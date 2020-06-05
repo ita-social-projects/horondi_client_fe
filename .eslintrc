@@ -1,0 +1,192 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "arrowFunctions": true,
+      "classes": true,
+      "defaultParams": true,
+      "destructuring": true,
+      "forOf": true,
+      "modules": true,
+      "objectLiteralShorthandMethods": true,
+      "objectLiteralShorthandProperties": true,
+      "spread": true,
+      "superInFunctions": true,
+      "templateStrings": true,
+      "impliedStrict": true
+    }
+  },
+  "plugins": ["jsx-a11y", "react-app", "react", "import"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jquery": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:cypress/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "semi": "off",
+    "no-var": "warn",
+    "no-unused-vars": [
+      1,
+      {
+        "vars": "all",
+        "args": "none",
+        "ignoreSiblings": true,
+        "argsIgnorePattern": "res|next|^err"
+      }
+    ],
+    "no-debugger": 0,
+    "no-alert": 0,
+    "no-use-before-define": "off",
+    "no-await-in-loop": 0,
+    "no-return-assign": ["error", "except-parens"],
+    "no-restricted-syntax": [
+      2,
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all"
+      }
+    ],
+    "arrow-body-style": [2, "as-needed"],
+    "no-unused-expressions": 0,
+    "no-console": [0, { "allow": ["warn", "error"] }],
+    "no-plusplus": 0,
+    "no-nested-ternary": 0,
+    "no-unneeded-ternary": 2,
+    "react/no-unescaped-entities": 2,
+    "prefer-arrow-callback": 1,
+    "prefer-spread": 1,
+    "prefer-template": 1,
+    "prefer-destructuring": 1,
+    "prefer-default-export": 0,
+    "import/prefer-default-export": 0,
+    "no-underscore-dangle": 0,
+    "no-case-declarations": 0,
+    "lines-around-comment": 1,
+    "jsx-a11y/no-noninteractive-element-interact": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "no-multiple-empty-lines": 2,
+    "lines-between-class-members": [1, "always"],
+    "consistent-return": 0,
+    "no-this-before-super": 2,
+    "indent": [
+      2,
+      2,
+      {
+        "ignoreComments": true,
+        "VariableDeclarator": {
+          "var": 2,
+          "let": 2,
+          "const": 3
+        }
+      }
+    ],
+    "no-return-await": 2,
+    "react/jsx-no-duplicate-props":2,
+    "camelcase": 0,
+    "no-useless-return": 2,
+    "no-multi-str": 2,
+    "no-constant-condition": 1,
+    "no-extra-parens": [1, "functions"],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "no-multi-spaces": [
+      1,
+      {
+        "exceptions": {
+          "VariableDeclarator": true,
+          "FunctionExpression": true
+        }
+      }
+    ],
+    "jsx-quotes": [2, "prefer-single"],
+    "react/jsx-indent": 1,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-props-no-spreading": 0,
+    "react/prop-types": 0,
+    "react/no-array-index-key": 0,
+    "react/no-unknown-property": 2,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    " jsx-a11y/no-noninteractive-element-interact": 0,
+    "jsx-a11y/alt-text": 2,
+    "no-prototype-builtins": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/control-has-associated-label": 0,
+    "jsx-a11y/img-redundant-alt": [
+      2,
+      {
+        "components": ["Image"],
+        "words": ["Bild", "Foto"]
+      }
+    ],
+    "jsx-a11y/aria-role": [
+      2,
+      {
+        "ignoreNonDOM": true
+      }
+    ],
+    "react/display-name": [0, { "ignoreTranspilerName": false }],
+    "react/jsx-no-undef": 2,
+    "react/jsx-pascal-case": 2,
+    "react/no-deprecated": 1,
+    "react/wrap-multilines": 0,
+    "react/no-multi-comp": [1, { "ignoreStateless": true }],
+    "react/prefer-stateless-function": 2,
+    "react/self-closing-comp": 1,
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": true,
+        "assignment": true,
+        "return": true,
+        "arrow": true
+      }
+    ],
+
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "radix": 0,
+    "no-shadow": 0,
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/anchor-is-valid": [
+      1,
+      {
+        "aspects": ["invalidHref"]
+      }
+    ],
+    "cypress/no-unnecessary-waiting": 0
+  }
+}

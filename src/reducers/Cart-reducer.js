@@ -47,7 +47,7 @@ const setInitial = async () => {
   }
 };
 
-setInitial(accessToken);
+setInitial();
 
 const addToCart = (state, payload) => {
   const newProducts = [...state.cartProducts];

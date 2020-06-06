@@ -1,7 +1,6 @@
-const filterRemoveItems = (arrToFilter = [], filterItem) =>
+const filterRemoveItems = (filterItem, arrToFilter = []) =>
   arrToFilter.filter((item) => item !== filterItem);
 const instate = {
-  brand: [],
   products: [],
   category: [],
   color: [],
@@ -10,14 +9,8 @@ const instate = {
   searchValue: ''
 };
 
-const filter = (state = instate, action) => {
+const filterReducer = (state = instate, action) => {
   switch (action.type) {
-    case 'FILTER_ADD_BRAND': {
-      return {
-        ...state,
-        brand: [...state.brand, action.payload]
-      };
-    }
     case 'SET_CATALOG_FILTER': {
       return {
         ...state,
@@ -36,24 +29,6 @@ const filter = (state = instate, action) => {
       };
     }
 
-    case 'FILTER_REMOVE_BRAND': {
-      return {
-        ...state,
-        brand: filterRemoveItems(state.brand, action.payload)
-      };
-    }
-    case 'FILTER_REMOVE_ALL_BRANDS': {
-      return {
-        ...state,
-        brand: []
-      };
-    }
-    case 'FILTER_REMOVE_ALL_COLORS': {
-      return {
-        ...state,
-        brand: []
-      };
-    }
     case 'FILTER_ADD_CATEGORIES': {
       return {
         ...state,
@@ -106,4 +81,4 @@ const filter = (state = instate, action) => {
   }
 };
 
-export default filter;
+export default filterReducer;

@@ -1,5 +1,15 @@
-import localStorageService from './localStoreService';
 import productService from './ProductService';
 import userService from './UserService';
+import cartService from './CartService';
+import catalogService from './CatalogsService';
+import orderService from './OrderService';
+import ratingService from './RatingService';
 
-export { localStorageService, productService, userService };
+export {
+  cartService,
+  catalogService,
+  orderService,
+  productService,
+  userService,
+  ratingService
+};

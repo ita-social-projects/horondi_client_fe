@@ -1,6 +1,6 @@
-import UserService from './UserService';
+import ClientService from './ClientService';
 
-export default class ProductsService extends UserService {
+class CatalogService extends ClientService {
   getAllCatalogs = async () => {
     const catalogs = await this.getResource('catalogs');
     return catalogs;
@@ -23,3 +23,5 @@ export default class ProductsService extends UserService {
     return categories;
   };
 }
+const catalogService = new CatalogService();
+export default catalogService;

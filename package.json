@@ -14,9 +14,11 @@
     "cors": "^2.8.5",
     "create-components-react": "^2.1.4",
     "react": "^16.13.1",
+    "react-customer-chat": "^1.0.2",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "react-scroll-up-button": "^1.6.4",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
@@ -60,6 +62,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-react-app": "^5.2.1",
+    "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-flowtype": "^4.7.0",
     "eslint-plugin-html": "^6.0.2",
@@ -87,8 +90,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "prettier --write",
-      "test"
+      "prettier --write"
     ]
   }
 }

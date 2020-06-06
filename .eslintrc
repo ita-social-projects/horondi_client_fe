@@ -97,7 +97,7 @@
       }
     ],
     "no-return-await": 2,
-    "react/jsx-no-duplicate-props":2,
+    "react/jsx-no-duplicate-props": 2,
     "camelcase": 0,
     "no-useless-return": 2,
     "no-multi-str": 2,
@@ -118,6 +118,7 @@
         }
       }
     ],
+    "import/extensions": 0,
     "jsx-quotes": [2, "prefer-single"],
     "react/jsx-indent": 1,
     "react/jsx-uses-vars": 2,
@@ -187,6 +188,7 @@
         "aspects": ["invalidHref"]
       }
     ],
-    "cypress/no-unnecessary-waiting": 0
+    "cypress/no-unnecessary-waiting": 0,
+    "import/no-unresolved":0
   }
 }

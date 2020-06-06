@@ -1,6 +1,6 @@
-import UserService from './UserService';
+import ClientService from './ClientService';
 
-export default class ProductsService extends UserService {
+class ProductsService extends ClientService {
   getProductById = async (id) => {
     const product = await this.getResource(`products/${id}`);
     return product[0];
@@ -9,7 +9,6 @@ export default class ProductsService extends UserService {
   getProductsByFilter = async (filter) => {
     let queryString = 'products/?';
     const {
-      brand,
       color,
       category,
       catalog,
@@ -19,9 +18,6 @@ export default class ProductsService extends UserService {
       sortByRate,
       searchTerm
     } = filter;
-    if (brand) {
-      queryString = `${queryString}&brand=${brand}`;
-    }
     if (color) {
       queryString = `${queryString}&color=${color}`;
     }
@@ -52,27 +48,15 @@ export default class ProductsService extends UserService {
 
   getProductProperties = async (id) => {
     const product = await this.getResource(`products/${id}`);
-    const { propetries } = product[0];
-    return propetries;
+    const { properties } = product[0];
+    return properties;
   };
 
-  getOneProductPropertie = async (id) => {
-    const productPropertie = await this.getResource(
-      `products/propetries/${id}`
-    );
-    return productPropertie;
-  };
-
-  getProductProperties = async (id) => {
-    const product = await this.getResource(`products/${id}`);
-    const { propetries } = product[0];
-    return propetries;
-  };
-
-  getOneProductPropertie = async (id) => {
-    const productPropertie = await this.getResource(
-      `products/propetries/${id}`
-    );
-    return productPropertie;
+  getOneProductProperty = async (id) => {
+    const productProperty = await this.getResource(`products/properties/${id}`);
+    return productProperty;
   };
 }
+const productService = new ProductsService();
+
+export default productService;

@@ -1,10 +1,10 @@
 import axios from 'axios';
-import UserService from './UserService';
+import ClientService from './ClientService';
 import { config } from '../configs';
 
-const serverUrl = config.app;
+const { serverUrl } = config.app;
 
-export default class CartService extends UserService {
+class CartService extends ClientService {
   getAllCarts = async () => {
     const carts = await this.getResource('cart');
     return carts;
@@ -22,3 +22,6 @@ export default class CartService extends UserService {
     });
   };
 }
+
+const cartService = new CartService();
+export default cartService;

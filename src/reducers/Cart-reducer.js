@@ -6,7 +6,7 @@ import {
 import { config } from '../configs';
 import { setUser } from '../actions';
 
-const serverUrl = config.app;
+const { serverUrl } = config.app;
 const initialState = { cartNumbers: 0, cartProducts: [] };
 
 const userId = getFromLocalStorage('userId');

@@ -1,7 +1,7 @@
 import productService from './ProductService';
 import userService from './UserService';
 import cartService from './CartService';
-import catalogService from './CatalogsService';
+import catalogService from './CatalogService';
 import orderService from './OrderService';
 import ratingService from './RatingService';
 

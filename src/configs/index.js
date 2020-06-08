@@ -98,5 +98,6 @@ export const routes = {
 export const config = {
   app: {
     serverUrl: 'http://localhost:5000/'
-  }
+  },
+  routes
 };

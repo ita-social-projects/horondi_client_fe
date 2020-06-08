@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoreServiceConsumer } from '../store-service-context';
+import { StoreServiceConsumer } from '../src/components/store-service-context';
 
 const withStoreService = () => (Wrapped) => (props) => (
   <StoreServiceConsumer>

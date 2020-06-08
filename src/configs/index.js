@@ -86,10 +86,8 @@ export const routes = {
   pathToProductDetails: '/product/:id',
   pathToCategories: '/categories',
   pathToCategoryDetails: '/category/:id',
-  pathToBrands: '/brands',
   pathToNews: '/news',
   pathToNewsDetails: '/news/:id',
-  pathToBrandDetails: '/brand/:id',
   pathToUserDetails: '/user/:id',
   pathToLogin: '/login',
   pathToOrderDetails: '/order/:id'

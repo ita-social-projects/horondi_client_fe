@@ -4,6 +4,8 @@ import cartService from './CartService';
 import catalogService from './CatalogService';
 import orderService from './OrderService';
 import ratingService from './RatingService';
+import commentService from './CommentService';
+import authService from './AuthServices';
 
 export {
   cartService,
@@ -11,5 +13,7 @@ export {
   orderService,
   productService,
   userService,
-  ratingService
+  ratingService,
+  commentService,
+  authService
 };

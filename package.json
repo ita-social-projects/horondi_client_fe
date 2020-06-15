@@ -12,17 +12,16 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
-    "create-components-react": "^2.1.4",
     "react": "^16.13.1",
     "react-customer-chat": "^1.0.2",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "react-scripts-config": "^1.0.17-13",
     "react-scroll-up-button": "^1.6.4",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "react-scripts-config": "^1.0.17-13"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,7 +31,8 @@
     "lint:fix": "eslint . --fix --color",
     "cypress": "cypress open",
     "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "create": "ccr create"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -81,6 +81,7 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-dom": "^4.0.0",
+    "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",

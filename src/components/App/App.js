@@ -1,42 +1,25 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
-import {
-  cartService,
-  catalogService,
-  orderService,
-  productService,
-  userService,
-  ratingService
-} from '../../services';
 
-import { StoreServiceProvider } from '../store-service-context';
+import { GraphqlServiceProvider } from '../../graphqlServiceContext';
 
 import store from '../../store/store';
 
 // import Routes from '../routes';
 
-import Chat from '../chat';
-
-const storeService = {
-  cartService,
-  catalogService,
-  orderService,
-  productService,
-  userService,
-  ratingService
-};
+import Chat from '../Chat';
 
 const App = () => (
   <Provider store={store}>
-    <StoreServiceProvider value={storeService}>
+    <GraphqlServiceProvider>
       <div className='App'>
         {/* <Routes /> */}
         <p>horondi</p>
         <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
         <Chat />
       </div>
-    </StoreServiceProvider>
+    </GraphqlServiceProvider>
   </Provider>
 );
 

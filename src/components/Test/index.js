@@ -5,18 +5,21 @@ import withGraphqlService from '../../hoc/withGraphqlService';
 const Test = ({ graphqlService }) => {
   const handler = () => {
     graphqlService
-      .getAllItems(
+      .getItems(
         `query{
         categories{
           categoryCode,
           _id
+          name{
+            value
+          }
         }
       }`
       )
       .then((res) => res);
 
     graphqlService
-      .getAllItems(
+      .getItems(
         `query{
         category(id:"5ee7a23c30238d32798ae4a9"){
           categoryCode

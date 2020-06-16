@@ -32,8 +32,7 @@
     "lint:fix": "eslint . --fix --color",
     "cypress": "cypress open",
     "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
-    "test": "jest --coverage",
-    "create": "ccr create"
+    "test": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -82,7 +81,6 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-dom": "^4.0.0",
-    "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",

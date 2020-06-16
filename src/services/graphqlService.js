@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class GraphQlService {
-  getAllItems = (query) =>
+  getItems = (query) =>
     axios.post(
       'http://localhost:5000/graphql',
       { query },

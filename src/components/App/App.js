@@ -8,6 +8,7 @@ import Chat from '../Chat';
 import { GraphqlServiceProvider } from '../../graphqlServiceContext';
 import { graphqlService } from '../../services';
 import store from '../../store/store';
+import Categories from '../Categories/Categories';
 
 // import Routes from '../routes';
 
@@ -20,6 +21,7 @@ const App = () => (
         <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
         <Chat />
         <Test />
+        <Categories/>
       </div>
     </GraphqlServiceProvider>
   </Provider>

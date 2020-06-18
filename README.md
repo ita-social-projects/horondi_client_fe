@@ -1,4 +1,4 @@
-# Hondri
+# Horondi
 Frontend app for the `Hondri` online store
 ## Rules and guidelines
 - Redux

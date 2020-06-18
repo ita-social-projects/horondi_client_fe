@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "cors": "^2.8.5",
-    "create-components-react": "git+https://github.com/Crash1212/Crash.git",
+    "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "react": "^16.13.1",
     "react-customer-chat": "^1.0.2",
     "react-dom": "^16.13.1",

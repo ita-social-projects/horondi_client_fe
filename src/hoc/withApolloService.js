@@ -4,7 +4,7 @@ import { ApolloServiceConsumer } from '../services/ApolloService/ApolloServiceCo
 
 const withApolloService = () => (Wrapped) => (props) => (
   <ApolloServiceConsumer>
-    {(ApolloService) => <Wrapped {...props} client={ApolloService} gql={gql} />}
+    {(client) => <Wrapped {...props} client={client} gql={gql} />}
   </ApolloServiceConsumer>
 );
 

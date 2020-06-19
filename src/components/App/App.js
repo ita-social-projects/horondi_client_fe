@@ -3,17 +3,17 @@ import { Provider } from 'react-redux';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 
 import Test from '../Test';
-import Chat from '../Chat';
+import Chat from '../chat';
 
-import { GraphqlServiceProvider } from '../../graphqlServiceContext';
-import { graphqlService } from '../../services';
+import { ApolloServiceProvider } from '../../services/ApolloService/ApolloServiceContext';
+import { client } from '../../services/ApolloService/ApolloService';
 import store from '../../store/store';
 
 // import Routes from '../routes';
 
 const App = () => (
   <Provider store={store}>
-    <GraphqlServiceProvider value={graphqlService}>
+    <ApolloServiceProvider value={client}>
       <div className='App'>
         {/* <Routes /> */}
         <p>horondi</p>
@@ -21,7 +21,7 @@ const App = () => (
         <Chat />
         <Test />
       </div>
-    </GraphqlServiceProvider>
+    </ApolloServiceProvider>
   </Provider>
 );
 

@@ -1,40 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import withGraphqlService from '../../hoc/withGraphqlService';
+import withApolloService from '../../hoc/withApolloService';
 
-const Test = ({ graphqlService }) => {
+const Test = ({ client, gql }) => {
   const handler = () => {
-    graphqlService
-      .getItems(
-        `query{
-        categories{
-          categoryCode,
-          _id
-          name{
-            value
+    client
+      .query({
+        query: gql`
+          {
+            categories {
+              _id
+              name {
+                lang
+                value
+              }
+            }
           }
-        }
-      }`
-      )
-      .then((res) => res);
-
-    graphqlService
-      .getItems(
-        `query{
-        category(id:"5ee7a23c30238d32798ae4a9"){
-          categoryCode
-          _id
-          name{
-              lang
-              value
-          }
-          images{
-              large
-          }
-        }
-      }`
-      )
-      .then((res) => res);
+        `
+      })
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
   return (
     <div>
@@ -47,6 +32,6 @@ const Test = ({ graphqlService }) => {
 const mapStateToProps = (state, ownProps) => ({});
 const mapDispatchToProps = {};
 
-export default withGraphqlService()(
+export default withApolloService()(
   connect(mapStateToProps, mapDispatchToProps)(Test)
 );

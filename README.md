@@ -1,5 +1,5 @@
 # Horondi
-Frontend app for the `Hondri` online store
+Frontend app for the `Horondi` online store
 ## Rules and guidelines
 - Redux
     - For each entity we should have separate folder
@@ -30,6 +30,9 @@ Frontend app for the `Hondri` online store
 ## Starting a project
 In the project directory, you should run:
 - Copy content of `.env.example` file to the newly created `.env`
+- Ensure that backend is running. You can use deployed version and just put remote url in `.env` file. If remote backend
+  is not available pull repository [https://github.com/horondi/horondi_client_be](https://github.com/horondi/horondi_client_be)
+  and follow steps that are described in its README
 - Run `npm install` to install all dependencies
 - Run `npm run start` to start application
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

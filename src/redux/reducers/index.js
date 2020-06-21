@@ -1,3 +1,7 @@
-import CartReducer from './CartReducer';
+import { combineReducers } from 'redux';
+import newsReduser from './news-reduser/News-reduser';
 
-export default CartReducer;
+const rootReducer = combineReducers({
+  newsReduser
+});
+export default rootReducer;

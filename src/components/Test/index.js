@@ -7,34 +7,33 @@ const Test = ({ graphqlService }) => {
     graphqlService
       .getItems(
         `query{
-        categories{
-          categoryCode,
-          _id
-          name{
-            value
-          }
-        }
-      }`
-      )
-      .then((res) => res);
-
-    graphqlService
-      .getItems(
-        `query{
-        category(id:"5ee7a23c30238d32798ae4a9"){
-          categoryCode
-          _id
-          name{
+          getAllNews{
+            title{
               lang
               value
+            }
           }
-          images{
-              large
-          }
-        }
-      }`
+        }`
       )
-      .then((res) => res);
+      .then((res) => console.log(res));
+
+    // graphqlService
+    //   .getItems(
+    //     `query{
+    //     category(id:"5ee7a23c30238d32798ae4a9"){
+    //       categoryCode
+    //       _id
+    //       name{
+    //           lang
+    //           value
+    //       }
+    //       images{
+    //           large
+    //       }
+    //     }
+    //   }`
+    //   )
+    //   .then((res) => res);
   };
   return (
     <div>

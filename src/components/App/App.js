@@ -1,27 +1,32 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
-
+import NewsContainer from 'src/pages/news-conteiner';
 import Test from '../Test';
-import Chat from '../Chat';
+import configureStore from '../../store/store';
+// import { ApolloProvider } from '@apollo/react-hooks';
+// import ApolloClient from 'apollo-boost';
 
-import { GraphqlServiceProvider } from '../../graphqlServiceContext';
-import { graphqlService } from '../../services';
-import store from '../../store/store';
+// const client = new ApolloClient({
+//   uri: 'http://localhost:5000/graphql',
+//   headers: ['Content-Type: application/json', 'x-auth: Bearer']
+// });
 
 // import Routes from '../routes';
 
+const store = configureStore();
+
 const App = () => (
   <Provider store={store}>
-    <GraphqlServiceProvider value={graphqlService}>
-      <div className='App'>
-        {/* <Routes /> */}
-        <p>horondi</p>
-        <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
-        <Chat />
-        <Test />
-      </div>
-    </GraphqlServiceProvider>
+    {/* < ApolloProvider client={client}> */}
+    <div className='App'>
+      {/* <Routes /> */}
+      <p>horondi</p>
+      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
+      <Test />
+      <NewsContainer />
+    </div>
+    {/* </ApolloProvider> */}
   </Provider>
 );
 

@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { wachNewsLoad } from '../../redux/actions';
+import { wachNewsLoad } from '../../redux/news-page-redux/actions';
+import { useStyles } from './news-page.style';
+import NewsPageItem from './components/news-list';
 
 const NewsPage = ({ wachNewsLoad, news }) => {
   useEffect(() => {
     wachNewsLoad();
   }, [wachNewsLoad]);
 
-  // const styles = useStyles()
+  const styles = useStyles();
+  console.log(news);
+  const newsItems = news.map(({ _id, date, author, images }) => (
+    <NewsPageItem date={date} key={_id} author={author} image={images} />
+  ));
 
   return (
     <>
-      <h2 id='news-title'>News</h2>
-      <div>news!!!</div>
+      <h2 className={styles.newsTitle}>News</h2>
+      <div className={styles.NewsPageItem}>{newsItems}</div>
     </>
   );
 };

@@ -1,16 +1,26 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { storeSetNews } from '../../actions/index';
-import getItems from '../../../services/getItems';
+import getItems from '../../../../services/getItems';
 
 function* handleNewsLoad() {
   const news = yield call(
     getItems,
     `query{
              getAllNews{
+               _id
                title{
                  lang
                  value
                }
+               author{
+                name
+              }
+              date
+              images{
+                primary{
+                  medium
+                }
+              }
              }
            }`
   );

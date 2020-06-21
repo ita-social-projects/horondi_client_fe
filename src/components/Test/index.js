@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import withApolloService from '../../hoc/withApolloService';
+import { gql } from 'apollo-boost';
+import client from '../../services/ApolloService';
 
-const Test = ({ client, gql }) => {
+const Test = () => {
   const handler = () => {
     client
       .query({
@@ -21,6 +21,7 @@ const Test = ({ client, gql }) => {
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
+
   return (
     <div>
       <button type='button' onClick={handler}>
@@ -29,9 +30,5 @@ const Test = ({ client, gql }) => {
     </div>
   );
 };
-const mapStateToProps = (state, ownProps) => ({});
-const mapDispatchToProps = {};
 
-export default withApolloService()(
-  connect(mapStateToProps, mapDispatchToProps)(Test)
-);
+export default Test;

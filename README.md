@@ -57,8 +57,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Create Components react
 
-### npm run create <Component name>
+### `npm run create <Component name>`
 
 ## Create Components react + path
 
-### ccr create -r <path> <ComponentName>
+### `ccr create -r <path> <ComponentName>`

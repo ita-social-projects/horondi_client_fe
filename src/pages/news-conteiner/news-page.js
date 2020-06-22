@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { wachNewsLoad } from '../../redux/news-page-redux/actions';
+import { wachNewsLoad } from '../../redux/news-page/news-actions';
 import { useStyles } from './news-page.style';
 import NewsPageItem from './components/news-list';
 

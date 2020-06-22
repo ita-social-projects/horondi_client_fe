@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { storeSetNews } from '../../actions/index';
-import getItems from '../../../../services/getItems';
+import { storeSetNews } from './news-actions';
+import getItems from '../../services/getItems';
 
 function* handleNewsLoad() {
   const news = yield call(
@@ -9,11 +9,12 @@ function* handleNewsLoad() {
              getAllNews{
                _id
                title{
-                 lang
                  value
                }
                author{
-                name
+                name{
+                  value
+                }
               }
               date
               images{

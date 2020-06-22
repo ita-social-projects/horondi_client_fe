@@ -1,33 +1,77 @@
 import React from 'react';
-// import clsx from 'clsx';
-// import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
-// import IconButton from '@material-ui/core/IconButton';
-// import Typography from '@material-ui/core/Typography';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ShareIcon from '@material-ui/icons/Share';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import { useStyles } from './news-page-item.style';
+import { Link } from 'react-router-dom';
+import {
+  Card,
+  CardMedia,
+  CardHeader,
+  CardContent,
+  Typography,
+  Button,
+  Avatar
+} from '@material-ui/core';
+import { useStyles } from './news-page-item.style';
 
-const NewsPageItem = ({ date, author, image }) => (
-  // const [expanded, setExpanded] = React.useState(false);
-  // const classes = useStyles();
-
-  // const options = {
-  //   weekday: 'long',
-  //   year: 'numeric',
-  //   month: 'long',
-  //   day: 'numeric'
-  // };
-  // const dateToShow = new Date(date);
-  // const dateNews = dateToShow.toString('en-US', options);
-
-  <div>hello</div>
-);
+const NewsPageItem = ({ date, author, image, title, text, id }) => {
+  const styles = useStyles();
+  const language = 1;
+  const newsTitle = title[language].value || 'no title provided';
+  const newsImage = image[0].primary.medium;
+  const newsText = text[language].value || 'no text provided';
+  const newsAuthor = author.name[language].value;
+  const newsAuthorAvatar = author.image.small;
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  const dateToShow = new Date(parseInt(date));
+  const newsDate = dateToShow.toLocaleString('en-US', options);
+  return (
+    <div className={styles.container}>
+      <Card className={styles.root}>
+        <div className={styles.imagesContainer}>
+          <CardMedia
+            className={styles.media}
+            image={newsImage}
+            title={newsTitle}
+          />
+        </div>
+        <CardHeader subheader={newsDate} />
+        <CardContent>
+          <Typography
+            className={styles.ArticleTitle}
+            gutterBottom
+            variant='h5'
+            component='h2'
+          >
+            {newsTitle}
+          </Typography>
+          <Typography
+            variant='body2'
+            color='textSecondary'
+            component='p'
+            className={styles.newsText}
+          >
+            {newsText}
+          </Typography>
+        </CardContent>
+        <div className={styles.newsFooter}>
+          <Link to={`/news/${id}`}>
+            <Button variant='contained' color='primary'>
+              read more...
+            </Button>
+          </Link>
+          <CardHeader subheader={newsAuthor} />
+          <CardContent />
+          <Avatar
+            alt={newsAuthor}
+            src={newsAuthorAvatar}
+            className={styles.large}
+          />
+        </div>
+      </Card>
+    </div>
+  );
+};
 export default NewsPageItem;

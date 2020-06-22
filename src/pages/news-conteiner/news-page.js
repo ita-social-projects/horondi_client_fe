@@ -11,13 +11,21 @@ const NewsPage = ({ wachNewsLoad, news }) => {
 
   const styles = useStyles();
   console.log(news);
-  const newsItems = news.map(({ _id, date, author, images }) => (
-    <NewsPageItem date={date} key={_id} author={author} image={images} />
+  const newsItems = news.map(({ _id, date, author, images, title, text }) => (
+    <NewsPageItem
+      date={date}
+      key={_id}
+      id={_id}
+      author={author}
+      image={images}
+      title={title}
+      text={text}
+    />
   ));
 
   return (
     <>
-      <h2 className={styles.newsTitle}>News</h2>
+      <h1 className={styles.newsTitle}>News</h1>
       <div className={styles.NewsPageItem}>{newsItems}</div>
     </>
   );

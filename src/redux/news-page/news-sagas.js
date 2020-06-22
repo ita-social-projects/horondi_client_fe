@@ -15,6 +15,12 @@ function* handleNewsLoad() {
                 name{
                   value
                 }
+                image{
+                  small
+                }
+              }
+              text{
+                value
               }
               date
               images{

@@ -1,25 +1,36 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345
+    width: '90%',
+    marginBottom: '5rem'
+  },
+  imagesContainer: {
+    height: '25rem',
+    width: '25rem',
+    overflow: 'hidden',
+    borderRadius: '5px'
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
+    height: '25rem',
+    width: '25rem',
+    paddingTop: '56.25%', // 16:9
+    transition: '2s',
+    transform: 'scale(1)',
+    '&:hover': {
+      transform: 'scale(1.1)'
+    }
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
+  ArticleTitle: {
+    minHeight: '8rem'
   },
-  expandOpen: {
-    transform: 'rotate(180deg)'
+  newsText: {
+    textAlign: 'justify',
+    maxHeight: '30rem',
+    overflow: 'hidden'
   },
-  avatar: {
-    backgroundColor: red[500]
+  newsFooter: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));

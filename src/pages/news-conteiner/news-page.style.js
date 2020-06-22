@@ -2,15 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   newsTitle: {
-    color: 'blue',
     textAlign: 'center'
   },
   NewsPageItem: {
     marginTop: '5rem',
-    width: '90%',
-    marginLeft: 'auto',
+    width: '70%',
+    margin: '5rem auto',
     marginRight: 'auto',
-    display: 'flex',
-    justify: 'space-between'
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, auto))'
   }
 }));

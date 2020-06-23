@@ -58,17 +58,19 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
         </CardContent>
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}`}>
-            <Button variant='contained' color='primary'>
+            <Button variant='contained' className={styles.newsButton}>
               read more...
             </Button>
           </Link>
-          <CardHeader subheader={newsAuthor} />
-          <CardContent />
-          <Avatar
-            alt={newsAuthor}
-            src={newsAuthorAvatar}
-            className={styles.large}
-          />
+          <div className={styles.newsAuthorFooter}>
+            <CardHeader subheader={newsAuthor} />
+            <CardContent />
+            <Avatar
+              alt={newsAuthor}
+              src={newsAuthorAvatar}
+              className={styles.large}
+            />
+          </div>
         </div>
       </Card>
     </div>

@@ -13,7 +13,6 @@ const NewsPage = ({ wachNewsLoad, news }) => {
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  console.log(news);
   const newsItems = news.map(({ _id, date, author, images, title, text }) => (
     <NewsPageItem
       date={date}

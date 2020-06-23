@@ -1,4 +1,4 @@
-export const language = 0;
+export const language = 1;
 export const itemsPerPage = [15, 30, 60];
 export const PRODUCT_LIST_URL = '/productlist/';
 export const CATALOGS_URL = '/catalogs/';

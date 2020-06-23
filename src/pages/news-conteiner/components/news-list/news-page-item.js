@@ -1,4 +1,5 @@
 import React from 'react';
+import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import {
   Card,
@@ -16,7 +17,7 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
   const styles = useStyles();
   const newsTitle = title[language].value || 'no title provided';
   const newsImage = image[0].primary.medium;
-  const newsText = text[language].value || 'no text provided';
+  const newsText = parse(text[language].value) || 'no text provided';
   const newsAuthor = author.name[language].value;
   const newsAuthorAvatar = author.image.small;
   const newsButtonText = ['читати далі', 'read more...'];

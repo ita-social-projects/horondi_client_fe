@@ -1,6 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { setNews } from './news.actions';
 import getItems from '../../services/getItems';
+import { NEWS_LOADED } from './news.types';
 
 function* handleNewsLoad() {
   const news = yield call(
@@ -35,5 +36,5 @@ function* handleNewsLoad() {
 }
 
 export default function* watchNewsLoad() {
-  yield takeEvery('NEWS_LOADED', handleNewsLoad);
+  yield takeEvery(NEWS_LOADED, handleNewsLoad);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './Routes.style.js';
-import NewsPage from 'src/pages/news';
+import NewsPage from 'src/pages/news/news-page';
 import Test from '../components/Test';
 
 const Routes = () => (

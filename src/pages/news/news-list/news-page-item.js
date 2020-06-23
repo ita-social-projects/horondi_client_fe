@@ -11,7 +11,7 @@ import {
   Avatar
 } from '@material-ui/core';
 import { useStyles } from './news-page-item.style';
-import { LANGUAGE } from '../../../../configs';
+import { LANGUAGE } from '../../../configs';
 
 const NewsPageItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { watchNewsLoad } from '../../redux/news/news.actions';
+import { watchNewsLoad } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
-import NewsPageItem from './components/news-list';
-import { LANGUAGE } from '../../configs';
+import NewsPageItem from '../news-list';
+import { LANGUAGE } from '../../../configs';
 
 const NewsPage = ({ watchNewsLoad, list }) => {
   useEffect(() => {

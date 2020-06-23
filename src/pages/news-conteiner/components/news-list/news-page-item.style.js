@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   newsText: {
     textAlign: 'justify',
-    maxHeight: '30rem',
+    maxHeight: '15rem',
     overflow: 'hidden'
   },
   newsFooter: {

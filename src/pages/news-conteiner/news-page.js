@@ -8,6 +8,7 @@ import { language } from '../../configs';
 const NewsPage = ({ wachNewsLoad, news }) => {
   useEffect(() => {
     wachNewsLoad();
+    window.scrollTo(0, 0);
   }, [wachNewsLoad]);
 
   const newsHeader = ['Новини', 'News'];

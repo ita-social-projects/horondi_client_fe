@@ -54,7 +54,7 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
           <Typography
             variant='body2'
             color='textSecondary'
-            component='p'
+            component='div'
             className={styles.newsText}
           >
             {newsText}

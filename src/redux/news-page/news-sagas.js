@@ -6,11 +6,11 @@ function* handleNewsLoad() {
   const news = yield call(
     getItems,
     `query{
-             getAllNews{
-               _id
-               title{
-                 value
-               }
+       getAllNews{
+         _id
+         title {
+           value
+        }
                author{
                 name{
                   value

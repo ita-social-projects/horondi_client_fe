@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { wachNewsLoad } from '../../redux/news-page/news-actions';
 import { useStyles } from './news-page.style';
 import NewsPageItem from './components/news-list';
+import { language } from '../../configs';
 
 const NewsPage = ({ wachNewsLoad, news }) => {
   useEffect(() => {
     wachNewsLoad();
   }, [wachNewsLoad]);
 
+  const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
   console.log(news);
   const newsItems = news.map(({ _id, date, author, images, title, text }) => (
@@ -25,7 +27,7 @@ const NewsPage = ({ wachNewsLoad, news }) => {
 
   return (
     <>
-      <h1 className={styles.newsTitle}>News</h1>
+      <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>
       <div className={styles.NewsPageItem}>{newsItems}</div>
     </>
   );

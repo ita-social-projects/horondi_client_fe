@@ -10,15 +10,18 @@ import {
   Avatar
 } from '@material-ui/core';
 import { useStyles } from './news-page-item.style';
+import { language } from '../../../../configs';
 
 const NewsPageItem = ({ date, author, image, title, text, id }) => {
   const styles = useStyles();
-  const language = 1;
   const newsTitle = title[language].value || 'no title provided';
   const newsImage = image[0].primary.medium;
   const newsText = text[language].value || 'no text provided';
   const newsAuthor = author.name[language].value;
   const newsAuthorAvatar = author.image.small;
+  const newsButtonText = ['читати далі', 'read more...'];
+  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
+  const dateLanguage = `${newsDateLanguageOptions[language]}`;
   const options = {
     weekday: 'long',
     year: 'numeric',
@@ -26,7 +29,7 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
     day: 'numeric'
   };
   const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString('en-US', options);
+  const newsDate = dateToShow.toLocaleString(`${dateLanguage}`, options);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
@@ -59,7 +62,7 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}`}>
             <Button variant='contained' className={styles.newsButton}>
-              read more...
+              {newsButtonText[language]}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>

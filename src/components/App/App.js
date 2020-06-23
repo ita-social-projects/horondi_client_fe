@@ -9,10 +9,8 @@ const store = configureStore();
 
 const App = () => (
   <Provider store={store}>
-    <div className='App'>
-      <Routes />
-      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
-    </div>
+    <Routes />
+    <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
   </Provider>
 );
 

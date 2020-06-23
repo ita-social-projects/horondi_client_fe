@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import {
@@ -14,11 +14,18 @@ import { useStyles } from './news-page-item.style';
 import { language } from '../../../../configs';
 
 const NewsPageItem = ({ date, author, image, title, text, id }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const styles = useStyles();
-  const newsTitle = title[language].value || 'no title provided';
-  const newsImage = image[0].primary.medium;
-  const newsText = parse(text[language].value) || 'no text provided';
-  const newsAuthor = author.name[language].value;
+  const newsTitle =
+    title.length !== 0 ? title[language].value : 'No title provided';
+  const newsImage =
+    image.length !== 0 ? image[0].primary.medium : 'No image provided';
+  const newsText =
+    text.length !== 0 ? parse(text[language].value) : 'No text provided';
+  const newsAuthor =
+    author.length !== 0 ? author.name[language].value : 'No author provided';
   const newsAuthorAvatar = author.image.small;
   const newsButtonText = ['читати далі', 'read more...'];
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];

@@ -6,11 +6,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   NewsPageItem: {
     marginTop: '5rem',
-    width: '87%',
     margin: '5rem auto',
     marginRight: 'auto',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, auto))',
-    gridColumnGap: '10px'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(25rem, auto))',
+    gridColumnGap: '10px',
+    justifyContent: 'center'
   }
 }));

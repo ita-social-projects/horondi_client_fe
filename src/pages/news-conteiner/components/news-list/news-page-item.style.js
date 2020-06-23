@@ -6,9 +6,12 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '5rem'
   },
   container: {
-    minWidth: '20rem'
+    minWidth: '20rem',
+    maxWidth: '27rem'
   },
   imagesContainer: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
     height: '25rem',
     width: '25rem',
     overflow: 'hidden',
@@ -29,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   newsText: {
     textAlign: 'justify',
-    maxHeight: '15rem',
+    maxHeight: '20rem',
     overflow: 'hidden'
   },
   newsFooter: {

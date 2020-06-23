@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { storeSetNews } from './news-actions';
+import { setNews } from './news.actions';
 import getItems from '../../services/getItems';
 
 function* handleNewsLoad() {
@@ -31,7 +31,7 @@ function* handleNewsLoad() {
              }
            }`
   );
-  yield put(storeSetNews(news.data.data.getAllNews));
+  yield put(setNews(news.data.data.getAllNews));
 }
 
 export default function* watchNewsLoad() {

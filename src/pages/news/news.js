@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { wachNewsLoad } from '../../redux/news-page/news-actions';
-import { useStyles } from './news-page.style';
+import { watchNewsLoad } from '../../redux/news/news.actions';
+import { useStyles } from './news.style';
 import NewsPageItem from './components/news-list';
-import { language } from '../../configs';
+import { LANGUAGE } from '../../configs';
 
-const NewsPage = ({ wachNewsLoad, news }) => {
+const NewsPage = ({ watchNewsLoad, list }) => {
   useEffect(() => {
-    wachNewsLoad();
+    watchNewsLoad();
     window.scrollTo(0, 0);
-  }, [wachNewsLoad]);
+  }, [watchNewsLoad]);
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  const newsItems = news.map(({ _id, date, author, images, title, text }) => (
+  const newsItems = list.map(({ _id, date, author, images, title, text }) => (
     <NewsPageItem
       date={date}
       key={_id}
@@ -27,17 +27,17 @@ const NewsPage = ({ wachNewsLoad, news }) => {
 
   return (
     <>
-      <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>
+      <h1 className={styles.newsTitle}>{newsHeader[LANGUAGE]}</h1>
       <div className={styles.NewsPageItem}>{newsItems}</div>
     </>
   );
 };
 
-const mapStateToProps = ({ newsReduser: { news } }) => ({
-  news
+const mapStateToProps = ({ news: { list } }) => ({
+  list
 });
 const mapDispatchToProps = {
-  wachNewsLoad
+  watchNewsLoad
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);

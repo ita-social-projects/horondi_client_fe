@@ -1,13 +1,13 @@
 const initialState = {
-  news: []
+  list: []
 };
 
-const newsReduser = (state = initialState, action) => {
+const list = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_NEWS':
       return {
         ...state,
-        news: action.payload
+        list: action.payload
       };
     case 'NEWS_LOADED':
       return {
@@ -19,4 +19,4 @@ const newsReduser = (state = initialState, action) => {
   }
 };
 
-export default newsReduser;
+export default list;

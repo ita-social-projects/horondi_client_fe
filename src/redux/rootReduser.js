@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import newsReduser from './news-page/news-reduser';
+import news from './news/news.reduser';
 
 const rootReducer = combineReducers({
-  newsReduser
+  news
 });
 export default rootReducer;

@@ -11,7 +11,7 @@ import {
   Avatar
 } from '@material-ui/core';
 import { useStyles } from './news-page-item.style';
-import { language } from '../../../../configs';
+import { LANGUAGE } from '../../../../configs';
 
 const NewsPageItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
@@ -19,17 +19,17 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
   }, []);
   const styles = useStyles();
   const newsTitle =
-    title.length !== 0 ? title[language].value : 'No title provided';
+    title.length !== 0 ? title[LANGUAGE].value : 'No title provided';
   const newsImage =
     image.length !== 0 ? image[0].primary.medium : 'No image provided';
   const newsText =
-    text.length !== 0 ? parse(text[language].value) : 'No text provided';
+    text.length !== 0 ? parse(text[LANGUAGE].value) : 'No text provided';
   const newsAuthor =
-    author.length !== 0 ? author.name[language].value : 'No author provided';
+    author.length !== 0 ? author.name[LANGUAGE].value : 'No author provided';
   const newsAuthorAvatar = author.image.small;
   const newsButtonText = ['читати далі', 'read more...'];
-  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
-  const dateLanguage = `${newsDateLanguageOptions[language]}`;
+  const newsDateLANGUAGEOptions = ['ukr-UA', 'en-US'];
+  const dateLANGUAGE = `${newsDateLANGUAGEOptions[LANGUAGE]}`;
   const options = {
     weekday: 'long',
     year: 'numeric',
@@ -37,7 +37,7 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
     day: 'numeric'
   };
   const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(`${dateLanguage}`, options);
+  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, options);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
@@ -70,7 +70,7 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}`}>
             <Button variant='contained' className={styles.newsButton}>
-              {newsButtonText[language]}
+              {newsButtonText[LANGUAGE]}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>

@@ -11,7 +11,6 @@ const initialState = {
 };
 
 const CategoriesReducer = (state = initialState, { type, payload }) => {
-  console.log(state.category);
   switch (type) {
     case SET_CATEGORIES:
       return {

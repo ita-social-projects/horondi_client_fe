@@ -1,4 +1,5 @@
 export default {
+  fontFamily: ['Montserrat', '-apple-system', 'Arial', 'sans-serif'].join(','),
   h1: {
     fontWeight: 500,
     fontSize: '35px',
@@ -46,18 +47,8 @@ export default {
     letterSpacing: '-0.05px',
     lineHeight: '21px'
   },
-  body1: {
-    fontSize: '14px',
-    letterSpacing: '-0.05px',
-    lineHeight: '21px'
-  },
-  body2: {
-    fontSize: '12px',
-    letterSpacing: '-0.04px',
-    lineHeight: '18px'
-  },
   button: {
-    fontSize: '14px'
+    fontSize: '16px'
   },
   caption: {
     fontSize: '11px',

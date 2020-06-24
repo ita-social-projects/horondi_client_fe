@@ -1,3 +1,3 @@
-import Home from './home';
+import Categories from './categories';
 
-export default Home;
+export default Categories;

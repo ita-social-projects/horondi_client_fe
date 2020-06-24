@@ -55,10 +55,4 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Create Components react
 
-### `npm run create <Component name>`
-
-## Create Components react + path
-
-### `ccr create -r <path> <ComponentName>`

@@ -66,3 +66,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Create Components react
+
+### `npm run create <Component name>`
+
+## Create Components react + path
+
+### `ccr create -r <path> <ComponentName>`

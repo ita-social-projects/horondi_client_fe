@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { watchNewsLoad } from '../../../redux/news/news.actions';
+import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
-import NewsPageItem from '../news-list';
+import NewsPageItem from '../news-item';
 import { LANGUAGE } from '../../../configs';
 
-const NewsPage = ({ watchNewsLoad, list }) => {
+const NewsPage = ({ getNews, list }) => {
   useEffect(() => {
-    watchNewsLoad();
+    getNews();
     window.scrollTo(0, 0);
-  }, [watchNewsLoad]);
+  }, [getNews]);
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
@@ -33,11 +33,11 @@ const NewsPage = ({ watchNewsLoad, list }) => {
   );
 };
 
-const mapStateToProps = ({ news: { list } }) => ({
+const mapStateToProps = ({ News: { list } }) => ({
   list
 });
 const mapDispatchToProps = {
-  watchNewsLoad
+  getNews
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);

@@ -1,4 +1,4 @@
-import { NEWS_LOADED, SET_NEWS } from './news.types';
+import { GET_NEWS, SET_NEWS } from './news.types';
 
 const initialState = {
   list: []
@@ -11,7 +11,7 @@ const list = (state = initialState, action) => {
         ...state,
         list: action.payload
       };
-    case NEWS_LOADED:
+    case GET_NEWS:
       return {
         ...state
       };

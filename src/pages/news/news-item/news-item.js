@@ -10,7 +10,7 @@ import {
   Button,
   Avatar
 } from '@material-ui/core';
-import { useStyles } from './news-page-item.style';
+import { useStyles } from './news-item.style';
 import { LANGUAGE } from '../../../configs';
 
 const NewsPageItem = ({ date, author, image, title, text, id }) => {

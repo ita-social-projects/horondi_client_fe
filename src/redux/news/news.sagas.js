@@ -1,40 +1,44 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { setNews } from './news.actions';
 import getItems from '../../services/getItems';
-import { NEWS_LOADED } from './news.types';
+import { GET_NEWS } from './news.types';
 
 function* handleNewsLoad() {
-  const news = yield call(
-    getItems,
-    `query{
-       getAllNews{
-         _id
-         title {
-           value
-        }
-               author{
-                name{
+  try {
+    const news = yield call(
+      getItems,
+      `query{
+         getAllNews{
+           _id
+           title {
+             value
+           }
+           author{
+             name{
+             value
+             }
+             image{
+             small
+                  }
+                }
+                text{
                   value
                 }
-                image{
-                  small
+                date
+                images{
+                  primary{
+                    medium
+                  }
                 }
-              }
-              text{
-                value
-              }
-              date
-              images{
-                primary{
-                  medium
-                }
-              }
-             }
-           }`
-  );
-  yield put(setNews(news.data.data.getAllNews));
+               }
+             }`
+    );
+    yield put(setNews(news.data.data.getAllNews));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export default function* watchNewsLoad() {
-  yield takeEvery(NEWS_LOADED, handleNewsLoad);
+export default function* getNews() {
+  yield takeEvery(GET_NEWS, handleNewsLoad);
 }

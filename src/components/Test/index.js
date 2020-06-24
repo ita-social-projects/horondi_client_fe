@@ -1,40 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import withGraphqlService from '../../hoc/withGraphqlService';
+import { getItems } from 'src/services';
 
-const Test = ({ graphqlService }) => {
+const Test = () => {
   const handler = () => {
-    graphqlService
-      .getItems(
-        `query{
-        categories{
-          categoryCode,
-          _id
-          name{
-            value
-          }
-        }
-      }`
-      )
-      .then((res) => res);
-
-    graphqlService
-      .getItems(
-        `query{
-        category(id:"5ee7a23c30238d32798ae4a9"){
-          categoryCode
-          _id
-          name{
+    getItems(
+      `query{
+          getAllNews{
+            title{
               lang
               value
+            }
           }
-          images{
-              large
-          }
-        }
-      }`
-      )
-      .then((res) => res);
+        }`
+    ).then((res) => console.log(res));
   };
   return (
     <div>
@@ -47,6 +26,4 @@ const Test = ({ graphqlService }) => {
 const mapStateToProps = (state, ownProps) => ({});
 const mapDispatchToProps = {};
 
-export default withGraphqlService()(
-  connect(mapStateToProps, mapDispatchToProps)(Test)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Test);

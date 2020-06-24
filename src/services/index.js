@@ -1,3 +1,3 @@
-import graphqlService from './graphqlService';
+import getItems from './getItems';
 
-export { graphqlService };
+export { getItems };

@@ -2,27 +2,32 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 
 import getItems from '../../services/getItems';
 import { setCategories } from './categories.actions';
-import { CATEGORIES_LOADED } from './categories.types';
+import { GET_CATEGORIES } from './categories.types';
 
 function* handleCategoriesLoad() {
-  const categories = yield call(
-    getItems,
-    `query {
-        categories{
-          categoryCode,
-          _id
-          images{
-          large
-          }
-          name{
-            value
-          }
-        }
-      }`
-  );
-  yield put(setCategories(categories.data.data.getAllCategories));
+  try {
+    const categories = yield call(
+      getItems,
+      `query {
+            getAllCategories {
+              categoryCode
+              _id
+              name {
+               value
+              }
+              images {
+                large
+              }
+            }          
+    }`
+    );
+
+    yield put(setCategories(categories.data.data.getAllCategories));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export default function* watchCategoriesLoad() {
-  yield takeEvery(CATEGORIES_LOADED, handleCategoriesLoad);
+  yield takeEvery(GET_CATEGORIES, handleCategoriesLoad);
 }

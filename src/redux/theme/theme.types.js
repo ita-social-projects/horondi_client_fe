@@ -1,2 +1,3 @@
-export const SET_NEWS = 'SET_NEWS';
-export const NEWS_LOADED = 'NEWS_LOADED';
+const SET_THEME_MODE = 'SET_THEME_MODE';
+
+export { SET_THEME_MODE };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
@@ -8,40 +9,16 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from './Cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
-
-const CABINET_OPTIONS_NOT_LOGGED = {
-  0: {
-    wishlist: 'Список уподобань',
-    changeTheme: 'Змінити тему',
-    logIn: 'Увійти'
-  },
-  1: {
-    wishlist: 'Wishlist',
-    changeTheme: 'Change theme',
-    logIn: 'Log in'
-  }
-};
-
-const CABINET_OPTIONS_LOGGED = {
-  0: {
-    profile: 'Профіль',
-    wishlist: 'Список уподобань',
-    changeTheme: 'Змінити тему',
-    logOut: 'Вийти'
-  },
-  1: {
-    profile: 'Profile',
-    wishlist: 'Wishlist',
-    changeTheme: 'Change theme',
-    logOut: 'Log out'
-  }
-};
+import {
+  LANGUAGE,
+  CABINET_OPTIONS_LOGGED,
+  CABINET_OPTIONS_NOT_LOGGED
+} from '../../configs';
 
 const Cabinet = () => {
   const lightMode = useSelector(({ lightMode }) => lightMode);
   const dispatch = useDispatch();
-  const [isLogged, language] = [true, 1]; // 0 === UA, 1 === EN
-
+  const isLogged = true;
   const props = {
     logged: isLogged
   };
@@ -56,20 +33,26 @@ const Cabinet = () => {
   const loggedCabinet = () => (
     <ul className={classes.cabinetDropdownList}>
       <li>
-        <PersonOutlineIcon />
-        <span>{CABINET_OPTIONS_LOGGED[language].profile}</span>
+        <Link to='/profile'>
+          <PersonOutlineIcon />
+          <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].profile}</span>
+        </Link>
       </li>
       <li>
-        <FavoriteIcon />
-        <span>{CABINET_OPTIONS_LOGGED[language].wishlist}</span>
+        <Link to='/wishlist'>
+          <FavoriteIcon />
+          <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].wishlist}</span>
+        </Link>
       </li>
       <li onClick={changeTheme}>
         {themeIcon}
-        <span>{CABINET_OPTIONS_LOGGED[language].changeTheme}</span>
+        <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].changeTheme}</span>
       </li>
       <li>
-        <ExitToAppIcon />
-        <span>{CABINET_OPTIONS_LOGGED[language].logOut}</span>
+        <Link to='/login'>
+          <ExitToAppIcon />
+          <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].logOut}</span>
+        </Link>
       </li>
     </ul>
   );
@@ -77,16 +60,20 @@ const Cabinet = () => {
   const notLoggedCabinet = () => (
     <ul className={classes.cabinetDropdownList}>
       <li>
-        <FavoriteIcon />
-        <span>{CABINET_OPTIONS_NOT_LOGGED[language].wishlist}</span>
+        <Link to='/wishlist'>
+          <FavoriteIcon />
+          <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].wishlist}</span>
+        </Link>
       </li>
       <li onClick={changeTheme}>
         {themeIcon}
-        <span>{CABINET_OPTIONS_NOT_LOGGED[language].changeTheme}</span>
+        <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].changeTheme}</span>
       </li>
       <li>
-        <ExitToAppIcon />
-        <span>{CABINET_OPTIONS_NOT_LOGGED[language].logIn}</span>
+        <Link to='/login'>
+          <ExitToAppIcon />
+          <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].logIn}</span>
+        </Link>
       </li>
     </ul>
   );
@@ -100,53 +87,3 @@ const Cabinet = () => {
 };
 
 export default Cabinet;
-
-/*
-*   const loggedCabinet = () => (
-    <ul className={classes.cabinetDropdownList}>
-      <li>
-        <Link to='/profile'>
-          <PersonOutlineIcon />
-          <span>{CABINET_OPTIONS_LOGGED[language].profile}</span>
-        </Link>
-      </li>
-      <li>
-        <Link to='/wishlist'>
-          <FavoriteIcon />
-          <span>{CABINET_OPTIONS_LOGGED[language].wishlist}</span>
-        </Link>
-      </li>
-      <li onClick={changeTheme}>
-        {themeIcon}
-        <span>{CABINET_OPTIONS_LOGGED[language].changeTheme}</span>
-      </li>
-      <li>
-        <Link to='/login'>
-          <ExitToAppIcon />
-          <span>{CABINET_OPTIONS_LOGGED[language].logOut}</span>
-        </Link>
-      </li>
-    </ul>
-  );
-
-  const notLoggedCabinet = () => (
-    <ul className={classes.cabinetDropdownList}>
-      <li>
-        <Link to='/wishlist'>
-          <FavoriteIcon />
-          <span>{CABINET_OPTIONS_NOT_LOGGED[language].wishlist}</span>
-        </Link>
-      </li>
-      <li onClick={changeTheme}>
-        {themeIcon}
-        <span>{CABINET_OPTIONS_NOT_LOGGED[language].changeTheme}</span>
-      </li>
-      <li>
-        <Link to='/login'>
-          <ExitToAppIcon />
-          <span>{CABINET_OPTIONS_NOT_LOGGED[language].logIn}</span>
-        </Link>
-      </li>
-    </ul>
-  );
-* */

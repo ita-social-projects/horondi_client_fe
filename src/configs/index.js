@@ -124,3 +124,5 @@ export const errorMessages = {
   password: 'Please enter password',
   confirmPassword: 'Please confirm password'
 };
+
+export const LANGUAGE = 0;

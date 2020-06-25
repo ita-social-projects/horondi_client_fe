@@ -1,18 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { GraphqlServiceProvider } from '../../graphqlServiceContext';
-import { graphqlService } from '../../services';
-import store from '../../store/store';
-
+import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
+import configureStore from '../../store/store';
 import Routes from '../../routes';
+
+const store = configureStore();
 
 const App = () => (
   <Provider store={store}>
-    <GraphqlServiceProvider value={graphqlService}>
-      <div className='App'>
-        <Routes />
-      </div>
-    </GraphqlServiceProvider>
+    <Routes />
+    <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
   </Provider>
 );
 

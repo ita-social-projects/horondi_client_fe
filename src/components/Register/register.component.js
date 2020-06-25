@@ -113,7 +113,7 @@ function Register() {
             aria-label='toggle password visibility'
             onClick={(e) => toggleInputType(e, setShowPass)}
           >
-            {isVisible ? <Visibility /> : <VisibilityOff />}
+            {isVisible ? <VisibilityOff /> : <Visibility />}
           </IconButton>
         </InputAdornment>
       )

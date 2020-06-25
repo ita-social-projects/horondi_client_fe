@@ -1,12 +1,12 @@
-import { NEWS_LOADED, SET_NEWS } from './news.types';
+import { GET_NEWS, SET_NEWS } from './news.types';
 
 const setNews = (news) => ({
   type: SET_NEWS,
   payload: news
 });
 
-const watchNewsLoad = () => ({
-  type: NEWS_LOADED
+const getNews = () => ({
+  type: GET_NEWS
 });
 
-export { setNews, watchNewsLoad };
+export { setNews, getNews };

@@ -13,7 +13,7 @@ import {
 import { useStyles } from './news-item.style';
 import { LANGUAGE } from '../../../configs';
 
-const NewsPageItem = ({ date, author, image, title, text, id }) => {
+const NewsItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -87,4 +87,4 @@ const NewsPageItem = ({ date, author, image, title, text, id }) => {
     </div>
   );
 };
-export default NewsPageItem;
+export default NewsItem;

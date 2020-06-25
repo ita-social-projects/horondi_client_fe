@@ -1,4 +1,4 @@
-import { GET_NEWS, SET_NEWS } from './news.types';
+import { SET_NEWS } from './news.types';
 
 const initialState = {
   list: []
@@ -11,11 +11,6 @@ const list = (state = initialState, action) => {
         ...state,
         list: action.payload
       };
-    case GET_NEWS:
-      return {
-        ...state
-      };
-
     default:
       return state;
   }

@@ -1,3 +1,3 @@
-import NewsPageItem from './news-item';
+import NewsItem from './news-item';
 
-export default NewsPageItem;
+export default NewsItem;

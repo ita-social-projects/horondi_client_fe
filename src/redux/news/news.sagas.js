@@ -39,6 +39,6 @@ function* handleNewsLoad() {
   }
 }
 
-export default function* getNews() {
+export default function* newsSaga() {
   yield takeEvery(GET_NEWS, handleNewsLoad);
 }

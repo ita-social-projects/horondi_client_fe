@@ -4,7 +4,7 @@ const initialState = {
   list: []
 };
 
-const newsReducer = (action, state = initialState) => {
+const newsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_NEWS:
       return {

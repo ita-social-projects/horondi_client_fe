@@ -4,7 +4,7 @@ const initialState = {
   list: []
 };
 
-const list = (state = initialState, action) => {
+const newsReducer = (action, state = initialState) => {
   switch (action.type) {
     case SET_NEWS:
       return {
@@ -16,4 +16,4 @@ const list = (state = initialState, action) => {
   }
 };
 
-export default list;
+export default newsReducer;

@@ -111,17 +111,64 @@ export const formRegExp = {
 };
 
 export const placeholders = {
-  firstname: 'Enter firstname',
-  lastname: 'Enter lastname',
-  email: 'Enter email',
-  password: 'Enter password',
-  confirmPassword: 'Confirm password'
+  firstname: [
+    {
+      lang: 'eng',
+      value: 'Enter firstname*'
+    },
+    {
+      lang: 'uk',
+      value: "Введіть Ім'я*"
+    }
+  ],
+
+  lastname: [
+    {
+      lang: 'eng',
+      value: 'Enter lastname*'
+    },
+    {
+      lang: 'uk',
+      value: 'Введіть прізвище*'
+    }
+  ],
+  email: [
+    {
+      lang: 'eng',
+      value: 'Enter email*'
+    },
+    {
+      lang: 'uk',
+      value: 'Введіть емейл*'
+    }
+  ],
+  password: [
+    {
+      lang: 'eng',
+      value: 'Enter password*'
+    },
+    {
+      lang: 'uk',
+      value: 'Введіть пароль*'
+    }
+  ],
+  confirmPassword: [
+    {
+      lang: 'eng',
+      value: 'Confirm password'
+    },
+    {
+      lang: 'uk',
+      value: 'Підтвердіть пароль'
+    }
+  ]
 };
+
 export const errorMessages = {
   firstname: 'Please enter firstname',
   lastname: 'Please enter lastname',
   email: 'Please enter email',
-  password: 'Please enter password',
+  password: 'Password not correct',
   confirmPassword: 'Please confirm password'
 };
 

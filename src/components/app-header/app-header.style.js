@@ -29,7 +29,8 @@ export const useStyles = makeStyles(() => ({
       color: '#000000',
       backgroundColor: '#ffffff'
     },
-    fontFamily: 'Montserrat'
+    fontFamily: 'Montserrat',
+    textTransform: 'uppercase'
   },
   icons: {
     marginLeft: '65%'

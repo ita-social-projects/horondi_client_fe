@@ -28,6 +28,6 @@ function* handleCategoriesLoad() {
   }
 }
 
-export default function* watchCategoriesLoad() {
+export default function* categoriesSaga() {
   yield takeEvery(GET_CATEGORIES, handleCategoriesLoad);
 }

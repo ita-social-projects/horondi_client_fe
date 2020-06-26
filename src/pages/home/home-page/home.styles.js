@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.button.normal.color,
     zIndex: 2,
     margin: 10,
-    fontSize: 25,
+    fontSize: 20,
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color

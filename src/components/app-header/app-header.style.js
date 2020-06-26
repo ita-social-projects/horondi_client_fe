@@ -33,6 +33,6 @@ export const useStyles = makeStyles(() => ({
     textTransform: 'uppercase'
   },
   icons: {
-    marginLeft: '65%'
+    marginLeft: '62%'
   }
 }));

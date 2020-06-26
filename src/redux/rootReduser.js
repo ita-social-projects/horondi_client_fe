@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import news from './news/news.reduser';
-import categories from './categories/categories.reduser';
+import Categories from './categories/categories.reduser';
+import News from './news/news.reducer';
 
 const rootReducer = combineReducers({
-  news,
-  categories
+  News,
+  Categories
 });
 export default rootReducer;

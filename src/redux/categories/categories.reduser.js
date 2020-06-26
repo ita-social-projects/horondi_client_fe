@@ -1,12 +1,11 @@
-import { SET_CATEGORY, SET_CATEGORIES } from './categories.types';
+import { SET_CATEGORIES } from './categories.types';
 
 const initialState = {
   categories: [],
-  category: '',
   loading: true
 };
 
-const categoriesReducer = (action, state = initialState) => {
+const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CATEGORIES:
       return {
@@ -14,12 +13,7 @@ const categoriesReducer = (action, state = initialState) => {
         category: state.category,
         loading: false
       };
-    case SET_CATEGORY:
-      return {
-        ...state,
-        category: action.payload,
-        loading: false
-      };
+
     default:
       return state;
   }

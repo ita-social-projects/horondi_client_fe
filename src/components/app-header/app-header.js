@@ -1,63 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './app-header.style';
-import { LOGO, LANGUAGE } from '../../configs';
 
-export default function AppHeader() {
+import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
+import { getCategories } from '../../redux/categories/categories.actions';
+
+const AppHeader = () => {
+  const { categories } = useSelector(({ Categories }) => ({
+    categories: Categories.categories
+  }));
+
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const list = [
-    {
-      _id: '5ef25be18456ef0604ebb81a',
-      name: [
-        {
-          lang: 'uk',
-          value: 'Рюкзаки'
-        },
-        {
-          lang: 'en',
-          value: 'Backpacks'
-        }
-      ]
-    },
-    {
-      _id: '5ef25be18456ef0604ebb81b',
-      name: [
-        {
-          lang: 'uk',
-          value: 'Сумки'
-        },
-        {
-          lang: 'en',
-          value: 'Bags'
-        }
-      ]
-    },
-    {
-      _id: '5ef25be18456ef0604ebb81c',
-      name: [
-        {
-          lang: 'uk',
-          value: 'Аксесуари'
-        },
-        {
-          lang: 'en',
-          value: 'Accessories'
-        }
-      ]
-    }
-  ];
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   const categoryURL = (category) => {
-    const [filteredCategory] = category.filter((item) => item.lang === 'en');
+    const [filteredCategory] = category.filter(
+      (item) => item.lang === URL_LANGUAGE
+    );
     return filteredCategory.value.toLowerCase();
   };
 
-  const categories = list.map((category) => {
+  const categoriesItems = categories.map((category) => {
     const { _id, name } = category;
+
     return (
       <Link key={_id} className={classes.link} to={`/${categoryURL(name)}`}>
         {name[LANGUAGE].value}
@@ -74,7 +50,7 @@ export default function AppHeader() {
               {LOGO}
             </Link>
           </Typography>
-          {categories}
+          {categoriesItems}
           <div className={classes.icons}>
             <Button color='inherit'>Login</Button>
           </div>
@@ -82,4 +58,6 @@ export default function AppHeader() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default AppHeader;

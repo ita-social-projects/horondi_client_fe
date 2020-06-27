@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   home: {
     boxSizing: 'border-box',
-    backgroundColor: theme.palette.backgroundColor
+    backgroundColor: theme.palette.backgroundColor,
+    textAlign: 'center'
   },
   homeHeader: {
     backgroundImage:
@@ -39,13 +40,6 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
-    }
-  },
-  looks: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& img': {
-      flexBasis: '25%'
     }
   }
 }));

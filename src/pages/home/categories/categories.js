@@ -5,7 +5,7 @@ import LoadingBar from '../../../components/LoadingBar';
 import CategoryItem from '../category-item';
 import { useStyles } from './categories.style';
 import { getCategories } from '../../../redux/home-categories/categories.actions';
-import { LANGUAGE } from '../../../configs';
+import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
 
 const Categories = () => {
   const { categories, loading } = useSelector(({ categories }) => ({
@@ -29,13 +29,14 @@ const Categories = () => {
   ));
 
   return (
-    <>
+    <div className={classes.catalog}>
+      <h2 className={classes.title}>{HOMEPAGE_TITLES[LANGUAGE].catalog}</h2>
       {loading ? (
-        <LoadingBar />
+        <LoadingBar className={classes.loadingIndicator} />
       ) : (
         <div className={classes.categories}>{items}</div>
       )}
-    </>
+    </div>
   );
 };
 

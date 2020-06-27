@@ -33,7 +33,7 @@ const NewsPage = ({ getNews, list }) => {
   );
 };
 
-const mapStateToProps = ({ News: { list } }) => ({
+const mapStateToProps = ({ news: { list } }) => ({
   list
 });
 const mapDispatchToProps = {

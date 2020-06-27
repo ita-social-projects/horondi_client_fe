@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 import Categories from '../categories';
-import { LANGUAGE, HOMEPAGE_LOOKS_IMAGES } from '../../../configs';
+import OurLooks from '../our-looks';
+import { LANGUAGE } from '../../../configs';
 import { useStyles } from './home.styles';
 
 const HOME_BUTTONS = {
@@ -35,11 +36,7 @@ const Home = () => {
         </Link>
       </div>
       <Categories />
-      <div className={classes.looks}>
-        {HOMEPAGE_LOOKS_IMAGES.map((imageSrc, i) => (
-          <img key={i} src={imageSrc} alt='Looks' />
-        ))}
-      </div>
+      <OurLooks />
     </div>
   );
 };

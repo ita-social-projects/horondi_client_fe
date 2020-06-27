@@ -2,7 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   newsTitle: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: '0'
   },
   NewsPageItem: {
     marginTop: '5rem',

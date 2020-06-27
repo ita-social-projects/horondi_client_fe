@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { setNews } from './news.actions';
-import getItems from '../../services/getItems';
+import getItems from '../../utils/client';
 import { GET_NEWS } from './news.types';
 
 function* handleNewsLoad() {
@@ -33,7 +33,7 @@ function* handleNewsLoad() {
                }
              }`
     );
-    yield put(setNews(news.data.data.getAllNews));
+    yield put(setNews(news.data.getAllNews));
   } catch (error) {
     console.log(error);
   }

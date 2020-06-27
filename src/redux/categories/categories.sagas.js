@@ -4,10 +4,7 @@ import getItems from '../../utils/client';
 import { GET_CATEGORIES } from './categories.types';
 
 function* handleCategoriesLoad() {
-  try {
-    const categories = yield call(
-      getItems,
-      `query {
+  const query = `query {
                 getAllCategories {
                     _id
                     categoryCode
@@ -16,8 +13,10 @@ function* handleCategoriesLoad() {
                         value
                     }
                 }
-             }`
-    );
+             }`;
+
+  try {
+    const categories = yield call(getItems, query);
     yield put(setCategories(categories.data.getAllCategories));
   } catch (e) {
     console.log(e);

@@ -1,18 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  root: {
-    position: 'absolute',
-    width: '100%',
-    top: '0'
-  },
-  header: {
-    backgroundColor: '#000000'
-  },
   logo: {
     letterSpacing: '0.2rem',
     fontSize: '1.5rem',
-    margin: '0 1rem',
+    margin: '0 0.6rem 0 0.2rem',
     color: '#ffffff',
     textDecoration: 'none',
     fontFamily: 'Montserrat',
@@ -31,8 +23,5 @@ export const useStyles = makeStyles(() => ({
     },
     fontFamily: 'Montserrat',
     textTransform: 'uppercase'
-  },
-  icons: {
-    marginLeft: '62%'
   }
 }));

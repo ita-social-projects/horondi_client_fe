@@ -9,6 +9,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import LanguageIcon from '@material-ui/icons/Language';
 import NavbarLeft from '../../containers/navbar-left';
 import { useStyles } from './app-header.styles';
+import Language from '../language/Language';
 
 const AppHeader = () => {
   const classes = useStyles();
@@ -21,7 +22,9 @@ const AppHeader = () => {
           <Toolbar className={classes.navright}>
             {/* Here will be NavbarRight */}
             <AttachMoneyIcon className={classes.icons} />
-            <LanguageIcon className={classes.icons} />
+
+            <Language className={classes.icons} />
+
             <ShoppingBasketIcon className={classes.icons} />
             <PersonIcon className={classes.icons} />
           </Toolbar>

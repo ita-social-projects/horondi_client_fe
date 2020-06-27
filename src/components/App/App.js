@@ -9,7 +9,6 @@ const store = configureStore();
 
 const App = () => (
   <Provider store={store}>
-    <Language />
     <Routes />
     <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
   </Provider>

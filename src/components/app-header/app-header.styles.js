@@ -14,6 +14,7 @@ export const useStyles = makeStyles(() => ({
     marginLeft: '85%'
   },
   icons: {
+    position: 'relative',
     fontSize: '2rem',
     paddingRight: '0.8rem',
     color: '#ffffff'

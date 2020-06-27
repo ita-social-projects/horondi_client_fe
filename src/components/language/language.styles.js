@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '2rem',
     paddingRight: '0.8rem',
     color: '#ffffff'
-  }
+  },
+
+  menuItem: {}
 }));
 export default useStyles;

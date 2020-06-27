@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './navbar-left.styles';
 
-import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
+import { LOGO, URL_LANGUAGE } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
 const NavbarLeft = () => {
-  const { categories } = useSelector(({ Categories }) => ({
-    categories: Categories.categories
+  const { categories, language } = useSelector(({ Categories, Language }) => ({
+    categories: Categories.categories,
+    language: Language.language
   }));
 
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const NavbarLeft = () => {
 
     return (
       <Link key={_id} className={classes.link} to={`/${categoryURL(name)}`}>
-        {name[LANGUAGE].value}
+        {name[language].value}
       </Link>
     );
   });

@@ -15,3 +15,7 @@ code {
   padding-left: 0;
   margin: 0;
 }
+
+.makeStyles-formControl-6 {
+  margin: 0 !important;
+}

@@ -2,7 +2,6 @@ import React from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-
 import PersonIcon from '@material-ui/icons/Person';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -15,10 +14,10 @@ const AppHeader = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.header} position='static'>
-        <Toolbar>
+      <AppBar position='static'>
+        <Toolbar className={classes.header}>
           <NavbarLeft />
-          <Toolbar className={classes.navright}>
+          <Toolbar>
             {/* Here will be NavbarRight */}
             <AttachMoneyIcon className={classes.icons} />
             <Language />

@@ -7,11 +7,8 @@ export const useStyles = makeStyles(() => ({
   },
   header: {
     backgroundColor: '#000000',
-    float: 'left'
-  },
-  navright: {
-    position: 'absolute',
-    marginLeft: '85%'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   icons: {
     position: 'relative',

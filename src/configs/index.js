@@ -172,4 +172,36 @@ export const errorMessages = {
   confirmPassword: 'Please confirm password'
 };
 
+export const LOGIN_FORM_LABEL = [
+  {
+    lang: 'eng',
+    value: 'log in'
+  },
+  {
+    lang: 'uk',
+    value: 'увійти'
+  }
+];
+export const OR_TEXT = [
+  {
+    lang: 'eng',
+    value: 'or'
+  },
+  {
+    lang: 'uk',
+    value: 'або'
+  }
+];
+
+export const REGISTER_FORM_LABEL = [
+  {
+    lang: 'eng',
+    value: 'Register'
+  },
+  {
+    lang: 'uk',
+    value: 'Реєстрація'
+  }
+];
+
 export const LANGUAGE = 0;

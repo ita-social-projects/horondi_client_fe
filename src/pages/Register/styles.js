@@ -5,20 +5,17 @@ export const useStyles = makeStyles({
   register: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
-    height: '100vh',
-    position: 'relative',
-    left: '0px',
-    top: '0px'
+    height: '1000px'
   },
   registerForm: {
     backgroundColor: 'white',
     width: '400px',
     height: '600px',
-    position: 'absolute',
-    right: '53px',
-    top: '141px',
     padding: '33px 47px 63px 53px',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    float: 'right',
+    marginTop: '141px',
+    marginRight: '53px'
   },
   heading: {
     fontSize: '24px',
@@ -36,9 +33,6 @@ export const useStyles = makeStyles({
       transform: 'translate(14px, 14px) scale(1)'
     }
   },
-  inputSize: {
-    height: '41px'
-  },
   registerBtn: {
     fontFamily: 'Montserrat',
     fontSize: '16px',
@@ -47,18 +41,9 @@ export const useStyles = makeStyles({
     backgroundColor: '#404040',
     color: 'white',
     textTransform: 'capitalize',
-    marginBottom: '23px',
     '&:hover': {
       backgroundColor: 'black'
     }
-  },
-  disabledRegisterBtn: {
-    backgroundColor: '#999999',
-    marginBottom: '23px',
-    fontFamily: 'Montserrat',
-    fontSize: '16px',
-    lineHeight: '20px',
-    height: '42px'
   },
   loginBtn: {
     float: 'right',
@@ -66,11 +51,34 @@ export const useStyles = makeStyles({
     lineHeight: '17px',
     color: 'black',
     textTransform: 'capitalize',
+    marginTop: '3px',
     '&:hover': {
       color: '#1976D2',
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }
+  },
+  registerError: {
+    fontSize: '0.75rem',
+    margin: '3px 14px 0px',
+    textAlign: 'left',
+    fontFamily: 'Roboto,Helvetica,Arial,sans-serif',
+    fontWeight: '400',
+    lineHeight: '1.66',
+    letterSpacing: '0.03333em',
+    color: '#f44336',
+    wordWrap: 'break-word',
+    position: 'absolute',
+    top: '42px',
+    left: '0px'
+  },
+  registerGroup: {
+    position: 'relative',
+    paddingBottom: '22px'
+  },
+  registerWrapper: {
+    width: '100%',
+    height: '100%'
   }
 });
 

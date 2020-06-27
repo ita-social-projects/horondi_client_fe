@@ -7,8 +7,17 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
-import { placeholders, formRegExp, errorMessages } from '../../configs';
+import { withRouter } from 'react-router';
+import {
+  placeholders,
+  formRegExp,
+  errorMessages,
+  LANGUAGE,
+  REGISTER_FORM_LABEL,
+  LOGIN_FORM_LABEL
+} from '../../configs';
 import { useStyles, defaultTheme } from './styles';
+import registerUser from '../../services/registerUser';
 
 const USER_DATA = {
   firstName: '',
@@ -18,19 +27,9 @@ const USER_DATA = {
   confirmPassword: ''
 };
 
-const language = 0;
-const FORM_LABEL = [
-  {
-    lang: 'uk',
-    value: 'Реєстрація'
-  },
-  {
-    lang: 'eng',
-    value: 'Register'
-  }
-];
+const language = LANGUAGE;
 
-function Register() {
+function Register({ match, location, history }) {
   // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
@@ -47,28 +46,8 @@ function Register() {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmedPassword, setShowConfirmedPassword] = useState(true);
 
-  useEffect(() => {
-    if (
-      firstNameValidated &&
-      lastNameValidated &&
-      emailValidated &&
-      passwordValidated &&
-      isConfirmedPassword
-    ) {
-      setAllFieldsValidated(true);
-    } else {
-      setAllFieldsValidated(false);
-    }
-  }, [
-    firstNameValidated,
-    lastNameValidated,
-    emailValidated,
-    passwordValidated,
-    isConfirmedPassword,
-    allFieldsValidated,
-    shouldValidate,
-    user
-  ]);
+  // ERROR
+  const [registerError, setRegisterError] = useState('');
 
   // PLACEHOLDERS FOR LABELS
   const firstNamePlaceholder = placeholders.firstname[language].value;
@@ -90,8 +69,20 @@ function Register() {
     }
   };
 
-  const handleClickCheck = () => {
+  const handleRegister = async () => {
     setShouldValidate(true);
+    if (allFieldsValidated) {
+      try {
+        const response = await registerUser(user);
+        if (response.data.errors) {
+          setRegisterError(response.data.errors[0].message);
+        } else {
+          history.push('/login');
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
   };
 
   const checkIfConfirmed = (e, setConfirm) => {
@@ -117,6 +108,8 @@ function Register() {
     }
   }
 
+  // EYE TOGGLER
+
   function endAdornment(isVisible, setShowPass) {
     return {
       endAdornment: (
@@ -132,9 +125,30 @@ function Register() {
     };
   }
 
+  // HOOKS
   const classes = useStyles();
 
-  // userField Data
+  useEffect(() => {
+    if (
+      firstNameValidated &&
+      lastNameValidated &&
+      emailValidated &&
+      passwordValidated &&
+      isConfirmedPassword
+    ) {
+      setAllFieldsValidated(true);
+    } else {
+      setAllFieldsValidated(false);
+    }
+  }, [
+    firstNameValidated,
+    lastNameValidated,
+    emailValidated,
+    passwordValidated,
+    isConfirmedPassword
+  ]);
+
+  // USERFIELD DATA
   const { firstName, lastName, confirmPassword, email, password } = user;
 
   const userFields = {
@@ -206,130 +220,76 @@ function Register() {
     }
   };
 
+  const {
+    register,
+    registerForm,
+    heading,
+    dataInput,
+    loginBtn,
+    registerBtn,
+    registerGroup,
+    registerWrapper
+  } = classes;
+
   return (
     <ThemeProvider theme={defaultTheme}>
-      <div className={classes.register}>
-        <form className={classes.registerForm}>
-          <h2 className={classes.heading}>Реєстрація</h2>
-          {Object.values(userFields).map(
-            ({
-              label,
-              inputName,
-              errorMessage,
-              value,
-              onChange,
-              validation,
-              type,
-              InputProps = null,
-              regExp = null
-            }) => (
-              <TextField
-                key={label}
-                label={label}
-                variant='outlined'
-                name={inputName}
+      <div className={register}>
+        <div className={registerWrapper}>
+          <form className={registerForm}>
+            <h2 className={heading}>{REGISTER_FORM_LABEL[language].value}</h2>
+            {Object.values(userFields).map(
+              ({
+                label,
+                inputName,
+                errorMessage,
+                value,
+                onChange,
+                validation,
+                type,
+                InputProps = null,
+                regExp = null
+              }) => (
+                <TextField
+                  key={label}
+                  label={label}
+                  variant='outlined'
+                  name={inputName}
+                  fullWidth
+                  error={!validation.value && !!value && shouldValidate}
+                  helperText={
+                    !validation.value && !!value && shouldValidate
+                      ? `${errorMessage}`
+                      : ''
+                  }
+                  className={dataInput}
+                  onChange={(e) => onChange(e, validation.setValid, regExp)}
+                  value={value}
+                  type={type}
+                  InputProps={InputProps}
+                />
+              )
+            )}
+
+            <div className={registerGroup}>
+              <Button
+                className={registerBtn}
                 fullWidth
-                // error={shouldValidate && !!value && !validation.value}
-                error={!validation.value && !!value && shouldValidate}
-                helperText={
-                  // shouldValidate && !!value && !validation.value ? `${errorMessage}` : ''
-                  !validation.value && !!value && shouldValidate
-                    ? `${errorMessage}`
-                    : ''
-                }
-                className={classes.dataInput}
-                onChange={(e) => onChange(e, validation.setValid, regExp)}
-                value={value}
-                type={type}
-                InputProps={InputProps}
-              />
-            )
-          )}
-          {/* <Validator */}
-          {/*  label={firstNamePlaceholder} */}
-          {/*  name='firstName' */}
-          {/*  helperText={ */}
-          {/*    !firstNameValidated && !!firstName ? `${errorMessages.firstname}` : '' */}
-          {/*  } */}
-          {/*  validate={shouldValidate} */}
-          {/*  className={classes.dataInput} */}
-          {/*  setIsValidated={setFirstNameValidated} */}
-          {/*  value={firstName} */}
-          {/*  regex={formRegExp.name} */}
-          {/*  handler={handleChange} */}
-          {/* /> */}
-          {/* <Validator */}
-          {/*  label={lastNamePlaceholder} */}
-          {/*  name='lastName' */}
-          {/*  helperText={ */}
-          {/*    !lastNameValidated && !!lastName ? `${errorMessages.lastname}` : '' */}
-          {/*  } */}
-          {/*  className={classes.dataInput} */}
-          {/*  setIsValidated={setLastNameValidated} */}
-          {/*  value={lastName} */}
-          {/*  validate={shouldValidate} */}
-          {/*  regex={formRegExp.name} */}
-          {/*  handler={handleChange} */}
-          {/* /> */}
-          {/* <Validator */}
-          {/*  name='email' */}
-          {/*  label={emailPlaceholder} */}
-          {/*  regex={formRegExp.email} */}
-          {/*  validate={shouldValidate} */}
-          {/*  className={classes.dataInput} */}
-          {/*  handler={handleChange} */}
-          {/*  value={email} */}
-          {/*  setIsValidated={setEmailValidated} */}
-          {/*  helperText={ */}
-          {/*    !emailValidated && !!email ? `${errorMessages.email}` : '' */}
-          {/*  } */}
-          {/* /> */}
-          {/* <Validator */}
-          {/*  type='password' */}
-          {/*  name='password' */}
-          {/*  label={passwordPlaceholder} */}
-          {/*  regex={formRegExp.password} */}
-          {/*  validate={shouldValidate} */}
-          {/*  className={classes.dataInput} */}
-          {/*  handler={handleChange} */}
-          {/*  value={password} */}
-          {/*  setIsValidated={setPasswordValidated} */}
-          {/*  helperText={ */}
-          {/*    !passwordValidated && !!password ? `${errorMessages.password}` : '' */}
-          {/*  } */}
-          {/*  inputProps={endAdornment(showPassword, setShowPassword)} */}
-          {/* /> */}
-          {/* <Validator */}
-          {/*  type='password' */}
-          {/*  name='confirmPassword' */}
-          {/*  label={passwordPlaceholder} */}
-          {/*  regex={`^${password}$`} */}
-          {/*  validate={shouldValidate} */}
-          {/*  className={classes.dataInput} */}
-          {/*  handler={handleChange} */}
-          {/*  value={confirmPassword} */}
-          {/*  setIsValidated={setIsConfirmedPassword} */}
-          {/*  helperText={ */}
-          {/*    !isConfirmedPassword && !!confirmPassword ? `${errorMessages.confirmPassword}` : '' */}
-          {/*  } */}
-          {/*  inputProps={endAdornment(showConfirmedPassword, setShowConfirmedPassword)} */}
-          {/* /> */}
-          <Button
-            className={classes.registerBtn}
-            fullWidth
-            onClick={handleClickCheck}
-          >
-            {FORM_LABEL[language].value}
-          </Button>
-          <div>
-            <Link to='/login' className={classes.loginBtn}>
-              Увійти
-            </Link>
-          </div>
-        </form>
+                onClick={handleRegister}
+              >
+                {REGISTER_FORM_LABEL[language].value}
+              </Button>
+              <p className={classes.registerError}>{registerError}</p>
+            </div>
+            <div>
+              <Link to='/login' className={loginBtn}>
+                {LOGIN_FORM_LABEL[language].value}
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </ThemeProvider>
   );
 }
 
-export default Register;
+export default withRouter(Register);

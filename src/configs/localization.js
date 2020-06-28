@@ -18,3 +18,13 @@ export const OR_TEXT = [
     value: 'або'
   }
 ];
+export const HOME_BUTTONS = {
+  0: {
+    NEWS: 'НОВИНИ',
+    ABOUT_US: 'ПРО НАС'
+  },
+  1: {
+    NEWS: 'NEWS',
+    ABOUT_US: 'ABOUT US'
+  }
+};

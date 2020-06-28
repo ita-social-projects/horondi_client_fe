@@ -44,7 +44,7 @@ const NavbarLeft = ({ getCategories, list, language = 0 }) => {
   );
 };
 
-const mapStateToProps = ({ Categories: { list }, Language: { language } }) => ({
+const mapStateToProps = ({ categories: { list }, language: { language } }) => ({
   list,
   language
 });

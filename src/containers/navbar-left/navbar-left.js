@@ -21,7 +21,7 @@ const NavbarLeft = ({ getCategories, list }) => {
       (item) => item.lang === URL_LANGUAGE
     );
 
-    if (filteredCategory) {
+    if (filteredCategory.value) {
       return filteredCategory.value.toLowerCase();
     }
   };

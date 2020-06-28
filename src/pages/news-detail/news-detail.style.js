@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
+    fontFamily: 'Montserrat',
     width: '90%',
     marginLeft: 'auto',
     marginRight: 'auto'

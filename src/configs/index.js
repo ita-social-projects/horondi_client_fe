@@ -52,3 +52,6 @@ export const HOMEPAGE_TITLES = {
     look: 'Horondi style'
   }
 };
+
+export const LOGO = 'HORONDI';
+export const URL_LANGUAGE = 'en';

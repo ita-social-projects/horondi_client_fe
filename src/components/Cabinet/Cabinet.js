@@ -16,9 +16,9 @@ import {
 } from '../../configs';
 
 const Cabinet = () => {
-  const lightMode = useSelector(({ lightMode }) => lightMode);
+  const lightMode = useSelector(({ theme }) => theme.lightMode);
   const dispatch = useDispatch();
-  const isLogged = true;
+  const isLogged = false;
   const props = {
     logged: isLogged
   };
@@ -33,13 +33,13 @@ const Cabinet = () => {
   const loggedCabinet = () => (
     <ul className={classes.cabinetDropdownList}>
       <li>
-        <Link to='/profile'>
+        <Link to='/profile' className={classes.link}>
           <PersonOutlineIcon />
           <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].profile}</span>
         </Link>
       </li>
       <li>
-        <Link to='/wishlist'>
+        <Link to='/wishlist' className={classes.link}>
           <FavoriteIcon />
           <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].wishlist}</span>
         </Link>
@@ -49,7 +49,7 @@ const Cabinet = () => {
         <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].changeTheme}</span>
       </li>
       <li>
-        <Link to='/login'>
+        <Link to='/login' className={classes.link}>
           <ExitToAppIcon />
           <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].logOut}</span>
         </Link>
@@ -60,7 +60,7 @@ const Cabinet = () => {
   const notLoggedCabinet = () => (
     <ul className={classes.cabinetDropdownList}>
       <li>
-        <Link to='/wishlist'>
+        <Link to='/wishlist' className={classes.link}>
           <FavoriteIcon />
           <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].wishlist}</span>
         </Link>
@@ -70,7 +70,7 @@ const Cabinet = () => {
         <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].changeTheme}</span>
       </li>
       <li>
-        <Link to='/login'>
+        <Link to='/login' className={classes.link}>
           <ExitToAppIcon />
           <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].logIn}</span>
         </Link>

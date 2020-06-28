@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './our-looks.style';
 import {
@@ -12,7 +13,9 @@ const OurLooks = () => {
 
   return (
     <div>
-      <h2 className={classes.title}>{HOMEPAGE_TITLES[LANGUAGE].look}</h2>
+      <Typography variant='h2' className={classes.title}>
+        {HOMEPAGE_TITLES[LANGUAGE].look}
+      </Typography>
       <div className={classes.imageSection}>
         {HOMEPAGE_LOOKS_IMAGES.map((imageSrc, i) => (
           <div key={i} className={classes.imageWrapper}>

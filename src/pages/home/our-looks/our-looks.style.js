@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   imageSection: {
     display: 'flex',
     flexWrap: 'wrap'
@@ -21,6 +21,7 @@ export const useStyles = makeStyles(() => ({
     transform: 'translateY(-100px)'
   },
   title: {
-    fontSize: '30px'
+    fontSize: '30px',
+    color: theme.palette.textColor
   }
 }));

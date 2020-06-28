@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 
 import LoadingBar from '../../../components/LoadingBar';
 import CategoryItem from '../category-item';
 import { useStyles } from './categories.style';
-import { getCategories } from '../../../redux/home-categories/categories.actions';
+import { getCategories } from '../../../redux/categories/categories.actions';
 import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
 
 const Categories = () => {
@@ -15,9 +16,9 @@ const Categories = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(getCategories());
-  }, []);
+  }, []); */
 
   const items = categories.map(({ _id, name, images, categoryCode }) => (
     <CategoryItem
@@ -30,7 +31,9 @@ const Categories = () => {
 
   return (
     <div className={classes.catalog}>
-      <h2 className={classes.title}>{HOMEPAGE_TITLES[LANGUAGE].catalog}</h2>
+      <Typography variant='h2' className={classes.title}>
+        {HOMEPAGE_TITLES[LANGUAGE].catalog}
+      </Typography>
       {loading ? (
         <LoadingBar className={classes.loadingIndicator} />
       ) : (

@@ -2,18 +2,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   cabinet: (props) => ({
-    color: 'black',
+    color: 'white',
     position: 'relative',
     cursor: 'pointer',
-    width: 50,
-    height: 50,
+    zIndex: 2,
     '&:hover': {
-      backgroundColor: 'red',
+      backgroundColor: 'white',
       '& ul': {
         display: 'block'
       },
       '& > svg': {
-        color: 'white'
+        color: props.logged ? 'white' : 'black'
       },
       '&::after': {
         background: 'black'
@@ -24,16 +23,18 @@ export const useStyles = makeStyles(() => ({
       content: `''`,
       width: 30,
       height: 30,
-      background: 'red',
+      background: 'white',
       position: 'absolute',
-      left: 0,
-      top: 0,
+      left: '1px',
+      top: '1px',
       zIndex: 1,
       borderRadius: '50%'
     },
     '& svg': {
       position: 'relative',
-      zIndex: 2
+      zIndex: 2,
+      fontSize: '2rem',
+      color: props.logged ? 'black' : 'white'
     }
   }),
   cabinetDropdownList: {
@@ -43,18 +44,34 @@ export const useStyles = makeStyles(() => ({
     padding: 0,
     backgroundColor: 'white',
     color: 'black',
-    width: 200,
+    width: 250,
+    right: 0,
+    top: '20px',
     '& li': {
       display: 'flex',
       padding: 10,
+      alignItems: 'center',
       '& span': {
         fontSize: 16,
         marginLeft: 10
       },
+      '& svg': {
+        color: 'black'
+      },
       '&:hover': {
         color: 'white',
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        '& svg': {
+          color: 'white'
+        }
       }
     }
+  },
+  link: {
+    color: 'inherit',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center'
   }
 }));

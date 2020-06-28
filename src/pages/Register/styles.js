@@ -10,7 +10,7 @@ export const useStyles = makeStyles({
   registerForm: {
     backgroundColor: 'white',
     width: '400px',
-    height: '600px',
+    minHeight: '200px',
     padding: '33px 47px 63px 53px',
     boxSizing: 'border-box',
     float: 'right',
@@ -27,7 +27,6 @@ export const useStyles = makeStyles({
   },
   dataInput: {
     marginBottom: '10px',
-    color: 'black',
     paddingBottom: '22.5px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
@@ -51,6 +50,7 @@ export const useStyles = makeStyles({
     lineHeight: '17px',
     color: 'black',
     textTransform: 'capitalize',
+    textDecoration: 'none',
     marginTop: '3px',
     '&:hover': {
       color: '#1976D2',
@@ -79,6 +79,25 @@ export const useStyles = makeStyles({
   registerWrapper: {
     width: '100%',
     height: '100%'
+  },
+  disabledRegister: {
+    backgroundColor: '#999999',
+    color: '#c2c2c2',
+    fontFamily: 'Montserrat',
+    fontSize: '16px',
+    lineHeight: '20px',
+    height: '42px',
+    textTransform: 'capitalize'
+  },
+  infoLogo: {
+    width: '30px',
+    height: '30px',
+    margin: '0 auto',
+    display: 'block',
+    marginBottom: '23px'
+  },
+  successText: {
+    width: '250px'
   }
 });
 

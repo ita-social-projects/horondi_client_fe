@@ -111,45 +111,44 @@ export const formRegExp = {
 };
 
 export const placeholders = {
-  firstname: [
+  firstName: [
     {
       lang: 'eng',
-      value: 'Enter firstname*'
+      value: 'Enter firstname'
     },
     {
       lang: 'uk',
-      value: "Введіть Ім'я*"
+      value: "Введіть Ім'я"
     }
   ],
-
-  lastname: [
+  lastName: [
     {
       lang: 'eng',
-      value: 'Enter lastname*'
+      value: 'Enter lastname'
     },
     {
       lang: 'uk',
-      value: 'Введіть прізвище*'
+      value: 'Введіть прізвище'
     }
   ],
   email: [
     {
       lang: 'eng',
-      value: 'Enter email*'
+      value: 'Enter email'
     },
     {
       lang: 'uk',
-      value: 'Введіть емейл*'
+      value: 'Введіть емейл'
     }
   ],
   password: [
     {
       lang: 'eng',
-      value: 'Enter password*'
+      value: 'Enter password'
     },
     {
       lang: 'uk',
-      value: 'Введіть пароль*'
+      value: 'Введіть пароль'
     }
   ],
   confirmPassword: [
@@ -203,5 +202,33 @@ export const REGISTER_FORM_LABEL = [
     value: 'Реєстрація'
   }
 ];
+
+export const CONFIRM_EMAIL = [
+  {
+    lang: 'eng',
+    value:
+      'You have successfully registered! Please, confirm your email address.'
+  },
+  {
+    lang: 'uk',
+    value:
+      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+  }
+];
+
+export const REGISTER_USER_DATA = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+};
+
+export const LOGIN_USER_DATA = {
+  email: '',
+  password: ''
+};
+
+export const SHOW_AFTER = 3000;
 
 export const LANGUAGE = 0;

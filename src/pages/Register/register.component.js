@@ -12,24 +12,18 @@ import {
   placeholders,
   formRegExp,
   errorMessages,
-  LANGUAGE,
+  LANGUAGE as language,
   REGISTER_FORM_LABEL,
-  LOGIN_FORM_LABEL
+  LOGIN_FORM_LABEL,
+  REGISTER_USER_DATA,
+  CONFIRM_EMAIL,
+  SHOW_AFTER
 } from '../../configs';
 import { useStyles, defaultTheme } from './styles';
 import registerUser from '../../services/registerUser';
+import info from '../../images/information.png';
 
-const USER_DATA = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  confirmPassword: ''
-};
-
-const language = LANGUAGE;
-
-function Register({ match, location, history }) {
+function Register({ history }) {
   // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
@@ -38,9 +32,11 @@ function Register({ match, location, history }) {
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [isConfirmedPassword, setIsConfirmedPassword] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [allFieldsSet, setAllFieldsSet] = useState(false);
+  const [hasRegistered, setHasRegistered] = useState(false);
 
   // VALUES
-  const [user, setUser] = useState(USER_DATA);
+  const [user, setUser] = useState(REGISTER_USER_DATA);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
@@ -48,14 +44,6 @@ function Register({ match, location, history }) {
 
   // ERROR
   const [registerError, setRegisterError] = useState('');
-
-  // PLACEHOLDERS FOR LABELS
-  const firstNamePlaceholder = placeholders.firstname[language].value;
-  const lastNamePlaceholder = placeholders.lastname[language].value;
-  const emailPlaceholder = placeholders.email[language].value;
-  const passwordPlaceholder = placeholders.password[language].value;
-  const confirmPasswordPlaceholder =
-    placeholders.confirmPassword[language].value;
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -77,7 +65,10 @@ function Register({ match, location, history }) {
         if (response.data.errors) {
           setRegisterError(response.data.errors[0].message);
         } else {
-          history.push('/login');
+          setHasRegistered(true);
+          setTimeout(() => {
+            history.push('/login');
+          }, SHOW_AFTER);
         }
       } catch (e) {
         console.error(e);
@@ -108,8 +99,7 @@ function Register({ match, location, history }) {
     }
   }
 
-  // EYE TOGGLER
-
+  // EYE
   function endAdornment(isVisible, setShowPass) {
     return {
       endAdornment: (
@@ -140,12 +130,19 @@ function Register({ match, location, history }) {
     } else {
       setAllFieldsValidated(false);
     }
+    if (Object.values(user).every((val) => val !== '')) {
+      setAllFieldsSet(true);
+    } else {
+      setAllFieldsSet(false);
+    }
   }, [
     firstNameValidated,
     lastNameValidated,
     emailValidated,
     passwordValidated,
-    isConfirmedPassword
+    isConfirmedPassword,
+    user,
+    allFieldsSet
   ]);
 
   // USERFIELD DATA
@@ -153,7 +150,6 @@ function Register({ match, location, history }) {
 
   const userFields = {
     firstNameField: {
-      label: firstNamePlaceholder,
       inputName: 'firstName',
       errorMessage: errorMessages.firstname,
       value: firstName,
@@ -166,7 +162,6 @@ function Register({ match, location, history }) {
       regExp: formRegExp.name
     },
     lastNameField: {
-      label: lastNamePlaceholder,
       inputName: 'lastName',
       errorMessage: errorMessages.lastname,
       value: lastName,
@@ -179,7 +174,6 @@ function Register({ match, location, history }) {
       regExp: formRegExp.name
     },
     email: {
-      label: emailPlaceholder,
       inputName: 'email',
       errorMessage: errorMessages.email,
       value: email,
@@ -192,7 +186,6 @@ function Register({ match, location, history }) {
       regExp: formRegExp.email
     },
     passwordField: {
-      label: passwordPlaceholder,
       inputName: 'password',
       errorMessage: errorMessages.password,
       value: password,
@@ -206,7 +199,6 @@ function Register({ match, location, history }) {
       regExp: formRegExp.password
     },
     confirmPasswordField: {
-      label: confirmPasswordPlaceholder,
       inputName: 'confirmPassword',
       errorMessage: errorMessages.confirmPassword,
       value: confirmPassword,
@@ -220,6 +212,7 @@ function Register({ match, location, history }) {
     }
   };
 
+  // CLASSES
   const {
     register,
     registerForm,
@@ -228,64 +221,81 @@ function Register({ match, location, history }) {
     loginBtn,
     registerBtn,
     registerGroup,
-    registerWrapper
+    registerWrapper,
+    disabledRegister,
+    infoLogo,
+    successText
   } = classes;
+
+  const successWindow = (
+    <form className={registerForm}>
+      <div>
+        <img src={info} alt='info' className={infoLogo} />
+        <p className={successText}>{CONFIRM_EMAIL[language].value}</p>
+      </div>
+    </form>
+  );
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className={register}>
         <div className={registerWrapper}>
-          <form className={registerForm}>
-            <h2 className={heading}>{REGISTER_FORM_LABEL[language].value}</h2>
-            {Object.values(userFields).map(
-              ({
-                label,
-                inputName,
-                errorMessage,
-                value,
-                onChange,
-                validation,
-                type,
-                InputProps = null,
-                regExp = null
-              }) => (
-                <TextField
-                  key={label}
-                  label={label}
-                  variant='outlined'
-                  name={inputName}
-                  fullWidth
-                  error={!validation.value && !!value && shouldValidate}
-                  helperText={
-                    !validation.value && !!value && shouldValidate
-                      ? `${errorMessage}`
-                      : ''
-                  }
-                  className={dataInput}
-                  onChange={(e) => onChange(e, validation.setValid, regExp)}
-                  value={value}
-                  type={type}
-                  InputProps={InputProps}
-                />
-              )
-            )}
+          {hasRegistered ? (
+            successWindow
+          ) : (
+            <form className={registerForm}>
+              <h2 className={heading}>{REGISTER_FORM_LABEL[language].value}</h2>
+              {Object.values(userFields).map(
+                ({
+                  inputName,
+                  errorMessage,
+                  value,
+                  onChange,
+                  validation,
+                  type,
+                  InputProps = null,
+                  regExp = null
+                }) => (
+                  <TextField
+                    required
+                    key={placeholders[inputName][language].value}
+                    label={placeholders[inputName][language].value}
+                    variant='outlined'
+                    name={inputName}
+                    fullWidth
+                    error={!validation.value && !!value && shouldValidate}
+                    helperText={
+                      !validation.value && !!value && shouldValidate
+                        ? `${errorMessage}`
+                        : ''
+                    }
+                    className={dataInput}
+                    onChange={(e) => onChange(e, validation.setValid, regExp)}
+                    value={value}
+                    type={type}
+                    InputProps={InputProps}
+                  />
+                )
+              )}
 
-            <div className={registerGroup}>
-              <Button
-                className={registerBtn}
-                fullWidth
-                onClick={handleRegister}
-              >
-                {REGISTER_FORM_LABEL[language].value}
-              </Button>
-              <p className={classes.registerError}>{registerError}</p>
-            </div>
-            <div>
-              <Link to='/login' className={loginBtn}>
-                {LOGIN_FORM_LABEL[language].value}
-              </Link>
-            </div>
-          </form>
+              <div className={registerGroup}>
+                <Button
+                  className={allFieldsSet ? registerBtn : disabledRegister}
+                  fullWidth
+                  onClick={handleRegister}
+                  disabled={!allFieldsSet}
+                >
+                  {REGISTER_FORM_LABEL[language].value}
+                </Button>
+                <p className={classes.registerError}>{registerError}</p>
+              </div>
+              <div>
+                <Link to='/login' className={loginBtn}>
+                  {LOGIN_FORM_LABEL[language].value}
+                </Link>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </ThemeProvider>

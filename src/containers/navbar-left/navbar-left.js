@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
@@ -8,35 +9,28 @@ import { useStyles } from './navbar-left.styles';
 import { LOGO, URL_LANGUAGE } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
-const NavbarLeft = () => {
-  const { categories, language } = useSelector(({ Categories, Language }) => ({
-    categories: Categories.categories,
-    language: Language.language
-  }));
-
-  const dispatch = useDispatch();
+const NavbarLeft = ({ getCategories, list, language = 0 }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+    getCategories();
+  }, [getCategories]);
 
-  const categoryURL = (category) => {
+  const getCategoryURL = (category) => {
     const [filteredCategory] = category.filter(
       (item) => item.lang === URL_LANGUAGE
     );
-    return filteredCategory.value.toLowerCase();
+
+    if (filteredCategory.value) {
+      return filteredCategory.value.toLowerCase();
+    }
   };
 
-  const categoriesItems = categories.map((category) => {
-    const { _id, name } = category;
-
-    return (
-      <Link key={_id} className={classes.link} to={`/${categoryURL(name)}`}>
-        {name[language].value}
-      </Link>
-    );
-  });
+  const categoriesItems = list.map(({ _id, name }) => (
+    <Link key={_id} className={classes.link} to={`/${getCategoryURL(name)}`}>
+      {name[language].value}
+    </Link>
+  ));
 
   return (
     <Toolbar>
@@ -50,4 +44,13 @@ const NavbarLeft = () => {
   );
 };
 
-export default NavbarLeft;
+const mapStateToProps = ({ Categories: { list }, Language: { language } }) => ({
+  list,
+  language
+});
+
+const mapDispatchToProps = {
+  getCategories
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarLeft);

@@ -36,42 +36,5 @@ export const useStyles = makeStyles(() => ({
       fontSize: '2rem',
       color: props.logged ? 'black' : 'white'
     }
-  }),
-  cabinetDropdownList: {
-    listStyle: 'none',
-    display: 'none',
-    position: 'absolute',
-    padding: 0,
-    backgroundColor: 'white',
-    color: 'black',
-    width: 250,
-    right: 0,
-    top: '20px',
-    '& li': {
-      display: 'flex',
-      padding: 10,
-      alignItems: 'center',
-      '& span': {
-        fontSize: 16,
-        marginLeft: 10
-      },
-      '& svg': {
-        color: 'black'
-      },
-      '&:hover': {
-        color: 'white',
-        backgroundColor: 'black',
-        '& svg': {
-          color: 'white'
-        }
-      }
-    }
-  },
-  link: {
-    color: 'inherit',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center'
-  }
+  })
 }));

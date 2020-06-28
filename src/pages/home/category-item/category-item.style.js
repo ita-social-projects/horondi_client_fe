@@ -1,15 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   categoryItem: (props) => ({
     backgroundImage: `url(${props.image})`,
     backgroundSize: 'cover',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 400,
-    height: 500,
-    margin: 20,
+    width: '25em',
+    height: '30em',
+    margin: '2em',
     cursor: 'pointer',
     borderRadius: 5,
     boxShadow: '0px 5px 8px #c5c5c5',
@@ -21,8 +21,8 @@ export const useStyles = makeStyles((theme) => ({
   }),
   categoryNameWrapper: {
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    width: 250,
-    height: 60,
+    width: '60%',
+    height: '10%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

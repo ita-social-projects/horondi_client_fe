@@ -2,27 +2,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   imageSection: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, 200px)',
+    justifyContent: 'center'
   },
   imageWrapper: {
-    flexBasis: '25%',
-    height: 400,
-    position: 'relative',
-    overflow: 'hidden',
-    '& img': {
-      width: '100%',
-      position: 'absolute',
-      top: 0,
-      left: 0
-    }
-  },
-  secondFloorImg: {
-    transform: 'translateY(-100px)'
+    height: '15em',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
   },
   title: {
-    fontSize: '30px',
-    marginBottom: '30px',
+    fontSize: '2em',
+    marginBottom: '1.5em',
     color: theme.palette.textColor
   }
 }));

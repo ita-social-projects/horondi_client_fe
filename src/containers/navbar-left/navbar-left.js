@@ -44,7 +44,7 @@ const NavbarLeft = ({ getCategories, list }) => {
   );
 };
 
-const mapStateToProps = ({ categories: { list } }) => ({
+const mapStateToProps = ({ Categories: { list } }) => ({
   list
 });
 

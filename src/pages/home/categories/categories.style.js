@@ -2,21 +2,20 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   catalog: {
-    margin: '200px 0'
+    margin: '10em 0'
   },
   categories: {
     display: 'flex',
     justifyContent: 'center',
     alignContent: 'center',
     flexWrap: 'wrap',
-    margin: '0 50px 200px'
+    margin: '0 2em 3em'
   },
   loadingIndicator: {
-    marginTop: '50px'
+    marginTop: '3em'
   },
   title: {
-    marginTop: '200px',
-    fontSize: '30px',
+    fontSize: '2em',
     color: theme.palette.textColor
   }
 }));

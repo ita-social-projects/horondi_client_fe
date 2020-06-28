@@ -7,22 +7,15 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { useStyles } from './Cabinet.styles';
-import { setThemeMode } from '../../../redux/theme/theme.actions';
-import {
-  LANGUAGE,
-  CABINET_OPTIONS_LOGGED
-} from '../../../configs';
+import { useStyles } from './LoggedCabinet.styles';
+import { setThemeMode } from '../../redux/theme/theme.actions';
+import { LANGUAGE, CABINET_OPTIONS_LOGGED } from '../../configs';
 
-const CabinetLogged = () => {
-  const lightMode = useSelector(({ theme }) => theme.lightMode);
+const LoggedCabinet = () => {
+  const lightMode = useSelector(({ Theme }) => Theme.lightMode);
   const dispatch = useDispatch();
-  const isLogged = false;
-  const props = {
-    logged: isLogged
-  };
 
-  const classes = useStyles(props);
+  const classes = useStyles();
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
 
   const changeTheme = () => {
@@ -57,4 +50,4 @@ const CabinetLogged = () => {
   );
 };
 
-export default CabinetLogged;
+export default LoggedCabinet;

@@ -1,3 +1,3 @@
-import CabinetNotLogged from './CabinetNotLogged';
+import NotLoggedCabinet from './NotLoggedCabinet';
 
-export default CabinetNotLogged;
+export default NotLoggedCabinet;

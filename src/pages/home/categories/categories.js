@@ -8,9 +8,9 @@ import { useStyles } from './categories.style';
 import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
 
 const Categories = () => {
-  const { categories, loading } = useSelector(({ categories }) => ({
-    categories: categories.list,
-    loading: categories.loading
+  const { categories, loading } = useSelector(({ Categories }) => ({
+    categories: Categories.list,
+    loading: Categories.loading
   }));
   const classes = useStyles();
 

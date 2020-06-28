@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
-import news from './news/news.reducer';
-import categories from './categories/categories.reducer';
-import theme from './theme/theme.reducer';
+import News from './news/news.reducer';
+import Categories from './categories/categories.reducer';
+import Theme from './theme/theme.reducer';
 
 const rootReducer = combineReducers({
-  news,
-  categories,
-  theme
+  News,
+  Categories,
+  Theme
 });
 export default rootReducer;

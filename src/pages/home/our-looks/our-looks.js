@@ -18,17 +18,11 @@ const OurLooks = () => {
       </Typography>
       <div className={classes.imageSection}>
         {HOMEPAGE_LOOKS_IMAGES.map((imageSrc, i) => (
-          <div key={i} className={classes.imageWrapper}>
-            {i < 4 ? (
-              <img src={imageSrc} alt='Looks' />
-            ) : (
-              <img
-                className={classes.secondFloorImg}
-                src={imageSrc}
-                alt='Looks'
-              />
-            )}
-          </div>
+          <div
+            key={i}
+            className={classes.imageWrapper}
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          />
         ))}
       </div>
     </div>

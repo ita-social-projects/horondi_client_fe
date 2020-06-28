@@ -25,3 +25,6 @@ code {
 a {
   text-decoration: none;
 }
+.MuiOutlinedInput-notchedOutline{
+  border: none !important;
+}

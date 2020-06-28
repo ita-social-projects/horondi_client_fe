@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
-import { LANGUAGE } from '../../../configs';
 
-const NewsPage = ({ getNews, list }) => {
+const NewsPage = ({ getNews, list, language }) => {
   useEffect(() => {
     getNews();
     window.scrollTo(0, 0);
@@ -27,14 +26,15 @@ const NewsPage = ({ getNews, list }) => {
 
   return (
     <>
-      <h1 className={styles.newsTitle}>{newsHeader[LANGUAGE]}</h1>
+      <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>
       <div className={styles.NewsPageItem}>{newsItems}</div>
     </>
   );
 };
 
-const mapStateToProps = ({ news: { list } }) => ({
-  list
+const mapStateToProps = ({ news: { list }, language: { language } }) => ({
+  list,
+  language
 });
 const mapDispatchToProps = {
   getNews

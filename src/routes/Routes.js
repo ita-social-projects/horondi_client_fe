@@ -4,6 +4,7 @@ import './Routes.style.js';
 import NewsPage from 'src/pages/news/news-page';
 import Home from 'src/pages/home/home-page';
 import AppHeader from '../components/app-header';
+import AppFooter from '../components/App-footer';
 
 const Routes = () => (
   <Router>
@@ -14,6 +15,7 @@ const Routes = () => (
         <Route path='/news' exact component={NewsPage} />
       </Switch>
     </div>
+    <AppFooter />
   </Router>
 );
 

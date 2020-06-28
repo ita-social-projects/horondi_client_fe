@@ -1,4 +1,4 @@
-import { call, put, take, delay } from 'redux-saga/effects';
+import { call, put, take } from 'redux-saga/effects';
 import { setUser, setError } from './user.actions';
 import loginUser from '../../services/loginUser';
 import { GET_USER } from './user.types';

@@ -3,7 +3,12 @@ import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { useStyles, defaultTheme } from './Login.styles';
+import {
+  darkTheme,
+  createStyles,
+  defaultTheme,
+  lightTheme
+} from './Login.styles';
 import {
   placeholders,
   OR_TEXT,
@@ -19,6 +24,7 @@ const Login = ({ loginUser, loginError, history }) => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
   const [allFieldsSet, setAllFieldsSet] = useState(false);
+  const [theme, setTheme] = useState(darkTheme);
 
   // VALIDATE
   const [shouldValidate, setShouldValidate] = useState(false);
@@ -47,8 +53,6 @@ const Login = ({ loginUser, loginError, history }) => {
     }
   };
 
-  // EYE
-
   // HOOKS
   useEffect(() => {
     if (Object.values(user).every((val) => val !== '')) {
@@ -59,10 +63,10 @@ const Login = ({ loginUser, loginError, history }) => {
     if (!loginError && loginError !== null) {
       history.push('/');
     }
-  }, [user, loginError]);
+  }, [user, loginError, history]);
 
   // CLASSES
-  const classes = useStyles();
+  const classes = createStyles(theme)();
   const {
     login,
     loginWrapper,
@@ -80,7 +84,8 @@ const Login = ({ loginUser, loginError, history }) => {
     registrContainer,
     registrBtn,
     googleLogo,
-    disabledLogin
+    disabledLogin,
+    notchedOutline
   } = classes;
 
   const { email, password } = user;
@@ -92,6 +97,18 @@ const Login = ({ loginUser, loginError, history }) => {
           <form className={loginForm}>
             <h2 className={heading}>{LOGIN_FORM_LABEL[language].value}</h2>
             <TextField
+              InputLabelProps={{
+                style: {
+                  color: theme.inputLabelColor.color
+                }
+              }}
+              InputProps={{
+                style: { color: theme.inputTextColor.color },
+                classes: {
+                  notchedOutline
+                }
+              }}
+              color='secondary'
               label={emailLabel}
               className={emailInput}
               fullWidth
@@ -107,12 +124,22 @@ const Login = ({ loginUser, loginError, history }) => {
               }
             />
             <TextField
+              InputLabelProps={{
+                style: {
+                  color: theme.inputLabelColor.color
+                }
+              }}
               label={passwordLabel}
               className={passwordInput}
               fullWidth
               variant='outlined'
               type='password'
-              InputProps={endAdornment(showPassword, setShowPassword)}
+              InputProps={endAdornment(
+                showPassword,
+                setShowPassword,
+                theme.inputTextColor.color,
+                notchedOutline
+              )}
               name='password'
               value={password}
               error={!password && shouldValidate}

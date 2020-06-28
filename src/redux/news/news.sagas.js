@@ -29,7 +29,11 @@ function* handleNewsLoad() {
                   primary{
                     medium
                   }
+                  additional{
+                    medium
+                  }
                 }
+                video
                }
              }`
     );

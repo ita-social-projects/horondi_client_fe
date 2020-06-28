@@ -9,7 +9,7 @@ import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
 
 const Categories = () => {
   const { categories, loading } = useSelector(({ categories }) => ({
-    categories: categories.categories,
+    categories: categories.list,
     loading: categories.loading
   }));
   const classes = useStyles();

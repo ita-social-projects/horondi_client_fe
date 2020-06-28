@@ -8,20 +8,22 @@ import {
 } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { useStyles, defaultTheme } from './Login.styles';
 import {
   placeholders,
   OR_TEXT,
   LANGUAGE as language,
   LOGIN_FORM_LABEL,
-  LOGIN_USER_DATA
+  LOGIN_USER_DATA,
+  EMPTY_FIELD
 } from '../../configs';
-import loginUser from '../../services/loginUser';
+import { getUser } from '../../redux/user/user.actions';
 
-const Login = () => {
+const Login = ({ loginUser, loginError, history }) => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
-  const [loginError, setLoginError] = useState(false);
   const [allFieldsSet, setAllFieldsSet] = useState(false);
 
   // VALIDATE
@@ -44,10 +46,7 @@ const Login = () => {
     setShouldValidate(true);
     if (allFieldsSet) {
       try {
-        const response = await loginUser(user);
-        if (response.data.errors) {
-          setLoginError(true);
-        }
+        loginUser(user);
       } catch (e) {
         console.error(e);
       }
@@ -89,7 +88,10 @@ const Login = () => {
     } else {
       setAllFieldsSet(false);
     }
-  }, [user]);
+    if (!loginError && loginError !== null) {
+      history.push('/');
+    }
+  }, [user, loginError]);
 
   // CLASSES
   const classes = useStyles();
@@ -132,7 +134,9 @@ const Login = () => {
               error={!email && shouldValidate}
               required
               onChange={handleChange}
-              helperText={!email && shouldValidate ? 'Empty field' : ''}
+              helperText={
+                !email && shouldValidate ? EMPTY_FIELD[language].value : ''
+              }
             />
             <TextField
               label={passwordLabel}
@@ -146,7 +150,9 @@ const Login = () => {
               error={!password && shouldValidate}
               required
               onChange={handleChange}
-              helperText={!password && shouldValidate ? 'Empty field' : ''}
+              helperText={
+                !password && shouldValidate ? EMPTY_FIELD[language].value : ''
+              }
             />
             <div className={recoveryContainer}>
               <Link to='/recovery' className={recoveryBtn}>
@@ -185,4 +191,12 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (user) => dispatch(getUser(user))
+});
+
+const mapStateToProps = (state) => ({
+  loginError: state.User.error
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

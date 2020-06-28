@@ -229,6 +229,17 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
+export const EMPTY_FIELD = [
+  {
+    lang: 'eng',
+    value: 'Empty field'
+  },
+  {
+    lang: 'uk',
+    value: 'Заповніть поле'
+  }
+];
+
 export const SHOW_AFTER = 3000;
 
 export const LANGUAGE = 0;

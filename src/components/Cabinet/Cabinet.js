@@ -10,13 +10,17 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStyles } from './Cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import {
-  LANGUAGE,
   CABINET_OPTIONS_LOGGED,
   CABINET_OPTIONS_NOT_LOGGED
 } from '../../configs';
 
 const Cabinet = () => {
-  const lightMode = useSelector(({ theme }) => theme.lightMode);
+  const { lightMode, language } = useSelector(
+    ({ theme: { lightMode }, language: { language } }) => ({
+      lightMode,
+      language
+    })
+  );
   const dispatch = useDispatch();
   const isLogged = false;
   const props = {
@@ -35,23 +39,23 @@ const Cabinet = () => {
       <li>
         <Link to='/profile' className={classes.link}>
           <PersonOutlineIcon />
-          <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].profile}</span>
+          <span>{CABINET_OPTIONS_LOGGED[language].profile}</span>
         </Link>
       </li>
       <li>
         <Link to='/wishlist' className={classes.link}>
           <FavoriteIcon />
-          <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].wishlist}</span>
+          <span>{CABINET_OPTIONS_LOGGED[language].wishlist}</span>
         </Link>
       </li>
       <li onClick={changeTheme}>
         {themeIcon}
-        <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].changeTheme}</span>
+        <span>{CABINET_OPTIONS_LOGGED[language].changeTheme}</span>
       </li>
       <li>
         <Link to='/login' className={classes.link}>
           <ExitToAppIcon />
-          <span>{CABINET_OPTIONS_LOGGED[LANGUAGE].logOut}</span>
+          <span>{CABINET_OPTIONS_LOGGED[language].logOut}</span>
         </Link>
       </li>
     </ul>
@@ -62,17 +66,17 @@ const Cabinet = () => {
       <li>
         <Link to='/wishlist' className={classes.link}>
           <FavoriteIcon />
-          <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].wishlist}</span>
+          <span>{CABINET_OPTIONS_NOT_LOGGED[language].wishlist}</span>
         </Link>
       </li>
       <li onClick={changeTheme}>
         {themeIcon}
-        <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].changeTheme}</span>
+        <span>{CABINET_OPTIONS_NOT_LOGGED[language].changeTheme}</span>
       </li>
       <li>
         <Link to='/login' className={classes.link}>
           <ExitToAppIcon />
-          <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].logIn}</span>
+          <span>{CABINET_OPTIONS_NOT_LOGGED[language].logIn}</span>
         </Link>
       </li>
     </ul>

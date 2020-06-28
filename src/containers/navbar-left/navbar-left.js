@@ -18,7 +18,7 @@ const NavbarLeft = () => {
 
   useEffect(() => {
     dispatch(getCategories());
-  }, []);
+  }, [dispatch]);
 
   const categoryURL = (category) => {
     const [filteredCategory] = category.filter(

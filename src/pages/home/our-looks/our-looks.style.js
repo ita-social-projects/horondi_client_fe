@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: '30px',
+    marginBottom: '30px',
     color: theme.palette.textColor
   }
 }));

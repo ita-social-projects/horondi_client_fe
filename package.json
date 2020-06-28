@@ -15,6 +15,7 @@
     "connected-react-router": "^6.8.0",
     "cors": "^2.8.5",
     "create-components-react": "^2.1.4",
+    "graphql": "^15.1.0",
     "html-react-parser": "^0.13.0",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
@@ -38,7 +39,8 @@
     "lint:fix": "eslint . --fix --color",
     "cypress": "cypress open",
     "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "create": "ccr create"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -66,7 +68,6 @@
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.0.1",
     "cypress": "^4.4.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -87,6 +88,7 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-dom": "^4.0.0",
+    "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",

@@ -40,7 +40,7 @@ function Register({ history }) {
 
   // VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  const [theme, setTheme] = useState(lightTheme);
+  const [theme, setTheme] = useState(darkTheme);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);

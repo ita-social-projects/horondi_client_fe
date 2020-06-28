@@ -1,7 +1,14 @@
-import ApolloClient from 'apollo-boost';
+import ApolloClient, { gql } from 'apollo-boost';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_BASE_URI
 });
 
-export default client;
+const getItems = (query) =>
+  client.query({
+    query: gql`
+      ${query}
+    `
+  });
+
+export default getItems;

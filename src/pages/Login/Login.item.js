@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import {
   darkTheme,
-  createStyles,
+  createLoginStyles,
   defaultTheme,
   lightTheme
 } from './Login.styles';
@@ -66,7 +66,7 @@ const Login = ({ loginUser, loginError, history }) => {
   }, [user, loginError, history]);
 
   // CLASSES
-  const classes = createStyles(theme)();
+  const classes = createLoginStyles(theme)();
   const {
     login,
     loginWrapper,

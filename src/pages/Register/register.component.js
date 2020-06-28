@@ -15,9 +15,15 @@ import {
   CONFIRM_EMAIL,
   SHOW_AFTER
 } from '../../configs';
-import { useStyles, defaultTheme } from './styles';
+import {
+  darkTheme,
+  lightTheme,
+  createRegisterStyles,
+  defaultTheme
+} from './styles';
 import registerUser from '../../services/registerUser';
 import info from '../../images/information.png';
+import infoLight from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 
 function Register({ history }) {
@@ -34,6 +40,7 @@ function Register({ history }) {
 
   // VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
+  const [theme, setTheme] = useState(lightTheme);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
@@ -85,7 +92,7 @@ function Register({ history }) {
   };
 
   // HOOKS
-  const classes = useStyles();
+  const classes = createRegisterStyles(theme)();
 
   useEffect(() => {
     if (
@@ -113,6 +120,22 @@ function Register({ history }) {
     user,
     allFieldsSet
   ]);
+
+  // CLASSES
+  const {
+    register,
+    registerForm,
+    heading,
+    dataInput,
+    loginBtn,
+    registerBtn,
+    registerGroup,
+    registerWrapper,
+    disabledRegister,
+    infoLogo,
+    successText,
+    notchedOutline
+  } = classes;
 
   // USERFIELD DATA
   const { firstName, lastName, confirmPassword, email, password } = user;
@@ -164,7 +187,12 @@ function Register({ history }) {
         setValid: setPasswordValidated
       },
       type: 'password',
-      InputProps: endAdornment(showPassword, setShowPassword),
+      InputProps: endAdornment(
+        showPassword,
+        setShowPassword,
+        theme.inputTextColor.color,
+        notchedOutline
+      ),
       regExp: formRegExp.password
     },
     confirmPasswordField: {
@@ -177,29 +205,23 @@ function Register({ history }) {
         setValid: setIsConfirmedPassword
       },
       type: 'password',
-      InputProps: endAdornment(showConfirmedPassword, setShowConfirmedPassword)
+      InputProps: endAdornment(
+        showConfirmedPassword,
+        setShowConfirmedPassword,
+        theme.inputTextColor.color,
+        notchedOutline
+      )
     }
   };
-
-  // CLASSES
-  const {
-    register,
-    registerForm,
-    heading,
-    dataInput,
-    loginBtn,
-    registerBtn,
-    registerGroup,
-    registerWrapper,
-    disabledRegister,
-    infoLogo,
-    successText
-  } = classes;
 
   const successWindow = (
     <form className={registerForm}>
       <div>
-        <img src={info} alt='info' className={infoLogo} />
+        <img
+          src={theme.inputTextColor.color === 'white' ? infoLight : info}
+          alt='info'
+          className={infoLogo}
+        />
         <p className={successText}>{CONFIRM_EMAIL[language].value}</p>
       </div>
     </form>
@@ -226,6 +248,18 @@ function Register({ history }) {
                   regExp = null
                 }) => (
                   <TextField
+                    InputLabelProps={{
+                      style: {
+                        color: theme.inputLabelColor.color
+                      }
+                    }}
+                    InputProps={{
+                      style: { color: theme.inputTextColor.color },
+                      classes: {
+                        notchedOutline
+                      },
+                      endAdornment: InputProps && InputProps.endAdornment
+                    }}
                     required
                     key={placeholders[inputName][language].value}
                     label={placeholders[inputName][language].value}
@@ -242,7 +276,7 @@ function Register({ history }) {
                     onChange={(e) => onChange(e, validation.setValid, regExp)}
                     value={value}
                     type={type}
-                    InputProps={InputProps}
+                    // InputProps={InputProps}
                   />
                 )
               )}

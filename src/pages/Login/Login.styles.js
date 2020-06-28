@@ -27,9 +27,6 @@ export const lightTheme = createMuiTheme({
   registrBtn: {
     color: 'black'
   },
-  inputColor: {
-    color: 'black'
-  },
   notchedOutline: {
     borderColor: 'black !important'
   },
@@ -65,9 +62,6 @@ export const darkTheme = createMuiTheme({
   registrBtn: {
     color: '#ABABAB'
   },
-  inputColor: {
-    color: 'white'
-  },
   notchedOutline: {
     borderColor: 'white !important'
   },
@@ -79,8 +73,8 @@ export const darkTheme = createMuiTheme({
   }
 });
 
-export const createStyles = (theme) =>
-  makeStyles(() => ({
+export const createLoginStyles = (theme) =>
+  makeStyles({
     login: {
       background: `url(${BG}) no-repeat `,
       backgroundSize: 'cover',
@@ -227,14 +221,8 @@ export const createStyles = (theme) =>
     },
     notchedOutline: {
       borderColor: theme.notchedOutline.borderColor
-    },
-    inputTextColor: {
-      color: theme.inputTextColor.color
-    },
-    inputLabelColor: {
-      color: theme.inputLabelColor.color
     }
-  }));
+  });
 
 export const defaultTheme = createMuiTheme({
   palette: {

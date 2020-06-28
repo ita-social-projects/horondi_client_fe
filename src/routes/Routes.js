@@ -4,6 +4,8 @@ import './Routes.style.js';
 import NewsPage from 'src/pages/news/news-page';
 import Home from 'src/pages/home/home-page';
 import AppHeader from '../components/app-header';
+import Register from '../pages/Register';
+import Login from '../pages/Login';
 
 const Routes = () => (
   <Router>
@@ -12,6 +14,8 @@ const Routes = () => (
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/news' exact component={NewsPage} />
+        <Route path='/register' exact component={Register} />
+        <Route path='/login' exact component={Login} />
       </Switch>
     </div>
   </Router>

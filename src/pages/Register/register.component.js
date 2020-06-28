@@ -15,12 +15,7 @@ import {
   CONFIRM_EMAIL,
   SHOW_AFTER
 } from '../../configs';
-import {
-  darkTheme,
-  lightTheme,
-  createRegisterStyles,
-  defaultTheme
-} from './styles';
+import { lightTheme, createRegisterStyles, defaultTheme } from './styles';
 import registerUser from '../../services/registerUser';
 import info from '../../images/information.png';
 import infoLight from '../../images/info-light.png';
@@ -40,7 +35,7 @@ function Register({ history }) {
 
   // VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme] = useState(lightTheme);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);

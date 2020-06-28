@@ -3,12 +3,7 @@ import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {
-  darkTheme,
-  createLoginStyles,
-  defaultTheme,
-  lightTheme
-} from './Login.styles';
+import { darkTheme, createLoginStyles, defaultTheme } from './Login.styles';
 import {
   placeholders,
   OR_TEXT,
@@ -24,7 +19,7 @@ const Login = ({ loginUser, loginError, history }) => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
   const [allFieldsSet, setAllFieldsSet] = useState(false);
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme] = useState(darkTheme);
 
   // VALIDATE
   const [shouldValidate, setShouldValidate] = useState(false);

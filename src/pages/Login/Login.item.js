@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  InputAdornment,
-  IconButton,
-  ThemeProvider,
-  TextField
-} from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -20,6 +13,7 @@ import {
   EMPTY_FIELD
 } from '../../configs';
 import { getUser } from '../../redux/user/user.actions';
+import { endAdornment } from '../../utils/eyeToggle';
 
 const Login = ({ loginUser, loginError, history }) => {
   // VALUES
@@ -30,7 +24,7 @@ const Login = ({ loginUser, loginError, history }) => {
   const [shouldValidate, setShouldValidate] = useState(false);
 
   // SHOW PASSWORDS
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   // LABELS
   const label = LOGIN_FORM_LABEL[language].value;
@@ -53,33 +47,7 @@ const Login = ({ loginUser, loginError, history }) => {
     }
   };
 
-  // EYE TOGGLE
-  function toggleInputType(e, showPass) {
-    const input = e.currentTarget.parentElement.previousSibling;
-    if (input.type === 'password') {
-      input.type = 'text';
-      showPass(false);
-    } else {
-      input.type = 'password';
-      showPass(true);
-    }
-  }
-
   // EYE
-  function endAdornment(isVisible, setShowPass) {
-    return {
-      endAdornment: (
-        <InputAdornment position='end'>
-          <IconButton
-            aria-label='toggle password visibility'
-            onClick={(e) => toggleInputType(e, setShowPass)}
-          >
-            {isVisible ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      )
-    };
-  }
 
   // HOOKS
   useEffect(() => {

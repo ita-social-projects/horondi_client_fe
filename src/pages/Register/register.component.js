@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './register.styles.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import {
@@ -22,6 +18,7 @@ import {
 import { useStyles, defaultTheme } from './styles';
 import registerUser from '../../services/registerUser';
 import info from '../../images/information.png';
+import { endAdornment } from '../../utils/eyeToggle';
 
 function Register({ history }) {
   // VALIDATED && CONFIRMED
@@ -86,34 +83,6 @@ function Register({ history }) {
       setConfirm(false);
     }
   };
-
-  // EYE TOGGLE
-  function toggleInputType(e, showPass) {
-    const input = e.currentTarget.parentElement.previousSibling;
-    if (input.type === 'password') {
-      input.type = 'text';
-      showPass(false);
-    } else {
-      input.type = 'password';
-      showPass(true);
-    }
-  }
-
-  // EYE
-  function endAdornment(isVisible, setShowPass) {
-    return {
-      endAdornment: (
-        <InputAdornment position='end'>
-          <IconButton
-            aria-label='toggle password visibility'
-            onClick={(e) => toggleInputType(e, setShowPass)}
-          >
-            {isVisible ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      )
-    };
-  }
 
   // HOOKS
   const classes = useStyles();

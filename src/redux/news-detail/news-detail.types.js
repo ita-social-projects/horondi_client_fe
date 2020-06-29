@@ -1,2 +1,2 @@
-export const GET_ARTICLE_BY_ID = 'GET_ARTICLE_BY_ID';
+export const GET_ARTICLE = 'GET_ARTICLE';
 export const SET_ARTICLE = 'SET_ARTICLE';

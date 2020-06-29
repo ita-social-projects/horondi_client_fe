@@ -1,15 +1,14 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { setArticle } from './news-detail.actions';
 import getItems from '../../utils/client';
-import { GET_ARTICLE_BY_ID } from './news-detail.types';
+import { GET_ARTICLE } from './news-detail.types';
 
-function* handleArticleLoad() {
-  console.log('jdjdjdjjdjdjjdj');
+function* handleArticleLoad({ payload }) {
   try {
     const article = yield call(
       getItems,
       `query{
-        getNewsById(id:){
+        getNewsById(id:"${payload}"){
           _id
           title{
             value
@@ -38,12 +37,12 @@ function* handleArticleLoad() {
         }
       }`
     );
-    yield put(setArticle(article));
+    yield put(setArticle(article.data.getNewsById));
   } catch (error) {
     console.log(error);
   }
 }
 
 export default function* newsDetailSaga() {
-  yield takeEvery(GET_ARTICLE_BY_ID, handleArticleLoad);
+  yield takeEvery(GET_ARTICLE, handleArticleLoad);
 }

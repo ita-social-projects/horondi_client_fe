@@ -1,13 +1,13 @@
-import { GET_ARTICLE_BY_ID, SET_ARTICLE } from './news-detail.types';
+import { GET_ARTICLE, SET_ARTICLE } from './news-detail.types';
 
 const setArticle = (article) => ({
   type: SET_ARTICLE,
   payload: article
 });
 
-const getArticleById = (id) => ({
-  type: GET_ARTICLE_BY_ID,
+const getArticle = (id) => ({
+  type: GET_ARTICLE,
   payload: id
 });
 
-export { setArticle, getArticleById };
+export { setArticle, getArticle };

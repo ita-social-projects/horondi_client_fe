@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto'
   },
+  hide: {
+    display: 'none'
+  },
   ArticleTitle: {
     textAlign: 'center'
   },

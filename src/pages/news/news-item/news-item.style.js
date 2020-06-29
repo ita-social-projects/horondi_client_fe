@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => ({
     width: '90%',
     marginBottom: '5rem'
   },
+  Link: {
+    textDecoration: 'none'
+  },
   container: {
     minWidth: '20rem',
     maxWidth: '27rem'
@@ -50,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '0.5rem',
     backgroundColor: '#4c4545',
     '&:hover': {
-      color: 'black'
+      backgroundColor: 'black'
     }
   },
   newsAuthorFooter: {

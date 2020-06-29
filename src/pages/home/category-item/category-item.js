@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
 
-const Categories = ({ categoryName, categoryImage, categoryCode }) => {
+const CategoryItem = ({ categoryName, categoryImage, categoryCode }) => {
   const props = {
     image: categoryImage
   };
@@ -21,4 +21,4 @@ const Categories = ({ categoryName, categoryImage, categoryCode }) => {
   );
 };
 
-export default Categories;
+export default CategoryItem;

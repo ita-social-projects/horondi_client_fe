@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Categories from '../categories';
 import OurLooks from '../our-looks';
 import { LANGUAGE } from '../../../configs';
-import { useStyles } from './home.styles';
+import { useStyles } from './home-page.styles';
 
 const HOME_BUTTONS = {
   0: {
@@ -18,7 +18,7 @@ const HOME_BUTTONS = {
   }
 };
 
-const Home = () => {
+const HomePage = () => {
   const styles = useStyles();
 
   return (
@@ -40,5 +40,5 @@ const Home = () => {
     </div>
   );
 };
-//
-export default Home;
+
+export default HomePage;

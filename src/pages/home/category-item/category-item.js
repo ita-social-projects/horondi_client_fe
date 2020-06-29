@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
 
-const Categories = ({ categoryName, categoryImage, categoryCode }) => {
-  const props = {
-    image: categoryImage
-  };
+const CategoryItem = ({ categoryName, categoryImage, categoryCode }) => {
   const linkTo = categoryCode.split('-')[1];
-  const styles = useStyles(props);
+  const styles = useStyles({ image: categoryImage });
 
   return (
     <Link to={`/${linkTo}`} className={styles.link}>
@@ -21,4 +18,4 @@ const Categories = ({ categoryName, categoryImage, categoryCode }) => {
   );
 };
 
-export default Categories;
+export default CategoryItem;

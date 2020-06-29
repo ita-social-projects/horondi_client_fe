@@ -5,11 +5,7 @@ import { useStyles } from './about-us.style';
 import { ABOUT_US_IMAGES } from '../../configs';
 
 const AboutUs = () => {
-  const props = {
-    ...ABOUT_US_IMAGES
-  };
-
-  const styles = useStyles(props);
+  const styles = useStyles({ ...ABOUT_US_IMAGES });
 
   useEffect(() => {
     window.scrollTo(0, 0);

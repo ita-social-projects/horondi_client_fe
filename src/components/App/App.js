@@ -1,16 +1,22 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { ThemeProvider } from '@material-ui/styles';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
-import configureStore from '../../store/store';
 import Routes from '../../routes';
+import { theme } from './app-theme/app.theme';
+import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
-const store = configureStore();
+const App = () => {
+  const lightMode = useSelector(({ Theme }) => Theme.lightMode);
+  const themeMode = lightMode ? LIGHT_THEME : DARK_THEME;
+  const themeValue = theme(themeMode);
 
-const App = () => (
-  <Provider store={store}>
-    <Routes />
-    <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
-  </Provider>
-);
+  return (
+    <ThemeProvider theme={themeValue}>
+      <Routes />
+      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
+    </ThemeProvider>
+  );
+};
 
 export default App;

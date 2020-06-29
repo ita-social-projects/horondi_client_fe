@@ -1,4 +1,4 @@
-export const LANGUAGE = 0;
+export const LANGUAGE = 1;
 
 // delete if dont need
 export const formRegExp = {
@@ -21,106 +21,127 @@ export const formRegExp = {
 export const placeholders = {
   firstName: [
     {
-      lang: 'eng',
-      value: 'Enter firstname'
-    },
-    {
       lang: 'uk',
       value: "Введіть Ім'я"
+    },
+    {
+      lang: 'eng',
+      value: 'Enter firstname'
     }
   ],
   lastName: [
     {
-      lang: 'eng',
-      value: 'Enter lastname'
-    },
-    {
       lang: 'uk',
       value: 'Введіть прізвище'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter lastname'
     }
   ],
   email: [
     {
-      lang: 'eng',
-      value: 'Enter email'
-    },
-    {
       lang: 'uk',
       value: 'Введіть емейл'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter email'
     }
   ],
   password: [
     {
-      lang: 'eng',
-      value: 'Enter password'
-    },
-    {
       lang: 'uk',
       value: 'Введіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter password'
     }
   ],
   confirmPassword: [
     {
-      lang: 'eng',
-      value: 'Confirm password'
-    },
-    {
       lang: 'uk',
       value: 'Підтвердіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Confirm password'
     }
   ]
 };
 
 export const errorMessages = {
-  firstname: 'Please enter firstname',
-  lastname: 'Please enter lastname',
-  email: 'Please enter email',
-  password: 'Password not correct',
-  confirmPassword: 'Please confirm password'
+  firstname: [
+    {
+      lang: 'uk',
+      value: 'Будь-ласка введіть імя'
+    },
+    {
+      lang: 'eng',
+      value: 'Please enter firstname'
+    }
+  ],
+  lastname: [
+    { lang: 'uk', value: 'Будь-ласка введіть прізвище' },
+    { lang: 'eng', value: 'Please enter lastname' }
+  ],
+  email: [
+    { lang: 'uk', value: 'Будь-ласка введіть емейл' },
+    { lang: 'eng', value: 'Please enter email' }
+  ],
+  password: [
+    { lang: 'uk', value: 'Будь-ласка введіть пароль' },
+    { lang: 'eng', value: 'Password not correct' }
+  ],
+  confirmPassword: [
+    { lang: 'uk', value: 'Будь-ласка підтвердіть пароль' },
+    { lang: 'eng', value: 'Please confirm password' }
+  ]
 };
 
 export const LOGIN_FORM_LABEL = [
   {
-    lang: 'eng',
-    value: 'log in'
-  },
-  {
     lang: 'uk',
     value: 'увійти'
+  },
+  {
+    lang: 'eng',
+    value: 'log in'
   }
 ];
 export const OR_TEXT = [
   {
-    lang: 'eng',
-    value: 'or'
-  },
-  {
     lang: 'uk',
     value: 'або'
+  },
+  {
+    lang: 'eng',
+    value: 'or'
   }
 ];
 
 export const REGISTER_FORM_LABEL = [
   {
-    lang: 'eng',
-    value: 'Register'
-  },
-  {
     lang: 'uk',
     value: 'Реєстрація'
+  },
+  {
+    lang: 'eng',
+    value: 'Register'
   }
 ];
 
 export const CONFIRM_EMAIL = [
   {
-    lang: 'eng',
-    value:
-      'You have successfully registered! Please, confirm your email address.'
-  },
-  {
     lang: 'uk',
     value:
       'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+  },
+  {
+    lang: 'eng',
+    value:
+      'You have successfully registered! Please, confirm your email address.'
   }
 ];
 
@@ -139,12 +160,12 @@ export const LOGIN_USER_DATA = {
 
 export const EMPTY_FIELD = [
   {
-    lang: 'eng',
-    value: 'Empty field'
-  },
-  {
     lang: 'uk',
     value: 'Заповніть поле'
+  },
+  {
+    lang: 'eng',
+    value: 'Empty field'
   }
 ];
 
@@ -185,6 +206,17 @@ export const CABINET_OPTIONS_NOT_LOGGED = {
     logIn: 'Log in'
   }
 };
+
+export const FORGOT_PASSWORD = [
+  {
+    lang: 'uk',
+    value: 'Забув пароль?'
+  },
+  {
+    lang: 'eng',
+    value: 'Forgot password?'
+  }
+];
 
 export const CABINET_OPTIONS_LOGGED = {
   0: {

@@ -14,7 +14,8 @@ import {
   LOGIN_FORM_LABEL,
   REGISTER_USER_DATA,
   CONFIRM_EMAIL,
-  SHOW_AFTER
+  SHOW_AFTER,
+  LANGUAGE
 } from '../../configs';
 import {
   lightTheme,
@@ -150,7 +151,7 @@ function Register({ history, isLightTheme }) {
   const userFields = {
     firstNameField: {
       inputName: 'firstName',
-      errorMessage: errorMessages.firstname,
+      errorMessage: errorMessages.firstname[LANGUAGE].value,
       value: firstName,
       onChange: handleChange,
       validation: {
@@ -162,7 +163,7 @@ function Register({ history, isLightTheme }) {
     },
     lastNameField: {
       inputName: 'lastName',
-      errorMessage: errorMessages.lastname,
+      errorMessage: errorMessages.lastname[LANGUAGE].value,
       value: lastName,
       onChange: handleChange,
       validation: {
@@ -174,7 +175,7 @@ function Register({ history, isLightTheme }) {
     },
     email: {
       inputName: 'email',
-      errorMessage: errorMessages.email,
+      errorMessage: errorMessages.email[LANGUAGE].value,
       value: email,
       onChange: handleChange,
       validation: {
@@ -186,7 +187,7 @@ function Register({ history, isLightTheme }) {
     },
     passwordField: {
       inputName: 'password',
-      errorMessage: errorMessages.password,
+      errorMessage: errorMessages.password[LANGUAGE].value,
       value: password,
       onChange: handleChange,
       validation: {
@@ -204,7 +205,7 @@ function Register({ history, isLightTheme }) {
     },
     confirmPasswordField: {
       inputName: 'confirmPassword',
-      errorMessage: errorMessages.confirmPassword,
+      errorMessage: errorMessages.confirmPassword[LANGUAGE].value,
       value: confirmPassword,
       onChange: checkIfConfirmed,
       validation: {

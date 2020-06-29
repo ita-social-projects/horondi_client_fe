@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
@@ -9,12 +9,16 @@ import { useStyles } from './navbar-left.styles';
 import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
-const NavbarLeft = ({ getCategories, list }) => {
-  const classes = useStyles();
+const NavbarLeft = () => {
+  const styles = useStyles();
+  const dispatch = useDispatch();
+  const { categories } = useSelector(({ Categories: { list } }) => ({
+    categories: list
+  }));
 
   useEffect(() => {
-    getCategories();
-  }, [getCategories]);
+    dispatch(getCategories());
+  }, [dispatch]);
 
   const getCategoryURL = (category) => {
     const [filteredCategory] = category.filter(
@@ -26,8 +30,8 @@ const NavbarLeft = ({ getCategories, list }) => {
     }
   };
 
-  const categoriesItems = list.map(({ _id, name }) => (
-    <Link key={_id} className={classes.link} to={`/${getCategoryURL(name)}`}>
+  const categoriesItems = categories.map(({ _id, name }) => (
+    <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
       {name[LANGUAGE].value}
     </Link>
   ));
@@ -35,7 +39,7 @@ const NavbarLeft = ({ getCategories, list }) => {
   return (
     <Toolbar>
       <Typography variant='h6'>
-        <Link to='/' className={classes.logo}>
+        <Link to='/' className={styles.logo}>
           {LOGO}
         </Link>
       </Typography>
@@ -44,12 +48,4 @@ const NavbarLeft = ({ getCategories, list }) => {
   );
 };
 
-const mapStateToProps = ({ Categories: { list } }) => ({
-  list
-});
-
-const mapDispatchToProps = {
-  getCategories
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarLeft);
+export default NavbarLeft;

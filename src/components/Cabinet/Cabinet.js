@@ -11,10 +11,10 @@ const Cabinet = () => {
     logged: isLogged
   };
 
-  const classes = useStyles(props);
+  const styles = useStyles(props);
 
   return (
-    <div className={classes.cabinet}>
+    <div className={styles.cabinet}>
       <PersonOutlineIcon />
       {isLogged ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>

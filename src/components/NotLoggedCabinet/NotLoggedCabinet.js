@@ -14,7 +14,7 @@ const NotLoggedCabinet = () => {
   const lightMode = useSelector(({ Theme }) => Theme.lightMode);
   const dispatch = useDispatch();
 
-  const classes = useStyles();
+  const styles = useStyles();
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
 
   const changeTheme = () => {
@@ -22,9 +22,9 @@ const NotLoggedCabinet = () => {
   };
 
   return (
-    <ul className={classes.cabinetDropdownList}>
+    <ul className={styles.cabinetDropdownList}>
       <li>
-        <Link to='/wishlist' className={classes.link}>
+        <Link to='/wishlist' className={styles.link}>
           <FavoriteIcon />
           <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].wishlist}</span>
         </Link>
@@ -34,7 +34,7 @@ const NotLoggedCabinet = () => {
         <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].changeTheme}</span>
       </li>
       <li>
-        <Link to='/login' className={classes.link}>
+        <Link to='/login' className={styles.link}>
           <ExitToAppIcon />
           <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].logIn}</span>
         </Link>

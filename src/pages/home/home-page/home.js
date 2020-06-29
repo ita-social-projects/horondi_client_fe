@@ -19,18 +19,18 @@ const HOME_BUTTONS = {
 };
 
 const Home = () => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
-    <div className={classes.home}>
-      <div className={classes.homeHeader}>
+    <div className={styles.home}>
+      <div className={styles.homeHeader}>
         <Link to='/news'>
-          <Button className={classes.headerButton} variant='contained'>
+          <Button className={styles.headerButton} variant='contained'>
             {HOME_BUTTONS[LANGUAGE].NEWS}
           </Button>
         </Link>
         <Link to='/about-us'>
-          <Button className={classes.headerButton} variant='contained'>
+          <Button className={styles.headerButton} variant='contained'>
             {HOME_BUTTONS[LANGUAGE].ABOUT_US}
           </Button>
         </Link>

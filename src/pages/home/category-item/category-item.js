@@ -8,12 +8,12 @@ const Categories = ({ categoryName, categoryImage, categoryCode }) => {
     image: categoryImage
   };
   const linkTo = categoryCode.split('-')[1];
-  const classes = useStyles(props);
+  const styles = useStyles(props);
 
   return (
-    <Link to={`/${linkTo}`} className={classes.link}>
-      <div className={classes.categoryItem}>
-        <div className={classes.categoryNameWrapper}>
+    <Link to={`/${linkTo}`} className={styles.link}>
+      <div className={styles.categoryItem}>
+        <div className={styles.categoryNameWrapper}>
           <span>{categoryName}</span>
         </div>
       </div>

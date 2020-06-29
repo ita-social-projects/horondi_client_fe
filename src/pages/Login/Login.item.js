@@ -3,7 +3,12 @@ import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { darkTheme, createLoginStyles, defaultTheme } from './Login.styles';
+import {
+  darkTheme,
+  createLoginStyles,
+  defaultTheme,
+  lightTheme
+} from './Login.styles';
 import {
   placeholders,
   OR_TEXT,
@@ -15,11 +20,11 @@ import {
 import { getUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 
-const Login = ({ loginUser, loginError, history }) => {
+const Login = ({ loginUser, loginError, history, isLightTheme }) => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
   const [allFieldsSet, setAllFieldsSet] = useState(false);
-  const [theme] = useState(darkTheme);
+  const [theme, setTheme] = useState(darkTheme);
 
   // VALIDATE
   const [shouldValidate, setShouldValidate] = useState(false);
@@ -58,7 +63,12 @@ const Login = ({ loginUser, loginError, history }) => {
     if (!loginError && loginError !== null) {
       history.push('/');
     }
-  }, [user, loginError, history]);
+    if (isLightTheme) {
+      setTheme(lightTheme);
+    } else {
+      setTheme(darkTheme);
+    }
+  }, [user, loginError, history, isLightTheme]);
 
   // CLASSES
   const classes = createLoginStyles(theme)();
@@ -98,7 +108,10 @@ const Login = ({ loginUser, loginError, history }) => {
                 }
               }}
               InputProps={{
-                style: { color: theme.inputTextColor.color },
+                style: {
+                  color: theme.inputTextColor.color,
+                  padding: '10px 14px'
+                },
                 classes: {
                   notchedOutline
                 }
@@ -186,7 +199,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  loginError: state.User.error
+  loginError: state.User.error,
+  isLightTheme: state.Theme.lightMode
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

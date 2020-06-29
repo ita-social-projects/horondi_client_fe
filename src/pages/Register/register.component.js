@@ -3,6 +3,7 @@ import './register.styles.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import {
   placeholders,
@@ -15,13 +16,18 @@ import {
   CONFIRM_EMAIL,
   SHOW_AFTER
 } from '../../configs';
-import { lightTheme, createRegisterStyles, defaultTheme } from './styles';
+import {
+  lightTheme,
+  createRegisterStyles,
+  defaultTheme,
+  darkTheme
+} from './styles';
 import registerUser from '../../services/registerUser';
 import info from '../../images/information.png';
 import infoLight from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 
-function Register({ history }) {
+function Register({ history, isLightTheme }) {
   // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
@@ -35,7 +41,7 @@ function Register({ history }) {
 
   // VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  const [theme] = useState(lightTheme);
+  const [theme, setTheme] = useState(lightTheme);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
@@ -106,6 +112,11 @@ function Register({ history }) {
     } else {
       setAllFieldsSet(false);
     }
+    if (isLightTheme) {
+      setTheme(lightTheme);
+    } else {
+      setTheme(darkTheme);
+    }
   }, [
     firstNameValidated,
     lastNameValidated,
@@ -113,7 +124,8 @@ function Register({ history }) {
     passwordValidated,
     isConfirmedPassword,
     user,
-    allFieldsSet
+    allFieldsSet,
+    isLightTheme
   ]);
 
   // CLASSES
@@ -300,4 +312,8 @@ function Register({ history }) {
   );
 }
 
-export default withRouter(Register);
+const mapStateToProps = (state) => ({
+  isLightTheme: state.Theme.lightMode
+});
+
+export default connect(mapStateToProps, null)(withRouter(Register));

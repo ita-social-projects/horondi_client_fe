@@ -14,12 +14,13 @@ import { getArticle } from '../../redux/news-detail/news-detail.actions';
 import { useStyles } from './news-detail.style';
 import { LANGUAGE, TIME_OPTIONS } from '../../configs';
 
-const NewsDetailPage = ({ match, item, getArticle }) => {
+const NewsDetailPage = ({ match, item, onGetArticle }) => {
   useEffect(() => {
     const articleId = match.params.id;
     window.scrollTo(0, 0);
-    getArticle(articleId);
-  }, [match.params.id, getArticle]);
+    onGetArticle(articleId);
+  }, [match.params.id, onGetArticle]);
+
   const article = item;
   const newsTitle = article.title[LANGUAGE].value;
   const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
@@ -87,7 +88,7 @@ const mapStateToProps = ({ Article: { item } }) => ({
   item
 });
 const mapDispatchToProps = {
-  getArticle
+  onGetArticle: getArticle
 };
 
 export default connect(

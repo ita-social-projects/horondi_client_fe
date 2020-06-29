@@ -1,3 +1,3 @@
-import Registration from './Login.item';
+import Registration from './login';
 
 export default Registration;

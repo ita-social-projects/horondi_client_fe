@@ -8,7 +8,7 @@ import {
   createLoginStyles,
   defaultTheme,
   lightTheme
-} from './Login.styles';
+} from './login.styles';
 import {
   placeholders,
   OR_TEXT,

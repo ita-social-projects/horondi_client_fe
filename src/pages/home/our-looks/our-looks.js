@@ -9,18 +9,18 @@ import {
 } from '../../../configs';
 
 const OurLooks = () => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
     <div>
-      <Typography variant='h2' className={classes.title}>
+      <Typography variant='h2' className={styles.title}>
         {HOMEPAGE_TITLES[LANGUAGE].look}
       </Typography>
-      <div className={classes.imageSection}>
+      <div className={styles.imageSection}>
         {HOMEPAGE_LOOKS_IMAGES.map((imageSrc, i) => (
           <div
             key={i}
-            className={classes.imageWrapper}
+            className={styles.imageWrapper}
             style={{ backgroundImage: `url(${imageSrc})` }}
           />
         ))}

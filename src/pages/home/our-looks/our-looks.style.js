@@ -3,8 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   imageSection: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, 200px)',
-    justifyContent: 'center'
+    gridTemplateColumns: 'repeat(4, 300px)',
+    justifyContent: 'center',
+    '@media screen and (max-width: 991px)': {
+      gridTemplateColumns: 'repeat(2, 300px)'
+    },
+    '@media screen and (max-width: 552px)': {
+      gridTemplateColumns: 'repeat(1, 300px)'
+    }
   },
   imageWrapper: {
     height: '15em',

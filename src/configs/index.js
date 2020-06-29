@@ -258,6 +258,15 @@ export const HOMEPAGE_LOOKS_IMAGES = [
   'https://horondi.blob.core.windows.net/horondi/our-looks/img8.jpg'
 ];
 
+export const ABOUT_US_IMAGES = {
+  hero: './images/about-us/hero-bg.jpg',
+  horondi_1: './images/about-us/horondi.jpg',
+  horondi_2: './images/about-us/horondi-2.jpg',
+  horondi_3: './images/about-us/horondi-3.jpg',
+  workPlace_1: './images/about-us/work-place.jpg',
+  workPlace_2: './images/about-us/work-place-2.jpg'
+};
+
 export const CABINET_OPTIONS_NOT_LOGGED = {
   0: {
     wishlist: 'Список уподобань',

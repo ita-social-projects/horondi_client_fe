@@ -6,15 +6,11 @@ import NotLoggedCabinet from '../NotLoggedCabinet';
 import LoggedCabinet from '../LoggedCabinet';
 
 const Cabinet = () => {
-  const isLogged = false;
-  const props = {
-    logged: isLogged
-  };
-
-  const classes = useStyles(props);
+  const isLogged = true;
+  const styles = useStyles({ logged: isLogged });
 
   return (
-    <div className={classes.cabinet}>
+    <div className={styles.cabinet}>
       <PersonOutlineIcon />
       {isLogged ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>

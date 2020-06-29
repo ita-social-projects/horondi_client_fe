@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import {
   darkTheme,
   createLoginStyles,
   defaultTheme,
   lightTheme
-} from './Login.styles';
+} from './login.styles';
 import {
   placeholders,
   OR_TEXT,
@@ -17,11 +17,10 @@ import {
   LOGIN_USER_DATA,
   EMPTY_FIELD
 } from '../../configs';
-import { getUser } from '../../redux/user/user.actions';
+import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
-import './login.css';
 
-const Login = ({ loginUser, loginError, history, isLightTheme }) => {
+const Login = ({ history }) => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
   const [allFieldsSet, setAllFieldsSet] = useState(false);
@@ -47,7 +46,7 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
     setShouldValidate(true);
     if (allFieldsSet) {
       try {
-        loginUser(user);
+        dispatch(loginUser(user));
       } catch (e) {
         console.error(e);
       }
@@ -55,6 +54,13 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
   };
 
   // HOOKS
+  const { loginError, isLightTheme } = useSelector((state) => ({
+    loginError: state.User.error,
+    isLightTheme: state.Theme.lightMode
+  }));
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (Object.values(user).every((val) => val !== '')) {
       setAllFieldsSet(true);
@@ -72,36 +78,18 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
   }, [user, loginError, history, isLightTheme]);
 
   // CLASSES
-  const classes = createLoginStyles(theme)();
-  const {
-    login,
-    loginWrapper,
-    loginForm,
-    heading,
-    passwordInput,
-    loginBtn,
-    loginGroup,
-    recoveryBtn,
-    recoveryContainer,
-    emailInput,
-    orContainer,
-    orText,
-    googleBtn,
-    registrContainer,
-    registrBtn,
-    googleLogo,
-    disabledLogin,
-    notchedOutline
-  } = classes;
+  const styles = createLoginStyles(theme)();
 
   const { email, password } = user;
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <div className={login}>
-        <div className={loginWrapper}>
-          <form className={loginForm}>
-            <h2 className={heading}>{LOGIN_FORM_LABEL[language].value}</h2>
+      <div className={styles.login}>
+        <div className={styles.loginWrapper}>
+          <form className={styles.loginForm}>
+            <h2 className={styles.heading}>
+              {LOGIN_FORM_LABEL[language].value}
+            </h2>
             <TextField
               InputLabelProps={{
                 style: {
@@ -113,12 +101,12 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
                   color: theme.inputTextColor.color
                 },
                 classes: {
-                  notchedOutline
+                  notchedOutline: styles.notchedOutline
                 }
               }}
               color='secondary'
               label={emailLabel}
-              className={emailInput}
+              className={styles.emailInput}
               fullWidth
               variant='outlined'
               type='text'
@@ -138,7 +126,7 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
                 }
               }}
               label={passwordLabel}
-              className={passwordInput}
+              className={styles.passwordInput}
               fullWidth
               variant='outlined'
               type='password'
@@ -146,7 +134,7 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
                 showPassword,
                 setShowPassword,
                 theme.inputTextColor.color,
-                notchedOutline
+                styles.notchedOutline
               )}
               name='password'
               value={password}
@@ -157,33 +145,35 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
                 !password && shouldValidate ? EMPTY_FIELD[language].value : ''
               }
             />
-            <div className={recoveryContainer}>
-              <Link to='/recovery' className={recoveryBtn}>
+            <div className={styles.recoveryContainer}>
+              <Link to='/recovery' className={styles.recoveryBtn}>
                 Forgot password?
               </Link>
             </div>
-            <div className={loginGroup}>
+            <div className={styles.loginGroup}>
               <Button
-                className={allFieldsSet ? loginBtn : disabledLogin}
+                className={
+                  allFieldsSet ? styles.loginBtn : styles.disabledLogin
+                }
                 fullWidth
                 onClick={handleLogin}
                 disabled={!allFieldsSet}
               >
                 {label}
               </Button>
-              <p className={classes.loginError}>
+              <p className={styles.loginError}>
                 {loginError ? 'Wrong e-mail address or password' : ''}
               </p>
             </div>
-            <div className={orContainer}>
-              <span className={orText}>{OR_TEXT[language].value}</span>
+            <div className={styles.orContainer}>
+              <span className={styles.orText}>{OR_TEXT[language].value}</span>
             </div>
-            <Button className={googleBtn} fullWidth>
-              <span className={googleLogo} />
+            <Button className={styles.googleBtn} fullWidth>
+              <span className={styles.googleLogo} />
               Google
             </Button>
-            <div className={registrContainer}>
-              <Link to='/register' className={registrBtn}>
+            <div className={styles.registrContainer}>
+              <Link to='/register' className={styles.registrBtn}>
                 Registration
               </Link>
             </div>
@@ -194,13 +184,4 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  loginUser: (user) => dispatch(getUser(user))
-});
-
-const mapStateToProps = (state) => ({
-  loginError: state.User.error,
-  isLightTheme: state.Theme.lightMode
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
+export default withRouter(Login);

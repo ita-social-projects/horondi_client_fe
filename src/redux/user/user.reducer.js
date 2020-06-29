@@ -1,7 +1,7 @@
 import { SET_USER, SET_ERROR } from './user.types';
 
 const initialState = {
-  userData: [],
+  userData: {},
   error: null
 };
 

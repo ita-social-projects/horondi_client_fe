@@ -12,7 +12,7 @@ const Categories = () => {
     categories: Categories.list,
     loading: Categories.loading
   }));
-  const classes = useStyles();
+  const styles = useStyles();
 
   const items = categories.map(({ _id, name, images, categoryCode }) => (
     <CategoryItem
@@ -24,14 +24,14 @@ const Categories = () => {
   ));
 
   return (
-    <div className={classes.catalog}>
-      <Typography variant='h2' className={classes.title}>
+    <div className={styles.catalog}>
+      <Typography variant='h2' className={styles.title}>
         {HOMEPAGE_TITLES[LANGUAGE].catalog}
       </Typography>
       {loading ? (
-        <LoadingBar className={classes.loadingIndicator} />
+        <LoadingBar className={styles.loadingIndicator} />
       ) : (
-        <div className={classes.categories}>{items}</div>
+        <div className={styles.categories}>{items}</div>
       )}
     </div>
   );

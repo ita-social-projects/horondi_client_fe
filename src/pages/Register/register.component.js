@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './register.styles.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import {
   placeholders,
@@ -21,13 +20,13 @@ import {
   createRegisterStyles,
   defaultTheme,
   darkTheme
-} from './styles';
+} from './register.styles';
 import registerUser from '../../services/registerUser';
 import info from '../../images/information.png';
 import infoLight from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 
-function Register({ history, isLightTheme }) {
+function Register({ history }) {
   // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
@@ -93,7 +92,9 @@ function Register({ history, isLightTheme }) {
   };
 
   // HOOKS
-  const classes = createRegisterStyles(theme)();
+  const { isLightTheme } = useSelector((state) => ({
+    isLightTheme: state.Theme.lightMode
+  }));
 
   useEffect(() => {
     if (
@@ -128,21 +129,8 @@ function Register({ history, isLightTheme }) {
     isLightTheme
   ]);
 
-  // CLASSES
-  const {
-    register,
-    registerForm,
-    heading,
-    dataInput,
-    loginBtn,
-    registerBtn,
-    registerGroup,
-    registerWrapper,
-    disabledRegister,
-    infoLogo,
-    successText,
-    notchedOutline
-  } = classes;
+  // STYLES
+  const styles = createRegisterStyles(theme)();
 
   // USERFIELD DATA
   const { firstName, lastName, confirmPassword, email, password } = user;
@@ -198,7 +186,7 @@ function Register({ history, isLightTheme }) {
         showPassword,
         setShowPassword,
         theme.inputTextColor.color,
-        notchedOutline
+        styles.notchedOutline
       ),
       regExp: formRegExp.password
     },
@@ -216,33 +204,35 @@ function Register({ history, isLightTheme }) {
         showConfirmedPassword,
         setShowConfirmedPassword,
         theme.inputTextColor.color,
-        notchedOutline
+        styles.notchedOutline
       )
     }
   };
 
   const successWindow = (
-    <form className={registerForm}>
+    <form className={styles.registerForm}>
       <div>
         <img
           src={theme.inputTextColor.color === 'white' ? infoLight : info}
           alt='info'
-          className={infoLogo}
+          className={styles.infoLogo}
         />
-        <p className={successText}>{CONFIRM_EMAIL[language].value}</p>
+        <p className={styles.successText}>{CONFIRM_EMAIL[language].value}</p>
       </div>
     </form>
   );
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <div className={register}>
-        <div className={registerWrapper}>
+      <div className={styles.register}>
+        <div className={styles.registerWrapper}>
           {hasRegistered ? (
             successWindow
           ) : (
-            <form className={registerForm}>
-              <h2 className={heading}>{REGISTER_FORM_LABEL[language].value}</h2>
+            <form className={styles.registerForm}>
+              <h2 className={styles.heading}>
+                {REGISTER_FORM_LABEL[language].value}
+              </h2>
               {Object.values(userFields).map(
                 ({
                   inputName,
@@ -263,7 +253,7 @@ function Register({ history, isLightTheme }) {
                     InputProps={{
                       style: { color: theme.inputTextColor.color },
                       classes: {
-                        notchedOutline
+                        notchedOutline: styles.notchedOutline
                       },
                       endAdornment: InputProps && InputProps.endAdornment
                     }}
@@ -279,7 +269,7 @@ function Register({ history, isLightTheme }) {
                         ? `${errorMessage}`
                         : ''
                     }
-                    className={dataInput}
+                    className={styles.dataInput}
                     onChange={(e) => onChange(e, validation.setValid, regExp)}
                     value={value}
                     type={type}
@@ -288,19 +278,21 @@ function Register({ history, isLightTheme }) {
                 )
               )}
 
-              <div className={registerGroup}>
+              <div className={styles.registerGroup}>
                 <Button
-                  className={allFieldsSet ? registerBtn : disabledRegister}
+                  className={
+                    allFieldsSet ? styles.registerBtn : styles.disabledRegister
+                  }
                   fullWidth
                   onClick={handleRegister}
                   disabled={!allFieldsSet}
                 >
                   {REGISTER_FORM_LABEL[language].value}
                 </Button>
-                <p className={classes.registerError}>{registerError}</p>
+                <p className={styles.registerError}>{registerError}</p>
               </div>
               <div>
-                <Link to='/login' className={loginBtn}>
+                <Link to='/login' className={styles.loginBtn}>
                   {LOGIN_FORM_LABEL[language].value}
                 </Link>
               </div>
@@ -312,8 +304,4 @@ function Register({ history, isLightTheme }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isLightTheme: state.Theme.lightMode
-});
-
-export default connect(mapStateToProps, null)(withRouter(Register));
+export default withRouter(Register);

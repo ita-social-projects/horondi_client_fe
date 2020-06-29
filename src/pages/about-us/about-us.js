@@ -99,7 +99,7 @@ const AboutUs = () => {
             <Typography variant='h3' className={styles.underline}>
               Команда
             </Typography>
-            <div className={styles.block}>
+            <div className={`${styles.block} ${styles.blockReverse}`}>
               <img src={ABOUT_US_IMAGES.workPlace_1} alt='Horondi team' />
               <Typography paragraph>
                 Наша команда складається з п‘ятьох чоловік, де кожен вірить в
@@ -113,7 +113,7 @@ const AboutUs = () => {
                 еко-шкіри.
               </Typography>
             </div>
-            <div className={`${styles.block} ${styles.blockReverse}`}>
+            <div className={styles.block}>
               <img src={ABOUT_US_IMAGES.workPlace_2} alt='Horondi team' />
               <Typography paragraph>
                 <span className={styles.horondi}>HORONDI</span> розташований у

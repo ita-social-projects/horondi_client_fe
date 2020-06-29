@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
   },
   icons: {
     fontSize: '2rem',
-    paddingRight: '0.8rem',
+    padding: '0 0.4rem',
     color: '#ffffff'
   }
 }));

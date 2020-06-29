@@ -6,11 +6,11 @@ import FooterLists from '../../containers/footer-lists';
 import FooterLinks from '../../containers/footer-links';
 
 const AppFooter = () => {
-  const classes = useStyles();
+  const styles = useStyles();
   return (
-    <div className={classes.root}>
-      <div className={classes.footer}>
-        <div className={classes.cardDeck}>
+    <div className={styles.root}>
+      <div className={styles.footer}>
+        <div className={styles.cardDeck}>
           <FooterLists />
           <FooterLinks />
         </div>

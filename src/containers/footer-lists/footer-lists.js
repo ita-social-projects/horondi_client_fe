@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
@@ -9,16 +9,21 @@ import {
   URL_LANGUAGE,
   FOOTER_INFORMATION,
   FOOTER_CONTACTS,
-  FOOTER_CATALOGS
+  FOOTER_CATALOGS,
+  LANGUAGE
 } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
-const FooterLists = ({ getCategories, list, language = 0 }) => {
+const FooterLists = ({ language = LANGUAGE }) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
+  const { categories } = useSelector(({ Categories: { list } }) => ({
+    categories: list
+  }));
 
   useEffect(() => {
-    getCategories();
-  }, [getCategories]);
+    dispatch(getCategories());
+  }, [dispatch]);
 
   const getCategoryURL = (category) => {
     const [filteredCategory] = category.filter(
@@ -30,7 +35,7 @@ const FooterLists = ({ getCategories, list, language = 0 }) => {
     }
   };
 
-  const categoriesList = list.map(({ _id, name }) => (
+  const categoriesList = categories.map(({ _id, name }) => (
     <div key={_id}>
       <Typography variant='subtitle2'>
         <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
@@ -68,7 +73,6 @@ const FooterLists = ({ getCategories, list, language = 0 }) => {
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>
-            {' '}
             {FOOTER_CATALOGS[language].title}
           </Typography>
         </div>
@@ -77,7 +81,6 @@ const FooterLists = ({ getCategories, list, language = 0 }) => {
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>
-            {' '}
             {FOOTER_INFORMATION[language].title}
           </Typography>
         </div>
@@ -86,7 +89,6 @@ const FooterLists = ({ getCategories, list, language = 0 }) => {
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>
-            {' '}
             {FOOTER_CONTACTS[language].title}
           </Typography>
         </div>
@@ -96,12 +98,4 @@ const FooterLists = ({ getCategories, list, language = 0 }) => {
   );
 };
 
-const mapStateToProps = ({ Categories: { list } }) => ({
-  list
-});
-
-const mapDispatchToProps = {
-  getCategories
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FooterLists);
+export default FooterLists;

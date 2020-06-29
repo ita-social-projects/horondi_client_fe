@@ -10,7 +10,7 @@ import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
 const NavbarLeft = ({ getCategories, list }) => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   useEffect(() => {
     getCategories();
@@ -27,7 +27,7 @@ const NavbarLeft = ({ getCategories, list }) => {
   };
 
   const categoriesItems = list.map(({ _id, name }) => (
-    <Link key={_id} className={classes.link} to={`/${getCategoryURL(name)}`}>
+    <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
       {name[LANGUAGE].value}
     </Link>
   ));
@@ -35,7 +35,7 @@ const NavbarLeft = ({ getCategories, list }) => {
   return (
     <Toolbar>
       <Typography variant='h6'>
-        <Link to='/' className={classes.logo}>
+        <Link to='/' className={styles.logo}>
           {LOGO}
         </Link>
       </Typography>

@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@material-ui/core/Typography';
 
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { FOOTER_SOCIAL_NETWORK_LINKS } from '../../configs';
+import { FOOTER_SOCIAL_NETWORK_LINKS, LANGUAGE } from '../../configs';
 
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ language = 0 }) => {
+const FooterLinks = ({ language = LANGUAGE }) => {
   const styles = useStyles();
 
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
-import { useStyles } from './Cabinet.styles';
-import NotLoggedCabinet from '../NotLoggedCabinet';
-import LoggedCabinet from '../LoggedCabinet';
+import { useStyles } from './cabinet.styles';
+import NotLoggedCabinet from '../not-logged-cabinet';
+import LoggedCabinet from '../logged-cabinet';
 
 const Cabinet = () => {
   const isLogged = false;
@@ -11,10 +11,10 @@ const Cabinet = () => {
     logged: isLogged
   };
 
-  const classes = useStyles(props);
+  const styles = useStyles(props);
 
   return (
-    <div className={classes.cabinet}>
+    <div className={styles.cabinet}>
       <PersonOutlineIcon />
       {isLogged ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>

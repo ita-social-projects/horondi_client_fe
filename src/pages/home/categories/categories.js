@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
-import LoadingBar from '../../../components/LoadingBar';
+import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from '../category-item';
 import { useStyles } from './categories.style';
 import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
@@ -12,7 +12,7 @@ const Categories = () => {
     categories: Categories.list,
     loading: Categories.loading
   }));
-  const classes = useStyles();
+  const styles = useStyles();
 
   const items = categories.map(({ _id, name, images, categoryCode }) => (
     <CategoryItem
@@ -24,14 +24,14 @@ const Categories = () => {
   ));
 
   return (
-    <div className={classes.catalog}>
-      <Typography variant='h2' className={classes.title}>
+    <div className={styles.catalog}>
+      <Typography variant='h2' className={styles.title}>
         {HOMEPAGE_TITLES[LANGUAGE].catalog}
       </Typography>
       {loading ? (
-        <LoadingBar className={classes.loadingIndicator} />
+        <LoadingBar className={styles.loadingIndicator} />
       ) : (
-        <div className={classes.categories}>{items}</div>
+        <div className={styles.categories}>{items}</div>
       )}
     </div>
   );

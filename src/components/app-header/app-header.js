@@ -11,19 +11,18 @@ import { useStyles } from './app-header.styles';
 import NavbarLeft from '../../containers/navbar-left';
 
 const AppHeader = () => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <AppBar position='static'>
-        <Toolbar className={classes.header}>
+        <Toolbar className={styles.header}>
           <NavbarLeft />
           <Toolbar>
-            {/* Here will be NavbarRight */}
-            <AttachMoneyIcon className={classes.icons} />
-            <LanguageIcon className={classes.icons} />
-            <ShoppingBasketIcon className={classes.icons} />
-            <PersonIcon className={classes.icons} />
+            <AttachMoneyIcon className={styles.icons} />
+            <LanguageIcon className={styles.icons} />
+            <ShoppingBasketIcon className={styles.icons} />
+            <PersonIcon className={styles.icons} />
           </Toolbar>
         </Toolbar>
       </AppBar>

@@ -5,14 +5,17 @@ import { GET_CATEGORIES } from './categories.types';
 
 function* handleCategoriesLoad() {
   const query = `query {
-                getAllCategories {
-                    _id
-                    categoryCode
-                    name {
-                        lang
-                        value
-                    }
-                }
+               getAllCategories {
+              categoryCode
+              _id
+              name {
+               value
+               lang
+              }
+              images {
+                large
+              }
+            }          
              }`;
 
   try {

@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { setArticle } from './news-detail.actions';
 import getItems from '../../utils/client';
-import { GET_ARTICLE } from './news-detail.types';
+import { GET_NEWS_ARTICLE } from './news-detail.types';
 
 function* handleArticleLoad({ payload }) {
   try {
@@ -44,5 +44,5 @@ function* handleArticleLoad({ payload }) {
 }
 
 export default function* newsDetailSaga() {
-  yield takeEvery(GET_ARTICLE, handleArticleLoad);
+  yield takeEvery(GET_NEWS_ARTICLE, handleArticleLoad);
 }

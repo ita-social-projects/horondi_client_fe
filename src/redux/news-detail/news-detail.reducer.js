@@ -2,16 +2,16 @@ import { SET_ARTICLE } from './news-detail.types';
 
 const initialState = {
   item: {
-    title: [{ value: 'завантаження' }, { value: 'loading' }],
+    title: [{ value: '' }, { value: '' }],
     images: [
       {
         primary: { medium: '' },
         additional: [{ medium: '' }]
       }
     ],
-    text: [{ value: 'завантаження' }, { value: 'loading' }],
+    text: [{ value: '' }, { value: '' }],
     author: {
-      name: [{ value: 'завантаження' }, { value: 'loading' }],
+      name: [{ value: '' }, { value: '' }],
       image: [
         {
           small: ''

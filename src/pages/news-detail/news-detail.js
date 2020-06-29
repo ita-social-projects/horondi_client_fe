@@ -66,8 +66,8 @@ const NewsDetailPage = ({ match, item, getArticle }) => {
           className={newsVideo ? 'styles.video' : 'styles.hide'}
           url={newsVideo}
           playing={false}
+          origin='http://localhost:3000/'
           controls
-          origin='http://localhost:3000'
         />
         <hr />
         <div className={styles.newsAuthorFooter}>

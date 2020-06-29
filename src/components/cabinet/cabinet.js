@@ -22,4 +22,3 @@ const Cabinet = () => {
 };
 
 export default Cabinet;
-

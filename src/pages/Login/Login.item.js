@@ -19,6 +19,7 @@ import {
 } from '../../configs';
 import { getUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
+import './login.css';
 
 const Login = ({ loginUser, loginError, history, isLightTheme }) => {
   // VALUES
@@ -109,8 +110,7 @@ const Login = ({ loginUser, loginError, history, isLightTheme }) => {
               }}
               InputProps={{
                 style: {
-                  color: theme.inputTextColor.color,
-                  padding: '10px 14px'
+                  color: theme.inputTextColor.color
                 },
                 classes: {
                   notchedOutline

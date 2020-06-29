@@ -98,6 +98,14 @@ export const createRegisterStyles = (theme) =>
       paddingBottom: '22.5px',
       '& label': {
         transform: 'translate(14px, 14px) scale(1)'
+      },
+      '& div > input': {
+        padding: '11px 14px !important',
+        position: 'relative'
+      },
+      '& p': {
+        position: 'absolute',
+        top: '40px'
       }
     },
     registerBtn: {

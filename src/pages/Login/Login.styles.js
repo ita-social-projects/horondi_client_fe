@@ -108,12 +108,18 @@ export const createLoginStyles = (theme) =>
       marginBottom: '11px',
       '& label': {
         transform: 'translate(14px, 14px) scale(1)'
+      },
+      '& div > input': {
+        padding: '11px 14px !important'
       }
     },
     emailInput: {
       marginBottom: '29px',
       '& label': {
         transform: 'translate(14px, 14px) scale(1)'
+      },
+      '& div > input': {
+        padding: '11px 14px !important'
       }
     },
     loginBtn: {

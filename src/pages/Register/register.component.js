@@ -91,6 +91,9 @@ function Register({ history }) {
     }
   };
 
+  // USERFIELD DATA
+  const { firstName, lastName, confirmPassword, email, password } = user;
+
   // HOOKS
   const { isLightTheme } = useSelector((state) => ({
     isLightTheme: state.Theme.lightMode
@@ -118,6 +121,12 @@ function Register({ history }) {
     } else {
       setTheme(darkTheme);
     }
+    // PASSWORD CHECK
+    if (passwordValidated && password === confirmPassword) {
+      setIsConfirmedPassword(true);
+    } else {
+      setIsConfirmedPassword(false);
+    }
   }, [
     firstNameValidated,
     lastNameValidated,
@@ -126,14 +135,13 @@ function Register({ history }) {
     isConfirmedPassword,
     user,
     allFieldsSet,
-    isLightTheme
+    isLightTheme,
+    password,
+    confirmPassword
   ]);
 
   // STYLES
   const styles = createRegisterStyles(theme)();
-
-  // USERFIELD DATA
-  const { firstName, lastName, confirmPassword, email, password } = user;
 
   const userFields = {
     firstNameField: {

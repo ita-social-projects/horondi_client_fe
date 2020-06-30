@@ -1,4 +1,4 @@
-import { LOGIN_USER, SET_USER, SET_ERROR } from './user.types';
+import { LOGIN_USER, SET_USER, SET_ERROR, LOGOUT_USER } from './user.types';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -14,4 +14,8 @@ const setError = (error) => ({
   type: SET_ERROR,
   payload: error
 });
-export { loginUser, setUser, setError };
+
+const logoutUser = () => ({
+  type: LOGOUT_USER
+});
+export { loginUser, setUser, setError, logoutUser };

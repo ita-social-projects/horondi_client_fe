@@ -7,7 +7,7 @@ import {
   getFromLocalStorage
 } from 'src/services/localstorage.service';
 import LanguageIcon from '@material-ui/icons/Language';
-import { InputLabel } from '@material-ui/core';
+import { Button, Menu, Card } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import useStyles from './language.styles';
 import { changeLanguage } from '../../redux/language/language.action';
@@ -44,19 +44,19 @@ const Language = () => {
   };
 
   return (
-    <div>
-      <FormControl variant='outlined' className={classes.formControl}>
-        <InputLabel id='demo-simple-select-label'>
-          <LanguageIcon
-            style={{ color: 'white', fontSize: '2rem', marginTop: '2rem' }}
-          />
-        </InputLabel>
+    <div className={classes.root}>
+      <Button id='lang-icon' variant='outlined' className={classes.icon}>
+        <LanguageIcon
+          style={{ color: 'white', fontSize: '2rem', marginTop: '2rem' }}
+        />
+      </Button>
 
-        <Select value={language} onChange={handleChange}>
-          <MenuItem value={0}>UA</MenuItem>
-          <MenuItem value={1}>EN</MenuItem>
-        </Select>
-      </FormControl>
+      <Card className={classes.card} onChange={handleChange}>
+        <ul>
+          <li value={0}>UA</li>
+          <li value={1}>EN</li>
+        </ul>
+      </Card>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import NewsPage from 'src/pages/news/news-page';
 import Home from 'src/pages/home/home-page';
 import AppHeader from '../components/app-header';
 import Register from '../pages/Register';
-import Login from '../pages/Login';
+import Login from '../pages/login';
 
 const Routes = () => (
   <Router>

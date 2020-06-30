@@ -7,7 +7,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { useStyles } from './LoggedCabinet.styles';
+import { useStyles } from './logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { LANGUAGE, CABINET_OPTIONS_LOGGED } from '../../configs';
 

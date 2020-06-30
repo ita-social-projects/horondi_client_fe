@@ -1,7 +1,7 @@
 import { sendItems } from './getItems';
 
 const registerUser = (user) => {
-  const { firstName, lastName, email, password, confirmPassword } = user;
+  const { firstName, lastName, email, password } = user;
   const query = ` 
   mutation {
   registerUser(
@@ -10,7 +10,6 @@ const registerUser = (user) => {
       lastName: "${lastName}"
       email: "${email}"
       password: "${password}"
-      confirmPassword: "${confirmPassword}"
     }
   ) {
     email

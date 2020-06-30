@@ -61,7 +61,7 @@ const Login = ({ loginUser, loginError, history, language }) => {
     if (!loginError && loginError !== null) {
       history.push('/');
     }
-  }, [user, loginError]);
+  }, [user, loginError, history]);
 
   // CLASSES
   const classes = useStyles();

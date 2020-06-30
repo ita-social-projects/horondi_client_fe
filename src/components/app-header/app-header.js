@@ -6,7 +6,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import NavbarLeft from '../../containers/navbar-left';
 import { useStyles } from './app-header.styles';
-import Language from '../language/Language';
+import Language from '../language';
 import Cabinet from '../Cabinet';
 
 const AppHeader = () => {

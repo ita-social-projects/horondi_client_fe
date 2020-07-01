@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
 
-const NewsPage = ({ getNews, list, language }) => {
+const NewsPage = () => {
+  const { list, language } = useSelector(
+    ({ News: { list }, Language: { language } }) => ({
+      list,
+      language
+    })
+  );
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getNews();
+    dispatch(getNews());
     window.scrollTo(0, 0);
-  }, [getNews]);
+  }, [dispatch]);
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
@@ -32,12 +40,4 @@ const NewsPage = ({ getNews, list, language }) => {
   );
 };
 
-const mapStateToProps = ({ news: { list }, language: { language } }) => ({
-  list,
-  language
-});
-const mapDispatchToProps = {
-  getNews
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);
+export default NewsPage;

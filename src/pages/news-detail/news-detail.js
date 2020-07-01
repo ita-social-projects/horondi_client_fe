@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import parse from 'html-react-parser';
 import ReactPlayer from 'react-player';
@@ -14,14 +14,16 @@ import { getArticle } from '../../redux/news-detail/news-detail.actions';
 import { useStyles } from './news-detail.style';
 import { LANGUAGE, TIME_OPTIONS } from '../../configs';
 
-const NewsDetailPage = ({ match, item, onGetArticle }) => {
+const NewsDetailPage = ({ match }) => {
+  const article = useSelector(({ Article: { item } }) => item);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const articleId = match.params.id;
     window.scrollTo(0, 0);
-    onGetArticle(articleId);
-  }, [match.params.id, onGetArticle]);
+    dispatch(getArticle(articleId));
+  }, [match.params.id, dispatch]);
 
-  const article = item;
   const newsTitle = article.title[LANGUAGE].value;
   const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
   const dateLANGUAGE = `${newsDateLanguegeOptions[LANGUAGE]}`;
@@ -67,8 +69,8 @@ const NewsDetailPage = ({ match, item, onGetArticle }) => {
           className={newsVideo ? 'styles.video' : 'styles.hide'}
           url={newsVideo}
           playing={false}
+          origin='http://localhost:3000/'
           controls
-          origin='http://localhost:3000/news/*'
         />
         <hr />
         <div className={styles.newsAuthorFooter}>
@@ -84,14 +86,4 @@ const NewsDetailPage = ({ match, item, onGetArticle }) => {
   );
 };
 
-const mapStateToProps = ({ Article: { item } }) => ({
-  item
-});
-const mapDispatchToProps = {
-  onGetArticle: getArticle
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(NewsDetailPage));
+export default withRouter(NewsDetailPage);

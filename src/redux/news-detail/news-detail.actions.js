@@ -1,4 +1,4 @@
-import { GET_ARTICLE, SET_ARTICLE } from './news-detail.types';
+import { GET_NEWS_ARTICLE, SET_ARTICLE } from './news-detail.types';
 
 const setArticle = (article) => ({
   type: SET_ARTICLE,
@@ -6,7 +6,7 @@ const setArticle = (article) => ({
 });
 
 const getArticle = (id) => ({
-  type: GET_ARTICLE,
+  type: GET_NEWS_ARTICLE,
   payload: id
 });
 

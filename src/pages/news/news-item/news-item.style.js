@@ -2,8 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    fontFamily: 'Montserrat',
     width: '90%',
     marginBottom: '5rem'
+  },
+  Link: {
+    textDecoration: 'none'
   },
   container: {
     minWidth: '20rem',
@@ -49,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '0.5rem',
     backgroundColor: '#4c4545',
     '&:hover': {
-      color: 'black'
+      backgroundColor: 'black'
     }
   },
   newsAuthorFooter: {

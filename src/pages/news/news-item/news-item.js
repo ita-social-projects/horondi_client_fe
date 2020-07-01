@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useStyles } from './news-item.style';
+import { TIME_OPTIONS } from '../../../configs';
 
 const NewsItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
@@ -31,16 +32,10 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
     author.length !== 0 ? author.name[language].value : 'No author provided';
   const newsAuthorAvatar = author.image.small;
   const newsButtonText = ['читати далі', 'read more...'];
-  const newsDateLANGUAGEOptions = ['ukr-UA', 'en-US'];
-  const dateLANGUAGE = `${newsDateLANGUAGEOptions[language]}`;
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  };
+  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
+  const dateLanguege = `${newsDateLanguegeOptions[language]}`;
   const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, options);
+  const newsDate = dateToShow.toLocaleString(`${dateLanguege}`, TIME_OPTIONS);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>

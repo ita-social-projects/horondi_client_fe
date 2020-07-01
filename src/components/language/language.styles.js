@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 0,
       zIndex: 2,
       backgroundColor: 'white',
+      color: 'black',
       width: 'auto',
       position: 'absolute',
       listStyle: 'none',

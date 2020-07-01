@@ -1,100 +1,6 @@
-export * from './localization';
+export const LANGUAGE = 1;
 
-export const itemsPerPage = [15, 30, 60];
-export const PRODUCT_LIST_URL = '/productlist/';
-export const CATALOGS_URL = '/catalogs/';
-export const placeholder = 'Type here...';
-export const countries = {
-  title: 'Country',
-  name: 'country',
-  value: [
-    '',
-    'Ukraine',
-    'Italy',
-    'Netherlands',
-    'Poland',
-    'Portugal',
-    'France',
-    'Germany',
-    'Greece',
-    'Spain',
-    'Hungary',
-    'Sweden',
-    'England',
-    'USA'
-  ]
-};
-export const paymentMethods = {
-  title: 'Payment Method',
-  name: 'paymentMethod',
-  value: [
-    '',
-    'credit card',
-    'pay pal',
-    'cash',
-    'google pay',
-    'amazon pay',
-    'apple pay'
-  ]
-};
-
-export const deliveryType = {
-  title: 'Delivery Type',
-  name: 'deliveryType',
-  value: ['', 'currier', 'post', 'delivery servise']
-};
-
-export const socialNetworkLinks = {
-  title: 'Links',
-  telegram: 'https://web.telegram.org',
-  facebook: 'https://www.facebook.com/Fn-100171608356044/',
-  instagram: 'https://www.instagram.com/'
-};
-
-export const policiesFooter = {
-  title: 'Information',
-  items: [
-    { id: 1, url: '/about-us', item: 'About us' },
-    { id: 2, url: '/terms-conditions', item: 'Terms and Conditions' },
-    { id: 3, url: '#', item: 'Privacy Policy' },
-    { id: 4, url: '/materials', item: 'Materials' }
-  ]
-};
-
-export const contactInformationFooter = {
-  title: 'Contacts',
-  items: ['FashionNode', 'fashionnode@gmail.com', '+380630123456']
-};
-
-export const catalogsFooter = {
-  title: 'Catalogs',
-  items: [
-    { id: 1, url: 'men', item: 'Men' },
-    { id: 2, url: 'women', item: 'Women' },
-    { id: 3, url: 'kids', item: 'Kids' }
-  ]
-};
-
-export const routes = {
-  pathToOrders: '/',
-  pathToProducts: '/products',
-  pathToProductDetails: '/product/:id',
-  pathToCategories: '/categories',
-  pathToCategoryDetails: '/category/:id',
-  pathToNews: '/news',
-  pathToNewsDetails: '/news/:id',
-  pathToUserDetails: '/user/:id',
-  pathToLogin: '/login',
-  pathToOrderDetails: '/order/:id'
-};
-
-export const config = {
-  app: {
-    serverUrl: 'http://localhost:5000/'
-  },
-  routes
-};
-
+// delete if dont need
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
@@ -112,6 +18,133 @@ export const formRegExp = {
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
 };
 
+export const placeholders = {
+  firstName: [
+    {
+      lang: 'uk',
+      value: "Введіть Ім'я"
+    },
+    {
+      lang: 'eng',
+      value: 'Enter firstname'
+    }
+  ],
+  lastName: [
+    {
+      lang: 'uk',
+      value: 'Введіть прізвище'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter lastname'
+    }
+  ],
+  email: [
+    {
+      lang: 'uk',
+      value: 'Введіть емейл'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter email'
+    }
+  ],
+  password: [
+    {
+      lang: 'uk',
+      value: 'Введіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter password'
+    }
+  ],
+  confirmPassword: [
+    {
+      lang: 'uk',
+      value: 'Підтвердіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Confirm password'
+    }
+  ]
+};
+
+export const errorMessages = {
+  firstname: [
+    {
+      lang: 'uk',
+      value: 'Будь-ласка введіть імя'
+    },
+    {
+      lang: 'eng',
+      value: 'Please enter firstname'
+    }
+  ],
+  lastname: [
+    { lang: 'uk', value: 'Будь-ласка введіть прізвище' },
+    { lang: 'eng', value: 'Please enter lastname' }
+  ],
+  email: [
+    { lang: 'uk', value: 'Будь-ласка введіть емейл' },
+    { lang: 'eng', value: 'Please enter email' }
+  ],
+  password: [
+    { lang: 'uk', value: 'Будь-ласка введіть пароль' },
+    { lang: 'eng', value: 'Password not correct' }
+  ],
+  confirmPassword: [
+    { lang: 'uk', value: 'Будь-ласка підтвердіть пароль' },
+    { lang: 'eng', value: 'Please confirm password' }
+  ]
+};
+
+export const LOGIN_FORM_LABEL = [
+  {
+    lang: 'uk',
+    value: 'увійти'
+  },
+  {
+    lang: 'eng',
+    value: 'log in'
+  }
+];
+export const OR_TEXT = [
+  {
+    lang: 'uk',
+    value: 'або'
+  },
+  {
+    lang: 'eng',
+    value: 'or'
+  }
+];
+
+export const REGISTER_FORM_LABEL = [
+  {
+    lang: 'uk',
+    value: 'Реєстрація'
+  },
+  {
+    lang: 'eng',
+    value: 'Register'
+  }
+];
+
+export const CONFIRM_EMAIL = [
+  {
+    lang: 'uk',
+    value:
+      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+  },
+  {
+    lang: 'eng',
+    value:
+      'You have successfully registered! Please, confirm your email address.'
+  }
+];
+
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
@@ -125,9 +158,18 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
-export const SHOW_AFTER = 3000;
+export const EMPTY_FIELD = [
+  {
+    lang: 'uk',
+    value: 'Заповніть поле'
+  },
+  {
+    lang: 'eng',
+    value: 'Empty field'
+  }
+];
 
-export const LANGUAGE = 0;
+export const SHOW_AFTER = 3000;
 
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
@@ -143,6 +185,15 @@ export const HOMEPAGE_LOOKS_IMAGES = [
   'https://horondi.blob.core.windows.net/horondi/our-looks/img8.jpg'
 ];
 
+export const ABOUT_US_IMAGES = {
+  hero: './images/about-us/hero-bg.jpg',
+  horondi_1: './images/about-us/horondi.jpg',
+  horondi_2: './images/about-us/horondi-2.jpg',
+  horondi_3: './images/about-us/horondi-3.jpg',
+  workPlace_1: './images/about-us/work-place.jpg',
+  workPlace_2: './images/about-us/work-place-2.jpg'
+};
+
 export const CABINET_OPTIONS_NOT_LOGGED = {
   0: {
     wishlist: 'Список уподобань',
@@ -155,6 +206,17 @@ export const CABINET_OPTIONS_NOT_LOGGED = {
     logIn: 'Log in'
   }
 };
+
+export const FORGOT_PASSWORD = [
+  {
+    lang: 'uk',
+    value: 'Забув пароль?'
+  },
+  {
+    lang: 'eng',
+    value: 'Forgot password?'
+  }
+];
 
 export const CABINET_OPTIONS_LOGGED = {
   0: {
@@ -184,3 +246,75 @@ export const HOMEPAGE_TITLES = {
 
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
+export const TIME_OPTIONS = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+};
+export const FOOTER_CATALOGS = {
+  0: { title: 'Каталоги' },
+  1: { title: 'Catalogs' }
+};
+export const FOOTER_INFORMATION = {
+  0: {
+    title: 'Інформація',
+    items: [
+      { id: 1, url: '/about-us', item: 'Про нас' },
+      { id: 2, url: '#', item: 'Матеріали' },
+      { id: 3, url: '#', item: 'Оплата і доставка' },
+      { id: 4, url: '#', item: 'Умови конфіденційності' }
+    ]
+  },
+  1: {
+    title: 'Information',
+    items: [
+      { id: 1, url: '/about-us', item: 'About us' },
+      { id: 2, url: '#', item: 'Materials' },
+      { id: 3, url: '#', item: 'Payment & shipping' },
+      { id: 4, url: '#', item: 'Privacy policy' }
+    ]
+  }
+};
+
+export const FOOTER_CONTACTS = {
+  0: {
+    title: 'Контакти',
+    items: [
+      { id: 1, url: '#', item: '+38 012 345 678' },
+      { id: 2, url: '#', item: 'horondi@gmail.com' },
+      { id: 3, url: '#', item: 'Львів, вул.Угорська,2' },
+      {
+        id: 4,
+        url:
+          'https://www.google.com.ua/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%A3%D0%B3%D0%BE%D1%80%D1%81%D1%8C%D0%BA%D0%B0,+2,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+79000/@49.8130045,24.0348852,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae7fa9be7c3b5:0xb30b2516d705bae6!8m2!3d49.8130011!4d24.0370739',
+        item: 'Показати на мапі'
+      }
+    ]
+  },
+  1: {
+    title: 'Contacts',
+    items: [
+      { id: 1, url: '#', item: '+38 012 345 678' },
+      { id: 2, url: '#', item: 'horondi@gmail.com' },
+      { id: 3, url: '#', item: 'Lviv, Ugorska str.2' },
+      {
+        id: 4,
+        url:
+          'https://www.google.com.ua/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%A3%D0%B3%D0%BE%D1%80%D1%81%D1%8C%D0%BA%D0%B0,+2,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+79000/@49.8130045,24.0348852,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae7fa9be7c3b5:0xb30b2516d705bae6!8m2!3d49.8130011!4d24.0370739',
+        item: 'Show on map'
+      }
+    ]
+  }
+};
+
+export const FOOTER_SOCIAL_NETWORK_LINKS = {
+  0: {
+    title: 'Ми в соцмережах'
+  },
+  1: {
+    title: 'Social networks'
+  },
+  facebook: 'https://www.facebook.com/Horondi',
+  instagram: 'https://www.instagram.com/horondi'
+};

@@ -1,8 +1,6 @@
 import { SET_THEME_MODE } from './theme.types';
 
-const setThemeMode = (boolean) => ({
+export const setThemeMode = (isLight) => ({
   type: SET_THEME_MODE,
-  payload: boolean
+  payload: isLight
 });
-
-export { setThemeMode };

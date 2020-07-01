@@ -7,7 +7,7 @@ import { theme } from './app-theme/app.theme';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const App = () => {
-  const lightMode = useSelector(({ theme }) => theme.lightMode);
+  const lightMode = useSelector(({ Theme }) => Theme.lightMode);
   const themeMode = lightMode ? LIGHT_THEME : DARK_THEME;
   const themeValue = theme(themeMode);
   return (

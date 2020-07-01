@@ -1,3 +1,3 @@
-import Cabinet from './Cabinet';
+import Cabinet from './cabinet';
 
 export default Cabinet;

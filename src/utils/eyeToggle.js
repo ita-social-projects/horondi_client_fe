@@ -13,7 +13,12 @@ export function toggleInputType(e, showPass) {
   }
 }
 
-export function endAdornment(isVisible, setShowPass) {
+export function endAdornment(
+  isVisible,
+  setShowPass,
+  inputTextColor,
+  outlineClass
+) {
   return {
     endAdornment: (
       <InputAdornment position='end'>
@@ -21,9 +26,19 @@ export function endAdornment(isVisible, setShowPass) {
           aria-label='toggle password visibility'
           onClick={(e) => toggleInputType(e, setShowPass)}
         >
-          {isVisible ? <VisibilityOff /> : <Visibility />}
+          {isVisible ? (
+            <VisibilityOff style={{ color: inputTextColor }} />
+          ) : (
+            <Visibility style={{ color: inputTextColor }} />
+          )}
         </IconButton>
       </InputAdornment>
-    )
+    ),
+    style: {
+      color: inputTextColor
+    },
+    classes: {
+      notchedOutline: outlineClass
+    }
   };
 }

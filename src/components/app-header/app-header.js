@@ -10,18 +10,18 @@ import Language from '../language';
 import Cabinet from '../Cabinet';
 
 const AppHeader = () => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <AppBar position='static'>
-        <Toolbar className={classes.header}>
+        <Toolbar className={styles.header}>
           <NavbarLeft />
           <Toolbar>
             {/* Here will be NavbarRight */}
-            <AttachMoneyIcon className={classes.icons} />
+            <AttachMoneyIcon className={styles.icons} />
             <Language />
-            <ShoppingBasketIcon className={classes.icons} />
+            <ShoppingBasketIcon className={styles.icons} />
             <Cabinet />
           </Toolbar>
         </Toolbar>

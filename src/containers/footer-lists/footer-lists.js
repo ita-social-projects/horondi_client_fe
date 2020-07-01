@@ -9,17 +9,19 @@ import {
   URL_LANGUAGE,
   FOOTER_INFORMATION,
   FOOTER_CONTACTS,
-  FOOTER_CATALOGS,
-  LANGUAGE
+  FOOTER_CATALOGS
 } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
-const FooterLists = ({ language = LANGUAGE }) => {
+const FooterLists = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { categories } = useSelector(({ Categories: { list } }) => ({
-    categories: list
-  }));
+  const { categories, language } = useSelector(
+    ({ Categories: { list }, Language: { language } }) => ({
+      categories: list,
+      language
+    })
+  );
 
   useEffect(() => {
     dispatch(getCategories());

@@ -4,13 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@material-ui/core/Typography';
 
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { FOOTER_SOCIAL_NETWORK_LINKS, LANGUAGE } from '../../configs';
+import { useSelector } from 'react-redux';
+import { FOOTER_SOCIAL_NETWORK_LINKS } from '../../configs';
 
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ language = LANGUAGE }) => {
+const FooterLinks = () => {
   const styles = useStyles();
-
+  const { language } = useSelector(({ Language: { language } }) => ({
+    language
+  }));
   return (
     <div className={styles.cardBody}>
       <div className={styles.iconsBox}>

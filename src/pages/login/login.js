@@ -22,7 +22,6 @@ import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 
 const Login = ({ history }) => {
-  console.log(history);
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
   const [allFieldsSet, setAllFieldsSet] = useState(false);

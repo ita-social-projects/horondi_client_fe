@@ -1,7 +1,7 @@
-import { SET_USER, SET_ERROR } from './user.types';
+import { SET_USER, SET_ERROR, LOGOUT_USER } from './user.types';
 
 const initialState = {
-  userData: [],
+  userData: null,
   error: null
 };
 
@@ -16,6 +16,10 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      };
+    case LOGOUT_USER:
+      return {
+        ...initialState
       };
     default:
       return state;

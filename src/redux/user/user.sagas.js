@@ -1,9 +1,9 @@
-import { call, put, take } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { setUser, setError } from './user.actions';
 import loginUser from '../../services/loginUser';
-import { GET_USER } from './user.types';
+import { LOGIN_USER } from './user.types';
 
-function* handleUserLoad(payload) {
+function* handleUserLoad({ payload }) {
   try {
     const user = yield call(loginUser, payload);
     if (user.data.errors) {
@@ -18,8 +18,5 @@ function* handleUserLoad(payload) {
 }
 
 export default function* userSaga() {
-  while (1) {
-    const { payload } = yield take(GET_USER);
-    yield call(handleUserLoad, payload);
-  }
+  yield takeEvery(LOGIN_USER, handleUserLoad);
 }

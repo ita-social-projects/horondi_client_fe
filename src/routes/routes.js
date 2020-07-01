@@ -8,7 +8,7 @@ import { useStyles } from './routes.style.js';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import Register from '../pages/register';
-import Login from '../pages/login';
+import Login from '../pages/login/index';
 
 const Routes = () => {
   const styles = useStyles();

@@ -123,7 +123,7 @@
     "react/jsx-indent": 1,
     "react/jsx-uses-vars": 2,
     "react/jsx-props-no-spreading": 0,
-    "react/prop-types": 0,
+    "react/prop-types": 2,
     "react/no-array-index-key": 0,
     "react/no-unknown-property": 2,
     "jsx-a11y/click-events-have-key-events": 0,

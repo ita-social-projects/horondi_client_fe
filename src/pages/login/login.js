@@ -3,6 +3,7 @@ import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import {
   darkTheme,
   createLoginStyles,
@@ -21,6 +22,7 @@ import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 
 const Login = ({ history }) => {
+  console.log(history);
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
   const [allFieldsSet, setAllFieldsSet] = useState(false);
@@ -182,6 +184,12 @@ const Login = ({ history }) => {
       </div>
     </ThemeProvider>
   );
+};
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }).isRequired
 };
 
 export default withRouter(Login);

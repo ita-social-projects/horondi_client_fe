@@ -4,6 +4,7 @@ import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import {
   placeholders,
   formRegExp,
@@ -311,5 +312,11 @@ function Register({ history }) {
     </ThemeProvider>
   );
 }
+
+Register.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }).isRequired
+};
 
 export default withRouter(Register);

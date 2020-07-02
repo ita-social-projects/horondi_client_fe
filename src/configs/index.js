@@ -1,6 +1,5 @@
 export const LANGUAGE = 0;
 
-// delete if dont need
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
@@ -77,7 +76,7 @@ export const errorMessages = [
     value: {
       firstname: 'Minimum 2 characters',
       lastname: 'Minimum 2 characters',
-      email: 'Wrong email address',
+      email: `Wrong email address, `,
       password: 'Minimum 6 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match'
     }

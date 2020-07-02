@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import parse from 'html-react-parser';
 import {
   placeholders,
   formRegExp,
@@ -26,6 +27,8 @@ import registerUser from '../../services/registerUser';
 import info from '../../images/information.png';
 import infoLight from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
+
+const ExampleEmail = () => <span>example@mail.com</span>;
 
 function Register({ history }) {
   // VALIDATED && CONFIRMED
@@ -278,11 +281,12 @@ function Register({ history }) {
                         ? `${errorMessage}`
                         : ''
                     }
-                    className={styles.dataInput}
+                    className={`${styles.dataInput} ${
+                      inputName === 'email' ? styles.afterText : ''
+                    }`}
                     onChange={(e) => onChange(e, validation.setValid, regExp)}
                     value={value}
                     type={type}
-                    // InputProps={InputProps}
                   />
                 )
               )}

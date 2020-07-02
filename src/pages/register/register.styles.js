@@ -179,6 +179,12 @@ export const createRegisterStyles = (theme) =>
     },
     notchedOutline: {
       borderColor: theme.notchedOutline.borderColor
+    },
+    afterText: {
+      '& p::after': {
+        content: `'example@mail.com'`,
+        color: '#828282'
+      }
     }
   });
 

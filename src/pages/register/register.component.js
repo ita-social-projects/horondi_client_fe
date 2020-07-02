@@ -289,12 +289,9 @@ function Register({ history }) {
 
               <div className={styles.registerGroup}>
                 <Button
-                  className={
-                    allFieldsSet ? styles.registerBtn : styles.disabledRegister
-                  }
+                  className={styles.registerBtn}
                   fullWidth
                   onClick={handleRegister}
-                  disabled={!allFieldsSet}
                 >
                   {REGISTER_FORM_LABEL[language].value}
                 </Button>

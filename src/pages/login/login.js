@@ -153,12 +153,9 @@ const Login = ({ history }) => {
             </div>
             <div className={styles.loginGroup}>
               <Button
-                className={
-                  allFieldsSet ? styles.loginBtn : styles.disabledLogin
-                }
+                className={styles.loginBtn}
                 fullWidth
                 onClick={handleLogin}
-                disabled={!allFieldsSet}
               >
                 {label}
               </Button>

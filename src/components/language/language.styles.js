@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     '& li': {
-      // padding: '.3rem !important'
+      padding: '.3rem !important'
     }
   }
 }));

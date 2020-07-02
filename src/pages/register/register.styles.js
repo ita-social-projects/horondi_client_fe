@@ -105,7 +105,8 @@ export const createRegisterStyles = (theme) =>
       },
       '& p': {
         position: 'absolute',
-        top: '40px'
+        top: '40px',
+        fontSize: '10px'
       }
     },
     registerBtn: {

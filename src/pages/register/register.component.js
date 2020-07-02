@@ -147,7 +147,7 @@ function Register({ history }) {
   const userFields = {
     firstNameField: {
       inputName: 'firstName',
-      errorMessage: errorMessages.firstname,
+      errorMessage: errorMessages[0].value.firstname,
       value: firstName,
       onChange: handleChange,
       validation: {
@@ -159,7 +159,7 @@ function Register({ history }) {
     },
     lastNameField: {
       inputName: 'lastName',
-      errorMessage: errorMessages.lastname,
+      errorMessage: errorMessages[0].value.lastname,
       value: lastName,
       onChange: handleChange,
       validation: {
@@ -171,7 +171,7 @@ function Register({ history }) {
     },
     email: {
       inputName: 'email',
-      errorMessage: errorMessages.email,
+      errorMessage: errorMessages[0].value.email,
       value: email,
       onChange: handleChange,
       validation: {
@@ -183,7 +183,7 @@ function Register({ history }) {
     },
     passwordField: {
       inputName: 'password',
-      errorMessage: errorMessages.password,
+      errorMessage: errorMessages[0].value.password,
       value: password,
       onChange: handleChange,
       validation: {
@@ -201,7 +201,7 @@ function Register({ history }) {
     },
     confirmPasswordField: {
       inputName: 'confirmPassword',
-      errorMessage: errorMessages.confirmPassword,
+      errorMessage: errorMessages[0].value.confirmPassword,
       value: confirmPassword,
       onChange: checkIfConfirmed,
       validation: {
@@ -272,9 +272,9 @@ function Register({ history }) {
                     variant='outlined'
                     name={inputName}
                     fullWidth
-                    error={!validation.value && !!value && shouldValidate}
+                    error={!validation.value && shouldValidate}
                     helperText={
-                      !validation.value && !!value && shouldValidate
+                      !validation.value && shouldValidate
                         ? `${errorMessage}`
                         : ''
                     }

@@ -16,7 +16,8 @@ import {
   LANGUAGE as language,
   LOGIN_FORM_LABEL,
   LOGIN_USER_DATA,
-  EMPTY_FIELD
+  EMPTY_FIELD,
+  formRegExp
 } from '../../configs';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
@@ -24,11 +25,16 @@ import { endAdornment } from '../../utils/eyeToggle';
 const Login = ({ history }) => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
-  const [allFieldsSet, setAllFieldsSet] = useState(false);
   const [theme, setTheme] = useState(darkTheme);
 
   // VALIDATE
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [emailValidated, setEmailValidated] = useState(false);
+  const [passwordValidated, setPasswordValidated] = useState(false);
+  const [allFieldsValidated, setAllFieldsValidated] = useState(false);
+
+  // ERROR
+  const [showError, setShowError] = useState(false);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
@@ -39,18 +45,27 @@ const Login = ({ history }) => {
   const passwordLabel = placeholders.password[language].value;
 
   // HANDLERS
-  const handleChange = (event) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+  const handleChange = (event, setValid, regExp) => {
+    const input = event.target.value;
+    const inputName = event.target.name;
+    setUser({ ...user, [inputName]: input });
+    if (input.match(regExp)) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
   };
 
   const handleLogin = async () => {
     setShouldValidate(true);
-    if (allFieldsSet) {
+    if (allFieldsValidated) {
       try {
         dispatch(loginUser(user));
       } catch (e) {
         console.error(e);
       }
+    } else {
+      setShowError(true);
     }
   };
 
@@ -63,18 +78,20 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (Object.values(user).every((val) => val !== '')) {
-      setAllFieldsSet(true);
-    } else {
-      setAllFieldsSet(false);
-    }
     if (!loginError && loginError !== null) {
       history.push('/');
+    } else {
+      setShowError(true);
     }
     if (isLightTheme) {
       setTheme(lightTheme);
     } else {
       setTheme(darkTheme);
+    }
+    if (emailValidated && passwordValidated) {
+      setAllFieldsValidated(true);
+    } else {
+      setAllFieldsValidated(false);
     }
   }, [user, loginError, history, isLightTheme]);
 
@@ -115,9 +132,8 @@ const Login = ({ history }) => {
               value={email}
               error={!email && shouldValidate}
               required
-              onChange={handleChange}
-              helperText={
-                !email && shouldValidate ? EMPTY_FIELD[language].value : ''
+              onChange={(e) =>
+                handleChange(e, setEmailValidated, formRegExp.email)
               }
             />
             <TextField
@@ -141,9 +157,8 @@ const Login = ({ history }) => {
               value={password}
               error={!password && shouldValidate}
               required
-              onChange={handleChange}
-              helperText={
-                !password && shouldValidate ? EMPTY_FIELD[language].value : ''
+              onChange={(e) =>
+                handleChange(e, setPasswordValidated, formRegExp.password)
               }
             />
             <div className={styles.recoveryContainer}>
@@ -160,7 +175,9 @@ const Login = ({ history }) => {
                 {label}
               </Button>
               <p className={styles.loginError}>
-                {loginError ? 'Wrong e-mail address or password' : ''}
+                {showError && shouldValidate
+                  ? 'Wrong e-mail address or password'
+                  : ''}
               </p>
             </div>
             <div className={styles.orContainer}>

@@ -71,13 +71,28 @@ export const placeholders = {
   ]
 };
 
-export const errorMessages = {
-  firstname: 'Please enter firstname',
-  lastname: 'Please enter lastname',
-  email: 'Please enter email',
-  password: 'Password not correct',
-  confirmPassword: 'Please confirm password'
-};
+export const errorMessages = [
+  {
+    lang: 'eng',
+    value: {
+      firstname: 'Minimum 2 characters',
+      lastname: 'Minimum 2 characters',
+      email: 'Wrong email address',
+      password: 'Minimum 6 characters with one letter and one digit',
+      confirmPassword: 'Passwords do not match'
+    }
+  },
+  {
+    lang: 'uk',
+    value: {
+      firstname: 'Мінімум 2 символа',
+      lastname: 'Мінімум 2 символа',
+      email: 'Некоректний фоомат',
+      password: 'Мінімум 6 символів з однією літерою та цифрою',
+      confirmPassword: 'Паролі не співпадають'
+    }
+  }
+];
 
 export const LOGIN_FORM_LABEL = [
   {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  setToLocalStorage,
-  getFromLocalStorage
-} from 'src/services/localstorage.service';
 import LanguageIcon from '@material-ui/icons/Language';
 import { Button, Card, MenuItem } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+import {
+  setToLocalStorage,
+  getFromLocalStorage
+} from '../../services/localstorage.service';
 import useStyles from './language.styles';
 import { initLanguageSaga } from '../../redux/language/language.action';
 

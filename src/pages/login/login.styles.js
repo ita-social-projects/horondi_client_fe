@@ -110,7 +110,12 @@ export const createLoginStyles = (theme) =>
         transform: 'translate(14px, 14px) scale(1)'
       },
       '& div > input': {
-        padding: '11px 14px !important'
+        padding: '11px 14px !important',
+        position: 'relative'
+      },
+      '& p': {
+        position: 'absolute',
+        top: '40px'
       }
     },
     emailInput: {
@@ -119,7 +124,12 @@ export const createLoginStyles = (theme) =>
         transform: 'translate(14px, 14px) scale(1)'
       },
       '& div > input': {
-        padding: '11px 14px !important'
+        padding: '11px 14px !important',
+        position: 'relative'
+      },
+      '& p': {
+        position: 'absolute',
+        top: '40px'
       }
     },
     loginBtn: {

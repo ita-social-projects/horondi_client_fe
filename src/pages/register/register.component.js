@@ -286,7 +286,6 @@ function Register({ history }) {
                   />
                 )
               )}
-
               <div className={styles.registerGroup}>
                 <Button
                   className={styles.registerBtn}

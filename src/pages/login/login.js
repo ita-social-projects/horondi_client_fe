@@ -16,7 +16,6 @@ import {
   LANGUAGE as language,
   LOGIN_FORM_LABEL,
   LOGIN_USER_DATA,
-  EMPTY_FIELD,
   formRegExp
 } from '../../configs';
 import { loginUser } from '../../redux/user/user.actions';
@@ -93,7 +92,14 @@ const Login = ({ history }) => {
     } else {
       setAllFieldsValidated(false);
     }
-  }, [user, loginError, history, isLightTheme]);
+  }, [
+    user,
+    loginError,
+    history,
+    isLightTheme,
+    emailValidated,
+    passwordValidated
+  ]);
 
   // CLASSES
   const styles = createLoginStyles(theme)();

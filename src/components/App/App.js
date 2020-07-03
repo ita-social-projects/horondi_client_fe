@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import configureStore from '../../store/store';
-
 import Routes from '../../routes';
 
 const store = configureStore();

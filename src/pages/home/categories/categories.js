@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
-import LoadingBar from '../../../components/LoadingBar';
-import CategoryItem from '../category-item';
+import LoadingBar from '../../../components/loading-bar';
+import CategoryItem from './category-item';
 import { useStyles } from './categories.style';
 import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
 

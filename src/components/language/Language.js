@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import LanguageIcon from '@material-ui/icons/Language';
 import { Button, Card, MenuItem } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -16,24 +16,13 @@ const Language = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const setLanguageToStore = useCallback(
-    (lang) => {
-      dispatch(initLanguageSaga(lang));
-    },
-    [dispatch]
-  );
-
   useEffect(() => {
-    setLanguageToStore(language);
-  }, [setLanguageToStore, language]);
-
-  const setChangedLanguage = (value) => {
-    setToLocalStorage('language', value);
-    setLanguage(value);
-  };
+    dispatch(initLanguageSaga(language));
+  }, [dispatch, language]);
 
   const handleChange = (e) => {
-    setChangedLanguage(e.target.value);
+    setToLocalStorage('language', e.target.value);
+    setLanguage(e.target.value);
   };
 
   return (
@@ -41,7 +30,6 @@ const Language = () => {
       <Button id='lang-icon' variant='outlined' className={classes.icon}>
         <LanguageIcon />
       </Button>
-
       <Card>
         <ul className={classes.list} onClick={handleChange}>
           <MenuItem value={0}>UA</MenuItem>

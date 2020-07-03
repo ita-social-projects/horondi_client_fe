@@ -19,6 +19,7 @@
     "connected-react-router": "^6.8.0",
     "cors": "^2.8.5",
     "create-components-react": "^2.1.4",
+    "graphql": "^15.1.0",
     "html-react-parser": "^0.13.0",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",

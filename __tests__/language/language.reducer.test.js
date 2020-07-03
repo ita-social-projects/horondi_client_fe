@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import Language from '../../src/redux/language/language.reducer';
-import { CHANGE_LANGUAGE } from '../../src/redux/language/language.types';
 
 describe('test language reducer', () => {
   test('should return default state', () => {

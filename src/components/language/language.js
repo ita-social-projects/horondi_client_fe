@@ -31,9 +31,13 @@ const Language = () => {
         <LanguageIcon />
       </Button>
       <Card>
-        <ul className={classes.list} onClick={handleChange}>
-          <MenuItem value={0}>UA</MenuItem>
-          <MenuItem value={1}>EN</MenuItem>
+        <ul id='language' className={classes.list} onClick={handleChange}>
+          <MenuItem id='language1' value={0}>
+            UA
+          </MenuItem>
+          <MenuItem id='language2' value={1}>
+            EN
+          </MenuItem>
         </ul>
       </Card>
     </div>

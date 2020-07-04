@@ -7,8 +7,10 @@ import LoadingBar from '../../../components/LoadingBar';
 import { LANGUAGE } from '../../../configs';
 
 const NewsPage = () => {
-  const newslist = useSelector(({ News: { list } }) => list);
-  const loading = useSelector(({ News: { loading } }) => loading);
+  const { newslist, loading } = useSelector(({ News }) => ({
+    newslist: News.list,
+    loading: News.loading
+  }));
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -15,8 +15,10 @@ import LoadingBar from '../../../components/LoadingBar';
 import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
-  const article = useSelector(({ News: { item } }) => item);
-  const loading = useSelector(({ News: { loading } }) => loading);
+  const { article, loading } = useSelector(({ News }) => ({
+    article: News.item,
+    loading: News.loading
+  }));
   const dispatch = useDispatch();
 
   useEffect(() => {

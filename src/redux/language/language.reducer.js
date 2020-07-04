@@ -1,6 +1,6 @@
 import { CHANGE_LANGUAGE } from './language.types';
 
-const initialState = {
+export const initialState = {
   language: 0
 };
 

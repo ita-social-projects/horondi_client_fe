@@ -6,7 +6,7 @@ import NewsItem from '../news-item';
 import { LANGUAGE } from '../../../configs';
 
 const NewsPage = () => {
-  const list = useSelector(({ News: { list } }) => list);
+  const newslist = useSelector(({ News: { list } }) => list);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,17 +16,19 @@ const NewsPage = () => {
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  const newsItems = list.map(({ _id, date, author, images, title, text }) => (
-    <NewsItem
-      date={date}
-      key={_id}
-      id={_id}
-      author={author}
-      image={images}
-      title={title}
-      text={text}
-    />
-  ));
+  const newsItems = newslist.map(
+    ({ _id, date, author, images, title, text }) => (
+      <NewsItem
+        date={date}
+        key={_id}
+        id={_id}
+        author={author}
+        image={images}
+        title={title}
+        text={text}
+      />
+    )
+  );
 
   return (
     <>

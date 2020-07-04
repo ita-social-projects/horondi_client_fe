@@ -1,43 +1,22 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { ThemeProvider } from '@material-ui/styles';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
-import {
-  cartService,
-  catalogService,
-  orderService,
-  productService,
-  userService,
-  ratingService
-} from '../../services';
+import Routes from '../../routes';
+import { theme } from './app-theme/app.theme';
+import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
-import { StoreServiceProvider } from '../store-service-context';
+const App = () => {
+  const lightMode = useSelector(({ Theme }) => Theme.lightMode);
+  const themeMode = lightMode ? LIGHT_THEME : DARK_THEME;
+  const themeValue = theme(themeMode);
 
-import store from '../../store/store';
-
-// import Routes from '../routes';
-
-import Chat from '../chat';
-
-const storeService = {
-  cartService,
-  catalogService,
-  orderService,
-  productService,
-  userService,
-  ratingService
+  return (
+    <ThemeProvider theme={themeValue}>
+      <Routes />
+      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
+    </ThemeProvider>
+  );
 };
-
-const App = () => (
-  <Provider store={store}>
-    <StoreServiceProvider value={storeService}>
-      <div className='App'>
-        {/* <Routes /> */}
-        <p>horondi</p>
-        <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
-        <Chat />
-      </div>
-    </StoreServiceProvider>
-  </Provider>
-);
 
 export default App;

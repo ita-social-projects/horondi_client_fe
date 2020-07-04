@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { setNews, setArticle } from './news.actions';
+import { setNews, setArticle, setLoading } from './news.actions';
 import getItems from '../../utils/client';
 import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 
@@ -38,6 +38,7 @@ function* handleNewsLoad() {
              }`
     );
     yield put(setNews(news.data.getAllNews));
+    yield put(setLoading(news.loading));
   } catch (error) {
     console.log(error);
   }
@@ -78,6 +79,7 @@ function* handleArticleLoad({ payload }) {
       }`
     );
     yield put(setArticle(article.data.getNewsById));
+    yield put(setLoading(article.loading));
   } catch (error) {
     console.log(error);
   }

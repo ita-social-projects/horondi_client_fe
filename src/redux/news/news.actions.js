@@ -2,7 +2,8 @@ import {
   GET_NEWS,
   SET_NEWS,
   GET_NEWS_ARTICLE,
-  SET_ARTICLE
+  SET_ARTICLE,
+  SET_LOADING
 } from './news.types';
 
 const setNews = (news) => ({
@@ -24,4 +25,9 @@ const getArticle = (id) => ({
   payload: id
 });
 
-export { setArticle, getArticle, setNews, getNews };
+const setLoading = (loading) => ({
+  type: SET_LOADING,
+  payload: loading
+});
+
+export { setArticle, getArticle, setNews, getNews, setLoading };

@@ -11,10 +11,12 @@ import {
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
+import LoadingBar from '../../../components/LoadingBar';
 import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
   const article = useSelector(({ News: { item } }) => item);
+  const loading = useSelector(({ News: { loading } }) => loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +36,11 @@ const NewsDetailPage = ({ match }) => {
   const newsAuthor = article.author.name[LANGUAGE].value;
   const newsAuthorAvatar = article.author.image.small;
   const styles = useStyles();
+
+  if (loading) {
+    return <LoadingBar />;
+    // console.log(loading)
+  }
 
   return (
     <Card className={styles.container}>

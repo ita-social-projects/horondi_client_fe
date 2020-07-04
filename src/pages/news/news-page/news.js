@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
+import LoadingBar from '../../../components/LoadingBar';
 import { LANGUAGE } from '../../../configs';
 
 const NewsPage = () => {
   const newslist = useSelector(({ News: { list } }) => list);
+  const loading = useSelector(({ News: { loading } }) => loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +31,10 @@ const NewsPage = () => {
       />
     )
   );
-
+  if (loading) {
+    return <LoadingBar />;
+    // console.log(loading)
+  }
   return (
     <>
       <h1 className={styles.newsTitle}>{newsHeader[LANGUAGE]}</h1>

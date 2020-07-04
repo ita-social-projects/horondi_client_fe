@@ -1,7 +1,25 @@
-import { SET_NEWS } from './news.types';
+import { SET_NEWS, SET_ARTICLE } from './news.types';
 
 const initialState = {
-  list: []
+  list: [],
+  item: {
+    title: [{ value: '' }, { value: '' }],
+    images: [
+      {
+        primary: { medium: '' },
+        additional: [{ medium: '' }]
+      }
+    ],
+    text: [{ value: '' }, { value: '' }],
+    author: {
+      name: [{ value: '' }, { value: '' }],
+      image: [
+        {
+          small: ''
+        }
+      ]
+    }
+  }
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -10,6 +28,11 @@ const newsReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload
+      };
+    case SET_ARTICLE:
+      return {
+        ...state,
+        item: action.payload
       };
     default:
       return state;

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import parse from 'html-react-parser';
-import ReactPlayer from 'react-player';
 import {
   Card,
   Typography,
@@ -10,12 +9,12 @@ import {
   CardHeader,
   CardMedia
 } from '@material-ui/core';
-import { getArticle } from '../../redux/news-detail/news-detail.actions';
+import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import { LANGUAGE, TIME_OPTIONS } from '../../configs';
+import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
-  const article = useSelector(({ Article: { item } }) => item);
+  const article = useSelector(({ News: { item } }) => item);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -65,12 +64,15 @@ const NewsDetailPage = ({ match }) => {
         >
           {newsText}
         </Typography>
-        <ReactPlayer
-          className={newsVideo ? 'styles.video' : 'styles.hide'}
-          url={newsVideo}
-          playing={false}
-          origin='http://localhost:3000/'
-          controls
+        <iframe
+          className={newsVideo ? 'disp-block' : 'disp-none'}
+          title={newsTitle}
+          width='100%'
+          height='600'
+          src={newsVideo}
+          frameBorder='0'
+          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
         />
         <hr />
         <div className={styles.newsAuthorFooter}>

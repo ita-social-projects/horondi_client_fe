@@ -1,7 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { setArticle } from './news-detail.actions';
+import { setArticle } from './news.actions';
 import getItems from '../../utils/client';
-import { GET_NEWS_ARTICLE } from './news-detail.types';
+import { GET_NEWS_ARTICLE } from './news.types';
 
 function* handleArticleLoad({ payload }) {
   try {

@@ -45,5 +45,8 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '2rem',
     minHeight: '9rem',
     minWidth: '5rem'
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1
   }
 }));

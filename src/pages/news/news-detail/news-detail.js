@@ -7,7 +7,8 @@ import {
   Typography,
   CardContent,
   CardHeader,
-  CardMedia
+  CardMedia,
+  Backdrop
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
@@ -40,8 +41,11 @@ const NewsDetailPage = ({ match }) => {
   const styles = useStyles();
 
   if (loading) {
-    return <LoadingBar />;
-    // console.log(loading)
+    return (
+      <Backdrop className={styles.backdrop} open={loading}>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
   }
 
   return (

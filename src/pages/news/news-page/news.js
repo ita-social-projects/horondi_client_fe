@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Backdrop } from '@material-ui/core';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
@@ -34,8 +35,11 @@ const NewsPage = () => {
     )
   );
   if (loading) {
-    return <LoadingBar />;
-    // console.log(loading)
+    return (
+      <Backdrop className={styles.backdrop} open={loading}>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
   }
   return (
     <>

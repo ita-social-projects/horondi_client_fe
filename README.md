@@ -80,12 +80,16 @@ Checks:
 - changes of state when action is dispatched for different values of state 
 
 ## Starting a project
-In the project directory, you should run:
-- Run backend on the port [http://localhost:5000](http://localhost:5000)
-- Copy content of `.env.example` file to the newly created `.env`
-- Run `npm install` to install all dependencies
-- Run `npm run start` to start application
-- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##### Setup backend (two ways):
+- Use deployed version of backend and just put remote url in `.env` file in the client. 
+- Pull repository from [https://github.com/horondi/horondi_client_be](https://github.com/horondi/horondi_client_be)
+  and setup it locally using its readme.
+##### Setup frontend application:
+1) Copy content of `.env.example` file to the newly created `.env`.
+   Replace env for url with the url to running backend.
+2) Run `npm install` to install all dependencies
+3) Run `npm run start` to start application
+4) Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.

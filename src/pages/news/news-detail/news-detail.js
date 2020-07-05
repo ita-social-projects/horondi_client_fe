@@ -42,7 +42,7 @@ const NewsDetailPage = ({ match }) => {
 
   if (loading) {
     return (
-      <Backdrop className={styles.backdrop} open={loading} invisible='true'>
+      <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />
       </Backdrop>
     );
@@ -54,7 +54,7 @@ const NewsDetailPage = ({ match }) => {
         <Typography
           className={styles.ArticleTitle}
           gutterBottom
-          variant='h5'
+          variant='h2'
           component='h2'
         >
           {newsTitle}
@@ -67,6 +67,7 @@ const NewsDetailPage = ({ match }) => {
             image={newsImage}
             title={newsTitle}
             alt={newsTitle}
+            component='div'
           />
         </div>
         <Typography
@@ -94,6 +95,7 @@ const NewsDetailPage = ({ match }) => {
             className={styles.authorAvatar}
             image={newsAuthorAvatar}
             title={newsTitle}
+            component='div'
           />
         </div>
       </CardContent>

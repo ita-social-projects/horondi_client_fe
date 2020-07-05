@@ -40,6 +40,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
             className={styles.media}
             image={newsImage}
             title={newsTitle}
+            component='div'
           />
         </div>
         <CardHeader subheader={newsDate} />

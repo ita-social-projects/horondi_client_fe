@@ -2,7 +2,7 @@ import {
   GET_NEWS,
   SET_NEWS,
   GET_NEWS_ARTICLE,
-  SET_ARTICLE,
+  SET_NEWS_ARTICLE,
   SET_LOADING
 } from './news.types';
 
@@ -16,7 +16,7 @@ const getNews = () => ({
 });
 
 const setArticle = (article) => ({
-  type: SET_ARTICLE,
+  type: SET_NEWS_ARTICLE,
   payload: article
 });
 

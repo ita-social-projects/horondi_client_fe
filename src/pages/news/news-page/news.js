@@ -36,7 +36,7 @@ const NewsPage = () => {
   );
   if (loading) {
     return (
-      <Backdrop className={styles.backdrop} open={loading} invisible='true'>
+      <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />
       </Backdrop>
     );

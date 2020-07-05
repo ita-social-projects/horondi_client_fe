@@ -1,6 +1,4 @@
 import React from 'react';
-import LanguageIcon from '@material-ui/icons/Language';
-import { Button, Card, MenuItem } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import {
   setToLocalStorage,
@@ -12,7 +10,7 @@ import { changeLanguage } from '../../redux/language/language.actions';
 const languageInLocalStorage = JSON.parse(getFromLocalStorage('language')) || 0;
 
 const Language = () => {
-  const classes = useStyles();
+  const styles = useStyles();
   const dispatch = useDispatch();
   dispatch(changeLanguage(languageInLocalStorage));
 
@@ -26,21 +24,19 @@ const Language = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <Button id='lang-icon' variant='outlined' className={classes.icon}>
-        <LanguageIcon />
-      </Button>
-      <Card>
-        <ul id='language' className={classes.list} onClick={handleChange}>
-          <MenuItem id='language1' value={0}>
-            UA
-          </MenuItem>
-          <MenuItem id='language2' value={1}>
-            EN
-          </MenuItem>
-        </ul>
-      </Card>
-    </div>
+    <select
+      className={styles.rootSelect}
+      defaultValue={languageInLocalStorage}
+      id='language'
+      onClick={handleChange}
+    >
+      <option className={styles.LanguageOption} id='language1' value={0}>
+        UA
+      </option>
+      <option id='language2' value={1}>
+        EN
+      </option>
+    </select>
   );
 };
 

@@ -86,7 +86,7 @@ Checks:
   and setup it locally using its readme.
 ##### Setup frontend application:
 1) Copy content of `.env.example` file to the newly created `.env`.
-   Replace env for url with the url to running backend.
+   Replace environment variable for backend url with the url to running backend in `.env` file.
 2) Run `npm install` to install all dependencies
 3) Run `npm run start` to start application
 4) Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

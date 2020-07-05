@@ -1,5 +1,5 @@
-# Hondri
-Frontend app for the `Hondri` online store
+# Horondi
+Frontend app for the `Horondi` online store
 ## Rules and guidelines
 - Redux
     - For each entity we should have separate folder
@@ -33,9 +33,8 @@ Frontend app for the `Hondri` online store
 Order of testing components:
 1) simple stateless components that are used in multiple places
 2) components that depends on other components but not connected to redux and don’t have any state
-3) components that depend on other components but not connected to redux and don’t have any state
-4) components that have internal state but are not connected to redux
-5) components that connected to redux
+3) components that have internal state but are not connected to redux
+4) components that connected to redux
 
 ##### Don’t test:
 - third-party libraries
@@ -82,6 +81,7 @@ Checks:
 
 ## Starting a project
 In the project directory, you should run:
+- Run backend on the port [http://localhost:5000](http://localhost:5000)
 - Copy content of `.env.example` file to the newly created `.env`
 - Run `npm install` to install all dependencies
 - Run `npm run start` to start application

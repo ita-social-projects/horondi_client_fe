@@ -22,7 +22,6 @@
     "react-scroll-up-button": "^1.6.4",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

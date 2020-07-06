@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './Routes.style.js';
-import NewsPage from 'src/pages/news/news-page';
-import Home from 'src/pages/home/home-page';
-import AboutUs from 'src/pages/about-us';
+import NewsPage from '../pages/news/news-page';
+import NewsDetailPage from '../pages/news/news-detail';
+import Home from '../pages/home/home-page';
+import AboutUs from '../pages/about-us';
 import AppHeader from '../components/app-header';
 
 const Routes = () => (
@@ -13,6 +14,7 @@ const Routes = () => (
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/news' exact component={NewsPage} />
+        <Route path='/news/:id' exact component={NewsDetailPage} />
         <Route path='/about-us' exact component={AboutUs} />
       </Switch>
     </div>

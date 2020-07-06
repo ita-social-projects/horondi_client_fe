@@ -24,12 +24,13 @@ const NewsDetailPage = ({ match }) => {
 
   useEffect(() => {
     const articleId = match.params.id;
-    window.scrollTo(0, 0);
     dispatch(getArticle(articleId));
+    window.scrollTo(0, 0);
   }, [match.params.id, dispatch]);
+
   const styles = useStyles();
 
-  if (loading) {
+  if (loading || article.length === 0) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />

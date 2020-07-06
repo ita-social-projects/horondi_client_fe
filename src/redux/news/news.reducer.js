@@ -3,7 +3,7 @@ import { SET_NEWS, SET_NEWS_ARTICLE, SET_LOADING } from './news.types';
 const initialState = {
   loading: true,
   list: [],
-  item: {}
+  item: []
 };
 
 const newsReducer = (state = initialState, action) => {

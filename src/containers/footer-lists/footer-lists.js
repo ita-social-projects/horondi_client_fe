@@ -56,16 +56,7 @@ const FooterLists = ({ language = LANGUAGE }) => {
 
   const contactsList = FOOTER_CONTACTS[language].items.map((item) => (
     <div key={item.id}>
-      <Typography variant='subtitle2'>
-        <a
-          className={styles.cardLink}
-          href={item.url}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          {item.item}
-        </a>
-      </Typography>
+      <Typography variant='subtitle2'>{item.item}</Typography>
     </div>
   ));
   return (
@@ -93,6 +84,18 @@ const FooterLists = ({ language = LANGUAGE }) => {
           </Typography>
         </div>
         {contactsList}
+        <div key={FOOTER_CONTACTS[language].map.id}>
+          <Typography variant='subtitle2'>
+            <a
+              className={styles.cardLink}
+              target='_blank'
+              href={FOOTER_CONTACTS[language].map.url}
+              rel='noopener noreferrer'
+            >
+              {FOOTER_CONTACTS[language].map.item}
+            </a>
+          </Typography>
+        </div>
       </div>
     </div>
   );

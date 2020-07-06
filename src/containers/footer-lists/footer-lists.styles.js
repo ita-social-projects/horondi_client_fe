@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardBody: {
     [theme.breakpoints.up('sm')]: {
-      flex: '1 1 auto',
+      flex: 'auto',
       minHeight: '1px',
       padding: '1.25rem'
     },

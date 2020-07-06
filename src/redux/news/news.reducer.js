@@ -38,7 +38,7 @@ const newsReducer = (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: false
+        loading: action.payload
       };
     default:
       return state;

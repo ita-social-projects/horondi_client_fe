@@ -5,6 +5,7 @@ import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 
 function* handleNewsLoad() {
   try {
+    yield put(setLoading(true));
     const news = yield call(
       getItems,
       `query{
@@ -38,9 +39,9 @@ function* handleNewsLoad() {
              }`
     );
     yield put(setNews(news.data.getAllNews));
-    yield put(setLoading(news.loading));
+    yield put(setLoading(false));
   } catch (error) {
-    console.log(error);
+    console.log(error); // TODO: handler router redirect(connect router error page)
   }
 }
 

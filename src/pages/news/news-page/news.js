@@ -21,6 +21,13 @@ const NewsPage = () => {
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
+  if (loading) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
   const newsItems = newslist.map(
     ({ _id, date, author, images, title, text }) => (
       <NewsItem
@@ -34,13 +41,6 @@ const NewsPage = () => {
       />
     )
   );
-  if (loading) {
-    return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
-      </Backdrop>
-    );
-  }
   return (
     <>
       <h1 className={styles.newsTitle}>{newsHeader[LANGUAGE]}</h1>

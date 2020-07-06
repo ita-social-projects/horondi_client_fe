@@ -20,13 +20,17 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
   const styles = useStyles();
   const newsTitle =
     title.length !== 0 ? title[LANGUAGE].value : 'No title provided';
-  const newsImage =
-    image.length !== 0 ? image[0].primary.medium : 'No image provided';
+  const newsImage = image ? image.primary.medium : 'No image provided';
   const newsText =
     text.length !== 0 ? parse(text[LANGUAGE].value) : 'No text provided';
   const newsAuthor =
-    author.length !== 0 ? author.name[LANGUAGE].value : 'No author provided';
-  const newsAuthorAvatar = author.image.small;
+    author.name.length !== 0
+      ? author.name[LANGUAGE].value
+      : 'No author provided';
+  const newsAuthorAvatar = author.image
+    ? author.image.small
+    : 'No author provided';
+
   const newsButtonText = ['читати далі', 'read more...'];
   const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
   const dateLanguege = `${newsDateLanguegeOptions[LANGUAGE]}`;

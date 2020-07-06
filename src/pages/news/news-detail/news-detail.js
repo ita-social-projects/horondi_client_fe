@@ -27,17 +27,6 @@ const NewsDetailPage = ({ match }) => {
     window.scrollTo(0, 0);
     dispatch(getArticle(articleId));
   }, [match.params.id, dispatch]);
-
-  const newsTitle = article.title[LANGUAGE].value;
-  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
-  const dateLANGUAGE = `${newsDateLanguegeOptions[LANGUAGE]}`;
-  const dateToShow = new Date(parseInt(article.date));
-  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, TIME_OPTIONS);
-  const newsImage = article.images[0].primary.medium;
-  const newsText = parse(article.text[LANGUAGE].value);
-  const newsVideo = article.video;
-  const newsAuthor = article.author.name[LANGUAGE].value;
-  const newsAuthorAvatar = article.author.image.small;
   const styles = useStyles();
 
   if (loading) {
@@ -47,6 +36,28 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
+
+  const newsTitle =
+    article.title.length !== 0
+      ? article.title[LANGUAGE].value
+      : 'No title provided';
+  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
+  const dateLANGUAGE = `${newsDateLanguegeOptions[LANGUAGE]}`;
+  const dateToShow = new Date(parseInt(article.date));
+  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, TIME_OPTIONS);
+  const newsImage = article.images ? article.images.primary.medium : ' ';
+  const newsText =
+    article.text.length !== 0
+      ? parse(article.text[LANGUAGE].value)
+      : 'No text provided';
+  const newsVideo = article.video;
+  const newsAuthor =
+    article.author.name.length !== 0
+      ? article.author.name[LANGUAGE].value
+      : 'No author provided';
+  const newsAuthorAvatar = article.author.image
+    ? article.author.image.small
+    : 'No author provided';
 
   return (
     <Card className={styles.container}>

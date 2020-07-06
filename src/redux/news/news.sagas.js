@@ -47,6 +47,7 @@ function* handleNewsLoad() {
 
 function* handleArticleLoad({ payload }) {
   try {
+    yield put(setLoading(true));
     const article = yield call(
       getItems,
       `query{
@@ -80,7 +81,7 @@ function* handleArticleLoad({ payload }) {
       }`
     );
     yield put(setArticle(article.data.getNewsById));
-    yield put(setLoading(article.loading));
+    yield put(setLoading(false));
   } catch (error) {
     console.log(error);
   }

@@ -9,7 +9,7 @@ import useStyles from './language.styless';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST } from '../../configs';
 
-const languageInLocalStorage = JSON.parse(getFromLocalStorage('language')) || 0;
+const languageInLocalStorage = getFromLocalStorage('language') || 0;
 
 const Language = () => {
   const styles = useStyles();

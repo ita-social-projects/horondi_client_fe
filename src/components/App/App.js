@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
+import { CssBaseline } from '@material-ui/core';
 import Routes from '../../routes';
 import { theme } from './app-theme/app.theme';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
@@ -13,6 +14,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={themeValue}>
+      <CssBaseline />
       <Routes />
       <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
     </ThemeProvider>

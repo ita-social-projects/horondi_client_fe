@@ -1,7 +1,9 @@
-import { SET_NEWS } from './news.types';
+import { SET_NEWS, SET_NEWS_ARTICLE, SET_LOADING } from './news.types';
 
 const initialState = {
-  list: []
+  loading: true,
+  list: [],
+  activeArticle: null
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -10,6 +12,16 @@ const newsReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload
+      };
+    case SET_NEWS_ARTICLE:
+      return {
+        ...state,
+        activeArticle: action.payload
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload
       };
     default:
       return state;

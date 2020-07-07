@@ -131,3 +131,9 @@ export const FOOTER_SOCIAL_NETWORK_LINKS = {
   facebook: 'https://www.facebook.com/Horondi',
   instagram: 'https://www.instagram.com/horondi'
 };
+export const TIME_OPTIONS = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+};

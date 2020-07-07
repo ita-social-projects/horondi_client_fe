@@ -6,6 +6,11 @@ import App from './components/App';
 import configureStore from './store/store';
 
 import './index.css';
+import { clearLocalStorage } from './services/local-storage.service';
+
+if (!localStorage.getItem('horondi')) {
+  clearLocalStorage();
+}
 
 const store = configureStore();
 
@@ -15,6 +20,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
 if (window.Cypress) {
   window.store = store;
 }

@@ -39,7 +39,7 @@ const NavbarLeft = () => {
   return (
     <Toolbar>
       <Typography variant='h6'>
-        <Link id='logo' to='/' className={styles.logo}>
+        <Link to='/' className={styles.logo}>
           {LOGO}
         </Link>
       </Typography>

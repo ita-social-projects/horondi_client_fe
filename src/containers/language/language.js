@@ -4,8 +4,8 @@ import { Select, MenuItem } from '@material-ui/core';
 import {
   setToLocalStorage,
   getFromLocalStorage
-} from '../../services/localstorage.service';
-import useStyles from './language.styless';
+} from '../../services/local-storage.service';
+import useStyles from './language.styles';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST } from '../../configs';
 
@@ -18,9 +18,6 @@ const Language = () => {
 
   const handleChange = (e) => {
     const targetValue = e.target.value;
-    if (targetValue === languageInLocalStorage) {
-      dispatch(changeLanguage(targetValue));
-    }
     setToLocalStorage('language', targetValue);
     dispatch(changeLanguage(targetValue));
   };

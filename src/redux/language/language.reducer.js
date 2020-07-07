@@ -8,6 +8,7 @@ const languageReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case CHANGE_LANGUAGE:
     return {
+      ...state,
       language: action.payload
     };
 

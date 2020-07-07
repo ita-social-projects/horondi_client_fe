@@ -13,6 +13,17 @@ code {
 a {
   text-decoration: none;
 }
-select option{
- text-align: center;
+
+.MuiMenuItem-root {
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.MuiList-padding {
+  padding: 0 !important;
+}
+.MuiMenuItem-root{
+  line-height: 33px !important;
 }

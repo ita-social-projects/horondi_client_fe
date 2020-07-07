@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Select, MenuItem } from '@material-ui/core';
 import {
   setToLocalStorage,
   getFromLocalStorage
@@ -8,7 +9,10 @@ import useStyles from './language.styless';
 import { changeLanguage } from '../../redux/language/language.actions';
 
 const languageInLocalStorage = JSON.parse(getFromLocalStorage('language')) || 0;
-
+const languages = [
+  { lang: 'UA', value: 0 },
+  { lang: 'EN', value: 1 }
+];
 const Language = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -22,21 +26,21 @@ const Language = () => {
     setToLocalStorage('language', targetValue);
     dispatch(changeLanguage(targetValue));
   };
-
+  const mappedLanguages = languages.map(({ lang, value }) => (
+    <MenuItem key={value} value={value}>
+      {lang}
+    </MenuItem>
+  ));
   return (
-    <select
-      className={styles.rootSelect}
-      defaultValue={languageInLocalStorage}
-      id='language'
-      onClick={handleChange}
-    >
-      <option className={styles.LanguageOption} id='language1' value={0}>
-        UA
-      </option>
-      <option id='language2' value={1}>
-        EN
-      </option>
-    </select>
+    <div id='language' className={styles.rootLanguage}>
+      <Select
+        className={styles.rootSelect}
+        defaultValue={languageInLocalStorage}
+        onClick={handleChange}
+      >
+        {mappedLanguages}
+      </Select>
+    </div>
   );
 };
 

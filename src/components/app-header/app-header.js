@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStyles } from './app-header.styles';
-import Language from '../language';
+import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
 import Cabinet from '../Cabinet';
 

@@ -11,5 +11,7 @@ describe('language test', () => {
     cy.get('#language1').should('have.value', 0);
     cy.get('#language1').contains('UA');
     cy.get('#language2').contains('EN');
+
+    cy.get('.makeStyles-homeHeader-13');
   });
 });

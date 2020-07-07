@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'normal',
     fontSize: '18px',
     textAlign: 'center',
-    width: '33px',
+    width: '60px',
     height: '33px',
     cursor: 'pointer',
     backgroundColor: 'black',
@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
       height: '33px',
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
-      fontWeight: 'normal'
+      fontWeight: 'normal',
+      width: '11rem !important'
     }
   }
 }));

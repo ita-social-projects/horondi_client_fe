@@ -137,3 +137,8 @@ export const TIME_OPTIONS = {
   month: 'long',
   day: 'numeric'
 };
+
+export const LANGUAGES_LIST = [
+  { lang: 'UA', value: 0 },
+  { lang: 'EN', value: 1 }
+];

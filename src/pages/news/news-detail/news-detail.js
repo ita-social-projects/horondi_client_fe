@@ -17,7 +17,7 @@ import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
   const { article, loading } = useSelector(({ News }) => ({
-    article: News.item,
+    article: News.activeArticle,
     loading: News.loading
   }));
   const dispatch = useDispatch();
@@ -26,11 +26,11 @@ const NewsDetailPage = ({ match }) => {
     const articleId = match.params.id;
     dispatch(getArticle(articleId));
     window.scrollTo(0, 0);
-  }, [match.params.id, dispatch]);
+  }, [match.params.id, dispatch, article]);
 
   const styles = useStyles();
 
-  if (loading || article.length === 0) {
+  if (loading || !article) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />

@@ -3,7 +3,7 @@ import { SET_NEWS, SET_NEWS_ARTICLE, SET_LOADING } from './news.types';
 const initialState = {
   loading: true,
   list: [],
-  item: []
+  activeArticle: null
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const newsReducer = (state = initialState, action) => {
     case SET_NEWS_ARTICLE:
       return {
         ...state,
-        item: action.payload
+        activeArticle: action.payload
       };
     case SET_LOADING:
       return {

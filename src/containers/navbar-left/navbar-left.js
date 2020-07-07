@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
@@ -7,18 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './navbar-left.styles';
 
 import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
-import { getCategories } from '../../redux/categories/categories.actions';
 
 const NavbarLeft = () => {
   const styles = useStyles();
-  const dispatch = useDispatch();
   const { categories } = useSelector(({ Categories: { list } }) => ({
     categories: list
   }));
-
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
 
   const getCategoryURL = (category) => {
     const [filteredCategory] = category.filter(

@@ -2,6 +2,10 @@
   "name": "horondi_client_fe",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/horondi/horondi_client_fe.git"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
@@ -72,6 +76,7 @@
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.0.1",
     "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "cypress": "^4.9.0",
     "eslint": "^6.8.0",
@@ -91,7 +96,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
+    "jest": "^26.1.0",
     "jest-dom": "^4.0.0",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
@@ -109,8 +114,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "eslint . --fix --color"
     ]
   }
 }

@@ -6,13 +6,13 @@ const initialState = {
 
 const themeState = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_THEME_MODE:
-      return {
-        ...state,
-        lightMode: payload
-      };
-    default:
-      return state;
+  case SET_THEME_MODE:
+    return {
+      ...state,
+      lightMode: payload
+    };
+  default:
+    return state;
   }
 };
 

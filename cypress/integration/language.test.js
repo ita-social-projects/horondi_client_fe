@@ -11,7 +11,12 @@ describe('language test', () => {
     cy.get('#language1').should('have.value', 0);
     cy.get('#language1').contains('UA');
     cy.get('#language2').contains('EN');
-
-    cy.get('.makeStyles-homeHeader-13');
+    cy.get('#language1').click();
+    cy.get('#language1').should('be.not.visible');
+    cy.get('#language2').should('be.not.visible');
+    cy.get('#language').click();
+    cy.get('#language2').click();
+    cy.get('#language1').should('be.not.visible');
+    cy.get('#language2').should('be.not.visible');
   });
 });

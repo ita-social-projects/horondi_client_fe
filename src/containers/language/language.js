@@ -25,7 +25,7 @@ const Language = () => {
     dispatch(changeLanguage(targetValue));
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
-    <MenuItem key={value} value={value}>
+    <MenuItem id={`language${value + 1}`} key={value} value={value}>
       {lang}
     </MenuItem>
   ));

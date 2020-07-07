@@ -17,19 +17,20 @@ import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
   const { article, loading } = useSelector(({ News }) => ({
-    article: News.item,
+    article: News.activeArticle,
     loading: News.loading
   }));
   const dispatch = useDispatch();
 
   useEffect(() => {
     const articleId = match.params.id;
-    window.scrollTo(0, 0);
     dispatch(getArticle(articleId));
-  }, [match.params.id, dispatch]);
+    window.scrollTo(0, 0);
+  }, [match.params.id, dispatch, article]);
+
   const styles = useStyles();
 
-  if (loading) {
+  if (loading || !article) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />

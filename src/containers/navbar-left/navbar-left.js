@@ -9,10 +9,10 @@ import { useStyles } from './navbar-left.styles';
 import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
 
 const NavbarLeft = () => {
-  const styles = useStyles();
-  const { categories } = useSelector(({ Categories: { list } }) => ({
-    categories: list
+  const { categories } = useSelector(({ Categories }) => ({
+    categories: Categories.list
   }));
+  const styles = useStyles();
 
   const getCategoryURL = (category) => {
     const [filteredCategory] = category.filter(
@@ -24,11 +24,16 @@ const NavbarLeft = () => {
     }
   };
 
-  const categoriesItems = categories.map(({ _id, name }) => (
-    <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
-      {name[LANGUAGE].value}
-    </Link>
-  ));
+  const CategoriesView = () => {
+    if (categories) {
+      return categories.map(({ _id, name }) => (
+        <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
+          {name[LANGUAGE].value}
+        </Link>
+      ));
+    }
+    return null;
+  };
 
   return (
     <Toolbar>
@@ -37,7 +42,7 @@ const NavbarLeft = () => {
           {LOGO}
         </Link>
       </Typography>
-      {categoriesItems}
+      <CategoriesView />
     </Toolbar>
   );
 };

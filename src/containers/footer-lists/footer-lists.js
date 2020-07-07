@@ -15,8 +15,8 @@ import {
 
 const FooterLists = ({ language = LANGUAGE }) => {
   const styles = useStyles();
-  const { categories } = useSelector(({ Categories: { list } }) => ({
-    categories: list
+  const { categories } = useSelector(({ Categories }) => ({
+    categories: Categories.list
   }));
 
   const getCategoryURL = (category) => {
@@ -29,15 +29,21 @@ const FooterLists = ({ language = LANGUAGE }) => {
     }
   };
 
-  const categoriesList = categories.map(({ _id, name }) => (
-    <div key={_id}>
-      <Typography variant='subtitle2'>
-        <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
-          {name[language].value}
-        </Link>
-      </Typography>
-    </div>
-  ));
+  const CategoriesView = () => {
+    if (categories) {
+      return categories.map(({ _id, name }) => (
+        <div key={_id}>
+          <Typography variant='subtitle2'>
+            <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+              {name[language].value}
+            </Link>
+          </Typography>
+        </div>
+      ));
+    }
+    return null;
+  };
+
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (
     <div key={item.id}>
       <Typography variant='subtitle2'>
@@ -61,7 +67,7 @@ const FooterLists = ({ language = LANGUAGE }) => {
             {FOOTER_CATALOGS[language].title}
           </Typography>
         </div>
-        {categoriesList}
+        <CategoriesView />
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>

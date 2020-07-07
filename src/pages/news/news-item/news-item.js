@@ -11,7 +11,7 @@ import {
   Avatar
 } from '@material-ui/core';
 import { useStyles } from './news-item.style';
-import { LANGUAGE } from '../../../configs';
+import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
@@ -20,24 +20,22 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
   const styles = useStyles();
   const newsTitle =
     title.length !== 0 ? title[LANGUAGE].value : 'No title provided';
-  const newsImage =
-    image.length !== 0 ? image[0].primary.medium : 'No image provided';
+  const newsImage = image ? image.primary.medium : 'No image provided';
   const newsText =
     text.length !== 0 ? parse(text[LANGUAGE].value) : 'No text provided';
   const newsAuthor =
-    author.length !== 0 ? author.name[LANGUAGE].value : 'No author provided';
-  const newsAuthorAvatar = author.image.small;
+    author.name.length !== 0
+      ? author.name[LANGUAGE].value
+      : 'No author provided';
+  const newsAuthorAvatar = author.image
+    ? author.image.small
+    : 'No author provided';
+
   const newsButtonText = ['читати далі', 'read more...'];
-  const newsDateLANGUAGEOptions = ['ukr-UA', 'en-US'];
-  const dateLANGUAGE = `${newsDateLANGUAGEOptions[LANGUAGE]}`;
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  };
+  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
+  const dateLanguege = `${newsDateLanguegeOptions[LANGUAGE]}`;
   const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, options);
+  const newsDate = dateToShow.toLocaleString(`${dateLanguege}`, TIME_OPTIONS);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
@@ -46,6 +44,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
             className={styles.media}
             image={newsImage}
             title={newsTitle}
+            component='div'
           />
         </div>
         <CardHeader subheader={newsDate} />

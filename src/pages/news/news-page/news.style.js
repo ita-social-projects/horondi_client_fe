@@ -12,5 +12,8 @@ export const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: 'repeat(auto-fit, minmax(25rem, auto))',
     gridColumnGap: '10px',
     justifyContent: 'center'
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1
   }
 }));

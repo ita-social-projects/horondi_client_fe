@@ -1,30 +1,46 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Backdrop } from '@material-ui/core';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
+import LoadingBar from '../../../components/LoadingBar';
 import { LANGUAGE } from '../../../configs';
 
-const NewsPage = ({ getNews, list }) => {
+const NewsPage = () => {
+  const { newslist, loading } = useSelector(({ News }) => ({
+    newslist: News.list,
+    loading: News.loading
+  }));
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getNews();
+    dispatch(getNews());
     window.scrollTo(0, 0);
-  }, [getNews]);
+  }, [dispatch]);
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  const newsItems = list.map(({ _id, date, author, images, title, text }) => (
-    <NewsItem
-      date={date}
-      key={_id}
-      id={_id}
-      author={author}
-      image={images}
-      title={title}
-      text={text}
-    />
-  ));
-
+  if (loading) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
+  const newsItems = newslist.map(
+    ({ _id, date, author, images, title, text }) => (
+      <NewsItem
+        date={date}
+        key={_id}
+        id={_id}
+        author={author}
+        image={images}
+        title={title}
+        text={text}
+      />
+    )
+  );
   return (
     <>
       <h1 className={styles.newsTitle}>{newsHeader[LANGUAGE]}</h1>
@@ -33,11 +49,4 @@ const NewsPage = ({ getNews, list }) => {
   );
 };
 
-const mapStateToProps = ({ News: { list } }) => ({
-  list
-});
-const mapDispatchToProps = {
-  getNews
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage);
+export default NewsPage;

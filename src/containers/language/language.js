@@ -7,12 +7,10 @@ import {
 } from '../../services/localstorage.service';
 import useStyles from './language.styless';
 import { changeLanguage } from '../../redux/language/language.actions';
+import { LANGUAGES_LIST } from '../../configs';
 
 const languageInLocalStorage = JSON.parse(getFromLocalStorage('language')) || 0;
-const languages = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
+
 const Language = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -26,7 +24,7 @@ const Language = () => {
     setToLocalStorage('language', targetValue);
     dispatch(changeLanguage(targetValue));
   };
-  const mappedLanguages = languages.map(({ lang, value }) => (
+  const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
     <MenuItem key={value} value={value}>
       {lang}
     </MenuItem>

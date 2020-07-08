@@ -1,18 +1,20 @@
 import React from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-
+import { useSelector } from 'react-redux';
 import { useStyles } from './Cabinet.styles';
 import NotLoggedCabinet from '../NotLoggedCabinet';
 import LoggedCabinet from '../LoggedCabinet';
 
 const Cabinet = () => {
-  const isLogged = true;
-  const styles = useStyles({ logged: isLogged });
+  const { userData } = useSelector((state) => ({
+    userData: state.User.userData
+  }));
+  const styles = useStyles({ logged: !!userData });
 
   return (
     <div className={styles.cabinet}>
       <PersonOutlineIcon />
-      {isLogged ? <LoggedCabinet /> : <NotLoggedCabinet />}
+      {userData ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>
   );
 };

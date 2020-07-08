@@ -11,21 +11,23 @@ import {
   Avatar
 } from '@material-ui/core';
 import { useStyles } from './news-item.style';
-import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
+import { TIME_OPTIONS } from '../../../configs';
+import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 const NewsItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const language = getFromLocalStorage('language');
   const styles = useStyles();
   const newsTitle =
-    title.length !== 0 ? title[LANGUAGE].value : 'No title provided';
+    title.length !== 0 ? title[language].value : 'No title provided';
   const newsImage = image ? image.primary.medium : 'No image provided';
   const newsText =
-    text.length !== 0 ? parse(text[LANGUAGE].value) : 'No text provided';
+    text.length !== 0 ? parse(text[language].value) : 'No text provided';
   const newsAuthor =
     author.name.length !== 0
-      ? author.name[LANGUAGE].value
+      ? author.name[language].value
       : 'No author provided';
   const newsAuthorAvatar = author.image
     ? author.image.small
@@ -33,7 +35,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
 
   const newsButtonText = ['читати далі', 'read more...'];
   const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
-  const dateLanguege = `${newsDateLanguegeOptions[LANGUAGE]}`;
+  const dateLanguege = `${newsDateLanguegeOptions[language]}`;
   const dateToShow = new Date(parseInt(date));
   const newsDate = dateToShow.toLocaleString(`${dateLanguege}`, TIME_OPTIONS);
   return (
@@ -69,7 +71,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}`}>
             <Button variant='contained' className={styles.newsButton}>
-              {newsButtonText[LANGUAGE]}
+              {newsButtonText[language]}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>

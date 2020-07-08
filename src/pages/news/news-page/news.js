@@ -5,7 +5,7 @@ import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
 import LoadingBar from '../../../components/LoadingBar';
-import { LANGUAGE } from '../../../configs';
+import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 const NewsPage = () => {
   const { newslist, loading } = useSelector(({ News }) => ({
@@ -19,6 +19,7 @@ const NewsPage = () => {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
+  const language = getFromLocalStorage('language');
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
   if (loading) {
@@ -43,7 +44,7 @@ const NewsPage = () => {
   );
   return (
     <>
-      <h1 className={styles.newsTitle}>{newsHeader[LANGUAGE]}</h1>
+      <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>
       <div className={styles.NewsPageItem}>{newsItems}</div>
     </>
   );

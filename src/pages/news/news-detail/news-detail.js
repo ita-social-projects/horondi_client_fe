@@ -13,13 +13,15 @@ import {
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
 import LoadingBar from '../../../components/LoadingBar';
-import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
+import { TIME_OPTIONS } from '../../../configs';
+import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 const NewsDetailPage = ({ match }) => {
   const { article, loading } = useSelector(({ News }) => ({
     article: News.activeArticle,
     loading: News.loading
   }));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,24 +39,24 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
-
+  const language = getFromLocalStorage('language');
   const newsTitle =
     article.title.length !== 0
-      ? article.title[LANGUAGE].value
+      ? article.title[language].value
       : 'No title provided';
   const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
-  const dateLANGUAGE = `${newsDateLanguegeOptions[LANGUAGE]}`;
+  const datelanguage = `${newsDateLanguegeOptions[language]}`;
   const dateToShow = new Date(parseInt(article.date));
-  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, TIME_OPTIONS);
+  const newsDate = dateToShow.toLocaleString(`${datelanguage}`, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
   const newsText =
     article.text.length !== 0
-      ? parse(article.text[LANGUAGE].value)
+      ? parse(article.text[language].value)
       : 'No text provided';
   const newsVideo = article.video;
   const newsAuthor =
     article.author.name.length !== 0
-      ? article.author.name[LANGUAGE].value
+      ? article.author.name[language].value
       : 'No author provided';
   const newsAuthorAvatar = article.author.image
     ? article.author.image.small

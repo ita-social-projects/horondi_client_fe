@@ -44,10 +44,10 @@ const NewsDetailPage = ({ match }) => {
     article.title.length !== 0
       ? article.title[language].value
       : 'No title provided';
-  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
-  const datelanguage = `${newsDateLanguegeOptions[language]}`;
+  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
+  const dateLanguage = `${newsDateLanguageOptions[language]}`;
   const dateToShow = new Date(parseInt(article.date));
-  const newsDate = dateToShow.toLocaleString(`${datelanguage}`, TIME_OPTIONS);
+  const newsDate = dateToShow.toLocaleString(`${dateLanguage}`, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
   const newsText =
     article.text.length !== 0

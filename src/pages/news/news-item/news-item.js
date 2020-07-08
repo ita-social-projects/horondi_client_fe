@@ -34,10 +34,10 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
     : 'No author provided';
 
   const newsButtonText = ['читати далі', 'read more...'];
-  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
-  const dateLanguege = `${newsDateLanguegeOptions[language]}`;
+  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
+  const dateLanguage = `${newsDateLanguageOptions[language]}`;
   const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(`${dateLanguege}`, TIME_OPTIONS);
+  const newsDate = dateToShow.toLocaleString(`${dateLanguage}`, TIME_OPTIONS);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>

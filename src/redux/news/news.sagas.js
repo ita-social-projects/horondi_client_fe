@@ -1,5 +1,7 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import { setNews, setArticle, setLoading } from './news.actions';
+import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 
@@ -40,8 +42,10 @@ function* handleNewsLoad() {
     );
     yield put(setNews(news.data.getAllNews));
     yield put(setLoading(false));
-  } catch (error) {
-    console.log(error); // TODO: handler router redirect(connect router error page)
+  } catch (e) {
+    yield put(setLoading(false));
+    yield setError(e);
+    yield put(push('/error-page'));
   }
 }
 
@@ -82,8 +86,10 @@ function* handleArticleLoad({ payload }) {
     );
     yield put(setArticle(article.data.getNewsById));
     yield put(setLoading(false));
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    yield put(setLoading(false));
+    yield setError(e);
+    yield put(push('/error-page'));
   }
 }
 

@@ -5,10 +5,20 @@ const client = new ApolloClient({
 });
 
 const getItems = (query) =>
-  client.query({
-    query: gql`
-      ${query}
-    `
-  });
+  client
+    .query({
+      query: gql`
+        ${query}
+      `
+    })
+    .then(
+      (res) =>
+        // const result = {
+        //     data: {},
+        //     error: ['Seems like our server has some problems']
+        // }
+        //     throw new Error(result.error[0]);
+        res
+    );
 
 export default getItems;

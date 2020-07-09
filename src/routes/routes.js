@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import NewsPage from 'src/pages/news/news-page';
-import Home from 'src/pages/home';
-import AboutUs from 'src/pages/about-us/index.js';
-import NewsDetailPage from 'src/pages/news-detail/index.js';
+
+import NewsPage from '../pages/news/news-page';
+import Home from '../pages/home';
+import AboutUs from '../pages/about-us';
+import NewsDetailPage from '../pages/news-detail';
 import { useStyles } from './routes.style.js';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';

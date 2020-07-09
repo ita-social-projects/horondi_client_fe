@@ -66,6 +66,7 @@ const FooterLists = ({ language = LANGUAGE }) => {
           {item.item}
         </a>
       </Typography>
+      <Typography variant='subtitle2'>{item.item}</Typography>
     </div>
   ));
   return (
@@ -93,6 +94,18 @@ const FooterLists = ({ language = LANGUAGE }) => {
           </Typography>
         </div>
         {contactsList}
+        <div key={FOOTER_CONTACTS[language].map.id}>
+          <Typography variant='subtitle2'>
+            <a
+              className={styles.cardLink}
+              target='_blank'
+              href={FOOTER_CONTACTS[language].map.url}
+              rel='noopener noreferrer'
+            >
+              {FOOTER_CONTACTS[language].map.item}
+            </a>
+          </Typography>
+        </div>
       </div>
     </div>
   );

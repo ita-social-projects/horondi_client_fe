@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const getItems = (query) => {
   axios.post(
-    'http://localhost:5000/graphql',
+    'http://localhost:5000',
     { query },
     { headers: { 'Content-Type': 'application/json' } }
   );
@@ -10,7 +10,7 @@ const getItems = (query) => {
 
 export function sendItems(mutation) {
   return axios.post(
-    'http://localhost:5000/graphql',
+    'http://localhost:5000',
     { query: mutation },
     { headers: { 'Content-Type': 'application/json' } }
   );

@@ -8,10 +8,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from '../logged-cabinet/logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
-import { LANGUAGE, CABINET_OPTIONS_NOT_LOGGED } from '../../configs';
+import { CABINET_OPTIONS_NOT_LOGGED } from '../../configs';
 
 const NotLoggedCabinet = () => {
-  const lightMode = useSelector(({ Theme }) => Theme.lightMode);
+  const { lightMode, language } = useSelector(({ Theme, Language }) => ({
+    lightMode: Theme.lightMode,
+    language: Language.language
+  }));
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -26,17 +29,17 @@ const NotLoggedCabinet = () => {
       <li>
         <Link to='/wishlist' className={styles.link}>
           <FavoriteIcon />
-          <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].wishlist}</span>
+          <span>{CABINET_OPTIONS_NOT_LOGGED[language].wishlist}</span>
         </Link>
       </li>
       <li onClick={changeTheme}>
         {themeIcon}
-        <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].changeTheme}</span>
+        <span>{CABINET_OPTIONS_NOT_LOGGED[language].changeTheme}</span>
       </li>
       <li>
         <Link to='/login' className={styles.link}>
           <ExitToAppIcon />
-          <span>{CABINET_OPTIONS_NOT_LOGGED[LANGUAGE].logIn}</span>
+          <span>{CABINET_OPTIONS_NOT_LOGGED[language].logIn}</span>
         </Link>
       </li>
     </ul>

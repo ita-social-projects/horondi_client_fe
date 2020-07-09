@@ -7,15 +7,15 @@ const initialState = {
 
 const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CATEGORIES:
-      return {
-        ...state,
-        list: action.payload,
-        loading: false
-      };
+  case SET_CATEGORIES:
+    return {
+      ...state,
+      list: action.payload,
+      loading: false
+    };
 
-    default:
-      return state;
+  default:
+    return state;
   }
 };
 

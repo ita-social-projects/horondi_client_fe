@@ -23,13 +23,13 @@ const initialState = {
 
 const newsDetailReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ARTICLE:
-      return {
-        ...state,
-        item: action.payload
-      };
-    default:
-      return state;
+  case SET_ARTICLE:
+    return {
+      ...state,
+      item: action.payload
+    };
+  default:
+    return state;
   }
 };
 

@@ -30,7 +30,7 @@ export const CABINET_OPTIONS_NOT_LOGGED = {
     logIn: 'Увійти'
   },
   1: {
-    wishlist: 'Wishlist',
+    wishlist: 'Wish list',
     changeTheme: 'Change theme',
     logIn: 'Log in'
   }
@@ -56,7 +56,7 @@ export const CABINET_OPTIONS_LOGGED = {
   },
   1: {
     profile: 'Profile',
-    wishlist: 'Wishlist',
+    wishlist: 'Wish list',
     changeTheme: 'Change theme',
     logOut: 'Log out'
   }

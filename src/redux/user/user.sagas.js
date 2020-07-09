@@ -1,7 +1,28 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { setUser, setError } from './user.actions';
-import loginUser from '../../services/loginUser';
 import { LOGIN_USER } from './user.types';
+import { setItems } from '../../utils/client';
+
+const loginUser = (user) => {
+  const { email, password } = user;
+  const query = ` 
+  mutation {
+  loginUser(
+    user: {
+      email: "${email}"
+      password: "${password}"
+    }
+  ) {
+    purchasedProducts
+    orders
+    cart
+    token
+    id
+  }
+}
+  `;
+  return setItems(query);
+};
 
 function* handleUserLoad({ payload }) {
   try {
@@ -10,7 +31,7 @@ function* handleUserLoad({ payload }) {
       yield put(setError(true));
     } else {
       yield put(setError(false));
-      yield put(setUser(user.data.data.loginUser));
+      yield put(setUser(user.data.loginUser));
     }
   } catch (error) {
     console.log(error);

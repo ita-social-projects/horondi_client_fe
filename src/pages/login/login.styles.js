@@ -210,11 +210,11 @@ export const createLoginStyles = (theme) =>
       height: '22px',
       marginRight: '10px'
     },
-    registrContainer: {
+    registerContainer: {
       width: '100%',
       minHeight: '18px'
     },
-    registrBtn: {
+    registerBtn: {
       float: 'right',
       fontSize: '14px',
       color: theme.registrBtn.color,

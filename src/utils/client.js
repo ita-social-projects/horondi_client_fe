@@ -15,4 +15,11 @@ const getItems = (query) =>
     `
   });
 
+export const setItems = (query) =>
+  client.mutate({
+    mutation: gql`
+      ${query}
+    `
+  });
+
 export default getItems;

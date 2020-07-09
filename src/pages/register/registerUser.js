@@ -1,4 +1,4 @@
-import { sendItems } from './getItems';
+import { setItems } from '../../utils/client';
 
 const registerUser = (user) => {
   const { firstName, lastName, email, password } = user;
@@ -16,7 +16,7 @@ const registerUser = (user) => {
   }
   }
   `;
-  return sendItems(query);
+  return setItems(query);
 };
 
 export default registerUser;

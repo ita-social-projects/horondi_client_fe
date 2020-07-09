@@ -184,7 +184,7 @@ const Login = ({ history }) => {
                 {label}
               </Button>
               <p className={styles.loginError}>
-                {showError && shouldValidate
+                {showError && shouldValidate && loginError === true
                   ? LOGIN_USER_ERROR[language].value
                   : ''}
               </p>
@@ -196,8 +196,8 @@ const Login = ({ history }) => {
               <span className={styles.googleLogo} />
               Google
             </Button>
-            <div className={styles.registrContainer}>
-              <Link to='/register' className={styles.registrBtn}>
+            <div className={styles.registerContainer}>
+              <Link to='/register' className={styles.registerBtn}>
                 {REGISTER_PROPOSAL[language].value}
               </Link>
             </div>

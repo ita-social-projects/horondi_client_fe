@@ -22,9 +22,9 @@ import {
   defaultTheme,
   darkTheme
 } from './register.styles';
-import registerUser from '../../services/registerUser';
-import info from '../../images/information.png';
-import infoLight from '../../images/info-light.png';
+import registerUser from './registerUser';
+import infoImg from '../../images/information.png';
+import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 
 function Register({ history }) {
@@ -222,7 +222,7 @@ function Register({ history }) {
     <form className={styles.registerForm}>
       <div>
         <img
-          src={theme.inputTextColor.color === 'white' ? infoLight : info}
+          src={theme.inputTextColor.color === 'white' ? infoLightImg : infoImg}
           alt='info'
           className={styles.infoLogo}
         />

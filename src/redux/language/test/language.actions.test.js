@@ -1,5 +1,5 @@
-import { changeLanguage } from '../../src/redux/language/language.actions';
-import { CHANGE_LANGUAGE } from '../../src/redux/language/language.types';
+import { changeLanguage } from '../language.actions';
+import { CHANGE_LANGUAGE } from '../language.types';
 
 describe('test action', () => {
   test('should return default payload', () => {

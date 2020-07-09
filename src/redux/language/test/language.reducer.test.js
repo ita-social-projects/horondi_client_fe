@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
-import languageReducer, {
-  initialState
-} from '../../src/redux/language/language.reducer';
+import languageReducer, { initialState } from '../language.reducer';
 
 describe('test language reducer', () => {
   test('should return default state', () => {

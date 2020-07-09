@@ -14,10 +14,14 @@ const languageInLocalStorage = getFromLocalStorage('language') || 0;
 const Language = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
+
   dispatch(changeLanguage(languageInLocalStorage));
 
   const handleChange = (e) => {
     const targetValue = e.target.value;
+    if (targetValue === undefined) {
+      return;
+    }
     setToLocalStorage('language', targetValue);
     dispatch(changeLanguage(targetValue));
   };
@@ -31,7 +35,7 @@ const Language = () => {
       <Select
         className={styles.rootSelect}
         defaultValue={languageInLocalStorage}
-        onClick={handleChange}
+        onChange={handleChange}
       >
         {mappedLanguages}
       </Select>

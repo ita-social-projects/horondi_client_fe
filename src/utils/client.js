@@ -1,7 +1,12 @@
 import ApolloClient, { gql } from 'apollo-boost';
 
+export const REACT_APP_API_URL =
+  window.env && window.env.REACT_APP_API_URL
+    ? window.env.REACT_APP_API_URL
+    : process.env.REACT_APP_API_URL;
+
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_BASE_URI
+  uri: REACT_APP_API_URL
 });
 
 const getItems = (query) =>
@@ -11,14 +16,11 @@ const getItems = (query) =>
         ${query}
       `
     })
-    .then(
-      (res) =>
-        // const result = {
-        //     data: {},
-        //     error: ['Seems like our server has some problems']
-        // }
-        //     throw new Error(result.error[0]);
-        res
+    .then((response) => 
+      // if(response.error.length > 0) {
+      //     throw new Error(response.error[0]);
+      // }
+      response
     );
 
 export default getItems;

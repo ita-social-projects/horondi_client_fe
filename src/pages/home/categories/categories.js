@@ -15,17 +15,17 @@ const Categories = () => {
   const styles = useStyles();
 
   const CategoriesView = () => {
-    if (categories) {
-      return categories.map(({ _id, name, images, categoryCode }) => (
-        <CategoryItem
-          key={_id}
-          categoryCode={categoryCode}
-          categoryName={name[LANGUAGE].value}
-          categoryImage={images.large}
-        />
-      ));
+    if (!categories) {
+      return null;
     }
-    return null;
+    return categories.map(({ _id, name, images, categoryCode }) => (
+      <CategoryItem
+        key={_id}
+        categoryCode={categoryCode}
+        categoryName={name[LANGUAGE].value}
+        categoryImage={images.large}
+      />
+    ));
   };
 
   return (

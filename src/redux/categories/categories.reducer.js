@@ -7,19 +7,18 @@ const initialState = {
 
 const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CATEGORIES:
-      return {
-        ...state,
-        list: action.payload,
-        loading: false
-      };
-    case SET_CATEGORIES_LOADING:
-      return {
-        ...state,
-        loading: action.payload
-      };
-    default:
-      return state;
+  case SET_CATEGORIES:
+    return {
+      ...state,
+      list: action.payload
+    };
+  case SET_CATEGORIES_LOADING:
+    return {
+      ...state,
+      loading: action.payload
+    };
+  default:
+    return state;
   }
 };
 

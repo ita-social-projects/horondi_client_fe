@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './navbar-left.styles';
 
-import { LOGO, LANGUAGE, URL_LANGUAGE } from '../../configs';
+import { LOGO, URL_LANGUAGE } from '../../configs';
 
 const NavbarLeft = () => {
-  const { categories } = useSelector(({ Categories }) => ({
-    categories: Categories.list
+  const { categories, language } = useSelector(({ Categories, Language }) => ({
+    categories: Categories.list,
+    language: Language.language
   }));
   const styles = useStyles();
 
@@ -25,14 +26,14 @@ const NavbarLeft = () => {
   };
 
   const CategoriesView = () => {
-    if (categories) {
-      return categories.map(({ _id, name }) => (
-        <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
-          {name[LANGUAGE].value}
-        </Link>
-      ));
+    if (!categories) {
+      return null;
     }
-    return null;
+    return categories.map(({ _id, name }) => (
+      <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
+        {name[language].value}
+      </Link>
+    ));
   };
 
   return (

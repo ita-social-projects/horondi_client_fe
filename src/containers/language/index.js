@@ -1,3 +1,3 @@
 import Language from './language';
 
-export { Language };
+export default Language;

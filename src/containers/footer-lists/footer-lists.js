@@ -30,18 +30,18 @@ const FooterLists = ({ language = LANGUAGE }) => {
   };
 
   const CategoriesView = () => {
-    if (categories) {
-      return categories.map(({ _id, name }) => (
-        <div key={_id}>
-          <Typography variant='subtitle2'>
-            <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
-              {name[language].value}
-            </Link>
-          </Typography>
-        </div>
-      ));
+    if (!categories) {
+      return null;
     }
-    return null;
+    return categories.map(({ _id, name }) => (
+      <div key={_id}>
+        <Typography variant='subtitle2'>
+          <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+            {name[language].value}
+          </Link>
+        </Typography>
+      </div>
+    ));
   };
 
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (

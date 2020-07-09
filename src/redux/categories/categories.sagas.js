@@ -5,7 +5,7 @@ import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_CATEGORIES } from './categories.types';
 
-function* handleCategoriesLoad() {
+export function* handleCategoriesLoad() {
   yield put(setCategoriesLoading(true));
   const query = `query {
                    getAllCategories {

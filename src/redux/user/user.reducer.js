@@ -5,7 +5,7 @@ const initialState = {
   error: null
 };
 
-const userReducer = (action, state = initialState) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
   case SET_USER:
     return {

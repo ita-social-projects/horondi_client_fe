@@ -44,7 +44,7 @@ function* handleNewsLoad() {
     yield put(setLoading(false));
   } catch (e) {
     yield put(setLoading(false));
-    yield setError(e);
+    yield put(setError({ e }));
     yield put(push('/error-page'));
   }
 }
@@ -88,7 +88,7 @@ function* handleArticleLoad({ payload }) {
     yield put(setLoading(false));
   } catch (e) {
     yield put(setLoading(false));
-    yield setError(e);
+    yield put(setError({ e }));
     yield put(push('/error-page'));
   }
 }

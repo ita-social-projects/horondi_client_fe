@@ -10,17 +10,10 @@ const client = new ApolloClient({
 });
 
 const getItems = (query) =>
-  client
-    .query({
-      query: gql`
-        ${query}
-      `
-    })
-    .then((response) => 
-      // if(response.error.length > 0) {
-      //     throw new Error(response.error[0]);
-      // }
-      response
-    );
+  client.query({
+    query: gql`
+      ${query}
+    `
+  });
 
 export default getItems;

@@ -19,11 +19,10 @@ const Language = () => {
 
   const handleChange = (e) => {
     const targetValue = e.target.value;
-    if (targetValue === undefined) {
-      return;
+    if (targetValue !== undefined) {
+      setToLocalStorage('language', targetValue);
+      dispatch(changeLanguage(targetValue));
     }
-    setToLocalStorage('language', targetValue);
-    dispatch(changeLanguage(targetValue));
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
     <MenuItem id={`language${value + 1}`} key={value} value={value}>

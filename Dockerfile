@@ -1,7 +1,10 @@
 # build environment
 FROM node:13.12.0-alpine as build
+RUN apk add git openssh-client
 WORKDIR /app
 COPY package.json ./
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN --mount=type=ssh,id=github npm install
 RUN npm i
 COPY . ./
 RUN npm run build

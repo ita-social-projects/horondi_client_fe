@@ -25,6 +25,7 @@
     "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "graphql": "^15.1.0",
     "html-react-parser": "^0.13.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-customer-chat": "^1.0.2",

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Card,
   CardMedia,
@@ -35,9 +36,9 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
 
   const newsButtonText = ['читати далі', 'read more...'];
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
-  const dateLanguage = `${newsDateLanguageOptions[language]}`;
+  const dateLanguage = newsDateLanguageOptions[language];
   const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(`${dateLanguage}`, TIME_OPTIONS);
+  const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
@@ -87,5 +88,56 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
       </Card>
     </div>
   );
+};
+
+const primaryShape = PropTypes.shape({
+  medium: PropTypes.string
+});
+
+const valueShape = PropTypes.shape({
+  value: PropTypes.string
+});
+
+NewsItem.propTypes = {
+  date: PropTypes.string,
+  id: PropTypes.string,
+  text: PropTypes.arrayOf(valueShape),
+  title: PropTypes.arrayOf(valueShape),
+  image: PropTypes.shape({
+    additional: PropTypes.arrayOf(primaryShape),
+    primary: primaryShape
+  }),
+  author: PropTypes.shape({
+    image: PropTypes.shape({
+      small: PropTypes.string
+    }),
+    name: PropTypes.arrayOf(
+      PropTypes.shape({
+        lang: PropTypes.string,
+        value: PropTypes.string
+      })
+    )
+  })
+};
+NewsItem.defaultProps = {
+  date: PropTypes.string,
+  id: PropTypes.string,
+  text: PropTypes.arrayOf(valueShape),
+  title: PropTypes.arrayOf(valueShape),
+  image: PropTypes.shape({
+    additional: PropTypes.arrayOf(primaryShape),
+    primary: primaryShape
+  }),
+  author: PropTypes.shape({
+    image: PropTypes.shape({
+      small: PropTypes.string
+    }),
+    name: PropTypes.arrayOf(
+      PropTypes.shape({
+        lang: PropTypes.string,
+        value: PropTypes.string
+      })
+    )
+  })
 };
 export default NewsItem;

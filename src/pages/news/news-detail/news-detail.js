@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
 import {
   Card,
   Typography,
@@ -45,9 +46,9 @@ const NewsDetailPage = ({ match }) => {
       ? article.title[language].value
       : 'No title provided';
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
-  const dateLanguage = `${newsDateLanguageOptions[language]}`;
+  const dateLanguage = newsDateLanguageOptions[language];
   const dateToShow = new Date(parseInt(article.date));
-  const newsDate = dateToShow.toLocaleString(`${dateLanguage}`, TIME_OPTIONS);
+  const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
   const newsText =
     article.text.length !== 0
@@ -116,5 +117,14 @@ const NewsDetailPage = ({ match }) => {
     </Card>
   );
 };
+
+NewsDetailPage.propTypes.shape({
+  isExact: PropTypes.string,
+  params: PropTypes.shape({
+    id: PropTypes.string
+  }),
+  path: PropTypes.string,
+  url: PropTypes.string
+});
 
 export default withRouter(NewsDetailPage);

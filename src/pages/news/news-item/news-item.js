@@ -98,7 +98,7 @@ const valueShape = PropTypes.shape({
   value: PropTypes.string
 });
 
-NewsItem.propTypes = {
+const newsItemPropTypes = {
   date: PropTypes.string,
   id: PropTypes.string,
   text: PropTypes.arrayOf(valueShape),
@@ -119,25 +119,7 @@ NewsItem.propTypes = {
     )
   })
 };
-NewsItem.defaultProps = {
-  date: PropTypes.string,
-  id: PropTypes.string,
-  text: PropTypes.arrayOf(valueShape),
-  title: PropTypes.arrayOf(valueShape),
-  image: PropTypes.shape({
-    additional: PropTypes.arrayOf(primaryShape),
-    primary: primaryShape
-  }),
-  author: PropTypes.shape({
-    image: PropTypes.shape({
-      small: PropTypes.string
-    }),
-    name: PropTypes.arrayOf(
-      PropTypes.shape({
-        lang: PropTypes.string,
-        value: PropTypes.string
-      })
-    )
-  })
-};
+
+NewsItem.propTypes = newsItemPropTypes;
+NewsItem.defaultProps = newsItemPropTypes;
 export default NewsItem;

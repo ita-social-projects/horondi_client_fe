@@ -118,13 +118,16 @@ const NewsDetailPage = ({ match }) => {
   );
 };
 
-NewsDetailPage.propTypes.shape({
-  isExact: PropTypes.string,
+NewsDetailPage.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.string
-  }),
-  path: PropTypes.string,
-  url: PropTypes.string
-});
+  })
+};
+
+NewsDetailPage.defaultProps = {
+  params: PropTypes.shape({
+    id: PropTypes.string
+  })
+};
 
 export default withRouter(NewsDetailPage);

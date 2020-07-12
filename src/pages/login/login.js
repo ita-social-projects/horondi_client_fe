@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Button, ThemeProvider, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ import {
 } from '../../configs';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
+import LoadingBar from '../../components/LoadingBar/LoadingBar';
 
 const Login = ({ history }) => {
   // VALUES
@@ -72,9 +73,10 @@ const Login = ({ history }) => {
   };
 
   // HOOKS
-  const { loginError, isLightTheme } = useSelector((state) => ({
+  const { loginError, isLightTheme, userLoading } = useSelector((state) => ({
     loginError: state.User.error,
-    isLightTheme: state.Theme.lightMode
+    isLightTheme: state.Theme.lightMode,
+    userLoading: state.User.userLoading
   }));
 
   const dispatch = useDispatch();
@@ -114,93 +116,101 @@ const Login = ({ history }) => {
       <div className={styles.login}>
         <div className={styles.loginWrapper}>
           <form className={styles.loginForm}>
-            <h2 className={styles.heading}>
-              {LOGIN_FORM_LABEL[language].value}
-            </h2>
-            <TextField
-              InputLabelProps={{
-                style: {
-                  color: theme.inputLabelColor.color
-                }
-              }}
-              InputProps={{
-                style: {
-                  color: theme.inputTextColor.color
-                },
-                classes: {
-                  notchedOutline: styles.notchedOutline
-                }
-              }}
-              color='secondary'
-              label={emailLabel}
-              className={styles.emailInput}
-              fullWidth
-              variant='outlined'
-              type='text'
-              name='email'
-              value={email}
-              error={!email && shouldValidate}
-              required
-              onChange={(e) =>
-                handleChange(e, setEmailValidated, formRegExp.email)
-              }
-            />
-            <TextField
-              InputLabelProps={{
-                style: {
-                  color: theme.inputLabelColor.color
-                }
-              }}
-              label={passwordLabel}
-              className={styles.passwordInput}
-              fullWidth
-              variant='outlined'
-              type='password'
-              InputProps={endAdornment(
-                showPassword,
-                setShowPassword,
-                theme.inputTextColor.color,
-                styles.notchedOutline
-              )}
-              name='password'
-              value={password}
-              error={!password && shouldValidate}
-              required
-              onChange={(e) =>
-                handleChange(e, setPasswordValidated, formRegExp.password)
-              }
-            />
-            <div className={styles.recoveryContainer}>
-              <Link to='/recovery' className={styles.recoveryBtn}>
-                {FORGOT_PASSWORD[language].value}
-              </Link>
-            </div>
-            <div className={styles.loginGroup}>
-              <Button
-                className={styles.loginBtn}
-                fullWidth
-                onClick={handleLogin}
-              >
-                {label}
-              </Button>
-              <p className={styles.loginError}>
-                {showError && shouldValidate && loginError === true
-                  ? LOGIN_USER_ERROR[language].value
-                  : ''}
-              </p>
-            </div>
-            <div className={styles.orContainer}>
-              <span className={styles.orText}>{OR_TEXT[language].value}</span>
-            </div>
-            <Button className={styles.googleBtn} fullWidth>
-              <span className={styles.googleLogo} />
-              Google
-            </Button>
-            <div className={styles.registerContainer}>
-              <Link to='/register' className={styles.registerBtn}>
-                {REGISTER_PROPOSAL[language].value}
-              </Link>
-            </div>
+            {userLoading ? (
+              <LoadingBar />
+            ) : (
+              <>
+                <h2 className={styles.heading}>
+                  {LOGIN_FORM_LABEL[language].value}
+                </h2>
+                <TextField
+                  InputLabelProps={{
+                    style: {
+                      color: theme.inputLabelColor.color
+                    }
+                  }}
+                  InputProps={{
+                    style: {
+                      color: theme.inputTextColor.color
+                    },
+                    classes: {
+                      notchedOutline: styles.notchedOutline
+                    }
+                  }}
+                  color='secondary'
+                  label={emailLabel}
+                  className={styles.emailInput}
+                  fullWidth
+                  variant='outlined'
+                  type='text'
+                  name='email'
+                  value={email}
+                  error={!email && shouldValidate}
+                  required
+                  onChange={(e) =>
+                    handleChange(e, setEmailValidated, formRegExp.email)
+                  }
+                />
+                <TextField
+                  InputLabelProps={{
+                    style: {
+                      color: theme.inputLabelColor.color
+                    }
+                  }}
+                  label={passwordLabel}
+                  className={styles.passwordInput}
+                  fullWidth
+                  variant='outlined'
+                  type='password'
+                  InputProps={endAdornment(
+                    showPassword,
+                    setShowPassword,
+                    theme.inputTextColor.color,
+                    styles.notchedOutline
+                  )}
+                  name='password'
+                  value={password}
+                  error={!password && shouldValidate}
+                  required
+                  onChange={(e) =>
+                    handleChange(e, setPasswordValidated, formRegExp.password)
+                  }
+                />
+                <div className={styles.recoveryContainer}>
+                  <Link to='/recovery' className={styles.recoveryBtn}>
+                    {FORGOT_PASSWORD[language].value}
+                  </Link>
+                </div>
+                <div className={styles.loginGroup}>
+                  <Button
+                    className={styles.loginBtn}
+                    fullWidth
+                    onClick={handleLogin}
+                  >
+                    {label}
+                  </Button>
+                  <p className={styles.loginError}>
+                    {showError && shouldValidate && loginError === true
+                      ? LOGIN_USER_ERROR[language].value
+                      : ''}
+                  </p>
+                </div>
+                <div className={styles.orContainer}>
+                  <span className={styles.orText}>
+                    {OR_TEXT[language].value}
+                  </span>
+                </div>
+                <Button className={styles.googleBtn} fullWidth>
+                  <span className={styles.googleLogo} />
+                  Google
+                </Button>
+                <div className={styles.registerContainer}>
+                  <Link to='/register' className={styles.registerBtn}>
+                    {REGISTER_PROPOSAL[language].value}
+                  </Link>
+                </div>
+              </>
+            )}
           </form>
         </div>
       </div>

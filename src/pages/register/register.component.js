@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -26,6 +26,7 @@ import registerUser from './registerUser';
 import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
+import LoadingBar from '../../components/LoadingBar/LoadingBar';
 
 function Register({ history }) {
   // VALIDATED && CONFIRMED
@@ -66,17 +67,13 @@ function Register({ history }) {
     setShouldValidate(true);
     if (allFieldsValidated) {
       try {
-        const response = await registerUser(user);
-        if (response.data.errors) {
-          setRegisterError(response.data.errors[0].message);
-        } else {
-          setHasRegistered(true);
-          setTimeout(() => {
-            history.push('/login');
-          }, SHOW_AFTER);
-        }
+        setLoading(true);
+        await registerUser(user);
+        setHasRegistered(true);
+        setLoading(false);
       } catch (e) {
-        console.error(e);
+        setRegisterError(e.message.replace('GraphQL error: ', ''));
+        setLoading(false);
       }
     }
   };
@@ -94,6 +91,7 @@ function Register({ history }) {
 
   // USERFIELD DATA
   const { firstName, lastName, confirmPassword, email, password } = user;
+  const [loading, setLoading] = useState(false);
 
   // HOOKS
   const { isLightTheme } = useSelector((state) => ({
@@ -101,6 +99,7 @@ function Register({ history }) {
   }));
 
   useEffect(() => {
+    // VALID FIELDS
     if (
       firstNameValidated &&
       lastNameValidated &&
@@ -112,11 +111,13 @@ function Register({ history }) {
     } else {
       setAllFieldsValidated(false);
     }
+    // FIELDS NOT EMPTY
     if (Object.values(user).every((val) => val !== '')) {
       setAllFieldsSet(true);
     } else {
       setAllFieldsSet(false);
     }
+    // THEME
     if (isLightTheme) {
       setTheme(lightTheme);
     } else {
@@ -128,6 +129,12 @@ function Register({ history }) {
     } else {
       setIsConfirmedPassword(false);
     }
+    // HAS REGISTERED
+    if (hasRegistered) {
+      setTimeout(() => {
+        history.push('/login');
+      }, SHOW_AFTER);
+    }
   }, [
     firstNameValidated,
     lastNameValidated,
@@ -138,7 +145,9 @@ function Register({ history }) {
     allFieldsSet,
     isLightTheme,
     password,
-    confirmPassword
+    confirmPassword,
+    hasRegistered,
+    history
   ]);
 
   // STYLES
@@ -239,69 +248,77 @@ function Register({ history }) {
             successWindow
           ) : (
             <form className={styles.registerForm}>
-              <h2 className={styles.heading}>
-                {REGISTER_FORM_LABEL[language].value}
-              </h2>
-              {Object.values(userFields).map(
-                ({
-                  inputName,
-                  errorMessage,
-                  value,
-                  onChange,
-                  validation,
-                  type,
-                  InputProps = null,
-                  regExp = null
-                }) => (
-                  <TextField
-                    InputLabelProps={{
-                      style: {
-                        color: theme.inputLabelColor.color
-                      }
-                    }}
-                    InputProps={{
-                      style: { color: theme.inputTextColor.color },
-                      classes: {
-                        notchedOutline: styles.notchedOutline
-                      },
-                      endAdornment: InputProps && InputProps.endAdornment
-                    }}
-                    required
-                    key={placeholders[inputName][language].value}
-                    label={placeholders[inputName][language].value}
-                    variant='outlined'
-                    name={inputName}
-                    fullWidth
-                    error={!validation.value && shouldValidate}
-                    helperText={
-                      !validation.value && shouldValidate
-                        ? `${errorMessage}`
-                        : ''
-                    }
-                    className={`${styles.dataInput} ${
-                      inputName === 'email' ? styles.afterText : ''
-                    }`}
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
-                  />
-                )
+              {loading ? (
+                <LoadingBar />
+              ) : (
+                <>
+                  <h2 className={styles.heading}>
+                    {REGISTER_FORM_LABEL[language].value}
+                  </h2>
+                  {Object.values(userFields).map(
+                    ({
+                      inputName,
+                      errorMessage,
+                      value,
+                      onChange,
+                      validation,
+                      type,
+                      InputProps = null,
+                      regExp = null
+                    }) => (
+                      <TextField
+                        InputLabelProps={{
+                          style: {
+                            color: theme.inputLabelColor.color
+                          }
+                        }}
+                        InputProps={{
+                          style: { color: theme.inputTextColor.color },
+                          classes: {
+                            notchedOutline: styles.notchedOutline
+                          },
+                          endAdornment: InputProps && InputProps.endAdornment
+                        }}
+                        required
+                        key={placeholders[inputName][language].value}
+                        label={placeholders[inputName][language].value}
+                        variant='outlined'
+                        name={inputName}
+                        fullWidth
+                        error={!validation.value && shouldValidate}
+                        helperText={
+                          !validation.value && shouldValidate
+                            ? `${errorMessage}`
+                            : ''
+                        }
+                        className={`${styles.dataInput} ${
+                          inputName === 'email' ? styles.afterText : ''
+                        }`}
+                        onChange={(e) =>
+                          onChange(e, validation.setValid, regExp)
+                        }
+                        value={value}
+                        type={type}
+                      />
+                    )
+                  )}
+                  <div className={styles.registerGroup}>
+                    <Button
+                      className={styles.registerBtn}
+                      fullWidth
+                      onClick={handleRegister}
+                    >
+                      {REGISTER_FORM_LABEL[language].value}
+                    </Button>
+                    <p className={styles.registerError}>{registerError}</p>
+                  </div>
+                  <div>
+                    <Link to='/login' className={styles.loginBtn}>
+                      {LOGIN_FORM_LABEL[language].value}
+                    </Link>
+                  </div>
+                </>
               )}
-              <div className={styles.registerGroup}>
-                <Button
-                  className={styles.registerBtn}
-                  fullWidth
-                  onClick={handleRegister}
-                >
-                  {REGISTER_FORM_LABEL[language].value}
-                </Button>
-                <p className={styles.registerError}>{registerError}</p>
-              </div>
-              <div>
-                <Link to='/login' className={styles.loginBtn}>
-                  {LOGIN_FORM_LABEL[language].value}
-                </Link>
-              </div>
             </form>
           )}
         </div>

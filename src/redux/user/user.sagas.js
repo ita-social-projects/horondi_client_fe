@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { setUser, setError } from './user.actions';
+import { setUser, setError, userLoading } from './user.actions';
 import { LOGIN_USER } from './user.types';
 import { setItems } from '../../utils/client';
 
@@ -26,15 +26,12 @@ const loginUser = (user) => {
 
 function* handleUserLoad({ payload }) {
   try {
+    yield put(userLoading());
     const user = yield call(loginUser, payload);
-    if (user.data.errors) {
-      yield put(setError(true));
-    } else {
-      yield put(setError(false));
-      yield put(setUser(user.data.loginUser));
-    }
+    yield put(setUser(user.data.loginUser));
   } catch (error) {
     console.log(error);
+    yield put(setError(true));
   }
 }
 

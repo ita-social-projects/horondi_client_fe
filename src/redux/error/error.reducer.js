@@ -1,4 +1,4 @@
-import { SET_ERROR, CLEAR_ERROR } from './error.types';
+import { SET_ERROR } from './error.types';
 
 const initialState = {
   error: null
@@ -10,11 +10,6 @@ const errorReducer = (state = initialState, action) => {
     return {
       ...state,
       error: action.payload
-    };
-  case CLEAR_ERROR:
-    return {
-      ...state,
-      error: null
     };
   default:
     return state;

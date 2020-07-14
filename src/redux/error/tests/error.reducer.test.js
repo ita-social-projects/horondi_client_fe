@@ -1,5 +1,5 @@
 import errorReducer from '../error.reducer';
-import { SET_ERROR, CLEAR_ERROR } from '../error.types';
+import { SET_ERROR } from '../error.types';
 
 describe('error.reducer test', () => {
   let initialState;
@@ -35,28 +35,5 @@ describe('error.reducer test', () => {
     };
 
     expect(errorReducer(initialState, newError)).toEqual(result);
-  });
-
-  it('should clear error', () => {
-    const currentState = {
-      error: {
-        errors: [
-          {
-            lang: 'ua',
-            value: 'Категорій не знайдено'
-          },
-          {
-            lang: 'en',
-            value: 'Categories not found'
-          }
-        ]
-      }
-    };
-
-    const clearError = {
-      type: CLEAR_ERROR
-    };
-
-    expect(errorReducer(currentState, clearError)).toEqual(initialState);
   });
 });

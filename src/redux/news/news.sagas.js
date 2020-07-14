@@ -43,9 +43,7 @@ function* handleNewsLoad() {
     yield put(setNews(news.data.getAllNews));
     yield put(setLoading(false));
   } catch (e) {
-    yield put(setLoading(false));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleNewsError, e);
   }
 }
 
@@ -87,10 +85,14 @@ function* handleArticleLoad({ payload }) {
     yield put(setArticle(article.data.getNewsById));
     yield put(setLoading(false));
   } catch (e) {
-    yield put(setLoading(false));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleNewsError, e);
   }
+}
+
+function* handleNewsError(e) {
+  yield put(setLoading(false));
+  yield put(setError({ e }));
+  yield put(push('/error-page'));
 }
 
 export default function* newsSaga() {

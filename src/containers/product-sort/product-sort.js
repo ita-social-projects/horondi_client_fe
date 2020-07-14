@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NativeSelect, TextField } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 import useStyles from './product-sort.styles';
 
+const ITEMS_PER_PAGE = [9, 18, 30];
 const SORT_BY_TEXT = [
   { lang: 'uk', value: 'Сортувати за:' },
   { lang: 'eng', value: 'Sort by:' }
@@ -13,7 +14,7 @@ const SORT_BY_SELECT_OPTIONS = [
     name: 'sortDesc',
     lang: [
       { lang: 'uk', value: 'від дорогих до дешевих' },
-      { lang: 'eng', value: 'price(high to low)' }
+      { lang: 'eng', value: 'price (high to low) ' }
     ],
     value: -1
   },
@@ -21,7 +22,7 @@ const SORT_BY_SELECT_OPTIONS = [
     name: 'sortAsc',
     lang: [
       { lang: 'uk', value: 'від дешевих до дорогих' },
-      { lang: 'eng', value: 'price(low to high)' }
+      { lang: 'eng', value: 'price (low to high) ' }
     ],
     value: 1
   },
@@ -50,28 +51,33 @@ const ProductSort = () => {
 
   const sortByText = SORT_BY_TEXT[language].value;
 
-  const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, value }, index) => (
-    <option key={index} value={value}>
-      {lang[language].value}
-    </option>
-  ));
+  const selectOptions = SORT_BY_SELECT_OPTIONS.map(
+    ({ name, lang, value }, index) => (
+      <option key={index} name={name} value={value}>
+        {lang[language].value}
+      </option>
+    )
+  );
 
+  const itemsOnPage = ITEMS_PER_PAGE.map((value) => (
+    <Button className={styles.itemsButton} key={value} type='button'>
+      {value}
+    </Button>
+  ));
   return (
-    <div>
+    <div className={styles.sortDiv}>
       <div>
         {sortByText}
-        <div className={styles.root}>
-          <TextField
-            SelectProps={{
-              native: true
-            }}
-            select
-          >
-            {selectOptions}
-          </TextField>
-        </div>
+        <TextField
+          className={styles.root}
+          variant='outlined'
+          SelectProps={{ native: true }}
+          select
+        >
+          {selectOptions}
+        </TextField>
       </div>
-      <div />
+      <div>{itemsOnPage}</div>
     </div>
   );
 };

@@ -147,7 +147,7 @@ const ProductListPage = () => {
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
   return (
     <div className={styles.root}>
-      <div className={styles.div}>
+      <div className={styles.sortDiv}>
         <ProductSort />
       </div>
       <div className={styles.div} />

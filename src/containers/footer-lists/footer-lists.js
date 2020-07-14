@@ -6,12 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './footer-lists.styles';
 
 import {
-  URL_LANGUAGE,
   FOOTER_INFORMATION,
   FOOTER_CONTACTS,
-  FOOTER_CATALOGS,
-  LANGUAGE
-} from '../../configs';
+  FOOTER_CATALOGS
+} from '../../translations/footer.translations';
+import { URL_LANGUAGE, LANGUAGE } from '../../configs';
 import { getCategories } from '../../redux/categories/categories.actions';
 
 const FooterLists = ({ language = LANGUAGE }) => {

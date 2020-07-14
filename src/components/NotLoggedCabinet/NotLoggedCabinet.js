@@ -8,7 +8,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from '../LoggedCabinet/LoggedCabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
-import { LANGUAGE, CABINET_OPTIONS_NOT_LOGGED } from '../../configs';
+import { LANGUAGE } from '../../configs';
+import { CABINET_OPTIONS_NOT_LOGGED } from '../../translations/cabinet.translations';
 
 const NotLoggedCabinet = () => {
   const lightMode = useSelector(({ Theme }) => Theme.lightMode);

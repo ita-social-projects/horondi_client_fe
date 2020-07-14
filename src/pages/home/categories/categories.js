@@ -5,20 +5,23 @@ import Typography from '@material-ui/core/Typography';
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
 import { useStyles } from './categories.style';
-import { LANGUAGE, HOMEPAGE_TITLES } from '../../../configs';
+import { HOMEPAGE_TITLES } from '../../../configs';
 
 const Categories = () => {
-  const { categories, loading } = useSelector(({ Categories }) => ({
-    categories: Categories.list,
-    loading: Categories.loading
-  }));
+  const { categories, loading, language } = useSelector(
+    ({ Categories, Language }) => ({
+      categories: Categories.list,
+      loading: Categories.loading,
+      language: Language.language
+    })
+  );
   const styles = useStyles();
 
   const items = categories.map(({ _id, name, images, categoryCode }) => (
     <CategoryItem
       key={_id}
       categoryCode={categoryCode}
-      categoryName={name[LANGUAGE].value}
+      categoryName={name[language].value}
       categoryImage={images.large}
     />
   ));
@@ -26,7 +29,7 @@ const Categories = () => {
   return (
     <div className={styles.catalog}>
       <Typography variant='h2' className={styles.title}>
-        {HOMEPAGE_TITLES[LANGUAGE].catalog}
+        {HOMEPAGE_TITLES[language].catalog}
       </Typography>
       {loading ? (
         <LoadingBar className={styles.loadingIndicator} />

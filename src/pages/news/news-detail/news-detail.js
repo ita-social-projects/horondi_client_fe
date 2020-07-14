@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import LoadingBar from '../../../components/LoadingBar';
+import LoadingBar from '../../../components/loading-bar';
 import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {

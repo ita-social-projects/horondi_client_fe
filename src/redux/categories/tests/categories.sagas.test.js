@@ -1,44 +1,45 @@
-import { call, put } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { expectSaga } from 'redux-saga-test-plan';
+import * as matchers from 'redux-saga-test-plan/matchers';
+import { throwError } from 'redux-saga-test-plan/providers';
 import { handleCategoriesLoad } from '../categories.sagas';
-import { setCategoriesLoading, setCategories } from '../categories.actions';
-import { setError } from '../../error/error.actions';
 import getItems from '../../../utils/client';
+import { SET_CATEGORIES, SET_CATEGORIES_LOADING } from '../categories.types';
+import { SET_ERROR } from '../../error/error.types';
 
-const categories = {
-  data: {
-    getAllCategories: {
-      name: {
-        value: 'bags',
-        lang: 'en'
+describe('categories saga', () => {
+  it('fetches categories', () => {
+    const fakeCategories = {
+      data: {
+        getAllCategories: {
+          name: [
+            {
+              value: 'Bags',
+              lang: 'en'
+            }
+          ]
+        }
       }
-    }
-  }
-};
+    };
 
-describe('categories-saga testing', () => {
-  it('should fails cause data is not defined ', async () => {
-    // const getItems = jest.fn(query => categories);
-    const query = `query {
-                   getAllCategories {
-                     categoryCode
-                     _id
-                     name {
-                     value
-                     lang
-                     }
-                     images {
-                      large
-                   }
-                  }          
-                 }`;
+    return expectSaga(handleCategoriesLoad)
+      .provide([[matchers.call.fn(getItems), fakeCategories]])
+      .put({ type: SET_CATEGORIES_LOADING, payload: true })
+      .put({
+        type: SET_CATEGORIES,
+        payload: fakeCategories.data.getAllCategories
+      })
+      .put({ type: SET_CATEGORIES_LOADING, payload: false })
+      .run();
+  });
 
-    const gen = handleCategoriesLoad();
-    const e = new Error("Cannot read property 'data' of undefined");
-    expect(gen.next().value).toEqual(put(setCategoriesLoading(true)));
-    expect(gen.next().value).toEqual(call(getItems, query));
-    expect(gen.next().value).toEqual(put(setCategoriesLoading(false)));
-    expect(gen.next().value).toEqual(put(setError({ e })));
-    expect(gen.next().value).toEqual(put(push('/error-page')));
+  it('handles errors', () => {
+    const e = new Error('categories not found');
+
+    return expectSaga(handleCategoriesLoad)
+      .provide([[matchers.call.fn(getItems), throwError(e)]])
+      .put({ type: SET_CATEGORIES_LOADING, payload: true })
+      .put({ type: SET_CATEGORIES_LOADING, payload: false })
+      .put({ type: SET_ERROR, payload: { e } })
+      .run();
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NativeSelect, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import useStyles from './product-sort.styles';
 
 const SORT_BY_TEXT = [

@@ -11,15 +11,15 @@ import {
   Button,
   Avatar
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import { useStyles } from './news-item.style';
 import { TIME_OPTIONS } from '../../../configs';
-import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 const NewsItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const language = getFromLocalStorage('language');
+  const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
   const newsTitle =
     title.length !== 0 ? title[language].value : 'No title provided';

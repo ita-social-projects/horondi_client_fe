@@ -15,12 +15,12 @@ import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
 import LoadingBar from '../../../components/LoadingBar';
 import { TIME_OPTIONS } from '../../../configs';
-import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 const NewsDetailPage = ({ match }) => {
-  const { article, loading } = useSelector(({ News }) => ({
+  const { article, loading, language } = useSelector(({ News, Language }) => ({
     article: News.activeArticle,
-    loading: News.loading
+    loading: News.loading,
+    language: Language.language
   }));
 
   const dispatch = useDispatch();
@@ -40,7 +40,6 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
-  const language = getFromLocalStorage('language');
   const newsTitle =
     article.title.length !== 0
       ? article.title[language].value

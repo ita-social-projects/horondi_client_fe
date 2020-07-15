@@ -29,9 +29,8 @@ const FooterLists = ({ language = LANGUAGE }) => {
     }
   };
 
-  const categoriesList = !categories
-    ? null
-    : categories.map(({ _id, name }) => (
+  const categoriesList = categories
+    ? categories.map(({ _id, name }) => (
       <div key={_id}>
         <Typography variant='subtitle2'>
           <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
@@ -39,7 +38,8 @@ const FooterLists = ({ language = LANGUAGE }) => {
           </Link>
         </Typography>
       </div>
-    ));
+    ))
+    : null;
 
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (
     <div key={item.id}>

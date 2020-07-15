@@ -14,16 +14,16 @@ const Categories = () => {
   }));
   const styles = useStyles();
 
-  const categoriesList = !categories
-    ? null
-    : categories.map(({ _id, name, images, categoryCode }) => (
+  const categoriesList = categories
+    ? categories.map(({ _id, name, images, categoryCode }) => (
       <CategoryItem
         key={_id}
         categoryCode={categoryCode}
         categoryName={name[LANGUAGE].value}
         categoryImage={images.large}
       />
-    ));
+    ))
+    : null;
 
   return (
     <div className={styles.catalog}>

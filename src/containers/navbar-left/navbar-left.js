@@ -25,13 +25,13 @@ const NavbarLeft = () => {
     }
   };
 
-  const categoriesList = !categories
-    ? null
-    : categories.map(({ _id, name }) => (
+  const categoriesList = categories
+    ? categories.map(({ _id, name }) => (
       <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
         {name[language].value}
       </Link>
-    ));
+    ))
+    : null;
 
   return (
     <Toolbar>

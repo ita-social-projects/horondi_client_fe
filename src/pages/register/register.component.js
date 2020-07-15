@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import PropTypes from 'prop-types';
 import {
   placeholders,
   formRegExp,
@@ -37,7 +35,6 @@ function Register({ history }) {
 
   // VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  // const [theme, setTheme] = useState();
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);

@@ -3,7 +3,6 @@ import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import PropTypes from 'prop-types';
 import { useStyles } from './login.styles';
 import {
   placeholders,
@@ -67,9 +66,8 @@ const Login = ({ history }) => {
   };
 
   // HOOKS
-  const { loginError, isLightTheme, userLoading } = useSelector((state) => ({
+  const { loginError, userLoading } = useSelector((state) => ({
     loginError: state.User.error,
-    isLightTheme: state.Theme.lightMode,
     userLoading: state.User.userLoading
   }));
 
@@ -86,14 +84,7 @@ const Login = ({ history }) => {
     } else {
       setAllFieldsValidated(false);
     }
-  }, [
-    user,
-    loginError,
-    history,
-    isLightTheme,
-    emailValidated,
-    passwordValidated
-  ]);
+  }, [user, loginError, history, emailValidated, passwordValidated]);
 
   // CLASSES
   const styles = useStyles();
@@ -178,12 +169,6 @@ const Login = ({ history }) => {
       </div>
     </div>
   );
-};
-
-Login.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func
-  }).isRequired
 };
 
 export default withRouter(Login);

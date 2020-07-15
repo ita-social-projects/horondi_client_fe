@@ -26,14 +26,10 @@ export function* handleCategoriesLoad() {
     yield put(setCategories(categories.data.getAllCategories));
     yield put(setCategoriesLoading(false));
   } catch (e) {
-    yield call(handleCategoriesError, e);
+    yield put(setCategoriesLoading(false));
+    yield put(setError({ e }));
+    yield put(push('/error-page'));
   }
-}
-
-function* handleCategoriesError(e) {
-  yield put(setCategoriesLoading(false));
-  yield put(setError({ e }));
-  yield put(push('/error-page'));
 }
 
 export default function* categoriesSaga() {

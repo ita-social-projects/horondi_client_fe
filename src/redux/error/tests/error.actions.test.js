@@ -1,7 +1,7 @@
 import { setError } from '../error.actions';
 import { SET_ERROR } from '../error.types';
 
-describe('error.actions test', () => {
+describe('Error actions test', () => {
   it('should set new error to payload property', () => {
     const response = {
       errors: [

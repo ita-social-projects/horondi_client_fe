@@ -14,11 +14,9 @@ const Categories = () => {
   }));
   const styles = useStyles();
 
-  const CategoriesView = () => {
-    if (!categories) {
-      return null;
-    }
-    return categories.map(({ _id, name, images, categoryCode }) => (
+  const categoriesList = !categories
+    ? null
+    : categories.map(({ _id, name, images, categoryCode }) => (
       <CategoryItem
         key={_id}
         categoryCode={categoryCode}
@@ -26,7 +24,6 @@ const Categories = () => {
         categoryImage={images.large}
       />
     ));
-  };
 
   return (
     <div className={styles.catalog}>
@@ -36,9 +33,7 @@ const Categories = () => {
       {loading ? (
         <LoadingBar className={styles.loadingIndicator} />
       ) : (
-        <div className={styles.categories}>
-          <CategoriesView />
-        </div>
+        <div className={styles.categories}>{categoriesList}</div>
       )}
     </div>
   );

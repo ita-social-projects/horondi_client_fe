@@ -25,16 +25,13 @@ const NavbarLeft = () => {
     }
   };
 
-  const CategoriesView = () => {
-    if (!categories) {
-      return null;
-    }
-    return categories.map(({ _id, name }) => (
+  const categoriesList = !categories
+    ? null
+    : categories.map(({ _id, name }) => (
       <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
         {name[language].value}
       </Link>
     ));
-  };
 
   return (
     <Toolbar>
@@ -43,7 +40,7 @@ const NavbarLeft = () => {
           {LOGO}
         </Link>
       </Typography>
-      <CategoriesView />
+      {categoriesList}
     </Toolbar>
   );
 };

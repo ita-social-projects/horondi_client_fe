@@ -1,7 +1,7 @@
 import errorReducer from '../error.reducer';
-import { SET_ERROR } from '../error.types';
+import { setError } from '../error.actions';
 
-describe('error.reducer test', () => {
+describe('Error reducer test', () => {
   let initialState;
   beforeEach(() => {
     initialState = {
@@ -15,25 +15,22 @@ describe('error.reducer test', () => {
 
   it('should return state with new error', () => {
     const newError = {
-      type: SET_ERROR,
-      payload: {
-        errors: [
-          {
-            lang: 'ua',
-            value: 'Категорій не знайдено'
-          },
-          {
-            lang: 'en',
-            value: 'Categories not found'
-          }
-        ]
-      }
+      errors: [
+        {
+          lang: 'ua',
+          value: 'Категорій не знайдено'
+        },
+        {
+          lang: 'en',
+          value: 'Categories not found'
+        }
+      ]
     };
 
-    const result = {
-      error: newError.payload
+    const state = {
+      error: newError
     };
 
-    expect(errorReducer(initialState, newError)).toEqual(result);
+    expect(errorReducer(initialState, setError(newError))).toEqual(state);
   });
 });

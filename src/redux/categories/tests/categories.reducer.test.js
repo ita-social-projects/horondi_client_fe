@@ -1,7 +1,7 @@
 import categoriesReducer from '../categories.reducer';
-import { SET_CATEGORIES } from '../categories.types';
+import { setCategories , setCategoriesLoading } from '../categories.actions';
 
-describe('categories.reducer.test', () => {
+describe('Categories reducer test', () => {
   let initialState;
   beforeEach(() => {
     initialState = {
@@ -16,21 +16,31 @@ describe('categories.reducer.test', () => {
 
   it('should return state with new categories', () => {
     const newCategories = {
-      type: SET_CATEGORIES,
-      payload: {
-        name: [
-          {
-            value: 'Рюкзаки',
-            lang: 'uk'
-          }
-        ]
-      }
+      name: [
+        {
+          value: 'Рюкзаки',
+          lang: 'uk'
+        }
+      ]
     };
     const state = {
-      list: newCategories.payload,
+      list: newCategories,
+      loading: true
+    };
+
+    expect(
+      categoriesReducer(initialState, setCategories(newCategories))
+    ).toEqual(state);
+  });
+
+  it('should set loading to false', () => {
+    const state = {
+      ...initialState,
       loading: false
     };
 
-    expect(categoriesReducer(initialState, newCategories)).toEqual(state);
+    expect(
+      categoriesReducer(initialState, setCategoriesLoading(false))
+    ).toEqual(state);
   });
 });

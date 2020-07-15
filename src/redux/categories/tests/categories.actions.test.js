@@ -1,7 +1,7 @@
 import { setCategories, getCategories } from '../categories.actions';
 import { GET_CATEGORIES, SET_CATEGORIES } from '../categories.types';
 
-describe('categories.actions test', () => {
+describe('Categories actions test', () => {
   it('should set new categories to payload property', () => {
     const newCategories = {
       name: [

@@ -229,20 +229,20 @@ export const errorMessages = [
   {
     lang: 'uk',
     value: {
-      firstname: 'Мінімум 2 символа',
-      lastname: 'Мінімум 2 символа',
+      firstname: 'Поле повинно містити від 2 до 30 символів',
+      lastname: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
-      password: 'Мінімум 6 символів з однією літерою та цифрою',
+      password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають'
     }
   },
   {
     lang: 'eng',
     value: {
-      firstname: 'Minimum 2 characters',
-      lastname: 'Minimum 2 characters',
+      firstname: 'Field should contain from 2 to 30 characters',
+      lastname: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
-      password: 'Minimum 6 characters with one letter and one digit',
+      password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match'
     }
   }

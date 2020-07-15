@@ -16,12 +16,7 @@ import {
   CONFIRM_EMAIL,
   SHOW_AFTER
 } from '../../configs';
-import {
-  lightTheme,
-  createRegisterStyles,
-  defaultTheme,
-  darkTheme
-} from './register.styles';
+import { useStyles } from './register.styles';
 import registerUser from './registerUser';
 import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
@@ -42,7 +37,7 @@ function Register({ history }) {
 
   // VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  const [theme, setTheme] = useState(lightTheme);
+  // const [theme, setTheme] = useState();
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
@@ -117,12 +112,6 @@ function Register({ history }) {
     } else {
       setAllFieldsSet(false);
     }
-    // THEME
-    if (isLightTheme) {
-      setTheme(lightTheme);
-    } else {
-      setTheme(darkTheme);
-    }
     // PASSWORD CHECK
     if (passwordValidated && password === confirmPassword) {
       setIsConfirmedPassword(true);
@@ -151,7 +140,7 @@ function Register({ history }) {
   ]);
 
   // STYLES
-  const styles = createRegisterStyles(theme)();
+  const styles = useStyles();
 
   const userFields = {
     firstNameField: {
@@ -200,12 +189,7 @@ function Register({ history }) {
         setValid: setPasswordValidated
       },
       type: 'password',
-      InputProps: endAdornment(
-        showPassword,
-        setShowPassword,
-        theme.inputTextColor.color,
-        styles.notchedOutline
-      ),
+      InputProps: endAdornment(showPassword, setShowPassword),
       regExp: formRegExp.password
     },
     confirmPasswordField: {
@@ -218,12 +202,7 @@ function Register({ history }) {
         setValid: setIsConfirmedPassword
       },
       type: 'password',
-      InputProps: endAdornment(
-        showConfirmedPassword,
-        setShowConfirmedPassword,
-        theme.inputTextColor.color,
-        styles.notchedOutline
-      )
+      InputProps: endAdornment(showConfirmedPassword, setShowConfirmedPassword)
     }
   };
 
@@ -231,7 +210,7 @@ function Register({ history }) {
     <form className={styles.registerForm}>
       <div>
         <img
-          src={theme.inputTextColor.color === 'white' ? infoLightImg : infoImg}
+          src={isLightTheme ? infoImg : infoLightImg}
           alt='info'
           className={styles.infoLogo}
         />
@@ -241,96 +220,77 @@ function Register({ history }) {
   );
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <div className={styles.register}>
-        <div className={styles.registerWrapper}>
-          {hasRegistered ? (
-            successWindow
-          ) : (
-            <form className={styles.registerForm}>
-              {loading ? (
-                <LoadingBar />
-              ) : (
-                <>
-                  <h2 className={styles.heading}>
-                    {REGISTER_FORM_LABEL[language].value}
-                  </h2>
-                  {Object.values(userFields).map(
-                    ({
-                      inputName,
-                      errorMessage,
-                      value,
-                      onChange,
-                      validation,
-                      type,
-                      InputProps = null,
-                      regExp = null
-                    }) => (
-                      <TextField
-                        InputLabelProps={{
-                          style: {
-                            color: theme.inputLabelColor.color
-                          }
-                        }}
-                        InputProps={{
-                          style: { color: theme.inputTextColor.color },
-                          classes: {
-                            notchedOutline: styles.notchedOutline
-                          },
-                          endAdornment: InputProps && InputProps.endAdornment
-                        }}
-                        required
-                        key={placeholders[inputName][language].value}
-                        label={placeholders[inputName][language].value}
-                        variant='outlined'
-                        name={inputName}
-                        fullWidth
-                        error={!validation.value && shouldValidate}
-                        helperText={
-                          !validation.value && shouldValidate
-                            ? `${errorMessage}`
-                            : ''
-                        }
-                        className={`${styles.dataInput} ${
-                          inputName === 'email' ? styles.afterText : ''
-                        }`}
-                        onChange={(e) =>
-                          onChange(e, validation.setValid, regExp)
-                        }
-                        value={value}
-                        type={type}
-                      />
-                    )
-                  )}
-                  <div className={styles.registerGroup}>
-                    <Button
-                      className={styles.registerBtn}
+    <div className={styles.register}>
+      <div className={styles.registerWrapper}>
+        {hasRegistered ? (
+          successWindow
+        ) : (
+          <form className={styles.registerForm}>
+            {loading ? (
+              <LoadingBar />
+            ) : (
+              <>
+                <h2 className={styles.heading}>
+                  {REGISTER_FORM_LABEL[language].value}
+                </h2>
+                {Object.values(userFields).map(
+                  ({
+                    inputName,
+                    errorMessage,
+                    value,
+                    onChange,
+                    validation,
+                    type,
+                    InputProps = null,
+                    regExp = null
+                  }) => (
+                    <TextField
+                      InputProps={{
+                        endAdornment: InputProps && InputProps.endAdornment
+                      }}
+                      required
+                      key={placeholders[inputName][language].value}
+                      label={placeholders[inputName][language].value}
+                      variant='outlined'
+                      name={inputName}
                       fullWidth
-                      onClick={handleRegister}
-                    >
-                      {REGISTER_FORM_LABEL[language].value}
-                    </Button>
-                    <p className={styles.registerError}>{registerError}</p>
-                  </div>
-                  <div>
-                    <Link to='/login' className={styles.loginBtn}>
-                      {LOGIN_FORM_LABEL[language].value}
-                    </Link>
-                  </div>
-                </>
-              )}
-            </form>
-          )}
-        </div>
+                      error={!validation.value && shouldValidate}
+                      helperText={
+                        !validation.value && shouldValidate
+                          ? `${errorMessage}`
+                          : ''
+                      }
+                      className={`${styles.dataInput} ${
+                        inputName === 'email' && styles.afterText
+                      }`}
+                      onChange={(e) => onChange(e, validation.setValid, regExp)}
+                      value={value}
+                      type={type}
+                    />
+                  )
+                )}
+                <div className={styles.registerGroup}>
+                  <Button
+                    className={styles.registerBtn}
+                    fullWidth
+                    onClick={handleRegister}
+                  >
+                    {REGISTER_FORM_LABEL[language].value}
+                  </Button>
+                  <p className={styles.registerError}>{registerError}</p>
+                </div>
+                <div>
+                  <Link to='/login' className={styles.loginBtn}>
+                    {LOGIN_FORM_LABEL[language].value}
+                  </Link>
+                </div>
+              </>
+            )}
+          </form>
+        )}
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
-
-Register.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func
-  }).isRequired
-};
 
 export default withRouter(Register);

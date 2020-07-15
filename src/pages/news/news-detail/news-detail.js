@@ -118,14 +118,12 @@ const NewsDetailPage = ({ match }) => {
   );
 };
 
-const newsDetailPropTypes = {
-  params: PropTypes.shape({
-    id: PropTypes.string
-  })
+NewsDetailPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
-
-NewsDetailPage.propTypes = newsDetailPropTypes;
-
-NewsDetailPage.defaultProps = newsDetailPropTypes;
 
 export default withRouter(NewsDetailPage);

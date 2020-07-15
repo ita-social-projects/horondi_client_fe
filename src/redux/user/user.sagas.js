@@ -3,7 +3,7 @@ import { setUser, setError, userLoading } from './user.actions';
 import { LOGIN_USER } from './user.types';
 import { setItems } from '../../utils/client';
 
-const loginUser = (user) => {
+export const loginUser = (user) => {
   const { email, password } = user;
   const query = ` 
   mutation {
@@ -24,7 +24,7 @@ const loginUser = (user) => {
   return setItems(query);
 };
 
-function* handleUserLoad({ payload }) {
+export function* handleUserLoad({ payload }) {
   try {
     yield put(userLoading());
     const user = yield call(loginUser, payload);

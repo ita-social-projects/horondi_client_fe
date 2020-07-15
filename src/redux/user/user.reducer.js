@@ -1,12 +1,12 @@
 import { SET_USER, SET_ERROR, LOGOUT_USER, USER_LOADING } from './user.types';
 
-const initialState = {
+export const initialState = {
   userData: null,
   error: null,
   userLoading: false
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case SET_USER:
     return {

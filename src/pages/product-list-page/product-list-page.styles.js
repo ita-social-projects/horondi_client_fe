@@ -4,20 +4,29 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '2rem'
+    padding: '3rem 3rem 2rem 2rem',
+    width: '100vw'
   },
   div: {
     display: 'flex',
     border: '1px solid red',
     alignItems: 'center',
-    padding: '1rem',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexWrap: 'wrap'
   },
   sortDiv: {
     alignItems: 'center',
-    padding: '1rem',
+    padding: '1rem 0',
     display: 'flex',
     justifyContent: 'flex-end'
+  },
+  paginationDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '1rem',
+    '& Mui-selected': {
+      backgroundColor: 'black !important'
+    }
   }
 }));
 export default useStyles;

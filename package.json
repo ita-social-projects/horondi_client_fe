@@ -25,6 +25,7 @@
     "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "graphql": "^15.1.0",
     "html-react-parser": "^0.13.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-customer-chat": "^1.0.2",
@@ -45,10 +46,9 @@
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "lint:fix": "eslint . --fix --color",
-    "cypress": "cypress open",
+    "cypress": "cypress run --record --key b8017e1c-a479-4cd2-9e35-65855609ae00",
     "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
-    "test": "jest --coverage",
-    "create": "ccr create"
+    "test": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -77,7 +77,6 @@
     "@babel/preset-env": "^7.10.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
-    "create-components-react": "git+https://github.com/horondi/template_creator.git",
     "cypress": "^4.9.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",

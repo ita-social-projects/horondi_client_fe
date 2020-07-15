@@ -7,9 +7,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     '& .MuiOutlinedInput-input': {
       height: '25px',
-      width: '130px',
       fontSize: '13px',
-      padding: '0 .5rem 0 .4rem'
+      padding: '0 1.2rem 0 .4rem'
     },
     '& .MuiOutlinedInput-input:focus': {
       borderColor: 'black'
@@ -22,19 +21,15 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '13px',
-    lineHeight: '7px'
+    fontSize: '13px'
   },
   sortDiv: {
     display: 'flex',
-    border: '1px solid green',
-    alignItems: 'center'
+    alignItems: 'center',
+    lineHeight: '25px !important'
   },
-  itemsButton: {
-    width: '40px',
-    height: '25px'
-  },
-  '&:active': {
+
+  activeButton: {
     backgroundColor: 'black',
     color: 'white'
   }

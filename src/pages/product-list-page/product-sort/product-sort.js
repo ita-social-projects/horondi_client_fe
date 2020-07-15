@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import useStyles from './product-sort.styles';
+import ProductsPerPage from '../products-per-page';
 
-const ITEMS_PER_PAGE = [9, 18, 30];
 const SORT_BY_TEXT = [
   { lang: 'uk', value: 'Сортувати за:' },
   { lang: 'eng', value: 'Sort by:' }
@@ -59,11 +59,6 @@ const ProductSort = () => {
     )
   );
 
-  const itemsOnPage = ITEMS_PER_PAGE.map((value) => (
-    <Button className={styles.itemsButton} key={value} type='button'>
-      {value}
-    </Button>
-  ));
   return (
     <div className={styles.sortDiv}>
       <div>
@@ -77,7 +72,7 @@ const ProductSort = () => {
           {selectOptions}
         </TextField>
       </div>
-      <div>{itemsOnPage}</div>
+      <ProductsPerPage />
     </div>
   );
 };

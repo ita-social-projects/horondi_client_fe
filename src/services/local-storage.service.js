@@ -1,6 +1,6 @@
 export const clearLocalStorage = () => {
   const horondi = {
-    accessToken: null,
+    accessToken: 'not null',
     _id: null,
     wishlist: null,
     cart: null,

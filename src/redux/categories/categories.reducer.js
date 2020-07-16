@@ -1,4 +1,4 @@
-import { SET_CATEGORIES } from './categories.types';
+import { SET_CATEGORIES, SET_CATEGORIES_LOADING } from './categories.types';
 
 const initialState = {
   list: [],
@@ -10,10 +10,13 @@ const categoriesReducer = (state = initialState, action) => {
   case SET_CATEGORIES:
     return {
       ...state,
-      list: action.payload,
-      loading: false
+      list: action.payload
     };
-
+  case SET_CATEGORIES_LOADING:
+    return {
+      ...state,
+      loading: action.payload
+    };
   default:
     return state;
   }

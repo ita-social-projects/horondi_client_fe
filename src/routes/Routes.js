@@ -28,6 +28,7 @@ const Routes = () => {
               return <ProductListPage category={category} />;
             }}
           />
+          <Route path='/:category/:id' exact render={() => 'detail page'} />
         </Switch>
       </div>
       <AppFooter />

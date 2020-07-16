@@ -28,16 +28,16 @@ const ProductsPerPage = () => {
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
       title={item.title}
-      className={styles.itemsButton}
       key={item.value}
       type='button'
       value={item.value}
       onClick={() => pickQuantity(item.value)}
+      variant='outlined'
     >
       {item.value}
     </Button>
   ));
-  return <div>{productsOnPage}</div>;
+  return <div className={styles.item}>{productsOnPage}</div>;
 };
 
 export default ProductsPerPage;

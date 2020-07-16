@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(() => ({
   productItem: (props) => ({
     background: `url(${props.image}) no-repeat center`,
+    backgroundSize: 'cover',
     width: '12rem',
     height: '15rem',
     margin: '1rem',
@@ -13,7 +14,6 @@ const useStyles = makeStyles(() => ({
   name: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'space-between',
     height: '4rem',
     width: '12rem',
     position: 'absolute',

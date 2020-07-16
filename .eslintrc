@@ -49,6 +49,7 @@
     "no-debugger": 0,
     "no-alert": 0,
     "no-use-before-define": "off",
+    "no-param-reassign": 0,
     "no-await-in-loop": 0,
     "no-return-assign": ["error", "except-parens"],
     "no-restricted-syntax": [
@@ -104,21 +105,6 @@
     "no-multi-str": 2,
     "no-constant-condition": 2,
     "no-extra-parens": [1, "functions"],
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
-    "no-multi-spaces": [
-      1,
-      {
-        "exceptions": {
-          "VariableDeclarator": true,
-          "FunctionExpression": true
-        }
-      }
-    ],
     "import/extensions": 0,
     "jsx-quotes": [2, "prefer-single"],
     "jsx-a11y/click-events-have-key-events": 0,

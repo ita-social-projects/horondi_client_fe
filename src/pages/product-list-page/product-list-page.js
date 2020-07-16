@@ -2,6 +2,7 @@ import React from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch } from 'react-redux';
 import Proptypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
 import { setCurrentPage } from '../../redux/filter/filter.actions';
@@ -22,7 +23,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: './images/about-us/horondi-2.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 4,
@@ -42,7 +43,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: './images/about-us/hero-bg.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 3,
@@ -62,7 +63,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: './images/about-us/horondi-3.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 5,
@@ -82,7 +83,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: './images/about-us/hero-bg.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 3,
@@ -102,7 +103,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: '../images/about-us/hero-bg.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 1,
@@ -122,7 +123,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: './images/about-us/hero-bg.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 1,
@@ -142,7 +143,7 @@ const productsBoilerPlate = [
     ],
     images: {
       primary: {
-        medium: './images/about-us/hero-bg.jpg'
+        medium: './images/backpack.jpg'
       }
     },
     rate: 1,
@@ -156,10 +157,14 @@ const ProductListPage = ({ category }) => {
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 
   const itemsToShow = productsBoilerPlate.map((product, index) => (
-    <ProductListItem key={index} product={product} />
+    <ProductListItem key={index} product={product} category={category} />
   ));
+  category = category.toUpperCase();
   return (
     <div className={styles.root}>
+      <Typography className={styles.paginationDiv} variant='h3'>
+        {category}
+      </Typography>
       <div className={styles.sortDiv}>
         <ProductSort />
       </div>

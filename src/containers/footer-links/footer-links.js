@@ -1,15 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@material-ui/core/Typography';
 
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { FOOTER_SOCIAL_NETWORK_LINKS } from '../../translations/footer.translations';
-import { LANGUAGE } from '../../configs';
 
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ language = LANGUAGE }) => {
+const FooterLinks = () => {
+  const { language } = useSelector(({ Categories, Language }) => ({
+    language: Language.language
+  }));
   const styles = useStyles();
 
   return (

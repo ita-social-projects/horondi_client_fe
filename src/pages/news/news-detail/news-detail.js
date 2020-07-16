@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
 import {
   Card,
   Typography,
@@ -12,14 +13,16 @@ import {
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import LoadingBar from '../../../components/LoadingBar';
-import { LANGUAGE, TIME_OPTIONS } from '../../../configs';
+import LoadingBar from '../../../components/loading-bar';
+import { TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
-  const { article, loading } = useSelector(({ News }) => ({
+  const { article, loading, language } = useSelector(({ News, Language }) => ({
     article: News.activeArticle,
-    loading: News.loading
+    loading: News.loading,
+    language: Language.language
   }));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,24 +40,23 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
-
   const newsTitle =
     article.title.length !== 0
-      ? article.title[LANGUAGE].value
+      ? article.title[language].value
       : 'No title provided';
-  const newsDateLanguegeOptions = ['ukr-UA', 'en-US'];
-  const dateLANGUAGE = `${newsDateLanguegeOptions[LANGUAGE]}`;
+  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
+  const dateLanguage = newsDateLanguageOptions[language];
   const dateToShow = new Date(parseInt(article.date));
-  const newsDate = dateToShow.toLocaleString(`${dateLANGUAGE}`, TIME_OPTIONS);
+  const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
   const newsText =
     article.text.length !== 0
-      ? parse(article.text[LANGUAGE].value)
+      ? parse(article.text[language].value)
       : 'No text provided';
   const newsVideo = article.video;
   const newsAuthor =
     article.author.name.length !== 0
-      ? article.author.name[LANGUAGE].value
+      ? article.author.name[language].value
       : 'No author provided';
   const newsAuthorAvatar = article.author.image
     ? article.author.image.small
@@ -113,6 +115,14 @@ const NewsDetailPage = ({ match }) => {
       </CardContent>
     </Card>
   );
+};
+
+NewsDetailPage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default withRouter(NewsDetailPage);

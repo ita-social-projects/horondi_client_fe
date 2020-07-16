@@ -1,6 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useStyles } from './Routes.style.js';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store/store';
+
+import { useStyles } from './routes.style.js';
 import NewsPage from '../pages/news/news-page';
 import NewsDetailPage from '../pages/news/news-detail';
 import Home from '../pages/home/home-page';
@@ -11,7 +14,7 @@ import AppFooter from '../components/app-footer';
 const Routes = () => {
   const styles = useStyles();
   return (
-    <Router>
+    <ConnectedRouter history={history}>
       <AppHeader />
       <div className={styles.root}>
         <Switch>
@@ -22,7 +25,7 @@ const Routes = () => {
         </Switch>
       </div>
       <AppFooter />
-    </Router>
+    </ConnectedRouter>
   );
 };
 

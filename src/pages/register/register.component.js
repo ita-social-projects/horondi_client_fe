@@ -19,7 +19,7 @@ import registerUser from './registerUser';
 import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
-import LoadingBar from '../../components/LoadingBar/LoadingBar';
+import { Loader } from '../../components/Loader/loader';
 
 function Register({ history }) {
   // VALIDATED && CONFIRMED
@@ -224,7 +224,7 @@ function Register({ history }) {
         ) : (
           <form className={styles.registerForm}>
             {loading ? (
-              <LoadingBar />
+              <Loader />
             ) : (
               <>
                 <h2 className={styles.heading}>

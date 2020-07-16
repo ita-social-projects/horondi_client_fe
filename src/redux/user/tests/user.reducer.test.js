@@ -1,5 +1,5 @@
-import userReducer, { initialState } from './user.reducer';
-import { setError, setUser, logoutUser, userLoading } from './user.actions';
+import userReducer, { initialState } from '../user.reducer';
+import { setError, setUser, logoutUser, userLoading } from '../user.actions';
 
 const user = {
   name: 'user',

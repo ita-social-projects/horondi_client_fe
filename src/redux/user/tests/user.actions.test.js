@@ -1,5 +1,5 @@
-import { setError, setUser } from './user.actions';
-import { SET_ERROR, SET_USER } from './user.types';
+import { setError, setUser } from '../user.actions';
+import { SET_ERROR, SET_USER } from '../user.types';
 
 const user = {
   name: 'user',

@@ -24,7 +24,7 @@ export const loginUser = (user) => {
   return setItems(query);
 };
 
-export function* handleUserLoad({ payload }) {
+export function* handleUserLoad({ payload = {} }) {
   try {
     yield put(userLoading());
     const user = yield call(loginUser, payload);

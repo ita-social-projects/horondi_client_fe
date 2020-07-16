@@ -17,7 +17,7 @@ import {
 } from '../../configs';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
-import LoadingBar from '../../components/LoadingBar/LoadingBar';
+import { Loader } from '../../components/Loader/loader';
 
 const Login = ({ history }) => {
   // VALUES
@@ -96,7 +96,7 @@ const Login = ({ history }) => {
       <div className={styles.loginWrapper}>
         <form className={styles.loginForm}>
           {userLoading ? (
-            <LoadingBar />
+            <Loader />
           ) : (
             <>
               <h2 className={styles.heading}>

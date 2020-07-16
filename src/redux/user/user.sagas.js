@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import { setUser, setError, userLoading } from './user.actions';
 import { LOGIN_USER } from './user.types';
 import { setItems } from '../../utils/client';
@@ -24,13 +25,13 @@ export const loginUser = (user) => {
   return setItems(query);
 };
 
-export function* handleUserLoad({ payload = {} }) {
+export function* handleUserLoad({ payload }) {
   try {
     yield put(userLoading());
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
+    yield put(push('/'));
   } catch (error) {
-    console.log(error);
     yield put(setError(true));
   }
 }

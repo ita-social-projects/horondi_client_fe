@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { withRouter } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { push } from 'connected-react-router';
 import {
   placeholders,
   formRegExp,
@@ -21,7 +21,7 @@ import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/Loader/loader';
 
-function Register({ history }) {
+function Register() {
   // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
@@ -90,6 +90,8 @@ function Register({ history }) {
     isLightTheme: state.Theme.lightMode
   }));
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     // VALID FIELDS
     if (
@@ -118,7 +120,7 @@ function Register({ history }) {
     // HAS REGISTERED
     if (hasRegistered) {
       setTimeout(() => {
-        history.push('/login');
+        dispatch(push('/login'));
       }, SHOW_AFTER);
     }
   }, [
@@ -129,11 +131,9 @@ function Register({ history }) {
     isConfirmedPassword,
     user,
     allFieldsSet,
-    isLightTheme,
     password,
     confirmPassword,
-    hasRegistered,
-    history
+    hasRegistered
   ]);
 
   // STYLES
@@ -290,4 +290,4 @@ function Register({ history }) {
   );
 }
 
-export default withRouter(Register);
+export default Register;

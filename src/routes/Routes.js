@@ -1,5 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store/store';
+
 import { useStyles } from './Routes.style.js';
 import NewsPage from '../pages/news/news-page';
 import NewsDetailPage from '../pages/news/news-detail';
@@ -13,7 +16,7 @@ import Login from '../pages/login';
 const Routes = () => {
   const styles = useStyles();
   return (
-    <Router>
+    <ConnectedRouter history={history}>
       <AppHeader />
       <div className={styles.root}>
         <Switch>
@@ -26,7 +29,7 @@ const Routes = () => {
         </Switch>
       </div>
       <AppFooter />
-    </Router>
+    </ConnectedRouter>
   );
 };
 

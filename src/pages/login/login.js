@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router';
 import { useStyles } from './login.styles';
 import {
   placeholders,
@@ -19,7 +18,7 @@ import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/Loader/loader';
 
-const Login = ({ history }) => {
+const Login = () => {
   // VALUES
   const [user, setUser] = useState(LOGIN_USER_DATA);
 
@@ -28,9 +27,6 @@ const Login = ({ history }) => {
   const [emailValidated, setEmailValidated] = useState(false);
   const [passwordValidated, setPasswordValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
-
-  // ERROR
-  const [showError, setShowError] = useState(false);
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
@@ -60,8 +56,6 @@ const Login = ({ history }) => {
       } catch (e) {
         console.error(e);
       }
-    } else {
-      setShowError(true);
     }
   };
 
@@ -74,17 +68,12 @@ const Login = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!loginError && loginError !== null) {
-      history.push('/');
-    } else {
-      setShowError(true);
-    }
     if (emailValidated && passwordValidated) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
     }
-  }, [user, loginError, history, emailValidated, passwordValidated]);
+  }, [user, loginError, emailValidated, passwordValidated]);
 
   // CLASSES
   const styles = useStyles();
@@ -146,7 +135,7 @@ const Login = ({ history }) => {
                   {label}
                 </Button>
                 <p className={styles.loginError}>
-                  {showError && shouldValidate && loginError === true
+                  {shouldValidate && loginError === true
                     ? LOGIN_USER_ERROR[language].value
                     : ''}
                 </p>
@@ -171,4 +160,4 @@ const Login = ({ history }) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

@@ -104,4 +104,12 @@ describe('News reducer test', () => {
 
     expect(newsReducer(initialState, setLoading(false))).toEqual(state);
   });
+  it('should set loading to false', () => {
+    const state = {
+      ...initialState,
+      loading: true
+    };
+
+    expect(newsReducer(initialState, setLoading(true))).toEqual(state);
+  });
 });

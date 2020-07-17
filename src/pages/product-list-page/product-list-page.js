@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pagination } from '@material-ui/lab';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Proptypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import useStyles from './product-list-page.styles';
@@ -146,7 +146,7 @@ const productsBoilerPlate = [
         medium: './images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 2.4,
     basePrice: 1234
   }
 ];
@@ -154,8 +154,36 @@ const productsBoilerPlate = [
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const { language } = useSelector(({ Language: { language } }) => ({
+    language
+  }));
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
+  if (category === 'backpacks') {
+    category = [
+      {
+        value: 'рюкзаки'
+      },
+      { value: 'backpacks' }
+    ];
+  }
+  if (category === 'bags') {
+    category = [
+      {
+        value: 'сумки'
+      },
+      { value: 'bags' }
+    ];
+  }
+  if (category === 'accessories') {
+    category = [
+      {
+        value: 'аксесуари'
+      },
+      { value: 'accessories' }
+    ];
+  }
 
+  category = category[language].value;
   const itemsToShow = productsBoilerPlate.map((product, index) => (
     <ProductListItem key={index} product={product} category={category} />
   ));

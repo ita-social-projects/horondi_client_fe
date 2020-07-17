@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, ButtonGroup } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import styles from './products-per-page.styles';
 import { setProductsPerPage } from '../../../redux/filter/filter.actions';
@@ -37,7 +37,7 @@ const ProductsPerPage = () => {
       {item.value}
     </Button>
   ));
-  return <div className={styles.item}>{productsOnPage}</div>;
+  return <ButtonGroup className={styles.item}>{productsOnPage}</ButtonGroup>;
 };
 
 export default ProductsPerPage;

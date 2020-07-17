@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   items: {
     height: '25px !important',
     lineHeight: '25px !important',
-    '& button': {
+    '& .MuiButton-outlined': {
       background: 'red',
       boxSizing: 'border-box',
       padding: 0,

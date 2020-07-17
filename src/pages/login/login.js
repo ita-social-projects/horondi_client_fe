@@ -6,7 +6,6 @@ import { useStyles } from './login.styles';
 import {
   placeholders,
   OR_TEXT,
-  LANGUAGE as language,
   LOGIN_FORM_LABEL,
   LOGIN_USER_DATA,
   formRegExp,
@@ -30,11 +29,6 @@ const Login = () => {
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
-
-  // LABELS
-  const label = LOGIN_FORM_LABEL[language].value;
-  const emailLabel = placeholders.email[language].value;
-  const passwordLabel = placeholders.password[language].value;
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -60,9 +54,10 @@ const Login = () => {
   };
 
   // HOOKS
-  const { loginError, userLoading } = useSelector((state) => ({
+  const { loginError, userLoading, language } = useSelector((state) => ({
     loginError: state.User.error,
-    userLoading: state.User.userLoading
+    userLoading: state.User.userLoading,
+    language: state.Language.language
   }));
 
   const dispatch = useDispatch();
@@ -74,6 +69,11 @@ const Login = () => {
       setAllFieldsValidated(false);
     }
   }, [user, loginError, emailValidated, passwordValidated]);
+
+  // LABELS
+  const label = LOGIN_FORM_LABEL[language].value;
+  const emailLabel = placeholders.email[language].value;
+  const passwordLabel = placeholders.password[language].value;
 
   // CLASSES
   const styles = useStyles();

@@ -7,7 +7,6 @@ import {
   placeholders,
   formRegExp,
   errorMessages,
-  LANGUAGE as language,
   REGISTER_FORM_LABEL,
   LOGIN_FORM_LABEL,
   REGISTER_USER_DATA,
@@ -86,8 +85,9 @@ function Register() {
   const [loading, setLoading] = useState(false);
 
   // HOOKS
-  const { isLightTheme } = useSelector((state) => ({
-    isLightTheme: state.Theme.lightMode
+  const { isLightTheme, language } = useSelector((state) => ({
+    isLightTheme: state.Theme.lightMode,
+    language: state.Language.language
   }));
 
   const dispatch = useDispatch();
@@ -133,7 +133,8 @@ function Register() {
     allFieldsSet,
     password,
     confirmPassword,
-    hasRegistered
+    hasRegistered,
+    dispatch
   ]);
 
   // STYLES

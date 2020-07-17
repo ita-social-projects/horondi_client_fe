@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Select, MenuItem } from '@material-ui/core';
 import {
@@ -14,12 +14,17 @@ const languageInLocalStorage = getFromLocalStorage('language') || 0;
 const Language = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  dispatch(changeLanguage(languageInLocalStorage));
+
+  useEffect(() => {
+    dispatch(changeLanguage(languageInLocalStorage));
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const targetValue = e.target.value;
-    setToLocalStorage('language', targetValue);
-    dispatch(changeLanguage(targetValue));
+    if (targetValue !== undefined) {
+      setToLocalStorage('language', targetValue);
+      dispatch(changeLanguage(targetValue));
+    }
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
     <MenuItem id={`language${value + 1}`} key={value} value={value}>
@@ -31,7 +36,7 @@ const Language = () => {
       <Select
         className={styles.rootSelect}
         defaultValue={languageInLocalStorage}
-        onClick={handleChange}
+        onChange={handleChange}
       >
         {mappedLanguages}
       </Select>

@@ -5,7 +5,7 @@ import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 
-function* handleNewsLoad() {
+export function* handleNewsLoad() {
   try {
     yield put(setLoading(true));
     const news = yield call(
@@ -47,7 +47,7 @@ function* handleNewsLoad() {
   }
 }
 
-function* handleArticleLoad({ payload }) {
+export function* handleArticleLoad({ payload }) {
   try {
     yield put(setLoading(true));
     const article = yield call(

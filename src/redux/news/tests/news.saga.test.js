@@ -1,6 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import { handleNewsLoad, handleArticleLoad } from '../news.saga';
+import { handleNewsLoad, handleArticleLoad } from '../news.sagas';
 import getItems from '../../../utils/client';
 import { SET_NEWS, SET_NEWS_ARTICLE, SET_LOADING } from '../news.types';
 

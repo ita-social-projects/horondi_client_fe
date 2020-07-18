@@ -62,7 +62,7 @@ describe('get article saga', () => {
       }
     };
 
-    return expectSaga(handleArticleLoad)
+    return expectSaga(handleArticleLoad, { payload: '13546789456' })
       .provide([[matchers.call.fn(getItems), articleExample]])
       .put({ type: SET_LOADING, payload: true })
       .put({

@@ -89,7 +89,7 @@ export function* handleArticleLoad({ payload }) {
   }
 }
 
-function* handleNewsError(e) {
+export function* handleNewsError(e) {
   yield put(setLoading(false));
   yield put(setError({ e }));
   yield put(push('/error-page'));

@@ -23,6 +23,11 @@ export const ABOUT_US_IMAGES = {
   workPlace_2: './images/about-us/work-place-2.jpg'
 };
 
+export const CART_IMAGES = {
+  lightTheme: './images/cart/cart-light-theme-img.png',
+  darkTheme: './images/cart/cart-dark-theme-img.png'
+};
+
 export const CABINET_OPTIONS_NOT_LOGGED = {
   0: {
     wishlist: 'Список уподобань',

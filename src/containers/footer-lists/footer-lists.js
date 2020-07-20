@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
@@ -12,18 +12,12 @@ import {
   FOOTER_CATALOGS,
   LANGUAGE
 } from '../../configs';
-import { getCategories } from '../../redux/categories/categories.actions';
 
 const FooterLists = ({ language = LANGUAGE }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
-  const { categories } = useSelector(({ Categories: { list } }) => ({
-    categories: list
+  const { categories } = useSelector(({ Categories }) => ({
+    categories: Categories.list
   }));
-
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
 
   const getCategoryURL = (category) => {
     const [filteredCategory] = category.filter(
@@ -35,15 +29,18 @@ const FooterLists = ({ language = LANGUAGE }) => {
     }
   };
 
-  const categoriesList = categories.map(({ _id, name }) => (
-    <div key={_id}>
-      <Typography variant='subtitle2'>
-        <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
-          {name[language].value}
-        </Link>
-      </Typography>
-    </div>
-  ));
+  const categoriesList = categories
+    ? categories.map(({ _id, name }) => (
+      <div key={_id}>
+        <Typography variant='subtitle2'>
+          <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+            {name[language].value}
+          </Link>
+        </Typography>
+      </div>
+    ))
+    : null;
+
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (
     <div key={item.id}>
       <Typography variant='subtitle2'>

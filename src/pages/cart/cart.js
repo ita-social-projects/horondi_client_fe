@@ -1,26 +1,17 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
-// import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
+import { useSelector } from 'react-redux';
 
 import { useStyles } from './cart.styles';
 import EmptyCart from './empty-cart';
-// import { CART_TITTLES } from '../../translations/cart.translations';
-// import { CART_IMAGES } from '../../configs';
+import FilledCart from './filled-cart';
 
 const Cart = () => {
-
-  /*  const {language, cartItems} = useSelector(({Language, Cart}) => (
-    {
-      language: Language.language,
-      cartItems: Cart.list
-    }
-  )) */
+  const cartItems = useSelector(({ Cart }) => Cart.list);
   const styles = useStyles();
 
   return (
     <div className={styles.root}>
-      <EmptyCart />
+      {cartItems.length ? <FilledCart items={cartItems} /> : <EmptyCart />}
     </div>
   );
 };

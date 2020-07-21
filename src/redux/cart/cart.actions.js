@@ -1,12 +1,12 @@
 import {
-  GET_CART_ITEMS,
   SET_ITEM_TO_CART,
-  REMOVE_ITEM_FROM_CART
+  REMOVE_ITEM_FROM_CART,
+  SET_CART_ITEMS
 } from './cart.types';
 
-const getCartItems = (newCategories) => ({
-  type: GET_CART_ITEMS,
-  payload: newCategories
+const setCartItems = (cartItems) => ({
+  type: SET_CART_ITEMS,
+  payload: cartItems
 });
 
 const setItemToCart = (item) => ({
@@ -19,4 +19,4 @@ const removeItemFromCart = (itemId) => ({
   payload: itemId
 });
 
-export { getCartItems, setItemToCart, removeItemFromCart };
+export { setItemToCart, removeItemFromCart, setCartItems };

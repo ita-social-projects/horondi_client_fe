@@ -1,6 +1,6 @@
 import {
   SET_CURRENT_PAGE,
-  FILTER_BY_PRICE,
+  FILTER_PRODUCTS,
   SET_ALL_FILTER_PRODUCTS
 } from './filter.types';
 
@@ -14,7 +14,7 @@ export const setCurrentPage = (payload) => ({
   payload
 });
 
-export const filterByPrice = (payload) => ({
-  type: FILTER_BY_PRICE,
+export const filterProducts = (payload) => ({
+  type: FILTER_PRODUCTS,
   payload
 });

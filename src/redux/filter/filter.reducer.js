@@ -1,6 +1,6 @@
 import {
   SET_CURRENT_PAGE,
-  FILTER_BY_PRICE,
+  FILTER_PRODUCTS,
   SET_ALL_FILTER_PRODUCTS
 } from './filter.types';
 
@@ -21,12 +21,19 @@ const filterReducer = (state = initialState, action = {}) => {
       ...state,
       currentPage: action.payload
     };
-  case FILTER_BY_PRICE:
-    const filteredValues = state.products.filter(
-      (product) =>
-        product.basePrice >= action.payload.bottomValue &&
-          product.basePrice <= action.payload.topValue
-    );
+  case FILTER_PRODUCTS:
+    const filteredValues = state.products
+      .filter(
+        (product) =>
+          product.basePrice >= action.payload.price.bottomPrice &&
+            product.basePrice <= action.payload.price.topPrice
+      )
+      .filter((product) =>
+        action.payload.colors.length
+          ? action.payload.colors.some((color) => color === product.color)
+          : product
+      );
+    console.log(filteredValues);
     return {
       ...state,
       products: filteredValues

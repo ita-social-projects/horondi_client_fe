@@ -7,10 +7,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Button from '@material-ui/core/Button';
+
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './product-list-filter.styles';
 import {
-  filterByPrice,
+  filterProducts,
   setAllFilterProducts
 } from '../../../redux/filter/filter.actions';
 import { setAllProducts } from '../../../redux/products/products.actions';
@@ -33,7 +35,8 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 12342
+    basePrice: 7234,
+    color: 'red'
   },
   {
     name: [
@@ -52,7 +55,8 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 4503
+    basePrice: 4503,
+    color: 'blue'
   },
   {
     name: [
@@ -71,7 +75,8 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 1234
+    basePrice: 1234,
+    color: 'green'
   },
   {
     name: [
@@ -90,7 +95,8 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 1234
+    basePrice: 1234,
+    color: 'yellow'
   },
   {
     name: [
@@ -109,7 +115,8 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 1234
+    basePrice: 1234,
+    color: 'yollow'
   },
   {
     name: [
@@ -128,7 +135,8 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 1234
+    basePrice: 1234,
+    color: 'red'
   },
   {
     name: [
@@ -147,9 +155,12 @@ const productsBoilerPlate = [
       }
     },
     rate: 1,
-    basePrice: 1234
+    basePrice: 1234,
+    color: 'green'
   }
 ];
+
+const colors = ['red', 'green', 'blue', 'yellow'];
 
 export default function CheckboxesGroup() {
   const dispatch = useDispatch();
@@ -166,21 +177,41 @@ export default function CheckboxesGroup() {
     products: Products.list
   }));
 
-  const [value, setValue] = useState([
-    Math.min(...products.map((product) => product.basePrice)),
-    Math.max(...products.map((product) => product.basePrice))
-  ]);
+  const [price, setPrice] = useState([null, null]);
+
+  useEffect(() => {
+    setPrice([
+      Math.min(...products.map((product) => product.basePrice)),
+      Math.max(...products.map((product) => product.basePrice))
+    ]);
+  }, [products]);
+
+  const [colorsCheck, setColorsCheck] = useState({});
 
   const handlePriceChange = (event, newValue) => {
-    console.log(newValue);
-    setValue(newValue);
-    dispatch(setAllFilterProducts(products));
-    dispatch(
-      filterByPrice({ topValue: newValue[1], bottomValue: newValue[0] })
-    );
+    setPrice(newValue);
   };
 
-  const valuetext = (value) => `${value}$`;
+  const handleColorChange = (event) => {
+    setColorsCheck({
+      ...colorsCheck,
+      [event.target.name]: event.target.checked
+    });
+  };
+
+  const handleFilter = () => {
+    console.log(!!colors.filter((color) => colorsCheck[color]).length);
+    dispatch(setAllFilterProducts(products));
+    dispatch(
+      filterProducts({
+        price: {
+          bottomPrice: price[0],
+          topPrice: price[1]
+        },
+        colors: colors.filter((color) => colorsCheck[color])
+      })
+    );
+  };
 
   const priceFilter = (
     <FormGroup>
@@ -188,37 +219,44 @@ export default function CheckboxesGroup() {
         Price Range:
       </Typography>
       <Slider
-        value={value}
+        className={classes.slider}
+        value={price}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
         min={Math.min(...products.map((product) => product.basePrice))}
         max={Math.max(...products.map((product) => product.basePrice))}
         aria-labelledby='range-slider'
-        getAriaValueText={valuetext}
       />
+    </FormGroup>
+  );
+
+  const colorFilter = (
+    <FormGroup>
+      <Typography id='colors' gutterBottom>
+        Color:
+      </Typography>
+      {colors.map((color) => (
+        <FormControlLabel
+          key={color}
+          className={classes.checkbox}
+          control={<Checkbox name={color} />}
+          label={color}
+          onChange={handleColorChange}
+        />
+      ))}
     </FormGroup>
   );
 
   return (
     <div className={classes.root}>
       <FormControl component='fieldset' className={classes.formControl}>
-        <FormLabel component='legend'>Assign responsibility</FormLabel>
+        <FormLabel component='legend'>Filter</FormLabel>
         {priceFilter}
-        <FormGroup>
-          <FormControlLabel
-            control={<Checkbox name='gilad' />}
-            label='Gilad Gray'
-          />
-          <FormControlLabel
-            control={<Checkbox name='jason' />}
-            label='Jason Killian'
-          />
-          <FormControlLabel
-            control={<Checkbox name='antoine' />}
-            label='Antoine Llorca'
-          />
-        </FormGroup>
+        {colorFilter}
         <FormHelperText>Be careful</FormHelperText>
+        <Button variant='contained' onClick={handleFilter}>
+          Filter
+        </Button>
       </FormControl>
     </div>
   );

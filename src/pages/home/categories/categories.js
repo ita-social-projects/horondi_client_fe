@@ -7,16 +7,6 @@ import CategoryItem from '../category-item';
 import { useStyles } from './categories.style';
 import { LANGUAGE, HOMEPAGE_TITLES, URL_LANGUAGE } from '../../../configs';
 
-export const getCategoryURL = (category) => {
-  const [filteredCategory] = category.filter(
-    (item) => item.lang === URL_LANGUAGE
-  );
-
-  if (filteredCategory.value) {
-    return filteredCategory.value.toLowerCase();
-  }
-};
-
 const Categories = () => {
   const { categories, loading } = useSelector(({ Categories }) => ({
     categories: Categories.list,
@@ -49,6 +39,16 @@ const Categories = () => {
       )}
     </div>
   );
+};
+
+export const getCategoryURL = (category) => {
+  const [filteredCategory] = category.filter(
+    (item) => item.lang === URL_LANGUAGE
+  );
+
+  if (filteredCategory.value) {
+    return filteredCategory.value.toLowerCase();
+  }
 };
 
 export default Categories;

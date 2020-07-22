@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setItemToCart } from '../../redux/cart/cart.actions';
+import { setItemToWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 
 const items = [
@@ -36,12 +36,11 @@ const items = [
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector(({ Cart }) => Cart.list);
-
+  const wishlistItems = useSelector(({ Wishlist }) => Wishlist.list);
+  console.log('wishlist', wishlistItems);
   const onAddItemToCart = () => {
-    console.log(cartItems);
-    setToLocalStorage('cart', [...cartItems, items[1]]);
-    dispatch(setItemToCart(items[1]));
+    setToLocalStorage('wishlist', [...wishlistItems, items[1]]);
+    dispatch(setItemToWishlist(items[1]));
   };
 
   return (

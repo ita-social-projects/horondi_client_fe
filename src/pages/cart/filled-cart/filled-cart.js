@@ -11,7 +11,6 @@ import {
 } from '../../../translations/cart.translations';
 
 const FilledCart = ({ items }) => {
-  console.log(items);
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 

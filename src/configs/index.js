@@ -28,6 +28,11 @@ export const CART_IMAGES = {
   darkTheme: './images/cart/cart-dark-theme-img.png'
 };
 
+export const WISHLIST_IMAGES = {
+  lightTheme: './images/wishlist/wishlist-light-theme-img.png',
+  darkTheme: './images/wishlist/wishlist-dark-theme-img.png'
+};
+
 export const CABINET_OPTIONS_NOT_LOGGED = {
   0: {
     wishlist: 'Список уподобань',

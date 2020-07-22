@@ -1,7 +1,7 @@
 import categoriesReducer from '../categories.reducer';
 import { setCategories, setCategoriesLoading } from '../categories.actions';
 
-describe('CategoriesList reducer test', () => {
+describe('Categories reducer test', () => {
   let initialState;
   beforeEach(() => {
     initialState = {

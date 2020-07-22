@@ -16,7 +16,6 @@ const CategoriesList = () => {
     })
   );
   const styles = useStyles();
-  console.log(categories[0].name);
 
   const categoriesList = categories
     ? categories.map(({ _id, name, images, isMain }) =>
@@ -46,7 +45,6 @@ const CategoriesList = () => {
 };
 
 export const getCategoryURL = (category) => {
-  console.log(category, '2');
   const [filteredCategory] = category.filter(
     (item) => item.lang === URL_LANGUAGE
   );

@@ -6,7 +6,7 @@ import getItems from '../../../utils/client';
 import { SET_CATEGORIES, SET_CATEGORIES_LOADING } from '../categories.types';
 import { SET_ERROR } from '../../error/error.types';
 
-describe('CategoriesList saga', () => {
+describe('Categories saga', () => {
   it('fetches categories', () => {
     const fakeCategories = {
       data: {

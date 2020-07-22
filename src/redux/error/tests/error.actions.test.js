@@ -11,7 +11,7 @@ describe('Error actions test', () => {
         },
         {
           lang: 'en',
-          value: 'CategoriesList not found'
+          value: 'Categories not found'
         }
       ]
     };

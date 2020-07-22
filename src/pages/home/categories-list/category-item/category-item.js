@@ -5,7 +5,6 @@ import { useStyles } from './category-item.style';
 
 const CategoryItem = ({ categoryName, categoryImage, categoryUrl }) => {
   const styles = useStyles({ image: categoryImage });
-  console.log(categoryName);
 
   return (
     <Link to={`/${categoryUrl}`} className={styles.link}>

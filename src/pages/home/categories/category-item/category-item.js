@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
 
-const CategoryItem = ({ categoryName, categoryImage, categoryCode }) => {
-  const linkTo = categoryCode.split('-')[1];
+const CategoryItem = ({ categoryName, categoryImage, categoryUrl }) => {
   const styles = useStyles({ image: categoryImage });
+  console.log(categoryName);
 
   return (
-    <Link to={`/${linkTo}`} className={styles.link}>
+    <Link to={`/${categoryUrl}`} className={styles.link}>
       <div className={styles.categoryItem}>
         <div className={styles.categoryNameWrapper}>
           <span>{categoryName}</span>

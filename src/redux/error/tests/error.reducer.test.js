@@ -22,7 +22,7 @@ describe('Error reducer test', () => {
         },
         {
           lang: 'en',
-          value: 'Categories not found'
+          value: 'CategoriesList not found'
         }
       ]
     };

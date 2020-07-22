@@ -1,3 +1,3 @@
-import Categories from './categories';
+import CategoriesList from './categories-list';
 
-export default Categories;
+export default CategoriesList;

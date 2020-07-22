@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
+import { useStyles } from './categories-list.style';
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
-import { useStyles } from './categories.style';
-import { HOMEPAGE_TITLES } from '../../../configs';
+import { HOMEPAGE_TITLES, URL_LANGUAGE } from '../../../configs';
 
-const Categories = () => {
+const CategoriesList = () => {
   const { categories, loading, language } = useSelector(
     ({ Categories, Language }) => ({
       categories: Categories.list,
@@ -16,16 +16,19 @@ const Categories = () => {
     })
   );
   const styles = useStyles();
+  console.log(categories[0].name);
 
   const categoriesList = categories
-    ? categories.map(({ _id, name, images, categoryCode }) => (
-      <CategoryItem
-        key={_id}
-        categoryCode={categoryCode}
-        categoryName={name[language].value}
-        categoryImage={images.large}
-      />
-    ))
+    ? categories.map(({ _id, name, images, isMain }) =>
+      isMain ? (
+        <CategoryItem
+          key={_id}
+          categoryUrl={getCategoryURL(name)}
+          categoryName={name[language].value}
+          categoryImage={images.large}
+        />
+      ) : null
+    )
     : null;
 
   return (
@@ -42,4 +45,15 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export const getCategoryURL = (category) => {
+  console.log(category, '2');
+  const [filteredCategory] = category.filter(
+    (item) => item.lang === URL_LANGUAGE
+  );
+
+  if (filteredCategory.value) {
+    return filteredCategory.value.toLowerCase();
+  }
+};
+
+export default CategoriesList;

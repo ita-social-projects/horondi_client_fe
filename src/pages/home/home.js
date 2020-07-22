@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 
-import CategoriesList from './categories';
+import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
 import { HOME_BUTTONS } from '../../configs';
 import { useStyles } from './home.styles';

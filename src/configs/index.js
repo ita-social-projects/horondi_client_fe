@@ -30,9 +30,20 @@ export const CABINET_OPTIONS_NOT_LOGGED = {
     logIn: 'Увійти'
   },
   1: {
-    wishlist: 'Wishlist',
+    wishlist: 'Wish list',
     changeTheme: 'Change theme',
     logIn: 'Log in'
+  }
+};
+
+export const HOME_BUTTONS = {
+  0: {
+    NEWS: 'НОВИНИ',
+    ABOUT_US: 'ПРО НАС'
+  },
+  1: {
+    NEWS: 'NEWS',
+    ABOUT_US: 'ABOUT US'
   }
 };
 
@@ -45,7 +56,7 @@ export const CABINET_OPTIONS_LOGGED = {
   },
   1: {
     profile: 'Profile',
-    wishlist: 'Wishlist',
+    wishlist: 'Wish list',
     changeTheme: 'Change theme',
     logOut: 'Log out'
   }
@@ -251,12 +262,9 @@ export const errorMessages = [
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
-  // '^(?=.{1,60}$)(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
   password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
   phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
-  // /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/g,
-  // ^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$
   country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",

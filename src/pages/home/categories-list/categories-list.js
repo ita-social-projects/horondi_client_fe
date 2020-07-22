@@ -2,16 +2,19 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
-import LoadingBar from '../../../components/LoadingBar';
-import CategoryItem from '../category-item';
-import { useStyles } from './categories.style';
-import { LANGUAGE, HOMEPAGE_TITLES, URL_LANGUAGE } from '../../../configs';
+import { useStyles } from './categories-list.style';
+import LoadingBar from '../../../components/loading-bar';
+import CategoryItem from './category-item';
+import { HOMEPAGE_TITLES, URL_LANGUAGE } from '../../../configs';
 
-const Categories = () => {
-  const { categories, loading } = useSelector(({ Categories }) => ({
-    categories: Categories.list,
-    loading: Categories.loading
-  }));
+const CategoriesList = () => {
+  const { categories, loading, language } = useSelector(
+    ({ Categories, Language }) => ({
+      categories: Categories.list,
+      loading: Categories.loading,
+      language: Language.language
+    })
+  );
   const styles = useStyles();
 
   const categoriesList = categories
@@ -20,7 +23,7 @@ const Categories = () => {
         <CategoryItem
           key={_id}
           categoryUrl={getCategoryURL(name)}
-          categoryName={name[LANGUAGE].value}
+          categoryName={name[language].value}
           categoryImage={images.large}
         />
       ) : null
@@ -30,7 +33,7 @@ const Categories = () => {
   return (
     <div className={styles.catalog}>
       <Typography variant='h2' className={styles.title}>
-        {HOMEPAGE_TITLES[LANGUAGE].catalog}
+        {HOMEPAGE_TITLES[language].catalog}
       </Typography>
       {loading ? (
         <LoadingBar className={styles.loadingIndicator} />
@@ -51,4 +54,4 @@ export const getCategoryURL = (category) => {
   }
 };
 
-export default Categories;
+export default CategoriesList;

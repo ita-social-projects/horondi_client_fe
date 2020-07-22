@@ -6,7 +6,7 @@ const initialState = {
   activeArticle: null
 };
 
-const newsReducer = (state = initialState, action) => {
+const newsReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case SET_NEWS:
     return {

@@ -1,9 +1,9 @@
 import React from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import { useSelector } from 'react-redux';
-import { useStyles } from './Cabinet.styles';
-import NotLoggedCabinet from '../NotLoggedCabinet';
-import LoggedCabinet from '../LoggedCabinet';
+import { useStyles } from './cabinet.styles';
+import NotLoggedCabinet from '../not-logged-cabinet';
+import LoggedCabinet from '../logged-cabinet';
 
 const Cabinet = () => {
   const { userData } = useSelector((state) => ({

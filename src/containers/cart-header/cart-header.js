@@ -27,7 +27,7 @@ const CartHeader = () => {
   useEffect(() => {
     const cartItems = getFromLocalStorage('cart');
     dispatch(setCartItems(cartItems || []));
-  }, []);
+  }, [dispatch]);
 
   return (
     <Link to='/cart'>

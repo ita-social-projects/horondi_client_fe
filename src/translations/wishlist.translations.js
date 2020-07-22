@@ -1,40 +1,32 @@
-export const CART_TITTLES = {
+export const WISHLIST_TITTLES = {
   0: {
-    empty: 'Ваша корзина порожня',
-    filled: 'Корзина'
+    empty: 'Ваш список уподобань порожній',
+    filled: 'Список уподобань'
   },
   1: {
-    empty: 'Your cart is empty',
-    filled: 'Cart'
+    empty: 'Your wishlist is empty',
+    filled: 'Wishlist'
   }
 };
 
-export const CART_BUTTONS = {
+export const WISHLIST_BUTTONS = {
   0: {
     empty: 'ОБРАТИ ЗАРАЗ',
-    shopMore: 'ПРОДОВЖИТИ ВИБІР',
-    checkout: 'ОФОРМИТИ ЗАМОВЛЕННЯ'
+    toCart: 'ДОДАТИ В КОРЗИНУ'
   },
   1: {
-    empty: 'SHOP NOW',
-    shopMore: 'CONTINUE SHOPPING',
-    checkout: 'GO TO CHECKOUT'
+    empty: 'WISH NOW',
+    toCart: 'ADD TO CART'
   }
 };
 
-export const CART_TABLE_FIELDS = {
+export const WISHLIST_TABLE_FIELDS = {
   0: {
     item: 'ПРОДУКТ',
-    quantity: 'КІЛЬКІСТЬ',
-    price: 'ЦІНА',
-    size: 'Розмір',
-    total: 'СУМА'
+    price: 'ЦІНА'
   },
   1: {
     item: 'PRODUCT',
-    quantity: 'QUANTITY',
-    price: 'PRICE',
-    size: 'Size',
-    total: 'TOTAL'
+    price: 'PRICE'
   }
 };

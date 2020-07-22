@@ -9,6 +9,7 @@ import Home from '../pages/home';
 import AboutUs from '../pages/about-us';
 import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
+import Checkout from '../pages/checkout';
 import NewsDetailPage from '../pages/news/news-detail';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
@@ -27,6 +28,7 @@ const Routes = () => {
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
+          <Route path='/checkout' exact component={Checkout} />
         </Switch>
       </div>
       <AppFooter />

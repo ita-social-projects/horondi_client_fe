@@ -25,8 +25,12 @@ const filterReducer = (state = initialState, action = {}) => {
     const filteredValues = state.products
       .filter((product) =>
         action.payload.search.length
-          ? product.name[0].value.includes(action.payload.search) ||
-              product.name[1].value.includes(action.payload.search)
+          ? product.name[0].value
+            .toLowerCase()
+            .includes(action.payload.search.toLowerCase()) ||
+              product.name[1].value
+                .toLowerCase()
+                .includes(action.payload.search.toLowerCase())
           : product
       )
       .filter(

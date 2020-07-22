@@ -10,15 +10,14 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useStyles from './product-list-filter.styles';
 import {
   filterProducts,
   setAllFilterProducts
 } from '../../../redux/filter/filter.actions';
-import { setAllProducts } from '../../../redux/products/products.actions';
 
-const productsBoilerPlate = [
+const products = [
   {
     name: [
       {
@@ -165,7 +164,7 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 1234,
-    color: 'yollow',
+    color: 'yellow',
     pattern: {
       name: [
         {
@@ -173,7 +172,7 @@ const productsBoilerPlate = [
           value: 'вуличний'
         },
         {
-          lang: 'en',
+          lang: 'eng',
           value: 'street'
         }
       ]
@@ -205,7 +204,7 @@ const productsBoilerPlate = [
           value: 'ручний'
         },
         {
-          lang: 'en',
+          lang: 'eng',
           value: 'handmade'
         }
       ]
@@ -237,7 +236,7 @@ const productsBoilerPlate = [
           value: 'ручний'
         },
         {
-          lang: 'en',
+          lang: 'eng',
           value: 'handmade'
         }
       ]
@@ -245,73 +244,16 @@ const productsBoilerPlate = [
   }
 ];
 
-const colors = ['red', 'green', 'blue', 'yellow'];
+const colors = [...new Set(products.map((product) => product.color))];
 
 const patterns = [
-  {
-    name: [
-      {
-        lang: 'uk',
-        value: 'фабричнмй'
-      },
-      {
-        lang: 'en',
-        value: 'fabric'
-      }
-    ]
-  },
-  {
-    name: [
-      {
-        lang: 'uk',
-        value: 'ручний'
-      },
-      {
-        lang: 'en',
-        value: 'handmade'
-      }
-    ]
-  },
-  {
-    name: [
-      {
-        lang: 'uk',
-        value: 'вуличний'
-      },
-      {
-        lang: 'en',
-        value: 'street'
-      }
-    ]
-  },
-  {
-    name: [
-      {
-        lang: 'uk',
-        value: 'національний'
-      },
-      {
-        lang: 'eng',
-        value: 'nation'
-      }
-    ]
-  }
-];
+  ...new Set(products.map((product) => JSON.stringify(product.pattern)))
+].map(JSON.parse);
 
 export default function CheckboxesGroup() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setAllProducts(productsBoilerPlate));
-    console.log('dispached');
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
   const classes = useStyles();
-
-  const { products } = useSelector(({ Products }) => ({
-    products: Products.list
-  }));
 
   const [price, setPrice] = useState([null, null]);
 
@@ -320,7 +262,7 @@ export default function CheckboxesGroup() {
       Math.min(...products.map((product) => product.basePrice)),
       Math.max(...products.map((product) => product.basePrice))
     ]);
-  }, [products]);
+  }, []);
 
   const [search, setSearch] = useState('');
   const [colorsCheck, setColorsCheck] = useState({});
@@ -349,7 +291,6 @@ export default function CheckboxesGroup() {
   };
 
   const handleFilter = () => {
-    console.log(search);
     dispatch(setAllFilterProducts(products));
     dispatch(
       filterProducts({
@@ -367,6 +308,7 @@ export default function CheckboxesGroup() {
   };
 
   const handleClearFilter = () => {
+    setSearch('');
     setPrice([
       Math.min(...products.map((product) => product.basePrice)),
       Math.max(...products.map((product) => product.basePrice))
@@ -440,6 +382,7 @@ export default function CheckboxesGroup() {
             <TextField
               className={classes.search}
               onChange={handleSearch}
+              value={search}
               id='outlined-search'
               label='Search field'
               type='search'

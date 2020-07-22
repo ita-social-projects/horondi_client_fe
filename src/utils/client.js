@@ -1,4 +1,4 @@
-import ApolloClient, { gql } from 'apollo-boost';
+import ApolloClient, { gql, IntrospectionFragmentMatcher } from 'apollo-boost';
 
 export const REACT_APP_API_URL =
   window.env && window.env.REACT_APP_API_URL

@@ -46,7 +46,7 @@
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "lint:fix": "eslint . --fix --color",
-    "cypress": "cypress run --record --key b8017e1c-a479-4cd2-9e35-65855609ae00",
+    "cypress": "cypress open",
     "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
     "test": "jest --coverage"
   },

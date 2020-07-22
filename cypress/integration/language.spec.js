@@ -18,6 +18,5 @@ describe('language test', () => {
     cy.get('#language2').click();
     cy.get('#language1').should('be.not.visible');
     cy.get('#language2').should('be.not.visible');
-    cy.window().its('state').invoke('getState');
   });
 });

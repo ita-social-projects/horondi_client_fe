@@ -99,7 +99,7 @@ const ProductSort = () => {
 
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(
     ({ name, lang, optionValue }, index) => (
-      <option key={index} name={name} value={JSON.stringify(optionValue)}>
+      <option key={index} value={JSON.stringify(optionValue)}>
         {lang[language].value}
       </option>
     )

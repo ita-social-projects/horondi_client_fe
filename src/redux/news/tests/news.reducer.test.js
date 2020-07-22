@@ -1,11 +1,5 @@
 import newsReducer from '../news.reducer';
-import {
-  setNews,
-  setArticle,
-  getNews,
-  getArticle,
-  setLoading
-} from '../news.actions';
+import { setNews, setArticle, setLoading } from '../news.actions';
 
 describe('News reducer test', () => {
   let initialState;
@@ -59,17 +53,7 @@ describe('News reducer test', () => {
       activeArticle: null
     };
 
-    expect(newsReducer(initialState, setNews(newsExample))).toEqual(state);
-  });
-
-  it('should return news array', () => {
-    const state = {
-      loading: true,
-      list: newsExample,
-      activeArticle: null
-    };
-
-    expect(newsReducer(state, getNews()).list).toEqual(newsExample);
+    expect(newsReducer(state, setNews(newsExample))).toEqual(state);
   });
 
   it('should return state with activeArticle', () => {
@@ -81,18 +65,6 @@ describe('News reducer test', () => {
 
     expect(newsReducer(initialState, setArticle(articleExample))).toEqual(
       state
-    );
-  });
-
-  it('should return aticle', () => {
-    const state = {
-      loading: true,
-      list: [],
-      activeArticle: articleExample
-    };
-
-    expect(newsReducer(state, getArticle()).activeArticle).toEqual(
-      articleExample
     );
   });
 

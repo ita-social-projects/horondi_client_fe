@@ -3,8 +3,9 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { handleNewsLoad, handleArticleLoad } from '../news.sagas';
 import getItems from '../../../utils/client';
-import { SET_NEWS, SET_NEWS_ARTICLE, SET_LOADING } from '../news.types';
+import { setLoading, setNews, setArticle } from '../news.actions';
 import { SET_ERROR } from '../../error/error.types';
+import { setError } from '../../error/error.actions';
 
 describe('get news saga', () => {
   it('fetches news', () => {
@@ -37,12 +38,9 @@ describe('get news saga', () => {
 
     return expectSaga(handleNewsLoad)
       .provide([[matchers.call.fn(getItems), newsExample]])
-      .put({ type: SET_LOADING, payload: true })
-      .put({
-        type: SET_NEWS,
-        payload: newsExample.data.getAllNews
-      })
-      .put({ type: SET_LOADING, payload: false })
+      .put(setLoading(true))
+      .put(setNews(newsExample.data.getAllNews))
+      .put(setLoading(false))
       .run();
   });
 });
@@ -52,9 +50,9 @@ it('handles errors', () => {
 
   return expectSaga(handleNewsLoad)
     .provide([[matchers.call.fn(getItems), throwError(e)]])
-    .put({ type: SET_LOADING, payload: true })
-    .put({ type: SET_LOADING, payload: false })
-    .put({ type: SET_ERROR, payload: { e } })
+    .put(setLoading(true))
+    .put(setLoading(false))
+    .put(setError({ e }))
     .run();
 });
 
@@ -78,12 +76,9 @@ describe('get article saga', () => {
 
     return expectSaga(handleArticleLoad, { payload: '13546789456' })
       .provide([[matchers.call.fn(getItems), articleExample]])
-      .put({ type: SET_LOADING, payload: true })
-      .put({
-        type: SET_NEWS_ARTICLE,
-        payload: articleExample.data.getNewsById
-      })
-      .put({ type: SET_LOADING, payload: false })
+      .put(setLoading(true))
+      .put(setArticle(articleExample.data.getNewsById))
+      .put(setLoading(false))
       .run();
   });
 
@@ -92,9 +87,9 @@ describe('get article saga', () => {
 
     return expectSaga(handleArticleLoad, { payload: '13546789456' })
       .provide([[matchers.call.fn(getItems), throwError(e)]])
-      .put({ type: SET_LOADING, payload: true })
-      .put({ type: SET_LOADING, payload: false })
-      .put({ type: SET_ERROR, payload: { e } })
+      .put(setLoading(true))
+      .put(setLoading(false))
+      .put(setError({ e }))
       .run();
   });
 });

@@ -3,16 +3,17 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store/store';
 
-import { useStyles } from './Routes.style.js';
+import { useStyles } from './routes.style.js';
 import NewsPage from '../pages/news/news-page';
-import NewsDetailPage from '../pages/news/news-detail';
-import Home from '../pages/home/home-page';
+import Home from '../pages/home';
 import AboutUs from '../pages/about-us';
+import NewsDetailPage from '../pages/news/news-detail';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 
 const Routes = () => {
   const styles = useStyles();
+
   return (
     <ConnectedRouter history={history}>
       <AppHeader />

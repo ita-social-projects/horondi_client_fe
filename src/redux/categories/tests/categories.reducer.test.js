@@ -1,5 +1,5 @@
 import categoriesReducer from '../categories.reducer';
-import { setCategories , setCategoriesLoading } from '../categories.actions';
+import { setCategories, setCategoriesLoading } from '../categories.actions';
 
 describe('Categories reducer test', () => {
   let initialState;

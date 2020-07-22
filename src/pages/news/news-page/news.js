@@ -4,7 +4,7 @@ import { Backdrop } from '@material-ui/core';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news.style';
 import NewsItem from '../news-item';
-import LoadingBar from '../../../components/LoadingBar';
+import LoadingBar from '../../../components/loading-bar';
 
 const NewsPage = () => {
   const { newslist, loading, language } = useSelector(({ News, Language }) => ({

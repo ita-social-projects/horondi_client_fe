@@ -7,6 +7,7 @@ import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
 import Cart from './cart/cart.reducer';
+import Wishlist from './wishlist/wishlist.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = (history) =>
     Theme,
     Error,
     Language,
-    Cart
+    Cart,
+    Wishlist
   });
 
 export default rootReducer;

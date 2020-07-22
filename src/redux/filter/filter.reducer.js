@@ -23,6 +23,12 @@ const filterReducer = (state = initialState, action = {}) => {
     };
   case FILTER_PRODUCTS:
     const filteredValues = state.products
+      .filter((product) =>
+        action.payload.search.length
+          ? product.name[0].value.includes(action.payload.search) ||
+              product.name[1].value.includes(action.payload.search)
+          : product
+      )
       .filter(
         (product) =>
           product.basePrice >= action.payload.price.bottomPrice &&
@@ -31,6 +37,14 @@ const filterReducer = (state = initialState, action = {}) => {
       .filter((product) =>
         action.payload.colors.length
           ? action.payload.colors.some((color) => color === product.color)
+          : product
+      )
+      .filter((product) =>
+        action.payload.patterns.length
+          ? action.payload.patterns.some(
+            (pattern) =>
+              pattern.name[1].value === product.pattern.name[1].value
+          )
           : product
       );
     console.log(filteredValues);

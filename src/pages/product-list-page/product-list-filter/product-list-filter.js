@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -7,7 +6,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './product-list-filter.styles';
@@ -22,11 +23,11 @@ const productsBoilerPlate = [
     name: [
       {
         lang: 'uk',
-        value: 'Ролтоп'
+        value: 'Гарбуз'
       },
       {
         lang: 'eng',
-        value: 'Rolltop'
+        value: 'Garbuz'
       }
     ],
     images: {
@@ -36,17 +37,29 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 7234,
-    color: 'red'
+    color: 'red',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'фабричнмй'
+        },
+        {
+          lang: 'eng',
+          value: 'fabric'
+        }
+      ]
+    }
   },
   {
     name: [
       {
         lang: 'uk',
-        value: 'Ролтоп'
+        value: 'Новий'
       },
       {
         lang: 'eng',
-        value: 'Rolltop'
+        value: 'New'
       }
     ],
     images: {
@@ -56,7 +69,19 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 4503,
-    color: 'blue'
+    color: 'blue',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'фабричнмй'
+        },
+        {
+          lang: 'eng',
+          value: 'fabric'
+        }
+      ]
+    }
   },
   {
     name: [
@@ -76,7 +101,19 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 1234,
-    color: 'green'
+    color: 'green',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'ручний'
+        },
+        {
+          lang: 'eng',
+          value: 'handmade'
+        }
+      ]
+    }
   },
   {
     name: [
@@ -96,7 +133,19 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 1234,
-    color: 'yellow'
+    color: 'yellow',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'національний'
+        },
+        {
+          lang: 'eng',
+          value: 'nation'
+        }
+      ]
+    }
   },
   {
     name: [
@@ -116,7 +165,19 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 1234,
-    color: 'yollow'
+    color: 'yollow',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'вуличний'
+        },
+        {
+          lang: 'en',
+          value: 'street'
+        }
+      ]
+    }
   },
   {
     name: [
@@ -136,7 +197,19 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 1234,
-    color: 'red'
+    color: 'red',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'ручний'
+        },
+        {
+          lang: 'en',
+          value: 'handmade'
+        }
+      ]
+    }
   },
   {
     name: [
@@ -156,11 +229,74 @@ const productsBoilerPlate = [
     },
     rate: 1,
     basePrice: 1234,
-    color: 'green'
+    color: 'green',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'ручний'
+        },
+        {
+          lang: 'en',
+          value: 'handmade'
+        }
+      ]
+    }
   }
 ];
 
 const colors = ['red', 'green', 'blue', 'yellow'];
+
+const patterns = [
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'фабричнмй'
+      },
+      {
+        lang: 'en',
+        value: 'fabric'
+      }
+    ]
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'ручний'
+      },
+      {
+        lang: 'en',
+        value: 'handmade'
+      }
+    ]
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'вуличний'
+      },
+      {
+        lang: 'en',
+        value: 'street'
+      }
+    ]
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'національний'
+      },
+      {
+        lang: 'eng',
+        value: 'nation'
+      }
+    ]
+  }
+];
 
 export default function CheckboxesGroup() {
   const dispatch = useDispatch();
@@ -186,7 +322,13 @@ export default function CheckboxesGroup() {
     ]);
   }, [products]);
 
+  const [search, setSearch] = useState('');
   const [colorsCheck, setColorsCheck] = useState({});
+  const [patternsCheck, setPatternsCheck] = useState({});
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
 
   const handlePriceChange = (event, newValue) => {
     setPrice(newValue);
@@ -199,18 +341,39 @@ export default function CheckboxesGroup() {
     });
   };
 
+  const handlePatternChange = (event) => {
+    setPatternsCheck({
+      ...patternsCheck,
+      [event.target.name]: event.target.checked
+    });
+  };
+
   const handleFilter = () => {
-    console.log(!!colors.filter((color) => colorsCheck[color]).length);
+    console.log(search);
     dispatch(setAllFilterProducts(products));
     dispatch(
       filterProducts({
+        search,
         price: {
           bottomPrice: price[0],
           topPrice: price[1]
         },
-        colors: colors.filter((color) => colorsCheck[color])
+        colors: colors.filter((color) => colorsCheck[color]),
+        patterns: patterns.filter(
+          (pattern) => patternsCheck[pattern.name[1].value]
+        )
       })
     );
+  };
+
+  const handleClearFilter = () => {
+    setPrice([
+      Math.min(...products.map((product) => product.basePrice)),
+      Math.max(...products.map((product) => product.basePrice))
+    ]);
+    setColorsCheck({});
+    setPatternsCheck({});
+    dispatch(setAllFilterProducts(products));
   };
 
   const priceFilter = (
@@ -239,7 +402,7 @@ export default function CheckboxesGroup() {
         <FormControlLabel
           key={color}
           className={classes.checkbox}
-          control={<Checkbox name={color} />}
+          control={<Checkbox name={color} checked={!!colorsCheck[color]} />}
           label={color}
           onChange={handleColorChange}
         />
@@ -247,17 +410,64 @@ export default function CheckboxesGroup() {
     </FormGroup>
   );
 
+  const patternFilter = (
+    <FormGroup>
+      <Typography id='patterns' gutterBottom>
+        Pattern:
+      </Typography>
+      {patterns.map((pattern) => (
+        <FormControlLabel
+          key={pattern.name[1].value}
+          className={classes.checkbox}
+          control={
+            <Checkbox
+              name={pattern.name[1].value}
+              checked={!!patternsCheck[pattern.name[1].value]}
+            />
+          }
+          label={pattern.name[1].value}
+          onChange={handlePatternChange}
+        />
+      ))}
+    </FormGroup>
+  );
+
   return (
     <div className={classes.root}>
-      <FormControl component='fieldset' className={classes.formControl}>
-        <FormLabel component='legend'>Filter</FormLabel>
-        {priceFilter}
-        {colorFilter}
-        <FormHelperText>Be careful</FormHelperText>
-        <Button variant='contained' onClick={handleFilter}>
-          Filter
-        </Button>
-      </FormControl>
+      <Paper className={classes.paper}>
+        <FormControl component='fieldset' className={classes.formControl}>
+          <FormGroup>
+            <TextField
+              className={classes.search}
+              onChange={handleSearch}
+              id='outlined-search'
+              label='Search field'
+              type='search'
+              variant='outlined'
+            />
+          </FormGroup>
+          <FormGroup className={classes.controls}>
+            <Button
+              className={classes.button}
+              variant='contained'
+              onClick={handleFilter}
+            >
+              Filter
+            </Button>
+            <Button
+              className={classes.button}
+              variant='contained'
+              onClick={handleClearFilter}
+            >
+              Clear Filter
+            </Button>
+          </FormGroup>
+          {priceFilter}
+          {colorFilter}
+          {patternFilter}
+          <FormHelperText>Be careful</FormHelperText>
+        </FormControl>
+      </Paper>
     </div>
   );
 }

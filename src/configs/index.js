@@ -339,3 +339,16 @@ export const REGISTER_PROPOSAL = [
     value: 'Registration'
   }
 ];
+
+export const WELCOME_MESSAGE = [
+  {
+    h2: 'Вітаємо',
+    h3: 'Реєстрація пройшла успішно!',
+    button: 'В магазин'
+  },
+  {
+    h2: 'Welcome',
+    h3: 'Registration was successful!',
+    button: 'Go to shop'
+  }
+];

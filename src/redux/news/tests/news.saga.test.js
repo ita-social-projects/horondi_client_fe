@@ -4,7 +4,6 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { handleNewsLoad, handleArticleLoad } from '../news.sagas';
 import getItems from '../../../utils/client';
 import { setLoading, setNews, setArticle } from '../news.actions';
-import { SET_ERROR } from '../../error/error.types';
 import { setError } from '../../error/error.actions';
 
 describe('get news saga', () => {

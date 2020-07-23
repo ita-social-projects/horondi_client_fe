@@ -23,7 +23,7 @@ const cartReducer = (state = initialState, { type, payload }) => {
   case REMOVE_ITEM_FROM_CART:
     return {
       ...state,
-      list: state.filter((item) => item.id !== payload)
+      list: state.list.filter((item) => item.id !== payload)
     };
   default:
     return state;

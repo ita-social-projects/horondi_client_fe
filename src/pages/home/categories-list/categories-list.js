@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
+import { useStyles } from './categories-list.style';
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
-import { useStyles } from './categories.style';
 import { HOMEPAGE_TITLES, URL_LANGUAGE } from '../../../configs';
 
-const Categories = () => {
+const CategoriesList = () => {
   const { categories, loading, language } = useSelector(
     ({ Categories, Language }) => ({
       categories: Categories.list,
@@ -54,4 +54,4 @@ export const getCategoryURL = (category) => {
   }
 };
 
-export default Categories;
+export default CategoriesList;

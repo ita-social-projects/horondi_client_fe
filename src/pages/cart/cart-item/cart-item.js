@@ -9,7 +9,10 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../../services/local-storage.service';
-import { setCartItems } from '../../../redux/cart/cart.actions';
+import {
+  setCartItems,
+  removeItemFromCart
+} from '../../../redux/cart/cart.actions';
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -34,8 +37,8 @@ const CartItem = ({ item }) => {
         (val) => val.id !== item.id
       );
 
+      dispatch(removeItemFromCart(item.id));
       setToLocalStorage('cart', localStorageCartItems);
-      dispatch(setCartItems(localStorageCartItems));
     }
   };
 

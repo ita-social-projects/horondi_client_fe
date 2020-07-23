@@ -1,7 +1,7 @@
 import React from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
-import { useStyles } from './cab.styles';
+import { useStyles } from './cabinet.styles';
 import NotLoggedCabinet from '../not-logged-cabinet';
 import LoggedCabinet from '../logged-cabinet';
 

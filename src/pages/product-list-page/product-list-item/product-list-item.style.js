@@ -4,8 +4,8 @@ const useStyles = makeStyles(() => ({
   productItem: (props) => ({
     background: `url(${props.image}) no-repeat center`,
     backgroundSize: 'cover',
-    width: '12rem',
-    height: '15rem',
+    width: '29%',
+    height: '20rem',
     margin: '1rem',
     cursor: 'pointer',
     position: 'relative',

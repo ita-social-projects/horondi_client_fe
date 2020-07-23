@@ -9,7 +9,18 @@ const useStyles = makeStyles((theme) => ({
   },
   div: {
     display: 'flex',
-    maxWidth: '75%',
+    flexDirection: 'row',
+    maxWidth: '100%',
+    border: '1px solid red',
+    alignItems: 'base-line',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap'
+  },
+  productsDiv: {
+    display: 'flex',
+    width: '75%',
+    flexDirection: 'row',
+    maxWidth: '100%',
     border: '1px solid red',
     alignItems: 'base-line',
     justifyContent: 'flex-start',

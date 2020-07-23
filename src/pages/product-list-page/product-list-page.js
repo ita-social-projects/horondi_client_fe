@@ -196,7 +196,12 @@ const ProductListPage = ({ category }) => {
       <div className={styles.sortDiv}>
         <ProductSort />
       </div>
-      <div className={styles.div}>{itemsToShow}</div>
+      <div className={styles.div}>
+        <div
+          style={{ width: '25%', height: '10rem', backgroundColor: 'grey' }}
+        />
+        <div className={styles.productsDiv}>{itemsToShow}</div>
+      </div>
 
       <Pagination
         className={styles.paginationDiv}

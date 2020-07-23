@@ -1,9 +1,9 @@
 import {
   LOGIN_USER,
   SET_USER,
-  SET_ERROR,
   LOGOUT_USER,
-  USER_LOADING
+  SET_USER_ERROR,
+  SET_USER_LOADING
 } from './user.types';
 
 const setUser = (user) => ({
@@ -16,8 +16,8 @@ const loginUser = (payload) => ({
   payload
 });
 
-const setError = (error) => ({
-  type: SET_ERROR,
+const setUserError = (error) => ({
+  type: SET_USER_ERROR,
   payload: error
 });
 
@@ -25,7 +25,7 @@ const logoutUser = () => ({
   type: LOGOUT_USER
 });
 
-const userLoading = () => ({
-  type: USER_LOADING
+const setUserLoading = () => ({
+  type: SET_USER_LOADING
 });
-export { loginUser, setUser, setError, logoutUser, userLoading };
+export { loginUser, setUser, setUserError, logoutUser, setUserLoading };

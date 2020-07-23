@@ -1,19 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setUser, setError, userLoading } from './user.actions';
+import { setUser, setUserError, setUserLoading } from './user.actions';
 import { LOGIN_USER } from './user.types';
 import { setItems } from '../../utils/client';
 
 export const loginUser = (payload) => {
-  const { email, password } = payload.user;
   const query = ` 
-  mutation {
+  mutation login($user: UserInput!, $language: Int!) {
   loginUser(
-    user: {
-      email: "${email}"
-      password: "${password}"
-    },
-    language: ${payload.language}
+    user: $user,
+    language: $language
   ) {
     purchasedProducts
     orders
@@ -22,17 +18,17 @@ export const loginUser = (payload) => {
   }
 }
   `;
-  return setItems(query);
+  return setItems(query, payload);
 };
 
 export function* handleUserLoad({ payload }) {
   try {
-    yield put(userLoading());
+    yield put(setUserLoading());
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
     yield put(push('/'));
   } catch (error) {
-    yield put(setError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }
 }
 

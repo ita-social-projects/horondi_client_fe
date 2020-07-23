@@ -1,5 +1,10 @@
 import userReducer, { initialState } from '../user.reducer';
-import { setError, setUser, logoutUser, userLoading } from '../user.actions';
+import {
+  setUserError,
+  setUser,
+  logoutUser,
+  setUserLoading
+} from '../user.actions';
 
 const user = {
   name: 'user',
@@ -18,7 +23,7 @@ describe('test language reducer', () => {
     });
   });
   test('should set error to true', () => {
-    expect(userReducer(initialState, setError(true))).toEqual({
+    expect(userReducer(initialState, setUserError(true))).toEqual({
       ...initialState,
       error: true,
       userLoading: false
@@ -28,7 +33,7 @@ describe('test language reducer', () => {
     expect(userReducer(initialState, logoutUser())).toEqual(initialState);
   });
   test('should user loading', () => {
-    expect(userReducer(initialState, userLoading())).toEqual({
+    expect(userReducer(initialState, setUserLoading())).toEqual({
       ...initialState,
       userLoading: true
     });

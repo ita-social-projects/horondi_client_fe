@@ -1,7 +1,7 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { handleUserLoad, loginUser } from '../user.sagas';
-import { setUser, userLoading, setError } from '../user.actions';
+import { setUser, setUserLoading, setUserError } from '../user.actions';
 
 const userData = {
   email: 'qwerty@gmail.com',
@@ -24,14 +24,15 @@ describe('Categories saga', () => {
 
     return expectSaga(handleUserLoad, userData)
       .provide([[matchers.call.fn(loginUser), fakeUser]])
-      .put(userLoading())
+      .put(setUserLoading())
       .put(setUser(fakeUser.data.loginUser))
       .run();
   });
 
-  it('handles errors', () => expectSaga(handleUserLoad, userData)
-    .provide([[matchers.call.fn(loginUser)]])
-    .put(userLoading())
-    .put(setError(true))
-    .run());
+  it('handles errors', () =>
+    expectSaga(handleUserLoad, userData)
+      .provide([[matchers.call.fn(loginUser)]])
+      .put(setUserLoading())
+      .put(setUserError(true))
+      .run());
 });

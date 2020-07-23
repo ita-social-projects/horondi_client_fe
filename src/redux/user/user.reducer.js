@@ -1,4 +1,9 @@
-import { SET_USER, SET_ERROR, LOGOUT_USER, USER_LOADING } from './user.types';
+import {
+  SET_USER,
+  SET_USER_ERROR,
+  LOGOUT_USER,
+  SET_USER_LOADING
+} from './user.types';
 
 export const initialState = {
   userData: null,
@@ -15,7 +20,7 @@ const userReducer = (state = initialState, action = {}) => {
       userLoading: false,
       userData: action.payload
     };
-  case SET_ERROR:
+  case SET_USER_ERROR:
     return {
       ...state,
       userLoading: false,
@@ -25,7 +30,7 @@ const userReducer = (state = initialState, action = {}) => {
     return {
       ...initialState
     };
-  case USER_LOADING:
+  case SET_USER_LOADING:
     return {
       ...state,
       userLoading: true

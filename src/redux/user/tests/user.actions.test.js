@@ -1,5 +1,5 @@
-import { setError, setUser } from '../user.actions';
-import { SET_ERROR, SET_USER } from '../user.types';
+import { setUserError, setUser } from '../user.actions';
+import { SET_USER_ERROR, SET_USER } from '../user.types';
 
 const user = {
   name: 'user',
@@ -8,8 +8,8 @@ const user = {
 
 describe('test action', () => {
   test('should set error to false', () => {
-    expect(setError(false)).toEqual({
-      type: SET_ERROR,
+    expect(setUserError(false)).toEqual({
+      type: SET_USER_ERROR,
       payload: false
     });
   });

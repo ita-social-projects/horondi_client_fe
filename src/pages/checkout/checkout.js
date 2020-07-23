@@ -37,10 +37,10 @@ const items = [
 const Checkout = () => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector(({ Wishlist }) => Wishlist.list);
-  console.log('wishlist', wishlistItems);
+
   const onAddItemToCart = () => {
-    setToLocalStorage('wishlist', [...wishlistItems, items[1]]);
     dispatch(setItemToWishlist(items[1]));
+    setToLocalStorage('wishlist', [...wishlistItems, items[1]]);
   };
 
   return (

@@ -8,7 +8,7 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../../services/local-storage.service';
-import { setWishlistItems } from '../../../redux/wishlist/wishlist.actions';
+import { removeItemFromWishlist } from '../../../redux/wishlist/wishlist.actions';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
 import { setItemToCart } from '../../../redux/cart/cart.actions';
 
@@ -23,15 +23,15 @@ const WishlistItem = ({ item }) => {
         (val) => val.id !== item.id
       );
 
+      dispatch(removeItemFromWishlist(item.id));
       setToLocalStorage('wishlist', localStorageCartItems);
-      dispatch(setWishlistItems(localStorageCartItems));
     }
   };
 
   const onAddToCart = () => {
     const cartItems = getFromLocalStorage('cart');
-    setToLocalStorage('cart', [...cartItems, item]);
     dispatch(setItemToCart(item));
+    setToLocalStorage('cart', [...cartItems, item]);
   };
 
   return (

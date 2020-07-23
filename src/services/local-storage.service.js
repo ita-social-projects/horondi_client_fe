@@ -3,8 +3,8 @@ export const clearLocalStorage = () => {
     accessToken: 'not null',
     _id: null,
     wishlist: null,
-    cart: null,
-    language: 0
+    language: 0,
+    cart: null
   };
   localStorage.setItem('horondi', JSON.stringify(horondi));
 };

@@ -18,7 +18,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '1rem 0',
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    '& div': {
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      marginRight: 0
+    }
   },
   paginationDiv: {
     display: 'flex',
@@ -26,6 +31,19 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem',
     '& Mui-selected': {
       backgroundColor: 'black !important'
+    },
+    '@media (max-width:500px)': {
+      padding: '1rem 0',
+      '& ul': {
+        '& li': {
+          '& button': {
+            minWidth: '25px !important',
+            height: '25px !important',
+            padding: 0,
+            margin: 0
+          }
+        }
+      }
     }
   }
 }));

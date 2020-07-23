@@ -1,11 +1,14 @@
-import ApolloClient, { gql, IntrospectionFragmentMatcher } from 'apollo-boost';
+import ApolloClient, { gql } from 'apollo-boost';
+import fetch from 'unfetch';
 
 export const REACT_APP_API_URL =
   window.env && window.env.REACT_APP_API_URL
     ? window.env.REACT_APP_API_URL
     : process.env.REACT_APP_API_URL;
+
 const client = new ApolloClient({
-  uri: REACT_APP_API_URL
+  uri: REACT_APP_API_URL,
+  fetch
 });
 
 const getItems = (query) =>

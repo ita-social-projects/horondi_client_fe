@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Select, MenuItem } from '@material-ui/core';
 import {
@@ -15,7 +15,9 @@ const Language = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  dispatch(changeLanguage(languageInLocalStorage));
+  useEffect(() => {
+    dispatch(changeLanguage(languageInLocalStorage));
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const targetValue = e.target.value;

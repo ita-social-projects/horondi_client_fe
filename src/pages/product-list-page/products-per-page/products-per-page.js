@@ -37,7 +37,7 @@ const ProductsPerPage = () => {
       {item.value}
     </Button>
   ));
-  return <ButtonGroup className={styles.item}>{productsOnPage}</ButtonGroup>;
+  return <ButtonGroup className={styles.items}>{productsOnPage}</ButtonGroup>;
 };
 
 export default ProductsPerPage;

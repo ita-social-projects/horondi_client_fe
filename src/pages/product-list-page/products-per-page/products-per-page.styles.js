@@ -8,9 +8,7 @@ const useStyles = makeStyles((theme) => ({
       background: 'red',
       boxSizing: 'border-box',
       padding: 0,
-
       minWidth: 0,
-
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
       fontWeight: 'normal',

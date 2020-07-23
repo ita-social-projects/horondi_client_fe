@@ -24,7 +24,16 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
-          <Route path='/products' exact component={ProductListPage} />
+          <Route path='/error-page' exact render={() => 'error page'} />
+          <Route
+            path='/:category'
+            exact
+            render={({ match }) => {
+              const { category } = match.params;
+              return <ProductListPage category={category} />;
+            }}
+          />
+          <Route path='/:category/:id' exact render={() => 'detail page'} />
         </Switch>
       </div>
       <AppFooter />

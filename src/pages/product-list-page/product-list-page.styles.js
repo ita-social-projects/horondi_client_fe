@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme) => ({
   },
   div: {
     display: 'flex',
+    maxWidth: '75%',
     border: '1px solid red',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'base-line',
+    justifyContent: 'flex-start',
     flexWrap: 'wrap'
   },
   sortDiv: {

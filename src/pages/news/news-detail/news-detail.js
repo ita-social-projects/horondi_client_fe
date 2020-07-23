@@ -89,6 +89,7 @@ const NewsDetailPage = ({ match }) => {
           color='textSecondary'
           component='div'
           className={styles.newsText}
+          id='fullText'
         >
           {newsText}
         </Typography>
@@ -104,12 +105,13 @@ const NewsDetailPage = ({ match }) => {
         />
         <hr />
         <div className={styles.newsAuthorFooter}>
-          <CardHeader subheader={newsAuthor} />
+          <CardHeader subheader={newsAuthor} id='newsAuthor' />
           <CardMedia
             className={styles.authorAvatar}
             image={newsAuthorAvatar}
             title={newsTitle}
             component='div'
+            id='newsAuthorAvatar'
           />
         </div>
       </CardContent>

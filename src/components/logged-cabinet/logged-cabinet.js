@@ -12,18 +12,18 @@ import { setThemeMode } from '../../redux/theme/theme.actions';
 import { CABINET_OPTIONS_LOGGED } from '../../configs';
 
 const LoggedCabinet = () => {
+  const dispatch = useDispatch();
   const { lightMode, language } = useSelector(({ Theme, Language }) => ({
     lightMode: Theme.lightMode,
     language: Language.language
   }));
-  const dispatch = useDispatch();
-
-  const styles = useStyles();
-  const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
 
   const changeTheme = () => {
     dispatch(setThemeMode(!lightMode));
   };
+
+  const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
+  const styles = useStyles();
 
   return (
     <ul className={styles.cabinetDropdownList}>

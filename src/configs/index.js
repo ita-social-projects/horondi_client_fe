@@ -360,3 +360,12 @@ export const WELCOME_MESSAGE = [
     button: 'Go to shop'
   }
 ];
+
+export const CONFIRM_ERROR = [
+  {
+    value: 'Ой! Щось пішло не так.'
+  },
+  {
+    value: 'Oops! Something went wrong.'
+  }
+];

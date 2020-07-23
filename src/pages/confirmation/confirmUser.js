@@ -1,9 +1,9 @@
 import { setItems } from '../../utils/client';
 
-const confirmUser = (token) => {
+const confirmUser = (token, language) => {
   const query = ` 
   mutation {
-    confirmUser(token: "${token}")
+    confirmUser(token: "${token}", language: ${language})
   }
   `;
   return setItems(query);

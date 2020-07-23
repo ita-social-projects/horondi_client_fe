@@ -9,13 +9,12 @@ import {
   LOGIN_FORM_LABEL,
   LOGIN_USER_DATA,
   formRegExp,
-  LOGIN_USER_ERROR,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL
 } from '../../configs';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
-import { Loader } from '../../components/Loader/loader';
+import { Loader } from '../../components/loader/loader';
 
 const Login = () => {
   // VALUES
@@ -29,6 +28,25 @@ const Login = () => {
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
+
+  // HOOKS
+  const { loginError, userLoading, language } = useSelector(
+    ({ User, Language }) => ({
+      loginError: User.error,
+      userLoading: User.userLoading,
+      language: Language.language
+    })
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (emailValidated && passwordValidated) {
+      setAllFieldsValidated(true);
+    } else {
+      setAllFieldsValidated(false);
+    }
+  }, [emailValidated, passwordValidated]);
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -45,30 +63,9 @@ const Login = () => {
   const handleLogin = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      try {
-        dispatch(loginUser(user));
-      } catch (e) {
-        console.error(e);
-      }
+      dispatch(loginUser({ user, language }));
     }
   };
-
-  // HOOKS
-  const { loginError, userLoading, language } = useSelector((state) => ({
-    loginError: state.User.error,
-    userLoading: state.User.userLoading,
-    language: state.Language.language
-  }));
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (emailValidated && passwordValidated) {
-      setAllFieldsValidated(true);
-    } else {
-      setAllFieldsValidated(false);
-    }
-  }, [user, loginError, emailValidated, passwordValidated]);
 
   // LABELS
   const label = LOGIN_FORM_LABEL[language].value;
@@ -135,9 +132,7 @@ const Login = () => {
                   {label}
                 </Button>
                 <p className={styles.loginError}>
-                  {shouldValidate && loginError === true
-                    ? LOGIN_USER_ERROR[language].value
-                    : ''}
+                  {shouldValidate && loginError ? loginError : ''}
                 </p>
               </div>
               <div className={styles.orContainer}>

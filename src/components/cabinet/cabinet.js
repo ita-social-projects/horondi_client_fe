@@ -6,8 +6,8 @@ import NotLoggedCabinet from '../not-logged-cabinet';
 import LoggedCabinet from '../logged-cabinet';
 
 const Cabinet = () => {
-  const { userData } = useSelector((state) => ({
-    userData: state.User.userData
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
   }));
   const styles = useStyles({ logged: !!userData });
 

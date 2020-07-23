@@ -11,9 +11,9 @@ const setUser = (user) => ({
   payload: user
 });
 
-const loginUser = (user) => ({
+const loginUser = (payload) => ({
   type: LOGIN_USER,
-  payload: user
+  payload
 });
 
 const setError = (error) => ({

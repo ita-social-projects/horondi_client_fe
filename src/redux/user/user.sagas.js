@@ -4,19 +4,19 @@ import { setUser, setError, userLoading } from './user.actions';
 import { LOGIN_USER } from './user.types';
 import { setItems } from '../../utils/client';
 
-export const loginUser = (user) => {
-  const { email, password } = user;
+export const loginUser = (payload) => {
+  const { email, password } = payload.user;
   const query = ` 
   mutation {
   loginUser(
     user: {
       email: "${email}"
       password: "${password}"
-    }
+    },
+    language: ${payload.language}
   ) {
     purchasedProducts
     orders
-    cart
     token
     id
   }
@@ -32,7 +32,7 @@ export function* handleUserLoad({ payload }) {
     yield put(setUser(user.data.loginUser));
     yield put(push('/'));
   } catch (error) {
-    yield put(setError(true));
+    yield put(setError(error.message.replace('GraphQL error: ', '')));
   }
 }
 

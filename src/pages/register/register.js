@@ -18,7 +18,7 @@ import registerUser from './registerUser';
 import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
-import { Loader } from '../../components/Loader/loader';
+import { Loader } from '../../components/loader/loader';
 
 function Register() {
   // VALIDATED && CONFIRMED

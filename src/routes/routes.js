@@ -19,7 +19,7 @@ const Routes = () => {
 
   return (
     <ConnectedRouter history={history}>
-      {/* <AppHeader /> */}
+      <AppHeader />
       <div className={styles.root}>
         <Switch>
           <Route path='/' exact component={Home} />

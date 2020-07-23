@@ -7,7 +7,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStyles } from './app-header.styles';
 import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
-import Cabinet from '../cabinet';
+import Cabinet from '../cab';
 
 const AppHeader = () => {
   const styles = useStyles();

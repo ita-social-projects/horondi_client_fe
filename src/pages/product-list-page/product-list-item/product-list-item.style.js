@@ -4,7 +4,7 @@ const useStyles = makeStyles(() => ({
   productItem: (props) => ({
     background: `url(${props.image}) no-repeat center`,
     backgroundSize: 'cover',
-    width: '19.4rem',
+    width: '16rem',
     height: '25rem',
     margin: '1rem',
     cursor: 'pointer',
@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
       width: '45%'
     },
     '@media (max-width:768px)': {
-      width: '14rem',
-      height: '20rem'
+      width: '19rem',
+      height: '25rem'
     },
     '@media (max-width:500px)': {
       width: '100%',

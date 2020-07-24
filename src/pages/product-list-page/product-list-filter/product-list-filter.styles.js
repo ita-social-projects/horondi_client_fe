@@ -3,7 +3,10 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     color: '#3d3d3d',
-    display: 'flex'
+    display: 'flex',
+    '@media (max-width:768px)': {
+      display: 'none'
+    }
   },
   formControl: {
     margin: theme.spacing(3)

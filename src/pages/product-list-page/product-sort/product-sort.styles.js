@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme) => ({
   sortDiv: {
     display: 'flex',
     alignItems: 'center',
-    lineHeight: '25px !important'
+    lineHeight: '25px !important',
+    '& div': {
+      '@media (max-width:500px)': {
+        marginRight: '0 !important',
+        marginBottom: '.5rem'
+      }
+    }
   },
 
   activeButton: {

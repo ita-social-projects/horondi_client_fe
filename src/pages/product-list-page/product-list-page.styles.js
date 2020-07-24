@@ -9,9 +9,21 @@ const useStyles = makeStyles((theme) => ({
   },
   div: {
     display: 'flex',
+    flexDirection: 'row',
+    maxWidth: '100%',
     border: '1px solid red',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'base-line',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap'
+  },
+  productsDiv: {
+    display: 'flex',
+    width: '75%',
+    flexDirection: 'row',
+    maxWidth: '100%',
+    border: '1px solid red',
+    alignItems: 'base-line',
+    justifyContent: 'flex-start',
     flexWrap: 'wrap'
   },
   sortDiv: {
@@ -48,10 +60,6 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     display: 'flex'
-  },
-  filter: {
-    display: 'flex',
-    flexWrap: 'wrap'
   },
   products: {
     display: 'flex',

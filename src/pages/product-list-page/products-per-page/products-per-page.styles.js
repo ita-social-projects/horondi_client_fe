@@ -5,12 +5,9 @@ const useStyles = makeStyles((theme) => ({
     height: '25px !important',
     lineHeight: '25px !important',
     '& .MuiButton-outlined': {
-      background: 'red',
       boxSizing: 'border-box',
       padding: 0,
-
       minWidth: 0,
-
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
       fontWeight: 'normal',

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: '.5rem',
-    marginRight: '17px',
+    marginRight: '17px !important',
     display: 'inline-block',
     '& .MuiOutlinedInput-input': {
       height: '25px',
@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme) => ({
   sortDiv: {
     display: 'flex',
     alignItems: 'center',
-    lineHeight: '25px !important'
+    lineHeight: '25px !important',
+    '& div': {
+      '@media (max-width:500px)': {
+        marginRight: '0 !important',
+        marginBottom: '.5rem'
+      }
+    }
   },
 
   activeButton: {

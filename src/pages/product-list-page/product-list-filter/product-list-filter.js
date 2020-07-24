@@ -487,7 +487,7 @@ export default function CheckboxesGroup() {
       Math.min(...products.map((product) => product.basePrice)),
       Math.max(...products.map((product) => product.basePrice))
     ]);
-  }, []);
+  }, [dispatch]);
 
   const [search, setSearch] = useState('');
   const [colorsCheck, setColorsCheck] = useState({});

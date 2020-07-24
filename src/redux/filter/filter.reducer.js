@@ -97,7 +97,6 @@ const filterReducer = (state = initialState, action = {}) => {
           )
           : product
       );
-    console.log(filteredValues);
     return {
       ...state,
       products: filteredValues

@@ -45,6 +45,17 @@ const useStyles = makeStyles((theme) => ({
         }
       }
     }
+  },
+  list: {
+    display: 'flex'
+  },
+  filter: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  products: {
+    display: 'flex',
+    flexWrap: 'wrap'
   }
 }));
 export default useStyles;

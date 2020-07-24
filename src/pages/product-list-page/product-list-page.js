@@ -158,6 +158,9 @@ const ProductListPage = ({ category }) => {
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));
+  const { products } = useSelector(({ Filter: { products } }) => ({
+    products
+  }));
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
   if (category === 'backpacks') {
     category = [
@@ -185,7 +188,7 @@ const ProductListPage = ({ category }) => {
   }
 
   category = category[language].value;
-  const itemsToShow = productsBoilerPlate.map((product, index) => (
+  const itemsToShow = products.map((product, index) => (
     <ProductListItem key={index} product={product} category={category} />
   ));
   category = category.toUpperCase();
@@ -197,11 +200,11 @@ const ProductListPage = ({ category }) => {
       <div className={styles.sortDiv}>
         <ProductSort />
       </div>
-      <div className={styles.div}>
-        <div className={styles.div}>
+      <div className={styles.list}>
+        <div className={styles.filter}>
           <ProductFilter />
         </div>
-        <div className={styles.div}>{itemsToShow}</div>
+        <div className={styles.products}>{itemsToShow}</div>
       </div>
       <div className={styles.div}>
         <Pagination

@@ -31,10 +31,10 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 2.5,
     basePrice: 7234,
     color: 'red',
     pattern: {
@@ -63,10 +63,10 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 5,
     basePrice: 4503,
     color: 'blue',
     pattern: {
@@ -95,10 +95,10 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 3.5,
     basePrice: 1234,
     color: 'green',
     pattern: {
@@ -127,10 +127,10 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 4.5,
     basePrice: 1234,
     color: 'yellow',
     pattern: {
@@ -159,10 +159,10 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 5,
     basePrice: 1234,
     color: 'yellow',
     pattern: {
@@ -191,10 +191,10 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 3,
     basePrice: 1234,
     color: 'red',
     pattern: {
@@ -223,10 +223,234 @@ const products = [
     ],
     images: {
       primary: {
-        medium: '../../../public/images/about-us/hero-bg.jpg'
+        medium: '../../images/backpack.jpg'
       }
     },
-    rate: 1,
+    rate: 4,
+    basePrice: 1234,
+    color: 'green',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'ручний'
+        },
+        {
+          lang: 'eng',
+          value: 'handmade'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Гарбуз'
+      },
+      {
+        lang: 'eng',
+        value: 'Garbuz'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 2.5,
+    basePrice: 7234,
+    color: 'red',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'фабричнмй'
+        },
+        {
+          lang: 'eng',
+          value: 'fabric'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Новий'
+      },
+      {
+        lang: 'eng',
+        value: 'New'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 5,
+    basePrice: 4503,
+    color: 'blue',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'фабричнмй'
+        },
+        {
+          lang: 'eng',
+          value: 'fabric'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Ролтоп'
+      },
+      {
+        lang: 'eng',
+        value: 'Rolltop'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 3.5,
+    basePrice: 1234,
+    color: 'green',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'ручний'
+        },
+        {
+          lang: 'eng',
+          value: 'handmade'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Ролтоп'
+      },
+      {
+        lang: 'eng',
+        value: 'Rolltop'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 4.5,
+    basePrice: 1234,
+    color: 'yellow',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'національний'
+        },
+        {
+          lang: 'eng',
+          value: 'nation'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Ролтоп'
+      },
+      {
+        lang: 'eng',
+        value: 'Rolltop'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 5,
+    basePrice: 1234,
+    color: 'yellow',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'вуличний'
+        },
+        {
+          lang: 'eng',
+          value: 'street'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Ролтоп'
+      },
+      {
+        lang: 'eng',
+        value: 'Rolltop'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 3,
+    basePrice: 1234,
+    color: 'red',
+    pattern: {
+      name: [
+        {
+          lang: 'uk',
+          value: 'ручний'
+        },
+        {
+          lang: 'eng',
+          value: 'handmade'
+        }
+      ]
+    }
+  },
+  {
+    name: [
+      {
+        lang: 'uk',
+        value: 'Ролтоп'
+      },
+      {
+        lang: 'eng',
+        value: 'Rolltop'
+      }
+    ],
+    images: {
+      primary: {
+        medium: '../../images/backpack.jpg'
+      }
+    },
+    rate: 4,
     basePrice: 1234,
     color: 'green',
     pattern: {
@@ -253,11 +477,12 @@ const patterns = [
 export default function CheckboxesGroup() {
   const dispatch = useDispatch();
 
-  const classes = useStyles();
+  const styles = useStyles();
 
   const [price, setPrice] = useState([null, null]);
 
   useEffect(() => {
+    dispatch(setAllFilterProducts(products));
     setPrice([
       Math.min(...products.map((product) => product.basePrice)),
       Math.max(...products.map((product) => product.basePrice))
@@ -324,7 +549,7 @@ export default function CheckboxesGroup() {
         Price Range:
       </Typography>
       <Slider
-        className={classes.slider}
+        className={styles.slider}
         value={price}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
@@ -343,7 +568,7 @@ export default function CheckboxesGroup() {
       {colors.map((color) => (
         <FormControlLabel
           key={color}
-          className={classes.checkbox}
+          className={styles.checkbox}
           control={<Checkbox name={color} checked={!!colorsCheck[color]} />}
           label={color}
           onChange={handleColorChange}
@@ -360,7 +585,7 @@ export default function CheckboxesGroup() {
       {patterns.map((pattern) => (
         <FormControlLabel
           key={pattern.name[1].value}
-          className={classes.checkbox}
+          className={styles.checkbox}
           control={
             <Checkbox
               name={pattern.name[1].value}
@@ -375,12 +600,12 @@ export default function CheckboxesGroup() {
   );
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <FormControl component='fieldset' className={classes.formControl}>
+    <div className={styles.root}>
+      <Paper className={styles.paper}>
+        <FormControl component='fieldset' className={styles.formControl}>
           <FormGroup>
             <TextField
-              className={classes.search}
+              className={styles.search}
               onChange={handleSearch}
               value={search}
               id='outlined-search'
@@ -389,16 +614,16 @@ export default function CheckboxesGroup() {
               variant='outlined'
             />
           </FormGroup>
-          <FormGroup className={classes.controls}>
+          <FormGroup className={styles.controls}>
             <Button
-              className={classes.button}
+              className={styles.button}
               variant='contained'
               onClick={handleFilter}
             >
               Filter
             </Button>
             <Button
-              className={classes.button}
+              className={styles.button}
               variant='contained'
               onClick={handleClearFilter}
             >

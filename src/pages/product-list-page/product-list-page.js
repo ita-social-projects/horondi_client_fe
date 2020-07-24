@@ -206,7 +206,7 @@ const ProductListPage = ({ category }) => {
         </div>
         <div className={styles.products}>{itemsToShow}</div>
       </div>
-      <div className={styles.div}>
+      <div className={styles.paginationDiv}>
         <Pagination
           count={10}
           variant='outlined'

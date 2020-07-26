@@ -16,16 +16,19 @@ import ProductListItem from './product-list-item';
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language } = useSelector(({ Language: { language } }) => ({
-    language
-  }));
+
+  const { language, products, pagesCount } = useSelector(
+    ({ Language: { language }, Filter: { products, pagesCount } }) => ({
+      language,
+      products,
+      pagesCount
+    })
+  );
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(getFiltredProducts());
   }, [dispatch]);
-  const { products } = useSelector(({ Filter: { products } }) => ({
-    products
-  }));
+
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
   if (category === 'backpacks') {
     category = [
@@ -73,7 +76,7 @@ const ProductListPage = ({ category }) => {
       </div>
       <div className={styles.paginationDiv}>
         <Pagination
-          count={10}
+          count={pagesCount}
           variant='outlined'
           shape='rounded'
           onChange={changeHandler}
@@ -82,6 +85,7 @@ const ProductListPage = ({ category }) => {
     </div>
   );
 };
+
 ProductListPage.propTypes = {
   category: Proptypes.string
 };

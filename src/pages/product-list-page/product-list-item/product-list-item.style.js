@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '0px 0px 5px 5px',
 
     '@media (max-width:1024px)': {
-      width: '45%'
+      width: '16rem'
     },
     '@media (max-width:768px)': {
       width: '19rem',

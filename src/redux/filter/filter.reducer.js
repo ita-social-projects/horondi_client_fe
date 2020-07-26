@@ -1,15 +1,16 @@
 import {
   SET_CURRENT_PAGE,
-  FILTER_PRODUCTS,
   SET_ALL_FILTER_PRODUCTS,
   SET_PRODUCTS_PER_PAGE,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_DATE,
   SET_SORT_BY_RATE,
-  SET_SORT_BY_POPULARITY
+  SET_SORT_BY_POPULARITY,
+  SET_LOADING
 } from './filter.types';
 
 const initialState = {
+  loading: true,
   currentPage: 0,
   productsPerPage: 9,
   sortByPrice: 0,
@@ -33,6 +34,7 @@ const setSort = ({
 const filterReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case SET_ALL_FILTER_PRODUCTS:
+    console.log('sert FILTER products');
     return {
       ...state,
       products: action.payload
@@ -67,39 +69,10 @@ const filterReducer = (state = initialState, action = {}) => {
       ...state,
       ...setSort({ sortByPopularity: action.payload })
     };
-  case FILTER_PRODUCTS:
-    const filteredValues = state.products
-      .filter((product) =>
-        action.payload.search.length
-          ? product.name[0].value
-            .toLowerCase()
-            .includes(action.payload.search.toLowerCase()) ||
-              product.name[1].value
-                .toLowerCase()
-                .includes(action.payload.search.toLowerCase())
-          : product
-      )
-      .filter(
-        (product) =>
-          product.basePrice >= action.payload.price.bottomPrice &&
-            product.basePrice <= action.payload.price.topPrice
-      )
-      .filter((product) =>
-        action.payload.colors.length
-          ? action.payload.colors.some((color) => color === product.color)
-          : product
-      )
-      .filter((product) =>
-        action.payload.patterns.length
-          ? action.payload.patterns.some(
-            (pattern) =>
-              pattern.name[1].value === product.pattern.name[1].value
-          )
-          : product
-      );
+  case SET_LOADING:
     return {
       ...state,
-      products: filteredValues
+      loading: action.payload
     };
   default:
     return state;

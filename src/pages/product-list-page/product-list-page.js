@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import Proptypes from 'prop-types';
@@ -6,151 +6,12 @@ import { Typography } from '@material-ui/core';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
-import { setCurrentPage } from '../../redux/filter/filter.actions';
+import {
+  setCurrentPage,
+  getFiltredProducts
+} from '../../redux/filter/filter.actions';
+import { getAllProducts } from '../../redux/products/products.actions';
 import ProductListItem from './product-list-item';
-
-// const productsBoilerPlate = [
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Гарбуз'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Pumpkin'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 4,
-//     basePrice: 555
-//   },
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Ролтоп1'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Rolltop1'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 3,
-//     basePrice: 1488
-//   },
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Ролтоп2'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Rolltop2'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 5,
-//     basePrice: 676
-//   },
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Ролтоп3'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Rolltop3'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 3,
-//     basePrice: 444
-//   },
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Ролтоп4'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Rolltop4'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 1,
-//     basePrice: 1234
-//   },
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Ролтоп5'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Rolltop5'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 1,
-//     basePrice: 1234
-//   },
-//   {
-//     _id: '5f0434835ac2ec33594276cd',
-//     name: [
-//       {
-//         lang: 'uk',
-//         value: 'Ролтоп6'
-//       },
-//       {
-//         lang: 'eng',
-//         value: 'Rolltop6'
-//       }
-//     ],
-//     images: {
-//       primary: {
-//         medium: './images/backpack.jpg'
-//       }
-//     },
-//     rate: 2.4,
-//     basePrice: 1234
-//   }
-// ];
 
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
@@ -158,6 +19,10 @@ const ProductListPage = ({ category }) => {
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));
+  useEffect(() => {
+    dispatch(getAllProducts());
+    dispatch(getFiltredProducts());
+  }, [dispatch]);
   const { products } = useSelector(({ Filter: { products } }) => ({
     products
   }));

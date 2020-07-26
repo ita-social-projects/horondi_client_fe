@@ -11,11 +11,12 @@ const client = new ApolloClient({
   fetch
 });
 
-const getItems = (query) =>
+const getItems = (query, variables = {}) =>
   client.query({
     query: gql`
       ${query}
-    `
+    `,
+    variables
   });
 
 export default getItems;

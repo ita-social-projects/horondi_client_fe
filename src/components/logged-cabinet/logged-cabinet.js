@@ -16,14 +16,15 @@ const LoggedCabinet = () => {
     lightMode: Theme.lightMode,
     language: Language.language
   }));
-  const dispatch = useDispatch();
 
-  const styles = useStyles();
-  const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
+  const dispatch = useDispatch();
 
   const changeTheme = () => {
     dispatch(setThemeMode(!lightMode));
   };
+
+  const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
+  const styles = useStyles();
 
   return (
     <ul className={styles.cabinetDropdownList}>

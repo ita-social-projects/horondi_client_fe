@@ -8,3 +8,13 @@ export const HOMEPAGE_TITLES = {
     look: 'Horondi style'
   }
 };
+export const HOME_BUTTONS = {
+  0: {
+    NEWS: 'НОВИНИ',
+    ABOUT_US: 'ПРО НАС'
+  },
+  1: {
+    NEWS: 'NEWS',
+    ABOUT_US: 'ABOUT US'
+  }
+};

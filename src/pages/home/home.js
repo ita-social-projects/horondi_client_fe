@@ -1,24 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 
-import Categories from '../categories';
-import OurLooks from '../our-looks';
-import { LANGUAGE } from '../../../configs';
+import CategoriesList from './categories-list';
+import OurLooks from './our-looks';
+import { HOME_BUTTONS } from '../../translations/homepage.translations';
 import { useStyles } from './home.styles';
 
-const HOME_BUTTONS = {
-  0: {
-    NEWS: 'НОВИНИ',
-    ABOUT_US: 'ПРО НАС'
-  },
-  1: {
-    NEWS: 'NEWS',
-    ABOUT_US: 'ABOUT US'
-  }
-};
-
 const Home = () => {
+  const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
   return (
@@ -26,19 +17,19 @@ const Home = () => {
       <div className={styles.homeHeader}>
         <Link to='/news'>
           <Button className={styles.headerButton} variant='contained'>
-            {HOME_BUTTONS[LANGUAGE].NEWS}
+            {HOME_BUTTONS[language].NEWS}
           </Button>
         </Link>
         <Link to='/about-us'>
           <Button className={styles.headerButton} variant='contained'>
-            {HOME_BUTTONS[LANGUAGE].ABOUT_US}
+            {HOME_BUTTONS[language].ABOUT_US}
           </Button>
         </Link>
       </div>
-      <Categories />
+      <CategoriesList />
       <OurLooks />
     </div>
   );
 };
-//
+
 export default Home;

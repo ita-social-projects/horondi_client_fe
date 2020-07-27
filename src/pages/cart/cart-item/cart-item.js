@@ -19,8 +19,6 @@ const CartItem = ({ item }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
-  console.log(item);
-
   const onChangeQuantity = (itemId, key) => {
     const localStorageCartItems = getFromLocalStorage('cart').map((item) => {
       if (item._id === itemId) {

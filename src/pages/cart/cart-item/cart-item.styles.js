@@ -13,14 +13,18 @@ export const useStyles = makeStyles((theme) => ({
       width: 200,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      '@media (max-width: 768px)': {
+        width: 100
+      }
     }
   },
   image: {
     flexBasis: 100,
     '& > img': {
       width: '100%',
-      borderRadius: 5
+      borderRadius: 5,
+      minWidth: 60
     }
   },
   description: {

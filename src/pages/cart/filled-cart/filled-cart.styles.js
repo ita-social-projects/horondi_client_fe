@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '100px auto'
+    margin: '50px auto'
   },
   table: {
     display: 'flex',
@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
     borderColor: '#DADADA',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px',
+    '@media (max-width: 768px)': {
+      fontSize: '1em'
+    },
     '& > tr': {
       display: 'flex',
       width: '100%',
@@ -25,7 +28,10 @@ export const useStyles = makeStyles((theme) => ({
       flex: '1'
     },
     '& tr > th:not(:first-child)': {
-      width: 200
+      width: 200,
+      '@media (max-width: 768px)': {
+        width: 100
+      }
     }
   },
   tableBody: {

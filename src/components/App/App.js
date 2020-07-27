@@ -6,9 +6,11 @@ import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import { CssBaseline } from '@material-ui/core';
 import Routes from '../../routes';
 import { theme } from './app-theme/app.theme';
-import { DARK_THEME, LIGHT_THEME } from '../../configs';
+import { LIGHT_THEME } from '../../configs';
 import CircularUnderLoad from '../loading-bar';
 import { useStyles } from './App.styles';
+import { getFromLocalStorage } from '../../services/local-storage.service';
+import { setThemeMode } from '../../redux/theme/theme.actions';
 
 import { getCategories } from '../../redux/categories/categories.actions';
 
@@ -19,12 +21,15 @@ const App = () => {
   }));
   const dispatch = useDispatch();
   const styles = useStyles();
-  const themeMode = lightMode ? LIGHT_THEME : DARK_THEME;
-  const themeValue = theme(themeMode);
+
+  const localStorageThemeMode = getFromLocalStorage('theme');
+  const isLightTheme = localStorageThemeMode === LIGHT_THEME;
+  const themeValue = theme(localStorageThemeMode);
 
   useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
+    dispatch(setThemeMode(isLightTheme));
+  }, [dispatch, lightMode]);
 
   if (isLoading) {
     return (

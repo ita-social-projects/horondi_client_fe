@@ -11,7 +11,6 @@ const ProductListItem = ({ product, category }) => {
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));
-  console.log(product.rate);
   const name = product.name[language].value;
   const price = product.basePrice;
   return (
@@ -35,9 +34,9 @@ ProductListItem.propTypes = {
           medium: PropTypes.string
         })
       })
-    ),
-    rate: PropTypes.number
-  })
+    )
+  }),
+  rate: PropTypes.number
 };
 ProductListItem.defaultProps = {
   category: 'backpacks',
@@ -45,8 +44,7 @@ ProductListItem.defaultProps = {
     _id: '',
     basePrice: 1,
     images: {
-      primary: { medium: '' },
-      _typename: PropTypes.string
+      primary: { medium: '' }
     },
     additional: {}
   },

@@ -23,26 +23,64 @@ const ProductListPage = ({ category }) => {
     pagesCount,
     currentPage,
     productsPerPage,
-    
+    sortByRate,
+    sortByPrice,
+    pattern,
+    colors,
+    sortByPopularity
   } = useSelector(
     ({
       Language: { language },
-      Filter: { products, pagesCount, currentPage, productsPerPage, sortByRate }
+      Filter: {
+        products,
+        pagesCount,
+        currentPage,
+        productsPerPage,
+        sortByRate,
+        sortByPrice,
+        pattern,
+        colors,
+        sortByPopularity
+      }
     }) => ({
       language,
       products,
       currentPage,
       pagesCount,
       productsPerPage,
-      sortByRate
+      sortByRate,
+      sortByPrice,
+      pattern,
+      colors,
+      sortByPopularity
     })
   );
-
+  console.log(products);
   useEffect(() => {
     dispatch(setCategory(category));
     dispatch(getAllProducts());
-    dispatch(getFiltredProducts({ sort: { } }));
-  }, [dispatch, category, currentPage, productsPerPage]);
+    dispatch(
+      getFiltredProducts({
+        rate: sortByRate,
+        basePrice: sortByPrice,
+        pattern,
+        colors,
+        skip: currentPage * productsPerPage,
+        limit: productsPerPage,
+        purchasedCount: sortByPopularity
+      })
+    );
+  }, [
+    dispatch,
+    category,
+    currentPage,
+    productsPerPage,
+    sortByPrice,
+    sortByPopularity,
+    sortByRate,
+    pattern,
+    colors
+  ]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
   if (category === 'backpacks') {

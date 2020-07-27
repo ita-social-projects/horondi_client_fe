@@ -27,7 +27,8 @@ export default function CheckboxesGroup() {
     productsPerPage,
     sortByPrice,
     sortByRate,
-    sortByPopularity
+    sortByPopularity,
+    category
   } = useSelector(
     ({
       Products: { products },
@@ -37,7 +38,8 @@ export default function CheckboxesGroup() {
         sortByPrice,
         isHotItem,
         sortByRate,
-        sortByPopularity
+        sortByPopularity,
+        category
       }
     }) => ({
       products,
@@ -46,10 +48,10 @@ export default function CheckboxesGroup() {
       sortByPrice,
       isHotItem,
       sortByRate,
-      sortByPopularity
+      sortByPopularity,
+      category
     })
   );
-  console.log(sortByRate);
   useEffect(() => {
     setPrice([
       Math.min(...products.map((product) => product.basePrice)),
@@ -102,7 +104,8 @@ export default function CheckboxesGroup() {
           .map((pattern) => pattern[1].value),
         skip: currentPage * productsPerPage,
         limit: productsPerPage,
-        sort: { basePrice: sortByPrice, rate: sortByRate },
+        basePrice: sortByPrice,
+        rate: sortByRate,
         purchasedProducts: sortByPopularity
       })
     );

@@ -6,7 +6,6 @@ import getItems from '../../utils/client';
 import { GET_ALL_PRODUCTS } from './products.types';
 
 export function* handleGetAllProducts() {
-  console.log('GET ALL CALLED!');
   try {
     yield put(setLoading(true));
     const products = yield call(

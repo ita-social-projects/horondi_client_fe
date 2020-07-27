@@ -13,11 +13,10 @@ export function* handleFilterLoad({
     price: [0, 99999],
     skip: 1,
     limit: 9,
-    rate: 1
+    rate: 0,
+    basePrice: 0
   }
 }) {
-  console.log(payload.skip);
-  console.log(payload.limit);
   try {
     yield put(setLoading(true));
     const products = yield call(
@@ -30,7 +29,7 @@ export function* handleFilterLoad({
                 $skip:Int
                 $limit:Int
                 $rate:Int
-             
+                $basePrice:Int
             ){
             getProductsByOptions(
                 filter: {
@@ -41,7 +40,10 @@ export function* handleFilterLoad({
                  skip: $skip
                  limit: $limit
                 search: $search
-               sort:{ rate: $rate}
+               sort:{ 
+                 rate: $rate,
+                 basePrice: $basePrice,
+                }
             ){
             _id
             name {
@@ -55,6 +57,7 @@ export function* handleFilterLoad({
                 medium
               }
             }
+            purchasedCount
             colors{
                 name {
                   lang
@@ -75,10 +78,10 @@ export function* handleFilterLoad({
         price: payload.price,
         skip: payload.skip,
         limit: payload.limit,
-        rate: payload.rate
+        rate: payload.rate,
+        basePrice: payload.basePrice
       }
     );
-    console.log(products.data);
     yield put(setAllFilterProducts(products.data.getProductsByOptions));
     yield put(setLoading(false));
   } catch (e) {

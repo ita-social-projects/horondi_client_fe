@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Rating } from '@material-ui/lab';
 
 const StarRating = ({
-  rate = 3,
+  rate,
   size = 'normal',
   disabled = false,
-  precision = 0.5
+  precision = 0.1
 }) => {
   const [value, setValue] = useState(rate);
   const changeHandler = (event, newValue) => {
@@ -15,7 +15,7 @@ const StarRating = ({
   return (
     <Rating
       name='simple-controlled'
-      value={value}
+      value={rate}
       size={size}
       onChange={changeHandler}
       disabled={disabled}

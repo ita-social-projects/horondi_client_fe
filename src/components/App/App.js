@@ -1,43 +1,46 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ThemeProvider } from '@material-ui/styles';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
-import {
-  cartService,
-  catalogService,
-  orderService,
-  productService,
-  userService,
-  ratingService
-} from '../../services';
+import { CssBaseline } from '@material-ui/core';
+import Routes from '../../routes';
+import { theme } from './app-theme/app.theme';
+import { DARK_THEME, LIGHT_THEME } from '../../configs';
+import CircularUnderLoad from '../loading-bar';
+import { useStyles } from './App.styles';
 
-import { StoreServiceProvider } from '../store-service-context';
+import { getCategories } from '../../redux/categories/categories.actions';
 
-import store from '../../store/store';
+const App = () => {
+  const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
+    isLoading: Categories.loading,
+    lightMode: Theme.lightMode
+  }));
+  const dispatch = useDispatch();
+  const styles = useStyles();
+  const themeMode = lightMode ? LIGHT_THEME : DARK_THEME;
+  const themeValue = theme(themeMode);
 
-// import Routes from '../routes';
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
-import Chat from '../chat';
-
-const storeService = {
-  cartService,
-  catalogService,
-  orderService,
-  productService,
-  userService,
-  ratingService
-};
-
-const App = () => (
-  <Provider store={store}>
-    <StoreServiceProvider value={storeService}>
-      <div className='App'>
-        {/* <Routes /> */}
-        <p>horondi</p>
-        <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
-        <Chat />
+  if (isLoading) {
+    return (
+      <div className={styles.center}>
+        <CircularUnderLoad />
       </div>
-    </StoreServiceProvider>
-  </Provider>
-);
+    );
+  }
+
+  return (
+    <ThemeProvider theme={themeValue}>
+      <CssBaseline />
+      <Routes />
+      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
+    </ThemeProvider>
+  );
+};
 
 export default App;

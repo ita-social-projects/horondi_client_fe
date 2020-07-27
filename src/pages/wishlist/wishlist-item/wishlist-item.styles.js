@@ -13,13 +13,18 @@ export const useStyles = makeStyles((theme) => ({
       width: 200,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      '@media (max-width: 768px)': {
+        width: 100
+      }
     }
   },
   image: {
     flexBasis: 100,
     '& > img': {
-      width: '100%'
+      width: '100%',
+      borderRadius: 5,
+      minWidth: 60
     }
   },
   description: {
@@ -38,7 +43,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   itemName: {
-    fontWeight: '600'
+    fontSize: '1.7em'
   },
   price: {
     position: 'relative'
@@ -46,6 +51,9 @@ export const useStyles = makeStyles((theme) => ({
   trash: {
     position: 'absolute',
     right: 10,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 768px)': {
+      right: 1
+    }
   }
 }));

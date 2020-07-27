@@ -41,14 +41,14 @@ const WishlistItem = ({ item }) => {
           <img src={item.image} alt='product pictures' />
         </div>
         <div className={styles.description}>
-          <span className={styles.itemName}>{item.name}</span>
+          <span className={styles.itemName}>{item.name[language].value}</span>
           <Button onClick={onAddToCart} variant='contained'>
             {WISHLIST_BUTTONS[language].toCart}
           </Button>
         </div>
       </td>
       <td className={styles.price}>
-        <span>{item.price}</span>
+        <span>{item.totalPrice} UAH</span>
         <DeleteIcon className={styles.trash} onClick={onRemoveItem} />
       </td>
     </tr>

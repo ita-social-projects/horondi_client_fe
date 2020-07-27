@@ -19,6 +19,8 @@ const CartItem = ({ item }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
+  console.log(item);
+
   const onChangeQuantity = (itemId, key) => {
     const localStorageCartItems = getFromLocalStorage('cart').map((item) => {
       if (item.id === itemId) {
@@ -49,9 +51,9 @@ const CartItem = ({ item }) => {
           <img src={item.image} alt='product pictures' />
         </div>
         <div className={styles.description}>
-          <span className={styles.itemName}>{item.name}</span>
+          <span className={styles.itemName}>{item.name[language].value}</span>
           <span className={styles.size}>
-            {CART_TABLE_FIELDS[language].size}: {item.size}
+            {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
           </span>
         </div>
       </td>
@@ -59,7 +61,7 @@ const CartItem = ({ item }) => {
         <NumberInput item={item} onChangeQuantity={onChangeQuantity} />
       </td>
       <td className={styles.price}>
-        <span>{item.price}</span>
+        <span>{item.totalPrice}</span>
         <DeleteIcon className={styles.trash} onClick={onRemoveItem} />
       </td>
     </tr>

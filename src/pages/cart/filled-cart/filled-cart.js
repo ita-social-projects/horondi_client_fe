@@ -16,7 +16,7 @@ const FilledCart = ({ items }) => {
   const styles = useStyles();
 
   const totalCounter = () =>
-    items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0);
 
   return (
     <div className={styles.root}>
@@ -29,8 +29,8 @@ const FilledCart = ({ items }) => {
           </tr>
         </thead>
         <tbody className={styles.tableBody}>
-          {items.map((item, i) => (
-            <CartItem key={i} item={item} />
+          {items.map((item) => (
+            <CartItem key={item.id} item={item} />
           ))}
         </tbody>
       </table>

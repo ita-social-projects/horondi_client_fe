@@ -11,12 +11,12 @@ const NumberInput = ({ onChangeQuantity, item }) => {
     <div className={styles.root}>
       <RemoveIcon
         className={styles.button}
-        onClick={() => onChangeQuantity(item.id, 0)}
+        onClick={() => onChangeQuantity(item._id, 0)}
       />
       <span>{item.quantity}</span>
       <AddIcon
         className={styles.button}
-        onClick={() => onChangeQuantity(item.id, 1)}
+        onClick={() => onChangeQuantity(item._id, 1)}
       />
     </div>
   );

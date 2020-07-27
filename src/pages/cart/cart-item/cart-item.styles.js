@@ -19,7 +19,8 @@ export const useStyles = makeStyles((theme) => ({
   image: {
     flexBasis: 100,
     '& > img': {
-      width: '100%'
+      width: '100%',
+      borderRadius: 5
     }
   },
   description: {
@@ -28,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: 20
   },
   itemName: {
-    fontWeight: '600'
+    fontSize: '1.7em'
   },
   price: {
     position: 'relative'

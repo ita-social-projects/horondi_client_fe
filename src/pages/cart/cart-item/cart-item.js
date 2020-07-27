@@ -23,7 +23,7 @@ const CartItem = ({ item }) => {
 
   const onChangeQuantity = (itemId, key) => {
     const localStorageCartItems = getFromLocalStorage('cart').map((item) => {
-      if (item.id === itemId) {
+      if (item._id === itemId) {
         item.quantity = key ? ++item.quantity : --item.quantity || 1;
       }
       return item;
@@ -61,7 +61,7 @@ const CartItem = ({ item }) => {
         <NumberInput item={item} onChangeQuantity={onChangeQuantity} />
       </td>
       <td className={styles.price}>
-        <span>{item.totalPrice}</span>
+        <span>{item.totalPrice} UAH</span>
         <DeleteIcon className={styles.trash} onClick={onRemoveItem} />
       </td>
     </tr>

@@ -30,12 +30,12 @@ const FilledCart = ({ items }) => {
         </thead>
         <tbody className={styles.tableBody}>
           {items.map((item) => (
-            <CartItem key={item.id} item={item} />
+            <CartItem key={item._id} item={item} />
           ))}
         </tbody>
       </table>
       <div className={styles.total}>
-        {CART_TABLE_FIELDS[language].total}: {totalCounter()}
+        {CART_TABLE_FIELDS[language].total}: {totalCounter()} UAH
       </div>
       <div className={styles.controlButtons}>
         <Link to='/'>

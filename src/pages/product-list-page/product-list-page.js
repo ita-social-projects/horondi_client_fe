@@ -8,7 +8,8 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import {
   setCurrentPage,
-  getFiltredProducts
+  getFiltredProducts,
+  setCategory
 } from '../../redux/filter/filter.actions';
 import { getAllProducts } from '../../redux/products/products.actions';
 import ProductListItem from './product-list-item';
@@ -16,18 +17,32 @@ import ProductListItem from './product-list-item';
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-
-  const { language, products, pagesCount } = useSelector(
-    ({ Language: { language }, Filter: { products, pagesCount } }) => ({
+  const {
+    language,
+    products,
+    pagesCount,
+    currentPage,
+    productsPerPage,
+    
+  } = useSelector(
+    ({
+      Language: { language },
+      Filter: { products, pagesCount, currentPage, productsPerPage, sortByRate }
+    }) => ({
       language,
       products,
-      pagesCount
+      currentPage,
+      pagesCount,
+      productsPerPage,
+      sortByRate
     })
   );
+
   useEffect(() => {
+    dispatch(setCategory(category));
     dispatch(getAllProducts());
-    dispatch(getFiltredProducts());
-  }, [dispatch]);
+    dispatch(getFiltredProducts({ sort: { } }));
+  }, [dispatch, category, currentPage, productsPerPage]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
   if (category === 'backpacks') {

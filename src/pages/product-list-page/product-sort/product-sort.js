@@ -53,7 +53,6 @@ const ProductSort = () => {
       }
     },
     {
-      name: 'sortDesc',
       lang: [
         { lang: 'uk', value: 'від дорогих до дешевих' },
         { lang: 'eng', value: 'price (high to low) ' }
@@ -64,7 +63,7 @@ const ProductSort = () => {
       }
     },
     {
-      name: 'sortAsc',
+
       lang: [
         { lang: 'uk', value: 'від дешевих до дорогих' },
         { lang: 'eng', value: 'price (low to high) ' }
@@ -72,7 +71,7 @@ const ProductSort = () => {
       optionValue: { name: 'sortAsc', value: 1 }
     },
     {
-      name: 'rate',
+   
       lang: [
         { lang: 'uk', value: 'за рейтингом' },
         { lang: 'eng', value: 'rate' }
@@ -83,7 +82,7 @@ const ProductSort = () => {
       }
     },
     {
-      name: 'new',
+    
       lang: [
         { lang: 'uk', value: 'новинки' },
         { lang: 'eng', value: 'new' }

@@ -7,7 +7,8 @@ import {
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   GET_FILTRED_PRODUCTS,
-  SET_LOADING
+  SET_LOADING,
+  SET_CATEGORY,
 } from './filter.types';
 
 export const setAllFilterProducts = (payload) => ({
@@ -46,4 +47,8 @@ export const getFiltredProducts = (payload) => ({
 export const setLoading = (loading) => ({
   type: SET_LOADING,
   payload: loading
+});
+export const setCategory = (payload) => ({
+  type: SET_CATEGORY,
+  payload
 });

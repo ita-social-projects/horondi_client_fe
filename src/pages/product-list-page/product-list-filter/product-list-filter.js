@@ -21,10 +21,35 @@ export default function CheckboxesGroup() {
 
   const [price, setPrice] = useState([null, null]);
 
-  const { products } = useSelector(({ Products: { products } }) => ({
-    products
-  }));
-
+  const {
+    products,
+    currentPage,
+    productsPerPage,
+    sortByPrice,
+    sortByRate,
+    sortByPopularity
+  } = useSelector(
+    ({
+      Products: { products },
+      Filter: {
+        currentPage,
+        productsPerPage,
+        sortByPrice,
+        isHotItem,
+        sortByRate,
+        sortByPopularity
+      }
+    }) => ({
+      products,
+      currentPage,
+      productsPerPage,
+      sortByPrice,
+      isHotItem,
+      sortByRate,
+      sortByPopularity
+    })
+  );
+  console.log(sortByRate);
   useEffect(() => {
     setPrice([
       Math.min(...products.map((product) => product.basePrice)),
@@ -74,7 +99,11 @@ export default function CheckboxesGroup() {
         colors: colors.filter((color) => colorsCheck[color]),
         patterns: patterns
           .filter((pattern) => patternsCheck[pattern[1].value])
-          .map((pattern) => pattern[1].value)
+          .map((pattern) => pattern[1].value),
+        skip: currentPage * productsPerPage,
+        limit: productsPerPage,
+        sort: { basePrice: sortByPrice, rate: sortByRate },
+        purchasedProducts: sortByPopularity
       })
     );
   };

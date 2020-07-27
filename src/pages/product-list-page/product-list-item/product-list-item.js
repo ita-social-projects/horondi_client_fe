@@ -7,10 +7,11 @@ import useStyles from './product-list-item.style';
 import StarRating from '../../../containers/star-rating';
 
 const ProductListItem = ({ product, category }) => {
-  const styles = useStyles({ image: product.images[0].primary.medium });
+  const styles = useStyles({ image: product.images.primary.medium });
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));
+  console.log(product.rate);
   const name = product.name[language].value;
   const price = product.basePrice;
   return (
@@ -28,17 +29,13 @@ ProductListItem.propTypes = {
   product: PropTypes.shape({
     _id: PropTypes.string,
     basePrice: PropTypes.number,
-    images: PropTypes.shape({
-      name: PropTypes.arrayOf(
-        PropTypes.shape({
-          lang: PropTypes.string,
-          value: PropTypes.string
+    images: PropTypes.objectOf(
+      PropTypes.shape({
+        primary: PropTypes.shape({
+          medium: PropTypes.string
         })
-      ),
-      primary: PropTypes.shape({
-        medium: PropTypes.string
       })
-    }),
+    ),
     rate: PropTypes.number
   })
 };
@@ -48,13 +45,12 @@ ProductListItem.defaultProps = {
     _id: '',
     basePrice: 1,
     images: {
-      name: [{ lang: '' }, { value: '' }]
+      primary: { medium: '' },
+      _typename: PropTypes.string
     },
-    primary: {
-      medium: ''
-    },
-    rate: 1
-  }
+    additional: {}
+  },
+  rate: 1
 };
 
 export default ProductListItem;

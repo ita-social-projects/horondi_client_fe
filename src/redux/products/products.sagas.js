@@ -24,8 +24,10 @@ export function* handleGetAllProducts() {
                 value
                 
               }
-              simpleName{
+              simpleName {
+                lang
                 value
+                
               }
             }
             basePrice

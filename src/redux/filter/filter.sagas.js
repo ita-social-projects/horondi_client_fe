@@ -69,7 +69,8 @@ export function* handleFilterLoad({
                   lang
                   value
                 }
-                simpleName{
+                simpleName {
+                  lang
                   value
                 }
               }

@@ -12,6 +12,7 @@ import {
   setCategory
 } from '../../redux/filter/filter.actions';
 import ProductListItem from './product-list-item';
+import { getAllProducts } from '../../redux/products/products.actions';
 
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
@@ -59,6 +60,7 @@ const ProductListPage = ({ category }) => {
   );
   const getProducts = useCallback(
     (args) => {
+      dispatch(getAllProducts());
       dispatch(getFiltredProducts(args));
     },
     [

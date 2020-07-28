@@ -1,51 +1,57 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { setItemToWishlist } from '../../redux/wishlist/wishlist.actions';
-import { setToLocalStorage } from '../../services/local-storage.service';
+import { addItemToWishlist } from '../../redux/wishlist/wishlist.actions';
 
 const items = [
   {
     id: 1,
-    name: 'Roltop RED',
+    name: {
+      0: {
+        value: 'Ролтоп"Гарбуз"'
+      },
+      1: {
+        value: 'Rolltop "Pumpkin"'
+      }
+    },
     image:
       'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/63110485_2122892687837419_4024521649276583936_o.jpg?_nc_cat=102&_nc_sid=730e14&_nc_ohc=vonTwNGPltQAX-ZouQM&_nc_ht=scontent.flwo4-2.fna&oh=8be8c78b21e0d929118de7640e683a17&oe=5F3DF6CB',
     quantity: 1,
-    size: 'm',
-    price: 99
+    selectedSize: 'S',
+    bagBottom: 'leatherette',
+    sidePocket: true,
+    totalPrice: 99
   },
   {
     id: 2,
-    name: 'Roltop BLUE',
+    name: {
+      0: {
+        value: 'Ролтоп "Банан"'
+      },
+      1: {
+        value: 'Rolltop "Banana"'
+      }
+    },
     image:
-      'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/60137130_2077078339085521_2095612185504907264_o.jpg?_nc_cat=103&_nc_sid=730e14&_nc_ohc=u7_20yRoE9AAX_dv4Da&_nc_ht=scontent.flwo4-2.fna&oh=1b9914aa095d801acbdef5063c903317&oe=5F3B2EC0',
-    quantity: 4,
-    size: 's',
-    price: 399
-  },
-  {
-    id: 3,
-    name: 'Roltop GREEN',
-    image:
-      'https://scontent.flwo4-1.fna.fbcdn.net/v/t1.0-9/41454920_1729869400473085_948813010749620224_o.jpg?_nc_cat=109&_nc_sid=730e14&_nc_ohc=wYgGdFz6LOUAX98AlXc&_nc_ht=scontent.flwo4-1.fna&oh=90c9077c0425d548fefadc0559a1e1f6&oe=5F3B3BA5',
-    quantity: 2,
-    size: 'm',
-    price: 199
+      'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/63110485_2122892687837419_4024521649276583936_o.jpg?_nc_cat=102&_nc_sid=730e14&_nc_ohc=vonTwNGPltQAX-ZouQM&_nc_ht=scontent.flwo4-2.fna&oh=8be8c78b21e0d929118de7640e683a17&oe=5F3DF6CB',
+    quantity: 1,
+    selectedSize: 'M',
+    bagBottom: 'Cordura',
+    sidePocket: true,
+    totalPrice: 199
   }
 ];
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const wishlistItems = useSelector(({ Wishlist }) => Wishlist.list);
 
-  const onAddItemToCart = () => {
-    dispatch(setItemToWishlist(items[1]));
-    setToLocalStorage('wishlist', [...wishlistItems, items[1]]);
+  const onAddItemToCart = (item) => {
+    dispatch(addItemToWishlist(item));
   };
 
   return (
     <div>
-      <button type='button' onClick={onAddItemToCart}>
+      <button type='button' onClick={() => onAddItemToCart(items[0])}>
         {' '}
         add
       </button>

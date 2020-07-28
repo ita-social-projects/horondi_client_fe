@@ -6,6 +6,7 @@ import Categories from './categories/categories.reducer';
 import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
+import User from './user/user.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = (history) =>
     News,
     Categories,
     Theme,
+    User,
     Error,
     Language
   });

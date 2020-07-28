@@ -10,6 +10,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStyles } from './logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { CABINET_OPTIONS_LOGGED } from '../../translations/cabinet.translations';
+import { logoutUser } from '../../redux/user/user.actions';
 
 const LoggedCabinet = () => {
   const { lightMode, language } = useSelector(({ Theme, Language }) => ({
@@ -23,6 +24,9 @@ const LoggedCabinet = () => {
     dispatch(setThemeMode(!lightMode));
   };
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
   const styles = useStyles();
 
@@ -45,7 +49,7 @@ const LoggedCabinet = () => {
         <span>{CABINET_OPTIONS_LOGGED[language].changeTheme}</span>
       </li>
       <li>
-        <Link to='/login' className={styles.link}>
+        <Link to='/login' className={styles.link} onClick={handleLogout}>
           <ExitToAppIcon />
           <span>{CABINET_OPTIONS_LOGGED[language].logOut}</span>
         </Link>

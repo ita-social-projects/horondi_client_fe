@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Backdrop } from '@material-ui/core';
 import { getNews } from '../../../redux/news/news.actions';
-import { useStyles } from './news.style';
+import { useStyles } from './news-page.style';
 import NewsItem from '../news-item';
 import LoadingBar from '../../../components/loading-bar';
 

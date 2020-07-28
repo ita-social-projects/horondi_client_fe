@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useStyles } from './cabinet.styles';
 import NotLoggedCabinet from '../../components/not-logged-cabinet';
@@ -14,13 +14,15 @@ const Cabinet = () => {
     dispatch(getWishlist());
   }, [dispatch]);
 
-  const isLogged = true;
-  const styles = useStyles({ logged: isLogged });
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
+  }));
+  const styles = useStyles({ logged: !!userData });
 
   return (
     <div className={styles.cabinet}>
       <PersonOutlineIcon />
-      {isLogged ? <LoggedCabinet /> : <NotLoggedCabinet />}
+      {userData ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>
   );
 };

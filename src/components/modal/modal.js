@@ -1,37 +1,41 @@
 import React, { useState } from 'react';
 import SimpleModal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 
 import { MODAL_BUTTONS } from '../../translations/modal.translations';
 import { useStyles } from './modal.styles';
 
 const Modal = ({ message, itemName, onAction, isOpen, language }) => {
-  const styles = useStyles();
   const [open, setOpen] = useState(isOpen);
+  const styles = useStyles();
 
-  console.log(message);
-
-  const handleClose = (action) => {
+  const handleClose = (_, __, action) => {
     action ? onAction(true) : onAction(false);
     setOpen(false);
   };
 
   const body = (
     <div className={styles.paper}>
-      <h2 id='simple-modal-title'>Text in a modal</h2>
-      <p id='simple-modal-description'>{message + itemName}?</p>
-      {/* <div style={styles.buttonGroup}>
-        <button type='button' onClick={() => handleClose(true)}>
+      <p>
+        {message}
+        <b>{itemName}</b>?
+      </p>
+      <div className={styles.buttonGroup}>
+        <Button
+          onClick={() => handleClose(null, null, true)}
+          variant='contained'
+        >
           {MODAL_BUTTONS[language].confirm}
-        </button>
-        <button type='button' onClick={() => handleClose(false)}>
+        </Button>
+        <Button onClick={handleClose} variant='contained'>
           {MODAL_BUTTONS[language].cancel}
-        </button>
-      </div> */}
+        </Button>
+      </div>
     </div>
   );
 
   return (
-    <div>
+    <td>
       <SimpleModal
         open={open}
         onClose={handleClose}
@@ -40,7 +44,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
       >
         {body}
       </SimpleModal>
-    </div>
+    </td>
   );
 };
 

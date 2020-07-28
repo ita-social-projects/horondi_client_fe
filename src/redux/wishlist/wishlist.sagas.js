@@ -27,13 +27,10 @@ function* handleAddWishlistItem({ payload }) {
 
 function* handleRemoveWishlistItem({ payload }) {
   const wishlist = yield call(getFromLocalStorage, 'wishlist');
+  const newWishlist = wishlist.filter((item) => item._id !== payload._id);
 
-  if (window.confirm('Delete?')) {
-    const newWishlist = wishlist.filter((item) => item._id !== payload._id);
-
-    setToLocalStorage('wishlist', newWishlist);
-    yield put(setWishlist(newWishlist));
-  }
+  setToLocalStorage('wishlist', newWishlist);
+  yield put(setWishlist(newWishlist));
 }
 
 export default function* wishlistSaga() {

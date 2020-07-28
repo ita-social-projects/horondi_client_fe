@@ -9,14 +9,15 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from './logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
-import { CABINET_OPTIONS_LOGGED } from '../../configs';
+import { CABINET_OPTIONS_LOGGED } from '../../translations/cabinet.translations';
 
 const LoggedCabinet = () => {
-  const dispatch = useDispatch();
   const { lightMode, language } = useSelector(({ Theme, Language }) => ({
     lightMode: Theme.lightMode,
     language: Language.language
   }));
+
+  const dispatch = useDispatch();
 
   const changeTheme = () => {
     dispatch(setThemeMode(!lightMode));

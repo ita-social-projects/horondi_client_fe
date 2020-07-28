@@ -6,10 +6,9 @@ import { setItems } from '../../utils/client';
 
 export const loginUser = (payload) => {
   const query = ` 
-  mutation login($user: UserInput!, $language: Int!) {
+  mutation login($user: UserInput!) {
   loginUser(
-    user: $user,
-    language: $language
+    user: $user
   ) {
     purchasedProducts
     orders

@@ -11,7 +11,6 @@ import {
 } from '../../../translations/cart.translations';
 
 const FilledCart = ({ items }) => {
-  console.log(items);
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
@@ -30,7 +29,7 @@ const FilledCart = ({ items }) => {
         </thead>
         <tbody className={styles.tableBody}>
           {items.map((item) => (
-            <CartItem key={item._id} item={item} />
+            <CartItem key={Math.random()} item={item} />
           ))}
         </tbody>
       </table>

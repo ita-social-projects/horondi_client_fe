@@ -4,19 +4,22 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 import { useStyles } from './number-input.styles';
 
-const NumberInput = ({ onChangeQuantity, item }) => {
+const NumberInput = ({
+  onChangeQuantity,
+  item: { _id, selectedSize, quantity }
+}) => {
   const styles = useStyles();
 
   return (
     <div className={styles.root}>
       <RemoveIcon
         className={styles.button}
-        onClick={() => onChangeQuantity(item._id, 0)}
+        onClick={() => onChangeQuantity(_id, selectedSize, 0)}
       />
-      <span>{item.quantity}</span>
+      <span>{quantity}</span>
       <AddIcon
         className={styles.button}
-        onClick={() => onChangeQuantity(item._id, 1)}
+        onClick={() => onChangeQuantity(_id, selectedSize, 1)}
       />
     </div>
   );

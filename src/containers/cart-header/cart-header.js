@@ -29,10 +29,12 @@ const CartHeader = () => {
     dispatch(setCartItems(cartItems || []));
   }, []);
 
+  const cartItemsCounter = () => cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <Link to='/cart'>
       <IconButton className={styles.root} aria-label='cart'>
-        <StyledBadge badgeContent={cartItems.length} color='secondary'>
+        <StyledBadge badgeContent={cartItemsCounter()} color='secondary'>
           <ShoppingBasketIcon />
         </StyledBadge>
       </IconButton>

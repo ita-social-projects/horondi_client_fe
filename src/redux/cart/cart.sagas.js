@@ -41,17 +41,14 @@ function* handleAddCartItem({ payload }) {
 
 function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
   const cart = yield call(getFromLocalStorage, 'cart');
+  const newCart = cart.filter(
+    (item) =>
+      item._id !== _id ||
+      (item._id === _id && item.selectedSize !== selectedSize)
+  );
 
-  if (window.confirm('Delete?')) {
-    const newCart = cart.filter(
-      (item) =>
-        item._id !== _id ||
-        (item._id === _id && item.selectedSize !== selectedSize)
-    );
-
-    setToLocalStorage('cart', newCart);
-    yield put(setCart(newCart));
-  }
+  setToLocalStorage('cart', newCart);
+  yield put(setCart(newCart));
 }
 
 function* handleIncrementCartItemQuantity({ payload: { _id, selectedSize } }) {

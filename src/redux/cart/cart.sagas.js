@@ -14,89 +14,69 @@ import {
 } from '../../services/local-storage.service';
 
 function* handleCartLoad() {
-  try {
-    const cart = yield call(getFromLocalStorage, 'cart');
-    yield put(setCart(cart));
-  } catch (e) {
-    console.log(e);
-  }
+  const cart = yield call(getFromLocalStorage, 'cart');
+  yield put(setCart(cart));
 }
 
 function* handleAddCartItem({ payload }) {
-  try {
-    const cart = yield call(getFromLocalStorage, 'cart');
-    const possibleItemInCart = cart.find(
-      (item) =>
-        item._id === payload._id && item.selectedSize === payload.selectedSize
-    );
+  const cart = yield call(getFromLocalStorage, 'cart');
+  const possibleItemInCart = cart.find(
+    (item) =>
+      item._id === payload._id && item.selectedSize === payload.selectedSize
+  );
 
-    let newCart;
-    if (possibleItemInCart) {
-      newCart = cart.map((item) => {
-        item._id === payload._id && item.quantity++;
-        return item;
-      });
-    } else {
-      newCart = [...cart, payload];
-    }
-
-    setToLocalStorage('cart', newCart);
-    yield put(setCart(newCart));
-  } catch (e) {
-    console.log(e);
+  let newCart;
+  if (possibleItemInCart) {
+    newCart = cart.map((item) => {
+      item._id === payload._id && item.quantity++;
+      return item;
+    });
+  } else {
+    newCart = [...cart, payload];
   }
+
+  setToLocalStorage('cart', newCart);
+  yield put(setCart(newCart));
 }
 
 function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
-  try {
-    const cart = yield call(getFromLocalStorage, 'cart');
+  const cart = yield call(getFromLocalStorage, 'cart');
 
-    if (window.confirm('Delete?')) {
-      const newCart = cart.filter(
-        (item) =>
-          item._id !== _id ||
-          (item._id === _id && item.selectedSize !== selectedSize)
-      );
+  if (window.confirm('Delete?')) {
+    const newCart = cart.filter(
+      (item) =>
+        item._id !== _id ||
+        (item._id === _id && item.selectedSize !== selectedSize)
+    );
 
-      setToLocalStorage('cart', newCart);
-      yield put(setCart(newCart));
-    }
-  } catch (e) {
-    console.log(e);
+    setToLocalStorage('cart', newCart);
+    yield put(setCart(newCart));
   }
 }
 
 function* handleIncrementCartItemQuantity({ payload: { _id, selectedSize } }) {
-  try {
-    const cart = yield call(getFromLocalStorage, 'cart');
-    const newCart = cart.map((item) => {
-      if (item._id === _id && item.selectedSize === selectedSize) {
-        item.quantity++;
-      }
-      return item;
-    });
+  const cart = yield call(getFromLocalStorage, 'cart');
+  const newCart = cart.map((item) => {
+    if (item._id === _id && item.selectedSize === selectedSize) {
+      item.quantity++;
+    }
+    return item;
+  });
 
-    setToLocalStorage('cart', newCart);
-    yield put(setCart(newCart));
-  } catch (e) {
-    console.log(e);
-  }
+  setToLocalStorage('cart', newCart);
+  yield put(setCart(newCart));
 }
 
 function* handleDecrementCartItemQuantity({ payload: { _id, selectedSize } }) {
-  try {
-    const cart = yield call(getFromLocalStorage, 'cart');
-    const newCart = cart.map((item) => {
-      if (item._id === _id && item.selectedSize === selectedSize) {
-        item.quantity--;
-      }
-      return item;
-    });
-    setToLocalStorage('cart', newCart);
-    yield put(setCart(newCart));
-  } catch (e) {
-    console.log(e);
-  }
+  const cart = yield call(getFromLocalStorage, 'cart');
+  const newCart = cart.map((item) => {
+    if (item._id === _id && item.selectedSize === selectedSize) {
+      item.quantity--;
+    }
+    return item;
+  });
+  setToLocalStorage('cart', newCart);
+  yield put(setCart(newCart));
 }
 
 export default function* categoriesSaga() {

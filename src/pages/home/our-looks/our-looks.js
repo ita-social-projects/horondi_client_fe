@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './our-looks.style';
-import { HOMEPAGE_TITLES, HOMEPAGE_LOOKS_IMAGES } from '../../../configs';
+import { HOMEPAGE_LOOKS_IMAGES } from '../../../configs';
+import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 const OurLooks = () => {
   const language = useSelector(({ Language }) => Language.language);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import Proptypes from 'prop-types';
@@ -11,7 +11,6 @@ import {
   getFiltredProducts,
   setCategory
 } from '../../redux/filter/filter.actions';
-import { getAllProducts } from '../../redux/products/products.actions';
 import ProductListItem from './product-list-item';
 
 const ProductListPage = ({ category }) => {
@@ -27,7 +26,8 @@ const ProductListPage = ({ category }) => {
     sortByPrice,
     pattern,
     colors,
-    sortByPopularity
+    sortByPopularity,
+    filteredCategory
   } = useSelector(
     ({
       Language: { language },
@@ -40,7 +40,8 @@ const ProductListPage = ({ category }) => {
         sortByPrice,
         pattern,
         colors,
-        sortByPopularity
+        sortByPopularity,
+        filteredCategory
       }
     }) => ({
       language,
@@ -52,24 +53,38 @@ const ProductListPage = ({ category }) => {
       sortByPrice,
       pattern,
       colors,
-      sortByPopularity
+      sortByPopularity,
+      filteredCategory
     })
   );
-  console.log(products);
+  const getProducts = useCallback(
+    (args) => {
+      dispatch(getFiltredProducts(args));
+    },
+    [
+      dispatch,
+      sortByRate,
+      sortByPrice,
+      sortByPopularity,
+      colors,
+      pattern,
+      currentPage,
+      productsPerPage,
+      category
+    ]
+  );
   useEffect(() => {
     dispatch(setCategory(category));
-    dispatch(getAllProducts());
-    dispatch(
-      getFiltredProducts({
-        rate: sortByRate,
-        basePrice: sortByPrice,
-        pattern,
-        colors,
-        skip: currentPage * productsPerPage,
-        limit: productsPerPage,
-        purchasedCount: sortByPopularity
-      })
-    );
+    getProducts({
+      rate: sortByRate || undefined,
+      basePrice: sortByPrice || undefined,
+      pattern,
+      colors,
+      skip: currentPage * productsPerPage,
+      limit: productsPerPage,
+      purchasedCount: sortByPopularity || undefined,
+      category: filteredCategory
+    });
   }, [
     dispatch,
     category,
@@ -138,10 +153,10 @@ const ProductListPage = ({ category }) => {
     </div>
   );
 };
-
 ProductListPage.propTypes = {
   category: Proptypes.string
 };
+
 ProductListPage.defaultProps = {
   category: 'backpacks'
 };

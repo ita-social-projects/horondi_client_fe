@@ -16,6 +16,7 @@ const getItems = (query, variables = {}) =>
     query: gql`
       ${query}
     `,
+    fetchPolicy: 'no-cache',
     variables
   });
 

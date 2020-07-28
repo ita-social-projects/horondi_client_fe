@@ -10,6 +10,7 @@ const useStyles = makeStyles(() => ({
     cursor: 'pointer',
     position: 'relative',
     borderRadius: '0px 0px 5px 5px',
+    backgroundColor: 'lightgrey',
 
     '@media (max-width:1024px)': {
       width: '16rem'

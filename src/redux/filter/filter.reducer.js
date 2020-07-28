@@ -17,7 +17,7 @@ const initialState = {
   sortByPrice: 0,
   isHotItem: true,
   sortByRate: 0,
-  sortByPopularity: 1,
+  sortByPopularity: -1,
   products: []
 };
 const setSort = ({

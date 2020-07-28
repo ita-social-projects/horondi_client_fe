@@ -13,8 +13,10 @@ export function* handleFilterLoad({
     price: [0, 99999],
     skip: 1,
     limit: 9,
-    rate: 0,
-    basePrice: 0
+    rate: undefined,
+    basePrice: undefined,
+    purchasedCount: undefined,
+    category: ''
   }
 }) {
   try {
@@ -30,12 +32,15 @@ export function* handleFilterLoad({
                 $limit:Int
                 $rate:Int
                 $basePrice:Int
+                $purchasedCount:Int
+                $category:String
             ){
-            getProductsByOptions(
+            getProducts(
                 filter: {
                     colors: $colors
                     pattern: $patterns
                     price: $price
+                    subcategory:$category
                   }
                  skip: $skip
                  limit: $limit
@@ -43,9 +48,11 @@ export function* handleFilterLoad({
                sort:{ 
                  rate: $rate,
                  basePrice: $basePrice,
+                 purchasedCount:$purchasedCount
                 }
             ){
             _id
+            purchasedCount
             name {
               lang
               value
@@ -57,13 +64,14 @@ export function* handleFilterLoad({
                 medium
               }
             }
-            purchasedCount
             colors{
                 name {
                   lang
                   value
                 }
-                simpleName
+                simpleName{
+                  value
+                }
               }
             pattern {
                 lang
@@ -71,6 +79,7 @@ export function* handleFilterLoad({
               }
           },
       }`,
+
       {
         search: payload.search,
         colors: payload.colors,
@@ -79,10 +88,12 @@ export function* handleFilterLoad({
         skip: payload.skip,
         limit: payload.limit,
         rate: payload.rate,
-        basePrice: payload.basePrice
+        basePrice: payload.basePrice,
+        category: payload.category,
+        purchasedCount: payload.purchasedCount
       }
     );
-    yield put(setAllFilterProducts(products.data.getProductsByOptions));
+    yield put(setAllFilterProducts(products.data.getProducts));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleFilterError, e);

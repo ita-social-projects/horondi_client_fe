@@ -4,35 +4,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 
 import { useStyles } from './wishlist-item.styles';
-import {
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../../services/local-storage.service';
 import { removeItemFromWishlist } from '../../../redux/wishlist/wishlist.actions';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
-import { setItemToCart } from '../../../redux/cart/cart.actions';
+// import { addItemToCart } from '../../../redux/cart/cart.actions';
 
 const WishlistItem = ({ item }) => {
   const dispatch = useDispatch();
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
-  const onRemoveItem = () => {
-    if (window.confirm('Delete?')) {
-      const localStorageCartItems = getFromLocalStorage('wishlist').filter(
-        (val) => val.id !== item.id
-      );
-
-      dispatch(removeItemFromWishlist(item.id));
-      setToLocalStorage('wishlist', localStorageCartItems);
-    }
-  };
-
-  const onAddToCart = () => {
-    const cartItems = getFromLocalStorage('cart');
-    dispatch(setItemToCart(item));
-    setToLocalStorage('cart', [...cartItems, item]);
-  };
+  const onRemoveItem = () => dispatch(removeItemFromWishlist(item));
+  const onAddToCart = () => dispatch();
 
   return (
     <tr className={styles.root}>

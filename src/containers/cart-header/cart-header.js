@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 import { withStyles } from '@material-ui/core/styles';
 import { useStyles } from './cart-header.styles';
-import { setCartItems } from '../../redux/cart/cart.actions';
-import { getFromLocalStorage } from '../../services/local-storage.service';
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -20,19 +18,12 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 const CartHeader = () => {
-  const dispatch = useDispatch();
-  const cartItems = useSelector(({ Cart }) => Cart.list);
   const styles = useStyles();
-
-  useEffect(() => {
-    const cartItems = getFromLocalStorage('cart');
-    dispatch(setCartItems(cartItems || []));
-  }, [dispatch]);
 
   return (
     <Link to='/cart'>
       <IconButton className={styles.root} aria-label='cart'>
-        <StyledBadge badgeContent={cartItems.length} color='secondary'>
+        <StyledBadge badgeContent={1} color='secondary'>
           <ShoppingBasketIcon />
         </StyledBadge>
       </IconButton>

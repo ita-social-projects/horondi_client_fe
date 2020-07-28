@@ -5,15 +5,13 @@ import { useDispatch } from 'react-redux';
 import { useStyles } from './cabinet.styles';
 import NotLoggedCabinet from '../../components/not-logged-cabinet';
 import LoggedCabinet from '../../components/logged-cabinet';
-import { getFromLocalStorage } from '../../services/local-storage.service';
-import { setWishlistItems } from '../../redux/wishlist/wishlist.actions';
+import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 
 const Cabinet = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const wishlistItems = getFromLocalStorage('wishlist');
-    dispatch(setWishlistItems(wishlistItems));
+    dispatch(getWishlist());
   }, [dispatch]);
 
   const isLogged = true;

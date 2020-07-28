@@ -7,7 +7,6 @@ import { useStyles } from './routes.style.js';
 import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
 import AboutUs from '../pages/about-us';
-import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
 import Checkout from '../pages/checkout';
 import NewsDetailPage from '../pages/news/news-detail';
@@ -26,7 +25,6 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
-          <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/checkout' exact component={Checkout} />
         </Switch>

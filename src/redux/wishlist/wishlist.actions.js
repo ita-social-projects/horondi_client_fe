@@ -1,16 +1,21 @@
 import {
-  SET_WISHLIST_ITEMS,
-  SET_ITEM_TO_WISHLIST,
+  SET_WISHLIST,
+  GET_WISHLIST,
+  ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST
 } from './wishlist.types';
 
-const setWishlistItems = (wishlistItems) => ({
-  type: SET_WISHLIST_ITEMS,
+const getWishlist = () => ({
+  type: GET_WISHLIST
+});
+
+const setWishlist = (wishlistItems) => ({
+  type: SET_WISHLIST,
   payload: wishlistItems
 });
 
-const setItemToWishlist = (item) => ({
-  type: SET_ITEM_TO_WISHLIST,
+const addItemToWishlist = (item) => ({
+  type: ADD_ITEM_TO_WISHLIST,
   payload: item
 });
 
@@ -19,4 +24,4 @@ const removeItemFromWishlist = (itemId) => ({
   payload: itemId
 });
 
-export { setWishlistItems, setItemToWishlist, removeItemFromWishlist };
+export { getWishlist, setWishlist, addItemToWishlist, removeItemFromWishlist };

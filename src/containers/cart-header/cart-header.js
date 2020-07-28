@@ -7,8 +7,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 import { withStyles } from '@material-ui/core/styles';
 import { useStyles } from './cart-header.styles';
-import { setCartItems } from '../../redux/cart/cart.actions';
-import { getFromLocalStorage } from '../../services/local-storage.service';
+import { getCart } from '../../redux/cart/cart.actions';
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -25,11 +24,11 @@ const CartHeader = () => {
   const styles = useStyles();
 
   useEffect(() => {
-    const cartItems = getFromLocalStorage('cart');
-    dispatch(setCartItems(cartItems || []));
-  }, []);
+    dispatch(getCart());
+  }, [dispatch]);
 
-  const cartItemsCounter = () => cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const cartItemsCounter = () =>
+    cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Link to='/cart'>

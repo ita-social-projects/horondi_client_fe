@@ -1,8 +1,4 @@
-import {
-  SET_ITEM_TO_CART,
-  REMOVE_ITEM_FROM_CART,
-  SET_CART_ITEMS
-} from './cart.types';
+import { SET_CART } from './cart.types';
 
 const initialState = {
   list: []
@@ -10,20 +6,10 @@ const initialState = {
 
 const cartReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-  case SET_CART_ITEMS:
+  case SET_CART:
     return {
       ...state,
       list: payload
-    };
-  case SET_ITEM_TO_CART:
-    return {
-      ...state,
-      list: [...state.list, payload]
-    };
-  case REMOVE_ITEM_FROM_CART:
-    return {
-      ...state,
-      list: state.list.filter((item) => item.id !== payload)
     };
   default:
     return state;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import { useSelector } from 'react-redux';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
@@ -14,6 +15,10 @@ import ProductListPage from '../pages/product-list-page';
 
 const Routes = () => {
   const styles = useStyles();
+
+  const { categories } = useSelector(({ Categories }) => ({
+    categories: Categories.list
+  }));
 
   return (
     <ConnectedRouter history={history}>
@@ -30,7 +35,12 @@ const Routes = () => {
             exact
             render={({ match }) => {
               const { category } = match.params;
-              return <ProductListPage category={category} />;
+              const categoryParam = categories.find(
+                (categoryFound) =>
+                  categoryFound.name[1].value.toLowerCase() ===
+                    category.toLowerCase() && categoryFound.isMain
+              );
+              return <ProductListPage category={categoryParam} />;
             }}
           />
           <Route path='/:category/:id' exact render={() => 'detail page'} />

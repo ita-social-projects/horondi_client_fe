@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import Proptypes from 'prop-types';
@@ -8,8 +8,7 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import {
   setCurrentPage,
-  getFiltredProducts,
-  setCategory
+  getFiltredProducts
 } from '../../redux/filter/filter.actions';
 import ProductListItem from './product-list-item';
 import { getAllProducts } from '../../redux/products/products.actions';
@@ -17,6 +16,7 @@ import { getAllProducts } from '../../redux/products/products.actions';
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+
   const {
     language,
     products,
@@ -25,122 +25,88 @@ const ProductListPage = ({ category }) => {
     productsPerPage,
     sortByRate,
     sortByPrice,
-    pattern,
-    colors,
-    sortByPopularity,
-    filteredCategory
+    colorsFilter,
+    patternsFilter,
+    categoryFilter,
+    priceFilter,
+    searchFilter,
+    sortByPopularity
   } = useSelector(
     ({
       Language: { language },
       Filter: {
         products,
         pagesCount,
-        currentPage,
-        productsPerPage,
         sortByRate,
         sortByPrice,
-        pattern,
-        colors,
+        colorsFilter,
+        patternsFilter,
+        categoryFilter,
+        priceFilter,
+        searchFilter,
         sortByPopularity,
-        filteredCategory
+        productsPerPage,
+        currentPage
       }
     }) => ({
       language,
       products,
-      currentPage,
       pagesCount,
-      productsPerPage,
       sortByRate,
       sortByPrice,
-      pattern,
-      colors,
+      colorsFilter,
+      patternsFilter,
+      categoryFilter,
+      priceFilter,
+      searchFilter,
       sortByPopularity,
-      filteredCategory
+      productsPerPage,
+      currentPage
     })
   );
-  const getProducts = useCallback(
-    (args) => {
-      dispatch(getAllProducts());
-      dispatch(getFiltredProducts(args));
-    },
-    [
-      dispatch,
-      sortByRate,
-      sortByPrice,
-      sortByPopularity,
-      colors,
-      pattern,
-      currentPage,
-      productsPerPage,
-      category
-    ]
-  );
+
   useEffect(() => {
-    dispatch(setCategory(category));
-    getProducts({
-      rate: sortByRate || undefined,
-      basePrice: sortByPrice || undefined,
-      pattern,
-      colors,
-      skip: currentPage * productsPerPage,
-      limit: productsPerPage,
-      purchasedCount: sortByPopularity || undefined,
-      category: filteredCategory
-    });
+    dispatch(getAllProducts());
+    dispatch(
+      getFiltredProducts({
+        patterns: patternsFilter,
+        colors: colorsFilter,
+        category: categoryFilter || [category._id],
+        price: priceFilter,
+        search: searchFilter,
+        skip: currentPage * productsPerPage,
+        limit: productsPerPage,
+        basePrice: sortByPrice,
+        rate: sortByRate,
+        purchasedProducts: sortByPopularity
+      })
+    );
   }, [
     dispatch,
-    category,
-    currentPage,
-    productsPerPage,
+    sortByRate,
     sortByPrice,
     sortByPopularity,
-    sortByRate,
-    pattern,
-    colors
+    productsPerPage,
+    category
   ]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
-  if (category === 'backpacks') {
-    category = [
-      {
-        value: 'рюкзаки'
-      },
-      { value: 'backpacks' }
-    ];
-  }
-  if (category === 'bags') {
-    category = [
-      {
-        value: 'сумки'
-      },
-      { value: 'bags' }
-    ];
-  }
-  if (category === 'accessories') {
-    category = [
-      {
-        value: 'аксесуари'
-      },
-      { value: 'accessories' }
-    ];
-  }
 
-  category = category[language].value;
+  const categoryText = category.name[language].value.toUpperCase();
   const itemsToShow = products.map((product, index) => (
-    <ProductListItem key={index} product={product} category={category} />
+    <ProductListItem key={index} product={product} category={categoryText} />
   ));
-  category = category.toUpperCase();
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3'>
-        {category}
+        {categoryText}
       </Typography>
       <div className={styles.sortDiv}>
         <ProductSort />
       </div>
       <div className={styles.list}>
         <div className={styles.filter}>
-          <ProductFilter />
+          <ProductFilter selectedCategory={category.name[1].value} />
         </div>
         <div className={styles.products}>{itemsToShow}</div>
       </div>

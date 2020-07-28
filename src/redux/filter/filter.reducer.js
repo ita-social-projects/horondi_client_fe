@@ -7,7 +7,12 @@ import {
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   SET_LOADING,
-  SET_CATEGORY
+  SET_CATEGORY,
+  SET_CATEGORY_FILTER,
+  SET_PRICE_FILTER,
+  SET_COLORS_FILTER,
+  SET_PATTERNS_FILTER,
+  SET_SEARCH
 } from './filter.types';
 
 const initialState = {
@@ -18,6 +23,11 @@ const initialState = {
   isHotItem: true,
   sortByRate: 0,
   sortByPopularity: -1,
+  colorsFilter: [],
+  patternsFilter: [],
+  categoryFilter: undefined,
+  priceFilter: [0, 99999],
+  searchFilter: '',
   products: []
 };
 const setSort = ({
@@ -48,6 +58,32 @@ const filterReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       productsPerPage: action.payload
+    };
+  case SET_PATTERNS_FILTER:
+    return {
+      ...state,
+      patternsFilter: action.payload
+    };
+  case SET_COLORS_FILTER:
+    return {
+      ...state,
+      colorsFilter: action.payload
+    };
+  case SET_PRICE_FILTER:
+    console.log(action.payload);
+    return {
+      ...state,
+      priceFilter: action.payload
+    };
+  case SET_CATEGORY_FILTER:
+    return {
+      ...state,
+      categoryFilter: action.payload
+    };
+  case SET_SEARCH:
+    return {
+      ...state,
+      searchFilter: action.payload
     };
   case SET_SORT_BY_PRICE:
     return {

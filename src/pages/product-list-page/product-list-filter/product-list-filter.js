@@ -21,9 +21,12 @@ export default function CheckboxesGroup() {
 
   const [price, setPrice] = useState([null, null]);
 
-  const { products } = useSelector(({ Products: { products } }) => ({
-    products
-  }));
+  const { products, language } = useSelector(
+    ({ Language: { language }, Products: { products } }) => ({
+      language,
+      products
+    })
+  );
 
   useEffect(() => {
     setPrice([
@@ -33,13 +36,30 @@ export default function CheckboxesGroup() {
   }, [products]);
 
   const colors = [
-    ...new Set(products.map((product) => product.colors[0].simpleName))
-  ];
-
-  const patterns = [
-    ...new Set(products.map((product) => JSON.stringify(product.pattern)))
+    ...new Set(
+      products.map((product) => JSON.stringify(product.colors[0].simpleName))
+    )
   ].map(JSON.parse);
 
+  const patterns = [
+    ...new Set(
+      products.map((product) =>
+        product.pattern.length
+          ? JSON.stringify(product.pattern)
+          : JSON.stringify([
+            {
+              lang: 'uk',
+              value: 'Немає'
+            },
+            {
+              lang: 'eng',
+              value: 'None '
+            }
+          ])
+      )
+    )
+  ].map(JSON.parse);
+  console.log(patterns);
   const [search, setSearch] = useState('');
   const [colorsCheck, setColorsCheck] = useState({});
   const [patternsCheck, setPatternsCheck] = useState({});
@@ -71,7 +91,9 @@ export default function CheckboxesGroup() {
       getFiltredProducts({
         search,
         price,
-        colors: colors.filter((color) => colorsCheck[color]),
+        colors: colors
+          .filter((color) => colorsCheck[color[1].value])
+          .map((color) => color[1].value),
         patterns: patterns
           .filter((pattern) => patternsCheck[pattern[1].value])
           .map((pattern) => pattern[1].value)
@@ -90,10 +112,22 @@ export default function CheckboxesGroup() {
     dispatch(getFiltredProducts());
   };
 
+  const searchText = ['Пошук', 'Search'];
+
+  const priceText = ['Ціна', 'Price Range'];
+
+  const colorsText = ['Колір', 'Colors'];
+
+  const patternText = ['Гобелен', 'Pattern'];
+
+  const filterButtonText = ['Фільтр', 'Filter'];
+
+  const clearFilterButtonText = ['Очистити', 'Clear Filter'];
+
   const priceFilter = (
     <FormGroup>
       <Typography id='range-slider' gutterBottom>
-        Price Range:
+        {priceText[language]}:
       </Typography>
       <Slider
         className={styles.slider}
@@ -110,14 +144,19 @@ export default function CheckboxesGroup() {
   const colorFilter = (
     <FormGroup>
       <Typography id='colors' gutterBottom>
-        Color:
+        {colorsText[language]}:
       </Typography>
       {colors.map((color) => (
         <FormControlLabel
-          key={color}
+          key={color[1].value}
           className={styles.checkbox}
-          control={<Checkbox name={color} checked={!!colorsCheck[color]} />}
-          label={color}
+          control={
+            <Checkbox
+              name={color[1].value}
+              checked={!!colorsCheck[color[1].value]}
+            />
+          }
+          label={color[language].value}
           onChange={handleColorChange}
         />
       ))}
@@ -127,7 +166,7 @@ export default function CheckboxesGroup() {
   const patternFilter = (
     <FormGroup>
       <Typography id='patterns' gutterBottom>
-        Pattern:
+        {patternText[language]}:
       </Typography>
       {patterns.map((pattern) => (
         <FormControlLabel
@@ -139,7 +178,7 @@ export default function CheckboxesGroup() {
               checked={!!patternsCheck[pattern[1].value]}
             />
           }
-          label={pattern[1].value}
+          label={pattern[language].value}
           onChange={handlePatternChange}
         />
       ))}
@@ -156,7 +195,7 @@ export default function CheckboxesGroup() {
               onChange={handleSearch}
               value={search}
               id='outlined-search'
-              label='Search field'
+              label={searchText[language]}
               type='search'
               variant='outlined'
             />
@@ -167,14 +206,14 @@ export default function CheckboxesGroup() {
               variant='contained'
               onClick={handleFilter}
             >
-              Filter
+              {filterButtonText[language]}
             </Button>
             <Button
               className={styles.button}
               variant='contained'
               onClick={handleClearFilter}
             >
-              Clear Filter
+              {clearFilterButtonText[language]}
             </Button>
           </FormGroup>
           {priceFilter}

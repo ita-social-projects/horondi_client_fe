@@ -11,7 +11,7 @@ export function* handleGetAllProducts() {
     const products = yield call(
       getItems,
       `query{
-        getAllProducts {
+        getProducts {
             name {
               lang
               value
@@ -24,7 +24,11 @@ export function* handleGetAllProducts() {
                 value
                 
               }
-              simpleName
+              simpleName {
+                lang
+                value
+                
+              }
             }
             basePrice
             pattern {
@@ -40,7 +44,7 @@ export function* handleGetAllProducts() {
           }
       }`
     );
-    yield put(setAllProducts(products.data.getAllProducts));
+    yield put(setAllProducts(products.data.getProducts));
     yield put(setLoading(false));
   } catch (e) {
     console.log(e);

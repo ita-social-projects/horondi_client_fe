@@ -23,7 +23,7 @@ export function* handleFilterLoad({
                 $colors: [String]
                 $patterns: [String]
             ){
-            getProductsByOptions(
+            getProducts(
                 filter: {
                     colors: $colors
                     pattern: $patterns
@@ -48,7 +48,10 @@ export function* handleFilterLoad({
                   lang
                   value
                 }
-                simpleName
+                simpleName {
+                  lang
+                  value
+                }
               }
             pattern {
                 lang
@@ -63,7 +66,7 @@ export function* handleFilterLoad({
         price: payload.price
       }
     );
-    yield put(setAllFilterProducts(products.data.getProductsByOptions));
+    yield put(setAllFilterProducts(products.data.getProducts));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleFilterError, e);

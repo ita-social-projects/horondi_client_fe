@@ -33,6 +33,14 @@ const Routes = () => {
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/error-page' exact render={() => 'error page'} />
+
+          <Route path='/register' exact component={Register} />
+          <Route path='/login' exact component={Login} />
+          <Route
+            path='/confirmation/:token'
+            exact
+            render={({ match }) => <Confirmation token={match.params.token} />}
+          />
           <Route
             path='/:category'
             exact
@@ -47,13 +55,6 @@ const Routes = () => {
             }}
           />
           <Route path='/:category/:id' exact render={() => 'detail page'} />
-          <Route path='/register' exact component={Register} />
-          <Route path='/login' exact component={Login} />
-          <Route
-            path='/confirmation/:token'
-            exact
-            render={({ match }) => <Confirmation token={match.params.token} />}
-          />
         </Switch>
       </div>
       <AppFooter />

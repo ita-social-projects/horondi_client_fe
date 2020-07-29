@@ -70,7 +70,6 @@ const filterReducer = (state = initialState, action = {}) => {
       colorsFilter: action.payload
     };
   case SET_PRICE_FILTER:
-    console.log(action.payload);
     return {
       ...state,
       priceFilter: action.payload

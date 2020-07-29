@@ -7,7 +7,7 @@ import useStyles from './product-list-item.style';
 import StarRating from '../../../containers/star-rating';
 
 const ProductListItem = ({ product, category }) => {
-  const styles = useStyles({ image: product.images[0].primary.medium });
+  const styles = useStyles({ image: './images/backpack.jpg' });
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));
@@ -24,23 +24,24 @@ const ProductListItem = ({ product, category }) => {
 };
 
 ProductListItem.propTypes = {
-  category: PropTypes.string,
+  category: PropTypes.string.isRequired,
   product: PropTypes.shape({
     _id: PropTypes.string,
     basePrice: PropTypes.number,
-    images: PropTypes.objectOf(
-      PropTypes.shape({
-        primary: PropTypes.shape({
-          medium: PropTypes.string,
-          _typename: PropTypes.string
+    images: PropTypes.shape({
+      isMain: PropTypes.string,
+      large: PropTypes.string,
+      name: PropTypes.arrayOf(
+        PropTypes.shape({
+          lang: PropTypes.string,
+          value: PropTypes.string
         })
-      })
-    )
+      )
+    })
   }),
   rate: PropTypes.number
 };
 ProductListItem.defaultProps = {
-  category: 'backpacks',
   product: {
     _id: '',
     basePrice: 1,

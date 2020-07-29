@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
@@ -122,10 +122,10 @@ const ProductListPage = ({ category }) => {
   );
 };
 ProductListPage.propTypes = {
-  category: Proptypes.string
+  category: PropTypes.arrayOf(PropTypes.string)
 };
 
 ProductListPage.defaultProps = {
-  category: 'backpacks'
+  category: ['backpacks']
 };
 export default ProductListPage;

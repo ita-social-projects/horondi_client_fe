@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import Proptypes from 'prop-types';
@@ -58,35 +58,22 @@ const ProductListPage = ({ category }) => {
       filteredCategory
     })
   );
-  const getProducts = useCallback(
-    (args) => {
-      dispatch(getAllProducts());
-      dispatch(getFiltredProducts(args));
-    },
-    [
-      dispatch,
-      sortByRate,
-      sortByPrice,
-      sortByPopularity,
-      colors,
-      pattern,
-      currentPage,
-      productsPerPage,
-      category
-    ]
-  );
+
   useEffect(() => {
     dispatch(setCategory(category));
-    getProducts({
-      rate: sortByRate || undefined,
-      basePrice: sortByPrice || undefined,
-      pattern,
-      colors,
-      skip: currentPage * productsPerPage,
-      limit: productsPerPage,
-      purchasedCount: sortByPopularity || undefined,
-      category: filteredCategory
-    });
+    dispatch(getAllProducts());
+    dispatch(
+      getFiltredProducts({
+        rate: sortByRate || undefined,
+        basePrice: sortByPrice || undefined,
+        pattern,
+        colors,
+        skip: currentPage * productsPerPage,
+        limit: productsPerPage,
+        purchasedCount: sortByPopularity || undefined,
+        category: filteredCategory
+      })
+    );
   }, [
     dispatch,
     category,
@@ -96,7 +83,8 @@ const ProductListPage = ({ category }) => {
     sortByPopularity,
     sortByRate,
     pattern,
-    colors
+    colors,
+    filteredCategory
   ]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
@@ -130,6 +118,7 @@ const ProductListPage = ({ category }) => {
     <ProductListItem key={index} product={product} category={category} />
   ));
   category = category.toUpperCase();
+
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3'>
@@ -142,7 +131,7 @@ const ProductListPage = ({ category }) => {
         <div className={styles.filter}>
           <ProductFilter />
         </div>
-        <div className={styles.products}>{itemsToShow}</div>
+        <div className={styles.productsDiv}>{itemsToShow}</div>
       </div>
       <div className={styles.paginationDiv}>
         <Pagination

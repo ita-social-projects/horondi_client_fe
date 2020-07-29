@@ -31,7 +31,8 @@ ProductListItem.propTypes = {
     images: PropTypes.objectOf(
       PropTypes.shape({
         primary: PropTypes.shape({
-          medium: PropTypes.string
+          medium: PropTypes.string,
+          _typename: PropTypes.string
         })
       })
     )

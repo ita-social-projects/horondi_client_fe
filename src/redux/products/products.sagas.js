@@ -22,12 +22,10 @@ export function* handleGetAllProducts() {
               name {
                 lang
                 value
-                
               }
               simpleName {
                 lang
                 value
-                
               }
             }
             basePrice

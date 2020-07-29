@@ -28,7 +28,6 @@ export default function CheckboxesGroup() {
     sortByPrice,
     sortByRate,
     sortByPopularity,
-    category,
     language
   } = useSelector(
     ({
@@ -87,7 +86,6 @@ export default function CheckboxesGroup() {
       )
     )
   ].map(JSON.parse);
-  console.log(patterns);
   const [search, setSearch] = useState('');
   const [colorsCheck, setColorsCheck] = useState({});
   const [patternsCheck, setPatternsCheck] = useState({});

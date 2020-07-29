@@ -1,6 +1,10 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setAllFilterProducts, setLoading } from './filter.actions';
+import {
+  setAllFilterProducts,
+  setLoading,
+  setPagesCount
+} from './filter.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_FILTRED_PRODUCTS } from './filter.types';
@@ -16,7 +20,8 @@ export function* handleFilterLoad({
     rate: undefined,
     basePrice: undefined,
     purchasedCount: undefined,
-    category: []
+    category: [],
+    productsPerPage: 9
   }
 }) {
   try {
@@ -51,6 +56,7 @@ export function* handleFilterLoad({
                  purchasedCount:$purchasedCount
                 }
             ){
+              products{
             _id
             purchasedCount
             name {
@@ -85,9 +91,10 @@ export function* handleFilterLoad({
               }
               isMain
             }
+          }
+          productsCount
           },
       }`,
-
       {
         search: payload.search,
         colors: payload.colors,
@@ -101,9 +108,17 @@ export function* handleFilterLoad({
         purchasedCount: payload.purchasedCount
       }
     );
-    yield put(setAllFilterProducts(products.data.getProducts));
+    yield put(
+      setPagesCount(
+        Math.ceil(
+          products.data.getProducts.productsCount / payload.productsPerPage
+        )
+      )
+    );
+    yield put(setAllFilterProducts(products.data.getProducts.products));
     yield put(setLoading(false));
   } catch (e) {
+    console.log(e);
     yield call(handleFilterError, e);
   }
 }

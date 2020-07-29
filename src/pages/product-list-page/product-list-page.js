@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -64,7 +64,6 @@ const ProductListPage = ({ category }) => {
       currentPage
     })
   );
-
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(
@@ -78,7 +77,8 @@ const ProductListPage = ({ category }) => {
         limit: productsPerPage,
         basePrice: sortByPrice || undefined,
         rate: sortByRate || undefined,
-        purchasedProducts: sortByPopularity || undefined
+        purchasedProducts: sortByPopularity || undefined,
+        productsPerPage
       })
     );
   }, [
@@ -87,7 +87,8 @@ const ProductListPage = ({ category }) => {
     sortByPrice,
     sortByPopularity,
     productsPerPage,
-    category
+    category,
+    currentPage
   ]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
@@ -122,10 +123,15 @@ const ProductListPage = ({ category }) => {
   );
 };
 ProductListPage.propTypes = {
-  category: PropTypes.arrayOf(PropTypes.string)
+  category: PropTypes.shape({
+    _id: PropTypes.string,
+    isMain: PropTypes.bool,
+    name: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string
+      })
+    )
+  }).isRequired
 };
 
-ProductListPage.defaultProps = {
-  category: ['backpacks']
-};
 export default ProductListPage;

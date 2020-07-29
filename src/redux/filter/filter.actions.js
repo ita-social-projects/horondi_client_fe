@@ -13,7 +13,8 @@ import {
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_PAGES_COUNT
 } from './filter.types';
 
 export const setAllFilterProducts = (payload) => ({
@@ -75,5 +76,9 @@ export const setPatternsFilter = (payload) => ({
 });
 export const setSearchFilter = (payload) => ({
   type: SET_SEARCH,
+  payload
+});
+export const setPagesCount = (payload) => ({
+  type: SET_PAGES_COUNT,
   payload
 });

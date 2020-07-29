@@ -24,9 +24,16 @@ const ProductListItem = ({ product, category }) => {
 };
 
 ProductListItem.propTypes = {
-  category: PropTypes.string.isRequired,
+  category: PropTypes.string,
   product: PropTypes.shape({
     _id: PropTypes.string,
+    name: PropTypes.arrayOf(
+      PropTypes.shape({
+        lang: PropTypes.string,
+        value: PropTypes.string
+      })
+    ),
+    rate: PropTypes.number,
     basePrice: PropTypes.number,
     images: PropTypes.shape({
       isMain: PropTypes.string,
@@ -38,19 +45,19 @@ ProductListItem.propTypes = {
         })
       )
     })
-  }),
-  rate: PropTypes.number
+  })
 };
 ProductListItem.defaultProps = {
+  category: '',
   product: {
     _id: '',
     basePrice: 1,
     images: {
-      primary: { medium: '' }
+      primary: { medium: '' },
+      additional: {}
     },
-    additional: {}
-  },
-  rate: 1
+    rate: 1
+  }
 };
 
 export default ProductListItem;

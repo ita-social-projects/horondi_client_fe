@@ -76,9 +76,9 @@ const ProductListPage = ({ category }) => {
         search: searchFilter,
         skip: currentPage * productsPerPage,
         limit: productsPerPage,
-        basePrice: sortByPrice,
-        rate: sortByRate,
-        purchasedProducts: sortByPopularity
+        basePrice: sortByPrice || undefined,
+        rate: sortByRate || undefined,
+        purchasedProducts: sortByPopularity || undefined
       })
     );
   }, [
@@ -108,7 +108,7 @@ const ProductListPage = ({ category }) => {
         <div className={styles.filter}>
           <ProductFilter selectedCategory={category.name[1].value} />
         </div>
-        <div className={styles.products}>{itemsToShow}</div>
+        <div className={styles.productsDiv}>{itemsToShow}</div>
       </div>
       <div className={styles.paginationDiv}>
         <Pagination

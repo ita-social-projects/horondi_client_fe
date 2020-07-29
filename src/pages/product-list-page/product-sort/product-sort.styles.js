@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '13px'
+    fontSize: '13px',
+    '@media (max-width:400px)': {
+      display: 'none'
+    }
   },
   sortDiv: {
     display: 'flex',

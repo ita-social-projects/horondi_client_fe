@@ -91,7 +91,6 @@ export default function CheckboxesGroup({ selectedCategory }) {
       )
     )
   ].map(JSON.parse);
-
   const [search, setSearch] = useState('');
   const [price, setPrice] = useState([null, null]);
   const [categoryCheck, setCategoryCheck] = useState({});

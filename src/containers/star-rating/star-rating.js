@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Rating } from '@material-ui/lab';
 
@@ -7,26 +7,25 @@ const StarRating = ({
   size = 'normal',
   disabled = false,
   precision = 0.1
-}) => {
-  const [value, setValue] = useState(rate);
-  const changeHandler = (event, newValue) => {
-    setValue(newValue);
-  };
-  return (
-    <Rating
-      name='simple-controlled'
-      value={rate}
-      size={size}
-      onChange={changeHandler}
-      disabled={disabled}
-      precision={precision}
-    />
-  );
-};
+}) => (
+  <Rating
+    name='simple-controlled'
+    value={rate}
+    size={size}
+    disabled={disabled}
+    precision={precision}
+  />
+);
 StarRating.propTypes = {
-  rate: PropTypes.number
+  rate: PropTypes.number,
+  size: PropTypes.string,
+  disabled: PropTypes.bool,
+  precision: PropTypes.number
 };
 StarRating.defaultProps = {
-  rate: 1
+  rate: 1,
+  size: 'small',
+  disabled: false,
+  precision: 0.1
 };
 export default StarRating;

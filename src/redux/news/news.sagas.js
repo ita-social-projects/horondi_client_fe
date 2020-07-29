@@ -54,31 +54,33 @@ export function* handleArticleLoad({ payload }) {
       getItems,
       `query{
         getNewsById(id:"${payload}"){
-          _id
-          title{
-            value
-          }
-          text{
-            value
-          }
-          images{
-            primary{
-              medium
-            }
-            additional{
-              medium
-            }
-          }
-          video
-          author{
-            name{
+          ... on News{
+            _id
+            title{
               value
             }
-            image{
-              small
+            text{
+              value
             }
+            images{
+              primary{
+                medium
+              }
+              additional{
+                medium
+              }
+            }
+            video
+            author{
+              name{
+                value
+              }
+              image{
+                small
+              }
+            }
+            date
           }
-          date
         }
       }`
     );

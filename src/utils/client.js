@@ -20,4 +20,12 @@ const getItems = (query, variables = {}) =>
     variables
   });
 
+export const setItems = (query, variables) =>
+  client.mutate({
+    mutation: gql`
+      ${query}
+    `,
+    variables
+  });
+
 export default getItems;

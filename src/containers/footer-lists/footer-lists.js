@@ -9,14 +9,15 @@ import { useStyles } from './footer-lists.styles';
 import {
   FOOTER_INFORMATION,
   FOOTER_CONTACTS,
-  FOOTER_CATALOGS,
-  LANGUAGE
-} from '../../configs';
+  FOOTER_CATALOGS
+} from '../../translations/footer.translations';
+// import { URL_LANGUAGE } from '../../configs';
 
-const FooterLists = ({ language = LANGUAGE }) => {
+const FooterLists = () => {
   const styles = useStyles();
-  const { categories } = useSelector(({ Categories }) => ({
-    categories: Categories.list
+  const { categories, language } = useSelector(({ Categories, Language }) => ({
+    categories: Categories.list,
+    language: Language.language
   }));
 
   const categoriesList = categories

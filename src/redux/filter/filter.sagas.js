@@ -101,6 +101,7 @@ export function* handleFilterLoad({
         purchasedCount: payload.purchasedCount
       }
     );
+    console.log(products.data.getProducts);
     yield put(setAllFilterProducts(products.data.getProducts));
     yield put(setLoading(false));
   } catch (e) {

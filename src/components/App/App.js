@@ -28,8 +28,11 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(setThemeMode(localStorageThemeMode));
-  }, [dispatch, lightMode]);
+  }, [lightMode, dispatch]);
 
   if (isLoading) {
     return (

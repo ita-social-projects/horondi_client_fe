@@ -81,6 +81,12 @@ export function* handleArticleLoad({ payload }) {
             }
             date
           }
+          ... on Error {
+            message {
+              lang
+            }
+            statusCode
+          }
         }
       }`
     );

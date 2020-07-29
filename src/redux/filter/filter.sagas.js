@@ -12,11 +12,11 @@ export function* handleFilterLoad({
     patterns: [],
     price: [0, 99999],
     skip: 1,
-    limit: 9,
+    limit: 90,
     rate: undefined,
     basePrice: undefined,
     purchasedCount: undefined,
-    category: ''
+    category: []
   }
 }) {
   try {
@@ -33,14 +33,14 @@ export function* handleFilterLoad({
                 $rate:Int
                 $basePrice:Int
                 $purchasedCount:Int
-                $category:String
+                $category:[String]
             ){
             getProducts(
                 filter: {
                     colors: $colors
                     pattern: $patterns
                     price: $price
-                    subcategory:$category
+                    category:$category
                   }
                  skip: $skip
                  limit: $limit
@@ -78,6 +78,13 @@ export function* handleFilterLoad({
                 lang
                 value
               }
+            category {
+              _id
+              name {
+                value
+              }
+              isMain
+            }
           },
       }`,
 

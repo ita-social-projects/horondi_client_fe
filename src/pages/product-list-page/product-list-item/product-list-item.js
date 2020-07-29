@@ -7,7 +7,7 @@ import useStyles from './product-list-item.style';
 import StarRating from '../../../containers/star-rating';
 
 const ProductListItem = ({ product, category }) => {
-  const styles = useStyles({ image: product.images.primary.medium });
+  const styles = useStyles({ image: product.images[0].primary.medium });
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));

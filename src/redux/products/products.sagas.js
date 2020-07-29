@@ -39,6 +39,13 @@ export function* handleGetAllProducts() {
                     medium
                 }
             }
+            category {
+              _id
+              name {
+                value
+              }
+              isMain
+            }
           }
       }`
     );

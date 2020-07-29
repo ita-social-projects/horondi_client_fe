@@ -9,6 +9,11 @@ import {
   GET_FILTRED_PRODUCTS,
   SET_LOADING,
   SET_CATEGORY,
+  SET_CATEGORY_FILTER,
+  SET_PRICE_FILTER,
+  SET_COLORS_FILTER,
+  SET_PATTERNS_FILTER,
+  SET_SEARCH
 } from './filter.types';
 
 export const setAllFilterProducts = (payload) => ({
@@ -50,5 +55,25 @@ export const setLoading = (loading) => ({
 });
 export const setCategory = (payload) => ({
   type: SET_CATEGORY,
+  payload
+});
+export const setCategoryFilter = (payload) => ({
+  type: SET_CATEGORY_FILTER,
+  payload
+});
+export const setPriceFilter = (payload) => ({
+  type: SET_PRICE_FILTER,
+  payload
+});
+export const setColorsFilter = (payload) => ({
+  type: SET_COLORS_FILTER,
+  payload
+});
+export const setPatternsFilter = (payload) => ({
+  type: SET_PATTERNS_FILTER,
+  payload
+});
+export const setSearchFilter = (payload) => ({
+  type: SET_SEARCH,
   payload
 });

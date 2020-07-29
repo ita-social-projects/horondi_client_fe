@@ -12,14 +12,19 @@ import TextField from '@material-ui/core/TextField';
 
 import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './product-list-filter.styles';
-import { getFiltredProducts } from '../../../redux/filter/filter.actions';
+import {
+  getFiltredProducts,
+  setColorsFilter,
+  setPatternsFilter,
+  setCategoryFilter,
+  setPriceFilter,
+  setSearchFilter
+} from '../../../redux/filter/filter.actions';
 
-export default function CheckboxesGroup() {
+export default function CheckboxesGroup({ selectedCategory }) {
   const dispatch = useDispatch();
 
   const styles = useStyles();
-
-  const [price, setPrice] = useState([null, null]);
 
   const {
     products,
@@ -36,10 +41,8 @@ export default function CheckboxesGroup() {
         currentPage,
         productsPerPage,
         sortByPrice,
-        isHotItem,
         sortByRate,
-        sortByPopularity,
-        category
+        sortByPopularity
       },
       Language: { language }
     }) => ({
@@ -47,10 +50,8 @@ export default function CheckboxesGroup() {
       currentPage,
       productsPerPage,
       sortByPrice,
-      isHotItem,
       sortByRate,
       sortByPopularity,
-      category,
       language
     })
   );
@@ -60,12 +61,16 @@ export default function CheckboxesGroup() {
       Math.min(...products.map((product) => product.basePrice)),
       Math.max(...products.map((product) => product.basePrice))
     ]);
-  }, [products]);
+    setCategoryCheck({ [selectedCategory]: true });
+  }, [products, selectedCategory]);
 
   const colors = [
     ...new Set(
       products.map((product) => JSON.stringify(product.colors[0].simpleName))
     )
+  ].map(JSON.parse);
+  const categories = [
+    ...new Set(products.map((product) => JSON.stringify(product.category)))
   ].map(JSON.parse);
 
   const patterns = [
@@ -87,6 +92,8 @@ export default function CheckboxesGroup() {
     )
   ].map(JSON.parse);
   const [search, setSearch] = useState('');
+  const [price, setPrice] = useState([null, null]);
+  const [categoryCheck, setCategoryCheck] = useState({});
   const [colorsCheck, setColorsCheck] = useState({});
   const [patternsCheck, setPatternsCheck] = useState({});
 
@@ -96,6 +103,13 @@ export default function CheckboxesGroup() {
 
   const handlePriceChange = (event, newValue) => {
     setPrice(newValue);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategoryCheck({
+      ...categoryCheck,
+      [event.target.name]: event.target.checked
+    });
   };
 
   const handleColorChange = (event) => {
@@ -114,6 +128,29 @@ export default function CheckboxesGroup() {
 
   const handleFilter = () => {
     dispatch(
+      setColorsFilter(
+        colors
+          .filter((color) => colorsCheck[color[1].value])
+          .map((color) => color[1].value)
+      )
+    );
+    dispatch(
+      setPatternsFilter(
+        patterns
+          .filter((pattern) => patternsCheck[pattern[1].value])
+          .map((pattern) => pattern[1].value)
+      )
+    );
+    dispatch(
+      setCategoryFilter(
+        categories
+          .filter((category) => categoryCheck[category.name[1].value])
+          .map((category) => category._id)
+      )
+    );
+    dispatch(setSearchFilter(search));
+    dispatch(setPriceFilter(price));
+    dispatch(
       getFiltredProducts({
         search,
         price,
@@ -123,6 +160,9 @@ export default function CheckboxesGroup() {
         patterns: patterns
           .filter((pattern) => patternsCheck[pattern[1].value])
           .map((pattern) => pattern[1].value),
+        category: categories
+          .filter((category) => categoryCheck[category.name[1].value])
+          .map((category) => category._id),
         skip: currentPage * productsPerPage,
         limit: productsPerPage,
         basePrice: sortByPrice,
@@ -133,6 +173,10 @@ export default function CheckboxesGroup() {
   };
 
   const handleClearFilter = () => {
+    dispatch(setColorsFilter());
+    dispatch(setPatternsFilter());
+    dispatch(setSearchFilter());
+    dispatch(setCategoryFilter());
     setSearch('');
     setPrice([
       Math.min(...products.map((product) => product.basePrice)),
@@ -140,12 +184,15 @@ export default function CheckboxesGroup() {
     ]);
     setColorsCheck({});
     setPatternsCheck({});
+    dispatch(setPriceFilter(price));
     dispatch(getFiltredProducts());
   };
 
   const searchText = ['Пошук', 'Search'];
 
   const priceText = ['Ціна', 'Price Range'];
+
+  const categoryText = ['Категорії', 'Category'];
 
   const colorsText = ['Колір', 'Colors'];
 
@@ -155,7 +202,29 @@ export default function CheckboxesGroup() {
 
   const clearFilterButtonText = ['Очистити', 'Clear Filter'];
 
-  const priceFilter = (
+  const categoryFilterView = (
+    <FormGroup>
+      <Typography id='categories' gutterBottom>
+        {categoryText[language]}:
+      </Typography>
+      {categories.map((category) => (
+        <FormControlLabel
+          key={category.name[1].value}
+          className={styles.checkbox}
+          control={
+            <Checkbox
+              name={category.name[1].value}
+              checked={!!categoryCheck[category.name[1].value]}
+            />
+          }
+          label={category.name[language].value}
+          onChange={handleCategoryChange}
+        />
+      ))}
+    </FormGroup>
+  );
+
+  const priceFilterView = (
     <FormGroup>
       <Typography id='range-slider' gutterBottom>
         {priceText[language]}:
@@ -172,7 +241,7 @@ export default function CheckboxesGroup() {
     </FormGroup>
   );
 
-  const colorFilter = (
+  const colorFilterView = (
     <FormGroup>
       <Typography id='colors' gutterBottom>
         {colorsText[language]}:
@@ -194,7 +263,7 @@ export default function CheckboxesGroup() {
     </FormGroup>
   );
 
-  const patternFilter = (
+  const patternFilterView = (
     <FormGroup>
       <Typography id='patterns' gutterBottom>
         {patternText[language]}:
@@ -247,9 +316,10 @@ export default function CheckboxesGroup() {
               {clearFilterButtonText[language]}
             </Button>
           </FormGroup>
-          {priceFilter}
-          {colorFilter}
-          {patternFilter}
+          {priceFilterView}
+          {categoryFilterView}
+          {colorFilterView}
+          {patternFilterView}
           <FormHelperText>Be careful</FormHelperText>
         </FormControl>
       </Paper>

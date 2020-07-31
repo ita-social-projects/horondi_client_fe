@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   cardBody: {
-    flex: 'auto',
+    flex: '1 1 auto',
     minHeight: '1px',
     padding: '1.25rem',
     '&:before': {
@@ -26,7 +26,7 @@ export const useStyles = makeStyles(() => ({
   },
   icon: {
     color: '#ffffff',
-    fontSize: '2.5rem',
+    fontSize: '3rem',
     transition: 'all 0.5s',
     padding: '0.5rem',
     borderRadius: '100%',

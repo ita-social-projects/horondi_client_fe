@@ -5,8 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './navbar-left.styles';
+import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 
-import { LOGO, URL_LANGUAGE } from '../../configs';
+import { LOGO } from '../../configs';
 
 const NavbarLeft = () => {
   const { categories, language } = useSelector(({ Categories, Language }) => ({
@@ -15,22 +16,18 @@ const NavbarLeft = () => {
   }));
   const styles = useStyles();
 
-  const getCategoryURL = (category) => {
-    const [filteredCategory] = category.filter(
-      (item) => item.lang === URL_LANGUAGE
-    );
-
-    if (filteredCategory.value) {
-      return filteredCategory.value.toLowerCase();
-    }
-  };
-
   const categoriesList = categories
-    ? categories.map(({ _id, name }) => (
-      <Link key={_id} className={styles.link} to={`/${getCategoryURL(name)}`}>
-        {name[language].value}
-      </Link>
-    ))
+    ? categories.map(({ _id, name, isMain }) =>
+      isMain ? (
+        <Link
+          key={_id}
+          className={styles.link}
+          to={`/${getCategoryURL(name)}`}
+        >
+          {name[language].value}
+        </Link>
+      ) : null
+    )
     : null;
 
   return (

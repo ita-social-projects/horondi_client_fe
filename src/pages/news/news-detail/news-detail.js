@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import LoadingBar from '../../../components/LoadingBar';
+import LoadingBar from '../../../components/loading-bar';
 import { TIME_OPTIONS } from '../../../configs';
 
 const NewsDetailPage = ({ match }) => {
@@ -89,6 +89,7 @@ const NewsDetailPage = ({ match }) => {
           color='textSecondary'
           component='div'
           className={styles.newsText}
+          id='fullText'
         >
           {newsText}
         </Typography>
@@ -104,12 +105,13 @@ const NewsDetailPage = ({ match }) => {
         />
         <hr />
         <div className={styles.newsAuthorFooter}>
-          <CardHeader subheader={newsAuthor} />
+          <CardHeader subheader={newsAuthor} id='newsAuthor' />
           <CardMedia
             className={styles.authorAvatar}
             image={newsAuthorAvatar}
             title={newsTitle}
             component='div'
+            id='newsAuthorAvatar'
           />
         </div>
       </CardContent>

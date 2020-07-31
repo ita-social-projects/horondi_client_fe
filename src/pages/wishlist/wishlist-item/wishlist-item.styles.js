@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   image: {
     flexBasis: 100,
-    '& > img': {
+    '& img': {
       width: '100%',
       borderRadius: 5,
       minWidth: 60
@@ -40,6 +40,9 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.button.hover.color,
         backgroundColor: theme.palette.button.hover.backgroundColor
       }
+    },
+    '& a': {
+      color: 'inherit'
     }
   },
   itemName: {

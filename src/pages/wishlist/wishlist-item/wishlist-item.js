@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -8,7 +9,6 @@ import { useStyles } from './wishlist-item.styles';
 import { removeItemFromWishlist } from '../../../redux/wishlist/wishlist.actions';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
 import { MODAL_DELETE_MESSAGES } from '../../../translations/modal.translations';
-// import { addItemToCart } from '../../../redux/cart/cart.actions';
 
 const WishlistItem = ({ item }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -25,19 +25,25 @@ const WishlistItem = ({ item }) => {
     setModalVisibility(false);
   };
 
-  const onAddToCart = () => dispatch();
-
   return (
     <>
       <tr className={styles.root}>
         <td className={styles.product}>
           <div className={styles.image}>
-            <img src={item.image} alt='product pictures' />
+            <Link to={`/${item.category}/${item._id}`}>
+              <img src={item.images} alt='product pictures' />
+            </Link>
           </div>
           <div className={styles.description}>
-            <span className={styles.itemName}>{item.name[language].value}</span>
-            <Button onClick={onAddToCart} variant='contained'>
-              {WISHLIST_BUTTONS[language].toCart}
+            <Link to={`/${item.category}/${item._id}`}>
+              <span className={styles.itemName}>
+                {item.name[language].value}
+              </span>
+            </Link>
+            <Button variant='contained'>
+              <Link to={`/${item.category}/${item._id}`}>
+                {WISHLIST_BUTTONS[language].toItem}
+              </Link>
             </Button>
           </div>
         </td>

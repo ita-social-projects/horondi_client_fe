@@ -3,10 +3,9 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { setCart } from './cart.actions';
 import {
   GET_CART,
-  INCREMENT_CART_ITEM_QUANTITY,
-  DECREMENT_CART_ITEM_QUANTITY,
   ADD_ITEM_TO_CART,
-  REMOVE_ITEM_FROM_CART
+  REMOVE_ITEM_FROM_CART,
+  SET_CART_ITEM_QUANTITY
 } from './cart.types';
 import {
   getFromLocalStorage,
@@ -51,24 +50,16 @@ function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
   yield put(setCart(newCart));
 }
 
-function* handleIncrementCartItemQuantity({ payload: { _id, selectedSize } }) {
+function* handleSetCartItemQuantity({
+  payload: { _id, selectedSize },
+  value,
+  key
+}) {
   const cart = yield call(getFromLocalStorage, 'cart');
   const newCart = cart.map((item) => {
     if (item._id === _id && item.selectedSize === selectedSize) {
-      item.quantity++;
-    }
-    return item;
-  });
-
-  setToLocalStorage('cart', newCart);
-  yield put(setCart(newCart));
-}
-
-function* handleDecrementCartItemQuantity({ payload: { _id, selectedSize } }) {
-  const cart = yield call(getFromLocalStorage, 'cart');
-  const newCart = cart.map((item) => {
-    if (item._id === _id && item.selectedSize === selectedSize) {
-      item.quantity = --item.quantity || 1;
+      // key will be true if user typing inside input
+      item.quantity = key ? value || 1 : item.quantity + value;
     }
     return item;
   });
@@ -80,12 +71,5 @@ export default function* categoriesSaga() {
   yield takeEvery(GET_CART, handleCartLoad);
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
-  yield takeEvery(
-    INCREMENT_CART_ITEM_QUANTITY,
-    handleIncrementCartItemQuantity
-  );
-  yield takeEvery(
-    DECREMENT_CART_ITEM_QUANTITY,
-    handleDecrementCartItemQuantity
-  );
+  yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
 }

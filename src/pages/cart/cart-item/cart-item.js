@@ -10,9 +10,8 @@ import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
 import { MODAL_DELETE_MESSAGES } from '../../../translations/modal.translations';
 import NumberInput from '../../../components/number-input';
 import {
-  decrementCartItemQuantity,
-  incrementCartItemQuantity,
-  removeItemFromCart
+  removeItemFromCart,
+  setCartItemQuantity
 } from '../../../redux/cart/cart.actions';
 
 const CartItem = ({ item }) => {
@@ -21,10 +20,8 @@ const CartItem = ({ item }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
-  const onChangeQuantity = (key) => {
-    key
-      ? dispatch(incrementCartItemQuantity(item))
-      : dispatch(decrementCartItemQuantity(item));
+  const onChangeQuantity = (value, key) => {
+    dispatch(setCartItemQuantity(item, +value, key));
   };
 
   const onModalAction = (action) => {

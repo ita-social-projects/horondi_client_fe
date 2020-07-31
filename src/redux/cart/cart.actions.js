@@ -3,8 +3,7 @@ import {
   GET_CART,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
-  INCREMENT_CART_ITEM_QUANTITY,
-  DECREMENT_CART_ITEM_QUANTITY
+  SET_CART_ITEM_QUANTITY
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -26,14 +25,11 @@ const removeItemFromCart = (item) => ({
   payload: item
 });
 
-const incrementCartItemQuantity = (item) => ({
-  type: INCREMENT_CART_ITEM_QUANTITY,
-  payload: item
-});
-
-const decrementCartItemQuantity = (item) => ({
-  type: DECREMENT_CART_ITEM_QUANTITY,
-  payload: item
+const setCartItemQuantity = (item, value, key) => ({
+  type: SET_CART_ITEM_QUANTITY,
+  payload: item,
+  value,
+  key
 });
 
 export {
@@ -41,6 +37,5 @@ export {
   getCart,
   addItemToCart,
   removeItemFromCart,
-  incrementCartItemQuantity,
-  decrementCartItemQuantity
+  setCartItemQuantity
 };

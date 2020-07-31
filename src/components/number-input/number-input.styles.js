@@ -4,11 +4,22 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     color: theme.palette.textColor,
     display: 'flex',
-    '& > span': {
-      margin: '0 5px'
+    '& input::-webkit-outer-spin-button': {
+      WebkitAppearance: 'none',
+      margin: 0
+    },
+    '& input::-webkit-inner-spin-button': {
+      WebkitAppearance: 'none',
+      margin: 0
+    },
+    '& input[type=number]': {
+      MozAppearance: 'textfield'
     }
   },
   button: {
     cursor: 'pointer'
+  },
+  input: {
+    width: 50
   }
 }));

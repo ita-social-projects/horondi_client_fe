@@ -68,7 +68,7 @@ function* handleDecrementCartItemQuantity({ payload: { _id, selectedSize } }) {
   const cart = yield call(getFromLocalStorage, 'cart');
   const newCart = cart.map((item) => {
     if (item._id === _id && item.selectedSize === selectedSize) {
-      item.quantity--;
+      item.quantity = --item.quantity || 1;
     }
     return item;
   });

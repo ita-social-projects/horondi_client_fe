@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DoneIcon from '@material-ui/icons/Done';
 
 import Modal from '../../../components/modal';
 import { useStyles } from './cart-item.styles';
@@ -39,12 +41,26 @@ const CartItem = ({ item }) => {
       <tr className={styles.root}>
         <td className={styles.product}>
           <div className={styles.image}>
-            <img src={item.image} alt='product pictures' />
+            <Link to={`/${item.category}/${item._id}`}>
+              <img src={item.images} alt='product pictures' />
+            </Link>
           </div>
           <div className={styles.description}>
-            <span className={styles.itemName}>{item.name[language].value}</span>
-            <span className={styles.size}>
+            <Link to={`/${item.category}/${item._id}`}>
+              <span className={styles.itemName}>
+                {item.name[language].value}
+              </span>
+            </Link>
+            <span>
               {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
+            </span>
+            <span>
+              {CART_TABLE_FIELDS[language].bagBottom}:{' '}
+              {item.bagBottom[language].value}
+            </span>
+            <span>
+              {CART_TABLE_FIELDS[language].sidePocket}:{' '}
+              {item.sidePocket && <DoneIcon className={styles.doneIcon} />}
             </span>
           </div>
         </td>

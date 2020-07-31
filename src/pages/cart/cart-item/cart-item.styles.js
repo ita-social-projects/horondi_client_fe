@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   image: {
     flexBasis: 100,
-    '& > img': {
+    '& img': {
       width: '100%',
       borderRadius: 5,
       minWidth: 60
@@ -30,7 +30,13 @@ export const useStyles = makeStyles((theme) => ({
   description: {
     display: 'flex',
     flexDirection: 'column',
-    padding: 20
+    padding: '0 20px',
+    '& a': {
+      color: 'inherit'
+    },
+    '& > span': {
+      lineHeight: '30px'
+    }
   },
   itemName: {
     fontSize: '1.7em'
@@ -42,5 +48,10 @@ export const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     right: 10,
     cursor: 'pointer'
+  },
+  doneIcon: {
+    position: 'relative',
+    top: 2,
+    fontSize: '1.5em'
   }
 }));

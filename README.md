@@ -12,7 +12,8 @@ Frontend app for the `Horondi` online store
       variables
 - Styles
     - For styling function `makeStyles` from `@material-ui`
-      should be used and all styles should be located inside a separate file `{modelName}-styles.js` in the component folder.
+      should be used and all styles should be located inside separate
+      component.
 - Components
     - Components that are connected to redux should be located inside
       `containers` folder. Components without connection to redux should
@@ -20,8 +21,7 @@ Frontend app for the `Horondi` online store
     - Each individual page that is accessed via `react-router`
       should be located inside `pages` folder. All components
       that are used inside particular page should be located inside
-      folder for the specific page. It is useful when we delete some page we are sure that all components that are
-      used inside that page are removed too.
+      folder for the specific page.
     - Each component should have at least three files:
       - `index.js` where we export anything from the whole folder
       - `{component-name}.js` - file where component is located

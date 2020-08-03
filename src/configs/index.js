@@ -247,9 +247,11 @@ export const WELCOME_MESSAGE = [
 
 export const CONFIRM_ERROR = [
   {
-    value: 'Ой! Щось пішло не так.'
+    value: 'Ой! Щось пішло не так.',
+    button: 'На головну'
   },
   {
-    value: 'Oops! Something went wrong.'
+    value: 'Oops! Something went wrong.',
+    button: 'Go to homepage'
   }
 ];

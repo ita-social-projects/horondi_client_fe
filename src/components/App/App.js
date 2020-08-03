@@ -6,7 +6,7 @@ import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import { CssBaseline } from '@material-ui/core';
 import Routes from '../../routes';
 import { theme } from './app-theme/app.theme';
-import { DARK_THEME, LIGHT_THEME } from '../../configs';
+import { LIGHT_THEME } from '../../configs';
 import CircularUnderLoad from '../loading-bar';
 import { useStyles } from './App.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
@@ -23,15 +23,15 @@ const App = () => {
   const styles = useStyles();
 
   const localStorageThemeMode = getFromLocalStorage('theme');
-  const themeMode = localStorageThemeMode ? LIGHT_THEME : DARK_THEME;
-  const themeValue = theme(themeMode);
+  const themeMode = localStorageThemeMode === LIGHT_THEME;
+  const themeValue = theme(localStorageThemeMode);
 
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(setThemeMode(localStorageThemeMode));
+    dispatch(setThemeMode(themeMode));
   }, [lightMode, dispatch]);
 
   if (isLoading) {

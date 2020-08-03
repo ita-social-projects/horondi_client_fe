@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
     color: 'white',
     padding: '.5rem',
     borderRadius: '0px 0px 5px 5px',
-    fontFamily: 'Roboto',
+    fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '12px'

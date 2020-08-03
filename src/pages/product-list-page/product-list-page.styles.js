@@ -57,12 +57,26 @@ const useStyles = makeStyles((theme) => ({
       }
     }
   },
-  list: {
-    display: 'flex'
+  button: {
+    width: '100%'
   },
   products: {
     display: 'flex',
     flexWrap: 'wrap'
+  },
+  list: {
+    '@media (min-width:500px)': {
+      display: 'flex'
+    }
+  },
+  hide: {
+    textAlign: 'center',
+    textDecorationLine: 'underline'
+  },
+  mobile: {
+    '@media (min-width:500px)': {
+      display: 'none'
+    }
   }
 }));
 export default useStyles;

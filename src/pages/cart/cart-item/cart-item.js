@@ -36,14 +36,14 @@ const CartItem = ({ item }) => {
   return (
     <>
       <tr className={styles.root}>
-        <td className={styles.product}>
+        <td>
           <div className={styles.image}>
-            <Link to={`/${item.category}/${item._id}`}>
+            <Link to={item.productUrl}>
               <img src={item.images} alt='product pictures' />
             </Link>
           </div>
           <div className={styles.description}>
-            <Link to={`/${item.category}/${item._id}`}>
+            <Link to={item.productUrl}>
               <span className={styles.itemName}>
                 {item.name[language].value}
               </span>
@@ -52,16 +52,17 @@ const CartItem = ({ item }) => {
               {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
             </span>
             <span>
-              {CART_TABLE_FIELDS[language].bagBottom}:{' '}
-              {item.bagBottom[language].value}
+              {CART_TABLE_FIELDS[language].bagBottom}: {item.bagBottom}
             </span>
-            <span>
-              {CART_TABLE_FIELDS[language].sidePocket}:{' '}
-              {item.sidePocket && <DoneIcon className={styles.doneIcon} />}
-            </span>
+            {item.sidePocket.isSelected && (
+              <span>
+                {CART_TABLE_FIELDS[language].sidePocket}:{' '}
+                <DoneIcon className={styles.doneIcon} />
+              </span>
+            )}
           </div>
         </td>
-        <td className={styles.quantity}>
+        <td>
           <NumberInput
             quantity={item.quantity}
             onChangeQuantity={onChangeQuantity}

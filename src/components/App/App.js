@@ -32,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setThemeMode(themeMode));
-  }, [lightMode, dispatch]);
+  }, [lightMode, dispatch, themeMode]);
 
   if (isLoading) {
     return (

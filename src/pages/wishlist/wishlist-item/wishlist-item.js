@@ -28,20 +28,20 @@ const WishlistItem = ({ item }) => {
   return (
     <>
       <tr className={styles.root}>
-        <td className={styles.product}>
+        <td>
           <div className={styles.image}>
-            <Link to={`/${item.category}/${item._id}`}>
+            <Link to={item.productUrl}>
               <img src={item.images} alt='product pictures' />
             </Link>
           </div>
           <div className={styles.description}>
-            <Link to={`/${item.category}/${item._id}`}>
+            <Link to={item.productUrl}>
               <span className={styles.itemName}>
                 {item.name[language].value}
               </span>
             </Link>
             <Button variant='contained'>
-              <Link to={`/${item.category}/${item._id}`}>
+              <Link to={item.productUrl}>
                 {WISHLIST_BUTTONS[language].toItem}
               </Link>
             </Button>

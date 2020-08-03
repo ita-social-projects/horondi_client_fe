@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import {
@@ -127,4 +126,4 @@ NewsDetailPage.propTypes = {
   }).isRequired
 };
 
-export default withRouter(NewsDetailPage);
+export default NewsDetailPage;

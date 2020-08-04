@@ -3,7 +3,14 @@ import newsSaga from './news/news.sagas';
 import categoriesSaga from './categories/categories.sagas';
 import filtersSaga from './filter/filter.sagas';
 import productsSaga from './products/products.sagas';
+import userSaga from './user/user.sagas';
 
 export default function* rootSaga() {
-  yield all([newsSaga(), categoriesSaga(), filtersSaga(), productsSaga()]);
+  yield all([
+    newsSaga(),
+    categoriesSaga(),
+    filtersSaga(),
+    productsSaga(),
+    userSaga()
+  ]);
 }

@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
-import { HOME_BUTTONS } from '../../configs';
+import { HOME_BUTTONS } from '../../translations/homepage.translations';
 import { useStyles } from './home.styles';
 
 const Home = () => {

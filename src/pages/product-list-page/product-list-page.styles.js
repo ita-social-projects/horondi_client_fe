@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    padding: '0 3rem 1rem 2rem',
+    padding: '0 2rem 1rem 2rem',
     width: '100vw'
   },
   div: {
@@ -57,12 +57,26 @@ const useStyles = makeStyles((theme) => ({
       }
     }
   },
-  list: {
-    display: 'flex'
+  button: {
+    width: '100%'
   },
   products: {
     display: 'flex',
     flexWrap: 'wrap'
+  },
+  list: {
+    '@media (min-width:500px)': {
+      display: 'flex'
+    }
+  },
+  hide: {
+    textAlign: 'center',
+    textDecorationLine: 'underline'
+  },
+  mobile: {
+    '@media (min-width:500px)': {
+      display: 'none'
+    }
   }
 }));
 export default useStyles;

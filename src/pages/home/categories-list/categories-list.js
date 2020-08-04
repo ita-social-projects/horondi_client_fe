@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './categories-list.style';
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
-import { HOMEPAGE_TITLES, URL_LANGUAGE } from '../../../configs';
+import { URL_LANGUAGE } from '../../../configs';
+import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 const CategoriesList = () => {
   const { categories, loading, language } = useSelector(

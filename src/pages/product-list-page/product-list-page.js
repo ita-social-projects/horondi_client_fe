@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -12,6 +13,10 @@ import {
 } from '../../redux/filter/filter.actions';
 import ProductListItem from './product-list-item';
 import { getAllProducts } from '../../redux/products/products.actions';
+import {
+  SHOW_FILTER_BUTTON_TEXT,
+  HIDE_FILTER_BUTTON_TEXT
+} from '../../translations/product-list.translations';
 
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
@@ -64,6 +69,13 @@ const ProductListPage = ({ category }) => {
       currentPage
     })
   );
+
+  const [mobile, setMobile] = useState();
+
+  useEffect(() => {
+    setMobile(window.matchMedia('(min-width: 768px)').matches);
+  }, []);
+
   useEffect(() => {
     dispatch(getAllProducts());
     dispatch(
@@ -88,10 +100,17 @@ const ProductListPage = ({ category }) => {
     sortByPopularity,
     productsPerPage,
     category,
+    colorsFilter,
+    patternsFilter,
+    categoryFilter,
+    priceFilter,
+    searchFilter,
     currentPage
   ]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
+
+  const handleFilterShow = () => setMobile(!mobile);
 
   const categoryText = category.name[language].value.toUpperCase();
   const itemsToShow = products.map((product, index) => (
@@ -107,7 +126,27 @@ const ProductListPage = ({ category }) => {
       </div>
       <div className={styles.list}>
         <div className={styles.filter}>
-          <ProductFilter selectedCategory={category.name[1].value} />
+          {mobile && (
+            <ProductFilter selectedCategory={category.name[1].value} />
+          )}
+          {!mobile && (
+            <Button
+              className={`${styles.button} ${styles.mobile}`}
+              variant='contained'
+              onClick={handleFilterShow}
+            >
+              {SHOW_FILTER_BUTTON_TEXT[language].value}
+            </Button>
+          )}
+          {mobile && (
+            <div
+              className={`${styles.hide} ${styles.mobile}`}
+              variant='contained'
+              onClick={handleFilterShow}
+            >
+              {HIDE_FILTER_BUTTON_TEXT[language].value}
+            </div>
+          )}
         </div>
         <div className={styles.productsDiv}>{itemsToShow}</div>
       </div>

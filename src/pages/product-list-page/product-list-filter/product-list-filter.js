@@ -21,7 +21,18 @@ import {
   setSearchFilter
 } from '../../../redux/filter/filter.actions';
 
-export default function CheckboxesGroup({ selectedCategory }) {
+import {
+  NONE_PATTERN,
+  SEARCH_TEXT,
+  PRICE_TEXT,
+  CATERGORY_TEXT,
+  COLORS_TEXT,
+  PATTERN_TEXT,
+  FILTER_BUTTON_TEXT,
+  CLEAR_FILTER_BUTTON_TEXT
+} from '../../../translations/product-list.translations';
+
+export default ({ selectedCategory }) => {
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -78,16 +89,7 @@ export default function CheckboxesGroup({ selectedCategory }) {
       products.map((product) =>
         product.pattern.length
           ? JSON.stringify(product.pattern)
-          : JSON.stringify([
-            {
-              lang: 'uk',
-              value: 'Немає'
-            },
-            {
-              lang: 'eng',
-              value: 'None '
-            }
-          ])
+          : JSON.stringify(NONE_PATTERN)
       )
     )
   ].map(JSON.parse);
@@ -188,24 +190,10 @@ export default function CheckboxesGroup({ selectedCategory }) {
     dispatch(getFiltredProducts());
   };
 
-  const searchText = ['Пошук', 'Search'];
-
-  const priceText = ['Ціна', 'Price Range'];
-
-  const categoryText = ['Категорії', 'Category'];
-
-  const colorsText = ['Колір', 'Colors'];
-
-  const patternText = ['Гобелен', 'Pattern'];
-
-  const filterButtonText = ['Фільтр', 'Filter'];
-
-  const clearFilterButtonText = ['Очистити', 'Clear Filter'];
-
   const categoryFilterView = (
     <FormGroup>
       <Typography id='categories' gutterBottom>
-        {categoryText[language]}:
+        {CATERGORY_TEXT[language]}:
       </Typography>
       {categories.map((category) => (
         <FormControlLabel
@@ -227,7 +215,7 @@ export default function CheckboxesGroup({ selectedCategory }) {
   const priceFilterView = (
     <FormGroup>
       <Typography id='range-slider' gutterBottom>
-        {priceText[language]}:
+        {PRICE_TEXT[language]}:
       </Typography>
       <Slider
         className={styles.slider}
@@ -244,7 +232,7 @@ export default function CheckboxesGroup({ selectedCategory }) {
   const colorFilterView = (
     <FormGroup>
       <Typography id='colors' gutterBottom>
-        {colorsText[language]}:
+        {COLORS_TEXT[language]}:
       </Typography>
       {colors.map((color) => (
         <FormControlLabel
@@ -266,7 +254,7 @@ export default function CheckboxesGroup({ selectedCategory }) {
   const patternFilterView = (
     <FormGroup>
       <Typography id='patterns' gutterBottom>
-        {patternText[language]}:
+        {PATTERN_TEXT[language]}:
       </Typography>
       {patterns.map((pattern) => (
         <FormControlLabel
@@ -295,7 +283,7 @@ export default function CheckboxesGroup({ selectedCategory }) {
               onChange={handleSearch}
               value={search}
               id='outlined-search'
-              label={searchText[language]}
+              label={SEARCH_TEXT[language]}
               type='search'
               variant='outlined'
             />
@@ -306,14 +294,14 @@ export default function CheckboxesGroup({ selectedCategory }) {
               variant='contained'
               onClick={handleFilter}
             >
-              {filterButtonText[language]}
+              {FILTER_BUTTON_TEXT[language]}
             </Button>
             <Button
               className={styles.button}
               variant='contained'
               onClick={handleClearFilter}
             >
-              {clearFilterButtonText[language]}
+              {CLEAR_FILTER_BUTTON_TEXT[language]}
             </Button>
           </FormGroup>
           {priceFilterView}
@@ -325,4 +313,4 @@ export default function CheckboxesGroup({ selectedCategory }) {
       </Paper>
     </div>
   );
-}
+};

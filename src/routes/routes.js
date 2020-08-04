@@ -12,6 +12,9 @@ import NewsDetailPage from '../pages/news/news-detail';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductListPage from '../pages/product-list-page';
+import Register from '../pages/register';
+import Login from '../pages/login';
+import Confirmation from '../pages/confirmation';
 
 const Routes = () => {
   const styles = useStyles();
@@ -30,6 +33,14 @@ const Routes = () => {
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/error-page' exact render={() => 'error page'} />
+
+          <Route path='/register' exact component={Register} />
+          <Route path='/login' exact component={Login} />
+          <Route
+            path='/confirmation/:token'
+            exact
+            render={({ match }) => <Confirmation token={match.params.token} />}
+          />
           <Route
             path='/:category'
             exact

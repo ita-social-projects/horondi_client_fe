@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/Rectangle.png';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   thanks: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
@@ -36,11 +36,14 @@ export const useStyles = makeStyles(() => ({
     borderRadius: '5px',
     fontWeight: 'normal',
     fontSize: '18px',
-    lineHeight: '22px',
     color: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '15%',
-    marginLeft: '72%'
+    marginLeft: '72%',
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
   }
 }));

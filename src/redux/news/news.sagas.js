@@ -83,8 +83,7 @@ export function* handleArticleLoad({ payload }) {
             date
           }
           ... on Error {
-            __typename
-            message 
+            message
             statusCode
           }
         }

@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { useStyles } from './errorPage.styles';
-import { getError } from '../../redux/error/error.actions';
+import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_MESSAGE, ERROR_PAGE_IMAGES } from '../../configs';
 
 const ErrorPage = () => {
@@ -18,15 +17,10 @@ const ErrorPage = () => {
   );
 
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   const errorImagePath = isLightTheme
     ? ERROR_PAGE_IMAGES.light
     : ERROR_PAGE_IMAGES.dark;
-
-  useEffect(() => {
-    dispatch(getError());
-  }, [dispatch]);
 
   return (
     <div className={classes.wrapper}>

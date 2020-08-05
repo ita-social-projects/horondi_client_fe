@@ -82,9 +82,7 @@ export function* handleArticleLoad({ payload }) {
             date
           }
           ... on Error {
-            message {
-              lang
-            }
+            message
             statusCode
           }
         }

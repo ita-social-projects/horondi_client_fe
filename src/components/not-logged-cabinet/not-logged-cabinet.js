@@ -25,7 +25,7 @@ const NotLoggedCabinet = () => {
   };
 
   return (
-    <ul className={styles.cabinetDropdownList}>
+    <ul className={styles.cabinetDropdownList} data-cy='cabinet-dropdown'>
       <li>
         <Link to='/wishlist' className={styles.link}>
           <FavoriteIcon />

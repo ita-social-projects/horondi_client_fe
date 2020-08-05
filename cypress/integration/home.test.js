@@ -18,7 +18,7 @@ describe('home page test', () => {
   });
 
   it('"Horondi style" section tests', () => {
-    cy.get('.makeStyles-home-13 > :nth-child(3)')
+    cy.get('[data-cy="home-page"] > :nth-child(3)')
       .should('exist')
       .and('be.visible');
   });

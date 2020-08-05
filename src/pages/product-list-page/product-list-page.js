@@ -8,7 +8,8 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import {
   setCurrentPage,
-  getFiltredProducts
+  getFiltredProducts,
+  setCategoryFilter
 } from '../../redux/filter/filter.actions';
 import ProductListItem from './product-list-item';
 import { getAllProducts } from '../../redux/products/products.actions';
@@ -16,6 +17,7 @@ import {
   SHOW_FILTER_BUTTON_TEXT,
   HIDE_FILTER_BUTTON_TEXT
 } from '../../translations/product-list.translations';
+import CategoryFilter from './product-list-filter/category-filter';
 
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
@@ -77,10 +79,13 @@ const ProductListPage = ({ category }) => {
 
   useEffect(() => {
     dispatch(getAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(
       getFiltredProducts({
-        patterns: patternsFilter,
-        colors: colorsFilter,
+        patterns: patternsFilter || [],
+        colors: colorsFilter || [],
         category: categoryFilter || [category._id],
         price: priceFilter,
         search: searchFilter,
@@ -97,12 +102,8 @@ const ProductListPage = ({ category }) => {
     sortByPrice,
     sortByPopularity,
     productsPerPage,
-    category,
-    colorsFilter,
-    patternsFilter,
     categoryFilter,
-    priceFilter,
-    searchFilter,
+    category,
     currentPage
   ]);
 
@@ -124,9 +125,7 @@ const ProductListPage = ({ category }) => {
       </div>
       <div className={styles.list}>
         <div className={styles.filter}>
-          {mobile && (
-            <ProductFilter selectedCategory={category.name[1].value} />
-          )}
+          {mobile && <ProductFilter selectedCategory={category} />}
           {!mobile && (
             <Button
               className={`${styles.button} ${styles.mobile}`}

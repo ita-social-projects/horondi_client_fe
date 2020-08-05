@@ -7,7 +7,6 @@ import {
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   SET_LOADING,
-  SET_CATEGORY,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
@@ -108,11 +107,6 @@ const filterReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       loading: action.payload
-    };
-  case SET_CATEGORY:
-    return {
-      ...state,
-      filteredCategory: action.payload
     };
   default:
     return state;

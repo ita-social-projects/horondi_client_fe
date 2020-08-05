@@ -8,7 +8,6 @@ import {
   SET_SORT_BY_POPULARITY,
   GET_FILTRED_PRODUCTS,
   SET_LOADING,
-  SET_CATEGORY,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
@@ -52,10 +51,6 @@ export const getFiltredProducts = (payload) => ({
 export const setLoading = (loading) => ({
   type: SET_LOADING,
   payload: loading
-});
-export const setCategory = (payload) => ({
-  type: SET_CATEGORY,
-  payload
 });
 export const setCategoryFilter = (payload) => ({
   type: SET_CATEGORY_FILTER,

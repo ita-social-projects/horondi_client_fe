@@ -23,6 +23,11 @@ export const ABOUT_US_IMAGES = {
   workPlace_2: './images/about-us/work-place-2.jpg'
 };
 
+export const ERROR_PAGE_IMAGES = {
+  light: './images/error-page/error-light.png',
+  dark: './images/error-page/error-dark.png'
+};
+
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
 

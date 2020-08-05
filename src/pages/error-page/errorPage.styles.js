@@ -1,7 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import imageURL from '../../images/oops.png';
-
 export const useStyles = makeStyles(() => ({
   wrapper: {
     display: 'flex',
@@ -9,33 +7,28 @@ export const useStyles = makeStyles(() => ({
     alignItems: 'center',
     minHeight: '70vh'
   },
-  img: {
-    position: 'relative',
-    width: '100%',
-    height: '100%'
-  },
   error: {
     display: 'flex',
-    justifyContent: 'space-evenly',
-    background: `url(${imageURL}) no-repeat`,
-    backgroundSize: '100% 100%',
-    width: '60%',
-    minHeight: '450px'
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '60%'
+  },
+  errorImage: {
+    width: '80%',
+    height: '80%'
   },
   info: {
     display: 'flex',
     flexDirection: 'column',
-    alignSelf: 'flex-end',
     alignItems: 'center',
-    marginBottom: '80px',
     '& h2': {
+      margin: '15px 20px',
       fontFamily: 'Montserrat',
       fontWeight: 'normal',
-      color: 'rgba(0, 0, 0, 0.87)'
+      textAlign: 'center',
+      '@media (max-width: 768px)': {
+        fontSize: '1.2em'
+      }
     }
-  },
-  headerButton: {
-    background: '#404040',
-    color: '#FFFFFF'
   }
 }));

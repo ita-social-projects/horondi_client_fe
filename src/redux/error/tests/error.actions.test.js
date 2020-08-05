@@ -1,5 +1,5 @@
-import { setError } from '../error.actions';
-import { SET_ERROR } from '../error.types';
+import { setError, getError } from '../error.actions';
+import { SET_ERROR, GET_ERROR } from '../error.types';
 
 describe('Error actions test', () => {
   it('should set new error to payload property', () => {
@@ -22,5 +22,13 @@ describe('Error actions test', () => {
     };
 
     expect(setError(response.errors)).toEqual(result);
+  });
+
+  it('should return error state', () => {
+    const result = {
+      type: GET_ERROR
+    };
+
+    expect(getError()).toEqual(result);
   });
 });

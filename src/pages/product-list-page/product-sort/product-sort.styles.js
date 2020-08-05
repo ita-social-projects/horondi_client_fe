@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
     '& div': {
       '@media (max-width:500px)': {
         marginRight: '0 !important',
-        marginBottom: '.5rem'
+        marginBottom: '.5rem',
+        textAlign: 'center'
       }
     }
   },

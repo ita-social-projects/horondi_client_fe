@@ -18,12 +18,7 @@
       "impliedStrict": true
     }
   },
-  "plugins": [
-    "jsx-a11y",
-    "react-app",
-    "react",
-    "import"
-  ],
+  "plugins": ["jsx-a11y", "react-app", "react", "import"],
   "env": {
     "browser": true,
     "es6": true,
@@ -56,10 +51,7 @@
     "no-use-before-define": "off",
     "no-param-reassign": 0,
     "no-await-in-loop": 0,
-    "no-return-assign": [
-      "error",
-      "except-parens"
-    ],
+    "no-return-assign": ["error", "except-parens"],
     "no-restricted-syntax": [
       2,
       "ForInStatement",
@@ -72,18 +64,12 @@
         "destructuring": "all"
       }
     ],
-    "arrow-body-style": [
-      2,
-      "as-needed"
-    ],
+    "arrow-body-style": [2, "as-needed"],
     "no-unused-expressions": 0,
     "no-console": [
       0,
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ],
     "no-plusplus": 0,
@@ -102,10 +88,7 @@
     "jsx-a11y/no-noninteractive-element-interact": 0,
     "jsx-a11y/label-has-associated-control": 0,
     "no-multiple-empty-lines": 2,
-    "lines-between-class-members": [
-      1,
-      "always"
-    ],
+    "lines-between-class-members": [1, "always"],
     "consistent-return": 0,
     "no-this-before-super": 2,
     "indent": [
@@ -128,10 +111,7 @@
     "no-constant-condition": 2,
     "no-extra-parens": [1, "functions"],
     "import/extensions": 0,
-    "jsx-quotes": [
-      2,
-      "prefer-single"
-    ],
+    "jsx-quotes": [2, "prefer-single"],
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     " jsx-a11y/no-noninteractive-element-interact": 0,
@@ -142,13 +122,8 @@
     "jsx-a11y/img-redundant-alt": [
       2,
       {
-        "components": [
-          "Image"
-        ],
-        "words": [
-          "Bild",
-          "Foto"
-        ]
+        "components": ["Image"],
+        "words": ["Bild", "Foto"]
       }
     ],
     "jsx-a11y/aria-role": [
@@ -199,10 +174,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "radix": 0,
@@ -219,9 +191,7 @@
     "jsx-a11y/anchor-is-valid": [
       1,
       {
-        "aspects": [
-          "invalidHref"
-        ]
+        "aspects": ["invalidHref"]
       }
     ],
     "cypress/no-unnecessary-waiting": 0,

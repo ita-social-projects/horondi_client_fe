@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
@@ -93,7 +94,8 @@ const ProductListPage = ({ category }) => {
         limit: productsPerPage,
         basePrice: sortByPrice || undefined,
         rate: sortByRate || undefined,
-        purchasedProducts: sortByPopularity || undefined
+        purchasedProducts: sortByPopularity || undefined,
+        productsPerPage
       })
     );
   }, [
@@ -157,6 +159,17 @@ const ProductListPage = ({ category }) => {
       </div>
     </div>
   );
+};
+ProductListPage.propTypes = {
+  category: PropTypes.shape({
+    _id: PropTypes.string,
+    isMain: PropTypes.bool,
+    name: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string
+      })
+    )
+  }).isRequired
 };
 
 export default ProductListPage;

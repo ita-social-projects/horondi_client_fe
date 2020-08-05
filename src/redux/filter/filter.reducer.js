@@ -11,7 +11,8 @@ import {
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_PAGES_COUNT
 } from './filter.types';
 
 const initialState = {
@@ -27,7 +28,8 @@ const initialState = {
   categoryFilter: undefined,
   priceFilter: [0, 99999],
   searchFilter: '',
-  products: []
+  products: [],
+  pagesCount: 1
 };
 const setSort = ({
   sortByDate = 0,
@@ -107,6 +109,11 @@ const filterReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       loading: action.payload
+    };
+  case SET_PAGES_COUNT:
+    return {
+      ...state,
+      pagesCount: action.payload
     };
   default:
     return state;

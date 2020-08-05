@@ -12,6 +12,7 @@ export function* handleGetAllProducts() {
       getItems,
       `query{
         getProducts {
+      products{
             name {
               lang
               value
@@ -47,9 +48,11 @@ export function* handleGetAllProducts() {
               isMain
             }
           }
+          }
       }`
     );
-    yield put(setAllProducts(products.data.getProducts));
+
+    yield put(setAllProducts(products.data.getProducts.products));
     yield put(setLoading(false));
   } catch (e) {
     console.log(e);

@@ -48,15 +48,17 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
             image={newsImage}
             title={newsTitle}
             component='div'
+            data-cy='image'
           />
         </div>
-        <CardHeader subheader={newsDate} />
+        <CardHeader subheader={newsDate} data-cy='date' />
         <CardContent>
           <Typography
             className={styles.ArticleTitle}
             gutterBottom
             variant='h5'
             component='h2'
+            data-cy='newsTitle'
           >
             {newsTitle}
           </Typography>
@@ -65,23 +67,29 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
             color='textSecondary'
             component='div'
             className={styles.newsText}
+            data-cy='newsText'
           >
             {newsText}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}`}>
-            <Button variant='contained' className={styles.newsButton}>
+            <Button
+              variant='contained'
+              className={styles.newsButton}
+              data-cy='readMoreButton'
+            >
               {newsButtonText[language]}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>
-            <CardHeader subheader={newsAuthor} />
+            <CardHeader subheader={newsAuthor} data-cy='authorName' />
             <CardContent />
             <Avatar
               alt={newsAuthor}
               src={newsAuthorAvatar}
               className={styles.large}
+              data-cy='authorPhoto'
             />
           </div>
         </div>

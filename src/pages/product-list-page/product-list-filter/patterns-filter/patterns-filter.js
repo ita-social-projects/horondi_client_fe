@@ -38,27 +38,18 @@ const PatternsFilter = () => {
     )
   ].map(JSON.parse);
 
-  const [patternsCheck, setPatternsCheck] = useState({});
-
-  useEffect(() => {
-    dispatch(
-      setPatternsFilter(
-        patterns
-          .filter((pattern) => patternsCheck[pattern[1].value])
-          .map((pattern) => pattern[1].value)
-      )
-    );
-  }, [patternsCheck]);
-
-  useEffect(() => {
-    if (!patternsFilter) setPatternsCheck({});
-  });
-
   const handlePatternChange = (event) => {
-    setPatternsCheck({
-      ...patternsCheck,
-      [event.target.name]: event.target.checked
-    });
+    if (!event.target.checked) {
+      dispatch(
+        setPatternsFilter(
+          patternsFilter.filter((pattern) => pattern !== event.target.name)
+        )
+      );
+    } else {
+      dispatch(
+        setPatternsFilter([...new Set([...patternsFilter, event.target.name])])
+      );
+    }
   };
 
   return (
@@ -73,7 +64,9 @@ const PatternsFilter = () => {
           control={
             <Checkbox
               name={pattern[1].value}
-              checked={!!patternsCheck[pattern[1].value]}
+              checked={
+                !!patternsFilter.find((filter) => filter === pattern[1].value)
+              }
             />
           }
           label={pattern[language].value}

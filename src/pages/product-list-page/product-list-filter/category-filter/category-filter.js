@@ -29,32 +29,22 @@ const CategoryFilter = ({ selectedCategory }) => {
     ...new Set(products.map((product) => JSON.stringify(product.category)))
   ].map(JSON.parse);
 
-  const [categoryCheck, setCategoryCheck] = useState({});
-
   useEffect(() => {
-    if (!categoryFilter)
-      setCategoryCheck({ [selectedCategory.name[1].value]: true });
-  }, [categoryFilter]);
-
-  useEffect(() => {
-    setCategoryCheck({ [selectedCategory.name[1].value]: true });
+    dispatch(setCategoryFilter([selectedCategory._id]));
   }, [selectedCategory]);
 
-  useEffect(() => {
-    dispatch(
-      setCategoryFilter(
-        categories
-          .filter((category) => categoryCheck[category.name[1].value])
-          .map((category) => category._id)
-      )
-    );
-  }, [categoryCheck, dispatch]);
-
   const handleCategoryChange = (event) => {
-    setCategoryCheck({
-      ...categoryCheck,
-      [event.target.name]: event.target.checked
-    });
+    if (!event.target.checked) {
+      dispatch(
+        setCategoryFilter(
+          categoryFilter.filter((category) => category !== event.target.name)
+        )
+      );
+    } else {
+      dispatch(
+        setCategoryFilter([...new Set([...categoryFilter, event.target.name])])
+      );
+    }
   };
 
   return (
@@ -68,8 +58,10 @@ const CategoryFilter = ({ selectedCategory }) => {
           className={styles.checkbox}
           control={
             <Checkbox
-              name={category.name[1].value}
-              checked={!!categoryCheck[category.name[1].value]}
+              name={category._id}
+              checked={
+                !!categoryFilter.find((filter) => filter === category._id)
+              }
             />
           }
           label={category.name[language].value}

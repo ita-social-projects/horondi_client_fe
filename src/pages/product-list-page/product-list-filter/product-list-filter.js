@@ -100,9 +100,9 @@ const ProductListFilter = ({ selectedCategory }) => {
   };
 
   const handleClearFilter = () => {
-    dispatch(setColorsFilter(false));
-    dispatch(setPatternsFilter(false));
-    dispatch(setCategoryFilter(false));
+    dispatch(setColorsFilter([]));
+    dispatch(setPatternsFilter([]));
+    dispatch(setCategoryFilter([]));
     dispatch(setSearchFilter(''));
     dispatch(
       setPriceFilter([

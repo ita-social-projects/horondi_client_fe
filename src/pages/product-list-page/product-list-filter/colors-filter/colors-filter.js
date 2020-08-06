@@ -31,27 +31,18 @@ const ColorsFilter = () => {
     )
   ].map(JSON.parse);
 
-  const [colorsCheck, setColorsCheck] = useState({});
-
-  useEffect(() => {
-    dispatch(
-      setColorsFilter(
-        colors
-          .filter((color) => colorsCheck[color[1].value])
-          .map((color) => color[1].value)
-      )
-    );
-  }, [colorsCheck]);
-
-  useEffect(() => {
-    if (!colorsFilter) setColorsCheck({});
-  });
-
   const handleColorChange = (event) => {
-    setColorsCheck({
-      ...colorsCheck,
-      [event.target.name]: event.target.checked
-    });
+    if (!event.target.checked) {
+      dispatch(
+        setColorsFilter(
+          colorsFilter.filter((color) => color !== event.target.name)
+        )
+      );
+    } else {
+      dispatch(
+        setColorsFilter([...new Set([...colorsFilter, event.target.name])])
+      );
+    }
   };
 
   return (
@@ -66,7 +57,9 @@ const ColorsFilter = () => {
           control={
             <Checkbox
               name={color[1].value}
-              checked={!!colorsCheck[color[1].value]}
+              checked={
+                !!colorsFilter.find((filter) => filter === color[1].value)
+              }
             />
           }
           label={color[language].value}

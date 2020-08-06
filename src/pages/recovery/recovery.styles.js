@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
   recoveryForm: {
     width: '400px',
     minHeight: '100px',
-    background: 'white',
+    background: theme.palette.backgroundColor,
     textAlign: 'center',
     position: 'absolute',
     top: '202px',
@@ -38,10 +38,6 @@ export const useStyles = makeStyles((theme) => ({
     '& p': {
       position: 'absolute',
       top: '40px'
-    },
-    '& p::after': {
-      content: `'example@mail.com'`,
-      color: '#828282'
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor
@@ -73,6 +69,12 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
+    }
+  },
+  helperEmail: {
+    '& p::after': {
+      content: `'example@mail.com'`,
+      color: '#828282'
     }
   }
 }));

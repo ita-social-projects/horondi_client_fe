@@ -278,3 +278,50 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+
+export const RECOVERY_MESSAGES = [
+  {
+    h2: 'Відновлення паролю',
+    label: 'Електронна адреса',
+    p_1:
+      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    button: 'Відправити'
+  },
+  {
+    h2: 'Password recovery',
+    label: 'E-mail  ',
+    p_1:
+      'Specify your e-mail to reset the password and we will send recovery instructions.',
+    button: 'Send'
+  }
+];
+
+export const RECOVERY_SUCCESS_MESSAGE = [
+  {
+    h2: 'Успішно!',
+    p: 'Будь ласка виконайте інструкції у листі, який ми вам надіслали.'
+  },
+  {
+    h2: 'Success!',
+    p: 'Please follow the instructions in the message, we have just sent you.'
+  }
+];
+
+export const RECOVERY_ERROR_MESSAGE = {
+  USER_NOT_FOUND: [
+    {
+      value: 'Користувача з даним емейлом не знайдено'
+    },
+    {
+      value: 'User with given e-mail address is not found'
+    }
+  ],
+  EMAIL_ERROR: [
+    {
+      value: 'Будь ласка перезавантажте сторінку та спробуйте ще раз.'
+    },
+    {
+      value: 'Please, reload your page and try again.'
+    }
+  ]
+};

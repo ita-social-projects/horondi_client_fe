@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { formRegExp, errorMessages } from '../../configs';
+import { useSelector, useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
+import {
+  formRegExp,
+  errorMessages,
+  RECOVERY_SUCCESS_MESSAGE,
+  RECOVERY_MESSAGES,
+  RECOVERY_ERROR_MESSAGE,
+  SHOW_AFTER
+} from '../../configs';
 import { useStyles } from './recovery.styles';
 import recoverUser from './recoverUser';
 import { Loader } from '../../components/loader/loader';
@@ -18,8 +26,11 @@ const Recovery = () => {
     language: Language.language
   }));
 
+  const dispatch = useDispatch();
+
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
+    setRecoveryError('');
     setEmail(input);
     if (input.match(regExp)) {
       setValid(true);
@@ -30,11 +41,14 @@ const Recovery = () => {
 
   const handleRecovery = async () => {
     setShouldValidate(true);
-    if (email) {
+    if (emailValidated) {
       setLoading(true);
       try {
         await recoverUser(email);
         setHasRecovered(true);
+        setTimeout(() => {
+          dispatch(push('/login'));
+        }, SHOW_AFTER);
       } catch (e) {
         setRecoveryError(e.message.replace('GraphQL error: ', ''));
       } finally {
@@ -47,18 +61,11 @@ const Recovery = () => {
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>Success!</h2>
+      <h2 className={styles.heading}>
+        {hasRecovered ? RECOVERY_SUCCESS_MESSAGE[language].h2 : ''}
+      </h2>
       <p className={styles.recoveryText}>
-        Please, follow the instructions in the message, we have just sent you.
-      </p>
-    </div>
-  );
-
-  const errorText = (
-    <div>
-      <h2 className={styles.heading}>Oops, something went wrong!</h2>
-      <p className={styles.recoveryText}>
-        Please, reload your page and try again.
+        {hasRecovered ? RECOVERY_SUCCESS_MESSAGE[language].p : ''}
       </p>
     </div>
   );
@@ -70,40 +77,44 @@ const Recovery = () => {
           successWindow
         ) : loading ? (
           <Loader />
-        ) : recoveryError ? (
-          errorText
         ) : (
           <div>
-            <h2 className={styles.heading}>Відновлення паролю</h2>
+            <h2 className={styles.heading}>{RECOVERY_MESSAGES[language].h2}</h2>
             <TextField
               color='secondary'
-              label='Електронна адреса'
-              className={styles.emailInput}
+              label={RECOVERY_MESSAGES[language].label}
+              className={`${styles.emailInput} ${
+                !recoveryError ? styles.helperEmail : null
+              }`}
               fullWidth
               variant='outlined'
               type='text'
               helperText={
                 shouldValidate && !emailValidated && email
                   ? `${errorMessages[language].value.email}`
-                  : ''
+                  : recoveryError
+                    ? `${RECOVERY_ERROR_MESSAGE[recoveryError][language].value}`
+                    : null
               }
               value={email}
-              error={shouldValidate && !emailValidated && !!email}
+              error={
+                (shouldValidate && !emailValidated && !!email) ||
+                !!recoveryError
+              }
               required
               onChange={(e) =>
                 handleChange(e, setEmailValidated, formRegExp.email)
               }
             />
             <p className={styles.recoveryText}>
-              Вкажіть свою електронну пошту для скидання паролю і ми надішлемо
-              інструкції для відновлення.
+              {RECOVERY_MESSAGES[language].p_1}
             </p>
             <Button
               className={styles.recoverBtn}
               fullWidth
               onClick={handleRecovery}
             >
-              Відправити
+              {RECOVERY_MESSAGES[language].button}
             </Button>
           </div>
         )}

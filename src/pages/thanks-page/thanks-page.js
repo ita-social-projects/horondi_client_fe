@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 import { useStyles } from './thanks-page.styles';
 import {
   THANKS_PAGE_TITLE,
@@ -15,23 +16,11 @@ const Thanks = () => {
     <div className={styles.thanks}>
       <div className={styles.thanksWrapper}>
         <div className={styles.titleStyle}>
-          {language === 0
-            ? THANKS_PAGE_TITLE['0'].thanks
-            : THANKS_PAGE_TITLE['1'].thanks}
+          {THANKS_PAGE_TITLE[language].thanks}
         </div>
-        <button type='button' className={styles.buttonStyle}>
-          <Link to='/'>
-            {language === 0 ? (
-              <span className={styles.textStyle}>
-                {THANKS_PAGE_BUTTON['0'].continueShopping}
-              </span>
-            ) : (
-              <span className={styles.textStyle}>
-                {THANKS_PAGE_BUTTON['1'].continueShopping}
-              </span>
-            )}
-          </Link>
-        </button>
+        <Button className={styles.buttonStyle}>
+          <Link to='/'>{THANKS_PAGE_BUTTON[language].continueShopping}</Link>
+        </Button>
       </div>
     </div>
   );

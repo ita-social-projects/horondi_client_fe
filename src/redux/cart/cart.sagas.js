@@ -12,12 +12,12 @@ import {
   setToLocalStorage
 } from '../../services/local-storage.service';
 
-function* handleCartLoad() {
+export function* handleCartLoad() {
   const cart = yield call(getFromLocalStorage, 'cart');
   yield put(setCart(cart));
 }
 
-function* handleAddCartItem({ payload }) {
+export function* handleAddCartItem({ payload }) {
   const cart = yield call(getFromLocalStorage, 'cart');
   const possibleItemInCart = cart.find(
     (item) =>
@@ -34,11 +34,11 @@ function* handleAddCartItem({ payload }) {
     newCart = [...cart, payload];
   }
 
-  setToLocalStorage('cart', newCart);
   yield put(setCart(newCart));
+  setToLocalStorage('cart', newCart);
 }
 
-function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
+export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
   const cart = yield call(getFromLocalStorage, 'cart');
   const newCart = cart.filter(
     (item) =>
@@ -50,7 +50,7 @@ function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
   yield put(setCart(newCart));
 }
 
-function* handleSetCartItemQuantity({
+export function* handleSetCartItemQuantity({
   payload: { _id, selectedSize },
   value,
   key

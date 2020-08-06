@@ -12,7 +12,8 @@ import {
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
   SET_SEARCH,
-  SET_PAGES_COUNT
+  SET_PAGES_COUNT,
+  SET_HOT_ITEMS_FILTER
 } from './filter.types';
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   categoryFilter: undefined,
   priceFilter: [0, 99999],
   searchFilter: '',
+  isHotItemFilter: false,
   products: [],
   pagesCount: 1
 };
@@ -79,6 +81,11 @@ const filterReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       categoryFilter: action.payload
+    };
+  case SET_HOT_ITEMS_FILTER:
+    return {
+      ...state,
+      isHotItemFilter: action.payload
     };
   case SET_SEARCH:
     return {

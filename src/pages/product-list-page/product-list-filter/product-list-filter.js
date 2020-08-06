@@ -11,6 +11,7 @@ import ColorsFilter from './colors-filter';
 import PatternsFilter from './patterns-filter';
 import CategoryFilter from './category-filter';
 import PriceFilter from './price-filter';
+import HotItemFilter from './hotItem-filter';
 
 import useStyles from './product-list-filter.styles';
 import {
@@ -19,7 +20,8 @@ import {
   setPatternsFilter,
   setCategoryFilter,
   setPriceFilter,
-  setSearchFilter
+  setSearchFilter,
+  setHotItemFilter
 } from '../../../redux/filter/filter.actions';
 
 import {
@@ -43,6 +45,7 @@ const ProductListFilter = ({ selectedCategory }) => {
     colorsFilter,
     patternsFilter,
     categoryFilter,
+    isHotItemFilter,
     priceFilter,
     searchFilter,
     language
@@ -58,6 +61,7 @@ const ProductListFilter = ({ selectedCategory }) => {
         colorsFilter,
         patternsFilter,
         categoryFilter,
+        isHotItemFilter,
         priceFilter,
         searchFilter
       },
@@ -72,6 +76,7 @@ const ProductListFilter = ({ selectedCategory }) => {
       colorsFilter,
       patternsFilter,
       categoryFilter,
+      isHotItemFilter,
       priceFilter,
       searchFilter,
       language
@@ -90,6 +95,7 @@ const ProductListFilter = ({ selectedCategory }) => {
         colors: colorsFilter,
         patterns: patternsFilter,
         category: categoryFilter,
+        isHotItemFilter,
         skip: currentPage * productsPerPage,
         limit: productsPerPage,
         basePrice: sortByPrice,
@@ -104,6 +110,7 @@ const ProductListFilter = ({ selectedCategory }) => {
     dispatch(setPatternsFilter([]));
     dispatch(setCategoryFilter([]));
     dispatch(setSearchFilter(''));
+    dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
         Math.min(...products.map((product) => product.basePrice)),
@@ -144,7 +151,9 @@ const ProductListFilter = ({ selectedCategory }) => {
               {CLEAR_FILTER_BUTTON_TEXT[language]}
             </Button>
           </FormGroup>
+          <HotItemFilter />
           <PriceFilter />
+
           <CategoryFilter selectedCategory={selectedCategory} />
           <ColorsFilter />
           <PatternsFilter />

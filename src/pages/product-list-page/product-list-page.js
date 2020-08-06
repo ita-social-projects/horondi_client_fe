@@ -9,8 +9,7 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import {
   setCurrentPage,
-  getFiltredProducts,
-  setCategoryFilter
+  getFiltredProducts
 } from '../../redux/filter/filter.actions';
 import ProductListItem from './product-list-item';
 import { getAllProducts } from '../../redux/products/products.actions';
@@ -18,7 +17,6 @@ import {
   SHOW_FILTER_BUTTON_TEXT,
   HIDE_FILTER_BUTTON_TEXT
 } from '../../translations/product-list.translations';
-import CategoryFilter from './product-list-filter/category-filter';
 
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
@@ -34,6 +32,7 @@ const ProductListPage = ({ category }) => {
     sortByPrice,
     colorsFilter,
     patternsFilter,
+    isHotItemFilter,
     categoryFilter,
     priceFilter,
     searchFilter,
@@ -51,6 +50,7 @@ const ProductListPage = ({ category }) => {
         categoryFilter,
         priceFilter,
         searchFilter,
+        isHotItemFilter,
         sortByPopularity,
         productsPerPage,
         currentPage
@@ -65,6 +65,7 @@ const ProductListPage = ({ category }) => {
       patternsFilter,
       categoryFilter,
       priceFilter,
+      isHotItemFilter,
       searchFilter,
       sortByPopularity,
       productsPerPage,
@@ -85,6 +86,7 @@ const ProductListPage = ({ category }) => {
   useEffect(() => {
     dispatch(
       getFiltredProducts({
+        isHotItemFilter,
         patterns: patternsFilter || [],
         colors: colorsFilter || [],
         category: categoryFilter || [category._id],

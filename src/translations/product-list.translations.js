@@ -41,6 +41,8 @@ export const COLORS_TEXT = ['Колір', 'Colors'];
 
 export const PATTERN_TEXT = ['Гобелен', 'Pattern'];
 
+export const IS_HOT_TEXT = ['Популярні', 'Hot Products'];
+
 export const FILTER_BUTTON_TEXT = ['Фільтр', 'Filter'];
 
 export const CLEAR_FILTER_BUTTON_TEXT = ['Очистити', 'Clear Filter'];

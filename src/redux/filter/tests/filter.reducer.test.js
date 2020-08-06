@@ -6,7 +6,8 @@ import {
   setPatternsFilter,
   setPriceFilter,
   setLoading,
-  setSearchFilter
+  setSearchFilter,
+  setHotItemFilter
 } from '../filter.actions';
 
 describe('Filter reducer test', () => {
@@ -24,6 +25,7 @@ describe('Filter reducer test', () => {
       patternsFilter: [],
       categoryFilter: undefined,
       priceFilter: [],
+      isHotItemFilter: false,
       searchFilter: '',
       products: []
     };
@@ -84,6 +86,15 @@ describe('Filter reducer test', () => {
     expect(filterReducer(state, setAllFilterProducts(productsExample))).toEqual(
       state
     );
+  });
+
+  it('should return state with hot item true', () => {
+    const state = {
+      ...initialState,
+      isHotItemFilter: true
+    };
+
+    expect(filterReducer(state, setHotItemFilter(true))).toEqual(state);
   });
 
   it('should return state with category filter', () => {

@@ -15,6 +15,7 @@ export function* handleFilterLoad({
     colors: [],
     patterns: [],
     price: [0, 99999],
+    isHotItemFilter: false,
     skip: 1,
     limit: 90,
     rate: undefined,
@@ -33,6 +34,7 @@ export function* handleFilterLoad({
                 $price: [Int]
                 $colors: [String]
                 $patterns: [String]
+                $isHotItem: Boolean
                 $skip:Int
                 $limit:Int
                 $rate:Int
@@ -46,6 +48,7 @@ export function* handleFilterLoad({
                     pattern: $patterns
                     price: $price
                     category:$category
+                    isHotItem: $isHotItem
                   }
                  skip: $skip
                  limit: $limit
@@ -56,7 +59,7 @@ export function* handleFilterLoad({
                  purchasedCount:$purchasedCount
                 }
             ){
-              products{
+              items{
             _id
             purchasedCount
             name {
@@ -91,8 +94,10 @@ export function* handleFilterLoad({
               }
               isMain
             }
+            isHotItem
           }
-          productsCount
+          
+          count
           },
       }`,
       {
@@ -105,17 +110,16 @@ export function* handleFilterLoad({
         rate: payload.rate,
         basePrice: payload.basePrice,
         category: payload.category,
-        purchasedCount: payload.purchasedCount
+        purchasedCount: payload.purchasedCount,
+        isHotItem: payload.isHotItemFilter
       }
     );
     yield put(
       setPagesCount(
-        Math.ceil(
-          products.data.getProducts.productsCount / payload.productsPerPage
-        )
+        Math.ceil(products.data.getProducts.count / payload.productsPerPage)
       )
     );
-    yield put(setAllFilterProducts(products.data.getProducts.products));
+    yield put(setAllFilterProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
     console.log(e);

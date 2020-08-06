@@ -6,6 +6,7 @@ import {
   setPriceFilter,
   setLoading,
   setSearchFilter,
+  setHotItemFilter,
   getFiltredProducts
 } from '../filter.actions';
 import {
@@ -16,7 +17,8 @@ import {
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_HOT_ITEMS_FILTER
 } from '../filter.types';
 
 describe('Filter actions test', () => {
@@ -67,6 +69,16 @@ describe('Filter actions test', () => {
     };
 
     expect(setAllFilterProducts(products)).toEqual(result);
+  });
+
+  it('should set hot items filter to payload property', () => {
+    const isHot = true;
+    const result = {
+      type: SET_HOT_ITEMS_FILTER,
+      payload: isHot
+    };
+
+    expect(setHotItemFilter(isHot)).toEqual(result);
   });
 
   it('should set category filter to payload property', () => {

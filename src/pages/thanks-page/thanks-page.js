@@ -19,11 +19,19 @@ const Thanks = () => {
             ? THANKS_PAGE_TITLE['0'].thanks
             : THANKS_PAGE_TITLE['1'].thanks}
         </div>
-        <Link className={styles.linkStyle} to='/'>
-          {language === 0
-            ? THANKS_PAGE_BUTTON['0'].continueShopping
-            : THANKS_PAGE_BUTTON['1'].continueShopping}
-        </Link>
+        <button type='button' className={styles.buttonStyle}>
+          <Link to='/'>
+            {language === 0 ? (
+              <span className={styles.textStyle}>
+                {THANKS_PAGE_BUTTON['0'].continueShopping}
+              </span>
+            ) : (
+              <span className={styles.textStyle}>
+                {THANKS_PAGE_BUTTON['1'].continueShopping}
+              </span>
+            )}
+          </Link>
+        </button>
       </div>
     </div>
   );

@@ -13,28 +13,16 @@ describe('news test', () => {
   it('Check elements at the news page', () => {
     cy.get('h1').wait(100).should('exist').and('be.visible');
 
-    cy.get('#root > div.makeStyles-root-1 > div > div:nth-child(1)')
-      .should('exist')
-      .and('be.visible');
-    cy.get(
-      '#root > div.makeStyles-root-1 > div > div:nth-child(1) > div > div.MuiCardHeader-root'
-    )
-      .should('exist')
-      .and('be.visible');
-    cy.get(
-      '#root > div.makeStyles-root-1 > div > div:nth-child(1) > div > div.MuiCardContent-root'
-    )
-      .should('exist')
-      .and('be.visible');
-    cy.get('div > div:nth-child(1) a > button')
-      .should('exist')
-      .and('be.visible');
+    cy.get('[data-cy="image"]').should('exist').and('be.visible');
+    cy.get('[data-cy="date"]').should('exist').and('be.visible');
+    cy.get('[data-cy="newsTitle"]').should('exist').and('be.visible');
+    cy.get('[data-cy="newsText"]').should('exist').and('be.visible');
+    cy.get('[data-cy="authorName"]').should('exist').and('be.visible');
+    cy.get('[data-cy="authorPhoto"]').should('exist').and('be.visible');
   });
 
   it('Click to news detail button', () => {
-    cy.get(
-      `#root > div.makeStyles-root-1 > div > div:nth-child(1) > div a > button`
-    )
+    cy.get(':nth-child(1) > .MuiPaper-root a > [data-cy=readMoreButton]')
       .should('exist')
       .and('be.visible')
       .click();

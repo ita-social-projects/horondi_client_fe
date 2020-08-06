@@ -11,7 +11,8 @@ import {
   LOGIN_FORM_LABEL,
   REGISTER_USER_DATA,
   CONFIRM_EMAIL,
-  SHOW_AFTER
+  SHOW_AFTER,
+  REGISTER_USER_ERROR
 } from '../../configs';
 import { useStyles } from './register.styles';
 import registerUser from './registerUser';
@@ -40,7 +41,7 @@ function Register() {
   const [showConfirmedPassword, setShowConfirmedPassword] = useState(true);
 
   // ERROR
-  const [registerError, setRegisterError] = useState('');
+  const [registerError, setRegisterError] = useState(null);
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -61,9 +62,9 @@ function Register() {
         setLoading(true);
         await registerUser(user);
         setHasRegistered(true);
-        setLoading(false);
       } catch (e) {
         setRegisterError(e.message.replace('GraphQL error: ', ''));
+      } finally {
         setLoading(false);
       }
     }
@@ -275,7 +276,11 @@ function Register() {
                   >
                     {REGISTER_FORM_LABEL[language].value}
                   </Button>
-                  <p className={styles.registerError}>{registerError}</p>
+                  <p className={styles.registerError}>
+                    {registerError
+                      ? REGISTER_USER_ERROR[registerError][language].value
+                      : ''}
+                  </p>
                 </div>
                 <div>
                   <Link to='/login' className={styles.loginBtn}>

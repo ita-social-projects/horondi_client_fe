@@ -10,7 +10,8 @@ import {
   LOGIN_USER_DATA,
   formRegExp,
   FORGOT_PASSWORD,
-  REGISTER_PROPOSAL
+  REGISTER_PROPOSAL,
+  LOGIN_USER_ERROR
 } from '../../configs';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
@@ -63,7 +64,7 @@ const Login = () => {
   const handleLogin = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      dispatch(loginUser({ user, language }));
+      dispatch(loginUser({ user }));
     }
   };
 
@@ -132,7 +133,9 @@ const Login = () => {
                   {label}
                 </Button>
                 <p className={styles.loginError}>
-                  {shouldValidate && loginError ? loginError : ''}
+                  {shouldValidate && loginError
+                    ? LOGIN_USER_ERROR[loginError][language].value
+                    : ''}
                 </p>
               </div>
               <div className={styles.orContainer}>

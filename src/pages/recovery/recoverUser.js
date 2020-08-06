@@ -1,12 +1,12 @@
 import { setItems } from '../../utils/client';
 
-const confirmUser = (token) => {
+const recoverUser = (email) => {
   const query = ` 
   mutation {
-    confirmUser(token: "${token}")
+    recoverUser(email: "${email}")
   }
   `;
   return setItems(query);
 };
 
-export default confirmUser;
+export default recoverUser;

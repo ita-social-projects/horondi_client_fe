@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { push } from 'connected-react-router';
 import { useStyles } from './confirmation.styles';
 import { WELCOME_MESSAGE, CONFIRM_ERROR } from '../../configs';
 import confirmUser from './confirmUser';
@@ -15,13 +16,21 @@ const Confirmation = ({ token }) => {
     language: state.Language.language
   }));
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
-    confirmUser(token, language)
+    confirmUser(token)
       .catch((err) => setError(err.message.replace('GraphQL error: ', '')))
       .finally(() => setLoading(false));
-  }, [token, language]);
+  }, [token]);
 
+  // HANDLERS
+  const goTo = (path) => {
+    dispatch(push(path));
+  };
+
+  // STYLES
   const styles = useStyles();
 
   return (
@@ -39,7 +48,14 @@ const Confirmation = ({ token }) => {
             <h3>{WELCOME_MESSAGE[language].h3}</h3>
           </>
         )}
-        <Button variant='contained'>{WELCOME_MESSAGE[language].button}</Button>
+        <div className={styles.buttonGroup}>
+          <Button variant='contained' onClick={() => goTo('/')}>
+            {WELCOME_MESSAGE[language].button_1}
+          </Button>
+          <Button variant='contained' onClick={() => goTo('/login')}>
+            {WELCOME_MESSAGE[language].button_2}
+          </Button>
+        </div>
       </div>
     </div>
   );

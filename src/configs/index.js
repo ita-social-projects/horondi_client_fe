@@ -107,16 +107,39 @@ export const EMPTY_FIELD = [
   }
 ];
 
-export const LOGIN_USER_ERROR = [
-  {
-    lang: 'uk',
-    value: 'Неправильна електронна адреса або пароль'
-  },
-  {
-    lang: 'eng',
-    value: 'Wrong e-mail address or password'
-  }
-];
+export const LOGIN_USER_ERROR = {
+  WRONG_CREDENTIALS: [
+    {
+      lang: 'uk',
+      value: 'Неправильна електронна адреса або пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Wrong e-mail address or password'
+    }
+  ],
+  INPUT_NOT_VALID: [
+    {
+      lang: 'uk',
+      value: 'Ви ввели невірні дані'
+    },
+    {
+      lang: 'eng',
+      value: 'You have typed wrong data'
+    }
+  ]
+};
+
+export const REGISTER_USER_ERROR = {
+  USER_ALREADY_EXIST: [
+    {
+      value: 'Користувач за вказаним емейлом вже існує'
+    },
+    {
+      value: 'User with given email already exists'
+    }
+  ]
+};
 
 export const SHOW_AFTER = 3000;
 
@@ -236,12 +259,14 @@ export const WELCOME_MESSAGE = [
   {
     h2: 'Вітаємо',
     h3: 'Реєстрація пройшла успішно!',
-    button: 'В магазин'
+    button_1: 'В магазин',
+    button_2: 'Увійти'
   },
   {
     h2: 'Welcome',
     h3: 'Registration was successful!',
-    button: 'Go to shop'
+    button_1: 'Go to shop',
+    button_2: 'Log in'
   }
 ];
 

@@ -36,10 +36,16 @@ export const useStyles = makeStyles((theme) => ({
       height: '45px',
       backgroundColor: '#404040',
       color: 'white',
-      width: '235px',
+      width: '135px',
       '&:hover': {
         backgroundColor: 'black'
       }
+    }
+  },
+  buttonGroup: {
+    '& > *': {
+      margin: theme.spacing(1),
+      textTransform: 'capitalize'
     }
   }
 }));

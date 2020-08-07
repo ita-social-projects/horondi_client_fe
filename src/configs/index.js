@@ -258,14 +258,3 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
-
-export const ERROR_PAGE_MESSAGE = [
-  {
-    value: 'Щось пішло не так...',
-    button: 'На головну'
-  },
-  {
-    value: 'Something went wrong...',
-    button: 'Go to homepage'
-  }
-];

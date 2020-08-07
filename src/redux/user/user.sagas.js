@@ -13,7 +13,7 @@ export const loginUser = (payload) => {
     purchasedProducts
     orders
     token
-    id
+    _id
   }
 }
   `;

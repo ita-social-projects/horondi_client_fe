@@ -62,10 +62,10 @@ const Recovery = () => {
   const successWindow = (
     <div>
       <h2 className={styles.heading}>
-        {hasRecovered ? RECOVERY_SUCCESS_MESSAGE[language].h2 : ''}
+        {RECOVERY_SUCCESS_MESSAGE[language].h2}
       </h2>
       <p className={styles.recoveryText}>
-        {hasRecovered ? RECOVERY_SUCCESS_MESSAGE[language].p : ''}
+        {RECOVERY_SUCCESS_MESSAGE[language].p}
       </p>
     </div>
   );

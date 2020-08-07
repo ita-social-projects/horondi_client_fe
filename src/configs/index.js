@@ -178,7 +178,7 @@ export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
+  password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{6,30}$',
   phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
   country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
@@ -346,5 +346,36 @@ export const CHANGE_PASSWORD = [
     pass_label: 'New password',
     confirm_label: 'Confirm password',
     button: 'Change'
+  }
+];
+
+export const NEW_PASSWORD_ERROR = {
+  USER_NOT_FOUND: [
+    {
+      value: 'Користувача не знайдено'
+    },
+    {
+      value: 'User is not found'
+    }
+  ],
+  DEFAULT_ERROR: [
+    {
+      value:
+        'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
+    },
+    {
+      value: 'An error occurred! Please, reload your page and try again.'
+    }
+  ]
+};
+
+export const NEW_PASSWORD_SUCCESS_MESSAGE = [
+  {
+    h2: 'Ваш пароль успішно змінено!',
+    p: 'Вас буде спрямовано на сторінку логінування'
+  },
+  {
+    h2: 'Your password is successfully changed!',
+    p: 'You will be directed to login page'
   }
 ];

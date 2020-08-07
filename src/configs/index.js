@@ -138,6 +138,14 @@ export const REGISTER_USER_ERROR = {
     {
       value: 'User with given email already exists'
     }
+  ],
+  INPUT_NOT_VALID: [
+    {
+      value: 'Невірно введені дані'
+    },
+    {
+      value: 'Wrong input data'
+    }
   ]
 };
 
@@ -325,3 +333,18 @@ export const RECOVERY_ERROR_MESSAGE = {
     }
   ]
 };
+
+export const CHANGE_PASSWORD = [
+  {
+    h2: 'Введіть новий пароль',
+    pass_label: 'Новий пароль',
+    confirm_label: 'Підтвердіть пароль',
+    button: 'Змінити'
+  },
+  {
+    h2: 'Enter new password',
+    pass_label: 'New password',
+    confirm_label: 'Confirm password',
+    button: 'Change'
+  }
+];

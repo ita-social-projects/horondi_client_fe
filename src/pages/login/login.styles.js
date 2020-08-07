@@ -83,7 +83,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   loginBtn: {
-    fontFamily: 'Montserrat',
     fontSize: '16px',
     lineHeight: '20px',
     height: '42px',

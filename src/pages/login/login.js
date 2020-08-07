@@ -90,7 +90,6 @@ const Login = () => {
                 {LOGIN_FORM_LABEL[language].value}
               </h2>
               <TextField
-                color='secondary'
                 label={emailLabel}
                 className={styles.emailInput}
                 fullWidth

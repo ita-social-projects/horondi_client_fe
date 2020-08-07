@@ -60,7 +60,7 @@ function Register() {
     if (allFieldsValidated) {
       try {
         setLoading(true);
-        await registerUser(user);
+        await registerUser(user, language);
         setHasRegistered(true);
       } catch (e) {
         setRegisterError(e.message.replace('GraphQL error: ', ''));

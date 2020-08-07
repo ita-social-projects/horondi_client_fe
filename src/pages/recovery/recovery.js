@@ -44,7 +44,7 @@ const Recovery = () => {
     if (emailValidated) {
       setLoading(true);
       try {
-        await recoverUser(email);
+        await recoverUser(email, language);
         setHasRecovered(true);
         setTimeout(() => {
           dispatch(push('/login'));

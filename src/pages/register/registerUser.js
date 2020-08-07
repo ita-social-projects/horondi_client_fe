@@ -1,6 +1,6 @@
 import { setItems } from '../../utils/client';
 
-const registerUser = (user) => {
+const registerUser = (user, language) => {
   const { firstName, lastName, password, email } = user;
   const query = ` 
   mutation {
@@ -10,7 +10,8 @@ const registerUser = (user) => {
       lastName: "${lastName}"
       password: "${password}"
       email: "${email}"
-    }
+    },
+    language: ${language}
   ) {
     email
   }

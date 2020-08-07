@@ -35,7 +35,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
   );
 
   return (
-    <td>
+    <div>
       <SimpleModal
         open={open}
         onClose={handleClose}
@@ -44,7 +44,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
       >
         {body}
       </SimpleModal>
-    </td>
+    </div>
   );
 };
 

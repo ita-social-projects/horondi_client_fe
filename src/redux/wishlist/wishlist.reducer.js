@@ -8,7 +8,6 @@ const wishlistReducer = (state = initialState, { type, payload }) => {
   switch (type) {
   case SET_WISHLIST:
     return {
-      ...state,
       list: payload
     };
   default:

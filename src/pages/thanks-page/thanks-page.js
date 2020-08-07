@@ -8,7 +8,7 @@ import {
   THANKS_PAGE_BUTTON
 } from '../../translations/thanks-page.translations';
 
-const Thanks = () => {
+const ThanksPage = () => {
   const styles = useStyles();
   const language = useSelector((state) => state.Language.language);
 
@@ -26,4 +26,4 @@ const Thanks = () => {
   );
 };
 
-export default Thanks;
+export default ThanksPage;

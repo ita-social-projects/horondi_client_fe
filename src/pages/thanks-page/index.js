@@ -1,3 +1,3 @@
-import Thanks from './thanks-page';
+import ThanksPage from './thanks-page';
 
-export default Thanks;
+export default ThanksPage;

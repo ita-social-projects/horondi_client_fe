@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/Rectangle.png';
+import BG from '../../images/rectangle.png';
 
 export const useStyles = makeStyles((theme) => ({
   thanks: {

@@ -9,7 +9,7 @@ import {
   NONE_PATTERN
 } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
-import { setPatternsFilter } from '../../../../redux/filter/filter.actions';
+import { setPatternsFilter } from '../../../../redux/products/products.actions';
 
 const PatternsFilter = () => {
   const dispatch = useDispatch();
@@ -17,11 +17,7 @@ const PatternsFilter = () => {
   const styles = useStyles();
 
   const { products, patternsFilter, language } = useSelector(
-    ({
-      Products: { products },
-      Filter: { patternsFilter },
-      Language: { language }
-    }) => ({
+    ({ Products: { products, patternsFilter }, Language: { language } }) => ({
       products,
       patternsFilter,
       language

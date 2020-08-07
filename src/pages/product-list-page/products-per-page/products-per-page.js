@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import styles from './products-per-page.styles';
-import { setProductsPerPage } from '../../../redux/filter/filter.actions';
+import { setProductsPerPage } from '../../../redux/products/products.actions';
 
 const ITEMS_PER_PAGE = [
   {

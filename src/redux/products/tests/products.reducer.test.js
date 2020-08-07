@@ -1,4 +1,4 @@
-import filterReducer from '../filter.reducer';
+import filterReducer from '../products.reducer';
 import {
   setAllFilterProducts,
   setCategoryFilter,
@@ -8,7 +8,7 @@ import {
   setLoading,
   setSearchFilter,
   setHotItemFilter
-} from '../filter.actions';
+} from '../products.actions';
 
 describe('Filter reducer test', () => {
   let initialState;
@@ -27,6 +27,7 @@ describe('Filter reducer test', () => {
       priceFilter: [],
       isHotItemFilter: false,
       searchFilter: '',
+      filtredProducts: [],
       products: []
     };
   });
@@ -80,7 +81,7 @@ describe('Filter reducer test', () => {
     const state = {
       ...initialState,
       loading: true,
-      products: productsExample
+      filtredProducts: productsExample
     };
 
     expect(filterReducer(state, setAllFilterProducts(productsExample))).toEqual(

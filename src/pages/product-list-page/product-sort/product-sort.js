@@ -8,7 +8,7 @@ import {
   setSortByPrice,
   setSortByRate,
   setSortByPopularity
-} from '../../../redux/filter/filter.actions';
+} from '../../../redux/products/products.actions';
 
 const SORT_BY_TEXT = [
   { lang: 'uk', value: 'Сортувати за:' },

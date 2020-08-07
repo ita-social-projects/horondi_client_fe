@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { COLORS_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
-import { setColorsFilter } from '../../../../redux/filter/filter.actions';
+import { setColorsFilter } from '../../../../redux/products/products.actions';
 
 const ColorsFilter = () => {
   const dispatch = useDispatch();
@@ -14,11 +14,7 @@ const ColorsFilter = () => {
   const styles = useStyles();
 
   const { products, colorsFilter, language } = useSelector(
-    ({
-      Products: { products },
-      Filter: { colorsFilter },
-      Language: { language }
-    }) => ({
+    ({ Products: { products, colorsFilter }, Language: { language } }) => ({
       products,
       colorsFilter,
       language

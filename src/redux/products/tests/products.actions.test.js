@@ -8,7 +8,7 @@ import {
   setSearchFilter,
   setHotItemFilter,
   getFiltredProducts
-} from '../filter.actions';
+} from '../products.actions';
 import {
   SET_ALL_FILTER_PRODUCTS,
   GET_FILTRED_PRODUCTS,
@@ -19,7 +19,7 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_HOT_ITEMS_FILTER
-} from '../filter.types';
+} from '../products.types';
 
 describe('Filter actions test', () => {
   it('should set all filtred products to payload property', () => {

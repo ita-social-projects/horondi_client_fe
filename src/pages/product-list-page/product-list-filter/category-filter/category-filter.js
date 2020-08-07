@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { CATERGORY_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
-import { setCategoryFilter } from '../../../../redux/filter/filter.actions';
+import { setCategoryFilter } from '../../../../redux/products/products.actions';
 
 const CategoryFilter = ({ selectedCategory }) => {
   const dispatch = useDispatch();
@@ -14,11 +14,7 @@ const CategoryFilter = ({ selectedCategory }) => {
   const styles = useStyles();
 
   const { products, categoryFilter, language } = useSelector(
-    ({
-      Products: { products },
-      Filter: { categoryFilter },
-      Language: { language }
-    }) => ({
+    ({ Products: { products, categoryFilter }, Language: { language } }) => ({
       products,
       categoryFilter,
       language

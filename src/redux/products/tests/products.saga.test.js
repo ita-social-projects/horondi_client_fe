@@ -1,8 +1,8 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import { handleFilterLoad } from '../filter.sagas';
+import { handleFilterLoad } from '../products.sagas';
 import getItems from '../../../utils/client';
-import { setLoading, setAllFilterProducts } from '../filter.actions';
+import { setLoading, setAllFilterProducts } from '../products.actions';
 
 describe('get products by filter saga', () => {
   it('Filter products', () => {

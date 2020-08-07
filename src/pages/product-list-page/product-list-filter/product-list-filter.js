@@ -22,7 +22,7 @@ import {
   setPriceFilter,
   setSearchFilter,
   setHotItemFilter
-} from '../../../redux/filter/filter.actions';
+} from '../../../redux/products/products.actions';
 
 import {
   SEARCH_TEXT,
@@ -51,8 +51,8 @@ const ProductListFilter = ({ selectedCategory }) => {
     language
   } = useSelector(
     ({
-      Products: { products },
-      Filter: {
+      Products: {
+        products,
         currentPage,
         productsPerPage,
         sortByPrice,

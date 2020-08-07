@@ -4,13 +4,13 @@ import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { IS_HOT_TEXT } from '../../../../translations/product-list.translations';
-import { setHotItemFilter } from '../../../../redux/filter/filter.actions';
+import { setHotItemFilter } from '../../../../redux/products/products.actions';
 
 const HotItemFilter = () => {
   const dispatch = useDispatch();
 
   const { isHotItemFilter, language } = useSelector(
-    ({ Filter: { isHotItemFilter }, Language: { language } }) => ({
+    ({ Products: { isHotItemFilter }, Language: { language } }) => ({
       isHotItemFilter,
       language
     })

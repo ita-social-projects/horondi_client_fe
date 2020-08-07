@@ -7,12 +7,12 @@ import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
+import ProductListItem from './product-list-item';
 import {
+  getAllProducts,
   setCurrentPage,
   getFiltredProducts
-} from '../../redux/filter/filter.actions';
-import ProductListItem from './product-list-item';
-import { getAllProducts } from '../../redux/products/products.actions';
+} from '../../redux/products/products.actions';
 import {
   SHOW_FILTER_BUTTON_TEXT,
   HIDE_FILTER_BUTTON_TEXT
@@ -24,7 +24,7 @@ const ProductListPage = ({ category }) => {
 
   const {
     language,
-    products,
+    filtredProducts,
     pagesCount,
     currentPage,
     productsPerPage,
@@ -40,8 +40,8 @@ const ProductListPage = ({ category }) => {
   } = useSelector(
     ({
       Language: { language },
-      Filter: {
-        products,
+      Products: {
+        filtredProducts,
         pagesCount,
         sortByRate,
         sortByPrice,
@@ -57,7 +57,7 @@ const ProductListPage = ({ category }) => {
       }
     }) => ({
       language,
-      products,
+      filtredProducts,
       pagesCount,
       sortByRate,
       sortByPrice,
@@ -116,7 +116,7 @@ const ProductListPage = ({ category }) => {
   const handleFilterShow = () => setMobile(!mobile);
 
   const categoryText = category.name[language].value.toUpperCase();
-  const itemsToShow = products.map((product, index) => (
+  const itemsToShow = filtredProducts.map((product, index) => (
     <ProductListItem key={index} product={product} category={categoryText} />
   ));
   return (

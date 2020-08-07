@@ -8,7 +8,6 @@ const cartReducer = (state = initialState, { type, payload }) => {
   switch (type) {
   case SET_CART:
     return {
-      ...state,
       list: payload
     };
   default:

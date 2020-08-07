@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 
 import { setCart } from './cart.actions';
 import {
@@ -13,12 +13,12 @@ import {
 } from '../../services/local-storage.service';
 
 function* handleCartLoad() {
-  const cart = yield call(getFromLocalStorage, 'cart');
+  const cart = getFromLocalStorage('cart');
   yield put(setCart(cart));
 }
 
 function* handleAddCartItem({ payload }) {
-  const cart = yield call(getFromLocalStorage, 'cart');
+  const cart = getFromLocalStorage('cart');
   const possibleItemInCart = cart.find(
     (item) =>
       item._id === payload._id && item.selectedSize === payload.selectedSize
@@ -39,7 +39,7 @@ function* handleAddCartItem({ payload }) {
 }
 
 function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
-  const cart = yield call(getFromLocalStorage, 'cart');
+  const cart = getFromLocalStorage('cart');
   const newCart = cart.filter(
     (item) =>
       item._id !== _id ||
@@ -51,11 +51,13 @@ function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
 }
 
 function* handleSetCartItemQuantity({
-  payload: { _id, selectedSize },
-  value,
-  key
+  payload: {
+    item: { _id, selectedSize },
+    value,
+    key
+  }
 }) {
-  const cart = yield call(getFromLocalStorage, 'cart');
+  const cart = getFromLocalStorage('cart');
   const newCart = cart.map((item) => {
     if (item._id === _id && item.selectedSize === selectedSize) {
       // key will be true if user typing inside input

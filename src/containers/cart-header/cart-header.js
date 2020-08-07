@@ -17,13 +17,13 @@ const CartHeader = () => {
     dispatch(getCart());
   }, [dispatch]);
 
-  const cartItemsCounter = () =>
+  const getCartItemsCount = () =>
     cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Link to='/cart'>
       <IconButton className={styles.root} aria-label='cart'>
-        <Badge badgeContent={cartItemsCounter()} color='secondary'>
+        <Badge badgeContent={getCartItemsCount()} color='secondary'>
           <ShoppingBasketIcon />
         </Badge>
       </IconButton>

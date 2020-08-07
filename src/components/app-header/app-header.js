@@ -7,7 +7,7 @@ import { useStyles } from './app-header.styles';
 import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
 import Cabinet from '../cabinet';
-import CartIcon from '../../containers/cart-header';
+import CartHeader from '../../containers/cart-header';
 
 const AppHeader = () => {
   const styles = useStyles();
@@ -20,7 +20,7 @@ const AppHeader = () => {
           <Toolbar>
             <AttachMoneyIcon className={styles.icons} />
             <Language />
-            <CartIcon />
+            <CartHeader />
             <Cabinet />
           </Toolbar>
         </Toolbar>

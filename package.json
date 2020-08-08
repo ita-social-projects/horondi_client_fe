@@ -29,6 +29,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
+    "react-awesome-slider": "^4.1.0",
     "react-customer-chat": "^1.0.2",
     "react-dom": "^16.13.1",
     "react-player": "^2.3.1",

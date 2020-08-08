@@ -21,7 +21,7 @@ const HotItemFilter = () => {
   };
 
   return (
-    <FormGroup>
+    <FormGroup data-cy='hot_item_filter'>
       <Typography id='isHot' gutterBottom>
         {IS_HOT_TEXT[language]}:
         <Switch

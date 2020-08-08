@@ -124,7 +124,7 @@ const ProductListFilter = ({ selectedCategory }) => {
     <div className={styles.root}>
       <Paper className={styles.paper}>
         <FormControl component='fieldset' className={styles.formControl}>
-          <FormGroup>
+          <FormGroup data-cy='search'>
             <TextField
               className={styles.search}
               onChange={handleSearch}
@@ -138,6 +138,7 @@ const ProductListFilter = ({ selectedCategory }) => {
           <FormGroup className={styles.controls}>
             <Button
               className={styles.button}
+              data-cy='filter_button'
               variant='contained'
               onClick={handleFilter}
             >
@@ -145,6 +146,7 @@ const ProductListFilter = ({ selectedCategory }) => {
             </Button>
             <Button
               className={styles.button}
+              data-cy='clear_filter_button'
               variant='contained'
               onClick={handleClearFilter}
             >

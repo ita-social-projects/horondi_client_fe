@@ -44,7 +44,7 @@ const CategoryFilter = ({ selectedCategory }) => {
   };
 
   return (
-    <FormGroup>
+    <FormGroup data-cy='category_filter'>
       <Typography id='categories' gutterBottom>
         {CATERGORY_TEXT[language]}:
       </Typography>
@@ -54,6 +54,7 @@ const CategoryFilter = ({ selectedCategory }) => {
           className={styles.checkbox}
           control={
             <Checkbox
+              data-cy={category.name[1].value.toLowerCase()}
               name={category._id}
               checked={
                 !!categoryFilter.find((filter) => filter === category._id)

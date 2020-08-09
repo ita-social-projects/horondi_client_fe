@@ -42,7 +42,7 @@ const ColorsFilter = () => {
   };
 
   return (
-    <FormGroup>
+    <FormGroup data-cy='colors_filter'>
       <Typography id='colors' gutterBottom>
         {COLORS_TEXT[language]}:
       </Typography>

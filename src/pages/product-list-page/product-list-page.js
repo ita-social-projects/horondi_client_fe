@@ -81,7 +81,6 @@ const ProductListPage = ({ category }) => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-
   useEffect(() => {
     dispatch(
       getFiltredProducts({
@@ -95,7 +94,7 @@ const ProductListPage = ({ category }) => {
         limit: productsPerPage,
         basePrice: sortByPrice || undefined,
         rate: sortByRate || undefined,
-        purchasedProducts: sortByPopularity || undefined,
+        purchasedCount: sortByPopularity || undefined,
         productsPerPage
       })
     );

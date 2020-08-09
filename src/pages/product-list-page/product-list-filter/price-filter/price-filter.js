@@ -34,7 +34,7 @@ const PriceFilter = () => {
   };
 
   return (
-    <FormGroup>
+    <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
         {PRICE_TEXT[language]}:
       </Typography>

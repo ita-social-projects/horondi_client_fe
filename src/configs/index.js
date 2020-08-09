@@ -143,6 +143,11 @@ export const errorMessages = [
   }
 ];
 
+export const SORT_BY_TEXT = [
+  { lang: 'uk', value: 'Сортувати за:' },
+  { lang: 'eng', value: 'Sort by:' }
+];
+
 export const SORT_BY_SELECT_OPTIONS = [
   {
     lang: [
@@ -158,7 +163,6 @@ export const SORT_BY_SELECT_OPTIONS = [
     }
   },
   {
-    name: 'sortDesc',
     lang: [
       { lang: 'uk', value: 'від дорогих до дешевих' },
       { lang: 'eng', value: 'price (high to low) ' }
@@ -169,7 +173,6 @@ export const SORT_BY_SELECT_OPTIONS = [
     }
   },
   {
-    name: 'sortAsc',
     lang: [
       { lang: 'uk', value: 'від дешевих до дорогих' },
       { lang: 'eng', value: 'price (low to high) ' }
@@ -177,28 +180,17 @@ export const SORT_BY_SELECT_OPTIONS = [
     optionValue: { name: 'sortAsc', value: 1 }
   },
   {
-    name: 'rate',
     lang: [
-      { lang: 'uk', value: 'за рейтингом' },
+      { lang: 'uk', value: 'рейтингом' },
       { lang: 'eng', value: 'rate' }
     ],
     optionValue: {
       name: 'rate',
       value: -1
     }
-  },
-  {
-    name: 'new',
-    lang: [
-      { lang: 'uk', value: 'новинки' },
-      { lang: 'eng', value: 'new' }
-    ],
-    optionValue: {
-      name: 'date',
-      value: -1
-    }
   }
 ];
+
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',

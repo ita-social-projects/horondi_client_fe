@@ -49,7 +49,7 @@ const PatternsFilter = () => {
   };
 
   return (
-    <FormGroup>
+    <FormGroup data-cy='patterns_filter'>
       <Typography id='patterns' gutterBottom>
         {PATTERN_TEXT[language]}:
       </Typography>

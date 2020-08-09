@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap'
   },
   productsDiv: {
-    margin: '0 0 0 1rem',
+    margin: '0 0 0 2rem',
     width: '100%',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,auto))',
     gridTemplateRows: 'auto',
     gridGap: '1rem',
-    '&media (max-width:768px)': {
-      marginTop: '1rem'
+    '@media (max-width:768px)': {
+      margin: '1rem 0 0 0'
     }
   },
   sortDiv: {

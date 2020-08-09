@@ -7,7 +7,12 @@ import {
   setLoading,
   setSearchFilter,
   setHotItemFilter,
-  getFiltredProducts
+  getFiltredProducts,
+  setSortByPrice,
+  setSortByRate,
+  setSortByPopularity,
+  setPagesCount,
+  setCurrentPage
 } from '../products.actions';
 import {
   SET_ALL_FILTER_PRODUCTS,
@@ -18,7 +23,12 @@ import {
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
   SET_SEARCH,
-  SET_HOT_ITEMS_FILTER
+  SET_HOT_ITEMS_FILTER,
+  SET_SORT_BY_PRICE,
+  SET_SORT_BY_RATE,
+  SET_SORT_BY_POPULARITY,
+  SET_PAGES_COUNT,
+  SET_CURRENT_PAGE
 } from '../products.types';
 
 describe('Filter actions test', () => {
@@ -154,6 +164,41 @@ describe('loading action', () => {
     expect(setLoading(false)).toEqual({
       type: SET_LOADING,
       payload: false
+    });
+  });
+
+  test('should return current page payload = 5', () => {
+    expect(setCurrentPage(5)).toEqual({
+      type: SET_CURRENT_PAGE,
+      payload: 5
+    });
+  });
+
+  test('should return sort by price payload = -1', () => {
+    expect(setSortByPrice(-1)).toEqual({
+      type: SET_SORT_BY_PRICE,
+      payload: -1
+    });
+  });
+
+  test('should return sort by rate payload = -1', () => {
+    expect(setSortByRate(-1)).toEqual({
+      type: SET_SORT_BY_RATE,
+      payload: -1
+    });
+  });
+
+  test('should return sort by popularity payload = 1', () => {
+    expect(setSortByPopularity(1)).toEqual({
+      type: SET_SORT_BY_POPULARITY,
+      payload: 1
+    });
+  });
+
+  test('should set pages count', () => {
+    expect(setPagesCount(10)).toEqual({
+      type: SET_PAGES_COUNT,
+      payload: 10
     });
   });
 });

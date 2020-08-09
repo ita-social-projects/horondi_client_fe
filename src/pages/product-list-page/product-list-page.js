@@ -21,7 +21,6 @@ import {
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-
   const {
     language,
     filtredProducts,
@@ -156,6 +155,7 @@ const ProductListPage = ({ category }) => {
           count={pagesCount}
           variant='outlined'
           shape='rounded'
+          value={currentPage + 1}
           onChange={changeHandler}
         />
       </div>

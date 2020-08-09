@@ -27,7 +27,6 @@ const PriceFilter = () => {
         Math.max(...products.map((product) => product.basePrice))
       ])
     );
-    console.log('here');
   }, [products]);
 
   const handlePriceChange = (event, newValue) => {

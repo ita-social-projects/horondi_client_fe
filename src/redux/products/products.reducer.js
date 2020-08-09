@@ -17,7 +17,7 @@ import {
   SET_HOT_ITEMS_FILTER
 } from './products.types';
 
-const initialState = {
+export const initialState = {
   loading: true,
   currentPage: 0,
   productsPerPage: 9,
@@ -36,12 +36,10 @@ const initialState = {
   pagesCount: 1
 };
 const setSort = ({
-  sortByDate = 0,
   sortByPrice = 0,
   sortByRate = 0,
   sortByPopularity = 0
 }) => ({
-  sortByDate,
   sortByPrice,
   sortByRate,
   sortByPopularity

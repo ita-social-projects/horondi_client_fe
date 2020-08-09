@@ -11,19 +11,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     maxWidth: '100%',
-    border: '1px solid red',
     alignItems: 'base-line',
     justifyContent: 'flex-start',
     flexWrap: 'wrap'
   },
   productsDiv: {
-    display: 'flex',
-    width: '100vw',
-    flexDirection: 'row',
-    maxWidth: '100%',
-    alignItems: 'base-line',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap'
+    margin: '0 0 0 1rem',
+    width: '100%',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,auto))',
+    gridTemplateRows: 'auto',
+    gridGap: '1rem',
+    '&media (max-width:768px)': {
+      marginTop: '1rem'
+    }
   },
   sortDiv: {
     alignItems: 'center',

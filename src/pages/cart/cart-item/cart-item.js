@@ -11,7 +11,7 @@ import { setCartItemQuantity } from '../../../redux/cart/cart.actions';
 
 const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   const dispatch = useDispatch();
-  const styles = useStyles();
+  const styles = useStyles({ image: item.images });
 
   const onChangeQuantity = (value, key) => {
     dispatch(setCartItemQuantity(item, +value, key));
@@ -23,11 +23,11 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   };
 
   return (
-    <tr className={styles.root}>
-      <td>
+    <div className={styles.root}>
+      <div className={styles.itemData}>
         <div className={styles.image}>
           <Link to={item.productUrl}>
-            <img src={item.images} alt='product pictures' />
+            <b />
           </Link>
         </div>
         <div className={styles.description}>
@@ -47,18 +47,18 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
             </span>
           )}
         </div>
-      </td>
-      <td>
+      </div>
+      <div>
         <NumberInput
           quantity={item.quantity}
           onChangeQuantity={onChangeQuantity}
         />
-      </td>
-      <td className={styles.price}>
+      </div>
+      <div className={styles.price}>
         <span>{item.totalPrice} UAH</span>
         <DeleteIcon className={styles.trash} onClick={onRemoveItem} />
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 

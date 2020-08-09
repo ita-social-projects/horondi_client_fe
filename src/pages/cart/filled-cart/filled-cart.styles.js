@@ -9,35 +9,29 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   tableHeader: {
-    fontSize: '1.5em',
     display: 'flex',
     borderColor: '#DADADA',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px',
-    '@media (max-width: 768px)': {
-      fontSize: '1em'
-    },
-    '& > tr': {
-      display: 'flex',
-      width: '100%',
-      '& > *': {
-        margin: '10px 0'
+    width: '100%',
+    '& > div': {
+      margin: '10px 0',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: '1.5em',
+      '@media (max-width: 768px)': {
+        fontSize: '1em'
       }
     },
-    '& tr > th:first-child': {
+    '& > div:first-child': {
       flex: '1'
     },
-    '& tr > th:not(:first-child)': {
+    '& > div:not(:first-child)': {
       width: 200,
       '@media (max-width: 768px)': {
         width: 100
       }
     }
-  },
-  tableBody: {
-    borderColor: '#DADADA',
-    borderStyle: 'solid',
-    borderWidth: '0 0 1px'
   },
   total: {
     textAlign: 'right',

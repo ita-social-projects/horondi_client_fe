@@ -5,28 +5,39 @@ export const useStyles = makeStyles((theme) => ({
     margin: '10px 0',
     display: 'flex',
     width: '100%',
-    '& td:first-child': {
-      display: 'flex',
-      flex: 1
-    },
-    '& td:not(:first-child)': {
+    '& > div:not(:first-child)': {
       width: 200,
       display: 'flex',
-      alignItems: 'center',
       justifyContent: 'center',
+      alignItems: 'center',
       '@media (max-width: 768px)': {
         width: 100
       }
     }
   },
-  image: {
-    flexBasis: 100,
-    '& img': {
-      width: '100%',
-      borderRadius: 5,
-      minWidth: 60
+  itemData: {
+    display: 'flex',
+    flex: '1',
+    '@media (max-width: 551px)': {
+      flexDirection: 'column'
     }
   },
+  image: (props) => ({
+    flexBasis: 100,
+    display: 'flex',
+    justifyContent: 'center',
+    '& > a': {
+      background: `url('${props.image}')no-repeat center center`,
+      backgroundSize: 'cover',
+      borderRadius: 5,
+      display: 'block',
+      width: '100px',
+      height: '100px',
+      '@media (max-width: 768px)': {
+        borderRadius: '50%'
+      }
+    }
+  }),
   description: {
     display: 'flex',
     flexDirection: 'column',
@@ -35,7 +46,10 @@ export const useStyles = makeStyles((theme) => ({
       color: 'inherit'
     },
     '& > span': {
-      lineHeight: '30px'
+      lineHeight: '30px',
+      '@media (max-width: 768px)': {
+        fontSize: '.8em'
+      }
     }
   },
   itemName: {
@@ -47,7 +61,10 @@ export const useStyles = makeStyles((theme) => ({
   trash: {
     position: 'absolute',
     right: 10,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 551px)': {
+      bottom: 20
+    }
   },
   doneIcon: {
     position: 'relative',

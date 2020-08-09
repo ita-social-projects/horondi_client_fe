@@ -17,7 +17,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   button: {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 768px)': {
+      minWidth: 40
+    }
   },
   input: {
     width: 50

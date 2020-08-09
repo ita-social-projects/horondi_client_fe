@@ -30,26 +30,22 @@ const FilledCart = ({ items }) => {
 
   return (
     <div className={styles.root}>
-      <table className={styles.table}>
-        <thead className={styles.tableHeader}>
-          <tr>
-            <th>{CART_TABLE_FIELDS[language].item}</th>
-            <th>{CART_TABLE_FIELDS[language].quantity}</th>
-            <th>{CART_TABLE_FIELDS[language].price}</th>
-          </tr>
-        </thead>
-        <tbody className={styles.tableBody}>
-          {items.map((item) => (
-            <CartItem
-              key={Math.random()}
-              item={item}
-              language={language}
-              setModalVisibility={setModalVisibility}
-              setModalItem={setModalItem}
-            />
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.table}>
+        <div className={styles.tableHeader}>
+          <div>{CART_TABLE_FIELDS[language].item}</div>
+          <div>{CART_TABLE_FIELDS[language].quantity}</div>
+          <div>{CART_TABLE_FIELDS[language].price}</div>
+        </div>
+        {items.map((item) => (
+          <CartItem
+            key={Math.random()}
+            item={item}
+            language={language}
+            setModalVisibility={setModalVisibility}
+            setModalItem={setModalItem}
+          />
+        ))}
+      </div>
       <div className={styles.total}>
         {CART_TABLE_FIELDS[language].total}: {totalCounter()} UAH
       </div>

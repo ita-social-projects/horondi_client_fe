@@ -97,9 +97,8 @@ export function* handleFilterLoad({
             }
             isHotItem
           }
-          
-          count
-          },
+            count
+          }
       }`,
       {
         search: payload.search,

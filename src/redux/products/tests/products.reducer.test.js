@@ -178,7 +178,24 @@ describe('Product reducer test', () => {
       sortByPopularity: 0,
       sortByPrice: 1
     };
-    console.log(productReducer(initialState, setSortByPrice(1)));
     expect(productReducer(initialState, setSortByPrice(1))).toEqual(state);
+  });
+  it('should set s0rt by rate to 1', () => {
+    const state = {
+      ...initialState,
+      sortByPopularity: 0,
+      sortByRate: 1
+    };
+    expect(productReducer(initialState, setSortByRate(1))).toEqual(state);
+  });
+  it('should set s0rt by popularity to -1', () => {
+    const state = {
+      ...initialState,
+      sortByRate: 0,
+      sortByPopularity: -1
+    };
+    expect(productReducer(initialState, setSortByPopularity(-1))).toEqual(
+      state
+    );
   });
 });

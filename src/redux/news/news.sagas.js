@@ -55,6 +55,7 @@ export function* handleArticleLoad({ payload }) {
       `query{
         getNewsById(id:"${payload}"){
           ... on News{
+           __typename
             _id
             title{
               value
@@ -80,6 +81,10 @@ export function* handleArticleLoad({ payload }) {
               }
             }
             date
+          }
+          ... on Error {
+            message
+            statusCode
           }
         }
       }`

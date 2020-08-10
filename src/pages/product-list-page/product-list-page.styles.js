@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 0 0 2rem',
     width: '100%',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,auto))',
+    gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,30%))',
     gridTemplateRows: 'auto',
     gridGap: '1rem',
     '@media (max-width:768px)': {

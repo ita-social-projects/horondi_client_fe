@@ -100,7 +100,8 @@ const ProductListFilter = ({ selectedCategory }) => {
         limit: productsPerPage,
         basePrice: sortByPrice,
         rate: sortByRate,
-        purchasedProducts: sortByPopularity
+        purchasedProducts: sortByPopularity,
+        productsPerPage
       })
     );
   };

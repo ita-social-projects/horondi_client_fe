@@ -113,7 +113,7 @@ function Register() {
       setAllFieldsSet(false);
     }
     // PASSWORD CHECK
-    if (passwordValidated && password === confirmPassword) {
+    if (password === confirmPassword) {
       setIsConfirmedPassword(true);
     } else {
       setIsConfirmedPassword(false);

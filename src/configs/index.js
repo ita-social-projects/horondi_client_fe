@@ -158,7 +158,7 @@ export const errorMessages = [
       firstname: 'Поле повинно містити від 2 до 30 символів',
       lastname: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
-      password: 'Від 6 до 30 символів з однією літерою та цифрою',
+      password: 'Від 6 до 30 символів з однією великою літерою та цифрою',
       confirmPassword: 'Паролі не співпадають'
     }
   },
@@ -168,7 +168,7 @@ export const errorMessages = [
       firstname: 'Field should contain from 2 to 30 characters',
       lastname: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
-      password: 'From 6 to 30 characters with one letter and one digit',
+      password: 'From 6 to 30 characters with one capital letter and one digit',
       confirmPassword: 'Passwords do not match'
     }
   }
@@ -178,7 +178,7 @@ export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{6,30}$',
+  password: '^(?!.* )(?=.+[0-9])(?=.+[a-z])(?=.+[A-Z]+).{6,30}$',
   phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
   country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",

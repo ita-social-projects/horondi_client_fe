@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -14,6 +14,7 @@ import {
 import { endAdornment } from '../../utils/eyeToggle';
 import changePassword from './changePassword';
 import Loader from '../../components/loader';
+import checkIfExists from '../../utils/checkIfExists';
 
 const NewPassword = ({ token }) => {
   // VALIDATORS
@@ -30,6 +31,14 @@ const NewPassword = ({ token }) => {
   }));
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setLoading(true);
+    checkIfExists(token)
+      .catch(() => dispatch(push('/error-page')))
+      .finally(() => setLoading(false));
+    // eslint-disable-next-line
+  }, []);
 
   // LOADING & ERRORS
   const [loading, setLoading] = useState(false);

@@ -30,7 +30,6 @@ function Register() {
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [isConfirmedPassword, setIsConfirmedPassword] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [allFieldsSet, setAllFieldsSet] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
 
   // VALUES
@@ -106,12 +105,6 @@ function Register() {
     } else {
       setAllFieldsValidated(false);
     }
-    // FIELDS NOT EMPTY
-    if (Object.values(user).every((val) => val !== '')) {
-      setAllFieldsSet(true);
-    } else {
-      setAllFieldsSet(false);
-    }
     // PASSWORD CHECK
     if (password === confirmPassword) {
       setIsConfirmedPassword(true);
@@ -131,7 +124,6 @@ function Register() {
     passwordValidated,
     isConfirmedPassword,
     user,
-    allFieldsSet,
     password,
     confirmPassword,
     hasRegistered,

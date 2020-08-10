@@ -33,10 +33,18 @@ const NewPassword = ({ token }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let isSubscribed = true;
     setLoading(true);
     checkIfExists(token)
       .catch(() => dispatch(push('/error-page')))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (isSubscribed) {
+          setLoading(false);
+        }
+      });
+    return () => {
+      isSubscribed = false;
+    };
     // eslint-disable-next-line
   }, []);
 

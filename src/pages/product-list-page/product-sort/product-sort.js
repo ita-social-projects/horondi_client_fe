@@ -9,7 +9,10 @@ import {
   setSortByRate,
   setSortByPopularity
 } from '../../../redux/products/products.actions';
-import { SORT_BY_SELECT_OPTIONS, SORT_BY_TEXT } from '../../../configs';
+import {
+  SORT_BY_SELECT_OPTIONS,
+  SORT_BY_TEXT
+} from '../../../translations/product-list.translations';
 
 const ProductSort = () => {
   const { language } = useSelector(({ Language: { language } }) => ({
@@ -26,9 +29,6 @@ const ProductSort = () => {
     }
     if (name === 'rate') {
       return dispatch(setSortByRate(value));
-    }
-    if (name === 'date') {
-      return dispatch(setSortByDate(value));
     }
     if (name === 'popularity') {
       return dispatch(setSortByPopularity(value));

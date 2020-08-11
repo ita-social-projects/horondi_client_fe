@@ -14,6 +14,8 @@ export const loginUser = (payload) => {
     orders
     token
     _id
+    email
+    firstName
   }
 }
   `;

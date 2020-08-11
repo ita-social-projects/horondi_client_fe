@@ -30,12 +30,7 @@ const ProductListPage = ({ category }) => {
     productsPerPage,
     sortByRate,
     sortByPrice,
-    colorsFilter,
-    patternsFilter,
-    isHotItemFilter,
-    categoryFilter,
-    priceFilter,
-    searchFilter,
+    filters,
     sortByPopularity
   } = useSelector(
     ({
@@ -45,12 +40,7 @@ const ProductListPage = ({ category }) => {
         pagesCount,
         sortByRate,
         sortByPrice,
-        colorsFilter,
-        patternsFilter,
-        categoryFilter,
-        priceFilter,
-        searchFilter,
-        isHotItemFilter,
+        filters,
         sortByPopularity,
         productsPerPage,
         currentPage
@@ -61,17 +51,21 @@ const ProductListPage = ({ category }) => {
       pagesCount,
       sortByRate,
       sortByPrice,
-      colorsFilter,
-      patternsFilter,
-      categoryFilter,
-      priceFilter,
-      isHotItemFilter,
-      searchFilter,
+      filters,
       sortByPopularity,
       productsPerPage,
       currentPage
     })
   );
+
+  const {
+    colorsFilter,
+    patternsFilter,
+    categoryFilter,
+    isHotItemFilter,
+    priceFilter,
+    searchFilter
+  } = filters;
 
   const [mobile, setMobile] = useState();
 
@@ -86,12 +80,14 @@ const ProductListPage = ({ category }) => {
   useEffect(() => {
     dispatch(
       getFiltredProducts({
-        isHotItemFilter,
-        patterns: patternsFilter || [],
-        colors: colorsFilter || [],
-        category: categoryFilter || [category._id],
-        price: priceFilter,
-        search: searchFilter,
+        filters: {
+          isHotItemFilter,
+          patternsFilter: patternsFilter || [],
+          colorsFilter: colorsFilter || [],
+          categoryFilter: categoryFilter || [category._id],
+          priceFilter,
+          searchFilter
+        },
         skip: currentPage * productsPerPage,
         limit: productsPerPage,
         basePrice: sortByPrice || undefined,

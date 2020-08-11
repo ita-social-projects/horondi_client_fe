@@ -12,13 +12,15 @@ const PriceFilter = () => {
 
   const styles = useStyles();
 
-  const { products, priceFilter, language } = useSelector(
-    ({ Products: { products, priceFilter }, Language: { language } }) => ({
+  const { products, filters, language } = useSelector(
+    ({ Products: { products, filters }, Language: { language } }) => ({
       products,
-      priceFilter,
+      filters,
       language
     })
   );
+
+  const { priceFilter } = filters;
 
   useEffect(() => {
     dispatch(
@@ -37,7 +39,7 @@ const PriceFilter = () => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language]}:
+        {PRICE_TEXT[language].value}:
       </Typography>
       <Slider
         className={styles.slider}

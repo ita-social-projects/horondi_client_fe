@@ -4,10 +4,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  PATTERN_TEXT,
-  NONE_PATTERN
-} from '../../../../translations/product-list.translations';
+import { PATTERN_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
 import { setPatternsFilter } from '../../../../redux/products/products.actions';
 
@@ -16,22 +13,18 @@ const PatternsFilter = () => {
 
   const styles = useStyles();
 
-  const { products, patternsFilter, language } = useSelector(
-    ({ Products: { products, patternsFilter }, Language: { language } }) => ({
+  const { products, filters, language } = useSelector(
+    ({ Products: { products, filters }, Language: { language } }) => ({
       products,
-      patternsFilter,
+      filters,
       language
     })
   );
 
+  const { patternsFilter } = filters;
+
   const patterns = [
-    ...new Set(
-      products.map((product) =>
-        product.pattern.length
-          ? JSON.stringify(product.pattern)
-          : JSON.stringify(NONE_PATTERN)
-      )
-    )
+    ...new Set(products.map((product) => JSON.stringify(product.pattern)))
   ].map(JSON.parse);
 
   const handlePatternChange = (event) => {
@@ -51,7 +44,7 @@ const PatternsFilter = () => {
   return (
     <FormGroup data-cy='patterns_filter'>
       <Typography id='patterns' gutterBottom>
-        {PATTERN_TEXT[language]}:
+        {PATTERN_TEXT[language].value}:
       </Typography>
       {patterns.map((pattern) => (
         <FormControlLabel

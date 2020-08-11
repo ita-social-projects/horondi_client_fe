@@ -12,17 +12,20 @@ import { GET_ALL_PRODUCTS, GET_FILTRED_PRODUCTS } from './products.types';
 
 export function* handleFilterLoad({
   payload = {
-    search: '',
-    colors: [],
-    patterns: [],
-    price: [0, 99999],
-    isHotItemFilter: false,
+    filters: {
+      colorsFilter: [],
+      patternsFilter: [],
+      priceFilter: [0, 99999],
+      isHotItemFilter: false,
+      categoryFilter: [],
+      searchFilter: ''
+    },
     skip: 1,
     limit: 90,
     rate: undefined,
     basePrice: undefined,
     purchasedCount: undefined,
-    category: [],
+
     productsPerPage: 9
   }
 }) {
@@ -102,17 +105,17 @@ export function* handleFilterLoad({
           },
       }`,
       {
-        search: payload.search,
-        colors: payload.colors,
-        patterns: payload.patterns,
-        price: payload.price,
+        search: payload.filters.searchFilter,
+        colors: payload.filters.colorsFilter,
+        patterns: payload.filters.patternsFilter,
+        price: payload.filters.priceFilter,
         skip: payload.skip,
         limit: payload.limit,
         rate: payload.rate,
         basePrice: payload.basePrice,
-        category: payload.category,
+        category: payload.filters.categoryFilter,
         purchasedCount: payload.purchasedCount,
-        isHotItem: payload.isHotItemFilter
+        isHotItem: payload.filters.isHotItemFilter
       }
     );
     yield put(
@@ -123,7 +126,6 @@ export function* handleFilterLoad({
     yield put(setAllFilterProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
-    console.log(e);
     yield call(handleProductsErrors, e);
   }
 }
@@ -178,7 +180,6 @@ export function* handleGetAllProducts() {
     yield put(setAllProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
-    console.log(e);
     yield call(handleProductsErrors, e);
   }
 }

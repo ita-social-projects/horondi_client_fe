@@ -13,13 +13,15 @@ const CategoryFilter = ({ selectedCategory }) => {
 
   const styles = useStyles();
 
-  const { products, categoryFilter, language } = useSelector(
-    ({ Products: { products, categoryFilter }, Language: { language } }) => ({
+  const { products, filters, language } = useSelector(
+    ({ Products: { products, filters }, Language: { language } }) => ({
       products,
-      categoryFilter,
+      filters,
       language
     })
   );
+
+  const { categoryFilter } = filters;
 
   const categories = [
     ...new Set(products.map((product) => JSON.stringify(product.category)))
@@ -46,7 +48,7 @@ const CategoryFilter = ({ selectedCategory }) => {
   return (
     <FormGroup data-cy='category_filter'>
       <Typography id='categories' gutterBottom>
-        {CATERGORY_TEXT[language]}:
+        {CATERGORY_TEXT[language].value}:
       </Typography>
       {categories.map((category) => (
         <FormControlLabel

@@ -42,12 +42,7 @@ const ProductListFilter = ({ selectedCategory }) => {
     sortByPrice,
     sortByRate,
     sortByPopularity,
-    colorsFilter,
-    patternsFilter,
-    categoryFilter,
-    isHotItemFilter,
-    priceFilter,
-    searchFilter,
+    filters,
     language
   } = useSelector(
     ({
@@ -58,12 +53,7 @@ const ProductListFilter = ({ selectedCategory }) => {
         sortByPrice,
         sortByRate,
         sortByPopularity,
-        colorsFilter,
-        patternsFilter,
-        categoryFilter,
-        isHotItemFilter,
-        priceFilter,
-        searchFilter
+        filters
       },
       Language: { language }
     }) => ({
@@ -73,15 +63,12 @@ const ProductListFilter = ({ selectedCategory }) => {
       sortByPrice,
       sortByRate,
       sortByPopularity,
-      colorsFilter,
-      patternsFilter,
-      categoryFilter,
-      isHotItemFilter,
-      priceFilter,
-      searchFilter,
+      filters,
       language
     })
   );
+
+  const { searchFilter } = filters;
 
   const handleSearch = (event) => {
     dispatch(setSearchFilter(event.target.value));
@@ -90,12 +77,7 @@ const ProductListFilter = ({ selectedCategory }) => {
   const handleFilter = () => {
     dispatch(
       getFiltredProducts({
-        search: searchFilter,
-        price: priceFilter,
-        colors: colorsFilter,
-        patterns: patternsFilter,
-        category: categoryFilter,
-        isHotItemFilter,
+        filters,
         skip: currentPage * productsPerPage,
         limit: productsPerPage,
         basePrice: sortByPrice,
@@ -130,7 +112,7 @@ const ProductListFilter = ({ selectedCategory }) => {
               onChange={handleSearch}
               value={searchFilter}
               id='outlined-search'
-              label={SEARCH_TEXT[language]}
+              label={SEARCH_TEXT[language].value}
               type='search'
               variant='outlined'
             />
@@ -142,7 +124,7 @@ const ProductListFilter = ({ selectedCategory }) => {
               variant='contained'
               onClick={handleFilter}
             >
-              {FILTER_BUTTON_TEXT[language]}
+              {FILTER_BUTTON_TEXT[language].value}
             </Button>
             <Button
               className={styles.button}
@@ -150,7 +132,7 @@ const ProductListFilter = ({ selectedCategory }) => {
               variant='contained'
               onClick={handleClearFilter}
             >
-              {CLEAR_FILTER_BUTTON_TEXT[language]}
+              {CLEAR_FILTER_BUTTON_TEXT[language].value}
             </Button>
           </FormGroup>
           <HotItemFilter />

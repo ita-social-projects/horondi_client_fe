@@ -13,13 +13,15 @@ const ColorsFilter = () => {
 
   const styles = useStyles();
 
-  const { products, colorsFilter, language } = useSelector(
-    ({ Products: { products, colorsFilter }, Language: { language } }) => ({
+  const { products, filters, language } = useSelector(
+    ({ Products: { products, filters }, Language: { language } }) => ({
       products,
-      colorsFilter,
+      filters,
       language
     })
   );
+
+  const { colorsFilter } = filters;
 
   const colors = [
     ...new Set(
@@ -44,7 +46,7 @@ const ColorsFilter = () => {
   return (
     <FormGroup data-cy='colors_filter'>
       <Typography id='colors' gutterBottom>
-        {COLORS_TEXT[language]}:
+        {COLORS_TEXT[language].value}:
       </Typography>
       {colors.map((color) => (
         <FormControlLabel

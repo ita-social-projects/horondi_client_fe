@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import useStyles from './product-list-item.style';
 import StarRating from '../../../containers/star-rating';
 import * as productImage from '../../../images/pdp_main.jpg';
-// import  dollar from '../../../dollar-sign.svg';
 
 const ProductListItem = ({ product, category }) => {
   const styles = useStyles({ image: productImage });

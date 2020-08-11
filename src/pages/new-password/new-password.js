@@ -12,9 +12,9 @@ import {
   SHOW_AFTER
 } from '../../configs';
 import { endAdornment } from '../../utils/eyeToggle';
-import changePassword from './changePassword';
+import resetPassword from './resetPassword';
 import Loader from '../../components/loader';
-import checkIfExists from '../../utils/checkIfExists';
+import checkIfTokenIsValid from '../../utils/checkIfTokenIsValid';
 
 const NewPassword = ({ token }) => {
   // VALIDATORS
@@ -35,7 +35,7 @@ const NewPassword = ({ token }) => {
   useEffect(() => {
     let isSubscribed = true;
     setLoading(true);
-    checkIfExists(token)
+    checkIfTokenIsValid(token)
       .catch(() => dispatch(push('/error-page')))
       .finally(() => {
         if (isSubscribed) {
@@ -56,7 +56,7 @@ const NewPassword = ({ token }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [hasChanged, setHasChanged] = useState(false);
+  const [isReset, setIsReset] = useState(false);
 
   // HANDLERS
   const handlePasswordChange = (event) => {
@@ -84,8 +84,8 @@ const NewPassword = ({ token }) => {
     if (passwordValid && confirmMatches) {
       setLoading(true);
       try {
-        await changePassword(password, token);
-        setHasChanged(true);
+        await resetPassword(password, token);
+        setIsReset(true);
         setTimeout(() => {
           dispatch(push('/login'));
         }, SHOW_AFTER);
@@ -114,7 +114,7 @@ const NewPassword = ({ token }) => {
   return (
     <div className={styles.newPassBackground}>
       <div className={styles.newPassForm}>
-        {hasChanged ? (
+        {isReset ? (
           successWindow
         ) : loading ? (
           <Loader />

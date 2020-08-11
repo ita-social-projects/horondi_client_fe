@@ -143,62 +143,6 @@ export const errorMessages = [
   }
 ];
 
-export const SORT_BY_SELECT_OPTIONS = [
-  {
-    lang: [
-      {
-        lang: 'uk',
-        value: 'популярністю'
-      },
-      { lang: 'eng', value: 'popularity' }
-    ],
-    optionValue: {
-      name: 'popularity',
-      value: -1
-    }
-  },
-  {
-    name: 'sortDesc',
-    lang: [
-      { lang: 'uk', value: 'від дорогих до дешевих' },
-      { lang: 'eng', value: 'price (high to low) ' }
-    ],
-    optionValue: {
-      name: 'sortDesc',
-      value: -1
-    }
-  },
-  {
-    name: 'sortAsc',
-    lang: [
-      { lang: 'uk', value: 'від дешевих до дорогих' },
-      { lang: 'eng', value: 'price (low to high) ' }
-    ],
-    optionValue: { name: 'sortAsc', value: 1 }
-  },
-  {
-    name: 'rate',
-    lang: [
-      { lang: 'uk', value: 'за рейтингом' },
-      { lang: 'eng', value: 'rate' }
-    ],
-    optionValue: {
-      name: 'rate',
-      value: -1
-    }
-  },
-  {
-    name: 'new',
-    lang: [
-      { lang: 'uk', value: 'новинки' },
-      { lang: 'eng', value: 'new' }
-    ],
-    optionValue: {
-      name: 'date',
-      value: -1
-    }
-  }
-];
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',

@@ -21,7 +21,6 @@ import {
 const ProductListPage = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-
   const {
     language,
     filtredProducts,
@@ -76,7 +75,6 @@ const ProductListPage = ({ category }) => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-
   useEffect(() => {
     dispatch(
       getFiltredProducts({
@@ -92,7 +90,7 @@ const ProductListPage = ({ category }) => {
         limit: productsPerPage,
         basePrice: sortByPrice || undefined,
         rate: sortByRate || undefined,
-        purchasedProducts: sortByPopularity || undefined,
+        purchasedCount: sortByPopularity || undefined,
         productsPerPage
       })
     );
@@ -152,6 +150,7 @@ const ProductListPage = ({ category }) => {
           count={pagesCount}
           variant='outlined'
           shape='rounded'
+          page={currentPage + 1}
           onChange={changeHandler}
         />
       </div>

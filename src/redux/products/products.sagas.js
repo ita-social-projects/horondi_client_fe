@@ -34,76 +34,75 @@ export function* handleFilterLoad({
     const products = yield call(
       getItems,
       `query(
-                $search: String
-                $price: [Int]
-                $colors: [String]
-                $patterns: [String]
-                $isHotItem: Boolean
-                $skip:Int
-                $limit:Int
-                $rate:Int
-                $basePrice:Int
-                $purchasedCount:Int
-                $category:[String]
-            ){
-            getProducts(
-                filter: {
-                    colors: $colors
-                    pattern: $patterns
-                    price: $price
-                    category:$category
-                    isHotItem: $isHotItem
-                  }
-                 skip: $skip
-                 limit: $limit
-                search: $search
-               sort:{ 
-                 rate: $rate,
-                 basePrice: $basePrice,
-                 purchasedCount:$purchasedCount
-                }
+        $search: String
+        $price: [Int]
+        $colors: [String]
+        $patterns: [String]
+        $isHotItem: Boolean
+        $skip:Int
+        $limit:Int
+        $rate:Int
+        $basePrice:Int
+        $purchasedCount:Int
+        $category:[String]
+        ){
+          getProducts(
+            filter: {
+              colors: $colors
+              pattern: $patterns
+              price: $price
+              category:$category
+              isHotItem: $isHotItem
+            }
+            skip: $skip
+            limit: $limit
+            search: $search
+            sort:{ 
+              rate: $rate,
+              basePrice: $basePrice,
+              purchasedCount:$purchasedCount
+            }
             ){
               items{
-            _id
-            purchasedCount
-            name {
-              lang
-              value
-            }
-            basePrice
-            rate
-            images {
-              primary {
-                medium
-              }
-            }
-            colors{
+                _id
+                purchasedCount
                 name {
                   lang
                   value
                 }
-                simpleName {
+                basePrice
+                rate
+                images {
+                  primary {
+                    medium
+                  }
+                }
+                colors{
+                  name {
+                    lang
+                    value
+                  }
+                  simpleName {
+                    lang
+                    value
+                  }
+                }
+                pattern {
                   lang
                   value
                 }
+                category {
+                  _id
+                  name {
+                    value
+                  }
+                  isMain
+                }
+                isHotItem
               }
-            pattern {
-                lang
-                value
-              }
-            category {
-              _id
-              name {
-                value
-              }
-              isMain
+              count
             }
-            isHotItem
-          }
-          
-          count
-          },
-      }`,
+          }`,
       {
         search: payload.filters.searchFilter,
         colors: payload.filters.colorsFilter,

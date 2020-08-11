@@ -9,11 +9,10 @@ import {
   setSortByRate,
   setSortByPopularity
 } from '../../../redux/products/products.actions';
-
-const SORT_BY_TEXT = [
-  { lang: 'uk', value: 'Сортувати за:' },
-  { lang: 'eng', value: 'Sort by:' }
-];
+import {
+  SORT_BY_SELECT_OPTIONS,
+  SORT_BY_TEXT
+} from '../../../translations/product-list.translations';
 
 const ProductSort = () => {
   const { language } = useSelector(({ Language: { language } }) => ({
@@ -31,55 +30,10 @@ const ProductSort = () => {
     if (name === 'rate') {
       return dispatch(setSortByRate(value));
     }
-    if (name === 'date') {
-      return dispatch(setSortByDate(value));
-    }
     if (name === 'popularity') {
       return dispatch(setSortByPopularity(value));
     }
   };
-  const SORT_BY_SELECT_OPTIONS = [
-    {
-      lang: [
-        {
-          lang: 'uk',
-          value: 'популярністю'
-        },
-        { lang: 'eng', value: 'popularity' }
-      ],
-      optionValue: {
-        name: 'popularity',
-        value: -1
-      }
-    },
-    {
-      lang: [
-        { lang: 'uk', value: 'від дорогих до дешевих' },
-        { lang: 'eng', value: 'price (high to low) ' }
-      ],
-      optionValue: {
-        name: 'sortDesc',
-        value: -1
-      }
-    },
-    {
-      lang: [
-        { lang: 'uk', value: 'від дешевих до дорогих' },
-        { lang: 'eng', value: 'price (low to high) ' }
-      ],
-      optionValue: { name: 'sortAsc', value: 1 }
-    },
-    {
-      lang: [
-        { lang: 'uk', value: 'за рейтингом' },
-        { lang: 'eng', value: 'rate' }
-      ],
-      optionValue: {
-        name: 'rate',
-        value: -1
-      }
-    }
-  ];
 
   const sortByText = SORT_BY_TEXT[language].value;
 
@@ -92,7 +46,7 @@ const ProductSort = () => {
   );
 
   return (
-    <div className={styles.sortDiv}>
+    <div data-cy='sort' className={styles.sortDiv}>
       <div>
         {sortByText}
         <TextField

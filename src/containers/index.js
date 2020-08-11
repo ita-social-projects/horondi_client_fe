@@ -1,3 +1,4 @@
 import Language from './language';
+import Cabinet from './cabinet';
 
-export { Language };
+export { Language, Cabinet };

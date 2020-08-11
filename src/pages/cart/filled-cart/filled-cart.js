@@ -20,9 +20,6 @@ const FilledCart = ({ items }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
-  const totalCounter = () =>
-    items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0);
-
   const onModalAction = (action) => {
     action && dispatch(removeItemFromCart(modalItem));
     setModalVisibility(false);
@@ -47,7 +44,9 @@ const FilledCart = ({ items }) => {
         ))}
       </div>
       <div className={styles.total}>
-        {CART_TABLE_FIELDS[language].total}: {totalCounter()} UAH
+        {CART_TABLE_FIELDS[language].total}:{' '}
+        {items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)}{' '}
+        UAH
       </div>
       <div className={styles.controlButtons}>
         <Link to='/'>

@@ -3,7 +3,10 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useStyles } from './confirmation.styles';
-import { WELCOME_MESSAGE, CONFIRM_ERROR } from '../../configs';
+import {
+  WELCOME_MESSAGE,
+  CONFIRM_ERROR
+} from '../../translations/user.translations';
 import confirmUser from './confirmUser';
 import { Loader } from '../../components/loader/loader';
 

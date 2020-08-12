@@ -3,17 +3,15 @@ import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
+import { formRegExp, REGISTER_USER_DATA, SHOW_AFTER } from '../../configs';
 import {
-  placeholders,
-  formRegExp,
   errorMessages,
   REGISTER_FORM_LABEL,
   LOGIN_FORM_LABEL,
-  REGISTER_USER_DATA,
+  placeholders,
   CONFIRM_EMAIL,
-  SHOW_AFTER,
   REGISTER_USER_ERROR
-} from '../../configs';
+} from '../../translations/user.translations';
 import { useStyles } from './register.styles';
 import registerUser from './registerUser';
 import infoImg from '../../images/information.png';

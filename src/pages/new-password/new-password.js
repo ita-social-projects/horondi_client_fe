@@ -3,14 +3,13 @@ import { Button, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useStyles } from './new-password.styles';
+import { formRegExp, SHOW_AFTER } from '../../configs';
 import {
-  formRegExp,
   errorMessages,
   CHANGE_PASSWORD,
   NEW_PASSWORD_ERROR,
-  NEW_PASSWORD_SUCCESS_MESSAGE,
-  SHOW_AFTER
-} from '../../configs';
+  NEW_PASSWORD_SUCCESS_MESSAGE
+} from '../../translations/user.translations';
 import { endAdornment } from '../../utils/eyeToggle';
 import resetPassword from './resetPassword';
 import Loader from '../../components/loader';

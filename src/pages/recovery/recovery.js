@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
+import { formRegExp, SHOW_AFTER } from '../../configs';
 import {
-  formRegExp,
   errorMessages,
   RECOVERY_SUCCESS_MESSAGE,
   RECOVERY_MESSAGES,
-  RECOVERY_ERROR_MESSAGE,
-  SHOW_AFTER
-} from '../../configs';
+  RECOVERY_ERROR_MESSAGE
+} from '../../translations/user.translations';
 import { useStyles } from './recovery.styles';
 import recoverUser from './recoverUser';
 import { Loader } from '../../components/loader/loader';

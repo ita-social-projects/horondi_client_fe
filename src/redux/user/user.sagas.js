@@ -6,9 +6,12 @@ import { setItems } from '../../utils/client';
 
 export const loginUser = (payload) => {
   const query = ` 
-  mutation login($user: UserInput!) {
+  mutation {
   loginUser(
-    user: $user
+    loginInput: {
+      email: "${payload.email}"
+      password: "${payload.password}"
+    }
   ) {
     purchasedProducts
     orders
@@ -19,7 +22,7 @@ export const loginUser = (payload) => {
   }
 }
   `;
-  return setItems(query, payload);
+  return setItems(query);
 };
 
 export function* handleUserLoad({ payload }) {

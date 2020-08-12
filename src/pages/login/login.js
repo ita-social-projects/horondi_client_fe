@@ -3,16 +3,15 @@ import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './login.styles';
+import { LOGIN_USER_DATA, formRegExp } from '../../configs';
 import {
   placeholders,
   OR_TEXT,
   LOGIN_FORM_LABEL,
-  LOGIN_USER_DATA,
-  formRegExp,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
   LOGIN_USER_ERROR
-} from '../../configs';
+} from '../../translations/user.translations';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
@@ -64,7 +63,7 @@ const Login = () => {
   const handleLogin = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      dispatch(loginUser({ user }));
+      dispatch(loginUser(user));
     }
   };
 

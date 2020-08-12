@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: '79px'
   },
   heading: {
-    fontSize: '24px',
+    fontSize: '1.5rem',
     lineHeight: '29px',
     marginBottom: '25px',
     marginTop: '0px',
@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   changeBtn: {
-    fontSize: '16px',
+    fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     backgroundColor: theme.palette.button.normal.backgroundColor,
@@ -67,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
   serverError: {
     color: '#e53935',
     margin: '3px 14px -29px',
-    fontSize: '11px',
+    fontSize: '0.6875',
     textAlign: 'left',
     lineHeight: '13px',
     letterSpacing: '0.33px'

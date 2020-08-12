@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: '53px'
   },
   heading: {
-    fontSize: '24px',
+    fontSize: '1.5rem',
     lineHeight: '29px',
     textAlign: 'center',
     marginBottom: '25px',
@@ -68,7 +68,7 @@ export const useStyles = makeStyles((theme) => ({
     '& p': {
       position: 'absolute',
       top: '40px',
-      fontSize: '10px'
+      fontSize: '0.625rem'
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor
@@ -83,7 +83,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   loginBtn: {
-    fontSize: '16px',
+    fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     backgroundColor: theme.palette.button.normal.backgroundColor,
@@ -115,7 +115,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   recoveryBtn: {
     float: 'right',
-    fontSize: '14px',
+    fontSize: '0.875rem',
     color: theme.palette.button.disabled.backgroundColor,
     textDecoration: 'none',
     '&:hover': {
@@ -137,7 +137,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'table',
     margin: '0 auto',
     color: '#636363',
-    fontSize: '14px'
+    fontSize: '0.875rem'
   },
   googleBtn: {
     border: '1px solid black',
@@ -163,7 +163,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   registerBtn: {
     float: 'right',
-    fontSize: '14px',
+    fontSize: '0.875rem',
     color: theme.palette.textColor,
     textDecoration: 'none',
     textTransform: 'capitalize',
@@ -177,7 +177,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.button.disabled.backgroundColor,
     color: '#c2c2c2',
     fontFamily: 'Montserrat',
-    fontSize: '16px',
+    fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     textTransform: 'capitalize'

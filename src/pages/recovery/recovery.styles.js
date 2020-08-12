@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '50px'
   },
   heading: {
-    fontSize: '24px',
+    fontSize: '1.5rem',
     lineHeight: '29px',
     marginBottom: '25px',
     marginTop: '0px',
@@ -55,12 +55,12 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '0px',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '12px',
+    fontSize: '0.75rem',
     lineHeight: '15px',
     textAlign: 'left'
   },
   recoverBtn: {
-    fontSize: '16px',
+    fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     backgroundColor: theme.palette.button.normal.backgroundColor,

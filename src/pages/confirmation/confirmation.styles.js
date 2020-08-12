@@ -24,12 +24,12 @@ export const useStyles = makeStyles((theme) => ({
       margin: '0',
       color: 'white',
       textTransform: 'uppercase',
-      fontSize: '48px'
+      fontSize: '3rem'
     },
     '& h3': {
       margin: '0',
       color: 'white',
-      fontSize: '24px'
+      fontSize: '1.5rem'
     },
     '& button': {
       marginTop: '45px',

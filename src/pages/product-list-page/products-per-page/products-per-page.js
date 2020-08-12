@@ -3,15 +3,7 @@ import { Button, ButtonGroup } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import styles from './products-per-page.styles';
 import { setProductsPerPage } from '../../../redux/products/products.actions';
-
-const ITEMS_PER_PAGE = [
-  {
-    title: 'nine products per page',
-    value: 9
-  },
-  { title: 'eighteen products per page', value: 18 },
-  { title: 'thirty products per page', value: 30 }
-];
+import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
 
 const productsCount = sessionStorage.getItem('productsPerPage') || 9;
 

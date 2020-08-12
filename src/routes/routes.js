@@ -13,7 +13,7 @@ import AppFooter from '../components/app-footer';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
-import ErrorRage from '../pages/error-page';
+import ErrorPage from '../pages/error-page';
 
 const Routes = () => {
   const styles = useStyles();
@@ -34,7 +34,7 @@ const Routes = () => {
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
           />
-          <Route path='/error-page' exact component={ErrorRage} />
+          <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>
       <AppFooter />

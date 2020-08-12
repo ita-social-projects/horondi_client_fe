@@ -17,21 +17,21 @@ const ErrorPage = () => {
     })
   );
 
-  const classes = useStyles();
+  const styles = useStyles();
 
   const errorImagePath = isLightTheme
     ? ERROR_PAGE_IMAGES.light
     : ERROR_PAGE_IMAGES.dark;
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.error}>
+    <div className={styles.wrapper}>
+      <div className={styles.error}>
         <img
-          className={classes.errorImage}
+          className={styles.errorImage}
           src={errorImagePath}
           alt={ERROR_PAGE_MESSAGE[language].title}
         />
-        <div className={classes.info}>
+        <div className={styles.info}>
           <h2>
             {errorMessage
               ? errorMessage.e.message

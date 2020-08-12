@@ -3,10 +3,11 @@ import { Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import useStyles from './product-list-item.style';
 import StarRating from '../../../containers/star-rating';
 import * as productImage from '../../../images/pdp_main.jpg';
-// import  dollar from '../../../dollar-sign.svg';
 
 const ProductListItem = ({ product, category }) => {
   const styles = useStyles({ image: productImage });
@@ -22,7 +23,11 @@ const ProductListItem = ({ product, category }) => {
     >
       <Card className={styles.name}>
         {name}
-        <StarRating size='small' readOnly rate={product.rate} />${price}
+        <StarRating size='small' readOnly rate={product.rate} />
+        <div>
+          {<FontAwesomeIcon icon={faHryvnia} />}
+          {price}
+        </div>
       </Card>
     </Link>
   );

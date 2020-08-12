@@ -23,6 +23,8 @@ export const ABOUT_US_IMAGES = {
   workPlace_2: './images/about-us/work-place-2.jpg'
 };
 
+export const GOOGLE_MAPS_API_KEY = 'AIzaSyC8JS9NjI_ksZ-a-jaw-jXtHjjsOJgonDs';
+
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
 

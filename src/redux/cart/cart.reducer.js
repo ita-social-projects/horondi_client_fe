@@ -5,14 +5,12 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-  case SET_CART:
+  if (type === SET_CART) {
     return {
       list: payload
     };
-  default:
-    return state;
   }
+  return state;
 };
 
 export default cartReducer;

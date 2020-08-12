@@ -2,7 +2,7 @@ import { SET_BUSINESS_PAGE, SET_LOADING } from './businessPages.types';
 
 const initialState = {
   loading: true,
-  businessPages: {
+  pages: {
     aboutUs: {},
     contacts: {},
     termsAndConditions: {},
@@ -15,8 +15,8 @@ const businessPagesReducer = (state = initialState, action = {}) => {
   case SET_BUSINESS_PAGE:
     return {
       ...state,
-      businessPages: {
-        ...state.businessPages,
+      pages: {
+        ...state.pages,
         [action.payload.key]: action.payload.businessPage
       }
     };

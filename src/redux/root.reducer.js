@@ -8,7 +8,7 @@ import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
 import Wishlist from './wishlist/wishlist.reducer';
-import BusinessPageReducer from './businessPages/businessPages.reducer';
+import BusinessPages from './businessPages/businessPages.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -20,7 +20,7 @@ const rootReducer = (history) =>
     Error,
     Language,
     Wishlist,
-    BusinessPageReducer
+    BusinessPages
   });
 
 export default rootReducer;

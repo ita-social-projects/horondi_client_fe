@@ -7,13 +7,14 @@ import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 
 export function* handleBusinessPageLoad({ payload }) {
+  console.log(payload);
   try {
     yield put(setLoading(true));
     const businessPage = yield call(
       getItems,
       `query{
-         getBusinessPageByCode(code: ${payload}){
-            ... on BusinessPage {
+            getBusinessTextByCode(code: "${payload}") {
+            ... on BusinessText {
                 _id
                 code
                 title {
@@ -28,9 +29,11 @@ export function* handleBusinessPageLoad({ payload }) {
             message
             statusCode
             }
-          }`
+          }
+      }`
     );
-    yield put(setBusinessPage(businessPage.data.getBusinessPageByCode));
+
+    yield put(setBusinessPage(businessPage.data.getBusinessTextByCode));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleBusinessPageError, e);

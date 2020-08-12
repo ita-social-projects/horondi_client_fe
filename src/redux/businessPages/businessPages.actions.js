@@ -9,6 +9,9 @@ const setBusinessPage = (businessPage) => ({
   payload: {
     businessPage,
     key: businessPage.code
+      .split('-')
+      .map((val, idx) => (idx ? val[0].toUpperCase() + val.slice(1) : val))
+      .join('')
   }
 });
 

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
-import { Button } from '@material-ui/core';
 import { useStyles } from './chat.style';
 import kyivstar from '../../images/kyivstar.png';
 import lifecell from '../../images/lifecell.png';
 import vodafone from '../../images/vodafone.png';
-import gmail from '../../images/gmail.png';
 
 export const Chat = () => {
   const style = useStyles();
   const [visible, setBlock] = useState(false);
+  const [mailVisible, setMailVisible] = useState(false);
+  const [facebookVisible, setFacebookVisible] = useState(false);
 
   return (
     <div>
@@ -28,20 +28,36 @@ export const Chat = () => {
             <img className={style.logo} src={vodafone} alt='vodafone' />{' '}
             +38-050-999-77-66
           </span>
-          <span>
-            <img className={style.logo} src={gmail} alt='gmail' />{' '}
-            horondi@gmail.com
-          </span>
         </div>
-        <div className={style.messengers}>
-          <Button className={style.facebook}>
-            <a href='https://www.facebook.com/Horondi'>Facebook</a>
-          </Button>
-          <Button>
-            <a href='https://www.instagram.com/horondi/?hl=uk'>Instagram</a>
-          </Button>
+        \
+        <div className={style.tabs}>
+          <div
+            className={
+              facebookVisible ? style.facebookActive : style.facebookDisactive
+            }
+            onClick={() => {
+              setFacebookVisible(true);
+              setMailVisible(false);
+            }}
+          >
+            facebook
+          </div>
+
+          <div
+            className={mailVisible ? style.gmailActive : style.gmailDisactive}
+            onClick={() => {
+              setMailVisible(true);
+              setFacebookVisible(false);
+            }}
+          >
+            mail
+          </div>
+        </div>
+        <div className={style}>
+          <span>Виберіть зручний спосіб для контакту</span>
         </div>
       </div>
+
       <div onClick={() => setBlock(!visible)} className={style.chatIcon}>
         <ForumIcon color='warning' style={{ fontSize: 80 }} />
       </div>

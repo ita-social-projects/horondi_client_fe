@@ -7,6 +7,7 @@ import Categories from './categories/categories.reducer';
 import Theme from './theme/theme.reducer';
 import Error from './error/error.reducer';
 import Language from './language/language.reducer';
+import Contacts from './contacts/contacts.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = (history) =>
     Categories,
     Theme,
     Error,
-    Language
+    Language,
+    Contacts
   });
 
 export default rootReducer;

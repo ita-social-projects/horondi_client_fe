@@ -10,17 +10,25 @@ export const useStyles = makeStyles(() => ({
   content: {
     display: 'flex',
     justifyContent: 'flex-start',
-    width: '90%'
+    '@media screen and (max-width: 768px)': {
+      flexDirection: 'column'
+    }
   },
   contacts: {
-    marginLeft: '30px',
-    width: '30%'
+    marginLeft: '30px'
   },
   contactsItem: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    margin: '10px',
+    width: '280px'
   },
   contactsDetails: {
-    width: '50%'
+    width: '57%'
+  },
+  schedule: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '57%'
   }
 }));

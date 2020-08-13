@@ -1,37 +1,94 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import MapContainer from './map-container/map-container';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { Backdrop } from '@material-ui/core';
+
 import { useStyles } from './contacts.styles';
+import LoadingBar from '../../components/loading-bar';
+import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
+import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const Contacts = () => {
-  const classes = useStyles();
+  const { contacts, loading, language } = useSelector(
+    ({ Language, Contacts }) => ({
+      contacts: Contacts.contacts,
+      loading: Contacts.loading,
+      language: Language.language
+    })
+  );
+  const styles = useStyles();
 
-  return (
-    <div className={classes.wrapper}>
-      <h2>Контакти</h2>
-      <div className={classes.content}>
-        <MapContainer />
-        <div className={classes.contacts}>
-          <div className={classes.contactsItem}>
-            <span>Телефон:</span>
-            <span className={classes.contactsDetails} />
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
+
+  if (loading) {
+    console.log(contacts, 'CONTACTS IN COMPONENT');
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
+
+  const getAddress = (language, contact) => {
+    let address = '';
+
+    switch (language) {
+    case 0:
+      console.log(contact.address);
+      return (address = `${contact.address.city[0][language].value}, ${CONTACTS_PAGE_TITLES[language].street} ${contact.address.street[0][language].value} ${contact.address.buildingNumber[0][language].value}`);
+
+    case 1:
+      return (address = `${contact.address.city[0][language].value}, ${contact.address.street[0][language].value} ${CONTACTS_PAGE_TITLES[language].street} ${contact.address.buildingNumber[0][language].value}`);
+
+    default:
+      return address;
+    }
+  };
+
+  return contacts.map((contact) => (
+    <div key={contact._id} className={styles.wrapper}>
+      <h2>{CONTACTS_PAGE_TITLES[language].title}</h2>
+      <div className={styles.content}>
+        <a target='_blank' rel='noopener noreferrer' href={contact.link}>
+          <img
+            src={contact.images.medium}
+            alt={CONTACTS_PAGE_TITLES[language].location}
+          />
+        </a>
+        <div className={styles.contacts}>
+          <div className={styles.contactsItem}>
+            <span>{CONTACTS_PAGE_TITLES[language].phone}</span>
+            <span className={styles.contactsDetails}>
+              +{contact.phoneNumber}
+            </span>
           </div>
-          <div className={classes.contactsItem}>
-            <span>Графік роботи:</span>
-            <span className={classes.contactsDetails} />
+          <div className={styles.contactsItem}>
+            <span>{CONTACTS_PAGE_TITLES[language].schedule}</span>
+            <div className={styles.schedule}>
+              {contact.openHours[language].value.split('|').map((el, i) => (
+                <span key={i}>{el}</span>
+              ))}
+            </div>
           </div>
-          <div className={classes.contactsItem}>
-            <span>Адреса:</span>
-            <span className={classes.contactsDetails} />
+          <div className={styles.contactsItem}>
+            <span>{CONTACTS_PAGE_TITLES[language].address}</span>
+            <span className={styles.contactsDetails}>
+              {getAddress(language, contact)}
+            </span>
           </div>
-          <div className={classes.contactsItem}>
+          <div className={styles.contactsItem}>
             <span>Email:</span>
-            <span className={classes.contactsDetails} />
+            <span className={styles.contactsDetails}>{contact.email}</span>
           </div>
         </div>
       </div>
     </div>
-  );
+  ));
 };
 
 export default Contacts;

@@ -52,7 +52,7 @@
     "lint-staged": "lint-staged",
     "lint:fix": "eslint . --fix --color",
     "cypress": "cypress open",
-    "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
+    "eslint-check": "eslint --print-config src/components/app/app.js | eslint-config-prettier-check",
     "test": "jest --coverage",
     "create": "ccr create"
   },

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   cabinet: (props) => ({
     color: 'white',
+    padding: '0 5px',
     position: 'relative',
     cursor: 'pointer',
     zIndex: 2,
@@ -25,7 +26,7 @@ export const useStyles = makeStyles(() => ({
       height: 30,
       background: 'white',
       position: 'absolute',
-      left: '1px',
+      left: '5px',
       top: '1px',
       zIndex: 1,
       borderRadius: '50%'

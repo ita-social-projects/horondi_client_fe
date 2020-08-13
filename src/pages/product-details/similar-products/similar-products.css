@@ -1,0 +1,37 @@
+.react-multi-carousel-list {
+    margin-bottom: 1rem;
+}
+.react-multiple-carousel__arrow {
+    min-width: 20px!important;
+    min-height: 20px!important;
+}
+.react-multiple-carousel__arrow::before {
+    font-size: 10px!important;
+}
+.react-multiple-carousel__arrow--right{
+    right: 1rem !important;
+}
+.react-multiple-carousel__arrow--left {
+    left: 1rem !important;
+}
+.similarItems {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.similarItems hr {
+    border: none;
+    color: #C2C2C2;
+    background-color: #C2C2C2;
+    height: 0.05rem;
+}
+
+.carousel {
+    margin-top: 2rem;
+}
+
+.carousel img{
+    width: 300px;
+    height: 383px;
+}

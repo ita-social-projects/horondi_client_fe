@@ -14,6 +14,7 @@ import AppFooter from '../components/app-footer';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import ProductDetails from '../pages/product-details';
 
 const Routes = () => {
   const styles = useStyles();
@@ -35,6 +36,7 @@ const Routes = () => {
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
           />
+          <Route path='/:category/:id' exact component={ProductDetails} />
         </Switch>
       </div>
       <AppFooter />

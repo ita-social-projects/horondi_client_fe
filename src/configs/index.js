@@ -258,3 +258,13 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+
+export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
+export const DEFAULT_SIZE = 'M';
+export const INPUT_VARIANT = 'outlined';
+export const COMMENTS_TIME_OPTIONS = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric'
+};
+export const TEXT = 'text';

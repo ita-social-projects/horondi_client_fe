@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import styles from './products-per-page.styles';
+import styles from './count-per-page.styles';
 import { setProductsPerPage } from '../../../redux/products/products.actions';
 import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
 
 const productsCount = sessionStorage.getItem('productsPerPage') || 9;
 
-const ProductsPerPage = () => {
+const CountPerPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setProductsPerPage(+productsCount));
@@ -32,4 +32,4 @@ const ProductsPerPage = () => {
   return <ButtonGroup className={styles.items}>{productsOnPage}</ButtonGroup>;
 };
 
-export default ProductsPerPage;
+export default CountPerPage;

@@ -1,7 +1,6 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -160,7 +159,6 @@ const ProductListFilter = ({ selectedCategory }) => {
           <CategoryFilter selectedCategory={selectedCategory} />
           <ColorsFilter />
           <PatternsFilter />
-          <FormHelperText>Be careful</FormHelperText>
         </FormControl>
       </Paper>
     </div>

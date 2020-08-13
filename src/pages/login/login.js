@@ -130,11 +130,13 @@ const Login = () => {
                 >
                   {label}
                 </Button>
-                <p className={styles.loginError}>
-                  {shouldValidate && loginError
-                    ? LOGIN_USER_ERROR[loginError][language].value
-                    : ''}
-                </p>
+                {loginError ? (
+                  <p className={styles.loginError}>
+                    {LOGIN_USER_ERROR[loginError] && loginError
+                      ? LOGIN_USER_ERROR[loginError][language].value
+                      : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
+                  </p>
+                ) : null}
               </div>
               <div className={styles.orContainer}>
                 <span className={styles.orText}>{OR_TEXT[language].value}</span>

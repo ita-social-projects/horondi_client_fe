@@ -11,7 +11,11 @@ const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer(history),
-    compose(applyMiddleware(routerMiddleware(history), sagaMiddleware))
+    compose(
+      applyMiddleware(routerMiddleware(history), sagaMiddleware),
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
   );
   sagaMiddleware.run(rootSaga);
   return store;

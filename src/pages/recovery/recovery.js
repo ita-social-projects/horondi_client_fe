@@ -90,9 +90,9 @@ const Recovery = () => {
               type='text'
               helperText={
                 shouldValidate && !emailValidated && email
-                  ? `${errorMessages[language].value.email}`
-                  : recoveryError
-                    ? `${RECOVERY_ERROR_MESSAGE[recoveryError][language].value}`
+                  ? errorMessages[language].value.email
+                  : RECOVERY_ERROR_MESSAGE[recoveryError]
+                    ? RECOVERY_ERROR_MESSAGE[recoveryError][language].value
                     : null
               }
               value={email}

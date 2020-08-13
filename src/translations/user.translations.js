@@ -5,7 +5,7 @@ export const CONFIRM_EMAIL = [
       'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value:
       'You have successfully registered! Please, confirm your email address.'
   }
@@ -17,7 +17,7 @@ export const LOGIN_FORM_LABEL = [
     value: 'увійти'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: 'log in'
   }
 ];
@@ -27,7 +27,7 @@ export const OR_TEXT = [
     value: 'або'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: 'or'
   }
 ];
@@ -38,7 +38,7 @@ export const REGISTER_FORM_LABEL = [
     value: 'Реєстрація'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: 'Register'
   }
 ];
@@ -49,7 +49,7 @@ export const EMPTY_FIELD = [
     value: 'Заповніть поле'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: 'Empty field'
   }
 ];
@@ -61,7 +61,7 @@ export const LOGIN_USER_ERROR = {
       value: 'Неправильна електронна адреса або пароль'
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'Wrong e-mail address or password'
     }
   ],
@@ -71,8 +71,18 @@ export const LOGIN_USER_ERROR = {
       value: 'Ви ввели невірні дані'
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'You have typed wrong data'
+    }
+  ],
+  DEFAULT_ERROR: [
+    {
+      lang: 'uk',
+      value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'
+    },
+    {
+      lang: 'en',
+      value: 'Oops! Something went wrong. Please, try again later.'
     }
   ]
 };
@@ -80,17 +90,21 @@ export const LOGIN_USER_ERROR = {
 export const REGISTER_USER_ERROR = {
   USER_ALREADY_EXIST: [
     {
+      lang: 'uk',
       value: 'Користувач за вказаним емейлом вже існує'
     },
     {
+      lang: 'en',
       value: 'User with given email already exists'
     }
   ],
   INPUT_NOT_VALID: [
     {
+      lang: 'uk',
       value: 'Невірно введені дані'
     },
     {
+      lang: 'en',
       value: 'Wrong input data'
     }
   ]
@@ -108,7 +122,7 @@ export const errorMessages = [
     }
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: {
       firstname: 'Field should contain from 2 to 30 characters',
       lastname: 'Field should contain from 2 to 30 characters',
@@ -126,7 +140,7 @@ export const placeholders = {
       value: "Введіть Ім'я"
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'Enter firstname'
     }
   ],
@@ -136,7 +150,7 @@ export const placeholders = {
       value: 'Введіть прізвище'
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'Enter lastname'
     }
   ],
@@ -146,7 +160,7 @@ export const placeholders = {
       value: 'Введіть емейл'
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'Enter email'
     }
   ],
@@ -156,7 +170,7 @@ export const placeholders = {
       value: 'Введіть пароль'
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'Enter password'
     }
   ],
@@ -166,7 +180,7 @@ export const placeholders = {
       value: 'Підтвердіть пароль'
     },
     {
-      lang: 'eng',
+      lang: 'en',
       value: 'Confirm password'
     }
   ]
@@ -178,7 +192,7 @@ export const FORGOT_PASSWORD = [
     value: 'Забули пароль?'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: 'Forgot password?'
   }
 ];
@@ -189,19 +203,21 @@ export const REGISTER_PROPOSAL = [
     value: 'Реєстрація'
   },
   {
-    lang: 'eng',
+    lang: 'en',
     value: 'Registration'
   }
 ];
 
 export const WELCOME_MESSAGE = [
   {
+    lang: 'uk',
     h2: 'Вітаємо',
     h3: 'Реєстрація пройшла успішно!',
     button_1: 'В магазин',
     button_2: 'Увійти'
   },
   {
+    lang: 'en',
     h2: 'Welcome',
     h3: 'Registration was successful!',
     button_1: 'Go to shop',
@@ -211,15 +227,18 @@ export const WELCOME_MESSAGE = [
 
 export const CONFIRM_ERROR = [
   {
+    lang: 'uk',
     value: 'Ой! Щось пішло не так.'
   },
   {
+    lang: 'en',
     value: 'Oops! Something went wrong.'
   }
 ];
 
 export const RECOVERY_MESSAGES = [
   {
+    lang: 'uk',
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
     p_1:
@@ -227,6 +246,7 @@ export const RECOVERY_MESSAGES = [
     button: 'Відправити'
   },
   {
+    lang: 'en',
     h2: 'Password recovery',
     label: 'E-mail  ',
     p_1:
@@ -237,10 +257,12 @@ export const RECOVERY_MESSAGES = [
 
 export const RECOVERY_SUCCESS_MESSAGE = [
   {
+    lang: 'uk',
     h2: 'Успішно!',
     p: 'Будь ласка виконайте інструкції у листі, який ми вам надіслали.'
   },
   {
+    lang: 'en',
     h2: 'Success!',
     p: 'Please follow the instructions in the message, we have just sent you.'
   }
@@ -249,17 +271,21 @@ export const RECOVERY_SUCCESS_MESSAGE = [
 export const RECOVERY_ERROR_MESSAGE = {
   USER_NOT_FOUND: [
     {
+      lang: 'uk',
       value: 'Користувача з даним емейлом не знайдено'
     },
     {
+      lang: 'en',
       value: 'User with given e-mail address is not found'
     }
   ],
   EMAIL_ERROR: [
     {
+      lang: 'uk',
       value: 'Будь ласка перезавантажте сторінку та спробуйте ще раз.'
     },
     {
+      lang: 'en',
       value: 'Please, reload your page and try again.'
     }
   ]
@@ -267,12 +293,14 @@ export const RECOVERY_ERROR_MESSAGE = {
 
 export const CHANGE_PASSWORD = [
   {
+    lang: 'uk',
     h2: 'Введіть новий пароль',
     pass_label: 'Новий пароль',
     confirm_label: 'Підтвердіть пароль',
     button: 'Змінити'
   },
   {
+    lang: 'en',
     h2: 'Enter new password',
     pass_label: 'New password',
     confirm_label: 'Confirm password',
@@ -283,18 +311,22 @@ export const CHANGE_PASSWORD = [
 export const NEW_PASSWORD_ERROR = {
   USER_NOT_FOUND: [
     {
+      lang: 'uk',
       value: 'Користувача не знайдено'
     },
     {
+      lang: 'en',
       value: 'User is not found'
     }
   ],
   DEFAULT_ERROR: [
     {
+      lang: 'uk',
       value:
         'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
     },
     {
+      lang: 'en',
       value: 'An error occurred! Please, reload your page and try again.'
     }
   ]
@@ -302,10 +334,12 @@ export const NEW_PASSWORD_ERROR = {
 
 export const NEW_PASSWORD_SUCCESS_MESSAGE = [
   {
+    lang: 'uk',
     h2: 'Ваш пароль успішно змінено!',
     p: 'Вас буде спрямовано на сторінку логінування'
   },
   {
+    lang: 'en',
     h2: 'Your password is successfully changed!',
     p: 'You will be directed to login page'
   }

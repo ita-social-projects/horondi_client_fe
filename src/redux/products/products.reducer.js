@@ -14,7 +14,7 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEMS_FILTER
+  SET_HOT_ITEM_FILTER
 } from './products.types';
 
 export const initialState = {
@@ -101,7 +101,7 @@ const productsReducer = (state = initialState, action = {}) => {
         categoryFilter: action.payload
       }
     };
-  case SET_HOT_ITEMS_FILTER:
+  case SET_HOT_ITEM_FILTER:
     return {
       ...state,
       filters: {

@@ -23,68 +23,29 @@ import {
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
   SET_SEARCH,
-  SET_HOT_ITEMS_FILTER,
+  SET_HOT_ITEM_FILTER,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   SET_PAGES_COUNT,
   SET_CURRENT_PAGE
 } from '../products.types';
+import productsExample from './products.mocks';
 
 describe('Filter actions test', () => {
   it('should set all filtred products to payload property', () => {
-    const products = [
-      {
-        name: [
-          {
-            value: 'Сумка синя'
-          },
-          {
-            value: 'Bag Blue'
-          }
-        ],
-        basePrice: 900,
-        rate: 3.8,
-        images: [
-          {
-            primary: {
-              medium: 'medium-primary_19.jpg'
-            }
-          }
-        ]
-      },
-      {
-        name: [
-          {
-            value: 'Бананка рожева'
-          },
-          {
-            value: 'Fanny Pack Pink'
-          }
-        ],
-        basePrice: 500,
-        rate: 3.7,
-        images: [
-          {
-            primary: {
-              medium: 'medium-primary_25.jpg'
-            }
-          }
-        ]
-      }
-    ];
     const result = {
       type: SET_ALL_FILTER_PRODUCTS,
-      payload: products
+      payload: productsExample
     };
 
-    expect(setAllFilterProducts(products)).toEqual(result);
+    expect(setAllFilterProducts(productsExample)).toEqual(result);
   });
 
   it('should set hot items filter to payload property', () => {
     const isHot = true;
     const result = {
-      type: SET_HOT_ITEMS_FILTER,
+      type: SET_HOT_ITEM_FILTER,
       payload: isHot
     };
 

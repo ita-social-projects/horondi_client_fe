@@ -3,8 +3,10 @@ import { Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import useStyles from './product-list-item.style';
-import StarRating from '../../../containers/star-rating';
+import StarRating from '../../../components/star-rating';
 import * as productImage from '../../../images/pdp_main.jpg';
 
 const ProductListItem = ({ product, category }) => {
@@ -12,16 +14,19 @@ const ProductListItem = ({ product, category }) => {
   const { language } = useSelector(({ Language: { language } }) => ({
     language
   }));
-  const name = product.name[language].value;
-  const price = product.basePrice;
+
   return (
     <Link
       to={`${category.toLowerCase()}/${product._id}`}
       className={styles.productItem}
     >
       <Card className={styles.name}>
-        {name}
-        <StarRating size='small' readOnly rate={product.rate} />${price}
+        {product.name[language].value}
+        <StarRating size='small' readOnly rate={product.rate} />
+        <div>
+          {<FontAwesomeIcon icon={faHryvnia} />}
+          {product.basePrice}
+        </div>
       </Card>
     </Link>
   );

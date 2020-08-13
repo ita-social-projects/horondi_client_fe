@@ -11,7 +11,9 @@ import ProductListItem from './product-list-item';
 import {
   getAllProducts,
   setCurrentPage,
-  getFiltredProducts
+  getFiltredProducts,
+  setCategoryFilter,
+  setPriceFilter
 } from '../../redux/products/products.actions';
 import {
   SHOW_FILTER_BUTTON_TEXT,
@@ -30,6 +32,7 @@ const ProductListPage = ({ category }) => {
     sortByRate,
     sortByPrice,
     filters,
+    products,
     sortByPopularity
   } = useSelector(
     ({
@@ -40,6 +43,7 @@ const ProductListPage = ({ category }) => {
         sortByRate,
         sortByPrice,
         filters,
+        products,
         sortByPopularity,
         productsPerPage,
         currentPage
@@ -51,20 +55,14 @@ const ProductListPage = ({ category }) => {
       sortByRate,
       sortByPrice,
       filters,
+      products,
       sortByPopularity,
       productsPerPage,
       currentPage
     })
   );
 
-  const {
-    colorsFilter,
-    patternsFilter,
-    categoryFilter,
-    isHotItemFilter,
-    priceFilter,
-    searchFilter
-  } = filters;
+  const { categoryFilter } = filters;
 
   const [mobile, setMobile] = useState();
 
@@ -75,25 +73,9 @@ const ProductListPage = ({ category }) => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
   useEffect(() => {
-    dispatch(
-      getFiltredProducts({
-        filters: {
-          isHotItemFilter,
-          patternsFilter: patternsFilter || [],
-          colorsFilter: colorsFilter || [],
-          categoryFilter: categoryFilter || [category._id],
-          priceFilter,
-          searchFilter
-        },
-        skip: currentPage * productsPerPage,
-        limit: productsPerPage,
-        basePrice: sortByPrice || undefined,
-        rate: sortByRate || undefined,
-        purchasedCount: sortByPopularity || undefined,
-        productsPerPage
-      })
-    );
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,
@@ -102,8 +84,23 @@ const ProductListPage = ({ category }) => {
     productsPerPage,
     categoryFilter,
     category,
+    // patternsFilter,
+    // isHotItemFilter,
+    // priceFilter,
+    // searchFilter,
+    // colorsFilter,
     currentPage
   ]);
+
+  useEffect(() => {
+    dispatch(setCategoryFilter([category._id]));
+    dispatch(
+      setPriceFilter([
+        Math.min(...products.map((product) => product.basePrice)),
+        Math.max(...products.map((product) => product.basePrice))
+      ])
+    );
+  }, [category, products, dispatch]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -21,15 +21,6 @@ const PriceFilter = () => {
   );
 
   const { priceFilter } = filters;
-
-  useEffect(() => {
-    dispatch(
-      setPriceFilter([
-        Math.min(...products.map((product) => product.basePrice)),
-        Math.max(...products.map((product) => product.basePrice))
-      ])
-    );
-  }, [products]);
 
   const handlePriceChange = (event, newValue) => {
     dispatch(setPriceFilter(newValue));

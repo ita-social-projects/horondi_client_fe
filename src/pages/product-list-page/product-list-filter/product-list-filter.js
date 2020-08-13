@@ -1,7 +1,6 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,7 +10,7 @@ import ColorsFilter from './colors-filter';
 import PatternsFilter from './patterns-filter';
 import CategoryFilter from './category-filter';
 import PriceFilter from './price-filter';
-import HotItemFilter from './hotItem-filter';
+import HotItemFilter from './hot-item-filter';
 
 import useStyles from './product-list-filter.styles';
 import {
@@ -35,16 +34,7 @@ const ProductListFilter = ({ selectedCategory }) => {
 
   const styles = useStyles();
 
-  const {
-    products,
-    currentPage,
-    productsPerPage,
-    sortByPrice,
-    sortByRate,
-    sortByPopularity,
-    filters,
-    language
-  } = useSelector(
+  const { products, filters, language } = useSelector(
     ({
       Products: {
         products,
@@ -75,17 +65,7 @@ const ProductListFilter = ({ selectedCategory }) => {
   };
 
   const handleFilter = () => {
-    dispatch(
-      getFiltredProducts({
-        filters,
-        skip: currentPage * productsPerPage,
-        limit: productsPerPage,
-        basePrice: sortByPrice,
-        rate: sortByRate,
-        purchasedProducts: sortByPopularity,
-        productsPerPage
-      })
-    );
+    dispatch(getFiltredProducts({}));
   };
 
   const handleClearFilter = () => {
@@ -142,7 +122,6 @@ const ProductListFilter = ({ selectedCategory }) => {
           <CategoryFilter selectedCategory={selectedCategory} />
           <ColorsFilter />
           <PatternsFilter />
-          <FormHelperText>Be careful</FormHelperText>
         </FormControl>
       </Paper>
     </div>

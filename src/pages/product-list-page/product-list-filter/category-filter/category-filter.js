@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -27,10 +27,6 @@ const CategoryFilter = ({ selectedCategory }) => {
     ...new Set(products.map((product) => JSON.stringify(product.category)))
   ].map(JSON.parse);
 
-  useEffect(() => {
-    dispatch(setCategoryFilter([selectedCategory._id]));
-  }, [selectedCategory]);
-
   const handleCategoryChange = (event) => {
     if (!event.target.checked) {
       dispatch(
@@ -50,9 +46,9 @@ const CategoryFilter = ({ selectedCategory }) => {
       <Typography id='categories' gutterBottom>
         {CATERGORY_TEXT[language].value}:
       </Typography>
-      {categories.map((category) => (
+      {categories.map((category, key) => (
         <FormControlLabel
-          key={category.name[1].value}
+          key={key}
           className={styles.checkbox}
           control={
             <Checkbox

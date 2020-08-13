@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useStyles } from './cabinet.styles';
-import NotLoggedCabinet from '../not-logged-cabinet';
-import LoggedCabinet from '../logged-cabinet';
+import NotLoggedCabinet from '../../components/not-logged-cabinet';
+import LoggedCabinet from '../../components/logged-cabinet';
+import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 
 const Cabinet = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getWishlist());
+  }, [dispatch]);
+
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));

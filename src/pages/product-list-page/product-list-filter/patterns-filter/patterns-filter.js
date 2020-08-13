@@ -46,9 +46,9 @@ const PatternsFilter = () => {
       <Typography id='patterns' gutterBottom>
         {PATTERN_TEXT[language].value}:
       </Typography>
-      {patterns.map((pattern) => (
+      {patterns.map((pattern, key) => (
         <FormControlLabel
-          key={pattern[1].value}
+          key={key}
           className={styles.checkbox}
           control={
             <Checkbox

@@ -48,9 +48,9 @@ const ColorsFilter = () => {
       <Typography id='colors' gutterBottom>
         {COLORS_TEXT[language].value}:
       </Typography>
-      {colors.map((color) => (
+      {colors.map((color, key) => (
         <FormControlLabel
-          key={color[1].value}
+          key={key}
           className={styles.checkbox}
           control={
             <Checkbox

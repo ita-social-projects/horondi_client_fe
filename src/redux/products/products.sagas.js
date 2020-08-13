@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   setAllProducts,
@@ -10,27 +10,10 @@ import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_ALL_PRODUCTS, GET_FILTRED_PRODUCTS } from './products.types';
 
-export function* handleFilterLoad({
-  payload = {
-    filters: {
-      colorsFilter: [],
-      patternsFilter: [],
-      priceFilter: [0, 99999],
-      isHotItemFilter: false,
-      categoryFilter: [],
-      searchFilter: ''
-    },
-    skip: 1,
-    limit: 90,
-    rate: undefined,
-    basePrice: undefined,
-    purchasedCount: undefined,
-
-    productsPerPage: 9
-  }
-}) {
+export function* handleFilterLoad() {
   try {
     yield put(setLoading(true));
+    const state = yield select((state) => state.Products);
     const products = yield call(
       getItems,
       `query(
@@ -104,22 +87,22 @@ export function* handleFilterLoad({
             }
           }`,
       {
-        search: payload.filters.searchFilter,
-        colors: payload.filters.colorsFilter,
-        patterns: payload.filters.patternsFilter,
-        price: payload.filters.priceFilter,
-        skip: payload.skip,
-        limit: payload.limit,
-        rate: payload.rate,
-        basePrice: payload.basePrice,
-        category: payload.filters.categoryFilter,
-        purchasedCount: payload.purchasedCount,
-        isHotItem: payload.filters.isHotItemFilter
+        search: state.filters.searchFilter,
+        colors: state.filters.colorsFilter,
+        patterns: state.filters.patternsFilter,
+        price: state.filters.priceFilter,
+        skip: state.currentPage * state.productsPerPage,
+        limit: state.productsPerPage,
+        rate: state.sortByRate || undefined,
+        basePrice: state.sortByPrice || undefined,
+        category: state.filters.categoryFilter,
+        purchasedCount: state.sortByPopularity || undefined,
+        isHotItem: state.filters.isHotItemFilter
       }
     );
     yield put(
       setPagesCount(
-        Math.ceil(products.data.getProducts.count / payload.productsPerPage)
+        Math.ceil(products.data.getProducts.count / state.productsPerPage)
       )
     );
     yield put(setAllFilterProducts(products.data.getProducts.items));

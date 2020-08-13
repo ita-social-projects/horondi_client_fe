@@ -19,10 +19,17 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 0 0 2rem',
     width: '100%',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,30%))',
+    gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,32%))',
     gridTemplateRows: 'auto',
     gridGap: '1rem',
-    '@media (max-width:768px)': {
+    '@media (max-width:1024px)': {
+      gridTemplateColumns: 'repeat(auto-fit,minmax(12rem,auto))'
+    },
+    '@media (max-width:850px)': {
+      gridTemplateColumns: 'repeat(auto-fit,minmax(10rem,auto))'
+    },
+    '@media (max-width:520px)': {
+      gridTemplateColumns: 'repeat(auto-fit,minmax(16rem,auto))',
       margin: '1rem 0 0 0'
     }
   },

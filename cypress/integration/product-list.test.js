@@ -1,32 +1,4 @@
 /* eslint-disable cypress/no-assigning-return-values */
-describe('filter test', () => {
-  it('Click to clear filter button', () => {
-    cy.visit('/bags');
-    cy.get('[data-cy="bags"]').should('exist').and('be.visible');
-    cy.get('[data-cy="backpacks"]').should('exist').and('be.visible');
-    cy.get('[data-cy="accessories"]').should('exist').and('be.visible');
-    cy.get('[data-cy="clear_filter_button"]')
-      .should('exist')
-      .and('be.visible')
-      .click();
-  });
-  it('Click to filter button', () => {
-    cy.visit('/bags');
-    cy.get('[data-cy="filter_button"]')
-      .should('exist')
-      .and('be.visible')
-      .click();
-  });
-  it('Filters should be exist', () => {
-    cy.visit('/bags');
-    cy.get('[data-cy="search"]').should('exist').and('be.visible');
-    cy.get('[data-cy="hot_item_filter"]').should('exist').and('be.visible');
-    cy.get('[data-cy="price_filter"]').should('exist').and('be.visible');
-    cy.get('[data-cy="category_filter"]').should('exist').and('be.visible');
-    cy.get('[data-cy="colors_filter"]').should('exist').and('be.visible');
-    cy.get('[data-cy="patterns_filter"]').should('exist').and('be.visible');
-  });
-});
 describe('products tests', () => {
   it('products should be sorted by popularity', () => {
     const products = () =>
@@ -42,7 +14,7 @@ describe('products tests', () => {
     products()
       .its('filtredProducts')
       .should(($products) => {
-        console.log($products[0]);
+        console.log($products);
         expect($products[0].purchasedCount).to.be.equal(43);
         expect($products[$products.length - 1].purchasedCount).to.be.equal(16);
       });
@@ -101,8 +73,8 @@ describe('products tests', () => {
       .its('filtredProducts')
       .should(($products) => {
         console.log($products);
-        expect($products[0].rate).to.be.equal(3.8);
-        expect($products[$products.length - 1].rate).to.be.equal(0);
+        expect($products[0].rate).to.be.equal(4.9);
+        expect($products[$products.length - 1].rate).to.be.equal(3.5);
       });
   });
   it('in store should be 9 products', () => {
@@ -122,7 +94,38 @@ describe('products tests', () => {
     const products = () =>
       cy.window().its('store').invoke('getState').its('Products');
     cy.get('.MuiPagination-ul').should('be.visible');
-    cy.get('.MuiPagination-ul > :nth-child(2) > .MuiButtonBase-root').click();
-    expect(products().its('currentPage')).to.equal(0);
+    cy.get('.MuiPagination-ul > :nth-child(2) > .MuiButtonBase-root').click({
+      force: true
+    });
+    products().its('currentPage').should('be.equal', 0);
+  });
+});
+
+describe('filter test', () => {
+  it('Click to clear filter button', () => {
+    cy.visit('/bags');
+    cy.get('[data-cy="bags"]').should('exist').and('be.visible');
+    cy.get('[data-cy="backpacks"]').should('exist').and('be.visible');
+    cy.get('[data-cy="accessories"]').should('exist').and('be.visible');
+    cy.get('[data-cy="clear_filter_button"]')
+      .should('exist')
+      .and('be.visible')
+      .click();
+  });
+  it('Click to filter button', () => {
+    cy.visit('/bags');
+    cy.get('[data-cy="filter_button"]')
+      .should('exist')
+      .and('be.visible')
+      .click();
+  });
+  it('Filters should be exist', () => {
+    cy.visit('/bags');
+    cy.get('[data-cy="search"]').should('exist').and('be.visible');
+    cy.get('[data-cy="hot_item_filter"]').should('exist').and('be.visible');
+    cy.get('[data-cy="price_filter"]').should('exist').and('be.visible');
+    cy.get('[data-cy="category_filter"]').should('exist').and('be.visible');
+    cy.get('[data-cy="colors_filter"]').should('exist').and('be.visible');
+    cy.get('[data-cy="patterns_filter"]').should('exist').and('be.visible');
   });
 });

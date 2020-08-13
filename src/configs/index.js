@@ -38,11 +38,6 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
-
 export const CONFIRM_EMAIL = [
   {
     lang: 'uk',
@@ -144,54 +139,6 @@ export const errorMessages = [
       email: `Wrong email address, `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match'
-    }
-  }
-];
-
-export const SORT_BY_TEXT = [
-  { lang: 'uk', value: 'Сортувати за:' },
-  { lang: 'eng', value: 'Sort by:' }
-];
-
-export const SORT_BY_SELECT_OPTIONS = [
-  {
-    lang: [
-      {
-        lang: 'uk',
-        value: 'популярністю'
-      },
-      { lang: 'eng', value: 'popularity' }
-    ],
-    optionValue: {
-      name: 'popularity',
-      value: -1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'від дорогих до дешевих' },
-      { lang: 'eng', value: 'price (high to low) ' }
-    ],
-    optionValue: {
-      name: 'sortDesc',
-      value: -1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'від дешевих до дорогих' },
-      { lang: 'eng', value: 'price (low to high) ' }
-    ],
-    optionValue: { name: 'sortAsc', value: 1 }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'рейтингом' },
-      { lang: 'eng', value: 'rate' }
-    ],
-    optionValue: {
-      name: 'rate',
-      value: -1
     }
   }
 ];
@@ -306,3 +253,7 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+export const SORT_ASC = 'sortAsc';
+export const SORT_DESC = 'sortDesc';
+export const RATE = 'rate';
+export const POPULARITY = 'POPULARITY';

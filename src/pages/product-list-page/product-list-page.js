@@ -19,6 +19,7 @@ import {
 } from '../../translations/product-list.translations';
 
 const ProductListPage = ({ category }) => {
+  console.log(category);
   const styles = useStyles();
   const dispatch = useDispatch();
   const {

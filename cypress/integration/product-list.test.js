@@ -14,7 +14,6 @@ describe('products tests', () => {
     products()
       .its('filtredProducts')
       .should(($products) => {
-        console.log($products);
         expect($products[0].purchasedCount).to.be.equal(43);
         expect($products[$products.length - 1].purchasedCount).to.be.equal(16);
       });
@@ -30,13 +29,11 @@ describe('products tests', () => {
     products().its('sortByPopularity').should('be.equal', 0);
     products().its('sortByPrice').should('be.equal', 1);
     products().its('sortByRate').should('be.equal', 0);
-    products().its('filtredProducts').should('have.length', 9);
     products()
       .its('filtredProducts')
       .should(($products) => {
-        console.log($products);
         expect($products[0].basePrice).to.be.equal(500);
-        expect($products[$products.length - 1].basePrice).to.be.equal(900);
+        expect($products[$products.length - 1].basePrice).to.be.equal(950);
       });
   });
   it('products should be sorted by price descending', () => {
@@ -53,8 +50,7 @@ describe('products tests', () => {
     products()
       .its('filtredProducts')
       .should(($products) => {
-        console.log($products);
-        expect($products[0].basePrice).to.be.equal(950);
+        expect($products[0].basePrice).to.be.equal(900);
         expect($products[$products.length - 1].basePrice).to.be.equal(500);
       });
   });
@@ -72,9 +68,8 @@ describe('products tests', () => {
     products()
       .its('filtredProducts')
       .should(($products) => {
-        console.log($products);
         expect($products[0].rate).to.be.equal(4.9);
-        expect($products[$products.length - 1].rate).to.be.equal(3.5);
+        expect($products[$products.length - 1].rate).to.be.equal(0);
       });
   });
   it('in store should be 9 products', () => {
@@ -85,11 +80,27 @@ describe('products tests', () => {
     cy.wait(3000);
     products().its('filtredProducts').should('have.length', 9);
     products().its('productsPerPage').should('be.equal', 9);
+  });
+
+  it('in store should be 18 products', () => {
+    const products = () =>
+      cy.window().its('store').invoke('getState').its('Products');
+    cy.visit('/bags');
     cy.get('[title="eighteen products per page"]').click();
     cy.wait(3000);
-    products().its('productsPerPage').should('be.equal', 18);
     products().its('filtredProducts').should('have.length', 11);
+    products().its('productsPerPage').should('be.equal', 18);
   });
+  it('in store should be 18 products', () => {
+    const products = () =>
+      cy.window().its('store').invoke('getState').its('Products');
+    cy.visit('/bags');
+    cy.get('[title="eighteen products per page"]').click();
+    cy.wait(3000);
+    products().its('filtredProducts').should('have.length', 11);
+    products().its('productsPerPage').should('be.equal', 30);
+  });
+
   it('current page must be added to store', () => {
     const products = () =>
       cy.window().its('store').invoke('getState').its('Products');

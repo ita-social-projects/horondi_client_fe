@@ -122,7 +122,7 @@ export function* handleFilterLoad({
     yield put(setAllFilterProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
-    console.log(e);
+    console.error(e);
     yield call(handleProductsErrors, e);
   }
 }

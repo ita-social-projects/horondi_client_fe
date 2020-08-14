@@ -15,6 +15,7 @@ import AppFooter from '../components/app-footer';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import ThanksPage from '../pages/thanks-page';
 
 const Routes = () => {
   const styles = useStyles();
@@ -32,6 +33,7 @@ const Routes = () => {
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
+          <Route path='/thanks' exact component={ThanksPage} />
           <Route
             path='/confirmation/:token'
             exact

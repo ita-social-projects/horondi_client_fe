@@ -11,7 +11,9 @@ import ProductListItem from './product-list-item';
 import {
   getAllProducts,
   setCurrentPage,
-  getFiltredProducts
+  getFiltredProducts,
+  setCategoryFilter,
+  setPriceFilter
 } from '../../redux/products/products.actions';
 import {
   SHOW_FILTER_BUTTON_TEXT,
@@ -29,12 +31,8 @@ const ProductListPage = ({ category }) => {
     productsPerPage,
     sortByRate,
     sortByPrice,
-    colorsFilter,
-    patternsFilter,
-    isHotItemFilter,
-    categoryFilter,
-    priceFilter,
-    searchFilter,
+    filters,
+    products,
     sortByPopularity
   } = useSelector(
     ({
@@ -44,12 +42,8 @@ const ProductListPage = ({ category }) => {
         pagesCount,
         sortByRate,
         sortByPrice,
-        colorsFilter,
-        patternsFilter,
-        categoryFilter,
-        priceFilter,
-        searchFilter,
-        isHotItemFilter,
+        filters,
+        products,
         sortByPopularity,
         productsPerPage,
         currentPage
@@ -60,17 +54,15 @@ const ProductListPage = ({ category }) => {
       pagesCount,
       sortByRate,
       sortByPrice,
-      colorsFilter,
-      patternsFilter,
-      categoryFilter,
-      priceFilter,
-      isHotItemFilter,
-      searchFilter,
+      filters,
+      products,
       sortByPopularity,
       productsPerPage,
       currentPage
     })
   );
+
+  const { categoryFilter } = filters;
 
   const [mobile, setMobile] = useState();
 
@@ -81,23 +73,9 @@ const ProductListPage = ({ category }) => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
   useEffect(() => {
-    dispatch(
-      getFiltredProducts({
-        isHotItemFilter,
-        patterns: patternsFilter || [],
-        colors: colorsFilter || [],
-        category: categoryFilter || [category._id],
-        price: priceFilter,
-        search: searchFilter,
-        skip: currentPage * productsPerPage,
-        limit: productsPerPage,
-        basePrice: sortByPrice || undefined,
-        rate: sortByRate || undefined,
-        purchasedCount: sortByPopularity || undefined,
-        productsPerPage
-      })
-    );
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,
@@ -108,6 +86,16 @@ const ProductListPage = ({ category }) => {
     category,
     currentPage
   ]);
+
+  useEffect(() => {
+    dispatch(setCategoryFilter([category._id]));
+    dispatch(
+      setPriceFilter([
+        Math.min(...products.map((product) => product.basePrice)),
+        Math.max(...products.map((product) => product.basePrice))
+      ])
+    );
+  }, [category, products, dispatch]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 

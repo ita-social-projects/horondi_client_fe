@@ -14,7 +14,7 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEMS_FILTER
+  SET_HOT_ITEM_FILTER
 } from './products.types';
 
 export const initialState = {
@@ -25,12 +25,14 @@ export const initialState = {
   isHotItem: true,
   sortByRate: 0,
   sortByPopularity: -1,
-  colorsFilter: [],
-  patternsFilter: [],
-  categoryFilter: undefined,
-  priceFilter: [0, 99999],
-  searchFilter: '',
-  isHotItemFilter: false,
+  filters: {
+    colorsFilter: [],
+    patternsFilter: [],
+    categoryFilter: null,
+    priceFilter: [0, 99999],
+    searchFilter: '',
+    isHotItemFilter: false
+  },
   filtredProducts: [],
   products: [],
   pagesCount: 1
@@ -70,32 +72,50 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_PATTERNS_FILTER:
     return {
       ...state,
-      patternsFilter: action.payload
+      filters: {
+        ...state.filters,
+        patternsFilter: action.payload
+      }
     };
   case SET_COLORS_FILTER:
     return {
       ...state,
-      colorsFilter: action.payload
+      filters: {
+        ...state.filters,
+        colorsFilter: action.payload
+      }
     };
   case SET_PRICE_FILTER:
     return {
       ...state,
-      priceFilter: action.payload
+      filters: {
+        ...state.filters,
+        priceFilter: action.payload
+      }
     };
   case SET_CATEGORY_FILTER:
     return {
       ...state,
-      categoryFilter: action.payload
+      filters: {
+        ...state.filters,
+        categoryFilter: action.payload
+      }
     };
-  case SET_HOT_ITEMS_FILTER:
+  case SET_HOT_ITEM_FILTER:
     return {
       ...state,
-      isHotItemFilter: action.payload
+      filters: {
+        ...state.filters,
+        isHotItemFilter: action.payload
+      }
     };
   case SET_SEARCH:
     return {
       ...state,
-      searchFilter: action.payload
+      filters: {
+        ...state.filters,
+        searchFilter: action.payload
+      }
     };
   case SET_SORT_BY_PRICE:
     return {

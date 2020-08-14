@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -12,22 +12,15 @@ const PriceFilter = () => {
 
   const styles = useStyles();
 
-  const { products, priceFilter, language } = useSelector(
-    ({ Products: { products, priceFilter }, Language: { language } }) => ({
+  const { products, filters, language } = useSelector(
+    ({ Products: { products, filters }, Language: { language } }) => ({
       products,
-      priceFilter,
+      filters,
       language
     })
   );
 
-  useEffect(() => {
-    dispatch(
-      setPriceFilter([
-        Math.min(...products.map((product) => product.basePrice)),
-        Math.max(...products.map((product) => product.basePrice))
-      ])
-    );
-  }, [products]);
+  const { priceFilter } = filters;
 
   const handlePriceChange = (event, newValue) => {
     dispatch(setPriceFilter(newValue));
@@ -36,7 +29,7 @@ const PriceFilter = () => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language]}:
+        {PRICE_TEXT[language].value}:
       </Typography>
       <Slider
         className={styles.slider}

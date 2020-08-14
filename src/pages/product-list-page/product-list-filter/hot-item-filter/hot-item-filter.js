@@ -9,12 +9,14 @@ import { setHotItemFilter } from '../../../../redux/products/products.actions';
 const HotItemFilter = () => {
   const dispatch = useDispatch();
 
-  const { isHotItemFilter, language } = useSelector(
-    ({ Products: { isHotItemFilter }, Language: { language } }) => ({
-      isHotItemFilter,
+  const { filters, language } = useSelector(
+    ({ Products: { filters }, Language: { language } }) => ({
+      filters,
       language
     })
   );
+
+  const { isHotItemFilter } = filters;
 
   const handleChange = (event) => {
     dispatch(setHotItemFilter(event.target.checked));
@@ -23,7 +25,7 @@ const HotItemFilter = () => {
   return (
     <FormGroup data-cy='hot_item_filter'>
       <Typography id='isHot' gutterBottom>
-        {IS_HOT_TEXT[language]}:
+        {IS_HOT_TEXT[language].value}:
         <Switch
           checked={isHotItemFilter}
           onChange={handleChange}

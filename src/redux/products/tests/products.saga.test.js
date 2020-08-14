@@ -86,12 +86,7 @@ describe('get products by filter saga', () => {
       }
     };
 
-    return expectSaga(handleFilterLoad, {
-      payload: {
-        colors: ['red'],
-        search: 'Rol'
-      }
-    })
+    return expectSaga(handleFilterLoad, {})
       .provide([[matchers.call.fn(getItems), productsExample]])
       .put(setLoading(true))
       .put(setAllFilterProducts(productsExample.data.getProducts.items))

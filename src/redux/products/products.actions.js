@@ -16,7 +16,7 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEMS_FILTER
+  SET_HOT_ITEM_FILTER
 } from './products.types';
 
 export const setAllFilterProducts = (payload) => ({
@@ -68,7 +68,7 @@ export const setColorsFilter = (payload) => ({
   payload
 });
 export const setHotItemFilter = (payload) => ({
-  type: SET_HOT_ITEMS_FILTER,
+  type: SET_HOT_ITEM_FILTER,
   payload
 });
 export const setPatternsFilter = (payload) => ({

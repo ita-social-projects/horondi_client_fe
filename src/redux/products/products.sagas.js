@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   setAllProducts,
@@ -10,24 +10,10 @@ import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_ALL_PRODUCTS, GET_FILTRED_PRODUCTS } from './products.types';
 
-export function* handleFilterLoad({
-  payload = {
-    search: '',
-    colors: [],
-    patterns: [],
-    price: [0, 99999],
-    isHotItemFilter: false,
-    skip: 1,
-    limit: 90,
-    rate: undefined,
-    basePrice: undefined,
-    purchasedCount: undefined,
-    category: [],
-    productsPerPage: 9
-  }
-}) {
+export function* handleFilterLoad() {
   try {
     yield put(setLoading(true));
+    const state = yield select((state) => state.Products);
     const products = yield call(
       getItems,
       `query(
@@ -101,28 +87,27 @@ export function* handleFilterLoad({
             }
           }`,
       {
-        search: payload.search,
-        colors: payload.colors,
-        patterns: payload.patterns,
-        price: payload.price,
-        skip: payload.skip,
-        limit: payload.limit,
-        rate: payload.rate,
-        basePrice: payload.basePrice,
-        category: payload.category,
-        purchasedCount: payload.purchasedCount,
-        isHotItem: payload.isHotItemFilter
+        search: state.filters.searchFilter,
+        colors: state.filters.colorsFilter,
+        patterns: state.filters.patternsFilter,
+        price: state.filters.priceFilter,
+        skip: state.currentPage * state.productsPerPage,
+        limit: state.productsPerPage,
+        rate: state.sortByRate || undefined,
+        basePrice: state.sortByPrice || undefined,
+        category: state.filters.categoryFilter,
+        purchasedCount: state.sortByPopularity || undefined,
+        isHotItem: state.filters.isHotItemFilter
       }
     );
     yield put(
       setPagesCount(
-        Math.ceil(products.data.getProducts.count / payload.productsPerPage)
+        Math.ceil(products.data.getProducts.count / state.productsPerPage)
       )
     );
     yield put(setAllFilterProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
-    console.error(e);
     yield call(handleProductsErrors, e);
   }
 }
@@ -135,32 +120,17 @@ export function* handleGetAllProducts() {
       `query{
         getProducts {
       items{
-            name {
-              lang
-              value
-            }
-            rate
-            basePrice
             colors {
               name {
-                lang
                 value
               }
               simpleName {
-                lang
                 value
               }
             }
             basePrice
             pattern {
-              lang
               value
-            }
-            rate
-            images{
-                primary {
-                    medium
-                }
             }
             category {
               _id
@@ -170,14 +140,13 @@ export function* handleGetAllProducts() {
               isMain
             }
           }
-          }
+        }
       }`
     );
 
     yield put(setAllProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
-    console.error(e);
     yield call(handleProductsErrors, e);
   }
 }

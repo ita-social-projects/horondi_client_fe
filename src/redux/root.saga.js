@@ -4,6 +4,7 @@ import newsSaga from './news/news.sagas';
 import categoriesSaga from './categories/categories.sagas';
 import productsSaga from './products/products.sagas';
 import wishlistSaga from './wishlist/wishlist.sagas';
+import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
 
 export default function* rootSaga() {
@@ -12,6 +13,7 @@ export default function* rootSaga() {
     categoriesSaga(),
     userSaga(),
     wishlistSaga(),
-    productsSaga()
+    productsSaga(),
+    cartSaga()
   ]);
 }

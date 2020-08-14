@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     right: '6%',
     bottom: '11%',
     width: '15%',
-    height: '40%',
+    height: '65%',
     border: 'solid 1px black',
     background: 'white',
     zIndex: '3'
@@ -34,23 +34,13 @@ export const useStyles = makeStyles((theme) => ({
     margin: '3px 0 2px 0',
     fontSize: '1.3rem'
   },
+  mailTitle: {
+    marginBottom: '15%',
+    fontSize: '1.3rem'
+  },
   logo: {
     height: '15px',
     width: '15px'
-  },
-  messengerGmail: {
-    display: 'flex',
-    width: '100%',
-    height: '50%',
-    background: 'yellow',
-    border: '1px solid black'
-  },
-  messengerFacebook: {
-    display: 'flex',
-    width: '100%',
-    height: '50%',
-    background: 'yellow',
-    border: '1px solid black'
   },
   tabs: {
     display: 'flex',
@@ -60,31 +50,58 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '30px'
   },
   facebookActive: {
-    background: 'yellow',
+    background: '#efefef',
     height: '45px',
-    width: '90px',
+    width: '75%',
     border: '1px solid black',
     borderBottom: '0'
   },
   gmailActive: {
-    background: 'yellow',
+    background: '#efefef',
     height: '45px',
-    width: '90px',
+    width: '75%',
     border: '1px solid black',
     borderBottom: '0'
   },
   gmailDisactive: {
     background: 'white',
     height: '45px',
-    width: '20px',
+    width: '25%',
     border: '1px solid black',
     borderBottom: '0'
   },
   facebookDisactive: {
     background: 'white',
     height: '45px',
-    width: '20px',
+    width: '25%',
     border: '1px solid black',
     borderBottom: '0'
+  },
+  formField: {
+    background: '#efefef',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '75%'
+  },
+  btnSend: {
+    marginBottom: '35px',
+    width: '70%',
+    fontFamily: 'Montserrat',
+    fontSize: '16px',
+    lineHeight: '20px',
+    height: '12%',
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    color: theme.palette.button.normal.color,
+    textTransform: 'capitalize',
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor
+    }
+  },
+  dataInput: {
+    marginBottom: '15px',
+    height: '100%'
   }
 }));

@@ -1,58 +1,66 @@
 import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import { useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
 import { useStyles } from './chat.style';
+import { CHAT } from '../../translations/chat.translation';
 import kyivstar from '../../images/kyivstar.png';
 import vodafone from '../../images/vodafone.png';
 
 export const Chat = () => {
   const style = useStyles();
-  const [visible, setBlock] = useState(false);
-  const [mailVisible, setMailVisible] = useState(false);
-  const [facebookVisible, setFacebookVisible] = useState(false);
-  // const language =
+  const [visible, setBlock] = useState(true);
+  const [mailVisible, setMailVisible] = useState(true);
+  const [facebookVisible, setFacebookVisible] = useState(true);
+  const language = useSelector((state) => state.Language.language);
 
   const activeMessenger = () => {
-    if (!facebookVisible && !mailVisible) {
+    if (facebookVisible && mailVisible) {
       return (
         <div className={style.formField}>
-          <span>Виберіть зручний спосіб для контакту</span>
+          <span>{CHAT[language].simpleChoice}.</span>
         </div>
       );
     }
     if (facebookVisible) {
       return (
-        <div className={style.formField}>
+        <div className={style.formFieldActive}>
           <Button className={style.btnSend}>
-            <a href='https://www.facebook.com/Horondi'>
-              <span>Facebook</span>
+            <a
+              href='https://www.facebook.com/Horondi'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Facebook
             </a>
           </Button>
         </div>
       );
     }
     return (
-      <div className={style.formField}>
-        <span className={style.mailTitle}>Напишіть нам листа</span>
+      <div className={style.formFieldActive}>
+        <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
         <TextField
           className={style.dataInput}
           id='outlined-basic'
-          label='Імя'
+          label={CHAT[language].name}
           variant='outlined'
         />
         <TextField
           className={style.dataInput}
           id='outlined-basic'
-          label='Електронна пошта'
+          label={CHAT[language].email}
           variant='outlined'
         />
         <TextField
           className={style.dataInput}
           id='outlined-basic'
-          label='Текст повідемлення'
+          label={CHAT[language].msgText}
           variant='outlined'
         />
-        <Button className={style.btnSend}>Відправити</Button>
+        <Button className={style.btnSend}>{CHAT[language].sendBtn}</Button>
       </div>
     );
   };
@@ -61,7 +69,9 @@ export const Chat = () => {
     <div>
       <div className={visible ? style.chatForm : style.disable}>
         <div className={style.contacts}>
-          <span className={style.contactsTitle}>Наші контакти:</span>
+          <span className={style.contactsTitle}>
+            {CHAT[language].ourContacts}
+          </span>
           <span>
             <img className={style.logo} src={kyivstar} alt='kyivstar' />{' '}
             +38-067-777-55-33
@@ -82,7 +92,7 @@ export const Chat = () => {
               setMailVisible(false);
             }}
           >
-            facebook
+            <FacebookIcon style={{ fontSize: 40 }} />
           </div>
 
           <div
@@ -92,7 +102,7 @@ export const Chat = () => {
               setFacebookVisible(false);
             }}
           >
-            mail
+            <MailOutlineIcon style={{ fontSize: 40 }} />
           </div>
         </div>
         {activeMessenger()}

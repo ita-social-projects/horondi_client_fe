@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     right: '6%',
     bottom: '11%',
-    width: '15%',
+    width: '20%',
     height: '65%',
     border: 'solid 1px black',
     background: 'white',
@@ -35,7 +35,8 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.3rem'
   },
   mailTitle: {
-    marginBottom: '15%',
+    marginTop: '5%',
+    marginBottom: '6%',
     fontSize: '1.3rem'
   },
   logo: {
@@ -50,6 +51,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '30px'
   },
   facebookActive: {
+    display: 'flex',
+    justifyContent: 'center',
     background: '#efefef',
     height: '45px',
     width: '75%',
@@ -57,6 +60,8 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '0'
   },
   gmailActive: {
+    display: 'flex',
+    justifyContent: 'center',
     background: '#efefef',
     height: '45px',
     width: '75%',
@@ -64,20 +69,34 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '0'
   },
   gmailDisactive: {
+    display: 'flex',
+    justifyContent: 'center',
     background: 'white',
     height: '45px',
     width: '25%',
-    border: '1px solid black',
-    borderBottom: '0'
+    border: '1px solid black'
+    // borderBottom: '0',
   },
   facebookDisactive: {
+    display: 'flex',
+    justifyContent: 'center',
     background: 'white',
     height: '45px',
     width: '25%',
-    border: '1px solid black',
-    borderBottom: '0'
+    border: '1px solid black'
+    // borderBottom: '0'
   },
   formField: {
+    border: '1px solid black',
+    background: '#efefef',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '75%'
+  },
+  formFieldActive: {
     background: '#efefef',
     display: 'flex',
     flexDirection: 'column',
@@ -87,21 +106,44 @@ export const useStyles = makeStyles((theme) => ({
     height: '75%'
   },
   btnSend: {
-    marginBottom: '35px',
-    width: '70%',
-    fontFamily: 'Montserrat',
-    fontSize: '16px',
-    lineHeight: '20px',
-    height: '12%',
-    backgroundColor: theme.palette.button.normal.backgroundColor,
+    // fontFamily: 'Montserrat',
+    // fontSize: '16px',
+    // lineHeight: '20px',
+    // height: '12%',
+    // backgroundColor: theme.palette.button.normal.backgroundColor,
+    // color: theme.palette.button.normal.color,
+    // textTransform: 'capitalize',
+    // '&:hover': {
+    //   backgroundColor: theme.palette.button.hover.backgroundColor
+    // }
+    // marginBottom: '35px',
+    // width: '77%',
+    background: theme.palette.button.normal.backgroundColor,
+    borderRadius: '5px',
+    fontSize: '1.5em',
+    padding: 10,
     color: theme.palette.button.normal.color,
-    textTransform: 'capitalize',
+    '& a': {
+      color: 'inherit'
+    },
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    },
+    '@media (max-width: 768px)': {
+      fontSize: '1em',
+      padding: 5
     }
   },
   dataInput: {
     marginBottom: '15px',
     height: '100%'
+  },
+  icons: {
+    width: '40px',
+    height: '40px'
+  },
+  link: {
+    color: 'white'
   }
 }));

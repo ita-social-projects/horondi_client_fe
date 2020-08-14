@@ -3,12 +3,12 @@ import { push } from 'connected-react-router';
 import {
   setAllProducts,
   setLoading,
-  setAllFilterProducts,
+  setAllFilterData,
   setPagesCount
 } from './products.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
-import { GET_ALL_PRODUCTS, GET_FILTRED_PRODUCTS } from './products.types';
+import { GET_ALL_FILTERS, GET_FILTRED_PRODUCTS } from './products.types';
 
 export function* handleFilterLoad() {
   try {
@@ -105,21 +105,21 @@ export function* handleFilterLoad() {
         Math.ceil(products.data.getProducts.count / state.productsPerPage)
       )
     );
-    yield put(setAllFilterProducts(products.data.getProducts.items));
+    yield put(setAllProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
 }
 
-export function* handleGetAllProducts() {
+export function* handleGetFilters() {
   try {
     yield put(setLoading(true));
-    const products = yield call(
+    const filter = yield call(
       getItems,
       `query{
         getProducts {
-      items{
+          items{
             colors {
               name {
                 value
@@ -144,7 +144,7 @@ export function* handleGetAllProducts() {
       }`
     );
 
-    yield put(setAllProducts(products.data.getProducts.items));
+    yield put(setAllFilterData(filter.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
@@ -158,6 +158,6 @@ export function* handleProductsErrors(e) {
 }
 
 export default function* productsSaga() {
-  yield takeEvery(GET_ALL_PRODUCTS, handleGetAllProducts);
+  yield takeEvery(GET_ALL_FILTERS, handleGetFilters);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilterLoad);
 }

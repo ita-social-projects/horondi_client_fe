@@ -13,9 +13,9 @@ const CategoryFilter = ({ selectedCategory }) => {
 
   const styles = useStyles();
 
-  const { products, filters, language } = useSelector(
-    ({ Products: { products, filters }, Language: { language } }) => ({
-      products,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
       filters,
       language
     })
@@ -24,7 +24,7 @@ const CategoryFilter = ({ selectedCategory }) => {
   const { categoryFilter } = filters;
 
   const categories = [
-    ...new Set(products.map((product) => JSON.stringify(product.category)))
+    ...new Set(filterData.map((product) => JSON.stringify(product.category)))
   ].map(JSON.parse);
 
   const handleCategoryChange = (event) => {

@@ -1,5 +1,6 @@
 import {
-  setAllFilterProducts,
+  setAllFilterData,
+  setAllProducts,
   setCategoryFilter,
   setColorsFilter,
   setPatternsFilter,
@@ -15,7 +16,8 @@ import {
   setCurrentPage
 } from '../products.actions';
 import {
-  SET_ALL_FILTER_PRODUCTS,
+  SET_ALL_FILTER_DATA,
+  SET_ALL_PRODUCTS,
   GET_FILTRED_PRODUCTS,
   SET_LOADING,
   SET_CATEGORY_FILTER,
@@ -33,13 +35,22 @@ import {
 import productsExample from './products.mocks';
 
 describe('Filter actions test', () => {
-  it('should set all filtred products to payload property', () => {
+  it('should set all products to payload property', () => {
     const result = {
-      type: SET_ALL_FILTER_PRODUCTS,
+      type: SET_ALL_PRODUCTS,
       payload: productsExample
     };
 
-    expect(setAllFilterProducts(productsExample)).toEqual(result);
+    expect(setAllProducts(productsExample)).toEqual(result);
+  });
+
+  it('should set all filter data to payload property', () => {
+    const result = {
+      type: SET_ALL_FILTER_DATA,
+      payload: productsExample
+    };
+
+    expect(setAllFilterData(productsExample)).toEqual(result);
   });
 
   it('should set hot items filter to payload property', () => {

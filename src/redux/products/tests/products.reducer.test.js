@@ -1,6 +1,6 @@
 import productReducer, { initialState } from '../products.reducer';
 import {
-  setAllFilterProducts,
+  setAllProducts,
   setCategoryFilter,
   setColorsFilter,
   setPatternsFilter,
@@ -25,12 +25,12 @@ describe('Product reducer test', () => {
     const state = {
       ...initialState,
       loading: true,
-      filtredProducts: productsExample
+      products: productsExample
     };
 
-    expect(
-      productReducer(state, setAllFilterProducts(productsExample))
-    ).toEqual(state);
+    expect(productReducer(state, setAllProducts(productsExample))).toEqual(
+      state
+    );
   });
 
   it('should return state with hot item true', () => {

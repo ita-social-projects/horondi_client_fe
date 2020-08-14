@@ -13,7 +13,7 @@ export default function* rootSaga() {
     categoriesSaga(),
     userSaga(),
     wishlistSaga(),
-    productsSaga()
-    cartSaga(),
+    productsSaga(),
+    cartSaga()
   ]);
 }

@@ -12,9 +12,9 @@ const PriceFilter = () => {
 
   const styles = useStyles();
 
-  const { products, filters, language } = useSelector(
-    ({ Products: { products, filters }, Language: { language } }) => ({
-      products,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
       filters,
       language
     })
@@ -35,13 +35,13 @@ const PriceFilter = () => {
         className={styles.slider}
         value={priceFilter}
         defaultValue={[
-          Math.min(...products.map((product) => product.basePrice)),
-          Math.max(...products.map((product) => product.basePrice))
+          Math.min(...filterData.map((product) => product.basePrice)),
+          Math.max(...filterData.map((product) => product.basePrice))
         ]}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
-        min={Math.min(...products.map((product) => product.basePrice))}
-        max={Math.max(...products.map((product) => product.basePrice))}
+        min={Math.min(...filterData.map((product) => product.basePrice))}
+        max={Math.max(...filterData.map((product) => product.basePrice))}
         aria-labelledby='range-slider'
       />
     </FormGroup>

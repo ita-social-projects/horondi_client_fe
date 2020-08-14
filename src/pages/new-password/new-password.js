@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
 import { useStyles } from './new-password.styles';
-import { formRegExp, SHOW_AFTER } from '../../configs';
+import { formRegExp } from '../../configs';
 import {
   errorMessages,
   CHANGE_PASSWORD,
@@ -11,9 +10,8 @@ import {
   NEW_PASSWORD_SUCCESS_MESSAGE
 } from '../../translations/user.translations';
 import { endAdornment } from '../../utils/eyeToggle';
-import resetPassword from './resetPassword';
 import Loader from '../../components/loader';
-import checkIfTokenIsValid from '../../utils/checkIfTokenIsValid';
+import { resetPassword , checkIfTokenValid } from '../../redux/user/user.actions';
 
 const NewPassword = ({ token }) => {
   // VALIDATORS
@@ -25,37 +23,25 @@ const NewPassword = ({ token }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
   // HOOKS
-  const { language } = useSelector((state) => ({
-    language: state.Language.language
-  }));
+  const { language, passwordReset, error, loading } = useSelector(
+    ({ Language, User }) => ({
+      language: Language.language,
+      passwordReset: User.passwordReset,
+      loading: User.userLoading,
+      error: User.error
+    })
+  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let isSubscribed = true;
-    setLoading(true);
-    checkIfTokenIsValid(token)
-      .catch(() => dispatch(push('/error-page')))
-      .finally(() => {
-        if (isSubscribed) {
-          setLoading(false);
-        }
-      });
-    return () => {
-      isSubscribed = false;
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  // LOADING & ERRORS
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+    dispatch(checkIfTokenValid({ token }));
+  }, [dispatch, token]);
 
   // VALUES
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [isReset, setIsReset] = useState(false);
 
   // HANDLERS
   const handlePasswordChange = (event) => {
@@ -81,18 +67,7 @@ const NewPassword = ({ token }) => {
   const handleRecovery = async () => {
     setShouldValidate(true);
     if (passwordValid && confirmMatches) {
-      setLoading(true);
-      try {
-        await resetPassword(password, token);
-        setIsReset(true);
-        setTimeout(() => {
-          dispatch(push('/login'));
-        }, SHOW_AFTER);
-      } catch (e) {
-        setError(e.message.replace('GraphQL error: ', ''));
-      } finally {
-        setLoading(false);
-      }
+      dispatch(resetPassword({ password, token }));
     }
   };
 
@@ -113,7 +88,7 @@ const NewPassword = ({ token }) => {
   return (
     <div className={styles.newPassBackground}>
       <div className={styles.newPassForm}>
-        {isReset ? (
+        {passwordReset ? (
           successWindow
         ) : loading ? (
           <Loader />

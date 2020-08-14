@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
-import { formRegExp, SHOW_AFTER } from '../../configs';
+import { formRegExp } from '../../configs';
 import {
   errorMessages,
   RECOVERY_SUCCESS_MESSAGE,
@@ -10,26 +9,32 @@ import {
   RECOVERY_ERROR_MESSAGE
 } from '../../translations/user.translations';
 import { useStyles } from './recovery.styles';
-import recoverUser from './recoverUser';
 import { Loader } from '../../components/loader/loader';
+import { recoverUser, resetState } from '../../redux/user/user.actions';
 
 const Recovery = () => {
   const [email, setEmail] = useState('');
   const [emailValidated, setEmailValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [recoveryError, setRecoveryError] = useState('');
-  const [hasRecovered, setHasRecovered] = useState(false);
 
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { language, loading, error, userRecovered } = useSelector(
+    ({ Language, User }) => ({
+      language: Language.language,
+      loading: User.userLoading,
+      error: User.error,
+      userRecovered: User.userRecovered
+    })
+  );
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(resetState());
+  }, [dispatch]);
+
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
-    setRecoveryError('');
+    dispatch(resetState());
     setEmail(input);
     if (input.match(regExp)) {
       setValid(true);
@@ -41,18 +46,7 @@ const Recovery = () => {
   const handleRecovery = async () => {
     setShouldValidate(true);
     if (emailValidated) {
-      setLoading(true);
-      try {
-        await recoverUser(email, language);
-        setHasRecovered(true);
-        setTimeout(() => {
-          dispatch(push('/login'));
-        }, SHOW_AFTER);
-      } catch (e) {
-        setRecoveryError(e.message.replace('GraphQL error: ', ''));
-      } finally {
-        setLoading(false);
-      }
+      dispatch(recoverUser({ email, language }));
     }
   };
 
@@ -72,7 +66,7 @@ const Recovery = () => {
   return (
     <div className={styles.recoveryBackground}>
       <div className={styles.recoveryForm}>
-        {hasRecovered ? (
+        {userRecovered ? (
           successWindow
         ) : loading ? (
           <Loader />
@@ -83,7 +77,7 @@ const Recovery = () => {
               color='secondary'
               label={RECOVERY_MESSAGES[language].label}
               className={`${styles.emailInput} ${
-                !recoveryError ? styles.helperEmail : null
+                !error ? styles.helperEmail : null
               }`}
               fullWidth
               variant='outlined'
@@ -91,15 +85,14 @@ const Recovery = () => {
               helperText={
                 shouldValidate && !emailValidated && email
                   ? errorMessages[language].value.email
-                  : RECOVERY_ERROR_MESSAGE[recoveryError]
-                    ? RECOVERY_ERROR_MESSAGE[recoveryError][language].value
-                    : null
+                  : RECOVERY_ERROR_MESSAGE[error]
+                    ? RECOVERY_ERROR_MESSAGE[error][language].value
+                    : error
+                      ? RECOVERY_ERROR_MESSAGE.EMAIL_ERROR[language].value
+                      : null
               }
               value={email}
-              error={
-                (shouldValidate && !emailValidated && !!email) ||
-                !!recoveryError
-              }
+              error={(shouldValidate && !emailValidated && !!email) || !!error}
               required
               onChange={(e) =>
                 handleChange(e, setEmailValidated, formRegExp.email)

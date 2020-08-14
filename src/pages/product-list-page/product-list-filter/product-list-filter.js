@@ -34,10 +34,10 @@ const ProductListFilter = ({ selectedCategory }) => {
 
   const styles = useStyles();
 
-  const { products, filters, language } = useSelector(
+  const { filterData, filters, language } = useSelector(
     ({
       Products: {
-        products,
+        filterData,
         currentPage,
         productsPerPage,
         sortByPrice,
@@ -47,7 +47,7 @@ const ProductListFilter = ({ selectedCategory }) => {
       },
       Language: { language }
     }) => ({
-      products,
+      filterData,
       currentPage,
       productsPerPage,
       sortByPrice,
@@ -76,8 +76,8 @@ const ProductListFilter = ({ selectedCategory }) => {
     dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
-        Math.min(...products.map((product) => product.basePrice)),
-        Math.max(...products.map((product) => product.basePrice))
+        Math.min(...filterData.map((product) => product.basePrice)),
+        Math.max(...filterData.map((product) => product.basePrice))
       ])
     );
     dispatch(getFiltredProducts());

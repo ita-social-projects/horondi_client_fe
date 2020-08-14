@@ -13,9 +13,9 @@ const ColorsFilter = () => {
 
   const styles = useStyles();
 
-  const { products, filters, language } = useSelector(
-    ({ Products: { products, filters }, Language: { language } }) => ({
-      products,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
       filters,
       language
     })
@@ -25,7 +25,7 @@ const ColorsFilter = () => {
 
   const colors = [
     ...new Set(
-      products.map((product) => JSON.stringify(product.colors[0].simpleName))
+      filterData.map((product) => JSON.stringify(product.colors[0].simpleName))
     )
   ].map(JSON.parse);
 

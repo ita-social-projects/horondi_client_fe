@@ -9,7 +9,7 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
 import {
-  getAllProducts,
+  getAllFilters,
   setCurrentPage,
   getFiltredProducts,
   setCategoryFilter,
@@ -25,37 +25,37 @@ const ProductListPage = ({ category }) => {
   const dispatch = useDispatch();
   const {
     language,
-    filtredProducts,
+    products,
     pagesCount,
     currentPage,
     productsPerPage,
     sortByRate,
     sortByPrice,
     filters,
-    products,
+    filterData,
     sortByPopularity
   } = useSelector(
     ({
       Language: { language },
       Products: {
-        filtredProducts,
+        products,
         pagesCount,
         sortByRate,
         sortByPrice,
         filters,
-        products,
+        filterData,
         sortByPopularity,
         productsPerPage,
         currentPage
       }
     }) => ({
       language,
-      filtredProducts,
+      products,
       pagesCount,
       sortByRate,
       sortByPrice,
       filters,
-      products,
+      filterData,
       sortByPopularity,
       productsPerPage,
       currentPage
@@ -71,7 +71,7 @@ const ProductListPage = ({ category }) => {
   }, []);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllFilters());
   }, [dispatch]);
 
   useEffect(() => {
@@ -91,18 +91,18 @@ const ProductListPage = ({ category }) => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(
       setPriceFilter([
-        Math.min(...products.map((product) => product.basePrice)),
-        Math.max(...products.map((product) => product.basePrice))
+        Math.min(...filterData.map((product) => product.basePrice)),
+        Math.max(...filterData.map((product) => product.basePrice))
       ])
     );
-  }, [category, products, dispatch]);
+  }, [category, filterData, dispatch]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 
   const handleFilterShow = () => setMobile(!mobile);
 
   const categoryText = category.name[language].value.toUpperCase();
-  const itemsToShow = filtredProducts.map((product, index) => (
+  const itemsToShow = products.map((product, index) => (
     <ProductListItem key={index} product={product} category={categoryText} />
   ));
   return (

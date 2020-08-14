@@ -1,8 +1,8 @@
 import {
   SET_ALL_PRODUCTS,
-  GET_ALL_PRODUCTS,
+  GET_ALL_FILTERS,
   SET_CURRENT_PAGE,
-  SET_ALL_FILTER_PRODUCTS,
+  SET_ALL_FILTER_DATA,
   SET_PRODUCTS_PER_PAGE,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_DATE,
@@ -19,8 +19,8 @@ import {
   SET_HOT_ITEM_FILTER
 } from './products.types';
 
-export const setAllFilterProducts = (payload) => ({
-  type: SET_ALL_FILTER_PRODUCTS,
+export const setAllFilterData = (payload) => ({
+  type: SET_ALL_FILTER_DATA,
   payload
 });
 export const setCurrentPage = (payload) => ({
@@ -87,6 +87,6 @@ export const setAllProducts = (payload) => ({
   type: SET_ALL_PRODUCTS,
   payload
 });
-export const getAllProducts = () => ({
-  type: GET_ALL_PRODUCTS
+export const getAllFilters = () => ({
+  type: GET_ALL_FILTERS
 });

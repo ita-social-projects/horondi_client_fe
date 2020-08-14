@@ -1,7 +1,7 @@
 import {
   SET_CURRENT_PAGE,
   SET_ALL_PRODUCTS,
-  SET_ALL_FILTER_PRODUCTS,
+  SET_ALL_FILTER_DATA,
   SET_PRODUCTS_PER_PAGE,
   SET_SORT_BY_PRICE,
   SET_SORT_BY_DATE,
@@ -22,7 +22,6 @@ export const initialState = {
   currentPage: 0,
   productsPerPage: 9,
   sortByPrice: 0,
-  isHotItem: true,
   sortByRate: 0,
   sortByPopularity: -1,
   filters: {
@@ -33,7 +32,7 @@ export const initialState = {
     searchFilter: '',
     isHotItemFilter: false
   },
-  filtredProducts: [],
+  filterData: [],
   products: [],
   pagesCount: 1
 };
@@ -54,10 +53,10 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       products: action.payload
     };
-  case SET_ALL_FILTER_PRODUCTS:
+  case SET_ALL_FILTER_DATA:
     return {
       ...state,
-      filtredProducts: action.payload
+      filterData: action.payload
     };
   case SET_CURRENT_PAGE:
     return {

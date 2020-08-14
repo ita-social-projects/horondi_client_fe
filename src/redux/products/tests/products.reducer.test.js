@@ -1,6 +1,6 @@
 import productReducer, { initialState } from '../products.reducer';
 import {
-  setAllFilterProducts,
+  setAllProducts,
   setCategoryFilter,
   setColorsFilter,
   setPatternsFilter,
@@ -12,7 +12,8 @@ import {
   setCurrentPage,
   setSortByPrice,
   setSortByRate,
-  setSortByPopularity
+  setSortByPopularity,
+  setProductsPerPage
 } from '../products.actions';
 import productsExample from './products.mocks';
 
@@ -25,12 +26,12 @@ describe('Product reducer test', () => {
     const state = {
       ...initialState,
       loading: true,
-      filtredProducts: productsExample
+      products: productsExample
     };
 
-    expect(
-      productReducer(state, setAllFilterProducts(productsExample))
-    ).toEqual(state);
+    expect(productReducer(state, setAllProducts(productsExample))).toEqual(
+      state
+    );
   });
 
   it('should return state with hot item true', () => {
@@ -174,5 +175,12 @@ describe('Product reducer test', () => {
     expect(productReducer(initialState, setSortByPopularity(-1))).toEqual(
       state
     );
+  });
+  it('products per page in store should be set to 18', () => {
+    const state = {
+      ...initialState,
+      productsPerPage: 18
+    };
+    expect(productReducer(initialState, setProductsPerPage(18))).toEqual(state);
   });
 });

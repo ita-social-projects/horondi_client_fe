@@ -13,9 +13,9 @@ const PatternsFilter = () => {
 
   const styles = useStyles();
 
-  const { products, filters, language } = useSelector(
-    ({ Products: { products, filters }, Language: { language } }) => ({
-      products,
+  const { filterData, filters, language } = useSelector(
+    ({ Products: { filterData, filters }, Language: { language } }) => ({
+      filterData,
       filters,
       language
     })
@@ -24,7 +24,7 @@ const PatternsFilter = () => {
   const { patternsFilter } = filters;
 
   const patterns = [
-    ...new Set(products.map((product) => JSON.stringify(product.pattern)))
+    ...new Set(filterData.map((product) => JSON.stringify(product.pattern)))
   ].map(JSON.parse);
 
   const handlePatternChange = (event) => {

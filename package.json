@@ -100,6 +100,7 @@
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
     "jest-dom": "^4.0.0",
+    "jest-runner-eslint": "^0.10.0",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",

@@ -63,7 +63,7 @@ const Login = () => {
   const handleLogin = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      dispatch(loginUser(user));
+      dispatch(loginUser({ user }));
     }
   };
 

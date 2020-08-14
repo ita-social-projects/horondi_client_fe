@@ -5,7 +5,8 @@ import {
   SET_USER_LOADING,
   STATE_RESET,
   SET_USER_RECOVERED,
-  SET_PASSWORD_RESET
+  SET_PASSWORD_RESET,
+  SET_USER_REGISTERED
 } from './user.types';
 
 export const initialState = {
@@ -13,7 +14,8 @@ export const initialState = {
   error: null,
   userLoading: false,
   userRecovered: false,
-  passwordReset: false
+  passwordReset: false,
+  userRegistered: false
 };
 
 const userReducer = (state = initialState, action = {}) => {
@@ -46,7 +48,8 @@ const userReducer = (state = initialState, action = {}) => {
       error: initialState.error,
       userLoading: initialState.userLoading,
       userRecovered: initialState.userRecovered,
-      passwordReset: initialState.passwordReset
+      passwordReset: initialState.passwordReset,
+      userRegistered: initialState.userRegistered
     };
   case SET_USER_RECOVERED:
     return {
@@ -59,6 +62,13 @@ const userReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       passwordReset: action.payload,
+      error: false,
+      userLoading: false
+    };
+  case SET_USER_REGISTERED:
+    return {
+      ...state,
+      userRegistered: action.payload,
       error: false,
       userLoading: false
     };

@@ -6,26 +6,25 @@ import {
   setUserLoading,
   resetState,
   setUserRecovered,
-  setPasswordReset
+  setPasswordReset,
+  setUserRegistered
 } from './user.actions';
 import {
   LOGIN_USER,
   CONFIRM_USER,
   RECOVER_USER,
   PASSWORD_RESET,
-  CHECK_IF_TOKEN_VALID
+  CHECK_IF_TOKEN_VALID,
+  REGISTER_USER
 } from './user.types';
 import { setItems } from '../../utils/client';
 import { SHOW_AFTER } from '../../configs/index';
 
-export const loginUser = (payload) => {
+export const loginUser = (data) => {
   const query = ` 
-  mutation {
+  mutation mutation($user: LoginInput!){
   loginUser(
-    loginInput: {
-      email: "${payload.email}"
-      password: "${payload.password}"
-    }
+    loginInput: $user
   ) {
     purchasedProducts
     orders
@@ -36,7 +35,7 @@ export const loginUser = (payload) => {
   }
 }
   `;
-  return setItems(query);
+  return setItems(query, data);
 };
 
 export const confirmUser = (token) => {
@@ -70,6 +69,20 @@ export const checkIfTokenIsValid = (data) => {
   const query = ` 
   mutation checkToken($token: String!){
   checkIfTokenIsValid(token: $token)
+  }
+  `;
+  return setItems(query, data);
+};
+
+export const registerUser = (data) => {
+  const query = ` 
+  mutation register($user: userRegisterInput!, $language: Int!){
+  registerUser(
+    user: $user,
+    language: $language
+  ) {
+    email
+  }
   }
   `;
   return setItems(query, data);
@@ -136,10 +149,24 @@ export function* handleTokenCheck({ payload }) {
   }
 }
 
+export function* handleUserRegister({ payload }) {
+  try {
+    yield put(resetState());
+    yield put(setUserLoading(true));
+    yield call(registerUser, payload);
+    yield put(setUserRegistered(true));
+    yield delay(SHOW_AFTER);
+    yield put(push('/login'));
+  } catch (error) {
+    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+  }
+}
+
 export default function* userSaga() {
   yield takeEvery(LOGIN_USER, handleUserLoad);
   yield takeEvery(CONFIRM_USER, handleUserConfirm);
   yield takeEvery(RECOVER_USER, handleUserRecovery);
   yield takeEvery(PASSWORD_RESET, handlePasswordReset);
   yield takeEvery(CHECK_IF_TOKEN_VALID, handleTokenCheck);
+  yield takeEvery(REGISTER_USER, handleUserRegister);
 }

@@ -10,7 +10,9 @@ import {
   SET_USER_RECOVERED,
   PASSWORD_RESET,
   SET_PASSWORD_RESET,
-  CHECK_IF_TOKEN_VALID
+  CHECK_IF_TOKEN_VALID,
+  REGISTER_USER,
+  SET_USER_REGISTERED
 } from './user.types';
 
 const setUser = (user) => ({
@@ -71,6 +73,16 @@ const checkIfTokenValid = (payload) => ({
   payload
 });
 
+const registerUser = (payload) => ({
+  type: REGISTER_USER,
+  payload
+});
+
+const setUserRegistered = (payload) => ({
+  type: SET_USER_REGISTERED,
+  payload
+});
+
 export {
   loginUser,
   setUser,
@@ -83,5 +95,7 @@ export {
   setUserRecovered,
   resetPassword,
   setPasswordReset,
-  checkIfTokenValid
+  checkIfTokenValid,
+  registerUser,
+  setUserRegistered
 };

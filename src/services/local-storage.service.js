@@ -2,9 +2,9 @@ export const clearLocalStorage = () => {
   const horondi = {
     accessToken: null,
     _id: null,
-    wishlist: null,
+    wishlist: [],
     language: 0,
-    cart: null,
+    cart: [],
     theme: 'light'
   };
   localStorage.setItem('horondi', JSON.stringify(horondi));

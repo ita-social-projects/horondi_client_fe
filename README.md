@@ -308,6 +308,8 @@ Now apollo client can read introspection result.
 
 #### Usage
 
+before using generator you should run backend server
+
 open terminal
 
 run `npm run generate`

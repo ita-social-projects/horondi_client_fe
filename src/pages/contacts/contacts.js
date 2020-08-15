@@ -8,6 +8,7 @@ import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { getContacts } from '../../redux/contacts/contacts.actions';
+import mapImg from '../../images/welcome.jpg';
 
 const Contacts = () => {
   const { contacts, loading, language } = useSelector(
@@ -52,23 +53,32 @@ const Contacts = () => {
 
   return contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
-      <h2>{CONTACTS_PAGE_TITLES[language].title}</h2>
+      <h2 className={styles.contactsTitle}>
+        {CONTACTS_PAGE_TITLES[language].title}
+      </h2>
       <div className={styles.content}>
-        <a target='_blank' rel='noopener noreferrer' href={contact.link}>
-          <img
-            src={contact.images.medium}
-            alt={CONTACTS_PAGE_TITLES[language].location}
-          />
-        </a>
+        <div className={styles.mapContainer}>
+          <a target='_blank' rel='noopener noreferrer' href={contact.link}>
+            <img
+              className={styles.mapImage}
+              src={mapImg}
+              alt={CONTACTS_PAGE_TITLES[language].location}
+            />
+          </a>
+        </div>
         <div className={styles.contacts}>
           <div className={styles.contactsItem}>
-            <span>{CONTACTS_PAGE_TITLES[language].phone}</span>
+            <span className={styles.contactName}>
+              {CONTACTS_PAGE_TITLES[language].phone}
+            </span>
             <span className={styles.contactsDetails}>
               +{contact.phoneNumber}
             </span>
           </div>
           <div className={styles.contactsItem}>
-            <span>{CONTACTS_PAGE_TITLES[language].schedule}</span>
+            <span className={styles.contactName}>
+              {CONTACTS_PAGE_TITLES[language].schedule}
+            </span>
             <div className={styles.schedule}>
               {contact.openHours[language].value.split('|').map((el, i) => (
                 <span key={i}>{el}</span>
@@ -76,13 +86,15 @@ const Contacts = () => {
             </div>
           </div>
           <div className={styles.contactsItem}>
-            <span>{CONTACTS_PAGE_TITLES[language].address}</span>
+            <span className={styles.contactName}>
+              {CONTACTS_PAGE_TITLES[language].address}
+            </span>
             <span className={styles.contactsDetails}>
               {getAddress(language, contact)}
             </span>
           </div>
           <div className={styles.contactsItem}>
-            <span>Email:</span>
+            <span className={styles.contactName}>Email:</span>
             <span className={styles.contactsDetails}>{contact.email}</span>
           </div>
         </div>

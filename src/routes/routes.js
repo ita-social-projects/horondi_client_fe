@@ -17,6 +17,8 @@ import ProductListPage from '../pages/product-list-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import ErrorPage from '../pages/error-page';
+import ThanksPage from '../pages/thanks-page';
 
 const Routes = () => {
   const styles = useStyles();
@@ -34,11 +36,11 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
-          <Route path='/error-page' exact render={() => 'error page'} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
+          <Route path='/thanks' exact component={ThanksPage} />
           <Route
             path='/confirmation/:token'
             exact
@@ -58,6 +60,7 @@ const Routes = () => {
             }}
           />
           <Route path='/:category/:id' exact render={() => 'detail page'} />
+          <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>
       <AppFooter />

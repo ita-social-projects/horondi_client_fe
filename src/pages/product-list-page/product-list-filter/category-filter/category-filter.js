@@ -23,9 +23,14 @@ const CategoryFilter = ({ selectedCategory }) => {
 
   const { categoryFilter } = filters;
 
-  const categories = [
-    ...new Set(filterData.map((product) => JSON.stringify(product.category)))
-  ].map(JSON.parse);
+  const categories = filterData
+    .map((product) => product.category)
+    .filter(
+      (category, index, self) =>
+        self
+          .map((category) => category.name[1].value)
+          .indexOf(category.name[1].value) === index
+    );
 
   const handleCategoryChange = (event) => {
     if (!event.target.checked) {
@@ -46,9 +51,9 @@ const CategoryFilter = ({ selectedCategory }) => {
       <Typography id='categories' gutterBottom>
         {CATERGORY_TEXT[language].value}:
       </Typography>
-      {categories.map((category, key) => (
+      {categories.map((category) => (
         <FormControlLabel
-          key={key}
+          key={category.name[1].value}
           className={styles.checkbox}
           control={
             <Checkbox

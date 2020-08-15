@@ -23,9 +23,13 @@ const PatternsFilter = () => {
 
   const { patternsFilter } = filters;
 
-  const patterns = [
-    ...new Set(filterData.map((product) => JSON.stringify(product.pattern)))
-  ].map(JSON.parse);
+  const patterns = filterData
+    .map((product) => product.pattern)
+    .filter(
+      (pattern, index, self) =>
+        self.map((pattern) => pattern[1].value).indexOf(pattern[1].value) ===
+        index
+    );
 
   const handlePatternChange = (event) => {
     if (!event.target.checked) {
@@ -46,9 +50,9 @@ const PatternsFilter = () => {
       <Typography id='patterns' gutterBottom>
         {PATTERN_TEXT[language].value}:
       </Typography>
-      {patterns.map((pattern, key) => (
+      {patterns.map((pattern) => (
         <FormControlLabel
-          key={key}
+          key={pattern[1].value}
           className={styles.checkbox}
           control={
             <Checkbox

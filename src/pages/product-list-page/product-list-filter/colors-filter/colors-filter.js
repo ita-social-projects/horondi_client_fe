@@ -23,11 +23,12 @@ const ColorsFilter = () => {
 
   const { colorsFilter } = filters;
 
-  const colors = [
-    ...new Set(
-      filterData.map((product) => JSON.stringify(product.colors[0].simpleName))
-    )
-  ].map(JSON.parse);
+  const colors = filterData
+    .map((product) => product.colors[0].simpleName)
+    .filter(
+      (color, index, self) =>
+        self.map((color) => color[1].value).indexOf(color[1].value) === index
+    );
 
   const handleColorChange = (event) => {
     if (!event.target.checked) {
@@ -48,9 +49,9 @@ const ColorsFilter = () => {
       <Typography id='colors' gutterBottom>
         {COLORS_TEXT[language].value}:
       </Typography>
-      {colors.map((color, key) => (
+      {colors.map((color) => (
         <FormControlLabel
-          key={key}
+          key={color[1].value}
           className={styles.checkbox}
           control={
             <Checkbox

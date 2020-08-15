@@ -36,7 +36,6 @@ export function* handleNewsLoad() {
                     medium
                   }
                 }
-                video
                }
              }`
     );
@@ -71,7 +70,6 @@ export function* handleArticleLoad({ payload }) {
                 medium
               }
             }
-            video
             author{
               name{
                 value

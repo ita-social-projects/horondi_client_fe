@@ -12,7 +12,8 @@ import {
   setCurrentPage,
   setSortByPrice,
   setSortByRate,
-  setSortByPopularity
+  setSortByPopularity,
+  setProductsPerPage
 } from '../products.actions';
 import productsExample from './products.mocks';
 
@@ -174,5 +175,12 @@ describe('Product reducer test', () => {
     expect(productReducer(initialState, setSortByPopularity(-1))).toEqual(
       state
     );
+  });
+  it('products per page in store should be set to 18', () => {
+    const state = {
+      ...initialState,
+      productsPerPage: 18
+    };
+    expect(productReducer(initialState, setProductsPerPage(18))).toEqual(state);
   });
 });

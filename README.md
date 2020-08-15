@@ -276,41 +276,13 @@ This allows us to use `npm run generate` or `yarn generate` and get the introspe
 
 You must run `npm run generate` to generate the introspection file every time you add new unions or intarfaces. This will awoid errors as our introspection will always be up to date.
 
-You should modify your apollo config file:
-
-`import ApolloClient, { gql } from 'apollo-boost';
-import fetch from 'unfetch';
-import {
-InMemoryCache,
-IntrospectionFragmentMatcher
-} from 'apollo-cache-inmemory';
-
-const introspectionResult = require('../fragmentTypes.json');
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-introspectionQueryResultData: introspectionResult
-});
-export const REACT_APP_API_URL =
-window.env && window.env.REACT_APP_API_URL
-? window.env.REACT_APP_API_URL
-: process.env.REACT_APP_API_URL;
-
-const client = new ApolloClient({
-uri: REACT_APP_API_URL,
-fetch,
-cache: new InMemoryCache({
-addTypename: true,
-fragmentMatcher
-})
-})`
+You should modify your apollo config file.
 
 Now apollo client can read introspection result.
 
 #### Usage
 
-before using generator you should run backend server
-
-open terminal
+before using generator you should run [backend server](https://horondi-back.azurewebsites.net)
 
 run `npm run generate`
 

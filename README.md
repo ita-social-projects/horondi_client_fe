@@ -280,12 +280,6 @@ You should modify your apollo config file.
 
 Now apollo client can read introspection result.
 
-#### Usage
-
-before using generator you should run [backend server](https://horondi-back.azurewebsites.net)
-
-run `npm run generate`
-
 #### License
 
 [MIT](https://choosealicense.com/licenses/mit/)

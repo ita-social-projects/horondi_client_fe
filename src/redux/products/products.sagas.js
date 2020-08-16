@@ -53,7 +53,9 @@ export function* handleFilterLoad() {
                   lang
                   value
                 }
-                basePrice
+                basePrice {
+                  value
+                }
                 rate
                 images {
                   primary {
@@ -105,6 +107,7 @@ export function* handleFilterLoad() {
         Math.ceil(products.data.getProducts.count / state.productsPerPage)
       )
     );
+    console.log(products.data.getProducts.count);
     yield put(setAllProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
@@ -128,7 +131,9 @@ export function* handleGetFilters() {
                 value
               }
             }
-            basePrice
+            basePrice {
+              value
+            }
             pattern {
               value
             }

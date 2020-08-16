@@ -35,13 +35,17 @@ const PriceFilter = () => {
         className={styles.slider}
         value={priceFilter}
         defaultValue={[
-          Math.min(...filterData.map((product) => product.basePrice)),
-          Math.max(...filterData.map((product) => product.basePrice))
+          Math.min(...filterData.map((product) => product.basePrice[0].value)),
+          Math.max(...filterData.map((product) => product.basePrice[0].value))
         ]}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
-        min={Math.min(...filterData.map((product) => product.basePrice))}
-        max={Math.max(...filterData.map((product) => product.basePrice))}
+        min={Math.min(
+          ...filterData.map((product) => product.basePrice[0].value)
+        )}
+        max={Math.max(
+          ...filterData.map((product) => product.basePrice[0].value)
+        )}
         aria-labelledby='range-slider'
       />
     </FormGroup>

@@ -25,7 +25,7 @@ const ProductListItem = ({ product, category }) => {
         <StarRating size='small' readOnly rate={product.rate} />
         <div>
           <FontAwesomeIcon icon={faHryvnia} />
-          {product.basePrice}
+          {product.basePrice[0].value}
         </div>
       </Card>
     </Link>

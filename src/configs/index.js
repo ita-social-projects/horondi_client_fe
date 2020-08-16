@@ -33,6 +33,11 @@ export const WISHLIST_IMAGES = {
   darkTheme: './images/wishlist/wishlist-dark-theme-img.png'
 };
 
+export const ERROR_PAGE_IMAGES = {
+  light: './images/error-page/error-light.png',
+  dark: './images/error-page/error-dark.png'
+};
+
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
 

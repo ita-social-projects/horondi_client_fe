@@ -17,6 +17,7 @@ import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
 import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
+import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 
 const Routes = () => {
@@ -47,6 +48,7 @@ const Routes = () => {
             exact
             render={({ match }) => <NewPassword token={match.params.token} />}
           />
+          <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>
       <AppFooter />

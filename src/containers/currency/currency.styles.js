@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '18px',
+    fontSize: '22px',
     textAlign: 'center',
     width: '60px',
     height: '33px',

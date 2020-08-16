@@ -1,0 +1,41 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { MenuItem } from '@material-ui/core';
+import {
+  setToLocalStorage,
+  getFromLocalStorage
+} from '../../services/local-storage.service';
+import { changeCurrency } from '../../redux/currency/currency.actions';
+import { CURRENCIES_LIST } from '../../translations/currency.translation';
+import Dropdown from '../../components/dropdown';
+import useStyles from './currency.styles';
+
+const currencyInLocalStorage = getFromLocalStorage('currency') || 0;
+
+const Currency = () => {
+  const styles = useStyles();
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    const targetValue = e.target.value;
+    if (targetValue !== undefined) {
+      setToLocalStorage('currency', targetValue);
+      dispatch(changeCurrency(targetValue));
+    }
+  };
+  const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
+    <MenuItem key={value} value={value}>
+      {currency === 'UAH' ? '\u20b4' : '\u0024'}
+    </MenuItem>
+  ));
+  return (
+    <Dropdown
+      styles={styles}
+      mappedItems={mappedCurrencies}
+      handler={handleChange}
+      defaultValue={currencyInLocalStorage}
+    />
+  );
+};
+
+export default Currency;

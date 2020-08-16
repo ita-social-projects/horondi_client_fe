@@ -4,6 +4,7 @@ export const clearLocalStorage = () => {
     _id: null,
     wishlist: [],
     language: 0,
+    currency: 0,
     cart: [],
     theme: 'light'
   };

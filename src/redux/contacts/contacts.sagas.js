@@ -35,6 +35,7 @@ export function* handleContactsLoad() {
                 lang
                 value
               }
+              postalCode
             }
             email
             images {

@@ -94,6 +94,14 @@ const Contacts = () => {
             </span>
           </div>
           <div className={styles.contactsItem}>
+            <span className={styles.contactName}>
+              {CONTACTS_PAGE_TITLES[language].index}
+            </span>
+            <span className={styles.contactsDetails}>
+              {contact.address.postalCode[0]}
+            </span>
+          </div>
+          <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>
             <span className={styles.contactsDetails}>{contact.email}</span>
           </div>

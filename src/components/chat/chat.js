@@ -14,11 +14,11 @@ export const Chat = () => {
   const [visible, setBlock] = useState(false);
   const [mailVisible, setMailVisible] = useState(true);
   const [facebookVisible, setFacebookVisible] = useState(true);
-  const { language, theme } = useSelector((state) => ({
+  const { language, themeMode } = useSelector((state) => ({
     language: state.Language.language,
-    theme: state.Theme.lightMode
+    themeMode: state.Theme.lightMode
   }));
-  const style = useStyles({ theme, visible });
+  const style = useStyles({ themeMode, visible });
 
   const activeMessenger = () => {
     if (facebookVisible && mailVisible) {

@@ -70,45 +70,45 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
-  facebookActive: ({ theme }) => ({
+  facebookActive: ({ themeMode }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: theme ? '#efefef' : '#232323',
+    background: themeMode ? '#efefef' : '#232323',
     height: '45px',
     width: '75%',
     border: '1px solid black',
     borderBottom: '0',
     borderLeft: '0'
   }),
-  gmailActive: ({ theme }) => ({
+  gmailActive: ({ themeMode }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: theme ? '#efefef' : '#232323',
+    background: themeMode ? '#efefef' : '#232323',
     height: '45px',
     width: '75%',
     border: '1px solid black',
     borderBottom: '0',
     borderRight: '0'
   }),
-  gmailDisactive: ({ theme }) => ({
+  gmailDisactive: ({ themeMode }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: theme ? 'white' : '#232323',
+    background: themeMode ? 'white' : '#232323',
     height: '45px',
     width: '25%',
     border: '1px solid black'
   }),
-  facebookDisactive: ({ theme }) => ({
+  facebookDisactive: ({ themeMode }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: theme ? 'white' : '#232323',
+    background: themeMode ? 'white' : '#232323',
     height: '45px',
     width: '25%',
     border: '1px solid black'
   }),
-  formField: ({ theme }) => ({
+  formField: ({ themeMode }) => ({
     border: '1px solid black',
-    background: theme ? '#efefef' : '#232323',
+    background: themeMode ? '#efefef' : '#232323',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -116,8 +116,8 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '75%'
   }),
-  formFieldActive: ({ theme }) => ({
-    background: theme ? '#efefef' : '#232323',
+  formFieldActive: ({ themeMode }) => ({
+    background: themeMode ? '#efefef' : '#232323',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

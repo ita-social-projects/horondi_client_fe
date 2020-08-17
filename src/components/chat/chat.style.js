@@ -1,38 +1,59 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  chatIcon: {
+  chatIcon: ({ visible }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: visible ? '#E4B200' : 'black',
+    width: '60px',
+    height: '60px',
+    borderRadius: '50%',
     position: 'fixed',
-    right: '3%',
-    bottom: '1%'
-  },
+    right: '4%',
+    bottom: '2%',
+    '&:hover': {
+      background: '#E4B200'
+    }
+  }),
   chatForm: {
     borderRadius: '5px',
     position: 'fixed',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    right: '6%',
-    bottom: '11%',
+    right: '9%',
+    bottom: '12%',
     width: '20%',
-    height: '65%',
+    height: '85%',
     border: 'solid 1px black',
     background: 'white',
+    boxShadow: '1px 2px 2px 1px',
     zIndex: '3'
   },
   disable: {
     display: 'none'
   },
+  cancelIcon: {
+    position: 'absolute',
+    right: '1px'
+  },
   contacts: {
-    marginTop: '15px',
+    background: theme.palette.backgroundColor,
+    width: '100%',
+    height: '40%',
     fontSize: '1.1rem',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   contactsTitle: {
     margin: '3px 0 2px 0',
     fontSize: '1.3rem'
+  },
+  phoneNumbers: {
+    color: theme.palette.textColor
   },
   mailTitle: {
     marginTop: '5%',
@@ -47,77 +68,65 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: '30px'
+    justifyContent: 'space-around'
   },
-  facebookActive: {
+  facebookActive: ({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: '#efefef',
+    background: theme ? '#efefef' : '#232323',
     height: '45px',
     width: '75%',
     border: '1px solid black',
-    borderBottom: '0'
-  },
-  gmailActive: {
+    borderBottom: '0',
+    borderLeft: '0'
+  }),
+  gmailActive: ({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: '#efefef',
+    background: theme ? '#efefef' : '#232323',
     height: '45px',
     width: '75%',
     border: '1px solid black',
-    borderBottom: '0'
-  },
-  gmailDisactive: {
+    borderBottom: '0',
+    borderRight: '0'
+  }),
+  gmailDisactive: ({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: 'white',
+    background: theme ? 'white' : '#232323',
     height: '45px',
     width: '25%',
     border: '1px solid black'
-    // borderBottom: '0',
-  },
-  facebookDisactive: {
+  }),
+  facebookDisactive: ({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
-    background: 'white',
+    background: theme ? 'white' : '#232323',
     height: '45px',
     width: '25%',
     border: '1px solid black'
-    // borderBottom: '0'
-  },
-  formField: {
+  }),
+  formField: ({ theme }) => ({
     border: '1px solid black',
-    background: '#efefef',
+    background: theme ? '#efefef' : '#232323',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
     height: '75%'
-  },
-  formFieldActive: {
-    background: '#efefef',
+  }),
+  formFieldActive: ({ theme }) => ({
+    background: theme ? '#efefef' : '#232323',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
     height: '75%'
-  },
+  }),
   btnSend: {
-    // fontFamily: 'Montserrat',
-    // fontSize: '16px',
-    // lineHeight: '20px',
-    // height: '12%',
-    // backgroundColor: theme.palette.button.normal.backgroundColor,
-    // color: theme.palette.button.normal.color,
-    // textTransform: 'capitalize',
-    // '&:hover': {
-    //   backgroundColor: theme.palette.button.hover.backgroundColor
-    // }
-    // marginBottom: '35px',
-    // width: '77%',
+    marginBottom: '20px',
     background: theme.palette.button.normal.backgroundColor,
     borderRadius: '5px',
     fontSize: '1.5em',
@@ -136,8 +145,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   dataInput: {
-    marginBottom: '15px',
-    height: '100%'
+    height: '100%',
+    marginBottom: '15px'
   },
   icons: {
     width: '40px',
@@ -145,5 +154,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   link: {
     color: 'white'
+  },
+  icon: {
+    color: theme.palette.white
   }
 }));

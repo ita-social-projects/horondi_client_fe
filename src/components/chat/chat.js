@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import CancelIcon from '@material-ui/icons/Cancel';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
@@ -10,11 +11,14 @@ import kyivstar from '../../images/kyivstar.png';
 import vodafone from '../../images/vodafone.png';
 
 export const Chat = () => {
-  const style = useStyles();
-  const [visible, setBlock] = useState(true);
+  const [visible, setBlock] = useState(false);
   const [mailVisible, setMailVisible] = useState(true);
   const [facebookVisible, setFacebookVisible] = useState(true);
-  const language = useSelector((state) => state.Language.language);
+  const { language, theme } = useSelector((state) => ({
+    language: state.Language.language,
+    theme: state.Theme.lightMode
+  }));
+  const style = useStyles({ theme, visible });
 
   const activeMessenger = () => {
     if (facebookVisible && mailVisible) {
@@ -47,18 +51,27 @@ export const Chat = () => {
           id='outlined-basic'
           label={CHAT[language].name}
           variant='outlined'
+          size='small'
+          multiline
+          rows={1}
         />
         <TextField
           className={style.dataInput}
           id='outlined-basic'
           label={CHAT[language].email}
           variant='outlined'
+          size='small'
+          multiline
+          rows={1}
         />
         <TextField
           className={style.dataInput}
           id='outlined-basic'
           label={CHAT[language].msgText}
           variant='outlined'
+          size='small'
+          multiline
+          rows={4}
         />
         <Button className={style.btnSend}>{CHAT[language].sendBtn}</Button>
       </div>
@@ -68,17 +81,21 @@ export const Chat = () => {
   return (
     <div>
       <div className={visible ? style.chatForm : style.disable}>
+        <div className={style.cancelIcon} onClick={() => setBlock(!visible)}>
+          <CancelIcon />
+        </div>
         <div className={style.contacts}>
           <span className={style.contactsTitle}>
             {CHAT[language].ourContacts}
           </span>
-          <span>
+          <span className={style.phoneNumbers}>
             <img className={style.logo} src={kyivstar} alt='kyivstar' />{' '}
-            +38-067-777-55-33
+            +38-(067)-777-55-33
           </span>
-          <span>
-            <img className={style.logo} src={vodafone} alt='vodafone' />{' '}
-            +38-050-999-77-66
+          <span className={style.phoneNumbers}>
+            <img className={style.logo} src={vodafone} alt='vodafone' />
+            {'  '}
+            +38-(050)-999-77-66
           </span>
         </div>
 
@@ -109,7 +126,7 @@ export const Chat = () => {
       </div>
 
       <div onClick={() => setBlock(!visible)} className={style.chatIcon}>
-        <ForumIcon color='warning' style={{ fontSize: 80 }} />
+        <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </div>
     </div>
   );

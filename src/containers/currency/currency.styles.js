@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
       fontWeight: 'normal',
-      width: '11rem !important'
+      width: '11rem !important',
+      fontSize: '22px'
     }
   }
 }));

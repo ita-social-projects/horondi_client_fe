@@ -1,3 +1,3 @@
-import Language from './currency';
+import Currency from './currency';
 
-export default Language;
+export default Currency;

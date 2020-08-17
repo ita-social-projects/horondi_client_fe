@@ -24,17 +24,19 @@ const Currency = () => {
     }
   };
   const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
-    <MenuItem key={value} value={value}>
+    <MenuItem id={`currency${value + 1}`} key={value} value={value}>
       {currency === 'UAH' ? '\u20b4' : '\u0024'}
     </MenuItem>
   ));
   return (
-    <Dropdown
-      styles={styles}
-      mappedItems={mappedCurrencies}
-      handler={handleChange}
-      defaultValue={currencyInLocalStorage}
-    />
+    <div id='currency'>
+      <Dropdown
+        styles={styles}
+        mappedItems={mappedCurrencies}
+        handler={handleChange}
+        defaultValue={currencyInLocalStorage}
+      />
+    </div>
   );
 };
 

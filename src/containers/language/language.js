@@ -33,12 +33,14 @@ const Language = () => {
     </MenuItem>
   ));
   return (
-    <Dropdown
-      styles={styles}
-      mappedItems={mappedLanguages}
-      handler={handleChange}
-      defaultValue={languageInLocalStorage}
-    />
+    <div id='language'>
+      <Dropdown
+        styles={styles}
+        mappedItems={mappedLanguages}
+        handler={handleChange}
+        defaultValue={languageInLocalStorage}
+      />
+    </div>
   );
 };
 

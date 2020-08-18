@@ -11,7 +11,7 @@ import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 import mapImg from '../../images/map-medium.png';
 
-const Contacts = () => {
+const ContactsPage = () => {
   const { contacts, loading, language } = useSelector(
     ({ Language, Contacts }) => ({
       contacts: Contacts.contacts,
@@ -84,4 +84,4 @@ const Contacts = () => {
   ));
 };
 
-export default Contacts;
+export default ContactsPage;

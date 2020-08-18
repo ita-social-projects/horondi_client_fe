@@ -1,10 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const flexCenter = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
+
 export const useStyles = makeStyles((theme) => ({
   chatIcon: ({ visible }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...flexCenter,
     background: visible ? '#E4B200' : 'black',
     width: '60px',
     height: '60px',
@@ -16,7 +20,40 @@ export const useStyles = makeStyles((theme) => ({
       background: '#E4B200'
     }
   }),
-  chatForm: {
+  iconsMessengers: {
+    ...flexCenter,
+    position: 'fixed',
+    right: '4%',
+    bottom: '6%',
+    width: '60px',
+    height: '150px',
+    flexDirection: 'column',
+    zIndex: '3'
+  },
+  disable: {
+    display: 'none'
+  },
+  msgIcon: {
+    ...flexCenter,
+    width: '50px',
+    height: '50px',
+    background: 'black',
+    borderRadius: '50%',
+    marginBottom: '10px',
+    '&:hover': {
+      background: '#E4B200'
+    }
+  },
+  msgIconActive: (mailFormVisible) => ({
+    ...flexCenter,
+    width: '40px',
+    height: '40px',
+    background: mailFormVisible ? '#E4B200' : 'black',
+    borderRadius: '50%',
+    marginBottom: '10px'
+  }),
+  facebookActive: {},
+  mailForm: {
     borderRadius: '5px',
     position: 'fixed',
     display: 'flex',
@@ -24,29 +61,23 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     right: '9%',
     bottom: '12%',
-    width: '20%',
-    height: '85%',
+    width: '15%',
+    height: '65%',
     border: 'solid 1px black',
     background: 'white',
-    boxShadow: '1px 2px 2px 1px',
-    zIndex: '3'
-  },
-  disable: {
-    display: 'none'
+    boxShadow: '1px 2px 2px 1px'
   },
   cancelIcon: {
     position: 'absolute',
     right: '1px'
   },
   contacts: {
+    ...flexCenter,
     background: theme.palette.backgroundColor,
     width: '100%',
     height: '40%',
     fontSize: '1.1rem',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexDirection: 'column'
   },
   contactsTitle: {
     margin: '3px 0 2px 0',
@@ -64,64 +95,10 @@ export const useStyles = makeStyles((theme) => ({
     height: '15px',
     width: '15px'
   },
-  tabs: {
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  facebookActive: ({ themeMode }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    background: themeMode ? '#efefef' : '#232323',
-    height: '45px',
-    width: '75%',
-    border: '1px solid black',
-    borderBottom: '0',
-    borderLeft: '0'
-  }),
-  gmailActive: ({ themeMode }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    background: themeMode ? '#efefef' : '#232323',
-    height: '45px',
-    width: '75%',
-    border: '1px solid black',
-    borderBottom: '0',
-    borderRight: '0'
-  }),
-  gmailDisactive: ({ themeMode }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    background: themeMode ? 'white' : '#232323',
-    height: '45px',
-    width: '25%',
-    border: '1px solid black'
-  }),
-  facebookDisactive: ({ themeMode }) => ({
-    display: 'flex',
-    justifyContent: 'center',
-    background: themeMode ? 'white' : '#232323',
-    height: '45px',
-    width: '25%',
-    border: '1px solid black'
-  }),
-  formField: ({ themeMode }) => ({
-    border: '1px solid black',
-    background: themeMode ? '#efefef' : '#232323',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '75%'
-  }),
   formFieldActive: ({ themeMode }) => ({
+    ...flexCenter,
     background: themeMode ? '#efefef' : '#232323',
-    display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
     height: '75%'
   }),
@@ -147,13 +124,6 @@ export const useStyles = makeStyles((theme) => ({
   dataInput: {
     height: '100%',
     marginBottom: '15px'
-  },
-  icons: {
-    width: '40px',
-    height: '40px'
-  },
-  link: {
-    color: 'white'
   },
   icon: {
     color: theme.palette.white

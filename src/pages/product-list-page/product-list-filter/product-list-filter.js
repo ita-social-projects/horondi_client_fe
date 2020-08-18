@@ -10,6 +10,7 @@ import ColorsFilter from './colors-filter';
 import PatternsFilter from './patterns-filter';
 import CategoryFilter from './category-filter';
 import PriceFilter from './price-filter';
+import ModelsFilter from './models-filter';
 import HotItemFilter from './hot-item-filter';
 
 import useStyles from './product-list-filter.styles';
@@ -29,7 +30,7 @@ import {
   CLEAR_FILTER_BUTTON_TEXT
 } from '../../../translations/product-list.translations';
 
-const ProductListFilter = ({ selectedCategory }) => {
+const ProductListFilter = () => {
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -119,7 +120,8 @@ const ProductListFilter = ({ selectedCategory }) => {
           <HotItemFilter />
           <PriceFilter />
 
-          <CategoryFilter selectedCategory={selectedCategory} />
+          <CategoryFilter />
+          <ModelsFilter />
           <ColorsFilter />
           <PatternsFilter />
         </FormControl>

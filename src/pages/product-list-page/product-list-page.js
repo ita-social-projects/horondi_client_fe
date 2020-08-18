@@ -20,7 +20,7 @@ import {
   HIDE_FILTER_BUTTON_TEXT
 } from '../../translations/product-list.translations';
 
-const ProductListPage = ({ category }) => {
+const ProductListPage = ({ category, model }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const {
@@ -95,7 +95,7 @@ const ProductListPage = ({ category }) => {
         Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
-  }, [category, filterData, dispatch]);
+  }, [category, filterData, model, dispatch]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 

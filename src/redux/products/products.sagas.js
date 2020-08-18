@@ -27,7 +27,8 @@ export function* handleFilterLoad() {
         $rate:Int
         $basePrice:Int
         $purchasedCount:Int
-        $category:[String]
+        $category: [String]
+        $models: [String]
         ){
           getProducts(
             filter: {
@@ -36,6 +37,7 @@ export function* handleFilterLoad() {
               price: $price
               category:$category
               isHotItem: $isHotItem
+              models: $models
             }
             skip: $skip
             limit: $limit
@@ -54,6 +56,9 @@ export function* handleFilterLoad() {
                   value
                 }
                 basePrice {
+                  value
+                }
+                model {
                   value
                 }
                 rate
@@ -99,15 +104,16 @@ export function* handleFilterLoad() {
         basePrice: state.sortByPrice || undefined,
         category: state.filters.categoryFilter,
         purchasedCount: state.sortByPopularity || undefined,
-        isHotItem: state.filters.isHotItemFilter
+        isHotItem: state.filters.isHotItemFilter,
+        models: state.filters.modelsFilter
       }
     );
+
     yield put(
       setPagesCount(
         Math.ceil(products.data.getProducts.count / state.productsPerPage)
       )
     );
-    console.log(products.data.getProducts.count);
     yield put(setAllProducts(products.data.getProducts.items));
     yield put(setLoading(false));
   } catch (e) {
@@ -132,6 +138,9 @@ export function* handleGetFilters() {
               }
             }
             basePrice {
+              value
+            }
+            model {
               value
             }
             pattern {

@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { CATERGORY_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
-import { setCategoryFilter } from '../../../../redux/products/products.actions';
+import { setModelsFilter } from '../../../../redux/products/products.actions';
 
-const CategoryFilter = () => {
+const ModelsFilter = () => {
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -21,27 +21,25 @@ const CategoryFilter = () => {
     })
   );
 
-  const { categoryFilter } = filters;
+  const { modelsFilter } = filters;
 
-  const categories = filterData
-    .map((product) => product.category)
+  const models = filterData
+    .map((product) => product.model)
     .filter(
-      (category, index, self) =>
-        self
-          .map((category) => category.name[1].value)
-          .indexOf(category.name[1].value) === index
+      (model, index, self) =>
+        self.map((model) => model[1].value).indexOf(model[1].value) === index
     );
 
   const handleCategoryChange = (event) => {
     if (!event.target.checked) {
       dispatch(
-        setCategoryFilter(
-          categoryFilter.filter((category) => category !== event.target.name)
+        setModelsFilter(
+          modelsFilter.filter((model) => model !== event.target.name)
         )
       );
     } else {
       dispatch(
-        setCategoryFilter([...new Set([...categoryFilter, event.target.name])])
+        setModelsFilter([...new Set([...modelsFilter, event.target.name])])
       );
     }
   };
@@ -51,20 +49,20 @@ const CategoryFilter = () => {
       <Typography id='categories' gutterBottom>
         {CATERGORY_TEXT[language].value}:
       </Typography>
-      {categories.map((category) => (
+      {models.map((model) => (
         <FormControlLabel
-          key={category.name[1].value}
+          key={model[1].value}
           className={styles.checkbox}
           control={
             <Checkbox
-              data-cy={category.name[1].value.toLowerCase()}
-              name={category._id}
+              data-cy={model[1].value.toLowerCase()}
+              name={model[1].value}
               checked={
-                !!categoryFilter.find((filter) => filter === category._id)
+                !!modelsFilter.find((filter) => filter === model[1].value)
               }
             />
           }
-          label={category.name[language].value}
+          label={model[language].value}
           onChange={handleCategoryChange}
         />
       ))}
@@ -72,4 +70,4 @@ const CategoryFilter = () => {
   );
 };
 
-export default CategoryFilter;
+export default ModelsFilter;

@@ -1,42 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
+import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
+import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './products-carousel.style';
+import { setModelsFilter } from '../../redux/products/products.actions';
+import { getModelsByCategory } from '../../redux/model/model.actions';
 
-const ProductsCorousel = () => {
+const ProductsCorousel = ({ category }) => {
   const styles = useStyles();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getModelsByCategory(category._id));
+  }, [dispatch, category]);
+
+  const { models, language } = useSelector(
+    ({ Model: { models }, Language: { language } }) => ({
+      models,
+      language
+    })
+  );
+
+  const handleClick = (model) => {
+    dispatch(setModelsFilter([model.name[1].value]));
+  };
 
   return (
     <div className={styles.container}>
       <AwesomeSlider className={styles.slider} mobileTouch>
-        <div
-          data-src='https://caferati.me/images/series/ricknmorty-3.png'
-          className={styles.captionBlock}
-        >
-          <p className={styles.caption}>I want to see what you got.</p>
-        </div>
-        <div
-          data-src='https://caferati.me/images/series/ricknmorty-2.jpg'
-          className={styles.captionBlock}
-        >
-          <p className={styles.caption}>
-            The answer is -- Dont think about it.
-          </p>
-        </div>
-        <div
-          data-src='https://caferati.me/images/series/ricknmorty-1.jpg'
-          className={styles.captionBlock}
-        >
-          <p className={styles.caption}>
-            Sometimes science is more art than science.
-          </p>
-        </div>
-        <div
-          data-src='https://caferati.me/images/series/ricknmorty-4.jpg'
-          className={styles.captionBlock}
-        >
-          <p className={styles.caption}>Love, connection, experience.</p>
-        </div>
+        {models.map((model) => (
+          <div
+            key={model.name[1].value}
+            data-src={model.images.large}
+            className={styles.captionBlock}
+          >
+            <Link
+              onClick={() => handleClick(model)}
+              to={`/${category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
+            >
+              <p className={styles.caption}>{model.name[language].value}</p>
+            </Link>
+          </div>
+        ))}
       </AwesomeSlider>
     </div>
   );

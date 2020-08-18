@@ -1,0 +1,2 @@
+export const GET_MODELS_BY_CATEGORY = 'GET_MODELS_BY_CATEGORY';
+export const SET_MODELS = 'SET_MODELS';

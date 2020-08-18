@@ -14,6 +14,7 @@ import {
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
+  SET_MODELS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
   SET_HOT_ITEM_FILTER
@@ -73,6 +74,10 @@ export const setHotItemFilter = (payload) => ({
 });
 export const setPatternsFilter = (payload) => ({
   type: SET_PATTERNS_FILTER,
+  payload
+});
+export const setModelsFilter = (payload) => ({
+  type: SET_MODELS_FILTER,
   payload
 });
 export const setSearchFilter = (payload) => ({

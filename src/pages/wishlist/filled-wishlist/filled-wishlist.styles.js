@@ -1,13 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: '50px auto'
+  },
   table: {
     margin: '50px auto',
     display: 'flex',
     flexDirection: 'column'
   },
   tableHeader: {
-    fontSize: '1.5em',
     display: 'flex',
     borderColor: '#DADADA',
     borderStyle: 'solid',
@@ -22,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: '10px 0'
       }
     },
-    '& tr > th:first-child': {
+    '& > div:first-child': {
       flex: '1'
     },
     '& tr > th:not(:first-child)': {
@@ -31,11 +33,6 @@ export const useStyles = makeStyles((theme) => ({
         width: 100
       }
     }
-  },
-  tableBody: {
-    borderColor: '#DADADA',
-    borderStyle: 'solid',
-    borderWidth: '0 0 1px'
   },
   total: {
     textAlign: 'right',

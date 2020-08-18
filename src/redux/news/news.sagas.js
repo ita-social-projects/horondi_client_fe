@@ -55,6 +55,7 @@ export function* handleArticleLoad({ payload }) {
       `query{
         getNewsById(id:"${payload}"){
           ... on News{
+           __typename
             _id
             title{
               value
@@ -82,14 +83,19 @@ export function* handleArticleLoad({ payload }) {
             date
           }
           ... on Error {
-            message {
-              lang
-            }
+            message
             statusCode
           }
         }
       }`
     );
+
+    if (article.data.getNewsById.message) {
+      throw new Error(
+        `${article.data.getNewsById.statusCode} ${article.data.getNewsById.message}`
+      );
+    }
+
     yield put(setArticle(article.data.getNewsById));
     yield put(setLoading(false));
   } catch (e) {

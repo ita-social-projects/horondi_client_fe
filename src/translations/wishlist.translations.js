@@ -11,12 +11,12 @@ export const WISHLIST_TITTLES = {
 
 export const WISHLIST_BUTTONS = {
   0: {
-    empty: 'ОБРАТИ ЗАРАЗ',
-    toItem: 'ОБРАТИ ДЕТАЛІ'
+    empty: 'Обрати зараз',
+    toItem: 'Обрати деталі'
   },
   1: {
-    empty: 'WISH NOW',
-    toItem: 'CHOOSE FEATURES'
+    empty: 'Wish now',
+    toItem: 'Choose features'
   }
 };
 

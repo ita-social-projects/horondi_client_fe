@@ -19,6 +19,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "apollo-boost": "^0.4.9",
+    "apollo-cache-inmemory": "^1.6.6",
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
     "cors": "^2.8.5",
@@ -51,7 +52,7 @@
     "lint-staged": "lint-staged",
     "lint:fix": "eslint . --fix --color",
     "cypress": "cypress open",
-    "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
+    "eslint-check": "eslint --print-config src/components/app/app.js | eslint-config-prettier-check",
     "test": "jest --coverage",
     "create": "ccr create"
   },

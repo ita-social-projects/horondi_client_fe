@@ -9,8 +9,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from './logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
+import { setToLocalStorage } from '../../services/local-storage.service';
 import { CABINET_OPTIONS_LOGGED } from '../../translations/cabinet.translations';
 import { logoutUser } from '../../redux/user/user.actions';
+import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const LoggedCabinet = () => {
   const { lightMode, language } = useSelector(({ Theme, Language }) => ({
@@ -22,6 +24,7 @@ const LoggedCabinet = () => {
 
   const changeTheme = () => {
     dispatch(setThemeMode(!lightMode));
+    setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
   };
 
   const handleLogout = () => {

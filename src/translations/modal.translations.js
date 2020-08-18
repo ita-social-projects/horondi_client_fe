@@ -5,11 +5,11 @@ export const MODAL_DELETE_MESSAGES = {
 
 export const MODAL_BUTTONS = {
   0: {
-    confirm: 'ВИДАЛИТИ',
-    cancel: 'СКАСУВАТИ'
+    confirm: 'Видалити',
+    cancel: 'Скасувати'
   },
   1: {
-    confirm: 'DELETE',
-    cancel: 'CANCEL'
+    confirm: 'Delete',
+    cancel: 'Cancel'
   }
 };

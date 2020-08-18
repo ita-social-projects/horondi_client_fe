@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 
 import { setWishlist } from './wishlist.actions';
 import {
@@ -13,12 +13,12 @@ import {
 } from '../../services/local-storage.service';
 
 export function* handleWishlistLoad() {
-  const wishlist = yield call(getFromLocalStorage, 'wishlist');
+  const wishlist = getFromLocalStorage('wishlist');
   yield put(setWishlist(wishlist));
 }
 
 export function* handleAddWishlistItem({ payload }) {
-  const wishlist = yield call(getFromLocalStorage, 'wishlist');
+  const wishlist = getFromLocalStorage('wishlist');
   const newWishlist = [...wishlist, payload];
 
   setToLocalStorage('wishlist', newWishlist);
@@ -26,7 +26,7 @@ export function* handleAddWishlistItem({ payload }) {
 }
 
 export function* handleRemoveWishlistItem({ payload }) {
-  const wishlist = yield call(getFromLocalStorage, 'wishlist');
+  const wishlist = getFromLocalStorage('wishlist');
   const newWishlist = wishlist.filter((item) => item._id !== payload._id);
 
   setToLocalStorage('wishlist', newWishlist);

@@ -26,7 +26,7 @@ const FilledCart = ({ items }) => {
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-cy='filled-cart'>
       <div className={styles.table}>
         <div className={styles.tableHeader}>
           <div>{CART_TABLE_FIELDS[language].item}</div>

@@ -5,8 +5,7 @@ export const CONTACTS_PAGE_TITLES = {
     schedule: 'Графік роботи:',
     address: 'Адреса:',
     street: 'вул.',
-    location: 'Місцезнаходження на мапі',
-    index: 'Індекс:'
+    location: 'Місцезнаходження на мапі'
   },
   1: {
     title: 'Contacts',
@@ -14,7 +13,6 @@ export const CONTACTS_PAGE_TITLES = {
     schedule: 'Schedule:',
     address: 'Address:',
     street: 'str.',
-    location: 'Location on the map',
-    index: 'Index:'
+    location: 'Location on the map'
   }
 };

@@ -23,19 +23,8 @@ export function* handleContactsLoad() {
               value
             }
             address {
-              city {
-                lang
-               value
-              }
-              street {
-                lang
-                value
-              }
-              buildingNumber {
-                lang
-                value
-              }
-              postalCode
+              lang
+              value
             }
             email
             images {

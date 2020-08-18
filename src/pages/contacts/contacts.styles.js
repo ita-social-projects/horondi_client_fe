@@ -65,5 +65,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   mapImage: {
     width: '100%'
+  },
+  contactAddress: {
+    '& > p': {
+      margin: '0'
+    }
   }
 }));

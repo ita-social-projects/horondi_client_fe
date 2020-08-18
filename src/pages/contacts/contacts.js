@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import parse from 'html-react-parser';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -8,7 +9,7 @@ import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { getContacts } from '../../redux/contacts/contacts.actions';
-import mapImg from '../../images/welcome.jpg';
+import mapImg from '../../images/map-medium.png';
 
 const Contacts = () => {
   const { contacts, loading, language } = useSelector(
@@ -19,7 +20,6 @@ const Contacts = () => {
     })
   );
   const styles = useStyles();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,29 +27,12 @@ const Contacts = () => {
   }, [dispatch]);
 
   if (loading) {
-    console.log(contacts, 'CONTACTS IN COMPONENT');
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
         <LoadingBar color='inherit' />
       </Backdrop>
     );
   }
-
-  const getAddress = (language, contact) => {
-    let address = '';
-
-    switch (language) {
-    case 0:
-      console.log(contact.address);
-      return (address = `${contact.address.city[0][language].value}, ${CONTACTS_PAGE_TITLES[language].street} ${contact.address.street[0][language].value} ${contact.address.buildingNumber[0][language].value}`);
-
-    case 1:
-      return (address = `${contact.address.city[0][language].value}, ${contact.address.street[0][language].value} ${CONTACTS_PAGE_TITLES[language].street} ${contact.address.buildingNumber[0][language].value}`);
-
-    default:
-      return address;
-    }
-  };
 
   return contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
@@ -61,7 +44,7 @@ const Contacts = () => {
           <a target='_blank' rel='noopener noreferrer' href={contact.link}>
             <img
               className={styles.mapImage}
-              src={mapImg}
+              src={contact.images.medium || mapImg}
               alt={CONTACTS_PAGE_TITLES[language].location}
             />
           </a>
@@ -71,9 +54,7 @@ const Contacts = () => {
             <span className={styles.contactName}>
               {CONTACTS_PAGE_TITLES[language].phone}
             </span>
-            <span className={styles.contactsDetails}>
-              +{contact.phoneNumber}
-            </span>
+            <span>+{contact.phoneNumber}</span>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>
@@ -89,21 +70,13 @@ const Contacts = () => {
             <span className={styles.contactName}>
               {CONTACTS_PAGE_TITLES[language].address}
             </span>
-            <span className={styles.contactsDetails}>
-              {getAddress(language, contact)}
-            </span>
-          </div>
-          <div className={styles.contactsItem}>
-            <span className={styles.contactName}>
-              {CONTACTS_PAGE_TITLES[language].index}
-            </span>
-            <span className={styles.contactsDetails}>
-              {contact.address.postalCode[0]}
-            </span>
+            <div className={styles.contactAddress}>
+              {parse(contact.address[language].value)}
+            </div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>
-            <span className={styles.contactsDetails}>{contact.email}</span>
+            <span>{contact.email}</span>
           </div>
         </div>
       </div>

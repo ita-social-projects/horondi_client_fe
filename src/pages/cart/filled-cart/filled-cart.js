@@ -48,7 +48,7 @@ const FilledCart = ({ items }) => {
         {items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)}{' '}
         UAH
       </div>
-      <div className={styles.controlButtons}>
+      <div className={styles.controlButtons} data-cy='control-buttons'>
         <Link to='/'>
           <Button variant='contained'>{CART_BUTTONS[language].shopMore}</Button>
         </Link>

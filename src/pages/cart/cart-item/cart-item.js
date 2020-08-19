@@ -23,15 +23,15 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-cy='cart-item'>
       <div className={styles.itemData}>
-        <div className={styles.image}>
+        <div className={styles.image} data-cy='cart-item-img'>
           <Link to={item.productUrl}>
             <b />
           </Link>
         </div>
         <div className={styles.description}>
-          <Link to={item.productUrl}>
+          <Link to={item.productUrl} data-cy='cart-item-title'>
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
           <span>
@@ -56,7 +56,11 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
       </div>
       <div className={styles.price}>
         <span>{item.totalPrice} UAH</span>
-        <DeleteIcon className={styles.trash} onClick={onRemoveItem} />
+        <DeleteIcon
+          className={styles.trash}
+          onClick={onRemoveItem}
+          data-cy='cart-item-remove'
+        />
       </div>
     </div>
   );

@@ -23,12 +23,13 @@ const ColorsFilter = () => {
 
   const { colorsFilter } = filters;
 
+  const colorsName = filterData.map(
+    (product) => product.colors[0].simpleName[1].value
+  );
+
   const colors = filterData
     .map((product) => product.colors[0].simpleName)
-    .filter(
-      (color, index, self) =>
-        self.map((color) => color[1].value).indexOf(color[1].value) === index
-    );
+    .filter((color, index) => colorsName.indexOf(color[1].value) === index);
 
   const handleColorChange = (event) => {
     if (!event.target.checked) {

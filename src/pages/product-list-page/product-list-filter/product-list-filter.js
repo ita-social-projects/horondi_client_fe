@@ -118,7 +118,6 @@ const ProductListFilter = ({ selectedCategory }) => {
           </FormGroup>
           <HotItemFilter />
           <PriceFilter />
-
           <CategoryFilter selectedCategory={selectedCategory} />
           <ColorsFilter />
           <PatternsFilter />

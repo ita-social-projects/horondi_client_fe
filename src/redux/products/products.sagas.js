@@ -2,7 +2,7 @@ import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   setAllProducts,
-  setLoading,
+  setProductsLoading,
   setAllFilterData,
   setPagesCount
 } from './products.actions';
@@ -12,7 +12,7 @@ import { GET_ALL_FILTERS, GET_FILTRED_PRODUCTS } from './products.types';
 
 export function* handleFilterLoad() {
   try {
-    yield put(setLoading(true));
+    yield put(setProductsLoading(true));
     const state = yield select((state) => state.Products);
     const products = yield call(
       getItems,
@@ -106,7 +106,7 @@ export function* handleFilterLoad() {
       )
     );
     yield put(setAllProducts(products.data.getProducts.items));
-    yield put(setLoading(false));
+    yield put(setProductsLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
@@ -114,7 +114,7 @@ export function* handleFilterLoad() {
 
 export function* handleGetFilters() {
   try {
-    yield put(setLoading(true));
+    yield put(setProductsLoading(true));
     const filter = yield call(
       getItems,
       `query{
@@ -145,14 +145,14 @@ export function* handleGetFilters() {
     );
 
     yield put(setAllFilterData(filter.data.getProducts.items));
-    yield put(setLoading(false));
+    yield put(setProductsLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
 }
 
 export function* handleProductsErrors(e) {
-  yield put(setLoading(false));
+  yield put(setProductsLoading(false));
   yield put(setError({ e }));
   yield put(push('/error-page'));
 }

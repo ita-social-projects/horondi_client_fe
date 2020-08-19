@@ -5,7 +5,7 @@ import {
   setColorsFilter,
   setPatternsFilter,
   setPriceFilter,
-  setLoading,
+  setProductsLoading,
   setSearchFilter,
   setHotItemFilter,
   setPagesCount,
@@ -125,7 +125,9 @@ describe('Product reducer test', () => {
       loading: false
     };
 
-    expect(productReducer(initialState, setLoading(false))).toEqual(state);
+    expect(productReducer(initialState, setProductsLoading(false))).toEqual(
+      state
+    );
   });
   it('should set loading to false', () => {
     const state = {
@@ -133,7 +135,9 @@ describe('Product reducer test', () => {
       loading: true
     };
 
-    expect(productReducer(initialState, setLoading(true))).toEqual(state);
+    expect(productReducer(initialState, setProductsLoading(true))).toEqual(
+      state
+    );
   });
 
   it('should set pages count to 10', () => {

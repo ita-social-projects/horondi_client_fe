@@ -2,7 +2,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { handleFilterLoad } from '../products.sagas';
 import getItems from '../../../utils/client';
-import { setLoading, setAllProducts } from '../products.actions';
+import { setProductsLoading, setAllProducts } from '../products.actions';
 
 describe('get products by filter saga', () => {
   it('Filter products', () => {
@@ -88,9 +88,9 @@ describe('get products by filter saga', () => {
 
     return expectSaga(handleFilterLoad, {})
       .provide([[matchers.call.fn(getItems), productsExample]])
-      .put(setLoading(true))
+      .put(setProductsLoading(true))
       .put(setAllProducts(productsExample.data.getProducts.items))
-      .put(setLoading(false))
+      .put(setProductsLoading(false))
       .run();
   });
 });

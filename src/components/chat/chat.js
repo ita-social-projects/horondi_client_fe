@@ -57,7 +57,10 @@ export const Chat = () => {
     <div>
       <div className={visible ? style.iconsMessengers : style.disable}>
         <div>
-          <MessengerCustomerChat pageId='950324285094271' appId='' />
+          <MessengerCustomerChat
+            pageId='106973281128068'
+            appId='768636160372711'
+          />
         </div>
         <div className={mailFormVisible ? style.msgIconActive : style.msgIcon}>
           <MailOutlineIcon

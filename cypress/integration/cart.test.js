@@ -67,7 +67,7 @@ describe('cart item test', () => {
 
   it('should have clickable title with link', () => {
     cy.get('[data-cy="filled-cart"]')
-      .find('[data-cy="cart-item-title"]')
+      .find('[data-cy="cart-item-description"] > a:first-child')
       .should('be.visible')
       .click();
   });

@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     borderColor: '#DADADA',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px',
+    fontSize: '1.5em',
     '@media (max-width: 768px)': {
       fontSize: '1em'
     },
@@ -22,6 +23,9 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
       '& > *': {
         margin: '10px 0'
+      },
+      '& > th:first-child': {
+        flex: '1'
       }
     },
     '& > div:first-child': {

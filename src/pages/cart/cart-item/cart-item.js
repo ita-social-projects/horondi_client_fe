@@ -31,7 +31,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
           </Link>
         </div>
         <div className={styles.description}>
-          <Link to={item.productUrl} data-cy='cart-item-title'>
+          <Link to={item.productUrl} data-cy='cart-item-description'>
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
           <span>

@@ -17,14 +17,14 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
   };
 
   return (
-    <tr className={styles.root}>
+    <tr className={styles.root} data-cy='wishlist-item'>
       <td>
-        <div className={styles.image}>
+        <div className={styles.image} data-cy='wishlist-item-img'>
           <Link to={item.productUrl}>
             <img src={item.images} alt='product pictures' />
           </Link>
         </div>
-        <div className={styles.description}>
+        <div className={styles.description} data-cy='wishlist-item-description'>
           <Link to={item.productUrl}>
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
@@ -37,7 +37,11 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
       </td>
       <td className={styles.price}>
         <span>{item.totalPrice} UAH</span>
-        <DeleteIcon className={styles.trash} onClick={onRemoveItem} />
+        <DeleteIcon
+          className={styles.trash}
+          onClick={onRemoveItem}
+          data-cy='wishlist-item-remove'
+        />
       </td>
     </tr>
   );

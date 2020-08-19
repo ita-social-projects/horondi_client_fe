@@ -23,14 +23,14 @@ const FilledWishlist = ({ items }) => {
 
   return (
     <>
-      <table className={styles.table}>
+      <table className={styles.table} data-cy='filled-wishlist'>
         <thead className={styles.tableHeader}>
           <tr>
             <th>{WISHLIST_TABLE_FIELDS[language].item}</th>
             <th>{WISHLIST_TABLE_FIELDS[language].price}</th>
           </tr>
         </thead>
-        <tbody className={styles.tableBody}>
+        <tbody>
           {items.map((item, i) => (
             <WishlistItem
               key={i}

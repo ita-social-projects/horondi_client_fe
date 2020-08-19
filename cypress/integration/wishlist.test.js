@@ -18,3 +18,63 @@ describe('empty wishlist test', () => {
       .click();
   });
 });
+
+describe('filled wishlist test', () => {
+  it('should be visible', () => {
+    cy.visit('/');
+    cy.get('[data-cy="add-to-wishlist"]').click();
+    cy.visit('/wishlist');
+    cy.get('[data-cy="filled-wishlist"]').should('be.visible');
+  });
+});
+
+describe('wishlist item test', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.get('[data-cy="add-to-wishlist"]').click();
+    cy.visit('/wishlist');
+  });
+
+  it('should have clickable image with link', () => {
+    cy.get('[data-cy="filled-wishlist"]')
+      .find('[data-cy="wishlist-item-img"]')
+      .should('be.visible')
+      .click();
+  });
+
+  it('should have clickable title with link', () => {
+    cy.get('[data-cy="filled-wishlist"]')
+      .find('[data-cy="wishlist-item-description"] > a:first-child')
+      .should('be.visible')
+      .click();
+  });
+
+  it('should have button to redirecting to product', () => {
+    cy.get('[data-cy="filled-wishlist"]')
+      .find('[data-cy="wishlist-item-description"] > button')
+      .should('be.visible')
+      .click();
+  });
+
+  it('should have button to remove item from wishlist', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').should('be.visible');
+  });
+
+  it('should to show modal window', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').click();
+  });
+
+  it('should to remove item from wishlist and show empty wishlist component', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').click();
+
+    cy.get('[data-cy="removing-modal"]').find('button:first-child').click();
+
+    cy.get('[data-cy="empty-wishlist"]').should('be.visible');
+  });
+
+  it('should to not remove item from wishlist', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').click();
+
+    cy.get('[data-cy="removing-modal"]').find('button:last-child').click();
+  });
+});

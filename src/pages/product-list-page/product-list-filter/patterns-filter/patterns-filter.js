@@ -23,12 +23,12 @@ const PatternsFilter = () => {
 
   const { patternsFilter } = filters;
 
+  const patternsName = filterData.map((product) => product.pattern[1].value);
+
   const patterns = filterData
     .map((product) => product.pattern)
     .filter(
-      (pattern, index, self) =>
-        self.map((pattern) => pattern[1].value).indexOf(pattern[1].value) ===
-        index
+      (pattern, index) => patternsName.indexOf(pattern[1].value) === index
     );
 
   const handlePatternChange = (event) => {

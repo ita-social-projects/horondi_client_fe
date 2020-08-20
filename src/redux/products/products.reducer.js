@@ -7,7 +7,7 @@ import {
   SET_SORT_BY_DATE,
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
-  SET_LOADING,
+  SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
@@ -146,7 +146,7 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       ...setSort({ sortByPopularity: action.payload })
     };
-  case SET_LOADING:
+  case SET_PRODUCTS_LOADING:
     return {
       ...state,
       loading: action.payload

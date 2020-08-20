@@ -23,13 +23,15 @@ const CategoryFilter = () => {
 
   const { categoryFilter } = filters;
 
+  const categoriesName = filterData.map(
+    (product) => product.category.name[1].value
+  );
+
   const categories = filterData
     .map((product) => product.category)
     .filter(
-      (category, index, self) =>
-        self
-          .map((category) => category.name[1].value)
-          .indexOf(category.name[1].value) === index
+      (category, index) =>
+        categoriesName.indexOf(category.name[1].value) === index
     );
 
   const handleCategoryChange = (event) => {

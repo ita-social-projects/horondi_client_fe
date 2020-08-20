@@ -119,7 +119,6 @@ const ProductListFilter = () => {
           </FormGroup>
           <HotItemFilter />
           <PriceFilter />
-
           <CategoryFilter />
           <ModelsFilter />
           <ColorsFilter />

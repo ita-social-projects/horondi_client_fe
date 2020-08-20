@@ -5,7 +5,7 @@ import {
   setColorsFilter,
   setPatternsFilter,
   setPriceFilter,
-  setLoading,
+  setProductsLoading,
   setSearchFilter,
   setHotItemFilter,
   getFiltredProducts,
@@ -19,7 +19,7 @@ import {
   SET_ALL_FILTER_DATA,
   SET_ALL_PRODUCTS,
   GET_FILTRED_PRODUCTS,
-  SET_LOADING,
+  SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
@@ -127,14 +127,14 @@ describe('Filter actions test', () => {
 
 describe('loading action', () => {
   test('should return loading = true', () => {
-    expect(setLoading(true)).toEqual({
-      type: SET_LOADING,
+    expect(setProductsLoading(true)).toEqual({
+      type: SET_PRODUCTS_LOADING,
       payload: true
     });
   });
   test('should return loading = false', () => {
-    expect(setLoading(false)).toEqual({
-      type: SET_LOADING,
+    expect(setProductsLoading(false)).toEqual({
+      type: SET_PRODUCTS_LOADING,
       payload: false
     });
   });

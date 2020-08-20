@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import currencyReducer, { initialState } from '../currency.reducer';
 import { changeCurrency } from '../currency.actions';
-import { CHANGE_CURRENCY } from '../currency.types';
 
 describe('test currency reducer', () => {
   test('should return default state', () => {

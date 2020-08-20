@@ -12,22 +12,28 @@ import ProductFeatures from './product-features/product-features';
 import ProductInfo from './product-info';
 import ProductImages from './product-images';
 import { Loader } from '../../components/loader/loader';
-import { getProduct } from '../../redux/products/products.actions';
+import {
+  getFiltredProducts,
+  getProduct,
+  setCategoryFilter
+} from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { language, product, isLoading, productUrl } = useSelector(
+  const { language, product, isLoading, productUrl, filters } = useSelector(
     ({ Language, Products, router }) => ({
       language: Language.language,
       product: Products.product,
+      filters: Products.filters,
       isLoading: Products.loading,
       productUrl: router.location.pathname
     })
   );
   const dispatch = useDispatch();
   const styles = useStyles();
+  const { categoryFilter } = filters;
 
   const [selectedSize, setSize] = useState('');
   const [error, setError] = useState(false);
@@ -47,7 +53,8 @@ const ProductDetails = ({ match }) => {
     comments,
     mainMaterial,
     innerMaterial,
-    strapLengthInCm
+    strapLengthInCm,
+    category
   } = product || {};
 
   const { volumeInLiters, weightInKg } = useMemo(
@@ -64,7 +71,8 @@ const ProductDetails = ({ match }) => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (product !== null) {
+    if (product) {
+      dispatch(setCategoryFilter([category._id]));
       setPrice(basePrice[0].value);
       setDimensions({ volumeInLiters, weightInKg });
     }
@@ -75,7 +83,11 @@ const ProductDetails = ({ match }) => {
       setSize('');
       setSidePocket(false);
     };
-  }, [basePrice, volumeInLiters, weightInKg, product]);
+  }, [basePrice, volumeInLiters, weightInKg, product, category, dispatch]);
+
+  useEffect(() => {
+    dispatch(getFiltredProducts({}));
+  }, [categoryFilter, dispatch]);
 
   const uniqueSizes = useMemo(
     () => [
@@ -252,7 +264,7 @@ const ProductDetails = ({ match }) => {
           />
         </div>
       </div>
-      <SimilarProducts />
+      <SimilarProducts category={category} productId={_id} />
       <Comments comments={comments} productId={_id} />
     </Card>
   );

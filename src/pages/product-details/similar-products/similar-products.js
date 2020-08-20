@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
@@ -12,16 +13,26 @@ import {
 } from '../../../translations/product-details.translations';
 import { responsive } from '../../../configs';
 
-const SimilarProducts = () => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+const SimilarProducts = ({ category, productId }) => {
+  const { language, similarProducts } = useSelector(
+    ({ Language, Products }) => ({
+      language: Language.language,
+      similarProducts: Products.products
+    })
+  );
   const { title } = SIMILAR_ITEMS[language];
 
-  const imgs = Array(6)
-    .fill(productImage)
-    .map((img, idx) => (
-      <img src={img} alt={IMG_ALT_INFO[language].value} key={idx} />
+  const imgs = similarProducts
+    .filter(({ _id }) => _id !== productId)
+    .map(({ _id }, idx) => (
+      <Link key={idx} to={`/${category.name[1].value}/${_id}`}>
+        <img
+          className='image'
+          src={productImage}
+          alt={IMG_ALT_INFO[language].value}
+          key={idx}
+        />
+      </Link>
     ));
 
   return (

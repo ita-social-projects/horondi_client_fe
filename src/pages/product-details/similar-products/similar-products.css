@@ -31,7 +31,16 @@
     margin-top: 2rem;
 }
 
-.carousel img{
+.carousel img {
     width: 300px;
     height: 383px;
+}
+
+.image {
+    transition: all 0.3s;
+    transform: scale(1);
+}
+
+.image:hover {
+    transform: scale(1.05);
 }

@@ -29,20 +29,18 @@ const ProductFeatures = ({
     language: Language.language
   }));
 
-  const {
-    additionalPrice: [{ value }],
-    available,
-    name
-  } = additions.length >= 1 ? additions[0] : {};
+  const { additionalPrice, available, name } = additions[0] || {};
 
   const setAdditionalPrice = (price) => ` +${price} UAH`;
 
   const handleBottomChange = (event) => {
     const { value } = event.target;
+
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
         .additionalPrice[0].value
       : 0;
+
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
         .additionalPrice[0].value
@@ -54,9 +52,9 @@ const ProductFeatures = ({
 
   const handlePocketChange = (event) => {
     if (!sidePocket) {
-      setPrice((currentPrice) => currentPrice + value);
+      setPrice((currentPrice) => currentPrice + additionalPrice[0].value);
     } else {
-      setPrice((currentPrice) => currentPrice - value);
+      setPrice((currentPrice) => currentPrice - additionalPrice[0].value);
     }
     setSidePocket(event.target.checked);
   };
@@ -103,7 +101,7 @@ const ProductFeatures = ({
           </div>
         </div>
       ) : null}
-      {available ? (
+      {available && additionalPrice ? (
         <div className={styles.checkbox}>
           <FormControlLabel
             control={
@@ -111,7 +109,9 @@ const ProductFeatures = ({
             }
             label={name[language].value}
           />
-          <span className={styles.price}>{setAdditionalPrice(value)}</span>
+          <span className={styles.price}>
+            {setAdditionalPrice(additionalPrice[0].value)}
+          </span>
         </div>
       ) : null}
     </div>

@@ -29,7 +29,7 @@ export const initialState = {
     colorsFilter: [],
     patternsFilter: [],
     categoryFilter: null,
-    priceFilter: [0, 99999],
+    priceFilter: [0, 99999999],
     searchFilter: '',
     isHotItemFilter: false
   },

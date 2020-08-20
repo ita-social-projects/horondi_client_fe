@@ -13,7 +13,6 @@ import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 
 import { getCategories } from '../../redux/categories/categories.actions';
-import { changeCurrency } from '../../redux/currency/currency.actions';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
@@ -26,12 +25,10 @@ const App = () => {
   const localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
   const themeValue = theme(localStorageThemeMode);
-  const currencyInLocalStorage = getFromLocalStorage('currency') || 0;
 
   useEffect(() => {
-    dispatch(changeCurrency(currencyInLocalStorage));
     dispatch(getCategories());
-  }, [dispatch, currencyInLocalStorage]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setThemeMode(themeMode));

@@ -87,6 +87,13 @@ export function* handleArticleLoad({ payload }) {
         }
       }`
     );
+
+    if (article.data.getNewsById.message) {
+      throw new Error(
+        `${article.data.getNewsById.statusCode} ${article.data.getNewsById.message}`
+      );
+    }
+
     yield put(setArticle(article.data.getNewsById));
     yield put(setLoading(false));
   } catch (e) {

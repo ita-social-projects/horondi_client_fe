@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
 import {
@@ -15,6 +15,9 @@ const currencyInLocalStorage = getFromLocalStorage('currency') || 0;
 const Currency = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(changeCurrency(currencyInLocalStorage));
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const targetValue = e.target.value;

@@ -58,7 +58,9 @@ export function* handleFilterLoad() {
                   lang
                   value
                 }
-                basePrice 
+                basePrice {
+                  value
+                }
                 rate
                 images {
                   primary {
@@ -133,7 +135,9 @@ export function* handleGetFilters() {
                 value
               }
             }
-            basePrice
+            basePrice {
+              value
+            }
             pattern {
               value
             }

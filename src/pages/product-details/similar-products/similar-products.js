@@ -24,13 +24,13 @@ const SimilarProducts = ({ category, productId }) => {
 
   const imgs = similarProducts
     .filter(({ _id }) => _id !== productId)
-    .map(({ _id }, idx) => (
-      <Link key={idx} to={`/${category.name[1].value}/${_id}`}>
+    .map(({ _id }) => (
+      <Link key={_id} to={`/${category.name[1].value}/${_id}`}>
         <img
           className='image'
           src={productImage}
           alt={IMG_ALT_INFO[language].value}
-          key={idx}
+          key={_id}
         />
       </Link>
     ));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -15,9 +15,12 @@ import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 import { PDP_BUTTONS } from '../../../translations/product-details.translations';
 
-const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
+const ProductSubmit = ({ checkSize, productToSend, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
   const wishlistItems = getFromLocalStorage('wishlist');
 
   const isWishful = wishlistItems

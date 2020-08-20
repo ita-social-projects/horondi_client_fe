@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -21,12 +22,18 @@ const ProductFeatures = ({
   setBagBottom,
   sidePocket,
   setSidePocket,
-  setPrice,
-  language
+  setPrice
 }) => {
-  const { additionalPrice, available, name } =
-    additions.length >= 1 ? additions[0] : {};
   const styles = useStyles();
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
+
+  const {
+    additionalPrice: [{ value }],
+    available,
+    name
+  } = additions.length >= 1 ? additions[0] : {};
 
   const setAdditionalPrice = (price) => ` +${price} UAH`;
 
@@ -34,11 +41,11 @@ const ProductFeatures = ({
     const { value } = event.target;
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        .additionalPrice
+        .additionalPrice[0].value
       : 0;
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-        .additionalPrice
+        .additionalPrice[0].value
       : 0;
 
     setPrice((currentPrice) => currentPrice - oldPrice + newPrice);
@@ -47,20 +54,20 @@ const ProductFeatures = ({
 
   const handlePocketChange = (event) => {
     if (!sidePocket) {
-      setPrice((currentPrice) => currentPrice + additionalPrice);
+      setPrice((currentPrice) => currentPrice + value);
     } else {
-      setPrice((currentPrice) => currentPrice - additionalPrice);
+      setPrice((currentPrice) => currentPrice - value);
     }
     setSidePocket(event.target.checked);
   };
 
   const menuItems = bottomMaterials
-    ? bottomMaterials.map(({ name, additionalPrice }) => (
-      <MenuItem value={name[1].value} key={name[1].value}>
+    ? bottomMaterials.map(({ _id, name, additionalPrice: [{ value }] }) => (
+      <MenuItem value={name[1].value} key={_id}>
         {name[language].value}
-        {additionalPrice ? (
+        {value ? (
           <span className={styles.selectPrice}>
-            {setAdditionalPrice(additionalPrice)}
+            {setAdditionalPrice(value)}
           </span>
         ) : null}
       </MenuItem>
@@ -104,9 +111,7 @@ const ProductFeatures = ({
             }
             label={name[language].value}
           />
-          <span className={styles.price}>
-            {setAdditionalPrice(additionalPrice)}
-          </span>
+          <span className={styles.price}>{setAdditionalPrice(value)}</span>
         </div>
       ) : null}
     </div>

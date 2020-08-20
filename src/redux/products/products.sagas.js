@@ -58,7 +58,7 @@ export function* handleFilterLoad() {
                   lang
                   value
                 }
-                basePrice
+                basePrice 
                 rate
                 images {
                   primary {
@@ -223,7 +223,10 @@ export function* handleProductLoading({ payload }) {
         lang
         value
       }
-      basePrice
+      basePrice {
+        value
+        currency
+      }
       options {
         size {
           name
@@ -232,14 +235,20 @@ export function* handleProductLoading({ payload }) {
           depthInCm
           volumeInLiters
           available
-          additionalPrice
+          additionalPrice {
+            value
+            currency
+          }
         }
         bottomMaterial {
           name {
             lang
             value
           }
-          additionalPrice
+          additionalPrice {
+            value
+            currency
+          }
         }
         additions {
           name {
@@ -247,11 +256,15 @@ export function* handleProductLoading({ payload }) {
             value
           }
           available
-          additionalPrice
+          additionalPrice {
+            value
+            currency
+          }
         }
       }
       rate
       comments {
+        _id
         text
         date
         user {
@@ -260,18 +273,23 @@ export function* handleProductLoading({ payload }) {
       }
       options {
         size {
+          _id
           name
           volumeInLiters
           widthInCm
           weightInKg
         }
         bottomMaterial {
+          _id
           name {
             lang
             value
           }
-        available
-          additionalPrice
+          available
+          additionalPrice {
+            value
+            currency
+          }
         }
         additions {
           name {
@@ -279,7 +297,10 @@ export function* handleProductLoading({ payload }) {
             lang
           }
           available
-          additionalPrice
+          additionalPrice {
+            value
+            currency
+          }
         }
         availableCount
       }
@@ -292,10 +313,6 @@ export function* handleProductLoading({ payload }) {
           large
           medium
         }
-      }
-      ... on Error {
-        message
-        statusCode
       }
     }
   }

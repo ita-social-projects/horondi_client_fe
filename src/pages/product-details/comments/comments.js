@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import useStyles from './COMMENTS.styles';
+import useStyles from './comments.styles';
 
 import CommentsItem from './comments-item';
 
 import { INPUT_VARIANT } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
 
-const Comments = ({ language, comments }) => {
+const Comments = ({ comments }) => {
   const styles = useStyles();
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
 
   const [rate, setRate] = useState(0);
 
   const commentsList = comments
-    ? comments.map(({ text, date, user: { firstName } }) => (
+    ? comments.map(({ _id, text, date, user: { name } }) => (
       <CommentsItem
-        key={date}
+        key={_id}
         language={language}
-        name={firstName}
+        name={name}
         text={text}
         date={date}
       />
@@ -39,7 +43,7 @@ const Comments = ({ language, comments }) => {
         <div className={styles.form}>
           <TextField
             className={styles.input}
-            label={COMMENTS[language].name}
+            label={COMMENTS[language].firstName}
             variant={INPUT_VARIANT}
             required
           />
@@ -52,7 +56,7 @@ const Comments = ({ language, comments }) => {
           <br />
           <TextField
             className={styles.textInput}
-            label={COMMENTS[language].textField}
+            label={COMMENTS[language].text}
             multiline
             rows={10}
             variant={INPUT_VARIANT}

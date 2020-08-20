@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -6,20 +7,16 @@ import useStyles from './product-sizes.styles';
 
 import { SIZE } from '../../../translations/product-details.translations';
 
-const ProductSizes = ({
-  selectedSize,
-  handleSizeChange,
-  sizes,
-  error,
-  language
-}) => {
+const ProductSizes = ({ selectedSize, handleSizeChange, sizes, error }) => {
   const styles = useStyles();
-
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
   const sizeButtons = sizes
-    ? sizes.map(({ name, available }) =>
+    ? sizes.map(({ _id, name, available }) =>
       available && name ? (
         <Button
-          key={name}
+          key={_id}
           className={
             name === selectedSize ? styles.selectedSize : styles.sizeButton
           }

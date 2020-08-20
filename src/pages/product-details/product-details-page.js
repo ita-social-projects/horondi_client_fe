@@ -47,8 +47,7 @@ const ProductDetails = ({ match }) => {
     comments,
     mainMaterial,
     innerMaterial,
-    strapLengthInCm,
-    category
+    strapLengthInCm
   } = product || {};
 
   const { volumeInLiters, weightInKg } = useMemo(
@@ -66,7 +65,7 @@ const ProductDetails = ({ match }) => {
 
   useEffect(() => {
     if (product !== null) {
-      setPrice(basePrice);
+      setPrice(basePrice[0].value);
       setDimensions({ volumeInLiters, weightInKg });
     }
 
@@ -189,15 +188,17 @@ const ProductDetails = ({ match }) => {
 
   const handleSizeChange = (event) => {
     const { textContent } = event.target;
+
     const oldPrice = selectedSize
-      ? sizes.find(({ name }) => name === selectedSize).additionalPrice
+      ? sizes.find(({ name }) => name === selectedSize).additionalPrice[0].value
       : 0;
+
     const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
       ({ name }) => name === textContent
     );
 
     setSize(textContent);
-    setPrice((price) => price - oldPrice + additionalPrice);
+    setPrice((price) => price - oldPrice + additionalPrice[0].value);
     setDimensions({ volumeInLiters, weightInKg });
 
     if (error) {
@@ -228,13 +229,11 @@ const ProductDetails = ({ match }) => {
             strapLengthInCm={strapLengthInCm}
             currentVolume={dimensions.volumeInLiters}
             currentWeight={dimensions.weightInKg}
-            language={language}
           />
           <ProductSizes
             selectedSize={selectedSize}
             handleSizeChange={handleSizeChange}
             sizes={sizes}
-            language={language}
             error={error}
           />
           <ProductFeatures
@@ -245,22 +244,16 @@ const ProductDetails = ({ match }) => {
             sidePocket={sidePocket}
             setSidePocket={setSidePocket}
             setPrice={setPrice}
-            language={language}
           />
           <ProductSubmit
             checkSize={checkSize}
-            language={language}
             product={product}
             productToSend={productToSend}
           />
         </div>
       </div>
-      <SimilarProducts
-        language={language}
-        product={product}
-        category={category}
-      />
-      <Comments language={language} comments={comments} productId={_id} />
+      <SimilarProducts />
+      <Comments comments={comments} productId={_id} />
     </Card>
   );
 };

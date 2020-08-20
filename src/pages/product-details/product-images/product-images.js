@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
 import useStyles from './product-images.styles';
@@ -9,11 +10,15 @@ import {
   IMG_ALT_INFO
 } from '../../../translations/product-details.translations';
 
-const ProductImages = ({ images, language }) => {
+const ProductImages = ({ images }) => {
+  const styles = useStyles();
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
+
   const [isOpen, setIsOpen] = useState(false);
   const [currImg, setCurrImg] = useState(0);
 
-  const styles = useStyles();
   const imagesSet = Array(4).fill({ src: productImage });
 
   const openImage = (idx) => {

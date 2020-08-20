@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import useStyles from './comments-item.styles';
 
 import {
@@ -6,8 +7,11 @@ import {
   DATE_LANGUAGE_OPTIONS
 } from '../../../../configs';
 
-const CommentsItem = ({ name, text, date, language }) => {
+const CommentsItem = ({ name, text, date }) => {
   const styles = useStyles();
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
 
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
   const dateToShow = new Date(parseInt(date));

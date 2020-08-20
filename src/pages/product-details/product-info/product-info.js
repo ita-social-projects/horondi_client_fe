@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
 import Rating from '@material-ui/lab/Rating';
@@ -23,13 +24,15 @@ const ProductInfo = ({
   innerMaterial,
   strapLengthInCm,
   currentVolume,
-  currentWeight,
-  language
+  currentWeight
 }) => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
   });
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
 
   return (
     <div>

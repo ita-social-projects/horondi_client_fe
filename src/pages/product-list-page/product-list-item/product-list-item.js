@@ -25,7 +25,7 @@ const ProductListItem = ({ product, category }) => {
         <StarRating size='small' readOnly rate={product.rate} />
         <div>
           <FontAwesomeIcon icon={faHryvnia} />
-          {product.basePrice}
+          {product.basePrice[0].value}
         </div>
       </Card>
     </Link>
@@ -43,7 +43,11 @@ ProductListItem.propTypes = {
       })
     ),
     rate: PropTypes.number,
-    basePrice: PropTypes.number,
+    basePrice: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.number
+      })
+    ),
     images: PropTypes.shape({
       isMain: PropTypes.string,
       large: PropTypes.string,
@@ -60,7 +64,11 @@ ProductListItem.defaultProps = {
   category: '',
   product: {
     _id: '',
-    basePrice: 1,
+    basePrice: [
+      {
+        value: 1
+      }
+    ],
     images: {
       primary: { medium: '' },
       additional: {}

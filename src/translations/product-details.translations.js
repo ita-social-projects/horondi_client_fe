@@ -147,3 +147,14 @@ export const IMG_ALT_INFO = {
     value: 'Product image'
   }
 };
+
+export const TOOLTIPS = {
+  0: {
+    addWishful: 'Додати в бажане',
+    removeWishful: 'Видалити з бажаного'
+  },
+  1: {
+    addWishful: 'Add to wishlist',
+    removeWishful: 'Remove from wishlist'
+  }
+};

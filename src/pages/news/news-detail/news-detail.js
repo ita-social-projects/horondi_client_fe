@@ -28,7 +28,7 @@ const NewsDetailPage = ({ match }) => {
     const articleId = match.params.id;
     dispatch(getArticle(articleId));
     window.scrollTo(0, 0);
-  }, [match.params.id, dispatch, article]);
+  }, [match.params.id, dispatch]);
 
   const styles = useStyles();
 

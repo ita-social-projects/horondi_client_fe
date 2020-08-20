@@ -7,22 +7,17 @@ import Button from '@material-ui/core/Button';
 import useStyles from './product-submit.styles';
 
 import {
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../../services/local-storage.service';
-
-import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
+import { addItemToCart } from '../../../redux/cart/cart.actions';
+import { getFromLocalStorage } from '../../../services/local-storage.service';
 
-import { setItemToCart } from '../../../redux/cart/cart.actions';
 import { PDP_BUTTONS } from '../../../translations/product-details.translations';
 
 const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const cartItems = getFromLocalStorage('cart');
   const wishlistItems = getFromLocalStorage('wishlist');
 
   const isWishful = wishlistItems
@@ -30,23 +25,26 @@ const ProductSubmit = ({ checkSize, language, productToSend, product }) => {
     : false;
 
   const onWishfulHandler = () => {
-    const productToWishlist = {
-      ...productToSend,
-      selectedSize: productToSend.selectedSize || 'S'
-    };
     if (isWishful) {
-      dispatch(removeItemFromWishlist(productToWishlist));
+      dispatch(removeItemFromWishlist(productToSend));
     } else {
-      dispatch(addItemToWishlist(productToWishlist));
+      dispatch(addItemToWishlist(productToSend));
     }
   };
 
   const onAddToCart = () => {
     const isChecked = checkSize();
+    if (isChecked) {
+      dispatch(addItemToCart(productToSend));
+    }
   };
 
   const onAddToCheckout = () => {
     const isChecked = checkSize();
+    if (isChecked) {
+      dispatch(addItemToCart(productToSend));
+      dispatch(push('/checkout'));
+    }
   };
 
   return (

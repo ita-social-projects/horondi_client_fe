@@ -23,9 +23,19 @@ export const ABOUT_US_IMAGES = {
   workPlace_2: './images/about-us/work-place-2.jpg'
 };
 
+export const CART_IMAGES = {
+  lightTheme: './images/cart/cart-light-theme-img.png',
+  darkTheme: './images/cart/cart-dark-theme-img.png'
+};
+
 export const WISHLIST_IMAGES = {
   lightTheme: './images/wishlist/wishlist-light-theme-img.png',
   darkTheme: './images/wishlist/wishlist-dark-theme-img.png'
+};
+
+export const ERROR_PAGE_IMAGES = {
+  light: './images/error-page/error-light.png',
+  dark: './images/error-page/error-dark.png'
 };
 
 export const LOGO = 'HORONDI';
@@ -37,11 +47,6 @@ export const TIME_OPTIONS = {
   month: 'long',
   day: 'numeric'
 };
-
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
 
 export const CONFIRM_EMAIL = [
   {
@@ -100,28 +105,6 @@ export const LOGIN_USER_DATA = {
   email: '',
   password: ''
 };
-
-export const EMPTY_FIELD = [
-  {
-    lang: 'uk',
-    value: 'Заповніть поле'
-  },
-  {
-    lang: 'eng',
-    value: 'Empty field'
-  }
-];
-
-export const LOGIN_USER_ERROR = [
-  {
-    lang: 'uk',
-    value: 'Неправильна електронна адреса або пароль'
-  },
-  {
-    lang: 'eng',
-    value: 'Wrong e-mail address or password'
-  }
-];
 
 export const SHOW_AFTER = 3000;
 
@@ -267,4 +250,7 @@ export const COMMENTS_TIME_OPTIONS = {
   month: 'numeric',
   day: 'numeric'
 };
-export const TEXT = 'text';
+export const SORT_ASC = 'sortAsc';
+export const SORT_DESC = 'sortDesc';
+export const RATE = 'rate';
+export const POPULARITY = 'POPULARITY';

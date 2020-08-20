@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { ThemeProvider } from '@material-ui/styles';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import { CssBaseline } from '@material-ui/core';
+
 import Routes from '../../routes';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import CircularUnderLoad from '../loading-bar';
-import { useStyles } from './App.styles';
+import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 

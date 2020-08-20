@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import { useSelector } from 'react-redux';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
@@ -12,12 +13,19 @@ import Wishlist from '../pages/wishlist';
 import NewsDetailPage from '../pages/news/news-detail';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
+import ProductListPage from '../pages/product-list-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import ErrorPage from '../pages/error-page';
+import ThanksPage from '../pages/thanks-page';
 
 const Routes = () => {
   const styles = useStyles();
+
+  const { categories } = useSelector(({ Categories }) => ({
+    categories: Categories.list
+  }));
 
   return (
     <ConnectedRouter history={history}>
@@ -32,11 +40,27 @@ const Routes = () => {
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
+          <Route path='/thanks' exact component={ThanksPage} />
           <Route
             path='/confirmation/:token'
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
           />
+          <Route
+            path='/:category'
+            exact
+            render={({ match }) => {
+              const { category } = match.params;
+              const categoryParam = categories.find(
+                (categoryFound) =>
+                  categoryFound.name[1].value.toLowerCase() ===
+                    category.toLowerCase() && categoryFound.isMain
+              );
+              return <ProductListPage category={categoryParam} />;
+            }}
+          />
+          <Route path='/:category/:id' exact render={() => 'detail page'} />
+          <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>
       <AppFooter />

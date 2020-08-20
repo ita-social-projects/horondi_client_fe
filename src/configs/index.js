@@ -33,6 +33,11 @@ export const WISHLIST_IMAGES = {
   darkTheme: './images/wishlist/wishlist-dark-theme-img.png'
 };
 
+export const ERROR_PAGE_IMAGES = {
+  light: './images/error-page/error-light.png',
+  dark: './images/error-page/error-dark.png'
+};
+
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
 
@@ -42,11 +47,6 @@ export const TIME_OPTIONS = {
   month: 'long',
   day: 'numeric'
 };
-
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
 
 export const CONFIRM_EMAIL = [
   {
@@ -263,3 +263,7 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+export const SORT_ASC = 'sortAsc';
+export const SORT_DESC = 'sortDesc';
+export const RATE = 'rate';
+export const POPULARITY = 'POPULARITY';

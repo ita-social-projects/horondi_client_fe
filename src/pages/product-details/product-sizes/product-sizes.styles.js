@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => {
   const sizeButton = {
     fontSize: '1rem',
-    marginTop: '15px',
     width: '45px',
     height: '45px'
   };
@@ -11,14 +10,15 @@ const useStyles = makeStyles((theme) => {
   return {
     sizeButtons: {
       width: '50px',
-      marginBottom: '0.8rem'
+      marginBottom: '15px'
     },
     label: {
       fontWeight: '700',
       alignSelf: 'center',
       '@media (max-width: 600px)': {
         justifyContent: 'center'
-      }
+      },
+      marginRight: '10px'
     },
     error: {
       fontSize: '0.75rem',
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => {
       fontWeight: '400',
       lineHeight: '1.66',
       letterSpacing: '0.03333em',
-      color: '#f44336',
+      color: 'tomato',
       position: 'absolute',
       '@media (max-width: 600px)': {
         left: '34vw'
@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => {
       '&:hover': {
         backgroundColor: theme.palette.card.selectedButton.backgroundColor
       }
+    },
+    container: {
+      display: 'flex'
     }
   };
 });

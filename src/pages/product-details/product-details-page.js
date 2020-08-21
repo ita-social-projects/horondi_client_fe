@@ -22,9 +22,8 @@ import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { language, product, isLoading, productUrl, filters } = useSelector(
-    ({ Language, Products, router }) => ({
-      language: Language.language,
+  const { product, isLoading, productUrl, filters } = useSelector(
+    ({ Products, router }) => ({
       product: Products.product,
       filters: Products.filters,
       isLoading: Products.loading,

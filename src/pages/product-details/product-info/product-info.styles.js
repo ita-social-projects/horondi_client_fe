@@ -2,12 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => {
   const circle = {
-    marginLeft: '0.5rem',
     width: '2.5rem',
     height: '2.5rem',
     borderRadius: '50%',
-    margin: '1rem 0',
-    marginRight: '1.5rem'
+    margin: '1rem 1.5rem 0.8rem 0.5rem'
   };
 
   return {

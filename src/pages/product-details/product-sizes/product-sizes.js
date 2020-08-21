@@ -31,14 +31,16 @@ const ProductSizes = ({ selectedSize, handleSizeChange, sizes, error }) => {
   return (
     <div className={styles.sizeButtons}>
       {sizeButtons[0] ? (
-        <div>
-          <span className={styles.label}>{SIZE[language].size}: </span>
-          <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
+        <div className={styles.container}>
+          <div className={styles.label}>{SIZE[language].size}:</div>
+          <div>
+            <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
+          </div>
           <br />
-          {error ? (
-            <span className={styles.error}>{SIZE[language].error}</span>
-          ) : null}
         </div>
+      ) : null}
+      {error ? (
+        <span className={styles.error}>{SIZE[language].error}</span>
       ) : null}
     </div>
   );

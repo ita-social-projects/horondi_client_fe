@@ -216,7 +216,7 @@ const ProductDetails = ({ match }) => {
   return (
     <Card className={styles.container}>
       <div className={styles.product}>
-        <ProductImages images={images} />
+        <ProductImages />
         <div className={styles.productDetails}>
           <ProductInfo
             currentPrice={currentPrice}

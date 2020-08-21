@@ -10,10 +10,11 @@ import {
   IMG_ALT_INFO
 } from '../../../translations/product-details.translations';
 
-const ProductImages = ({ images }) => {
+const ProductImages = () => {
   const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, images } = useSelector(({ Language, Products }) => ({
+    language: Language.language,
+    images: Products.product.images
   }));
 
   const [isOpen, setIsOpen] = useState(false);

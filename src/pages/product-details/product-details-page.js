@@ -229,7 +229,7 @@ const ProductDetails = ({ match }) => {
   return (
     <Card className={styles.container}>
       <div className={styles.product}>
-        <ProductImages images={images} language={language} />
+        <ProductImages images={images} />
         <div className={styles.productDetails}>
           <ProductInfo
             rate={rate}
@@ -265,7 +265,7 @@ const ProductDetails = ({ match }) => {
         </div>
       </div>
       <SimilarProducts category={category} productId={_id} />
-      <Comments comments={comments} productId={_id} />
+      <Comments comments={comments} />
     </Card>
   );
 };

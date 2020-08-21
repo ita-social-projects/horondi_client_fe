@@ -22,17 +22,15 @@ import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { product, isLoading, productUrl, filters } = useSelector(
+  const { product, isLoading, productUrl } = useSelector(
     ({ Products, router }) => ({
       product: Products.product,
-      filters: Products.filters,
       isLoading: Products.loading,
       productUrl: router.location.pathname
     })
   );
   const dispatch = useDispatch();
   const styles = useStyles();
-  const { categoryFilter } = filters;
 
   const [selectedSize, setSize] = useState('');
   const [error, setError] = useState(false);
@@ -86,7 +84,7 @@ const ProductDetails = ({ match }) => {
 
   useEffect(() => {
     dispatch(getFiltredProducts({}));
-  }, [categoryFilter, dispatch]);
+  }, [dispatch]);
 
   const uniqueSizes = useMemo(
     () => [

@@ -19,15 +19,16 @@ import {
   TOOLTIPS
 } from '../../../translations/product-details.translations';
 
-const ProductSubmit = ({ checkSize, productToSend, product }) => {
+const ProductSubmit = ({ checkSize, productToSend }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, productId } = useSelector(({ Language, Products }) => ({
+    language: Language.language,
+    productId: Products.product._id
   }));
   const wishlistItems = getFromLocalStorage('wishlist');
 
-  const isWishful = wishlistItems.find((item) => product._id === item._id);
+  const isWishful = wishlistItems.find((item) => productId === item._id);
 
   const wishlistTip = isWishful
     ? TOOLTIPS[language].removeWishful

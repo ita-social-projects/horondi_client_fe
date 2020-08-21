@@ -40,20 +40,7 @@ const ProductDetails = ({ match }) => {
   const [currentPrice, setPrice] = useState(0);
   const [dimensions, setDimensions] = useState({});
 
-  const {
-    _id,
-    name,
-    basePrice,
-    rate,
-    images,
-    options,
-    description,
-    comments,
-    mainMaterial,
-    innerMaterial,
-    strapLengthInCm,
-    category
-  } = product || {};
+  const { _id, name, basePrice, images, options, category } = product || {};
 
   const { volumeInLiters, weightInKg } = useMemo(
     () =>
@@ -232,13 +219,7 @@ const ProductDetails = ({ match }) => {
         <ProductImages images={images} />
         <div className={styles.productDetails}>
           <ProductInfo
-            rate={rate}
-            title={name}
-            description={description}
             currentPrice={currentPrice}
-            mainMaterial={mainMaterial}
-            innerMaterial={innerMaterial}
-            strapLengthInCm={strapLengthInCm}
             currentVolume={dimensions.volumeInLiters}
             currentWeight={dimensions.weightInKg}
           />
@@ -257,15 +238,11 @@ const ProductDetails = ({ match }) => {
             setSidePocket={setSidePocket}
             setPrice={setPrice}
           />
-          <ProductSubmit
-            checkSize={checkSize}
-            product={product}
-            productToSend={productToSend}
-          />
+          <ProductSubmit checkSize={checkSize} productToSend={productToSend} />
         </div>
       </div>
-      <SimilarProducts category={category} productId={_id} />
-      <Comments comments={comments} />
+      <SimilarProducts />
+      <Comments />
     </Card>
   );
 };

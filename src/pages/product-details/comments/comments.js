@@ -11,10 +11,11 @@ import CommentsItem from './comments-item';
 import { INPUT_VARIANT } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
 
-const Comments = ({ comments }) => {
+const Comments = () => {
   const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, comments } = useSelector(({ Language, Products }) => ({
+    language: Language.language,
+    comments: Products.product.comments
   }));
 
   const [rate, setRate] = useState(0);

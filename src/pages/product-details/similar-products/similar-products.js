@@ -13,11 +13,13 @@ import {
 } from '../../../translations/product-details.translations';
 import { responsive } from '../../../configs';
 
-const SimilarProducts = ({ category, productId }) => {
-  const { language, similarProducts } = useSelector(
-    ({ Language, Products }) => ({
+const SimilarProducts = () => {
+  const { language, similarProducts, category, productId } = useSelector(
+    ({ Language, Products: { products, product } }) => ({
       language: Language.language,
-      similarProducts: Products.products
+      similarProducts: products,
+      category: product.category,
+      productId: product._id
     })
   );
   const { title } = SIMILAR_ITEMS[language];

@@ -15,29 +15,34 @@ import {
   WEIGHT
 } from '../../../translations/product-details.translations';
 
-const ProductInfo = ({
-  rate,
-  title,
-  description,
-  currentPrice,
-  mainMaterial,
-  innerMaterial,
-  strapLengthInCm,
-  currentVolume,
-  currentWeight
-}) => {
+const ProductInfo = ({ currentPrice, currentVolume, currentWeight }) => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
   });
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+
+  const {
+    language,
+    rate,
+    name,
+    description,
+    mainMaterial,
+    innerMaterial,
+    strapLengthInCm
+  } = useSelector(({ Language, Products: { product } }) => ({
+    language: Language.language,
+    rate: product.rate,
+    name: product.name,
+    description: product.description,
+    mainMaterial: product.mainMaterial,
+    innerMaterial: product.innerMaterial,
+    strapLengthInCm: product.strapLengthInCm
   }));
 
   return (
     <div>
       <div className={styles.head}>
-        <span className={styles.title}>{title[language].value}</span>
+        <span className={styles.title}>{name[language].value}</span>
         <Rating value={rate} readOnly precision={0.1} />
       </div>
       <div className={styles.details}>

@@ -27,9 +27,7 @@ const ProductSubmit = ({ checkSize, productToSend, product }) => {
   }));
   const wishlistItems = getFromLocalStorage('wishlist');
 
-  const isWishful = wishlistItems
-    ? wishlistItems.find((item) => product._id === item._id)
-    : false;
+  const isWishful = wishlistItems.find((item) => product._id === item._id);
 
   const wishlistTip = isWishful
     ? TOOLTIPS[language].removeWishful

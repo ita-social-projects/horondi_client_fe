@@ -21,11 +21,12 @@ const SimilarProducts = ({ category, productId }) => {
     })
   );
   const { title } = SIMILAR_ITEMS[language];
+  const categoryName = category.name[1].value.toLowerCase();
 
   const imgs = similarProducts
     .filter(({ _id }) => _id !== productId)
     .map(({ _id }) => (
-      <Link key={_id} to={`/${category.name[1].value}/${_id}`}>
+      <Link key={_id} to={`/${categoryName}/${_id}`}>
         <img
           className='image'
           src={productImage}

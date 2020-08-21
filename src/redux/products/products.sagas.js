@@ -5,7 +5,8 @@ import {
   setProductsLoading,
   setAllFilterData,
   setPagesCount,
-  setProduct
+  setProduct,
+  setProductLoading
 } from './products.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
@@ -167,7 +168,7 @@ export function* handleProductsErrors(e) {
 }
 
 export function* handleProductLoading({ payload }) {
-  yield put(setProductsLoading(true));
+  yield put(setProductLoading(true));
   const query = `
   query {
     getProductById(id:"${payload}") {
@@ -324,9 +325,11 @@ export function* handleProductLoading({ payload }) {
   try {
     const product = yield call(getItems, query);
     yield put(setProduct(product.data.getProductById));
-    yield put(setProductsLoading(false));
+    yield put(setProductLoading(false));
   } catch (e) {
-    yield call(handleProductsErrors, e);
+    yield put(setProductLoading(false));
+    yield put(setError({ e }));
+    yield put(push('/error-page'));
   }
 }
 

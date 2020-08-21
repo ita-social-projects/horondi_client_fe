@@ -18,7 +18,8 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEM_FILTER
+  SET_HOT_ITEM_FILTER,
+  SET_PRODUCT_LOADING
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -101,4 +102,8 @@ export const setAllProducts = (payload) => ({
 });
 export const getAllFilters = () => ({
   type: GET_ALL_FILTERS
+});
+export const setProductLoading = (payload) => ({
+  type: SET_PRODUCT_LOADING,
+  payload
 });

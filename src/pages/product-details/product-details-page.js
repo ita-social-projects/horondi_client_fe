@@ -22,10 +22,11 @@ import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { product, isLoading, productUrl } = useSelector(
+  const { product, isLoading, productUrl, categoryFilter } = useSelector(
     ({ Products, router }) => ({
+      categoryFilter: Products.filters.categoryFilter,
       product: Products.product,
-      isLoading: Products.loading,
+      isLoading: Products.productLoading,
       productUrl: router.location.pathname
     })
   );
@@ -83,8 +84,10 @@ const ProductDetails = ({ match }) => {
   }, [basePrice, volumeInLiters, weightInKg, product, category, dispatch]);
 
   useEffect(() => {
-    dispatch(getFiltredProducts({}));
-  }, [dispatch]);
+    if (categoryFilter) {
+      dispatch(getFiltredProducts({}));
+    }
+  }, [dispatch, categoryFilter]);
 
   const uniqueSizes = useMemo(
     () => [

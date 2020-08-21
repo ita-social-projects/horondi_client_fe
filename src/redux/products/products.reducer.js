@@ -15,10 +15,12 @@ import {
   SET_PATTERNS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEM_FILTER
+  SET_HOT_ITEM_FILTER,
+  SET_PRODUCT_LOADING
 } from './products.types';
 
 export const initialState = {
+  productLoading: false,
   loading: true,
   currentPage: 0,
   productsPerPage: 9,
@@ -152,6 +154,11 @@ const productsReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       product: action.payload
+    };
+  case SET_PRODUCT_LOADING:
+    return {
+      ...state,
+      productLoading: action.payload
     };
   default:
     return state;

@@ -15,7 +15,8 @@ import {
   setPagesCount,
   setCurrentPage,
   setProduct,
-  getProduct
+  getProduct,
+  setProductLoading
 } from '../products.actions';
 import {
   SET_ALL_FILTER_DATA,
@@ -34,7 +35,8 @@ import {
   SET_PAGES_COUNT,
   SET_CURRENT_PAGE,
   SET_PRODUCT,
-  GET_PRODUCT
+  GET_PRODUCT,
+  SET_PRODUCT_LOADING
 } from '../products.types';
 import { productsExample } from './products.mocks';
 
@@ -208,5 +210,19 @@ describe('Product actions test', () => {
     };
 
     expect(getProduct(productId)).toEqual(result);
+  });
+
+  test('should return loading = true', () => {
+    expect(setProductLoading(true)).toEqual({
+      type: SET_PRODUCT_LOADING,
+      payload: true
+    });
+  });
+
+  test('should return loading = false', () => {
+    expect(setProductLoading(false)).toEqual({
+      type: SET_PRODUCT_LOADING,
+      payload: false
+    });
   });
 });

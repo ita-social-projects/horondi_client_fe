@@ -14,7 +14,8 @@ import {
   setSortByRate,
   setSortByPopularity,
   setProductsPerPage,
-  setProduct
+  setProduct,
+  setProductLoading
 } from '../products.actions';
 import { productsExample } from './products.mocks';
 
@@ -197,5 +198,16 @@ describe('Product reducer test', () => {
     };
 
     expect(productReducer(initialState, setProduct(newProduct))).toEqual(state);
+  });
+
+  it('should set product loading to false', () => {
+    const state = {
+      ...initialState,
+      productLoading: false
+    };
+
+    expect(productReducer(initialState, setProductLoading(false))).toEqual(
+      state
+    );
   });
 });

@@ -4,7 +4,11 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { handleFilterLoad, handleProductLoading } from '../products.sagas';
 import getItems from '../../../utils/client';
 import { setProductsLoading, setAllProducts } from '../products.actions';
-import { SET_PRODUCT, SET_PRODUCTS_LOADING } from '../products.types';
+import {
+  SET_PRODUCT,
+  SET_PRODUCT_LOADING,
+  SET_PRODUCTS_LOADING
+} from '../products.types';
 import { SET_ERROR } from '../../error/error.types';
 
 describe('get products by filter saga', () => {
@@ -116,9 +120,9 @@ describe('Product saga test', () => {
 
     return expectSaga(handleProductLoading, productId)
       .provide([[matchers.call.fn(getItems), fakeProduct]])
-      .put({ type: SET_PRODUCTS_LOADING, payload: true })
+      .put({ type: SET_PRODUCT_LOADING, payload: true })
       .put({ type: SET_PRODUCT, payload: fakeProduct.data.getProductById })
-      .put({ type: SET_PRODUCTS_LOADING, payload: false })
+      .put({ type: SET_PRODUCT_LOADING, payload: false })
       .run();
   });
 
@@ -127,8 +131,8 @@ describe('Product saga test', () => {
 
     return expectSaga(handleProductLoading, productId)
       .provide([[matchers.call.fn(getItems), throwError(e)]])
-      .put({ type: SET_PRODUCTS_LOADING, payload: true })
-      .put({ type: SET_PRODUCTS_LOADING, payload: false })
+      .put({ type: SET_PRODUCT_LOADING, payload: true })
+      .put({ type: SET_PRODUCT_LOADING, payload: false })
       .put({ type: SET_ERROR, payload: { e } })
       .run();
   });

@@ -14,8 +14,8 @@ export default function* rootSaga() {
     categoriesSaga(),
     userSaga(),
     wishlistSaga(),
+    contactsSaga(),
     productsSaga(),
-    cartSaga(),
-    contactsSaga()
+    cartSaga()
   ]);
 }

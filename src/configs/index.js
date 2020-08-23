@@ -48,9 +48,54 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
+
 export const LANGUAGES_LIST = [
   { lang: 'UA', value: 0 },
   { lang: 'EN', value: 1 }
+
+export const CONFIRM_EMAIL = [
+  {
+    lang: 'uk',
+    value:
+      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+  },
+  {
+    lang: 'eng',
+    value:
+      'You have successfully registered! Please, confirm your email address.'
+  }
+];
+
+export const LOGIN_FORM_LABEL = [
+  {
+    lang: 'uk',
+    value: 'увійти'
+  },
+  {
+    lang: 'eng',
+    value: 'log in'
+  }
+];
+export const OR_TEXT = [
+  {
+    lang: 'uk',
+    value: 'або'
+  },
+  {
+    lang: 'eng',
+    value: 'or'
+  }
+];
+
+export const REGISTER_FORM_LABEL = [
+  {
+    lang: 'uk',
+    value: 'Реєстрація'
+  },
+  {
+    lang: 'eng',
+    value: 'Register'
+  }
 ];
 
 export const REGISTER_USER_DATA = {
@@ -81,3 +126,105 @@ export const formRegExp = {
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
 };
+
+export const placeholders = {
+  firstName: [
+    {
+      lang: 'uk',
+      value: "Введіть Ім'я"
+    },
+    {
+      lang: 'eng',
+      value: 'Enter firstname'
+    }
+  ],
+  lastName: [
+    {
+      lang: 'uk',
+      value: 'Введіть прізвище'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter lastname'
+    }
+  ],
+  email: [
+    {
+      lang: 'uk',
+      value: 'Введіть емейл'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter email'
+    }
+  ],
+  password: [
+    {
+      lang: 'uk',
+      value: 'Введіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Enter password'
+    }
+  ],
+  confirmPassword: [
+    {
+      lang: 'uk',
+      value: 'Підтвердіть пароль'
+    },
+    {
+      lang: 'eng',
+      value: 'Confirm password'
+    }
+  ]
+};
+
+export const FORGOT_PASSWORD = [
+  {
+    lang: 'uk',
+    value: 'Забули пароль?'
+  },
+  {
+    lang: 'eng',
+    value: 'Forgot password?'
+  }
+];
+
+export const REGISTER_PROPOSAL = [
+  {
+    lang: 'uk',
+    value: 'Реєстрація'
+  },
+  {
+    lang: 'eng',
+    value: 'Registration'
+  }
+];
+
+export const WELCOME_MESSAGE = [
+  {
+    h2: 'Вітаємо',
+    h3: 'Реєстрація пройшла успішно!',
+    button: 'В магазин'
+  },
+  {
+    h2: 'Welcome',
+    h3: 'Registration was successful!',
+    button: 'Go to shop'
+  }
+];
+
+export const CONFIRM_ERROR = [
+  {
+    value: 'Ой! Щось пішло не так.'
+  },
+  {
+    value: 'Oops! Something went wrong.'
+  }
+];
+export const SORT_ASC = 'sortAsc';
+export const SORT_DESC = 'sortDesc';
+export const RATE = 'rate';
+export const POPULARITY = 'POPULARITY';
+

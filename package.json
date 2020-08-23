@@ -16,7 +16,6 @@
     "@material-ui/lab": "^4.0.0-alpha.55",
     "@material-ui/styles": "^4.10.0",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
@@ -52,9 +51,8 @@
     "lint-staged": "lint-staged",
     "lint:fix": "eslint . --fix --color",
     "cypress": "cypress open",
-    "eslint-check": "eslint --print-config src/components/app/app.js | eslint-config-prettier-check",
-    "test": "jest --coverage",
-    "create": "ccr create"
+    "eslint-check": "eslint --print-config src/components/App/App.js | eslint-config-prettier-check",
+    "test": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -83,7 +81,7 @@
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/preset-env": "^7.10.2",
     "babel-eslint": "^10.1.0",
-    "cypress": "^4.9.0",
+    "cypress": "^4.12.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
@@ -107,7 +105,8 @@
     "prettier-eslint": "^10.1.1",
     "react-test-render": "^1.1.2",
     "redux-saga-test-plan": "^4.0.0-rc.3",
-    "terser-webpack-plugin": "^3.0.3"
+    "terser-webpack-plugin": "^3.0.3",
+    "webpack": "^4.44.1"
   },
   "husky": {
     "hooks": {

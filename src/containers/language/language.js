@@ -7,7 +7,7 @@ import {
 } from '../../services/local-storage.service';
 import useStyles from './language.styles';
 import { changeLanguage } from '../../redux/language/language.actions';
-import { LANGUAGES_LIST } from '../../configs';
+import { LANGUAGES_LIST } from '../../translations/language.translations';
 
 const languageInLocalStorage = getFromLocalStorage('language') || 0;
 

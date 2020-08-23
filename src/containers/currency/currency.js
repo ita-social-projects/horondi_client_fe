@@ -6,14 +6,13 @@ import {
   getFromLocalStorage
 } from '../../services/local-storage.service';
 import { changeCurrency } from '../../redux/currency/currency.actions';
-import { CURRENCIES_LIST } from '../../translations/currency.translation';
+import { CURRENCIES_LIST, DEFAULT_CURRENCY } from '../../configs';
 import Dropdown from '../../components/dropdown';
-import useStyles from './currency.styles';
 
-const currencyInLocalStorage = getFromLocalStorage('currency') || 0;
+const currencyInLocalStorage =
+  getFromLocalStorage('currency') || DEFAULT_CURRENCY;
 
 const Currency = () => {
-  const styles = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
@@ -34,7 +33,6 @@ const Currency = () => {
   return (
     <div id='currency'>
       <Dropdown
-        styles={styles}
         mappedItems={mappedCurrencies}
         handler={handleChange}
         defaultValue={currencyInLocalStorage}

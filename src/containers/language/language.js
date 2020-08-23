@@ -6,15 +6,14 @@ import {
   getFromLocalStorage
 } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
-import { LANGUAGES_LIST } from '../../translations/language.tranclations';
+import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
 import Dropdown from '../../components/dropdown';
-import useStyles from './language.styles';
 
-const languageInLocalStorage = getFromLocalStorage('language') || 0;
+const languageInLocalStorage =
+  getFromLocalStorage('language') || DEFAULT_LANGUAGE;
 
 const Language = () => {
   const dispatch = useDispatch();
-  const styles = useStyles();
 
   useEffect(() => {
     dispatch(changeLanguage(languageInLocalStorage));
@@ -35,7 +34,6 @@ const Language = () => {
   return (
     <div id='language'>
       <Dropdown
-        styles={styles}
         mappedItems={mappedLanguages}
         handler={handleChange}
         defaultValue={languageInLocalStorage}

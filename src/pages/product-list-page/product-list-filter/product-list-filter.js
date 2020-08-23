@@ -21,7 +21,8 @@ import {
   setCategoryFilter,
   setPriceFilter,
   setSearchFilter,
-  setHotItemFilter
+  setHotItemFilter,
+  setModelsFilter
 } from '../../../redux/products/products.actions';
 
 import {
@@ -75,13 +76,14 @@ const ProductListFilter = () => {
     dispatch(setCategoryFilter([]));
     dispatch(setSearchFilter(''));
     dispatch(setHotItemFilter(false));
+    dispatch(setModelsFilter([]));
     dispatch(
       setPriceFilter([
         Math.min(...filterData.map((product) => product.basePrice[0].value)),
         Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
-    dispatch(getFiltredProducts());
+    dispatch(getFiltredProducts({}));
   };
 
   return (

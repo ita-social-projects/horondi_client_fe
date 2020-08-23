@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import { useDispatch, useSelector } from 'react-redux';
 import { COLORS_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
@@ -45,27 +46,37 @@ const ColorsFilter = () => {
     }
   };
 
+  const [hideFilters, setHideFilters] = useState(true);
+
   return (
     <FormGroup data-cy='colors_filter'>
-      <Typography id='colors' gutterBottom>
-        {COLORS_TEXT[language].value}:
+      <Typography
+        className={styles.filterName}
+        id='colors'
+        gutterBottom
+        onClick={() => setHideFilters(!hideFilters)}
+      >
+        <span>{COLORS_TEXT[language].value}:</span>
+        <span style={{ textDecoration: 'underline' }}>{colors.length}</span>
       </Typography>
-      {colors.map((color) => (
-        <FormControlLabel
-          key={color[1].value}
-          className={styles.checkbox}
-          control={
-            <Checkbox
-              name={color[1].value}
-              checked={
-                !!colorsFilter.find((filter) => filter === color[1].value)
-              }
-            />
-          }
-          label={color[language].value}
-          onChange={handleColorChange}
-        />
-      ))}
+      {hideFilters ||
+        colors.map((color) => (
+          <FormControlLabel
+            key={color[1].value}
+            className={styles.checkbox}
+            control={
+              <Checkbox
+                name={color[1].value}
+                checked={
+                  !!colorsFilter.find((filter) => filter === color[1].value)
+                }
+              />
+            }
+            label={color[language].value}
+            onChange={handleColorChange}
+          />
+        ))}
+      <Divider />
     </FormGroup>
   );
 };

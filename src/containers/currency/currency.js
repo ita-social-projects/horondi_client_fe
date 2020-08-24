@@ -26,12 +26,12 @@ const Currency = () => {
     }
   };
   const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
-    <MenuItem id={`currency${value + 1}`} key={value} value={value}>
+    <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
       {currency === 'UAH' ? '\u20b4' : '\u0024'}
     </MenuItem>
   ));
   return (
-    <div id='currency'>
+    <div data-cy='currency'>
       <Dropdown
         mappedItems={mappedCurrencies}
         handler={handleChange}

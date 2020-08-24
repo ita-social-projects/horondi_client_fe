@@ -27,12 +27,12 @@ const Language = () => {
     }
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
-    <MenuItem id={`language${value + 1}`} key={value} value={value}>
+    <MenuItem data-cy={`language${value + 1}`} key={value} value={value}>
       {lang}
     </MenuItem>
   ));
   return (
-    <div id='language'>
+    <div data-cy='language'>
       <Dropdown
         mappedItems={mappedLanguages}
         handler={handleChange}

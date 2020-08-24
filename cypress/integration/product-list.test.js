@@ -12,10 +12,10 @@ describe('products tests', () => {
     products().its('sortByPrice').should('be.equal', 0);
     products().its('sortByRate').should('be.equal', 0);
     products()
-      .its('filtredProducts')
+      .its('products')
       .should(($products) => {
         expect($products[0].purchasedCount).to.be.equal(43);
-        expect($products[$products.length - 1].purchasedCount).to.be.equal(16);
+        expect($products[$products.length - 1].purchasedCount).to.be.equal(11);
       });
   });
   it('products should be sorted by price ascending', () => {
@@ -30,10 +30,12 @@ describe('products tests', () => {
     products().its('sortByPrice').should('be.equal', 1);
     products().its('sortByRate').should('be.equal', 0);
     products()
-      .its('filtredProducts')
+      .its('products')
       .should(($products) => {
-        expect($products[0].basePrice).to.be.equal(500);
-        expect($products[$products.length - 1].basePrice).to.be.equal(950);
+        expect($products[0].basePrice[0].value).to.be.equal(50000);
+        expect($products[$products.length - 1].basePrice[0].value).to.be.equal(
+          95000
+        );
       });
   });
   it('products should be sorted by price descending', () => {
@@ -48,10 +50,12 @@ describe('products tests', () => {
     products().its('sortByPrice').should('be.equal', -1);
     products().its('sortByRate').should('be.equal', 0);
     products()
-      .its('filtredProducts')
+      .its('products')
       .should(($products) => {
-        expect($products[0].basePrice).to.be.equal(900);
-        expect($products[$products.length - 1].basePrice).to.be.equal(500);
+        expect($products[0].basePrice[0].value).to.be.equal(90000);
+        expect($products[$products.length - 1].basePrice[0].value).to.be.equal(
+          50000
+        );
       });
   });
   it('products should be sorted by rate descending', () => {
@@ -66,38 +70,38 @@ describe('products tests', () => {
     products().its('sortByPrice').should('be.equal', 0);
     products().its('sortByRate').should('be.equal', -1);
     products()
-      .its('filtredProducts')
+      .its('products')
       .should(($products) => {
         expect($products[0].rate).to.be.equal(4.9);
         expect($products[$products.length - 1].rate).to.be.equal(0);
       });
   });
-  it('in store should be 9 products', () => {
+  it('there should be 9 products in store', () => {
     const products = () =>
       cy.window().its('store').invoke('getState').its('Products');
     cy.visit('/bags');
-    cy.get('[title="nine products per page"]').click();
+    cy.get('[data-cy="nine products per page"]').click();
     cy.wait(3000);
-    products().its('filtredProducts').should('have.length', 9);
+    products().its('products').should('have.length', 9);
     products().its('productsPerPage').should('be.equal', 9);
   });
 
-  it('in store should be 18 products', () => {
+  it('there should be 18 products in store', () => {
     const products = () =>
       cy.window().its('store').invoke('getState').its('Products');
     cy.visit('/bags');
     cy.get('[title="eighteen products per page"]').click();
     cy.wait(3000);
-    products().its('filtredProducts').should('have.length', 11);
+    products().its('products').should('have.length', 11);
     products().its('productsPerPage').should('be.equal', 18);
   });
-  it('in store should be 18 products', () => {
+  it('there should be 30 products in store', () => {
     const products = () =>
       cy.window().its('store').invoke('getState').its('Products');
     cy.visit('/bags');
-    cy.get('[title="eighteen products per page"]').click();
+    cy.get('[data-cy="eighteen products per page"]').click();
     cy.wait(3000);
-    products().its('filtredProducts').should('have.length', 11);
+    products().its('products').should('have.length', 11);
     products().its('productsPerPage').should('be.equal', 30);
   });
 

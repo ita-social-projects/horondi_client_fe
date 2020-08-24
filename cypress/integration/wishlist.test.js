@@ -13,27 +13,6 @@ describe('filled wishlist test', () => {
   });
 });
 
-describe('empty wishlist test', () => {
-  beforeEach(() => {
-    cy.visit('/wishlist');
-  });
-
-  it('should be visible', () => {
-    cy.get('[data-cy="empty-wishlist"]').should('be.visible');
-  });
-
-  it('should contain button with link to homepage', () => {
-    cy.get('[data-cy="empty-wishlist"]')
-      .find('button')
-      .should('be.visible')
-      .click();
-  });
-
-  it('should contain image', () => {
-    cy.get('[data-cy="empty-wishlist"]').find('img').should('be.visible');
-  });
-});
-
 describe('wishlist item test', () => {
   beforeEach(() => {
     clearLocalStorage();
@@ -55,20 +34,20 @@ describe('wishlist item test', () => {
       .click();
   });
 
-  it('should have button to remove item from wishlist', () => {
-    cy.get('[data-cy="wishlist-item-remove"]').should('be.visible');
-  });
-
-  it('should to show modal window', () => {
-    cy.get('[data-cy="wishlist-item-remove"]').click();
-  });
-
   it('should to remove item from wishlist and show empty wishlist component', () => {
     cy.get('[data-cy="wishlist-item-remove"]').click();
 
     cy.get('[data-cy="removing-modal"]').find('button:first-child').click();
 
     cy.get('[data-cy="empty-wishlist"]').should('be.visible');
+  });
+
+  it('should have button to remove item from wishlist', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').should('be.visible');
+  });
+
+  it('should to show modal window', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').click();
   });
 
   it('should to not remove item from wishlist', () => {
@@ -81,5 +60,26 @@ describe('wishlist item test', () => {
       .find('[data-cy="wishlist-item-description"] > button')
       .should('be.visible')
       .click();
+  });
+});
+
+describe('empty wishlist test', () => {
+  beforeEach(() => {
+    cy.visit('/wishlist');
+  });
+
+  it('should be visible', () => {
+    cy.get('[data-cy="empty-wishlist"]').should('be.visible');
+  });
+
+  it('should contain button with link to homepage', () => {
+    cy.get('[data-cy="empty-wishlist"]')
+      .find('button')
+      .should('be.visible')
+      .click();
+  });
+
+  it('should contain image', () => {
+    cy.get('[data-cy="empty-wishlist"]').find('img').should('be.visible');
   });
 });

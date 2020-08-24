@@ -13,9 +13,9 @@ const getContacts = () => ({
   type: GET_CONTACTS
 });
 
-const setContactsLoading = (loading) => ({
+const setLoading = (loading) => ({
   type: SET_CONTACTS_LOADING,
   payload: loading
 });
 
-export { setContacts, getContacts, setContactsLoading };
+export { setContacts, getContacts, setLoading };

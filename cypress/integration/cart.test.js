@@ -2,24 +2,7 @@ import {
   clearLocalStorage,
   setToLocalStorage
 } from '../../src/services/local-storage.service';
-
-const fakeProduct = {
-  _id: 'xdfgbvc3',
-  name: {
-    0: { value: 'гарбуз' },
-    1: { value: 'Pumpkin' }
-  },
-  bagBottom: 'Натуральна шкіра',
-  selectedSize: 'S',
-  sidePocket: {
-    isSelected: true
-  },
-  totalPrice: 1200,
-  images:
-    'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/47230850_1840441399415884_8917409871041658880_o.jpg?_nc_cat=102&_nc_sid=8bfeb9&_nc_ohc=hm88c7z3vA8AX-1Hz30&_nc_ht=scontent.flwo4-2.fna&oh=72d7ebf7aaa8fee317e60c68bbc8a987&oe=5F47F0CA',
-  quantity: 1,
-  productUrl: '/backpacks/foweoo423'
-};
+import { FAKE_PRODUCT_FOR_TEST } from '../../src/configs';
 
 describe('empty cart test', () => {
   beforeEach(() => {
@@ -45,12 +28,18 @@ describe('empty cart test', () => {
 describe('filled cart test', () => {
   beforeEach(() => {
     clearLocalStorage();
-    setToLocalStorage('cart', [fakeProduct]);
+    setToLocalStorage('cart', [FAKE_PRODUCT_FOR_TEST]);
     cy.visit('/cart');
   });
 
   it('should be visible', () => {
     cy.get('[data-cy="filled-cart"]').should('be.visible');
+  });
+
+  it('after click to "continue shopping" button should to redirect to home page', () => {
+    cy.get('[data-cy="control-buttons"]')
+      .find('a:first-child > button')
+      .click();
   });
 
   it('should to contain 2 linked buttons "continue shopping" and "checkout"', () => {
@@ -63,12 +52,6 @@ describe('filled cart test', () => {
       .should('be.visible');
   });
 
-  it('after click to "continue shopping" button should to redirect to home page', () => {
-    cy.get('[data-cy="control-buttons"]')
-      .find('a:first-child > button')
-      .click();
-  });
-
   it('after click to "checkout" button should to redirect to checkout', () => {
     cy.get('[data-cy="control-buttons"]').find('a:last-child > button').click();
   });
@@ -77,20 +60,20 @@ describe('filled cart test', () => {
 describe('cart item test', () => {
   beforeEach(() => {
     clearLocalStorage();
-    setToLocalStorage('cart', [fakeProduct]);
+    setToLocalStorage('cart', [FAKE_PRODUCT_FOR_TEST]);
     cy.visit('/cart');
-  });
-
-  it('should have clickable image with link', () => {
-    cy.get('[data-cy="filled-cart"]')
-      .find('[data-cy="cart-item-img"]')
-      .should('be.visible')
-      .click();
   });
 
   it('should have clickable title with link', () => {
     cy.get('[data-cy="filled-cart"]')
       .find('[data-cy="cart-item-description"] > a:first-child')
+      .should('be.visible')
+      .click();
+  });
+
+  it('should have clickable image with link', () => {
+    cy.get('[data-cy="filled-cart"]')
+      .find('[data-cy="cart-item-img"]')
       .should('be.visible')
       .click();
   });

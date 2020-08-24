@@ -1,10 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  comments: {
+  comment: {
     padding: '1rem 3rem',
     marginTop: '1rem',
     '& hr': {
+      border: 'none',
       color: '#C2C2C2',
       backgroundColor: '#C2C2C2',
       height: '0.05rem'
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   form: {
+    marginTop: '15px',
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
       }
     },
     '@media (max-width: 950px)': {
+      marginTop: '0',
       display: 'flex',
       flexDirection: 'column',
       '&:nth-child(1)': {
@@ -44,35 +47,53 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   input: {
-    width: '20rem',
-    marginTop: '1rem',
+    marginBottom: '45px',
+    float: 'left',
+    width: '308px',
     paddingRight: '1rem',
     height: '2rem',
     '@media (max-width: 950px)': {
-      marginBottom: '1.5rem'
+      marginBottom: '1.5rem',
+      marginTop: '15px'
     },
-    '@media (max-width: 600px)': {
+    '& p': {
+      position: 'absolute',
+      top: '45px',
+      fontSize: '10px'
+    },
+    '@media (max-width: 350px)': {
       width: '85vw'
     },
-    '& .MuiOutlinedInput-root': {
-      backgroundColor: theme.palette.card.childrenBackgroundColor
+    '& input': {
+      fontFamily: 'Montserrat',
+      fontWeight: '500'
     }
   },
-  textInput: {
-    marginTop: '2.5rem',
-    width: '39rem',
-    backgroundColor: theme.palette.card.childrenBackgroundColor,
+  text: {
+    marginRight: '500px',
+    position: 'relative',
+    width: '70vw',
     '@media (max-width: 950px)': {
-      width: '67vw',
+      width: '63vw',
       marginTop: '1rem'
     },
     '@media (max-width: 600px)': {
-      width: '85vw',
-      marginTop: '1rem'
+      width: '78vw'
+    },
+    '& p': {
+      position: 'absolute',
+      top: '170px',
+      fontSize: '10px'
+    },
+    '& textarea': {
+      fontFamily: 'Montserrat',
+      fontSize: '0.875rem',
+      fontWeight: '500'
     }
   },
   commentBtn: {
-    margin: '1.5rem 0',
+    marginTop: '25px',
+    marginBottom: '1.5rem',
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '1rem',
@@ -81,10 +102,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
-    },
-    '&:disabled': {
-      background: '#999999',
-      color: '#C2C2C2'
     },
     '@media (max-width: 950px)': {
       marginTop: '0',

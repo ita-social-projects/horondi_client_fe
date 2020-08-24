@@ -16,7 +16,11 @@ import {
   SET_SEARCH,
   SET_PAGES_COUNT,
   SET_HOT_ITEM_FILTER,
-  SET_PRODUCT_LOADING
+  SET_PRODUCT_LOADING,
+  SET_COMMENT,
+  SET_RATE,
+  SET_COMMENTS_LOADING,
+  SET_UPDATING_COMMENT
 } from './products.types';
 
 export const initialState = {
@@ -38,7 +42,9 @@ export const initialState = {
   filterData: [],
   product: null,
   products: [],
-  pagesCount: 1
+  pagesCount: 1,
+  commentsLoading: false,
+  updatingComment: null
 };
 const setSort = ({
   sortByPrice = 0,
@@ -159,6 +165,33 @@ const productsReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       productLoading: action.payload
+    };
+  case SET_RATE:
+    return {
+      ...state,
+      product: {
+        ...state.product,
+        rate: action.payload.rate,
+        userRates: action.payload.userRates
+      }
+    };
+  case SET_COMMENT:
+    return {
+      ...state,
+      product: {
+        ...state.product,
+        comments: action.payload
+      }
+    };
+  case SET_COMMENTS_LOADING:
+    return {
+      ...state,
+      commentsLoading: action.payload
+    };
+  case SET_UPDATING_COMMENT:
+    return {
+      ...state,
+      updatingComment: action.payload
     };
   default:
     return state;

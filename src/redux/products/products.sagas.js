@@ -6,15 +6,43 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading
+  setProductLoading,
+  setCommentsLoading,
+  setComment,
+  setRate,
+  setUpdatingComment
 } from './products.actions';
+
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
+
 import {
   GET_ALL_FILTERS,
   GET_FILTRED_PRODUCTS,
-  GET_PRODUCT
+  GET_PRODUCT,
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  UPDATE_COMMENT
 } from './products.types';
+
+import {
+  addComment,
+  changeRate,
+  deleteComment,
+  getComments,
+  getProduct,
+  updateComment
+} from './products.operations';
+
+import {
+  setSnackBarMessage,
+  setSnackBarSeverity,
+  setSnackBarStatus
+} from '../snackbar/snackbar.actions';
+
+import { SNACKBAR_MESSAGE } from '../../configs';
+
+const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
 
 export function* handleFilterLoad() {
   try {
@@ -153,7 +181,6 @@ export function* handleGetFilters() {
         }
       }`
     );
-
     yield put(setAllFilterData(filter.data.getProducts.items));
     yield put(setProductsLoading(false));
   } catch (e) {
@@ -168,162 +195,9 @@ export function* handleProductsErrors(e) {
 }
 
 export function* handleProductLoading({ payload }) {
-  yield put(setProductLoading(true));
-  const query = `
-  query {
-    getProductById(id:"${payload}") {
-      ... on Product {
-        _id
-      category {
-        _id
-        name {
-          lang
-          value
-        }
-      }
-      name {
-        lang
-        value
-      }
-      description {
-        lang
-        value
-      }
-      mainMaterial {
-        lang
-        value
-      }
-      innerMaterial {
-        lang
-        value
-      }
-      strapLengthInCm
-      images {
-        primary {
-          medium
-          large
-        }
-        additional {
-          thumbnail
-          large
-        }
-      }
-      colors {
-        code
-        name {
-          lang
-          value
-        }
-        images {
-          thumbnail
-          large
-        }
-        available
-      }
-      pattern {
-        lang
-        value
-      }
-      closure {
-        lang
-        value
-      }
-      basePrice {
-        value
-        currency
-      }
-      options {
-        size {
-          name
-          heightInCm
-          widthInCm
-          depthInCm
-          volumeInLiters
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        bottomMaterial {
-          name {
-            lang
-            value
-          }
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        additions {
-          name {
-            lang
-            value
-          }
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-      }
-      rate
-      comments {
-        _id
-        text
-        date
-        user {
-          name
-        }
-      }
-      options {
-        size {
-          _id
-          name
-          volumeInLiters
-          widthInCm
-          weightInKg
-        }
-        bottomMaterial {
-          _id
-          name {
-            lang
-            value
-          }
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        additions {
-          name {
-            value
-            lang
-          }
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        availableCount
-      }
-      images {
-        primary {
-          large
-          medium
-        }
-        additional {
-          large
-          medium
-        }
-      }
-    }
-  }
-}`;
   try {
-    const product = yield call(getItems, query);
+    yield put(setProductLoading(true));
+    const product = yield call(getProduct, payload);
     yield put(setProduct(product.data.getProductById));
     yield put(setProductLoading(false));
   } catch (e) {
@@ -333,8 +207,72 @@ export function* handleProductLoading({ payload }) {
   }
 }
 
+export function* handleAddComment({ payload }) {
+  try {
+    yield put(setCommentsLoading(true));
+    yield call(addComment, payload);
+    const comments = yield call(getComments, payload.product);
+    console.log(comments.data.getAllCommentsByProduct);
+    yield put(setComment(comments.data.getAllCommentsByProduct));
+    yield put(setCommentsLoading(false));
+    yield call(handleSnackbar, added);
+    if (payload.rate > 0) {
+      const rate = yield call(changeRate, payload);
+      yield put(setRate(rate.data[payload.method]));
+    }
+  } catch (e) {
+    yield call(handleCommentsError);
+  }
+}
+
+export function* handleDeleteComment({ payload }) {
+  try {
+    yield put(setCommentsLoading(true));
+    yield call(deleteComment, payload);
+    const comments = yield call(getComments, payload.product);
+    yield put(setComment(comments.data.getAllCommentsByProduct));
+    yield put(setCommentsLoading(false));
+    yield put(setCommentsLoading(false));
+    yield call(handleSnackbar, deleted);
+  } catch (e) {
+    yield call(handleCommentsError);
+  }
+}
+
+export function* handleUpdateComment({ payload }) {
+  try {
+    yield put(setUpdatingComment(payload.comment));
+    yield call(updateComment, payload);
+    const comments = yield call(getComments, payload.product);
+    yield put(setComment(comments.data.getAllCommentsByProduct));
+    yield put(setUpdatingComment(null));
+    yield call(handleSnackbar, updated);
+  } catch (e) {
+    yield put(setUpdatingComment(null));
+    yield put(setSnackBarSeverity('error'));
+    yield put(setSnackBarMessage(error));
+    yield put(setSnackBarStatus(true));
+  }
+}
+
+export function* handleCommentsError() {
+  yield put(setCommentsLoading(false));
+  yield put(setSnackBarSeverity('error'));
+  yield put(setSnackBarMessage(error));
+  yield put(setSnackBarStatus(true));
+}
+
+export function* handleSnackbar(message) {
+  yield put(setSnackBarSeverity('success'));
+  yield put(setSnackBarMessage(message));
+  yield put(setSnackBarStatus(true));
+}
+
 export default function* productsSaga() {
   yield takeEvery(GET_ALL_FILTERS, handleGetFilters);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilterLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
+  yield takeEvery(ADD_COMMENT, handleAddComment);
+  yield takeEvery(DELETE_COMMENT, handleDeleteComment);
+  yield takeEvery(UPDATE_COMMENT, handleUpdateComment);
 }

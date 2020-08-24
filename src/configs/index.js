@@ -114,9 +114,10 @@ export const errorMessages = [
     value: {
       firstname: 'Поле повинно містити від 2 до 30 символів',
       lastname: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      email: 'Некоректний формат ',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не співпадають',
+      text: 'Поле повинно містити від 2 до 500 символів'
     }
   },
   {
@@ -124,9 +125,10 @@ export const errorMessages = [
     value: {
       firstname: 'Field should contain from 2 to 30 characters',
       lastname: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
-      confirmPassword: 'Passwords do not match'
+      confirmPassword: 'Passwords do not match',
+      text: 'Field should contain from 2 to 500 characters'
     }
   }
 ];
@@ -142,7 +144,10 @@ export const formRegExp = {
   street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+  text: /^.{2,700}$/gm,
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
+  script: /(script)/g
 };
 
 export const placeholders = {
@@ -272,3 +277,19 @@ export const responsive = {
     items: 1
   }
 };
+
+export const SNACKBAR_DURATION = 4000;
+export const SNACKBAR_MESSAGE = {
+  added: ['Успішно додано', 'Successfully added'],
+  updated: ['Успішно оновлено', 'Successfully updated'],
+  deleted: ['Успішно видалено', 'Successfully deleted'],
+  error: ['Щось пішло не так', 'Something went wrong']
+};
+export const COMMENT_DATA = {
+  firstName: '',
+  text: '',
+  product: '',
+  show: true,
+  email: ''
+};
+export const TEXT = 'text';

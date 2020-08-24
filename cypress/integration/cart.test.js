@@ -4,27 +4,6 @@ import {
 } from '../../src/services/local-storage.service';
 import { FAKE_PRODUCT_FOR_TEST } from '../../src/configs';
 
-describe('empty cart test', () => {
-  beforeEach(() => {
-    cy.visit('/cart');
-  });
-
-  it('should be visible', () => {
-    cy.get('[data-cy="empty-cart"]').should('be.visible');
-  });
-
-  it('should contain image', () => {
-    cy.get('[data-cy="empty-cart"]').find('img').should('be.visible');
-  });
-
-  it('should contain button with link to homepage', () => {
-    cy.get('[data-cy="empty-cart"]')
-      .find('button')
-      .should('be.visible')
-      .click();
-  });
-});
-
 describe('filled cart test', () => {
   beforeEach(() => {
     clearLocalStorage();
@@ -125,5 +104,26 @@ describe('cart item test', () => {
     cy.get('[data-cy="cart-item-remove"]').click();
 
     cy.get('[data-cy="removing-modal"]').find('button:last-child').click();
+  });
+});
+
+describe('empty cart test', () => {
+  beforeEach(() => {
+    cy.visit('/cart');
+  });
+
+  it('should be visible', () => {
+    cy.get('[data-cy="empty-cart"]').should('be.visible');
+  });
+
+  it('should contain image', () => {
+    cy.get('[data-cy="empty-cart"]').find('img').should('be.visible');
+  });
+
+  it('should contain button with link to homepage', () => {
+    cy.get('[data-cy="empty-cart"]')
+      .find('button')
+      .should('be.visible')
+      .click();
   });
 });

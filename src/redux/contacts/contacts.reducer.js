@@ -1,7 +1,7 @@
-import { SET_CONTACTS, SET_LOADING } from './contacts.types';
+import { SET_CONTACTS, SET_CONTACTS_LOADING } from './contacts.types';
 
 const initialState = {
-  loading: true,
+  loading: false,
   contacts: []
 };
 
@@ -13,7 +13,7 @@ const contactsReducer = (state = initialState, action = {}) => {
       contacts: action.payload
     };
 
-  case SET_LOADING:
+  case SET_CONTACTS_LOADING:
     return {
       ...state,
       loading: action.payload

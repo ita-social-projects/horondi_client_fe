@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem 3rem',
     marginTop: '1rem',
     '& hr': {
-      border: 'none',
       color: '#C2C2C2',
       backgroundColor: '#C2C2C2',
       height: '0.05rem'

@@ -31,7 +31,6 @@ const CommentsItem = ({ name, text, date }) => {
           <div>{text}</div>
         </div>
       </div>
-      <hr />
     </div>
   );
 };

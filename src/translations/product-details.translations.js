@@ -28,15 +28,15 @@ export const COMMENTS = {
 
 export const PRODUCT_DESCRIPTION = {
   0: {
-    productDescription: 'Опис продукту',
-    productMainMaterial: 'Основна тканина ',
-    productInnerMaterial: 'Внутрішній матеріал ',
+    description: 'Опис продукту',
+    mainMaterial: 'Основна тканина ',
+    innerMaterial: 'Внутрішній матеріал ',
     strapLengthInCm: 'Довжина лямок(см) '
   },
   1: {
-    productDescription: 'Product description',
-    productMainMaterial: 'Main material ',
-    productInnerMaterial: 'Inner material ',
+    description: 'Product description',
+    mainMaterial: 'Main material ',
+    innerMaterial: 'Inner material ',
     strapLengthInCm: 'Strap length(cm) '
   }
 };

@@ -14,6 +14,7 @@ import {
   PRODUCT_DESCRIPTION,
   WEIGHT
 } from '../../../translations/product-details.translations';
+import Detail from '../detail';
 
 const ProductInfo = ({ currentPrice, currentVolume, currentWeight }) => {
   const styles = useStyles({
@@ -46,56 +47,38 @@ const ProductInfo = ({ currentPrice, currentVolume, currentWeight }) => {
         <Rating value={rate} readOnly precision={0.1} />
       </div>
       <div className={styles.details}>
-        <div>
-          <p className={styles.subtitle}>
-            {PRODUCT_DESCRIPTION[language].productDescription}:
-          </p>
-          <div className={styles.description}>
-            {parse(description[language].value)}
-          </div>
-        </div>
-        <div>
-          <span className={styles.subtitle}>
-            {PRODUCT_DESCRIPTION[language].productMainMaterial}
-          </span>
-          <span className={styles.description}>
-            - {mainMaterial[language].value}
-          </span>
-        </div>
+        <Detail
+          subtitle={`${PRODUCT_DESCRIPTION[language].description}:`}
+          description={parse(description[language].value)}
+        />
+        <Detail
+          subtitle={PRODUCT_DESCRIPTION[language].mainMaterial}
+          description={` - ${mainMaterial[language].value}`}
+        />
         <div>
           {innerMaterial.length >= 1 ? (
-            <div>
-              <span className={styles.subtitle}>
-                {PRODUCT_DESCRIPTION[language].productInnerMaterial}
-              </span>
-              <span className={styles.description}>
-                - {innerMaterial[language].value}
-              </span>
-            </div>
+            <Detail
+              subtitle={PRODUCT_DESCRIPTION[language].innerMaterial}
+              description={` - ${innerMaterial[language].value}`}
+            />
           ) : null}
         </div>
-        {strapLengthInCm > 0 ? (
-          <div>
-            <span className={styles.subtitle}>
-              {PRODUCT_DESCRIPTION[language].strapLengthInCm}
-            </span>
-            <span className={styles.description}>- {strapLengthInCm}</span>
-          </div>
+        {strapLengthInCm ? (
+          <Detail
+            subtitle={PRODUCT_DESCRIPTION[language].strapLengthInCm}
+            description={`- ${strapLengthInCm}`}
+          />
         ) : null}
         {currentVolume && currentWeight ? (
           <div>
-            <div>
-              <span className={styles.subtitle}>
-                {WEIGHT[language].volumeLabel}
-              </span>
-              <span className={styles.description}>- {currentVolume}</span>
-            </div>
-            <div>
-              <span className={styles.subtitle}>
-                {WEIGHT[language].weightLabel}
-              </span>
-              <span className={styles.description}>- {currentWeight}</span>
-            </div>
+            <Detail
+              subtitle={WEIGHT[language].volumeLabel}
+              description={` - ${currentVolume}`}
+            />
+            <Detail
+              subtitle={WEIGHT[language].weightLabel}
+              description={` - ${currentWeight}`}
+            />
           </div>
         ) : null}
       </div>

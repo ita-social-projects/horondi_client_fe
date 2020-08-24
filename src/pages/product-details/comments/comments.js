@@ -40,7 +40,7 @@ const Comments = () => {
         value={rate}
         onChange={(e, newRate) => setRate(newRate)}
       />
-      <form>
+      <form className={styles.form}>
         <div className={styles.form}>
           <TextField
             className={styles.input}
@@ -68,7 +68,6 @@ const Comments = () => {
           {COMMENTS[language].submit}
         </Button>
       </form>
-      <hr />
       {commentsList}
     </div>
   );

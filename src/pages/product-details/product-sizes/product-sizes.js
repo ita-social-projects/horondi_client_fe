@@ -36,7 +36,6 @@ const ProductSizes = ({ selectedSize, handleSizeChange, sizes, error }) => {
           <div>
             <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
           </div>
-          <br />
         </div>
       ) : null}
       {error ? (

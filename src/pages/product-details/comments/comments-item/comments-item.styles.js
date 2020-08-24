@@ -6,12 +6,7 @@ const useStyles = makeStyles((theme) => {
   return {
     container: {
       color,
-      '& hr': {
-        border: 'none',
-        color: '#C2C2C2',
-        backgroundColor: '#C2C2C2',
-        height: '0.05rem'
-      }
+      borderTop: '2px solid #C2C2C2'
     },
     comments: {
       margin: '0.5rem 0 1.5rem',

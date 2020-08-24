@@ -20,16 +20,13 @@ describe('wishlist item test', () => {
     cy.visit('/wishlist');
   });
 
+  it('should to show modal window', () => {
+    cy.get('[data-cy="wishlist-item-remove"]').click();
+  });
+
   it('should have clickable image with link', () => {
     cy.get('[data-cy="filled-wishlist"]')
       .find('[data-cy="wishlist-item-img"]')
-      .should('be.visible')
-      .click();
-  });
-
-  it('should have clickable title with link', () => {
-    cy.get('[data-cy="filled-wishlist"]')
-      .find('[data-cy="wishlist-item-description"] > a:first-child')
       .should('be.visible')
       .click();
   });
@@ -46,10 +43,6 @@ describe('wishlist item test', () => {
     cy.get('[data-cy="wishlist-item-remove"]').should('be.visible');
   });
 
-  it('should to show modal window', () => {
-    cy.get('[data-cy="wishlist-item-remove"]').click();
-  });
-
   it('should to not remove item from wishlist', () => {
     cy.get('[data-cy="wishlist-item-remove"]').click();
     cy.get('[data-cy="removing-modal"]').find('button:last-child').click();
@@ -58,6 +51,13 @@ describe('wishlist item test', () => {
   it('should have button to redirecting to product', () => {
     cy.get('[data-cy="filled-wishlist"]')
       .find('[data-cy="wishlist-item-description"] > button')
+      .should('be.visible')
+      .click();
+  });
+
+  it('should have clickable title with link', () => {
+    cy.get('[data-cy="filled-wishlist"]')
+      .find('[data-cy="wishlist-item-description"] > a:first-child')
       .should('be.visible')
       .click();
   });

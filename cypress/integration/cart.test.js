@@ -50,6 +50,10 @@ describe('cart item test', () => {
       .click();
   });
 
+  it('should have button to remove item from cart', () => {
+    cy.get('[data-cy="cart-item-remove"]').should('be.visible');
+  });
+
   it('should have clickable image with link', () => {
     cy.get('[data-cy="filled-cart"]')
       .find('[data-cy="cart-item-img"]')
@@ -82,10 +86,6 @@ describe('cart item test', () => {
     cy.get('[data-cy="cart-item-quantity"] > button:last-child')
       .should('be.visible')
       .click();
-  });
-
-  it('should have button to remove item from cart', () => {
-    cy.get('[data-cy="cart-item-remove"]').should('be.visible');
   });
 
   it('should to show modal window', () => {

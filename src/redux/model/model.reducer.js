@@ -1,10 +1,10 @@
 import { SET_MODELS } from './model.types';
 
-const initialState = {
+export const initialState = {
   models: []
 };
 
-const cartReducer = (state = initialState, action = {}) => {
+const modelReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case SET_MODELS:
     return {
@@ -16,4 +16,4 @@ const cartReducer = (state = initialState, action = {}) => {
   }
 };
 
-export default cartReducer;
+export default modelReducer;

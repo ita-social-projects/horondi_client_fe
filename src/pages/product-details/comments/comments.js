@@ -40,7 +40,7 @@ const Comments = () => {
         value={rate}
         onChange={(e, newRate) => setRate(newRate)}
       />
-      <form className={styles.form}>
+      <form>
         <div className={styles.form}>
           <TextField
             className={styles.input}

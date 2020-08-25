@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
@@ -59,35 +59,49 @@ const Comments = () => {
   const [rate, setRate] = useState(0);
 
   const { link, script } = formRegExp;
-  const { purchasedProduct, _id } = userData || {};
+  const { purchasedProduct, _id, email: userEmail, firstName: userName } =
+    userData || {};
 
-  const hasRate = userRates
-    ? userRates.some(({ user }) => user._id === _id)
-    : null;
+  const hasRate = useMemo(
+    () => (userRates ? userRates.some(({ user }) => user._id === _id) : null),
+    [userRates, _id]
+  );
 
-  const hasBought = purchasedProduct
-    ? purchasedProduct.some((product) => product === productId)
-    : null;
+  const hasBought = useMemo(
+    () =>
+      purchasedProduct
+        ? purchasedProduct.some((product) => product === productId)
+        : null,
+    [purchasedProduct, productId]
+  );
 
-  const rateTip = !_id
-    ? COMMENTS[language].unregisteredTip
-    : !hasBought
-      ? COMMENTS[language].registeredTip
-      : COMMENTS[language].successfulTip;
+  const rateTip = useMemo(
+    () =>
+      !_id
+        ? COMMENTS[language].unregisteredTip
+        : !hasBought
+          ? COMMENTS[language].registeredTip
+          : COMMENTS[language].successfulTip,
+    [language, _id, hasBought]
+  );
 
-  const commentToSend = _id
-    ? {
-      ...COMMENT_DATA,
-      user: _id,
-      email: userData.email,
-      firstName: userData.firstName,
-      product: productId
-    }
-    : { ...COMMENT_DATA, product: productId };
+  const commentToSend = useMemo(
+    () =>
+      _id
+        ? {
+          ...COMMENT_DATA,
+          user: _id,
+          email: userEmail,
+          firstName: userName,
+          product: productId
+        }
+        : { ...COMMENT_DATA, product: productId },
+    [_id, productId, userEmail, userName]
+  );
 
   useEffect(() => {
     setComment(commentToSend);
-  }, [setComment]);
+  }, [setComment, commentToSend]);
 
   useEffect(() => {
     if (userData && textValidated) {

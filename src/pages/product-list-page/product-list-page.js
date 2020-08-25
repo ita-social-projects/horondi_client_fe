@@ -91,8 +91,8 @@ const ProductListPage = ({ category }) => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice)),
-        Math.max(...filterData.map((product) => product.basePrice))
+        Math.min(...filterData.map((product) => product.basePrice[0].value)),
+        Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
   }, [category, filterData, dispatch]);

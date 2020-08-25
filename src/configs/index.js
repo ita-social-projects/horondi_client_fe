@@ -81,3 +81,8 @@ export const formRegExp = {
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
 };
+
+export const SORT_ASC = 'sortAsc';
+export const SORT_DESC = 'sortDesc';
+export const RATE = 'rate';
+export const POPULARITY = 'POPULARITY';

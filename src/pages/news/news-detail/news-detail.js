@@ -42,7 +42,7 @@ const NewsDetailPage = ({ match }) => {
   }
   if (article.text[language].value === null) {
     return (
-      <h1>Sory, this article is not translated. Try to change language</h1>
+      <h2>Sory, this article is not translated. Try to change language</h2>
     );
   }
   const newsTitle =

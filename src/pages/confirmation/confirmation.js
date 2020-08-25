@@ -21,7 +21,7 @@ const Confirmation = ({ token }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(confirmUser(token));
+    dispatch(confirmUser({ token }));
   }, [dispatch, token]);
 
   // HANDLERS

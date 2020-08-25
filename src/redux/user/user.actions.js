@@ -7,12 +7,9 @@ import {
   CONFIRM_USER,
   STATE_RESET,
   RECOVER_USER,
-  SET_USER_RECOVERED,
   PASSWORD_RESET,
-  SET_PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
-  REGISTER_USER,
-  SET_USER_REGISTERED
+  REGISTER_USER
 } from './user.types';
 
 const setUser = (user) => ({
@@ -53,18 +50,8 @@ const recoverUser = (payload) => ({
   payload
 });
 
-const setUserRecovered = (payload) => ({
-  type: SET_USER_RECOVERED,
-  payload
-});
-
 const resetPassword = (payload) => ({
   type: PASSWORD_RESET,
-  payload
-});
-
-const setPasswordReset = (payload) => ({
-  type: SET_PASSWORD_RESET,
   payload
 });
 
@@ -78,11 +65,6 @@ const registerUser = (payload) => ({
   payload
 });
 
-const setUserRegistered = (payload) => ({
-  type: SET_USER_REGISTERED,
-  payload
-});
-
 export {
   loginUser,
   setUser,
@@ -92,10 +74,7 @@ export {
   confirmUser,
   resetState,
   recoverUser,
-  setUserRecovered,
   resetPassword,
-  setPasswordReset,
   checkIfTokenValid,
-  registerUser,
-  setUserRegistered
+  registerUser
 };

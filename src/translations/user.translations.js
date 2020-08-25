@@ -200,14 +200,14 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p_1:
+    p:
       'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
     h2: 'Password recovery',
     label: 'E-mail  ',
-    p_1:
+    p:
       'Specify your e-mail to reset the password and we will send recovery instructions.',
     button: 'Send'
   }

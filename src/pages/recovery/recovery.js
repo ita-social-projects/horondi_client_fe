@@ -99,7 +99,7 @@ const Recovery = () => {
               }
             />
             <p className={styles.recoveryText}>
-              {RECOVERY_MESSAGES[language].p_1}
+              {RECOVERY_MESSAGES[language].p}
             </p>
             <Button
               className={styles.recoverBtn}

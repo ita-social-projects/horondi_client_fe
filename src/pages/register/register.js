@@ -51,6 +51,7 @@ function Register() {
   const handleRegister = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
+      delete user.confirmPassword;
       dispatch(registerUser({ user, language }));
     }
   };

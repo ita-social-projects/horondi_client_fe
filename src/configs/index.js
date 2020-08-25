@@ -66,7 +66,7 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
-export const SHOW_AFTER = 3000;
+export const REDIRECT_TIMEOUT = 3000;
 
 export const formRegExp = {
   email:

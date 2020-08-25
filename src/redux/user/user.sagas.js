@@ -4,10 +4,7 @@ import {
   setUser,
   setUserError,
   setUserLoading,
-  resetState,
-  setUserRecovered,
-  setPasswordReset,
-  setUserRegistered
+  resetState
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -18,11 +15,11 @@ import {
   REGISTER_USER
 } from './user.types';
 import { setItems } from '../../utils/client';
-import { SHOW_AFTER } from '../../configs/index';
+import { REDIRECT_TIMEOUT } from '../../configs/index';
 
 export const loginUser = (data) => {
   const query = ` 
-  mutation mutation($user: LoginInput!){
+  mutation login($user: LoginInput!){
   loginUser(
     loginInput: $user
   ) {
@@ -38,51 +35,10 @@ export const loginUser = (data) => {
   return setItems(query, data);
 };
 
-export const confirmUser = (token) => {
-  const query = ` 
-  mutation confirmUser($token: String!){
-    confirmUser(token: $token)
-  }
-  `;
-  return setItems(query, { token });
-};
-
-export const recoverUser = (data) => {
-  const query = ` 
-  mutation recovery($email: String!, $language: Int!){
-    recoverUser(email: $email, language: $language)
-  }
-  `;
-  return setItems(query, data);
-};
-
 export const resetPassword = (data) => {
   const query = ` 
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
-  }
-  `;
-  return setItems(query, data);
-};
-
-export const checkIfTokenIsValid = (data) => {
-  const query = ` 
-  mutation checkToken($token: String!){
-  checkIfTokenIsValid(token: $token)
-  }
-  `;
-  return setItems(query, data);
-};
-
-export const registerUser = (data) => {
-  const query = ` 
-  mutation register($user: userRegisterInput!, $language: Int!){
-  registerUser(
-    user: $user,
-    language: $language
-  ) {
-    email
-  }
   }
   `;
   return setItems(query, data);
@@ -93,7 +49,7 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
-    yield put(setUserLoading(true));
+    yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -104,7 +60,15 @@ export function* handleUserConfirm({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(confirmUser, payload);
+    yield call(
+      setItems,
+      ` 
+  mutation confirmUser($token: String!){
+    confirmUser(token: $token)
+  }
+  `,
+      payload
+    );
     yield put(setUserLoading(false));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -115,9 +79,17 @@ export function* handleUserRecovery({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(recoverUser, payload);
-    yield put(setUserRecovered(true));
-    yield delay(SHOW_AFTER);
+    yield call(
+      setItems,
+      ` 
+  mutation recovery($email: String!, $language: Int!){
+    recoverUser(email: $email, language: $language)
+  }
+  `,
+      payload
+    );
+    yield put(setUserLoading(false));
+    yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -128,9 +100,17 @@ export function* handlePasswordReset({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(resetPassword, payload);
-    yield put(setPasswordReset(true));
-    yield delay(SHOW_AFTER);
+    yield call(
+      setItems,
+      ` 
+  mutation reset($password: String!, $token: String!){
+    resetPassword(password: $password, token: $token)
+  }
+  `,
+      payload
+    );
+    yield put(setUserLoading(false));
+    yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -141,7 +121,15 @@ export function* handleTokenCheck({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(checkIfTokenIsValid, payload);
+    yield call(
+      setItems,
+      ` 
+  mutation checkToken($token: String!){
+  checkIfTokenIsValid(token: $token)
+  }
+  `,
+      payload
+    );
     yield put(setUserLoading(false));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -153,9 +141,22 @@ export function* handleUserRegister({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(registerUser, payload);
-    yield put(setUserRegistered(true));
-    yield delay(SHOW_AFTER);
+    yield call(
+      setItems,
+      `
+      mutation register($user: userRegisterInput!, $language: Int!){
+        registerUser(
+          user: $user,
+          language: $language
+        ) {
+          email
+        }
+        }
+      `,
+      payload
+    );
+    yield put(setUserLoading(false));
+    yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));

@@ -30,9 +30,6 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     zIndex: '3'
   },
-  disable: {
-    display: 'none'
-  },
   msgIcon: {
     ...flexCenter,
     width: '50px',

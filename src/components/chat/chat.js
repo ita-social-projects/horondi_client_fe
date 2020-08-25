@@ -4,7 +4,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
-import { Button, TextField } from '@material-ui/core';
+import { ActiveMessenger } from './activeMessenger';
 import { useStyles } from './chat.style';
 import { CHAT } from '../../translations/chat.translation';
 import kyivstar from '../../images/kyivstar.png';
@@ -19,82 +19,60 @@ export const Chat = () => {
   }));
   const style = useStyles({ themeMode, visible, mailFormVisible });
 
-  const activeMessenger = () => (
-    <div className={style.formFieldActive}>
-      <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
-      <TextField
-        className={style.dataInput}
-        id='outlined-basic'
-        label={CHAT[language].name}
-        variant='outlined'
-        size='small'
-        multiline
-        rows={1}
-      />
-      <TextField
-        className={style.dataInput}
-        id='outlined-basic'
-        label={CHAT[language].email}
-        variant='outlined'
-        size='small'
-        multiline
-        rows={1}
-      />
-      <TextField
-        className={style.dataInput}
-        id='outlined-basic'
-        label={CHAT[language].msgText}
-        variant='outlined'
-        size='small'
-        multiline
-        rows={4}
-      />
-      <Button className={style.btnSend}>{CHAT[language].sendBtn}</Button>
-    </div>
-  );
-
   return (
     <div>
-      <div className={visible ? style.iconsMessengers : style.disable}>
-        <div>
-          <MessengerCustomerChat
-            pageId='106973281128068'
-            appId='768636160372711'
-          />
-        </div>
-        <div className={mailFormVisible ? style.msgIconActive : style.msgIcon}>
-          <MailOutlineIcon
-            className={style.icon}
-            onClick={() => setMailFormVisible(!mailFormVisible)}
-          />
-        </div>
-        <div className={mailFormVisible ? style.mailForm : style.disable}>
+      {visible && (
+        <div className={style.iconsMessengers}>
+          <div>
+            <MessengerCustomerChat
+              pageId={process.env.FACEBOOK_PAGE_ID}
+              appId={process.env.FACEBOOK_APP_ID}
+            />
+          </div>
+
           <div
-            className={style.cancelIcon}
-            onClick={() => {
-              setBlock(!visible);
-              setMailFormVisible(false);
-            }}
+            className={mailFormVisible ? style.msgIconActive : style.msgIcon}
           >
-            <CancelIcon />
+            <MailOutlineIcon
+              className={style.icon}
+              onClick={() => setMailFormVisible(!mailFormVisible)}
+            />
           </div>
-          <div className={style.contacts}>
-            <span className={style.contactsTitle}>
-              {CHAT[language].ourContacts}
-            </span>
-            <span className={style.phoneNumbers}>
-              <img className={style.logo} src={kyivstar} alt='kyivstar' />{' '}
-              +38-(067)-777-55-33
-            </span>
-            <span className={style.phoneNumbers}>
-              <img className={style.logo} src={vodafone} alt='vodafone' />
-              {'  '}
-              +38-(050)-999-77-66
-            </span>
-          </div>
-          {activeMessenger()}
+          {mailFormVisible && (
+            <div className={style.mailForm}>
+              <div
+                className={style.cancelIcon}
+                onClick={() => {
+                  setBlock(!visible);
+                  setMailFormVisible(false);
+                }}
+              >
+                <CancelIcon />
+              </div>
+              <div className={style.contacts}>
+                <span className={style.contactsTitle}>
+                  {CHAT[language].ourContacts}
+                </span>
+                <span className={style.phoneNumbers}>
+                  <img className={style.logo} src={kyivstar} alt='kyivstar' />{' '}
+                  +38-(067)-777-55-33
+                </span>
+                <span className={style.phoneNumbers}>
+                  <img className={style.logo} src={vodafone} alt='vodafone' />
+                  {'  '}
+                  +38-(050)-999-77-66
+                </span>
+              </div>
+              <ActiveMessenger
+                visible
+                mailFormVisible
+                themeMode={themeMode}
+                language={language}
+              />
+            </div>
+          )}
         </div>
-      </div>
+      )}
       <div onClick={() => setBlock(!visible)} className={style.chatIcon}>
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </div>

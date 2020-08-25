@@ -67,6 +67,7 @@ const getProduct = (id) =>
         }
         options {
           size {
+            _id
             name
             heightInCm
             widthInCm
@@ -79,6 +80,7 @@ const getProduct = (id) =>
             }
           }
           bottomMaterial {
+            _id
             name {
               lang
               value

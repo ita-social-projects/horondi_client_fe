@@ -20,7 +20,7 @@ const CommentDialog = ({ modal, handleClose, commentId }) => {
   const dispatch = useDispatch();
 
   const { language, productId } = useSelector(({ Products, Language }) => ({
-    productId: Products.product.product,
+    productId: Products.product._id,
     language: Language.language
   }));
 

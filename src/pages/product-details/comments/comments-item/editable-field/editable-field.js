@@ -28,7 +28,7 @@ const EditableField = ({
 
   const { language, productId, userEmail } = useSelector(
     ({ Products, Language, User }) => ({
-      productId: Products.product.product,
+      productId: Products.product._id,
       language: Language.language,
       userEmail: User.email
     })
@@ -65,21 +65,22 @@ const EditableField = ({
   };
 
   const handleSubmit = () => {
-    setShouldValidate(true);
-    if (textValidated) {
-      dispatch(
-        updateComment({
-          show: true,
-          product: productId,
-          comment: commentId,
-          text: editableText,
-          email: userEmail,
-          firstName: username
-        })
-      );
-
-      setEditable(false);
+    if (text.trim() !== editableText.trim()) {
+      setShouldValidate(true);
+      if (textValidated) {
+        dispatch(
+          updateComment({
+            show: true,
+            product: productId,
+            comment: commentId,
+            text: editableText,
+            email: userEmail,
+            firstName: username
+          })
+        );
+      }
     }
+    setEditable(false);
   };
 
   return (

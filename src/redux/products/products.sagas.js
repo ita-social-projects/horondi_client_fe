@@ -212,7 +212,6 @@ export function* handleAddComment({ payload }) {
     yield put(setCommentsLoading(true));
     yield call(addComment, payload);
     const comments = yield call(getComments, payload.product);
-    console.log(comments.data.getAllCommentsByProduct);
     yield put(setComment(comments.data.getAllCommentsByProduct));
     yield put(setCommentsLoading(false));
     yield call(handleSnackbar, added);

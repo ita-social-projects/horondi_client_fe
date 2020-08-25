@@ -21,6 +21,9 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
   }, []);
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
+  if (text[language].value === null) {
+    return null;
+  }
   const newsTitle =
     title.length !== 0 ? title[language].value : 'No title provided';
   const newsImage = image ? image.primary.medium : 'No image provided';

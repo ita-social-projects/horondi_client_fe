@@ -6,7 +6,14 @@ import 'react-awesome-slider/dist/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBar from '../../components/loading-bar';
 import { useStyles } from './products-carousel.style';
-import { setModelsFilter } from '../../redux/products/products.actions';
+import {
+  setModelsFilter,
+  setPriceFilter,
+  setPatternsFilter,
+  setColorsFilter,
+  setHotItemFilter,
+  setSearchFilter
+} from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
 
 const ProductsCorousel = ({ category }) => {
@@ -18,11 +25,16 @@ const ProductsCorousel = ({ category }) => {
     dispatch(getModelsByCategory(category._id));
   }, [dispatch, category]);
 
-  const { models, loading, language } = useSelector(
-    ({ Model: { models, loading }, Language: { language } }) => ({
+  const { models, loading, language, filterData } = useSelector(
+    ({
+      Model: { models, loading },
+      Products: { filterData },
+      Language: { language }
+    }) => ({
       models,
       language,
-      loading
+      loading,
+      filterData
     })
   );
 
@@ -36,6 +48,16 @@ const ProductsCorousel = ({ category }) => {
 
   const handleClick = (model) => {
     dispatch(setModelsFilter([model.name[1].value]));
+    dispatch(setPatternsFilter([]));
+    dispatch(setColorsFilter([]));
+    dispatch(setSearchFilter(''));
+    dispatch(setHotItemFilter(false));
+    dispatch(
+      setPriceFilter([
+        Math.min(...filterData.map((product) => product.basePrice[0].value)),
+        Math.max(...filterData.map((product) => product.basePrice[0].value))
+      ])
+    );
   };
 
   return (

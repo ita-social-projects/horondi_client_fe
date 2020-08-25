@@ -40,6 +40,11 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
+  if (article.text[language].value === null) {
+    return (
+      <h1>Sory, this article is not translated. Try to change language</h1>
+    );
+  }
   const newsTitle =
     article.title.length !== 0
       ? article.title[language].value
@@ -50,7 +55,7 @@ const NewsDetailPage = ({ match }) => {
   const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
   const newsText =
-    article.text.length !== 0
+    article.text.length !== 0 && article.text[language].value !== null
       ? parse(article.text[language].value)
       : 'No text provided';
   const newsAuthor =

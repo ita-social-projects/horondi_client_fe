@@ -46,20 +46,20 @@ const PatternsFilter = () => {
     }
   };
 
-  const [hideFilters, setHideFilters] = useState(true);
+  const [isFiltersHidden, hideFilters] = useState(false);
 
   return (
     <FormGroup data-cy='patterns_filter'>
       <Typography
         className={styles.filterName}
-        id='patterns'
+        data-cy='patterns'
         gutterBottom
-        onClick={() => setHideFilters(!hideFilters)}
+        onClick={() => hideFilters(!isFiltersHidden)}
       >
         <span>{PATTERN_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{patterns.length}</span>
       </Typography>
-      {hideFilters ||
+      {isFiltersHidden &&
         patterns.map((pattern) => (
           <FormControlLabel
             key={pattern[1].value}

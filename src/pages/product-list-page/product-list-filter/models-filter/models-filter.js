@@ -44,20 +44,20 @@ const ModelsFilter = () => {
     }
   };
 
-  const [hideFilters, setHideFilters] = useState(true);
+  const [isFiltersHidden, hideFilters] = useState(false);
 
   return (
     <FormGroup data-cy='category_filter'>
       <Typography
         className={styles.filterName}
-        id='categories'
+        data-cy='categories'
         gutterBottom
-        onClick={() => setHideFilters(!hideFilters)}
+        onClick={() => hideFilters(!isFiltersHidden)}
       >
         <span>{MODEL_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{models.length}</span>
       </Typography>
-      {hideFilters ||
+      {isFiltersHidden &&
         models.map((model) => (
           <FormControlLabel
             key={model[1].value}

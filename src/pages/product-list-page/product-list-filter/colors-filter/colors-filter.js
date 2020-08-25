@@ -46,20 +46,20 @@ const ColorsFilter = () => {
     }
   };
 
-  const [hideFilters, setHideFilters] = useState(true);
+  const [isFiltersHidden, hideFilters] = useState(false);
 
   return (
     <FormGroup data-cy='colors_filter'>
       <Typography
         className={styles.filterName}
-        id='colors'
+        data-cy='colors'
         gutterBottom
-        onClick={() => setHideFilters(!hideFilters)}
+        onClick={() => hideFilters(!isFiltersHidden)}
       >
         <span>{COLORS_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{colors.length}</span>
       </Typography>
-      {hideFilters ||
+      {isFiltersHidden &&
         colors.map((color) => (
           <FormControlLabel
             key={color[1].value}

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
+import { Backdrop } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
+import LoadingBar from '../../components/loading-bar';
 import { useStyles } from './products-carousel.style';
 import { setModelsFilter } from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
@@ -16,12 +18,21 @@ const ProductsCorousel = ({ category }) => {
     dispatch(getModelsByCategory(category._id));
   }, [dispatch, category]);
 
-  const { models, language } = useSelector(
-    ({ Model: { models }, Language: { language } }) => ({
+  const { models, loading, language } = useSelector(
+    ({ Model: { models, loading }, Language: { language } }) => ({
       models,
-      language
+      language,
+      loading
     })
   );
+
+  if (loading) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
 
   const handleClick = (model) => {
     dispatch(setModelsFilter([model.name[1].value]));

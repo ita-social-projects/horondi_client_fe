@@ -49,20 +49,20 @@ const CategoryFilter = () => {
     }
   };
 
-  const [hideFilters, setHideFilters] = useState(false);
+  const [isFiltersHidden, hideFilters] = useState(true);
 
   return (
     <FormGroup data-cy='category_filter'>
       <Typography
         className={styles.filterName}
-        id='categories'
+        data-cy='categories'
         gutterBottom
-        onClick={() => setHideFilters(!hideFilters)}
+        onClick={() => hideFilters(!isFiltersHidden)}
       >
         <span>{CATERGORY_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{categories.length}</span>
       </Typography>
-      {hideFilters ||
+      {isFiltersHidden &&
         categories.map((category) => (
           <FormControlLabel
             key={category.name[1].value}

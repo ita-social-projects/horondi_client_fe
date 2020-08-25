@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@material-ui/core';
+import { Typography, Backdrop } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
@@ -15,6 +15,7 @@ import {
   setCategoryFilter,
   setPriceFilter
 } from '../../redux/products/products.actions';
+import LoadingBar from '../../components/loading-bar';
 import {
   SHOW_FILTER_BUTTON_TEXT,
   HIDE_FILTER_BUTTON_TEXT
@@ -24,6 +25,7 @@ const ProductListPage = ({ category, model }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const {
+    loading,
     language,
     products,
     pagesCount,
@@ -38,6 +40,7 @@ const ProductListPage = ({ category, model }) => {
     ({
       Language: { language },
       Products: {
+        loading,
         products,
         pagesCount,
         sortByRate,
@@ -49,6 +52,7 @@ const ProductListPage = ({ category, model }) => {
         currentPage
       }
     }) => ({
+      loading,
       language,
       products,
       pagesCount,
@@ -84,6 +88,7 @@ const ProductListPage = ({ category, model }) => {
     productsPerPage,
     categoryFilter,
     category,
+    model,
     currentPage
   ]);
 
@@ -100,6 +105,14 @@ const ProductListPage = ({ category, model }) => {
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 
   const handleFilterShow = () => setMobile(!mobile);
+
+  if (loading || !filterData) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
 
   const categoryText = category.name[language].value.toUpperCase();
   const itemsToShow = products.map((product, index) => (

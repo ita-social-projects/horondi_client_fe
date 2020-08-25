@@ -1,7 +1,8 @@
-import { SET_MODELS } from './model.types';
+import { SET_MODELS, SET_MODELS_LOADING } from './model.types';
 
 export const initialState = {
-  models: []
+  models: [],
+  loading: false
 };
 
 const modelReducer = (state = initialState, action = {}) => {
@@ -10,6 +11,11 @@ const modelReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       models: action.payload
+    };
+  case SET_MODELS_LOADING:
+    return {
+      ...state,
+      loading: action.payload
     };
   default:
     return state;

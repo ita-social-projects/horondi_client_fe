@@ -35,6 +35,15 @@ const useStyles = makeStyles((theme) => ({
       '& div > input': {
         padding: '13px 16px',
         fontSize: '0.9rem'
+      },
+      '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'tomato'
+      },
+      '& .MuiFormLabel-root.Mui-error': {
+        color: 'tomato'
+      },
+      '& .MuiFormHelperText-root.Mui-error': {
+        color: 'tomato'
       }
     },
     '@media (max-width: 950px)': {

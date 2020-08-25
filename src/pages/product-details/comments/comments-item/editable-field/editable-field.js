@@ -8,7 +8,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import useValidation from '../../../../../utils/use-validation';
 import useStyles from './editable-field.styles';
 
-import { errorMessages, formRegExp } from '../../../../../configs';
+import { errorMessages, formRegExp, TEXT } from '../../../../../configs';
 import { updateComment } from '../../../../../redux/products/products.actions';
 
 import {
@@ -40,7 +40,9 @@ const EditableField = ({
     shouldValidate,
     setTextValidated,
     setShouldValidate,
-    setEditableText
+    setEditableText,
+    filterText,
+    validateField
   } = useValidation();
 
   useEffect(() => {
@@ -49,19 +51,12 @@ const EditableField = ({
   }, [setEditableText, setTextValidated, text]);
 
   const handleChange = (event) => {
-    const { value } = event.target;
-    const { script, link, text } = formRegExp;
+    const { value, name } = event.target;
+    const { text } = formRegExp;
+    const filteredText = filterText(value, name);
 
-    const noScriptText = value.replace(script, '');
-    const noLinkText = noScriptText.replace(link, '');
-
-    setEditableText(noLinkText);
-
-    if (noLinkText.match(text) && noLinkText.trim().length >= 2) {
-      setTextValidated(true);
-    } else {
-      setTextValidated(false);
-    }
+    setEditableText(filteredText);
+    validateField(filteredText, text, setTextValidated);
   };
 
   const handleSubmit = () => {
@@ -100,6 +95,7 @@ const EditableField = ({
             : ''
         }
         type='text'
+        name={TEXT}
       />
       <div className={styles.editForm}>
         <Button

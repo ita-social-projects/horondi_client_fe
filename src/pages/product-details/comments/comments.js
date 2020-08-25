@@ -53,12 +53,14 @@ const Comments = () => {
     setTextValidated,
     setAllFieldsValidated,
     setShouldValidate,
-    setComment
+    setComment,
+    clearFields,
+    filterText,
+    validateField
   } = useValidation();
 
   const [rate, setRate] = useState(0);
 
-  const { link, script } = formRegExp;
   const { purchasedProduct, _id, email: userEmail, firstName: userName } =
     userData || {};
 
@@ -123,17 +125,10 @@ const Comments = () => {
 
   const handleChange = (event, setValid, regExp) => {
     const { value, name } = event.target;
-    const noScriptText = value.replace(script, '');
-    const noLinkText =
-      name === TEXT ? noScriptText.replace(link, '') : noScriptText;
+    const filteredText = filterText(value, name);
 
-    setComment({ ...comment, [name]: noLinkText });
-
-    if (noLinkText.match(regExp) && noLinkText.trim().length >= 2) {
-      setValid(true);
-    } else {
-      setValid(false);
-    }
+    setComment({ ...comment, [name]: filteredText });
+    validateField(filteredText, regExp, setValid);
   };
 
   const handleComment = () => {
@@ -149,12 +144,8 @@ const Comments = () => {
       );
 
       setComment(commentToSend);
-      setShouldValidate(false);
-      setAllFieldsValidated(false);
-      setEmailValidated(false);
-      setFirstNameValidated(false);
-      setTextValidated(false);
       setRate(0);
+      clearFields();
     }
   };
 

@@ -254,14 +254,14 @@ export function* handleUpdateComment({ payload }) {
   }
 }
 
-export function* handleCommentsError() {
+function* handleCommentsError() {
   yield put(setCommentsLoading(false));
   yield put(setSnackBarSeverity('error'));
   yield put(setSnackBarMessage(error));
   yield put(setSnackBarStatus(true));
 }
 
-export function* handleSnackbar(message) {
+function* handleSnackbar(message) {
   yield put(setSnackBarSeverity('success'));
   yield put(setSnackBarMessage(message));
   yield put(setSnackBarStatus(true));

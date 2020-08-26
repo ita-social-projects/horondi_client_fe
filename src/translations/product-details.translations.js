@@ -169,7 +169,7 @@ export const COMMENTS = {
     firstName: `Ім'я`,
     email: 'Електронна адреса',
     text: 'Поділіться своїми враженнями з іншими',
-    submit: 'Залишити відгук',
+    submit: 'Залишити коментар',
     unregisteredTip:
       'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
     registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
@@ -180,7 +180,7 @@ export const COMMENTS = {
     firstName: 'First name',
     email: 'Email',
     text: 'Share your thoughts with others',
-    submit: 'Leave feedback',
+    submit: 'Leave comment',
     unregisteredTip: 'You should login and bought the product to leave rate',
     registeredTip: 'You should bought the product to leave rate',
     successfulTip: 'Set rate'

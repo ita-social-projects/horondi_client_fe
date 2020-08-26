@@ -9,8 +9,12 @@ const useStyles = makeStyles((theme) => {
 
   return {
     sizeButtons: {
+      display: 'flex',
       width: '50px',
-      marginBottom: '15px'
+      marginBottom: '15px',
+      '@media (max-width: 600px)': {
+        justifyContent: 'center'
+      }
     },
     label: {
       fontWeight: '700',

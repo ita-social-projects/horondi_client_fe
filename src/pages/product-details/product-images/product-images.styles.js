@@ -46,9 +46,12 @@ const useStyles = makeStyles((theme) => ({
       }
     },
     '@media (max-width: 1300px)': {
-      gridTemplate: 'repeat(3, 6.8rem) / 3.8rem 15rem'
+      gridTemplate: 'repeat(3, 35%) / 18% 66%'
     },
-    '@media (max-width: 400px)': {
+    '@media (max-width: 1000px)': {
+      gridTemplate: 'repeat(3, 8.9rem) / 5.5rem 20rem'
+    },
+    '@media (max-width: 500px)': {
       gridTemplate: '14rem / 0',
       gridGap: '0'
     }

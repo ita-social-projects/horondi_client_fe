@@ -293,3 +293,4 @@ export const COMMENT_DATA = {
   email: ''
 };
 export const TEXT = 'text';
+export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';

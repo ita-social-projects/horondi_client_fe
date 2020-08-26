@@ -150,10 +150,14 @@ const getProduct = (id) =>
         }
         images {
           primary {
+            thumbnail
+            small
             large
             medium
           }
           additional {
+            thumbnail
+            small
             large
             medium
           }

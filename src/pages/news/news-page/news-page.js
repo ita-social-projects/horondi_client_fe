@@ -20,7 +20,7 @@ const NewsPage = () => {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
-  const newsHeader = ['Оголошення', 'News'];
+  const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
   if (loading) {
     return (

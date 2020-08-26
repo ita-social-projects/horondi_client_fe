@@ -4,11 +4,10 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
+import { FOOTER_CONTACTS } from '../../translations/footer.translations';
 import { ActiveMessenger } from './activeMessenger';
 import { useStyles } from './chat.style';
 import { CHAT } from '../../translations/chat.translation';
-import kyivstar from '../../images/kyivstar.png';
-import vodafone from '../../images/vodafone.png';
 
 export const Chat = () => {
   const [visible, setBlock] = useState(false);
@@ -17,6 +16,7 @@ export const Chat = () => {
     language: state.Language.language,
     themeMode: state.Theme.lightMode
   }));
+  const { item: PHONE_NUMBER } = FOOTER_CONTACTS[language].items;
   const style = useStyles({ themeMode, visible, mailFormVisible });
 
   return (
@@ -53,15 +53,7 @@ export const Chat = () => {
                 <span className={style.contactsTitle}>
                   {CHAT[language].ourContacts}
                 </span>
-                <span className={style.phoneNumbers}>
-                  <img className={style.logo} src={kyivstar} alt='kyivstar' />{' '}
-                  +38-(067)-777-55-33
-                </span>
-                <span className={style.phoneNumbers}>
-                  <img className={style.logo} src={vodafone} alt='vodafone' />
-                  {'  '}
-                  +38-(050)-999-77-66
-                </span>
+                <span className={style.phoneNumbers}>{PHONE_NUMBER}</span>
               </div>
               <ActiveMessenger
                 visible

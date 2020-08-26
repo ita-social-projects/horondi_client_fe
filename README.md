@@ -166,6 +166,8 @@ Order of testing components:
 3. components that have internal state but are not connected to redux
 4. components that connected to redux
 
+#### Cypress
+1. Use `data-cy` as selector
 ##### Don’t test:
 
 - third-party libraries
@@ -252,33 +254,13 @@ Your app is ready to be deployed!
 
 this command is used to run [graphql code generator](https://graphql-code-generator.com)
 
-#### Installation
+1. before using codegen you must run backend server [horondi backend](https://github.com/horondi/horondi_client_be)
 
-We need implementing the `IntrospectionFragmentMatcher` to avoid making heuristic queries. Before we can get started, we need to install it.
+2. open terminal
 
-In your project directory, open your terminal:
-run `npm i -D @graphql-codegen/cli` or `yarn add -D @graphql-codegen` – this installs GraphQL Code Generator.
-run `npm i -D @graphql-codegen/fragment-matcher` or `yarn add -D @graphql-codegen/fragment-matcher` – this installs the fragment matcher plugin.
+3. run `npm run generate`
 
-After installing it you should create file `codegen.yml` in root directory and paste the following code into it
-`schema: "<Your GraphQL Endpoint URI>" //eg. http://ocalhost:1337graphql generates: ./fragmentTypes.json: plugins: - "fragment-matcher"`.
-
-##### Remember to replace <Your GraphQL Endpoint URI> with your actual endpoint.
-
-This YAML file acts as a config store for your code generator. You define your schema endpoint and an output directory and name for your generated introspection file. Ours is called `fragmentTypes.json` and can be found in the projects root directory.
-
-Our introspection file contains the names of unions and interfaces so that your Apollo client can work accurately with the unions and their nested types in your schema.
-
-Next up we add the code generation script to our `package.json` by pasting the following:
-`{ "scripts": { "generate": "graphql-codegen" } }`
-
-This allows us to use `npm run generate` or `yarn generate` and get the introspection result when we need to.
-
-You must run `npm run generate` to generate the introspection file every time you add new unions or intarfaces. This will awoid errors as our introspection will always be up to date.
-
-You should modify your apollo config file.
-
-Now apollo client can read introspection result.
+4. you should run `npm run generate` every time new unions or interfaces are created
 
 #### License
 

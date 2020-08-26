@@ -12,8 +12,9 @@ iframe{
     height: 600px
 }
 img {
-    max-height: 12rem;
+    width: 100px;
     float: left;
+    max-height: 12rem;
     margin: 1rem;
 }
 li{

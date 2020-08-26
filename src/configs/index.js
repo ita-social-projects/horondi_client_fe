@@ -48,11 +48,6 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
-
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',

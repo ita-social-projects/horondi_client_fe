@@ -2,13 +2,13 @@ import React from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import { useStyles } from './app-header.styles';
+import { Cabinet } from '../../containers';
 import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
-import Cabinet from '../../containers/cabinet';
+import CartHeader from '../../containers/cart-header';
 
 const AppHeader = () => {
   const styles = useStyles();
@@ -21,7 +21,7 @@ const AppHeader = () => {
           <Toolbar>
             <AttachMoneyIcon className={styles.icons} />
             <Language />
-            <ShoppingBasketIcon />
+            <CartHeader />
             <Cabinet />
           </Toolbar>
         </Toolbar>

@@ -16,7 +16,7 @@ export const Chat = () => {
     language: state.Language.language,
     themeMode: state.Theme.lightMode
   }));
-  const { item: PHONE_NUMBER } = FOOTER_CONTACTS[language].items;
+  const { item: PHONE_NUMBER } = FOOTER_CONTACTS[language].items[0];
   const style = useStyles({ themeMode, visible, mailFormVisible });
 
   return (

@@ -18,8 +18,9 @@ const Sidebar = ({ setMenuOpen, menu }) => {
     language: Language.language
   }));
 
-  const menuList = categories.map(({ _id, name, isMain }) =>
-    isMain ? (
+  const menuList = categories
+    .filter(({ isMain }) => isMain)
+    .map(({ _id, name }) => (
       <div key={_id}>
         <ListItem button component={Link} to={`/${getCategoryURL(name)}`}>
           <ListItemText
@@ -29,8 +30,7 @@ const Sidebar = ({ setMenuOpen, menu }) => {
         </ListItem>
         <Divider />
       </div>
-    ) : null
-  );
+    ));
 
   return (
     <div>

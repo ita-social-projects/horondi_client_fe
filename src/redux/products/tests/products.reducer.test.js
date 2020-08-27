@@ -15,7 +15,11 @@ import {
   setSortByPopularity,
   setProductsPerPage,
   setProduct,
-  setProductLoading
+  setProductLoading,
+  setCommentsLoading,
+  setUpdatingComment,
+  setRate,
+  setComment
 } from '../products.actions';
 import { productsExample } from './products.mocks';
 
@@ -209,5 +213,83 @@ describe('Product reducer test', () => {
     expect(productReducer(initialState, setProductLoading(false))).toEqual(
       state
     );
+  });
+
+  it('should set loading to true', () => {
+    const state = {
+      ...initialState,
+      loading: false
+    };
+
+    expect(productReducer(initialState, setProductsLoading(false))).toEqual(
+      state
+    );
+  });
+
+  it('should set comments loading to true', () => {
+    const state = {
+      ...initialState,
+      commentsLoading: true
+    };
+
+    expect(productReducer(initialState, setCommentsLoading(true))).toEqual(
+      state
+    );
+  });
+
+  it('should set updating comment to state', () => {
+    const commentId = 'fnr89g4g49g85g80';
+    const state = {
+      ...initialState,
+      updatingComment: commentId
+    };
+
+    expect(productReducer(initialState, setUpdatingComment(commentId))).toEqual(
+      state
+    );
+  });
+
+  it('should set rate to state', () => {
+    const payload = {
+      userRates: [
+        {
+          rate: 2
+        },
+        {
+          rate: 5
+        }
+      ],
+      rate: 5
+    };
+    const state = {
+      ...initialState,
+      product: {
+        ...initialState.product,
+        rate: payload.rate,
+        userRates: payload.userRates
+      }
+    };
+
+    expect(productReducer(initialState, setRate(payload))).toEqual(state);
+  });
+
+  it('should set comments to state', () => {
+    const payload = [
+      {
+        text: 'nice'
+      },
+      {
+        text: 'good'
+      }
+    ];
+    const state = {
+      ...initialState,
+      product: {
+        ...initialState.product,
+        comments: payload
+      }
+    };
+
+    expect(productReducer(initialState, setComment(payload))).toEqual(state);
   });
 });

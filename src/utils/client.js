@@ -10,13 +10,13 @@ const introspectionResult = require('../fragmentTypes.json');
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: introspectionResult
 });
-export const REACT_APP_API_URL =
-  window.env && window.env.REACT_APP_API_URL
-    ? window.env.REACT_APP_API_URL
-    : process.env.REACT_APP_API_URL;
+// export const REACT_APP_API_URL =
+//   window.env && window.env.REACT_APP_API_URL
+//     ? window.env.REACT_APP_API_URL
+//     : process.env.REACT_APP_API_URL;
 
 export const client = new ApolloClient({
-  uri: REACT_APP_API_URL,
+  uri: process.env.REACT_APP_API_URL,
   fetch,
   cache: new InMemoryCache({
     addTypename: true,

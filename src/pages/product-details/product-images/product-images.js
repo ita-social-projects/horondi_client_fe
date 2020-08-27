@@ -16,7 +16,7 @@ const ProductImages = () => {
     images: Products.product.images
   }));
   const styles = useStyles({
-    primaryImage: `${IMG_URL}${images.primary.large}`
+    primaryImage: `${IMG_URL}${images.primary.medium}`
   });
 
   const [isOpen, setIsOpen] = useState(false);
@@ -37,16 +37,16 @@ const ProductImages = () => {
   ) : null;
 
   const sideImages = images.additional
-    ? images.additional.map((image, idx) =>
-      idx < 3 ? (
+    ? images.additional
+      .filter((img, idx) => idx < 3)
+      .map((image, idx) => (
         <img
-          src={`${IMG_URL}${image.small}`}
+          src={`${IMG_URL}${image.thumbnail}`}
           key={idx}
           alt={IMG_ALT_INFO[language].value}
           onClick={() => openImage(idx + 1)}
         />
-      ) : null
-    )
+      ))
     : null;
 
   return (

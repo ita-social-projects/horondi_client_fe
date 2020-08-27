@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -14,49 +14,74 @@ import {
   PRODUCT_BOTTOM,
   SELECT_NONE
 } from '../../../translations/product-details.translations';
+import { setProductToSend } from '../../../redux/products/products.actions';
 
-const ProductFeatures = ({
-  bottomMaterials,
-  additions,
-  bagBottom,
-  setBagBottom,
-  sidePocket,
-  setSidePocket,
-  setPrice
-}) => {
+const ProductFeatures = ({ bottomMaterials, additions }) => {
   const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const dispatch = useDispatch();
+  const { language, totalPrice, bagBottom, sidePocket } = useSelector(
+    ({ Language, Products: { productToSend } }) => ({
+      language: Language.language,
+      totalPrice: productToSend.totalPrice,
+      sidePocket: productToSend.sidePocket.isSelected,
+      bagBottom: productToSend.bagBottom.value
+    })
+  );
 
   const { additionalPrice, available, name } = additions[0] || {};
 
   const setAdditionalPrice = (price) => ` +${price} UAH`;
 
+  const additionsNameToSend = useMemo(
+    () => (additions.length >= 1 ? additions[0].name : null),
+    [additions]
+  );
+
+  const bottomNameToSend = useMemo(
+    () =>
+      bottomMaterials
+        ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
+        : null,
+    [bagBottom, bottomMaterials]
+  );
+
   const handleBottomChange = (event) => {
     const { value } = event.target;
-
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
         .additionalPrice[0].value
       : 0;
-
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
         .additionalPrice[0].value
       : 0;
+    const newTotalPrice = totalPrice - oldPrice + newPrice;
 
-    setPrice((currentPrice) => currentPrice - oldPrice + newPrice);
-    setBagBottom(value);
+    dispatch(
+      setProductToSend({
+        totalPrice: newTotalPrice,
+        bagBottom: { value, name: bottomNameToSend }
+      })
+    );
   };
 
   const handlePocketChange = (event) => {
+    const { checked } = event.target;
     if (!sidePocket) {
-      setPrice((currentPrice) => currentPrice + additionalPrice[0].value);
+      dispatch(
+        setProductToSend({ totalPrice: totalPrice + additionalPrice[0].value })
+      );
     } else {
-      setPrice((currentPrice) => currentPrice - additionalPrice[0].value);
+      dispatch(
+        setProductToSend({ totalPrice: totalPrice - additionalPrice[0].value })
+      );
     }
-    setSidePocket(event.target.checked);
+
+    dispatch(
+      setProductToSend({
+        sidePocket: { isSelected: checked, additionsNameToSend }
+      })
+    );
   };
 
   const menuItems = bottomMaterials

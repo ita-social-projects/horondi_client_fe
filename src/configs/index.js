@@ -272,3 +272,4 @@ export const responsive = {
     items: 1
   }
 };
+export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';

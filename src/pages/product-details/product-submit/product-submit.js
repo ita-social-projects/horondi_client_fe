@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -19,16 +19,27 @@ import {
   TOOLTIPS
 } from '../../../translations/product-details.translations';
 
-const ProductSubmit = ({ checkSize, productToSend }) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productId } = useSelector(({ Language, Products }) => ({
-    language: Language.language,
-    productId: Products.product._id
-  }));
-  const wishlistItems = getFromLocalStorage('wishlist');
+  const { language, productId, productToSend } = useSelector(
+    ({ Language, Products }) => ({
+      language: Language.language,
+      productId: Products.product._id,
+      productToSend: Products.productToSend
+    })
+  );
 
-  const isWishful = wishlistItems.find((item) => productId === item._id);
+  const wishlistItems = getFromLocalStorage('wishlist');
+  const { selectedSize } = productToSend;
+  const isWishful = useMemo(
+    () => wishlistItems.find((item) => productId === item._id),
+    [productId, wishlistItems]
+  );
+  const sizeToSend = useMemo(
+    () => sizes.find(({ _id }) => _id === selectedSize),
+    [selectedSize, sizes]
+  );
 
   const wishlistTip = isWishful
     ? TOOLTIPS[language].removeWishful
@@ -43,17 +54,19 @@ const ProductSubmit = ({ checkSize, productToSend }) => {
   };
 
   const onAddToCart = () => {
-    const isChecked = checkSize();
-    if (isChecked) {
-      dispatch(addItemToCart(productToSend));
+    if (selectedSize) {
+      dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
+    } else {
+      setSizeIsNotSelectedError(true);
     }
   };
 
   const onAddToCheckout = () => {
-    const isChecked = checkSize();
-    if (isChecked) {
-      dispatch(addItemToCart(productToSend));
+    if (selectedSize) {
+      dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
       dispatch(push('/checkout'));
+    } else {
+      setSizeIsNotSelectedError(true);
     }
   };
 

@@ -19,7 +19,9 @@ import {
   SET_SEARCH,
   SET_PAGES_COUNT,
   SET_HOT_ITEM_FILTER,
-  SET_PRODUCT_LOADING
+  SET_PRODUCT_LOADING,
+  SET_PRODUCT_TO_SEND,
+  CLEAR_PRODUCT_TO_SEND
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -106,4 +108,11 @@ export const getAllFilters = () => ({
 export const setProductLoading = (payload) => ({
   type: SET_PRODUCT_LOADING,
   payload
+});
+export const setProductToSend = (payload) => ({
+  type: SET_PRODUCT_TO_SEND,
+  payload
+});
+export const clearProductToSend = () => ({
+  type: CLEAR_PRODUCT_TO_SEND
 });

@@ -65,6 +65,7 @@ export function* handleFilterLoad() {
                 rate
                 images {
                   primary {
+                    large
                     medium
                   }
                 }
@@ -170,8 +171,8 @@ export function* handleProductsErrors(e) {
 export function* handleProductLoading({ payload }) {
   yield put(setProductLoading(true));
   const query = `
-  query {
-    getProductById(id:"${payload}") {
+  query($id: ID!) {
+    getProductById(id: $id) {
       ... on Product {
         _id
       category {
@@ -311,6 +312,8 @@ export function* handleProductLoading({ payload }) {
       }
       images {
         primary {
+          thumbnail
+          small
           large
           medium
         }
@@ -322,8 +325,11 @@ export function* handleProductLoading({ payload }) {
     }
   }
 }`;
+  const variables = {
+    id: payload
+  };
   try {
-    const product = yield call(getItems, query);
+    const product = yield call(getItems, query, variables);
     yield put(setProduct(product.data.getProductById));
     yield put(setProductLoading(false));
   } catch (e) {

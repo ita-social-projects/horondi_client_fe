@@ -1,54 +1,49 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
-import * as productImage from '../../../images/pdp_main.jpg';
+import useStyles from './similar-products.styles';
 
-import {
-  SIMILAR_ITEMS,
-  IMG_ALT_INFO
-} from '../../../translations/product-details.translations';
-import { responsive } from '../../../configs';
+import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
+import { IMG_URL, responsive } from '../../../configs';
+
+import SimilarProductItem from './similar-products-item';
 
 const SimilarProducts = () => {
-  const { language, similarProducts, category, productId } = useSelector(
+  const styles = useStyles();
+  const { language, similarProducts, productId } = useSelector(
     ({ Language, Products: { products, product } }) => ({
       language: Language.language,
       similarProducts: products,
-      category: product.category,
       productId: product._id
     })
   );
   const { title } = SIMILAR_ITEMS[language];
-  const categoryName = category.name[1].value.toLowerCase();
 
-  const imgs = similarProducts
+  const imagesList = similarProducts
     .filter(({ _id }) => _id !== productId)
-    .map(({ _id }) => (
-      <Link key={_id} to={`/${categoryName}/${_id}`}>
-        <img
-          className='image'
-          src={productImage}
-          alt={IMG_ALT_INFO[language].value}
-          key={_id}
-        />
-      </Link>
+    .map(({ _id, images }) => (
+      <SimilarProductItem
+        key={_id}
+        imageUrl={`${IMG_URL}${images.primary.large}`}
+        id={_id}
+      />
     ));
 
   return (
-    <div className='similarItems'>
+    <div className={styles.similarItems}>
       <div>
-        <hr />
-        <h2>{title}</h2>
-        <hr />
+        <h2 className={styles.title}>{title}</h2>
       </div>
-      <Carousel className='carousel' responsive={responsive} swipeable={false}>
-        {imgs}
+      <Carousel
+        className={styles.carousel}
+        responsive={responsive}
+        swipeable={false}
+      >
+        {imagesList}
       </Carousel>
-      <hr />
     </div>
   );
 };

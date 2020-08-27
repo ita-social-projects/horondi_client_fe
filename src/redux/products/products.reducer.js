@@ -16,7 +16,9 @@ import {
   SET_SEARCH,
   SET_PAGES_COUNT,
   SET_HOT_ITEM_FILTER,
-  SET_PRODUCT_LOADING
+  SET_PRODUCT_LOADING,
+  SET_PRODUCT_TO_SEND,
+  CLEAR_PRODUCT_TO_SEND
 } from './products.types';
 
 export const initialState = {
@@ -38,7 +40,25 @@ export const initialState = {
   filterData: [],
   product: null,
   products: [],
-  pagesCount: 1
+  pagesCount: 1,
+  productToSend: {
+    _id: '',
+    name: '',
+    images: '',
+    selectedSize: false,
+    bagBottom: '',
+    sidePocket: {
+      isSelected: false,
+      name: ''
+    },
+    totalPrice: 0,
+    quantity: 1,
+    productUrl: '',
+    dimensions: {
+      weightInKg: '',
+      volumeInLiters: ''
+    }
+  }
 };
 const setSort = ({
   sortByPrice = 0,
@@ -159,6 +179,19 @@ const productsReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       productLoading: action.payload
+    };
+  case SET_PRODUCT_TO_SEND:
+    return {
+      ...state,
+      productToSend: {
+        ...state.productToSend,
+        ...action.payload
+      }
+    };
+  case CLEAR_PRODUCT_TO_SEND:
+    return {
+      ...state,
+      productToSend: initialState.productToSend
     };
   default:
     return state;

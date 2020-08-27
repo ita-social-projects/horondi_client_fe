@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       '&:hover': {
         cursor: 'pointer',
-        transform: 'scale(1.05)'
+        transform: 'scale(1.1)'
       },
       '&:nth-child(1)': {
         gridColumn: '2',
@@ -46,13 +46,29 @@ const useStyles = makeStyles((theme) => ({
       }
     },
     '@media (max-width: 1300px)': {
-      gridTemplate: 'repeat(3, 6.8rem) / 3.8rem 15rem'
+      gridTemplate: 'repeat(3, 120px) / 125px 260px'
     },
-    '@media (max-width: 400px)': {
+    '@media (max-width: 1000px)': {
+      gridTemplate: 'repeat(3, 8.9rem) / 5.5rem 20rem'
+    },
+    '@media (max-width: 500px)': {
       gridTemplate: '14rem / 0',
       gridGap: '0'
     }
-  }
+  },
+  primaryImage: (props) => ({
+    background: `url(${props.primaryImage}) no-repeat center`,
+    backgroundSize: 'cover',
+    height: '350px',
+    width: '100%',
+    cursor: 'pointer',
+    transition: 'all 0.3s',
+    transform: 'scale(1)',
+    '&:hover': {
+      cursor: 'pointer',
+      transform: 'scale(1.05)'
+    }
+  })
 }));
 
 export default useStyles;

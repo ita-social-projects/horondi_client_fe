@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Card } from '@material-ui/core';
-import { useStyles } from './product-details-page.styles';
+import { useStyles } from './product-details.styles';
 
 import Comments from './comments';
 import SimilarProducts from './similar-products';
@@ -13,34 +13,41 @@ import ProductInfo from './product-info';
 import ProductImages from './product-images';
 import { Loader } from '../../components/loader/loader';
 import {
+  clearProductToSend,
   getFiltredProducts,
   getProduct,
-  setCategoryFilter
+  setCategoryFilter,
+  setProductToSend
 } from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { product, isLoading, productUrl, categoryFilter } = useSelector(
-    ({ Products, router }) => ({
-      categoryFilter: Products.filters.categoryFilter,
-      product: Products.product,
-      isLoading: Products.productLoading,
-      productUrl: router.location.pathname
+  const {
+    product,
+    isLoading,
+    productUrl,
+    categoryFilter,
+    productToSend
+  } = useSelector(
+    ({
+      Products: { product, productLoading, productToSend, filters },
+      router
+    }) => ({
+      categoryFilter: filters.categoryFilter,
+      product,
+      isLoading: productLoading,
+      productUrl: router.location.pathname,
+      productToSend
     })
   );
   const dispatch = useDispatch();
   const styles = useStyles();
-
-  const [selectedSize, setSize] = useState('');
-  const [error, setError] = useState(false);
-  const [bagBottom, setBagBottom] = useState('');
-  const [sidePocket, setSidePocket] = useState(false);
-  const [currentPrice, setPrice] = useState(0);
-  const [dimensions, setDimensions] = useState({});
+  const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
   const { _id, name, basePrice, images, options, category } = product || {};
+  const { selectedSize } = productToSend;
 
   const { volumeInLiters, weightInKg } = useMemo(
     () =>
@@ -58,17 +65,33 @@ const ProductDetails = ({ match }) => {
   useEffect(() => {
     if (product) {
       dispatch(setCategoryFilter([category._id]));
-      setPrice(basePrice[0].value);
-      setDimensions({ volumeInLiters, weightInKg });
+      dispatch(
+        setProductToSend({
+          _id,
+          name,
+          images,
+          productUrl,
+          totalPrice: basePrice[0].value,
+          dimensions: { volumeInLiters, weightInKg }
+        })
+      );
     }
 
     return () => {
-      setBagBottom('');
-      setPrice(0);
-      setSize('');
-      setSidePocket(false);
+      dispatch(clearProductToSend());
     };
-  }, [basePrice, volumeInLiters, weightInKg, product, category, dispatch]);
+  }, [
+    basePrice,
+    volumeInLiters,
+    weightInKg,
+    product,
+    category,
+    dispatch,
+    _id,
+    name,
+    images,
+    productUrl
+  ]);
 
   useEffect(() => {
     if (categoryFilter) {
@@ -149,59 +172,27 @@ const ProductDetails = ({ match }) => {
     [uniqueAdditions, options]
   );
 
-  const bottomNameToSend = useMemo(
-    () =>
-      bottomMaterials
-        ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        : null,
-    [bagBottom, bottomMaterials]
-  );
-
-  const additionsNameToSend = useMemo(
-    () => (additions.length >= 1 ? additions[0].name : null),
-    [additions]
-  );
-
-  const productToSend = {
-    _id,
-    name,
-    images,
-    selectedSize,
-    bagBottom: bottomNameToSend,
-    sidePocket: {
-      isSelected: sidePocket,
-      name: additionsNameToSend
-    },
-    totalPrice: currentPrice,
-    quantity: 1,
-    productUrl
-  };
-
-  const checkSize = () => {
-    if (sizes[0].name && !selectedSize) {
-      setError(true);
-      return false;
-    }
-    return true;
-  };
-
-  const handleSizeChange = (event) => {
-    const { textContent } = event.target;
-
+  const handleSizeChange = (event, id) => {
     const oldPrice = selectedSize
-      ? sizes.find(({ name }) => name === selectedSize).additionalPrice[0].value
+      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[0].value
       : 0;
-
     const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
-      ({ name }) => name === textContent
+      ({ _id }) => _id === id
+    );
+    const newPrice =
+      productToSend.totalPrice - oldPrice + additionalPrice[0].value;
+
+    dispatch(
+      setProductToSend({
+        ...productToSend,
+        totalPrice: newPrice,
+        dimensions: { volumeInLiters, weightInKg },
+        selectedSize: id
+      })
     );
 
-    setSize(textContent);
-    setPrice((price) => price - oldPrice + additionalPrice[0].value);
-    setDimensions({ volumeInLiters, weightInKg });
-
-    if (error) {
-      setError(false);
+    if (sizeIsNotSelectedError) {
+      setSizeIsNotSelectedError(false);
     }
   };
 
@@ -218,27 +209,22 @@ const ProductDetails = ({ match }) => {
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo
-            currentPrice={currentPrice}
-            currentVolume={dimensions.volumeInLiters}
-            currentWeight={dimensions.weightInKg}
-          />
+          <ProductInfo />
           <ProductSizes
-            selectedSize={selectedSize}
             handleSizeChange={handleSizeChange}
             sizes={sizes}
-            error={error}
+            sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
           <ProductFeatures
             bottomMaterials={bottomMaterials}
             additions={additions}
-            bagBottom={bagBottom}
-            setBagBottom={setBagBottom}
-            sidePocket={sidePocket}
-            setSidePocket={setSidePocket}
-            setPrice={setPrice}
           />
-          <ProductSubmit checkSize={checkSize} productToSend={productToSend} />
+          <ProductSubmit
+            bottomMaterials={bottomMaterials}
+            sizes={sizes}
+            productToSend={productToSend}
+            setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+          />
         </div>
       </div>
       <SimilarProducts />

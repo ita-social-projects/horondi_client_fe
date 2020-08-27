@@ -6,7 +6,12 @@ import {
   getFromLocalStorage
 } from '../../services/local-storage.service';
 import { changeCurrency } from '../../redux/currency/currency.actions';
-import { CURRENCIES_LIST, DEFAULT_CURRENCY } from '../../configs';
+import {
+  CURRENCIES_LIST,
+  DEFAULT_CURRENCY,
+  hryvniaUnicode,
+  dollarUnicode
+} from '../../configs';
 import Dropdown from '../../components/dropdown';
 
 const currencyInLocalStorage =
@@ -27,7 +32,7 @@ const Currency = () => {
   };
   const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
     <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
-      {currency === 'UAH' ? '\u20b4' : '\u0024'}
+      {currency === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
   return (

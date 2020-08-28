@@ -71,14 +71,13 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
     if (!sidePocket) {
       newPrice = totalPrice + additionalPrice[0].value / 100;
-      dispatch(setProductToSend({ totalPrice: newPrice }));
     } else {
       newPrice = totalPrice - additionalPrice[0].value / 100;
-      dispatch(setProductToSend({ totalPrice: newPrice }));
     }
 
     dispatch(
       setProductToSend({
+        totalPrice: newPrice,
         sidePocket: { isSelected: checked, additionsNameToSend }
       })
     );

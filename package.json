@@ -104,7 +104,7 @@
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
     "jest-dom": "^4.0.0",
-    "lint-staged": "^10.2.6",
+    "lint-staged": "^10.2.13",
     "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",
     "react-test-render": "^1.1.2",

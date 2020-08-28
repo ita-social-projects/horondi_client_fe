@@ -5,23 +5,23 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
 import { FOOTER_CONTACTS } from '../../translations/footer.translations';
-import { ActiveMessenger } from './activeMessenger';
+import ActiveMessenger from '../active-messenger';
 import { useStyles } from './chat.style';
 import { CHAT } from '../../translations/chat.translation';
 
 export const Chat = () => {
-  const [visible, setBlock] = useState(false);
+  const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
   const { language, themeMode } = useSelector((state) => ({
     language: state.Language.language,
     themeMode: state.Theme.lightMode
   }));
   const { item: PHONE_NUMBER } = FOOTER_CONTACTS[language].items[0];
-  const style = useStyles({ themeMode, visible, mailFormVisible });
+  const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
 
   return (
     <div>
-      {visible && (
+      {iconsVisible && (
         <div className={style.iconsMessengers}>
           <div>
             <MessengerCustomerChat
@@ -43,7 +43,7 @@ export const Chat = () => {
               <div
                 className={style.cancelIcon}
                 onClick={() => {
-                  setBlock(!visible);
+                  setIconsVisible(!iconsVisible);
                   setMailFormVisible(false);
                 }}
               >
@@ -65,7 +65,10 @@ export const Chat = () => {
           )}
         </div>
       )}
-      <div onClick={() => setBlock(!visible)} className={style.chatIcon}>
+      <div
+        onClick={() => setIconsVisible(!iconsVisible)}
+        className={style.chatIcon}
+      >
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </div>
     </div>

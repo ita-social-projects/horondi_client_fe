@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { CHAT } from '../../translations/chat.translation';
-import { useStyles } from './chat.style';
+import { useStyles } from '../chat/chat.style';
 
 export const ActiveMessenger = ({
   themeMode,
@@ -12,7 +12,7 @@ export const ActiveMessenger = ({
   const style = useStyles({ themeMode, visible, mailFormVisible });
 
   return (
-    <div className={style.formFieldActive}>
+    <form className={style.formFieldActive}>
       <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
       <TextField
         className={style.dataInput}
@@ -42,6 +42,6 @@ export const ActiveMessenger = ({
         rows={4}
       />
       <Button className={style.btnSend}>{CHAT[language].sendBtn}</Button>
-    </div>
+    </form>
   );
 };

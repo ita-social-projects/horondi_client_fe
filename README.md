@@ -23,7 +23,7 @@ Frontend app for the `Horondi` online store
       that are used inside particular page should be located inside
       folder for the specific page.
     - Each component should have at least three files:
-      - `index.js` where we export anything from the whole folder
+      - `index.js.js` where we export anything from the whole folder
       - `{component-name}.js` - file where component is located
       - `{component-name}.styles.js` where all styles are located
 

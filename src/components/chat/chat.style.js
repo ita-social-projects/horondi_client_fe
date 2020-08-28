@@ -7,9 +7,9 @@ const flexCenter = {
 };
 
 export const useStyles = makeStyles((theme) => ({
-  chatIcon: ({ visible }) => ({
+  chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
-    background: visible ? '#E4B200' : 'black',
+    background: iconsVisible ? '#E4B200' : 'black',
     width: '60px',
     height: '60px',
     borderRadius: '50%',

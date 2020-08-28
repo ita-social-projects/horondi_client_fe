@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
-    '@media (max-width: 1000px)': {
+    '@media (max-width: 1150px)': {
       display: 'flex',
       justifyContent: 'center'
     },
@@ -13,13 +13,7 @@ const useStyles = makeStyles((theme) => ({
   images: {
     display: 'grid',
     gridAutoFlow: 'column',
-    gridColumnGap: '2rem',
-    gridRowGap: '0.3rem',
-    gridTemplate: 'repeat(3, 12rem) / 8rem 27.4rem',
-    overflow: 'hidden',
-    '@media (max-width: 1600px)': {
-      gridTemplate: 'repeat(3, 9rem) / 6rem 20.6rem'
-    },
+    gridTemplate: 'repeat(3, 190px) / 29% 71%',
     '& img': {
       transition: 'all 0.3s',
       transform: 'scale(1)',
@@ -29,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         transform: 'scale(1.1)'
       },
       '&:nth-child(1)': {
+        width: '700px',
         gridColumn: '2',
         gridRow: '1 / 4'
       },
@@ -45,11 +40,11 @@ const useStyles = makeStyles((theme) => ({
         gridRow: '3'
       }
     },
+    '@media (max-width: 1600px)': {
+      gridTemplate: 'repeat(3, 140px) / 29% 71%'
+    },
     '@media (max-width: 1300px)': {
       gridTemplate: 'repeat(3, 120px) / 125px 260px'
-    },
-    '@media (max-width: 1000px)': {
-      gridTemplate: 'repeat(3, 8.9rem) / 5.5rem 20rem'
     },
     '@media (max-width: 500px)': {
       gridTemplate: '14rem / 0',
@@ -59,14 +54,18 @@ const useStyles = makeStyles((theme) => ({
   primaryImage: (props) => ({
     background: `url(${props.primaryImage}) no-repeat center`,
     backgroundSize: 'cover',
-    height: '350px',
-    width: '100%',
+    height: '500px',
     cursor: 'pointer',
+    width: '500px',
     transition: 'all 0.3s',
     transform: 'scale(1)',
     '&:hover': {
       cursor: 'pointer',
       transform: 'scale(1.05)'
+    },
+    '@media (max-width: 1600px)': {
+      width: '330px',
+      height: '350px'
     }
   })
 }));

@@ -205,7 +205,7 @@ export function* handleProductLoading({ payload }) {
           large
         }
         additional {
-          thumbnail
+          small
           large
         }
       }

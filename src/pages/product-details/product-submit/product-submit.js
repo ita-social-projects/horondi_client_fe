@@ -32,10 +32,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   const wishlistItems = getFromLocalStorage('wishlist');
   const { selectedSize } = productToSend;
+
   const isWishful = useMemo(
     () => wishlistItems.find((item) => productId === item._id),
     [productId, wishlistItems]
   );
+
   const sizeToSend = useMemo(
     () => sizes.find(({ _id }) => _id === selectedSize),
     [selectedSize, sizes]

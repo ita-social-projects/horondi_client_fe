@@ -46,7 +46,10 @@ export const initialState = {
     name: '',
     images: '',
     selectedSize: false,
-    bagBottom: '',
+    bagBottom: {
+      value: '',
+      name: ''
+    },
     sidePocket: {
       isSelected: false,
       name: ''

@@ -71,7 +71,7 @@ const ProductDetails = ({ match }) => {
           name,
           images,
           productUrl,
-          totalPrice: basePrice[0].value,
+          totalPrice: basePrice[0].value / 100,
           dimensions: { volumeInLiters, weightInKg }
         })
       );
@@ -174,13 +174,14 @@ const ProductDetails = ({ match }) => {
 
   const handleSizeChange = (event, id) => {
     const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[0].value
+      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[0].value /
+        100
       : 0;
     const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
       ({ _id }) => _id === id
     );
     const newPrice =
-      productToSend.totalPrice - oldPrice + additionalPrice[0].value;
+      productToSend.totalPrice - oldPrice + additionalPrice[0].value / 100;
 
     dispatch(
       setProductToSend({

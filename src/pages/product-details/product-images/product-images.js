@@ -41,7 +41,7 @@ const ProductImages = () => {
       .filter((img, idx) => idx < 3)
       .map((image, idx) => (
         <img
-          src={`${IMG_URL}${image.thumbnail}`}
+          src={`${IMG_URL}${image.small}`}
           key={idx}
           alt={IMG_ALT_INFO[language].value}
           onClick={() => openImage(idx + 1)}

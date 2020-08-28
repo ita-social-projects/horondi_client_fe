@@ -30,7 +30,7 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
   const { additionalPrice, available, name } = additions[0] || {};
 
-  const setAdditionalPrice = (price) => ` +${price} UAH`;
+  const setAdditionalPrice = (price) => ` +${price / 100} UAH`;
 
   const additionsNameToSend = useMemo(
     () => (additions.length >= 1 ? additions[0].name : null),
@@ -49,11 +49,11 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
     const { value } = event.target;
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        .additionalPrice[0].value
+        .additionalPrice[0].value / 100
       : 0;
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-        .additionalPrice[0].value
+        .additionalPrice[0].value / 100
       : 0;
     const newTotalPrice = totalPrice - oldPrice + newPrice;
 
@@ -67,14 +67,14 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
   const handlePocketChange = (event) => {
     const { checked } = event.target;
+    let newPrice;
+
     if (!sidePocket) {
-      dispatch(
-        setProductToSend({ totalPrice: totalPrice + additionalPrice[0].value })
-      );
+      newPrice = totalPrice + additionalPrice[0].value / 100;
+      dispatch(setProductToSend({ totalPrice: newPrice }));
     } else {
-      dispatch(
-        setProductToSend({ totalPrice: totalPrice - additionalPrice[0].value })
-      );
+      newPrice = totalPrice - additionalPrice[0].value / 100;
+      dispatch(setProductToSend({ totalPrice: newPrice }));
     }
 
     dispatch(

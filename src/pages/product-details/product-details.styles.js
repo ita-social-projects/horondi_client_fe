@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '50% 50%',
     padding: '2rem',
-    '@media (max-width: 1000px)': {
+    '@media (max-width: 1150px)': {
       display: 'block'
     },
     '@media (max-width: 400px)': {

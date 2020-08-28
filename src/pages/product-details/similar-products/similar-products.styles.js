@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
   },
   carousel: {
     marginTop: '2rem',
-    borderBottom: '2px solid #C2C2C2'
+    borderBottom: '2px solid #C2C2C2',
+    paddingBottom: '25px'
   },
   title: {
     borderTop: '2px solid #C2C2C2',

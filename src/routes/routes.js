@@ -47,7 +47,7 @@ const Routes = () => {
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
           />
-          <Route path='/:category/:id' exact component={ProductDetails} />
+          <Route path='/product/:id' exact component={ProductDetails} />
           <Route
             path='/:category'
             exact

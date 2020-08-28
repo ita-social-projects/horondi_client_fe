@@ -256,15 +256,15 @@ export const RATE = 'rate';
 export const POPULARITY = 'POPULARITY';
 export const responsive = {
   superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
+    breakpoint: { max: 4000, min: 1600 },
+    items: 4
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 1600, min: 1024 },
     items: 3
   },
   tablet: {
-    breakpoint: { max: 1146, min: 464 },
+    breakpoint: { max: 1250, min: 464 },
     items: 2
   },
   mobile: {

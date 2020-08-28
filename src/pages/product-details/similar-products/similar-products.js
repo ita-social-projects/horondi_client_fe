@@ -24,9 +24,12 @@ const SimilarProducts = () => {
 
   const imagesList = similarProducts
     .filter(({ _id }) => _id !== productId)
-    .map(({ _id, images }) => (
+    .map(({ _id, images, rate, name, basePrice }) => (
       <SimilarProductItem
         key={_id}
+        price={basePrice[0].value}
+        name={name}
+        rate={rate}
         imageUrl={`${IMG_URL}${images.primary.large}`}
         id={_id}
       />

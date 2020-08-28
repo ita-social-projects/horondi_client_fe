@@ -22,7 +22,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
           className={
             _id === selectedSize ? styles.selectedSize : styles.sizeButton
           }
-          onClick={(e) => handleSizeChange(e, _id)}
+          onClick={() => handleSizeChange(_id)}
         >
           {name}
         </Button>

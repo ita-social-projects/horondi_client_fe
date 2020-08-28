@@ -172,7 +172,7 @@ const ProductDetails = ({ match }) => {
     [uniqueAdditions, options]
   );
 
-  const handleSizeChange = (event, id) => {
+  const handleSizeChange = (id) => {
     const oldPrice = selectedSize
       ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[0].value /
         100

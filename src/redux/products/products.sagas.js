@@ -65,6 +65,8 @@ export function* handleFilterLoad() {
                 images {
                   primary {
                     medium
+                    large
+                    small
                   }
                 }
                 colors{

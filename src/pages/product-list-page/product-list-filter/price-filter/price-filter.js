@@ -23,7 +23,7 @@ const PriceFilter = () => {
   const { priceFilter } = filters;
 
   const handlePriceChange = (event, newValue) => {
-    dispatch(setPriceFilter(newValue));
+    dispatch(setPriceFilter(newValue.map((value) => value * 100)));
   };
 
   return (
@@ -33,18 +33,22 @@ const PriceFilter = () => {
       </Typography>
       <Slider
         className={styles.slider}
-        value={priceFilter}
+        value={priceFilter.map((price) => price / 100)}
         defaultValue={[
-          Math.min(...filterData.map((product) => product.basePrice[0].value)),
-          Math.max(...filterData.map((product) => product.basePrice[0].value))
+          Math.min(
+            ...filterData.map((product) => product.basePrice[0].value / 100)
+          ),
+          Math.max(
+            ...filterData.map((product) => product.basePrice[0].value / 100)
+          )
         ]}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
         min={Math.min(
-          ...filterData.map((product) => product.basePrice[0].value)
+          ...filterData.map((product) => product.basePrice[0].value / 100)
         )}
         max={Math.max(
-          ...filterData.map((product) => product.basePrice[0].value)
+          ...filterData.map((product) => product.basePrice[0].value / 100)
         )}
         aria-labelledby='range-slider'
       />

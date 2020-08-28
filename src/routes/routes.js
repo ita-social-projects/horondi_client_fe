@@ -17,6 +17,8 @@ import ProductListPage from '../pages/product-list-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import Recovery from '../pages/recovery';
+import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 
@@ -45,6 +47,12 @@ const Routes = () => {
             path='/confirmation/:token'
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
+          />
+          <Route path='/recovery' exact component={Recovery} />
+          <Route
+            path='/recovery/:token'
+            exact
+            render={({ match }) => <NewPassword token={match.params.token} />}
           />
           <Route
             path='/:category'

@@ -49,7 +49,7 @@ const CategoryFilter = () => {
     }
   };
 
-  const [isFiltersHidden, hideFilters] = useState(true);
+  const [isFiltersHidden, toggleFilters] = useState(true);
 
   return (
     <FormGroup data-cy='category_filter'>
@@ -57,7 +57,7 @@ const CategoryFilter = () => {
         className={styles.filterName}
         data-cy='categories'
         gutterBottom
-        onClick={() => hideFilters(!isFiltersHidden)}
+        onClick={() => toggleFilters(!isFiltersHidden)}
       >
         <span>{CATERGORY_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{categories.length}</span>

@@ -34,6 +34,7 @@ const Routes = () => {
       <div className={styles.root}>
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/error-page' exact component={ErrorPage} />
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
@@ -74,7 +75,6 @@ const Routes = () => {
             }}
           />
           <Route path='/product/:id' exact render={() => 'detail page'} />
-          <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>
       <AppFooter />

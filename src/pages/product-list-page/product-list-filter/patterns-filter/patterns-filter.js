@@ -46,7 +46,7 @@ const PatternsFilter = () => {
     }
   };
 
-  const [isFiltersHidden, hideFilters] = useState(false);
+  const [isFiltersHidden, toggleFilters] = useState(false);
 
   return (
     <FormGroup data-cy='patterns_filter'>
@@ -54,7 +54,7 @@ const PatternsFilter = () => {
         className={styles.filterName}
         data-cy='patterns'
         gutterBottom
-        onClick={() => hideFilters(!isFiltersHidden)}
+        onClick={() => toggleFilters(!isFiltersHidden)}
       >
         <span>{PATTERN_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{patterns.length}</span>

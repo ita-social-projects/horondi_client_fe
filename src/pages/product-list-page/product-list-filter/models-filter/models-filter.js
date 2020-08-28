@@ -44,7 +44,7 @@ const ModelsFilter = () => {
     }
   };
 
-  const [isFiltersHidden, hideFilters] = useState(false);
+  const [isFiltersHidden, toggleFilters] = useState(false);
 
   return (
     <FormGroup data-cy='category_filter'>
@@ -52,7 +52,7 @@ const ModelsFilter = () => {
         className={styles.filterName}
         data-cy='categories'
         gutterBottom
-        onClick={() => hideFilters(!isFiltersHidden)}
+        onClick={() => toggleFilters(!isFiltersHidden)}
       >
         <span>{MODEL_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{models.length}</span>

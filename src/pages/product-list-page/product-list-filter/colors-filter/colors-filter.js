@@ -46,7 +46,7 @@ const ColorsFilter = () => {
     }
   };
 
-  const [isFiltersHidden, hideFilters] = useState(false);
+  const [isFiltersHidden, toggleFilters] = useState(false);
 
   return (
     <FormGroup data-cy='colors_filter'>
@@ -54,7 +54,7 @@ const ColorsFilter = () => {
         className={styles.filterName}
         data-cy='colors'
         gutterBottom
-        onClick={() => hideFilters(!isFiltersHidden)}
+        onClick={() => toggleFilters(!isFiltersHidden)}
       >
         <span>{COLORS_TEXT[language].value}:</span>
         <span style={{ textDecoration: 'underline' }}>{colors.length}</span>

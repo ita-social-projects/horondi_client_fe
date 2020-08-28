@@ -82,17 +82,6 @@ export const OR_TEXT = [
   }
 ];
 
-export const REGISTER_FORM_LABEL = [
-  {
-    lang: 'uk',
-    value: 'Реєстрація'
-  },
-  {
-    lang: 'eng',
-    value: 'Register'
-  }
-];
-
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
@@ -105,8 +94,6 @@ export const LOGIN_USER_DATA = {
   email: '',
   password: ''
 };
-
-export const SHOW_AFTER = 3000;
 
 export const errorMessages = [
   {
@@ -220,19 +207,6 @@ export const REGISTER_PROPOSAL = [
   }
 ];
 
-export const WELCOME_MESSAGE = [
-  {
-    h2: 'Вітаємо',
-    h3: 'Реєстрація пройшла успішно!',
-    button: 'В магазин'
-  },
-  {
-    h2: 'Welcome',
-    h3: 'Registration was successful!',
-    button: 'Go to shop'
-  }
-];
-
 export const CONFIRM_ERROR = [
   {
     value: 'Ой! Щось пішло не так.'
@@ -241,30 +215,30 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
-
-export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
-export const DEFAULT_SIZE = 'M';
-export const INPUT_VARIANT = 'outlined';
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
   month: 'numeric',
   day: 'numeric'
 };
+export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
+export const DEFAULT_SIZE = 'M';
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
 export const POPULARITY = 'POPULARITY';
+export const INPUT_VARIANT = 'outlined';
+export const REDIRECT_TIMEOUT = 3000;
 export const responsive = {
   superLargeDesktop: {
-    breakpoint: { max: 4000, min: 1600 },
-    items: 4
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
   },
   desktop: {
-    breakpoint: { max: 1600, min: 1024 },
+    breakpoint: { max: 3000, min: 1024 },
     items: 3
   },
   tablet: {
-    breakpoint: { max: 1250, min: 464 },
+    breakpoint: { max: 1146, min: 464 },
     items: 2
   },
   mobile: {

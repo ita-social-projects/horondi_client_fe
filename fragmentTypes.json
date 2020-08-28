@@ -1,0 +1,90 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "CategoryResult",
+        "possibleTypes": [
+          {
+            "name": "Category"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "CurrencyResult",
+        "possibleTypes": [
+          {
+            "name": "Currency"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "MaterialResult",
+        "possibleTypes": [
+          {
+            "name": "Material"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "PatternResult",
+        "possibleTypes": [
+          {
+            "name": "Pattern"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "NewsResult",
+        "possibleTypes": [
+          {
+            "name": "News"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ProductResult",
+        "possibleTypes": [
+          {
+            "name": "Product"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "CommentResult",
+        "possibleTypes": [
+          {
+            "name": "Comment"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      }
+    ]
+  }
+}

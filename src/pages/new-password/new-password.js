@@ -11,7 +11,10 @@ import {
 } from '../../translations/user.translations';
 import { endAdornment } from '../../utils/eyeToggle';
 import Loader from '../../components/loader';
-import { resetPassword , checkIfTokenValid } from '../../redux/user/user.actions';
+import {
+  resetPassword,
+  checkIfTokenValid
+} from '../../redux/user/user.actions';
 
 const NewPassword = ({ token }) => {
   // VALIDATORS

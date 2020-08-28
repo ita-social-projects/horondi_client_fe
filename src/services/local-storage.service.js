@@ -1,10 +1,12 @@
+import { DEFAULT_CURRENCY, DEFAULT_LANGUAGE } from '../configs';
+
 export const clearLocalStorage = () => {
   const horondi = {
     accessToken: 'not null',
     _id: null,
     wishlist: [],
-    language: 0,
-    currency: 0,
+    language: DEFAULT_LANGUAGE,
+    currency: DEFAULT_CURRENCY,
     cart: [],
     theme: 'light'
   };

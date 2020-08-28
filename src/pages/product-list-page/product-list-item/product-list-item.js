@@ -12,12 +12,10 @@ import * as productImage from '../../../images/pdp_main.jpg';
 const ProductListItem = ({ product, category }) => {
   const styles = useStyles({ image: productImage });
 
-  const { language, currency } = useSelector(
-    ({ Language: { language }, Currency: { currency } }) => ({
-      language,
-      currency
-    })
-  );
+  const { language, currency } = useSelector(({ Language, Currency }) => ({
+    language: Language.language,
+    currency: Currency.currency
+  }));
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
   return (

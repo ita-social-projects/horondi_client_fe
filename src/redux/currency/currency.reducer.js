@@ -1,7 +1,8 @@
 import { CHANGE_CURRENCY } from './currency.types';
+import { DEFAULT_CURRENCY } from '../../configs';
 
 export const initialState = {
-  currency: 0
+  currency: DEFAULT_CURRENCY
 };
 
 const currencyReducer = (state = initialState, action = {}) => {
@@ -11,10 +12,8 @@ const currencyReducer = (state = initialState, action = {}) => {
       ...state,
       currency: action.payload
     };
-
-  default: {
+  default:
     return state;
-  }
   }
 };
 

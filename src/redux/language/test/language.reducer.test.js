@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import languageReducer, { initialState } from '../language.reducer';
+import { changeLanguage } from '../language.actions';
 
 describe('test language reducer', () => {
   test('should return default state', () => {
@@ -9,8 +10,8 @@ describe('test language reducer', () => {
     });
   });
   test('should change language', () => {
-    expect(languageReducer({ ...initialState, language: 1 })).toMatchSnapshot();
-    expect(languageReducer({ ...initialState, language: 1 })).toEqual({
+    expect(languageReducer(initialState, changeLanguage(1))).toMatchSnapshot();
+    expect(languageReducer(initialState, changeLanguage(1))).toEqual({
       language: 1
     });
   });

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  rootLanguage: {
+  rootItem: {
     '& div': {
       padding: '0 !important'
     },
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '18px',
+    fontSize: '22px',
     textAlign: 'center',
     width: '60px',
     height: '33px',
@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
       fontWeight: 'normal',
-      width: '11rem !important'
+      width: '11rem !important',
+      fontSize: '22px'
     }
   }
 }));

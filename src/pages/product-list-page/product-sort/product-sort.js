@@ -15,8 +15,8 @@ import {
 import { SORT_ASC, SORT_DESC, RATE, POPULARITY } from '../../../configs';
 
 const ProductSort = () => {
-  const { language } = useSelector(({ Language: { language } }) => ({
-    language
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
   }));
   const styles = useStyles();
   const dispatch = useDispatch();

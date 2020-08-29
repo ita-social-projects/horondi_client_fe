@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap'
   },
   productsDiv: {
+    alignContent: 'start',
     margin: '0 0 0 2rem',
     width: '100%',
     display: 'grid',

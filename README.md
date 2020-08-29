@@ -167,7 +167,9 @@ Order of testing components:
 4. components that connected to redux
 
 #### Cypress
+
 1. Use `data-cy` as selector
+
 ##### Don’t test:
 
 - third-party libraries

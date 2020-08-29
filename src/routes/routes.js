@@ -49,7 +49,6 @@ const Routes = () => {
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
           />
-          <Route path='/product/:id' exact component={ProductDetails} />
           <Route path='/recovery' exact component={Recovery} />
           <Route
             path='/recovery/:token'
@@ -69,7 +68,7 @@ const Routes = () => {
               return <ProductListPage category={categoryParam} />;
             }}
           />
-          <Route path='/:category/:id' exact render={() => 'detail page'} />
+          <Route path='/:category/:id' exact component={ProductDetails} />
           <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>

@@ -48,40 +48,6 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
-export const CONFIRM_EMAIL = [
-  {
-    lang: 'uk',
-    value:
-      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
-  },
-  {
-    lang: 'eng',
-    value:
-      'You have successfully registered! Please, confirm your email address.'
-  }
-];
-
-export const LOGIN_FORM_LABEL = [
-  {
-    lang: 'uk',
-    value: 'увійти'
-  },
-  {
-    lang: 'eng',
-    value: 'log in'
-  }
-];
-export const OR_TEXT = [
-  {
-    lang: 'uk',
-    value: 'або'
-  },
-  {
-    lang: 'eng',
-    value: 'or'
-  }
-];
-
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
@@ -247,3 +213,19 @@ export const responsive = {
   }
 };
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
+
+export const LANGUAGES_LIST = [
+  { lang: 'UA', value: 0 },
+  { lang: 'EN', value: 1 }
+];
+
+export const CURRENCIES_LIST = [
+  { currency: 'UAH', value: 0 },
+  { currency: 'USD', value: 1 }
+];
+
+export const DEFAULT_CURRENCY = 0;
+export const DEFAULT_LANGUAGE = 0;
+
+export const hryvniaUnicode = '\u20b4';
+export const dollarUnicode = '\u0024';

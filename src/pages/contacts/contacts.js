@@ -62,7 +62,10 @@ const ContactsPage = () => {
             </span>
             <div className={styles.schedule}>
               {contact.openHours[language].value.split('|').map((el, i) => (
-                <span key={i}>{el}</span>
+                <div key={i}>
+                  <span className={styles.day}>{el.substr(0, 4)}</span>
+                  <span>{el.substring(4)}</span>
+                </div>
               ))}
             </div>
           </div>

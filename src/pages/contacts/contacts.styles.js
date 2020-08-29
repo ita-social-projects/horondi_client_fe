@@ -70,5 +70,9 @@ export const useStyles = makeStyles((theme) => ({
     '& > p': {
       margin: '0'
     }
+  },
+  day: {
+    display: 'inline-block',
+    width: '40px'
   }
 }));

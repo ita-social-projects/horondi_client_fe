@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, TextField } from '@material-ui/core';
-import { CHAT } from '../../translations/chat.translation';
-import { useStyles } from '../chat/chat.style';
+import { CHAT } from '../../../translations/chat.translation';
+import { useStyles } from '../chat.style';
 
 export const ActiveMessenger = ({
   themeMode,

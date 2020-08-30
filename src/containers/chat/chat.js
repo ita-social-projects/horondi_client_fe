@@ -5,7 +5,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
 import { FOOTER_CONTACTS } from '../../translations/footer.translations';
-import ActiveMessenger from '../active-messenger';
+import ActiveMessenger from './active-messenger';
 import { useStyles } from './chat.style';
 import { CHAT } from '../../translations/chat.translation';
 

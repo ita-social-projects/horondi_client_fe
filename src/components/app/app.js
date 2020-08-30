@@ -13,7 +13,7 @@ import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 
 import { getCategories } from '../../redux/categories/categories.actions';
-import Chat from '../chat';
+import Chat from '../../containers/chat';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({

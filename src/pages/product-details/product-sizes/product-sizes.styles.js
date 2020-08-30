@@ -50,7 +50,10 @@ const useStyles = makeStyles((theme) => {
       }
     },
     container: {
-      display: 'flex'
+      display: 'flex',
+      '@media (max-width: 600px)': {
+        justifyContent: 'center'
+      }
     }
   };
 });

@@ -26,7 +26,9 @@ import {
   DELETE_COMMENT,
   SET_COMMENT,
   SET_COMMENTS_LOADING,
-  SET_UPDATING_COMMENT
+  SET_UPDATING_COMMENT,
+  SET_PRODUCT_TO_SEND,
+  CLEAR_PRODUCT_TO_SEND
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -148,4 +150,13 @@ export const setCommentsLoading = (payload) => ({
 export const setUpdatingComment = (payload) => ({
   type: SET_UPDATING_COMMENT,
   payload
+});
+
+export const setProductToSend = (payload) => ({
+  type: SET_PRODUCT_TO_SEND,
+  payload
+});
+
+export const clearProductToSend = () => ({
+  type: CLEAR_PRODUCT_TO_SEND
 });

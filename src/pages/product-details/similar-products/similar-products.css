@@ -14,32 +14,6 @@
 .react-multiple-carousel__arrow--left {
     left: 1rem !important;
 }
-.similarItems {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-}
 
-.similarItems hr {
-    color: #C2C2C2;
-    background-color: #C2C2C2;
-    height: 0.05rem;
-}
 
-.carousel {
-    margin-top: 2rem;
-}
 
-.carousel img {
-    width: 280px;
-    height: 363px;
-}
-
-.image {
-    transition: all 0.3s;
-    transform: scale(1);
-}
-
-.image:hover {
-    transform: scale(1.05);
-}

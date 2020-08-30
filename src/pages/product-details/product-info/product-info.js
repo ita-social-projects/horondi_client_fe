@@ -17,7 +17,7 @@ import {
 } from '../../../translations/product-details.translations';
 import Detail from '../detail';
 
-const ProductInfo = ({ currentPrice, currentVolume, currentWeight }) => {
+const ProductInfo = () => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
@@ -30,15 +30,21 @@ const ProductInfo = ({ currentPrice, currentVolume, currentWeight }) => {
     description,
     mainMaterial,
     innerMaterial,
-    strapLengthInCm
-  } = useSelector(({ Language, Products: { product } }) => ({
+    strapLengthInCm,
+    currentPrice,
+    currentWeight,
+    currentVolume
+  } = useSelector(({ Language, Products: { product, productToSend } }) => ({
     language: Language.language,
     rate: product.rate,
     name: product.name,
     description: product.description,
     mainMaterial: product.mainMaterial,
     innerMaterial: product.innerMaterial,
-    strapLengthInCm: product.strapLengthInCm
+    strapLengthInCm: product.strapLengthInCm,
+    currentPrice: productToSend.totalPrice,
+    currentWeight: productToSend.dimensions.weightInKg,
+    currentVolume: productToSend.dimensions.volumeInLiters
   }));
 
   return (

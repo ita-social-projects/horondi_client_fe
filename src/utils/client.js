@@ -5,7 +5,7 @@ import {
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory';
 
-const introspectionResult = require('../fragmentTypes.json');
+const introspectionResult = require('src/../../fragmentTypes.json');
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: introspectionResult

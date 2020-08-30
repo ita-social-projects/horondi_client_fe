@@ -1,5 +1,6 @@
 module.exports = {
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   verbose: true,
-  testPathIgnorePatterns: ['cypress']
+  testPathIgnorePatterns: ['cypress'],
+  modulePathIgnorePatterns: ['cypress']
 };

@@ -1,10 +1,10 @@
 import { gql } from 'apollo-boost';
 import getItems, { setItems, client } from '../../utils/client';
 
-const getProduct = (id) =>
+const getProduct = (payload) =>
   getItems(
-    `query {
-        getProductById(id:"${id}") {
+    `query($id: ID!) {
+      getProductById(id: $id) {
         ... on Product {
           _id
         category {
@@ -37,7 +37,7 @@ const getProduct = (id) =>
             large
           }
           additional {
-            thumbnail
+            small
             large
           }
         }
@@ -67,7 +67,6 @@ const getProduct = (id) =>
         }
         options {
           size {
-            _id
             name
             heightInCm
             widthInCm
@@ -75,18 +74,17 @@ const getProduct = (id) =>
             volumeInLiters
             available
             additionalPrice {
-              value 
+              value
               currency
             }
           }
           bottomMaterial {
-            _id
             name {
               lang
               value
             }
             additionalPrice {
-              value 
+              value
               currency
             }
           }
@@ -97,41 +95,37 @@ const getProduct = (id) =>
             }
             available
             additionalPrice {
-              value 
+              value
               currency
             }
           }
         }
         rate
-        userRates {
-          user {
-            _id
-          }
-        }
         comments {
           _id
           text
           date
           user {
-            email
             name
           }
         }
         options {
           size {
+            _id
             name
             volumeInLiters
             widthInCm
             weightInKg
           }
           bottomMaterial {
+            _id
             name {
               lang
               value
             }
-          available
+            available
             additionalPrice {
-              value 
+              value
               currency
             }
           }
@@ -142,7 +136,7 @@ const getProduct = (id) =>
             }
             available
             additionalPrice {
-              value 
+              value
               currency
             }
           }
@@ -156,15 +150,16 @@ const getProduct = (id) =>
             medium
           }
           additional {
-            thumbnail
-            small
             large
             medium
           }
         }
+      }
     }
-  }
-}`
+  }`,
+    {
+      id: payload
+    }
   );
 
 const getComments = (id) =>

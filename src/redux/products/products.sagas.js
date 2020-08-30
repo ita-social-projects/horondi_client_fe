@@ -93,6 +93,7 @@ export function* handleFilterLoad() {
                 rate
                 images {
                   primary {
+                    large
                     medium
                     large
                   }

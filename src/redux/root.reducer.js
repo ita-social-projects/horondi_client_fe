@@ -11,6 +11,7 @@ import Contacts from './contacts/contacts.reducer';
 import Products from './products/products.reducer';
 import Wishlist from './wishlist/wishlist.reducer';
 import Cart from './cart/cart.reducer';
+import Currency from './currency/currency.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = (history) =>
     Products,
     Wishlist,
     Cart,
-    Contacts
+    Contacts,
+    Currency
   });
 
 export default rootReducer;

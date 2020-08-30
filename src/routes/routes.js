@@ -17,6 +17,7 @@ import ProductListPage from '../pages/product-list-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import ProductDetails from '../pages/product-details';
 import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
@@ -70,7 +71,8 @@ const Routes = () => {
               return <ProductListPage category={categoryParam} />;
             }}
           />
-          <Route path='/:category/:id' exact render={() => 'detail page'} />
+          <Route path='/:category/:id' exact component={ProductDetails} />
+          <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>
       <AppFooter />

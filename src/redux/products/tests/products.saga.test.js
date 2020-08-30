@@ -1,8 +1,15 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import { handleFilterLoad } from '../products.sagas';
+import { throwError } from 'redux-saga-test-plan/providers';
+import { handleFilterLoad, handleProductLoading } from '../products.sagas';
 import getItems from '../../../utils/client';
 import { setProductsLoading, setAllProducts } from '../products.actions';
+import {
+  SET_PRODUCT,
+  SET_PRODUCT_LOADING,
+  SET_PRODUCTS_LOADING
+} from '../products.types';
+import { SET_ERROR } from '../../error/error.types';
 
 describe('get products by filter saga', () => {
   it('Filter products', () => {
@@ -91,6 +98,42 @@ describe('get products by filter saga', () => {
       .put(setProductsLoading(true))
       .put(setAllProducts(productsExample.data.getProducts.items))
       .put(setProductsLoading(false))
+      .run();
+  });
+});
+
+describe('Product saga test', () => {
+  const productId = 'c3a84a5b9866c30390366168';
+
+  it('fetches product', () => {
+    const fakeProduct = {
+      data: {
+        getProductById: {
+          name: {
+            lang: 'en',
+            value: 'Rolltop Pink'
+          },
+          basePrice: 1450
+        }
+      }
+    };
+
+    return expectSaga(handleProductLoading, productId)
+      .provide([[matchers.call.fn(getItems), fakeProduct]])
+      .put({ type: SET_PRODUCT_LOADING, payload: true })
+      .put({ type: SET_PRODUCT, payload: fakeProduct.data.getProductById })
+      .put({ type: SET_PRODUCT_LOADING, payload: false })
+      .run();
+  });
+
+  it('handles error', () => {
+    const e = new Error('product not found');
+
+    return expectSaga(handleProductLoading, productId)
+      .provide([[matchers.call.fn(getItems), throwError(e)]])
+      .put({ type: SET_PRODUCT_LOADING, payload: true })
+      .put({ type: SET_PRODUCT_LOADING, payload: false })
+      .put({ type: SET_ERROR, payload: { e } })
       .run();
   });
 });

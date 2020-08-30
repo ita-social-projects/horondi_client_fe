@@ -13,9 +13,11 @@ import {
   setSortByPrice,
   setSortByRate,
   setSortByPopularity,
-  setProductsPerPage
+  setProductsPerPage,
+  setProduct,
+  setProductLoading
 } from '../products.actions';
-import productsExample from './products.mocks';
+import { productsExample } from './products.mocks';
 
 describe('Product reducer test', () => {
   it('should return default state', () => {
@@ -122,16 +124,6 @@ describe('Product reducer test', () => {
   it('should set loading to false', () => {
     const state = {
       ...initialState,
-      loading: false
-    };
-
-    expect(productReducer(initialState, setProductsLoading(false))).toEqual(
-      state
-    );
-  });
-  it('should set loading to false', () => {
-    const state = {
-      ...initialState,
       loading: true
     };
 
@@ -186,5 +178,36 @@ describe('Product reducer test', () => {
       productsPerPage: 18
     };
     expect(productReducer(initialState, setProductsPerPage(18))).toEqual(state);
+  });
+
+  it('should return state with new product', () => {
+    const newProduct = {
+      data: {
+        getProductsById: {
+          name: {
+            lang: 'en',
+            value: 'Rolltop Pink'
+          },
+          basePrice: 1450
+        }
+      }
+    };
+    const state = {
+      ...initialState,
+      product: newProduct
+    };
+
+    expect(productReducer(initialState, setProduct(newProduct))).toEqual(state);
+  });
+
+  it('should set product loading to false', () => {
+    const state = {
+      ...initialState,
+      productLoading: false
+    };
+
+    expect(productReducer(initialState, setProductLoading(false))).toEqual(
+      state
+    );
   });
 });

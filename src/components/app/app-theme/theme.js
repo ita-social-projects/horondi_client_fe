@@ -15,6 +15,15 @@ export default {
         backgroundColor: '#999999',
         color: '#C2C2C2'
       }
+    },
+    card: {
+      backgroundColor: '#F5F5F5',
+      border: '1px solid #D3D3D3',
+      childrenBackgroundColor: '#FFFFFF',
+      selectedButton: {
+        backgroundColor: '#000000',
+        color: '#FFFFFF'
+      }
     }
   },
   dark: {
@@ -32,6 +41,15 @@ export default {
       disabled: {
         backgroundColor: '#868585',
         color: '#C2C2C2'
+      }
+    },
+    card: {
+      backgroundColor: '#454545',
+      border: '1px solid #282828',
+      childrenBackgroundColor: '#353535',
+      selectedButton: {
+        backgroundColor: '#FFFFFF',
+        color: '#000000'
       }
     }
   }

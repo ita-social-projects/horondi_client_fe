@@ -1,0 +1,5 @@
+schema: "http://localhost:5000/graphql"
+generates:
+  ./fragmentTypes.json:
+    plugins:
+      - "fragment-matcher"

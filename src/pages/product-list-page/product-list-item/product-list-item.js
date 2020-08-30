@@ -4,17 +4,20 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import useStyles from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import * as productImage from '../../../images/pdp_main.jpg';
 
 const ProductListItem = ({ product, category }) => {
   const styles = useStyles({ image: productImage });
-  const { language } = useSelector(({ Language: { language } }) => ({
-    language
-  }));
 
+  const { language, currency } = useSelector(({ Language, Currency }) => ({
+    language: Language.language,
+    currency: Currency.currency
+  }));
+  const currencySign =
+    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
   return (
     <Link
       to={`${category.toLowerCase()}/${product._id}`}
@@ -24,8 +27,8 @@ const ProductListItem = ({ product, category }) => {
         {product.name[language].value}
         <StarRating size='small' readOnly rate={product.rate} />
         <div>
-          <FontAwesomeIcon icon={faHryvnia} />
-          {product.basePrice[0].value}
+          <FontAwesomeIcon icon={currencySign} />
+          {product.basePrice[currency].value / 100}
         </div>
       </Card>
     </Link>

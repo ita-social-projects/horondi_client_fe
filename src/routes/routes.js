@@ -17,6 +17,9 @@ import ProductListPage from '../pages/product-list-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
+import ProductDetails from '../pages/product-details';
+import Recovery from '../pages/recovery';
+import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 
@@ -46,6 +49,12 @@ const Routes = () => {
             exact
             render={({ match }) => <Confirmation token={match.params.token} />}
           />
+          <Route path='/recovery' exact component={Recovery} />
+          <Route
+            path='/recovery/:token'
+            exact
+            render={({ match }) => <NewPassword token={match.params.token} />}
+          />
           <Route
             path='/:category'
             exact
@@ -59,7 +68,7 @@ const Routes = () => {
               return <ProductListPage category={categoryParam} />;
             }}
           />
-          <Route path='/:category/:id' exact render={() => 'detail page'} />
+          <Route path='/:category/:id' exact component={ProductDetails} />
           <Route path='/error-page' exact component={ErrorPage} />
         </Switch>
       </div>

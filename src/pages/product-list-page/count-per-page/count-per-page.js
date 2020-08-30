@@ -19,6 +19,7 @@ const CountPerPage = () => {
   };
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
+      data-cy={item.title}
       title={item.title}
       key={item.value}
       type='button'

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test currency reducer should change currency 1`] = `
+Object {
+  "currency": 1,
+}
+`;
+
+exports[`test currency reducer should return default state 1`] = `
+Object {
+  "currency": 0,
+}
+`;

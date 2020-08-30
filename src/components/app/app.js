@@ -7,12 +7,12 @@ import { CssBaseline } from '@material-ui/core';
 import Routes from '../../routes';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
-import CircularUnderLoad from '../loading-bar';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 
 import { getCategories } from '../../redux/categories/categories.actions';
+import { Loader } from '../loader/loader';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
@@ -37,7 +37,7 @@ const App = () => {
   if (isLoading) {
     return (
       <div className={styles.center}>
-        <CircularUnderLoad />
+        <Loader />
       </div>
     );
   }

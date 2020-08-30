@@ -3,15 +3,15 @@ import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './login.styles';
+import { LOGIN_USER_DATA, formRegExp } from '../../configs';
 import {
   placeholders,
   OR_TEXT,
   LOGIN_FORM_LABEL,
-  LOGIN_USER_DATA,
-  formRegExp,
   FORGOT_PASSWORD,
-  REGISTER_PROPOSAL
-} from '../../configs';
+  REGISTER_PROPOSAL,
+  LOGIN_USER_ERROR
+} from '../../translations/user.translations';
 import { loginUser } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
@@ -63,7 +63,7 @@ const Login = () => {
   const handleLogin = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      dispatch(loginUser({ user, language }));
+      dispatch(loginUser({ user }));
     }
   };
 
@@ -89,7 +89,6 @@ const Login = () => {
                 {LOGIN_FORM_LABEL[language].value}
               </h2>
               <TextField
-                color='secondary'
                 label={emailLabel}
                 className={styles.emailInput}
                 fullWidth
@@ -131,9 +130,13 @@ const Login = () => {
                 >
                   {label}
                 </Button>
-                <p className={styles.loginError}>
-                  {shouldValidate && loginError ? loginError : ''}
-                </p>
+                {loginError ? (
+                  <p className={styles.loginError}>
+                    {LOGIN_USER_ERROR[loginError] && loginError
+                      ? LOGIN_USER_ERROR[loginError][language].value
+                      : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
+                  </p>
+                ) : null}
               </div>
               <div className={styles.orContainer}>
                 <span className={styles.orText}>{OR_TEXT[language].value}</span>

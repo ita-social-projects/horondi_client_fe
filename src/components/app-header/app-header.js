@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { AppBar, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStyles } from './app-header.styles';
 
 import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
 import Cabinet from '../../containers/cabinet';
 import Sidebar from '../../containers/sidebar';
+import CartHeader from '../../containers/cart-header';
+import Currency from '../../containers/currency';
 
 const AppHeader = () => {
   const styles = useStyles();
@@ -30,9 +30,9 @@ const AppHeader = () => {
           <div className={styles.categories}>
             <NavbarLeft />
           </div>
-          <AttachMoneyIcon />
+          <Currency />
           <Language />
-          <ShoppingBasketIcon />
+          <CartHeader />
           <Cabinet />
         </Toolbar>
       </AppBar>

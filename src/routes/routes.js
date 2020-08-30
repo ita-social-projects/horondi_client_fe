@@ -70,7 +70,7 @@ const Routes = () => {
               return <ProductsCarousel category={categoryParam} />;
             }}
           />
-          <Route path='/product/:id' exact render={ProductDetails} />
+          <Route path='/product/:id' exact component={ProductDetails} />
           <Route
             path='/:category/:model'
             exact

@@ -7,6 +7,7 @@ import { history } from '../store/store';
 import { useStyles } from './routes.style.js';
 import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
+import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
@@ -69,6 +70,7 @@ const Routes = () => {
               return <ProductsCarousel category={categoryParam} />;
             }}
           />
+          <Route path='/product/:id' exact render={ProductDetails} />
           <Route
             path='/:category/:model'
             exact
@@ -82,7 +84,6 @@ const Routes = () => {
               return <ProductListPage category={categoryParam} model={model} />;
             }}
           />
-          <Route path='/product/:id' exact render={() => 'detail page'} />
         </Switch>
       </div>
       <AppFooter />

@@ -20,10 +20,7 @@ const ProductListItem = ({ product, category }) => {
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
   return (
-    <Link
-      to={`${category.toLowerCase()}/${product._id}`}
-      className={styles.productItem}
-    >
+    <Link to={`/product/${product._id}`} className={styles.productItem}>
       <Card className={styles.name}>
         {product.name[language].value}
         <StarRating size='small' readOnly rate={product.rate} />

@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Backdrop } from '@material-ui/core';
+import { Backdrop , Card, Tooltip } from '@material-ui/core';
 
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
@@ -34,20 +34,26 @@ const ContactsPage = () => {
     );
   }
 
-  return contacts.map((contact) => (
+  const contactsDisplay = contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
-      <h2 className={styles.contactsTitle}>
-        {CONTACTS_PAGE_TITLES[language].title}
-      </h2>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
-          <a target='_blank' rel='noopener noreferrer' href={contact.link}>
-            <img
-              className={styles.mapImage}
-              src={contact.images.medium || mapImg}
-              alt={CONTACTS_PAGE_TITLES[language].location}
-            />
-          </a>
+          <Tooltip title={CONTACTS_PAGE_TITLES[language].showOnGoogleMaps}>
+            <Card>
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href={contact.link}
+                className={styles.link}
+              >
+                <img
+                  className={styles.mapImage}
+                  src={contact.images.medium || mapImg}
+                  alt={CONTACTS_PAGE_TITLES[language].location}
+                />
+              </a>
+            </Card>
+          </Tooltip>
         </div>
         <div className={styles.contacts}>
           <div className={styles.contactsItem}>
@@ -85,6 +91,15 @@ const ContactsPage = () => {
       </div>
     </div>
   ));
+
+  return (
+    <div className={styles.wrapper}>
+      <h2 className={styles.contactsTitle}>
+        {CONTACTS_PAGE_TITLES[language].title}
+      </h2>
+      {contactsDisplay}
+    </div>
+  );
 };
 
 export default ContactsPage;

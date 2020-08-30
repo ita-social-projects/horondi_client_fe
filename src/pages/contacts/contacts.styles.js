@@ -5,10 +5,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '77vh',
+    justifyContent: 'space-between',
+    marginBottom: '50px',
     '@media screen and (max-width: 768px)': {
-      height: 'auto',
-      marginBottom: '20px'
+      marginBottom: '30px'
     }
   },
   contactsTitle: {
@@ -45,6 +45,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   contactName: {
     width: '130px',
+    fontWeight: '700',
     '@media screen and (max-width: 768px)': {
       width: '100px'
     }
@@ -60,11 +61,16 @@ export const useStyles = makeStyles((theme) => ({
     width: '48%',
     height: '100%',
     '@media screen and (max-width: 768px)': {
-      width: 'auto'
+      width: 'auto',
+      marginBottom: '30px'
     }
   },
   mapImage: {
-    width: '100%'
+    width: '100%',
+    '&:hover': {
+      filter: 'brightness(.8)',
+      transition: '.3s'
+    }
   },
   contactAddress: {
     '& > p': {
@@ -74,5 +80,12 @@ export const useStyles = makeStyles((theme) => ({
   day: {
     display: 'inline-block',
     width: '40px'
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1
+  },
+  link: {
+    display: 'block',
+    lineHeight: '0'
   }
 }));

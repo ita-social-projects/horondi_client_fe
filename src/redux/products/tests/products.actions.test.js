@@ -13,7 +13,10 @@ import {
   setSortByRate,
   setSortByPopularity,
   setPagesCount,
-  setCurrentPage
+  setCurrentPage,
+  setProduct,
+  getProduct,
+  setProductLoading
 } from '../products.actions';
 import {
   SET_ALL_FILTER_DATA,
@@ -30,9 +33,12 @@ import {
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
   SET_PAGES_COUNT,
-  SET_CURRENT_PAGE
+  SET_CURRENT_PAGE,
+  SET_PRODUCT,
+  GET_PRODUCT,
+  SET_PRODUCT_LOADING
 } from '../products.types';
-import productsExample from './products.mocks';
+import { productsExample } from './products.mocks';
 
 describe('Filter actions test', () => {
   it('should set all products to payload property', () => {
@@ -171,6 +177,52 @@ describe('loading action', () => {
     expect(setPagesCount(10)).toEqual({
       type: SET_PAGES_COUNT,
       payload: 10
+    });
+  });
+});
+
+describe('Product actions test', () => {
+  test('should set new product to payload property', () => {
+    const newProduct = {
+      data: {
+        getProductsById: {
+          name: {
+            lang: 'en',
+            value: 'Rolltop Pink'
+          },
+          basePrice: 1450
+        }
+      }
+    };
+    const result = {
+      type: SET_PRODUCT,
+      payload: newProduct
+    };
+
+    expect(setProduct(newProduct)).toEqual(result);
+  });
+
+  test('should return object with type GET_PRODUCT and product id', () => {
+    const productId = 'c3a84a5b9866c30390366168';
+    const result = {
+      type: GET_PRODUCT,
+      payload: productId
+    };
+
+    expect(getProduct(productId)).toEqual(result);
+  });
+
+  test('should return loading = true', () => {
+    expect(setProductLoading(true)).toEqual({
+      type: SET_PRODUCT_LOADING,
+      payload: true
+    });
+  });
+
+  test('should return loading = false', () => {
+    expect(setProductLoading(false)).toEqual({
+      type: SET_PRODUCT_LOADING,
+      payload: false
     });
   });
 });

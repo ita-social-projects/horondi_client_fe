@@ -12,11 +12,16 @@ const PriceFilter = () => {
 
   const styles = useStyles();
 
-  const { filterData, filters, language } = useSelector(
-    ({ Products: { filterData, filters }, Language: { language } }) => ({
+  const { filterData, filters, language, currency } = useSelector(
+    ({
+      Products: { filterData, filters },
+      Language: { language },
+      Currency: { currency }
+    }) => ({
       filterData,
       filters,
-      language
+      language,
+      currency
     })
   );
 
@@ -36,19 +41,27 @@ const PriceFilter = () => {
         value={priceFilter.map((price) => price / 100)}
         defaultValue={[
           Math.min(
-            ...filterData.map((product) => product.basePrice[0].value / 100)
+            ...filterData.map(
+              (product) => product.basePrice[currency].value / 100
+            )
           ),
           Math.max(
-            ...filterData.map((product) => product.basePrice[0].value / 100)
+            ...filterData.map(
+              (product) => product.basePrice[currency].value / 100
+            )
           )
         ]}
         onChange={handlePriceChange}
         valueLabelDisplay='auto'
         min={Math.min(
-          ...filterData.map((product) => product.basePrice[0].value / 100)
+          ...filterData.map(
+            (product) => product.basePrice[currency].value / 100
+          )
         )}
         max={Math.max(
-          ...filterData.map((product) => product.basePrice[0].value / 100)
+          ...filterData.map(
+            (product) => product.basePrice[currency].value / 100
+          )
         )}
         aria-labelledby='range-slider'
       />

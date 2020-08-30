@@ -8,7 +8,10 @@ export const useStyles = makeStyles(() => ({
     color: '#ffffff',
     textDecoration: 'none',
     fontFamily: 'Montserrat',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    '@media (max-width: 900px)': {
+      marginRight: '10px'
+    }
   },
   link: {
     textDecoration: 'none',
@@ -22,6 +25,9 @@ export const useStyles = makeStyles(() => ({
       backgroundColor: '#ffffff'
     },
     fontFamily: 'Montserrat',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    '@media (max-width: 900px)': {
+      display: 'none'
+    }
   }
 }));

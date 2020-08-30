@@ -1,4 +1,5 @@
 import {
+  SET_PRODUCT,
   SET_CURRENT_PAGE,
   SET_ALL_PRODUCTS,
   SET_ALL_FILTER_DATA,
@@ -15,10 +16,14 @@ import {
   SET_MODELS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEM_FILTER
+  SET_HOT_ITEM_FILTER,
+  SET_PRODUCT_LOADING,
+  SET_PRODUCT_TO_SEND,
+  CLEAR_PRODUCT_TO_SEND
 } from './products.types';
 
 export const initialState = {
+  productLoading: false,
   loading: true,
   currentPage: 0,
   productsPerPage: 9,
@@ -29,14 +34,36 @@ export const initialState = {
     colorsFilter: [],
     patternsFilter: [],
     categoryFilter: null,
-    priceFilter: [0, 99999],
+    priceFilter: [0, 99999999],
     searchFilter: '',
     modelsFilter: [],
     isHotItemFilter: false
   },
   filterData: [],
+  product: null,
   products: [],
-  pagesCount: 1
+  pagesCount: 1,
+  productToSend: {
+    _id: '',
+    name: '',
+    images: '',
+    selectedSize: false,
+    bagBottom: {
+      value: '',
+      name: ''
+    },
+    sidePocket: {
+      isSelected: false,
+      name: ''
+    },
+    totalPrice: 0,
+    quantity: 1,
+    productUrl: '',
+    dimensions: {
+      weightInKg: '',
+      volumeInLiters: ''
+    }
+  }
 };
 const setSort = ({
   sortByPrice = 0,
@@ -155,6 +182,29 @@ const productsReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       pagesCount: action.payload
+    };
+  case SET_PRODUCT:
+    return {
+      ...state,
+      product: action.payload
+    };
+  case SET_PRODUCT_LOADING:
+    return {
+      ...state,
+      productLoading: action.payload
+    };
+  case SET_PRODUCT_TO_SEND:
+    return {
+      ...state,
+      productToSend: {
+        ...state.productToSend,
+        ...action.payload
+      }
+    };
+  case CLEAR_PRODUCT_TO_SEND:
+    return {
+      ...state,
+      productToSend: initialState.productToSend
     };
   default:
     return state;

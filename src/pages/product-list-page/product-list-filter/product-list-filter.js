@@ -36,7 +36,7 @@ const ProductListFilter = () => {
 
   const styles = useStyles();
 
-  const { filterData, filters, language } = useSelector(
+  const { filterData, filters, language, currency } = useSelector(
     ({
       Products: {
         filterData,
@@ -47,7 +47,8 @@ const ProductListFilter = () => {
         sortByPopularity,
         filters
       },
-      Language: { language }
+      Language: { language },
+      Currency: { currency }
     }) => ({
       filterData,
       currentPage,
@@ -56,7 +57,8 @@ const ProductListFilter = () => {
       sortByRate,
       sortByPopularity,
       filters,
-      language
+      language,
+      currency
     })
   );
 
@@ -79,8 +81,12 @@ const ProductListFilter = () => {
     dispatch(setModelsFilter([]));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice[0].value)),
-        Math.max(...filterData.map((product) => product.basePrice[0].value))
+        Math.min(
+          ...filterData.map((product) => product.basePrice[currency].value)
+        ),
+        Math.max(
+          ...filterData.map((product) => product.basePrice[currency].value)
+        )
       ])
     );
     dispatch(getFiltredProducts({}));

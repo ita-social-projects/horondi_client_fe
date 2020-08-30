@@ -35,7 +35,8 @@ const ProductListPage = ({ category, model }) => {
     sortByPrice,
     filters,
     filterData,
-    sortByPopularity
+    sortByPopularity,
+    currency
   } = useSelector(
     ({
       Language: { language },
@@ -50,7 +51,8 @@ const ProductListPage = ({ category, model }) => {
         sortByPopularity,
         productsPerPage,
         currentPage
-      }
+      },
+      Currency: { currency }
     }) => ({
       loading,
       language,
@@ -62,7 +64,8 @@ const ProductListPage = ({ category, model }) => {
       filterData,
       sortByPopularity,
       productsPerPage,
-      currentPage
+      currentPage,
+      currency
     })
   );
 
@@ -96,11 +99,15 @@ const ProductListPage = ({ category, model }) => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice[0].value)),
-        Math.max(...filterData.map((product) => product.basePrice[0].value))
+        Math.min(
+          ...filterData.map((product) => product.basePrice[currency].value)
+        ),
+        Math.max(
+          ...filterData.map((product) => product.basePrice[currency].value)
+        )
       ])
     );
-  }, [category, filterData, model, dispatch]);
+  }, [category, filterData, model, currency, dispatch]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 

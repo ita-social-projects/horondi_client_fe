@@ -2,23 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { push } from 'connected-react-router';
+import { formRegExp, REGISTER_USER_DATA } from '../../configs';
 import {
-  placeholders,
-  formRegExp,
   errorMessages,
   REGISTER_FORM_LABEL,
   LOGIN_FORM_LABEL,
-  REGISTER_USER_DATA,
+  placeholders,
   CONFIRM_EMAIL,
-  SHOW_AFTER
-} from '../../configs';
+  REGISTER_USER_ERROR
+} from '../../translations/user.translations';
 import { useStyles } from './register.styles';
-import registerUser from './registerUser';
 import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
+import { registerUser } from '../../redux/user/user.actions';
 
 function Register() {
   // VALIDATED && CONFIRMED
@@ -27,20 +25,16 @@ function Register() {
   const [emailValidated, setEmailValidated] = useState(false);
   const [passwordValidated, setPasswordValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
-  const [isConfirmedPassword, setIsConfirmedPassword] = useState(false);
+  const [isConfirmedPassword, setIsConfirmedPassword] = useState(true);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [allFieldsSet, setAllFieldsSet] = useState(false);
-  const [hasRegistered, setHasRegistered] = useState(false);
 
-  // VALUES
+  // USER VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
+  const { firstName, lastName, confirmPassword, email, password } = user;
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmedPassword, setShowConfirmedPassword] = useState(true);
-
-  // ERROR
-  const [registerError, setRegisterError] = useState('');
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -57,15 +51,8 @@ function Register() {
   const handleRegister = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      try {
-        setLoading(true);
-        await registerUser(user);
-        setHasRegistered(true);
-        setLoading(false);
-      } catch (e) {
-        setRegisterError(e.message.replace('GraphQL error: ', ''));
-        setLoading(false);
-      }
+      delete user.confirmPassword;
+      dispatch(registerUser({ user, language }));
     }
   };
 
@@ -80,14 +67,19 @@ function Register() {
     }
   };
 
-  // USERFIELD DATA
-  const { firstName, lastName, confirmPassword, email, password } = user;
-  const [loading, setLoading] = useState(false);
-
   // HOOKS
-  const { isLightTheme, language } = useSelector((state) => ({
-    isLightTheme: state.Theme.lightMode,
-    language: state.Language.language
+  const {
+    isLightTheme,
+    language,
+    hasRegistered,
+    registerError,
+    loading
+  } = useSelector(({ Theme, Language, User }) => ({
+    isLightTheme: Theme.lightMode,
+    language: Language.language,
+    loading: User.userLoading,
+    registerError: User.error,
+    hasRegistered: User.userRegistered
   }));
 
   const dispatch = useDispatch();
@@ -105,36 +97,12 @@ function Register() {
     } else {
       setAllFieldsValidated(false);
     }
-    // FIELDS NOT EMPTY
-    if (Object.values(user).every((val) => val !== '')) {
-      setAllFieldsSet(true);
-    } else {
-      setAllFieldsSet(false);
-    }
-    // PASSWORD CHECK
-    if (passwordValidated && password === confirmPassword) {
-      setIsConfirmedPassword(true);
-    } else {
-      setIsConfirmedPassword(false);
-    }
-    // HAS REGISTERED
-    if (hasRegistered) {
-      setTimeout(() => {
-        dispatch(push('/login'));
-      }, SHOW_AFTER);
-    }
   }, [
     firstNameValidated,
     lastNameValidated,
     emailValidated,
     passwordValidated,
-    isConfirmedPassword,
-    user,
-    allFieldsSet,
-    password,
-    confirmPassword,
-    hasRegistered,
-    dispatch
+    isConfirmedPassword
   ]);
 
   // STYLES
@@ -275,7 +243,11 @@ function Register() {
                   >
                     {REGISTER_FORM_LABEL[language].value}
                   </Button>
-                  <p className={styles.registerError}>{registerError}</p>
+                  <p className={styles.registerError}>
+                    {registerError && REGISTER_USER_ERROR[registerError]
+                      ? REGISTER_USER_ERROR[registerError][language].value
+                      : ''}
+                  </p>
                 </div>
                 <div>
                   <Link to='/login' className={styles.loginBtn}>

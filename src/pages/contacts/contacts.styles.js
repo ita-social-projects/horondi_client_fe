@@ -67,6 +67,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   mapImage: {
     width: '100%',
+    float: 'none',
+    maxHeight: '100%',
+    margin: '0',
     '&:hover': {
       filter: 'brightness(.8)',
       transition: '.3s'
@@ -74,7 +77,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   contactAddress: {
     '& > p': {
-      margin: '0'
+      margin: '0',
+      fontSize: '0.875rem',
+      lineHeight: '1.43'
     }
   },
   day: {

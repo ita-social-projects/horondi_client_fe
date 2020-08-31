@@ -219,9 +219,10 @@ export function* handleAddComment({ payload }) {
     yield call(handleSnackbar, added);
     if (payload.rate > 0) {
       const rate = yield call(changeRate, payload);
-      yield put(setRate(rate.data[payload.method]));
+      yield put(setRate(rate.data.addRate));
     }
   } catch (e) {
+    console.log({ e });
     yield call(handleCommentsError);
   }
 }

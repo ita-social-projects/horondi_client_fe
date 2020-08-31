@@ -181,13 +181,10 @@ const getComments = (id) =>
 
 const changeRate = (payload) =>
   setItems(
-    `mutation($product: ID!, $user: ID!, $rate: Int!) {
-        ${payload.method}(product: $product, userRate: {user: $user,rate: $rate}) {
-          rate
-          userRates {
-            user {
-              _id
-            }
+    `mutation($product: ID!, $rate: Int!) {
+        addRate(product: $product, userRate: { rate: $rate }) {
+          ... on Product {
+            rate
           }
         }
     }`,

@@ -29,13 +29,11 @@ const Comments = () => {
     commentsLoading,
     language,
     productId,
-    userRates,
     comments,
     userData
   } = useSelector(({ Products, Language, User }) => ({
     commentsLoading: Products.commentsLoading,
     productId: Products.product._id,
-    userRates: Products.product.userRates,
     comments: Products.product.comments,
     language: Language.language,
     userData: User.userData
@@ -61,13 +59,8 @@ const Comments = () => {
 
   const [rate, setRate] = useState(0);
 
-  const { purchasedProduct, _id, email: userEmail, firstName: userName } =
-    userData || {};
-
-  const hasRate = useMemo(
-    () => (userRates ? userRates.some(({ user }) => user._id === _id) : null),
-    [userRates, _id]
-  );
+  const { _id, email: userEmail, firstName: userName } = userData || {};
+  const purchasedProduct = ['a37599c11e0a732bfd75b899'];
 
   const hasBought = useMemo(
     () =>
@@ -137,9 +130,7 @@ const Comments = () => {
       dispatch(
         addComment({
           ...comment,
-          user: _id,
-          rate,
-          method: hasRate ? 'updateRate' : 'addRate'
+          rate
         })
       );
 

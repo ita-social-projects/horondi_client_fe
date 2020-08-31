@@ -251,22 +251,13 @@ describe('Product reducer test', () => {
 
   it('should set rate to state', () => {
     const payload = {
-      userRates: [
-        {
-          rate: 2
-        },
-        {
-          rate: 5
-        }
-      ],
       rate: 5
     };
     const state = {
       ...initialState,
       product: {
         ...initialState.product,
-        rate: payload.rate,
-        userRates: payload.userRates
+        rate: payload.rate
       }
     };
 

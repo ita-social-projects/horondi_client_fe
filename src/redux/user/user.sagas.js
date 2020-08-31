@@ -16,6 +16,7 @@ import {
 } from './user.types';
 import { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
+import { setToLocalStorage } from '../../services/local-storage.service';
 
 export const loginUser = (data) => {
   const query = ` 
@@ -49,6 +50,8 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
+    const {token} = user.data.loginUser;
+    yield setToLocalStorage('accessToken', token);
     yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {

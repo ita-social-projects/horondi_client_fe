@@ -194,8 +194,7 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       product: {
         ...state.product,
-        rate: action.payload.rate,
-        userRates: action.payload.userRates
+        rate: action.payload.rate
       }
     };
   case SET_COMMENT:

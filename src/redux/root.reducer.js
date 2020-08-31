@@ -10,6 +10,8 @@ import Language from './language/language.reducer';
 import Products from './products/products.reducer';
 import Wishlist from './wishlist/wishlist.reducer';
 import Cart from './cart/cart.reducer';
+import Model from './model/model.reducer';
+import Currency from './currency/currency.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -22,7 +24,9 @@ const rootReducer = (history) =>
     Language,
     Products,
     Wishlist,
-    Cart
+    Cart,
+    Model,
+    Currency
   });
 
 export default rootReducer;

@@ -48,51 +48,6 @@ export const TIME_OPTIONS = {
   day: 'numeric'
 };
 
-export const CONFIRM_EMAIL = [
-  {
-    lang: 'uk',
-    value:
-      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
-  },
-  {
-    lang: 'eng',
-    value:
-      'You have successfully registered! Please, confirm your email address.'
-  }
-];
-
-export const LOGIN_FORM_LABEL = [
-  {
-    lang: 'uk',
-    value: 'увійти'
-  },
-  {
-    lang: 'eng',
-    value: 'log in'
-  }
-];
-export const OR_TEXT = [
-  {
-    lang: 'uk',
-    value: 'або'
-  },
-  {
-    lang: 'eng',
-    value: 'or'
-  }
-];
-
-export const REGISTER_FORM_LABEL = [
-  {
-    lang: 'uk',
-    value: 'Реєстрація'
-  },
-  {
-    lang: 'eng',
-    value: 'Register'
-  }
-];
-
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
@@ -105,30 +60,6 @@ export const LOGIN_USER_DATA = {
   email: '',
   password: ''
 };
-
-export const EMPTY_FIELD = [
-  {
-    lang: 'uk',
-    value: 'Заповніть поле'
-  },
-  {
-    lang: 'eng',
-    value: 'Empty field'
-  }
-];
-
-export const LOGIN_USER_ERROR = [
-  {
-    lang: 'uk',
-    value: 'Неправильна електронна адреса або пароль'
-  },
-  {
-    lang: 'eng',
-    value: 'Wrong e-mail address or password'
-  }
-];
-
-export const SHOW_AFTER = 3000;
 
 export const errorMessages = [
   {
@@ -242,19 +173,6 @@ export const REGISTER_PROPOSAL = [
   }
 ];
 
-export const WELCOME_MESSAGE = [
-  {
-    h2: 'Вітаємо',
-    h3: 'Реєстрація пройшла успішно!',
-    button: 'В магазин'
-  },
-  {
-    h2: 'Welcome',
-    h3: 'Registration was successful!',
-    button: 'Go to shop'
-  }
-];
-
 export const CONFIRM_ERROR = [
   {
     value: 'Ой! Щось пішло не так.'
@@ -263,6 +181,13 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+export const COMMENTS_TIME_OPTIONS = {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric'
+};
+export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
+export const DEFAULT_SIZE = 'M';
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
@@ -285,3 +210,41 @@ export const FAKE_PRODUCT_FOR_TEST = {
   quantity: 1,
   productUrl: '/backpacks/foweoo423'
 };
+
+export const INPUT_VARIANT = 'outlined';
+export const REDIRECT_TIMEOUT = 3000;
+export const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1146, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 810, min: 0 },
+    items: 1
+  }
+};
+export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
+
+export const LANGUAGES_LIST = [
+  { lang: 'UA', value: 0 },
+  { lang: 'EN', value: 1 }
+];
+
+export const CURRENCIES_LIST = [
+  { currency: 'UAH', value: 0 },
+  { currency: 'USD', value: 1 }
+];
+
+export const DEFAULT_CURRENCY = 0;
+export const DEFAULT_LANGUAGE = 0;
+
+export const hryvniaUnicode = '\u20b4';
+export const dollarUnicode = '\u0024';

@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './wishlist-item.styles';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
+import { IMG_URL } from '../../../configs';
 
 const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
   const language = useSelector(({ Language }) => Language.language);
@@ -21,7 +22,10 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
       <td>
         <div className={styles.image} data-cy='wishlist-item-img'>
           <Link to={item.productUrl}>
-            <img src={item.images} alt='product pictures' />
+            <img
+              src={`${IMG_URL}${item.images.primary.large}`}
+              alt='product pictures'
+            />
           </Link>
         </div>
         <div className={styles.description} data-cy='wishlist-item-description'>

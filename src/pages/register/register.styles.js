@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: '53px'
   },
   heading: {
-    fontSize: '24px',
+    fontSize: '1.5rem',
     lineHeight: '29px',
     textAlign: 'center',
     marginBottom: '25px',
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     '& p': {
       position: 'absolute',
       top: '40px',
-      fontSize: '10px'
+      fontSize: '0.625rem'
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor
@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   registerBtn: {
     fontFamily: 'Montserrat',
-    fontSize: '16px',
+    fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     backgroundColor: theme.palette.button.normal.backgroundColor,
@@ -66,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   loginBtn: {
     float: 'right',
-    fontSize: '14px',
+    fontSize: '0.825rem',
     lineHeight: '17px',
     color: theme.palette.button.disabled.backgroundColor,
     textTransform: 'capitalize',
@@ -103,7 +103,7 @@ export const useStyles = makeStyles((theme) => ({
   disabledRegister: {
     backgroundColor: '#999999',
     color: '#c2c2c2',
-    fontSize: '16px',
+    fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     textTransform: 'capitalize'

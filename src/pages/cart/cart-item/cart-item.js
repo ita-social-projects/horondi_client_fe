@@ -8,10 +8,11 @@ import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
 import NumberInput from '../../../components/number-input';
 import { setCartItemQuantity } from '../../../redux/cart/cart.actions';
+import { IMG_URL } from '../../../configs';
 
 const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: item.images });
+  const styles = useStyles({ image: `${IMG_URL}${item.images.primary.large}` });
 
   const onChangeQuantity = (value, key) => {
     dispatch(setCartItemQuantity(item, +value, key));
@@ -37,9 +38,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
           <span>
             {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
           </span>
-          <span>
-            {CART_TABLE_FIELDS[language].bagBottom}: {item.bagBottom}
-          </span>
+          {item.bagBottom && (
+            <span>
+              {CART_TABLE_FIELDS[language].bagBottom}:{' '}
+              {item.bagBottom.name[language].value}
+            </span>
+          )}
           {item.sidePocket.isSelected && (
             <span>
               {CART_TABLE_FIELDS[language].sidePocket}:{' '}

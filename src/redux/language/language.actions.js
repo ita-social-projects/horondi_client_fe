@@ -1,6 +1,6 @@
 import { CHANGE_LANGUAGE } from './language.types';
 
-const changeLanguage = (value = 0) => ({
+const changeLanguage = (value) => ({
   type: CHANGE_LANGUAGE,
   payload: value
 });

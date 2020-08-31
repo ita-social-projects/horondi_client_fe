@@ -10,6 +10,15 @@ export const paletteGenerator = (colorSchema) => ({
   white,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
+  card: {
+    backgroundColor: theme[colorSchema].card.backgroundColor,
+    border: theme[colorSchema].card.border,
+    childrenBackgroundColor: theme[colorSchema].card.childrenBackgroundColor,
+    selectedButton: {
+      backgroundColor: theme[colorSchema].card.selectedButton.backgroundColor,
+      color: theme[colorSchema].card.selectedButton.color
+    }
+  },
   button: {
     normal: {
       backgroundColor: theme[colorSchema].button.normal.backgroundColor,

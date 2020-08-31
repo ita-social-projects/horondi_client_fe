@@ -22,7 +22,7 @@ const EmptyCart = () => {
     : CART_IMAGES.darkTheme;
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-cy='empty-cart'>
       <Typography variant='h2'>{CART_TITTLES[language].empty}</Typography>
       <img src={emptyCartImgLink} alt='empty cart' />
       <Link to='/'>

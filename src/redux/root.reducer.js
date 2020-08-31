@@ -11,6 +11,7 @@ import Products from './products/products.reducer';
 import Wishlist from './wishlist/wishlist.reducer';
 import Cart from './cart/cart.reducer';
 import Snackbar from './snackbar/snackbar.reducer';
+import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
 
 const rootReducer = (history) =>
@@ -26,6 +27,7 @@ const rootReducer = (history) =>
     Wishlist,
     Cart,
     Snackbar,
+    Model,
     Currency
   });
 

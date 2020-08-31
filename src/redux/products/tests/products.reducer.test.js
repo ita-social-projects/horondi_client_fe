@@ -1,6 +1,7 @@
 import productReducer, { initialState } from '../products.reducer';
 import {
   setAllProducts,
+  setAllFilterData,
   setCategoryFilter,
   setColorsFilter,
   setPatternsFilter,
@@ -14,6 +15,7 @@ import {
   setSortByRate,
   setSortByPopularity,
   setProductsPerPage,
+  setModelsFilter,
   setProduct,
   setProductLoading,
   setCommentsLoading,
@@ -38,6 +40,30 @@ describe('Product reducer test', () => {
     expect(productReducer(state, setAllProducts(productsExample))).toEqual(
       state
     );
+  });
+
+  it('should return state with filter data', () => {
+    const state = {
+      ...initialState,
+      loading: true,
+      filterData: productsExample
+    };
+
+    expect(productReducer(state, setAllFilterData(productsExample))).toEqual(
+      state
+    );
+  });
+
+  it('should return state with models filter', () => {
+    const state = {
+      ...initialState,
+      filters: {
+        ...initialState.filters,
+        modelsFilter: ['Rolltop']
+      }
+    };
+
+    expect(productReducer(state, setModelsFilter(['Rolltop']))).toEqual(state);
   });
 
   it('should return state with hot item true', () => {

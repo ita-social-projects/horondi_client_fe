@@ -17,8 +17,9 @@ const NavbarLeft = () => {
   const styles = useStyles();
 
   const categoriesList = categories
-    ? categories.map(({ _id, name, isMain }) =>
-      isMain ? (
+    ? categories
+      .filter(({ isMain }) => isMain)
+      .map(({ _id, name }) => (
         <Link
           key={_id}
           className={styles.link}
@@ -26,8 +27,7 @@ const NavbarLeft = () => {
         >
           {name[language].value}
         </Link>
-      ) : null
-    )
+      ))
     : null;
 
   return (

@@ -48,6 +48,7 @@ export function* handleFilterLoad() {
   try {
     yield put(setProductsLoading(true));
     const state = yield select((state) => state.Products);
+    const currency = yield select((state) => state.Currency.currency);
     const products = yield call(
       getItems,
       `query(
@@ -61,7 +62,9 @@ export function* handleFilterLoad() {
         $rate:Int
         $basePrice:Int
         $purchasedCount:Int
-        $category:[String]
+        $category: [String]
+        $models: [String]
+        $currency: Int
         ){
           getProducts(
             filter: {
@@ -70,6 +73,8 @@ export function* handleFilterLoad() {
               price: $price
               category:$category
               isHotItem: $isHotItem
+              models: $models
+              currency: $currency
             }
             skip: $skip
             limit: $limit
@@ -90,12 +95,16 @@ export function* handleFilterLoad() {
                 basePrice {
                   value
                 }
+                model {
+                  value
+                }
                 rate
                 images {
                   primary {
                     large
                     medium
                     large
+                    small
                   }
                 }
                 colors{
@@ -129,15 +138,18 @@ export function* handleFilterLoad() {
         colors: state.filters.colorsFilter,
         patterns: state.filters.patternsFilter,
         price: state.filters.priceFilter,
+        currency,
         skip: state.currentPage * state.productsPerPage,
         limit: state.productsPerPage,
         rate: state.sortByRate || undefined,
         basePrice: state.sortByPrice || undefined,
         category: state.filters.categoryFilter,
         purchasedCount: state.sortByPopularity || undefined,
-        isHotItem: state.filters.isHotItemFilter
+        isHotItem: state.filters.isHotItemFilter,
+        models: state.filters.modelsFilter
       }
     );
+
     yield put(
       setPagesCount(
         Math.ceil(products.data.getProducts.count / state.productsPerPage)
@@ -167,6 +179,9 @@ export function* handleGetFilters() {
               }
             }
             basePrice {
+              value
+            }
+            model {
               value
             }
             pattern {
@@ -222,7 +237,6 @@ export function* handleAddComment({ payload }) {
       yield put(setRate(rate.data.addRate));
     }
   } catch (e) {
-    console.log({ e });
     yield call(handleCommentsError);
   }
 }

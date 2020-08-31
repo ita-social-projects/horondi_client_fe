@@ -12,6 +12,7 @@ export function* handleNewsLoad() {
       getItems,
       `query{
          getAllNews{
+           items{
            _id
            title {
              value
@@ -37,9 +38,10 @@ export function* handleNewsLoad() {
                   }
                 }
                }
+              }
              }`
     );
-    yield put(setNews(news.data.getAllNews));
+    yield put(setNews(news.data.getAllNews.items));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleNewsError, e);

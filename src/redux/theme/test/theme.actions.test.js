@@ -1,4 +1,4 @@
-import { setThemeMode } from './theme.actions';
+import { setThemeMode } from '../theme.actions';
 
 describe('theme actions test', () => {
   let type;

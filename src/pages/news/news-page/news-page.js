@@ -29,6 +29,7 @@ const NewsPage = () => {
       </Backdrop>
     );
   }
+
   const newsItems = newslist.map(
     ({ _id, date, author, images, title, text }) => (
       <NewsItem

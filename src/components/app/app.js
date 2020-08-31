@@ -5,6 +5,7 @@ import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import { CssBaseline } from '@material-ui/core';
 
 import Routes from '../../routes';
+import Chat from '../../containers/chat';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
@@ -12,6 +13,7 @@ import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 
 import { getCategories } from '../../redux/categories/categories.actions';
+
 import { Loader } from '../loader/loader';
 
 const App = () => {
@@ -46,6 +48,7 @@ const App = () => {
     <ThemeProvider theme={themeValue}>
       <CssBaseline />
       <Routes />
+      <Chat />
       <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
     </ThemeProvider>
   );

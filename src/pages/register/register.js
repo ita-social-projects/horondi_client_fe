@@ -244,7 +244,7 @@ function Register() {
                     {REGISTER_FORM_LABEL[language].value}
                   </Button>
                   <p className={styles.registerError}>
-                    {registerError
+                    {registerError && REGISTER_USER_ERROR[registerError]
                       ? REGISTER_USER_ERROR[registerError][language].value
                       : ''}
                   </p>

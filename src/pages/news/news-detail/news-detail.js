@@ -55,7 +55,7 @@ const NewsDetailPage = ({ match }) => {
   const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   const newsImage = article.images ? article.images.primary.medium : ' ';
   const newsText =
-    article.text.length !== 0 && article.text[language].value !== null
+    article.text.length !== 0
       ? parse(article.text[language].value)
       : 'No text provided';
   const newsAuthor =

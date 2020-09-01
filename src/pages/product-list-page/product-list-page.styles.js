@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     padding: '0 2rem 1rem 2rem',
-    width: '100vw'
+    width: '100vw',
+    backgroundColor: theme.palette.card.backgroundColor
   },
   div: {
     display: 'flex',

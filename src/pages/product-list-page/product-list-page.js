@@ -100,10 +100,10 @@ const ProductListPage = ({ category, model }) => {
     dispatch(
       setPriceFilter([
         Math.min(
-          ...filterData.map((product) => product.basePrice[currency].value)
+          ...filterData.map(product => product.basePrice[currency].value)
         ),
         Math.max(
-          ...filterData.map((product) => product.basePrice[currency].value)
+          ...filterData.map(product => product.basePrice[currency].value)
         )
       ])
     );
@@ -122,9 +122,16 @@ const ProductListPage = ({ category, model }) => {
   }
 
   const categoryText = category.name[language].value.toUpperCase();
-  const itemsToShow = products.map((product, index) => (
-    <ProductListItem key={index} product={product} category={categoryText} />
-  ));
+  const itemsToShow =
+    products.length > 0
+      ? products.map((product, index) => (
+        <ProductListItem
+          key={index}
+          product={product}
+          category={categoryText}
+        />
+      ))
+      : null;
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3'>

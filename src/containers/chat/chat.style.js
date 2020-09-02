@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '20px',
     cursor: 'pointer'
   }),
-  mailForm: {
+  mailForm: ({ themeMode }) => ({
     borderRadius: '4px',
     position: 'fixed',
     display: 'flex',
@@ -64,12 +64,12 @@ export const useStyles = makeStyles((theme) => ({
     bottom: '12%',
     width: '320px',
     height: '600px',
-    background: 'white',
+    background: themeMode ? 'white' : '#232323',
     boxShadow:
       '0px 2px 1px -1px rgba(0,0,0,0.2), ' +
       '0px 1px 1px 0px rgba(0,0,0,0.14), ' +
       '0px 1px 3px 0px rgba(0,0,0,0.12)'
-  },
+  }),
   cancelIcon: {
     position: 'absolute',
     right: '1px',

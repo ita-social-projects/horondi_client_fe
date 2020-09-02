@@ -9,10 +9,10 @@ export const ActiveMessenger = ({
   mailFormVisible,
   language
 }) => {
-  const style = useStyles({ themeMode, visible, mailFormVisible });
+  const style = useStyles({ visible, mailFormVisible, themeMode });
 
   return (
-    <form className={style.formFieldActive}>
+    <form className={style.formField}>
       <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
       <TextField
         className={style.dataInput}

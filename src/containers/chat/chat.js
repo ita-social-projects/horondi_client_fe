@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
-import CancelIcon from '@material-ui/icons/Cancel';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
-import { FOOTER_CONTACTS } from '../../translations/footer.translations';
-import ActiveMessenger from './active-messenger';
+// import { Transition, animated } from 'react-spring';
+
 import { useStyles } from './chat.style';
-import { CHAT } from '../../translations/chat.translation';
+import MailForm from './mail-form';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
@@ -16,9 +15,9 @@ export const Chat = () => {
     language: state.Language.language,
     themeMode: state.Theme.lightMode
   }));
-  const { item: PHONE_NUMBER } = FOOTER_CONTACTS[language].items[0];
-  const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
 
+  const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
+  console.log(`${themeMode  } chat`);
   return (
     <div>
       {iconsVisible && (
@@ -39,29 +38,13 @@ export const Chat = () => {
             />
           </div>
           {mailFormVisible && (
-            <div className={style.mailForm}>
-              <div
-                className={style.cancelIcon}
-                onClick={() => {
-                  setIconsVisible(!iconsVisible);
-                  setMailFormVisible(false);
-                }}
-              >
-                <CancelIcon />
-              </div>
-              <div className={style.contacts}>
-                <span className={style.contactsTitle}>
-                  {CHAT[language].ourContacts}
-                </span>
-                <span className={style.phoneNumbers}>{PHONE_NUMBER}</span>
-              </div>
-              <ActiveMessenger
-                visible
-                mailFormVisible
-                themeMode={themeMode}
-                language={language}
-              />
-            </div>
+            <MailForm
+              themeMode={themeMode}
+              iconsVisible
+              language={language}
+              setIconsVisible={setIconsVisible}
+              setMailFormVisible={setMailFormVisible}
+            />
           )}
         </div>
       )}

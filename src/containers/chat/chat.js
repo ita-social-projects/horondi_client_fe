@@ -64,7 +64,10 @@ export const Chat = () => {
         </div>
       )}
       <div
-        onClick={() => setIconsVisible(!iconsVisible)}
+        onClick={() => {
+          setMailFormVisible(false);
+          setIconsVisible(!iconsVisible);
+        }}
         className={style.chatIcon}
       >
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />

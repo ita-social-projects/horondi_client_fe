@@ -20,7 +20,7 @@ const Cabinet = () => {
   const styles = useStyles({ logged: !!userData });
 
   return (
-    <div className={styles.cabinet}>
+    <div className={styles.cabinet} data-cy='cabinet'>
       <PersonOutlineIcon />
       {userData ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>

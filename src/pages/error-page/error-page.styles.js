@@ -15,7 +15,7 @@ export const useStyles = makeStyles(() => ({
   },
   errorImage: {
     width: '80%',
-    height: '80%'
+    height: 'auto'
   },
   info: {
     display: 'flex',

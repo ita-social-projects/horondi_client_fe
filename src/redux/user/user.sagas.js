@@ -128,7 +128,7 @@ export function* handleTokenCheck({ payload }) {
       setItems,
       ` 
   mutation checkToken($token: String!){
-  checkIfTokenIsValid(token: $token)
+    checkIfTokenIsValid(token: $token)
   }
   `,
       payload
@@ -147,10 +147,9 @@ export function* handleUserRegister({ payload }) {
     yield call(
       setItems,
       `
-      mutation register($user: userRegisterInput!, $language: Int!){
+      mutation register($user: userRegisterInput!){
         registerUser(
-          user: $user,
-          language: $language
+          user: $user
         ) {
           email
         }

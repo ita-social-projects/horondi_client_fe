@@ -35,6 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: '3rem'
   },
   newsText: {
+    minHeight: '20rem',
     textAlign: 'justify',
     maxHeight: '20rem',
     overflow: 'hidden'

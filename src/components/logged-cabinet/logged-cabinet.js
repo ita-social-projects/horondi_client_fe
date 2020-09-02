@@ -34,7 +34,7 @@ const LoggedCabinet = () => {
   const styles = useStyles();
 
   return (
-    <ul className={styles.cabinetDropdownList}>
+    <ul className={styles.cabinetDropdownList} data-cy='cabinet-dropdown'>
       <li>
         <Link to='/profile' className={styles.link}>
           <PersonOutlineIcon />

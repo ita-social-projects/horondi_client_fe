@@ -12,6 +12,7 @@ export function* handleNewsLoad() {
       getItems,
       `query{
          getAllNews{
+           items{
            _id
            title {
              value
@@ -36,11 +37,11 @@ export function* handleNewsLoad() {
                     medium
                   }
                 }
-                video
                }
+              }
              }`
     );
-    yield put(setNews(news.data.getAllNews));
+    yield put(setNews(news.data.getAllNews.items));
     yield put(setLoading(false));
   } catch (e) {
     yield call(handleNewsError, e);
@@ -71,7 +72,6 @@ export function* handleArticleLoad({ payload }) {
                 medium
               }
             }
-            video
             author{
               name{
                 value

@@ -1,4 +1,6 @@
 import {
+  SET_PRODUCT,
+  GET_PRODUCT,
   SET_ALL_PRODUCTS,
   GET_ALL_FILTERS,
   SET_CURRENT_PAGE,
@@ -14,10 +16,24 @@ import {
   SET_PRICE_FILTER,
   SET_COLORS_FILTER,
   SET_PATTERNS_FILTER,
+  SET_MODELS_FILTER,
   SET_SEARCH,
   SET_PAGES_COUNT,
-  SET_HOT_ITEM_FILTER
+  SET_HOT_ITEM_FILTER,
+  SET_PRODUCT_LOADING,
+  SET_PRODUCT_TO_SEND,
+  CLEAR_PRODUCT_TO_SEND
 } from './products.types';
+
+export const setProduct = (item) => ({
+  type: SET_PRODUCT,
+  payload: item
+});
+
+export const getProduct = (id) => ({
+  type: GET_PRODUCT,
+  payload: id
+});
 
 export const setAllFilterData = (payload) => ({
   type: SET_ALL_FILTER_DATA,
@@ -75,6 +91,10 @@ export const setPatternsFilter = (payload) => ({
   type: SET_PATTERNS_FILTER,
   payload
 });
+export const setModelsFilter = (payload) => ({
+  type: SET_MODELS_FILTER,
+  payload
+});
 export const setSearchFilter = (payload) => ({
   type: SET_SEARCH,
   payload
@@ -89,4 +109,15 @@ export const setAllProducts = (payload) => ({
 });
 export const getAllFilters = () => ({
   type: GET_ALL_FILTERS
+});
+export const setProductLoading = (payload) => ({
+  type: SET_PRODUCT_LOADING,
+  payload
+});
+export const setProductToSend = (payload) => ({
+  type: SET_PRODUCT_TO_SEND,
+  payload
+});
+export const clearProductToSend = () => ({
+  type: CLEAR_PRODUCT_TO_SEND
 });

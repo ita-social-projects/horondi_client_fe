@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Select, MenuItem } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import {
   setToLocalStorage,
   getFromLocalStorage
 } from '../../services/local-storage.service';
-import useStyles from './language.styles';
 import { changeLanguage } from '../../redux/language/language.actions';
-import { LANGUAGES_LIST } from '../../translations/language.translations';
+import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
+import Dropdown from '../../components/dropdown';
 
-const languageInLocalStorage = getFromLocalStorage('language') || 0;
+const languageInLocalStorage =
+  getFromLocalStorage('language') || DEFAULT_LANGUAGE;
 
 const Language = () => {
-  const styles = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,19 +27,17 @@ const Language = () => {
     }
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
-    <MenuItem id={`language${value + 1}`} key={value} value={value}>
+    <MenuItem data-cy={`language${value + 1}`} key={value} value={value}>
       {lang}
     </MenuItem>
   ));
   return (
-    <div id='language' className={styles.rootLanguage}>
-      <Select
-        className={styles.rootSelect}
+    <div data-cy='language'>
+      <Dropdown
+        mappedItems={mappedLanguages}
+        handler={handleChange}
         defaultValue={languageInLocalStorage}
-        onChange={handleChange}
-      >
-        {mappedLanguages}
-      </Select>
+      />
     </div>
   );
 };

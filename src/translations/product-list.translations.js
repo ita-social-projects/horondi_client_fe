@@ -86,6 +86,17 @@ export const PATTERN_TEXT = {
   }
 };
 
+export const MODEL_TEXT = {
+  0: {
+    lang: 'uk',
+    value: 'Модель'
+  },
+  1: {
+    lang: 'eng',
+    value: 'Model'
+  }
+};
+
 export const IS_HOT_TEXT = {
   0: {
     lang: 'uk',

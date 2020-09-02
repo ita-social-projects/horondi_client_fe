@@ -8,7 +8,7 @@ const CategoryItem = ({ categoryName, categoryImage, categoryUrl }) => {
 
   return (
     <Link to={`/${categoryUrl}`} className={styles.link}>
-      <div className={styles.categoryItem}>
+      <div className={styles.categoryItem} data-cy='category-item'>
         <div className={styles.categoryNameWrapper}>
           <span>{categoryName}</span>
         </div>

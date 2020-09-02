@@ -14,6 +14,7 @@ import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
 import LoadingBar from '../../../components/loading-bar';
 import { TIME_OPTIONS } from '../../../configs';
+import './news-detail.style.css';
 
 const NewsDetailPage = ({ match }) => {
   const { article, loading, language } = useSelector(({ News, Language }) => ({
@@ -39,6 +40,11 @@ const NewsDetailPage = ({ match }) => {
       </Backdrop>
     );
   }
+  if (article.text[language].value === null) {
+    return (
+      <h2>Sory, this article is not translated. Try to change language</h2>
+    );
+  }
   const newsTitle =
     article.title.length !== 0
       ? article.title[language].value
@@ -52,7 +58,6 @@ const NewsDetailPage = ({ match }) => {
     article.text.length !== 0
       ? parse(article.text[language].value)
       : 'No text provided';
-  const newsVideo = article.video;
   const newsAuthor =
     article.author.name.length !== 0
       ? article.author.name[language].value
@@ -92,16 +97,6 @@ const NewsDetailPage = ({ match }) => {
         >
           {newsText}
         </Typography>
-        <iframe
-          className={newsVideo ? 'disp-block' : 'disp-none'}
-          title={newsTitle}
-          width='100%'
-          height='600'
-          src={newsVideo}
-          frameBorder='0'
-          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-          allowFullScreen
-        />
         <hr />
         <div className={styles.newsAuthorFooter}>
           <CardHeader subheader={newsAuthor} id='newsAuthor' />

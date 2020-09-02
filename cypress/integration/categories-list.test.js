@@ -3,22 +3,26 @@ describe('home page test', () => {
     cy.visit('/');
   });
 
-  it('Click to categories list items', () => {
-    cy.get('[href="/bags"] > .makeStyles-categoryItem-36')
+  it('Click to categories list item - "bags"', () => {
+    cy.get('[href="/bags"] > [data-cy="category-item"]')
       .should('exist')
       .and('be.visible')
       .click()
       .url()
       .should('include', '/bags');
+  });
 
-    cy.get('[href="/backpacks"] > .makeStyles-categoryItem-36')
+  it('Click to categories list item - "backpacks"', () => {
+    cy.get('[href="/backpacks"] > [data-cy="category-item"]')
       .should('exist')
       .and('be.visible')
       .click()
       .url()
       .should('include', '/backpacks');
+  });
 
-    cy.get('[href="/accessories"] > .makeStyles-categoryItem-36')
+  it('Click to categories list item - "accessories"', () => {
+    cy.get('[href="/accessories"] > [data-cy="category-item"]')
       .should('exist')
       .and('be.visible')
       .click()

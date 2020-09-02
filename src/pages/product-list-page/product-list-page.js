@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@material-ui/core';
+import { Typography, Backdrop } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
@@ -15,15 +15,17 @@ import {
   setCategoryFilter,
   setPriceFilter
 } from '../../redux/products/products.actions';
+import LoadingBar from '../../components/loading-bar';
 import {
   SHOW_FILTER_BUTTON_TEXT,
   HIDE_FILTER_BUTTON_TEXT
 } from '../../translations/product-list.translations';
 
-const ProductListPage = ({ category }) => {
+const ProductListPage = ({ category, model }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const {
+    loading,
     language,
     products,
     pagesCount,
@@ -33,11 +35,13 @@ const ProductListPage = ({ category }) => {
     sortByPrice,
     filters,
     filterData,
-    sortByPopularity
+    sortByPopularity,
+    currency
   } = useSelector(
     ({
       Language: { language },
       Products: {
+        loading,
         products,
         pagesCount,
         sortByRate,
@@ -47,8 +51,10 @@ const ProductListPage = ({ category }) => {
         sortByPopularity,
         productsPerPage,
         currentPage
-      }
+      },
+      Currency: { currency }
     }) => ({
+      loading,
       language,
       products,
       pagesCount,
@@ -58,7 +64,8 @@ const ProductListPage = ({ category }) => {
       filterData,
       sortByPopularity,
       productsPerPage,
-      currentPage
+      currentPage,
+      currency
     })
   );
 
@@ -84,6 +91,7 @@ const ProductListPage = ({ category }) => {
     productsPerPage,
     categoryFilter,
     category,
+    model,
     currentPage
   ]);
 
@@ -91,15 +99,27 @@ const ProductListPage = ({ category }) => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice[0].value)),
-        Math.max(...filterData.map((product) => product.basePrice[0].value))
+        Math.min(
+          ...filterData.map((product) => product.basePrice[currency].value)
+        ),
+        Math.max(
+          ...filterData.map((product) => product.basePrice[currency].value)
+        )
       ])
     );
-  }, [category, filterData, dispatch]);
+  }, [category, filterData, model, currency, dispatch]);
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 
   const handleFilterShow = () => setMobile(!mobile);
+
+  if (loading || !filterData) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <LoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
 
   const categoryText = category.name[language].value.toUpperCase();
   const itemsToShow = products.map((product, index) => (

@@ -12,12 +12,12 @@ import {
   setToLocalStorage
 } from '../../services/local-storage.service';
 
-function* handleWishlistLoad() {
+export function* handleWishlistLoad() {
   const wishlist = getFromLocalStorage('wishlist');
   yield put(setWishlist(wishlist));
 }
 
-function* handleAddWishlistItem({ payload }) {
+export function* handleAddWishlistItem({ payload }) {
   const wishlist = getFromLocalStorage('wishlist');
   const newWishlist = [...wishlist, payload];
 
@@ -25,7 +25,7 @@ function* handleAddWishlistItem({ payload }) {
   yield put(setWishlist(newWishlist));
 }
 
-function* handleRemoveWishlistItem({ payload }) {
+export function* handleRemoveWishlistItem({ payload }) {
   const wishlist = getFromLocalStorage('wishlist');
   const newWishlist = wishlist.filter((item) => item._id !== payload._id);
 

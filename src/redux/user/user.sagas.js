@@ -4,7 +4,9 @@ import {
   setUser,
   setUserError,
   setUserLoading,
-  resetState
+  resetState,
+  userHasRecovered,
+  userHasRegistered
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -89,6 +91,7 @@ export function* handleUserRecovery({ payload }) {
       payload
     );
     yield put(setUserLoading(false));
+    yield put(userHasRecovered(true));
     yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {
@@ -156,6 +159,7 @@ export function* handleUserRegister({ payload }) {
       payload
     );
     yield put(setUserLoading(false));
+    yield put(userHasRegistered(true));
     yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {

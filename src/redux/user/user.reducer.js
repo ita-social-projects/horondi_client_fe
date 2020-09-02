@@ -3,7 +3,9 @@ import {
   SET_USER_ERROR,
   LOGOUT_USER,
   SET_USER_LOADING,
-  STATE_RESET
+  STATE_RESET,
+  USER_HAS_REGISTERED,
+  USER_HAS_RECOVERED
 } from './user.types';
 
 export const initialState = {
@@ -46,6 +48,16 @@ const userReducer = (state = initialState, action = {}) => {
       userRecovered: initialState.userRecovered,
       passwordReset: initialState.passwordReset,
       userRegistered: initialState.userRegistered
+    };
+  case USER_HAS_REGISTERED:
+    return {
+      ...state,
+      userRegistered: action.payload
+    };
+  case USER_HAS_RECOVERED:
+    return {
+      ...state,
+      userRecovered: action.payload
     };
   default:
     return state;

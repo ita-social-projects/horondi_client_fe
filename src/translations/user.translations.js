@@ -87,6 +87,14 @@ export const REGISTER_USER_ERROR = {
     {
       value: 'Wrong input data'
     }
+  ],
+  DEFAULT_ERROR: [
+    {
+      value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'
+    },
+    {
+      value: 'Oops! Something went wrong. Please, try again later.'
+    }
   ]
 };
 

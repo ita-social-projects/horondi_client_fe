@@ -245,7 +245,9 @@ function Register() {
                   </Button>
                   <p className={styles.registerError}>
                     {registerError
-                      ? REGISTER_USER_ERROR[registerError][language].value
+                      ? REGISTER_USER_ERROR[registerError]
+                        ? REGISTER_USER_ERROR[registerError][language].value
+                        : REGISTER_USER_ERROR.DEFAULT_ERROR[language].value
                       : ''}
                   </p>
                 </div>

@@ -105,6 +105,14 @@ function Register() {
     isConfirmedPassword
   ]);
 
+  useEffect(() => {
+    if (user.password === user.confirmPassword) {
+      setIsConfirmedPassword(true);
+    } else {
+      setIsConfirmedPassword(false);
+    }
+  }, [user.password, user.confirmPassword]);
+
   // STYLES
   const styles = useStyles();
 

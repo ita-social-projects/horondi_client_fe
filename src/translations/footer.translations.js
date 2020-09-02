@@ -8,8 +8,8 @@ export const FOOTER_INFORMATION = {
     items: [
       { id: 1, url: '/about-us', item: 'Про нас' },
       { id: 2, url: '#', item: 'Матеріали' },
-      { id: 3, url: '#', item: 'Оплата і доставка' },
-      { id: 4, url: '#', item: 'Умови конфіденційності' }
+      { id: 3, url: '/payment-and-shipping', item: 'Оплата і доставка' },
+      { id: 4, url: '/privacy-policy', item: 'Умови конфіденційності' }
     ]
   },
   1: {

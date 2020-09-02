@@ -8,7 +8,8 @@ export const clearLocalStorage = () => {
     language: DEFAULT_LANGUAGE,
     currency: DEFAULT_CURRENCY,
     cart: [],
-    theme: 'light'
+    theme: 'light',
+    countPerPage: 9
   };
   localStorage.setItem('horondi', JSON.stringify(horondi));
 };
@@ -17,7 +18,7 @@ if (!localStorage.getItem('horondi')) {
   clearLocalStorage();
 }
 
-export const getFromLocalStorage = (name) => {
+export const getFromLocalStorage = name => {
   const localObject = JSON.parse(localStorage.getItem('horondi'));
   return localObject[name];
 };

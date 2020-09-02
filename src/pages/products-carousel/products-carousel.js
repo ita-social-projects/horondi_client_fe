@@ -46,7 +46,7 @@ const ProductsCorousel = ({ category }) => {
     );
   }
 
-  const handleClick = (model) => {
+  const handleClick = model => {
     dispatch(setModelsFilter([model.name[1].value]));
     dispatch(setPatternsFilter([]));
     dispatch(setColorsFilter([]));
@@ -54,8 +54,8 @@ const ProductsCorousel = ({ category }) => {
     dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice[0].value)),
-        Math.max(...filterData.map((product) => product.basePrice[0].value))
+        Math.min(...filterData.map(product => product.basePrice[0].value)),
+        Math.max(...filterData.map(product => product.basePrice[0].value))
       ])
     );
   };
@@ -63,7 +63,7 @@ const ProductsCorousel = ({ category }) => {
   return (
     <div className={styles.container}>
       <AwesomeSlider className={styles.slider} mobileTouch>
-        {models.map((model) => (
+        {models.map(model => (
           <div
             key={model.name[1].value}
             data-src={model.images.large}
@@ -73,7 +73,9 @@ const ProductsCorousel = ({ category }) => {
               onClick={() => handleClick(model)}
               to={`/${category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
             >
-              <p className={styles.caption}>{model.name[language].value}</p>
+              <p data-cy='model-name' className={styles.caption}>
+                {model.name[language].value}
+              </p>
             </Link>
           </div>
         ))}

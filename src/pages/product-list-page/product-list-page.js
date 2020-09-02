@@ -30,7 +30,7 @@ const ProductListPage = ({ category, model }) => {
     products,
     pagesCount,
     currentPage,
-    productsPerPage,
+    countPerPage,
     sortByRate,
     sortByPrice,
     filters,
@@ -49,7 +49,7 @@ const ProductListPage = ({ category, model }) => {
         filters,
         filterData,
         sortByPopularity,
-        productsPerPage,
+        countPerPage,
         currentPage
       },
       Currency: { currency }
@@ -63,7 +63,7 @@ const ProductListPage = ({ category, model }) => {
       filters,
       filterData,
       sortByPopularity,
-      productsPerPage,
+      countPerPage,
       currentPage,
       currency
     })
@@ -88,7 +88,7 @@ const ProductListPage = ({ category, model }) => {
     sortByRate,
     sortByPrice,
     sortByPopularity,
-    productsPerPage,
+    countPerPage,
     categoryFilter,
     category,
     model,

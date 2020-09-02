@@ -41,7 +41,7 @@ const ProductListFilter = () => {
       Products: {
         filterData,
         currentPage,
-        productsPerPage,
+        countPerPage,
         sortByPrice,
         sortByRate,
         sortByPopularity,
@@ -52,7 +52,7 @@ const ProductListFilter = () => {
     }) => ({
       filterData,
       currentPage,
-      productsPerPage,
+      countPerPage,
       sortByPrice,
       sortByRate,
       sortByPopularity,
@@ -64,7 +64,7 @@ const ProductListFilter = () => {
 
   const { searchFilter } = filters;
 
-  const handleSearch = (event) => {
+  const handleSearch = event => {
     dispatch(setSearchFilter(event.target.value));
   };
 
@@ -82,10 +82,10 @@ const ProductListFilter = () => {
     dispatch(
       setPriceFilter([
         Math.min(
-          ...filterData.map((product) => product.basePrice[currency].value)
+          ...filterData.map(product => product.basePrice[currency].value)
         ),
         Math.max(
-          ...filterData.map((product) => product.basePrice[currency].value)
+          ...filterData.map(product => product.basePrice[currency].value)
         )
       ])
     );

@@ -13,6 +13,7 @@ export const MailForm = ({
 }) => {
   const PHONE_NUMBER = '093 456 12 32';
   const style = useStyles({ themeMode });
+
   return (
     <div className={style.mailForm}>
       <div

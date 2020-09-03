@@ -7,6 +7,7 @@ import { history } from '../store/store';
 import { useStyles } from './routes.style.js';
 import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
+import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
@@ -17,11 +18,12 @@ import ProductListPage from '../pages/product-list-page';
 import Register from '../pages/register';
 import Login from '../pages/login';
 import Confirmation from '../pages/confirmation';
-import ProductDetails from '../pages/product-details';
 import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
+import ContactsPage from '../pages/contacts';
+import ProductsCarousel from '../pages/products-carousel';
 
 const Routes = () => {
   const styles = useStyles();
@@ -36,11 +38,13 @@ const Routes = () => {
       <div className={styles.root}>
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/error-page' exact component={ErrorPage} />
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
+          <Route path='/contacts' exact component={ContactsPage} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
           <Route path='/thanks' exact component={ThanksPage} />
@@ -65,11 +69,23 @@ const Routes = () => {
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
-              return <ProductListPage category={categoryParam} />;
+              return <ProductsCarousel category={categoryParam} />;
             }}
           />
-          <Route path='/:category/:id' exact component={ProductDetails} />
-          <Route path='/error-page' exact component={ErrorPage} />
+          <Route path='/product/:id' exact component={ProductDetails} />
+          <Route
+            path='/:category/:model'
+            exact
+            render={({ match }) => {
+              const { category, model } = match.params;
+              const categoryParam = categories.find(
+                (categoryFound) =>
+                  categoryFound.name[1].value.toLowerCase() ===
+                    category.toLowerCase() && categoryFound.isMain
+              );
+              return <ProductListPage category={categoryParam} model={model} />;
+            }}
+          />
         </Switch>
       </div>
       <AppFooter />

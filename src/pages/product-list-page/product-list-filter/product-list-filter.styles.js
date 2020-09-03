@@ -30,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
   button: {
     width: '8rem',
     margin: '0 0.2rem 1rem'
+  },
+  filterName: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    cursor: 'pointer',
+    padding: '0.5em 0'
   }
 }));
 

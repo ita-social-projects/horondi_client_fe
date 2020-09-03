@@ -13,7 +13,7 @@ const Home = () => {
   const styles = useStyles();
 
   return (
-    <div className={styles.home}>
+    <div className={styles.home} data-cy='home-page'>
       <div className={styles.homeHeader}>
         <Link to='/news'>
           <Button className={styles.headerButton} variant='contained'>

@@ -1,6 +1,7 @@
 {
   "parser": "babel-eslint",
   "parserOptions": {
+    "ecmaVersion": 6,
     "ecmaFeatures": {
       "jsx": true,
       "arrowFunctions": true,
@@ -48,6 +49,7 @@
     "no-debugger": 0,
     "no-alert": 0,
     "no-use-before-define": "off",
+    "no-param-reassign": 0,
     "no-await-in-loop": 0,
     "no-return-assign": ["error", "except-parens"],
     "no-restricted-syntax": [
@@ -64,7 +66,12 @@
     ],
     "arrow-body-style": [2, "as-needed"],
     "no-unused-expressions": 0,
-    "no-console": [0, { "allow": ["warn", "error"] }],
+    "no-console": [
+      0,
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
     "no-plusplus": 0,
     "no-nested-ternary": 0,
     "no-unneeded-ternary": 2,
@@ -98,34 +105,13 @@
     ],
     "no-return-await": 2,
     "react/jsx-no-duplicate-props": 2,
-    "camelcase": 0,
+    "camelcase": 2,
     "no-useless-return": 2,
     "no-multi-str": 2,
-    "no-constant-condition": 1,
+    "no-constant-condition": 2,
     "no-extra-parens": [1, "functions"],
-    "no-param-reassign": [
-      2,
-      {
-        "props": false
-      }
-    ],
-    "no-multi-spaces": [
-      1,
-      {
-        "exceptions": {
-          "VariableDeclarator": true,
-          "FunctionExpression": true
-        }
-      }
-    ],
     "import/extensions": 0,
     "jsx-quotes": [2, "prefer-single"],
-    "react/jsx-indent": 1,
-    "react/jsx-uses-vars": 2,
-    "react/jsx-props-no-spreading": 0,
-    "react/prop-types": 0,
-    "react/no-array-index-key": 0,
-    "react/no-unknown-property": 2,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     " jsx-a11y/no-noninteractive-element-interact": 0,
@@ -146,15 +132,36 @@
         "ignoreNonDOM": true
       }
     ],
-    "react/display-name": [0, { "ignoreTranspilerName": false }],
+    "react/jsx-indent": 1,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-props-no-spreading": 0,
+    "react/prop-types": 0,
+    "react/no-array-index-key": 0,
+    "react/no-unknown-property": 2,
+    "react/display-name": [
+      2,
+      {
+        "ignoreTranspilerName": false
+      }
+    ],
     "react/jsx-no-undef": 2,
     "react/jsx-pascal-case": 2,
     "react/no-deprecated": 1,
     "react/wrap-multilines": 0,
-    "react/no-multi-comp": [1, { "ignoreStateless": true }],
+    "react/no-multi-comp": [
+      1,
+      {
+        "ignoreStateless": true
+      }
+    ],
     "react/prefer-stateless-function": 2,
     "react/self-closing-comp": 1,
-    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "react/jsx-tag-spacing": [
+      "error",
+      {
+        "beforeSelfClosing": "always"
+      }
+    ],
     "react/jsx-wrap-multilines": [
       "error",
       {
@@ -164,7 +171,6 @@
         "arrow": true
       }
     ],
-
     "react/jsx-filename-extension": [
       1,
       {
@@ -189,6 +195,6 @@
       }
     ],
     "cypress/no-unnecessary-waiting": 0,
-    "import/no-unresolved":0
+    "import/no-unresolved": 0
   }
 }

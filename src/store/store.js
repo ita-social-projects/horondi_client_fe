@@ -1,7 +1,23 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducer from '../redux/reducers';
+import createSagaMiddleware from 'redux-saga';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import rootReducer from '../redux/root.reducer';
+import rootSaga from '../redux/root.saga';
 
-const store = createStore(reducer, applyMiddleware(thunk));
+export const history = createBrowserHistory();
 
-export default store;
+const configureStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+    rootReducer(history),
+    composeWithDevTools(
+      applyMiddleware(routerMiddleware(history), sagaMiddleware)
+    )
+  );
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
+
+export default configureStore;

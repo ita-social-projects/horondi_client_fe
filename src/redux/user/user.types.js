@@ -1,0 +1,11 @@
+export const SET_USER = 'SET_USER';
+export const SET_USER_ERROR = 'SET_USER_ERROR';
+export const SET_USER_LOADING = 'SET_USER_LOADING';
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const CONFIRM_USER = 'CONFIRM_USER';
+export const STATE_RESET = 'STATE_RESET';
+export const RECOVER_USER = 'RECOVER_USER';
+export const PASSWORD_RESET = 'PASSWORD_RESET';
+export const CHECK_IF_TOKEN_VALID = 'CHECK_IF_TOKEN_VALID';
+export const REGISTER_USER = 'REGISTER_USER';

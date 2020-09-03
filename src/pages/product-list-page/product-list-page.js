@@ -88,7 +88,7 @@ const ProductListPage = ({ category }) => {
   ]);
 
   useEffect(() => {
-    // dispatch(setCategoryFilter([category._id]));
+    dispatch(setCategoryFilter([category._id]));
     dispatch(
       setPriceFilter([
         Math.min(...filterData.map((product) => product.basePrice[0].value)),
@@ -101,14 +101,14 @@ const ProductListPage = ({ category }) => {
 
   const handleFilterShow = () => setMobile(!mobile);
 
-  // const categoryText = category.name[language].value.toUpperCase();
-  // const itemsToShow = products.map((product, index) => (
-  //   <ProductListItem key={index} product={product} category={categoryText} />
-  // ));
+  const categoryText = category.name[language].value.toUpperCase();
+  const itemsToShow = products.map((product, index) => (
+    <ProductListItem key={index} product={product} category={categoryText} />
+  ));
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3'>
-        {/* {categoryText} */}
+        {categoryText}
       </Typography>
       <div className={styles.sortDiv}>
         <ProductSort />
@@ -135,7 +135,7 @@ const ProductListPage = ({ category }) => {
             </div>
           )}
         </div>
-        {/* <div className={styles.productsDiv}>{itemsToShow}</div> */}
+        <div className={styles.productsDiv}>{itemsToShow}</div>
       </div>
       <div className={styles.paginationDiv}>
         <Pagination

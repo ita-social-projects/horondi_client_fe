@@ -15,6 +15,7 @@ import { setThemeMode } from '../../redux/theme/theme.actions';
 import { getCategories } from '../../redux/categories/categories.actions';
 
 import { Loader } from '../loader/loader';
+import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
@@ -30,6 +31,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getContacts());
   }, [dispatch]);
 
   useEffect(() => {

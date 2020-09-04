@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import parse from 'html-react-parser';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { Backdrop , Card, Tooltip } from '@material-ui/core';
+import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
-import { getContacts } from '../../redux/contacts/contacts.actions';
+
 import mapImg from '../../images/map-medium.png';
 
 const ContactsPage = () => {
@@ -20,11 +20,6 @@ const ContactsPage = () => {
     })
   );
   const styles = useStyles();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
 
   if (loading) {
     return (

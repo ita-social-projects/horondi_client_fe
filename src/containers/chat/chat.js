@@ -11,9 +11,10 @@ import MailForm from './mail-form';
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const { language, themeMode } = useSelector((state) => ({
+  const { language, themeMode, contacts } = useSelector((state) => ({
     language: state.Language.language,
-    themeMode: state.Theme.lightMode
+    themeMode: state.Theme.lightMode,
+    contacts: state.Contacts.contacts
   }));
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
 
@@ -25,6 +26,7 @@ export const Chat = () => {
             <MessengerCustomerChat
               pageId={process.env.FACEBOOK_PAGE_ID}
               appId={process.env.FACEBOOK_APP_ID}
+              onClick={() => setMailFormVisible(false)}
             />
           </div>
 
@@ -36,31 +38,30 @@ export const Chat = () => {
               onClick={() => setMailFormVisible(!mailFormVisible)}
             />
           </div>
-          <div>
-            <Transition
-              initial={null}
-              items={mailFormVisible}
-              from={{ opacity: 0, height: 0 }}
-              enter={{ opacity: 1, height: 0 }}
-              leave={{ opacity: 0, height: 0 }}
-              config={config.gentle}
-            >
-              {(item) =>
-                item &&
-                ((style) => (
-                  <div style={style}>
-                    <MailForm
-                      themeMode={themeMode}
-                      iconsVisible
-                      language={language}
-                      setIconsVisible={setIconsVisible}
-                      setMailFormVisible={setMailFormVisible}
-                    />
-                  </div>
-                ))
-              }
-            </Transition>
-          </div>
+          <Transition
+            initial={null}
+            items={mailFormVisible}
+            from={{ opacity: 0, height: 0 }}
+            enter={{ opacity: 1, height: 0 }}
+            leave={{ opacity: 0, height: 0 }}
+            config={config.gentle}
+          >
+            {(item) =>
+              item &&
+              ((style) => (
+                <div style={style}>
+                  <MailForm
+                    contacts={contacts}
+                    themeMode={themeMode}
+                    iconsVisible
+                    language={language}
+                    setIconsVisible={setIconsVisible}
+                    setMailFormVisible={setMailFormVisible}
+                  />
+                </div>
+              ))
+            }
+          </Transition>
         </div>
       )}
       <div

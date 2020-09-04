@@ -9,9 +9,9 @@ export const MailForm = ({
   iconsVisible,
   setIconsVisible,
   setMailFormVisible,
-  language
+  language,
+  contacts
 }) => {
-  const PHONE_NUMBER = '093 456 12 32';
   const style = useStyles({ themeMode });
 
   return (
@@ -29,7 +29,7 @@ export const MailForm = ({
         <span className={style.contactsTitle}>
           {CHAT[language].ourContacts}
         </span>
-        <span className={style.phoneNumbers}>{PHONE_NUMBER}</span>
+        <span className={style.phoneNumbers}>+{contacts[0].phoneNumber}</span>
       </div>
       <ActiveMessenger
         visible

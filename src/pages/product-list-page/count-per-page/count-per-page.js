@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './count-per-page.styles';
 import { setCountPerPage } from '../../../redux/products/products.actions';
 import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
-import {
-  setToLocalStorage,
-  getFromLocalStorage
-} from '../../../services/local-storage.service';
-
-const productsCount = getFromLocalStorage('countPerPage') || 9;
+import { setToLocalStorage } from '../../../services/local-storage.service';
 
 const CountPerPage = () => {
   const dispatch = useDispatch();
@@ -18,13 +13,10 @@ const CountPerPage = () => {
   const { countPerPage } = useSelector(({ Products: { countPerPage } }) => ({
     countPerPage
   }));
-  useEffect(() => {
-    dispatch(setCountPerPage(+productsCount));
-  }, [dispatch]);
 
   const pickQuantity = value => {
-    setToLocalStorage('countPerPage', value);
     dispatch(setCountPerPage(value));
+    setToLocalStorage('countPerPage', value);
   };
 
   const productsOnPage = ITEMS_PER_PAGE.map(item => (

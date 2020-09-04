@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     '& > p > strong': {
       color: 'white',
       padding: 2,
-      alignSelf: 'flex-end',
+      alignSelf: 'flex-start',
       position: 'relative',
       fontWeight: 'bold',
       zIndex: 1,
@@ -30,8 +30,9 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: 'black',
         zIndex: -1
       }
-    },
-    '& > p:last-child': {
+    }
+
+    /* '& > p:last-child': {
       display: 'flex',
       '& > img': {
         flexBasis: '25%',
@@ -42,6 +43,6 @@ export const useStyles = makeStyles((theme) => ({
           transform: 'scale(1.5)'
         }
       }
-    }
+    } */
   }
 }));

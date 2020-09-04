@@ -6,12 +6,20 @@ export const useStyles = makeStyles((theme) => ({
     margin: '50px auto',
     maxWidth: 1280,
     paddingTop: 30,
+    '& *:not(h1), & *:not(h2)': {
+      color: `inherit !important`,
+      fontSize: '1rem',
+      lineHeight: '2rem'
+    },
     '& > h1': {
-      textAlign: 'center'
+      textAlign: 'center',
+      fontSize: '2em'
     },
     '& > h2': {
-      textDecoration: 'underline orangered',
       textAlign: 'left'
+    },
+    '& > p': {
+      lineHeight: 'initial'
     }
   }
 }));

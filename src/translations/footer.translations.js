@@ -17,8 +17,8 @@ export const FOOTER_INFORMATION = {
     items: [
       { id: 1, url: '/about-us', item: 'About us' },
       { id: 2, url: '#', item: 'Materials' },
-      { id: 3, url: '#', item: 'Payment & shipping' },
-      { id: 4, url: '#', item: 'Privacy policy' }
+      { id: 3, url: '/payment-and-shipping', item: 'Payment & shipping' },
+      { id: 4, url: '/privacy-policy', item: 'Privacy policy' }
     ]
   }
 };

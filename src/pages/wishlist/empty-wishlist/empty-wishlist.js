@@ -22,7 +22,7 @@ const EmptyWishlist = () => {
     : WISHLIST_IMAGES.darkTheme;
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-cy='empty-wishlist'>
       <Typography variant='h2'>{WISHLIST_TITTLES[language].empty}</Typography>
       <img src={emptyWishlistImgLink} alt='empty wishlist' />
       <Link to='/'>

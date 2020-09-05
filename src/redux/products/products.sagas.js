@@ -4,16 +4,24 @@ import {
   setAllProducts,
   setProductsLoading,
   setAllFilterData,
-  setPagesCount
+  setPagesCount,
+  setProduct,
+  setProductLoading
 } from './products.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
-import { GET_ALL_FILTERS, GET_FILTRED_PRODUCTS } from './products.types';
+import {
+  GET_ALL_FILTERS,
+  GET_FILTRED_PRODUCTS,
+  GET_PRODUCT
+} from './products.types';
 
 export function* handleFilterLoad() {
   try {
     yield put(setProductsLoading(true));
     const state = yield select((state) => state.Products);
+    const currency = yield select((state) => state.Currency.currency);
+    console.log(currency);
     const products = yield call(
       getItems,
       `query(
@@ -27,7 +35,9 @@ export function* handleFilterLoad() {
         $rate:Int
         $basePrice:Int
         $purchasedCount:Int
-        $category:[String]
+        $category: [String]
+        $models: [String]
+        $currency: Int
         ){
           getProducts(
             filter: {
@@ -36,6 +46,8 @@ export function* handleFilterLoad() {
               price: $price
               category:$category
               isHotItem: $isHotItem
+              models: $models
+              currency: $currency
             }
             skip: $skip
             limit: $limit
@@ -56,10 +68,16 @@ export function* handleFilterLoad() {
                 basePrice {
                   value
                 }
+                model {
+                  value
+                }
                 rate
                 images {
                   primary {
+                    large
                     medium
+                    large
+                    small
                   }
                 }
                 colors{
@@ -93,15 +111,18 @@ export function* handleFilterLoad() {
         colors: state.filters.colorsFilter,
         patterns: state.filters.patternsFilter,
         price: state.filters.priceFilter,
+        currency,
         skip: state.currentPage * state.productsPerPage,
         limit: state.productsPerPage,
         rate: state.sortByRate || undefined,
         basePrice: state.sortByPrice || undefined,
         category: state.filters.categoryFilter,
         purchasedCount: state.sortByPopularity || undefined,
-        isHotItem: state.filters.isHotItemFilter
+        isHotItem: state.filters.isHotItemFilter,
+        models: state.filters.modelsFilter
       }
     );
+
     yield put(
       setPagesCount(
         Math.ceil(products.data.getProducts.count / state.productsPerPage)
@@ -133,6 +154,9 @@ export function* handleGetFilters() {
             basePrice {
               value
             }
+            model {
+              value
+            }
             pattern {
               value
             }
@@ -161,7 +185,179 @@ export function* handleProductsErrors(e) {
   yield put(push('/error-page'));
 }
 
+export function* handleProductLoading({ payload }) {
+  yield put(setProductLoading(true));
+  const query = `
+  query($id: ID!) {
+    getProductById(id: $id) {
+      ... on Product {
+        _id
+      category {
+        _id
+        name {
+          lang
+          value
+        }
+      }
+      name {
+        lang
+        value
+      }
+      description {
+        lang
+        value
+      }
+      mainMaterial {
+        lang
+        value
+      }
+      innerMaterial {
+        lang
+        value
+      }
+      strapLengthInCm
+      images {
+        primary {
+          medium
+          large
+        }
+        additional {
+          small
+          large
+        }
+      }
+      colors {
+        code
+        name {
+          lang
+          value
+        }
+        images {
+          thumbnail
+          large
+        }
+        available
+      }
+      pattern {
+        lang
+        value
+      }
+      closure {
+        lang
+        value
+      }
+      basePrice {
+        value
+        currency
+      }
+      options {
+        size {
+          name
+          heightInCm
+          widthInCm
+          depthInCm
+          volumeInLiters
+          available
+          additionalPrice {
+            value
+            currency
+          }
+        }
+        bottomMaterial {
+          name {
+            lang
+            value
+          }
+          additionalPrice {
+            value
+            currency
+          }
+        }
+        additions {
+          name {
+            lang
+            value
+          }
+          available
+          additionalPrice {
+            value
+            currency
+          }
+        }
+      }
+      rate
+      comments {
+        _id
+        text
+        date
+        user {
+          name
+        }
+      }
+      options {
+        size {
+          _id
+          name
+          volumeInLiters
+          widthInCm
+          weightInKg
+        }
+        bottomMaterial {
+          _id
+          name {
+            lang
+            value
+          }
+          available
+          additionalPrice {
+            value
+            currency
+          }
+        }
+        additions {
+          name {
+            value
+            lang
+          }
+          available
+          additionalPrice {
+            value
+            currency
+          }
+        }
+        availableCount
+      }
+      images {
+        primary {
+          thumbnail
+          small
+          large
+          medium
+        }
+        additional {
+          large
+          medium
+        }
+      }
+    }
+  }
+}`;
+  const variables = {
+    id: payload
+  };
+  try {
+    const product = yield call(getItems, query, variables);
+    yield put(setProduct(product.data.getProductById));
+    yield put(setProductLoading(false));
+  } catch (e) {
+    yield put(setProductLoading(false));
+    yield put(setError({ e }));
+    yield put(push('/error-page'));
+  }
+}
+
 export default function* productsSaga() {
   yield takeEvery(GET_ALL_FILTERS, handleGetFilters);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilterLoad);
+  yield takeEvery(GET_PRODUCT, handleProductLoading);
 }

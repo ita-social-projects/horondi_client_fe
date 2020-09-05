@@ -9,8 +9,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: '5rem auto',
     marginRight: 'auto',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(25rem, auto))',
-    gridColumnGap: '10px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(27rem, auto))',
+    gridColumnGap: '15px',
     justifyContent: 'center'
   },
   backdrop: {

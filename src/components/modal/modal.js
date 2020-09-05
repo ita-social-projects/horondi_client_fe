@@ -15,7 +15,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
   };
 
   const body = (
-    <div className={styles.paper}>
+    <div className={styles.paper} data-cy='removing-modal'>
       <p>
         {message}
         <b>{itemName}</b>?

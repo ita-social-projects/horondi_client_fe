@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import { useDispatch, useSelector } from 'react-redux';
 import { PATTERN_TEXT } from '../../../../translations/product-list.translations';
 import useStyles from '../product-list-filter.styles';
@@ -45,27 +46,37 @@ const PatternsFilter = () => {
     }
   };
 
+  const [isFiltersHidden, toggleFilters] = useState(false);
+
   return (
     <FormGroup data-cy='patterns_filter'>
-      <Typography id='patterns' gutterBottom>
-        {PATTERN_TEXT[language].value}:
+      <Typography
+        className={styles.filterName}
+        data-cy='patterns'
+        gutterBottom
+        onClick={() => toggleFilters(!isFiltersHidden)}
+      >
+        <span>{PATTERN_TEXT[language].value}:</span>
+        <span style={{ textDecoration: 'underline' }}>{patterns.length}</span>
       </Typography>
-      {patterns.map((pattern) => (
-        <FormControlLabel
-          key={pattern[1].value}
-          className={styles.checkbox}
-          control={
-            <Checkbox
-              name={pattern[1].value}
-              checked={
-                !!patternsFilter.find((filter) => filter === pattern[1].value)
-              }
-            />
-          }
-          label={pattern[language].value}
-          onChange={handlePatternChange}
-        />
-      ))}
+      {isFiltersHidden &&
+        patterns.map((pattern) => (
+          <FormControlLabel
+            key={pattern[1].value}
+            className={styles.checkbox}
+            control={
+              <Checkbox
+                name={pattern[1].value}
+                checked={
+                  !!patternsFilter.find((filter) => filter === pattern[1].value)
+                }
+              />
+            }
+            label={pattern[language].value}
+            onChange={handlePatternChange}
+          />
+        ))}
+      <Divider />
     </FormGroup>
   );
 };

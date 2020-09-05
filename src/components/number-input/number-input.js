@@ -9,7 +9,7 @@ const NumberInput = ({ onChangeQuantity, quantity }) => {
   const styles = useStyles();
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-cy='cart-item-quantity'>
       <Button
         className={styles.button}
         onClick={() => onChangeQuantity(-1)}

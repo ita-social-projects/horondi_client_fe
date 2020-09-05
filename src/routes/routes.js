@@ -24,6 +24,7 @@ import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 import ContactsPage from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
+import Checkout from '../pages/checkout';
 
 const Routes = () => {
   const styles = useStyles();
@@ -48,6 +49,7 @@ const Routes = () => {
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
           <Route path='/thanks' exact component={ThanksPage} />
+          <Route path='/checkout' exact component={Checkout} />
           <Route
             path='/confirmation/:token'
             exact

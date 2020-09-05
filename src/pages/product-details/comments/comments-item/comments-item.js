@@ -28,10 +28,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
     })
   );
 
-  const {
-    name,
-    images: { medium }
-  } = user;
+  const { name, images } = user;
 
   const [isEditable, setEditable] = useState(false);
   const [modal, setModal] = useState(false);
@@ -65,7 +62,11 @@ const CommentsItem = ({ user, text, date, commentId }) => {
         <div className={styles.comment}>
           <div>
             <div className={styles.user}>
-              <Avatar alt={name} src={medium} className={styles.avatar} />
+              <Avatar
+                alt={name}
+                src={images ? images.medium : ''}
+                className={styles.avatar}
+              />
               <span className={styles.name}>{name}</span>
             </div>
           </div>

@@ -108,6 +108,9 @@ const getProduct = (payload) =>
           user {
             email
             name
+            images {
+              medium
+            }
           }
         }
         options {

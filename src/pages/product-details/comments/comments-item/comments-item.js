@@ -11,7 +11,6 @@ import { Loader } from '../../../../components/loader/loader';
 import EditableField from './editable-field';
 import CommentDialog from './comment-dialog';
 
-import * as avatar from '../../../../images/avatar.jpg';
 import {
   COMMENTS_TIME_OPTIONS,
   DATE_LANGUAGE_OPTIONS
@@ -29,7 +28,10 @@ const CommentsItem = ({ user, text, date, commentId }) => {
     })
   );
 
-  const { name } = user;
+  const {
+    name,
+    images: { medium }
+  } = user;
 
   const [isEditable, setEditable] = useState(false);
   const [modal, setModal] = useState(false);
@@ -63,7 +65,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
         <div className={styles.comment}>
           <div>
             <div className={styles.user}>
-              <Avatar alt={name} src={avatar} className={styles.avatar} />
+              <Avatar alt={name} src={medium} className={styles.avatar} />
               <span className={styles.name}>{name}</span>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import './similar-products.css';
@@ -36,7 +36,7 @@ const SimilarProducts = () => {
     ));
 
   return (
-    <>
+    <div>
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
@@ -51,7 +51,7 @@ const SimilarProducts = () => {
           </Carousel>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 

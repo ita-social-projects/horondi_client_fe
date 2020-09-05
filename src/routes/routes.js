@@ -22,6 +22,7 @@ import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
+import ContactsPage from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
 
 const Routes = () => {
@@ -43,6 +44,7 @@ const Routes = () => {
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
+          <Route path='/contacts' exact component={ContactsPage} />
           <Route path='/register' exact component={Register} />
           <Route path='/login' exact component={Login} />
           <Route path='/thanks' exact component={ThanksPage} />

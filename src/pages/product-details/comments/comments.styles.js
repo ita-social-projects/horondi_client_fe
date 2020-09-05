@@ -2,8 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   comment: {
-    padding: '1rem 3rem',
-    marginTop: '1rem',
+    padding: '0 3rem',
     '& hr': {
       border: 'none',
       color: '#C2C2C2',
@@ -101,8 +100,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   commentBtn: {
-    marginTop: '25px',
-    marginBottom: '1.5rem',
+    marginTop: 25,
+    marginBottom: 40,
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '1rem',
@@ -115,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 950px)': {
       marginTop: '0',
       marginBottom: '1.5rem'
+    },
+    title: {
+      textAlign: 'left important!'
     }
   }
 }));

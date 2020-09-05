@@ -106,6 +106,7 @@ const getProduct = (payload) =>
           text
           date
           user {
+            email
             name
           }
         }

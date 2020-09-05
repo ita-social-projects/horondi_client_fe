@@ -59,8 +59,8 @@ const Comments = () => {
 
   const [rate, setRate] = useState(0);
 
-  const { _id, email: userEmail, firstName: userName } = userData || {};
-  const purchasedProduct = ['a37599c11e0a732bfd75b899'];
+  const { _id, email: userEmail, firstName: userName, purchasedProduct } =
+    userData || {};
 
   const hasBought = useMemo(
     () =>
@@ -127,13 +127,7 @@ const Comments = () => {
   const handleComment = () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      dispatch(
-        addComment({
-          ...comment,
-          rate
-        })
-      );
-
+      dispatch(addComment({ ...comment, rate }));
       setComment(commentToSend);
       setRate(0);
       clearFields();
@@ -199,7 +193,7 @@ const Comments = () => {
 
   return (
     <div className={styles.comment}>
-      <h2>{COMMENTS[language].title}</h2>
+      <h2 className={styles.title}>{COMMENTS[language].title}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
           <Rating

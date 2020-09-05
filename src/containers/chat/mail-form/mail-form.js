@@ -29,9 +29,11 @@ export const MailForm = ({
         <span className={style.contactsTitle}>
           {CHAT[language].ourContacts}
         </span>
-        <span className={style.phoneNumbers}>
-          +{contacts.map((contact) => contact.phoneNumber)}
-        </span>
+        {contacts.map((contact, index) => (
+          <span className={style.phoneNumbers} key={index}>
+            +{contact.phoneNumber}
+          </span>
+        ))}
       </div>
       <ActiveMessenger
         visible

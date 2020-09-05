@@ -282,8 +282,9 @@ in '.env' file.
 
 4. Now go to your Facebook Business page -> Settings(Left bar) -> Advanced Messaging and find section 'Whitelisted 
  Domains'. Here you must add your domain to white list and save.
- 
- 
+
+More details you can find on official site 
+https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/ 
 #### License
 
 [MIT](https://choosealicense.com/licenses/mit/)

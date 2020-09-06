@@ -81,7 +81,7 @@ export const errorMessages = [
       email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
-      text: 'Field should contain from 2 to 500 characters'
+      text: 'Field should contain from 2 to 700 characters'
     }
   }
 ];

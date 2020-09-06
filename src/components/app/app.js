@@ -31,8 +31,10 @@ const App = () => {
   const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
-    dispatch(setCountPerPage(productsCount));
     dispatch(getCategories());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(setCountPerPage(productsCount));
   }, [dispatch, productsCount]);
 
   useEffect(() => {

@@ -1,7 +1,7 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import getItems, { setItems, client } from '../../utils/client';
 
-const getProduct = (payload) =>
+const getProduct = (id) =>
   getItems(
     `query($id: ID!) {
       getProductById(id: $id) {
@@ -162,14 +162,14 @@ const getProduct = (payload) =>
     }
   }`,
     {
-      id: payload
+      id
     }
   );
 
 const getComments = (id) =>
   getItems(
-    `query {
-        getAllCommentsByProduct(productId: "${id}") {
+    `query($id: ID!) {
+        getAllCommentsByProduct(productId: $id) {
           ... on Comment {
             _id
             text
@@ -180,7 +180,10 @@ const getComments = (id) =>
             }
           }
         }
-    }`
+    }`,
+    {
+      id
+    }
   );
 
 const changeRate = (payload) =>

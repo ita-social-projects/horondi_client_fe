@@ -16,6 +16,7 @@ export const Chat = () => {
     themeMode: state.Theme.lightMode,
     contacts: state.Contacts.contacts
   }));
+
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
 
   return (
@@ -32,11 +33,9 @@ export const Chat = () => {
 
           <div
             className={mailFormVisible ? style.msgIconActive : style.msgIcon}
+            onClick={() => setMailFormVisible(!mailFormVisible)}
           >
-            <MailOutlineIcon
-              className={style.icon}
-              onClick={() => setMailFormVisible(!mailFormVisible)}
-            />
+            <MailOutlineIcon className={style.icon} />
           </div>
           <Transition
             initial={null}

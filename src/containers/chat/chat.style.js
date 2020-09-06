@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     right: '4%',
     bottom: '2%',
+    transition: 'background 0.3s',
     '&:hover': {
       cursor: 'pointer',
       background: '#E4B200'
@@ -27,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     position: 'fixed',
     right: '4%',
-    bottom: '8.5%',
+    bottom: '80px',
     width: '60px',
     height: '150px',
     flexDirection: 'column',
@@ -41,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginBottom: '20px',
     cursor: 'pointer',
+    transition: 'background 0.3s',
     '&:hover': {
       background: '#E4B200'
     }
@@ -60,15 +62,12 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    right: '9%',
+    right: '160px',
     bottom: '12%',
     width: '320px',
     height: '600px',
     background: themeMode ? 'white' : '#232323',
-    boxShadow:
-      '0px 2px 1px -1px rgba(0,0,0,0.2), ' +
-      '0px 1px 1px 0px rgba(0,0,0,0.14), ' +
-      '0px 1px 3px 0px rgba(0,0,0,0.12)'
+    boxShadow: 'rgb(197, 197, 197) 0px 5px 8px'
   }),
   cancelIcon: {
     position: 'absolute',
@@ -131,7 +130,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   dataInput: {
     height: '100%',
-    marginBottom: '15px'
+    marginBottom: '15px',
+    width: '280px'
   },
   icon: {
     color: theme.palette.white

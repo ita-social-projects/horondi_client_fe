@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => {
 
   return {
     sizeButtons: {
+      position: 'relative',
       display: 'flex',
       width: '50px',
       marginBottom: '15px',
@@ -33,9 +34,8 @@ const useStyles = makeStyles((theme) => {
       letterSpacing: '0.03333em',
       color: 'tomato',
       position: 'absolute',
-      '@media (max-width: 600px)': {
-        left: '34vw'
-      }
+      width: '160px',
+      top: '45px'
     },
     sizeButton: {
       ...sizeButton,

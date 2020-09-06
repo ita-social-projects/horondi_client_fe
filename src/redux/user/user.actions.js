@@ -9,7 +9,8 @@ import {
   RECOVER_USER,
   PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
-  REGISTER_USER
+  REGISTER_USER,
+  CLEAR_USER_DATA
 } from './user.types';
 
 const setUser = (user) => ({
@@ -34,6 +35,10 @@ const setUserError = (error) => ({
 
 const logoutUser = () => ({
   type: LOGOUT_USER
+});
+
+const clearUserData = () => ({
+  type: CLEAR_USER_DATA
 });
 
 const setUserLoading = (payload) => ({
@@ -76,5 +81,6 @@ export {
   recoverUser,
   resetPassword,
   checkIfTokenValid,
-  registerUser
+  registerUser,
+  clearUserData
 };

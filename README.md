@@ -267,7 +267,7 @@ this command is used to run [graphql code generator](https://graphql-code-genera
 ### Implementing Facebook chat.
 
 For run Facebook chat on your site you need two variables - FACEBOOK_PAGE_ID and FACEBOOK_APP_ID and write them
-in '.env' file.
+in 'src -> containers -> chat -> chat.js' file.
 
 1. FACEBOOK_PAGE_ID.
  You can find your page ID in menu under your avatar, button 'about' or 'more -> about'.

@@ -15,7 +15,7 @@ export function* handleContactsLoad() {
       getItems,
       `query {
         getContacts {
-          ... on Contact {
+          items {
             _id
             phoneNumber
             openHours {
@@ -28,14 +28,16 @@ export function* handleContactsLoad() {
             }
             email
             images {
-              medium
+              value {
+                medium
+              }
             }
             link
           }
         }
       }`
     );
-    yield put(setContacts(contacts.data.getContacts));
+    yield put(setContacts(contacts.data.getContacts.items));
     yield put(setLoading(false));
   } catch (e) {
     yield put(setLoading(false));

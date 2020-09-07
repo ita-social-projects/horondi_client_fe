@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
 import {
   CHECKOUT_TITLES,
@@ -11,7 +11,6 @@ import {
   errorMessages
 } from '../../../translations/checkout.translations';
 import { useStyles } from '../checkout.styles';
-import { registerUser } from '../../../redux/user/user.actions';
 
 export const OrderForm = () => {
   // VALIDATED && CONFIRMED
@@ -34,20 +33,15 @@ export const OrderForm = () => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleCreateOrder = async () => {
+  const handleCreateOrder = () => {
     setShouldValidate(true);
-    if (allFieldsValidated) {
-      delete user.confirmPassword;
-      dispatch(registerUser({ user, language }));
-    }
+    allFieldsValidated && console.log('YRA!');
   };
 
   // HOOKS
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     // VALID FIELDS
@@ -126,7 +120,7 @@ export const OrderForm = () => {
         <span className={style.mainTitle}>
           {CHECKOUT_TITLES[language].orderForm}
         </span>
-        <div className={style.contactsFilds}>
+        <div className={style.contactsFields}>
           <span className={style.subTitle}>
             {CHECKOUT_TITLES[language].contactInfo}
           </span>

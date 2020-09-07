@@ -14,10 +14,9 @@ export const useStyles = makeStyles((theme) => ({
     color: 'rgba(0, 0, 0, 0.54)',
     fontSize: '1.8rem'
   },
-  contactsFilds: {
+  contactsFields: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    flexDirection: 'column'
   },
   dataInput: {
     width: '300px'

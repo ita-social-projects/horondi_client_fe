@@ -97,7 +97,7 @@ export const formRegExp = {
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  phoneNumber: '/\\d{10}/'
+  phoneNumber: /^[0-9]{10}$/g
 };
 
 export const placeholders = {

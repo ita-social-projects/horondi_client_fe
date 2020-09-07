@@ -115,76 +115,81 @@ export const OrderForm = () => {
 
   return (
     <div>
-      <div />
       <div className={style.orderFormWrapper}>
-        <span className={style.mainTitle}>
-          {CHECKOUT_TITLES[language].orderForm}
-        </span>
+        <div className={style.mainTitle}>
+          <span>{CHECKOUT_TITLES[language].orderForm}</span>
+        </div>
         <div className={style.contactsFields}>
           <span className={style.subTitle}>
             {CHECKOUT_TITLES[language].contactInfo}
           </span>
           <div>
-            {Object.values(contactsNames).map(
-              ({
-                label,
-                inputName,
-                errorMessage,
-                value,
-                onChange,
-                validation,
-                type,
-                regExp = null
-              }) => (
-                <TextField
-                  required
-                  fullWidth
-                  key={label}
-                  label={label}
-                  variant='outlined'
-                  name={inputName}
-                  error={!validation.value && shouldValidate}
-                  helperText={
-                    !validation.value && shouldValidate ? `${errorMessage}` : ''
-                  }
-                  className={style.dataInput}
-                  onChange={(e) => onChange(e, validation.setValid, regExp)}
-                  value={value}
-                  type={type}
-                />
-              )
-            )}
-          </div>
-          <div>
-            {Object.values(contactsEmailPhone).map(
-              ({
-                label,
-                inputName,
-                errorMessage,
-                value,
-                onChange,
-                validation,
-                type,
-                regExp = null
-              }) => (
-                <TextField
-                  required
-                  fullWidth
-                  key={label}
-                  label={label}
-                  variant='outlined'
-                  name={inputName}
-                  error={!validation.value && shouldValidate}
-                  helperText={
-                    !validation.value && shouldValidate ? `${errorMessage}` : ''
-                  }
-                  className={style.dataInput}
-                  onChange={(e) => onChange(e, validation.setValid, regExp)}
-                  value={value}
-                  type={type}
-                />
-              )
-            )}
+            <div className={style.contactFild}>
+              {Object.values(contactsNames).map(
+                ({
+                  label,
+                  inputName,
+                  errorMessage,
+                  value,
+                  onChange,
+                  validation,
+                  type,
+                  regExp = null
+                }) => (
+                  <TextField
+                    required
+                    fullWidth
+                    key={label}
+                    label={label}
+                    variant='outlined'
+                    name={inputName}
+                    error={!validation.value && shouldValidate}
+                    helperText={
+                      !validation.value && shouldValidate
+                        ? `${errorMessage}`
+                        : ''
+                    }
+                    className={style.dataInput}
+                    onChange={(e) => onChange(e, validation.setValid, regExp)}
+                    value={value}
+                    type={type}
+                  />
+                )
+              )}
+            </div>
+            <div className={style.contactFild}>
+              {Object.values(contactsEmailPhone).map(
+                ({
+                  label,
+                  inputName,
+                  errorMessage,
+                  value,
+                  onChange,
+                  validation,
+                  type,
+                  regExp = null
+                }) => (
+                  <TextField
+                    required
+                    fullWidth
+                    key={label}
+                    label={label}
+                    variant='outlined'
+                    name={inputName}
+                    error={!validation.value && shouldValidate}
+                    helperText={
+                      !validation.value && shouldValidate
+                        ? `${errorMessage}`
+                        : ''
+                    }
+                    className={style.dataInput}
+                    onChange={(e) => onChange(e, validation.setValid, regExp)}
+                    value={value}
+                    type={type}
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
         <span className={style.subTitle}>

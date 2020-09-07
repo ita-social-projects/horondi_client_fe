@@ -3,12 +3,14 @@ import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
-
 import { config, Transition } from 'react-spring/renderprops';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 
 export const Chat = () => {
+  const FACEBOOK_PAGE_ID = '106973281128068';
+  const FACEBOOK_APP_ID = '768636160372711';
+
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
   const { language, themeMode, contacts } = useSelector((state) => ({
@@ -25,8 +27,8 @@ export const Chat = () => {
         <div className={style.iconsMessengers}>
           <div>
             <MessengerCustomerChat
-              pageId={process.env.FACEBOOK_PAGE_ID}
-              appId={process.env.FACEBOOK_APP_ID}
+              pageId={FACEBOOK_PAGE_ID}
+              appId={FACEBOOK_APP_ID}
               onClick={() => setMailFormVisible(false)}
             />
           </div>

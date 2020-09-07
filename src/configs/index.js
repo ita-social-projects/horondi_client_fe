@@ -53,7 +53,8 @@ export const REGISTER_USER_DATA = {
   lastName: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  phoneNumber: ''
 };
 
 export const LOGIN_USER_DATA = {
@@ -95,7 +96,8 @@ export const formRegExp = {
   street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+  phoneNumber: '/\\d{10}/'
 };
 
 export const placeholders = {

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
 import { CHAT, errorMessages } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';
-import { registerUser } from '../../../redux/user/user.actions';
 
 export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   // VALIDATED && CONFIRMED
@@ -26,20 +25,15 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleRegister = async () => {
+  const handleSend = () => {
     setShouldValidate(true);
-    if (allFieldsValidated) {
-      delete user.confirmPassword;
-      dispatch(registerUser({ user, language }));
-    }
+    allFieldsValidated && console.log('YO!');
   };
 
   // HOOKS
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     // VALID FIELDS
@@ -136,7 +130,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           />
         )
       )}
-      <Button className={style.btnSend} onClick={handleRegister}>
+      <Button className={style.btnSend} onClick={handleSend}>
         {CHAT[language].sendBtn}
       </Button>
     </form>

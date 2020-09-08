@@ -14,7 +14,7 @@ import {
   setSortByPrice,
   setSortByRate,
   setSortByPopularity,
-  setProductsPerPage,
+  setCountPerPage,
   setModelsFilter,
   setProduct,
   setProductLoading
@@ -201,9 +201,9 @@ describe('Product reducer test', () => {
   it('products per page in store should be set to 18', () => {
     const state = {
       ...initialState,
-      productsPerPage: 18
+      countPerPage: 18
     };
-    expect(productReducer(initialState, setProductsPerPage(18))).toEqual(state);
+    expect(productReducer(initialState, setCountPerPage(18))).toEqual(state);
   });
 
   it('should return state with new product', () => {

@@ -25,96 +25,96 @@ import {
   CLEAR_PRODUCT_TO_SEND
 } from './products.types';
 
-export const setProduct = (item) => ({
+export const setProduct = item => ({
   type: SET_PRODUCT,
   payload: item
 });
 
-export const getProduct = (id) => ({
+export const getProduct = id => ({
   type: GET_PRODUCT,
   payload: id
 });
 
-export const setAllFilterData = (payload) => ({
+export const setAllFilterData = payload => ({
   type: SET_ALL_FILTER_DATA,
   payload
 });
-export const setCurrentPage = (payload) => ({
+export const setCurrentPage = payload => ({
   type: SET_CURRENT_PAGE,
   payload
 });
-export const setProductsPerPage = (payload) => ({
+export const setCountPerPage = payload => ({
   type: SET_PRODUCTS_PER_PAGE,
   payload
 });
-export const setSortByPrice = (payload) => ({
+export const setSortByPrice = payload => ({
   type: SET_SORT_BY_PRICE,
   payload
 });
-export const setSortByDate = (payload) => ({
+export const setSortByDate = payload => ({
   type: SET_SORT_BY_DATE,
   payload
 });
-export const setSortByRate = (payload) => ({
+export const setSortByRate = payload => ({
   type: SET_SORT_BY_RATE,
   payload
 });
-export const setSortByPopularity = (payload) => ({
+export const setSortByPopularity = payload => ({
   type: SET_SORT_BY_POPULARITY,
   payload
 });
-export const getFiltredProducts = (payload) => ({
+export const getFiltredProducts = payload => ({
   type: GET_FILTRED_PRODUCTS,
   payload
 });
-export const setProductsLoading = (loading) => ({
+export const setProductsLoading = loading => ({
   type: SET_PRODUCTS_LOADING,
   payload: loading
 });
-export const setCategoryFilter = (payload) => ({
+export const setCategoryFilter = payload => ({
   type: SET_CATEGORY_FILTER,
   payload
 });
-export const setPriceFilter = (payload) => ({
+export const setPriceFilter = payload => ({
   type: SET_PRICE_FILTER,
   payload
 });
-export const setColorsFilter = (payload) => ({
+export const setColorsFilter = payload => ({
   type: SET_COLORS_FILTER,
   payload
 });
-export const setHotItemFilter = (payload) => ({
+export const setHotItemFilter = payload => ({
   type: SET_HOT_ITEM_FILTER,
   payload
 });
-export const setPatternsFilter = (payload) => ({
+export const setPatternsFilter = payload => ({
   type: SET_PATTERNS_FILTER,
   payload
 });
-export const setModelsFilter = (payload) => ({
+export const setModelsFilter = payload => ({
   type: SET_MODELS_FILTER,
   payload
 });
-export const setSearchFilter = (payload) => ({
+export const setSearchFilter = payload => ({
   type: SET_SEARCH,
   payload
 });
-export const setPagesCount = (payload) => ({
+export const setPagesCount = payload => ({
   type: SET_PAGES_COUNT,
   payload
 });
-export const setAllProducts = (payload) => ({
+export const setAllProducts = payload => ({
   type: SET_ALL_PRODUCTS,
   payload
 });
 export const getAllFilters = () => ({
   type: GET_ALL_FILTERS
 });
-export const setProductLoading = (payload) => ({
+export const setProductLoading = payload => ({
   type: SET_PRODUCT_LOADING,
   payload
 });
-export const setProductToSend = (payload) => ({
+export const setProductToSend = payload => ({
   type: SET_PRODUCT_TO_SEND,
   payload
 });

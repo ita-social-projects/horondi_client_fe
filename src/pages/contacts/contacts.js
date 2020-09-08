@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Backdrop , Card, Tooltip } from '@material-ui/core';
+import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
@@ -48,7 +48,7 @@ const ContactsPage = () => {
               >
                 <img
                   className={styles.mapImage}
-                  src={contact.images.medium || mapImg}
+                  src={contact.images[language].value.medium || mapImg}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
               </a>

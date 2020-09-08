@@ -123,7 +123,11 @@ const ProductListPage = ({ category, model }) => {
 
   const categoryText = category.name[language].value.toUpperCase();
   const itemsToShow = products.map((product, index) => (
-    <ProductListItem key={index} product={product} category={categoryText} />
+    <ProductListItem
+      key={product._id}
+      product={product}
+      category={categoryText}
+    />
   ));
 
   return (

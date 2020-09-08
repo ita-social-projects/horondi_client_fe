@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
 import {
   CHECKOUT_TITLES,
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_DROP_LIST,
   CHECKOUT_BUTTON,
+  CHECKOUT_PAYMENT,
   CHECKOUT_ADDITIONAL_INFORMATION,
+  CHECKOUT_DELIVERY_TYPES,
   errorMessages
 } from '../../../translations/checkout.translations';
 import { useStyles } from '../checkout.styles';
@@ -20,6 +27,8 @@ export const OrderForm = () => {
   const [phoneValidated, setPhoneValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [deliveryType, setDeliveryType] = useState('');
+  const [paymentType, setPaymentType] = useState('');
 
   // USER VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
@@ -38,6 +47,14 @@ export const OrderForm = () => {
     allFieldsValidated && console.log('YRA!');
   };
 
+  const selectHandlerDelivery = (event) => {
+    setDeliveryType(event.target.value);
+  };
+
+  const selectHandlerPayment = (event) => {
+    setPaymentType(event.target.value);
+  };
+
   // HOOKS
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
@@ -45,12 +62,12 @@ export const OrderForm = () => {
 
   useEffect(() => {
     // VALID FIELDS
-    if (firstNameValidated && emailValidated) {
+    if (firstNameValidated && emailValidated && lastName && phoneNumber) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
     }
-  }, [firstNameValidated, emailValidated]);
+  }, [firstNameValidated, emailValidated, lastName, phoneNumber]);
 
   // STYLES
   const style = useStyles();
@@ -124,7 +141,7 @@ export const OrderForm = () => {
             {CHECKOUT_TITLES[language].contactInfo}
           </span>
           <div>
-            <div className={style.contactFild}>
+            <div className={style.contactField}>
               {Object.values(contactsNames).map(
                 ({
                   label,
@@ -157,7 +174,7 @@ export const OrderForm = () => {
                 )
               )}
             </div>
-            <div className={style.contactFild}>
+            <div className={style.contactField}>
               {Object.values(contactsEmailPhone).map(
                 ({
                   label,
@@ -192,15 +209,60 @@ export const OrderForm = () => {
             </div>
           </div>
         </div>
-        <span className={style.subTitle}>
-          {CHECKOUT_TITLES[language].delivery}
-        </span>
-        <span className={style.subTitle}>
-          {CHECKOUT_TITLES[language].payment}
-        </span>
-        <Button onClick={handleCreateOrder}>
-          {CHECKOUT_BUTTON[language].createOrder}
-        </Button>
+        <div className={style.subTitle}>
+          <span>{CHECKOUT_TITLES[language].delivery}</span>
+        </div>
+
+        <div className={style.deliveryType}>
+          <FormControl variant='outlined' className={style.dataInput}>
+            <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>
+            <Select
+              value={deliveryType}
+              onChange={selectHandlerDelivery}
+              label='deliveryType'
+            >
+              <MenuItem value={10}>
+                {CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
+              </MenuItem>
+              <MenuItem value={10}>
+                {CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
+              </MenuItem>
+              <MenuItem value={20}>
+                {CHECKOUT_DELIVERY_TYPES[language].ukrPoshta}
+              </MenuItem>
+              <MenuItem value={30}>
+                {CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta}
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div className={style.subTitle}>
+          <span>{CHECKOUT_TITLES[language].payment}</span>
+        </div>
+
+        <div>
+          <FormControl variant='outlined' className={style.dataInput}>
+            <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>
+            <Select
+              value={paymentType}
+              onChange={selectHandlerPayment}
+              label='paymentType'
+            >
+              <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cart}</MenuItem>
+              <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cash}</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div className={style.addInfo}>
+          <span>
+            {CHECKOUT_ADDITIONAL_INFORMATION[language].additionalInfo}
+          </span>
+        </div>
+        <div className={style.btnWrapper}>
+          <Button className={style.btnCreateOrder} onClick={handleCreateOrder}>
+            {CHECKOUT_BUTTON[language].createOrder}
+          </Button>
+        </div>
       </div>
     </div>
   );

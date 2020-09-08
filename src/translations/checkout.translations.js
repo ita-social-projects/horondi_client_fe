@@ -39,12 +39,37 @@ export const CHECKOUT_DROP_LIST = {
   }
 };
 
+export const CHECKOUT_DELIVERY_TYPES = {
+  0: {
+    selfPickUP: 'Самовивіз',
+    novaPoshta: 'Нова пошта',
+    ukrPoshta: 'Укрпошта',
+    currierNovaPoshta: "Кур'єр Нової пошти"
+  },
+  1: {
+    selfPickUP: 'Self pick-up',
+    novaPoshta: 'Nova poshta',
+    ukrPoshta: 'Ukrposhta',
+    currierNovaPoshta: 'Currier from Nova poshta'
+  }
+};
+
 export const CHECKOUT_BUTTON = {
   0: {
     createOrder: 'Створити замовлення'
   },
   1: {
     createOrder: 'Create order'
+  }
+};
+export const CHECKOUT_PAYMENT = {
+  0: {
+    cart: 'Картою',
+    cash: 'Готівкою'
+  },
+  1: {
+    cart: 'Cart',
+    cash: 'Cash'
   }
 };
 

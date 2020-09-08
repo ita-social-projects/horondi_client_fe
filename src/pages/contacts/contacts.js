@@ -48,7 +48,7 @@ const ContactsPage = () => {
               >
                 <img
                   className={styles.mapImage}
-                  src={contact.images.medium || mapImg}
+                  src={contact.images[language].value.medium || mapImg}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
               </a>

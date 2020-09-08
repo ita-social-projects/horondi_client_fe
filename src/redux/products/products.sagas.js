@@ -18,10 +18,8 @@ import {
 
 export function* handleFilterLoad() {
   try {
-    yield put(setProductsLoading(true));
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
-    console.log(currency);
     const products = yield call(
       getItems,
       `query(
@@ -112,8 +110,8 @@ export function* handleFilterLoad() {
         patterns: state.filters.patternsFilter,
         price: state.filters.priceFilter,
         currency,
-        skip: state.currentPage * state.productsPerPage,
-        limit: state.productsPerPage,
+        skip: state.currentPage * state.countPerPage,
+        limit: state.countPerPage,
         rate: state.sortByRate || undefined,
         basePrice: state.sortByPrice || undefined,
         category: state.filters.categoryFilter,
@@ -125,11 +123,10 @@ export function* handleFilterLoad() {
 
     yield put(
       setPagesCount(
-        Math.ceil(products.data.getProducts.count / state.productsPerPage)
+        Math.ceil(products.data.getProducts.count / state.countPerPage)
       )
     );
     yield put(setAllProducts(products.data.getProducts.items));
-    yield put(setProductsLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
   }

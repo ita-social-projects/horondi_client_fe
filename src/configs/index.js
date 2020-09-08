@@ -138,6 +138,7 @@ export const CURRENCIES_LIST = [
 
 export const DEFAULT_CURRENCY = 0;
 export const DEFAULT_LANGUAGE = 0;
+export const DEFAULT_COUNT_PER_PAGE = 9;
 
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';

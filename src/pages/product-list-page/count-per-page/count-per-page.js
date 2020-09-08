@@ -1,24 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import styles from './count-per-page.styles';
-import { setProductsPerPage } from '../../../redux/products/products.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import useStyles from './count-per-page.styles';
+import { setCountPerPage } from '../../../redux/products/products.actions';
 import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
-
-const productsCount = sessionStorage.getItem('productsPerPage') || 9;
+import { setToLocalStorage } from '../../../services/local-storage.service';
 
 const CountPerPage = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setProductsPerPage(+productsCount));
-  }, [dispatch]);
+  const styles = useStyles();
 
-  const pickQuantity = (value) => {
-    sessionStorage.setItem('productsPerPage', value);
-    dispatch(setProductsPerPage(value));
+  const { countPerPage } = useSelector(({ Products: { countPerPage } }) => ({
+    countPerPage
+  }));
+
+  const pickQuantity = value => {
+    dispatch(setCountPerPage(value));
+    setToLocalStorage('countPerPage', value);
   };
-  const productsOnPage = ITEMS_PER_PAGE.map((item) => (
+
+  const productsOnPage = ITEMS_PER_PAGE.map(item => (
     <Button
+      className={countPerPage === item.value && styles.selectedButton}
       data-cy={item.title}
       title={item.title}
       key={item.value}

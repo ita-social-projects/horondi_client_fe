@@ -20,11 +20,11 @@ import { TOOLTIPS } from '../../../../translations/product-details.translations'
 const CommentsItem = ({ user, text, date, commentId }) => {
   const styles = useStyles();
 
-  const { updatingComment, language, userEmail } = useSelector(
-    ({ Products, Language, User }) => ({
-      updatingComment: Products.updatingComment,
+  const { updatingComment, language, userData } = useSelector(
+    ({ Comments, Language, User }) => ({
+      updatingComment: Comments.updatingComment,
       language: Language.language,
-      userEmail: User.email
+      userData: User.userData
     })
   );
 
@@ -72,7 +72,8 @@ const CommentsItem = ({ user, text, date, commentId }) => {
           </div>
           <div className={styles.icons}>
             <div className={styles.commentActions}>
-              {!isEditable && userEmail === user.email ? (
+              {!isEditable &&
+              (userData ? userData.email === user.email : false) ? (
                 <div>
                   <Tooltip title={TOOLTIPS[language].edit}>
                     <EditIcon

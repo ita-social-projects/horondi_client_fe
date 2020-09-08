@@ -30,7 +30,7 @@ export const initialState = {
   productLoading: false,
   loading: true,
   currentPage: 0,
-  productsPerPage: 9,
+  countPerPage: 9,
   sortByPrice: 0,
   sortByRate: 0,
   sortByPopularity: -1,
@@ -101,7 +101,7 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_PRODUCTS_PER_PAGE:
     return {
       ...state,
-      productsPerPage: action.payload
+      countPerPage: action.payload
     };
   case SET_PATTERNS_FILTER:
     return {

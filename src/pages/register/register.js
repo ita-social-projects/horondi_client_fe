@@ -16,7 +16,8 @@ import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
-import { registerUser } from '../../redux/user/user.actions';
+import { registerUser, resetState } from '../../redux/user/user.actions';
+import { setToLocalStorage } from '../../services/local-storage.service';
 
 function Register() {
   // VALIDATED && CONFIRMED
@@ -25,16 +26,14 @@ function Register() {
   const [emailValidated, setEmailValidated] = useState(false);
   const [passwordValidated, setPasswordValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
-  const [isConfirmedPassword, setIsConfirmedPassword] = useState(true);
   const [shouldValidate, setShouldValidate] = useState(false);
 
   // USER VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  const { firstName, lastName, confirmPassword, email, password } = user;
+  const { firstName, lastName, email, password } = user;
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
-  const [showConfirmedPassword, setShowConfirmedPassword] = useState(true);
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -51,19 +50,8 @@ function Register() {
   const handleRegister = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      delete user.confirmPassword;
+      setToLocalStorage('accessToken', null);
       dispatch(registerUser({ user, language }));
-    }
-  };
-
-  const checkIfConfirmed = (e, setConfirm) => {
-    const confirmedInput = e.target.value;
-    const inputName = e.target.name;
-    setUser({ ...user, [inputName]: confirmedInput });
-    if (confirmedInput === password) {
-      setConfirm(true);
-    } else {
-      setConfirm(false);
     }
   };
 
@@ -90,8 +78,7 @@ function Register() {
       firstNameValidated &&
       lastNameValidated &&
       emailValidated &&
-      passwordValidated &&
-      isConfirmedPassword
+      passwordValidated
     ) {
       setAllFieldsValidated(true);
     } else {
@@ -101,17 +88,12 @@ function Register() {
     firstNameValidated,
     lastNameValidated,
     emailValidated,
-    passwordValidated,
-    isConfirmedPassword
+    passwordValidated
   ]);
 
   useEffect(() => {
-    if (user.password === user.confirmPassword) {
-      setIsConfirmedPassword(true);
-    } else {
-      setIsConfirmedPassword(false);
-    }
-  }, [user.password, user.confirmPassword]);
+    dispatch(resetState());
+  }, [dispatch]);
 
   // STYLES
   const styles = useStyles();
@@ -165,24 +147,12 @@ function Register() {
       type: 'password',
       InputProps: endAdornment(showPassword, setShowPassword),
       regExp: formRegExp.password
-    },
-    confirmPasswordField: {
-      inputName: 'confirmPassword',
-      errorMessage: errorMessages[language].value.confirmPassword,
-      value: confirmPassword,
-      onChange: checkIfConfirmed,
-      validation: {
-        value: isConfirmedPassword,
-        setValid: setIsConfirmedPassword
-      },
-      type: 'password',
-      InputProps: endAdornment(showConfirmedPassword, setShowConfirmedPassword)
     }
   };
 
   const successWindow = (
     <form className={styles.registerForm}>
-      <div>
+      <div className={styles.successWrapper}>
         <img
           src={isLightTheme ? infoImg : infoLightImg}
           alt='info'

@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     right: '4%',
     bottom: '2%',
+    border: '3px solid white',
     '&:hover': {
       background: '#E4B200'
     }

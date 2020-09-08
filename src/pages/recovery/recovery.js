@@ -46,7 +46,7 @@ const Recovery = () => {
   const handleRecovery = async () => {
     setShouldValidate(true);
     if (emailValidated) {
-      dispatch(recoverUser({ email, language }));
+      dispatch(recoverUser({ email, language, redirect: true }));
     }
   };
 

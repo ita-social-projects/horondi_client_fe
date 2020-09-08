@@ -52,8 +52,7 @@ export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
-  confirmPassword: ''
+  password: ''
 };
 
 export const LOGIN_USER_DATA = {
@@ -61,34 +60,11 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
-export const errorMessages = [
-  {
-    lang: 'uk',
-    value: {
-      firstname: 'Поле повинно містити від 2 до 30 символів',
-      lastname: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
-      password: 'Від 6 до 30 символів з однією літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
-    }
-  },
-  {
-    lang: 'eng',
-    value: {
-      firstname: 'Field should contain from 2 to 30 characters',
-      lastname: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
-      password: 'From 6 to 30 characters with one letter and one digit',
-      confirmPassword: 'Passwords do not match'
-    }
-  }
-];
-
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
+  password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{6,30}$',
   phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
   country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
@@ -98,89 +74,6 @@ export const formRegExp = {
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
 };
 
-export const placeholders = {
-  firstName: [
-    {
-      lang: 'uk',
-      value: "Введіть Ім'я"
-    },
-    {
-      lang: 'eng',
-      value: 'Enter firstname'
-    }
-  ],
-  lastName: [
-    {
-      lang: 'uk',
-      value: 'Введіть прізвище'
-    },
-    {
-      lang: 'eng',
-      value: 'Enter lastname'
-    }
-  ],
-  email: [
-    {
-      lang: 'uk',
-      value: 'Введіть емейл'
-    },
-    {
-      lang: 'eng',
-      value: 'Enter email'
-    }
-  ],
-  password: [
-    {
-      lang: 'uk',
-      value: 'Введіть пароль'
-    },
-    {
-      lang: 'eng',
-      value: 'Enter password'
-    }
-  ],
-  confirmPassword: [
-    {
-      lang: 'uk',
-      value: 'Підтвердіть пароль'
-    },
-    {
-      lang: 'eng',
-      value: 'Confirm password'
-    }
-  ]
-};
-
-export const FORGOT_PASSWORD = [
-  {
-    lang: 'uk',
-    value: 'Забули пароль?'
-  },
-  {
-    lang: 'eng',
-    value: 'Forgot password?'
-  }
-];
-
-export const REGISTER_PROPOSAL = [
-  {
-    lang: 'uk',
-    value: 'Реєстрація'
-  },
-  {
-    lang: 'eng',
-    value: 'Registration'
-  }
-];
-
-export const CONFIRM_ERROR = [
-  {
-    value: 'Ой! Щось пішло не так.'
-  },
-  {
-    value: 'Oops! Something went wrong.'
-  }
-];
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
   month: 'numeric',

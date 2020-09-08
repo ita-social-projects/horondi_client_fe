@@ -2,7 +2,7 @@ import { DEFAULT_CURRENCY, DEFAULT_LANGUAGE } from '../configs';
 
 export const clearLocalStorage = () => {
   const horondi = {
-    accessToken: 'not null',
+    accessToken: null,
     _id: null,
     wishlist: [],
     language: DEFAULT_LANGUAGE,
@@ -19,6 +19,9 @@ if (!localStorage.getItem('horondi')) {
 
 export const getFromLocalStorage = (name) => {
   const localObject = JSON.parse(localStorage.getItem('horondi'));
+  if (!localObject) {
+    return null;
+  }
   return localObject[name];
 };
 

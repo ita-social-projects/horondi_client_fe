@@ -11,7 +11,13 @@ import {
   CHECK_IF_TOKEN_VALID,
   REGISTER_USER,
   USER_HAS_RECOVERED,
-  USER_HAS_REGISTERED
+  USER_HAS_REGISTERED,
+  PRESERVE_USER,
+  SET_USER_IS_CHECKED,
+  UPDATE_USER,
+  PASWORD_IS_RESET,
+  SEND_CONFIRMATION_EMAIL,
+  CONFIRMATION_EMAIL_SENT
 } from './user.types';
 
 const setUser = (user) => ({
@@ -77,6 +83,35 @@ const userHasRegistered = (payload) => ({
   payload
 });
 
+const preserveUser = () => ({
+  type: PRESERVE_USER
+});
+
+const setUserIsChecked = (payload) => ({
+  type: SET_USER_IS_CHECKED,
+  payload
+});
+
+const updateUser = (payload) => ({
+  type: UPDATE_USER,
+  payload
+});
+
+const setPasswordIsReset = (payload) => ({
+  type: PASWORD_IS_RESET,
+  payload
+});
+
+const sendConfirmationEmail = (payload) => ({
+  type: SEND_CONFIRMATION_EMAIL,
+  payload
+});
+
+const setConfirmationEmailStatus = (payload) => ({
+  type: CONFIRMATION_EMAIL_SENT,
+  payload
+});
+
 export {
   loginUser,
   setUser,
@@ -90,5 +125,11 @@ export {
   checkIfTokenValid,
   registerUser,
   userHasRecovered,
-  userHasRegistered
+  userHasRegistered,
+  preserveUser,
+  setUserIsChecked,
+  updateUser,
+  setPasswordIsReset,
+  sendConfirmationEmail,
+  setConfirmationEmailStatus
 };

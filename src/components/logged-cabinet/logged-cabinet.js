@@ -29,6 +29,7 @@ const LoggedCabinet = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    setToLocalStorage('accessToken', null);
   };
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
   const styles = useStyles();

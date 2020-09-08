@@ -5,7 +5,10 @@ import {
   SET_USER_LOADING,
   STATE_RESET,
   USER_HAS_REGISTERED,
-  USER_HAS_RECOVERED
+  USER_HAS_RECOVERED,
+  SET_USER_IS_CHECKED,
+  PASWORD_IS_RESET,
+  CONFIRMATION_EMAIL_SENT
 } from './user.types';
 
 export const initialState = {
@@ -13,7 +16,10 @@ export const initialState = {
   error: null,
   userLoading: false,
   userRecovered: false,
-  userRegistered: false
+  userRegistered: false,
+  userIsChecked: false,
+  passwordReset: false,
+  confirmationEmailSent: false
 };
 
 const userReducer = (state = initialState, action = {}) => {
@@ -33,7 +39,8 @@ const userReducer = (state = initialState, action = {}) => {
     };
   case LOGOUT_USER:
     return {
-      ...initialState
+      ...initialState,
+      userIsChecked: state.userIsChecked
     };
   case SET_USER_LOADING:
     return {
@@ -42,12 +49,9 @@ const userReducer = (state = initialState, action = {}) => {
     };
   case STATE_RESET:
     return {
-      ...state,
-      error: initialState.error,
-      userLoading: initialState.userLoading,
-      userRecovered: initialState.userRecovered,
-      passwordReset: initialState.passwordReset,
-      userRegistered: initialState.userRegistered
+      ...initialState,
+      userData: state.userData,
+      userIsChecked: state.userIsChecked
     };
   case USER_HAS_REGISTERED:
     return {
@@ -58,6 +62,21 @@ const userReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       userRecovered: action.payload
+    };
+  case PASWORD_IS_RESET:
+    return {
+      ...state,
+      passwordReset: action.payload
+    };
+  case SET_USER_IS_CHECKED:
+    return {
+      ...state,
+      userIsChecked: action.payload
+    };
+  case CONFIRMATION_EMAIL_SENT:
+    return {
+      ...state,
+      confirmationEmailSent: action.payload
     };
   default:
     return state;

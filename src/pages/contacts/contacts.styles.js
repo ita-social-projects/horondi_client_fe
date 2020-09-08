@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -78,7 +78,7 @@ export const useStyles = makeStyles((theme) => ({
   contactAddress: {
     '& > p': {
       margin: '0',
-      fontSize: '0.875rem',
+      fontSize: '1em',
       lineHeight: '1.43'
     }
   },

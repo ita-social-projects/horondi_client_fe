@@ -1,4 +1,8 @@
-import { DEFAULT_CURRENCY, DEFAULT_LANGUAGE } from '../configs';
+import {
+  DEFAULT_CURRENCY,
+  DEFAULT_LANGUAGE,
+  DEFAULT_COUNT_PER_PAGE
+} from '../configs';
 
 export const clearLocalStorage = () => {
   const horondi = {
@@ -9,7 +13,7 @@ export const clearLocalStorage = () => {
     currency: DEFAULT_CURRENCY,
     cart: [],
     theme: 'light',
-    countPerPage: 9
+    countPerPage: DEFAULT_COUNT_PER_PAGE
   };
   localStorage.setItem('horondi', JSON.stringify(horondi));
 };

@@ -122,16 +122,10 @@ const ProductListPage = ({ category, model }) => {
   }
 
   const categoryText = category.name[language].value.toUpperCase();
-  const itemsToShow =
-    products.length > 0
-      ? products.map((product, index) => (
-        <ProductListItem
-          key={index}
-          product={product}
-          category={categoryText}
-        />
-      ))
-      : null;
+  const itemsToShow = products.map((product, index) => (
+    <ProductListItem key={index} product={product} category={categoryText} />
+  ));
+
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3'>
@@ -175,17 +169,6 @@ const ProductListPage = ({ category, model }) => {
       </div>
     </div>
   );
-};
-ProductListPage.propTypes = {
-  category: PropTypes.shape({
-    _id: PropTypes.string,
-    isMain: PropTypes.bool,
-    name: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string
-      })
-    )
-  }).isRequired
 };
 
 export default ProductListPage;

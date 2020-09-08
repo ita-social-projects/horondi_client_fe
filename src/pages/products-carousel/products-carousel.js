@@ -73,7 +73,9 @@ const ProductsCorousel = ({ category }) => {
               onClick={() => handleClick(model)}
               to={`/${category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
             >
-              <p className={styles.caption}>{model.name[language].value}</p>
+              <p data-cy='model-name' className={styles.caption}>
+                {model.name[language].value}
+              </p>
             </Link>
           </div>
         ))}

@@ -19,7 +19,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   contactsFields: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: '40px'
   },
   contactField: {
     display: 'flex',
@@ -50,5 +51,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   dataInput: {
     width: '350px'
+  },
+  deliveryTypeSelected: {
+    margin: '0 auto',
+    border: '1px solid black',
+    height: '300px',
+    width: '800px',
+    borderRadius: '4px'
   }
 }));

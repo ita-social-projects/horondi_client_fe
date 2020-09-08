@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Delivery from '../delivery';
 
 import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
 import {
@@ -14,27 +15,23 @@ import {
   CHECKOUT_BUTTON,
   CHECKOUT_PAYMENT,
   CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_DELIVERY_TYPES,
   errorMessages
 } from '../../../translations/checkout.translations';
 import { useStyles } from '../checkout.styles';
 
 export const OrderForm = () => {
-  // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
   const [emailValidated, setEmailValidated] = useState(false);
   const [phoneValidated, setPhoneValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [deliveryType, setDeliveryType] = useState('');
+
   const [paymentType, setPaymentType] = useState('');
 
-  // USER VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
   const { firstName, lastName, email, phoneNumber } = user;
 
-  // HANDLERS
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
     const inputName = event.target.name;
@@ -47,21 +44,15 @@ export const OrderForm = () => {
     allFieldsValidated && console.log('YRA!');
   };
 
-  const selectHandlerDelivery = (event) => {
-    setDeliveryType(event.target.value);
-  };
-
   const selectHandlerPayment = (event) => {
     setPaymentType(event.target.value);
   };
 
-  // HOOKS
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
 
   useEffect(() => {
-    // VALID FIELDS
     if (firstNameValidated && emailValidated && lastName && phoneNumber) {
       setAllFieldsValidated(true);
     } else {
@@ -69,7 +60,6 @@ export const OrderForm = () => {
     }
   }, [firstNameValidated, emailValidated, lastName, phoneNumber]);
 
-  // STYLES
   const style = useStyles();
 
   const contactsNames = {
@@ -209,37 +199,10 @@ export const OrderForm = () => {
             </div>
           </div>
         </div>
-        <div className={style.subTitle}>
-          <span>{CHECKOUT_TITLES[language].delivery}</span>
-        </div>
-
-        <div className={style.deliveryType}>
-          <FormControl variant='outlined' className={style.dataInput}>
-            <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>
-            <Select
-              value={deliveryType}
-              onChange={selectHandlerDelivery}
-              label='deliveryType'
-            >
-              <MenuItem value={10}>
-                {CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
-              </MenuItem>
-              <MenuItem value={10}>
-                {CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
-              </MenuItem>
-              <MenuItem value={20}>
-                {CHECKOUT_DELIVERY_TYPES[language].ukrPoshta}
-              </MenuItem>
-              <MenuItem value={30}>
-                {CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta}
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </div>
+        <Delivery />
         <div className={style.subTitle}>
           <span>{CHECKOUT_TITLES[language].payment}</span>
         </div>
-
         <div>
           <FormControl variant='outlined' className={style.dataInput}>
             <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>

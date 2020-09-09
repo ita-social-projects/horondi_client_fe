@@ -9,14 +9,15 @@ export const useStyles = makeStyles((theme) => ({
     '& *': {
       color: `inherit !important`
     },
+    '& p, & ul, & li': {
+      fontSize: '1rem',
+      lineHeight: '2rem'
+    },
     '& > h1': {
       textAlign: 'center'
     },
     '& > h2': {
       textAlign: 'left'
-    },
-    '& > p': {
-      lineHeight: 'initial'
     }
   }
 }));

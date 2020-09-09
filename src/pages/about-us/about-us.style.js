@@ -30,19 +30,10 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: 'black',
         zIndex: -1
       }
+    },
+    '& img': {
+      width: 150,
+      height: 'auto'
     }
-
-    /* '& > p:last-child': {
-      display: 'flex',
-      '& > img': {
-        flexBasis: '25%',
-        float: 'none',
-        transition: 'transform .3s ease',
-        cursor: 'pointer',
-        '&:hover': {
-          transform: 'scale(1.5)'
-        }
-      }
-    } */
   }
 }));

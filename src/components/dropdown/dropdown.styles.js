@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   rootItem: {
     '& div': {
       padding: '0 !important'
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     outline: 'none',
     border: 'none',
+    '@media (max-width:768px)': {
+      width: '33px'
+    },
     '&:hover': {
       backgroundColor: 'white',
       color: 'black'
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
       fontWeight: 'normal',
-      width: '11rem !important',
+      width: '1rem !important',
       fontSize: '22px'
     }
   }

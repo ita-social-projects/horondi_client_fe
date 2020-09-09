@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   items: {
     height: '25px !important',
     lineHeight: '25px !important',
@@ -12,6 +12,14 @@ const useStyles = makeStyles((theme) => ({
       fontStyle: 'normal',
       fontWeight: 'normal',
       fontSize: '12px'
+    }
+  },
+
+  selectedButton: {
+    backgroundColor: theme.palette.card.selectedButton.backgroundColor,
+    color: theme.palette.card.selectedButton.color,
+    '&:hover': {
+      backgroundColor: theme.palette.card.selectedButton.backgroundColor
     }
   }
 }));

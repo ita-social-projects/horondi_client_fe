@@ -1,26 +1,26 @@
-hr{
+#fullText hr{
     clear: both;
 }
-h3{
+#fullText h3{
     font-size: 1.2rem;
 }
-h2{
+#fullText h2{
     text-align: center;
 }
-iframe{
+#fullText iframe{
     width: 100%;
     height: 600px
 }
-img {
+#fullText img {
     width: 100px;
     float: left;
     max-height: 12rem;
     margin: 1rem;
 }
-li{
+#fullText li{
     font-size: 1.2rem;
 }
-p{
+#fullText p{
     font-size: 1.2rem;
     line-height: 2.5rem;
 }

@@ -5,6 +5,7 @@
 HORONDI project is an e-commerce online shop that provides hand-made backpacks, bags, purses and other accessories.
 
 [![GitHub issues](https://img.shields.io/github/issues/ita-social-projects/horondi_client_fe)](https://github.com/ita-social-projects/horondi_client_fe/issues)
+[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/horondi_client_fe?style=flat-square)](https://github.com/ita-social-projects/Horondi_client_fe/pulls)
 [![GitHub license](https://img.shields.io/github/license/ita-social-projects/horondi_client_fe)](https://github.com/ita-social-projects/horondi_client_fe/blob/master/LICENSE)
 
 ---
@@ -174,7 +175,6 @@ Checks:
 
 1. Use `data-cy` as selector
 
-
 ### Generator
 
 Command `npm run generate` is used to run [graphql code generator](https://graphql-code-generator.com)
@@ -187,9 +187,7 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 4. you should run `npm run generate` every time new unions or interfaces are created
 
-
 ---
-
 
 ## Contributing
 
@@ -266,5 +264,6 @@ Reach out to me at one of the following places!
 ---
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © <a href="https://softserve.academy/" target="_blank"> SoftServe IT Academy</a>.

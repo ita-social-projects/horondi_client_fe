@@ -31,7 +31,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
   const { name, images } = user;
 
   const [isEditable, setEditable] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [isModalShown, toggleModal] = useState(false);
 
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
   const dateToShow = new Date(parseInt(date));
@@ -41,11 +41,11 @@ const CommentsItem = ({ user, text, date, commentId }) => {
   );
 
   const handleOpen = () => {
-    setModal(true);
+    toggleModal(true);
   };
 
   const handleClose = () => {
-    setModal(false);
+    toggleModal(false);
   };
 
   if (updatingComment === commentId) {
@@ -107,7 +107,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
       </div>
       <CommentDialog
         handleClose={handleClose}
-        modal={modal}
+        isModalShown={isModalShown}
         commentId={commentId}
       />
     </div>

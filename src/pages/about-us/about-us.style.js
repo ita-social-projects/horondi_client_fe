@@ -33,7 +33,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& img': {
       width: 150,
-      height: 'auto'
+      height: 'auto',
+      float: ' left',
+      margin: '0 20px 20px 0'
     }
   }
 }));

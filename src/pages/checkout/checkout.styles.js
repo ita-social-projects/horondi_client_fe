@@ -52,6 +52,9 @@ export const useStyles = makeStyles((theme) => ({
   dataInput: {
     width: '350px'
   },
+  dataInputCurrier: {
+    width: '250px'
+  },
   deliveryTypeSelected: {
     margin: '0 auto',
     border: '1px solid black',

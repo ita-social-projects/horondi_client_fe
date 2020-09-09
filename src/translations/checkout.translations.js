@@ -18,24 +18,34 @@ export const CHECKOUT_TEXT_FIELDS = {
     firstName: 'Ім`я',
     lastName: 'Прізвище',
     email: 'email',
-    contactPhoneNumber: 'Номер телефону'
+    contactPhoneNumber: 'Номер телефону',
+    city: 'Місто',
+    building: 'Будинок',
+    street: 'Вулиця',
+    apartment: 'Квартира'
   },
   1: {
     firstName: 'First name',
     lastName: 'last name',
     email: 'email',
-    contactPhoneNumber: 'Contact phone number'
+    contactPhoneNumber: 'Contact phone number',
+    city: 'City',
+    building: 'Building',
+    street: 'Street',
+    apartment: 'Apartment'
   }
 };
 
 export const CHECKOUT_DROP_LIST = {
   0: {
     deliveryType: 'Тип доставки',
-    paymentMethod: 'Метод оплати'
+    paymentMethod: 'Метод оплати',
+    department: 'Відділення'
   },
   1: {
     deliveryType: 'Delivery type',
-    paymentMethod: 'Payment method'
+    paymentMethod: 'Payment method',
+    department: 'Department'
   }
 };
 

@@ -30,6 +30,12 @@ p {
     line-height: 33px !important;
 }
 
+@media (max-width:768px) {
+  .MuiMenuItem-root{
+  min-height:0 !important
+  }
+}
+
 .MuiList-padding {
     padding: 0 !important;
 }
@@ -38,4 +44,7 @@ p {
     height: 25px;
     width: 40px;
     font-size: 14px !important;
+}
+.MuiListItem-gutters {
+padding:0 !important
 }

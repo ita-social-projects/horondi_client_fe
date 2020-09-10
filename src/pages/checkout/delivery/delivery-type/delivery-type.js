@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import { useSelector } from 'react-redux';
-import { TextField } from '@material-ui/core';
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
+} from '@material-ui/core';
 import { useStyles } from '../../checkout.styles';
 import {
   CHECKOUT_DELIVERY_TYPES,
   CHECKOUT_DROP_LIST,
   CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
-import ContactsPage from '../../../contacts';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-  // const [deliveryType, setDeliveryType] = useState('');
+
   const [department, setDepartment] = useState('');
   const [region, setRegion] = useState('');
+  const [city, setCity] = useState('');
 
   const selectHandlerDepartment = (event) => {
     setDepartment(event.target.value);
@@ -28,10 +30,6 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const selectHandlerRegion = (event) => {
     setRegion(event.target.value);
   };
-
-  const departments = [1, 2, 3];
-  const regions = ['Lviv', 'Kyiv', 'Odesa'];
-  const [city, setCity] = useState('');
 
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
@@ -41,6 +39,9 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     setCity(event.target.value);
   };
 
+  const departments = [1, 2, 3];
+  const regions = ['Lviv', 'Kyiv', 'Odesa'];
+  const cities = ['Lviv', 'Brody'];
   const deliveries = [
     CHECKOUT_DELIVERY_TYPES[language].selfPickUP,
     CHECKOUT_DELIVERY_TYPES[language].novaPoshta,
@@ -48,7 +49,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
 
-  const novaPoshta = () => (
+  const novaPoshta = (
     <div className={style.contactField}>
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
@@ -67,7 +68,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const ukrPoshta = () => (
+  const ukrPoshta = (
     <div className={style.contactField}>
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>Region</InputLabel>
@@ -96,7 +97,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const currier = () => (
+  const currier = (
     <div className={style.contactField}>
       <TextField
         required
@@ -119,16 +120,14 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const cities = ['Lviv', 'Brody'];
-
   const deliverySwitcher = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return novaPoshta();
+        return novaPoshta;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return ukrPoshta();
+        return ukrPoshta;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return currier();
+        return currier;
       default:
         console.log('default!');
     }
@@ -153,7 +152,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
         </FormControl>
         {deliveryType &&
           (deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP ? (
-            <ContactsPage />
+            <div>ТУТ МОГЛА БИ БУТИ ВАША РЕКЛАМА</div>
           ) : (
             <FormControl variant='outlined' className={style.dataInput}>
               <InputLabel>{CHECKOUT_TEXT_FIELDS[language].city}</InputLabel>

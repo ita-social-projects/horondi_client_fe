@@ -205,7 +205,9 @@ export const OrderForm = () => {
         </div>
         <div>
           <FormControl variant='outlined' className={style.dataInput}>
-            <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>
+            <InputLabel>
+              {CHECKOUT_DROP_LIST[language].paymentMethod}
+            </InputLabel>
             <Select
               value={paymentType}
               onChange={selectHandlerPayment}
@@ -215,6 +217,15 @@ export const OrderForm = () => {
               <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cash}</MenuItem>
             </Select>
           </FormControl>
+        </div>
+        <div className={style.comments}>
+          <TextField
+            fullWidth
+            multiline
+            rows={3}
+            variant='outlined'
+            label={CHECKOUT_TEXT_FIELDS[language].orderComment}
+          />
         </div>
         <div className={style.addInfo}>
           <span>

@@ -55,6 +55,9 @@ export const useStyles = makeStyles((theme) => ({
   dataInputCurrier: {
     width: '250px'
   },
+  comments: {
+    marginTop: '20px'
+  },
   deliveryTypeSelected: {
     margin: '0 auto',
     border: '1px solid black',

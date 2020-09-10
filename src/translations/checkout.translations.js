@@ -22,7 +22,8 @@ export const CHECKOUT_TEXT_FIELDS = {
     city: 'Місто',
     building: 'Будинок',
     street: 'Вулиця',
-    apartment: 'Квартира'
+    apartment: 'Квартира',
+    orderComment: 'Коментар до замовлення...'
   },
   1: {
     firstName: 'First name',
@@ -32,7 +33,8 @@ export const CHECKOUT_TEXT_FIELDS = {
     city: 'City',
     building: 'Building',
     street: 'Street',
-    apartment: 'Apartment'
+    apartment: 'Apartment',
+    orderComment: 'Order comment...'
   }
 };
 

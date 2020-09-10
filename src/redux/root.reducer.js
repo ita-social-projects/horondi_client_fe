@@ -13,6 +13,7 @@ import Wishlist from './wishlist/wishlist.reducer';
 import Cart from './cart/cart.reducer';
 import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
+import Checkout from './checkout/checkout.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -28,7 +29,8 @@ const rootReducer = (history) =>
     Cart,
     Contacts,
     Model,
-    Currency
+    Currency,
+    Checkout
   });
 
 export default rootReducer;

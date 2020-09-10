@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   TextField,
   FormControl,
@@ -13,6 +14,10 @@ import {
   CHECKOUT_DROP_LIST,
   CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
+import {
+  getNovaPoshtaCities,
+  setNovaPoshtaCities
+} from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
@@ -41,30 +46,46 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
 
   const departments = [1, 2, 3];
   const regions = ['Lviv', 'Kyiv', 'Odesa'];
-  const cities = ['Lviv', 'Brody'];
+
   const deliveries = [
     CHECKOUT_DELIVERY_TYPES[language].selfPickUP,
     CHECKOUT_DELIVERY_TYPES[language].novaPoshta,
     CHECKOUT_DELIVERY_TYPES[language].ukrPoshta,
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
+  getNovaPoshtaCities('OLOLO!');
+  const cities = [];
 
   const novaPoshta = (
     <div className={style.contactField}>
-      <FormControl variant='outlined' className={style.dataInput}>
-        <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
-        <Select
-          value={department}
-          onChange={selectHandlerDepartment}
-          label='department'
-        >
-          {departments.map((department) => (
-            <MenuItem key={department} value={department}>
-              {department}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      {/* <FormControl variant='outlined' className={style.dataInput}> */}
+      {/*  <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel> */}
+      {/*  <Select */}
+      {/*    value={department} */}
+      {/*    onChange={selectHandlerDepartment} */}
+      {/*    label='department' */}
+      {/*  > */}
+      {/*    {departments.map((department) => ( */}
+      {/*      <MenuItem key={department} value={department}> */}
+      {/*        {department} */}
+      {/*      </MenuItem> */}
+      {/*    ))} */}
+      {/*  </Select> */}
+      {/* </FormControl> */}
+      <Autocomplete
+        options={cities}
+        getOptionLabel={(option) => option.label}
+        style={{ width: 300 }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            onChange={(event) => getNovaPoshtaCities(event.target.value)}
+            // onChange={(event)=>console.log(event.target.value)}
+            label='олол'
+            variant='outlined'
+          />
+        )}
+      />
     </div>
   );
 

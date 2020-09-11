@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   TextField,
@@ -14,10 +14,7 @@ import {
   CHECKOUT_DROP_LIST,
   CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
-import {
-  getNovaPoshtaCities,
-  setNovaPoshtaCities
-} from '../../../../redux/checkout/checkout.actions';
+import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
@@ -28,6 +25,12 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const [department, setDepartment] = useState('');
   const [region, setRegion] = useState('');
   const [city, setCity] = useState('');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNovaPoshtaCities(city));
+  }, [dispatch, city]);
 
   const selectHandlerDepartment = (event) => {
     setDepartment(event.target.value);
@@ -44,7 +47,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     setCity(event.target.value);
   };
 
-  const departments = [1, 2, 3];
+  const departments = [];
   const regions = ['Lviv', 'Kyiv', 'Odesa'];
 
   const deliveries = [
@@ -53,39 +56,28 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].ukrPoshta,
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
-  getNovaPoshtaCities('OLOLO!');
-  const cities = [];
+
+  let { cities } = useSelector(({ Checkout }) => ({
+    cities: Checkout.cities
+  }));
+  cities = cities.map((citi) => citi.Description);
 
   const novaPoshta = (
     <div className={style.contactField}>
-      {/* <FormControl variant='outlined' className={style.dataInput}> */}
-      {/*  <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel> */}
-      {/*  <Select */}
-      {/*    value={department} */}
-      {/*    onChange={selectHandlerDepartment} */}
-      {/*    label='department' */}
-      {/*  > */}
-      {/*    {departments.map((department) => ( */}
-      {/*      <MenuItem key={department} value={department}> */}
-      {/*        {department} */}
-      {/*      </MenuItem> */}
-      {/*    ))} */}
-      {/*  </Select> */}
-      {/* </FormControl> */}
-      <Autocomplete
-        options={cities}
-        getOptionLabel={(option) => option.label}
-        style={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            onChange={(event) => getNovaPoshtaCities(event.target.value)}
-            // onChange={(event)=>console.log(event.target.value)}
-            label='олол'
-            variant='outlined'
-          />
-        )}
-      />
+      <FormControl variant='outlined' className={style.dataInput}>
+        <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
+        <Select
+          value={department}
+          onChange={selectHandlerDepartment}
+          label='department'
+        >
+          {departments.map((department) => (
+            <MenuItem key={department} value={department}>
+              {department}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 
@@ -150,7 +142,6 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return currier;
       default:
-        console.log('default!');
     }
   };
 
@@ -175,16 +166,29 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
           (deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP ? (
             <div>ТУТ МОГЛА БИ БУТИ ВАША РЕКЛАМА</div>
           ) : (
-            <FormControl variant='outlined' className={style.dataInput}>
-              <InputLabel>{CHECKOUT_TEXT_FIELDS[language].city}</InputLabel>
-              <Select value={city} onChange={selectHandlerCity} label='city'>
-                {cities.map((city) => (
-                  <MenuItem key={city} value={city}>
-                    {city}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            // <FormControl variant='outlined' className={style.dataInput}>
+            //   <InputLabel>{CHECKOUT_TEXT_FIELDS[language].city}</InputLabel>
+            //   <Select value={city} onChange={selectHandlerCity} label='city'>
+            //     {cities.map((city) => (
+            //       <MenuItem key={city} value={city}>
+            //         {city}
+            //       </MenuItem>
+            //     ))}
+            //   </Select>
+            // </FormControl>
+            <Autocomplete
+              options={cities}
+              getOptionLabel={(option) => option}
+              className={style.dataInput}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  onChange={(event) => selectHandlerCity(event)}
+                  label='Місто'
+                  variant='outlined'
+                />
+              )}
+            />
           ))}
       </div>
       {deliverySwitcher()}

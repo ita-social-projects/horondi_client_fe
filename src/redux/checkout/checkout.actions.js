@@ -1,4 +1,10 @@
-import { SET_NOVAPOSHTA_CITIES, GET_NOVAPOSHTA_CITIES } from './checkout.types';
+import {
+  SET_NOVAPOSHTA_CITIES,
+  GET_NOVAPOSHTA_CITIES,
+  GET_NOVAPOSHTA_WAREHOUSES,
+  SET_NOVAPOSHTA_WAREHOUSES,
+  SET_LOADING
+} from './checkout.types';
 
 const setNovaPoshtaCities = (cities) => ({
   type: SET_NOVAPOSHTA_CITIES,
@@ -10,4 +16,25 @@ const getNovaPoshtaCities = (inputValue) => ({
   payload: inputValue
 });
 
-export { getNovaPoshtaCities, setNovaPoshtaCities };
+const setNovaPoshtaWarehouse = (warehouses) => ({
+  type: SET_NOVAPOSHTA_WAREHOUSES,
+  payload: warehouses
+});
+
+const getNovaPoshtaWarehouse = (inputValue) => ({
+  type: GET_NOVAPOSHTA_WAREHOUSES,
+  payload: inputValue
+});
+
+const setLoading = (loading) => ({
+  type: SET_LOADING,
+  payload: loading
+});
+
+export {
+  getNovaPoshtaCities,
+  setNovaPoshtaCities,
+  getNovaPoshtaWarehouse,
+  setNovaPoshtaWarehouse,
+  setLoading
+};

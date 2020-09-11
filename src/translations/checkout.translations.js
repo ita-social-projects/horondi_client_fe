@@ -15,9 +15,9 @@ export const CHECKOUT_TITLES = {
 
 export const CHECKOUT_TEXT_FIELDS = {
   0: {
-    firstName: 'Ім`я',
+    firstName: "Ім'я",
     lastName: 'Прізвище',
-    email: 'email',
+    email: 'Email',
     contactPhoneNumber: 'Номер телефону',
     city: 'Місто',
     building: 'Будинок',
@@ -27,8 +27,8 @@ export const CHECKOUT_TEXT_FIELDS = {
   },
   1: {
     firstName: 'First name',
-    lastName: 'last name',
-    email: 'email',
+    lastName: 'Last name',
+    email: 'Email',
     contactPhoneNumber: 'Contact phone number',
     city: 'City',
     building: 'Building',

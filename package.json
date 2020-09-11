@@ -7,6 +7,7 @@
     "url": "https://github.com/horondi/horondi_client_fe.git"
   },
   "dependencies": {
+    "@apollo/client": "^3.1.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
@@ -19,10 +20,14 @@
     "@testing-library/user-event": "^7.2.1",
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
+    "apollo-link": "^1.2.14",
+    "apollo-link-http": "^1.5.17",
+    "apollo-upload-client": "^14.1.1",
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
     "cors": "^2.8.5",
     "graphql": "^15.1.0",
+    "graphql-upload": "^11.0.0",
     "history": "^4.10.1",
     "html-react-parser": "^0.13.0",
     "prop-types": "^15.7.2",

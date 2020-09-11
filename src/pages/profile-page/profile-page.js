@@ -36,6 +36,8 @@ const ProfilePage = () => {
 
   const [user, setUser] = useState(userData);
   const [isEdited, setIsEdited] = useState(userData);
+  const [userImageUrl, setUserImageUrl] = useState(null);
+  const [upload, setUpload] = useState(null);
 
   const handleChange = (e, innerProp) => {
     const inputName = e.target.name;
@@ -53,12 +55,10 @@ const ProfilePage = () => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setUser({
-          ...user,
-          images: { ...user.images, thumbnail: e.target.result }
-        });
+        setUserImageUrl(e.target.result);
       };
       reader.readAsDataURL(e.target.files[0]);
+      setUpload(e.target.files[0]);
     }
   };
 
@@ -67,7 +67,8 @@ const ProfilePage = () => {
   };
 
   const handleSaveUser = () => {
-    dispatch(updateUser({ user, id: user._id }));
+    delete user.token;
+    dispatch(updateUser({ user, id: user._id, upload }));
   };
 
   const handleImageError = (e) => {
@@ -99,6 +100,9 @@ const ProfilePage = () => {
     if (userData) {
       setUser(userData);
     }
+    if (userData.images && userData.images.thumbnail) {
+      setUserImageUrl(userData.images.thumbnail);
+    }
   }, [userData]);
 
   const { images } = user;
@@ -114,13 +118,7 @@ const ProfilePage = () => {
               <div className={classes.imageAndName}>
                 <div className={classes.imageContainer}>
                   <img
-                    src={
-                      images
-                        ? images.thumbnail
-                          ? images.thumbnail
-                          : ProfilePicture
-                        : ProfilePicture
-                    }
+                    src={userImageUrl || ProfilePicture}
                     alt='profile-logo'
                     className={classes.userImage}
                     onError={handleImageError}
@@ -267,7 +265,7 @@ const ProfilePage = () => {
                   className={classes.userInput}
                 />
               </div>
-              {isEdited && (
+              {!(isEdited || upload) ? null : (
                 <Button className={classes.saveBtn} onClick={handleSaveUser}>
                   {PROFILE_DATA[language].saveBtnTitle}
                 </Button>

@@ -1,9 +1,11 @@
-import ApolloClient, { gql } from 'apollo-boost';
+import { ApolloClient, gql } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import fetch from 'unfetch';
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher
 } from 'apollo-cache-inmemory';
+import { createUploadLink } from 'apollo-upload-client/public/index';
 import { getFromLocalStorage } from '../services/local-storage.service';
 
 const introspectionResult = require('src/../../fragmentTypes.json');
@@ -11,23 +13,29 @@ const introspectionResult = require('src/../../fragmentTypes.json');
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: introspectionResult
 });
+
 export const REACT_APP_API_URL =
   window.env && window.env.REACT_APP_API_URL
     ? window.env.REACT_APP_API_URL
     : process.env.REACT_APP_API_URL;
 
-const token = getFromLocalStorage('accessToken');
+const authLink = setContext((_, { headers }) => {
+  const token = getFromLocalStorage('accessToken');
+  return {
+    headers: {
+      ...headers,
+      token: token || ''
+    }
+  };
+});
 
-const client = new ApolloClient({
-  uri: REACT_APP_API_URL,
+export const client = new ApolloClient({
   fetch,
+  link: authLink.concat(createUploadLink({ uri: REACT_APP_API_URL })),
   cache: new InMemoryCache({
     addTypename: false,
     fragmentMatcher
-  }),
-  headers: {
-    token
-  }
+  })
 });
 
 const getItems = (query, variables = {}) =>

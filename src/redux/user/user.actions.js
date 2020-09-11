@@ -17,7 +17,8 @@ import {
   UPDATE_USER,
   PASWORD_IS_RESET,
   SEND_CONFIRMATION_EMAIL,
-  CONFIRMATION_EMAIL_SENT
+  CONFIRMATION_EMAIL_SENT,
+  SET_USER_IS_CONFIRMED
 } from './user.types';
 
 const setUser = (user) => ({
@@ -112,6 +113,11 @@ const setConfirmationEmailStatus = (payload) => ({
   payload
 });
 
+const setUserIsConfirmed = (payload) => ({
+  type: SET_USER_IS_CONFIRMED,
+  payload
+});
+
 export {
   loginUser,
   setUser,
@@ -131,5 +137,6 @@ export {
   updateUser,
   setPasswordIsReset,
   sendConfirmationEmail,
-  setConfirmationEmailStatus
+  setConfirmationEmailStatus,
+  setUserIsConfirmed
 };

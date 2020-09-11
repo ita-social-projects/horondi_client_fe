@@ -9,7 +9,8 @@ import {
   userHasRegistered,
   setUserIsChecked,
   setPasswordIsReset,
-  setConfirmationEmailStatus
+  setConfirmationEmailStatus,
+  setUserIsConfirmed
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -85,39 +86,17 @@ export function* handleUserConfirm({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    const user = yield call(
+    yield call(
       setItems,
       ` 
   mutation confirmUser($token: String!){
-    confirmUser(token: $token) {
-      purchasedProducts
-        orders
-        _id
-        email
-        firstName
-        lastName
-        phoneNumber
-        confirmed
-        images {
-          thumbnail
-        }
-        address {
-          country
-          city
-          street
-          buildingNumber
-          appartment
-          region
-          zipcode
-        }
-        confirmed
-    }
+    confirmUserEmail(token: $token)
   }
   `,
       payload
     );
     yield put(setUserLoading(false));
-    yield put(setUser(user.data.confirmUser));
+    yield put(setUserIsConfirmed(true));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }
@@ -274,8 +253,8 @@ export function* handleUpdateUser({ payload }) {
     const user = yield call(
       setItems,
       `
-     mutation updateUser($user: UserInput!, $id: ID!){
-      updateUserById(user: $user, id: $id) {
+     mutation updateUser($user: UserInput!, $id: ID!, $upload: Upload){
+      updateUserById(user: $user, id: $id, upload: $upload) {
         purchasedProducts
         orders
         _id
@@ -317,7 +296,7 @@ export function* handleSendConfirmation({ payload }) {
       setItems,
       `
      mutation sendConfirmation($email: String!, $language: Int!){
-      sendConfirmationLetter(email: $email, language: $language)
+      sendEmailConfirmation(email: $email, language: $language)
     }
   `,
       payload

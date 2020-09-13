@@ -1,7 +1,6 @@
 import {
   SET_USER,
   SET_USER_ERROR,
-  LOGOUT_USER,
   SET_USER_LOADING,
   STATE_RESET,
   USER_HAS_REGISTERED,
@@ -37,11 +36,6 @@ const userReducer = (state = initialState, action = {}) => {
       ...state,
       userLoading: false,
       error: action.payload
-    };
-  case LOGOUT_USER:
-    return {
-      ...initialState,
-      userIsChecked: state.userIsChecked
     };
   case SET_USER_LOADING:
     return {

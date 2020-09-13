@@ -78,4 +78,22 @@ describe('Product details test', () => {
     cy.contains('Жоден').click();
     cy.get('[data-cy="price"]').contains('1450');
   });
+
+  it('comment inputs should be visible and editable', () => {
+    cy.get('[data-cy="rate"]').should('exist').and('be.visible');
+    cy.get('[data-cy="firstName"]').should('exist').and('be.visible');
+    cy.get('[data-cy="email"]').should('exist').and('be.visible');
+    cy.get('[data-cy="text"]').should('exist').and('be.visible');
+    cy.get('[data-cy=email] > .MuiInputBase-root > .MuiInputBase-input')
+      .type('vas.mytro@gmail.com')
+      .should('have.value', 'vas.mytro@gmail.com');
+    cy.get('[data-cy=firstName] > .MuiInputBase-root > .MuiInputBase-input')
+      .type('Dimas')
+      .should('have.value', 'Dimas');
+    cy.get('[data-cy=text] > .MuiInputBase-root > .MuiInputBase-input')
+      .type('Nice bag')
+      .should('have.value', 'Nice bag');
+    cy.get('form > .MuiButtonBase-root > .MuiButton-label').click();
+    cy.contains('Dimas');
+  });
 });

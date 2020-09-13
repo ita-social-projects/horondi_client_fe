@@ -28,7 +28,7 @@ import { REDIRECT_TIMEOUT } from '../../configs/index';
 import { setToLocalStorage } from '../../services/local-storage.service';
 
 export const loginUser = (data) => {
-  const query = ` 
+  const query = `
   mutation login($user: LoginInput!){
   loginUser(
     loginInput: $user
@@ -61,7 +61,7 @@ export const loginUser = (data) => {
 };
 
 export const resetPassword = (data) => {
-  const query = ` 
+  const query = `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
   }
@@ -88,7 +88,7 @@ export function* handleUserConfirm({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation confirmUser($token: String!){
     confirmUserEmail(token: $token)
   }
@@ -108,7 +108,7 @@ export function* handleUserRecovery({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation recovery($email: String!, $language: Int!){
     recoverUser(email: $email, language: $language)
   }
@@ -132,7 +132,7 @@ export function* handlePasswordReset({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
   }
@@ -154,7 +154,7 @@ export function* handleTokenCheck({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation checkToken($token: String!){
     checkIfTokenIsValid(token: $token)
   }

@@ -8,8 +8,7 @@ import {
 export const initialState = {
 	commentsLoading: false,
 	updatingComment: null,
-	comments: [],
-	rate: 0
+	comments: []
 };
 
 const commentsReducer = (state = initialState, action = {}) => {

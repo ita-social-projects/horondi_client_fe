@@ -6,14 +6,19 @@ export const useStyles = makeStyles((theme) => ({
     minWidth: '100px',
     maxWidth: 780,
     display: 'flex',
-    justifyContent: 'space-between'
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    '@media screen and (max-width: 768px)': {
+      justifyContent: 'center'
+    }
   },
   userForm: {
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     maxWidth: 400,
     minWidth: 388,
     minHeight: 740,
-    padding: '44px 34px'
+    padding: '44px 34px',
+    marginBottom: 20
   },
   userImage: {
     width: '100%',

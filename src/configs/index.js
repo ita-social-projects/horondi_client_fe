@@ -239,9 +239,9 @@ export const responsive = {
 
 export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
-	added: [ 'Ваш коментар успішно створений', 'Successfully added' ],
-	updated: [ 'Ваш коментар успішно оновлений', 'Successfully updated' ],
-	deleted: [ 'Ваш коментар успішно видалений', 'Successfully deleted' ],
+	added: [ 'Ваш коментар успішно створений', 'Your comment is successfully added' ],
+	updated: [ 'Ваш коментар успішно оновлений', 'Your comment is successfully updated' ],
+	deleted: [ 'Ваш коментар успішно видалений', 'Your comment is successfully deleted' ],
 	error: [ 'Щось пішло не так', 'Something went wrong' ]
 };
 export const COMMENT_DATA = {

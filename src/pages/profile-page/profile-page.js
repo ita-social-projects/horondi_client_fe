@@ -177,10 +177,8 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].country}
                   name='country'
                   value={
-                    user.address
+                    user.address && user.address.country
                       ? user.address.country
-                        ? user.address.country
-                        : ''
                       : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}
@@ -190,10 +188,8 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].region}
                   name='region'
                   value={
-                    user.address
+                    user.address && user.address.region
                       ? user.address.region
-                        ? user.address.region
-                        : ''
                       : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}
@@ -203,11 +199,7 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].city}
                   name='city'
                   value={
-                    user.address
-                      ? user.address.city
-                        ? user.address.city
-                        : ''
-                      : ''
+                    user.address && user.address.city ? user.address.city : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}
                   className={classes.userInput}
@@ -216,10 +208,8 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].street}
                   name='street'
                   value={
-                    user.address
+                    user.address && user.address.street
                       ? user.address.street
-                        ? user.address.street
-                        : ''
                       : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}
@@ -229,10 +219,8 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].buildingNumber}
                   name='buildingNumber'
                   value={
-                    user.address
+                    user.address && user.address.buildingNumber
                       ? user.address.buildingNumber
-                        ? user.address.buildingNumber
-                        : ''
                       : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}
@@ -242,10 +230,8 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].appartment}
                   name='appartment'
                   value={
-                    user.address
+                    user.address && user.address.appartment
                       ? user.address.appartment
-                        ? user.address.appartment
-                        : ''
                       : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}
@@ -255,10 +241,8 @@ const ProfilePage = () => {
                   label={PROFILE_DATA[language].zipcode}
                   name='zipcode'
                   value={
-                    user.address
+                    user.address && user.address.zipcode
                       ? user.address.zipcode
-                        ? user.address.zipcode
-                        : ''
                       : ''
                   }
                   onChange={(e) => handleChange(e, 'address')}

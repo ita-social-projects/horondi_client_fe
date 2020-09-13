@@ -1,9 +1,9 @@
 import {
   SET_USER,
   SET_USER_ERROR,
-  LOGOUT_USER,
   SET_USER_LOADING,
-  STATE_RESET
+  STATE_RESET,
+  CLEAR_USER_DATA
 } from './user.types';
 
 export const initialState = {
@@ -29,7 +29,7 @@ const userReducer = (state = initialState, action = {}) => {
       userLoading: false,
       error: action.payload
     };
-  case LOGOUT_USER:
+  case CLEAR_USER_DATA:
     return {
       ...initialState
     };

@@ -37,25 +37,24 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
     [additions]
   );
 
-  const bottomNameToSend = useMemo(
-    () =>
-      bottomMaterials
-        ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        : null,
-    [bagBottom, bottomMaterials]
-  );
-
   const handleBottomChange = (event) => {
     const { value } = event.target;
+
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
         .additionalPrice[0].value / 100
       : 0;
+
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
         .additionalPrice[0].value / 100
       : 0;
+
     const newTotalPrice = totalPrice - oldPrice + newPrice;
+
+    const bottomNameToSend = value
+      ? bottomMaterials.find(({ name }) => name[1].value === value).name
+      : '';
 
     dispatch(
       setProductToSend({

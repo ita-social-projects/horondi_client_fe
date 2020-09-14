@@ -16,15 +16,16 @@ export const useStyles = makeStyles((theme) => ({
     '&::after': {
       content: '" "',
       display: 'block',
-      width: (props)=> props.width ? props.width : '64px',
-      height: (props)=> props.height ? props.height : '64px',
-      margin: '8px',
+      borderWidth: (props) => (props.width ? parseInt(props.width) / 10 : 6),
+      width: (props) => (props.width ? props.width : '64px'),
+      height: (props) => (props.height ? props.height : '64px'),
       borderRadius: '50%',
-      borderWidth: (props)=> `${props.thickness ? props.thickness : '6px'}`,
       borderStyle: 'solid',
-      borderColor: `${theme.palette.textColor} transparent ${theme.palette.textColor} transparent`,
-      animation: '$ldsDualRing 1.2s linear infinite',
-    },
+      borderColor: `${theme.palette.textColor || 'black'} transparent ${
+        theme.palette.textColor || 'black'
+      } transparent`,
+      animation: '$ldsDualRing 1.2s linear infinite'
+    }
   },
   '@keyframes ldsDualRing': {
     '0%': {

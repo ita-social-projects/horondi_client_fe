@@ -6,7 +6,7 @@ import {
 
 export const clearLocalStorage = () => {
   const horondi = {
-    accessToken: 'not null',
+    accessToken: null,
     _id: null,
     wishlist: [],
     language: DEFAULT_LANGUAGE,

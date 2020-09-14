@@ -53,8 +53,7 @@ export const REGISTER_USER_DATA = {
   lastName: '',
   email: '',
   password: '',
-  confirmPassword: '',
-  message: ''
+  confirmPassword: ''
 };
 
 export const LOGIN_USER_DATA = {
@@ -68,9 +67,10 @@ export const errorMessages = [
     value: {
       firstname: 'Поле повинно містити від 2 до 30 символів',
       lastname: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      email: 'Некоректний формат ',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не співпадають',
+      text: 'Поле повинно містити від 2 до 500 символів'
     }
   },
   {
@@ -78,9 +78,10 @@ export const errorMessages = [
     value: {
       firstname: 'Field should contain from 2 to 30 characters',
       lastname: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
-      confirmPassword: 'Passwords do not match'
+      confirmPassword: 'Passwords do not match',
+      text: 'Field should contain from 2 to 700 characters'
     }
   }
 ];
@@ -97,7 +98,9 @@ export const formRegExp = {
   buildingNum: '^[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
   deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  message: '(?=.{1,500}$)'
+  text: /^.{2,700}$/gm,
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
+  script: /(script)/g
 };
 
 export const placeholders = {
@@ -233,6 +236,31 @@ export const responsive = {
     items: 1
   }
 };
+
+export const SNACKBAR_DURATION = 4000;
+export const SNACKBAR_MESSAGE = {
+  added: [
+    'Ваш коментар успішно створений',
+    'Your comment is successfully added'
+  ],
+  updated: [
+    'Ваш коментар успішно оновлений',
+    'Your comment is successfully updated'
+  ],
+  deleted: [
+    'Ваш коментар успішно видалений',
+    'Your comment is successfully deleted'
+  ],
+  error: ['Щось пішло не так', 'Something went wrong']
+};
+export const COMMENT_DATA = {
+  firstName: '',
+  text: '',
+  product: '',
+  show: true,
+  email: ''
+};
+export const TEXT = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
 export const LANGUAGES_LIST = [

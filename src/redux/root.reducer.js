@@ -11,8 +11,10 @@ import Contacts from './contacts/contacts.reducer';
 import Products from './products/products.reducer';
 import Wishlist from './wishlist/wishlist.reducer';
 import Cart from './cart/cart.reducer';
+import Snackbar from './snackbar/snackbar.reducer';
 import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
+import Comments from './comments/comments.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -26,9 +28,11 @@ const rootReducer = (history) =>
     Products,
     Wishlist,
     Cart,
+    Snackbar,
     Contacts,
     Model,
-    Currency
+    Currency,
+    Comments
   });
 
 export default rootReducer;

@@ -16,18 +16,18 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
 
   const sizeButtons = sizes
     ? sizes.map(({ _id, name, available }) =>
-      available && name ? (
-        <Button
-          key={_id}
-          className={
-            _id === selectedSize ? styles.selectedSize : styles.sizeButton
-          }
-          onClick={() => handleSizeChange(_id)}
-        >
-          {name}
-        </Button>
-      ) : null
-    )
+        available && name ? (
+          <Button
+            key={_id}
+            className={
+              _id === selectedSize ? styles.selectedSize : styles.sizeButton
+            }
+            onClick={() => handleSizeChange(_id)}
+          >
+            {name}
+          </Button>
+        ) : null
+      )
     : null;
 
   return (
@@ -41,7 +41,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
         </div>
       ) : null}
       {sizeIsNotSelectedError ? (
-        <span className={styles.error}>{SIZE[language].error}</span>
+        <div className={styles.error}>{SIZE[language].error}</div>
       ) : null}
     </div>
   );

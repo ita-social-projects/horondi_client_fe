@@ -4,7 +4,8 @@ import {
   setUser,
   setUserError,
   setUserLoading,
-  resetState
+  resetState,
+  clearUserData
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -12,10 +13,13 @@ import {
   RECOVER_USER,
   PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
-  REGISTER_USER
+  REGISTER_USER,
+  LOGOUT_USER
 } from './user.types';
 import { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
+import { setToLocalStorage } from '../../services/local-storage.service';
+import { setError } from '../error/error.actions';
 
 export const loginUser = (data) => {
   const query = ` 
@@ -49,6 +53,8 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
+    const { token } = user.data.loginUser;
+    yield setToLocalStorage('accessToken', token);
     yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {
@@ -162,6 +168,16 @@ export function* handleUserRegister({ payload }) {
   }
 }
 
+export function* handleLogOutUser() {
+  try {
+    yield put(clearUserData());
+    yield setToLocalStorage('accessToken', null);
+  } catch (error) {
+    yield put(setError(error));
+    yield put(push('/error-page'));
+  }
+}
+
 export default function* userSaga() {
   yield takeEvery(LOGIN_USER, handleUserLoad);
   yield takeEvery(CONFIRM_USER, handleUserConfirm);
@@ -169,4 +185,5 @@ export default function* userSaga() {
   yield takeEvery(PASSWORD_RESET, handlePasswordReset);
   yield takeEvery(CHECK_IF_TOKEN_VALID, handleTokenCheck);
   yield takeEvery(REGISTER_USER, handleUserRegister);
+  yield takeEvery(LOGOUT_USER, handleLogOutUser);
 }

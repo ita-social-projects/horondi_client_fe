@@ -3,7 +3,8 @@ import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
-import { config, Transition } from 'react-spring/renderprops';
+import { config } from 'react-spring';
+import { Transition } from 'react-spring/renderprops';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 
@@ -50,7 +51,13 @@ export const Chat = () => {
             {(item) =>
               item &&
               ((style) => (
-                <div style={style}>
+                <div
+                  style={style}
+                  onClick={() => {
+                    setIconsVisible(!iconsVisible);
+                    setMailFormVisible(!mailFormVisible);
+                  }}
+                >
                   <MailForm
                     contacts={contacts}
                     themeMode={themeMode}
@@ -58,11 +65,13 @@ export const Chat = () => {
                     language={language}
                     setIconsVisible={setIconsVisible}
                     setMailFormVisible={setMailFormVisible}
+                    mailFormVisible={mailFormVisible}
                   />
                 </div>
               ))
             }
           </Transition>
+          {console.log(mailFormVisible)}
         </div>
       )}
       <div

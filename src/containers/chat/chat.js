@@ -54,7 +54,6 @@ export const Chat = () => {
                 <div
                   style={style}
                   onClick={() => {
-                    setIconsVisible(!iconsVisible);
                     setMailFormVisible(!mailFormVisible);
                   }}
                 >
@@ -71,7 +70,6 @@ export const Chat = () => {
               ))
             }
           </Transition>
-          {console.log(mailFormVisible)}
         </div>
       )}
       <div

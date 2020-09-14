@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
       margin: '8px',
       borderRadius: '50%',
       borderWidth: (props)=> `${props.thickness ? props.thickness : '6px'}`,
-      border: `6px solid ${theme.palette.textColor}`,
+      borderStyle: 'solid',
       borderColor: `${theme.palette.textColor} transparent ${theme.palette.textColor} transparent`,
       animation: '$ldsDualRing 1.2s linear infinite',
     },

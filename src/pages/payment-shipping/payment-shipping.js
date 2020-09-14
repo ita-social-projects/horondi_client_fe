@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
 import { useStyles } from './payment-shipping.style';
-import { getBusinessPageByCode } from '../../redux/businessPages/businessPages.actions';
+import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 
 const PaymentsAndShipping = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,9 @@ const PaymentsAndShipping = () => {
     dispatch(getBusinessPageByCode('payment-and-shipping'));
   }, [dispatch]);
 
-  const PaymentsAndShippingText = Object.keys(paymentAndShippingPage).length
-    ? parse(paymentAndShippingPage.text[language].value)
-    : 'No text provided';
+  const paymentsAndShippingText =
+    paymentAndShippingPage.text &&
+    parse(paymentAndShippingPage.text[language].value);
   const styles = useStyles();
 
   return (
@@ -29,7 +29,7 @@ const PaymentsAndShipping = () => {
       {paymentAndShippingPage.title && (
         <h1>{paymentAndShippingPage.title[language].value}</h1>
       )}
-      {PaymentsAndShippingText}
+      {paymentsAndShippingText}
     </div>
   );
 };

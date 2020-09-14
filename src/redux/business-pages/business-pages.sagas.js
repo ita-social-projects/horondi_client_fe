@@ -1,19 +1,20 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
-import { setBusinessPage, setLoading } from './businessPages.actions';
-import { GET_BUSINESS_PAGE_BY_CODE } from './businessPages.types';
+import { setBusinessPage, setLoading } from './business-pages.actions';
+import { GET_BUSINESS_PAGE_BY_CODE } from './business-pages.types';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 
 export function* handleBusinessPageLoad({ payload }) {
-  console.log(payload);
   try {
     yield put(setLoading(true));
     const businessPage = yield call(
       getItems,
-      `query{
-            getBusinessTextByCode(code: "${payload}") {
+      `query (
+        $code: String!
+        ){
+            getBusinessTextByCode(code: $code) {
             ... on BusinessText {
                 _id
                 code
@@ -30,7 +31,10 @@ export function* handleBusinessPageLoad({ payload }) {
             statusCode
             }
           }
-      }`
+      }`,
+      {
+        code: payload
+      }
     );
 
     yield put(setBusinessPage(businessPage.data.getBusinessTextByCode));

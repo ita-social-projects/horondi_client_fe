@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
 import { useStyles } from './privacy-policy.style';
-import { getBusinessPageByCode } from '../../redux/businessPages/businessPages.actions';
+import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 
 const PrivacyPolicy = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,8 @@ const PrivacyPolicy = () => {
     dispatch(getBusinessPageByCode('privacy-policy'));
   }, [dispatch]);
 
-  const privacyPolicyText = Object.keys(privacyPolicyPage).length
-    ? parse(privacyPolicyPage.text[language].value)
-    : 'No text provided';
+  const privacyPolicyText =
+    privacyPolicyPage.text && parse(privacyPolicyPage.text[language].value);
   const styles = useStyles();
 
   return (

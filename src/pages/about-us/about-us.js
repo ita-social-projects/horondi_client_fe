@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
 import { useStyles } from './about-us.style';
-import { ABOUT_US_IMAGES } from '../../configs';
-import { getBusinessPageByCode } from '../../redux/businessPages/businessPages.actions';
+import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 
 const AboutUs = () => {
   const dispatch = useDispatch();
@@ -20,9 +19,8 @@ const AboutUs = () => {
     dispatch(getBusinessPageByCode('about-us'));
   }, [dispatch]);
 
-  const aboutUsText = Object.keys(aboutUsPage).length
-    ? parse(aboutUsPage.text[language].value)
-    : 'No text provided';
+  const aboutUsText =
+    aboutUsPage.text && parse(aboutUsPage.text[language].value);
   const styles = useStyles();
 
   return (

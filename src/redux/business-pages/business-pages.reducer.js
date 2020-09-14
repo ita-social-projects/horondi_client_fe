@@ -1,4 +1,7 @@
-import { SET_BUSINESS_PAGE, SET_LOADING } from './businessPages.types';
+import {
+  SET_BUSINESS_PAGE,
+  SET_BUSINESS_PAGE_LOADING
+} from './business-pages.types';
 
 const initialState = {
   loading: true,
@@ -20,7 +23,7 @@ const businessPagesReducer = (state = initialState, action = {}) => {
         [action.payload.key]: action.payload.businessPage
       }
     };
-  case SET_LOADING:
+  case SET_BUSINESS_PAGE_LOADING:
     return {
       ...state,
       loading: action.payload

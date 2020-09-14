@@ -1,3 +1,3 @@
-import PaymentsAndShipping from './privacy-policy';
+import PrivacyPolicy from './privacy-policy';
 
-export default PaymentsAndShipping;
+export default PrivacyPolicy;

@@ -170,7 +170,7 @@ function Register() {
           successWindow
         ) : (
           <form className={styles.registerForm}>
-            {!loading ? (
+            {loading ? (
               <Loader />
             ) : (
               <>

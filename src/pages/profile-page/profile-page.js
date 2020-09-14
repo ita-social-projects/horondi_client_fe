@@ -105,8 +105,6 @@ const ProfilePage = () => {
     }
   }, [userData]);
 
-  const { images } = user;
-
   return (
     <div>
       <div className={classes.profile}>

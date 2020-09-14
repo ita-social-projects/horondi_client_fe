@@ -265,6 +265,9 @@ export function* handleUpdateUser({ payload }) {
         confirmed
         images {
           thumbnail
+          large
+          small
+          medium
         }
         address {
           country

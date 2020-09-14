@@ -10,22 +10,21 @@ export const useStyles = makeStyles((theme) => ({
   },
   ldsDualRing: {
     display: 'inline-block',
-    width: '80px',
-    height: '80px',
     margin: '0 auto',
     alignItems: 'center',
     alignSelf: 'center',
     '&::after': {
       content: '" "',
       display: 'block',
-      width: '64px',
-      height: '64px',
+      width: (props)=> props.width ? props.width : '64px',
+      height: (props)=> props.height ? props.height : '64px',
       margin: '8px',
       borderRadius: '50%',
+      borderWidth: (props)=> `${props.thickness ? props.thickness : '6px'}`,
       border: `6px solid ${theme.palette.textColor}`,
       borderColor: `${theme.palette.textColor} transparent ${theme.palette.textColor} transparent`,
-      animation: ' $ldsDualRing 1.2s linear infinite'
-    }
+      animation: '$ldsDualRing 1.2s linear infinite',
+    },
   },
   '@keyframes ldsDualRing': {
     '0%': {

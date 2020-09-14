@@ -318,8 +318,7 @@ export const PROFILE_DATA = [
     buildingNumber: 'Будинок',
     appartment: 'Квартира',
     zipcode: 'Почтовий індекс',
-    addPhoto: 'Додати фото',
-    changePhoto: 'Змінити фото',
+    addPhoto: '+',
     saveBtnTitle: 'Зберегти'
   },
   {
@@ -334,8 +333,7 @@ export const PROFILE_DATA = [
     buildingNumber: 'Building number',
     appartment: 'Appartment number',
     zipcode: 'Zip Code',
-    addPhoto: 'Add photo',
-    changePhoto: 'Change photo',
+    addPhoto: '+',
     saveBtnTitle: 'Save'
   }
 ];

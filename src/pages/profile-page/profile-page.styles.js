@@ -21,13 +21,8 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 20
   },
   userImage: {
-    width: '100%',
     height: '100%',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    zIndex: 1,
-    borderRadius: 5
+    borderRadius: 5,
   },
   imageContainer: {
     width: 100,
@@ -56,21 +51,32 @@ export const useStyles = makeStyles((theme) => ({
     display: 'none'
   },
   uploadBtn: {
+    width: '100%',
     height: '100%',
     fontWeight: 'bold'
   },
   uploadLabel: {
     height: '100%',
+    width: '100%',
     opacity: 0,
     textAlign: 'center',
     position: 'absolute',
     top: 0,
     left: 0,
     zIndex: 2,
+    border: '2px solid black',
+    background: 'white',
+    borderRadius: 5,
+    transition: 'all 1s ease',
+    '& > span': {
+      fontSize: 40,
+      color: 'white',
+      textShadow: '-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000'
+    },
     '&:hover': {
       opacity: 1,
-      background: 'white'
-    }
+      transition: 'all 1s ease'
+    },
   },
   restOfUserInputs: {
     display: 'flex',

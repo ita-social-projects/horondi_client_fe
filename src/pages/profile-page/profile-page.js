@@ -133,11 +133,7 @@ const ProfilePage = () => {
                   />
                   <label htmlFor='photoUpload' className={classes.uploadLabel}>
                     <Button component='span' className={classes.uploadBtn}>
-                      {images
-                        ? images.thumbnail
-                          ? PROFILE_DATA[language].changePhoto
-                          : PROFILE_DATA[language].addPhoto
-                        : PROFILE_DATA[language].addPhoto}
+                      {PROFILE_DATA[language].addPhoto}
                     </Button>
                   </label>
                 </div>

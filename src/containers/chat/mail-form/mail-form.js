@@ -16,8 +16,8 @@ export const MailForm = ({ themeMode, language, contacts }) => {
         <span className={style.contactsTitle}>
           {CHAT[language].ourContacts}
         </span>
-        {contacts.map((contact, index) => (
-          <span className={style.phoneNumbers} key={index}>
+        {contacts.map((contact) => (
+          <span className={style.phoneNumbers} key={contact.phoneNumber}>
             +{contact.phoneNumber}
           </span>
         ))}

@@ -67,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '320px',
     height: '600px',
     background: themeMode ? 'white' : '#232323',
-    boxShadow: 'rgb(197, 197, 197) 0px 5px 8px'
+    boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)'
   }),
   cancelIcon: {
     position: 'absolute',

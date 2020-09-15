@@ -15,10 +15,12 @@ import {
   PRESERVE_USER,
   SET_USER_IS_CHECKED,
   UPDATE_USER,
-  PASWORD_IS_RESET,
+  PASSWORD_IS_RESET,
   SEND_CONFIRMATION_EMAIL,
   CONFIRMATION_EMAIL_SENT,
-  SET_USER_IS_CONFIRMED
+  SET_USER_IS_CONFIRMED,
+  SET_CONFIRMATION_LOADING,
+  SET_RECOVERY_LOADING
 } from './user.types';
 
 const setUser = (user) => ({
@@ -99,7 +101,7 @@ const updateUser = (payload) => ({
 });
 
 const setPasswordIsReset = (payload) => ({
-  type: PASWORD_IS_RESET,
+  type: PASSWORD_IS_RESET,
   payload
 });
 
@@ -115,6 +117,16 @@ const setConfirmationEmailStatus = (payload) => ({
 
 const setUserIsConfirmed = (payload) => ({
   type: SET_USER_IS_CONFIRMED,
+  payload
+});
+
+const setConfirmationLoading = (payload) => ({
+  type: SET_CONFIRMATION_LOADING,
+  payload
+});
+
+const setRecoveryLoading = (payload) => ({
+  type: SET_RECOVERY_LOADING,
   payload
 });
 
@@ -138,5 +150,7 @@ export {
   setPasswordIsReset,
   sendConfirmationEmail,
   setConfirmationEmailStatus,
-  setUserIsConfirmed
+  setUserIsConfirmed,
+  setConfirmationLoading,
+  setRecoveryLoading,
 };

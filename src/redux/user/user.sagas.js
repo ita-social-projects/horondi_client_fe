@@ -10,7 +10,9 @@ import {
   setUserIsChecked,
   setPasswordIsReset,
   setConfirmationEmailStatus,
-  setUserIsConfirmed
+  setUserIsConfirmed,
+  setConfirmationLoading,
+  setRecoveryLoading,
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -105,7 +107,7 @@ export function* handleUserConfirm({ payload }) {
 export function* handleUserRecovery({ payload }) {
   try {
     yield put(resetState());
-    yield put(setUserLoading(true));
+    yield put(setRecoveryLoading(true))
     yield call(
       setItems,
       `
@@ -115,13 +117,14 @@ export function* handleUserRecovery({ payload }) {
   `,
       payload
     );
-    yield put(setUserLoading(false));
+    yield put(setRecoveryLoading(false))
     yield put(userHasRecovered(true));
     if (payload.redirect) {
       yield delay(REDIRECT_TIMEOUT);
       yield put(push('/login'));
     }
   } catch (error) {
+    yield put(setRecoveryLoading(false))
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }
 }
@@ -295,6 +298,7 @@ export function* handleUpdateUser({ payload }) {
 export function* handleSendConfirmation({ payload }) {
   try {
     yield put(resetState());
+    yield put(setConfirmationLoading(true))
     yield call(
       setItems,
       `
@@ -304,8 +308,10 @@ export function* handleSendConfirmation({ payload }) {
   `,
       payload
     );
+    yield put(setConfirmationLoading(false))
     yield put(setConfirmationEmailStatus(true));
   } catch (e) {
+    yield put(setConfirmationLoading(false))
     yield put(setUserError(e.message.replace('GraphQL error: ', '')));
   }
 }

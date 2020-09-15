@@ -10,17 +10,17 @@ import {
 } from '../../translations/user.translations';
 import { useStyles } from './recovery.styles';
 import { Loader } from '../../components/loader/loader';
-import { recoverUser, resetState } from '../../redux/user/user.actions';
+import { recoverUser, resetState, userHasRecovered } from '../../redux/user/user.actions';
 
 const Recovery = () => {
   const [email, setEmail] = useState('');
   const [emailValidated, setEmailValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
 
-  const { language, loading, error, userRecovered } = useSelector(
+  const { language, error, userRecovered, recoveryLoading } = useSelector(
     ({ Language, User }) => ({
       language: Language.language,
-      loading: User.userLoading,
+      recoveryLoading: User.recoveryLoading,
       error: User.error,
       userRecovered: User.userRecovered
     })
@@ -29,6 +29,7 @@ const Recovery = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(userHasRecovered(false))
     dispatch(resetState());
   }, [dispatch]);
 
@@ -68,7 +69,7 @@ const Recovery = () => {
       <div className={styles.recoveryForm}>
         {userRecovered ? (
           successWindow
-        ) : loading ? (
+        ) : recoveryLoading ? (
           <Loader />
         ) : (
           <div>

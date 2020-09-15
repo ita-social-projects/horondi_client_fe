@@ -14,6 +14,7 @@ import {
   PROFILE_PASSWORD_CHANGE,
   PROFILE_EMAIL_CONFIRM
 } from '../../translations/user.translations';
+import { IMG_URL } from '../../configs/index'
 
 const ProfilePage = () => {
   const classes = useStyles();
@@ -23,13 +24,17 @@ const ProfilePage = () => {
     userLoading,
     language,
     confirmationEmailSent,
-    userRecovered
+    userRecovered,
+    confirmationLoading,
+    recoveryLoading,
   } = useSelector(({ User, Language }) => ({
     userData: User.userData,
     userLoading: User.userLoading,
     language: Language.language,
     confirmationEmailSent: User.confirmationEmailSent,
-    userRecovered: User.userRecovered
+    userRecovered: User.userRecovered,
+    confirmationLoading: User.confirmationLoading,
+    recoveryLoading: User.recoveryLoading,
   }));
 
   const dispatch = useDispatch();
@@ -71,13 +76,14 @@ const ProfilePage = () => {
     dispatch(updateUser({ user, id: user._id, upload }));
   };
 
+  const handlePasswordChange = () => {
+    dispatch(recoverUser({ email: userData.email, language }));
+  };
+
   const handleImageError = (e) => {
     e.target.src = ProfilePicture;
   };
 
-  const handlePasswordChange = () => {
-    dispatch(recoverUser({ email: userData.email, language }));
-  };
 
   useEffect(() => {
     if (
@@ -101,7 +107,7 @@ const ProfilePage = () => {
       setUser(userData);
     }
     if (userData.images && userData.images.thumbnail) {
-      setUserImageUrl(userData.images.thumbnail);
+      setUserImageUrl(IMG_URL+userData.images.thumbnail);
     }
   }, [userData]);
 
@@ -253,32 +259,40 @@ const ProfilePage = () => {
         </form>
         <div className={classes.userActions}>
           <div className={classes.newPassword}>
-            <h2>{PROFILE_PASSWORD_CHANGE[language].heading}</h2>
-            <p>{!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}</p>
-            {userRecovered ? (
-              <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
-            ) : (
-              <Button
-                className={classes.saveBtn}
-                onClick={handlePasswordChange}
-              >
-                {PROFILE_PASSWORD_CHANGE[language].btnTitle}
-              </Button>
-            )}
+            {recoveryLoading ? <Loader /> :
+              <>
+                <h2>{PROFILE_PASSWORD_CHANGE[language].heading}</h2>
+                <p>{!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}</p>
+                {userRecovered ? (
+                  <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
+                ) : (
+                  <Button
+                    className={classes.saveBtn}
+                    onClick={handlePasswordChange}
+                  >
+                    {PROFILE_PASSWORD_CHANGE[language].btnTitle}
+                  </Button>
+                )}
+              </>
+            }
           </div>
           {!user.confirmed && (
             <div className={classes.confirmUser}>
-              <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
-              {confirmationEmailSent ? (
-                <h3>{PROFILE_EMAIL_CONFIRM[language].checkEmailText}</h3>
-              ) : (
-                <Button
-                  className={classes.saveBtn}
-                  onClick={handleConfirmation}
-                >
-                  {PROFILE_EMAIL_CONFIRM[language].btnTitle}
-                </Button>
-              )}
+              {confirmationLoading ? <Loader/> :
+                <>
+                  <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
+                  {confirmationEmailSent ? (
+                    <h3>{PROFILE_EMAIL_CONFIRM[language].checkEmailText}</h3>
+                  ) : (
+                    <Button
+                      className={classes.saveBtn}
+                      onClick={handleConfirmation}
+                    >
+                      {PROFILE_EMAIL_CONFIRM[language].btnTitle}
+                    </Button>
+                  )}
+                </>
+              }
             </div>
           )}
         </div>

@@ -21,6 +21,7 @@ export const Chat = () => {
   }));
 
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
+  const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
   return (
     <div>
@@ -50,21 +51,13 @@ export const Chat = () => {
           >
             {(item) =>
               item &&
-              ((style) => (
-                <div
-                  style={style}
-                  onClick={() => {
-                    setMailFormVisible(!mailFormVisible);
-                  }}
-                >
+              ((styles) => (
+                <div style={styles}>
                   <MailForm
                     contacts={contacts}
                     themeMode={themeMode}
-                    iconsVisible
                     language={language}
-                    setIconsVisible={setIconsVisible}
-                    setMailFormVisible={setMailFormVisible}
-                    mailFormVisible={mailFormVisible}
+                    cancelIconHandler={cancelIconHandler}
                   />
                 </div>
               ))

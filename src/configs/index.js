@@ -4,14 +4,18 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const HOMEPAGE_LOOKS_IMAGES = [
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img1.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img2.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img3.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img4.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img5.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img6.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img7.jpg',
-	'https://horondi.blob.core.windows.net/horondi/our-looks/img8.jpg'
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_1.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_2.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_3.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_4.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_5.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_6.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_7.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_8.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_9.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_10.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_11.jpg',
+	'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg',
 ];
 
 export const ABOUT_US_IMAGES = {

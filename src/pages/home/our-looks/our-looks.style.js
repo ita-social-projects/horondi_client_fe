@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
       flexBasis: '50%',
     },
     '&:hover > div': {
-      transform: 'scale(1.2)'
+      transform: 'scale(1.1)'
     }
   },
   image: {

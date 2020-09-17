@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     display: 'flex',
     animationName: '',
-    animationDuration: ''
+    animationDuration: '',
+    gridColumn: (props)=>props.gridColumn || 'none',
   },
   ldsDualRing: {
     display: 'inline-block',
@@ -25,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
         theme.palette.textColor || 'black'
       } transparent`,
       animation: '$ldsDualRing 1.2s linear infinite'
-    }
+    },
   },
   '@keyframes ldsDualRing': {
     '0%': {

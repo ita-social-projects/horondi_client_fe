@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import { useStyles } from './profile-page.styles';
@@ -14,7 +14,7 @@ import {
   PROFILE_PASSWORD_CHANGE,
   PROFILE_EMAIL_CONFIRM
 } from '../../translations/user.translations';
-import { IMG_URL } from '../../configs/index'
+import { IMG_URL, formRegExp, errorMessages, profileFields } from '../../configs/index'
 
 const ProfilePage = () => {
   const classes = useStyles();
@@ -43,6 +43,8 @@ const ProfilePage = () => {
   const [isEdited, setIsEdited] = useState(userData);
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
+  const [validationObject, setValidationObject] = useState({})
+  const [shouldValidate, setShouldValidate] = useState(false)
 
   const handleChange = (e, innerProp) => {
     const inputName = e.target.name;
@@ -71,9 +73,13 @@ const ProfilePage = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
   };
 
-  const handleSaveUser = () => {
-    delete user.token;
-    dispatch(updateUser({ user, id: user._id, upload }));
+  const handleSaveUser = (e) => {
+    e.preventDefault()
+    setShouldValidate(true)
+    if(Object.values(validationObject).every(item=>item)) {
+      delete user.token;
+      dispatch(updateUser({ user, id: user._id, upload }));
+    }
   };
 
   const handlePasswordChange = () => {
@@ -84,6 +90,42 @@ const ProfilePage = () => {
     e.target.src = ProfilePicture;
   };
 
+  const toEntries = useCallback((obj) => {
+    return Object.keys(obj)
+      .filter(key => (!(obj[key] instanceof Array) && obj[key]) || (key==='firstName'||key==='lastName'||key==='email'))
+      .map(key => {
+        if (obj[key] !== Object(obj[key])) {
+          return [key, obj[key]];
+        } else {
+          return toEntries(obj[key]);
+        }
+      });
+  }, []);
+
+  const destructureObject = useCallback((obj) => {
+    return toEntries(obj)
+      .map(item => {
+        if (Array.isArray(item[0])) {
+          return Object.fromEntries(item);
+        }
+        return Object.fromEntries([item]);
+      })
+      .reduce((prev, curr) => Object.assign(prev, curr), {});
+  }, [toEntries]);
+
+  const checkFieldsForValidity = useCallback((obj) => {
+    return Object.fromEntries(Object.entries(destructureObject(obj))
+      .filter(entry => formRegExp[entry[0]])
+      .map(entry => {
+        return [entry[0], new RegExp(formRegExp[entry[0]]).test(entry[1])];
+      }));
+  }, [destructureObject]);
+
+  const validateFields = useMemo(()=> checkFieldsForValidity(user),[user, checkFieldsForValidity])
+
+  useEffect(()=> {
+    setValidationObject(validateFields);
+  },[validateFields])
 
   useEffect(() => {
     if (
@@ -114,12 +156,11 @@ const ProfilePage = () => {
   return (
     <div>
       <div className={classes.profile}>
-        <form className={classes.userForm}>
+        <form className={classes.userForm} onSubmit={handleSaveUser}>
           {userLoading ? (
-            <Loader />
+            <Loader gridColumn={'span 3'}/>
           ) : (
             <>
-              <div className={classes.imageAndName}>
                 <div className={classes.imageContainer}>
                   <img
                     src={userImageUrl || ProfilePicture}
@@ -141,116 +182,22 @@ const ProfilePage = () => {
                     </Button>
                   </label>
                 </div>
-                <div className={classes.userNames}>
-                  <TextField
-                    label={PROFILE_DATA[language].firstName}
-                    name='firstName'
-                    value={user.firstName || ''}
-                    className={classes.userInput}
-                    onChange={handleChange}
-                  />
-                  <TextField
-                    label={PROFILE_DATA[language].lastName}
-                    name='lastName'
-                    value={user.lastName || ''}
-                    className={classes.userInput}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className={classes.restOfUserInputs}>
-                <TextField
-                  label={PROFILE_DATA[language].email}
-                  name='email'
-                  value={user.email || ''}
-                  onChange={handleChange}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].phoneNumber}
-                  name='phoneNumber'
-                  value={user.phoneNumber ? user.phoneNumber : ''}
-                  onChange={handleChange}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].country}
-                  name='country'
-                  value={
-                    user.address && user.address.country
-                      ? user.address.country
-                      : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].region}
-                  name='region'
-                  value={
-                    user.address && user.address.region
-                      ? user.address.region
-                      : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].city}
-                  name='city'
-                  value={
-                    user.address && user.address.city ? user.address.city : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].street}
-                  name='street'
-                  value={
-                    user.address && user.address.street
-                      ? user.address.street
-                      : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].buildingNumber}
-                  name='buildingNumber'
-                  value={
-                    user.address && user.address.buildingNumber
-                      ? user.address.buildingNumber
-                      : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].appartment}
-                  name='appartment'
-                  value={
-                    user.address && user.address.appartment
-                      ? user.address.appartment
-                      : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-                <TextField
-                  label={PROFILE_DATA[language].zipcode}
-                  name='zipcode'
-                  value={
-                    user.address && user.address.zipcode
-                      ? user.address.zipcode
-                      : ''
-                  }
-                  onChange={(e) => handleChange(e, 'address')}
-                  className={classes.userInput}
-                />
-              </div>
+                {
+                  profileFields.map(name=> (
+                    <TextField
+                      key={name}
+                      label={PROFILE_DATA[language][name]}
+                      name={name}
+                      value={user.hasOwnProperty(name)? (user[name] || '') : (user.address && user.address[name] ? user.address[name] : '')}
+                      onChange={user.hasOwnProperty(name) ? handleChange : (e)=> handleChange(e,'address')}
+                      className={`${classes.userInput} ${(name==='firstName'||name==='lastName') && classes.nameInputs}`}
+                      error={shouldValidate && !validationObject[name] && (!user.hasOwnProperty(name) ? (user.address&&!!user.address[name]) : (name === 'phoneNumber' ? !!user[name] : true))}
+                      helperText={shouldValidate && !validationObject[name] && (!user.hasOwnProperty(name) ? (user.address&&!!user.address[name]) : (name === 'phoneNumber' ? !!user[name] : true)) && errorMessages[language].value[name]}
+                    />
+                  ))
+                }
               {!(isEdited || upload) ? null : (
-                <Button className={classes.saveBtn} onClick={handleSaveUser}>
+                <Button className={`${classes.button} ${classes.saveBtn}`} type='submit'>
                   {PROFILE_DATA[language].saveBtnTitle}
                 </Button>
               )}
@@ -267,7 +214,7 @@ const ProfilePage = () => {
                   <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
                 ) : (
                   <Button
-                    className={classes.saveBtn}
+                    className={classes.button}
                     onClick={handlePasswordChange}
                   >
                     {PROFILE_PASSWORD_CHANGE[language].btnTitle}
@@ -285,7 +232,7 @@ const ProfilePage = () => {
                     <h3>{PROFILE_EMAIL_CONFIRM[language].checkEmailText}</h3>
                   ) : (
                     <Button
-                      className={classes.saveBtn}
+                      className={classes.button}
                       onClick={handleConfirmation}
                     >
                       {PROFILE_EMAIL_CONFIRM[language].btnTitle}

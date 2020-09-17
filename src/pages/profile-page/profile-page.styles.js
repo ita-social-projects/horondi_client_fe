@@ -13,28 +13,34 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   userForm: {
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
     maxWidth: 400,
     minWidth: 388,
-    minHeight: 740,
-    padding: '44px 34px',
-    marginBottom: 20
+    padding: '44px 34px 86px',
+    marginBottom: 20,
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3,1fr)',
+    rowGap: '10px',
+    position: 'relative'
   },
   userImage: {
     height: '100%',
     borderRadius: 5,
   },
   imageContainer: {
-    width: 100,
-    height: 100,
+    width: 103,
+    height: 103,
     position: 'relative',
-    marginRight: 10
+    marginRight: 10,
+    gridRow: 'span 2',
+    alignSelf: 'start'
   },
   imageAndName: {
     display: 'flex',
     justifyContent: 'space-between'
   },
   userInput: {
+    gridColumn: 'span 3',
     width: '100%',
     '& label.Mui-focused': {
       color: theme.palette.textColor
@@ -42,6 +48,9 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiInput-underline:after': {
       borderBottom: '2px solid black'
     }
+  },
+  nameInputs: {
+    gridColumn: 'span 2'
   },
   userNames: {
     display: 'flex',
@@ -53,7 +62,7 @@ export const useStyles = makeStyles((theme) => ({
   uploadBtn: {
     width: '100%',
     height: '100%',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   uploadLabel: {
     height: '100%',
@@ -89,17 +98,24 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: 10
     }
   },
-  saveBtn: {
+  button: {
     fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
     width: '100%',
+    gridColumn: 'span 3',
     backgroundColor: theme.palette.button.normal.backgroundColor,
     color: theme.palette.button.normal.color,
     textTransform: 'capitalize',
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor
     }
+  },
+  saveBtn: {
+    position:'absolute',
+    width: 332,
+    bottom: 32,
+    left: 34
   },
   userActions: {
     display: 'flex',

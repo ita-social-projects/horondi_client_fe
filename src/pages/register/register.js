@@ -101,9 +101,7 @@ function Register() {
   const userFields = {
     firstNameField: {
       inputName: 'firstName',
-      errorMessage: errorMessages[language].value.firstname,
       value: firstName,
-      onChange: handleChange,
       validation: {
         value: firstNameValidated,
         setValid: setFirstNameValidated
@@ -113,9 +111,7 @@ function Register() {
     },
     lastNameField: {
       inputName: 'lastName',
-      errorMessage: errorMessages[language].value.lastname,
       value: lastName,
-      onChange: handleChange,
       validation: {
         value: lastNameValidated,
         setValid: setLastNameValidated
@@ -125,9 +121,7 @@ function Register() {
     },
     email: {
       inputName: 'email',
-      errorMessage: errorMessages[language].value.email,
       value: email,
-      onChange: handleChange,
       validation: {
         value: emailValidated,
         setValid: setEmailValidated
@@ -137,9 +131,7 @@ function Register() {
     },
     passwordField: {
       inputName: 'password',
-      errorMessage: errorMessages[language].value.password,
       value: password,
-      onChange: handleChange,
       validation: {
         value: passwordValidated,
         setValid: setPasswordValidated
@@ -180,9 +172,7 @@ function Register() {
                 {Object.values(userFields).map(
                   ({
                     inputName,
-                    errorMessage,
                     value,
-                    onChange,
                     validation,
                     type,
                     InputProps = null,
@@ -201,13 +191,13 @@ function Register() {
                       error={!validation.value && shouldValidate}
                       helperText={
                         !validation.value && shouldValidate
-                          ? `${errorMessage}`
+                          ? `${errorMessages[language].value[inputName]}`
                           : ''
                       }
                       className={`${styles.dataInput} ${
                         inputName === 'email' && styles.afterText
                       }`}
-                      onChange={(e) => onChange(e, validation.setValid, regExp)}
+                      onChange={(e) => handleChange(e, validation.setValid, regExp)}
                       value={value}
                       type={type}
                     />

@@ -64,23 +64,25 @@ export const errorMessages = [
 	{
 		lang: 'uk',
 		value: {
-			firstname: 'Поле повинно містити від 2 до 30 символів',
-			lastname: 'Поле повинно містити від 2 до 30 символів',
+			firstName: 'Поле повинно містити від 2 до 30 символів',
+			lastName: 'Поле повинно містити від 2 до 30 символів',
 			email: 'Некоректний формат ',
 			password: 'Від 6 до 30 символів з однією літерою та цифрою',
 			confirmPassword: 'Паролі не співпадають',
-			text: 'Поле повинно містити від 2 до 500 символів'
+			text: 'Поле повинно містити від 2 до 500 символів',
+			zipcode: 'Некоректний формат почтового індексу'
 		}
 	},
 	{
 		lang: 'eng',
 		value: {
-			firstname: 'Field should contain from 2 to 30 characters',
-			lastname: 'Field should contain from 2 to 30 characters',
+			firstName: 'Field should contain from 2 to 30 characters',
+			lastName: 'Field should contain from 2 to 30 characters',
 			email: `Wrong email address `,
 			password: 'From 6 to 30 characters with one letter and one digit',
 			confirmPassword: 'Passwords do not match',
-			text: 'Field should contain from 2 to 700 characters'
+			text: 'Field should contain from 2 to 700 characters',
+			zipcode: 'Wrong zipcode format'
 		}
 	}
 ];
@@ -89,8 +91,11 @@ export const formRegExp = {
 	email:
 		'^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
 	name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
+	firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
+	lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
 	password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
-	phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
+	phoneNumber: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
+	zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
 	country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
 	city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
 	region: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
@@ -266,3 +271,5 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
+
+export const profileFields = ['firstName','lastName','email','phoneNumber','country','region','city','street','buildingNumber','appartment','zipcode']

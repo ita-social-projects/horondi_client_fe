@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   carousel: {
     marginTop: '2rem',
+    marginBottom: theme.spacing(4),
     borderBottom: '2px solid #C2C2C2',
     paddingBottom: '25px'
   },

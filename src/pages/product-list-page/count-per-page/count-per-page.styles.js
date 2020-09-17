@@ -13,6 +13,14 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 'normal',
       fontSize: '12px'
     }
+  },
+
+  selectedButton: {
+    backgroundColor: theme.palette.card.selectedButton.backgroundColor,
+    color: theme.palette.card.selectedButton.color,
+    '&:hover': {
+      backgroundColor: theme.palette.card.selectedButton.backgroundColor
+    }
   }
 }));
 export default useStyles;

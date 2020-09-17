@@ -8,11 +8,10 @@ import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
 import contactsSaga from './contacts/contacts.sagas';
 import modelSaga from './model/model.sagas';
-import checkoutSaga from './checkout/checkout.sagas';
+import commentsSaga from './comments/comments.sagas';
 
 export default function* rootSaga() {
   yield all([
-    checkoutSaga(),
     newsSaga(),
     categoriesSaga(),
     userSaga(),
@@ -20,6 +19,7 @@ export default function* rootSaga() {
     contactsSaga(),
     productsSaga(),
     cartSaga(),
-    modelSaga()
+    modelSaga(),
+    commentsSaga()
   ]);
 }

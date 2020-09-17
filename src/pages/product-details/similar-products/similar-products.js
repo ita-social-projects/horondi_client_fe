@@ -36,17 +36,21 @@ const SimilarProducts = () => {
     ));
 
   return (
-    <div className={styles.similarItems}>
-      <div>
-        <h2 className={styles.title}>{title}</h2>
-      </div>
-      <Carousel
-        className={styles.carousel}
-        responsive={responsive}
-        swipeable={false}
-      >
-        {imagesList}
-      </Carousel>
+    <div>
+      {imagesList.length ? (
+        <div className={styles.similarItems}>
+          <div>
+            <h2 className={styles.title}>{title}</h2>
+          </div>
+          <Carousel
+            className={styles.carousel}
+            responsive={responsive}
+            swipeable={false}
+          >
+            {imagesList}
+          </Carousel>
+        </div>
+      ) : null}
     </div>
   );
 };

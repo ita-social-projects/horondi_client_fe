@@ -8,20 +8,24 @@ import {
   setProduct,
   setProductLoading
 } from './products.actions';
+
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
+
 import {
   GET_ALL_FILTERS,
   GET_FILTRED_PRODUCTS,
   GET_PRODUCT
 } from './products.types';
 
+import { getProduct } from './products.operations';
+
+import { setComments } from '../comments/comments.actions';
+
 export function* handleFilterLoad() {
   try {
-    yield put(setProductsLoading(true));
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
-    console.log(currency);
     const products = yield call(
       getItems,
       `query(
@@ -112,8 +116,8 @@ export function* handleFilterLoad() {
         patterns: state.filters.patternsFilter,
         price: state.filters.priceFilter,
         currency,
-        skip: state.currentPage * state.productsPerPage,
-        limit: state.productsPerPage,
+        skip: state.currentPage * state.countPerPage,
+        limit: state.countPerPage,
         rate: state.sortByRate || undefined,
         basePrice: state.sortByPrice || undefined,
         category: state.filters.categoryFilter,
@@ -125,11 +129,10 @@ export function* handleFilterLoad() {
 
     yield put(
       setPagesCount(
-        Math.ceil(products.data.getProducts.count / state.productsPerPage)
+        Math.ceil(products.data.getProducts.count / state.countPerPage)
       )
     );
     yield put(setAllProducts(products.data.getProducts.items));
-    yield put(setProductsLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
@@ -171,7 +174,6 @@ export function* handleGetFilters() {
         }
       }`
     );
-
     yield put(setAllFilterData(filter.data.getProducts.items));
     yield put(setProductsLoading(false));
   } catch (e) {
@@ -186,168 +188,11 @@ export function* handleProductsErrors(e) {
 }
 
 export function* handleProductLoading({ payload }) {
-  yield put(setProductLoading(true));
-  const query = `
-  query($id: ID!) {
-    getProductById(id: $id) {
-      ... on Product {
-        _id
-      category {
-        _id
-        name {
-          lang
-          value
-        }
-      }
-      name {
-        lang
-        value
-      }
-      description {
-        lang
-        value
-      }
-      mainMaterial {
-        lang
-        value
-      }
-      innerMaterial {
-        lang
-        value
-      }
-      strapLengthInCm
-      images {
-        primary {
-          medium
-          large
-        }
-        additional {
-          small
-          large
-        }
-      }
-      colors {
-        code
-        name {
-          lang
-          value
-        }
-        images {
-          thumbnail
-          large
-        }
-        available
-      }
-      pattern {
-        lang
-        value
-      }
-      closure {
-        lang
-        value
-      }
-      basePrice {
-        value
-        currency
-      }
-      options {
-        size {
-          name
-          heightInCm
-          widthInCm
-          depthInCm
-          volumeInLiters
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        bottomMaterial {
-          name {
-            lang
-            value
-          }
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        additions {
-          name {
-            lang
-            value
-          }
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-      }
-      rate
-      comments {
-        _id
-        text
-        date
-        user {
-          name
-        }
-      }
-      options {
-        size {
-          _id
-          name
-          volumeInLiters
-          widthInCm
-          weightInKg
-        }
-        bottomMaterial {
-          _id
-          name {
-            lang
-            value
-          }
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        additions {
-          name {
-            value
-            lang
-          }
-          available
-          additionalPrice {
-            value
-            currency
-          }
-        }
-        availableCount
-      }
-      images {
-        primary {
-          thumbnail
-          small
-          large
-          medium
-        }
-        additional {
-          large
-          medium
-        }
-      }
-    }
-  }
-}`;
-  const variables = {
-    id: payload
-  };
   try {
-    const product = yield call(getItems, query, variables);
+    yield put(setProductLoading(true));
+    const product = yield call(getProduct, payload);
     yield put(setProduct(product.data.getProductById));
+    yield put(setComments(product.data.getProductById.comments));
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));

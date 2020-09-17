@@ -1,9 +1,11 @@
 import {
   SET_NOVAPOSHTA_CITIES,
-  SET_NOVAPOSHTA_WAREHOUSES
+  SET_NOVAPOSHTA_WAREHOUSES,
+  SET_LOADING
 } from './checkout.types';
 
 const initialState = {
+  loading: false,
   cities: [],
   warehouses: []
 };
@@ -20,6 +22,11 @@ const checkoutReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         warehouses: action.payload
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload
       };
 
     default:

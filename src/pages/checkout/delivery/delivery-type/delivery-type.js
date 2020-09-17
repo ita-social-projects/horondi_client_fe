@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import {
   TextField,
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
+  Backdrop
 } from '@material-ui/core';
 import { useStyles } from '../../checkout.styles';
 import {
@@ -14,13 +16,23 @@ import {
   CHECKOUT_DROP_LIST,
   CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
-import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
+import {
+  getNovaPoshtaCities,
+  getNovaPoshtaWarehouse
+} from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, loading } = useSelector(({ Language, Checkout }) => ({
+    language: Language.language,
+    loading: Checkout.loading
   }));
+  let { cities, warehouses } = useSelector(({ Checkout }) => ({
+    cities: Checkout.cities,
+    warehouses: Checkout.warehouses
+  }));
+  cities = cities.map((citi) => citi.Description);
+  warehouses = warehouses.map((warehouse) => warehouse.Description);
 
   const [department, setDepartment] = useState('');
   const [region, setRegion] = useState('');
@@ -31,6 +43,10 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   useEffect(() => {
     dispatch(getNovaPoshtaCities(city));
   }, [dispatch, city]);
+
+  // useEffect(() => {
+  //   dispatch(getNovaPoshtaWarehouse(department));
+  // }, [dispatch, department]);
 
   const selectHandlerDepartment = (event) => {
     setDepartment(event.target.value);
@@ -56,11 +72,6 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].ukrPoshta,
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
-
-  let { cities } = useSelector(({ Checkout }) => ({
-    cities: Checkout.cities
-  }));
-  cities = cities.map((citi) => citi.Description);
 
   const novaPoshta = (
     <div className={style.contactField}>

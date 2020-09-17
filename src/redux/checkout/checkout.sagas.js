@@ -3,7 +3,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   setNovaPoshtaCities,
-  setNovaPoshtaWarehouse
+  setNovaPoshtaWarehouse,
+  setLoading
 } from './checkout.actions';
 import {
   GET_NOVAPOSHTA_CITIES,
@@ -14,6 +15,8 @@ import { setError } from '../error/error.actions';
 
 export function* handleCities({ payload }) {
   try {
+    yield put(setLoading(true));
+
     const cities = yield call(
       getItems,
       `query{
@@ -30,6 +33,7 @@ export function* handleCities({ payload }) {
 }`
     );
     yield put(setNovaPoshtaCities(cities.data.getNovaPoshtaCities));
+    yield put(setLoading(false));
   } catch (e) {
     yield put(setError({ e }));
     yield put(push('/error-page'));

@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Backdrop , Card, Tooltip } from '@material-ui/core';
+import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';

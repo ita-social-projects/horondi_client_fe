@@ -41,9 +41,11 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
 
   const handleClick = () => {
     setOpen(true);
+    setUser(CHAT_USER_DATA);
   };
 
   const sendHandler = () => {
+    setAllFieldsValidated(false);
     dispatch(
       sendEmail({
         email,
@@ -51,7 +53,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
         text: message
       })
     );
-    setUser(CHAT_USER_DATA);
     handleClick();
   };
 

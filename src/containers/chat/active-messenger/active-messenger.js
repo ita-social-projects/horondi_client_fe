@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
+import { useDispatch, useSelector } from 'react-redux';
+import { formRegExp, CHAT_USER_DATA } from '../../../configs';
 import { CHAT, errorMessages } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';
+import { sendEmail } from '../../../redux/chat/chat.actions';
 
 export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   // VALIDATED && CONFIRMED
@@ -12,10 +13,12 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const [messageValidated, setMessageValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [isSend, setIsSend] = useState(false);
 
   // USER VALUES
-  const [user, setUser] = useState(REGISTER_USER_DATA);
+  const [user, setUser] = useState(CHAT_USER_DATA);
   const { firstName, email, message } = user;
+  const dispatch = useDispatch();
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -25,9 +28,20 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleSend = () => {
+  const handleValidForms = () => {
     setShouldValidate(true);
-    allFieldsValidated && console.log('YO!');
+    allFieldsValidated && sendHandler();
+  };
+
+  const sendHandler = () => {
+    dispatch(
+      sendEmail({
+        email,
+        senderName: firstName,
+        text: message
+      })
+    );
+    setIsSend(true);
   };
 
   // HOOKS
@@ -88,51 +102,70 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
         setValid: setMessageValidated
       },
       type: 'text',
-      regExp: formRegExp.message
+      regExp: formRegExp.text
     }
   };
 
   return (
-    <form className={style.formField}>
-      <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
-      {Object.values(userFields).map(
-        ({
-          label,
-          size = 'small',
-          multiline = true,
-          rows,
-          inputName,
-          errorMessage,
-          value,
-          onChange,
-          validation,
-          type,
-          regExp = null
-        }) => (
-          <TextField
-            required
-            fullWidth
-            key={label}
-            label={label}
-            variant='outlined'
-            name={inputName}
-            size={size}
-            multiline={multiline}
-            rows={rows}
-            error={!validation.value && shouldValidate}
-            helperText={
-              !validation.value && shouldValidate ? `${errorMessage}` : ''
-            }
-            className={style.dataInput}
-            onChange={(e) => onChange(e, validation.setValid, regExp)}
-            value={value}
-            type={type}
-          />
+    <div className={style.activeMsgWrapper}>
+      {
+        !isSend ? (
+          <div className={style.formField}>
+            <div className={style.thankForMsgWrapper}>
+              <div className={style.thankForMsg}>
+                <span>{CHAT[language].thanksMsg}</span>
+              </div>
+              <Button className={style.btnSend}>
+                {CHAT[language].continue}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div>ololo!</div>
         )
-      )}
-      <Button className={style.btnSend} onClick={handleSend}>
-        {CHAT[language].sendBtn}
-      </Button>
-    </form>
+        // (<form className={style.formField}>
+        //   <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
+        //   {Object.values(userFields).map(
+        //     ({
+        //       label,
+        //       size = 'small',
+        //       multiline = true,
+        //       rows,
+        //       inputName,
+        //       errorMessage,
+        //       value,
+        //       onChange,
+        //       validation,
+        //       type,
+        //       regExp = null
+        //     }) => (
+        //       <TextField
+        //         required
+        //         fullWidth
+        //         key={label}
+        //         label={label}
+        //         variant='outlined'
+        //         name={inputName}
+        //         size={size}
+        //         multiline={multiline}
+        //         rows={rows}
+        //         error={!validation.value && shouldValidate}
+        //         helperText={
+        //           !validation.value && shouldValidate ? `${errorMessage}` : ''
+        //         }
+        //         className={style.dataInput}
+        //         onChange={(e) => onChange(e, validation.setValid, regExp)}
+        //         value={value}
+        //         type={type}
+        //       />
+        //     )
+        //   )
+        //   }
+        //   <Button className={style.btnSend} onClick={handleValidForms()}>
+        //     {CHAT[language].sendBtn}
+        //   </Button>
+        // </form>)
+      }
+    </div>
   );
 };

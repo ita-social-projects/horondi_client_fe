@@ -27,8 +27,10 @@ export function* handleContactsLoad() {
               value
             }
             email
-            images {
+            images { 
+              value{
               medium
+              }
             }
             link
           }

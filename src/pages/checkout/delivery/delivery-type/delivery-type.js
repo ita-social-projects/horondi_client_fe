@@ -20,6 +20,7 @@ import {
   getNovaPoshtaCities,
   getNovaPoshtaWarehouse
 } from '../../../../redux/checkout/checkout.actions';
+import ContactsPage from '../../../contacts';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
@@ -175,18 +176,8 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
         </FormControl>
         {deliveryType &&
           (deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP ? (
-            <div>ТУТ МОГЛА БИ БУТИ ВАША РЕКЛАМА</div>
+            <ContactsPage />
           ) : (
-            // <FormControl variant='outlined' className={style.dataInput}>
-            //   <InputLabel>{CHECKOUT_TEXT_FIELDS[language].city}</InputLabel>
-            //   <Select value={city} onChange={selectHandlerCity} label='city'>
-            //     {cities.map((city) => (
-            //       <MenuItem key={city} value={city}>
-            //         {city}
-            //       </MenuItem>
-            //     ))}
-            //   </Select>
-            // </FormControl>
             <Autocomplete
               options={cities}
               getOptionLabel={(option) => option}

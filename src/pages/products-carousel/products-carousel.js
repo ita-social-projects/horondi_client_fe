@@ -15,6 +15,7 @@ import {
   setSearchFilter
 } from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
+import { getImage } from '../../utils/imageLoad'
 
 const ProductsCorousel = ({ category }) => {
   const styles = useStyles();
@@ -46,13 +47,7 @@ const ProductsCorousel = ({ category }) => {
     );
   }
 
-  const getImage = (imageName) => {
-    const image = new Image();
-    image.src = imageName;
-    return image.complete
-      ? imageName
-      : 'https://caferati.me/images/series/bojack-5.jpg';
-  };
+ 
 
   const handleClick = (model) => {
     dispatch(setModelsFilter([model.name[1].value]));
@@ -62,8 +57,8 @@ const ProductsCorousel = ({ category }) => {
     dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice[0].value)),
-        Math.max(...filterData.map((product) => product.basePrice[0].value))
+        Math.min(...filterData.map(product => product.basePrice[0].value)),
+        Math.max(...filterData.map(product => product.basePrice[0].value))
       ])
     );
   };
@@ -71,7 +66,7 @@ const ProductsCorousel = ({ category }) => {
   return (
     <div className={styles.container}>
       <AwesomeSlider className={styles.slider} mobileTouch>
-        {models.map((model) => (
+        {models.map(model => (
           <div
             key={model.name[1].value}
             data-src={getImage(model.images.large)}
@@ -81,7 +76,9 @@ const ProductsCorousel = ({ category }) => {
               onClick={() => handleClick(model)}
               to={`/${category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
             >
-              <p className={styles.caption}>{model.name[language].value}</p>
+              <p data-cy='model-name' className={styles.caption}>
+                {model.name[language].value}
+              </p>
             </Link>
           </div>
         ))}

@@ -11,7 +11,7 @@ const Cart = () => {
   console.log(cartItems);
   return (
     <div className={styles.root}>
-      {/* {cartItems.length ? <FilledCart items={cartItems} /> : <EmptyCart />} */}
+      {cartItems.length ? <FilledCart items={cartItems} /> : <EmptyCart />}
     </div>
   );
 };

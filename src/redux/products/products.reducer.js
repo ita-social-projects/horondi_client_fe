@@ -18,6 +18,10 @@ import {
   SET_PAGES_COUNT,
   SET_HOT_ITEM_FILTER,
   SET_PRODUCT_LOADING,
+  SET_COMMENT,
+  SET_RATE,
+  SET_COMMENTS_LOADING,
+  SET_UPDATING_COMMENT,
   SET_PRODUCT_TO_SEND,
   CLEAR_PRODUCT_TO_SEND
 } from './products.types';
@@ -26,7 +30,7 @@ export const initialState = {
   productLoading: false,
   loading: true,
   currentPage: 0,
-  productsPerPage: 9,
+  countPerPage: 9,
   sortByPrice: 0,
   sortByRate: 0,
   sortByPopularity: -1,
@@ -43,6 +47,8 @@ export const initialState = {
   product: null,
   products: [],
   pagesCount: 1,
+  commentsLoading: false,
+  updatingComment: null,
   productToSend: {
     _id: '',
     name: '',
@@ -95,7 +101,7 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_PRODUCTS_PER_PAGE:
     return {
       ...state,
-      productsPerPage: action.payload
+      countPerPage: action.payload
     };
   case SET_PATTERNS_FILTER:
     return {
@@ -192,6 +198,32 @@ const productsReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       productLoading: action.payload
+    };
+  case SET_RATE:
+    return {
+      ...state,
+      product: {
+        ...state.product,
+        rate: action.payload.rate
+      }
+    };
+  case SET_COMMENT:
+    return {
+      ...state,
+      product: {
+        ...state.product,
+        comments: action.payload
+      }
+    };
+  case SET_COMMENTS_LOADING:
+    return {
+      ...state,
+      commentsLoading: action.payload
+    };
+  case SET_UPDATING_COMMENT:
+    return {
+      ...state,
+      updatingComment: action.payload
     };
   case SET_PRODUCT_TO_SEND:
     return {

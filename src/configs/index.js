@@ -279,3 +279,4 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
+export const imagePrefix = `https://horondi.blob.core.windows.net/horondi/images/`;

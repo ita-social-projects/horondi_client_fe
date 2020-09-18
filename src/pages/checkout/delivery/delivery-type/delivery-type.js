@@ -6,8 +6,7 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem,
-  Backdrop
+  MenuItem
 } from '@material-ui/core';
 import { CheckoutContacts } from '../checkout-contacts/checkout-contacts';
 import { useStyles } from '../../checkout.styles';
@@ -20,17 +19,16 @@ import {
   getNovaPoshtaCities,
   getNovaPoshtaWarehouse
 } from '../../../../redux/checkout/checkout.actions';
-import ContactsPage from '../../../contacts';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
-  const { language, contacts, loading } = useSelector(
+  const { language, contacts } = useSelector(
     ({ Language, Checkout, Contacts }) => ({
       language: Language.language,
-      contacts: Contacts.contacts,
-      loading: Contacts.loading
+      contacts: Contacts.contacts
     })
   );
+  const moreOneWarehouse = 1;
   // let { cities, warehouses } = useSelector(({ Checkout }) => ({
   //   // cities: Checkout.cities,
   //   warehouses: Checkout.warehouses
@@ -68,7 +66,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   };
 
   const departmentSelfPickUpStorage = contacts.map(
-    (contact) => contact.phoneNumber
+    (contact) => contact.address[language].value
   );
 
   const [departmentSelfPickUp, setDepartmentSeflPickUp] = useState('');
@@ -134,25 +132,23 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     />
   );
 
-  const selfPickUpFirstStep =
-    departmentSelfPickUpStorage.length > 1 ? (
-      <FormControl variant='outlined' className={style.dataInput}>
-        <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
-        <Select
-          value={departmentSelfPickUp}
-          onChange={selectHandlerDepartmentSelfPickup}
-          label='department'
-        >
-          {departmentSelfPickUpStorage.map((department) => (
-            <MenuItem key={department} value={department}>
-              {department}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    ) : (
-      <div>asdf</div>
-    );
+  const selfPickUpFirstStep = departmentSelfPickUpStorage.length >
+    moreOneWarehouse && (
+    <FormControl variant='outlined' className={style.dataInput}>
+      <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
+      <Select
+        value={departmentSelfPickUp}
+        onChange={selectHandlerDepartmentSelfPickup}
+        label='department'
+      >
+        {departmentSelfPickUpStorage.map((department) => (
+          <MenuItem key={department} value={department}>
+            {department}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
 
   const novaPoshtaSecondStep = (
     <div className={style.contactField}>
@@ -226,10 +222,10 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   );
 
   const selfPickUpSecondStep =
-    departmentSelfPickUpStorage.length > 1 ? (
+    departmentSelfPickUpStorage.length > moreOneWarehouse ? (
       <CheckoutContacts departmentSelfPickUp={departmentSelfPickUp} />
     ) : (
-      <div>OLOLO</div>
+      <CheckoutContacts departmentSelfPickUp={departmentSelfPickUpStorage[0]} />
     );
 
   const deliverySwitcherFirstStep = () => {
@@ -240,10 +236,8 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
         return ukrPoshtaFirstStep;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return currierFirstStep;
-      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return selfPickUpFirstStep;
       default:
-        return console.log('yo!');
+        return selfPickUpFirstStep;
     }
   };
 
@@ -258,7 +252,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return selfPickUpSecondStep;
       default:
-        return console.log('yo!');
+        return '';
     }
   };
 
@@ -279,39 +273,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
             ))}
           </Select>
         </FormControl>
-        {
-          deliveryType && deliverySwitcherFirstStep()
-          // (deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP ? (
-          //   <FormControl variant='outlined' className={style.dataInput}>
-          //     <InputLabel>Department</InputLabel>
-          //     <Select
-          //       value={departmentSelfPickUp}
-          //       onChange={selectHandlerDepartmentSelfPickup}
-          //       label='department'
-          //     >
-          //       {departments.map((department) => (
-          //         <MenuItem key={department} value={department}>
-          //           {department}
-          //         </MenuItem>
-          //       ))}
-          //     </Select>
-          //   </FormControl>
-          // ) : (
-          //   <Autocomplete
-          //     options={cities}
-          //     getOptionLabel={(option) => option}
-          //     className={style.dataInput}
-          //     renderInput={(params) => (
-          //       <TextField
-          //         {...params}
-          //         onChange={(event) => selectHandlerCity(event)}
-          //         label='City'
-          //         variant='outlined'
-          //       />
-          //     )}
-          //   />
-          // ))
-        }
+        {deliveryType && deliverySwitcherFirstStep()}
       </div>
       {deliverySwitcherSecondStep()}
     </div>

@@ -1,36 +1,19 @@
 import { useSelector } from 'react-redux';
-import React, { useState } from 'react';
-import {
-  Card,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Tooltip
-} from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import parse from 'html-react-parser';
-import ContactsPage from '../../../contacts';
+import React from 'react';
+
 import { useStyles } from '../../checkout.styles';
 import { CONTACTS_PAGE_TITLES } from '../../../../translations/contacts.translations';
-import mapImg from '../../../../images/map-medium.png';
 
 export const CheckoutContacts = ({ departmentSelfPickUp }) => {
   const style = useStyles();
-  const { language, contacts, loading } = useSelector(
-    ({ Language, Checkout, Contacts }) => ({
-      language: Language.language,
-      contacts: Contacts.contacts,
-      loading: Contacts.loading
-    })
-  );
-
-  const [depart, setDepart] = useState('');
-
+  const { language, contacts } = useSelector(({ Language, Contacts }) => ({
+    language: Language.language,
+    contacts: Contacts.contacts
+  }));
+  // console.log(departmentSelfPickUp);
   const contactsDisplay = contacts.map(
     (contact) =>
-      contact.phoneNumber === departmentSelfPickUp && (
+      contact.address[language].value === departmentSelfPickUp && (
         <div key={contact._id} className={style.content}>
           <div>
             <div className={style.contactsItem}>
@@ -44,7 +27,7 @@ export const CheckoutContacts = ({ departmentSelfPickUp }) => {
                 {CONTACTS_PAGE_TITLES[language].address}
               </span>
               <div className={style.contactAddress}>
-                {parse(contact.address[language].value)}
+                {contact.address[language].value}
               </div>
             </div>
             <div className={style.contactsItem}>

@@ -5,12 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import parse from 'html-react-parser';
+import { imagePrefix } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { getContacts } from '../../redux/contacts/contacts.actions';
-
-import mapImg from '../../images/map-medium.png';
 
 const ContactsPage = ({ fromCheckout }) => {
   const { contacts, loading, language } = useSelector(
@@ -49,7 +48,7 @@ const ContactsPage = ({ fromCheckout }) => {
               >
                 <img
                   className={styles.mapImage}
-                  src={contact.images[language].value.medium || mapImg}
+                  src={`${imagePrefix}${contact.images[language].value.medium}`}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
               </a>
@@ -81,7 +80,9 @@ const ContactsPage = ({ fromCheckout }) => {
               {CONTACTS_PAGE_TITLES[language].address}
             </span>
             <div className={styles.contactAddress}>
-              {parse(contact.address[language].value)}
+              {contact.address[language].value.includes('<p>')
+                ? parse(contact.address[language].value)
+                : contact.address[language].value}
             </div>
           </div>
           <div className={styles.contactsItem}>

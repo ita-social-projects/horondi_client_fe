@@ -73,22 +73,22 @@ const CommentsItem = ({ user, text, date, commentId }) => {
           <div className={styles.icons}>
             <div className={styles.commentActions}>
               {!isEditable &&
-              (userData ? userData.email === user.email : false) ? (
-                <div>
-                  <Tooltip title={TOOLTIPS[language].edit}>
-                    <EditIcon
-                      className={styles.editIcon}
-                      onClick={() => setEditable(true)}
-                    />
-                  </Tooltip>
-                  <Tooltip title={TOOLTIPS[language].delete}>
-                    <DeleteForeverIcon
-                      className={styles.deleteIcon}
-                      onClick={handleOpen}
-                    />
-                  </Tooltip>
-                </div>
-              ) : null}
+                (userData ? userData.email === user.email : false) ? (
+                  <div>
+                    <Tooltip title={TOOLTIPS[language].edit}>
+                      <EditIcon
+                        className={styles.editIcon}
+                        onClick={() => setEditable(true)}
+                      />
+                    </Tooltip>
+                    <Tooltip title={TOOLTIPS[language].delete}>
+                      <DeleteForeverIcon
+                        className={styles.deleteIcon}
+                        onClick={handleOpen}
+                      />
+                    </Tooltip>
+                  </div>
+                ) : null}
             </div>
           </div>
         </div>
@@ -101,8 +101,8 @@ const CommentsItem = ({ user, text, date, commentId }) => {
             username={name}
           />
         ) : (
-          <div className={styles.text}>{text}</div>
-        )}
+            <div className={styles.text}>{text}</div>
+          )}
         <div className={styles.date}>{commentDate}</div>
       </div>
       <CommentDialog

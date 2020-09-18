@@ -121,7 +121,7 @@ export const useStyles = makeStyles((theme) => ({
   saveBtn: {
     position:'absolute',
     width: '382px',
-    bottom: 32,
+    bottom: 26,
     left: 34
   },
   userActions: {

@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import parse from 'html-react-parser';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
-import { getContacts } from '../../redux/contacts/contacts.actions';
+
 import mapImg from '../../images/map-medium.png';
 
 const ContactsPage = () => {
@@ -20,11 +20,6 @@ const ContactsPage = () => {
     })
   );
   const styles = useStyles();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
 
   if (loading) {
     return (
@@ -34,7 +29,7 @@ const ContactsPage = () => {
     );
   }
 
-  const contactsDisplay = contacts.map(contact => (
+  const contactsDisplay = contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
@@ -67,7 +62,7 @@ const ContactsPage = () => {
               {CONTACTS_PAGE_TITLES[language].schedule}
             </span>
             <div className={styles.schedule}>
-              {contact.openHours[language].value.split('|').map(el => (
+              {contact.openHours[language].value.split('|').map((el) => (
                 <div key={el}>
                   <span className={styles.day}>{el.substr(0, 4)}</span>
                   <span>{el.substring(4)}</span>

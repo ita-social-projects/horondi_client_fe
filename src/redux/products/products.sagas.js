@@ -21,7 +21,6 @@ export function* handleFilterLoad() {
     yield put(setProductsLoading(true));
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
-    console.log(currency);
     const products = yield call(
       getItems,
       `query(

@@ -46,6 +46,14 @@ const ProductsCorousel = ({ category }) => {
     );
   }
 
+  const getImage = (imageName) => {
+    const image = new Image();
+    image.src = imageName;
+    return image.complete
+      ? imageName
+      : 'https://caferati.me/images/series/bojack-5.jpg';
+  };
+
   const handleClick = (model) => {
     dispatch(setModelsFilter([model.name[1].value]));
     dispatch(setPatternsFilter([]));
@@ -66,7 +74,7 @@ const ProductsCorousel = ({ category }) => {
         {models.map((model) => (
           <div
             key={model.name[1].value}
-            data-src={model.images.large}
+            data-src={getImage(model.images.large)}
             className={styles.captionBlock}
           >
             <Link

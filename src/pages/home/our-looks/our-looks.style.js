@@ -2,20 +2,29 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   imageSection: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 300px)',
-    justifyContent: 'center',
-    '@media screen and (max-width: 991px)': {
-      gridTemplateColumns: 'repeat(2, 300px)'
-    },
-    '@media screen and (max-width: 552px)': {
-      gridTemplateColumns: 'repeat(1, 300px)'
-    }
+    display: 'flex',
+    flexFlow: 'wrap',
   },
   imageWrapper: {
-    height: '15em',
+    height: '340px',
+    overflow: 'hidden',
+    flexBasis: '16.666%',
+    '@media screen and (max-width: 991px)': {
+      flexBasis: '25%',
+    },
+    '@media screen and (max-width: 552px)': {
+      flexBasis: '50%',
+    },
+    '&:hover > div': {
+      transform: 'scale(1.1)'
+    }
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    transition: 'transform .3s ease',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   },
   title: {
     fontSize: '2em',

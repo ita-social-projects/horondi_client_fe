@@ -16,8 +16,8 @@ const OurLooks = () => {
         {HOMEPAGE_TITLES[language].look}
       </Typography>
       <div className={styles.imageSection}>
-        {HOMEPAGE_LOOKS_IMAGES.map((imageSrc, i) => (
-          <div key={i} className={styles.imageWrapper}>
+        {HOMEPAGE_LOOKS_IMAGES.map((imageSrc) => (
+          <div key={imageSrc} className={styles.imageWrapper}>
             <div
               className={styles.image}
               style={{ backgroundImage: `url(${imageSrc})` }}

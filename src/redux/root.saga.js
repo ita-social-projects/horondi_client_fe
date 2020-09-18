@@ -11,15 +11,15 @@ import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
 
 export default function* rootSaga() {
-	yield all([
-		newsSaga(),
-		categoriesSaga(),
-		userSaga(),
-		wishlistSaga(),
-		contactsSaga(),
-		productsSaga(),
-		cartSaga(),
-		modelSaga(),
-		commentsSaga()
-	]);
+  yield all([
+    newsSaga(),
+    categoriesSaga(),
+    userSaga(),
+    wishlistSaga(),
+    contactsSaga(),
+    productsSaga(),
+    cartSaga(),
+    modelSaga(),
+    commentsSaga()
+  ]);
 }

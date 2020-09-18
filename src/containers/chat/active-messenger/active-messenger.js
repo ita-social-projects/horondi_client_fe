@@ -15,7 +15,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const [open, setOpen] = useState(false);
-  // const [isSend, setIsSend] = useState(false);
 
   // USER VALUES
   const [user, setUser] = useState(CHAT_USER_DATA);

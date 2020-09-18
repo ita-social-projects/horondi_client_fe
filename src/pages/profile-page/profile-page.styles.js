@@ -3,25 +3,24 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   profile: {
     margin: '26px auto',
-    minWidth: '100px',
-    maxWidth: 780,
+    minWidth: 100,
+    maxWidth: 835,
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 907px)': {
       justifyContent: 'center'
     }
   },
   userForm: {
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    maxWidth: 400,
-    minWidth: 388,
     padding: '44px 34px 86px',
     marginBottom: 20,
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
-    rowGap: '10px',
-    position: 'relative'
+    rowGap: '15px',
+    position: 'relative',
+    minWidth: 450
   },
   userImage: {
     height: '100%',
@@ -33,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     marginRight: 10,
     gridRow: 'span 2',
-    alignSelf: 'start'
+    alignSelf: 'center'
   },
   imageAndName: {
     display: 'flex',
@@ -47,7 +46,15 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& .MuiInput-underline:after': {
       borderBottom: '2px solid black'
-    }
+    },
+    '& div > input': {
+      position: 'relative'
+    },
+    '& p': {
+      position: 'absolute',
+      top: '46px',
+      fontSize: '0.625rem'
+    },
   },
   nameInputs: {
     gridColumn: 'span 2'
@@ -83,7 +90,7 @@ export const useStyles = makeStyles((theme) => ({
       textShadow: '-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000'
     },
     '&:hover': {
-      opacity: 1,
+      opacity: 0.7,
       transition: 'all 1s ease'
     },
   },
@@ -113,7 +120,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   saveBtn: {
     position:'absolute',
-    width: 332,
+    width: '382px',
     bottom: 32,
     left: 34
   },

@@ -255,12 +255,6 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 ## Support
 
-Reach out to me at one of the following places!
-
-- Website at <a href="http://Website.com" target="_blank">`Website.com`</a>
-- Facebook at <a href="https://www.facebook.com/LiubomyrHalamaha/" target="_blank">`Liubomyr Halamaha`</a>
-- Insert more social links here.
-
 ---
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)

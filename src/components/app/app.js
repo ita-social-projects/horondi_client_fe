@@ -34,11 +34,11 @@ const App = () => {
   useEffect(() => {
     dispatch(getContacts());
     dispatch(getCategories());
+    dispatch(getContacts());
   }, [dispatch]);
   useEffect(() => {
     dispatch(setCountPerPage(productsCount));
   }, [dispatch, productsCount]);
-
   useEffect(() => {
     dispatch(setThemeMode(themeMode));
   }, [lightMode, dispatch, themeMode]);

@@ -41,6 +41,7 @@
     "react-scripts": "^3.4.1",
     "react-scripts-config": "^1.0.17-13",
     "react-scroll-up-button": "^1.6.4",
+    "react-spring": "^8.0.27",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
@@ -125,8 +126,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write",
-      "eslint . --fix --color"
+      "prettier --write"
     ]
   }
 }

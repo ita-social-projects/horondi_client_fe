@@ -16,6 +16,7 @@ import { getCategories } from '../../redux/categories/categories.actions';
 
 import { Loader } from '../loader/loader';
 import { setCountPerPage } from '../../redux/products/products.actions';
+import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
@@ -31,6 +32,7 @@ const App = () => {
   const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
+    dispatch(getContacts());
     dispatch(getCategories());
   }, [dispatch]);
   useEffect(() => {

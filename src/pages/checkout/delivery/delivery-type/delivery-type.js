@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
 import {
   TextField,
   FormControl,
@@ -10,6 +9,7 @@ import {
   MenuItem,
   Backdrop
 } from '@material-ui/core';
+import { CheckoutContacts } from '../checkout-contacts/checkout-contacts';
 import { useStyles } from '../../checkout.styles';
 import {
   CHECKOUT_DELIVERY_TYPES,
@@ -24,17 +24,20 @@ import ContactsPage from '../../../contacts';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
-  const { language, loading } = useSelector(({ Language, Checkout }) => ({
-    language: Language.language,
-    loading: Checkout.loading
-  }));
-  let { cities, warehouses } = useSelector(({ Checkout }) => ({
-    cities: Checkout.cities,
-    warehouses: Checkout.warehouses
-  }));
-  cities = cities.map((citi) => citi.Description);
-  warehouses = warehouses.map((warehouse) => warehouse.Description);
-
+  const { language, contacts, loading } = useSelector(
+    ({ Language, Checkout, Contacts }) => ({
+      language: Language.language,
+      contacts: Contacts.contacts,
+      loading: Contacts.loading
+    })
+  );
+  // let { cities, warehouses } = useSelector(({ Checkout }) => ({
+  //   // cities: Checkout.cities,
+  //   warehouses: Checkout.warehouses
+  // }));
+  // cities = cities.map((citi) => citi.Description);
+  // warehouses = warehouses.map((warehouse) => warehouse.Description);
+  const cities = [];
   const [department, setDepartment] = useState('');
   const [region, setRegion] = useState('');
   const [city, setCity] = useState('');
@@ -64,7 +67,16 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     setCity(event.target.value);
   };
 
-  const departments = [];
+  const departmentSelfPickUpStorage = contacts.map(
+    (contact) => contact.phoneNumber
+  );
+
+  const [departmentSelfPickUp, setDepartmentSeflPickUp] = useState('');
+
+  const selectHandlerDepartmentSelfPickup = (event) => {
+    setDepartmentSeflPickUp(event.target.value);
+  };
+
   const regions = ['Lviv', 'Kyiv', 'Odesa'];
 
   const deliveries = [
@@ -74,7 +86,75 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
 
-  const novaPoshta = (
+  const novaPoshtaFirstStep = (
+    <Autocomplete
+      options={cities}
+      getOptionLabel={(option) => option}
+      className={style.dataInput}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          onChange={(event) => selectHandlerCity(event)}
+          label='City'
+          variant='outlined'
+        />
+      )}
+    />
+  );
+
+  const ukrPoshtaFirstStep = (
+    <Autocomplete
+      options={cities}
+      getOptionLabel={(option) => option}
+      className={style.dataInput}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          onChange={(event) => selectHandlerCity(event)}
+          label='City'
+          variant='outlined'
+        />
+      )}
+    />
+  );
+
+  const currierFirstStep = (
+    <Autocomplete
+      options={cities}
+      getOptionLabel={(option) => option}
+      className={style.dataInput}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          onChange={(event) => selectHandlerCity(event)}
+          label='City'
+          variant='outlined'
+        />
+      )}
+    />
+  );
+
+  const selfPickUpFirstStep =
+    departmentSelfPickUpStorage.length > 1 ? (
+      <FormControl variant='outlined' className={style.dataInput}>
+        <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
+        <Select
+          value={departmentSelfPickUp}
+          onChange={selectHandlerDepartmentSelfPickup}
+          label='department'
+        >
+          {departmentSelfPickUpStorage.map((department) => (
+            <MenuItem key={department} value={department}>
+              {department}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    ) : (
+      <div>asdf</div>
+    );
+
+  const novaPoshtaSecondStep = (
     <div className={style.contactField}>
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
@@ -83,7 +163,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
           onChange={selectHandlerDepartment}
           label='department'
         >
-          {departments.map((department) => (
+          {departmentSelfPickUpStorage.map((department) => (
             <MenuItem key={department} value={department}>
               {department}
             </MenuItem>
@@ -93,7 +173,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const ukrPoshta = (
+  const ukrPoshtaSecondStep = (
     <div className={style.contactField}>
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>Region</InputLabel>
@@ -112,7 +192,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
           onChange={selectHandlerDepartment}
           label='department'
         >
-          {departments.map((department) => (
+          {departmentSelfPickUpStorage.map((department) => (
             <MenuItem key={department} value={department}>
               {department}
             </MenuItem>
@@ -122,7 +202,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const currier = (
+  const currierSecondStep = (
     <div className={style.contactField}>
       <TextField
         required
@@ -145,15 +225,40 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const deliverySwitcher = () => {
+  const selfPickUpSecondStep =
+    departmentSelfPickUpStorage.length > 1 ? (
+      <CheckoutContacts departmentSelfPickUp={departmentSelfPickUp} />
+    ) : (
+      <div>OLOLO</div>
+    );
+
+  const deliverySwitcherFirstStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return novaPoshta;
+        return novaPoshtaFirstStep;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return ukrPoshta;
+        return ukrPoshtaFirstStep;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return currier;
+        return currierFirstStep;
+      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
+        return selfPickUpFirstStep;
       default:
+        return console.log('yo!');
+    }
+  };
+
+  const deliverySwitcherSecondStep = () => {
+    switch (deliveryType) {
+      case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
+        return novaPoshtaSecondStep;
+      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
+        return ukrPoshtaSecondStep;
+      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+        return currierSecondStep;
+      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
+        return selfPickUpSecondStep;
+      default:
+        return console.log('yo!');
     }
   };
 
@@ -174,26 +279,41 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
             ))}
           </Select>
         </FormControl>
-        {deliveryType &&
-          (deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP ? (
-            <ContactsPage />
-          ) : (
-            <Autocomplete
-              options={cities}
-              getOptionLabel={(option) => option}
-              className={style.dataInput}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  onChange={(event) => selectHandlerCity(event)}
-                  label='Місто'
-                  variant='outlined'
-                />
-              )}
-            />
-          ))}
+        {
+          deliveryType && deliverySwitcherFirstStep()
+          // (deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP ? (
+          //   <FormControl variant='outlined' className={style.dataInput}>
+          //     <InputLabel>Department</InputLabel>
+          //     <Select
+          //       value={departmentSelfPickUp}
+          //       onChange={selectHandlerDepartmentSelfPickup}
+          //       label='department'
+          //     >
+          //       {departments.map((department) => (
+          //         <MenuItem key={department} value={department}>
+          //           {department}
+          //         </MenuItem>
+          //       ))}
+          //     </Select>
+          //   </FormControl>
+          // ) : (
+          //   <Autocomplete
+          //     options={cities}
+          //     getOptionLabel={(option) => option}
+          //     className={style.dataInput}
+          //     renderInput={(params) => (
+          //       <TextField
+          //         {...params}
+          //         onChange={(event) => selectHandlerCity(event)}
+          //         label='City'
+          //         variant='outlined'
+          //       />
+          //     )}
+          //   />
+          // ))
+        }
       </div>
-      {deliverySwitcher()}
+      {deliverySwitcherSecondStep()}
     </div>
   );
 };

@@ -10,7 +10,7 @@ export const CHAT = {
   },
   1: {
     simpleChoice: 'Contact us',
-    ourContacts: 'Our contacts:',
+    ourContacts: 'Our checkout-contacts:',
     sendMail: 'Contact us',
     name: `Name`,
     email: 'Email',

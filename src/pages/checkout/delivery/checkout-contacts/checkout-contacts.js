@@ -10,7 +10,7 @@ export const CheckoutContacts = ({ departmentSelfPickUp }) => {
     language: Language.language,
     contacts: Contacts.contacts
   }));
-  // console.log(departmentSelfPickUp);
+
   const contactsDisplay = contacts.map(
     (contact) =>
       contact.address[language].value === departmentSelfPickUp && (

@@ -8,7 +8,6 @@ import {
   Select,
   MenuItem
 } from '@material-ui/core';
-import { CheckoutContacts } from '../checkout-contacts/checkout-contacts';
 import { useStyles } from '../../checkout.styles';
 import {
   CHECKOUT_DELIVERY_TYPES,
@@ -16,9 +15,12 @@ import {
   CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
 import {
-  getNovaPoshtaCities,
-  getNovaPoshtaWarehouse
-} from '../../../../redux/checkout/checkout.actions';
+  SelfPickUpFirstStep,
+  SelfPickUpSecondStep
+} from './mail-services/self-pickup';
+import { NovaPoshtaFirstStep } from './mail-services/nova-poshta/nova-poshta-first-step';
+import { NovaPoshtaSecondStep } from './mail-services/nova-poshta/nova-poshta-second-step';
+import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const style = useStyles();
@@ -28,41 +30,24 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       contacts: Contacts.contacts
     })
   );
-  const moreOneWarehouse = 1;
-  // let { cities, warehouses } = useSelector(({ Checkout }) => ({
-  //   // cities: Checkout.cities,
-  //   warehouses: Checkout.warehouses
-  // }));
-  // cities = cities.map((citi) => citi.Description);
-  // warehouses = warehouses.map((warehouse) => warehouse.Description);
-  const cities = [];
-  const [department, setDepartment] = useState('');
-  const [region, setRegion] = useState('');
   const [city, setCity] = useState('');
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getNovaPoshtaCities(city));
   }, [dispatch, city]);
+  const [region, setRegion] = useState('');
 
   // useEffect(() => {
   //   dispatch(getNovaPoshtaWarehouse(department));
   // }, [dispatch, department]);
 
-  const selectHandlerDepartment = (event) => {
-    setDepartment(event.target.value);
-  };
   const selectHandlerRegion = (event) => {
     setRegion(event.target.value);
   };
 
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
-  };
-
-  const selectHandlerCity = (event) => {
-    setCity(event.target.value);
   };
 
   const departmentSelfPickUpStorage = contacts.map(
@@ -84,31 +69,15 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
 
-  const novaPoshtaFirstStep = (
-    <Autocomplete
-      options={cities}
-      getOptionLabel={(option) => option}
-      className={style.dataInput}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          onChange={(event) => selectHandlerCity(event)}
-          label='City'
-          variant='outlined'
-        />
-      )}
-    />
-  );
-
   const ukrPoshtaFirstStep = (
     <Autocomplete
-      options={cities}
+      options={[]}
       getOptionLabel={(option) => option}
       className={style.dataInput}
       renderInput={(params) => (
         <TextField
           {...params}
-          onChange={(event) => selectHandlerCity(event)}
+          onChange={(event) => console.log('I AM UKRPOSHTA')}
           label='City'
           variant='outlined'
         />
@@ -118,55 +87,18 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
 
   const currierFirstStep = (
     <Autocomplete
-      options={cities}
+      options={[]}
       getOptionLabel={(option) => option}
       className={style.dataInput}
       renderInput={(params) => (
         <TextField
           {...params}
-          onChange={(event) => selectHandlerCity(event)}
+          onChange={(event) => console.log('I AM GROOT')}
           label='City'
           variant='outlined'
         />
       )}
     />
-  );
-
-  const selfPickUpFirstStep = departmentSelfPickUpStorage.length >
-    moreOneWarehouse && (
-    <FormControl variant='outlined' className={style.dataInput}>
-      <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
-      <Select
-        value={departmentSelfPickUp}
-        onChange={selectHandlerDepartmentSelfPickup}
-        label='department'
-      >
-        {departmentSelfPickUpStorage.map((department) => (
-          <MenuItem key={department} value={department}>
-            {department}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-  );
-
-  const novaPoshtaSecondStep = (
-    <div className={style.contactField}>
-      <FormControl variant='outlined' className={style.dataInput}>
-        <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
-        <Select
-          value={department}
-          onChange={selectHandlerDepartment}
-          label='department'
-        >
-          {departmentSelfPickUpStorage.map((department) => (
-            <MenuItem key={department} value={department}>
-              {department}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
   );
 
   const ukrPoshtaSecondStep = (
@@ -184,8 +116,10 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>Department</InputLabel>
         <Select
-          value={department}
-          onChange={selectHandlerDepartment}
+          value={[]}
+          onChange={() => {
+            console.log('UKRPOSTA!');
+          }}
           label='department'
         >
           {departmentSelfPickUpStorage.map((department) => (
@@ -221,36 +155,42 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     </div>
   );
 
-  const selfPickUpSecondStep =
-    departmentSelfPickUpStorage.length > moreOneWarehouse ? (
-      <CheckoutContacts departmentSelfPickUp={departmentSelfPickUp} />
-    ) : (
-      <CheckoutContacts departmentSelfPickUp={departmentSelfPickUpStorage[0]} />
-    );
-
   const deliverySwitcherFirstStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return novaPoshtaFirstStep;
+        return <NovaPoshtaFirstStep />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return ukrPoshtaFirstStep;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return currierFirstStep;
       default:
-        return selfPickUpFirstStep;
+        return (
+          <SelfPickUpFirstStep
+            departmentSelfPickUpStorage={departmentSelfPickUpStorage}
+            departmentSelfPickUp={departmentSelfPickUp}
+            selectHandlerDepartmentSelfPickup={
+              selectHandlerDepartmentSelfPickup
+            }
+          />
+        );
     }
   };
 
   const deliverySwitcherSecondStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return novaPoshtaSecondStep;
+        return <NovaPoshtaSecondStep />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return ukrPoshtaSecondStep;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return currierSecondStep;
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return selfPickUpSecondStep;
+        return (
+          <SelfPickUpSecondStep
+            departmentSelfPickUpStorage={departmentSelfPickUpStorage}
+            departmentSelfPickUp={departmentSelfPickUp}
+          />
+        );
       default:
         return '';
     }

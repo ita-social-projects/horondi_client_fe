@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
+
 import { formRegExp, CHAT_USER_DATA } from '../../../configs';
 import { CHAT, errorMessages } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';

@@ -20,17 +20,11 @@ export function* handleCities({ payload }) {
     const cities = yield call(
       getItems,
       `query{
-  getNovaPoshtaCities(city: "${payload}"){
-    ...on NovaPoshtaCity {
-      Description
-      Ref
-    } 
-  ...on Error{
-    message
-    statusCode
-    }
-  }
-}`
+      getNovaPoshtaCities(city: "${payload}") {
+         description
+         ref
+         }
+      }`
     );
     yield put(setNovaPoshtaCities(cities.data.getNovaPoshtaCities));
     yield put(setLoading(false));
@@ -45,19 +39,12 @@ export function* handleWarehouse({ payload }) {
     const warehouses = yield call(
       getItems,
       `query{
-  getNovaPoshtaWarehouses(city: ${payload}){
-    ...on NovaPoshtaWarehouse {
-      Description
-      Ref
-      ShortAddress
-    } 
-
-  ...on Error{
-    message
-    statusCode
-    }
-  }
-}`
+                getNovaPoshtaWarehouses(city: "${payload}"){   
+                    description
+                    ref
+                    shortAddress
+                }
+            }`
     );
     yield put(setNovaPoshtaWarehouse(warehouses.data.getNovaPoshtaWarehouses));
   } catch (e) {

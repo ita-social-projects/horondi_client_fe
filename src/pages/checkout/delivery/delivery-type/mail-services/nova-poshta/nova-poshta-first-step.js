@@ -1,35 +1,48 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from '../../../../checkout.styles';
-import { getNovaPoshtaCities } from '../../../../../../redux/checkout/checkout.actions';
+import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.translations';
 
-const NovaPoshtaFirstStep = () => {
+const NovaPoshtaFirstStep = ({ cities, setCity }) => {
   const style = useStyles();
-  const cities = [];
-
-  // let { cities } = useSelector(({ Checkout }) => ({
-  //   cities: Checkout.cities
-  // }));
-  // cities = cities.map((citi) => citi.Description);
-  // warehouses = warehouses.map((warehouse) => warehouse.Description);
-
-  // const selectHandlerCity = (event) => {
-  //   setCity(event.target.value);
-  // };
+  const { language, loading } = useSelector(({ Checkout, Language }) => ({
+    loading: Checkout.loading,
+    cities: Checkout.cities,
+    language: Language.language
+  }));
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <Autocomplete
+      onChange={(event, newValue) => {
+        setCity(newValue);
+      }}
+      inputValue={inputValue}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+        setCity(newInputValue);
+      }}
       options={cities}
-      getOptionLabel={(option) => option}
       className={style.dataInput}
       renderInput={(params) => (
         <TextField
           {...params}
-          // onChange={(event) => selectHandlerCity(event)}
-          label='City'
+          label={CHECKOUT_TEXT_FIELDS[language].city}
           variant='outlined'
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading ? (
+                  <CircularProgress color='inherit' size={20} />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </>
+            )
+          }}
         />
       )}
     />

@@ -15,6 +15,7 @@ import Snackbar from './snackbar/snackbar.reducer';
 import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
+import Checkout from './checkout/checkout.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -32,7 +33,8 @@ const rootReducer = (history) =>
     Contacts,
     Model,
     Currency,
-    Comments
+    Comments,
+    Checkout
   });
 
 export default rootReducer;

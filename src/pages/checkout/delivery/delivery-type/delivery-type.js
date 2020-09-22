@@ -24,15 +24,19 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     language: Language.language,
     contacts: Contacts.contacts
   }));
-  // const [city, setCity] = useState('');
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getNovaPoshtaCities(city));
-  // }, [dispatch, city]);
-  // const [region, setRegion] = useState('');
-  // useEffect(() => {
-  //   dispatch(getNovaPoshtaWarehouse(department));
-  // }, [dispatch, department]);
+
+  let { cities } = useSelector(({ Checkout }) => ({
+    cities: Checkout.cities
+  }));
+
+  const [city, setCity] = useState('');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNovaPoshtaCities(city));
+  }, [dispatch, city]);
+
+  cities = cities.map((citi) => citi.description);
 
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
@@ -58,7 +62,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherFirstStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaFirstStep />;
+        return <NovaPoshtaFirstStep cities={cities} setCity={setCity} />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaFirstStep />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
@@ -79,7 +83,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherSecondStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaSecondStep />;
+        return <NovaPoshtaSecondStep city={city} />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaSecondStep />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:

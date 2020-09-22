@@ -18,7 +18,6 @@ const ContactsPage = ({ fromCheckout }) => {
     })
   );
   const styles = useStyles();
-
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>

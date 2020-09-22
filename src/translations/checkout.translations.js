@@ -95,21 +95,36 @@ export const CHECKOUT_ADDITIONAL_INFORMATION = {
   }
 };
 
-export const errorMessages = [
-  {
-    value: {
-      firstname: 'Поле повинно містити від 2 до 30 символів',
-      lastname: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, електронної пошти ',
-      phoneNumber: 'Некоректний формат номеру телефону'
-    }
+export const CHECKOUT_ERROR = {
+  0: {
+    firstName: 'Поле повинно містити від 2 до 30 символів',
+    lastName: 'Поле повинно містити від 2 до 30 символів',
+    email: 'Некоректний формат, електронної пошти ',
+    phoneNumber: 'Некоректний формат номеру телефону'
   },
-  {
-    value: {
-      firstname: 'Field should contain from 2 to 30 characters',
-      lastname: 'Field should contain from 2 to 30 characters',
-      email: `Incorrect email format`,
-      phoneNumber: 'Incorrect phone number format'
-    }
+  1: {
+    firstName: 'Field should contain from 2 to 30 characters',
+    lastName: 'Field should contain from 2 to 30 characters',
+    email: `Incorrect email format`,
+    phoneNumber: 'Incorrect phone number format'
   }
-];
+};
+
+// export const errorMessages = [
+//   {
+//     value: {
+//       firstname: 'Поле повинно містити від 2 до 30 символів',
+//       lastname: 'Поле повинно містити від 2 до 30 символів',
+//       email: 'Некоректний формат, електронної пошти ',
+//       phoneNumber: 'Некоректний формат номеру телефону'
+//     }
+//   },
+//   {
+//     value: {
+//       firstname: 'Field should contain from 2 to 30 characters',
+//       lastname: 'Field should contain from 2 to 30 characters',
+//       email: `Incorrect email format`,
+//       phoneNumber: 'Incorrect phone number format'
+//     }
+//   }
+// ];

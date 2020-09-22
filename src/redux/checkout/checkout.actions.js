@@ -11,13 +11,10 @@ const setNovaPoshtaCities = (cities) => ({
   payload: cities
 });
 
-const getNovaPoshtaCities = (inputValue) => {
-  console.log(inputValue);
-  return {
-    type: GET_NOVAPOSHTA_CITIES,
-    payload: inputValue
-  };
-};
+const getNovaPoshtaCities = (inputValue) => ({
+  type: GET_NOVAPOSHTA_CITIES,
+  payload: inputValue
+});
 
 const setNovaPoshtaWarehouse = (warehouses) => ({
   type: SET_NOVAPOSHTA_WAREHOUSES,

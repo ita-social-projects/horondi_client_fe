@@ -10,12 +10,15 @@ import {
   SelfPickUpFirstStep,
   SelfPickUpSecondStep
 } from './mail-services/self-pickup';
-import { NovaPoshtaFirstStep } from './mail-services/nova-poshta/nova-poshta-first-step';
-import { NovaPoshtaSecondStep } from './mail-services/nova-poshta/nova-poshta-second-step';
-import { UkrPoshtaFirstStep } from './mail-services/ukrposhta/ukrposhta-first-step';
-import { UkrPoshtaSecondStep } from './mail-services/ukrposhta/ukrposhta-second';
-import { CurrierFirstStep } from './mail-services/currier/currier-first';
-import { CurrierSecondStep } from './mail-services/currier/currier-second';
+import {
+  NovaPoshtaFirstStep,
+  NovaPoshtaSecondStep
+} from './mail-services/nova-poshta';
+import {
+  UkrPoshtaFirstStep,
+  UkrPoshtaSecondStep
+} from './mail-services/ukrposhta';
+import { CurrierFirstStep, CurrierSecondStep } from './mail-services/currier';
 import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {

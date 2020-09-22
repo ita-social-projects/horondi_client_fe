@@ -15,7 +15,7 @@ import {
   CHECKOUT_BUTTON,
   CHECKOUT_PAYMENT,
   CHECKOUT_ADDITIONAL_INFORMATION,
-  errorMessages
+  CHECKOUT_ERROR
 } from '../../../translations/checkout.translations';
 import { useStyles } from '../checkout.styles';
 
@@ -65,7 +65,7 @@ export const OrderForm = () => {
   const contactsNames = {
     firstNameField: {
       inputName: 'firstName',
-      errorMessage: errorMessages[language].value.firstName,
+      errorMessage: CHECKOUT_ERROR[language].firstName,
       value: firstName,
       label: CHECKOUT_TEXT_FIELDS[language].firstName,
       onChange: handleChange,
@@ -79,7 +79,7 @@ export const OrderForm = () => {
     },
     lastNameNameField: {
       inputName: 'lastName',
-      errorMessage: errorMessages[language].value.lastName,
+      errorMessage: CHECKOUT_ERROR[language].lastName,
       value: lastName,
       label: CHECKOUT_TEXT_FIELDS[language].lastName,
       onChange: handleChange,
@@ -91,10 +91,11 @@ export const OrderForm = () => {
       regExp: formRegExp.name
     }
   };
+
   const contactsEmailPhone = {
     email: {
       inputName: 'email',
-      errorMessage: errorMessages[language].value.email,
+      errorMessage: CHECKOUT_ERROR[language].email,
       value: email,
       label: CHECKOUT_TEXT_FIELDS[language].email,
       onChange: handleChange,
@@ -107,7 +108,7 @@ export const OrderForm = () => {
     },
     phoneNumberField: {
       inputName: 'phoneNumber',
-      errorMessage: errorMessages[language].value.phoneNumber,
+      errorMessage: CHECKOUT_ERROR[language].phoneNumber,
       value: phoneNumber,
       label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber,
       onChange: handleChange,

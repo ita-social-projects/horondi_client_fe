@@ -25,6 +25,8 @@ const FilledCart = ({ items }) => {
     setModalVisibility(false);
   };
 
+  //console.log(items);
+
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <div className={styles.table}>
@@ -45,7 +47,9 @@ const FilledCart = ({ items }) => {
       </div>
       <div className={styles.total}>
         {CART_TABLE_FIELDS[language].total}:{' '}
-        {items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)}{' '}
+        {items
+          .reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)
+          .toFixed(2)}{' '}
         UAH
       </div>
       <div className={styles.controlButtons} data-cy='control-buttons'>

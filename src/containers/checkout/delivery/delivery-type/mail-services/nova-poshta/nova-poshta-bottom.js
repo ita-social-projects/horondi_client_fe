@@ -2,19 +2,19 @@ import { TextField } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { CHECKOUT_DROP_LIST } from '../../../../../../translations/checkout.translations';
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaWarehouse } from '../../../../../../redux/checkout/checkout.actions';
 
 const NovaPoshtaBottom = ({ city }) => {
-  const { language } = useSelector(({ Language, Checkout }) => ({
-    language: Language.language,
-    warehouses: Checkout.warehouses
-  }));
-
-  const { warehouses } = useSelector(({ Checkout }) => ({
-    warehouses: Checkout.warehouses
-  }));
+  const { language, warehouses, loading } = useSelector(
+    ({ Language, Checkout }) => ({
+      language: Language.language,
+      warehouses: Checkout.warehouses,
+      loading: Checkout.loading
+    })
+  );
 
   const style = useStyles();
 
@@ -42,6 +42,17 @@ const NovaPoshtaBottom = ({ city }) => {
             {...params}
             label={CHECKOUT_DROP_LIST[language].department}
             variant='outlined'
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color='inherit' size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              )
+            }}
           />
         )}
       />

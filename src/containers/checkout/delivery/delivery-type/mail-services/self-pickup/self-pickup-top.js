@@ -10,12 +10,13 @@ const SelfPickupTop = ({
   selectHandlerDepartmentSelfPickup
 }) => {
   const style = useStyles();
+  const moreOneDepartment = 1;
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
 
   return (
-    departmentSelfPickUpStorage.length > 1 && (
+    departmentSelfPickUpStorage.length > moreOneDepartment && (
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
         <Select

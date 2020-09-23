@@ -24,7 +24,7 @@ import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 import ContactsPage from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
-import Checkout from '../pages/checkout';
+import Checkout from '../containers/checkout';
 
 const Routes = () => {
   const styles = useStyles();

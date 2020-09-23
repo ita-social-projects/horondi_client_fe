@@ -45,7 +45,9 @@ const FilledCart = ({ items }) => {
       </div>
       <div className={styles.total}>
         {CART_TABLE_FIELDS[language].total}:{' '}
-        {items.reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)}{' '}
+        {items
+          .reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)
+          .toFixed(2)}{' '}
         UAH
       </div>
       <div className={styles.controlButtons} data-cy='control-buttons'>

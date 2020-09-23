@@ -36,6 +36,9 @@ export const useStyles = makeStyles((theme) => ({
       margin: '10px 0 0',
       color: theme.palette.button.normal.color,
       backgroundColor: theme.palette.button.normal.backgroundColor,
+      fontSize: '.8em',
+      padding: '5px 10px',
+      width: 'fitContent',
       '&:hover': {
         color: theme.palette.button.hover.color,
         backgroundColor: theme.palette.button.hover.backgroundColor

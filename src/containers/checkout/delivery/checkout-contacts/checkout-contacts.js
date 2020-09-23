@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
 
-import { useStyles } from '../../checkout.styles';
 import { CONTACTS_PAGE_TITLES } from '../../../../translations/contacts.translations';
+import { useStyles } from '../../checkout.styles';
+// import { useStyles } from '../../../../pages/contacts/contacts.styles';
 
 export const CheckoutContacts = ({ departmentSelfPickUp }) => {
+  // const style = useStyles();
   const style = useStyles();
   const { language, contacts } = useSelector(({ Language, Contacts }) => ({
     language: Language.language,
@@ -14,33 +16,33 @@ export const CheckoutContacts = ({ departmentSelfPickUp }) => {
   const contactsDisplay = contacts.map(
     (contact) =>
       contact.address[language].value === departmentSelfPickUp && (
-        <div key={contact._id} className={style.content}>
+        <div key={contact._id} className={style.checkoutContactsWrapper}>
           <div>
-            <div className={style.contactsItem}>
-              <span className={style.contactName}>
+            <div className={style.checkoutContactsItem}>
+              <span className={style.checkoutContactsName}>
                 {CONTACTS_PAGE_TITLES[language].phone}
               </span>
               <span>+{contact.phoneNumber}</span>
             </div>
-            <div className={style.contactsItem}>
-              <span className={style.contactName}>
+            <div className={style.checkoutContactsItem}>
+              <span className={style.checkoutContactsName}>
                 {CONTACTS_PAGE_TITLES[language].address}
               </span>
-              <div className={style.contactAddress}>
+              <div className={style.checkoutContactsAddress}>
                 {contact.address[language].value}
               </div>
             </div>
-            <div className={style.contactsItem}>
-              <span className={style.contactName}>Email:</span>
+            <div className={style.checkoutContactsItem}>
+              <span className={style.checkoutContactsName}>Email:</span>
               <span>{contact.email}</span>
             </div>
           </div>
-          <div className={style.contacts}>
-            <div className={style.contactsItem}>
-              <span className={style.contactName}>
+          <div className={style.checkoutContacts}>
+            <div className={style.checkoutContactsItem}>
+              <span className={style.checkoutContactsName}>
                 {CONTACTS_PAGE_TITLES[language].schedule}
               </span>
-              <div className={style.schedule}>
+              <div className={style.checkoutContactsSchedule}>
                 {contact.openHours[language].value.split('|').map((el) => (
                   <div key={el}>
                     <span className={style.day}>{el}</span>

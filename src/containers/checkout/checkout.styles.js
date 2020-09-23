@@ -68,19 +68,19 @@ export const useStyles = makeStyles((theme) => ({
     transform: 'translateX(-30px)',
     boxSizing: 'content-box'
   },
-  contactsTitle: {
+  checkoutContactsTitle: {
     fontWeight: '400',
     fontSize: '2em'
   },
-  content: {
+  checkoutContactsWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%'
   },
-  contacts: {
+  checkoutContacts: {
     width: '41%'
   },
-  contactsItem: {
+  checkoutContactsItem: {
     display: 'flex',
     margin: '0 0 10px 10px',
     width: '100%',
@@ -92,14 +92,14 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '.9em'
     }
   },
-  contactName: {
+  checkoutContactsName: {
     width: '130px',
     fontWeight: '700',
     '@media screen and (max-width: 768px)': {
       width: '100px'
     }
   },
-  schedule: {
+  checkoutContactsSchedule: {
     display: 'flex',
     flexDirection: 'column',
     '@media screen and (max-width: 768px)': {
@@ -124,7 +124,7 @@ export const useStyles = makeStyles((theme) => ({
       transition: '.3s'
     }
   },
-  contactAddress: {
+  checkoutContactsAddress: {
     '& > p': {
       margin: '0',
       fontSize: '1em',

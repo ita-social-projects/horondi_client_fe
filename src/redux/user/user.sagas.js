@@ -235,9 +235,12 @@ export function* handleUserPreserve() {
       }
     }`
     );
-    yield put(setUser(user.data.getUserByToken));
-    if (!user.data.getUserByToken) {
+    if(user.data.getUserByToken.statusCode===401) {
       yield setToLocalStorage('accessToken', null);
+    } else if (!user.data.getUserByToken) {
+      yield setToLocalStorage('accessToken', null);
+    } else {
+      yield put(setUser(user.data.getUserByToken));
     }
   } catch (error) {
     yield setToLocalStorage('accessToken', null);

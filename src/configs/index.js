@@ -70,7 +70,14 @@ export const errorMessages = [
 			password: 'Від 6 до 30 символів з однією літерою та цифрою',
 			confirmPassword: 'Паролі не співпадають',
 			text: 'Поле повинно містити від 2 до 500 символів',
-			zipcode: 'Некоректний формат почтового індексу'
+			zipcode: 'Некоректний формат почтового індексу',
+			phoneNumber: 'Некоректний формат телефону',
+			country:'Поле повинно містити від 2 до 30 символів',
+			region:'Поле повинно містити від 2 до 30 символів',
+			city:'Поле повинно містити від 2 до 30 символів',
+			street:'Поле повинно містити від 2 до 30 символів',
+			buildingNumber:'Поле повинно містити від 1 до 30 символів',
+			appartment :'Поле повинно містити від 1 до 30 символів'
 		}
 	},
 	{
@@ -82,7 +89,14 @@ export const errorMessages = [
 			password: 'From 6 to 30 characters with one letter and one digit',
 			confirmPassword: 'Passwords do not match',
 			text: 'Field should contain from 2 to 700 characters',
-			zipcode: 'Wrong zipcode format'
+			zipcode: 'Wrong zipcode format',
+			phoneNumber: 'Wrong phone format',
+			country:'Field should contain from 2 to 30 characters',
+			region:'Field should contain from 2 to 30 characters',
+			city:'Field should contain from 2 to 30 characters',
+			street:'Field should contain from 2 to 30 characters',
+			buildingNumber:'Field should contain from 1 to 30 characters',
+			appartment :'Field should contain from 1 to 30 characters'
 		}
 	}
 ];
@@ -96,14 +110,14 @@ export const formRegExp = {
 	password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
 	phoneNumber: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
 	zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
-	country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-	city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-	region: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-	street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+	country: "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+	city: "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+	region: "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+	street: "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
 	buildingNumber: '^[a-zA-Z0-9_.-]*$',
 	appartment: '^[a-zA-Z0-9_.-]*$',
-	deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-	deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+	deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+	deliveryMethod: "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
 	text: /^.{2,700}$/gm,
 	link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
 	script: /(script)/g

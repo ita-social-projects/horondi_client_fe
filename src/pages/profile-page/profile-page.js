@@ -173,7 +173,7 @@ const ProfilePage = () => {
                     className={classes.photoUpload}
                     id='photoUpload'
                     onChange={handleImageLoad}
-                    multiple={false}
+                    multiple={true}
                     accept='image/*'
                   />
                   <label htmlFor='photoUpload' className={classes.uploadLabel}>

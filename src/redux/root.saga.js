@@ -9,6 +9,7 @@ import userSaga from './user/user.sagas';
 import contactsSaga from './contacts/contacts.sagas';
 import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
+import chatSaga from './chat/chat.sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     productsSaga(),
     cartSaga(),
     modelSaga(),
-    commentsSaga()
+    commentsSaga(),
+    chatSaga()
   ]);
 }

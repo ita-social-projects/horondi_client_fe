@@ -3,10 +3,8 @@ import React from 'react';
 
 import { CONTACTS_PAGE_TITLES } from '../../../../translations/contacts.translations';
 import { useStyles } from '../../checkout.styles';
-// import { useStyles } from '../../../../pages/contacts/contacts.styles';
 
 export const CheckoutContacts = ({ departmentSelfPickUp }) => {
-  // const style = useStyles();
   const style = useStyles();
   const { language, contacts } = useSelector(({ Language, Contacts }) => ({
     language: Language.language,

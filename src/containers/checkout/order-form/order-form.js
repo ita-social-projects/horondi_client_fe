@@ -135,16 +135,24 @@ export const OrderForm = () => {
             <div className={style.contactField}>
               {Object.values(contactsNames).map(
                 ({
-                  label,
-                  inputName,
                   errorMessage,
                   value,
                   onChange,
                   validation,
                   type,
-                  regExp = null
+                  regExp = null,
+                  label,
+                  inputName
                 }) => (
                   <TextField
+                    helperText={
+                      !validation.value && shouldValidate
+                        ? `${errorMessage}`
+                        : ''
+                    }
+                    onChange={(e) => onChange(e, validation.setValid, regExp)}
+                    value={value}
+                    type={type}
                     required
                     fullWidth
                     key={label}
@@ -152,15 +160,7 @@ export const OrderForm = () => {
                     variant='outlined'
                     name={inputName}
                     error={!validation.value && shouldValidate}
-                    helperText={
-                      !validation.value && shouldValidate
-                        ? `${errorMessage}`
-                        : ''
-                    }
                     className={style.dataInput}
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
                   />
                 )
               )}

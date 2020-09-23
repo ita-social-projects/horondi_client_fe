@@ -23,8 +23,6 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
     setModalItem(item);
   };
 
-  console.log(item);
-
   return (
     <div className={styles.root} data-cy='cart-item'>
       <div className={styles.itemData}>

@@ -58,7 +58,6 @@ export function* handleSetCartItemQuantity({
     key
   }
 }) {
-  console.log('cyka');
   const cart = getFromLocalStorage('cart');
   const newCart = cart.map((item) => {
     if (item._id === _id && item.selectedSize.name === selectedSize.name) {

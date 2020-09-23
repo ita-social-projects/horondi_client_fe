@@ -20,7 +20,7 @@ const UkrPoshtaSecondStep = () => {
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>Department</InputLabel>
         <Select
-          value={[]}
+          value=''
           onChange={() => {
             console.log('UKRPOSTA!');
           }}

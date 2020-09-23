@@ -105,7 +105,8 @@ export const formRegExp = {
   text: /^.{2,700}$/gm,
   nameForChat: /^.{2,30}$/gm,
   link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
-  script: /(script)/g
+  script: /(script)/g,
+  phoneCheckout: /^((8|\+7)[/\- ]?)?(\(?\d{3}\)?[/\- ]?)?[\d\- ]{7,10}$/
 };
 
 export const placeholders = {

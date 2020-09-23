@@ -13,21 +13,24 @@ const SelfPickUpFirstStep = ({
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
+
   return (
-    <FormControl variant='outlined' className={style.dataInput}>
-      <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
-      <Select
-        value={departmentSelfPickUp}
-        onChange={selectHandlerDepartmentSelfPickup}
-        label='department'
-      >
-        {departmentSelfPickUpStorage.map((department) => (
-          <MenuItem key={department} value={department}>
-            {department}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    departmentSelfPickUpStorage.length > 1 && (
+      <FormControl variant='outlined' className={style.dataInput}>
+        <InputLabel>{CHECKOUT_DROP_LIST[language].department}</InputLabel>
+        <Select
+          value={departmentSelfPickUp}
+          onChange={selectHandlerDepartmentSelfPickup}
+          label='department'
+        >
+          {departmentSelfPickUpStorage.map((department) => (
+            <MenuItem key={department} value={department}>
+              {department}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    )
   );
 };
 

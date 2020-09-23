@@ -117,7 +117,7 @@ export const OrderForm = () => {
         setValid: setPhoneValidated
       },
       type: 'text',
-      regExp: formRegExp.phoneNumber
+      regExp: formRegExp.phoneCheckout
     }
   };
 

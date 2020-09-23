@@ -132,8 +132,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   day: {
-    display: 'inline-block',
-    width: '40px'
+    display: 'inline-block'
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1

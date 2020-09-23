@@ -43,8 +43,7 @@ export const CheckoutContacts = ({ departmentSelfPickUp }) => {
               <div className={style.schedule}>
                 {contact.openHours[language].value.split('|').map((el) => (
                   <div key={el}>
-                    <span className={style.day}>{el.substr(0, 4)}</span>
-                    <span>{el.substring(4)}</span>
+                    <span className={style.day}>{el}</span>
                   </div>
                 ))}
               </div>

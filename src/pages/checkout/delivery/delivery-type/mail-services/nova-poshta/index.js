@@ -1,4 +1,4 @@
-import { NovaPoshtaFirstStep } from './nova-poshta-first-step';
-import { NovaPoshtaSecondStep } from './nova-poshta-second-step';
+import { NovaPoshtaTop } from './nova-poshta-top';
+import { NovaPoshtaBottom } from './nova-poshta-bottom';
 
-export { NovaPoshtaFirstStep, NovaPoshtaSecondStep };
+export { NovaPoshtaTop, NovaPoshtaBottom };

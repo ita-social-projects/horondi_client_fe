@@ -1,4 +1,4 @@
-import { SelfPickUpFirstStep } from './self-pickup-first-step';
-import { SelfPickUpSecondStep } from './self-pickup-second-step';
+import { SelfPickupTop } from './self-pickup-top';
+import { SelfPickupBottom } from './self-pickup-bottom';
 
-export { SelfPickUpFirstStep, SelfPickUpSecondStep };
+export { SelfPickupTop, SelfPickupBottom };

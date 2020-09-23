@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../../../../checkout.styles';
 
-const UkrPoshtaFirstStep = () => {
+const UkrposhtaTop = () => {
   const style = useStyles();
   return (
     <Autocomplete
@@ -22,4 +22,4 @@ const UkrPoshtaFirstStep = () => {
   );
 };
 
-export { UkrPoshtaFirstStep };
+export { UkrposhtaTop };

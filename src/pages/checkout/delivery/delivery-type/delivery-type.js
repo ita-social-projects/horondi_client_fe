@@ -6,19 +6,10 @@ import {
   CHECKOUT_DELIVERY_TYPES,
   CHECKOUT_DROP_LIST
 } from '../../../../translations/checkout.translations';
-import {
-  SelfPickUpFirstStep,
-  SelfPickUpSecondStep
-} from './mail-services/self-pickup';
-import {
-  NovaPoshtaFirstStep,
-  NovaPoshtaSecondStep
-} from './mail-services/nova-poshta';
-import {
-  UkrPoshtaFirstStep,
-  UkrPoshtaSecondStep
-} from './mail-services/ukrposhta';
-import { CurrierFirstStep, CurrierSecondStep } from './mail-services/currier';
+import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
+import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
+import { UkrposhtaTop, UkrPoshtaSecondStep } from './mail-services/ukrposhta';
+import { CurrierSecondStep } from './mail-services/currier/currier-bottom';
 import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
@@ -65,14 +56,14 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherFirstStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaFirstStep cities={cities} setCity={setCity} />;
+        return <NovaPoshtaTop cities={cities} setCity={setCity} />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return <UkrPoshtaFirstStep />;
+        return <UkrposhtaTop />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return <CurrierFirstStep />;
+        return <NovaPoshtaTop cities={cities} setCity={setCity} />;
       default:
         return (
-          <SelfPickUpFirstStep
+          <SelfPickupTop
             departmentSelfPickUpStorage={departmentSelfPickUpStorage}
             departmentSelfPickUp={departmentSelfPickUp}
             selectHandlerDepartmentSelfPickup={
@@ -86,14 +77,14 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherSecondStep = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaSecondStep city={city} />;
+        return <NovaPoshtaBottom city={city} />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaSecondStep />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return <CurrierSecondStep />;
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return (
-          <SelfPickUpSecondStep
+          <SelfPickupBottom
             departmentSelfPickUpStorage={departmentSelfPickUpStorage}
             departmentSelfPickUp={departmentSelfPickUp}
           />

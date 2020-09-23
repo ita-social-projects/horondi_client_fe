@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CHECKOUT_DROP_LIST } from '../../../../../../translations/checkout.translations';
 import { useStyles } from '../../../../checkout.styles';
 
-const SelfPickUpFirstStep = ({
+const SelfPickupTop = ({
   departmentSelfPickUpStorage,
   departmentSelfPickUp,
   selectHandlerDepartmentSelfPickup
@@ -34,4 +34,4 @@ const SelfPickUpFirstStep = ({
   );
 };
 
-export { SelfPickUpFirstStep };
+export { SelfPickupTop };

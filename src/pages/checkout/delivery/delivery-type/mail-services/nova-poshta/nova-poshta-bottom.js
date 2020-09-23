@@ -6,7 +6,7 @@ import { CHECKOUT_DROP_LIST } from '../../../../../../translations/checkout.tran
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaWarehouse } from '../../../../../../redux/checkout/checkout.actions';
 
-const NovaPoshtaSecondStep = ({ city }) => {
+const NovaPoshtaBottom = ({ city }) => {
   const { language } = useSelector(({ Language, Checkout }) => ({
     language: Language.language,
     warehouses: Checkout.warehouses
@@ -49,4 +49,4 @@ const NovaPoshtaSecondStep = ({ city }) => {
   );
 };
 
-export { NovaPoshtaSecondStep };
+export { NovaPoshtaBottom };

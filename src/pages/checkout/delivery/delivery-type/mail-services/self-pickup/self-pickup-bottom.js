@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckoutContacts } from '../../../checkout-contacts/checkout-contacts';
 
-const SelfPickUpSecondStep = ({
+const SelfPickupBottom = ({
   departmentSelfPickUpStorage,
   departmentSelfPickUp
 }) => {
@@ -17,4 +17,4 @@ const SelfPickUpSecondStep = ({
   );
 };
 
-export { SelfPickUpSecondStep };
+export { SelfPickupBottom };

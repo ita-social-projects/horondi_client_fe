@@ -17,22 +17,22 @@ import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
 
 const rootReducer = (history) =>
-	combineReducers({
-		router: connectRouter(history),
-		User,
-		News,
-		Categories,
-		Theme,
-		Error,
-		Language,
-		Products,
-		Wishlist,
-		Cart,
-		Snackbar,
-		Contacts,
-		Model,
-		Currency,
-		Comments
-	});
+  combineReducers({
+    router: connectRouter(history),
+    User,
+    News,
+    Categories,
+    Theme,
+    Error,
+    Language,
+    Products,
+    Wishlist,
+    Cart,
+    Snackbar,
+    Contacts,
+    Model,
+    Currency,
+    Comments
+  });
 
 export default rootReducer;

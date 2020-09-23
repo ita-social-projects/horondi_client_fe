@@ -42,12 +42,12 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        .additionalPrice[0].value / 100
+          .additionalPrice[0].value / 100
       : 0;
 
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-        .additionalPrice[0].value / 100
+          .additionalPrice[0].value / 100
       : 0;
 
     const newTotalPrice = totalPrice - oldPrice + newPrice;
@@ -84,15 +84,15 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
   const menuItems = bottomMaterials
     ? bottomMaterials.map(({ _id, name, additionalPrice: [{ value }] }) => (
-      <MenuItem value={name[1].value} key={_id}>
-        {name[language].value}
-        {value ? (
-          <span className={styles.selectPrice}>
-            {setAdditionalPrice(value)}
-          </span>
-        ) : null}
-      </MenuItem>
-    ))
+        <MenuItem value={name[1].value} key={_id}>
+          {name[language].value}
+          {value ? (
+            <span className={styles.selectPrice}>
+              {setAdditionalPrice(value)}
+            </span>
+          ) : null}
+        </MenuItem>
+      ))
     : null;
 
   return (

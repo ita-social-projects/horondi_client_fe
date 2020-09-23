@@ -25,8 +25,6 @@ const FilledCart = ({ items }) => {
     setModalVisibility(false);
   };
 
-  //console.log(items);
-
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <div className={styles.table}>

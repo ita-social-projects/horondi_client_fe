@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   similarItems: {
     width: '90%',
     margin: '0 auto',
@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   carousel: {
     marginTop: '2rem',
+    marginBottom: theme.spacing(4),
     borderBottom: '2px solid #C2C2C2',
     paddingBottom: '25px'
   },

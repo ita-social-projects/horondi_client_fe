@@ -4,14 +4,18 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const HOMEPAGE_LOOKS_IMAGES = [
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img1.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img2.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img3.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img4.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img5.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img6.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img7.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/img8.jpg'
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_1.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_2.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_3.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_4.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_5.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_6.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_7.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_8.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_9.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_10.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_11.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
 ];
 
 export const ABOUT_US_IMAGES = {
@@ -52,8 +56,13 @@ export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
-  confirmPassword: ''
+  password: ''
+};
+
+export const CHAT_USER_DATA = {
+  firstName: '',
+  email: '',
+  message: ''
 };
 
 export const LOGIN_USER_DATA = {
@@ -65,21 +74,39 @@ export const errorMessages = [
   {
     lang: 'uk',
     value: {
-      firstname: 'Поле повинно містити від 2 до 30 символів',
-      lastname: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      firstName: 'Поле повинно містити від 2 до 30 символів',
+      lastName: 'Поле повинно містити від 2 до 30 символів',
+      email: 'Некоректний формат ',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не співпадають',
+      text: 'Поле повинно містити від 2 до 500 символів',
+      zipcode: 'Некоректний формат почтового індексу',
+      phoneNumber: 'Некоректний формат телефону',
+      country: 'Поле повинно містити від 2 до 30 символів',
+      region: 'Поле повинно містити від 2 до 30 символів',
+      city: 'Поле повинно містити від 2 до 30 символів',
+      street: 'Поле повинно містити від 2 до 30 символів',
+      buildingNumber: 'Поле повинно містити від 1 до 30 символів',
+      appartment: 'Поле повинно містити від 1 до 30 символів'
     }
   },
   {
     lang: 'eng',
     value: {
-      firstname: 'Field should contain from 2 to 30 characters',
-      lastname: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      firstName: 'Field should contain from 2 to 30 characters',
+      lastName: 'Field should contain from 2 to 30 characters',
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
-      confirmPassword: 'Passwords do not match'
+      confirmPassword: 'Passwords do not match',
+      text: 'Field should contain from 2 to 700 characters',
+      zipcode: 'Wrong zipcode format',
+      phoneNumber: 'Wrong phone format',
+      country: 'Field should contain from 2 to 30 characters',
+      region: 'Field should contain from 2 to 30 characters',
+      city: 'Field should contain from 2 to 30 characters',
+      street: 'Field should contain from 2 to 30 characters',
+      buildingNumber: 'Field should contain from 1 to 30 characters',
+      appartment: 'Field should contain from 1 to 30 characters'
     }
   }
 ];
@@ -88,14 +115,28 @@ export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
+  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
+  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
   password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
-  phone: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
-  country: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  city: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  street: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  buildingNum: '^[a-zA-Z0-9_.-]*$',
-  deliveryType: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-  deliveryMethod: "^(?=.{1,30}$)[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+  phoneNumber: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
+  zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
+  country:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  city:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  region:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  street:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  buildingNumber: '^[a-zA-Z0-9_.-]*$',
+  appartment: '^[a-zA-Z0-9_.-]*$',
+  deliveryType:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  deliveryMethod:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  text: /^.{2,700}$/gm,
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
+  script: /(script)/g
 };
 
 export const placeholders = {
@@ -181,6 +222,7 @@ export const CONFIRM_ERROR = [
     value: 'Oops! Something went wrong.'
   }
 ];
+
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
   month: 'numeric',
@@ -231,6 +273,31 @@ export const responsive = {
     items: 1
   }
 };
+
+export const SNACKBAR_DURATION = 4000;
+export const SNACKBAR_MESSAGE = {
+  added: [
+    'Ваш коментар успішно створений',
+    'Your comment is successfully added'
+  ],
+  updated: [
+    'Ваш коментар успішно оновлений',
+    'Your comment is successfully updated'
+  ],
+  deleted: [
+    'Ваш коментар успішно видалений',
+    'Your comment is successfully deleted'
+  ],
+  error: ['Щось пішло не так', 'Something went wrong']
+};
+export const COMMENT_DATA = {
+  firstName: '',
+  text: '',
+  product: '',
+  show: true,
+  email: ''
+};
+export const TEXT = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
 export const LANGUAGES_LIST = [
@@ -249,3 +316,17 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
+
+export const profileFields = [
+  'firstName',
+  'lastName',
+  'email',
+  'phoneNumber',
+  'country',
+  'region',
+  'city',
+  'street',
+  'buildingNumber',
+  'appartment',
+  'zipcode'
+];

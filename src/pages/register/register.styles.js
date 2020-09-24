@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/1.jpg';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   register: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
@@ -53,7 +53,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   registerBtn: {
-    fontFamily: 'Montserrat',
     fontSize: '1rem',
     lineHeight: '20px',
     height: '42px',
@@ -100,14 +99,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '100%'
   },
-  disabledRegister: {
-    backgroundColor: '#999999',
-    color: '#c2c2c2',
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    textTransform: 'capitalize'
-  },
   infoLogo: {
     width: '30px',
     height: '30px',
@@ -116,8 +107,12 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '23px'
   },
   successText: {
-    width: '250px',
-    color: theme.palette.textColor
+    color: theme.palette.textColor,
+    margin: 0
+  },
+  successWrapper: {
+    display: 'flex',
+    flexDirection: 'column'
   },
   notchedOutline: {
     borderColor: theme.palette.textColor

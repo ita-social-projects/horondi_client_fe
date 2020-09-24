@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Backdrop } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';

@@ -11,11 +11,11 @@ import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
-
 import { getCategories } from '../../redux/categories/categories.actions';
-
 import { Loader } from '../loader/loader';
+import { preserveUser } from '../../redux/user/user.actions';
 import { setCountPerPage } from '../../redux/products/products.actions';
+import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
   const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
@@ -25,18 +25,25 @@ const App = () => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const localStorageThemeMode = getFromLocalStorage('theme');
+  let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
+  if (!localStorageThemeMode) {
+    localStorageThemeMode = LIGHT_THEME;
+  }
   const themeValue = theme(localStorageThemeMode);
   const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
+    dispatch(preserveUser());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getCategories());
+    dispatch(getContacts());
   }, [dispatch]);
   useEffect(() => {
     dispatch(setCountPerPage(productsCount));
   }, [dispatch, productsCount]);
-
   useEffect(() => {
     dispatch(setThemeMode(themeMode));
   }, [lightMode, dispatch, themeMode]);

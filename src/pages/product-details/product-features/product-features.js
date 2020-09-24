@@ -30,32 +30,31 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
   const { additionalPrice, available, name } = additions[0] || {};
 
-  const setAdditionalPrice = (price) => ` +${price / 100} UAH`;
+  const setAdditionalPrice = price => ` +${price / 100} UAH`;
 
   const additionsNameToSend = useMemo(
     () => (additions.length >= 1 ? additions[0].name : null),
     [additions]
   );
 
-  const bottomNameToSend = useMemo(
-    () =>
-      bottomMaterials
-        ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        : null,
-    [bagBottom, bottomMaterials]
-  );
-
-  const handleBottomChange = (event) => {
+  const handleBottomChange = event => {
     const { value } = event.target;
+
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-        .additionalPrice[0].value / 100
+          .additionalPrice[0].value / 100
       : 0;
+
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-        .additionalPrice[0].value / 100
+          .additionalPrice[0].value / 100
       : 0;
+
     const newTotalPrice = totalPrice - oldPrice + newPrice;
+
+    const bottomNameToSend = value
+      ? bottomMaterials.find(({ name }) => name[1].value === value).name
+      : '';
 
     dispatch(
       setProductToSend({
@@ -65,7 +64,7 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
     );
   };
 
-  const handlePocketChange = (event) => {
+  const handlePocketChange = event => {
     const { checked } = event.target;
     let newPrice;
 
@@ -85,15 +84,15 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
   const menuItems = bottomMaterials
     ? bottomMaterials.map(({ _id, name, additionalPrice: [{ value }] }) => (
-      <MenuItem value={name[1].value} key={_id}>
-        {name[language].value}
-        {value ? (
-          <span className={styles.selectPrice}>
-            {setAdditionalPrice(value)}
-          </span>
-        ) : null}
-      </MenuItem>
-    ))
+        <MenuItem value={name[1].value} key={_id}>
+          {name[language].value}
+          {value ? (
+            <span className={styles.selectPrice}>
+              {setAdditionalPrice(value)}
+            </span>
+          ) : null}
+        </MenuItem>
+      ))
     : null;
 
   return (

@@ -257,7 +257,33 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 ---
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+### Implementing Facebook chat.
+
+For run Facebook chat on your site you need two variables - FACEBOOK_PAGE_ID and FACEBOOK_APP_ID and write them
+in 'src -> containers -> chat -> chat.js' file.
+
+1. FACEBOOK_PAGE_ID.
+   You can find your page ID in menu under your avatar, button 'about' or 'more -> about'.
+   Then scroll to the down and find your Page ID.
+
+2. FACEBOOK_APP_ID
+   Go to https://developers.facebook.com/apps/ and choose 'Add a New App -> Manage Business Integration'.
+   Fills the forms and press 'Create App ID'. You can find your App ID at the top of page.
+
+3. After that you may go to left bar, and find 'Messenger -> Settings' and add your Facebook Business page ID in section
+   'Access Tokens'.
+
+4. Now go to your Facebook Business page -> Settings(Left bar) -> Advanced Messaging and find section 'Whitelisted
+   Domains'. Here you must add your domain to white list and save.
+
+More details you can find on official site
+https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/
+
+#### License
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © <a href="https://softserve.academy/" target="_blank"> SoftServe IT Academy</a>.
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)

@@ -53,7 +53,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
   ];
 
-  const deliverySwitcherFirstStep = () => {
+  const deliverySwitcherTop = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return <NovaPoshtaTop cities={cities} setCity={setCity} />;
@@ -74,7 +74,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     }
   };
 
-  const deliverySwitcherSecondStep = () => {
+  const deliverySwitcherBottom = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return <NovaPoshtaBottom city={city} />;
@@ -111,9 +111,9 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
             ))}
           </Select>
         </FormControl>
-        {deliveryType && deliverySwitcherFirstStep()}
+        {deliveryType && deliverySwitcherTop()}
       </div>
-      {deliverySwitcherSecondStep()}
+      {deliverySwitcherBottom()}
     </div>
   );
 };

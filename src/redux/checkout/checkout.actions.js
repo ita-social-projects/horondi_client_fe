@@ -3,8 +3,20 @@ import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
   SET_NOVAPOSHTA_WAREHOUSES,
-  SET_LOADING
+  SET_LOADING,
+  GET_NOVAPOSHTA_STREETS,
+  SET_NOVAPOSHTA_STREETS
 } from './checkout.types';
+
+const setNovaPoshtaStreets = (payload) => ({
+  type: SET_NOVAPOSHTA_STREETS,
+  payload
+});
+
+const getNovaPoshtaStreets = (payload) => ({
+  type: GET_NOVAPOSHTA_STREETS,
+  payload
+});
 
 const setNovaPoshtaCities = (cities) => ({
   type: SET_NOVAPOSHTA_CITIES,
@@ -36,5 +48,7 @@ export {
   setNovaPoshtaCities,
   getNovaPoshtaWarehouse,
   setNovaPoshtaWarehouse,
-  setLoading
+  setLoading,
+  setNovaPoshtaStreets,
+  getNovaPoshtaStreets
 };

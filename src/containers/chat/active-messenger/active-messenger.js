@@ -30,10 +30,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const Alert = (props) => (
-    <MuiAlert elevation={6} variant='filled' {...props} />
-  );
-
   const handleValidForms = () => {
     setShouldValidate(true);
     allFieldsValidated && sendHandler();
@@ -62,6 +58,10 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     }
     setOpen(false);
   };
+
+  const Alert = (props) => (
+    <MuiAlert elevation={6} variant='filled' {...props} />
+  );
 
   // HOOKS
   const { language } = useSelector(({ Language }) => ({

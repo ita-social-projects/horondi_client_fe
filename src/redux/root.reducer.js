@@ -16,6 +16,7 @@ import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
 import Checkout from './checkout/checkout.reducer';
+import Chat from './chat/chat.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -34,7 +35,8 @@ const rootReducer = (history) =>
     Model,
     Currency,
     Comments,
-    Checkout
+    Checkout,
+    Chat
   });
 
 export default rootReducer;

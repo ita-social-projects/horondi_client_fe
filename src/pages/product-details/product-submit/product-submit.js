@@ -22,11 +22,11 @@ import {
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productId, productToSend } = useSelector(
+  const { language, productToSend, product } = useSelector(
     ({ Language, Products }) => ({
       language: Language.language,
-      productId: Products.product._id,
-      productToSend: Products.productToSend
+      productToSend: Products.productToSend,
+      product: Products.product
     })
   );
 
@@ -34,8 +34,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const { selectedSize } = productToSend;
 
   const isWishful = useMemo(
-    () => wishlistItems.find((item) => productId === item._id),
-    [productId, wishlistItems]
+    () => wishlistItems.find((item) => product._id === item._id),
+    [product._id, wishlistItems]
   );
 
   const sizeToSend = useMemo(
@@ -56,7 +56,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    if (selectedSize) {
+    if ((product && !product.options[0].size) || selectedSize) {
       dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
     } else {
       setSizeIsNotSelectedError(true);
@@ -64,7 +64,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if (selectedSize) {
+    if ((product && !product.options[0].size) || selectedSize) {
       dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
       dispatch(push('/checkout'));
     } else {

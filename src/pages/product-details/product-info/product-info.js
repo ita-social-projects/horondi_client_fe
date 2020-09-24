@@ -51,7 +51,7 @@ const ProductInfo = () => {
     <div>
       <div className={styles.head}>
         <span className={styles.title}>{name[language].value}</span>
-        <Tooltip title={rate} placement='left'>
+        <Tooltip title={rate.toFixed(2)} placement='left'>
           <span>
             <Rating value={rate} readOnly precision={0.1} />
           </span>

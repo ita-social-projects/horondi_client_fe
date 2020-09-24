@@ -44,6 +44,7 @@ const ProductDetails = ({ match }) => {
   );
   const dispatch = useDispatch();
   const styles = useStyles();
+
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
   const { _id, name, basePrice, images, options, category } = product || {};
@@ -51,7 +52,7 @@ const ProductDetails = ({ match }) => {
 
   const { volumeInLiters, weightInKg } = useMemo(
     () =>
-      product && options[0].size.name
+      product && options[0].size
         ? options.find(({ size: { name } }) => name === DEFAULT_SIZE).size
         : {},
     [product, options]
@@ -78,6 +79,7 @@ const ProductDetails = ({ match }) => {
     }
 
     return () => {
+      setSizeIsNotSelectedError(false);
       dispatch(clearProductToSend());
     };
   }, [
@@ -102,41 +104,41 @@ const ProductDetails = ({ match }) => {
   const uniqueSizes = useMemo(
     () => [
       ...new Set(
-        options
+        product && options[0].size
           ? options.map(({ size: { available, name } }) => available && name)
           : null
       )
     ],
-    [options]
+    [options, product]
   );
 
   const uniqueBottomMaterials = useMemo(
     () => [
       ...new Set(
-        options
+        product && options[0].bottomMaterial
           ? options.map(({ bottomMaterial: item }) =>
-            item && item.available ? item.name[1].value : null
-          )
+              item && item.available ? item.name[1].value : null
+            )
           : null
       )
     ],
-    [options]
+    [options, product]
   );
 
   const uniqueAdditions = useMemo(
     () => [
       ...new Set(
-        options
+        product && options[0].additions
           ? options
-            .filter(({ additions }) => additions.length > 0)
-            .map(
-              ({ additions: [{ available, name }] }) =>
-                available && name[1].value
-            )
+              .filter(({ additions }) => additions.length > 0)
+              .map(
+                ({ additions: [{ available, name }] }) =>
+                  available && name[1].value
+              )
           : null
       )
     ],
-    [options]
+    [options, product]
   );
 
   const sizes = useMemo(
@@ -151,11 +153,11 @@ const ProductDetails = ({ match }) => {
     () =>
       uniqueBottomMaterials[0]
         ? uniqueBottomMaterials.map(
-          (item) =>
-            options.find(
-              ({ bottomMaterial: { name } }) => item === name[1].value
-            ).bottomMaterial
-        )
+            (item) =>
+              options.find(
+                ({ bottomMaterial: { name } }) => item === name[1].value
+              ).bottomMaterial
+          )
         : null,
     [uniqueBottomMaterials, options]
   );

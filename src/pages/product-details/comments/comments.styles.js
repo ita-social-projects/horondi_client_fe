@@ -120,8 +120,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   loader: {
-    width: '100px',
-    marginLeft: '30px'
+    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(2.5)
   },
   submit: {
     display: 'flex'

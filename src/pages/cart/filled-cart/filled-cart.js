@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useStyles } from './filled-cart.styles';
 import CartItem from '../cart-item';
-import {
-  CART_BUTTONS,
-  CART_TABLE_FIELDS
-} from '../../../translations/cart.translations';
+import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
 import { removeItemFromCart } from '../../../redux/cart/cart.actions';
 import { MODAL_DELETE_MESSAGES } from '../../../translations/modal.translations';
 import Modal from '../../../components/modal';

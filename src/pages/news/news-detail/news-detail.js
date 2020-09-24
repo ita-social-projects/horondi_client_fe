@@ -14,7 +14,6 @@ import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
 import LoadingBar from '../../../components/loading-bar';
 import { TIME_OPTIONS } from '../../../configs';
-import './news-detail.style.css';
 
 const NewsDetailPage = ({ match }) => {
   const { article, loading, language } = useSelector(({ News, Language }) => ({

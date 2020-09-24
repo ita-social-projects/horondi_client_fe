@@ -3,17 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   imageSection: {
     display: 'flex',
-    flexFlow: 'wrap',
+    flexFlow: 'wrap'
   },
   imageWrapper: {
     height: '340px',
     overflow: 'hidden',
     flexBasis: '16.666%',
     '@media screen and (max-width: 991px)': {
-      flexBasis: '25%',
+      flexBasis: '25%'
     },
     '@media screen and (max-width: 552px)': {
-      flexBasis: '50%',
+      flexBasis: '50%'
     },
     '&:hover > div': {
       transform: 'scale(1.1)'
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     transition: 'transform .3s ease',
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'center'
   },
   title: {
     fontSize: '2em',

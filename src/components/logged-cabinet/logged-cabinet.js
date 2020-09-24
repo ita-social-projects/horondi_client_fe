@@ -11,7 +11,7 @@ import { useStyles } from './logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { CABINET_OPTIONS_LOGGED } from '../../translations/cabinet.translations';
-import { logoutUser } from '../../redux/user/user.actions';
+import { setUser } from '../../redux/user/user.actions';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const LoggedCabinet = () => {
@@ -28,7 +28,8 @@ const LoggedCabinet = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    dispatch(setUser(null));
+    setToLocalStorage('accessToken', null);
   };
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
   const styles = useStyles();

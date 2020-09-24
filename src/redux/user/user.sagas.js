@@ -5,7 +5,14 @@ import {
   setUserError,
   setUserLoading,
   resetState,
-  clearUserData
+  userHasRecovered,
+  userHasRegistered,
+  setUserIsChecked,
+  setPasswordIsReset,
+  setConfirmationEmailStatus,
+  setUserIsConfirmed,
+  setConfirmationLoading,
+  setRecoveryLoading,
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -14,15 +21,16 @@ import {
   PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
   REGISTER_USER,
-  LOGOUT_USER
+  PRESERVE_USER,
+  UPDATE_USER,
+  SEND_CONFIRMATION_EMAIL
 } from './user.types';
-import { setItems } from '../../utils/client';
+import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
 import { setToLocalStorage } from '../../services/local-storage.service';
-import { setError } from '../error/error.actions';
 
 export const loginUser = (data) => {
-  const query = ` 
+  const query = `
   mutation login($user: LoginInput!){
   loginUser(
     loginInput: $user
@@ -33,6 +41,21 @@ export const loginUser = (data) => {
     _id
     email
     firstName
+    lastName
+    phoneNumber
+    confirmed
+    images {
+      thumbnail
+    }
+    address {
+      country
+      city
+      street
+      buildingNumber
+      appartment
+      region
+      zipcode
+    }
   }
 }
   `;
@@ -40,7 +63,7 @@ export const loginUser = (data) => {
 };
 
 export const resetPassword = (data) => {
-  const query = ` 
+  const query = `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
   }
@@ -53,8 +76,7 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     yield put(setUser(user.data.loginUser));
-    const { token } = user.data.loginUser;
-    yield setToLocalStorage('accessToken', token);
+    yield setToLocalStorage('accessToken', user.data.loginUser.token);
     yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {
@@ -68,14 +90,15 @@ export function* handleUserConfirm({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation confirmUser($token: String!){
-    confirmUser(token: $token)
+    confirmUserEmail(token: $token)
   }
   `,
       payload
     );
     yield put(setUserLoading(false));
+    yield put(setUserIsConfirmed(true));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }
@@ -84,20 +107,24 @@ export function* handleUserConfirm({ payload }) {
 export function* handleUserRecovery({ payload }) {
   try {
     yield put(resetState());
-    yield put(setUserLoading(true));
+    yield put(setRecoveryLoading(true))
     yield call(
       setItems,
-      ` 
+      `
   mutation recovery($email: String!, $language: Int!){
     recoverUser(email: $email, language: $language)
   }
   `,
       payload
     );
-    yield put(setUserLoading(false));
-    yield delay(REDIRECT_TIMEOUT);
-    yield put(push('/login'));
+    yield put(setRecoveryLoading(false))
+    yield put(userHasRecovered(true));
+    if (payload.redirect) {
+      yield delay(REDIRECT_TIMEOUT);
+      yield put(push('/login'));
+    }
   } catch (error) {
+    yield put(setRecoveryLoading(false))
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }
 }
@@ -108,7 +135,7 @@ export function* handlePasswordReset({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
   }
@@ -116,6 +143,7 @@ export function* handlePasswordReset({ payload }) {
       payload
     );
     yield put(setUserLoading(false));
+    yield put(setPasswordIsReset(true));
     yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {
@@ -129,7 +157,7 @@ export function* handleTokenCheck({ payload }) {
     yield put(setUserLoading(true));
     yield call(
       setItems,
-      ` 
+      `
   mutation checkToken($token: String!){
     checkIfTokenIsValid(token: $token)
   }
@@ -150,9 +178,10 @@ export function* handleUserRegister({ payload }) {
     yield call(
       setItems,
       `
-      mutation register($user: userRegisterInput!){
+      mutation register($user: userRegisterInput!, $language: Int!){
         registerUser(
           user: $user
+          language: $language
         ) {
           email
         }
@@ -161,6 +190,7 @@ export function* handleUserRegister({ payload }) {
       payload
     );
     yield put(setUserLoading(false));
+    yield put(userHasRegistered(true));
     yield delay(REDIRECT_TIMEOUT);
     yield put(push('/login'));
   } catch (error) {
@@ -168,13 +198,124 @@ export function* handleUserRegister({ payload }) {
   }
 }
 
-export function* handleLogOutUser() {
+export function* handleUserPreserve() {
   try {
-    yield put(clearUserData());
-    yield setToLocalStorage('accessToken', null);
+    yield put(resetState());
+    yield put(setUserLoading(true));
+    const user = yield call(
+      getItems,
+      `query {
+      getUserByToken {
+        ... on User {
+        purchasedProducts
+        orders
+        _id
+        email
+        firstName
+        lastName
+        phoneNumber
+        images {
+          thumbnail
+        }
+        address {
+          country
+          city
+          street
+          buildingNumber
+          appartment
+          zipcode
+          region
+        }
+        confirmed
+        }
+        ... on Error {
+          statusCode
+          message
+        }
+      }
+    }`
+    );
+    if(user.data.getUserByToken.statusCode===401) {
+      yield setToLocalStorage('accessToken', null);
+    } else if (!user.data.getUserByToken) {
+      yield setToLocalStorage('accessToken', null);
+    } else {
+      yield put(setUser(user.data.getUserByToken));
+    }
   } catch (error) {
-    yield put(setError(error));
+    yield setToLocalStorage('accessToken', null);
+    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
     yield put(push('/error-page'));
+  } finally {
+    yield put(setUserIsChecked(true));
+    yield put(setUserLoading(false));
+  }
+}
+
+export function* handleUpdateUser({ payload }) {
+  try {
+    yield put(resetState());
+    yield put(setUserLoading(true));
+    const user = yield call(
+      setItems,
+      `
+     mutation updateUser($user: UserInput!, $id: ID!, $upload: Upload){
+      updateUserById(user: $user, id: $id, upload: $upload) {
+        purchasedProducts
+        orders
+        _id
+        email
+        firstName
+        lastName
+        phoneNumber
+        confirmed
+        images {
+          thumbnail
+          large
+          small
+          medium
+        }
+        address {
+          country
+          city
+          street
+          buildingNumber
+          appartment
+          region
+          zipcode
+        }
+        confirmed
+      }
+    }
+  `,
+      payload
+    );
+    yield put(setUser(user.data.updateUserById));
+    yield put(setUserLoading(false));
+  } catch (error) {
+    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(push('/error-page'));
+  }
+}
+
+export function* handleSendConfirmation({ payload }) {
+  try {
+    yield put(resetState());
+    yield put(setConfirmationLoading(true))
+    yield call(
+      setItems,
+      `
+     mutation sendConfirmation($email: String!, $language: Int!){
+      sendEmailConfirmation(email: $email, language: $language)
+    }
+  `,
+      payload
+    );
+    yield put(setConfirmationLoading(false))
+    yield put(setConfirmationEmailStatus(true));
+  } catch (e) {
+    yield put(setConfirmationLoading(false))
+    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
   }
 }
 
@@ -185,5 +326,7 @@ export default function* userSaga() {
   yield takeEvery(PASSWORD_RESET, handlePasswordReset);
   yield takeEvery(CHECK_IF_TOKEN_VALID, handleTokenCheck);
   yield takeEvery(REGISTER_USER, handleUserRegister);
-  yield takeEvery(LOGOUT_USER, handleLogOutUser);
+  yield takeEvery(PRESERVE_USER, handleUserPreserve);
+  yield takeEvery(UPDATE_USER, handleUpdateUser);
+  yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
 }

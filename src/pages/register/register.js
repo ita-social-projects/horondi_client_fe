@@ -16,7 +16,8 @@ import infoImg from '../../images/information.png';
 import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
-import { registerUser } from '../../redux/user/user.actions';
+import { registerUser, resetState } from '../../redux/user/user.actions';
+import { setToLocalStorage } from '../../services/local-storage.service';
 
 function Register() {
   // VALIDATED && CONFIRMED
@@ -25,16 +26,14 @@ function Register() {
   const [emailValidated, setEmailValidated] = useState(false);
   const [passwordValidated, setPasswordValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
-  const [isConfirmedPassword, setIsConfirmedPassword] = useState(true);
   const [shouldValidate, setShouldValidate] = useState(false);
 
   // USER VALUES
   const [user, setUser] = useState(REGISTER_USER_DATA);
-  const { firstName, lastName, confirmPassword, email, password } = user;
+  const { firstName, lastName, email, password } = user;
 
   // SHOW PASSWORDS
   const [showPassword, setShowPassword] = useState(true);
-  const [showConfirmedPassword, setShowConfirmedPassword] = useState(true);
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -51,19 +50,8 @@ function Register() {
   const handleRegister = async () => {
     setShouldValidate(true);
     if (allFieldsValidated) {
-      delete user.confirmPassword;
+      setToLocalStorage('accessToken', null);
       dispatch(registerUser({ user, language }));
-    }
-  };
-
-  const checkIfConfirmed = (e, setConfirm) => {
-    const confirmedInput = e.target.value;
-    const inputName = e.target.name;
-    setUser({ ...user, [inputName]: confirmedInput });
-    if (confirmedInput === password) {
-      setConfirm(true);
-    } else {
-      setConfirm(false);
     }
   };
 
@@ -90,8 +78,7 @@ function Register() {
       firstNameValidated &&
       lastNameValidated &&
       emailValidated &&
-      passwordValidated &&
-      isConfirmedPassword
+      passwordValidated
     ) {
       setAllFieldsValidated(true);
     } else {
@@ -101,9 +88,12 @@ function Register() {
     firstNameValidated,
     lastNameValidated,
     emailValidated,
-    passwordValidated,
-    isConfirmedPassword
+    passwordValidated
   ]);
+
+  useEffect(() => {
+    dispatch(resetState());
+  }, [dispatch]);
 
   // STYLES
   const styles = useStyles();
@@ -111,9 +101,7 @@ function Register() {
   const userFields = {
     firstNameField: {
       inputName: 'firstName',
-      errorMessage: errorMessages[language].value.firstname,
       value: firstName,
-      onChange: handleChange,
       validation: {
         value: firstNameValidated,
         setValid: setFirstNameValidated
@@ -123,9 +111,7 @@ function Register() {
     },
     lastNameField: {
       inputName: 'lastName',
-      errorMessage: errorMessages[language].value.lastname,
       value: lastName,
-      onChange: handleChange,
       validation: {
         value: lastNameValidated,
         setValid: setLastNameValidated
@@ -135,9 +121,7 @@ function Register() {
     },
     email: {
       inputName: 'email',
-      errorMessage: errorMessages[language].value.email,
       value: email,
-      onChange: handleChange,
       validation: {
         value: emailValidated,
         setValid: setEmailValidated
@@ -147,9 +131,7 @@ function Register() {
     },
     passwordField: {
       inputName: 'password',
-      errorMessage: errorMessages[language].value.password,
       value: password,
-      onChange: handleChange,
       validation: {
         value: passwordValidated,
         setValid: setPasswordValidated
@@ -157,24 +139,12 @@ function Register() {
       type: 'password',
       InputProps: endAdornment(showPassword, setShowPassword),
       regExp: formRegExp.password
-    },
-    confirmPasswordField: {
-      inputName: 'confirmPassword',
-      errorMessage: errorMessages[language].value.confirmPassword,
-      value: confirmPassword,
-      onChange: checkIfConfirmed,
-      validation: {
-        value: isConfirmedPassword,
-        setValid: setIsConfirmedPassword
-      },
-      type: 'password',
-      InputProps: endAdornment(showConfirmedPassword, setShowConfirmedPassword)
     }
   };
 
   const successWindow = (
     <form className={styles.registerForm}>
-      <div>
+      <div className={styles.successWrapper}>
         <img
           src={isLightTheme ? infoImg : infoLightImg}
           alt='info'
@@ -202,9 +172,7 @@ function Register() {
                 {Object.values(userFields).map(
                   ({
                     inputName,
-                    errorMessage,
                     value,
-                    onChange,
                     validation,
                     type,
                     InputProps = null,
@@ -223,13 +191,13 @@ function Register() {
                       error={!validation.value && shouldValidate}
                       helperText={
                         !validation.value && shouldValidate
-                          ? `${errorMessage}`
+                          ? `${errorMessages[language].value[inputName]}`
                           : ''
                       }
                       className={`${styles.dataInput} ${
                         inputName === 'email' && styles.afterText
                       }`}
-                      onChange={(e) => onChange(e, validation.setValid, regExp)}
+                      onChange={(e) => handleChange(e, validation.setValid, regExp)}
                       value={value}
                       type={type}
                     />
@@ -244,8 +212,10 @@ function Register() {
                     {REGISTER_FORM_LABEL[language].value}
                   </Button>
                   <p className={styles.registerError}>
-                    {registerError && REGISTER_USER_ERROR[registerError]
-                      ? REGISTER_USER_ERROR[registerError][language].value
+                    {registerError
+                      ? REGISTER_USER_ERROR[registerError]
+                        ? REGISTER_USER_ERROR[registerError][language].value
+                        : REGISTER_USER_ERROR.DEFAULT_ERROR[language].value
                       : ''}
                   </p>
                 </div>

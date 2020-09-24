@@ -10,7 +10,17 @@ import {
   PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
   REGISTER_USER,
-  CLEAR_USER_DATA
+  USER_HAS_RECOVERED,
+  USER_HAS_REGISTERED,
+  PRESERVE_USER,
+  SET_USER_IS_CHECKED,
+  UPDATE_USER,
+  PASSWORD_IS_RESET,
+  SEND_CONFIRMATION_EMAIL,
+  CONFIRMATION_EMAIL_SENT,
+  SET_USER_IS_CONFIRMED,
+  SET_CONFIRMATION_LOADING,
+  SET_RECOVERY_LOADING
 } from './user.types';
 
 const setUser = (user) => ({
@@ -35,10 +45,6 @@ const setUserError = (error) => ({
 
 const logoutUser = () => ({
   type: LOGOUT_USER
-});
-
-const clearUserData = () => ({
-  type: CLEAR_USER_DATA
 });
 
 const setUserLoading = (payload) => ({
@@ -70,6 +76,60 @@ const registerUser = (payload) => ({
   payload
 });
 
+const userHasRecovered = (payload) => ({
+  type: USER_HAS_RECOVERED,
+  payload
+});
+
+const userHasRegistered = (payload) => ({
+  type: USER_HAS_REGISTERED,
+  payload
+});
+
+const preserveUser = () => ({
+  type: PRESERVE_USER
+});
+
+const setUserIsChecked = (payload) => ({
+  type: SET_USER_IS_CHECKED,
+  payload
+});
+
+const updateUser = (payload) => ({
+  type: UPDATE_USER,
+  payload
+});
+
+const setPasswordIsReset = (payload) => ({
+  type: PASSWORD_IS_RESET,
+  payload
+});
+
+const sendConfirmationEmail = (payload) => ({
+  type: SEND_CONFIRMATION_EMAIL,
+  payload
+});
+
+const setConfirmationEmailStatus = (payload) => ({
+  type: CONFIRMATION_EMAIL_SENT,
+  payload
+});
+
+const setUserIsConfirmed = (payload) => ({
+  type: SET_USER_IS_CONFIRMED,
+  payload
+});
+
+const setConfirmationLoading = (payload) => ({
+  type: SET_CONFIRMATION_LOADING,
+  payload
+});
+
+const setRecoveryLoading = (payload) => ({
+  type: SET_RECOVERY_LOADING,
+  payload
+});
+
 export {
   loginUser,
   setUser,
@@ -82,5 +142,15 @@ export {
   resetPassword,
   checkIfTokenValid,
   registerUser,
-  clearUserData
+  userHasRecovered,
+  userHasRegistered,
+  preserveUser,
+  setUserIsChecked,
+  updateUser,
+  setPasswordIsReset,
+  sendConfirmationEmail,
+  setConfirmationEmailStatus,
+  setUserIsConfirmed,
+  setConfirmationLoading,
+  setRecoveryLoading,
 };

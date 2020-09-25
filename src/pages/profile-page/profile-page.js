@@ -14,7 +14,12 @@ import {
   PROFILE_PASSWORD_CHANGE,
   PROFILE_EMAIL_CONFIRM
 } from '../../translations/user.translations';
-import { IMG_URL, formRegExp, errorMessages, profileFields } from '../../configs/index'
+import {
+  IMG_URL,
+  formRegExp,
+  errorMessages,
+  profileFields
+} from '../../configs/index';
 
 const ProfilePage = () => {
   const classes = useStyles();
@@ -26,7 +31,7 @@ const ProfilePage = () => {
     confirmationEmailSent,
     userRecovered,
     confirmationLoading,
-    recoveryLoading,
+    recoveryLoading
   } = useSelector(({ User, Language }) => ({
     userData: User.userData,
     userLoading: User.userLoading,
@@ -34,7 +39,7 @@ const ProfilePage = () => {
     confirmationEmailSent: User.confirmationEmailSent,
     userRecovered: User.userRecovered,
     confirmationLoading: User.confirmationLoading,
-    recoveryLoading: User.recoveryLoading,
+    recoveryLoading: User.recoveryLoading
   }));
 
   const dispatch = useDispatch();
@@ -43,8 +48,8 @@ const ProfilePage = () => {
   const [isEdited, setIsEdited] = useState(userData);
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
-  const [validationObject, setValidationObject] = useState({})
-  const [shouldValidate, setShouldValidate] = useState(false)
+  const [validationObject, setValidationObject] = useState({});
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   const handleChange = (e, innerProp) => {
     const inputName = e.target.name;
@@ -74,9 +79,9 @@ const ProfilePage = () => {
   };
 
   const handleSaveUser = (e) => {
-    e.preventDefault()
-    setShouldValidate(true)
-    if(Object.values(validationObject).every(item=>item)) {
+    e.preventDefault();
+    setShouldValidate(true);
+    if (Object.values(validationObject).every((item) => item)) {
       delete user.token;
       dispatch(updateUser({ user, id: user._id, upload }));
     }
@@ -92,8 +97,14 @@ const ProfilePage = () => {
 
   const toEntries = useCallback((obj) => {
     return Object.keys(obj)
-      .filter(key => (!(obj[key] instanceof Array) && obj[key]) || (key==='firstName'||key==='lastName'||key==='email'))
-      .map(key => {
+      .filter(
+        (key) =>
+          (!(obj[key] instanceof Array) && obj[key]) ||
+          key === 'firstName' ||
+          key === 'lastName' ||
+          key === 'email'
+      )
+      .map((key) => {
         if (obj[key] !== Object(obj[key])) {
           return [key, obj[key]];
         } else {
@@ -102,30 +113,41 @@ const ProfilePage = () => {
       });
   }, []);
 
-  const destructureObject = useCallback((obj) => {
-    return toEntries(obj)
-      .map(item => {
-        if (Array.isArray(item[0])) {
-          return Object.fromEntries(item);
-        }
-        return Object.fromEntries([item]);
-      })
-      .reduce((prev, curr) => Object.assign(prev, curr), {});
-  }, [toEntries]);
+  const destructureObject = useCallback(
+    (obj) => {
+      return toEntries(obj)
+        .map((item) => {
+          if (Array.isArray(item[0])) {
+            return Object.fromEntries(item);
+          }
+          return Object.fromEntries([item]);
+        })
+        .reduce((prev, curr) => Object.assign(prev, curr), {});
+    },
+    [toEntries]
+  );
 
-  const checkFieldsForValidity = useCallback((obj) => {
-    return Object.fromEntries(Object.entries(destructureObject(obj))
-      .filter(entry => formRegExp[entry[0]])
-      .map(entry => {
-        return [entry[0], new RegExp(formRegExp[entry[0]]).test(entry[1])];
-      }));
-  }, [destructureObject]);
+  const checkFieldsForValidity = useCallback(
+    (obj) => {
+      return Object.fromEntries(
+        Object.entries(destructureObject(obj))
+          .filter((entry) => formRegExp[entry[0]])
+          .map((entry) => {
+            return [entry[0], new RegExp(formRegExp[entry[0]]).test(entry[1])];
+          })
+      );
+    },
+    [destructureObject]
+  );
 
-  const validateFields = useMemo(()=> checkFieldsForValidity(user),[user, checkFieldsForValidity])
+  const validateFields = useMemo(() => checkFieldsForValidity(user), [
+    user,
+    checkFieldsForValidity
+  ]);
 
-  useEffect(()=> {
+  useEffect(() => {
     setValidationObject(validateFields);
-  },[validateFields])
+  }, [validateFields]);
 
   useEffect(() => {
     if (
@@ -149,7 +171,7 @@ const ProfilePage = () => {
       setUser(userData);
     }
     if (userData.images && userData.images.thumbnail) {
-      setUserImageUrl(IMG_URL+userData.images.thumbnail);
+      setUserImageUrl(IMG_URL + userData.images.thumbnail);
     }
   }, [userData]);
 
@@ -158,46 +180,77 @@ const ProfilePage = () => {
       <div className={classes.profile}>
         <form className={classes.userForm} onSubmit={handleSaveUser}>
           {userLoading ? (
-            <Loader gridColumn={'span 3'}/>
+            <Loader gridColumn={'span 3'} />
           ) : (
             <>
-                <div className={classes.imageContainer}>
-                  <img
-                    src={userImageUrl || ProfilePicture}
-                    alt='profile-logo'
-                    className={classes.userImage}
-                    onError={handleImageError}
-                  />
-                  <input
-                    type='file'
-                    className={classes.photoUpload}
-                    id='photoUpload'
-                    onChange={handleImageLoad}
-                    multiple={true}
-                    accept='image/*'
-                  />
-                  <label htmlFor='photoUpload' className={classes.uploadLabel}>
-                    <Button component='span' className={classes.uploadBtn}>
-                      {PROFILE_DATA[language].addPhoto}
-                    </Button>
-                  </label>
-                </div>
-                {
-                  profileFields.map(name=> (
-                    <TextField
-                      key={name}
-                      label={PROFILE_DATA[language][name]}
-                      name={name}
-                      value={user.hasOwnProperty(name)? (user[name] || '') : (user.address && user.address[name] ? user.address[name] : '')}
-                      onChange={user.hasOwnProperty(name) ? handleChange : (e)=> handleChange(e,'address')}
-                      className={`${classes.userInput} ${(name==='firstName'||name==='lastName') && classes.nameInputs}`}
-                      error={shouldValidate && !validationObject[name] && (!user.hasOwnProperty(name) ? (user.address&&!!user.address[name]) : (name === 'phoneNumber' ? !!user[name] : true))}
-                      helperText={shouldValidate && !validationObject[name] && (!user.hasOwnProperty(name) ? (user.address&&!!user.address[name]) : (name === 'phoneNumber' ? !!user[name] : true)) && errorMessages[language].value[name]}
-                    />
-                  ))
-                }
+              <div className={classes.imageContainer}>
+                <img
+                  src={userImageUrl || ProfilePicture}
+                  alt='profile-logo'
+                  className={classes.userImage}
+                  onError={handleImageError}
+                />
+                <input
+                  type='file'
+                  className={classes.photoUpload}
+                  id='photoUpload'
+                  onChange={handleImageLoad}
+                  multiple={true}
+                  accept='image/*'
+                />
+                <label htmlFor='photoUpload' className={classes.uploadLabel}>
+                  <Button component='span' className={classes.uploadBtn}>
+                    {PROFILE_DATA[language].addPhoto}
+                  </Button>
+                </label>
+              </div>
+              {profileFields.map((name) => (
+                <TextField
+                  key={name}
+                  label={PROFILE_DATA[language][name]}
+                  name={name}
+                  value={
+                    user.hasOwnProperty(name)
+                      ? user[name] || ''
+                      : user.address && user.address[name]
+                      ? user.address[name]
+                      : ''
+                  }
+                  onChange={
+                    user.hasOwnProperty(name)
+                      ? handleChange
+                      : (e) => handleChange(e, 'address')
+                  }
+                  className={`${classes.userInput} ${
+                    (name === 'firstName' || name === 'lastName') &&
+                    classes.nameInputs
+                  }`}
+                  error={
+                    shouldValidate &&
+                    !validationObject[name] &&
+                    (!user.hasOwnProperty(name)
+                      ? user.address && !!user.address[name]
+                      : name === 'phoneNumber'
+                      ? !!user[name]
+                      : true)
+                  }
+                  helperText={
+                    shouldValidate &&
+                    !validationObject[name] &&
+                    (!user.hasOwnProperty(name)
+                      ? user.address && !!user.address[name]
+                      : name === 'phoneNumber'
+                      ? !!user[name]
+                      : true) &&
+                    errorMessages[language].value[name]
+                  }
+                />
+              ))}
               {!(isEdited || upload) ? null : (
-                <Button className={`${classes.button} ${classes.saveBtn}`} type='submit'>
+                <Button
+                  className={`${classes.button} ${classes.saveBtn}`}
+                  type='submit'
+                >
                   {PROFILE_DATA[language].saveBtnTitle}
                 </Button>
               )}
@@ -206,10 +259,14 @@ const ProfilePage = () => {
         </form>
         <div className={classes.userActions}>
           <div className={classes.newPassword}>
-            {recoveryLoading ? <Loader /> :
+            {recoveryLoading ? (
+              <Loader />
+            ) : (
               <>
                 <h2>{PROFILE_PASSWORD_CHANGE[language].heading}</h2>
-                <p>{!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}</p>
+                <p>
+                  {!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}
+                </p>
                 {userRecovered ? (
                   <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
                 ) : (
@@ -221,11 +278,13 @@ const ProfilePage = () => {
                   </Button>
                 )}
               </>
-            }
+            )}
           </div>
           {!user.confirmed && (
             <div className={classes.confirmUser}>
-              {confirmationLoading ? <Loader/> :
+              {confirmationLoading ? (
+                <Loader />
+              ) : (
                 <>
                   <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
                   {confirmationEmailSent ? (
@@ -239,7 +298,7 @@ const ProfilePage = () => {
                     </Button>
                   )}
                 </>
-              }
+              )}
             </div>
           )}
         </div>

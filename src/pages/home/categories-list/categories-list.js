@@ -6,7 +6,7 @@ import { useStyles } from './categories-list.style';
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
 import { URL_LANGUAGE, IMG_URL } from '../../../configs';
-import { getImage } from '../../../utils/imageLoad'
+import { getImage } from '../../../utils/imageLoad';
 import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 const CategoriesList = () => {
@@ -18,18 +18,18 @@ const CategoriesList = () => {
     })
   );
   const styles = useStyles();
- 
+
   const categoriesList = categories
     ? categories.map(({ _id, name, images, isMain }) =>
-      isMain ? (
-        <CategoryItem
-          key={_id}
-          categoryUrl={getCategoryURL(name)}
-          categoryName={name[language].value}
-          categoryImage={getImage(`${IMG_URL}${images.large}`)}
-        />
-      ) : null
-    )
+        isMain ? (
+          <CategoryItem
+            key={_id}
+            categoryUrl={getCategoryURL(name)}
+            categoryName={name[language].value}
+            categoryImage={getImage(`${IMG_URL}${images.large}`)}
+          />
+        ) : null
+      )
     : null;
 
   return (

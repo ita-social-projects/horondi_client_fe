@@ -15,7 +15,7 @@ import {
   setSearchFilter
 } from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
-import { getImage } from '../../utils/imageLoad'
+import { getImage } from '../../utils/imageLoad';
 
 const ProductsCorousel = ({ category }) => {
   const styles = useStyles();

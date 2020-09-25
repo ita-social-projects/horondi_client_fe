@@ -152,5 +152,5 @@ export {
   setConfirmationEmailStatus,
   setUserIsConfirmed,
   setConfirmationLoading,
-  setRecoveryLoading,
+  setRecoveryLoading
 };

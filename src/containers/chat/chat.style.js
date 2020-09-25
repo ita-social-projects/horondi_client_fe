@@ -106,7 +106,7 @@ export const useStyles = makeStyles((theme) => ({
     background: themeMode ? '#efefef' : '#232323',
     flexDirection: 'column',
     width: '100%',
-    height: '75%',
+    height: '100%',
     borderRadius: '4px'
   }),
   btnSend: {
@@ -135,5 +135,19 @@ export const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: theme.palette.white
+  },
+  activeMsgWrapper: {
+    height: '65%',
+    width: '100%'
+  },
+  thankForMsgWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '60%'
+  },
+  thankForMsg: {
+    fontSize: '1rem',
+    marginBottom: '20px'
   }
 }));

@@ -16,25 +16,27 @@ import Snackbar from './snackbar/snackbar.reducer';
 import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
+import Chat from './chat/chat.reducer';
 
 const rootReducer = (history) =>
-	combineReducers({
-		router: connectRouter(history),
-		User,
-		News,
-		Categories,
-		Theme,
-		Error,
-		Language,
-		Products,
-		Wishlist,
-		Cart,
-		Snackbar,
-		Contacts,
-		Model,
-		Currency,
-		Comments,
-		BusinessPages
-	});
+  combineReducers({
+    router: connectRouter(history),
+    User,
+    News,
+    Categories,
+    Theme,
+    Error,
+    Language,
+    Products,
+    Wishlist,
+    Cart,
+    Snackbar,
+    Contacts,
+    Model,
+    Currency,
+    Comments,
+    BusinessPages,
+    Chat
+  });
 
 export default rootReducer;

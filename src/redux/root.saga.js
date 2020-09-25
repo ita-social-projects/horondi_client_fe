@@ -10,18 +10,20 @@ import businessPagesSaga from './business-pages/business-pages.sagas';
 import contactsSaga from './contacts/contacts.sagas';
 import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
+import chatSaga from './chat/chat.sagas';
 
 export default function* rootSaga() {
-	yield all([
-		newsSaga(),
-		categoriesSaga(),
-		userSaga(),
-		wishlistSaga(),
-		contactsSaga(),
-		productsSaga(),
-		cartSaga(),
-		modelSaga(),
+  yield all([
+    newsSaga(),
+    categoriesSaga(),
+    userSaga(),
+    wishlistSaga(),
+    contactsSaga(),
+    productsSaga(),
+    cartSaga(),
+    modelSaga(),
     commentsSaga(),
-    businessPagesSaga()
-	]);
+    businessPagesSaga(),
+    chatSaga()
+  ]);
 }

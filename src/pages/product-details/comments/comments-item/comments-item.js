@@ -74,21 +74,21 @@ const CommentsItem = ({ user, text, date, commentId }) => {
             <div className={styles.commentActions}>
               {!isEditable &&
               (userData ? userData.email === user.email : false) ? (
-                  <div>
-                    <Tooltip title={TOOLTIPS[language].edit}>
-                      <EditIcon
-                        className={styles.editIcon}
-                        onClick={() => setEditable(true)}
-                      />
-                    </Tooltip>
-                    <Tooltip title={TOOLTIPS[language].delete}>
-                      <DeleteForeverIcon
-                        className={styles.deleteIcon}
-                        onClick={handleOpen}
-                      />
-                    </Tooltip>
-                  </div>
-                ) : null}
+                <div>
+                  <Tooltip title={TOOLTIPS[language].edit}>
+                    <EditIcon
+                      className={styles.editIcon}
+                      onClick={() => setEditable(true)}
+                    />
+                  </Tooltip>
+                  <Tooltip title={TOOLTIPS[language].delete}>
+                    <DeleteForeverIcon
+                      className={styles.deleteIcon}
+                      onClick={handleOpen}
+                    />
+                  </Tooltip>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

@@ -36,9 +36,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
           <span>
-            {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
+            {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
           </span>
-          {item.bagBottom && (
+          {item.bagBottom.value && (
             <span>
               {CART_TABLE_FIELDS[language].bagBottom}:{' '}
               {item.bagBottom.name[language].value}
@@ -59,7 +59,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
         />
       </div>
       <div className={styles.price}>
-        <span>{item.totalPrice} UAH</span>
+        <span>{item.totalPrice.toFixed(2)} UAH</span>
         <DeleteIcon
           className={styles.trash}
           onClick={onRemoveItem}

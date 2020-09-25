@@ -99,10 +99,10 @@
       },
       {
         "kind": "UNION",
-        "name": "EmailChatResult",
+        "name": "ModelResult",
         "possibleTypes": [
           {
-            "name": "EmailChat"
+            "name": "Model"
           },
           {
             "name": "Error"
@@ -115,6 +115,18 @@
         "possibleTypes": [
           {
             "name": "Contact"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "UserResult",
+        "possibleTypes": [
+          {
+            "name": "User"
           },
           {
             "name": "Error"

@@ -172,14 +172,5 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }
-  },
-  disabledLogin: {
-    backgroundColor: theme.palette.button.disabled.backgroundColor,
-    color: '#c2c2c2',
-    fontFamily: 'Montserrat',
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    textTransform: 'capitalize'
   }
 }));

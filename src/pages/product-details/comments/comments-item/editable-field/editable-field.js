@@ -70,8 +70,8 @@ const EditableField = ({
           product: productId,
           comment: commentId,
           text: editableText,
-          email: userData.email,
           firstName: username,
+          email: userData.email,
           images: userData.images
         })
       );

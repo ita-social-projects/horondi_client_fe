@@ -11,13 +11,14 @@ import { IMG_URL, responsive } from '../../../configs';
 
 import SimilarProductItem from './similar-products-item';
 
-const SimilarProducts = () => {
+const SimilarProducts = ({ currencySign }) => {
   const styles = useStyles();
-  const { language, similarProducts, productId } = useSelector(
-    ({ Language, Products: { products, product } }) => ({
+  const { language, similarProducts, productId, currency } = useSelector(
+    ({ Language, Currency, Products: { products, product } }) => ({
       language: Language.language,
       similarProducts: products,
-      productId: product._id
+      productId: product._id,
+      currency: Currency.currency
     })
   );
   const { title } = SIMILAR_ITEMS[language];
@@ -26,8 +27,9 @@ const SimilarProducts = () => {
     .filter(({ _id }) => _id !== productId)
     .map(({ _id, images, rate, name, basePrice }) => (
       <SimilarProductItem
+        currencySign={currencySign}
         key={_id}
-        price={basePrice[0].value}
+        price={basePrice[currency].value}
         name={name}
         rate={rate}
         imageUrl={`${IMG_URL}${images.primary.large}`}

@@ -39,7 +39,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   );
 
   const sizeToSend = useMemo(
-    () => sizes.find(({ _id }) => _id === selectedSize),
+    () => (sizes ? sizes.find(({ _id }) => _id === selectedSize) : null),
     [selectedSize, sizes]
   );
 

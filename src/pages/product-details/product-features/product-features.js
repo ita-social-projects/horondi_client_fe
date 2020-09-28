@@ -15,25 +15,26 @@ import {
   SELECT_NONE
 } from '../../../translations/product-details.translations';
 import { setProductToSend } from '../../../redux/products/products.actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ProductFeatures = ({ bottomMaterials, additions }) => {
+const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, totalPrice, bagBottom, sidePocket } = useSelector(
-    ({ Language, Products: { productToSend } }) => ({
+  const { language, totalPrice, bagBottom, sidePocket, currency } = useSelector(
+    ({ Language, Currency, Products: { productToSend } }) => ({
       language: Language.language,
       totalPrice: productToSend.totalPrice,
       sidePocket: productToSend.sidePocket.isSelected,
-      bagBottom: productToSend.bagBottom.value
+      bagBottom: productToSend.bagBottom.value,
+      currency: Currency.currency
     })
   );
 
-  const { additionalPrice, available, name } = additions[0] || {};
-
-  const setAdditionalPrice = (price) => ` +${price / 100} UAH`;
+  const { additionalPrice, name } =
+    additions && additions.length ? additions[0] : {};
 
   const additionsNameToSend = useMemo(
-    () => (additions.length >= 1 ? additions[0].name : null),
+    () => (additions && additions.length ? additions[0].name : null),
     [additions]
   );
 
@@ -42,12 +43,12 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-          .additionalPrice[0].value / 100
+          .additionalPrice[currency].value / 100
       : 0;
 
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-          .additionalPrice[0].value / 100
+          .additionalPrice[currency].value / 100
       : 0;
 
     const newTotalPrice = totalPrice - oldPrice + newPrice;
@@ -69,9 +70,9 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
     let newPrice;
 
     if (!sidePocket) {
-      newPrice = totalPrice + additionalPrice[0].value / 100;
+      newPrice = totalPrice + additionalPrice[currency].value / 100;
     } else {
-      newPrice = totalPrice - additionalPrice[0].value / 100;
+      newPrice = totalPrice - additionalPrice[currency].value / 100;
     }
 
     dispatch(
@@ -83,14 +84,18 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
   };
 
   const menuItems = bottomMaterials
-    ? bottomMaterials.map(({ _id, name, additionalPrice: [{ value }] }) => (
+    ? bottomMaterials.map(({ _id, name, additionalPrice }) => (
         <MenuItem value={name[1].value} key={_id}>
-          {name[language].value}
-          {value ? (
-            <span className={styles.selectPrice}>
-              {setAdditionalPrice(value)}
-            </span>
-          ) : null}
+          <span>
+            {name[language].value}{' '}
+            {additionalPrice[0].value ? (
+              <span className={styles.selectPrice}>
+                {'+'}
+                <FontAwesomeIcon icon={currencySign} />
+                {(additionalPrice[currency].value / 100).toFixed()}
+              </span>
+            ) : null}
+          </span>
         </MenuItem>
       ))
     : null;
@@ -124,17 +129,23 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
           </div>
         </div>
       ) : null}
-      {available && additionalPrice ? (
+      {additionalPrice ? (
         <div className={styles.checkbox}>
           <FormControlLabel
             control={
               <Checkbox checked={sidePocket} onChange={handlePocketChange} />
             }
-            label={name[language].value}
+            label={
+              <span>
+                {name[language].value}{' '}
+                <span className={styles.selectPrice}>
+                  {'+'}
+                  <FontAwesomeIcon icon={currencySign} />
+                  {(additionalPrice[currency].value / 100).toFixed()}
+                </span>
+              </span>
+            }
           />
-          <span className={styles.price}>
-            {setAdditionalPrice(additionalPrice[0].value)}
-          </span>
         </div>
       ) : null}
     </div>

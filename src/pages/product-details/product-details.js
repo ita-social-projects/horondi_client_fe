@@ -21,6 +21,7 @@ import {
 } from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE } from '../../configs';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -29,16 +30,19 @@ const ProductDetails = ({ match }) => {
     isLoading,
     productUrl,
     categoryFilter,
-    productToSend
+    productToSend,
+    currency
   } = useSelector(
     ({
+      Currency,
       Products: { product, productLoading, productToSend, filters },
       router
     }) => ({
+      currency: Currency.currency,
       categoryFilter: filters.categoryFilter,
-      product,
       isLoading: productLoading,
       productUrl: router.location.pathname,
+      product,
       productToSend
     })
   );
@@ -47,15 +51,18 @@ const ProductDetails = ({ match }) => {
 
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
+  const currencySign =
+    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+
   const { _id, name, basePrice, images, options, category } = product || {};
   const { selectedSize } = productToSend;
 
   const { volumeInLiters, weightInKg } = useMemo(
     () =>
-      product && options[0].size
+      options && options.length && options[0].size
         ? options.find(({ size: { name } }) => name === DEFAULT_SIZE).size
         : {},
-    [product, options]
+    [options]
   );
 
   useEffect(() => {
@@ -72,7 +79,7 @@ const ProductDetails = ({ match }) => {
           name,
           images,
           productUrl,
-          totalPrice: basePrice[0].value / 100,
+          totalPrice: basePrice[currency].value / 100,
           dimensions: { volumeInLiters, weightInKg }
         })
       );
@@ -92,7 +99,8 @@ const ProductDetails = ({ match }) => {
     _id,
     name,
     images,
-    productUrl
+    productUrl,
+    currency
   ]);
 
   useEffect(() => {
@@ -104,54 +112,53 @@ const ProductDetails = ({ match }) => {
   const uniqueSizes = useMemo(
     () => [
       ...new Set(
-        product && options[0].size
+        options && options.length && options[0].size
           ? options.map(({ size: { available, name } }) => available && name)
           : null
       )
     ],
-    [options, product]
+    [options]
   );
 
   const uniqueBottomMaterials = useMemo(
     () => [
       ...new Set(
-        product && options[0].bottomMaterial
+        options && options.length && options[0].bottomMaterial
           ? options.map(({ bottomMaterial: item }) =>
               item && item.available ? item.name[1].value : null
             )
           : null
       )
     ],
-    [options, product]
+    [options]
   );
 
   const uniqueAdditions = useMemo(
     () => [
       ...new Set(
-        product && options[0].additions
+        options && options.length && options[0].additions
           ? options
               .filter(({ additions }) => additions.length > 0)
-              .map(
-                ({ additions: [{ available, name }] }) =>
-                  available && name[1].value
-              )
+              .map(({ additions: [{ name }] }) => name[1].value)
           : null
       )
     ],
-    [options, product]
+    [options]
   );
 
   const sizes = useMemo(
     () =>
-      uniqueSizes.map(
-        (item) => options.find(({ size: { name } }) => item === name).size
-      ),
+      options && options.length
+        ? uniqueSizes.map(
+            (item) => options.find(({ size: { name } }) => item === name).size
+          )
+        : null,
     [uniqueSizes, options]
   );
 
   const bottomMaterials = useMemo(
     () =>
-      uniqueBottomMaterials[0]
+      uniqueBottomMaterials[0] && options && options.length
         ? uniqueBottomMaterials.map(
             (item) =>
               options.find(
@@ -164,26 +171,30 @@ const ProductDetails = ({ match }) => {
 
   const additions = useMemo(
     () =>
-      uniqueAdditions.map(
-        (item) =>
-          options
-            .filter(({ additions }) => additions.length > 0)
-            .find(({ additions: [{ name }] }) => item === name[1].value)
-            .additions[0]
-      ),
+      options && options.length
+        ? uniqueAdditions.map(
+            (item) =>
+              options
+                .filter(({ additions }) => additions.length > 0)
+                .find(({ additions: [{ name }] }) => item === name[1].value)
+                .additions[0]
+          )
+        : null,
     [uniqueAdditions, options]
   );
 
   const handleSizeChange = (id) => {
     const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[0].value /
-        100
+      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[currency]
+          .value / 100
       : 0;
     const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
       ({ _id }) => _id === id
     );
     const newPrice =
-      productToSend.totalPrice - oldPrice + additionalPrice[0].value / 100;
+      productToSend.totalPrice -
+      oldPrice +
+      additionalPrice[currency].value / 100;
 
     dispatch(
       setProductToSend({
@@ -212,13 +223,14 @@ const ProductDetails = ({ match }) => {
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo />
+          <ProductInfo currencySign={currencySign} />
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}
             sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
           <ProductFeatures
+            currencySign={currencySign}
             bottomMaterials={bottomMaterials}
             additions={additions}
           />
@@ -230,7 +242,7 @@ const ProductDetails = ({ match }) => {
           />
         </div>
       </div>
-      <SimilarProducts />
+      <SimilarProducts currencySign={currencySign} />
       <Comments />
     </Card>
   );

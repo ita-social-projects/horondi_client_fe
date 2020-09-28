@@ -234,6 +234,16 @@ export const OrderForm = () => {
           </span>
         </div>
         <div className={style.btnWrapper}>
+          <a
+            className={style.btnCreateOrder}
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://api.fondy.eu/s/sJf5sdUE4mFyEh'
+          >
+            <i className='fa fa-credit-card' /> Платежная страница
+          </a>
+        </div>
+        <div className={style.btnWrapper}>
           <Button className={style.btnCreateOrder} onClick={handleCreateOrder}>
             {CHECKOUT_BUTTON[language].createOrder}
           </Button>

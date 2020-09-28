@@ -6,7 +6,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.translations';
 import { useStyles } from '../../../../checkout.styles';
 
-const CurrierSecondStep = ({ city }) => {
+const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
   const style = useStyles();
   const { language, streets, loading } = useSelector(
     ({ Language, Checkout }) => ({
@@ -23,7 +23,7 @@ const CurrierSecondStep = ({ city }) => {
   return (
     <div className={style.contactField}>
       <Autocomplete
-        disabled={!city}
+        disabled={!cityForNovaPoshtaBottom}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
@@ -65,4 +65,4 @@ const CurrierSecondStep = ({ city }) => {
   );
 };
 
-export { CurrierSecondStep };
+export { CurrierBottom };

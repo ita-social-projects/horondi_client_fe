@@ -1,4 +1,4 @@
 import { UkrposhtaTop } from './ukrposhta-top';
-import { UkrPoshtaSecondStep } from './ukrposhta-bottom';
+import { UkrPoshtaBottom } from './ukrposhta-bottom';
 
-export { UkrposhtaTop, UkrPoshtaSecondStep };
+export { UkrposhtaTop, UkrPoshtaBottom };

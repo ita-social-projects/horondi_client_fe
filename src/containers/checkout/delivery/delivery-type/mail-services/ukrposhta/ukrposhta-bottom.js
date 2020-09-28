@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../../../../checkout.styles';
 
-const UkrPoshtaSecondStep = () => {
+const UkrPoshtaBottom = () => {
   const style = useStyles();
 
   return (
@@ -37,4 +37,4 @@ const UkrPoshtaSecondStep = () => {
   );
 };
 
-export { UkrPoshtaSecondStep };
+export { UkrPoshtaBottom };

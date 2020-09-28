@@ -8,8 +8,8 @@ import {
 } from '../../../../translations/checkout.translations';
 import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
 import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
-import { UkrposhtaTop, UkrPoshtaSecondStep } from './mail-services/ukrposhta';
-import { CurrierSecondStep } from './mail-services/currier/currier-bottom';
+import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
+import { CurrierBottom } from './mail-services/currier/currier-bottom';
 import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 
 const DeliveryType = ({ deliveryType, setDeliveryType }) => {
@@ -19,18 +19,21 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     contacts: Contacts.contacts
   }));
 
-  let { cities } = useSelector(({ Checkout }) => ({
+  const [city, setCity] = useState('');
+  const dispatch = useDispatch();
+
+  const { cities } = useSelector(({ Checkout }) => ({
     cities: Checkout.cities
   }));
 
-  const [city, setCity] = useState('');
-  const dispatch = useDispatch();
+  const citiesForNovaPoshta = cities.map((citi) => citi.description);
+  const cityForNovaPoshtaBottom = cities.find(
+    (value) => value.description === city
+  );
 
   useEffect(() => {
     dispatch(getNovaPoshtaCities(city));
   }, [dispatch, city]);
-
-  cities = cities.map((citi) => citi.description);
 
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
@@ -56,11 +59,21 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherTop = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaTop cities={cities} setCity={setCity} />;
+        return (
+          <NovaPoshtaTop
+            setCity={setCity}
+            citiesForNovaPoshta={citiesForNovaPoshta}
+          />
+        );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrposhtaTop />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return <NovaPoshtaTop cities={cities} setCity={setCity} />;
+        return (
+          <NovaPoshtaTop
+            setCity={setCity}
+            citiesForNovaPoshta={citiesForNovaPoshta}
+          />
+        );
       default:
         return (
           <SelfPickupTop
@@ -79,9 +92,11 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return <NovaPoshtaBottom city={city} />;
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return <UkrPoshtaSecondStep />;
+        return <UkrPoshtaBottom />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return <CurrierSecondStep />;
+        return (
+          <CurrierBottom cityForNovaPoshtaBottom={cityForNovaPoshtaBottom} />
+        );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return (
           <SelfPickupBottom

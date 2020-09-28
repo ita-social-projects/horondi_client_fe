@@ -27,7 +27,7 @@ const ProductListItem = ({ product, category }) => {
         <StarRating size='small' readOnly rate={product.rate} />
         <div>
           <FontAwesomeIcon icon={currencySign} />
-          {(product.basePrice[currency].value / 100).toFixed()}
+          {product.basePrice[currency].value / 100}
         </div>
       </Card>
     </Link>

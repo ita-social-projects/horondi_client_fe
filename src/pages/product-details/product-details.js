@@ -79,7 +79,7 @@ const ProductDetails = ({ match }) => {
           name,
           images,
           productUrl,
-          totalPrice: basePrice[currency].value / 100,
+          totalPrice: (basePrice[currency].value / 100).toFixed(2),
           dimensions: { volumeInLiters, weightInKg }
         })
       );
@@ -199,7 +199,7 @@ const ProductDetails = ({ match }) => {
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: newPrice,
+        totalPrice: newPrice.toFixed(2),
         dimensions: { volumeInLiters, weightInKg },
         selectedSize: id
       })

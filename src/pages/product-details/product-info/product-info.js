@@ -100,7 +100,7 @@ const ProductInfo = ({ currencySign }) => {
         </span>
         <span data-cy='price' className={styles.price}>
           <FontAwesomeIcon icon={currencySign} />
-          {currentPrice.toFixed()}
+          {currentPrice}
         </span>
       </div>
       <div className={styles.look}>

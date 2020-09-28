@@ -26,7 +26,7 @@ const SimilarProductItem = ({
           <Rating value={rate} readOnly size='small' />
           <span>
             <FontAwesomeIcon icon={currencySign} />
-            {(price / 100).toFixed()}
+            {price / 100}
           </span>
         </div>
       </div>

@@ -59,7 +59,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
     dispatch(
       setProductToSend({
-        totalPrice: newTotalPrice,
+        totalPrice: newTotalPrice.toFixed(2),
         bagBottom: { value, name: bottomNameToSend }
       })
     );
@@ -68,16 +68,16 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const handlePocketChange = (event) => {
     const { checked } = event.target;
     let newPrice;
-
+    console.log(additionalPrice[currency].value / 100);
     if (!sidePocket) {
-      newPrice = totalPrice + additionalPrice[currency].value / 100;
+      newPrice = +totalPrice + additionalPrice[currency].value / 100;
     } else {
-      newPrice = totalPrice - additionalPrice[currency].value / 100;
+      newPrice = +totalPrice - additionalPrice[currency].value / 100;
     }
 
     dispatch(
       setProductToSend({
-        totalPrice: newPrice,
+        totalPrice: newPrice.toFixed(2),
         sidePocket: { isSelected: checked, additionsNameToSend }
       })
     );
@@ -141,7 +141,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
                 <span className={styles.selectPrice}>
                   {'+'}
                   <FontAwesomeIcon icon={currencySign} />
-                  {(additionalPrice[currency].value / 100).toFixed()}
+                  {additionalPrice[currency].value / 100}
                 </span>
               </span>
             }

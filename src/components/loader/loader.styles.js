@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   wrapper: {
     width: '100%',
     height: '100%',
@@ -17,14 +17,13 @@ export const useStyles = makeStyles((theme) => ({
     '&::after': {
       content: '" "',
       display: 'block',
-      borderWidth: (props) => (props.width ? parseInt(props.width) / 10 : 6),
-      width: (props) => (props.width ? props.width : '64px'),
-      height: (props) => (props.height ? props.height : '64px'),
+      borderWidth: props => (props.width ? parseInt(props.width) / 10 : 6),
+      width: props => (props.width ? props.width : '64px'),
+      height: props => (props.height ? props.height : '64px'),
       borderRadius: '50%',
       borderStyle: 'solid',
-      borderColor: `${theme.palette.textColor || 'black'} transparent ${
-        theme.palette.textColor || 'black'
-      } transparent`,
+      borderColor: `${theme.palette.textColor || 'black'} transparent ${theme
+        .palette.textColor || 'black'} transparent`,
       animation: '$ldsDualRing 1.2s linear infinite'
     }
   },

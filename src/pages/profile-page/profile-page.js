@@ -63,10 +63,10 @@ const ProfilePage = () => {
     setUser({ ...user, [inputName]: inputValue });
   };
 
-  const handleImageLoad = (e) => {
+  const handleImageLoad = e => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         setUserImageUrl(e.target.result);
       };
       reader.readAsDataURL(e.target.files[0]);
@@ -77,6 +77,7 @@ const ProfilePage = () => {
   const handleConfirmation = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
   };
+
 
   const handleSaveUser = (e) => {
     e.preventDefault();
@@ -91,11 +92,11 @@ const ProfilePage = () => {
     dispatch(recoverUser({ email: userData.email, language }));
   };
 
-  const handleImageError = (e) => {
+  const handleImageError = e => {
     e.target.src = ProfilePicture;
   };
 
-  const toEntries = useCallback((obj) => {
+  const toEntries = useCallback(obj => {
     return Object.keys(obj)
       .filter(
         (key) =>
@@ -152,7 +153,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (
       user.address &&
-      Object.keys(user.address).every((key) => !user.address[key])
+      Object.keys(user.address).every(key => !user.address[key])
     ) {
       user.address = null;
     }

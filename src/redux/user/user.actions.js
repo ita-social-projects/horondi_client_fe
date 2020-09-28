@@ -23,22 +23,22 @@ import {
   SET_RECOVERY_LOADING
 } from './user.types';
 
-const setUser = (user) => ({
+const setUser = user => ({
   type: SET_USER,
   payload: user
 });
 
-const loginUser = (payload) => ({
+const loginUser = payload => ({
   type: LOGIN_USER,
   payload
 });
 
-const confirmUser = (payload) => ({
+const confirmUser = payload => ({
   type: CONFIRM_USER,
   payload
 });
 
-const setUserError = (error) => ({
+const setUserError = error => ({
   type: SET_USER_ERROR,
   payload: error
 });
@@ -47,7 +47,7 @@ const logoutUser = () => ({
   type: LOGOUT_USER
 });
 
-const setUserLoading = (payload) => ({
+const setUserLoading = payload => ({
   type: SET_USER_LOADING,
   payload
 });
@@ -56,32 +56,32 @@ const resetState = () => ({
   type: STATE_RESET
 });
 
-const recoverUser = (payload) => ({
+const recoverUser = payload => ({
   type: RECOVER_USER,
   payload
 });
 
-const resetPassword = (payload) => ({
+const resetPassword = payload => ({
   type: PASSWORD_RESET,
   payload
 });
 
-const checkIfTokenValid = (payload) => ({
+const checkIfTokenValid = payload => ({
   type: CHECK_IF_TOKEN_VALID,
   payload
 });
 
-const registerUser = (payload) => ({
+const registerUser = payload => ({
   type: REGISTER_USER,
   payload
 });
 
-const userHasRecovered = (payload) => ({
+const userHasRecovered = payload => ({
   type: USER_HAS_RECOVERED,
   payload
 });
 
-const userHasRegistered = (payload) => ({
+const userHasRegistered = payload => ({
   type: USER_HAS_REGISTERED,
   payload
 });
@@ -90,42 +90,42 @@ const preserveUser = () => ({
   type: PRESERVE_USER
 });
 
-const setUserIsChecked = (payload) => ({
+const setUserIsChecked = payload => ({
   type: SET_USER_IS_CHECKED,
   payload
 });
 
-const updateUser = (payload) => ({
+const updateUser = payload => ({
   type: UPDATE_USER,
   payload
 });
 
-const setPasswordIsReset = (payload) => ({
+const setPasswordIsReset = payload => ({
   type: PASSWORD_IS_RESET,
   payload
 });
 
-const sendConfirmationEmail = (payload) => ({
+const sendConfirmationEmail = payload => ({
   type: SEND_CONFIRMATION_EMAIL,
   payload
 });
 
-const setConfirmationEmailStatus = (payload) => ({
+const setConfirmationEmailStatus = payload => ({
   type: CONFIRMATION_EMAIL_SENT,
   payload
 });
 
-const setUserIsConfirmed = (payload) => ({
+const setUserIsConfirmed = payload => ({
   type: SET_USER_IS_CONFIRMED,
   payload
 });
 
-const setConfirmationLoading = (payload) => ({
+const setConfirmationLoading = payload => ({
   type: SET_CONFIRMATION_LOADING,
   payload
 });
 
-const setRecoveryLoading = (payload) => ({
+const setRecoveryLoading = payload => ({
   type: SET_RECOVERY_LOADING,
   payload
 });

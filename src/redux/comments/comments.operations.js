@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import getItems, { setItems, client } from '../../utils/client';
 
-const getComments = (id) =>
+const getComments = id =>
   getItems(
     `query($id: ID!) {
         getAllCommentsByProduct(productId: $id) {
@@ -21,7 +21,7 @@ const getComments = (id) =>
     }
   );
 
-const changeRate = (payload) =>
+const changeRate = payload =>
   setItems(
     `mutation($product: ID!, $rate: Int!) {
         addRate(product: $product, userRate: { rate: $rate }) {
@@ -33,7 +33,7 @@ const changeRate = (payload) =>
     payload
   );
 
-const addComment = async (payload) => {
+const addComment = async payload => {
   const result = await client.mutate({
     mutation: gql`
       mutation(
@@ -70,7 +70,7 @@ const addComment = async (payload) => {
   return result;
 };
 
-const deleteComment = async (payload) => {
+const deleteComment = async payload => {
   const result = await client.mutate({
     mutation: gql`
       mutation($comment: ID!) {
@@ -89,7 +89,7 @@ const deleteComment = async (payload) => {
   return result;
 };
 
-const updateComment = async (payload) => {
+const updateComment = async payload => {
   const result = await client.mutate({
     mutation: gql`
       mutation(

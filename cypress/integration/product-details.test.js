@@ -59,7 +59,10 @@ describe('Product details test', () => {
 
   it('should redirect to checkout page', () => {
     cy.get('[data-cy="sizes"]').click();
-    cy.contains('Купити зараз').click().url().should('include', '/checkout');
+    cy.contains('Купити зараз')
+      .click()
+      .url()
+      .should('include', '/checkout');
   });
 
   it('should change price when pocket checked', () => {
@@ -80,10 +83,18 @@ describe('Product details test', () => {
   });
 
   it('comment inputs should be visible and editable', () => {
-    cy.get('[data-cy="rate"]').should('exist').and('be.visible');
-    cy.get('[data-cy="firstName"]').should('exist').and('be.visible');
-    cy.get('[data-cy="email"]').should('exist').and('be.visible');
-    cy.get('[data-cy="text"]').should('exist').and('be.visible');
+    cy.get('[data-cy="rate"]')
+      .should('exist')
+      .and('be.visible');
+    cy.get('[data-cy="firstName"]')
+      .should('exist')
+      .and('be.visible');
+    cy.get('[data-cy="email"]')
+      .should('exist')
+      .and('be.visible');
+    cy.get('[data-cy="text"]')
+      .should('exist')
+      .and('be.visible');
     cy.get('[data-cy=email] > .MuiInputBase-root > .MuiInputBase-input')
       .type('vas.mytro@gmail.com')
       .should('have.value', 'vas.mytro@gmail.com');

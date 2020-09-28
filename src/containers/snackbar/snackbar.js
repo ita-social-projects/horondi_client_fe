@@ -7,7 +7,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { setSnackBarStatus } from '../../redux/snackbar/snackbar.actions';
 import { SNACKBAR_DURATION } from '../../configs';
 
-const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
+const Alert = props => <MuiAlert elevation={6} variant='filled' {...props} />;
 
 const SnackbarItem = () => {
   const dispatch = useDispatch();

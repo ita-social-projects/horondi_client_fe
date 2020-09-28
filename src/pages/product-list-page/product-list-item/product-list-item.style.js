@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-  productItem: (props) => ({
+  productItem: props => ({
     background: `url(${props.image}) no-repeat center`,
     backgroundSize: 'cover',
     width: '100%',

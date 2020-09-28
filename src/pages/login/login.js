@@ -102,7 +102,7 @@ const Login = () => {
                 value={email}
                 error={!email && shouldValidate}
                 required
-                onChange={(e) =>
+                onChange={e =>
                   handleChange(e, setEmailValidated, formRegExp.email)
                 }
               />
@@ -117,7 +117,7 @@ const Login = () => {
                 value={password}
                 error={!password && shouldValidate}
                 required
-                onChange={(e) =>
+                onChange={e =>
                   handleChange(e, setPasswordValidated, formRegExp.password)
                 }
               />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './loader.styles';
 
-export const Loader = (props) => {
+export const Loader = props => {
   const styles = useStyles(props);
 
   return (

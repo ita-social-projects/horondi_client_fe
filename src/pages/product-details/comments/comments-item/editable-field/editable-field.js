@@ -50,7 +50,7 @@ const EditableField = ({
     setTextValidated(true);
   }, [setEditableText, setTextValidated, text]);
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const { value, name } = event.target;
     const { text } = formRegExp;
     const filteredText = filterText(value, name);
@@ -87,7 +87,7 @@ const EditableField = ({
         value={editableText}
         className={styles.editableText}
         variant='outlined'
-        onChange={(e) => handleChange(e)}
+        onChange={e => handleChange(e)}
         error={!textValidated && shouldValidate}
         helperText={
           !textValidated && shouldValidate

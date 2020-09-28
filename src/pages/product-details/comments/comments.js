@@ -65,7 +65,7 @@ const Comments = () => {
   const hasBought = useMemo(
     () =>
       purchasedProduct
-        ? purchasedProduct.some((product) => product === productId)
+        ? purchasedProduct.some(product => product === productId)
         : null,
     [purchasedProduct, productId]
   );
@@ -236,7 +236,7 @@ const Comments = () => {
                         ? `${errorMessage}`
                         : ''
                     }
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
+                    onChange={e => onChange(e, validation.setValid, regExp)}
                     value={value}
                     type={type}
                     multiline={multiline}

@@ -17,7 +17,7 @@ const FilledCart = ({ items }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
-  const onModalAction = (action) => {
+  const onModalAction = action => {
     action && dispatch(removeItemFromCart(modalItem));
     setModalVisibility(false);
   };
@@ -33,7 +33,7 @@ const FilledCart = ({ items }) => {
           <div>{CART_TABLE_FIELDS[language].quantity}</div>
           <div>{CART_TABLE_FIELDS[language].price}</div>
         </div>
-        {items.map((item) => (
+        {items.map(item => (
           <CartItem
             key={Math.random()}
             item={item}

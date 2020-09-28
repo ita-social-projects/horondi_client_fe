@@ -99,7 +99,7 @@ const Recovery = () => {
               value={email}
               error={(shouldValidate && !emailValidated && !!email) || !!error}
               required
-              onChange={(e) =>
+              onChange={e =>
                 handleChange(e, setEmailValidated, formRegExp.email)
               }
             />

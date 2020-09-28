@@ -18,7 +18,7 @@ import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
 import Chat from './chat/chat.reducer';
 
-const rootReducer = (history) =>
+const rootReducer = history =>
   combineReducers({
     router: connectRouter(history),
     User,

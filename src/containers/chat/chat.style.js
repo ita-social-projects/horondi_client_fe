@@ -6,7 +6,7 @@ const flexCenter = {
   alignItems: 'center'
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
     background: iconsVisible ? '#E4B200' : 'black',
@@ -47,7 +47,7 @@ export const useStyles = makeStyles((theme) => ({
       background: '#E4B200'
     }
   },
-  msgIconActive: (mailFormVisible) => ({
+  msgIconActive: mailFormVisible => ({
     ...flexCenter,
     width: '50px',
     height: '50px',

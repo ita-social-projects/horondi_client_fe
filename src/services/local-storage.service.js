@@ -22,7 +22,7 @@ if (!localStorage.getItem('horondi')) {
   clearLocalStorage();
 }
 
-export const getFromLocalStorage = (name) => {
+export const getFromLocalStorage = name => {
   const localObject = JSON.parse(localStorage.getItem('horondi'));
   if (!localObject) {
     return null;

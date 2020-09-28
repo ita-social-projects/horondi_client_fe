@@ -29,7 +29,7 @@ const ContactsPage = () => {
     );
   }
 
-  const contactsDisplay = contacts.map((contact) => (
+  const contactsDisplay = contacts.map(contact => (
     <div key={contact._id} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
@@ -62,7 +62,7 @@ const ContactsPage = () => {
               {CONTACTS_PAGE_TITLES[language].schedule}
             </span>
             <div className={styles.schedule}>
-              {contact.openHours[language].value.split('|').map((el) => (
+              {contact.openHours[language].value.split('|').map(el => (
                 <div key={el}>
                   <span className={styles.day}>{el.substr(0, 4)}</span>
                   <span>{el.substring(4)}</span>

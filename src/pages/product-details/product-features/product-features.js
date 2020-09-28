@@ -30,14 +30,14 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
 
   const { additionalPrice, available, name } = additions[0] || {};
 
-  const setAdditionalPrice = (price) => ` +${price / 100} UAH`;
+  const setAdditionalPrice = price => ` +${price / 100} UAH`;
 
   const additionsNameToSend = useMemo(
     () => (additions.length >= 1 ? additions[0].name : null),
     [additions]
   );
 
-  const handleBottomChange = (event) => {
+  const handleBottomChange = event => {
     const { value } = event.target;
 
     const oldPrice = bagBottom
@@ -64,7 +64,7 @@ const ProductFeatures = ({ bottomMaterials, additions }) => {
     );
   };
 
-  const handlePocketChange = (event) => {
+  const handlePocketChange = event => {
     const { checked } = event.target;
     let newPrice;
 

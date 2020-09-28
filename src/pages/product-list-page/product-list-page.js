@@ -99,10 +99,10 @@ const ProductListPage = ({ category, model }) => {
     dispatch(
       setPriceFilter([
         Math.min(
-          ...filterData.map((product) => product.basePrice[currency].value)
+          ...filterData.map(product => product.basePrice[currency].value)
         ),
         Math.max(
-          ...filterData.map((product) => product.basePrice[currency].value)
+          ...filterData.map(product => product.basePrice[currency].value)
         )
       ])
     );

@@ -7,7 +7,7 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     animationName: '',
     animationDuration: '',
-    gridColumn: props => props.gridColumn || 'none'
+    gridColumn: (props) => props.gridColumn || 'none'
   },
   ldsDualRing: {
     display: 'inline-block',

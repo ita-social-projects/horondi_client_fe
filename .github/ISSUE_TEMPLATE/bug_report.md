@@ -10,7 +10,7 @@ assignees: ''
 
 **Environment:** OS, browser, it's version, device (for mobile devices).
 **Reproducible:** always, rarely, sometimes etc.
-**Build found:** last commit from https://github.com/ita-social-projects/GreenCityClient/tree/dev
+**Build found:** last commit from https://github.com/ita-social-projects/horondi_client_fe
 E.g. "commit 147fa44"
 
 **Preconditions**

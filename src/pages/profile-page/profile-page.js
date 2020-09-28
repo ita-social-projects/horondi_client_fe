@@ -63,10 +63,10 @@ const ProfilePage = () => {
     setUser({ ...user, [inputName]: inputValue });
   };
 
-  const handleImageLoad = e => {
+  const handleImageLoad = (e) => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         setUserImageUrl(e.target.result);
       };
       reader.readAsDataURL(e.target.files[0]);
@@ -78,10 +78,10 @@ const ProfilePage = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
   };
 
-  const handleSaveUser = e => {
+  const handleSaveUser = (e) => {
     e.preventDefault();
     setShouldValidate(true);
-    if (Object.values(validationObject).every(item => item)) {
+    if (Object.values(validationObject).every((item) => item)) {
       delete user.token;
       dispatch(updateUser({ user, id: user._id, upload }));
     }
@@ -91,18 +91,20 @@ const ProfilePage = () => {
     dispatch(recoverUser({ email: userData.email, language }));
   };
 
-  const handleImageError = e => {
+  const handleImageError = (e) => {
     e.target.src = ProfilePicture;
   };
 
-  const toEntries = useCallback(obj => {
+  const toEntries = useCallback((obj) => {
     return Object.keys(obj)
       .filter(
-        key =>
+        (key) =>
           (!(obj[key] instanceof Array) && obj[key]) ||
-          (key === 'firstName' || key === 'lastName' || key === 'email')
+          key === 'firstName' ||
+          key === 'lastName' ||
+          key === 'email'
       )
-      .map(key => {
+      .map((key) => {
         if (obj[key] !== Object(obj[key])) {
           return [key, obj[key]];
         } else {
@@ -112,9 +114,9 @@ const ProfilePage = () => {
   }, []);
 
   const destructureObject = useCallback(
-    obj => {
+    (obj) => {
       return toEntries(obj)
-        .map(item => {
+        .map((item) => {
           if (Array.isArray(item[0])) {
             return Object.fromEntries(item);
           }
@@ -126,11 +128,11 @@ const ProfilePage = () => {
   );
 
   const checkFieldsForValidity = useCallback(
-    obj => {
+    (obj) => {
       return Object.fromEntries(
         Object.entries(destructureObject(obj))
-          .filter(entry => formRegExp[entry[0]])
-          .map(entry => {
+          .filter((entry) => formRegExp[entry[0]])
+          .map((entry) => {
             return [entry[0], new RegExp(formRegExp[entry[0]]).test(entry[1])];
           })
       );
@@ -150,7 +152,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (
       user.address &&
-      Object.keys(user.address).every(key => !user.address[key])
+      Object.keys(user.address).every((key) => !user.address[key])
     ) {
       user.address = null;
     }
@@ -202,7 +204,7 @@ const ProfilePage = () => {
                   </Button>
                 </label>
               </div>
-              {profileFields.map(name => (
+              {profileFields.map((name) => (
                 <TextField
                   key={name}
                   label={PROFILE_DATA[language][name]}
@@ -217,11 +219,12 @@ const ProfilePage = () => {
                   onChange={
                     user.hasOwnProperty(name)
                       ? handleChange
-                      : e => handleChange(e, 'address')
+                      : (e) => handleChange(e, 'address')
                   }
-                  className={`${classes.userInput} ${(name === 'firstName' ||
-                    name === 'lastName') &&
-                    classes.nameInputs}`}
+                  className={`${classes.userInput} ${
+                    (name === 'firstName' || name === 'lastName') &&
+                    classes.nameInputs
+                  }`}
                   error={
                     shouldValidate &&
                     !validationObject[name] &&

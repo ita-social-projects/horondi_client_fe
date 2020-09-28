@@ -9,6 +9,8 @@ import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
+import PaymentsAndShipping from '../pages/payment-shipping';
+import PrivacyPolicy from '../pages/privacy-policy';
 import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
 import NewsDetailPage from '../pages/news/news-detail';
@@ -48,6 +50,12 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
+          <Route
+            path='/payment-and-shipping'
+            exact
+            component={PaymentsAndShipping}
+          />
+          <Route path='/privacy-policy' exact component={PrivacyPolicy} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/contacts' exact component={ContactsPage} />
@@ -90,7 +98,7 @@ const Routes = () => {
             render={({ match }) => {
               const { category } = match.params;
               const categoryParam = categories.find(
-                categoryFound =>
+                (categoryFound) =>
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
@@ -104,7 +112,7 @@ const Routes = () => {
             render={({ match }) => {
               const { category, model } = match.params;
               const categoryParam = categories.find(
-                categoryFound =>
+                (categoryFound) =>
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );

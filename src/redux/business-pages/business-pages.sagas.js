@@ -6,6 +6,12 @@ import { GET_BUSINESS_PAGE_BY_CODE } from './business-pages.types';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 
+export function* handleBusinessPageError(e) {
+  yield put(setLoading(false));
+  yield put(setError({ e }));
+  yield put(push('/error-page'));
+}
+
 export function* handleBusinessPageLoad({ payload }) {
   try {
     yield put(setLoading(true));
@@ -42,12 +48,6 @@ export function* handleBusinessPageLoad({ payload }) {
   } catch (e) {
     yield call(handleBusinessPageError, e);
   }
-}
-
-export function* handleBusinessPageError(e) {
-  yield put(setLoading(false));
-  yield put(setError({ e }));
-  yield put(push('/error-page'));
 }
 
 export default function* businessPagesSaga() {

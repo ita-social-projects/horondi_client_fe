@@ -10,7 +10,11 @@ import {
 } from '../../translations/user.translations';
 import { useStyles } from './recovery.styles';
 import { Loader } from '../../components/loader/loader';
-import { recoverUser, resetState, userHasRecovered } from '../../redux/user/user.actions';
+import {
+  recoverUser,
+  resetState,
+  userHasRecovered
+} from '../../redux/user/user.actions';
 
 const Recovery = () => {
   const [email, setEmail] = useState('');
@@ -29,7 +33,7 @@ const Recovery = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userHasRecovered(false))
+    dispatch(userHasRecovered(false));
     dispatch(resetState());
   }, [dispatch]);
 
@@ -87,10 +91,10 @@ const Recovery = () => {
                 shouldValidate && !emailValidated && email
                   ? errorMessages[language].value.email
                   : RECOVERY_ERROR_MESSAGE[error]
-                    ? RECOVERY_ERROR_MESSAGE[error][language].value
-                    : error
-                      ? RECOVERY_ERROR_MESSAGE.EMAIL_ERROR[language].value
-                      : null
+                  ? RECOVERY_ERROR_MESSAGE[error][language].value
+                  : error
+                  ? RECOVERY_ERROR_MESSAGE.EMAIL_ERROR[language].value
+                  : null
               }
               value={email}
               error={(shouldValidate && !emailValidated && !!email) || !!error}

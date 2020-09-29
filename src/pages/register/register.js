@@ -197,7 +197,9 @@ function Register() {
                       className={`${styles.dataInput} ${
                         inputName === 'email' && styles.afterText
                       }`}
-                      onChange={(e) => handleChange(e, validation.setValid, regExp)}
+                      onChange={(e) =>
+                        handleChange(e, validation.setValid, regExp)
+                      }
                       value={value}
                       type={type}
                     />

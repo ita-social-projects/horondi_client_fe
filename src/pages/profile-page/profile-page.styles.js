@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   userImage: {
     height: '100%',
-    borderRadius: 5,
+    borderRadius: 5
   },
   imageContainer: {
     width: 103,
@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       top: '46px',
       fontSize: '0.625rem'
-    },
+    }
   },
   nameInputs: {
     gridColumn: 'span 2'
@@ -69,7 +69,7 @@ export const useStyles = makeStyles((theme) => ({
   uploadBtn: {
     width: '100%',
     height: '100%',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   uploadLabel: {
     height: '100%',
@@ -87,12 +87,13 @@ export const useStyles = makeStyles((theme) => ({
     '& > span': {
       fontSize: 40,
       color: 'white',
-      textShadow: '-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000'
+      textShadow:
+        '-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000'
     },
     '&:hover': {
       opacity: 0.7,
       transition: 'all 1s ease'
-    },
+    }
   },
   restOfUserInputs: {
     display: 'flex',
@@ -119,7 +120,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   saveBtn: {
-    position:'absolute',
+    position: 'absolute',
     width: '382px',
     bottom: 26,
     left: 34

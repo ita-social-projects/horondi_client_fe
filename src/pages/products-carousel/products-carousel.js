@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { Backdrop } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
@@ -16,6 +17,8 @@ import {
 } from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
 import { getImage } from '../../utils/imageLoad';
+
+const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const ProductsCorousel = ({ category }) => {
   const styles = useStyles();
@@ -47,7 +50,7 @@ const ProductsCorousel = ({ category }) => {
     );
   }
 
-  const handleClick = model => {
+  const handleClick = (model) => {
     dispatch(setModelsFilter([model.name[1].value]));
     dispatch(setPatternsFilter([]));
     dispatch(setColorsFilter([]));
@@ -55,16 +58,22 @@ const ProductsCorousel = ({ category }) => {
     dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map(product => product.basePrice[0].value)),
-        Math.max(...filterData.map(product => product.basePrice[0].value))
+        Math.min(...filterData.map((product) => product.basePrice[0].value)),
+        Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
   };
 
   return (
     <div className={styles.container}>
-      <AwesomeSlider className={styles.slider} mobileTouch>
-        {models.map(model => (
+      <AutoplaySlider
+        play={true}
+        cancelOnInteraction={false}
+        interval={4000}
+        className={styles.slider}
+        mobileTouch
+      >
+        {models.map((model) => (
           <div
             key={model.name[1].value}
             data-src={getImage(model.images.large)}
@@ -80,7 +89,7 @@ const ProductsCorousel = ({ category }) => {
             </Link>
           </div>
         ))}
-      </AwesomeSlider>
+      </AutoplaySlider>
     </div>
   );
 };

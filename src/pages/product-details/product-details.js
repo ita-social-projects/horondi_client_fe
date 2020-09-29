@@ -79,7 +79,7 @@ const ProductDetails = ({ match }) => {
           name,
           images,
           productUrl,
-          totalPrice: (basePrice[currency].value / 100).toFixed(2),
+          totalPrice: +(basePrice[currency].value / 100).toFixed(2),
           dimensions: { volumeInLiters, weightInKg }
         })
       );

@@ -38,15 +38,16 @@ const ProductImages = () => {
 
   const sideImages = images.additional
     ? images.additional
-      .filter((img, idx) => idx < 3)
-      .map((image, idx) => (
-        <img
-          src={`${IMG_URL}${image.small}`}
-          key={idx}
-          alt={IMG_ALT_INFO[language].value}
-          onClick={() => openImage(idx + 1)}
-        />
-      ))
+        .filter((img, idx) => idx < 3)
+        .map((image, idx) => (
+          <img
+            className={styles.sideImage}
+            src={`${IMG_URL}${image.small}`}
+            key={idx}
+            alt={IMG_ALT_INFO[language].value}
+            onClick={() => openImage(idx + 1)}
+          />
+        ))
     : null;
 
   return (
@@ -64,11 +65,9 @@ const ProductImages = () => {
         leftArrowTitle={IMGS_VIEWER[language].prev}
         rightArrowTitle={IMGS_VIEWER[language].next}
       />
-      <div className={styles.container}>
-        <div className={styles.images}>
-          {primaryImage}
-          {sideImages}
-        </div>
+      <div className={styles.images}>
+        {sideImages}
+        {primaryImage}
       </div>
     </div>
   );

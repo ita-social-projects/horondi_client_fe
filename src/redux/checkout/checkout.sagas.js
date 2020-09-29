@@ -18,17 +18,17 @@ import { setError } from '../error/error.actions';
 export function* handleStreets({ payload }) {
   try {
     yield put(setLoading(true));
-
     const streets = yield call(
       getItems,
-      `query{
-                getNovaPoshtaStreets(cityRef: ${payload.ref}, street: ${payload.street}){   
+      `query($cityRef: String, $street: String){
+                getNovaPoshtaStreets(cityRef: $cityRef, street: $street){   
                     description
                     ref
                     streetsTypeRef
                     streetsType
                     }
-                 }`
+                 }`,
+      { cityRef: payload.ref, street: payload.street }
     );
     yield put(setNovaPoshtaStreets(streets.data.getNovaPoshtaStreets));
     yield put(setLoading(false));
@@ -41,15 +41,15 @@ export function* handleStreets({ payload }) {
 export function* handleCities({ payload }) {
   try {
     yield put(setLoading(true));
-
+    console.log('handleCities');
     const cities = yield call(
       getItems,
       `query{
-      getNovaPoshtaCities(city: "${payload}") {
-         description
-         ref
-         }
-      }`
+               getNovaPoshtaCities(city: "${payload}") {
+                  description
+                  ref
+                     }
+                  }`
     );
     yield put(setNovaPoshtaCities(cities.data.getNovaPoshtaCities));
     yield put(setLoading(false));

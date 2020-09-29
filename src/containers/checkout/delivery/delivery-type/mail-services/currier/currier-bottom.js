@@ -1,13 +1,15 @@
 import { TextField } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.translations';
 import { useStyles } from '../../../../checkout.styles';
+import { getNovaPoshtaStreets } from '../../../../../../redux/checkout/checkout.actions';
 
 const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
   const style = useStyles();
+  const dispatch = useDispatch();
   const { language, streets, loading } = useSelector(
     ({ Language, Checkout }) => ({
       language: Language.language,
@@ -20,10 +22,21 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
 
   const [inputValue, setInputValue] = useState('');
 
+  const payload = useMemo(
+    () => ({
+      ref: cityForNovaPoshtaBottom && cityForNovaPoshtaBottom.ref,
+      street: inputValue
+    }),
+    [cityForNovaPoshtaBottom, inputValue]
+  );
+
+  useEffect(() => {
+    dispatch(getNovaPoshtaStreets(payload));
+  }, [dispatch, payload]);
+
   return (
     <div className={style.contactField}>
       <Autocomplete
-        disabled={!cityForNovaPoshtaBottom}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);

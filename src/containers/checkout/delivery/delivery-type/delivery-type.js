@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { useStyles } from '../../checkout.styles';
@@ -27,8 +27,9 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   }));
 
   const citiesForNovaPoshta = cities.map((citi) => citi.description);
-  const cityForNovaPoshtaBottom = cities.find(
-    (value) => value.description === city
+  const cityForNovaPoshtaBottom = useMemo(
+    () => cities.find((value) => value.description === city),
+    [cities, city]
   );
 
   useEffect(() => {

@@ -12,7 +12,7 @@ import {
   setConfirmationEmailStatus,
   setUserIsConfirmed,
   setConfirmationLoading,
-  setRecoveryLoading,
+  setRecoveryLoading
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -107,7 +107,7 @@ export function* handleUserConfirm({ payload }) {
 export function* handleUserRecovery({ payload }) {
   try {
     yield put(resetState());
-    yield put(setRecoveryLoading(true))
+    yield put(setRecoveryLoading(true));
     yield call(
       setItems,
       `
@@ -117,14 +117,14 @@ export function* handleUserRecovery({ payload }) {
   `,
       payload
     );
-    yield put(setRecoveryLoading(false))
+    yield put(setRecoveryLoading(false));
     yield put(userHasRecovered(true));
     if (payload.redirect) {
       yield delay(REDIRECT_TIMEOUT);
       yield put(push('/login'));
     }
   } catch (error) {
-    yield put(setRecoveryLoading(false))
+    yield put(setRecoveryLoading(false));
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }
 }
@@ -235,9 +235,10 @@ export function* handleUserPreserve() {
       }
     }`
     );
-    if(user.data.getUserByToken.statusCode===401) {
-      yield setToLocalStorage('accessToken', null);
-    } else if (!user.data.getUserByToken) {
+    if (
+      user.data.getUserByToken.statusCode >= 400 ||
+      !user.data.getUserByToken
+    ) {
       yield setToLocalStorage('accessToken', null);
     } else {
       yield put(setUser(user.data.getUserByToken));
@@ -301,7 +302,7 @@ export function* handleUpdateUser({ payload }) {
 export function* handleSendConfirmation({ payload }) {
   try {
     yield put(resetState());
-    yield put(setConfirmationLoading(true))
+    yield put(setConfirmationLoading(true));
     yield call(
       setItems,
       `
@@ -311,10 +312,10 @@ export function* handleSendConfirmation({ payload }) {
   `,
       payload
     );
-    yield put(setConfirmationLoading(false))
+    yield put(setConfirmationLoading(false));
     yield put(setConfirmationEmailStatus(true));
   } catch (e) {
-    yield put(setConfirmationLoading(false))
+    yield put(setConfirmationLoading(false));
     yield put(setUserError(e.message.replace('GraphQL error: ', '')));
   }
 }

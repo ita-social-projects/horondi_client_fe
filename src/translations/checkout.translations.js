@@ -3,13 +3,17 @@ export const CHECKOUT_TITLES = {
     orderForm: 'Форма замовлення',
     contactInfo: 'Контактна інформація',
     delivery: 'Доставка',
-    payment: 'Оплата'
+    payment: 'Оплата',
+    deliveryPrice: 'Ціна доставки',
+    totalPrice: 'Всього'
   },
   1: {
     orderForm: 'Order form',
     contactInfo: 'Contact information',
     delivery: 'Delivery',
-    payment: 'Payment'
+    payment: 'Payment',
+    deliveryPrice: 'Delivery price',
+    totalPrice: 'Total price'
   }
 };
 

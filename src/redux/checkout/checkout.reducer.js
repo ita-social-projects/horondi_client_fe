@@ -2,19 +2,27 @@ import {
   SET_NOVAPOSHTA_CITIES,
   SET_NOVAPOSHTA_WAREHOUSES,
   SET_LOADING,
-  SET_NOVAPOSHTA_STREETS
+  SET_NOVAPOSHTA_STREETS,
+  SET_NOVAPOSHTA_PRICES
 } from './checkout.types';
 
 const initialState = {
   loading: false,
   cities: [],
   warehouses: [],
-  streets: []
+  streets: [],
+  price: 0
 };
 
 const checkoutReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_NOVAPOSHTA_CITIES:
+      return {
+        ...state,
+        cities: action.payload
+      };
+
+    case SET_NOVAPOSHTA_PRICES:
       return {
         ...state,
         cities: action.payload

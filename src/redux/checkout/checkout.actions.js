@@ -5,8 +5,20 @@ import {
   SET_NOVAPOSHTA_WAREHOUSES,
   SET_LOADING,
   GET_NOVAPOSHTA_STREETS,
-  SET_NOVAPOSHTA_STREETS
+  SET_NOVAPOSHTA_STREETS,
+  SET_NOVAPOSHTA_PRICES,
+  GET_NOVAPOSHTA_PRICES
 } from './checkout.types';
+
+const setNovaPoshtaPrices = (payload) => ({
+  type: SET_NOVAPOSHTA_PRICES,
+  payload
+});
+
+const getNovaPoshtaPrices = (payload) => ({
+  type: GET_NOVAPOSHTA_PRICES,
+  payload
+});
 
 const setNovaPoshtaStreets = (payload) => ({
   type: SET_NOVAPOSHTA_STREETS,
@@ -50,5 +62,7 @@ export {
   setNovaPoshtaWarehouse,
   setLoading,
   setNovaPoshtaStreets,
-  getNovaPoshtaStreets
+  getNovaPoshtaStreets,
+  setNovaPoshtaPrices,
+  getNovaPoshtaPrices
 };

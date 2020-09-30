@@ -86,7 +86,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     fontFamily: 'Montserrat',
     fontSize: '1.1em',
-    fontWeight: '500',
+    fontWeight: '400',
     color: theme.palette.textColor,
     '@media screen and (max-width: 768px)': {
       fontSize: '.9em'
@@ -94,7 +94,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   checkoutContactsName: {
     width: '130px',
-    fontWeight: '700',
+    fontWeight: '550',
     '@media screen and (max-width: 768px)': {
       width: '100px'
     }
@@ -140,5 +140,15 @@ export const useStyles = makeStyles((theme) => ({
   link: {
     display: 'block',
     lineHeight: '0'
+  },
+  deliveryInfoWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: '30px'
+  },
+  totalPrice: {
+    color: theme.palette.textColor,
+    fontSize: '1.3rem',
+    fontWeight: 600
   }
 }));

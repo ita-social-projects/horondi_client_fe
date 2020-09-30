@@ -6,6 +6,7 @@ import {
   CHECKOUT_DELIVERY_TYPES,
   CHECKOUT_DROP_LIST
 } from '../../../../translations/checkout.translations';
+import DeliveryInfo from './delivery-info/delivery-info';
 import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
 import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
 import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
@@ -130,6 +131,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
         {deliveryType && deliverySwitcherTop()}
       </div>
       {deliverySwitcherBottom()}
+      {deliveryType && <DeliveryInfo />}
     </div>
   );
 };

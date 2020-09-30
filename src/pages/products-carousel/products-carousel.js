@@ -17,6 +17,7 @@ import {
 } from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
 import { getImage } from '../../utils/imageLoad';
+import { carouselInterval } from '../../configs';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
@@ -69,7 +70,7 @@ const ProductsCorousel = ({ category }) => {
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false}
-        interval={4000}
+        interval={carouselInterval}
         className={styles.slider}
         mobileTouch
       >

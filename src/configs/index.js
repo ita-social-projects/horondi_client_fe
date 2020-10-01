@@ -255,7 +255,7 @@ export const FAKE_PRODUCT_FOR_TEST = {
 
 export const INPUT_VARIANT = 'outlined';
 export const REDIRECT_TIMEOUT = 3000;
-export const responsive = {
+export const RESPONSIVE_PDP = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
     items: 5
@@ -270,6 +270,25 @@ export const responsive = {
   },
   mobile: {
     breakpoint: { max: 810, min: 0 },
+    items: 1
+  }
+};
+
+export const RESPONSIVE_CATEGORIES = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1146, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 760, min: 0 },
     items: 1
   }
 };

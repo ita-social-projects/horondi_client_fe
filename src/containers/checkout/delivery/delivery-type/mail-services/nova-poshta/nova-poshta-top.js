@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from '../../../../checkout.styles';
 import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.translations';
 
-const NovaPoshtaTop = ({ setCity, citiesForNovaPoshta }) => {
+const NovaPoshtaTop = ({ setCityHandler, citiesForNovaPoshta }) => {
   const style = useStyles();
   const { language, loading } = useSelector(({ Checkout, Language }) => ({
     loading: Checkout.loading,
@@ -19,12 +19,12 @@ const NovaPoshtaTop = ({ setCity, citiesForNovaPoshta }) => {
   return (
     <Autocomplete
       onChange={(event, newValue) => {
-        setCity(newValue);
+        setCityHandler(newValue);
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
-        setCity(newInputValue);
+        setCityHandler(newInputValue);
       }}
       options={citiesForNovaPoshta}
       className={style.dataInput}

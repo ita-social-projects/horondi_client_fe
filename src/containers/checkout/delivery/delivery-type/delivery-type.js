@@ -41,6 +41,8 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     setDeliveryType(event.target.value);
   };
 
+  const setCityHandler = (city) => setCity(city);
+
   const departmentSelfPickUpStorage = contacts.map(
     (contact) => contact.address[language].value
   );
@@ -63,7 +65,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return (
           <NovaPoshtaTop
-            setCity={setCity}
+            setCityHandler={setCityHandler}
             citiesForNovaPoshta={citiesForNovaPoshta}
           />
         );
@@ -72,7 +74,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return (
           <NovaPoshtaTop
-            setCity={setCity}
+            setCityHandler={setCityHandler}
             citiesForNovaPoshta={citiesForNovaPoshta}
           />
         );
@@ -111,6 +113,21 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     }
   };
 
+  const deliveryInfoSwitcher = () => {
+    switch (deliveryType) {
+      case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
+        return <DeliveryInfo />;
+      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
+        return <DeliveryInfo />;
+      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+        return <DeliveryInfo />;
+      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
+        return <DeliveryInfo />;
+      default:
+        return '';
+    }
+  };
+
   return (
     <div>
       <div className={style.contactField}>
@@ -131,7 +148,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
         {deliveryType && deliverySwitcherTop()}
       </div>
       {deliverySwitcherBottom()}
-      {deliveryType && <DeliveryInfo />}
+      {deliveryInfoSwitcher()}
     </div>
   );
 };

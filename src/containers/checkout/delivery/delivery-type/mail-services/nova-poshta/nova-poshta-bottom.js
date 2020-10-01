@@ -15,14 +15,12 @@ const NovaPoshtaBottom = ({ city }) => {
       loading: Checkout.loading
     })
   );
-
   const style = useStyles();
-
   const dispatch = useDispatch();
-  const departments = warehouses.map((warehouse) => warehouse.description);
 
   useEffect(() => {
-    dispatch(getNovaPoshtaWarehouse(city));
+    city && dispatch(getNovaPoshtaWarehouse(city));
+    setInputValue('');
   }, [dispatch, city]);
 
   const [inputValue, setInputValue] = useState('');
@@ -35,7 +33,8 @@ const NovaPoshtaBottom = ({ city }) => {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
-        options={departments}
+        options={warehouses.map((warehouse) => warehouse.description)}
+        // getOptionSelected = {(option)=>option}
         className={style.dataInput}
         renderInput={(params) => (
           <TextField

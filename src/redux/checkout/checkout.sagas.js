@@ -41,7 +41,7 @@ export function* handleStreets({ payload }) {
 export function* handleCities({ payload }) {
   try {
     yield put(setLoading(true));
-    console.log('handleCities');
+    console.log(payload, 'payload');
     const cities = yield call(
       getItems,
       `query{

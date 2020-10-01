@@ -18,8 +18,6 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
     })
   );
 
-  const streetsArr = streets.map((warehouse) => warehouse.description);
-
   const [inputValue, setInputValue] = useState('');
 
   const payload = useMemo(
@@ -37,11 +35,12 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
   return (
     <div className={style.contactField}>
       <Autocomplete
+        disabled={!cityForNovaPoshtaBottom}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
-        options={streetsArr}
+        options={streets.map((warehouse) => warehouse.description)}
         className={style.dataInputCurrier}
         renderInput={(params) => (
           <TextField
@@ -63,12 +62,14 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
         )}
       />
       <TextField
+        disabled={!cityForNovaPoshtaBottom}
         required
         label={CHECKOUT_TEXT_FIELDS[language].building}
         variant='outlined'
         className={style.dataInputCurrier}
       />
       <TextField
+        disabled={!cityForNovaPoshtaBottom}
         required
         label={CHECKOUT_TEXT_FIELDS[language].apartment}
         variant='outlined'

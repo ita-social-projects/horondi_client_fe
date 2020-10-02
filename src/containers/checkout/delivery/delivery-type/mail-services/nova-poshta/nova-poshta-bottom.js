@@ -34,7 +34,6 @@ const NovaPoshtaBottom = ({ city }) => {
           setInputValue(newInputValue);
         }}
         options={warehouses.map((warehouse) => warehouse.description)}
-        // getOptionSelected = {(option)=>option}
         className={style.dataInput}
         renderInput={(params) => (
           <TextField

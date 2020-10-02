@@ -12,6 +12,17 @@ const DeliveryInfo = () => {
   const productsPrice = cart
     .map((product) => product.totalPrice * product.quantity)
     .reduce((prevPrice, currentPrice) => prevPrice + currentPrice);
+  const productsWeight = cart
+    .map((product) => product.dimensions.weightInKg)
+    .reduce((prevWeight, currentWeight) => prevWeight + currentWeight);
+
+  const priceData = {
+    cityRecipient: '',
+    weight: productsWeight,
+    cost: productsPrice,
+    seatsAmount: 1,
+    serviceType: 'WarehouseWarehouse'
+  };
 
   return (
     <div className={style.deliveryInfoWrapper}>

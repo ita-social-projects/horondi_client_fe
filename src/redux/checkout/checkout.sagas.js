@@ -5,15 +5,48 @@ import {
   setNovaPoshtaCities,
   setNovaPoshtaWarehouse,
   setNovaPoshtaStreets,
-  setLoading
+  setLoading,
+  setNovaPoshtaPrices
 } from './checkout.actions';
 import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
-  GET_NOVAPOSHTA_STREETS
+  GET_NOVAPOSHTA_STREETS,
+  GET_NOVAPOSHTA_PRICES
 } from './checkout.types';
 import getItems from '../../utils/client';
 import { setError } from '../error/error.actions';
+
+export function* handlePrice({ payload }) {
+  try {
+    const price = yield call(
+      getItems,
+      `query ($cityRecipient: String, $weight: Float, $cost: Float, $seatsAmount: Int, $serviceType: String){
+              getNovaPoshtaPrices(data: {
+                 cityRecipient: $cityRecipient
+                 weight: $weight
+                 cost: $cost
+                 seatsAmount: 1
+                 serviceType: $serviceType
+                   }){
+                      cost
+                      assessedCost
+                     }
+                   }`,
+      {
+        cityRecipient: payload.cityRecipient,
+        weight: payload.weight,
+        cost: payload.cost,
+        seatsAmount: payload.seatsAmount,
+        serviceType: payload.serviceType
+      }
+    );
+    yield put(setNovaPoshtaPrices(price.data.getNovaPoshtaPrices));
+  } catch (e) {
+    yield put(setError({ e }));
+    yield put(push('/error-page'));
+  }
+}
 
 export function* handleStreets({ payload }) {
   try {
@@ -41,7 +74,6 @@ export function* handleStreets({ payload }) {
 export function* handleCities({ payload }) {
   try {
     yield put(setLoading(true));
-    console.log(payload, 'payload');
     const cities = yield call(
       getItems,
       `query{
@@ -82,4 +114,5 @@ export default function* checkoutSaga() {
   yield takeEvery(GET_NOVAPOSHTA_CITIES, handleCities);
   yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleWarehouse);
   yield takeEvery(GET_NOVAPOSHTA_STREETS, handleStreets);
+  yield takeEvery(GET_NOVAPOSHTA_PRICES, handlePrice);
 }

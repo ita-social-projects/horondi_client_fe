@@ -21,27 +21,20 @@ export function* handlePrice({ payload }) {
   try {
     const price = yield call(
       getItems,
-      `query ($cityRecipient: String, $weight: Float, $cost: Float, $seatsAmount: Int, $serviceType: String){
-              getNovaPoshtaPrices(data: {
-                 cityRecipient: $cityRecipient
-                 weight: $weight
-                 cost: $cost
-                 seatsAmount: 1
-                 serviceType: $serviceType
-                   }){
-                      cost
-                      assessedCost
-                     }
-                   }`,
-      {
-        cityRecipient: payload.cityRecipient,
-        weight: payload.weight,
-        cost: payload.cost,
-        seatsAmount: payload.seatsAmount,
-        serviceType: payload.serviceType
-      }
+      `query {
+        getNovaPoshtaPrices(data:{
+              cityRecipient: "${payload.cityRecipient}"
+              weight: ${payload.weight}
+              cost: ${payload.cost}
+              seatsAmount: 1
+              serviceType: "${payload.serviceType}"
+                    }){
+          cost
+          assessedCost
+        }
+      }`
     );
-    yield put(setNovaPoshtaPrices(price.data.getNovaPoshtaPrices));
+    yield put(setNovaPoshtaPrices(...price.data.getNovaPoshtaPrices));
   } catch (e) {
     yield put(setError({ e }));
     yield put(push('/error-page'));
@@ -100,6 +93,11 @@ export function* handleWarehouse({ payload }) {
                     description
                     ref
                     shortAddress
+                    schedule {
+                       monday
+                       saturday
+                       sunday
+                     }
                 }
             }`
     );

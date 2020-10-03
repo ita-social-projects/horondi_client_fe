@@ -25,7 +25,7 @@ const checkoutReducer = (state = initialState, action = {}) => {
     case SET_NOVAPOSHTA_PRICES:
       return {
         ...state,
-        cities: action.payload
+        price: action.payload
       };
 
     case SET_NOVAPOSHTA_STREETS:

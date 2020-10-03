@@ -116,11 +116,21 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliveryInfoSwitcher = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <DeliveryInfo />;
+        return (
+          <DeliveryInfo
+            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+            from={CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
+          />
+        );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <DeliveryInfo />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return <DeliveryInfo />;
+        return (
+          <DeliveryInfo
+            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+            from={CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta}
+          />
+        );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return <DeliveryInfo />;
       default:

@@ -143,12 +143,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   deliveryInfoWrapper: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: '30px'
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    marginTop: '85px'
   },
   totalPrice: {
     color: theme.palette.textColor,
     fontSize: '1.3rem',
     fontWeight: 600
+  },
+  deliveryPrice: {
+    color: theme.palette.textColor,
+    fontSize: '1rem',
+    fontWeight: 450
   }
 }));

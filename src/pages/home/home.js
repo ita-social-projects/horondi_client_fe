@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import SliderHomePage from './slider-home-page';
 
+import SliderHomePage from './slider-home-page';
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
 import { HOME_BUTTONS } from '../../translations/homepage.translations';

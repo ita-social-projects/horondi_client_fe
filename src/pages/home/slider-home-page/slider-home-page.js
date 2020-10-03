@@ -1,20 +1,24 @@
 import React from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-import logo1 from './fot-home/photo_2020-07-09_15-48-27.jpg';
-import logo2 from './fot-home/photo_2020-07-09_15-48-27 (2).jpg';
-import logo3 from './fot-home/photo_2020-07-09_15-48-28.jpg';
+import { useSelector } from 'react-redux';
 import { sliderHome } from './slider-home-page.style';
+import { getImage } from '../../../utils/imageLoad';
 
 const SliderHomePage = () => {
   const styles = sliderHome();
-
+  const { models } = useSelector(({ Model: { models, loading } }) => ({
+    models
+  }));
   return (
     <div className={styles.container}>
-      <AwesomeSlider className={styles.slider}>
-        <div data-src={logo1} />
-        <div data-src={logo2} />
-        <div data-src={logo3} />
+      <AwesomeSlider className={styles.slider} mobileTouch>
+        {models.map((photo) => (
+          <div
+            key={photo.name[1].value}
+            data-src={getImage(photo.images.large)}
+          />
+        ))}
       </AwesomeSlider>
     </div>
   );

@@ -81,15 +81,6 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
             citiesForNovaPoshta={citiesForNovaPoshta}
           />
         );
-      // (
-      //   <SelfPickupTop
-      //     departmentSelfPickUpStorage={departmentSelfPickUpStorage}
-      //     departmentSelfPickUp={departmentSelfPickUp}
-      //     selectHandlerDepartmentSelfPickup={
-      //       selectHandlerDepartmentSelfPickup
-      //     }
-      //   />
-      // );
     }
   };
 

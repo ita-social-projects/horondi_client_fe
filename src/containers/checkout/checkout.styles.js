@@ -92,6 +92,17 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '.9em'
     }
   },
+  deliverySchedule: {
+    display: 'flex',
+    margin: '0 0 10px 10px',
+    width: '39%',
+    fontSize: '1.1em',
+    fontWeight: '400',
+    color: theme.palette.textColor,
+    '@media screen and (max-width: 768px)': {
+      fontSize: '.9em'
+    }
+  },
   checkoutContactsName: {
     width: '130px',
     fontWeight: '550',
@@ -145,7 +156,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
-    marginTop: '85px'
+    marginTop: '75px',
+    position: 'absolute',
+    right: '30px',
+    bottom: '15px'
   },
   totalPrice: {
     color: theme.palette.textColor,

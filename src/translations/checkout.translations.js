@@ -5,7 +5,11 @@ export const CHECKOUT_TITLES = {
     delivery: 'Доставка',
     payment: 'Оплата',
     deliveryPrice: 'Ціна доставки',
-    totalPrice: 'Всього'
+    totalPrice: 'Всього',
+    schedule: 'Графік роботи:',
+    mondayToFriday: 'Пн-пт:  ',
+    saturday: 'Сб:  ',
+    sunday: 'Нд:  '
   },
   1: {
     orderForm: 'Order form',
@@ -13,7 +17,11 @@ export const CHECKOUT_TITLES = {
     delivery: 'Delivery',
     payment: 'Payment',
     deliveryPrice: 'Delivery price',
-    totalPrice: 'Total price'
+    totalPrice: 'Total price',
+    schedule: 'Schedule:',
+    mondayToFriday: 'Mon-Fri',
+    saturday: 'Sat',
+    sunday: 'Sun'
   }
 };
 

@@ -41,7 +41,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     setDeliveryType(event.target.value);
   };
 
-  const setCityHandler = (city) => setCity(city);
+  const setCityHandler = (cityToSend) => setCity(cityToSend);
 
   const departmentSelfPickUpStorage = contacts.map(
     (contact) => contact.address[language].value
@@ -62,23 +62,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
 
   const deliverySwitcherTop = () => {
     switch (deliveryType) {
-      case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return (
-          <NovaPoshtaTop
-            setCityHandler={setCityHandler}
-            citiesForNovaPoshta={citiesForNovaPoshta}
-          />
-        );
-      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return <UkrposhtaTop />;
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
-        return (
-          <NovaPoshtaTop
-            setCityHandler={setCityHandler}
-            citiesForNovaPoshta={citiesForNovaPoshta}
-          />
-        );
-      default:
+      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return (
           <SelfPickupTop
             departmentSelfPickUpStorage={departmentSelfPickUpStorage}
@@ -88,6 +72,24 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
             }
           />
         );
+      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
+        return <UkrposhtaTop />;
+      default:
+        return (
+          <NovaPoshtaTop
+            setCityHandler={setCityHandler}
+            citiesForNovaPoshta={citiesForNovaPoshta}
+          />
+        );
+      // (
+      //   <SelfPickupTop
+      //     departmentSelfPickUpStorage={departmentSelfPickUpStorage}
+      //     departmentSelfPickUp={departmentSelfPickUp}
+      //     selectHandlerDepartmentSelfPickup={
+      //       selectHandlerDepartmentSelfPickup
+      //     }
+      //   />
+      // );
     }
   };
 

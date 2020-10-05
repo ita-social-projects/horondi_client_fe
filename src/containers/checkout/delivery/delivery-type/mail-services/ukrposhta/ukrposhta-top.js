@@ -11,12 +11,7 @@ const UkrposhtaTop = () => {
       getOptionLabel={(option) => option}
       className={style.dataInput}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          onChange={(event) => console.log('I AM UKRPOSHTA')}
-          label='City'
-          variant='outlined'
-        />
+        <TextField {...params} label='City' variant='outlined' />
       )}
     />
   );

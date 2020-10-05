@@ -19,13 +19,7 @@ const UkrPoshtaBottom = () => {
       </FormControl>
       <FormControl variant='outlined' className={style.dataInput}>
         <InputLabel>Department</InputLabel>
-        <Select
-          value=''
-          onChange={() => {
-            console.log('UKRPOSTA!');
-          }}
-          label='department'
-        >
+        <Select value='' label='department'>
           {[].map((department) => (
             <MenuItem key={department} value={department}>
               {department}

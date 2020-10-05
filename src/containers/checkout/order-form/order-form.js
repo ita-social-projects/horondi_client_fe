@@ -41,7 +41,7 @@ export const OrderForm = () => {
 
   const handleCreateOrder = () => {
     setShouldValidate(true);
-    allFieldsValidated && console.log('YRA!');
+    allFieldsValidated && console.log('all fields valid');
   };
 
   const selectHandlerPayment = (event) => {

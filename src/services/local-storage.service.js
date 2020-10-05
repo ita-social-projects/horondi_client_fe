@@ -24,6 +24,9 @@ if (!localStorage.getItem('horondi')) {
 
 export const getFromLocalStorage = (name) => {
   const localObject = JSON.parse(localStorage.getItem('horondi'));
+  if (!localObject) {
+    return null;
+  }
   return localObject[name];
 };
 

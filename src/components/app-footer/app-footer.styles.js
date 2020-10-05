@@ -11,7 +11,13 @@ export const useStyles = makeStyles(() => ({
   },
   cardDeck: {
     display: 'flex',
-    flexFlow: 'row wrap'
+    flexFlow: 'row wrap',
+    '& a': {
+      transition: 'color .2s ease'
+    },
+    '& a:hover': {
+      color: '#bebebe'
+    }
   },
   icons: {
     position: 'relative',

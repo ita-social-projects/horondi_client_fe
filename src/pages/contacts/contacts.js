@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
-import { imagePrefix } from '../../configs/index';
+import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
@@ -40,7 +40,7 @@ const ContactsPage = ({ fromCheckout }) => {
               >
                 <img
                   className={styles.mapImage}
-                  src={`${imagePrefix}${contact.images[language].value.medium}`}
+                  src={`${IMG_URL}${contact.images[language].value.medium}`}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
               </a>

@@ -30,7 +30,7 @@ export const useStyles = makeStyles(() => ({
     transition: 'all 0.5s',
     padding: '0.5rem',
     borderRadius: '100%',
-    width: '40px',
+    width: '40px !important',
     height: '40px',
     '&:hover': {
       color: '#000000',

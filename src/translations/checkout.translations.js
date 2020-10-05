@@ -9,7 +9,9 @@ export const CHECKOUT_TITLES = {
     schedule: 'Графік роботи:',
     mondayToFriday: 'Пн-пт:  ',
     saturday: 'Сб:  ',
-    sunday: 'Нд:  '
+    sunday: 'Нд:  ',
+    UAH: 'UAH',
+    region: 'Регіон'
   },
   1: {
     orderForm: 'Order form',
@@ -21,7 +23,9 @@ export const CHECKOUT_TITLES = {
     schedule: 'Schedule:',
     mondayToFriday: 'Mon-Fri',
     saturday: 'Sat',
-    sunday: 'Sun'
+    sunday: 'Sun',
+    UAH: 'UAH',
+    region: 'Region'
   }
 };
 

@@ -17,6 +17,11 @@ import {
 import getItems from '../../utils/client';
 import { setError } from '../error/error.actions';
 
+function* handleErrors(error) {
+  yield put(setError({ error }));
+  yield put(push('/error-page'));
+}
+
 export function* handlePrice({ payload }) {
   try {
     const price = yield call(
@@ -36,8 +41,7 @@ export function* handlePrice({ payload }) {
     );
     yield put(setNovaPoshtaPrices(...price.data.getNovaPoshtaPrices));
   } catch (e) {
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleErrors, e);
   }
 }
 
@@ -59,8 +63,7 @@ export function* handleStreets({ payload }) {
     yield put(setNovaPoshtaStreets(streets.data.getNovaPoshtaStreets));
     yield put(setLoading(false));
   } catch (e) {
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleErrors, e);
   }
 }
 
@@ -79,8 +82,7 @@ export function* handleCities({ payload }) {
     yield put(setNovaPoshtaCities(cities.data.getNovaPoshtaCities));
     yield put(setLoading(false));
   } catch (e) {
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleErrors, e);
   }
 }
 
@@ -103,8 +105,7 @@ export function* handleWarehouse({ payload }) {
     );
     yield put(setNovaPoshtaWarehouse(warehouses.data.getNovaPoshtaWarehouses));
   } catch (e) {
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleErrors, e);
   }
 }
 

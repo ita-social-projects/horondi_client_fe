@@ -49,7 +49,8 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
               </span>
               <span className={style.totalPrice}>
                 {CHECKOUT_TITLES[language].totalPrice}:{' '}
-                {price && productsPrice + price.cost} UAH
+                {price && productsPrice + price.cost}{' '}
+                {CHECKOUT_TITLES[language].UAH}
               </span>
             </>
           )

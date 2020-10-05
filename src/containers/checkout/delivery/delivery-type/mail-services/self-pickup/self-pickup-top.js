@@ -22,7 +22,7 @@ const SelfPickupTop = ({
         <Select
           value={departmentSelfPickUp}
           onChange={selectHandlerDepartmentSelfPickup}
-          label='department'
+          label={CHECKOUT_DROP_LIST[language].department}
         >
           {departmentSelfPickUpStorage.map((department) => (
             <MenuItem key={department} value={department}>

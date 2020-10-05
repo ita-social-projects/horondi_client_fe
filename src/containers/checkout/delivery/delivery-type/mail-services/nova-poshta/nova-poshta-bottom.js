@@ -29,7 +29,7 @@ const NovaPoshtaBottom = ({ city }) => {
   const [inputValue, setInputValue] = useState('');
 
   const schedule = warehouses.find(
-    (warehouses) => warehouses.description === inputValue
+    (warehouse) => warehouse.description === inputValue
   );
 
   return (

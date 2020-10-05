@@ -31,7 +31,7 @@ const NovaPoshtaBottom = ({ city }) => {
   const schedule = warehouses.find(
     (warehouses) => warehouses.description === inputValue
   );
-  console.log(schedule);
+
   return (
     <div className={style.contactField}>
       <Autocomplete

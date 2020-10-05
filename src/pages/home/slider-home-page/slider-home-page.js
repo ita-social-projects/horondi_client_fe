@@ -22,10 +22,8 @@ const SliderHomePage = () => {
     );
   }
 
-  function IsSlider(props) {
-    const models = props.models;
-
-    return models.length > 0 ? (
+  return models.length > 0 ? (
+    <div className={styles.captionBlock}>
       <AwesomeSlider className={styles.slider} mobileTouch>
         {models.map((photo) => (
           <div
@@ -34,14 +32,8 @@ const SliderHomePage = () => {
           />
         ))}
       </AwesomeSlider>
-    ) : null;
-  }
-
-  return (
-    <div className={styles.captionBlock}>
-      <IsSlider models={models} />
     </div>
-  );
+  ) : null;
 };
 
 export default SliderHomePage;

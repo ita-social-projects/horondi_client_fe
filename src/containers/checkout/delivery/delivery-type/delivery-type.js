@@ -27,7 +27,8 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     cities: Checkout.cities
   }));
 
-  const citiesForNovaPoshta = cities.map((citi) => citi.description);
+  const citiesForNovaPoshta = cities.map((city) => city && city.description);
+
   const cityForNovaPoshtaBottom = useMemo(
     () => cities.find((value) => value.description === city),
     [cities, city]

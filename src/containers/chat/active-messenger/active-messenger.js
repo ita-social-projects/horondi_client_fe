@@ -93,7 +93,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
         setValid: setFirstNameValidated
       },
       type: 'text',
-      regExp: formRegExp.nameForChat
+      regExp: formRegExp.name
     },
     email: {
       inputName: 'email',

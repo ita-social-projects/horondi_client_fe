@@ -12,7 +12,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
 
 - [Installation](#installation)
   - [Required to install](#Required-to-install)
-  - [Environment](#Environment)
+  - [Environment](https://github.com/ita-social-projects/horondi_client_fe/blob/master/environment%20valiables.md)
   - [Clone](#Clone)
   - [Setup](#Setup)
   - [How to run local](#How-to-run-local)
@@ -40,15 +40,6 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
 ### Required to install
 
 - NodeJS (14.4.0)
-
-### Environment
-
-environmental variables
-
-```properties
-REACT_APP_API_URL=http://examplehost:7777/graphql
-IMAGE_LINK=
-```
 
 ### Clone
 

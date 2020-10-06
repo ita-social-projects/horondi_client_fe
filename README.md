@@ -1,4 +1,4 @@
-<a href="https://softserve.academy/"><img src="https://github.com/ita-social-projects/horondi_client_fe/tree/master/public/photo_2020-09-08_17-16-47.jpg" title="SoftServe IT Academy" alt="SoftServe IT Academy"></a>
+<a href="https://softserve.academy/"><img src="https://github.com/ita-social-projects/horondi_client_fe/blob/master/public/photo_2020-09-08_17-16-47.jpg" title="SoftServe IT Academy" alt="SoftServe IT Academy"></a>
 
 # Horondi project
 

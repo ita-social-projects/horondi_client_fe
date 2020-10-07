@@ -170,7 +170,7 @@ Checks:
 
 Command `npm run generate` is used to run [graphql code generator](https://graphql-code-generator.com)
 
-1. before using codegen you must run backend server [horondi backend](https://github.com/horondi/horondi_client_be)
+1. before using codegen you must run backend server [horondi backend](https://github.com/ita-social-projects/horondi_client_be)
 
 2. open terminal
 

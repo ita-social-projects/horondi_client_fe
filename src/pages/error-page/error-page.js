@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
-import { ERROR_PAGE_MESSAGE } from '../../translations/errorpage.translations';
+import {
+  ERROR_PAGE_MESSAGE,
+  LINK_TO_HOMEPAGE
+} from '../../translations/errorpage.translations';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
@@ -19,11 +22,11 @@ const ErrorPage = () => {
     })
   );
 
-  useEffect(() => {
-    if (!errorMessage) {
-      dispatch(push('/'));
-    }
-  }, [dispatch, errorMessage]);
+  // useEffect(() => {
+  //   if (!errorMessage) {
+  //     dispatch(push('/'));
+  //   }
+  // }, [dispatch, errorMessage]);
 
   const styles = useStyles();
 
@@ -37,17 +40,17 @@ const ErrorPage = () => {
         <img
           className={styles.errorImage}
           src={errorImagePath}
-          alt={ERROR_PAGE_MESSAGE[language].title}
+          alt={ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
         />
         <div className={styles.info}>
           <h2>
             {errorMessage
-              ? errorMessage.e.message
-              : ERROR_PAGE_MESSAGE[language].title}
+              ? ERROR_PAGE_MESSAGE[errorMessage][language].value
+              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
           </h2>
           <Link to='/'>
             <Button variant='contained'>
-              {ERROR_PAGE_MESSAGE[language].toHomepage}
+              {LINK_TO_HOMEPAGE[language].value}
             </Button>
           </Link>
         </div>

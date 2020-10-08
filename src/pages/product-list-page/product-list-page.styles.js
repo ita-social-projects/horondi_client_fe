@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -92,6 +92,13 @@ const useStyles = makeStyles(theme => ({
   mobile: {
     '@media (min-width:500px)': {
       display: 'none'
+    }
+  },
+  center: {
+    width: '3rem',
+    margin: '22rem auto',
+    '@media (max-width: 1400px)': {
+      margin: '13rem auto'
     }
   }
 }));

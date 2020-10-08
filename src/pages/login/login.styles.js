@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/2.jpg';
 import GoogleLogo from '../../images/google.png';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   login: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',

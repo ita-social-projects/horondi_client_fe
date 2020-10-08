@@ -14,12 +14,12 @@ const CountPerPage = () => {
     countPerPage
   }));
 
-  const pickQuantity = value => {
+  const pickQuantity = (value) => {
     dispatch(setCountPerPage(value));
     setToLocalStorage('countPerPage', value);
   };
 
-  const productsOnPage = ITEMS_PER_PAGE.map(item => (
+  const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
       className={countPerPage === item.value && styles.selectedButton}
       data-cy={item.title}

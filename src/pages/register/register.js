@@ -194,7 +194,6 @@ function Register() {
                           ? `${errorMessages[language].value[inputName]}`
                           : ''
                       }
-
                       className={`${styles.dataInput} ${
                         inputName === 'email' && styles.afterText
                       }`}

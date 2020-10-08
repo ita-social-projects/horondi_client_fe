@@ -14,7 +14,7 @@ export const Chat = () => {
 
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const { language, themeMode, contacts } = useSelector(state => ({
+  const { language, themeMode, contacts } = useSelector((state) => ({
     language: state.Language.language,
     themeMode: state.Theme.lightMode,
     contacts: state.Contacts.contacts
@@ -49,9 +49,9 @@ export const Chat = () => {
             leave={{ opacity: 0, height: 0 }}
             config={config.gentle}
           >
-            {item =>
+            {(item) =>
               item &&
-              (styles => (
+              ((styles) => (
                 <div style={styles}>
                   <MailForm
                     contacts={contacts}

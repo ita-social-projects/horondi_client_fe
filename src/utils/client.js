@@ -52,6 +52,7 @@ export const setItems = (query, variables) =>
     mutation: gql`
       ${query}
     `,
+    fetchPolicy: 'no-cache',
     variables
   });
 

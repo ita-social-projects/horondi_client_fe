@@ -51,7 +51,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
   if (updatingComment === commentId) {
     return (
       <div className={styles.loader}>
-        <Loader/>
+        <Loader />
       </div>
     );
   }

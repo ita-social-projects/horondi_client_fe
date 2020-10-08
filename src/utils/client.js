@@ -55,4 +55,12 @@ export const setItems = (query, variables) =>
     variables
   });
 
+export const setChatMail = (query, variables) =>
+  client.mutate({
+    mutation: gql`
+      ${query}
+    `,
+    variables
+  });
+
 export default getItems;

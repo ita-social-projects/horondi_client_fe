@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
+import { TextField, Button, Snackbar } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import MuiAlert from '@material-ui/lab/Alert';
+
+import { formRegExp, CHAT_USER_DATA } from '../../../configs';
 import { CHAT, errorMessages } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';
+import { sendEmail } from '../../../redux/chat/chat.actions';
 
 export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   // VALIDATED && CONFIRMED
@@ -12,10 +15,12 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const [messageValidated, setMessageValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [open, setOpen] = useState(false);
 
   // USER VALUES
-  const [user, setUser] = useState(REGISTER_USER_DATA);
+  const [user, setUser] = useState(CHAT_USER_DATA);
   const { firstName, email, message } = user;
+  const dispatch = useDispatch();
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -25,9 +30,37 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleSend = () => {
+  const Alert = (props) => (
+    <MuiAlert elevation={6} variant='filled' {...props} />
+  );
+
+  const handleValidForms = () => {
     setShouldValidate(true);
-    allFieldsValidated && console.log('YO!');
+    allFieldsValidated && sendHandler();
+  };
+
+  const handleClick = () => {
+    setOpen(true);
+    setUser(CHAT_USER_DATA);
+  };
+
+  const sendHandler = () => {
+    setAllFieldsValidated(false);
+    dispatch(
+      sendEmail({
+        email,
+        senderName: firstName,
+        text: message
+      })
+    );
+    handleClick();
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   // HOOKS
@@ -130,7 +163,12 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           />
         )
       )}
-      <Button className={style.btnSend} onClick={handleSend}>
+      <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success'>
+          {CHAT[language].thanksMsg}
+        </Alert>
+      </Snackbar>
+      <Button className={style.btnSend} onClick={handleValidForms}>
         {CHAT[language].sendBtn}
       </Button>
     </form>

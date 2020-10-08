@@ -59,6 +59,12 @@ export const REGISTER_USER_DATA = {
   password: ''
 };
 
+export const CHAT_USER_DATA = {
+  firstName: '',
+  email: '',
+  message: ''
+};
+
 export const LOGIN_USER_DATA = {
   email: '',
   password: ''

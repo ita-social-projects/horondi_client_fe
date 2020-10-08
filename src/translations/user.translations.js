@@ -101,17 +101,17 @@ export const REGISTER_USER_ERROR = {
 export const errorMessages = [
   {
     value: {
-      firstname: 'Поле повинно містити від 2 до 30 символів',
-      lastname: 'Поле повинно містити від 2 до 30 символів',
+      firstName: 'Поле повинно містити від 2 до 30 символів',
+      lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
       password: 'Від 6 до 30 символів з однією великою літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не збігаються'
     }
   },
   {
     value: {
-      firstname: 'Field should contain from 2 to 30 characters',
-      lastname: 'Field should contain from 2 to 30 characters',
+      firstName: 'Field should contain from 2 to 30 characters',
+      lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
       password: 'From 6 to 30 characters with one capital letter and one digit',
       confirmPassword: 'Passwords do not match'
@@ -275,7 +275,7 @@ export const NEW_PASSWORD_ERROR = {
       value: 'User is not found'
     }
   ],
-  RECOVERY_ATTEMPTS_LIMIT_EXCEEDED: [
+  PASSWORD_RECOVERY_ATTEMPTS_LIMIT_EXCEEDED: [
     {
       value: 'Перевищено максимальну кількість спроб відновлення'
     },

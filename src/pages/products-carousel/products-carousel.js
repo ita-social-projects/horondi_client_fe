@@ -15,6 +15,7 @@ import {
   setSearchFilter
 } from '../../redux/products/products.actions';
 import { getModelsByCategory } from '../../redux/model/model.actions';
+import { getImage } from '../../utils/imageLoad';
 
 const ProductsCorousel = ({ category }) => {
   const styles = useStyles();
@@ -66,7 +67,7 @@ const ProductsCorousel = ({ category }) => {
         {models.map((model) => (
           <div
             key={model.name[1].value}
-            data-src={model.images.large}
+            data-src={getImage(model.images.large)}
             className={styles.captionBlock}
           >
             <Link

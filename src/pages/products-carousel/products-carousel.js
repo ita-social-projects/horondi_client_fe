@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
+import { Backdrop } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +17,9 @@ import {
 import { getModelsByCategory } from '../../redux/model/model.actions';
 import { getImage } from '../../utils/imageLoad';
 import { Loader } from '../../components/loader/loader';
+import { carouselInterval } from '../../configs';
+
+const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const ProductsCorousel = ({ category }) => {
   const styles = useStyles();
@@ -62,7 +67,13 @@ const ProductsCorousel = ({ category }) => {
 
   return (
     <div className={styles.container}>
-      <AwesomeSlider className={styles.slider} mobileTouch>
+      <AutoplaySlider
+        play={true}
+        cancelOnInteraction={false}
+        interval={carouselInterval}
+        className={styles.slider}
+        mobileTouch
+      >
         {models.map((model) => (
           <div
             key={model.name[1].value}
@@ -79,7 +90,7 @@ const ProductsCorousel = ({ category }) => {
             </Link>
           </div>
         ))}
-      </AwesomeSlider>
+      </AutoplaySlider>
     </div>
   );
 };

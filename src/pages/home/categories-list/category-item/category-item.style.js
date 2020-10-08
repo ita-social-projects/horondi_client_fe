@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  categoryItem: (props) => ({
+  categoryItem: props => ({
     backgroundImage: `url(${props.image})`,
+    backgroundPosition: 'center',
     backgroundSize: 'cover',
     display: 'flex',
     alignItems: 'center',

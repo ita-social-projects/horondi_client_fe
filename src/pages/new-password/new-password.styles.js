@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/4.jpg';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   newPassBackground: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 'normal'
   },
   passwordInput: {
-    marginBottom: '35px',
+    marginBottom: '32px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },

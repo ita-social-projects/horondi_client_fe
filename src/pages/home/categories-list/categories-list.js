@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './categories-list.style';
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
-import { URL_LANGUAGE } from '../../../configs';
+import { URL_LANGUAGE, IMG_URL } from '../../../configs';
+import { getImage } from '../../../utils/imageLoad';
 import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 const CategoriesList = () => {
@@ -20,15 +21,15 @@ const CategoriesList = () => {
 
   const categoriesList = categories
     ? categories.map(({ _id, name, images, isMain }) =>
-      isMain ? (
-        <CategoryItem
-          key={_id}
-          categoryUrl={getCategoryURL(name)}
-          categoryName={name[language].value}
-          categoryImage={images.large}
-        />
-      ) : null
-    )
+        isMain ? (
+          <CategoryItem
+            key={_id}
+            categoryUrl={getCategoryURL(name)}
+            categoryName={name[language].value}
+            categoryImage={getImage(`${IMG_URL}${images.large}`)}
+          />
+        ) : null
+      )
     : null;
 
   return (
@@ -45,9 +46,9 @@ const CategoriesList = () => {
   );
 };
 
-export const getCategoryURL = (category) => {
+export const getCategoryURL = category => {
   const [filteredCategory] = category.filter(
-    (item) => item.lang === URL_LANGUAGE
+    item => item.lang === URL_LANGUAGE
   );
 
   if (filteredCategory.value) {

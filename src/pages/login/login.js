@@ -12,7 +12,7 @@ import {
   REGISTER_PROPOSAL,
   LOGIN_USER_ERROR
 } from '../../translations/user.translations';
-import { loginUser } from '../../redux/user/user.actions';
+import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
 
@@ -39,6 +39,10 @@ const Login = () => {
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetState());
+  }, [dispatch]);
 
   useEffect(() => {
     if (emailValidated && passwordValidated) {
@@ -98,7 +102,7 @@ const Login = () => {
                 value={email}
                 error={!email && shouldValidate}
                 required
-                onChange={(e) =>
+                onChange={e =>
                   handleChange(e, setEmailValidated, formRegExp.email)
                 }
               />
@@ -113,7 +117,7 @@ const Login = () => {
                 value={password}
                 error={!password && shouldValidate}
                 required
-                onChange={(e) =>
+                onChange={e =>
                   handleChange(e, setPasswordValidated, formRegExp.password)
                 }
               />

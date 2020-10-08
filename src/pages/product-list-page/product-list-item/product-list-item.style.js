@@ -26,10 +26,10 @@ const useStyles = makeStyles(() => ({
       height: '18rem'
     },
     '@media (max-width:1024px)': {
-      height: '18rem'
+      height: '14rem'
     },
     '@media (max-width:900px)': {
-      height: '14rem'
+      height: '12rem'
     },
     '@media (max-width:768px)': {
       height: '18rem'

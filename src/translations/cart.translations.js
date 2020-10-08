@@ -11,14 +11,10 @@ export const CART_TITTLES = {
 
 export const CART_BUTTONS = {
   0: {
-    empty: 'Обрати зараз',
-    shopMore: 'Продовжити вибір',
-    checkout: 'Оформити замовлення'
+    empty: 'Обрати зараз'
   },
   1: {
-    empty: 'Shop now',
-    shopMore: 'Continue shopping',
-    checkout: 'Go to checkout'
+    empty: 'Shop now'
   }
 };
 

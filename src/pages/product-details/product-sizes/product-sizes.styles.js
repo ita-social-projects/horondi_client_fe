@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(theme => {
   const sizeButton = {
     fontSize: '1rem',
     width: '45px',
@@ -9,8 +9,13 @@ const useStyles = makeStyles((theme) => {
 
   return {
     sizeButtons: {
+      position: 'relative',
+      display: 'flex',
       width: '50px',
-      marginBottom: '15px'
+      marginBottom: '15px',
+      '@media (max-width: 600px)': {
+        justifyContent: 'center'
+      }
     },
     label: {
       fontWeight: '700',
@@ -29,9 +34,8 @@ const useStyles = makeStyles((theme) => {
       letterSpacing: '0.03333em',
       color: 'tomato',
       position: 'absolute',
-      '@media (max-width: 600px)': {
-        left: '34vw'
-      }
+      width: '160px',
+      top: '45px'
     },
     sizeButton: {
       ...sizeButton,

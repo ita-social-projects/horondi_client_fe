@@ -236,4 +236,15 @@ describe('Product reducer test', () => {
       state
     );
   });
+
+  it('should set loading to true', () => {
+    const state = {
+      ...initialState,
+      loading: false
+    };
+
+    expect(productReducer(initialState, setProductsLoading(false))).toEqual(
+      state
+    );
+  });
 });

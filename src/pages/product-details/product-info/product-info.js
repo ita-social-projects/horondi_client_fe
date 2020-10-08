@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
+import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import useStyles from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
@@ -50,7 +51,11 @@ const ProductInfo = () => {
     <div>
       <div className={styles.head}>
         <span className={styles.title}>{name[language].value}</span>
-        <Rating value={rate} readOnly precision={0.1} />
+        <Tooltip title={rate} placement='left'>
+          <span>
+            <Rating value={rate} readOnly precision={0.1} />
+          </span>
+        </Tooltip>
       </div>
       <div className={styles.details}>
         <Detail

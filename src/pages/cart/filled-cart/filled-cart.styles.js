@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(theme => ({
   root: {
     margin: '50px auto'
   },
@@ -39,15 +39,15 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     margin: 20
   },
-  controlButtons: {
-    textAlign: 'right',
-    '& button': {
-      margin: '0 5px',
-      color: theme.palette.button.normal.color,
-      backgroundColor: theme.palette.button.normal.backgroundColor,
+  backButton: {
+    '&:visited': {
+      color: 'inherit'
+    },
+    '& > svg': {
+      fontSize: '2.5em',
+      transition: 'transform .2s ease',
       '&:hover': {
-        color: theme.palette.button.hover.color,
-        backgroundColor: theme.palette.button.hover.backgroundColor
+        transform: 'scale(1.1)'
       }
     }
   }

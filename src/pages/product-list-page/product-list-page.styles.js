@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     gridGap: '1rem',
 
     '@media (max-width:768px)': {
-      gridTemplateColumns: 'repeat(2,1fr)',
+      gridTemplateColumns: 'repeat(3,1fr)',
       margin: '1rem 0 0 0'
     },
     '@media (max-width:600px)': {

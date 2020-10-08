@@ -8,41 +8,19 @@ import {
   SET_BUSINESS_PAGE,
   GET_BUSINESS_PAGE_BY_CODE
 } from '../business-pages.types';
+import { businessPage } from './business-page.variables';
 
 describe('Business pages actions test', () => {
-  it('should set new business page to payload property', () => {
-    const page = {
-      code: 'new-page-code',
-      title: [
-        {
-          lang: 'ua',
-          value: 'Title_UA'
-        },
-        {
-          lang: 'en',
-          value: 'Title_EN'
-        }
-      ],
-      text: [
-        {
-          lang: 'ua',
-          value: 'Text_UA'
-        },
-        {
-          lang: 'en',
-          value: 'Text_EN'
-        }
-      ]
-    };
+  it('should set new business page to payload property and edit code to "newPageCode"', () => {
     const result = {
       type: SET_BUSINESS_PAGE,
       payload: {
-        businessPage: page,
+        businessPage,
         key: 'newPageCode'
       }
     };
 
-    expect(setBusinessPage(page)).toEqual(result);
+    expect(setBusinessPage(businessPage)).toEqual(result);
   });
 
   it('Should set business page loading to true', () => {

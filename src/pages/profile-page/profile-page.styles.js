@@ -39,23 +39,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
-  userInput: {
-    gridColumn: 'span 3',
-    width: '100%',
-    '& label.Mui-focused': {
-      color: theme.palette.textColor
-    },
-    '& .MuiInput-underline:after': {
-      borderBottom: '2px solid black'
-    },
-    '& div > input': {
-      position: 'relative'
-    },
-    '& p': {
-      position: 'absolute',
-      top: '46px',
-      fontSize: '0.625rem'
-    }
+  dataInput: {
+    gridColumn: 'span 3'
   },
   nameInputs: {
     gridColumn: 'span 2'
@@ -147,5 +132,11 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
     padding: '20px 34px',
     textAlign: 'center'
+  },
+  afterText: {
+    '& p::after': {
+      content: `'example@mail.com'`,
+      color: '#828282'
+    }
   }
 }));

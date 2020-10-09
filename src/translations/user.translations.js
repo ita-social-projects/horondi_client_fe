@@ -305,7 +305,7 @@ export const NEW_PASSWORD_SUCCESS_MESSAGE = [
   }
 ];
 
-export const PROFILE_DATA = [
+export const PROFILE_LABELS = [
   {
     firstName: "Ім'я",
     lastName: 'Прізвище',

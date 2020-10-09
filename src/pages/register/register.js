@@ -108,9 +108,7 @@ export default function Register() {
                       variant='outlined'
                       fullWidth
                       error={!!errors[name]}
-                      helperText={
-                        errors[name] && errorMessages[language].value[name]
-                      }
+                      helperText={errors[name] || ''}
                       className={`${styles.dataInput} ${
                         name === 'email' && styles.afterText
                       }`}

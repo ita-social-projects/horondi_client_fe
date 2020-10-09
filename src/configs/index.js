@@ -70,6 +70,22 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
+export const PROFILE_USER_DATA = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  country: '',
+  region: '',
+  city: '',
+  street: '',
+  buildingNumber: '',
+  appartment: '',
+  zipcode: ''
+};
+
+export const REQUIRED_USER_FIELDS = ['firstName', 'lastName', 'email'];
+
 export const errorMessages = [
   {
     lang: 'uk',
@@ -80,8 +96,8 @@ export const errorMessages = [
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
       text: 'Поле повинно містити від 2 до 500 символів',
-      zipcode: 'Некоректний формат почтового індексу',
       phoneNumber: 'Некоректний формат телефону',
+      zipcode: 'Некоректний формат почтового індексу',
       country: 'Поле повинно містити від 2 до 30 символів',
       region: 'Поле повинно містити від 2 до 30 символів',
       city: 'Поле повинно містити від 2 до 30 символів',
@@ -99,8 +115,8 @@ export const errorMessages = [
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
-      zipcode: 'Wrong zipcode format',
       phoneNumber: 'Wrong phone format',
+      zipcode: 'Wrong zipcode format',
       country: 'Field should contain from 2 to 30 characters',
       region: 'Field should contain from 2 to 30 characters',
       city: 'Field should contain from 2 to 30 characters',

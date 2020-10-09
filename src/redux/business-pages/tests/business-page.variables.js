@@ -21,3 +21,21 @@ export const businessPage = {
     }
   ]
 };
+
+export const fakeAboutUs = {
+  data: {
+    getBusinessTextByCode: {
+      code: 'about-us',
+      title: [
+        {
+          value: 'Про нас',
+          lang: 'ua'
+        },
+        {
+          value: 'About us',
+          lang: 'en'
+        }
+      ]
+    }
+  }
+};

@@ -8,28 +8,11 @@ import {
   SET_BUSINESS_PAGE,
   SET_BUSINESS_PAGE_LOADING
 } from '../business-pages.types';
+import { fakeAboutUs } from './business-page.variables';
 import { SET_ERROR } from '../../error/error.types';
 
 describe('Business pages sagas tests', () => {
   it('fetches business page by code', () => {
-    const fakeAboutUs = {
-      data: {
-        getBusinessTextByCode: {
-          code: 'about-us',
-          title: [
-            {
-              value: 'Про нас',
-              lang: 'ua'
-            },
-            {
-              value: 'About us',
-              lang: 'en'
-            }
-          ]
-        }
-      }
-    };
-
     return expectSaga(handleBusinessPageLoad, { payload: 'about-us' })
       .provide([[matchers.call.fn(getItems), fakeAboutUs]])
       .put({ type: SET_BUSINESS_PAGE_LOADING, payload: true })

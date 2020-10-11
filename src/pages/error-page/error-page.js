@@ -22,11 +22,11 @@ const ErrorPage = () => {
     })
   );
 
-  // useEffect(() => {
-  //   if (!errorMessage) {
-  //     dispatch(push('/'));
-  //   }
-  // }, [dispatch, errorMessage]);
+  useEffect(() => {
+    if (!errorMessage) {
+      dispatch(push('/'));
+    }
+  }, [dispatch, errorMessage]);
 
   const styles = useStyles();
 

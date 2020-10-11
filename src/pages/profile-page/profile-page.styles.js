@@ -14,13 +14,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   userForm: {
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    padding: '44px 34px 86px',
+    padding: '44px 34px 95px',
     marginBottom: 20,
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
-    rowGap: '15px',
+    rowGap: '20px',
     position: 'relative',
-    minWidth: 450
+    minWidth: 460
   },
   userImage: {
     height: '100%',
@@ -40,7 +40,12 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   dataInput: {
-    gridColumn: 'span 3'
+    gridColumn: 'span 3',
+    position: 'relative',
+    '& p': {
+      position: 'absolute',
+      top: 48
+    }
   },
   nameInputs: {
     gridColumn: 'span 2'
@@ -107,7 +112,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   saveBtn: {
     position: 'absolute',
-    width: '382px',
+    width: '392px',
     bottom: 26,
     left: 34
   },
@@ -138,5 +143,9 @@ export const useStyles = makeStyles((theme) => ({
       content: `'example@mail.com'`,
       color: '#828282'
     }
+  },
+  recoverPasswordText: {
+    display: 'block',
+    marginBottom: '15px'
   }
 }));

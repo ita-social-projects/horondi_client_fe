@@ -25,7 +25,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const ProfilePage = () => {
-  const [user, setUser] = useState({});
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
   const [shouldValidate, setShouldValidate] = useState(false);
@@ -67,16 +66,29 @@ const ProfilePage = () => {
     )
   );
 
+  const handleSaveUser = ({
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    ...address
+  }) => {
+    const user = { firstName, lastName, email, phoneNumber, address };
+    dispatch(updateUser({ user, id: userData._id, upload }));
+    setShouldValidate(false);
+  };
+
   const {
     errors,
     values,
     resetForm,
     dirty,
     handleSubmit,
-    handleChange
+    handleChange,
+    setErrors
   } = useFormik({
     initialValues: {},
-    onSubmit: (val) => console.log('submit: ', val),
+    onSubmit: handleSaveUser,
     validationSchema,
     validateOnChange: shouldValidate,
     validateOnBlur: shouldValidate
@@ -97,10 +109,6 @@ const ProfilePage = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
   };
 
-  const handleSaveUser = () => {
-    dispatch(updateUser({ user, id: user._id, upload }));
-  };
-
   const handlePasswordChange = () => {
     dispatch(recoverUser({ email: userData.email, language }));
   };
@@ -108,15 +116,6 @@ const ProfilePage = () => {
   const handleImageError = (e) => {
     e.target.src = ProfilePicture;
   };
-
-  useEffect(() => {
-    if (
-      user.address &&
-      Object.keys(user.address).every((key) => !user.address[key])
-    ) {
-      user.address = null;
-    }
-  }, [user.address]);
 
   useEffect(() => {
     if (userData) {
@@ -140,7 +139,9 @@ const ProfilePage = () => {
     <div className={classes.profile}>
       <div>
         {userLoading ? (
-          <Loader gridColumn={'span 3'} />
+          <div className={classes.userForm}>
+            <Loader gridColumn={'span 3'} />
+          </div>
         ) : (
           <form onSubmit={handleSubmit} className={classes.userForm}>
             <div className={classes.imageContainer}>
@@ -202,7 +203,7 @@ const ProfilePage = () => {
           ) : (
             <>
               <h2>{PROFILE_PASSWORD_CHANGE[language].heading}</h2>
-              <span>
+              <span className={classes.recoverPasswordText}>
                 {!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}
               </span>
               {userRecovered ? (
@@ -218,7 +219,7 @@ const ProfilePage = () => {
             </>
           )}
         </div>
-        {!user.confirmed && (
+        {!userData.confirmed && (
           <div className={classes.confirmUser}>
             {confirmationLoading ? (
               <Loader />

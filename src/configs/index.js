@@ -98,12 +98,12 @@ export const errorMessages = [
       text: 'Поле повинно містити від 2 до 500 символів',
       phoneNumber: 'Некоректний формат телефону',
       zipcode: 'Некоректний формат почтового індексу',
-      country: 'Поле повинно містити від 2 до 30 символів',
-      region: 'Поле повинно містити від 2 до 30 символів',
-      city: 'Поле повинно містити від 2 до 30 символів',
-      street: 'Поле повинно містити від 2 до 30 символів',
-      buildingNumber: 'Поле повинно містити від 1 до 30 символів',
-      appartment: 'Поле повинно містити від 1 до 30 символів'
+      country: 'Поле повинно містити від 2 до 40 символів',
+      region: 'Поле повинно містити від 2 до 40 символів',
+      city: 'Поле повинно містити від 2 до 40 символів',
+      street: 'Поле повинно містити від 2 до 40 символів',
+      buildingNumber: 'Поле повинно містити від 1 до 6 символів',
+      appartment: 'Поле повинно містити від 1 до 6 символів'
     }
   },
   {
@@ -117,12 +117,12 @@ export const errorMessages = [
       text: 'Field should contain from 2 to 700 characters',
       phoneNumber: 'Wrong phone format',
       zipcode: 'Wrong zipcode format',
-      country: 'Field should contain from 2 to 30 characters',
-      region: 'Field should contain from 2 to 30 characters',
-      city: 'Field should contain from 2 to 30 characters',
-      street: 'Field should contain from 2 to 30 characters',
-      buildingNumber: 'Field should contain from 1 to 30 characters',
-      appartment: 'Field should contain from 1 to 30 characters'
+      country: 'Field should contain from 2 to 40 characters',
+      region: 'Field should contain from 2 to 40 characters',
+      city: 'Field should contain from 2 to 40 characters',
+      street: 'Field should contain from 2 to 40 characters',
+      buildingNumber: 'Field should contain from 1 to 6 characters',
+      appartment: 'Field should contain from 1 to 6 characters'
     }
   }
 ];
@@ -137,15 +137,15 @@ export const formRegExp = {
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
   country:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   city:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   region:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   street:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
-  buildingNumber: '^[a-zA-Z0-9_.-]*$',
-  appartment: '^[a-zA-Z0-9_.-]*$',
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
+  appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   deliveryMethod:

@@ -1,6 +1,6 @@
 export const ERROR_PAGE_MESSAGE = {
   BUSINESS_TEXT_NOT_FOUND: [
-    { value: 'текст бізнесу не знайдений' },
+    { value: 'Текст бізнесу не знайдений' },
     { value: 'business text not found' }
   ],
   CATEGORY_NOT_VALID: [
@@ -25,7 +25,7 @@ export const ERROR_PAGE_MESSAGE = {
     { value: 'Order not found' }
   ],
   PATTERN_NOT_FOUND: [
-    { value: 'Паттерн не знайдено' },
+    { value: 'Гобелен не знайдено' },
     { value: 'Pattern not found' }
   ],
   USER_NOT_FOUND: [

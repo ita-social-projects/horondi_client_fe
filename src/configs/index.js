@@ -346,3 +346,5 @@ export const profileFields = [
   'appartment',
   'zipcode'
 ];
+
+export const carouselInterval = 5000;

@@ -11,7 +11,7 @@ const initialState = {
   cities: [],
   warehouses: [],
   streets: [],
-  price: 0
+  price: {}
 };
 
 const checkoutReducer = (state = initialState, action = {}) => {

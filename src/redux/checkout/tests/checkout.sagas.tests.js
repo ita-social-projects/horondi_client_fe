@@ -11,9 +11,19 @@ import {
   getNovaPoshtaCities,
   getNovaPoshtaWarehouse,
   getNovaPoshtaStreets,
-  getNovaPoshtaPrices
+  getNovaPoshtaPrices,
+  setLoading,
+  setNovaPoshtaCities,
+  setNovaPoshtaStreets,
+  setNovaPoshtaPrices,
+  setNovaPoshtaWarehouse
 } from '../checkout.actions';
-import { handleCities, handleWarehouse } from '../checkout.sagas';
+import {
+  handleCities,
+  handlePrice,
+  handleStreets,
+  handleWarehouse
+} from '../checkout.sagas';
 import {
   SET_NOVAPOSHTA_CITIES,
   SET_NOVAPOSHTA_STREETS,
@@ -26,14 +36,9 @@ describe('Checkout pages sagas tests', () => {
   it('fetches cities', () =>
     expectSaga(handleCities, { payload: 'Львів' })
       .provide([[matchers.call.fn(getNovaPoshtaCities), fakeNPCities]])
-      .put({ type: SET_LOADING, payload: true })
-      .put({
-        type: SET_NOVAPOSHTA_CITIES,
-        payload: {
-          cities: fakeNPCities.data.getNovaPoshtaCities
-        }
-      })
-      .put({ type: SET_LOADING, payload: false })
+      .put(setLoading(true))
+      .put(setNovaPoshtaCities(fakeNPCities))
+      .put(setLoading(false))
       .run());
 
   it('fetches streets', () => {
@@ -44,14 +49,9 @@ describe('Checkout pages sagas tests', () => {
       }
     })
       .provide([[matchers.call.fn(getNovaPoshtaStreets), fakeNPStreets]])
-      .put({ type: SET_LOADING, payload: true })
-      .put({
-        type: SET_NOVAPOSHTA_STREETS,
-        payload: {
-          streets: fakeNPStreets.data.getNovaPoshtaStreets
-        }
-      })
-      .put({ type: SET_LOADING, payload: false })
+      .put(setLoading(true))
+      .put(setNovaPoshtaStreets(fakeNPStreets))
+      .put(setLoading(false))
       .run();
   });
 
@@ -66,24 +66,46 @@ describe('Checkout pages sagas tests', () => {
       }
     })
       .provide([[matchers.call.fn(getNovaPoshtaPrices), fakeNPPrices]])
-      .put({ type: SET_LOADING, payload: true })
-      .put({
-        type: SET_NOVAPOSHTA_PRICES,
-        payload: {
-          price: fakeNPPrices.data.getNovaPoshtaPrices
-        }
-      })
-      .put({ type: SET_LOADING, payload: false })
+      .put(setLoading(true))
+      .put(setNovaPoshtaPrices(fakeNPPrices))
+      .put(setLoading(false))
       .run());
 
   it('fetches warehouses', () =>
     expectSaga(handleWarehouse, { payload: 'Авіаторське' })
       .provide([[matchers.call.fn(getNovaPoshtaWarehouse), fakeNPWarehouses]])
-      .put({
-        type: SET_NOVAPOSHTA_WAREHOUSES,
-        payload: {
-          price: fakeNPWarehouses.data.getNovaPoshtaWarehouses
-        }
-      })
+      .put(setNovaPoshtaWarehouse(fakeNPWarehouses))
       .run());
+});
+
+describe('Checkout sagas test', () => {
+  it('should not throw error', () => {
+    expect(handleWarehouse).not.toThrow();
+    expect(handleCities).not.toThrow();
+    expect(handleStreets).not.toThrow();
+    expect(handlePrice).not.toThrow();
+  });
+  it('#1 should receive all patterns and set to store', () => {
+    expectSaga(handleCities)
+      .provide([[matchers.call.fn(getAllPatterns), fakePatterns]])
+      .put(setPatternLoading(true))
+      .put(setPatterns(fakePatterns))
+      .put(setPatternLoading(false))
+      .run();
+  });
+  it('#2 should receive one pattern and set to store', () => {
+    const fakePattern = {
+      data: {
+        getPatternById: {
+          ...pattern
+        }
+      }
+    };
+    expectSaga(handlePatternLoad, patternId)
+      .provide([[matchers.call.fn(getPatternById), fakePattern]])
+      .put(setPatternLoading(true))
+      .put(setPattern(fakePattern))
+      .put(setPatternLoading(false))
+      .run();
+  });
 });

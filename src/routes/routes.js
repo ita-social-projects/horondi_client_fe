@@ -98,7 +98,7 @@ const Routes = () => {
             render={({ match }) => {
               const { category } = match.params;
               const categoryParam = categories.find(
-                categoryFound =>
+                (categoryFound) =>
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
@@ -112,7 +112,7 @@ const Routes = () => {
             render={({ match }) => {
               const { category, model } = match.params;
               const categoryParam = categories.find(
-                categoryFound =>
+                (categoryFound) =>
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );

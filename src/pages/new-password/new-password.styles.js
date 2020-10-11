@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/4.jpg';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   newPassBackground: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',

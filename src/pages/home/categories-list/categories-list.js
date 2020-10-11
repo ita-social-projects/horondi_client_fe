@@ -46,9 +46,9 @@ const CategoriesList = () => {
   );
 };
 
-export const getCategoryURL = category => {
+export const getCategoryURL = (category) => {
   const [filteredCategory] = category.filter(
-    item => item.lang === URL_LANGUAGE
+    (item) => item.lang === URL_LANGUAGE
   );
 
   if (filteredCategory.value) {

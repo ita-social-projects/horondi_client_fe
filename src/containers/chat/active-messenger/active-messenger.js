@@ -30,7 +30,9 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const Alert = props => <MuiAlert elevation={6} variant='filled' {...props} />;
+  const Alert = (props) => (
+    <MuiAlert elevation={6} variant='filled' {...props} />
+  );
 
   const handleValidForms = () => {
     setShouldValidate(true);
@@ -155,7 +157,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
               !validation.value && shouldValidate ? `${errorMessage}` : ''
             }
             className={style.dataInput}
-            onChange={e => onChange(e, validation.setValid, regExp)}
+            onChange={(e) => onChange(e, validation.setValid, regExp)}
             value={value}
             type={type}
           />

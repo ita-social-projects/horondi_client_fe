@@ -29,7 +29,7 @@ import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
 import { setToLocalStorage } from '../../services/local-storage.service';
 
-export const loginUser = data => {
+export const loginUser = (data) => {
   const query = `
   mutation login($user: LoginInput!){
   loginUser(
@@ -62,7 +62,7 @@ export const loginUser = data => {
   return setItems(query, data);
 };
 
-export const resetPassword = data => {
+export const resetPassword = (data) => {
   const query = `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)

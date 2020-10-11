@@ -1,7 +1,7 @@
 export const ERROR_PAGE_MESSAGE = {
   BUSINESS_TEXT_NOT_FOUND: [
     { value: 'Текст бізнесу не знайдений' },
-    { value: 'business text not found' }
+    { value: 'Business text not found' }
   ],
   CATEGORY_NOT_VALID: [
     { value: 'Категорія не вірна' },

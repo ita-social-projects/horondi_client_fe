@@ -93,6 +93,13 @@ const useStyles = makeStyles((theme) => ({
     '@media (min-width:500px)': {
       display: 'none'
     }
+  },
+  center: {
+    width: '3rem',
+    margin: '22rem auto',
+    '@media (max-width: 1400px)': {
+      margin: '13rem auto'
+    }
   }
 }));
 export default useStyles;

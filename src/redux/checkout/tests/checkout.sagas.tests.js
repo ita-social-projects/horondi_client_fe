@@ -25,7 +25,7 @@ import {
 describe('Checkout pages sagas tests', () => {
   it('fetches cities', () =>
     expectSaga(handleCities, { payload: 'Львів' })
-      .provide([[matchers.call.fn(getNovaPoshtaCities()), fakeNPCities]])
+      .provide([[matchers.call.fn(getNovaPoshtaCities), fakeNPCities]])
       .put({ type: SET_LOADING, payload: true })
       .put({
         type: SET_NOVAPOSHTA_CITIES,
@@ -43,7 +43,7 @@ describe('Checkout pages sagas tests', () => {
         street: 'івана'
       }
     })
-      .provide([[matchers.call.fn(getNovaPoshtaStreets()), fakeNPStreets]])
+      .provide([[matchers.call.fn(getNovaPoshtaStreets), fakeNPStreets]])
       .put({ type: SET_LOADING, payload: true })
       .put({
         type: SET_NOVAPOSHTA_STREETS,
@@ -65,7 +65,7 @@ describe('Checkout pages sagas tests', () => {
         serviceType: 'WarehouseWarehouse'
       }
     })
-      .provide([[matchers.call.fn(getNovaPoshtaPrices()), fakeNPPrices]])
+      .provide([[matchers.call.fn(getNovaPoshtaPrices), fakeNPPrices]])
       .put({ type: SET_LOADING, payload: true })
       .put({
         type: SET_NOVAPOSHTA_PRICES,
@@ -78,7 +78,7 @@ describe('Checkout pages sagas tests', () => {
 
   it('fetches warehouses', () =>
     expectSaga(handleWarehouse, { payload: 'Авіаторське' })
-      .provide([[matchers.call.fn(getNovaPoshtaWarehouse()), fakeNPWarehouses]])
+      .provide([[matchers.call.fn(getNovaPoshtaWarehouse), fakeNPWarehouses]])
       .put({
         type: SET_NOVAPOSHTA_WAREHOUSES,
         payload: {

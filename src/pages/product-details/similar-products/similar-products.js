@@ -7,7 +7,7 @@ import Carousel from 'react-multi-carousel';
 import useStyles from './similar-products.styles';
 
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
-import { IMG_URL, responsive } from '../../../configs';
+import { IMG_URL, RESPONSIVE_PDP } from '../../../configs';
 
 import SimilarProductItem from './similar-products-item';
 
@@ -38,7 +38,7 @@ const SimilarProducts = ({ currencySign }) => {
     ));
 
   return (
-    <div>
+    <div id='similar-products'>
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
@@ -46,7 +46,7 @@ const SimilarProducts = ({ currencySign }) => {
           </div>
           <Carousel
             className={styles.carousel}
-            responsive={responsive}
+            responsive={RESPONSIVE_PDP}
             swipeable={false}
           >
             {imagesList}

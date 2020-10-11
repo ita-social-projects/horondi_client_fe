@@ -84,8 +84,7 @@ const ProfilePage = () => {
     resetForm,
     dirty,
     handleSubmit,
-    handleChange,
-    setErrors
+    handleChange
   } = useFormik({
     initialValues: {},
     onSubmit: handleSaveUser,

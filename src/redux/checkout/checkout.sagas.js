@@ -39,7 +39,6 @@ export function* handlePrice({ payload }) {
         }
       }`
     );
-    console.log(...price.data.getNovaPoshtaPrices);
     yield put(setNovaPoshtaPrices(...price.data.getNovaPoshtaPrices));
   } catch (e) {
     yield call(handleErrors, e);
@@ -80,7 +79,6 @@ export function* handleCities({ payload }) {
                      }
                   }`
     );
-    console.log(cities.data.getNovaPoshtaCities);
     yield put(setNovaPoshtaCities(cities.data.getNovaPoshtaCities));
     yield put(setLoading(false));
   } catch (e) {

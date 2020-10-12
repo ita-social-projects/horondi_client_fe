@@ -9,8 +9,8 @@ import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 
 export const Chat = () => {
-  const FACEBOOK_PAGE_ID = '106973281128068';
-  const FACEBOOK_APP_ID = '768636160372711';
+  const FACEBOOK_PAGE_ID = '101134448446261';
+  const FACEBOOK_APP_ID = '713686025904610';
 
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);

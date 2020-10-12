@@ -10,11 +10,13 @@ import {
   CONFIRMATION_EMAIL_SENT,
   SET_USER_IS_CONFIRMED,
   SET_CONFIRMATION_LOADING,
-  SET_RECOVERY_LOADING
+  SET_RECOVERY_LOADING,
+  SET_USER_ORDERS
 } from './user.types';
 
 export const initialState = {
   userData: null,
+  userOrders: null,
   error: null,
   userLoading: false,
   userRecovered: false,
@@ -96,6 +98,11 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         recoveryLoading: action.payload
+      };
+    case SET_USER_ORDERS:
+      return {
+        ...state,
+        userOrders: action.payload
       };
     default:
       return state;

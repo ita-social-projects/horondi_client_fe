@@ -22,22 +22,16 @@ export const useStyles = makeStyles((theme) => ({
       flexDirection: 'column'
     }
   },
-  image: (props) => ({
+  image: {
     flexBasis: 100,
-    display: 'flex',
     justifyContent: 'center',
-    '& > a': {
-      background: `url('${props.image}')no-repeat center center`,
-      backgroundSize: 'cover',
-      borderRadius: 5,
-      display: 'block',
-      width: '100px',
-      height: '100px',
-      '@media (max-width: 768px)': {
-        borderRadius: '50%'
-      }
-    }
-  }),
+    backgroundColor: '#999999',
+    borderRadius: 5,
+    display: 'block',
+    width: '100px',
+    height: '100px',
+    margin: 5
+  },
   description: {
     display: 'flex',
     flexDirection: 'column',

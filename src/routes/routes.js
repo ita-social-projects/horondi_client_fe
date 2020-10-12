@@ -27,6 +27,7 @@ import ThanksPage from '../pages/thanks-page';
 import ContactsPage from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
 import ProfilePage from '../pages/profile-page';
+import OrderHistory from '../pages/order-history';
 import ProtectedRoute from '../components/protected-route';
 
 const Routes = () => {
@@ -88,6 +89,13 @@ const Routes = () => {
           <ProtectedRoute
             component={ProfilePage}
             path='/profile'
+            isAuthed={userIsChecked && userData}
+            exact
+            redirectTo='/login'
+          />
+          <ProtectedRoute
+            component={OrderHistory}
+            path='/order-history'
             isAuthed={userIsChecked && userData}
             exact
             redirectTo='/login'

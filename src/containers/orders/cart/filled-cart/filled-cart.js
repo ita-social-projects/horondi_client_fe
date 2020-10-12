@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
-import FilledOrder from '../../order/filled-order';
+import OrderTable from '../../order/order-table';
 import Modal from '../../../../components/modal';
 import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
 import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../cart-item';
+import { useStyles } from './filled-cart.styles';
 
 const FilledCart = ({ items }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
+  const styles = useStyles();
   const dispatch = useDispatch();
   const language = useSelector(({ Language }) => Language.language);
 
@@ -33,13 +37,11 @@ const FilledCart = ({ items }) => {
     .toFixed(2);
 
   return (
-    <div>
-      <FilledOrder
-        name='filled-cart'
-        items={orderList}
-        totalPrice={totalPrice}
-        currency='UAH'
-      />
+    <div className={styles.root} data-cy='filled-cart'>
+      <Link to='/' className={styles.backButton}>
+        <KeyboardBackspaceIcon />
+      </Link>
+      <OrderTable items={orderList} totalPrice={totalPrice} currency='UAH' />
       {modalVisibility && (
         <div>
           <Modal

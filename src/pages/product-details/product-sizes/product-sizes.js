@@ -32,7 +32,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
 
   return (
     <div className={styles.sizeButtons}>
-      {sizeButtons.length ? (
+      {sizeButtons && sizeButtons.length ? (
         <div className={styles.container}>
           <div className={styles.label}>{SIZE[language].size}:</div>
           <div>

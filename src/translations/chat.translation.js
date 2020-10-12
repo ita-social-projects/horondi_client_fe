@@ -5,7 +5,9 @@ export const CHAT = {
     name: `Ім'я`,
     email: 'Електронна пошта',
     msgText: 'Текст повідомлення...',
-    sendBtn: 'Відправити'
+    sendBtn: 'Відправити',
+    thanksMsg: "Дякуємо, що написали. Ми зв'яжемось з Вами найближчим часом.",
+    continue: 'Продовжити'
   },
   1: {
     ourContacts: 'Our contacts:',
@@ -13,7 +15,9 @@ export const CHAT = {
     name: `Name`,
     email: 'Email',
     msgText: 'Type your message...',
-    sendBtn: 'Send'
+    sendBtn: 'Send',
+    thanksMsg: 'Thank you for your letter, we will contact you soon',
+    continue: 'Continue'
   }
 };
 

@@ -16,10 +16,7 @@ const useStyles = makeStyles((theme) => {
         flexDirection: 'column',
         alignItems: 'center'
       },
-      marginBottom: '15px',
-      '@media (max-width: 500px)': {
-        marginTop: '120px'
-      }
+      marginBottom: '15px'
     },
     title: {
       fontSize: '1.4rem',

@@ -7,12 +7,10 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center'
   },
   homeHeader: {
-    backgroundImage:
-      'url("https://horondi.blob.core.windows.net/horondi/backgrounds/bg-home-page.jpg")',
+    background:
+      'url("https://horondi.blob.core.windows.net/horondi/backgrounds/IMG_0428.jpg") no-repeat center center',
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    height: 500,
+    height: 800,
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
@@ -26,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
       left: 0,
       bottom: 0,
       backgroundColor: 'black',
-      opacity: '.3',
+      opacity: '.1',
       zIndex: 0
     }
   },
@@ -36,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.button.normal.color,
     zIndex: 2,
     margin: 10,
-    fontSize: 20,
+    fontSize: 15,
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color

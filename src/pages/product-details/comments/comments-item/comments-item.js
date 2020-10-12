@@ -13,7 +13,8 @@ import CommentDialog from './comment-dialog';
 
 import {
   COMMENTS_TIME_OPTIONS,
-  DATE_LANGUAGE_OPTIONS
+  DATE_LANGUAGE_OPTIONS,
+  IMG_URL
 } from '../../../../configs';
 import { TOOLTIPS } from '../../../../translations/product-details.translations';
 
@@ -64,7 +65,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
             <div className={styles.user}>
               <Avatar
                 alt={name}
-                src={images ? images.medium : ''}
+                src={images ? `${IMG_URL}${images.thumbnail}` : ''}
                 className={styles.avatar}
               />
               <span className={styles.name}>{name}</span>

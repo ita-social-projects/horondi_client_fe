@@ -16,8 +16,9 @@ import {
   WEIGHT
 } from '../../../translations/product-details.translations';
 import Detail from '../detail';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ProductInfo = () => {
+const ProductInfo = ({ currencySign }) => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
@@ -51,7 +52,7 @@ const ProductInfo = () => {
     <div>
       <div className={styles.head}>
         <span className={styles.title}>{name[language].value}</span>
-        <Tooltip title={rate} placement='left'>
+        <Tooltip title={rate.toFixed(2)} placement='left'>
           <span>
             <Rating value={rate} readOnly precision={0.1} />
           </span>
@@ -59,7 +60,7 @@ const ProductInfo = () => {
       </div>
       <div className={styles.details}>
         <Detail
-          subtitle={`${PRODUCT_DESCRIPTION[language].description}:`}
+          subtitle={`${PRODUCT_DESCRIPTION[language].description}: `}
           description={parse(description[language].value)}
         />
         <Detail
@@ -98,7 +99,8 @@ const ProductInfo = () => {
           {PRODUCT_PRICE[language].price}:{' '}
         </span>
         <span data-cy='price' className={styles.price}>
-          {currentPrice} UAH
+          <FontAwesomeIcon icon={currencySign} />
+          {currentPrice}
         </span>
       </div>
       <div className={styles.look}>

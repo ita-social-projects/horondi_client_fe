@@ -9,6 +9,8 @@ import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
+import PaymentsAndShipping from '../pages/payment-shipping';
+import PrivacyPolicy from '../pages/privacy-policy';
 import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
 import NewsDetailPage from '../pages/news/news-detail';
@@ -24,13 +26,19 @@ import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 import ContactsPage from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
+import ProfilePage from '../pages/profile-page';
+import ProtectedRoute from '../components/protected-route';
 
 const Routes = () => {
   const styles = useStyles();
 
-  const { categories } = useSelector(({ Categories }) => ({
-    categories: Categories.list
-  }));
+  const { categories, userData, userIsChecked } = useSelector(
+    ({ Categories, User }) => ({
+      categories: Categories.list,
+      userIsChecked: User.userIsChecked,
+      userData: User.userData
+    })
+  );
 
   return (
     <ConnectedRouter history={history}>
@@ -42,11 +50,29 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
+          <Route
+            path='/payment-and-shipping'
+            exact
+            component={PaymentsAndShipping}
+          />
+          <Route path='/privacy-policy' exact component={PrivacyPolicy} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
           <Route path='/contacts' exact component={ContactsPage} />
-          <Route path='/register' exact component={Register} />
-          <Route path='/login' exact component={Login} />
+          <ProtectedRoute
+            path='/login'
+            exact
+            component={Login}
+            isAuthed={!userData}
+            redirectTo='/'
+          />
+          <ProtectedRoute
+            path='/register'
+            exact
+            component={Register}
+            isAuthed={!userData}
+            redirectTo='/'
+          />
           <Route path='/thanks' exact component={ThanksPage} />
           <Route
             path='/confirmation/:token'
@@ -58,6 +84,13 @@ const Routes = () => {
             path='/recovery/:token'
             exact
             render={({ match }) => <NewPassword token={match.params.token} />}
+          />
+          <ProtectedRoute
+            component={ProfilePage}
+            path='/profile'
+            isAuthed={userIsChecked && userData}
+            exact
+            redirectTo='/login'
           />
           <Route
             path='/:category'

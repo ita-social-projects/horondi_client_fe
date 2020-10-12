@@ -7,14 +7,12 @@ import {
   Typography,
   CardContent,
   CardHeader,
-  CardMedia,
-  Backdrop
+  CardMedia
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import LoadingBar from '../../../components/loading-bar';
 import { TIME_OPTIONS } from '../../../configs';
-import './news-detail.style.css';
+import { Loader } from '../../../components/loader/loader';
 
 const NewsDetailPage = ({ match }) => {
   const { article, loading, language } = useSelector(({ News, Language }) => ({
@@ -35,9 +33,9 @@ const NewsDetailPage = ({ match }) => {
 
   if (loading || !article) {
     return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
-      </Backdrop>
+      <div className={styles.center}>
+        <Loader />
+      </div>
     );
   }
   if (article.text[language].value === null) {

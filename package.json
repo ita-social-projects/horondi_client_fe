@@ -7,7 +7,7 @@
     "url": "https://github.com/horondi/horondi_client_fe.git"
   },
   "dependencies": {
-    "@apollo/client": "^3.1.4",
+    "@apollo/client": "^3.1.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
@@ -19,10 +19,14 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.2.1",
     "apollo-cache-inmemory": "^1.6.6",
+    "apollo-link": "^1.2.14",
+    "apollo-link-http": "^1.5.17",
+    "apollo-upload-client": "^14.1.1",
     "axios": "^0.19.2",
     "connected-react-router": "^6.8.0",
     "cors": "^2.8.5",
     "graphql": "^15.3.0",
+    "graphql-upload": "^11.0.0",
     "history": "^4.10.1",
     "html-react-parser": "^0.13.0",
     "prop-types": "^15.7.2",
@@ -48,7 +52,7 @@
     "redux-saga": "^1.1.3",
     "redux-saga-test-plan": "^4.0.0-rc.3",
     "unfetch": "^4.1.0",
-    "webpack": "^4.44.1"
+    "webpack": "^4.44.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -97,7 +101,6 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-react-app": "^5.2.1",
-    "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-flowtype": "^4.7.0",
     "eslint-plugin-html": "^6.0.2",
@@ -107,7 +110,6 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-app": "^6.2.2",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
     "jest-dom": "^4.0.0",
     "lint-staged": "^10.2.13",

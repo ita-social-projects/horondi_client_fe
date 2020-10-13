@@ -21,7 +21,11 @@ const CartHeader = () => {
     <Link to='/cart'>
       <IconButton className={styles.root} aria-label='cart'>
         <Badge
-          badgeContent={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+          badgeContent={
+            cartItems
+              ? cartItems.reduce((sum, item) => sum + item.quantity, 0)
+              : 0
+          }
           color='secondary'
         >
           <ShoppingBasketIcon />

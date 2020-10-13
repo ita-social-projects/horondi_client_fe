@@ -44,7 +44,7 @@ const ErrorPage = () => {
         />
         <div className={styles.info}>
           <h2>
-            {errorMessage
+            {errorMessage && ERROR_PAGE_MESSAGE[errorMessage]
               ? ERROR_PAGE_MESSAGE[errorMessage][language].value
               : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
           </h2>
@@ -58,5 +58,4 @@ const ErrorPage = () => {
     </div>
   );
 };
-
 export default ErrorPage;

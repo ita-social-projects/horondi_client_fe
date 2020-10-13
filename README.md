@@ -227,6 +227,9 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 [![@HrytsykOlya](https://avatars1.githubusercontent.com/u/65678737?s=200&u=181e62bf4f25b07122f06ce677e73ddd34021391&v=4)](https://github.com/HrytsykOlya)
 
+### ISTQB team
+
+[![@olya011](https://avatars3.githubusercontent.com/u/49495443?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/olya011)
 ### Database team
 
 [![@YukiAmeka](https://avatars2.githubusercontent.com/u/42378468?s=200&u=c749e6713546c371b801786ecdd678dd1d152f42&v=4)](https://github.com/YukiAmeka)
@@ -234,6 +237,7 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 ### DevOps team
 
 [![@SofiaDemyanovska](https://avatars1.githubusercontent.com/u/48492789?s=200&u=cb0520a8498667594ded0db8e29cdd3ec5529578&v=4)](https://github.com/SofiaDemyanovska)
+[![@ikoblyk](https://avatars3.githubusercontent.com/u/45568834?s=200&u=5d8790e8e58a7966e2d6d6bc6a4f0d15c8cb2e9c&v=4)](https://github.com/IKoblyk)
 
 ---
 

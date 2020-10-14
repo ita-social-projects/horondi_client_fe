@@ -6,11 +6,9 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './empty-order.styles';
 import { CART_IMAGES } from '../../../../configs';
-import { ORDER_BUTTON_TITLES } from '../../../../translations/order.translations';
 
-const EmptyOrder = ({ title, name }) => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
+const EmptyOrder = ({ title, buttonTitle, name }) => {
+  const { isLightTheme } = useSelector(({ Theme }) => ({
     isLightTheme: Theme.lightMode
   }));
   const styles = useStyles();
@@ -24,7 +22,7 @@ const EmptyOrder = ({ title, name }) => {
       <img src={emptyOrderImgLink} alt={name} />
       <Link to='/'>
         <Button className={styles.button} variant='contained'>
-          {ORDER_BUTTON_TITLES[language].empty}
+          {buttonTitle}
         </Button>
       </Link>
     </div>

@@ -15,10 +15,7 @@ const OrderHistoryOrderItem = ({ item, language, currency }) => {
   return (
     <div className={styles.root} data-cy='order-history-order-item'>
       <div className={styles.itemData}>
-        <div
-          className={styles.image}
-          data-cy='order-history-order-item-img'
-        ></div>
+        <div className={styles.image} data-cy='order-history-order-item-img' />
         <div
           className={styles.description}
           data-cy='order-history-order-item-description'

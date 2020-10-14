@@ -41,7 +41,7 @@ export const ORDER_STATUSES = {
   DELIVERED: ['ДОСТАВЛЕНО', 'DELIVERED']
 };
 
-export const ORDER_HISTORY_LABELS = {
+export const ORDER_HISTORY_TITLES = {
   0: {
     empty: 'Ваша історія замовлень пуста'
   },
@@ -52,7 +52,7 @@ export const ORDER_HISTORY_LABELS = {
 
 export const ORDER_BUTTON_TITLES = {
   0: {
-    empty: 'Обрати зараз'
+    empty: 'Почати замовляти зараз'
   },
   1: {
     empty: 'Shop now'

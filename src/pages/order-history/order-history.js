@@ -28,7 +28,7 @@ const OrderHistory = () => {
 
   return (
     <div className={styles.root}>
-      {orders ? (
+      {orders && orders.length ? (
         orders.map((item, index) => (
           <OrderHistoryOrder order={item} key={index} />
         ))

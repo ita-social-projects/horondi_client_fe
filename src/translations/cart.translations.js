@@ -9,6 +9,15 @@ export const CART_TITTLES = {
   }
 };
 
+export const CART_BUTTON_TITLES = {
+  0: {
+    empty: 'Обрати зараз'
+  },
+  1: {
+    empty: 'Shop now'
+  }
+};
+
 export const CART_TABLE_FIELDS = {
   0: {
     item: 'ПРОДУКТ',

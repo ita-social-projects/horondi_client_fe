@@ -12,7 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import { useStyles } from './sidebar.styles';
-
+import StarBorder from '@material-ui/icons/StarBorder';
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { grey } from '@material-ui/core/colors';
 
@@ -28,13 +28,12 @@ const Sidebar = ({ setMenuOpen, menu }) => {
     .map(({ _id, name }) => (
       <SideBarItem name={name} language={language} key={_id} />
     ));
-
+  console.log(categories);
   return (
     <div>
       <Drawer anchor='left' open={menu} onClose={() => setMenuOpen(false)}>
         <List className={styles.list}>
-          {' '}
-          {/**onClick={() => setMenuOpen(false)} */}
+          {/**onClick={() => setMenuOpen(false)}   <SideBarItem />   */}
           {menuList}
         </List>
       </Drawer>

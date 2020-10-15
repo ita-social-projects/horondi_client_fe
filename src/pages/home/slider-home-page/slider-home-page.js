@@ -2,13 +2,13 @@ import React from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import { useSelector } from 'react-redux';
-import { sliderHome } from './slider-home-page.style';
+import { useStyles } from './slider-home-page.style';
 import { getImage } from '../../../utils/imageLoad';
 import { Backdrop } from '@material-ui/core';
 import LoadingBar from '../../../components/loading-bar';
 
 const SliderHomePage = () => {
-  const styles = sliderHome();
+  const styles = useStyles();
   const { models, loading } = useSelector(({ Model }) => ({
     models: Model.models,
     loading: Model.loading

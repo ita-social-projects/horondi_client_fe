@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const sliderHome = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   caption: {
     color: '#fff',
     fontSize: '1rem'

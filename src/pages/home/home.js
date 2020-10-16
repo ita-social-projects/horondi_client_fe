@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 
+import SliderHomePage from './slider-home-page';
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
 import { HOME_BUTTONS } from '../../translations/homepage.translations';
@@ -15,6 +16,7 @@ const Home = () => {
   return (
     <div className={styles.home} data-cy='home-page'>
       <div className={styles.homeHeader}>
+        <SliderHomePage />
         <Link to='/news'>
           <Button className={styles.headerButton} variant='contained'>
             {HOME_BUTTONS[language].NEWS}

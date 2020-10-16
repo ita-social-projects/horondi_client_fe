@@ -152,8 +152,7 @@ export const formRegExp = {
     "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   text: /^.{2,700}$/gm,
   link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
-  script: /(script)/g,
-  phoneCheckout: /^((8|\+7)[/\- ]?)?(\(?\d{3}\)?[/\- ]?)?[\d\- ]{7,10}$/
+  script: /(script)/g
 };
 
 export const placeholders = {

@@ -5,10 +5,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 
 import { useStyles } from './cart-item.styles';
-import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
-import NumberInput from '../../../components/number-input';
-import { setCartItemQuantity } from '../../../redux/cart/cart.actions';
-import { IMG_URL } from '../../../configs';
+import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
+import NumberInput from '../../../../components/number-input';
+import { setCartItemQuantity } from '../../../../redux/cart/cart.actions';
+import { IMG_URL } from '../../../../configs';
 
 const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   const dispatch = useDispatch();

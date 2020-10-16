@@ -12,7 +12,8 @@ import {
   setConfirmationEmailStatus,
   setUserIsConfirmed,
   setConfirmationLoading,
-  setRecoveryLoading
+  setRecoveryLoading,
+  setUserOrders
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -23,7 +24,8 @@ import {
   REGISTER_USER,
   PRESERVE_USER,
   UPDATE_USER,
-  SEND_CONFIRMATION_EMAIL
+  SEND_CONFIRMATION_EMAIL,
+  GET_USER_ORDERS
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
@@ -320,6 +322,46 @@ export function* handleSendConfirmation({ payload }) {
   }
 }
 
+export function* handleGetUserOrders() {
+  try {
+    yield put(setUserLoading(true));
+    const res = yield call(
+      getItems,
+      `
+       {
+        getUserOrders {
+          _id
+          dateOfCreation
+          status
+          items {
+            name {
+              value
+            }
+            bottomMaterial{
+              value
+            }
+            quantity
+            actualPrice {
+              value
+              currency
+            }
+          }
+          totalItemsPrice {
+            value
+            currency
+          }
+        }
+      }
+    `
+    );
+    yield put(setUserOrders(res.data.getUserOrders));
+    yield put(setUserLoading(false));
+  } catch (e) {
+    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
+    yield put(push('/error-page'));
+  }
+}
+
 export default function* userSaga() {
   yield takeEvery(LOGIN_USER, handleUserLoad);
   yield takeEvery(CONFIRM_USER, handleUserConfirm);
@@ -330,4 +372,5 @@ export default function* userSaga() {
   yield takeEvery(PRESERVE_USER, handleUserPreserve);
   yield takeEvery(UPDATE_USER, handleUpdateUser);
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
+  yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
 }

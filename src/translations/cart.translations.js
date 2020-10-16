@@ -9,7 +9,7 @@ export const CART_TITTLES = {
   }
 };
 
-export const CART_BUTTONS = {
+export const CART_BUTTON_TITLES = {
   0: {
     empty: 'Обрати зараз'
   },

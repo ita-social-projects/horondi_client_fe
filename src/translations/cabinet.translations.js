@@ -15,12 +15,14 @@ export const CABINET_OPTIONS_LOGGED = {
   0: {
     profile: 'Профіль',
     wishlist: 'Список уподобань',
+    orderHistory: 'Історія замовлень',
     changeTheme: 'Змінити тему',
     logOut: 'Вийти'
   },
   1: {
     profile: 'Profile',
     wishlist: 'Wishlist',
+    orderHistory: 'Order history',
     changeTheme: 'Change theme',
     logOut: 'Log out'
   }

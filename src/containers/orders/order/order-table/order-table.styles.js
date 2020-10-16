@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: '50px auto'
-  },
   table: {
     display: 'flex',
     flexDirection: 'column'

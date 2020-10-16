@@ -20,7 +20,9 @@ import {
   CONFIRMATION_EMAIL_SENT,
   SET_USER_IS_CONFIRMED,
   SET_CONFIRMATION_LOADING,
-  SET_RECOVERY_LOADING
+  SET_RECOVERY_LOADING,
+  SET_USER_ORDERS,
+  GET_USER_ORDERS
 } from './user.types';
 
 const setUser = (user) => ({
@@ -130,6 +132,15 @@ const setRecoveryLoading = (payload) => ({
   payload
 });
 
+const setUserOrders = (payload) => ({
+  type: SET_USER_ORDERS,
+  payload
+});
+
+const getUserOrders = () => ({
+  type: GET_USER_ORDERS
+});
+
 export {
   loginUser,
   setUser,
@@ -152,5 +163,7 @@ export {
   setConfirmationEmailStatus,
   setUserIsConfirmed,
   setConfirmationLoading,
-  setRecoveryLoading
+  setRecoveryLoading,
+  setUserOrders,
+  getUserOrders
 };

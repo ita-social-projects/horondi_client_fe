@@ -2,7 +2,6 @@ import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
 export const sendMail = async (payload) => {
-  console.log(payload);
   const result = await client.mutate({
     mutation: gql`
       mutation{
@@ -18,6 +17,5 @@ export const sendMail = async (payload) => {
  }`
   });
   await client.resetStore();
-  console.log(result);
   return result;
 };

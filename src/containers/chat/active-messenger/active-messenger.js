@@ -50,7 +50,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
       sendEmail({
         email,
         senderName: firstName,
-        text: message
+        text: message,
+        language
       })
     );
     handleClick();

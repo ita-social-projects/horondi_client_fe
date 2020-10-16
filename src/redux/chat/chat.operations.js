@@ -9,7 +9,8 @@ export const sendMail = async (payload) => {
     question:{
       senderName:"${payload.senderName}"
       text: "${payload.text}"
-      email: "${payload.email}"
+      email: "${payload.email}",
+      language: ${payload.language}
     }){
     _id
   }

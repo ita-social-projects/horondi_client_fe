@@ -70,24 +70,40 @@ export const LOGIN_USER_DATA = {
   password: ''
 };
 
+export const PROFILE_USER_DATA = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  country: '',
+  region: '',
+  city: '',
+  street: '',
+  buildingNumber: '',
+  appartment: '',
+  zipcode: ''
+};
+
+export const REQUIRED_USER_FIELDS = ['firstName', 'lastName', 'email'];
+
 export const errorMessages = [
   {
     lang: 'uk',
     value: {
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат пошти',
+      email: 'Некоректний формат, ',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
       text: 'Поле повинно містити від 2 до 500 символів',
-      zipcode: 'Некоректний формат почтового індексу',
       phoneNumber: 'Некоректний формат телефону',
-      country: 'Поле повинно містити від 2 до 30 символів',
-      region: 'Поле повинно містити від 2 до 30 символів',
-      city: 'Поле повинно містити від 2 до 30 символів',
-      street: 'Поле повинно містити від 2 до 30 символів',
-      buildingNumber: 'Поле повинно містити від 1 до 30 символів',
-      appartment: 'Поле повинно містити від 1 до 30 символів'
+      zipcode: 'Некоректний формат почтового індексу',
+      country: 'Поле повинно містити від 2 до 40 символів',
+      region: 'Поле повинно містити від 2 до 40 символів',
+      city: 'Поле повинно містити від 2 до 40 символів',
+      street: 'Поле повинно містити від 2 до 40 символів',
+      buildingNumber: 'Поле повинно містити від 1 до 6 символів',
+      appartment: 'Поле повинно містити від 1 до 6 символів'
     }
   },
   {
@@ -95,18 +111,18 @@ export const errorMessages = [
     value: {
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address `,
+      email: `Wrong email address, `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
-      zipcode: 'Wrong zipcode format',
       phoneNumber: 'Wrong phone format',
-      country: 'Field should contain from 2 to 30 characters',
-      region: 'Field should contain from 2 to 30 characters',
-      city: 'Field should contain from 2 to 30 characters',
-      street: 'Field should contain from 2 to 30 characters',
-      buildingNumber: 'Field should contain from 1 to 30 characters',
-      appartment: 'Field should contain from 1 to 30 characters'
+      zipcode: 'Wrong zipcode format',
+      country: 'Field should contain from 2 to 40 characters',
+      region: 'Field should contain from 2 to 40 characters',
+      city: 'Field should contain from 2 to 40 characters',
+      street: 'Field should contain from 2 to 40 characters',
+      buildingNumber: 'Field should contain from 1 to 6 characters',
+      appartment: 'Field should contain from 1 to 6 characters'
     }
   }
 ];
@@ -118,18 +134,18 @@ export const formRegExp = {
   firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
   lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
   password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
-  phoneNumber: /^\+?[0-9]{3}-?[0-9]{6,12}$/g,
+  phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
   country:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   city:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   region:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   street:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
-  buildingNumber: '^[a-zA-Z0-9_.-]*$',
-  appartment: '^[a-zA-Z0-9_.-]*$',
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+  buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
+  appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   deliveryMethod:

@@ -16,6 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     right: '4%',
     bottom: '2%',
+    zIndex: 3,
     transition: 'background 0.3s',
     '&:hover': {
       cursor: 'pointer',

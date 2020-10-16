@@ -105,7 +105,7 @@ export const errorMessages = [
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
       password: 'Від 6 до 30 символів з однією великою літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не збігаються'
     }
   },
   {
@@ -275,7 +275,7 @@ export const NEW_PASSWORD_ERROR = {
       value: 'User is not found'
     }
   ],
-  RECOVERY_ATTEMPTS_LIMIT_EXCEEDED: [
+  PASSWORD_RECOVERY_ATTEMPTS_LIMIT_EXCEEDED: [
     {
       value: 'Перевищено максимальну кількість спроб відновлення'
     },
@@ -305,7 +305,7 @@ export const NEW_PASSWORD_SUCCESS_MESSAGE = [
   }
 ];
 
-export const PROFILE_DATA = [
+export const PROFILE_LABELS = [
   {
     firstName: "Ім'я",
     lastName: 'Прізвище',

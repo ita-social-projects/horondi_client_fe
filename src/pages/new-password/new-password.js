@@ -13,69 +13,37 @@ import { endAdornment } from '../../utils/eyeToggle';
 import Loader from '../../components/loader';
 import {
   resetPassword,
-  checkIfTokenValid
+  checkIfTokenValid,
+  resetState
 } from '../../redux/user/user.actions';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 
 const NewPassword = ({ token }) => {
-  // VALIDATORS
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [confirmMatches, setConfirmMatches] = useState(false);
-
-  // EYE TOGGLERS
+  const styles = useStyles();
+  const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
-  // HOOKS
-  const { language, passwordReset, error, loading } = useSelector(
+  const dispatch = useDispatch();
+
+  const { language, passwordReset, userError, loading } = useSelector(
     ({ Language, User }) => ({
       language: Language.language,
       passwordReset: User.passwordReset,
       loading: User.userLoading,
-      error: User.error
+      userError: User.error
     })
   );
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
+    dispatch(resetState());
     dispatch(checkIfTokenValid({ token }));
   }, [dispatch, token]);
 
-  // VALUES
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [shouldValidate, setShouldValidate] = useState(false);
-
-  // HANDLERS
-  const handlePasswordChange = (event) => {
-    const input = event.target.value;
-    setPassword(input);
-    if (input.match(formRegExp.password)) {
-      setPasswordValid(true);
-    } else {
-      setPasswordValid(false);
-    }
+  const handleRecovery = async ({ password }) => {
+    dispatch(resetPassword({ password, token }));
   };
-
-  const handlePasswordConfirm = (e) => {
-    const confirmedInput = e.target.value;
-    setConfirmPassword(confirmedInput);
-    if (confirmedInput === password) {
-      setConfirmMatches(true);
-    } else {
-      setConfirmMatches(false);
-    }
-  };
-
-  const handleRecovery = async () => {
-    setShouldValidate(true);
-    if (passwordValid && confirmMatches) {
-      dispatch(resetPassword({ password, token }));
-    }
-  };
-
-  // STYLES
-  const styles = useStyles();
 
   const successWindow = (
     <div>
@@ -88,71 +56,96 @@ const NewPassword = ({ token }) => {
     </div>
   );
 
+  const validationSchema = Yup.object({
+    password: Yup.string()
+      .matches(formRegExp.password, errorMessages[language].value.password)
+      .required(errorMessages[language].value.password),
+    confirmPassword: Yup.string()
+      .oneOf(
+        [Yup.ref('password')],
+        errorMessages[language].value.confirmPassword
+      )
+      .when('password', {
+        is: (val) => {
+          if (val) return val;
+        },
+        then: Yup.string().required(
+          errorMessages[language].value.confirmPassword
+        )
+      })
+  });
+
   return (
-    <div className={styles.newPassBackground}>
-      <div className={styles.newPassForm}>
-        {passwordReset ? (
-          successWindow
-        ) : loading ? (
-          <Loader />
-        ) : (
-          <div className='newPasswordForm'>
-            <h2 className={styles.heading}>{CHANGE_PASSWORD[language].h2}</h2>
-            <TextField
-              label={CHANGE_PASSWORD[language].pass_label}
-              className={styles.passwordInput}
-              fullWidth
-              variant='outlined'
-              type='password'
-              value={password}
-              error={!passwordValid && shouldValidate && !!password}
-              helperText={
-                !passwordValid && shouldValidate && password
-                  ? `${errorMessages[language].value.password}`
-                  : ''
-              }
-              InputProps={endAdornment(showPassword, setShowPassword)}
-              required
-              onChange={handlePasswordChange}
-            />
-            <TextField
-              label={CHANGE_PASSWORD[language].confirm_label}
-              className={styles.passwordInput}
-              fullWidth
-              variant='outlined'
-              type='password'
-              value={confirmPassword}
-              error={!confirmMatches && shouldValidate && !!confirmPassword}
-              helperText={
-                !confirmMatches && shouldValidate && confirmPassword
-                  ? `${errorMessages[language].value.confirmPassword}`
-                  : ''
-              }
-              InputProps={endAdornment(
-                showConfirmPassword,
-                setShowConfirmPassword
-              )}
-              required
-              onChange={handlePasswordConfirm}
-            />
-            <Button
-              className={styles.changeBtn}
-              fullWidth
-              onClick={handleRecovery}
-            >
-              {CHANGE_PASSWORD[language].button}
-            </Button>
-            {error ? (
-              <p className={styles.serverError}>
-                {NEW_PASSWORD_ERROR[error]
-                  ? NEW_PASSWORD_ERROR[error][language].value
-                  : NEW_PASSWORD_ERROR.DEFAULT_ERROR[language].value}
-              </p>
-            ) : null}
+    <Formik
+      onSubmit={handleRecovery}
+      initialValues={{ password: '', confirmPassword: '' }}
+      validateOnBlur={shouldValidate}
+      validateOnChange={shouldValidate}
+      validationSchema={validationSchema}
+    >
+      {({ errors }) => (
+        <div className={styles.newPassBackground}>
+          <div className={styles.newPassForm}>
+            {passwordReset ? (
+              successWindow
+            ) : loading ? (
+              <Loader />
+            ) : (
+              <Form className='newPasswordForm'>
+                <h2 className={styles.heading}>
+                  {CHANGE_PASSWORD[language].h2}
+                </h2>
+                <Field
+                  name='password'
+                  as={TextField}
+                  type='text'
+                  label={CHANGE_PASSWORD[language].pass_label}
+                  className={styles.passwordInput}
+                  variant='outlined'
+                  fullWidth
+                  InputProps={endAdornment(showPassword, setShowPassword)}
+                  error={!!errors.password}
+                  helperText={errors.password || ''}
+                />
+                <Field
+                  name='confirmPassword'
+                  as={TextField}
+                  type='text'
+                  label={CHANGE_PASSWORD[language].confirm_label}
+                  className={styles.passwordInput}
+                  variant='outlined'
+                  fullWidth
+                  InputProps={endAdornment(
+                    showConfirmPassword,
+                    setShowConfirmPassword
+                  )}
+                  error={!!errors.confirmPassword}
+                  helperText={errors.confirmPassword || ''}
+                />
+                <Button
+                  className={styles.changeBtn}
+                  fullWidth
+                  type='submit'
+                  onClick={() => {
+                    console.log(errors);
+                    setShouldValidate(true);
+                  }}
+                >
+                  {CHANGE_PASSWORD[language].button}
+                </Button>
+                {userError ? (
+                  <p className={styles.serverError}>
+                    {NEW_PASSWORD_ERROR[userError]
+                      ? NEW_PASSWORD_ERROR[userError][language].value
+                      : NEW_PASSWORD_ERROR.DEFAULT_ERROR[language].value}
+                  </p>
+                ) : null}
+              </Form>
+            )}
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </Formik>
   );
 };
 

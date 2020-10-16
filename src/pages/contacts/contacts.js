@@ -1,17 +1,15 @@
 import React from 'react';
-import parse from 'html-react-parser';
 
 import { useSelector } from 'react-redux';
 
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
+import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import LoadingBar from '../../components/loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 
-import mapImg from '../../images/map-medium.png';
-
-const ContactsPage = () => {
+const ContactsPage = ({ fromCheckout }) => {
   const { contacts, loading, language } = useSelector(
     ({ Language, Contacts }) => ({
       contacts: Contacts.contacts,
@@ -20,7 +18,6 @@ const ContactsPage = () => {
     })
   );
   const styles = useStyles();
-
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
@@ -29,7 +26,7 @@ const ContactsPage = () => {
     );
   }
 
-  const contactsDisplay = contacts.map(contact => (
+  const contactsDisplay = contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
@@ -43,7 +40,7 @@ const ContactsPage = () => {
               >
                 <img
                   className={styles.mapImage}
-                  src={contact.images[language].value.medium || mapImg}
+                  src={`${IMG_URL}${contact.images[language].value.medium}`}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
               </a>
@@ -62,10 +59,9 @@ const ContactsPage = () => {
               {CONTACTS_PAGE_TITLES[language].schedule}
             </span>
             <div className={styles.schedule}>
-              {contact.openHours[language].value.split('|').map(el => (
+              {contact.openHours[language].value.split('|').map((el) => (
                 <div key={el}>
-                  <span className={styles.day}>{el.substr(0, 4)}</span>
-                  <span>{el.substring(4)}</span>
+                  <span className={styles.day}>{el}</span>
                 </div>
               ))}
             </div>
@@ -75,7 +71,7 @@ const ContactsPage = () => {
               {CONTACTS_PAGE_TITLES[language].address}
             </span>
             <div className={styles.contactAddress}>
-              {parse(contact.address[language].value)}
+              {contact.address[language].value}
             </div>
           </div>
           <div className={styles.contactsItem}>
@@ -89,9 +85,11 @@ const ContactsPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.contactsTitle}>
-        {CONTACTS_PAGE_TITLES[language].title}
-      </h2>
+      {!fromCheckout && (
+        <h2 className={styles.contactsTitle}>
+          {CONTACTS_PAGE_TITLES[language].title}
+        </h2>
+      )}
       {contactsDisplay}
     </div>
   );

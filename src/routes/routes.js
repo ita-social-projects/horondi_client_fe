@@ -26,6 +26,7 @@ import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
 import ContactsPage from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
+import Checkout from '../containers/checkout';
 import ProfilePage from '../pages/profile-page';
 import ProtectedRoute from '../components/protected-route';
 
@@ -74,6 +75,7 @@ const Routes = () => {
             redirectTo='/'
           />
           <Route path='/thanks' exact component={ThanksPage} />
+          <Route path='/checkout' exact component={Checkout} />
           <Route
             path='/confirmation/:token'
             exact
@@ -98,7 +100,7 @@ const Routes = () => {
             render={({ match }) => {
               const { category } = match.params;
               const categoryParam = categories.find(
-                categoryFound =>
+                (categoryFound) =>
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
@@ -112,7 +114,7 @@ const Routes = () => {
             render={({ match }) => {
               const { category, model } = match.params;
               const categoryParam = categories.find(
-                categoryFound =>
+                (categoryFound) =>
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );

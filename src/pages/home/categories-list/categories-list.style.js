@@ -4,13 +4,10 @@ export const useStyles = makeStyles((theme) => ({
   catalog: {
     margin: '10em 0'
   },
-  categories: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-    flexWrap: 'wrap',
-    margin: '0 2em 3em'
+  categoriesContainer: {
+    margin: '0 auto'
   },
+  carouselContainer: {},
   loadingIndicator: {
     marginTop: '3em'
   },

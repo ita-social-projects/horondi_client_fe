@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 import getItems, { setItems, client } from '../../utils/client';
 
-const getComments = id =>
-  getItems(
+const getComments = async (id) => {
+  const res = await getItems(
     `query($id: ID!) {
         getAllCommentsByProduct(productId: $id) {
           ... on Comment {
@@ -12,6 +12,9 @@ const getComments = id =>
             user {
               email
               name
+              images {
+                thumbnail 
+              }
             }
           }
         }
@@ -20,8 +23,11 @@ const getComments = id =>
       id
     }
   );
+  await client.resetStore();
+  return res.data.getAllCommentsByProduct;
+};
 
-const changeRate = payload =>
+const changeRate = (payload) =>
   setItems(
     `mutation($product: ID!, $rate: Int!) {
         addRate(product: $product, userRate: { rate: $rate }) {
@@ -33,7 +39,7 @@ const changeRate = payload =>
     payload
   );
 
-const addComment = async payload => {
+const addComment = async (payload) => {
   const result = await client.mutate({
     mutation: gql`
       mutation(
@@ -42,13 +48,14 @@ const addComment = async payload => {
         $firstName: String
         $show: Boolean!
         $text: String
+        $images: ImageSetInput
       ) {
         addComment(
           productId: $product
           comment: {
             text: $text
             show: $show
-            user: { email: $email, name: $firstName }
+            user: { email: $email, name: $firstName, images: $images }
             product: $product
           }
         ) {
@@ -59,18 +66,22 @@ const addComment = async payload => {
             user {
               name
               email
+              images {
+                thumbnail
+              }
             }
           }
         }
       }
     `,
-    variables: payload
+    variables: payload,
+    fetchPolicy: 'no-cache'
   });
   await client.resetStore();
   return result;
 };
 
-const deleteComment = async payload => {
+const deleteComment = async (payload) => {
   const result = await client.mutate({
     mutation: gql`
       mutation($comment: ID!) {
@@ -83,13 +94,14 @@ const deleteComment = async payload => {
         }
       }
     `,
-    variables: payload
+    variables: payload,
+    fetchPolicy: 'no-cache'
   });
   await client.resetStore();
   return result;
 };
 
-const updateComment = async payload => {
+const updateComment = async (payload) => {
   const result = await client.mutate({
     mutation: gql`
       mutation(
@@ -99,13 +111,14 @@ const updateComment = async payload => {
         $show: Boolean!
         $text: String
         $firstName: String
+        $images: ImageSetInput
       ) {
         updateComment(
           id: $comment
           comment: {
             text: $text
             show: $show
-            user: { email: $email, name: $firstName }
+            user: { email: $email, name: $firstName, images: $images }
             product: $product
           }
         ) {
@@ -116,12 +129,16 @@ const updateComment = async payload => {
             user {
               name
               email
+              images {
+                thumbnail
+              }
             }
           }
         }
       }
     `,
-    variables: payload
+    variables: payload,
+    fetchPolicy: 'no-cache'
   });
   await client.resetStore();
   return result;

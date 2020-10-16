@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Backdrop } from '@material-ui/core';
 import { getNews } from '../../../redux/news/news.actions';
 import { useStyles } from './news-page.style';
 import NewsItem from '../news-item';
-import LoadingBar from '../../../components/loading-bar';
+import { Loader } from '../../../components/loader/loader';
 
 const NewsPage = () => {
   const { newslist, loading, language } = useSelector(({ News, Language }) => ({
@@ -24,9 +23,9 @@ const NewsPage = () => {
   const styles = useStyles();
   if (loading) {
     return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
-      </Backdrop>
+      <div className={styles.center}>
+        <Loader />
+      </div>
     );
   }
 

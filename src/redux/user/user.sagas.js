@@ -29,7 +29,7 @@ import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
 import { setToLocalStorage } from '../../services/local-storage.service';
 
-export const loginUser = data => {
+export const loginUser = (data) => {
   const query = `
   mutation login($user: LoginInput!){
   loginUser(
@@ -62,7 +62,7 @@ export const loginUser = data => {
   return setItems(query, data);
 };
 
-export const resetPassword = data => {
+export const resetPassword = (data) => {
   const query = `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
@@ -235,9 +235,10 @@ export function* handleUserPreserve() {
       }
     }`
     );
-    if (user.data.getUserByToken.statusCode === 401) {
-      yield setToLocalStorage('accessToken', null);
-    } else if (!user.data.getUserByToken) {
+    if (
+      user.data.getUserByToken.statusCode >= 400 ||
+      !user.data.getUserByToken
+    ) {
       yield setToLocalStorage('accessToken', null);
     } else {
       yield put(setUser(user.data.getUserByToken));

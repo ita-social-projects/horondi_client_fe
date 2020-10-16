@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  cabinet: props => ({
+  cabinet: (props) => ({
     color: 'white',
     padding: '0 4px',
     position: 'relative',

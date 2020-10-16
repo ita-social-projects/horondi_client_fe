@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/1.jpg';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
   register: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',

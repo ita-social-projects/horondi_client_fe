@@ -30,7 +30,7 @@ export function* handleAddComment({ payload }) {
     yield put(setCommentsLoading(true));
     yield call(addComment, payload);
     const comments = yield call(getComments, payload.product);
-    yield put(setComments(comments.data.getAllCommentsByProduct));
+    yield put(setComments(comments));
     yield put(setCommentsLoading(false));
     yield call(handleSnackbar, added);
     if (payload.rate > 0) {
@@ -46,7 +46,7 @@ export function* handleDeleteComment({ payload }) {
   try {
     yield call(deleteComment, payload);
     const comments = yield call(getComments, payload.product);
-    yield put(setComments(comments.data.getAllCommentsByProduct));
+    yield put(setComments(comments));
     yield call(handleSnackbar, deleted);
   } catch (e) {
     yield call(handleCommentsError);
@@ -58,7 +58,7 @@ export function* handleUpdateComment({ payload }) {
     yield put(setUpdatingComment(payload.comment));
     yield call(updateComment, payload);
     const comments = yield call(getComments, payload.product);
-    yield put(setComments(comments.data.getAllCommentsByProduct));
+    yield put(setComments(comments));
     yield put(setUpdatingComment(null));
     yield call(handleSnackbar, updated);
   } catch (e) {

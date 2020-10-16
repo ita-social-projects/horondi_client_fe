@@ -7,6 +7,7 @@ export function* handleSendMail({ payload }) {
   try {
     yield put(setCommentsLoading(true));
     const res = yield call(sendMail, payload);
+    // console.log(res);
     yield put(setMessageState(res.data.addEmailQuestion._id));
     yield put(setCommentsLoading(false));
   } catch (e) {

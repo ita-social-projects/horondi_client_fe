@@ -49,9 +49,9 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     dispatch(
       sendEmail({
         email,
-        language,
         senderName: firstName,
-        text: message
+        text: message,
+        language
       })
     );
     handleClick();

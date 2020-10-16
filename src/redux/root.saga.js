@@ -10,6 +10,7 @@ import businessPagesSaga from './business-pages/business-pages.sagas';
 import contactsSaga from './contacts/contacts.sagas';
 import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
+import checkoutSaga from './checkout/checkout.sagas';
 import chatSaga from './chat/chat.sagas';
 
 export default function* rootSaga() {
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     cartSaga(),
     modelSaga(),
     commentsSaga(),
+    checkoutSaga(),
     businessPagesSaga(),
     chatSaga()
   ]);

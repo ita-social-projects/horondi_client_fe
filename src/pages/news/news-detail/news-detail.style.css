@@ -1,26 +1,26 @@
-#fullText hr{
-    clear: both;
+#fullText hr {
+  clear: both;
 }
-#fullText h3{
-    font-size: 1.2rem;
+#fullText h3 {
+  font-size: 1.2rem;
 }
-#fullText h2{
-    text-align: center;
+#fullText h2 {
+  text-align: center;
 }
-#fullText iframe{
-    width: 100%;
-    height: 600px
+#fullText iframe {
+  width: 100%;
+  height: 600px;
 }
 #fullText img {
-    width: 100px;
-    float: left;
-    max-height: 12rem;
-    margin: 1rem;
+  width: 100px;
+  float: left;
+  max-height: 12rem;
+  margin: 1rem;
 }
-#fullText li{
-    font-size: 1.2rem;
+#fullText li {
+  font-size: 1.2rem;
 }
-#fullText p{
-    font-size: 1.2rem;
-    line-height: 2.5rem;
+#fullText p {
+  font-size: 1.2rem;
+  line-height: 2.5rem;
 }

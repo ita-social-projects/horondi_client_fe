@@ -143,8 +143,8 @@ const getProduct = (id) =>
               currency
             }
           }
-          availableCount
         }
+        availableCount
         images {
           primary {
             thumbnail
@@ -165,4 +165,6 @@ const getProduct = (id) =>
     }
   );
 
-export { getProduct };
+export {
+  getProduct,
+};

@@ -20,6 +20,17 @@ export const HIDE_FILTER_BUTTON_TEXT = {
   }
 };
 
+export const AVAILABLE_COUNT_LABEL_TEXT = {
+  0: {
+    lang: 'uk',
+    value: 'В наявності'
+  },
+  1: {
+    lang: 'eng',
+    value: 'Available'
+  }
+};
+
 export const NONE_PATTERN = {
   0: {
     lang: 'uk',

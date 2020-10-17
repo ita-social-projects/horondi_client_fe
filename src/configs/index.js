@@ -367,3 +367,14 @@ export const profileFields = [
 ];
 
 export const carouselInterval = 5000;
+
+export const moreHeaderButton = [
+  {
+    lang: 'uk',
+    value: 'Більше'
+  },
+  {
+    lang: 'en',
+    value: 'More'
+  }
+];

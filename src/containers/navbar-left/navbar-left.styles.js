@@ -29,5 +29,17 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 900px)': {
       display: 'none'
     }
+  },
+  moreItem: {
+    minWidth: '6rem',
+    margin: '0.5rem',
+    borderRadius: 0
+  },
+  moreItemLink: {
+    textDecoration: 'none',
+    fontSize: '1.2rem',
+    fontFamily: 'Montserrat',
+    textTransform: 'uppercase',
+    color: '#000'
   }
 }));

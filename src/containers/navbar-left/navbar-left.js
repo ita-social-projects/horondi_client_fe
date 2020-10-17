@@ -1,34 +1,66 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import Menu from '@material-ui/core/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './navbar-left.styles';
-import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
+import { getAllHeaderLinks } from '../../redux/header-links/header-links.actions';
 
-import { LOGO } from '../../configs';
+import { LOGO, moreHeaderButton } from '../../configs';
+import { MenuItem } from '@material-ui/core';
 
 const NavbarLeft = () => {
-  const { categories, language } = useSelector(({ Categories, Language }) => ({
-    categories: Categories.list,
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllHeaderLinks());
+  }, [dispatch]);
+
+  const { linksList, language } = useSelector(({ HeaderLinks, Language }) => ({
+    linksList: HeaderLinks.linksList,
     language: Language.language
   }));
+
   const styles = useStyles();
 
-  const categoriesList = categories
-    ? categories
-      .filter(({ isMain }) => isMain)
-      .map(({ _id, name }) => (
-        <Link
-          key={_id}
-          className={styles.link}
-          to={`/${getCategoryURL(name)}`}
-        >
-          {name[language].value}
-        </Link>
-      ))
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const navbarList = linksList
+    ? linksList
+        .filter(({ priority }) => priority <= 3)
+        .map(({ _id, title, link }) => (
+          <Link key={_id} className={styles.link} to={link}>
+            {title[language].value}
+          </Link>
+        ))
     : null;
+
+  const moreDropDownList =
+    linksList.length > 3
+      ? linksList
+          .filter(({ priority }) => priority > 3)
+          .map(({ _id, title, link }) => (
+            <MenuItem
+              key={_id}
+              className={styles.moreItem}
+              onClick={handleClose}
+            >
+              <Link to={link} className={styles.moreItemLink}>
+                {title[language].value}
+              </Link>
+            </MenuItem>
+          ))
+      : null;
 
   return (
     <Toolbar>
@@ -37,7 +69,39 @@ const NavbarLeft = () => {
           {LOGO}
         </Link>
       </Typography>
-      {categoriesList}
+      {navbarList}
+      {!!moreDropDownList && (
+        <div>
+          <Link
+            borderRadius={0}
+            aria-controls='customized-menu'
+            aria-haspopup='true'
+            className={styles.link}
+            onClick={handleClick}
+          >
+            {moreHeaderButton[language].value}
+          </Link>
+          <Menu
+            className={styles.menu}
+            anchorEl={anchorEl}
+            keepMounted
+            elevation={0}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center'
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            {moreDropDownList}
+          </Menu>
+        </div>
+      )}
     </Toolbar>
   );
 };

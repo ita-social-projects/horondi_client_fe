@@ -4,7 +4,7 @@ import {
 } from './business-pages.types';
 
 const initialState = {
-  loading: true,
+  loading: false,
   pages: {
     aboutUs: {},
     contacts: {},

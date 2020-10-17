@@ -16,9 +16,10 @@ import Snackbar from './snackbar/snackbar.reducer';
 import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
+import Checkout from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 
-const rootReducer = history =>
+const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     User,
@@ -35,6 +36,7 @@ const rootReducer = history =>
     Model,
     Currency,
     Comments,
+    Checkout,
     BusinessPages,
     Chat
   });

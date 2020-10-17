@@ -26,11 +26,11 @@ const EditableField = ({
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { language, productId, userEmail } = useSelector(
+  const { language, productId, userData } = useSelector(
     ({ Products, Language, User }) => ({
       productId: Products.product._id,
       language: Language.language,
-      userEmail: User.userData.email
+      userData: User.userData
     })
   );
 
@@ -50,7 +50,7 @@ const EditableField = ({
     setTextValidated(true);
   }, [setEditableText, setTextValidated, text]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { value, name } = event.target;
     const { text } = formRegExp;
     const filteredText = filterText(value, name);
@@ -60,22 +60,23 @@ const EditableField = ({
   };
 
   const handleSubmit = () => {
-    if (text.trim() !== editableText.trim()) {
-      setShouldValidate(true);
-      if (textValidated) {
-        dispatch(
-          updateComment({
-            show: true,
-            product: productId,
-            comment: commentId,
-            text: editableText,
-            email: userEmail,
-            firstName: username
-          })
-        );
-      }
+    setShouldValidate(true);
+    if (text.trim() === editableText.trim()) {
+      setEditable(false);
+    } else if (textValidated) {
+      dispatch(
+        updateComment({
+          show: true,
+          product: productId,
+          comment: commentId,
+          text: editableText,
+          firstName: username,
+          email: userData.email,
+          images: userData.images
+        })
+      );
+      setEditable(false);
     }
-    setEditable(false);
   };
 
   return (
@@ -87,7 +88,7 @@ const EditableField = ({
         value={editableText}
         className={styles.editableText}
         variant='outlined'
-        onChange={e => handleChange(e)}
+        onChange={(e) => handleChange(e)}
         error={!textValidated && shouldValidate}
         helperText={
           !textValidated && shouldValidate

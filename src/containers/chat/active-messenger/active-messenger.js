@@ -30,7 +30,9 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const Alert = props => <MuiAlert elevation={6} variant='filled' {...props} />;
+  const Alert = (props) => (
+    <MuiAlert elevation={6} variant='filled' {...props} />
+  );
 
   const handleValidForms = () => {
     setShouldValidate(true);
@@ -48,7 +50,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
       sendEmail({
         email,
         senderName: firstName,
-        text: message
+        text: message,
+        language
       })
     );
     handleClick();
@@ -91,7 +94,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
         setValid: setFirstNameValidated
       },
       type: 'text',
-      regExp: formRegExp.nameForChat
+      regExp: formRegExp.name
     },
     email: {
       inputName: 'email',
@@ -155,7 +158,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
               !validation.value && shouldValidate ? `${errorMessage}` : ''
             }
             className={style.dataInput}
-            onChange={e => onChange(e, validation.setValid, regExp)}
+            onChange={(e) => onChange(e, validation.setValid, regExp)}
             value={value}
             type={type}
           />

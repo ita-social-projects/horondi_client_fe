@@ -1,16 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  categoryItem: props => ({
+  categoryItem: (props) => ({
     backgroundImage: `url(${props.image})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '25em',
-    height: '30em',
-    margin: '2em',
+    width: 'calc(100% - 40px)',
+    height: '500px',
+    margin: '20px',
     cursor: 'pointer',
     borderRadius: 5,
     boxShadow: '0px 5px 8px #c5c5c5',
@@ -18,6 +18,10 @@ export const useStyles = makeStyles(() => ({
       '& span': {
         fontSize: 30
       }
+    },
+    '@media (max-width: 768px)': {
+      width: 'calc(100% - 40px)',
+      height: '420px'
     }
   }),
   categoryNameWrapper: {

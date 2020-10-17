@@ -4,6 +4,11 @@ import {
   SET_BUSINESS_PAGE
 } from './business-pages.types';
 
+const getBusinessPageByCode = (code) => ({
+  type: GET_BUSINESS_PAGE_BY_CODE,
+  payload: code
+});
+
 const setBusinessPage = (businessPage) => ({
   type: SET_BUSINESS_PAGE,
   payload: {
@@ -15,11 +20,6 @@ const setBusinessPage = (businessPage) => ({
       )
       .join('')
   }
-});
-
-const getBusinessPageByCode = (code) => ({
-  type: GET_BUSINESS_PAGE_BY_CODE,
-  payload: code
 });
 
 const setLoading = (loading) => ({

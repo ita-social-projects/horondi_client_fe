@@ -1,5 +1,4 @@
-import { gql } from '@apollo/client';
-import getItems, { setItems, client } from '../../utils/client';
+import getItems from '../../utils/client';
 
 const getProduct = (id) =>
   getItems(
@@ -109,7 +108,7 @@ const getProduct = (id) =>
             email
             name
             images {
-              medium
+              thumbnail
             }
           }
         }

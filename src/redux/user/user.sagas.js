@@ -12,7 +12,8 @@ import {
   setConfirmationEmailStatus,
   setUserIsConfirmed,
   setConfirmationLoading,
-  setRecoveryLoading
+  setRecoveryLoading,
+  setUserOrders
 } from './user.actions';
 import {
   LOGIN_USER,
@@ -23,13 +24,14 @@ import {
   REGISTER_USER,
   PRESERVE_USER,
   UPDATE_USER,
-  SEND_CONFIRMATION_EMAIL
+  SEND_CONFIRMATION_EMAIL,
+  GET_USER_ORDERS
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
 import { setToLocalStorage } from '../../services/local-storage.service';
 
-export const loginUser = data => {
+export const loginUser = (data) => {
   const query = `
   mutation login($user: LoginInput!){
   loginUser(
@@ -62,7 +64,7 @@ export const loginUser = data => {
   return setItems(query, data);
 };
 
-export const resetPassword = data => {
+export const resetPassword = (data) => {
   const query = `
   mutation reset($password: String!, $token: String!){
     resetPassword(password: $password, token: $token)
@@ -235,9 +237,10 @@ export function* handleUserPreserve() {
       }
     }`
     );
-    if (user.data.getUserByToken.statusCode === 401) {
-      yield setToLocalStorage('accessToken', null);
-    } else if (!user.data.getUserByToken) {
+    if (
+      user.data.getUserByToken.statusCode >= 400 ||
+      !user.data.getUserByToken
+    ) {
       yield setToLocalStorage('accessToken', null);
     } else {
       yield put(setUser(user.data.getUserByToken));
@@ -319,6 +322,46 @@ export function* handleSendConfirmation({ payload }) {
   }
 }
 
+export function* handleGetUserOrders() {
+  try {
+    yield put(setUserLoading(true));
+    const res = yield call(
+      getItems,
+      `
+       {
+        getUserOrders {
+          _id
+          dateOfCreation
+          status
+          items {
+            name {
+              value
+            }
+            bottomMaterial{
+              value
+            }
+            quantity
+            actualPrice {
+              value
+              currency
+            }
+          }
+          totalItemsPrice {
+            value
+            currency
+          }
+        }
+      }
+    `
+    );
+    yield put(setUserOrders(res.data.getUserOrders));
+    yield put(setUserLoading(false));
+  } catch (e) {
+    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
+    yield put(push('/error-page'));
+  }
+}
+
 export default function* userSaga() {
   yield takeEvery(LOGIN_USER, handleUserLoad);
   yield takeEvery(CONFIRM_USER, handleUserConfirm);
@@ -329,4 +372,5 @@ export default function* userSaga() {
   yield takeEvery(PRESERVE_USER, handleUserPreserve);
   yield takeEvery(UPDATE_USER, handleUpdateUser);
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
+  yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
 }

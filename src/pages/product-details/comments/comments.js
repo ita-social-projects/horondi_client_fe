@@ -59,15 +59,20 @@ const Comments = () => {
 
   const [rate, setRate] = useState(0);
 
-  const { _id, email: userEmail, firstName: userName, purchasedProduct } =
-    userData || {};
+  const {
+    _id,
+    email: userEmail,
+    firstName: userName,
+    purchasedProducts,
+    images
+  } = userData || {};
 
   const hasBought = useMemo(
     () =>
-      purchasedProduct
-        ? purchasedProduct.some(product => product === productId)
+      purchasedProducts
+        ? purchasedProducts.some((product) => product === productId)
         : null,
-    [purchasedProduct, productId]
+    [purchasedProducts, productId]
   );
 
   const rateTip = useMemo(
@@ -88,10 +93,11 @@ const Comments = () => {
             user: _id,
             email: userEmail,
             firstName: userName,
-            product: productId
+            product: productId,
+            images: images
           }
         : { ...COMMENT_DATA, product: productId },
-    [_id, productId, userEmail, userName]
+    [_id, productId, userEmail, userName, images]
   );
 
   useEffect(() => {
@@ -137,7 +143,7 @@ const Comments = () => {
   const userFields = {
     firstNameField: {
       inputName: 'firstName',
-      errorMessage: errorMessages[language].value.firstname,
+      errorMessage: errorMessages[language].value.firstName,
       value: firstName,
       onChange: handleChange,
       validation: {
@@ -236,7 +242,7 @@ const Comments = () => {
                         ? `${errorMessage}`
                         : ''
                     }
-                    onChange={e => onChange(e, validation.setValid, regExp)}
+                    onChange={(e) => onChange(e, validation.setValid, regExp)}
                     value={value}
                     type={type}
                     multiline={multiline}
@@ -253,11 +259,10 @@ const Comments = () => {
           </Button>
           {commentsLoading && (
             <div className={styles.loader}>
-              <Loader />
+              <Loader width={40} height={40} />
             </div>
           )}
         </div>
-        <div className={styles.vovsa} />
       </form>
       {commentsList}
       <SnackbarItem />

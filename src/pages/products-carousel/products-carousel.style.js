@@ -17,5 +17,12 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     opacity: '0.7',
     top: '0'
+  },
+  center: {
+    width: '3rem',
+    margin: '22rem auto',
+    '@media (max-width: 1400px)': {
+      margin: '13rem auto'
+    }
   }
 }));

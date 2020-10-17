@@ -24,8 +24,8 @@ import { setComments } from '../comments/comments.actions';
 
 export function* handleFilterLoad() {
   try {
-    const state = yield select(state => state.Products);
-    const currency = yield select(state => state.Currency.currency);
+    const state = yield select((state) => state.Products);
+    const currency = yield select((state) => state.Currency.currency);
     const products = yield call(
       getItems,
       `query(
@@ -65,6 +65,7 @@ export function* handleFilterLoad() {
               items{
                 _id
                 purchasedCount
+                availableCount
                 name {
                   lang
                   value

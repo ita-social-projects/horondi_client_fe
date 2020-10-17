@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import useStyles from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
+import { AVAILABLE_COUNT_LABEL_TEXT } from '../../../translations/product-list.translations';
 
 const ProductListItem = ({ product, category }) => {
   const styles = useStyles({
@@ -25,8 +26,18 @@ const ProductListItem = ({ product, category }) => {
         {product.name[language].value}
         <StarRating size='small' readOnly rate={product.rate} />
         <div>
-          <FontAwesomeIcon icon={currencySign} />
-          {product.basePrice[currency].value / 100}
+          <span className={styles.title}>
+            <span>
+              <FontAwesomeIcon icon={currencySign} />
+              {product.basePrice[currency].value / 100}
+            </span>
+            {!!product.availableCount && (
+              <span>
+                {AVAILABLE_COUNT_LABEL_TEXT[language].value}:{' '}
+                {product.availableCount}
+              </span>
+            )}
+          </span>
         </div>
       </Card>
     </Link>

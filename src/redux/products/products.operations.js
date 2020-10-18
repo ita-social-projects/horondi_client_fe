@@ -165,4 +165,6 @@ const getProduct = (id) =>
     }
   );
 
-export { getProduct };
+export {
+  getProduct,
+};

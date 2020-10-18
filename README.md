@@ -237,6 +237,8 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 [![@olya011](https://avatars3.githubusercontent.com/u/49495443?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/olya011)
 [![@Vika-Bodnar](https://avatars2.githubusercontent.com/u/71330682?s=200&u=6c3b98868d6197bd41e3182c24c477343d355e04&v=4)](https://github.com/Vika-Bodnar)
+[![@chelochev](https://avatars0.githubusercontent.com/u/66883720?s=200&u=7eec35db41587211874a2bfe962cbb6ca4e8e99a&v=4)](https://github.com/chelochev)
+
 
 ### Database team
 

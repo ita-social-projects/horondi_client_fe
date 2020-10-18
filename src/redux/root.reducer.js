@@ -18,6 +18,7 @@ import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
 import Checkout from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
+import HeaderLinks from './header-links/header-links.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -38,7 +39,8 @@ const rootReducer = (history) =>
     Comments,
     Checkout,
     BusinessPages,
-    Chat
+    Chat,
+    HeaderLinks
   });
 
 export default rootReducer;

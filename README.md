@@ -7,6 +7,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
 [![GitHub issues](https://img.shields.io/github/issues/ita-social-projects/horondi_client_fe)](https://github.com/ita-social-projects/horondi_client_fe/issues)
 [![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/horondi_client_fe?style=flat-square)](https://github.com/ita-social-projects/Horondi_client_fe/pulls)
 [![GitHub license](https://img.shields.io/github/license/ita-social-projects/horondi_client_fe)](https://github.com/ita-social-projects/horondi_client_fe/blob/master/LICENSE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=horondi_horondi_client_fe&metric=alert_status)](https://sonarcloud.io/dashboard?id=horondi_horondi_client_fe)
 
 ---
 
@@ -23,6 +24,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
   - [Rules and guidelines](#Rules-and-guidelines)
   - [Testing](#Testing)
   - [Generator](#Generator)
+  - [Chat](#Chat)
 - [Contributing](#contributing)
   - [git flow](#git-flow)
   - [issue flow](#git-flow)
@@ -166,6 +168,8 @@ Checks:
 
 1. Use `data-cy` as selector
 
+---
+
 ### Generator
 
 Command `npm run generate` is used to run [graphql code generator](https://graphql-code-generator.com)
@@ -182,28 +186,84 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 ## Contributing
 
+You're encouraged to contribute to our project if you've found any issues or missing functionality that you would want to see. Here you can see [the list of issues](https://github.com/ita-social-projects/horondi_client_fe/issues) and here you can create [a new issue](https://github.com/ita-social-projects/horondi_client_fe/issues/new/choose).
+
+Before sending any pull request, please discuss requirements/changes to be implemented using an existing issue or by creating a new one. All pull requests should be done into `development` branch.
+
+There are three GitHub projects: [horondi_client_fe](https://github.com/ita-social-projects/horondi_client_fe) for frontend part, [horondi_client_be](https://github.com/ita-social-projects/horondi_client_be) for backend part and [horondi_admin](https://github.com/ita-social-projects/horondi_admin). Every project has it's own issues.
+
+Every pull request should be linked to an issue. So if you make changes on frontend, backend or admin parts you should create an issue with a link to corresponding requirement (story, task or epic).
+
+All Pull Requests should start from prefix _#xxx-yyy_ where _xxx_ - task number and and _yyy_ - short description
+e.g. #020-createAdminPanel
+
+---
+
 ### Git flow
 
-> To get started...
+We have **master** , **development** and **feature** branches.  
+All **feature** branches must be merged into [development](https://github.com/ita-social-projects/horondi_client_fe/tree/development) branch!!!
+Only the release should merge into the main branch!!!
+
+![Github flow](<https://wac-cdn.atlassian.com/dam/jcr:b5259cce-6245-49f2-b89b-9871f9ee3fa4/03%20(2).svg?cdnVersion=1312>)
 
 #### Step 1
 
 - **Option 1**
 
-  - 🍴 Fork this repo!
+  - 👯 Clone this repo to your local machine using `https://github.com/ita-social-projects/horondi_client_fe.git`
 
 - **Option 2**
-  - 👯 Clone this repo to your local machine using `https://github.com/ita-social-projects/horondi_client_fe.git`
+
+  - create new branch from development branch
 
 #### Step 2
 
-- **HACK AWAY!** 🔨🔨🔨
+- add some commits to your new branch
 
 #### Step 3
 
 - 🔃 Create a new pull request using <a href="https://github.com/ita-social-projects/horondi_client_fe/compare/" target="_blank">github.com/ita-social-projects/horondi_client_fe</a>.
 
+---
+
 ### Issue flow
+
+#### Step 1
+
+-go to [!issues](https://github.com/ita-social-projects/horondi_client_fe/issues) and click `New issue` button
+
+#### Step 2
+
+when creating [!issue](https://github.com/ita-social-projects/horondi_client_fe/issues/new/choose) you should add name of the issue, description, choose assignee, label, project. If issue is a `User Story` you should link it with corresponding tasks, and corresponding tasks should be linked to issue.
+
+#### Step 3
+
+if issue is in work it should be placed in proper column on dashboard according to its status.
+
+---
+
+### Chat.
+
+For run Facebook chat on your site you need two variables - FACEBOOK_PAGE_ID and FACEBOOK_APP_ID and write them
+in 'src -> containers -> chat -> chat.js' file.
+
+1. FACEBOOK_PAGE_ID.
+   You can find your page ID in menu under your avatar, button 'about' or 'more -> about'.
+   Then scroll to the down and find your Page ID.
+
+2. FACEBOOK_APP_ID
+   Go to https://developers.facebook.com/apps/ and choose 'Add a New App -> Manage Business Integration'.
+   Fills the forms and press 'Create App ID'. You can find your App ID at the top of page.
+
+3. After that you may go to left bar, and find 'Messenger -> Settings' and add your Facebook Business page ID in section
+   'Access Tokens'.
+
+4. Now go to your Facebook Business page -> Settings(Left bar) -> Advanced Messaging and find section 'Whitelisted
+   Domains'. Here you must add your domain to white list and save.
+
+More details you can find on official site
+https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/
 
 ---
 
@@ -238,7 +298,7 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 [![@olya011](https://avatars3.githubusercontent.com/u/49495443?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/olya011)
 [![@Vika-Bodnar](https://avatars2.githubusercontent.com/u/71330682?s=200&u=6c3b98868d6197bd41e3182c24c477343d355e04&v=4)](https://github.com/Vika-Bodnar)
 [![@chelochev](https://avatars0.githubusercontent.com/u/66883720?s=200&u=7eec35db41587211874a2bfe962cbb6ca4e8e99a&v=4)](https://github.com/chelochev)
-
+[![@Mary-Red](https://avatars0.githubusercontent.com/u/55394709?s=200&u=bcb5ad20d943f981a5a0d8ed09fb33bb9e878fc3&v=4)](https://github.com/Mary-Red)
 
 ### Database team
 
@@ -261,28 +321,6 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 ## Support
 
 ---
-
-### Implementing Facebook chat.
-
-For run Facebook chat on your site you need two variables - FACEBOOK_PAGE_ID and FACEBOOK_APP_ID and write them
-in 'src -> containers -> chat -> chat.js' file.
-
-1. FACEBOOK_PAGE_ID.
-   You can find your page ID in menu under your avatar, button 'about' or 'more -> about'.
-   Then scroll to the down and find your Page ID.
-
-2. FACEBOOK_APP_ID
-   Go to https://developers.facebook.com/apps/ and choose 'Add a New App -> Manage Business Integration'.
-   Fills the forms and press 'Create App ID'. You can find your App ID at the top of page.
-
-3. After that you may go to left bar, and find 'Messenger -> Settings' and add your Facebook Business page ID in section
-   'Access Tokens'.
-
-4. Now go to your Facebook Business page -> Settings(Left bar) -> Advanced Messaging and find section 'Whitelisted
-   Domains'. Here you must add your domain to white list and save.
-
-More details you can find on official site
-https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/
 
 #### License
 

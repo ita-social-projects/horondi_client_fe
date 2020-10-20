@@ -245,7 +245,6 @@ export const COMMENTS_TIME_OPTIONS = {
   day: 'numeric'
 };
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
-export const DEFAULT_SIZE = 'M';
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';

@@ -44,7 +44,6 @@ const SideBarItem = ({ name, language }) => {
 
   const handleClickk = (model) => {
     dispatch(setModelsFilter([model.action]));
-    console.log(model);
   };
 
   const dispatch = useDispatch();
@@ -52,7 +51,7 @@ const SideBarItem = ({ name, language }) => {
   return (
     <div>
       <ListItemText
-        button
+        button='true'
         onClick={handleClick}
         primary={name[language].value}
         className={styles.link}

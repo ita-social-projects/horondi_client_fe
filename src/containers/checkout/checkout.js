@@ -4,13 +4,13 @@ import OrderForm from './order-form';
 import Cart from '../../pages/cart';
 
 export const Checkout = () => {
-  const { cart } = useSelector(({ Cart }) => ({
-    cart: Cart.list
+  const { cartData } = useSelector(({ Cart }) => ({
+    cartData: Cart.list
   }));
   return (
     <>
       <Cart />
-      {cart.length && <OrderForm />}
+      {cartData.length && <OrderForm />}
     </>
   );
 };

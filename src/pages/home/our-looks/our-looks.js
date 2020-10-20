@@ -7,7 +7,12 @@ import { HOMEPAGE_LOOKS_IMAGES } from '../../../configs';
 import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 const OurLooks = () => {
-  const language = useSelector(({ Language }) => Language.language);
+  const { language, looksImages } = useSelector(
+    ({ Language, HomePageImages }) => ({
+      language: Language.language,
+      looksImages: HomePageImages.images
+    })
+  );
   const styles = useStyles();
 
   return (
@@ -16,7 +21,7 @@ const OurLooks = () => {
         {HOMEPAGE_TITLES[language].look}
       </Typography>
       <div className={styles.imageSection}>
-        {HOMEPAGE_LOOKS_IMAGES.map((imageSrc) => (
+        {looksImages.map((imageSrc) => (
           <div key={imageSrc} className={styles.imageWrapper}>
             <div
               className={styles.image}

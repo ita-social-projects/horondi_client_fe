@@ -13,6 +13,7 @@ import commentsSaga from './comments/comments.sagas';
 import checkoutSaga from './checkout/checkout.sagas';
 import chatSaga from './chat/chat.sagas';
 import headerLinksSaga from './header-links/header-links.sagas';
+import homeLooksImagesSaga from './home-page-looks/home-page-looks.sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -28,6 +29,7 @@ export default function* rootSaga() {
     checkoutSaga(),
     businessPagesSaga(),
     chatSaga(),
-    headerLinksSaga()
+    headerLinksSaga(),
+    homeLooksImagesSaga()
   ]);
 }

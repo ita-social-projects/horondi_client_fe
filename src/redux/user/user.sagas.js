@@ -57,7 +57,8 @@ export const loginUser = (data) => {
       appartment
       region
       zipcode
-    }
+		}
+		wishlist
   }
 }
   `;
@@ -228,7 +229,8 @@ export function* handleUserPreserve() {
           zipcode
           region
         }
-        confirmed
+				confirmed
+				wishlist
         }
         ... on Error {
           statusCode

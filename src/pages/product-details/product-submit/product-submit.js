@@ -22,19 +22,26 @@ import {
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product } = useSelector(
-    ({ Language, Products }) => ({
+  const { language, productToSend, product, userData } = useSelector(
+    ({ Language, Products, User }) => ({
       language: Language.language,
       productToSend: Products.productToSend,
-      product: Products.product
+      product: Products.product,
+      userData: User.userData
     })
   );
 
-  const wishlistItems = getFromLocalStorage('wishlist');
+  const wishlistItems = userData
+    ? userData.wishlist
+    : getFromLocalStorage('wishlist');
+
   const { selectedSize } = productToSend;
 
   const isWishful = useMemo(
-    () => wishlistItems.find((item) => product._id === item._id),
+    () =>
+      wishlistItems.find(
+        (item) => product._id === (userData ? item : item._id)
+      ),
     [product._id, wishlistItems]
   );
 

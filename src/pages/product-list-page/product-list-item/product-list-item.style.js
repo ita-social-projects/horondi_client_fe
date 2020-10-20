@@ -56,6 +56,10 @@ const useStyles = makeStyles(() => ({
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '12px'
+  },
+  title: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
 export default useStyles;

@@ -65,6 +65,7 @@ export function* handleFilterLoad() {
               items{
                 _id
                 purchasedCount
+                availableCount
                 name {
                   lang
                   value

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
 import AwesomeSlider from 'react-awesome-slider';
-import { useDispatch, useSelector } from 'react-redux';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
-
+import { Backdrop } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
+import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './products-carousel.style';
 import {
   setModelsFilter,

@@ -6,7 +6,7 @@ import { TextField, Tooltip, Button } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import useStyles from './editable-field.styles';
 
-import { formRegExp, TEXT } from '../../../../../configs';
+import { commentFields, formRegExp, TEXT } from '../../../../../configs';
 import { updateComment } from '../../../../../redux/comments/comments.actions';
 
 import {
@@ -69,7 +69,7 @@ const EditableField = ({
     <form onSubmit={handleSubmit}>
       <TextField
         multiline
-        rows={7}
+        rows={commentFields.text.rows}
         value={values.text}
         className={styles.editableText}
         variant='outlined'

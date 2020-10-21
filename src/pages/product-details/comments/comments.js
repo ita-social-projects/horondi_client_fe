@@ -35,11 +35,11 @@ const Comments = () => {
     productId,
     comments,
     userData,
-    limit
+    currentLimit
   } = useSelector(({ Products, Language, User, Comments }) => ({
     commentsLoading: Comments.commentsLoading,
     comments: Comments.comments,
-    limit: Comments.limit,
+    currentLimit: Comments.limit,
     productId: Products.product._id,
     language: Language.language,
     userData: User.userData
@@ -72,15 +72,13 @@ const Comments = () => {
     handleBlur,
     resetForm,
     setFieldValue,
-    setShouldValidate,
-    shouldValidate
+    setShouldValidate
   } = useCommentValidation(!!userData, onSubmit);
 
   const hasBought = useMemo(
     () =>
-      purchasedProducts
-        ? purchasedProducts.some((product) => product === productId)
-        : null,
+      !!purchasedProducts &&
+      purchasedProducts.some((product) => product === productId),
     [purchasedProducts, productId]
   );
 
@@ -96,7 +94,7 @@ const Comments = () => {
 
   const commentsList = comments
     ? comments
-        .slice(0, limit)
+        .slice(0, currentLimit)
         .map(({ text, date, _id, user }) => (
           <CommentsItem
             key={_id}
@@ -112,7 +110,7 @@ const Comments = () => {
     commentsList.length === comments.length && comments.length > commentsLimit;
 
   const handleCommentsReload = () => {
-    const newLimit = limitOption ? commentsLimit : limit + commentsLimit;
+    const newLimit = limitOption ? commentsLimit : currentLimit + commentsLimit;
     dispatch(setCommentsLimit(newLimit));
   };
 
@@ -150,8 +148,8 @@ const Comments = () => {
                     onBlur={handleBlur}
                     value={values[name]}
                     label={COMMENTS[language][name]}
-                    error={shouldValidate && !!errors[name]}
-                    helperText={shouldValidate && errors[name]}
+                    error={!!errors[name]}
+                    helperText={errors[name] || ''}
                     multiline={multiline}
                     rows={rows}
                     variant='outlined'

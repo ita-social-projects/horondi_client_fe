@@ -62,13 +62,13 @@ export function* handleUpdateComment({ payload }) {
     const updatedComment = yield call(updateComment, payload);
     if (updatedComment) {
       const comments = yield select(({ Comments }) => Comments.comments);
-      const commentToDelete = comments.findIndex(
+      const commentToUpdate = comments.findIndex(
         ({ _id }) => _id === updatedComment._id
       );
       const newComments = [
-        ...comments.slice(0, commentToDelete),
+        ...comments.slice(0, commentToUpdate),
         updatedComment,
-        ...comments.slice(commentToDelete + 1)
+        ...comments.slice(commentToUpdate + 1)
       ];
       yield put(setComments(newComments));
       yield put(setUpdatingComment(null));

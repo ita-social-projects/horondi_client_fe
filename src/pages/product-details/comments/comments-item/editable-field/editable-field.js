@@ -56,8 +56,7 @@ const EditableField = ({
     handleSubmit,
     handleBlur,
     setFieldValue,
-    setShouldValidate,
-    shouldValidate
+    setShouldValidate
   } = useCommentValidation(!!userData, onSubmit, text);
 
   const handleCommentChange = (e) => {
@@ -75,8 +74,8 @@ const EditableField = ({
         variant='outlined'
         onChange={handleCommentChange}
         onBlue={handleBlur}
-        error={shouldValidate && !!errors.text}
-        helperText={shouldValidate ? errors.text : ''}
+        error={!!errors.text}
+        helperText={errors.text || ''}
         name={TEXT}
       />
       <div className={styles.editForm}>

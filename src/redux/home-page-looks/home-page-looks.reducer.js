@@ -1,7 +1,11 @@
-import { SET_HOME_IMAGE_LOOKS } from './home-page-looks.types';
+import {
+  SET_HOME_IMAGE_LOOKS,
+  SET_HOME_IMAGE_LOOKS_LOADING
+} from './home-page-looks.types';
 
 const initialState = {
-  imageList: []
+  imageList: [],
+  homeImagesLoading: true
 };
 
 const homePageImagesReducer = (state = initialState, action = {}) => {
@@ -10,6 +14,12 @@ const homePageImagesReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         imageList: action.payload
+      };
+
+    case SET_HOME_IMAGE_LOOKS_LOADING:
+      return {
+        ...state,
+        homeImagesLoading: action.payload
       };
 
     default:

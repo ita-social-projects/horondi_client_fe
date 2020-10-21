@@ -30,5 +30,12 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '2em',
     marginBottom: '1.5em',
     color: theme.palette.textColor
+  },
+  center: {
+    width: '3rem',
+    margin: '22rem auto',
+    '@media (max-width: 1400px)': {
+      margin: '13rem auto'
+    }
   }
 }));

@@ -1,19 +1,36 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './our-looks.style';
-import { HOMEPAGE_LOOKS_IMAGES } from '../../../configs';
+import { IMG_URL } from '../../../configs';
+import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
+import { Loader } from '../../../components/loader/loader';
 
 const OurLooks = () => {
-  const { language, looksImages } = useSelector(
+  const { language, looksImages, loading } = useSelector(
     ({ Language, HomePageImages }) => ({
       language: Language.language,
-      looksImages: HomePageImages.images
+      looksImages: HomePageImages.imageList,
+      loading: HomePageImages.homeImagesLoading
     })
   );
   const styles = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllHomeImageLooks());
+  }, [dispatch]);
+
+  console.log(loading, looksImages);
+  if (loading) {
+    return (
+      <div className={styles.center}>
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -21,14 +38,18 @@ const OurLooks = () => {
         {HOMEPAGE_TITLES[language].look}
       </Typography>
       <div className={styles.imageSection}>
-        {looksImages.map((imageSrc) => (
-          <div key={imageSrc} className={styles.imageWrapper}>
-            <div
-              className={styles.image}
-              style={{ backgroundImage: `url(${imageSrc})` }}
-            />
-          </div>
-        ))}
+        {looksImages && looksImages.length > 0
+          ? looksImages.map((image) => (
+              <div key={image.images.medium} className={styles.imageWrapper}>
+                <div
+                  className={styles.image}
+                  style={{
+                    backgroundImage: `url(${IMG_URL}${image.images.medium})`
+                  }}
+                />
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );

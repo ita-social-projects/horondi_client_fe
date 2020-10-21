@@ -33,9 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   center: {
     width: '3rem',
-    margin: '22rem auto',
-    '@media (max-width: 1400px)': {
-      margin: '13rem auto'
-    }
+    margin: 'auto',
+    paddingBottom: '11rem'
   }
 }));

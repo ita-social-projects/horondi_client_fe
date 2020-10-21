@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   imageList: [],
-  homeImagesLoading: true
+  homeImagesLoading: false
 };
 
 const homePageImagesReducer = (state = initialState, action = {}) => {

@@ -23,7 +23,6 @@ const OurLooks = () => {
     dispatch(getAllHomeImageLooks());
   }, [dispatch]);
 
-  console.log(loading, looksImages);
   if (loading) {
     return (
       <div className={styles.center}>
@@ -38,7 +37,7 @@ const OurLooks = () => {
         {HOMEPAGE_TITLES[language].look}
       </Typography>
       <div className={styles.imageSection}>
-        {looksImages && looksImages.length > 0
+        {looksImages.length
           ? looksImages.map((image) => (
               <div key={image.images.medium} className={styles.imageWrapper}>
                 <div

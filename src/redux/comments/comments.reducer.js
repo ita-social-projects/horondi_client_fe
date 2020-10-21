@@ -1,3 +1,5 @@
+import { commentsLimit } from '../../configs';
+
 import {
   SET_COMMENTS,
   SET_RATE,
@@ -10,7 +12,7 @@ export const initialState = {
   commentsLoading: false,
   updatingComment: null,
   comments: [],
-  limit: 10
+  limit: commentsLimit
 };
 
 const commentsReducer = (state = initialState, action = {}) => {

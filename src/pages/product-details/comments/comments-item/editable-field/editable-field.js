@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import useCommentValidation from '../../../../../hooks/use-comment-validation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
+import { TextField, Tooltip, Button } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import useValidation from '../../../../../utils/use-validation';
 import useStyles from './editable-field.styles';
 
-import { errorMessages, formRegExp, TEXT } from '../../../../../configs';
+import { formRegExp, TEXT } from '../../../../../configs';
 import { updateComment } from '../../../../../redux/comments/comments.actions';
 
 import {
@@ -21,91 +19,78 @@ const EditableField = ({
   text,
   handleOpen,
   commentId,
-  username
+  firstName
 }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { language, productId, userData } = useSelector(
+  const { language, product, userData } = useSelector(
     ({ Products, Language, User }) => ({
-      productId: Products.product._id,
+      product: Products.product._id,
       language: Language.language,
       userData: User.userData
     })
   );
 
-  const {
-    editableText,
-    textValidated,
-    shouldValidate,
-    setTextValidated,
-    setShouldValidate,
-    setEditableText,
-    filterText,
-    validateField
-  } = useValidation();
+  const { email, images } = userData;
 
-  useEffect(() => {
-    setEditableText(text);
-    setTextValidated(true);
-  }, [setEditableText, setTextValidated, text]);
-
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    const { text } = formRegExp;
-    const filteredText = filterText(value, name);
-
-    setEditableText(filteredText);
-    validateField(filteredText, text, setTextValidated);
+  const onSubmit = ({ text }) => {
+    dispatch(
+      updateComment({
+        product,
+        text,
+        email,
+        images,
+        firstName,
+        comment: commentId,
+        show: true
+      })
+    );
+    setShouldValidate(false);
+    setEditable(false);
   };
 
-  const handleSubmit = () => {
-    setShouldValidate(true);
-    if (text.trim() === editableText.trim()) {
-      setEditable(false);
-    } else if (textValidated) {
-      dispatch(
-        updateComment({
-          show: true,
-          product: productId,
-          comment: commentId,
-          text: editableText,
-          firstName: username,
-          email: userData.email,
-          images: userData.images
-        })
-      );
-      setEditable(false);
-    }
+  const {
+    values,
+    errors,
+    handleSubmit,
+    handleBlur,
+    setFieldValue,
+    setShouldValidate,
+    shouldValidate
+  } = useCommentValidation(!!userData, onSubmit, text);
+
+  const handleCommentChange = (e) => {
+    const value = e.target.value.replace(formRegExp.link, '');
+    setFieldValue(TEXT, value);
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <TextField
-        required
         multiline
         rows={7}
-        value={editableText}
+        value={values.text}
         className={styles.editableText}
         variant='outlined'
-        onChange={(e) => handleChange(e)}
-        error={!textValidated && shouldValidate}
-        helperText={
-          !textValidated && shouldValidate
-            ? `${errorMessages[language].value.text}`
-            : ''
-        }
-        type='text'
+        onChange={handleCommentChange}
+        onBlue={handleBlur}
+        error={shouldValidate && !!errors.text}
+        helperText={shouldValidate ? errors.text : ''}
         name={TEXT}
       />
       <div className={styles.editForm}>
         <Button
           className={styles.editButton}
-          onClick={() => setEditable(false)}
+          onClick={setEditable.bind(this, false)}
         >
           {PDP_BUTTONS[language].cancelButton}
         </Button>
-        <Button className={styles.editButton} onClick={handleSubmit}>
+        <Button
+          type='submit'
+          className={styles.editButton}
+          onClick={setShouldValidate.bind(this, true)}
+        >
           {PDP_BUTTONS[language].submitButton}
         </Button>
         <Tooltip title={TOOLTIPS[language].delete} placement='right'>
@@ -115,7 +100,7 @@ const EditableField = ({
           />
         </Tooltip>
       </div>
-    </div>
+    </form>
   );
 };
 

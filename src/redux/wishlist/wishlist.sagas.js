@@ -35,7 +35,7 @@ export function* handleAddWishlistItem({ payload }) {
 
     const userData = yield select(({ User }) => User.userData);
     if (userData) {
-      userData.wishlist = [...userData.wishlist, payload._id];
+      userData.wishlist = [...userData.wishlist, payload];
       yield put(setUser(userData));
       yield call(addProductToWishlist, userData._id, payload._id);
     }
@@ -54,7 +54,9 @@ export function* handleRemoveWishlistItem({ payload }) {
 
   const userData = yield select(({ User }) => User.userData);
   if (userData) {
-    userData.wishlist = userData.wishlist.filter((id) => id !== payload._id);
+    userData.wishlist = userData.wishlist.filter(
+      ({ _id }) => _id !== payload._id
+    );
     yield put(setUser(userData));
     yield call(removeProductFromWishlist, userData._id, payload._id);
   }

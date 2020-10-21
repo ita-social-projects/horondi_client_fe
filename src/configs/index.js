@@ -151,8 +151,7 @@ export const formRegExp = {
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   text: /^.{2,700}$/gm,
-  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
-  script: /(script)/g
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };
 
 export const placeholders = {
@@ -351,6 +350,12 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
+export const commentFields = {
+  firstName: { name: 'firstName' },
+  email: { name: 'email' },
+  text: { name: 'text', multiline: true, rows: 7 }
+};
+
 export const profileFields = [
   'firstName',
   'lastName',
@@ -377,3 +382,5 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const commentsLimit = 10;

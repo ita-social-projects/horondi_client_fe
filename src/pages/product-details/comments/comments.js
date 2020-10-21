@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
-import useValidation from '../../../utils/use-validation';
+import { Button, Tooltip, TextField } from '@material-ui/core';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import useStyles from './comments.styles';
 
 import CommentsItem from './comments-item';
@@ -13,13 +12,18 @@ import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 
 import {
-  COMMENT_DATA,
   TEXT,
+  commentFields,
   formRegExp,
-  errorMessages
+  commentsLimit
 } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
-import { addComment } from '../../../redux/comments/comments.actions';
+import {
+  addComment,
+  setCommentsLimit
+} from '../../../redux/comments/comments.actions';
+import LimitButton from './limit-button/limit-button';
+import useCommentValidation from '../../../hooks/use-comment-validation';
 
 const Comments = () => {
   const styles = useStyles();
@@ -41,33 +45,36 @@ const Comments = () => {
     userData: User.userData
   }));
 
-  const {
-    firstNameValidated,
-    emailValidated,
-    textValidated,
-    allFieldsValidated,
-    shouldValidate,
-    comment,
-    setFirstNameValidated,
-    setEmailValidated,
-    setTextValidated,
-    setAllFieldsValidated,
-    setShouldValidate,
-    setComment,
-    clearFields,
-    filterText,
-    validateField
-  } = useValidation();
-
   const [rate, setRate] = useState(0);
 
+  const { _id, email, firstName, purchasedProducts, images } = userData || {};
+
+  const onSubmit = (values) => {
+    const userFields = _id ? { email, firstName, images, user: _id } : {};
+    dispatch(
+      addComment({
+        ...values,
+        ...userFields,
+        product: productId,
+        show: true,
+        rate
+      })
+    );
+    setShouldValidate(false);
+    resetForm();
+  };
+
   const {
-    _id,
-    email: userEmail,
-    firstName: userName,
-    purchasedProducts,
-    images
-  } = userData || {};
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    resetForm,
+    setFieldValue,
+    setShouldValidate,
+    shouldValidate
+  } = useCommentValidation(!!userData, onSubmit);
 
   const hasBought = useMemo(
     () =>
@@ -87,104 +94,6 @@ const Comments = () => {
     [language, _id, hasBought]
   );
 
-  const commentToSend = useMemo(
-    () =>
-      _id
-        ? {
-            ...COMMENT_DATA,
-            user: _id,
-            email: userEmail,
-            firstName: userName,
-            product: productId,
-            images: images
-          }
-        : { ...COMMENT_DATA, product: productId },
-    [_id, productId, userEmail, userName, images]
-  );
-
-  useEffect(() => {
-    setComment(commentToSend);
-  }, [setComment, commentToSend]);
-
-  useEffect(() => {
-    if (userData && textValidated) {
-      setAllFieldsValidated(true);
-    } else if (firstNameValidated && emailValidated && textValidated) {
-      setAllFieldsValidated(true);
-    } else {
-      setAllFieldsValidated(false);
-    }
-  }, [
-    firstNameValidated,
-    emailValidated,
-    textValidated,
-    setAllFieldsValidated,
-    userData
-  ]);
-
-  const { firstName, email, text } = comment;
-
-  const handleChange = (event, setValid, regExp) => {
-    const { value, name } = event.target;
-    const filteredText = filterText(value, name);
-
-    setComment({ ...comment, [name]: filteredText });
-    validateField(filteredText, regExp, setValid);
-  };
-
-  const handleComment = () => {
-    setShouldValidate(true);
-    if (allFieldsValidated) {
-      dispatch(addComment({ ...comment, rate }));
-      setComment(commentToSend);
-      setRate(0);
-      clearFields();
-    }
-  };
-
-  const userFields = {
-    firstNameField: {
-      inputName: 'firstName',
-      errorMessage: errorMessages[language].value.firstName,
-      value: firstName,
-      onChange: handleChange,
-      validation: {
-        value: firstNameValidated,
-        setValid: setFirstNameValidated
-      },
-      type: TEXT,
-      regExp: formRegExp.name,
-      show: !userData
-    },
-    email: {
-      inputName: 'email',
-      errorMessage: errorMessages[language].value.email,
-      value: email,
-      onChange: handleChange,
-      validation: {
-        value: emailValidated,
-        setValid: setEmailValidated
-      },
-      type: TEXT,
-      regExp: formRegExp.email,
-      show: !userData
-    },
-    text: {
-      inputName: TEXT,
-      errorMessage: errorMessages[language].value.text,
-      value: text,
-      onChange: handleChange,
-      validation: {
-        value: textValidated,
-        setValid: setTextValidated
-      },
-      type: TEXT,
-      regExp: formRegExp.text,
-      multiline: true,
-      rows: 7
-    }
-  };
-
   const commentsList = comments
     ? comments
         .slice(0, limit)
@@ -197,7 +106,20 @@ const Comments = () => {
             date={date}
           />
         ))
-    : null;
+    : [];
+
+  const limitOption =
+    commentsList.length === comments.length && comments.length > commentsLimit;
+
+  const handleCommentsReload = () => {
+    const newLimit = limitOption ? commentsLimit : limit + commentsLimit;
+    dispatch(setCommentsLimit(newLimit));
+  };
+
+  const handleCommentChange = (e) => {
+    const value = e.target.value.replace(formRegExp.link, '');
+    setFieldValue(commentFields.text.name, value);
+  };
 
   return (
     <div className={styles.comment}>
@@ -213,50 +135,38 @@ const Comments = () => {
           />
         </span>
       </Tooltip>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={styles.form}>
-          {Object.values(userFields).map(
-            ({
-              inputName,
-              errorMessage,
-              value,
-              onChange,
-              validation,
-              type,
-              regExp,
-              multiline = null,
-              rows = null,
-              show = true
-            }) =>
-              show ? (
-                <div key={inputName}>
+          {Object.values(commentFields).map(
+            ({ name, multiline = null, rows = null }) =>
+              ((name !== TEXT && !userData) || name === TEXT) && (
+                <div key={name}>
                   <TextField
-                    required
-                    className={`${
-                      inputName === TEXT ? styles.text : styles.input
-                    }`}
-                    label={COMMENTS[language][inputName]}
-                    variant='outlined'
-                    name={inputName}
-                    error={!validation.value && shouldValidate}
-                    helperText={
-                      !validation.value && shouldValidate
-                        ? `${errorMessage}`
-                        : ''
+                    className={`${name === TEXT ? styles.text : styles.input}`}
+                    name={name}
+                    onChange={
+                      name === TEXT ? handleCommentChange : handleChange
                     }
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
+                    onBlur={handleBlur}
+                    value={values[name]}
+                    label={COMMENTS[language][name]}
+                    error={shouldValidate && !!errors[name]}
+                    helperText={shouldValidate && errors[name]}
                     multiline={multiline}
                     rows={rows}
-                    data-cy={inputName}
+                    variant='outlined'
+                    data-cy={name}
                   />
                 </div>
-              ) : null
+              )
           )}
         </div>
         <div className={styles.submit}>
-          <Button className={styles.commentBtn} onClick={handleComment}>
+          <Button
+            type='submit'
+            className={styles.commentBtn}
+            onClick={setShouldValidate.bind(this, true)}
+          >
             {COMMENTS[language].submit}
           </Button>
           {commentsLoading && (
@@ -267,6 +177,16 @@ const Comments = () => {
         </div>
       </form>
       {commentsList}
+      {
+        <LimitButton
+          onClick={handleCommentsReload}
+          startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}
+        >
+          {limitOption
+            ? COMMENTS[language].hideBtn
+            : COMMENTS[language].loadMore}
+        </LimitButton>
+      }
       <SnackbarItem />
     </div>
   );

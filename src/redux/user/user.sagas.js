@@ -58,7 +58,17 @@ export const loginUser = (data) => {
       region
       zipcode
 		}
-		wishlist
+		wishlist {
+			_id
+			name {
+				lang
+				value
+			}
+			basePrice {
+				currency
+				value
+			}
+		}
   }
 }
   `;
@@ -230,7 +240,17 @@ export function* handleUserPreserve() {
           region
         }
 				confirmed
-				wishlist
+				wishlist {
+					_id
+					name {
+						lang
+						value
+					}
+					basePrice {
+						currency
+						value
+					}
+				}
         }
         ... on Error {
           statusCode

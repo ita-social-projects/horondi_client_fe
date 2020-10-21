@@ -46,15 +46,11 @@ export function* handleAddComment({ payload }) {
 
 export function* handleDeleteComment({ payload }) {
   try {
-    const deletedComment = yield call(deleteComment, payload);
-    if (deletedComment) {
-      const comments = yield select(({ Comments }) => Comments.comments);
-      const newComments = comments.filter(
-        ({ _id }) => _id !== deletedComment._id
-      );
-      yield put(setComments(newComments));
-      yield call(handleSnackbar, deleted);
-    }
+    const comments = yield select(({ Comments }) => Comments.comments);
+    const newComments = comments.filter(({ _id }) => _id !== payload.comment);
+    yield put(setComments(newComments));
+    yield call(handleSnackbar, deleted);
+    yield call(deleteComment, payload);
   } catch (e) {
     yield call(handleCommentsError);
   }

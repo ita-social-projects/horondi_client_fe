@@ -23,6 +23,10 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper
   },
+
+  list: {
+    margin: '10px'
+  },
   nested: {
     paddingLeft: theme.spacing(10)
   }

@@ -60,7 +60,7 @@ const SideBarItem = ({ name, language }) => {
       </ListItemText>
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>
-        <List>
+        <List className={styles.list}>
           {menuItems[language][name[1].value].map((model) => (
             <ListItem
               button

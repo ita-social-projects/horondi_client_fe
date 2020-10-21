@@ -30,10 +30,12 @@ const Comments = () => {
     language,
     productId,
     comments,
-    userData
+    userData,
+    limit
   } = useSelector(({ Products, Language, User, Comments }) => ({
     commentsLoading: Comments.commentsLoading,
     comments: Comments.comments,
+    limit: Comments.limit,
     productId: Products.product._id,
     language: Language.language,
     userData: User.userData
@@ -185,7 +187,7 @@ const Comments = () => {
 
   const commentsList = comments
     ? comments
-        .sort((a, b) => b.date - a.date)
+        .slice(0, limit)
         .map(({ text, date, _id, user }) => (
           <CommentsItem
             key={_id}

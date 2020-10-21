@@ -5,7 +5,8 @@ import {
   DELETE_COMMENT,
   SET_COMMENTS,
   SET_COMMENTS_LOADING,
-  SET_UPDATING_COMMENT
+  SET_UPDATING_COMMENT,
+  SET_COMMENTS_LIMIT
 } from './comments.types';
 
 export const setRate = (rate) => ({
@@ -40,5 +41,10 @@ export const setCommentsLoading = (payload) => ({
 
 export const setUpdatingComment = (payload) => ({
   type: SET_UPDATING_COMMENT,
+  payload
+});
+
+export const setCommentsLimit = (payload) => ({
+  type: SET_COMMENTS_LIMIT,
   payload
 });

@@ -1,31 +1,5 @@
 import { gql } from '@apollo/client';
-import getItems, { setItems, client } from '../../utils/client';
-
-const getComments = async (id) => {
-  const res = await getItems(
-    `query($id: ID!) {
-        getAllCommentsByProduct(productId: $id) {
-          ... on Comment {
-            _id
-            text
-            date
-            user {
-              email
-              name
-              images {
-                thumbnail 
-              }
-            }
-          }
-        }
-    }`,
-    {
-      id
-    }
-  );
-  await client.resetStore();
-  return res.data.getAllCommentsByProduct;
-};
+import { setItems, client } from '../../utils/client';
 
 const changeRate = (payload) =>
   setItems(
@@ -78,7 +52,7 @@ const addComment = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   await client.resetStore();
-  return result;
+  return result.data.addComment;
 };
 
 const deleteComment = async (payload) => {
@@ -88,8 +62,6 @@ const deleteComment = async (payload) => {
         deleteComment(id: $comment) {
           ... on Comment {
             _id
-            text
-            date
           }
         }
       }
@@ -98,7 +70,7 @@ const deleteComment = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   await client.resetStore();
-  return result;
+  return result.data.deleteComment;
 };
 
 const updateComment = async (payload) => {
@@ -141,7 +113,7 @@ const updateComment = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   await client.resetStore();
-  return result;
+  return result.data.updateComment;
 };
 
-export { getComments, changeRate, addComment, deleteComment, updateComment };
+export { changeRate, addComment, deleteComment, updateComment };

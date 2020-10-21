@@ -2,13 +2,15 @@ import {
   SET_COMMENTS,
   SET_RATE,
   SET_COMMENTS_LOADING,
-  SET_UPDATING_COMMENT
+  SET_UPDATING_COMMENT,
+  SET_COMMENTS_LIMIT
 } from './comments.types';
 
 export const initialState = {
   commentsLoading: false,
   updatingComment: null,
-  comments: []
+  comments: [],
+  limit: 10
 };
 
 const commentsReducer = (state = initialState, action = {}) => {
@@ -32,6 +34,11 @@ const commentsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         updatingComment: action.payload
+      };
+    case SET_COMMENTS_LIMIT:
+      return {
+        ...state,
+        limit: action.payload
       };
     default:
       return state;

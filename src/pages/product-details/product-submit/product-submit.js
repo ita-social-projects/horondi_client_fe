@@ -42,7 +42,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       wishlistItems.find(
         (item) => product._id === (userData ? item : item._id)
       ),
-    [product._id, wishlistItems]
+    [product._id, wishlistItems, userData]
   );
 
   const sizeToSend = useMemo(

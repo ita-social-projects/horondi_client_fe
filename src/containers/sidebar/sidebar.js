@@ -20,8 +20,8 @@ const Sidebar = ({ setMenuOpen, menu }) => {
   return (
     <div>
       <Drawer anchor='left' open={menu} onClose={() => setMenuOpen(false)}>
-        <List className={styles.list}>
-          {/*onClick={() => setMenuOpen(false)} */}
+        <List className={styles.list} onClick={() => setMenuOpen(true)}>
+          {/* onClick={() => setMenuOpen(false)}*/}
           {menuList}
         </List>
       </Drawer>

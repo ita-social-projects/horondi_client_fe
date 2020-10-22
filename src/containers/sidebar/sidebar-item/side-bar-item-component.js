@@ -4,8 +4,7 @@ const backpacks = [
     action: 'Rolltop'
   },
   {
-    name: 'Новий',
-    url: '#'
+    name: 'Новий'
   },
   {
     name: 'Гарбуз',

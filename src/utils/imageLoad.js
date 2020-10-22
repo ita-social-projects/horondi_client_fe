@@ -4,7 +4,6 @@ import { IMG_URL } from '../configs';
 export const getImage = (imageUrlData) =>
   new Promise((resolve, reject) => {
     const imageUrl = `${IMG_URL}${imageUrlData}`;
-    console.log(imageUrl);
 
     const img = new Image();
     img.onload = () => resolve(imageUrl);

@@ -1,7 +1,13 @@
 import notLoaded from '../images/not-loaded.png';
+import { IMG_URL } from '../configs';
 
-export const getImage = (imageName) => {
-  const image = new Image();
-  image.src = imageName;
-  return image.complete ? imageName : notLoaded;
-};
+export const getImage = (imageUrlData) =>
+  new Promise((resolve, reject) => {
+    const imageUrl = `${IMG_URL}${imageUrlData}`;
+    console.log(imageUrl);
+
+    const img = new Image();
+    img.onload = () => resolve(imageUrl);
+    img.onerror = () => reject(notLoaded);
+    img.src = imageUrl;
+  });

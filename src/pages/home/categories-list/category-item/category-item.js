@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
+import { getImage } from '../../../../utils/imageLoad';
 
-const CategoryItem = ({ categoryName, categoryImage, categoryUrl }) => {
-  const styles = useStyles({ image: categoryImage });
+const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
+  const [image, setImage] = useState(categoryImageUrl);
+
+  getImage(categoryImageUrl).then(
+    (src) => setImage(src),
+    (badSrc) => setImage(badSrc)
+  );
+
+  const styles = useStyles({ image });
 
   return (
     <Link to={`/${categoryUrl}`} className={styles.link}>

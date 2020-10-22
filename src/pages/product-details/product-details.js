@@ -20,7 +20,6 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_SIZE } from '../../configs';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetails = ({ match }) => {
@@ -54,16 +53,12 @@ const ProductDetails = ({ match }) => {
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
-  const { _id, name, basePrice, images, options, category } = product || {};
+  const { _id, name, basePrice, images, options = [], category } =
+    product || {};
+
   const { selectedSize } = productToSend;
 
-  const { volumeInLiters, weightInKg } = useMemo(
-    () =>
-      options && options.length && options[0].size
-        ? options.find(({ size: { name } }) => name === DEFAULT_SIZE).size
-        : {},
-    [options]
-  );
+  const { volumeInLiters, weightInKg } = (options[0] && options[0].size) || {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -112,7 +107,7 @@ const ProductDetails = ({ match }) => {
   const uniqueSizes = useMemo(
     () => [
       ...new Set(
-        options && options.length && options[0].size
+        options.length && options[0].size
           ? options.map(({ size: { available, name } }) => available && name)
           : null
       )
@@ -123,7 +118,7 @@ const ProductDetails = ({ match }) => {
   const uniqueBottomMaterials = useMemo(
     () => [
       ...new Set(
-        options && options.length && options[0].bottomMaterial
+        options.length && options[0].bottomMaterial
           ? options.map(({ bottomMaterial: item }) =>
               item && item.available ? item.name[1].value : null
             )
@@ -136,7 +131,7 @@ const ProductDetails = ({ match }) => {
   const uniqueAdditions = useMemo(
     () => [
       ...new Set(
-        options && options.length && options[0].additions
+        options.length && options[0].additions
           ? options
               .filter(({ additions }) => additions.length > 0)
               .map(({ additions: [{ name }] }) => name[1].value)
@@ -148,7 +143,7 @@ const ProductDetails = ({ match }) => {
 
   const sizes = useMemo(
     () =>
-      options && options.length
+      options.length
         ? uniqueSizes.map(
             (item) => options.find(({ size: { name } }) => item === name).size
           )
@@ -171,7 +166,7 @@ const ProductDetails = ({ match }) => {
 
   const additions = useMemo(
     () =>
-      options && options.length
+      options.length
         ? uniqueAdditions.map(
             (item) =>
               options

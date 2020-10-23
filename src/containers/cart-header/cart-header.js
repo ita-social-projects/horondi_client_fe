@@ -18,7 +18,7 @@ const CartHeader = () => {
   }, [dispatch]);
 
   return (
-    <Link to='/cart'>
+    <Link to='/checkout'>
       <IconButton className={styles.root} aria-label='cart'>
         <Badge
           badgeContent={

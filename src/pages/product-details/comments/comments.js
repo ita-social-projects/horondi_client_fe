@@ -175,7 +175,7 @@ const Comments = () => {
         </div>
       </form>
       {commentsList}
-      {
+      {comments.length > commentsLimit && (
         <LimitButton
           onClick={handleCommentsReload}
           startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}
@@ -184,7 +184,7 @@ const Comments = () => {
             ? COMMENTS[language].hideBtn
             : COMMENTS[language].loadMore}
         </LimitButton>
-      }
+      )}
       <SnackbarItem />
     </div>
   );

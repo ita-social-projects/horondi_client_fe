@@ -6,8 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: '50px auto',
     maxWidth: 1280,
     paddingTop: 30,
-    '& p, & ul, & li': {
-      color: `inherit !important`,
+    '& p, & ul, & li, & span': {
+      color: `${theme.palette.textColor} !important`,
       fontSize: '1rem',
       lineHeight: '2rem'
     },

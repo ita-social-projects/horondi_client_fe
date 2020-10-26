@@ -4,6 +4,9 @@ export const useStyles = makeStyles((theme) => ({
   container: {
     '@media(min-width: 720px)': {
       padding: '0rem 10rem 3rem 10rem'
+    },
+    '& .awssld.awssld--organic-arrows': {
+      zIndex: 1
     }
   },
   caption: {

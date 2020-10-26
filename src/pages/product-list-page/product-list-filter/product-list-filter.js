@@ -41,7 +41,7 @@ const ProductListFilter = () => {
       Products: {
         filterData,
         currentPage,
-        productsPerPage,
+        countPerPage,
         sortByPrice,
         sortByRate,
         sortByPopularity,
@@ -52,7 +52,7 @@ const ProductListFilter = () => {
     }) => ({
       filterData,
       currentPage,
-      productsPerPage,
+      countPerPage,
       sortByPrice,
       sortByRate,
       sortByPopularity,

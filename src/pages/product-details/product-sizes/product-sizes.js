@@ -14,9 +14,11 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
     selectedSize: Products.productToSend.selectedSize
   }));
 
-  const sizeButtons = sizes
-    ? sizes.map(({ _id, name, available }) =>
-      available && name ? (
+  const sizeButtons =
+    !!sizes.length &&
+    sizes
+      .filter(({ available, name }) => available && name)
+      .map(({ _id, name }) => (
         <Button
           key={_id}
           className={
@@ -26,13 +28,11 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
         >
           {name}
         </Button>
-      ) : null
-    )
-    : null;
+      ));
 
   return (
     <div className={styles.sizeButtons}>
-      {sizeButtons.length ? (
+      {sizeButtons ? (
         <div className={styles.container}>
           <div className={styles.label}>{SIZE[language].size}:</div>
           <div>
@@ -41,7 +41,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
         </div>
       ) : null}
       {sizeIsNotSelectedError ? (
-        <span className={styles.error}>{SIZE[language].error}</span>
+        <div className={styles.error}>{SIZE[language].error}</div>
       ) : null}
     </div>
   );

@@ -16,15 +16,20 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     right: '4%',
     bottom: '2%',
+    zIndex: 3,
+    transition: 'background 0.3s',
     '&:hover': {
+      cursor: 'pointer',
       background: '#E4B200'
     }
   }),
   iconsMessengers: {
-    ...flexCenter,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     position: 'fixed',
     right: '4%',
-    bottom: '6%',
+    bottom: '80px',
     width: '60px',
     height: '150px',
     flexDirection: 'column',
@@ -36,37 +41,41 @@ export const useStyles = makeStyles((theme) => ({
     height: '50px',
     background: 'black',
     borderRadius: '50%',
-    marginBottom: '10px',
+    marginBottom: '20px',
+    cursor: 'pointer',
+    transition: 'background 0.3s',
     '&:hover': {
       background: '#E4B200'
     }
   },
   msgIconActive: (mailFormVisible) => ({
     ...flexCenter,
-    width: '40px',
-    height: '40px',
+    width: '50px',
+    height: '50px',
     background: mailFormVisible ? '#E4B200' : 'black',
     borderRadius: '50%',
-    marginBottom: '10px'
+    marginBottom: '20px',
+    cursor: 'pointer'
   }),
-  facebookActive: {},
-  mailForm: {
-    borderRadius: '5px',
+  mailForm: ({ themeMode }) => ({
+    borderRadius: '4px',
     position: 'fixed',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    right: '9%',
+    right: '160px',
     bottom: '12%',
-    width: '15%',
-    height: '65%',
-    border: 'solid 1px black',
-    background: 'white',
-    boxShadow: '1px 2px 2px 1px'
-  },
+    width: '320px',
+    height: '600px',
+    background: themeMode ? 'white' : '#232323',
+    boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)'
+  }),
   cancelIcon: {
     position: 'absolute',
-    right: '1px'
+    right: '1px',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
   contacts: {
     ...flexCenter,
@@ -74,7 +83,8 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '40%',
     fontSize: '1.1rem',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    borderRadius: '4px'
   },
   contactsTitle: {
     margin: '3px 0 2px 0',
@@ -92,12 +102,13 @@ export const useStyles = makeStyles((theme) => ({
     height: '15px',
     width: '15px'
   },
-  formFieldActive: ({ themeMode }) => ({
+  formField: ({ themeMode }) => ({
     ...flexCenter,
     background: themeMode ? '#efefef' : '#232323',
     flexDirection: 'column',
     width: '100%',
-    height: '75%'
+    height: '100%',
+    borderRadius: '4px'
   }),
   btnSend: {
     marginBottom: '20px',
@@ -120,9 +131,24 @@ export const useStyles = makeStyles((theme) => ({
   },
   dataInput: {
     height: '100%',
-    marginBottom: '15px'
+    marginBottom: '15px',
+    width: '280px'
   },
   icon: {
     color: theme.palette.white
+  },
+  activeMsgWrapper: {
+    height: '65%',
+    width: '100%'
+  },
+  thankForMsgWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '60%'
+  },
+  thankForMsg: {
+    fontSize: '1rem',
+    marginBottom: '20px'
   }
 }));

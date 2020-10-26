@@ -1,17 +1,18 @@
-.react-multi-carousel-list {
+#similar-products .react-multi-carousel-list {
     margin-bottom: 1rem;
 }
-.react-multiple-carousel__arrow {
+
+#similar-products .react-multiple-carousel__arrow {
     min-width: 20px!important;
     min-height: 20px!important;
 }
-.react-multiple-carousel__arrow::before {
+#similar-products .react-multiple-carousel__arrow::before {
     font-size: 10px!important;
 }
-.react-multiple-carousel__arrow--right{
+#similar-products  .react-multiple-carousel__arrow--right{
     right: 1rem !important;
 }
-.react-multiple-carousel__arrow--left {
+#similar-products .react-multiple-carousel__arrow--left {
     left: 1rem !important;
 }
 

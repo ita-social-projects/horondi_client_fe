@@ -87,6 +87,18 @@
       },
       {
         "kind": "UNION",
+        "name": "BusinessTextResult",
+        "possibleTypes": [
+          {
+            "name": "BusinessText"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
         "name": "LogicalResult",
         "possibleTypes": [
           {
@@ -123,10 +135,46 @@
       },
       {
         "kind": "UNION",
+        "name": "OrderResult",
+        "possibleTypes": [
+          {
+            "name": "Order"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "UserResult",
+        "possibleTypes": [
+          {
+            "name": "User"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
         "name": "EmailQuestionResult",
         "possibleTypes": [
           {
             "name": "EmailQuestion"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "NovaPoshtaOrderResult",
+        "possibleTypes": [
+          {
+            "name": "NovaPoshtaOrder"
           },
           {
             "name": "Error"

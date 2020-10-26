@@ -9,7 +9,20 @@ import {
   RECOVER_USER,
   PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
-  REGISTER_USER
+  REGISTER_USER,
+  USER_HAS_RECOVERED,
+  USER_HAS_REGISTERED,
+  PRESERVE_USER,
+  SET_USER_IS_CHECKED,
+  UPDATE_USER,
+  PASSWORD_IS_RESET,
+  SEND_CONFIRMATION_EMAIL,
+  CONFIRMATION_EMAIL_SENT,
+  SET_USER_IS_CONFIRMED,
+  SET_CONFIRMATION_LOADING,
+  SET_RECOVERY_LOADING,
+  SET_USER_ORDERS,
+  GET_USER_ORDERS
 } from './user.types';
 
 const setUser = (user) => ({
@@ -65,6 +78,69 @@ const registerUser = (payload) => ({
   payload
 });
 
+const userHasRecovered = (payload) => ({
+  type: USER_HAS_RECOVERED,
+  payload
+});
+
+const userHasRegistered = (payload) => ({
+  type: USER_HAS_REGISTERED,
+  payload
+});
+
+const preserveUser = () => ({
+  type: PRESERVE_USER
+});
+
+const setUserIsChecked = (payload) => ({
+  type: SET_USER_IS_CHECKED,
+  payload
+});
+
+const updateUser = (payload) => ({
+  type: UPDATE_USER,
+  payload
+});
+
+const setPasswordIsReset = (payload) => ({
+  type: PASSWORD_IS_RESET,
+  payload
+});
+
+const sendConfirmationEmail = (payload) => ({
+  type: SEND_CONFIRMATION_EMAIL,
+  payload
+});
+
+const setConfirmationEmailStatus = (payload) => ({
+  type: CONFIRMATION_EMAIL_SENT,
+  payload
+});
+
+const setUserIsConfirmed = (payload) => ({
+  type: SET_USER_IS_CONFIRMED,
+  payload
+});
+
+const setConfirmationLoading = (payload) => ({
+  type: SET_CONFIRMATION_LOADING,
+  payload
+});
+
+const setRecoveryLoading = (payload) => ({
+  type: SET_RECOVERY_LOADING,
+  payload
+});
+
+const setUserOrders = (payload) => ({
+  type: SET_USER_ORDERS,
+  payload
+});
+
+const getUserOrders = () => ({
+  type: GET_USER_ORDERS
+});
+
 export {
   loginUser,
   setUser,
@@ -76,5 +152,18 @@ export {
   recoverUser,
   resetPassword,
   checkIfTokenValid,
-  registerUser
+  registerUser,
+  userHasRecovered,
+  userHasRegistered,
+  preserveUser,
+  setUserIsChecked,
+  updateUser,
+  setPasswordIsReset,
+  sendConfirmationEmail,
+  setConfirmationEmailStatus,
+  setUserIsConfirmed,
+  setConfirmationLoading,
+  setRecoveryLoading,
+  setUserOrders,
+  getUserOrders
 };

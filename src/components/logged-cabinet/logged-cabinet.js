@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import HistoryIcon from '@material-ui/icons/History';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -11,7 +12,7 @@ import { useStyles } from './logged-cabinet.styles';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { CABINET_OPTIONS_LOGGED } from '../../translations/cabinet.translations';
-import { logoutUser } from '../../redux/user/user.actions';
+import { setUser } from '../../redux/user/user.actions';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const LoggedCabinet = () => {
@@ -28,7 +29,8 @@ const LoggedCabinet = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    dispatch(setUser(null));
+    setToLocalStorage('accessToken', null);
   };
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
   const styles = useStyles();
@@ -39,6 +41,12 @@ const LoggedCabinet = () => {
         <Link to='/profile' className={styles.link}>
           <PersonOutlineIcon />
           <span>{CABINET_OPTIONS_LOGGED[language].profile}</span>
+        </Link>
+      </li>
+      <li>
+        <Link to='/order-history' className={styles.link}>
+          <HistoryIcon />
+          <span>{CABINET_OPTIONS_LOGGED[language].orderHistory}</span>
         </Link>
       </li>
       <li>

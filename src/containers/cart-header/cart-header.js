@@ -18,10 +18,14 @@ const CartHeader = () => {
   }, [dispatch]);
 
   return (
-    <Link to='/cart'>
+    <Link to='/checkout'>
       <IconButton className={styles.root} aria-label='cart'>
         <Badge
-          badgeContent={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+          badgeContent={
+            cartItems
+              ? cartItems.reduce((sum, item) => sum + item.quantity, 0)
+              : 0
+          }
           color='secondary'
         >
           <ShoppingBasketIcon />

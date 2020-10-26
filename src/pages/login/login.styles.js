@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor
   },
   passwordInput: {
-    marginBottom: '11px',
+    marginBottom: '16px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -42,7 +42,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& p': {
       position: 'absolute',
-      top: '40px'
+      top: '40px',
+      fontSize: '0.625rem',
+      marginLeft: '12px'
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor
@@ -68,7 +70,8 @@ export const useStyles = makeStyles((theme) => ({
     '& p': {
       position: 'absolute',
       top: '40px',
-      fontSize: '0.625rem'
+      fontSize: '0.625rem',
+      marginLeft: '12px'
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor
@@ -173,13 +176,10 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: 'transparent'
     }
   },
-  disabledLogin: {
-    backgroundColor: theme.palette.button.disabled.backgroundColor,
-    color: '#c2c2c2',
-    fontFamily: 'Montserrat',
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    textTransform: 'capitalize'
+  afterText: {
+    '& p::after': {
+      content: `'example@mail.com'`,
+      color: '#828282'
+    }
   }
 }));

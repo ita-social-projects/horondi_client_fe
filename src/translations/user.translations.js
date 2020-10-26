@@ -87,23 +87,31 @@ export const REGISTER_USER_ERROR = {
     {
       value: 'Wrong input data'
     }
+  ],
+  DEFAULT_ERROR: [
+    {
+      value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'
+    },
+    {
+      value: 'Oops! Something went wrong. Please, try again later.'
+    }
   ]
 };
 
 export const errorMessages = [
   {
     value: {
-      firstname: 'Поле повинно містити від 2 до 30 символів',
-      lastname: 'Поле повинно містити від 2 до 30 символів',
+      firstName: 'Поле повинно містити від 2 до 30 символів',
+      lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
       password: 'Від 6 до 30 символів з однією великою літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають'
+      confirmPassword: 'Паролі не збігаються'
     }
   },
   {
     value: {
-      firstname: 'Field should contain from 2 to 30 characters',
-      lastname: 'Field should contain from 2 to 30 characters',
+      firstName: 'Field should contain from 2 to 30 characters',
+      lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
       password: 'From 6 to 30 characters with one capital letter and one digit',
       confirmPassword: 'Passwords do not match'
@@ -130,7 +138,7 @@ export const placeholders = {
   ],
   email: [
     {
-      value: 'Введіть емейл'
+      value: 'Введіть email'
     },
     {
       value: 'Enter email'
@@ -267,6 +275,14 @@ export const NEW_PASSWORD_ERROR = {
       value: 'User is not found'
     }
   ],
+  PASSWORD_RECOVERY_ATTEMPTS_LIMIT_EXCEEDED: [
+    {
+      value: 'Перевищено максимальну кількість спроб відновлення'
+    },
+    {
+      value: 'Exceeded password recovery limit'
+    }
+  ],
   DEFAULT_ERROR: [
     {
       value:
@@ -286,5 +302,68 @@ export const NEW_PASSWORD_SUCCESS_MESSAGE = [
   {
     h2: 'Your password is successfully changed!',
     p: 'You will be directed to login page'
+  }
+];
+
+export const PROFILE_LABELS = [
+  {
+    firstName: "Ім'я",
+    lastName: 'Прізвище',
+    email: 'Емейл',
+    phoneNumber: 'Номер телефону',
+    country: 'Країна',
+    region: 'Область',
+    city: 'Місто',
+    street: 'Вулиця',
+    buildingNumber: 'Будинок',
+    appartment: 'Квартира',
+    zipcode: 'Почтовий індекс',
+    addPhoto: '+',
+    saveBtnTitle: 'Зберегти'
+  },
+  {
+    firstName: 'First name',
+    lastName: 'Last name',
+    email: 'Email',
+    phoneNumber: 'Contact phone number',
+    country: 'Country',
+    region: 'Region',
+    city: 'City',
+    street: 'Street',
+    buildingNumber: 'Building number',
+    appartment: 'Appartment number',
+    zipcode: 'Zip Code',
+    addPhoto: '+',
+    saveBtnTitle: 'Save'
+  }
+];
+
+export const PROFILE_PASSWORD_CHANGE = [
+  {
+    heading: 'Зміна паролю',
+    text:
+      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    btnTitle: 'Змінити пароль',
+    checkEmailText: 'Будь ласка, перевірте ваш емейл!'
+  },
+  {
+    heading: 'Change password',
+    text:
+      'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    btnTitle: 'Change password',
+    checkEmailText: 'Please, check your email!'
+  }
+];
+
+export const PROFILE_EMAIL_CONFIRM = [
+  {
+    heading: 'Підтвердження емейлу',
+    btnTitle: 'Підтвердити',
+    checkEmailText: 'Будь ласка, перевірте ваш емейл!'
+  },
+  {
+    heading: 'Confirm email',
+    btnTitle: 'Resend confirmation letter',
+    checkEmailText: 'Please, check your email!'
   }
 ];

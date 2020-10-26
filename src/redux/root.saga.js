@@ -6,8 +6,13 @@ import productsSaga from './products/products.sagas';
 import wishlistSaga from './wishlist/wishlist.sagas';
 import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
+import businessPagesSaga from './business-pages/business-pages.sagas';
 import contactsSaga from './contacts/contacts.sagas';
 import modelSaga from './model/model.sagas';
+import commentsSaga from './comments/comments.sagas';
+import checkoutSaga from './checkout/checkout.sagas';
+import chatSaga from './chat/chat.sagas';
+import headerLinksSaga from './header-links/header-links.sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -18,6 +23,11 @@ export default function* rootSaga() {
     contactsSaga(),
     productsSaga(),
     cartSaga(),
-    modelSaga()
+    modelSaga(),
+    commentsSaga(),
+    checkoutSaga(),
+    businessPagesSaga(),
+    chatSaga(),
+    headerLinksSaga()
   ]);
 }

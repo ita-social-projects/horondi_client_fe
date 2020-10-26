@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 'normal'
   },
   passwordInput: {
-    marginBottom: '35px',
+    marginBottom: '32px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -67,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
   serverError: {
     color: '#e53935',
     margin: '3px 14px -29px',
-    fontSize: '0.6875',
+    fontSize: '0.6875 !important',
     textAlign: 'left',
     lineHeight: '13px',
     letterSpacing: '0.33px'

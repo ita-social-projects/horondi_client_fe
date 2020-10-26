@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography, Backdrop } from '@material-ui/core';
-import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import useStyles from './product-list-page.styles';
 import ProductSort from './product-sort';
@@ -15,11 +14,12 @@ import {
   setCategoryFilter,
   setPriceFilter
 } from '../../redux/products/products.actions';
-import LoadingBar from '../../components/loading-bar';
+
 import {
   SHOW_FILTER_BUTTON_TEXT,
   HIDE_FILTER_BUTTON_TEXT
 } from '../../translations/product-list.translations';
+import { Loader } from '../../components/loader/loader';
 
 const ProductListPage = ({ category, model }) => {
   const styles = useStyles();
@@ -30,7 +30,7 @@ const ProductListPage = ({ category, model }) => {
     products,
     pagesCount,
     currentPage,
-    productsPerPage,
+    countPerPage,
     sortByRate,
     sortByPrice,
     filters,
@@ -49,7 +49,7 @@ const ProductListPage = ({ category, model }) => {
         filters,
         filterData,
         sortByPopularity,
-        productsPerPage,
+        countPerPage,
         currentPage
       },
       Currency: { currency }
@@ -63,7 +63,7 @@ const ProductListPage = ({ category, model }) => {
       filters,
       filterData,
       sortByPopularity,
-      productsPerPage,
+      countPerPage,
       currentPage,
       currency
     })
@@ -88,7 +88,7 @@ const ProductListPage = ({ category, model }) => {
     sortByRate,
     sortByPrice,
     sortByPopularity,
-    productsPerPage,
+    countPerPage,
     categoryFilter,
     category,
     model,
@@ -115,16 +115,21 @@ const ProductListPage = ({ category, model }) => {
 
   if (loading || !filterData) {
     return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
-      </Backdrop>
+      <div className={styles.center}>
+        <Loader />
+      </div>
     );
   }
 
   const categoryText = category.name[language].value.toUpperCase();
-  const itemsToShow = products.map((product, index) => (
-    <ProductListItem key={index} product={product} category={categoryText} />
+  const itemsToShow = products.map((product) => (
+    <ProductListItem
+      key={product._id}
+      product={product}
+      category={categoryText}
+    />
   ));
+
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3'>
@@ -168,17 +173,6 @@ const ProductListPage = ({ category, model }) => {
       </div>
     </div>
   );
-};
-ProductListPage.propTypes = {
-  category: PropTypes.shape({
-    _id: PropTypes.string,
-    isMain: PropTypes.bool,
-    name: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.string
-      })
-    )
-  }).isRequired
 };
 
 export default ProductListPage;

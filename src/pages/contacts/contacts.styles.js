@@ -78,13 +78,12 @@ export const useStyles = makeStyles((theme) => ({
   contactAddress: {
     '& > p': {
       margin: '0',
-      fontSize: '0.875rem',
+      fontSize: '1em',
       lineHeight: '1.43'
     }
   },
   day: {
-    display: 'inline-block',
-    width: '40px'
+    display: 'inline-block'
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1

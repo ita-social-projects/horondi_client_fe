@@ -9,23 +9,6 @@ export const WEIGHT = {
   }
 };
 
-export const COMMENTS = {
-  0: {
-    title: 'Коментарі',
-    firstName: `Ім'я`,
-    email: 'Електронна адреса',
-    text: 'Поділіться своїми враженнями з іншими',
-    submit: 'Залишити коментар'
-  },
-  1: {
-    title: 'Comments',
-    firstName: 'First name',
-    email: 'Email',
-    text: 'Share your thoughts with others',
-    submit: 'Leave comment'
-  }
-};
-
 export const PRODUCT_DESCRIPTION = {
   0: {
     description: 'Опис продукту',
@@ -104,11 +87,15 @@ export const IMGS_VIEWER = {
 export const PDP_BUTTONS = {
   0: {
     cartButton: 'В кошик',
-    buyButton: 'Купити зараз'
+    buyButton: 'Купити зараз',
+    submitButton: 'Підтвердити',
+    cancelButton: 'Відхилити'
   },
   1: {
     cartButton: 'Add to cart',
-    buyButton: 'Buy now'
+    buyButton: 'Buy now',
+    submitButton: 'Submit',
+    cancelButton: 'Cancel'
   }
 };
 
@@ -151,10 +138,51 @@ export const IMG_ALT_INFO = {
 export const TOOLTIPS = {
   0: {
     addWishful: 'Додати в бажане',
-    removeWishful: 'Видалити з бажаного'
+    removeWishful: 'Видалити з бажаного',
+    edit: 'Редагувати',
+    delete: 'Видалити'
   },
   1: {
     addWishful: 'Add to wishlist',
-    removeWishful: 'Remove from wishlist'
+    removeWishful: 'Remove from wishlist',
+    edit: 'Edit',
+    delete: 'Delete'
+  }
+};
+
+export const DIALOG = {
+  0: {
+    title: 'Видалити коментар?',
+    description:
+      'Ви дійсно хочете видалити коментар? Після видалення Ви не зможете його відновити.'
+  },
+  1: {
+    title: 'Delete comment?',
+    description:
+      'Are you sure you want to delete the comment? After deleting you will not be able to restore the comment.'
+  }
+};
+
+export const COMMENTS = {
+  0: {
+    title: 'Коментарі',
+    firstName: `Ім'я`,
+    email: 'Електронна адреса',
+    text: 'Поділіться своїми враженнями з іншими',
+    submit: 'Залишити коментар',
+    unregisteredTip:
+      'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
+    registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
+    successfulTip: 'Встановити рейтинг'
+  },
+  1: {
+    title: 'Comments',
+    firstName: 'First name',
+    email: 'Email',
+    text: 'Share your thoughts with others',
+    submit: 'Leave comment',
+    unregisteredTip: 'You should login and bought the product to leave rate',
+    registeredTip: 'You should bought the product to leave rate',
+    successfulTip: 'Set rate'
   }
 };

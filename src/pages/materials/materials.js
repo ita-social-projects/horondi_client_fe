@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './materials.style';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 
 const Materials = () => {
   const dispatch = useDispatch();

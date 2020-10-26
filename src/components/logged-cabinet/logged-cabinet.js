@@ -9,24 +9,17 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { useStyles } from './logged-cabinet.styles';
-import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { CABINET_OPTIONS_LOGGED } from '../../translations/cabinet.translations';
 import { setUser } from '../../redux/user/user.actions';
-import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
-const LoggedCabinet = () => {
+const LoggedCabinet = ({ onChangeTheme }) => {
   const { lightMode, language } = useSelector(({ Theme, Language }) => ({
     lightMode: Theme.lightMode,
     language: Language.language
   }));
 
   const dispatch = useDispatch();
-
-  const changeTheme = () => {
-    dispatch(setThemeMode(!lightMode));
-    setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
-  };
 
   const handleLogout = () => {
     dispatch(setUser(null));
@@ -55,7 +48,7 @@ const LoggedCabinet = () => {
           <span>{CABINET_OPTIONS_LOGGED[language].wishlist}</span>
         </Link>
       </li>
-      <li onClick={changeTheme}>
+      <li onClick={onChangeTheme} onKeyDown={onChangeTheme} tabIndex={0}>
         {themeIcon}
         <span>{CABINET_OPTIONS_LOGGED[language].changeTheme}</span>
       </li>

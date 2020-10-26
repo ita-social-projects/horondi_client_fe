@@ -7,7 +7,7 @@ export const FOOTER_INFORMATION = {
     title: 'Інформація',
     items: [
       { id: 1, url: '/about-us', item: 'Про нас' },
-      { id: 2, url: '#', item: 'Матеріали' },
+      { id: 2, url: '/materials', item: 'Матеріали' },
       { id: 3, url: '/payment-and-shipping', item: 'Оплата і доставка' },
       { id: 4, url: '/privacy-policy', item: 'Умови конфіденційності' }
     ]
@@ -16,7 +16,7 @@ export const FOOTER_INFORMATION = {
     title: 'Information',
     items: [
       { id: 1, url: '/about-us', item: 'About us' },
-      { id: 2, url: '#', item: 'Materials' },
+      { id: 2, url: '/materials', item: 'Materials' },
       { id: 3, url: '/payment-and-shipping', item: 'Payment & shipping' },
       { id: 4, url: '/privacy-policy', item: 'Privacy policy' }
     ]

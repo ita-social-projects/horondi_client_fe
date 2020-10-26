@@ -30,6 +30,7 @@ import Checkout from '../containers/checkout';
 import ProfilePage from '../pages/profile-page';
 import OrderHistory from '../pages/order-history';
 import ProtectedRoute from '../components/protected-route';
+import Materials from '../pages/materials';
 
 const Routes = () => {
   const styles = useStyles();
@@ -52,6 +53,7 @@ const Routes = () => {
           <Route path='/news' exact component={NewsPage} />
           <Route path='/news/:id' exact component={NewsDetailPage} />
           <Route path='/about-us' exact component={AboutUs} />
+          <Route path='/materials' exact component={Materials} />
           <Route
             path='/payment-and-shipping'
             exact

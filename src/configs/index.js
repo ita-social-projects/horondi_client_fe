@@ -18,15 +18,6 @@ export const HOMEPAGE_LOOKS_IMAGES = [
   'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
 ];
 
-export const ABOUT_US_IMAGES = {
-  hero: './images/about-us/hero-bg.jpg',
-  horondi_1: './images/about-us/horondi.jpg',
-  horondi_2: './images/about-us/horondi-2.jpg',
-  horondi_3: './images/about-us/horondi-3.jpg',
-  workPlace_1: './images/about-us/work-place.jpg',
-  workPlace_2: './images/about-us/work-place-2.jpg'
-};
-
 export const CART_IMAGES = {
   lightTheme: './images/cart/cart-light-theme-img.png',
   darkTheme: './images/cart/cart-dark-theme-img.png'
@@ -122,7 +113,7 @@ export const errorMessages = [
       city: 'Field should contain from 2 to 40 characters',
       street: 'Field should contain from 2 to 40 characters',
       buildingNumber: 'Field should contain from 1 to 6 characters',
-      apartment: 'Field should contain from 1 to 6 characters'
+      appartment: 'Field should contain from 1 to 6 characters'
     }
   }
 ];
@@ -145,7 +136,7 @@ export const formRegExp = {
   street:
     "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  apartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
+  appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:

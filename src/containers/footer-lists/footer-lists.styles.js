@@ -1,33 +1,22 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   cardDeck: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-      flexFlow: 'row wrap',
-      width: '71%'
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '100%'
-    }
+    display: 'flex'
   },
   cardBody: {
-    [theme.breakpoints.up('sm')]: {
-      flex: '1 1 auto',
-      minHeight: '1px',
-      padding: '1.25rem'
-    },
-    [theme.breakpoints.down('sm')]: {
-      minHeight: '1px',
-      padding: '1.25rem',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
+    flex: 1,
+    padding: '25px',
+    '@media screen and (max-width: 552px)': {
+      width: '50%'
     }
   },
+
   cardTitle: {
-    fontSize: '1.25rem',
-    marginBottom: '0.75rem'
+    marginBottom: '10px',
+    '@media screen and (max-width: 552px)': {
+      textAlign: 'center'
+    }
   },
   cardLink: {
     color: '#ffffff',

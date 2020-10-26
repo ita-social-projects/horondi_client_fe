@@ -21,7 +21,7 @@ const Cabinet = () => {
 
   return (
     <div className={styles.cabinet} data-cy='cabinet'>
-      <PersonOutlineIcon />
+      <PersonOutlineIcon tabIndex='0' />
       {userData ? <LoggedCabinet /> : <NotLoggedCabinet />}
     </div>
   );

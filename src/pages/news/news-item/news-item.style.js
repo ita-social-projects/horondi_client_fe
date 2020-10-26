@@ -31,6 +31,9 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'scale(1.1)'
     }
   },
+  newsItemContent: {
+    padding: '16px 16px 0'
+  },
   ArticleTitle: {
     minHeight: '3rem'
   },
@@ -43,15 +46,16 @@ export const useStyles = makeStyles((theme) => ({
   newsFooter: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, auto))',
-    gridColumnGap: '10px'
+    gridColumnGap: '10px',
+    '& > *': {
+      padding: '10px'
+    }
   },
   newsButton: {
     display: 'flex',
     alignSelf: 'flex-end',
     textDecoration: 'none',
     color: 'white',
-    marginLeft: '1rem',
-    marginBottom: '0.5rem',
     backgroundColor: '#4c4545',
     '&:hover': {
       backgroundColor: 'black'
@@ -59,6 +63,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   newsAuthorFooter: {
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
+  },
+  authorName: {
+    padding: 0
   }
 }));

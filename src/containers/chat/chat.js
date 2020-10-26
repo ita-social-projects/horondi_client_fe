@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import MailForm from './mail-form';
 import { CHAT_FACEBOOK_DATA } from '../../configs/index';
 
 export const Chat = () => {
+  const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
   const { language, themeMode, contacts } = useSelector((state) => ({
     language: state.Language.language,
@@ -16,16 +18,21 @@ export const Chat = () => {
     contacts: state.Contacts.contacts
   }));
 
-  const style = useStyles({ themeMode, mailFormVisible });
+  const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
   return (
-    <>
-      <MessengerCustomerChat
-        pageId={CHAT_FACEBOOK_DATA.pageId}
-        appId={CHAT_FACEBOOK_DATA.appId}
-      />
-      <div className={style.iconsMessengers}>
+    <div>
+      <div
+        className={
+          iconsVisible ? style.iconsMessengersActive : style.iconsMessengers
+        }
+      >
+        <MessengerCustomerChat
+          pageId={CHAT_FACEBOOK_DATA.pageId}
+          appId={CHAT_FACEBOOK_DATA.appId}
+          onClick={() => setMailFormVisible(false)}
+        />
         <div
           className={mailFormVisible ? style.msgIconActive : style.msgIcon}
           onClick={() => setMailFormVisible(!mailFormVisible)}
@@ -55,6 +62,16 @@ export const Chat = () => {
           }
         </Transition>
       </div>
-    </>
+      )
+      <div
+        onClick={() => {
+          setMailFormVisible(false);
+          setIconsVisible(!iconsVisible);
+        }}
+        className={style.chatIcon}
+      >
+        <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
+      </div>
+    </div>
   );
 };

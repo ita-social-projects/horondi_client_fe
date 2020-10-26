@@ -7,7 +7,23 @@ const flexCenter = {
 };
 
 export const useStyles = makeStyles((theme) => ({
-  iconsMessengers: {
+  chatIcon: ({ iconsVisible }) => ({
+    ...flexCenter,
+    background: iconsVisible ? '#E4B200' : 'black',
+    width: '60px',
+    height: '60px',
+    borderRadius: '50%',
+    position: 'fixed',
+    right: '1.35%',
+    bottom: '2%',
+    zIndex: 3,
+    transition: 'background 0.3s',
+    '&:hover': {
+      cursor: 'pointer',
+      background: '#E4B200'
+    }
+  }),
+  iconsMessengersActive: {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -16,6 +32,9 @@ export const useStyles = makeStyles((theme) => ({
     bottom: '80px',
     flexDirection: 'column',
     zIndex: '3'
+  },
+  iconsMessengers: {
+    visibility: 'hidden'
   },
   msgIcon: {
     ...flexCenter,

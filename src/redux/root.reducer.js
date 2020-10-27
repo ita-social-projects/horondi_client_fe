@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-
+import BurgerMenu from './burgerMenu/burgerMenu.reducer';
 import News from './news/news.reducer';
 import User from './user/user.reducer';
 import Categories from './categories/categories.reducer';
@@ -38,7 +38,8 @@ const rootReducer = (history) =>
     Comments,
     Checkout,
     BusinessPages,
-    Chat
+    Chat,
+    BurgerMenu
   });
 
 export default rootReducer;

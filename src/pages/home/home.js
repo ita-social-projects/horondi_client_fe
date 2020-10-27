@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
-
+import { getBurgerMenu } from '../../redux/burgerMenu/burgerMenu.actions';
 import SliderHomePage from './slider-home-page';
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
@@ -12,6 +12,11 @@ import { useStyles } from './home.styles';
 const Home = () => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBurgerMenu());
+  }, [dispatch]);
 
   return (
     <div className={styles.home} data-cy='home-page'>

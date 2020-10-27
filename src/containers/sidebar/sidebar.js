@@ -12,17 +12,19 @@ const Sidebar = ({ setMenuOpen, menu }) => {
     language: Language.language
   }));
 
-  const menuList = categories
-    .filter(({ isMain }) => isMain)
-    .map(({ _id, name }) => (
-      <SideBarItem
-        name={name}
-        language={language}
-        key={_id}
-        handler={() => setMenuOpen(false)}
-      />
-    ));
-  console.log(menuList);
+  const burgerMenuCategories = useSelector(({ BurgerMenu }) => {
+    return BurgerMenu.categories;
+  });
+
+  const menuList = burgerMenuCategories.map(({ category, models }) => (
+    <SideBarItem
+      name={category.name}
+      language={language}
+      key={category._id}
+      models={models}
+      handler={() => setMenuOpen(false)}
+    />
+  ));
   return (
     <div>
       <Drawer anchor='left' open={menu} onClose={() => setMenuOpen(false)}>

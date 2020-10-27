@@ -4,7 +4,8 @@ const backpacks = [
     action: 'Rolltop'
   },
   {
-    name: 'Новий'
+    name: 'Новий',
+    action: 'New'
   },
   {
     name: 'Гарбуз',
@@ -17,7 +18,8 @@ const backpacksEn = [
     action: 'Rolltop'
   },
   {
-    name: 'New'
+    name: 'New',
+    action: 'New'
   },
   {
     name: 'Harbuz',

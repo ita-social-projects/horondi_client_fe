@@ -49,6 +49,26 @@ const Login = () => {
       .matches(formRegExp.password, errorMessages[language].value.password)
       .required(' ')
   });
+  const auth = () => {
+    const _onInit = (auth2) => {
+      console.log('init OK', auth2);
+    };
+    const _onError = (err) => {
+      console.log('error', err);
+    };
+    window.gapi.load('auth2', function () {
+      window.gapi.auth2
+        .init({
+          client_id:
+            '648273081193-f3b5j2al2k4tu6hgm0ogdci5ag431pnc.apps.googleusercontent.com'
+        })
+        .then(_onInit, _onError);
+    });
+  };
+
+  const singIn = () => {
+    auth();
+  };
 
   return (
     <Formik
@@ -123,7 +143,11 @@ const Login = () => {
                       {OR_TEXT[language].value}
                     </span>
                   </div>
-                  <Button className={styles.googleBtn} fullWidth>
+                  <Button
+                    className={styles.googleBtn}
+                    onClick={singIn}
+                    fullWidth
+                  >
                     <span className={styles.googleLogo} />
                     Google
                   </Button>

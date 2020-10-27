@@ -87,9 +87,9 @@ import { setModelsFilter } from '../../../redux/products/products.actions';
 
 const SideBarItem = ({ handler, models, language, name }) => {
   const styles = useStyles();
-  const [isListOpen, toggleList] = useState(false);
+  const [isListOpen, setIsListOpen] = useState(false);
   const handleClick = () => {
-    toggleList((prevValue) => toggleList(!prevValue));
+    setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
 
   const dispatch = useDispatch();
@@ -123,6 +123,7 @@ const SideBarItem = ({ handler, models, language, name }) => {
                   handleModelClick(model);
                 }}
                 component={Link}
+                // to={`/${getCategoryURL(name)}/${model.name[1].value}/`}
                 to={`/${name[1].value.toLowerCase()}/${model.name[1].value
                   .toLowerCase()
                   .split(' ')

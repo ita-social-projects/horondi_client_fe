@@ -7,14 +7,12 @@ import { useStyles } from './sidebar.styles';
 
 const Sidebar = ({ setMenuOpen, menu }) => {
   const styles = useStyles();
-  const { categories, language } = useSelector(({ Categories, Language }) => ({
-    categories: Categories.list,
-    language: Language.language
-  }));
-
-  const burgerMenuCategories = useSelector(({ BurgerMenu }) => {
-    return BurgerMenu.categories;
-  });
+  const { language, burgerMenuCategories } = useSelector(
+    ({ Language, BurgerMenu }) => ({
+      language: Language.language,
+      burgerMenuCategories: BurgerMenu.categories
+    })
+  );
 
   const menuList = burgerMenuCategories.map(({ category, models }) => (
     <SideBarItem

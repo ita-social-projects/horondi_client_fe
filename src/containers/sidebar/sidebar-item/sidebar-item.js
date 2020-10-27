@@ -94,16 +94,16 @@ const SideBarItem = ({ handler, models, language, name }) => {
 
   const dispatch = useDispatch();
   const handleModelClick = (models) => {
-    dispatch(setModelsFilter([models.action]));
+    console.log('vjltkgkfk', models);
+    dispatch(setModelsFilter(models.action));
   };
-  console.log(models, language, name);
 
   return (
     <div>
       <ListItemText
         button='true'
         onClick={handleClick}
-        primary={models.name[language].value}
+        primary={name[language].value}
         className={styles.link}
       >
         {isListOpen ? <ExpandLess /> : <ExpandMore />}
@@ -111,24 +111,30 @@ const SideBarItem = ({ handler, models, language, name }) => {
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>
         <List className={styles.list}>
-          {models.map((model) => (
-            <ListItem
-              button
-              className={styles.nested}
-              key={model._id}
-              onClick={() => {
-                handler();
-                handleModelClick(model);
-              }}
-              component={Link}
-              to={`${name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
-            >
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary={model.name} />
-            </ListItem>
-          ))}
+          {models.map((model) => {
+            console.log(model);
+            return (
+              <ListItem
+                button
+                className={styles.nested}
+                key={model._id}
+                onClick={() => {
+                  handler();
+                  handleModelClick(model);
+                }}
+                component={Link}
+                to={`/${name[1].value.toLowerCase()}/${model.name[1].value
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}`}
+              >
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary={model.name[language].value} />
+              </ListItem>
+            );
+          })}
         </List>
       </Collapse>
     </div>

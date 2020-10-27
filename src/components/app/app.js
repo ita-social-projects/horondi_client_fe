@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import { CssBaseline } from '@material-ui/core';
-
+import { getBurgerMenu } from '../../redux/burgerMenu/burgerMenu.actions';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
 import { theme } from './app-theme/app.theme';
@@ -32,6 +32,10 @@ const App = () => {
   }
   const themeValue = theme(localStorageThemeMode);
   const productsCount = getFromLocalStorage('countPerPage');
+
+  useEffect(() => {
+    dispatch(getBurgerMenu());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(preserveUser());

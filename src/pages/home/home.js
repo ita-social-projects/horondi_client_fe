@@ -13,11 +13,6 @@ const Home = () => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBurgerMenu());
-  }, [dispatch]);
-
   return (
     <div className={styles.home} data-cy='home-page'>
       <div className={styles.homeHeader}>

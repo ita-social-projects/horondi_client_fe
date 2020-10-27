@@ -5,7 +5,6 @@ import {
 } from './burgerMenu.types';
 
 const setBurgerMenu = (newBurgerMenu) => {
-  console.log(newBurgerMenu);
   return {
     type: SET_BURGER_MENU,
     payload: newBurgerMenu

@@ -28,9 +28,7 @@ export function* handleBurgerMenuLoad() {
 
   try {
     const burgerMenu = yield call(getItems, query);
-    console.log(burgerMenu.data.getCategoriesForBurgerMenu);
     yield put(setBurgerMenu(burgerMenu.data.getCategoriesForBurgerMenu));
-
     yield put(setBurgerMenuLoading(false));
   } catch (e) {
     yield put(setBurgerMenuLoading(false));

@@ -12,6 +12,7 @@ import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
 import checkoutSaga from './checkout/checkout.sagas';
 import chatSaga from './chat/chat.sagas';
+import headerLinksSaga from './header-links/header-links.sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -27,6 +28,7 @@ export default function* rootSaga() {
     checkoutSaga(),
     businessPagesSaga(),
     chatSaga(),
-    burgerMenuSaga()
+    burgerMenuSaga(),
+    headerLinksSaga()
   ]);
 }

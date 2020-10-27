@@ -45,6 +45,11 @@ p {
   width: 40px;
   font-size: 14px !important;
 }
+
 .MuiListItem-gutters {
 padding:0 !important
+}
+
+.fb_dialog_content iframe:first-child {
+  bottom: 170px !important;
 }

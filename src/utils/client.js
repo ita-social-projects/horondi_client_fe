@@ -8,7 +8,7 @@ import {
 import { createUploadLink } from 'apollo-upload-client/public/index';
 import { getFromLocalStorage } from '../services/local-storage.service';
 
-const introspectionResult = require('src/../../fragmentTypes.json');
+const introspectionResult = require('../fragmentTypes');
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: introspectionResult

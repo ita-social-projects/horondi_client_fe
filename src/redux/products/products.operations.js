@@ -143,8 +143,8 @@ const getProduct = (id) =>
               currency
             }
           }
-          availableCount
         }
+        availableCount
         images {
           primary {
             thumbnail

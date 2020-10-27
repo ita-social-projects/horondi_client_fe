@@ -5,10 +5,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 
 import { useStyles } from './cart-item.styles';
-import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
-import NumberInput from '../../../components/number-input';
-import { setCartItemQuantity } from '../../../redux/cart/cart.actions';
-import { IMG_URL } from '../../../configs';
+import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
+import NumberInput from '../../../../components/number-input';
+import { setCartItemQuantity } from '../../../../redux/cart/cart.actions';
+import { IMG_URL } from '../../../../configs';
 
 const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   const dispatch = useDispatch();
@@ -35,9 +35,11 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
           <Link to={item.productUrl}>
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
-          <span>
-            {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
-          </span>
+          {item.selectedSize && (
+            <span>
+              {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
+            </span>
+          )}
           {item.bagBottom.value && (
             <span>
               {CART_TABLE_FIELDS[language].bagBottom}:{' '}
@@ -59,7 +61,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
         />
       </div>
       <div className={styles.price}>
-        <span>{item.totalPrice.toFixed(2)} UAH</span>
+        <span>{Number(item.totalPrice).toFixed(2)} UAH</span>
         <DeleteIcon
           className={styles.trash}
           onClick={onRemoveItem}

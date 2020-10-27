@@ -9,6 +9,12 @@ import { useStyles } from '../chat.style';
 import { sendEmail } from '../../../redux/chat/chat.actions';
 
 export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
+  const dispatch = useDispatch();
+  const style = useStyles({ visible, mailFormVisible, themeMode });
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
+
   // VALIDATED && CONFIRMED
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [emailValidated, setEmailValidated] = useState(false);
@@ -20,7 +26,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   // USER VALUES
   const [user, setUser] = useState(CHAT_USER_DATA);
   const { firstName, email, message } = user;
-  const dispatch = useDispatch();
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -29,10 +34,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     setUser({ ...user, [inputName]: input });
     input.match(regExp) ? setValid(true) : setValid(false);
   };
-
-  const Alert = (props) => (
-    <MuiAlert elevation={6} variant='filled' {...props} />
-  );
 
   const handleValidForms = () => {
     setShouldValidate(true);
@@ -50,7 +51,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
       sendEmail({
         email,
         senderName: firstName,
-        text: message
+        text: message,
+        language
       })
     );
     handleClick();
@@ -63,10 +65,9 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     setOpen(false);
   };
 
-  // HOOKS
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const Alert = (props) => (
+    <MuiAlert elevation={6} variant='filled' {...props} />
+  );
 
   useEffect(() => {
     // VALID FIELDS
@@ -77,92 +78,78 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     }
   }, [firstNameValidated, emailValidated]);
 
-  // STYLES
-  const style = useStyles({ visible, mailFormVisible, themeMode });
-
-  const userFields = {
-    firstNameField: {
-      inputName: 'firstName',
-      errorMessage: errorMessages[language].value.firstName,
-      value: firstName,
-      label: CHAT[language].name,
-      onChange: handleChange,
-      rows: 1,
-      validation: {
-        value: firstNameValidated,
-        setValid: setFirstNameValidated
-      },
-      type: 'text',
-      regExp: formRegExp.name
-    },
-    email: {
-      inputName: 'email',
-      errorMessage: errorMessages[language].value.email,
-      value: email,
-      label: CHAT[language].email,
-      onChange: handleChange,
-      rows: 1,
-      validation: {
-        value: emailValidated,
-        setValid: setEmailValidated
-      },
-      type: 'text',
-      regExp: formRegExp.email
-    },
-    messageField: {
-      inputName: 'message',
-      errorMessage: errorMessages[language].value.message,
-      value: message,
-      label: CHAT[language].msgText,
-      onChange: handleChange,
-      rows: 3,
-      validation: {
-        value: messageValidated,
-        setValid: setMessageValidated
-      },
-      type: 'text',
-      regExp: formRegExp.text
-    }
-  };
-
   return (
     <form className={style.formField}>
       <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
-      {Object.values(userFields).map(
-        ({
-          label,
-          size = 'small',
-          multiline = true,
-          rows,
-          inputName,
-          errorMessage,
-          value,
-          onChange,
-          validation,
-          type,
-          regExp = null
-        }) => (
-          <TextField
-            required
-            fullWidth
-            key={label}
-            label={label}
-            variant='outlined'
-            name={inputName}
-            size={size}
-            multiline={multiline}
-            rows={rows}
-            error={!validation.value && shouldValidate}
-            helperText={
-              !validation.value && shouldValidate ? `${errorMessage}` : ''
-            }
-            className={style.dataInput}
-            onChange={(e) => onChange(e, validation.setValid, regExp)}
-            value={value}
-            type={type}
-          />
-        )
-      )}
+      <>
+        <TextField
+          required
+          fullWidth
+          key={CHAT[language].name}
+          label={CHAT[language].name}
+          variant='outlined'
+          name='firstName'
+          size='small'
+          multiline
+          rows={1}
+          error={!firstNameValidated && shouldValidate}
+          helperText={
+            !firstNameValidated && shouldValidate
+              ? `${errorMessages[language].value.firstName}`
+              : ''
+          }
+          className={style.dataInput}
+          onChange={(e) =>
+            handleChange(e, setFirstNameValidated, formRegExp.text)
+          }
+          value={firstName}
+          type='text'
+        />
+        <TextField
+          required
+          fullWidth
+          key={CHAT[language].email}
+          label={CHAT[language].email}
+          variant='outlined'
+          name='email'
+          size='small'
+          multiline
+          rows={1}
+          error={!emailValidated && shouldValidate}
+          helperText={
+            !emailValidated && shouldValidate
+              ? `${errorMessages[language].value.email}`
+              : ''
+          }
+          className={style.dataInput}
+          onChange={(e) => handleChange(e, setEmailValidated, formRegExp.email)}
+          value={email}
+          type='text'
+        />
+        <TextField
+          required
+          fullWidth
+          key={CHAT[language].msgText}
+          label={CHAT[language].msgText}
+          variant='outlined'
+          name='message'
+          size='small'
+          multiline
+          rows={3}
+          error={!messageValidated && shouldValidate}
+          helperText={
+            !messageValidated && shouldValidate
+              ? `${errorMessages[language].value.message}`
+              : ''
+          }
+          className={style.dataInput}
+          onChange={(e) =>
+            handleChange(e, setMessageValidated, formRegExp.text)
+          }
+          value={message}
+          type='text'
+        />
+      </>
       <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
         <Alert onClose={handleClose} severity='success'>
           {CHAT[language].thanksMsg}

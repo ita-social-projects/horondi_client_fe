@@ -65,6 +65,11 @@ export const CHAT_USER_DATA = {
   message: ''
 };
 
+export const CHAT_FACEBOOK_DATA = {
+  pageId: '101134448446261',
+  appId: '713686025904610'
+};
+
 export const LOGIN_USER_DATA = {
   email: '',
   password: ''
@@ -245,7 +250,6 @@ export const COMMENTS_TIME_OPTIONS = {
   day: 'numeric'
 };
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
-export const DEFAULT_SIZE = 'M';
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
@@ -367,3 +371,14 @@ export const profileFields = [
 ];
 
 export const carouselInterval = 5000;
+
+export const moreHeaderButton = [
+  {
+    lang: 'uk',
+    value: 'Більше'
+  },
+  {
+    lang: 'en',
+    value: 'More'
+  }
+];

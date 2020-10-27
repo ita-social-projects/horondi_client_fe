@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '60px',
     borderRadius: '50%',
     position: 'fixed',
-    right: '4%',
+    right: '1.35%',
     bottom: '2%',
     zIndex: 3,
     transition: 'background 0.3s',
@@ -23,22 +23,23 @@ export const useStyles = makeStyles((theme) => ({
       background: '#E4B200'
     }
   }),
-  iconsMessengers: {
+  iconsMessengersActive: {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
     position: 'fixed',
-    right: '4%',
+    right: '1.35%',
     bottom: '80px',
-    width: '60px',
-    height: '150px',
     flexDirection: 'column',
     zIndex: '3'
   },
+  iconsMessengers: {
+    visibility: 'hidden'
+  },
   msgIcon: {
     ...flexCenter,
-    width: '50px',
-    height: '50px',
+    width: '60px',
+    height: '60px',
     background: 'black',
     borderRadius: '50%',
     marginBottom: '20px',
@@ -50,8 +51,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   msgIconActive: (mailFormVisible) => ({
     ...flexCenter,
-    width: '50px',
-    height: '50px',
+    width: '60px',
+    height: '60px',
     background: mailFormVisible ? '#E4B200' : 'black',
     borderRadius: '50%',
     marginBottom: '20px',
@@ -135,7 +136,8 @@ export const useStyles = makeStyles((theme) => ({
     width: '280px'
   },
   icon: {
-    color: theme.palette.white
+    color: theme.palette.white,
+    fontSize: '35px'
   },
   activeMsgWrapper: {
     height: '65%',

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import { getBurgerMenu } from '../../redux/burgerMenu/burgerMenu.actions';
 import SliderHomePage from './slider-home-page';
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';

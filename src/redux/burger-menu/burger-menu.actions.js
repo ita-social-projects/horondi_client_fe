@@ -4,20 +4,20 @@ import {
   SET_BURGER_MENU_LOADING_LINKS
 } from './burger-menu.types';
 
-const setBurgerMenu = (newBurgerMenu) => {
+const setBurgerMenuLinks = (newBurgerMenu) => {
   return {
     type: SET_BURGER_MENU_LINKS,
     payload: newBurgerMenu
   };
 };
 
-const getBurgerMenu = () => ({
+const getBurgerMenuLinks = () => ({
   type: GET_BURGER_MENU_LINKS
 });
 
-const setBurgerMenuLoading = (loading) => ({
+const setBurgerMenuLoadingLinks = (loading) => ({
   type: SET_BURGER_MENU_LOADING_LINKS,
   payload: loading
 });
 
-export { setBurgerMenu, getBurgerMenu, setBurgerMenuLoading };
+export { setBurgerMenuLinks, getBurgerMenuLinks, setBurgerMenuLoadingLinks };

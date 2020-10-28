@@ -6,8 +6,6 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useDispatch } from 'react-redux';
 import { useStyles } from './sidebar-items.style';
 import { setModelsFilter } from '../../../redux/products/products.actions';
@@ -22,6 +20,7 @@ const SideBarItem = ({ handlerItem, models, language, name }) => {
   const dispatch = useDispatch();
   const handleModelClick = (models) => {
     dispatch(setModelsFilter(models.name[language].value));
+    console.log(name.value);
   };
   return (
     <div>

@@ -50,19 +50,10 @@ const Login = () => {
       .required(' ')
   });
   const auth = () => {
-    const _onInit = (auth2) => {
-      console.log('init OK', auth2);
-    };
-    const _onError = (err) => {
-      console.log('error', err);
-    };
     window.gapi.load('auth2', function () {
-      window.gapi.auth2
-        .init({
-          client_id:
-            '648273081193-f3b5j2al2k4tu6hgm0ogdci5ag431pnc.apps.googleusercontent.com'
-        })
-        .then(_onInit, _onError);
+      window.gapi.auth2.init({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
+      });
     });
   };
 

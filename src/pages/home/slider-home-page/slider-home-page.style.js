@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   captionBlock: {
     margin: '0 auto',
-    width: '1400px',
+    width: '100%',
     backgroundColor: '#3d3d3d'
   }
 }));

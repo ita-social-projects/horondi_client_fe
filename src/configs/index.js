@@ -82,7 +82,7 @@ export const errorMessages = [
     value: {
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      email: 'Некоректний формат пошти',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
       text: 'Поле повинно містити від 2 до 700 символів',
@@ -101,7 +101,7 @@ export const errorMessages = [
     value: {
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
@@ -141,8 +141,7 @@ export const formRegExp = {
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   text: /^.{2,700}$/gm,
-  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
-  script: /(script)/g
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };
 
 export const placeholders = {
@@ -341,6 +340,12 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
+export const commentFields = {
+  firstName: { name: 'firstName' },
+  email: { name: 'email' },
+  text: { name: 'text', multiline: true, rows: 7 }
+};
+
 export const profileFields = [
   'firstName',
   'lastName',
@@ -367,5 +372,7 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';

@@ -3,21 +3,6 @@ export const LANGUAGE = 0;
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const HOMEPAGE_LOOKS_IMAGES = [
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_1.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_2.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_3.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_4.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_5.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_6.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_7.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_8.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_9.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_10.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_11.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
-];
-
 export const ABOUT_US_IMAGES = {
   hero: './images/about-us/hero-bg.jpg',
   horondi_1: './images/about-us/horondi.jpg',
@@ -97,10 +82,10 @@ export const errorMessages = [
     value: {
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      email: 'Некоректний формат пошти',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
-      text: 'Поле повинно містити від 2 до 500 символів',
+      text: 'Поле повинно містити від 2 до 700 символів',
       phoneNumber: 'Некоректний формат телефону',
       zipcode: 'Некоректний формат почтового індексу',
       country: 'Поле повинно містити від 2 до 40 символів',
@@ -116,7 +101,7 @@ export const errorMessages = [
     value: {
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
@@ -156,8 +141,7 @@ export const formRegExp = {
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
   text: /^.{2,700}$/gm,
-  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
-  script: /(script)/g
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };
 
 export const placeholders = {
@@ -356,6 +340,12 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
+export const commentFields = {
+  firstName: { name: 'firstName' },
+  email: { name: 'email' },
+  text: { name: 'text', multiline: true, rows: 7 }
+};
+
 export const profileFields = [
   'firstName',
   'lastName',
@@ -382,3 +372,7 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const commentsLimit = 10;
+
+export const DEFAULT_SIZE = 'M';

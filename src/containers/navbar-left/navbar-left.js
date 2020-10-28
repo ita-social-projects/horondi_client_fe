@@ -5,11 +5,11 @@ import Menu from '@material-ui/core/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { MenuItem } from '@material-ui/core';
 import { useStyles } from './navbar-left.styles';
 import { getAllHeaderLinks } from '../../redux/header-links/header-links.actions';
 
 import { LOGO, moreHeaderButton } from '../../configs';
-import { MenuItem } from '@material-ui/core';
 
 const NavbarLeft = () => {
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ const NavbarLeft = () => {
       {!!moreDropDownList && (
         <div>
           <Link
-            borderRadius={0}
+            to=''
             aria-controls='customized-menu'
             aria-haspopup='true'
             className={styles.link}

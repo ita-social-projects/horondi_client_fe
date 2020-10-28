@@ -19,6 +19,7 @@ import Comments from './comments/comments.reducer';
 import Checkout from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 import HeaderLinks from './header-links/header-links.reducer';
+import HomePageImages from './home-page-looks/home-page-looks.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -41,7 +42,8 @@ const rootReducer = (history) =>
     BusinessPages,
     Chat,
     BurgerMenu,
-    HeaderLinks
+    HeaderLinks,
+    HomePageImages
   });
 
 export default rootReducer;

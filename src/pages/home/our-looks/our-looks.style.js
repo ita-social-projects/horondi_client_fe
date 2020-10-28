@@ -30,5 +30,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '2em',
     marginBottom: '1.5em',
     color: theme.palette.textColor
+  },
+  center: {
+    width: '3rem',
+    margin: 'auto',
+    paddingBottom: '11rem'
   }
 }));

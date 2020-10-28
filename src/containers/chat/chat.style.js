@@ -10,31 +10,37 @@ export const useStyles = makeStyles((theme) => ({
   chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
     background: iconsVisible ? '#E4B200' : 'black',
-    width: '60px',
-    height: '60px',
-    borderRadius: '50%',
+    margin: '0px 12px',
+    padding: '0px',
     position: 'fixed',
-    right: '1.35%',
-    bottom: '2%',
-    zIndex: 3,
+    zIndex: '3',
+    bottom: '30px',
+    top: 'auto',
+    height: '60px',
+    width: '60px',
+    borderRadius: '29px',
+    boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
+    right: '12px',
     transition: 'background 0.3s',
     '&:hover': {
       cursor: 'pointer',
       background: '#E4B200'
     }
   }),
-  iconsMessengersActive: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    position: 'fixed',
-    right: '1.35%',
-    bottom: '80px',
-    flexDirection: 'column',
-    zIndex: '3'
-  },
   iconsMessengers: {
-    visibility: 'hidden'
+    margin: '0px 12px',
+    padding: '0px',
+    position: 'fixed',
+    zIndex: '3',
+    bottom: '110px',
+    top: 'auto',
+    height: '60px',
+    width: '60px',
+    borderRadius: '29px',
+    boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
+    background: 'none',
+    display: 'block',
+    right: '12px'
   },
   msgIcon: {
     ...flexCenter,

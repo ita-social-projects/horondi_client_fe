@@ -21,6 +21,7 @@ import {
 } from '../../redux/products/products.actions';
 
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -58,7 +59,15 @@ const ProductDetails = ({ match }) => {
 
   const { selectedSize } = productToSend;
 
-  const { volumeInLiters, weightInKg } = (options[0] && options[0].size) || {};
+  const defaultSize = useMemo(
+    () =>
+      options[0]
+        ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE)
+        : {},
+    [options]
+  );
+  const { volumeInLiters, weightInKg } =
+    (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -194,7 +203,7 @@ const ProductDetails = ({ match }) => {
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: newPrice.toFixed(2),
+        totalPrice: +newPrice.toFixed(2),
         dimensions: { volumeInLiters, weightInKg },
         selectedSize: id
       })

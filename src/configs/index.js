@@ -367,3 +367,5 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const DEFAULT_SIZE = 'M';

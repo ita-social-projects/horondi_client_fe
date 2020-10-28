@@ -20,7 +20,6 @@ const SideBarItem = ({ handlerItem, models, language, name }) => {
   const dispatch = useDispatch();
   const handleModelClick = (models) => {
     dispatch(setModelsFilter(models.name[language].value));
-    console.log(name.value);
   };
   return (
     <div>

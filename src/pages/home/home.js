@@ -15,19 +15,19 @@ const Home = () => {
 
   return (
     <div className={styles.home} data-cy='home-page'>
-      <div className={styles.homeHeader}>
-        <SliderHomePage />
-        <Link to='/news'>
-          <Button className={styles.headerButton} variant='contained'>
-            {HOME_BUTTONS[language].NEWS}
-          </Button>
-        </Link>
-        <Link to='/about-us'>
-          <Button className={styles.headerButton} variant='contained'>
-            {HOME_BUTTONS[language].ABOUT_US}
-          </Button>
-        </Link>
-      </div>
+      {/*<div className={styles.homeHeader}>*/}
+      <SliderHomePage />
+      <Link to='/news'>
+        <Button className={styles.headerButton} variant='contained'>
+          {HOME_BUTTONS[language].NEWS}
+        </Button>
+      </Link>
+      <Link to='/about-us'>
+        <Button className={styles.headerButton} variant='contained'>
+          {HOME_BUTTONS[language].ABOUT_US}
+        </Button>
+      </Link>
+      {/*</div>*/}
       <CategoriesList />
       <OurLooks />
     </div>

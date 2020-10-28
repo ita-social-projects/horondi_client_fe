@@ -1,38 +1,41 @@
 import React from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-import { useSelector } from 'react-redux';
+import { useStore } from 'react-redux';
 import { useStyles } from './slider-home-page.style';
-import { getImage } from '../../../utils/imageLoad';
-import { Backdrop } from '@material-ui/core';
-import LoadingBar from '../../../components/loading-bar';
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
+import { carouselInterval } from '../../../configs';
+
+const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const SliderHomePage = () => {
+  const store = useStore();
   const styles = useStyles();
-  const { models, loading } = useSelector(({ Model }) => ({
-    models: Model.models,
-    loading: Model.loading
-  }));
-  if (loading) {
-    return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
-      </Backdrop>
-    );
+
+  function getImages(state) {
+    return state.Categories;
+  }
+  let curentValue = getImages(store.getState());
+  let images = [];
+  for (let i = 0; i < curentValue.list.length; i++) {
+    if (curentValue.list[i].isMain) {
+      images.push(curentValue.list[i].images.large);
+    }
   }
 
-  return models.length > 0 ? (
+  return (
     <div className={styles.captionBlock}>
-      <AwesomeSlider className={styles.slider} mobileTouch>
-        {models.map((photo) => (
-          <div
-            key={photo.name[1].value}
-            data-src={getImage(photo.images.large)}
-          />
+      <AutoplaySlider
+        play={true}
+        interval={carouselInterval}
+        className={styles.slider}
+      >
+        {images.map((image, index) => (
+          <div key={index} data-src={image} />
         ))}
-      </AwesomeSlider>
+      </AutoplaySlider>
     </div>
-  ) : null;
+  );
 };
 
 export default SliderHomePage;

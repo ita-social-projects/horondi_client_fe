@@ -1,22 +1,22 @@
 import {
-  GET_BURGER_MENU,
-  SET_BURGER_MENU,
-  SET_BURGER_MENU_LOADING
-} from './burgerMenu.types';
+  GET_BURGER_MENU_LINKS,
+  SET_BURGER_MENU_LINKS,
+  SET_BURGER_MENU_LOADING_LINKS
+} from './burger-menu.types';
 
 const setBurgerMenu = (newBurgerMenu) => {
   return {
-    type: SET_BURGER_MENU,
+    type: SET_BURGER_MENU_LINKS,
     payload: newBurgerMenu
   };
 };
 
 const getBurgerMenu = () => ({
-  type: GET_BURGER_MENU
+  type: GET_BURGER_MENU_LINKS
 });
 
 const setBurgerMenuLoading = (loading) => ({
-  type: SET_BURGER_MENU_LOADING,
+  type: SET_BURGER_MENU_LOADING_LINKS,
   payload: loading
 });
 

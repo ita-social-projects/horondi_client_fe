@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import BurgerMenu from './burgerMenu/burgerMenu.reducer';
+import BurgerMenu from './burger-menu/burger-menu.reducer';
 import News from './news/news.reducer';
 import User from './user/user.reducer';
 import Categories from './categories/categories.reducer';

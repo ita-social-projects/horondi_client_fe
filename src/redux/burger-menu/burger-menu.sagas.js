@@ -1,31 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setBurgerMenu, setBurgerMenuLoading } from './burgerMenu.actions';
+import { setBurgerMenu, setBurgerMenuLoading } from './burger-menu.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
-import { GET_BURGER_MENU } from './burgerMenu.types';
-
+import { GET_BURGER_MENU_LINKS } from './burger-menu.types';
+import query from './burger-menu.oparations';
 export function* handleBurgerMenuLoad() {
   yield put(setBurgerMenuLoading(true));
-  const query = `query {
-    getCategoriesForBurgerMenu{
-      category {
-        _id
-        name {
-          lang
-          value
-        }
-      }
-      models {
-        _id
-        name {
-          lang
-          value
-        } 
-      }
-    }
-  }`;
-
   try {
     const burgerMenu = yield call(getItems, query);
     yield put(setBurgerMenu(burgerMenu.data.getCategoriesForBurgerMenu));
@@ -38,5 +19,5 @@ export function* handleBurgerMenuLoad() {
 }
 
 export default function* burgerMenuSaga() {
-  yield takeEvery(GET_BURGER_MENU, handleBurgerMenuLoad);
+  yield takeEvery(GET_BURGER_MENU_LINKS, handleBurgerMenuLoad);
 }

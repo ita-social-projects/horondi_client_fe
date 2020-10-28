@@ -1,4 +1,7 @@
-import { SET_BURGER_MENU, SET_BURGER_MENU_LOADING } from './burgerMenu.types';
+import {
+  SET_BURGER_MENU_LINKS,
+  SET_BURGER_MENU_LOADING_LINKS
+} from './burger-menu.types';
 
 const initialState = {
   categories: [],
@@ -7,12 +10,12 @@ const initialState = {
 
 const burgerMenuReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_BURGER_MENU:
+    case SET_BURGER_MENU_LINKS:
       return {
         ...state,
         categories: action.payload
       };
-    case SET_BURGER_MENU_LOADING:
+    case SET_BURGER_MENU_LOADING_LINKS:
       return {
         ...state,
         loading: action.payload

@@ -3,21 +3,6 @@ export const LANGUAGE = 0;
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const HOMEPAGE_LOOKS_IMAGES = [
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_1.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_2.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_3.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_4.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_5.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_6.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_7.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_8.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_9.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_10.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_11.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
-];
-
 export const ABOUT_US_IMAGES = {
   hero: './images/about-us/hero-bg.jpg',
   horondi_1: './images/about-us/horondi.jpg',
@@ -65,6 +50,11 @@ export const CHAT_USER_DATA = {
   message: ''
 };
 
+export const CHAT_FACEBOOK_DATA = {
+  pageId: '101134448446261',
+  appId: '713686025904610'
+};
+
 export const LOGIN_USER_DATA = {
   email: '',
   password: ''
@@ -95,7 +85,7 @@ export const errorMessages = [
       email: 'Некоректний формат пошти',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
-      text: 'Поле повинно містити від 2 до 500 символів',
+      text: 'Поле повинно містити від 2 до 700 символів',
       phoneNumber: 'Некоректний формат телефону',
       zipcode: 'Некоректний формат почтового індексу',
       country: 'Поле повинно містити від 2 до 40 символів',
@@ -384,3 +374,5 @@ export const moreHeaderButton = [
 ];
 
 export const commentsLimit = 10;
+
+export const DEFAULT_SIZE = 'M';

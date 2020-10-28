@@ -19,12 +19,7 @@ export function* handleModelsLoad({ payload }) {
               name {
                 value
               }
-            },
-            subcategory{
-              name {
-                value
-              }
-            },
+            }           
             name {
               value
             }

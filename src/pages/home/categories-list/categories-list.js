@@ -5,8 +5,7 @@ import Carousel from 'react-multi-carousel';
 
 import LoadingBar from '../../../components/loading-bar';
 import CategoryItem from './category-item';
-import { URL_LANGUAGE, IMG_URL, RESPONSIVE_CATEGORIES } from '../../../configs';
-import { getImage } from '../../../utils/imageLoad';
+import { URL_LANGUAGE, RESPONSIVE_CATEGORIES } from '../../../configs';
 import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 import { useStyles } from './categories-list.style';
@@ -31,7 +30,7 @@ const CategoriesList = () => {
                 key={_id}
                 categoryUrl={getCategoryURL(name)}
                 categoryName={name[language].value}
-                categoryImage={getImage(`${IMG_URL}${images.large}`)}
+                categoryImageUrl={images.large}
               />
             )
         )

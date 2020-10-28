@@ -56,6 +56,11 @@ export const CHAT_USER_DATA = {
   message: ''
 };
 
+export const CHAT_FACEBOOK_DATA = {
+  pageId: '101134448446261',
+  appId: '713686025904610'
+};
+
 export const LOGIN_USER_DATA = {
   email: '',
   password: ''
@@ -368,3 +373,5 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const DEFAULT_SIZE = 'M';

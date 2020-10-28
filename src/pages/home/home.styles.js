@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   homeHeader: {
     background:
-      'url("https://horondi.blob.core.windows.net/horondi/backgrounds/IMG_0428.jpg") no-repeat center center',
+      'url("https://horondi.blob.core.windows.net/horondi/images/large_10b1e24kgt64yt0_IMG_0423.jpg") no-repeat center center',
     backgroundSize: 'cover',
     height: 800,
     position: 'relative',

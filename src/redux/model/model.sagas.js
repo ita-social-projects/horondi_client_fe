@@ -14,6 +14,7 @@ export function* handleModelsLoad({ payload }) {
         $category: ID!
         ){
           getModelsByCategory(id: $category){
+            _id
             category{
               name {
                 value

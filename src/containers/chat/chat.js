@@ -22,7 +22,7 @@ export const Chat = () => {
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
   return (
-    <div>
+    <>
       {iconsVisible && (
         <div className={style.iconsMessengers}>
           <MessengerCustomerChat
@@ -69,6 +69,6 @@ export const Chat = () => {
       >
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </div>
-    </div>
+    </>
   );
 };

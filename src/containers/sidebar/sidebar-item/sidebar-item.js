@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { useStyles } from './sidebar-items.style';
 import { setModelsFilter } from '../../../redux/products/products.actions';
 
-const SideBarItem = ({ handler, models, language, name }) => {
+const SideBarItem = ({ handlerItem, models, language, name }) => {
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);
   const handleClick = () => {
@@ -30,9 +30,7 @@ const SideBarItem = ({ handler, models, language, name }) => {
         onClick={handleClick}
         primary={name[language].value}
         className={styles.link}
-      >
-        {isListOpen ? <ExpandLess /> : <ExpandMore />}
-      </ListItemText>
+      ></ListItemText>
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>
         <List className={styles.list}>
@@ -42,7 +40,7 @@ const SideBarItem = ({ handler, models, language, name }) => {
               className={styles.nested}
               key={model._id}
               onClick={() => {
-                handler();
+                handlerItem();
                 handleModelClick(model);
               }}
               component={Link}

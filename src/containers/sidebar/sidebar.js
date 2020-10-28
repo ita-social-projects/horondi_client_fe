@@ -20,7 +20,7 @@ const Sidebar = ({ setMenuOpen, menu }) => {
       language={language}
       key={category._id}
       models={models}
-      handler={() => setMenuOpen(false)}
+      handlerItem={() => setMenuOpen(false)}
     />
   ));
   return (

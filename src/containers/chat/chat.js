@@ -23,46 +23,43 @@ export const Chat = () => {
 
   return (
     <div>
-      <div
-        className={
-          iconsVisible ? style.iconsMessengersActive : style.iconsMessengers
-        }
-      >
-        <MessengerCustomerChat
-          pageId={CHAT_FACEBOOK_DATA.pageId}
-          appId={CHAT_FACEBOOK_DATA.appId}
-          onClick={() => setMailFormVisible(false)}
-        />
-        <div
-          className={mailFormVisible ? style.msgIconActive : style.msgIcon}
-          onClick={() => setMailFormVisible(!mailFormVisible)}
-        >
-          <MailOutlineIcon className={style.icon} />
+      {iconsVisible && (
+        <div className={style.iconsMessengers}>
+          <MessengerCustomerChat
+            pageId={CHAT_FACEBOOK_DATA.pageId}
+            appId={CHAT_FACEBOOK_DATA.appId}
+            onClick={() => setMailFormVisible(false)}
+          />
+          <div
+            className={mailFormVisible ? style.msgIconActive : style.msgIcon}
+            onClick={() => setMailFormVisible(!mailFormVisible)}
+          >
+            <MailOutlineIcon className={style.icon} />
+          </div>
+          <Transition
+            initial={null}
+            items={mailFormVisible}
+            from={{ opacity: 0, height: 0 }}
+            enter={{ opacity: 1, height: 0 }}
+            leave={{ opacity: 0, height: 0 }}
+            config={config.gentle}
+          >
+            {(item) =>
+              item &&
+              ((styles) => (
+                <div style={styles}>
+                  <MailForm
+                    contacts={contacts}
+                    themeMode={themeMode}
+                    language={language}
+                    cancelIconHandler={cancelIconHandler}
+                  />
+                </div>
+              ))
+            }
+          </Transition>
         </div>
-        <Transition
-          initial={null}
-          items={mailFormVisible}
-          from={{ opacity: 0, height: 0 }}
-          enter={{ opacity: 1, height: 0 }}
-          leave={{ opacity: 0, height: 0 }}
-          config={config.gentle}
-        >
-          {(item) =>
-            item &&
-            ((styles) => (
-              <div style={styles}>
-                <MailForm
-                  contacts={contacts}
-                  themeMode={themeMode}
-                  language={language}
-                  cancelIconHandler={cancelIconHandler}
-                />
-              </div>
-            ))
-          }
-        </Transition>
-      </div>
-      )
+      )}
       <div
         onClick={() => {
           setMailFormVisible(false);

@@ -7,10 +7,9 @@ import { getImage } from '../../../../utils/imageLoad';
 const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const [image, setImage] = useState(categoryImageUrl);
 
-  getImage(categoryImageUrl).then(
-    (src) => setImage(src),
-    (badSrc) => setImage(badSrc)
-  );
+  getImage(categoryImageUrl)
+    .then((src) => setImage(src))
+    .catch((badSrc) => setImage(badSrc));
 
   const styles = useStyles({ image });
 

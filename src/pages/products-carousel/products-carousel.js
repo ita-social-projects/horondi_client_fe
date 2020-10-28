@@ -44,10 +44,9 @@ const ProductsCarousel = ({ category }) => {
 
   useMemo(() => {
     models.forEach((item) => {
-      getImage(item.images.large).then(
-        (src) => setImages([...images, src]),
-        (badSrc) => setImages([...images, badSrc])
-      );
+      getImage(item.images.large)
+        .then((src) => setImages(src))
+        .catch((badSrc) => setImages(badSrc));
     });
   }, [models]);
 

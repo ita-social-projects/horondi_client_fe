@@ -6,7 +6,7 @@ export const useStyles = makeStyles(() => ({
     padding: '0 4px',
     position: 'relative',
     cursor: 'pointer',
-    zIndex: 2,
+    zIndex: 3,
     '&:hover': {
       backgroundColor: 'white',
       '& ul': {

@@ -61,7 +61,7 @@ const App = () => {
       <CssBaseline />
       <Routes />
       <Chat />
-      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
+      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200, zIndex: 3 }} />
     </ThemeProvider>
   );
 };

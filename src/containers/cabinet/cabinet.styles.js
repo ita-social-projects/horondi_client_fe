@@ -37,5 +37,14 @@ export const useStyles = makeStyles(() => ({
       fontSize: '2rem',
       color: props.logged ? 'black' : 'white'
     }
-  })
+  }),
+  list: {
+    '& .MuiMenuItem-root': {
+      flexDirection: 'row',
+      padding: 10,
+      '& svg': {
+        marginRight: '5px'
+      }
+    }
+  }
 }));

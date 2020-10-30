@@ -73,7 +73,6 @@ const NavbarLeft = () => {
       {!!moreDropDownList && (
         <div>
           <Link
-            to=''
             aria-controls='customized-menu'
             aria-haspopup='true'
             className={styles.link}

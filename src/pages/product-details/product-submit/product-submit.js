@@ -52,10 +52,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     : TOOLTIPS[language].addWishful;
 
   const onWishfulHandler = () => {
+    const { _id, name, basePrice, images } = product;
     if (isWishful) {
-      dispatch(removeItemFromWishlist(productToSend));
+      dispatch(removeItemFromWishlist(_id));
     } else {
-      dispatch(addItemToWishlist(productToSend));
+      dispatch(addItemToWishlist({ _id, name, basePrice, images }));
     }
   };
 

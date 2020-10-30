@@ -15,6 +15,7 @@ import {
   setRecoveryLoading,
   setUserOrders
 } from './user.actions';
+import { getUserByToken } from './user.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -30,6 +31,8 @@ import {
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
 import { setToLocalStorage } from '../../services/local-storage.service';
+import { setCart } from '../cart/cart.actions';
+import { setWishlist } from '../wishlist/wishlist.actions';
 
 export const loginUser = (data) => {
   const query = `
@@ -68,7 +71,28 @@ export const loginUser = (data) => {
 				currency
 				value
 			}
+			images {
+			  primary {
+			    small
+			  }			  
+			}
 		}
+					cart {
+					_id
+					name {
+						lang
+						value
+					}
+					basePrice {
+						currency
+						value
+					}
+					 images {
+			      primary {
+			         small
+			     }
+				}
+				}
   }
 }
   `;
@@ -88,8 +112,15 @@ export function* handleUserLoad({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
+
     yield put(setUser(user.data.loginUser));
+    yield put(setCart(user.data.loginUser.cart));
+    yield put(setWishlist(user.data.loginUser.wishlist));
+
     yield setToLocalStorage('accessToken', user.data.loginUser.token);
+    yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
+    yield setToLocalStorage('cart', user.data.loginUser.cart);
+
     yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {
@@ -215,58 +246,9 @@ export function* handleUserPreserve() {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    const user = yield call(
-      getItems,
-      `query {
-      getUserByToken {
-        ... on User {
-        purchasedProducts
-        orders
-        _id
-        email
-        firstName
-        lastName
-        phoneNumber
-        images {
-          thumbnail
-        }
-        address {
-          country
-          city
-          street
-          buildingNumber
-          appartment
-          zipcode
-          region
-        }
-				confirmed
-				wishlist {
-					_id
-					name {
-						lang
-						value
-					}
-					basePrice {
-						currency
-						value
-					}
-				}
-        }
-        ... on Error {
-          statusCode
-          message
-        }
-      }
-    }`
-    );
-    if (
-      user.data.getUserByToken.statusCode >= 400 ||
-      !user.data.getUserByToken
-    ) {
-      yield setToLocalStorage('accessToken', null);
-    } else {
-      yield put(setUser(user.data.getUserByToken));
-    }
+    const user = yield call(getUserByToken);
+
+    yield put(setUser(user));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -284,7 +266,7 @@ export function* handleUpdateUser({ payload }) {
     const user = yield call(
       setItems,
       `
-     mutation updateUser($user: UserInput!, $id: ID!, $upload: Upload){
+     mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
       updateUserById(user: $user, id: $id, upload: $upload) {
         purchasedProducts
         orders

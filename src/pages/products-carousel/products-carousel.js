@@ -43,7 +43,7 @@ const ProductsCarousel = ({ category }) => {
   }, [dispatch, category]);
 
   useMemo(() => {
-    models.forEach((item, i) => {
+    models.forEach((item) => {
       getImage(item.images.large)
         .then((src) => setImages((prev) => [...prev, src]))
         .catch((badSrc) => setImages((prev) => [...prev, badSrc]));

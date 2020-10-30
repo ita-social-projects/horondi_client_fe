@@ -70,15 +70,14 @@ const NavbarLeft = () => {
       {navbarList}
       {!!moreDropDownList && (
         <div>
-          <Link
-            to=''
+          <div
             aria-controls='customized-menu'
             aria-haspopup='true'
             className={styles.link}
             onClick={handleClick}
           >
             {moreHeaderButton[language].value}
-          </Link>
+          </div>
           <Menu
             className={styles.menu}
             anchorEl={anchorEl}

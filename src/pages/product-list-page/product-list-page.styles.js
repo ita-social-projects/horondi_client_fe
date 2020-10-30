@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     padding: '0 2rem 1rem 2rem',
-    width: '100vw'
+    width: '100%'
   },
   div: {
     display: 'flex',

@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 import getItems, { setItems, client } from '../../utils/client';
 
-const getComments = async (id) => {
+const getComments = async (id, limit) => {
   const res = await getItems(
-    `query($id: ID!) {
-        getAllCommentsByProduct(productId: $id) {
+    `query($id: ID!, $limit: Int!) {
+        getAllCommentsByProduct(productId: $id, limit: $limit) {
           ... on Comment {
             _id
             text
@@ -20,7 +20,8 @@ const getComments = async (id) => {
         }
     }`,
     {
-      id
+      id,
+      limit
     }
   );
   await client.resetStore();
@@ -78,7 +79,7 @@ const addComment = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   await client.resetStore();
-  return result;
+  return result.data.addComment;
 };
 
 const deleteComment = async (payload) => {
@@ -88,8 +89,6 @@ const deleteComment = async (payload) => {
         deleteComment(id: $comment) {
           ... on Comment {
             _id
-            text
-            date
           }
         }
       }
@@ -98,7 +97,7 @@ const deleteComment = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   await client.resetStore();
-  return result;
+  return result.data.deleteComment;
 };
 
 const updateComment = async (payload) => {
@@ -141,7 +140,7 @@ const updateComment = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   await client.resetStore();
-  return result;
+  return result.data.updateComment;
 };
 
 export { getComments, changeRate, addComment, deleteComment, updateComment };

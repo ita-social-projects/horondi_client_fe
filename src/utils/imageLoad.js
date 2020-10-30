@@ -5,6 +5,8 @@ export const getImage = (imageUrlData) =>
   new Promise((resolve, reject) => {
     const imageUrl = `${IMG_URL}${imageUrlData}`;
 
+    console.log('gg wp');
+
     const img = new Image();
     img.onload = () => resolve(imageUrl);
     img.onerror = () => reject(notLoaded);

@@ -16,6 +16,7 @@ import {
   SELECT_NONE
 } from '../../../translations/product-details.translations';
 import { setProductToSend } from '../../../redux/products/products.actions';
+import { DEFAULT_PRICE } from '../../../configs';
 
 const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const styles = useStyles();
@@ -38,15 +39,18 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-          .additionalPrice[currency].value / 100
-      : 0;
+          .additionalPrice
+      : DEFAULT_PRICE;
 
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-          .additionalPrice[currency].value / 100
-      : 0;
+          .additionalPrice
+      : DEFAULT_PRICE;
 
-    const newTotalPrice = totalPrice - oldPrice + newPrice;
+    const newTotalPrice = totalPrice.map((item, i) => {
+      item.value = item.value - oldPrice[i].value + newPrice[i].value;
+      return item;
+    });
 
     const bottomNameToSend = value
       ? bottomMaterials.find(({ name }) => name[1].value === value).name
@@ -54,7 +58,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
     dispatch(
       setProductToSend({
-        totalPrice: +newTotalPrice.toFixed(2),
+        totalPrice: newTotalPrice,
         bagBottom: { value, name: bottomNameToSend }
       })
     );
@@ -62,17 +66,23 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
   const handlePocketChange = (event) => {
     const { checked } = event.target;
-    let newPrice;
+    let newTotalPrice;
 
     if (!sidePocket) {
-      newPrice = totalPrice + additionalPrice[currency].value / 100;
+      newTotalPrice = totalPrice.map((item, i) => {
+        item.value += additionalPrice[i].value;
+        return item;
+      });
     } else {
-      newPrice = totalPrice - additionalPrice[currency].value / 100;
+      newTotalPrice = totalPrice.map((item, i) => {
+        item.value -= additionalPrice[i].value;
+        return item;
+      });
     }
 
     dispatch(
       setProductToSend({
-        totalPrice: +newPrice.toFixed(2),
+        totalPrice: newTotalPrice,
         sidePocket: checked
       })
     );

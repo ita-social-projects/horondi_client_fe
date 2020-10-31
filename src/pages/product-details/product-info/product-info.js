@@ -34,19 +34,23 @@ const ProductInfo = ({ currencySign }) => {
     strapLengthInCm,
     currentPrice,
     currentWeight,
-    currentVolume
-  } = useSelector(({ Language, Products: { product, productToSend } }) => ({
-    language: Language.language,
-    rate: product.rate,
-    name: product.name,
-    description: product.description,
-    mainMaterial: product.mainMaterial,
-    innerMaterial: product.innerMaterial,
-    strapLengthInCm: product.strapLengthInCm,
-    currentPrice: productToSend.totalPrice,
-    currentWeight: productToSend.dimensions.weightInKg,
-    currentVolume: productToSend.dimensions.volumeInLiters
-  }));
+    currentVolume,
+    currency
+  } = useSelector(
+    ({ Language, Products: { product, productToSend }, Currency }) => ({
+      language: Language.language,
+      rate: product.rate,
+      name: product.name,
+      description: product.description,
+      mainMaterial: product.mainMaterial,
+      innerMaterial: product.innerMaterial,
+      strapLengthInCm: product.strapLengthInCm,
+      currentPrice: productToSend.totalPrice,
+      currentWeight: productToSend.dimensions.weightInKg,
+      currentVolume: productToSend.dimensions.volumeInLiters,
+      currency: Currency.currency
+    })
+  );
 
   return (
     <div>
@@ -100,7 +104,7 @@ const ProductInfo = ({ currencySign }) => {
         </span>
         <span data-cy='price' className={styles.price}>
           <FontAwesomeIcon icon={currencySign} />
-          {currentPrice}
+          {currentPrice[currency].value / 100}
         </span>
       </div>
       <div className={styles.look}>

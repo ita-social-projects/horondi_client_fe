@@ -21,7 +21,7 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_SIZE } from '../../configs';
+import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -80,7 +80,7 @@ const ProductDetails = ({ match }) => {
           _id,
           name,
           image: images.primary.small,
-          totalPrice: +(basePrice[currency].value / 100).toFixed(2)
+          totalPrice: basePrice
         })
       );
     }
@@ -184,19 +184,20 @@ const ProductDetails = ({ match }) => {
 
   const handleSizeChange = (id) => {
     const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[currency]
-          .value / 100
-      : 0;
+      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
+      : DEFAULT_PRICE;
+
     const { additionalPrice } = sizes.find(({ _id }) => _id === id);
-    const newPrice =
-      productToSend.totalPrice -
-      oldPrice +
-      additionalPrice[currency].value / 100;
+
+    const newTotalPrice = productToSend.totalPrice.map((item, i) => {
+      item.value = item.value - oldPrice[i].value + additionalPrice[i].value;
+      return item;
+    });
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: +newPrice.toFixed(2),
+        totalPrice: newTotalPrice,
         dimensions: { volumeInLiters, weightInKg },
         selectedSize: id
       })

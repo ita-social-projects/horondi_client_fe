@@ -10,7 +10,13 @@ import NumberInput from '../../../../components/number-input';
 import { setCartItemQuantity } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 
-const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
+const CartItem = ({
+  item,
+  setModalVisibility,
+  setModalItem,
+  language,
+  currency
+}) => {
   const dispatch = useDispatch();
   const styles = useStyles({ image: `${IMG_URL}${item.image}` });
 
@@ -46,7 +52,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
               {item.bagBottom.name[language].value}
             </span>
           )}
-          {item.sidePocket.isSelected && (
+          {item.sidePocket && (
             <span>
               {CART_TABLE_FIELDS[language].sidePocket}:{' '}
               <DoneIcon className={styles.doneIcon} />
@@ -61,7 +67,10 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
         />
       </div>
       <div className={styles.price}>
-        <span>{Number(item.totalPrice).toFixed(2)} UAH</span>
+        <span>
+          {item.totalPrice[currency].value / 100}{' '}
+          {item.totalPrice[currency].currency}
+        </span>
         <DeleteIcon
           className={styles.trash}
           onClick={onRemoveItem}

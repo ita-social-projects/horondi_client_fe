@@ -46,8 +46,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     () => sizes.find(({ _id }) => _id === selectedSize),
     [selectedSize, sizes]
   );
-  console.log(sizeToSend);
-  console.log(sizes);
 
   const wishlistTip = isWishful
     ? TOOLTIPS[language].removeWishful

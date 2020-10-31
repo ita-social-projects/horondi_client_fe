@@ -15,7 +15,7 @@ import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setUser } from '../../redux/user/user.actions';
-import { PROFILE_OPTIONS_VALUES } from '../../translations/cabinet.translations';
+import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const HeaderProfile = () => {
@@ -107,7 +107,7 @@ const HeaderProfile = () => {
     }
   ];
 
-  const mappedCabinetList = useMemo(
+  const mappedProfileList = useMemo(
     () =>
       PROFILE_STATIC_DATA.concat(
         userData ? PROFILE_LOGGED_DATA : PROFILE_NOT_LOGGED_DATA
@@ -149,7 +149,7 @@ const HeaderProfile = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {mappedCabinetList}
+        {mappedProfileList}
       </Menu>
     </div>
   );

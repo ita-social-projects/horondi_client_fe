@@ -2,24 +2,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   cardBody: {
-    flex: '1 1 auto',
-    minHeight: '1px',
-    padding: '1.25rem',
-    '&:before': {
-      boxSizing: 'border-box'
-    },
-    '&:after': {
-      boxSizing: 'border-box'
+    flex: 1,
+    padding: '25px',
+    '@media screen and (max-width: 552px)': {
+      width: '50%'
     }
   },
   iconsBox: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    flexDirection: 'column'
   },
   cardTitle: {
     fontSize: '1.25rem',
-    marginBottom: '0.75rem'
+    marginBottom: '10px',
+    '@media screen and (max-width: 552px)': {
+      textAlign: 'center'
+    }
   },
   iconWrap: {
     margin: '0.5rem'

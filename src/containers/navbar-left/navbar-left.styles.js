@@ -20,6 +20,7 @@ export const useStyles = makeStyles(() => ({
     fontSize: '1.2rem',
     letterSpacing: '0.1rem',
     transition: 'all 0.3s',
+    cursor: 'pointer',
     '&:hover': {
       color: '#000000',
       backgroundColor: '#ffffff'

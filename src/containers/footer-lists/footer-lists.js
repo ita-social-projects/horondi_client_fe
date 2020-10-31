@@ -11,7 +11,6 @@ import {
   FOOTER_CONTACTS,
   FOOTER_CATALOGS
 } from '../../translations/footer.translations';
-// import { URL_LANGUAGE } from '../../configs';
 
 const FooterLists = () => {
   const styles = useStyles();
@@ -22,16 +21,16 @@ const FooterLists = () => {
 
   const categoriesList = categories
     ? categories.map(({ _id, name, isMain }) =>
-      isMain ? (
-        <div key={_id}>
-          <Typography variant='subtitle2'>
-            <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
-              {name[language].value}
-            </Link>
-          </Typography>
-        </div>
-      ) : null
-    )
+        isMain ? (
+          <div key={_id}>
+            <Typography variant='subtitle2'>
+              <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+                {name[language].value}
+              </Link>
+            </Typography>
+          </div>
+        ) : null
+      )
     : null;
 
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (
@@ -50,7 +49,7 @@ const FooterLists = () => {
     </div>
   ));
   return (
-    <div className={styles.cardDeck}>
+    <>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
           <Typography variant='h5'>
@@ -82,7 +81,7 @@ const FooterLists = () => {
           </Typography>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

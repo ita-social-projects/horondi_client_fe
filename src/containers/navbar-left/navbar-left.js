@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { MenuItem } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import { MenuItem } from '@material-ui/core';
 import { useStyles } from './navbar-left.styles';
 import { getAllHeaderLinks } from '../../redux/header-links/header-links.actions';
-
 import { LOGO, moreHeaderButton } from '../../configs';
 
 const NavbarLeft = () => {
@@ -72,15 +70,14 @@ const NavbarLeft = () => {
       {navbarList}
       {!!moreDropDownList && (
         <div>
-          <Link
-            to=''
+          <div
             aria-controls='customized-menu'
             aria-haspopup='true'
             className={styles.link}
             onClick={handleClick}
           >
             {moreHeaderButton[language].value}
-          </Link>
+          </div>
           <Menu
             className={styles.menu}
             anchorEl={anchorEl}

@@ -10,7 +10,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import HistoryIcon from '@material-ui/icons/History';
 
-import { useStyles } from './cabinet.styles';
+import { useStyles } from './header-profile.styles';
 import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
@@ -18,7 +18,7 @@ import { setUser } from '../../redux/user/user.actions';
 import { CABINET_OPTIONS_VALUES } from '../../translations/cabinet.translations';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
-const Cabinet = () => {
+const HeaderProfile = () => {
   const { userData, language, lightMode } = useSelector(
     ({ User, Language, Theme }) => ({
       userData: User.userData,
@@ -117,7 +117,12 @@ const Cabinet = () => {
           {value}
         </MenuItem>
       )),
-    [userData, lightMode, language]
+    [
+      userData,
+      CABINET_STATIC_DATA,
+      CABINET_LOGGED_DATA,
+      CABINET_NOT_LOGGED_DATA
+    ]
   );
 
   return (
@@ -150,4 +155,4 @@ const Cabinet = () => {
   );
 };
 
-export default Cabinet;
+export default HeaderProfile;

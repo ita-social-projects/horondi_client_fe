@@ -37,16 +37,24 @@ const Cabinet = () => {
     dispatch(getWishlist());
   }, [dispatch]);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleKeyDown = (e) => {
+    e.persist();
+    return !(e.type === 'keydown' && e.key !== 'Enter');
+  };
+
+  const handleClick = (e) => {
+    handleKeyDown(e) && setAnchorEl(e.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleChangeTheme = () => {
-    console.log(lightMode);
+  const handleChangeTheme = (e) => {
+    e.persist();
+    if (e.type === 'keydown' && e.key !== 'Enter') {
+      return;
+    }
     dispatch(setThemeMode(!lightMode));
     setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
   };
@@ -114,7 +122,11 @@ const Cabinet = () => {
 
   return (
     <div className={styles.cabinet} data-cy='cabinet'>
-      <PersonOutlineIcon onClick={handleClick} />
+      <PersonOutlineIcon
+        onClick={handleClick}
+        onKeyDown={handleClick}
+        tabIndex={0}
+      />
       <Menu
         className={styles.list}
         anchorEl={anchorEl}

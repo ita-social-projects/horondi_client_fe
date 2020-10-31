@@ -19,7 +19,7 @@ const CartHeader = () => {
 
   return (
     <Link to='/checkout'>
-      <IconButton className={styles.root} aria-label='cart'>
+      <IconButton className={styles.root} aria-label='cart' tabIndex={-1}>
         <Badge
           badgeContent={
             cartItems

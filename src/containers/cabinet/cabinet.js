@@ -51,12 +51,11 @@ const Cabinet = () => {
   };
 
   const handleChangeTheme = (e) => {
-    e.persist();
-    if (e.type === 'keydown' && e.key !== 'Enter') {
-      return;
+    if (handleKeyDown(e)) {
+      dispatch(setThemeMode(!lightMode));
+      setAnchorEl(null);
+      setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
     }
-    dispatch(setThemeMode(!lightMode));
-    setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
   };
 
   const handleLogout = () => {
@@ -66,6 +65,7 @@ const Cabinet = () => {
 
   const handleRedirect = (link) => {
     dispatch(push(link));
+    setAnchorEl(null);
   };
 
   const CABINET_STATIC_DATA = [
@@ -117,7 +117,7 @@ const Cabinet = () => {
           {value}
         </MenuItem>
       )),
-    [userData, lightMode]
+    [userData, lightMode, language]
   );
 
   return (

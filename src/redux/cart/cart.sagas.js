@@ -42,20 +42,12 @@ export function* handleAddCartItem({ payload }) {
     newCart = [...cart, payload];
   }
 
-  const userData = yield select(({ User }) => User.userData);
-  if (userData) {
-    yield call(
-      possibleItemInCart ? changeQuantityIntoUserCart : addProductToUserCart,
-      {
-        id: userData._id,
-        product: newCart.find(
-          ({ _id, selectedSize }) =>
-            _id === payload._id && selectedSize === payload.selectedSize
-        ),
-        key: cartKey
-      }
-    );
-  }
+  yield call(
+    handleUserCartOperation,
+    possibleItemInCart ? changeQuantityIntoUserCart : addProductToUserCart,
+    newCart,
+    payload
+  );
 
   yield put(setCart(newCart));
   setToLocalStorage(cartKey, newCart);
@@ -71,16 +63,10 @@ export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
         item.selectedSize !== selectedSize)
   );
 
-  const userData = yield select(({ User }) => User.userData);
-  if (userData) {
-    yield call(removeProductFromUserCart, {
-      id: userData._id,
-      product: cart.find(
-        (item) => item._id === _id && item.selectedSize === selectedSize
-      ),
-      key: cartKey
-    });
-  }
+  yield call(handleUserCartOperation, removeProductFromUserCart, cart, {
+    _id,
+    selectedSize
+  });
 
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
@@ -105,19 +91,27 @@ export function* handleSetCartItemQuantity({
     return item;
   });
 
+  yield call(handleUserCartOperation, changeQuantityIntoUserCart, newCart, {
+    _id,
+    selectedSize
+  });
+
+  setToLocalStorage(cartKey, newCart);
+  yield put(setCart(newCart));
+}
+
+function* handleUserCartOperation(handler, list, product) {
   const userData = yield select(({ User }) => User.userData);
   if (userData) {
-    yield call(changeQuantityIntoUserCart, {
+    yield call(handler, {
       id: userData._id,
-      product: newCart.find(
-        (item) => item._id === _id && item.selectedSize === selectedSize
+      product: list.find(
+        (item) =>
+          item._id === product._id && item.selectedSize === product.selectedSize
       ),
       key: cartKey
     });
   }
-
-  setToLocalStorage(cartKey, newCart);
-  yield put(setCart(newCart));
 }
 
 export default function* categoriesSaga() {

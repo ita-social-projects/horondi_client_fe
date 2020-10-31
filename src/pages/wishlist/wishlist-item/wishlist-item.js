@@ -42,7 +42,8 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
       </td>
       <td className={styles.price}>
         <span>
-          {item.basePrice[currency].value} {item.basePrice[currency].currency}
+          {item.basePrice[currency].value / 100}{' '}
+          {item.basePrice[currency].currency}
         </span>
         <DeleteIcon
           className={styles.trash}

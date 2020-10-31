@@ -1,4 +1,4 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import { setCart } from './cart.actions';
 import {
@@ -11,14 +11,21 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../services/local-storage.service';
+import {
+  addProductToUserCart,
+  changeQuantityIntoUserCart,
+  removeProductFromUserCart
+} from '../user/user.operations';
+
+const cartKey = 'cart';
 
 export function* handleCartLoad() {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   yield put(setCart(cart));
 }
 
 export function* handleAddCartItem({ payload }) {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   const possibleItemInCart = cart.find(
     (item) =>
       (item._id === payload._id && !item.selectedSize) ||
@@ -35,12 +42,27 @@ export function* handleAddCartItem({ payload }) {
     newCart = [...cart, payload];
   }
 
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(
+      possibleItemInCart ? changeQuantityIntoUserCart : addProductToUserCart,
+      {
+        id: userData._id,
+        product: newCart.find(
+          ({ _id, selectedSize }) =>
+            _id === payload._id && selectedSize === payload.selectedSize
+        ),
+        key: cartKey
+      }
+    );
+  }
+
   yield put(setCart(newCart));
-  setToLocalStorage('cart', newCart);
+  setToLocalStorage(cartKey, newCart);
 }
 
 export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   const newCart = cart.filter(
     (item) =>
       item._id !== _id ||
@@ -49,7 +71,18 @@ export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
         item.selectedSize !== selectedSize)
   );
 
-  setToLocalStorage('cart', newCart);
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(removeProductFromUserCart, {
+      id: userData._id,
+      product: cart.find(
+        (item) => item._id === _id && item.selectedSize === selectedSize
+      ),
+      key: cartKey
+    });
+  }
+
+  setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
 
@@ -60,7 +93,7 @@ export function* handleSetCartItemQuantity({
     key
   }
 }) {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((item) => {
     if (
       (item._id === _id && !item.selectedSize) ||
@@ -71,7 +104,19 @@ export function* handleSetCartItemQuantity({
     }
     return item;
   });
-  setToLocalStorage('cart', newCart);
+
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(changeQuantityIntoUserCart, {
+      id: userData._id,
+      product: newCart.find(
+        (item) => item._id === _id && item.selectedSize === selectedSize
+      ),
+      key: cartKey
+    });
+  }
+
+  setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
 

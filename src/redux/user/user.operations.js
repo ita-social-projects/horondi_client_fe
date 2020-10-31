@@ -49,14 +49,21 @@ const getUserByToken = async () => {
                 lang
                 value
               }
-              basePrice {
-                currency
+              totalPrice
+              image
+              bagBottom {
+                name {
+                  value
+                  lang
+                }
                 value
               }
-              images {
-                primary {
-                  small
-                }
+              quantity
+              selectedSize
+              sidePocket
+              dimensions {
+                volumeInLiters
+                weightInKg
               }
             }
           }
@@ -115,8 +122,68 @@ const addProductToUserWishlist = async ({ id, productId, key }) => {
   return result.data.addProductToWishlist;
 };
 
+const removeProductFromUserCart = async ({ id, product, key }) => {
+  const result = await client.mutate({
+    variables: {
+      id,
+      product,
+      key
+    },
+    mutation: gql`
+      mutation($id: ID!, $key: String!, $product: CartProductInput!) {
+        removeProductFromCart(id: $id, product: $product, key: $key) {
+          _id
+        }
+      }
+    `
+  });
+
+  return result.data.removeProductFromCart;
+};
+
+const addProductToUserCart = async ({ id, product, key }) => {
+  const result = await client.mutate({
+    variables: {
+      id,
+      product,
+      key
+    },
+    mutation: gql`
+      mutation($id: ID!, $key: String!, $product: CartProductInput!) {
+        addProductToCart(id: $id, product: $product, key: $key) {
+          _id
+        }
+      }
+    `
+  });
+
+  return result.data.addProductToCart;
+};
+
+const changeQuantityIntoUserCart = async ({ id, product, key }) => {
+  const result = await client.mutate({
+    variables: {
+      id,
+      product,
+      key
+    },
+    mutation: gql`
+      mutation($id: ID!, $key: String!, $product: CartProductInput!) {
+        changeCartProductQuantity(id: $id, product: $product, key: $key) {
+          _id
+        }
+      }
+    `
+  });
+
+  return result.data.changeCartProductQuantity;
+};
+
 export {
   getUserByToken,
   removeProductFromUserWishlist,
-  addProductToUserWishlist
+  addProductToUserWishlist,
+  removeProductFromUserCart,
+  changeQuantityIntoUserCart,
+  addProductToUserCart
 };

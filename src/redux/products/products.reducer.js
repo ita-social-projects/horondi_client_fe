@@ -56,14 +56,17 @@ export const initialState = {
     selectedSize: false,
     bagBottom: {
       value: '',
-      name: ''
+      name: [
+        { lang: 'uk', value: '' },
+        { lang: 'en', value: '' }
+      ]
     },
     sidePocket: false,
     totalPrice: 0,
     quantity: 1,
     dimensions: {
-      weightInKg: '',
-      volumeInLiters: ''
+      weightInKg: null,
+      volumeInLiters: null
     }
   }
 };

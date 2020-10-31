@@ -43,10 +43,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   );
 
   const sizeToSend = useMemo(
-    () => (sizes ? sizes.find(({ _id }) => _id === selectedSize) : null),
+    () => sizes.find(({ _id }) => _id === selectedSize),
     [selectedSize, sizes]
   );
-
+  console.log(sizeToSend);
   console.log(sizes);
 
   const wishlistTip = isWishful
@@ -72,7 +72,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const onAddToCart = () => {
     if ((product && !product.options[0].size) || selectedSize) {
       dispatch(
-        addItemToCart({ ...productToSend, selectedSize: sizeToSend.name })
+        addItemToCart({
+          ...productToSend,
+          selectedSize: sizeToSend ? sizeToSend.name : ''
+        })
       );
     } else {
       setSizeIsNotSelectedError(true);
@@ -82,7 +85,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const onAddToCheckout = () => {
     if ((product && !product.options[0].size) || selectedSize) {
       dispatch(
-        addItemToCart({ ...productToSend, selectedSize: sizeToSend.name })
+        addItemToCart({
+          ...productToSend,
+          selectedSize: sizeToSend ? sizeToSend.name : ''
+        })
       );
       dispatch(push('/checkout'));
     } else {

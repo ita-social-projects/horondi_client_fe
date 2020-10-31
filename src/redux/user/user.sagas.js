@@ -78,21 +78,28 @@ export const loginUser = (data) => {
 			}
 		}
 					cart {
-					_id
-					name {
-						lang
-						value
-					}
-					basePrice {
-						currency
-						value
-					}
-					 images {
-			      primary {
-			         small
-			     }
-				}
-				}
+              _id
+              name {
+                lang
+                value
+              }
+              totalPrice
+              image
+              bagBottom {
+                  name {
+                      value  
+                      lang                    
+                  }
+                  value
+              }
+                quantity 
+                selectedSize
+                sidePocket
+                dimensions {
+                    volumeInLiters
+                    weightInKg
+                }                
+            }
   }
 }
   `;

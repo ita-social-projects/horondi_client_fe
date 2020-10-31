@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
-
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import useStyles from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
@@ -16,7 +17,6 @@ import {
   WEIGHT
 } from '../../../translations/product-details.translations';
 import Detail from '../detail';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProductInfo = ({ currencySign }) => {
   const styles = useStyles({
@@ -45,7 +45,7 @@ const ProductInfo = ({ currencySign }) => {
       mainMaterial: product.mainMaterial,
       innerMaterial: product.innerMaterial,
       strapLengthInCm: product.strapLengthInCm,
-      currentPrice: productToSend.totalPrice,
+      currentPrice: product.basePrice,
       currentWeight: productToSend.dimensions.weightInKg,
       currentVolume: productToSend.dimensions.volumeInLiters,
       currency: Currency.currency

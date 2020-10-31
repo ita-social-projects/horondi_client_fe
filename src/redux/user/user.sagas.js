@@ -83,7 +83,10 @@ export const loginUser = (data) => {
                 lang
                 value
               }
-              totalPrice
+                totalPrice {
+                  value
+                  currency
+              }
               image
               bagBottom {
                   name {

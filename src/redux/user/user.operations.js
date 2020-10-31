@@ -49,7 +49,10 @@ const getUserByToken = async () => {
                 lang
                 value
               }
-              totalPrice
+              totalPrice {
+                value
+                currency
+              }
               image
               bagBottom {
                 name {

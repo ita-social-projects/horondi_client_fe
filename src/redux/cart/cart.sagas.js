@@ -22,8 +22,7 @@ export function* handleAddCartItem({ payload }) {
   const possibleItemInCart = cart.find(
     (item) =>
       (item._id === payload._id && !item.selectedSize) ||
-      (item._id === payload._id &&
-        item.selectedSize.name === payload.selectedSize.name)
+      (item._id === payload._id && item.selectedSize === payload.selectedSize)
   );
 
   let newCart;
@@ -47,7 +46,7 @@ export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
       item._id !== _id ||
       (item._id === _id &&
         item.selectedSize &&
-        item.selectedSize.name !== selectedSize.name)
+        item.selectedSize !== selectedSize)
   );
 
   setToLocalStorage('cart', newCart);
@@ -65,7 +64,7 @@ export function* handleSetCartItemQuantity({
   const newCart = cart.map((item) => {
     if (
       (item._id === _id && !item.selectedSize) ||
-      (item._id === _id && item.selectedSize.name === selectedSize.name)
+      (item._id === _id && item.selectedSize === selectedSize)
     ) {
       // key will be true if user typing inside input
       item.quantity = key ? value || 1 : item.quantity + value;

@@ -47,22 +47,33 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     [selectedSize, sizes]
   );
 
+  console.log(sizes);
+
   const wishlistTip = isWishful
     ? TOOLTIPS[language].removeWishful
     : TOOLTIPS[language].addWishful;
 
   const onWishfulHandler = () => {
-    const { _id, name, basePrice, images } = product;
+    const {
+      _id,
+      name,
+      basePrice,
+      images: { primary }
+    } = product;
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
     } else {
-      dispatch(addItemToWishlist({ _id, name, basePrice, images }));
+      dispatch(
+        addItemToWishlist({ _id, name, basePrice, images: { primary } })
+      );
     }
   };
 
   const onAddToCart = () => {
     if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
+      dispatch(
+        addItemToCart({ ...productToSend, selectedSize: sizeToSend.name })
+      );
     } else {
       setSizeIsNotSelectedError(true);
     }
@@ -70,7 +81,9 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   const onAddToCheckout = () => {
     if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
+      dispatch(
+        addItemToCart({ ...productToSend, selectedSize: sizeToSend.name })
+      );
       dispatch(push('/checkout'));
     } else {
       setSizeIsNotSelectedError(true);

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Card } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
 import Comments from './comments';
@@ -20,7 +21,6 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
@@ -28,7 +28,6 @@ const ProductDetails = ({ match }) => {
   const {
     product,
     isLoading,
-    productUrl,
     categoryFilter,
     productToSend,
     currency
@@ -41,7 +40,6 @@ const ProductDetails = ({ match }) => {
       currency: Currency.currency,
       categoryFilter: filters.categoryFilter,
       isLoading: productLoading,
-      productUrl: router.location.pathname,
       product,
       productToSend
     })
@@ -81,10 +79,8 @@ const ProductDetails = ({ match }) => {
         setProductToSend({
           _id,
           name,
-          images,
-          productUrl,
-          totalPrice: +(basePrice[currency].value / 100).toFixed(2),
-          dimensions: { volumeInLiters, weightInKg }
+          image: images.primary.small,
+          totalPrice: +(basePrice[currency].value / 100).toFixed(2)
         })
       );
     }
@@ -103,7 +99,6 @@ const ProductDetails = ({ match }) => {
     _id,
     name,
     images,
-    productUrl,
     currency
   ]);
 
@@ -192,9 +187,7 @@ const ProductDetails = ({ match }) => {
       ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[currency]
           .value / 100
       : 0;
-    const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
-      ({ _id }) => _id === id
-    );
+    const { additionalPrice } = sizes.find(({ _id }) => _id === id);
     const newPrice =
       productToSend.totalPrice -
       oldPrice +

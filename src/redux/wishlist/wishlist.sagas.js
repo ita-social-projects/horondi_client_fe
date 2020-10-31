@@ -16,8 +16,8 @@ import {
 
 import { setUser } from '../user/user.actions';
 import {
-  removeProductFromUserCartOrWishlist,
-  addProductToUserCartOrWishlist
+  removeProductFromUserWishlist,
+  addProductToUserWishlist
 } from '../user/user.operations';
 
 const key = 'wishlist';
@@ -39,7 +39,7 @@ export function* handleAddWishlistItem({ payload: product }) {
     if (userData) {
       userData.wishlist = [...userData.wishlist, product];
       yield put(setUser(userData));
-      yield call(addProductToUserCartOrWishlist, {
+      yield call(addProductToUserWishlist, {
         id: userData._id,
         productId: product._id,
         key
@@ -65,7 +65,7 @@ export function* handleRemoveWishlistItem({ payload: productId }) {
         ({ _id }) => _id !== productId
       );
       yield put(setUser(userData));
-      yield call(removeProductFromUserCartOrWishlist, {
+      yield call(removeProductFromUserWishlist, {
         id: userData._id,
         productId,
         key

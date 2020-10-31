@@ -12,7 +12,7 @@ import { IMG_URL } from '../../../../configs';
 
 const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.images.primary.large}` });
+  const styles = useStyles({ image: `${IMG_URL}${item.image}` });
 
   const onChangeQuantity = (value, key) => {
     dispatch(setCartItemQuantity(item, +value, key));
@@ -27,17 +27,17 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
     <div className={styles.root} data-cy='cart-item'>
       <div className={styles.itemData}>
         <div className={styles.image} data-cy='cart-item-img'>
-          <Link to={item.productUrl}>
+          <Link to={`/product/${item._id}`}>
             <b />
           </Link>
         </div>
         <div className={styles.description} data-cy='cart-item-description'>
-          <Link to={item.productUrl}>
+          <Link to={`/product/${item._id}`}>
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
           {item.selectedSize && (
             <span>
-              {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
+              {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
             </span>
           )}
           {item.bagBottom.value && (

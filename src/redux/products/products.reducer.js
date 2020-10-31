@@ -52,19 +52,15 @@ export const initialState = {
   productToSend: {
     _id: '',
     name: '',
-    images: '',
+    image: '',
     selectedSize: false,
     bagBottom: {
       value: '',
       name: ''
     },
-    sidePocket: {
-      isSelected: false,
-      name: ''
-    },
+    sidePocket: false,
     totalPrice: 0,
     quantity: 1,
-    productUrl: '',
     dimensions: {
       weightInKg: '',
       volumeInLiters: ''

@@ -77,7 +77,7 @@ const getUserByToken = async () => {
   return result.data.getUserByToken;
 };
 
-const removeProductFromUserCartOrWishlist = async ({ id, productId, key }) => {
+const removeProductFromUserWishlist = async ({ id, productId, key }) => {
   const result = await client.mutate({
     variables: {
       id,
@@ -86,21 +86,17 @@ const removeProductFromUserCartOrWishlist = async ({ id, productId, key }) => {
     },
     mutation: gql`
       mutation($id: ID!, $key: String!, $productId: ID!) {
-        removeProductFromCartOrWishlist(
-          id: $id
-          productId: $productId
-          key: $key
-        ) {
+        removeProductFromWishlist(id: $id, productId: $productId, key: $key) {
           _id
         }
       }
     `
   });
 
-  return result.data.removeProductFromCartOrWishlist;
+  return result.data.removeProductFromWishlist;
 };
 
-const addProductToUserCartOrWishlist = async ({ id, productId, key }) => {
+const addProductToUserWishlist = async ({ id, productId, key }) => {
   const result = await client.mutate({
     variables: {
       id,
@@ -109,18 +105,18 @@ const addProductToUserCartOrWishlist = async ({ id, productId, key }) => {
     },
     mutation: gql`
       mutation($id: ID!, $key: String!, $productId: ID!) {
-        addProductToCartOrWishlist(id: $id, productId: $productId, key: $key) {
+        addProductToWishlist(id: $id, productId: $productId, key: $key) {
           _id
         }
       }
     `
   });
 
-  return result.data.addProductToCartOrWishlist;
+  return result.data.addProductToWishlist;
 };
 
 export {
   getUserByToken,
-  removeProductFromUserCartOrWishlist,
-  addProductToUserCartOrWishlist
+  removeProductFromUserWishlist,
+  addProductToUserWishlist
 };

@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useStyles from './product-features.styles';
 
 import {
@@ -15,7 +16,6 @@ import {
   SELECT_NONE
 } from '../../../translations/product-details.translations';
 import { setProductToSend } from '../../../redux/products/products.actions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const styles = useStyles();
@@ -24,7 +24,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
     ({ Language, Currency, Products: { productToSend } }) => ({
       language: Language.language,
       totalPrice: productToSend.totalPrice,
-      sidePocket: productToSend.sidePocket.isSelected,
+      sidePocket: productToSend.sidePocket,
       bagBottom: productToSend.bagBottom.value,
       currency: Currency.currency
     })
@@ -32,11 +32,6 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
   const { additionalPrice, name } =
     additions && additions.length ? additions[0] : {};
-
-  const additionsNameToSend = useMemo(
-    () => (additions && additions.length ? additions[0].name : null),
-    [additions]
-  );
 
   const handleBottomChange = (event) => {
     const { value } = event.target;
@@ -78,7 +73,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
     dispatch(
       setProductToSend({
         totalPrice: +newPrice.toFixed(2),
-        sidePocket: { isSelected: checked, additionsNameToSend }
+        sidePocket: checked
       })
     );
   };
@@ -90,7 +85,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
             {name[language].value}{' '}
             {additionalPrice[0].value ? (
               <span className={styles.selectPrice}>
-                {'+'}
+                +
                 <FontAwesomeIcon icon={currencySign} />
                 {(additionalPrice[currency].value / 100).toFixed()}
               </span>
@@ -139,7 +134,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
               <span>
                 {name[language].value}{' '}
                 <span className={styles.selectPrice}>
-                  {'+'}
+                  +
                   <FontAwesomeIcon icon={currencySign} />
                   {additionalPrice[currency].value / 100}
                 </span>

@@ -12,7 +12,6 @@ import {
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 import {
   PDP_BUTTONS,
@@ -22,18 +21,15 @@ import {
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, userData } = useSelector(
-    ({ Language, Products, User }) => ({
+  const { language, productToSend, product, wishlistItems } = useSelector(
+    ({ Language, Products, User, Wishlist }) => ({
       language: Language.language,
       productToSend: Products.productToSend,
       product: Products.product,
-      userData: User.userData
+      userData: User.userData,
+      wishlistItems: Wishlist.list
     })
   );
-
-  const wishlistItems = userData
-    ? userData.wishlist
-    : getFromLocalStorage('wishlist');
 
   const { selectedSize } = productToSend;
 

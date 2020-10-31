@@ -13,8 +13,6 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../services/local-storage.service';
-
-import { setUser } from '../user/user.actions';
 import {
   removeProductFromUserWishlist,
   addProductToUserWishlist
@@ -35,16 +33,11 @@ export function* handleAddWishlistItem({ payload: product }) {
     setToLocalStorage(key, newWishlist);
     yield put(setWishlist(newWishlist));
 
-    const userData = yield select(({ User }) => User.userData);
-    if (userData) {
-      userData.wishlist = [...userData.wishlist, product];
-      yield put(setUser(userData));
-      yield call(addProductToUserWishlist, {
-        id: userData._id,
-        productId: product._id,
-        key
-      });
-    }
+    yield call(
+      handleUserWishlistOperation,
+      addProductToUserWishlist,
+      product._id
+    );
   } catch (e) {
     yield put(setError({ e }));
     yield put(push('/error-page'));
@@ -59,21 +52,25 @@ export function* handleRemoveWishlistItem({ payload: productId }) {
     setToLocalStorage(key, newWishlist);
     yield put(setWishlist(newWishlist));
 
-    const userData = yield select(({ User }) => User.userData);
-    if (userData) {
-      userData.wishlist = userData.wishlist.filter(
-        ({ _id }) => _id !== productId
-      );
-      yield put(setUser(userData));
-      yield call(removeProductFromUserWishlist, {
-        id: userData._id,
-        productId,
-        key
-      });
-    }
+    yield call(
+      handleUserWishlistOperation,
+      removeProductFromUserWishlist,
+      productId
+    );
   } catch (e) {
     yield put(setError({ e }));
     yield put(push('/error-page'));
+  }
+}
+
+function* handleUserWishlistOperation(handler, productId) {
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(handler, {
+      id: userData._id,
+      productId,
+      key
+    });
   }
 }
 

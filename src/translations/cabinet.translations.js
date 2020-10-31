@@ -1,4 +1,4 @@
-export const CABINET_OPTIONS_VALUES = {
+export const PROFILE_OPTIONS_VALUES = {
   0: {
     profile: 'Профіль',
     wishlist: 'Список уподобань',

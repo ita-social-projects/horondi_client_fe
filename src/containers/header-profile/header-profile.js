@@ -15,7 +15,7 @@ import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setUser } from '../../redux/user/user.actions';
-import { CABINET_OPTIONS_VALUES } from '../../translations/cabinet.translations';
+import { PROFILE_OPTIONS_VALUES } from '../../translations/cabinet.translations';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const HeaderProfile = () => {
@@ -68,40 +68,40 @@ const HeaderProfile = () => {
     setAnchorEl(null);
   };
 
-  const CABINET_STATIC_DATA = [
+  const PROFILE_STATIC_DATA = [
     {
-      value: CABINET_OPTIONS_VALUES[language].wishlist,
+      value: PROFILE_OPTIONS_VALUES[language].wishlist,
       icon: <FavoriteIcon />,
       clickHandler: () => handleRedirect('/wishlist')
     },
     {
-      value: CABINET_OPTIONS_VALUES[language].changeTheme,
+      value: PROFILE_OPTIONS_VALUES[language].changeTheme,
       icon: themeIcon,
       clickHandler: handleChangeTheme
     }
   ];
 
-  const CABINET_NOT_LOGGED_DATA = [
+  const PROFILE_NOT_LOGGED_DATA = [
     {
-      value: CABINET_OPTIONS_VALUES[language].logIn,
+      value: PROFILE_OPTIONS_VALUES[language].logIn,
       icon: <ExitToAppIcon />,
       clickHandler: () => handleRedirect('/login')
     }
   ];
 
-  const CABINET_LOGGED_DATA = [
+  const PROFILE_LOGGED_DATA = [
     {
-      value: CABINET_OPTIONS_VALUES[language].profile,
+      value: PROFILE_OPTIONS_VALUES[language].profile,
       icon: <PersonOutlineIcon />,
       clickHandler: () => handleRedirect('/profile')
     },
     {
-      value: CABINET_OPTIONS_VALUES[language].orderHistory,
+      value: PROFILE_OPTIONS_VALUES[language].orderHistory,
       icon: <HistoryIcon />,
       clickHandler: () => handleRedirect('/order-history')
     },
     {
-      value: CABINET_OPTIONS_VALUES[language].logOut,
+      value: PROFILE_OPTIONS_VALUES[language].logOut,
       icon: <ExitToAppIcon />,
       clickHandler: handleLogout
     }
@@ -109,8 +109,8 @@ const HeaderProfile = () => {
 
   const mappedCabinetList = useMemo(
     () =>
-      CABINET_STATIC_DATA.concat(
-        userData ? CABINET_LOGGED_DATA : CABINET_NOT_LOGGED_DATA
+      PROFILE_STATIC_DATA.concat(
+        userData ? PROFILE_LOGGED_DATA : PROFILE_NOT_LOGGED_DATA
       ).map(({ value, icon, clickHandler }) => (
         <MenuItem key={value} onClick={clickHandler} disableGutters>
           {icon}
@@ -119,9 +119,9 @@ const HeaderProfile = () => {
       )),
     [
       userData,
-      CABINET_STATIC_DATA,
-      CABINET_LOGGED_DATA,
-      CABINET_NOT_LOGGED_DATA
+      PROFILE_STATIC_DATA,
+      PROFILE_LOGGED_DATA,
+      PROFILE_NOT_LOGGED_DATA
     ]
   );
 

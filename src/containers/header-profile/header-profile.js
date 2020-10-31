@@ -126,7 +126,7 @@ const HeaderProfile = () => {
   );
 
   return (
-    <div className={styles.cabinet} data-cy='cabinet'>
+    <div className={styles.profile} data-cy='profile'>
       <PersonOutlineIcon
         onClick={handleClick}
         onKeyDown={handleClick}

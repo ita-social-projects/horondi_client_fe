@@ -7,6 +7,12 @@ export const useStyles = makeStyles(() => ({
     position: 'relative',
     cursor: 'pointer',
     zIndex: 2,
+
+    '@media (max-width: 500px)': {
+      height: '2rem',
+      marginLeft: '-0.8rem'
+    },
+
     '&:hover': {
       backgroundColor: 'white',
       '& ul': {

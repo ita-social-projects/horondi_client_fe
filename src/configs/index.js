@@ -3,14 +3,20 @@ export const LANGUAGE = 0;
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const ABOUT_US_IMAGES = {
-  hero: './images/about-us/hero-bg.jpg',
-  horondi_1: './images/about-us/horondi.jpg',
-  horondi_2: './images/about-us/horondi-2.jpg',
-  horondi_3: './images/about-us/horondi-3.jpg',
-  workPlace_1: './images/about-us/work-place.jpg',
-  workPlace_2: './images/about-us/work-place-2.jpg'
-};
+export const HOMEPAGE_LOOKS_IMAGES = [
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_1.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_2.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_3.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_4.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_5.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_6.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_7.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_8.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_9.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_10.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_11.jpg',
+  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
+];
 
 export const CART_IMAGES = {
   lightTheme: './images/cart/cart-light-theme-img.png',
@@ -120,26 +126,26 @@ export const errorMessages = [
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
-  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
+  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
+  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
+  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
   country:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   city:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   region:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   street:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
   link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };

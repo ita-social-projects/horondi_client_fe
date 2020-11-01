@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
-import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import { CssBaseline } from '@material-ui/core';
 import { getBurgerMenuLinks } from '../../redux/burger-menu/burger-menu.actions';
 import Routes from '../../routes';
@@ -65,7 +64,6 @@ const App = () => {
       <CssBaseline />
       <Routes />
       <Chat />
-      <ScrollUpButton ToggledStyle={{ left: 30, bottom: 200 }} />
     </ThemeProvider>
   );
 };

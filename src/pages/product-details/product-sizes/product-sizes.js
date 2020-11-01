@@ -15,6 +15,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   }));
 
   const sizeButtons =
+    sizes &&
     !!sizes.length &&
     sizes
       .filter(({ available, name }) => available && name)

@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { changeCurrency } from '../../redux/currency/currency.actions';
 
 export const useStyles = makeStyles((theme) => ({
   header: {

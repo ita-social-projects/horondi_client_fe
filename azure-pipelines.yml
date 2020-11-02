@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '2d68e37e-b748-4bf8-997e-c6747034ac63'
-  imageRepository: 'horondi_client_front'
+  imageRepository: 'horondiclientfront'
   containerRegistry: 'horondi.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'

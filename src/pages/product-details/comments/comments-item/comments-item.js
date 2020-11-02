@@ -99,7 +99,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
             text={text}
             handleOpen={handleOpen}
             commentId={commentId}
-            username={name}
+            firstName={name}
           />
         ) : (
           <div className={styles.text}>{text}</div>

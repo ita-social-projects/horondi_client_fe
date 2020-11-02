@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { Link } from 'react-router-dom';
@@ -20,14 +20,10 @@ import { carouselInterval } from '../../configs';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
-const ProductsCorousel = ({ category }) => {
+const ProductsCarousel = ({ category }) => {
+  const [images, setImages] = useState([]);
   const styles = useStyles();
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getModelsByCategory(category._id));
-  }, [dispatch, category]);
 
   const { models, loading, language, filterData } = useSelector(
     ({
@@ -41,6 +37,18 @@ const ProductsCorousel = ({ category }) => {
       filterData
     })
   );
+
+  useEffect(() => {
+    dispatch(getModelsByCategory(category._id));
+  }, [dispatch, category]);
+
+  useMemo(() => {
+    models.forEach((item) => {
+      getImage(item.images.large)
+        .then((src) => setImages((prev) => [...prev, src]))
+        .catch((badSrc) => setImages((prev) => [...prev, badSrc]));
+    });
+  }, [models]);
 
   if (loading) {
     return (
@@ -67,16 +75,16 @@ const ProductsCorousel = ({ category }) => {
   return (
     <div className={styles.container}>
       <AutoplaySlider
-        play={true}
+        play
         cancelOnInteraction={false}
         interval={carouselInterval}
         className={styles.slider}
         mobileTouch
       >
-        {models.map((model) => (
+        {models.map((model, index) => (
           <div
             key={model.name[1].value}
-            data-src={getImage(model.images.large)}
+            data-src={images[index]}
             className={styles.captionBlock}
           >
             <Link
@@ -94,4 +102,4 @@ const ProductsCorousel = ({ category }) => {
   );
 };
 
-export default ProductsCorousel;
+export default ProductsCarousel;

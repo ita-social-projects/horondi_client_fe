@@ -173,7 +173,9 @@ export const COMMENTS = {
     unregisteredTip:
       'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
     registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
-    successfulTip: 'Встановити рейтинг'
+    successfulTip: 'Встановити рейтинг',
+    loadMore: 'Завантажити більше',
+    hideBtn: 'Приховати коментарі'
   },
   1: {
     title: 'Comments',
@@ -183,6 +185,8 @@ export const COMMENTS = {
     submit: 'Leave comment',
     unregisteredTip: 'You should login and bought the product to leave rate',
     registeredTip: 'You should bought the product to leave rate',
-    successfulTip: 'Set rate'
+    successfulTip: 'Set rate',
+    loadMore: 'Load more',
+    hideBtn: 'Hide comments'
   }
 };

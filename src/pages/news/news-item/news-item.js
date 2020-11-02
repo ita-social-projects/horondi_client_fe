@@ -57,7 +57,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
           />
         </div>
         <CardHeader subheader={newsDate} data-cy='date' />
-        <CardContent>
+        <CardContent className={styles.newsItemContent}>
           <Typography
             className={styles.ArticleTitle}
             gutterBottom
@@ -88,12 +88,14 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>
-            <CardHeader subheader={newsAuthor} data-cy='authorName' />
-            <CardContent />
+            <CardHeader
+              subheader={newsAuthor}
+              data-cy='authorName'
+              className={styles.authorName}
+            />
             <Avatar
               alt={newsAuthor}
               src={newsAuthorAvatar}
-              className={styles.large}
               data-cy='authorPhoto'
             />
           </div>

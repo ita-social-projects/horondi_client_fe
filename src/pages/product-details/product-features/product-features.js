@@ -1,21 +1,20 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import useStyles from './product-features.styles';
 
+import { useStyles } from './product-features.styles';
 import {
   ADD_FEATURES,
   PRODUCT_BOTTOM,
   SELECT_NONE
 } from '../../../translations/product-details.translations';
 import { setProductToSend } from '../../../redux/products/products.actions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const styles = useStyles();

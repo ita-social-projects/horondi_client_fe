@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Rating from '@material-ui/lab/Rating';
-import useStyles from './similar-products-item.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Rating from '@material-ui/lab/Rating';
+
+import { useStyles } from './similar-products-item.styles';
 
 const SimilarProductItem = ({
   imageUrl,

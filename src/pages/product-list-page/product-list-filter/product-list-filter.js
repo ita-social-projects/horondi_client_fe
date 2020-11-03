@@ -13,7 +13,7 @@ import PriceFilter from './price-filter';
 import ModelsFilter from './models-filter';
 import HotItemFilter from './hot-item-filter';
 
-import useStyles from './product-list-filter.styles';
+import { useStyles } from './product-list-filter.styles';
 import {
   getFiltredProducts,
   setColorsFilter,

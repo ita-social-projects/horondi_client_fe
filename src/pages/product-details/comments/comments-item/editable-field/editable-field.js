@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { TextField, Tooltip, Button } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import useStyles from './editable-field.styles';
+import { useStyles } from './editable-field.styles';
 
 import { commentFields, formRegExp, TEXT } from '../../../../../configs';
 import { updateComment } from '../../../../../redux/comments/comments.actions';

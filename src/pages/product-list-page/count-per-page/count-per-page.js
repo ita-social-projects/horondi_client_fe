@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import useStyles from './count-per-page.styles';
+import { useStyles } from './count-per-page.styles';
 import { setCountPerPage } from '../../../redux/products/products.actions';
 import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
 import { setToLocalStorage } from '../../../services/local-storage.service';

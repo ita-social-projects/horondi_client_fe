@@ -5,7 +5,7 @@ import Rating from '@material-ui/lab/Rating';
 import { Button, Tooltip, TextField } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import useStyles from './comments.styles';
+import { useStyles } from './comments.styles';
 
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';

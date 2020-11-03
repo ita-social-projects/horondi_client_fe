@@ -3,7 +3,7 @@ import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import useStyles from './product-list-page.styles';
+import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';

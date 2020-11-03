@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
-import useStyles from './product-info.styles';
+import { useStyles } from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
 

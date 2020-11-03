@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
-import useStyles from './product-images.styles';
+import { useStyles } from './product-images.styles';
 
 import {
   IMGS_VIEWER,

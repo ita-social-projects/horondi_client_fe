@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
-import useStyles from './similar-products.styles';
+import { useStyles } from './similar-products.styles';
 
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { IMG_URL, RESPONSIVE_PDP } from '../../../configs';

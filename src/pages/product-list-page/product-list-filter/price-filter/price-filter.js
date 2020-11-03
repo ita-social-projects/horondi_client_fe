@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useDispatch, useSelector } from 'react-redux';
 import { PRICE_TEXT } from '../../../../translations/product-list.translations';
-import useStyles from '../product-list-filter.styles';
+import { useStyles } from '../product-list-filter.styles';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
 
 const PriceFilter = () => {

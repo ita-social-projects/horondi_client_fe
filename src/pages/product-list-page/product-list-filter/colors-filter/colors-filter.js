@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { useDispatch, useSelector } from 'react-redux';
 import { COLORS_TEXT } from '../../../../translations/product-list.translations';
-import useStyles from '../product-list-filter.styles';
+import { useStyles } from '../product-list-filter.styles';
 import { setColorsFilter } from '../../../../redux/products/products.actions';
 
 const ColorsFilter = () => {

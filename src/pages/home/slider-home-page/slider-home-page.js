@@ -1,28 +1,25 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Backdrop } from '@material-ui/core';
 import { useStyles } from './slider-home-page.style';
-import { getImage } from '../../../utils/imageLoad';
+// import { getImage } from '../../../utils/imageLoad';
 import LoadingBar from '../../../components/loading-bar';
+import { getHomePageSliderImages } from '../../../redux/homepage-slider/homepage-slider.actions';
 
 const SliderHomePage = () => {
-  const [images, setImages] = useState([]);
-
   const styles = useStyles();
-  const { models, loading } = useSelector(({ Model }) => ({
-    models: Model.models,
-    loading: Model.loading
+  const { images, loading } = useSelector(({ HomePageSlider }) => ({
+    images: HomePageSlider.images,
+    loading: HomePageSlider.loading
   }));
 
-  useMemo(() => {
-    models.forEach((item) => {
-      getImage(item.images.large)
-        .then((src) => setImages(src))
-        .catch((badSrc) => setImages(badSrc));
-    });
-  }, [models]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getHomePageSliderImages());
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -32,15 +29,22 @@ const SliderHomePage = () => {
     );
   }
 
-  return models.length > 0 ? (
+  return (
     <div className={styles.captionBlock}>
-      <AwesomeSlider className={styles.slider} mobileTouch>
-        {models.map((photo, index) => (
-          <div key={photo.name[1].value} data-src={images[index]} />
+      <AwesomeSlider
+        className={styles.slider}
+        mobileTouch
+        fillParent='true'
+        infinite='true'
+        buttons='false'
+        organicArrows='false'
+      >
+        {images.items.map((item) => (
+          <div key={item._id}>{item.images.large}</div>
         ))}
       </AwesomeSlider>
     </div>
-  ) : null;
+  );
 };
 
 export default SliderHomePage;

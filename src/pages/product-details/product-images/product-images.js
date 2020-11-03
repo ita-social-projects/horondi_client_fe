@@ -57,8 +57,8 @@ const ProductImages = () => {
         currImg={currImg}
         showThumbnails
         isOpen={isOpen}
-        onClickPrev={() => setCurrImg((currImg) => currImg - 1)}
-        onClickNext={() => setCurrImg((currImg) => currImg + 1)}
+        onClickPrev={() => setCurrImg((prev) => prev - 1)}
+        onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
         onClose={() => setIsOpen(false)}
         closeBtnTitle={IMGS_VIEWER[language].close}

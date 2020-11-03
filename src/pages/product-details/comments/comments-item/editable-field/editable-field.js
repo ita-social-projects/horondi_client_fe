@@ -1,12 +1,11 @@
 import React from 'react';
-import useCommentValidation from '../../../../../hooks/use-comment-validation';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { TextField, Tooltip, Button } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { useStyles } from './editable-field.styles';
+import { TextField, Tooltip, Button } from '@material-ui/core';
 
-import { commentFields, formRegExp, TEXT } from '../../../../../configs';
+import useCommentValidation from '../../../../../hooks/use-comment-validation';
+import { useStyles } from './editable-field.styles';
+import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
 import { updateComment } from '../../../../../redux/comments/comments.actions';
 
 import {
@@ -34,11 +33,11 @@ const EditableField = ({
 
   const { email, images } = userData;
 
-  const onSubmit = ({ text }) => {
+  const onSubmit = ({ text: fieldText }) => {
     dispatch(
       updateComment({
         product,
-        text,
+        text: fieldText,
         email,
         images,
         firstName,
@@ -61,7 +60,7 @@ const EditableField = ({
 
   const handleCommentChange = (e) => {
     const value = e.target.value.replace(formRegExp.link, '');
-    setFieldValue(TEXT, value);
+    setFieldValue(TEXT_VALUE, value);
   };
 
   return (
@@ -76,7 +75,7 @@ const EditableField = ({
         onBlur={handleBlur}
         error={!!errors.text}
         helperText={errors.text || ''}
-        name={TEXT}
+        name={TEXT_VALUE}
       />
       <div className={styles.editForm}>
         <Button

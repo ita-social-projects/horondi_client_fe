@@ -14,7 +14,7 @@ import { useStyles } from './news-detail.style';
 import { TIME_OPTIONS } from '../../../configs';
 import { Loader } from '../../../components/loader/loader';
 
-const NewsDetailPage = ({ match }) => {
+const NewsDetail = ({ match }) => {
   const { article, loading, language } = useSelector(({ News, Language }) => ({
     article: News.activeArticle,
     loading: News.loading,
@@ -111,7 +111,7 @@ const NewsDetailPage = ({ match }) => {
   );
 };
 
-NewsDetailPage.propTypes = {
+NewsDetail.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired
@@ -119,4 +119,4 @@ NewsDetailPage.propTypes = {
   }).isRequired
 };
 
-export default NewsDetailPage;
+export default NewsDetail;

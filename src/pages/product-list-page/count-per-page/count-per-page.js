@@ -10,9 +10,9 @@ const CountPerPage = () => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const { countPerPage } = useSelector(({ Products: { countPerPage } }) => ({
-    countPerPage
-  }));
+  const countPerPageValue = useSelector(
+    ({ Products: { countPerPage } }) => countPerPage
+  );
 
   const pickQuantity = (value) => {
     dispatch(setCountPerPage(value));
@@ -21,7 +21,7 @@ const CountPerPage = () => {
 
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
-      className={countPerPage === item.value && styles.selectedButton}
+      className={countPerPageValue === item.value && styles.selectedButton}
       data-cy={item.title}
       title={item.title}
       key={item.value}

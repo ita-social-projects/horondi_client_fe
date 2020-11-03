@@ -6,7 +6,7 @@ import Rating from '@material-ui/lab/Rating';
 
 import { useStyles } from './similar-products-item.styles';
 
-const SimilarProductItem = ({
+const SimilarProductsItem = ({
   imageUrl,
   id,
   name,
@@ -35,4 +35,4 @@ const SimilarProductItem = ({
   );
 };
 
-export default SimilarProductItem;
+export default SimilarProductsItem;

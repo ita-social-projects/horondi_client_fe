@@ -2,28 +2,14 @@ import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PRICE_TEXT } from '../../../../translations/product-list.translations';
 import { useStyles } from '../product-list-filter.styles';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
 
-const PriceFilter = () => {
+const PriceFilter = ({ filterData, filters, language, currency }) => {
   const dispatch = useDispatch();
-
   const styles = useStyles();
-
-  const { filterData, filters, language, currency } = useSelector(
-    ({
-      Products: { filterData, filters },
-      Language: { language },
-      Currency: { currency }
-    }) => ({
-      filterData,
-      filters,
-      language,
-      currency
-    })
-  );
 
   const { priceFilter } = filters;
 

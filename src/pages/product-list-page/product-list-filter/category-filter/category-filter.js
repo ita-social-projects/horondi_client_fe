@@ -4,23 +4,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CATERGORY_TEXT } from '../../../../translations/product-list.translations';
 import { useStyles } from '../product-list-filter.styles';
 import { setCategoryFilter } from '../../../../redux/products/products.actions';
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ filterData, filters, language }) => {
   const dispatch = useDispatch();
-
   const styles = useStyles();
-
-  const { filterData, filters, language } = useSelector(
-    ({ Products: { filterData, filters }, Language: { language } }) => ({
-      filterData,
-      filters,
-      language
-    })
-  );
 
   const { categoryFilter } = filters;
 

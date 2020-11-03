@@ -12,6 +12,7 @@ import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { getCategories } from '../../redux/categories/categories.actions';
 import { Loader } from '../loader/loader';
+import ErrorBoundary from '../error-boundary';
 import { preserveUser } from '../../redux/user/user.actions';
 import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
@@ -56,11 +57,13 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={themeValue}>
-      <CssBaseline />
-      <Routes />
-      <Chat />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider theme={themeValue}>
+        <CssBaseline />
+        <Routes />
+        <Chat />
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 

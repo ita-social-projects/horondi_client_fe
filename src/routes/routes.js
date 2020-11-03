@@ -31,6 +31,7 @@ import ProfilePage from '../pages/profile-page';
 import OrderHistory from '../pages/order-history';
 import ProtectedRoute from '../components/protected-route';
 import Materials from '../pages/materials';
+import ErrorBoundary from '../components/error-boundary';
 
 const Routes = () => {
   const styles = useStyles();
@@ -128,7 +129,11 @@ const Routes = () => {
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
-              return <ProductListPage category={categoryParam} model={model} />;
+              return (
+                <ErrorBoundary>
+                  <ProductListPage category={categoryParam} model={model} />
+                </ErrorBoundary>
+              );
             }}
           />
         </Switch>

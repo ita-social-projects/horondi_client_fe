@@ -97,7 +97,6 @@
     "@graphql-codegen/fragment-matcher": "^1.17.8",
     "babel-eslint": "^10.1.0",
     "cypress": "^4.12.1",
-    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",

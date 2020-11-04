@@ -20,11 +20,11 @@ class ErrorBoundary extends React.Component {
     this.setState({ hasError: true });
   }
   render() {
-    if (this.state.hasError) {
-      return <Redirect to='/error-page' />;
-    } else {
-      return this.props.children;
-    }
+    return this.state.hasError ? (
+      <Redirect to='/error-page' />
+    ) : (
+      this.props.children
+    );
   }
 }
 const mapDispatchToProps = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-
+import ErrorBoundary from '../error-boundary/';
 const ProtectedRoute = ({
   component: Component,
   isAuthed,
@@ -10,7 +10,13 @@ const ProtectedRoute = ({
   <Route
     {...rest}
     render={(props) =>
-      isAuthed ? <Component {...props} /> : <Redirect to={redirectTo} />
+      isAuthed ? (
+        <ErrorBoundary>
+          <Component {...props} />
+        </ErrorBoundary>
+      ) : (
+        <Redirect to={redirectTo} />
+      )
     }
   />
 );

@@ -1,5 +1,4 @@
 import React from 'react';
-import ErrorAlert from '../error-alert';
 import { connect } from 'react-redux';
 import { setError } from '../../redux/error/error.actions';
 import { Redirect } from 'react-router-dom';

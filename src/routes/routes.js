@@ -31,7 +31,7 @@ import ProfilePage from '../pages/profile-page';
 import OrderHistory from '../pages/order-history';
 import ProtectedRoute from '../components/protected-route';
 import Materials from '../pages/materials';
-import ErrorBoundary from '../components/error-boundary';
+import ErrorBoundary from '../components/error-boundary/';
 
 const Routes = () => {
   const styles = useStyles();
@@ -49,61 +49,203 @@ const Routes = () => {
       <AppHeader />
       <div className={styles.root}>
         <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/error-page' exact component={ErrorPage} />
-          <Route path='/news' exact component={NewsPage} />
-          <Route path='/news/:id' exact component={NewsDetailPage} />
-          <Route path='/about-us' exact component={AboutUs} />
-          <Route path='/materials' exact component={Materials} />
+          <Route
+            path='/'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <Home />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/error-page'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <ErrorPage />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/news'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <NewsPage />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/news/:id'
+            exact
+            render={({ match }) => (
+              <ErrorBoundary>
+                <NewsDetailPage match={match} />
+              </ErrorBoundary>
+            )}
+          />
+          <Route
+            path='/about-us'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <AboutUs />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/materials'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <Materials />
+                </ErrorBoundary>
+              );
+            }}
+          />
           <Route
             path='/payment-and-shipping'
             exact
-            component={PaymentsAndShipping}
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <PaymentsAndShipping />
+                </ErrorBoundary>
+              );
+            }}
           />
-          <Route path='/privacy-policy' exact component={PrivacyPolicy} />
-          <Route path='/cart' exact component={Cart} />
-          <Route path='/wishlist' exact component={Wishlist} />
-          <Route path='/contacts' exact component={ContactsPage} />
+          <Route
+            path='/privacy-policy'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <PrivacyPolicy />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/cart'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <Cart />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/wishlist'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <Wishlist />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/contacts'
+            exact
+            render={({ fromCheckout }) => {
+              return (
+                <ErrorBoundary>
+                  <ContactsPage fromCheckout={fromCheckout} />
+                </ErrorBoundary>
+              );
+            }}
+          />
           <ProtectedRoute
             path='/login'
             exact
-            component={Login}
             isAuthed={!userData}
             redirectTo='/'
+            component={Login}
           />
           <ProtectedRoute
             path='/register'
             exact
-            component={Register}
             isAuthed={!userData}
             redirectTo='/'
+            component={Register}
           />
-          <Route path='/thanks' exact component={ThanksPage} />
-          <Route path='/checkout' exact component={Checkout} />
+          <Route
+            path='/thanks'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <ThanksPage />
+                </ErrorBoundary>
+              );
+            }}
+          />
+          <Route
+            path='/checkout'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <Checkout />
+                </ErrorBoundary>
+              );
+            }}
+          />
           <Route
             path='/confirmation/:token'
             exact
-            render={({ match }) => <Confirmation token={match.params.token} />}
+            render={({ match }) => (
+              <ErrorBoundary>
+                <Confirmation token={match.params.token} />
+              </ErrorBoundary>
+            )}
           />
-          <Route path='/recovery' exact component={Recovery} />
+          <Route
+            path='/recovery'
+            exact
+            render={() => {
+              return (
+                <ErrorBoundary>
+                  <Recovery />
+                </ErrorBoundary>
+              );
+            }}
+          />
           <Route
             path='/recovery/:token'
             exact
-            render={({ match }) => <NewPassword token={match.params.token} />}
+            render={({ match }) => (
+              <ErrorBoundary>
+                <NewPassword token={match.params.token} />
+              </ErrorBoundary>
+            )}
           />
           <ProtectedRoute
-            component={ProfilePage}
             path='/profile'
             isAuthed={userIsChecked && userData}
             exact
             redirectTo='/login'
+            component={ProfilePage}
           />
           <ProtectedRoute
-            component={OrderHistory}
             path='/order-history'
             isAuthed={userIsChecked && userData}
             exact
             redirectTo='/login'
+            component={OrderHistory}
           />
           <Route
             path='/:category'
@@ -115,10 +257,24 @@ const Routes = () => {
                   categoryFound.name[1].value.toLowerCase() ===
                     category.toLowerCase() && categoryFound.isMain
               );
-              return <ProductsCarousel category={categoryParam} />;
+              return (
+                <ErrorBoundary>
+                  <ProductsCarousel category={categoryParam} />
+                </ErrorBoundary>
+              );
             }}
           />
-          <Route path='/product/:id' exact component={ProductDetails} />
+          <Route
+            path='/product/:id'
+            exact
+            render={({ match }) => {
+              return (
+                <ErrorBoundary>
+                  <ProductDetails match={match} />
+                </ErrorBoundary>
+              );
+            }}
+          />
           <Route
             path='/:category/:model'
             exact

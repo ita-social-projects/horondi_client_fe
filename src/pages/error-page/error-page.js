@@ -21,8 +21,9 @@ const ErrorPage = () => {
       errorMessage: Error.error
     })
   );
-
+  console.log('Im alife');
   useEffect(() => {
+    console.log(errorMessage);
     if (!errorMessage) {
       dispatch(push('/'));
     }

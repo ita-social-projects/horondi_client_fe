@@ -1,4 +1,8 @@
 import React from 'react';
+import ErrorAlert from '../error-alert';
+import { connect } from 'react-redux';
+import { setError } from '../../redux/error/error.actions';
+import { Redirect } from 'react-router-dom';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -8,17 +12,23 @@ class ErrorBoundary extends React.Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch() {
+    this.props.setError({ error: 'DEFAULT_ERROR' });
     this.setState({ hasError: true });
   }
-
   render() {
-    return this.state.hasError ? 'dhdhhdhdhdh' : this.props.children;
+    if (this.state.hasError) {
+      return <Redirect to='/error-page' />;
+    } else {
+      return this.props.children;
+    }
   }
 }
-
-export default ErrorBoundary;
+const mapDispatchToProps = {
+  setError
+};
+export default connect(null, mapDispatchToProps)(ErrorBoundary);

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Card } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
 import Comments from './comments';
@@ -20,7 +21,6 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { DEFAULT_SIZE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
@@ -54,8 +54,14 @@ const ProductDetails = ({ match }) => {
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
-  const { _id, name, basePrice, images, options = [], category } =
-    product || {};
+  const {
+    _id: productId,
+    name: productName,
+    basePrice,
+    images,
+    options = [],
+    category
+  } = product || {};
 
   const { selectedSize } = productToSend;
 
@@ -79,8 +85,8 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
-          _id,
-          name,
+          productId,
+          name: productName,
           images,
           productUrl,
           totalPrice: +(basePrice[currency].value / 100).toFixed(2),
@@ -100,8 +106,8 @@ const ProductDetails = ({ match }) => {
     product,
     category,
     dispatch,
-    _id,
-    name,
+    productId,
+    productName,
     images,
     productUrl,
     currency
@@ -150,6 +156,20 @@ const ProductDetails = ({ match }) => {
     [options]
   );
 
+  const productAdditions = useMemo(
+    () =>
+      options.length
+        ? uniqueAdditions.map(
+            (item) =>
+              options
+                .filter(({ additions }) => additions.length > 0)
+                .find(({ additions: [{ name }] }) => item === name[1].value)
+                .additions[0]
+          )
+        : null,
+    [uniqueAdditions, options]
+  );
+
   const sizes = useMemo(
     () =>
       options.length
@@ -173,38 +193,25 @@ const ProductDetails = ({ match }) => {
     [uniqueBottomMaterials, options]
   );
 
-  const additions = useMemo(
-    () =>
-      options.length
-        ? uniqueAdditions.map(
-            (item) =>
-              options
-                .filter(({ additions }) => additions.length > 0)
-                .find(({ additions: [{ name }] }) => item === name[1].value)
-                .additions[0]
-          )
-        : null,
-    [uniqueAdditions, options]
-  );
-
   const handleSizeChange = (id) => {
     const oldPrice = selectedSize
       ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[currency]
           .value / 100
       : 0;
-    const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
-      ({ _id }) => _id === id
-    );
+    const size = sizes.find(({ _id }) => _id === id);
     const newPrice =
       productToSend.totalPrice -
       oldPrice +
-      additionalPrice[currency].value / 100;
+      size.additionalPrice[currency].value / 100;
 
     dispatch(
       setProductToSend({
         ...productToSend,
         totalPrice: +newPrice.toFixed(2),
-        dimensions: { volumeInLiters, weightInKg },
+        dimensions: {
+          volumeInLiters: size.volumeInLiters,
+          weightInKg: size.weightInKg
+        },
         selectedSize: id
       })
     );
@@ -236,7 +243,7 @@ const ProductDetails = ({ match }) => {
           <ProductFeatures
             currencySign={currencySign}
             bottomMaterials={bottomMaterials}
-            additions={additions}
+            additions={productAdditions}
           />
           <ProductSubmit
             bottomMaterials={bottomMaterials}

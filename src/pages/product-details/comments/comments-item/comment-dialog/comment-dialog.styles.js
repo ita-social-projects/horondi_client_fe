@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   button: {
     textTransform: 'none',
     textAlign: 'center',
@@ -18,5 +18,3 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-
-export default useStyles;

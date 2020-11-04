@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
-import useStyles from './comments-item.styles';
+import { useStyles } from './comments-item.styles';
 
 import { Loader } from '../../../../components/loader/loader';
 import EditableField from './editable-field';

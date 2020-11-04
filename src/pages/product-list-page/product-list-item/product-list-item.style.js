@@ -2,14 +2,15 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(() => ({
   productItem: (props) => ({
-    background: `url(${props.image}) no-repeat center`,
+    background: `url(${props.image}) no-repeat center ${
+      props.isLightTheme ? '#e3e7ea' : '#262626'
+    }`,
     backgroundSize: 'cover',
     width: '100%',
     height: '25rem',
     cursor: 'pointer',
     position: 'relative',
     borderRadius: '5px',
-    backgroundColor: 'lightgrey',
     '@media (max-width:2560px)': {
       height: '32rem'
     },

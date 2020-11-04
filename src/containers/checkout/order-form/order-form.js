@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, FormHelperText } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -28,7 +28,6 @@ export const OrderForm = () => {
   const [shouldValidate, setShouldValidate] = useState(false);
 
   const [paymentType, setPaymentType] = useState('');
-
   const [user, setUser] = useState(REGISTER_USER_DATA);
   const { firstName, lastName, email, phoneNumber } = user;
 
@@ -53,73 +52,68 @@ export const OrderForm = () => {
   }));
 
   useEffect(() => {
-    if (firstNameValidated && emailValidated && lastName && phoneNumber) {
+    if (
+      firstNameValidated &&
+      emailValidated &&
+      lastName &&
+      phoneNumber &&
+      paymentType
+    ) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
     }
-  }, [firstNameValidated, emailValidated, lastName, phoneNumber]);
+  }, [firstNameValidated, emailValidated, lastName, phoneNumber, paymentType]);
 
   const style = useStyles();
 
-  const contactsNames = {
-    firstNameField: {
+  const contactsNames = [
+    {
       inputName: 'firstName',
       errorMessage: CHECKOUT_ERROR[language].firstName,
       value: firstName,
       label: CHECKOUT_TEXT_FIELDS[language].firstName,
-      onChange: handleChange,
-      rows: 1,
       validation: {
         value: firstNameValidated,
         setValid: setFirstNameValidated
-      },
-      type: 'text',
-      regExp: formRegExp.name
+      }
     },
-    lastNameNameField: {
+    {
       inputName: 'lastName',
       errorMessage: CHECKOUT_ERROR[language].lastName,
       value: lastName,
       label: CHECKOUT_TEXT_FIELDS[language].lastName,
-      onChange: handleChange,
       validation: {
         value: lastNameValidated,
         setValid: setLastNameValidated
-      },
-      type: 'text',
-      regExp: formRegExp.name
+      }
     }
-  };
+  ];
 
-  const contactsEmailPhone = {
-    email: {
+  const contactsEmailPhone = [
+    {
       inputName: 'email',
       errorMessage: CHECKOUT_ERROR[language].email,
       value: email,
       label: CHECKOUT_TEXT_FIELDS[language].email,
-      onChange: handleChange,
       validation: {
         value: emailValidated,
         setValid: setEmailValidated
       },
-      type: 'text',
       regExp: formRegExp.email
     },
-    phoneNumberField: {
+    {
       inputName: 'phoneNumber',
       errorMessage: CHECKOUT_ERROR[language].phoneNumber,
       value: phoneNumber,
       label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber,
-      onChange: handleChange,
       validation: {
         value: phoneValidated,
         setValid: setPhoneValidated
       },
-      type: 'text',
       regExp: formRegExp.phoneNumber
     }
-  };
+  ];
 
   return (
     <div>
@@ -133,26 +127,18 @@ export const OrderForm = () => {
           </span>
           <div>
             <div className={style.contactField}>
-              {Object.values(contactsNames).map(
-                ({
-                  errorMessage,
-                  value,
-                  onChange,
-                  validation,
-                  type,
-                  regExp = null,
-                  label,
-                  inputName
-                }) => (
+              {contactsNames.map(
+                ({ errorMessage, value, validation, label, inputName }) => (
                   <TextField
                     helperText={
                       !validation.value && shouldValidate
                         ? `${errorMessage}`
                         : ''
                     }
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
+                    onChange={(e) =>
+                      handleChange(e, validation.setValid, formRegExp.name)
+                    }
+                    value={value || ''}
                     required
                     fullWidth
                     key={label}
@@ -161,20 +147,19 @@ export const OrderForm = () => {
                     name={inputName}
                     error={!validation.value && shouldValidate}
                     className={style.dataInput}
+                    type='text'
                   />
                 )
               )}
             </div>
             <div className={style.contactField}>
-              {Object.values(contactsEmailPhone).map(
+              {contactsEmailPhone.map(
                 ({
                   label,
                   inputName,
                   errorMessage,
                   value,
-                  onChange,
                   validation,
-                  type,
                   regExp = null
                 }) => (
                   <TextField
@@ -191,9 +176,11 @@ export const OrderForm = () => {
                         : ''
                     }
                     className={style.dataInput}
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
+                    onChange={(e) =>
+                      handleChange(e, validation.setValid, regExp)
+                    }
+                    value={value || ''}
+                    type='text'
                   />
                 )
               )}
@@ -214,9 +201,18 @@ export const OrderForm = () => {
               onChange={selectHandlerPayment}
               label='paymentType'
             >
-              <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cart}</MenuItem>
-              <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cash}</MenuItem>
+              <MenuItem value='cart'>
+                {CHECKOUT_PAYMENT[language].cart}
+              </MenuItem>
+              <MenuItem value='cash'>
+                {CHECKOUT_PAYMENT[language].cash}
+              </MenuItem>
             </Select>
+            {paymentType === '' && (
+              <FormHelperText>
+                {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
+              </FormHelperText>
+            )}
           </FormControl>
         </div>
         <div className={style.comments}>

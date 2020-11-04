@@ -1,10 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText
+} from '@material-ui/core';
 import { useStyles } from '../../checkout.styles';
 import {
   CHECKOUT_DELIVERY_TYPES,
-  CHECKOUT_DROP_LIST
+  CHECKOUT_DROP_LIST,
+  CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
 import DeliveryInfo from './delivery-info/delivery-info';
 import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
@@ -150,6 +157,11 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
               </MenuItem>
             ))}
           </Select>
+          {deliveryType === '' && (
+            <FormHelperText>
+              {CHECKOUT_TEXT_FIELDS[language].deliveryType}
+            </FormHelperText>
+          )}
         </FormControl>
         {deliveryType && deliverySwitcherTop()}
       </div>

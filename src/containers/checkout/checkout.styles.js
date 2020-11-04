@@ -10,12 +10,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   orderFormWrapper: {
     margin: '0 auto',
-    maxWidth: '800px'
+    maxWidth: '768px'
   },
   subTitle: {
     color: 'rgba(0, 0, 0, 0.54)',
     fontSize: '1.8rem',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    '@media screen and (max-width: 768px)': {
+      display: 'flex',
+      justifyContent: 'center'
+    }
   },
   contactsFields: {
     display: 'flex',
@@ -25,7 +29,11 @@ export const useStyles = makeStyles((theme) => ({
   contactField: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    '@media screen and (max-width: 768px)': {
+      flexDirection: 'column',
+      alignItems: 'center'
+    }
   },
   deliveryType: {
     marginBottom: '20px'
@@ -66,7 +74,13 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '4px',
     padding: '30px',
     transform: 'translateX(-30px)',
-    boxSizing: 'content-box'
+    boxSizing: 'content-box',
+    '@media screen and (max-width: 768px)': {
+      padding: 0,
+      width: '100%',
+      transform: 'none',
+      border: 'none'
+    }
   },
   checkoutContactsTitle: {
     fontWeight: '400',

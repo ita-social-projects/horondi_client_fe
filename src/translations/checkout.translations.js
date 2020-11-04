@@ -39,7 +39,9 @@ export const CHECKOUT_TEXT_FIELDS = {
     building: 'Будинок',
     street: 'Вулиця',
     apartment: 'Квартира',
-    orderComment: 'Коментар до замовлення...'
+    orderComment: 'Коментар до замовлення...',
+    paymentMethod: 'Виберіть метод оплати',
+    deliveryType: 'Виберіть тип доставки'
   },
   1: {
     firstName: 'First name',
@@ -50,7 +52,9 @@ export const CHECKOUT_TEXT_FIELDS = {
     building: 'Building',
     street: 'Street',
     apartment: 'Apartment',
-    orderComment: 'Order comment...'
+    orderComment: 'Order comment...',
+    paymentMethod: 'Choose a payment method',
+    deliveryType: 'Select a delivery type'
   }
 };
 
@@ -84,10 +88,12 @@ export const CHECKOUT_DELIVERY_TYPES = {
 
 export const CHECKOUT_BUTTON = {
   0: {
-    createOrder: 'Створити замовлення'
+    createOrder: 'Створити замовлення',
+    pay: 'Оплатити'
   },
   1: {
-    createOrder: 'Create order'
+    createOrder: 'Create order',
+    pay: 'Pay'
   }
 };
 export const CHECKOUT_PAYMENT = {

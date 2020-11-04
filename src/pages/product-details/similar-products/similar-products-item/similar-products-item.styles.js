@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(() => ({
   similarItem: (props) => ({
     background: `url(${props.image}) no-repeat center`,
     width: '280px',
@@ -29,5 +29,3 @@ const useStyles = makeStyles(() => ({
     borderRadius: '0px 0px 5px 5px'
   }
 }));
-
-export default useStyles;

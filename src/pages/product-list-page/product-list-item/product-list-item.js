@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
-import useStyles from './product-list-item.style';
+import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import { AVAILABLE_COUNT_LABEL_TEXT } from '../../../translations/product-list.translations';
 import { IMG_URL } from '../../../configs';

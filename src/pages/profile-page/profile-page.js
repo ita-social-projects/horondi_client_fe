@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useStyles } from './profile-page.styles';
 import ProfilePicture from '../../images/profile.png';
 import {
@@ -21,8 +23,6 @@ import {
   errorMessages,
   REQUIRED_USER_FIELDS
 } from '../../configs/index';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -93,14 +93,14 @@ const ProfilePage = () => {
     validateOnBlur: shouldValidate
   });
 
-  const handleImageLoad = (e) => {
-    if (e.target.files && e.target.files[0]) {
+  const handleImageLoad = (event) => {
+    if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setUserImageUrl(e.target.result);
+      reader.onload = (event) => {
+        setUserImageUrl(event.target.result);
       };
-      reader.readAsDataURL(e.target.files[0]);
-      setUpload(e.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
+      setUpload(event.target.files[0]);
     }
   };
 
@@ -112,8 +112,8 @@ const ProfilePage = () => {
     dispatch(recoverUser({ email: userData.email, language }));
   };
 
-  const handleImageError = (e) => {
-    e.target.src = ProfilePicture;
+  const handleImageError = (event) => {
+    event.target.src = ProfilePicture;
   };
 
   useEffect(() => {

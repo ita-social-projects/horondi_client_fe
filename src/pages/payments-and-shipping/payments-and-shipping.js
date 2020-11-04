@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
-import { useStyles } from './payment-shipping.style';
+import { useStyles } from './payments-and-shipping.style';
 import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 
 const PaymentsAndShipping = () => {

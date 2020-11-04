@@ -12,7 +12,11 @@ import {
   REGISTER_PROPOSAL,
   LOGIN_USER_ERROR
 } from '../../translations/user.translations';
-import { loginUser, resetState } from '../../redux/user/user.actions';
+import {
+  loginUser,
+  resetState,
+  loginByGoogle
+} from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
 import { Formik, Field, Form } from 'formik';
@@ -49,16 +53,29 @@ const Login = () => {
       .matches(formRegExp.password, errorMessages[language].value.password)
       .required(' ')
   });
-  const auth = () => {
+  useEffect(() => {
     window.gapi.load('auth2', function () {
       window.gapi.auth2.init({
         client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
       });
     });
-  };
+  });
 
   const singIn = () => {
-    auth();
+    const GoogleAuth = window.gapi.auth2.getAuthInstance();
+    GoogleAuth.signIn().then((googleUser) => {
+      const profile = googleUser.getBasicProfile();
+      console.log(profile);
+      console.log('ID: ' + profile.getId());
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+      const id_token = googleUser.getAuthResponse().id_token;
+      console.log('ID Token: ' + id_token);
+      dispatch(loginByGoogle(id_token));
+    });
   };
 
   return (

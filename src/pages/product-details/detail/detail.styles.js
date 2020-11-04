@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(() => ({
   description: {
     textAlign: 'left',
     '@media (max-width: 400px)': {
@@ -15,5 +15,3 @@ const useStyles = makeStyles(() => ({
     }
   }
 }));
-
-export default useStyles;

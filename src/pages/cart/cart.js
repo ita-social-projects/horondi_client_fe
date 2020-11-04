@@ -1,12 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { useStyles } from './cart.styles';
 import EmptyCart from '../../containers/orders/cart/empty-cart';
 import FilledCart from '../../containers/orders/cart/filled-cart';
 
-const Cart = () => {
-  const cartItems = useSelector(({ Cart }) => Cart.list);
+const Cart = ({ cartItems }) => {
   const styles = useStyles();
 
   return (

@@ -5,7 +5,7 @@ import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-import useStyles from './product-submit.styles';
+import { useStyles } from './product-submit.styles';
 
 import {
   addItemToWishlist,

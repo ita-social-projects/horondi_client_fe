@@ -34,8 +34,7 @@ const ProductDetails = ({ match }) => {
   } = useSelector(
     ({
       Currency,
-      Products: { product, productLoading, productToSend, filters },
-      router
+      Products: { product, productLoading, productToSend, filters }
     }) => ({
       currency: Currency.currency,
       categoryFilter: filters.categoryFilter,
@@ -52,8 +51,14 @@ const ProductDetails = ({ match }) => {
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
-  const { _id, name, basePrice, images, options = [], category } =
-    product || {};
+  const {
+    _id: productId,
+    name: productName,
+    basePrice,
+    images,
+    options = [],
+    category
+  } = product || {};
 
   const { selectedSize } = productToSend;
 
@@ -64,6 +69,7 @@ const ProductDetails = ({ match }) => {
         : {},
     [options]
   );
+
   const { volumeInLiters, weightInKg } =
     (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
 
@@ -77,10 +83,11 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
-          _id,
-          name,
+          _id: productId,
+          name: productName,
           image: images.primary.small,
-          totalPrice: basePrice
+          totalPrice: basePrice,
+          dimensions: { volumeInLiters, weightInKg }
         })
       );
     }
@@ -96,8 +103,8 @@ const ProductDetails = ({ match }) => {
     product,
     category,
     dispatch,
-    _id,
-    name,
+    productId,
+    productName,
     images,
     currency
   ]);
@@ -145,6 +152,20 @@ const ProductDetails = ({ match }) => {
     [options]
   );
 
+  const productAdditions = useMemo(
+    () =>
+      options.length
+        ? uniqueAdditions.map(
+            (item) =>
+              options
+                .filter(({ additions }) => additions.length > 0)
+                .find(({ additions: [{ name }] }) => item === name[1].value)
+                .additions[0]
+          )
+        : null,
+    [uniqueAdditions, options]
+  );
+
   const sizes = useMemo(
     () =>
       options.length
@@ -168,29 +189,16 @@ const ProductDetails = ({ match }) => {
     [uniqueBottomMaterials, options]
   );
 
-  const additions = useMemo(
-    () =>
-      options.length
-        ? uniqueAdditions.map(
-            (item) =>
-              options
-                .filter(({ additions }) => additions.length > 0)
-                .find(({ additions: [{ name }] }) => item === name[1].value)
-                .additions[0]
-          )
-        : null,
-    [uniqueAdditions, options]
-  );
-
   const handleSizeChange = (id) => {
     const oldPrice = selectedSize
       ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
       : DEFAULT_PRICE;
 
-    const { additionalPrice } = sizes.find(({ _id }) => _id === id);
+    const size = sizes.find(({ _id }) => _id === id);
 
     const newTotalPrice = productToSend.totalPrice.map((item, i) => {
-      item.value = item.value - oldPrice[i].value + additionalPrice[i].value;
+      item.value =
+        item.value - oldPrice[i].value + size.additionalPrice[i].value;
       return item;
     });
 
@@ -198,7 +206,10 @@ const ProductDetails = ({ match }) => {
       setProductToSend({
         ...productToSend,
         totalPrice: newTotalPrice,
-        dimensions: { volumeInLiters, weightInKg },
+        dimensions: {
+          volumeInLiters: size.volumeInLiters,
+          weightInKg: size.weightInKg
+        },
         selectedSize: id
       })
     );
@@ -230,7 +241,7 @@ const ProductDetails = ({ match }) => {
           <ProductFeatures
             currencySign={currencySign}
             bottomMaterials={bottomMaterials}
-            additions={additions}
+            additions={productAdditions}
           />
           <ProductSubmit
             bottomMaterials={bottomMaterials}

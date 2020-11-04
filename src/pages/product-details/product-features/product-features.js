@@ -1,15 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useStyles from './product-features.styles';
 
+import { useStyles } from './product-features.styles';
 import {
   ADD_FEATURES,
   PRODUCT_BOTTOM,
@@ -31,7 +30,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
     })
   );
 
-  const { additionalPrice, name } =
+  const { additionalPrice, name: additionalName } =
     additions && additions.length ? additions[0] : {};
 
   const handleBottomChange = (event) => {
@@ -89,15 +88,15 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   };
 
   const menuItems = bottomMaterials
-    ? bottomMaterials.map(({ _id, name, additionalPrice }) => (
-        <MenuItem value={name[1].value} key={_id}>
+    ? bottomMaterials.map((material) => (
+        <MenuItem value={material.name[1].value} key={material._id}>
           <span>
-            {name[language].value}{' '}
-            {additionalPrice[0].value ? (
+            {material.name[language].value}{' '}
+            {material.additionalPrice[0].value ? (
               <span className={styles.selectPrice}>
                 +
                 <FontAwesomeIcon icon={currencySign} />
-                {(additionalPrice[currency].value / 100).toFixed()}
+                {(material.additionalPrice[currency].value / 100).toFixed()}
               </span>
             ) : null}
           </span>
@@ -142,7 +141,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
             }
             label={
               <span>
-                {name[language].value}{' '}
+                {additionalName[language].value}{' '}
                 <span className={styles.selectPrice}>
                   +
                   <FontAwesomeIcon icon={currencySign} />

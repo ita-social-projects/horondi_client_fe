@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
-import useStyles from './comment-dialog.styles';
+import { useStyles } from './comment-dialog.styles';
 
 import { deleteComment } from '../../../../../redux/comments/comments.actions';
 import {

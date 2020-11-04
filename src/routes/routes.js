@@ -87,7 +87,7 @@ const Routes = () => {
             exact
             render={({ match }) => (
               <ErrorBoundary>
-                <NewsDetailPage match={match} />
+                <NewsDetail match={match} />
               </ErrorBoundary>
             )}
           />
@@ -163,7 +163,7 @@ const Routes = () => {
             render={({ fromCheckout }) => {
               return (
                 <ErrorBoundary>
-                  <ContactsPage fromCheckout={fromCheckout} />
+                  <Contacts fromCheckout={fromCheckout} />
                 </ErrorBoundary>
               );
             }}

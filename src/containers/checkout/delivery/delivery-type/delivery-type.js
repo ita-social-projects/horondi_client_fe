@@ -20,7 +20,12 @@ import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
 import { CurrierBottom } from './mail-services/currier/currier-bottom';
 import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 
-const DeliveryType = ({ deliveryType, setDeliveryType }) => {
+const DeliveryType = ({
+  deliveryType,
+  setDeliveryType,
+  handleDeliveryTypeValidator,
+  shouldValidate
+}) => {
   const style = useStyles();
   const { language, contacts } = useSelector(({ Language, Contacts }) => ({
     language: Language.language,
@@ -97,7 +102,13 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherBottom = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaBottom city={city} />;
+        return (
+          <NovaPoshtaBottom
+            city={city}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+            shouldValidate={shouldValidate}
+          />
+        );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaBottom />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:

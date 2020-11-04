@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useStyles } from './delivery.styles';
 import { CHECKOUT_TITLES } from '../../../translations/checkout.translations';
-import { useStyles } from '../checkout.styles';
 import DeliveryType from './delivery-type/delivery-type';
 
-export const Delivery = () => {
+export const Delivery = ({
+  handleDeliveryTypeValidator,
+  deliveryTypeValidator,
+  shouldValidate
+}) => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-  const style = useStyles();
+  const style = useStyles({ deliveryTypeValidator, shouldValidate });
   const [deliveryType, setDeliveryType] = useState('');
 
   return (
@@ -21,6 +25,8 @@ export const Delivery = () => {
           <DeliveryType
             deliveryType={deliveryType}
             setDeliveryType={setDeliveryType}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+            shouldValidate={shouldValidate}
           />
         </div>
       </div>

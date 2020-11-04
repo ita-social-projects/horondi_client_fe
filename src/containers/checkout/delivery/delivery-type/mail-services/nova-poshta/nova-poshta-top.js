@@ -1,13 +1,15 @@
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from '../../../../checkout.styles';
 import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.translations';
+import { setDeliveryType } from '../../../../../../redux/checkout/checkout.actions';
 
 const NovaPoshtaTop = ({ setCityHandler, citiesForNovaPoshta }) => {
   const style = useStyles();
+  const dispatch = useDispatch();
   const { language, loading } = useSelector(({ Checkout, Language }) => ({
     loading: Checkout.loading,
     cities: Checkout.cities,
@@ -15,6 +17,10 @@ const NovaPoshtaTop = ({ setCityHandler, citiesForNovaPoshta }) => {
   }));
 
   const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    dispatch(setDeliveryType(inputValue));
+  }, [dispatch, inputValue]);
 
   return (
     <Autocomplete

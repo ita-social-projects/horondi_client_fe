@@ -26,6 +26,7 @@ export const OrderForm = () => {
   const [phoneValidated, setPhoneValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [deliveryTypeValidator, setDeliveryTypeValidator] = useState(false);
 
   const [paymentType, setPaymentType] = useState('');
   const [user, setUser] = useState(REGISTER_USER_DATA);
@@ -43,6 +44,10 @@ export const OrderForm = () => {
     allFieldsValidated && console.log('all fields valid');
   };
 
+  const handleDeliveryTypeValidator = (city) => {
+    setDeliveryTypeValidator(city);
+  };
+
   const selectHandlerPayment = (event) => {
     setPaymentType(event.target.value);
   };
@@ -57,15 +62,23 @@ export const OrderForm = () => {
       emailValidated &&
       lastName &&
       phoneNumber &&
-      paymentType
+      paymentType &&
+      deliveryTypeValidator
     ) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
     }
-  }, [firstNameValidated, emailValidated, lastName, phoneNumber, paymentType]);
+  }, [
+    firstNameValidated,
+    emailValidated,
+    lastName,
+    phoneNumber,
+    paymentType,
+    deliveryTypeValidator
+  ]);
 
-  const style = useStyles();
+  const style = useStyles({ deliveryTypeValidator });
 
   const contactsNames = [
     {
@@ -187,12 +200,20 @@ export const OrderForm = () => {
             </div>
           </div>
         </div>
-        <Delivery />
+        <Delivery
+          handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+          deliveryTypeValidator={deliveryTypeValidator}
+          shouldValidate={shouldValidate}
+        />
         <div className={style.subTitle}>
           <span>{CHECKOUT_TITLES[language].payment}</span>
         </div>
         <div>
-          <FormControl variant='outlined' className={style.dataInput}>
+          <FormControl
+            variant='outlined'
+            className={style.dataInput}
+            error={false}
+          >
             <InputLabel>
               {CHECKOUT_DROP_LIST[language].paymentMethod}
             </InputLabel>

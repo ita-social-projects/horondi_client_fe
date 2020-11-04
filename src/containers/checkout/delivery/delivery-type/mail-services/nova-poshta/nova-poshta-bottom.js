@@ -10,7 +10,11 @@ import {
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaWarehouse } from '../../../../../../redux/checkout/checkout.actions';
 
-const NovaPoshtaBottom = ({ city }) => {
+const NovaPoshtaBottom = ({
+  city,
+  handleDeliveryTypeValidator,
+  shouldValidate
+}) => {
   const { language, warehouses, loading } = useSelector(
     ({ Language, Checkout }) => ({
       language: Language.language,
@@ -27,6 +31,12 @@ const NovaPoshtaBottom = ({ city }) => {
   }, [dispatch, city]);
 
   const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    inputValue
+      ? handleDeliveryTypeValidator(true)
+      : handleDeliveryTypeValidator(false);
+  }, [inputValue, handleDeliveryTypeValidator]);
 
   const schedule = warehouses.find(
     (warehouse) => warehouse.description === inputValue

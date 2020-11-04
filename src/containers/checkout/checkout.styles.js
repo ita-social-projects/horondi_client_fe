@@ -35,9 +35,6 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: 'center'
     }
   },
-  deliveryType: {
-    marginBottom: '20px'
-  },
   btnWrapper: {
     display: 'flex',
     justifyContent: 'center'
@@ -66,22 +63,7 @@ export const useStyles = makeStyles((theme) => ({
   comments: {
     marginTop: '20px'
   },
-  deliveryTypeSelected: {
-    margin: '0 auto',
-    border: '1px solid black',
-    height: '350px',
-    width: '800px',
-    borderRadius: '4px',
-    padding: '30px',
-    transform: 'translateX(-30px)',
-    boxSizing: 'content-box',
-    '@media screen and (max-width: 768px)': {
-      padding: 0,
-      width: '100%',
-      transform: 'none',
-      border: 'none'
-    }
-  },
+
   checkoutContactsTitle: {
     fontWeight: '400',
     fontSize: '2em'

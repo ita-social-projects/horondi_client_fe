@@ -4,8 +4,6 @@ import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './materials.style';
 import SliderHomePage from '../home/slider-home-page';
-import CategoriesList from '../home/categories-list';
-import OurLooks from '../home/our-looks';
 
 const Materials = () => {
   const dispatch = useDispatch();
@@ -31,8 +29,6 @@ const Materials = () => {
         <div className={styles.homeHeader}>
           <SliderHomePage />
         </div>
-        <CategoriesList />
-        <OurLooks />
       </div>
     </div>
   );

@@ -10,11 +10,7 @@ import {
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaWarehouse } from '../../../../../../redux/checkout/checkout.actions';
 
-const NovaPoshtaBottom = ({
-  city,
-  handleDeliveryTypeValidator,
-  shouldValidate
-}) => {
+const NovaPoshtaBottom = ({ city, handleDeliveryTypeValidator }) => {
   const { language, warehouses, loading } = useSelector(
     ({ Language, Checkout }) => ({
       language: Language.language,
@@ -30,23 +26,23 @@ const NovaPoshtaBottom = ({
     setInputValue('');
   }, [dispatch, city]);
 
-  const [inputValue, setInputValue] = useState('');
+  const [cityValue, setInputValue] = useState('');
 
   useEffect(() => {
-    inputValue
+    cityValue
       ? handleDeliveryTypeValidator(true)
       : handleDeliveryTypeValidator(false);
-  }, [inputValue, handleDeliveryTypeValidator]);
+  }, [cityValue, handleDeliveryTypeValidator]);
 
   const schedule = warehouses.find(
-    (warehouse) => warehouse.description === inputValue
+    (warehouse) => warehouse.description === cityValue
   );
 
   return (
     <div className={style.contactField}>
       <Autocomplete
         disabled={!city}
-        inputValue={inputValue}
+        inputValue={cityValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
@@ -71,7 +67,7 @@ const NovaPoshtaBottom = ({
           />
         )}
       />
-      {inputValue && (
+      {cityValue && (
         <div className={style.deliverySchedule}>
           <span className={style.checkoutContactsName}>
             {CHECKOUT_TITLES[language].schedule}

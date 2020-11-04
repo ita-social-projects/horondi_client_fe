@@ -106,20 +106,23 @@ const DeliveryType = ({
           <NovaPoshtaBottom
             city={city}
             handleDeliveryTypeValidator={handleDeliveryTypeValidator}
-            shouldValidate={shouldValidate}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaBottom />;
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return (
-          <CurrierBottom cityForNovaPoshtaBottom={cityForNovaPoshtaBottom} />
+          <CurrierBottom
+            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+          />
         );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return (
           <SelfPickupBottom
             departmentSelfPickUpStorage={departmentSelfPickUpStorage}
             departmentSelfPickUp={departmentSelfPickUp}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
           />
         );
       default:

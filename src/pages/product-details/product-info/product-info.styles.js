@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => {
+export const useStyles = makeStyles((theme) => {
   const circle = {
     width: '2.5rem',
     height: '2.5rem',
@@ -70,5 +70,3 @@ const useStyles = makeStyles((theme) => {
     })
   };
 });
-
-export default useStyles;

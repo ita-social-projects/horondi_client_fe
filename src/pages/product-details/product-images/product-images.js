@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
-import useStyles from './product-images.styles';
+import { useStyles } from './product-images.styles';
 
 import {
   IMGS_VIEWER,
@@ -57,8 +57,8 @@ const ProductImages = () => {
         currImg={currImg}
         showThumbnails
         isOpen={isOpen}
-        onClickPrev={() => setCurrImg((currImg) => currImg - 1)}
-        onClickNext={() => setCurrImg((currImg) => currImg + 1)}
+        onClickPrev={() => setCurrImg((prev) => prev - 1)}
+        onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
         onClose={() => setIsOpen(false)}
         closeBtnTitle={IMGS_VIEWER[language].close}

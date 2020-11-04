@@ -3,7 +3,7 @@ import {
   SET_HOME_IMAGE_LOOKS_LOADING
 } from './home-page-looks.types';
 
-const initialState = {
+export const initialState = {
   imageList: [],
   homeImagesLoading: false
 };

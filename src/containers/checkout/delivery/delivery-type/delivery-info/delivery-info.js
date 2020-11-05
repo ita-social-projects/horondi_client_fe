@@ -24,6 +24,8 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
     .map((product) => product.dimensions.weightInKg)
     .reduce((prevWeight, currentWeight) => prevWeight + currentWeight);
 
+  const sum = Number.isNaN(productsPrice + price.cost);
+  console.log(sum);
   const priceData = useMemo(
     () => ({
       cityRecipient: cityForNovaPoshtaBottom && cityForNovaPoshtaBottom.ref,
@@ -37,7 +39,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
     [productsWeight, productsPrice, cityForNovaPoshtaBottom, from, language]
   );
 
-  const switcher = () => {
+  const priceSwitcher = () => {
     switch (from) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return (
@@ -57,16 +59,17 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
         );
       case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
         return (
-          <>
-            <span className={style.deliveryPrice}>
-              {CHECKOUT_TITLES[language].deliveryPrice}: {price && price.cost}{' '}
-              UAH
-            </span>
-            <span className={style.totalPrice}>
-              {CHECKOUT_TITLES[language].totalPrice}:{' '}
-              {price && productsPrice + price.cost} UAH
-            </span>
-          </>
+          !sum && (
+            <>
+              <span className={style.deliveryPrice}>
+                {CHECKOUT_TITLES[language].deliveryPrice}: {price.cost} UAH
+              </span>
+              <span className={style.totalPrice}>
+                {CHECKOUT_TITLES[language].totalPrice}:{' '}
+                {productsPrice + price.cost} UAH
+              </span>
+            </>
+          )
         );
       default:
         return '';
@@ -76,8 +79,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
   useEffect(() => {
     cityForNovaPoshtaBottom && dispatch(getNovaPoshtaPrices(priceData));
   }, [dispatch, priceData, cityForNovaPoshtaBottom]);
-
-  return <div className={style.deliveryInfoWrapper}>{switcher()}</div>;
+  return <div className={style.deliveryInfoWrapper}>{priceSwitcher()}</div>;
 };
 
 export default DeliveryInfo;

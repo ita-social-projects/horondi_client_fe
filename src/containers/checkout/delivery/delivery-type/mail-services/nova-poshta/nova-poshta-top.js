@@ -7,7 +7,7 @@ import { useStyles } from '../../../../checkout.styles';
 import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.translations';
 import { setDeliveryType } from '../../../../../../redux/checkout/checkout.actions';
 
-const NovaPoshtaTop = ({ setCityHandler, citiesForNovaPoshta }) => {
+const NovaPoshtaTop = ({ setCity, citiesForNovaPoshta }) => {
   const style = useStyles();
   const dispatch = useDispatch();
   const { language, loading } = useSelector(({ Checkout, Language }) => ({
@@ -25,12 +25,12 @@ const NovaPoshtaTop = ({ setCityHandler, citiesForNovaPoshta }) => {
   return (
     <Autocomplete
       onChange={(event, newValue) => {
-        setCityHandler(newValue);
+        setCity(newValue);
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
-        setCityHandler(newInputValue);
+        setCity(newInputValue);
       }}
       options={citiesForNovaPoshta}
       className={style.dataInput}

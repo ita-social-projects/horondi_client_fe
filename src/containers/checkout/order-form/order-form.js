@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Delivery from '../delivery';
+import SimpleModal from './modal';
 
 import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
 import {
@@ -129,7 +130,7 @@ export const OrderForm = () => {
   ];
 
   return (
-    <div>
+    <>
       <div className={style.orderFormWrapper}>
         <div className={style.mainTitle}>
           <span>{CHECKOUT_TITLES[language].orderForm}</span>
@@ -212,7 +213,7 @@ export const OrderForm = () => {
           <FormControl
             variant='outlined'
             className={style.dataInput}
-            error={false}
+            error={shouldValidate && paymentType === '' && true}
           >
             <InputLabel>
               {CHECKOUT_DROP_LIST[language].paymentMethod}
@@ -256,6 +257,10 @@ export const OrderForm = () => {
           </Button>
         </div>
       </div>
-    </div>
+      <SimpleModal
+        shouldValidate={shouldValidate}
+        allFieldsValidated={allFieldsValidated}
+      />
+    </>
   );
 };

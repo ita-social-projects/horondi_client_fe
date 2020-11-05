@@ -1,5 +1,5 @@
 import { TextField } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -10,7 +10,12 @@ import {
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaWarehouse } from '../../../../../../redux/checkout/checkout.actions';
 
-const NovaPoshtaBottom = ({ city, handleDeliveryTypeValidator }) => {
+const NovaPoshtaBottom = ({
+  city,
+  handleDeliveryTypeValidator,
+  setDepartmentValue,
+  departmentValue
+}) => {
   const { language, warehouses, loading } = useSelector(
     ({ Language, Checkout }) => ({
       language: Language.language,
@@ -23,28 +28,28 @@ const NovaPoshtaBottom = ({ city, handleDeliveryTypeValidator }) => {
 
   useEffect(() => {
     city && dispatch(getNovaPoshtaWarehouse(city));
-    setInputValue('');
-  }, [dispatch, city]);
+    setDepartmentValue('');
+  }, [dispatch, city, setDepartmentValue]);
 
-  const [cityValue, setInputValue] = useState('');
+  // const [departmentValue, setDepartmentValue] = useState('');
 
   useEffect(() => {
-    cityValue
+    departmentValue
       ? handleDeliveryTypeValidator(true)
       : handleDeliveryTypeValidator(false);
-  }, [cityValue, handleDeliveryTypeValidator]);
+  }, [departmentValue, handleDeliveryTypeValidator]);
 
   const schedule = warehouses.find(
-    (warehouse) => warehouse.description === cityValue
+    (warehouse) => warehouse.description === departmentValue
   );
 
   return (
     <div className={style.contactField}>
       <Autocomplete
         disabled={!city}
-        inputValue={cityValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
+        inputValue={departmentValue}
+        onInputChange={(event, department) => {
+          setDepartmentValue(department);
         }}
         options={warehouses.map((warehouse) => warehouse.description)}
         className={style.dataInput}
@@ -67,7 +72,7 @@ const NovaPoshtaBottom = ({ city, handleDeliveryTypeValidator }) => {
           />
         )}
       />
-      {cityValue && (
+      {departmentValue && (
         <div className={style.deliverySchedule}>
           <span className={style.checkoutContactsName}>
             {CHECKOUT_TITLES[language].schedule}

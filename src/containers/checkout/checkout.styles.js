@@ -63,7 +63,6 @@ export const useStyles = makeStyles((theme) => ({
   comments: {
     marginTop: '20px'
   },
-
   checkoutContactsTitle: {
     fontWeight: '400',
     fontSize: '2em'
@@ -166,5 +165,13 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     fontSize: '1rem',
     fontWeight: 450
+  },
+  orderFormModal: {
+    width: '700px',
+    height: '400px',
+    position: 'relative',
+    left: '50%',
+    transform: `translate(-50%, 50%)`,
+    background: 'white'
   }
 }));

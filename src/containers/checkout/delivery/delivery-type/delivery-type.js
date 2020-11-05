@@ -33,6 +33,8 @@ const DeliveryType = ({
   }));
 
   const [city, setCity] = useState('');
+  const [departmentValue, setDepartmentValue] = useState('');
+
   const dispatch = useDispatch();
 
   const { cities } = useSelector(({ Checkout }) => ({
@@ -55,8 +57,6 @@ const DeliveryType = ({
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
   };
-
-  const setCityHandler = (cityToSend) => setCity(cityToSend);
 
   const departmentSelfPickUpStorage = contacts.map(
     (contact) => contact.address[language].value
@@ -92,7 +92,7 @@ const DeliveryType = ({
       default:
         return (
           <NovaPoshtaTop
-            setCityHandler={setCityHandler}
+            setCity={setCity}
             citiesForNovaPoshta={citiesForNovaPoshta}
           />
         );
@@ -106,6 +106,8 @@ const DeliveryType = ({
           <NovaPoshtaBottom
             city={city}
             handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+            departmentValue={departmentValue}
+            setDepartmentValue={setDepartmentValue}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
@@ -158,7 +160,11 @@ const DeliveryType = ({
   return (
     <div>
       <div className={style.contactField}>
-        <FormControl variant='outlined' className={style.dataInput}>
+        <FormControl
+          variant='outlined'
+          className={style.dataInput}
+          error={shouldValidate && deliveryType === '' && true}
+        >
           <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>
           <Select
             value={deliveryType}

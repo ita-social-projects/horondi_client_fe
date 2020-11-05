@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
         ? '1px solid red'
         : '1px solid black',
     height: '350px',
-    width: '800px',
+    width: '768px',
     borderRadius: '4px',
     padding: '30px',
     transform: 'translateX(-30px)',

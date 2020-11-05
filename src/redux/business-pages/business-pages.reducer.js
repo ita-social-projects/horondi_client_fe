@@ -8,6 +8,7 @@ const initialState = {
   pages: {
     aboutUs: {},
     contacts: {},
+    materials: {},
     privacyPolicy: {},
     paymentAndShipping: {}
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setError } from '../../redux/error/error.actions';
-import { Redirect } from 'react-router-dom';
+
+import ErrorPage from '../../pages/error-page';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -20,11 +21,7 @@ class ErrorBoundary extends React.Component {
     this.setState({ hasError: true });
   }
   render() {
-    return this.state.hasError ? (
-      <Redirect to='/error-page' />
-    ) : (
-      this.props.children
-    );
+    return this.state.hasError ? <ErrorPage /> : this.props.children;
   }
 }
 const mapDispatchToProps = {

@@ -2,28 +2,31 @@ import React, { useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { useStyles } from '../checkout.styles';
 
-const OrderFormModal = ({ allFieldsValidated, shouldValidate }) => {
+const OrderFormModal = ({
+  allFieldsValidated,
+  shouldValidate,
+  personalData
+}) => {
   const style = useStyles();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(shouldValidate);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  allFieldsValidated && shouldValidate && setOpen(true);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  console.log('shouldValidate', shouldValidate);
+  console.log('allFieldsValidated', allFieldsValidated);
+  console.log('personalData', personalData);
+  console.log('open', open);
+
   useEffect(() => {
-    shouldValidate && handleOpen(true);
+    shouldValidate && allFieldsValidated && setOpen(shouldValidate);
   }, [shouldValidate, allFieldsValidated]);
 
   const body = (
     <div className={style.orderFormModal}>
-      <h2 id='simple-modal-title'>Text in a modal</h2>
-      <p id='simple-modal-description'>
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      <h2>Order number: 100500</h2>
+      <span>Customer:</span>
+      <span>{}</span>
       <OrderFormModal />
     </div>
   );
@@ -33,7 +36,7 @@ const OrderFormModal = ({ allFieldsValidated, shouldValidate }) => {
       {open && (
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
           aria-labelledby='simple-modal-title'
           aria-describedby='simple-modal-description'
         >

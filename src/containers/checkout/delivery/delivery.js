@@ -7,7 +7,9 @@ import DeliveryType from './delivery-type/delivery-type';
 export const Delivery = ({
   handleDeliveryTypeValidator,
   deliveryTypeValidator,
-  shouldValidate
+  shouldValidate,
+  userData,
+  allFieldsValidated
 }) => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
@@ -27,6 +29,8 @@ export const Delivery = ({
             setDeliveryType={setDeliveryType}
             handleDeliveryTypeValidator={handleDeliveryTypeValidator}
             shouldValidate={shouldValidate}
+            userData={userData}
+            allFieldsValidated={allFieldsValidated}
           />
         </div>
       </div>

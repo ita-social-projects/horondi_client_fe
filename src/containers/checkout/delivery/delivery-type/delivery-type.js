@@ -19,12 +19,14 @@ import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
 import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
 import { CurrierBottom } from './mail-services/currier/currier-bottom';
 import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
+import SimpleModal from '../../order-form/modal';
 
 const DeliveryType = ({
   deliveryType,
   setDeliveryType,
   handleDeliveryTypeValidator,
-  shouldValidate
+  shouldValidate,
+  allFieldsValidated
 }) => {
   const style = useStyles();
   const { language, contacts } = useSelector(({ Language, Contacts }) => ({
@@ -34,13 +36,22 @@ const DeliveryType = ({
 
   const [city, setCity] = useState('');
   const [departmentValue, setDepartmentValue] = useState('');
+  const [streetValue, setStreetValue] = useState('');
+  const [buildValue, setBuildValue] = useState('');
+  const [apartmentValue, setApartmentValue] = useState('');
 
   const dispatch = useDispatch();
 
   const { cities } = useSelector(({ Checkout }) => ({
     cities: Checkout.cities
   }));
-
+  const userData = {
+    firstName: 'Тарас',
+    lastName: 'Куник',
+    email: 'tapiklviv@gmail.com',
+    password: '',
+    phoneNumber: '+380934837702'
+  };
   const citiesForNovaPoshta = cities.map(
     (cityForNovaPoshta) => cityForNovaPoshta && cityForNovaPoshta.description
   );
@@ -117,6 +128,12 @@ const DeliveryType = ({
           <CurrierBottom
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+            setStreetValue={setStreetValue}
+            setBuildValue={setBuildValue}
+            setApartmentValue={setApartmentValue}
+            streetValue={streetValue}
+            buildValue={buildValue}
+            apartmentValue={apartmentValue}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
@@ -187,6 +204,13 @@ const DeliveryType = ({
       </div>
       {deliverySwitcherBottom()}
       {deliveryInfoSwitcher()}
+      <div>
+        <SimpleModal
+          shouldValidate={shouldValidate}
+          allFieldsValidated={allFieldsValidated}
+          personalData={userData}
+        />
+      </div>
     </div>
   );
 };

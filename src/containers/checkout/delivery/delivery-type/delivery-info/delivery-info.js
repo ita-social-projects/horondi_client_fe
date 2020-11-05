@@ -25,7 +25,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
     .reduce((prevWeight, currentWeight) => prevWeight + currentWeight);
 
   const sum = Number.isNaN(productsPrice + price.cost);
-  console.log(sum);
+
   const priceData = useMemo(
     () => ({
       cityRecipient: cityForNovaPoshtaBottom && cityForNovaPoshtaBottom.ref,

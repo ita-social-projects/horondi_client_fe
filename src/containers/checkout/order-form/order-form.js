@@ -6,7 +6,6 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Delivery from '../delivery';
-import SimpleModal from './modal';
 
 import { formRegExp, REGISTER_USER_DATA } from '../../../configs';
 import {
@@ -205,6 +204,8 @@ export const OrderForm = () => {
           handleDeliveryTypeValidator={handleDeliveryTypeValidator}
           deliveryTypeValidator={deliveryTypeValidator}
           shouldValidate={shouldValidate}
+          // userData={us}
+          allFieldsValidated={allFieldsValidated}
         />
         <div className={style.subTitle}>
           <span>{CHECKOUT_TITLES[language].payment}</span>
@@ -257,10 +258,6 @@ export const OrderForm = () => {
           </Button>
         </div>
       </div>
-      <SimpleModal
-        shouldValidate={shouldValidate}
-        allFieldsValidated={allFieldsValidated}
-      />
     </>
   );
 };

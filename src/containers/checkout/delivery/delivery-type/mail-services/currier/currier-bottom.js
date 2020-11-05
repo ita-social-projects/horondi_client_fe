@@ -1,5 +1,5 @@
 import { TextField } from '@material-ui/core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -9,7 +9,13 @@ import { getNovaPoshtaStreets } from '../../../../../../redux/checkout/checkout.
 
 const CurrierBottom = ({
   cityForNovaPoshtaBottom,
-  handleDeliveryTypeValidator
+  handleDeliveryTypeValidator,
+  setStreetValue,
+  setBuildValue,
+  setApartmentValue,
+  streetValue,
+  buildValue,
+  apartmentValue
 }) => {
   const style = useStyles();
   const dispatch = useDispatch();
@@ -20,10 +26,6 @@ const CurrierBottom = ({
       loading: Checkout.loading
     })
   );
-
-  const [streetValue, setStreetValue] = useState('');
-  const [buildValue, setBuildValue] = useState('');
-  const [apartmentValue, setApartmentValue] = useState('');
 
   useEffect(() => {
     streetValue && apartmentValue && buildValue

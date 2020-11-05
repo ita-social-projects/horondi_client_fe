@@ -14,14 +14,22 @@ export function* handleHomePageSliderImagesLoad() {
   const query = `query {
                   getAllSlides {
                     items {
-                    _id
+                      _id
                       images {
-                        large
+                          large
                       }
                       link
-                    }
-                  }          
-                 }`;
+                      title {
+                          lang
+                          value
+                      }
+                      description {
+                        lang
+                        value
+                      }
+                  }
+                 }          
+                }`;
   try {
     const images = yield call(getItems, query);
 

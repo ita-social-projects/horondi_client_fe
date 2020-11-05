@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: '.5rem',
     marginRight: '17px !important',
@@ -44,5 +44,3 @@ const useStyles = makeStyles((theme) => ({
     color: 'white'
   }
 }));
-
-export default useStyles;

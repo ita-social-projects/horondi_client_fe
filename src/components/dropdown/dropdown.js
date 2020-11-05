@@ -1,10 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
-import useStyles from './dropdown.styles';
+import dropdownStyles from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue }) => {
-  const styles = useStyles();
+  const styles = dropdownStyles();
   return (
     <div className={styles.rootItem}>
       <Select

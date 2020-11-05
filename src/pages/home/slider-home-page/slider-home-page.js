@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Backdrop } from '@material-ui/core';
 import { useStyles } from './slider-home-page.style';
 import { getImage } from '../../../utils/imageLoad';
-import LoadingBar from '../../../components/loading-bar';
+import CircularLoadingBar from '../../../components/circular-loading-bar';
 
 const SliderHomePage = () => {
   const [images, setImages] = useState([]);
@@ -27,7 +27,7 @@ const SliderHomePage = () => {
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
+        <CircularLoadingBar color='inherit' />
       </Backdrop>
     );
   }

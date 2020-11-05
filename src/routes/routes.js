@@ -9,11 +9,11 @@ import NewsPage from '../pages/news/news-page';
 import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
-import PaymentsAndShipping from '../pages/payment-shipping';
+import PaymentsAndShipping from '../pages/payments-and-shipping';
 import PrivacyPolicy from '../pages/privacy-policy';
 import Cart from '../pages/cart';
 import Wishlist from '../pages/wishlist';
-import NewsDetailPage from '../pages/news/news-detail';
+import NewsDetail from '../pages/news/news-detail';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductListPage from '../pages/product-list-page';
@@ -24,7 +24,7 @@ import Recovery from '../pages/recovery';
 import NewPassword from '../pages/new-password';
 import ErrorPage from '../pages/error-page';
 import ThanksPage from '../pages/thanks-page';
-import ContactsPage from '../pages/contacts';
+import Contacts from '../pages/contacts';
 import ProductsCarousel from '../pages/products-carousel';
 import Checkout from '../containers/checkout';
 import ProfilePage from '../pages/profile-page';
@@ -51,7 +51,7 @@ const Routes = () => {
           <Route path='/' exact component={Home} />
           <Route path='/error-page' exact component={ErrorPage} />
           <Route path='/news' exact component={NewsPage} />
-          <Route path='/news/:id' exact component={NewsDetailPage} />
+          <Route path='/news/:id' exact component={NewsDetail} />
           <Route path='/about-us' exact component={AboutUs} />
           <Route path='/materials' exact component={Materials} />
           <Route
@@ -62,7 +62,7 @@ const Routes = () => {
           <Route path='/privacy-policy' exact component={PrivacyPolicy} />
           <Route path='/cart' exact component={Cart} />
           <Route path='/wishlist' exact component={Wishlist} />
-          <Route path='/contacts' exact component={ContactsPage} />
+          <Route path='/contacts' exact component={Contacts} />
           <ProtectedRoute
             path='/login'
             exact

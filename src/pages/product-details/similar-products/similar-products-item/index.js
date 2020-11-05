@@ -1,3 +1,3 @@
-import SimilarProductItem from './similar-products-item';
+import SimilarProductsItem from './similar-products-item';
 
-export default SimilarProductItem;
+export default SimilarProductsItem;

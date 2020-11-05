@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Snackbar from '@material-ui/core/Snackbar';
+import BaseSnackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 import { setSnackBarStatus } from '../../redux/snackbar/snackbar.actions';
@@ -9,7 +9,7 @@ import { SNACKBAR_DURATION } from '../../configs';
 
 const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
 
-const SnackbarItem = () => {
+const Snackbar = () => {
   const dispatch = useDispatch();
 
   const {
@@ -32,7 +32,7 @@ const SnackbarItem = () => {
   };
 
   return (
-    <Snackbar
+    <BaseSnackbar
       id='snack-bar'
       open={snackBarStatus}
       autoHideDuration={SNACKBAR_DURATION}
@@ -41,8 +41,8 @@ const SnackbarItem = () => {
       <Alert onClose={handleClose} severity={snackBarSeverity}>
         {snackBarMessage[language]}
       </Alert>
-    </Snackbar>
+    </BaseSnackbar>
   );
 };
 
-export default SnackbarItem;
+export default Snackbar;

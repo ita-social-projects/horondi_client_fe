@@ -1,15 +1,13 @@
 import React from 'react';
-
 import { useSelector } from 'react-redux';
-
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
-import LoadingBar from '../../components/loading-bar';
+import CircularLoadingBar from '../../components/circular-loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 
-const ContactsPage = ({ fromCheckout }) => {
+const Contacts = ({ fromCheckout }) => {
   const { contacts, loading, language } = useSelector(
     ({ Language, Contacts }) => ({
       contacts: Contacts.contacts,
@@ -21,7 +19,7 @@ const ContactsPage = ({ fromCheckout }) => {
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
+        <CircularLoadingBar color='inherit' />
       </Backdrop>
     );
   }
@@ -95,4 +93,4 @@ const ContactsPage = ({ fromCheckout }) => {
   );
 };
 
-export default ContactsPage;
+export default Contacts;

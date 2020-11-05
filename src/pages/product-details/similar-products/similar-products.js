@@ -4,12 +4,11 @@ import { useSelector } from 'react-redux';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
-import useStyles from './similar-products.styles';
+import { useStyles } from './similar-products.styles';
 
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { IMG_URL, RESPONSIVE_PDP } from '../../../configs';
-
-import SimilarProductItem from './similar-products-item';
+import SimilarProductsItem from './similar-products-item';
 
 const SimilarProducts = ({ currencySign }) => {
   const styles = useStyles();
@@ -26,7 +25,7 @@ const SimilarProducts = ({ currencySign }) => {
   const imagesList = similarProducts
     .filter(({ _id }) => _id !== productId)
     .map(({ _id, images, rate, name, basePrice }) => (
-      <SimilarProductItem
+      <SimilarProductsItem
         currencySign={currencySign}
         key={_id}
         price={basePrice[currency].value}

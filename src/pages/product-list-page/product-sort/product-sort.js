@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
-import useStyles from './product-sort.styles';
+import { useStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import {
   setSortByPrice,

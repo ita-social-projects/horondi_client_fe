@@ -5,14 +5,14 @@ import Rating from '@material-ui/lab/Rating';
 import { Button, Tooltip, TextField } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import useStyles from './comments.styles';
+import { useStyles } from './comments.styles';
 
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 
 import {
-  TEXT,
+  TEXT_VALUE,
   commentFields,
   formRegExp,
   commentsLimit
@@ -47,10 +47,11 @@ const Comments = () => {
 
   const [rate, setRate] = useState(0);
 
-  const { _id, email, firstName, purchasedProducts, images } = userData || {};
+  const { _id: userId, email, firstName, purchasedProducts, images } =
+    userData || {};
 
   const onSubmit = (values) => {
-    const userFields = _id ? { email, firstName, images, user: _id } : {};
+    const userFields = userId ? { email, firstName, images, user: userId } : {};
     dispatch(
       addComment({
         ...values,
@@ -84,12 +85,12 @@ const Comments = () => {
 
   const rateTip = useMemo(
     () =>
-      !_id
+      !userId
         ? COMMENTS[language].unregisteredTip
         : !hasBought
         ? COMMENTS[language].registeredTip
         : COMMENTS[language].successfulTip,
-    [language, _id, hasBought]
+    [language, userId, hasBought]
   );
 
   const commentsList = comments
@@ -137,13 +138,15 @@ const Comments = () => {
         <div className={styles.form}>
           {Object.values(commentFields).map(
             ({ name, multiline = null, rows = null }) =>
-              ((name !== TEXT && !userData) || name === TEXT) && (
+              ((name !== TEXT_VALUE && !userData) || name === TEXT_VALUE) && (
                 <div key={name}>
                   <TextField
-                    className={`${name === TEXT ? styles.text : styles.input}`}
+                    className={`${
+                      name === TEXT_VALUE ? styles.text : styles.input
+                    }`}
                     name={name}
                     onChange={
-                      name === TEXT ? handleCommentChange : handleChange
+                      name === TEXT_VALUE ? handleCommentChange : handleChange
                     }
                     onBlur={handleBlur}
                     value={values[name]}

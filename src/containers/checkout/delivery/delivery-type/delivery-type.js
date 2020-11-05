@@ -26,7 +26,8 @@ const DeliveryType = ({
   setDeliveryType,
   handleDeliveryTypeValidator,
   shouldValidate,
-  allFieldsValidated
+  allFieldsValidated,
+  userData
 }) => {
   const style = useStyles();
   const { language, contacts } = useSelector(({ Language, Contacts }) => ({
@@ -45,13 +46,16 @@ const DeliveryType = ({
   const { cities } = useSelector(({ Checkout }) => ({
     cities: Checkout.cities
   }));
-  const userData = {
-    firstName: 'Тарас',
-    lastName: 'Куник',
-    email: 'tapiklviv@gmail.com',
-    password: '',
-    phoneNumber: '+380934837702'
+  const personalData = {
+    ...userData,
+    city,
+    departmentValue,
+    streetValue,
+    buildValue,
+    apartmentValue,
+    deliveryType
   };
+
   const citiesForNovaPoshta = cities.map(
     (cityForNovaPoshta) => cityForNovaPoshta && cityForNovaPoshta.description
   );
@@ -64,6 +68,11 @@ const DeliveryType = ({
   useEffect(() => {
     dispatch(getNovaPoshtaCities(city));
   }, [dispatch, city]);
+
+  useEffect(() => {
+    deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP &&
+      setCity('');
+  }, [deliveryType, language]);
 
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
@@ -208,7 +217,7 @@ const DeliveryType = ({
         <SimpleModal
           shouldValidate={shouldValidate}
           allFieldsValidated={allFieldsValidated}
-          personalData={userData}
+          personalData={personalData}
         />
       </div>
     </div>

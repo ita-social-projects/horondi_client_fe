@@ -167,11 +167,40 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 450
   },
   orderFormModal: {
-    width: '700px',
+    width: '500px',
     height: '400px',
     position: 'relative',
     left: '50%',
     transform: `translate(-50%, 50%)`,
-    background: 'white'
+    background: 'white',
+    padding: '30px'
+  },
+  modalTitle: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  modalSubTitle: {
+    fontSize: '1.1rem',
+    color: 'rgba(0, 0, 0, 0.54)'
+  },
+  modalData: {
+    fontSize: '1.2rem',
+    color: 'black'
+  },
+  btnModal: {
+    marginLeft: '10px',
+    background: theme.palette.button.normal.backgroundColor,
+    borderRadius: '5px',
+    fontSize: '1rem',
+    color: theme.palette.button.normal.color,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
+  },
+  modalButtonsWrapper: {
+    position: 'absolute',
+    right: '30px',
+    bottom: '30px'
   }
 }));

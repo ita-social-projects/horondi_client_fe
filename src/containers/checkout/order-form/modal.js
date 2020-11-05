@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
+import { useSelector } from 'react-redux';
+import { Button } from '@material-ui/core';
+
 import { useStyles } from '../checkout.styles';
+import {
+  CHECKOUT_BUTTON,
+  CHECKOUT_TEXT_FIELDS
+} from '../../../translations/checkout.translations';
 
 const OrderFormModal = ({
   allFieldsValidated,
@@ -8,42 +15,106 @@ const OrderFormModal = ({
   personalData
 }) => {
   const style = useStyles();
-
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
   const [open, setOpen] = React.useState(shouldValidate);
 
-  allFieldsValidated && shouldValidate && setOpen(true);
-
-  console.log('shouldValidate', shouldValidate);
-  console.log('allFieldsValidated', allFieldsValidated);
-  console.log('personalData', personalData);
-  console.log('open', open);
-
   useEffect(() => {
-    shouldValidate && allFieldsValidated && setOpen(shouldValidate);
+    shouldValidate && setOpen(true);
   }, [shouldValidate, allFieldsValidated]);
 
-  const body = (
+  const modalHTML = (
     <div className={style.orderFormModal}>
-      <h2>Order number: 100500</h2>
-      <span>Customer:</span>
-      <span>{}</span>
-      <OrderFormModal />
+      <div className={style.modalTitle}>
+        <h2>Order number: 100500</h2>
+      </div>
+      <div>
+        <span className={style.modalSubTitle}>
+          {CHECKOUT_TEXT_FIELDS[language].firstName}:{' '}
+        </span>
+        <span className={style.modalData}>
+          {personalData.firstName} {personalData.lastName}
+        </span>
+      </div>
+      <div>
+        <span className={style.modalSubTitle}>
+          {CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}:{' '}
+        </span>
+        <span className={style.modalData}>{personalData.phoneNumber}</span>
+      </div>
+      <div>
+        <span className={style.modalSubTitle}>
+          {CHECKOUT_TEXT_FIELDS[language].email}:{' '}
+        </span>
+        <span className={style.modalData}>{personalData.email}</span>
+      </div>
+      <div>
+        <span className={style.modalSubTitle}>
+          {CHECKOUT_TEXT_FIELDS[language].delivery}:{' '}
+        </span>
+        <span className={style.modalData}>{personalData.deliveryType}</span>
+      </div>
+      {personalData.city && (
+        <div>
+          <span className={style.modalSubTitle}>
+            {CHECKOUT_TEXT_FIELDS[language].city}:{' '}
+          </span>
+          <span className={style.modalData}>{personalData.city}</span>
+        </div>
+      )}
+      {personalData.departmentValue && (
+        <div>
+          <span className={style.modalSubTitle}>
+            {CHECKOUT_TEXT_FIELDS[language].department}:{' '}
+          </span>
+          <span className={style.modalData}>
+            {personalData.departmentValue}
+          </span>
+        </div>
+      )}
+      {personalData.streetValue && (
+        <div>
+          <span className={style.modalSubTitle}>
+            {CHECKOUT_TEXT_FIELDS[language].street}:{' '}
+          </span>
+          <span className={style.modalData}>{personalData.streetValue}</span>
+        </div>
+      )}
+      {personalData.buildValue && (
+        <div>
+          <span className={style.modalSubTitle}>
+            {CHECKOUT_TEXT_FIELDS[language].building}:{' '}
+          </span>
+          <span className={style.modalData}>{personalData.buildValue}</span>
+        </div>
+      )}
+      {personalData.apartmentValue && (
+        <div>
+          <span className={style.modalSubTitle}>
+            {CHECKOUT_TEXT_FIELDS[language].apartment}:{' '}
+          </span>
+          <span className={style.modalData}>{personalData.apartmentValue}</span>
+        </div>
+      )}
+      <div className={style.modalButtonsWrapper}>
+        <Button className={style.btnModal} onClick={() => console.log('СЬОРБ')}>
+          {CHECKOUT_BUTTON[language].cancel}
+        </Button>
+        <Button className={style.btnModal} onClick={() => console.log('СЬОРБ')}>
+          {CHECKOUT_BUTTON[language].confirm}
+        </Button>
+      </div>
     </div>
   );
 
   return (
     <div>
-      {open && (
-        <Modal
-          open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
-        >
-          {body}
-        </Modal>
-      )}
+      <Modal open={open} onClose={() => setOpen((prevState) => !prevState)}>
+        {modalHTML}
+      </Modal>
     </div>
   );
 };
+
 export default OrderFormModal;

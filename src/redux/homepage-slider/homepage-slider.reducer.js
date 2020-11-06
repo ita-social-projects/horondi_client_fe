@@ -8,7 +8,7 @@ const initialState = {
   loading: true
 };
 
-const HomePageSliderReducer = (state = initialState, action) => {
+const HomePageSliderReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_HOMEPAGE_SLIDER_IMAGES:
       return {

@@ -42,6 +42,6 @@ export function* handleHomePageSliderImagesLoad() {
   }
 }
 
-export default function* HomePageSliderSaga() {
+export default function* homePageSliderSaga() {
   yield takeEvery(GET_HOMEPAGE_SLIDER_IMAGES, handleHomePageSliderImagesLoad);
 }

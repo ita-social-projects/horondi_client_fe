@@ -63,7 +63,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
             </>
           )
         );
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
           !sum && (
             <>

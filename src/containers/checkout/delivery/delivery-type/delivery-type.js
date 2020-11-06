@@ -17,7 +17,7 @@ import DeliveryInfo from './delivery-info/delivery-info';
 import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
 import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
 import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
-import { CurrierBottom } from './mail-services/currier/currier-bottom';
+import { CourierBottom } from './mail-services/courier/courier-bottom';
 import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
 import SimpleModal from '../../order-form/modal';
 
@@ -74,7 +74,7 @@ const DeliveryType = ({
   useEffect(() => {
     deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP &&
       setCity('');
-    deliveryType === CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta &&
+    deliveryType === CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta &&
       setDepartmentValue('');
     if (deliveryType === CHECKOUT_DELIVERY_TYPES[language].novaPoshta) {
       setBuildValue('');
@@ -101,7 +101,7 @@ const DeliveryType = ({
     CHECKOUT_DELIVERY_TYPES[language].selfPickUP,
     CHECKOUT_DELIVERY_TYPES[language].novaPoshta,
     CHECKOUT_DELIVERY_TYPES[language].ukrPoshta,
-    CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
+    CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta
   ];
 
   const deliverySwitcherTop = () => {
@@ -141,9 +141,9 @@ const DeliveryType = ({
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaBottom />;
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
-          <CurrierBottom
+          <CourierBottom
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             handleDeliveryTypeValidator={handleDeliveryTypeValidator}
             setStreetValue={setStreetValue}
@@ -179,11 +179,11 @@ const DeliveryType = ({
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <DeliveryInfo />;
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
           <DeliveryInfo
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
-            from={CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta}
+            from={CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta}
             setTotalPrice={setTotalPrice}
           />
         );

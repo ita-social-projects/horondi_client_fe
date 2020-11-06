@@ -6,13 +6,15 @@ import {
   setNovaPoshtaWarehouse,
   setNovaPoshtaStreets,
   setLoading,
-  setNovaPoshtaPrices
+  setNovaPoshtaPrices,
+  setFondyUrl
 } from './checkout.actions';
 import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
   GET_NOVAPOSHTA_STREETS,
-  GET_NOVAPOSHTA_PRICES
+  GET_NOVAPOSHTA_PRICES,
+  GET_FONDY_URL
 } from './checkout.types';
 import getItems from '../../utils/client';
 import { setError } from '../error/error.actions';
@@ -20,6 +22,30 @@ import { setError } from '../error/error.actions';
 function* handleErrors(error) {
   yield put(setError({ error }));
   yield put(push('/error-page'));
+}
+
+export function* handleFondyUrl({ payload }) {
+  try {
+    const url = yield call(
+      getItems,
+      `query{
+              getPaymentCheckout(data: {
+                orderId: "a34563456346df",
+                orderDesc: "ol3456456olo",
+                currency: "UAH",
+                amount: 1
+              }){
+                paymentId
+                checkoutUrl
+              }
+            }`
+    );
+    console.log(url.data);
+    yield put(setFondyUrl(...url.data));
+  } catch (e) {
+    console.log(e);
+    yield call(handleErrors, e);
+  }
 }
 
 export function* handlePrice({ payload }) {
@@ -114,4 +140,5 @@ export default function* checkoutSaga() {
   yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleWarehouse);
   yield takeEvery(GET_NOVAPOSHTA_STREETS, handleStreets);
   yield takeEvery(GET_NOVAPOSHTA_PRICES, handlePrice);
+  yield takeEvery(GET_FONDY_URL, handleFondyUrl);
 }

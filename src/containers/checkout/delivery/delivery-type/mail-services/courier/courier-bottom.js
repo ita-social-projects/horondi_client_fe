@@ -7,7 +7,7 @@ import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.tr
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaStreets } from '../../../../../../redux/checkout/checkout.actions';
 
-const CurrierBottom = ({
+const CourierBottom = ({
   cityForNovaPoshtaBottom,
   handleDeliveryTypeValidator,
   setStreetValue,
@@ -96,4 +96,4 @@ const CurrierBottom = ({
   );
 };
 
-export { CurrierBottom };
+export { CourierBottom };

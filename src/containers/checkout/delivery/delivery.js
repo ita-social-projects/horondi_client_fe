@@ -11,19 +11,24 @@ export const Delivery = ({
   userData,
   allFieldsValidated
 }) => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
   }));
-  const style = useStyles({ deliveryTypeValidator, shouldValidate });
+  const style = useStyles({
+    deliveryTypeValidator,
+    shouldValidate,
+    isLightTheme
+  });
   const [deliveryType, setDeliveryType] = useState('');
 
   return (
     <div className={style.deliveryType}>
       <div className={deliveryType && style.deliveryTypeSelected}>
         <div className={style.contactsFields}>
-          <span className={style.subTitle}>
-            {CHECKOUT_TITLES[language].delivery}
-          </span>
+          <div className={style.subTitle}>
+            <span>{CHECKOUT_TITLES[language].delivery}</span>
+          </div>
           <DeliveryType
             deliveryType={deliveryType}
             setDeliveryType={setDeliveryType}

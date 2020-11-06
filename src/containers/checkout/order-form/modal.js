@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from '@material-ui/core/Modal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 
 import { useStyles } from '../checkout.styles';
@@ -8,22 +8,27 @@ import {
   CHECKOUT_BUTTON,
   CHECKOUT_TEXT_FIELDS
 } from '../../../translations/checkout.translations';
+import { getFondyUrl } from '../../../redux/checkout/checkout.actions';
 
 const OrderFormModal = ({
   allFieldsValidated,
   shouldValidate,
   personalData
 }) => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
   }));
-  const style = useStyles({ isLightTheme });
+  const dispatch = useDispatch();
+  const style = useStyles();
   const [open, setOpen] = useState(shouldValidate);
 
   useEffect(() => {
     shouldValidate && setOpen(true);
   }, [shouldValidate, allFieldsValidated]);
+
+  useEffect(() => {
+    shouldValidate && dispatch(getFondyUrl());
+  }, [shouldValidate, dispatch]);
 
   const modalHTML = (
     <div className={style.orderFormModal}>
@@ -114,7 +119,7 @@ const OrderFormModal = ({
         </Button>
         <Button
           className={style.btnModalConfirm}
-          onClick={() => console.log('СЬОРБ')}
+          // onClick={() => setUrl(true)}
         >
           {CHECKOUT_BUTTON[language].confirm}
         </Button>

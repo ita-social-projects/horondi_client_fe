@@ -1,26 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  mainTitle: {
-    color: 'rgba(0, 0, 0, 0.54)',
+  mainTitle: ({ isLightTheme }) => ({
+    color: isLightTheme ? 'rgba(0, 0, 0, 0.54)' : theme.palette.textColor,
     fontSize: '2.5rem',
     display: 'flex',
     justifyContent: 'center',
     marginBottom: '35px'
-  },
+  }),
   orderFormWrapper: {
     margin: '0 auto',
     maxWidth: '768px'
   },
-  subTitle: {
-    color: 'rgba(0, 0, 0, 0.54)',
+  subTitle: ({ isLightTheme }) => ({
+    color: isLightTheme ? 'rgba(0, 0, 0, 0.54)' : theme.palette.textColor,
     fontSize: '1.8rem',
     marginBottom: '20px',
     '@media screen and (max-width: 768px)': {
       display: 'flex',
       justifyContent: 'center'
     }
-  },
+  }),
   contactsFields: {
     display: 'flex',
     flexDirection: 'column',

@@ -82,13 +82,13 @@ export const CHECKOUT_DELIVERY_TYPES = {
     selfPickUP: 'Самовивіз',
     novaPoshta: 'Нова пошта',
     ukrPoshta: 'Укрпошта',
-    currierNovaPoshta: "Кур'єр Нової пошти"
+    courierNovaPoshta: "Кур'єр Нової пошти"
   },
   1: {
     selfPickUP: 'Self pick-up',
     novaPoshta: 'Nova poshta',
     ukrPoshta: 'Ukrposhta',
-    currierNovaPoshta: 'Currier from Nova poshta'
+    courierNovaPoshta: 'Courier from Nova poshta'
   }
 };
 
@@ -108,11 +108,11 @@ export const CHECKOUT_BUTTON = {
 };
 export const CHECKOUT_PAYMENT = {
   0: {
-    cart: 'Картою',
+    card: 'Картою',
     cash: 'Готівкою'
   },
   1: {
-    cart: 'Cart',
+    card: 'Card',
     cash: 'Cash'
   }
 };

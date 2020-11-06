@@ -44,11 +44,6 @@ export const OrderForm = () => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
-  const handleCreateOrder = () => {
-    setShouldValidate(true);
-    allFieldsValidated && console.log('all fields valid');
-  };
-
   const handleDeliveryTypeValidator = (city) => {
     setDeliveryTypeValidator(city);
   };
@@ -57,8 +52,9 @@ export const OrderForm = () => {
     setPaymentType(event.target.value);
   };
 
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
   }));
 
   useEffect(() => {
@@ -83,7 +79,7 @@ export const OrderForm = () => {
     deliveryTypeValidator
   ]);
 
-  const style = useStyles({ deliveryTypeValidator });
+  const style = useStyles({ deliveryTypeValidator, isLightTheme });
 
   const contactsNames = [
     {
@@ -229,8 +225,8 @@ export const OrderForm = () => {
               onChange={selectHandlerPayment}
               label='paymentType'
             >
-              <MenuItem value='cart'>
-                {CHECKOUT_PAYMENT[language].cart}
+              <MenuItem value='card'>
+                {CHECKOUT_PAYMENT[language].card}
               </MenuItem>
               <MenuItem value='cash'>
                 {CHECKOUT_PAYMENT[language].cash}
@@ -258,7 +254,10 @@ export const OrderForm = () => {
           </span>
         </div>
         <div className={style.btnWrapper}>
-          <Button className={style.btnCreateOrder} onClick={handleCreateOrder}>
+          <Button
+            className={style.btnCreateOrder}
+            onClick={() => setShouldValidate(true)}
+          >
             {CHECKOUT_BUTTON[language].createOrder}
           </Button>
         </div>

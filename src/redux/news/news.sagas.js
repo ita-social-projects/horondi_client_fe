@@ -103,9 +103,9 @@ export function* handleArticleLoad({ payload }) {
   }
 }
 
-export function* handleNewsError(e) {
+export function* handleNewsError({ message }) {
   yield put(setLoading(false));
-  yield put(setError({ e }));
+  yield put(setError(message));
   yield put(push('/error-page'));
 }
 

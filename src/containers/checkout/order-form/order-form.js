@@ -32,6 +32,11 @@ export const OrderForm = () => {
   const [user, setUser] = useState(REGISTER_USER_DATA);
   const { firstName, lastName, email, phoneNumber } = user;
 
+  const userData = {
+    ...user,
+    paymentType
+  };
+
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
     const inputName = event.target.name;
@@ -204,7 +209,7 @@ export const OrderForm = () => {
           handleDeliveryTypeValidator={handleDeliveryTypeValidator}
           deliveryTypeValidator={deliveryTypeValidator}
           shouldValidate={shouldValidate}
-          userData={user}
+          userData={userData}
           allFieldsValidated={allFieldsValidated}
         />
         <div className={style.subTitle}>

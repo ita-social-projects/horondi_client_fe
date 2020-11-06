@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
@@ -14,11 +14,12 @@ const OrderFormModal = ({
   shouldValidate,
   personalData
 }) => {
-  const style = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
   }));
-  const [open, setOpen] = React.useState(shouldValidate);
+  const style = useStyles({ isLightTheme });
+  const [open, setOpen] = useState(shouldValidate);
 
   useEffect(() => {
     shouldValidate && setOpen(true);
@@ -97,11 +98,24 @@ const OrderFormModal = ({
           <span className={style.modalData}>{personalData.apartmentValue}</span>
         </div>
       )}
+      <div>
+        <span className={style.modalSubTitle}>
+          {CHECKOUT_TEXT_FIELDS[language].total}:{' '}
+        </span>
+        <span className={style.modalData}>{personalData.totalPrice}</span>
+      </div>
       <div className={style.modalButtonsWrapper}>
-        <Button className={style.btnModal} onClick={() => console.log('СЬОРБ')}>
+        <Button
+          className={style.btnModalCancel}
+          variant='outlined'
+          onClick={() => setOpen((prevState) => !prevState)}
+        >
           {CHECKOUT_BUTTON[language].cancel}
         </Button>
-        <Button className={style.btnModal} onClick={() => console.log('СЬОРБ')}>
+        <Button
+          className={style.btnModalConfirm}
+          onClick={() => console.log('СЬОРБ')}
+        >
           {CHECKOUT_BUTTON[language].confirm}
         </Button>
       </div>

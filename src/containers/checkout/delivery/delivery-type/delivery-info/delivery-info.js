@@ -7,7 +7,7 @@ import {
 } from '../../../../../translations/checkout.translations';
 import { getNovaPoshtaPrices } from '../../../../../redux/checkout/checkout.actions';
 
-const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
+const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
   const style = useStyles();
   const dispatch = useDispatch();
   const { language, cart, price } = useSelector(
@@ -23,7 +23,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
   const productsWeight = cart
     .map((product) => product.dimensions.weightInKg)
     .reduce((prevWeight, currentWeight) => prevWeight + currentWeight);
-
+  console.log(productsPrice);
   const sum = Number.isNaN(productsPrice + price.cost);
 
   const priceData = useMemo(
@@ -39,6 +39,12 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
     [productsWeight, productsPrice, cityForNovaPoshtaBottom, from, language]
   );
 
+  useEffect(() => {
+    from === CHECKOUT_DELIVERY_TYPES[language].selfPickUP
+      ? setTotalPrice(productsPrice)
+      : setTotalPrice(productsPrice + price.cost);
+  }, [productsPrice, price, setTotalPrice, from, language]);
+
   const priceSwitcher = () => {
     switch (from) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
@@ -47,7 +53,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
             <>
               <span className={style.deliveryPrice}>
                 {CHECKOUT_TITLES[language].deliveryPrice}: {price && price.cost}{' '}
-                UAH
+                {CHECKOUT_TITLES[language].UAH}
               </span>
               <span className={style.totalPrice}>
                 {CHECKOUT_TITLES[language].totalPrice}:{' '}
@@ -62,11 +68,13 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
           !sum && (
             <>
               <span className={style.deliveryPrice}>
-                {CHECKOUT_TITLES[language].deliveryPrice}: {price.cost} UAH
+                {CHECKOUT_TITLES[language].deliveryPrice}: {price.cost}
+                {CHECKOUT_TITLES[language].UAH}
               </span>
               <span className={style.totalPrice}>
                 {CHECKOUT_TITLES[language].totalPrice}:{' '}
-                {productsPrice + price.cost} UAH
+                {productsPrice + price.cost}
+                {CHECKOUT_TITLES[language].UAH}
               </span>
             </>
           )

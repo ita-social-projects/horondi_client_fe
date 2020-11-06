@@ -43,7 +43,8 @@ export const CHECKOUT_TEXT_FIELDS = {
     paymentMethod: 'Виберіть метод оплати',
     deliveryType: 'Виберіть тип доставки',
     department: 'Відділення',
-    delivery: 'Тип доставки'
+    delivery: 'Тип доставки',
+    total: 'Загальна сума'
   },
   1: {
     firstName: 'First name',
@@ -58,7 +59,8 @@ export const CHECKOUT_TEXT_FIELDS = {
     paymentMethod: 'Choose a payment method',
     deliveryType: 'Select a delivery type',
     department: 'Department',
-    delivery: 'Delivery type'
+    delivery: 'Delivery type',
+    total: 'Total'
   }
 };
 

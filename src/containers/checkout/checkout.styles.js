@@ -168,11 +168,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   orderFormModal: {
     width: '500px',
-    height: '400px',
+    height: '500px',
     position: 'relative',
     left: '50%',
-    transform: `translate(-50%, 50%)`,
-    background: 'white',
+    transform: `translate(-50%, 30%)`,
+    background: theme.palette.backgroundColor,
     padding: '30px'
   },
   modalTitle: {
@@ -181,13 +181,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   modalSubTitle: {
     fontSize: '1.1rem',
-    color: 'rgba(0, 0, 0, 0.54)'
+    color: theme.palette.textColor
   },
   modalData: {
     fontSize: '1.2rem',
-    color: 'black'
+    color: theme.palette.textColor,
+    fontWeight: 450
   },
-  btnModal: {
+  btnModalConfirm: {
     marginLeft: '10px',
     background: theme.palette.button.normal.backgroundColor,
     borderRadius: '5px',
@@ -196,6 +197,17 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
+    }
+  },
+  btnModalCancel: {
+    marginLeft: '10px',
+    border: '1px solid black',
+    borderRadius: '5px',
+    fontSize: '1rem',
+    color: theme.palette.textColor,
+    '&:hover': {
+      background: 'grey',
+      color: theme.palette.textColor
     }
   },
   modalButtonsWrapper: {

@@ -40,6 +40,7 @@ const DeliveryType = ({
   const [streetValue, setStreetValue] = useState('');
   const [buildValue, setBuildValue] = useState('');
   const [apartmentValue, setApartmentValue] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -53,7 +54,8 @@ const DeliveryType = ({
     streetValue,
     buildValue,
     apartmentValue,
-    deliveryType
+    deliveryType,
+    totalPrice
   };
 
   const citiesForNovaPoshta = cities.map(
@@ -72,6 +74,13 @@ const DeliveryType = ({
   useEffect(() => {
     deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP &&
       setCity('');
+    deliveryType === CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta &&
+      setDepartmentValue('');
+    if (deliveryType === CHECKOUT_DELIVERY_TYPES[language].novaPoshta) {
+      setBuildValue('');
+      setApartmentValue('');
+      setStreetValue('');
+    }
   }, [deliveryType, language]);
 
   const selectHandlerDelivery = (event) => {
@@ -165,6 +174,7 @@ const DeliveryType = ({
           <DeliveryInfo
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             from={CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
+            setTotalPrice={setTotalPrice}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
@@ -174,10 +184,16 @@ const DeliveryType = ({
           <DeliveryInfo
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             from={CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta}
+            setTotalPrice={setTotalPrice}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return <DeliveryInfo />;
+        return (
+          <DeliveryInfo
+            from={CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
+            setTotalPrice={setTotalPrice}
+          />
+        );
       default:
         return '';
     }

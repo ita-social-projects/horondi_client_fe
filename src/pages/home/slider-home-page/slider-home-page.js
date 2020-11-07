@@ -34,7 +34,7 @@ const SliderHomePage = () => {
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
-        <LoadingBar color='inherit' />
+        <CircularLoadingBar color='inherit' />
       </Backdrop>
     );
   }

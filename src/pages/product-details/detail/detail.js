@@ -1,5 +1,5 @@
 import React from 'react';
-import useStyles from './detail.styles';
+import { useStyles } from './detail.styles';
 
 const Detail = ({ subtitle, description }) => {
   const styles = useStyles();

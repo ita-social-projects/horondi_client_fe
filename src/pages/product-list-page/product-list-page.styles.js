@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -102,4 +102,3 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-export default useStyles;

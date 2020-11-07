@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 
 import { Backdrop } from '@material-ui/core';
@@ -20,19 +20,17 @@ const SliderHomePage = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { images, loading } = useSelector(({ HomePageSlider }) => ({
-    images: HomePageSlider.images,
-    loading: HomePageSlider.loading
-  }));
-
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { images, loading, language } = useSelector(
+    ({ HomePageSlider, Language }) => ({
+      images: HomePageSlider.images,
+      loading: HomePageSlider.loading,
+      language: Language.language
+    })
+  );
 
   useEffect(() => {
     dispatch(getHomePageSliderImages());
   }, [dispatch]);
-
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>

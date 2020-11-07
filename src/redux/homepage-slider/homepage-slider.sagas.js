@@ -9,7 +9,6 @@ import getItems from '../../utils/client';
 import { GET_HOMEPAGE_SLIDER_IMAGES } from './homepage-slider.types';
 
 export function* handleHomePageSliderImagesLoad() {
-  console.log('images');
   yield put(setHomePageSliderImagesLoading(true));
   const query = `query {
                   getAllSlides {
@@ -32,7 +31,6 @@ export function* handleHomePageSliderImagesLoad() {
                 }`;
   try {
     const images = yield call(getItems, query);
-
     yield put(setHomePageSliderImages(images.data.getAllSlides));
     yield put(setHomePageSliderImagesLoading(false));
   } catch (e) {

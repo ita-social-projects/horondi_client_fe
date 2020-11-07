@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff',
     transform: 'translate(-50%, -50%)',
     fontSize: '16px',
-    zIndex: 100,
+    zIndex: 10,
     textShadow: '2px 1px 2px #000',
     '&>span': {
       fontSize: '36px',
@@ -51,7 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
     color: '#fff',
     fontSize: '36px',
-    zIndex: 100
+    zIndex: 10
   },
   description: {
     position: 'absolute',
@@ -60,6 +60,6 @@ export const useStyles = makeStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
     color: '#fff',
     fontSize: '24px',
-    zIndex: 100
+    zIndex: 10
   }
 }));

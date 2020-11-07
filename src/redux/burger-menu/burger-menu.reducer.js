@@ -8,7 +8,7 @@ const initialState = {
   loading: true
 };
 
-const burgerMenuReducer = (state = initialState, action) => {
+const burgerMenuReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_BURGER_MENU_LINKS:
       return {

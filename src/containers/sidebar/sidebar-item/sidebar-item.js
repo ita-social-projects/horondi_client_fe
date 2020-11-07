@@ -18,8 +18,8 @@ const SideBarItem = ({ handlerItem, models, language, name }) => {
   };
 
   const dispatch = useDispatch();
-  const handleModelClick = (models) => {
-    dispatch(setModelsFilter(models.name[language].value));
+  const handleModelClick = (productModels) => {
+    dispatch(setModelsFilter(productModels.name[language].value));
   };
   return (
     <div>

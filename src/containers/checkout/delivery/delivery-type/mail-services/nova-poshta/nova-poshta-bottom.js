@@ -31,8 +31,6 @@ const NovaPoshtaBottom = ({
     setDepartmentValue('');
   }, [dispatch, city, setDepartmentValue]);
 
-  // const [departmentValue, setDepartmentValue] = useState('');
-
   useEffect(() => {
     departmentValue
       ? handleDeliveryTypeValidator(true)

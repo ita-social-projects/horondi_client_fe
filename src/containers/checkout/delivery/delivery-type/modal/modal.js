@@ -126,7 +126,7 @@ const OrderFormModal = ({
         ) : (
           <Button
             className={style.btnModalConfirm}
-            onClick={() => console.log('сьорб')}
+            onClick={() => setOpenModal(false)}
           >
             {CHECKOUT_BUTTON[language].confirm}
           </Button>

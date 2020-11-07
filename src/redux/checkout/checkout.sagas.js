@@ -88,7 +88,6 @@ export function* handleStreets({ payload }) {
     yield put(setNovaPoshtaStreets(streets.data.getNovaPoshtaStreets));
     yield put(setLoading(false));
   } catch (e) {
-    console.log(e);
     yield call(handleErrors, e);
   }
 }

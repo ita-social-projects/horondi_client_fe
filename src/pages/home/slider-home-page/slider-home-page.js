@@ -9,7 +9,7 @@ import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
 import { useStyles } from './slider-home-page.style';
 
-import LoadingBar from '../../../components/loading-bar';
+import CircularLoadingBar from '../../../components/circular-loading-bar';
 import { getHomePageSliderImages } from '../../../redux/homepage-slider/homepage-slider.actions';
 
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';

@@ -11,7 +11,8 @@ export const CHECKOUT_TITLES = {
     saturday: 'Сб:  ',
     sunday: 'Нд:  ',
     UAH: 'UAH',
-    region: 'Регіон'
+    region: 'Регіон',
+    orderNumber: 'Замовлення № '
   },
   1: {
     orderForm: 'Order form',
@@ -25,7 +26,8 @@ export const CHECKOUT_TITLES = {
     saturday: 'Sat',
     sunday: 'Sun',
     UAH: 'UAH',
-    region: 'Region'
+    region: 'Region',
+    orderNumber: 'Order № '
   }
 };
 

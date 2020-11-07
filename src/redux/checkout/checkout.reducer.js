@@ -4,7 +4,7 @@ import {
   SET_LOADING,
   SET_NOVAPOSHTA_STREETS,
   SET_NOVAPOSHTA_PRICES,
-  SET_FONDY_URL
+  SET_FONDY_DATA
 } from './checkout.types';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   warehouses: [],
   streets: [],
   price: {},
-  fondyUrl: ''
+  fondyData: {}
 };
 
 const checkoutReducer = (state = initialState, action = {}) => {
@@ -24,10 +24,10 @@ const checkoutReducer = (state = initialState, action = {}) => {
         cities: action.payload
       };
 
-    case SET_FONDY_URL:
+    case SET_FONDY_DATA:
       return {
         ...state,
-        fondyUrl: ''
+        fondyData: action.payload
       };
 
     case SET_NOVAPOSHTA_PRICES:

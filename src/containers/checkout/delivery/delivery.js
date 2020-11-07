@@ -9,7 +9,9 @@ export const Delivery = ({
   deliveryTypeValidator,
   shouldValidate,
   userData,
-  allFieldsValidated
+  allFieldsValidated,
+  openModal,
+  setOpenModal
 }) => {
   const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
     language: Language.language,
@@ -36,6 +38,8 @@ export const Delivery = ({
             shouldValidate={shouldValidate}
             userData={userData}
             allFieldsValidated={allFieldsValidated}
+            openModal={openModal}
+            setOpenModal={setOpenModal}
           />
         </div>
       </div>

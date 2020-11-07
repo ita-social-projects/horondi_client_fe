@@ -7,7 +7,12 @@ import {
 } from '../../../../../translations/checkout.translations';
 import { getNovaPoshtaPrices } from '../../../../../redux/checkout/checkout.actions';
 
-const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
+const DeliveryInfo = ({
+  cityForNovaPoshtaBottom,
+  from,
+  setTotalPrice,
+  isRenderPrice
+}) => {
   const style = useStyles();
   const dispatch = useDispatch();
   const { language, cart, price } = useSelector(
@@ -23,8 +28,6 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
   const productsWeight = cart
     .map((product) => product.dimensions.weightInKg)
     .reduce((prevWeight, currentWeight) => prevWeight + currentWeight);
-  console.log(productsPrice);
-  const sum = Number.isNaN(productsPrice + price.cost);
 
   const priceData = useMemo(
     () => ({
@@ -49,7 +52,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
     switch (from) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return (
-          cityForNovaPoshtaBottom && (
+          isRenderPrice && (
             <>
               <span className={style.deliveryPrice}>
                 {CHECKOUT_TITLES[language].deliveryPrice}: {price && price.cost}{' '}
@@ -65,7 +68,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
         );
       case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
-          !sum && (
+          isRenderPrice && (
             <>
               <span className={style.deliveryPrice}>
                 {CHECKOUT_TITLES[language].deliveryPrice}: {price.cost}
@@ -87,6 +90,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from, setTotalPrice }) => {
   useEffect(() => {
     cityForNovaPoshtaBottom && dispatch(getNovaPoshtaPrices(priceData));
   }, [dispatch, priceData, cityForNovaPoshtaBottom]);
+
   return <div className={style.deliveryInfoWrapper}>{priceSwitcher()}</div>;
 };
 

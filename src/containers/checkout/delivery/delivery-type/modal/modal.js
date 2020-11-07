@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 
-import { useStyles } from '../checkout.styles';
+import { useStyles } from '../../../checkout.styles';
 import {
   CHECKOUT_BUTTON,
-  CHECKOUT_TEXT_FIELDS
-} from '../../../translations/checkout.translations';
-import { getFondyUrl } from '../../../redux/checkout/checkout.actions';
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
+} from '../../../../../translations/checkout.translations';
 
 const OrderFormModal = ({
   allFieldsValidated,
   shouldValidate,
-  personalData
+  personalData,
+  fondyData,
+  openModal,
+  setOpenModal
 }) => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, fondy } = useSelector(({ Language, Checkout }) => ({
+    language: Language.language,
+    fondy: Checkout.fondyData
   }));
-  const dispatch = useDispatch();
+
   const style = useStyles();
-  const [open, setOpen] = useState(shouldValidate);
 
   useEffect(() => {
-    shouldValidate && setOpen(true);
-  }, [shouldValidate, allFieldsValidated]);
-
-  useEffect(() => {
-    shouldValidate && dispatch(getFondyUrl());
-  }, [shouldValidate, dispatch]);
+    shouldValidate && allFieldsValidated && setOpenModal(true);
+  }, [shouldValidate, allFieldsValidated, setOpenModal]);
 
   const modalHTML = (
     <div className={style.orderFormModal}>
       <div className={style.modalTitle}>
-        <h2>Order number: 100500</h2>
+        <span className={style.modalOrderTitle}>
+          {CHECKOUT_TITLES[language].orderNumber}
+        </span>
+        <span className={style.modalOrderSubTitle}>{fondyData.orderID}</span>
       </div>
       <div>
         <span className={style.modalSubTitle}>
@@ -113,23 +115,32 @@ const OrderFormModal = ({
         <Button
           className={style.btnModalCancel}
           variant='outlined'
-          onClick={() => setOpen((prevState) => !prevState)}
+          onClick={() => setOpenModal((prevState) => !prevState)}
         >
           {CHECKOUT_BUTTON[language].cancel}
         </Button>
-        <Button
-          className={style.btnModalConfirm}
-          // onClick={() => setUrl(true)}
-        >
-          {CHECKOUT_BUTTON[language].confirm}
-        </Button>
+        {personalData.paymentType === 'card' ? (
+          <Button className={style.btnModalLink} href={fondy.checkoutUrl}>
+            {CHECKOUT_BUTTON[language].pay}
+          </Button>
+        ) : (
+          <Button
+            className={style.btnModalConfirm}
+            onClick={() => console.log('сьорб')}
+          >
+            {CHECKOUT_BUTTON[language].confirm}
+          </Button>
+        )}
       </div>
     </div>
   );
 
   return (
     <div>
-      <Modal open={open} onClose={() => setOpen((prevState) => !prevState)}>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal((prevState) => !prevState)}
+      >
         {modalHTML}
       </Modal>
     </div>

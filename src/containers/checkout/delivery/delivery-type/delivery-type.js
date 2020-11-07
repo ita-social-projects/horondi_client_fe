@@ -18,8 +18,11 @@ import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
 import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
 import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
 import { CourierBottom } from './mail-services/courier/courier-bottom';
-import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
-import SimpleModal from '../../order-form/modal';
+import {
+  getFondyData,
+  getNovaPoshtaCities
+} from '../../../../redux/checkout/checkout.actions';
+import SimpleModal from './modal/modal';
 
 const DeliveryType = ({
   deliveryType,
@@ -27,9 +30,12 @@ const DeliveryType = ({
   handleDeliveryTypeValidator,
   shouldValidate,
   allFieldsValidated,
-  userData
+  userData,
+  openModal,
+  setOpenModal
 }) => {
   const style = useStyles();
+  const dispatch = useDispatch();
   const { language, contacts } = useSelector(({ Language, Contacts }) => ({
     language: Language.language,
     contacts: Contacts.contacts
@@ -41,12 +47,10 @@ const DeliveryType = ({
   const [buildValue, setBuildValue] = useState('');
   const [apartmentValue, setApartmentValue] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
-
-  const dispatch = useDispatch();
-
   const { cities } = useSelector(({ Checkout }) => ({
     cities: Checkout.cities
   }));
+
   const personalData = {
     ...userData,
     city,
@@ -57,6 +61,14 @@ const DeliveryType = ({
     deliveryType,
     totalPrice
   };
+
+  const fondyData = useMemo(
+    () => ({
+      amount: !!totalPrice && totalPrice * 100,
+      orderID: Math.floor(Math.random() * (100_000_000 - 1_000_000) + 1_000_000)
+    }),
+    [totalPrice]
+  );
 
   const citiesForNovaPoshta = cities.map(
     (cityForNovaPoshta) => cityForNovaPoshta && cityForNovaPoshta.description
@@ -70,6 +82,10 @@ const DeliveryType = ({
   useEffect(() => {
     dispatch(getNovaPoshtaCities(city));
   }, [dispatch, city]);
+
+  useEffect(() => {
+    fondyData.amount && dispatch(getFondyData(fondyData));
+  }, [dispatch, fondyData, totalPrice]);
 
   useEffect(() => {
     deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP &&
@@ -175,6 +191,7 @@ const DeliveryType = ({
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             from={CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
             setTotalPrice={setTotalPrice}
+            isRenderPrice={departmentValue}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
@@ -185,6 +202,7 @@ const DeliveryType = ({
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             from={CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta}
             setTotalPrice={setTotalPrice}
+            isRenderPrice={streetValue}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
@@ -231,9 +249,12 @@ const DeliveryType = ({
       {deliveryInfoSwitcher()}
       <div>
         <SimpleModal
+          fondyData={fondyData}
           shouldValidate={shouldValidate}
           allFieldsValidated={allFieldsValidated}
           personalData={personalData}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
         />
       </div>
     </div>

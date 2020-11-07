@@ -20,6 +20,11 @@ import {
 import { useStyles } from '../checkout.styles';
 
 export const OrderForm = () => {
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
+  }));
+
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
   const [emailValidated, setEmailValidated] = useState(false);
@@ -27,7 +32,7 @@ export const OrderForm = () => {
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const [deliveryTypeValidator, setDeliveryTypeValidator] = useState(false);
-
+  const [openModal, setOpenModal] = useState(shouldValidate);
   const [paymentType, setPaymentType] = useState('');
   const [user, setUser] = useState(REGISTER_USER_DATA);
   const { firstName, lastName, email, phoneNumber } = user;
@@ -44,6 +49,11 @@ export const OrderForm = () => {
     input.match(regExp) ? setValid(true) : setValid(false);
   };
 
+  const handleCreateOrder = () => {
+    setShouldValidate(true);
+    allFieldsValidated && setOpenModal(true);
+  };
+
   const handleDeliveryTypeValidator = (city) => {
     setDeliveryTypeValidator(city);
   };
@@ -52,10 +62,7 @@ export const OrderForm = () => {
     setPaymentType(event.target.value);
   };
 
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
-  }));
+  const style = useStyles({ deliveryTypeValidator, isLightTheme });
 
   useEffect(() => {
     if (
@@ -78,8 +85,6 @@ export const OrderForm = () => {
     paymentType,
     deliveryTypeValidator
   ]);
-
-  const style = useStyles({ deliveryTypeValidator, isLightTheme });
 
   const contactsNames = [
     {
@@ -207,6 +212,8 @@ export const OrderForm = () => {
           shouldValidate={shouldValidate}
           userData={userData}
           allFieldsValidated={allFieldsValidated}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
         />
         <div className={style.subTitle}>
           <span>{CHECKOUT_TITLES[language].payment}</span>
@@ -254,10 +261,7 @@ export const OrderForm = () => {
           </span>
         </div>
         <div className={style.btnWrapper}>
-          <Button
-            className={style.btnCreateOrder}
-            onClick={() => setShouldValidate(true)}
-          >
+          <Button className={style.btnCreateOrder} onClick={handleCreateOrder}>
             {CHECKOUT_BUTTON[language].createOrder}
           </Button>
         </div>

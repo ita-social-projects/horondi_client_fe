@@ -177,7 +177,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   modalTitle: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: '20px'
   },
   modalSubTitle: {
     fontSize: '1.1rem',
@@ -188,7 +189,27 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     fontWeight: 450
   },
+  modalOrderTitle: {
+    fontSize: '1.3rem',
+    color: theme.palette.textColor
+  },
+  modalOrderSubTitle: {
+    fontSize: '1.3rem',
+    color: theme.palette.textColor,
+    fontWeight: 450
+  },
   btnModalConfirm: {
+    marginLeft: '10px',
+    background: theme.palette.button.normal.backgroundColor,
+    borderRadius: '5px',
+    fontSize: '1rem',
+    color: theme.palette.button.normal.color,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
+  },
+  btnModalLink: {
     marginLeft: '10px',
     background: theme.palette.button.normal.backgroundColor,
     borderRadius: '5px',

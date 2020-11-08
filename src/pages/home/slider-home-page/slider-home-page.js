@@ -32,7 +32,8 @@ const SliderHomePage = () => {
     );
   }
 
-  return models.length > 0 ? (
+  return (
+    //змінити слайдер назад так як був, він не генерується яшко немає фоток
     <div className={styles.captionBlock}>
       <AwesomeSlider className={styles.slider} mobileTouch>
         {models.map((photo, index) => (
@@ -40,7 +41,7 @@ const SliderHomePage = () => {
         ))}
       </AwesomeSlider>
     </div>
-  ) : null;
+  );
 };
 
 export default SliderHomePage;

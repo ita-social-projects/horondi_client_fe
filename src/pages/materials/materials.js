@@ -1,37 +1,41 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
+import parse from 'html-react-parser';
 
-import { useStyles } from './materials.style';
+import { useStyles } from './materials.style.js';
+import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 import SliderHomePage from '../home/slider-home-page';
 
-const Materials = () => {
+const AboutUs = () => {
   const dispatch = useDispatch();
-  const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { materialsPage, aboutUsPage, language } = useSelector(
+    ({ BusinessPages, Language }) => ({
+      materialsPage: BusinessPages.pages.materials,
+      aboutUsPage: BusinessPages.pages.aboutUs,
+      language: Language.language
+    })
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(getBusinessPageByCode('materials'));
   }, [dispatch]);
 
-  const titleText = language
-    ? 'This page has not been developed yet'
-    : 'Ця сторінка ще не розроблена';
+  const materialPageText =
+    materialsPage.text && parse(materialsPage.text[language].value);
+  const styles = useStyles();
 
   return (
     <div className={styles.root}>
-      <Typography variant='h4' className={styles.title}>
-        {titleText}
-      </Typography>
       <div className={styles.home} data-cy='home-page'>
         <div className={styles.homeHeader}>
           <SliderHomePage />
         </div>
       </div>
+      {materialsPage.title && <h1>{materialsPage.title[language].value}</h1>}
+      {materialPageText}
     </div>
   );
 };
 
-export default Materials;
+export default AboutUs;

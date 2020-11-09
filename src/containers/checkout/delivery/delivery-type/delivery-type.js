@@ -36,10 +36,13 @@ const DeliveryType = ({
 }) => {
   const style = useStyles();
   const dispatch = useDispatch();
-  const { language, contacts } = useSelector(({ Language, Contacts }) => ({
-    language: Language.language,
-    contacts: Contacts.contacts
-  }));
+  const { language, contacts, cities } = useSelector(
+    ({ Language, Contacts, Checkout }) => ({
+      language: Language.language,
+      contacts: Contacts.contacts,
+      cities: Checkout.cities
+    })
+  );
 
   const [city, setCity] = useState('');
   const [departmentValue, setDepartmentValue] = useState('');
@@ -47,9 +50,6 @@ const DeliveryType = ({
   const [buildValue, setBuildValue] = useState('');
   const [apartmentValue, setApartmentValue] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
-  const { cities } = useSelector(({ Checkout }) => ({
-    cities: Checkout.cities
-  }));
 
   const personalData = {
     ...userData,

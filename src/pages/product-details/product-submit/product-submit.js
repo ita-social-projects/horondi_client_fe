@@ -5,7 +5,7 @@ import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-import useStyles from './product-submit.styles';
+import { useStyles } from './product-submit.styles';
 
 import {
   addItemToWishlist,
@@ -22,15 +22,19 @@ import {
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product } = useSelector(
-    ({ Language, Products }) => ({
+  const { language, productToSend, product, userData } = useSelector(
+    ({ Language, Products, User }) => ({
       language: Language.language,
       productToSend: Products.productToSend,
-      product: Products.product
+      product: Products.product,
+      userData: User.userData
     })
   );
 
-  const wishlistItems = getFromLocalStorage('wishlist');
+  const wishlistItems = userData
+    ? userData.wishlist
+    : getFromLocalStorage('wishlist');
+
   const { selectedSize } = productToSend;
 
   const isWishful = useMemo(

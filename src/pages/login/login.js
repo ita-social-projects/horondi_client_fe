@@ -109,7 +109,7 @@ const Login = () => {
                     name='email'
                     color='primary'
                     error={!!errors.email}
-                    helperText={errors.email || ''}
+                    helperText={!!errors.email && `${errors.email}, `}
                   />
                   <Field
                     as={TextField}

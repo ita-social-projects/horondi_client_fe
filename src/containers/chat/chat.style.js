@@ -10,13 +10,17 @@ export const useStyles = makeStyles((theme) => ({
   chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
     background: iconsVisible ? '#E4B200' : 'black',
-    width: '60px',
-    height: '60px',
-    borderRadius: '50%',
+    margin: '0px 12px',
+    padding: '0px',
     position: 'fixed',
-    right: '4%',
-    bottom: '2%',
-    zIndex: 3,
+    zIndex: '3',
+    bottom: '30px',
+    top: 'auto',
+    height: '60px',
+    width: '60px',
+    borderRadius: '29px',
+    boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
+    right: '12px',
     transition: 'background 0.3s',
     '&:hover': {
       cursor: 'pointer',
@@ -24,21 +28,24 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   iconsMessengers: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    margin: '0px 12px',
+    padding: '0px',
     position: 'fixed',
-    right: '4%',
-    bottom: '80px',
+    zIndex: '3',
+    bottom: '110px',
+    top: 'auto',
+    height: '60px',
     width: '60px',
-    height: '150px',
-    flexDirection: 'column',
-    zIndex: '3'
+    borderRadius: '29px',
+    boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
+    background: 'none',
+    display: 'block',
+    right: '12px'
   },
   msgIcon: {
     ...flexCenter,
-    width: '50px',
-    height: '50px',
+    width: '60px',
+    height: '60px',
     background: 'black',
     borderRadius: '50%',
     marginBottom: '20px',
@@ -50,8 +57,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   msgIconActive: (mailFormVisible) => ({
     ...flexCenter,
-    width: '50px',
-    height: '50px',
+    width: '60px',
+    height: '60px',
     background: mailFormVisible ? '#E4B200' : 'black',
     borderRadius: '50%',
     marginBottom: '20px',
@@ -135,7 +142,8 @@ export const useStyles = makeStyles((theme) => ({
     width: '280px'
   },
   icon: {
-    color: theme.palette.white
+    color: theme.palette.white,
+    fontSize: '35px'
   },
   activeMsgWrapper: {
     height: '65%',

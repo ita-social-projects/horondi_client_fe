@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     padding: '0 2rem 1rem 2rem',
-    width: '100vw'
+    width: '100%'
   },
   div: {
     display: 'flex',
@@ -102,4 +102,3 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-export default useStyles;

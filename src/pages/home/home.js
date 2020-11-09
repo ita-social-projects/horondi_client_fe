@@ -10,7 +10,9 @@ const Home = () => {
 
   return (
     <div className={styles.home} data-cy='home-page'>
-      <SliderHomePage />
+      <div className={styles.homeHeader}>
+        <SliderHomePage />
+      </div>
       <CategoriesList />
       <OurLooks />
     </div>

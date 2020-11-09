@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(() => ({
   productItem: (props) => ({
     background: `url(${props.image}) no-repeat center`,
     backgroundSize: 'cover',
@@ -62,4 +62,3 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-between'
   }
 }));
-export default useStyles;

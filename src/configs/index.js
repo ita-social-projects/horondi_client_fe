@@ -18,15 +18,6 @@ export const HOMEPAGE_LOOKS_IMAGES = [
   'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
 ];
 
-export const ABOUT_US_IMAGES = {
-  hero: './images/about-us/hero-bg.jpg',
-  horondi_1: './images/about-us/horondi.jpg',
-  horondi_2: './images/about-us/horondi-2.jpg',
-  horondi_3: './images/about-us/horondi-3.jpg',
-  workPlace_1: './images/about-us/work-place.jpg',
-  workPlace_2: './images/about-us/work-place-2.jpg'
-};
-
 export const CART_IMAGES = {
   lightTheme: './images/cart/cart-light-theme-img.png',
   darkTheme: './images/cart/cart-dark-theme-img.png'
@@ -65,6 +56,11 @@ export const CHAT_USER_DATA = {
   message: ''
 };
 
+export const CHAT_FACEBOOK_DATA = {
+  pageId: '101134448446261',
+  appId: '713686025904610'
+};
+
 export const LOGIN_USER_DATA = {
   email: '',
   password: ''
@@ -92,10 +88,10 @@ export const errorMessages = [
     value: {
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
+      email: 'Некоректний формат пошти',
       password: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
-      text: 'Поле повинно містити від 2 до 500 символів',
+      text: 'Поле повинно містити від 2 до 700 символів',
       phoneNumber: 'Некоректний формат телефону',
       zipcode: 'Некоректний формат почтового індексу',
       country: 'Поле повинно містити від 2 до 40 символів',
@@ -111,7 +107,7 @@ export const errorMessages = [
     value: {
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
+      email: `Wrong email address `,
       password: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
@@ -130,29 +126,28 @@ export const errorMessages = [
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
-  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
-  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$/u,
+  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
+  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
+  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
   country:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   city:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   region:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   street:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я])?[a-zA-Zа-яА-Я]*)*$",
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
-  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim,
-  script: /(script)/g
+  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };
 
 export const placeholders = {
@@ -331,7 +326,7 @@ export const COMMENT_DATA = {
   show: true,
   email: ''
 };
-export const TEXT = 'text';
+export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
 export const LANGUAGES_LIST = [
@@ -350,6 +345,12 @@ export const DEFAULT_COUNT_PER_PAGE = 9;
 
 export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
+
+export const commentFields = {
+  firstName: { name: 'firstName' },
+  email: { name: 'email' },
+  text: { name: 'text', multiline: true, rows: 7 }
+};
 
 export const profileFields = [
   'firstName',
@@ -377,3 +378,7 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const commentsLimit = 10;
+
+export const DEFAULT_SIZE = 'M';

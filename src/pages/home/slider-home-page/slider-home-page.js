@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-import { useStyles } from './slider-home-page.style';
-import withAutoplay from 'react-awesome-slider/dist/autoplay';
-import { carouselInterval } from '../../../configs';
-import image1 from '../../../images/sliderHomePage/IMG_0423.jpg';
-import image2 from '../../../images/sliderHomePage/IMG_0120.jpg';
-import image3 from '../../../images/sliderHomePage/photo_2020-07-09_15-48-27.jpg';
 
-const AutoplaySlider = withAutoplay(AwesomeSlider);
+import { useSelector } from 'react-redux';
+import { Backdrop } from '@material-ui/core';
+import { useStyles } from './slider-home-page.style';
+import { getImage } from '../../../utils/imageLoad';
+import CircularLoadingBar from '../../../components/circular-loading-bar';
 
 const SliderHomePage = () => {
+  const [images, setImages] = useState([]);
+
   const styles = useStyles();
-  return (
+
+  const { models, loading } = useSelector(({ Model }) => ({
+    models: Model.models,
+    loading: Model.loading
+  }));
+
+  useMemo(() => {
+    models.forEach((item) => {
+      getImage(item.images.large)
+        .then((src) => setImages(src))
+        .catch((badSrc) => setImages(badSrc));
+    });
+  }, [models]);
+
+  if (loading) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <CircularLoadingBar color='inherit' />
+      </Backdrop>
+    );
+  }
+
+  return models.length > 0 ? (
     <div className={styles.captionBlock}>
-      <AutoplaySlider
-        play={true}
-        interval={carouselInterval}
-        className={styles.slider}
-        organicArrows={false}
-      >
-        <div key={image1} data-src={image1} />
-        <div key={image2} data-src={image2} />
-        <div key={image3} data-src={image3} />
-      </AutoplaySlider>
+      <AwesomeSlider className={styles.slider} mobileTouch>
+        {models.map((photo, index) => (
+          <div key={photo.name[1].value} data-src={images[index]} />
+        ))}
+      </AwesomeSlider>
     </div>
   );
 };

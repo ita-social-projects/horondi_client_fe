@@ -7,7 +7,7 @@ import { Loader } from '../../../components/loader/loader';
 
 const NewsPage = () => {
   const { newslist, loading, language } = useSelector(({ News, Language }) => ({
-    newslist: News.list,
+    newslist: News.list.sort((a, b) => b.date - a.date),
     loading: News.loading,
     language: Language.language
   }));

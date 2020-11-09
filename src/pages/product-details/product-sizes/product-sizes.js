@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import useStyles from './product-sizes.styles';
+import { useStyles } from './product-sizes.styles';
 
 import { SIZE } from '../../../translations/product-details.translations';
 
@@ -15,6 +15,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   }));
 
   const sizeButtons =
+    sizes &&
     !!sizes.length &&
     sizes
       .filter(({ available, name }) => available && name)

@@ -12,6 +12,7 @@ import { useStyles } from './slider-home-page.style';
 import CircularLoadingBar from '../../../components/circular-loading-bar';
 import { getHomePageSliderImages } from '../../../redux/homepage-slider/homepage-slider.actions';
 
+import { carouselInterval } from '../../../configs';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
@@ -44,7 +45,7 @@ const SliderHomePage = () => {
       <AutoplaySlider
         play
         cancelOnInteraction
-        interval={6000}
+        interval={carouselInterval}
         className={styles.slider}
         mobileTouch
         buttons={false}
@@ -53,14 +54,17 @@ const SliderHomePage = () => {
       >
         {images.items.map((item) => (
           <div key={item._id} data-src={item.images.large}>
-            <a className={clsx(styles.hoverArrow, 'arrow')} href={item.link}>
+            <a
+              className={clsx(styles.hoverArrow, 'arrow')}
+              href={item.link || '/'}
+            >
               {HOME_BUTTONS[language].SEE_MORE}
               <span>&#8594;</span>
             </a>
             <div className={clsx(styles.sliderInner, 'slider')}>
-              <p className={styles.title}>{item.title[language].value}</p>
+              <p className={styles.title}>{item.title[language].value || ''}</p>
               <p className={styles.description}>
-                {item.description[language].value}
+                {item.description[language].value || ''}
               </p>
             </div>
           </div>

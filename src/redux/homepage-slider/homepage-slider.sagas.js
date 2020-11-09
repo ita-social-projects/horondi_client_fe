@@ -34,10 +34,14 @@ export function* handleHomePageSliderImagesLoad() {
     yield put(setHomePageSliderImages(images.data.getAllSlides));
     yield put(setHomePageSliderImagesLoading(false));
   } catch (e) {
-    yield put(setHomePageSliderImagesLoading(false));
-    yield put(setError({ e }));
-    yield put(push('/error-page'));
+    yield call(handleHomePageSliderError, e);
   }
+}
+
+function* handleHomePageSliderError(e) {
+  yield put(setHomePageSliderImagesLoading(false));
+  yield put(setError({ e }));
+  yield put(push('/error-page'));
 }
 
 export default function* homePageSliderSaga() {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 
@@ -9,15 +9,17 @@ import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
 import { useStyles } from './slider-home-page.style';
 
-import CircularLoadingBar from '../../../components/circular-loading-bar';
-import { getHomePageSliderImages } from '../../../redux/homepage-slider/homepage-slider.actions';
+import CircularLoadingBar from '../../components/circular-loading-bar';
+import { getHomePageSliderImages } from '../../redux/homepage-slider/homepage-slider.actions';
 
-import { carouselInterval } from '../../../configs';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
+import { carouselInterval } from '../../configs';
+import { HOME_BUTTONS } from '../../translations/homepage.translations';
+import { getImage } from '../../utils/imageLoad';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const SliderHomePage = () => {
+  const [imagesLinks, setImage] = useState([]);
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -32,6 +34,16 @@ const SliderHomePage = () => {
   useEffect(() => {
     dispatch(getHomePageSliderImages());
   }, [dispatch]);
+
+  useMemo(() => {
+    images.items &&
+      images.items.forEach((item) => {
+        getImage(item.images.large)
+          .then((src) => setImage((prev) => [...prev, src]))
+          .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
+      });
+  }, [images]);
+
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
@@ -52,8 +64,8 @@ const SliderHomePage = () => {
         fillParent
         infinite
       >
-        {images.items.map((item) => (
-          <div key={item._id} data-src={item.images.large}>
+        {images.items.map((item, index) => (
+          <div key={item._id} data-src={imagesLinks[index]}>
             <a
               className={clsx(styles.hoverArrow, 'arrow')}
               href={item.link || '/'}

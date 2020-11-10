@@ -3,14 +3,8 @@ describe('empty order history test', () => {
   const MOCK_PASSWORD = 'QazxsW21';
   it('should enter and open order history page', () => {
     cy.visit('/login');
-    cy.get(
-      '.makeStyles-emailInput-487 > .MuiInputBase-root > .MuiInputBase-input'
-    )
-      .should('be.visible')
-      .type(MOCK_EMAIL);
-    cy.get(
-      '.makeStyles-passwordInput-486 > .MuiInputBase-root > .MuiInputBase-input'
-    )
+    cy.get('form input[name=email]').should('be.visible').type(MOCK_EMAIL);
+    cy.get('form input[name=password]')
       .should('be.visible')
       .type(MOCK_PASSWORD)
       .type('{enter}');

@@ -41,7 +41,7 @@ export function* handleContactsLoad() {
     yield put(setLoading(false));
   } catch (e) {
     yield put(setLoading(false));
-    yield put(setError({ e }));
+    yield put(setError(e.message));
     yield put(push('/error-page'));
   }
 }

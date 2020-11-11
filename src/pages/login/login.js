@@ -60,7 +60,7 @@ const Login = () => {
         client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
       });
     });
-  });
+  }, []);
 
   const singIn = () => {
     const GoogleAuth = window.gapi.auth2.getAuthInstance();

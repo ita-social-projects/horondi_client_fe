@@ -26,7 +26,7 @@ import {
   UPDATE_USER,
   SEND_CONFIRMATION_EMAIL,
   GET_USER_ORDERS,
-  GOOGLE_USER
+  LOGIN_BY_GOOGLE
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
@@ -428,5 +428,5 @@ export default function* userSaga() {
   yield takeEvery(UPDATE_USER, handleUpdateUser);
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
   yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
-  yield takeEvery(GOOGLE_USER, handleGoogleUserLogin);
+  yield takeEvery(LOGIN_BY_GOOGLE, handleGoogleUserLogin);
 }

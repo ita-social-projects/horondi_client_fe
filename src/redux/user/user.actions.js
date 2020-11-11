@@ -23,7 +23,7 @@ import {
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
   GET_USER_ORDERS,
-  GOOGLE_USER
+  LOGIN_BY_GOOGLE
 } from './user.types';
 
 const setUser = (user) => ({
@@ -37,7 +37,7 @@ const loginUser = (payload) => ({
 });
 
 const loginByGoogle = (payload) => ({
-  type: GOOGLE_USER,
+  type: LOGIN_BY_GOOGLE,
   payload
 });
 

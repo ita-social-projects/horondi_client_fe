@@ -20,6 +20,7 @@ import Checkout from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 import HeaderLinks from './header-links/header-links.reducer';
 import HomePageImages from './home-page-looks/home-page-looks.reducer';
+import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -42,7 +43,8 @@ const rootReducer = (history) =>
     BusinessPages,
     Chat,
     HeaderLinks,
-    HomePageImages
+    HomePageImages,
+    HomePageSlider
   });
 
 export default rootReducer;

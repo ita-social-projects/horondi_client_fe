@@ -22,7 +22,8 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  GET_USER_ORDERS
+  GET_USER_ORDERS,
+  GOOGLE_USER
 } from './user.types';
 
 const setUser = (user) => ({
@@ -32,6 +33,11 @@ const setUser = (user) => ({
 
 const loginUser = (payload) => ({
   type: LOGIN_USER,
+  payload
+});
+
+const loginByGoogle = (payload) => ({
+  type: GOOGLE_USER,
   payload
 });
 
@@ -144,6 +150,7 @@ const getUserOrders = () => ({
 export {
   loginUser,
   setUser,
+  loginByGoogle,
   setUserError,
   logoutUser,
   setUserLoading,

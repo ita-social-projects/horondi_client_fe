@@ -27,7 +27,7 @@ export function* handleCategoriesLoad() {
     yield put(setCategoriesLoading(false));
   } catch (e) {
     yield put(setCategoriesLoading(false));
-    yield put(setError({ e }));
+    yield put(setError(e.message));
     yield put(push('/error-page'));
   }
 }

@@ -83,14 +83,14 @@ export function* handleGoogleUserLogin({ payload }) {
       getItems,
       `
     mutation($id_token:String!){googleUser(id_token:$id_token){
-   firstName,
+      firstName,
       lastName,
       email,
       credentials{
         source,
         tokenPass
       }
-  token
+      token
 } 
 
 }

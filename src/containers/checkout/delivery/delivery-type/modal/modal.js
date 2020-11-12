@@ -39,7 +39,7 @@ const OrderFormModal = ({
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].firstName}
+          {`${CHECKOUT_TEXT_FIELDS[language].firstName}: `}
         </span>
         <span className={style.modalData}>
           {personalData.firstName} {personalData.lastName}
@@ -47,13 +47,13 @@ const OrderFormModal = ({
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {`${CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}: `}
+          {CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}
         </span>
         <span className={style.modalData}>{personalData.phoneNumber}</span>
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].email}
+          {`${CHECKOUT_TEXT_FIELDS[language].email}: `}
         </span>
         <span className={style.modalData}>{personalData.email}</span>
       </div>

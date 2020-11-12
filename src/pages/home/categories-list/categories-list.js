@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Carousel from 'react-multi-carousel';
 
-import LoadingBar from '../../../components/loading-bar';
+import CircularLoadingBar from '../../../components/circular-loading-bar';
 import CategoryItem from './category-item';
 import { URL_LANGUAGE, RESPONSIVE_CATEGORIES } from '../../../configs';
 import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
@@ -43,7 +43,7 @@ const CategoriesList = () => {
         {HOMEPAGE_TITLES[language].catalog}
       </Typography>
       {loading ? (
-        <LoadingBar className={styles.loadingIndicator} />
+        <CircularLoadingBar className={styles.loadingIndicator} />
       ) : (
         <div>
           <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable={false}>

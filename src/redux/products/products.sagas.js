@@ -182,9 +182,9 @@ export function* handleGetFilters() {
   }
 }
 
-export function* handleProductsErrors(e) {
+export function* handleProductsErrors({ message }) {
   yield put(setProductsLoading(false));
-  yield put(setError({ e }));
+  yield put(setError(message));
   yield put(push('/error-page'));
 }
 
@@ -197,7 +197,7 @@ export function* handleProductLoading({ payload }) {
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));
-    yield put(setError({ e }));
+    yield put(setError(e.message));
     yield put(push('/error-page'));
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
@@ -7,9 +7,11 @@ import { getImage } from '../../../../utils/imageLoad';
 const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const [image, setImage] = useState(categoryImageUrl);
 
-  getImage(categoryImageUrl)
-    .then((src) => setImage(src))
-    .catch((badSrc) => setImage(badSrc));
+  useEffect(() => {
+    getImage(categoryImageUrl)
+      .then((src) => setImage(src))
+      .catch((badSrc) => setImage(badSrc));
+  }, [categoryImageUrl]);
 
   const styles = useStyles({ image });
 

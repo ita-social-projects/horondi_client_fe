@@ -17,8 +17,8 @@ import {
 import getItems from '../../utils/client';
 import { setError } from '../error/error.actions';
 
-function* handleErrors(error) {
-  yield put(setError({ error }));
+function* handleErrors({ message }) {
+  yield put(setError(message));
   yield put(push('/error-page'));
 }
 

@@ -44,7 +44,7 @@ export function* handleModelsLoad({ payload }) {
 }
 
 export function* handleProductsErrors(e) {
-  yield put(setError({ e }));
+  yield put(setError(e.message));
   yield put(push('/error-page'));
 }
 

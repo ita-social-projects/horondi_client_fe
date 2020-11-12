@@ -3,7 +3,7 @@ import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import useStyles from './product-list-page.styles';
+import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
@@ -37,37 +37,20 @@ const ProductListPage = ({ category, model }) => {
     filterData,
     sortByPopularity,
     currency
-  } = useSelector(
-    ({
-      Language: { language },
-      Products: {
-        loading,
-        products,
-        pagesCount,
-        sortByRate,
-        sortByPrice,
-        filters,
-        filterData,
-        sortByPopularity,
-        countPerPage,
-        currentPage
-      },
-      Currency: { currency }
-    }) => ({
-      loading,
-      language,
-      products,
-      pagesCount,
-      sortByRate,
-      sortByPrice,
-      filters,
-      filterData,
-      sortByPopularity,
-      countPerPage,
-      currentPage,
-      currency
-    })
-  );
+  } = useSelector(({ Language, Products, Currency }) => ({
+    loading: Products.loading,
+    language: Language.language,
+    products: Products.products,
+    pagesCount: Products.pagesCount,
+    sortByRate: Products.sortByRate,
+    sortByPrice: Products.sortByPrice,
+    filters: Products.filters,
+    filterData: Products.filterData,
+    sortByPopularity: Products.sortByPopularity,
+    countPerPage: Products.countPerPage,
+    currentPage: Products.currentPage,
+    currency: Currency.currency
+  }));
 
   const { categoryFilter } = filters;
 

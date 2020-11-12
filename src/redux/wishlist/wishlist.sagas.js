@@ -40,7 +40,7 @@ export function* handleAddWishlistItem({ payload }) {
       yield call(addProductToWishlist, userData._id, payload._id);
     }
   } catch (e) {
-    yield put(setError({ e }));
+    yield put(setError(e.message));
     yield put(push('/error-page'));
   }
 }

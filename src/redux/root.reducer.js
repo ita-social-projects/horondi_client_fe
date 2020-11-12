@@ -21,6 +21,7 @@ import Chat from './chat/chat.reducer';
 import HeaderLinks from './header-links/header-links.reducer';
 import HomePageImages from './home-page-looks/home-page-looks.reducer';
 import Pattern from './pattern/pattern.reducer';
+import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 
 const rootReducer = (history) =>
   combineReducers({
@@ -44,7 +45,8 @@ const rootReducer = (history) =>
     Chat,
     HeaderLinks,
     HomePageImages,
-    Pattern
+    Pattern,
+    HomePageSlider
   });
 
 export default rootReducer;

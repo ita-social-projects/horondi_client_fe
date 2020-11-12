@@ -88,9 +88,8 @@ const Materials = () => {
         >
           {imagesForSlider}
         </AutoplaySlider>
+        {materialPageText}
       </div>
-      <div className={styles.innerRoot}>{materialPageText}</div>
-
       {/*<AwesomeSlider>*/}
       {/*  */}
       {/*</AwesomeSlider>*/}

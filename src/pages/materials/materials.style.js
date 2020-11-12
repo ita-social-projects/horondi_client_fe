@@ -25,10 +25,9 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'flex-start',
     top: '90%',
-    left: '50%',
+    left: '45%',
     color: '#fff',
-    transform: 'translate(-50%, -50%)',
-    fontSize: '16px',
+    fontSize: '20px',
     zIndex: 10,
     textShadow: '2px 1px 2px #000',
     '&>span': {
@@ -67,6 +66,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: '50px auto',
     maxWidth: 1280,
     paddingLeft: 20,
+    paddingRight: 20,
     paddingTop: 30,
     '& > h1': {
       textAlign: 'center'
@@ -76,8 +76,8 @@ export const useStyles = makeStyles((theme) => ({
       textAlign: 'left'
     },
     '& > p > strong': {
+      margin: 0,
       color: 'white',
-      padding: 2,
       alignSelf: 'flex-start',
       position: 'relative',
       fontWeight: 'bold',
@@ -109,13 +109,13 @@ export const useStyles = makeStyles((theme) => ({
     '& > h1': {
       textAlign: 'center'
     },
-    '& > h2': {
+    '& > h3': {
       textDecoration: 'underline orangered',
       textAlign: 'left'
     },
     '& > p > strong': {
+      textAlign: 'right',
       color: 'white',
-      padding: 2,
       alignSelf: 'flex-start',
       position: 'relative',
       fontWeight: 'bold',
@@ -132,13 +132,7 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& img': {
-      width: 150,
-      height: 'auto',
-      float: ' left',
-      margin: '0 20px 20px 0'
-    },
-    '.sliderImage img': {
-      width: '100%',
+      width: 200,
       height: 'auto',
       float: ' left',
       margin: '0 20px 20px 0'

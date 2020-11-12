@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
@@ -10,20 +10,21 @@ import 'react-awesome-slider/dist/styles.css';
 
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
 import { getPatterns } from '../../../src/redux/pattern/pattern.actions';
-import { Backdrop } from '@material-ui/core';
-import CircularLoadingBar from '../../components/circular-loading-bar';
+import clsx from 'clsx';
+import { getImage } from '../../utils/imageLoad';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Materials = () => {
+  const [setImage] = useState([]);
   const dispatch = useDispatch();
-  const { materialsPage, language, patterns, loading } = useSelector(
-    //бере зі стейту дані
+  const { materialsPage, language, patterns, loading, images } = useSelector(
     ({ BusinessPages, Language, Pattern, HomePageSlider }) => ({
       materialsPage: BusinessPages.pages.materials,
       language: Language.language,
       patterns: Pattern.list,
-      loading: HomePageSlider.loading
+      loading: HomePageSlider.loading,
+      images: HomePageSlider.images
     })
   );
 
@@ -32,6 +33,15 @@ const Materials = () => {
     dispatch(getBusinessPageByCode('materials'));
     dispatch(getPatterns());
   }, [dispatch]);
+
+  useMemo(() => {
+    patterns.images &&
+      patterns.images.forEach((item) => {
+        getImage(patterns.images.medium)
+          .then((src) => setImage((prev) => [...prev, src]))
+          .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
+      });
+  }, [images]);
 
   const materialPageText =
     materialsPage.text && parse(materialsPage.text[language].value);
@@ -43,7 +53,11 @@ const Materials = () => {
       style={{ width: '100%', height: '100%' }}
       key={pattern._id}
       data-src={`${IMG_URL}${pattern.images.medium}`}
-    />
+    >
+      <p className={clsx(styles.hoverArrow, 'arrow')}>
+        {pattern.name[language].value}
+      </p>
+    </div>
   ));
   // console.log(imagesForSlider)
 
@@ -52,7 +66,7 @@ const Materials = () => {
   // )}
 
   // console.log(`${IMG_URL}${patterns}`)
-  //console.log(patterns);
+
   //   if (loading) {
   //       return (
   //           <Backdrop className={styles.backdrop} open={loading} invisible>
@@ -75,7 +89,7 @@ const Materials = () => {
           {imagesForSlider}
         </AutoplaySlider>
       </div>
-      {materialPageText}
+      <div className={styles.innerRoot}>{materialPageText}</div>
 
       {/*<AwesomeSlider>*/}
       {/*  */}

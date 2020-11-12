@@ -39,7 +39,7 @@ const OrderFormModal = ({
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].firstName}:{' '}
+          {CHECKOUT_TEXT_FIELDS[language].firstName}
         </span>
         <span className={style.modalData}>
           {personalData.firstName} {personalData.lastName}
@@ -47,26 +47,26 @@ const OrderFormModal = ({
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}:{' '}
+          {`${CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}: `}
         </span>
         <span className={style.modalData}>{personalData.phoneNumber}</span>
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].email}:{' '}
+          {CHECKOUT_TEXT_FIELDS[language].email}
         </span>
         <span className={style.modalData}>{personalData.email}</span>
       </div>
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].delivery}:{' '}
+          {`${CHECKOUT_TEXT_FIELDS[language].delivery}: `}
         </span>
         <span className={style.modalData}>{personalData.deliveryType}</span>
       </div>
       {personalData.city && (
         <div>
           <span className={style.modalSubTitle}>
-            {CHECKOUT_TEXT_FIELDS[language].city}:{' '}
+            {`${CHECKOUT_TEXT_FIELDS[language].city}: `}
           </span>
           <span className={style.modalData}>{personalData.city}</span>
         </div>
@@ -74,7 +74,7 @@ const OrderFormModal = ({
       {personalData.departmentValue && (
         <div>
           <span className={style.modalSubTitle}>
-            {CHECKOUT_TEXT_FIELDS[language].department}:{' '}
+            {`${CHECKOUT_TEXT_FIELDS[language].department}: `}
           </span>
           <span className={style.modalData}>
             {personalData.departmentValue}
@@ -84,7 +84,7 @@ const OrderFormModal = ({
       {personalData.streetValue && (
         <div>
           <span className={style.modalSubTitle}>
-            {CHECKOUT_TEXT_FIELDS[language].street}:{' '}
+            {`${CHECKOUT_TEXT_FIELDS[language].street}: `}
           </span>
           <span className={style.modalData}>{personalData.streetValue}</span>
         </div>
@@ -92,7 +92,7 @@ const OrderFormModal = ({
       {personalData.buildValue && (
         <div>
           <span className={style.modalSubTitle}>
-            {CHECKOUT_TEXT_FIELDS[language].building}:{' '}
+            {`${CHECKOUT_TEXT_FIELDS[language].building}: `}
           </span>
           <span className={style.modalData}>{personalData.buildValue}</span>
         </div>
@@ -100,14 +100,14 @@ const OrderFormModal = ({
       {personalData.apartmentValue && (
         <div>
           <span className={style.modalSubTitle}>
-            {CHECKOUT_TEXT_FIELDS[language].apartment}:{' '}
+            {`${CHECKOUT_TEXT_FIELDS[language].apartment}: `}
           </span>
           <span className={style.modalData}>{personalData.apartmentValue}</span>
         </div>
       )}
       <div>
         <span className={style.modalSubTitle}>
-          {CHECKOUT_TEXT_FIELDS[language].total}:{' '}
+          {`${CHECKOUT_TEXT_FIELDS[language].total}: `}
         </span>
         <span className={style.modalData}>{personalData.totalPrice}</span>
       </div>

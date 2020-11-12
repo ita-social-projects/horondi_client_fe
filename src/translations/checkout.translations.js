@@ -36,7 +36,7 @@ export const CHECKOUT_TEXT_FIELDS = {
     firstName: "Ім'я",
     lastName: 'Прізвище',
     email: 'Email',
-    contactPhoneNumber: 'Номер телефону',
+    contactPhoneNumber: 'Номер телефону: ',
     city: 'Місто',
     building: 'Будинок',
     street: 'Вулиця',

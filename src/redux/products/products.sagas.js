@@ -10,7 +10,6 @@ import {
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
-import getItems from '../../utils/client';
 
 import {
   GET_ALL_FILTERS,
@@ -26,7 +25,7 @@ import {
 
 import { setComments } from '../comments/comments.actions';
 
-export function* handleFilterLoad() {
+export function* handleFilteredProductsLoad() {
   try {
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
@@ -39,7 +38,7 @@ export function* handleFilterLoad() {
   }
 }
 
-export function* handleGetFilters() {
+export function* handleGetAllProducts() {
   try {
     yield put(setProductsLoading(true));
     const products = yield call(getAllProducts);
@@ -71,7 +70,7 @@ export function* handleProductLoading({ payload }) {
 }
 
 export default function* productsSaga() {
-  yield takeEvery(GET_ALL_FILTERS, handleGetFilters);
-  yield takeEvery(GET_FILTRED_PRODUCTS, handleFilterLoad);
+  yield takeEvery(GET_ALL_FILTERS, handleGetAllProducts);
+  yield takeEvery(GET_FILTRED_PRODUCTS, handleFilteredProductsLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
 }

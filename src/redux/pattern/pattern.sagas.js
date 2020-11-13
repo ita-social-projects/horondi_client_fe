@@ -4,7 +4,6 @@ import { setPatterns } from './pattern.actions';
 import { getAllPatterns } from './pattern.operations';
 
 import { GET_PATTERNS } from './pattern.types';
-import { handleProductsErrors } from '../model/model.sagas';
 import { setError } from '../error/error.actions';
 import { push } from 'connected-react-router';
 

@@ -2,9 +2,6 @@ import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { patternTranslations } from '../../translations/pattern.translations';
-import { put } from 'redux-saga-test-plan/matchers';
-import { setError } from '../error/error.actions';
-import { push } from 'connected-react-router';
 
 export const getAllPatterns = async (skip, limit) => {
   const result = await client.query({

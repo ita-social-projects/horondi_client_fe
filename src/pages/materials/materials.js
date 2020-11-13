@@ -12,20 +12,17 @@ import { carouselMaterialInterval, IMG_URL } from '../../configs';
 import { getPatterns } from '../../../src/redux/pattern/pattern.actions';
 import clsx from 'clsx';
 import { getImage } from '../../utils/imageLoad';
-import { Backdrop } from '@material-ui/core';
-import CircularLoadingBar from '../../components/circular-loading-bar';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Materials = () => {
   const [setImage] = useState([]);
   const dispatch = useDispatch();
-  const { materialsPage, language, patterns, images, loading } = useSelector(
+  const { materialsPage, language, patterns, images } = useSelector(
     ({ BusinessPages, Language, Pattern, HomePageSlider }) => ({
       materialsPage: BusinessPages.pages.materials,
       language: Language.language,
       patterns: Pattern.list,
-      loading: HomePageSlider.loading,
       images: HomePageSlider.images
     })
   );

@@ -68,17 +68,24 @@ export const useStyles = makeStyles((theme) => ({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 30,
-    '& > h1': {
-      textAlign: 'center'
+    '& h1': {
+      textAlign: 'center',
+      fontSize: '45px'
     },
     '& > h2': {
       textDecoration: 'underline orangered',
       textAlign: 'left'
     },
+    '& h3': {
+      textDecoration: 'underline orangered',
+      textAlign: 'left',
+      fontSize: '30px'
+    },
     '& > p > strong': {
       margin: 0,
+      lineHeight: 0,
       color: 'white',
-      alignSelf: 'flex-start',
+      alignSelf: 'flex-end',
       position: 'relative',
       fontWeight: 'bold',
       zIndex: 1,
@@ -92,49 +99,16 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: 'black',
         zIndex: -1
       }
+    },
+    '& .editor-img': {
+      width: 200,
+      height: 'auto',
+      float: ' left',
+      margin: '0 20px 20px 0'
     },
     '.sliderImage img': {
       width: '100%',
       height: 'auto',
-      float: ' left',
-      margin: '0 20px 20px 0'
-    }
-  },
-  innerRoot: {
-    color: theme.palette.textColor,
-    margin: '50px auto',
-    maxWidth: 1280,
-    paddingLeft: 20,
-    paddingTop: 30,
-    '& > h1': {
-      textAlign: 'center'
-    },
-    '& > h3': {
-      textDecoration: 'underline orangered',
-      textAlign: 'left'
-    },
-    '& > p > strong': {
-      textAlign: 'right',
-      color: 'white',
-      alignSelf: 'flex-start',
-      position: 'relative',
-      fontWeight: 'bold',
-      zIndex: 1,
-      '&::after': {
-        content: `''`,
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        backgroundColor: 'black',
-        zIndex: -1
-      }
-    },
-    '& img': {
-      width: 200,
-      height: 'auto',
-      float: ' left',
       margin: '0 20px 20px 0'
     }
   }

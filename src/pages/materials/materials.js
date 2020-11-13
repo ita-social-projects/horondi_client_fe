@@ -46,7 +46,6 @@ const Materials = () => {
   const materialPageText =
     materialsPage.text && parse(materialsPage.text[language].value);
   const styles = useStyles();
-
   const imagesForSlider = patterns.map((pattern) => (
     <div
       className={'sliderImage'}
@@ -59,21 +58,6 @@ const Materials = () => {
       </p>
     </div>
   ));
-  // console.log(imagesForSlider)
-
-  // {patterns.length && (
-  //     <img src={`${IMG_URL}${patterns[2].images.medium}`} />
-  // )}
-
-  // console.log(`${IMG_URL}${patterns}`)
-
-  //   if (loading) {
-  //       return (
-  //           <Backdrop className={styles.backdrop} open={loading} invisible>
-  //               <CircularLoadingBar color='inherit' />
-  //           </Backdrop>
-  //       );
-  //   }
   return (
     <div className={styles.root}>
       {materialsPage.title && <h1>{materialsPage.title[language].value}</h1>}
@@ -90,16 +74,6 @@ const Materials = () => {
         </AutoplaySlider>
         {materialPageText}
       </div>
-      {/*<AwesomeSlider>*/}
-      {/*  */}
-      {/*</AwesomeSlider>*/}
-      {/*<SliderHomePage />*/}
-      {/*<awesomeSlider />використати цей слайдер */}
-
-      {/*{patterns.length && (*/}
-      {/*  <img src={`${IMG_URL}${patterns[2].images.medium}`} />*/}
-      {/*)}*/}
-      {/*якшо масив більший за 0 тоді покажи його*/}
     </div>
   );
 };

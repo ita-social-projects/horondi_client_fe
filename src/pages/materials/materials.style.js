@@ -35,12 +35,6 @@ export const useStyles = makeStyles((theme) => ({
       position: 'relative',
       top: '-18px',
       marginLeft: '10px'
-    },
-    '&:hover': {
-      cursor: 'pointer'
-    },
-    '&:hover + .slider': {
-      opacity: 1
     }
   },
   title: {
@@ -50,15 +44,6 @@ export const useStyles = makeStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
     color: '#fff',
     fontSize: '36px',
-    zIndex: 10
-  },
-  description: {
-    position: 'absolute',
-    top: '30%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    color: '#fff',
-    fontSize: '24px',
     zIndex: 10
   },
   root: {
@@ -72,13 +57,11 @@ export const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       fontSize: '45px'
     },
-    '& > h2': {
+    '& > h2, h3': {
       textDecoration: 'underline orangered',
       textAlign: 'left'
     },
     '& h3': {
-      textDecoration: 'underline orangered',
-      textAlign: 'left',
       fontSize: '30px'
     },
     '& > p > strong': {
@@ -88,28 +71,18 @@ export const useStyles = makeStyles((theme) => ({
       alignSelf: 'flex-end',
       position: 'relative',
       fontWeight: 'bold',
-      zIndex: 1,
-      '&::after': {
-        content: `''`,
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        backgroundColor: 'black',
-        zIndex: -1
-      }
+      zIndex: 1
     },
-    '& .editor-img': {
+    '& .editor-img ': {
       width: 200,
-      height: 'auto',
       float: ' left',
-      margin: '0 20px 20px 0'
+      margin: '0 30px 30px 0'
     },
     '.sliderImage img': {
-      width: '100%',
-      height: 'auto',
-      margin: '0 20px 20px 0'
+      width: '100%'
+    },
+    '.sliderImage img , .editor-img': {
+      height: 'auto'
     }
   }
 }));

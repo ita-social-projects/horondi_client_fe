@@ -5,14 +5,13 @@ export const initialState = {
 };
 
 const patternReducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-    case SET_PATTERNS:
-      return {
-        ...state,
-        list: action.payload
-      };
-    default:
-      return state;
+  if (action.type === SET_PATTERNS) {
+    return {
+      ...state,
+      list: action.payload
+    };
+  } else {
+    return state;
   }
 };
 

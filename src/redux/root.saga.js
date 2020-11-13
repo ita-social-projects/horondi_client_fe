@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-
+import burgerMenuSaga from './burger-menu/burger-menu.sagas';
 import newsSaga from './news/news.sagas';
 import categoriesSaga from './categories/categories.sagas';
 import productsSaga from './products/products.sagas';
@@ -30,6 +30,7 @@ export default function* rootSaga() {
     checkoutSaga(),
     businessPagesSaga(),
     chatSaga(),
+    burgerMenuSaga(),
     headerLinksSaga(),
     homeLooksImagesSaga(),
     homePageSliderSaga()

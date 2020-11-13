@@ -31,8 +31,8 @@ export function* handleFondyUrl({ payload }) {
       getItems,
       `query{
               getPaymentCheckout(data: {
-                orderId: '${payload.orderID}',
-                orderDesc: '${payload.orderID}',
+                orderId: "${payload.orderID}",
+                orderDesc: "${payload.orderID}",
                 currency: "UAH",
                 amount: ${payload.amount}
               }){

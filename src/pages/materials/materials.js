@@ -18,7 +18,7 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 const Materials = () => {
   const [setImage] = useState([]);
   const dispatch = useDispatch();
-  const { materialsPage, language, patterns, loading, images } = useSelector(
+  const { materialsPage, language, patterns, images } = useSelector(
     ({ BusinessPages, Language, Pattern, HomePageSlider }) => ({
       materialsPage: BusinessPages.pages.materials,
       language: Language.language,

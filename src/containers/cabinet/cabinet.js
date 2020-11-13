@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useStyles } from './cabinet.styles';
 import NotLoggedCabinet from '../../components/not-logged-cabinet';
 import LoggedCabinet from '../../components/logged-cabinet';

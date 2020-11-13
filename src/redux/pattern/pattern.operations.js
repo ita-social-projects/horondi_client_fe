@@ -2,6 +2,9 @@ import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { patternTranslations } from '../../translations/pattern.translations';
+import { put } from 'redux-saga-test-plan/matchers';
+import { setError } from '../error/error.actions';
+import { push } from 'connected-react-router';
 
 export const getAllPatterns = async (skip, limit) => {
   const result = await client.query({
@@ -65,14 +68,6 @@ export const getPatternById = async (id) => {
     fetchPolicy: 'no-cache'
   });
 
-  if (result.data.getPatternById.message) {
-    throw new Error(
-      `${result.data.getPatternById.statusCode} ${
-        patternTranslations[result.data.getPatternById.message]
-      }`
-    );
-  }
-
   return result.data.getPatternById;
 };
 
@@ -104,14 +99,6 @@ export const deletePattern = async (id) => {
     fetchPolicy: 'no-cache'
   });
   client.resetStore();
-
-  if (result.data.deletePattern.message) {
-    throw new Error(
-      `${result.data.deletePattern.statusCode} ${
-        patternTranslations[result.data.deletePattern.message]
-      }`
-    );
-  }
 
   return result.data.deletePattern;
 };
@@ -185,14 +172,6 @@ export const updatePattern = async (payload) => {
     fetchPolicy: 'no-cache'
   });
   client.resetStore();
-
-  if (result.data.updatePattern.message) {
-    throw new Error(
-      `${result.data.updatePattern.statusCode} ${
-        patternTranslations[result.data.updatePattern.message]
-      }`
-    );
-  }
 
   return result.data.updatePattern;
 };

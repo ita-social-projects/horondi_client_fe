@@ -130,14 +130,6 @@ export const createPattern = async (payload) => {
   });
   client.resetStore();
 
-  if (result.data.addPattern.message) {
-    throw new Error(
-      `${result.data.addPattern.statusCode} ${
-        patternTranslations[result.data.addPattern.message]
-      }`
-    );
-  }
-
   return result.data.addPattern;
 };
 

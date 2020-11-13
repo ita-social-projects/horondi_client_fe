@@ -12,7 +12,7 @@ export const useStyles = makeStyles(() => ({
       height: '2rem',
       marginLeft: '-0.8rem'
     },
-
+                       
     '&:hover': {
       backgroundColor: 'white',
       '& ul': {
@@ -34,7 +34,7 @@ export const useStyles = makeStyles(() => ({
       position: 'absolute',
       left: '5px',
       top: '1px',
-      zIndex: 1,
+      zIndex: 20,
       borderRadius: '50%'
     },
     '& svg': {

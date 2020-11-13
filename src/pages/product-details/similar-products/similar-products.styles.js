@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   similarItems: {
     width: '90%',
     margin: '0 auto',
@@ -18,5 +18,3 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px 0'
   }
 }));
-
-export default useStyles;

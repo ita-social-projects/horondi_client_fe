@@ -1,5 +1,5 @@
 import { TextField } from '@material-ui/core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -7,7 +7,16 @@ import { CHECKOUT_TEXT_FIELDS } from '../../../../../../translations/checkout.tr
 import { useStyles } from '../../../../checkout.styles';
 import { getNovaPoshtaStreets } from '../../../../../../redux/checkout/checkout.actions';
 
-const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
+const CourierBottom = ({
+  cityForNovaPoshtaBottom,
+  handleDeliveryTypeValidator,
+  setStreetValue,
+  setBuildValue,
+  setApartmentValue,
+  streetValue,
+  buildValue,
+  apartmentValue
+}) => {
   const style = useStyles();
   const dispatch = useDispatch();
   const { language, streets, loading } = useSelector(
@@ -18,14 +27,18 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
     })
   );
 
-  const [inputValue, setInputValue] = useState('');
+  useEffect(() => {
+    streetValue && apartmentValue && buildValue
+      ? handleDeliveryTypeValidator(true)
+      : handleDeliveryTypeValidator(false);
+  }, [streetValue, handleDeliveryTypeValidator, apartmentValue, buildValue]);
 
   const payload = useMemo(
     () => ({
       ref: cityForNovaPoshtaBottom && cityForNovaPoshtaBottom.ref,
-      street: inputValue
+      street: streetValue
     }),
-    [cityForNovaPoshtaBottom, inputValue]
+    [cityForNovaPoshtaBottom, streetValue]
   );
 
   useEffect(() => {
@@ -36,9 +49,9 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
     <div className={style.contactField}>
       <Autocomplete
         disabled={!cityForNovaPoshtaBottom}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
+        value={streetValue}
+        onInputChange={(event, newStreetValue) => {
+          setStreetValue(newStreetValue);
         }}
         options={streets.map((warehouse) => warehouse.description)}
         className={style.dataInputCurrier}
@@ -67,6 +80,8 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
         label={CHECKOUT_TEXT_FIELDS[language].building}
         variant='outlined'
         className={style.dataInputCurrier}
+        value={buildValue}
+        onChange={(e) => setBuildValue(e.target.value)}
       />
       <TextField
         disabled={!cityForNovaPoshtaBottom}
@@ -74,9 +89,11 @@ const CurrierBottom = ({ cityForNovaPoshtaBottom }) => {
         label={CHECKOUT_TEXT_FIELDS[language].apartment}
         variant='outlined'
         className={style.dataInputCurrier}
+        value={apartmentValue}
+        onChange={(e) => setApartmentValue(e.target.value)}
       />
     </div>
   );
 };
 
-export { CurrierBottom };
+export { CourierBottom };

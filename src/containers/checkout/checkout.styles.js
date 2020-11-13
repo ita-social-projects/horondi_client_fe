@@ -1,22 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  mainTitle: {
-    color: 'rgba(0, 0, 0, 0.54)',
+  mainTitle: ({ isLightTheme }) => ({
+    color: isLightTheme ? 'rgba(0, 0, 0, 0.54)' : theme.palette.textColor,
     fontSize: '2.5rem',
     display: 'flex',
     justifyContent: 'center',
     marginBottom: '35px'
-  },
+  }),
   orderFormWrapper: {
     margin: '0 auto',
-    maxWidth: '800px'
+    maxWidth: '768px'
   },
-  subTitle: {
-    color: 'rgba(0, 0, 0, 0.54)',
+  subTitle: ({ isLightTheme }) => ({
+    color: isLightTheme ? 'rgba(0, 0, 0, 0.54)' : theme.palette.textColor,
     fontSize: '1.8rem',
-    marginBottom: '20px'
-  },
+    marginBottom: '20px',
+    '@media screen and (max-width: 768px)': {
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }),
   contactsFields: {
     display: 'flex',
     flexDirection: 'column',
@@ -25,10 +29,11 @@ export const useStyles = makeStyles((theme) => ({
   contactField: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '20px'
-  },
-  deliveryType: {
-    marginBottom: '20px'
+    marginBottom: '20px',
+    '@media screen and (max-width: 768px)': {
+      flexDirection: 'column',
+      alignItems: 'center'
+    }
   },
   btnWrapper: {
     display: 'flex',
@@ -57,16 +62,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   comments: {
     marginTop: '20px'
-  },
-  deliveryTypeSelected: {
-    margin: '0 auto',
-    border: '1px solid black',
-    height: '350px',
-    width: '800px',
-    borderRadius: '4px',
-    padding: '30px',
-    transform: 'translateX(-30px)',
-    boxSizing: 'content-box'
   },
   checkoutContactsTitle: {
     fontWeight: '400',
@@ -170,5 +165,75 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     fontSize: '1rem',
     fontWeight: 450
+  },
+  orderFormModal: {
+    width: '500px',
+    height: '500px',
+    position: 'relative',
+    left: '50%',
+    transform: `translate(-50%, 30%)`,
+    background: theme.palette.backgroundColor,
+    padding: '30px'
+  },
+  modalTitle: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '20px'
+  },
+  modalSubTitle: {
+    fontSize: '1.1rem',
+    color: theme.palette.textColor
+  },
+  modalData: {
+    fontSize: '1.2rem',
+    color: theme.palette.textColor,
+    fontWeight: 450
+  },
+  modalOrderTitle: {
+    fontSize: '1.3rem',
+    color: theme.palette.textColor
+  },
+  modalOrderSubTitle: {
+    fontSize: '1.3rem',
+    color: theme.palette.textColor,
+    fontWeight: 450
+  },
+  btnModalConfirm: {
+    marginLeft: '10px',
+    background: theme.palette.button.normal.backgroundColor,
+    borderRadius: '5px',
+    fontSize: '1rem',
+    color: theme.palette.button.normal.color,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
+  },
+  btnModalLink: {
+    marginLeft: '10px',
+    background: theme.palette.button.normal.backgroundColor,
+    borderRadius: '5px',
+    fontSize: '1rem',
+    color: theme.palette.button.normal.color,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
+  },
+  btnModalCancel: {
+    marginLeft: '10px',
+    border: '1px solid black',
+    borderRadius: '5px',
+    fontSize: '1rem',
+    color: theme.palette.textColor,
+    '&:hover': {
+      background: 'grey',
+      color: theme.palette.textColor
+    }
+  },
+  modalButtonsWrapper: {
+    position: 'absolute',
+    right: '30px',
+    bottom: '30px'
   }
 }));

@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 import { getFromLocalStorage } from '../../services/local-storage.service';
-import { patternTranslations } from '../../translations/pattern.translations';
 
 export const getAllPatterns = async (skip, limit) => {
   const result = await client.query({

@@ -96,7 +96,7 @@ export function* handleGoogleUserLogin({ payload }) {
 }
   `,
       {
-        id_token: payload.id_token
+        id_token: payload.idToken
       }
     );
     yield put(setUser(user.data.googleUser));

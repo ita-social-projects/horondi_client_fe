@@ -65,8 +65,8 @@ const Login = () => {
   const singIn = () => {
     const googleAuth = window.gapi.auth2.getAuthInstance();
     googleAuth.signIn().then((googleUser) => {
-      const id_token = googleUser.getAuthResponse().id_token;
-      dispatch(loginByGoogle({ id_token }));
+      const idToken = googleUser.getAuthResponse().id_token;
+      dispatch(loginByGoogle({ idToken }));
     });
   };
 

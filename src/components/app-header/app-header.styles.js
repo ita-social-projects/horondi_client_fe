@@ -3,8 +3,7 @@ import { changeCurrency } from '../../redux/currency/currency.actions';
 
 export const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: '#000000',
-    overflow: 'hidden'
+    backgroundColor: '#000000'
   },
   menuButton: {
     color: '#ffffff',

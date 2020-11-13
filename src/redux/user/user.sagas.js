@@ -101,10 +101,11 @@ export function* handleGoogleUserLogin({ payload }) {
     );
     yield put(setUser(user.data.googleUser));
     yield setToLocalStorage('accessToken', user.data.googleUser.token);
-    yield put(setUserLoading(false));
     yield put(push('/profile'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+  } finally {
+    yield put(setUserLoading(false));
   }
 }
 

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-
 import { AppBar, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useStyles } from './app-header.styles';
-
 import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
 import Cabinet from '../../containers/cabinet';

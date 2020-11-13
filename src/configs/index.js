@@ -326,7 +326,7 @@ export const COMMENT_DATA = {
   show: true,
   email: ''
 };
-export const TEXT = 'text';
+export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
 export const LANGUAGES_LIST = [

@@ -7,7 +7,12 @@ import {
 } from '../../../../../translations/checkout.translations';
 import { getNovaPoshtaPrices } from '../../../../../redux/checkout/checkout.actions';
 
-const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
+const DeliveryInfo = ({
+  cityForNovaPoshtaBottom,
+  from,
+  setTotalPrice,
+  isRenderPrice
+}) => {
   const style = useStyles();
   const dispatch = useDispatch();
   const { language, cart, price } = useSelector(
@@ -37,15 +42,21 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
     [productsWeight, productsPrice, cityForNovaPoshtaBottom, from, language]
   );
 
-  const switcher = () => {
+  useEffect(() => {
+    from === CHECKOUT_DELIVERY_TYPES[language].selfPickUP
+      ? setTotalPrice(productsPrice)
+      : setTotalPrice(productsPrice + price.cost);
+  }, [productsPrice, price, setTotalPrice, from, language]);
+
+  const priceSwitcher = () => {
     switch (from) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
         return (
-          cityForNovaPoshtaBottom && (
+          isRenderPrice && (
             <>
               <span className={style.deliveryPrice}>
                 {CHECKOUT_TITLES[language].deliveryPrice}: {price && price.cost}{' '}
-                UAH
+                {CHECKOUT_TITLES[language].UAH}
               </span>
               <span className={style.totalPrice}>
                 {CHECKOUT_TITLES[language].totalPrice}:{' '}
@@ -55,18 +66,21 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
             </>
           )
         );
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
-          <>
-            <span className={style.deliveryPrice}>
-              {CHECKOUT_TITLES[language].deliveryPrice}: {price && price.cost}{' '}
-              UAH
-            </span>
-            <span className={style.totalPrice}>
-              {CHECKOUT_TITLES[language].totalPrice}:{' '}
-              {price && productsPrice + price.cost} UAH
-            </span>
-          </>
+          isRenderPrice && (
+            <>
+              <span className={style.deliveryPrice}>
+                {CHECKOUT_TITLES[language].deliveryPrice}: {price.cost}
+                {CHECKOUT_TITLES[language].UAH}
+              </span>
+              <span className={style.totalPrice}>
+                {CHECKOUT_TITLES[language].totalPrice}:{' '}
+                {productsPrice + price.cost}
+                {CHECKOUT_TITLES[language].UAH}
+              </span>
+            </>
+          )
         );
       default:
         return '';
@@ -77,7 +91,7 @@ const DeliveryInfo = ({ cityForNovaPoshtaBottom, from }) => {
     cityForNovaPoshtaBottom && dispatch(getNovaPoshtaPrices(priceData));
   }, [dispatch, priceData, cityForNovaPoshtaBottom]);
 
-  return <div className={style.deliveryInfoWrapper}>{switcher()}</div>;
+  return <div className={style.deliveryInfoWrapper}>{priceSwitcher()}</div>;
 };
 
 export default DeliveryInfo;

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   comment: {
     padding: '0 3rem',
     '& hr': {
@@ -127,5 +127,3 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex'
   }
 }));
-
-export default useStyles;

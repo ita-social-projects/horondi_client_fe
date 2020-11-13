@@ -132,7 +132,7 @@ const productsReducer = (state = initialState, action = {}) => {
         ...state,
         filters: {
           ...state.filters,
-          modelsFilter: [action.payload]
+          modelsFilter: action.payload
         }
       };
     case SET_CATEGORY_FILTER:

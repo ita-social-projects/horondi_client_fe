@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -8,19 +8,36 @@ import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import { AVAILABLE_COUNT_LABEL_TEXT } from '../../../translations/product-list.translations';
+import { getImage } from '../../../utils/imageLoad';
 import { IMG_URL } from '../../../configs';
 
-const ProductListItem = ({ product, category }) => {
-  const styles = useStyles({
-    image: `${IMG_URL}${product.images.primary.small}`
-  });
+import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
+import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
-    language: Language.language,
-    currency: Currency.currency
-  }));
+const ProductListItem = ({ product }) => {
+  const { language, currency, isLightTheme } = useSelector(
+    ({ Language, Currency, Theme }) => ({
+      language: Language.language,
+      currency: Currency.currency,
+      isLightTheme: Theme.lightMode
+    })
+  );
+
+  const [image, setImage] = useState(IMG_URL + product.images.primary.small);
+
+  useEffect(() => {
+    getImage(product.images.primary.small)
+      .then((src) => setImage(src))
+      .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
+
+    return () => setImage(null);
+  }, [isLightTheme, product.images.primary.small]);
+
+  const styles = useStyles({ image, isLightTheme });
+
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+
   return (
     <Link to={`/product/${product._id}`} className={styles.productItem}>
       <Card className={styles.name}>
@@ -46,7 +63,6 @@ const ProductListItem = ({ product, category }) => {
 };
 
 ProductListItem.propTypes = {
-  category: PropTypes.string,
   product: PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.arrayOf(
@@ -74,7 +90,6 @@ ProductListItem.propTypes = {
   })
 };
 ProductListItem.defaultProps = {
-  category: '',
   product: {
     _id: '',
     basePrice: [

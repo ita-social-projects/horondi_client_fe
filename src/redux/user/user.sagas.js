@@ -26,7 +26,8 @@ import {
   PRESERVE_USER,
   UPDATE_USER,
   SEND_CONFIRMATION_EMAIL,
-  GET_USER_ORDERS
+  GET_USER_ORDERS,
+  LOGIN_BY_GOOGLE
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
@@ -108,6 +109,39 @@ export const loginUser = (data) => {
   `;
   return setItems(query, data);
 };
+
+export function* handleGoogleUserLogin({ payload }) {
+  try {
+    yield put(setUserLoading(true));
+    const user = yield call(
+      getItems,
+      `
+    mutation($id_token:String!){googleUser(id_token:$id_token){
+      firstName,
+      lastName,
+      email,
+      credentials{
+        source,
+        tokenPass
+      }
+      token
+} 
+
+}
+  `,
+      {
+        id_token: payload.idToken
+      }
+    );
+    yield put(setUser(user.data.googleUser));
+    yield setToLocalStorage('accessToken', user.data.googleUser.token);
+    yield put(push('/profile'));
+  } catch (error) {
+    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+  } finally {
+    yield put(setUserLoading(false));
+  }
+}
 
 export const resetPassword = (data) => {
   const query = `
@@ -387,4 +421,5 @@ export default function* userSaga() {
   yield takeEvery(UPDATE_USER, handleUpdateUser);
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
   yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
+  yield takeEvery(LOGIN_BY_GOOGLE, handleGoogleUserLogin);
 }

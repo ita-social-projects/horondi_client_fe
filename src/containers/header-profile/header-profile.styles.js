@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  cabinet: (props) => ({
+  profile: (props) => ({
     color: 'white',
     padding: '0 4px',
     position: 'relative',
     cursor: 'pointer',
-    zIndex: 2,
+    zIndex: 20,
     '&:hover': {
       backgroundColor: 'white',
       '& ul': {
@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() => ({
       position: 'absolute',
       left: '5px',
       top: '1px',
-      zIndex: 1,
+      zIndex: 20,
       borderRadius: '50%'
     },
     '& svg': {
@@ -37,5 +37,14 @@ export const useStyles = makeStyles(() => ({
       fontSize: '2rem',
       color: props.logged ? 'black' : 'white'
     }
-  })
+  }),
+  list: {
+    '& .MuiMenuItem-root': {
+      flexDirection: 'row',
+      padding: 10,
+      '& svg': {
+        marginRight: '5px'
+      }
+    }
+  }
 }));

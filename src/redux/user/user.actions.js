@@ -24,7 +24,8 @@ import {
   SET_USER_ORDERS,
   GET_USER_ORDERS,
   ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
-  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST
+  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  LOGIN_BY_GOOGLE
 } from './user.types';
 
 const setUser = (user) => ({
@@ -34,6 +35,11 @@ const setUser = (user) => ({
 
 const loginUser = (payload) => ({
   type: LOGIN_USER,
+  payload
+});
+
+const loginByGoogle = (payload) => ({
+  type: LOGIN_BY_GOOGLE,
   payload
 });
 
@@ -156,6 +162,7 @@ const removeProductFromUserCartOrWishlist = (productId) => ({
 export {
   loginUser,
   setUser,
+  loginByGoogle,
   setUserError,
   logoutUser,
   setUserLoading,

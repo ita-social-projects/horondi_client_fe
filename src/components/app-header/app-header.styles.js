@@ -22,5 +22,10 @@ export const useStyles = makeStyles((theme) => ({
   item: {
     width: '280px',
     height: '30px'
+  },
+  icon: {
+    '@media (min-width: 900px)': {
+      width: '3px'
+    }
   }
 }));

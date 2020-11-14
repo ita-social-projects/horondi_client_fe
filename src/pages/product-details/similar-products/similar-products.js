@@ -7,7 +7,7 @@ import Carousel from 'react-multi-carousel';
 import { useStyles } from './similar-products.styles';
 
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
-import { IMG_URL, RESPONSIVE_PDP } from '../../../configs';
+import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 
 const SimilarProducts = ({ currencySign }) => {
@@ -31,7 +31,7 @@ const SimilarProducts = ({ currencySign }) => {
         price={basePrice[currency].value}
         name={name}
         rate={rate}
-        imageUrl={`${IMG_URL}${images.primary.large}`}
+        imageUrl={images.primary.medium}
         id={_id}
       />
     ));

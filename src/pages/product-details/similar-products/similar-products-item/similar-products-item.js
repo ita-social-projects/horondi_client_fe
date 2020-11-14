@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Rating from '@material-ui/lab/Rating';
 
 import { useStyles } from './similar-products-item.styles';
+import { getImage } from '../../../../utils/imageLoad';
+import { IMG_URL } from '../../../../configs';
+
+import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
+import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
 
 const SimilarProductsItem = ({
   imageUrl,
@@ -14,10 +19,20 @@ const SimilarProductsItem = ({
   price,
   currencySign
 }) => {
-  const styles = useStyles({ image: imageUrl });
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
   }));
+
+  const [image, setImage] = useState(IMG_URL + imageUrl);
+
+  useEffect(() => {
+    getImage(imageUrl)
+      .then((src) => setImage(src))
+      .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
+  }, [imageUrl, isLightTheme]);
+
+  const styles = useStyles({ image, isLightTheme });
 
   return (
     <Link to={`/product/${id}`}>

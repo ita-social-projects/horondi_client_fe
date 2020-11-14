@@ -39,7 +39,7 @@ export function* handleAddWishlistItem({ payload: product }) {
       product._id
     );
   } catch (e) {
-    yield put(setError({ e }));
+    yield put(setError(e.message));
     yield put(push('/error-page'));
   }
 }

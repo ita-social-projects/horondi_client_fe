@@ -8,11 +8,24 @@ export const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: '#000000'
   },
-  menuButton: {
+  logo: {
+    letterSpacing: '0.2rem',
+    fontSize: '1.5rem',
+    margin: '0 0.6rem 0 0.2rem',
     color: '#ffffff',
-    '@media (min-width: 900px)': {
-      display: 'none'
+    textDecoration: 'none',
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    '@media (max-width: 900px)': {
+      marginLeft: '-20px',
+      fontSize: '1rem'
     }
+  },
+  menuButton: {
+    color: '#ffffff'
+    /*    '@media (min-width: 900px)': {
+      display: 'none'
+    }*/
   },
   categories: {
     flexGrow: 1
@@ -31,5 +44,6 @@ export const useStyles = makeStyles((theme) => ({
     '@media (min-width: 900px)': {
       width: '3px'
     }
-  }
+  },
+  rightBar: {}
 }));

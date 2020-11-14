@@ -45,7 +45,10 @@ export const useStyles = makeStyles(() => ({
     color: 'white',
     fontSize: '1.3em',
     transform: 'translateX(-50%)',
-    width: '100%'
+    width: '100%',
+    '& span': {
+      marginLeft: '5px'
+    }
   },
   categoryName: {
     fontSize: '2em',

@@ -4,6 +4,7 @@ import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
 import { useStyles } from './home.styles';
 import ScrollBar from '../../components/scroll-bar';
+import ConstructorPreview from './contructor-preview';
 
 const Home = () => {
   const styles = useStyles();
@@ -14,6 +15,7 @@ const Home = () => {
         <SliderHomePage />
       </div>
       <CategoriesList />
+      <ConstructorPreview />
       <OurLooks />
       <ScrollBar />
     </div>

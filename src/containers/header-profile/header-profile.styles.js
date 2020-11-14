@@ -6,7 +6,7 @@ export const useStyles = makeStyles(() => ({
     padding: '0 4px',
     position: 'relative',
     cursor: 'pointer',
-    zIndex: 2,
+    zIndex: 20,
     '&:hover': {
       backgroundColor: 'white',
       '& ul': {
@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() => ({
       position: 'absolute',
       left: '5px',
       top: '1px',
-      zIndex: 1,
+      zIndex: 20,
       borderRadius: '50%'
     },
     '& svg': {

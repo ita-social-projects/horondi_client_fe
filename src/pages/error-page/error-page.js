@@ -48,7 +48,7 @@ const ErrorPage = () => {
               ? ERROR_PAGE_MESSAGE[errorMessage][language].value
               : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
           </h2>
-          <Link to='/'>
+          <Link to='/' onClick={() => window.location.reload()}>
             <Button variant='contained'>
               {LINK_TO_HOMEPAGE[language].value}
             </Button>

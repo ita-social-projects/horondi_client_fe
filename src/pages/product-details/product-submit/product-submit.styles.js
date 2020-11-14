@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => {
+export const useStyles = makeStyles((theme) => {
   const heart = {
     marginTop: '1.2rem',
     marginRight: '1.2rem',
@@ -58,5 +58,3 @@ const useStyles = makeStyles((theme) => {
     }
   };
 });
-
-export default useStyles;

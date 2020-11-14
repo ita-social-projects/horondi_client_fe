@@ -26,15 +26,11 @@ const ProductsCarousel = ({ category }) => {
   const dispatch = useDispatch();
 
   const { models, loading, language, filterData } = useSelector(
-    ({
-      Model: { models, loading },
-      Products: { filterData },
-      Language: { language }
-    }) => ({
-      models,
-      language,
-      loading,
-      filterData
+    ({ Model, Products, Language }) => ({
+      models: Model.models,
+      language: Language.language,
+      loading: Model.loading,
+      filterData: Products.filterData
     })
   );
 

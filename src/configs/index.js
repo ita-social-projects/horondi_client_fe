@@ -339,6 +339,11 @@ export const CURRENCIES_LIST = [
   { currency: 'USD', value: 1 }
 ];
 
+export const DEFAULT_PRICE = [
+  { value: 0, currency: 'UAH' },
+  { value: 0, currency: 'USD' }
+];
+
 export const DEFAULT_CURRENCY = 0;
 export const DEFAULT_LANGUAGE = 0;
 export const DEFAULT_COUNT_PER_PAGE = 9;

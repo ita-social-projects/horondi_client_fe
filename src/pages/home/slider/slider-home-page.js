@@ -9,12 +9,12 @@ import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
 import { useStyles } from './slider-home-page.style';
 
-import CircularLoadingBar from '../../components/circular-loading-bar';
-import { getHomePageSliderImages } from '../../redux/homepage-slider/homepage-slider.actions';
+import CircularLoadingBar from '../../../components/circular-loading-bar';
+import { getHomePageSliderImages } from '../../../redux/homepage-slider/homepage-slider.actions';
 
-import { carouselInterval } from '../../configs';
-import { HOME_BUTTONS } from '../../translations/homepage.translations';
-import { getImage } from '../../utils/imageLoad';
+import { carouselInterval } from '../../../configs';
+import { HOME_BUTTONS } from '../../../translations/homepage.translations';
+import { getImage } from '../../../utils/imageLoad';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
@@ -53,12 +53,11 @@ const SliderHomePage = () => {
   }
 
   return (
-    <div className={styles.captionBlock}>
+    <div className={styles.caption}>
       <AutoplaySlider
         play
         cancelOnInteraction
         interval={carouselInterval}
-        className={styles.slider}
         mobileTouch
         buttons={false}
         fillParent

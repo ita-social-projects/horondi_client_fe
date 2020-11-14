@@ -1,5 +1,5 @@
 import React from 'react';
-import SliderHomePage from '../slider-home-page';
+import SliderHomePage from './slider';
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
 import { useStyles } from './home.styles';

@@ -2,7 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   catalog: {
-    margin: '10em 0'
+    scrollSnapAlign: 'start',
+    height: '100vh',
+    position: 'relative',
+    scrollSnapStop: 'normal'
   },
   categoriesContainer: {
     margin: '0 auto'

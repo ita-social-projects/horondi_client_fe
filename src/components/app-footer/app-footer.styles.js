@@ -2,7 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   root: {
-    width: '100%'
+    width: '100%',
+    scrollSnapStop: 'none',
+    scrollSnapAlign: 'start'
   },
   footer: {
     backgroundColor: '#000000',

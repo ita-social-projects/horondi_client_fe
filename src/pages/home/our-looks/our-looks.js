@@ -32,7 +32,7 @@ const OurLooks = () => {
   }
 
   return (
-    <div>
+    <div className={styles.horondiStyle}>
       <Typography variant='h2' className={styles.title}>
         {HOMEPAGE_TITLES[language].look}
       </Typography>

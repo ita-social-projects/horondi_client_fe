@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    scrollSnapStop: 'none',
+    scrollSnapAlign: 'start'
+  },
   header: {
     backgroundColor: '#000000'
   },

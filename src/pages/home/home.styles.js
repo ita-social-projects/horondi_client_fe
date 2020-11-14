@@ -7,7 +7,9 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center'
   },
   homeHeader: {
-    height: '90vh',
-    position: 'relative'
+    position: 'relative',
+    scrollSnapAlign: 'start',
+    scrollSnapStop: 'normal',
+    height: '100vh'
   }
 }));

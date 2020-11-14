@@ -1,11 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  caption: {
-    color: '#fff',
-    fontSize: '1rem',
-    position: 'absolute'
-  },
+  caption: {},
   sliderInner: {
     opacity: 0,
     transition: '1s',

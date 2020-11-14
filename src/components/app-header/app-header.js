@@ -14,7 +14,7 @@ import { LOGO } from '../../configs';
 const AppHeader = () => {
   const styles = useStyles();
 
-  const [menu, setMenuOpen] = useState(true);
+  const [menu, setMenuOpen] = useState(false);
 
   return (
     <div className={styles.root}>

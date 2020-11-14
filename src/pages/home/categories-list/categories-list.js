@@ -38,7 +38,7 @@ const CategoriesList = () => {
     : null;
 
   return (
-    <div className={styles.catalog} id='home-categories'>
+    <div id='catalog' className={styles.catalog}>
       {loading ? (
         <CircularLoadingBar className={styles.loadingIndicator} />
       ) : (

@@ -398,6 +398,29 @@ export const sideBarSubList = [
   }
 ];
 
+export const SCROLL_BAR_DATA = [
+  {
+    name: ['Слайдер', 'Slider'],
+    href: '#slider'
+  },
+  {
+    name: ['Каталог', 'Catalog'],
+    href: '#catalog'
+  },
+  {
+    name: ['Конструктор', 'Constructor'],
+    href: '#constructor'
+  },
+  {
+    name: ['Моделі', 'Models'],
+    href: '#models'
+  },
+  {
+    name: ['Стиль горонді', 'Horondi style'],
+    href: '#horondiStyle'
+  }
+];
+
 export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';

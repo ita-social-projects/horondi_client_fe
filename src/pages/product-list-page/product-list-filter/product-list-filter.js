@@ -37,15 +37,11 @@ const ProductListFilter = () => {
   const styles = useStyles();
 
   const { filterData, filters, language, currency } = useSelector(
-    ({
-      Products: { filterData, filters },
-      Language: { language },
-      Currency: { currency }
-    }) => ({
-      filterData,
-      filters,
-      language,
-      currency
+    ({ Products, Language, Currency }) => ({
+      filterData: Products.filterData,
+      filters: Products.filters,
+      language: Language.language,
+      currency: Currency.currency
     })
   );
 

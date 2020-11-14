@@ -20,7 +20,7 @@ import {
 import {
   getAllProducts,
   getFilteredProducts,
-  getProduct
+  getProductById
 } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
@@ -58,9 +58,9 @@ export function* handleProductsErrors({ message }) {
 export function* handleProductLoading({ payload }) {
   try {
     yield put(setProductLoading(true));
-    const product = yield call(getProduct, payload);
-    yield put(setProduct(product.data.getProductById));
-    yield put(setComments(product.data.getProductById.comments.items));
+    const product = yield call(getProductById, payload);
+    yield put(setProduct(product));
+    yield put(setComments(product.comments.items));
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));

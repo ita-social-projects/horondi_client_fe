@@ -50,11 +50,11 @@ const Comments = () => {
   const { _id: userId, email, firstName, purchasedProducts, images } =
     userData || {};
 
-  const onSubmit = (values) => {
+  const onSubmit = (formValues) => {
     const userFields = userId ? { email, firstName, images, user: userId } : {};
     dispatch(
       addComment({
-        ...values,
+        ...formValues,
         ...userFields,
         product: productId,
         show: true,

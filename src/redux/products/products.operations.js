@@ -145,12 +145,12 @@ const getFilteredProducts = async ({ state, currency }) => {
   return result.data.getProducts;
 };
 
-const getProduct = async (id) => {
+const getProductById = async (id) => {
   const result = await client.query({
     variables: {
       id
     },
-    mutation: gql`
+    query: gql`
       query($id: ID!) {
         getProductById(id: $id) {
           ... on Product {
@@ -311,9 +311,11 @@ const getProduct = async (id) => {
           }
         }
       }
-    `
+    `,
+    fetchPolicy: 'no-cache'
   });
-  return result.data;
+
+  return result.data.getProductById;
 };
 
-export { getProduct, getAllProducts, getFilteredProducts };
+export { getProductById, getAllProducts, getFilteredProducts };

@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     scrollSnapStop: 'normal',
     margin: '50px 0',
     boxSizing: 'border-box',
+    overflowY: 'hidden',
     '&:after': {
       opacity: isMouseIn ? 1 : 0,
       transition: 'opacity .5s ease',

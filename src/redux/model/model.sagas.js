@@ -1,53 +1,41 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { setModels, setModelsLoading } from './model.actions';
-import getItems from '../../utils/client';
-import { setError } from '../error/error.actions';
-import { GET_MODELS_BY_CATEGORY } from './model.types';
 
-export function* handleModelsLoad({ payload }) {
+import { getAllModels, getModelsByCategory } from './model.operations';
+import { setModels, setModelsLoading } from './model.actions';
+import { setError } from '../error/error.actions';
+import { GET_MODELS_BY_CATEGORY, GET_ALL_MODELS } from './model.types';
+
+export function* handleModelsLoadByCategory({ payload }) {
   try {
     yield put(setModelsLoading(true));
-    const products = yield call(
-      getItems,
-      `query(
-        $category: ID!
-        ){
-          getModelsByCategory(id: $category){
-            _id
-            category{
-              name {
-                value
-              }
-            }           
-            name {
-              value
-            }
-            images {
-              large
-            }
-            description {
-              value
-            }
-          }
-        }`,
-      {
-        category: payload
-      }
-    );
-    yield put(setModels(products.data.getModelsByCategory));
+    const models = yield call(getModelsByCategory, payload);
+    yield put(setModels(models));
 
     yield put(setModelsLoading(false));
   } catch (e) {
-    yield call(handleProductsErrors, e);
+    yield call(handleModelsErrors, e);
   }
 }
 
-export function* handleProductsErrors(e) {
+export function* handleAllModelsLoad() {
+  try {
+    yield put(setModelsLoading(true));
+    const models = yield call(getAllModels);
+    yield put(setModels(models.items));
+
+    yield put(setModelsLoading(false));
+  } catch (e) {
+    yield call(handleModelsErrors, e);
+  }
+}
+
+export function* handleModelsErrors(e) {
   yield put(setError(e.message));
   yield put(push('/error-page'));
 }
 
 export default function* modelSaga() {
-  yield takeEvery(GET_MODELS_BY_CATEGORY, handleModelsLoad);
+  yield takeEvery(GET_MODELS_BY_CATEGORY, handleModelsLoadByCategory);
+  yield takeEvery(GET_ALL_MODELS, handleAllModelsLoad);
 }

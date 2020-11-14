@@ -5,6 +5,7 @@ import OurLooks from './our-looks';
 import { useStyles } from './home.styles';
 import ScrollBar from '../../components/scroll-bar';
 import ConstructorPreview from './contructor-preview';
+import ModelsList from './modles-list';
 
 const Home = () => {
   const styles = useStyles();
@@ -16,6 +17,7 @@ const Home = () => {
       </div>
       <CategoriesList />
       <ConstructorPreview />
+      <ModelsList />
       <OurLooks />
       <ScrollBar />
     </div>

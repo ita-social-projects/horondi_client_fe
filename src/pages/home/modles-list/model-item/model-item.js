@@ -42,8 +42,6 @@ const ModelItem = ({ model }) => {
     );
   };
 
-  console.log(model);
-
   return (
     <div
       key={model.name[1].value}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SliderHomePage from './slider';
 import CategoriesList from './categories-list';
 import OurLooks from './our-looks';
@@ -9,9 +9,19 @@ import ModelsList from './modles-list';
 
 const Home = () => {
   const styles = useStyles();
+  const homeRef = useRef(null);
+
+  const getData = () => {
+    console.dir(homeRef.current);
+  };
 
   return (
-    <div className={styles.home} data-cy='home-page'>
+    <div
+      ref={homeRef}
+      onClick={() => getData()}
+      className={styles.home}
+      data-cy='home-page'
+    >
       <div id='slider' className={styles.homeHeader}>
         <SliderHomePage />
       </div>

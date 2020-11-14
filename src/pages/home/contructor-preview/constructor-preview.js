@@ -28,7 +28,7 @@ const ConstructorPreview = () => {
     <div
       className={styles.constructorPreview}
       onClick={() => setIsPlaying(!isPlaying)}
-      id='#constructor'
+      id='constructor'
     >
       <ReactPlayer
         width='100%'

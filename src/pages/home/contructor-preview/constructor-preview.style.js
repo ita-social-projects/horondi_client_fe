@@ -46,8 +46,7 @@ export const useStyles = makeStyles((theme) => ({
     transform: `translateX(-50%) ${
       isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'
     }`,
-    fontSize: '4em',
-    animation: 'jumping 3s infinite'
+    fontSize: '4em'
   }),
   constructorInnerLink: {
     color: 'white',

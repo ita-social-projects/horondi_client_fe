@@ -32,7 +32,7 @@ const OurLooks = () => {
   }
 
   return (
-    <div className={styles.horondiStyle}>
+    <div className={styles.horondiStyle} id='horondiStyle'>
       <div className={styles.imageSection}>
         {looksImages.length
           ? looksImages.map((image) => (

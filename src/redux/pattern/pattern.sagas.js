@@ -20,6 +20,7 @@ export function* handlePatternsLoad() {
 }
 
 export function* handlePatternsErrors(e) {
+  yield put(setPatternLoading(false));
   yield put(setError(e.message));
   yield put(push('/error-page'));
 }

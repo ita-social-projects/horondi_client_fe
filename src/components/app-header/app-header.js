@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { useStyles } from './app-header.styles';
 import Language from '../../containers/language';
 import NavbarLeft from '../../containers/navbar-left';
-import Cabinet from '../../containers/cabinet';
+import HeaderProfile from '../../containers/header-profile';
 import Sidebar from '../../containers/sidebar';
 import CartHeader from '../../containers/cart-header';
 import Currency from '../../containers/currency';
@@ -31,7 +31,7 @@ const AppHeader = () => {
           <Currency />
           <Language />
           <CartHeader />
-          <Cabinet />
+          <HeaderProfile />
         </Toolbar>
       </AppBar>
       <Sidebar setMenuOpen={setMenuOpen} menu={menu} />

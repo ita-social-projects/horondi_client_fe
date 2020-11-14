@@ -4,7 +4,7 @@ import { useStyles } from './header-right-bar.styles';
 import Currency from '../currency';
 import Language from '../language';
 import CartHeader from '../cart-header';
-import Cabinet from '../cabinet';
+import HeaderProfile from '../header-profile';
 
 const HeaderRightBar = ({ fromSideBar }) => {
   const styles = useStyles();
@@ -14,7 +14,7 @@ const HeaderRightBar = ({ fromSideBar }) => {
       <Currency fromSideBar={fromSideBar} />
       <Language fromSideBar={fromSideBar} />
       <CartHeader fromSideBar={fromSideBar} />
-      <Cabinet fromSideBar={fromSideBar} />
+      <HeaderProfile fromSideBar={fromSideBar} />
     </div>
   );
 };

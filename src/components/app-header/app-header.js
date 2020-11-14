@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
-import { AppBar, IconButton } from '@material-ui/core';
+import { AppBar, IconButton as BurgerMenu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+
 import { useStyles } from './app-header.styles';
 import Sidebar from '../../containers/sidebar';
 import HeaderRightBar from '../../containers/header-right-bar';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
+
 import { LOGO } from '../../configs';
 
 const AppHeader = () => {
   const styles = useStyles();
 
-  const [menu, setMenuOpen] = useState(false);
+  const [menu, setMenuOpen] = useState(true);
 
   return (
     <div className={styles.root}>
       <AppBar position='static' className={styles.header}>
         <Toolbar>
-          <IconButton
+          <BurgerMenu
             className={styles.menuButton}
             onClick={() => setMenuOpen(true)}
           >
             <MenuIcon />
-          </IconButton>
+          </BurgerMenu>
           <Typography variant='h5'>
             <Link to='/' className={styles.logo}>
               {LOGO}

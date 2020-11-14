@@ -17,11 +17,13 @@ import Dropdown from '../../components/dropdown';
 const currencyInLocalStorage =
   getFromLocalStorage('currency') || DEFAULT_CURRENCY;
 
-const Currency = () => {
+const Currency = ({ fromSideBar }) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);
+
   const handleChange = (e) => {
     const targetValue = e.target.value;
     if (targetValue !== undefined) {
@@ -40,6 +42,7 @@ const Currency = () => {
         mappedItems={mappedCurrencies}
         handler={handleChange}
         defaultValue={currencyInLocalStorage}
+        fromSideBar={fromSideBar}
       />
     </div>
   );

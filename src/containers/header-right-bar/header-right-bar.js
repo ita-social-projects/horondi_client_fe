@@ -6,15 +6,15 @@ import Language from '../language';
 import CartHeader from '../cart-header';
 import Cabinet from '../cabinet';
 
-const HeaderRightBar = () => {
+const HeaderRightBar = ({ fromSideBar }) => {
   const styles = useStyles();
 
   return (
     <div className={styles.root}>
-      <Currency />
-      <Language />
-      <CartHeader />
-      <Cabinet />
+      <Currency fromSideBar={fromSideBar} />
+      <Language fromSideBar={fromSideBar} />
+      <CartHeader fromSideBar={fromSideBar} />
+      <Cabinet fromSideBar={fromSideBar} />
     </div>
   );
 };

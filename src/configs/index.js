@@ -379,6 +379,25 @@ export const moreHeaderButton = [
   }
 ];
 
+export const sideBarSubList = [
+  {
+    name: ['Матеріали', 'Materials'],
+    link: '/materials'
+  },
+  {
+    name: ['Про нас', 'About us'],
+    link: '/about-us'
+  },
+  {
+    name: ['Новини', 'News'],
+    link: '/news'
+  },
+  {
+    name: ['Контакти', 'Contacts'],
+    link: '/contacts'
+  }
+];
+
 export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';

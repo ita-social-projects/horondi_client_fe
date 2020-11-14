@@ -6,13 +6,16 @@ import { getAllPatterns } from './pattern.operations';
 import { GET_PATTERNS } from './pattern.types';
 import { setError } from '../error/error.actions';
 import { push } from 'connected-react-router';
+import { setPatternLoading } from '../pattern/pattern.actions';
 
-export function* handlePatternsLoad({ payload }) {
+export function* handlePatternsLoad() {
   try {
+    yield put(setPatternLoading(true));
     const patterns = yield call(getAllPatterns, 0, 1000);
     yield put(setPatterns(patterns.items));
-  } catch (e) {
-    yield call(handlePatternsErrors, e);
+    yield put(setPatternLoading(false));
+  } catch (error) {
+    yield call(handlePatternsErrors, error);
   }
 }
 

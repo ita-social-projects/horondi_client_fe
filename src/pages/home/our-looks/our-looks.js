@@ -33,9 +33,6 @@ const OurLooks = () => {
 
   return (
     <div className={styles.horondiStyle}>
-      <Typography variant='h2' className={styles.title}>
-        {HOMEPAGE_TITLES[language].look}
-      </Typography>
       <div className={styles.imageSection}>
         {looksImages.length
           ? looksImages.map((image) => (

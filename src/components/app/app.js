@@ -17,12 +17,15 @@ import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
-  const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
-    isLoading: Categories.loading,
-    lightMode: Theme.lightMode
-  }));
+  const { isLoading, lightMode, location } = useSelector(
+    ({ Categories, Theme, router }) => ({
+      isLoading: Categories.loading,
+      lightMode: Theme.lightMode,
+      location: router.location.pathname
+    })
+  );
   const dispatch = useDispatch();
-  const styles = useStyles();
+  const styles = useStyles({ isHome: location });
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
@@ -62,7 +65,9 @@ const App = () => {
   return (
     <ThemeProvider theme={themeValue}>
       <CssBaseline />
-      <Routes />
+      <div className={styles.app}>
+        <Routes />
+      </div>
       <Chat />
     </ThemeProvider>
   );

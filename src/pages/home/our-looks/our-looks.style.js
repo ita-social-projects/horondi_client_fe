@@ -4,16 +4,16 @@ export const useStyles = makeStyles((theme) => ({
   horondiStyle: {
     scrollSnapAlign: 'start',
     height: '100vh',
-    backgroundColor: 'blue',
     position: 'relative',
     scrollSnapStop: 'normal'
   },
   imageSection: {
     display: 'flex',
-    flexFlow: 'wrap'
+    flexFlow: 'wrap',
+    height: '100%'
   },
   imageWrapper: {
-    height: '340px',
+    height: '50%',
     overflow: 'hidden',
     flexBasis: '16.666%',
     '@media screen and (max-width: 991px)': {

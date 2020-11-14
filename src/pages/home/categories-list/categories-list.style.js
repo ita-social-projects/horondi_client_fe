@@ -4,8 +4,19 @@ export const useStyles = makeStyles((theme) => ({
   catalog: {
     scrollSnapAlign: 'start',
     height: '100vh',
+    marginTop: 50,
     position: 'relative',
-    scrollSnapStop: 'normal'
+    scrollSnapStop: 'normal',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& > div': {
+      height: '100%',
+      width: '100%'
+    },
+    '& .react-multi-carousel-list': {
+      height: '100%'
+    }
   },
   categoriesContainer: {
     margin: '0 auto'

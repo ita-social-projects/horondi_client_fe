@@ -39,9 +39,6 @@ const CategoriesList = () => {
 
   return (
     <div className={styles.catalog} id='home-categories'>
-      <Typography variant='h2' className={styles.title}>
-        {HOMEPAGE_TITLES[language].catalog}
-      </Typography>
       {loading ? (
         <CircularLoadingBar className={styles.loadingIndicator} />
       ) : (

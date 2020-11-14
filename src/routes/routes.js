@@ -31,7 +31,7 @@ import ProfilePage from '../pages/profile-page';
 import OrderHistory from '../pages/order-history';
 import ProtectedRoute from '../components/protected-route';
 import Materials from '../pages/materials';
-import ErrorBoundary from '../components/error-boundary/';
+import ErrorBoundary from '../components/error-boundary';
 
 const Routes = () => {
   const styles = useStyles();

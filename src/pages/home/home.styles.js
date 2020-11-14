@@ -10,6 +10,6 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     scrollSnapAlign: 'start',
     scrollSnapStop: 'normal',
-    height: '100vh'
+    height: 'calc(100vh - 50px)'
   }
 }));

@@ -7,7 +7,7 @@ import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 
 const HeaderRightBar = ({ fromSideBar }) => {
-  const styles = useStyles();
+  const styles = useStyles({ fromSideBar });
 
   return (
     <div className={styles.root}>

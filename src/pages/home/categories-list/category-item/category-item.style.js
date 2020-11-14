@@ -6,38 +6,51 @@ export const useStyles = makeStyles(() => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     width: 'calc(100% - 40px)',
     height: '500px',
     margin: '20px',
     cursor: 'pointer',
-    borderRadius: 5,
     boxShadow: '0px 5px 8px #c5c5c5',
-    '&:hover': {
-      '& span': {
-        fontSize: 30
-      }
+    padding: 20,
+    position: 'relative',
+    '&:after': {
+      opacity: 0,
+      transition: 'all .2s ease',
+      color: 'white',
+      content: `''`,
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      left: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.7)'
+    },
+    '&:hover:after, &:hover > a': {
+      opacity: 1
+    },
+    '&:hover > span:first-child': {
+      color: 'white'
     },
     '@media (max-width: 768px)': {
       width: 'calc(100% - 40px)',
       height: '420px'
     }
   }),
-  categoryNameWrapper: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    width: '60%',
-    height: '10%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-    '& span': {
-      fontSize: 24
-    }
+  categoryInner: {
+    position: 'absolute',
+    bottom: 20,
+    left: '50%',
+    opacity: 0,
+    zIndex: 10,
+    color: 'white',
+    fontSize: '1.3em',
+    transform: 'translateX(-50%)',
+    width: '100%'
   },
-  link: {
-    textDecoration: 'none',
-    color: 'black'
+  categoryName: {
+    fontSize: '2em',
+    textTransform: 'uppercase',
+    fontWeight: '600',
+    zIndex: 10
   }
 }));

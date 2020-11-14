@@ -31,6 +31,7 @@ const CategoriesList = () => {
                 categoryUrl={getCategoryURL(name)}
                 categoryName={name[language].value}
                 categoryImageUrl={images.large}
+                language={language}
               />
             )
         )

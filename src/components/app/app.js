@@ -17,6 +17,10 @@ import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
+  window.addEventListener('scroll', () => {
+    console.log('scroll');
+  });
+
   const { isLoading, lightMode, location } = useSelector(
     ({ Categories, Theme, router }) => ({
       isLoading: Categories.loading,
@@ -25,7 +29,7 @@ const App = () => {
     })
   );
   const dispatch = useDispatch();
-  const styles = useStyles({ isHome: location });
+  const styles = useStyles({ isHome: location === '/' });
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;

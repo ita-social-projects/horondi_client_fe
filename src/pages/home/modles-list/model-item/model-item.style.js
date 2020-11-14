@@ -9,13 +9,14 @@ export const useStyles = makeStyles(() => ({
     overflow: 'hidden',
     height: 200,
     position: 'relative',
+    boxShadow: '0px 5px 8px #c5c5c5',
     '& > *': {
       flex: 1
     },
     '&:after': {
       content: `''`,
       background: 'black',
-      opacity: '.5',
+      opacity: 0,
       position: 'absolute',
       transition: 'opacity .2s ease',
       top: 0,
@@ -23,15 +24,15 @@ export const useStyles = makeStyles(() => ({
       left: 0,
       bottom: 0
     },
-    '&:hover div:last-child img': {
+    '&:hover div img': {
       zIndex: 12,
       transform: 'scale(1.1)'
     },
     '&:hover div:first-child': {
-      color: 'black'
+      color: 'white'
     },
     '&:hover:after': {
-      opacity: 0
+      opacity: '.5'
     },
     '&:hover a': {
       opacity: 1
@@ -42,7 +43,7 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'flex-start',
     zIndex: 10,
-    color: 'white',
+    color: 'black',
     fontSize: '1.6em',
     textAlign: 'left',
     transition: 'color .2s ease',
@@ -68,7 +69,7 @@ export const useStyles = makeStyles(() => ({
     left: '10%',
     opacity: 0,
     zIndex: 10,
-    color: 'black',
+    color: 'white',
     fontSize: '1em',
     '& span': {
       marginLeft: '5px'

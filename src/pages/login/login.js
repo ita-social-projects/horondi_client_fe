@@ -12,7 +12,11 @@ import {
   REGISTER_PROPOSAL,
   LOGIN_USER_ERROR
 } from '../../translations/user.translations';
-import { loginUser, resetState } from '../../redux/user/user.actions';
+import {
+  loginByGoogle,
+  loginUser,
+  resetState
+} from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
 import { Formik, Field, Form } from 'formik';
@@ -49,6 +53,22 @@ const Login = () => {
       .matches(formRegExp.password, errorMessages[language].value.password)
       .required(' ')
   });
+
+  useEffect(() => {
+    window.gapi.load('auth2', () => {
+      window.gapi.auth2.init({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
+      });
+    });
+  }, []);
+
+  const singIn = () => {
+    const googleAuth = window.gapi.auth2.getAuthInstance();
+    googleAuth.signIn().then((googleUser) => {
+      const idToken = googleUser.getAuthResponse().id_token;
+      dispatch(loginByGoogle({ idToken }));
+    });
+  };
 
   return (
     <Formik
@@ -123,7 +143,11 @@ const Login = () => {
                       {OR_TEXT[language].value}
                     </span>
                   </div>
-                  <Button className={styles.googleBtn} fullWidth>
+                  <Button
+                    className={styles.googleBtn}
+                    onClick={singIn}
+                    fullWidth
+                  >
                     <span className={styles.googleLogo} />
                     Google
                   </Button>

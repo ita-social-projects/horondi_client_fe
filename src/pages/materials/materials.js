@@ -40,7 +40,7 @@ const Materials = () => {
           .then((src) => setImage((prev) => [...prev, src]))
           .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
       });
-  }, [images]);
+  }, [patterns]);
 
   const materialPageText =
     materialsPage.text && parse(materialsPage.text[language].value);

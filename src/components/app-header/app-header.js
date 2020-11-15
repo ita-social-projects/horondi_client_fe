@@ -14,7 +14,7 @@ import { LOGO } from '../../configs';
 const AppHeader = () => {
   const styles = useStyles();
 
-  const [menu, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className={styles.root}>
@@ -22,7 +22,7 @@ const AppHeader = () => {
         <Toolbar>
           <BurgerMenu
             className={styles.menuButton}
-            onClick={() => setMenuOpen(true)}
+            onClick={() => setIsMenuOpen(true)}
           >
             <MenuIcon />
           </BurgerMenu>
@@ -34,7 +34,7 @@ const AppHeader = () => {
           <HeaderRightBar />
         </Toolbar>
       </AppBar>
-      <Sidebar setMenuOpen={setMenuOpen} menu={menu} />
+      <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  drawer: {
+  drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
-      top: 64,
+      top: fromSideBar ? 0 : 64,
       padding: theme.spacing(3),
-      height: 'calc(100vh - 64px)'
+      height: fromSideBar ? '100vh' : 'calc(100vh - 64px)'
     }
-  },
+  }),
   list: {
     width: '400px'
   },

@@ -56,7 +56,14 @@ const scrollBarStyles = makeStyles(() => ({
     borderRadius: '50%',
     marginRight: 20
   }),
-  selectedSection: () => ({})
+  selectedSection: () => ({}),
+  fixedBurgerMenu: ({ isDarkSection }) => ({
+    color: isDarkSection ? '#fff' : '#000',
+    position: 'fixed',
+    top: '10px',
+    left: '12px',
+    zIndex: 20
+  })
 }));
 
 export default scrollBarStyles;

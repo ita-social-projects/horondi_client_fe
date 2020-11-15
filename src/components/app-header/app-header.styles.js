@@ -23,9 +23,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     color: '#ffffff'
-    /*    '@media (min-width: 900px)': {
-      display: 'none'
-    }*/
   },
   categories: {
     flexGrow: 1

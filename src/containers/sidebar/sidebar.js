@@ -11,8 +11,8 @@ import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import HeaderRightBar from '../header-right-bar';
 
-const Sidebar = ({ setMenuOpen, menu }) => {
-  const styles = useStyles();
+const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
+  const styles = useStyles({ fromSideBar });
   const { language, burgerMenuCategories } = useSelector(
     ({ Language, BurgerMenu }) => ({
       language: Language.language,
@@ -29,7 +29,7 @@ const Sidebar = ({ setMenuOpen, menu }) => {
           language={language}
           key={category._id}
           models={models}
-          handlerItem={() => setMenuOpen(false)}
+          handlerItem={() => setIsMenuOpen(false)}
         />
       )),
     [burgerMenuCategories, styles]
@@ -52,8 +52,8 @@ const Sidebar = ({ setMenuOpen, menu }) => {
     <Drawer
       className={styles.drawer}
       anchor='left'
-      open={menu}
-      onClose={() => setMenuOpen(false)}
+      open={isMenuOpen}
+      onClose={() => setIsMenuOpen(false)}
     >
       <Link to='/constructor' className={styles.mainItem}>
         <span>{CONSTRUCTOR[language].value}</span>

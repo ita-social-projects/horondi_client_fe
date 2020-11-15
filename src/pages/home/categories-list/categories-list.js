@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
 import Carousel from 'react-multi-carousel';
 
 import CircularLoadingBar from '../../../components/circular-loading-bar';
 import CategoryItem from './category-item';
 import { URL_LANGUAGE, RESPONSIVE_CATEGORIES } from '../../../configs';
-import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 import { useStyles } from './categories-list.style';
 import './categories-carousel.css';
@@ -23,25 +21,23 @@ const CategoriesList = () => {
 
   const categoriesList = categories
     ? categories
-      .map(
-        ({ _id, name, images, isMain }) =>
-          isMain && (
-            <CategoryItem
-              key={_id}
-              categoryUrl={getCategoryURL(name)}
-              categoryName={name[language].value}
-              categoryImageUrl={images.large}
-              language={language}
-            />
-          )
-      )
-      .filter((val) => val)
+        .map(
+          ({ _id, name, images, isMain }) =>
+            isMain && (
+              <CategoryItem
+                key={_id}
+                categoryUrl={getCategoryURL(name)}
+                categoryName={name[language].value}
+                categoryImageUrl={images.large}
+                language={language}
+              />
+            )
+        )
+        .filter((val) => val)
     : null;
 
   return (
-    <div id='catalog'
-      data-section-style='light'
-      className={styles.catalog}>
+    <div id='catalog' data-section-style='light' className={styles.catalog}>
       {loading ? (
         <CircularLoadingBar className={styles.loadingIndicator} />
       ) : (

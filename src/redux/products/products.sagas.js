@@ -6,7 +6,8 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading
+  setProductLoading,
+  setProductsForSearchBar
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
@@ -25,14 +26,19 @@ import {
 
 import { setComments } from '../comments/comments.actions';
 
-export function* handleFilteredProductsLoad() {
+export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
     const products = yield call(getFilteredProducts, { state, currency });
 
     yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));
-    yield put(setAllProducts(products.items));
+
+    if (forSearchBar) {
+      yield put(setProductsForSearchBar(products.items));
+    } else {
+      yield put(setAllProducts(products.items));
+    }
   } catch (e) {
     yield call(handleProductsErrors, e);
   }

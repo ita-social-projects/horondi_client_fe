@@ -1,16 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
-import { Backdrop } from '@material-ui/core';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 
 import 'react-awesome-slider/dist/styles.css';
 import { useStyles } from './slider-home-page.style';
-
-import CircularLoadingBar from '../../../components/circular-loading-bar';
-import { getHomePageSliderImages } from '../../../redux/homepage-slider/homepage-slider.actions';
 
 import { carouselInterval } from '../../../configs';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
@@ -21,15 +17,11 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 const SliderHomePage = () => {
   const [imagesLinks, setImage] = useState([]);
   const styles = useStyles();
-  const dispatch = useDispatch();
 
-  const { images, loading, language } = useSelector(
-    ({ HomePageSlider, Language }) => ({
-      images: HomePageSlider.images,
-      loading: HomePageSlider.loading,
-      language: Language.language
-    })
-  );
+  const { images, language } = useSelector(({ HomePageSlider, Language }) => ({
+    images: HomePageSlider.images,
+    language: Language.language
+  }));
 
   useMemo(() => {
     images.items &&
@@ -40,18 +32,8 @@ const SliderHomePage = () => {
       });
   }, [images]);
 
-  // if (loading) {
-  //   return (
-  //     <Backdrop className={styles.backdrop} open={loading} invisible>
-  //       <CircularLoadingBar color='inherit' />
-  //     </Backdrop>
-  //   );
-  // }
-
   return (
-    <div id='slider'
-      data-section-style='light'
-      className={styles.homeHeader}>
+    <div id='slider' data-section-style='light' className={styles.homeHeader}>
       <AutoplaySlider
         play
         cancelOnInteraction

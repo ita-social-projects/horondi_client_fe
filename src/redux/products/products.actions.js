@@ -22,7 +22,8 @@ import {
   SET_HOT_ITEM_FILTER,
   SET_PRODUCT_LOADING,
   SET_PRODUCT_TO_SEND,
-  CLEAR_PRODUCT_TO_SEND
+  CLEAR_PRODUCT_TO_SEND,
+  SET_ALL_PRODUCTS_FOR_SEARCH_BAR
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -105,6 +106,10 @@ export const setPagesCount = (payload) => ({
 });
 export const setAllProducts = (payload) => ({
   type: SET_ALL_PRODUCTS,
+  payload
+});
+export const setProductsForSearchBar = (payload) => ({
+  type: SET_ALL_PRODUCTS_FOR_SEARCH_BAR,
   payload
 });
 export const getAllFilters = () => ({

@@ -32,6 +32,7 @@ export function* handleHomePageSliderImagesLoad() {
   try {
     const images = yield call(getItems, query);
     yield put(setHomePageSliderImages(images.data.getAllSlides));
+    console.log(images);
     yield put(setHomePageSliderImagesLoading(false));
   } catch (e) {
     yield call(handleHomePageSliderError, e);

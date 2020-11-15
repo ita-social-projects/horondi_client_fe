@@ -31,10 +31,6 @@ const SliderHomePage = () => {
     })
   );
 
-  useEffect(() => {
-    dispatch(getHomePageSliderImages());
-  }, [dispatch]);
-
   useMemo(() => {
     images.items &&
       images.items.forEach((item) => {
@@ -44,13 +40,13 @@ const SliderHomePage = () => {
       });
   }, [images]);
 
-  if (loading) {
-    return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <CircularLoadingBar color='inherit' />
-      </Backdrop>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Backdrop className={styles.backdrop} open={loading} invisible>
+  //       <CircularLoadingBar color='inherit' />
+  //     </Backdrop>
+  //   );
+  // }
 
   return (
     <div id='slider'

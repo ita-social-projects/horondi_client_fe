@@ -2,10 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   horondiStyle: {
-    scrollSnapAlign: 'start',
     height: '100vh',
     position: 'relative',
-    scrollSnapStop: 'normal'
   },
   imageSection: {
     display: 'flex',

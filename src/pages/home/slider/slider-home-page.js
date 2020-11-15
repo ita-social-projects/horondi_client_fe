@@ -53,7 +53,9 @@ const SliderHomePage = () => {
   }
 
   return (
-    <div className={styles.caption}>
+    <div id='slider'
+      data-section-style='light'
+      className={styles.homeHeader}>
       <AutoplaySlider
         play
         cancelOnInteraction

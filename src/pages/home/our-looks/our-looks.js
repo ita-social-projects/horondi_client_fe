@@ -32,19 +32,21 @@ const OurLooks = () => {
   }
 
   return (
-    <div className={styles.horondiStyle} id='horondiStyle'>
+    <div className={styles.horondiStyle}
+      data-section-style='light'
+      id='horondiStyle'>
       <div className={styles.imageSection}>
         {looksImages.length
           ? looksImages.map((image) => (
-              <div key={image.images.medium} className={styles.imageWrapper}>
-                <div
-                  className={styles.image}
-                  style={{
-                    backgroundImage: `url(${IMG_URL}${image.images.medium})`
-                  }}
-                />
-              </div>
-            ))
+            <div key={image.images.medium} className={styles.imageWrapper}>
+              <div
+                className={styles.image}
+                style={{
+                  backgroundImage: `url(${IMG_URL}${image.images.medium})`
+                }}
+              />
+            </div>
+          ))
           : null}
       </div>
     </div>

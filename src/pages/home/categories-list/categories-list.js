@@ -23,23 +23,25 @@ const CategoriesList = () => {
 
   const categoriesList = categories
     ? categories
-        .map(
-          ({ _id, name, images, isMain }) =>
-            isMain && (
-              <CategoryItem
-                key={_id}
-                categoryUrl={getCategoryURL(name)}
-                categoryName={name[language].value}
-                categoryImageUrl={images.large}
-                language={language}
-              />
-            )
-        )
-        .filter((val) => val)
+      .map(
+        ({ _id, name, images, isMain }) =>
+          isMain && (
+            <CategoryItem
+              key={_id}
+              categoryUrl={getCategoryURL(name)}
+              categoryName={name[language].value}
+              categoryImageUrl={images.large}
+              language={language}
+            />
+          )
+      )
+      .filter((val) => val)
     : null;
 
   return (
-    <div id='catalog' className={styles.catalog}>
+    <div id='catalog'
+      data-section-style='light'
+      className={styles.catalog}>
       {loading ? (
         <CircularLoadingBar className={styles.loadingIndicator} />
       ) : (

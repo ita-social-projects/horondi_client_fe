@@ -1,12 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  app: ({ isHome }) => ({
-    scrollSnapType: isHome ? 'y mandatory' : 'none',
-    height: '100vh',
+  app: {
     overflowY: 'scroll',
-    scrollBehavior: 'smooth'
-  }),
+  },
   center: {
     width: '3rem',
     margin: '22rem auto',

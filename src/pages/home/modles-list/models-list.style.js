@@ -2,11 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   root: ({ isModelsVisible, modelsCount }) => ({
-    scrollSnapAlign: 'start',
     height: !isModelsVisible ? '100vh' : `${(modelsCount / 3) * 210 + 250}px`,
     minHeight: '100vh',
     position: 'relative',
-    scrollSnapStop: 'normal',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

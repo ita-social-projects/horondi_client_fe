@@ -17,10 +17,6 @@ import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
-  window.addEventListener('scroll', () => {
-    console.log('scroll');
-  });
-
   const { isLoading, lightMode, location } = useSelector(
     ({ Categories, Theme, router }) => ({
       isLoading: Categories.loading,
@@ -40,20 +36,16 @@ const App = () => {
   const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
-    dispatch(getBurgerMenuLinks());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(preserveUser());
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(getBurgerMenuLinks());
     dispatch(getCategories());
     dispatch(getContacts());
-  }, [dispatch]);
+  }, []);
+
   useEffect(() => {
     dispatch(setCountPerPage(productsCount));
   }, [dispatch, productsCount]);
+
   useEffect(() => {
     dispatch(setThemeMode(themeMode));
   }, [lightMode, dispatch, themeMode]);
@@ -69,9 +61,7 @@ const App = () => {
   return (
     <ThemeProvider theme={themeValue}>
       <CssBaseline />
-      <div className={styles.app}>
-        <Routes />
-      </div>
+      <Routes />
       <Chat />
     </ThemeProvider>
   );

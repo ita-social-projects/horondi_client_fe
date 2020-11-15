@@ -29,6 +29,7 @@ const ConstructorPreview = () => {
       className={styles.constructorPreview}
       onClick={() => setIsPlaying(!isPlaying)}
       id='constructor'
+      data-section-style='dark'
     >
       <ReactPlayer
         width='100%'
@@ -36,6 +37,7 @@ const ConstructorPreview = () => {
         playing={isPlaying}
         volume={0}
         playsinline={false}
+        loop
         muted
         url='https://www.youtube.com/watch?v=KG1y-lk2f0E&ab_channel=Ukra%D1%97ner'
       />

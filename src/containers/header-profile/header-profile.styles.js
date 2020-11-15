@@ -28,12 +28,12 @@ export const useStyles = makeStyles(() => ({
       position: 'absolute',
       left: '5px',
       top: '1px',
-      zIndex: 20,
+      zIndex: 2,
       borderRadius: '50%'
     },
     '& svg': {
       position: 'relative',
-      zIndex: 2,
+      zIndex: 5,
       fontSize: '2rem',
       color: props.logged ? 'black' : 'white'
     }

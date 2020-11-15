@@ -8,7 +8,6 @@ import { useStyles } from './home.styles';
 import ScrollBar from '../../components/scroll-bar';
 import ConstructorPreview from './contructor-preview';
 import ModelsList from './modles-list';
-import CircularLoadingBar from '../../components/circular-loading-bar';
 import { Loader } from '../../components/loader/loader';
 import { getHomePageSliderImages } from '../../redux/homepage-slider/homepage-slider.actions';
 
@@ -18,21 +17,23 @@ const Home = () => {
     sliderLoading: HomePageSlider.loading
   }));
 
-
   const dispatch = useDispatch();
   const styles = useStyles();
   const homeRef = useRef(null);
 
-  const [currentSection, setCurrentSection] = useState({ id: '#slider', sectionStyle: 'light' });
+  const [currentSection, setCurrentSection] = useState({ id: '#slider', sectionStyle: 'light', index: 0 });
+  const [isScrolling, setIsScrolling] = useState(false)
 
   useEffect(() => {
     dispatch(getHomePageSliderImages());
   }, [dispatch]);
 
-  const scrollHandler = () => {
-    if (!homeRef.current) {
+  const scrollHandler = (e) => {
+    if (!homeRef.current || isScrolling) {
       return;
     }
+
+    setIsScrolling(true)
 
     const windowMiddle = window.scrollY + window.innerHeight / 2;
     const sectionsData = Array.from(homeRef.current.children)
@@ -54,24 +55,54 @@ const Home = () => {
         };
       });
 
-    const sectionOnView = sectionsData.find((el, i, arr) => {
-      return el.sectionStart <= windowMiddle && el.sectionEnd >= windowMiddle;
-    });
+    const currentSectionIndex = currentSection.index
 
-    console.log(sectionOnView);
+    if (e.wheelDelta > 0) {
+      const isElementExist = !!sectionsData[currentSectionIndex - 1]
+      console.log('UP');
+      console.log(sectionsData);
+      console.log(currentSectionIndex - 1);
+      console.log(sectionsData[currentSectionIndex - 1]);
+
+      const nextSection = {
+        id: sectionsData[currentSectionIndex - 1].id,
+        sectionStyle: sectionsData[currentSectionIndex - 1].sectionStyle,
+        index: sectionsData[currentSectionIndex - 1].index
+      }
+      isElementExist && setCurrentSection(nextSection);
+
+      window.scrollTo(0, nextSection.sectionStart)
+
+    } else if (e.wheelDelta < 0) {
+      console.log('DOWN');
+      console.log(sectionsData);
+      console.log(currentSectionIndex + 1);
+      console.log(sectionsData[currentSectionIndex + 1]);
+      const isElementExist = !!sectionsData[currentSectionIndex + 1]
+
+      const nextSection = {
+        id: sectionsData[currentSectionIndex + 1].id,
+        sectionStyle: sectionsData[currentSectionIndex + 1].sectionStyle,
+        index: sectionsData[currentSectionIndex + 1].index
+      }
+      isElementExist && setCurrentSection(nextSection);
+
+      window.scrollTo(0, nextSection.sectionStart)
+    }
+    const sectionOnView = sectionsData.find((el, i, arr) => el.sectionStart <= windowMiddle && el.sectionEnd >= windowMiddle);
 
     if (sectionOnView && sectionOnView.id !== currentSection.id) {
-      //console.log(sectionOnView);
-      // window.scrollTo(0, sectionOnView.sectionStart)
-      setCurrentSection({ id: sectionOnView.id, sectionStyle: sectionOnView.sectionStyle });
-    }
 
+      setCurrentSection({ id: sectionOnView.id, sectionStyle: sectionOnView.sectionStyle });
+      window.scrollTo(0, sectionOnView.sectionStart)
+    }
   };
 
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('mousewheel', scrollHandler)
 
-    return () => window.removeEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('mousewheel', scrollHandler);
   }, []);
 
   if (sliderLoading) {
@@ -84,11 +115,11 @@ const Home = () => {
       className={styles.home}
       data-cy='home-page'
     >
-      <SliderHomePage/>
-      <CategoriesList/>
-      <ConstructorPreview/>
-      <ModelsList/>
-      <OurLooks/>
+      <SliderHomePage />
+      <CategoriesList />
+      <ConstructorPreview />
+      <ModelsList />
+      <OurLooks />
       <ScrollBar
         currentSection={currentSection}
       />

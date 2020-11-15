@@ -13,7 +13,7 @@ import PriceFilter from './price-filter';
 import ModelsFilter from './models-filter';
 import HotItemFilter from './hot-item-filter';
 
-import useStyles from './product-list-filter.styles';
+import { useStyles } from './product-list-filter.styles';
 import {
   getFiltredProducts,
   setColorsFilter,
@@ -37,28 +37,11 @@ const ProductListFilter = () => {
   const styles = useStyles();
 
   const { filterData, filters, language, currency } = useSelector(
-    ({
-      Products: {
-        filterData,
-        currentPage,
-        countPerPage,
-        sortByPrice,
-        sortByRate,
-        sortByPopularity,
-        filters
-      },
-      Language: { language },
-      Currency: { currency }
-    }) => ({
-      filterData,
-      currentPage,
-      countPerPage,
-      sortByPrice,
-      sortByRate,
-      sortByPopularity,
-      filters,
-      language,
-      currency
+    ({ Products, Language, Currency }) => ({
+      filterData: Products.filterData,
+      filters: Products.filters,
+      language: Language.language,
+      currency: Currency.currency
     })
   );
 
@@ -125,12 +108,33 @@ const ProductListFilter = () => {
               {CLEAR_FILTER_BUTTON_TEXT[language].value}
             </Button>
           </FormGroup>
-          <HotItemFilter />
-          <PriceFilter />
-          <CategoryFilter />
-          <ModelsFilter />
-          <ColorsFilter />
-          <PatternsFilter />
+          <HotItemFilter filters={filters} language={language} />
+          <PriceFilter
+            filterData={filterData}
+            filters={filters}
+            language={language}
+            currency={currency}
+          />
+          <CategoryFilter
+            filterData={filterData}
+            filters={filters}
+            language={language}
+          />
+          <ModelsFilter
+            filterData={filterData}
+            filters={filters}
+            language={language}
+          />
+          <ColorsFilter
+            filterData={filterData}
+            filters={filters}
+            language={language}
+          />
+          <PatternsFilter
+            filterData={filterData}
+            filters={filters}
+            language={language}
+          />
         </FormControl>
       </Paper>
     </div>

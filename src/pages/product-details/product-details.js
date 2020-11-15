@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Card } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
 import Comments from './comments';
@@ -20,27 +21,24 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
   const {
     product,
     isLoading,
-    productUrl,
     categoryFilter,
     productToSend,
     currency
   } = useSelector(
     ({
       Currency,
-      Products: { product, productLoading, productToSend, filters },
-      router
+      Products: { product, productLoading, productToSend, filters }
     }) => ({
       currency: Currency.currency,
       categoryFilter: filters.categoryFilter,
       isLoading: productLoading,
-      productUrl: router.location.pathname,
       product,
       productToSend
     })
@@ -53,12 +51,27 @@ const ProductDetails = ({ match }) => {
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
-  const { _id, name, basePrice, images, options = [], category } =
-    product || {};
+  const {
+    _id: productId,
+    name: productName,
+    basePrice,
+    images,
+    options = [],
+    category
+  } = product || {};
 
   const { selectedSize } = productToSend;
 
-  const { volumeInLiters, weightInKg } = (options[0] && options[0].size) || {};
+  const defaultSize = useMemo(
+    () =>
+      options[0]
+        ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE)
+        : {},
+    [options]
+  );
+
+  const { volumeInLiters, weightInKg } =
+    (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -70,11 +83,10 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
-          _id,
-          name,
-          images,
-          productUrl,
-          totalPrice: +(basePrice[currency].value / 100).toFixed(2),
+          _id: productId,
+          name: productName,
+          image: images.primary.small,
+          totalPrice: basePrice,
           dimensions: { volumeInLiters, weightInKg }
         })
       );
@@ -91,10 +103,9 @@ const ProductDetails = ({ match }) => {
     product,
     category,
     dispatch,
-    _id,
-    name,
+    productId,
+    productName,
     images,
-    productUrl,
     currency
   ]);
 
@@ -141,6 +152,20 @@ const ProductDetails = ({ match }) => {
     [options]
   );
 
+  const productAdditions = useMemo(
+    () =>
+      options.length
+        ? uniqueAdditions.map(
+            (item) =>
+              options
+                .filter(({ additions }) => additions.length > 0)
+                .find(({ additions: [{ name }] }) => item === name[1].value)
+                .additions[0]
+          )
+        : null,
+    [uniqueAdditions, options]
+  );
+
   const sizes = useMemo(
     () =>
       options.length
@@ -164,38 +189,27 @@ const ProductDetails = ({ match }) => {
     [uniqueBottomMaterials, options]
   );
 
-  const additions = useMemo(
-    () =>
-      options.length
-        ? uniqueAdditions.map(
-            (item) =>
-              options
-                .filter(({ additions }) => additions.length > 0)
-                .find(({ additions: [{ name }] }) => item === name[1].value)
-                .additions[0]
-          )
-        : null,
-    [uniqueAdditions, options]
-  );
-
   const handleSizeChange = (id) => {
     const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[currency]
-          .value / 100
-      : 0;
-    const { additionalPrice, volumeInLiters, weightInKg } = sizes.find(
-      ({ _id }) => _id === id
-    );
-    const newPrice =
-      productToSend.totalPrice -
-      oldPrice +
-      additionalPrice[currency].value / 100;
+      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
+      : DEFAULT_PRICE;
+
+    const size = sizes.find(({ _id }) => _id === id);
+
+    const newTotalPrice = productToSend.totalPrice.map((item, i) => {
+      item.value =
+        item.value - oldPrice[i].value + size.additionalPrice[i].value;
+      return item;
+    });
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: newPrice.toFixed(2),
-        dimensions: { volumeInLiters, weightInKg },
+        totalPrice: newTotalPrice,
+        dimensions: {
+          volumeInLiters: size.volumeInLiters,
+          weightInKg: size.weightInKg
+        },
         selectedSize: id
       })
     );
@@ -227,7 +241,7 @@ const ProductDetails = ({ match }) => {
           <ProductFeatures
             currencySign={currencySign}
             bottomMaterials={bottomMaterials}
-            additions={additions}
+            additions={productAdditions}
           />
           <ProductSubmit
             bottomMaterials={bottomMaterials}

@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
-import useStyles from './comments-item.styles';
+import { useStyles } from './comments-item.styles';
 
 import { Loader } from '../../../../components/loader/loader';
 import EditableField from './editable-field';
@@ -99,7 +99,7 @@ const CommentsItem = ({ user, text, date, commentId }) => {
             text={text}
             handleOpen={handleOpen}
             commentId={commentId}
-            username={name}
+            firstName={name}
           />
         ) : (
           <div className={styles.text}>{text}</div>

@@ -6,9 +6,9 @@ import { GET_BUSINESS_PAGE_BY_CODE } from './business-pages.types';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 
-export function* handleBusinessPageError(e) {
+export function* handleBusinessPageError({ message }) {
   yield put(setLoading(false));
-  yield put(setError({ e }));
+  yield put(setError(message));
   yield put(push('/error-page'));
 }
 

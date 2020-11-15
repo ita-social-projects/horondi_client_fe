@@ -22,7 +22,10 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  GET_USER_ORDERS
+  GET_USER_ORDERS,
+  ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  LOGIN_BY_GOOGLE
 } from './user.types';
 
 const setUser = (user) => ({
@@ -32,6 +35,11 @@ const setUser = (user) => ({
 
 const loginUser = (payload) => ({
   type: LOGIN_USER,
+  payload
+});
+
+const loginByGoogle = (payload) => ({
+  type: LOGIN_BY_GOOGLE,
   payload
 });
 
@@ -141,9 +149,20 @@ const getUserOrders = () => ({
   type: GET_USER_ORDERS
 });
 
+const addProductToUserCartOrWishlist = (productId) => ({
+  type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+  payload: productId
+});
+
+const removeProductFromUserCartOrWishlist = (productId) => ({
+  type: REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  payload: productId
+});
+
 export {
   loginUser,
   setUser,
+  loginByGoogle,
   setUserError,
   logoutUser,
   setUserLoading,
@@ -165,5 +184,7 @@ export {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  getUserOrders
+  getUserOrders,
+  addProductToUserCartOrWishlist,
+  removeProductFromUserCartOrWishlist
 };

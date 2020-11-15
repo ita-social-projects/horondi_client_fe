@@ -14,6 +14,7 @@ export function* handleModelsLoad({ payload }) {
         $category: ID!
         ){
           getModelsByCategory(id: $category){
+            _id
             category{
               name {
                 value
@@ -43,7 +44,7 @@ export function* handleModelsLoad({ payload }) {
 }
 
 export function* handleProductsErrors(e) {
-  yield put(setError({ e }));
+  yield put(setError(e.message));
   yield put(push('/error-page'));
 }
 

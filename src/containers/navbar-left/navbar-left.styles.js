@@ -10,7 +10,8 @@ export const useStyles = makeStyles(() => ({
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     '@media (max-width: 900px)': {
-      marginRight: '10px'
+      marginLeft: '-20px',
+      fontSize: '1rem'
     }
   },
   link: {
@@ -20,6 +21,7 @@ export const useStyles = makeStyles(() => ({
     fontSize: '1.2rem',
     letterSpacing: '0.1rem',
     transition: 'all 0.3s',
+    cursor: 'pointer',
     '&:hover': {
       color: '#000000',
       backgroundColor: '#ffffff'

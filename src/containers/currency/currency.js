@@ -22,7 +22,6 @@ const Currency = () => {
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);
-
   const handleChange = (e) => {
     const targetValue = e.target.value;
     if (targetValue !== undefined) {

@@ -1,6 +1,8 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, select, call } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 import { setWishlist } from './wishlist.actions';
+import { setError } from '../error/error.actions';
 import {
   GET_WISHLIST,
   ADD_ITEM_TO_WISHLIST,
@@ -11,26 +13,65 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../services/local-storage.service';
+import {
+  removeProductFromUserWishlist,
+  addProductToUserWishlist
+} from '../user/user.operations';
+
+const key = 'wishlist';
 
 export function* handleWishlistLoad() {
-  const wishlist = getFromLocalStorage('wishlist');
+  const wishlist = getFromLocalStorage(key);
   yield put(setWishlist(wishlist));
 }
 
-export function* handleAddWishlistItem({ payload }) {
-  const wishlist = getFromLocalStorage('wishlist');
-  const newWishlist = [...wishlist, payload];
+export function* handleAddWishlistItem({ payload: product }) {
+  try {
+    const wishlist = getFromLocalStorage(key);
+    const newWishlist = [...wishlist, product];
 
-  setToLocalStorage('wishlist', newWishlist);
-  yield put(setWishlist(newWishlist));
+    setToLocalStorage(key, newWishlist);
+    yield put(setWishlist(newWishlist));
+
+    yield call(
+      handleUserWishlistOperation,
+      addProductToUserWishlist,
+      product._id
+    );
+  } catch (e) {
+    yield put(setError(e.message));
+    yield put(push('/error-page'));
+  }
 }
 
-export function* handleRemoveWishlistItem({ payload }) {
-  const wishlist = getFromLocalStorage('wishlist');
-  const newWishlist = wishlist.filter((item) => item._id !== payload._id);
+export function* handleRemoveWishlistItem({ payload: productId }) {
+  try {
+    const wishlist = getFromLocalStorage(key);
+    const newWishlist = wishlist.filter((item) => item._id !== productId);
 
-  setToLocalStorage('wishlist', newWishlist);
-  yield put(setWishlist(newWishlist));
+    setToLocalStorage(key, newWishlist);
+    yield put(setWishlist(newWishlist));
+
+    yield call(
+      handleUserWishlistOperation,
+      removeProductFromUserWishlist,
+      productId
+    );
+  } catch (e) {
+    yield put(setError({ e }));
+    yield put(push('/error-page'));
+  }
+}
+
+function* handleUserWishlistOperation(handler, productId) {
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(handler, {
+      id: userData._id,
+      productId,
+      key
+    });
+  }
 }
 
 export default function* wishlistSaga() {

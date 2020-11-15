@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: '.5rem',
     marginRight: '17px !important',
@@ -48,5 +48,3 @@ sortDiv: {
     color: 'white'
   }
 }));
-
-export default useStyles;

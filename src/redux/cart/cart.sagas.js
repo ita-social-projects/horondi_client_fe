@@ -1,4 +1,4 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import { setCart } from './cart.actions';
 import {
@@ -11,19 +11,25 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../services/local-storage.service';
+import {
+  addProductToUserCart,
+  changeQuantityIntoUserCart,
+  removeProductFromUserCart
+} from '../user/user.operations';
+
+const cartKey = 'cart';
 
 export function* handleCartLoad() {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   yield put(setCart(cart));
 }
 
 export function* handleAddCartItem({ payload }) {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   const possibleItemInCart = cart.find(
     (item) =>
       (item._id === payload._id && !item.selectedSize) ||
-      (item._id === payload._id &&
-        item.selectedSize.name === payload.selectedSize.name)
+      (item._id === payload._id && item.selectedSize === payload.selectedSize)
   );
 
   let newCart;
@@ -36,21 +42,33 @@ export function* handleAddCartItem({ payload }) {
     newCart = [...cart, payload];
   }
 
+  yield call(
+    handleUserCartOperation,
+    possibleItemInCart ? changeQuantityIntoUserCart : addProductToUserCart,
+    newCart,
+    payload
+  );
+
   yield put(setCart(newCart));
-  setToLocalStorage('cart', newCart);
+  setToLocalStorage(cartKey, newCart);
 }
 
 export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   const newCart = cart.filter(
     (item) =>
       item._id !== _id ||
       (item._id === _id &&
         item.selectedSize &&
-        item.selectedSize.name !== selectedSize.name)
+        item.selectedSize !== selectedSize)
   );
 
-  setToLocalStorage('cart', newCart);
+  yield call(handleUserCartOperation, removeProductFromUserCart, cart, {
+    _id,
+    selectedSize
+  });
+
+  setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
 
@@ -61,19 +79,39 @@ export function* handleSetCartItemQuantity({
     key
   }
 }) {
-  const cart = getFromLocalStorage('cart');
+  const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((item) => {
     if (
       (item._id === _id && !item.selectedSize) ||
-      (item._id === _id && item.selectedSize.name === selectedSize.name)
+      (item._id === _id && item.selectedSize === selectedSize)
     ) {
       // key will be true if user typing inside input
       item.quantity = key ? value || 1 : item.quantity + value;
     }
     return item;
   });
-  setToLocalStorage('cart', newCart);
+
+  yield call(handleUserCartOperation, changeQuantityIntoUserCart, newCart, {
+    _id,
+    selectedSize
+  });
+
+  setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
+}
+
+function* handleUserCartOperation(handler, list, product) {
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(handler, {
+      id: userData._id,
+      product: list.find(
+        (item) =>
+          item._id === product._id && item.selectedSize === product.selectedSize
+      ),
+      key: cartKey
+    });
+  }
 }
 
 export default function* categoriesSaga() {

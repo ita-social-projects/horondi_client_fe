@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 
 import {
   setCommentsLoading,
@@ -19,7 +19,6 @@ import {
   addComment,
   updateComment,
   deleteComment,
-  getComments,
   changeRate
 } from './comments.operations';
 
@@ -28,11 +27,14 @@ const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
 export function* handleAddComment({ payload }) {
   try {
     yield put(setCommentsLoading(true));
-    yield call(addComment, payload);
-    const comments = yield call(getComments, payload.product);
-    yield put(setComments(comments));
-    yield put(setCommentsLoading(false));
-    yield call(handleSnackbar, added);
+    const addedComment = yield call(addComment, payload);
+    if (addedComment) {
+      const comments = yield select(({ Comments }) => Comments.comments);
+      const newComments = [addedComment, ...comments];
+      yield put(setComments(newComments));
+      yield call(handleSnackbar, added);
+      yield put(setCommentsLoading(false));
+    }
     if (payload.rate > 0) {
       const rate = yield call(changeRate, payload);
       yield put(setRate(rate.data.addRate));
@@ -44,10 +46,11 @@ export function* handleAddComment({ payload }) {
 
 export function* handleDeleteComment({ payload }) {
   try {
-    yield call(deleteComment, payload);
-    const comments = yield call(getComments, payload.product);
-    yield put(setComments(comments));
+    const comments = yield select(({ Comments }) => Comments.comments);
+    const newComments = comments.filter(({ _id }) => _id !== payload.comment);
+    yield put(setComments(newComments));
     yield call(handleSnackbar, deleted);
+    yield call(deleteComment, payload);
   } catch (e) {
     yield call(handleCommentsError);
   }
@@ -56,11 +59,21 @@ export function* handleDeleteComment({ payload }) {
 export function* handleUpdateComment({ payload }) {
   try {
     yield put(setUpdatingComment(payload.comment));
-    yield call(updateComment, payload);
-    const comments = yield call(getComments, payload.product);
-    yield put(setComments(comments));
-    yield put(setUpdatingComment(null));
-    yield call(handleSnackbar, updated);
+    const updatedComment = yield call(updateComment, payload);
+    if (updatedComment) {
+      const comments = yield select(({ Comments }) => Comments.comments);
+      const commentToUpdate = comments.findIndex(
+        ({ _id }) => _id === updatedComment._id
+      );
+      const newComments = [
+        ...comments.slice(0, commentToUpdate),
+        updatedComment,
+        ...comments.slice(commentToUpdate + 1)
+      ];
+      yield put(setComments(newComments));
+      yield put(setUpdatingComment(null));
+      yield call(handleSnackbar, updated);
+    }
   } catch (e) {
     yield put(setUpdatingComment(null));
     yield put(setSnackBarSeverity('error'));

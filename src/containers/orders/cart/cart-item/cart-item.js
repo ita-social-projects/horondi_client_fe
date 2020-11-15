@@ -10,9 +10,15 @@ import NumberInput from '../../../../components/number-input';
 import { setCartItemQuantity } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 
-const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
+const CartItem = ({
+  item,
+  setModalVisibility,
+  setModalItem,
+  language,
+  currency
+}) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.images.primary.large}` });
+  const styles = useStyles({ image: `${IMG_URL}${item.image}` });
 
   const onChangeQuantity = (value, key) => {
     dispatch(setCartItemQuantity(item, +value, key));
@@ -27,17 +33,17 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
     <div className={styles.root} data-cy='cart-item'>
       <div className={styles.itemData}>
         <div className={styles.image} data-cy='cart-item-img'>
-          <Link to={item.productUrl}>
+          <Link to={`/product/${item._id}`}>
             <b />
           </Link>
         </div>
         <div className={styles.description} data-cy='cart-item-description'>
-          <Link to={item.productUrl}>
+          <Link to={`/product/${item._id}`}>
             <span className={styles.itemName}>{item.name[language].value}</span>
           </Link>
           {item.selectedSize && (
             <span>
-              {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
+              {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
             </span>
           )}
           {item.bagBottom.value && (
@@ -46,7 +52,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
               {item.bagBottom.name[language].value}
             </span>
           )}
-          {item.sidePocket.isSelected && (
+          {item.sidePocket && (
             <span>
               {CART_TABLE_FIELDS[language].sidePocket}:{' '}
               <DoneIcon className={styles.doneIcon} />
@@ -61,7 +67,10 @@ const CartItem = ({ item, setModalVisibility, setModalItem, language }) => {
         />
       </div>
       <div className={styles.price}>
-        <span>{Number(item.totalPrice).toFixed(2)} UAH</span>
+        <span>
+          {item.totalPrice[currency].value / 100}{' '}
+          {item.totalPrice[currency].currency}
+        </span>
         <DeleteIcon
           className={styles.trash}
           onClick={onRemoveItem}

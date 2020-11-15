@@ -5,14 +5,13 @@ import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-import useStyles from './product-submit.styles';
+import { useStyles } from './product-submit.styles';
 
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import { getFromLocalStorage } from '../../../services/local-storage.service';
 
 import {
   PDP_BUTTONS,
@@ -22,15 +21,16 @@ import {
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product } = useSelector(
-    ({ Language, Products }) => ({
+  const { language, productToSend, product, wishlistItems } = useSelector(
+    ({ Language, Products, User, Wishlist }) => ({
       language: Language.language,
       productToSend: Products.productToSend,
-      product: Products.product
+      product: Products.product,
+      userData: User.userData,
+      wishlistItems: Wishlist.list
     })
   );
 
-  const wishlistItems = getFromLocalStorage('wishlist');
   const { selectedSize } = productToSend;
 
   const isWishful = useMemo(
@@ -39,7 +39,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   );
 
   const sizeToSend = useMemo(
-    () => (sizes ? sizes.find(({ _id }) => _id === selectedSize) : null),
+    () => sizes.find(({ _id }) => _id === selectedSize),
     [selectedSize, sizes]
   );
 
@@ -48,16 +48,29 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     : TOOLTIPS[language].addWishful;
 
   const onWishfulHandler = () => {
+    const {
+      _id,
+      name,
+      basePrice,
+      images: { primary }
+    } = product;
     if (isWishful) {
-      dispatch(removeItemFromWishlist(productToSend));
+      dispatch(removeItemFromWishlist(_id));
     } else {
-      dispatch(addItemToWishlist(productToSend));
+      dispatch(
+        addItemToWishlist({ _id, name, basePrice, images: { primary } })
+      );
     }
   };
 
   const onAddToCart = () => {
     if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
+      dispatch(
+        addItemToCart({
+          ...productToSend,
+          selectedSize: sizeToSend ? sizeToSend.name : ''
+        })
+      );
     } else {
       setSizeIsNotSelectedError(true);
     }
@@ -65,7 +78,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   const onAddToCheckout = () => {
     if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(addItemToCart({ ...productToSend, selectedSize: sizeToSend }));
+      dispatch(
+        addItemToCart({
+          ...productToSend,
+          selectedSize: sizeToSend ? sizeToSend.name : ''
+        })
+      );
       dispatch(push('/checkout'));
     } else {
       setSizeIsNotSelectedError(true);

@@ -1,3 +1,3 @@
-import NewsDetailPage from './news-detail';
+import NewsDetail from './news-detail';
 
-export default NewsDetailPage;
+export default NewsDetail;

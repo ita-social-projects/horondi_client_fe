@@ -61,8 +61,6 @@ export const getCategoryURL = (category) => {
     (item) => item.lang === URL_LANGUAGE
   );
 
-  console.log(filteredCategory);
-
   if (filteredCategory.value) {
     return filteredCategory.value.toLowerCase();
   }

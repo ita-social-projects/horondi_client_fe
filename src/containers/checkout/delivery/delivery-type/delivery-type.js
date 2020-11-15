@@ -22,7 +22,7 @@ import {
   getFondyData,
   getNovaPoshtaCities
 } from '../../../../redux/checkout/checkout.actions';
-import SimpleModal from './modal/modal';
+import SimpleModal from './modal/order-form-modal';
 
 const DeliveryType = ({
   deliveryType,

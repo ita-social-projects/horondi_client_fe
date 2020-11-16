@@ -5,14 +5,14 @@ import Currency from '../currency';
 import Language from '../language';
 import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
-import HeaderSearchBar from '../header-search-bar';
+import HeaderSearchBar from '../search-bar';
 
 const HeaderRightBar = ({ fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
 
   return (
     <div className={styles.root}>
-      <HeaderSearchBar />
+      <HeaderSearchBar fromSideBar={fromSideBar} />
       <Currency fromSideBar={fromSideBar} />
       <Language fromSideBar={fromSideBar} />
       <CartHeader fromSideBar={fromSideBar} />

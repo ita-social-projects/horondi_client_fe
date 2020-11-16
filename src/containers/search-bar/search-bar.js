@@ -1,23 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
 
-import { useStyles, defaultStyles } from './header-search-bar.styles';
+import { useStyles } from './search-bar.styles';
 import {
   getFiltredProducts,
   setSearchFilter
 } from '../../redux/products/products.actions';
 import { SEARCH_TEXT } from '../../translations/product-list.translations';
 
-const SearchBar = withStyles({
-  ...defaultStyles
-})(TextField);
-
-const HeaderSearchBar = () => {
+const SearchBar = ({ fromSideBar }) => {
   const language = useSelector(({ Language }) => Language.language);
 
-  const styles = useStyles();
+  const styles = useStyles({ fromSideBar });
   const dispatch = useDispatch();
 
   const handleSearch = ({ target }) => {
@@ -26,13 +21,12 @@ const HeaderSearchBar = () => {
   };
 
   return (
-    <SearchBar
-      className={styles.searchBar}
-      id='custom-css-standard-input'
+    <TextField
+      className={styles.root}
       label={SEARCH_TEXT[language].value}
       onChange={handleSearch}
     />
   );
 };
 
-export default HeaderSearchBar;
+export default SearchBar;

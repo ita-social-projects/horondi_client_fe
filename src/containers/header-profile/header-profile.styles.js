@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  profile: ({ fromSideBar }) => ({
+  profile: ({ fromSideBar, logged }) => ({
     padding: '0 4px',
     position: 'relative',
     cursor: 'pointer',
@@ -14,18 +14,6 @@ export const useStyles = makeStyles(() => ({
       '& > svg': {
         color: fromSideBar ? '#fff' : '#000'
       }
-    },
-    '&::after': {
-      display: props.logged ? 'block' : 'none',
-      content: `''`,
-      width: 30,
-      height: 30,
-      background: 'white',
-      position: 'absolute',
-      left: '5px',
-      top: '1px',
-      zIndex: 2,
-      borderRadius: '50%'
     },
     '& svg': {
       position: 'relative',

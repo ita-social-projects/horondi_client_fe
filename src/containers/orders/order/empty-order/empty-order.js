@@ -20,7 +20,7 @@ const EmptyOrder = ({ title, buttonTitle, name }) => {
     <div className={styles.root} data-cy={name}>
       <Typography variant='h2'>{title}</Typography>
       <img src={emptyOrderImgLink} alt={name} />
-      <Link to='/'>
+      <Link to='/backpacks/rolltop'>
         <Button className={styles.button} variant='contained'>
           {buttonTitle}
         </Button>

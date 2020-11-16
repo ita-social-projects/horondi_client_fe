@@ -372,6 +372,7 @@ export const profileFields = [
 ];
 
 export const carouselInterval = 5000;
+export const carouselMaterialInterval = 2000;
 
 export const moreHeaderButton = [
   {

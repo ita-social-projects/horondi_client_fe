@@ -10,7 +10,8 @@ export const useStyles = makeStyles(() => ({
     backgroundColor: '#000000',
     color: '#ffffff',
     padding: '10px',
-    display: 'flex'
+    display: 'flex',
+    clear: 'both'
   },
   cardDeck: {
     display: 'flex',

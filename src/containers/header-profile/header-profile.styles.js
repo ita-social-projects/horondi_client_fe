@@ -15,9 +15,21 @@ export const useStyles = makeStyles(() => ({
         color: fromSideBar ? '#fff' : '#000'
       }
     },
+    '&::after': {
+      display: props.logged ? 'block' : 'none',
+      content: `''`,
+      width: 30,
+      height: 30,
+      background: 'white',
+      position: 'absolute',
+      left: '5px',
+      top: '1px',
+      zIndex: 2,
+      borderRadius: '50%'
+    },
     '& svg': {
       position: 'relative',
-      zIndex: 2,
+      zIndex: 5,
       fontSize: '2rem',
       color: fromSideBar ? '#000' : '#fff'
     }

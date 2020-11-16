@@ -93,14 +93,14 @@ const ProfilePage = () => {
     validateOnBlur: shouldValidate
   });
 
-  const handleImageLoad = (event) => {
-    if (event.target.files && event.target.files[0]) {
+  const handleImageLoad = ({ target }) => {
+    if (target.files && target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (event) => {
-        setUserImageUrl(event.target.result);
+      reader.onload = ({ target: { result } }) => {
+        setUserImageUrl(result);
       };
-      reader.readAsDataURL(event.target.files[0]);
-      setUpload(event.target.files[0]);
+      reader.readAsDataURL(target.files[0]);
+      setUpload(target.files[0]);
     }
   };
 

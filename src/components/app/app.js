@@ -5,6 +5,7 @@ import { CssBaseline } from '@material-ui/core';
 import { getBurgerMenuLinks } from '../../redux/burger-menu/burger-menu.actions';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
+import SearchBarList from '../../containers/search-bar-list';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
@@ -61,8 +62,9 @@ const App = () => {
   return (
     <ThemeProvider theme={themeValue}>
       <CssBaseline />
-        <Routes />
+      <Routes />
       <Chat />
+      <SearchBarList />
     </ThemeProvider>
   );
 };

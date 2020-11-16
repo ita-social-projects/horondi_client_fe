@@ -17,6 +17,7 @@ const getAllProducts = async () => {
             }
             basePrice {
               value
+              currency
             }
             model {
               value
@@ -101,6 +102,7 @@ const getFilteredProducts = async ({ state, currency }) => {
             }
             basePrice {
               value
+              currency
             }
             model {
               value

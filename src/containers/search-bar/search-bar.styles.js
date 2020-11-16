@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
       color: fromSideBar ? 'rgb(0 0 0 / 54%)' : 'rgb(255 255 255 / 54%)'
     },
     '& .MuiInputBase-input': {
-      color: 'white'
+      color: fromSideBar ? 'black' : 'white'
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
       borderBottomColor: fromSideBar ? '#353535' : '#dedede'

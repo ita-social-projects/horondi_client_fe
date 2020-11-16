@@ -5,7 +5,8 @@ export const ClassicButton = ({
   buttonType,
   innerText,
   onClickHandler,
-  style
+  buttonStyle,
+  customStyles = {}
 }) => {
   const styles = useStyles();
 
@@ -13,7 +14,8 @@ export const ClassicButton = ({
     <button
       type={buttonType}
       onClick={onClickHandler}
-      className={styles[style]}
+      className={styles[buttonStyle]}
+      style={{ ...customStyles }}
     >
       {innerText}
     </button>

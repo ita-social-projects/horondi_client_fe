@@ -36,9 +36,7 @@ const ModelsList = () => {
   }
 
   return (
-    <div className={styles.root}
-         data-section-style='light'
-         id='models'>
+    <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>
         {models.map((model) => (
           <ModelItem key={model._id} model={model} />
@@ -55,7 +53,7 @@ const ModelsList = () => {
         </Link>
       </div>
       <ClassicButton
-        style={isModelsVisible ? 'classic' : 'inverse'}
+        buttonStyle={isModelsVisible ? 'classic' : 'inverse'}
         buttonType='text'
         innerText={
           isModelsVisible

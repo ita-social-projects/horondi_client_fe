@@ -47,7 +47,6 @@ export const initialState = {
   filterData: [],
   product: null,
   products: [],
-  searchBarProducts: [],
   pagesCount: 1,
   commentsLoading: false,
   updatingComment: null,
@@ -88,11 +87,6 @@ const productsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         products: action.payload
-      };
-    case SET_ALL_PRODUCTS_FOR_SEARCH_BAR:
-      return {
-        ...state,
-        searchBarProducts: action.payload
       };
     case SET_ALL_FILTER_DATA:
       return {

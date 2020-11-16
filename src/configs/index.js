@@ -426,6 +426,8 @@ export const SCROLL_BAR_DATA = [
   }
 ];
 
+export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
+
 export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';

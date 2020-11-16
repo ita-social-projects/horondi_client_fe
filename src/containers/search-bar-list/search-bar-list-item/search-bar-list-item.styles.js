@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   searchBarListItem: {
     display: 'flex',
-    height: 100,
+    height: 110,
     width: '100%',
     padding: 10,
     borderBottom: '1px solid #c3c3c3'

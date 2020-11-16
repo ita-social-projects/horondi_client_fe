@@ -37,9 +37,9 @@ const SearchBarListItem = ({ product }) => {
       <div className={styles.image} style={{ backgroundSize: 'cover' }} />
       <div className={styles.content}>
         <div className={styles.title}>
-          <Typography variant='h5'>{product.name[language].value}</Typography>
+          <Typography variant='h4'>{product.name[language].value}</Typography>
           <div>
-            {product.basePrice[currency].value}{' '}
+            {product.basePrice[currency].value / 100}{' '}
             {product.basePrice[currency].currency}
           </div>
         </div>

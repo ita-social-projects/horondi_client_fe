@@ -4,11 +4,12 @@ export const useStyles = makeStyles(() => ({
   root: ({ fromSideBar }) => ({
     height: 61,
     margin: '0 8px',
+    display: fromSideBar ? 'none' : 'inline',
     '& label.Mui-focused': {
-      color: fromSideBar ? 'black' : 'white'
+      color: 'white'
     },
     '& .MuiInput-underline:after, & .MuiInput-underline:before': {
-      borderBottomColor: fromSideBar ? 'black' : 'white'
+      borderBottomColor: 'white'
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -18,17 +19,17 @@ export const useStyles = makeStyles(() => ({
         borderColor: 'yellow'
       },
       '&.Mui-focused fieldset': {
-        borderColor: fromSideBar ? 'black' : 'white'
+        borderColor: 'white'
       }
     },
     '& .MuiFormLabel-root': {
-      color: fromSideBar ? 'rgb(0 0 0 / 54%)' : 'rgb(255 255 255 / 54%)'
+      color: 'rgb(255 255 255 / 54%)'
     },
     '& .MuiInputBase-input': {
-      color: fromSideBar ? 'black' : 'white'
+      color: 'white'
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: fromSideBar ? '#353535' : '#dedede'
+      borderBottomColor: '#dedede'
     }
   })
 }));

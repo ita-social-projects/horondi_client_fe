@@ -7,12 +7,10 @@ import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-l
 import { Loader } from '../../../components/loader/loader';
 
 const OurLooks = () => {
-  const { looksImages, loading } = useSelector(
-    ({ Language, HomePageImages }) => ({
-      looksImages: HomePageImages.imageList,
-      loading: HomePageImages.homeImagesLoading
-    })
-  );
+  const { looksImages, loading } = useSelector(({ HomePageImages }) => ({
+    looksImages: HomePageImages.imageList,
+    loading: HomePageImages.homeImagesLoading
+  }));
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -36,8 +34,8 @@ const OurLooks = () => {
     >
       <div className={styles.imageSection}>
         {looksImages.length
-          ? looksImages.map((image) => (
-              <div key={image.images.medium} className={styles.imageWrapper}>
+          ? looksImages.slice(0, 7).map((image) => (
+              <div key={image._id} className={styles.imageWrapper}>
                 <div
                   className={styles.image}
                   style={{

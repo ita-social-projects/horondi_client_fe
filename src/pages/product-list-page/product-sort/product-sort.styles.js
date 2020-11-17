@@ -30,6 +30,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     lineHeight: '25px !important',
+    '@media (max-width:500px)': {
+      justifyContent: 'center !important',
+      alignItems: 'baseline'
+    },
     '& div': {
       '@media (max-width:500px)': {
         marginRight: '0 !important',

@@ -1,4 +1,4 @@
-const query = `query {
+export const getCategoriesForBurgerMenuQuery = `query {
     getCategoriesForBurgerMenu{
       category {
         _id
@@ -16,4 +16,3 @@ const query = `query {
       }
     }
   }`;
-export default query;

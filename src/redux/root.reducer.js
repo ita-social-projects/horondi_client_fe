@@ -20,6 +20,7 @@ import Checkout from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 import HeaderLinks from './header-links/header-links.reducer';
 import HomePageImages from './home-page-looks/home-page-looks.reducer';
+import Pattern from './pattern/pattern.reducer';
 import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
 
@@ -47,7 +48,9 @@ const rootReducer = (history) =>
     HeaderLinks,
     HomePageImages,
     HomePageSlider,
-    SearchBar
+    SearchBar,
+    Pattern,
+    HomePageSlider
   });
 
 export default rootReducer;

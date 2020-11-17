@@ -12,12 +12,7 @@ import {
   setSearchFilter
 } from '../../../../redux/products/products.actions';
 import { HOME_BUTTONS } from '../../../../translations/homepage.translations';
-
-const images = [
-  'https://i.imgur.com/YrV1ajs.png',
-  'https://i.imgur.com/ET5P2BQ.png',
-  'https://i.imgur.com/EgQqur6.png'
-];
+import { IMG_URL } from '../../../../configs';
 
 const ModelItem = ({ model }) => {
   const { language, filterData } = useSelector(({ Language, Products }) => ({
@@ -50,7 +45,7 @@ const ModelItem = ({ model }) => {
     >
       <div className={styles.modelItemTitle}>{model.name[language].value}</div>
       <div className={styles.modelItemImage}>
-        <img src={images[Math.floor(Math.random() * (2 + 1))]} alt='model' />
+        <img src={IMG_URL + model.images.small} alt='model' />
       </div>
       <Link
         className={styles.link}

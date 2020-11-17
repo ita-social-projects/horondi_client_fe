@@ -10,6 +10,7 @@ export const useStyles = makeStyles(() => ({
     height: 200,
     position: 'relative',
     boxShadow: '0px 5px 8px #c5c5c5',
+    backgroundColor: '#f7f7f7',
     zIndex: '3',
     '& > *': {
       flex: 1

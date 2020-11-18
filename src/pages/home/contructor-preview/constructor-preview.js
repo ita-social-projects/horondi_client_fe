@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
+import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
 
 const ConstructorPreview = () => {
   const { language } = useSelector(({ Language, HomePageImages }) => ({
@@ -39,7 +41,7 @@ const ConstructorPreview = () => {
         playsinline={false}
         loop
         muted
-        url='https://www.youtube.com/watch?v=KG1y-lk2f0E&ab_channel=Ukra%D1%97ner'
+        url={CONSTRUCTOR_VIDEO_LINK}
       />
       <div
         className={styles.constructorInner}
@@ -49,7 +51,7 @@ const ConstructorPreview = () => {
         <ExpandLessIcon className={styles.constructorInnerIcon} />
         <Link to='/constructor' className={styles.constructorInnerLink}>
           {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
-          <span>&#8594;</span>
+          <ArrowRightAltIcon />
         </Link>
       </div>
     </div>

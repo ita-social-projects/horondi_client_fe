@@ -9,6 +9,7 @@ import CircularLoadingBar from '../../../components/circular-loading-bar';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from './model-item';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
+import { UNIQUE_MODEL_IMAGE_LINK } from '../../../configs';
 
 const ModelsList = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const ModelsList = () => {
           <div
             className={modelItemStyles.modelItemImage}
             style={{
-              background: `url(https://i.imgur.com/ygJaph4.jpg) center center`,
+              background: `url(${UNIQUE_MODEL_IMAGE_LINK}) center center`,
               backgroundSize: 'cover'
             }}
           />

@@ -10,6 +10,7 @@ import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
+import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 
 const SearchBarListItem = ({ product }) => {
   const { language, currency, isLightTheme } = useSelector(
@@ -47,12 +48,12 @@ const SearchBarListItem = ({ product }) => {
           <ClassicButton
             buttonType='button'
             innerText={<ShoppingBasketIcon />}
-            onClickHandler={() => console.log('to cart')}
+            onClickHandler={() => {}}
             buttonStyle='classic'
           />
           <ClassicButton
             buttonType='button'
-            innerText='ДЕТАЛІ'
+            innerText={HOME_BUTTONS[language].DETAILS}
             onClickHandler={() => dispatch(push(`/product/${product._id}`))}
             buttonStyle='classic'
           />

@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './search-bar-list.styles';
 import { NOTHING_FOUND_MESSAGE } from '../../configs';
 import SearchBarListItem from './search-bar-list-item';
 import CircularLoadingBar from '../../components/circular-loading-bar';
-import { setProductsForSearchBar } from '../../redux/search-bar/search-bar.actions';
 
 const SearchBarList = () => {
   const {
@@ -22,9 +21,6 @@ const SearchBarList = () => {
   }));
 
   const styles = useStyles();
-  const dispatch = useDispatch();
-
-  useEffect(() => () => dispatch(setProductsForSearchBar([])), [dispatch]);
 
   return (
     <>

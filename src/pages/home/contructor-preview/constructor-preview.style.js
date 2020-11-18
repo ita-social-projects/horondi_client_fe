@@ -49,8 +49,10 @@ export const useStyles = makeStyles((theme) => ({
   constructorInnerLink: {
     color: 'white',
     fontSize: '3em',
-    '& span': {
-      marginLeft: '10px'
+    display: 'flex',
+    '& svg': {
+      marginLeft: '10px',
+      fontSize: '1.4em'
     }
   }
 }));

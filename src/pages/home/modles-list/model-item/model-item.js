@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import { useStyles } from './model-item.style';
 import {
@@ -52,7 +53,7 @@ const ModelItem = ({ model }) => {
         to={`/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
       >
         {HOME_BUTTONS[language].MOVE_TO_MODEL}
-        <span>&#8594;</span>
+        <ArrowRightAltIcon />
       </Link>
     </div>
   );

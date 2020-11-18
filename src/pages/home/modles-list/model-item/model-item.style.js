@@ -73,8 +73,10 @@ export const useStyles = makeStyles(() => ({
     zIndex: 10,
     color: 'white',
     fontSize: '1em',
-    '& span': {
-      marginLeft: '5px'
+    display: 'flex',
+    '& svg': {
+      marginLeft: '5px',
+      fontSize: '1.2em'
     }
   }
 }));

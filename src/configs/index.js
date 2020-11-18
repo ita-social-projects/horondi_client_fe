@@ -414,7 +414,7 @@ export const SCROLL_BAR_DATA = [
     href: '#catalog'
   },
   {
-    name: ['Конструктор', 'Constructor'],
+    name: ['Змоделюй рюкзак сам', 'Model backpack by yourself'],
     href: '#constructor'
   },
   {

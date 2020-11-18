@@ -20,7 +20,6 @@ import {
   GET_FILTRED_PRODUCTS,
   GET_PRODUCT
 } from './products.types';
-import { GET_PRODUCTS_FOR_SEARCH_BAR } from '../search-bar/search-bar.types';
 
 import {
   getAllProducts,

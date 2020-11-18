@@ -29,9 +29,10 @@ const ScrollBar = ({ homeRef }) => {
       .slice(0, 5)
       .filter((item) => item.id)
       .map((item, i) => {
-        const styles = window.getComputedStyle(item);
+        const sectionStyles = window.getComputedStyle(item);
         const margin =
-          parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
+          parseFloat(sectionStyles.marginTop) +
+          parseFloat(sectionStyles.marginBottom);
 
         return {
           id: `#${item.id}`,

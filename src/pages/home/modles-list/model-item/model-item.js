@@ -23,8 +23,8 @@ const ModelItem = ({ model }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const handleClick = (model) => {
-    dispatch(setModelsFilter([model.name[1].value]));
+  const handleClick = (selectedModel) => {
+    dispatch(setModelsFilter([selectedModel.name[1].value]));
     dispatch(setPatternsFilter([]));
     dispatch(setColorsFilter([]));
     dispatch(setSearchFilter(''));

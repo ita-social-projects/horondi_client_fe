@@ -23,8 +23,7 @@ import {
   SET_COMMENTS_LOADING,
   SET_UPDATING_COMMENT,
   SET_PRODUCT_TO_SEND,
-  CLEAR_PRODUCT_TO_SEND,
-  SET_ALL_PRODUCTS_FOR_SEARCH_BAR
+  CLEAR_PRODUCT_TO_SEND
 } from './products.types';
 
 export const initialState = {

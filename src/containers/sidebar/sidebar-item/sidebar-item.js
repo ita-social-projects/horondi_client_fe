@@ -30,14 +30,14 @@ const SideBarItem = ({
   };
   return (
     <>
-      <div className={mainItemStyles}>
+      <li className={mainItemStyles}>
         <ListItemText
           button='true'
           onClick={handleClick}
           primary={name[language].value}
         />
         {isListOpen ? <RemoveIcon /> : <AddIcon />}
-      </div>
+      </li>
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>
         <List className={styles.list}>

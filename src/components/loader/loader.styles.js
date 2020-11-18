@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   wrapper: {
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: 'calc(100vh - 200px)',
     overflow: 'hidden',
     display: 'flex',
     animationName: '',

@@ -58,7 +58,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       <Link to='/constructor' className={styles.mainItem}>
         <span>{CONSTRUCTOR[language].value}</span>
       </Link>
-      <List className={styles.list}>{categoriesList}</List>
+      <List>{categoriesList}</List>
       {subList}
       <FooterLinks
         socialIconsStyles={styles.socialIconsStyles}

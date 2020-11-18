@@ -49,7 +49,7 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
       yield put(setSearchBarLoading(false));
     } else {
       yield put(setAllProducts(products.items));
-      yield put(setProductsLoading(true));
+      yield put(setProductsLoading(false));
     }
   } catch (e) {
     yield call(handleProductsErrors, e);

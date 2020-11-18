@@ -5,21 +5,21 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiDrawer-paper': {
       top: fromSideBar ? 0 : 64,
       padding: theme.spacing(3),
-      height: fromSideBar ? '100vh' : 'calc(100vh - 64px)'
+      height: fromSideBar ? '100vh' : 'calc(100vh - 64px)',
+      width: 'fit-content',
+      minWidth: '300px',
+      maxWidth: '450px'
     }
   }),
-  list: {
-    width: '400px'
-  },
   mainItem: {
     color: theme.palette.textColor,
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
-    margin: '0 20px',
     cursor: 'pointer',
+    width: '100%',
     '& span, & svg': {
-      fontSize: '2em'
+      fontSize: '1.5em'
     },
     '&:hover span': {
       textDecoration: 'underline'
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0 20px',
     cursor: 'pointer',
     '& span': {
-      fontSize: '1.3em'
+      fontSize: '1em'
     },
     '&:hover span': {
       textDecoration: 'underline'

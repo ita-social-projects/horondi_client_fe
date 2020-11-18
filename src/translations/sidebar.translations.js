@@ -1,8 +1,8 @@
 export const CONSTRUCTOR = {
   0: {
-    value: 'Конструктор'
+    value: 'Змоделюй рюкзак сам'
   },
   1: {
-    value: 'Constructor'
+    value: 'Model backpack by yourself'
   }
 };

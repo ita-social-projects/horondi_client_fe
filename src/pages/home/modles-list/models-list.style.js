@@ -11,11 +11,7 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     transition: 'height 1s ease',
     '& button': {
-      zIndex: 10,
-      position: !isModelsVisible ? 'absolute' : 'static',
-      top: '50%',
-      bottom: '30px',
-      transform: !isModelsVisible ? 'translateY(-50%)' : 'translateY(0)'
+      zIndex: 10
     }
   }),
   modelsWrapper: ({ isModelsVisible }) => ({

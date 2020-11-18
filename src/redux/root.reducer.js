@@ -49,8 +49,7 @@ const rootReducer = (history) =>
     HomePageImages,
     HomePageSlider,
     SearchBar,
-    Pattern,
-    HomePageSlider
+    Pattern
   });
 
 export default rootReducer;

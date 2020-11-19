@@ -26,27 +26,13 @@ export const FOOTER_INFORMATION = {
 export const FOOTER_CONTACTS = {
   0: {
     title: 'Контакти',
-    items: [
-      { id: 1, url: '#', item: '+38 096 173 73 61' },
-      { id: 2, url: '#', item: 'horondi@gmail.com' },
-      { id: 3, url: '#', item: 'Львів, вул.Заводська,31' }
-    ],
     map: {
-      id: 4,
-      url: 'https://g.page/horondi?share',
       item: 'Показати на мапі'
     }
   },
   1: {
     title: 'Contacts',
-    items: [
-      { id: 1, url: '#', item: '+38 096 173 73 61' },
-      { id: 2, url: '#', item: 'horondi@gmail.com' },
-      { id: 3, url: '#', item: 'Lviv,31 Zavodska str' }
-    ],
     map: {
-      id: 4,
-      url: 'https://g.page/horondi?share',
       item: 'Show on map'
     }
   }

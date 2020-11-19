@@ -15,10 +15,10 @@ import {
 const FooterLists = () => {
   const styles = useStyles();
   const { categories, language, contacts } = useSelector(
-    ({ Categories, Language, Contacts: { loading, contacts } }) => ({
+    ({ Categories, Language, Contacts }) => ({
       categories: Categories.list,
       language: Language.language,
-      contacts
+      contacts: Contacts.contacts
     })
   );
 

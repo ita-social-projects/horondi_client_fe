@@ -16,9 +16,10 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
 
   const body = (
     <div className={styles.paper} data-cy='removing-modal'>
-      <p>
+      <p className={styles.message}>
         {message}
-        <b>{itemName}</b>?
+        <br />
+        <b>{itemName}</b> ?
       </p>
       <div className={styles.buttonGroup}>
         <Button

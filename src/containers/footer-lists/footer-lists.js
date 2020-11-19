@@ -14,11 +14,15 @@ import {
 
 const FooterLists = () => {
   const styles = useStyles();
-  const { categories, language } = useSelector(({ Categories, Language }) => ({
-    categories: Categories.list,
-    language: Language.language
-  }));
+  const { categories, language, contacts } = useSelector(
+    ({ Categories, Language, Contacts: { loading, contacts } }) => ({
+      categories: Categories.list,
+      language: Language.language,
+      contacts
+    })
+  );
 
+  console.log(contacts);
   const categoriesList = categories
     ? categories.map(({ _id, name, isMain }) =>
         isMain ? (
@@ -43,9 +47,19 @@ const FooterLists = () => {
     </div>
   ));
 
-  const contactsList = FOOTER_CONTACTS[language].items.map((item) => (
-    <div key={item.id}>
-      <Typography variant='subtitle2'>{item.item}</Typography>
+  const contactsList = contacts.map((item) => (
+    <div key={item._id}>
+      <div>
+        <Typography variant='subtitle2'>+{item.phoneNumber}</Typography>
+      </div>
+      <div>
+        <Typography variant='subtitle2'>{item.email}</Typography>
+      </div>
+      <div>
+        <Typography variant='subtitle2'>
+          {item.address[language].value}
+        </Typography>
+      </div>
     </div>
   ));
   return (

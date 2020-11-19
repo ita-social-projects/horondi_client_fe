@@ -53,5 +53,8 @@ export const useStyles = makeStyles((theme) => ({
       color: '#fff',
       backgroundColor: '#000'
     }
+  },
+  constructorItem: {
+    padding: '30px 0 0'
   }
 }));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 
@@ -16,11 +16,22 @@ const SearchBar = ({ fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const dispatch = useDispatch();
 
-  const handleSearch = ({ target }) => {
-    dispatch(setSearchFilter(target.value));
-    dispatch(getFiltredProducts({ forSearchBar: true }));
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
-    dispatch(setSearchBarVisibility(!!target.value));
+  const handleSearch = ({ target }) => {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
+    if (target.value && target.value.trim()) {
+      setSearchTimeout(
+        setTimeout(() => {
+          dispatch(setSearchFilter(target.value));
+          dispatch(getFiltredProducts({ forSearchBar: true }));
+          dispatch(setSearchBarVisibility(!!target.value));
+        }, 1000)
+      );
+    }
   };
 
   const handleOnBlur = () => {

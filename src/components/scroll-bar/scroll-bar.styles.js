@@ -36,9 +36,6 @@ const scrollBarStyles = makeStyles(() => ({
     '& > :first-child[data-id=true]': {
       backgroundColor: isDarkSection ? '#000' : '#fff',
       border: `1px solid ${isDarkSection ? '#fff' : '#000'}`
-    },
-    '& > :first-child[data-id=true] + span': {
-      display: 'inline'
     }
   }),
   sectionTitle: ({ isDarkSection }) => ({

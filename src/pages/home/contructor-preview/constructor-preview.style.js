@@ -54,5 +54,15 @@ export const useStyles = makeStyles((theme) => ({
       marginLeft: '10px',
       fontSize: '1.4em'
     }
+  },
+  playerSoundControl: {
+    position: 'absolute',
+    cursor: 'pointer',
+    zIndex: 100,
+    right: 80,
+    bottom: 30,
+    '& svg': {
+      color: 'white'
+    }
   }
 }));

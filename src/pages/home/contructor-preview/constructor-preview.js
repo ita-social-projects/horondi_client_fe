@@ -4,6 +4,8 @@ import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 
 import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
@@ -17,7 +19,7 @@ const ConstructorPreview = () => {
     loading: HomePageImages.homeImagesLoading
   }));
   const [isMouseIn, setIsMouseIn] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(0);
 
   const styles = useStyles({ isMouseIn });
   const dispatch = useDispatch();
@@ -29,18 +31,15 @@ const ConstructorPreview = () => {
   return (
     <div
       className={styles.constructorPreview}
-      onClick={() => setIsPlaying(!isPlaying)}
       id='constructor'
       data-section-style='dark'
     >
       <ReactPlayer
         width='100%'
         height='100%'
-        playing={isPlaying}
-        volume={0}
-        playsinline={false}
+        playing
+        volume={isMuted}
         loop
-        muted
         url={CONSTRUCTOR_VIDEO_LINK}
       />
       <div
@@ -53,6 +52,13 @@ const ConstructorPreview = () => {
           {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
           <ArrowRightAltIcon />
         </Link>
+      </div>
+      <div className={styles.playerSoundControl}>
+        {isMuted ? (
+          <VolumeUpIcon onClick={() => setIsMuted(0)} />
+        ) : (
+          <VolumeOffIcon onClick={() => setIsMuted(1)} />
+        )}
       </div>
     </div>
   );

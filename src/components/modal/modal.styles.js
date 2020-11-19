@@ -6,11 +6,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   paper: {
     position: 'absolute',
-    top: '50%',
+    top: '48%',
     left: '51%',
     transform: 'translate(-50%, -50%)',
     width: 400,
     backgroundColor: '#F1F3F4',
+    color: 'black',
     border: '5px solid #666',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),

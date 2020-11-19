@@ -22,7 +22,6 @@ const FooterLists = () => {
     })
   );
 
-  console.log(contacts);
   const categoriesList = categories
     ? categories.map(({ _id, name, isMain }) =>
         isMain ? (

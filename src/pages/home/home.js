@@ -12,9 +12,17 @@ import { Loader } from '../../components/loader/loader';
 import { getHomePageSliderImages } from '../../redux/homepage-slider/homepage-slider.actions';
 
 const Home = () => {
-  const sliderLoading = useSelector(
-    ({ HomePageSlider }) => HomePageSlider.loading
-  );
+  const {
+    sliderLoading,
+    ourLooksLoading,
+    categoriesLoading,
+    modelsLoading
+  } = useSelector(({ HomePageSlider, HomePageImages, Categories, Model }) => ({
+    sliderLoading: HomePageSlider.loading,
+    ourLooksLoading: HomePageImages.loading,
+    categoriesLoading: Categories.loading,
+    modelsLoading: Model.loading
+  }));
 
   const dispatch = useDispatch();
   const styles = useStyles();
@@ -26,7 +34,7 @@ const Home = () => {
     dispatch(getHomePageSliderImages());
   }, [dispatch]);
 
-  if (sliderLoading) {
+  if (sliderLoading || ourLooksLoading || categoriesLoading) {
     return <Loader />;
   }
 

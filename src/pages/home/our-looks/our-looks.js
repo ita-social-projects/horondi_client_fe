@@ -4,27 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './our-looks.style';
 import { IMG_URL } from '../../../configs';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
-import { Loader } from '../../../components/loader/loader';
 
 const OurLooks = () => {
-  const { looksImages, loading } = useSelector(({ HomePageImages }) => ({
-    looksImages: HomePageImages.imageList,
-    loading: HomePageImages.homeImagesLoading
-  }));
+  const looksImages = useSelector(
+    ({ HomePageImages }) => HomePageImages.imageList
+  );
   const styles = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllHomeImageLooks());
   }, [dispatch]);
-
-  if (loading) {
-    return (
-      <div className={styles.center}>
-        <Loader />
-      </div>
-    );
-  }
 
   return (
     <div

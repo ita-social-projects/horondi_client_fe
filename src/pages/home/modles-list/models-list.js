@@ -5,19 +5,21 @@ import { Link } from 'react-router-dom';
 import { useStyles } from './models-list.style';
 import { useStyles as useModelItemStyles } from './model-item/model-item.style';
 import { getAllModels } from '../../../redux/model/model.actions';
-import CircularLoadingBar from '../../../components/circular-loading-bar';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from './model-item';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { UNIQUE_MODEL_IMAGE_LINK } from '../../../configs';
+import CircularLoadingBar from '../../../components/circular-loading-bar';
 
 const ModelsList = () => {
   const dispatch = useDispatch();
-  const { models, loading, language } = useSelector(({ Model, Language }) => ({
-    models: Model.models,
-    loading: Model.loading,
-    language: Language.language
-  }));
+  const { models, language, modelsLoading } = useSelector(
+    ({ Model, Language }) => ({
+      models: Model.models,
+      modelsLoading: Model.loading,
+      language: Language.language
+    })
+  );
 
   const [isModelsVisible, setIsModelsVisible] = useState(false);
 
@@ -32,7 +34,7 @@ const ModelsList = () => {
     setIsModelsVisible(!isModelsVisible);
   };
 
-  if (loading) {
+  if (modelsLoading) {
     return <CircularLoadingBar />;
   }
 

@@ -13,11 +13,8 @@ import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
 
 const ConstructorPreview = () => {
-  const { language } = useSelector(({ Language, HomePageImages }) => ({
-    language: Language.language,
-    looksImages: HomePageImages.imageList,
-    loading: HomePageImages.homeImagesLoading
-  }));
+  const language = useSelector(({ Language }) => Language.language);
+
   const [isMouseIn, setIsMouseIn] = useState(false);
   const [isMuted, setIsMuted] = useState(0);
 

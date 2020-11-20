@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 
-import CircularLoadingBar from '../../../components/circular-loading-bar';
 import CategoryItem from './category-item';
 import { URL_LANGUAGE, RESPONSIVE_CATEGORIES } from '../../../configs';
 
@@ -10,13 +9,10 @@ import { useStyles } from './categories-list.style';
 import './categories-carousel.css';
 
 const CategoriesList = () => {
-  const { categories, loading, language } = useSelector(
-    ({ Categories, Language }) => ({
-      categories: Categories.list,
-      loading: Categories.loading,
-      language: Language.language
-    })
-  );
+  const { categories, language } = useSelector(({ Categories, Language }) => ({
+    categories: Categories.list,
+    language: Language.language
+  }));
   const styles = useStyles();
 
   const categoriesList = categories
@@ -38,15 +34,9 @@ const CategoriesList = () => {
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>
-      {loading ? (
-        <CircularLoadingBar className={styles.loadingIndicator} />
-      ) : (
-        <div>
-          <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable={false}>
-            {categoriesList}
-          </Carousel>
-        </div>
-      )}
+      <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable={false}>
+        {categoriesList}
+      </Carousel>
     </div>
   );
 };

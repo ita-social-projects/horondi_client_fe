@@ -4,7 +4,7 @@ import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useStyles } from './products-carousel.style';
+import { useStyles } from './products-table.style';
 import {
   setModelsFilter,
   setPriceFilter,
@@ -17,10 +17,11 @@ import { getModelsByCategory } from '../../redux/model/model.actions';
 import { getImage } from '../../utils/imageLoad';
 import { Loader } from '../../components/loader/loader';
 import { carouselInterval } from '../../configs';
+import ModelItem from '../../components/model-item';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
-const ProductsCarousel = ({ category }) => {
+const ProductsTable = ({ category }) => {
   const [images, setImages] = useState([]);
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -67,35 +68,14 @@ const ProductsCarousel = ({ category }) => {
       ])
     );
   };
-
+  console.log(models);
   return (
     <div className={styles.container}>
-      <AutoplaySlider
-        play
-        cancelOnInteraction={false}
-        interval={carouselInterval}
-        className={styles.slider}
-        mobileTouch
-      >
-        {models.map((model, index) => (
-          <div
-            key={model.name[1].value}
-            data-src={images[index]}
-            className={styles.captionBlock}
-          >
-            <Link
-              onClick={() => handleClick(model)}
-              to={`/${category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
-            >
-              <p data-cy='model-name' className={styles.caption}>
-                {model.name[language].value}
-              </p>
-            </Link>
-          </div>
-        ))}
-      </AutoplaySlider>
+      {models.map((model) => (
+        <ModelItem key={model._id} model={model} />
+      ))}
     </div>
   );
 };
 
-export default ProductsCarousel;
+export default ProductsTable;

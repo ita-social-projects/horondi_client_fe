@@ -68,7 +68,7 @@ const ProductsTable = ({ category }) => {
       ])
     );
   };
-  console.log(models);
+
   return (
     <div className={styles.container}>
       {models.map((model) => (

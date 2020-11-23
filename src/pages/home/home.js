@@ -12,17 +12,13 @@ import { Loader } from '../../components/loader/loader';
 import { getHomePageSliderImages } from '../../redux/homepage-slider/homepage-slider.actions';
 
 const Home = () => {
-  const {
-    sliderLoading,
-    ourLooksLoading,
-    categoriesLoading,
-    modelsLoading
-  } = useSelector(({ HomePageSlider, HomePageImages, Categories, Model }) => ({
-    sliderLoading: HomePageSlider.loading,
-    ourLooksLoading: HomePageImages.loading,
-    categoriesLoading: Categories.loading,
-    modelsLoading: Model.loading
-  }));
+  const { sliderLoading, ourLooksLoading, categoriesLoading } = useSelector(
+    ({ HomePageSlider, HomePageImages, Categories }) => ({
+      sliderLoading: HomePageSlider.loading,
+      ourLooksLoading: HomePageImages.loading,
+      categoriesLoading: Categories.loading
+    })
+  );
 
   const dispatch = useDispatch();
   const styles = useStyles();

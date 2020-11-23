@@ -17,7 +17,7 @@ const FilledWishlist = ({ items }) => {
   const styles = useStyles();
 
   const onModalAction = (action) => {
-    action && dispatch(removeItemFromWishlist(modalItem));
+    action && dispatch(removeItemFromWishlist(modalItem._id));
     setModalVisibility(false);
   };
 

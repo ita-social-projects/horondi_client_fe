@@ -7,7 +7,10 @@ import Divider from '@material-ui/core/Divider';
 import { useDispatch } from 'react-redux';
 import { CATERGORY_TEXT } from '../../../../translations/product-list.translations';
 import { useStyles } from '../product-list-filter.styles';
-import { setCategoryFilter } from '../../../../redux/products/products.actions';
+import {
+  setCategoryFilter,
+  setModelsFilter
+} from '../../../../redux/products/products.actions';
 
 const CategoryFilter = ({ filterData, filters, language }) => {
   const dispatch = useDispatch();
@@ -33,10 +36,12 @@ const CategoryFilter = ({ filterData, filters, language }) => {
           categoryFilter.filter((category) => category !== event.target.name)
         )
       );
+      dispatch(setModelsFilter([]));
     } else {
       dispatch(
         setCategoryFilter([...new Set([...categoryFilter, event.target.name])])
       );
+      dispatch(setModelsFilter([]));
     }
   };
 

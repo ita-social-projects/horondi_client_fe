@@ -1,40 +1,40 @@
 import React, { useState } from 'react';
-import { AppBar, IconButton } from '@material-ui/core';
+import { AppBar, IconButton as BurgerMenu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+
 import { useStyles } from './app-header.styles';
-import Language from '../../containers/language';
-import NavbarLeft from '../../containers/navbar-left';
-import Cabinet from '../../containers/cabinet';
 import Sidebar from '../../containers/sidebar';
-import CartHeader from '../../containers/cart-header';
-import Currency from '../../containers/currency';
+import HeaderRightBar from '../../containers/header-right-bar';
+
+import { LOGO } from '../../configs';
 
 const AppHeader = () => {
   const styles = useStyles();
 
-  const [menu, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className={styles.root}>
       <AppBar position='static' className={styles.header}>
         <Toolbar>
-          <IconButton
+          <BurgerMenu
             className={styles.menuButton}
-            onClick={() => setMenuOpen(true)}
+            onClick={() => setIsMenuOpen(true)}
           >
             <MenuIcon />
-          </IconButton>
-          <div className={styles.categories}>
-            <NavbarLeft />
-          </div>
-          <Currency />
-          <Language />
-          <CartHeader />
-          <Cabinet />
+          </BurgerMenu>
+          <Typography variant='h5'>
+            <Link to='/' className={styles.logo}>
+              {LOGO}
+            </Link>
+          </Typography>
+          <HeaderRightBar />
         </Toolbar>
       </AppBar>
-      <Sidebar setMenuOpen={setMenuOpen} menu={menu} />
+      <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
     </div>
   );
 };

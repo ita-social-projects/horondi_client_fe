@@ -35,11 +35,13 @@ export const OrderForm = () => {
   const [openModal, setOpenModal] = useState(shouldValidate);
   const [paymentType, setPaymentType] = useState('');
   const [user, setUser] = useState(REGISTER_USER_DATA);
+  const [userComment, setUserComment] = useState('');
   const { firstName, lastName, email, phoneNumber } = user;
 
   const userData = {
     ...user,
-    paymentType
+    paymentType,
+    userComment
   };
 
   const handleChange = (event, setValid, regExp) => {
@@ -68,8 +70,8 @@ export const OrderForm = () => {
     if (
       firstNameValidated &&
       emailValidated &&
-      lastName &&
-      phoneNumber &&
+      lastNameValidated &&
+      phoneValidated &&
       paymentType &&
       deliveryTypeValidator
     ) {
@@ -80,8 +82,8 @@ export const OrderForm = () => {
   }, [
     firstNameValidated,
     emailValidated,
-    lastName,
-    phoneNumber,
+    lastNameValidated,
+    phoneValidated,
     paymentType,
     deliveryTypeValidator
   ]);
@@ -248,9 +250,11 @@ export const OrderForm = () => {
         </div>
         <div className={style.comments}>
           <TextField
+            value={userComment}
             fullWidth
             multiline
             rows={3}
+            onChange={(e) => setUserComment(e.target.value)}
             variant='outlined'
             label={CHECKOUT_TEXT_FIELDS[language].orderComment}
           />

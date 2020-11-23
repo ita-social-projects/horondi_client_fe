@@ -2,7 +2,19 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   catalog: {
-    margin: '10em 0'
+    height: '100vh',
+    marginTop: 50,
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& > div': {
+      height: '100%',
+      width: '100%'
+    },
+    '& .react-multi-carousel-list': {
+      height: '100%'
+    }
   },
   categoriesContainer: {
     margin: '0 auto'

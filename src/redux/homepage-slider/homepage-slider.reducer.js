@@ -3,7 +3,7 @@ import {
   SET_HOMEPAGE_SLIDER_IMAGES_LOADING
 } from './homepage-slider.types';
 
-const initialState = {
+export const initialState = {
   images: [],
   loading: true
 };

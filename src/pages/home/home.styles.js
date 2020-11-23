@@ -4,10 +4,6 @@ export const useStyles = makeStyles((theme) => ({
   home: {
     boxSizing: 'border-box',
     backgroundColor: theme.palette.backgroundColor,
-    textAlign: 'center'
-  },
-  homeHeader: {
-    height: '90vh',
-    position: 'relative'
+    textAlign: 'center',
   }
 }));

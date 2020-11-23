@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,6 +15,7 @@ import {
   SELECT_NONE
 } from '../../../translations/product-details.translations';
 import { setProductToSend } from '../../../redux/products/products.actions';
+import { DEFAULT_PRICE } from '../../../configs';
 
 const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const styles = useStyles();
@@ -23,7 +24,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
     ({ Language, Currency, Products: { productToSend } }) => ({
       language: Language.language,
       totalPrice: productToSend.totalPrice,
-      sidePocket: productToSend.sidePocket.isSelected,
+      sidePocket: productToSend.sidePocket,
       bagBottom: productToSend.bagBottom.value,
       currency: Currency.currency
     })
@@ -32,25 +33,23 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const { additionalPrice, name: additionalName } =
     additions && additions.length ? additions[0] : {};
 
-  const additionsNameToSend = useMemo(
-    () => (additions && additions.length ? additions[0].name : null),
-    [additions]
-  );
-
   const handleBottomChange = (event) => {
     const { value } = event.target;
 
     const oldPrice = bagBottom
       ? bottomMaterials.find(({ name }) => name[1].value === bagBottom)
-          .additionalPrice[currency].value / 100
-      : 0;
+          .additionalPrice
+      : DEFAULT_PRICE;
 
     const newPrice = value
       ? bottomMaterials.find(({ name }) => name[1].value === value)
-          .additionalPrice[currency].value / 100
-      : 0;
+          .additionalPrice
+      : DEFAULT_PRICE;
 
-    const newTotalPrice = totalPrice - oldPrice + newPrice;
+    const newTotalPrice = totalPrice.map((item, i) => {
+      item.value = item.value - oldPrice[i].value + newPrice[i].value;
+      return item;
+    });
 
     const bottomNameToSend = value
       ? bottomMaterials.find(({ name }) => name[1].value === value).name
@@ -58,7 +57,7 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
     dispatch(
       setProductToSend({
-        totalPrice: +newTotalPrice.toFixed(2),
+        totalPrice: newTotalPrice,
         bagBottom: { value, name: bottomNameToSend }
       })
     );
@@ -66,18 +65,24 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
 
   const handlePocketChange = (event) => {
     const { checked } = event.target;
-    let newPrice;
+    let newTotalPrice;
 
     if (!sidePocket) {
-      newPrice = totalPrice + additionalPrice[currency].value / 100;
+      newTotalPrice = totalPrice.map((item, i) => {
+        item.value += additionalPrice[i].value;
+        return item;
+      });
     } else {
-      newPrice = totalPrice - additionalPrice[currency].value / 100;
+      newTotalPrice = totalPrice.map((item, i) => {
+        item.value -= additionalPrice[i].value;
+        return item;
+      });
     }
 
     dispatch(
       setProductToSend({
-        totalPrice: +newPrice.toFixed(2),
-        sidePocket: { isSelected: checked, additionsNameToSend }
+        totalPrice: newTotalPrice,
+        sidePocket: checked
       })
     );
   };

@@ -52,22 +52,21 @@ export const initialState = {
   productToSend: {
     _id: '',
     name: '',
-    images: '',
+    image: '',
     selectedSize: false,
     bagBottom: {
       value: '',
-      name: ''
+      name: [
+        { lang: 'uk', value: '' },
+        { lang: 'en', value: '' }
+      ]
     },
-    sidePocket: {
-      isSelected: false,
-      name: ''
-    },
+    sidePocket: false,
     totalPrice: 0,
     quantity: 1,
-    productUrl: '',
     dimensions: {
-      weightInKg: '',
-      volumeInLiters: ''
+      weightInKg: null,
+      volumeInLiters: null
     }
   }
 };
@@ -132,7 +131,7 @@ const productsReducer = (state = initialState, action = {}) => {
         ...state,
         filters: {
           ...state.filters,
-          modelsFilter: [action.payload]
+          modelsFilter: action.payload
         }
       };
     case SET_CATEGORY_FILTER:

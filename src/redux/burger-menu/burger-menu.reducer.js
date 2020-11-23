@@ -3,7 +3,7 @@ import {
   SET_BURGER_MENU_LOADING_LINKS
 } from './burger-menu.types';
 
-const initialState = {
+export const initialState = {
   categories: [],
   loading: true
 };

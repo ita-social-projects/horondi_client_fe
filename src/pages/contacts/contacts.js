@@ -9,9 +9,9 @@ import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 
 const Contacts = ({ fromCheckout }) => {
   const { contacts, loading, language } = useSelector(
-    ({ Language, Contacts }) => ({
-      contacts: Contacts.contacts,
-      loading: Contacts.loading,
+    ({ Language, Contacts: { loading, contacts } }) => ({
+      contacts,
+      loading,
       language: Language.language
     })
   );

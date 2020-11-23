@@ -21,27 +21,24 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_SIZE } from '../../configs';
+import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
   const {
     product,
     isLoading,
-    productUrl,
     categoryFilter,
     productToSend,
     currency
   } = useSelector(
     ({
       Currency,
-      Products: { product, productLoading, productToSend, filters },
-      router
+      Products: { product, productLoading, productToSend, filters }
     }) => ({
       currency: Currency.currency,
       categoryFilter: filters.categoryFilter,
       isLoading: productLoading,
-      productUrl: router.location.pathname,
       product,
       productToSend
     })
@@ -72,6 +69,7 @@ const ProductDetails = ({ match }) => {
         : {},
     [options]
   );
+
   const { volumeInLiters, weightInKg } =
     (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
 
@@ -85,11 +83,10 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
-          productId,
+          _id: productId,
           name: productName,
-          images,
-          productUrl,
-          totalPrice: +(basePrice[currency].value / 100).toFixed(2),
+          image: images.primary.small,
+          totalPrice: basePrice,
           dimensions: { volumeInLiters, weightInKg }
         })
       );
@@ -109,7 +106,6 @@ const ProductDetails = ({ match }) => {
     productId,
     productName,
     images,
-    productUrl,
     currency
   ]);
 
@@ -195,19 +191,21 @@ const ProductDetails = ({ match }) => {
 
   const handleSizeChange = (id) => {
     const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice[currency]
-          .value / 100
-      : 0;
+      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
+      : DEFAULT_PRICE;
+
     const size = sizes.find(({ _id }) => _id === id);
-    const newPrice =
-      productToSend.totalPrice -
-      oldPrice +
-      size.additionalPrice[currency].value / 100;
+
+    const newTotalPrice = productToSend.totalPrice.map((item, i) => {
+      item.value =
+        item.value - oldPrice[i].value + size.additionalPrice[i].value;
+      return item;
+    });
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: +newPrice.toFixed(2),
+        totalPrice: newTotalPrice,
         dimensions: {
           volumeInLiters: size.volumeInLiters,
           weightInKg: size.weightInKg

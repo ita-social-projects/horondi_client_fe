@@ -1,21 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
+
 export const useStyles = makeStyles((theme) => ({
-  link: {
-    textDecoration: 'none',
+  categoryItem: {
     color: theme.palette.textColor,
-    letterSpacing: '0.1rem',
-    transition: 'all 0.3s',
-    fontFamily: 'Montserrat',
-    padding: '30px',
-    backgroundColor: '#DBDBDB',
     textTransform: 'uppercase',
-    textAlign: 'center',
-    margin: '10px',
-    borderRadius: '10px',
-    height: '80px',
-    '&:hover': {
-      cursor: 'pointer',
-      backgroundColor: '#7F7F7F'
+    display: 'flex',
+    alignItems: 'center',
+    margin: '0 20px',
+    cursor: 'pointer',
+    '& span, & svg': {
+      fontSize: '2em'
+    },
+    '&:hover span': {
+      textDecoration: 'underline'
     }
   },
   root: {
@@ -28,6 +25,29 @@ export const useStyles = makeStyles((theme) => ({
     margin: '10px'
   },
   nested: {
-    paddingLeft: theme.spacing(10)
+    marginLeft: theme.spacing(3),
+    '&:hover': {
+      background: 'none'
+    },
+    '& span': {
+      textTransform: 'uppercase',
+      fontSize: '1.2em'
+    },
+    '&:before': {
+      content: `''`,
+      display: 'block',
+      width: 10,
+      height: 10,
+      position: 'relative',
+      top: '50%',
+      background: '#000',
+      borderRadius: '50%',
+      marginRight: 10,
+      opacity: 0,
+      transition: 'opacity .2s ease'
+    },
+    '&:hover:before': {
+      opacity: 1
+    }
   }
 }));

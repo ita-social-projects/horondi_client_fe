@@ -10,7 +10,7 @@ const dropdownStyles = makeStyles(() => ({
       display: 'none'
     }
   },
-  rootSelect: {
+  rootSelect: ({ fromSideBar }) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -22,16 +22,16 @@ const dropdownStyles = makeStyles(() => ({
     width: '60px',
     height: '33px',
     cursor: 'pointer',
-    backgroundColor: 'black',
-    color: 'white',
+    backgroundColor: fromSideBar ? '#fff' : '#000',
+    color: fromSideBar ? '#000' : '#fff',
     outline: 'none',
     border: 'none',
     '@media (max-width:768px)': {
       width: '33px'
     },
     '&:hover': {
-      backgroundColor: 'white',
-      color: 'black'
+      backgroundColor: fromSideBar ? '#000' : '#fff',
+      color: fromSideBar ? '#fff' : '#000'
     },
     '& li': {
       height: '33px',
@@ -41,7 +41,7 @@ const dropdownStyles = makeStyles(() => ({
       width: '1rem !important',
       fontSize: '22px'
     }
-  }
+  })
 }));
 
 export default dropdownStyles;

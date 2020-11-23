@@ -10,6 +10,10 @@ import {
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
+import {
+  setProductsForSearchBar,
+  setSearchBarLoading
+} from '../search-bar/search-bar.actions';
 
 import {
   GET_ALL_FILTERS,
@@ -25,14 +29,27 @@ import {
 
 import { setComments } from '../comments/comments.actions';
 
-export function* handleFilteredProductsLoad() {
+export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {
+    if (forSearchBar) {
+      yield put(setSearchBarLoading(true));
+    } else {
+      yield put(setProductsLoading(true));
+    }
+
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
     const products = yield call(getFilteredProducts, { state, currency });
 
     yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));
-    yield put(setAllProducts(products.items));
+
+    if (forSearchBar) {
+      yield put(setProductsForSearchBar(products.items));
+      yield put(setSearchBarLoading(false));
+    } else {
+      yield put(setAllProducts(products.items));
+      yield put(setProductsLoading(false));
+    }
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
@@ -51,6 +68,7 @@ export function* handleGetAllProducts() {
 
 export function* handleProductsErrors({ message }) {
   yield put(setProductsLoading(false));
+  yield put(setSearchBarLoading(false));
   yield put(setError(message));
   yield put(push('/error-page'));
 }

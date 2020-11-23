@@ -5,6 +5,7 @@ import { CssBaseline } from '@material-ui/core';
 import { getBurgerMenuLinks } from '../../redux/burger-menu/burger-menu.actions';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
+import SearchBarList from '../../containers/search-bar-list';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
@@ -17,12 +18,15 @@ import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 
 const App = () => {
-  const { isLoading, lightMode } = useSelector(({ Categories, Theme }) => ({
-    isLoading: Categories.loading,
-    lightMode: Theme.lightMode
-  }));
+  const { isLoading, lightMode, location } = useSelector(
+    ({ Categories, Theme, router }) => ({
+      isLoading: Categories.loading,
+      lightMode: Theme.lightMode,
+      location: router.location.pathname
+    })
+  );
   const dispatch = useDispatch();
-  const styles = useStyles();
+  const styles = useStyles({ isHome: location === '/' });
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
@@ -33,20 +37,16 @@ const App = () => {
   const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
-    dispatch(getBurgerMenuLinks());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(preserveUser());
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(getBurgerMenuLinks());
     dispatch(getCategories());
     dispatch(getContacts());
-  }, [dispatch]);
+  }, []);
+
   useEffect(() => {
     dispatch(setCountPerPage(productsCount));
   }, [dispatch, productsCount]);
+
   useEffect(() => {
     dispatch(setThemeMode(themeMode));
   }, [lightMode, dispatch, themeMode]);
@@ -64,6 +64,7 @@ const App = () => {
       <CssBaseline />
       <Routes />
       <Chat />
+      <SearchBarList />
     </ThemeProvider>
   );
 };

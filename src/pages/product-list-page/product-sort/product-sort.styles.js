@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
       display: 'none'
     }
   },
-sortDiv: {
+  sortDiv: {
     display: 'flex',
     alignItems: 'center',
     lineHeight: '25px !important',

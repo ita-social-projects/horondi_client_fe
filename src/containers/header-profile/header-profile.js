@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import Menu from '@material-ui/core/Menu';
 import { MenuItem } from '@material-ui/core';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import PersonIcon from '@material-ui/icons/Person';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
@@ -18,7 +19,7 @@ import { setUser } from '../../redux/user/user.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
-const HeaderProfile = () => {
+const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(
     ({ User, Language, Theme }) => ({
       userData: User.userData,
@@ -30,7 +31,7 @@ const HeaderProfile = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const dispatch = useDispatch();
-  const styles = useStyles({ logged: !!userData });
+  const styles = useStyles({ fromSideBar });
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
 
   useEffect(() => {
@@ -127,11 +128,19 @@ const HeaderProfile = () => {
 
   return (
     <div className={styles.profile} data-cy='profile'>
-      <PersonOutlineIcon
-        onClick={handleClick}
-        onKeyDown={handleClick}
-        tabIndex={0}
-      />
+      {userData ? (
+        <PersonIcon
+          onClick={handleClick}
+          onKeyDown={handleClick}
+          tabIndex={0}
+        />
+      ) : (
+        <PersonOutlineIcon
+          onClick={handleClick}
+          onKeyDown={handleClick}
+          tabIndex={0}
+        />
+      )}
       <Menu
         className={styles.list}
         anchorEl={anchorEl}

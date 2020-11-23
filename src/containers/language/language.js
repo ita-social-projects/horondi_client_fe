@@ -12,7 +12,7 @@ import Dropdown from '../../components/dropdown';
 const languageInLocalStorage =
   getFromLocalStorage('language') || DEFAULT_LANGUAGE;
 
-const Language = () => {
+const Language = ({ fromSideBar }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,6 +37,7 @@ const Language = () => {
         mappedItems={mappedLanguages}
         handler={handleChange}
         defaultValue={languageInLocalStorage}
+        fromSideBar={fromSideBar}
       />
     </div>
   );

@@ -19,6 +19,7 @@ export function* handleHomeLooksImagesLoad() {
         getHomePageLooksImages {
           _id
           images {
+            large
             medium
             small
           }

@@ -8,10 +8,10 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { useStyles } from './cart-header.styles';
 import { getCart } from '../../redux/cart/cart.actions';
 
-const CartHeader = () => {
+const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(({ Cart }) => Cart.list);
-  const styles = useStyles();
+  const styles = useStyles({ fromSideBar });
 
   useEffect(() => {
     dispatch(getCart());

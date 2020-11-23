@@ -12,7 +12,11 @@ const AppFooter = () => {
       <div className={styles.footer}>
         <div className={styles.cardDeck}>
           <FooterLists />
-          <FooterLinks />
+          <FooterLinks
+            showTitle
+            socialIconsStyles={styles.socialIconsStyles}
+            position='flex-start'
+          />
         </div>
       </div>
     </div>

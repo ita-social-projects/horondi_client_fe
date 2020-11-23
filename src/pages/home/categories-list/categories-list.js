@@ -1,24 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
 import Carousel from 'react-multi-carousel';
 
-import CircularLoadingBar from '../../../components/circular-loading-bar';
 import CategoryItem from './category-item';
 import { URL_LANGUAGE, RESPONSIVE_CATEGORIES } from '../../../configs';
-import { HOMEPAGE_TITLES } from '../../../translations/homepage.translations';
 
 import { useStyles } from './categories-list.style';
 import './categories-carousel.css';
 
 const CategoriesList = () => {
-  const { categories, loading, language } = useSelector(
-    ({ Categories, Language }) => ({
-      categories: Categories.list,
-      loading: Categories.loading,
-      language: Language.language
-    })
-  );
+  const { categories, language } = useSelector(({ Categories, Language }) => ({
+    categories: Categories.list,
+    language: Language.language
+  }));
   const styles = useStyles();
 
   const categoriesList = categories
@@ -31,6 +25,7 @@ const CategoriesList = () => {
                 categoryUrl={getCategoryURL(name)}
                 categoryName={name[language].value}
                 categoryImageUrl={images.large}
+                language={language}
               />
             )
         )
@@ -38,30 +33,18 @@ const CategoriesList = () => {
     : null;
 
   return (
-    <div className={styles.catalog} id='home-categories'>
-      <Typography variant='h2' className={styles.title}>
-        {HOMEPAGE_TITLES[language].catalog}
-      </Typography>
-      {loading ? (
-        <CircularLoadingBar className={styles.loadingIndicator} />
-      ) : (
-        <div>
-          <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable={false}>
-            {categoriesList}
-          </Carousel>
-        </div>
-      )}
+    <div id='catalog' data-section-style='light' className={styles.catalog}>
+      <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable={false}>
+        {categoriesList}
+      </Carousel>
     </div>
   );
 };
 
 export const getCategoryURL = (category) => {
-  console.log(category);
   const [filteredCategory] = category.filter(
     (item) => item.lang === URL_LANGUAGE
   );
-
-  console.log(filteredCategory);
 
   if (filteredCategory.value) {
     return filteredCategory.value.toLowerCase();

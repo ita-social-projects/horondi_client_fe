@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
 import { getImage } from '../../../../utils/imageLoad';
+import { HOME_BUTTONS } from '../../../../translations/homepage.translations';
 
-const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
+const CategoryItem = ({
+  categoryName,
+  categoryImageUrl,
+  categoryUrl,
+  language
+}) => {
   const [image, setImage] = useState(categoryImageUrl);
 
   useEffect(() => {
@@ -16,13 +22,13 @@ const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const styles = useStyles({ image });
 
   return (
-    <Link to={`/${categoryUrl}`} className={styles.link}>
-      <div className={styles.categoryItem} data-cy='category-item'>
-        <div className={styles.categoryNameWrapper}>
-          <span>{categoryName}</span>
-        </div>
-      </div>
-    </Link>
+    <div className={styles.categoryItem} data-cy='category-item'>
+      <span className={styles.categoryName}>{categoryName}</span>
+      <Link to={`/${categoryUrl}`} className={styles.categoryInner}>
+        {HOME_BUTTONS[language].MOVE_TO_CATEGORY}
+        <span>&#8594;</span>
+      </Link>
+    </div>
   );
 };
 

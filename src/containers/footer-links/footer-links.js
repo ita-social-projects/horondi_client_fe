@@ -9,28 +9,30 @@ import { FOOTER_SOCIAL_NETWORK_LINKS } from '../../translations/footer.translati
 
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = () => {
-  const { language } = useSelector(({ Categories, Language }) => ({
+const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
+  const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-  const styles = useStyles();
+  const styles = useStyles({ position });
 
   return (
     <div className={styles.cardBody}>
       <div className={styles.iconsBox}>
-        <div className={styles.cardTitle}>
-          <Typography variant='h5'>
-            {FOOTER_SOCIAL_NETWORK_LINKS[language].title}
-          </Typography>
-        </div>
-        <div>
+        {showTitle && (
+          <div className={styles.cardTitle}>
+            <Typography variant='h5'>
+              {FOOTER_SOCIAL_NETWORK_LINKS[language].title}
+            </Typography>
+          </div>
+        )}
+        <div className={styles.iconsContainer}>
           <a
             className={styles.iconWrap}
             href={FOOTER_SOCIAL_NETWORK_LINKS.facebook}
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FontAwesomeIcon className={styles.icon} icon={faFacebook} />
+            <FontAwesomeIcon className={socialIconsStyles} icon={faFacebook} />
           </a>
           <a
             className={styles.iconWrap}
@@ -38,7 +40,7 @@ const FooterLinks = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FontAwesomeIcon className={styles.icon} icon={faInstagram} />
+            <FontAwesomeIcon className={socialIconsStyles} icon={faInstagram} />
           </a>
         </div>
       </div>

@@ -2,7 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   root: {
-    width: '100%'
+    width: '100%',
+    scrollSnapStop: 'none',
+    scrollSnapAlign: 'start'
   },
   footer: {
     backgroundColor: '#000000',
@@ -30,5 +32,18 @@ export const useStyles = makeStyles(() => ({
     fontSize: '2rem',
     paddingRight: '0.8rem',
     color: '#ffffff'
+  },
+  socialIconsStyles: {
+    color: '#ffffff',
+    fontSize: '3rem',
+    transition: 'all 0.5s',
+    padding: '0.5rem',
+    borderRadius: '100%',
+    width: '40px !important',
+    height: '40px',
+    '&:hover': {
+      color: '#000000',
+      backgroundColor: '#ffffff'
+    }
   }
 }));

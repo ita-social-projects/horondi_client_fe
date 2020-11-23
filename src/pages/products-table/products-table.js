@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import 'react-awesome-slider/dist/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './products-table.style';
@@ -10,14 +10,10 @@ const ProductsTable = ({ category }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { models, loading, filterData } = useSelector(
-    ({ Model, Products, Language }) => ({
-      models: Model.models,
-      language: Language.language,
-      loading: Model.loading,
-      filterData: Products.filterData
-    })
-  );
+  const { models, loading } = useSelector(({ Model }) => ({
+    models: Model.models,
+    loading: Model.loading
+  }));
 
   useEffect(() => {
     dispatch(getModelsByCategory(category._id));

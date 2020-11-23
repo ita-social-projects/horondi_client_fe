@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { IconButton as BurgerMenu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import scrollBarStyles from './scroll-bar.styles';
+import { scrollBarStyles } from './scroll-bar.styles';
 import { SCROLL_BAR_DATA } from '../../configs';
 import Sidebar from '../../containers/sidebar';
 

@@ -1,6 +1,6 @@
 export const MODAL_DELETE_MESSAGES = {
-  0: 'Ви дійсно бажаєте видалити ',
-  1: 'You really want to delete '
+  0: 'Ви дійсно бажаєте видалити ?',
+  1: 'Do you really want to delete ?'
 };
 
 export const MODAL_BUTTONS = {

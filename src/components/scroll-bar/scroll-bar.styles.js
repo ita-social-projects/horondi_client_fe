@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const scrollBarStyles = makeStyles(() => ({
+export const scrollBarStyles = makeStyles(() => ({
   scrollBar: ({ isDarkSection }) => ({
     boxSizing: 'border-box',
     display: 'block',
@@ -62,5 +62,3 @@ const scrollBarStyles = makeStyles(() => ({
     zIndex: 20
   })
 }));
-
-export default scrollBarStyles;

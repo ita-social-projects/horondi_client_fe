@@ -171,6 +171,15 @@ export const FORGOT_PASSWORD = [
   }
 ];
 
+export const STAY_SIGNED_IN = [
+  {
+    value: 'Залишитись авторизованим'
+  },
+  {
+    value: 'Stay signed in'
+  }
+];
+
 export const REGISTER_PROPOSAL = [
   {
     value: 'Реєстрація'

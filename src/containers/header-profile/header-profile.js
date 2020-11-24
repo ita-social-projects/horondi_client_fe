@@ -62,6 +62,7 @@ const HeaderProfile = ({ fromSideBar }) => {
   const handleLogout = () => {
     dispatch(setUser(null));
     setToLocalStorage('accessToken', null);
+    setToLocalStorage('refreshToken', null);
   };
 
   const handleRedirect = (link) => {

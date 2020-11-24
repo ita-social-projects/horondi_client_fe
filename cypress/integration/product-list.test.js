@@ -1,4 +1,4 @@
-g; /* eslint-disable cypress/no-assigning-return-values */
+/* eslint-disable cypress/no-assigning-return-values */
 describe('products tests', () => {
   it('products should be sorted by popularity', () => {
     cy.visit('/bags');

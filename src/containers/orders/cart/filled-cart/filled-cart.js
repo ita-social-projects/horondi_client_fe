@@ -12,44 +12,51 @@ import { Button } from '@material-ui/core';
 import { CART_BUTTON_TITLES } from '../../../../translations/cart.translations';
 import SimilarProducts from '../../../../pages/product-details/similar-products/similar-products';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import {
+  getFiltredProducts,
+  getProduct,
+  setCategoryFilter
+} from '../../../../redux/products/products.actions';
 
-const FilledCart = ({ items }) => {
+const FilledCart = ({ items, categories }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
   const dispatch = useDispatch();
-  const {
-    language,
-    product,
-    categoryFilter,
-    productToSend,
-    currency
-  } = useSelector(
+  const { language, product, currency } = useSelector(
     ({
       Language,
       Currency,
-      Products: { product, productLoading, productToSend, filters }
+      Products: { product, productLoading, productToSend }
     }) => ({
       language: Language.language,
       currency: Currency.currency,
-      categoryFilter: filters.categoryFilter,
       isLoading: productLoading,
       product,
       productToSend
     })
   );
+  useEffect(() => {
+    dispatch(getProduct(items[0]._id));
+    window.scrollTo(0, 0);
+  }, [items[0]._id, dispatch]);
+
+  useEffect(() => {
+    if (product) {
+      const categoryFilter = categories.filter((item) => {
+        return product.category.name[0].value === item.name[0].value;
+      });
+      dispatch(setCategoryFilter([categoryFilter[0]._id]));
+    }
+  }, [product]);
+  useEffect(() => {
+    if (product) {
+      dispatch(getFiltredProducts({}));
+    }
+  }, [dispatch, product]);
 
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
-
-  const {
-    _id: productId,
-    name: productName,
-    basePrice,
-    images,
-    options = [],
-    category
-  } = product || {};
 
   const onModalAction = (action) => {
     action && dispatch(removeItemFromCart(modalItem));
@@ -102,7 +109,11 @@ const FilledCart = ({ items }) => {
           </Button>
         </Link>
       </div>
-      <SimilarProducts currencySign={currencySign} />
+      {product ? (
+        <div>
+          <SimilarProducts currencySign={currencySign} />
+        </div>
+      ) : null}
     </div>
   );
 };

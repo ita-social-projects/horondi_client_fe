@@ -23,7 +23,7 @@ const FilledCart = ({ items, categories }) => {
   const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, product, currency } = useSelector(
+  const { language, goods, currency } = useSelector(
     ({
       Language,
       Currency,
@@ -32,7 +32,7 @@ const FilledCart = ({ items, categories }) => {
       language: Language.language,
       currency: Currency.currency,
       isLoading: productLoading,
-      product,
+      goods: product,
       productToSend
     })
   );
@@ -42,18 +42,18 @@ const FilledCart = ({ items, categories }) => {
   }, [items[0]._id, dispatch]);
 
   useEffect(() => {
-    if (product) {
+    if (goods) {
       const categoryFilter = categories.filter((item) => {
-        return product.category.name[0].value === item.name[0].value;
+        return goods.category.name[0].value === item.name[0].value;
       });
       dispatch(setCategoryFilter([categoryFilter[0]._id]));
     }
-  }, [product]);
+  }, [goods]);
   useEffect(() => {
-    if (product) {
+    if (goods) {
       dispatch(getFiltredProducts({}));
     }
-  }, [dispatch, product]);
+  }, [dispatch, goods]);
 
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
@@ -109,7 +109,7 @@ const FilledCart = ({ items, categories }) => {
           </Button>
         </Link>
       </div>
-      {product ? (
+      {goods ? (
         <div>
           <SimilarProducts currencySign={currencySign} />
         </div>

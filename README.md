@@ -2,7 +2,7 @@
 
 # Horondi project
 
-HORONDI project is an e-commerce online shop that provides hand-made backpacks, bags, purses and other accessories.
+HORONDI project is an e-commerce online shop that provides hand-made backpacks, bags, purses and other accessories.\
 
 [![GitHub issues](https://img.shields.io/github/issues/ita-social-projects/horondi_client_fe)](https://github.com/ita-social-projects/horondi_client_fe/issues)
 [![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/horondi_client_fe?style=flat-square)](https://github.com/ita-social-projects/Horondi_client_fe/pulls)

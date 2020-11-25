@@ -10,7 +10,7 @@ import ProtectedRoute from '../components/protected-route';
 import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
-import ProductsCarousel from '../pages/products-carousel';
+import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 
@@ -124,7 +124,7 @@ const Routes = () => {
                       categoryFound.name[1].value.toLowerCase() ===
                         category.toLowerCase() && categoryFound.isMain
                   );
-                  return <ProductsCarousel category={categoryParam} />;
+                  return <ProductsTable category={categoryParam} />;
                 }}
               />
               <Route path='/product/:id' exact component={ProductDetails} />

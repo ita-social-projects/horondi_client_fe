@@ -11,7 +11,6 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ita-social-projects-horondi-client-fe&metric=coverage)](https://sonarcloud.io/dashboard?id=ita-social-projects-horondi-client-fe)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/horondi/horondi_client_fe)
 
-
 ---
 
 - [Installation](#installation)

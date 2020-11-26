@@ -28,6 +28,10 @@ import {
 } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
+import {
+  StateCurrencySelector,
+  StateProductsSelector
+} from '../selectors/products-sagas.selectors';
 
 export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {
@@ -37,8 +41,8 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
       yield put(setProductsLoading(true));
     }
 
-    const state = yield select((state) => state.Products);
-    const currency = yield select((state) => state.Currency.currency);
+    const state = yield select(StateProductsSelector);
+    const currency = yield select(StateCurrencySelector);
     const products = yield call(getFilteredProducts, { state, currency });
 
     yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));

@@ -6,13 +6,12 @@ export const initialState = {
 };
 
 const languageReducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-  case CHANGE_LANGUAGE:
+  if (action.type === CHANGE_LANGUAGE) {
     return {
       ...state,
       language: action.payload
     };
-  default:
+  } else {
     return state;
   }
 };

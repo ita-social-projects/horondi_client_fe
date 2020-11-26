@@ -4,14 +4,13 @@ const initialState = {
   error: null
 };
 
-const errorReducer = (state = initialState, action) => {
-  switch (action.type) {
-  case SET_ERROR:
+const errorReducer = (state = initialState, action = {}) => {
+  if (action.type === SET_ERROR) {
     return {
       ...state,
       error: action.payload
     };
-  default:
+  } else {
     return state;
   }
 };

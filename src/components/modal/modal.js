@@ -25,10 +25,15 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
         <Button
           onClick={() => handleClose(null, null, true)}
           variant='contained'
+          className={styles.buttonDel}
         >
           {MODAL_BUTTONS[language].confirm}
         </Button>
-        <Button onClick={handleClose} variant='contained'>
+        <Button
+          onClick={handleClose}
+          variant='contained'
+          className={styles.buttonCan}
+        >
           {MODAL_BUTTONS[language].cancel}
         </Button>
       </div>

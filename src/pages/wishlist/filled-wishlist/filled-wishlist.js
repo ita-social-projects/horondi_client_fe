@@ -49,7 +49,6 @@ const FilledWishlist = ({ items }) => {
             isOpen={modalVisibility}
             onAction={onModalAction}
             language={language}
-            className={styles.modal}
           />
         </div>
       )}

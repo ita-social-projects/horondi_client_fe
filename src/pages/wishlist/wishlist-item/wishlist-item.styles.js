@@ -52,14 +52,21 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.7em'
   },
   price: {
-    position: 'relative'
+    position: 'relative',
+    '@media (max-width: 390px)': {
+      right: 7
+    }
   },
   trash: {
     position: 'absolute',
     right: 10,
     cursor: 'pointer',
     '@media (max-width: 768px)': {
-      right: 1
+      right: 80
+    },
+    '@media (max-width: 390px)': {
+      bottom: 8,
+      left: 8
     }
   }
 }));

@@ -46,7 +46,6 @@ export const useStyles = makeStyles((theme) => ({
       '@media (max-width: 610px)': {
         width: '120px',
         marginRight: '16em',
-        // position:'absolute',
         fontSize: '0.7em'
       },
       '&:hover': {
@@ -69,18 +68,9 @@ export const useStyles = makeStyles((theme) => ({
   price: {
     position: 'relative',
     '@media (max-width: 550px)': {
-      left: -80,
+      left: -110,
       fontSize: '0.8em',
       fontWeight: 'bold'
     }
-  },
-  trash: {
-    // position: 'absolute',
-    // right: -4,
-    // cursor: 'pointer',
-    // '@media (max-width: 610px)': {
-    //   bottom: 17,
-    //   left: 25
-    // }
   }
 }));

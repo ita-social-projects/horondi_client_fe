@@ -182,11 +182,42 @@ const changeQuantityIntoUserCart = async ({ id, product, key }) => {
   return result.data.changeCartProductQuantity;
 };
 
+const regenerateAccessToken = async (refreshToken) => {
+  const result = await client.mutate({
+    variables: {
+      refreshToken
+    },
+    mutation: gql`
+      mutation($refreshToken: String!) {
+        regenerateAccessToken(refreshToken: $refreshToken) {
+          ... on Token {
+            __typename
+            token
+          }
+          ... on Error {
+            message
+            statusCode
+          }
+        }
+      }
+    `
+  });
+
+  const data = result.data.regenerateAccessToken;
+
+  if (data.message || data.statusCode) {
+    throw new Error(data.message);
+  }
+
+  return data.token;
+};
+
 export {
   getUserByToken,
   removeProductFromUserWishlist,
   addProductToUserWishlist,
   removeProductFromUserCart,
   changeQuantityIntoUserCart,
-  addProductToUserCart
+  addProductToUserCart,
+  regenerateAccessToken
 };

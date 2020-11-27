@@ -3,6 +3,10 @@ import BG from '../../images/2.jpg';
 import GoogleLogo from '../../images/google.png';
 
 export const useStyles = makeStyles((theme) => ({
+  container: {
+    width: '100%',
+    minHeight: '18px'
+  },
   login: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
@@ -181,5 +185,10 @@ export const useStyles = makeStyles((theme) => ({
       content: `'example@mail.com'`,
       color: '#828282'
     }
+  },
+  text: {
+    fontSize: '0.875rem',
+    color: theme.palette.textColor,
+    textDecoration: 'none'
   }
 }));

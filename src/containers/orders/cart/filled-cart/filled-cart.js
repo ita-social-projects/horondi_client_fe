@@ -24,16 +24,10 @@ const FilledCart = ({ items, categories }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { language, goods, currency } = useSelector(
-    ({
-      Language,
-      Currency,
-      Products: { product, productLoading, productToSend }
-    }) => ({
+    ({ Language, Currency, Products: { product } }) => ({
       language: Language.language,
       currency: Currency.currency,
-      isLoading: productLoading,
-      goods: product,
-      productToSend
+      goods: product
     })
   );
   useEffect(() => {

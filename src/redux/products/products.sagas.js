@@ -10,7 +10,10 @@ import {
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
-import getItems from '../../utils/client';
+import {
+  setProductsForSearchBar,
+  setSearchBarLoading
+} from '../search-bar/search-bar.actions';
 
 import {
   GET_ALL_FILTERS,
@@ -18,192 +21,74 @@ import {
   GET_PRODUCT
 } from './products.types';
 
-import { getProduct } from './products.operations';
+import {
+  getAllProducts,
+  getFilteredProducts,
+  getProductById
+} from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
 
-export function* handleFilterLoad() {
+export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {
+    if (forSearchBar) {
+      yield put(setSearchBarLoading(true));
+    } else {
+      yield put(setProductsLoading(true));
+    }
+
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
-    const products = yield call(
-      getItems,
-      `query(
-        $search: String
-        $price: [Int]
-        $colors: [String]
-        $patterns: [String]
-        $isHotItem: Boolean
-        $skip:Int
-        $limit:Int
-        $rate:Int
-        $basePrice:Int
-        $purchasedCount:Int
-        $category: [String]
-        $models: [String]
-        $currency: Int
-        ){
-          getProducts(
-            filter: {
-              colors: $colors
-              pattern: $patterns
-              price: $price
-              category:$category
-              isHotItem: $isHotItem
-              models: $models
-              currency: $currency
-            }
-            skip: $skip
-            limit: $limit
-            search: $search
-            sort:{ 
-              rate: $rate,
-              basePrice: $basePrice,
-              purchasedCount:$purchasedCount
-            }
-            ){
-              items{
-                _id
-                purchasedCount
-                availableCount
-                name {
-                  lang
-                  value
-                }
-                basePrice {
-                  value
-                }
-                model {
-                  value
-                }
-                rate
-                images {
-                  primary {
-                    large
-                    medium
-                    large
-                    small
-                  }
-                }
-                colors{
-                  name {
-                    lang
-                    value
-                  }
-                  simpleName {
-                    lang
-                    value
-                  }
-                }
-                pattern {
-                  lang
-                  value
-                }
-                category {
-                  _id
-                  name {
-                    value
-                  }
-                  isMain
-                }
-                isHotItem
-              }
-              count
-            }
-          }`,
-      {
-        search: state.filters.searchFilter,
-        colors: state.filters.colorsFilter,
-        patterns: state.filters.patternsFilter,
-        price: state.filters.priceFilter,
-        currency,
-        skip: state.currentPage * state.countPerPage,
-        limit: state.countPerPage,
-        rate: state.sortByRate || undefined,
-        basePrice: state.sortByPrice || undefined,
-        category: state.filters.categoryFilter,
-        purchasedCount: state.sortByPopularity || undefined,
-        isHotItem: state.filters.isHotItemFilter,
-        models: state.filters.modelsFilter
-      }
-    );
+    const products = yield call(getFilteredProducts, { state, currency });
 
-    yield put(
-      setPagesCount(
-        Math.ceil(products.data.getProducts.count / state.countPerPage)
-      )
-    );
-    yield put(setAllProducts(products.data.getProducts.items));
+    yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));
+
+    if (forSearchBar) {
+      yield put(setProductsForSearchBar(products.items));
+      yield put(setSearchBarLoading(false));
+    } else {
+      yield put(setAllProducts(products.items));
+      yield put(setProductsLoading(false));
+    }
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
 }
 
-export function* handleGetFilters() {
+export function* handleGetAllProducts() {
   try {
     yield put(setProductsLoading(true));
-    const filter = yield call(
-      getItems,
-      `query{
-        getProducts {
-          items{
-            colors {
-              name {
-                value
-              }
-              simpleName {
-                value
-              }
-            }
-            basePrice {
-              value
-            }
-            model {
-              value
-            }
-            pattern {
-              value
-            }
-            category {
-              _id
-              name {
-                value
-              }
-              isMain
-            }
-          }
-        }
-      }`
-    );
-    yield put(setAllFilterData(filter.data.getProducts.items));
+    const products = yield call(getAllProducts);
+    yield put(setAllFilterData(products.items));
     yield put(setProductsLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);
   }
 }
 
-export function* handleProductsErrors(e) {
+export function* handleProductsErrors({ message }) {
   yield put(setProductsLoading(false));
-  yield put(setError({ e }));
+  yield put(setSearchBarLoading(false));
+  yield put(setError(message));
   yield put(push('/error-page'));
 }
 
 export function* handleProductLoading({ payload }) {
   try {
     yield put(setProductLoading(true));
-    const product = yield call(getProduct, payload);
-    yield put(setProduct(product.data.getProductById));
-    yield put(setComments(product.data.getProductById.comments.items));
+    const product = yield call(getProductById, payload);
+    yield put(setProduct(product));
+    yield put(setComments(product.comments.items));
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));
-    yield put(setError({ e }));
+    yield put(setError(e.message));
     yield put(push('/error-page'));
   }
 }
 
 export default function* productsSaga() {
-  yield takeEvery(GET_ALL_FILTERS, handleGetFilters);
-  yield takeEvery(GET_FILTRED_PRODUCTS, handleFilterLoad);
+  yield takeEvery(GET_ALL_FILTERS, handleGetAllProducts);
+  yield takeEvery(GET_FILTRED_PRODUCTS, handleFilteredProductsLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
 }

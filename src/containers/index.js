@@ -1,4 +1,4 @@
 import Language from './language';
-import Cabinet from './cabinet';
+import HeaderProfile from './header-profile';
 
-export { Language, Cabinet };
+export { Language, HeaderProfile };

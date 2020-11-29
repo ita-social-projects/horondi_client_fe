@@ -7,12 +7,24 @@ import {
   GET_NOVAPOSHTA_STREETS,
   SET_NOVAPOSHTA_STREETS,
   SET_NOVAPOSHTA_PRICES,
-  GET_NOVAPOSHTA_PRICES
+  GET_NOVAPOSHTA_PRICES,
+  GET_FONDY_DATA,
+  SET_FONDY_DATA
 } from './checkout.types';
 
 const setNovaPoshtaPrices = (payload) => ({
   type: SET_NOVAPOSHTA_PRICES,
   payload
+});
+
+const setFondyData = (fondyData) => ({
+  type: SET_FONDY_DATA,
+  payload: fondyData
+});
+
+const getFondyData = (orderDesc) => ({
+  type: GET_FONDY_DATA,
+  payload: orderDesc
 });
 
 const getNovaPoshtaPrices = (payload) => ({
@@ -64,5 +76,7 @@ export {
   setNovaPoshtaStreets,
   getNovaPoshtaStreets,
   setNovaPoshtaPrices,
-  getNovaPoshtaPrices
+  getNovaPoshtaPrices,
+  setFondyData,
+  getFondyData
 };

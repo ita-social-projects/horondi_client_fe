@@ -107,6 +107,7 @@ export const setAllProducts = (payload) => ({
   type: SET_ALL_PRODUCTS,
   payload
 });
+
 export const getAllFilters = () => ({
   type: GET_ALL_FILTERS
 });

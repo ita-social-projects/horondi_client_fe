@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
-
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { useStyles } from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
@@ -16,7 +17,6 @@ import {
   WEIGHT
 } from '../../../translations/product-details.translations';
 import Detail from '../detail';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProductInfo = ({ currencySign }) => {
   const styles = useStyles({
@@ -34,19 +34,23 @@ const ProductInfo = ({ currencySign }) => {
     strapLengthInCm,
     currentPrice,
     currentWeight,
-    currentVolume
-  } = useSelector(({ Language, Products: { product, productToSend } }) => ({
-    language: Language.language,
-    rate: product.rate,
-    name: product.name,
-    description: product.description,
-    mainMaterial: product.mainMaterial,
-    innerMaterial: product.innerMaterial,
-    strapLengthInCm: product.strapLengthInCm,
-    currentPrice: productToSend.totalPrice,
-    currentWeight: productToSend.dimensions.weightInKg,
-    currentVolume: productToSend.dimensions.volumeInLiters
-  }));
+    currentVolume,
+    currency
+  } = useSelector(
+    ({ Language, Products: { product, productToSend }, Currency }) => ({
+      language: Language.language,
+      rate: product.rate,
+      name: product.name,
+      description: product.description,
+      mainMaterial: product.mainMaterial,
+      innerMaterial: product.innerMaterial,
+      strapLengthInCm: product.strapLengthInCm,
+      currentPrice: product.basePrice,
+      currentWeight: productToSend.dimensions.weightInKg,
+      currentVolume: productToSend.dimensions.volumeInLiters,
+      currency: Currency.currency
+    })
+  );
 
   return (
     <div>
@@ -100,7 +104,7 @@ const ProductInfo = ({ currencySign }) => {
         </span>
         <span data-cy='price' className={styles.price}>
           <FontAwesomeIcon icon={currencySign} />
-          {currentPrice}
+          {currentPrice[currency].value / 100}
         </span>
       </div>
       <div className={styles.look}>

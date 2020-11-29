@@ -19,6 +19,7 @@ export function* handleHomeLooksImagesLoad() {
         getHomePageLooksImages {
           _id
           images {
+            large
             medium
             small
           }
@@ -36,7 +37,7 @@ export function* handleHomeLooksImagesLoad() {
 
 export function* handleError(e) {
   yield put(setHomeImageLooksLoading(false));
-  yield put(setError({ e }));
+  yield put(setError(e.message));
   yield put(push('/error-page'));
 }
 

@@ -32,6 +32,10 @@ export const ERROR_PAGE_MESSAGE = {
     { value: 'Користувача не знайдено' },
     { value: 'User not found' }
   ],
+  IMAGE_NOT_FOUND: [
+    { value: 'Фото не знайдено' },
+    { value: 'Image not found' }
+  ],
   DEFAULT_ERROR: [
     { value: 'Щось пішло не так...' },
     { value: 'Something went wrong...' }

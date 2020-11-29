@@ -15,7 +15,10 @@ const FilledCart = ({ items }) => {
   const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
   const dispatch = useDispatch();
-  const language = useSelector(({ Language }) => Language.language);
+  const { language, currency } = useSelector(({ Language, Currency }) => ({
+    language: Language.language,
+    currency: Currency.currency
+  }));
 
   const onModalAction = (action) => {
     action && dispatch(removeItemFromCart(modalItem));
@@ -27,21 +30,27 @@ const FilledCart = ({ items }) => {
       key={index}
       item={item}
       language={language}
+      currency={currency}
       setModalVisibility={setModalVisibility}
       setModalItem={setModalItem}
     />
   ));
 
-  const totalPrice = items
-    .reduce((acc, item) => acc + item.totalPrice * item.quantity, 0)
-    .toFixed(2);
+  const totalPrice = items.reduce(
+    (acc, item) => acc + item.totalPrice[currency].value * item.quantity,
+    0
+  );
 
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <Link to='/' className={styles.backButton}>
         <KeyboardBackspaceIcon />
       </Link>
-      <OrderTable items={orderList} totalPrice={totalPrice} currency='UAH' />
+      <OrderTable
+        items={orderList}
+        totalPrice={totalPrice / 100}
+        currency={currency ? 'USD' : 'UAH'}
+      />
       {modalVisibility && (
         <div>
           <Modal

@@ -11,7 +11,8 @@ export const CHECKOUT_TITLES = {
     saturday: 'Сб:  ',
     sunday: 'Нд:  ',
     UAH: 'UAH',
-    region: 'Регіон'
+    region: 'Регіон',
+    orderNumber: 'Замовлення № '
   },
   1: {
     orderForm: 'Order form',
@@ -25,7 +26,8 @@ export const CHECKOUT_TITLES = {
     saturday: 'Sat',
     sunday: 'Sun',
     UAH: 'UAH',
-    region: 'Region'
+    region: 'Region',
+    orderNumber: 'Order № '
   }
 };
 
@@ -34,12 +36,17 @@ export const CHECKOUT_TEXT_FIELDS = {
     firstName: "Ім'я",
     lastName: 'Прізвище',
     email: 'Email',
-    contactPhoneNumber: 'Номер телефону',
+    contactPhoneNumber: 'Номер телефону: ',
     city: 'Місто',
     building: 'Будинок',
     street: 'Вулиця',
     apartment: 'Квартира',
-    orderComment: 'Коментар до замовлення...'
+    orderComment: 'Коментар до замовлення...',
+    paymentMethod: 'Виберіть метод оплати',
+    deliveryType: 'Виберіть тип доставки',
+    department: 'Відділення',
+    delivery: 'Тип доставки',
+    total: 'Загальна сума'
   },
   1: {
     firstName: 'First name',
@@ -50,7 +57,12 @@ export const CHECKOUT_TEXT_FIELDS = {
     building: 'Building',
     street: 'Street',
     apartment: 'Apartment',
-    orderComment: 'Order comment...'
+    orderComment: 'Order comment...',
+    paymentMethod: 'Choose a payment method',
+    deliveryType: 'Select a delivery type',
+    department: 'Department',
+    delivery: 'Delivery type',
+    total: 'Total'
   }
 };
 
@@ -72,31 +84,37 @@ export const CHECKOUT_DELIVERY_TYPES = {
     selfPickUP: 'Самовивіз',
     novaPoshta: 'Нова пошта',
     ukrPoshta: 'Укрпошта',
-    currierNovaPoshta: "Кур'єр Нової пошти"
+    courierNovaPoshta: "Кур'єр Нової пошти"
   },
   1: {
     selfPickUP: 'Self pick-up',
     novaPoshta: 'Nova poshta',
     ukrPoshta: 'Ukrposhta',
-    currierNovaPoshta: 'Currier from Nova poshta'
+    courierNovaPoshta: 'Courier from Nova poshta'
   }
 };
 
 export const CHECKOUT_BUTTON = {
   0: {
-    createOrder: 'Створити замовлення'
+    createOrder: 'Створити замовлення',
+    pay: 'Оплатити',
+    confirm: 'Підтвердити',
+    cancel: 'Скасувати'
   },
   1: {
-    createOrder: 'Create order'
+    createOrder: 'Create order',
+    pay: 'Pay',
+    confirm: 'Confirm',
+    cancel: 'Cancel'
   }
 };
 export const CHECKOUT_PAYMENT = {
   0: {
-    cart: 'Картою',
+    card: 'Картою',
     cash: 'Готівкою'
   },
   1: {
-    cart: 'Cart',
+    card: 'Card',
     cash: 'Cash'
   }
 };

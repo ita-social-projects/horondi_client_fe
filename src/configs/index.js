@@ -1,22 +1,9 @@
-export const LANGUAGE = 0;
-
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const HOMEPAGE_LOOKS_IMAGES = [
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_1.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_2.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_3.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_4.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_5.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_6.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_7.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_8.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_9.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_10.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_11.jpg',
-  'https://horondi.blob.core.windows.net/horondi/our-looks/horondi_style_12.jpg'
-];
+export const CONSTRUCTOR_VIDEO_LINK =
+  'https://www.youtube.com/watch?v=KG1y-lk2f0E&ab_channel=Ukra%D1%97ner';
+export const UNIQUE_MODEL_IMAGE_LINK = 'https://i.imgur.com/ygJaph4.jpg';
 
 export const CART_IMAGES = {
   lightTheme: './images/cart/cart-light-theme-img.png',
@@ -63,7 +50,8 @@ export const CHAT_FACEBOOK_DATA = {
 
 export const LOGIN_USER_DATA = {
   email: '',
-  password: ''
+  password: '',
+  staySignedIn: false
 };
 
 export const PROFILE_USER_DATA = {
@@ -339,6 +327,11 @@ export const CURRENCIES_LIST = [
   { currency: 'USD', value: 1 }
 ];
 
+export const DEFAULT_PRICE = [
+  { value: 0, currency: 'UAH' },
+  { value: 0, currency: 'USD' }
+];
+
 export const DEFAULT_CURRENCY = 0;
 export const DEFAULT_LANGUAGE = 0;
 export const DEFAULT_COUNT_PER_PAGE = 9;
@@ -367,6 +360,7 @@ export const profileFields = [
 ];
 
 export const carouselInterval = 5000;
+export const carouselMaterialInterval = 2000;
 
 export const moreHeaderButton = [
   {
@@ -378,6 +372,50 @@ export const moreHeaderButton = [
     value: 'More'
   }
 ];
+
+export const sideBarSubList = [
+  {
+    name: ['Матеріали', 'Materials'],
+    link: '/materials'
+  },
+  {
+    name: ['Про нас', 'About us'],
+    link: '/about-us'
+  },
+  {
+    name: ['Новини', 'News'],
+    link: '/news'
+  },
+  {
+    name: ['Контакти', 'Contacts'],
+    link: '/contacts'
+  }
+];
+
+export const SCROLL_BAR_DATA = [
+  {
+    name: ['Слайдер', 'Slider'],
+    href: '#slider'
+  },
+  {
+    name: ['Каталог', 'Catalog'],
+    href: '#catalog'
+  },
+  {
+    name: ['Створи сам', 'Create by yourself'],
+    href: '#constructor'
+  },
+  {
+    name: ['Моделі', 'Models'],
+    href: '#models'
+  },
+  {
+    name: ['Стиль горонді', 'Horondi style'],
+    href: '#horondiStyle'
+  }
+];
+
+export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
 
 export const commentsLimit = 10;
 

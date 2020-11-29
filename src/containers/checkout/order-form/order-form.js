@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, FormHelperText } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -20,17 +20,29 @@ import {
 import { useStyles } from '../checkout.styles';
 
 export const OrderForm = () => {
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
+  }));
+
   const [firstNameValidated, setFirstNameValidated] = useState(false);
   const [lastNameValidated, setLastNameValidated] = useState(false);
   const [emailValidated, setEmailValidated] = useState(false);
   const [phoneValidated, setPhoneValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
-
+  const [deliveryTypeValidator, setDeliveryTypeValidator] = useState(false);
+  const [openModal, setOpenModal] = useState(shouldValidate);
   const [paymentType, setPaymentType] = useState('');
-
   const [user, setUser] = useState(REGISTER_USER_DATA);
+  const [userComment, setUserComment] = useState('');
   const { firstName, lastName, email, phoneNumber } = user;
+
+  const userData = {
+    ...user,
+    paymentType,
+    userComment
+  };
 
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
@@ -41,88 +53,91 @@ export const OrderForm = () => {
 
   const handleCreateOrder = () => {
     setShouldValidate(true);
-    allFieldsValidated && console.log('all fields valid');
+    allFieldsValidated && setOpenModal(true);
+  };
+
+  const handleDeliveryTypeValidator = (city) => {
+    setDeliveryTypeValidator(city);
   };
 
   const selectHandlerPayment = (event) => {
     setPaymentType(event.target.value);
   };
 
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const style = useStyles({ deliveryTypeValidator, isLightTheme });
 
   useEffect(() => {
-    if (firstNameValidated && emailValidated && lastName && phoneNumber) {
+    if (
+      firstNameValidated &&
+      emailValidated &&
+      lastNameValidated &&
+      phoneValidated &&
+      paymentType &&
+      deliveryTypeValidator
+    ) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
     }
-  }, [firstNameValidated, emailValidated, lastName, phoneNumber]);
+  }, [
+    firstNameValidated,
+    emailValidated,
+    lastNameValidated,
+    phoneValidated,
+    paymentType,
+    deliveryTypeValidator
+  ]);
 
-  const style = useStyles();
-
-  const contactsNames = {
-    firstNameField: {
+  const contactsNames = [
+    {
       inputName: 'firstName',
       errorMessage: CHECKOUT_ERROR[language].firstName,
       value: firstName,
       label: CHECKOUT_TEXT_FIELDS[language].firstName,
-      onChange: handleChange,
-      rows: 1,
       validation: {
         value: firstNameValidated,
         setValid: setFirstNameValidated
-      },
-      type: 'text',
-      regExp: formRegExp.name
+      }
     },
-    lastNameNameField: {
+    {
       inputName: 'lastName',
       errorMessage: CHECKOUT_ERROR[language].lastName,
       value: lastName,
       label: CHECKOUT_TEXT_FIELDS[language].lastName,
-      onChange: handleChange,
       validation: {
         value: lastNameValidated,
         setValid: setLastNameValidated
-      },
-      type: 'text',
-      regExp: formRegExp.name
+      }
     }
-  };
+  ];
 
-  const contactsEmailPhone = {
-    email: {
+  const contactsEmailPhone = [
+    {
       inputName: 'email',
       errorMessage: CHECKOUT_ERROR[language].email,
       value: email,
       label: CHECKOUT_TEXT_FIELDS[language].email,
-      onChange: handleChange,
       validation: {
         value: emailValidated,
         setValid: setEmailValidated
       },
-      type: 'text',
       regExp: formRegExp.email
     },
-    phoneNumberField: {
+    {
       inputName: 'phoneNumber',
       errorMessage: CHECKOUT_ERROR[language].phoneNumber,
       value: phoneNumber,
       label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber,
-      onChange: handleChange,
       validation: {
         value: phoneValidated,
         setValid: setPhoneValidated
       },
-      type: 'text',
       regExp: formRegExp.phoneNumber
     }
-  };
+  ];
 
   return (
-    <div>
+    <>
       <div className={style.orderFormWrapper}>
         <div className={style.mainTitle}>
           <span>{CHECKOUT_TITLES[language].orderForm}</span>
@@ -133,26 +148,18 @@ export const OrderForm = () => {
           </span>
           <div>
             <div className={style.contactField}>
-              {Object.values(contactsNames).map(
-                ({
-                  errorMessage,
-                  value,
-                  onChange,
-                  validation,
-                  type,
-                  regExp = null,
-                  label,
-                  inputName
-                }) => (
+              {contactsNames.map(
+                ({ errorMessage, value, validation, label, inputName }) => (
                   <TextField
                     helperText={
                       !validation.value && shouldValidate
                         ? `${errorMessage}`
                         : ''
                     }
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
+                    onChange={(e) =>
+                      handleChange(e, validation.setValid, formRegExp.name)
+                    }
+                    value={value || ''}
                     required
                     fullWidth
                     key={label}
@@ -161,20 +168,19 @@ export const OrderForm = () => {
                     name={inputName}
                     error={!validation.value && shouldValidate}
                     className={style.dataInput}
+                    type='text'
                   />
                 )
               )}
             </div>
             <div className={style.contactField}>
-              {Object.values(contactsEmailPhone).map(
+              {contactsEmailPhone.map(
                 ({
                   label,
                   inputName,
                   errorMessage,
                   value,
-                  onChange,
                   validation,
-                  type,
                   regExp = null
                 }) => (
                   <TextField
@@ -191,21 +197,35 @@ export const OrderForm = () => {
                         : ''
                     }
                     className={style.dataInput}
-                    onChange={(e) => onChange(e, validation.setValid, regExp)}
-                    value={value}
-                    type={type}
+                    onChange={(e) =>
+                      handleChange(e, validation.setValid, regExp)
+                    }
+                    value={value || ''}
+                    type='text'
                   />
                 )
               )}
             </div>
           </div>
         </div>
-        <Delivery />
+        <Delivery
+          handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+          deliveryTypeValidator={deliveryTypeValidator}
+          shouldValidate={shouldValidate}
+          userData={userData}
+          allFieldsValidated={allFieldsValidated}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
         <div className={style.subTitle}>
           <span>{CHECKOUT_TITLES[language].payment}</span>
         </div>
         <div>
-          <FormControl variant='outlined' className={style.dataInput}>
+          <FormControl
+            variant='outlined'
+            className={style.dataInput}
+            error={shouldValidate && paymentType === '' && true}
+          >
             <InputLabel>
               {CHECKOUT_DROP_LIST[language].paymentMethod}
             </InputLabel>
@@ -214,16 +234,27 @@ export const OrderForm = () => {
               onChange={selectHandlerPayment}
               label='paymentType'
             >
-              <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cart}</MenuItem>
-              <MenuItem value={10}>{CHECKOUT_PAYMENT[language].cash}</MenuItem>
+              <MenuItem value='card'>
+                {CHECKOUT_PAYMENT[language].card}
+              </MenuItem>
+              <MenuItem value='cash'>
+                {CHECKOUT_PAYMENT[language].cash}
+              </MenuItem>
             </Select>
+            {paymentType === '' && (
+              <FormHelperText>
+                {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
+              </FormHelperText>
+            )}
           </FormControl>
         </div>
         <div className={style.comments}>
           <TextField
+            value={userComment}
             fullWidth
             multiline
             rows={3}
+            onChange={(e) => setUserComment(e.target.value)}
             variant='outlined'
             label={CHECKOUT_TEXT_FIELDS[language].orderComment}
           />
@@ -239,6 +270,6 @@ export const OrderForm = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };

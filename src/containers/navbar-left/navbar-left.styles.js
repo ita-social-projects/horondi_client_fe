@@ -10,7 +10,8 @@ export const useStyles = makeStyles(() => ({
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     '@media (max-width: 900px)': {
-      marginRight: '10px'
+      marginLeft: '-20px',
+      fontSize: '1rem'
     }
   },
   link: {

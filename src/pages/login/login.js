@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Typography
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './login.styles';
@@ -10,9 +16,14 @@ import {
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  LOGIN_USER_ERROR
+  LOGIN_USER_ERROR,
+  STAY_SIGNED_IN
 } from '../../translations/user.translations';
-import { loginUser, resetState } from '../../redux/user/user.actions';
+import {
+  loginByGoogle,
+  loginUser,
+  resetState
+} from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
 import { Formik, Field, Form } from 'formik';
@@ -47,8 +58,25 @@ const Login = () => {
       .required(' '),
     password: Yup.string()
       .matches(formRegExp.password, errorMessages[language].value.password)
-      .required(' ')
+      .required(' '),
+    staySignedIn: Yup.bool()
   });
+
+  useEffect(() => {
+    window.gapi.load('auth2', () => {
+      window.gapi.auth2.init({
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
+      });
+    });
+  }, []);
+
+  const singIn = () => {
+    const googleAuth = window.gapi.auth2.getAuthInstance();
+    googleAuth.signIn().then((googleUser) => {
+      const idToken = googleUser.getAuthResponse().id_token;
+      dispatch(loginByGoogle({ idToken }));
+    });
+  };
 
   return (
     <Formik
@@ -123,10 +151,31 @@ const Login = () => {
                       {OR_TEXT[language].value}
                     </span>
                   </div>
-                  <Button className={styles.googleBtn} fullWidth>
+                  <Button
+                    className={styles.googleBtn}
+                    onClick={singIn}
+                    fullWidth
+                  >
                     <span className={styles.googleLogo} />
                     Google
                   </Button>
+                  <div className={styles.container}>
+                    <FormControlLabel
+                      control={
+                        <Field
+                          as={Checkbox}
+                          name='staySignedIn'
+                          color='primary'
+                          checked={values.staySignedIn}
+                        />
+                      }
+                      label={
+                        <Typography className={styles.text}>
+                          {STAY_SIGNED_IN[language].value}
+                        </Typography>
+                      }
+                    />
+                  </div>
                   <div className={styles.registerContainer}>
                     <Link to='/register' className={styles.registerBtn}>
                       {REGISTER_PROPOSAL[language].value}

@@ -1,31 +1,74 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText
+} from '@material-ui/core';
 import { useStyles } from '../../checkout.styles';
 import {
   CHECKOUT_DELIVERY_TYPES,
-  CHECKOUT_DROP_LIST
+  CHECKOUT_DROP_LIST,
+  CHECKOUT_TEXT_FIELDS
 } from '../../../../translations/checkout.translations';
 import DeliveryInfo from './delivery-info/delivery-info';
 import { SelfPickupTop, SelfPickupBottom } from './mail-services/self-pickup';
 import { NovaPoshtaTop, NovaPoshtaBottom } from './mail-services/nova-poshta';
 import { UkrposhtaTop, UkrPoshtaBottom } from './mail-services/ukrposhta';
-import { CurrierBottom } from './mail-services/currier/currier-bottom';
-import { getNovaPoshtaCities } from '../../../../redux/checkout/checkout.actions';
+import { CourierBottom } from './mail-services/courier/courier-bottom';
+import {
+  getFondyData,
+  getNovaPoshtaCities
+} from '../../../../redux/checkout/checkout.actions';
+import SimpleModal from './modal/order-form-modal';
 
-const DeliveryType = ({ deliveryType, setDeliveryType }) => {
+const DeliveryType = ({
+  deliveryType,
+  setDeliveryType,
+  handleDeliveryTypeValidator,
+  shouldValidate,
+  allFieldsValidated,
+  userData,
+  openModal,
+  setOpenModal
+}) => {
   const style = useStyles();
-  const { language, contacts } = useSelector(({ Language, Contacts }) => ({
-    language: Language.language,
-    contacts: Contacts.contacts
-  }));
+  const dispatch = useDispatch();
+  const { language, contacts, cities } = useSelector(
+    ({ Language, Contacts, Checkout }) => ({
+      language: Language.language,
+      contacts: Contacts.contacts,
+      cities: Checkout.cities
+    })
+  );
 
   const [city, setCity] = useState('');
-  const dispatch = useDispatch();
+  const [departmentValue, setDepartmentValue] = useState('');
+  const [streetValue, setStreetValue] = useState('');
+  const [buildValue, setBuildValue] = useState('');
+  const [apartmentValue, setApartmentValue] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const { cities } = useSelector(({ Checkout }) => ({
-    cities: Checkout.cities
-  }));
+  const personalData = {
+    ...userData,
+    city,
+    departmentValue,
+    streetValue,
+    buildValue,
+    apartmentValue,
+    deliveryType,
+    totalPrice
+  };
+
+  const fondyData = useMemo(
+    () => ({
+      amount: !!totalPrice && totalPrice * 100,
+      orderID: Math.floor(Math.random() * (100_000_000 - 1_000_000) + 1_000_000)
+    }),
+    [totalPrice]
+  );
 
   const citiesForNovaPoshta = cities.map(
     (cityForNovaPoshta) => cityForNovaPoshta && cityForNovaPoshta.description
@@ -40,11 +83,25 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     dispatch(getNovaPoshtaCities(city));
   }, [dispatch, city]);
 
+  useEffect(() => {
+    fondyData.amount && dispatch(getFondyData(fondyData));
+  }, [dispatch, fondyData, totalPrice]);
+
+  useEffect(() => {
+    deliveryType === CHECKOUT_DELIVERY_TYPES[language].selfPickUP &&
+      setCity('');
+    deliveryType === CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta &&
+      setDepartmentValue('');
+    if (deliveryType === CHECKOUT_DELIVERY_TYPES[language].novaPoshta) {
+      setBuildValue('');
+      setApartmentValue('');
+      setStreetValue('');
+    }
+  }, [deliveryType, language]);
+
   const selectHandlerDelivery = (event) => {
     setDeliveryType(event.target.value);
   };
-
-  const setCityHandler = (cityToSend) => setCity(cityToSend);
 
   const departmentSelfPickUpStorage = contacts.map(
     (contact) => contact.address[language].value
@@ -60,7 +117,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
     CHECKOUT_DELIVERY_TYPES[language].selfPickUP,
     CHECKOUT_DELIVERY_TYPES[language].novaPoshta,
     CHECKOUT_DELIVERY_TYPES[language].ukrPoshta,
-    CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta
+    CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta
   ];
 
   const deliverySwitcherTop = () => {
@@ -80,7 +137,7 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
       default:
         return (
           <NovaPoshtaTop
-            setCityHandler={setCityHandler}
+            setCity={setCity}
             citiesForNovaPoshta={citiesForNovaPoshta}
           />
         );
@@ -90,18 +147,35 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   const deliverySwitcherBottom = () => {
     switch (deliveryType) {
       case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return <NovaPoshtaBottom city={city} />;
+        return (
+          <NovaPoshtaBottom
+            city={city}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+            departmentValue={departmentValue}
+            setDepartmentValue={setDepartmentValue}
+          />
+        );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <UkrPoshtaBottom />;
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
-          <CurrierBottom cityForNovaPoshtaBottom={cityForNovaPoshtaBottom} />
+          <CourierBottom
+            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+            setStreetValue={setStreetValue}
+            setBuildValue={setBuildValue}
+            setApartmentValue={setApartmentValue}
+            streetValue={streetValue}
+            buildValue={buildValue}
+            apartmentValue={apartmentValue}
+          />
         );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
         return (
           <SelfPickupBottom
             departmentSelfPickUpStorage={departmentSelfPickUpStorage}
             departmentSelfPickUp={departmentSelfPickUp}
+            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
           />
         );
       default:
@@ -116,19 +190,28 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
           <DeliveryInfo
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
             from={CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
+            setTotalPrice={setTotalPrice}
+            isRenderPrice={departmentValue}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
         return <DeliveryInfo />;
-      case CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta:
+      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
         return (
           <DeliveryInfo
             cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
-            from={CHECKOUT_DELIVERY_TYPES[language].currierNovaPoshta}
+            from={CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta}
+            setTotalPrice={setTotalPrice}
+            isRenderPrice={streetValue}
           />
         );
       case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return <DeliveryInfo />;
+        return (
+          <DeliveryInfo
+            from={CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
+            setTotalPrice={setTotalPrice}
+          />
+        );
       default:
         return '';
     }
@@ -137,7 +220,11 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
   return (
     <div>
       <div className={style.contactField}>
-        <FormControl variant='outlined' className={style.dataInput}>
+        <FormControl
+          variant='outlined'
+          className={style.dataInput}
+          error={shouldValidate && deliveryType === '' && true}
+        >
           <InputLabel>{CHECKOUT_DROP_LIST[language].deliveryType}</InputLabel>
           <Select
             value={deliveryType}
@@ -150,11 +237,26 @@ const DeliveryType = ({ deliveryType, setDeliveryType }) => {
               </MenuItem>
             ))}
           </Select>
+          {deliveryType === '' && (
+            <FormHelperText>
+              {CHECKOUT_TEXT_FIELDS[language].deliveryType}
+            </FormHelperText>
+          )}
         </FormControl>
         {deliveryType && deliverySwitcherTop()}
       </div>
       {deliverySwitcherBottom()}
       {deliveryInfoSwitcher()}
+      <div>
+        <SimpleModal
+          fondyData={fondyData}
+          shouldValidate={shouldValidate}
+          allFieldsValidated={allFieldsValidated}
+          personalData={personalData}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
+      </div>
     </div>
   );
 };

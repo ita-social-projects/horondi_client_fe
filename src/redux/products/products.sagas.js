@@ -31,7 +31,7 @@ import { setComments } from '../comments/comments.actions';
 import {
   StateCurrencySelector,
   StateProductsSelector
-} from '../selectors/products-sagas.selectors';
+} from '../selectors/state.selectors';
 
 export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {

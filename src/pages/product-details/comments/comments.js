@@ -24,7 +24,7 @@ import {
 } from '../../../redux/comments/comments.actions';
 import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
-import { ProductDetailsCommentsPageSelector } from '../../../redux/selectors/product-details.selectors';
+import { ProductDetailsCommentsPageSelector } from '../../../redux/selectors/multiple.selectors';
 
 const Comments = () => {
   const styles = useStyles();

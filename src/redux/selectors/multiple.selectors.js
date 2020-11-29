@@ -1,3 +1,12 @@
+export const LanguageAndContactsSelectors = ({
+  Language,
+  Contacts: { loading, contacts }
+}) => ({
+  contacts,
+  loading,
+  language: Language.language
+});
+
 export const ProductDetailsCommentsPageSelector = ({
   Products,
   Language,

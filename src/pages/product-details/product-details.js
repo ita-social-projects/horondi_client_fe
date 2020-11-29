@@ -22,7 +22,7 @@ import {
 } from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
-import { CurrencyAndProductsSelector } from '../../redux/selectors/product-details.selectors';
+import { CurrencyAndProductsSelector } from '../../redux/selectors/multiple.selectors';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;

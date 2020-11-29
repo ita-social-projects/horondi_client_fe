@@ -6,7 +6,7 @@ import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import CircularLoadingBar from '../../components/circular-loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
-import { LanguageAndContactsSelectors } from '../../redux/selectors/contacts.selectors';
+import { LanguageAndContactsSelectors } from '../../redux/selectors/multiple.selectors';
 
 const Contacts = ({ fromCheckout }) => {
   const { contacts, loading, language } = useSelector(

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 
 import { MODAL_BUTTONS } from '../../translations/modal.translations';
 import { useStyles } from './modal.styles';
+import Popper from '@material-ui/core/Popper';
 
 const Modal = ({ message, itemName, onAction, isOpen, language }) => {
   const [open, setOpen] = useState(isOpen);
@@ -19,7 +20,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
       <p className={styles.message}>
         {message}
         <br />
-        <b>{itemName}</b> ?
+        <b>{itemName}</b>
       </p>
       <div className={styles.buttonGroup}>
         <Button
@@ -42,14 +43,14 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
 
   return (
     <div>
-      <SimpleModal
+      <Popper
         open={open}
         onClose={handleClose}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >
-        {body}
-      </SimpleModal>
+        <SimpleModal open={open}>{body}</SimpleModal>
+      </Popper>
     </div>
   );
 };

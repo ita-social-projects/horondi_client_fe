@@ -9,6 +9,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '-15px'
   },
   paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
     position: 'absolute',
     top: '53%',
     left: '51%',
@@ -22,6 +25,8 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3)
   },
   buttonGroup: {
+    display: 'flex',
+    justifyContent: 'space-around',
     width: '100%',
     height: '30%',
     textAlign: 'center',

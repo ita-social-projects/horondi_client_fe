@@ -5,10 +5,13 @@ import Cart from '../../pages/cart';
 
 export const Checkout = () => {
   const cartItems = useSelector(({ Cart: cartData }) => cartData.list);
+  const categories = useSelector(
+    ({ Categories: categoriesData }) => categoriesData.list
+  );
 
   return (
     <>
-      <Cart cartItems={cartItems} />
+      <Cart cartItems={cartItems} categories={categories} />
       {cartItems.length && <OrderForm />}
     </>
   );

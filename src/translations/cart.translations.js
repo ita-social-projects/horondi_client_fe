@@ -13,12 +13,12 @@ export const CART_BUTTON_TITLES = {
   0: {
     empty: 'Обрати зараз',
     home: 'На домашню сторінку',
-    goods: 'Замовити товар'
+    goods: 'Щоб продовжити замовлення'
   },
   1: {
     empty: 'Shop now',
     home: 'To home page',
-    goods: 'To order goods'
+    goods: 'To proceed order'
   }
 };
 

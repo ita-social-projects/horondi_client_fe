@@ -1,4 +1,4 @@
-export const LanguageAndContactsSelectors = ({
+export const selectLanguageAndContactsLoadingContacts = ({
   Language,
   Contacts: { loading, contacts }
 }) => ({
@@ -7,7 +7,7 @@ export const LanguageAndContactsSelectors = ({
   language: Language.language
 });
 
-export const ProductDetailsCommentsPageSelector = ({
+export const selectProductsIdCommentsLanguageUserData = ({
   Products,
   Language,
   User,
@@ -21,7 +21,7 @@ export const ProductDetailsCommentsPageSelector = ({
   userData: User.userData
 });
 
-export const CurrencyAndProductsSelector = ({
+export const selectCurrencyProductsCategoryFilter = ({
   Currency,
   Products: { product, productLoading, productToSend, filters }
 }) => ({

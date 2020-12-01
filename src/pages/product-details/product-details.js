@@ -22,7 +22,7 @@ import {
 } from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
-import { CurrencyAndProductsSelector } from '../../redux/selectors/multiple.selectors';
+import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -32,7 +32,7 @@ const ProductDetails = ({ match }) => {
     categoryFilter,
     productToSend,
     currency
-  } = useSelector(CurrencyAndProductsSelector);
+  } = useSelector(selectCurrencyProductsCategoryFilter);
   const dispatch = useDispatch();
   const styles = useStyles();
 

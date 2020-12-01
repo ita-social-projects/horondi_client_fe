@@ -1,1 +1,1 @@
-export const WishListListSelector = ({ Wishlist }) => Wishlist.list;
+export const selectWishListList = ({ Wishlist }) => Wishlist.list;

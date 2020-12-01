@@ -24,7 +24,7 @@ import {
 } from '../../../redux/comments/comments.actions';
 import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
-import { ProductDetailsCommentsPageSelector } from '../../../redux/selectors/multiple.selectors';
+import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 
 const Comments = () => {
   const styles = useStyles();
@@ -37,7 +37,7 @@ const Comments = () => {
     comments,
     userData,
     currentLimit
-  } = useSelector(ProductDetailsCommentsPageSelector);
+  } = useSelector(selectProductsIdCommentsLanguageUserData);
 
   const [rate, setRate] = useState(0);
 

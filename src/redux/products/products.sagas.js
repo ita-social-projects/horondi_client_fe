@@ -28,10 +28,9 @@ import {
 } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
-import {
-  StateCurrencySelector,
-  StateProductsSelector
-} from '../selectors/state.selectors';
+
+const StateProductsSelector = (state) => state.Products;
+const StateCurrencySelector = (state) => state.Currency.currency;
 
 export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {

@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3)
   },
+
   buttonGroup: {
     display: 'flex',
     justifyContent: 'space-around',

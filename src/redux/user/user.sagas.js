@@ -120,7 +120,7 @@ export function* handleGoogleUserLogin({ payload }) {
     const user = yield call(
       getItems,
       `
-    mutation($id_token:String!){googleUser(id_token:$id_token){
+    mutation($idToken:String!){googleUser(idToken:$idToken){
       firstName,
       lastName,
       email,
@@ -134,7 +134,7 @@ export function* handleGoogleUserLogin({ payload }) {
 }
   `,
       {
-        id_token: payload.idToken
+        idToken: payload.idToken
       }
     );
     yield put(setUser(user.data.googleUser));

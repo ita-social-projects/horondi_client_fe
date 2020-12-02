@@ -17,7 +17,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
 
   const body = (
     <div className={styles.paper} data-cy='removing-modal'>
-      <p className={styles.message}>
+      <p>
         {message}
         <br />
         <b>{itemName}</b>
@@ -26,15 +26,10 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
         <Button
           onClick={() => handleClose(null, null, true)}
           variant='contained'
-          className={styles.buttonDel}
         >
           {MODAL_BUTTONS[language].confirm}
         </Button>
-        <Button
-          onClick={handleClose}
-          variant='contained'
-          className={styles.buttonCan}
-        >
+        <Button onClick={handleClose} variant='contained'>
           {MODAL_BUTTONS[language].cancel}
         </Button>
       </div>

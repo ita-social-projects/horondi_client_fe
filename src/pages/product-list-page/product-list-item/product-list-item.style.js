@@ -6,53 +6,26 @@ export const useStyles = makeStyles(() => ({
       props.isLightTheme ? '#e3e7ea' : '#262626'
     }`,
     backgroundSize: 'cover',
-    width: '100%',
-    height: '25rem',
-    cursor: 'pointer',
+    height:'100%',
+    width:'100%',
     position: 'relative',
-    borderRadius: '5px',
-    '@media (max-width:2560px)': {
-      height: '32rem'
-    },
-    '@media (max-width:1920px)': {
-      height: '26rem'
-    },
-    '@media (max-width:1440px)': {
-      height: '22rem'
-    },
-    '@media (max-width:1280px)': {
-      height: '20rem'
-    },
-    '@media (max-width:1152px)': {
-      height: '18rem'
-    },
-    '@media (max-width:1024px)': {
-      height: '14rem'
-    },
-    '@media (max-width:900px)': {
-      height: '12rem'
-    },
-    '@media (max-width:768px)': {
-      height: '18rem'
-    },
-    '@media (max-width:520px)': {
-      height: '16rem'
-    },
-    '@media (max-width:420px)': {
-      height: '20rem'
-    }
+    boxShadow: '0px 5px 8px #c5c5c5',
   }),
+  wrapper:{
+    height:'400px',
+    width:'100%',
+    cursor: 'pointer',
+  },
   name: {
     display: 'flex',
     flexDirection: 'column',
     height: '4rem',
     width: '100%',
     position: 'absolute',
-    backgroundColor: 'rgb(3, 3, 3,.6)',
+    backgroundColor: 'rgba(3,3,3,0.6)',
     bottom: 0,
     color: 'white',
     padding: '.5rem',
-    borderRadius: '0px 0px 5px 5px',
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',

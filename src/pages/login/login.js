@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
 import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
 import {
@@ -19,8 +22,6 @@ import {
 } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 
 const Login = () => {
   const styles = useStyles();
@@ -79,88 +80,101 @@ const Login = () => {
       validateOnBlur={shouldValidate}
     >
       {({ values, errors, isValid }) => (
-        <div className={styles.login}>
-          <div className={styles.loginWrapper}>
-            <Form className={styles.loginForm}>
-              {userLoading ? (
-                <Loader />
-              ) : (
-                <>
-                  <h2 className={styles.heading}>
-                    {LOGIN_FORM_LABEL[language].value}
-                  </h2>
-                  <Field
-                    as={TextField}
-                    label={placeholders.email[language].value}
-                    className={`${styles.emailInput} ${
-                      values.email ? styles.afterText : ''
-                    }`}
-                    fullWidth
-                    variant='outlined'
-                    type='text'
-                    name='email'
-                    color='primary'
-                    error={!!errors.email}
-                    helperText={!!errors.email && `${errors.email}, `}
-                  />
-                  <Field
-                    as={TextField}
-                    label={placeholders.password[language].value}
-                    className={styles.passwordInput}
-                    fullWidth
-                    variant='outlined'
-                    color='primary'
-                    type='password'
-                    InputProps={endAdornment(showPassword, setShowPassword)}
-                    name='password'
-                    error={!!errors.password}
-                    helperText={errors.password || ''}
-                  />
-                  <div className={styles.recoveryContainer}>
-                    <Link to='/recovery' className={styles.recoveryBtn}>
-                      {FORGOT_PASSWORD[language].value}
-                    </Link>
-                  </div>
-                  <div className={styles.loginGroup}>
-                    <Button
-                      className={styles.loginBtn}
-                      fullWidth
-                      type='submit'
-                      onClick={() => setShouldValidate(true)}
-                    >
-                      {LOGIN_FORM_LABEL[language].value}
-                    </Button>
-                    {loginError ? (
-                      <p className={styles.loginError}>
-                        {LOGIN_USER_ERROR[loginError] && loginError
-                          ? LOGIN_USER_ERROR[loginError][language].value
-                          : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className={styles.orContainer}>
-                    <span className={styles.orText}>
-                      {OR_TEXT[language].value}
-                    </span>
-                  </div>
-                  <Button
-                    className={styles.googleBtn}
-                    onClick={singIn}
-                    fullWidth
-                  >
-                    <span className={styles.googleLogo} />
-                    Google
-                  </Button>
-                  <div className={styles.registerContainer}>
-                    <Link to='/register' className={styles.registerBtn}>
-                      {REGISTER_PROPOSAL[language].value}
-                    </Link>
-                  </div>
-                </>
-              )}
-            </Form>
+        <div className={styles.container}>
+          <div className={styles.background}></div>
+          <div className={styles.wrapper}>
+            <Grid
+              container
+              alignItems='center'
+              className={styles.formWrapper}
+              spacing={2}>
+              <Grid item xs={12} sm={6} md={6} lg={6}  className={styles.fonWrapper}>
+              </Grid>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
+                <Form className={styles.loginForm}>
+                  {userLoading ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      <h2 className={styles.heading}>
+                        {LOGIN_FORM_LABEL[language].value}
+                      </h2>
+                      <Field
+                        as={TextField}
+                        label={placeholders.email[language].value}
+                        className={`${styles.emailInput} ${
+                          values.email ? styles.afterText : ''
+                        }`}
+                        fullWidth
+                        variant='outlined'
+                        type='text'
+                        name='email'
+                        color='primary'
+                        error={!!errors.email}
+                        helperText={!!errors.email && `${errors.email}, `}
+                      />
+                      <Field
+                        as={TextField}
+                        label={placeholders.password[language].value}
+                        className={styles.passwordInput}
+                        fullWidth
+                        variant='outlined'
+                        color='primary'
+                        type='password'
+                        InputProps={endAdornment(showPassword, setShowPassword)}
+                        name='password'
+                        error={!!errors.password}
+                        helperText={errors.password || ''}
+                      />
+                      <div className={styles.recoveryContainer}>
+                        <Link to='/recovery' className={styles.recoveryBtn}>
+                          {FORGOT_PASSWORD[language].value}
+                        </Link>
+                      </div>
+                      <div className={styles.loginGroup}>
+                        <Button
+                          className={styles.loginBtn}
+                          fullWidth
+                          type='submit'
+                          onClick={() => setShouldValidate(true)}
+                        >
+                          {LOGIN_FORM_LABEL[language].value}
+                        </Button>
+                        {loginError ? (
+                          <p className={styles.loginError}>
+                            {LOGIN_USER_ERROR[loginError] && loginError
+                              ? LOGIN_USER_ERROR[loginError][language].value
+                              : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div className={styles.orContainer}>
+                        <span className={styles.orText}>
+                          {OR_TEXT[language].value}
+                        </span>
+                      </div>
+                      <Button
+                        className={styles.googleBtn}
+                        onClick={singIn}
+                        fullWidth
+                      >
+                        <span className={styles.googleLogo} />
+                        Google
+                      </Button>
+                      <div className={styles.registerContainer}>
+                        <Link to='/register' className={styles.registerBtn}>
+                          {REGISTER_PROPOSAL[language].value}
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </Form>
+              </Grid>
+            </Grid>
           </div>
+
         </div>
+
       )}
     </Formik>
   );

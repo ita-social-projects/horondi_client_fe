@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import { AVAILABLE_COUNT_LABEL_TEXT } from '../../../translations/product-list.translations';
@@ -39,26 +41,31 @@ const ProductListItem = ({ product }) => {
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
   return (
-    <Link to={`/product/${product._id}`} className={styles.productItem}>
-      <Card className={styles.name}>
-        {product.name[language].value}
-        <StarRating size='small' readOnly rate={product.rate} />
-        <div>
-          <span className={styles.title}>
-            <span>
-              <FontAwesomeIcon icon={currencySign} />
-              {product.basePrice[currency].value / 100}
-            </span>
-            {!!product.availableCount && (
-              <span>
-                {AVAILABLE_COUNT_LABEL_TEXT[language].value}:{' '}
-                {product.availableCount}
+    <Grid item xs={12} sm={6} md={4} lg={4} className={styles.wrapper}>
+      <div className={styles.productItem}>
+        <Link to={`/product/${product._id}`}>
+          <div className={styles.name}>
+            {product.name[language].value}
+            <StarRating size='small' readOnly rate={product.rate} />
+            <div>
+              <span className={styles.title}>
+                <span>
+                  <FontAwesomeIcon icon={currencySign} />
+                  {product.basePrice[currency].value / 100}
+                </span>
+                {!!product.availableCount && (
+                  <span>
+                    {AVAILABLE_COUNT_LABEL_TEXT[language].value}:{' '}
+                    {product.availableCount}
+                  </span>
+                )}
               </span>
-            )}
-          </span>
-        </div>
-      </Card>
-    </Link>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+    </Grid>
   );
 };
 

@@ -1,21 +1,46 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/1.jpg';
+import BG from '../../images/8.jpg';
 
 export const useStyles = makeStyles((theme) => ({
-  register: {
+  container:{
+    overflowX:'hidden',
+  },
+  wrapper:{
+    height:'100vh',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  background:{
+    height:'100vh',
+    width:'100%',
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
-    height: '1000px'
+    filter:'brightness(30%) contrast(90%)',
+    position:'absolute',
+    zIndex:-1
+  },
+  formWrapper:{
+    margin:theme.spacing(1),
+    maxWidth:'960px',
+    height: '550px',
+    filter:'drop-shadow(8px 8px 10px dark-gray)',
+    '& .MuiGrid-item': {
+      padding: '0px !important'
+    }
+  },
+  fonWrapper:{
+    background: `url(${BG}) no-repeat `,
+    backgroundSize: 'cover',
+    height: '100%',
+    width: '100%',
   },
   registerForm: {
     backgroundColor: theme.palette.backgroundColor,
-    width: '400px',
-    minHeight: '200px',
-    padding: '33px 47px 63px 53px',
+    width: '100%',
+    height: '550px',
+    padding: '80px 63px 63px',
     boxSizing: 'border-box',
-    float: 'right',
-    marginTop: '141px',
-    marginRight: '53px'
   },
   heading: {
     fontSize: '1.5rem',

@@ -6,7 +6,7 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading
+  setProductLoading, setCurrentPage
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
@@ -40,7 +40,6 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
     const state = yield select((state) => state.Products);
     const currency = yield select((state) => state.Currency.currency);
     const products = yield call(getFilteredProducts, { state, currency });
-
     yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));
 
     if (forSearchBar) {

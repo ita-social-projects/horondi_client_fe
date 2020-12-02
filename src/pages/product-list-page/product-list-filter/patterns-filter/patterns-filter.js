@@ -24,6 +24,7 @@ const PatternsFilter = ({ filterData, filters, language }) => {
     );
 
   const handlePatternChange = (event) => {
+
     if (!event.target.checked) {
       dispatch(
         setPatternsFilter(

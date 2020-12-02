@@ -10,5 +10,10 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 1400px)': {
       margin: '13rem auto'
     }
+  },
+  mainBar: {
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
   }
 }));

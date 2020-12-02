@@ -4,7 +4,8 @@ export const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
     scrollSnapStop: 'none',
-    scrollSnapAlign: 'start'
+    scrollSnapAlign: 'start',
+    marginTop: 'auto'
   },
   footer: {
     backgroundColor: '#000000',

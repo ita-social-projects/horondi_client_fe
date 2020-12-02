@@ -60,12 +60,14 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={themeValue}>
-      <CssBaseline />
-      <Routes />
-      <Chat />
-      <SearchBarList />
-    </ThemeProvider>
+    <div className={styles.mainBar}>
+      <ThemeProvider theme={themeValue}>
+        <CssBaseline />
+        <Routes />
+        <Chat />
+        <SearchBarList />
+      </ThemeProvider>
+    </div>
   );
 };
 

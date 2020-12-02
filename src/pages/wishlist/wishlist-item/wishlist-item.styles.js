@@ -72,5 +72,13 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '0.8em',
       fontWeight: 'bold'
     }
+  },
+  trash: {
+    position: 'absolute',
+    right: 10,
+    cursor: 'pointer',
+    '@media (max-width: 768px)': {
+      right: 1
+    }
   }
 }));

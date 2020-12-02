@@ -79,6 +79,9 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     '@media (max-width: 768px)': {
       right: 1
+    },
+    '@media (max-width: 425px)': {
+      right: -35
     }
   }
 }));

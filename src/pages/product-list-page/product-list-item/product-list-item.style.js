@@ -16,7 +16,10 @@ export const useStyles = makeStyles(() => ({
   wrapper:{
     height:'380px',
     width:'100%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 450px)': {
+      height:'320px',
+    }
   },
   name: {
     display: 'flex',

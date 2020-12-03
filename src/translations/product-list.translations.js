@@ -217,7 +217,9 @@ export const SORT_BY_SELECT_OPTIONS = [
     }
   }
 ];
-
+export const DRAWER_TEMPORARY = 'temporary';
+export const DRAWER_PERMANENT = 'permanent';
+export const TEMPORARY_WIDTHS = ['sm', 'xs'];
 export const ITEMS_PER_PAGE = [
   {
     title: 'nine products per page',

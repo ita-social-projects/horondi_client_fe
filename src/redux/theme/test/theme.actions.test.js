@@ -1,4 +1,5 @@
-import { setThemeMode } from '../theme.actions';
+import { setFilterMenuStatus, setThemeMode } from '../theme.actions';
+import { SET_FILTER_MENU_STATUS } from '../theme.types';
 
 describe('theme actions test', () => {
   let type;
@@ -28,5 +29,18 @@ describe('theme actions test', () => {
   it('value by key "payload" of returned object should to be false', () => {
     themeAction = setThemeMode(false);
     expect(themeAction.payload).toEqual(false);
+  });
+  it('should return filter menu status = true', () => {
+    expect(setFilterMenuStatus(true)).toEqual({
+      type: SET_FILTER_MENU_STATUS,
+      payload: true
+    });
+  });
+
+  it('should return filter menu status = false', () => {
+    expect(setFilterMenuStatus(false)).toEqual({
+      type: SET_FILTER_MENU_STATUS,
+      payload: false
+    });
   });
 });

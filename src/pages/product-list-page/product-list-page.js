@@ -21,14 +21,13 @@ import {
 
 import {
   SHOW_FILTER_BUTTON_TEXT,
-  PRODUCT_NOT_FOUND
+  PRODUCT_NOT_FOUND,
+  DRAWER_PERMANENT,
+  DRAWER_TEMPORARY,
+  TEMPORARY_WIDTHS
 } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
-
-const DRAWER_TEMPORARY = 'temporary';
-const DRAWER_PERMANENT = 'permanent';
-const TEMPORARY_WIDTHS = ['sm', 'xs'];
 
 const ProductListPage = ({ category, model, width }) => {
   const dispatch = useDispatch();

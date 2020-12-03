@@ -29,8 +29,8 @@ import {
 
 import { setComments } from '../comments/comments.actions';
 
-const StateProductsSelector = (state) => state.Products;
-const StateCurrencySelector = (state) => state.Currency.currency;
+const selectStateProducts = (state) => state.Products;
+const selectStateCurrency = (state) => state.Currency.currency;
 
 export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
   try {
@@ -40,8 +40,8 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
       yield put(setProductsLoading(true));
     }
 
-    const state = yield select(StateProductsSelector);
-    const currency = yield select(StateCurrencySelector);
+    const state = yield select(selectStateProducts);
+    const currency = yield select(selectStateCurrency);
     const products = yield call(getFilteredProducts, { state, currency });
 
     yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));

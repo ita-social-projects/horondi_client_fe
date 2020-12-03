@@ -22,6 +22,7 @@ import {
 } from '../../redux/products/products.actions';
 
 import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
+import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -31,18 +32,7 @@ const ProductDetails = ({ match }) => {
     categoryFilter,
     productToSend,
     currency
-  } = useSelector(
-    ({
-      Currency,
-      Products: { product, productLoading, productToSend, filters }
-    }) => ({
-      currency: Currency.currency,
-      categoryFilter: filters.categoryFilter,
-      isLoading: productLoading,
-      product,
-      productToSend
-    })
-  );
+  } = useSelector(selectCurrencyProductsCategoryFilter);
   const dispatch = useDispatch();
   const styles = useStyles();
 
@@ -189,12 +179,12 @@ const ProductDetails = ({ match }) => {
     [uniqueBottomMaterials, options]
   );
 
-  const handleSizeChange = (id) => {
+  const handleSizeChange = (selectedId) => {
     const oldPrice = selectedSize
       ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
       : DEFAULT_PRICE;
 
-    const size = sizes.find(({ _id }) => _id === id);
+    const size = sizes.find(({ _id }) => _id === selectedId);
 
     const newTotalPrice = productToSend.totalPrice.map((item, i) => {
       item.value =
@@ -210,7 +200,7 @@ const ProductDetails = ({ match }) => {
           volumeInLiters: size.volumeInLiters,
           weightInKg: size.weightInKg
         },
-        selectedSize: id
+        selectedSize: selectedId
       })
     );
 

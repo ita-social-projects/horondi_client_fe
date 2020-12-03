@@ -5,14 +5,13 @@ const initialState = {
 };
 
 const businessPagesReducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-    case SET_HEADER_LINKS:
-      return {
-        ...state,
-        linksList: action.payload
-      };
-    default:
-      return state;
+  if (action.type === SET_HEADER_LINKS) {
+    return {
+      ...state,
+      linksList: action.payload
+    };
+  } else {
+    return state;
   }
 };
 

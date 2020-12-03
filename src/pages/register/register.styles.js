@@ -2,23 +2,23 @@ import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/8.jpg';
 
 export const useStyles = makeStyles((theme) => ({
-  container:{
+  registerContainer:{
     overflowX:'hidden',
   },
-  wrapper:{
+  formContainer:{
     height:'100vh',
     display:'flex',
-    alignItems:'center',
     justifyContent:'center',
+    alignItems:'center'
   },
-  background:{
+  registerBackground:{
     height:'100vh',
     width:'100%',
+    position:'absolute',
+    zIndex:-1,
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
-    filter:'brightness(30%) contrast(90%)',
-    position:'absolute',
-    zIndex:-1
+    filter:'brightness(30%) contrast(90%)'
   },
   formWrapper:{
     margin:theme.spacing(1),
@@ -35,11 +35,11 @@ export const useStyles = makeStyles((theme) => ({
       padding:'0 15px'
     }
   },
-  fonWrapper:{
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
+  formBackground:{
     height: '100%',
     width: '100%',
+    background: `url(${BG}) no-repeat `,
+    backgroundSize: 'cover',
     '@media (max-width: 959px)': {
       display: 'none'
     }

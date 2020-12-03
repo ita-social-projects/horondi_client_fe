@@ -88,15 +88,15 @@ export default function Register() {
         hasRegistered ? (
           successWindow
         ) : (
-          <div className={styles.container}>
-            <div className={styles.background}></div>
-            <div className={styles.wrapper}>
+          <div className={styles.registerContainer}>
+            <div className={styles.registerBackground}></div>
+            <div className={styles.formContainer}>
               <Grid
                 container
                 alignItems='center'
                 className={styles.formWrapper}
                 spacing={2}>
-                <Grid item sm={12} md={6} lg={6}  className={styles.fonWrapper}>
+                <Grid item sm={12} md={6} lg={6}  className={styles.formBackground}>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Form className={styles.registerForm}>

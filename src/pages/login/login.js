@@ -8,6 +8,9 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
 import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
 import {
@@ -26,14 +29,13 @@ import {
 } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
+import routes from '../../configs/routes';
 
 const Login = () => {
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-
+  const {pathToRecovery, pathToRegister}= routes
   const { loginError, userLoading, language } = useSelector(
     ({ User, Language }) => ({
       loginError: User.error,
@@ -87,103 +89,113 @@ const Login = () => {
       validateOnBlur={shouldValidate}
     >
       {({ values, errors, isValid }) => (
-        <div className={styles.login}>
-          <div className={styles.loginWrapper}>
-            <Form className={styles.loginForm}>
-              {userLoading ? (
-                <Loader />
-              ) : (
-                <>
-                  <h2 className={styles.heading}>
-                    {LOGIN_FORM_LABEL[language].value}
-                  </h2>
-                  <Field
-                    as={TextField}
-                    label={placeholders.email[language].value}
-                    className={`${styles.emailInput} ${
-                      values.email ? styles.afterText : ''
-                    }`}
-                    fullWidth
-                    variant='outlined'
-                    type='text'
-                    name='email'
-                    color='primary'
-                    error={!!errors.email}
-                    helperText={!!errors.email && `${errors.email}, `}
-                  />
-                  <Field
-                    as={TextField}
-                    label={placeholders.password[language].value}
-                    className={styles.passwordInput}
-                    fullWidth
-                    variant='outlined'
-                    color='primary'
-                    type='password'
-                    InputProps={endAdornment(showPassword, setShowPassword)}
-                    name='password'
-                    error={!!errors.password}
-                    helperText={errors.password || ''}
-                  />
-                  <div className={styles.recoveryContainer}>
-                    <Link to='/recovery' className={styles.recoveryBtn}>
-                      {FORGOT_PASSWORD[language].value}
-                    </Link>
-                  </div>
-                  <div className={styles.loginGroup}>
-                    <Button
-                      className={styles.loginBtn}
-                      fullWidth
-                      type='submit'
-                      onClick={() => setShouldValidate(true)}
-                    >
-                      {LOGIN_FORM_LABEL[language].value}
-                    </Button>
-                    {loginError ? (
-                      <p className={styles.loginError}>
-                        {LOGIN_USER_ERROR[loginError] && loginError
-                          ? LOGIN_USER_ERROR[loginError][language].value
-                          : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className={styles.orContainer}>
-                    <span className={styles.orText}>
-                      {OR_TEXT[language].value}
-                    </span>
-                  </div>
-                  <Button
-                    className={styles.googleBtn}
-                    onClick={singIn}
-                    fullWidth
-                  >
-                    <span className={styles.googleLogo} />
-                    Google
-                  </Button>
-                  <div className={styles.container}>
-                    <FormControlLabel
-                      control={
-                        <Field
-                          as={Checkbox}
-                          name='staySignedIn'
-                          color='primary'
-                          checked={values.staySignedIn}
+        <div className={styles.container}>
+          <div className={styles.background} />
+          <div className={styles.wrapper}>
+            <Grid
+              container
+              alignItems='center'
+              className={styles.formWrapper}
+              spacing={2}>
+              <Grid item sm={12} md={6} lg={6}  className={styles.fonWrapper} />
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <Form className={styles.loginForm}>
+                  {userLoading ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      <h2 className={styles.heading}>
+                        {LOGIN_FORM_LABEL[language].value}
+                      </h2>
+                      <Field
+                        as={TextField}
+                        label={placeholders.email[language].value}
+                        className={`${styles.emailInput} ${
+                          values.email ? styles.afterText : ''
+                        }`}
+                        fullWidth
+                        variant='outlined'
+                        type='text'
+                        name='email'
+                        color='primary'
+                        error={!!errors.email}
+                        helperText={!!errors.email && `${errors.email}, `}
+                      />
+                      <Field
+                        as={TextField}
+                        label={placeholders.password[language].value}
+                        className={styles.passwordInput}
+                        fullWidth
+                        variant='outlined'
+                        color='primary'
+                        type='password'
+                        InputProps={endAdornment(showPassword, setShowPassword)}
+                        name='password'
+                        error={!!errors.password}
+                        helperText={errors.password || ''}
+                      />
+                      <div className={styles.recoveryContainer}>
+                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
+                          {FORGOT_PASSWORD[language].value}
+                        </Link>
+                      </div>
+                      <div className={styles.loginGroup}>
+                        <Button
+                          className={styles.loginBtn}
+                          fullWidth
+                          type='submit'
+                          onClick={() => setShouldValidate(true)}
+                        >
+                          {LOGIN_FORM_LABEL[language].value}
+                        </Button>
+                        {loginError ? (
+                          <p className={styles.loginError}>
+                            {LOGIN_USER_ERROR[loginError] && loginError
+                              ? LOGIN_USER_ERROR[loginError][language].value
+                              : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div className={styles.orContainer}>
+                        <span className={styles.orText}>
+                          {OR_TEXT[language].value}
+                        </span>
+                      </div>
+                      <Button
+                        className={styles.googleBtn}
+                        onClick={singIn}
+                        fullWidth
+                      >
+                        <span className={styles.googleLogo} />
+                        Google
+                      </Button>
+                      <div className={styles.container}>
+                        <FormControlLabel
+                          control={
+                            <Field
+                              as={Checkbox}
+                              name='staySignedIn'
+                              color='primary'
+                              checked={values.staySignedIn}
+                            />
+                          }
+                          label={
+                            <Typography className={styles.text}>
+                              {STAY_SIGNED_IN[language].value}
+                            </Typography>
+                          }
                         />
-                      }
-                      label={
-                        <Typography className={styles.text}>
-                          {STAY_SIGNED_IN[language].value}
-                        </Typography>
-                      }
-                    />
-                  </div>
-                  <div className={styles.registerContainer}>
-                    <Link to='/register' className={styles.registerBtn}>
-                      {REGISTER_PROPOSAL[language].value}
-                    </Link>
-                  </div>
-                </>
-              )}
-            </Form>
+                      </div>
+                      <div className={styles.registerContainer}>
+                        <Link to={pathToRegister} className={styles.registerBtn}>
+                          {REGISTER_PROPOSAL[language].value}
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </Form>
+              </Grid>
+            </Grid>
           </div>
         </div>
       )}

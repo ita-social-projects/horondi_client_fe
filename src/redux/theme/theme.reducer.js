@@ -1,16 +1,23 @@
-import { SET_THEME_MODE } from './theme.types';
+import { SET_FILTER_MENU_STATUS, SET_THEME_MODE } from './theme.types';
 
 const initialState = {
-  lightMode: true
+  lightMode: true,
+  filterMenuStatus: false
 };
 
-const themeState = (state = initialState, { type, payload } = {}) => {
-  if (type === SET_THEME_MODE) {
+const themeState = (state = initialState, { type, payload }) => {
+  switch (type) {
+  case SET_THEME_MODE:
     return {
       ...state,
       lightMode: payload
     };
-  } else {
+  case SET_FILTER_MENU_STATUS:
+    return {
+      ...state,
+      filterMenuStatus: payload
+    };
+  default:
     return state;
   }
 };

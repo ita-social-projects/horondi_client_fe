@@ -16,7 +16,7 @@ import {
   setCurrentPage,
   setProduct,
   getProduct,
-  setProductLoading
+  setProductLoading, changeFilterStatus
 } from '../products.actions';
 import {
   SET_ALL_FILTER_DATA,
@@ -36,7 +36,7 @@ import {
   SET_CURRENT_PAGE,
   SET_PRODUCT,
   GET_PRODUCT,
-  SET_PRODUCT_LOADING
+  SET_PRODUCT_LOADING, CHANGE_FILTER_STATUS
 } from '../products.types';
 import { productsExample } from './products.mocks';
 
@@ -222,6 +222,19 @@ describe('Product actions test', () => {
   test('should return loading = false', () => {
     expect(setProductLoading(false)).toEqual({
       type: SET_PRODUCT_LOADING,
+      payload: false
+    });
+  });
+  test('should return filter status = true', () => {
+    expect(changeFilterStatus(true)).toEqual({
+      type: CHANGE_FILTER_STATUS,
+      payload: true
+    });
+  });
+
+  test('should return filter status = false', () => {
+    expect(changeFilterStatus(false)).toEqual({
+      type: CHANGE_FILTER_STATUS,
       payload: false
     });
   });

@@ -2,17 +2,22 @@ import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IS_HOT_TEXT } from '../../../../translations/product-list.translations';
-import { setHotItemFilter } from '../../../../redux/products/products.actions';
+import { changeFilterStatus, setHotItemFilter } from '../../../../redux/products/products.actions';
 
 const HotItemFilter = ({ filters, language }) => {
   const dispatch = useDispatch();
-
+  const { filterStatus} = useSelector(
+    ({ Products}) => ({
+      filterStatus: Products.filterStatus
+    })
+  );
   const { isHotItemFilter } = filters;
 
   const handleChange = (event) => {
     dispatch(setHotItemFilter(event.target.checked));
+    dispatch(changeFilterStatus(!filterStatus));
   };
 
   return (
@@ -20,6 +25,7 @@ const HotItemFilter = ({ filters, language }) => {
       <Typography id='isHot' gutterBottom>
         {IS_HOT_TEXT[language].value}:
         <Switch
+          color='default'
           checked={isHotItemFilter}
           onChange={handleChange}
           name='isHotItemFilter'

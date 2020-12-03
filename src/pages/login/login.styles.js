@@ -3,28 +3,54 @@ import BG from '../../images/2.jpg';
 import GoogleLogo from '../../images/google.png';
 
 export const useStyles = makeStyles((theme) => ({
-  container: {
-    width: '100%',
-    minHeight: '18px'
+  container:{
+    overflowX:'hidden',
   },
-  login: {
+  wrapper:{
+    height:'100vh',
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  background:{
+    height:'100vh',
+    width:'100%',
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
-    height: '1000px'
+    filter:'brightness(30%) contrast(90%)',
+    position:'absolute',
+    zIndex:-1
   },
-  loginWrapper: {
+  formWrapper:{
+    margin:theme.spacing(1),
+    maxWidth:'960px',
+    height: '550px',
+    filter:'drop-shadow(8px 8px 10px dark-gray)',
+    '& .MuiGrid-item': {
+      padding: '0px !important'
+    },
+    '@media (max-width: 959px)': {
+      padding:'0 50px'
+    },
+    '@media (max-width: 525px)': {
+      padding:'0 15px'
+    }
+  },
+  fonWrapper:{
+    background: `url(${BG}) no-repeat `,
+    backgroundSize: 'cover',
+    height: '100%',
     width: '100%',
-    height: '100%'
+    '@media (max-width: 959px)': {
+      display: 'none'
+    }
   },
   loginForm: {
     backgroundColor: theme.palette.backgroundColor,
-    width: '400px',
-    height: '500px',
-    padding: '33px 47px 63px 53px',
-    boxSizing: 'border-box',
-    float: 'right',
-    marginTop: '141px',
-    marginRight: '53px'
+    width: '100%',
+    height: '550px',
+    padding: '80px 63px 63px',
+    boxSizing: 'border-box'
   },
   heading: {
     fontSize: '1.5rem',

@@ -29,7 +29,7 @@ export default function useProductSpecies() {
     [filterData]
   );
 
-  const colors = useMemo(
+  const color = useMemo(
     () =>
       colorsNames.map(
         (item) =>
@@ -68,7 +68,7 @@ export default function useProductSpecies() {
   );
 
   return {
-    colors,
+    color,
     colorsNames,
     categories,
     categoriesNames,

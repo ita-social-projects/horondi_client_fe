@@ -238,11 +238,11 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       productToSend: initialState.productToSend
     };
-    case CHANGE_FILTER_STATUS:
-      return {
-        ...state,
-        filterStatus: action.payload
-      };
+  case CHANGE_FILTER_STATUS:
+    return {
+      ...state,
+      filterStatus: action.payload
+    };
   default:
     return state;
   }

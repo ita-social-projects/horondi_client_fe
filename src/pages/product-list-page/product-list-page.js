@@ -72,21 +72,6 @@ const ProductListPage = ({ category, model, width }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getFiltredProducts({}));
-  }, [
-    dispatch,
-    sortByRate,
-    sortByPrice,
-    sortByPopularity,
-    countPerPage,
-    categoryFilter,
-    category,
-    model,
-    currentPage,
-    filterStatus
-  ]);
-
-  useEffect(() => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(
       setPriceFilter([
@@ -100,6 +85,20 @@ const ProductListPage = ({ category, model, width }) => {
     );
   }, [category, filterData, model, currency, dispatch]);
 
+  useEffect(() => {
+    dispatch(getFiltredProducts({}));
+  }, [
+    dispatch,
+    sortByRate,
+    sortByPrice,
+    sortByPopularity,
+    countPerPage,
+    categoryFilter,
+    category,
+    model,
+    currentPage,
+    filterStatus
+  ]);
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };
@@ -112,7 +111,7 @@ const ProductListPage = ({ category, model, width }) => {
 
   const handleFilterShow = () => dispatch(setFilterMenuStatus(!filterMenuStatus));
 
-  if (loading || !filterData) {
+  if (loading || !filterData.length) {
     return (
       <div className={styles.center}>
         <Loader />

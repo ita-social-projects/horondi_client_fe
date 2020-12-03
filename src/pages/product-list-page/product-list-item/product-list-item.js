@@ -38,7 +38,7 @@ const ProductListItem = ({ product }) => {
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={4} className={styles.wrapper}>
+    <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
       <Link to={`/product/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>

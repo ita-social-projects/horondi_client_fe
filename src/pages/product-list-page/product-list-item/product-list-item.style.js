@@ -9,11 +9,14 @@ export const useStyles = makeStyles(() => ({
     height:'100%',
     width:'100%',
     position: 'relative',
+    '&:hover': {
+      boxShadow: '5px 5px 20px #c5c5c5',
+    }
   }),
   wrapper:{
     height:'380px',
     width:'100%',
-    cursor: 'pointer',
+    cursor: 'pointer'
   },
   name: {
     display: 'flex',

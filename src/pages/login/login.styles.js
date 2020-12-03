@@ -42,7 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
     '@media (max-width: 959px)': {
-      display: 'none',
+      display: 'none'
     }
   },
   loginForm: {
@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '550px',
     padding: '80px 63px 63px',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box'
   },
   heading: {
     fontSize: '1.5rem',
@@ -211,5 +211,10 @@ export const useStyles = makeStyles((theme) => ({
       content: `'example@mail.com'`,
       color: '#828282'
     }
+  },
+  text: {
+    fontSize: '0.875rem',
+    color: theme.palette.textColor,
+    textDecoration: 'none'
   }
 }));

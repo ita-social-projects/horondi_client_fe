@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Typography
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
 import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
 import {
@@ -13,7 +18,8 @@ import {
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  LOGIN_USER_ERROR
+  LOGIN_USER_ERROR,
+  STAY_SIGNED_IN
 } from '../../translations/user.translations';
 import {
   loginByGoogle,
@@ -22,6 +28,7 @@ import {
 } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
+import Grid from '@material-ui/core/Grid';
 
 const Login = () => {
   const styles = useStyles();
@@ -52,7 +59,8 @@ const Login = () => {
       .required(' '),
     password: Yup.string()
       .matches(formRegExp.password, errorMessages[language].value.password)
-      .required(' ')
+      .required(' '),
+    staySignedIn: Yup.bool()
   });
 
   useEffect(() => {
@@ -149,9 +157,9 @@ const Login = () => {
                         ) : null}
                       </div>
                       <div className={styles.orContainer}>
-                        <span className={styles.orText}>
-                          {OR_TEXT[language].value}
-                        </span>
+                    <span className={styles.orText}>
+                      {OR_TEXT[language].value}
+                    </span>
                       </div>
                       <Button
                         className={styles.googleBtn}
@@ -161,6 +169,23 @@ const Login = () => {
                         <span className={styles.googleLogo} />
                         Google
                       </Button>
+                      <div className={styles.container}>
+                        <FormControlLabel
+                          control={
+                            <Field
+                              as={Checkbox}
+                              name='staySignedIn'
+                              color='primary'
+                              checked={values.staySignedIn}
+                            />
+                          }
+                          label={
+                            <Typography className={styles.text}>
+                              {STAY_SIGNED_IN[language].value}
+                            </Typography>
+                          }
+                        />
+                      </div>
                       <div className={styles.registerContainer}>
                         <Link to='/register' className={styles.registerBtn}>
                           {REGISTER_PROPOSAL[language].value}
@@ -172,9 +197,7 @@ const Login = () => {
               </Grid>
             </Grid>
           </div>
-
         </div>
-
       )}
     </Formik>
   );

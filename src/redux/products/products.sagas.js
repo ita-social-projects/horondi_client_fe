@@ -6,7 +6,7 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading, setCurrentPage
+  setProductLoading
 } from './products.actions';
 
 import { setError } from '../error/error.actions';

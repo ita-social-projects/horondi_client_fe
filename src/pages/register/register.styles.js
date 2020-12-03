@@ -41,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     width: '100%',
     '@media (max-width: 959px)': {
-      display: 'none',
+      display: 'none'
     }
   },
   registerForm: {
@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: '550px',
     padding: '80px 63px 63px',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box'
   },
   heading: {
     fontSize: '1.5rem',

@@ -57,22 +57,22 @@ const ProductsFiltersContainer = ({
               className={styles.clearFilter}>
               {CLEAR_FILTER_BUTTON_TEXT[language].value}
               <CloseIcon fontSize='small' /></ListItem> : null}
-          {list.map((list) => (
+          {list.map((listItems) => (
             <ListItem
               button
               className={styles.nested}
-              key={list}
+              key={listItems}
             >
               <Checkbox
-                name={list}
+                name={listItems}
                 onChange={filterHandler}
                 size='small'
                 color='default'
-                checked={productFilter ? productFilter.find((filter) => filter === list)
-                  ||checkCategory(list)
+                checked={productFilter ? productFilter.find((filter) => filter === listItems)
+                  ||checkCategory(listItems)
                   : false}
               />
-              <ListItemText primary={list} />
+              <ListItemText primary={listItems} />
             </ListItem>
           ))}
         </List>

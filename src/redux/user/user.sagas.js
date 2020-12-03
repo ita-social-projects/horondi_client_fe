@@ -15,7 +15,7 @@ import {
   setRecoveryLoading,
   setUserOrders
 } from './user.actions';
-import { getUserByToken } from './user.operations';
+import { getUserByToken, regenerateAccessToken } from './user.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -31,7 +31,10 @@ import {
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
-import { setToLocalStorage } from '../../services/local-storage.service';
+import {
+  getFromLocalStorage,
+  setToLocalStorage
+} from '../../services/local-storage.service';
 import { setCart } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
 
@@ -44,6 +47,7 @@ export const loginUser = (data) => {
     purchasedProducts
     orders
     token
+    refreshToken
     _id
     email
     firstName
@@ -116,7 +120,7 @@ export function* handleGoogleUserLogin({ payload }) {
     const user = yield call(
       getItems,
       `
-    mutation($id_token:String!){googleUser(id_token:$id_token){
+    mutation($idToken:String!){googleUser(idToken:$idToken){
       firstName,
       lastName,
       email,
@@ -130,7 +134,7 @@ export function* handleGoogleUserLogin({ payload }) {
 }
   `,
       {
-        id_token: payload.idToken
+        idToken: payload.idToken
       }
     );
     yield put(setUser(user.data.googleUser));
@@ -161,6 +165,7 @@ export function* handleUserLoad({ payload }) {
     yield put(setCart(user.data.loginUser.cart));
     yield put(setWishlist(user.data.loginUser.wishlist));
 
+    yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
     yield setToLocalStorage('accessToken', user.data.loginUser.token);
     yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
     yield setToLocalStorage('cart', user.data.loginUser.cart);
@@ -288,10 +293,13 @@ export function* handleUserRegister({ payload }) {
 
 export function* handleUserPreserve() {
   try {
-    yield put(resetState());
     yield put(setUserLoading(true));
+    const refreshToken = getFromLocalStorage('refreshToken');
+    if (refreshToken) {
+      const newAccessToken = yield call(regenerateAccessToken, refreshToken);
+      setToLocalStorage('accessToken', newAccessToken);
+    }
     const user = yield call(getUserByToken);
-
     yield put(setUser(user));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);

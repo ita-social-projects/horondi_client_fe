@@ -11,9 +11,9 @@ import {
   setPatternsFilter,
   setPriceFilter,
   setSearchFilter
-} from '../../../../redux/products/products.actions';
-import { HOME_BUTTONS } from '../../../../translations/homepage.translations';
-import { IMG_URL } from '../../../../configs';
+} from '../../redux/products/products.actions';
+import { HOME_BUTTONS } from '../../translations/homepage.translations';
+import { IMG_URL } from '../../configs';
 
 const ModelItem = ({ model }) => {
   const { language, filterData } = useSelector(({ Language, Products }) => ({

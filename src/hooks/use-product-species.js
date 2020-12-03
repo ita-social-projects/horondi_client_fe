@@ -32,9 +32,9 @@ export default function useProductSpecies() {
   const colors = useMemo(
     () =>
       colorsNames.map(
-        (color) =>
+        (item) =>
           filterData.find(
-            ({ colors }) => colors[0].simpleName[0].value === color
+            ({ colors }) => colors[0].simpleName[0].value === item
           ).colors
       ),
     [filterData, colorsNames]

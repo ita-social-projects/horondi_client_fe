@@ -54,9 +54,9 @@ const ProductListFilter = () => {
     modelNames
   } = useProductSpecies();
 
-  const handleFilterChange = ({ target }, setFilter, filter, categories) => {
-    if (categories) {
-      const categoryId = categories.filter(element => element.name[0].value === target.name)[0]._id;
+  const handleFilterChange = ({ target }, setFilter, filter, categoriesList) => {
+    if (categoriesList) {
+      const categoryId = categoriesList.filter(element => element.name[0].value === target.name)[0]._id;
       if (!target.checked) {
         dispatch(setFilter(
           filter.filter((category) => category !== categoryId)

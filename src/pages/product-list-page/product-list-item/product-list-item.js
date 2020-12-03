@@ -12,6 +12,7 @@ import { IMG_URL } from '../../../configs';
 
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
+import routes from '../../../configs/routes';
 
 const ProductListItem = ({ product }) => {
   const { language, currency, isLightTheme } = useSelector(
@@ -23,7 +24,7 @@ const ProductListItem = ({ product }) => {
   );
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
-
+  const {pathToProducts}= routes
   useEffect(() => {
     getImage(product.images.primary.small)
       .then((src) => setImage(src))
@@ -39,7 +40,7 @@ const ProductListItem = ({ product }) => {
 
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
-      <Link to={`/product/${product._id}`}>
+      <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>
             {product.name[language].value}

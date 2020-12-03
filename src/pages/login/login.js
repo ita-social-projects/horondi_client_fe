@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
 import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
 import {
@@ -28,13 +29,13 @@ import {
 } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
-import Grid from '@material-ui/core/Grid';
+import routes from '../../configs/routes';
 
 const Login = () => {
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-
+  const {pathToRecovery, pathToRegister}= routes
   const { loginError, userLoading, language } = useSelector(
     ({ User, Language }) => ({
       loginError: User.error,
@@ -89,15 +90,14 @@ const Login = () => {
     >
       {({ values, errors, isValid }) => (
         <div className={styles.container}>
-          <div className={styles.background}></div>
+          <div className={styles.background} />
           <div className={styles.wrapper}>
             <Grid
               container
               alignItems='center'
               className={styles.formWrapper}
               spacing={2}>
-              <Grid item sm={12} md={6} lg={6}  className={styles.fonWrapper}>
-              </Grid>
+              <Grid item sm={12} md={6} lg={6}  className={styles.fonWrapper} />
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Form className={styles.loginForm}>
                   {userLoading ? (
@@ -135,7 +135,7 @@ const Login = () => {
                         helperText={errors.password || ''}
                       />
                       <div className={styles.recoveryContainer}>
-                        <Link to='/recovery' className={styles.recoveryBtn}>
+                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
                           {FORGOT_PASSWORD[language].value}
                         </Link>
                       </div>
@@ -157,9 +157,9 @@ const Login = () => {
                         ) : null}
                       </div>
                       <div className={styles.orContainer}>
-                    <span className={styles.orText}>
-                      {OR_TEXT[language].value}
-                    </span>
+                        <span className={styles.orText}>
+                          {OR_TEXT[language].value}
+                        </span>
                       </div>
                       <Button
                         className={styles.googleBtn}
@@ -187,7 +187,7 @@ const Login = () => {
                         />
                       </div>
                       <div className={styles.registerContainer}>
-                        <Link to='/register' className={styles.registerBtn}>
+                        <Link to={pathToRegister} className={styles.registerBtn}>
                           {REGISTER_PROPOSAL[language].value}
                         </Link>
                       </div>

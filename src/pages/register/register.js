@@ -21,12 +21,13 @@ import { endAdornment } from '../../utils/eyeToggle';
 import { Loader } from '../../components/loader/loader';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
+import routes from '../../configs/routes';
 
 export default function Register() {
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-
+  const {pathToLogin}= routes
   const handleRegister = (user) => {
     setToLocalStorage('accessToken', null);
     dispatch(registerUser({ user, language }));
@@ -148,7 +149,7 @@ export default function Register() {
                           </p>
                         </div>
                         <div>
-                          <Link to='/login' className={styles.loginBtn}>
+                          <Link to={pathToLogin} className={styles.loginBtn}>
                             {LOGIN_FORM_LABEL[language].value}
                           </Link>
                         </div>

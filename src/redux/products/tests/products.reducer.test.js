@@ -17,7 +17,7 @@ import {
   setCountPerPage,
   setModelsFilter,
   setProduct,
-  setProductLoading
+  setProductLoading, changeFilterStatus
 } from '../products.actions';
 import { productsExample } from './products.mocks';
 
@@ -244,6 +244,15 @@ describe('Product reducer test', () => {
     };
 
     expect(productReducer(initialState, setProductsLoading(false))).toEqual(
+      state
+    );
+  });
+  it('should set filter status to true', () => {
+    const state = {
+      ...initialState,
+      filterStatus: true
+    };
+    expect(productReducer(initialState, changeFilterStatus(true))).toEqual(
       state
     );
   });

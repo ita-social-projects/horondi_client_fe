@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 export const useStyles = makeStyles((theme) => ({
   wrapper:{
-    width:'240px',
-    padding:'10px'
+    width:'250px',
+    padding:'10px 20px 10px 10px'
   },
   root: {
     color: '#3d3d3d',
@@ -40,7 +40,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'inline'
   },
   button: {
-    width: '8rem',
+    fontSize: '0.9em',
+    width: '100%',
     margin: '0 0.2rem 1rem'
   },
   filterName: {

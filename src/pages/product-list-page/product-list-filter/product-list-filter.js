@@ -1,17 +1,9 @@
 import React from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import ColorsFilter from './colors-filter';
-import PatternsFilter from './patterns-filter';
-import CategoryFilter from './category-filter';
 import PriceFilter from './price-filter';
-import ModelsFilter from './models-filter';
 import HotItemFilter from './hot-item-filter';
 
 import { useStyles } from './product-list-filter.styles';
@@ -23,12 +15,10 @@ import {
   setPriceFilter,
   setSearchFilter,
   setHotItemFilter,
-  setModelsFilter, setCurrentPage, changeFilterStatus
+  setModelsFilter, changeFilterStatus
 } from '../../../redux/products/products.actions';
 
 import {
-  SEARCH_TEXT,
-  FILTER_BUTTON_TEXT,
   MODEL_TEXT,
   PATTERN_TEXT, CATERGORY_TEXT,
   CLEAR_FILTER_BUTTON_TEXT, COLORS_TEXT
@@ -50,24 +40,37 @@ const ProductListFilter = () => {
     })
   );
   const {
+    categoryFilter,
     colorsFilter,
     patternsFilter,
     modelsFilter
   } = filters;
 
   const {
+    categories,
+    categoriesNames,
     colorsNames,
     patternsNames,
     modelNames
   } = useProductSpecies();
 
-  const handleFilterChange = ({ target }, setFilter, filter) => {
-    if (!target.checked) {
+  const handleFilterChange = ({ target }, setFilter, filter, categories) => {
+    if (categories) {
+      const categoryId = categories.filter(element => element.name[0].value === target.name)[0]._id;
+      if (!target.checked) {
+        dispatch(setFilter(
+          filter.filter((category) => category !== categoryId)
+        ));
+      } else {
+        dispatch(
+          setFilter([...new Set([...filter, categoryId])])
+        );
+      }
+    } else if (!target.checked) {
       dispatch(
         setFilter(
           filter.filter((name) => name !== target.name)
-        )
-      );
+        ));
     } else {
       dispatch(
         setFilter([...new Set([...filter, target.name])])
@@ -78,8 +81,17 @@ const ProductListFilter = () => {
 
   const handleFilterClear = (setFilter) => {
     dispatch(setFilter([]));
+    dispatch(changeFilterStatus(!filterStatus));
   };
   const filtersOptions = {
+    categories: {
+      filterName: CATERGORY_TEXT[language].value,
+      productFilter: categoryFilter,
+      list: categoriesNames,
+      categories,
+      clearFilter: () => handleFilterClear(setCategoryFilter),
+      filterHandler: (e) => handleFilterChange(e, setCategoryFilter, categoryFilter, categories)
+    },
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
@@ -132,6 +144,7 @@ const ProductListFilter = () => {
       labels={labels}
       filterHandler={filterHandler}
       clearFilter={clearFilter}
+      categories={categories}
     />
   ));
   return (
@@ -143,11 +156,14 @@ const ProductListFilter = () => {
         className={styles.wrapper}
         spacing={2}
       >
-        <CategoryFilter
-          filterData={filterData}
-          filters={filters}
-          language={language}
-        />
+        <Button
+          className={styles.button}
+          data-cy='clear_filter_button'
+          variant='contained'
+          onClick={handleClearFilter}
+        >
+          {CLEAR_FILTER_BUTTON_TEXT[language].value}
+        </Button>
         <PriceFilter
           filterData={filterData}
           filters={filters}
@@ -159,84 +175,6 @@ const ProductListFilter = () => {
       </Grid>
     </div>
   );
-
-  //
-  // const { searchFilter } = filters;
-  //
-  // const handleSearch = (event) => {
-  //   dispatch(setSearchFilter(event.target.value));
-  // };
-  //
-  // const handleFilter = () => {
-  //   dispatch(getFiltredProducts({}));
-  // };
-  //
-
-  //
-  // return (
-  //   <div className={styles.root}>
-  //     <Paper className={styles.paper}>
-  //       <FormControl component='fieldset' className={styles.formControl}>
-  //         <FormGroup data-cy='search'>
-  //           <TextField
-  //             className={styles.search}
-  //             onChange={handleSearch}
-  //             value={searchFilter}
-  //             id='outlined-search'
-  //             label={SEARCH_TEXT[language].value}
-  //             type='search'
-  //             variant='outlined'
-  //           />
-  //         </FormGroup>
-  //         <FormGroup className={styles.controls}>
-  //           <Button
-  //             className={styles.button}
-  //             data-cy='filter_button'
-  //             variant='contained'
-  //             onClick={handleFilter}
-  //           >
-  //             {FILTER_BUTTON_TEXT[language].value}
-  //           </Button>
-  //           <Button
-  //             className={styles.button}
-  //             data-cy='clear_filter_button'
-  //             variant='contained'
-  //             onClick={handleClearFilter}
-  //           >
-  //             {CLEAR_FILTER_BUTTON_TEXT[language].value}
-  //           </Button>
-  //         </FormGroup>
-  //         <HotItemFilter filters={filters} language={language} />
-  //         <PriceFilter
-  //           filterData={filterData}
-  //           filters={filters}
-  //           language={language}
-  //           currency={currency}
-  //         />
-  //         <CategoryFilter
-  //           filterData={filterData}
-  //           filters={filters}
-  //           language={language}
-  //         />
-  //         <ModelsFilter
-  //           filterData={filterData}
-  //           filters={filters}
-  //           language={language}
-  //         />
-  //         <ColorsFilter
-  //           filterData={filterData}
-  //           filters={filters}
-  //           language={language}
-  //         />
-  //         <PatternsFilter
-  //           filterData={filterData}
-  //           filters={filters}
-  //           language={language}
-  //         />
-  //       </FormControl>
-  //     </Paper>
-  //   </div>
-  // );
 };
 
 export default ProductListFilter;

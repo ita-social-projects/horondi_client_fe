@@ -9,15 +9,15 @@ export const useStyles = makeStyles(() => ({
     height:'100%',
     width:'100%',
     position: 'relative',
-    boxShadow: '0px 5px 8px #c5c5c5',
   }),
   wrapper:{
-    height:'400px',
+    height:'380px',
     width:'100%',
     cursor: 'pointer',
   },
   name: {
     display: 'flex',
+    justifyContent:'center',
     flexDirection: 'column',
     height: '4rem',
     width: '100%',
@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
     backgroundColor: 'rgba(3,3,3,0.6)',
     bottom: 0,
     color: 'white',
-    padding: '.5rem',
+    padding: '0px 15px',
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
@@ -33,6 +33,7 @@ export const useStyles = makeStyles(() => ({
   },
   title: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    fontSize: '14px'
   }
 }));

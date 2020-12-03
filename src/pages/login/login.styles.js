@@ -28,6 +28,12 @@ export const useStyles = makeStyles((theme) => ({
     filter:'drop-shadow(8px 8px 10px dark-gray)',
     '& .MuiGrid-item': {
       padding: '0px !important'
+    },
+    '@media (max-width: 959px)': {
+      padding:'0 50px'
+    },
+    '@media (max-width: 525px)': {
+      padding:'0 15px'
     }
   },
   fonWrapper:{
@@ -35,6 +41,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     height: '100%',
     width: '100%',
+    '@media (max-width: 959px)': {
+      display: 'none',
+    }
   },
   loginForm: {
     backgroundColor: theme.palette.backgroundColor,

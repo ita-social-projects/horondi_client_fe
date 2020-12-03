@@ -129,11 +129,40 @@ export const FILTER_BUTTON_TEXT = {
     value: 'Filter'
   }
 };
-
+export const PRODUCT_NOT_FOUND = {
+  0: {
+    lang: 'uk',
+    value: 'В цій категорії продуктів не знайдено'
+  },
+  1: {
+    lang: 'eng',
+    value: 'No products found in this product category'
+  }
+};
+export const PRICE_FROM = {
+  0: {
+    lang: 'uk',
+    value: 'від'
+  },
+  1: {
+    lang: 'eng',
+    value: 'from'
+  }
+};
+export const PRICE_TO = {
+  0: {
+    lang: 'uk',
+    value: 'до'
+  },
+  1: {
+    lang: 'eng',
+    value: 'to'
+  }
+};
 export const CLEAR_FILTER_BUTTON_TEXT = {
   0: {
     lang: 'uk',
-    value: 'Очистити'
+    value: 'Очистити фільтр'
   },
   1: {
     lang: 'eng',

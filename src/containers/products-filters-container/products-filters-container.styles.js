@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
+  container:{
+    borderBottom:'1px solid gray',
+    padding:'10px 0px'
+  },
   mainItem: {
     color: theme.palette.textColor,
     textTransform: 'uppercase',
@@ -17,6 +21,14 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline'
     }
   },
+  clearFilter:{
+    cursor: 'pointer',
+    color:'gray',
+    '&:hover': {
+      textDecoration: 'underline',
+      color:'red'
+    }
+  },
   mainItemIcon:{
     position:'absolute',
     right:'15px',
@@ -29,9 +41,6 @@ export const useStyles = makeStyles((theme) => ({
     '& span': {
       textTransform: 'uppercase',
       fontSize: '0.9em'
-    },
-    '& .MuiCheckbox-colorSecondary.Mui-checked':{
-      color:'#3E3C3C !important'
     }
   }
 }));

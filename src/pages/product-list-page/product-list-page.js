@@ -5,10 +5,8 @@ import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import withWidth from '@material-ui/core/withWidth';
-import Toolbar from '@material-ui/core/Toolbar';
 import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -22,7 +20,8 @@ import {
 } from '../../redux/products/products.actions';
 
 import {
-  SHOW_FILTER_BUTTON_TEXT
+  SHOW_FILTER_BUTTON_TEXT,
+  PRODUCT_NOT_FOUND
 } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
@@ -32,8 +31,8 @@ const DRAWER_PERMANENT = 'permanent';
 const TEMPORARY_WIDTHS = ['sm', 'xs'];
 
 const ProductListPage = ({ category, model, width }) => {
-  const styles = useStyles();
   const dispatch = useDispatch();
+  const styles = useStyles();
   const {
     filterMenuStatus,
     loading,
@@ -48,7 +47,7 @@ const ProductListPage = ({ category, model, width }) => {
     filterData,
     sortByPopularity,
     currency,
-    filterStatus
+    filterStatus,
   } = useSelector(({ Theme, Language, Products, Currency }) => ({
     filterMenuStatus: Theme.filterMenuStatus,
     loading: Products.loading,
@@ -63,10 +62,11 @@ const ProductListPage = ({ category, model, width }) => {
     countPerPage: Products.countPerPage,
     currentPage: Products.currentPage,
     currency: Currency.currency,
-    filterStatus: Products.filterStatus,
+    filterStatus: Products.filterStatus
   }));
 
   const { categoryFilter } = filters;
+
   useEffect(() => {
     dispatch(getAllFilters());
   }, [dispatch]);
@@ -156,27 +156,32 @@ const ProductListPage = ({ category, model, width }) => {
             paper: styles.drawerPaper
           }}
         >
-          <Toolbar />
           <div className={styles.drawerContainer}>
             <ProductFilter selectedCategory={category} />
-            <Divider />
-            <List />
           </div>
         </Drawer>
         <div className={styles.filterMenu}>
           <ProductFilter selectedCategory={category} />
         </div>
-        <Grid container spacing={3} className={styles.productsDiv}>{itemsToShow}
-          <div className={styles.paginationDiv}>
-            <Pagination
-              count={pagesCount}
-              variant='outlined'
-              shape='rounded'
-              page={currentPage + 1}
-              onChange={changeHandler}
-            />
-          </div>
-        </Grid>
+        {products.length ?
+          <div className={styles.productsWrapper}>
+            <Grid container spacing={3} className={styles.productsDiv}>
+              {itemsToShow}
+            </Grid>
+            <div className={styles.paginationDiv}>
+              <Pagination
+                count={pagesCount}
+                variant='outlined'
+                shape='rounded'
+                page={currentPage + 1}
+                onChange={changeHandler}
+              />
+            </div>
+          </div> :
+          <div className={styles.defaultBlock}>
+            <div>{PRODUCT_NOT_FOUND[language].value}</div>
+            <div><MoodBadIcon className={styles.defaultIcon} /></div>
+          </div>}
       </div>
     </div>
   );

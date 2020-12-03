@@ -88,9 +88,9 @@ const Login = () => {
               alignItems='center'
               className={styles.formWrapper}
               spacing={2}>
-              <Grid item xs={12} sm={6} md={6} lg={6}  className={styles.fonWrapper}>
+              <Grid item sm={12} md={6} lg={6}  className={styles.fonWrapper}>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Form className={styles.loginForm}>
                   {userLoading ? (
                     <Loader />

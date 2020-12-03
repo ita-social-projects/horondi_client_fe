@@ -4,14 +4,13 @@ const initialState = {
   lightMode: true
 };
 
-const themeState = (state = initialState, { type, payload }) => {
-  switch (type) {
-  case SET_THEME_MODE:
+const themeState = (state = initialState, { type, payload } = {}) => {
+  if (type === SET_THEME_MODE) {
     return {
       ...state,
       lightMode: payload
     };
-  default:
+  } else {
     return state;
   }
 };

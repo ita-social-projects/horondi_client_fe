@@ -4,7 +4,7 @@ const initialState = {
   list: []
 };
 
-const cartReducer = (state = initialState, { type, payload }) => {
+const cartReducer = (state = initialState, { type, payload } = {}) => {
   if (type === SET_CART) {
     return {
       list: payload

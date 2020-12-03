@@ -4,13 +4,12 @@ const initialState = {
   list: []
 };
 
-const wishlistReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-  case SET_WISHLIST:
+const wishlistReducer = (state = initialState, { type, payload } = {}) => {
+  if (type === SET_WISHLIST) {
     return {
       list: payload
     };
-  default:
+  } else {
     return state;
   }
 };

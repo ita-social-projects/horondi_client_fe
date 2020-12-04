@@ -85,7 +85,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   day: {
     display: 'inline-block',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    width: 40
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1

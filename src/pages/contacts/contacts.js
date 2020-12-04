@@ -54,11 +54,15 @@ const Contacts = ({ fromCheckout }) => {
               {CONTACTS_PAGE_TITLES[language].schedule}
             </span>
             <div className={styles.schedule}>
-              {contact.openHours[language].value.split('|').map((el) => (
-                <div key={el}>
-                  <span className={styles.day}>{el}</span>
-                </div>
-              ))}
+              {contact.openHours[language].value.split('|').map((el) => {
+                let i = language ? 4 : 3;
+                return (
+                  <div key={el}>
+                    <span className={styles.day}>{el.slice(0, i)}</span>
+                    <span className={styles.time}>{el.slice(i)}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className={styles.contactsItem}>

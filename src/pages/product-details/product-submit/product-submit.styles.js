@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => {
     marginTop: '1.2rem',
     marginRight: '1.2rem',
     fontSize: '2.5rem',
-    color: '#000000',
+    color: '#ed0505',
     '&:hover': {
       transform: 'scale(1.15)',
       cursor: 'pointer',
@@ -42,6 +42,8 @@ export const useStyles = makeStyles((theme) => {
     submitButton: {
       marginRight: '1rem',
       marginTop: '1rem',
+      padding: '0.4rem 0.9rem',
+      minWidth: '9rem',
       textTransform: 'none',
       textAlign: 'center',
       fontSize: '1rem',
@@ -52,7 +54,7 @@ export const useStyles = makeStyles((theme) => {
         color: theme.palette.button.hover.color
       },
       '@media (max-width: 600px)': {
-        paddingRight: '0.5rem',
+        padding: '0.2rem 0.6rem',
         fontSize: '0.9rem'
       }
     }

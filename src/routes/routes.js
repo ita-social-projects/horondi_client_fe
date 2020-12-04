@@ -50,8 +50,8 @@ const Routes = () => {
   return (
     <ConnectedRouter history={history}>
       <Suspense fallback={<div></div>}>
-        <AppHeader />
         <ErrorBoundary>
+          <AppHeader />
           <div className={styles.root}>
             <Switch>
               <Route path='/' exact component={Home} />
@@ -145,8 +145,8 @@ const Routes = () => {
               />
             </Switch>
           </div>
+          <AppFooter />
         </ErrorBoundary>
-        <AppFooter />
       </Suspense>
     </ConnectedRouter>
   );

@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => {
       position: 'relative',
       display: 'flex',
       width: '50px',
-      marginBottom: '15px',
+      paddingBottom: '0.55rem',
       '@media (max-width: 600px)': {
         justifyContent: 'center'
       }
@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => {
       color: 'tomato',
       position: 'absolute',
       width: '160px',
-      top: '45px'
+      bottom: '0'
     },
     sizeButton: {
       ...sizeButton,
@@ -51,6 +51,7 @@ export const useStyles = makeStyles((theme) => {
     },
     container: {
       display: 'flex',
+      marginBottom: '1.35rem',
       '@media (max-width: 600px)': {
         justifyContent: 'center'
       }

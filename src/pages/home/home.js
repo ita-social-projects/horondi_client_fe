@@ -7,7 +7,7 @@ import OurLooks from './our-looks';
 import { useStyles } from './home.styles';
 import ScrollBar from '../../components/scroll-bar';
 import ConstructorPreview from './contructor-preview';
-import ModelsList from './modles-list';
+import ModelsList from './models-list';
 import { Loader } from '../../components/loader/loader';
 import { getHomePageSliderImages } from '../../redux/homepage-slider/homepage-slider.actions';
 

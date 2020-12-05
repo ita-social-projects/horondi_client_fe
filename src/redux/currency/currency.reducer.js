@@ -6,13 +6,12 @@ export const initialState = {
 };
 
 const currencyReducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-  case CHANGE_CURRENCY:
+  if (action.type === CHANGE_CURRENCY) {
     return {
       ...state,
       currency: action.payload
     };
-  default:
+  } else {
     return state;
   }
 };

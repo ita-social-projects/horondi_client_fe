@@ -1,45 +1,21 @@
 import { makeStyles } from '@material-ui/styles';
 
+const drawerWidth = 320;
+
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent:'center',
     padding: '0 2rem 1rem 2rem',
     width: '100%'
   },
-  div: {
-    display: 'flex',
-    flexDirection: 'row',
-    maxWidth: '100%',
-    alignItems: 'base-line',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap'
+  productsWrapper:{
+    width: '100%'
   },
   productsDiv: {
-    alignContent: 'start',
-    margin: '0 0 0 2rem',
     width: '100%',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3,1fr)',
-    gridTemplateRows: 'auto',
-    gridGap: '1rem',
-
-    '@media (max-width:768px)': {
-      gridTemplateColumns: 'repeat(3,1fr)',
-      margin: '1rem 0 0 0'
-    },
-    '@media (max-width:600px)': {
-      gridTemplateColumns: '1fr 1fr',
-      margin: '1rem 0 0 0'
-    },
-    '@media (max-width:520px)': {
-      gridTemplateColumns: '1fr 1fr',
-      margin: '1rem 0 0 0'
-    },
-    '@media (max-width:420px)': {
-      gridTemplateColumns: '1fr',
-      margin: '1rem 0 0 0'
-    }
+    padding: '0px 20px'
   },
   sortDiv: {
     alignItems: 'center',
@@ -74,25 +50,49 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   button: {
-    width: '100%'
+    fontSize: '0.9em',
+    margin:'0 auto',
+    display: 'none',
+    '@media (max-width: 959px)': {
+      display: 'block'
+    }
+  },
+  filterButtonBlock:{
+    padding:'15px'
   },
   products: {
     display: 'flex',
     flexWrap: 'wrap'
   },
   list: {
-    '@media (min-width:500px)': {
-      display: 'flex'
+    display: 'flex',
+    flexDirection:'row'
+  },
+  filterMenu:{
+    '@media (max-width: 959px)': {
+      display: 'none'
     }
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    display: 'none',
+    '@media (max-width: 959px)': {
+      display: 'block'
+    }
+  },
+  drawerPaper: {
+    width: drawerWidth
+  },
+  drawerContainer: {
+    overflow: 'auto',
+    display:'flex',
+    paddingTop:'20px',
+    justifyContent:'center'
   },
   hide: {
     textAlign: 'center',
     textDecorationLine: 'underline'
-  },
-  mobile: {
-    '@media (min-width:500px)': {
-      display: 'none'
-    }
   },
   center: {
     width: '3rem',
@@ -100,5 +100,19 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 1400px)': {
       margin: '13rem auto'
     }
+  },
+  defaultBlock:{
+    width:'100%',
+    height:'100%',
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    color: theme.palette.textColor,
+    fontSize: '1.2em'
+  },
+  defaultIcon:{
+    width:'100px',
+    height:'100px'
   }
 }));

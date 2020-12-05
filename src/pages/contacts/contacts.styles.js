@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   contactsItem: {
     display: 'flex',
-    margin: '0 0 10px 10px',
+    margin: '0 0 30px 10px',
     width: '100%',
     fontFamily: 'Montserrat',
     fontSize: '1.1em',
@@ -46,6 +46,7 @@ export const useStyles = makeStyles((theme) => ({
   contactName: {
     width: '130px',
     fontWeight: '700',
+    marginRight: '15px',
     '@media screen and (max-width: 768px)': {
       width: '100px'
     }
@@ -83,7 +84,9 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   day: {
-    display: 'inline-block'
+    display: 'inline-block',
+    marginBottom: '10px',
+    width: 40
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1

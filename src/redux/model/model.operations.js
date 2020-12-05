@@ -53,6 +53,7 @@ const getModelsByCategory = async (payload) => {
           }
           images {
             large
+            small
           }
           description {
             value

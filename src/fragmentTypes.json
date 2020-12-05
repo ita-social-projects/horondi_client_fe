@@ -111,6 +111,18 @@
       },
       {
         "kind": "UNION",
+        "name": "TokenResult",
+        "possibleTypes": [
+          {
+            "name": "Token"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
         "name": "ModelResult",
         "possibleTypes": [
           {

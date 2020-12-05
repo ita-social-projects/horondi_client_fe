@@ -4,12 +4,16 @@ import { useStyles } from './cart.styles';
 import EmptyCart from '../../containers/orders/cart/empty-cart';
 import FilledCart from '../../containers/orders/cart/filled-cart';
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, categories }) => {
   const styles = useStyles();
 
   return (
     <div className={styles.root}>
-      {cartItems.length ? <FilledCart items={cartItems} /> : <EmptyCart />}
+      {cartItems.length ? (
+        <FilledCart items={cartItems} categories={categories} />
+      ) : (
+        <EmptyCart />
+      )}
     </div>
   );
 };

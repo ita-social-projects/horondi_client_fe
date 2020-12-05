@@ -1,7 +1,8 @@
-import { SET_THEME_MODE } from './theme.types';
+import { SET_FILTER_MENU_STATUS, SET_THEME_MODE } from './theme.types';
 
 const initialState = {
-  lightMode: true
+  lightMode: true,
+  filterMenuStatus: false
 };
 
 const themeState = (state = initialState, { type, payload }) => {
@@ -10,6 +11,11 @@ const themeState = (state = initialState, { type, payload }) => {
     return {
       ...state,
       lightMode: payload
+    };
+  case SET_FILTER_MENU_STATUS:
+    return {
+      ...state,
+      filterMenuStatus: payload
     };
   default:
     return state;

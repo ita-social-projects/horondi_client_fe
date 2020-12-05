@@ -1,4 +1,4 @@
-import { setThemeMode } from '../theme.actions';
+import { setFilterMenuStatus, setThemeMode } from '../theme.actions';
 import themeReducer from '../theme.reducer';
 
 describe('theme reducer test', () => {
@@ -8,7 +8,8 @@ describe('theme reducer test', () => {
 
   beforeEach(() => {
     initialState = {
-      lightMode: true
+      lightMode: true,
+      filterMenuStatus: false
     };
     themeAction = setThemeMode(true);
     newState = themeReducer(initialState, themeAction);
@@ -35,5 +36,10 @@ describe('theme reducer test', () => {
   it('value by key "lightMode" of returned state should to be equal to initial state', () => {
     newState = themeReducer(initialState, { type: 'ANYTHING' });
     expect(newState.lightMode).toEqual(initialState.lightMode);
+  });
+  it('should set filter menu status to true', () => {
+    themeAction = setFilterMenuStatus(true);
+    newState = themeReducer(initialState, themeAction);
+    expect(newState.filterMenuStatus).toEqual(true);
   });
 });

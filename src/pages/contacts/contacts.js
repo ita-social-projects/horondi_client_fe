@@ -6,14 +6,11 @@ import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import CircularLoadingBar from '../../components/circular-loading-bar';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
+import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 
 const Contacts = ({ fromCheckout }) => {
   const { contacts, loading, language } = useSelector(
-    ({ Language, Contacts: { loading, contacts } }) => ({
-      contacts,
-      loading,
-      language: Language.language
-    })
+    selectLanguageAndContactsLoadingContacts
   );
   const styles = useStyles();
   if (loading) {
@@ -57,11 +54,15 @@ const Contacts = ({ fromCheckout }) => {
               {CONTACTS_PAGE_TITLES[language].schedule}
             </span>
             <div className={styles.schedule}>
-              {contact.openHours[language].value.split('|').map((el) => (
-                <div key={el}>
-                  <span className={styles.day}>{el}</span>
-                </div>
-              ))}
+              {contact.openHours[language].value.split('|').map((el) => {
+                let i = language ? 4 : 3;
+                return (
+                  <div key={el}>
+                    <span className={styles.day}>{el.slice(0, i)}</span>
+                    <span className={styles.time}>{el.slice(i)}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className={styles.contactsItem}>

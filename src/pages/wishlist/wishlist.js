@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './wishlist.styles';
 import FilledWishlist from './filled-wishlist';
 import EmptyWishlist from './empty-wishlist';
+import { selectWishListList } from '../../redux/selectors/wishlist.selectors';
 
 const Wishlist = () => {
-  const wishlistItems = useSelector(({ Wishlist }) => Wishlist.list);
+  const wishlistItems = useSelector(selectWishListList);
   const styles = useStyles();
 
   return (

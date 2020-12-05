@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     display: 'flex',
+    marginRight: '2em',
     borderColor: '#DADADA',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px',

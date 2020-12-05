@@ -22,7 +22,7 @@ import {
   SET_HOT_ITEM_FILTER,
   SET_PRODUCT_LOADING,
   SET_PRODUCT_TO_SEND,
-  CLEAR_PRODUCT_TO_SEND
+  CLEAR_PRODUCT_TO_SEND, CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -122,4 +122,9 @@ export const setProductToSend = (payload) => ({
 
 export const clearProductToSend = () => ({
   type: CLEAR_PRODUCT_TO_SEND
+});
+
+export const changeFilterStatus = (payload) => ({
+  type: CHANGE_FILTER_STATUS,
+  payload
 });

@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   homeHeader: {
     position: 'relative',
     height: 'calc(100vh - 50px)',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   sliderInner: {
     opacity: 0,

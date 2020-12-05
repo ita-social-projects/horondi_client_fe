@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   app: {
-    overflowY: 'scroll',
+    overflowY: 'scroll'
   },
   center: {
     width: '3rem',
@@ -10,5 +10,10 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 1400px)': {
       margin: '13rem auto'
     }
+  },
+  mainBar: {
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
   }
 }));

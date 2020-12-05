@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
@@ -46,7 +46,7 @@ const ProductListPage = ({ category, model, width }) => {
     filterData,
     sortByPopularity,
     currency,
-    filterStatus,
+    filterStatus
   } = useSelector(({ Theme, Language, Products, Currency }) => ({
     filterMenuStatus: Theme.filterMenuStatus,
     loading: Products.loading,
@@ -108,7 +108,8 @@ const ProductListPage = ({ category, model, width }) => {
 
   const changeHandler = (e, value) => dispatch(setCurrentPage(value));
 
-  const handleFilterShow = () => dispatch(setFilterMenuStatus(!filterMenuStatus));
+  const handleFilterShow = () =>
+    dispatch(setFilterMenuStatus(!filterMenuStatus));
 
   if (loading || !filterData.length) {
     return (
@@ -139,7 +140,8 @@ const ProductListPage = ({ category, model, width }) => {
         <Button
           className={styles.button}
           variant='contained'
-          onClick={handleFilterShow}>
+          onClick={handleFilterShow}
+        >
           {SHOW_FILTER_BUTTON_TEXT[language].value}
         </Button>
       </div>
@@ -161,7 +163,7 @@ const ProductListPage = ({ category, model, width }) => {
         <div className={styles.filterMenu}>
           <ProductFilter selectedCategory={category} />
         </div>
-        {products.length ?
+        {products.length ? (
           <div className={styles.productsWrapper}>
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}
@@ -175,11 +177,15 @@ const ProductListPage = ({ category, model, width }) => {
                 onChange={changeHandler}
               />
             </div>
-          </div> :
+          </div>
+        ) : (
           <div className={styles.defaultBlock}>
             <div>{PRODUCT_NOT_FOUND[language].value}</div>
-            <div><MoodBadIcon className={styles.defaultIcon} /></div>
-          </div>}
+            <div>
+              <MoodBadIcon className={styles.defaultIcon} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

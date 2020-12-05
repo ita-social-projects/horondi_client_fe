@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
@@ -93,11 +94,19 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   return (
     <div className={styles.submit}>
       <Tooltip title={wishlistTip} placement='bottom'>
-        <FavoriteIcon
-          data-cy='wishful'
-          className={isWishful ? styles.redHeart : styles.heart}
-          onClick={onWishfulHandler}
-        />
+        {isWishful ? (
+          <FavoriteIcon
+            data-cy='wishful'
+            className={styles.redHeart}
+            onClick={onWishfulHandler}
+          />
+        ) : (
+          <FavouriteBorderIcon
+            data-cy='not-wishful'
+            className={styles.heart}
+            onClick={onWishfulHandler}
+          />
+        )}
       </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCart}>
         {PDP_BUTTONS[language].cartButton}

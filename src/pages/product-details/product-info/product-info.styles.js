@@ -32,11 +32,13 @@ export const useStyles = makeStyles((theme) => {
       marginTop: '0.5rem'
     },
     price: {
-      fontSize: '1.15rem',
+      fontSize: '1.17rem',
       fontWeight: '700',
+      marginLeft: 7,
       color: theme.palette.textColor,
       '@media (max-width: 600px)': {
-        fontSize: '1rem'
+        fontSize: '1rem',
+        marginLeft: 3
       },
       alignSelf: 'center'
     },

@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
   formControl: {
+    marginTop: '0.6rem',
     marginRight: '0.7rem',
     minWidth: '9.5rem',
     '& .MuiInputBase-root .MuiSelect-root': {
@@ -75,5 +76,8 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 300px)': {
       marginRight: '0'
     }
+  },
+  menuItem: {
+    padding: '0.18rem 0.5rem'
   }
 }));

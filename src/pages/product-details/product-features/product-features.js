@@ -90,16 +90,18 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
   const menuItems = bottomMaterials
     ? bottomMaterials.map((material) => (
         <MenuItem value={material.name[1].value} key={material._id}>
-          <span>
-            {material.name[language].value}{' '}
-            {material.additionalPrice[0].value ? (
-              <span className={styles.selectPrice}>
-                +
-                <FontAwesomeIcon icon={currencySign} />
-                {(material.additionalPrice[currency].value / 100).toFixed()}
-              </span>
-            ) : null}
-          </span>
+          <div className={styles.menuItem}>
+            <span>
+              {material.name[language].value}{' '}
+              {material.additionalPrice[0].value ? (
+                <span className={styles.selectPrice}>
+                  +
+                  <FontAwesomeIcon icon={currencySign} />
+                  {(material.additionalPrice[currency].value / 100).toFixed()}
+                </span>
+              ) : null}
+            </span>
+          </div>
         </MenuItem>
       ))
     : null;
@@ -124,7 +126,9 @@ const ProductFeatures = ({ bottomMaterials, additions, currencySign }) => {
                   autoWidth
                 >
                   <MenuItem value='' key='none'>
-                    {SELECT_NONE[language].none}
+                    <div className={styles.menuItem}>
+                      {SELECT_NONE[language].none}
+                    </div>
                   </MenuItem>
                   {menuItems}
                 </Select>

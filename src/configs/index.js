@@ -1,8 +1,7 @@
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const CONSTRUCTOR_VIDEO_LINK =
-  'https://www.youtube.com/watch?v=KG1y-lk2f0E&ab_channel=Ukra%D1%97ner';
+export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
 export const UNIQUE_MODEL_IMAGE_LINK = 'https://i.imgur.com/ygJaph4.jpg';
 
 export const CART_IMAGES = {

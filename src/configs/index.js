@@ -33,7 +33,7 @@ export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  password: ''
+  pass: ''
 };
 
 export const CHAT_USER_DATA = {
@@ -76,7 +76,7 @@ export const errorMessages = [
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат пошти',
-      password: 'Від 6 до 30 символів з однією літерою та цифрою',
+      pass: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
       text: 'Поле повинно містити від 2 до 700 символів',
       phoneNumber: 'Некоректний формат телефону',
@@ -95,7 +95,7 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address `,
-      password: 'From 6 to 30 characters with one letter and one digit',
+      pass: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
       phoneNumber: 'Wrong phone format',
@@ -116,7 +116,7 @@ export const formRegExp = {
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
-  password: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
+  pass: '^(?!.* )(?=.*[0-9])(?=.*[A-Z]).{8,30}$',
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
   country:

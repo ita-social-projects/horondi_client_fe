@@ -5,7 +5,7 @@ const initialState = {
   filterMenuStatus: false
 };
 
-const themeState = (state = initialState, { type, payload }) => {
+const themeState = (state = initialState, { type, payload } = {}) => {
   switch (type) {
   case SET_THEME_MODE:
     return {

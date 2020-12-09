@@ -14,24 +14,22 @@ const initialState = {
   }
 };
 
-const businessPagesReducer = (state = initialState, action = {}) => {
+export const businessPagesReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_BUSINESS_PAGE:
-      return {
-        ...state,
-        pages: {
-          ...state.pages,
-          [action.payload.key]: action.payload.businessPage
-        }
-      };
-    case SET_BUSINESS_PAGE_LOADING:
-      return {
-        ...state,
-        loading: action.payload
-      };
-    default:
-      return state;
+  case SET_BUSINESS_PAGE:
+    return {
+      ...state,
+      pages: {
+        ...state.pages,
+        [action.payload.key]: action.payload.businessPage
+      }
+    };
+  case SET_BUSINESS_PAGE_LOADING:
+    return {
+      ...state,
+      loading: action.payload
+    };
+  default:
+    return state;
   }
 };
-
-export default businessPagesReducer;

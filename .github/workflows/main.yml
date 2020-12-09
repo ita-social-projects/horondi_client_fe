@@ -28,6 +28,7 @@ jobs:
       - run: npm test -- -u
 
       - name: fix code coverage paths
+        if: always()
         run: | 
           sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_admin\//\/github\/workspace\//g' test-report.xml
           sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_admin\//\/github\/workspace\//g' coverage/lcov.info

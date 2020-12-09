@@ -25,7 +25,7 @@ describe('Cart saga', () => {
     setToLocalStorage('cart', products);
   });
 
-  it.skip('fetching cart items from local storage and set to redux store', () =>
+  it('fetching cart items from local storage and set to redux store', () =>
     expectSaga(handleCartLoad)
       .provide([[matchers.call.fn(getFromLocalStorage), products]])
       .put({
@@ -34,7 +34,7 @@ describe('Cart saga', () => {
       })
       .run());
 
-  it.skip('fetching cart items from local storage and add new one', () => {
+  it('fetching cart items from local storage and add new one', () => {
     const productToCart = addItemToCart(product);
 
     return expectSaga(handleAddCartItem, productToCart)
@@ -46,7 +46,7 @@ describe('Cart saga', () => {
       .run();
   });
 
-  it.skip('if product already in cart nothing changes', () => {
+  it('if product already in cart nothing changes', () => {
     const productToCart = addItemToCart(products[0]);
 
     return expectSaga(handleAddCartItem, productToCart)
@@ -58,7 +58,7 @@ describe('Cart saga', () => {
       .run();
   });
 
-  it.skip('should to remove product from cart by id', () => {
+  it('should to remove product from cart by id', () => {
     const productToRemove = removeItemFromCart(products[0]);
 
     return expectSaga(handleRemoveCartItem, productToRemove)
@@ -70,7 +70,7 @@ describe('Cart saga', () => {
       .run();
   });
 
-  it.skip('also checks the size of products before removal', () => {
+  it('also checks the size of products before removal', () => {
     const fakeItems = [
       { _id: 1, name: 'Pumpkin', selectedSize: 'M' },
       { _id: 1, name: 'Pumpkin', selectedSize: 'L' }

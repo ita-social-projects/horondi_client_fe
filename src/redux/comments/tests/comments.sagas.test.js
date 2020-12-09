@@ -6,20 +6,20 @@ import {
   handleAddComment,
   handleDeleteComment,
   handleUpdateComment
-} from '../comments.sagas';
+} from '../products.sagas';
 
 import {
   addComment,
   deleteComment,
   getComments,
   updateComment
-} from '../comments.operations';
+} from '../products.operations';
 
 import {
   SET_COMMENTS_LOADING,
-  SET_COMMENTS,
+  SET_COMMENT,
   SET_UPDATING_COMMENT
-} from '../comments.types';
+} from '../products.types';
 import { SNACKBAR_MESSAGE } from '../../../configs';
 import {
   SET_SNACKBAR_MESSAGE,
@@ -37,7 +37,7 @@ const fakeComments = {
 };
 
 describe('Add comments saga', () => {
-  it.skip('should add comment', () => {
+  it('should add comment', () => {
     const args = {
       payload: {
         rate: 0,
@@ -59,7 +59,7 @@ describe('Add comments saga', () => {
       ])
       .put({ type: SET_COMMENTS_LOADING, payload: true })
       .put({
-        type: SET_COMMENTS,
+        type: SET_COMMENT,
         payload: fakeComments.data.getAllCommentsByProduct
       })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
@@ -89,7 +89,7 @@ describe('Add comments saga', () => {
 });
 
 describe('Delete comments saga', () => {
-  it.skip('should delete comment', () => {
+  it('should delete comment', () => {
     const args = {
       payload: {
         product: productId
@@ -110,7 +110,7 @@ describe('Delete comments saga', () => {
       ])
       .put({ type: SET_COMMENTS_LOADING, payload: true })
       .put({
-        type: SET_COMMENTS,
+        type: SET_COMMENT,
         payload: fakeComments.data.getAllCommentsByProduct
       })
       .put({ type: SET_COMMENTS_LOADING, payload: false })
@@ -120,7 +120,7 @@ describe('Delete comments saga', () => {
       .run();
   });
 
-  it.skip('should throw an error', () => {
+  it('should throw an error', () => {
     const args = {
       payload: {
         product: productId
@@ -140,7 +140,7 @@ describe('Delete comments saga', () => {
 });
 
 describe('Update comments saga', () => {
-  it.skip('should update comment', () => {
+  it('should update comment', () => {
     const args = {
       payload: {
         comment: productId
@@ -161,7 +161,7 @@ describe('Update comments saga', () => {
       ])
       .put({ type: SET_UPDATING_COMMENT, payload: args.payload.comment })
       .put({
-        type: SET_COMMENTS,
+        type: SET_COMMENT,
         payload: fakeComments.data.getAllCommentsByProduct
       })
       .put({ type: SET_UPDATING_COMMENT, payload: null })

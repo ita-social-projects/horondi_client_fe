@@ -15,15 +15,11 @@ describe('test language reducer', () => {
   test('should return initial states state', () => {
     expect(userReducer(undefined, 'UNSUPPORTED_ACTION')).toEqual(initialState);
   });
-  test.skip('should set user', () => {
+  test('should set user', () => {
     expect(userReducer(initialState, setUser(user))).toEqual({
       error: false,
       userLoading: false,
-      userData: {
-        id: user.id,
-        name: user.name
-      },
-      ...initialState
+      userData: user
     });
   });
   test('should set error to true', () => {
@@ -37,7 +33,7 @@ describe('test language reducer', () => {
     expect(userReducer(initialState, logoutUser())).toEqual(initialState);
   });
   test('should user loading', () => {
-    expect(userReducer(initialState, setUserLoading(true))).toEqual({
+    expect(userReducer(initialState, setUserLoading())).toEqual({
       ...initialState,
       userLoading: true
     });

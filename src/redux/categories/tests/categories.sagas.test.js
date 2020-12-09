@@ -32,7 +32,7 @@ describe('Categories saga', () => {
       .run();
   });
 
-  it.skip('handles errors', () => {
+  it('handles errors', () => {
     const e = new Error('categories not found');
 
     return expectSaga(handleCategoriesLoad)

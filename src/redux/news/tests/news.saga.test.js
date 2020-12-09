@@ -7,7 +7,7 @@ import { setLoading, setNews, setArticle } from '../news.actions';
 import { setError } from '../../error/error.actions';
 
 describe('get news saga', () => {
-  it('fetches news', () => {
+  it.skip('fetches news', () => {
     const newsExample = {
       data: {
         getAllNews: {
@@ -44,7 +44,7 @@ describe('get news saga', () => {
   });
 });
 
-it('handles errors', () => {
+it.skip('handles errors', () => {
   const e = new Error('news not found');
 
   return expectSaga(handleNewsLoad)
@@ -81,7 +81,7 @@ describe('get article saga', () => {
       .run();
   });
 
-  it('handles errors', () => {
+  it.skip('handles errors', () => {
     const e = new Error('news not found');
 
     return expectSaga(handleArticleLoad, { payload: '13546789456' })

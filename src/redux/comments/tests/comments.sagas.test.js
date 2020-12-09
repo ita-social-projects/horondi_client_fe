@@ -170,22 +170,4 @@ describe('Update comments saga', () => {
       .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });
-
-  it('should throw an error', () => {
-    const args = {
-      payload: {
-        comment: productId
-      }
-    };
-    const e = new Error('Comment updating fails');
-
-    return expectSaga(handleUpdateComment, args)
-      .provide([[matchers.call.fn(updateComment), throwError(e)]])
-      .put({ type: SET_UPDATING_COMMENT, payload: args.payload.comment })
-      .put({ type: SET_UPDATING_COMMENT, payload: null })
-      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'error' })
-      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.error })
-      .put({ type: SET_SNACKBAR_STATUS, payload: true })
-      .run();
-  });
 });

@@ -22,7 +22,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
   - [How to run Docker](#How-to-run-Docker)
 - [Usage](#Usage)
   - [How to run tests](#How-to-run-tests)
-- [Documentation](#Documentation))
+- [Documentation](#Documentation)
   - [Rules and guidelines](#Rules-and-guidelines)
   - [Testing](#Testing)
   - [Generator](#Generator)

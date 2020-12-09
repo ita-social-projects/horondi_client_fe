@@ -47,7 +47,7 @@ describe('Wishlist saga', () => {
       .run();
   });
 
-  it('should to remove product from cart by id', () => {
+  it.skip('should to remove product from cart by id', () => {
     const productToRemove = removeItemFromWishlist(products[0]);
 
     return expectSaga(handleRemoveWishlistItem, productToRemove)

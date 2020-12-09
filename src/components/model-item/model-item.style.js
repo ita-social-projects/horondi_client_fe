@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   modelItem: {
+    cursor: 'pointer',
     flex: '1 0 31.3333%',
     margin: 5,
     boxSizing: 'border-box',

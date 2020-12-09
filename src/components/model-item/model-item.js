@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
@@ -23,6 +23,7 @@ const ModelItem = ({ model }) => {
 
   const dispatch = useDispatch();
   const styles = useStyles();
+  const history = useHistory();
 
   const handleClick = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));
@@ -36,6 +37,8 @@ const ModelItem = ({ model }) => {
         Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
+    const path = `/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`;
+    history.push(path);
   };
 
   return (

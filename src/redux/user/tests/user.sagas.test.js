@@ -5,7 +5,7 @@ import { setUser, setUserLoading, setUserError } from '../user.actions';
 
 const userData = {
   email: 'qwerty@gmail.com',
-  password: 'qwertY123'
+  pass: 'qwertY123'
 };
 
 describe('Categories saga', () => {

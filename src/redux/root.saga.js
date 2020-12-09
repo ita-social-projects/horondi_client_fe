@@ -17,7 +17,7 @@ import homeLooksImagesSaga from './home-page-looks/home-page-looks.sagas';
 import patternSaga from './pattern/pattern.sagas';
 import homePageSliderSaga from './homepage-slider/homepage-slider.sagas';
 
-export default function* rootSaga() {
+export function* rootSaga() {
   yield all([
     newsSaga(),
     categoriesSaga(),

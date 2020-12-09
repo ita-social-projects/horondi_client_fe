@@ -62,13 +62,14 @@ const DeliveryType = ({
     totalPrice
   };
 
-  const fondyData = useMemo(
-    () => ({
+  const fondyData = useMemo(() => {
+    const crypto = window.crypto || window.msCrypto;
+    const array = new Uint32Array(1);
+    return {
       amount: !!totalPrice && totalPrice * 100,
-      orderID: Math.floor(Math.random() * (100_000_000 - 1_000_000) + 1_000_000)
-    }),
-    [totalPrice]
-  );
+      orderID: crypto.getRandomValues(array)
+    };
+  }, [totalPrice]);
 
   const citiesForNovaPoshta = cities.map(
     (cityForNovaPoshta) => cityForNovaPoshta && cityForNovaPoshta.description
@@ -122,98 +123,98 @@ const DeliveryType = ({
 
   const deliverySwitcherTop = () => {
     switch (deliveryType) {
-      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return (
-          <SelfPickupTop
-            departmentSelfPickUpStorage={departmentSelfPickUpStorage}
-            departmentSelfPickUp={departmentSelfPickUp}
-            selectHandlerDepartmentSelfPickup={
-              selectHandlerDepartmentSelfPickup
-            }
-          />
-        );
-      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return <UkrposhtaTop />;
-      default:
-        return (
-          <NovaPoshtaTop
-            setCity={setCity}
-            citiesForNovaPoshta={citiesForNovaPoshta}
-          />
-        );
+    case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
+      return (
+        <SelfPickupTop
+          departmentSelfPickUpStorage={departmentSelfPickUpStorage}
+          departmentSelfPickUp={departmentSelfPickUp}
+          selectHandlerDepartmentSelfPickup={
+            selectHandlerDepartmentSelfPickup
+          }
+        />
+      );
+    case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
+      return <UkrposhtaTop />;
+    default:
+      return (
+        <NovaPoshtaTop
+          setCity={setCity}
+          citiesForNovaPoshta={citiesForNovaPoshta}
+        />
+      );
     }
   };
 
   const deliverySwitcherBottom = () => {
     switch (deliveryType) {
-      case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return (
-          <NovaPoshtaBottom
-            city={city}
-            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
-            departmentValue={departmentValue}
-            setDepartmentValue={setDepartmentValue}
-          />
-        );
-      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return <UkrPoshtaBottom />;
-      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
-        return (
-          <CourierBottom
-            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
-            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
-            setStreetValue={setStreetValue}
-            setBuildValue={setBuildValue}
-            setApartmentValue={setApartmentValue}
-            streetValue={streetValue}
-            buildValue={buildValue}
-            apartmentValue={apartmentValue}
-          />
-        );
-      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return (
-          <SelfPickupBottom
-            departmentSelfPickUpStorage={departmentSelfPickUpStorage}
-            departmentSelfPickUp={departmentSelfPickUp}
-            handleDeliveryTypeValidator={handleDeliveryTypeValidator}
-          />
-        );
-      default:
-        return '';
+    case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
+      return (
+        <NovaPoshtaBottom
+          city={city}
+          handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+          departmentValue={departmentValue}
+          setDepartmentValue={setDepartmentValue}
+        />
+      );
+    case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
+      return <UkrPoshtaBottom />;
+    case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
+      return (
+        <CourierBottom
+          cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+          handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+          setStreetValue={setStreetValue}
+          setBuildValue={setBuildValue}
+          setApartmentValue={setApartmentValue}
+          streetValue={streetValue}
+          buildValue={buildValue}
+          apartmentValue={apartmentValue}
+        />
+      );
+    case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
+      return (
+        <SelfPickupBottom
+          departmentSelfPickUpStorage={departmentSelfPickUpStorage}
+          departmentSelfPickUp={departmentSelfPickUp}
+          handleDeliveryTypeValidator={handleDeliveryTypeValidator}
+        />
+      );
+    default:
+      return '';
     }
   };
 
   const deliveryInfoSwitcher = () => {
     switch (deliveryType) {
-      case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
-        return (
-          <DeliveryInfo
-            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
-            from={CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
-            setTotalPrice={setTotalPrice}
-            isRenderPrice={departmentValue}
-          />
-        );
-      case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
-        return <DeliveryInfo />;
-      case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
-        return (
-          <DeliveryInfo
-            cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
-            from={CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta}
-            setTotalPrice={setTotalPrice}
-            isRenderPrice={streetValue}
-          />
-        );
-      case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
-        return (
-          <DeliveryInfo
-            from={CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
-            setTotalPrice={setTotalPrice}
-          />
-        );
-      default:
-        return '';
+    case CHECKOUT_DELIVERY_TYPES[language].novaPoshta:
+      return (
+        <DeliveryInfo
+          cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+          from={CHECKOUT_DELIVERY_TYPES[language].novaPoshta}
+          setTotalPrice={setTotalPrice}
+          isRenderPrice={departmentValue}
+        />
+      );
+    case CHECKOUT_DELIVERY_TYPES[language].ukrPoshta:
+      return <DeliveryInfo />;
+    case CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta:
+      return (
+        <DeliveryInfo
+          cityForNovaPoshtaBottom={cityForNovaPoshtaBottom}
+          from={CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta}
+          setTotalPrice={setTotalPrice}
+          isRenderPrice={streetValue}
+        />
+      );
+    case CHECKOUT_DELIVERY_TYPES[language].selfPickUP:
+      return (
+        <DeliveryInfo
+          from={CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
+          setTotalPrice={setTotalPrice}
+        />
+      );
+    default:
+      return '';
     }
   };
 

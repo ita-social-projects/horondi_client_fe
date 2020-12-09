@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
-import dropdownStyles from './dropdown.styles';
+import { dropdownStyles } from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue, fromSideBar }) => {
   const styles = dropdownStyles({ fromSideBar });

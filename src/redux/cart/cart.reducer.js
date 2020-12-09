@@ -4,7 +4,7 @@ const initialState = {
   list: []
 };
 
-const cartReducer = (state = initialState, { type, payload } = {}) => {
+export const cartReducer = (state = initialState, { type, payload } = {}) => {
   if (type === SET_CART) {
     return {
       list: payload
@@ -12,5 +12,3 @@ const cartReducer = (state = initialState, { type, payload } = {}) => {
   }
   return state;
 };
-
-export default cartReducer;

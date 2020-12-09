@@ -35,7 +35,7 @@ const Login = () => {
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const {pathToRecovery, pathToRegister}= routes
+  const { pathToRecovery, pathToRegister } = routes;
   const { loginError, userLoading, language } = useSelector(
     ({ User, Language }) => ({
       loginError: User.error,
@@ -59,7 +59,7 @@ const Login = () => {
       .email(errorMessages[language].value.email)
       .required(' '),
     password: Yup.string()
-      .matches(formRegExp.password, errorMessages[language].value.password)
+      .matches(formRegExp.pass, errorMessages[language].value.pass)
       .required(' '),
     staySignedIn: Yup.bool()
   });
@@ -96,8 +96,9 @@ const Login = () => {
               container
               alignItems='center'
               className={styles.formWrapper}
-              spacing={2}>
-              <Grid item sm={12} md={6} lg={6}  className={styles.fonWrapper} />
+              spacing={2}
+            >
+              <Grid item sm={12} md={6} lg={6} className={styles.fonWrapper} />
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 <Form className={styles.loginForm}>
                   {userLoading ? (
@@ -123,7 +124,7 @@ const Login = () => {
                       />
                       <Field
                         as={TextField}
-                        label={placeholders.password[language].value}
+                        label={placeholders.pass[language].value}
                         className={styles.passwordInput}
                         fullWidth
                         variant='outlined'
@@ -135,7 +136,10 @@ const Login = () => {
                         helperText={errors.password || ''}
                       />
                       <div className={styles.recoveryContainer}>
-                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
+                        <Link
+                          to={pathToRecovery}
+                          className={styles.recoveryBtn}
+                        >
                           {FORGOT_PASSWORD[language].value}
                         </Link>
                       </div>
@@ -187,7 +191,10 @@ const Login = () => {
                         />
                       </div>
                       <div className={styles.registerContainer}>
-                        <Link to={pathToRegister} className={styles.registerBtn}>
+                        <Link
+                          to={pathToRegister}
+                          className={styles.registerBtn}
+                        >
                           {REGISTER_PROPOSAL[language].value}
                         </Link>
                       </div>

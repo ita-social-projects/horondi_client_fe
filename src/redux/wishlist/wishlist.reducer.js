@@ -1,17 +1,20 @@
 import { SET_WISHLIST } from './wishlist.types';
 
+export const selectWishListList = ({ Wishlist }) => Wishlist.list;
+
 const initialState = {
   list: []
 };
 
-const wishlistReducer = (state = initialState, { type, payload } = {}) => {
+export const wishlistReducer = (
+  state = initialState,
+  { type, payload } = {}
+) => {
   if (type === SET_WISHLIST) {
     return {
       list: payload
     };
-  } else {
-    return state;
-  }
+  } 
+  return state;
+  
 };
-
-export default wishlistReducer;

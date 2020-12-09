@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const dropdownStyles = makeStyles(() => ({
+export const dropdownStyles = makeStyles(() => ({
   rootItem: {
     '& div': {
       padding: '0 !important'
@@ -43,5 +43,3 @@ const dropdownStyles = makeStyles(() => ({
     }
   })
 }));
-
-export default dropdownStyles;

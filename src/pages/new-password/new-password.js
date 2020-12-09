@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 import { useStyles } from './new-password.styles';
 import { formRegExp } from '../../configs';
 import {
@@ -16,8 +18,6 @@ import {
   checkIfTokenValid,
   resetState
 } from '../../redux/user/user.actions';
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 
 const NewPassword = ({ token }) => {
   const styles = useStyles();
@@ -58,8 +58,8 @@ const NewPassword = ({ token }) => {
 
   const validationSchema = Yup.object({
     password: Yup.string()
-      .matches(formRegExp.password, errorMessages[language].value.password)
-      .required(errorMessages[language].value.password),
+      .matches(formRegExp.password, errorMessages[language].value.pass)
+      .required(errorMessages[language].value.pass),
     confirmPassword: Yup.string()
       .oneOf(
         [Yup.ref('password')],

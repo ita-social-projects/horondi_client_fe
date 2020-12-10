@@ -1,4 +1,4 @@
-import errorReducer from '../error.reducer';
+import { errorReducer } from '../error.reducer';
 import { setError } from '../error.actions';
 
 describe('Error reducer test', () => {

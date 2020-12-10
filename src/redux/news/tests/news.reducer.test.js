@@ -1,4 +1,4 @@
-import newsReducer from '../news.reducer';
+import { newsReducer } from '../news.reducer';
 import { setNews, setArticle, setLoading } from '../news.actions';
 
 describe('News reducer test', () => {

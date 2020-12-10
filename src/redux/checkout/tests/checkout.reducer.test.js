@@ -5,7 +5,7 @@ import {
   setNovaPoshtaPrices,
   setLoading
 } from '../checkout.actions';
-import checkoutReducer from '../checkout.reducer';
+import { checkoutReducer } from '../checkout.reducer';
 
 describe('Checkout reducer tests', () => {
   let initialState;

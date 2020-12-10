@@ -1,4 +1,4 @@
-import businessPagesReducer from '../business-pages.reducer';
+import { businessPagesReducer } from '../business-pages.reducer';
 import { setBusinessPage, setLoading } from '../business-pages.actions';
 import { businessPage } from './business-page.variables';
 

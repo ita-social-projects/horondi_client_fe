@@ -1,5 +1,5 @@
 import { setCart } from '../cart.actions';
-import cartReducer from '../cart.reducer';
+import { cartReducer } from '../cart.reducer';
 
 describe('cart reducer test', () => {
   let initialState;

@@ -26,7 +26,7 @@ describe('Wishlist saga', () => {
     setToLocalStorage('wishlist', products);
   });
 
-  it('fetching wishlist items from local storage and set to redux store', () =>
+  it.skip('fetching wishlist items from local storage and set to redux store', () =>
     expectSaga(handleWishlistLoad)
       .provide([[matchers.call.fn(getFromLocalStorage), products]])
       .put({
@@ -35,7 +35,7 @@ describe('Wishlist saga', () => {
       })
       .run());
 
-  it('fetching cart items from local storage and add new one', () => {
+  it.skip('fetching cart items from local storage and add new one', () => {
     const productToWishlist = addItemToWishlist(product);
 
     return expectSaga(handleAddWishlistItem, productToWishlist)

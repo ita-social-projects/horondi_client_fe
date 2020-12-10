@@ -1,5 +1,5 @@
 import { setFilterMenuStatus, setThemeMode } from '../theme.actions';
-import themeReducer from '../theme.reducer';
+import { themeState as themeReducer } from '../theme.reducer';
 
 describe('theme reducer test', () => {
   let initialState;

@@ -1,4 +1,4 @@
-import categoriesReducer from '../categories.reducer';
+import { categoriesReducer } from '../categories.reducer';
 import { setCategories, setCategoriesLoading } from '../categories.actions';
 
 describe('Categories reducer test', () => {

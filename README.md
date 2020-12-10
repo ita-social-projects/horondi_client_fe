@@ -27,7 +27,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
   - [Testing](#Testing)
   - [Generator](#Generator)
   - [Chat](#Chat)
-- [Project Deploy](#Project Deploy)
+- [Project Deploy]
 - [Contributing](#contributing)
   - [git flow](#git-flow)
   - [issue flow](#git-flow)

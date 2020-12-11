@@ -16,7 +16,7 @@ const CategoryItem = ({
 
   const path = `/${categoryUrl}`;
 
-  const routeChange = () => {
+  const changeRouteHandler = () => {
     history.push(path);
   };
 
@@ -32,7 +32,7 @@ const CategoryItem = ({
     <div
       className={styles.categoryItem}
       data-cy='category-item'
-      onClick={routeChange}
+      onClick={changeRouteHandler}
     >
       <span className={styles.categoryName}>{categoryName}</span>
       <Link to={path} className={styles.categoryInner}>

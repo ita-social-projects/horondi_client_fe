@@ -49,7 +49,7 @@ const Routes = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<div />}>
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
@@ -122,7 +122,7 @@ const Routes = () => {
                   const categoryParam = categories.find(
                     (categoryFound) =>
                       categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
+                      category.toLowerCase()
                   );
                   return <ProductsTable category={categoryParam} />;
                 }}
@@ -136,7 +136,7 @@ const Routes = () => {
                   const categoryParam = categories.find(
                     (categoryFound) =>
                       categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
+                      category.toLowerCase()
                   );
                   return (
                     <ProductListPage category={categoryParam} model={model} />

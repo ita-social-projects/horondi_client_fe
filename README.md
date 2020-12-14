@@ -322,7 +322,7 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 ### DevOps team
 
 [![@SofiaDemyanovska](https://avatars1.githubusercontent.com/u/48492789?s=200&u=cb0520a8498667594ded0db8e29cdd3ec5529578&v=4)](https://github.com/SofiaDemyanovska)
-[![@ikoblyk](https://avatars3.githubusercontent.com/u/45568834?s=200&u=5d8790e8e58a7966e2d6d6bc6a4f0d15c8cb2e9c&v=4)](https://github.com/IKoblyk)
+[![@vitaliy-pavlyshyn](https://avatars0.githubusercontent.com/u/24523962?s=460&u=db2f3b6459c080079c5c5e4b52da61cd18b4e223&v=4)](https://github.com/vitaliy-pavlyshyn)
 
 ---
 

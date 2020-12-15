@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { useStyles } from './search-bar-list.styles';
 import { NOTHING_FOUND_MESSAGE } from '../../configs';
 import SearchBarListItem from './search-bar-list-item';
-import CircularLoadingBar from '../../components/circular-loading-bar';
+import Loader from '../../components/loader';
 
 const SearchBarList = () => {
   const {
@@ -31,7 +31,7 @@ const SearchBarList = () => {
               <SearchBarListItem key={item._id} product={item} />
             ))
           ) : searchBarLoading ? (
-            <CircularLoadingBar />
+            <Loader />
           ) : (
             <Typography className={styles.emptyList} variant='h3'>
               {NOTHING_FOUND_MESSAGE[language]}

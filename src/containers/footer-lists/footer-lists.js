@@ -23,17 +23,15 @@ const FooterLists = () => {
   );
 
   const categoriesList = categories
-    ? categories.map(({ _id, name, isMain }) =>
-        isMain ? (
-          <div key={_id}>
-            <Typography variant='subtitle2'>
-              <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
-                {name[language].value}
-              </Link>
-            </Typography>
-          </div>
-        ) : null
-      )
+    ? categories.map(({ _id, name }) => (
+      <div key={_id}>
+        <Typography variant='subtitle2'>
+          <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+            {name[language].value}
+          </Link>
+        </Typography>
+      </div>
+    ))
     : null;
 
   const informationList = FOOTER_INFORMATION[language].items.map((item) => (

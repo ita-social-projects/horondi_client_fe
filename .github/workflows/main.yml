@@ -4,7 +4,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ development ]
+    branches: [ test-sonar-coverage ]
   pull_request:
     branches: [ development  ]
 
@@ -28,10 +28,9 @@ jobs:
       - run: npm test -- -u
 
       - name: fix code coverage paths
-        if: always()
         run: | 
-          sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_client_fe\//\/github\/workspace\//g' test-report.xml
-          sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_client_fe\//\/github\/workspace\//g' coverage/lcov.info
+          sed -i 's/\/home\/runner\/work\/horondi_client_fe\/horondi_client_fe\//\/github\/workspace\//g' test-report.xml
+          sed -i 's/\/home\/runner\/work\/horondi_client_fe\/horondi_client_fe\//\/github\/workspace\//g' coverage/lcov.info
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

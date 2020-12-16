@@ -57,10 +57,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     } = product;
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
+      console.log('removed from wishlist');
     } else {
       dispatch(
         addItemToWishlist({ _id, name, basePrice, images: { primary } })
       );
+      console.log('added to wishlist');
     }
   };
 
@@ -72,6 +74,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
+      console.log('added to cart');
     } else {
       setSizeIsNotSelectedError(true);
     }

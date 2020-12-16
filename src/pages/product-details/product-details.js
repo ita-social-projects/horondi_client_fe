@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Card } from '@material-ui/core';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_SIZE, DEFAULT_PRICE } from '../../configs';
+import { DEFAULT_PRICE, DEFAULT_SIZE } from '../../configs';
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 
 const ProductDetails = ({ match }) => {
@@ -121,8 +121,8 @@ const ProductDetails = ({ match }) => {
       ...new Set(
         options.length && options[0].bottomMaterial
           ? options.map(({ bottomMaterial: item }) =>
-              item && item.available ? item.name[1].value : null
-            )
+            item && item.available ? item.name[1].value : null
+          )
           : null
       )
     ],
@@ -134,8 +134,8 @@ const ProductDetails = ({ match }) => {
       ...new Set(
         options.length && options[0].additions
           ? options
-              .filter(({ additions }) => additions.length > 0)
-              .map(({ additions: [{ name }] }) => name[1].value)
+            .filter(({ additions }) => additions.length > 0)
+            .map(({ additions: [{ name }] }) => name[1].value)
           : null
       )
     ],
@@ -146,12 +146,12 @@ const ProductDetails = ({ match }) => {
     () =>
       options.length
         ? uniqueAdditions.map(
-            (item) =>
-              options
-                .filter(({ additions }) => additions.length > 0)
-                .find(({ additions: [{ name }] }) => item === name[1].value)
-                .additions[0]
-          )
+          (item) =>
+            options
+              .filter(({ additions }) => additions.length > 0)
+              .find(({ additions: [{ name }] }) => item === name[1].value)
+              .additions[0]
+        )
         : null,
     [uniqueAdditions, options]
   );
@@ -160,8 +160,8 @@ const ProductDetails = ({ match }) => {
     () =>
       options.length
         ? uniqueSizes.map(
-            (item) => options.find(({ size: { name } }) => item === name).size
-          )
+          (item) => options.find(({ size: { name } }) => item === name).size
+        )
         : null,
     [uniqueSizes, options]
   );
@@ -170,11 +170,11 @@ const ProductDetails = ({ match }) => {
     () =>
       uniqueBottomMaterials[0] && options && options.length
         ? uniqueBottomMaterials.map(
-            (item) =>
-              options.find(
-                ({ bottomMaterial: { name } }) => item === name[1].value
-              ).bottomMaterial
-          )
+          (item) =>
+            options.find(
+              ({ bottomMaterial: { name } }) => item === name[1].value
+            ).bottomMaterial
+        )
         : null,
     [uniqueBottomMaterials, options]
   );
@@ -210,11 +210,7 @@ const ProductDetails = ({ match }) => {
   };
 
   if (isLoading || !product) {
-    return (
-      <div className={styles.center}>
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

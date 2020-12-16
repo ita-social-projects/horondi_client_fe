@@ -30,8 +30,8 @@ jobs:
       - name: fix code coverage paths
         if: always()
         run: | 
-          sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_admin\//\/github\/workspace\//g' test-report.xml
-          sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_admin\//\/github\/workspace\//g' coverage/lcov.info
+          sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_client_fe\//\/github\/workspace\//g' test-report.xml
+          sed -i 's/\/home\/runner\/work\/horondi_admin\/horondi_client_fe\//\/github\/workspace\//g' coverage/lcov.info
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

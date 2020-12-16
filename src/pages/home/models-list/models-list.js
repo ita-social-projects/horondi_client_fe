@@ -9,7 +9,7 @@ import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { UNIQUE_MODEL_IMAGE_LINK } from '../../../configs';
-import CircularLoadingBar from '../../../components/circular-loading-bar';
+import Loader from '../../../components/loader';
 
 const ModelsList = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const ModelsList = () => {
   };
 
   if (modelsLoading) {
-    return <CircularLoadingBar />;
+    return <Loader />;
   }
 
   return (

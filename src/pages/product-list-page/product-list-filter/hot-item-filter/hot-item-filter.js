@@ -1,23 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
 import { IS_HOT_TEXT } from '../../../../translations/product-list.translations';
-import { changeFilterStatus, setHotItemFilter } from '../../../../redux/products/products.actions';
+import {URL_QUERIES_NAME} from '../../../../configs/index'
+import { setHotItemFilter } from '../../../../redux/products/products.actions';
 
-const HotItemFilter = ({ filters, language }) => {
+const HotItemFilter = ({ language }) => {
   const dispatch = useDispatch();
-  const { filterStatus} = useSelector(
-    ({ Products}) => ({
-      filterStatus: Products.filterStatus
-    })
-  );
-  const { isHotItemFilter } = filters;
+  const history = useHistory();
+  const { search } = useLocation();
+  const { isHotItemFilter, page, defaultPage } = URL_QUERIES_NAME
+  const searchParams = new URLSearchParams(search);
+  const [hotItem, setHotItem] = useState(false)
+  useEffect(() => {
+    if(searchParams.get(isHotItemFilter)){
+      setHotItem(!hotItem)
+      dispatch(setHotItemFilter(hotItem));
+    }
+  }, [dispatch, searchParams.toString()]);
 
   const handleChange = (event) => {
-    dispatch(setHotItemFilter(event.target.checked));
-    dispatch(changeFilterStatus(!filterStatus));
+    if(event.target.checked){
+      searchParams.set( isHotItemFilter, event.target.checked)
+    }else {
+      searchParams.delete( isHotItemFilter)
+      setHotItem(!hotItem)
+      dispatch(setHotItemFilter(hotItem));
+    }
+    searchParams.set(page, defaultPage)
+    history.push(`?${searchParams.toString()}`);
   };
 
   return (
@@ -26,9 +40,9 @@ const HotItemFilter = ({ filters, language }) => {
         {IS_HOT_TEXT[language].value}:
         <Switch
           color='default'
-          checked={isHotItemFilter}
+          checked={hotItem}
           onChange={handleChange}
-          name='isHotItemFilter'
+          name={isHotItemFilter}
           inputProps={{ 'aria-label': 'secondary checkbox' }}
         />
       </Typography>

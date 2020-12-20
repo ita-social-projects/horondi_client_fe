@@ -9,17 +9,6 @@ export const SHOW_FILTER_BUTTON_TEXT = {
   }
 };
 
-export const HIDE_FILTER_BUTTON_TEXT = {
-  0: {
-    lang: 'uk',
-    value: 'Сховати фільтри'
-  },
-  1: {
-    lang: 'eng',
-    value: 'Hide Filter'
-  }
-};
-
 export const AVAILABLE_COUNT_LABEL_TEXT = {
   0: {
     lang: 'uk',
@@ -28,17 +17,6 @@ export const AVAILABLE_COUNT_LABEL_TEXT = {
   1: {
     lang: 'eng',
     value: 'Available'
-  }
-};
-
-export const NONE_PATTERN = {
-  0: {
-    lang: 'uk',
-    value: 'Немає'
-  },
-  1: {
-    lang: 'eng',
-    value: 'None '
   }
 };
 
@@ -217,6 +195,7 @@ export const SORT_BY_SELECT_OPTIONS = [
     }
   }
 ];
+
 export const DRAWER_TEMPORARY = 'temporary';
 export const DRAWER_PERMANENT = 'permanent';
 export const TEMPORARY_WIDTHS = ['sm', 'xs'];

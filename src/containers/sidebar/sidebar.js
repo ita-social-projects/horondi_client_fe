@@ -24,6 +24,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
     () =>
       burgerMenuCategories.map(({ category, models }) => (
         <SideBarItem
+          category={category._id}
           name={category.name}
           mainItemStyles={styles.mainItem}
           language={language}

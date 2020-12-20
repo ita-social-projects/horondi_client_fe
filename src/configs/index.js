@@ -230,8 +230,19 @@ export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
-export const POPULARITY = 'POPULARITY';
-
+export const POPULARITY = 'popularity';
+export const URL_QUERIES_NAME = {
+  page:'page',
+  sort:'sort',
+  countPerPage:'countPerPage',
+  categoryFilter:'categoryFilter',
+  modelsFilter:'modelsFilter',
+  colorsFilter:'colorsFilter',
+  patternsFilter:'patternsFilter',
+  isHotItemFilter:'isHotItemFilter',
+  priceFilter:'priceFilter',
+  defaultPage:'1'
+};
 export const FAKE_PRODUCT_FOR_TEST = {
   _id: 'xdfgbvc3',
   name: {

@@ -13,6 +13,7 @@ import AppFooter from '../components/app-footer';
 import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
+import { useLocation } from 'react-router';
 
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
@@ -46,7 +47,8 @@ const Routes = () => {
       userData: User.userData
     })
   );
-
+  // const {search} = useLocation();
+  // const searchParams = new URLSearchParams(search);
   return (
     <ConnectedRouter history={history}>
       <Suspense fallback={<div></div>}>
@@ -114,35 +116,37 @@ const Routes = () => {
                 exact
                 redirectTo='/login'
               />
-              <Route
-                path='/:category'
-                exact
-                render={({ match }) => {
-                  const { category } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
-                  );
-                  return <ProductsTable category={categoryParam} />;
-                }}
-              />
+              {/*<Route*/}
+              {/*  path='/:category'*/}
+              {/*  exact*/}
+              {/*  render={({ match }) => {*/}
+              {/*    const { category } = match.params;*/}
+              {/*    const categoryParam = categories.find(*/}
+              {/*      (categoryFound) =>*/}
+              {/*        categoryFound.name[1].value.toLowerCase() ===*/}
+              {/*          category.toLowerCase() && categoryFound.isMain*/}
+              {/*    );*/}
+              {/*    return <ProductsTable category={categoryParam} />;*/}
+              {/*  }}*/}
+              {/*/>*/}
               <Route path='/product/:id' exact component={ProductDetails} />
-              <Route
-                path='/:category/:model'
-                exact
-                render={({ match }) => {
-                  const { category, model } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
-                  );
-                  return (
-                    <ProductListPage category={categoryParam} model={model} />
-                  );
-                }}
-              />
+              {/*<Route*/}
+              {/*  path='/:category/:model'*/}
+              {/*  exact*/}
+              {/*  render={({ match }) => {*/}
+              {/*    const { category, model } = match.params;*/}
+              {/*    const categoryParam = categories.find(*/}
+              {/*      (categoryFound) =>*/}
+              {/*        categoryFound.name[1].value.toLowerCase() ===*/}
+              {/*          category.toLowerCase() && categoryFound.isMain*/}
+              {/*    );*/}
+
+              {/*    return (*/}
+              {/*      <ProductListPage category={categoryParam} model={model} />*/}
+              {/*    );*/}
+              {/*  }}*/}
+              {/*/>*/}
+              <Route path='/products' exact component={ProductListPage} />
             </Switch>
           </div>
           <AppFooter />

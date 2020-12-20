@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
+import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import {
@@ -12,7 +13,7 @@ import {
   SORT_BY_SELECT_OPTIONS,
   SORT_BY_TEXT
 } from '../../../translations/product-list.translations';
-import { SORT_ASC, SORT_DESC, RATE, POPULARITY } from '../../../configs';
+import { SORT_ASC, SORT_DESC, RATE, POPULARITY, URL_QUERIES_NAME } from '../../../configs';
 
 const ProductSort = () => {
   const { language } = useSelector(({ Language }) => ({
@@ -20,26 +21,48 @@ const ProductSort = () => {
   }));
   const styles = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const { sort, page, defaultPage } = URL_QUERIES_NAME;
+  const query = searchParams.get(sort);
+  const sortAction = [setSortByPrice, setSortByRate, setSortByPrice]
+  useEffect(() => {
+    // SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }, index) => {
+    //   if (query === optionValue.name) {
+    //     return dispatch(sortAction[](optionValue.value));
+    //   }
+    // });
+    // sortAction.forEach(action=>dispatch(action(0)))
+    SORT_BY_SELECT_OPTIONS.forEach(({optionValue})=>{
+      if (query === optionValue.name) {
+        dispatch(setSortByPrice(optionValue.value));
+      }
+      if (query === optionValue.name) {
+        dispatch(setSortByRate(optionValue.value));
+      }
+      if (query === optionValue.name) {
+        dispatch(setSortByPopularity(optionValue.value));
+      }
+      if (query === optionValue.name) {
+        dispatch(setSortByPrice(optionValue.value));
+      }
+    })
+  }, [dispatch, searchParams.toString()]);
 
   const selectHandler = (e) => {
-    const { name, value } = JSON.parse(e.target.value);
-
-    if (name === SORT_ASC || name === SORT_DESC) {
-      return dispatch(setSortByPrice(value));
-    }
-    if (name === RATE) {
-      return dispatch(setSortByRate(value));
-    }
-    if (name === POPULARITY) {
-      return dispatch(setSortByPopularity(value));
-    }
+    const { name } = JSON.parse(e.target.value);
+    searchParams.set(sort, name);
+    searchParams.set(page, defaultPage);
+    history.push(`?${searchParams.toString()}`);
   };
 
   const sortByText = SORT_BY_TEXT[language].value;
 
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(
-    ({ lang, optionValue }, index) => (
-      <option key={lang[1].value} value={JSON.stringify(optionValue)}>
+    ({ lang, optionValue }) => (
+      <option key={lang[1].value} value={JSON.stringify(optionValue)}
+        selected={optionValue.name === query}>
         {lang[language].value}
       </option>
     )

@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     color:'gray',
     '&:hover': {
       textDecoration: 'underline',
-      color:'red'
+      color:'black'
     }
   },
   mainItemIcon:{

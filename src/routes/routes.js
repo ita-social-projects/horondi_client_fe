@@ -6,6 +6,7 @@ import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
+import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
 import Home from '../pages/home';
 import AppHeader from '../components/app-header';
@@ -20,7 +21,6 @@ const PaymentsAndShipping = lazy(() =>
   import('../pages/payments-and-shipping')
 );
 const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
-const Cart = lazy(() => import('../pages/cart'));
 const Wishlist = lazy(() => import('../pages/wishlist'));
 const NewsDetail = lazy(() => import('../pages/news/news-detail'));
 const ProductListPage = lazy(() => import('../pages/product-list-page'));
@@ -47,11 +47,10 @@ const Routes = () => {
       userData: User.userData
     })
   );
-  // const {search} = useLocation();
-  // const searchParams = new URLSearchParams(search);
+
   return (
     <ConnectedRouter history={history}>
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
@@ -68,7 +67,6 @@ const Routes = () => {
                 component={PaymentsAndShipping}
               />
               <Route path='/privacy-policy' exact component={PrivacyPolicy} />
-              <Route path='/cart' exact component={Cart} />
               <Route path='/wishlist' exact component={Wishlist} />
               <Route path='/contacts' exact component={Contacts} />
               <ProtectedRoute
@@ -116,19 +114,19 @@ const Routes = () => {
                 exact
                 redirectTo='/login'
               />
-              {/*<Route*/}
-              {/*  path='/:category'*/}
-              {/*  exact*/}
-              {/*  render={({ match }) => {*/}
-              {/*    const { category } = match.params;*/}
-              {/*    const categoryParam = categories.find(*/}
-              {/*      (categoryFound) =>*/}
-              {/*        categoryFound.name[1].value.toLowerCase() ===*/}
-              {/*          category.toLowerCase() && categoryFound.isMain*/}
-              {/*    );*/}
-              {/*    return <ProductsTable category={categoryParam} />;*/}
-              {/*  }}*/}
-              {/*/>*/}
+              <Route
+                path='/:category'
+                exact
+                render={({ match }) => {
+                  const { category } = match.params;
+                  const categoryParam = categories.find(
+                    (categoryFound) =>
+                      categoryFound.name[1].value.toLowerCase() ===
+                      category.toLowerCase()
+                  );
+                  return <ProductsTable category={categoryParam} />;
+                }}
+              />
               <Route path='/product/:id' exact component={ProductDetails} />
               {/*<Route*/}
               {/*  path='/:category/:model'*/}

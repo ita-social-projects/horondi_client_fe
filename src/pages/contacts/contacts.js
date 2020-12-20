@@ -4,7 +4,7 @@ import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
 import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
-import CircularLoadingBar from '../../components/circular-loading-bar';
+import Loader from '../../components/loader';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 
@@ -16,7 +16,7 @@ const Contacts = ({ fromCheckout }) => {
   if (loading) {
     return (
       <Backdrop className={styles.backdrop} open={loading} invisible>
-        <CircularLoadingBar color='inherit' />
+        <Loader color='inherit' />
       </Backdrop>
     );
   }
@@ -55,7 +55,7 @@ const Contacts = ({ fromCheckout }) => {
             </span>
             <div className={styles.schedule}>
               {contact.openHours[language].value.split('|').map((el) => {
-                let i = language ? 4 : 3;
+                const i = language ? 4 : 3;
                 return (
                   <div key={el}>
                     <span className={styles.day}>{el.slice(0, i)}</span>

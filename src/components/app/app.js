@@ -51,14 +51,6 @@ const App = () => {
     dispatch(setThemeMode(themeMode));
   }, [lightMode, dispatch, themeMode]);
 
-  if (isLoading) {
-    return (
-      <div className={styles.center}>
-        <Loader />
-      </div>
-    );
-  }
-
   return (
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>

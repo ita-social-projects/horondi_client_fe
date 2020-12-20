@@ -30,7 +30,6 @@ const getAllProducts = async () => {
               name {
                 value
               }
-              isMain
             }
           }
         }
@@ -135,7 +134,6 @@ const getFilteredProducts = async ({ state, currency }) => {
               name {
                 value
               }
-              isMain
             }
             isHotItem
           }

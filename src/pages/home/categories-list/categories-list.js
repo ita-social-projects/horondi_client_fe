@@ -17,19 +17,16 @@ const CategoriesList = () => {
 
   const categoriesList = categories
     ? categories
-        .map(
-          ({ _id, name, images, isMain }) =>
-            isMain && (
-              <CategoryItem
-                key={_id}
-                categoryUrl={getCategoryURL(name)}
-                categoryName={name[language].value}
-                categoryImageUrl={images.large}
-                language={language}
-              />
-            )
-        )
-        .filter((val) => val)
+      .map(({ _id, name, images }) => (
+        <CategoryItem
+          key={_id}
+          categoryUrl={getCategoryURL(name)}
+          categoryName={name[language].value}
+          categoryImageUrl={images.large}
+          language={language}
+        />
+      ))
+      .filter((val) => val)
     : null;
 
   return (

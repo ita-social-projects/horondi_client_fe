@@ -36,7 +36,11 @@ const SideBarItem = ({
           onClick={handleClick}
           primary={name[language].value}
         />
-        {isListOpen ? <RemoveIcon /> : <AddIcon />}
+        {isListOpen ? (
+          <RemoveIcon onClick={handleClick} />
+        ) : (
+          <AddIcon onClick={handleClick} />
+        )}
       </li>
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>

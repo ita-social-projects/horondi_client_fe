@@ -8,11 +8,17 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
+import Popup from '../../../components/popup';
+
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
+import {
+  setPopupMessage,
+  setPopupStatus
+} from '../../../redux/popup/popup.actions';
 
 import {
   PDP_BUTTONS,
@@ -57,12 +63,14 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     } = product;
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
-      console.log('removed from wishlist');
+      dispatch(setPopupMessage('removed from wishlist'));
+      dispatch(setPopupStatus(true));
     } else {
       dispatch(
         addItemToWishlist({ _id, name, basePrice, images: { primary } })
       );
-      console.log('added to wishlist');
+      dispatch(setPopupMessage('added to wishlist'));
+      dispatch(setPopupStatus(true));
     }
   };
 
@@ -74,7 +82,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
-      console.log('added to cart');
+      dispatch(setPopupMessage('added to cart'));
+      dispatch(setPopupStatus(true));
     } else {
       setSizeIsNotSelectedError(true);
     }
@@ -96,6 +105,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   return (
     <div className={styles.submit}>
+      <Popup />
       <Tooltip title={wishlistTip} placement='bottom'>
         {isWishful ? (
           <FavoriteIcon

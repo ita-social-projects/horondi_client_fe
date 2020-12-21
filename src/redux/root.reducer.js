@@ -23,6 +23,7 @@ import HomePageImages from './home-page-looks/home-page-looks.reducer';
 import Pattern from './pattern/pattern.reducer';
 import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
+import Popup from './popup/popup.reducer';
 
 export const rootReducer = (history) =>
   combineReducers({
@@ -33,6 +34,7 @@ export const rootReducer = (history) =>
     Theme,
     Error,
     Language,
+    Popup,
     Products,
     Wishlist,
     Cart,

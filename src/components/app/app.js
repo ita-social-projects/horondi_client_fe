@@ -15,12 +15,10 @@ import { getCategories } from '../../redux/categories/categories.actions';
 import { preserveUser } from '../../redux/user/user.actions';
 import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
+import { selectLightModeAndLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
-  const { lightMode, location } = useSelector(({ Theme, router }) => ({
-    lightMode: Theme.lightMode,
-    location: router.location.pathname
-  }));
+  const { lightMode, location } = useSelector(selectLightModeAndLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
 

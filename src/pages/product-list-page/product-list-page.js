@@ -13,17 +13,17 @@ import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
 import {
   getAllFilters,
-  setCurrentPage,
   getFiltredProducts,
   setCategoryFilter,
+  setCurrentPage,
   setPriceFilter
 } from '../../redux/products/products.actions';
 
 import {
-  SHOW_FILTER_BUTTON_TEXT,
-  PRODUCT_NOT_FOUND,
   DRAWER_PERMANENT,
   DRAWER_TEMPORARY,
+  PRODUCT_NOT_FOUND,
+  SHOW_FILTER_BUTTON_TEXT,
   TEMPORARY_WIDTHS
 } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
@@ -70,8 +70,6 @@ const ProductListPage = ({ category, model, width }) => {
     dispatch(getAllFilters());
   }, [dispatch]);
 
-  console.log(category);
-
   useEffect(() => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(
@@ -114,11 +112,7 @@ const ProductListPage = ({ category, model, width }) => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
 
   if (loading || !filterData.length) {
-    return (
-      <div className={styles.center}>
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
 
   const categoryText = category.name[language].value.toUpperCase();

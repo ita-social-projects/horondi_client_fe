@@ -24,9 +24,9 @@ const ModelItem = ({ model }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
-  const path = `/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`;
+  const pathToModel = `/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`;
 
-  const handleClick = (selectedModel) => {
+  const handleClickToModel = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));
     dispatch(setPatternsFilter([]));
     dispatch(setColorsFilter([]));
@@ -38,20 +38,20 @@ const ModelItem = ({ model }) => {
         Math.max(...filterData.map((product) => product.basePrice[0].value))
       ])
     );
-    history.push(path);
+    history.push(pathToModel);
   };
 
   return (
     <div
       key={model.name[1].value}
       className={styles.modelItem}
-      onClick={() => handleClick(model)}
+      onClick={() => handleClickToModel(model)}
     >
       <div className={styles.modelItemTitle}>{model.name[language].value}</div>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>
-      <Link className={styles.link} to={path}>
+      <Link className={styles.link} to={pathToModel}>
         {HOME_BUTTONS[language].MOVE_TO_MODEL}
         <ArrowRightAltIcon />
       </Link>

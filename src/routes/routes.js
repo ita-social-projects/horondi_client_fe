@@ -119,8 +119,10 @@ const Routes = () => {
                 exact
                 render={({ match }) => {
                   const { category } = match.params;
-                  const categoryParam = categories.find((categoryFound) =>
-                    categoryFound.name[1].value.toLowerCase()
+                  const categoryParam = categories.find(
+                    (categoryFound) =>
+                      categoryFound.name[1].value.toLowerCase() ===
+                      category.toLowerCase()
                   );
                   return <ProductsTable category={categoryParam} />;
                 }}
@@ -131,8 +133,11 @@ const Routes = () => {
                 exact
                 render={({ match }) => {
                   const { category, model } = match.params;
-                  const categoryParam = categories.find((categoryFound) =>
-                    categoryFound.name[1].value.toLowerCase()
+                  console.log(categories);
+                  const categoryParam = categories.find(
+                    (categoryFound) =>
+                      categoryFound.name[1].value.toLowerCase() ===
+                      category.toLowerCase()
                   );
                   return (
                     <ProductListPage category={categoryParam} model={model} />

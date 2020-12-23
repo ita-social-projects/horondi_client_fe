@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/Users/nikitadenysenko/Development/SoftServe/Horondi/horondi_client_fe/src/redux/products/tests/products.saga.test.js">
-    <testCase name="Products saga fetches product" duration="1"/>
-    <testCase name="Products saga handles product fetching error" duration="0"/>
-  </file>
   <file path="/Users/nikitadenysenko/Development/SoftServe/Horondi/horondi_client_fe/src/redux/categories/tests/categories.sagas.test.js">
-    <testCase name="Categories saga fetches categories" duration="22"/>
+    <testCase name="Categories saga fetches categories" duration="11"/>
     <testCase name="Categories saga handles errors" duration="0"/>
   </file>
 </testExecutions>

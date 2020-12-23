@@ -49,7 +49,7 @@ const Routes = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<div />}>
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
@@ -119,10 +119,8 @@ const Routes = () => {
                 exact
                 render={({ match }) => {
                   const { category } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
+                  const categoryParam = categories.find((categoryFound) =>
+                    categoryFound.name[1].value.toLowerCase()
                   );
                   return <ProductsTable category={categoryParam} />;
                 }}
@@ -133,10 +131,8 @@ const Routes = () => {
                 exact
                 render={({ match }) => {
                   const { category, model } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
+                  const categoryParam = categories.find((categoryFound) =>
+                    categoryFound.name[1].value.toLowerCase()
                   );
                   return (
                     <ProductListPage category={categoryParam} model={model} />

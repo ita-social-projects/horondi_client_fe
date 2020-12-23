@@ -70,6 +70,8 @@ const ProductListPage = ({ category, model, width }) => {
     dispatch(getAllFilters());
   }, [dispatch]);
 
+  console.log(category);
+
   useEffect(() => {
     dispatch(setCategoryFilter([category._id]));
     dispatch(

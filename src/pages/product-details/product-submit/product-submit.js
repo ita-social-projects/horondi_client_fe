@@ -8,28 +8,27 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
-import Popup from '../../../components/popup';
+import Toast from '../../../components/toast';
 
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import {
-  setPopupMessage,
-  setPopupStatus
-} from '../../../redux/popup/popup.actions';
+import { setToastMessage } from '../../../redux/toast/toast.actions';
 
 import {
   PDP_BUTTONS,
   TOOLTIPS
 } from '../../../translations/product-details.translations';
 
+import { TOAST_MESSAGE } from '../../../translations/toast.translations';
+
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { language, productToSend, product, wishlistItems } = useSelector(
-    ({ Language, Products, User, Wishlist }) => ({
+    ({ Language, Products, User, Wishlist, Toast }) => ({
       language: Language.language,
       productToSend: Products.productToSend,
       product: Products.product,
@@ -54,6 +53,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     ? TOOLTIPS[language].removeWishful
     : TOOLTIPS[language].addWishful;
 
+  const toastMessages = TOAST_MESSAGE[language];
+
   const onWishfulHandler = () => {
     const {
       _id,
@@ -63,14 +64,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     } = product;
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
-      dispatch(setPopupMessage('removed from wishlist'));
-      dispatch(setPopupStatus(true));
+      dispatch(setToastMessage(toastMessages.removedFromWishList));
     } else {
       dispatch(
         addItemToWishlist({ _id, name, basePrice, images: { primary } })
       );
-      dispatch(setPopupMessage('added to wishlist'));
-      dispatch(setPopupStatus(true));
+      dispatch(setToastMessage(toastMessages.addedToWishList));
     }
   };
 
@@ -82,8 +81,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
-      dispatch(setPopupMessage('added to cart'));
-      dispatch(setPopupStatus(true));
+      dispatch(setToastMessage(toastMessages.addedToCard));
     } else {
       setSizeIsNotSelectedError(true);
     }
@@ -105,7 +103,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   return (
     <div className={styles.submit}>
-      <Popup />
+      <Toast autoClose={3000} />
       <Tooltip title={wishlistTip} placement='bottom'>
         {isWishful ? (
           <FavoriteIcon

@@ -1,4 +1,7 @@
 import React, { Suspense, lazy } from 'react';
+
+import { ToastContainer } from 'react-toastify';
+
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
@@ -14,12 +17,13 @@ import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
   import('../pages/payments-and-shipping')
 );
 const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
-const Cart = lazy(() => import('../pages/cart'));
 const Wishlist = lazy(() => import('../pages/wishlist'));
 const NewsDetail = lazy(() => import('../pages/news/news-detail'));
 const ProductListPage = lazy(() => import('../pages/product-list-page'));
@@ -53,6 +57,7 @@ const Routes = () => {
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
+            <ToastContainer autoClose={3000} hideProgressBar />
             <Switch>
               <Route path='/' exact component={Home} />
               <Route path='/error-page' exact component={ErrorPage} />
@@ -66,7 +71,6 @@ const Routes = () => {
                 component={PaymentsAndShipping}
               />
               <Route path='/privacy-policy' exact component={PrivacyPolicy} />
-              <Route path='/cart' exact component={Cart} />
               <Route path='/wishlist' exact component={Wishlist} />
               <Route path='/contacts' exact component={Contacts} />
               <ProtectedRoute
@@ -133,7 +137,6 @@ const Routes = () => {
                 exact
                 render={({ match }) => {
                   const { category, model } = match.params;
-                  console.log(categories);
                   const categoryParam = categories.find(
                     (categoryFound) =>
                       categoryFound.name[1].value.toLowerCase() ===

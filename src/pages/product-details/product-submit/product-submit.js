@@ -8,7 +8,7 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
-import Toast from '../../../components/toast';
+import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
 import {
   addItemToWishlist,
@@ -28,13 +28,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { language, productToSend, product, wishlistItems } = useSelector(
-    ({ Language, Products, User, Wishlist, Toast }) => ({
-      language: Language.language,
-      productToSend: Products.productToSend,
-      product: Products.product,
-      userData: User.userData,
-      wishlistItems: Wishlist.list
-    })
+    selectLanguageProductsUserWishlist
   );
 
   const { selectedSize } = productToSend;
@@ -81,6 +75,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
+
       dispatch(setToastMessage(toastMessages.addedToCard));
     } else {
       setSizeIsNotSelectedError(true);
@@ -103,7 +98,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   return (
     <div className={styles.submit}>
-      <Toast autoClose={3000} />
       <Tooltip title={wishlistTip} placement='bottom'>
         {isWishful ? (
           <FavoriteIcon

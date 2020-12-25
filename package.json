@@ -25,6 +25,7 @@
     "axios": "^0.19.2",
     "clsx": "^1.1.1",
     "connected-react-router": "^6.8.0",
+    "merge-images": "^2.0.0",
     "cors": "^2.8.5",
     "formik": "^2.1.7",
     "graphql": "^15.3.0",

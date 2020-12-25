@@ -31,3 +31,8 @@ export const selectCurrencyProductsCategoryFilter = ({
   product,
   productToSend
 });
+
+export const selectLightModeAndLocation = ({ Theme, router }) => ({
+  lightMode: Theme.lightMode,
+  location: router.location.pathname
+});

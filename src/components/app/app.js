@@ -12,19 +12,13 @@ import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { getCategories } from '../../redux/categories/categories.actions';
-import { Loader } from '../loader/loader';
 import { preserveUser } from '../../redux/user/user.actions';
 import { setCountPerPage } from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
+import { selectLightModeAndLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
-  const { isLoading, lightMode, location } = useSelector(
-    ({ Categories, Theme, router }) => ({
-      isLoading: Categories.loading,
-      lightMode: Theme.lightMode,
-      location: router.location.pathname
-    })
-  );
+  const { lightMode, location } = useSelector(selectLightModeAndLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
 

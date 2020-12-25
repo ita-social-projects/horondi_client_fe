@@ -43,6 +43,7 @@ export const selectLanguageProductsUserWishlist = ({
   product: Products.product,
   userData: User.userData,
   wishlistItems: Wishlist.list
+});
 
 export const selectLightModeAndLocation = ({ Theme, router }) => ({
   lightMode: Theme.lightMode,

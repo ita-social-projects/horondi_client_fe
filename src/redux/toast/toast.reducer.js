@@ -5,15 +5,13 @@ const initialState = {
 };
 
 const toastReducer = (state = initialState, action = {}) => {
-  switch (action.type) {
-  case SET_TOAST_MESSAGE:
+  if (action.type === SET_TOAST_MESSAGE) {
     return {
       ...state,
       toastMessage: action.payload
     };
-  default:
-    return state;
   }
+  return state;
 };
 
 export default toastReducer;

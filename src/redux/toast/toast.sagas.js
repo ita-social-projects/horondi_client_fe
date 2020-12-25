@@ -6,7 +6,7 @@ import { SET_TOAST_MESSAGE } from './toast.types';
 
 export function* handleSetToastMessage({ payload: message }) {
   const isLightTheme = yield select((state) => state.Theme.lightMode);
-  yield isLightTheme ? toast(message) : toast.dark(message);
+  yield isLightTheme ? toast.dark(message) : toast(message);
 }
 
 export default function* toastSaga() {

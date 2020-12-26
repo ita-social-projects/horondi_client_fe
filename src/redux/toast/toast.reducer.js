@@ -5,7 +5,7 @@ const initialState = {
   toastSettings: {}
 };
 
-const toastReducer = (state = initialState, action = {}) => {
+export const toastReducer = (state = initialState, action = {}) => {
   if (action.type === SET_TOAST_MESSAGE) {
     return {
       ...state,
@@ -22,5 +22,3 @@ const toastReducer = (state = initialState, action = {}) => {
   }
   return state;
 };
-
-export default toastReducer;

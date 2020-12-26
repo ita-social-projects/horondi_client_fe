@@ -23,7 +23,7 @@ import HomePageImages from './home-page-looks/home-page-looks.reducer';
 import Pattern from './pattern/pattern.reducer';
 import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
-import Toast from './toast/toast.reducer';
+import { toastReducer as Toast } from './toast/toast.reducer';
 
 export const rootReducer = (history) =>
   combineReducers({

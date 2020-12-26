@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import { TIME_OPTIONS } from '../../../configs';
+import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 import { Loader } from '../../../components/loader/loader';
 
 const NewsDetail = ({ match }) => {
@@ -51,7 +51,9 @@ const NewsDetail = ({ match }) => {
   const dateLanguage = newsDateLanguageOptions[language];
   const dateToShow = new Date(parseInt(article.date));
   const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
-  const newsImage = article.images ? article.images.primary.medium : ' ';
+  const newsImage = article.image
+    ? IMG_URL + article.image
+    : 'No photo provided';
   const newsText =
     article.text.length !== 0
       ? parse(article.text[language].value)
@@ -61,7 +63,7 @@ const NewsDetail = ({ match }) => {
       ? article.author.name[language].value
       : 'No author provided';
   const newsAuthorAvatar = article.author.image
-    ? article.author.image.small
+    ? IMG_URL + article.author.image
     : 'No author provided';
 
   return (

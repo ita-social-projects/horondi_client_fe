@@ -8,6 +8,8 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
+import { toastSettings } from '../../../configs/index';
+
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
 import {
@@ -33,11 +35,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const { language, productToSend, product, wishlistItems } = useSelector(
     selectLanguageProductsUserWishlist
   );
-
-  const toastSettings = {
-    autoClose: 3000,
-    hideProgressBar: true
-  };
 
   const { selectedSize } = productToSend;
 

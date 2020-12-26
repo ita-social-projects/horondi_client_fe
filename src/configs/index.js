@@ -414,6 +414,11 @@ export const SCROLL_BAR_DATA = [
   }
 ];
 
+export const toastSettings = {
+  autoClose: 3000,
+  hideProgressBar: true
+};
+
 export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
 
 export const commentsLimit = 10;

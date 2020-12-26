@@ -49,3 +49,5 @@ export const selectLightModeAndLocation = ({ Theme, router }) => ({
   lightMode: Theme.lightMode,
   location: router.location.pathname
 });
+
+export const selectToastSettings = (state) => state.Toast.toastSettings;

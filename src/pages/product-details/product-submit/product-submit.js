@@ -15,7 +15,10 @@ import {
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import { setToastMessage } from '../../../redux/toast/toast.actions';
+import {
+  setToastMessage,
+  setToastSettings
+} from '../../../redux/toast/toast.actions';
 
 import {
   PDP_BUTTONS,
@@ -30,6 +33,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const { language, productToSend, product, wishlistItems } = useSelector(
     selectLanguageProductsUserWishlist
   );
+
+  const toastSettings = {
+    autoClose: 3000,
+    hideProgressBar: true
+  };
 
   const { selectedSize } = productToSend;
 
@@ -59,11 +67,13 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
       dispatch(setToastMessage(toastMessages.removedFromWishList));
+      dispatch(setToastSettings(toastSettings));
     } else {
       dispatch(
         addItemToWishlist({ _id, name, basePrice, images: { primary } })
       );
       dispatch(setToastMessage(toastMessages.addedToWishList));
+      dispatch(setToastSettings(toastSettings));
     }
   };
 
@@ -75,8 +85,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
-
       dispatch(setToastMessage(toastMessages.addedToCard));
+      dispatch(setToastSettings(toastSettings));
     } else {
       setSizeIsNotSelectedError(true);
     }

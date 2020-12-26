@@ -1,10 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 
-import { ToastContainer } from 'react-toastify';
-
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
+import Toast from '../containers/toast';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
@@ -16,8 +15,6 @@ import AppFooter from '../components/app-footer';
 import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
-
-import 'react-toastify/dist/ReactToastify.css';
 
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
@@ -57,7 +54,7 @@ const Routes = () => {
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
-            <ToastContainer autoClose={3000} hideProgressBar />
+            <Toast />
             <Switch>
               <Route path='/' exact component={Home} />
               <Route path='/error-page' exact component={ErrorPage} />

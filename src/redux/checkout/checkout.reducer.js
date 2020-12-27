@@ -16,46 +16,44 @@ const initialState = {
   fondyData: {}
 };
 
-const checkoutReducer = (state = initialState, action = {}) => {
+export const checkoutReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_NOVAPOSHTA_CITIES:
-      return {
-        ...state,
-        cities: action.payload
-      };
+  case SET_NOVAPOSHTA_CITIES:
+    return {
+      ...state,
+      cities: action.payload
+    };
 
-    case SET_FONDY_DATA:
-      return {
-        ...state,
-        fondyData: action.payload
-      };
+  case SET_FONDY_DATA:
+    return {
+      ...state,
+      fondyData: action.payload
+    };
 
-    case SET_NOVAPOSHTA_PRICES:
-      return {
-        ...state,
-        price: action.payload
-      };
+  case SET_NOVAPOSHTA_PRICES:
+    return {
+      ...state,
+      price: action.payload
+    };
 
-    case SET_NOVAPOSHTA_STREETS:
-      return {
-        ...state,
-        streets: action.payload
-      };
+  case SET_NOVAPOSHTA_STREETS:
+    return {
+      ...state,
+      streets: action.payload
+    };
 
-    case SET_NOVAPOSHTA_WAREHOUSES:
-      return {
-        ...state,
-        warehouses: action.payload
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: action.payload
-      };
+  case SET_NOVAPOSHTA_WAREHOUSES:
+    return {
+      ...state,
+      warehouses: action.payload
+    };
+  case SET_LOADING:
+    return {
+      ...state,
+      loading: action.payload
+    };
 
-    default:
-      return state;
+  default:
+    return state;
   }
 };
-
-export default checkoutReducer;

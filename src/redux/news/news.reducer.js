@@ -6,7 +6,7 @@ const initialState = {
   activeArticle: null
 };
 
-const newsReducer = (state = initialState, action = {}) => {
+export const newsReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case SET_NEWS:
     return {
@@ -27,5 +27,3 @@ const newsReducer = (state = initialState, action = {}) => {
     return state;
   }
 };
-
-export default newsReducer;

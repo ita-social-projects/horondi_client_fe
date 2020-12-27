@@ -7,7 +7,7 @@ import {
   setUpdatingComment
 } from '../comments.actions';
 
-describe(() => {
+describe('comments reducer', () => {
   it('should set comments loading to true', () => {
     const state = {
       ...initialState,
@@ -37,7 +37,7 @@ describe(() => {
     };
     const state = {
       ...initialState,
-      rate: payload.rate
+      rate: payload
     };
 
     expect(commentsReducer(initialState, setRate(payload))).toEqual(state);

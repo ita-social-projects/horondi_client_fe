@@ -1,7 +1,9 @@
 import React, { Suspense, lazy } from 'react';
+
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
+import Toast from '../containers/toast';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
@@ -19,7 +21,6 @@ const PaymentsAndShipping = lazy(() =>
   import('../pages/payments-and-shipping')
 );
 const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
-const Cart = lazy(() => import('../pages/cart'));
 const Wishlist = lazy(() => import('../pages/wishlist'));
 const NewsDetail = lazy(() => import('../pages/news/news-detail'));
 const ProductListPage = lazy(() => import('../pages/product-list-page'));
@@ -49,10 +50,11 @@ const Routes = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <Suspense fallback={<div></div>}>
+      <Suspense fallback={<div />}>
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
+            <Toast />
             <Switch>
               <Route path='/' exact component={Home} />
               <Route path='/error-page' exact component={ErrorPage} />
@@ -66,7 +68,6 @@ const Routes = () => {
                 component={PaymentsAndShipping}
               />
               <Route path='/privacy-policy' exact component={PrivacyPolicy} />
-              <Route path='/cart' exact component={Cart} />
               <Route path='/wishlist' exact component={Wishlist} />
               <Route path='/contacts' exact component={Contacts} />
               <ProtectedRoute
@@ -122,7 +123,7 @@ const Routes = () => {
                   const categoryParam = categories.find(
                     (categoryFound) =>
                       categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
+                      category.toLowerCase()
                   );
                   return <ProductsTable category={categoryParam} />;
                 }}
@@ -136,7 +137,7 @@ const Routes = () => {
                   const categoryParam = categories.find(
                     (categoryFound) =>
                       categoryFound.name[1].value.toLowerCase() ===
-                        category.toLowerCase() && categoryFound.isMain
+                      category.toLowerCase()
                   );
                   return (
                     <ProductListPage category={categoryParam} model={model} />

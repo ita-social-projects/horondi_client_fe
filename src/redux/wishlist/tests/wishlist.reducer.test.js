@@ -1,5 +1,5 @@
 import { setWishlist } from '../wishlist.actions';
-import wishlistReducer from '../wishlist.reducer';
+import { wishlistReducer } from '../wishlist.reducer';
 
 describe('cart reducer test', () => {
   let initialState;

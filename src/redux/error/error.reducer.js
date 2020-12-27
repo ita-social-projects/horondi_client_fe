@@ -4,15 +4,13 @@ const initialState = {
   error: null
 };
 
-const errorReducer = (state = initialState, action = {}) => {
+export const errorReducer = (state = initialState, action = {}) => {
   if (action.type === SET_ERROR) {
     return {
       ...state,
       error: action.payload
     };
-  } else {
-    return state;
-  }
+  } 
+  return state;
+  
 };
-
-export default errorReducer;

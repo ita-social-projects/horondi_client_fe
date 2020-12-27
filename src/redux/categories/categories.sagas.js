@@ -16,8 +16,7 @@ export function* handleCategoriesLoad() {
                      }
                      images {
                       large
-                     }
-                     isMain
+                     }         
                    }          
                  }`;
 

@@ -5,7 +5,7 @@ const initialState = {
   filterMenuStatus: false
 };
 
-const themeState = (state = initialState, { type, payload }) => {
+export const themeState = (state = initialState, { type, payload } = {}) => {
   switch (type) {
   case SET_THEME_MODE:
     return {
@@ -21,5 +21,3 @@ const themeState = (state = initialState, { type, payload }) => {
     return state;
   }
 };
-
-export default themeState;

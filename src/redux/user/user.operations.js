@@ -7,7 +7,6 @@ const getUserByToken = async () => {
       query {
         getUserByToken {
           ... on User {
-            purchasedProducts
             orders
             _id
             email
@@ -109,14 +108,14 @@ const removeProductFromUserWishlist = async ({ id, productId, key }) => {
 const getPurchasedProducts = async (id) => {
   const result = await client.mutate({
     variables: {
-      id,
+      id
     },
     mutation: gql`
-    query($id: ID!) {
-      getPurchasedProducts(id: $id) {
-        _id
+      query($id: ID!) {
+        getPurchasedProducts(id: $id) {
+          _id
+        }
       }
-    }
     `
   });
 

@@ -106,6 +106,23 @@ const removeProductFromUserWishlist = async ({ id, productId, key }) => {
   return result.data.removeProductFromWishlist;
 };
 
+const getPurchasedProducts = async (id) => {
+  const result = await client.mutate({
+    variables: {
+      id,
+    },
+    mutation: gql`
+    query($id: ID!) {
+      getPurchasedProducts(id: $id) {
+        _id
+      }
+    }
+    `
+  });
+
+  return result.data.getPurchasedProducts;
+};
+
 const addProductToUserWishlist = async ({ id, productId, key }) => {
   const result = await client.mutate({
     variables: {
@@ -219,5 +236,6 @@ export {
   removeProductFromUserCart,
   changeQuantityIntoUserCart,
   addProductToUserCart,
-  regenerateAccessToken
+  regenerateAccessToken,
+  getPurchasedProducts
 };

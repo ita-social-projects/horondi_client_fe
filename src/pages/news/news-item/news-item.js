@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { useStyles } from './news-item.style';
-import { TIME_OPTIONS } from '../../../configs';
+import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 
 const NewsItem = ({ date, author, image, title, text, id }) => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
   }
   const newsTitle =
     title.length !== 0 ? title[language].value : 'No title provided';
-  const newsImage = image ? image.primary.medium : 'No image provided';
+  const newsImage = image ? IMG_URL + image : 'No image provided';
   const newsText =
     text.length !== 0 && text[language].value != null
       ? parse(text[language].value)
@@ -36,7 +36,7 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
       ? author.name[language].value
       : 'No author provided';
   const newsAuthorAvatar = author.image
-    ? author.image.small
+    ? IMG_URL + author.image
     : 'No author provided';
 
   const newsButtonText = ['читати далі', 'read more...'];

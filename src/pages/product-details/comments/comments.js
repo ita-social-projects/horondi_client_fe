@@ -73,7 +73,7 @@ const Comments = () => {
   const hasBought = useMemo(
     () =>
       !!purchasedProducts &&
-      purchasedProducts.some((product) => product === productId),
+      purchasedProducts.some((product) => product._id === productId),
     [purchasedProducts, productId]
   );
 

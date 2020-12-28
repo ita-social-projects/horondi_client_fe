@@ -10,36 +10,28 @@ export function* handleNewsLoad() {
     yield put(setLoading(true));
     const news = yield call(
       getItems,
-      `query{
-         getAllNews{
-           items{
-           _id
-           title {
-             value
-           }
-           author{
-             name{
-             value
-             }
-             image{
-             small
-                  }
-                }
-                text{
-                  value
-                }
-                date
-                images{
-                  primary{
-                    medium
-                  }
-                  additional{
-                    medium
-                  }
-                }
-               }
+      `query {
+        getAllNews {
+          items {
+            _id
+            title {
+              value
+            }
+            author {
+              name {
+                value
               }
-             }`
+              image 
+            }
+            text {
+              value
+            }
+            date
+            image
+          }
+        }
+      }
+      `
     );
     yield put(setNews(news.data.getAllNews.items));
     yield put(setLoading(false));
@@ -64,21 +56,12 @@ export function* handleArticleLoad({ payload }) {
             text{
               value
             }
-            images{
-              primary{
-                medium
-              }
-              additional{
-                medium
-              }
-            }
+            image
             author{
               name{
                 value
               }
-              image{
-                small
-              }
+              image
             }
             date
           }

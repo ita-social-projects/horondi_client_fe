@@ -57,10 +57,10 @@ const Login = () => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .email(errorMessages[language].value.email)
-      .required(' '),
+      .required(errorMessages[language].value.empty),
     password: Yup.string()
       .matches(formRegExp.pass, errorMessages[language].value.pass)
-      .required(' '),
+      .required(errorMessages[language].value.empty),
     staySignedIn: Yup.bool()
   });
 
@@ -124,7 +124,7 @@ const Login = () => {
                       />
                       <Field
                         as={TextField}
-                        label={placeholders.pass[language].value}
+                        label={placeholders.password[language].value}
                         className={styles.passwordInput}
                         fullWidth
                         variant='outlined'

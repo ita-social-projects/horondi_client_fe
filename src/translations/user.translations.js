@@ -144,7 +144,7 @@ export const placeholders = {
       value: 'Enter email'
     }
   ],
-  pass: [
+  password: [
     {
       value: 'Введіть пароль'
     },

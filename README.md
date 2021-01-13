@@ -199,6 +199,10 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 ## Contributing
 
+#### Here is our [wiki](https://github.com/ita-social-projects/horondi_client_fe/wiki), where you can find guide about project running.
+
+---
+
 You're encouraged to contribute to our project if you've found any issues or missing functionality that you would want to see. Here you can see [the list of issues](https://github.com/ita-social-projects/horondi_client_fe/issues) and here you can create [a new issue](https://github.com/ita-social-projects/horondi_client_fe/issues/new/choose).
 
 Before sending any pull request, please discuss requirements/changes to be implemented using an existing issue or by creating a new one. All pull requests should be done into `development` branch.

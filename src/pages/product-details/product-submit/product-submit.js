@@ -8,28 +8,32 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
+import { toastSettings } from '../../../configs/index';
+
+import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
+
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
+import {
+  setToastMessage,
+  setToastSettings
+} from '../../../redux/toast/toast.actions';
 
 import {
   PDP_BUTTONS,
   TOOLTIPS
 } from '../../../translations/product-details.translations';
 
+import { TOAST_MESSAGE } from '../../../translations/toast.translations';
+
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { language, productToSend, product, wishlistItems } = useSelector(
-    ({ Language, Products, User, Wishlist }) => ({
-      language: Language.language,
-      productToSend: Products.productToSend,
-      product: Products.product,
-      userData: User.userData,
-      wishlistItems: Wishlist.list
-    })
+    selectLanguageProductsUserWishlist
   );
 
   const { selectedSize } = productToSend;
@@ -48,6 +52,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     ? TOOLTIPS[language].removeWishful
     : TOOLTIPS[language].addWishful;
 
+  const toastMessages = TOAST_MESSAGE[language];
+
   const onWishfulHandler = () => {
     const {
       _id,
@@ -57,10 +63,14 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     } = product;
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
+      dispatch(setToastMessage(toastMessages.removedFromWishList));
+      dispatch(setToastSettings(toastSettings));
     } else {
       dispatch(
         addItemToWishlist({ _id, name, basePrice, images: { primary } })
       );
+      dispatch(setToastMessage(toastMessages.addedToWishList));
+      dispatch(setToastSettings(toastSettings));
     }
   };
 
@@ -72,6 +82,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
+      dispatch(setToastMessage(toastMessages.addedToCard));
+      dispatch(setToastSettings(toastSettings));
     } else {
       setSizeIsNotSelectedError(true);
     }

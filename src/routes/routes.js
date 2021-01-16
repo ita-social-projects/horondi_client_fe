@@ -1,12 +1,13 @@
 import React, { Suspense, lazy } from 'react';
+
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
+import Toast from '../containers/toast';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
-import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
 import Home from '../pages/home';
 import AppHeader from '../components/app-header';
@@ -49,10 +50,11 @@ const Routes = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<div />}>
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
+            <Toast />
             <Switch>
               <Route path='/' exact component={Home} />
               <Route path='/error-page' exact component={ErrorPage} />

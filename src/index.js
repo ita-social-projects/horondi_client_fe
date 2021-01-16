@@ -6,6 +6,7 @@ import App from './components/app';
 import configureStore from './store/store';
 
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { clearLocalStorage } from './services/local-storage.service';
 
 if (!localStorage.getItem('horondi')) {

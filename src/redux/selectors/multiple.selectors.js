@@ -32,7 +32,22 @@ export const selectCurrencyProductsCategoryFilter = ({
   productToSend
 });
 
+export const selectLanguageProductsUserWishlist = ({
+  Language,
+  Products,
+  User,
+  Wishlist
+}) => ({
+  language: Language.language,
+  productToSend: Products.productToSend,
+  product: Products.product,
+  userData: User.userData,
+  wishlistItems: Wishlist.list
+});
+
 export const selectLightModeAndLocation = ({ Theme, router }) => ({
   lightMode: Theme.lightMode,
   location: router.location.pathname
 });
+
+export const selectToastSettings = (state) => state.Toast.toastSettings;

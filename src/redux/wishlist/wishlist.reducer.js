@@ -14,7 +14,6 @@ export const wishlistReducer = (
     return {
       list: payload
     };
-  } 
+  }
   return state;
-  
 };

@@ -1,136 +1,210 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormControl, InputLabel, NativeSelect } from '@material-ui/core';
 import mergeImages from 'merge-images';
+import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './constructor.style';
-import gobelen1 from '../../images/constructor/gobelen-1.png';
-import gobelen2 from '../../images/constructor/gobelen-2.png';
-import main1 from '../../images/constructor/main-1.png';
-import main2 from '../../images/constructor/main-2.png';
-import nuz1 from '../../images/constructor/nuz-1.png';
-import mouth from '../../images/constructor/mouth-1.png';
+import {
+  getConstructorBasic,
+  getConstructorBottom,
+  getConstructorModel,
+  getConstructorPattern
+} from '../../redux/constructor/constructor.actions';
+import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
+
+const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
 
 const Constructor = () => {
   const styles = useStyles();
+  const dispatch = useDispatch();
+
+  const {
+    constructorModel,
+    constructorBasic,
+    constructorBottom,
+    constructorPattern
+  } = useSelector(({ Constructor }) => ({
+    constructorModel: Constructor.constructorModel,
+    constructorBasic: Constructor.constructorBasic,
+    constructorBottom: Constructor.constructorBottom,
+    constructorPattern: Constructor.constructorPattern
+  }));
+
+  const image = useRef(null);
+  const [basic, setBasic] = useState('');
+  const [bottom, setBottom] = useState('');
+  const [frontPocket, setFrontPocket] = useState('');
+  const [pattern, setPattern] = useState('');
+
+  const modelId = '600064d9e13f421f58674b1b';
+
+  const models = [
+    { id: '1', name: 'Гарбуз' },
+    { id: '600064d9e13f421f58674b1b', name: 'Rolltop' }
+  ];
+
+  const basics = [
+    {
+      _id: '600067e4e13f421f58674b1c',
+      name: [{ value: 'Тест' }, { value: 'Test' }]
+    },
+    {
+      _id: '6000d4b91944f53154ce6125',
+      name: [{ value: 'Тест2' }, { value: 'Test2' }]
+    }
+  ];
+
+  const patterns = [
+    {
+      _id: '600067e1421f58674b1c',
+      name: [{ value: 'Тест' }, { value: 'Test' }]
+    },
+    {
+      _id: '494991140ecfe3a21d3ffb4e',
+      name: [{ value: 'Тест2' }, { value: 'Test2' }]
+    }
+  ];
+
+  const bottoms = [
+    {
+      _id: '600067e4e13f421f58674b2c',
+      name: [{ value: 'Тест' }, { value: 'Test' }]
+    },
+    {
+      _id: '600068bfe13f421f58674b1e',
+      name: [{ value: 'Тест2' }, { value: 'Test2' }]
+    }
+  ];
 
   useEffect(() => {
-    mergeImages([mouth, main1, nuz1, gobelen1], {
-      height: 3000,
-      weight: 460
-    }).then((b64) => (document.querySelector('#constructor').src = b64));
-  }, [mouth, main1, nuz1, gobelen1]);
+    dispatch(getConstructorModel(modelId));
+  }, [dispatch, modelId]);
 
-  const [pattern, setPattern] = useState(gobelen1);
-  const [main, setMain] = useState(main1);
-  const [bottom, setBotton] = useState(nuz1);
-
-  const changeImage = () => {
-    console.log(pattern);
-    console.log(main);
-    console.log(bottom);
-
-    mergeImages([mouth, main, bottom, pattern], {
+  const createImage = () => {
+    mergeImages([frontPocket, basic, bottom, pattern], {
       height: 3000,
       weight: 460
     }).then((b64) => (document.querySelector('#constructor').src = b64));
   };
 
+  const currState = () => {
+    console.log('constructorModel');
+    console.log(constructorModel);
+    console.log('constructorBasic');
+    console.log(constructorBasic);
+    console.log('constructorBottom');
+    console.log(constructorBottom);
+    console.log('constructorPattern');
+    console.log(constructorPattern);
+  };
+
+  useEffect(() => {
+    if (constructorModel) {
+      console.log(constructorModel);
+      setBasic(constructorModel.constructorBasic[0].image);
+      setBottom(constructorModel.constructorBottom[0].image);
+      setFrontPocket(constructorModel.constructorFrontPocket[0].image);
+      setPattern(constructorModel.constructorPattern[0].constructorImg);
+      if ((basic, bottom, frontPocket, pattern)) {
+        createImage();
+      } else {
+        console.log('Image Load...');
+      }
+    }
+  }, [constructorModel]);
+
+  const changeModel = (id) => {
+    console.log('changed model id - ', id);
+    dispatch(getConstructorModel(modelId));
+    currState();
+  };
+
+  const changeBasic = (id) => {
+    console.log('changed basic id - ', id);
+    dispatch(getConstructorBasic(id));
+    currState();
+  };
+
+  const changePattern = (id) => {
+    console.log('changed pattern id - ', id);
+    dispatch(getConstructorPattern(id));
+    currState();
+  };
+
+  const changeBottom = (id) => {
+    console.log('changed bottom id - ', id);
+    dispatch(getConstructorBottom(id));
+    currState();
+  };
+
+  const availableModels = models.map((obj) => (
+    <option key={obj.id} value={obj.id}>
+      {obj.name}
+    </option>
+  ));
+
+  const availableBasics = basics.map((obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
+
+  const availablePatterns = patterns.map((obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
+
+  const availableBottoms = bottoms.map((obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
+
   return (
     <div className={styles.constructorWrapper}>
-      <h1>Роллтоп</h1>
+      <FormControl>
+        <InputLabel htmlFor='model-select'>{MODEL}</InputLabel>
+        <NativeSelect onChange={(e) => changeModel(e.target.value)} name='name'>
+          {availableModels}
+        </NativeSelect>
+      </FormControl>
 
       <div className={styles.contentWrapper}>
         <form className={styles.form}>
           <FormControl>
-            <InputLabel htmlFor='main-material-select'>Основа</InputLabel>
+            <InputLabel htmlFor='main-material-select'>{BASIC}</InputLabel>
             <NativeSelect
-              onChange={(e) => {
-                setMain(e.target.value);
-                changeImage();
-              }}
+              onChange={(e) => changeBasic(e.target.value)}
               name='name'
-              inputProps={{
-                id: 'main-material-select'
-              }}
             >
-              <optgroup label='Bond'>
-                <option value='314'>314</option>
-                <option value='316'>316</option>
-                <option value='318'>318</option>
-                <option value='308'>308</option>
-                <option value='303'>303</option>
-                <option value='304'>304</option>
-                <option value='305'>305</option>
-              </optgroup>
-              <optgroup label='Malmo'>
-                <option value={main1}>main1</option>
-                <option value={main2}>main2</option>
-                {/* <option value='200'>200</option>
-                <option value='201'>201</option>
-                <option value='202'>202</option>
-                <option value='203'>203</option>
-                <option value='204'>204</option>
-                <option value='205'>205</option>
-                <option value='206'>206</option>
-                <option value='207'>207</option>
-                <option value='208'>208</option>
-                <option value='209'>209</option>
-                <option value='210'>210</option>
-                <option value='211'>211</option>
-                <option value='212'>212</option>
-                <option value='213'>213</option>
-                <option value='214'>214</option>
-                <option value='215'>215</option> */}
-              </optgroup>
+              {availableBasics}
             </NativeSelect>
           </FormControl>
           <FormControl>
-            <InputLabel htmlFor='pattern-select'>Гобелен</InputLabel>
+            <InputLabel htmlFor='pattern-select'>{PATTERN}</InputLabel>
             <NativeSelect
-              onChange={(e) => {
-                setPattern(e.target.value);
-                changeImage();
-              }}
+              onChange={(e) => changePattern(e.target.value)}
               name='name'
-              inputProps={{
-                id: 'pattern-select'
-              }}
             >
-              <option value={gobelen1}>gobelen1</option>
-              <option value={gobelen2}>gobelen2</option>
-              {/* <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              <option value='7'>7</option>
-              <option value='8'>8</option>
-              <option value='9'>9</option>
-              <option value='10'>10</option>
-              <option value='11'>11</option>
-              <option value='12'>12</option>
-              <option value='13'>13</option>
-              <option value='14'>14</option> */}
+              {availablePatterns}
             </NativeSelect>
           </FormControl>
           <FormControl>
-            <InputLabel htmlFor='bottom-select'>Низ</InputLabel>
+            <InputLabel htmlFor='bottom-select'>{BOTTOM}</InputLabel>
             <NativeSelect
-              onChange={(e) => {
-                setBotton(e.target.value);
-                changeImage();
-              }}
+              onChange={(e) => changeBottom(e.target.value)}
               name='name'
-              inputProps={{
-                id: 'bottom-select'
-              }}
             >
-              <option value='1'>Шкірзамінник</option>
-              <option value='2'>Тканина Cordura</option>
-              <option value='3'>Натуральна шкіра</option>
+              {availableBottoms}
             </NativeSelect>
           </FormControl>
         </form>
-
-        <img id='constructor' className={styles.imageContainer} alt='Constructor' />
+        <img
+          ref={image}
+          id='constructor'
+          className={styles.imageContainer}
+          alt='Constructor'
+        />
       </div>
     </div>
   );

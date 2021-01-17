@@ -23,6 +23,7 @@ import HomePageImages from './home-page-looks/home-page-looks.reducer';
 import Pattern from './pattern/pattern.reducer';
 import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
+import Constructor from './constructor/constructor.reducer';
 
 export const rootReducer = (history) =>
   combineReducers({
@@ -49,5 +50,6 @@ export const rootReducer = (history) =>
     HomePageImages,
     HomePageSlider,
     SearchBar,
-    Pattern
+    Pattern,
+    Constructor
   });

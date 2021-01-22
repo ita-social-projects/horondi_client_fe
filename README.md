@@ -44,7 +44,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
 
 ### Required to install
 
-- NodeJS (14.4.0)
+- NodeJS (14.15.4)
 
 ### Clone
 

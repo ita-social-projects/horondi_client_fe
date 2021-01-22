@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="/Users/olenashchadylo/Desktop/horondi/horondi_client_fe/src/redux/toast/tests/toasts.actions.test.js">
+    <testCase name="toasts action tests should set toast message" duration="3"/>
+    <testCase name="toasts action tests should set toast settings" duration="0"/>
+  </file>
 </testExecutions>

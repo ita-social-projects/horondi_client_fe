@@ -132,8 +132,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCart}>
         {' '}
-        {PDP_BUTTONS[language].cartButton}
-      </Button>{' '}
+        {PDP_BUTTONS[language].cartButton}{' '}
+      </Button>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
         {' '}
         {PDP_BUTTONS[language].buyButton}

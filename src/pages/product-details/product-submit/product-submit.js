@@ -115,7 +115,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   return (
     <div className={styles.submit}>
       <Tooltip title={wishlistTip} placement='bottom'>
-        {' '}
         {isWishful ? (
           <FavoriteIcon
             data-cy='wishful'
@@ -128,16 +127,14 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
             className={styles.heart}
             onClick={onWishfulHandler}
           />
-        )}{' '}
+        )}
       </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCart}>
-        {' '}
-        {PDP_BUTTONS[language].cartButton}{' '}
+        {PDP_BUTTONS[language].cartButton}
       </Button>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
-        {' '}
         {PDP_BUTTONS[language].buyButton}
-      </Button>{' '}
+      </Button>
     </div>
   );
 };

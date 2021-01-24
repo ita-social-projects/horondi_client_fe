@@ -18,10 +18,7 @@ import {
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import {
-  setToastMessage,
-  setToastSettings
-} from '../../../redux/toast/toast.actions';
+import { setToastSettings } from '../../../redux/toast/toast.actions';
 
 import {
   PDP_BUTTONS,
@@ -91,8 +88,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
-      dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));
+      isLightTheme
+        ? toast.dark(toastMessages.addedToCard)
+        : toast(toastMessages.addedToCard);
     } else {
       setSizeIsNotSelectedError(true);
     }

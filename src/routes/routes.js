@@ -114,36 +114,20 @@ const Routes = () => {
                 exact
                 redirectTo='/login'
               />
-              <Route
-                path='/:category'
-                exact
-                render={({ match }) => {
-                  const { category } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                      category.toLowerCase()
-                  );
-                  return <ProductsTable category={categoryParam} />;
-                }}
-              />
-              <Route path='/product/:id' exact component={ProductDetails} />
               {/*<Route*/}
-              {/*  path='/:category/:model'*/}
+              {/*  path='/:category'*/}
               {/*  exact*/}
               {/*  render={({ match }) => {*/}
-              {/*    const { category, model } = match.params;*/}
+              {/*    const { category } = match.params;*/}
               {/*    const categoryParam = categories.find(*/}
               {/*      (categoryFound) =>*/}
               {/*        categoryFound.name[1].value.toLowerCase() ===*/}
-              {/*          category.toLowerCase() && categoryFound.isMain*/}
+              {/*        category.toLowerCase()*/}
               {/*    );*/}
-
-              {/*    return (*/}
-              {/*      <ProductListPage category={categoryParam} model={model} />*/}
-              {/*    );*/}
+              {/*    return <ProductsTable category={categoryParam} />;*/}
               {/*  }}*/}
               {/*/>*/}
+              <Route path='/product/:id' exact component={ProductDetails} />
               <Route path='/products' exact component={ProductListPage} />
             </Switch>
           </div>

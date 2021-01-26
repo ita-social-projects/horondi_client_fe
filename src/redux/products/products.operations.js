@@ -7,12 +7,12 @@ const getAllProducts = async () => {
       query {
         getProducts {
           items {
-            colors {
-              name {
-                value
-              }
-              simpleName {
-                value
+            mainMaterial {
+              color {
+                _id
+                simpleName {
+                  value
+                }
               }
             }
             basePrice {
@@ -20,10 +20,16 @@ const getAllProducts = async () => {
               currency
             }
             model {
-              value
+              _id
+              name {
+                value
+              }
             }
             pattern {
-              value
+              _id
+              name {
+                value
+              }
             }
             category {
               _id
@@ -103,31 +109,20 @@ const getFilteredProducts = async ({ state, currency }) => {
               value
               currency
             }
-            model {
-              value
-            }
             rate
             images {
               primary {
-                large
+                small
                 medium
                 large
-                small
-              }
-            }
-            colors {
-              name {
-                lang
-                value
-              }
-              simpleName {
-                lang
-                value
+                thumbnail
               }
             }
             pattern {
-              lang
-              value
+              _id
+              name {
+                value
+              }
             }
             category {
               _id
@@ -171,12 +166,20 @@ const getProductById = async (id) => {
               value
             }
             mainMaterial {
-              lang
-              value
+              material {
+                _id
+              }
+              color {
+                _id
+              }
             }
             innerMaterial {
-              lang
-              value
+              material {
+                _id
+              }
+              color {
+                _id
+              }
             }
             strapLengthInCm
             images {
@@ -189,25 +192,11 @@ const getProductById = async (id) => {
                 large
               }
             }
-            colors {
-              code
-              name {
-                lang
-                value
-              }
-              images {
-                thumbnail
-                large
-              }
-              available
-            }
             pattern {
-              lang
-              value
+              _id
             }
             closure {
-              lang
-              value
+              _id
             }
             basePrice {
               value
@@ -221,6 +210,7 @@ const getProductById = async (id) => {
                 depthInCm
                 volumeInLiters
                 available
+                weightInKg
                 additionalPrice {
                   value
                   currency
@@ -260,38 +250,6 @@ const getProductById = async (id) => {
                   images {
                     thumbnail
                   }
-                }
-              }
-            }
-            options {
-              size {
-                _id
-                name
-                volumeInLiters
-                widthInCm
-                weightInKg
-              }
-              bottomMaterial {
-                _id
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  value
-                  lang
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
                 }
               }
             }

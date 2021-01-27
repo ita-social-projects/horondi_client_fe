@@ -1,21 +1,38 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(() => ({
-  imageContainer: {
-    maxWidth: '500px'
+  constructorWrapper: {
+    padding: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
-  form: {
+  headingWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  mainHeader: {
+    fontSize: '24px'
+  },
+  contentWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '50px 100px'
+  },
+  formWrapper: {
+    width: '25%',
     display: 'flex',
     flexDirection: 'column',
     '& > div': {
       margin: '15px 0'
     }
   },
-  constructorWrapper: {
-    padding: '20px'
+  imageContainer: {
+    width: '35%'
   },
-  contentWrapper: {
-    display: 'flex',
-    justifyContent: 'center'
+  infoWrapper: {
+    width: '25%'
   }
 }));

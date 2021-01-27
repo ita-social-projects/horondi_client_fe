@@ -10,7 +10,6 @@ export const errorReducer = (state = initialState, action = {}) => {
       ...state,
       error: action.payload
     };
-  } 
+  }
   return state;
-  
 };

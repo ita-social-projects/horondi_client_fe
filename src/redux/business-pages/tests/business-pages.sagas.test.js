@@ -12,18 +12,19 @@ import { fakeAboutUs } from './business-page.variables';
 import { SET_ERROR } from '../../error/error.types';
 
 describe('Business pages sagas tests', () => {
-  it('fetches business page by code', () => expectSaga(handleBusinessPageLoad, { payload: 'about-us' })
-    .provide([[matchers.call.fn(getItems), fakeAboutUs]])
-    .put({ type: SET_BUSINESS_PAGE_LOADING, payload: true })
-    .put({
-      type: SET_BUSINESS_PAGE,
-      payload: {
-        businessPage: fakeAboutUs.data.getBusinessTextByCode,
-        key: 'aboutUs'
-      }
-    })
-    .put({ type: SET_BUSINESS_PAGE_LOADING, payload: false })
-    .run());
+  it('fetches business page by code', () =>
+    expectSaga(handleBusinessPageLoad, { payload: 'about-us' })
+      .provide([[matchers.call.fn(getItems), fakeAboutUs]])
+      .put({ type: SET_BUSINESS_PAGE_LOADING, payload: true })
+      .put({
+        type: SET_BUSINESS_PAGE,
+        payload: {
+          businessPage: fakeAboutUs.data.getBusinessTextByCode,
+          key: 'aboutUs'
+        }
+      })
+      .put({ type: SET_BUSINESS_PAGE_LOADING, payload: false })
+      .run());
 
   it.skip('handles errors', () => {
     const e = new Error('BUSINESS_PAGE_NOT_FOUND');

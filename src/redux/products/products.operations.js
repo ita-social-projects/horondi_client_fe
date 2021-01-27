@@ -8,12 +8,23 @@ const getAllProducts = async () => {
         getProducts {
           items {
             mainMaterial {
+              material {
+                _id {
+                  name {
+                    value
+                  }
+                }
+              }
               color {
                 _id
                 simpleName {
                   value
                 }
               }
+            }
+            sizes {
+              _id
+              name
             }
             basePrice {
               value
@@ -181,6 +192,14 @@ const getProductById = async (id) => {
                 _id
               }
             }
+            bottomMaterial {
+              material {
+                _id
+              }
+              color {
+                _id
+              }
+            }
             strapLengthInCm
             images {
               primary {
@@ -202,42 +221,18 @@ const getProductById = async (id) => {
               value
               currency
             }
-            options {
-              size {
-                name
-                heightInCm
-                widthInCm
-                depthInCm
-                volumeInLiters
-                available
-                weightInKg
-                additionalPrice {
-                  value
-                  currency
-                }
+            sizes {
+              name
+              heightInCm
+              widthInCm
+              depthInCm
+              volumeInLiters
+              available
+              weightInKg
+              additionalPrice {
+                value
+                currency
               }
-              bottomMaterial {
-                name {
-                  lang
-                  value
-                }
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-            }
             rate
             comments {
               items {

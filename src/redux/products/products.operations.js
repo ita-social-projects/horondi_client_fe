@@ -233,6 +233,7 @@ const getProductById = async (id) => {
                 value
                 currency
               }
+            }
             rate
             comments {
               items {

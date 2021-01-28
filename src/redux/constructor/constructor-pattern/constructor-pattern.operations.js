@@ -20,7 +20,10 @@ export const getConstructorPatternById = async (id) => {
     `,
     fetchPolicy: 'no-cache'
   });
-  if (result.data.getPatternById.message) throw new Error();
+
+  if (result.data.getPatternById.message) {
+    throw new Error(result.data.getPatternById.message);
+  }
 
   return result.data.getPatternById;
 };

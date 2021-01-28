@@ -17,6 +17,11 @@ export const getModelForConstructor = async () => {
     `,
     fetchPolicy: 'no-cache'
   });
+
+  if (result.data.getModelsForConstructor.message) {
+    throw new Error(result.data.getModelsForConstructor.message);
+  }
+
   return result.data.getModelsForConstructor;
 };
 
@@ -48,7 +53,6 @@ export const getModelById = async (id) => {
               name {
                 value
               }
-              image
             }
             constructorBottom {
               _id
@@ -67,7 +71,9 @@ export const getModelById = async (id) => {
     fetchPolicy: 'no-cache'
   });
 
-  if (result.data.getModelById.message) throw new Error();
+  if (result.data.getModelById.message) {
+    throw new Error(result.data.getModelById.message);
+  }
 
   return result.data.getModelById;
 };

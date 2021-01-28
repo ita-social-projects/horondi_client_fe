@@ -52,7 +52,7 @@ const Constructor = () => {
 
   useEffect(() => {
     if (models) {
-      dispatch(getConstructorModelById(models[0]._id));
+      dispatch(getConstructorModelById(models[1]._id));
     }
   }, [models]);
 
@@ -60,7 +60,7 @@ const Constructor = () => {
     if (currentModel) {
       dispatch(setModelLoading(true));
       dispatch(getConstructorBasic(currentModel.constructorBasic[0]._id));
-      dispatch(getConstructorFrontPocket('600068a5e13f421f58674b1d'));
+      dispatch(getConstructorFrontPocket(currentModel.constructorFrontPocket[0]._id));
       dispatch(getConstructorPattern(currentModel.constructorPattern[0]._id));
       dispatch(getConstructorBottom(currentModel.constructorBottom[0]._id));
     }
@@ -104,7 +104,6 @@ const Constructor = () => {
   const changeBasic = useCallback((id) => {
     dispatch(setModelLoading(true));
     dispatch(getConstructorBasic(id));
-    dispatch(getConstructorFrontPocket('600068a5e13f421f58674b1d'));
   }, []);
 
   const changePattern = useCallback((id) => {
@@ -186,16 +185,18 @@ const Constructor = () => {
             <FormHelperText>{BOTTOM}</FormHelperText>
           </FormControl>
         </form>
-        {modelLoading ? (
-          <Loader />
-        ) : (
-          <img
-            ref={image}
-            id='constructor'
-            className={styles.imageContainer}
-            alt='Constructor'
-          />
-        )}
+        <div style={{ maxHeight: '470px', maxWidth: '35%' }}>
+          {modelLoading ? (
+            <Loader style={{ maxHeight: '30px' }} />
+          ) : (
+            <img
+              ref={image}
+              id='constructor'
+              style={{ width: '100%' }}
+              alt='Constructor'
+            />
+          )}
+        </div>
         <div className={styles.infoWrapper}>
           <h2>Загальна вартість:</h2>
           <ul>

@@ -12,3 +12,9 @@ export const CONSTRUCTOR_TITLES = {
     BOTTOM: 'Bottom'
   }
 };
+
+export const constructorBasicErrors = {
+  BASIC_NOT_FOUND: 'Основа Не Знайдена!',
+  BASIC_ALREADY_EXIST: 'Основа',
+  IMAGE_NOT_PROVIDED: ''
+};

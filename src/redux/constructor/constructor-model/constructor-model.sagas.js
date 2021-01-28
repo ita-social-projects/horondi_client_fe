@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import {
   getModelById,
   getModelForConstructor
@@ -12,14 +13,16 @@ import {
   setModelForConstructor,
   setModelLoading
 } from './constructor-model.actions';
+import { setError } from '../../error/error.actions';
 
 export function* handleConstructorModelByIdLoad({ payload: id }) {
   try {
     yield put(setModelLoading(true));
     const model = yield call(getModelById, id);
     yield put(setConstructorModelById(model));
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.log(e);
+    yield call(handleError, e);
   }
 }
 
@@ -28,9 +31,16 @@ export function* handleConstructorModelsLoad() {
     yield put(setModelLoading(true));
     const models = yield call(getModelForConstructor);
     yield put(setModelForConstructor(models));
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.log(e);
+    yield call(handleError, e);
   }
+}
+
+export function* handleError(e) {
+  yield put(setModelLoading(true));
+  yield put(setError(e.message));
+  yield put(push('/error-page'));
 }
 
 export default function* constructorModelSaga() {

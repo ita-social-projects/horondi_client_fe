@@ -20,6 +20,10 @@ export const getConstructorBottomById = async (id) => {
     `,
     fetchPolicy: 'no-cache'
   });
-  if (result.data.getConstructorBottomById.message) throw new Error();
+
+  if (result.data.getConstructorBottomById.message) {
+    throw new Error(result.data.getConstructorBottomById.message);
+  }
+
   return result.data.getConstructorBottomById;
 };

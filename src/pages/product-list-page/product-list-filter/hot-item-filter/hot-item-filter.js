@@ -8,12 +8,11 @@ import {
   changeFilterStatus,
   setHotItemFilter
 } from '../../../../redux/products/products.actions';
+import { selectHotItemFilter } from '../../../../redux/selectors/multiple.selectors';
 
 const HotItemFilter = ({ filters, language }) => {
   const dispatch = useDispatch();
-  const { filterStatus } = useSelector(({ Products }) => ({
-    filterStatus: Products.filterStatus
-  }));
+  const { filterStatus } = useSelector(selectHotItemFilter);
   const { isHotItemFilter } = filters;
 
   const handleChange = (event) => {

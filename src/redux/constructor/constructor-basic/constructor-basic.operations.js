@@ -21,7 +21,9 @@ export const getConstructorBasicById = async (id) => {
     fetchPolicy: 'no-cache'
   });
 
-  if (result.data.getConstructorBasicById.message) throw new Error();
+  if (result.data.getConstructorBasicById.message) {
+    throw new Error(result.data.getConstructorBasicById.message);
+  }
 
   return result.data.getConstructorBasicById;
 };

@@ -50,4 +50,8 @@ export const selectLightModeAndLocation = ({ Theme, router }) => ({
   location: router.location.pathname
 });
 
+export const selectHotItemFilter = ({ Products }) => ({
+  filterStatus: Products.filterStatus
+});
+
 export const selectToastSettings = (state) => state.Toast.toastSettings;

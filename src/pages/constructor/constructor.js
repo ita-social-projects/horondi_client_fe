@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { FormControl, InputLabel, NativeSelect } from '@material-ui/core';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import mergeImages from 'merge-images';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './constructor.style';
@@ -14,6 +14,8 @@ import { getConstructorPattern } from '../../redux/constructor/constructor-patte
 import { getConstructorBottom } from '../../redux/constructor/constructor-bottom/constructor-bottom.actions';
 import { getConstructorFrontPocket } from '../../redux/constructor/constructor-front-pocket/constructor-front-pocket.actions';
 import Loader from '../../components/loader';
+
+const map = require('lodash/map');
 
 const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
 
@@ -38,7 +40,6 @@ const Constructor = () => {
   }));
 
   const image = useRef(null);
-
   const currentModel = constructorModel.constructorModel;
   const models = constructorModel.modelsForConstructor;
   const basics = constructorModel.constructorModel.constructorBasic;
@@ -51,7 +52,7 @@ const Constructor = () => {
 
   useEffect(() => {
     if (models) {
-      dispatch(getConstructorModelById(models[1]._id));
+      dispatch(getConstructorModelById(models[0]._id));
     }
   }, [models]);
 
@@ -96,101 +97,93 @@ const Constructor = () => {
     constructorPattern
   ]);
 
-  const changeModel = (id) => {
+  const changeModel = useCallback((id) => {
     dispatch(getConstructorModelById(id));
-  };
+  }, []);
 
-  const changeBasic = (id) => {
+  const changeBasic = useCallback((id) => {
     dispatch(setModelLoading(true));
     dispatch(getConstructorBasic(id));
     dispatch(getConstructorFrontPocket('600068a5e13f421f58674b1d'));
-  };
+  }, []);
 
-  const changePattern = (id) => {
+  const changePattern = useCallback((id) => {
     dispatch(setModelLoading(true));
     dispatch(getConstructorPattern(id));
-  };
+  }, []);
 
-  const changeBottom = (id) => {
+  const changeBottom = useCallback((id) => {
     dispatch(setModelLoading(true));
     dispatch(getConstructorBottom(id));
-  };
+  }, []);
 
-  const availableModels = models
-    ? models.map((obj) => (
-      <option key={obj._id} value={obj._id}>
-        {obj.name[0].value}
-      </option>
-    ))
-    : null;
+  const availableModels = map(models, obj => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
 
-  const availableBasics = basics
-    ? basics.map((obj) => (
-      <option key={obj._id} value={obj._id}>
-        {obj.name[0].value}
-      </option>
-    ))
-    : null;
+  const availableBasics = map(basics, obj => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
 
-  const availablePatterns = patterns
-    ? patterns.map((obj) => (
-      <option key={obj._id} value={obj._id}>
-        {obj.name[0].value}
-      </option>
-    ))
-    : null;
+  const availablePatterns = map(patterns, obj => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
 
-  const availableBottoms = bottoms
-    ? bottoms.map((obj) => (
-      <option key={obj._id} value={obj._id}>
-        {obj.name[0].value}
-      </option>
-    ))
-    : null;
+  const availableBottoms = map(bottoms, obj => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
+  ));
 
   return (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
         <FormControl>
-          <InputLabel htmlFor='model-select'>{MODEL}</InputLabel>
           <NativeSelect
             className={styles.mainHeader}
+            name='model'
             onChange={(e) => changeModel(e.target.value)}
-            name='name'
           >
             {availableModels}
           </NativeSelect>
+          <FormHelperText>{MODEL}</FormHelperText>
         </FormControl>
       </div>
 
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
           <FormControl>
-            <InputLabel htmlFor='main-material-select'>{BASIC}</InputLabel>
             <NativeSelect
+              name='basic'
               onChange={(e) => changeBasic(e.target.value)}
-              name='name'
             >
               {availableBasics}
             </NativeSelect>
+            <FormHelperText>{BASIC}</FormHelperText>
           </FormControl>
           <FormControl>
-            <InputLabel htmlFor='pattern-select'>{PATTERN}</InputLabel>
             <NativeSelect
+              name='pattern'
               onChange={(e) => changePattern(e.target.value)}
-              name='name'
             >
               {availablePatterns}
             </NativeSelect>
+            <FormHelperText>{PATTERN}</FormHelperText>
           </FormControl>
           <FormControl>
-            <InputLabel htmlFor='bottom-select'>{BOTTOM}</InputLabel>
             <NativeSelect
+              name='bottoms'
               onChange={(e) => changeBottom(e.target.value)}
-              name='name'
             >
               {availableBottoms}
             </NativeSelect>
+            <FormHelperText>{BOTTOM}</FormHelperText>
           </FormControl>
         </form>
         {modelLoading ? (

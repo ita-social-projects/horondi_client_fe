@@ -31,8 +31,8 @@ const PriceFilter = ({ filterData, filters, language, currency }) => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value}{' '}
-        {Math.round(priceFilter[0] / 100)}- {PRICE_TO[language].value}{' '}
+        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value}
+        {Math.round(priceFilter[0] / 100)}- {PRICE_TO[language].value}
         {Math.round(priceFilter[1] / 100)}
       </Typography>
       <Slider

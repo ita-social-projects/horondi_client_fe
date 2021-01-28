@@ -21,7 +21,6 @@ import toastSaga from './toast/toast.sagas';
 
 export function* rootSaga() {
   yield all([
-    toastSaga(),
     newsSaga(),
     categoriesSaga(),
     userSaga(),

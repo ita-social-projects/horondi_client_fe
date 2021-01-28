@@ -36,13 +36,15 @@ export const selectLanguageProductsUserWishlist = ({
   Language,
   Products,
   User,
-  Wishlist
+  Wishlist,
+  Theme
 }) => ({
   language: Language.language,
   productToSend: Products.productToSend,
   product: Products.product,
   userData: User.userData,
-  wishlistItems: Wishlist.list
+  wishlistItems: Wishlist.list,
+  isLightTheme: Theme.lightMode
 });
 
 export const selectLightModeAndLocation = ({ Theme, router }) => ({

@@ -19,9 +19,9 @@ import homePageSliderSaga from './homepage-slider/homepage-slider.sagas';
 import constructorSaga from './constructor/constructor.sagas';
 import toastSaga from './toast/toast.sagas';
 
+
 export function* rootSaga() {
   yield all([
-    toastSaga(),
     newsSaga(),
     categoriesSaga(),
     userSaga(),

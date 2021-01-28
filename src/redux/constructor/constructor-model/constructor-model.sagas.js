@@ -18,7 +18,6 @@ export function* handleConstructorModelByIdLoad({ payload: id }) {
     yield put(setModelLoading(true));
     const model = yield call(getModelById, id);
     yield put(setConstructorModelById(model));
-    yield put(setModelLoading(false));
   } catch (error) {
     console.error(error);
   }
@@ -29,7 +28,6 @@ export function* handleConstructorModelsLoad() {
     yield put(setModelLoading(true));
     const models = yield call(getModelForConstructor);
     yield put(setModelForConstructor(models));
-    yield put(setModelLoading(false));
   } catch (error) {
     console.error(error);
   }

@@ -20,7 +20,7 @@ export const getConstructorFrontPocketById = async (id) => {
     `,
     fetchPolicy: 'no-cache'
   });
-  if (result.data.getConstructorBottomById.message) throw new Error();
+  if (result.data.getConstructorFrontPocketById.message) throw new Error();
 
   return result.data.getConstructorFrontPocketById;
 };

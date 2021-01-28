@@ -50,10 +50,6 @@ const Constructor = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(modelLoading);
-  }, [modelLoading]);
-
-  useEffect(() => {
     if (models) {
       dispatch(getConstructorModelById(models[1]._id));
     }
@@ -81,24 +77,17 @@ const Constructor = () => {
 
   useEffect(() => {
     if (
-      constructorBasic &&
-      constructorBottom &&
-      constructorFrontPocket &&
-      constructorPattern
+      constructorBasic.image &&
+      constructorBottom.image &&
+      constructorFrontPocket.image &&
+      constructorPattern.constructorImg
     ) {
-      if (
-        (constructorBasic.image,
+      createImage(
+        constructorBasic.image,
         constructorBottom.image,
         constructorFrontPocket.image,
-        constructorPattern.constructorImg)
-      ) {
-        createImage(
-          constructorBasic.image,
-          constructorBottom.image,
-          constructorFrontPocket.image,
-          constructorPattern.constructorImg
-        );
-      }
+        constructorPattern.constructorImg
+      );
     }
   }, [
     constructorBasic,

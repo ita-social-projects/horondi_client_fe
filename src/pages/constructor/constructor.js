@@ -14,6 +14,7 @@ import { getConstructorPattern } from '../../redux/constructor/constructor-patte
 import { getConstructorBottom } from '../../redux/constructor/constructor-bottom/constructor-bottom.actions';
 import { getConstructorFrontPocket } from '../../redux/constructor/constructor-front-pocket/constructor-front-pocket.actions';
 import Loader from '../../components/loader';
+import { selectConstructor } from '../../redux/selectors/multiple.selectors';
 
 const map = require('lodash/map');
 
@@ -29,15 +30,7 @@ const useConstructor = () => {
     patternImage,
     bottomImage,
     modelLoading
-  } = useSelector(({ Constructor }) => ({
-    constructorModel: Constructor.constructorModel,
-    currentModel: Constructor.constructorModel.currentModel,
-    basicImage: Constructor.constructorBasic.image,
-    frontPocketImage: Constructor.constructorFrontPocket.image,
-    patternImage: Constructor.constructorPattern.constructorImg,
-    bottomImage: Constructor.constructorBottom.image,
-    modelLoading: Constructor.constructorModel.modelLoading
-  }));
+  } = useSelector(selectConstructor);
 
   const models = constructorModel.modelsForConstructor;
   const basics = currentModel.constructorBasic;

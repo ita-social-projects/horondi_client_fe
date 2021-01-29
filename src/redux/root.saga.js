@@ -27,6 +27,7 @@ export function* rootSaga() {
     wishlistSaga(),
     contactsSaga(),
     productsSaga(),
+    toastSaga(),
     cartSaga(),
     modelSaga(),
     commentsSaga(),

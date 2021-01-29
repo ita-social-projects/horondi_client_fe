@@ -1,12 +1,10 @@
 import { SET_CONSTRUCTOR_BASIC } from './constructor-basic.types';
 
 const constructorBasic = (state = '', action = {}) => {
-  switch (action.type) {
-  case SET_CONSTRUCTOR_BASIC:
+  if (action.type === SET_CONSTRUCTOR_BASIC) {
     return action.payload;
-  default:
-    return state;
   }
+  return state;
 };
 
 export default constructorBasic;

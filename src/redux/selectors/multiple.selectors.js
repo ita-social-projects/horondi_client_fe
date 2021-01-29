@@ -54,4 +54,14 @@ export const selectHotItemFilter = ({ Products }) => ({
   filterStatus: Products.filterStatus
 });
 
+export const selectConstructor = ({ Constructor }) => ({
+  constructorModel: Constructor.constructorModel,
+  currentModel: Constructor.constructorModel.currentModel,
+  basicImage: Constructor.constructorBasic.image,
+  frontPocketImage: Constructor.constructorFrontPocket.image,
+  patternImage: Constructor.constructorPattern.constructorImg,
+  bottomImage: Constructor.constructorBottom.image,
+  modelLoading: Constructor.constructorModel.modelLoading
+});
+
 export const selectToastSettings = (state) => state.Toast.toastSettings;

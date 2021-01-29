@@ -6,7 +6,7 @@ import {
 
 export const initialState = {
   modelsForConstructor: '',
-  constructorModel: '',
+  currentModel: '',
   modelLoading: false
 };
 
@@ -20,7 +20,7 @@ const constructorModel = (state = initialState, action = {}) => {
   case SET_CONSTRUCTOR_MODEL_BY_ID:
     return {
       ...state,
-      constructorModel: action.payload
+      currentModel: action.payload
     };
   case SET_MODEL_LOADING:
     return {

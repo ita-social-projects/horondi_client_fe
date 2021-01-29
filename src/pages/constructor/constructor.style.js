@@ -30,7 +30,11 @@ export const useStyles = makeStyles(() => ({
     }
   },
   imageContainer: {
-    width: '35%'
+    maxHeight: '470px',
+    maxWidth: '35%'
+  },
+  image: {
+    maxWidth: '100%'
   },
   infoWrapper: {
     width: '25%'

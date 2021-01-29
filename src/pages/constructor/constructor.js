@@ -19,36 +19,34 @@ const map = require('lodash/map');
 
 const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
 
-const Constructor = () => {
-  const styles = useStyles();
+const useConstructor = () => {
   const dispatch = useDispatch();
-
   const {
     constructorModel,
-    constructorBasic,
-    constructorFrontPocket,
-    constructorPattern,
-    constructorBottom,
+    currentModel,
+    basicImage,
+    frontPocketImage,
+    patternImage,
+    bottomImage,
     modelLoading
   } = useSelector(({ Constructor }) => ({
     constructorModel: Constructor.constructorModel,
-    constructorBasic: Constructor.constructorBasic,
-    constructorFrontPocket: Constructor.constructorFrontPocket,
-    constructorPattern: Constructor.constructorPattern,
-    constructorBottom: Constructor.constructorBottom,
+    currentModel: Constructor.constructorModel.currentModel,
+    basicImage: Constructor.constructorBasic.image,
+    frontPocketImage: Constructor.constructorFrontPocket.image,
+    patternImage: Constructor.constructorPattern.constructorImg,
+    bottomImage: Constructor.constructorBottom.image,
     modelLoading: Constructor.constructorModel.modelLoading
   }));
 
-  const image = useRef(null);
-  const currentModel = constructorModel.constructorModel;
   const models = constructorModel.modelsForConstructor;
-  const basics = constructorModel.constructorModel.constructorBasic;
-  const patterns = constructorModel.constructorModel.constructorPattern;
-  const bottoms = constructorModel.constructorModel.constructorBottom;
+  const basics = currentModel.constructorBasic;
+  const patterns = currentModel.constructorPattern;
+  const bottoms = currentModel.constructorBottom;
 
   useEffect(() => {
     dispatch(getModelForConstructor());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (models) {
@@ -60,42 +58,13 @@ const Constructor = () => {
     if (currentModel) {
       dispatch(setModelLoading(true));
       dispatch(getConstructorBasic(currentModel.constructorBasic[0]._id));
-      dispatch(getConstructorFrontPocket(currentModel.constructorFrontPocket[0]._id));
+      dispatch(
+        getConstructorFrontPocket(currentModel.constructorFrontPocket[0]._id)
+      );
       dispatch(getConstructorPattern(currentModel.constructorPattern[0]._id));
       dispatch(getConstructorBottom(currentModel.constructorBottom[0]._id));
     }
   }, [currentModel]);
-
-  const createImage = (basic, bottom, frontPocket, pattern) => {
-    mergeImages([frontPocket, basic, bottom, pattern], {
-      height: 3000,
-      weight: 460
-    }).then((b64) => {
-      dispatch(setModelLoading(false));
-      image.current.src = b64;
-    });
-  };
-
-  useEffect(() => {
-    if (
-      constructorBasic.image &&
-      constructorBottom.image &&
-      constructorFrontPocket.image &&
-      constructorPattern.constructorImg
-    ) {
-      createImage(
-        constructorBasic.image,
-        constructorBottom.image,
-        constructorFrontPocket.image,
-        constructorPattern.constructorImg
-      );
-    }
-  }, [
-    constructorBasic,
-    constructorBottom,
-    constructorFrontPocket,
-    constructorPattern
-  ]);
 
   const changeModel = useCallback((id) => {
     dispatch(getConstructorModelById(id));
@@ -116,25 +85,85 @@ const Constructor = () => {
     dispatch(getConstructorBottom(id));
   }, []);
 
-  const availableModels = map(models, obj => (
+  return {
+    values: {
+      models,
+      basics,
+      patterns,
+      bottoms,
+      modelLoading
+    },
+    images: {
+      basicImage,
+      frontPocketImage,
+      patternImage,
+      bottomImage
+    },
+    methods: {
+      dispatch,
+      changeModel,
+      changeBasic,
+      changePattern,
+      changeBottom
+    }
+  };
+};
+
+const Constructor = () => {
+  const styles = useStyles();
+  const { values, images, methods } = useConstructor();
+  const image = useRef(null);
+
+  const createImage = (frontPocket, basic, bottom, pattern) => {
+    mergeImages([frontPocket, basic, bottom, pattern], {
+      height: 3000,
+      weight: 460
+    }).then((b64) => {
+      methods.dispatch(setModelLoading(false));
+      image.current.src = b64;
+    });
+  };
+
+  useEffect(() => {
+    if (
+      images.basicImage &&
+      images.patternImage &&
+      images.frontPocketImage &&
+      images.bottomImage
+    ) {
+      createImage(
+        images.frontPocketImage,
+        images.basicImage,
+        images.bottomImage,
+        images.patternImage
+      );
+    }
+  }, [
+    images.basicImage,
+    images.patternImage,
+    images.frontPocketImage,
+    images.bottomImage
+  ]);
+
+  const availableModels = map(values.models, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
   ));
 
-  const availableBasics = map(basics, obj => (
+  const availableBasics = map(values.basics, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
   ));
 
-  const availablePatterns = map(patterns, obj => (
+  const availablePatterns = map(values.patterns, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
   ));
 
-  const availableBottoms = map(bottoms, obj => (
+  const availableBottoms = map(values.bottoms, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
@@ -147,7 +176,7 @@ const Constructor = () => {
           <NativeSelect
             className={styles.mainHeader}
             name='model'
-            onChange={(e) => changeModel(e.target.value)}
+            onChange={(e) => methods.changeModel(e.target.value)}
           >
             {availableModels}
           </NativeSelect>
@@ -160,7 +189,7 @@ const Constructor = () => {
           <FormControl>
             <NativeSelect
               name='basic'
-              onChange={(e) => changeBasic(e.target.value)}
+              onChange={(e) => methods.changeBasic(e.target.value)}
             >
               {availableBasics}
             </NativeSelect>
@@ -169,7 +198,7 @@ const Constructor = () => {
           <FormControl>
             <NativeSelect
               name='pattern'
-              onChange={(e) => changePattern(e.target.value)}
+              onChange={(e) => methods.changePattern(e.target.value)}
             >
               {availablePatterns}
             </NativeSelect>
@@ -178,21 +207,21 @@ const Constructor = () => {
           <FormControl>
             <NativeSelect
               name='bottoms'
-              onChange={(e) => changeBottom(e.target.value)}
+              onChange={(e) => methods.changeBottom(e.target.value)}
             >
               {availableBottoms}
             </NativeSelect>
             <FormHelperText>{BOTTOM}</FormHelperText>
           </FormControl>
         </form>
-        <div style={{ maxHeight: '470px', maxWidth: '35%' }}>
-          {modelLoading ? (
-            <Loader style={{ maxHeight: '30px' }} />
+        <div className={styles.imageContainer}>
+          {values.modelLoading ? (
+            <Loader />
           ) : (
             <img
               ref={image}
+              className={styles.image}
               id='constructor'
-              style={{ width: '100%' }}
               alt='Constructor'
             />
           )}

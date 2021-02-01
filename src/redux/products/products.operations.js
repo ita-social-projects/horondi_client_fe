@@ -7,12 +7,15 @@ const getAllProducts = async () => {
       query {
         getProducts {
           items {
-            colors {
-              name {
-                value
-              }
-              simpleName {
-                value
+            mainMaterial {
+              color {
+                _id
+                name {
+                  value
+                }
+                simpleName {
+                  value
+                }
               }
             }
             basePrice {
@@ -20,10 +23,22 @@ const getAllProducts = async () => {
               currency
             }
             model {
-              value
+              _id
+              category {
+                _id
+                code
+                name {
+                  value
+                }
+              }
+              name {
+                value
+              }
             }
             pattern {
-              value
+              name {
+                value
+              }
             }
             category {
               _id
@@ -319,3 +334,5 @@ const getProductById = async (id) => {
 };
 
 export { getProductById, getAllProducts, getFilteredProducts };
+
+console.log(getAllProducts());

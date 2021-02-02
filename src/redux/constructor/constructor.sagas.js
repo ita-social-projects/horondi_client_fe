@@ -5,7 +5,7 @@ import constructorFrontPocketSaga from './constructor-front-pocket/constructor-f
 import constructorModelSaga from './constructor-model/constructor-model.sagas';
 import constructorPatternSaga from './constructor-pattern/constructor-pattern.sagas';
 
-function* constructorSaga() {
+export function* constructorSaga() {
   yield all([
     constructorBasicSaga(),
     constructorBottomSaga(),
@@ -14,5 +14,3 @@ function* constructorSaga() {
     constructorPatternSaga()
   ]);
 }
-
-export default constructorSaga;

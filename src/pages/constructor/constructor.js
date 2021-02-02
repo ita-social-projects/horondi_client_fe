@@ -43,7 +43,7 @@ const useConstructor = () => {
 
   useEffect(() => {
     if (models) {
-      dispatch(getConstructorModelById(models[1]._id));
+      dispatch(getConstructorModelById(models[0]._id));
     }
   }, [models]);
 

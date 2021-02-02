@@ -31,7 +31,6 @@ export function* handleConstructorModelsLoad() {
     const models = yield call(getModelForConstructor);
     yield put(setModelForConstructor(models));
   } catch (e) {
-    console.log(e);
     yield call(handleError, e);
   }
 }

@@ -11,7 +11,6 @@ export function* handleConstructorPatternLoad({ payload: id }) {
     const pattern = yield call(getConstructorPatternById, id);
     yield put(setConstructorPattern(pattern));
   } catch (e) {
-    console.log(e);
     yield call(handleError, e);
   }
 }

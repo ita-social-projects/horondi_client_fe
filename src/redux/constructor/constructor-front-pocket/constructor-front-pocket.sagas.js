@@ -11,7 +11,6 @@ export function* handleConstructorFrontPocketLoad({ payload: id }) {
     const frontPocket = yield call(getConstructorFrontPocketById, id);
     yield put(setConstructorFrontPocket(frontPocket));
   } catch (e) {
-    console.log(e);
     yield call(handleError, e);
   }
 }

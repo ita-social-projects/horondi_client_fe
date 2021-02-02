@@ -11,7 +11,6 @@ export function* handleConstructorBottomLoad({ payload: id }) {
     const bottom = yield call(getConstructorBottomById, id);
     yield put(setConstructorBottom(bottom));
   } catch (e) {
-    console.log(e);
     yield call(handleError, e);
   }
 }

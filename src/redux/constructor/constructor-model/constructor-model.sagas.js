@@ -21,7 +21,6 @@ export function* handleConstructorModelByIdLoad({ payload: id }) {
     const model = yield call(getModelById, id);
     yield put(setConstructorModelById(model));
   } catch (e) {
-    console.log(e);
     yield call(handleError, e);
   }
 }

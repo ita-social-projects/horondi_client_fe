@@ -11,7 +11,6 @@ export function* handleConstructorBasicLoad({ payload: id }) {
     const basic = yield call(getConstructorBasicById, id);
     yield put(setConstructorBasic(basic));
   } catch (e) {
-    console.log(e);
     yield call(handleError, e);
   }
 }

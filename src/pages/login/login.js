@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import GoogleLogin from 'react-google-login';
 import {
   Button,
   TextField,
@@ -64,21 +65,11 @@ const Login = () => {
     staySignedIn: Yup.bool()
   });
 
-  useEffect(() => {
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2.init({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
-      });
-    });
-  }, []);
-
-  const singIn = () => {
-    const googleAuth = window.gapi.auth2.getAuthInstance();
-    googleAuth.signIn().then((googleUser) => {
-      const idToken = googleUser.getAuthResponse().id_token;
-      dispatch(loginByGoogle({ idToken }));
-    });
+  const responseGoogleSuccess = (response) => {
+    const idToken = response.tokenId;
+    dispatch(loginByGoogle({ idToken }));
   };
+  const responseGoogleFailure = (response) => response;
 
   return (
     <Formik
@@ -165,14 +156,24 @@ const Login = () => {
                           {OR_TEXT[language].value}
                         </span>
                       </div>
-                      <Button
-                        className={styles.googleBtn}
-                        onClick={singIn}
-                        fullWidth
-                      >
-                        <span className={styles.googleLogo} />
-                        Google
-                      </Button>
+                      <GoogleLogin
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        render={(renderProps) => (
+                          <Button
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className={styles.googleBtn}
+                            fullWidth
+                          >
+                            <span className={styles.googleLogo} />
+                            Google
+                          </Button>
+                        )}
+                        buttonText='Login with Google'
+                        onSuccess={responseGoogleSuccess}
+                        onFailure={responseGoogleFailure}
+                        cookiePolicy='single_host_origin'
+                      />
                       <div className={styles.container}>
                         <FormControlLabel
                           control={

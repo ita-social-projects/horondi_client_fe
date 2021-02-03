@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { Button } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import OrderTable from '../../order/order-table';
 import Modal from '../../../../components/modal';
 import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
 import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../cart-item';
 import { useStyles } from './filled-cart.styles';
-import { Button } from '@material-ui/core';
 import { CART_BUTTON_TITLES } from '../../../../translations/cart.translations';
 import SimilarProducts from '../../../../pages/product-details/similar-products/similar-products';
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import {
+  getCartItems,
   getFiltredProducts,
   getProduct,
   setCategoryFilter
@@ -23,32 +24,37 @@ const FilledCart = ({ items, categories }) => {
   const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, goods, currency } = useSelector(
-    ({ Language, Currency, Products: { product } }) => ({
+  const { language, goods, currency, cart } = useSelector(
+    ({ Language, Currency, Products }) => ({
       language: Language.language,
       currency: Currency.currency,
-      goods: product
+      goods: Products,
+      cart: Products.cartItems
     })
   );
+  const prods = [];
   useEffect(() => {
-    dispatch(getProduct(items[0]._id));
-    window.scrollTo(0, 0);
-  }, [items[0]._id, dispatch]);
-
+    dispatch(getProduct(items[0]));
+    // window.scrollTo(0, 0);
+  }, [items[0]]);
   useEffect(() => {
-    if (goods) {
-      const categoryFilter = categories.filter((item) => {
-        return goods.category.name[0].value === item.name[0].value;
-      });
-      dispatch(setCategoryFilter([categoryFilter[0]._id]));
-    }
-  }, [goods]);
-  useEffect(() => {
-    if (goods) {
-      dispatch(getFiltredProducts({}));
-    }
-  }, [dispatch, goods]);
-
+    dispatch(getCartItems(items));
+  }, [dispatch, JSON.stringify(cart)]);
+  // useEffect(() => {
+  //   if (goods) {
+  //     const categoryFilter = categories.filter((item) => {
+  //       return goods.category.name[0].value === item.name[0].value;
+  //     });
+  //     dispatch(setCategoryFilter([categoryFilter[0]._id]));
+  //   }
+  // }, [goods]);
+  // useEffect(() => {
+  //   if (goods) {
+  //     dispatch(getFiltredProducts({}));
+  //   }
+  // }, [dispatch, goods]);
+  console.log(goods);
+  console.log(cart);
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
@@ -57,28 +63,30 @@ const FilledCart = ({ items, categories }) => {
     setModalVisibility(false);
   };
 
-  const orderList = items.map((item, index) => (
-    <CartItem
-      key={index}
-      item={item}
-      language={language}
-      currency={currency}
-      setModalVisibility={setModalVisibility}
-      setModalItem={setModalItem}
-    />
-  ));
-
-  const totalPrice = items.reduce(
-    (acc, item) => acc + item.totalPrice[currency].value * item.quantity,
-    0
-  );
+  // const orderList = goods && [goods].map((item, index) => {
+  //   return (
+  //     <CartItem
+  //       key={index}
+  //       item={item}
+  //       language={language}
+  //       currency={currency}
+  //       setModalVisibility={setModalVisibility}
+  //       setModalItem={setModalItem}
+  //     />
+  //   );
+  // });
+  const totalPrice = 0;
+  // const totalPrice = items.reduce(
+  //   (acc, item) => acc + item.totalPrice[currency].value * item.quantity,
+  //   0
+  // );
 
   return (
     <div className={styles.root} data-cy='filled-cart'>
-      <OrderTable
+      {/* <OrderTable
         items={orderList}
         totalPrice={totalPrice / 100}
-        currency={currency ? 'USD' : 'UAH'}
+        currency={currency ? "USD" : "UAH"}
       />
       {modalVisibility && (
         <div>
@@ -92,12 +100,12 @@ const FilledCart = ({ items, categories }) => {
         </div>
       )}
       <div className={styles.btnWrapper}>
-        <Link to='/'>
+        <Link to="/">
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].home}
           </Button>
         </Link>
-        <Link to='/backpacks/rolltop'>
+        <Link to="/backpacks/rolltop">
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].goods}
           </Button>
@@ -107,7 +115,7 @@ const FilledCart = ({ items, categories }) => {
         <div>
           <SimilarProducts currencySign={currencySign} />
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

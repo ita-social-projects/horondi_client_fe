@@ -12,7 +12,7 @@ export const Checkout = () => {
   return (
     <>
       <Cart cartItems={cartItems} categories={categories} />
-      {cartItems.length && <OrderForm />}
+      {/* {cartItems.length && <OrderForm />} */}
     </>
   );
 };

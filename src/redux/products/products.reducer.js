@@ -23,7 +23,9 @@ import {
   SET_COMMENTS_LOADING,
   SET_UPDATING_COMMENT,
   SET_PRODUCT_TO_SEND,
-  CLEAR_PRODUCT_TO_SEND, CHANGE_FILTER_STATUS
+  CLEAR_PRODUCT_TO_SEND,
+  CHANGE_FILTER_STATUS,
+  SET_CART_ITEMS
 } from './products.types';
 
 export const initialState = {
@@ -46,6 +48,7 @@ export const initialState = {
   filterData: [],
   product: null,
   products: [],
+  cartItems: [],
   pagesCount: 1,
   commentsLoading: false,
   updatingComment: null,
@@ -69,7 +72,7 @@ export const initialState = {
       volumeInLiters: null
     }
   },
-  filterStatus:false
+  filterStatus: false
 };
 const setSort = ({
   sortByPrice = 0,
@@ -96,7 +99,7 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_CURRENT_PAGE:
     return {
       ...state,
-      currentPage: action.payload-1
+      currentPage: action.payload - 1
     };
   case SET_PRODUCTS_PER_PAGE:
     return {
@@ -243,6 +246,12 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       filterStatus: action.payload
     };
+  case SET_CART_ITEMS: {
+    return {
+      ...state,
+      cartItems: action.payload
+    };
+  }
   default:
     return state;
   }

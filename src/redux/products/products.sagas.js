@@ -6,7 +6,8 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading
+  setProductLoading,
+  setCartItems
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
@@ -18,16 +19,19 @@ import {
 import {
   GET_ALL_FILTERS,
   GET_FILTRED_PRODUCTS,
-  GET_PRODUCT
+  GET_PRODUCT,
+  GET_CART_ITEMS
 } from './products.types';
 
 import {
   getAllProducts,
   getFilteredProducts,
-  getProductById
+  getProductById,
+  getCartItems
 } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
+import routes from '../../configs/routes';
 
 const selectStateProducts = (state) => state.Products;
 const selectStateCurrency = (state) => state.Currency.currency;
@@ -72,7 +76,7 @@ export function* handleProductsErrors({ message }) {
   yield put(setProductsLoading(false));
   yield put(setSearchBarLoading(false));
   yield put(setError(message));
-  yield put(push('/error-page'));
+  yield put(push(routes.pathToErrorPage));
 }
 
 export function* handleProductLoading({ payload }) {
@@ -80,12 +84,25 @@ export function* handleProductLoading({ payload }) {
     yield put(setProductLoading(true));
     const product = yield call(getProductById, payload);
     yield put(setProduct(product));
-    yield put(setComments(product.comments.items));
+    yield put(setComments(product.comments?.items));
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));
     yield put(setError(e.message));
-    yield put(push('/error-page'));
+    yield put(push(routes.pathToErrorPage));
+  }
+}
+
+export function* handleCartItemsLoading({ payload }) {
+  try {
+    yield put(setProductLoading(true));
+    const products = yield call(getCartItems, payload);
+    yield put(setCartItems(products));
+    yield put(setProductLoading(false));
+  } catch (e) {
+    yield put(setProductLoading(false));
+    yield put(setError(e.message));
+    yield put(push(routes.pathToErrorPage));
   }
 }
 
@@ -93,4 +110,5 @@ export default function* productsSaga() {
   yield takeEvery(GET_ALL_FILTERS, handleGetAllProducts);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilteredProductsLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
+  yield takeEvery(GET_CART_ITEMS, handleCartItemsLoading);
 }

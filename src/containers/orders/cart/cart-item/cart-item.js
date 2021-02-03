@@ -18,7 +18,8 @@ const CartItem = ({
   currency
 }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.image}` });
+  const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
+  // const styles = useStyles();
 
   const onChangeQuantity = (value, key) => {
     dispatch(setCartItemQuantity(item, +value, key));
@@ -28,56 +29,64 @@ const CartItem = ({
     setModalVisibility(true);
     setModalItem(item);
   };
+  console.log(item);
 
   return (
-    <div className={styles.root} data-cy='cart-item'>
-      <div className={styles.itemData}>
-        <div className={styles.image} data-cy='cart-item-img'>
-          <Link to={`/product/${item._id}`}>
-            <b />
-          </Link>
-        </div>
-        <div className={styles.description} data-cy='cart-item-description'>
-          <Link to={`/product/${item._id}`}>
-            <span className={styles.itemName}>{item.name[language].value}</span>
-          </Link>
-          {item.selectedSize && (
+    item && (
+      <div className={styles.root} data-cy='cart-item'>
+        <div className={styles.itemData}>
+          <div className={styles.image} data-cy='cart-item-img'>
+            <Link to={`/product/${item._id}`}>
+              <b />
+            </Link>
+          </div>
+          <div className={styles.description} data-cy='cart-item-description'>
+            <Link to={`/product/${item._id}`}>
+              {item && (
+                <span className={styles.itemName}>
+                  {item.name[language].value}
+                </span>
+              )}
+            </Link>
+            {/* {item.selectedSize && (
             <span>
               {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
             </span>
-          )}
-          {item.bagBottom.value && (
-            <span>
-              {CART_TABLE_FIELDS[language].bagBottom}:{' '}
-              {item.bagBottom.name[language].value}
-            </span>
-          )}
-          {item.sidePocket && (
-            <span>
-              {CART_TABLE_FIELDS[language].sidePocket}:{' '}
-              <DoneIcon className={styles.doneIcon} />
-            </span>
-          )}
+          )} */}
+            {/* {item.bagBottom.value && (
+              <span>
+                {CART_TABLE_FIELDS[language].bagBottom}:{" "}
+                {item.bagBottom.name[language].value}
+              </span>
+            )} */}
+            {/* {item.sidePocket && (
+              <span>
+                {CART_TABLE_FIELDS[language].sidePocket}:{" "}
+                <DoneIcon className={styles.doneIcon} />
+              </span>
+            )} */}
+          </div>
+        </div>
+        <div>
+          <NumberInput
+            // quantity={item.quantity}
+            quantity={1}
+            onChangeQuantity={onChangeQuantity}
+          />
+        </div>
+        <div className={styles.price}>
+          <span>
+            {item.basePrice[currency].value / 100}{' '}
+            {item.basePrice[currency].currency}
+          </span>
+          <DeleteIcon
+            className={styles.trash}
+            onClick={onRemoveItem}
+            data-cy='cart-item-remove'
+          />
         </div>
       </div>
-      <div>
-        <NumberInput
-          quantity={item.quantity}
-          onChangeQuantity={onChangeQuantity}
-        />
-      </div>
-      <div className={styles.price}>
-        <span>
-          {item.totalPrice[currency].value / 100}{' '}
-          {item.totalPrice[currency].currency}
-        </span>
-        <DeleteIcon
-          className={styles.trash}
-          onClick={onRemoveItem}
-          data-cy='cart-item-remove'
-        />
-      </div>
-    </div>
+    )
   );
 };
 

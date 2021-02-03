@@ -15,13 +15,16 @@ import {
   setPriceFilter,
   setSearchFilter,
   setHotItemFilter,
-  setModelsFilter, changeFilterStatus
+  setModelsFilter,
+  changeFilterStatus
 } from '../../../redux/products/products.actions';
 
 import {
   MODEL_TEXT,
-  PATTERN_TEXT, CATERGORY_TEXT,
-  CLEAR_FILTER_BUTTON_TEXT, COLORS_TEXT
+  PATTERN_TEXT,
+  CATERGORY_TEXT,
+  CLEAR_FILTER_BUTTON_TEXT,
+  COLORS_TEXT
 } from '../../../translations/product-list.translations';
 import useProductSpecies from '../../../hooks/use-product-species';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
@@ -54,27 +57,27 @@ const ProductListFilter = () => {
     modelNames
   } = useProductSpecies();
 
-  const handleFilterChange = ({ target }, setFilter, filter, categoriesList) => {
+  const handleFilterChange = (
+    { target },
+    setFilter,
+    filter,
+    categoriesList
+  ) => {
     if (categoriesList) {
-      const categoryId = categoriesList.filter(element => element.name[0].value === target.name)[0]._id;
+      const categoryId = categoriesList.filter(
+        (element) => element.name[0].value === target.name
+      )[0]._id;
       if (!target.checked) {
-        dispatch(setFilter(
-          filter.filter((category) => category !== categoryId)
-        ));
-      } else {
         dispatch(
-          setFilter([...new Set([...filter, categoryId])])
+          setFilter(filter.filter((category) => category !== categoryId))
         );
+      } else {
+        dispatch(setFilter([...new Set([...filter, categoryId])]));
       }
     } else if (!target.checked) {
-      dispatch(
-        setFilter(
-          filter.filter((name) => name !== target.name)
-        ));
+      dispatch(setFilter(filter.filter((name) => name !== target.name)));
     } else {
-      dispatch(
-        setFilter([...new Set([...filter, target.name])])
-      );
+      dispatch(setFilter([...new Set([...filter, target.name])]));
     }
     dispatch(changeFilterStatus(!filterStatus));
   };
@@ -90,7 +93,8 @@ const ProductListFilter = () => {
       list: categoriesNames,
       categories,
       clearFilter: () => handleFilterClear(setCategoryFilter),
-      filterHandler: (e) => handleFilterChange(e, setCategoryFilter, categoryFilter, categories)
+      filterHandler: (e) =>
+        handleFilterChange(e, setCategoryFilter, categoryFilter, categories)
     },
     models: {
       filterName: MODEL_TEXT[language].value,
@@ -111,7 +115,8 @@ const ProductListFilter = () => {
       productFilter: patternsFilter,
       list: patternsNames,
       clearFilter: () => handleFilterClear(setPatternsFilter),
-      filterHandler: (e) => handleFilterChange(e, setPatternsFilter, patternsFilter)
+      filterHandler: (e) =>
+        handleFilterChange(e, setPatternsFilter, patternsFilter)
     }
   };
   const handleClearFilter = () => {
@@ -135,23 +140,32 @@ const ProductListFilter = () => {
   };
   const filterButtons = Object.values(
     filtersOptions
-  ).map(({ filterName, productFilter, list, labels, filterHandler, clearFilter }) => (
-    <ProductsFiltersContainer
-      key={filterName}
-      filterName={filterName}
-      productFilter={productFilter}
-      list={list}
-      labels={labels}
-      filterHandler={filterHandler}
-      clearFilter={clearFilter}
-      categories={categories}
-    />
-  ));
+  ).map(
+    ({
+      filterName,
+      productFilter,
+      list,
+      labels,
+      filterHandler,
+      clearFilter
+    }) => (
+      <ProductsFiltersContainer
+        key={filterName}
+        filterName={filterName}
+        productFilter={productFilter}
+        list={list}
+        labels={labels}
+        filterHandler={filterHandler}
+        clearFilter={clearFilter}
+        categories={categories}
+      />
+    )
+  );
   return (
     <div>
       <Grid
         container
-        alignItems='space-around'
+        alignItems='center'
         direction='column'
         className={styles.wrapper}
         spacing={2}

@@ -13,7 +13,12 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
-import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
+import {
+  LOGIN_USER_DATA,
+  formRegExp,
+  errorMessages,
+  cookiePolicy
+} from '../../configs';
 import {
   placeholders,
   OR_TEXT,
@@ -170,7 +175,7 @@ const Login = () => {
                         )}
                         onSuccess={responseGoogleSuccess}
                         onFailure={responseGoogleFailure}
-                        cookiePolicy='single_host_origin'
+                        cookiePolicy={cookiePolicy.SINGLE_HOST_ORIGIN}
                       />
                       <div className={styles.container}>
                         <FormControlLabel

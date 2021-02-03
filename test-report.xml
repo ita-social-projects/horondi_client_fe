@@ -1,3 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\comments\tests\comments.sagas.test.js">
+    <testCase name="Add comments saga should add comment" duration="1"/>
+    <testCase name="Add comments saga should throw an error" duration="10"/>
+    <testCase name="Delete comments saga should delete comment" duration="0"/>
+    <testCase name="Delete comments saga should throw an error" duration="0"/>
+    <testCase name="Update comments saga should update comment" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\business-pages\tests\business-pages.sagas.test.js">
+    <testCase name="Business pages sagas tests fetches business page by code" duration="18"/>
+    <testCase name="Business pages sagas tests handles errors" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\language\test\language.reducer.test.js">
+    <testCase name="test language reducer should return default state" duration="10"/>
+    <testCase name="test language reducer should change language" duration="2"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\categories\tests\categories.sagas.test.js">
+    <testCase name="Categories saga fetches categories" duration="18"/>
+    <testCase name="Categories saga handles errors" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\news\tests\news.saga.test.js">
+    <testCase name="get news saga fetches news" duration="0"/>
+    <testCase name="handles errors" duration="0"/>
+    <testCase name="get article saga fetches article" duration="12"/>
+    <testCase name="get article saga handles errors" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\currency\test\currency.reducer.test.js">
+    <testCase name="test currency reducer should return default state" duration="7"/>
+    <testCase name="test currency reducer should change currency" duration="3"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\comments\tests\comments.reducer.test.js">
+    <testCase name="comments reducer should set comments loading to true" duration="2"/>
+    <testCase name="comments reducer should set updating comment to state" duration="1"/>
+    <testCase name="comments reducer should set rate to state" duration="1"/>
+    <testCase name="comments reducer should set comments to state" duration="1"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\chat\tests\chat.sagas.test.js">
+    <testCase name="sagas test send message" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\checkout\tests\checkout.sagas.test.js">
+    <testCase name="sagas test fetch cities" duration="0"/>
+    <testCase name="sagas test fetch streets" duration="0"/>
+    <testCase name="sagas test fetch prices" duration="0"/>
+    <testCase name="sagas test fetch warehouses" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\cart\tests\cart.sagas.test.js">
+    <testCase name="Cart saga fetching cart items from local storage and set to redux store" duration="0"/>
+    <testCase name="Cart saga fetching cart items from local storage and add new one" duration="0"/>
+    <testCase name="Cart saga if product already in cart nothing changes" duration="0"/>
+    <testCase name="Cart saga should to remove product from cart by id" duration="0"/>
+    <testCase name="Cart saga also checks the size of products before removal" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\products\tests\products.saga.test.js">
+    <testCase name="Products saga fetches product" duration="0"/>
+    <testCase name="Products saga handles product fetching error" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\user\tests\user.sagas.test.js">
+    <testCase name="Categories saga fetches user" duration="0"/>
+    <testCase name="Categories saga handles errors" duration="0"/>
+  </file>
+  <file path="C:\Users\yyats\Desktop\SoftServe\horondi_client_fe\src\redux\wishlist\tests\wishlist.sagas.test.js">
+    <testCase name="Wishlist saga fetching wishlist items from local storage and set to redux store" duration="0"/>
+    <testCase name="Wishlist saga fetching cart items from local storage and add new one" duration="0"/>
+    <testCase name="Wishlist saga should to remove product from cart by id" duration="0"/>
+  </file>
 </testExecutions>

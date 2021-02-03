@@ -66,8 +66,7 @@ const Login = () => {
   });
 
   const responseGoogleSuccess = (response) => {
-    const idToken = response.tokenId;
-    dispatch(loginByGoogle({ idToken }));
+    dispatch(loginByGoogle({ tokenId: response.tokenId }));
   };
   const responseGoogleFailure = (response) => response;
 
@@ -169,7 +168,6 @@ const Login = () => {
                             Google
                           </Button>
                         )}
-                        buttonText='Login with Google'
                         onSuccess={responseGoogleSuccess}
                         onFailure={responseGoogleFailure}
                         cookiePolicy='single_host_origin'

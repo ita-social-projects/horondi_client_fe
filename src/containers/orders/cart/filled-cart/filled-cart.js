@@ -24,36 +24,21 @@ const FilledCart = ({ items, categories }) => {
   const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, goods, currency, cart } = useSelector(
+  const { language, prods, currency, cart, loading } = useSelector(
     ({ Language, Currency, Products }) => ({
       language: Language.language,
       currency: Currency.currency,
-      goods: Products,
-      cart: Products.cartItems
+      prods: Products,
+      cart: Products.cartItems,
+      loading: Products.productLoading
     })
   );
-  const prods = [];
-  useEffect(() => {
-    dispatch(getProduct(items[0]));
-    // window.scrollTo(0, 0);
-  }, [items[0]]);
+
   useEffect(() => {
     dispatch(getCartItems(items));
-  }, [dispatch, JSON.stringify(cart)]);
-  // useEffect(() => {
-  //   if (goods) {
-  //     const categoryFilter = categories.filter((item) => {
-  //       return goods.category.name[0].value === item.name[0].value;
-  //     });
-  //     dispatch(setCategoryFilter([categoryFilter[0]._id]));
-  //   }
-  // }, [goods]);
-  // useEffect(() => {
-  //   if (goods) {
-  //     dispatch(getFiltredProducts({}));
-  //   }
-  // }, [dispatch, goods]);
-  console.log(goods);
+  }, [JSON.stringify(cart), dispatch]);
+
+  console.log(prods);
   console.log(cart);
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
@@ -63,30 +48,34 @@ const FilledCart = ({ items, categories }) => {
     setModalVisibility(false);
   };
 
-  // const orderList = goods && [goods].map((item, index) => {
-  //   return (
-  //     <CartItem
-  //       key={index}
-  //       item={item}
-  //       language={language}
-  //       currency={currency}
-  //       setModalVisibility={setModalVisibility}
-  //       setModalItem={setModalItem}
-  //     />
-  //   );
-  // });
-  const totalPrice = 0;
-  // const totalPrice = items.reduce(
-  //   (acc, item) => acc + item.totalPrice[currency].value * item.quantity,
-  //   0
-  // );
+  const orderList =
+    cart &&
+    cart.map((item, index) => (
+      <CartItem
+        key={index}
+        item={item}
+        language={language}
+        currency={currency}
+        setModalVisibility={setModalVisibility}
+        setModalItem={setModalItem}
+      />
+    ));
+  // const totalPrice = 0;
+  const totalPrice = cart.reduce(
+    (acc, item) =>
+      acc +
+      item.basePrice[currency].value *
+        // item.quantity,
+        1,
+    0
+  );
 
   return (
     <div className={styles.root} data-cy='filled-cart'>
-      {/* <OrderTable
+      <OrderTable
         items={orderList}
         totalPrice={totalPrice / 100}
-        currency={currency ? "USD" : "UAH"}
+        currency={currency ? 'USD' : 'UAH'}
       />
       {modalVisibility && (
         <div>
@@ -100,22 +89,20 @@ const FilledCart = ({ items, categories }) => {
         </div>
       )}
       <div className={styles.btnWrapper}>
-        <Link to="/">
-          <Button className={styles.btnCreateOrder}>
-            {CART_BUTTON_TITLES[language].home}
-          </Button>
-        </Link>
-        <Link to="/backpacks/rolltop">
+        <Link to='/backpacks/rolltop'>
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].goods}
           </Button>
         </Link>
+        <Link to='/'>
+          <Button className={styles.btnCreateOrder}>
+            {CART_BUTTON_TITLES[language].checkout}
+          </Button>
+        </Link>
       </div>
-      {goods ? (
-        <div>
-          <SimilarProducts currencySign={currencySign} />
-        </div>
-      ) : null} */}
+      {cart ? (
+        <div>{/* <SimilarProducts currencySign={currencySign} /> */}</div>
+      ) : null}
     </div>
   );
 };

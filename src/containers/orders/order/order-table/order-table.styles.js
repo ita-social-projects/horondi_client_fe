@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     fontSize: '1.5em',
     fontWeight: 'bold',
-    margin: 20
+    margin: '40px 0'
   },
   backButton: {
     '&:visited': {

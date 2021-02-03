@@ -39,7 +39,7 @@ export function* handleConstructorModelsLoad() {
 export function* handleError(e) {
   yield put(setModelLoading(true));
   yield put(setError(e.message));
-  yield put(routes.pathToErrorPage);
+  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* constructorModelSaga() {

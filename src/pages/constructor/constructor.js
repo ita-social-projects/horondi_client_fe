@@ -47,28 +47,44 @@ const Constructor = () => {
     images.bottomImage
   ]);
 
-  const availableModels = useMemo(() => map(values.models, (obj) => (
-    <option key={obj._id} value={obj._id}>
-      {obj.name[0].value}
-    </option>
-  )), [values.models]);
+  const availableModels = useMemo(
+    () =>
+      map(values.models, (obj) => (
+        <option key={obj._id} value={obj._id}>
+          {obj.name[0].value}
+        </option>
+      )),
+    [values.models]
+  );
 
-  const availableBasics = useMemo(() => map(values.basics, (obj) => (
-    <option key={obj._id} value={obj._id}>
-      {obj.name[0].value}
-    </option>
-  )), [values.basics]);
+  const availableBasics = useMemo(
+    () =>
+      map(values.basics, (obj) => (
+        <option key={obj._id} value={obj._id}>
+          {obj.name[0].value}
+        </option>
+      )),
+    [values.basics]
+  );
 
-  const availablePatterns = useMemo(() => map(values.patterns, (obj) => (
-    <option key={obj._id} value={obj._id}>
-      {obj.name[0].value}
-    </option>
-  )), [values.patterns]);
-  const availableBottoms = useMemo(() => map(values.bottoms, (obj) => (
-    <option key={obj._id} value={obj._id}>
-      {obj.name[0].value}
-    </option>
-  )), [values.bottoms]);
+  const availablePatterns = useMemo(
+    () =>
+      map(values.patterns, (obj) => (
+        <option key={obj._id} value={obj._id}>
+          {obj.name[0].value}
+        </option>
+      )),
+    [values.patterns]
+  );
+  const availableBottoms = useMemo(
+    () =>
+      map(values.bottoms, (obj) => (
+        <option key={obj._id} value={obj._id}>
+          {obj.name[0].value}
+        </option>
+      )),
+    [values.bottoms]
+  );
 
   return (
     <div className={styles.constructorWrapper}>

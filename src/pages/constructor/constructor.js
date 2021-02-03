@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import mergeImages from 'merge-images';
 import { useStyles } from './constructor.style';
@@ -47,29 +47,28 @@ const Constructor = () => {
     images.bottomImage
   ]);
 
-  const availableModels = map(values.models, (obj) => (
+  const availableModels = useMemo(() => map(values.models, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
-  ));
+  )), [values.models]);
 
-  const availableBasics = map(values.basics, (obj) => (
+  const availableBasics = useMemo(() => map(values.basics, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
-  ));
+  )), [values.basics]);
 
-  const availablePatterns = map(values.patterns, (obj) => (
+  const availablePatterns = useMemo(() => map(values.patterns, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
-  ));
-
-  const availableBottoms = map(values.bottoms, (obj) => (
+  )), [values.patterns]);
+  const availableBottoms = useMemo(() => map(values.bottoms, (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[0].value}
     </option>
-  ));
+  )), [values.bottoms]);
 
   return (
     <div className={styles.constructorWrapper}>

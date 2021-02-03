@@ -1,6 +1,6 @@
 import { SET_CONSTRUCTOR_BASIC } from './constructor-basic.types';
 
-const constructorBasic = (state = '', action = {}) => {
+const constructorBasic = (state = {}, action = {}) => {
   if (action.type === SET_CONSTRUCTOR_BASIC) {
     return action.payload;
   }

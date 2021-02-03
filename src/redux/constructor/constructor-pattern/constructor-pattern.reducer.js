@@ -1,6 +1,6 @@
 import { SET_CONSTRUCTOR_PATTERN } from './constructor-pattern.types';
 
-const constructorPattern = (state = '', action = {}) => {
+const constructorPattern = (state = {}, action = {}) => {
   if (action.type === SET_CONSTRUCTOR_PATTERN) {
     return action.payload;
   }

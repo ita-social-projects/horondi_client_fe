@@ -426,3 +426,5 @@ export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Not
 export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';
+
+export const ERROR_PAGE = '/error-page';

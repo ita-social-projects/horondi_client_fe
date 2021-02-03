@@ -5,6 +5,7 @@ import { GET_CONSTRUCTOR_PATTERN } from './constructor-pattern.types';
 import { setConstructorPattern } from './constructor-pattern.actions';
 import { setModelLoading } from '../constructor-model/constructor-model.actions';
 import { setError } from '../../error/error.actions';
+import { ERROR_PAGE } from '../../../configs';
 
 export function* handleConstructorPatternLoad({ payload: id }) {
   try {
@@ -18,7 +19,7 @@ export function* handleConstructorPatternLoad({ payload: id }) {
 export function* handleError(e) {
   yield put(setModelLoading(true));
   yield put(setError(e.message));
-  yield put(push('/error-page'));
+  yield put(push(ERROR_PAGE));
 }
 
 export default function* constructorPatternSaga() {

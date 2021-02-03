@@ -5,7 +5,7 @@ import { GET_CONSTRUCTOR_BASIC } from './constructor-basic.types';
 import { setConstructorBasic } from './constructor-basic.actions';
 import { setModelLoading } from '../constructor-model/constructor-model.actions';
 import { setError } from '../../error/error.actions';
-import { ERROR_PAGE } from '../../../configs';
+import routes from '../../../configs/routes';
 
 export function* handleConstructorBasicLoad({ payload: id }) {
   try {
@@ -19,7 +19,7 @@ export function* handleConstructorBasicLoad({ payload: id }) {
 export function* handleError(e) {
   yield put(setModelLoading(true));
   yield put(setError(e.message));
-  yield put(push(ERROR_PAGE));
+  yield put(routes.pathToErrorPage);
 }
 
 export default function* constructorBasicSaga() {

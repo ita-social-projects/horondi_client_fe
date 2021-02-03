@@ -14,7 +14,7 @@ import {
   setModelLoading
 } from './constructor-model.actions';
 import { setError } from '../../error/error.actions';
-import { ERROR_PAGE } from '../../../configs';
+import routes from '../../../configs/routes';
 
 export function* handleConstructorModelByIdLoad({ payload: id }) {
   try {
@@ -39,7 +39,7 @@ export function* handleConstructorModelsLoad() {
 export function* handleError(e) {
   yield put(setModelLoading(true));
   yield put(setError(e.message));
-  yield put(push(ERROR_PAGE));
+  yield put(routes.pathToErrorPage);
 }
 
 export default function* constructorModelSaga() {

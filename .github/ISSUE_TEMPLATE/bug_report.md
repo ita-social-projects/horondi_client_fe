@@ -1,11 +1,11 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: '[Affected functionality] Clear and concise summary, e.g. "[Create news] ''Publish''
+title:
+  '[Affected functionality] Clear and concise summary, e.g. "[Create news] ''Publish''
   button is not displayed on the ''Preview'' page"'
 labels: Bug
 assignees: ''
-
 ---
 
 **Environment:** OS, browser, it's version, device (for mobile devices).
@@ -20,6 +20,7 @@ INSERT INTO table1 (column1, column2)
 VALUES (value1, value2);"
 
 **Steps to reproduce**
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'

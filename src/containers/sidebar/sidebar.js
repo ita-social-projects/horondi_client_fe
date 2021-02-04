@@ -56,7 +56,11 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       onClose={() => setIsMenuOpen(false)}
     >
       <List>{categoriesList}</List>
-      <Link to='/constructor' className={styles.mainItem}>
+      <Link
+        to='/constructor'
+        className={styles.mainItem}
+        onClick={() => setIsMenuOpen(false)}
+      >
         <span className={styles.constructorItem}>
           {CONSTRUCTOR[language].value}
         </span>

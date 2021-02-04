@@ -24,8 +24,7 @@ import {
   SET_UPDATING_COMMENT,
   SET_PRODUCT_TO_SEND,
   CLEAR_PRODUCT_TO_SEND,
-  CHANGE_FILTER_STATUS,
-  SET_CART_ITEMS
+  CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const initialState = {
@@ -48,7 +47,6 @@ export const initialState = {
   filterData: [],
   product: null,
   products: [],
-  cartItems: [],
   pagesCount: 1,
   commentsLoading: false,
   updatingComment: null,
@@ -246,12 +244,6 @@ const productsReducer = (state = initialState, action = {}) => {
       ...state,
       filterStatus: action.payload
     };
-  case SET_CART_ITEMS: {
-    return {
-      ...state,
-      cartItems: action.payload
-    };
-  }
   default:
     return state;
   }

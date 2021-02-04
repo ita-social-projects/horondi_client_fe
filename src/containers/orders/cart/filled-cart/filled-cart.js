@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -11,19 +11,15 @@ import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../cart-item';
 import { useStyles } from './filled-cart.styles';
 import { CART_BUTTON_TITLES } from '../../../../translations/cart.translations';
+import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products/similar-products';
-import {
-  getCartItems,
-  getFiltredProducts,
-  getProduct,
-  setCategoryFilter
-} from '../../../../redux/products/products.actions';
 
 const FilledCart = ({ items, categories }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
   const dispatch = useDispatch();
+  const { pathToBackpacks, pathToCheckout } = routes;
   const { language, prods, currency, cart, loading } = useSelector(
     ({ Language, Currency, Products }) => ({
       language: Language.language,
@@ -34,12 +30,6 @@ const FilledCart = ({ items, categories }) => {
     })
   );
 
-  useEffect(() => {
-    dispatch(getCartItems(items));
-  }, [JSON.stringify(cart), dispatch]);
-
-  console.log(prods);
-  console.log(cart);
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
@@ -48,30 +38,25 @@ const FilledCart = ({ items, categories }) => {
     setModalVisibility(false);
   };
 
-  const orderList =
-    cart &&
-    cart.map((item, index) => {
-      item.quantity = 1;
-      return (
-        <CartItem
-          key={index}
-          item={item}
-          language={language}
-          currency={currency}
-          setModalVisibility={setModalVisibility}
-          setModalItem={setModalItem}
-        />
-      );
-    });
-  // const totalPrice = 0;
-  const totalPrice = cart.reduce(
-    (acc, item) =>
-      acc +
-      item.basePrice[currency].value *
-        // item.quantity,
-        1,
-    0
+  const calcPrice = (item) => (
+    (item.basePrice[currency].value +
+        item.selectedSize.additionalPrice[currency].value +
+        item.bottomMaterial.material.additionalPrice[currency].value) *
+      item.quantity
   );
+  const orderList = items.map((item, index) => (
+    <CartItem
+      key={index}
+      item={item}
+      calcPrice={calcPrice}
+      language={language}
+      currency={currency}
+      setModalVisibility={setModalVisibility}
+      setModalItem={setModalItem}
+    />
+  ));
+
+  const totalPrice = items.reduce((acc, item) => acc + calcPrice(item), 0);
 
   return (
     <div className={styles.root} data-cy='filled-cart'>
@@ -92,20 +77,18 @@ const FilledCart = ({ items, categories }) => {
         </div>
       )}
       <div className={styles.btnWrapper}>
-        <Link to='/backpacks/rolltop'>
+        <Link to={pathToBackpacks}>
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].goods}
           </Button>
         </Link>
-        <Link to='/'>
+        <Link to={pathToCheckout}>
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].checkout}
           </Button>
         </Link>
       </div>
-      {cart ? (
-        <div>{/* <SimilarProducts currencySign={currencySign} /> */}</div>
-      ) : null}
+      <div>{/* <SimilarProducts currencySign={currencySign} /> */}</div>
     </div>
   );
 };

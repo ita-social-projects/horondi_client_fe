@@ -6,8 +6,7 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading,
-  setCartItems
+  setProductLoading
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
@@ -19,15 +18,13 @@ import {
 import {
   GET_ALL_FILTERS,
   GET_FILTRED_PRODUCTS,
-  GET_PRODUCT,
-  GET_CART_ITEMS
+  GET_PRODUCT
 } from './products.types';
 
 import {
   getAllProducts,
   getFilteredProducts,
-  getProductById,
-  getCartItems
+  getProductById
 } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
@@ -93,22 +90,8 @@ export function* handleProductLoading({ payload }) {
   }
 }
 
-export function* handleCartItemsLoading({ payload }) {
-  try {
-    yield put(setProductLoading(true));
-    const products = yield call(getCartItems, payload);
-    yield put(setCartItems(products));
-    yield put(setProductLoading(false));
-  } catch (e) {
-    yield put(setProductLoading(false));
-    yield put(setError(e.message));
-    yield put(push(routes.pathToErrorPage));
-  }
-}
-
 export default function* productsSaga() {
   yield takeEvery(GET_ALL_FILTERS, handleGetAllProducts);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilteredProductsLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
-  yield takeEvery(GET_CART_ITEMS, handleCartItemsLoading);
 }

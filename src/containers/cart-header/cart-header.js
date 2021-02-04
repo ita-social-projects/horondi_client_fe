@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Badge from '@material-ui/core/Badge';
@@ -18,13 +18,17 @@ const CartHeader = ({ fromSideBar }) => {
     dispatch(getCart());
   }, [dispatch]);
 
+  const itemsCount = useMemo(
+    () =>
+      cartItems.length &&
+      cartItems.reduce((curr, prev) => curr.quantity + prev.quantity),
+    [cartItems]
+  );
+
   return (
     <Link to='/checkout'>
       <IconButton className={styles.root} aria-label='cart' tabIndex={-1}>
-        <Badge
-          badgeContent={cartItems ? cartItems.length : 0}
-          color='secondary'
-        >
+        <Badge badgeContent={itemsCount} color='secondary'>
           <ShoppingBasketIcon />
         </Badge>
       </IconButton>

@@ -21,8 +21,5 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       minWidth: 40
     }
-  },
-  input: {
-    width: 50
   }
 }));

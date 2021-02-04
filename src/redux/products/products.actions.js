@@ -23,9 +23,7 @@ import {
   SET_PRODUCT_LOADING,
   SET_PRODUCT_TO_SEND,
   CLEAR_PRODUCT_TO_SEND,
-  CHANGE_FILTER_STATUS,
-  GET_CART_ITEMS,
-  SET_CART_ITEMS
+  CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -130,13 +128,4 @@ export const clearProductToSend = () => ({
 export const changeFilterStatus = (payload) => ({
   type: CHANGE_FILTER_STATUS,
   payload
-});
-
-export const getCartItems = (itemIds) => ({
-  type: GET_CART_ITEMS,
-  payload: itemIds
-});
-export const setCartItems = (items) => ({
-  type: SET_CART_ITEMS,
-  payload: items
 });

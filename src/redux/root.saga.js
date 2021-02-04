@@ -35,6 +35,7 @@ export function* rootSaga() {
     headerLinksSaga(),
     homeLooksImagesSaga(),
     patternSaga(),
-    homePageSliderSaga()
+    homePageSliderSaga(),
+    cartSaga()
   ]);
 }

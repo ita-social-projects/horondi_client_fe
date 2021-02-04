@@ -25,12 +25,11 @@ const removeItemFromCart = (item) => ({
   payload: item
 });
 
-const setCartItemQuantity = (item, value, key) => ({
+const setCartItemQuantity = (item, value) => ({
   type: SET_CART_ITEM_QUANTITY,
   payload: {
     item,
-    value,
-    key
+    value
   }
 });
 

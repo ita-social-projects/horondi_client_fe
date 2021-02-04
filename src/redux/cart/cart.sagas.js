@@ -75,18 +75,13 @@ export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
 export function* handleSetCartItemQuantity({
   payload: {
     item: { _id, selectedSize },
-    value,
-    key
+    value
   }
 }) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((item) => {
-    if (
-      (item._id === _id && !item.selectedSize) ||
-      (item._id === _id && item.selectedSize === selectedSize)
-    ) {
-      // key will be true if user typing inside input
-      item.quantity = key ? value || 1 : item.quantity + value;
+    if (item._id === _id) {
+      item.quantity = value;
     }
     return item;
   });
@@ -114,7 +109,7 @@ function* handleUserCartOperation(handler, list, product) {
   }
 }
 
-export default function* categoriesSaga() {
+export default function* cartSaga() {
   yield takeEvery(GET_CART, handleCartLoad);
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);

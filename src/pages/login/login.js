@@ -166,7 +166,7 @@ const Login = () => {
                           <Button
                             onClick={renderProps.onClick}
                             disabled={renderProps.disabled}
-                            className={styles.googleBtn}
+                            className={styles.loginBtn}
                             fullWidth
                           >
                             <span className={styles.googleLogo} />

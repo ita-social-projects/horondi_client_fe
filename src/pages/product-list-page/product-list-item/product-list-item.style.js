@@ -6,24 +6,24 @@ export const useStyles = makeStyles(() => ({
       props.isLightTheme ? '#e3e7ea' : '#262626'
     }`,
     backgroundSize: 'cover',
-    height:'100%',
-    width:'100%',
+    height: '100%',
+    width: '100%',
     position: 'relative',
     '&:hover': {
-      boxShadow: '5px 5px 20px #c5c5c5',
+      boxShadow: '5px 5px 20px #c5c5c5'
     }
   }),
-  wrapper:{
-    height:'380px',
-    width:'100%',
+  wrapper: {
+    height: '380px',
+    width: '100%',
     cursor: 'pointer',
     '@media (max-width: 450px)': {
-      height:'320px',
+      height: '320px'
     }
   },
   name: {
     display: 'flex',
-    justifyContent:'center',
+    justifyContent: 'center',
     flexDirection: 'column',
     height: '4rem',
     width: '100%',

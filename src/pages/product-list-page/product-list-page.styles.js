@@ -6,11 +6,11 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent:'center',
+    justifyContent: 'center',
     padding: '0 2rem 1rem 2rem',
     width: '100%'
   },
-  productsWrapper:{
+  productsWrapper: {
     width: '100%'
   },
   productsDiv: {
@@ -51,14 +51,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     fontSize: '0.9em',
-    margin:'0 auto',
+    margin: '0 auto',
     display: 'none',
     '@media (max-width: 959px)': {
       display: 'block'
     }
   },
-  filterButtonBlock:{
-    padding:'15px'
+  filterButtonBlock: {
+    padding: '15px'
   },
   products: {
     display: 'flex',
@@ -66,9 +66,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   list: {
     display: 'flex',
-    flexDirection:'row'
+    flexDirection: 'row'
   },
-  filterMenu:{
+  filterMenu: {
     '@media (max-width: 959px)': {
       display: 'none'
     }
@@ -86,9 +86,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   drawerContainer: {
     overflow: 'auto',
-    display:'flex',
-    paddingTop:'20px',
-    justifyContent:'center'
+    display: 'flex',
+    paddingTop: '20px',
+    justifyContent: 'center'
   },
   hide: {
     textAlign: 'center',
@@ -101,18 +101,18 @@ export const useStyles = makeStyles((theme) => ({
       margin: '13rem auto'
     }
   },
-  defaultBlock:{
-    width:'100%',
-    height:'100%',
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'center',
+  defaultBlock: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     color: theme.palette.textColor,
     fontSize: '1.2em'
   },
-  defaultIcon:{
-    width:'100px',
-    height:'100px'
+  defaultIcon: {
+    width: '100px',
+    height: '100px'
   }
 }));

@@ -6,7 +6,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
-import { toast } from 'react-toastify';
 import { useStyles } from './product-submit.styles';
 
 import { toastSettings } from '../../../configs/index';
@@ -18,7 +17,10 @@ import {
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import { setToastSettings } from '../../../redux/toast/toast.actions';
+import {
+  setToastMessage,
+  setToastSettings
+} from '../../../redux/toast/toast.actions';
 
 import {
   PDP_BUTTONS,
@@ -30,13 +32,9 @@ import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const {
-    language,
-    productToSend,
-    product,
-    wishlistItems,
-    isLightTheme
-  } = useSelector(selectLanguageProductsUserWishlist);
+  const { language, productToSend, product, wishlistItems } = useSelector(
+    selectLanguageProductsUserWishlist
+  );
 
   const { selectedSize } = productToSend;
 
@@ -65,18 +63,14 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     } = product;
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
+      dispatch(setToastMessage(toastMessages.removedFromWishList));
       dispatch(setToastSettings(toastSettings));
-      isLightTheme
-        ? toast.dark(toastMessages.removedFromWishList)
-        : toast(toastMessages.removedFromWishList);
     } else {
       dispatch(
         addItemToWishlist({ _id, name, basePrice, images: { primary } })
       );
+      dispatch(setToastMessage(toastMessages.addedToWishList));
       dispatch(setToastSettings(toastSettings));
-      isLightTheme
-        ? toast.dark(toastMessages.addedToWishList)
-        : toast(toastMessages.addedToWishList);
     }
   };
 
@@ -88,10 +82,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
+      dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));
-      isLightTheme
-        ? toast.dark(toastMessages.addedToCard)
-        : toast(toastMessages.addedToCard);
     } else {
       setSizeIsNotSelectedError(true);
     }

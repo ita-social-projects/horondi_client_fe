@@ -16,7 +16,8 @@ import {
   setCurrentPage,
   setProduct,
   getProduct,
-  setProductLoading, changeFilterStatus
+  setProductLoading,
+  changeFilterStatus
 } from '../products.actions';
 import {
   SET_ALL_FILTER_DATA,
@@ -36,7 +37,8 @@ import {
   SET_CURRENT_PAGE,
   SET_PRODUCT,
   GET_PRODUCT,
-  SET_PRODUCT_LOADING, CHANGE_FILTER_STATUS
+  SET_PRODUCT_LOADING,
+  CHANGE_FILTER_STATUS
 } from '../products.types';
 import { productsExample } from './products.mocks';
 

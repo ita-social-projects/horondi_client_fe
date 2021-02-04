@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import GoogleLogin from 'react-google-login';
 import {
   Button,
   TextField,
@@ -12,7 +13,12 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
-import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
+import {
+  LOGIN_USER_DATA,
+  formRegExp,
+  errorMessages,
+  cookiePolicy
+} from '../../configs';
 import {
   placeholders,
   OR_TEXT,
@@ -64,21 +70,10 @@ const Login = () => {
     staySignedIn: Yup.bool()
   });
 
-  useEffect(() => {
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2.init({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
-      });
-    });
-  }, []);
-
-  const singIn = () => {
-    const googleAuth = window.gapi.auth2.getAuthInstance();
-    googleAuth.signIn().then((googleUser) => {
-      const idToken = googleUser.getAuthResponse().id_token;
-      dispatch(loginByGoogle({ idToken }));
-    });
+  const responseGoogleSuccess = (response) => {
+    dispatch(loginByGoogle({ tokenId: response.tokenId }));
   };
+  const responseGoogleFailure = (response) => response;
 
   return (
     <Formik
@@ -165,14 +160,23 @@ const Login = () => {
                           {OR_TEXT[language].value}
                         </span>
                       </div>
-                      <Button
-                        className={styles.googleBtn}
-                        onClick={singIn}
-                        fullWidth
-                      >
-                        <span className={styles.googleLogo} />
-                        Google
-                      </Button>
+                      <GoogleLogin
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        render={(renderProps) => (
+                          <Button
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className={styles.loginBtn}
+                            fullWidth
+                          >
+                            <span className={styles.googleLogo} />
+                            Google
+                          </Button>
+                        )}
+                        onSuccess={responseGoogleSuccess}
+                        onFailure={responseGoogleFailure}
+                        cookiePolicy={cookiePolicy.SINGLE_HOST_ORIGIN}
+                      />
                       <div className={styles.container}>
                         <FormControlLabel
                           control={

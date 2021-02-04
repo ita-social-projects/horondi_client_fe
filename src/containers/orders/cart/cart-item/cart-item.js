@@ -19,7 +19,6 @@ const CartItem = ({
 }) => {
   const dispatch = useDispatch();
   const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
-  // const styles = useStyles();
 
   const onChangeQuantity = (value, key) => {
     dispatch(setCartItemQuantity(item, +value, key));
@@ -30,7 +29,8 @@ const CartItem = ({
     setModalItem(item);
   };
   console.log(item);
-
+  item.selectedSize = 'M';
+  item.quantity = 1;
   return (
     item && (
       <div className={styles.root} data-cy='cart-item'>
@@ -48,17 +48,17 @@ const CartItem = ({
                 </span>
               )}
             </Link>
-            {/* {item.selectedSize && (
-            <span>
-              {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
-            </span>
-          )} */}
-            {/* {item.bagBottom.value && (
+            {item.selectedSize && (
               <span>
-                {CART_TABLE_FIELDS[language].bagBottom}:{" "}
-                {item.bagBottom.name[language].value}
+                {CART_TABLE_FIELDS[language].size}: {item.selectedSize}
               </span>
-            )} */}
+            )}
+            {item.bottomMaterial && (
+              <span>
+                {CART_TABLE_FIELDS[language].bottomMaterial}:{' '}
+                {item.bottomMaterial.material.name[language].value}
+              </span>
+            )}
             {/* {item.sidePocket && (
               <span>
                 {CART_TABLE_FIELDS[language].sidePocket}:{" "}
@@ -69,8 +69,8 @@ const CartItem = ({
         </div>
         <div>
           <NumberInput
-            // quantity={item.quantity}
-            quantity={1}
+            quantity={item.quantity}
+            // quantity={1}
             onChangeQuantity={onChangeQuantity}
           />
         </div>

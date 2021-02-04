@@ -50,16 +50,19 @@ const FilledCart = ({ items, categories }) => {
 
   const orderList =
     cart &&
-    cart.map((item, index) => (
-      <CartItem
-        key={index}
-        item={item}
-        language={language}
-        currency={currency}
-        setModalVisibility={setModalVisibility}
-        setModalItem={setModalItem}
-      />
-    ));
+    cart.map((item, index) => {
+      item.quantity = 1;
+      return (
+        <CartItem
+          key={index}
+          item={item}
+          language={language}
+          currency={currency}
+          setModalVisibility={setModalVisibility}
+          setModalItem={setModalItem}
+        />
+      );
+    });
   // const totalPrice = 0;
   const totalPrice = cart.reduce(
     (acc, item) =>

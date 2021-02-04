@@ -290,6 +290,9 @@ const getCartItems = async (itemIds) => {
             bottomMaterial {
               material {
                 _id
+                name {
+                  value
+                }
               }
               color {
                 _id

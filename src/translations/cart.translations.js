@@ -28,7 +28,7 @@ export const CART_TABLE_FIELDS = {
     quantity: 'КІЛЬКІСТЬ',
     price: 'ЦІНА',
     size: 'Розмір',
-    bagBottom: 'Дно рюкзака',
+    bottomMaterial: 'Дно рюкзака',
     sidePocket: 'Бокова кишеня',
     total: 'СУМА'
   },
@@ -37,7 +37,7 @@ export const CART_TABLE_FIELDS = {
     quantity: 'QUANTITY',
     price: 'PRICE',
     size: 'Size',
-    bagBottom: 'Bag bottom',
+    bottomMaterial: 'Bag bottom',
     sidePocket: 'Side pocket',
     total: 'TOTAL'
   }

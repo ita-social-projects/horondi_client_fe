@@ -21,7 +21,7 @@ const CartHeader = ({ fromSideBar }) => {
   const itemsCount = useMemo(
     () =>
       cartItems.length &&
-      cartItems.reduce((curr, prev) => curr.quantity + prev.quantity),
+      cartItems.reduce((acc, item) => acc + item.quantity, 0),
     [cartItems]
   );
 

@@ -35,7 +35,12 @@ export function* handleAddCartItem({ payload }) {
   let newCart;
   if (possibleItemInCart) {
     newCart = cart.map((item) => {
-      item._id === payload._id && item.quantity++;
+      item._id === payload._id &&
+        item.selectedSize._id === payload.selectedSize._id &&
+        item.sidePocket === payload.sidePocket &&
+        item.bottomMaterial.material._id ===
+          payload.bottomMaterial.material._id &&
+        item.quantity++;
       return item;
     });
   } else {
@@ -53,19 +58,27 @@ export function* handleAddCartItem({ payload }) {
   setToLocalStorage(cartKey, newCart);
 }
 
-export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
+export function* handleRemoveCartItem({
+  payload: { _id, selectedSize, sidePocket, bottomMaterial }
+}) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.filter(
     (item) =>
       item._id !== _id ||
       (item._id === _id &&
-        item.selectedSize &&
-        item.selectedSize !== selectedSize)
+        item.selectedSize._id &&
+        item.selectedSize._id !== selectedSize._id) ||
+      (item._id === _id && item.sidePocket && item.sidePocket !== sidePocket) ||
+      (item._id === _id &&
+        item.bottomMaterial.material._id &&
+        item.bottomMaterial.material._id !== bottomMaterial.material._id)
   );
 
   yield call(handleUserCartOperation, removeProductFromUserCart, cart, {
     _id,
-    selectedSize
+    selectedSize,
+    sidePocket,
+    bottomMaterial
   });
 
   setToLocalStorage(cartKey, newCart);
@@ -74,13 +87,18 @@ export function* handleRemoveCartItem({ payload: { _id, selectedSize } }) {
 
 export function* handleSetCartItemQuantity({
   payload: {
-    item: { _id, selectedSize },
+    item: { _id, selectedSize, sidePocket, bottomMaterial },
     value
   }
 }) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((item) => {
-    if (item._id === _id) {
+    if (
+      item._id === _id &&
+      item.selectedSize._id === selectedSize._id &&
+      item.sidePocket === sidePocket &&
+      item.bottomMaterial.material._id === bottomMaterial.material._id
+    ) {
       item.quantity = value;
     }
     return item;
@@ -88,7 +106,9 @@ export function* handleSetCartItemQuantity({
 
   yield call(handleUserCartOperation, changeQuantityIntoUserCart, newCart, {
     _id,
-    selectedSize
+    selectedSize,
+    bottomMaterial,
+    sidePocket
   });
 
   setToLocalStorage(cartKey, newCart);

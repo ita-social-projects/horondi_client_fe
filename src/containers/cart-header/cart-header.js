@@ -7,7 +7,6 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 import { useStyles } from './cart-header.styles';
 import { getCart } from '../../redux/cart/cart.actions';
-import { getProduct } from '../../redux/products/products.actions';
 
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ const CartHeader = ({ fromSideBar }) => {
   );
 
   return (
-    <Link to='/checkout'>
+    <Link to='/cart'>
       <IconButton className={styles.root} aria-label='cart' tabIndex={-1}>
         <Badge badgeContent={itemsCount} color='secondary'>
           <ShoppingBasketIcon />

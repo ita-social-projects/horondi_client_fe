@@ -138,7 +138,7 @@ export function* handleGoogleUserLogin({ payload }) {
 }
   `,
       {
-        idToken: payload.idToken
+        idToken: payload.tokenId
       }
     );
     const purchasedProducts = yield call(

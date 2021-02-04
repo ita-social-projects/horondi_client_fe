@@ -116,15 +116,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   loginBtn: {
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    backgroundColor: theme.palette.button.normal.backgroundColor,
-    color: theme.palette.button.normal.color,
+    border: '1px solid black',
+    borderRadius: '4px',
+    marginBottom: '10px',
     textTransform: 'capitalize',
+    backgroundColor: 'white',
+    color: 'black',
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
+      color: theme.palette.button.normal.backgroundColor
     }
   },
   loginGroup: {
@@ -172,17 +171,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#636363',
     fontSize: '0.875rem'
   },
-  googleBtn: {
-    border: '1px solid black',
-    borderRadius: '4px',
-    marginBottom: '10px',
-    textTransform: 'capitalize',
-    backgroundColor: 'white',
-    color: 'black',
-    '&:hover': {
-      color: theme.palette.button.normal.backgroundColor
-    }
-  },
+
   googleLogo: {
     background: `url(${GoogleLogo}) no-repeat `,
     backgroundSize: 'cover',

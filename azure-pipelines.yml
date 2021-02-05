@@ -11,7 +11,7 @@ pr:
   - development
 
 resources:
-  - repo: self
+- repo: self
 
 variables:
   # Agent VM image name
@@ -96,9 +96,9 @@ stages:
           appName: 'horondi-front'
           containers: 'horondi.azurecr.io/ita-social-projects/horondi_client_fe:$(Build.BuildId)'
 
-          - task: AzureWebAppContainer@1
-            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
-            inputs:
-              azureSubscription: 'Visual Studio Enterprise – MPN (734fc759-c3a2-4e22-a478-301dc5b10496)'
-              appName: 'horondi-front-staging'
-              containers: 'horondistaging.azurecr.io/ita-social-projects/horondi_client_fe:$(Build.BuildId)'
+      - task: AzureWebAppContainer@1
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/development'))
+        inputs:
+          azureSubscription: 'Visual Studio Enterprise – MPN (734fc759-c3a2-4e22-a478-301dc5b10496)'
+          appName: 'horondi-front-staging'
+          containers: 'horondistaging.azurecr.io/ita-social-projects/horondi_client_fe:$(Build.BuildId)'

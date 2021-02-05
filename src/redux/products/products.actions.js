@@ -22,7 +22,8 @@ import {
   SET_HOT_ITEM_FILTER,
   SET_PRODUCT_LOADING,
   SET_PRODUCT_TO_SEND,
-  CLEAR_PRODUCT_TO_SEND, CHANGE_FILTER_STATUS
+  CLEAR_PRODUCT_TO_SEND,
+  CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const setProduct = (item) => ({

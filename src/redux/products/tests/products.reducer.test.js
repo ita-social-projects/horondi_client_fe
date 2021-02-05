@@ -17,7 +17,8 @@ import {
   setCountPerPage,
   setModelsFilter,
   setProduct,
-  setProductLoading, changeFilterStatus
+  setProductLoading,
+  changeFilterStatus
 } from '../products.actions';
 import { productsExample } from './products.mocks';
 

@@ -27,7 +27,7 @@ export default function Register() {
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const {pathToLogin}= routes
+  const { pathToLogin } = routes;
   const handleRegister = (user) => {
     setToLocalStorage('accessToken', null);
     dispatch(registerUser({ user, language }));
@@ -90,15 +90,21 @@ export default function Register() {
           successWindow
         ) : (
           <div className={styles.registerContainer}>
-            <div className={styles.registerBackground}></div>
+            <div className={styles.registerBackground} />
             <div className={styles.formContainer}>
               <Grid
                 container
                 alignItems='center'
                 className={styles.formWrapper}
-                spacing={2}>
-                <Grid item sm={12} md={6} lg={6}  className={styles.formBackground}>
-                </Grid>
+                spacing={2}
+              >
+                <Grid
+                  item
+                  sm={12}
+                  md={6}
+                  lg={6}
+                  className={styles.formBackground}
+                />
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Form className={styles.registerForm}>
                     {loading ? (
@@ -143,8 +149,10 @@ export default function Register() {
                           <p className={styles.registerError}>
                             {registerError
                               ? REGISTER_USER_ERROR[registerError]
-                                ? REGISTER_USER_ERROR[registerError][language].value
-                                : REGISTER_USER_ERROR.DEFAULT_ERROR[language].value
+                                ? REGISTER_USER_ERROR[registerError][language]
+                                  .value
+                                : REGISTER_USER_ERROR.DEFAULT_ERROR[language]
+                                  .value
                               : null}
                           </p>
                         </div>
@@ -160,7 +168,6 @@ export default function Register() {
               </Grid>
             </div>
           </div>
-
         )
       }
     </Formik>

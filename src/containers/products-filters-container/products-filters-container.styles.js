@@ -1,19 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  container:{
-    borderBottom:'1px solid gray',
-    padding:'10px 0px'
+  container: {
+    borderBottom: '1px solid gray',
+    padding: '10px 0px'
   },
   mainItem: {
     color: theme.palette.textColor,
     textTransform: 'uppercase',
     display: 'flex',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     cursor: 'pointer',
     width: '100%',
-    position:'relative',
+    position: 'relative',
     '& span, & svg': {
       fontSize: '1.2em'
     },
@@ -21,18 +21,18 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline'
     }
   },
-  clearFilter:{
+  clearFilter: {
     cursor: 'pointer',
-    color:'gray',
+    color: 'gray',
     '&:hover': {
       textDecoration: 'underline',
-      color:'red'
+      color: 'red'
     }
   },
-  mainItemIcon:{
-    position:'absolute',
-    right:'15px',
-    top:'5px'
+  mainItemIcon: {
+    position: 'absolute',
+    right: '15px',
+    top: '5px'
   },
   nested: {
     '&:hover': {

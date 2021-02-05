@@ -63,10 +63,10 @@ const ProductsFiltersContainer = ({
                 size='small'
                 color='default'
                 checked={
-                  !!(productFilter
+                  productFilter
                     ? productFilter.find((filter) => filter === listItems) ||
                       checkCategory(listItems)
-                    : false)
+                    : false
                 }
               />
               <ListItemText primary={listItems} />

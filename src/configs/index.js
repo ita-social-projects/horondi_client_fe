@@ -426,3 +426,7 @@ export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Not
 export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';
+
+export const cookiePolicy = {
+  SINGLE_HOST_ORIGIN: 'single_host_origin'
+};

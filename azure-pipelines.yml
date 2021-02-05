@@ -102,5 +102,3 @@ stages:
           azureSubscription: 'Visual Studio Enterprise – MPN (734fc759-c3a2-4e22-a478-301dc5b10496)'
           appName: 'horondi-front-staging'
           containers: 'horondistaging.azurecr.io/ita-social-projects/horondi_client_fe:$(Build.BuildId)'
-
-        

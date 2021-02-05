@@ -16,29 +16,29 @@ const SimilarProducts = ({ currencySign }) => {
     ({ Language, Currency, Products: { products, product } }) => ({
       language: Language.language,
       similarProducts: products,
-      productId: product._id,
+      // productId: product._id,
       currency: Currency.currency
     })
   );
-  const { title } = SIMILAR_ITEMS[language];
+  // const { title } = SIMILAR_ITEMS[language];
 
-  const imagesList = similarProducts
-    .filter(({ _id }) => _id !== productId)
-    .map(({ _id, images, rate, name, basePrice }) => (
-      <SimilarProductsItem
-        currencySign={currencySign}
-        key={_id}
-        price={basePrice[currency].value}
-        name={name}
-        rate={rate}
-        imageUrl={images.primary.medium}
-        id={_id}
-      />
-    ));
+  // const imagesList = similarProducts
+  //   .filter(({ _id }) => _id !== productId)
+  //   .map(({ _id, images, rate, name, basePrice }) => (
+  //     <SimilarProductsItem
+  //       currencySign={currencySign}
+  //       key={_id}
+  //       price={basePrice[currency].value}
+  //       name={name}
+  //       rate={rate}
+  //       imageUrl={images.primary.medium}
+  //       id={_id}
+  //     />
+  //   ));
 
   return (
     <div id='similar-products'>
-      {imagesList.length ? (
+      {/* {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
             <h2 className={styles.title}>{title}</h2>
@@ -51,7 +51,8 @@ const SimilarProducts = ({ currencySign }) => {
             {imagesList}
           </Carousel>
         </div>
-      ) : null}
+      ) : null} */}
+      similar products
     </div>
   );
 };

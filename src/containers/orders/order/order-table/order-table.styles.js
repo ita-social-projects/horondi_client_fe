@@ -5,6 +5,32 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column'
   },
+  titleWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  cartActionButtons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    minHeight: 40
+  },
+  cartButton: {
+    margin: '10px 0 10px 20px',
+    background: 'none',
+    borderRadius: 5,
+    border: 'none',
+    cursor: 'pointer',
+    alignSelf: 'flex-end',
+    color: 'grey',
+    outline: 'none',
+    '&:hover': {
+      color: '#363636'
+    },
+    '&:active': {
+      color: theme.palette.textColor
+    }
+  },
   tableHeader: {
     display: 'flex',
     borderColor: '#DADADA',
@@ -15,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
       margin: '10px 0',
       textAlign: 'center',
       fontWeight: 'bold',
-      fontSize: '1.5em',
+      fontSize: '1.2em',
       '@media (max-width: 768px)': {
         fontSize: '1em'
       }
@@ -29,6 +55,10 @@ export const useStyles = makeStyles((theme) => ({
         width: 100
       }
     }
+  },
+  quantity: {
+    color: 'grey',
+    fontWeight: 'lighter'
   },
   total: {
     textAlign: 'right',

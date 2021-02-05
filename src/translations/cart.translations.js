@@ -1,44 +1,82 @@
-export const CART_TITTLES = {
+export const CART_TITLES = {
   0: {
-    empty: 'Ваша корзина порожня',
-    filled: 'Корзина'
+    empty: 'Ваш кошик порожній',
+    filled: 'Ваш кошик',
+    order: 'Ваше замовлення',
+    quantity: 'шт'
   },
   1: {
     empty: 'Your cart is empty',
-    filled: 'Cart'
+    filled: 'Your cart',
+    order: 'Your order',
+    quantity: 'pcs'
   }
 };
 
 export const CART_BUTTON_TITLES = {
   0: {
     empty: 'Обрати зараз',
-    goods: 'Продовжити вибір',
-    checkout: 'Оформити замовлення'
+    goods: 'Продовжити покупки',
+    checkout: 'Створити замовлення',
+    edit: 'Редагувати корзину',
+    editCancel: 'Припинити редагування',
+    toWishlist: 'Перемістити у вподобані товари',
+    remove: 'Видалити',
+    confirm: 'Підтвердити замовлення',
+    pay: 'Перейти до оплати'
   },
   1: {
     empty: 'Shop now',
     goods: 'Continue shopping',
-    checkout: 'Go to checkout'
+    checkout: 'Go to checkout',
+    edit: 'Edit cart',
+    editCancel: 'Cancel editing',
+    toWishlist: 'Move to wishlist',
+    remove: 'Remove',
+    confirm: 'Confirm order',
+    pay: 'Go to payment'
   }
 };
 
 export const CART_TABLE_FIELDS = {
   0: {
-    item: 'ПРОДУКТ',
-    quantity: 'КІЛЬКІСТЬ',
-    price: 'ЦІНА',
+    item: 'Назва товару',
+    quantity: 'Кількість',
+    price: 'Ціна',
     size: 'Розмір',
-    bottomMaterial: 'Дно рюкзака',
+    bottomMaterial: 'Матеріал низу',
     sidePocket: 'Бокова кишеня',
-    total: 'СУМА'
+    total: 'Підсумок',
+    toPay: 'До сплати',
+    photo: 'Фото',
+    delivery: 'Метод доставки'
   },
   1: {
-    item: 'PRODUCT',
-    quantity: 'QUANTITY',
-    price: 'PRICE',
+    item: 'Product name',
+    quantity: 'Quantity',
+    price: 'Price',
     size: 'Size',
-    bottomMaterial: 'Bag bottom',
+    bottomMaterial: 'Bottom material',
     sidePocket: 'Side pocket',
-    total: 'TOTAL'
+    total: 'Total price',
+    toPay: 'Total price to pay',
+    photo: 'Photo',
+    delivery: 'Delivery type'
+  }
+};
+export const DELIVERY_TYPE = {
+  0: {
+    novaPost: 'Нова пошта',
+    ukrPost: 'Укрпошта',
+    selfPickup: 'Самовивіз',
+    novaPostCourier: "Кур'єр нової пошти",
+    ukrPostCourier: "Кур'єр укрпошти"
+  },
+  1: {
+    novaPost: 'Nova Post',
+    ukrPost: 'Ukr Post',
+    selfPickup: 'Self pickup',
+    novaPostCourier: 'Nova Post courier',
+    ukrPostCourier: 'Ukr Post courier'
   }
 };

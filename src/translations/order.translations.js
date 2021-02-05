@@ -1,21 +1,25 @@
 export const ORDER_TABLE_FIELDS = {
   0: {
-    item: 'ПРОДУКТ',
-    quantity: 'КІЛЬКІСТЬ',
-    price: 'ЦІНА',
+    item: 'Назва товару',
+    quantity: 'Кількість',
+    price: 'Ціна',
     size: 'Розмір',
     bagBottom: 'Дно рюкзака',
     sidePocket: 'Бокова кишеня',
-    total: 'СУМА'
+    total: 'Підсумок',
+    toPay: 'До сплати',
+    photo: 'Фото'
   },
   1: {
-    item: 'PRODUCT',
-    quantity: 'QUANTITY',
-    price: 'PRICE',
+    item: 'Product name',
+    quantity: 'Quantity',
+    price: 'Price',
     size: 'Size',
     bagBottom: 'Bag bottom',
     sidePocket: 'Side pocket',
-    total: 'TOTAL'
+    total: 'Total price',
+    toPay: 'Total price to pay',
+    photo: 'Photo'
   }
 };
 

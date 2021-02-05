@@ -1,71 +1,50 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { Button } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import OrderTable from '../../order/order-table';
-import Modal from '../../../../components/modal';
-import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
-import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
-import CartItem from '../cart-item';
 import { useStyles } from './filled-cart.styles';
-import { CART_BUTTON_TITLES } from '../../../../translations/cart.translations';
-import routes from '../../../../configs/routes';
+import SimilarProducts from '../../../../pages/product-details/similar-products';
+import CreateOrder from '../../order/create-order/create-order';
 
 const FilledCart = ({ items }) => {
-  const [modalVisibility, setModalVisibility] = useState(false);
-  const [modalItem, setModalItem] = useState({});
   const styles = useStyles();
-  const dispatch = useDispatch();
-  const { pathToBackpacks, pathToCheckout } = routes;
   const { language, currency } = useSelector(({ Language, Currency }) => ({
     language: Language.language,
     currency: Currency.currency
   }));
 
-  const onModalAction = (action) => {
-    action && dispatch(removeItemFromCart(modalItem));
-    setModalVisibility(false);
-  };
+  const currencySign =
+    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
   const calcPrice = (item) =>
     (item.basePrice[currency].value +
       item.selectedSize.additionalPrice[currency].value +
       item.bottomMaterial.material.additionalPrice[currency].value) *
     item.quantity;
-  const orderList = items.map((item, index) => (
-    <CartItem
-      key={index}
-      item={item}
-      calcPrice={calcPrice}
-      language={language}
-      currency={currency}
-      setModalVisibility={setModalVisibility}
-      setModalItem={setModalItem}
-    />
-  ));
 
   const totalPrice = items.reduce((acc, item) => acc + calcPrice(item), 0);
 
   return (
     <div className={styles.root} data-cy='filled-cart'>
-      <OrderTable
-        items={orderList}
-        totalPrice={totalPrice / 100}
-        currency={currency ? 'USD' : 'UAH'}
-      />
-      {modalVisibility && (
-        <div>
-          <Modal
-            itemName={modalItem.name[language].value}
-            message={MODAL_DELETE_MESSAGES[language]}
-            isOpen={modalVisibility}
-            onAction={onModalAction}
+      <div className={styles.orderWrapper}>
+        <div className={styles.orderTable}>
+          <OrderTable
+            calcPrice={calcPrice}
+            currency={currency}
+            items={items}
             language={language}
           />
         </div>
-      )}
-      <div className={styles.btnWrapper}>
+        <div className={styles.createOrder}>
+          <CreateOrder
+            language={language}
+            totalPrice={totalPrice}
+            currency={currency}
+          />
+        </div>
+      </div>
+      {/* <div className={styles.btnWrapper}>
         <Link to={pathToBackpacks}>
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].goods}
@@ -76,8 +55,10 @@ const FilledCart = ({ items }) => {
             {CART_BUTTON_TITLES[language].checkout}
           </Button>
         </Link>
+      </div> */}
+      <div className={styles.similarProductsWrapper}>
+        <SimilarProducts currencySign={currencySign} />
       </div>
-      {/* {here will be similar product component} */}
     </div>
   );
 };

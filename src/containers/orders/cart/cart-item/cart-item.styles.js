@@ -2,20 +2,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '10px 0',
+    marginTop: 10,
     display: 'flex',
-    justifyContent: 'space-between',
     width: '100%',
     borderBottom: '1px solid #DADADA',
+    borderTop: '1px solid #DADADA',
     '& > div:not(:first-child)': {
       width: 200,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       '@media (max-width: 768px)': {
-        width: 120,
-        maxWidth: 120,
-        minWidth: 120
+        width: 100
       }
     }
   },
@@ -30,7 +28,6 @@ export const useStyles = makeStyles((theme) => ({
     flexBasis: 100,
     display: 'flex',
     justifyContent: 'center',
-    borderRadius: 50,
     '& > a': {
       background: `url('${props.image}')no-repeat center center`,
       backgroundSize: 'cover',
@@ -51,6 +48,7 @@ export const useStyles = makeStyles((theme) => ({
       color: 'inherit'
     },
     '& > span': {
+      textAlign: 'center',
       lineHeight: '30px',
       '@media (max-width: 768px)': {
         fontSize: '.8em'
@@ -61,25 +59,14 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.7em'
   },
   price: {
-    position: 'relative',
-    fontSize: 16,
-    '@media (max-width: 551px)': {
-      textAlign: 'right'
-    }
+    position: 'relative'
   },
-  trash: {
+  checkbox: {
     position: 'absolute',
     right: 10,
     cursor: 'pointer',
-    color: 'darkgrey',
-    '&:hover': {
-      color: 'grey'
-    },
-    '&:active': {
-      color: 'black'
-    },
-    '@media (max-width: 768px)': {
-      bottom: 10
+    '@media (max-width: 551px)': {
+      bottom: 20
     }
   },
   doneIcon: {

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import EmptyOrder from '../../order/empty-order';
 import {
   CART_BUTTON_TITLES,
-  CART_TITTLES
+  CART_TITLES
 } from '../../../../translations/cart.translations';
 
 const EmptyCart = () => {
@@ -11,7 +11,7 @@ const EmptyCart = () => {
 
   return (
     <EmptyOrder
-      title={CART_TITTLES[language].empty}
+      title={CART_TITLES[language].empty}
       buttonTitle={CART_BUTTON_TITLES[language].empty}
       name='empty-cart'
     />

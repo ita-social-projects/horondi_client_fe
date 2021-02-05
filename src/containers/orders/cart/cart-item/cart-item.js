@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 
+import { Checkbox } from '@material-ui/core';
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
-import { setCartItemQuantity } from '../../../../redux/cart/cart.actions';
+import {
+  setCartItemChecked,
+  setCartItemQuantity
+} from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 
 const CartItem = ({
@@ -16,15 +20,18 @@ const CartItem = ({
   setModalItem,
   language,
   currency,
-  calcPrice
+  calcPrice,
+  isCartEditing
 }) => {
   const dispatch = useDispatch();
   const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
-
+  const [checkedItem, setCheckedItem] = useState(false);
   const onChangeQuantity = (value) => {
     dispatch(setCartItemQuantity(item, +value));
   };
-
+  const onCartItemCheck = () => {
+    dispatch(setCartItemChecked(item, item?.isChecked));
+  };
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);
@@ -32,38 +39,33 @@ const CartItem = ({
 
   return (
     <div className={styles.root} data-cy='cart-item'>
-      <div className={styles.itemData}>
-        <div className={styles.image} data-cy='cart-item-img'>
-          <Link to={`/product/${item._id}`}>
-            <b />
-          </Link>
-        </div>
-        <div className={styles.description} data-cy='cart-item-description'>
-          <Link to={`/product/${item._id}`}>
-            {item && (
-              <span className={styles.itemName}>
-                {item.name[language].value}
-              </span>
-            )}
-          </Link>
-          {item.selectedSize && (
-            <span>
-              {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
-            </span>
-          )}
-          {item.bottomMaterial && (
-            <span>
-              {CART_TABLE_FIELDS[language].bottomMaterial}:{' '}
-              {item.bottomMaterial.material.name[language].value}
-            </span>
-          )}
-          {item.sidePocket && (
-            <span>
-              {CART_TABLE_FIELDS[language].sidePocket}:{' '}
-              <DoneIcon className={styles.doneIcon} />
-            </span>
-          )}
-        </div>
+      <div className={styles.image} data-cy='cart-item-img'>
+        <Link to={`/product/${item._id}`}>
+          <b />
+        </Link>
+      </div>
+      <div className={styles.description} data-cy='cart-item-description'>
+        <Link to={`/product/${item._id}`}>
+          <span className={styles.itemName}>{item.name[language].value}</span>
+        </Link>
+        {item.selectedSize && (
+          <span>
+            {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
+          </span>
+        )}
+        {item.bottomMaterial && (
+          <span>
+            {CART_TABLE_FIELDS[language].bottomMaterial}:
+            <br />
+            {item.bottomMaterial.material.name[language].value}
+          </span>
+        )}
+        {item.sidePocket && (
+          <span>
+            {CART_TABLE_FIELDS[language].sidePocket}:{' '}
+            <DoneIcon className={styles.doneIcon} />
+          </span>
+        )}
       </div>
       <div>
         <NumberInput
@@ -75,11 +77,14 @@ const CartItem = ({
         <span>
           {calcPrice(item) / 100} {item.basePrice[currency].currency}
         </span>
-        <DeleteIcon
-          className={styles.trash}
-          onClick={onRemoveItem}
-          data-cy='cart-item-remove'
-        />
+        {isCartEditing ? (
+          <Checkbox
+            className={styles.checkbox}
+            color='default'
+            checked={item.isChecked}
+            onChange={() => onCartItemCheck(item?.isChecked)}
+          />
+        ) : null}
       </div>
     </div>
   );

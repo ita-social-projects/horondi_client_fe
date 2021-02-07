@@ -61,7 +61,10 @@ export const selectConstructor = ({ Constructor }) => ({
   frontPocketImage: Constructor.constructorFrontPocket.image,
   patternImage: Constructor.constructorPattern.constructorImg,
   bottomImage: Constructor.constructorBottom.image,
-  modelLoading: Constructor.constructorModel.modelLoading
+  modelLoading: Constructor.constructorModel.modelLoading,
+  basicPrice: Constructor.constructorBasic.basePrice,
+  frontPocketPrice: Constructor.constructorFrontPocket.basePrice,
+  bottomPrice: Constructor.constructorBottom.basePrice
 });
 
 export const selectToastSettings = (state) => state.Toast.toastSettings;

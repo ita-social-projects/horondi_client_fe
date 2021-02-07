@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import mergeImages from 'merge-images';
+import { useSelector } from 'react-redux';
 import { useStyles } from './constructor.style';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 import { setModelLoading } from '../../redux/constructor/constructor-model/constructor-model.actions';
@@ -9,14 +10,21 @@ import { useConstructor } from './hooks';
 
 const map = require('lodash/map');
 
-const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
-
 const Constructor = () => {
+
   const styles = useStyles();
-  const { values, images, methods } = useConstructor();
+  const {language} = useSelector(
+    ({ Language }) => ({
+      language: Language.language
+    })
+  );
+  const { MODEL, BASIC, PATTERN, BOTTOM, BASIC_PRICE,GOBELEN_PRICE,BOTTOM_PRICE,DEFAULT_PRICE,TOTAL_PRICE,END_PRICE } = CONSTRUCTOR_TITLES[language];
+  const { values, images, prices, methods } = useConstructor();
+
   const image = useRef(null);
 
   const createImage = (frontPocket, basic, bottom, pattern) => {
+
     mergeImages([frontPocket, basic, bottom, pattern], {
       height: 3000,
       weight: 460
@@ -44,14 +52,14 @@ const Constructor = () => {
     images.basicImage,
     images.patternImage,
     images.frontPocketImage,
-    images.bottomImage
+    images.bottomImage,
   ]);
 
   const availableModels = useMemo(
     () =>
       map(values.models, (obj) => (
         <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
+          {obj.name[language].value}
         </option>
       )),
     [values.models]
@@ -61,29 +69,63 @@ const Constructor = () => {
     () =>
       map(values.basics, (obj) => (
         <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
+          {obj.name[language].value}
         </option>
       )),
-    [values.basics]
+    [values.basics,language]
   );
 
   const availablePatterns = useMemo(
     () =>
       map(values.patterns, (obj) => (
         <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
+          {obj.name[language].value}
         </option>
       )),
-    [values.patterns]
+    [values.patterns,language]
   );
   const availableBottoms = useMemo(
     () =>
       map(values.bottoms, (obj) => (
         <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
+          {obj.name[language].value}
         </option>
       )),
-    [values.bottoms]
+    [values.bottoms,language]
+  );
+
+/*   const priceTotal = useMemo(
+    () => {
+      if(prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice ){
+        return <h2>{prices.basicPrice[language].value+prices.frontPocketPrice[language].value+prices.bottomPrice[language].value}</h2>
+      }
+    }
+    ,
+    [prices.bottomPrice,prices.frontPocketPrice,prices.bottomPrice,language]
+  ); */
+  const priceBasic = useMemo(
+    () => {
+      if(prices.basicPrice)
+        return prices.basicPrice[language].value
+    }
+    ,
+    [prices.basicPrice,language]
+  );
+  const priceGobelen = useMemo(
+    () => {
+      if(prices.frontPocketPrice)
+        return <li>{GOBELEN_PRICE}{prices.frontPocketPrice[language].value}</li>
+    }
+    ,
+    [prices.frontPocketPrice,language]
+  );
+  const priceBottom = useMemo(
+    () => {
+      if(prices.bottomPrice)
+        return <li>{BOTTOM_PRICE}{prices.bottomPrice[language].value}</li>
+    }
+    ,
+    [prices.bottomPrice,language]
   );
 
   return (
@@ -144,15 +186,15 @@ const Constructor = () => {
           )}
         </div>
         <div className={styles.infoWrapper}>
-          <h2>Загальна вартість:</h2>
+
+          <h2>{TOTAL_PRICE}</h2>
           <ul>
-            <li>Ціна товару без змін: 1400</li>
-            <li>Матеріал: +100</li>
-            <li>Ліва бокова кишеня: +100</li>
-            <li>Права бокова кишеня: +100</li>
-            <li>Гобелен: +100</li>
+            <li>{DEFAULT_PRICE}</li>
+            <li>{BASIC_PRICE}{priceBasic}</li>
+            {priceGobelen}
+            {priceBottom}
           </ul>
-          <h2>Кінцева ціна: 1800</h2>
+
         </div>
       </div>
     </div>

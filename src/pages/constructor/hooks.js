@@ -20,7 +20,10 @@ export const useConstructor = () => {
     frontPocketImage,
     patternImage,
     bottomImage,
-    modelLoading
+    modelLoading,
+    basicPrice,
+    frontPocketPrice,
+    bottomPrice
   } = useSelector(selectConstructor);
 
   const models = constructorModel.modelsForConstructor;
@@ -82,6 +85,11 @@ export const useConstructor = () => {
       frontPocketImage,
       patternImage,
       bottomImage
+    },
+    prices: {
+      basicPrice,
+      frontPocketPrice,
+      bottomPrice
     },
     methods: {
       dispatch,

@@ -10,7 +10,6 @@ export const businessPagesReducer = (state = initialState, action = {}) => {
       ...state,
       linksList: action.payload
     };
-  } 
+  }
   return state;
-  
 };

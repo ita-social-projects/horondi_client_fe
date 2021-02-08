@@ -15,6 +15,7 @@ import AppFooter from '../components/app-footer';
 import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
+import Constructor from '../pages/constructor';
 
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
@@ -86,6 +87,7 @@ const Routes = () => {
               />
               <Route path='/thanks' exact component={ThanksPage} />
               <Route path='/checkout' exact component={Checkout} />
+              <Route path='/constructor' exact component={Constructor} />
               <Route
                 path='/confirmation/:token'
                 exact

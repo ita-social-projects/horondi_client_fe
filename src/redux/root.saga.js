@@ -16,17 +16,18 @@ import headerLinksSaga from './header-links/header-links.sagas';
 import homeLooksImagesSaga from './home-page-looks/home-page-looks.sagas';
 import patternSaga from './pattern/pattern.sagas';
 import homePageSliderSaga from './homepage-slider/homepage-slider.sagas';
+import { constructorSaga } from './constructor/constructor.sagas';
 import toastSaga from './toast/toast.sagas';
 
 export function* rootSaga() {
   yield all([
-    toastSaga(),
     newsSaga(),
     categoriesSaga(),
     userSaga(),
     wishlistSaga(),
     contactsSaga(),
     productsSaga(),
+    toastSaga(),
     cartSaga(),
     modelSaga(),
     commentsSaga(),
@@ -37,6 +38,7 @@ export function* rootSaga() {
     headerLinksSaga(),
     homeLooksImagesSaga(),
     patternSaga(),
-    homePageSliderSaga()
+    homePageSliderSaga(),
+    constructorSaga()
   ]);
 }

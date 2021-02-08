@@ -15,7 +15,11 @@ import {
   setRecoveryLoading,
   setUserOrders
 } from './user.actions';
-import { getUserByToken, regenerateAccessToken } from './user.operations';
+import {
+  getUserByToken,
+  regenerateAccessToken,
+  getPurchasedProducts
+} from './user.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -43,8 +47,7 @@ export const loginUser = (data) => {
   mutation login($user: LoginInput!){
   loginUser(
     loginInput: $user
-  ) {
-    purchasedProducts
+  ) {    
     orders
     token
     refreshToken
@@ -121,6 +124,7 @@ export function* handleGoogleUserLogin({ payload }) {
       getItems,
       `
     mutation($idToken:String!){googleUser(idToken:$idToken){
+      _id
       firstName,
       lastName,
       email,
@@ -134,10 +138,14 @@ export function* handleGoogleUserLogin({ payload }) {
 }
   `,
       {
-        idToken: payload.idToken
+        idToken: payload.tokenId
       }
     );
-    yield put(setUser(user.data.googleUser));
+    const purchasedProducts = yield call(
+      getPurchasedProducts,
+      user.data.googleUser._id
+    );
+    yield put(setUser({ ...user.data.googleUser, purchasedProducts }));
     yield setToLocalStorage('accessToken', user.data.googleUser.token);
     yield put(push('/profile'));
   } catch (error) {
@@ -160,8 +168,11 @@ export function* handleUserLoad({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-
-    yield put(setUser(user.data.loginUser));
+    const purchasedProducts = yield call(
+      getPurchasedProducts,
+      user.data.loginUser._id
+    );
+    yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
     yield put(setCart(user.data.loginUser.cart));
     yield put(setWishlist(user.data.loginUser.wishlist));
 
@@ -300,7 +311,8 @@ export function* handleUserPreserve() {
       setToLocalStorage('accessToken', newAccessToken);
     }
     const user = yield call(getUserByToken);
-    yield put(setUser(user));
+    const purchasedProducts = yield call(getPurchasedProducts, user._id);
+    yield put(setUser({ ...user, purchasedProducts }));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
@@ -319,8 +331,7 @@ export function* handleUpdateUser({ payload }) {
       setItems,
       `
      mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
-      updateUserById(user: $user, id: $id, upload: $upload) {
-        purchasedProducts
+      updateUserById(user: $user, id: $id, upload: $upload) { 
         orders
         _id
         email
@@ -349,7 +360,11 @@ export function* handleUpdateUser({ payload }) {
   `,
       payload
     );
-    yield put(setUser(user.data.updateUserById));
+    const purchasedProducts = yield call(
+      getPurchasedProducts,
+      user.data.updateUserById._id
+    );
+    yield put(setUser({ ...user.data.updateUserById, purchasedProducts }));
     yield put(setUserLoading(false));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));

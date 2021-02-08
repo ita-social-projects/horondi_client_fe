@@ -273,8 +273,8 @@ in 'src -> configs -> index and find a variable CHAT_FACEBOOK_DATA.
    Go to https://developers.facebook.com/apps/ and choose 'Add a New App -> Manage Business Integration'.
    Fills the forms and press 'Create App ID'. You can find your App ID at the top of page.
 
-3. After that you may go to left bar, and find 'Messenger -> Settings' and add your Facebook Business page ID in the 
-section 'Access Tokens'.
+3. After that you may go to left bar, and find 'Messenger -> Settings' and add your Facebook Business page ID in the
+   section 'Access Tokens'.
 
 4. Now go to your Facebook Business page -> Settings(Left bar) -> Advanced Messaging and find section 'Whitelisted
    Domains'. Here you must add your domain to white list and save.

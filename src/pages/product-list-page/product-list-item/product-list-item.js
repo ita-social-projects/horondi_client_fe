@@ -24,7 +24,7 @@ const ProductListItem = ({ product }) => {
   );
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
-  const {pathToProducts}= routes
+  const { pathToProducts } = routes;
   useEffect(() => {
     getImage(product.images.primary.small)
       .then((src) => setImage(src))

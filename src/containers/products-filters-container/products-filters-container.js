@@ -38,6 +38,7 @@ const ProductsFiltersContainer = ({
       return true;
     }
   };
+
   return (
     <Grid className={styles.container}>
       <li className={styles.mainItem} onClick={handleClick}>

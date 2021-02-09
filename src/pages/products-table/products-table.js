@@ -6,7 +6,7 @@ import { getModelsByCategory } from '../../redux/model/model.actions';
 import { Loader } from '../../components/loader/loader';
 import ModelItem from '../../components/model-item';
 
-const ProductsTable = ({ category }) => {
+const ProductsTable = ({ category = {} }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 

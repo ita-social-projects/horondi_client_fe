@@ -9,7 +9,8 @@ export const CONSTRUCTOR_TITLES = {
     BOTTOM_PRICE: 'Матеріал низу:',
     DEFAULT_PRICE: 'Ціна товару без змін:',
     TOTAL_PRICE: 'Загальна Вартість:',
-    END_PRICE: 'Кінцева Ціна: '
+    END_PRICE: 'Кінцева Ціна: ',
+    DEFAULT_PRICE_VALUE: '1400'
   },
   1: {
     MODEL: 'Model',
@@ -21,7 +22,8 @@ export const CONSTRUCTOR_TITLES = {
     BOTTOM_PRICE: 'Bottom material:',
     DEFAULT_PRICE: 'Default item price:',
     TOTAL_PRICE: 'Total item price',
-    END_PRICE: 'End Price'
+    END_PRICE: 'End Price',
+    DEFAULT_PRICE_VALUE: '50'
   }
 };
 

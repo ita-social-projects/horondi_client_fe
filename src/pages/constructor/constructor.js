@@ -18,7 +18,7 @@ const Constructor = () => {
       language: Language.language
     })
   );
-  const { MODEL, BASIC, PATTERN, BOTTOM, BASIC_PRICE,GOBELEN_PRICE,BOTTOM_PRICE,DEFAULT_PRICE,TOTAL_PRICE,END_PRICE } = CONSTRUCTOR_TITLES[language];
+  const { MODEL, BASIC, PATTERN, BOTTOM, BASIC_PRICE,GOBELEN_PRICE,BOTTOM_PRICE,DEFAULT_PRICE,TOTAL_PRICE,END_PRICE,DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[language];
   const { values, images, prices, methods } = useConstructor();
 
   const image = useRef(null);
@@ -198,14 +198,14 @@ const Constructor = () => {
             </div>
             <div className={styles.priceWrapper}>
               <ul style={{ listStyleType: 'none' }} >
-                <li>1400</li>
+                <li>{DEFAULT_PRICE_VALUE}</li>
                 <li>{!priceBasic ? (0) : (priceBasic) }</li>
                 <li>{!priceGobelen ? (0) : (priceGobelen)}</li>
                 <li>{!priceBottom ? (0) : (priceBottom)}</li>
               </ul>
             </div>
           </div>
-          <h2 className={styles.headerWrapper}>{END_PRICE}{!priceTotal ? (1400) : (priceTotal) }</h2>
+          <h2 className={styles.headerWrapper}>{END_PRICE}{!priceTotal ? (DEFAULT_PRICE_VALUE) : (priceTotal) }</h2>
         </div>
 
       </div>

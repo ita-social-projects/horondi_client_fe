@@ -37,6 +37,23 @@ export const useStyles = makeStyles(() => ({
     maxWidth: '100%'
   },
   infoWrapper: {
+    display: 'flex',
+  },
+  pricesInfoWrapper: {
     width: '25%'
+  },
+  headerWrapper: {
+    marginLeft: '5%'
+  },
+  textWrapper: {
+    fontSize: '17px',
+    marginBottom: '12px'
+  },
+  priceWrapper: {
+    fontSize: '17px',
+    listStyleType: 'none' 
+  },
+  li: {
+    marginTop: '25px'
   }
 }));

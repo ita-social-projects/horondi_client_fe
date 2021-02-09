@@ -94,15 +94,15 @@ const Constructor = () => {
     [values.bottoms,language]
   );
 
-/*   const priceTotal = useMemo(
+  const priceTotal = useMemo(
     () => {
       if(prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice ){
-        return <h2>{prices.basicPrice[language].value+prices.frontPocketPrice[language].value+prices.bottomPrice[language].value}</h2>
+        return prices.basicPrice[language].value+prices.frontPocketPrice[language].value+prices.bottomPrice[language].value
       }
     }
     ,
     [prices.bottomPrice,prices.frontPocketPrice,prices.bottomPrice,language]
-  ); */
+  ); 
   const priceBasic = useMemo(
     () => {
       if(prices.basicPrice)
@@ -114,7 +114,7 @@ const Constructor = () => {
   const priceGobelen = useMemo(
     () => {
       if(prices.frontPocketPrice)
-        return <li>{GOBELEN_PRICE}{prices.frontPocketPrice[language].value}</li>
+        return prices.frontPocketPrice[language].value
     }
     ,
     [prices.frontPocketPrice,language]
@@ -122,7 +122,7 @@ const Constructor = () => {
   const priceBottom = useMemo(
     () => {
       if(prices.bottomPrice)
-        return <li>{BOTTOM_PRICE}{prices.bottomPrice[language].value}</li>
+        return prices.bottomPrice[language].value
     }
     ,
     [prices.bottomPrice,language]
@@ -185,17 +185,29 @@ const Constructor = () => {
             />
           )}
         </div>
-        <div className={styles.infoWrapper}>
-
-          <h2>{TOTAL_PRICE}</h2>
-          <ul>
-            <li>{DEFAULT_PRICE}</li>
-            <li>{BASIC_PRICE}{priceBasic}</li>
-            {priceGobelen}
-            {priceBottom}
-          </ul>
-
+        <div className={styles.pricesInfoWrapper}>
+          <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>
+          <div className={styles.infoWrapper}>
+            <div className={styles.textWrapper}>
+              <ul>
+                <li>{DEFAULT_PRICE}</li>
+                <li>{BASIC_PRICE}</li>
+                <li>{GOBELEN_PRICE}</li>
+                <li>{BOTTOM_PRICE}</li>
+              </ul>
+            </div>
+            <div className={styles.priceWrapper}>
+              <ul style={{ listStyleType: 'none' }} >
+                <li>1400</li>
+                <li>{!priceBasic ? (0) : (priceBasic) }</li>
+                <li>{!priceGobelen ? (0) : (priceGobelen)}</li>
+                <li>{!priceBottom ? (0) : (priceBottom)}</li>
+              </ul>
+            </div>
+          </div>
+          <h2 className={styles.headerWrapper}>{END_PRICE}{!priceTotal ? (1400) : (priceTotal) }</h2>
         </div>
+
       </div>
     </div>
   );

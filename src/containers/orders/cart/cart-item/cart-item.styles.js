@@ -2,9 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '10px 0',
+    marginTop: 10,
     display: 'flex',
     width: '100%',
+    borderBottom: '1px solid #DADADA',
+    borderTop: '1px solid #DADADA',
     '& > div:not(:first-child)': {
       width: 200,
       display: 'flex',
@@ -46,6 +48,7 @@ export const useStyles = makeStyles((theme) => ({
       color: 'inherit'
     },
     '& > span': {
+      textAlign: 'center',
       lineHeight: '30px',
       '@media (max-width: 768px)': {
         fontSize: '.8em'
@@ -58,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
   price: {
     position: 'relative'
   },
-  trash: {
+  checkbox: {
     position: 'absolute',
     right: 10,
     cursor: 'pointer',

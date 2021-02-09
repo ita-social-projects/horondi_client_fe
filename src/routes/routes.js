@@ -33,7 +33,7 @@ const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
 const Contacts = lazy(() => import('../pages/contacts'));
-const Checkout = lazy(() => import('../containers/checkout'));
+const Cart = lazy(() => import('../pages/cart'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
 const Materials = lazy(() => import('../pages/materials'));
@@ -86,7 +86,7 @@ const Routes = () => {
                 redirectTo='/'
               />
               <Route path='/thanks' exact component={ThanksPage} />
-              <Route path='/checkout' exact component={Checkout} />
+              <Route path='/cart' exact component={Cart} />
               <Route path='/constructor' exact component={Constructor} />
               <Route
                 path='/confirmation/:token'

@@ -3,7 +3,8 @@ import {
   GET_CART,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
-  SET_CART_ITEM_QUANTITY
+  SET_CART_ITEM_QUANTITY,
+  SET_CART_ITEM_CHECKED
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -25,12 +26,18 @@ const removeItemFromCart = (item) => ({
   payload: item
 });
 
-const setCartItemQuantity = (item, value, key) => ({
+const setCartItemQuantity = (item, value) => ({
   type: SET_CART_ITEM_QUANTITY,
   payload: {
     item,
-    value,
-    key
+    value
+  }
+});
+const setCartItemChecked = (item, isChecked) => ({
+  type: SET_CART_ITEM_CHECKED,
+  payload: {
+    item,
+    isChecked
   }
 });
 
@@ -39,5 +46,6 @@ export {
   getCart,
   addItemToCart,
   removeItemFromCart,
-  setCartItemQuantity
+  setCartItemQuantity,
+  setCartItemChecked
 };

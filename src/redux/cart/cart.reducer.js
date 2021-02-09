@@ -1,4 +1,4 @@
-import { SET_CART } from './cart.types';
+import { SET_CART, SET_CART_ITEM_CHECKED } from './cart.types';
 
 const initialState = {
   list: []

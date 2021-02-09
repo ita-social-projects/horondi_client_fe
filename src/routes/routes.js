@@ -34,6 +34,7 @@ const ErrorPage = lazy(() => import('../pages/error-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
 const Contacts = lazy(() => import('../pages/contacts'));
 const Cart = lazy(() => import('../pages/cart'));
+const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
 const Materials = lazy(() => import('../pages/materials'));
@@ -87,6 +88,7 @@ const Routes = () => {
               />
               <Route path='/thanks' exact component={ThanksPage} />
               <Route path='/cart' exact component={Cart} />
+              <Route path='/hello' exact component={Checkout} />
               <Route path='/constructor' exact component={Constructor} />
               <Route
                 path='/confirmation/:token'

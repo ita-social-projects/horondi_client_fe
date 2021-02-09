@@ -10,6 +10,7 @@
 # production
 /build
 # misc
+.README.md
 .DS_Store
 .env
 .env.local

@@ -4,7 +4,7 @@ import { setCategories, setCategoriesLoading } from './categories.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_CATEGORIES } from './categories.types';
-import query from './categories.operations';
+import { query } from './categories.operations';
 
 export function* handleCategoriesLoad() {
   yield put(setCategoriesLoading(true));

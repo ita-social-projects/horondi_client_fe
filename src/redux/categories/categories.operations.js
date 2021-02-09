@@ -1,4 +1,4 @@
-const query = `
+export const query = `
 					query {
 						getAllCategories {
 							items {
@@ -17,5 +17,3 @@ const query = `
 						}
 					}
 				`;
-
-export default query;

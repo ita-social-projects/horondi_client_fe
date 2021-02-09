@@ -16,6 +16,7 @@ import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 import Constructor from '../pages/constructor';
+import Checkout from '../containers/checkout/checkout';
 
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
@@ -34,7 +35,7 @@ const ErrorPage = lazy(() => import('../pages/error-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
 const Contacts = lazy(() => import('../pages/contacts'));
 const Cart = lazy(() => import('../pages/cart'));
-const Checkout = lazy(() => import('../containers/checkout'));
+// const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
 const Materials = lazy(() => import('../pages/materials'));

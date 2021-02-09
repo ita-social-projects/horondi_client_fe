@@ -430,3 +430,5 @@ export const DEFAULT_SIZE = 'M';
 export const cookiePolicy = {
   SINGLE_HOST_ORIGIN: 'single_host_origin'
 };
+
+export const cartKey = 'cart';

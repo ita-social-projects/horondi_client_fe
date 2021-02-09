@@ -30,21 +30,5 @@ export const useStyles = makeStyles((theme) => ({
         transform: 'scale(1.1)'
       }
     }
-  },
-  btnWrapper: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    flexWrap: 'wrap'
-  },
-  btnCreateOrder: {
-    margin: '0 0 20px 20px',
-    background: theme.palette.button.normal.backgroundColor,
-    borderRadius: '5px',
-    fontSize: '1.5em',
-    color: theme.palette.button.normal.color,
-    '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
-    }
   }
 }));

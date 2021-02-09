@@ -9,10 +9,13 @@ import CreateOrder from '../../order/create-order/create-order';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
-    language: Language.language,
-    currency: Currency.currency
-  }));
+  const { language, currency, cart } = useSelector(
+    ({ Language, Currency, Cart }) => ({
+      language: Language.language,
+      currency: Currency.currency,
+      cart: Cart
+    })
+  );
 
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
@@ -44,18 +47,6 @@ const FilledCart = ({ items }) => {
           />
         </div>
       </div>
-      {/* <div className={styles.btnWrapper}>
-        <Link to={pathToBackpacks}>
-          <Button className={styles.btnCreateOrder}>
-            {CART_BUTTON_TITLES[language].goods}
-          </Button>
-        </Link>
-        <Link to={pathToCheckout}>
-          <Button className={styles.btnCreateOrder}>
-            {CART_BUTTON_TITLES[language].checkout}
-          </Button>
-        </Link>
-      </div> */}
       <div className={styles.similarProductsWrapper}>
         <SimilarProducts currencySign={currencySign} />
       </div>

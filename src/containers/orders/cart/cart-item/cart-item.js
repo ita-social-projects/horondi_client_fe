@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -30,12 +30,16 @@ const CartItem = ({
     dispatch(setCartItemQuantity(item, +value));
   };
   const onCartItemCheck = () => {
-    dispatch(setCartItemChecked(item, item?.isChecked));
+    setCheckedItem(!checkedItem);
+    dispatch(setCartItemChecked(item, checkedItem));
   };
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);
   };
+  useEffect(() => {
+    dispatch(setCartItemChecked(item, true));
+  }, []);
 
   return (
     <div className={styles.root} data-cy='cart-item'>
@@ -81,8 +85,8 @@ const CartItem = ({
           <Checkbox
             className={styles.checkbox}
             color='default'
-            checked={item.isChecked}
-            onChange={() => onCartItemCheck(item?.isChecked)}
+            checked={checkedItem}
+            onChange={() => onCartItemCheck(checkedItem)}
           />
         ) : null}
       </div>

@@ -59,15 +59,14 @@ const OrderTable = ({ items, currency, calcPrice }) => {
             ({items.length} {CART_TITLES[language].quantity})
           </span>
         </h2>
-        <button
-          type='button'
+        <span
           className={styles.cartButton}
           onClick={() => setCartEditing(!isCartEditing)}
         >
           {isCartEditing
             ? CART_BUTTON_TITLES[language].editCancel
             : CART_BUTTON_TITLES[language].edit}
-        </button>
+        </span>
       </div>
       <div className={styles.table}>
         <div className={styles.tableHeader}>
@@ -81,12 +80,12 @@ const OrderTable = ({ items, currency, calcPrice }) => {
       <div className={styles.cartActionButtons}>
         {isCartEditing ? (
           <>
-            <button className={styles.cartButton} type='button'>
+            <div className={styles.cartButton} type='button'>
               {CART_BUTTON_TITLES[language].toWishlist}
-            </button>
-            <button className={styles.cartButton} type='button'>
+            </div>
+            <div className={styles.cartButton} type='button'>
               {CART_BUTTON_TITLES[language].remove}
-            </button>
+            </div>
           </>
         ) : null}
       </div>

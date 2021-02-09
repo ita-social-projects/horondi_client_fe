@@ -33,13 +33,13 @@ const setCartItemQuantity = (item, value) => ({
     value
   }
 });
-const setCartItemChecked = (item, isChecked) => {
-  console.log(item, isChecked);
-  return {
-    type: SET_CART_ITEM_CHECKED,
-    payload: item
-  };
-};
+const setCartItemChecked = (item, isChecked) => ({
+  type: SET_CART_ITEM_CHECKED,
+  payload: {
+    item,
+    isChecked
+  }
+});
 
 export {
   setCart,

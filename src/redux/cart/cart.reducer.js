@@ -5,27 +5,10 @@ const initialState = {
 };
 
 export const cartReducer = (state = initialState, { type, payload } = {}) => {
-  // if (type === SET_CART) {
-  //   return {
-  //     list: payload
-  //   };
-  // }
-
-  switch (type) {
-  case SET_CART: {
+  if (type === SET_CART) {
     return {
       list: payload
     };
   }
-  case SET_CART_ITEM_CHECKED: {
-    return {
-      list: {
-        ...payload,
-        isChecked: !payload.isChecked
-      }
-    };
-  }
-  default:
-    return state;
-  }
+  return state;
 };

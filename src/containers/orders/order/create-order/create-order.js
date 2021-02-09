@@ -63,15 +63,15 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
         </span>
       </div>
       <div className={styles.btnWrapper}>
-        <Link to={pathToBackpacks}>
-          <Button className={styles.btnCreateOrder}>
-            {CART_BUTTON_TITLES[language].goods}
-          </Button>
-        </Link>
         <Link to={pathToCheckout}>
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].checkout}
           </Button>
+        </Link>
+        <Link to={pathToBackpacks}>
+          <span className={styles.btnCatalogue}>
+            {CART_BUTTON_TITLES[language].goods}
+          </span>
         </Link>
       </div>
     </div>

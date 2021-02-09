@@ -5,7 +5,8 @@ import {
   GET_CART,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
-  SET_CART_ITEM_QUANTITY
+  SET_CART_ITEM_QUANTITY,
+  SET_CART_ITEM_CHECKED
 } from './cart.types';
 import {
   getFromLocalStorage,
@@ -16,8 +17,7 @@ import {
   changeQuantityIntoUserCart,
   removeProductFromUserCart
 } from '../user/user.operations';
-
-const cartKey = 'cart';
+import { cartKey } from '../../configs/index';
 
 export function* handleCartLoad() {
   const cart = getFromLocalStorage(cartKey);
@@ -115,6 +115,28 @@ export function* handleSetCartItemQuantity({
   yield put(setCart(newCart));
 }
 
+export function* handleSetCartItemChecked({
+  payload: {
+    item: { _id, selectedSize, sidePocket, bottomMaterial },
+    isChecked
+  }
+}) {
+  const cart = getFromLocalStorage(cartKey);
+  const newCart = cart.map((item) => {
+    if (
+      item._id === _id &&
+      item.selectedSize._id === selectedSize._id &&
+      item.sidePocket === sidePocket &&
+      item.bottomMaterial.material._id === bottomMaterial.material._id
+    ) {
+      item.isChecked = !isChecked;
+    }
+    return item;
+  });
+  setToLocalStorage(cartKey, newCart);
+  yield put(setCart(newCart));
+}
+
 function* handleUserCartOperation(handler, list, product) {
   const userData = yield select(({ User }) => User.userData);
   if (userData) {
@@ -134,4 +156,5 @@ export default function* cartSaga() {
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
   yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
+  yield takeEvery(SET_CART_ITEM_CHECKED, handleSetCartItemChecked);
 }

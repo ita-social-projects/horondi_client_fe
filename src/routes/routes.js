@@ -141,6 +141,7 @@ const Routes = () => {
                       categoryFound.name[1].value.toLowerCase() ===
                       category.toLowerCase()
                   );
+
                   return (
                     <ProductListPage category={categoryParam} model={model} />
                   );

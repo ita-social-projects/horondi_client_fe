@@ -51,7 +51,7 @@ const ProductListPage = ({ category, model, width }) => {
     filterMenuStatus: Theme.filterMenuStatus,
     loading: Products.loading,
     language: Language.language,
-    products: Products.products,
+    products: Products.filterData,
     pagesCount: Products.pagesCount,
     sortByRate: Products.sortByRate,
     sortByPrice: Products.sortByPrice,
@@ -63,7 +63,6 @@ const ProductListPage = ({ category, model, width }) => {
     currency: Currency.currency,
     filterStatus: Products.filterStatus
   }));
-
   const { categoryFilter } = filters;
 
   useEffect(() => {
@@ -125,65 +124,67 @@ const ProductListPage = ({ category, model, width }) => {
   ));
 
   return (
-    <div className={styles.root}>
-      <Typography className={styles.paginationDiv} variant='h3'>
-        {categoryText}
-      </Typography>
-      <div className={styles.sortDiv}>
-        <ProductSort />
-      </div>
-      <div className={styles.filterButtonBlock}>
-        <Button
-          className={styles.button}
-          variant='contained'
-          onClick={handleFilterShow}
-        >
-          {SHOW_FILTER_BUTTON_TEXT[language].value}
-        </Button>
-      </div>
-      <div className={styles.list}>
-        <Drawer
-          id='menuDrawer'
-          className={styles.drawer}
-          variant={drawerVariant}
-          open={filterMenuStatus}
-          onClose={handleDrawerToggle}
-          classes={{
-            paper: styles.drawerPaper
-          }}
-        >
-          <div className={styles.drawerContainer}>
+    products && (
+      <div className={styles.root}>
+        <Typography className={styles.paginationDiv} variant='h3'>
+          {categoryText}
+        </Typography>
+        <div className={styles.sortDiv}>
+          <ProductSort />
+        </div>
+        <div className={styles.filterButtonBlock}>
+          <Button
+            className={styles.button}
+            variant='contained'
+            onClick={handleFilterShow}
+          >
+            {SHOW_FILTER_BUTTON_TEXT[language].value}
+          </Button>
+        </div>
+        <div className={styles.list}>
+          <Drawer
+            id='menuDrawer'
+            className={styles.drawer}
+            variant={drawerVariant}
+            open={filterMenuStatus}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: styles.drawerPaper
+            }}
+          >
+            <div className={styles.drawerContainer}>
+              <ProductFilter selectedCategory={category} />
+            </div>
+          </Drawer>
+          <div className={styles.filterMenu}>
             <ProductFilter selectedCategory={category} />
           </div>
-        </Drawer>
-        <div className={styles.filterMenu}>
-          <ProductFilter selectedCategory={category} />
+          {products.length ? (
+            <div className={styles.productsWrapper}>
+              <Grid container spacing={3} className={styles.productsDiv}>
+                {itemsToShow}
+              </Grid>
+              <div className={styles.paginationDiv}>
+                <Pagination
+                  count={pagesCount}
+                  variant='outlined'
+                  shape='rounded'
+                  page={currentPage + 1}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className={styles.defaultBlock}>
+              <div>{PRODUCT_NOT_FOUND[language].value}</div>
+              <div>
+                <MoodBadIcon className={styles.defaultIcon} />
+              </div>
+            </div>
+          )}
         </div>
-        {products.length ? (
-          <div className={styles.productsWrapper}>
-            <Grid container spacing={3} className={styles.productsDiv}>
-              {itemsToShow}
-            </Grid>
-            <div className={styles.paginationDiv}>
-              <Pagination
-                count={pagesCount}
-                variant='outlined'
-                shape='rounded'
-                page={currentPage + 1}
-                onChange={changeHandler}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className={styles.defaultBlock}>
-            <div>{PRODUCT_NOT_FOUND[language].value}</div>
-            <div>
-              <MoodBadIcon className={styles.defaultIcon} />
-            </div>
-          </div>
-        )}
       </div>
-    </div>
+    )
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListItemText, Checkbox } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -7,7 +7,8 @@ import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import { useStyles } from './products-filters-container.styles';
 import { CLEAR_FILTER_BUTTON_TEXT } from '../../translations/product-list.translations';
 
@@ -17,19 +18,33 @@ const ProductsFiltersContainer = ({
   categories,
   filterHandler,
   clearFilter,
-  filterName
+  filterName,
+  filterAction,
+  labels
 }) => {
   const styles = useStyles();
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
+  const dispatch = useDispatch();
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
   const [isListOpen, setIsListOpen] = useState(true);
+
+  useEffect(() => {
+    if (searchParams.get(labels)) {
+      const query = searchParams.get(labels).split(',');
+      dispatch(filterAction(query));
+    } else {
+      dispatch(filterAction([]));
+    }
+  }, [dispatch, searchParams.toString()]);
   const handleClick = () => {
     setIsListOpen(!isListOpen);
   };
   const checkCategory = (category) => {
     const categoryName = categories.filter(
-      (element) => element.name[0].value === category
+      (element) => element.name[language].value === category
     );
     if (
       categoryName.length &&
@@ -38,7 +53,6 @@ const ProductsFiltersContainer = ({
       return true;
     }
   };
-
   return (
     <Grid className={styles.container}>
       <li className={styles.mainItem} onClick={handleClick}>

@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import { useHistory, useLocation } from 'react-router';
 import PriceFilter from './price-filter';
 import HotItemFilter from './hot-item-filter';
 
@@ -12,11 +13,7 @@ import {
   setColorsFilter,
   setPatternsFilter,
   setCategoryFilter,
-  setPriceFilter,
-  setSearchFilter,
-  setHotItemFilter,
-  setModelsFilter,
-  changeFilterStatus
+  setModelsFilter
 } from '../../../redux/products/products.actions';
 
 import {
@@ -32,16 +29,13 @@ import ProductsFiltersContainer from '../../../containers/products-filters-conta
 const ProductListFilter = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
-
-  const { filterStatus, filterData, filters, language, currency } = useSelector(
-    ({ Products, Language, Currency }) => ({
-      filterData: Products.filterData,
-      filters: Products.filters,
-      language: Language.language,
-      currency: Currency.currency,
-      filterStatus: Products.filterStatus
-    })
-  );
+  const history = useHistory();
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const { filters, language } = useSelector(({ Products, Language }) => ({
+    filters: Products.filters,
+    language: Language.language
+  }));
   const {
     categoryFilter,
     colorsFilter,
@@ -57,34 +51,44 @@ const ProductListFilter = () => {
     modelNames
   } = useProductSpecies();
 
-  const handleFilterChange = (
-    { target },
-    setFilter,
-    filter,
-    categoriesList
-  ) => {
+  const handleFilterChange = ({ target }, queryName, categoriesList) => {
+    let query = searchParams.get(queryName);
     if (categoriesList) {
       const categoryId = categoriesList.filter(
-        (element) => element.name[0].value === target.name
+        (element) => element.name[language].value === target.name
       )[0]._id;
-      if (!target.checked) {
-        dispatch(
-          setFilter(filter.filter((category) => category !== categoryId))
-        );
+      if (query) {
+        if (!target.checked) {
+          query = query.replace(categoryId, '');
+        } else {
+          query = query.concat(',', categoryId);
+        }
       } else {
-        dispatch(setFilter([...new Set([...filter, categoryId])]));
+        query = categoryId;
       }
-    } else if (!target.checked) {
-      dispatch(setFilter(filter.filter((name) => name !== target.name)));
+    } else if (query) {
+      if (!target.checked) {
+        query = query.replace(target.name, '');
+      } else {
+        query = query.concat(',', target.name);
+      }
     } else {
-      dispatch(setFilter([...new Set([...filter, target.name])]));
+      query = target.name;
     }
-    dispatch(changeFilterStatus(!filterStatus));
+    if (query) {
+      searchParams.set(queryName, query);
+    } else {
+      searchParams.delete(queryName);
+    }
+    searchParams.set('page', 1);
+    history.push(`?${searchParams.toString()}`);
   };
 
-  const handleFilterClear = (setFilter) => {
+  const handleFilterClear = (setFilter, queryName) => {
+    searchParams.set('page', 1);
     dispatch(setFilter([]));
-    dispatch(changeFilterStatus(!filterStatus));
+    searchParams.delete(queryName);
+    history.push(`?${searchParams.toString()}`);
   };
   const filtersOptions = {
     categories: {
@@ -92,49 +96,44 @@ const ProductListFilter = () => {
       productFilter: categoryFilter,
       list: categoriesNames,
       categories,
-      clearFilter: () => handleFilterClear(setCategoryFilter),
-      filterHandler: (e) =>
-        handleFilterChange(e, setCategoryFilter, categoryFilter, categories)
+      filterAction: setCategoryFilter,
+      labels: 'categoryFilter',
+      clearFilter: () => handleFilterClear(setCategoryFilter, 'categoryFilter'),
+      filterHandler: (e) => handleFilterChange(e, 'categoryFilter', categories)
     },
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
       list: modelNames,
-      clearFilter: () => handleFilterClear(setModelsFilter),
-      filterHandler: (e) => handleFilterChange(e, setModelsFilter, modelsFilter)
+      filterAction: setModelsFilter,
+      labels: 'modelsFilter',
+      clearFilter: () => handleFilterClear(setModelsFilter, 'modelsFilter'),
+      filterHandler: (e) => handleFilterChange(e, 'modelsFilter')
     },
     colors: {
       filterName: COLORS_TEXT[language].value,
       productFilter: colorsFilter,
       list: colorsNames,
-      clearFilter: () => handleFilterClear(setColorsFilter),
-      filterHandler: (e) => handleFilterChange(e, setColorsFilter, colorsFilter)
+      filterAction: setColorsFilter,
+      labels: 'colorsFilter',
+      clearFilter: () => handleFilterClear(setColorsFilter, 'colorsFilter'),
+      filterHandler: (e) => handleFilterChange(e, 'colorsFilter')
     },
     patterns: {
       filterName: PATTERN_TEXT[language].value,
       productFilter: patternsFilter,
       list: patternsNames,
-      clearFilter: () => handleFilterClear(setPatternsFilter),
-      filterHandler: (e) =>
-        handleFilterChange(e, setPatternsFilter, patternsFilter)
+      filterAction: setPatternsFilter,
+      labels: 'patternsFilter',
+      clearFilter: () => handleFilterClear(setPatternsFilter, 'patternsFilter'),
+      filterHandler: (e) => handleFilterChange(e, 'patternsFilter')
     }
   };
   const handleClearFilter = () => {
-    dispatch(setColorsFilter([]));
-    dispatch(setPatternsFilter([]));
-    dispatch(setCategoryFilter([]));
-    dispatch(setSearchFilter(''));
-    dispatch(setHotItemFilter(false));
-    dispatch(setModelsFilter([]));
-    dispatch(
-      setPriceFilter([
-        Math.min(
-          ...filterData.map((product) => product.basePrice[currency].value)
-        ),
-        Math.max(
-          ...filterData.map((product) => product.basePrice[currency].value)
-        )
-      ])
+    const sortQuery = searchParams.get('sort');
+    const quantityPerPage = searchParams.get('countPerPage');
+    history.push(
+      `/products/?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`
     );
     dispatch(getFiltredProducts({}));
   };
@@ -146,6 +145,7 @@ const ProductListFilter = () => {
       productFilter,
       list,
       labels,
+      filterAction,
       filterHandler,
       clearFilter
     }) => (
@@ -155,6 +155,7 @@ const ProductListFilter = () => {
         productFilter={productFilter}
         list={list}
         labels={labels}
+        filterAction={filterAction}
         filterHandler={filterHandler}
         clearFilter={clearFilter}
         categories={categories}
@@ -165,7 +166,7 @@ const ProductListFilter = () => {
     <div>
       <Grid
         container
-        alignItems='center'
+        alignItems='space-around'
         direction='column'
         className={styles.wrapper}
         spacing={2}
@@ -178,13 +179,8 @@ const ProductListFilter = () => {
         >
           {CLEAR_FILTER_BUTTON_TEXT[language].value}
         </Button>
-        <PriceFilter
-          filterData={filterData}
-          filters={filters}
-          language={language}
-          currency={currency}
-        />
-        <HotItemFilter filters={filters} language={language} />
+        <PriceFilter />
+        <HotItemFilter language={language} />
         {filterButtons}
       </Grid>
     </div>

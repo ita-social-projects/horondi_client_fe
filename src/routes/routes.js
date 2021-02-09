@@ -1,13 +1,13 @@
 import React, { Suspense, lazy } from 'react';
-
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
-import Toast from '../containers/toast';
+import { useLocation } from 'react-router';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
+import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
 import Home from '../pages/home';
 import AppHeader from '../components/app-header';
@@ -15,7 +15,6 @@ import AppFooter from '../components/app-footer';
 import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
-import Constructor from '../pages/constructor';
 
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
@@ -51,11 +50,10 @@ const Routes = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <Suspense fallback={<div />}>
+      <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <AppHeader />
           <div className={styles.root}>
-            <Toast />
             <Switch>
               <Route path='/' exact component={Home} />
               <Route path='/error-page' exact component={ErrorPage} />
@@ -87,7 +85,6 @@ const Routes = () => {
               />
               <Route path='/thanks' exact component={ThanksPage} />
               <Route path='/checkout' exact component={Checkout} />
-              <Route path='/constructor' exact component={Constructor} />
               <Route
                 path='/confirmation/:token'
                 exact
@@ -117,36 +114,21 @@ const Routes = () => {
                 exact
                 redirectTo='/login'
               />
-              <Route
-                path='/:category'
-                exact
-                render={({ match }) => {
-                  const { category } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                      category.toLowerCase()
-                  );
-                  return <ProductsTable category={categoryParam} />;
-                }}
-              />
+              {/* <Route */}
+              {/*  path='/:category' */}
+              {/*  exact */}
+              {/*  render={({ match }) => { */}
+              {/*    const { category } = match.params; */}
+              {/*    const categoryParam = categories.find( */}
+              {/*      (categoryFound) => */}
+              {/*        categoryFound.name[1].value.toLowerCase() === */}
+              {/*        category.toLowerCase() */}
+              {/*    ); */}
+              {/*    return <ProductsTable category={categoryParam} />; */}
+              {/*  }} */}
+              {/* /> */}
               <Route path='/product/:id' exact component={ProductDetails} />
-              <Route
-                path='/:category/:model'
-                exact
-                render={({ match }) => {
-                  const { category, model } = match.params;
-                  const categoryParam = categories.find(
-                    (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                      category.toLowerCase()
-                  );
-
-                  return (
-                    <ProductListPage category={categoryParam} model={model} />
-                  );
-                }}
-              />
+              <Route path='/products' exact component={ProductListPage} />
             </Switch>
           </div>
           <AppFooter />

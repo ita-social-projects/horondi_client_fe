@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
+import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -28,10 +29,15 @@ import {
 } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
+import { URL_QUERIES_NAME } from '../../configs/index';
 
-const ProductListPage = ({ category, model, width }) => {
+const ProductListPage = ({ model, width }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
+  const history = useHistory();
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const url = searchParams.toString();
   const {
     filterMenuStatus,
     loading,
@@ -45,13 +51,12 @@ const ProductListPage = ({ category, model, width }) => {
     filters,
     filterData,
     sortByPopularity,
-    currency,
     filterStatus
-  } = useSelector(({ Theme, Language, Products, Currency }) => ({
+  } = useSelector(({ Theme, Language, Products }) => ({
     filterMenuStatus: Theme.filterMenuStatus,
     loading: Products.loading,
     language: Language.language,
-    products: Products.filterData,
+    products: Products.products,
     pagesCount: Products.pagesCount,
     sortByRate: Products.sortByRate,
     sortByPrice: Products.sortByPrice,
@@ -60,30 +65,23 @@ const ProductListPage = ({ category, model, width }) => {
     sortByPopularity: Products.sortByPopularity,
     countPerPage: Products.countPerPage,
     currentPage: Products.currentPage,
-    currency: Currency.currency,
     filterStatus: Products.filterStatus
   }));
-  const { categoryFilter } = filters;
+
+  const {
+    modelsFilter,
+    categoryFilter,
+    colorsFilter,
+    patternsFilter,
+    isHotItemFilter
+  } = filters;
 
   useEffect(() => {
     dispatch(getAllFilters());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(setCategoryFilter([category._id]));
-    dispatch(
-      setPriceFilter([
-        Math.min(
-          ...filterData.map((product) => product.basePrice[currency].value)
-        ),
-        Math.max(
-          ...filterData.map((product) => product.basePrice[currency].value)
-        )
-      ])
-    );
-  }, [category, filterData, model, currency, dispatch]);
-
-  useEffect(() => {
+    dispatch(setCurrentPage(searchParams.get('page')));
     dispatch(getFiltredProducts({}));
   }, [
     dispatch,
@@ -91,11 +89,14 @@ const ProductListPage = ({ category, model, width }) => {
     sortByPrice,
     sortByPopularity,
     countPerPage,
-    categoryFilter,
-    category,
-    model,
+    modelsFilter.length,
+    categoryFilter.length,
+    colorsFilter.length,
+    patternsFilter.length,
+    isHotItemFilter,
     currentPage,
-    filterStatus
+    filterStatus,
+    url
   ]);
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
@@ -105,7 +106,10 @@ const ProductListPage = ({ category, model, width }) => {
 
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
-  const changeHandler = (e, value) => dispatch(setCurrentPage(value));
+  const changeHandler = (e, value) => {
+    searchParams.set('page', value);
+    history.push(`?${searchParams.toString()}`);
+  };
 
   const handleFilterShow = () =>
     dispatch(setFilterMenuStatus(!filterMenuStatus));
@@ -114,77 +118,71 @@ const ProductListPage = ({ category, model, width }) => {
     return <Loader />;
   }
 
-  const categoryText = category.name[language].value.toUpperCase();
   const itemsToShow = products.map((product) => (
-    <ProductListItem
-      key={product._id}
-      product={product}
-      category={categoryText}
-    />
+    <ProductListItem key={product._id} product={product} />
   ));
 
   return (
-    products && (
-      <div className={styles.root}>
-        <Typography className={styles.paginationDiv} variant='h3'>
-          {categoryText}
-        </Typography>
-        <div className={styles.sortDiv}>
-          <ProductSort />
-        </div>
-        <div className={styles.filterButtonBlock}>
-          <Button
-            className={styles.button}
-            variant='contained'
-            onClick={handleFilterShow}
-          >
-            {SHOW_FILTER_BUTTON_TEXT[language].value}
-          </Button>
-        </div>
-        <div className={styles.list}>
-          <Drawer
-            id='menuDrawer'
-            className={styles.drawer}
-            variant={drawerVariant}
-            open={filterMenuStatus}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: styles.drawerPaper
-            }}
-          >
-            <div className={styles.drawerContainer}>
-              <ProductFilter selectedCategory={category} />
-            </div>
-          </Drawer>
-          <div className={styles.filterMenu}>
-            <ProductFilter selectedCategory={category} />
-          </div>
-          {products.length ? (
-            <div className={styles.productsWrapper}>
-              <Grid container spacing={3} className={styles.productsDiv}>
-                {itemsToShow}
-              </Grid>
-              <div className={styles.paginationDiv}>
-                <Pagination
-                  count={pagesCount}
-                  variant='outlined'
-                  shape='rounded'
-                  page={currentPage + 1}
-                  onChange={changeHandler}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className={styles.defaultBlock}>
-              <div>{PRODUCT_NOT_FOUND[language].value}</div>
-              <div>
-                <MoodBadIcon className={styles.defaultIcon} />
-              </div>
-            </div>
-          )}
-        </div>
+    <div className={styles.root}>
+      <Typography className={styles.paginationDiv} variant='h3'>
+        {/* {categoryText} */}
+        Test
+      </Typography>
+      <div className={styles.sortDiv}>
+        <ProductSort />
       </div>
-    )
+      <div className={styles.filterButtonBlock}>
+        <Button
+          className={styles.button}
+          variant='contained'
+          onClick={handleFilterShow}
+        >
+          {SHOW_FILTER_BUTTON_TEXT[language].value}
+        </Button>
+      </div>
+      <div className={styles.list}>
+        <Drawer
+          id='menuDrawer'
+          className={styles.drawer}
+          variant={drawerVariant}
+          open={filterMenuStatus}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: styles.drawerPaper
+          }}
+        >
+          <div className={styles.drawerContainer}>
+            <ProductFilter />
+          </div>
+        </Drawer>
+        <div className={styles.filterMenu}>
+          <ProductFilter />
+        </div>
+        {products.length ? (
+          <div className={styles.productsWrapper}>
+            <Grid container spacing={3} className={styles.productsDiv}>
+              {itemsToShow}
+            </Grid>
+            <div className={styles.paginationDiv}>
+              <Pagination
+                count={pagesCount}
+                variant='outlined'
+                shape='rounded'
+                page={currentPage + 1}
+                onChange={changeHandler}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className={styles.defaultBlock}>
+            <div>{PRODUCT_NOT_FOUND[language].value}</div>
+            <div>
+              <MoodBadIcon className={styles.defaultIcon} />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

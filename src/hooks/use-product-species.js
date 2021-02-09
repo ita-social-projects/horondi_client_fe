@@ -2,11 +2,15 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function useProductSpecies() {
-  const filterData = useSelector(({ Products }) => Products.filterData);
-
+  const { language, filterData } = useSelector(({ Language, Products }) => ({
+    language: Language.language,
+    filterData: Products.filterData
+  }));
   const categoriesNames = useMemo(
     () => [
-      ...new Set(filterData.map(({ category }) => category.name[0].value))
+      ...new Set(
+        filterData.map(({ category }) => category.name[language].value)
+      )
     ],
     [filterData]
   );
@@ -16,7 +20,7 @@ export default function useProductSpecies() {
       categoriesNames.map(
         (category) =>
           filterData.find(
-            ({ category: { name } }) => category === name[0].value
+            ({ category: { name } }) => category === name[language].value
           ).category
       ),
     [filterData, categoriesNames]
@@ -25,9 +29,7 @@ export default function useProductSpecies() {
   const colorsNames = useMemo(
     () => [
       ...new Set(
-        filterData.map(
-          ({ mainMaterial }) => mainMaterial.color.simpleName[0].value
-        )
+        filterData.map(({ colors }) => colors[0].simpleName[language].value)
       )
     ],
     [filterData]
@@ -38,15 +40,16 @@ export default function useProductSpecies() {
       colorsNames.map(
         (item) =>
           filterData.find(
-            ({ mainMaterial }) =>
-              mainMaterial.color.simpleName[0].value === item
+            ({ colors }) => colors[0].simpleName[language].value === item
           ).colors
       ),
     [filterData, colorsNames]
   );
 
   const patternsNames = useMemo(
-    () => [...new Set(filterData.map(({ pattern }) => pattern.name[0].value))],
+    () => [
+      ...new Set(filterData.map(({ pattern }) => pattern[language].value))
+    ],
     [filterData]
   );
 
@@ -54,14 +57,14 @@ export default function useProductSpecies() {
     () =>
       patternsNames.map(
         (item) =>
-          filterData.find(({ pattern }) => pattern.name[0].value === item)
+          filterData.find(({ pattern }) => pattern[language].value === item)
             .pattern
       ),
     [filterData, patternsNames]
   );
 
   const modelNames = useMemo(
-    () => [...new Set(filterData.map(({ model }) => model.name[0].value))],
+    () => [...new Set(filterData.map(({ model }) => model[language].value))],
     [filterData]
   );
 
@@ -69,7 +72,7 @@ export default function useProductSpecies() {
     () =>
       modelNames.map(
         (item) =>
-          filterData.find(({ model }) => model.name[0].value === item).model
+          filterData.find(({ model }) => model[language].value === item).model
       ),
     [filterData, modelNames]
   );

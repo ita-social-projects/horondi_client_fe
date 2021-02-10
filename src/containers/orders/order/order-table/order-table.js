@@ -33,12 +33,16 @@ const OrderTable = ({ items, currency, calcPrice }) => {
       calcPrice={calcPrice}
       language={language}
       currency={currency}
-      setModalVisibility={setModalVisibility}
-      setModalItem={setModalItem}
       isCartEditing={isCartEditing}
     />
   ));
 
+  const removeItemsHandler = () => {
+    const selectedItems = items.filter((item) => item?.isChecked === true);
+    console.log(selectedItems);
+    setModalVisibility(true);
+    setModalItem(items[0]);
+  };
   return (
     <>
       {modalVisibility && (
@@ -83,7 +87,11 @@ const OrderTable = ({ items, currency, calcPrice }) => {
             <div className={styles.cartButton} type='button'>
               {CART_BUTTON_TITLES[language].toWishlist}
             </div>
-            <div className={styles.cartButton} type='button'>
+            <div
+              className={styles.cartButton}
+              type='button'
+              onClick={removeItemsHandler}
+            >
               {CART_BUTTON_TITLES[language].remove}
             </div>
           </>

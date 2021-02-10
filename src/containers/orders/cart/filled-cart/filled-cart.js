@@ -9,13 +9,10 @@ import CreateOrder from '../../order/create-order/create-order';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
-  const { language, currency, cart } = useSelector(
-    ({ Language, Currency, Cart }) => ({
-      language: Language.language,
-      currency: Currency.currency,
-      cart: Cart
-    })
-  );
+  const { language, currency } = useSelector(({ Language, Currency }) => ({
+    language: Language.language,
+    currency: Currency.currency
+  }));
 
   const currencySign =
     currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
@@ -27,7 +24,6 @@ const FilledCart = ({ items }) => {
     item.quantity;
 
   const totalPrice = items.reduce((acc, item) => acc + calcPrice(item), 0);
-
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <div className={styles.orderWrapper}>

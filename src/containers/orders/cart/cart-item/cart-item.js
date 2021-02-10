@@ -26,6 +26,7 @@ const CartItem = ({
   const dispatch = useDispatch();
   const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
   const [checkedItem, setCheckedItem] = useState(false);
+
   const onChangeQuantity = (value) => {
     dispatch(setCartItemQuantity(item, +value));
   };
@@ -33,10 +34,7 @@ const CartItem = ({
     setCheckedItem(!checkedItem);
     dispatch(setCartItemChecked(item, checkedItem));
   };
-  const onRemoveItem = () => {
-    setModalVisibility(true);
-    setModalItem(item);
-  };
+
   useEffect(() => {
     dispatch(setCartItemChecked(item, true));
   }, []);

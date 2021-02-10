@@ -40,7 +40,7 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
       <div>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
-          {totalPrice} <FontAwesomeIcon icon={currencySign} />
+          {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div>
@@ -59,11 +59,17 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
       <div>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
-          {totalPrice} <FontAwesomeIcon icon={currencySign} />
+          {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div className={styles.btnWrapper}>
-        <Link to={pathToCheckout}>
+        <Link
+          to={{
+            pathname: pathToCheckout,
+            deliveryType,
+            totalPrice
+          }}
+        >
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].checkout}
           </Button>

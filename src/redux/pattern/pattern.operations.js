@@ -16,11 +16,20 @@ export const getAllPatterns = async (skip, limit) => {
               lang
               value
             }
-            material
-            available
             images {
+              large
               medium
+              small
+              thumbnail
             }
+            material {
+              _id
+              name {
+                lang
+                value
+              }
+            }
+            available
           }
           count
         }

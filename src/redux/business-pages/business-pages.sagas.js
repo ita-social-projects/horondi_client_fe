@@ -5,6 +5,7 @@ import { setBusinessPage, setLoading } from './business-pages.actions';
 import { GET_BUSINESS_PAGE_BY_CODE } from './business-pages.types';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
+import { getBusinessTextByCode } from './business-page.operations';
 
 export function* handleBusinessPageError({ message }) {
   yield put(setLoading(false));
@@ -20,23 +21,23 @@ export function* handleBusinessPageLoad({ payload }) {
       `query (
         $code: String!
         ){
-            getBusinessTextByCode(code: $code) {
-            ... on BusinessText {
-                _id
-                code
-                title {
-                  value
-                }
-                text {
-                  value
-                }
-                date
-            }           
-            ... on Error {
+          getBusinessTextByCode(code: $code) {
+          ... on BusinessText {
+            _id
+            code
+            title {
+              value
+            }
+            text {
+              value
+            }
+            date
+          }           
+          ... on Error {
             message
             statusCode
-            }
           }
+        }
       }`,
       {
         code: payload

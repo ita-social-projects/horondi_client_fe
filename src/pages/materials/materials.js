@@ -2,15 +2,15 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
-import { useStyles } from './materials.style.js';
-import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
+import clsx from 'clsx';
+import { useStyles } from './materials.style.js';
+import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 import 'react-awesome-slider/dist/styles.css';
 
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
-import { getPatterns } from '../../../src/redux/pattern/pattern.actions';
-import clsx from 'clsx';
+import { getPatterns } from '../../redux/pattern/pattern.actions';
 import { getImage } from '../../utils/imageLoad';
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
@@ -55,6 +55,7 @@ const Materials = () => {
       </p>
     </div>
   ));
+
   return (
     <div className={styles.root}>
       {materialsPage.title && <h1>{materialsPage.title[language].value}</h1>}

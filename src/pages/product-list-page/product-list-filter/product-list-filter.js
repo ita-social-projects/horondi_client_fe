@@ -165,7 +165,7 @@ const ProductListFilter = () => {
     <div>
       <Grid
         container
-        alignItems='space-around'
+        alignItems='center'
         direction='column'
         className={styles.wrapper}
         spacing={2}

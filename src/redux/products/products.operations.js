@@ -7,12 +7,24 @@ const getAllProducts = async () => {
       query {
         getProducts {
           items {
-            colors {
-              name {
-                value
+            _id
+            name {
+              value
+            }
+            mainMaterial {
+              color {
+                _id
+                name {
+                  value
+                }
+                simpleName {
+                  value
+                }
               }
-              simpleName {
-                value
+            }
+            images {
+              primary {
+                small
               }
             }
             basePrice {
@@ -20,10 +32,22 @@ const getAllProducts = async () => {
               currency
             }
             model {
-              value
+              _id
+              category {
+                _id
+                code
+                name {
+                  value
+                }
+              }
+              name {
+                value
+              }
             }
             pattern {
-              value
+              name {
+                value
+              }
             }
             category {
               _id
@@ -104,7 +128,9 @@ const getFilteredProducts = async ({ state, currency }) => {
               currency
             }
             model {
-              value
+              name {
+                value
+              }
             }
             rate
             images {
@@ -114,19 +140,23 @@ const getFilteredProducts = async ({ state, currency }) => {
                 large
               }
             }
-            colors {
+            mainMaterial {
+              color {
+                name {
+                  lang
+                  value
+                }
+                simpleName {
+                  lang
+                  value
+                }
+              }
+            }
+            pattern {
               name {
                 lang
                 value
               }
-              simpleName {
-                lang
-                value
-              }
-            }
-            pattern {
-              lang
-              value
             }
             category {
               _id

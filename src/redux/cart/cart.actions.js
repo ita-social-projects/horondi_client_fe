@@ -21,9 +21,9 @@ const addItemToCart = (item) => ({
   payload: item
 });
 
-const removeItemFromCart = (item) => ({
+const removeItemFromCart = (items) => ({
   type: REMOVE_ITEM_FROM_CART,
-  payload: item
+  payload: items
 });
 
 const setCartItemQuantity = (item, value) => ({
@@ -33,6 +33,7 @@ const setCartItemQuantity = (item, value) => ({
     value
   }
 });
+
 const setCartItemChecked = (item, isChecked) => ({
   type: SET_CART_ITEM_CHECKED,
   payload: {

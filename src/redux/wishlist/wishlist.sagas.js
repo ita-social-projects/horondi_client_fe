@@ -6,7 +6,8 @@ import { setError } from '../error/error.actions';
 import {
   GET_WISHLIST,
   ADD_ITEM_TO_WISHLIST,
-  REMOVE_ITEM_FROM_WISHLIST
+  REMOVE_ITEM_FROM_WISHLIST,
+  ADD_CART_ITEMS_TO_WISHLIST
 } from './wishlist.types';
 
 import {
@@ -17,20 +18,19 @@ import {
   removeProductFromUserWishlist,
   addProductToUserWishlist
 } from '../user/user.operations';
-
-const key = 'wishlist';
+import { wishlistKey } from '../../configs/index';
 
 export function* handleWishlistLoad() {
-  const wishlist = getFromLocalStorage(key);
+  const wishlist = getFromLocalStorage(wishlistKey);
   yield put(setWishlist(wishlist));
 }
 
 export function* handleAddWishlistItem({ payload: product }) {
   try {
-    const wishlist = getFromLocalStorage(key);
+    const wishlist = getFromLocalStorage(wishlistKey);
     const newWishlist = [...wishlist, product];
 
-    setToLocalStorage(key, newWishlist);
+    setToLocalStorage(wishlistKey, newWishlist);
     yield put(setWishlist(newWishlist));
 
     yield call(
@@ -43,13 +43,33 @@ export function* handleAddWishlistItem({ payload: product }) {
     yield put(push('/error-page'));
   }
 }
+export function* handleAddWishlistCartItems({ payload }) {
+  try {
+    const wishlist = getFromLocalStorage(wishlistKey);
+    // console.log(payload)
+    const cartItems = payload
+      .filter((item) => {
+        const data = wishlist.some((el) => item._id === el._id);
+        console.log(data);
+        return !data;
+      })
+      .map((el) => el._id);
+    // console.log(cartItems)
+    const newWishlist = [...wishlist, ...cartItems];
+    setToLocalStorage(wishlistKey, newWishlist);
+    yield put(setWishlist(newWishlist));
+  } catch (e) {
+    yield put(setError(e.message));
+    yield put(push('/error-page'));
+  }
+}
 
 export function* handleRemoveWishlistItem({ payload: productId }) {
   try {
-    const wishlist = getFromLocalStorage(key);
+    const wishlist = getFromLocalStorage(wishlistKey);
     const newWishlist = wishlist.filter((item) => item._id !== productId);
 
-    setToLocalStorage(key, newWishlist);
+    setToLocalStorage(wishlistKey, newWishlist);
     yield put(setWishlist(newWishlist));
 
     yield call(
@@ -69,7 +89,7 @@ function* handleUserWishlistOperation(handler, productId) {
     yield call(handler, {
       id: userData._id,
       productId,
-      key
+      wishlistKey
     });
   }
 }
@@ -78,4 +98,5 @@ export default function* wishlistSaga() {
   yield takeEvery(GET_WISHLIST, handleWishlistLoad);
   yield takeEvery(ADD_ITEM_TO_WISHLIST, handleAddWishlistItem);
   yield takeEvery(REMOVE_ITEM_FROM_WISHLIST, handleRemoveWishlistItem);
+  yield takeEvery(ADD_CART_ITEMS_TO_WISHLIST, handleAddWishlistCartItems);
 }

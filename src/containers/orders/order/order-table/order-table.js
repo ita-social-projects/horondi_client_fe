@@ -11,24 +11,25 @@ import Modal from '../../../../components/modal';
 import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
 import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../../cart/cart-item';
+import { addCartItemsToWishlist } from '../../../../redux/wishlist/wishlist.actions';
 
 const OrderTable = ({ items, currency, calcPrice }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
   const dispatch = useDispatch();
-  const [modalItem, setModalItem] = useState({});
+  const [checkedItems, setCheckedItems] = useState([]);
 
   const [isCartEditing, setCartEditing] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const onModalAction = (action) => {
-    action && dispatch(removeItemFromCart(modalItem));
+    action && dispatch(removeItemFromCart(checkedItems));
     setModalVisibility(false);
   };
 
-  const cartItems = items.map((item, index) => (
+  const cartItems = items.map((item) => (
     <CartItem
-      key={index}
+      key={item._id}
       item={item}
       calcPrice={calcPrice}
       language={language}
@@ -36,23 +37,26 @@ const OrderTable = ({ items, currency, calcPrice }) => {
       isCartEditing={isCartEditing}
     />
   ));
+  const selectedItems = items.filter((item) => item?.isChecked === true);
 
   const removeItemsHandler = () => {
-    const selectedItems = items.filter((item) => item?.isChecked === true);
-    console.log(selectedItems);
-    setModalVisibility(true);
-    setModalItem(items[0]);
+    selectedItems.length && setModalVisibility(true);
+    setCheckedItems(selectedItems);
+  };
+  const addCartItemsToWishlistHandler = () => {
+    selectedItems.length && dispatch(addCartItemsToWishlist(selectedItems));
   };
   return (
     <>
       {modalVisibility && (
         <div>
           <Modal
-            itemName={modalItem.name[language].value}
+            itemName={selectedItems.map((item) => item.name[language].value)}
             message={MODAL_DELETE_MESSAGES[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
             language={language}
+            isCartModal
           />
         </div>
       )}
@@ -84,7 +88,11 @@ const OrderTable = ({ items, currency, calcPrice }) => {
       <div className={styles.cartActionButtons}>
         {isCartEditing ? (
           <>
-            <div className={styles.cartButton} type='button'>
+            <div
+              className={styles.cartButton}
+              type='button'
+              onClick={addCartItemsToWishlistHandler}
+            >
               {CART_BUTTON_TITLES[language].toWishlist}
             </div>
             <div

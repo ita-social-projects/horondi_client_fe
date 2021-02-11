@@ -114,6 +114,22 @@ const Routes = () => {
                 exact
                 redirectTo='/login'
               />
+              <Route
+                path='/:category/:model'
+                exact
+                render={({ match }) => {
+                  const { category, model } = match.params;
+                  const categoryParam = categories.find(
+                    (categoryFound) =>
+                      categoryFound.name[1].value.toLowerCase() ===
+                      category.toLowerCase()
+                  );
+
+                  return (
+                    <ProductListPage category={categoryParam} model={model} />
+                  );
+                }}
+              />
               {/* <Route */}
               {/*  path='/:category' */}
               {/*  exact */}

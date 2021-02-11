@@ -15,9 +15,7 @@ import ProductListItem from './product-list-item';
 import {
   getAllFilters,
   getFiltredProducts,
-  setCategoryFilter,
-  setCurrentPage,
-  setPriceFilter
+  setCurrentPage
 } from '../../redux/products/products.actions';
 
 import {
@@ -29,7 +27,6 @@ import {
 } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
-import { URL_QUERIES_NAME } from '../../configs/index';
 
 const ProductListPage = ({ model, width }) => {
   const dispatch = useDispatch();

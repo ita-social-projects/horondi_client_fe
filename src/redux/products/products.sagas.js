@@ -22,9 +22,9 @@ import {
 } from './products.types';
 
 import {
-  getAllProducts,
   getFilteredProducts,
-  getProductById
+  getProductById,
+  getAllFilters
 } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
@@ -39,12 +39,10 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
     } else {
       yield put(setProductsLoading(true));
     }
-
     const state = yield select(selectStateProducts);
     const currency = yield select(selectStateCurrency);
     const products = yield call(getFilteredProducts, { state, currency });
     yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));
-
     if (forSearchBar) {
       yield put(setProductsForSearchBar(products.items));
       yield put(setSearchBarLoading(false));
@@ -53,14 +51,16 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
       yield put(setProductsLoading(false));
     }
   } catch (e) {
+    console.log(e);
     yield call(handleProductsErrors, e);
   }
 }
 
-export function* handleGetAllProducts() {
+export function* handleGetAllProductsFilters() {
+  // refactor saga
   try {
     yield put(setProductsLoading(true));
-    const products = yield call(getAllProducts);
+    const products = yield call(getAllFilters);
     yield put(setAllFilterData(products.items));
     yield put(setProductsLoading(false));
   } catch (e) {
@@ -90,7 +90,7 @@ export function* handleProductLoading({ payload }) {
 }
 
 export default function* productsSaga() {
-  yield takeEvery(GET_ALL_FILTERS, handleGetAllProducts);
+  yield takeEvery(GET_ALL_FILTERS, handleGetAllProductsFilters); // here new saga - handleGetAllProductsFilters
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilteredProductsLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
 }

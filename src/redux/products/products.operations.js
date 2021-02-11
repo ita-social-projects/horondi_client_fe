@@ -1,66 +1,68 @@
 import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
-const getAllProducts = async () => {
+const getAllFilters = async () => {
+  // change for new query from backend
   const result = await client.query({
     query: gql`
       query {
-        getProducts {
-          items {
+        getProductsFilters {
+          categories {
             _id
             name {
               value
             }
-            mainMaterial {
-              color {
-                _id
-                name {
-                  value
-                }
-                simpleName {
-                  value
-                }
-              }
-            }
-            images {
-              primary {
-                small
-              }
-            }
-            basePrice {
+          }
+          models {
+            _id
+            name {
               value
-              currency
             }
-            model {
-              _id
-              category {
-                _id
-                code
-                name {
-                  value
-                }
-              }
-              name {
-                value
-              }
+          }
+          patterns {
+            _id
+            name {
+              value
             }
-            pattern {
-              name {
-                value
-              }
+          }
+          closures {
+            _id
+            name {
+              value
             }
-            category {
-              _id
-              name {
-                value
-              }
+          }
+          mainMaterial {
+            _id
+            name {
+              value
+            }
+          }
+          mainMaterialColor {
+            _id
+            name {
+              value
+            }
+          }
+          innerMaterialColor {
+            _id
+            name {
+              value
+            }
+          }
+          bottomMaterial {
+            _id
+            name {
+              value
             }
           }
         }
       }
     `
   });
-  return result.data.getProducts;
+  debugger;
+  console.log('filter', result);
+  await client.resetStore();
+  return result.data.getProductsFilters;
 };
 
 const getFilteredProducts = async ({ state, currency }) => {
@@ -115,63 +117,72 @@ const getFilteredProducts = async ({ state, currency }) => {
             purchasedCount: $purchasedCount
           }
         ) {
-          items {
-            _id
-            purchasedCount
-            availableCount
-            name {
-              lang
-              value
-            }
-            basePrice {
-              value
-              currency
-            }
-            model {
-              name {
-                value
-              }
-            }
-            rate
-            images {
-              primary {
-                large
-                medium
-                large
-                small
-              }
-            }
-            mainMaterial {
-              color {
-                name {
-                  lang
-                  value
-                }
-                simpleName {
-                  lang
-                  value
-                }
-              }
-            }
-            pattern {
+          __typename
+          ... on PaginatedProducts {
+            items {
+              _id
+              purchasedCount
+              availableCount
               name {
                 lang
                 value
               }
-            }
-            category {
-              _id
-              name {
+              basePrice {
                 value
+                currency
               }
+              model {
+                _id
+                name {
+                  value
+                }
+              }
+              rate
+              images {
+                primary {
+                  large
+                  medium
+                  large
+                  small
+                }
+              }
+              mainMaterial {
+                color {
+                  name {
+                    lang
+                    value
+                  }
+                  simpleName {
+                    lang
+                    value
+                  }
+                }
+              }
+              pattern {
+                name {
+                  lang
+                  value
+                }
+              }
+              category {
+                _id
+                name {
+                  value
+                }
+              }
+              isHotItem
             }
-            isHotItem
+            count
           }
-          count
+          ... on Error {
+            statusCode
+            message
+          }
         }
       }
     `
   });
+  await client.resetStore();
   return result.data.getProducts;
 };
 
@@ -344,8 +355,7 @@ const getProductById = async (id) => {
     `,
     fetchPolicy: 'no-cache'
   });
-
   return result.data.getProductById;
 };
 
-export { getProductById, getAllProducts, getFilteredProducts };
+export { getProductById, getAllFilters, getFilteredProducts };

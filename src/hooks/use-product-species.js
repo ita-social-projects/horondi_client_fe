@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function useProductSpecies() {
+  // console log filtered data
   const { language, filterData } = useSelector(({ Language, Products }) => ({
     language: Language.language,
     filterData: Products.filterData
@@ -29,7 +30,9 @@ export default function useProductSpecies() {
   const colorsNames = useMemo(
     () => [
       ...new Set(
-        filterData.map(({ colors }) => colors[0].simpleName[language].value)
+        filterData.map(
+          ({ mainMaterial: { color } }) => color.simpleName[language].value
+        )
       )
     ],
     [filterData]
@@ -40,7 +43,8 @@ export default function useProductSpecies() {
       colorsNames.map(
         (item) =>
           filterData.find(
-            ({ colors }) => colors[0].simpleName[language].value === item
+            ({ mainMaterial: { color } }) =>
+              color.simpleName[language].value === item
           ).colors
       ),
     [filterData, colorsNames]
@@ -48,7 +52,7 @@ export default function useProductSpecies() {
 
   const patternsNames = useMemo(
     () => [
-      ...new Set(filterData.map(({ pattern }) => pattern[language].value))
+      ...new Set(filterData.map(({ pattern }) => pattern.name[language].value))
     ],
     [filterData]
   );
@@ -57,14 +61,19 @@ export default function useProductSpecies() {
     () =>
       patternsNames.map(
         (item) =>
-          filterData.find(({ pattern }) => pattern[language].value === item)
-            .pattern
+          filterData.find(
+            ({ pattern }) => pattern.name[language].value === item
+          ).pattern
       ),
     [filterData, patternsNames]
   );
 
   const modelNames = useMemo(
-    () => [...new Set(filterData.map(({ model }) => model[language].value))],
+    () => [
+      ...new Set(
+        filterData.map((data) => data.model.name[language].value)
+      )
+    ],
     [filterData]
   );
 
@@ -72,7 +81,8 @@ export default function useProductSpecies() {
     () =>
       modelNames.map(
         (item) =>
-          filterData.find(({ model }) => model[language].value === item).model
+          filterData.find(({ model }) => model.name[language].value === item)
+            .model
       ),
     [filterData, modelNames]
   );

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DoneIcon from '@material-ui/icons/Done';
 
+import DoneIcon from '@material-ui/icons/Done';
 import { Checkbox } from '@material-ui/core';
+
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
@@ -14,15 +14,7 @@ import {
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 
-const CartItem = ({
-  item,
-  setModalVisibility,
-  setModalItem,
-  language,
-  currency,
-  calcPrice,
-  isCartEditing
-}) => {
+const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
   const dispatch = useDispatch();
   const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
   const [checkedItem, setCheckedItem] = useState(false);
@@ -69,24 +61,24 @@ const CartItem = ({
           </span>
         )}
       </div>
-      <div>
+      <>
         <NumberInput
           quantity={item.quantity}
           onChangeQuantity={onChangeQuantity}
         />
-      </div>
+      </>
       <div className={styles.price}>
         <span>
-          {calcPrice(item) / 100} {item.basePrice[currency].currency}
+          {calcPrice(item, currency) / 100} {item.basePrice[currency].currency}
         </span>
-        {isCartEditing ? (
+        {isCartEditing && (
           <Checkbox
             className={styles.checkbox}
             color='default'
             checked={checkedItem}
             onChange={onCartItemCheck}
           />
-        ) : null}
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Button,
@@ -9,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+
 import {
   CART_TITLES,
   CART_TABLE_FIELDS,
@@ -22,9 +23,11 @@ import routes from '../../../../configs/routes';
 const CreateOrder = ({ language, totalPrice, currency }) => {
   const styles = useStyles();
   const [deliveryType, setDeliveryType] = useState('SELFPICKUP');
+
   const { pathToBackpacks, pathToCheckout } = routes;
-  const currencySign =
-    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+
+  const currencySign = currency ? faDollarSign : faHryvnia;
+
   const radioButtons = Object.entries(DELIVERY_TYPE[language]).map((type) => (
     <FormControlLabel
       value={type[0].toUpperCase()}
@@ -37,12 +40,12 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
   return (
     <div className={styles.root}>
       <h2>{CART_TITLES[language].order}</h2>
-      <div>
+      <>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
           {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
-      </div>
+      </>
       <div>
         <h3>{CART_TABLE_FIELDS[language].delivery}</h3>
         <FormControl component='fieldset'>
@@ -56,18 +59,17 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
           </RadioGroup>
         </FormControl>
       </div>
-      <div>
+      <>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
           {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
-      </div>
+      </>
       <div className={styles.btnWrapper}>
         <Link
           to={{
             pathname: pathToCheckout,
-            deliveryType,
-            totalPrice
+            deliveryType
           }}
         >
           <Button className={styles.btnCreateOrder}>

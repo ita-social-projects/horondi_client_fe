@@ -33,6 +33,7 @@
     "html-react-parser": "^0.13.0",
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
+    "lodash": "^4.17.20",
     "merge-images": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

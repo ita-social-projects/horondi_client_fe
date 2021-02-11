@@ -84,7 +84,7 @@ const CartItem = ({
             className={styles.checkbox}
             color='default'
             checked={checkedItem}
-            onChange={() => onCartItemCheck(checkedItem)}
+            onChange={onCartItemCheck}
           />
         ) : null}
       </div>

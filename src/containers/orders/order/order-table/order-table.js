@@ -12,6 +12,8 @@ import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translatio
 import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../../cart/cart-item';
 import { addCartItemsToWishlist } from '../../../../redux/wishlist/wishlist.actions';
+import { setToastMessage } from '../../../../redux/toast/toast.actions';
+import { TOAST_MESSAGE } from '../../../../translations/toast.translations';
 
 const OrderTable = ({ items, currency, calcPrice }) => {
   const language = useSelector(({ Language }) => Language.language);
@@ -44,7 +46,9 @@ const OrderTable = ({ items, currency, calcPrice }) => {
     setCheckedItems(selectedItems);
   };
   const addCartItemsToWishlistHandler = () => {
-    selectedItems.length && dispatch(addCartItemsToWishlist(selectedItems));
+    selectedItems.length &&
+      dispatch(addCartItemsToWishlist(selectedItems)) &&
+      dispatch(setToastMessage(TOAST_MESSAGE[language].addedToWishList));
   };
   return (
     <>

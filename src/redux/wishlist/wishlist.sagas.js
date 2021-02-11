@@ -1,4 +1,4 @@
-import { takeEvery, put, select, call } from 'redux-saga/effects';
+import { takeEvery, put, select, call, all } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { setWishlist } from './wishlist.actions';
@@ -46,18 +46,18 @@ export function* handleAddWishlistItem({ payload: product }) {
 export function* handleAddWishlistCartItems({ payload }) {
   try {
     const wishlist = getFromLocalStorage(wishlistKey);
-    // console.log(payload)
     const cartItems = payload
-      .filter((item) => {
-        const data = wishlist.some((el) => item._id === el._id);
-        console.log(data);
-        return !data;
-      })
+      .filter((item) => !wishlist.includes(item._id))
       .map((el) => el._id);
-    // console.log(cartItems)
     const newWishlist = [...wishlist, ...cartItems];
+
     setToLocalStorage(wishlistKey, newWishlist);
     yield put(setWishlist(newWishlist));
+    yield all(
+      cartItems.map((id) =>
+        call(handleUserWishlistOperation, addProductToUserWishlist, id)
+      )
+    );
   } catch (e) {
     yield put(setError(e.message));
     yield put(push('/error-page'));

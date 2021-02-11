@@ -1,4 +1,4 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, call, select, all } from 'redux-saga/effects';
 
 import { setCart } from './cart.actions';
 import {
@@ -70,13 +70,17 @@ export function* handleRemoveCartItem({ payload }) {
     );
     return !foundedItem;
   });
-  // yield call(handleUserCartOperation, removeProductFromUserCart, cart, {
-  //   _id,
-  //   selectedSize,
-  //   sidePocket,
-  //   bottomMaterial
-  // });
 
+  yield all(
+    payload.map(({ _id, selectedSize, sidePocket, bottomMaterial }) =>
+      call(handleUserCartOperation, removeProductFromUserCart, cart, {
+        _id,
+        selectedSize,
+        sidePocket,
+        bottomMaterial
+      })
+    )
+  );
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }

@@ -17,10 +17,10 @@ import {
   DELIVERY_TYPE,
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
-import { useStyles } from './create-order.styles';
+import { useStyles } from './delivery-type.styles';
 import routes from '../../../../configs/routes';
 
-const CreateOrder = ({ language, totalPrice, currency }) => {
+const DeliveryType = ({ language, totalPrice, currency }) => {
   const styles = useStyles();
   const [deliveryType, setDeliveryType] = useState('SELFPICKUP');
 
@@ -31,24 +31,28 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
   const radioButtons = Object.entries(DELIVERY_TYPE[language]).map((type) => (
     <FormControlLabel
       value={type[0].toUpperCase()}
-      control={<Radio color='default' />}
+      control={<Radio color='default' size='small' />}
       label={type[1]}
       key={type[0]}
+      classes={{ label: styles.radioBtn }}
     />
   ));
 
   return (
     <div className={styles.root}>
       <h2>{CART_TITLES[language].order}</h2>
-      <>
+      <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
           {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
-      </>
+      </div>
       <div>
         <h3>{CART_TABLE_FIELDS[language].delivery}</h3>
-        <FormControl component='fieldset'>
+        <FormControl
+          component='fieldset'
+          classes={{ root: styles.radioBtnWrapper }}
+        >
           <RadioGroup
             aria-label='gender'
             name='gender1'
@@ -59,12 +63,12 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
           </RadioGroup>
         </FormControl>
       </div>
-      <>
+      <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
           {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
-      </>
+      </div>
       <div className={styles.btnWrapper}>
         <Link
           to={{
@@ -86,4 +90,4 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
   );
 };
 
-export default CreateOrder;
+export default DeliveryType;

@@ -2,37 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: 10,
-    display: 'flex',
     width: '100%',
-    borderBottom: '1px solid #DADADA',
-    borderTop: '1px solid #DADADA',
-    '& > div:not(:first-child)': {
-      width: 200,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      '@media (max-width: 768px)': {
-        width: 100
-      }
-    }
-  },
-  itemData: {
-    display: 'flex',
-    flex: '1',
-    '@media (max-width: 551px)': {
-      flexDirection: 'column'
-    }
+    justifyContent: 'space-between'
   },
   image: (props) => ({
-    flexBasis: 100,
-    display: 'flex',
-    justifyContent: 'center',
     '& > a': {
       background: `url('${props.image}')no-repeat center center`,
       backgroundSize: 'cover',
       borderRadius: 5,
-      display: 'block',
       width: '100px',
       height: '100px',
       '@media (max-width: 768px)': {
@@ -41,37 +18,33 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   description: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '0 20px',
-    '& a': {
-      color: 'inherit'
-    },
-    '& > span': {
-      textAlign: 'center',
-      lineHeight: '30px',
-      '@media (max-width: 768px)': {
-        fontSize: '.8em'
-      }
-    }
+    textAlign: 'center',
+    lineHeight: '30px'
   },
   itemName: {
-    fontSize: '1.7em'
+    fontSize: '1.7em',
+    textDecoration: 'none',
+    color: theme.palette.textColor
   },
   price: {
-    position: 'relative'
+    position: 'relative',
+    textAlign: 'center'
   },
   checkbox: {
     position: 'absolute',
     right: 10,
+    top: '50%',
+    transform: 'translateY(-50%)',
     cursor: 'pointer',
-    '@media (max-width: 551px)': {
-      bottom: 20
+    '@media (max-width: 1050px)': {
+      bottom: 10,
+      top: 'initial',
+      transform: 'none'
     }
   },
   doneIcon: {
     position: 'relative',
-    top: 2,
+    top: 4,
     fontSize: '1.5em'
   }
 }));

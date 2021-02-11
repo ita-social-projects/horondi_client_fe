@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableBody
+} from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 import {
   CART_TABLE_FIELDS,
@@ -83,15 +90,17 @@ const OrderTable = ({ items, currency, calcPrice }) => {
             : CART_BUTTON_TITLES[language].edit}
         </span>
       </div>
-      <div className={styles.table}>
-        <div className={styles.tableHeader}>
-          <div>{CART_TABLE_FIELDS[language].photo}</div>
-          <div>{CART_TABLE_FIELDS[language].item}</div>
-          <div>{CART_TABLE_FIELDS[language].quantity}</div>
-          <div>{CART_TABLE_FIELDS[language].price}</div>
-        </div>
-        {cartItems}
-      </div>
+      <Table>
+        <TableHead>
+          <TableRow classes={{ root: styles.tableHeader }}>
+            <TableCell>{CART_TABLE_FIELDS[language].photo}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].item}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{cartItems}</TableBody>
+      </Table>
       <div className={styles.cartActionButtons}>
         {isCartEditing && (
           <>

@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
-
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
-import CreateOrder from '../../order/create-order/create-order';
+import DeliveryType from '../../order/delivery-type/delivery-type';
 import { calcPrice } from '../../../../utils/priceCalculating';
 
 const FilledCart = ({ items }) => {
@@ -15,8 +13,6 @@ const FilledCart = ({ items }) => {
     language: Language.language,
     currency: Currency.currency
   }));
-
-  const currencySign = currency ? faDollarSign : faHryvnia;
 
   const totalPrice = items.reduce(
     (acc, item) => acc + calcPrice(item, currency),
@@ -33,17 +29,17 @@ const FilledCart = ({ items }) => {
             language={language}
           />
         </div>
-        <div className={styles.createOrder}>
-          <CreateOrder
+        <>
+          <DeliveryType
             language={language}
             totalPrice={totalPrice}
             currency={currency}
           />
-        </div>
+        </>
       </div>
-      <div className={styles.similarProductsWrapper}>
-        <SimilarProducts currencySign={currencySign} />
-      </div>
+      <>
+        <SimilarProducts />
+      </>
     </div>
   );
 };

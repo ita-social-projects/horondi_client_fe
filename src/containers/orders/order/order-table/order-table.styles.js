@@ -1,10 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  table: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
   titleWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -17,65 +13,29 @@ export const useStyles = makeStyles((theme) => ({
   },
   cartButton: {
     margin: '10px 0 10px 20px',
-    background: 'none',
-    borderRadius: 5,
-    border: 'none',
     cursor: 'pointer',
     alignSelf: 'flex-end',
-    color: 'grey',
+    color: '#363636',
     outline: 'none',
-    '&:hover': {
-      color: '#363636'
-    },
     '&:active': {
       color: theme.palette.textColor
+    },
+    '&:hover': {
+      textDecoration: 'underline'
     }
   },
   tableHeader: {
-    display: 'flex',
-    borderColor: '#DADADA',
-    borderStyle: 'solid',
-    borderWidth: '1px 0 1px',
-    width: '100%',
-    '& > div': {
-      margin: '10px 0',
-      textAlign: 'center',
-      fontWeight: 'bold',
-      fontSize: '1.2em',
-      '@media (max-width: 768px)': {
-        fontSize: '1em'
-      }
-    },
-    '& > div:first-child': {
-      flex: '1'
-    },
-    '& > div:not(:first-child)': {
-      width: 200,
-      '@media (max-width: 768px)': {
-        width: 100
-      }
+    borderTop: '1px solid #DADADA',
+    borderBottom: '1px solid #DADADA',
+    paddingBottom: 10,
+    paddingTop: 10,
+    '& >th': {
+      padding: 8,
+      textAlign: 'center'
     }
   },
   quantity: {
     color: 'grey',
     fontWeight: 'lighter'
-  },
-  total: {
-    textAlign: 'right',
-    fontSize: '1.5em',
-    fontWeight: 'bold',
-    margin: '40px 0'
-  },
-  backButton: {
-    '&:visited': {
-      color: 'inherit'
-    },
-    '& > svg': {
-      fontSize: '2.5em',
-      transition: 'transform .2s ease',
-      '&:hover': {
-        transform: 'scale(1.1)'
-      }
-    }
   }
 }));

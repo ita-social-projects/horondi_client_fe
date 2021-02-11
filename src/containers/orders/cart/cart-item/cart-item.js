@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import DoneIcon from '@material-ui/icons/Done';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, TableCell, TableRow } from '@material-ui/core';
 
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
@@ -32,42 +32,45 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
   }, []);
 
   return (
-    <div className={styles.root} data-cy='cart-item'>
-      <div className={styles.image} data-cy='cart-item-img'>
+    <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
+      <TableCell classes={{ root: styles.image }} data-cy='cart-item-img'>
         <Link to={`/product/${item._id}`}>
           <b />
         </Link>
-      </div>
-      <div className={styles.description} data-cy='cart-item-description'>
+      </TableCell>
+      <TableCell
+        classes={{ root: styles.description }}
+        data-cy='cart-item-description'
+      >
         <Link to={`/product/${item._id}`}>
           <span className={styles.itemName}>{item.name[language].value}</span>
         </Link>
         {item.selectedSize && (
-          <span>
+          <div>
             {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
-          </span>
+          </div>
         )}
         {item.bottomMaterial && (
-          <span>
+          <div>
             {CART_TABLE_FIELDS[language].bottomMaterial}:
             <br />
             {item.bottomMaterial.material.name[language].value}
-          </span>
+          </div>
         )}
         {item.sidePocket && (
-          <span>
+          <div>
             {CART_TABLE_FIELDS[language].sidePocket}:{' '}
             <DoneIcon className={styles.doneIcon} />
-          </span>
+          </div>
         )}
-      </div>
-      <>
+      </TableCell>
+      <TableCell>
         <NumberInput
           quantity={item.quantity}
           onChangeQuantity={onChangeQuantity}
         />
-      </>
-      <div className={styles.price}>
+      </TableCell>
+      <TableCell classes={{ root: styles.price }}>
         <span>
           {calcPrice(item, currency) / 100} {item.basePrice[currency].currency}
         </span>
@@ -79,8 +82,8 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
             onChange={onCartItemCheck}
           />
         )}
-      </div>
-    </div>
+      </TableCell>
+    </TableRow>
   );
 };
 

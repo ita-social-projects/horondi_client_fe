@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 import { Grid, TextField } from '@material-ui/core';
 import * as Yup from 'yup';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -54,9 +53,6 @@ const CheckoutForm = ({ language, isLightTheme }) => {
       phoneNumber: '',
       paymentMethod: '',
       userComment: ''
-    },
-    onSubmit: (data) => {
-      /// method will be implement in next steps
     }
   });
 

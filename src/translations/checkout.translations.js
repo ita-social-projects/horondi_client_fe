@@ -1,9 +1,12 @@
 export const CHECKOUT_TITLES = {
   0: {
+    orderComment: 'Коментар до замовлення',
+    checkoutTitle: 'Оплата та доставка',
+    yourOrderTitle: 'Ваше замовлення',
     orderForm: 'Форма замовлення',
     contactInfo: 'Контактна інформація',
     delivery: 'Доставка',
-    payment: 'Оплата',
+    payment: 'Метод оплати',
     deliveryPrice: 'Ціна доставки',
     totalPrice: 'Всього',
     schedule: 'Графік роботи:',
@@ -15,10 +18,13 @@ export const CHECKOUT_TITLES = {
     orderNumber: 'Замовлення № '
   },
   1: {
+    orderComment: 'Order comment',
+    checkoutTitle: 'Payment and delivery',
+    yourOrderTitle: 'Your order',
     orderForm: 'Order form',
     contactInfo: 'Contact information',
     delivery: 'Delivery',
-    payment: 'Payment',
+    payment: 'Payment method',
     deliveryPrice: 'Delivery price',
     totalPrice: 'Total price',
     schedule: 'Schedule:',
@@ -33,10 +39,10 @@ export const CHECKOUT_TITLES = {
 
 export const CHECKOUT_TEXT_FIELDS = {
   0: {
-    firstName: "Ім'я",
-    lastName: 'Прізвище',
-    email: 'Email',
-    contactPhoneNumber: 'Номер телефону: ',
+    firstName: "Ім'я *",
+    lastName: 'Прізвище *',
+    email: 'Email *',
+    contactPhoneNumber: 'Номер телефону *',
     city: 'Місто',
     building: 'Будинок',
     street: 'Вулиця',
@@ -49,10 +55,10 @@ export const CHECKOUT_TEXT_FIELDS = {
     total: 'Загальна сума'
   },
   1: {
-    firstName: 'First name',
-    lastName: 'Last name',
-    email: 'Email',
-    contactPhoneNumber: 'Contact phone number',
+    firstName: 'First name *',
+    lastName: 'Last name *',
+    email: 'Email *',
+    contactPhoneNumber: 'Contact phone number *',
     city: 'City',
     building: 'Building',
     street: 'Street',
@@ -131,15 +137,19 @@ export const CHECKOUT_ADDITIONAL_INFORMATION = {
 
 export const CHECKOUT_ERROR = {
   0: {
+    requiredField: 'Поле не повинне бути порожнім',
     firstName: 'Поле повинно містити від 2 до 30 символів',
     lastName: 'Поле повинно містити від 2 до 30 символів',
-    email: 'Некоректний формат, електронної пошти ',
-    phoneNumber: 'Некоректний формат номеру телефону'
+    email: 'Некоректний формат електронної пошти ',
+    phoneNumber: 'Некоректний формат номеру телефону',
+    userComment: 'Поле повинно містити від 2 до 300 символів'
   },
   1: {
+    requiredField: 'Field should not to be empty',
     firstName: 'Field should contain from 2 to 30 characters',
     lastName: 'Field should contain from 2 to 30 characters',
     email: `Incorrect email format`,
-    phoneNumber: 'Incorrect phone number format'
+    phoneNumber: 'Incorrect phone number format',
+    userComment: 'Field should contain from 2 to 300 characters'
   }
 };

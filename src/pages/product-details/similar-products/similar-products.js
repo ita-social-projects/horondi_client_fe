@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';

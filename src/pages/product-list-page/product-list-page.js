@@ -111,13 +111,15 @@ const ProductListPage = ({ model, width }) => {
   const handleFilterShow = () =>
     dispatch(setFilterMenuStatus(!filterMenuStatus));
 
-  if (loading || !filterData.length) {
+  if (loading || filterData.length) {
     return <Loader />;
   }
 
-  const itemsToShow = products.map((product) => (
-    <ProductListItem key={product._id} product={product} />
-  ));
+  const itemsToShow = products
+    ? products.map((product) => (
+      <ProductListItem key={product._id} product={product} />
+    ))
+    : null;
 
   return (
     <div className={styles.root}>
@@ -155,7 +157,7 @@ const ProductListPage = ({ model, width }) => {
         <div className={styles.filterMenu}>
           <ProductFilter />
         </div>
-        {products.length ? (
+        {products ? (
           <div className={styles.productsWrapper}>
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}

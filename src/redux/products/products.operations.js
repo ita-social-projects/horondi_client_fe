@@ -59,9 +59,9 @@ const getAllFilters = async () => {
       }
     `
   });
-  debugger;
-  console.log('filter', result);
-  await client.resetStore();
+  // debugger
+  // console.log('filter', result);
+  // await client.resetStore();
   return result.data.getProductsFilters;
 };
 
@@ -182,7 +182,7 @@ const getFilteredProducts = async ({ state, currency }) => {
       }
     `
   });
-  await client.resetStore();
+  // await client.resetStore();
   return result.data.getProducts;
 };
 

@@ -44,7 +44,156 @@ export const initialState = {
     modelsFilter: [],
     isHotItemFilter: false
   },
-  filterData: [],
+  filterData: {
+    categories: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    models: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    patterns: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      },
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    closures: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      },
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    mainMaterial: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    mainMaterialColor: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    innerMaterialColor: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      },
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ],
+    bottomMaterial: [
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      },
+      {
+        _id: '',
+        name: [
+          {
+            value: ''
+          },
+          {
+            value: ''
+          }
+        ]
+      }
+    ]
+  },
   product: null,
   products: [],
   pagesCount: 1,

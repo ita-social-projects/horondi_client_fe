@@ -40,16 +40,16 @@ const PriceFilter = () => {
         )
       );
     } else {
-      dispatch(
-        setPriceFilter([
-          Math.min(
-            ...filterData.map((product) => product.basePrice[currency].value)
-          ),
-          Math.max(
-            ...filterData.map((product) => product.basePrice[currency].value)
-          )
-        ])
-      );
+      // dispatch(
+      //   setPriceFilter([
+      //     Math.min(
+      //       ...filterData.map((product) => product.basePrice[currency].value)
+      //     ),
+      //     Math.max(
+      //       ...filterData.map((product) => product.basePrice[currency].value)
+      //     )
+      //   ])
+      // );
     }
   }, [dispatch, searchParams.toString()]);
 
@@ -75,16 +75,16 @@ const PriceFilter = () => {
         onChange={handlePriceChange}
         onChangeCommitted={handlePriceFilter}
         valueLabelDisplay='auto'
-        min={Math.min(
-          ...filterData.map(
-            (product) => product.basePrice[currency].value / 100
-          )
-        )}
-        max={Math.max(
-          ...filterData.map(
-            (product) => product.basePrice[currency].value / 100
-          )
-        )}
+        // min={Math.min(
+        //   ...filterData.map(
+        //     (product) => product.basePrice[currency].value / 100
+        //   )
+        // )}
+        // max={Math.max(
+        //   ...filterData.map(
+        //     (product) => product.basePrice[currency].value / 100
+        //   )
+        // )}
         aria-labelledby='range-slider'
       />
     </FormGroup>

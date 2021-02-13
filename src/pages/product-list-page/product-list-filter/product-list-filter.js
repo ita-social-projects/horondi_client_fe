@@ -23,7 +23,6 @@ import {
   CLEAR_FILTER_BUTTON_TEXT,
   COLORS_TEXT
 } from '../../../translations/product-list.translations';
-import useProductSpecies from '../../../hooks/use-product-species';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
 
 const ProductListFilter = () => {
@@ -32,24 +31,27 @@ const ProductListFilter = () => {
   const history = useHistory();
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  const { filters, language } = useSelector(({ Products, Language }) => ({
-    filters: Products.filters,
-    language: Language.language
-  }));
+  const { filters, language, filterData } = useSelector(
+    ({ Products, Language }) => ({
+      filters: Products.filters,
+      language: Language.language,
+      filterData: Products.filterData
+    })
+  );
   const {
     categoryFilter,
     colorsFilter,
     patternsFilter,
     modelsFilter
   } = filters;
-
-  const {
-    categories,
-    categoriesNames,
-    colorsNames,
-    patternsNames,
-    modelNames
-  } = useProductSpecies();
+  //
+  // const {
+  //   categories,
+  //   categoriesNames,
+  //   colorsNames,
+  //   patternsNames,
+  //   modelNames
+  // } = useProductSpecies();
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
     let query = searchParams.get(queryName);
@@ -94,35 +96,38 @@ const ProductListFilter = () => {
     categories: {
       filterName: CATERGORY_TEXT[language].value,
       productFilter: categoryFilter,
-      list: categoriesNames,
-      categories,
+      list: filterData.categories.map(
+        (category) => category.name[language].value
+      ),
+      categories: filterData.categories,
       filterAction: setCategoryFilter,
       labels: 'categoryFilter',
       clearFilter: () => handleFilterClear(setCategoryFilter, 'categoryFilter'),
-      filterHandler: (e) => handleFilterChange(e, 'categoryFilter', categories)
+      filterHandler: (e) =>
+        handleFilterChange(e, 'categoryFilter', filterData.categories)
     },
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
-      list: modelNames,
+      list: filterData.models.map((model) => model.name[language].value),
       filterAction: setModelsFilter,
       labels: 'modelsFilter',
       clearFilter: () => handleFilterClear(setModelsFilter, 'modelsFilter'),
       filterHandler: (e) => handleFilterChange(e, 'modelsFilter')
     },
-    colors: {
-      filterName: COLORS_TEXT[language].value,
-      productFilter: colorsFilter,
-      list: colorsNames,
-      filterAction: setColorsFilter,
-      labels: 'colorsFilter',
-      clearFilter: () => handleFilterClear(setColorsFilter, 'colorsFilter'),
-      filterHandler: (e) => handleFilterChange(e, 'colorsFilter')
-    },
+    // colors: {
+    //   filterName: COLORS_TEXT[language].value,
+    //   productFilter: colorsFilter,
+    //   list: filterData.colors.map((color) => color.name[0].value),
+    //   filterAction: setColorsFilter,
+    //   labels: 'colorsFilter',
+    //   clearFilter: () => handleFilterClear(setColorsFilter, 'colorsFilter'),
+    //   filterHandler: (e) => handleFilterChange(e, 'colorsFilter')
+    // },
     patterns: {
       filterName: PATTERN_TEXT[language].value,
       productFilter: patternsFilter,
-      list: patternsNames,
+      list: filterData.patterns.map((pattern) => pattern.name[language].value),
       filterAction: setPatternsFilter,
       labels: 'patternsFilter',
       clearFilter: () => handleFilterClear(setPatternsFilter, 'patternsFilter'),
@@ -158,7 +163,7 @@ const ProductListFilter = () => {
         filterAction={filterAction}
         filterHandler={filterHandler}
         clearFilter={clearFilter}
-        categories={categories}
+        categories={filterData.categories}
       />
     )
   );

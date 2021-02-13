@@ -60,8 +60,8 @@ export function* handleGetAllProductsFilters() {
   // refactor saga
   try {
     yield put(setProductsLoading(true));
-    const products = yield call(getAllFilters);
-    yield put(setAllFilterData(products.items));
+    const filtersData = yield call(getAllFilters);
+    yield put(setAllFilterData(filtersData));
     yield put(setProductsLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);

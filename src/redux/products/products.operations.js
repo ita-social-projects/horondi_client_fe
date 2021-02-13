@@ -355,6 +355,7 @@ const getProductById = async (id) => {
     `,
     fetchPolicy: 'no-cache'
   });
+
   return result.data.getProductById;
 };
 

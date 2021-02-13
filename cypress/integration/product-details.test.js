@@ -59,7 +59,7 @@ describe('Product details test', () => {
 
   it('should redirect to checkout page', () => {
     cy.get('[data-cy="sizes"]').click();
-    cy.contains('Купити зараз').click().url().should('include', '/checkout');
+    cy.contains('Купити зараз').click().url().should('include', '/cart');
   });
 
   it('should change price when pocket checked', () => {

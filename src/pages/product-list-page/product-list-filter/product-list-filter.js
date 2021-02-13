@@ -109,7 +109,7 @@ const ProductListFilter = () => {
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
-      list: filterData.models.map((model) => model.name[language].value),
+      list: filterData.models.map((model) => model._id),
       filterAction: setModelsFilter,
       labels: 'modelsFilter',
       clearFilter: () => handleFilterClear(setModelsFilter, 'modelsFilter'),
@@ -171,7 +171,7 @@ const ProductListFilter = () => {
     <div>
       <Grid
         container
-        alignItems='space-around'
+        alignItems='center'
         direction='column'
         className={styles.wrapper}
         spacing={2}

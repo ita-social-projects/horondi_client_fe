@@ -3,6 +3,8 @@ const routes = {
   pathToRecovery: '/recovery',
   pathToRegister: '/register',
   pathToProducts: '/product',
-  pathToErrorPage: '/error-page'
+  pathToErrorPage: '/error-page',
+  pathToBackpacks: '/backpacks',
+  pathToCheckout: '/checkout'
 };
 export default routes;

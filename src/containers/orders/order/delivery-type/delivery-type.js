@@ -54,8 +54,8 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
           classes={{ root: styles.radioBtnWrapper }}
         >
           <RadioGroup
-            aria-label='gender'
-            name='gender1'
+            aria-label='Delivery type'
+            name='delivery-type'
             value={deliveryType}
             onChange={(e) => setDeliveryType(e.target.value)}
           >

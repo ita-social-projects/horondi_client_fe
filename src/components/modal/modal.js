@@ -6,7 +6,14 @@ import Popper from '@material-ui/core/Popper';
 import { MODAL_BUTTONS } from '../../translations/modal.translations';
 import { useStyles } from './modal.styles';
 
-const Modal = ({ message, itemName, onAction, isOpen, language }) => {
+const Modal = ({
+  message,
+  itemName,
+  onAction,
+  isOpen,
+  language,
+  isCartModal = false
+}) => {
   const [open, setOpen] = useState(isOpen);
   const styles = useStyles();
 
@@ -20,7 +27,7 @@ const Modal = ({ message, itemName, onAction, isOpen, language }) => {
       <p>
         {message}
         <br />
-        <b>{itemName}</b>
+        {isCartModal ? <b>{itemName.join()}</b> : <b>{itemName}</b>}
       </p>
       <div className={styles.buttonGroup}>
         <Button onClick={handleClose} variant='contained'>

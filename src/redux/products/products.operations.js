@@ -138,7 +138,6 @@ const getFilteredProducts = async ({ state, currency }) => {
                 large
                 medium
                 large
-                small
               }
             }
             mainMaterial {
@@ -183,168 +182,103 @@ const getProductById = async (id) => {
     query: gql`
       query($id: ID!) {
         getProductById(id: $id) {
-          ... on Product {
+          _id
+          category {
             _id
-            category {
-              _id
-              name {
-                lang
-                value
-              }
-            }
             name {
               lang
               value
             }
-            description {
-              lang
-              value
+          }
+          name {
+            lang
+            value
+          }
+          description {
+            lang
+            value
+          }
+          mainMaterial {
+            material {
+              _id
             }
-            mainMaterial {
-              lang
-              value
+            color {
+              _id
             }
-            innerMaterial {
-              lang
-              value
+          }
+          innerMaterial {
+            material {
+              _id
             }
-            strapLengthInCm
-            images {
-              primary {
-                medium
-                large
-              }
-              additional {
-                small
-                large
-              }
+            color {
+              _id
             }
-            colors {
-              code
+          }
+          bottomMaterial {
+            material {
+              _id
               name {
-                lang
                 value
               }
-              images {
-                thumbnail
-                large
+              additionalPrice{
+                value
               }
-              available
             }
-            pattern {
-              lang
-              value
+            color {
+              _id
             }
-            closure {
-              lang
-              value
+          }
+          strapLengthInCm
+          images {
+            primary {
+              medium
+              large
+              thumbnail
+              small
             }
-            basePrice {
+            additional {
+              medium
+              large
+            }
+          }
+          pattern {
+            _id
+          }
+          closure {
+            _id
+          }
+          basePrice {
+            value
+            currency
+          }
+          sizes {
+            _id
+            name
+            heightInCm
+            widthInCm
+            depthInCm
+            volumeInLiters
+            available
+            additionalPrice {
               value
               currency
             }
-            options {
-              size {
-                name
-                heightInCm
-                widthInCm
-                depthInCm
-                volumeInLiters
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              bottomMaterial {
-                name {
-                  lang
-                  value
-                }
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-            }
-            rate
-            comments {
-              items {
-                _id
-                text
-                date
-                user {
-                  email
-                  name
-                  images {
-                    thumbnail
-                  }
-                }
-              }
-            }
-            options {
-              size {
-                _id
-                name
-                volumeInLiters
-                widthInCm
-                weightInKg
-              }
-              bottomMaterial {
-                _id
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  value
-                  lang
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-            }
-            availableCount
-            images {
-              primary {
-                thumbnail
-                small
-                large
-                medium
-              }
-              additional {
-                large
-                medium
-              }
+          }
+          rate
+          comments {
+            items {
+              _id
+              text
+              date
             }
           }
+          availableCount
+        }
         }
       }
     `,
     fetchPolicy: 'no-cache'
   });
-
   return result.data.getProductById;
 };
 

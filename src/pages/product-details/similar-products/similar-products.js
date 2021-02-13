@@ -7,9 +7,6 @@ import { useStyles } from './similar-products.styles';
 
 const SimilarProducts = () => {
   const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
 
   return (
     <div id='similar-products'>

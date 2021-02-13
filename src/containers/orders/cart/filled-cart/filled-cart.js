@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
@@ -18,6 +19,9 @@ const FilledCart = ({ items }) => {
     (acc, item) => acc + calcPrice(item, currency),
     0
   );
+
+  const currencySign = currency ? faDollarSign : faHryvnia;
+
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <div className={styles.orderWrapper}>
@@ -38,7 +42,7 @@ const FilledCart = ({ items }) => {
         </>
       </div>
       <>
-        <SimilarProducts />
+        <SimilarProducts currencySign={currencySign} />
       </>
     </div>
   );

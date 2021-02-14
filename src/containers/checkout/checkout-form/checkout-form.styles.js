@@ -12,7 +12,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '3%'
   },
   paymentSelect: {
-    height: 50
+    height: 50,
+    width: 270
   },
   contactInfoTitle: ({ isLightTheme }) => ({
     fontSize: 18,

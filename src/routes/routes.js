@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
 import { history } from '../store/store';
 
 import { useStyles } from './routes.style.js';
@@ -12,7 +11,6 @@ import ProtectedRoute from '../components/protected-route';
 import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
-import ProductsTable from '../pages/products-table';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 
@@ -119,9 +117,7 @@ const Routes = () => {
               <Route
                 path='/products/:category/:model'
                 exact
-                render={({ match, history }) => {
-                  console.log(history);
-                  console.log(match);
+                render={({ match }) => {
                   const { category, model } = match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>

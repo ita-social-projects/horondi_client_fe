@@ -140,7 +140,7 @@ const CheckoutForm = ({ language, isLightTheme }) => {
             </div>
             <div className={styles.contactPaymentInfo}>
               <h2
-                className={`${styles.contactInfoTitle  } ${  styles.paymentTitle}`}
+                className={`${styles.contactInfoTitle} ${styles.paymentTitle}`}
               >
                 {CHECKOUT_TITLES[language].payment}
               </h2>

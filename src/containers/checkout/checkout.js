@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useStyles } from './checkout.styles';
 import { CHECKOUT_TITLES } from '../../translations/checkout.translations';
 import CheckoutForm from './checkout-form';
+import routes from '../../configs/routes';
 
 const Checkout = () => {
   const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
@@ -22,7 +23,7 @@ const Checkout = () => {
         <div className={styles.checkoutHeader}>
           <div className={styles.checkoutTitleInfo}>
             <div className={styles.checkoutTitleInfoData}>
-              <Link to='/cart' className={styles.backBtn}>
+              <Link to={routes.pathToCart} className={styles.backBtn}>
                 <KeyboardBackspaceIcon
                   color={isLightTheme ? 'primary' : 'action'}
                   className={styles.backBtnLine}

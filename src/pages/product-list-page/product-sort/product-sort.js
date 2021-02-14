@@ -26,14 +26,7 @@ const ProductSort = () => {
   const searchParams = new URLSearchParams(search);
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
   const query = searchParams.get(sort);
-  // const sortAction = [setSortByPrice, setSortByRate, setSortByPrice];
   useEffect(() => {
-    // SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }, index) => {
-    //   if (query === optionValue.name) {
-    //     return dispatch(sortAction[](optionValue.value));
-    //   }
-    // });
-    // sortAction.forEach(action=>dispatch(action(0)))
     SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }) => {
       if (query === optionValue.name) {
         dispatch(setSortByPrice(optionValue.value));

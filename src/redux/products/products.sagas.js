@@ -57,7 +57,6 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
 }
 
 export function* handleGetAllProductsFilters() {
-  // refactor saga
   try {
     yield put(setProductsLoading(true));
     const filtersData = yield call(getAllFilters);
@@ -90,7 +89,7 @@ export function* handleProductLoading({ payload }) {
 }
 
 export default function* productsSaga() {
-  yield takeEvery(GET_ALL_FILTERS, handleGetAllProductsFilters); // here new saga - handleGetAllProductsFilters
+  yield takeEvery(GET_ALL_FILTERS, handleGetAllProductsFilters);
   yield takeEvery(GET_FILTRED_PRODUCTS, handleFilteredProductsLoad);
   yield takeEvery(GET_PRODUCT, handleProductLoading);
 }

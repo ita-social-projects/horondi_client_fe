@@ -4,9 +4,9 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { useHistory, useLocation } from 'react-router';
+import _ from 'lodash';
 import PriceFilter from './price-filter';
 import HotItemFilter from './hot-item-filter';
-
 import { useStyles } from './product-list-filter.styles';
 import {
   getFiltredProducts,
@@ -81,7 +81,8 @@ const ProductListFilter = () => {
     categories: {
       filterName: CATERGORY_TEXT[language].value,
       productFilter: categoryFilter,
-      list: filterData.categories.map(
+      list: _.map(
+        filterData.categories,
         (category) => category.name[language].value
       ),
       categories: filterData.categories,
@@ -94,7 +95,7 @@ const ProductListFilter = () => {
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
-      list: filterData.models.map((model) => model.name[language].value),
+      list: _.map(filterData.models, (model) => model.name[language].value),
       categories: filterData.models,
       filterAction: setModelsFilter,
       labels: 'modelsFilter',
@@ -102,19 +103,13 @@ const ProductListFilter = () => {
       filterHandler: (e) =>
         handleFilterChange(e, 'modelsFilter', filterData.models)
     },
-    // colors: {
-    //   filterName: COLORS_TEXT[language].value,
-    //   productFilter: colorsFilter,
-    //   list: filterData.colors.map((color) => color.name[0].value),
-    //   filterAction: setColorsFilter,
-    //   labels: 'colorsFilter',
-    //   clearFilter: () => handleFilterClear(setColorsFilter, 'colorsFilter'),
-    //   filterHandler: (e) => handleFilterChange(e, 'colorsFilter')
-    // },
     patterns: {
       filterName: PATTERN_TEXT[language].value,
       productFilter: patternsFilter,
-      list: filterData.patterns.map((pattern) => pattern.name[language].value),
+      list: _.map(
+        filterData.patterns,
+        (pattern) => pattern.name[language].value
+      ),
       categories: filterData.patterns,
       filterAction: setPatternsFilter,
       labels: 'patternsFilter',

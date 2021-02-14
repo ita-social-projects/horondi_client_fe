@@ -2,23 +2,29 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '50px auto',
-    padding: 20,
+    display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    padding: 15
   },
   orderWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
-    '@media (max-width: 768px)': {
+    flexWrap: 'wrap',
+    '@media (max-width: 813px)': {
       flexDirection: 'column'
     }
   },
   similarProductsWrapper: {
-    display: 'flex',
-    justifyContent: 'center'
+    textAlign: 'center'
   },
-
+  orderTable: {
+    flexGrow: 1,
+    marginRight: 50,
+    '@media (max-width: 813px)': {
+      marginRight: 'initial'
+    }
+  },
   backButton: {
     '&:visited': {
       color: 'inherit'

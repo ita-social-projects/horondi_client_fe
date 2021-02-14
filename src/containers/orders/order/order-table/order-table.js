@@ -1,56 +1,78 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableBody
+} from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 import {
   CART_TABLE_FIELDS,
   CART_TITLES,
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
-import Modal from '../../../../components/modal';
+import { TOAST_MESSAGE } from '../../../../translations/toast.translations';
 import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
+import { setToastMessage } from '../../../../redux/toast/toast.actions';
+import { addCartItemsToWishlist } from '../../../../redux/wishlist/wishlist.actions';
 import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../../cart/cart-item';
+import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice }) => {
   const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
   const dispatch = useDispatch();
-  const [modalItem, setModalItem] = useState({});
 
+  const [checkedItems, setCheckedItems] = useState([]);
   const [isCartEditing, setCartEditing] = useState(false);
   const [modalVisibility, setModalVisibility] = useState(false);
 
-  const onModalAction = (action) => {
-    action && dispatch(removeItemFromCart(modalItem));
-    setModalVisibility(false);
-  };
-
-  const cartItems = items.map((item, index) => (
+  const cartItems = items.map((item) => (
     <CartItem
-      key={index}
+      key={item._id}
       item={item}
       calcPrice={calcPrice}
       language={language}
       currency={currency}
-      setModalVisibility={setModalVisibility}
-      setModalItem={setModalItem}
       isCartEditing={isCartEditing}
     />
   ));
 
+  const selectedItems = items.filter((item) => item?.isChecked === true);
+
+  const onModalAction = (action) => {
+    action && dispatch(removeItemFromCart(checkedItems));
+    setModalVisibility(false);
+  };
+
+  const removeItemsHandler = () => {
+    selectedItems.length && setModalVisibility(true);
+    setCheckedItems(selectedItems);
+  };
+
+  const addCartItemsToWishlistHandler = () => {
+    selectedItems.length &&
+      dispatch(addCartItemsToWishlist(selectedItems)) &&
+      dispatch(setToastMessage(TOAST_MESSAGE[language].addedToWishList));
+  };
+
   return (
     <>
       {modalVisibility && (
-        <div>
+        <>
           <Modal
-            itemName={modalItem.name[language].value}
+            itemName={selectedItems.map((item) => item.name[language].value)}
             message={MODAL_DELETE_MESSAGES[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
             language={language}
+            isCartModal
           />
-        </div>
+        </>
       )}
       <div className={styles.titleWrapper}>
         <h2>
@@ -68,26 +90,36 @@ const OrderTable = ({ items, currency, calcPrice }) => {
             : CART_BUTTON_TITLES[language].edit}
         </span>
       </div>
-      <div className={styles.table}>
-        <div className={styles.tableHeader}>
-          <div>{CART_TABLE_FIELDS[language].photo}</div>
-          <div>{CART_TABLE_FIELDS[language].item}</div>
-          <div>{CART_TABLE_FIELDS[language].quantity}</div>
-          <div>{CART_TABLE_FIELDS[language].price}</div>
-        </div>
-        {cartItems}
-      </div>
+      <Table>
+        <TableHead>
+          <TableRow classes={{ root: styles.tableHeader }}>
+            <TableCell>{CART_TABLE_FIELDS[language].photo}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].item}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{cartItems}</TableBody>
+      </Table>
       <div className={styles.cartActionButtons}>
-        {isCartEditing ? (
+        {isCartEditing && (
           <>
-            <div className={styles.cartButton} type='button'>
+            <div
+              className={styles.cartButton}
+              type='button'
+              onClick={addCartItemsToWishlistHandler}
+            >
               {CART_BUTTON_TITLES[language].toWishlist}
             </div>
-            <div className={styles.cartButton} type='button'>
+            <div
+              className={styles.cartButton}
+              type='button'
+              onClick={removeItemsHandler}
+            >
               {CART_BUTTON_TITLES[language].remove}
             </div>
           </>
-        ) : null}
+        )}
       </div>
     </>
   );

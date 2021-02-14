@@ -432,3 +432,4 @@ export const cookiePolicy = {
 };
 
 export const cartKey = 'cart';
+export const wishlistKey = 'wishlist';

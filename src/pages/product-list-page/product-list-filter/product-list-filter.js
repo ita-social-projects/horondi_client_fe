@@ -10,7 +10,7 @@ import HotItemFilter from './hot-item-filter';
 import { useStyles } from './product-list-filter.styles';
 import {
   getFiltredProducts,
-  setColorsFilter,
+  // setColorsFilter,
   setPatternsFilter,
   setCategoryFilter,
   setModelsFilter
@@ -20,8 +20,8 @@ import {
   MODEL_TEXT,
   PATTERN_TEXT,
   CATERGORY_TEXT,
-  CLEAR_FILTER_BUTTON_TEXT,
-  COLORS_TEXT
+  CLEAR_FILTER_BUTTON_TEXT
+  // COLORS_TEXT
 } from '../../../translations/product-list.translations';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
 
@@ -40,7 +40,7 @@ const ProductListFilter = () => {
   );
   const {
     categoryFilter,
-    colorsFilter,
+    // colorsFilter,
     patternsFilter,
     modelsFilter
   } = filters;

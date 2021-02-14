@@ -21,12 +21,10 @@ const PriceFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
 
-  const { filterData, filters, language, currency } = useSelector(
+  const { filters, language } = useSelector(
     ({ Products, Language, Currency }) => ({
-      filterData: Products.filterData,
       filters: Products.filters.priceFilter,
-      language: Language.language,
-      currency: Currency.currency
+      language: Language.language
     })
   );
   useEffect(() => {

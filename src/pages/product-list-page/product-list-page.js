@@ -78,10 +78,10 @@ const ProductListPage = ({ model, width }) => {
   }, [dispatch]);
 
   const fetchFilteredData = useCallback(
-    (dispatch) => {
+    (dispatched) => {
       console.log('callback');
-      dispatch(setCurrentPage(searchParams.get('page')));
-      dispatch(getFiltredProducts({}));
+      dispatched(setCurrentPage(searchParams.get('page')));
+      dispatched(getFiltredProducts({}));
     },
     [
       sortByRate,

@@ -13,13 +13,7 @@ import {
   SORT_BY_SELECT_OPTIONS,
   SORT_BY_TEXT
 } from '../../../translations/product-list.translations';
-import {
-  SORT_ASC,
-  SORT_DESC,
-  RATE,
-  POPULARITY,
-  URL_QUERIES_NAME
-} from '../../../configs';
+import { URL_QUERIES_NAME } from '../../../configs';
 
 const ProductSort = () => {
   const { language } = useSelector(({ Language }) => ({
@@ -32,7 +26,7 @@ const ProductSort = () => {
   const searchParams = new URLSearchParams(search);
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
   const query = searchParams.get(sort);
-  const sortAction = [setSortByPrice, setSortByRate, setSortByPrice];
+  // const sortAction = [setSortByPrice, setSortByRate, setSortByPrice];
   useEffect(() => {
     // SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }, index) => {
     //   if (query === optionValue.name) {

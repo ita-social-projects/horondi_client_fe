@@ -35,10 +35,10 @@ const SideBarItem = ({
   const { quantityPerPage } = useSelector(({ Products }) => ({
     quantityPerPage: Products.countPerPage
   }));
-  const handleModelClick = (productModels, category) => {
+  const handleModelClick = (productModels, categoryId) => {
     history.push('/');
     history.push(
-      `products/?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${category}&${modelsFilter}=${productModels._id}`
+      `products/?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
     );
   };
   return (

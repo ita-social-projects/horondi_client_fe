@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
@@ -77,9 +77,30 @@ const ProductListPage = ({ model, width }) => {
     dispatch(getAllFilters());
   }, [dispatch]);
 
+  const fetchFilteredData = useCallback(
+    (dispatch) => {
+      console.log('callback');
+      dispatch(setCurrentPage(searchParams.get('page')));
+      dispatch(getFiltredProducts({}));
+    },
+    [
+      sortByRate,
+      sortByPrice,
+      sortByPopularity,
+      countPerPage,
+      modelsFilter.length,
+      categoryFilter.length,
+      colorsFilter.length,
+      patternsFilter.length,
+      isHotItemFilter,
+      currentPage,
+      filterStatus,
+      url
+    ]
+  );
   useEffect(() => {
-    dispatch(setCurrentPage(searchParams.get('page')));
-    dispatch(getFiltredProducts({}));
+    fetchFilteredData(dispatch);
+    console.log('useEffect');
   }, [
     dispatch,
     sortByRate,
@@ -95,6 +116,7 @@ const ProductListPage = ({ model, width }) => {
     filterStatus,
     url
   ]);
+
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };

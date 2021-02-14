@@ -117,9 +117,11 @@ const Routes = () => {
                 redirectTo='/login'
               />
               <Route
-                path='/:category/:model'
+                path='/products/:category/:model'
                 exact
-                render={({ match }) => {
+                render={({ match, history }) => {
+                  console.log(history);
+                  console.log(match);
                   const { category, model } = match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>

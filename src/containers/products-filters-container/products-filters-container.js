@@ -69,22 +69,35 @@ const ProductsFiltersContainer = ({
               <CloseIcon fontSize='small' />
             </ListItem>
           ) : null}
-          {list.map((listItems) => (
-            <ListItem button className={styles.nested} key={listItems}>
-              <Checkbox
-                name={listItems}
-                onChange={filterHandler}
-                size='small'
-                color='default'
-                checked={
+          {list.map((listItem) => (
+            <label key={listItem}>
+              {' '}
+              <ListItem
+                selected={
                   productFilter
-                    ? productFilter.find((filter) => filter === listItems) ||
-                      checkCategory(listItems)
+                    ? productFilter.find((filter) => filter === listItem) ||
+                      checkCategory(listItem)
                     : false
                 }
-              />
-              <ListItemText primary={listItems} />
-            </ListItem>
+                button
+                className={styles.nested}
+                key={listItem}
+              >
+                <Checkbox
+                  name={listItem}
+                  onChange={filterHandler}
+                  size='small'
+                  color='default'
+                  checked={
+                    productFilter
+                      ? productFilter.find((filter) => filter === listItem) ||
+                        checkCategory(listItem)
+                      : false
+                  }
+                />
+                <ListItemText primary={listItem} />
+              </ListItem>{' '}
+            </label>
           ))}
         </List>
       </Collapse>

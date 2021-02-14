@@ -38,7 +38,7 @@ const SideBarItem = ({
   const handleModelClick = (productModels, category) => {
     history.push('/');
     history.push(
-      `products/?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${category}&${modelsFilter}=${productModels.name[language].value}`
+      `products/?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${category}&${modelsFilter}=${productModels._id}`
     );
   };
   return (

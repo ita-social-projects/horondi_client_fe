@@ -109,11 +109,13 @@ const ProductListFilter = () => {
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
-      list: filterData.models.map((model) => model._id),
+      list: filterData.models.map((model) => model.name[language].value),
+      categories: filterData.models, // add this for working
       filterAction: setModelsFilter,
       labels: 'modelsFilter',
       clearFilter: () => handleFilterClear(setModelsFilter, 'modelsFilter'),
-      filterHandler: (e) => handleFilterChange(e, 'modelsFilter')
+      filterHandler: (e) =>
+        handleFilterChange(e, 'modelsFilter', filterData.models)
     },
     // colors: {
     //   filterName: COLORS_TEXT[language].value,
@@ -128,10 +130,12 @@ const ProductListFilter = () => {
       filterName: PATTERN_TEXT[language].value,
       productFilter: patternsFilter,
       list: filterData.patterns.map((pattern) => pattern.name[language].value),
+      categories: filterData.patterns,
       filterAction: setPatternsFilter,
       labels: 'patternsFilter',
       clearFilter: () => handleFilterClear(setPatternsFilter, 'patternsFilter'),
-      filterHandler: (e) => handleFilterChange(e, 'patternsFilter')
+      filterHandler: (e) =>
+        handleFilterChange(e, 'patternsFilter', filterData.patterns)
     }
   };
   const handleClearFilter = () => {
@@ -152,7 +156,8 @@ const ProductListFilter = () => {
       labels,
       filterAction,
       filterHandler,
-      clearFilter
+      clearFilter,
+      categories
     }) => (
       <ProductsFiltersContainer
         key={filterName}
@@ -163,7 +168,7 @@ const ProductListFilter = () => {
         filterAction={filterAction}
         filterHandler={filterHandler}
         clearFilter={clearFilter}
-        categories={filterData.categories}
+        categories={categories}
       />
     )
   );

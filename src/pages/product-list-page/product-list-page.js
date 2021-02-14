@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';

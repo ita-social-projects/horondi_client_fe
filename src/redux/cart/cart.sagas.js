@@ -1,4 +1,4 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, call, select, all } from 'redux-saga/effects';
 
 import { setCart } from './cart.actions';
 import {
@@ -58,29 +58,29 @@ export function* handleAddCartItem({ payload }) {
   setToLocalStorage(cartKey, newCart);
 }
 
-export function* handleRemoveCartItem({
-  payload: { _id, selectedSize, sidePocket, bottomMaterial }
-}) {
+export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
-  const newCart = cart.filter(
-    (item) =>
-      item._id !== _id ||
-      (item._id === _id &&
-        item.selectedSize._id &&
-        item.selectedSize._id !== selectedSize._id) ||
-      (item._id === _id && item.sidePocket && item.sidePocket !== sidePocket) ||
-      (item._id === _id &&
-        item.bottomMaterial.material._id &&
-        item.bottomMaterial.material._id !== bottomMaterial.material._id)
-  );
-
-  yield call(handleUserCartOperation, removeProductFromUserCart, cart, {
-    _id,
-    selectedSize,
-    sidePocket,
-    bottomMaterial
+  const newCart = cart.filter((item) => {
+    const foundedItem = payload.some(
+      (el) =>
+        item._id === el._id &&
+        item.selectedSize._id === el.selectedSize._id &&
+        item.sidePocket === el.sidePocket &&
+        item.bottomMaterial.material._id === el.bottomMaterial.material._id
+    );
+    return !foundedItem;
   });
 
+  yield all(
+    payload.map(({ _id, selectedSize, sidePocket, bottomMaterial }) =>
+      call(handleUserCartOperation, removeProductFromUserCart, cart, {
+        _id,
+        selectedSize,
+        sidePocket,
+        bottomMaterial
+      })
+    )
+  );
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }

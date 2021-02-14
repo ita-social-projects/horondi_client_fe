@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   Button,
@@ -9,46 +10,52 @@ import {
 } from '@material-ui/core';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+
 import {
   CART_TITLES,
   CART_TABLE_FIELDS,
   DELIVERY_TYPE,
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
-import { useStyles } from './create-order.styles';
+import { useStyles } from './delivery-type.styles';
 import routes from '../../../../configs/routes';
 
-const CreateOrder = ({ language, totalPrice, currency }) => {
+const DeliveryType = ({ language, totalPrice, currency }) => {
   const styles = useStyles();
   const [deliveryType, setDeliveryType] = useState('SELFPICKUP');
+
   const { pathToBackpacks, pathToCheckout } = routes;
-  const currencySign =
-    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+
+  const currencySign = currency ? faDollarSign : faHryvnia;
+
   const radioButtons = Object.entries(DELIVERY_TYPE[language]).map((type) => (
     <FormControlLabel
       value={type[0].toUpperCase()}
-      control={<Radio color='default' />}
+      control={<Radio color='default' size='small' />}
       label={type[1]}
       key={type[0]}
+      classes={{ label: styles.radioBtn }}
     />
   ));
 
   return (
     <div className={styles.root}>
       <h2>{CART_TITLES[language].order}</h2>
-      <div>
+      <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
-          {totalPrice} <FontAwesomeIcon icon={currencySign} />
+          {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div>
         <h3>{CART_TABLE_FIELDS[language].delivery}</h3>
-        <FormControl component='fieldset'>
+        <FormControl
+          component='fieldset'
+          classes={{ root: styles.radioBtnWrapper }}
+        >
           <RadioGroup
-            aria-label='gender'
-            name='gender1'
+            aria-label='Delivery type'
+            name='delivery-type'
             value={deliveryType}
             onChange={(e) => setDeliveryType(e.target.value)}
           >
@@ -56,14 +63,19 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
           </RadioGroup>
         </FormControl>
       </div>
-      <div>
+      <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
-          {totalPrice} <FontAwesomeIcon icon={currencySign} />
+          {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div className={styles.btnWrapper}>
-        <Link to={pathToCheckout}>
+        <Link
+          to={{
+            pathname: pathToCheckout,
+            deliveryType
+          }}
+        >
           <Button className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].checkout}
           </Button>
@@ -78,4 +90,4 @@ const CreateOrder = ({ language, totalPrice, currency }) => {
   );
 };
 
-export default CreateOrder;
+export default DeliveryType;

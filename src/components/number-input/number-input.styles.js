@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     color: theme.palette.textColor,
     display: 'flex',
+    justifyContent: 'center',
     '& input::-webkit-outer-spin-button': {
       WebkitAppearance: 'none',
       margin: 0

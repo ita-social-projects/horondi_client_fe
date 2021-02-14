@@ -10,7 +10,6 @@ import HotItemFilter from './hot-item-filter';
 import { useStyles } from './product-list-filter.styles';
 import {
   getFiltredProducts,
-  // setColorsFilter,
   setPatternsFilter,
   setCategoryFilter,
   setModelsFilter
@@ -21,7 +20,6 @@ import {
   PATTERN_TEXT,
   CATERGORY_TEXT,
   CLEAR_FILTER_BUTTON_TEXT
-  // COLORS_TEXT
 } from '../../../translations/product-list.translations';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
 
@@ -38,20 +36,7 @@ const ProductListFilter = () => {
       filterData: Products.filterData
     })
   );
-  const {
-    categoryFilter,
-    // colorsFilter,
-    patternsFilter,
-    modelsFilter
-  } = filters;
-  //
-  // const {
-  //   categories,
-  //   categoriesNames,
-  //   colorsNames,
-  //   patternsNames,
-  //   modelNames
-  // } = useProductSpecies();
+  const { categoryFilter, patternsFilter, modelsFilter } = filters;
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
     let query = searchParams.get(queryName);
@@ -110,7 +95,7 @@ const ProductListFilter = () => {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
       list: filterData.models.map((model) => model.name[language].value),
-      categories: filterData.models, // add this for working
+      categories: filterData.models,
       filterAction: setModelsFilter,
       labels: 'modelsFilter',
       clearFilter: () => handleFilterClear(setModelsFilter, 'modelsFilter'),

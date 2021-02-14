@@ -52,7 +52,6 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
       yield put(setProductsLoading(false));
     }
   } catch (e) {
-    console.log(e);
     yield call(handleProductsErrors, e);
   }
 }

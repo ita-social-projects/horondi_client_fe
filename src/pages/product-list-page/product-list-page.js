@@ -77,30 +77,9 @@ const ProductListPage = ({ model, width }) => {
     dispatch(getAllFilters());
   }, [dispatch]);
 
-  const fetchFilteredData = useCallback(
-    (dispatched) => {
-      console.log('callback');
-      dispatched(setCurrentPage(searchParams.get('page')));
-      dispatched(getFiltredProducts({}));
-    },
-    [
-      sortByRate,
-      sortByPrice,
-      sortByPopularity,
-      countPerPage,
-      modelsFilter.length,
-      categoryFilter.length,
-      colorsFilter.length,
-      patternsFilter.length,
-      isHotItemFilter,
-      currentPage,
-      filterStatus,
-      url
-    ]
-  );
   useEffect(() => {
-    fetchFilteredData(dispatch);
-    console.log('useEffect');
+    dispatch(setCurrentPage(searchParams.get('page')));
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,
@@ -116,7 +95,6 @@ const ProductListPage = ({ model, width }) => {
     filterStatus,
     url
   ]);
-
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };

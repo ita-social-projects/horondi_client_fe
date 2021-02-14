@@ -103,14 +103,14 @@ export const CHECKOUT_DELIVERY_TYPES = {
 export const CHECKOUT_BUTTON = {
   0: {
     createOrder: 'Створити замовлення',
-    pay: 'Оплатити',
-    confirm: 'Підтвердити',
+    payOrder: 'Перейти до оплати',
+    confirmOrder: 'Підтвердити замовлення',
     cancel: 'Скасувати'
   },
   1: {
     createOrder: 'Create order',
-    pay: 'Pay',
-    confirm: 'Confirm',
+    payOrder: 'Pay',
+    confirmOrder: 'Confirm order',
     cancel: 'Cancel'
   }
 };

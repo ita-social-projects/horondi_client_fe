@@ -48,9 +48,11 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   checkoutFormContainer: {
     display: 'flex',
-    flexDirection: 'column',
-    width: '60%',
-    justifyContent: 'space-around'
+    width: '100%',
+    justifyContent: 'space-between'
+  },
+  userInfoContainer: {
+    width: '60%'
   },
   contactInfoWrapper: {
     display: 'flex',
@@ -71,12 +73,21 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginLeft: '2%'
   },
 
-  button: {
+  submitBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 400,
+    fontSize: 19,
+    background: palette.button.normal.backgroundColor,
+    borderRadius: '10px',
+    width: 300,
+    height: 50,
+    cursor: 'pointer',
     color: palette.button.normal.color,
-    backgroundColor: palette.button.normal.backgroundColor,
     '&:hover': {
-      color: palette.button.hover.color,
-      backgroundColor: palette.button.hover.backgroundColor
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
     }
   }
 }));

@@ -316,7 +316,7 @@ export function* handleUserPreserve() {
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+    // yield put(push('/error-page'));
   } finally {
     yield put(setUserIsChecked(true));
     yield put(setUserLoading(false));

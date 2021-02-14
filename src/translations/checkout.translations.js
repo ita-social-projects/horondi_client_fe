@@ -8,7 +8,7 @@ export const CHECKOUT_TITLES = {
     delivery: 'Доставка',
     payment: 'Метод оплати',
     deliveryPrice: 'Ціна доставки',
-    totalPrice: 'Всього',
+    totalPrice: 'До сплати',
     schedule: 'Графік роботи:',
     mondayToFriday: 'Пн-пт:  ',
     saturday: 'Сб:  ',

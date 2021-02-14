@@ -17,7 +17,8 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import routes from '../../../configs/routes';
+import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
+import Delivery from './delivery';
 
 const CheckoutForm = ({ language, isLightTheme }) => {
   const styles = useStyles({
@@ -200,15 +201,24 @@ const CheckoutForm = ({ language, isLightTheme }) => {
               </div>
             </div>
             <div className={styles.deliveryContainer}>
+              <Delivery language={language} isLightTheme={isLightTheme} />
               <div className={styles.submitInfo}>
-                <div className={styles.totalSum} />
-                <Link to={routes.pathToProducts}>
-                  <button type='submit' className={styles.submitBtn}>
-                    {values.paymentMethod === '' ||
-                    values.paymentMethod === CHECKOUT_PAYMENT[language].cash
-                      ? CHECKOUT_BUTTON[language].confirmOrder
-                      : CHECKOUT_BUTTON[language].payOrder}
-                  </button>
+                <div className={styles.totalSum}>
+                  <h4 className={styles.totalSumTitle}>
+                    {CHECKOUT_TITLES[language].totalPrice}
+                  </h4>
+                  <p className={styles.totalSumValue}>900</p>
+                </div>
+                <button type='submit' className={styles.submitBtn}>
+                  {values.paymentMethod === '' ||
+                  values.paymentMethod === CHECKOUT_PAYMENT[language].cash
+                    ? CHECKOUT_BUTTON[language].confirmOrder
+                    : CHECKOUT_BUTTON[language].payOrder}
+                </button>
+                <Link to='/'>
+                  <span className={`${styles.totalSumTitle} ${styles.goods}`}>
+                    {CART_BUTTON_TITLES[language].goods}
+                  </span>
                 </Link>
               </div>
             </div>

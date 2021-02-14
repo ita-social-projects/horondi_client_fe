@@ -72,7 +72,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: 500,
     marginLeft: '2%'
   },
-
   submitBtn: {
     display: 'flex',
     alignItems: 'center',
@@ -89,5 +88,26 @@ export const useStyles = makeStyles(({ palette }) => ({
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
     }
+  },
+  totalSum: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    borderTop: '1px solid #636262',
+    borderBottom: '1px solid #636262',
+    margin: '1% 0 1% 0'
+  },
+  totalSumTitle: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    fontSize: 19,
+    fontWeight: 400,
+    color: '#363636',
+    margin: 0,
+    width: '100%'
+  },
+  goods: {
+    fontSize: 17
   }
 }));

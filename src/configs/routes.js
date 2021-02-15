@@ -5,6 +5,7 @@ const routes = {
   pathToProducts: '/product',
   pathToErrorPage: '/error-page',
   pathToBackpacks: '/backpacks',
-  pathToCheckout: '/checkout'
+  pathToCheckout: '/checkout',
+  pathToCart: '/cart'
 };
 export default routes;

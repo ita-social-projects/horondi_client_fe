@@ -20,7 +20,7 @@ const ImagesConstructor = () => {
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
-      const images = sources.map(
+      const loadedImages = sources.map(
         (source) =>
           new Promise((resolve, reject) => {
             const img = new Image();
@@ -30,21 +30,21 @@ const ImagesConstructor = () => {
           })
       );
 
-      resolve(Promise.all(images).then((images) => images));
+      resolve(Promise.all(loadedImages).then((loadedImage) => loadedImage));
     });
 
   const mergeImages = (
-    images,
-    canvas,
+    imagesToMerge,
+    currentCanvas,
     width = 1000,
     height = 1000,
     x = 0,
     y = 0
   ) => {
-    const ctx = canvas.getContext('2d');
+    const ctx = currentCanvas.getContext('2d');
     ctx.clearRect(0, 0, width, height);
-    images.forEach((img) => {
-      ctx.drawImage(img, x, y, width, height);
+    imagesToMerge.forEach((imageToMerge) => {
+      ctx.drawImage(imageToMerge, x, y, width, height);
     });
   };
 
@@ -60,8 +60,8 @@ const ImagesConstructor = () => {
         images.basicImage,
         images.bottomImage,
         images.patternImage
-      ]).then((images) => {
-        mergeImages(images, canvas.current, canvasW, canvasH);
+      ]).then((loadedImages) => {
+        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
         methods.dispatch(setModelLoading(false));
       });
     }
@@ -72,43 +72,26 @@ const ImagesConstructor = () => {
     images.bottomImage
   ]);
 
-  const availableModels = useMemo(
-    () =>
-      map(values.models, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.models]
+  const options = (obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
   );
 
-  const availableBasics = useMemo(
-    () =>
-      map(values.basics, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.basics]
+  const availableModels = useMemo(() =>
+    map(values.models, options, [values.models])
   );
 
-  const availablePatterns = useMemo(
-    () =>
-      map(values.patterns, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.patterns]
+  const availableBasics = useMemo(() =>
+    map(values.basics, options, [values.basics])
   );
-  const availableBottoms = useMemo(
-    () =>
-      map(values.bottoms, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.bottoms]
+
+  const availablePatterns = useMemo(() =>
+    map(values.patterns, options, [values.patterns])
+  );
+
+  const availableBottoms = useMemo(() =>
+    map(values.bottoms, options, [values.bottoms])
   );
 
   return (

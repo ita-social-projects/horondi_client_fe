@@ -19,11 +19,19 @@ import {
 import { useStyles } from './checkout-form.styles';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import Delivery from './delivery';
+import { calcPrice } from '../../../utils/priceCalculating';
+import { DEFAULT_CURRENCY, formRegExp } from '../../../configs';
 
-const CheckoutForm = ({ language, isLightTheme }) => {
+const CheckoutForm = ({ language, isLightTheme, currency, cartItems, match }) => {
+  console.log(match);
   const styles = useStyles({
     isLightTheme
   });
+  const totalPriceToPay = cartItems.reduce(
+    (previousValue, currentValue) =>
+      previousValue + calcPrice(currentValue, currency),
+    0
+  );
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -38,7 +46,7 @@ const CheckoutForm = ({ language, isLightTheme }) => {
       .email(CHECKOUT_ERROR[language].email)
       .required(CHECKOUT_ERROR[language].requiredField),
     phoneNumber: Yup.string()
-      .email(CHECKOUT_ERROR[language].phoneNumber)
+      .matches(formRegExp.phoneNumber, CHECKOUT_ERROR[language].phoneNumber)
       .required(CHECKOUT_ERROR[language].requiredField),
     paymentMethod: Yup.string().required(
       CHECKOUT_ERROR[language].requiredField
@@ -46,7 +54,6 @@ const CheckoutForm = ({ language, isLightTheme }) => {
     userComment: Yup.string()
       .min(2, CHECKOUT_ERROR[language].firstName)
       .max(20, CHECKOUT_ERROR[language].firstName)
-      .required(CHECKOUT_ERROR[language].requiredField)
   });
 
   const { values, handleSubmit, handleChange, touched, errors } = useFormik({
@@ -72,77 +79,85 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                   {CHECKOUT_TITLES[language].contactInfo}
                 </h2>
                 <div className={styles.contactInfoFields}>
-                  <TextField
-                    size='small'
-                    id='outlined-basic'
-                    data-cy='firstName'
-                    name='firstName'
-                    className={styles.textField}
-                    variant='outlined'
-                    label={CHECKOUT_TEXT_FIELDS[language].firstName}
-                    value={values.firstName}
-                    onChange={handleChange}
-                    error={touched.code && !!errors.code}
-                  />
-                  {touched.code && errors.code && (
-                    <div data-cy='code-error' className={styles.error}>
-                      {errors.code}
-                    </div>
-                  )}
-                  <TextField
-                    size='small'
-                    id='standard-start-adornment'
-                    data-cy='lastName'
-                    name='lastName'
-                    className={styles.textField}
-                    variant='outlined'
-                    label={CHECKOUT_TEXT_FIELDS[language].lastName}
-                    value={values.lastName}
-                    onChange={handleChange}
-                    error={touched.code && !!errors.code}
-                  />
-                  {touched.code && errors.code && (
-                    <div data-cy='code-error' className={styles.error}>
-                      {errors.code}
-                    </div>
-                  )}
+                  <div className={styles.inputData}>
+                    <TextField
+                      size='small'
+                      id='outlined-basic'
+                      data-cy='firstName'
+                      name='firstName'
+                      className={styles.textField}
+                      variant='outlined'
+                      label={CHECKOUT_TEXT_FIELDS[language].firstName}
+                      value={values.firstName}
+                      onChange={handleChange}
+                      error={touched.firstName && !!errors.firstName}
+                    />
+                    {touched.firstName && errors.firstName && (
+                      <div data-cy='code-error' className={styles.error}>
+                        {errors.firstName}
+                      </div>
+                    )}
+                  </div>
+                  <div className={styles.inputData}>
+                    <TextField
+                      size='small'
+                      id='standard-start-adornment'
+                      data-cy='lastName'
+                      name='lastName'
+                      className={styles.textField}
+                      variant='outlined'
+                      label={CHECKOUT_TEXT_FIELDS[language].lastName}
+                      value={values.lastName}
+                      onChange={handleChange}
+                      error={touched.lastName && !!errors.lastName}
+                    />
+                    {touched.lastName && errors.lastName && (
+                      <div data-cy='code-error' className={styles.error}>
+                        {errors.lastName}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className={styles.contactInfoFields}>
-                <TextField
-                  size='small'
-                  id='standard-start-adornment'
-                  data-cy='email'
-                  name='email'
-                  className={styles.textField}
-                  variant='outlined'
-                  label={CHECKOUT_TEXT_FIELDS[language].email}
-                  value={values.email}
-                  onChange={handleChange}
-                  error={touched.code && !!errors.code}
-                />
-                {touched.code && errors.code && (
-                  <div data-cy='code-error' className={styles.error}>
-                    {errors.code}
+                <div className={styles.contactInfoFields}>
+                  <div className={styles.inputData}>
+                    <TextField
+                      size='small'
+                      id='standard-start-adornment'
+                      data-cy='email'
+                      name='email'
+                      className={styles.textField}
+                      variant='outlined'
+                      label={CHECKOUT_TEXT_FIELDS[language].email}
+                      value={values.email}
+                      onChange={handleChange}
+                      error={touched.email && !!errors.email}
+                    />
+                    {touched.email && errors.email && (
+                      <div data-cy='code-error' className={styles.error}>
+                        {errors.email}
+                      </div>
+                    )}
                   </div>
-                )}
-                <TextField
-                  size='small'
-                  id='standard-start-adornment'
-                  data-cy='phoneNumber'
-                  name='phoneNumber'
-                  className={styles.textField}
-                  variant='outlined'
-                  label={CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}
-                  value={values.phoneNumber}
-                  onChange={handleChange}
-                  error={touched.code && !!errors.code}
-                />
-                {touched.code && errors.code && (
-                  <div data-cy='code-error' className={styles.error}>
-                    {errors.code}
+                  <div className={styles.inputData}>
+                    <TextField
+                      size='small'
+                      id='standard-start-adornment'
+                      data-cy='phoneNumber'
+                      name='phoneNumber'
+                      className={styles.textField}
+                      variant='outlined'
+                      label={CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}
+                      value={values.phoneNumber}
+                      onChange={handleChange}
+                      error={touched.phoneNumber && !!errors.phoneNumber}
+                    />
+                    {touched.phoneNumber && errors.phoneNumber && (
+                      <div data-cy='code-error' className={styles.error}>
+                        {errors.phoneNumber}
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
               <div className={styles.contactPaymentInfo}>
                 <h2
@@ -150,7 +165,10 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                 >
                   {CHECKOUT_TITLES[language].payment}
                 </h2>
-                <FormControl variant='outlined' className={styles.formControl}>
+                <FormControl
+                  error={touched.paymentMethod && !!errors.paymentMethod}
+                  variant='outlined' className={styles.formControl}
+                >
                   <InputLabel variant='outlined'>
                     {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
                   </InputLabel>
@@ -159,8 +177,7 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                     className={styles.paymentSelect}
                     data-cy='paymentMethod'
                     name='paymentMethod'
-                    error={touched.paymentMethod && !!errors.paymentMethod}
-                    value={values.paymentMethod || []}
+                    value={values.paymentMethod}
                     onChange={handleChange}
                   >
                     {Object.values(CHECKOUT_PAYMENT[language]).map((value) => (
@@ -170,6 +187,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                     ))}
                   </Select>
                 </FormControl>
+                {touched.paymentMethod && errors.paymentMethod && (
+                  <div data-cy='code-error' className={styles.error}>
+                    {errors.paymentMethod}
+                  </div>
+                )}
               </div>
               <div className={styles.contactPaymentInfo}>
                 <h2 className={styles.contactInfoTitle}>
@@ -207,7 +229,13 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                   <h4 className={styles.totalSumTitle}>
                     {CHECKOUT_TITLES[language].totalPrice}
                   </h4>
-                  <p className={styles.totalSumValue}>900</p>
+                  <p className={`${styles.totalSumTitle  } ${  styles.totalSumValue}`}>
+                    {totalPriceToPay / 100} {
+                      currency === DEFAULT_CURRENCY ?
+                        CHECKOUT_TITLES[language].UAH :
+                        CHECKOUT_TITLES[language].USD
+                    }
+                  </p>
                 </div>
                 <button type='submit' className={styles.submitBtn}>
                   {values.paymentMethod === '' ||

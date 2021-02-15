@@ -1,5 +1,7 @@
 export const CHECKOUT_TITLES = {
   0: {
+    address: 'Адреса:',
+    addressHorondi: 'Львів, вул. Заводська,31',
     orderComment: 'Коментар до замовлення',
     checkoutTitle: 'Оплата та доставка',
     yourOrderTitle: 'Ваше замовлення',
@@ -10,14 +12,16 @@ export const CHECKOUT_TITLES = {
     deliveryPrice: 'Ціна доставки',
     totalPrice: 'До сплати',
     schedule: 'Графік роботи:',
-    mondayToFriday: 'Пн-пт:  ',
-    saturday: 'Сб:  ',
-    sunday: 'Нд:  ',
-    UAH: 'UAH',
+    workDay: '10:00 - 19:00',
+    restDay: 'Вихідний',
+    UAH: 'грн',
+    USD: 'долл',
     region: 'Регіон',
     orderNumber: 'Замовлення № '
   },
   1: {
+    address: 'Address:',
+    addressHorondi: 'Lviv, st. Zavodska,31',
     orderComment: 'Order comment',
     checkoutTitle: 'Payment and delivery',
     yourOrderTitle: 'Your order',
@@ -28,15 +32,35 @@ export const CHECKOUT_TITLES = {
     deliveryPrice: 'Delivery price',
     totalPrice: 'Total price',
     schedule: 'Schedule:',
-    mondayToFriday: 'Mon-Fri',
-    saturday: 'Sat',
-    sunday: 'Sun',
+    workDay: '10:00 - 19:00',
+    restDay: 'Day off',
     UAH: 'UAH',
+    USD: 'USD',
     region: 'Region',
     orderNumber: 'Order № '
   }
 };
 
+export const SCHEDULE = {
+  0: {
+    monday: 'Пн:  ',
+    tuesday: 'Вт:  ',
+    wednesday: 'Ср:  ',
+    thursday: 'Чт:  ',
+    friday: 'Пт:  ',
+    saturday: 'Сб:  ',
+    sunday: 'Нд:  '
+  },
+  1: {
+    monday: 'Mon:  ',
+    tuesday: 'Tue:  ',
+    wednesday: 'Wed:  ',
+    thursday: 'Thu:  ',
+    friday: 'Fri:  ',
+    saturday: 'Sat:  ',
+    sunday: 'Sun:  '
+  }
+};
 export const CHECKOUT_TEXT_FIELDS = {
   0: {
     firstName: "Ім'я *",
@@ -48,7 +72,7 @@ export const CHECKOUT_TEXT_FIELDS = {
     street: 'Вулиця',
     apartment: 'Квартира',
     orderComment: 'Коментар до замовлення...',
-    paymentMethod: 'Виберіть метод оплати',
+    paymentMethod: 'Виберіть метод оплати *',
     deliveryType: 'Виберіть тип доставки',
     department: 'Відділення',
     delivery: 'Тип доставки',
@@ -64,14 +88,13 @@ export const CHECKOUT_TEXT_FIELDS = {
     street: 'Street',
     apartment: 'Apartment',
     orderComment: 'Order comment...',
-    paymentMethod: 'Choose a payment method',
+    paymentMethod: 'Choose a payment method *',
     deliveryType: 'Select a delivery type',
     department: 'Department',
     delivery: 'Delivery type',
     total: 'Total'
   }
 };
-
 export const CHECKOUT_DROP_LIST = {
   0: {
     deliveryType: 'Тип доставки',
@@ -84,7 +107,6 @@ export const CHECKOUT_DROP_LIST = {
     department: 'Department'
   }
 };
-
 export const CHECKOUT_DELIVERY_TYPES = {
   0: {
     selfPickUP: 'Самовивіз',
@@ -99,7 +121,6 @@ export const CHECKOUT_DELIVERY_TYPES = {
     courierNovaPoshta: 'Courier from Nova poshta'
   }
 };
-
 export const CHECKOUT_BUTTON = {
   0: {
     createOrder: 'Створити замовлення',
@@ -124,7 +145,6 @@ export const CHECKOUT_PAYMENT = {
     cash: 'Cash'
   }
 };
-
 export const CHECKOUT_ADDITIONAL_INFORMATION = {
   0: {
     additionalInfo:
@@ -134,7 +154,6 @@ export const CHECKOUT_ADDITIONAL_INFORMATION = {
     additionalInfo: '* Order will be shipped within 10 business days.'
   }
 };
-
 export const CHECKOUT_ERROR = {
   0: {
     requiredField: 'Поле не повинне бути порожнім',

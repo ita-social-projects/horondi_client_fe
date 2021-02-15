@@ -9,10 +9,13 @@ import CheckoutForm from './checkout-form';
 import routes from '../../configs/routes';
 
 const Checkout = () => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
-  }));
+  const { language, isLightTheme, currency, cartItems } = useSelector(
+    ({ Language, Theme, Currency, Cart }) => ({
+      language: Language.language,
+      isLightTheme: Theme.lightMode,
+      currency: Currency.currency,
+      cartItems: Cart.list
+    }));
   const styles = useStyles({
     isLightTheme
   });
@@ -43,7 +46,12 @@ const Checkout = () => {
           </div>
         </div>
         <div className={styles.checkoutMain}>
-          <CheckoutForm language={language} isLightTheme={isLightTheme} />
+          <CheckoutForm
+            language={language}
+            isLightTheme={isLightTheme}
+            currency={currency}
+            cartItems={cartItems}
+          />
         </div>
       </div>
     </div>

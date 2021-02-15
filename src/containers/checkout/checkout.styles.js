@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
   checkoutTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
-    width: '65%'
+    width: '60%'
   },
   checkoutTitleInfoData: {
     display: 'flex',
@@ -47,7 +47,7 @@ export const useStyles = makeStyles((theme) => ({
   checkoutYourOrderTitleData: {
     display: 'flex',
     flexDirection: 'column',
-    width: '35%'
+    width: '40%'
   },
   checkoutTitleLine: {
     width: '80%',

@@ -36,8 +36,9 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   contactInfoFields: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    width: '100%'
+    alignItems: 'flex-start',
+    width: '100%',
+    marginLeft: 10
   },
   a: {
     margin: 0
@@ -63,7 +64,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   error: {
     color: '#e60000',
-    marginLeft: '5px'
+    marginLeft: '3%'
   },
   textField: {
     width: 300,
@@ -78,11 +79,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: 400,
-    fontSize: 19,
+    fontSize: 17,
+    outline: 'none',
     background: palette.button.normal.backgroundColor,
     borderRadius: '10px',
-    width: 300,
-    height: 50,
+    width: 280,
+    marginBottom: 20,
+    height: 43,
     cursor: 'pointer',
     color: palette.button.normal.color,
     '&:hover': {
@@ -93,22 +96,48 @@ export const useStyles = makeStyles(({ palette }) => ({
   totalSum: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
     borderTop: '1px solid #636262',
     borderBottom: '1px solid #636262',
-    margin: '1% 0 1% 0'
+    margin: '9% 0 7% 0',
+    height: 50
   },
-  totalSumTitle: {
+  totalSumTitle: ({ isLightTheme }) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    fontSize: 19,
+    fontSize: 16,
     fontWeight: 400,
-    color: '#363636',
+    color: isLightTheme ? '#363636' : '#fff',
     margin: 0,
-    width: '100%'
+    width: '100%',
+    height: 20
+  }),
+  totalSumValue: {
+    justifyContent: 'flex-end'
   },
-  goods: {
-    fontSize: 17
+  goods: ({ isLightTheme }) => ({
+    fontSize: 13,
+    transition: '0.2s',
+    '&:hover': {
+      transform: 'scale(1.05)',
+      transition: '0.2s'
+    },
+    width: '55%'
+
+  }),
+  deliveryContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    width: '36%',
+    marginRight: '2%',
+    flexWrap: 'wrap'
+  },
+  inputData: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 }));

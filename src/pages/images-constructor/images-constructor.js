@@ -1,44 +1,69 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useLayoutEffect } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
-import mergeImages from 'merge-images';
-import { useStyles } from './constructor.style';
+import { useStyles } from './images-constructor.style';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
-import { setModelLoading } from '../../redux/constructor/constructor-model/constructor-model.actions';
+import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
 import { useConstructor } from './hooks';
+import { IMG_URL } from '../../configs';
 
 const map = require('lodash/map');
 
 const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
 
-const Constructor = () => {
+const ImagesConstructor = () => {
   const styles = useStyles();
   const { values, images, methods } = useConstructor();
-  const image = useRef(null);
+  const canvas = useRef({});
+  const canvasH = 768;
+  const canvasW = 768;
 
-  const createImage = (frontPocket, basic, bottom, pattern) => {
-    mergeImages([frontPocket, basic, bottom, pattern], {
-      height: 3000,
-      weight: 460
-    }).then((b64) => {
-      methods.dispatch(setModelLoading(false));
-      image.current.src = b64;
+  const loadImages = (sources = []) =>
+    new Promise((resolve) => {
+      const images = sources.map(
+        (source) =>
+          new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = () => reject(new Error());
+            img.src = `${IMG_URL}${source}`;
+          })
+      );
+
+      resolve(Promise.all(images).then((images) => images));
+    });
+
+  const mergeImages = (
+    images,
+    canvas,
+    width = 1000,
+    height = 1000,
+    x = 0,
+    y = 0
+  ) => {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height);
+    images.forEach((img) => {
+      ctx.drawImage(img, x, y, width, height);
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       images.basicImage &&
       images.patternImage &&
       images.frontPocketImage &&
       images.bottomImage
     ) {
-      createImage(
+      loadImages([
         images.frontPocketImage,
         images.basicImage,
         images.bottomImage,
         images.patternImage
-      );
+      ]).then((images) => {
+        mergeImages(images, canvas.current, canvasW, canvasH);
+        methods.dispatch(setModelLoading(false));
+      });
     }
   }, [
     images.basicImage,
@@ -132,16 +157,13 @@ const Constructor = () => {
           </FormControl>
         </form>
         <div className={styles.imageContainer}>
-          {values.modelLoading ? (
-            <Loader />
-          ) : (
-            <img
-              ref={image}
-              className={styles.image}
-              id='constructor'
-              alt='Constructor'
-            />
-          )}
+          {values.modelLoading && <Loader />}
+          <canvas
+            className={styles.image}
+            width={canvasW}
+            height={canvasH}
+            ref={canvas}
+          />
         </div>
         <div className={styles.infoWrapper}>
           <h2>Загальна вартість:</h2>
@@ -159,4 +181,4 @@ const Constructor = () => {
   );
 };
 
-export default Constructor;
+export default ImagesConstructor;

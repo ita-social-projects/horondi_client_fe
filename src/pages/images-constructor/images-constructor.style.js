@@ -34,7 +34,7 @@ export const useStyles = makeStyles(() => ({
     maxWidth: '35%'
   },
   image: {
-    maxWidth: '100%'
+    width: '100%'
   },
   infoWrapper: {
     width: '25%'

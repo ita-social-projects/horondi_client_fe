@@ -10,6 +10,8 @@
 # production
 /build
 # misc
+.README.md
+debug.log
 .DS_Store
 .env
 .env.local

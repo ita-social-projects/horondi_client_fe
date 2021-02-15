@@ -15,6 +15,7 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
+import { formRegExp } from '../../../configs';
 
 const CheckoutForm = ({ language, isLightTheme }) => {
   const styles = useStyles({
@@ -34,14 +35,14 @@ const CheckoutForm = ({ language, isLightTheme }) => {
       .email(CHECKOUT_ERROR[language].email)
       .required(CHECKOUT_ERROR[language].requiredField),
     phoneNumber: Yup.string()
-      .email(CHECKOUT_ERROR[language].phoneNumber)
+      .matches(formRegExp.phoneNumber, CHECKOUT_ERROR[language].phoneNumber)
       .required(CHECKOUT_ERROR[language].requiredField),
     paymentMethod: Yup.string().required(
       CHECKOUT_ERROR[language].requiredField
     ),
     userComment: Yup.string()
-      .min(2, CHECKOUT_ERROR[language].firstName)
-      .max(20, CHECKOUT_ERROR[language].firstName)
+      .min(2, CHECKOUT_ERROR[language].userComment)
+      .max(300, CHECKOUT_ERROR[language].userComment)
       .required(CHECKOUT_ERROR[language].requiredField)
   });
   const { values, handleSubmit, handleChange, touched, errors } = useFormik({
@@ -76,11 +77,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                   label={CHECKOUT_TEXT_FIELDS[language].firstName}
                   value={values.firstName}
                   onChange={handleChange}
-                  error={touched.code && !!errors.code}
+                  error={touched.firstName && !!errors.firstName}
                 />
-                {touched.code && errors.code && (
+                {touched.firstName && errors.firstName && (
                   <div data-cy='code-error' className={styles.error}>
-                    {errors.code}
+                    {errors.firstName}
                   </div>
                 )}
                 <TextField
@@ -93,11 +94,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                   label={CHECKOUT_TEXT_FIELDS[language].lastName}
                   value={values.lastName}
                   onChange={handleChange}
-                  error={touched.code && !!errors.code}
+                  error={touched.lastName && !!errors.lastName}
                 />
-                {touched.code && errors.code && (
+                {touched.lastName && errors.lastName && (
                   <div data-cy='code-error' className={styles.error}>
-                    {errors.code}
+                    {errors.lastName}
                   </div>
                 )}
               </div>
@@ -113,11 +114,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                 label={CHECKOUT_TEXT_FIELDS[language].email}
                 value={values.email}
                 onChange={handleChange}
-                error={touched.code && !!errors.code}
+                error={touched.email && !!errors.email}
               />
-              {touched.code && errors.code && (
+              {touched.email && errors.email && (
                 <div data-cy='code-error' className={styles.error}>
-                  {errors.code}
+                  {errors.email}
                 </div>
               )}
               <TextField
@@ -130,11 +131,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                 label={CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}
                 value={values.phoneNumber}
                 onChange={handleChange}
-                error={touched.code && !!errors.code}
+                error={touched.phoneNumber && !!errors.phoneNumber}
               />
-              {touched.code && errors.code && (
+              {touched.phoneNumber && errors.phoneNumber && (
                 <div data-cy='code-error' className={styles.error}>
-                  {errors.code}
+                  {errors.phoneNumber}
                 </div>
               )}
             </div>
@@ -163,6 +164,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                     </MenuItem>
                   ))}
                 </Select>
+                {touched.paymentMethod && errors.paymentMethod && (
+                  <div data-cy='code-error' className={styles.error}>
+                    {errors.paymentMethod}
+                  </div>
+                )}
               </FormControl>
             </div>
             <div className={styles.contactPaymentInfo}>
@@ -181,11 +187,11 @@ const CheckoutForm = ({ language, isLightTheme }) => {
                   variant='outlined'
                   value={values.userComment}
                   onChange={handleChange}
-                  error={touched.code && !!errors.code}
+                  error={touched.userComment && !!errors.userComment}
                 />
                 {touched.code && errors.code && (
                   <div data-cy='code-error' className={styles.error}>
-                    {errors.code}
+                    {errors.userComment}
                   </div>
                 )}
               </div>

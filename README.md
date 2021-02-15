@@ -9,7 +9,7 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
 [![GitHub license](https://img.shields.io/github/license/ita-social-projects/horondi_client_fe)](https://github.com/ita-social-projects/horondi_client_fe/blob/master/LICENSE)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=horondi_horondi_client_fe&metric=alert_status)](https://sonarcloud.io/dashboard?id=horondi_horondi_client_fe)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ita-social-projects-horondi-client-fe&metric=coverage)](https://sonarcloud.io/dashboard?id=ita-social-projects-horondi-client-fe)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/horondi/horondi_client_fe)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/horondi/horondi_client_fe)](https://horondi-front.azurewebsites.net/)
 
 ---
 
@@ -22,11 +22,12 @@ HORONDI project is an e-commerce online shop that provides hand-made backpacks, 
   - [How to run Docker](#How-to-run-Docker)
 - [Usage](#Usage)
   - [How to run tests](#How-to-run-tests)
-- [Documentation](#Documentation))
+- [Documentation](#Documentation)
   - [Rules and guidelines](#Rules-and-guidelines)
   - [Testing](#Testing)
   - [Generator](#Generator)
   - [Chat](#Chat)
+- [Project deploy](#project-deploy)
 - [Contributing](#contributing)
   - [git flow](#git-flow)
   - [issue flow](#git-flow)
@@ -60,8 +61,10 @@ $ npm install
 ### How to run local
 
 1. Open terminal.
-2. Run `npm run start` to start application.
+2. Run `npm run start` to start application.<sup>[*](#footnote)</sup>
 3. Open http://localhost:3000 to view it in the browser.
+
+###### <a name="footnote">*</a> - to run the project you need an `.env` file in root folder
 
 ### How to run Docker
 
@@ -186,7 +189,19 @@ Command `npm run generate` is used to run [graphql code generator](https://graph
 
 ---
 
+## Project Deploy
+
+#### Deploy Сlient part: https://horondi-front.azurewebsites.net/
+
+#### Deploy Admin Part: https://horondi-admin.azurewebsites.net/
+
+---
+
 ## Contributing
+
+#### Here is our [wiki](https://github.com/ita-social-projects/horondi_client_fe/wiki), where you can find guide about project running.
+
+---
 
 You're encouraged to contribute to our project if you've found any issues or missing functionality that you would want to see. Here you can see [the list of issues](https://github.com/ita-social-projects/horondi_client_fe/issues) and here you can create [a new issue](https://github.com/ita-social-projects/horondi_client_fe/issues/new/choose).
 
@@ -314,6 +329,7 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 
 [![@SofiaDemyanovska](https://avatars1.githubusercontent.com/u/48492789?s=200&u=cb0520a8498667594ded0db8e29cdd3ec5529578&v=4)](https://github.com/SofiaDemyanovska)
 [![@ikoblyk](https://avatars3.githubusercontent.com/u/45568834?s=200&u=5d8790e8e58a7966e2d6d6bc6a4f0d15c8cb2e9c&v=4)](https://github.com/IKoblyk)
+[![@vitaliy-pavlyshyn](https://avatars0.githubusercontent.com/u/24523962?s=200&u=db2f3b6459c080079c5c5e4b52da61cd18b4e223&v=4)](https://github.com/vitaliy-pavlyshyn)
 
 ---
 

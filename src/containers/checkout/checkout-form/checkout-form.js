@@ -17,12 +17,18 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
-import Delivery from './delivery';
-import { calcPrice } from '../../../utils/priceCalculating';
 import { DEFAULT_CURRENCY, formRegExp } from '../../../configs';
+import { calcPrice } from '../../../utils/priceCalculating';
+import Delivery from './delivery';
+import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 
-const CheckoutForm = ({ language, isLightTheme, currency, cartItems, match }) => {
+const CheckoutForm = ({
+  language,
+  isLightTheme,
+  currency,
+  cartItems,
+  match
+}) => {
   console.log(match);
   const styles = useStyles({
     isLightTheme
@@ -167,7 +173,8 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, match }) =>
                 </h2>
                 <FormControl
                   error={touched.paymentMethod && !!errors.paymentMethod}
-                  variant='outlined' className={styles.formControl}
+                  variant='outlined'
+                  className={styles.formControl}
                 >
                   <InputLabel variant='outlined'>
                     {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
@@ -229,12 +236,13 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, match }) =>
                   <h4 className={styles.totalSumTitle}>
                     {CHECKOUT_TITLES[language].totalPrice}
                   </h4>
-                  <p className={`${styles.totalSumTitle  } ${  styles.totalSumValue}`}>
-                    {totalPriceToPay / 100} {
-                      currency === DEFAULT_CURRENCY ?
-                        CHECKOUT_TITLES[language].UAH :
-                        CHECKOUT_TITLES[language].USD
-                    }
+                  <p
+                    className={`${styles.totalSumTitle} ${styles.totalSumValue}`}
+                  >
+                    {totalPriceToPay / 100}{' '}
+                    {currency === DEFAULT_CURRENCY
+                      ? CHECKOUT_TITLES[language].UAH
+                      : CHECKOUT_TITLES[language].USD}
                   </p>
                 </div>
                 <button type='submit' className={styles.submitBtn}>

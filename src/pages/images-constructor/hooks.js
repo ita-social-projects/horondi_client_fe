@@ -5,11 +5,11 @@ import {
   getConstructorModelById,
   getModelForConstructor,
   setModelLoading
-} from '../../redux/constructor/constructor-model/constructor-model.actions';
-import { getConstructorBasic } from '../../redux/constructor/constructor-basic/constructor-basic.actions';
-import { getConstructorFrontPocket } from '../../redux/constructor/constructor-front-pocket/constructor-front-pocket.actions';
-import { getConstructorPattern } from '../../redux/constructor/constructor-pattern/constructor-pattern.actions';
-import { getConstructorBottom } from '../../redux/constructor/constructor-bottom/constructor-bottom.actions';
+} from '../../redux/images-constructor/constructor-model/constructor-model.actions';
+import { getConstructorBasic } from '../../redux/images-constructor/constructor-basic/constructor-basic.actions';
+import { getConstructorFrontPocket } from '../../redux/images-constructor/constructor-front-pocket/constructor-front-pocket.actions';
+import { getConstructorPattern } from '../../redux/images-constructor/constructor-pattern/constructor-pattern.actions';
+import { getConstructorBottom } from '../../redux/images-constructor/constructor-bottom/constructor-bottom.actions';
 
 export const useConstructor = () => {
   const dispatch = useDispatch();

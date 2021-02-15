@@ -11,12 +11,14 @@ describe('Categories saga', () => {
     const fakeCategories = {
       data: {
         getAllCategories: {
-          name: [
-            {
-              value: 'Bags',
-              lang: 'en'
-            }
-          ]
+          items: {
+            name: [
+              {
+                value: 'Bags',
+                lang: 'en'
+              }
+            ]
+          }
         }
       }
     };
@@ -26,7 +28,7 @@ describe('Categories saga', () => {
       .put({ type: SET_CATEGORIES_LOADING, payload: true })
       .put({
         type: SET_CATEGORIES,
-        payload: fakeCategories.data.getAllCategories
+        payload: fakeCategories.data.getAllCategories.items
       })
       .put({ type: SET_CATEGORIES_LOADING, payload: false })
       .run();

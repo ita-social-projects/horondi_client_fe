@@ -2,7 +2,28 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '50px auto'
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: 15
+  },
+  orderWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    '@media (max-width: 813px)': {
+      flexDirection: 'column'
+    }
+  },
+  similarProductsWrapper: {
+    textAlign: 'center'
+  },
+  orderTable: {
+    flexGrow: 1,
+    marginRight: 50,
+    '@media (max-width: 813px)': {
+      marginRight: 'initial'
+    }
   },
   backButton: {
     '&:visited': {
@@ -14,21 +35,6 @@ export const useStyles = makeStyles((theme) => ({
       '&:hover': {
         transform: 'scale(1.1)'
       }
-    }
-  },
-  btnWrapper: {
-    display: 'flex',
-    justifyContent: 'space-around'
-  },
-  btnCreateOrder: {
-    marginBottom: '20px',
-    background: theme.palette.button.normal.backgroundColor,
-    borderRadius: '5px',
-    fontSize: '1.5em',
-    color: theme.palette.button.normal.color,
-    '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
     }
   }
 }));

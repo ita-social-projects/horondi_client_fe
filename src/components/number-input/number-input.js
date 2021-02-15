@@ -12,18 +12,16 @@ const NumberInput = ({ onChangeQuantity, quantity }) => {
     <div className={styles.root} data-cy='cart-item-quantity'>
       <Button
         className={styles.button}
-        onClick={() => onChangeQuantity(-1)}
+        onClick={() => onChangeQuantity(quantity - 1)}
         disabled={quantity <= 1}
       >
         <RemoveIcon />
       </Button>
-      <input
-        className={styles.input}
-        type='number'
-        value={quantity}
-        onChange={(e) => onChangeQuantity(e.target.value, true)}
-      />
-      <Button className={styles.button} onClick={() => onChangeQuantity(1)}>
+      <h3>{quantity}</h3>
+      <Button
+        className={styles.button}
+        onClick={() => onChangeQuantity(quantity + 1)}
+      >
         <AddIcon />
       </Button>
     </div>

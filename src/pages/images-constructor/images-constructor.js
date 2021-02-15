@@ -22,10 +22,10 @@ const ImagesConstructor = () => {
     new Promise((resolve) => {
       const loadedImages = sources.map(
         (source) =>
-          new Promise((resolve, reject) => {
+          new Promise((resolveImage, rejectImage) => {
             const img = new Image();
-            img.onload = () => resolve(img);
-            img.onerror = () => reject(new Error());
+            img.onload = () => resolveImage(img);
+            img.onerror = () => rejectImage(new Error());
             img.src = `${IMG_URL}${source}`;
           })
       );

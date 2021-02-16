@@ -18,6 +18,7 @@ import patternSaga from './pattern/pattern.sagas';
 import homePageSliderSaga from './homepage-slider/homepage-slider.sagas';
 import toastSaga from './toast/toast.sagas';
 import { constructorSaga } from './images-constructor/constructor.sagas';
+import orderSaga from './order/order.sagas';
 
 export function* rootSaga() {
   yield all([
@@ -40,6 +41,7 @@ export function* rootSaga() {
     patternSaga(),
     homePageSliderSaga(),
     cartSaga(),
-    constructorSaga()
+    constructorSaga(),
+    orderSaga()
   ]);
 }

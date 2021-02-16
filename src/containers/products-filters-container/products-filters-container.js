@@ -33,7 +33,10 @@ const ProductsFiltersContainer = ({
 
   useEffect(() => {
     if (searchParams.get(labels)) {
-      const query = searchParams.get(labels).split(',');
+      const query = searchParams
+        .get(labels)
+        .split(',')
+        .filter((el) => el !== '');
       dispatch(filterAction(query));
     } else {
       dispatch(filterAction([]));

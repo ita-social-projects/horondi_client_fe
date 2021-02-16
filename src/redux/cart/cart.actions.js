@@ -4,8 +4,8 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   SET_CART_ITEM_QUANTITY,
-  SET_CART_ITEM_CHECKED
-} from './cart.types';
+  SET_CART_ITEM_CHECKED, SET_DELIVERY_TYPE, ADD_DELIVERY_TYPE, GET_DELIVERY_TYPE
+} from "./cart.types";
 
 const setCart = (cartItems) => ({
   type: SET_CART,
@@ -41,6 +41,17 @@ const setCartItemChecked = (item, isChecked) => ({
     isChecked
   }
 });
+const setDeliveryType = payload => ({
+  type: SET_DELIVERY_TYPE,
+  payload
+});
+const addDeliveryType = payload => ({
+  type: ADD_DELIVERY_TYPE,
+  payload
+});
+const getDeliveryType = () => ({
+  type: GET_DELIVERY_TYPE
+});
 
 export {
   setCart,
@@ -48,5 +59,8 @@ export {
   addItemToCart,
   removeItemFromCart,
   setCartItemQuantity,
-  setCartItemChecked
+  setCartItemChecked,
+  setDeliveryType,
+  addDeliveryType,
+  getDeliveryType
 };

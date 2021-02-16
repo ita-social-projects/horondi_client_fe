@@ -9,9 +9,14 @@ export const useStyles = makeStyles(() => ({
     width: '100%',
     marginBottom: '3%'
   },
-  selfPickupData: ({ isLightTheme }) => ({
+  selfPickupTitlesWrapper:{
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
+    width:'40%'
+  },
+  selfPickupData: ({ isLightTheme }) => ({
+    display: 'flex',
     width: '80%',
     background: isLightTheme ? '#f6f4f4' : null,
     paddingLeft: 5
@@ -23,8 +28,9 @@ export const useStyles = makeStyles(() => ({
   }),
   schedule: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'flex-start',
-    width: '100%'
+    width: '60%'
   },
   scheduleTitle: ({ isLightTheme }) => ({
     marginRight: '4%',
@@ -33,7 +39,7 @@ export const useStyles = makeStyles(() => ({
     fontSize: 14
   }),
   addressTitle: ({ isLightTheme }) => ({
-    margin: ' 0 16% 0 0',
+    margin: ' 0 0 7.5% 0',
     color: isLightTheme ? '#000000' : '#ffffffff',
     fontWeight: 'bolder',
     fontSize: 14

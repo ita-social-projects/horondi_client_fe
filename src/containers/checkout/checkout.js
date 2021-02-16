@@ -1,59 +1,59 @@
-import React from 'react';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
-import { useStyles } from './checkout.styles';
-import { CHECKOUT_TITLES } from '../../translations/checkout.translations';
-import CheckoutForm from './checkout-form';
-import routes from '../../configs/routes';
+import { useStyles } from "./checkout.styles";
+import CheckoutForm from "./checkout-form";
+import { getDeliveryType } from "../../redux/cart/cart.actions";
+import { Loader } from "../../components/loader/loader";
+import routes from "../../configs/routes";
 
 const Checkout = () => {
-  const { language, isLightTheme, currency, cartItems } = useSelector(
-    ({ Language, Theme, Currency, Cart }) => ({
+  const {
+    language,
+    isLightTheme,
+    currency,
+    cartItems,
+    deliveryType,
+    loading,
+    isOrderCreated
+
+  } = useSelector(
+    ({ Language, Theme, Currency, Cart, Order }) => ({
       language: Language.language,
       isLightTheme: Theme.lightMode,
       currency: Currency.currency,
-      cartItems: Cart.list
+      cartItems: Cart.list,
+      deliveryType: Cart.deliveryType,
+      loading: Order.loading,
+      isOrderCreated: Order.isOrderCreated
+
     }));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDeliveryType());
+  }, [dispatch, deliveryType]);
+
   const styles = useStyles({
     isLightTheme
   });
 
   return (
     <div className={styles.root}>
-      <div className={styles.checkoutContainer}>
-        <div className={styles.checkoutHeader}>
-          <div className={styles.checkoutTitleInfo}>
-            <div className={styles.checkoutTitleInfoData}>
-              <Link to={routes.pathToCart} className={styles.backBtn}>
-                <KeyboardBackspaceIcon
-                  color={isLightTheme ? 'primary' : 'action'}
-                  className={styles.backBtnLine}
-                />
-              </Link>
-              <h2 className={styles.checkoutTitle}>
-                {CHECKOUT_TITLES[language].checkoutTitle}
-              </h2>
-            </div>
-            <div className={styles.checkoutTitleLine} />
-          </div>
-          <div className={styles.checkoutYourOrderTitleData}>
-            <h2 className={styles.checkoutTitle}>
-              {CHECKOUT_TITLES[language].yourOrderTitle}
-            </h2>
-            <div className={styles.checkoutTitleLine} />
-          </div>
-        </div>
-        <div className={styles.checkoutMain}>
+      {(isOrderCreated || !cartItems.length) && <Redirect to={routes.pathToMain}/>}
+      {loading && <Loader/>}
+      {
+        !loading && <div className={styles.checkoutContainer}>
           <CheckoutForm
             language={language}
             isLightTheme={isLightTheme}
             currency={currency}
             cartItems={cartItems}
+            deliveryType={deliveryType}
           />
         </div>
-      </div>
+      }
     </div>
   );
 };

@@ -161,7 +161,7 @@ export const CHECKOUT_ERROR = {
     lastName: 'Поле повинно містити від 2 до 30 символів',
     email: 'Некоректний формат електронної пошти ',
     phoneNumber: 'Некоректний формат номеру телефону',
-    userComment: 'Поле повинно містити від 2 до 300 символів'
+    userComment: 'Поле повинно містити від 2 до 500 символів'
   },
   1: {
     requiredField: 'Field should not to be empty',
@@ -169,6 +169,6 @@ export const CHECKOUT_ERROR = {
     lastName: 'Field should contain from 2 to 30 characters',
     email: `Incorrect email format`,
     phoneNumber: 'Incorrect phone number format',
-    userComment: 'Field should contain from 2 to 300 characters'
+    userComment: 'Field should contain from 2 to 500 characters'
   }
 };

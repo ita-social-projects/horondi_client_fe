@@ -1,9 +1,13 @@
-import React from 'react';
-import SelfPickup from './self-pickup';
+import React from "react";
+import SelfPickup from "./self-pickup";
+import { deliveryTypes } from "../../../../configs";
 
-const Delivery = ({ isLightTheme, language }) => (
+const Delivery = ({ isLightTheme, language, deliveryType }) => (
   <>
-    <SelfPickup language={language} isLightTheme={isLightTheme} />
+    {
+      deliveryType === deliveryTypes.SELFPICKUP &&
+      <SelfPickup language={language} isLightTheme={isLightTheme}/>
+    }
   </>
 );
 export default Delivery;

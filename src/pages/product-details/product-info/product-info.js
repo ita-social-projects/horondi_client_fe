@@ -69,7 +69,7 @@ const ProductInfo = ({ currencySign }) => {
         />
         <Detail
           subtitle={PRODUCT_DESCRIPTION[language].mainMaterial}
-          description={` - ${mainMaterial[language].value}`}
+          description={` - ${mainMaterial.material.name[language].value}`}
         />
         <div>
           {innerMaterial.length >= 1 ? (

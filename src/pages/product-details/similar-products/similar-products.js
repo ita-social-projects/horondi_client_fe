@@ -12,7 +12,7 @@ import SimilarProductsItem from './similar-products-item';
 
 const SimilarProducts = ({ currencySign }) => {
   const styles = useStyles();
-  const { language, similarProducts, productId, currency } = useSelector(
+  let { language, similarProducts, productId, currency } = useSelector(
     ({ Language, Currency, Products: { products, product } }) => ({
       language: Language.language,
       similarProducts: products,
@@ -20,7 +20,12 @@ const SimilarProducts = ({ currencySign }) => {
       currency: Currency.currency
     })
   );
+
   const { title } = SIMILAR_ITEMS[language];
+
+  if (similarProducts === null) {
+    similarProducts = [];
+  }
 
   const imagesList = similarProducts
     .filter(({ _id }) => _id !== productId)

@@ -46,23 +46,24 @@ const ProductDetails = ({ match }) => {
     name: productName,
     basePrice,
     images,
+    bottomMaterial,
     options = [],
+    sizes = [],
     category
   } = product || {};
 
   const { selectedSize } = productToSend;
 
-  const defaultSize = useMemo(
-    () =>
-      options[0]
-        ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE)
-        : {},
-    [options]
-  );
+  // const defaultSize = useMemo(
+  //   () =>
+  //   sizes[0]
+  //       ? sizes.find(( size ) => {
+  //         return size.name === DEFAULT_SIZE})
+  //       : {},
+  //   [sizes]
+  // );
 
-  const { volumeInLiters, weightInKg } =
-    (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
-
+  const { volumeInLiters, weightInKg } = sizes[0] || {};
   useEffect(() => {
     dispatch(getProduct(id));
     window.scrollTo(0, 0);
@@ -105,16 +106,16 @@ const ProductDetails = ({ match }) => {
     }
   }, [dispatch, categoryFilter]);
 
-  const uniqueSizes = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].size
-          ? options.map(({ size: { available, name } }) => available && name)
-          : null
-      )
-    ],
-    [options]
-  );
+  // const uniqueSizes = useMemo(
+  //   () => [
+  //     ...new Set(
+  //       options.length && options[0].size
+  //         ? options.map(({ size: { available, name } }) => available && name)
+  //         : null
+  //     )
+  //   ],
+  //   [options]
+  // );
 
   const uniqueBottomMaterials = useMemo(
     () => [
@@ -156,19 +157,19 @@ const ProductDetails = ({ match }) => {
     [uniqueAdditions, options]
   );
 
-  const sizes = useMemo(
-    () =>
-      options.length
-        ? uniqueSizes.map(
-          (item) => options.find(({ size: { name } }) => item === name).size
-        )
-        : null,
-    [uniqueSizes, options]
-  );
+  // const sizes = useMemo(
+  //   () =>
+  //     options.length
+  //       ? uniqueSizes.map(
+  //         (item) => options.find(({ size: { name } }) => item === name).size
+  //       )
+  //       : null,
+  //   [uniqueSizes, options]
+  // );
 
   const bottomMaterials = useMemo(
     () =>
-      uniqueBottomMaterials[0] && options && options.length
+      uniqueBottomMaterials[0]
         ? uniqueBottomMaterials.map(
           (item) =>
             options.find(
@@ -197,8 +198,8 @@ const ProductDetails = ({ match }) => {
         ...productToSend,
         totalPrice: newTotalPrice,
         dimensions: {
-          volumeInLiters: size.volumeInLiters,
-          weightInKg: size.weightInKg
+          volumeInLiters,
+          weightInKg
         },
         selectedSize: selectedId
       })

@@ -30,7 +30,7 @@ const Comments = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const {
+  let {
     commentsLoading,
     language,
     productId,
@@ -38,6 +38,10 @@ const Comments = () => {
     userData,
     currentLimit
   } = useSelector(selectProductsIdCommentsLanguageUserData);
+
+  if (comments === null) {
+    comments = [];
+  }
 
   const [rate, setRate] = useState(0);
 
@@ -82,23 +86,23 @@ const Comments = () => {
       !userId
         ? COMMENTS[language].unregisteredTip
         : !hasBought
-        ? COMMENTS[language].registeredTip
-        : COMMENTS[language].successfulTip,
+          ? COMMENTS[language].registeredTip
+          : COMMENTS[language].successfulTip,
     [language, userId, hasBought]
   );
 
   const commentsList = comments
     ? comments
-        .slice(0, currentLimit)
-        .map(({ text, date, _id, user }) => (
-          <CommentsItem
-            key={_id}
-            commentId={_id}
-            user={user}
-            text={text}
-            date={date}
-          />
-        ))
+      .slice(0, currentLimit)
+      .map(({ text, date, _id, user }) => (
+        <CommentsItem
+          key={_id}
+          commentId={_id}
+          user={user}
+          text={text}
+          date={date}
+        />
+      ))
     : [];
 
   const limitOption =
@@ -160,7 +164,7 @@ const Comments = () => {
           <Button
             type='submit'
             className={styles.commentBtn}
-            onClick={setShouldValidate.bind(this, true)}
+            onClick={setShouldValidate(this, true)}
           >
             {COMMENTS[language].submit}
           </Button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
-// import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 import { useStyles } from './search-bar-list-item.styles';
 import { getImage } from '../../../utils/imageLoad';
@@ -45,12 +45,12 @@ const SearchBarListItem = ({ product }) => {
           </div>
         </div>
         <div className={styles.buttons}>
-          {/*  <ClassicButton
+          <ClassicButton
             buttonType='button'
             innerText={<ShoppingBasketIcon />}
             onClickHandler={() => {}}
             buttonStyle='classic'
-          />*/}
+          />
           <ClassicButton
             buttonType='button'
             innerText={HOME_BUTTONS[language].DETAILS}

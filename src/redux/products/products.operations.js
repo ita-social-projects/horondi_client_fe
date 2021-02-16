@@ -22,6 +22,14 @@ const getAllProducts = async () => {
                 }
               }
             }
+            bottomMaterial {
+              material {
+                _id
+                name {
+                  value
+                }
+              }
+            }
             images {
               primary {
                 small
@@ -66,80 +74,68 @@ const getAllProducts = async () => {
 const getFilteredProducts = async ({ state, currency }) => {
   const result = await client.query({
     variables: {
-      search: state.filters.searchFilter,
-      colors: state.filters.colorsFilter,
       patterns: state.filters.patternsFilter,
-      price: state.filters.priceFilter,
-      currency,
-      skip: state.currentPage * state.countPerPage,
-      limit: state.countPerPage,
-      rate: state.sortByRate || undefined,
-      basePrice: state.sortByPrice || undefined,
+      colors: state.filters.colorsFilter,
       category: state.filters.categoryFilter,
-      purchasedCount: state.sortByPopularity || undefined,
       isHotItem: state.filters.isHotItemFilter,
-      models: state.filters.modelsFilter
+      models: state.filters.modelsFilter,
+      currency,
+      limit: state.countPerPage,
+      skip: state.currentPage * state.countPerPage,
+      search: state.filters.searchFilter,
+      purchasedCount: state.sortByPopularity,
+      basePrice: state.sortByPrice,
+      rate: state.sortByRate
     },
     query: gql`
       query(
-        $search: String
-        $price: [Int]
-        $colors: [String]
         $patterns: [String]
-        $isHotItem: Boolean
-        $skip: Int
-        $limit: Int
-        $rate: Int
-        $basePrice: Int
-        $purchasedCount: Int
+        $colors: [String]
         $category: [String]
+        $isHotItem: Boolean
         $models: [String]
         $currency: Int
+        $limit: Int
+        $skip: Int
+        $search: String
+        $purchasedCount: Int
+        $basePrice: Int
+        $rate: Int
       ) {
         getProducts(
           filter: {
-            colors: $colors
             pattern: $patterns
-            price: $price
+            colors: $colors
             category: $category
             isHotItem: $isHotItem
             models: $models
             currency: $currency
           }
-          skip: $skip
           limit: $limit
+          skip: $skip
           search: $search
           sort: {
-            rate: $rate
-            basePrice: $basePrice
             purchasedCount: $purchasedCount
+            basePrice: $basePrice
+            rate: $rate
           }
         ) {
           items {
             _id
-            purchasedCount
-            availableCount
-            name {
-              lang
-              value
-            }
-            basePrice {
-              value
-              currency
+            category {
+              _id
+              name {
+                value
+              }
             }
             model {
               name {
                 value
               }
             }
-            rate
-            images {
-              primary {
-                large
-                medium
-                large
-                small
-              }
+            name {
+              lang
+              value
             }
             mainMaterial {
               color {
@@ -153,19 +149,28 @@ const getFilteredProducts = async ({ state, currency }) => {
                 }
               }
             }
+            images {
+              primary {
+                large
+                medium
+                large
+                small
+              }
+            }
             pattern {
               name {
                 lang
                 value
               }
             }
-            category {
-              _id
-              name {
-                value
-              }
+            basePrice {
+              value
+              currency
             }
+            availableCount
             isHotItem
+            purchasedCount
+            rate
           }
           count
         }
@@ -201,12 +206,35 @@ const getProductById = async (id) => {
               value
             }
             mainMaterial {
-              lang
-              value
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+              color {
+                _id
+                name {
+                  lang
+                  value
+                }
+              }
             }
             innerMaterial {
-              lang
-              value
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+            }
+            bottomMaterial {
+              material {
+                _id
+                name {
+                  value
+                }
+              }
             }
             strapLengthInCm
             images {
@@ -219,112 +247,29 @@ const getProductById = async (id) => {
                 large
               }
             }
-            colors {
-              code
+            closure {
               name {
                 lang
                 value
               }
-              images {
-                thumbnail
-                large
-              }
-              available
             }
             pattern {
-              lang
-              value
-            }
-            closure {
-              lang
-              value
+              name {
+                lang
+                value
+              }
             }
             basePrice {
               value
               currency
             }
-            options {
-              size {
-                name
-                heightInCm
-                widthInCm
-                depthInCm
-                volumeInLiters
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              bottomMaterial {
-                name {
-                  lang
-                  value
-                }
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
+            sizes {
+              _id
+              name
+              weightInKg
+              volumeInLiters
             }
             rate
-            comments {
-              items {
-                _id
-                text
-                date
-                user {
-                  email
-                  name
-                  images {
-                    thumbnail
-                  }
-                }
-              }
-            }
-            options {
-              size {
-                _id
-                name
-                volumeInLiters
-                widthInCm
-                weightInKg
-              }
-              bottomMaterial {
-                _id
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  value
-                  lang
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-            }
             availableCount
             images {
               primary {
@@ -336,6 +281,20 @@ const getProductById = async (id) => {
               additional {
                 large
                 medium
+              }
+            }
+            comments {
+              items {
+                _id
+                text
+                date
+                user {
+                  email
+                  firstName
+                  images {
+                    thumbnail
+                  }
+                }
               }
             }
           }

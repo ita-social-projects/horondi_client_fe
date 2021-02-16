@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
-const getBusinessTextByCode = async (payload) => {
+const getBusinessTextByCode = async (code) => {
   const result = await client.query({
     variables: {
-      code: payload
+      code
     },
     query: gql`
       query($code: String!) {

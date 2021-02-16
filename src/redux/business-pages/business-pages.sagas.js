@@ -16,34 +16,7 @@ export function* handleBusinessPageError({ message }) {
 export function* handleBusinessPageLoad({ payload }) {
   try {
     yield put(setLoading(true));
-    const businessPage = yield call(
-      getItems,
-      `query (
-        $code: String!
-        ){
-          getBusinessTextByCode(code: $code) {
-          ... on BusinessText {
-            _id
-            code
-            title {
-              value
-            }
-            text {
-              value
-            }
-            date
-          }           
-          ... on Error {
-            message
-            statusCode
-          }
-        }
-      }`,
-      {
-        code: payload
-      }
-    );
-
+    const businessPage = yield call(getBusinessTextByCode(payload));
     yield put(setBusinessPage(businessPage.data.getBusinessTextByCode));
     yield put(setLoading(false));
   } catch (e) {

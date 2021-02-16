@@ -1,44 +1,69 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useLayoutEffect } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
-import mergeImages from 'merge-images';
-import { useStyles } from './constructor.style';
+import { useStyles } from './images-constructor.style';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
-import { setModelLoading } from '../../redux/constructor/constructor-model/constructor-model.actions';
+import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
 import { useConstructor } from './hooks';
+import { IMG_URL } from '../../configs';
 
 const map = require('lodash/map');
 
 const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
 
-const Constructor = () => {
+const ImagesConstructor = () => {
   const styles = useStyles();
   const { values, images, methods } = useConstructor();
-  const image = useRef(null);
+  const canvas = useRef({});
+  const canvasH = 768;
+  const canvasW = 768;
 
-  const createImage = (frontPocket, basic, bottom, pattern) => {
-    mergeImages([frontPocket, basic, bottom, pattern], {
-      height: 3000,
-      weight: 460
-    }).then((b64) => {
-      methods.dispatch(setModelLoading(false));
-      image.current.src = b64;
+  const loadImages = (sources = []) =>
+    new Promise((resolve) => {
+      const loadedImages = sources.map(
+        (source) =>
+          new Promise((resolveImage, rejectImage) => {
+            const img = new Image();
+            img.onload = () => resolveImage(img);
+            img.onerror = () => rejectImage(new Error());
+            img.src = `${IMG_URL}${source}`;
+          })
+      );
+
+      resolve(Promise.all(loadedImages).then((loadedImage) => loadedImage));
+    });
+
+  const mergeImages = (
+    imagesToMerge,
+    currentCanvas,
+    width = 1000,
+    height = 1000,
+    x = 0,
+    y = 0
+  ) => {
+    const ctx = currentCanvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height);
+    imagesToMerge.forEach((imageToMerge) => {
+      ctx.drawImage(imageToMerge, x, y, width, height);
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       images.basicImage &&
       images.patternImage &&
       images.frontPocketImage &&
       images.bottomImage
     ) {
-      createImage(
+      loadImages([
         images.frontPocketImage,
         images.basicImage,
         images.bottomImage,
         images.patternImage
-      );
+      ]).then((loadedImages) => {
+        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
+        methods.dispatch(setModelLoading(false));
+      });
     }
   }, [
     images.basicImage,
@@ -47,43 +72,26 @@ const Constructor = () => {
     images.bottomImage
   ]);
 
-  const availableModels = useMemo(
-    () =>
-      map(values.models, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.models]
+  const options = (obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name[0].value}
+    </option>
   );
 
-  const availableBasics = useMemo(
-    () =>
-      map(values.basics, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.basics]
+  const availableModels = useMemo(() =>
+    map(values.models, options, [values.models])
   );
 
-  const availablePatterns = useMemo(
-    () =>
-      map(values.patterns, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.patterns]
+  const availableBasics = useMemo(() =>
+    map(values.basics, options, [values.basics])
   );
-  const availableBottoms = useMemo(
-    () =>
-      map(values.bottoms, (obj) => (
-        <option key={obj._id} value={obj._id}>
-          {obj.name[0].value}
-        </option>
-      )),
-    [values.bottoms]
+
+  const availablePatterns = useMemo(() =>
+    map(values.patterns, options, [values.patterns])
+  );
+
+  const availableBottoms = useMemo(() =>
+    map(values.bottoms, options, [values.bottoms])
   );
 
   return (
@@ -132,16 +140,13 @@ const Constructor = () => {
           </FormControl>
         </form>
         <div className={styles.imageContainer}>
-          {values.modelLoading ? (
-            <Loader />
-          ) : (
-            <img
-              ref={image}
-              className={styles.image}
-              id='constructor'
-              alt='Constructor'
-            />
-          )}
+          {values.modelLoading && <Loader />}
+          <canvas
+            className={styles.image}
+            width={canvasW}
+            height={canvasH}
+            ref={canvas}
+          />
         </div>
         <div className={styles.infoWrapper}>
           <h2>Загальна вартість:</h2>
@@ -159,4 +164,4 @@ const Constructor = () => {
   );
 };
 
-export default Constructor;
+export default ImagesConstructor;

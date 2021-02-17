@@ -2,7 +2,6 @@ import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
 const getAllFilters = async () => {
-  // change for new query from backend
   const result = await client.query({
     query: gql`
       query {
@@ -59,9 +58,6 @@ const getAllFilters = async () => {
       }
     `
   });
-  // debugger
-  // console.log('filter', result);
-  // await client.resetStore();
   return result.data.getProductsFilters;
 };
 
@@ -182,7 +178,6 @@ const getFilteredProducts = async ({ state, currency }) => {
       }
     `
   });
-  // await client.resetStore();
   return result.data.getProducts;
 };
 

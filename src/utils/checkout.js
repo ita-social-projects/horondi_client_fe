@@ -1,4 +1,8 @@
-import { CHECKOUT_PAYMENT } from '../translations/checkout.translations';
+import React from 'react';
+import {
+  CHECKOUT_BUTTON,
+  CHECKOUT_PAYMENT
+} from '../translations/checkout.translations';
 
 const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
@@ -31,3 +35,8 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
       : CHECKOUT_PAYMENT[1].cash.toUpperCase(),
   userComment: data.userComment
 });
+
+export const checkoutFormBtnValue = (values, language) => values.paymentMethod === '' ||
+    values.paymentMethod === CHECKOUT_PAYMENT[language].cash
+  ? CHECKOUT_BUTTON[language].confirmOrder
+  : CHECKOUT_BUTTON[language].payOrder;

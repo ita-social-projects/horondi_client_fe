@@ -26,7 +26,7 @@ import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
 import { setOrder } from '../../../redux/order/order.actions';
-import { orderInputData } from '../../../utils/checkout';
+import { checkoutFormBtnValue, orderInputData } from '../../../utils/checkout';
 
 const CheckoutForm = ({
   language,
@@ -288,10 +288,7 @@ const CheckoutForm = ({
                 </p>
               </div>
               <button type='submit' className={styles.submitBtn}>
-                {values.paymentMethod === '' ||
-                values.paymentMethod === CHECKOUT_PAYMENT[language].cash
-                  ? CHECKOUT_BUTTON[language].confirmOrder
-                  : CHECKOUT_BUTTON[language].payOrder}
+                {checkoutFormBtnValue(values, language)}
               </button>
               <Link to={routes.pathToMain}>
                 <span className={`${styles.totalSumTitle} ${styles.goods}`}>

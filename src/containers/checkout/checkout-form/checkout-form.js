@@ -33,11 +33,11 @@ const CheckoutForm = ({
   cartItems,
   deliveryType
 }) => {
-  const dispatch = useDispatch();
-
   const styles = useStyles({
     isLightTheme
   });
+
+  const dispatch = useDispatch();
 
   const productItemsInput = cartItems.map((item) => ({
     product: item?._id,

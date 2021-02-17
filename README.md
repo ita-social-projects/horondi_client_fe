@@ -106,7 +106,7 @@ Then open one more terminal and run `npm run cypress`.
   - Each component should have at least three files:
     - `index.js` where we export anything from the whole folder
     - `{component-name}.js` - file where component is located
-    - `{component-name}.self-pickup.styles.js` where all styles are located
+    - `{component-name}.styles.js` where all styles are located
 
 ### Testing
 

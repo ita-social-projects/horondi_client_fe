@@ -3,6 +3,18 @@
     "types": [
       {
         "kind": "UNION",
+        "name": "PaginatedProductsResult",
+        "possibleTypes": [
+          {
+            "name": "PaginatedProducts"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
         "name": "CategoryResult",
         "possibleTypes": [
           {
@@ -163,18 +175,6 @@
         "possibleTypes": [
           {
             "name": "EmailQuestion"
-          },
-          {
-            "name": "Error"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "NovaPoshtaOrderResult",
-        "possibleTypes": [
-          {
-            "name": "NovaPoshtaOrder"
           },
           {
             "name": "Error"

@@ -115,18 +115,16 @@ const ProductListPage = ({ model, width }) => {
     return <Loader />;
   }
 
-  const itemsToShow = products
-    ? products.map((product) => (
-      <ProductListItem key={product._id} product={product} />
-    ))
-    : null;
+  const itemsToShow =
+    products.length > 0
+      ? products.map((product) => (
+        <ProductListItem key={product._id} product={product} />
+      ))
+      : null;
 
   return (
     <div className={styles.root}>
-      <Typography className={styles.paginationDiv} variant='h3'>
-        {/* {categoryText} */}
-        Test
-      </Typography>
+      <Typography className={styles.paginationDiv} variant='h3' />
       <div className={styles.sortDiv}>
         <ProductSort />
       </div>
@@ -157,7 +155,7 @@ const ProductListPage = ({ model, width }) => {
         <div className={styles.filterMenu}>
           <ProductFilter />
         </div>
-        {products ? (
+        {products.length > 0 ? (
           <div className={styles.productsWrapper}>
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}

@@ -444,3 +444,6 @@ export const cookiePolicy = {
 
 export const cartKey = 'cart';
 export const wishlistKey = 'wishlist';
+export const sort = 'sort';
+export const countPerPage = 'countPerPage';
+export const page = 'page';

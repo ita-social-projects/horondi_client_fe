@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { useHistory, useLocation } from 'react-router';
-import _ from 'lodash';
+import { map } from 'lodash';
 import PriceFilter from './price-filter';
 import HotItemFilter from './hot-item-filter';
 import { useStyles } from './product-list-filter.styles';
@@ -22,6 +22,8 @@ import {
   CLEAR_FILTER_BUTTON_TEXT
 } from '../../../translations/product-list.translations';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
+import { selectFilterData } from '../../../redux/selectors/multiple.selectors';
+import { countPerPage, page, sort, URL_QUERIES_NAME } from '../../../configs';
 
 const ProductListFilter = () => {
   const styles = useStyles();
@@ -29,13 +31,7 @@ const ProductListFilter = () => {
   const history = useHistory();
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  const { filters, language, filterData } = useSelector(
-    ({ Products, Language }) => ({
-      filters: Products.filters,
-      language: Language.language,
-      filterData: Products.filterData
-    })
-  );
+  const { filters, language, filterData } = useSelector(selectFilterData);
   const { categoryFilter, patternsFilter, modelsFilter } = filters;
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
@@ -67,12 +63,12 @@ const ProductListFilter = () => {
     } else {
       searchParams.delete(queryName);
     }
-    searchParams.set('page', 1);
+    searchParams.set(page, 1);
     history.push(`?${searchParams.toString()}`);
   };
 
   const handleFilterClear = (setFilter, queryName) => {
-    searchParams.set('page', 1);
+    searchParams.set(page, 1);
     dispatch(setFilter([]));
     searchParams.delete(queryName);
     history.push(`?${searchParams.toString()}`);
@@ -81,46 +77,54 @@ const ProductListFilter = () => {
     categories: {
       filterName: CATERGORY_TEXT[language].value,
       productFilter: categoryFilter,
-      list: _.map(
+      list: map(
         filterData.categories,
         (category) => category.name[language].value
       ),
       categories: filterData.categories,
       filterAction: setCategoryFilter,
-      labels: 'categoryFilter',
-      clearFilter: () => handleFilterClear(setCategoryFilter, 'categoryFilter'),
+      labels: URL_QUERIES_NAME.categoryFilter,
+      clearFilter: () =>
+        handleFilterClear(setCategoryFilter, URL_QUERIES_NAME.categoryFilter),
       filterHandler: (e) =>
-        handleFilterChange(e, 'categoryFilter', filterData.categories)
+        handleFilterChange(
+          e,
+          URL_QUERIES_NAME.categoryFilter,
+          filterData.categories
+        )
     },
     models: {
       filterName: MODEL_TEXT[language].value,
       productFilter: modelsFilter,
-      list: _.map(filterData.models, (model) => model.name[language].value),
+      list: map(filterData.models, (model) => model.name[language].value),
       categories: filterData.models,
       filterAction: setModelsFilter,
-      labels: 'modelsFilter',
-      clearFilter: () => handleFilterClear(setModelsFilter, 'modelsFilter'),
+      labels: URL_QUERIES_NAME.modelsFilter,
+      clearFilter: () =>
+        handleFilterClear(setModelsFilter, URL_QUERIES_NAME.modelsFilter),
       filterHandler: (e) =>
-        handleFilterChange(e, 'modelsFilter', filterData.models)
+        handleFilterChange(e, URL_QUERIES_NAME.modelsFilter, filterData.models)
     },
     patterns: {
       filterName: PATTERN_TEXT[language].value,
       productFilter: patternsFilter,
-      list: _.map(
-        filterData.patterns,
-        (pattern) => pattern.name[language].value
-      ),
+      list: map(filterData.patterns, (pattern) => pattern.name[language].value),
       categories: filterData.patterns,
       filterAction: setPatternsFilter,
-      labels: 'patternsFilter',
-      clearFilter: () => handleFilterClear(setPatternsFilter, 'patternsFilter'),
+      labels: URL_QUERIES_NAME.patternsFilter,
+      clearFilter: () =>
+        handleFilterClear(setPatternsFilter, URL_QUERIES_NAME.patternsFilter),
       filterHandler: (e) =>
-        handleFilterChange(e, 'patternsFilter', filterData.patterns)
+        handleFilterChange(
+          e,
+          URL_QUERIES_NAME.patternsFilter,
+          filterData.patterns
+        )
     }
   };
   const handleClearFilter = () => {
-    const sortQuery = searchParams.get('sort');
-    const quantityPerPage = searchParams.get('countPerPage');
+    const sortQuery = searchParams.get(sort);
+    const quantityPerPage = searchParams.get(countPerPage);
     history.push(
       `/products/?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`
     );

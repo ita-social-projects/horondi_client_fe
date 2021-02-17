@@ -130,19 +130,6 @@ const Routes = () => {
                   );
                 }}
               />
-              {/* <Route */}
-              {/*  path='/:category' */}
-              {/*  exact */}
-              {/*  render={({ match }) => { */}
-              {/*    const { category } = match.params; */}
-              {/*    const categoryParam = categories.find( */}
-              {/*      (categoryFound) => */}
-              {/*        categoryFound.name[1].value.toLowerCase() === */}
-              {/*        category.toLowerCase() */}
-              {/*    ); */}
-              {/*    return <ProductsTable category={categoryParam} />; */}
-              {/*  }} */}
-              {/* /> */}
               <Route path='/product/:id' exact component={ProductDetails} />
               <Route path='/products' exact component={ProductListPage} />
             </Switch>

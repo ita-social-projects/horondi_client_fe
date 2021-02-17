@@ -49,7 +49,11 @@ const CheckoutForm = ({
     }
   }));
 
-  const totalPriceToPay = cartItems.reduce((previousValue, currentValue) => previousValue + calcPrice(currentValue, currency), 0);
+  const totalPriceToPay = cartItems.reduce(
+    (previousValue, currentValue) =>
+      previousValue + calcPrice(currentValue, currency),
+    0
+  );
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()

@@ -32,7 +32,7 @@ const SelfPickup = ({ isLightTheme, language }) => {
                 <div className={styles.scheduleItem}> {value} {CHECKOUT_TITLES[language].workDay} </div>
             )}
           </p>
-          <p className={styles.scheduleItem + ' '+styles.addressTitle}>
+          <p className={`${styles.scheduleItem} ${styles.addressTitle}`}>
             {CHECKOUT_TITLES[language].addressHorondi}
           </p>
         </div>

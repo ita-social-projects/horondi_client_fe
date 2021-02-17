@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import * as Yup from 'yup';
 import MenuItem from '@material-ui/core/MenuItem';

@@ -13,7 +13,6 @@ import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
-
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() =>
   import('../pages/payments-and-shipping')

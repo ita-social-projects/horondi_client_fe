@@ -4,25 +4,13 @@ import { setCategories, setCategoriesLoading } from './categories.actions';
 import { setError } from '../error/error.actions';
 import getItems from '../../utils/client';
 import { GET_CATEGORIES } from './categories.types';
+import { query } from './categories.operations';
 
 export function* handleCategoriesLoad() {
   yield put(setCategoriesLoading(true));
-  const query = `query {
-                   getAllCategories {
-                     _id
-                     name {
-                     value
-                     lang
-                     }
-                     images {
-                      large
-                     }         
-                   }          
-                 }`;
-
   try {
     const categories = yield call(getItems, query);
-    yield put(setCategories(categories.data.getAllCategories));
+    yield put(setCategories(categories.data.getAllCategories.items));
     yield put(setCategoriesLoading(false));
   } catch (e) {
     yield put(setCategoriesLoading(false));

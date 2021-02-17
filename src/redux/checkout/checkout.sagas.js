@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-
 import { push } from 'connected-react-router';
+
 import {
   setNovaPoshtaCities,
   setNovaPoshtaWarehouse,
@@ -9,7 +9,12 @@ import {
   setNovaPoshtaPrices,
   setFondyData
 } from './checkout.actions';
-
+import {
+  getNovaPoshtaCities,
+  getNovaPoshtaPrices,
+  getNovaPoshtaStreets,
+  getNovaPoshtaWarehouses
+} from './checkout.operations';
 import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
@@ -47,97 +52,70 @@ export function* handleFondyUrl({ payload }) {
   }
 }
 
-export function* handlePrice({ payload }) {
+export function* handleNovaPoshtaPrice({ payload }) {
   try {
+    yield put(setLoading(true));
     const price = yield call(
       getItems,
-      `query {
-        getNovaPoshtaPrices(data:{
-              cityRecipient: "${payload.cityRecipient}"
-              weight: ${payload.weight}
-              cost: ${payload.cost}
-              seatsAmount: 1
-              serviceType: "${payload.serviceType}"
-                    }){
-          cost
-          assessedCost
-        }
-      }`
+      getNovaPoshtaPrices(
+        payload.cityRecipient,
+        payload.weight,
+        payload.cost,
+        payload.serviceType
+      )
     );
-    yield put(setNovaPoshtaPrices(...price.data.getNovaPoshtaPrices));
+    yield put(setNovaPoshtaPrices(...price));
+    yield put(setLoading(false));
   } catch (e) {
+    yield put(setLoading(false));
     yield call(handleErrors, e);
   }
 }
 
-export function* handleStreets({ payload }) {
+export function* handleNovaPoshtaStreets({ payload }) {
   try {
     yield put(setLoading(true));
     const streets = yield call(
       getItems,
-      `query($cityRef: String, $street: String){
-                getNovaPoshtaStreets(cityRef: $cityRef, street: $street){   
-                    description
-                    ref
-                    streetsTypeRef
-                    streetsType
-                    }
-                 }`,
-      { cityRef: payload.ref, street: payload.street }
+      getNovaPoshtaStreets(payload.ref, payload.street)
     );
-    yield put(setNovaPoshtaStreets(streets.data.getNovaPoshtaStreets));
+    yield put(setNovaPoshtaStreets(streets));
     yield put(setLoading(false));
   } catch (e) {
+    yield put(setLoading(false));
     yield call(handleErrors, e);
   }
 }
 
-export function* handleCities({ payload }) {
+export function* handleNovaPoshtaCities({ payload }) {
   try {
     yield put(setLoading(true));
-    const cities = yield call(
-      getItems,
-      `query{
-               getNovaPoshtaCities(city: "${payload}") {
-                  description
-                  ref
-                     }
-                  }`
-    );
-    yield put(setNovaPoshtaCities(cities.data.getNovaPoshtaCities));
+    const cities = yield call(getItems, getNovaPoshtaCities(payload));
+    yield put(setNovaPoshtaCities(cities));
     yield put(setLoading(false));
   } catch (e) {
+    yield put(setLoading(false));
     yield call(handleErrors, e);
   }
 }
 
-export function* handleWarehouse({ payload }) {
+export function* handleNovaPoshtaWarehouse({ payload }) {
   try {
-    const warehouses = yield call(
-      getItems,
-      `query{
-                getNovaPoshtaWarehouses(city: "${payload}"){   
-                    description
-                    ref
-                    shortAddress
-                    schedule {
-                       monday
-                       saturday
-                       sunday
-                     }
-                }
-            }`
-    );
-    yield put(setNovaPoshtaWarehouse(warehouses.data.getNovaPoshtaWarehouses));
+    yield put(setLoading(true));
+    const warehouses = yield call(getItems, getNovaPoshtaWarehouses(payload));
+    yield put(setNovaPoshtaWarehouse(warehouses));
+    yield put(setLoading(false));
   } catch (e) {
+    yield put(setLoading(false));
+
     yield call(handleErrors, e);
   }
 }
 
 export default function* checkoutSaga() {
-  yield takeEvery(GET_NOVAPOSHTA_CITIES, handleCities);
-  yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleWarehouse);
-  yield takeEvery(GET_NOVAPOSHTA_STREETS, handleStreets);
-  yield takeEvery(GET_NOVAPOSHTA_PRICES, handlePrice);
+  yield takeEvery(GET_NOVAPOSHTA_CITIES, handleNovaPoshtaCities);
+  yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleNovaPoshtaWarehouse);
+  yield takeEvery(GET_NOVAPOSHTA_STREETS, handleNovaPoshtaStreets);
+  yield takeEvery(GET_NOVAPOSHTA_PRICES, handleNovaPoshtaPrice);
   yield takeEvery(GET_FONDY_DATA, handleFondyUrl);
 }

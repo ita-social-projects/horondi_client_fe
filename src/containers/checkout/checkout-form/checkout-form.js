@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
@@ -25,6 +26,7 @@ import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
 import { setOrder } from '../../../redux/order/order.actions';
+import { orderInputData } from '../../../utils/checkout';
 
 const CheckoutForm = ({
   language,
@@ -38,16 +40,6 @@ const CheckoutForm = ({
   });
 
   const dispatch = useDispatch();
-
-  const productItemsInput = cartItems.map((item) => ({
-    product: item?._id,
-    quantity: item.quantity,
-    isFromConstructor: !item._id,
-    options: {
-      size: item.selectedSize._id,
-      sidePocket: item.sidePocket
-    }
-  }));
 
   const totalPriceToPay = cartItems.reduce(
     (previousValue, currentValue) =>
@@ -89,27 +81,12 @@ const CheckoutForm = ({
       userComment: ''
     },
     onSubmit: (data) => {
-      const orderInput = {
-        status: 'CREATED',
-        user: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phoneNumber: data.phoneNumber
-        },
-        delivery: {
-          sentBy: deliveryType,
-          invoiceNumber: data.invoiceNumber || '',
-          courierOffice: data.courierOffice || null,
-          byCourier: data.byCourier || false
-        },
-        items: productItemsInput,
-        paymentMethod:
-          data.paymentMethod === CHECKOUT_PAYMENT[language].card
-            ? CHECKOUT_PAYMENT[1].card.toUpperCase()
-            : CHECKOUT_PAYMENT[1].cash.toUpperCase(),
-        userComment: data.userComment
-      };
+      const orderInput = orderInputData(
+        data,
+        deliveryType,
+        cartItems,
+        language
+      );
 
       dispatch(setOrder(orderInput));
     }
@@ -328,15 +305,48 @@ const CheckoutForm = ({
     </div>
   );
 };
+CheckoutForm.propTypes = {
+  language: PropTypes.number,
+  isLightTheme: PropTypes.bool,
+  currency: PropTypes.number,
+  cartItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string
+    })
+  ),
+  deliveryType: PropTypes.string,
+  values: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    paymentMethod: PropTypes.string,
+    userComment: PropTypes.string
+  }),
+  errors: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    paymentMethod: PropTypes.string,
+    userComment: PropTypes.string
+  }),
+  touched: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    paymentMethod: PropTypes.string,
+    userComment: PropTypes.string
+  })
+};
 
 CheckoutForm.defaultProps = {
-  id: '',
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: '',
-  paymentMethod: '',
-  userComment: '',
+  language: null,
+  isLightTheme: false,
+  currency: null,
+  deliveryType: '',
+  cartItems: [],
   values: {},
   errors: {},
   touched: {}

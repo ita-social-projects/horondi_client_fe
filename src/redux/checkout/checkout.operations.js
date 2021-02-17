@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-import { client } from '../../utils/client';
+import { client } from "../../utils/client";
 
 export const getNovaPoshtaPrices = async (
   cityRecipient,
@@ -55,7 +55,7 @@ export const getNovaPoshtaStreets = async (cityRef, street) => {
 
   return result.data.getNovaPoshtaStreets;
 };
-export const getNovaPoshtaCities = async (city) => {
+export const getNovaPoshtaCities = async city => {
   const result = await client.query({
     variables: {
       city
@@ -73,7 +73,7 @@ export const getNovaPoshtaCities = async (city) => {
 
   return result.data.getNovaPoshtaCities;
 };
-export const getNovaPoshtaWarehouses = async (city) => {
+export const getNovaPoshtaWarehouses = async city => {
   const result = await client.query({
     variables: {
       city

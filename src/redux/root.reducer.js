@@ -25,6 +25,7 @@ import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
 import Constructor from './images-constructor/constructor.reducer';
 import { toastReducer as Toast } from './toast/toast.reducer';
+import { orderReducer as Order } from './order/order.reducer';
 
 export const rootReducer = (history) =>
   combineReducers({
@@ -53,5 +54,6 @@ export const rootReducer = (history) =>
     HomePageSlider,
     SearchBar,
     Pattern,
-    Constructor
+    Constructor,
+    Order
   });

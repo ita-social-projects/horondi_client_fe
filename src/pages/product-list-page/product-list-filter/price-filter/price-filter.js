@@ -38,7 +38,7 @@ const PriceFilter = () => {
           searchParams
             .get(priceFilter)
             .split(',')
-            .map((price) => price * 100)
+            .map((price) => Math.round(price * 100))
         )
       );
     } else if (price) {

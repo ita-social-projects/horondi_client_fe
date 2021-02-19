@@ -60,13 +60,7 @@ const ProductListFilter = () => {
   );
   return (
     <div>
-      <Grid
-        container
-        alignItems='center'
-        direction='column'
-        className={styles.wrapper}
-        spacing={2}
-      >
+      <Grid container direction='column' className={styles.wrapper} spacing={2}>
         <Button
           className={styles.button}
           data-cy='clear_filter_button'

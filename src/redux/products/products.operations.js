@@ -54,6 +54,13 @@ const getAllFilters = async () => {
               value
             }
           }
+          productPrice {
+            _id
+            basePrice {
+              currency
+              value
+            }
+          }
         }
       }
     `

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { map } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import {
@@ -21,12 +22,15 @@ const PriceFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
 
-  const { filters, language } = useSelector(
+  const { filters, language, currency, price } = useSelector(
     ({ Products, Language, Currency }) => ({
       filters: Products.filters.priceFilter,
-      language: Language.language
+      language: Language.language,
+      currency: Currency.currency,
+      price: Products.filterData.productPrice
     })
   );
+
   useEffect(() => {
     if (searchParams.get(priceFilter)) {
       dispatch(
@@ -36,6 +40,21 @@ const PriceFilter = () => {
             .split(',')
             .map((price) => price * 100)
         )
+      );
+    } else if (price) {
+      dispatch(
+        setPriceFilter([
+          Math.min(
+            ...price.map(
+              (productPrice) => productPrice.basePrice[currency].value
+            )
+          ),
+          Math.max(
+            ...price.map(
+              (productPrice) => productPrice.basePrice[currency].value
+            )
+          )
+        ])
       );
     }
   }, [dispatch, searchParams.toString()]);
@@ -62,6 +81,12 @@ const PriceFilter = () => {
         onChange={handlePriceChange}
         onChangeCommitted={handlePriceFilter}
         valueLabelDisplay='auto'
+        min={Math.min(
+          ...map(price, (product) => product.basePrice[currency].value / 100)
+        )}
+        max={Math.max(
+          ...map(price, (product) => product.basePrice[currency].value / 100)
+        )}
         aria-labelledby='range-slider'
       />
     </FormGroup>

@@ -27,7 +27,7 @@ export const useStyles = makeStyles(() => ({
   },
   textField: {
     width: '80%',
-    marginBottom: '2%'
+    marginBottom: '3%'
   },
   courierTitle: ({ isLightTheme }) => ({
     fontWeight: 400,

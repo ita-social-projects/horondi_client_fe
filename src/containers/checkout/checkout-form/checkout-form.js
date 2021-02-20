@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '@material-ui/core';
-import * as Yup from 'yup';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,10 +8,9 @@ import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 
-import { CHECKOUT_ADDITIONAL_INFORMATION, CHECKOUT_ERROR, CHECKOUT_PAYMENT, CHECKOUT_TEXT_FIELDS, CHECKOUT_TITLES } from '../../../translations/checkout.translations';
+import { CHECKOUT_ADDITIONAL_INFORMATION, CHECKOUT_PAYMENT, CHECKOUT_TEXT_FIELDS, CHECKOUT_TITLES } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
 import { DEFAULT_CURRENCY, deliveryTypes, formRegExp } from '../../../configs';
 import { calcPrice } from '../../../utils/priceCalculating';
@@ -20,7 +18,8 @@ import Delivery from './delivery';
 import { CART_BUTTON_TITLES, DELIVERY_TYPE } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
 import { setOrder } from '../../../redux/order/order.actions';
-import { checkoutFormBtnValue, orderInputData } from '../../../utils/checkout';
+import { checkoutDefaultProps, checkoutFormBtnValue, checkoutPropTypes, initialValues, orderInputData } from '../../../utils/checkout';
+import { validationSchema } from '../../../validators/chekout';
 
 const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
@@ -31,46 +30,11 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
 
   const totalPriceToPay = cartItems.reduce((previousValue, currentValue) => previousValue + calcPrice(currentValue, currency), 0);
 
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string().min(2, CHECKOUT_ERROR[language].firstName).max(20, CHECKOUT_ERROR[language].firstName).required(CHECKOUT_ERROR[language].requiredField),
-    lastName: Yup.string().min(2, CHECKOUT_ERROR[language].lastName).max(20, CHECKOUT_ERROR[language].lastName).required(CHECKOUT_ERROR[language].requiredField),
-    email: Yup.string().email(CHECKOUT_ERROR[language].email).required(CHECKOUT_ERROR[language].requiredField),
-    phoneNumber: Yup.string().matches(formRegExp.phoneNumber, CHECKOUT_ERROR[language].phoneNumber).required(CHECKOUT_ERROR[language].requiredField),
-    paymentMethod: Yup.string().required(CHECKOUT_ERROR[language].requiredField),
-    userComment: Yup.string().min(2, CHECKOUT_ERROR[language].userComment).max(500, CHECKOUT_ERROR[language].userComment),
-    courierOffice: deliveryType === deliveryTypes.NOVAPOST && Yup.string().required(CHECKOUT_ERROR[language].requiredField),
-    courierOfficeName: deliveryType === deliveryTypes.NOVAPOST && Yup.string().required(CHECKOUT_ERROR[language].requiredField),
-    city: deliveryType !== deliveryTypes.SELFPICKUP && Yup.string().min(2, CHECKOUT_ERROR[language].city).max(50, CHECKOUT_ERROR[language].city).required(CHECKOUT_ERROR[language].requiredField),
-    street:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-      Yup.string().min(2, CHECKOUT_ERROR[language].street).max(100, CHECKOUT_ERROR[language].street).required(CHECKOUT_ERROR[language].requiredField),
-    house:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-      Yup.number().min(1, CHECKOUT_ERROR[language].house).required(CHECKOUT_ERROR[language].requiredField).typeError(CHECKOUT_ERROR[language].onlyNum),
-    flat:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-      Yup.number().min(1, CHECKOUT_ERROR[language].flat).typeError(CHECKOUT_ERROR[language].onlyNum)
-  });
-
   const { values, handleSubmit, handleChange, touched, errors } = useFormik({
-    validationSchema,
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      paymentMethod: '',
-      userComment: '',
-      courierOffice: '',
-      courierOfficeName: '',
-      city: '',
-      street: '',
-      house: null,
-      flat: null
-    },
+    validationSchema: validationSchema(deliveryType, language),
+    initialValues,
     onSubmit: (data) => {
       const orderInput = orderInputData(data, deliveryType, cartItems, language);
-
       dispatch(setOrder(orderInput));
     }
   });
@@ -249,69 +213,8 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
     </div>
   );
 };
-CheckoutForm.propTypes = {
-  language: PropTypes.number,
-  isLightTheme: PropTypes.bool,
-  currency: PropTypes.number,
-  cartItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string
-    })
-  ),
-  deliveryType: PropTypes.string,
-  values: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    userComment: PropTypes.string,
-    courierOffice: PropTypes.string,
-    courierOfficeName: PropTypes.string,
-    city: PropTypes.string,
-    street: PropTypes.string,
-    house: PropTypes.number,
-    flat: PropTypes.number
-  }),
-  errors: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    userComment: PropTypes.string,
-    courierOffice: PropTypes.string,
-    courierOfficeName: PropTypes.string,
-    city: PropTypes.string,
-    street: PropTypes.string,
-    house: PropTypes.number,
-    flat: PropTypes.number
-  }),
-  touched: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    userComment: PropTypes.string,
-    courierOffice: PropTypes.string,
-    courierOfficeName: PropTypes.string,
-    city: PropTypes.string,
-    street: PropTypes.string,
-    house: PropTypes.number,
-    flat: PropTypes.number
-  })
-};
 
-CheckoutForm.defaultProps = {
-  language: null,
-  isLightTheme: false,
-  currency: null,
-  deliveryType: '',
-  cartItems: [],
-  values: {},
-  errors: {},
-  touched: {}
-};
+CheckoutForm.propTypes = checkoutPropTypes;
+CheckoutForm.defaultProps = checkoutDefaultProps;
 
 export default CheckoutForm;

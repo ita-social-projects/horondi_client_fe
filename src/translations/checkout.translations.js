@@ -167,9 +167,8 @@ export const CHECKOUT_ERROR = {
     userComment: 'Поле повинно містити від 2 до 500 символів',
     city: 'Поле повинно містити від 2 до 50 символів',
     street: 'Поле повинно містити від 2 до 100 символів',
-    house: 'Мінімальне значення не повинно бути меншим 1',
-    flat: 'Мінімальне значення не повинно бути меншим 1',
-    onlyNum: 'Поле повинно містити лише числові значення'
+    house: 'Мінімальне значення не повинно бути меншим 1 символу',
+    flat: 'Мінімальне значення не повинно бути меншим 1 символу'
   },
   1: {
     requiredField: 'Field should not to be empty',
@@ -180,9 +179,8 @@ export const CHECKOUT_ERROR = {
     userComment: 'Field should contain from 2 to 500 characters',
     city: 'Field should contain from 2 to 50 characters',
     street: 'Field should contain from 2 to 100 characters',
-    house: 'Min value is 1',
-    flat: 'Min value is 1',
-    onlyNum: 'Field should be a number'
+    house: 'Min value is 1 character',
+    flat: 'Min value is 1 character'
   }
 };
 

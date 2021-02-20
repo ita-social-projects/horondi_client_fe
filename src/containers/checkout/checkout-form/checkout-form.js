@@ -39,7 +39,15 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
     paymentMethod: Yup.string().required(CHECKOUT_ERROR[language].requiredField),
     userComment: Yup.string().min(2, CHECKOUT_ERROR[language].userComment).max(500, CHECKOUT_ERROR[language].userComment),
     courierOffice: deliveryType === deliveryTypes.NOVAPOST && Yup.string().required(CHECKOUT_ERROR[language].requiredField),
-    novaPostCity: deliveryType === deliveryTypes.NOVAPOST && Yup.string().required(CHECKOUT_ERROR[language].requiredField)
+    courierOfficeName: deliveryType === deliveryTypes.NOVAPOST && Yup.string().required(CHECKOUT_ERROR[language].requiredField),
+    city: deliveryType !== deliveryTypes.SELFPICKUP && Yup.string().min(2, CHECKOUT_ERROR[language].city).max(50, CHECKOUT_ERROR[language].city).required(CHECKOUT_ERROR[language].requiredField),
+    street:
+      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      Yup.string().min(2, CHECKOUT_ERROR[language].street).max(100, CHECKOUT_ERROR[language].street).required(CHECKOUT_ERROR[language].requiredField),
+    house:
+      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) && Yup.number().min(1, CHECKOUT_ERROR[language].house).required(CHECKOUT_ERROR[language].house),
+    flat:
+      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) && Yup.number().min(1, CHECKOUT_ERROR[language].flat).required(CHECKOUT_ERROR[language].flat)
   });
 
   const { values, handleSubmit, handleChange, touched, errors } = useFormik({
@@ -51,7 +59,12 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
       phoneNumber: '',
       paymentMethod: '',
       userComment: '',
-      courierOffice: ''
+      courierOffice: '',
+      courierOfficeName: '',
+      city: '',
+      street: '',
+      house: null,
+      flat: null
     },
     onSubmit: (data) => {
       const orderInput = orderInputData(data, deliveryType, cartItems, language);
@@ -250,7 +263,13 @@ CheckoutForm.propTypes = {
     email: PropTypes.string,
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
-    userComment: PropTypes.string
+    userComment: PropTypes.string,
+    courierOffice: PropTypes.string,
+    courierOfficeName: PropTypes.string,
+    city: PropTypes.string,
+    street: PropTypes.string,
+    house: PropTypes.number,
+    flat: PropTypes.number
   }),
   errors: PropTypes.shape({
     firstName: PropTypes.string,
@@ -258,7 +277,13 @@ CheckoutForm.propTypes = {
     email: PropTypes.string,
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
-    userComment: PropTypes.string
+    userComment: PropTypes.string,
+    courierOffice: PropTypes.string,
+    courierOfficeName: PropTypes.string,
+    city: PropTypes.string,
+    street: PropTypes.string,
+    house: PropTypes.number,
+    flat: PropTypes.number
   }),
   touched: PropTypes.shape({
     firstName: PropTypes.string,
@@ -266,7 +291,13 @@ CheckoutForm.propTypes = {
     email: PropTypes.string,
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
-    userComment: PropTypes.string
+    userComment: PropTypes.string,
+    courierOffice: PropTypes.string,
+    courierOfficeName: PropTypes.string,
+    city: PropTypes.string,
+    street: PropTypes.string,
+    house: PropTypes.number,
+    flat: PropTypes.number
   })
 };
 

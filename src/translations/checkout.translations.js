@@ -147,8 +147,7 @@ export const CHECKOUT_PAYMENT = {
 };
 export const CHECKOUT_ADDITIONAL_INFORMATION = {
   0: {
-    additionalInfo:
-      '* Замовлення буде відправлено протягом десяти робочих днів.'
+    additionalInfo: '* Замовлення буде відправлено протягом десяти робочих днів.'
   },
   1: {
     additionalInfo: '* Order will be shipped within 10 business days.'
@@ -161,7 +160,11 @@ export const CHECKOUT_ERROR = {
     lastName: 'Поле повинно містити від 2 до 30 символів',
     email: 'Некоректний формат електронної пошти ',
     phoneNumber: 'Некоректний формат номеру телефону',
-    userComment: 'Поле повинно містити від 2 до 500 символів'
+    userComment: 'Поле повинно містити від 2 до 500 символів',
+    city: 'Поле повинно містити від 2 до 50 символів',
+    street: 'Поле повинно містити від 2 до 100 символів',
+    house: 'Поле повинно містити від 2 до 50 символів',
+    flat: 'Поле повинно містити від 2 до 50 символів'
   },
   1: {
     requiredField: 'Field should not to be empty',
@@ -169,6 +172,10 @@ export const CHECKOUT_ERROR = {
     lastName: 'Field should contain from 2 to 30 characters',
     email: `Incorrect email format`,
     phoneNumber: 'Incorrect phone number format',
-    userComment: 'Field should contain from 2 to 500 characters'
+    userComment: 'Field should contain from 2 to 500 characters',
+    city: 'Field should contain from 2 to 50 characters',
+    street: 'Field should contain from 2 to 100 characters',
+    house: 'Min value is 1',
+    flat: 'Min value is 1'
   }
 };

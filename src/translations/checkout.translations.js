@@ -17,7 +17,8 @@ export const CHECKOUT_TITLES = {
     UAH: 'грн',
     USD: 'долл',
     region: 'Регіон',
-    orderNumber: 'Замовлення № '
+    orderNumber: 'Замовлення № ',
+    deliveryAddress: 'Адреса доставки'
   },
   1: {
     address: 'Address:',
@@ -37,7 +38,8 @@ export const CHECKOUT_TITLES = {
     UAH: 'UAH',
     USD: 'USD',
     region: 'Region',
-    orderNumber: 'Order № '
+    orderNumber: 'Order № ',
+    deliveryAddress: 'Delivery address'
   }
 };
 
@@ -67,10 +69,10 @@ export const CHECKOUT_TEXT_FIELDS = {
     lastName: 'Прізвище *',
     email: 'Email *',
     contactPhoneNumber: 'Номер телефону *',
-    city: 'Місто',
-    building: 'Будинок',
-    street: 'Вулиця',
-    apartment: 'Квартира',
+    city: 'Місто *',
+    house: 'Будинок *',
+    street: 'Вулиця *',
+    flat: 'Квартира ',
     orderComment: 'Коментар до замовлення...',
     paymentMethod: 'Виберіть метод оплати *',
     deliveryType: 'Виберіть тип доставки',
@@ -83,10 +85,10 @@ export const CHECKOUT_TEXT_FIELDS = {
     lastName: 'Last name *',
     email: 'Email *',
     contactPhoneNumber: 'Contact phone number *',
-    city: 'City',
-    building: 'Building',
-    street: 'Street',
-    apartment: 'Apartment',
+    city: 'City *',
+    house: 'Building *',
+    street: 'Street *',
+    flat: 'Apartment *',
     orderComment: 'Order comment...',
     paymentMethod: 'Choose a payment method *',
     deliveryType: 'Select a delivery type',
@@ -110,15 +112,17 @@ export const CHECKOUT_DROP_LIST = {
 export const CHECKOUT_DELIVERY_TYPES = {
   0: {
     selfPickUP: 'Самовивіз',
-    novaPoshta: 'Нова пошта',
+    novaPoshta: 'Нова Пошта',
     ukrPoshta: 'Укрпошта',
-    courierNovaPoshta: "Кур'єр Нової пошти"
+    courierNovaPoshta: "Новa Пошта кур'єр",
+    courierUkrPoshta: "Укрпошта кур'єр"
   },
   1: {
     selfPickUP: 'Self pick-up',
-    novaPoshta: 'Nova poshta',
+    novaPoshta: 'Nova Poshta',
     ukrPoshta: 'Ukrposhta',
-    courierNovaPoshta: 'Courier from Nova poshta'
+    courierNovaPoshta: 'Courier from Nova Poshta',
+    courierUkrPoshta: 'Courier from Ukrposhta'
   }
 };
 export const CHECKOUT_BUTTON = {
@@ -163,8 +167,9 @@ export const CHECKOUT_ERROR = {
     userComment: 'Поле повинно містити від 2 до 500 символів',
     city: 'Поле повинно містити від 2 до 50 символів',
     street: 'Поле повинно містити від 2 до 100 символів',
-    house: 'Поле повинно містити від 2 до 50 символів',
-    flat: 'Поле повинно містити від 2 до 50 символів'
+    house: 'Мінімальне значення не повинно бути меншим 1',
+    flat: 'Мінімальне значення не повинно бути меншим 1',
+    onlyNum: 'Поле повинно містити лише числові значення'
   },
   1: {
     requiredField: 'Field should not to be empty',
@@ -176,6 +181,14 @@ export const CHECKOUT_ERROR = {
     city: 'Field should contain from 2 to 50 characters',
     street: 'Field should contain from 2 to 100 characters',
     house: 'Min value is 1',
-    flat: 'Min value is 1'
+    flat: 'Min value is 1',
+    onlyNum: 'Field should be a number'
   }
+};
+
+export const CHECKOUT_INPUT_FIELD = {
+  city: 'city',
+  street: 'street',
+  house: 'house',
+  flat: 'flat'
 };

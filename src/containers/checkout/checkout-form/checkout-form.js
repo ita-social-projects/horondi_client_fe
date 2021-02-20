@@ -45,9 +45,11 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
       (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
       Yup.string().min(2, CHECKOUT_ERROR[language].street).max(100, CHECKOUT_ERROR[language].street).required(CHECKOUT_ERROR[language].requiredField),
     house:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) && Yup.number().min(1, CHECKOUT_ERROR[language].house).required(CHECKOUT_ERROR[language].house),
+      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      Yup.number().min(1, CHECKOUT_ERROR[language].house).required(CHECKOUT_ERROR[language].requiredField).typeError(CHECKOUT_ERROR[language].onlyNum),
     flat:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) && Yup.number().min(1, CHECKOUT_ERROR[language].flat).required(CHECKOUT_ERROR[language].flat)
+      (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      Yup.number().min(1, CHECKOUT_ERROR[language].flat).typeError(CHECKOUT_ERROR[language].onlyNum)
   });
 
   const { values, handleSubmit, handleChange, touched, errors } = useFormik({

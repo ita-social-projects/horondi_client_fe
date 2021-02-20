@@ -1,9 +1,8 @@
 import {
   setNovaPoshtaCities,
   setNovaPoshtaWarehouse,
-  setNovaPoshtaStreets,
   setNovaPoshtaPrices,
-  setLoading
+  setDeliveryLoading
 } from '../checkout.actions';
 import { checkoutReducer } from '../checkout.reducer';
 
@@ -14,7 +13,6 @@ describe('Checkout reducer tests', () => {
       loading: false,
       cities: [],
       warehouses: [],
-      streets: [],
       price: {}
     };
   });
@@ -29,7 +27,9 @@ describe('Checkout reducer tests', () => {
       loading: true
     };
 
-    expect(checkoutReducer(initialState, setLoading(true))).toEqual(state);
+    expect(checkoutReducer(initialState, setDeliveryLoading(true))).toEqual(
+      state
+    );
   });
 
   it('should set array of cities', () => {
@@ -59,25 +59,6 @@ describe('Checkout reducer tests', () => {
             ref: '90a1d47c-a7a5-11e9-b73a-005056b24375'
           }
         ])
-      )
-    ).toEqual(state);
-  });
-
-  it('should set array of streets', () => {
-    const state = {
-      ...initialState,
-      streets: {
-        cityRef: 'c4302938-f428-11e9-91ff-0025b501a04b',
-        street: 'івана'
-      }
-    };
-    expect(
-      checkoutReducer(
-        initialState,
-        setNovaPoshtaStreets({
-          cityRef: 'c4302938-f428-11e9-91ff-0025b501a04b',
-          street: 'івана'
-        })
       )
     ).toEqual(state);
   });

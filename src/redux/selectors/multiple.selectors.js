@@ -65,3 +65,9 @@ export const selectConstructor = ({ Constructor }) => ({
 });
 
 export const selectToastSettings = (state) => state.Toast.toastSettings;
+
+export const selectFilterData = ({ Products, Language }) => ({
+  filters: Products.filters,
+  language: Language.language,
+  filterData: Products.filterData
+});

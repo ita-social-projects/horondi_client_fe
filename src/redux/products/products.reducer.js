@@ -38,7 +38,7 @@ export const initialState = {
   filters: {
     colorsFilter: [],
     patternsFilter: [],
-    categoryFilter: null,
+    categoryFilter: [],
     priceFilter: [0, 99999999],
     searchFilter: '',
     modelsFilter: [],

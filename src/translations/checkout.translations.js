@@ -198,5 +198,7 @@ export const CHECKOUT_INPUT_FIELD = {
   house: 'house',
   flat: 'flat',
   userComment: 'userComment',
-  paymentMethod: 'paymentMethod'
+  paymentMethod: 'paymentMethod',
+  courierOffice: 'courierOffice',
+  courierOfficeName: 'courierOfficeName'
 };

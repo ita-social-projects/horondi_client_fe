@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { useStyles } from './nova-post.styles';
-import { CHECKOUT_ADDITIONAL_INFORMATION, CHECKOUT_DELIVERY_TYPES, CHECKOUT_TEXT_FIELDS } from '../../../../../translations/checkout.translations';
+import { CHECKOUT_ADDITIONAL_INFORMATION, CHECKOUT_DELIVERY_TYPES, CHECKOUT_INPUT_FIELD, CHECKOUT_TEXT_FIELDS } from '../../../../../translations/checkout.translations';
 import { getNovaPoshtaCities, getNovaPoshtaWarehouse } from '../../../../../redux/checkout/checkout.actions';
 import { TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 
-const NovaPost = ({ isLightTheme, language, values, errors, touched, handleChange }) => {
+const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touched, handleChange }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
@@ -37,7 +37,7 @@ const NovaPost = ({ isLightTheme, language, values, errors, touched, handleChang
       dispatch(getNovaPoshtaWarehouse(selectedCity));
     }
   }, [dispatch, selectedCity]);
-
+  console.log(values);
   return (
     <div className={styles.novaPostContainer}>
       <h3 className={styles.novaPostTitle}>{CHECKOUT_DELIVERY_TYPES[language].novaPoshta}</h3>
@@ -50,7 +50,15 @@ const NovaPost = ({ isLightTheme, language, values, errors, touched, handleChang
               getPostCities(value);
             }}
             noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
-            onChange={(event, value) => value ? setSelectedCity(value.description) : setSelectedCity('')}
+            onChange={(event, value) => {
+              if (value) {
+                setSelectedCity(value.description);
+                setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
+              } else {
+                setSelectedCity('');
+                setWarehouse('');
+              }
+            }}
             options={cities}
             inputValue={inputValue}
             getOptionLabel={(option) => option?.description || null}
@@ -87,9 +95,13 @@ const NovaPost = ({ isLightTheme, language, values, errors, touched, handleChang
             onInputChange={(event, value) => {
               setWarehouse(value);
             }}
-            value={values.courierOffice}
             noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDepartment}
-            onChange={handleChange}
+            onChange={(event, value) => {
+              if (value) {
+                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value.ref);
+                setFieldValue(CHECKOUT_INPUT_FIELD.courierOfficeName, value.description);
+              }
+            }}
             disabled={!selectedCity}
             options={_.filter(warehouses, (warehouseItem) => !warehouseItem.description.includes('Поштомат'))}
             inputValue={wareHouse}

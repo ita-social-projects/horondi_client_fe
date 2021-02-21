@@ -31,7 +31,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
 
   const totalPriceToPay = cartItems.reduce((previousValue, currentValue) => previousValue + calcPrice(currentValue, currency), 0);
 
-  const { values, handleSubmit, handleChange, touched, errors } = useFormik({
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     validationSchema: validationSchema(deliveryType, language),
     initialValues,
     onSubmit: (data) => {
@@ -155,7 +155,16 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].yourOrderTitle}</h2>
               <div className={styles.checkoutTitleLine} />
             </div>
-            <Delivery deliveryType={deliveryType} language={language} isLightTheme={isLightTheme} values={values} errors={errors} touched={touched} handleChange={handleChange} />
+            <Delivery
+              deliveryType={deliveryType}
+              language={language}
+              isLightTheme={isLightTheme}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+            />
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>

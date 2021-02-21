@@ -113,28 +113,21 @@ export const errorMessages = [
 ];
 
 export const formRegExp = {
-  email:
-    '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
+  email: '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   pass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/,
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
-  country:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  city:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  region:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  street:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  country: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  city: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  region: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  street: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  deliveryType:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  deliveryMethod:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  deliveryMethod: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
   link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };
@@ -307,18 +300,9 @@ export const RESPONSIVE_CATEGORIES = {
 
 export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
-  added: [
-    'Ваш коментар успішно створений',
-    'Your comment is successfully added'
-  ],
-  updated: [
-    'Ваш коментар успішно оновлений',
-    'Your comment is successfully updated'
-  ],
-  deleted: [
-    'Ваш коментар успішно видалений',
-    'Your comment is successfully deleted'
-  ],
+  added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
+  updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
+  deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong']
 };
 export const COMMENT_DATA = {
@@ -359,19 +343,7 @@ export const commentFields = {
   text: { name: 'text', multiline: true, rows: 7 }
 };
 
-export const profileFields = [
-  'firstName',
-  'lastName',
-  'email',
-  'phoneNumber',
-  'country',
-  'region',
-  'city',
-  'street',
-  'buildingNumber',
-  'appartment',
-  'zipcode'
-];
+export const profileFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'country', 'region', 'city', 'street', 'buildingNumber', 'appartment', 'zipcode'];
 
 export const carouselInterval = 5000;
 export const carouselMaterialInterval = 2000;

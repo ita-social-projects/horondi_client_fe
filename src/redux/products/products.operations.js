@@ -54,12 +54,11 @@ const getAllFilters = async () => {
               value
             }
           }
-          productPrice {
-            _id
-            basePrice {
-              currency
-              value
-            }
+          maxPrice {
+            value
+          }
+          minPrice {
+            value
           }
         }
       }
@@ -102,23 +101,11 @@ const getFilteredProducts = async ({ state, currency }) => {
         $currency: Int
       ) {
         getProducts(
-          filter: {
-            colors: $colors
-            pattern: $patterns
-            price: $price
-            category: $category
-            isHotItem: $isHotItem
-            models: $models
-            currency: $currency
-          }
+          filter: { colors: $colors, pattern: $patterns, price: $price, category: $category, isHotItem: $isHotItem, models: $models, currency: $currency }
           skip: $skip
           limit: $limit
           search: $search
-          sort: {
-            rate: $rate
-            basePrice: $basePrice
-            purchasedCount: $purchasedCount
-          }
+          sort: { rate: $rate, basePrice: $basePrice, purchasedCount: $purchasedCount }
         ) {
           __typename
           ... on PaginatedProducts {

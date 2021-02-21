@@ -13,17 +13,14 @@ const CountPerPage = () => {
   const history = useHistory();
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  const { countPerPages, page, defaultPage } = URL_QUERIES_NAME;
-  const countPerPageValue = useSelector(
-    ({ Products: { countPerPage } }) => countPerPage
-  );
+  const { countPerPage, page, defaultPage } = URL_QUERIES_NAME;
+  const countPerPageValue = useSelector(({ Products: { countPerPage } }) => countPerPage);
   useEffect(() => {
-    dispatch(setCountPerPage(+searchParams.get(countPerPages)));
+    dispatch(setCountPerPage(+searchParams.get(countPerPage)));
   }, [dispatch, searchParams.toString()]);
-
   const pickQuantity = (value) => {
     searchParams.set(page, defaultPage);
-    searchParams.set(countPerPages, value);
+    searchParams.set(countPerPage, value);
     history.push(`?${searchParams.toString()}`);
   };
 

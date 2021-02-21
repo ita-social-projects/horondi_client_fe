@@ -5,11 +5,7 @@ import Slider from '@material-ui/core/Slider';
 import { map } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import {
-  PRICE_TEXT,
-  PRICE_FROM,
-  PRICE_TO
-} from '../../../../translations/product-list.translations';
+import { PRICE_TEXT, PRICE_FROM, PRICE_TO } from '../../../../translations/product-list.translations';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
@@ -22,14 +18,13 @@ const PriceFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
 
-  const { filters, language, currency, price } = useSelector(
-    ({ Products, Language, Currency }) => ({
-      filters: Products.filters.priceFilter,
-      language: Language.language,
-      currency: Currency.currency,
-      price: Products.filterData.productPrice
-    })
-  );
+  const { filters, language, currency, maxPrice, minPrice } = useSelector(({ Products, Language, Currency }) => ({
+    filters: Products.filters.priceFilter,
+    language: Language.language,
+    currency: Currency.currency,
+    maxPrice: Products.filterData.maxPrice,
+    minPrice: Products.filterData.minPrice
+  }));
 
   useEffect(() => {
     if (searchParams.get(priceFilter)) {
@@ -38,24 +33,11 @@ const PriceFilter = () => {
           searchParams
             .get(priceFilter)
             .split(',')
-            .map((price) => Math.round(price * 100))
+            .map((price) => price * 100)
         )
       );
-    } else if (price) {
-      dispatch(
-        setPriceFilter([
-          Math.min(
-            ...price.map(
-              (productPrice) => productPrice.basePrice[currency].value
-            )
-          ),
-          Math.max(
-            ...price.map(
-              (productPrice) => productPrice.basePrice[currency].value
-            )
-          )
-        ])
-      );
+    } else if (minPrice && maxPrice) {
+      dispatch(setPriceFilter([minPrice[currency].value, maxPrice[currency].value]));
     }
   }, [dispatch, searchParams.toString()]);
 
@@ -67,12 +49,12 @@ const PriceFilter = () => {
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
+  const min = minPrice ? minPrice[currency].value / 100 : 0;
+  const max = maxPrice ? maxPrice[currency].value / 100 : 1000;
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value}{' '}
-        {Math.round(filters[0] / 100)}- {PRICE_TO[language].value}{' '}
-        {Math.round(filters[1] / 100)}
+        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value} {Math.round(filters[0] / 100)}- {PRICE_TO[language].value} {Math.round(filters[1] / 100)}
       </Typography>
       <Slider
         className={styles.slider}
@@ -81,12 +63,8 @@ const PriceFilter = () => {
         onChange={handlePriceChange}
         onChangeCommitted={handlePriceFilter}
         valueLabelDisplay='auto'
-        min={Math.min(
-          ...map(price, (product) => product.basePrice[currency].value / 100)
-        )}
-        max={Math.max(
-          ...map(price, (product) => product.basePrice[currency].value / 100)
-        )}
+        min={min}
+        max={max}
         aria-labelledby='range-slider'
       />
     </FormGroup>

@@ -151,10 +151,14 @@ export const CHECKOUT_PAYMENT = {
 };
 export const CHECKOUT_ADDITIONAL_INFORMATION = {
   0: {
-    additionalInfo: '* Замовлення буде відправлено протягом десяти робочих днів.'
+    additionalInfo: '* Замовлення буде відправлено протягом десяти робочих днів.',
+    noOneCity: 'Жодного міста не знайдено',
+    noOneDepartment: 'Жодного відділення не знайдемо'
   },
   1: {
-    additionalInfo: '* Order will be shipped within 10 business days.'
+    additionalInfo: '* Order will be shipped within 10 business days.',
+    noOneCity: 'City not found',
+    noOneDepartment: 'Department not found'
   }
 };
 export const CHECKOUT_ERROR = {
@@ -185,8 +189,14 @@ export const CHECKOUT_ERROR = {
 };
 
 export const CHECKOUT_INPUT_FIELD = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
   city: 'city',
   street: 'street',
   house: 'house',
-  flat: 'flat'
+  flat: 'flat',
+  userComment: 'userComment',
+  paymentMethod: 'paymentMethod'
 };

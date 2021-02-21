@@ -114,9 +114,17 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
 });
 export const checkoutFormBtnValue = (values, language) =>
   values.paymentMethod === '' || values.paymentMethod === CHECKOUT_PAYMENT[language].cash ? CHECKOUT_BUTTON[language].confirmOrder : CHECKOUT_BUTTON[language].payOrder;
-export const courierInputData = (language) => [
+export const courierInputLabels = (language) => [
   { name: CHECKOUT_INPUT_FIELD.city, label: CHECKOUT_TEXT_FIELDS[language].city },
   { name: CHECKOUT_INPUT_FIELD.street, label: CHECKOUT_TEXT_FIELDS[language].street },
   { name: CHECKOUT_INPUT_FIELD.house, label: CHECKOUT_TEXT_FIELDS[language].house },
   { name: CHECKOUT_INPUT_FIELD.flat, label: CHECKOUT_TEXT_FIELDS[language].flat }
+];
+export const userNameInputLabels = (language) => [
+  { name: CHECKOUT_INPUT_FIELD.firstName, label: CHECKOUT_TEXT_FIELDS[language].firstName },
+  { name: CHECKOUT_INPUT_FIELD.lastName, label: CHECKOUT_TEXT_FIELDS[language].lastName }
+];
+export const userContactInputLabels = (language) => [
+  { name: CHECKOUT_INPUT_FIELD.email, label: CHECKOUT_TEXT_FIELDS[language].email },
+  { name: CHECKOUT_INPUT_FIELD.phoneNumber, label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber }
 ];

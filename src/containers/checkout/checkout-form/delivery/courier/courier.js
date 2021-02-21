@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import { useStyles } from './courier.styles';
 import { CHECKOUT_DELIVERY_TYPES, CHECKOUT_TEXT_FIELDS, CHECKOUT_TITLES } from '../../../../../translations/checkout.translations';
 import { deliveryTypes } from '../../../../../configs';
-import { courierInputData } from '../../../../../utils/checkout';
+import { courierInputLabels } from '../../../../../utils/checkout';
 
 const Courier = ({ isLightTheme, language, deliveryType, values, handleChange, touched, errors }) => {
   const styles = useStyles({ isLightTheme });
@@ -16,7 +16,7 @@ const Courier = ({ isLightTheme, language, deliveryType, values, handleChange, t
       <div className={styles.inputData}>
         <h4 className={styles.courierInputDataTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h4>
         <div className={styles.inputWrapper}>
-          {courierInputData(language).map((field) => (
+          {courierInputLabels(language).map((field) => (
             <>
               <TextField
                 size='small'

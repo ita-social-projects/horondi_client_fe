@@ -85,7 +85,6 @@ export function* handleNovaPoshtaCities({ payload }) {
 }
 
 export function* handleNovaPoshtaWarehouse({ payload }) {
-  console.log(payload);
   try {
     yield put(setDeliveryLoading(true));
 

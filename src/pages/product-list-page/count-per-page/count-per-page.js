@@ -14,7 +14,7 @@ const CountPerPage = () => {
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const { countPerPage, page, defaultPage } = URL_QUERIES_NAME;
-  const countPerPageValue = useSelector(({ Products: { countPerPage } }) => countPerPage);
+  const countPerPageValue = useSelector(({ Products: { countPerPages } }) => countPerPages);
   useEffect(() => {
     dispatch(setCountPerPage(+searchParams.get(countPerPage)));
   }, [dispatch, searchParams.toString()]);

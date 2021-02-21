@@ -7,13 +7,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '0 auto'
   },
   formControl: {
-    width: 250,
+    width: 260,
     marginLeft: '2%',
     marginBottom: '3%'
   },
   paymentSelect: {
     height: 50,
-    width: 270,
+    width: 280,
     marginBottom: 10
   },
   contactInfoTitle: ({ isLightTheme }) => ({

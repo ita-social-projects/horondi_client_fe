@@ -88,11 +88,11 @@ export const CHECKOUT_TEXT_FIELDS = {
     city: 'City *',
     house: 'Building *',
     street: 'Street *',
-    flat: 'Apartment *',
+    flat: 'Apartment ',
     orderComment: 'Order comment...',
     paymentMethod: 'Choose a payment method *',
     deliveryType: 'Select a delivery type',
-    department: 'Department',
+    department: 'Department *',
     delivery: 'Delivery type',
     total: 'Total'
   }

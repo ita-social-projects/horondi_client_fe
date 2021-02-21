@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
+import FormControl from '@material-ui/core/FormControl';
 import { useStyles } from './nova-post.styles';
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
@@ -53,43 +54,50 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
       <div className={styles.novaPostData}>
         <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].city}</h4>
         <div className={styles.selectorInfo}>
-          <Autocomplete
-            onInputChange={(e, value) => {
-              setInputValue(value);
-              getPostCities(value);
-            }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
-            onChange={(event, value) => {
-              if (value) {
-                setSelectedCity(value.description);
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
-              } else {
-                setSelectedCity('');
-                setWarehouse('');
-              }
-            }}
-            options={cities}
-            inputValue={inputValue}
-            getOptionLabel={(option) => option?.description || null}
-            className={styles.dataInput}
+          <FormControl
             error={touched.city && !!errors.city}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={CHECKOUT_TEXT_FIELDS[language].city}
-                variant={TEXT_FIELD_VARIANT.OUTLINED}
-                InputProps={{
-                  ...params.InputProps,
-                  endAdornment: (
-                    <>
-                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
-                      {params.InputProps.endAdornment}
-                    </>
-                  )
-                }}
-              />
-            )}
-          />
+            variant={TEXT_FIELD_VARIANT.OUTLINED}
+            className={styles.formControl}
+          >
+            <Autocomplete
+              onInputChange={(e, value) => {
+                setInputValue(value);
+                getPostCities(value);
+              }}
+              noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+              onChange={(event, value) => {
+                if (value) {
+                  setSelectedCity(value.description);
+                  setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
+                } else {
+                  setSelectedCity('');
+                  setWarehouse('');
+                }
+              }}
+              options={cities}
+              inputValue={inputValue}
+              getOptionLabel={(option) => option?.description || null}
+              className={styles.dataInput}
+              error={touched.city && !!errors.city}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={touched.city && !!errors.city}
+                  label={CHECKOUT_TEXT_FIELDS[language].city}
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {deliveryLoading && <CircularProgress color='inherit' size={20} />}
+                        {params.InputProps.endAdornment}
+                      </>
+                    )
+                  }}
+                />
+              )}
+            />
+          </FormControl>
           {touched.city && errors.city && (
             <div data-cy='code-error' className={styles.error}>
               {errors.city}
@@ -121,10 +129,11 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
             inputValue={wareHouse}
             getOptionLabel={(option) => option?.description}
             className={styles.dataInput}
-            error={touched.courierOffice && !!errors.courierOffice}
+            error={touched.courierOfficeName && !!errors.courierOfficeName}
             renderInput={(params) => (
               <TextField
                 {...params}
+                error={touched.courierOfficeName && !!errors.courierOfficeName}
                 label={CHECKOUT_TEXT_FIELDS[language].department}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
@@ -139,9 +148,9 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
               />
             )}
           />
-          {touched.courierOffice && errors.courierOffice && (
+          {touched.courierOfficeName && errors.courierOfficeName && (
             <div data-cy='code-error' className={styles.error}>
-              {errors.courierOffice}
+              {errors.courierOfficeName}
             </div>
           )}
         </div>

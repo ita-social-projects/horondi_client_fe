@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+
 import { CHECKOUT_ERROR } from '../translations/checkout.translations';
 import { deliveryTypes, formRegExp } from '../configs';
 

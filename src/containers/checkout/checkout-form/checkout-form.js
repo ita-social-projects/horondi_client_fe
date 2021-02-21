@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '@material-ui/core';
-import * as Yup from 'yup';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,31 +8,35 @@ import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_ERROR,
+  CHECKOUT_INPUT_FIELD,
   CHECKOUT_PAYMENT,
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { DEFAULT_CURRENCY, formRegExp } from '../../../configs';
+import { DEFAULT_CURRENCY } from '../../../configs';
 import { calcPrice } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
 import { setOrder } from '../../../redux/order/order.actions';
-import { checkoutFormBtnValue, orderInputData } from '../../../utils/checkout';
+import {
+  checkoutDefaultProps,
+  checkoutFormBtnValue,
+  checkoutPropTypes,
+  initialValues,
+  orderInputData,
+  userContactInputLabels,
+  userNameInputLabels
+} from '../../../utils/checkout';
+import { validationSchema } from '../../../validators/chekout';
+import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
-const CheckoutForm = ({
-  language,
-  isLightTheme,
-  currency,
-  cartItems,
-  deliveryType
-}) => {
+const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
     isLightTheme
   });
@@ -41,52 +44,16 @@ const CheckoutForm = ({
   const dispatch = useDispatch();
 
   const totalPriceToPay = cartItems.reduce(
-    (previousValue, currentValue) =>
-      previousValue + calcPrice(currentValue, currency),
+    (previousValue, currentValue) => previousValue + calcPrice(currentValue, currency),
     0
   );
 
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, CHECKOUT_ERROR[language].firstName)
-      .max(20, CHECKOUT_ERROR[language].firstName)
-      .required(CHECKOUT_ERROR[language].requiredField),
-    lastName: Yup.string()
-      .min(2, CHECKOUT_ERROR[language].lastName)
-      .max(20, CHECKOUT_ERROR[language].lastName)
-      .required(CHECKOUT_ERROR[language].requiredField),
-    email: Yup.string()
-      .email(CHECKOUT_ERROR[language].email)
-      .required(CHECKOUT_ERROR[language].requiredField),
-    phoneNumber: Yup.string()
-      .matches(formRegExp.phoneNumber, CHECKOUT_ERROR[language].phoneNumber)
-      .required(CHECKOUT_ERROR[language].requiredField),
-    paymentMethod: Yup.string().required(
-      CHECKOUT_ERROR[language].requiredField
-    ),
-    userComment: Yup.string()
-      .min(2, CHECKOUT_ERROR[language].userComment)
-      .max(500, CHECKOUT_ERROR[language].userComment)
-  });
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
+    validationSchema: validationSchema(deliveryType, language),
+    initialValues,
 
-  const { values, handleSubmit, handleChange, touched, errors } = useFormik({
-    validationSchema,
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      paymentMethod: '',
-      userComment: ''
-    },
     onSubmit: (data) => {
-      const orderInput = orderInputData(
-        data,
-        deliveryType,
-        cartItems,
-        language
-      );
-
+      const orderInput = orderInputData(data, deliveryType, cartItems, language);
       dispatch(setOrder(orderInput));
     }
   });
@@ -94,8 +61,8 @@ const CheckoutForm = ({
   return (
     <div>
       <form onSubmit={handleSubmit} className={styles.root}>
-        <div className={styles.checkoutFormContainer}>
-          <div className={styles.userInfoContainer}>
+        <Grid item className={styles.checkoutFormContainer}>
+          <Grid item className={styles.userInfoContainer}>
             <div className={styles.checkoutTitleInfo}>
               <div className={styles.checkoutTitleInfoData}>
                 <Link to={routes.pathToCart} className={styles.backBtn}>
@@ -110,111 +77,72 @@ const CheckoutForm = ({
               </div>
               <div className={styles.checkoutTitleLine} />
             </div>
-
             <div className={styles.contactInfoWrapper}>
               <h2 className={styles.contactInfoTitle}>
                 {CHECKOUT_TITLES[language].contactInfo}
               </h2>
               <div className={styles.contactInfoFields}>
-                <div className={styles.inputData}>
-                  <TextField
-                    size='small'
-                    id='outlined-basic'
-                    data-cy='firstName'
-                    name='firstName'
-                    className={styles.textField}
-                    variant='outlined'
-                    label={CHECKOUT_TEXT_FIELDS[language].firstName}
-                    value={values.firstName}
-                    onChange={handleChange}
-                    error={touched.firstName && !!errors.firstName}
-                  />
-                  {touched.firstName && errors.firstName && (
-                    <div data-cy='code-error' className={styles.error}>
-                      {errors.firstName}
-                    </div>
-                  )}
-                </div>
-                <div className={styles.inputData}>
-                  <TextField
-                    size='small'
-                    id='standard-start-adornment'
-                    data-cy='lastName'
-                    name='lastName'
-                    className={styles.textField}
-                    variant='outlined'
-                    label={CHECKOUT_TEXT_FIELDS[language].lastName}
-                    value={values.lastName}
-                    onChange={handleChange}
-                    error={touched.lastName && !!errors.lastName}
-                  />
-                  {touched.lastName && errors.lastName && (
-                    <div data-cy='code-error' className={styles.error}>
-                      {errors.lastName}
-                    </div>
-                  )}
-                </div>
+                {userNameInputLabels(language).map((field) => (
+                  <div key={field.name} className={styles.inputData}>
+                    <TextField
+                      size={TEXT_FIELD_SIZE.SMALL}
+                      data-cy={CHECKOUT_INPUT_FIELD[field.name]}
+                      name={CHECKOUT_INPUT_FIELD[field.name]}
+                      className={styles.textField}
+                      variant={TEXT_FIELD_VARIANT.OUTLINED}
+                      label={field.label}
+                      value={values[field.name]}
+                      onChange={handleChange}
+                      error={touched[field.name] && !!errors[field.name]}
+                    />
+                    {touched[field.name] && errors[field.name] && (
+                      <div data-cy='code-error' className={styles.error}>
+                        {errors[field.name]}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
               <div className={styles.contactInfoFields}>
-                <div className={styles.inputData}>
-                  <TextField
-                    size='small'
-                    id='standard-start-adornment'
-                    data-cy='email'
-                    name='email'
-                    className={styles.textField}
-                    variant='outlined'
-                    label={CHECKOUT_TEXT_FIELDS[language].email}
-                    value={values.email}
-                    onChange={handleChange}
-                    error={touched.email && !!errors.email}
-                  />
-                  {touched.email && errors.email && (
-                    <div data-cy='code-error' className={styles.error}>
-                      {errors.email}
-                    </div>
-                  )}
-                </div>
-                <div className={styles.inputData}>
-                  <TextField
-                    size='small'
-                    id='standard-start-adornment'
-                    data-cy='phoneNumber'
-                    name='phoneNumber'
-                    className={styles.textField}
-                    variant='outlined'
-                    label={CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber}
-                    value={values.phoneNumber}
-                    onChange={handleChange}
-                    error={touched.phoneNumber && !!errors.phoneNumber}
-                  />
-                  {touched.phoneNumber && errors.phoneNumber && (
-                    <div data-cy='code-error' className={styles.error}>
-                      {errors.phoneNumber}
-                    </div>
-                  )}
-                </div>
+                {userContactInputLabels(language).map((field) => (
+                  <div key={field.name} className={styles.inputData}>
+                    <TextField
+                      size={TEXT_FIELD_SIZE.SMALL}
+                      data-cy={CHECKOUT_INPUT_FIELD[field.name]}
+                      name={CHECKOUT_INPUT_FIELD[field.name]}
+                      className={styles.textField}
+                      variant={TEXT_FIELD_VARIANT.OUTLINED}
+                      label={field.label}
+                      value={values[field.name]}
+                      onChange={handleChange}
+                      error={touched[field.name] && !!errors[field.name]}
+                    />
+                    {touched[field.name] && errors[field.name] && (
+                      <div data-cy='code-error' className={styles.error}>
+                        {errors[field.name]}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
             <div className={styles.contactPaymentInfo}>
-              <h2
-                className={`${styles.contactInfoTitle} ${styles.paymentTitle}`}
-              >
+              <h2 className={`${styles.contactInfoTitle} ${styles.paymentTitle}`}>
                 {CHECKOUT_TITLES[language].payment}
               </h2>
               <FormControl
                 error={touched.paymentMethod && !!errors.paymentMethod}
-                variant='outlined'
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
                 className={styles.formControl}
               >
-                <InputLabel variant='outlined'>
+                <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
                   {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
                 </InputLabel>
                 <Select
                   label={CHECKOUT_TEXT_FIELDS[language].paymentMethod}
                   className={styles.paymentSelect}
-                  data-cy='paymentMethod'
-                  name='paymentMethod'
+                  data-cy={CHECKOUT_INPUT_FIELD.paymentMethod}
+                  name={CHECKOUT_INPUT_FIELD.paymentMethod}
                   value={values.paymentMethod}
                   onChange={handleChange}
                 >
@@ -237,14 +165,13 @@ const CheckoutForm = ({
               </h2>
               <div>
                 <TextField
-                  size='small'
-                  id='outlined-multiline-static'
-                  data-cy='userComment'
-                  name='userComment'
+                  size={TEXT_FIELD_SIZE.SMALL}
+                  data-cy={CHECKOUT_INPUT_FIELD.userComment}
+                  name={CHECKOUT_INPUT_FIELD.userComment}
                   multiline
                   rows={4}
                   className={styles.textAreaField}
-                  variant='outlined'
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
                   value={values.userComment}
                   onChange={handleChange}
                   error={touched.userComment && !!errors.userComment}
@@ -259,8 +186,8 @@ const CheckoutForm = ({
                 {CHECKOUT_ADDITIONAL_INFORMATION[language].additionalInfo}
               </p>
             </div>
-          </div>
-          <div className={styles.deliveryContainer}>
+          </Grid>
+          <Grid item className={styles.deliveryContainer}>
             <div className={styles.checkoutYourOrderTitleData}>
               <h2 className={styles.checkoutTitle}>
                 {CHECKOUT_TITLES[language].yourOrderTitle}
@@ -271,16 +198,19 @@ const CheckoutForm = ({
               deliveryType={deliveryType}
               language={language}
               isLightTheme={isLightTheme}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
             />
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>
                   {CHECKOUT_TITLES[language].totalPrice}
                 </h4>
-                <p
-                  className={`${styles.totalSumTitle} ${styles.totalSumValue}`}
-                >
-                  {totalPriceToPay / 100}{' '}
+                <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
+                  {totalPriceToPay / 100}
                   {currency === DEFAULT_CURRENCY
                     ? CHECKOUT_TITLES[language].UAH
                     : CHECKOUT_TITLES[language].USD}
@@ -295,57 +225,14 @@ const CheckoutForm = ({
                 </span>
               </Link>
             </div>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );
 };
-CheckoutForm.propTypes = {
-  language: PropTypes.number,
-  isLightTheme: PropTypes.bool,
-  currency: PropTypes.number,
-  cartItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string
-    })
-  ),
-  deliveryType: PropTypes.string,
-  values: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    userComment: PropTypes.string
-  }),
-  errors: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    userComment: PropTypes.string
-  }),
-  touched: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    paymentMethod: PropTypes.string,
-    userComment: PropTypes.string
-  })
-};
 
-CheckoutForm.defaultProps = {
-  language: null,
-  isLightTheme: false,
-  currency: null,
-  deliveryType: '',
-  cartItems: [],
-  values: {},
-  errors: {},
-  touched: {}
-};
+CheckoutForm.propTypes = checkoutPropTypes;
+CheckoutForm.defaultProps = checkoutDefaultProps;
 
 export default CheckoutForm;

@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
-import { client } from "../../utils/client";
+import { client } from '../../utils/client';
 
 export const getNovaPoshtaPrices = async (
   cityRecipient,
@@ -30,33 +30,11 @@ export const getNovaPoshtaPrices = async (
         }
       }`
   });
-  await client.resetStore();
 
   return result.data.getNovaPoshtaPrices;
 };
-export const getNovaPoshtaStreets = async (cityRef, street) => {
-  const result = await client.query({
-    variables: {
-      cityRef,
-      street
-    },
-    query: gql`
-      query($cityRef: String, $street: String) {
-        getNovaPoshtaStreets(cityRef: $cityRef, street: $street) {
-          description
-          ref
-          streetsTypeRef
-          streetsType
-        }
-      }
-    `
-  });
-  await client.resetStore();
-
-  return result.data.getNovaPoshtaStreets;
-};
-export const getNovaPoshtaCities = async city => {
-  const result = await client.query({
+export const getNovaPoshtaCities = async (city) => {
+  const res = await client.query({
     variables: {
       city
     },
@@ -64,16 +42,14 @@ export const getNovaPoshtaCities = async city => {
       query($city: String) {
         getNovaPoshtaCities(city: $city) {
           description
-          ref
         }
       }
-    `
+    `,
+    fetchPolicy: 'no-cache'
   });
-  await client.resetStore();
-
-  return result.data.getNovaPoshtaCities;
+  return res.data.getNovaPoshtaCities;
 };
-export const getNovaPoshtaWarehouses = async city => {
+export const getNovaPoshtaWarehouses = async (city) => {
   const result = await client.query({
     variables: {
       city
@@ -83,16 +59,11 @@ export const getNovaPoshtaWarehouses = async city => {
         getNovaPoshtaWarehouses(city: $city) {
           description
           ref
-          shortAddress
-          schedule {
-            monday
-            saturday
-            sunday
-          }
         }
       }
-    `
+    `,
+    fetchPolicy: 'no-cache'
   });
-  await client.resetStore();
+
   return result.data.getNovaPoshtaWarehouses;
 };

@@ -3,9 +3,7 @@ import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
   SET_NOVAPOSHTA_WAREHOUSES,
-  SET_LOADING,
-  GET_NOVAPOSHTA_STREETS,
-  SET_NOVAPOSHTA_STREETS,
+  SET_DELIVERY_LOADING,
   SET_NOVAPOSHTA_PRICES,
   GET_NOVAPOSHTA_PRICES,
   GET_FONDY_DATA,
@@ -32,39 +30,29 @@ const getNovaPoshtaPrices = (payload) => ({
   payload
 });
 
-const setNovaPoshtaStreets = (payload) => ({
-  type: SET_NOVAPOSHTA_STREETS,
-  payload
-});
-
-const getNovaPoshtaStreets = (payload) => ({
-  type: GET_NOVAPOSHTA_STREETS,
-  payload
-});
-
 const setNovaPoshtaCities = (cities) => ({
   type: SET_NOVAPOSHTA_CITIES,
   payload: cities
 });
 
-const getNovaPoshtaCities = (inputValue) => ({
+const getNovaPoshtaCities = (payload) => ({
   type: GET_NOVAPOSHTA_CITIES,
-  payload: inputValue
+  payload
 });
 
-const setNovaPoshtaWarehouse = (warehouses) => ({
+const setNovaPoshtaWarehouse = (payload) => ({
   type: SET_NOVAPOSHTA_WAREHOUSES,
-  payload: warehouses
+  payload
 });
 
-const getNovaPoshtaWarehouse = (inputValue) => ({
+const getNovaPoshtaWarehouse = (payload) => ({
   type: GET_NOVAPOSHTA_WAREHOUSES,
-  payload: inputValue
+  payload
 });
 
-const setLoading = (loading) => ({
-  type: SET_LOADING,
-  payload: loading
+const setDeliveryLoading = (payload) => ({
+  type: SET_DELIVERY_LOADING,
+  payload
 });
 
 export {
@@ -72,9 +60,7 @@ export {
   setNovaPoshtaCities,
   getNovaPoshtaWarehouse,
   setNovaPoshtaWarehouse,
-  setLoading,
-  setNovaPoshtaStreets,
-  getNovaPoshtaStreets,
+  setDeliveryLoading,
   setNovaPoshtaPrices,
   getNovaPoshtaPrices,
   setFondyData,

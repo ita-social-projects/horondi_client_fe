@@ -10,7 +10,15 @@ import routes from '../../configs/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
 
 const Checkout = () => {
-  const { language, isLightTheme, currency, cartItems, deliveryType, loading, isOrderCreated } = useSelector(({ Language, Theme, Currency, Cart, Order }) => ({
+  const {
+    language,
+    isLightTheme,
+    currency,
+    cartItems,
+    deliveryType,
+    loading,
+    isOrderCreated
+  } = useSelector(({ Language, Theme, Currency, Cart, Order }) => ({
     language: Language.language,
     isLightTheme: Theme.lightMode,
     currency: Currency.currency,
@@ -37,7 +45,13 @@ const Checkout = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>
-          <CheckoutForm language={language} isLightTheme={isLightTheme} currency={currency} cartItems={cartItems} deliveryType={deliveryType} />
+          <CheckoutForm
+            language={language}
+            isLightTheme={isLightTheme}
+            currency={currency}
+            cartItems={cartItems}
+            deliveryType={deliveryType}
+          />
         </div>
       )}
     </div>

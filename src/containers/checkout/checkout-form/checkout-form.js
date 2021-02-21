@@ -10,7 +10,13 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
-import { CHECKOUT_ADDITIONAL_INFORMATION, CHECKOUT_INPUT_FIELD, CHECKOUT_PAYMENT, CHECKOUT_TEXT_FIELDS, CHECKOUT_TITLES } from '../../../translations/checkout.translations';
+import {
+  CHECKOUT_ADDITIONAL_INFORMATION,
+  CHECKOUT_INPUT_FIELD,
+  CHECKOUT_PAYMENT,
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
+} from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
 import { DEFAULT_CURRENCY } from '../../../configs';
 import { calcPrice } from '../../../utils/priceCalculating';
@@ -18,7 +24,15 @@ import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
 import { setOrder } from '../../../redux/order/order.actions';
-import { checkoutDefaultProps, checkoutFormBtnValue, checkoutPropTypes, initialValues, orderInputData, userContactInputLabels, userNameInputLabels } from '../../../utils/checkout';
+import {
+  checkoutDefaultProps,
+  checkoutFormBtnValue,
+  checkoutPropTypes,
+  initialValues,
+  orderInputData,
+  userContactInputLabels,
+  userNameInputLabels
+} from '../../../utils/checkout';
 import { validationSchema } from '../../../validators/chekout';
 import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
@@ -29,11 +43,15 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
 
   const dispatch = useDispatch();
 
-  const totalPriceToPay = cartItems.reduce((previousValue, currentValue) => previousValue + calcPrice(currentValue, currency), 0);
+  const totalPriceToPay = cartItems.reduce(
+    (previousValue, currentValue) => previousValue + calcPrice(currentValue, currency),
+    0
+  );
 
   const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     validationSchema: validationSchema(deliveryType, language),
     initialValues,
+
     onSubmit: (data) => {
       const orderInput = orderInputData(data, deliveryType, cartItems, language);
       dispatch(setOrder(orderInput));
@@ -48,7 +66,10 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
             <div className={styles.checkoutTitleInfo}>
               <div className={styles.checkoutTitleInfoData}>
                 <Link to={routes.pathToCart} className={styles.backBtn}>
-                  <KeyboardBackspaceIcon color={isLightTheme ? 'primary' : 'action'} className={styles.backBtnLine} />
+                  <KeyboardBackspaceIcon
+                    color={isLightTheme ? 'primary' : 'action'}
+                    className={styles.backBtnLine}
+                  />
                 </Link>
                 <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
               </div>
@@ -102,9 +123,17 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               </div>
             </div>
             <div className={styles.contactPaymentInfo}>
-              <h2 className={`${styles.contactInfoTitle} ${styles.paymentTitle}`}>{CHECKOUT_TITLES[language].payment}</h2>
-              <FormControl error={touched.paymentMethod && !!errors.paymentMethod} variant={TEXT_FIELD_VARIANT.OUTLINED} className={styles.formControl}>
-                <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>{CHECKOUT_TEXT_FIELDS[language].paymentMethod}</InputLabel>
+              <h2 className={`${styles.contactInfoTitle} ${styles.paymentTitle}`}>
+                {CHECKOUT_TITLES[language].payment}
+              </h2>
+              <FormControl
+                error={touched.paymentMethod && !!errors.paymentMethod}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
+                className={styles.formControl}
+              >
+                <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
+                  {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
+                </InputLabel>
                 <Select
                   label={CHECKOUT_TEXT_FIELDS[language].paymentMethod}
                   className={styles.paymentSelect}
@@ -147,7 +176,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                   </div>
                 )}
               </div>
-              <p className={styles.contactInfoAdditional}>{CHECKOUT_ADDITIONAL_INFORMATION[language].additionalInfo}</p>
+              <p className={styles.contactInfoAdditional}>
+                {CHECKOUT_ADDITIONAL_INFORMATION[language].additionalInfo}
+              </p>
             </div>
           </Grid>
           <Grid item className={styles.deliveryContainer}>
@@ -169,14 +200,19 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {totalPriceToPay / 100} {currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD}
+                  {totalPriceToPay / 100}
+                  {currency === DEFAULT_CURRENCY
+                    ? CHECKOUT_TITLES[language].UAH
+                    : CHECKOUT_TITLES[language].USD}
                 </p>
               </div>
               <button type='submit' className={styles.submitBtn}>
                 {checkoutFormBtnValue(values, language)}
               </button>
               <Link to={routes.pathToMain}>
-                <span className={`${styles.totalSumTitle} ${styles.goods}`}>{CART_BUTTON_TITLES[language].goods}</span>
+                <span className={`${styles.totalSumTitle} ${styles.goods}`}>
+                  {CART_BUTTON_TITLES[language].goods}
+                </span>
               </Link>
             </div>
           </Grid>

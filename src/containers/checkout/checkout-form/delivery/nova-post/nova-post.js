@@ -6,11 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { useStyles } from './nova-post.styles';
-import { CHECKOUT_ADDITIONAL_INFORMATION, CHECKOUT_DELIVERY_TYPES, CHECKOUT_INPUT_FIELD, CHECKOUT_TEXT_FIELDS } from '../../../../../translations/checkout.translations';
-import { getNovaPoshtaCities, getNovaPoshtaWarehouse } from '../../../../../redux/checkout/checkout.actions';
+import {
+  CHECKOUT_ADDITIONAL_INFORMATION,
+  CHECKOUT_DELIVERY_TYPES,
+  CHECKOUT_INPUT_FIELD,
+  CHECKOUT_TEXT_FIELDS
+} from '../../../../../translations/checkout.translations';
+import {
+  getNovaPoshtaCities,
+  getNovaPoshtaWarehouse
+} from '../../../../../redux/checkout/checkout.actions';
 import { TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
+import { POSTOMAT } from '../../../../../utils/checkout';
 
-const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touched, handleChange }) => {
+const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touched }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
@@ -37,7 +46,7 @@ const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touch
       dispatch(getNovaPoshtaWarehouse(selectedCity));
     }
   }, [dispatch, selectedCity]);
-  console.log(values);
+
   return (
     <div className={styles.novaPostContainer}>
       <h3 className={styles.novaPostTitle}>{CHECKOUT_DELIVERY_TYPES[language].novaPoshta}</h3>
@@ -103,7 +112,10 @@ const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touch
               }
             }}
             disabled={!selectedCity}
-            options={_.filter(warehouses, (warehouseItem) => !warehouseItem.description.includes('Поштомат'))}
+            options={_.filter(
+              warehouses,
+              (warehouseItem) => !warehouseItem.description.includes(POSTOMAT)
+            )}
             inputValue={wareHouse}
             getOptionLabel={(option) => option?.description}
             className={styles.dataInput}
@@ -112,7 +124,7 @@ const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touch
               <TextField
                 {...params}
                 label={CHECKOUT_TEXT_FIELDS[language].department}
-                variant='outlined'
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (

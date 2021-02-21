@@ -17,7 +17,7 @@ const CountPerPage = () => {
   const countPerPageValue = useSelector(({ Products: { countPerPage } }) => countPerPage);
   useEffect(() => {
     dispatch(setCountPerPage(+searchParams.get(countPerPage)));
-  }, [dispatch, searchParams.toString()]);
+  }, [dispatch, searchParams, countPerPage]);
   const pickQuantity = (value) => {
     searchParams.set(page, defaultPage);
     searchParams.set(countPerPage, value);

@@ -19,7 +19,7 @@ import {
 import { TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POSTOMAT } from '../../../../../utils/checkout';
 
-const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touched }) => {
+const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
@@ -98,7 +98,9 @@ const NovaPost = ({ isLightTheme, language, values, setFieldValue, errors, touch
         </div>
       </div>
       <div className={styles.novaPostData}>
-        <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].department}</h4>
+        <h4 className={styles.novaPostDataTitle}>
+          {CHECKOUT_TEXT_FIELDS[language].department}
+        </h4>
         <div>
           <Autocomplete
             onInputChange={(event, value) => {

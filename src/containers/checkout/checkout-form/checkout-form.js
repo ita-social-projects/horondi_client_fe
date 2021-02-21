@@ -71,12 +71,16 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                     className={styles.backBtnLine}
                   />
                 </Link>
-                <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
+                <h2 className={styles.checkoutTitle}>
+                  {CHECKOUT_TITLES[language].checkoutTitle}
+                </h2>
               </div>
               <div className={styles.checkoutTitleLine} />
             </div>
             <div className={styles.contactInfoWrapper}>
-              <h2 className={styles.contactInfoTitle}>{CHECKOUT_TITLES[language].contactInfo}</h2>
+              <h2 className={styles.contactInfoTitle}>
+                {CHECKOUT_TITLES[language].contactInfo}
+              </h2>
               <div className={styles.contactInfoFields}>
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
@@ -156,7 +160,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               </FormControl>
             </div>
             <div className={styles.contactPaymentInfo}>
-              <h2 className={styles.contactInfoTitle}>{CHECKOUT_TITLES[language].orderComment}</h2>
+              <h2 className={styles.contactInfoTitle}>
+                {CHECKOUT_TITLES[language].orderComment}
+              </h2>
               <div>
                 <TextField
                   size={TEXT_FIELD_SIZE.SMALL}
@@ -183,7 +189,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
           </Grid>
           <Grid item className={styles.deliveryContainer}>
             <div className={styles.checkoutYourOrderTitleData}>
-              <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].yourOrderTitle}</h2>
+              <h2 className={styles.checkoutTitle}>
+                {CHECKOUT_TITLES[language].yourOrderTitle}
+              </h2>
               <div className={styles.checkoutTitleLine} />
             </div>
             <Delivery
@@ -198,7 +206,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
             />
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
-                <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
+                <h4 className={styles.totalSumTitle}>
+                  {CHECKOUT_TITLES[language].totalPrice}
+                </h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
                   {totalPriceToPay / 100}
                   {currency === DEFAULT_CURRENCY

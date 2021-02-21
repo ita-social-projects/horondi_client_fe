@@ -12,7 +12,9 @@ const SelfPickup = ({ isLightTheme, language }) => {
 
   return (
     <div className={styles.selfPickupContainer}>
-      <h3 className={styles.selfPickupTitle}>{CHECKOUT_DELIVERY_TYPES[language].selfPickUP}</h3>
+      <h3 className={styles.selfPickupTitle}>
+        {CHECKOUT_DELIVERY_TYPES[language].selfPickUP}
+      </h3>
       <div className={styles.selfPickupData}>
         <div className={styles.selfPickupTitlesWrapper}>
           <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].schedule}</h5>

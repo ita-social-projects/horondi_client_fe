@@ -3,8 +3,6 @@ import {
   setNovaPoshtaCities,
   getNovaPoshtaWarehouse,
   setNovaPoshtaWarehouse,
-  setNovaPoshtaStreets,
-  getNovaPoshtaStreets,
   setNovaPoshtaPrices,
   getNovaPoshtaPrices
 } from '../checkout.actions';
@@ -13,84 +11,9 @@ import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
   SET_NOVAPOSHTA_WAREHOUSES,
-  GET_NOVAPOSHTA_STREETS,
-  SET_NOVAPOSHTA_STREETS,
   SET_NOVAPOSHTA_PRICES,
   GET_NOVAPOSHTA_PRICES
 } from '../checkout.types';
-
-// streets actions tests
-describe('setStreets action test', () => {
-  let type;
-  let setNPStreetsAction;
-
-  const payload = {
-    cityRef: 'c4302938-f428-11e9-91ff-0025b501a04b',
-    street: 'Івана Франка'
-  };
-  beforeEach(() => {
-    type = SET_NOVAPOSHTA_STREETS;
-    setNPStreetsAction = setNovaPoshtaStreets(payload);
-  });
-
-  it('should return object', () => {
-    expect(typeof setNPStreetsAction).toStrictEqual('object');
-  });
-
-  it('should to be truthy', () => {
-    expect(setNPStreetsAction).toBeTruthy();
-  });
-
-  it('value by key "type" of returned object should to be equal to "GET_NOVAPOSHTA_STREETS"', () => {
-    expect(setNPStreetsAction.type).toEqual(type);
-  });
-
-  it('value by key "payload.name" of returned object should to be "Івана Франка"', () => {
-    expect(payload.street).toEqual('Івана Франка');
-  });
-
-  it('value by key "payload.street" of returned object should to be "Івана Франка"', () => {
-    const expectation = {
-      description: 'Івана Франка',
-      ref: '5ae6c214-021f-11ea-91ff-0025b501a04b',
-      streetsTypeRef: 'Street',
-      streetsType: 'вул.'
-    };
-    setNPStreetsAction = setNovaPoshtaStreets(expectation);
-    expect(payload.street).toEqual('Івана Франка');
-  });
-});
-
-describe('get streets from NovaPoshta API', () => {
-  let type;
-  const payload = {
-    cityRef: 'c4302938-f428-11e9-91ff-0025b501a04b',
-    street: 'Івана Франка'
-  };
-
-  beforeEach(() => {
-    type = GET_NOVAPOSHTA_STREETS;
-  });
-
-  it('should return object', () => {
-    expect(typeof getNovaPoshtaStreets()).toStrictEqual('object');
-  });
-
-  it('should return object with two key/value "type: GET_NOVAPOSHTA_STREETS"', () => {
-    expect(getNovaPoshtaStreets(payload)).toStrictEqual({
-      type: GET_NOVAPOSHTA_STREETS,
-      payload
-    });
-  });
-
-  it('should to be truthy', () => {
-    expect(getNovaPoshtaStreets()).toBeTruthy();
-  });
-
-  it('value by key "type" of returned object should to be equal to "GET_NOVAPOSHTA_STREETS"', () => {
-    expect(getNovaPoshtaStreets().type).toEqual(type);
-  });
-});
 
 // cities actions tests
 describe('setCities action test', () => {

@@ -35,10 +35,7 @@ import {
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT } from '../../configs/index';
-import {
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { setCart } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
 
@@ -141,10 +138,7 @@ export function* handleGoogleUserLogin({ payload }) {
         idToken: payload.tokenId
       }
     );
-    const purchasedProducts = yield call(
-      getPurchasedProducts,
-      user.data.googleUser._id
-    );
+    const purchasedProducts = yield call(getPurchasedProducts, user.data.googleUser._id);
     yield put(setUser({ ...user.data.googleUser, purchasedProducts }));
     yield setToLocalStorage('accessToken', user.data.googleUser.token);
     yield put(push('/profile'));
@@ -168,10 +162,7 @@ export function* handleUserLoad({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-    const purchasedProducts = yield call(
-      getPurchasedProducts,
-      user.data.loginUser._id
-    );
+    const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
     yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
     yield put(setCart(user.data.loginUser.cart));
     yield put(setWishlist(user.data.loginUser.wishlist));
@@ -316,7 +307,6 @@ export function* handleUserPreserve() {
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
   } finally {
     yield put(setUserIsChecked(true));
     yield put(setUserLoading(false));
@@ -360,10 +350,7 @@ export function* handleUpdateUser({ payload }) {
   `,
       payload
     );
-    const purchasedProducts = yield call(
-      getPurchasedProducts,
-      user.data.updateUserById._id
-    );
+    const purchasedProducts = yield call(getPurchasedProducts, user.data.updateUserById._id);
     yield put(setUser({ ...user.data.updateUserById, purchasedProducts }));
     yield put(setUserLoading(false));
   } catch (error) {

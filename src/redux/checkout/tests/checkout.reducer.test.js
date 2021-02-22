@@ -1,9 +1,8 @@
 import {
   setNovaPoshtaCities,
   setNovaPoshtaWarehouse,
-  setNovaPoshtaStreets,
   setNovaPoshtaPrices,
-  setLoading
+  setDeliveryLoading
 } from '../checkout.actions';
 import { checkoutReducer } from '../checkout.reducer';
 
@@ -11,10 +10,9 @@ describe('Checkout reducer tests', () => {
   let initialState;
   beforeEach(() => {
     initialState = {
-      loading: false,
+      deliveryLoading: false,
       cities: [],
       warehouses: [],
-      streets: [],
       price: {}
     };
   });
@@ -26,10 +24,10 @@ describe('Checkout reducer tests', () => {
   it('should set loading to true', () => {
     const state = {
       ...initialState,
-      loading: true
+      deliveryLoading: true
     };
 
-    expect(checkoutReducer(initialState, setLoading(true))).toEqual(state);
+    expect(checkoutReducer(initialState, setDeliveryLoading(true))).toEqual(state);
   });
 
   it('should set array of cities', () => {
@@ -63,25 +61,6 @@ describe('Checkout reducer tests', () => {
     ).toEqual(state);
   });
 
-  it('should set array of streets', () => {
-    const state = {
-      ...initialState,
-      streets: {
-        cityRef: 'c4302938-f428-11e9-91ff-0025b501a04b',
-        street: 'івана'
-      }
-    };
-    expect(
-      checkoutReducer(
-        initialState,
-        setNovaPoshtaStreets({
-          cityRef: 'c4302938-f428-11e9-91ff-0025b501a04b',
-          street: 'івана'
-        })
-      )
-    ).toEqual(state);
-  });
-
   it('should set warehouses', () => {
     const state = {
       ...initialState,
@@ -107,8 +86,7 @@ describe('Checkout reducer tests', () => {
           }
         },
         {
-          description:
-            'Поштомат "Нова Пошта" №5083: вул. Ангарська, 12 (маг. АТБ)',
+          description: 'Поштомат "Нова Пошта" №5083: вул. Ангарська, 12 (маг. АТБ)',
           ref: 'ddb1aa3e-cd91-11ea-b39d-b8830365bd14',
           shortAddress: 'Авангард, Ангарська, 12 (маг. АТБ)',
           schedule: {
@@ -144,8 +122,7 @@ describe('Checkout reducer tests', () => {
             }
           },
           {
-            description:
-              'Поштомат "Нова Пошта" №5083: вул. Ангарська, 12 (маг. АТБ)',
+            description: 'Поштомат "Нова Пошта" №5083: вул. Ангарська, 12 (маг. АТБ)',
             ref: 'ddb1aa3e-cd91-11ea-b39d-b8830365bd14',
             shortAddress: 'Авангард, Ангарська, 12 (маг. АТБ)',
             schedule: {
@@ -166,10 +143,7 @@ describe('Checkout reducer tests', () => {
     };
 
     expect(
-      checkoutReducer(
-        initialState,
-        setNovaPoshtaPrices({ cost: 68, assessedCost: 3600 })
-      )
+      checkoutReducer(initialState, setNovaPoshtaPrices({ cost: 68, assessedCost: 3600 }))
     ).toEqual(state);
   });
 });

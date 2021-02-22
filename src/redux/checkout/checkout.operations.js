@@ -113,10 +113,10 @@ export const getUkrPoshtaCitiesByDistrictId = async (id) => {
   });
   return res.data.getUkrPoshtaCitiesByDistrictId;
 };
-export const getUkrPoshtaPostOfficesByCityId = async (city) => {
+export const getUkrPoshtaPostOfficesByCityId = async (id) => {
   const res = await client.query({
     variables: {
-      city
+      id
     },
     query: gql`
       query($id: ID!) {

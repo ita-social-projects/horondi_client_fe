@@ -4,9 +4,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useStyles } from '../nova-post/nova-post.styles';
+import { useStyles } from './ukrpost.styles';
 import {
-  getUkrPostDistricts,
+  getUkrPostCities,
+  getUkrPostDistricts, getUkrPostPostOffices,
   getUkrPostRegions
 } from '../../../../../redux/checkout/checkout.actions';
 import { TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
@@ -16,18 +17,12 @@ import {
   CHECKOUT_TEXT_FIELDS
 } from '../../../../../translations/checkout.translations';
 
-const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => {
-  const dispatch = useDispatch();
+const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => {const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
 
-  const {
-    deliveryLoading,
-    ukrPoshtaCities,
-    ukrPoshtaRegions,
-    ukrPoshtaDistricts,
-    ukrPoshtaPostOffices
+  const { deliveryLoading, ukrPoshtaCities, ukrPoshtaRegions, ukrPoshtaDistricts, ukrPoshtaPostOffices
   } = useSelector(({ Checkout }) => ({
     deliveryLoading: Checkout.deliveryLoading,
     ukrPoshtaCities: Checkout.ukrPoshtaCities,
@@ -54,6 +49,18 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
     }
   }, [dispatch, regionId]);
 
+  useEffect(() => {
+    if (districtId) {
+      dispatch(getUkrPostCities(districtId));
+    }
+  }, [dispatch, districtId]);
+
+  useEffect(() => {
+    if (cityId) {
+      dispatch(getUkrPostPostOffices(cityId));
+    }
+  }, [dispatch, cityId]);
+
   return (
     <div>
       <div className={styles.selectorInfo}>
@@ -73,12 +80,13 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
                 // setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
               } else {
                 setRegionId('');
+                setDistrict('');
               }
             }}
             options={ukrPoshtaRegions}
             inputValue={region}
             getOptionLabel={(option) => option?.REGION_UA || null}
-            // className={styles.dataInput}
+            className={styles.dataInput}
             // error={touched.city && !!errors.city}
             renderInput={(params) => (
               <TextField
@@ -119,16 +127,16 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
             onChange={(event, value) => {
               if (value) {
                 setDistrictId(value.DISTRICT_ID);
-                // setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
               } else {
                 setDistrictId('');
+                setCity('');
               }
             }}
             disabled={!regionId}
             options={ukrPoshtaDistricts}
             inputValue={district}
             getOptionLabel={(option) => option?.DISTRICT_UA || null}
-            // className={styles.dataInput}
+            className={styles.dataInput}
             // error={touched.city && !!errors.city}
             renderInput={(params) => (
               <TextField
@@ -136,6 +144,91 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
                 error={touched.city && !!errors.city}
                 label={CHECKOUT_TEXT_FIELDS[language].city}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
+                      {params.InputProps.endAdornment}
+                    </>
+                  )
+                }}
+              />
+            )}
+          />
+        </FormControl>
+        {touched.city && errors.city && (
+          <div data-cy='code-error' className={styles.error}>
+            {errors.city}
+          </div>
+        )}
+      </div>
+      <div>
+        <FormControl
+          error={touched.city && !!errors.city} variant={TEXT_FIELD_VARIANT.OUTLINED} className={styles.formControl}
+        >
+          <Autocomplete
+            onInputChange={(e, value) => {
+              setCity(value);
+            }}
+            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity} onChange={(event, value) => {
+              if (value) {
+                setCityId(value.CITY_ID);
+                setFieldValue(CHECKOUT_INPUT_FIELD.city, value.CITY_UA);
+              } else {
+                setCityId('');
+              }
+            }}
+            disabled={!districtId}
+            options={ukrPoshtaCities}
+            inputValue={city}
+            getOptionLabel={(option) => option?.CITY_UA || null}  className={styles.dataInput}
+            // error={touched.city && !!errors.city}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                error={touched.city && !!errors.city}  label={CHECKOUT_TEXT_FIELDS[language].city}  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <>
+                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
+                      {params.InputProps.endAdornment}
+                    </>
+                  )
+                }}
+              />
+            )}
+          />
+        </FormControl>
+        {touched.city && errors.city && (
+          <div data-cy='code-error' className={styles.error}>
+            {errors.city}
+          </div>
+        )}
+      </div>
+      <div>
+        <FormControl
+          error={touched.city && !!errors.city} variant={TEXT_FIELD_VARIANT.OUTLINED} className={styles.formControl}
+        >
+          <Autocomplete
+            onInputChange={(e, value) => {
+              setPostOffice(value);
+            }}
+            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+            onChange={(event, value) => {
+              if (value) {
+                setPostOffice(`Відделення № ${value.POSTCODE}, ${value?.STREET_UA_VPZ}`);
+              } else {
+                setPostOffice('');
+              }
+            }}
+            disabled={!cityId}  options={ukrPoshtaPostOffices} inputValue={postOffice} getOptionLabel={(option) => `Відделення № ${option?.POSTCODE}, ${option?.STREET_UA_VPZ}` || null}
+            className={styles.dataInput}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                error={touched.city && !!errors.city} label={CHECKOUT_TEXT_FIELDS[language].city} variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (

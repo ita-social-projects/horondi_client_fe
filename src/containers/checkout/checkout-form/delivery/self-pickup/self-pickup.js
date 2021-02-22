@@ -25,6 +25,7 @@ const SelfPickup = ({ isLightTheme, language }) => {
             {Object.values(SCHEDULE[language]).map((value) =>
               value === SCHEDULE[language].saturday || value === SCHEDULE[language].sunday ? (
                 <div className={styles.scheduleItem}>
+
                   {value} {CHECKOUT_TITLES[language].restDay}{' '}
                 </div>
               ) : (

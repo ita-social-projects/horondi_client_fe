@@ -119,6 +119,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "jest-dom": "^4.0.0",
     "jest-sonar-reporter": "^2.0.0",
+    "prettier": "^2.0.5",
     "prettier-eslint": "^10.1.1",
     "react-test-render": "^1.1.2",
     "redux-saga-test-plan": "^4.0.0-rc.3",

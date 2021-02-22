@@ -101,7 +101,15 @@ const getFilteredProducts = async ({ state, currency }) => {
         $currency: Int
       ) {
         getProducts(
-          filter: { colors: $colors, pattern: $patterns, price: $price, category: $category, isHotItem: $isHotItem, models: $models, currency: $currency }
+          filter: {
+            colors: $colors
+            pattern: $patterns
+            price: $price
+            category: $category
+            isHotItem: $isHotItem
+            models: $models
+            currency: $currency
+          }
           skip: $skip
           limit: $limit
           search: $search

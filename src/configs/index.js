@@ -437,7 +437,6 @@ export const sort = 'sort';
 export const countPerPage = 'countPerPage';
 export const page = 'page';
 export const deliveryTypeKey = 'deliveryType';
-
 export const deliveryTypes = {
   NOVAPOST: 'NOVAPOST',
   UKRPOST: 'UKRPOST',

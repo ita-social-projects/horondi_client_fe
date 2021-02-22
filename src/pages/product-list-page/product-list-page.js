@@ -98,8 +98,7 @@ const ProductListPage = ({ model, width }) => {
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };
-  const checkWidth = () =>
-    TEMPORARY_WIDTHS.find((element) => element === width);
+  const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
 
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
@@ -108,18 +107,15 @@ const ProductListPage = ({ model, width }) => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const handleFilterShow = () =>
-    dispatch(setFilterMenuStatus(!filterMenuStatus));
+  const handleFilterShow = () => dispatch(setFilterMenuStatus(!filterMenuStatus));
 
   if (loading || filterData.length) {
     return <Loader />;
   }
 
   const itemsToShow =
-    products.length > 0
-      ? products.map((product) => (
-        <ProductListItem key={product._id} product={product} />
-      ))
+    products?.length > 0
+      ? products.map((product) => <ProductListItem key={product._id} product={product} />)
       : null;
 
   return (
@@ -129,11 +125,7 @@ const ProductListPage = ({ model, width }) => {
         <ProductSort />
       </div>
       <div className={styles.filterButtonBlock}>
-        <Button
-          className={styles.button}
-          variant='contained'
-          onClick={handleFilterShow}
-        >
+        <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
           {SHOW_FILTER_BUTTON_TEXT[language].value}
         </Button>
       </div>
@@ -155,7 +147,7 @@ const ProductListPage = ({ model, width }) => {
         <div className={styles.filterMenu}>
           <ProductFilter />
         </div>
-        {products.length > 0 ? (
+        {products?.length > 0 ? (
           <div className={styles.productsWrapper}>
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}

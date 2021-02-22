@@ -17,12 +17,20 @@ import {
   CHECKOUT_TEXT_FIELDS
 } from '../../../../../translations/checkout.translations';
 
-const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => {const dispatch = useDispatch();
+const UkrPost = ({
+  isLightTheme, language, setFieldValue, errors, touched
+}) => {
+  const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
 
-  const { deliveryLoading, ukrPoshtaCities, ukrPoshtaRegions, ukrPoshtaDistricts, ukrPoshtaPostOffices
+  const {
+    deliveryLoading,
+    ukrPoshtaCities,
+    ukrPoshtaRegions,
+    ukrPoshtaDistricts,
+    ukrPoshtaPostOffices
   } = useSelector(({ Checkout }) => ({
     deliveryLoading: Checkout.deliveryLoading,
     ukrPoshtaCities: Checkout.ukrPoshtaCities,
@@ -148,7 +156,10 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
+                      {deliveryLoading && <CircularProgress
+                        color='inherit'
+                        size={20}
+                      />}
                       {params.InputProps.endAdornment}
                     </>
                   )
@@ -165,13 +176,16 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
       </div>
       <div>
         <FormControl
-          error={touched.city && !!errors.city} variant={TEXT_FIELD_VARIANT.OUTLINED} className={styles.formControl}
+          error={touched.city && !!errors.city}
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
+          className={styles.formControl}
         >
           <Autocomplete
             onInputChange={(e, value) => {
               setCity(value);
             }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity} onChange={(event, value) => {
+            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+            onChange={(event, value) => {
               if (value) {
                 setCityId(value.CITY_ID);
                 setFieldValue(CHECKOUT_INPUT_FIELD.city, value.CITY_UA);
@@ -182,17 +196,23 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
             disabled={!districtId}
             options={ukrPoshtaCities}
             inputValue={city}
-            getOptionLabel={(option) => option?.CITY_UA || null}  className={styles.dataInput}
+            getOptionLabel={(option) => option?.CITY_UA || null}
+            className={styles.dataInput}
             // error={touched.city && !!errors.city}
             renderInput={(params) => (
               <TextField
                 {...params}
-                error={touched.city && !!errors.city}  label={CHECKOUT_TEXT_FIELDS[language].city}  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                error={touched.city && !!errors.city}
+                label={CHECKOUT_TEXT_FIELDS[language].city}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
+                      {deliveryLoading && <CircularProgress
+                        color='inherit'
+                        size={20}
+                      />}
                       {params.InputProps.endAdornment}
                     </>
                   )
@@ -209,7 +229,9 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
       </div>
       <div>
         <FormControl
-          error={touched.city && !!errors.city} variant={TEXT_FIELD_VARIANT.OUTLINED} className={styles.formControl}
+          error={touched.city && !!errors.city}
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
+          className={styles.formControl}
         >
           <Autocomplete
             onInputChange={(e, value) => {
@@ -223,17 +245,26 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
                 setPostOffice('');
               }
             }}
-            disabled={!cityId}  options={ukrPoshtaPostOffices} inputValue={postOffice} getOptionLabel={(option) => `Відделення № ${option?.POSTCODE}, ${option?.STREET_UA_VPZ}` || null}
+            disabled={!cityId}
+            options={ukrPoshtaPostOffices}
+            inputValue={postOffice}
+            getOptionLabel={(option) =>
+              `Відделення № ${option?.POSTCODE}, ${option?.STREET_UA_VPZ}` || null}
             className={styles.dataInput}
             renderInput={(params) => (
               <TextField
                 {...params}
-                error={touched.city && !!errors.city} label={CHECKOUT_TEXT_FIELDS[language].city} variant={TEXT_FIELD_VARIANT.OUTLINED}
+                error={touched.city && !!errors.city}
+                label={CHECKOUT_TEXT_FIELDS[language].city}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
+                      {deliveryLoading && <CircularProgress
+                        color='inherit'
+                        size={20}
+                      />}
                       {params.InputProps.endAdornment}
                     </>
                   )

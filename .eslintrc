@@ -86,18 +86,6 @@
         ]
       }
     ],
-//    "max-len": [
-//      2,
-//      {
-//        "code": 80,
-//        "ignoreComments": true,
-//        "ignoreTrailingComments": true,
-//        "ignoreUrls": true,
-//        "ignoreStrings": true,
-//        "ignoreTemplateLiterals": true,
-//        "ignoreRegExpLiterals": true
-//      }
-//    ],
     "no-plusplus": 0,
     "no-nested-ternary": 0,
     "no-unneeded-ternary": 2,
@@ -125,6 +113,7 @@
       2,
       {
         "ignoreComments": true,
+        "SwitchCase": 1,
         "VariableDeclarator": {
           "var": 2,
           "let": 2,

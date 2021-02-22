@@ -7,7 +7,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from './ukrpost.styles';
 import {
   getUkrPostCities,
-  getUkrPostDistricts, getUkrPostPostOffices,
+  getUkrPostDistricts,
+  getUkrPostPostOffices,
   getUkrPostRegions
 } from '../../../../../redux/checkout/checkout.actions';
 import { TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
@@ -17,14 +18,18 @@ import {
   CHECKOUT_TEXT_FIELDS
 } from '../../../../../translations/checkout.translations';
 
-const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched
-}) => {
+const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
 
-  const { deliveryLoading, ukrPoshtaCities, ukrPoshtaRegions, ukrPoshtaDistricts, ukrPoshtaPostOffices
+  const {
+    deliveryLoading,
+    ukrPoshtaCities,
+    ukrPoshtaRegions,
+    ukrPoshtaDistricts,
+    ukrPoshtaPostOffices
   } = useSelector(({ Checkout }) => ({
     deliveryLoading: Checkout.deliveryLoading,
     ukrPoshtaCities: Checkout.ukrPoshtaCities,
@@ -133,20 +138,24 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched
                 setDistrictId('');
                 setCity('');
               }
-            }} disabled={!regionId} options={ukrPoshtaDistricts} inputValue={district} getOptionLabel={(option) => option?.DISTRICT_UA || null}
+            }}
+            disabled={!regionId}
+            options={ukrPoshtaDistricts}
+            inputValue={district}
+            getOptionLabel={(option) => option?.DISTRICT_UA || null}
             className={styles.dataInput}
             // error={touched.city && !!errors.city}
             renderInput={(params) => (
               <TextField
-                {...params} error={touched.city && !!errors.city} label={CHECKOUT_TEXT_FIELDS[language].city} variant={TEXT_FIELD_VARIANT.OUTLINED}
+                {...params}
+                error={touched.city && !!errors.city}
+                label={CHECKOUT_TEXT_FIELDS[language].city}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && <CircularProgress
-                        color='inherit'
-                        size={20}
-                      />}
+                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
                       {params.InputProps.endAdornment}
                     </>
                   )
@@ -180,21 +189,23 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched
                 setCityId('');
               }
             }}
-            disabled={!districtId} options={ukrPoshtaCities} inputValue={city} getOptionLabel={(option) => option?.CITY_UA || null}
+            disabled={!districtId}
+            options={ukrPoshtaCities}
+            inputValue={city}
+            getOptionLabel={(option) => option?.CITY_UA || null}
             className={styles.dataInput}
             // error={touched.city && !!errors.city}
             renderInput={(params) => (
               <TextField
                 {...params}
-                error={touched.city && !!errors.city} label={CHECKOUT_TEXT_FIELDS[language].city} variant={TEXT_FIELD_VARIANT.OUTLINED}
+                error={touched.city && !!errors.city}
+                label={CHECKOUT_TEXT_FIELDS[language].city}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && <CircularProgress
-                        color='inherit'
-                        size={20}
-                      />}
+                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
                       {params.InputProps.endAdornment}
                     </>
                   )
@@ -219,14 +230,20 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched
             onInputChange={(e, value) => {
               setPostOffice(value);
             }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity} onChange={(event, value) => {
+            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+            onChange={(event, value) => {
               if (value) {
                 setPostOffice(`Відделення № ${value.POSTCODE}, ${value?.STREET_UA_VPZ}`);
               } else {
                 setPostOffice('');
               }
             }}
-            disabled={!cityId} options={ukrPoshtaPostOffices} inputValue={postOffice} getOptionLabel={(option) => `Відделення № ${option?.POSTCODE}, ${option?.STREET_UA_VPZ}` || null}
+            disabled={!cityId}
+            options={ukrPoshtaPostOffices}
+            inputValue={postOffice}
+            getOptionLabel={(option) =>
+              `Відделення № ${option?.POSTCODE}, ${option?.STREET_UA_VPZ}` || null
+            }
             className={styles.dataInput}
             renderInput={(params) => (
               <TextField
@@ -238,10 +255,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && <CircularProgress
-                        color='inherit'
-                        size={20}
-                      />}
+                      {deliveryLoading && <CircularProgress color='inherit' size={20} />}
                       {params.InputProps.endAdornment}
                     </>
                   )

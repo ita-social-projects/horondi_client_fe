@@ -113,7 +113,8 @@ export const errorMessages = [
 ];
 
 export const formRegExp = {
-  email: '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
+  email:
+    '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
   name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
   lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
@@ -126,8 +127,10 @@ export const formRegExp = {
   street: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  deliveryMethod: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  deliveryType:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  deliveryMethod:
+    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
   link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
 };
@@ -343,7 +346,19 @@ export const commentFields = {
   text: { name: 'text', multiline: true, rows: 7 }
 };
 
-export const profileFields = ['firstName', 'lastName', 'email', 'phoneNumber', 'country', 'region', 'city', 'street', 'buildingNumber', 'appartment', 'zipcode'];
+export const profileFields = [
+  'firstName',
+  'lastName',
+  'email',
+  'phoneNumber',
+  'country',
+  'region',
+  'city',
+  'street',
+  'buildingNumber',
+  'appartment',
+  'zipcode'
+];
 
 export const carouselInterval = 5000;
 export const carouselMaterialInterval = 2000;

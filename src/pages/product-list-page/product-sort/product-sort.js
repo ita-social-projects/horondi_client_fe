@@ -53,11 +53,7 @@ const ProductSort = () => {
   const sortByText = SORT_BY_TEXT[language].value;
 
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
-    <option
-      key={lang[1].value}
-      value={JSON.stringify(optionValue)}
-      selected={optionValue.name === query}
-    >
+    <option key={lang[1].value} value={JSON.stringify(optionValue)}>
       {lang[language].value}
     </option>
   ));

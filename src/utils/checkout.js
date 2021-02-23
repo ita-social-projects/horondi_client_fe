@@ -16,11 +16,12 @@ export const initialValues = {
   paymentMethod: '',
   userComment: '',
   courierOffice: '',
-  courierOfficeName: '',
   city: '',
   street: '',
   house: '',
-  flat: ''
+  flat: '',
+  region: '',
+  district: ''
 };
 
 export const checkoutPropTypes = {
@@ -41,11 +42,12 @@ export const checkoutPropTypes = {
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
     courierOffice: PropTypes.string,
-    courierOfficeName: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
     house: PropTypes.string,
-    flat: PropTypes.string
+    flat: PropTypes.string,
+    region: PropTypes.string,
+    district: PropTypes.string
   }),
   errors: PropTypes.shape({
     firstName: PropTypes.string,
@@ -55,11 +57,12 @@ export const checkoutPropTypes = {
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
     courierOffice: PropTypes.string,
-    courierOfficeName: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
     house: PropTypes.string,
-    flat: PropTypes.string
+    flat: PropTypes.string,
+    region: PropTypes.string,
+    district: PropTypes.string
   }),
   touched: PropTypes.shape({
     firstName: PropTypes.string,
@@ -69,11 +72,12 @@ export const checkoutPropTypes = {
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
     courierOffice: PropTypes.string,
-    courierOfficeName: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
     house: PropTypes.string,
-    flat: PropTypes.string
+    flat: PropTypes.string,
+    region: PropTypes.string,
+    district: PropTypes.string
   })
 };
 
@@ -110,7 +114,6 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
     sentBy: deliveryType,
     invoiceNumber: data.invoiceNumber || '',
     courierOffice: data.courierOffice || '',
-    courierOfficeName: data.courierOfficeName || '',
     city: data.city || '',
     street: data.street || '',
     house: data.house || '',
@@ -174,3 +177,4 @@ export const userContactInputLabels = (language) => [
 ];
 
 export const POSTOMAT = 'Поштомат';
+export const POST_OFFICE_NUMBER = 'Відділення № ';

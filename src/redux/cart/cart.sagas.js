@@ -1,6 +1,6 @@
-import { takeEvery, put, call, select, all } from "redux-saga/effects";
+import { takeEvery, put, call, select, all } from 'redux-saga/effects';
 
-import { setCart, setDeliveryType } from "./cart.actions";
+import { setCart, setDeliveryType } from './cart.actions';
 import {
   GET_CART,
   ADD_ITEM_TO_CART,
@@ -9,20 +9,28 @@ import {
   SET_CART_ITEM_CHECKED,
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE
-} from "./cart.types";
+} from './cart.types';
 import {
+  clearLocalStorage,
   getFromLocalStorage,
   setToLocalStorage
-} from "../../services/local-storage.service";
+} from '../../services/local-storage.service';
 import {
   addProductToUserCart,
   changeQuantityIntoUserCart,
   removeProductFromUserCart
-} from "../user/user.operations";
-import { cartKey, deliveryTypeKey } from "../../configs/index";
+} from '../user/user.operations';
+import { cartKey, deliveryTypeKey } from '../../configs/index';
 
 export function* handleCartLoad() {
   const cart = getFromLocalStorage(cartKey);
+  yield put(setCart(cart));
+}
+
+export function* handleCartReset() {
+  clearLocalStorage();
+  const cart = getFromLocalStorage(cartKey);
+
   yield put(setCart(cart));
 }
 
@@ -43,11 +51,10 @@ export function* handleAddCartItem({ payload }) {
   if (possibleItemInCart) {
     newCart = cart.map((item) => {
       item._id === payload._id &&
-      item.selectedSize._id === payload.selectedSize._id &&
-      item.sidePocket === payload.sidePocket &&
-      item.bottomMaterial.material._id ===
-      payload.bottomMaterial.material._id &&
-      item.quantity++;
+        item.selectedSize._id === payload.selectedSize._id &&
+        item.sidePocket === payload.sidePocket &&
+        item.bottomMaterial.material._id === payload.bottomMaterial.material._id &&
+        item.quantity++;
       return item;
     });
   } else {
@@ -93,20 +100,17 @@ export function* handleRemoveCartItem({ payload }) {
 }
 
 export function* handleSetDeliveryType({ payload }) {
-
   yield put(setDeliveryType(payload));
 
   setToLocalStorage(deliveryTypeKey, payload);
 }
 
-export function* handleSetCartItemQuantity(
-  {
-    payload: {
-      item: { _id, selectedSize, sidePocket, bottomMaterial },
-      value
-    }
+export function* handleSetCartItemQuantity({
+  payload: {
+    item: { _id, selectedSize, sidePocket, bottomMaterial },
+    value
   }
-) {
+}) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((item) => {
     if (
@@ -131,14 +135,12 @@ export function* handleSetCartItemQuantity(
   yield put(setCart(newCart));
 }
 
-export function* handleSetCartItemChecked(
-  {
-    payload: {
-      item: { _id, selectedSize, sidePocket, bottomMaterial },
-      isChecked
-    }
+export function* handleSetCartItemChecked({
+  payload: {
+    item: { _id, selectedSize, sidePocket, bottomMaterial },
+    isChecked
   }
-) {
+}) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((item) => {
     if (
@@ -161,8 +163,7 @@ function* handleUserCartOperation(handler, list, product) {
     yield call(handler, {
       id: userData._id,
       product: list.find(
-        (item) =>
-          item._id === product._id && item.selectedSize === product.selectedSize
+        (item) => item._id === product._id && item.selectedSize === product.selectedSize
       ),
       key: cartKey
     });

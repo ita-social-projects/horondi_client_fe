@@ -8,10 +8,12 @@ export const validationSchema = (deliveryType, language) =>
     firstName: Yup.string()
       .min(2, CHECKOUT_ERROR[language].firstName)
       .max(20, CHECKOUT_ERROR[language].firstName)
+      .matches(formRegExp.firstName, CHECKOUT_ERROR[language].onlyLetter)
       .required(CHECKOUT_ERROR[language].requiredField),
     lastName: Yup.string()
       .min(2, CHECKOUT_ERROR[language].lastName)
       .max(20, CHECKOUT_ERROR[language].lastName)
+      .matches(formRegExp.lastName, CHECKOUT_ERROR[language].onlyLetter)
       .required(CHECKOUT_ERROR[language].requiredField),
     email: Yup.string()
       .email(CHECKOUT_ERROR[language].email)
@@ -24,10 +26,13 @@ export const validationSchema = (deliveryType, language) =>
       .min(2, CHECKOUT_ERROR[language].userComment)
       .max(500, CHECKOUT_ERROR[language].userComment),
     courierOffice:
-      deliveryType === deliveryTypes.NOVAPOST &&
+      (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) &&
       Yup.string().required(CHECKOUT_ERROR[language].requiredField),
-    courierOfficeName:
-      deliveryType === deliveryTypes.NOVAPOST &&
+    region:
+      deliveryType === deliveryTypes.UKRPOST &&
+      Yup.string().required(CHECKOUT_ERROR[language].requiredField),
+    district:
+      deliveryType === deliveryTypes.UKRPOST &&
       Yup.string().required(CHECKOUT_ERROR[language].requiredField),
     city:
       deliveryType !== deliveryTypes.SELFPICKUP &&

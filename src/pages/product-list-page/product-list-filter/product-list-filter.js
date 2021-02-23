@@ -27,7 +27,7 @@ const ProductListFilter = () => {
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(sort);
     const quantityPerPage = searchParams.get(countPerPage);
-    history.push(`/products/?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
+    history.push(`/products?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
     dispatch(getFiltredProducts({}));
     dispatch(setPriceFilter([]));
   };

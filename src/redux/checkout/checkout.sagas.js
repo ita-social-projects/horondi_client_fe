@@ -69,12 +69,7 @@ export function* handleNovaPoshtaPrice({ payload }) {
     yield put(setDeliveryLoading(true));
     const price = yield call(
       getItems,
-      getNovaPoshtaPrices(
-        payload.cityRecipient,
-        payload.weight,
-        payload.cost,
-        payload.serviceType
-      )
+      getNovaPoshtaPrices(payload.cityRecipient, payload.weight, payload.cost, payload.serviceType)
     );
     yield put(setNovaPoshtaPrices(...price));
     yield put(setDeliveryLoading(false));
@@ -127,12 +122,11 @@ export function* handleUkrPostRegions() {
 }
 
 export function* handleUkrPostDistricts({ payload }) {
-  console.log(payload);
   try {
     yield put(setDeliveryLoading(true));
 
     const districts = yield call(getUkrPoshtaDistrictsByRegionId, payload);
-    console.log(districts);
+
     yield put(setUkrPostDistricts(districts));
     yield put(setDeliveryLoading(false));
   } catch (e) {

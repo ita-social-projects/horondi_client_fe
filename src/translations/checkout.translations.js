@@ -76,9 +76,11 @@ export const CHECKOUT_TEXT_FIELDS = {
     orderComment: 'Коментар до замовлення...',
     paymentMethod: 'Виберіть метод оплати *',
     deliveryType: 'Виберіть тип доставки',
-    department: 'Відділення',
+    department: 'Відділення *',
     delivery: 'Тип доставки',
-    total: 'Загальна сума'
+    total: 'Загальна сума',
+    region: 'Область *',
+    district: 'Район *'
   },
   1: {
     firstName: 'First name *',
@@ -94,7 +96,9 @@ export const CHECKOUT_TEXT_FIELDS = {
     deliveryType: 'Select a delivery type',
     department: 'Department *',
     delivery: 'Delivery type',
-    total: 'Total'
+    total: 'Total',
+    region: 'Region *',
+    district: 'District *'
   }
 };
 export const CHECKOUT_DROP_LIST = {
@@ -153,12 +157,16 @@ export const CHECKOUT_ADDITIONAL_INFORMATION = {
   0: {
     additionalInfo: '* Замовлення буде відправлено протягом десяти робочих днів.',
     noOneCity: 'Жодного міста не знайдено',
-    noOneDepartment: 'Жодного відділення не знайдемо'
+    noOneDepartment: 'Жодного відділення не знайдено',
+    noOneRegion: 'Жодної області не знайдено',
+    noOneDistrict: 'Жодного району не знайдено'
   },
   1: {
     additionalInfo: '* Order will be shipped within 10 business days.',
     noOneCity: 'City not found',
-    noOneDepartment: 'Department not found'
+    noOneDepartment: 'Department not found',
+    noOneRegion: 'Region not found',
+    noOneDistrict: 'District not found'
   }
 };
 export const CHECKOUT_ERROR = {
@@ -200,5 +208,6 @@ export const CHECKOUT_INPUT_FIELD = {
   userComment: 'userComment',
   paymentMethod: 'paymentMethod',
   courierOffice: 'courierOffice',
-  courierOfficeName: 'courierOfficeName'
+  region: 'region',
+  district: 'district'
 };

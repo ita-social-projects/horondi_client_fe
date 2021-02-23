@@ -9,9 +9,6 @@ export const useStyles = makeStyles(() => ({
     width: '100%',
     marginBottom: '5%'
   },
-  formControl: {
-    width: '100%'
-  },
   error: {
     color: '#e60000',
     marginTop: 15
@@ -34,5 +31,8 @@ export const useStyles = makeStyles(() => ({
   },
   dataInput: {
     width: '80%'
+  },
+  disabled: {
+    border: '1px solid red'
   }
 }));

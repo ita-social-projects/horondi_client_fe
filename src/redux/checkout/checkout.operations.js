@@ -53,7 +53,6 @@ export const getNovaPoshtaWarehouses = async (city) => {
       query($city: String) {
         getNovaPoshtaWarehouses(city: $city) {
           description
-          ref
         }
       }
     `,

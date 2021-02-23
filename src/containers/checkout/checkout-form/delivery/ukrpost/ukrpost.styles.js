@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  novaPostContainer: {
+  ukrPostContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -16,28 +16,16 @@ export const useStyles = makeStyles(() => ({
     color: '#e60000',
     marginTop: 15
   },
-  novaPostTitle: ({ isLightTheme }) => ({
+  ukrPostTitle: ({ isLightTheme }) => ({
     fontWeight: 400,
     fontSize: 18,
     color: isLightTheme ? '#1D1C1C' : '#ffffff'
   }),
-  novaPostDataTitle: ({ isLightTheme }) => ({
-    fontWeight: 400,
-    fontSize: 16,
-    color: isLightTheme ? '#4E4E4E' : '#ffffff'
-  }),
-  novaPostData: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    marginBottom: '3%'
-  },
   dataInput: {
-    width: '80%'
+    width: '87%'
   },
-  selectorInfo:{
-    width: 400
-
+  selectorInfo: {
+    width: '87%',
+    marginBottom: 15
   }
-
 }));

@@ -24,10 +24,13 @@ export const validationSchema = (deliveryType, language) =>
       .min(2, CHECKOUT_ERROR[language].userComment)
       .max(500, CHECKOUT_ERROR[language].userComment),
     courierOffice:
-      deliveryType === deliveryTypes.NOVAPOST &&
+      (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) &&
       Yup.string().required(CHECKOUT_ERROR[language].requiredField),
-    courierOfficeName:
-      deliveryType === deliveryTypes.NOVAPOST &&
+    region:
+      deliveryType === deliveryTypes.UKRPOST &&
+      Yup.string().required(CHECKOUT_ERROR[language].requiredField),
+    district:
+      deliveryType === deliveryTypes.UKRPOST &&
       Yup.string().required(CHECKOUT_ERROR[language].requiredField),
     city:
       deliveryType !== deliveryTypes.SELFPICKUP &&

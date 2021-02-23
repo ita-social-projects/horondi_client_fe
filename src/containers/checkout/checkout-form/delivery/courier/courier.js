@@ -6,7 +6,7 @@ import {
   CHECKOUT_DELIVERY_TYPES,
   CHECKOUT_TITLES
 } from '../../../../../translations/checkout.translations';
-import { deliveryTypes } from '../../../../../configs';
+import { CY_CODE_ERR, deliveryTypes } from '../../../../../configs';
 import { courierInputLabels } from '../../../../../utils/checkout';
 import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 
@@ -48,7 +48,7 @@ const Courier = ({
                 error={touched[field.name] && !!errors[field.name]}
               />
               {touched[field.name] && errors[field.name] && (
-                <div className={styles.error} data-cy='code-error'>
+                <div className={styles.error} data-cy={CY_CODE_ERR}>
                   {errors[field.name]}
                 </div>
               )}

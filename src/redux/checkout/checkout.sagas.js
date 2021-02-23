@@ -10,9 +10,7 @@ import {
   setUkrPostRegions,
   setUkrPostDistricts,
   setUkrPostCities,
-  getUkrPostPostOffices,
-  setUkrPostPostOffices,
-  getUkrPostDistricts
+  setUkrPostPostOffices
 } from './checkout.actions';
 import {
   getNovaPoshtaCities,

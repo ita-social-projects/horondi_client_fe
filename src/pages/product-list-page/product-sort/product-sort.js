@@ -14,6 +14,7 @@ import {
   SORT_BY_TEXT
 } from '../../../translations/product-list.translations';
 import { URL_QUERIES_NAME } from '../../../configs';
+import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const ProductSort = () => {
   const { language } = useSelector(({ Language }) => ({
@@ -67,7 +68,7 @@ const ProductSort = () => {
           SelectProps={{ native: true }}
           onChange={selectHandler}
           className={styles.root}
-          variant='outlined'
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
         >
           {selectOptions}
         </TextField>

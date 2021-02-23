@@ -6,6 +6,7 @@ import { useStyles } from './count-per-page.styles';
 import { setCountPerPage } from '../../../redux/products/products.actions';
 import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
 import { URL_QUERIES_NAME } from '../../../configs/index';
+import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const CountPerPage = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const CountPerPage = () => {
       type='button'
       value={item.value}
       onClick={() => pickQuantity(item.value)}
-      variant='outlined'
+      variant={TEXT_FIELD_VARIANT.OUTLINED}
     >
       {item.value}
     </Button>

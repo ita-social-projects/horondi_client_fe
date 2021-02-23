@@ -18,7 +18,7 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { DEFAULT_CURRENCY } from '../../../configs';
+import { CY_CODE_ERR, DEFAULT_CURRENCY } from '../../../configs';
 import { calcPrice } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
@@ -34,7 +34,7 @@ import {
   userNameInputLabels
 } from '../../../utils/checkout';
 import { validationSchema } from '../../../validators/chekout';
-import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
@@ -67,20 +67,16 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <div className={styles.checkoutTitleInfoData}>
                 <Link to={routes.pathToCart} className={styles.backBtn}>
                   <KeyboardBackspaceIcon
-                    color={isLightTheme ? 'primary' : 'action'}
+                    color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
                     className={styles.backBtnLine}
                   />
                 </Link>
-                <h2 className={styles.checkoutTitle}>
-                  {CHECKOUT_TITLES[language].checkoutTitle}
-                </h2>
+                <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
               </div>
               <div className={styles.checkoutTitleLine} />
             </div>
             <div className={styles.contactInfoWrapper}>
-              <h2 className={styles.contactInfoTitle}>
-                {CHECKOUT_TITLES[language].contactInfo}
-              </h2>
+              <h2 className={styles.contactInfoTitle}>{CHECKOUT_TITLES[language].contactInfo}</h2>
               <div className={styles.contactInfoFields}>
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
@@ -96,7 +92,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                       error={touched[field.name] && !!errors[field.name]}
                     />
                     {touched[field.name] && errors[field.name] && (
-                      <div data-cy='code-error' className={styles.error}>
+                      <div data-cy={CY_CODE_ERR} className={styles.error}>
                         {errors[field.name]}
                       </div>
                     )}
@@ -118,7 +114,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                       error={touched[field.name] && !!errors[field.name]}
                     />
                     {touched[field.name] && errors[field.name] && (
-                      <div data-cy='code-error' className={styles.error}>
+                      <div data-cy={CY_CODE_ERR} className={styles.error}>
                         {errors[field.name]}
                       </div>
                     )}
@@ -153,16 +149,14 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                   ))}
                 </Select>
                 {touched.paymentMethod && errors.paymentMethod && (
-                  <div data-cy='code-error' className={styles.error}>
+                  <div data-cy={CY_CODE_ERR} className={styles.error}>
                     {errors.paymentMethod}
                   </div>
                 )}
               </FormControl>
             </div>
             <div className={styles.contactPaymentInfo}>
-              <h2 className={styles.contactInfoTitle}>
-                {CHECKOUT_TITLES[language].orderComment}
-              </h2>
+              <h2 className={styles.contactInfoTitle}>{CHECKOUT_TITLES[language].orderComment}</h2>
               <div>
                 <TextField
                   size={TEXT_FIELD_SIZE.SMALL}
@@ -177,7 +171,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                   error={touched.userComment && !!errors.userComment}
                 />
                 {touched.userComment && errors.userComment && (
-                  <div data-cy='code-error' className={styles.error}>
+                  <div data-cy={CY_CODE_ERR} className={styles.error}>
                     {errors.userComment}
                   </div>
                 )}
@@ -189,9 +183,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
           </Grid>
           <Grid item className={styles.deliveryContainer}>
             <div className={styles.checkoutYourOrderTitleData}>
-              <h2 className={styles.checkoutTitle}>
-                {CHECKOUT_TITLES[language].yourOrderTitle}
-              </h2>
+              <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].yourOrderTitle}</h2>
               <div className={styles.checkoutTitleLine} />
             </div>
             <Delivery
@@ -206,9 +198,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
             />
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
-                <h4 className={styles.totalSumTitle}>
-                  {CHECKOUT_TITLES[language].totalPrice}
-                </h4>
+                <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
                   {totalPriceToPay / 100}
                   {currency === DEFAULT_CURRENCY

@@ -1,6 +1,9 @@
 import React, { useRef, useMemo, useLayoutEffect } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+
 import { useStyles } from './images-constructor.style';
+import { selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
@@ -9,14 +12,26 @@ import { IMG_URL } from '../../configs';
 
 const map = require('lodash/map');
 
-const { MODEL, BASIC, PATTERN, BOTTOM } = CONSTRUCTOR_TITLES[0];
-
 const ImagesConstructor = () => {
   const styles = useStyles();
-  const { values, images, methods } = useConstructor();
+  const { values, images, prices, methods } = useConstructor();
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
+  const { language, currency } = useSelector(selectLangAndCurrency);
+  const {
+    MODEL,
+    BASIC,
+    PATTERN,
+    BOTTOM,
+    BASIC_PRICE,
+    GOBELEN_PRICE,
+    BOTTOM_PRICE,
+    DEFAULT_PRICE,
+    TOTAL_PRICE,
+    END_PRICE
+  } = CONSTRUCTOR_TITLES[language];
+  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
@@ -33,14 +48,7 @@ const ImagesConstructor = () => {
       resolve(Promise.all(loadedImages).then((loadedImage) => loadedImage));
     });
 
-  const mergeImages = (
-    imagesToMerge,
-    currentCanvas,
-    width = 1000,
-    height = 1000,
-    x = 0,
-    y = 0
-  ) => {
+  const mergeImages = (imagesToMerge, currentCanvas, width = 1000, height = 1000, x = 0, y = 0) => {
     const ctx = currentCanvas.getContext('2d');
     ctx.clearRect(0, 0, width, height);
     imagesToMerge.forEach((imageToMerge) => {
@@ -49,12 +57,7 @@ const ImagesConstructor = () => {
   };
 
   useLayoutEffect(() => {
-    if (
-      images.basicImage &&
-      images.patternImage &&
-      images.frontPocketImage &&
-      images.bottomImage
-    ) {
+    if (images.basicImage && images.patternImage && images.frontPocketImage && images.bottomImage) {
       loadImages([
         images.frontPocketImage,
         images.basicImage,
@@ -65,34 +68,42 @@ const ImagesConstructor = () => {
         methods.dispatch(setModelLoading(false));
       });
     }
-  }, [
-    images.basicImage,
-    images.patternImage,
-    images.frontPocketImage,
-    images.bottomImage
-  ]);
+  }, [images.basicImage, images.patternImage, images.frontPocketImage, images.bottomImage]);
 
   const options = (obj) => (
     <option key={obj._id} value={obj._id}>
-      {obj.name[0].value}
+      {obj.name[language].value}
     </option>
   );
 
-  const availableModels = useMemo(() =>
-    map(values.models, options, [values.models])
-  );
+  const availableModels = useMemo(() => map(values.models, options, [values.models, language]));
 
-  const availableBasics = useMemo(() =>
-    map(values.basics, options, [values.basics])
-  );
+  const availableBasics = useMemo(() => map(values.basics, options, [values.basics, language]));
 
   const availablePatterns = useMemo(() =>
-    map(values.patterns, options, [values.patterns])
+    map(values.patterns, options, [values.patterns, language])
   );
 
-  const availableBottoms = useMemo(() =>
-    map(values.bottoms, options, [values.bottoms])
-  );
+  const availableBottoms = useMemo(() => map(values.bottoms, options, [values.bottoms, language]));
+
+  const priceTotal = useMemo(() => {
+    if (prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice) {
+      return (
+        prices.basicPrice[currency].value +
+        prices.frontPocketPrice[currency].value +
+        prices.bottomPrice[currency].value
+      );
+    }
+  }, [prices.bottomPrice, prices.frontPocketPrice, prices.bottomPrice, currency]);
+  const priceBasic = useMemo(() => {
+    if (prices.basicPrice) return prices.basicPrice[currency].value;
+  }, [prices.basicPrice, currency]);
+  const priceGobelen = useMemo(() => {
+    if (prices.frontPocketPrice) return prices.frontPocketPrice[currency].value;
+  }, [prices.frontPocketPrice, currency]);
+  const priceBottom = useMemo(() => {
+    if (prices.bottomPrice) return prices.bottomPrice[currency].value;
+  }, [prices.bottomPrice, currency]);
 
   return (
     <div className={styles.constructorWrapper}>
@@ -112,28 +123,19 @@ const ImagesConstructor = () => {
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
           <FormControl>
-            <NativeSelect
-              name='basic'
-              onChange={(e) => methods.changeBasic(e.target.value)}
-            >
+            <NativeSelect name='basic' onChange={(e) => methods.changeBasic(e.target.value)}>
               {availableBasics}
             </NativeSelect>
             <FormHelperText>{BASIC}</FormHelperText>
           </FormControl>
           <FormControl>
-            <NativeSelect
-              name='pattern'
-              onChange={(e) => methods.changePattern(e.target.value)}
-            >
+            <NativeSelect name='pattern' onChange={(e) => methods.changePattern(e.target.value)}>
               {availablePatterns}
             </NativeSelect>
             <FormHelperText>{PATTERN}</FormHelperText>
           </FormControl>
           <FormControl>
-            <NativeSelect
-              name='bottoms'
-              onChange={(e) => methods.changeBottom(e.target.value)}
-            >
+            <NativeSelect name='bottoms' onChange={(e) => methods.changeBottom(e.target.value)}>
               {availableBottoms}
             </NativeSelect>
             <FormHelperText>{BOTTOM}</FormHelperText>
@@ -141,23 +143,32 @@ const ImagesConstructor = () => {
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
-          <canvas
-            className={styles.image}
-            width={canvasW}
-            height={canvasH}
-            ref={canvas}
-          />
+          <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
         </div>
-        <div className={styles.infoWrapper}>
-          <h2>Загальна вартість:</h2>
-          <ul>
-            <li>Ціна товару без змін: 1400</li>
-            <li>Матеріал: +100</li>
-            <li>Ліва бокова кишеня: +100</li>
-            <li>Права бокова кишеня: +100</li>
-            <li>Гобелен: +100</li>
-          </ul>
-          <h2>Кінцева ціна: 1800</h2>
+        <div className={styles.pricesInfoWrapper}>
+          <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>
+          <div className={styles.infoWrapper}>
+            <div className={styles.textWrapper}>
+              <ul>
+                <li>{DEFAULT_PRICE}</li>
+                <li>{BASIC_PRICE}</li>
+                <li>{GOBELEN_PRICE}</li>
+                <li>{BOTTOM_PRICE}</li>
+              </ul>
+            </div>
+            <div className={styles.priceWrapper}>
+              <ul>
+                <li>{DEFAULT_PRICE_VALUE}</li>
+                <li>{!priceBasic ? 0 : priceBasic}</li>
+                <li>{!priceGobelen ? 0 : priceGobelen}</li>
+                <li>{!priceBottom ? 0 : priceBottom}</li>
+              </ul>
+            </div>
+          </div>
+          <h2 className={styles.headerWrapper}>
+            {END_PRICE}
+            {!priceTotal ? DEFAULT_PRICE_VALUE : priceTotal}
+          </h2>
         </div>
       </div>
     </div>

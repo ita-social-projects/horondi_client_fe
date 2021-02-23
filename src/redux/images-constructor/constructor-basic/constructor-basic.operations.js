@@ -10,6 +10,9 @@ export const getConstructorBasicById = async (id) => {
           ... on ConstructorBasic {
             _id
             image
+            basePrice {
+              value
+            }
           }
           ... on Error {
             message

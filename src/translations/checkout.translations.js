@@ -180,7 +180,8 @@ export const CHECKOUT_ERROR = {
     city: 'Поле повинно містити від 2 до 50 символів',
     street: 'Поле повинно містити від 2 до 100 символів',
     house: 'Мінімальне значення не повинно бути меншим 1 символу',
-    flat: 'Мінімальне значення не повинно бути меншим 1 символу'
+    flat: 'Мінімальне значення не повинно бути меншим 1 символу',
+    onlyLetter: 'Поле повинно містити лише літери'
   },
   1: {
     requiredField: 'Field should not to be empty',
@@ -192,7 +193,8 @@ export const CHECKOUT_ERROR = {
     city: 'Field should contain from 2 to 50 characters',
     street: 'Field should contain from 2 to 100 characters',
     house: 'Min value is 1 character',
-    flat: 'Min value is 1 character'
+    flat: 'Min value is 1 character',
+    onlyLetter: 'Field should contain only letters'
   }
 };
 

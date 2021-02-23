@@ -8,10 +8,12 @@ export const validationSchema = (deliveryType, language) =>
     firstName: Yup.string()
       .min(2, CHECKOUT_ERROR[language].firstName)
       .max(20, CHECKOUT_ERROR[language].firstName)
+      .matches(formRegExp.firstName, CHECKOUT_ERROR[language].onlyLetter)
       .required(CHECKOUT_ERROR[language].requiredField),
     lastName: Yup.string()
       .min(2, CHECKOUT_ERROR[language].lastName)
       .max(20, CHECKOUT_ERROR[language].lastName)
+      .matches(formRegExp.lastName, CHECKOUT_ERROR[language].onlyLetter)
       .required(CHECKOUT_ERROR[language].requiredField),
     email: Yup.string()
       .email(CHECKOUT_ERROR[language].email)

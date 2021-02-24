@@ -158,13 +158,7 @@ const ImagesConstructor = () => {
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
-          <canvas
-            className={styles.image}
-            style={{ display: values.modelLoading ? 'none' : 'block' }}
-            width={canvasW}
-            height={canvasH}
-            ref={canvas}
-          />
+          <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
         </div>
         <div className={styles.pricesInfoWrapper}>
           <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>
@@ -178,7 +172,7 @@ const ImagesConstructor = () => {
                 </span>
               </li>
               {constructorPartPrice(priceBasic, priceGobelen, priceBottom).map((item, index) => (
-                <li key={item} className={styles.priceItem}>
+                <li key={index} className={styles.priceItem}>
                   <span>{constructorPartNames(language)[index]}</span>
                   <span>
                     {!item ? 0 : `${item}`}

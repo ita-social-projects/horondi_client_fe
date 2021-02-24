@@ -14,7 +14,7 @@ import {
   currentCurrencyValue,
   constructorPartPrice,
   constructorImageInput,
-  constructorPrices
+  constructorEndPrice
 } from '../../utils/constructor';
 
 const ImagesConstructor = () => {
@@ -94,7 +94,13 @@ const ImagesConstructor = () => {
   );
 
   const priceTotal = useMemo(() => {
-    constructorPrices(prices, currency);
+    if (prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice) {
+      return (
+        prices.basicPrice[currency].value +
+        prices.frontPocketPrice[currency].value +
+        prices.bottomPrice[currency].value
+      );
+    }
   }, [prices.basicPrice, prices.frontPocketPrice, prices.bottomPrice, currency]);
 
   const priceBasic = useMemo(() => {
@@ -188,7 +194,7 @@ const ImagesConstructor = () => {
           </div>
           <h2 className={styles.headerWrapper}>
             {END_PRICE}
-            {!priceTotal ? DEFAULT_PRICE_VALUE : `${priceTotal} `}
+            {constructorEndPrice(priceTotal)}
             {currentCurrencyValue(language, currency)}
           </h2>
         </div>

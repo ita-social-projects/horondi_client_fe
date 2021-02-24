@@ -31,7 +31,7 @@ export const useStyles = makeStyles(() => ({
   },
   imageContainer: {
     maxHeight: '470px',
-    maxWidth: '35%'
+    width: '35%'
   },
   image: {
     width: '100%'
@@ -40,7 +40,7 @@ export const useStyles = makeStyles(() => ({
     display: 'flex'
   },
   pricesInfoWrapper: {
-    width: '30%'
+    width: '25%'
   },
   headerWrapper: {
     marginLeft: '5%'
@@ -57,6 +57,11 @@ export const useStyles = makeStyles(() => ({
         listStyleType: 'none'
       }
     }
+  },
+  priceItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    minWidth: '100%'
   },
   li: {
     marginTop: '25px'

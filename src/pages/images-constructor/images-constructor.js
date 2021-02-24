@@ -12,7 +12,6 @@ import { useConstructor } from './hooks';
 import { IMG_URL } from '../../configs';
 import {
   currentCurrencyValue,
-  constructorPartPrice,
   constructorImageInput,
   constructorEndPrice
 } from '../../utils/constructor';
@@ -160,37 +159,47 @@ const ImagesConstructor = () => {
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
-          <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
+          <canvas
+            className={styles.image}
+            style={{ display: values.modelLoading ? 'none' : 'block' }}
+            width={canvasW}
+            height={canvasH}
+            ref={canvas}
+          />
         </div>
         <div className={styles.pricesInfoWrapper}>
           <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>
-          <div className={styles.infoWrapper}>
-            <div className={styles.textWrapper}>
-              <ul>
-                <li>{DEFAULT_PRICE}</li>
-                <li>{BASIC_PRICE}</li>
-                <li>{GOBELEN_PRICE}</li>
-                <li>{BOTTOM_PRICE}</li>
-              </ul>
-            </div>
-            <div className={styles.priceWrapper}>
-              <ul>
-                <li>
+          <div className={styles.textWrapper}>
+            <ul>
+              <li className={styles.priceItem}>
+                <span>{DEFAULT_PRICE}</span>
+                <span>
                   {DEFAULT_PRICE_VALUE}
                   {currentCurrencyValue(language, currency)}
-                </li>
-                {constructorPartPrice(priceBasic, priceGobelen, priceBottom).map((item) =>
-                  !item ? (
-                    0
-                  ) : (
-                    <li>
-                      {`${item} `}
-                      {currentCurrencyValue(language, currency)}
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
+                </span>
+              </li>
+              <li className={styles.priceItem}>
+                <span>{BASIC_PRICE}</span>
+                <span>
+                  {!priceBasic ? 0 : `${priceBasic}`}
+                  {currentCurrencyValue(language, currency)}
+                </span>
+              </li>
+              <li className={styles.priceItem}>
+                <span>{GOBELEN_PRICE}</span>
+                <span>
+                  {!priceGobelen ? 0 : `${priceGobelen}`}
+                  {currentCurrencyValue(language, currency)}
+                </span>
+              </li>
+              <li className={styles.priceItem}>
+                <span>{BOTTOM_PRICE}</span>
+                <span>
+                  {!priceBottom ? 0 : `${priceBottom}`}
+                  {currentCurrencyValue(language, currency)}
+                </span>
+              </li>
+            </ul>
           </div>
           <h2 className={styles.headerWrapper}>
             {END_PRICE}

@@ -10,6 +10,8 @@
 # production
 /build
 # misc
+.README.md
+debug.log
 .DS_Store
 .env
 .env.local
@@ -21,4 +23,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+test-report.xml
 .idea

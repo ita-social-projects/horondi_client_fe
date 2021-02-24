@@ -1,6 +1,6 @@
 import { SET_TOAST_MESSAGE, SET_TOAST_SETTINGS } from './toast.types';
 
-const initialState = {
+export const initialState = {
   toastMessage: null,
   toastSettings: {}
 };

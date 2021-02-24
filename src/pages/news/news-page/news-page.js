@@ -30,13 +30,13 @@ const NewsPage = () => {
   }
 
   const newsItems = newslist.map(
-    ({ _id, date, author, images, title, text }) => (
+    ({ _id, date, author, image, title, text }) => (
       <NewsItem
         date={date}
         key={_id}
         id={_id}
         author={author}
-        image={images}
+        image={image}
         title={title}
         text={text}
       />

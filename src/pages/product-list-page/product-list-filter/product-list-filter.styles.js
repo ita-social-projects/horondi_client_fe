@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core';
 
 const drawerWidth = 250;
 export const useStyles = makeStyles((theme) => ({
-  wrapper:{
-    width:'250px',
-    padding:'10px 20px 10px 10px'
+  wrapper: {
+    width: '250px',
+    padding: '10px 20px 10px 10px'
   },
   root: {
     color: '#3d3d3d',
@@ -13,9 +13,9 @@ export const useStyles = makeStyles((theme) => ({
       position: 'fixed',
       [theme.breakpoints.up('sm')]: {
         width: drawerWidth,
-        flexShrink: 0,
-      },
-    },
+        flexShrink: 0
+      }
+    }
   },
   formControl: {
     margin: theme.spacing(3)
@@ -51,6 +51,6 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.2em',
     padding: '0.5em 0',
     color: theme.palette.textColor,
-    textTransform: 'uppercase',
+    textTransform: 'uppercase'
   }
 }));

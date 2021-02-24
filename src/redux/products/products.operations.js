@@ -1,42 +1,70 @@
 import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
-const getAllProducts = async () => {
+const getAllFilters = async () => {
   const result = await client.query({
     query: gql`
       query {
-        getProducts {
-          items {
-            colors {
-              name {
-                value
-              }
-              simpleName {
-                value
-              }
-            }
-            basePrice {
-              value
-              currency
-            }
-            model {
+        getProductsFilters {
+          categories {
+            _id
+            name {
               value
             }
-            pattern {
+          }
+          models {
+            _id
+            name {
               value
             }
-            category {
-              _id
-              name {
-                value
-              }
+          }
+          patterns {
+            _id
+            name {
+              value
             }
+          }
+          closures {
+            _id
+            name {
+              value
+            }
+          }
+          mainMaterial {
+            _id
+            name {
+              value
+            }
+          }
+          mainMaterialColor {
+            _id
+            name {
+              value
+            }
+          }
+          innerMaterialColor {
+            _id
+            name {
+              value
+            }
+          }
+          bottomMaterial {
+            _id
+            name {
+              value
+            }
+          }
+          maxPrice {
+            value
+          }
+          minPrice {
+            value
           }
         }
       }
     `
   });
-  return result.data.getProducts;
+  return result.data.getProductsFilters;
 };
 
 const getFilteredProducts = async ({ state, currency }) => {
@@ -85,59 +113,69 @@ const getFilteredProducts = async ({ state, currency }) => {
           skip: $skip
           limit: $limit
           search: $search
-          sort: {
-            rate: $rate
-            basePrice: $basePrice
-            purchasedCount: $purchasedCount
-          }
+          sort: { rate: $rate, basePrice: $basePrice, purchasedCount: $purchasedCount }
         ) {
-          items {
-            _id
-            purchasedCount
-            availableCount
-            name {
-              lang
-              value
-            }
-            basePrice {
-              value
-              currency
-            }
-            model {
-              value
-            }
-            rate
-            images {
-              primary {
-                large
-                medium
-                large
-                small
-              }
-            }
-            colors {
-              name {
-                lang
-                value
-              }
-              simpleName {
-                lang
-                value
-              }
-            }
-            pattern {
-              lang
-              value
-            }
-            category {
+          __typename
+          ... on PaginatedProducts {
+            items {
               _id
+              purchasedCount
+              availableCount
               name {
+                lang
                 value
               }
+              basePrice {
+                value
+                currency
+              }
+              model {
+                _id
+                name {
+                  value
+                }
+              }
+              rate
+              images {
+                primary {
+                  large
+                  medium
+                  large
+                  small
+                }
+              }
+              mainMaterial {
+                color {
+                  name {
+                    lang
+                    value
+                  }
+                  simpleName {
+                    lang
+                    value
+                  }
+                }
+              }
+              pattern {
+                name {
+                  lang
+                  value
+                }
+              }
+              category {
+                _id
+                name {
+                  value
+                }
+              }
+              isHotItem
             }
-            isHotItem
+            count
           }
-          count
+          ... on Error {
+            statusCode
+            message
+          }
         }
       }
     `
@@ -318,4 +356,4 @@ const getProductById = async (id) => {
   return result.data.getProductById;
 };
 
-export { getProductById, getAllProducts, getFilteredProducts };
+export { getProductById, getAllFilters, getFilteredProducts };

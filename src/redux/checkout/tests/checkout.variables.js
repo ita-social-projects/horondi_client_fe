@@ -13,19 +13,6 @@ const fakeNPCities = {
   }
 };
 
-const fakeNPStreets = {
-  data: {
-    getNovaPoshtaStreets: [
-      {
-        description: 'Івана Франка',
-        ref: '5ae6c214-021f-11ea-91ff-0025b501a04b',
-        streetsTypeRef: 'Street',
-        streetsType: 'вул.'
-      }
-    ]
-  }
-};
-
 const fakeNPPrices = {
   data: {
     getNovaPoshtaPrices: [
@@ -54,4 +41,4 @@ const fakeNPWarehouses = {
   }
 };
 
-export { fakeNPWarehouses, fakeNPPrices, fakeNPStreets, fakeNPCities };
+export { fakeNPWarehouses, fakeNPPrices, fakeNPCities };

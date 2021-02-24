@@ -17,16 +17,18 @@ import homeLooksImagesSaga from './home-page-looks/home-page-looks.sagas';
 import patternSaga from './pattern/pattern.sagas';
 import homePageSliderSaga from './homepage-slider/homepage-slider.sagas';
 import toastSaga from './toast/toast.sagas';
+import { constructorSaga } from './images-constructor/constructor.sagas';
+import orderSaga from './order/order.sagas';
 
 export function* rootSaga() {
   yield all([
-    toastSaga(),
     newsSaga(),
     categoriesSaga(),
     userSaga(),
     wishlistSaga(),
     contactsSaga(),
     productsSaga(),
+    toastSaga(),
     cartSaga(),
     modelSaga(),
     commentsSaga(),
@@ -37,6 +39,9 @@ export function* rootSaga() {
     headerLinksSaga(),
     homeLooksImagesSaga(),
     patternSaga(),
-    homePageSliderSaga()
+    homePageSliderSaga(),
+    cartSaga(),
+    constructorSaga(),
+    orderSaga()
   ]);
 }

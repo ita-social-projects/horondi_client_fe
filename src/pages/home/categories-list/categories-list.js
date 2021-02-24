@@ -31,7 +31,7 @@ const CategoriesList = () => {
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>
-      <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable={false}>
+      <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable>
         {categoriesList}
       </Carousel>
     </div>

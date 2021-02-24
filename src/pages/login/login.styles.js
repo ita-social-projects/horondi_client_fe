@@ -3,40 +3,40 @@ import BG from '../../images/2.jpg';
 import GoogleLogo from '../../images/google.png';
 
 export const useStyles = makeStyles((theme) => ({
-  container:{
-    overflowX:'hidden',
+  container: {
+    overflowX: 'hidden'
   },
-  wrapper:{
-    height:'100vh',
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'center',
+  wrapper: {
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  background:{
-    height:'100vh',
-    width:'100%',
+  background: {
+    height: '100vh',
+    width: '100%',
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
-    filter:'brightness(30%) contrast(90%)',
-    position:'absolute',
-    zIndex:-1
+    filter: 'brightness(30%) contrast(90%)',
+    position: 'absolute',
+    zIndex: -1
   },
-  formWrapper:{
-    margin:theme.spacing(1),
-    maxWidth:'960px',
+  formWrapper: {
+    margin: theme.spacing(1),
+    maxWidth: '960px',
     height: '550px',
-    filter:'drop-shadow(8px 8px 10px dark-gray)',
+    filter: 'drop-shadow(8px 8px 10px dark-gray)',
     '& .MuiGrid-item': {
       padding: '0px !important'
     },
     '@media (max-width: 959px)': {
-      padding:'0 50px'
+      padding: '0 50px'
     },
     '@media (max-width: 525px)': {
-      padding:'0 15px'
+      padding: '0 15px'
     }
   },
-  fonWrapper:{
+  fonWrapper: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
     height: '100%',
@@ -116,15 +116,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   loginBtn: {
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    backgroundColor: theme.palette.button.normal.backgroundColor,
-    color: theme.palette.button.normal.color,
+    border: '1px solid black',
+    borderRadius: '4px',
+    marginBottom: '10px',
     textTransform: 'capitalize',
+    backgroundColor: 'white',
+    color: 'black',
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
+      color: theme.palette.button.normal.backgroundColor
     }
   },
   loginGroup: {
@@ -172,17 +171,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#636363',
     fontSize: '0.875rem'
   },
-  googleBtn: {
-    border: '1px solid black',
-    borderRadius: '4px',
-    marginBottom: '10px',
-    textTransform: 'capitalize',
-    backgroundColor: 'white',
-    color: 'black',
-    '&:hover': {
-      color: theme.palette.button.normal.backgroundColor
-    }
-  },
+
   googleLogo: {
     background: `url(${GoogleLogo}) no-repeat `,
     backgroundSize: 'cover',

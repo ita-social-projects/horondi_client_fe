@@ -32,12 +32,7 @@ export const selectCurrencyProductsCategoryFilter = ({
   productToSend
 });
 
-export const selectLanguageProductsUserWishlist = ({
-  Language,
-  Products,
-  User,
-  Wishlist
-}) => ({
+export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Wishlist }) => ({
   language: Language.language,
   productToSend: Products.productToSend,
   product: Products.product,
@@ -50,4 +45,31 @@ export const selectLightModeAndLocation = ({ Theme, router }) => ({
   location: router.location.pathname
 });
 
+export const selectHotItemFilter = ({ Products }) => ({
+  filterStatus: Products.filterStatus
+});
+
+export const selectConstructor = ({ Constructor }) => ({
+  constructorModel: Constructor.constructorModel,
+  currentModel: Constructor.constructorModel.currentModel,
+  basicImage: Constructor.constructorBasic.image,
+  frontPocketImage: Constructor.constructorFrontPocket.image,
+  patternImage: Constructor.constructorPattern.constructorImg,
+  bottomImage: Constructor.constructorBottom.image,
+  modelLoading: Constructor.constructorModel.modelLoading,
+  basicPrice: Constructor.constructorBasic.basePrice,
+  frontPocketPrice: Constructor.constructorFrontPocket.basePrice,
+  bottomPrice: Constructor.constructorBottom.basePrice
+});
+export const selectLangAndCurrency = ({ Language, Currency }) => ({
+  language: Language.language,
+  currency: Currency.currency
+});
+
 export const selectToastSettings = (state) => state.Toast.toastSettings;
+
+export const selectFilterData = ({ Products, Language }) => ({
+  filters: Products.filters,
+  language: Language.language,
+  filterData: Products.filterData
+});

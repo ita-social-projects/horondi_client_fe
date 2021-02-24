@@ -3,6 +3,18 @@
     "types": [
       {
         "kind": "UNION",
+        "name": "PaginatedProductsResult",
+        "possibleTypes": [
+          {
+            "name": "PaginatedProducts"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
         "name": "CategoryResult",
         "possibleTypes": [
           {
@@ -111,18 +123,6 @@
       },
       {
         "kind": "UNION",
-        "name": "TokenResult",
-        "possibleTypes": [
-          {
-            "name": "Token"
-          },
-          {
-            "name": "Error"
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
         "name": "ModelResult",
         "possibleTypes": [
           {
@@ -183,10 +183,133 @@
       },
       {
         "kind": "UNION",
-        "name": "NovaPoshtaOrderResult",
+        "name": "HeaderResult",
         "possibleTypes": [
           {
-            "name": "NovaPoshtaOrder"
+            "name": "Header"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "HomepageImagesResult",
+        "possibleTypes": [
+          {
+            "name": "HomePageImages"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "HomePageSlideResult",
+        "possibleTypes": [
+          {
+            "name": "HomePageSlide"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "TokenResult",
+        "possibleTypes": [
+          {
+            "name": "Token"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ClosureResult",
+        "possibleTypes": [
+          {
+            "name": "Closure"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "SizeResult",
+        "possibleTypes": [
+          {
+            "name": "Size"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ColorResult",
+        "possibleTypes": [
+          {
+            "name": "Color"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ColorDeletingResult",
+        "possibleTypes": [
+          {
+            "name": "Color"
+          },
+          {
+            "name": "Materials"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ConstructorBasicResult",
+        "possibleTypes": [
+          {
+            "name": "ConstructorBasic"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ConstructorFrontPocketResult",
+        "possibleTypes": [
+          {
+            "name": "ConstructorFrontPocket"
+          },
+          {
+            "name": "Error"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "ConstructorBottomResult",
+        "possibleTypes": [
+          {
+            "name": "ConstructorBottom"
           },
           {
             "name": "Error"

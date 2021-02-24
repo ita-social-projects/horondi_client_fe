@@ -121,18 +121,13 @@ export const formRegExp = {
   pass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/,
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
-  country:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  city:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  region:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  street:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  country: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  city: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  region: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  street: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  deliveryType:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
@@ -228,11 +223,24 @@ export const COMMENTS_TIME_OPTIONS = {
   month: 'numeric',
   day: 'numeric'
 };
+
 export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
-export const POPULARITY = 'POPULARITY';
+export const POPULARITY = 'popularity';
+export const URL_QUERIES_NAME = {
+  page: 'page',
+  sort: 'sort',
+  countPerPage: 'countPerPage',
+  categoryFilter: 'categoryFilter',
+  modelsFilter: 'modelsFilter',
+  colorsFilter: 'colorsFilter',
+  patternsFilter: 'patternsFilter',
+  isHotItemFilter: 'isHotItemFilter',
+  priceFilter: 'priceFilter',
+  defaultPage: '1'
+};
 
 export const FAKE_PRODUCT_FOR_TEST = {
   _id: 'xdfgbvc3',
@@ -294,18 +302,9 @@ export const RESPONSIVE_CATEGORIES = {
 
 export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
-  added: [
-    'Ваш коментар успішно створений',
-    'Your comment is successfully added'
-  ],
-  updated: [
-    'Ваш коментар успішно оновлений',
-    'Your comment is successfully updated'
-  ],
-  deleted: [
-    'Ваш коментар успішно видалений',
-    'Your comment is successfully deleted'
-  ],
+  added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
+  updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
+  deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong']
 };
 export const COMMENT_DATA = {
@@ -426,3 +425,23 @@ export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Not
 export const commentsLimit = 10;
 
 export const DEFAULT_SIZE = 'M';
+
+export const cookiePolicy = {
+  SINGLE_HOST_ORIGIN: 'single_host_origin'
+};
+
+export const cartKey = 'cart';
+export const wishlistKey = 'wishlist';
+export const sort = 'sort';
+export const countPerPage = 'countPerPage';
+export const page = 'page';
+export const deliveryTypeKey = 'deliveryType';
+export const deliveryTypes = {
+  NOVAPOST: 'NOVAPOST',
+  UKRPOST: 'UKRPOST',
+  SELFPICKUP: 'SELFPICKUP',
+  NOVAPOSTCOURIER: 'NOVAPOSTCOURIER',
+  UKRPOSTCOURIER: 'UKRPOSTCOURIER'
+};
+
+export const CY_CODE_ERR = 'code-error';

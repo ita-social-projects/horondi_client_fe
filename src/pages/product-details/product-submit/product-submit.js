@@ -97,7 +97,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           selectedSize: sizeToSend ? sizeToSend.name : ''
         })
       );
-      dispatch(push('/checkout'));
+      dispatch(push('/cart'));
     } else {
       setSizeIsNotSelectedError(true);
     }

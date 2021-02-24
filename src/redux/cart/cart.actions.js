@@ -3,7 +3,12 @@ import {
   GET_CART,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
-  SET_CART_ITEM_QUANTITY
+  SET_CART_ITEM_QUANTITY,
+  SET_CART_ITEM_CHECKED,
+  SET_DELIVERY_TYPE,
+  ADD_DELIVERY_TYPE,
+  GET_DELIVERY_TYPE,
+  RESET_CART
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -20,18 +25,40 @@ const addItemToCart = (item) => ({
   payload: item
 });
 
-const removeItemFromCart = (item) => ({
+const removeItemFromCart = (items) => ({
   type: REMOVE_ITEM_FROM_CART,
-  payload: item
+  payload: items
 });
 
-const setCartItemQuantity = (item, value, key) => ({
+const setCartItemQuantity = (item, value) => ({
   type: SET_CART_ITEM_QUANTITY,
   payload: {
     item,
-    value,
-    key
+    value
   }
+});
+
+const setCartItemChecked = (item, isChecked) => ({
+  type: SET_CART_ITEM_CHECKED,
+  payload: {
+    item,
+    isChecked
+  }
+});
+const setDeliveryType = (payload) => ({
+  type: SET_DELIVERY_TYPE,
+  payload
+});
+const addDeliveryType = (payload) => ({
+  type: ADD_DELIVERY_TYPE,
+  payload
+});
+const getDeliveryType = () => ({
+  type: GET_DELIVERY_TYPE
+});
+
+const resetCart = () => ({
+  type: RESET_CART
 });
 
 export {
@@ -39,5 +66,10 @@ export {
   getCart,
   addItemToCart,
   removeItemFromCart,
-  setCartItemQuantity
+  setCartItemQuantity,
+  setCartItemChecked,
+  setDeliveryType,
+  addDeliveryType,
+  getDeliveryType,
+  resetCart
 };

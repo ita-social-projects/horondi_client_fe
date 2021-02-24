@@ -23,7 +23,8 @@ import {
   SET_COMMENTS_LOADING,
   SET_UPDATING_COMMENT,
   SET_PRODUCT_TO_SEND,
-  CLEAR_PRODUCT_TO_SEND, CHANGE_FILTER_STATUS
+  CLEAR_PRODUCT_TO_SEND,
+  CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const initialState = {
@@ -37,7 +38,7 @@ export const initialState = {
   filters: {
     colorsFilter: [],
     patternsFilter: [],
-    categoryFilter: null,
+    categoryFilter: [],
     priceFilter: [0, 99999999],
     searchFilter: '',
     modelsFilter: [],
@@ -69,7 +70,7 @@ export const initialState = {
       volumeInLiters: null
     }
   },
-  filterStatus:false
+  filterStatus: false
 };
 const setSort = ({
   sortByPrice = 0,
@@ -96,7 +97,7 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_CURRENT_PAGE:
     return {
       ...state,
-      currentPage: action.payload-1
+      currentPage: action.payload - 1
     };
   case SET_PRODUCTS_PER_PAGE:
     return {

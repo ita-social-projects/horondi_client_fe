@@ -7,7 +7,7 @@ import { useHistory, useLocation } from 'react-router';
 import PriceFilter from './price-filter';
 import HotItemFilter from './hot-item-filter';
 import { useStyles } from './product-list-filter.styles';
-import { getFiltredProducts } from '../../../redux/products/products.actions';
+import { getFiltredProducts, setPriceFilter } from '../../../redux/products/products.actions';
 
 import { CLEAR_FILTER_BUTTON_TEXT } from '../../../translations/product-list.translations';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
@@ -27,10 +27,9 @@ const ProductListFilter = () => {
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(sort);
     const quantityPerPage = searchParams.get(countPerPage);
-    history.push(
-      `/products/?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`
-    );
+    history.push(`/products?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
     dispatch(getFiltredProducts({}));
+    dispatch(setPriceFilter([]));
   };
   const filterButtons = Object.values(
     filtersOptions

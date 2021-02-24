@@ -54,6 +54,12 @@ const getAllFilters = async () => {
               value
             }
           }
+          maxPrice {
+            value
+          }
+          minPrice {
+            value
+          }
         }
       }
     `
@@ -107,11 +113,7 @@ const getFilteredProducts = async ({ state, currency }) => {
           skip: $skip
           limit: $limit
           search: $search
-          sort: {
-            rate: $rate
-            basePrice: $basePrice
-            purchasedCount: $purchasedCount
-          }
+          sort: { rate: $rate, basePrice: $basePrice, purchasedCount: $purchasedCount }
         ) {
           __typename
           ... on PaginatedProducts {

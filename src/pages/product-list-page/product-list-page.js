@@ -12,11 +12,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import {
-  getAllFilters,
-  getFiltredProducts,
-  setCurrentPage
-} from '../../redux/products/products.actions';
+import { getFiltredProducts, setCurrentPage } from '../../redux/products/products.actions';
 
 import {
   DRAWER_PERMANENT,
@@ -27,6 +23,7 @@ import {
 } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
+import { URL_QUERIES_NAME } from '../../configs';
 
 const ProductListPage = ({ model, width }) => {
   const dispatch = useDispatch();
@@ -74,11 +71,7 @@ const ProductListPage = ({ model, width }) => {
   } = filters;
 
   useEffect(() => {
-    dispatch(getAllFilters());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(setCurrentPage(searchParams.get('page')));
+    dispatch(setCurrentPage(searchParams.get(URL_QUERIES_NAME.page)));
     dispatch(getFiltredProducts({}));
   }, [
     dispatch,
@@ -98,8 +91,7 @@ const ProductListPage = ({ model, width }) => {
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };
-  const checkWidth = () =>
-    TEMPORARY_WIDTHS.find((element) => element === width);
+  const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
 
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
@@ -108,18 +100,15 @@ const ProductListPage = ({ model, width }) => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const handleFilterShow = () =>
-    dispatch(setFilterMenuStatus(!filterMenuStatus));
+  const handleFilterShow = () => dispatch(setFilterMenuStatus(!filterMenuStatus));
 
   if (loading || filterData.length) {
     return <Loader />;
   }
 
   const itemsToShow =
-    products.length > 0
-      ? products.map((product) => (
-        <ProductListItem key={product._id} product={product} />
-      ))
+    products?.length > 0
+      ? products.map((product) => <ProductListItem key={product._id} product={product} />)
       : null;
 
   return (
@@ -129,11 +118,7 @@ const ProductListPage = ({ model, width }) => {
         <ProductSort />
       </div>
       <div className={styles.filterButtonBlock}>
-        <Button
-          className={styles.button}
-          variant='contained'
-          onClick={handleFilterShow}
-        >
+        <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
           {SHOW_FILTER_BUTTON_TEXT[language].value}
         </Button>
       </div>
@@ -155,7 +140,7 @@ const ProductListPage = ({ model, width }) => {
         <div className={styles.filterMenu}>
           <ProductFilter />
         </div>
-        {products.length > 0 ? (
+        {products?.length > 0 ? (
           <div className={styles.productsWrapper}>
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}

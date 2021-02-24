@@ -40,7 +40,7 @@ export const useStyles = makeStyles(() => ({
     display: 'flex'
   },
   pricesInfoWrapper: {
-    width: '25%'
+    width: '30%'
   },
   headerWrapper: {
     marginLeft: '5%'
@@ -51,8 +51,11 @@ export const useStyles = makeStyles(() => ({
   },
   priceWrapper: {
     '& ul': {
-      fontSize: '17px',
-      listStyleType: 'none'
+      '& li': {
+        width: '150px',
+        fontSize: '17px',
+        listStyleType: 'none'
+      }
     }
   },
   li: {

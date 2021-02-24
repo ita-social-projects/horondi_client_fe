@@ -1,6 +1,7 @@
 import React, { useRef, useMemo, useLayoutEffect } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import { useStyles } from './images-constructor.style';
 import { selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
@@ -9,8 +10,11 @@ import { setModelLoading } from '../../redux/images-constructor/constructor-mode
 import Loader from '../../components/loader';
 import { useConstructor } from './hooks';
 import { IMG_URL } from '../../configs';
-
-const map = require('lodash/map');
+import {
+  currentCurrencyValue,
+  constructorPartPrice,
+  constructorImageInput
+} from '../../utils/constructor';
 
 const ImagesConstructor = () => {
   const styles = useStyles();
@@ -76,15 +80,17 @@ const ImagesConstructor = () => {
     </option>
   );
 
-  const availableModels = useMemo(() => map(values.models, options, [values.models, language]));
+  const availableModels = useMemo(() => _.map(values.models, options, [values.models, language]));
 
-  const availableBasics = useMemo(() => map(values.basics, options, [values.basics, language]));
+  const availableBasics = useMemo(() => _.map(values.basics, options, [values.basics, language]));
 
   const availablePatterns = useMemo(() =>
-    map(values.patterns, options, [values.patterns, language])
+    _.map(values.patterns, options, [values.patterns, language])
   );
 
-  const availableBottoms = useMemo(() => map(values.bottoms, options, [values.bottoms, language]));
+  const availableBottoms = useMemo(() =>
+    _.map(values.bottoms, options, [values.bottoms, language])
+  );
 
   const priceTotal = useMemo(() => {
     if (prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice) {
@@ -94,7 +100,8 @@ const ImagesConstructor = () => {
         prices.bottomPrice[currency].value
       );
     }
-  }, [prices.bottomPrice, prices.frontPocketPrice, prices.bottomPrice, currency]);
+  }, [prices.basicPrice, prices.frontPocketPrice, prices.bottomPrice, currency]);
+
   const priceBasic = useMemo(() => {
     if (prices.basicPrice) return prices.basicPrice[currency].value;
   }, [prices.basicPrice, currency]);
@@ -111,7 +118,7 @@ const ImagesConstructor = () => {
         <FormControl>
           <NativeSelect
             className={styles.mainHeader}
-            name='model'
+            name={constructorImageInput.MODEL}
             onChange={(e) => methods.changeModel(e.target.value)}
           >
             {availableModels}
@@ -123,19 +130,28 @@ const ImagesConstructor = () => {
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
           <FormControl>
-            <NativeSelect name='basic' onChange={(e) => methods.changeBasic(e.target.value)}>
+            <NativeSelect
+              name={constructorImageInput.BASIC}
+              onChange={(e) => methods.changeBasic(e.target.value)}
+            >
               {availableBasics}
             </NativeSelect>
             <FormHelperText>{BASIC}</FormHelperText>
           </FormControl>
           <FormControl>
-            <NativeSelect name='pattern' onChange={(e) => methods.changePattern(e.target.value)}>
+            <NativeSelect
+              name={constructorImageInput.PATTERN}
+              onChange={(e) => methods.changePattern(e.target.value)}
+            >
               {availablePatterns}
             </NativeSelect>
             <FormHelperText>{PATTERN}</FormHelperText>
           </FormControl>
           <FormControl>
-            <NativeSelect name='bottoms' onChange={(e) => methods.changeBottom(e.target.value)}>
+            <NativeSelect
+              name={constructorImageInput.BOTTOM}
+              onChange={(e) => methods.changeBottom(e.target.value)}
+            >
               {availableBottoms}
             </NativeSelect>
             <FormHelperText>{BOTTOM}</FormHelperText>
@@ -158,16 +174,27 @@ const ImagesConstructor = () => {
             </div>
             <div className={styles.priceWrapper}>
               <ul>
-                <li>{DEFAULT_PRICE_VALUE}</li>
-                <li>{!priceBasic ? 0 : priceBasic}</li>
-                <li>{!priceGobelen ? 0 : priceGobelen}</li>
-                <li>{!priceBottom ? 0 : priceBottom}</li>
+                <li>
+                  {DEFAULT_PRICE_VALUE}
+                  {currentCurrencyValue(language, currency)}
+                </li>
+                {constructorPartPrice(priceBasic, priceGobelen, priceBottom).map((item) =>
+                  !item ? (
+                    0
+                  ) : (
+                    <li>
+                      {`${item} `}
+                      {currentCurrencyValue(language, currency)}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
           <h2 className={styles.headerWrapper}>
             {END_PRICE}
-            {!priceTotal ? DEFAULT_PRICE_VALUE : priceTotal}
+            {!priceTotal ? DEFAULT_PRICE_VALUE : `${priceTotal} `}
+            {currentCurrencyValue(language, currency)}
           </h2>
         </div>
       </div>

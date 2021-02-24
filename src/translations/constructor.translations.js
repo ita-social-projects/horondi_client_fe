@@ -10,7 +10,7 @@ export const CONSTRUCTOR_TITLES = {
     DEFAULT_PRICE: 'Ціна товару без змін:',
     TOTAL_PRICE: 'Загальна Вартість:',
     END_PRICE: 'Кінцева Ціна: ',
-    DEFAULT_PRICE_VALUE: '1400'
+    DEFAULT_PRICE_VALUE: '1400 '
   },
   1: {
     MODEL: 'Model',
@@ -23,7 +23,7 @@ export const CONSTRUCTOR_TITLES = {
     DEFAULT_PRICE: 'Default item price:',
     TOTAL_PRICE: 'Total item price',
     END_PRICE: 'End Price: ',
-    DEFAULT_PRICE_VALUE: '50'
+    DEFAULT_PRICE_VALUE: '50 '
   }
 };
 

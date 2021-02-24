@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { selectConstructor } from '../../redux/selectors/multiple.selectors';
 import {
   getConstructorModelById,

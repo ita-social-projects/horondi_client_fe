@@ -13,7 +13,9 @@ import { IMG_URL } from '../../configs';
 import {
   currentCurrencyValue,
   constructorImageInput,
-  constructorEndPrice
+  constructorEndPrice,
+  constructorPartPrice,
+  constructorPartNames
 } from '../../utils/constructor';
 
 const ImagesConstructor = () => {
@@ -28,9 +30,6 @@ const ImagesConstructor = () => {
     BASIC,
     PATTERN,
     BOTTOM,
-    BASIC_PRICE,
-    GOBELEN_PRICE,
-    BOTTOM_PRICE,
     DEFAULT_PRICE,
     TOTAL_PRICE,
     END_PRICE
@@ -178,27 +177,15 @@ const ImagesConstructor = () => {
                   {currentCurrencyValue(language, currency)}
                 </span>
               </li>
-              <li className={styles.priceItem}>
-                <span>{BASIC_PRICE}</span>
-                <span>
-                  {!priceBasic ? 0 : `${priceBasic}`}
-                  {currentCurrencyValue(language, currency)}
-                </span>
-              </li>
-              <li className={styles.priceItem}>
-                <span>{GOBELEN_PRICE}</span>
-                <span>
-                  {!priceGobelen ? 0 : `${priceGobelen}`}
-                  {currentCurrencyValue(language, currency)}
-                </span>
-              </li>
-              <li className={styles.priceItem}>
-                <span>{BOTTOM_PRICE}</span>
-                <span>
-                  {!priceBottom ? 0 : `${priceBottom}`}
-                  {currentCurrencyValue(language, currency)}
-                </span>
-              </li>
+              {constructorPartPrice(priceBasic, priceGobelen, priceBottom).map((item, index) => (
+                <li key={item} className={styles.priceItem}>
+                  <span>{constructorPartNames(language)[index]}</span>
+                  <span>
+                    {!item ? 0 : `${item}`}
+                    {currentCurrencyValue(language, currency)}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
           <h2 className={styles.headerWrapper}>

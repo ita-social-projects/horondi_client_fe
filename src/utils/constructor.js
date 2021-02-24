@@ -9,6 +9,15 @@ export const constructorPartPrice = (priceBasic, priceGobelen, priceBottom) => [
   priceGobelen,
   priceBottom
 ];
+export const constructorPrices = (prices, currency) => {
+  if (prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice) {
+    return (
+      prices.basicPrice[currency].value +
+      prices.frontPocketPrice[currency].value +
+      prices.bottomPrice[currency].value
+    );
+  }
+};
 
 export const constructorImageInput = {
   MODEL: 'model',

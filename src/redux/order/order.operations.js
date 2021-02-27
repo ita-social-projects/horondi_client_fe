@@ -1,7 +1,8 @@
-import { client } from "../../utils/client";
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
+import { client } from '../../utils/client';
 
-export const addOrder = async order => {
+export const addOrder = async (order) => {
+  console.log(order);
   const result = await client.mutate({
     variables: {
       order
@@ -9,42 +10,42 @@ export const addOrder = async order => {
     mutation: gql`
       mutation($order: OrderInput!) {
         addOrder(order: $order) {
-        ... on Order {
-          items{
-            product{
-              name{
-                lang
+          ... on Order {
+            items {
+              product {
+                name {
+                  lang
+                  value
+                }
+                images {
+                  primary {
+                    thumbnail
+                  }
+                }
+              }
+              fixedPrice {
+                currency
                 value
               }
-              images{
-                primary{
-                  thumbnail
+              quantity
+              options {
+                size {
+                  name
                 }
               }
             }
-            fixedPrice{
+            totalPriceToPay {
               currency
               value
             }
-            quantity
-            options{
-              size{
-                name
-              }
-            }
+            paymentStatus
           }
-          totalPriceToPay{
-            currency
-            value
+          ... on Error {
+            statusCode
+            message
           }
-          paymentStatus
         }
-        ...on Error{
-          statusCode
-          message
-        }
-       }
-     }
+      }
     `,
     fetchPolicy: 'no-cache'
   });

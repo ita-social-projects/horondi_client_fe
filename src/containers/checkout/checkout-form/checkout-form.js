@@ -23,7 +23,7 @@ import { calcPrice } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
-import { setOrder } from '../../../redux/order/order.actions';
+import { addOrder } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
@@ -53,8 +53,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
     initialValues,
 
     onSubmit: (data) => {
-      const orderInput = orderInputData(data, deliveryType, cartItems, language);
-      dispatch(setOrder(orderInput));
+      dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language)));
     }
   });
 

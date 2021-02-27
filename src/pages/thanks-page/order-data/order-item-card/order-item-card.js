@@ -1,35 +1,36 @@
 import React from 'react';
-import { Checkbox, TableCell, TableRow } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
-import DoneIcon from '@material-ui/icons/Done';
-import NumberInput from '../../../../components/number-input';
-import { useStyles } from '../../../../containers/orders/cart/cart-item/cart-item.styles';
-import { IMG_URL } from '../../../../configs';
+import { TableCell, TableRow } from '@material-ui/core';
 
-const OrderItemCard = ({ item, currency,language }) => {
-  const styles = useStyles({ image: `${IMG_URL}${item.product.images.primary.thumbnail}` });
+import { useStyles } from './order-item-card.styles';
+import { DEFAULT_CURRENCY, IMG_URL } from '../../../../configs';
+import { CHECKOUT_TITLES } from '../../../../translations/checkout.translations';
+import { THANKS_PAGE_TITLE } from '../../../../translations/thanks-page.translations';
+
+const OrderItemCard = ({ item, currency, language, isLightTheme }) => {
+  const styles = useStyles({ isLightTheme });
 
   return (
     <TableRow classes={{ root: styles.root }}>
       <TableCell classes={{ root: styles.image }}>
-        {/*<Link to={`/product/${item._id}`}>*/}
-        {/*  <b />*/}
-        {/*</Link>*/}
+        <img
+          src={`${IMG_URL}${item.product.images.primary.thumbnail}`}
+          alt={THANKS_PAGE_TITLE[language].alt}
+          className={styles.imgItem}
+        />
       </TableCell>
-      <TableCell
-        classes={{ root: styles.description }}
-        data-cy='cart-item-description'
-      >
+      <TableCell classes={{ root: styles.description }}>
+        <p>{item.product.name[language].value}</p>
+        <p>{`${THANKS_PAGE_TITLE[language].size} ${item.options.size.name}`}</p>
       </TableCell>
-      <TableCell>
-        {item.quantity}
-      </TableCell>
-      <TableCell classes={{ root: styles.price }}>
-        {item.fixedPrice[currency].value}
+      <TableCell className={styles.description}>{item.quantity}</TableCell>
+      <TableCell classes={{ root: styles.description }}>
+        {`${item.fixedPrice[currency].value} ${
+          currency === DEFAULT_CURRENCY
+            ? CHECKOUT_TITLES[language].UAH
+            : CHECKOUT_TITLES[language].USD
+        }`}
       </TableCell>
     </TableRow>
-
   );
 };
 

@@ -36,6 +36,7 @@ export function* handleCartReset() {
 
 export function* handleDeliveryTypeLoad() {
   const deliveryType = getFromLocalStorage(deliveryTypeKey);
+
   yield put(setDeliveryType(deliveryType));
 }
 

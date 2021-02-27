@@ -1,8 +1,8 @@
 import {
   SET_LOADING,
   SET_ORDER,
-  SET_IS_ORDER_CREATED,
-} from "./order.types";
+  SET_IS_ORDER_CREATED, GET_ORDER
+} from './order.types';
 
 export const setOrder = payload => ({
   type: SET_ORDER,
@@ -15,4 +15,7 @@ export const setOrderLoading = payload => ({
 export const setIsOrderCreated = payload => ({
   type: SET_IS_ORDER_CREATED,
   payload
+});
+export const getOrder = () => ({
+  type: GET_ORDER
 });

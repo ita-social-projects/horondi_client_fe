@@ -41,7 +41,7 @@ const Checkout = () => {
 
   return (
     <div className={styles.root}>
-      {(isOrderCreated || !cartItems.length) && <Redirect to={routes.pathToMain} />}
+      {(isOrderCreated || !cartItems.length) && <Redirect to={'/thanks'} />}
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>

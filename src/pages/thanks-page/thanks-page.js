@@ -1,28 +1,49 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useStyles } from './thanks-page.styles';
 import {
-  THANKS_PAGE_TITLE,
-  THANKS_PAGE_BUTTON
+  THANKS_PAGE_TITLE
 } from '../../translations/thanks-page.translations';
+import OrderData from './order-data';
+import { Redirect } from 'react-router';
+import { getOrder } from '../../redux/order/order.actions';
 
 const ThanksPage = () => {
+  const dispatch = useDispatch();
   const styles = useStyles();
-  const language = useSelector((state) => state.Language.language);
+  const { language, currency, order, loading } = useSelector(({ Language, Currency, Order }) => ({
+    language: Language.language,
+    currency: Currency.currency,
+    order: Order.order,
+    loading: Order.loading
+  }));
 
+  useEffect(() => {
+    dispatch(getOrder())
+  }, []);
   return (
-    <div className={styles.thanks}>
-      <div className={styles.thanksWrapper}>
-        <div className={styles.titleStyle}>
-          {THANKS_PAGE_TITLE[language].thanks}
-        </div>
-        <Button className={styles.buttonStyle}>
-          <Link to='/'>{THANKS_PAGE_BUTTON[language].continueShopping}</Link>
-        </Button>
-      </div>
+
+    <div className={styles.thanksContainer}>
+      {/*{!order && <Redirect to={'/'}/>}*/}
+
+      {
+        !loading &&
+        <>
+          <h2 className={styles.thunksTitle}>
+            {THANKS_PAGE_TITLE[language].thanks}
+          </h2>
+          <div className={styles.thunksInfo}>
+            <OrderData
+              order={order}
+              language={language}
+              currency={currency}
+            />
+          </div>
+        </>
+      }
     </div>
+
   );
 };
 

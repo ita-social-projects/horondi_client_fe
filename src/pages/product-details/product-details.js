@@ -26,43 +26,36 @@ import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/mult
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const {
-    product,
-    isLoading,
-    categoryFilter,
-    productToSend,
-    currency
-  } = useSelector(selectCurrencyProductsCategoryFilter);
+  const { product, isLoading, categoryFilter, productToSend, currency } = useSelector(
+    selectCurrencyProductsCategoryFilter
+  );
   const dispatch = useDispatch();
   const styles = useStyles();
 
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
-  const currencySign =
-    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+  const currencySign = currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
 
   const {
     _id: productId,
     name: productName,
     basePrice,
+    bottomMaterial,
     images,
     options = [],
-    category
+    category,
+    sizes
   } = product || {};
 
   const { selectedSize } = productToSend;
 
   const defaultSize = useMemo(
-    () =>
-      options[0]
-        ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE)
-        : {},
+    () => (options[0] ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE) : {}),
     [options]
   );
 
   const { volumeInLiters, weightInKg } =
     (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
-
   useEffect(() => {
     dispatch(getProduct(id));
     window.scrollTo(0, 0);
@@ -75,7 +68,7 @@ const ProductDetails = ({ match }) => {
         setProductToSend({
           _id: productId,
           name: productName,
-          image: images.primary.small,
+          image: images.additional.small,
           totalPrice: basePrice,
           dimensions: { volumeInLiters, weightInKg }
         })
@@ -105,16 +98,16 @@ const ProductDetails = ({ match }) => {
     }
   }, [dispatch, categoryFilter]);
 
-  const uniqueSizes = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].size
-          ? options.map(({ size: { available, name } }) => available && name)
-          : null
-      )
-    ],
-    [options]
-  );
+  // const uniqueSizes = useMemo(
+  //   () => [
+  //     ...new Set(
+  //       options.length && options[0].size
+  //         ? options.map(({ size: { available, name } }) => available && name)
+  //         : null
+  //     )
+  //   ],
+  //   [options]
+  // );
 
   const uniqueBottomMaterials = useMemo(
     () => [
@@ -149,31 +142,29 @@ const ProductDetails = ({ match }) => {
           (item) =>
             options
               .filter(({ additions }) => additions.length > 0)
-              .find(({ additions: [{ name }] }) => item === name[1].value)
-              .additions[0]
+              .find(({ additions: [{ name }] }) => item === name[1].value).additions[0]
         )
         : null,
     [uniqueAdditions, options]
   );
 
-  const sizes = useMemo(
-    () =>
-      options.length
-        ? uniqueSizes.map(
-          (item) => options.find(({ size: { name } }) => item === name).size
-        )
-        : null,
-    [uniqueSizes, options]
-  );
+  // const sizes = useMemo(
+  //   () =>
+  //     options.length
+  //       ? uniqueSizes.map(
+  //         (item) => options.find(({ size: { name } }) => item === name).size
+  //       )
+  //       : null,
+  //   [uniqueSizes, options]
+  // );
 
   const bottomMaterials = useMemo(
     () =>
       uniqueBottomMaterials[0] && options && options.length
         ? uniqueBottomMaterials.map(
           (item) =>
-            options.find(
-              ({ bottomMaterial: { name } }) => item === name[1].value
-            ).bottomMaterial
+            options.find(({ bottomMaterial: { name } }) => item === name[1].value)
+              .bottomMaterial
         )
         : null,
     [uniqueBottomMaterials, options]
@@ -185,10 +176,8 @@ const ProductDetails = ({ match }) => {
       : DEFAULT_PRICE;
 
     const size = sizes.find(({ _id }) => _id === selectedId);
-
     const newTotalPrice = productToSend.totalPrice.map((item, i) => {
-      item.value =
-        item.value - oldPrice[i].value + size.additionalPrice[i].value;
+      item.value = item.value - oldPrice[i].value + size.additionalPrice[i].value;
       return item;
     });
 
@@ -226,6 +215,7 @@ const ProductDetails = ({ match }) => {
           />
           <ProductFeatures
             currencySign={currencySign}
+            bottomMaterial={bottomMaterial}
             bottomMaterials={bottomMaterials}
             additions={productAdditions}
           />

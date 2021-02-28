@@ -8,15 +8,12 @@ import { Checkbox, TableCell, TableRow } from '@material-ui/core';
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
-import {
-  setCartItemChecked,
-  setCartItemQuantity
-} from '../../../../redux/cart/cart.actions';
+import { setCartItemChecked, setCartItemQuantity } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 
 const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
+  const styles = useStyles({ image: `${IMG_URL}${item.image}` });
   const [checkedItem, setCheckedItem] = useState(false);
 
   const onChangeQuantity = (value) => {
@@ -38,10 +35,7 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
           <b />
         </Link>
       </TableCell>
-      <TableCell
-        classes={{ root: styles.description }}
-        data-cy='cart-item-description'
-      >
+      <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
         <Link to={`/product/${item._id}`}>
           <span className={styles.itemName}>{item.name[language].value}</span>
         </Link>
@@ -59,20 +53,16 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
         )}
         {item.sidePocket && (
           <div>
-            {CART_TABLE_FIELDS[language].sidePocket}:{' '}
-            <DoneIcon className={styles.doneIcon} />
+            {CART_TABLE_FIELDS[language].sidePocket}: <DoneIcon className={styles.doneIcon} />
           </div>
         )}
       </TableCell>
       <TableCell>
-        <NumberInput
-          quantity={item.quantity}
-          onChangeQuantity={onChangeQuantity}
-        />
+        <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
         <span>
-          {calcPrice(item, currency) / 100} {item.basePrice[currency].currency}
+          {calcPrice(item, currency) / 100} {item.totalPrice[currency].currency}
         </span>
         {isCartEditing && (
           <Checkbox

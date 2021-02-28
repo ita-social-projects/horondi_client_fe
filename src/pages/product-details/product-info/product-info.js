@@ -36,21 +36,19 @@ const ProductInfo = ({ currencySign }) => {
     currentWeight,
     currentVolume,
     currency
-  } = useSelector(
-    ({ Language, Products: { product, productToSend }, Currency }) => ({
-      language: Language.language,
-      rate: product.rate,
-      name: product.name,
-      description: product.description,
-      mainMaterial: product.mainMaterial,
-      innerMaterial: product.innerMaterial,
-      strapLengthInCm: product.strapLengthInCm,
-      currentPrice: product.basePrice,
-      currentWeight: productToSend.dimensions.weightInKg,
-      currentVolume: productToSend.dimensions.volumeInLiters,
-      currency: Currency.currency
-    })
-  );
+  } = useSelector(({ Language, Products: { product, productToSend }, Currency }) => ({
+    language: Language.language,
+    rate: product.rate,
+    name: product.name,
+    description: product.description,
+    mainMaterial: product.mainMaterial,
+    innerMaterial: product.innerMaterial,
+    strapLengthInCm: product.strapLengthInCm,
+    currentPrice: product.basePrice,
+    currentWeight: productToSend.dimensions.weightInKg,
+    currentVolume: productToSend.dimensions.volumeInLiters,
+    currency: Currency.currency
+  }));
 
   return (
     <div>
@@ -69,7 +67,7 @@ const ProductInfo = ({ currencySign }) => {
         />
         <Detail
           subtitle={PRODUCT_DESCRIPTION[language].mainMaterial}
-          description={` - ${mainMaterial[language].value}`}
+          description={` - ${mainMaterial.material.name[language].value}`}
         />
         <div>
           {innerMaterial.length >= 1 ? (
@@ -99,9 +97,7 @@ const ProductInfo = ({ currencySign }) => {
         ) : null}
       </div>
       <div className={styles.priceContainer}>
-        <span className={styles.subtitle}>
-          {PRODUCT_PRICE[language].price}:{' '}
-        </span>
+        <span className={styles.subtitle}>{PRODUCT_PRICE[language].price}: </span>
         <span data-cy='price' className={styles.price}>
           <FontAwesomeIcon icon={currencySign} />
           {currentPrice[currency].value / 100}

@@ -107,11 +107,7 @@ const getFilteredProducts = async ({ state, currency }) => {
           skip: $skip
           limit: $limit
           search: $search
-          sort: {
-            rate: $rate
-            basePrice: $basePrice
-            purchasedCount: $purchasedCount
-          }
+          sort: { rate: $rate, basePrice: $basePrice, purchasedCount: $purchasedCount }
         ) {
           __typename
           ... on PaginatedProducts {
@@ -138,7 +134,6 @@ const getFilteredProducts = async ({ state, currency }) => {
                 primary {
                   large
                   medium
-                  large
                   small
                 }
               }
@@ -207,12 +202,45 @@ const getProductById = async (id) => {
               value
             }
             mainMaterial {
-              lang
-              value
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+              color {
+                _id
+                name {
+                  lang
+                  value
+                }
+                colorHex
+                simpleName {
+                  lang
+                  value
+                }
+              }
             }
             innerMaterial {
-              lang
-              value
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+            }
+            bottomMaterial {
+              material {
+                _id
+                name {
+                  lang
+                  value
+                }
+                additionalPrice {
+                  currency
+                  value
+                }
+              }
             }
             strapLengthInCm
             images {
@@ -222,68 +250,42 @@ const getProductById = async (id) => {
               }
               additional {
                 small
-                large
+                thumbnail
               }
             }
-            colors {
-              code
+            closure {
               name {
                 lang
                 value
               }
-              images {
-                thumbnail
-                large
-              }
-              available
             }
             pattern {
-              lang
-              value
-            }
-            closure {
-              lang
-              value
+              _id
+              name {
+                lang
+                value
+              }
             }
             basePrice {
-              value
               currency
+              value
             }
-            options {
-              size {
-                name
-                heightInCm
-                widthInCm
-                depthInCm
-                volumeInLiters
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
+            sizes {
+              _id
+              name
+              simpleName {
+                lang
+                value
               }
-              bottomMaterial {
-                name {
-                  lang
-                  value
-                }
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
+              volumeInLiters
+              weightInKg
+              available
+              additionalPrice {
+                currency
+                value
               }
             }
+            availableCount
             rate
             comments {
               items {
@@ -291,57 +293,14 @@ const getProductById = async (id) => {
                 text
                 date
                 user {
+                  _id
+                  firstName
+                  lastName
                   email
-                  name
                   images {
                     thumbnail
                   }
                 }
-              }
-            }
-            options {
-              size {
-                _id
-                name
-                volumeInLiters
-                widthInCm
-                weightInKg
-              }
-              bottomMaterial {
-                _id
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  value
-                  lang
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-            }
-            availableCount
-            images {
-              primary {
-                thumbnail
-                small
-                large
-                medium
-              }
-              additional {
-                large
-                medium
               }
             }
           }

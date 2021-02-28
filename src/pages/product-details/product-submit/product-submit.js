@@ -17,15 +17,9 @@ import {
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import {
-  setToastMessage,
-  setToastSettings
-} from '../../../redux/toast/toast.actions';
+import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 
-import {
-  PDP_BUTTONS,
-  TOOLTIPS
-} from '../../../translations/product-details.translations';
+import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
 
 import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 
@@ -38,15 +32,15 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   const { selectedSize } = productToSend;
 
-  const isWishful = useMemo(
-    () => wishlistItems.find((item) => product._id === item._id),
-    [product._id, wishlistItems]
-  );
+  const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
+    product._id,
+    wishlistItems
+  ]);
 
-  const sizeToSend = useMemo(
-    () => sizes.find(({ _id }) => _id === selectedSize),
-    [selectedSize, sizes]
-  );
+  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize), [
+    selectedSize,
+    sizes
+  ]);
 
   const wishlistTip = isWishful
     ? TOOLTIPS[language].removeWishful
@@ -61,21 +55,20 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       basePrice,
       images: { primary }
     } = product;
+
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
       dispatch(setToastMessage(toastMessages.removedFromWishList));
       dispatch(setToastSettings(toastSettings));
     } else {
-      dispatch(
-        addItemToWishlist({ _id, name, basePrice, images: { primary } })
-      );
+      dispatch(addItemToWishlist({ _id, name, basePrice, images: { primary } }));
       dispatch(setToastMessage(toastMessages.addedToWishList));
       dispatch(setToastSettings(toastSettings));
     }
   };
 
   const onAddToCart = () => {
-    if ((product && !product.options[0].size) || selectedSize) {
+    if ((product && !product.sizes[0].name) || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,

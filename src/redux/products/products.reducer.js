@@ -72,11 +72,7 @@ export const initialState = {
   },
   filterStatus: false
 };
-const setSort = ({
-  sortByPrice = 0,
-  sortByRate = 0,
-  sortByPopularity = 0
-}) => ({
+const setSort = ({ sortByPrice = 0, sortByRate = 0, sortByPopularity = 0 }) => ({
   sortByPrice,
   sortByRate,
   sortByPopularity
@@ -97,7 +93,7 @@ const productsReducer = (state = initialState, action = {}) => {
   case SET_CURRENT_PAGE:
     return {
       ...state,
-      currentPage: action.payload - 1
+      currentPage: action.payload
     };
   case SET_PRODUCTS_PER_PAGE:
     return {

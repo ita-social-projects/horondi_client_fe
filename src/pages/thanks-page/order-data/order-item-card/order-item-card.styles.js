@@ -8,17 +8,21 @@ export const useStyles = makeStyles(() => ({
   },
   image: {
     textAlign: 'center',
-    width: '25%'
+    width: '25%',
+    borderTop: '1px solid #636262',
+    borderBottom: '1px solid #636262'
   },
   description: ({ isLightTheme }) => ({
     textAlign: 'center',
     width: '25%',
-    color: isLightTheme ? '#ffffffff' : '#363636',
-    fontSize: 18,
-    fontWeight: 500
+    color: isLightTheme ? '#fff' : '#363636',
+    fontSize: 15,
+    fontWeight: 500,
+    borderTop: '1px solid #636262',
+    borderBottom: '1px solid #636262'
   }),
   imgItem: {
-    height: 170,
-    width: 150
+    height: 140,
+    width: 120
   }
 }));

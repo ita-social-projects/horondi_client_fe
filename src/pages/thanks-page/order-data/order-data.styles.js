@@ -5,8 +5,10 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     width: '25%',
     color: isLightTheme ? '#ffffffff' : '#363636',
-    fontSize: 18,
-    fontWeight: 500
+    fontSize: 15,
+    fontWeight: 500,
+    borderTop: '1px solid #636262',
+    borderBottom: '1px solid #636262'
   }),
   titleWrapper: {
     display: 'flex',
@@ -19,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: 40
   },
   thunksInfoTitle: {
-    fontSize: 25,
+    fontSize: 19,
     color: '#000000',
     fontWeight: 400,
     alignSelf: 'flex-start'
@@ -30,18 +32,31 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   tableHeader: {
-    borderTop: '1px solid #DADADA',
-    borderBottom: '1px solid #DADADA',
+    borderTop: '1px solid #636262',
+    borderBottom: '1px solid #636262',
     width: '100%',
     paddingBottom: 10,
     paddingTop: 10,
     '& >th': {
       padding: 8,
       textAlign: 'center'
-    }
+    },
+    marginBottom: '5%'
   },
   quantity: {
     color: 'grey',
     fontWeight: 'lighter'
-  }
+  },
+  result: {
+    width: '100%'
+  },
+
+  resultTitle: ({ isLightTheme }) => ({
+    width: '25%',
+    borderTop: '1px solid #636262',
+    borderBottom: '1px solid #636262',
+    color: isLightTheme ? '#ffffffff' : '#363636',
+    fontSize: 16,
+    fontWeight: 500
+  })
 }));

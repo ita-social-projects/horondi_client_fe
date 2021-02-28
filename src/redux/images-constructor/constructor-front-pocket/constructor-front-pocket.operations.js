@@ -10,6 +10,9 @@ export const getConstructorFrontPocketById = async (id) => {
           ... on ConstructorFrontPocket {
             _id
             image
+            basePrice {
+              value
+            }
           }
           ... on Error {
             message

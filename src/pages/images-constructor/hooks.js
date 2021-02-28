@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { selectConstructor } from '../../redux/selectors/multiple.selectors';
 import {
   getConstructorModelById,
@@ -20,7 +21,10 @@ export const useConstructor = () => {
     frontPocketImage,
     patternImage,
     bottomImage,
-    modelLoading
+    modelLoading,
+    basicPrice,
+    frontPocketPrice,
+    bottomPrice
   } = useSelector(selectConstructor);
 
   const models = constructorModel.modelsForConstructor;
@@ -42,9 +46,7 @@ export const useConstructor = () => {
     if (currentModel) {
       dispatch(setModelLoading(true));
       dispatch(getConstructorBasic(currentModel.constructorBasic[0]._id));
-      dispatch(
-        getConstructorFrontPocket(currentModel.constructorFrontPocket[0]._id)
-      );
+      dispatch(getConstructorFrontPocket(currentModel.constructorFrontPocket[0]._id));
       dispatch(getConstructorPattern(currentModel.constructorPattern[0]._id));
       dispatch(getConstructorBottom(currentModel.constructorBottom[0]._id));
     }
@@ -89,6 +91,11 @@ export const useConstructor = () => {
       changeBasic,
       changePattern,
       changeBottom
+    },
+    prices: {
+      basicPrice,
+      frontPocketPrice,
+      bottomPrice
     }
   };
 };

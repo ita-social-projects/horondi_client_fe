@@ -31,12 +31,39 @@ export const useStyles = makeStyles(() => ({
   },
   imageContainer: {
     maxHeight: '470px',
-    maxWidth: '35%'
+    width: '35%'
   },
   image: {
     width: '100%'
   },
   infoWrapper: {
+    display: 'flex'
+  },
+  pricesInfoWrapper: {
     width: '25%'
+  },
+  headerWrapper: {
+    marginLeft: '5%'
+  },
+  textWrapper: {
+    fontSize: '17px',
+    marginBottom: '12px'
+  },
+  priceWrapper: {
+    '& ul': {
+      '& li': {
+        width: '150px',
+        fontSize: '17px',
+        listStyleType: 'none'
+      }
+    }
+  },
+  priceItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    minWidth: '100%'
+  },
+  li: {
+    marginTop: '25px'
   }
 }));

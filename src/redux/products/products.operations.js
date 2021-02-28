@@ -54,6 +54,12 @@ const getAllFilters = async () => {
               value
             }
           }
+          maxPrice {
+            value
+          }
+          minPrice {
+            value
+          }
         }
       }
     `

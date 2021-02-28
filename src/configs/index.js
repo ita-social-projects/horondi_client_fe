@@ -121,18 +121,13 @@ export const formRegExp = {
   pass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/,
   phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
-  country:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  city:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  region:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  street:
-    "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  country: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  city: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  region: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  street: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  deliveryType:
-    "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
@@ -307,18 +302,9 @@ export const RESPONSIVE_CATEGORIES = {
 
 export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
-  added: [
-    'Ваш коментар успішно створений',
-    'Your comment is successfully added'
-  ],
-  updated: [
-    'Ваш коментар успішно оновлений',
-    'Your comment is successfully updated'
-  ],
-  deleted: [
-    'Ваш коментар успішно видалений',
-    'Your comment is successfully deleted'
-  ],
+  added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
+  updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
+  deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong']
 };
 export const COMMENT_DATA = {
@@ -450,7 +436,6 @@ export const sort = 'sort';
 export const countPerPage = 'countPerPage';
 export const page = 'page';
 export const deliveryTypeKey = 'deliveryType';
-
 export const deliveryTypes = {
   NOVAPOST: 'NOVAPOST',
   UKRPOST: 'UKRPOST',
@@ -458,3 +443,5 @@ export const deliveryTypes = {
   NOVAPOSTCOURIER: 'NOVAPOSTCOURIER',
   UKRPOSTCOURIER: 'UKRPOSTCOURIER'
 };
+
+export const CY_CODE_ERR = 'code-error';

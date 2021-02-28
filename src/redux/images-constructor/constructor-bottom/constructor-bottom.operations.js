@@ -10,6 +10,9 @@ export const getConstructorBottomById = async (id) => {
           ... on ConstructorBottom {
             _id
             image
+            basePrice {
+              value
+            }
           }
           ... on Error {
             message

@@ -32,12 +32,7 @@ export const selectCurrencyProductsCategoryFilter = ({
   productToSend
 });
 
-export const selectLanguageProductsUserWishlist = ({
-  Language,
-  Products,
-  User,
-  Wishlist
-}) => ({
+export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Wishlist }) => ({
   language: Language.language,
   productToSend: Products.productToSend,
   product: Products.product,
@@ -61,7 +56,14 @@ export const selectConstructor = ({ Constructor }) => ({
   frontPocketImage: Constructor.constructorFrontPocket.image,
   patternImage: Constructor.constructorPattern.constructorImg,
   bottomImage: Constructor.constructorBottom.image,
-  modelLoading: Constructor.constructorModel.modelLoading
+  modelLoading: Constructor.constructorModel.modelLoading,
+  basicPrice: Constructor.constructorBasic.basePrice,
+  frontPocketPrice: Constructor.constructorFrontPocket.basePrice,
+  bottomPrice: Constructor.constructorBottom.basePrice
+});
+export const selectLangAndCurrency = ({ Language, Currency }) => ({
+  language: Language.language,
+  currency: Currency.currency
 });
 
 export const selectToastSettings = (state) => state.Toast.toastSettings;

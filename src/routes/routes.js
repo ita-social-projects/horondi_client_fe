@@ -14,6 +14,7 @@ import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
 
+const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
 const NewsPage = lazy(() => import('../pages/news/news-page'));
 const PaymentsAndShipping = lazy(() => import('../pages/payments-and-shipping'));
 const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
@@ -56,6 +57,7 @@ const Routes = () => {
               <Route path='/news/:id' exact component={NewsDetail} />
               <Route path='/about-us' exact component={AboutUs} />
               <Route path='/materials' exact component={Materials} />
+              <Route path='/constructor' exact component={ImagesConstructor} />
               <Route path='/payment-and-shipping' exact component={PaymentsAndShipping} />
               <Route path='/privacy-policy' exact component={PrivacyPolicy} />
               <Route path='/wishlist' exact component={Wishlist} />

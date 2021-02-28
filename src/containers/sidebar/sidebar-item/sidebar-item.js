@@ -10,25 +10,11 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './sidebar-items.style';
 import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
 
-const SideBarItem = ({
-  category,
-  handlerItem,
-  models,
-  language,
-  name,
-  mainItemStyles
-}) => {
+const SideBarItem = ({ category, handlerItem, models, language, name, mainItemStyles }) => {
   const styles = useStyles();
   const history = useHistory();
   const [isListOpen, setIsListOpen] = useState(false);
-  const {
-    sort,
-    page,
-    countPerPage,
-    categoryFilter,
-    modelsFilter,
-    defaultPage
-  } = URL_QUERIES_NAME;
+  const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
   const handleClick = () => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
@@ -38,22 +24,14 @@ const SideBarItem = ({
   const handleModelClick = (productModels, categoryId) => {
     history.push('/');
     history.push(
-      `products/?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
+      `products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
     );
   };
   return (
     <>
       <li className={mainItemStyles}>
-        <ListItemText
-          button='true'
-          onClick={handleClick}
-          primary={name[language].value}
-        />
-        {isListOpen ? (
-          <RemoveIcon onClick={handleClick} />
-        ) : (
-          <AddIcon onClick={handleClick} />
-        )}
+        <ListItemText button='true' onClick={handleClick} primary={name[language].value} />
+        {isListOpen ? <RemoveIcon onClick={handleClick} /> : <AddIcon onClick={handleClick} />}
       </li>
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>

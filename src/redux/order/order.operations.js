@@ -2,7 +2,6 @@ import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
 export const addOrder = async (order) => {
-  console.log(order);
   const result = await client.mutate({
     variables: {
       order

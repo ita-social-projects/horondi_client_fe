@@ -30,6 +30,7 @@ export function* handleCartLoad() {
 
 export function* handleCartReset() {
   setToLocalStorage(cartKey, []);
+  setToLocalStorage(deliveryTypeKey, '');
   const cart = getFromLocalStorage(cartKey);
 
   yield put(setCart(cart));

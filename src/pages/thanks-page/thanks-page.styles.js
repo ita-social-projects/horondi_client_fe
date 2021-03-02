@@ -1,45 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/rectangle.png';
 
-export const useStyles = makeStyles((theme) => ({
-  thanks: {
-    background: `url(${BG}) no-repeat center`,
-    backgroundSize: 'cover',
-    height: '800px',
-    fontFamily: 'Montserrat',
-    color: '#FFFFFF',
+export const useStyles = makeStyles(() => ({
+  thanksContainer: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    padding: 50
-  },
-  thanksWrapper: {
-    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    flexDirection: 'column'
+    width: '100%'
   },
-  titleStyle: {
-    fontWeight: '600',
-    fontSize: '4em',
-    '@media (max-width: 768px)': {
-      fontSize: '3em'
-    }
-  },
-  buttonStyle: {
-    background: theme.palette.button.normal.backgroundColor,
-    borderRadius: '5px',
-    fontSize: '1.5em',
-    padding: 10,
-    color: theme.palette.button.normal.color,
-    '& a': {
-      color: 'inherit'
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
-    },
-    '@media (max-width: 768px)': {
-      fontSize: '1em',
-      padding: 5
-    }
+  thunksTitle: ({ isLightTheme }) => ({
+    fontSize: 30,
+    color: !isLightTheme ? '#ffffff' : '#000000',
+    fontWeight: 400,
+    marginBottom: 0
+  }),
+
+  thunksInfo: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }));

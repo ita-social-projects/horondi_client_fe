@@ -8,13 +8,10 @@ import {
   SET_CART_ITEM_QUANTITY,
   SET_CART_ITEM_CHECKED,
   ADD_DELIVERY_TYPE,
-  GET_DELIVERY_TYPE
+  GET_DELIVERY_TYPE,
+  RESET_CART
 } from './cart.types';
-import {
-  clearLocalStorage,
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import {
   addProductToUserCart,
   changeQuantityIntoUserCart,
@@ -28,7 +25,8 @@ export function* handleCartLoad() {
 }
 
 export function* handleCartReset() {
-  clearLocalStorage();
+  setToLocalStorage(cartKey, []);
+  setToLocalStorage(deliveryTypeKey, '');
   const cart = getFromLocalStorage(cartKey);
 
   yield put(setCart(cart));
@@ -36,6 +34,7 @@ export function* handleCartReset() {
 
 export function* handleDeliveryTypeLoad() {
   const deliveryType = getFromLocalStorage(deliveryTypeKey);
+
   yield put(setDeliveryType(deliveryType));
 }
 
@@ -178,4 +177,5 @@ export default function* cartSaga() {
   yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
   yield takeEvery(SET_CART_ITEM_CHECKED, handleSetCartItemChecked);
   yield takeEvery(ADD_DELIVERY_TYPE, handleSetDeliveryType);
+  yield takeEvery(RESET_CART, handleCartReset);
 }

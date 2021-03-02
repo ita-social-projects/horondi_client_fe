@@ -1,26 +1,54 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
-import { setError } from "../error/error.actions";
-import { setOrderLoading, setIsOrderCreated, setOrder } from "./order.actions";
-import { addOrder } from "./order.operations";
-import { SET_ORDER } from "./order.types";
+import { setError } from '../error/error.actions';
+import { setOrderLoading, setIsOrderCreated, setOrder } from './order.actions';
+import { addOrder } from './order.operations';
+import { ADD_ORDER, GET_ORDER, RESET_ORDER } from './order.types';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
+import { order } from '../../utils/order';
+import { setLoading } from '../news/news.actions';
+import routes from '../../configs/routes';
 
 export function* handleAddOrder({ payload }) {
   try {
     yield put(setOrderLoading(true));
 
     const newOrder = yield call(addOrder, payload);
+    setToLocalStorage(order, newOrder);
+
     yield put(setOrder(newOrder));
     yield put(setIsOrderCreated(true));
     yield put(setOrderLoading(false));
-
   } catch (e) {
-
-    yield put(setError(e.message));
-    yield put(setOrderLoading(false));
+    yield call(handleNewsError, e);
   }
 }
 
+export function* handleGetCreatedOrder() {
+  yield put(setOrderLoading(true));
+
+  const orderData = getFromLocalStorage(order);
+
+  yield put(setOrder(orderData));
+  yield put(setOrderLoading(false));
+}
+
+export function* handleOrderReset() {
+  setToLocalStorage(order, null);
+  const cart = getFromLocalStorage(order);
+
+  yield put(setOrder(cart));
+}
+
+export function* handleNewsError({ message }) {
+  yield put(setLoading(false));
+  yield put(setError(message));
+  yield put(push(routes.pathToErrorPage));
+}
+
 export default function* orderSaga() {
-  yield takeEvery(SET_ORDER, handleAddOrder);
+  yield takeEvery(ADD_ORDER, handleAddOrder);
+  yield takeEvery(GET_ORDER, handleGetCreatedOrder);
+  yield takeEvery(RESET_ORDER, handleOrderReset);
 }

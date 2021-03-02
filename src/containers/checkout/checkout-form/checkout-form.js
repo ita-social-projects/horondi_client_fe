@@ -199,10 +199,11 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {totalPriceToPay / 100}
-                  {currency === DEFAULT_CURRENCY
-                    ? CHECKOUT_TITLES[language].UAH
-                    : CHECKOUT_TITLES[language].USD}
+                  {`${totalPriceToPay / 100} ${
+                    currency === DEFAULT_CURRENCY
+                      ? CHECKOUT_TITLES[language].UAH
+                      : CHECKOUT_TITLES[language].USD
+                  }`}
                 </p>
               </div>
               <button type='submit' className={styles.submitBtn}>

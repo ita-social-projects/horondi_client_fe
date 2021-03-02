@@ -7,13 +7,16 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'space-around',
     alignItems: 'flex-start',
     width: '100%',
-    marginBottom: '3%'
+    marginBottom: '3%',
+    '@media (max-width: 1150px)': {
+      width: '80%'
+    }
   },
-  selfPickupTitlesWrapper:{
+  selfPickupTitlesWrapper: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width:'40%'
+    width: '40%'
   },
   selfPickupData: ({ isLightTheme }) => ({
     display: 'flex',

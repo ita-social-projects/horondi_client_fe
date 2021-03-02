@@ -1,19 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   thanksContainer: {
-    color: '#FFFFFF',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%'
   },
-  thunksTitle: {
+  thunksTitle: ({ isLightTheme }) => ({
     fontSize: 30,
-    color: '#000000',
+    color: !isLightTheme ? '#ffffff' : '#000000',
     fontWeight: 400,
     marginBottom: 0
-  },
+  }),
 
   thunksInfo: {
     width: '100%',

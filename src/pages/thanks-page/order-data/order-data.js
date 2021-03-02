@@ -3,10 +3,11 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 
 import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
 import { useStyles } from './order-data.styles';
-import { THANKS_PAGE_TITLE } from '../../../translations/thanks-page.translations';
+import { PAYMENT_STATUS, THANKS_PAGE_TITLE } from '../../../translations/thanks-page.translations';
 import OrderItemCard from './order-item-card';
-import { DEFAULT_CURRENCY, IMG_URL } from '../../../configs';
+import { defaultProps, ORDER_PAYMENT_STATUS, thanksPropTypes } from '../../../utils/thank-you';
 import { CHECKOUT_TITLES } from '../../../translations/checkout.translations';
+import { DEFAULT_CURRENCY } from '../../../configs';
 
 const OrderData = ({ language, currency, order, isLightTheme }) => {
   const styles = useStyles({ isLightTheme });
@@ -29,15 +30,28 @@ const OrderData = ({ language, currency, order, isLightTheme }) => {
           {order?.items.map((item) => (
             <OrderItemCard key={item._id} item={item} language={language} currency={currency} />
           ))}
-          <TableRow classes={{ root: styles.result }}>
-            <TableCell classes={{ root: styles.resultTitle }}>
-              {THANKS_PAGE_TITLE[language].result}
-            </TableCell>
-          </TableRow>
         </TableBody>
       </Table>
+      <div className={styles.result}>
+        <span className={styles.resultTitle}>{THANKS_PAGE_TITLE[language].result}</span>
+        <span className={styles.resultStatus}>
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.CREATED
+            ? PAYMENT_STATUS[language].created
+            : PAYMENT_STATUS[language].paid}
+        </span>
+        <span className={styles.resultTotalSum}>
+          {`${order?.totalPriceToPay[currency].value} ${
+            currency === DEFAULT_CURRENCY
+              ? CHECKOUT_TITLES[language].UAH
+              : CHECKOUT_TITLES[language].USD
+          }`}
+        </span>
+      </div>
     </div>
   );
 };
+
+OrderData.defaultProps = defaultProps;
+OrderData.propTypes = thanksPropTypes;
 
 export default OrderData;

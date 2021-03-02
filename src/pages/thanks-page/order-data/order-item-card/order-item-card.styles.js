@@ -6,20 +6,19 @@ export const useStyles = makeStyles(() => ({
     width: '100%',
     justifyContent: 'space-between'
   },
-  image: {
+  image: ({ isLightTheme }) => ({
     textAlign: 'center',
     width: '25%',
-    borderTop: '1px solid #636262',
-    borderBottom: '1px solid #636262'
-  },
+    borderTop: !isLightTheme ? '1px solid #636262' : '1px solid snow',
+    borderBottom: !isLightTheme ? '1px solid #636262' : '1px solid snow'
+  }),
   description: ({ isLightTheme }) => ({
     textAlign: 'center',
     width: '25%',
-    color: isLightTheme ? '#fff' : '#363636',
     fontSize: 15,
     fontWeight: 500,
-    borderTop: '1px solid #636262',
-    borderBottom: '1px solid #636262'
+    borderTop: !isLightTheme ? '1px solid #636262' : '1px solid snow',
+    borderBottom: !isLightTheme ? '1px solid #636262' : '1px solid snow'
   }),
   imgItem: {
     height: 140,

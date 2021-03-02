@@ -14,3 +14,14 @@ export const THANKS_PAGE_TITLE = {
     result: 'Result'
   }
 };
+
+export const PAYMENT_STATUS = {
+  0: {
+    created: 'Замовлення створено',
+    paid: 'Замовлення оплачено'
+  },
+  1: {
+    created: 'Order is created',
+    paid: 'Order is paid'
+  }
+};

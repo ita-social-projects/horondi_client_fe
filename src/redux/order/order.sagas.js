@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 import { setError } from '../error/error.actions';
 import { setOrderLoading, setIsOrderCreated, setOrder } from './order.actions';
 import { addOrder } from './order.operations';
-import { ADD_ORDER, GET_ORDER } from './order.types';
+import { ADD_ORDER, GET_ORDER, RESET_ORDER } from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { order } from '../../utils/order';
 import { setLoading } from '../news/news.actions';
@@ -26,9 +26,19 @@ export function* handleAddOrder({ payload }) {
 }
 
 export function* handleGetCreatedOrder() {
+  yield put(setOrderLoading(true));
+
   const orderData = getFromLocalStorage(order);
 
   yield put(setOrder(orderData));
+  yield put(setOrderLoading(false));
+}
+
+export function* handleOrderReset() {
+  setToLocalStorage(order, null);
+  const cart = getFromLocalStorage(order);
+
+  yield put(setOrder(cart));
 }
 
 export function* handleNewsError({ message }) {
@@ -40,4 +50,5 @@ export function* handleNewsError({ message }) {
 export default function* orderSaga() {
   yield takeEvery(ADD_ORDER, handleAddOrder);
   yield takeEvery(GET_ORDER, handleGetCreatedOrder);
+  yield takeEvery(RESET_ORDER, handleOrderReset);
 }

@@ -65,7 +65,7 @@ export const useStyles = makeStyles(() => ({
   }),
   resultTotalSum: ({ isLightTheme }) => ({
     width: '25%',
-    color: !isLightTheme ? '#ffffffff' : '#363636',
+    color: !isLightTheme ? '#ffffffff' : '#343434',
     fontSize: 16,
     fontWeight: 600,
     textAlign: 'center'

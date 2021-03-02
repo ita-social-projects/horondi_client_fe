@@ -11,11 +11,7 @@ import {
   GET_DELIVERY_TYPE,
   RESET_CART
 } from './cart.types';
-import {
-  clearLocalStorage,
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import {
   addProductToUserCart,
   changeQuantityIntoUserCart,

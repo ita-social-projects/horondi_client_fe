@@ -93,7 +93,7 @@
     "no-this-before-super": 2,
     "indent": [
       2,
-      1,
+      2,
       {
         "ignoreComments": true,
         "VariableDeclarator": {

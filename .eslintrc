@@ -92,8 +92,8 @@
     "consistent-return": 0,
     "no-this-before-super": 2,
     "indent": [
-      2,
-      2,
+      1,
+      1,
       {
         "ignoreComments": true,
         "VariableDeclarator": {

@@ -171,14 +171,6 @@ export const useStyles = makeStyles((theme) => ({
     color: '#636363',
     fontSize: '0.875rem'
   },
-
-  googleLogo: {
-    background: `url(${GoogleLogo}) no-repeat `,
-    backgroundSize: 'cover',
-    width: '22px',
-    height: '22px',
-    marginRight: '10px'
-  },
   registerContainer: {
     width: '100%',
     minHeight: '18px'

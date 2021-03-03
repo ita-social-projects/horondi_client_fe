@@ -1,14 +1,19 @@
 export const CONFIRM_EMAIL = [
   {
-    value:
-      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+    value: 'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
   },
   {
-    value:
-      'You have successfully registered! Please, confirm your email address.'
+    value: 'You have successfully registered! Please, confirm your email address.'
   }
 ];
-
+export const GOOGLE_SIGN_IN_TEXT = [
+  {
+    value: 'або увійдіть за допомогою'
+  },
+  {
+    value: 'or use your Google account to register'
+  }
+];
 export const LOGIN_FORM_LABEL = [
   {
     value: 'увійти'
@@ -104,8 +109,10 @@ export const errorMessages = [
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
-      pass: 'Від 6 до 30 символів з однією великою літерою та цифрою',
-      confirmPassword: 'Паролі не збігаються'
+      password: 'Від 6 до 30 символів з однією великою літерою та цифрою',
+      confirmPassword: 'Паролі не збігаються',
+      wrongFormat: 'Некоректний формат',
+      empty: 'Поле не повинне бути порожнім'
     }
   },
   {
@@ -113,8 +120,10 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
-      pass: 'From 6 to 30 characters with one capital letter and one digit',
-      confirmPassword: 'Passwords do not match'
+      password: 'From 6 to 30 characters with one capital letter and one digit',
+      confirmPassword: 'Passwords do not match',
+      wrongFormat: 'Wrong format',
+      empty: 'Field should not to be empty'
     }
   }
 ];
@@ -224,8 +233,7 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Password recovery',
     label: 'E-mail  ',
-    p:
-      'Specify your e-mail to reset the password and we will send recovery instructions.',
+    p: 'Specify your e-mail to reset the password and we will send recovery instructions.',
     button: 'Send'
   }
 ];
@@ -294,8 +302,7 @@ export const NEW_PASSWORD_ERROR = {
   ],
   DEFAULT_ERROR: [
     {
-      value:
-        'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
+      value: 'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
     },
     {
       value: 'An error occurred! Please, reload your page and try again.'

@@ -31,7 +31,13 @@ import {
   SET_UKRPOST_REGIONS
 } from '../checkout.types';
 
-// cities actions tests
+import {
+  fakeUkrPostRegions,
+  fakeUkrPostDistricts,
+  fakeUkrPostCities,
+  fakeUkrPostOffices
+} from './checkout.variables';
+
 describe('setCities action test', () => {
   let type;
   let setNPCitiesAction;
@@ -102,7 +108,6 @@ describe('get cities from NovaPoshta API', () => {
   });
 });
 
-// warehouses actions tests
 describe('setWarehouses action test', () => {
   let type;
   let setNPWarehousesAction;
@@ -193,7 +198,6 @@ describe('get warehouses from NovaPoshta API', () => {
   });
 });
 
-// prices actions tests
 describe('setPrices action test', () => {
   let type;
   let setNPPricesAction;
@@ -262,23 +266,11 @@ describe('get prices from NovaPoshta API', () => {
   });
 });
 
-// regions from UkrPoshta action tests
 describe('set regions from UkrPoshta action test', () => {
   let type;
   let setUPRegionsAction;
 
-  const payload = [
-    {
-      REGION_ID: '1',
-      REGION_UA: 'Вінницька',
-      REGION_EN: 'Vinnytska'
-    },
-    {
-      REGION_ID: '2',
-      REGION_UA: 'Волинська',
-      REGION_EN: 'Volynska'
-    }
-  ];
+  const payload = fakeUkrPostRegions.data.getUkrPoshtaRegions;
 
   beforeEach(() => {
     type = SET_UKRPOST_REGIONS;
@@ -326,37 +318,11 @@ describe('get regions from UkrPoshta API', () => {
   });
 });
 
-// districts from UkrPoshta action tests
 describe('set districts from UkrPoshta action test', () => {
   let type;
   let setUPDistrictsAction;
 
-  const payload = [
-    {
-      REGION_ID: '4',
-      REGION_UA: 'Дніпропетровська',
-      REGION_EN: 'Dnipropetrovska',
-      DISTRICT_ID: '62',
-      DISTRICT_UA: 'Апостолівський',
-      DISTRICT_EN: 'Apostolivskyi'
-    },
-    {
-      REGION_ID: '4',
-      REGION_UA: 'Дніпропетровська',
-      REGION_EN: 'Dnipropetrovska',
-      DISTRICT_ID: '63',
-      DISTRICT_UA: 'Вільногірськ',
-      DISTRICT_EN: 'Vilnohirsk'
-    },
-    {
-      REGION_ID: '4',
-      REGION_UA: 'Дніпропетровська',
-      REGION_EN: 'Dnipropetrovska',
-      DISTRICT_ID: '584',
-      DISTRICT_UA: 'Дніпро (місто)',
-      DISTRICT_EN: 'Dnipro (city)'
-    }
-  ];
+  const payload = fakeUkrPostDistricts.data.getUkrPoshtaDistrictsByRegionId;
 
   beforeEach(() => {
     type = SET_UKRPOST_DISTRICTS;
@@ -419,24 +385,11 @@ describe('get districts from UkrPoshta API', () => {
   });
 });
 
-// cities from UkrPoshta action tests
 describe('set cities from UkrPoshta action test', () => {
   let type;
   let setUPCitiesAction;
 
-  const payload = [
-    {
-      REGION_ID: '4',
-      REGION_UA: 'Дніпропетровська',
-      REGION_EN: 'Dnipropetrovska',
-      DISTRICT_ID: '584',
-      DISTRICT_UA: 'Дніпро (місто)',
-      DISTRICT_EN: 'Dnipro (city)',
-      CITY_ID: '10748',
-      CITY_UA: 'Дніпро',
-      CITY_EN: 'Dnipro'
-    }
-  ];
+  const payload = fakeUkrPostCities.data.getUkrPoshtaCitiesByDistrictId;
 
   beforeEach(() => {
     type = SET_UKRPOST_CITIES;
@@ -508,39 +461,11 @@ describe('get cities from UkrPoshta API', () => {
   });
 });
 
-// post offices from UkrPoshta action tests
 describe('set post offices from UkrPoshta action test', () => {
   let type;
   let setUPPostOfficesAction;
 
-  const payload = [
-    {
-      CITY_ID: '10748',
-      CITY_UA: 'Дніпро',
-      CITY_UA_TYPE: 'м.',
-      POSTTERMINAL: '1',
-      POSTOFFICE_ID: '12489',
-      POSTOFFICE_UA: '49000 Дніпро',
-      POSTCODE: '49000',
-      ISAUTOMATED: '1',
-      PHONE: '056-744-81-90, 050-160-97-27',
-      STREET_ID_VPZ: '448135',
-      STREET_UA_VPZ: 'просп. Дмитра Яворницького, 62'
-    },
-    {
-      CITY_ID: '10748',
-      CITY_UA: 'Дніпро',
-      CITY_UA_TYPE: 'м.',
-      POSTTERMINAL: '1',
-      POSTOFFICE_ID: '19192',
-      POSTOFFICE_UA: '49001 Дніпро',
-      POSTCODE: '49001',
-      ISAUTOMATED: '1',
-      PHONE: null,
-      STREET_ID_VPZ: '64624',
-      STREET_UA_VPZ: 'вул. Михайла Грушевського, 10'
-    }
-  ];
+  const payload = fakeUkrPostOffices.data.getUkrPoshtaPostofficesCityId;
 
   beforeEach(() => {
     type = SET_UKRPOST_POSTOFFICES;

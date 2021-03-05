@@ -8,7 +8,8 @@ import {
   mockConstructorModel,
   mockError,
   methodCall,
-  methodPut
+  methodPut,
+  mockState
 } from '../../constructor.variables';
 import { handleConstructorBasicLoad, handleError } from '../constructor-basic.sagas';
 import { getConstructorBasicById } from '../constructor-basic.operations';
@@ -23,7 +24,7 @@ describe('test for basic sagas', () => {
   it('should load constructor basic data', () =>
     expectSaga(handleConstructorBasicLoad, { payload: mockId })
       .provide([[call(getConstructorBasicById, mockId), mockConstructorModel]])
-      .withReducer(constructorBasic, {})
+      .withReducer(constructorBasic, mockState)
       .put(setConstructorBasic(mockConstructorModel))
       .hasFinalState(mockConstructorModel)
       .run()

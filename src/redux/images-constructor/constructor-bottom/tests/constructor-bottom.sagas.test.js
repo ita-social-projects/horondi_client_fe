@@ -8,7 +8,8 @@ import {
   mockConstructorModel,
   mockError,
   methodCall,
-  methodPut
+  methodPut,
+  mockState
 } from '../../constructor.variables';
 import { handleConstructorBottomLoad, handleError } from '../constructor-bottom.sagas';
 import { getConstructorBottomById } from '../constructor-bottom.operations';
@@ -23,7 +24,7 @@ describe('test for bottom sagas', () => {
   it('should load constructor bottom data', () =>
     expectSaga(handleConstructorBottomLoad, { payload: mockId })
       .provide([[call(getConstructorBottomById, mockId), mockConstructorModel]])
-      .withReducer(constructorBottom, {})
+      .withReducer(constructorBottom, mockState)
       .put(setConstructorBottom(mockConstructorModel))
       .hasFinalState(mockConstructorModel)
       .run()

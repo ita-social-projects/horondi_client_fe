@@ -1,13 +1,13 @@
 import { setConstructorBottom } from '../constructor-bottom.actions';
-import { mockConstructorModel } from '../../constructor.variables';
+import { mockConstructorModel, mockState } from '../../constructor.variables';
 import constructorBottom from '../constructor-bottom.reducer';
 
 describe('reducer tests', () => {
   it('should return default store', () => {
-    expect(constructorBottom({})).toEqual({});
+    expect(constructorBottom(mockState)).toEqual(mockState);
   });
   it('should set constructor bottom data to store', () => {
-    expect(constructorBottom({}, setConstructorBottom(mockConstructorModel))).toEqual(
+    expect(constructorBottom(mockState, setConstructorBottom(mockConstructorModel))).toEqual(
       mockConstructorModel
     );
   });

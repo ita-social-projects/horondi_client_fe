@@ -1,3 +1,4 @@
+export const mockState = {};
 export const mockId = '6024a1aff38a1b3938db6fd9';
 export const mockConstructorModel = {
   _id: '6024a1aff38a1b3938db6fd9',

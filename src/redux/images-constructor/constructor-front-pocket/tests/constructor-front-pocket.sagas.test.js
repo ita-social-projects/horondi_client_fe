@@ -8,7 +8,8 @@ import {
   mockConstructorModel,
   mockError,
   methodCall,
-  methodPut
+  methodPut,
+  mockState
 } from '../../constructor.variables';
 import { handleConstructorFrontPocketLoad, handleError } from '../constructor-front-pocket.sagas';
 import { getConstructorFrontPocketById } from '../constructor-front-pocket.operations';
@@ -23,7 +24,7 @@ describe('test for front pocket sagas', () => {
   it('should load constructor front pocket data', () =>
     expectSaga(handleConstructorFrontPocketLoad, { payload: mockId })
       .provide([[call(getConstructorFrontPocketById, mockId), mockConstructorModel]])
-      .withReducer(constructorBottom, {})
+      .withReducer(constructorBottom, mockState)
       .put(setConstructorFrontPocket(mockConstructorModel))
       .hasFinalState(mockConstructorModel)
       .run()

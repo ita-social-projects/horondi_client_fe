@@ -1,32 +1,31 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Card } from '@material-ui/core';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
-import Comments from './comments';
-import SimilarProducts from './similar-products';
+import ProductImages from './product-images';
+import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
 import ProductSubmit from './product-submit';
-import ProductFeatures from './product-features/product-features';
-import ProductInfo from './product-info';
-import ProductImages from './product-images';
+import SimilarProducts from './similar-products';
+import Comments from './comments';
+
 import { Loader } from '../../components/loader/loader';
 import {
   clearProductToSend,
-  getFiltredProducts,
   getProduct,
   setCategoryFilter,
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_PRICE, DEFAULT_SIZE } from '../../configs';
+import { DEFAULT_PRICE } from '../../configs';
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { product, isLoading, categoryFilter, productToSend, currency } = useSelector(
+  const { isLoading, productToSend, currency, product } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
   const dispatch = useDispatch();
@@ -40,22 +39,17 @@ const ProductDetails = ({ match }) => {
     _id: productId,
     name: productName,
     basePrice,
-    bottomMaterial,
     images,
-    options = [],
     category,
-    sizes
+    sizes,
+    mainMaterial,
+    pattern
   } = product || {};
 
   const { selectedSize } = productToSend;
 
-  const defaultSize = useMemo(
-    () => (options[0] ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE) : {}),
-    [options]
-  );
+  const { volumeInLiters, weightInKg } = sizes ? sizes[0] : {};
 
-  const { volumeInLiters, weightInKg } =
-    (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
   useEffect(() => {
     dispatch(getProduct(id));
     window.scrollTo(0, 0);
@@ -70,7 +64,10 @@ const ProductDetails = ({ match }) => {
           name: productName,
           image: images.additional.small,
           totalPrice: basePrice,
-          dimensions: { volumeInLiters, weightInKg }
+          dimensions: { volumeInLiters, weightInKg },
+          categoryID: category._id,
+          mainMaterialColorID: mainMaterial.color._id,
+          patternID: pattern._id
         })
       );
     }
@@ -91,84 +88,6 @@ const ProductDetails = ({ match }) => {
     images,
     currency
   ]);
-
-  useEffect(() => {
-    if (categoryFilter) {
-      dispatch(getFiltredProducts({}));
-    }
-  }, [dispatch, categoryFilter]);
-
-  // const uniqueSizes = useMemo(
-  //   () => [
-  //     ...new Set(
-  //       options.length && options[0].size
-  //         ? options.map(({ size: { available, name } }) => available && name)
-  //         : null
-  //     )
-  //   ],
-  //   [options]
-  // );
-
-  const uniqueBottomMaterials = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].bottomMaterial
-          ? options.map(({ bottomMaterial: item }) =>
-            item && item.available ? item.name[1].value : null
-          )
-          : null
-      )
-    ],
-    [options]
-  );
-
-  const uniqueAdditions = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].additions
-          ? options
-            .filter(({ additions }) => additions.length > 0)
-            .map(({ additions: [{ name }] }) => name[1].value)
-          : null
-      )
-    ],
-    [options]
-  );
-
-  const productAdditions = useMemo(
-    () =>
-      options.length
-        ? uniqueAdditions.map(
-          (item) =>
-            options
-              .filter(({ additions }) => additions.length > 0)
-              .find(({ additions: [{ name }] }) => item === name[1].value).additions[0]
-        )
-        : null,
-    [uniqueAdditions, options]
-  );
-
-  // const sizes = useMemo(
-  //   () =>
-  //     options.length
-  //       ? uniqueSizes.map(
-  //         (item) => options.find(({ size: { name } }) => item === name).size
-  //       )
-  //       : null,
-  //   [uniqueSizes, options]
-  // );
-
-  const bottomMaterials = useMemo(
-    () =>
-      uniqueBottomMaterials[0] && options && options.length
-        ? uniqueBottomMaterials.map(
-          (item) =>
-            options.find(({ bottomMaterial: { name } }) => item === name[1].value)
-              .bottomMaterial
-        )
-        : null,
-    [uniqueBottomMaterials, options]
-  );
 
   const handleSizeChange = (selectedId) => {
     const oldPrice = selectedSize
@@ -213,18 +132,7 @@ const ProductDetails = ({ match }) => {
             sizes={sizes}
             sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
-          <ProductFeatures
-            currencySign={currencySign}
-            bottomMaterial={bottomMaterial}
-            bottomMaterials={bottomMaterials}
-            additions={productAdditions}
-          />
-          <ProductSubmit
-            bottomMaterials={bottomMaterials}
-            sizes={sizes}
-            productToSend={productToSend}
-            setSizeIsNotSelectedError={setSizeIsNotSelectedError}
-          />
+          <ProductSubmit sizes={sizes} setSizeIsNotSelectedError={setSizeIsNotSelectedError} />
         </div>
       </div>
       <SimilarProducts currencySign={currencySign} />

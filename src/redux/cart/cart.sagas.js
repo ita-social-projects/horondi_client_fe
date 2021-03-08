@@ -53,7 +53,6 @@ export function* handleAddCartItem({ payload }) {
       item._id === payload._id &&
         item.selectedSize._id === payload.selectedSize._id &&
         item.sidePocket === payload.sidePocket &&
-        item.bottomMaterial.material._id === payload.bottomMaterial.material._id &&
         item.quantity++;
       return item;
     });

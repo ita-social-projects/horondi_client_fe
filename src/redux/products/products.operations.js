@@ -119,15 +119,11 @@ const getFilteredProducts = async ({ state, currency }) => {
           ... on PaginatedProducts {
             items {
               _id
-              purchasedCount
-              availableCount
-              name {
-                lang
-                value
-              }
-              basePrice {
-                value
-                currency
+              category {
+                _id
+                name {
+                  value
+                }
               }
               model {
                 _id
@@ -135,16 +131,13 @@ const getFilteredProducts = async ({ state, currency }) => {
                   value
                 }
               }
-              rate
-              images {
-                primary {
-                  large
-                  medium
-                  small
-                }
+              name {
+                lang
+                value
               }
               mainMaterial {
                 color {
+                  _id
                   name {
                     lang
                     value
@@ -155,19 +148,28 @@ const getFilteredProducts = async ({ state, currency }) => {
                   }
                 }
               }
+              images {
+                primary {
+                  large
+                  medium
+                  small
+                }
+              }
               pattern {
+                _id
                 name {
                   lang
                   value
                 }
               }
-              category {
-                _id
-                name {
-                  value
-                }
+              basePrice {
+                value
+                currency
               }
               isHotItem
+              purchasedCount
+              availableCount
+              rate
             }
             count
           }
@@ -243,7 +245,7 @@ const getProductById = async (id) => {
                   value
                 }
                 additionalPrice {
-                  currency
+                  # currency
                   value
                 }
               }
@@ -251,10 +253,14 @@ const getProductById = async (id) => {
             strapLengthInCm
             images {
               primary {
-                medium
                 large
+                medium
+                small
+                thumbnail
               }
               additional {
+                large
+                medium
                 small
                 thumbnail
               }
@@ -309,6 +315,10 @@ const getProductById = async (id) => {
                 }
               }
             }
+          }
+          ... on Error {
+            statusCode
+            message
           }
         }
       }

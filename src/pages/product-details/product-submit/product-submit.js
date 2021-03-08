@@ -42,9 +42,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     sizes
   ]);
 
-  const wishlistTip = isWishful
-    ? TOOLTIPS[language].removeWishful
-    : TOOLTIPS[language].addWishful;
+  const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
 
   const toastMessages = TOAST_MESSAGE[language];
 
@@ -83,7 +81,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if ((product && !product.options[0].size) || selectedSize) {
+    if ((product && !product.sizes[0].name) || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,
@@ -100,11 +98,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     <div className={styles.submit}>
       <Tooltip title={wishlistTip} placement='bottom'>
         {isWishful ? (
-          <FavoriteIcon
-            data-cy='wishful'
-            className={styles.redHeart}
-            onClick={onWishfulHandler}
-          />
+          <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={onWishfulHandler} />
         ) : (
           <FavouriteBorderIcon
             data-cy='not-wishful'

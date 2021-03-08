@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
@@ -16,9 +15,11 @@ import {
   PRODUCT_DESCRIPTION,
   WEIGHT
 } from '../../../translations/product-details.translations';
+
+import { CURRENCIES_LIST } from '../../../configs/index';
 import Detail from '../detail';
 
-const ProductInfo = ({ currencySign }) => {
+const ProductInfo = () => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
@@ -31,6 +32,7 @@ const ProductInfo = ({ currencySign }) => {
     description,
     mainMaterial,
     innerMaterial,
+    bottomMaterial,
     strapLengthInCm,
     currentPrice,
     currentWeight,
@@ -43,6 +45,7 @@ const ProductInfo = ({ currencySign }) => {
     description: product.description,
     mainMaterial: product.mainMaterial,
     innerMaterial: product.innerMaterial,
+    bottomMaterial: product.bottomMaterial,
     strapLengthInCm: product.strapLengthInCm,
     currentPrice: product.basePrice,
     currentWeight: productToSend.dimensions.weightInKg,
@@ -69,14 +72,14 @@ const ProductInfo = ({ currencySign }) => {
           subtitle={PRODUCT_DESCRIPTION[language].mainMaterial}
           description={` - ${mainMaterial.material.name[language].value}`}
         />
-        <div>
-          {innerMaterial.length >= 1 ? (
-            <Detail
-              subtitle={PRODUCT_DESCRIPTION[language].innerMaterial}
-              description={` - ${innerMaterial[language].value}`}
-            />
-          ) : null}
-        </div>
+        <Detail
+          subtitle={PRODUCT_DESCRIPTION[language].innerMaterial}
+          description={` - ${innerMaterial.material.name[language].value}`}
+        />
+        <Detail
+          subtitle={PRODUCT_DESCRIPTION[language].bottomMaterial}
+          description={` - ${bottomMaterial.material.name[language].value}`}
+        />
         {strapLengthInCm ? (
           <Detail
             subtitle={PRODUCT_DESCRIPTION[language].strapLengthInCm}
@@ -85,22 +88,16 @@ const ProductInfo = ({ currencySign }) => {
         ) : null}
         {currentVolume && currentWeight ? (
           <div>
-            <Detail
-              subtitle={WEIGHT[language].volumeLabel}
-              description={` - ${currentVolume}`}
-            />
-            <Detail
-              subtitle={WEIGHT[language].weightLabel}
-              description={` - ${currentWeight}`}
-            />
+            <Detail subtitle={WEIGHT[language].volumeLabel} description={` - ${currentVolume}`} />
+            <Detail subtitle={WEIGHT[language].weightLabel} description={` - ${currentWeight}`} />
           </div>
         ) : null}
       </div>
       <div className={styles.priceContainer}>
         <span className={styles.subtitle}>{PRODUCT_PRICE[language].price}: </span>
         <span data-cy='price' className={styles.price}>
-          <FontAwesomeIcon icon={currencySign} />
-          {currentPrice[currency].value / 100}
+          {currentPrice[currency].value / 100}&nbsp;
+          {CURRENCIES_LIST[currency].currency}
         </span>
       </div>
       <div className={styles.look}>

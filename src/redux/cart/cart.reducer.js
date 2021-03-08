@@ -1,13 +1,13 @@
-import { SET_CART, SET_DELIVERY_TYPE } from "./cart.types";
+import { SET_CART, SET_DELIVERY_TYPE } from './cart.types';
 
 const initialState = {
   list: [],
-  deliveryType: ""
+  deliveryType: ''
 };
 
 export const cartReducer = (state = initialState, { type, payload } = {}) => {
   switch (type) {
-    case  SET_CART: {
+    case SET_CART: {
       return {
         list: payload
       };
@@ -21,5 +21,4 @@ export const cartReducer = (state = initialState, { type, payload } = {}) => {
     default:
       return state;
   }
-
 };

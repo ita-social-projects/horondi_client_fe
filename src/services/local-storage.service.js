@@ -2,7 +2,7 @@ import {
   DEFAULT_CURRENCY,
   DEFAULT_LANGUAGE,
   DEFAULT_COUNT_PER_PAGE
-} from "../configs";
+} from '../configs';
 
 export const clearLocalStorage = () => {
   const horondi = {
@@ -12,19 +12,20 @@ export const clearLocalStorage = () => {
     language: DEFAULT_LANGUAGE,
     currency: DEFAULT_CURRENCY,
     cart: [],
-    theme: "light",
+    theme: 'light',
     countPerPage: DEFAULT_COUNT_PER_PAGE,
-    deliveryType: ""
+    deliveryType: '',
+    order: null
   };
-  localStorage.setItem("horondi", JSON.stringify(horondi));
+  localStorage.setItem('horondi', JSON.stringify(horondi));
 };
 
-if (!localStorage.getItem("horondi")) {
+if (!localStorage.getItem('horondi')) {
   clearLocalStorage();
 }
 
 export const getFromLocalStorage = (name) => {
-  const localObject = JSON.parse(localStorage.getItem("horondi"));
+  const localObject = JSON.parse(localStorage.getItem('horondi'));
   if (!localObject) {
     return null;
   }
@@ -32,7 +33,7 @@ export const getFromLocalStorage = (name) => {
 };
 
 export const setToLocalStorage = (name, item) => {
-  const localObject = JSON.parse(localStorage.getItem("horondi"));
+  const localObject = JSON.parse(localStorage.getItem('horondi'));
   localObject[name] = item;
-  localStorage.setItem("horondi", JSON.stringify(localObject));
+  localStorage.setItem('horondi', JSON.stringify(localObject));
 };

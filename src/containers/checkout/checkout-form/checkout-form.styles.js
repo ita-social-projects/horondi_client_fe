@@ -21,7 +21,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 400,
     color: isLightTheme ? '#4E4E4E' : '#fffff',
     width: '40%',
-    marginLeft: '2%'
+    marginLeft: '2%',
+    '@media (max-width: 920px)': {
+      width: '80%'
+    }
   }),
   paymentTitle: {
     marginTop: '3%'
@@ -39,7 +42,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'flex-start',
     width: '100%',
-    marginLeft: 10
+    marginLeft: 10,
+    '@media (max-width: 700px)': {
+      flexDirection: 'column',
+      width: '80%'
+    }
   },
   a: {
     margin: 0
@@ -59,13 +66,19 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   userInfoContainer: {
-    width: '60%'
+    width: '60%',
+    '@media (max-width: 700px)': {
+      width: '100%'
+    }
   },
   contactInfoWrapper: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    '@media (max-width: 700px)': {
+      width: '100%'
+    }
   },
   error: {
     color: '#e60000',
@@ -73,7 +86,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   textField: {
     width: 300,
-    margin: 10
+    margin: 10,
+    '@media (max-width: 700px)': {
+      width: '100%'
+    }
   },
   textAreaField: {
     width: 500,
@@ -137,11 +153,18 @@ export const useStyles = makeStyles(({ palette }) => ({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     width: '36%',
+    '@media (max-width: 1150px)': {
+      width: '100%',
+      marginTop: '2%'
+    },
     marginRight: '2%'
   },
   inputData: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '@media (max-width: 700px)': {
+      width: '100%'
+    }
   },
   checkoutTitleInfo: {
     display: 'flex',
@@ -171,7 +194,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 400,
     color: isLightTheme ? '#000000' : '#ffffff',
     margin: '10px 0 10px 2%',
-    width: '100%'
+    width: '100%',
+    '@media (max-width: 920px)': {
+      width: '100%'
+    }
   }),
   checkoutYourOrderTitleData: {
     display: 'flex',
@@ -181,6 +207,9 @@ export const useStyles = makeStyles(({ palette }) => ({
   checkoutTitleLine: {
     width: '80%',
     background: '#636262',
-    height: 1
+    height: 1,
+    '@media (max-width: 920px)': {
+      width: 400
+    }
   }
 }));

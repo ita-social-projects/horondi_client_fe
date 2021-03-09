@@ -1,27 +1,52 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
+
 import { useStyles } from './thanks-page.styles';
-import {
-  THANKS_PAGE_TITLE,
-  THANKS_PAGE_BUTTON
-} from '../../translations/thanks-page.translations';
+import { THANKS_PAGE_TITLE } from '../../translations/thanks-page.translations';
+import OrderData from './order-data';
+import { getOrder, resetOrder } from '../../redux/order/order.actions';
+import routes from '../../configs/routes';
+import { resetCart } from '../../redux/cart/cart.actions';
 
 const ThanksPage = () => {
-  const styles = useStyles();
-  const language = useSelector((state) => state.Language.language);
+  const dispatch = useDispatch();
+  const { language, currency, order, loading, isLightTheme } = useSelector(
+    ({ Language, Currency, Order, Theme }) => ({
+      language: Language.language,
+      currency: Currency.currency,
+      order: Order.order,
+      loading: Order.loading,
+      isLightTheme: Theme.lightMode
+    })
+  );
+  const styles = useStyles({
+    isLightTheme
+  });
 
+  useEffect(() => {
+    dispatch(resetCart());
+    dispatch(getOrder());
+    return () => {
+      dispatch(resetOrder());
+    };
+  }, []);
   return (
-    <div className={styles.thanks}>
-      <div className={styles.thanksWrapper}>
-        <div className={styles.titleStyle}>
-          {THANKS_PAGE_TITLE[language].thanks}
-        </div>
-        <Button className={styles.buttonStyle}>
-          <Link to='/'>{THANKS_PAGE_BUTTON[language].continueShopping}</Link>
-        </Button>
-      </div>
+    <div className={styles.thanksContainer}>
+      {!order && <Redirect to={routes.pathToMain} />}
+      {!loading && (
+        <>
+          <h2 className={styles.thunksTitle}>{THANKS_PAGE_TITLE[language].thanks}</h2>
+          <div className={styles.thunksInfo}>
+            <OrderData
+              order={order}
+              language={language}
+              currency={currency}
+              isLightTheme={isLightTheme}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

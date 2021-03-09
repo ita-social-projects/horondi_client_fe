@@ -15,3 +15,4 @@ Original             |  Updated
 - [ ] 🔽 My branch is up-to-date with "development" branch
 - [ ] ✅All tests passed locally
 - [ ] ✨My changes working with up-to-date admin and back-end part locally, like charm
+- [ ] 🔗 Link pull request to issue

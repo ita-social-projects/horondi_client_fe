@@ -23,7 +23,7 @@ const OurLooks = () => {
               <div
                 className={styles.image}
                 style={{
-                  backgroundImage: `url("${IMG_URL}${image.images.medium}")`
+                  backgroundImage: `url("${IMG_URL}${image.images.medium}"sh)`
                 }}
               />
             </div>

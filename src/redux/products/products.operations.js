@@ -24,12 +24,12 @@ const getAllFilters = async () => {
               value
             }
           }
-          closures {
-            _id
-            name {
-              value
-            }
-          }
+          # closures {
+          #   _id
+          #   name {
+          #     value
+          #   }
+          # }
           mainMaterial {
             _id
             name {
@@ -289,6 +289,9 @@ const getProductById = async (id) => {
                 lang
                 value
               }
+              heightInCm
+              widthInCm
+              depthInCm
               volumeInLiters
               weightInKg
               available

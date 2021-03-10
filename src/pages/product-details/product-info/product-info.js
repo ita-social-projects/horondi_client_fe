@@ -19,7 +19,7 @@ import {
 import { CURRENCIES_LIST } from '../../../configs/index';
 import Detail from '../detail';
 
-const ProductInfo = () => {
+const ProductInfo = ({ price }) => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
@@ -47,7 +47,7 @@ const ProductInfo = () => {
     innerMaterial: product.innerMaterial,
     bottomMaterial: product.bottomMaterial,
     strapLengthInCm: product.strapLengthInCm,
-    currentPrice: product.basePrice,
+    currentPrice: productToSend.totalPrice || price,
     currentWeight: productToSend.dimensions.weightInKg,
     currentVolume: productToSend.dimensions.volumeInLiters,
     currency: Currency.currency

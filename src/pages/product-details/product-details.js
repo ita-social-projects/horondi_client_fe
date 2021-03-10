@@ -20,7 +20,6 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_PRICE } from '../../configs';
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 
 const ProductDetails = ({ match }) => {
@@ -33,22 +32,24 @@ const ProductDetails = ({ match }) => {
 
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
-  const currencySign = currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+  let currencySign;
 
-  const {
-    _id: productId,
-    name: productName,
-    basePrice,
-    images,
-    category,
-    sizes,
-    mainMaterial,
-    pattern
-  } = product || {};
+  switch (currency) {
+    case 0:
+      currencySign = faHryvnia;
+      break;
+    case 1:
+      currencySign = faDollarSign;
+      break;
+    default:
+      currencySign = '';
+      break;
+  }
 
-  const { selectedSize } = productToSend;
+  const { _id: productId, name: productName, images, category, sizes, mainMaterial, pattern } =
+    product || {};
 
-  const { volumeInLiters, weightInKg } = sizes ? sizes[0] : {};
+  const currentSize = sizes ? sizes.find(({ name }) => name === 'M') : {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -63,8 +64,11 @@ const ProductDetails = ({ match }) => {
           _id: productId,
           name: productName,
           image: images.additional.small,
-          totalPrice: basePrice,
-          dimensions: { volumeInLiters, weightInKg },
+          totalPrice: currentSize.additionalPrice,
+          dimensions: {
+            volumeInLiters: currentSize.volumeInLiters,
+            weightInKg: currentSize.weightInKg
+          },
           categoryID: category._id,
           mainMaterialColorID: mainMaterial.color._id,
           patternID: pattern._id
@@ -77,9 +81,8 @@ const ProductDetails = ({ match }) => {
       dispatch(clearProductToSend());
     };
   }, [
-    basePrice,
-    volumeInLiters,
-    weightInKg,
+    currentSize.volumeInLiters,
+    currentSize.weightInKg,
     product,
     category,
     dispatch,
@@ -90,25 +93,17 @@ const ProductDetails = ({ match }) => {
   ]);
 
   const handleSizeChange = (selectedId) => {
-    const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
-      : DEFAULT_PRICE;
-
-    const size = sizes.find(({ _id }) => _id === selectedId);
-    const newTotalPrice = productToSend.totalPrice.map((item, i) => {
-      item.value = item.value - oldPrice[i].value + size.additionalPrice[i].value;
-      return item;
-    });
+    const selectedSize = sizes.find(({ _id }) => _id === selectedId);
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: newTotalPrice,
+        totalPrice: selectedSize.additionalPrice,
         dimensions: {
-          volumeInLiters: size.volumeInLiters,
-          weightInKg: size.weightInKg
+          volumeInLiters: selectedSize.volumeInLiters,
+          weightInKg: selectedSize.weightInKg
         },
-        selectedSize: selectedId
+        selectedSize: selectedSize._id
       })
     );
 
@@ -126,7 +121,7 @@ const ProductDetails = ({ match }) => {
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo currencySign={currencySign} />
+          <ProductInfo currencySign={currencySign} price={currentSize.additionalPrice} />
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}

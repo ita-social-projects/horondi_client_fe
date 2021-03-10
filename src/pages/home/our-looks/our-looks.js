@@ -6,9 +6,7 @@ import { IMG_URL } from '../../../configs';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 
 const OurLooks = () => {
-  const looksImages = useSelector(
-    ({ HomePageImages }) => HomePageImages.imageList
-  );
+  const looksImages = useSelector(({ HomePageImages }) => HomePageImages.imageList);
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -17,23 +15,19 @@ const OurLooks = () => {
   }, [dispatch]);
 
   return (
-    <div
-      className={styles.horondiStyle}
-      data-section-style='light'
-      id='horondiStyle'
-    >
+    <div className={styles.horondiStyle} data-section-style='light' id='horondiStyle'>
       <div className={styles.imageSection}>
         {looksImages.length
           ? looksImages.slice(0, 7).map((image) => (
-              <div key={image._id} className={styles.imageWrapper}>
-                <div
-                  className={styles.image}
-                  style={{
-                    backgroundImage: `url(${IMG_URL}${image.images.medium})`
-                  }}
-                />
-              </div>
-            ))
+            <div key={image._id} className={styles.imageWrapper}>
+              <div
+                className={styles.image}
+                style={{
+                  backgroundImage: `url("${IMG_URL}${image.images.medium}")`
+                }}
+              />
+            </div>
+          ))
           : null}
       </div>
     </div>

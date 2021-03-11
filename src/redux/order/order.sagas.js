@@ -3,10 +3,17 @@ import { push } from 'connected-react-router';
 
 import { setError } from '../error/error.actions';
 import { setOrderLoading, setIsOrderCreated, setOrder } from './order.actions';
-import { addOrder, getPaymentCheckout } from './order.operations';
-import { ADD_ORDER, GET_ORDER, RESET_ORDER, GET_FONDY_DATA } from './order.types';
+import { addOrder, getOrderByPaidOrderNumber, getPaymentCheckout } from './order.operations';
+import {
+  ADD_ORDER,
+  GET_ORDER,
+  RESET_ORDER,
+  GET_FONDY_DATA,
+  ADD_PAYMENT_METHOD,
+  GET_PAID_ORDER
+} from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { order } from '../../utils/order';
+import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
 
 export function* handleOrderError({ message }) {
@@ -20,7 +27,7 @@ export function* handleAddOrder({ payload }) {
     yield put(setOrderLoading(true));
 
     const newOrder = yield call(addOrder, payload);
-    setToLocalStorage(order, newOrder);
+    setToLocalStorage(orderDataToLS.order, newOrder);
 
     yield put(setOrder(newOrder));
     yield put(setIsOrderCreated(true));
@@ -33,15 +40,15 @@ export function* handleAddOrder({ payload }) {
 export function* handleGetCreatedOrder() {
   yield put(setOrderLoading(true));
 
-  const orderData = getFromLocalStorage(order);
+  const orderData = getFromLocalStorage(orderDataToLS.order);
 
   yield put(setOrder(orderData));
   yield put(setOrderLoading(false));
 }
 
 export function* handleOrderReset() {
-  setToLocalStorage(order, null);
-  const cart = getFromLocalStorage(order);
+  setToLocalStorage(orderDataToLS.order, null);
+  const cart = getFromLocalStorage(orderDataToLS.order);
 
   yield put(setOrder(cart));
 }
@@ -51,12 +58,26 @@ export function* handleGetFondyUrl({ payload }) {
     yield put(setOrderLoading(true));
 
     const newOrder = yield call(addOrder, payload.order);
-    const result = yield call(getPaymentCheckout, newOrder._id, payload.currency, payload.amount);
-    console.log(result);
+    yield call(getPaymentCheckout, newOrder._id, payload.currency, payload.amount);
 
-    setToLocalStorage(order, result);
+    yield put(setOrderLoading(false));
+  } catch (e) {
+    yield call(handleOrderError, e);
+  }
+}
 
-    yield put(setOrder(result));
+export function* handleSetPaymentMethod({ payload }) {
+  yield setToLocalStorage(orderDataToLS.paymentMethod, payload);
+}
+
+export function* handleGetOrderByPaidOrderNumber({ payload }) {
+  try {
+    yield put(setOrderLoading(true));
+
+    const paidOrder = yield call(getOrderByPaidOrderNumber, payload);
+
+    setToLocalStorage(orderDataToLS.order, paidOrder);
+
     yield put(setOrderLoading(false));
   } catch (e) {
     yield call(handleOrderError, e);
@@ -68,4 +89,6 @@ export default function* orderSaga() {
   yield takeEvery(GET_ORDER, handleGetCreatedOrder);
   yield takeEvery(RESET_ORDER, handleOrderReset);
   yield takeEvery(GET_FONDY_DATA, handleGetFondyUrl);
+  yield takeEvery(ADD_PAYMENT_METHOD, handleSetPaymentMethod);
+  yield takeEvery(GET_PAID_ORDER, handleGetOrderByPaidOrderNumber);
 }

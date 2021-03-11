@@ -18,12 +18,12 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, DEFAULT_CURRENCY } from '../../../configs';
+import { CY_CODE_ERR } from '../../../configs';
 import { calcPrice } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
-import { addOrder, getFondyData } from '../../../redux/order/order.actions';
+import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
@@ -55,14 +55,16 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
 
     onSubmit: (data) => {
       data.paymentMethod === CHECKOUT_PAYMENT[language].card
-        ? dispatch(
-          getFondyData({
-            order: orderInputData(data, deliveryType, cartItems, language),
-            currency: getCurrentCurrency(currency),
-            amount: String(totalPriceToPay)
-          })
-        )
-        : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language)));
+        ? dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].card)) &&
+          dispatch(
+            getFondyData({
+              order: orderInputData(data, deliveryType, cartItems, language),
+              currency: getCurrentCurrency(currency),
+              amount: String(totalPriceToPay)
+            })
+          )
+        : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
+          dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].cash));
     }
   });
 

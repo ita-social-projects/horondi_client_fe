@@ -16,9 +16,7 @@ import AboutUs from '../pages/about-us';
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
 const NewsPage = lazy(() => import('../pages/news/news-page'));
-const PaymentsAndShipping = lazy(() =>
-  import('../pages/payments-and-shipping')
-);
+const PaymentsAndShipping = lazy(() => import('../pages/payments-and-shipping'));
 const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
 const Wishlist = lazy(() => import('../pages/wishlist'));
 const NewsDetail = lazy(() => import('../pages/news/news-detail'));
@@ -40,13 +38,11 @@ const Materials = lazy(() => import('../pages/materials'));
 const Routes = () => {
   const styles = useStyles();
 
-  const { categories, userData, userIsChecked } = useSelector(
-    ({ Categories, User }) => ({
-      categories: Categories.list,
-      userIsChecked: User.userIsChecked,
-      userData: User.userData
-    })
-  );
+  const { categories, userData, userIsChecked } = useSelector(({ Categories, User }) => ({
+    categories: Categories.list,
+    userIsChecked: User.userIsChecked,
+    userData: User.userData
+  }));
 
   return (
     <ConnectedRouter history={history}>
@@ -62,11 +58,7 @@ const Routes = () => {
               <Route path='/about-us' exact component={AboutUs} />
               <Route path='/materials' exact component={Materials} />
               <Route path='/constructor' exact component={ImagesConstructor} />
-              <Route
-                path='/payment-and-shipping'
-                exact
-                component={PaymentsAndShipping}
-              />
+              <Route path='/payment-and-shipping' exact component={PaymentsAndShipping} />
               <Route path='/privacy-policy' exact component={PrivacyPolicy} />
               <Route path='/wishlist' exact component={Wishlist} />
               <Route path='/contacts' exact component={Contacts} />
@@ -84,23 +76,19 @@ const Routes = () => {
                 isAuthed={!userData}
                 redirectTo='/'
               />
-              <Route path='/thanks' exact component={ThanksPage} />
+              <Route path='/thanks' component={ThanksPage} />
               <Route path='/cart' exact component={Cart} />
               <Route path='/checkout' exact component={Checkout} />
               <Route
                 path='/confirmation/:token'
                 exact
-                render={({ match }) => (
-                  <Confirmation token={match.params.token} />
-                )}
+                render={({ match }) => <Confirmation token={match.params.token} />}
               />
               <Route path='/recovery' exact component={Recovery} />
               <Route
                 path='/recovery/:token'
                 exact
-                render={({ match }) => (
-                  <NewPassword token={match.params.token} />
-                )}
+                render={({ match }) => <NewPassword token={match.params.token} />}
               />
               <ProtectedRoute
                 component={ProfilePage}
@@ -123,13 +111,10 @@ const Routes = () => {
                   const { category, model } = match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                      category.toLowerCase()
+                      categoryFound.name[1].value.toLowerCase() === category.toLowerCase()
                   );
 
-                  return (
-                    <ProductListPage category={categoryParam} model={model} />
-                  );
+                  return <ProductListPage category={categoryParam} model={model} />;
                 }}
               />
               <Route path='/product/:id' exact component={ProductDetails} />

@@ -1,15 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
+import { parse } from 'query-string';
+import { orderDataToLS } from '../../utils/order';
 
 import { useStyles } from './thanks-page.styles';
 import { THANKS_PAGE_TITLE } from '../../translations/thanks-page.translations';
 import OrderData from './order-data';
-import { getOrder, resetOrder } from '../../redux/order/order.actions';
+import {
+  addPaymentMethod,
+  getOrder,
+  getPaidOrder,
+  resetOrder
+} from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
 import { resetCart } from '../../redux/cart/cart.actions';
+import { CHECKOUT_PAYMENT } from '../../translations/checkout.translations';
+import { getFromLocalStorage } from '../../services/local-storage.service';
 
 const ThanksPage = () => {
+  const router = useLocation();
+
   const dispatch = useDispatch();
   const { language, currency, order, loading, isLightTheme } = useSelector(
     ({ Language, Currency, Order, Theme }) => ({
@@ -26,11 +37,23 @@ const ThanksPage = () => {
 
   useEffect(() => {
     dispatch(resetCart());
-    dispatch(getOrder());
+    const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
+    if (paymentMethod === CHECKOUT_PAYMENT[language].card) {
+      const { order_id: paidOrderNumber } = parse(router.search);
+      dispatch(getPaidOrder(paidOrderNumber));
+      dispatch(getOrder());
+    }
+
+    if (paymentMethod === CHECKOUT_PAYMENT[language].cash) {
+      dispatch(getOrder());
+    }
+
     return () => {
       dispatch(resetOrder());
+      dispatch(addPaymentMethod(''));
     };
   }, []);
+
   return (
     <div className={styles.thanksContainer}>
       {!order && <Redirect to={routes.pathToMain} />}

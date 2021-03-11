@@ -1,4 +1,4 @@
-import { SET_ORDER, SET_IS_ORDER_CREATED, SET_LOADING } from "./order.types";
+import { SET_ORDER, SET_IS_ORDER_CREATED, SET_LOADING } from './order.types';
 
 const initialState = {
   loading: false,

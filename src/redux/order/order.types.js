@@ -5,3 +5,5 @@ export const GET_ORDER = 'GET_ORDER';
 export const ADD_ORDER = 'ADD_ORDER';
 export const RESET_ORDER = 'RESET_ORDER';
 export const GET_FONDY_DATA = 'GET_FONDY_DATA';
+export const GET_PAID_ORDER = 'GET_PAID_ORDER';
+export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';

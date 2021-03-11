@@ -5,7 +5,9 @@ import {
   GET_ORDER,
   ADD_ORDER,
   RESET_ORDER,
-  GET_FONDY_DATA
+  GET_FONDY_DATA,
+  GET_PAID_ORDER,
+  ADD_PAYMENT_METHOD
 } from './order.types';
 
 export const setOrder = (payload) => ({
@@ -28,10 +30,18 @@ export const setIsOrderCreated = (payload) => ({
 export const getOrder = () => ({
   type: GET_ORDER
 });
+export const getPaidOrder = (payload) => ({
+  type: GET_PAID_ORDER,
+  payload
+});
 export const resetOrder = () => ({
   type: RESET_ORDER
 });
 export const getFondyData = (payload) => ({
   type: GET_FONDY_DATA,
+  payload
+});
+export const addPaymentMethod = (payload) => ({
+  type: ADD_PAYMENT_METHOD,
   payload
 });

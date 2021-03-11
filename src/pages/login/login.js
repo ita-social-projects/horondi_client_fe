@@ -3,10 +3,9 @@ import { Button, TextField, FormControlLabel, Checkbox, Typography } from '@mate
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
-import { LOGIN_USER_DATA, formRegExp, errorMessages } from '../../configs';
+import { LOGIN_USER_DATA } from '../../configs';
 import {
   placeholders,
   OR_TEXT,

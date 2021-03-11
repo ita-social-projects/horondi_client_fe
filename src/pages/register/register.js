@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import Grid from '@material-ui/core/Grid';
-import { REGISTER_USER_DATA } from '../../configs';
+import { REGISTER_USER_DATA, USER_REGISTER_LABELS, USER_TOKENS } from '../../configs';
 import {
   REGISTER_FORM_LABEL,
   LOGIN_FORM_LABEL,
@@ -22,6 +22,8 @@ import { Loader } from '../../components/loader/loader';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import routes from '../../configs/routes';
+import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
+import { IMG_ALT } from '../../const/images-alts';
 import { validationSchema } from '../../validators/register';
 
 export default function Register() {
@@ -30,7 +32,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(true);
   const { pathToLogin } = routes;
   const handleRegister = (user) => {
-    setToLocalStorage('accessToken', null);
+    setToLocalStorage(USER_TOKENS.ACCES_TOKEN, null);
     dispatch(registerUser({ user, language }));
   };
 
@@ -62,7 +64,7 @@ export default function Register() {
         <div className={styles.registerContainer}>
           <div className={styles.registerBackground} />
           <div className={styles.formContainer}>
-            <Grid container alignItems='center' className={styles.formWrapper} spacing={2}>
+            <Grid container className={styles.formWrapper} spacing={2}>
               <Grid
                 item
                 sm={12}
@@ -75,12 +77,17 @@ export default function Register() {
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 {hasRegistered ? (
                   <div className={styles.registerSucces}>
-                    <img
-                      src={isLightTheme ? infoImg : infoLightImg}
-                      alt='info'
-                      className={styles.infoLogo}
-                    />
-                    <p>{CONFIRM_EMAIL[language].value}</p>
+                    <div className={styles.registerSuccesInfo}>
+                      <img
+                        src={isLightTheme ? infoImg : infoLightImg}
+                        alt={IMG_ALT.REGISTER_IMG_INFO}
+                        className={styles.infoLogo}
+                      />
+                      <p>{CONFIRM_EMAIL[language].value}</p>
+                    </div>
+                    <Link to={pathToLogin} className={styles.loginBtn}>
+                      {LOGIN_FORM_LABEL[language].value}
+                    </Link>
                   </div>
                 ) : (
                   <Form className={styles.registerForm}>
@@ -92,19 +99,25 @@ export default function Register() {
                         {Object.keys(values).map((name) => (
                           <Field
                             key={name}
-                            type={name === 'password' ? name : 'text'}
+                            type={
+                              name === USER_REGISTER_LABELS.password
+                                ? name
+                                : USER_REGISTER_LABELS.text
+                            }
                             name={name}
                             as={TextField}
                             label={placeholders[name][language].value}
-                            variant='outlined'
+                            variant={TEXT_FIELD_VARIANT.OUTLINED}
                             fullWidth
                             error={!!errors[name]}
                             helperText={errors[name] || ''}
                             className={`${styles.dataInput} ${
-                              name === 'email' && styles.afterText
+                              name === USER_REGISTER_LABELS.email && styles.afterText
                             }`}
                             InputProps={
-                              name === 'password' ? endAdornment(showPassword, setShowPassword) : {}
+                              name === USER_REGISTER_LABELS.password
+                                ? endAdornment(showPassword, setShowPassword)
+                                : {}
                             }
                           />
                         ))}

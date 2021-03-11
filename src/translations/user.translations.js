@@ -1,9 +1,10 @@
 export const CONFIRM_EMAIL = [
   {
-    value: 'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+    value:
+      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу для входу в аккаунт.'
   },
   {
-    value: 'You have successfully registered! Please, confirm your email address.'
+    value: 'You successfuly registered! Please, confirm your e-mail for Log In.'
   }
 ];
 export const GOOGLE_SIGN_IN_TEXT = [

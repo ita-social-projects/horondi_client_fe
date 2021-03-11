@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { CenterFocusStrong } from '@material-ui/icons';
 import BACKGROUND from '../../images/8.jpg';
 import BACKGROUND_REGISTERED_USER from '../../images/4.jpg';
 
@@ -23,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
     filter: 'brightness(30%) contrast(90%)'
   },
   formWrapper: {
+    alignItems: 'center',
     margin: theme.spacing(1),
     maxWidth: '960px',
     height: '550px',
@@ -47,8 +47,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   formBackgroundRegisteredUser: {
-    height: '100%',
-    width: '100%',
+    height: '350px',
+    width: '275px',
     background: `url(${BACKGROUND_REGISTERED_USER}) no-repeat `,
     backgroundSize: 'cover',
     '@media (max-width: 959px)': {
@@ -63,16 +63,19 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box'
   },
   registerSucces: {
-    display: 'flex',
-    flexDirection: 'column',
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
-    height: '550px',
+    height: '350px',
     padding: '30px 63px 63px',
     '& p': {
       textAlign: 'center',
       fontSize: '20px'
     }
+  },
+  registerSuccesInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '225px'
   },
   heading: {
     fontSize: '1.5rem',
@@ -110,15 +113,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   registerBtn: {
-    fontSize: '1rem',
+    border: '1px solid black',
+    borderRadius: '4px',
     marginBottom: '10px',
-    lineHeight: '20px',
-    height: '42px',
-    backgroundColor: theme.palette.button.normal.backgroundColor,
-    color: theme.palette.button.normal.color,
     textTransform: 'capitalize',
+    backgroundColor: 'white',
+    color: 'black',
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor
+      color: theme.palette.button.normal.backgroundColor
     }
   },
   loginBtn: {

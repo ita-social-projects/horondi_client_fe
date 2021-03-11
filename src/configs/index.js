@@ -35,6 +35,15 @@ export const REGISTER_USER_DATA = {
   email: '',
   password: ''
 };
+export const USER_REGISTER_LABELS = {
+  email: 'email',
+  password: 'password',
+  text: 'text'
+};
+export const USER_TOKENS = {
+  ACCES_TOKEN: 'accessToken',
+  REFRESH_TOKEN: 'refreshToken'
+};
 
 export const CHAT_USER_DATA = {
   firstName: '',

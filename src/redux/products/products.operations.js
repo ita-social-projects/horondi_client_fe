@@ -24,12 +24,12 @@ const getAllFilters = async () => {
               value
             }
           }
-          # closures {
-          #   _id
-          #   name {
-          #     value
-          #   }
-          # }
+          closures {
+            _id
+            name {
+              value
+            }
+          }
           mainMaterial {
             _id
             name {

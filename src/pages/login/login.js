@@ -21,6 +21,7 @@ import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
+import { validationSchema } from '../../validators/login';
 
 const Login = () => {
   const styles = useStyles();
@@ -43,19 +44,9 @@ const Login = () => {
     dispatch(loginUser({ user }));
   };
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email(errorMessages[language].value.email)
-      .required(errorMessages[language].value.empty),
-    password: Yup.string()
-      .matches(formRegExp.password, errorMessages[language].value.pass)
-      .required(errorMessages[language].value.empty),
-    staySignedIn: Yup.bool()
-  });
-
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={validationSchema(language)}
       initialValues={LOGIN_USER_DATA}
       onSubmit={handleLogin}
       validateOnChange={shouldValidate}
@@ -77,14 +68,14 @@ const Login = () => {
                       <Field
                         as={TextField}
                         label={placeholders.email[language].value}
-                        className={`${styles.emailInput} ${values.email ? styles.afterText : ''}`}
+                        className={`${styles.emailInput} ${styles.afterText}`}
                         fullWidth
                         variant='outlined'
                         type='text'
                         name='email'
                         color='primary'
                         error={!!errors.email}
-                        helperText={!!errors.email && `${errors.email}, `}
+                        helperText={errors.email || ''}
                       />
                       <Field
                         as={TextField}

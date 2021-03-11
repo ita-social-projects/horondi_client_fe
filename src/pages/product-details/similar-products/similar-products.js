@@ -12,7 +12,7 @@ import { SIMILAR_ITEMS } from '../../../translations/product-details.translation
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 
-const SimilarProducts = ({ currencySign, cartList }) => {
+const SimilarProducts = ({ currencySign }) => {
   const styles = useStyles();
   const { language, similarProducts, currency, product } = useSelector(
     selectInfoForSimilarProducts

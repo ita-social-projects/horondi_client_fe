@@ -5,7 +5,6 @@ import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
-import SimilarProducts from '../../../../pages/product-details/similar-products';
 import DeliveryType from '../../order/delivery-type/delivery-type';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
 
@@ -46,9 +45,7 @@ const FilledCart = ({ items }) => {
           <DeliveryType language={language} totalPrice={totalPrice} currency={currency} />
         </>
       </div>
-      <>
-        <SimilarProducts currencySign={currencySign} cartList={items} />
-      </>
+      <></>
     </div>
   );
 };

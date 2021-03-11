@@ -10,7 +10,6 @@ import {
   LOGIN_FORM_LABEL,
   placeholders,
   CONFIRM_EMAIL,
-  REGISTER_USER_ERROR,
   GOOGLE_SIGN_IN_TEXT
 } from '../../translations/user.translations';
 import { useStyles } from './register.styles';
@@ -21,6 +20,7 @@ import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
+import { setUserErrorType } from '../../utils/user-helpers';
 import routes from '../../configs/routes';
 import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
 import { IMG_ALT } from '../../const/images-alts';
@@ -113,7 +113,7 @@ export default function Register() {
                               name === USER_REGISTER_LABELS.email && styles.afterText
                             }`}
                             InputProps={
-                              name === USER_REGISTER_LABELS.passw
+                              name === USER_REGISTER_LABELS.pass
                                 ? endAdornment(showPassword, setShowPassword)
                                 : {}
                             }
@@ -131,11 +131,7 @@ export default function Register() {
                             {REGISTER_FORM_LABEL[language].value}
                           </Button>
                           <p className={styles.registerError}>
-                            {registerError
-                              ? REGISTER_USER_ERROR[registerError]
-                                ? REGISTER_USER_ERROR[registerError][language].value
-                                : REGISTER_USER_ERROR.DEFAULT_ERROR[language].value
-                              : null}
+                            {setUserErrorType(registerError, language)}
                           </p>
                           <p className={styles.googleText}>{GOOGLE_SIGN_IN_TEXT[language].value}</p>
                           <GoogleBtn />

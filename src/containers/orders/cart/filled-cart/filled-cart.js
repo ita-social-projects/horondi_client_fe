@@ -7,6 +7,7 @@ import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import DeliveryType from '../../order/delivery-type/delivery-type';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
+import { currencySign } from '../../../../utils/currency';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
@@ -17,18 +18,7 @@ const FilledCart = ({ items }) => {
 
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
 
-  let currencySign;
-  switch (currency) {
-    case 0:
-      currencySign = faHryvnia;
-      break;
-    case 1:
-      currencySign = faDollarSign;
-      break;
-    default:
-      currencySign = '';
-      break;
-  }
+  const currencySign = currencySign(currency, faHryvnia, faDollarSign);
 
   return (
     <div className={styles.root} data-cy='filled-cart'>

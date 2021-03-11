@@ -37,7 +37,7 @@ export const REGISTER_USER_DATA = {
 };
 export const USER_REGISTER_LABELS = {
   email: 'email',
-  password: 'password',
+  pass: 'password',
   text: 'text'
 };
 export const USER_TOKENS = {
@@ -85,7 +85,7 @@ export const errorMessages = [
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат пошти',
-      password: 'Від 6 до 30 символів з однією літерою та цифрою',
+      pass: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
       text: 'Поле повинно містити від 2 до 700 символів',
       phoneNumber: 'Некоректний формат телефону',
@@ -105,7 +105,7 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address `,
-      password: 'From 6 to 30 characters with one letter and one digit',
+      pass: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
       phoneNumber: 'Wrong phone format',

@@ -18,6 +18,6 @@ export const validationSchema = (language) =>
       .email(errorMessages[language].value.email)
       .required(errorMessages[language].value.email),
     password: Yup.string()
-      .matches(formRegExp.password, errorMessages[language].value.password)
+      .matches(formRegExp.password, errorMessages[language].value.pass)
       .required(errorMessages[language].value.empty)
   });

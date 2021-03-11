@@ -100,9 +100,7 @@ export default function Register() {
                           <Field
                             key={name}
                             type={
-                              name === USER_REGISTER_LABELS.password
-                                ? name
-                                : USER_REGISTER_LABELS.text
+                              name === USER_REGISTER_LABELS.pass ? name : USER_REGISTER_LABELS.text
                             }
                             name={name}
                             as={TextField}
@@ -115,7 +113,7 @@ export default function Register() {
                               name === USER_REGISTER_LABELS.email && styles.afterText
                             }`}
                             InputProps={
-                              name === USER_REGISTER_LABELS.password
+                              name === USER_REGISTER_LABELS.passw
                                 ? endAdornment(showPassword, setShowPassword)
                                 : {}
                             }

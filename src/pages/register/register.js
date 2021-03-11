@@ -13,14 +13,12 @@ import {
   GOOGLE_SIGN_IN_TEXT
 } from '../../translations/user.translations';
 import { useStyles } from './register.styles';
-import infoImg from '../../images/information.png';
-import infoLightImg from '../../images/info-light.png';
 import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
-import { setUserErrorType } from '../../utils/user-helpers';
+import { setUserErrorType, setInfoImgByTheme } from '../../utils/user-helpers';
 import routes from '../../configs/routes';
 import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
 import { IMG_ALT } from '../../const/images-alts';
@@ -79,7 +77,7 @@ export default function Register() {
                   <div className={styles.registerSucces}>
                     <div className={styles.registerSuccesInfo}>
                       <img
-                        src={isLightTheme ? infoImg : infoLightImg}
+                        src={setInfoImgByTheme(isLightTheme)}
                         alt={IMG_ALT.REGISTER_IMG_INFO}
                         className={styles.infoLogo}
                       />

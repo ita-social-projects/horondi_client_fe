@@ -6,7 +6,6 @@ import {
   setNovaPoshtaWarehouse,
   setDeliveryLoading,
   setNovaPoshtaPrices,
-  setFondyData,
   setUkrPostRegions,
   setUkrPostDistricts,
   setUkrPostCities,
@@ -25,7 +24,6 @@ import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
   GET_NOVAPOSHTA_PRICES,
-  GET_FONDY_DATA,
   GET_UKRPOST_REGIONS,
   GET_UKRPOST_DISTRICTS,
   GET_UKRPOST_CITIES,
@@ -38,28 +36,6 @@ import routes from '../../configs/routes';
 function* handleErrors({ message }) {
   yield put(setError(message));
   yield put(push(routes.pathToErrorPage));
-}
-
-export function* handleFondyUrl({ payload }) {
-  try {
-    const dataFromFondy = yield call(
-      getItems,
-      `query{
-              getPaymentCheckout(data: {
-                orderId: "${payload.orderID}",
-                orderDesc: "${payload.orderID}",
-                currency: "UAH",
-                amount: ${payload.amount}
-              }){
-                paymentId
-                checkoutUrl
-              }
-            }`
-    );
-    yield put(setFondyData(dataFromFondy.data.getPaymentCheckout));
-  } catch (e) {
-    yield call(handleErrors, e);
-  }
 }
 
 export function* handleNovaPoshtaPrice({ payload }) {
@@ -165,7 +141,6 @@ export default function* checkoutSaga() {
   yield takeEvery(GET_NOVAPOSHTA_CITIES, handleNovaPoshtaCities);
   yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleNovaPoshtaWarehouse);
   yield takeEvery(GET_NOVAPOSHTA_PRICES, handleNovaPoshtaPrice);
-  yield takeEvery(GET_FONDY_DATA, handleFondyUrl);
   yield takeEvery(GET_UKRPOST_REGIONS, handleUkrPostRegions);
   yield takeEvery(GET_UKRPOST_DISTRICTS, handleUkrPostDistricts);
   yield takeEvery(GET_UKRPOST_CITIES, handleUkrPostCities);

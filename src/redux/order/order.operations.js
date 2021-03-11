@@ -10,6 +10,7 @@ export const addOrder = async (order) => {
       mutation($order: OrderInput!) {
         addOrder(order: $order) {
           ... on Order {
+            _id
             items {
               product {
                 name {
@@ -49,4 +50,60 @@ export const addOrder = async (order) => {
     fetchPolicy: 'no-cache'
   });
   return result.data.addOrder;
+};
+
+export const getPaymentCheckout = async (orderId, currency, amount) => {
+  const res = await client.query({
+    variables: {
+      data: {
+        orderId,
+        currency,
+        amount
+      }
+    },
+    query: gql`
+      query($data: PaymentInput!) {
+        getPaymentCheckout(data: $data) {
+          ... on Order {
+            _id
+            items {
+              product {
+                name {
+                  lang
+                  value
+                }
+                images {
+                  primary {
+                    thumbnail
+                  }
+                }
+              }
+              fixedPrice {
+                currency
+                value
+              }
+              quantity
+              options {
+                size {
+                  name
+                }
+              }
+            }
+            totalPriceToPay {
+              currency
+              value
+            }
+            paymentStatus
+          }
+          ... on Error {
+            statusCode
+            message
+          }
+        }
+      }
+    `,
+    fetchPolicy: 'no-cache'
+  });
+
+  return res.data.getPaymentCheckout;
 };

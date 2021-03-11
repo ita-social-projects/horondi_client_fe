@@ -4,7 +4,8 @@ import {
   SET_IS_ORDER_CREATED,
   GET_ORDER,
   ADD_ORDER,
-  RESET_ORDER
+  RESET_ORDER,
+  GET_FONDY_DATA
 } from './order.types';
 
 export const setOrder = (payload) => ({
@@ -29,4 +30,8 @@ export const getOrder = () => ({
 });
 export const resetOrder = () => ({
   type: RESET_ORDER
+});
+export const getFondyData = (payload) => ({
+  type: GET_FONDY_DATA,
+  payload
 });

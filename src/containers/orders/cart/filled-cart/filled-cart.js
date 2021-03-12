@@ -1,13 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
-
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import DeliveryType from '../../order/delivery-type/delivery-type';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
-import { selectCurrencySign } from '../../../../utils/currency';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
@@ -17,8 +14,6 @@ const FilledCart = ({ items }) => {
   }));
 
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
-
-  const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
 
   return (
     <div className={styles.root} data-cy='filled-cart'>

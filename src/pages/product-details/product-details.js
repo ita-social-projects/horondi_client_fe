@@ -5,6 +5,9 @@ import { Card } from '@material-ui/core';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
+import { selectCurrencySign } from '../../utils/currency';
+import { DEFAULT_SIZE } from '../../configs/index';
+
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -32,24 +35,20 @@ const ProductDetails = ({ match }) => {
 
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
-  let currencySign;
+  const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
 
-  switch (currency) {
-    case 0:
-      currencySign = faHryvnia;
-      break;
-    case 1:
-      currencySign = faDollarSign;
-      break;
-    default:
-      currencySign = '';
-      break;
-  }
+  const {
+    _id: productId,
+    name: productName,
+    images,
+    category,
+    sizes,
+    mainMaterial,
+    bottomMaterial,
+    pattern
+  } = product || {};
 
-  const { _id: productId, name: productName, images, category, sizes, mainMaterial, pattern } =
-    product || {};
-
-  const currentSize = sizes ? sizes.find(({ name }) => name === 'M') : {};
+  const currentSize = sizes ? sizes.find(({ name }) => name === DEFAULT_SIZE) : {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -63,6 +62,8 @@ const ProductDetails = ({ match }) => {
         setProductToSend({
           _id: productId,
           name: productName,
+          selectedSize: currentSize,
+          bottomMaterial,
           image: images.additional.small,
           totalPrice: currentSize.additionalPrice,
           dimensions: {

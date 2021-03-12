@@ -66,11 +66,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    if ((product && !product.sizes[0].name) || selectedSize) {
+    if (product || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
+          selectedSize: sizeToSend || {}
         })
       );
       dispatch(setToastMessage(toastMessages.addedToCard));

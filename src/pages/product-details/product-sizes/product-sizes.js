@@ -22,10 +22,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
       .map(({ _id, name }) => (
         <Button
           key={_id}
-          className={`
-          ${name === 'M' && !selectedSize ? styles.selectedSize : styles.sizeButton}
-          ${_id === selectedSize ? styles.selectedSize : styles.sizeButton}
-          `}
+          className={_id === selectedSize._id ? styles.selectedSize : styles.sizeButton}
           onClick={() => handleSizeChange(_id)}
         >
           {name}

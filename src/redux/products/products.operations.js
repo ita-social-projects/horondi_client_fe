@@ -245,7 +245,19 @@ const getProductById = async (id) => {
                   value
                 }
                 additionalPrice {
-                  # currency
+                  currency
+                  value
+                }
+              }
+              color {
+                _id
+                name {
+                  lang
+                  value
+                }
+                colorHex
+                simpleName {
+                  lang
                   value
                 }
               }

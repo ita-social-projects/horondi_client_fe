@@ -46,6 +46,21 @@ const SimilarProducts = ({ currencySign }) => {
     );
   }
 
+  // const imagesList = cartList
+  //   ? similarProducts.filter(simProduct => {
+  //       cartList.forEach(cartProduct => {
+  //         return (simProduct.category._id !== cartProduct.categoryID &&
+  //           (simProduct.mainMaterial.color._id === cartProduct.mainMaterialColorID
+  //           || simProduct.pattern._id === cartProduct.patternID))
+  //       });
+  //     })
+  //   : similarProducts.filter(
+  //     ({ category, mainMaterial, pattern }) =>
+  //       category._id !== product.category._id &&
+  //       (mainMaterial.color._id === product.mainMaterial.color._id ||
+  //         pattern._id === product.pattern._id)
+  //     );
+
   imagesList = imagesList.map(({ _id, images, rate, name, basePrice }) => (
     <SimilarProductsItem
       currencySign={currencySign}

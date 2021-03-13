@@ -9,7 +9,7 @@ import { useStyles } from './product-details.styles';
 
 import { selectCurrencySign } from '../../utils/currency';
 import { DEFAULT_SIZE } from '../../configs/index';
-import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../const/material-ui';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import ProductImages from './product-images';
 import ProductInfo from './product-info';

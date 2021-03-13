@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
 import { selectCurrencySign } from '../../utils/currency';
 import { DEFAULT_SIZE } from '../../configs/index';
+import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../const/material-ui';
 
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
@@ -24,10 +27,13 @@ import {
 } from '../../redux/products/products.actions';
 
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
+import routes from '../../configs/routes';
+
+import { backArrow } from '../../translations/product-details.translations';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { isLoading, productToSend, currency, product } = useSelector(
+  const { isLightTheme, isLoading, productToSend, currency, product, language } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
   const dispatch = useDispatch();
@@ -119,6 +125,12 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
+      <Link to={routes.patthToCategory} className={styles.backBtn}>
+        <KeyboardBackspaceIcon
+          color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
+        />
+        <span className={styles.backBtn__text}>{backArrow[language].title}</span>
+      </Link>
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>

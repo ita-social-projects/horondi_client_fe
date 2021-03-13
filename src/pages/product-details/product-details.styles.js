@@ -45,5 +45,19 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 1400px)': {
       margin: '13rem auto'
     }
+  },
+  backBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '20px 0 0 20px',
+    width: 120,
+    transition: '0.1s',
+    '&:hover': {
+      transform: 'scale(1.1)'
+    }
+  },
+  backBtn__text: {
+    marginLeft: '10px',
+    textTransform: 'uppercase'
   }
 }));

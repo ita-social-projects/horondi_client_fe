@@ -22,14 +22,18 @@ export const selectProductsIdCommentsLanguageUserData = ({
 });
 
 export const selectCurrencyProductsCategoryFilter = ({
+  Theme,
   Currency,
-  Products: { product, productLoading, productToSend, filters }
+  Products: { product, productLoading, productToSend, filters },
+  Language
 }) => ({
   currency: Currency.currency,
   categoryFilter: filters.categoryFilter,
   isLoading: productLoading,
   product,
-  productToSend
+  productToSend,
+  isLightTheme: Theme.lightMode,
+  language: Language.language
 });
 
 export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Wishlist }) => ({

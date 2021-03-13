@@ -190,3 +190,12 @@ export const COMMENTS = {
     hideBtn: 'Hide comments'
   }
 };
+
+export const backArrow = {
+  0: {
+    title: 'назад'
+  },
+  1: {
+    title: 'back'
+  }
+};

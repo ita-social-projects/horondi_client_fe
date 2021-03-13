@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { map, filter } from 'lodash';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
@@ -20,14 +21,15 @@ const SimilarProducts = ({ currencySign }) => {
 
   const { title } = SIMILAR_ITEMS[language];
 
-  const imagesList = similarProducts
-    .filter(
+  const imagesList = map(
+    filter(
+      similarProducts,
       ({ category, mainMaterial, pattern }) =>
         category._id !== product.category._id &&
         (mainMaterial.color._id === product.mainMaterial.color._id ||
           pattern._id === product.pattern._id)
-    )
-    .map(({ _id, images, rate, name, basePrice }) => (
+    ),
+    ({ _id, images, rate, name, basePrice }) => (
       <SimilarProductsItem
         currencySign={currencySign}
         key={_id}
@@ -37,7 +39,8 @@ const SimilarProducts = ({ currencySign }) => {
         imageUrl={images.primary.medium}
         id={_id}
       />
-    ));
+    )
+  );
 
   return (
     <div>

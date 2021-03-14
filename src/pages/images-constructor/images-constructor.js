@@ -158,7 +158,13 @@ const ImagesConstructor = () => {
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
-          <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
+          <canvas
+            style={{ display: values.modelLoading ? 'none' : 'block' }}
+            className={styles.image}
+            width={canvasW}
+            height={canvasH}
+            ref={canvas}
+          />
         </div>
         <div className={styles.pricesInfoWrapper}>
           <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>

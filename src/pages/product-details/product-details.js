@@ -110,7 +110,7 @@ const ProductDetails = ({ match }) => {
           volumeInLiters: selectedSize.volumeInLiters,
           weightInKg: selectedSize.weightInKg
         },
-        selectedSize: selectedSize._id
+        selectedSize
       })
     );
 

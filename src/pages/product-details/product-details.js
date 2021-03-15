@@ -31,7 +31,7 @@ import routes from '../../configs/routes';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { isLightTheme, isLoading, productToSend, currency, product, language } = useSelector(
+  const { isLightTheme, isLoading, productToSend, currency, product } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
   const dispatch = useDispatch();

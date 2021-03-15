@@ -29,8 +29,6 @@ import {
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 import routes from '../../configs/routes';
 
-import { backArrow } from '../../translations/product-details.translations';
-
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
   const { isLightTheme, isLoading, productToSend, currency, product, language } = useSelector(

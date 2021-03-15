@@ -12,6 +12,8 @@ import { toastSettings } from '../../../configs/index';
 
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
+import { isProductInCartAlready } from '../../../utils/productDetails';
+
 import {
   addItemToWishlist,
   removeItemFromWishlist
@@ -26,7 +28,7 @@ import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems } = useSelector(
+  const { language, productToSend, product, wishlistItems, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
 
@@ -66,7 +68,9 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    if (product || selectedSize) {
+    if (isProductInCartAlready(cartList, productToSend)) {
+      return null;
+    } if (product || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,

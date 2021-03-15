@@ -36,12 +36,19 @@ export const selectCurrencyProductsCategoryFilter = ({
   language: Language.language
 });
 
-export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Wishlist }) => ({
+export const selectLanguageProductsUserWishlist = ({
+  Language,
+  Products,
+  User,
+  Wishlist,
+  Cart
+}) => ({
   language: Language.language,
   productToSend: Products.productToSend,
   product: Products.product,
   userData: User.userData,
-  wishlistItems: Wishlist.list
+  wishlistItems: Wishlist.list,
+  cartList: Cart.list
 });
 
 export const selectLightModeAndLocation = ({ Theme, router }) => ({

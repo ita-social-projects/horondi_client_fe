@@ -15,11 +15,7 @@ import {
   setRecoveryLoading,
   setUserOrders
 } from './user.actions';
-import {
-  getUserByToken,
-  regenerateAccessToken,
-  getPurchasedProducts
-} from './user.operations';
+import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -286,8 +282,6 @@ export function* handleUserRegister({ payload }) {
     );
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
-    yield delay(REDIRECT_TIMEOUT);
-    yield put(push('/login'));
   } catch (error) {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   }

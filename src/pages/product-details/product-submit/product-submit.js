@@ -70,7 +70,9 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const onAddToCart = () => {
     if (isProductInCartAlready(cartList, productToSend)) {
       return null;
-    } if (product || selectedSize) {
+    }
+
+    if (product || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,

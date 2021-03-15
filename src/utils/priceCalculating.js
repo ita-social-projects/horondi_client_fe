@@ -1,1 +1,2 @@
-export const calcPriceForCart = (item, currency) => item.totalPrice[currency].value;
+export const calcPriceForCart = (item, currency, quantity) =>
+  item.totalPrice[currency].value * quantity;

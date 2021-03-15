@@ -13,7 +13,10 @@ const FilledCart = ({ items }) => {
     currency: Currency.currency
   }));
 
-  const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
+  const totalPrice = items.reduce(
+    (acc, item) => acc + calcPriceForCart(item, currency, item.quantity),
+    0
+  );
 
   return (
     <div className={styles.root} data-cy='filled-cart'>

@@ -129,7 +129,6 @@ const ProductDetails = ({ match }) => {
         <KeyboardBackspaceIcon
           color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
         />
-        <span className={styles.backBtn__text}>{backArrow[language].title}</span>
       </Link>
       <div className={styles.product}>
         <ProductImages />

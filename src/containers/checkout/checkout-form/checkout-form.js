@@ -42,9 +42,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
   });
 
   const dispatch = useDispatch();
-
   const totalPriceToPay = cartItems.reduce(
-    (previousValue, currentValue) => previousValue + calcPriceForCart(currentValue, currency),
+    (previousValue, currentValue) =>
+      previousValue + calcPriceForCart(currentValue, currency, currentValue.quantity),
     0
   );
 

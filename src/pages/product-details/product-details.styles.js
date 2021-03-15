@@ -55,9 +55,5 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       transform: 'scale(1.1)'
     }
-  },
-  backBtn__text: {
-    marginLeft: '10px',
-    textTransform: 'uppercase'
   }
 }));

@@ -62,7 +62,7 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
         <span>
-          {calcPrice(item, currency) / 100} {item.totalPrice[currency].currency}
+          {calcPrice(item, currency, item.quantity) / 100} {item.totalPrice[currency].currency}
         </span>
         {isCartEditing && (
           <Checkbox

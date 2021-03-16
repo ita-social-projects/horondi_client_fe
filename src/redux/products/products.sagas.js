@@ -60,7 +60,7 @@ export function* handleProductsErrors({ message }) {
   yield put(setProductsLoading(false));
   yield put(setSearchBarLoading(false));
   yield put(setError(message));
-  yield put(push(routes.pathToErrorPage));
+  // yield put(push(routes.pathToErrorPage));
 }
 
 export function* handleProductLoading({ payload }) {

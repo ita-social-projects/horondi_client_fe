@@ -36,16 +36,16 @@ const ThanksPage = () => {
   });
 
   useEffect(() => {
-    dispatch(resetCart());
+    // dispatch(resetCart());
     const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
     if (paymentMethod === CHECKOUT_PAYMENT[language].card) {
       const { order_id: paidOrderNumber } = parse(router.search);
       dispatch(getPaidOrder(paidOrderNumber));
-      dispatch(getOrder());
+      // dispatch(getOrder());
     }
 
     if (paymentMethod === CHECKOUT_PAYMENT[language].cash) {
-      dispatch(getOrder());
+      // dispatch(getOrder());
     }
 
     return () => {

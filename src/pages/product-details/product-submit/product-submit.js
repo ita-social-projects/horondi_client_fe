@@ -87,13 +87,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if ((product && !product.sizes[0].name) || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
-        })
-      );
+    if (product || selectedSize) {
+      onAddToCart();
       dispatch(push('/cart'));
     } else {
       setSizeIsNotSelectedError(true);

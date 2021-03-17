@@ -29,6 +29,7 @@ export const useStyles = makeStyles((theme) => ({
   productDetails: {
     wordSpacing: '0.2rem',
     fontWeight: '500',
+    marginLeft: '20px',
     '@media (max-width: 600px)': {
       display: 'flex',
       flexDirection: 'column',

@@ -12,6 +12,8 @@ import { toastSettings } from '../../../configs/index';
 
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
+import { isProductInCartAlready } from '../../../utils/productDetails';
+
 import {
   addItemToWishlist,
   removeItemFromWishlist
@@ -26,7 +28,7 @@ import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems } = useSelector(
+  const { language, productToSend, product, wishlistItems, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
 
@@ -37,7 +39,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     wishlistItems
   ]);
 
-  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize), [
+  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize._id), [
     selectedSize,
     sizes
   ]);
@@ -66,11 +68,15 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    if ((product && !product.sizes[0].name) || selectedSize) {
+    if (isProductInCartAlready(cartList, productToSend)) {
+      return null;
+    }
+
+    if (product || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
+          selectedSize: sizeToSend || {}
         })
       );
       dispatch(setToastMessage(toastMessages.addedToCard));
@@ -81,13 +87,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if ((product && !product.sizes[0].name) || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
-        })
-      );
+    if (product || selectedSize) {
+      onAddToCart();
       dispatch(push('/cart'));
     } else {
       setSizeIsNotSelectedError(true);

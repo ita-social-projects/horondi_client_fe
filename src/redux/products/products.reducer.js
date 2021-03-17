@@ -52,9 +52,13 @@ export const initialState = {
   updatingComment: null,
   productToSend: {
     _id: '',
-    name: '',
+    name: [],
     image: '',
     selectedSize: false,
+    bottomMaterial: {
+      material: {},
+      color: {}
+    },
     bagBottom: {
       value: '',
       name: [

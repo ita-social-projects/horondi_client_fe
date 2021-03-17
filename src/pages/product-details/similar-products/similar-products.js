@@ -1,10 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { _ } from 'lodash';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import { useStyles } from './similar-products.styles';
+
+import { selectInfoForSimilarProducts } from './selector';
 
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { RESPONSIVE_PDP } from '../../../configs';
@@ -13,13 +16,7 @@ import SimilarProductsItem from './similar-products-item';
 const SimilarProducts = ({ currencySign }) => {
   const styles = useStyles();
   const { language, similarProducts, currency, product, cartList } = useSelector(
-    ({ Language, Currency, Products: { products, product }, Cart }) => ({
-      language: Language.language,
-      similarProducts: products,
-      product,
-      currency: Currency.currency,
-      cartList: Cart.list
-    })
+    selectInfoForSimilarProducts
   );
 
   const { title } = SIMILAR_ITEMS[language];
@@ -38,28 +35,12 @@ const SimilarProducts = ({ currencySign }) => {
       }
     }
   } else {
-    imagesList = similarProducts.filter(
-      ({ category, mainMaterial, pattern }) =>
-        category._id !== product.category._id &&
+    imagesList = _.filter(similarProducts, ({ category, mainMaterial, pattern }) => (
+      category._id !== product.category._id &&
         (mainMaterial.color._id === product.mainMaterial.color._id ||
           pattern._id === product.pattern._id)
-    );
+    ));
   }
-
-  // const imagesList = cartList
-  //   ? similarProducts.filter(simProduct => {
-  //       cartList.forEach(cartProduct => {
-  //         return (simProduct.category._id !== cartProduct.categoryID &&
-  //           (simProduct.mainMaterial.color._id === cartProduct.mainMaterialColorID
-  //           || simProduct.pattern._id === cartProduct.patternID))
-  //       });
-  //     })
-  //   : similarProducts.filter(
-  //     ({ category, mainMaterial, pattern }) =>
-  //       category._id !== product.category._id &&
-  //       (mainMaterial.color._id === product.mainMaterial.color._id ||
-  //         pattern._id === product.pattern._id)
-  //     );
 
   imagesList = imagesList.map(({ _id, images, rate, name, basePrice }) => (
     <SimilarProductsItem

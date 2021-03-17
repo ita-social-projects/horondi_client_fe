@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../images/2.jpg';
-import GoogleLogo from '../../images/google.png';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
@@ -171,14 +170,6 @@ export const useStyles = makeStyles((theme) => ({
     color: '#636363',
     fontSize: '0.875rem'
   },
-
-  googleLogo: {
-    background: `url(${GoogleLogo}) no-repeat `,
-    backgroundSize: 'cover',
-    width: '22px',
-    height: '22px',
-    marginRight: '10px'
-  },
   registerContainer: {
     width: '100%',
     minHeight: '18px'
@@ -197,7 +188,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   afterText: {
     '& p::after': {
-      content: `'example@mail.com'`,
+      content: `' example@mail.com'`,
       color: '#828282'
     }
   },

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
+
+import { selectCurrencySign } from '../../utils/currency';
+import { DEFAULT_SIZE } from '../../configs/index';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
@@ -20,12 +26,12 @@ import {
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_PRICE } from '../../configs';
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
+import routes from '../../configs/routes';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { isLoading, productToSend, currency, product } = useSelector(
+  const { isLightTheme, isLoading, productToSend, currency, product } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
   const dispatch = useDispatch();
@@ -33,22 +39,20 @@ const ProductDetails = ({ match }) => {
 
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
-  const currencySign = currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+  const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
 
   const {
     _id: productId,
     name: productName,
-    basePrice,
     images,
     category,
     sizes,
     mainMaterial,
+    bottomMaterial,
     pattern
   } = product || {};
 
-  const { selectedSize } = productToSend;
-
-  const { volumeInLiters, weightInKg } = sizes ? sizes[0] : {};
+  const currentSize = sizes ? sizes.find(({ name }) => name === DEFAULT_SIZE) : {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -62,9 +66,14 @@ const ProductDetails = ({ match }) => {
         setProductToSend({
           _id: productId,
           name: productName,
+          selectedSize: currentSize,
+          bottomMaterial,
           image: images.additional.small,
-          totalPrice: basePrice,
-          dimensions: { volumeInLiters, weightInKg },
+          totalPrice: currentSize.additionalPrice,
+          dimensions: {
+            volumeInLiters: currentSize.volumeInLiters,
+            weightInKg: currentSize.weightInKg
+          },
           categoryID: category._id,
           mainMaterialColorID: mainMaterial.color._id,
           patternID: pattern._id
@@ -77,9 +86,8 @@ const ProductDetails = ({ match }) => {
       dispatch(clearProductToSend());
     };
   }, [
-    basePrice,
-    volumeInLiters,
-    weightInKg,
+    currentSize.volumeInLiters,
+    currentSize.weightInKg,
     product,
     category,
     dispatch,
@@ -90,25 +98,17 @@ const ProductDetails = ({ match }) => {
   ]);
 
   const handleSizeChange = (selectedId) => {
-    const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
-      : DEFAULT_PRICE;
-
-    const size = sizes.find(({ _id }) => _id === selectedId);
-    const newTotalPrice = productToSend.totalPrice.map((item, i) => {
-      item.value = item.value - oldPrice[i].value + size.additionalPrice[i].value;
-      return item;
-    });
+    const selectedSize = sizes.find(({ _id }) => _id === selectedId);
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: newTotalPrice,
+        totalPrice: selectedSize.additionalPrice,
         dimensions: {
-          volumeInLiters: size.volumeInLiters,
-          weightInKg: size.weightInKg
+          volumeInLiters: selectedSize.volumeInLiters,
+          weightInKg: selectedSize.weightInKg
         },
-        selectedSize: selectedId
+        selectedSize
       })
     );
 
@@ -123,10 +123,15 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
+      <Link to={routes.patthToCategory} className={styles.backBtn}>
+        <KeyboardBackspaceIcon
+          color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
+        />
+      </Link>
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo currencySign={currencySign} />
+          <ProductInfo currencySign={currencySign} price={currentSize.additionalPrice} />
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}

@@ -10,22 +10,11 @@ import {
 } from './products.actions';
 
 import { setError } from '../error/error.actions';
-import {
-  setProductsForSearchBar,
-  setSearchBarLoading
-} from '../search-bar/search-bar.actions';
+import { setProductsForSearchBar, setSearchBarLoading } from '../search-bar/search-bar.actions';
 
-import {
-  GET_ALL_FILTERS,
-  GET_FILTRED_PRODUCTS,
-  GET_PRODUCT
-} from './products.types';
+import { GET_ALL_FILTERS, GET_FILTRED_PRODUCTS, GET_PRODUCT } from './products.types';
 
-import {
-  getFilteredProducts,
-  getProductById,
-  getAllFilters
-} from './products.operations';
+import { getFilteredProducts, getProductById, getAllFilters } from './products.operations';
 
 import { setComments } from '../comments/comments.actions';
 import routes from '../../configs/routes';
@@ -79,7 +68,9 @@ export function* handleProductLoading({ payload }) {
     yield put(setProductLoading(true));
     const product = yield call(getProductById, payload);
     yield put(setProduct(product));
-    yield put(setComments(product.comments?.items));
+    if (product.comments.items) {
+      yield put(setComments(product.comments?.items));
+    }
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));

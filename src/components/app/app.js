@@ -13,7 +13,11 @@ import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { getCategories } from '../../redux/categories/categories.actions';
 import { preserveUser } from '../../redux/user/user.actions';
-import { getAllFilters, setCountPerPage } from '../../redux/products/products.actions';
+import {
+  getAllFilters,
+  setCountPerPage,
+  getFiltredProducts
+} from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLightModeAndLocation } from '../../redux/selectors/multiple.selectors';
 
@@ -36,6 +40,7 @@ const App = () => {
     dispatch(getCategories());
     dispatch(getContacts());
     dispatch(getAllFilters());
+    dispatch(getFiltredProducts({}));
   }, []);
 
   useEffect(() => {

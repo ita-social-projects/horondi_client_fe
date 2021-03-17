@@ -14,12 +14,14 @@ export const PRODUCT_DESCRIPTION = {
     description: 'Опис продукту',
     mainMaterial: 'Основна тканина ',
     innerMaterial: 'Внутрішній матеріал ',
+    bottomMaterial: 'Матеріал низу',
     strapLengthInCm: 'Довжина лямок(см) '
   },
   1: {
     description: 'Product description',
     mainMaterial: 'Main material ',
     innerMaterial: 'Inner material ',
+    bottomMaterial: 'Bottom material ',
     strapLengthInCm: 'Strap length(cm) '
   }
 };
@@ -119,10 +121,10 @@ export const COLOR = {
 
 export const SIMILAR_ITEMS = {
   0: {
-    title: 'Схожі товари'
+    title: 'З цим пасує гарно'
   },
   1: {
-    title: 'Similar items'
+    title: 'It fits well with this'
   }
 };
 
@@ -153,8 +155,7 @@ export const TOOLTIPS = {
 export const DIALOG = {
   0: {
     title: 'Видалити коментар?',
-    description:
-      'Ви дійсно хочете видалити коментар? Після видалення Ви не зможете його відновити.'
+    description: 'Ви дійсно хочете видалити коментар? Після видалення Ви не зможете його відновити.'
   },
   1: {
     title: 'Delete comment?',
@@ -165,13 +166,12 @@ export const DIALOG = {
 
 export const COMMENTS = {
   0: {
-    title: 'Коментарі',
+    title: 'Відгуки',
     firstName: `Ім'я`,
     email: 'Електронна адреса',
     text: 'Поділіться своїми враженнями з іншими',
     submit: 'Залишити коментар',
-    unregisteredTip:
-      'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
+    unregisteredTip: 'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
     registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
     successfulTip: 'Встановити рейтинг',
     loadMore: 'Завантажити більше',

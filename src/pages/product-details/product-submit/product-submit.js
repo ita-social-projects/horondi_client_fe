@@ -12,45 +12,39 @@ import { toastSettings } from '../../../configs/index';
 
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
+import { isProductInCartAlready } from '../../../utils/productDetails';
+
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart } from '../../../redux/cart/cart.actions';
-import {
-  setToastMessage,
-  setToastSettings
-} from '../../../redux/toast/toast.actions';
+import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 
-import {
-  PDP_BUTTONS,
-  TOOLTIPS
-} from '../../../translations/product-details.translations';
+import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
 
 import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems } = useSelector(
+  const { language, productToSend, product, wishlistItems, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
 
   const { selectedSize } = productToSend;
 
-  const isWishful = useMemo(
-    () => wishlistItems.find((item) => product._id === item._id),
-    [product._id, wishlistItems]
-  );
+  const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
+    product._id,
+    wishlistItems
+  ]);
 
-  const sizeToSend = useMemo(
-    () => sizes.find(({ _id }) => _id === selectedSize),
-    [selectedSize, sizes]
-  );
+  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize._id), [
+    selectedSize,
+    sizes
+  ]);
 
-  const wishlistTip = isWishful
-    ? TOOLTIPS[language].removeWishful
-    : TOOLTIPS[language].addWishful;
+  const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
 
   const toastMessages = TOAST_MESSAGE[language];
 
@@ -61,25 +55,28 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       basePrice,
       images: { primary }
     } = product;
+
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
       dispatch(setToastMessage(toastMessages.removedFromWishList));
       dispatch(setToastSettings(toastSettings));
     } else {
-      dispatch(
-        addItemToWishlist({ _id, name, basePrice, images: { primary } })
-      );
+      dispatch(addItemToWishlist({ _id, name, basePrice, images: { primary } }));
       dispatch(setToastMessage(toastMessages.addedToWishList));
       dispatch(setToastSettings(toastSettings));
     }
   };
 
   const onAddToCart = () => {
-    if ((product && !product.options[0].size) || selectedSize) {
+    if (isProductInCartAlready(cartList, productToSend)) {
+      return null;
+    }
+
+    if (product || selectedSize) {
       dispatch(
         addItemToCart({
           ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
+          selectedSize: sizeToSend || {}
         })
       );
       dispatch(setToastMessage(toastMessages.addedToCard));
@@ -90,13 +87,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
-        })
-      );
+    if (product || selectedSize) {
+      onAddToCart();
       dispatch(push('/cart'));
     } else {
       setSizeIsNotSelectedError(true);
@@ -107,11 +99,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     <div className={styles.submit}>
       <Tooltip title={wishlistTip} placement='bottom'>
         {isWishful ? (
-          <FavoriteIcon
-            data-cy='wishful'
-            className={styles.redHeart}
-            onClick={onWishfulHandler}
-          />
+          <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={onWishfulHandler} />
         ) : (
           <FavouriteBorderIcon
             data-cy='not-wishful'

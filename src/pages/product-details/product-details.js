@@ -1,67 +1,58 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
-import Comments from './comments';
-import SimilarProducts from './similar-products';
+import { selectCurrencySign } from '../../utils/currency';
+import { DEFAULT_SIZE } from '../../configs/index';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
+
+import ProductImages from './product-images';
+import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
 import ProductSubmit from './product-submit';
-import ProductFeatures from './product-features/product-features';
-import ProductInfo from './product-info';
-import ProductImages from './product-images';
+import SimilarProducts from './similar-products';
+import Comments from './comments';
+
 import { Loader } from '../../components/loader/loader';
 import {
   clearProductToSend,
-  getFiltredProducts,
   getProduct,
   setCategoryFilter,
   setProductToSend
 } from '../../redux/products/products.actions';
 
-import { DEFAULT_PRICE, DEFAULT_SIZE } from '../../configs';
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
+import routes from '../../configs/routes';
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const {
-    product,
-    isLoading,
-    categoryFilter,
-    productToSend,
-    currency
-  } = useSelector(selectCurrencyProductsCategoryFilter);
+  const { isLightTheme, isLoading, productToSend, currency, product } = useSelector(
+    selectCurrencyProductsCategoryFilter
+  );
   const dispatch = useDispatch();
   const styles = useStyles();
 
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
-  const currencySign =
-    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+  const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
 
   const {
     _id: productId,
     name: productName,
-    basePrice,
     images,
-    options = [],
-    category
+    category,
+    sizes,
+    mainMaterial,
+    bottomMaterial,
+    pattern
   } = product || {};
 
-  const { selectedSize } = productToSend;
-
-  const defaultSize = useMemo(
-    () =>
-      options[0]
-        ? options.find(({ size }) => !!size && size.name === DEFAULT_SIZE)
-        : {},
-    [options]
-  );
-
-  const { volumeInLiters, weightInKg } =
-    (defaultSize && defaultSize.size) || (options[0] && options[0].size) || {};
+  const currentSize = sizes ? sizes.find(({ name }) => name === DEFAULT_SIZE) : {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -75,9 +66,17 @@ const ProductDetails = ({ match }) => {
         setProductToSend({
           _id: productId,
           name: productName,
-          image: images.primary.small,
-          totalPrice: basePrice,
-          dimensions: { volumeInLiters, weightInKg }
+          selectedSize: currentSize,
+          bottomMaterial,
+          image: images.additional.small,
+          totalPrice: currentSize.additionalPrice,
+          dimensions: {
+            volumeInLiters: currentSize.volumeInLiters,
+            weightInKg: currentSize.weightInKg
+          },
+          categoryID: category._id,
+          mainMaterialColorID: mainMaterial.color._id,
+          patternID: pattern._id
         })
       );
     }
@@ -87,9 +86,8 @@ const ProductDetails = ({ match }) => {
       dispatch(clearProductToSend());
     };
   }, [
-    basePrice,
-    volumeInLiters,
-    weightInKg,
+    currentSize.volumeInLiters,
+    currentSize.weightInKg,
     product,
     category,
     dispatch,
@@ -99,108 +97,18 @@ const ProductDetails = ({ match }) => {
     currency
   ]);
 
-  useEffect(() => {
-    if (categoryFilter) {
-      dispatch(getFiltredProducts({}));
-    }
-  }, [dispatch, categoryFilter]);
-
-  const uniqueSizes = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].size
-          ? options.map(({ size: { available, name } }) => available && name)
-          : null
-      )
-    ],
-    [options]
-  );
-
-  const uniqueBottomMaterials = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].bottomMaterial
-          ? options.map(({ bottomMaterial: item }) =>
-            item && item.available ? item.name[1].value : null
-          )
-          : null
-      )
-    ],
-    [options]
-  );
-
-  const uniqueAdditions = useMemo(
-    () => [
-      ...new Set(
-        options.length && options[0].additions
-          ? options
-            .filter(({ additions }) => additions.length > 0)
-            .map(({ additions: [{ name }] }) => name[1].value)
-          : null
-      )
-    ],
-    [options]
-  );
-
-  const productAdditions = useMemo(
-    () =>
-      options.length
-        ? uniqueAdditions.map(
-          (item) =>
-            options
-              .filter(({ additions }) => additions.length > 0)
-              .find(({ additions: [{ name }] }) => item === name[1].value)
-              .additions[0]
-        )
-        : null,
-    [uniqueAdditions, options]
-  );
-
-  const sizes = useMemo(
-    () =>
-      options.length
-        ? uniqueSizes.map(
-          (item) => options.find(({ size: { name } }) => item === name).size
-        )
-        : null,
-    [uniqueSizes, options]
-  );
-
-  const bottomMaterials = useMemo(
-    () =>
-      uniqueBottomMaterials[0] && options && options.length
-        ? uniqueBottomMaterials.map(
-          (item) =>
-            options.find(
-              ({ bottomMaterial: { name } }) => item === name[1].value
-            ).bottomMaterial
-        )
-        : null,
-    [uniqueBottomMaterials, options]
-  );
-
   const handleSizeChange = (selectedId) => {
-    const oldPrice = selectedSize
-      ? sizes.find(({ _id }) => _id === selectedSize).additionalPrice
-      : DEFAULT_PRICE;
-
-    const size = sizes.find(({ _id }) => _id === selectedId);
-
-    const newTotalPrice = productToSend.totalPrice.map((item, i) => {
-      item.value =
-        item.value - oldPrice[i].value + size.additionalPrice[i].value;
-      return item;
-    });
+    const selectedSize = sizes.find(({ _id }) => _id === selectedId);
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: newTotalPrice,
+        totalPrice: selectedSize.additionalPrice,
         dimensions: {
-          volumeInLiters: size.volumeInLiters,
-          weightInKg: size.weightInKg
+          volumeInLiters: selectedSize.volumeInLiters,
+          weightInKg: selectedSize.weightInKg
         },
-        selectedSize: selectedId
+        selectedSize
       })
     );
 
@@ -215,26 +123,21 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
+      <Link to={routes.patthToCategory} className={styles.backBtn}>
+        <KeyboardBackspaceIcon
+          color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
+        />
+      </Link>
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo currencySign={currencySign} />
+          <ProductInfo currencySign={currencySign} price={currentSize.additionalPrice} />
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}
             sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
-          <ProductFeatures
-            currencySign={currencySign}
-            bottomMaterials={bottomMaterials}
-            additions={productAdditions}
-          />
-          <ProductSubmit
-            bottomMaterials={bottomMaterials}
-            sizes={sizes}
-            productToSend={productToSend}
-            setSizeIsNotSelectedError={setSizeIsNotSelectedError}
-          />
+          <ProductSubmit sizes={sizes} setSizeIsNotSelectedError={setSizeIsNotSelectedError} />
         </div>
       </div>
       <SimilarProducts currencySign={currencySign} />

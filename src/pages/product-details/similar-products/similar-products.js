@@ -12,6 +12,7 @@ import { selectInfoForSimilarProducts } from './selector';
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
+import { similarProductForCart } from '../../../utils/productDetails';
 
 const SimilarProducts = ({ currencySign }) => {
   const styles = useStyles();
@@ -23,23 +24,15 @@ const SimilarProducts = ({ currencySign }) => {
 
   let imagesList = [];
   if (cartList) {
-    for (const simProduct of similarProducts) {
-      for (const cartProduct of cartList) {
-        if (
-          simProduct.category._id !== cartProduct.categoryID &&
-          (simProduct.mainMaterial.color._id === cartProduct.mainMaterialColorID ||
-            simProduct.pattern._id === cartProduct.patternID)
-        ) {
-          imagesList = [...imagesList, simProduct];
-        }
-      }
-    }
+    imagesList = similarProductForCart(similarProducts, cartList);
   } else {
-    imagesList = _.filter(similarProducts, ({ category, mainMaterial, pattern }) => (
-      category._id !== product.category._id &&
+    imagesList = _.filter(
+      similarProducts,
+      ({ category, mainMaterial, pattern }) =>
+        category._id !== product.category._id &&
         (mainMaterial.color._id === product.mainMaterial.color._id ||
           pattern._id === product.pattern._id)
-    ));
+    );
   }
 
   imagesList = imagesList.map(({ _id, images, rate, name, basePrice }) => (

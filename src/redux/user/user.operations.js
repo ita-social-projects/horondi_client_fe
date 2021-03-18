@@ -43,29 +43,18 @@ const getUserByToken = async () => {
               }
             }
             cart {
-              _id
-              name {
-                lang
-                value
+              items {
+                product {
+                  _id
+                }
+                options {
+                  size {
+                    _id
+                  }
+                }
               }
               totalPrice {
                 value
-                currency
-              }
-              image
-              bagBottom {
-                name {
-                  value
-                  lang
-                }
-                value
-              }
-              quantity
-              selectedSize
-              sidePocket
-              dimensions {
-                volumeInLiters
-                weightInKg
               }
             }
           }
@@ -149,9 +138,16 @@ const removeProductFromUserCart = async ({ id, product, key }) => {
       key
     },
     mutation: gql`
-      mutation($id: ID!, $key: String!, $product: CartProductInput!) {
-        removeProductFromCart(id: $id, product: $product, key: $key) {
-          _id
+      mutation($productId: ID!, $sizeId: ID!, $id: ID!) {
+        removeCartProductItem(productId: $productId, sizeId: $sizeId, id: $id) {
+          ... on User {
+            _id
+            firstName
+          }
+          ... on Error {
+            message
+            statusCode
+          }
         }
       }
     `
@@ -161,6 +157,7 @@ const removeProductFromUserCart = async ({ id, product, key }) => {
 };
 
 const addProductToUserCart = async ({ id, product, key }) => {
+  console.log('addddd');
   const result = await client.mutate({
     variables: {
       id,
@@ -168,9 +165,16 @@ const addProductToUserCart = async ({ id, product, key }) => {
       key
     },
     mutation: gql`
-      mutation($id: ID!, $key: String!, $product: CartProductInput!) {
-        addProductToCart(id: $id, product: $product, key: $key) {
-          _id
+      mutation($productId: ID!, $sizeId: ID!, $id: ID!) {
+        addProductToCart(productId: $productId, sizeId: $sizeId, id: $id) {
+          ... on User {
+            _id
+            firstName
+          }
+          ... on Error {
+            message
+            statusCode
+          }
         }
       }
     `

@@ -16,6 +16,7 @@ import {
   setUserOrders
 } from './user.actions';
 import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
+import { megreCartFromLCwithUserCart } from '../cart/cart.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -30,7 +31,7 @@ import {
   LOGIN_BY_GOOGLE
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
-import { REDIRECT_TIMEOUT } from '../../configs/index';
+import { REDIRECT_TIMEOUT , cartKey } from '../../configs/index';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { setCart } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
@@ -78,32 +79,21 @@ export const loginUser = (data) => {
 			  }			  
 			}
 		}
-					cart {
-              _id
-              name {
-                lang
-                value
-              }
-                totalPrice {
-                  value
-                  currency
-              }
-              image
-              bagBottom {
-                  name {
-                      value  
-                      lang                    
-                  }
-                  value
-              }
-                quantity 
-                selectedSize
-                sidePocket
-                dimensions {
-                    volumeInLiters
-                    weightInKg
-                }                
-            }
+    cart{
+      items{
+        product{
+          _id
+        }
+        options{
+          size {
+            _id
+          }
+        }
+      }
+      totalPrice{
+        value
+      }
+    }
   }
 }
   `;
@@ -159,14 +149,25 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
+    const cartFromLc = getFromLocalStorage(cartKey);
+    if (cartFromLc.length > 0) {
+      const mergedCart = yield call(
+        megreCartFromLCwithUserCart,
+        cartFromLc,
+        user.data.loginUser._id
+      );
+      yield put(setCart(mergedCart));
+      yield setToLocalStorage('cart', mergedCart);
+    } else {
+      yield put(setCart(user.data.loginUser.cart));
+      yield setToLocalStorage('cart', user.data.loginUser.cart);
+    }
     yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
-    yield put(setCart(user.data.loginUser.cart));
     yield put(setWishlist(user.data.loginUser.wishlist));
 
     yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
     yield setToLocalStorage('accessToken', user.data.loginUser.token);
     yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
-    yield setToLocalStorage('cart', user.data.loginUser.cart);
 
     yield put(setUserLoading(false));
     yield put(push('/'));

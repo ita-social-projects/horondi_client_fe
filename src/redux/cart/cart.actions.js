@@ -8,7 +8,10 @@ import {
   SET_DELIVERY_TYPE,
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE,
-  RESET_CART
+  RESET_CART,
+  ADD_PRODUCT_TO_USER_CART,
+  DELETE_PRODUCT_FROM_USER_CART,
+  MERGE_CART_FROM_LC_WITT_USER_CART
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -61,6 +64,21 @@ const resetCart = () => ({
   type: RESET_CART
 });
 
+const addProductToUserCart = (payload) => ({
+  type: ADD_PRODUCT_TO_USER_CART,
+  payload
+});
+
+const deleteProductToUserCart = (payload) => ({
+  type: DELETE_PRODUCT_FROM_USER_CART,
+  payload
+});
+
+const mergeCarts = (payload) => ({
+  type: MERGE_CART_FROM_LC_WITT_USER_CART,
+  payload
+});
+
 export {
   setCart,
   getCart,
@@ -71,5 +89,8 @@ export {
   setDeliveryType,
   addDeliveryType,
   getDeliveryType,
-  resetCart
+  resetCart,
+  addProductToUserCart,
+  deleteProductToUserCart,
+  mergeCarts
 };

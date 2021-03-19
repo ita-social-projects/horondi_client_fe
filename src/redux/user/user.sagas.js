@@ -31,7 +31,7 @@ import {
   LOGIN_BY_GOOGLE
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
-import { REDIRECT_TIMEOUT , cartKey } from '../../configs/index';
+import { REDIRECT_TIMEOUT, cartKey } from '../../configs/index';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { setCart } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
@@ -84,6 +84,7 @@ export const loginUser = (data) => {
         product{
           _id
         }
+        quantity
         options{
           size {
             _id
@@ -150,24 +151,17 @@ export function* handleUserLoad({ payload }) {
     const user = yield call(loginUser, payload);
     const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
     const cartFromLc = getFromLocalStorage(cartKey);
-    if (cartFromLc.length > 0) {
-      const mergedCart = yield call(
-        megreCartFromLCwithUserCart,
-        cartFromLc,
-        user.data.loginUser._id
-      );
-      yield put(setCart(mergedCart));
-      yield setToLocalStorage('cart', mergedCart);
-    } else {
-      yield put(setCart(user.data.loginUser.cart));
-      yield setToLocalStorage('cart', user.data.loginUser.cart);
-    }
     yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
     yield put(setWishlist(user.data.loginUser.wishlist));
 
     yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
     yield setToLocalStorage('accessToken', user.data.loginUser.token);
     yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
+
+    const mergedCart = yield call(megreCartFromLCwithUserCart, cartFromLc, user.data.loginUser._id);
+    console.log(mergedCart);
+    yield put(setCart(mergedCart));
+    yield setToLocalStorage(cartKey, mergedCart);
 
     yield put(setUserLoading(false));
     yield put(push('/'));

@@ -47,6 +47,7 @@ const getUserByToken = async () => {
                 product {
                   _id
                 }
+                quantity
                 options {
                   size {
                     _id

@@ -8,7 +8,6 @@ import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
 import { selectCurrencySign } from '../../utils/currency';
-import { DEFAULT_SIZE } from '../../configs/index';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import ProductImages from './product-images';
@@ -52,7 +51,7 @@ const ProductDetails = ({ match }) => {
     pattern
   } = product || {};
 
-  const currentSize = sizes ? sizes.find(({ name }) => name === DEFAULT_SIZE) : {};
+  const currentSize = sizes ? sizes[0] : {};
 
   useEffect(() => {
     dispatch(getProduct(id));

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { _ } from 'lodash';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
@@ -14,9 +13,9 @@ import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 
-const SimilarProducts = ({ currencySign }) => {
+const SimilarProducts = ({ currencySign, cartList }) => {
   const styles = useStyles();
-  const { language, similarProducts, currency, product, cartList } = useSelector(
+  const { language, similarProducts, currency, product } = useSelector(
     selectInfoForSimilarProducts
   );
 
@@ -26,8 +25,7 @@ const SimilarProducts = ({ currencySign }) => {
   if (cartList) {
     imagesList = similarProductForCart(similarProducts, cartList);
   } else {
-    imagesList = _.filter(
-      similarProducts,
+    imagesList = similarProducts.filter(
       ({ category, mainMaterial, pattern }) =>
         category._id !== product.category._id &&
         (mainMaterial.color._id === product.mainMaterial.color._id ||

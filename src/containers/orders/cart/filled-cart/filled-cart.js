@@ -12,9 +12,10 @@ import SimilarProducts from '../../../../pages/product-details/similar-products'
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
+  const { language, currency, cartList } = useSelector(({ Language, Currency, Cart }) => ({
     language: Language.language,
-    currency: Currency.currency
+    currency: Currency.currency,
+    cartList: Cart.list
   }));
 
   const totalPrice = items.reduce(
@@ -39,7 +40,7 @@ const FilledCart = ({ items }) => {
           <DeliveryType language={language} totalPrice={totalPrice} currency={currency} />
         </>
       </div>
-      <SimilarProducts currencySign={currencySign} />
+      <SimilarProducts currencySign={currencySign} cartList={cartList} />
     </div>
   );
 };

@@ -105,10 +105,10 @@ const Routes = () => {
                 redirectTo='/login'
               />
               <Route
-                path='/products/:category/:model'
+                path='/:category'
                 exact
-                render={({ match }) => {
-                  const { category, model } = match.params;
+                render={(data) => {
+                  const { category, model } = data.match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>
                       categoryFound.name[1].value.toLowerCase() === category.toLowerCase()
@@ -118,7 +118,6 @@ const Routes = () => {
                 }}
               />
               <Route path='/product/:id' exact component={ProductDetails} />
-              <Route path='/products' exact component={ProductListPage} />
             </Switch>
           </div>
           <AppFooter />

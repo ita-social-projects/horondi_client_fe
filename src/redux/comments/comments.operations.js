@@ -1,31 +1,38 @@
 import { gql } from '@apollo/client';
-import getItems, { setItems, client } from '../../utils/client';
+import { setItems, client } from '../../utils/client';
 
-const getComments = async (id, limit) => {
-  const res = await getItems(
-    `query($id: ID!, $limit: Int!) {
-        getAllCommentsByProduct(productId: $id, limit: $limit) {
+const getComments = async (id) => {
+  const result = await client.query({
+    variables: {
+      id
+    },
+    query: gql`
+      query($id: ID!) {
+        getAllCommentsByProduct(productId: $id) {
           ... on Comment {
             _id
             text
             date
             user {
+              _id
               email
-              name
+              firstName
+              lastName
               images {
-                thumbnail 
+                thumbnail
               }
             }
           }
+          ... on Error {
+            statusCode
+            message
+          }
         }
-    }`,
-    {
-      id,
-      limit
-    }
-  );
+      }
+    `
+  });
   await client.resetStore();
-  return res.data.getAllCommentsByProduct;
+  return result.data.getAllCommentsByProduct;
 };
 
 const changeRate = (payload) =>

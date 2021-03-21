@@ -5,7 +5,11 @@ import Slider from '@material-ui/core/Slider';
 import { map } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import { PRICE_TEXT, PRICE_FROM, PRICE_TO } from '../../../../translations/product-list.translations';
+import {
+  PRICE_TEXT,
+  PRICE_FROM,
+  PRICE_TO
+} from '../../../../translations/product-list.translations';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
@@ -18,13 +22,15 @@ const PriceFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
 
-  const { filters, language, currency, maxPrice, minPrice } = useSelector(({ Products, Language, Currency }) => ({
-    filters: Products.filters.priceFilter,
-    language: Language.language,
-    currency: Currency.currency,
-    maxPrice: Products.filterData.maxPrice,
-    minPrice: Products.filterData.minPrice
-  }));
+  const { filters, language, currency, maxPrice, minPrice } = useSelector(
+    ({ Products, Language, Currency }) => ({
+      filters: Products.filters.priceFilter,
+      language: Language.language,
+      currency: Currency.currency,
+      maxPrice: Products.filterData.maxPrice,
+      minPrice: Products.filterData.minPrice
+    })
+  );
 
   useEffect(() => {
     if (searchParams.get(priceFilter)) {
@@ -54,7 +60,8 @@ const PriceFilter = () => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value} {Math.round(filters[0] / 100)}- {PRICE_TO[language].value} {Math.round(filters[1] / 100)}
+        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value} {Math.round(filters[0] / 100)}-{' '}
+        {PRICE_TO[language].value} {Math.round(filters[1] / 100)}
       </Typography>
       <Slider
         className={styles.slider}

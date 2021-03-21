@@ -22,9 +22,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
       .map(({ _id, name }) => (
         <Button
           key={_id}
-          className={
-            _id === selectedSize ? styles.selectedSize : styles.sizeButton
-          }
+          className={_id === selectedSize._id ? styles.selectedSize : styles.sizeButton}
           onClick={() => handleSizeChange(_id)}
         >
           {name}
@@ -41,9 +39,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
           </div>
         </div>
       ) : null}
-      {sizeIsNotSelectedError ? (
-        <div className={styles.error}>{SIZE[language].error}</div>
-      ) : null}
+      {sizeIsNotSelectedError ? <div className={styles.error}>{SIZE[language].error}</div> : null}
     </div>
   );
 };

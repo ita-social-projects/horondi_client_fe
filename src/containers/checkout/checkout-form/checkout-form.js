@@ -18,8 +18,8 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR } from '../../../configs';
-import { calcPrice } from '../../../utils/priceCalculating';
+import { CY_CODE_ERR, DEFAULT_CURRENCY } from '../../../configs';
+import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
@@ -43,9 +43,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
   });
 
   const dispatch = useDispatch();
-
   const totalPriceToPay = cartItems.reduce(
-    (previousValue, currentValue) => previousValue + calcPrice(currentValue, currency),
+    (previousValue, currentValue) =>
+      previousValue + calcPriceForCart(currentValue, currency, currentValue.quantity),
     0
   );
 

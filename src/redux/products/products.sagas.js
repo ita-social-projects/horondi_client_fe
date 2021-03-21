@@ -68,7 +68,9 @@ export function* handleProductLoading({ payload }) {
     yield put(setProductLoading(true));
     const product = yield call(getProductById, payload);
     yield put(setProduct(product));
-    yield put(setComments(product.comments?.items));
+    if (product.comments.items) {
+      yield put(setComments(product.comments?.items));
+    }
     yield put(setProductLoading(false));
   } catch (e) {
     yield put(setProductLoading(false));

@@ -1,7 +1,44 @@
 import { gql } from '@apollo/client';
 import { client } from '../../utils/client';
 
-const megreCartFromLCwithUserCart = async (cartFromLc, userId) => {
+const cartReqBody = `
+items {
+    product {
+    _id
+    name {
+        lang
+        value
+    }
+    bottomMaterial{
+        material{
+        name{
+            lang
+            value
+        }
+        }
+    }
+    images{
+        primary{
+        small
+        }
+    }
+    
+    }
+    quantity
+    options {
+    size {
+        _id
+        name
+    }
+    }
+    price {
+    value
+    }
+}
+`
+
+const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
+
   const getCartInput = (cartFromLc) =>
     cartFromLc.map((item) => ({
       product: item.product._id,
@@ -10,54 +47,37 @@ const megreCartFromLCwithUserCart = async (cartFromLc, userId) => {
         size: item.options.size._id
       }
     }));
-  const cartForMerge = getCartInput(cartFromLc);
-  console.log(cartForMerge);
+  const items = getCartInput(cartFromLc);
 
-  const result = await client.mutate({
+  const res = await client.mutate({
     variables: {
-      items: cartForMerge,
-      id: userId
+      items,
+      id
     },
     mutation: gql`
-      mutation($items: [CartFromLSInput!], $id: ID!) {
-        mergeCartFromLS(items: $items, id: $id) {
-          ... on User {
-            _id
-            firstName
-            cart {
-              items {
-                product {
-                  _id
-                  name {
-                    lang
+        mutation($items: [CartFromLSInput!], $id: ID!) {
+            mergeCartFromLS(items: $items, id: $id) {
+            ... on User {
+                _id
+                firstName
+                cart {
+                    ${cartReqBody}
+                totalPrice{
+                    currency
                     value
-                  }
-                  pattern {
-                    _id
-                  }
                 }
-                quantity
-                options {
-                  size {
-                    _id
-                  }
                 }
-                price {
-                  value
-                }
-              }
             }
-          }
-          ... on Error {
-            message
-            statusCode
-          }
+            ... on Error {
+                message
+                statusCode
+            }
+            }
         }
-      }
-    `
+    `,
+    fetchPolicy: 'no-cache'
   });
-  console.log(result);
-  return result.data.mergeCartFromLS;
+  return res.data.mergeCartFromLS.cart.items;
 };
 
 const getCartByUserId = async (userId) => {
@@ -66,36 +86,20 @@ const getCartByUserId = async (userId) => {
       id: userId
     },
     query: gql`
-      query($id: ID!) {
+      query($id:ID!){
         getCartByUserId(id: $id) {
           ... on User {
             cart {
-              items {
-                product {
-                  _id
-                  name {
-                    lang
-                    value
-                  }
-                }
-                options {
-                  size {
-                    _id
-                  }
-                }
-              }
+              ${cartReqBody}
               totalPrice {
                 value
               }
             }
           }
-          ... on Error {
-            statusCode
-            message
-          }
         }
       }
-    `
+    `,
+    fetchPolicy: 'no-cache'
   });
   return result.data.getCartByUserId;
 };
@@ -112,28 +116,7 @@ const cleanCart = async (userId) => {
             _id
             firstName
             cart {
-              items {
-                product {
-                  _id
-                  name {
-                    lang
-                    value
-                  }
-                  pattern {
-                    _id
-                  }
-                }
-                quantity
-                options {
-                  size {
-                    _id
-                  }
-                }
-                price {
-                  value
-                }
-              }
-            }
+                ${cartReqBody}
           }
           ... on Error {
             message
@@ -141,10 +124,116 @@ const cleanCart = async (userId) => {
           }
         }
       }
-    `
+    `,
+    fetchPolicy: 'no-cache'
   });
   console.log(result);
   return result.data.cleanCart;
 };
 
-export { megreCartFromLCwithUserCart, getCartByUserId, cleanCart };
+const addProductToCart = async (userId,cartItem) => {
+
+    const result = await client.mutate({
+      variables: {
+        productId: cartItem.product._id,
+        sizeId: cartItem.options.size._id,
+        id: userId
+      },
+      mutation: gql`
+        mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
+            addProductToCart(productId: $productId, sizeId: $sizeId,id:$id) {
+                ... on User {
+                    _id
+                    firstName
+                    cart {
+                        ${cartReqBody}
+                    totalPrice{
+                        currency
+                        value
+                    }
+                    }
+                }
+            ... on Error {
+                message
+                statusCode
+            }
+            }
+        }
+      `,
+      fetchPolicy: 'no-cache'
+    });
+    return result.data.addProductToCart;
+  };
+
+  const DeleteProductFromCart = async ( userId,cartItem) => {
+
+    const result = await client.mutate({
+      variables: {
+        productId: cartItem.product._id,
+        sizeId: cartItem.options.size._id,
+        id: userId
+      },
+      mutation: gql`
+        mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
+            removeCartProductItem(productId: $productId, sizeId: $sizeId,id:$id) {
+                ... on User {
+                    _id
+                    firstName
+                    cart {
+                        ${cartReqBody}
+                    totalPrice{
+                        currency
+                        value
+                    }
+                    }
+                }
+            ... on Error {
+                message
+                statusCode
+            }
+            }
+        }
+      `,
+      fetchPolicy: 'no-cache'
+    });
+    return result.data.removeCartProductItem;
+  };
+
+  const updateCartItemQuantity = async ( productId ,quantity, sizeId, userId) => {
+
+    const result = await client.mutate({
+      variables: {
+        productId,
+        quantity,
+        sizeId,
+        userId
+      },
+      mutation: gql`
+        mutation($productId: ID!,$quantity:Int!, $sizeId: ID!, $id:ID!) {
+            updateCartItemQuantity(productId: $productId,quantity:$quantity, sizeId: $sizeId,id:$id) {
+                ... on User {
+                    _id
+                    firstName
+                    cart {
+                        ${cartReqBody}
+                    totalPrice{
+                        currency
+                        value
+                    }
+                    }
+                }
+            ... on Error {
+                message
+                statusCode
+            }
+            }
+        }
+      `
+      ,
+      fetchPolicy: 'no-cache'
+    });
+    return result.data.updateCartItemQuantity;
+  };
+
+
+export { megreCartFromLCwithUserCart,getCartByUserId,cleanCart,addProductToCart,DeleteProductFromCart,updateCartItemQuantity};

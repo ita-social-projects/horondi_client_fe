@@ -39,7 +39,7 @@ export const selectLanguageProductsUserWishlist = ({
   Products,
   User,
   Wishlist,
-  Cart
+  Cart,
 }) => ({
   language: Language.language,
   productToSend: Products.productToSend,

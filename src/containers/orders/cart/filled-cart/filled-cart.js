@@ -14,7 +14,7 @@ const FilledCart = ({ items }) => {
   }));
 
   const totalPrice = items.reduce(
-    (acc, item) => acc + calcPriceForCart(item, currency, item.quantity),
+    (acc, item) => acc + calcPriceForCart(item, currency),
     0
   );
 

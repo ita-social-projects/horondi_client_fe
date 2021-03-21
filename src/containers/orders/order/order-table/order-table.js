@@ -33,7 +33,7 @@ const OrderTable = ({ items, currency, calcPrice }) => {
 
   const cartItems = items.map((item) => (
     <CartItem
-      key={item._id}
+      key={item.product.product_id}
       item={item}
       calcPrice={calcPrice}
       language={language}

@@ -13,12 +13,13 @@ import { toastSettings } from '../../../configs/index';
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
 import { isProductInCartAlready } from '../../../utils/productDetails';
+import { getProductDataForCart } from '../../../utils/makeItemForCart';
 
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
-import { addItemToCart } from '../../../redux/cart/cart.actions';
+import { addItemToCart,addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 
 import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
@@ -28,10 +29,9 @@ import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems, cartList } = useSelector(
+  const { language, productToSend, product, wishlistItems, cartList, userData } = useSelector(
     selectLanguageProductsUserWishlist
   );
-
   const { selectedSize } = productToSend;
 
   const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
@@ -73,12 +73,19 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     }
 
     if (product || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend || {}
-        })
-      );
+      const newCartItem = getProductDataForCart(productToSend,sizeToSend);
+      if(userData){
+        const newCartItemWithUserId = {
+          userId: userData._id,
+          cartItem: newCartItem
+        }
+        dispatch(addProductToUserCart(newCartItemWithUserId));
+      }
+      else{
+        dispatch(
+          addItemToCart(newCartItem)
+        );
+      }
       dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));
     } else {

@@ -11,11 +11,12 @@ import { getCart } from '../../redux/cart/cart.actions';
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(({ Cart }) => Cart.list);
+  const userData = useSelector(({ User }) => User.userData);
   const styles = useStyles({ fromSideBar });
 
   useEffect(() => {
     dispatch(getCart());
-  }, [dispatch]);
+  }, []);
 
   const itemsCount = useMemo(
     () =>

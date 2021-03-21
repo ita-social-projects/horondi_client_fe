@@ -16,7 +16,7 @@ import {
   setUserOrders
 } from './user.actions';
 import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
-import { megreCartFromLCwithUserCart } from '../cart/cart.operations';
+import { megreCartFromLCwithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -150,16 +150,14 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
-    const cartFromLc = getFromLocalStorage(cartKey);
-    yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
-    yield put(setWishlist(user.data.loginUser.wishlist));
 
     yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
     yield setToLocalStorage('accessToken', user.data.loginUser.token);
     yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
-
+    yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
+    yield put(setWishlist(user.data.loginUser.wishlist));
+    const cartFromLc = getFromLocalStorage(cartKey);
     const mergedCart = yield call(megreCartFromLCwithUserCart, cartFromLc, user.data.loginUser._id);
-    console.log(mergedCart);
     yield put(setCart(mergedCart));
     yield setToLocalStorage(cartKey, mergedCart);
 
@@ -293,7 +291,10 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
+    const userCart = yield call(getCartByUserId,user._id);
+    yield put(setCart(userCart.cart.items))
   } catch (error) {
+    console.log(error);
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   } finally {

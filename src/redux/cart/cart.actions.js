@@ -1,6 +1,7 @@
 import {
   SET_CART,
   GET_CART,
+  GET_CART_BY_USER_ID,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   SET_CART_ITEM_QUANTITY,
@@ -11,7 +12,9 @@ import {
   RESET_CART,
   ADD_PRODUCT_TO_USER_CART,
   DELETE_PRODUCT_FROM_USER_CART,
-  MERGE_CART_FROM_LC_WITT_USER_CART
+  MERGE_CART_FROM_LC_WITT_USER_CART,
+  SET_CART_LOADING,
+  CLEAR_CART
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -21,6 +24,10 @@ const setCart = (cartItems) => ({
 
 const getCart = () => ({
   type: GET_CART
+});
+const getCartByUserId = (userId) => ({
+  type:GET_CART_BY_USER_ID,
+  payload: userId
 });
 
 const addItemToCart = (item) => ({
@@ -79,9 +86,19 @@ const mergeCarts = (payload) => ({
   payload
 });
 
+const setCartLoading = (payload) => ({
+  type: SET_CART_LOADING,
+  payload
+});
+
+const clearCartInstore = () => ({
+  type: CLEAR_CART
+});
+
 export {
   setCart,
   getCart,
+  getCartByUserId,
   addItemToCart,
   removeItemFromCart,
   setCartItemQuantity,
@@ -92,5 +109,7 @@ export {
   resetCart,
   addProductToUserCart,
   deleteProductToUserCart,
-  mergeCarts
+  mergeCarts,
+  setCartLoading,
+  clearCartInstore
 };

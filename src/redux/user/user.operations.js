@@ -131,7 +131,7 @@ const addProductToUserWishlist = async ({ id, productId, key }) => {
   return result.data.addProductToWishlist;
 };
 
-const removeProductFromUserCart = async ({ id, product, key }) => {
+/* const removeProductFromUserCart = async ({ id, product, key }) => {
   const result = await client.mutate({
     variables: {
       id,
@@ -201,7 +201,7 @@ const changeQuantityIntoUserCart = async ({ id, product, key }) => {
   });
 
   return result.data.changeCartProductQuantity;
-};
+}; */
 
 const regenerateAccessToken = async (refreshToken) => {
   const result = await client.mutate({
@@ -237,9 +237,6 @@ export {
   getUserByToken,
   removeProductFromUserWishlist,
   addProductToUserWishlist,
-  removeProductFromUserCart,
-  changeQuantityIntoUserCart,
-  addProductToUserCart,
   regenerateAccessToken,
   getPurchasedProducts
 };

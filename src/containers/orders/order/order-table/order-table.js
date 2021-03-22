@@ -17,6 +17,7 @@ import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice }) => {
+  console.log(items);
   const language = useSelector(({ Language }) => Language.language);
   const user = useSelector(({ User }) => User.userData);
   const styles = useStyles();
@@ -34,6 +35,7 @@ const OrderTable = ({ items, currency, calcPrice }) => {
       language={language}
       currency={currency}
       isCartEditing={isCartEditing}
+      user={user}
     />
   ));
 
@@ -45,9 +47,10 @@ const OrderTable = ({ items, currency, calcPrice }) => {
         dispatch(deleteProductFromUserCart({ userId: user._id, items: checkedItems }));
       } else {
         dispatch(removeItemFromCart(checkedItems));
+        setCartEditing(false);
       }
+      setModalVisibility(false);
     }
-    setModalVisibility(false);
   };
 
   const removeItemsHandler = () => {

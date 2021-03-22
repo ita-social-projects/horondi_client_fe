@@ -24,8 +24,12 @@ import {
 } from './cart.operations';
 
 export function* handleCartLoad() {
-  const cart = getFromLocalStorage(cartKey);
-  yield put(setCart(cart));
+  try {
+    const cart = yield getFromLocalStorage(cartKey);
+    yield put(setCart(cart));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function* handleCartLoadByUserID(payload) {
@@ -59,6 +63,7 @@ export function* handleSetDeliveryType({ payload }) {
 }
 
 export function* handleAddCartItem({ payload }) {
+  console.log(payload);
   const cart = getFromLocalStorage(cartKey);
   const possibleItemInCart = cart.find(
     (item) =>
@@ -100,6 +105,7 @@ export function* handleAddProductToUserCart({ payload }) {
     yield put(setCartLoading(true));
     const newCartList = yield call(addProductToCart, userId, cartItem);
     yield put(setCart(newCartList.cart.items));
+    setToLocalStorage(cartKey, newCartList.cart.items);
     yield put(setCartLoading(false));
   } catch (err) {
     console.log(err);
@@ -128,6 +134,7 @@ export function* handleDeleteProductFromUserCart({ payload }) {
 }
 
 export function* handleSetCartItemQuantity({ payload }) {
+  console.log(payload);
   const { item, value } = payload;
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((el) => {

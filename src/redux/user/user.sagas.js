@@ -291,10 +291,10 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
-    const userCart = yield call(getCartByUserId,user._id);
-    yield put(setCart(userCart.cart.items))
+    const userCart = yield call(getCartByUserId, user._id);
+    console.log(userCart);
+    yield put(setCart(userCart.cart.items));
   } catch (error) {
-    console.log(error);
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   } finally {

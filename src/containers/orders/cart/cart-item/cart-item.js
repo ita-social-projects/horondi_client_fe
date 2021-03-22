@@ -15,21 +15,20 @@ import {
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 
-const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
+const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) => {
   const dispatch = useDispatch();
-  const user = useSelector(({ User }) => User.userData);
   const styles = useStyles({ image: `${IMG_URL}${item.product.images.primary.small}` });
-  const [checkedItem, setCheckedItem] = useState(false);
+  const checkedItem = item.isChecked;
 
   const onChangeQuantity = (value) => {
     if (user) {
       dispatch(changeCartItemUserQuantity({ item, value, userId: user._id }));
     } else {
+      console.log('quntity');
       dispatch(setCartItemQuantity(item, +value));
     }
   };
   const onCartItemCheck = () => {
-    setCheckedItem(!checkedItem);
     dispatch(setCartItemChecked(item, checkedItem));
   };
 
@@ -39,7 +38,7 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell classes={{ root: styles.image }} data-cy='cart-item-img'>
+      <TableCell data-cy='cart-item-img'>
         <Link to={`/product/${item.product._id}`}>
           <b />
         </Link>
@@ -70,7 +69,7 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
         <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
-        <span>{calcPrice(item, currency) / 100}</span>
+        <span>{item.price[currency].value / 100}</span>
         {isCartEditing && (
           <Checkbox
             className={styles.checkbox}

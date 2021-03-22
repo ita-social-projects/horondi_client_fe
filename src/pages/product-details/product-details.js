@@ -67,7 +67,7 @@ const ProductDetails = ({ match }) => {
           name: productName,
           selectedSize: currentSize,
           bottomMaterial,
-          image: images.additional[0].small,
+          image: images.additional[0].thumbnail,
           totalPrice: currentSize.additionalPrice,
           dimensions: {
             volumeInLiters: currentSize.volumeInLiters,

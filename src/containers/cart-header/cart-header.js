@@ -16,12 +16,10 @@ const CartHeader = ({ fromSideBar }) => {
 
   useEffect(() => {
     dispatch(getCart());
-  }, []);
+  }, [dispatch]);
 
   const itemsCount = useMemo(
-    () =>
-      cartItems.length &&
-      cartItems.reduce((acc, item) => acc + item.quantity, 0),
+    () => cartItems.length && cartItems.reduce((acc, item) => acc + item.quantity, 0),
     [cartItems]
   );
 

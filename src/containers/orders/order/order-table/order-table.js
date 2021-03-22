@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  Table,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableBody
-} from '@material-ui/core';
+import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 import {
   CART_TABLE_FIELDS,
@@ -18,12 +12,13 @@ import { TOAST_MESSAGE } from '../../../../translations/toast.translations';
 import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
 import { setToastMessage } from '../../../../redux/toast/toast.actions';
 import { addCartItemsToWishlist } from '../../../../redux/wishlist/wishlist.actions';
-import { removeItemFromCart } from '../../../../redux/cart/cart.actions';
+import { removeItemFromCart, deleteProductFromUserCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice }) => {
   const language = useSelector(({ Language }) => Language.language);
+  const user = useSelector(({ User }) => User.userData);
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -45,7 +40,13 @@ const OrderTable = ({ items, currency, calcPrice }) => {
   const selectedItems = items.filter((item) => item?.isChecked === true);
 
   const onModalAction = (action) => {
-    action && dispatch(removeItemFromCart(checkedItems));
+    if (action) {
+      if (user) {
+        dispatch(deleteProductFromUserCart({ userId: user._id, items: checkedItems }));
+      } else {
+        dispatch(removeItemFromCart(checkedItems));
+      }
+    }
     setModalVisibility(false);
   };
 
@@ -65,7 +66,7 @@ const OrderTable = ({ items, currency, calcPrice }) => {
       {modalVisibility && (
         <>
           <Modal
-            itemName={selectedItems.map((item) => item.name[language].value)}
+            itemName={selectedItems.map((item) => item.product.name[language].value)}
             message={MODAL_DELETE_MESSAGES[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
@@ -81,10 +82,7 @@ const OrderTable = ({ items, currency, calcPrice }) => {
             ({items.length} {CART_TITLES[language].quantity})
           </span>
         </h2>
-        <span
-          className={styles.cartButton}
-          onClick={() => setCartEditing(!isCartEditing)}
-        >
+        <span className={styles.cartButton} onClick={() => setCartEditing(!isCartEditing)}>
           {isCartEditing
             ? CART_BUTTON_TITLES[language].editCancel
             : CART_BUTTON_TITLES[language].edit}
@@ -111,11 +109,7 @@ const OrderTable = ({ items, currency, calcPrice }) => {
             >
               {CART_BUTTON_TITLES[language].toWishlist}
             </div>
-            <div
-              className={styles.cartButton}
-              type='button'
-              onClick={removeItemsHandler}
-            >
+            <div className={styles.cartButton} type='button' onClick={removeItemsHandler}>
               {CART_BUTTON_TITLES[language].remove}
             </div>
           </>

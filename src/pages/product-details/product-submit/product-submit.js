@@ -19,7 +19,7 @@ import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
-import { addItemToCart,addProductToUserCart } from '../../../redux/cart/cart.actions';
+import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 
 import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
@@ -68,23 +68,16 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    if (isProductInCartAlready(cartList, productToSend)) {
-      return null;
-    }
-
     if (product || selectedSize) {
-      const newCartItem = getProductDataForCart(productToSend,sizeToSend);
-      if(userData){
+      const newCartItem = getProductDataForCart(productToSend, sizeToSend);
+      if (userData) {
         const newCartItemWithUserId = {
           userId: userData._id,
           cartItem: newCartItem
-        }
+        };
         dispatch(addProductToUserCart(newCartItemWithUserId));
-      }
-      else{
-        dispatch(
-          addItemToCart(newCartItem)
-        );
+      } else {
+        dispatch(addItemToCart(newCartItem));
       }
       dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));

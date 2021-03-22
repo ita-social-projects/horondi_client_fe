@@ -35,10 +35,9 @@ items {
     value
     }
 }
-`
+`;
 
 const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
-
   const getCartInput = (cartFromLc) =>
     cartFromLc.map((item) => ({
       product: item.product._id,
@@ -131,15 +130,14 @@ const cleanCart = async (userId) => {
   return result.data.cleanCart;
 };
 
-const addProductToCart = async (userId,cartItem) => {
-
-    const result = await client.mutate({
-      variables: {
-        productId: cartItem.product._id,
-        sizeId: cartItem.options.size._id,
-        id: userId
-      },
-      mutation: gql`
+const addProductToCart = async (userId, cartItem) => {
+  const result = await client.mutate({
+    variables: {
+      productId: cartItem.product._id,
+      sizeId: cartItem.options.size._id,
+      id: userId
+    },
+    mutation: gql`
         mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
             addProductToCart(productId: $productId, sizeId: $sizeId,id:$id) {
                 ... on User {
@@ -160,22 +158,20 @@ const addProductToCart = async (userId,cartItem) => {
             }
         }
       `,
-      fetchPolicy: 'no-cache'
-    });
-    return result.data.addProductToCart;
-  };
+    fetchPolicy: 'no-cache'
+  });
+  return result.data.addProductToCart;
+};
 
-  const DeleteProductFromCart = async ( userId,cartItem) => {
-
-    const result = await client.mutate({
-      variables: {
-        productId: cartItem.product._id,
-        sizeId: cartItem.options.size._id,
-        id: userId
-      },
-      mutation: gql`
-        mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
-            removeCartProductItem(productId: $productId, sizeId: $sizeId,id:$id) {
+const DeleteProductFromCart = async (userId, cartItems) => {
+  const result = await client.mutate({
+    variables: {
+      items: cartItems,
+      id: userId
+    },
+    mutation: gql`
+        mutation($items: [RemoveItemsFromCartInput!], $id:ID!) {
+          removeProductItemsFromCart(items: $items,id:$id) {
                 ... on User {
                     _id
                     firstName
@@ -194,21 +190,22 @@ const addProductToCart = async (userId,cartItem) => {
             }
         }
       `,
-      fetchPolicy: 'no-cache'
-    });
-    return result.data.removeCartProductItem;
-  };
+    fetchPolicy: 'no-cache'
+  });
+  return result.data.removeProductItemsFromCart;
+};
 
-  const updateCartItemQuantity = async ( productId ,quantity, sizeId, userId) => {
+const updateCartItemQuantity = async (payload) => {
+  const { item, value, userId } = payload;
 
-    const result = await client.mutate({
-      variables: {
-        productId,
-        quantity,
-        sizeId,
-        userId
-      },
-      mutation: gql`
+  const result = await client.mutate({
+    variables: {
+      productId: item.product._id,
+      quantity: value,
+      sizeId: item.options.size._id,
+      id: userId
+    },
+    mutation: gql`
         mutation($productId: ID!,$quantity:Int!, $sizeId: ID!, $id:ID!) {
             updateCartItemQuantity(productId: $productId,quantity:$quantity, sizeId: $sizeId,id:$id) {
                 ... on User {
@@ -228,12 +225,17 @@ const addProductToCart = async (userId,cartItem) => {
             }
             }
         }
-      `
-      ,
-      fetchPolicy: 'no-cache'
-    });
-    return result.data.updateCartItemQuantity;
-  };
+      `,
+    fetchPolicy: 'no-cache'
+  });
+  return result.data.updateCartItemQuantity;
+};
 
-
-export { megreCartFromLCwithUserCart,getCartByUserId,cleanCart,addProductToCart,DeleteProductFromCart,updateCartItemQuantity};
+export {
+  megreCartFromLCwithUserCart,
+  getCartByUserId,
+  cleanCart,
+  addProductToCart,
+  DeleteProductFromCart,
+  updateCartItemQuantity
+};

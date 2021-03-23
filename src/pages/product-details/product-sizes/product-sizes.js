@@ -11,7 +11,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const styles = useStyles();
   const { language, selectedSize } = useSelector(({ Language, Products }) => ({
     language: Language.language,
-    selectedSize: Products.productToSend.selectedSize
+    selectedSize: Products.productToSend.options.selectedSize
   }));
 
   const sizeButtons =

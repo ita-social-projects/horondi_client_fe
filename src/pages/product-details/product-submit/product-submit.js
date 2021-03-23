@@ -32,16 +32,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     selectLanguageProductsUserWishlist
   );
 
-  const { selectedSize } = productToSend;
+  const { selectedSize } = productToSend.options;
 
   const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
     product._id,
     wishlistItems
-  ]);
-
-  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize._id), [
-    selectedSize,
-    sizes
   ]);
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
@@ -68,15 +63,15 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
+    console.log('onAddToCart');
     if (isProductInCartAlready(cartList, productToSend)) {
       return null;
     }
 
-    if (product || selectedSize) {
+    if (product) {
       dispatch(
         addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend || {}
+          ...productToSend
         })
       );
       dispatch(setToastMessage(toastMessages.addedToCard));
@@ -87,7 +82,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if (product || selectedSize) {
+    if (product) {
       onAddToCart();
       dispatch(push('/cart'));
     } else {

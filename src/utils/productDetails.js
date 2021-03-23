@@ -1,17 +1,20 @@
-export const isProductInCartAlready = (cartList, productToSend) =>
-  cartList.find(
-    ({ _id, selectedSize }) =>
-      _id === productToSend._id && selectedSize._id === productToSend.selectedSize._id
+export const isProductInCartAlready = (cartList, productToSend) => cartList.find(({ product, options }) => {
+  console.log(product._id === productToSend.product._id);
+  console.log(options.selectedSize._id === productToSend.options.selectedSize._id);
+  return (
+    product._id === productToSend.product._id &&
+      options.selectedSize._id === productToSend.options.selectedSize._id
   );
+});
 
 export const similarProductForCart = (similarProducts, cartList) => {
   let imagesList = [];
   for (const simProduct of similarProducts) {
     for (const cartProduct of cartList) {
       if (
-        simProduct.category._id !== cartProduct.categoryID &&
-        (simProduct.mainMaterial.color._id === cartProduct.mainMaterialColorID ||
-          simProduct.pattern._id === cartProduct.patternID)
+        simProduct.category._id !== cartProduct.product.category._id &&
+        (simProduct.mainMaterial.color._id === cartProduct.product.mainMaterial.color._id ||
+          simProduct.pattern._id === cartProduct.product.pattern._id)
       ) {
         imagesList = [...imagesList, simProduct];
       }

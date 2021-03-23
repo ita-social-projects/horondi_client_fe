@@ -13,7 +13,7 @@ import { IMG_URL } from '../../../../configs';
 
 const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.image}` });
+  const styles = useStyles({ image: `${IMG_URL}${item.product.image}` });
   const [checkedItem, setCheckedItem] = useState(false);
 
   const onChangeQuantity = (value) => {
@@ -31,27 +31,27 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell classes={{ root: styles.image }} data-cy='cart-item-img'>
-        <Link to={`/product/${item._id}`}>
+        <Link to={`/product/${item.product._id}`}>
           <b />
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
-        <Link to={`/product/${item._id}`}>
-          <span className={styles.itemName}>{item.name[language].value}</span>
+        <Link to={`/product/${item.product._id}`}>
+          <span className={styles.itemName}>{item.product.name[language].value}</span>
         </Link>
-        {item.selectedSize && (
+        {item.product.selectedSize && (
           <div>
             {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
           </div>
         )}
-        {item.bottomMaterial && (
+        {item.product.bottomMaterial && (
           <div>
             {CART_TABLE_FIELDS[language].bottomMaterial}:
             <br />
-            {item.bottomMaterial.material.name[language].value}
+            {item.product.bottomMaterial.material.name[language].value}
           </div>
         )}
-        {item.sidePocket && (
+        {item.product.sidePocket && (
           <div>
             {CART_TABLE_FIELDS[language].sidePocket}: <DoneIcon className={styles.doneIcon} />
           </div>
@@ -62,7 +62,7 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
         <span>
-          {calcPrice(item, currency, item.quantity) / 100} {item.totalPrice[currency].currency}
+          {calcPrice(item, currency, item.quantity) / 100} {item.price[currency].currency}
         </span>
         {isCartEditing && (
           <Checkbox

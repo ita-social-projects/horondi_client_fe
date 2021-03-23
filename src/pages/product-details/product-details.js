@@ -63,19 +63,25 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
-          _id: productId,
-          name: productName,
-          selectedSize: currentSize,
-          bottomMaterial,
-          image: images.additional[0].thumbnail,
-          totalPrice: currentSize.additionalPrice,
+          product: {
+            _id: productId,
+            category: {
+              _id: category._id
+            },
+            name: productName,
+            mainMaterial,
+            bottomMaterial,
+            pattern,
+            image: images.additional[0].thumbnail
+          },
+          price: currentSize.additionalPrice,
+          options: {
+            selectedSize: currentSize
+          },
           dimensions: {
             volumeInLiters: currentSize.volumeInLiters,
             weightInKg: currentSize.weightInKg
-          },
-          categoryID: category._id,
-          mainMaterialColorID: mainMaterial.color._id,
-          patternID: pattern._id
+          }
         })
       );
     }
@@ -102,12 +108,14 @@ const ProductDetails = ({ match }) => {
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: selectedSize.additionalPrice,
+        price: selectedSize.additionalPrice,
         dimensions: {
           volumeInLiters: selectedSize.volumeInLiters,
           weightInKg: selectedSize.weightInKg
         },
-        selectedSize
+        options: {
+          selectedSize
+        }
       })
     );
 

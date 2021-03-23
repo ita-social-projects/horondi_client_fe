@@ -33,7 +33,7 @@ import {
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT, cartKey } from '../../configs/index';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { setCart } from '../cart/cart.actions';
+import { setCart, setCartTotalPrice } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
 
 export const loginUser = (data) => {
@@ -196,9 +196,9 @@ export function* handleUserLoad({ payload }) {
     yield put(setWishlist(user.data.loginUser.wishlist));
     const cartFromLc = getFromLocalStorage(cartKey);
     const mergedCart = yield call(megreCartFromLCwithUserCart, cartFromLc, user.data.loginUser._id);
-    yield put(setCart(mergedCart));
-    yield setToLocalStorage(cartKey, mergedCart);
-
+    yield put(setCart(mergedCart.cart.items));
+    yield put(setCartTotalPrice(mergedCart.cart.totalPrice));
+    yield setToLocalStorage(cartKey, mergedCart.cart.items);
     yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {
@@ -330,8 +330,8 @@ export function* handleUserPreserve() {
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
     const userCart = yield call(getCartByUserId, user._id);
-    console.log(userCart);
     yield put(setCart(userCart.cart.items));
+    yield put(setCartTotalPrice(userCart.cart.totalPrice));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));

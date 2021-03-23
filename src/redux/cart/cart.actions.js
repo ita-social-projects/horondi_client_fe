@@ -11,12 +11,14 @@ import {
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE,
   RESET_CART,
+  SET_CART_TOTAL_PRICE,
   ADD_PRODUCT_TO_USER_CART,
   DELETE_PRODUCT_FROM_USER_CART,
   MERGE_CART_FROM_LC_WITT_USER_CART,
   CHANGE_CART_ITEM_USER_QUANTITY,
   SET_CART_LOADING,
-  CLEAR_CART
+  CLEAR_CART,
+  SET_CART_ERROR
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -97,8 +99,16 @@ const mergeCarts = (payload) => ({
   payload
 });
 
+const setCartTotalPrice = (payload) => ({
+  type: SET_CART_TOTAL_PRICE,
+  payload
+});
 const setCartLoading = (payload) => ({
   type: SET_CART_LOADING,
+  payload
+});
+const setCartError = (payload) => ({
+  type: SET_CART_ERROR,
   payload
 });
 
@@ -123,6 +133,8 @@ export {
   deleteProductFromUserCart,
   changeCartItemUserQuantity,
   mergeCarts,
+  setCartTotalPrice,
   setCartLoading,
+  setCartError,
   clearCartInstore
 };

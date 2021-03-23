@@ -5,10 +5,13 @@ describe('cart reducer test', () => {
   let initialState;
   let newState;
   let cartAction;
-  const cartItem = {
-    id: 1,
-    name: 'Garbyz'
-  };
+  const cartItem = [
+    {
+      id: 1,
+      name: 'Garbyz',
+      checked: false
+    }
+  ];
 
   beforeEach(() => {
     initialState = {

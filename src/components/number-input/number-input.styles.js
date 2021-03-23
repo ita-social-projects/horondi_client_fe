@@ -22,5 +22,12 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       minWidth: 40
     }
+  },
+  inputQuantity: {
+    width: '30px',
+    textAlign: 'center'
+  },
+  inputText: {
+    textAlign: 'center'
   }
 }));

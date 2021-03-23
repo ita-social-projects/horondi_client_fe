@@ -35,7 +35,6 @@ const ProductDetails = ({ match }) => {
   );
   const dispatch = useDispatch();
   const styles = useStyles();
-  console.log(productToSend);
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
   const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);

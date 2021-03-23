@@ -86,6 +86,7 @@ function* getOrderTillSuccess(payload) {
     getOrderTillSuccess();
   } else {
     setToLocalStorage(orderDataToLS.order, paidOrder);
+
     yield put(setOrder(paidOrder));
     yield put(setPaidOderLoading(false));
   }

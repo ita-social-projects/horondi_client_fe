@@ -32,8 +32,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     selectLanguageProductsUserWishlist
   );
 
-  const { selectedSize } = productToSend.options;
-
   const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
     product._id,
     wishlistItems
@@ -63,7 +61,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    console.log('onAddToCart');
     if (isProductInCartAlready(cartList, productToSend)) {
       return null;
     }

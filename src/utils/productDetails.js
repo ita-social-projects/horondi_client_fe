@@ -1,11 +1,8 @@
-export const isProductInCartAlready = (cartList, productToSend) => cartList.find(({ product, options }) => {
-  console.log(product._id === productToSend.product._id);
-  console.log(options.selectedSize._id === productToSend.options.selectedSize._id);
-  return (
+export const isProductInCartAlready = (cartList, productToSend) =>
+  cartList.find(({ product, options }) => (
     product._id === productToSend.product._id &&
       options.selectedSize._id === productToSend.options.selectedSize._id
-  );
-});
+  ));
 
 export const similarProductForCart = (similarProducts, cartList) => {
   let imagesList = [];

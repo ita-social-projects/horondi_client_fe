@@ -14,17 +14,16 @@ import {
   changeCartItemUserQuantity
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
-
 const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.product.images.primary.small}` });
+  const styles = useStyles();
+
   const checkedItem = item.isChecked;
 
   const onChangeQuantity = (value) => {
     if (user) {
       dispatch(changeCartItemUserQuantity({ item, value, userId: user._id }));
     } else {
-      console.log('quntity');
       dispatch(setCartItemQuantity(item, +value));
     }
   };
@@ -40,7 +39,9 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell data-cy='cart-item-img'>
         <Link to={`/product/${item.product._id}`}>
-          <b />
+        <img
+          src={`${IMG_URL}${item.product.images.primary.thumbnail}`}
+        />
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>

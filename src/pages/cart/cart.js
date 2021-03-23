@@ -9,6 +9,7 @@ const Cart = () => {
   const styles = useStyles();
   const cartItems = useSelector(({Cart}) => Cart.list);
 
+
   return (
     <div className={styles.root}>
       {cartItems.length ? <FilledCart items={cartItems} /> : <EmptyCart />}

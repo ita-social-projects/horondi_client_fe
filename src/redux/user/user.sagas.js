@@ -80,17 +80,55 @@ export const loginUser = (data) => {
 			}
 		}
     cart{
-      items{
-        product{
+      items {
+        product {
+        _id
+        name {
+            lang
+            value
+        }
+        category{
           _id
         }
-        quantity
-        options{
-          size {
+        bottomMaterial{
+            material{
+            name{
+                lang
+                value
+            }
+            }
+        }
+        mainMaterial{
+          color{
             _id
+            name{
+              lang
+              value
+            }
           }
         }
-      }
+        pattern{
+          _id
+        }
+        images{
+            primary{
+            small
+            thumbnail
+            }
+        }
+        
+        }
+        quantity
+        options {
+        size {
+            _id
+            name
+        }
+        }
+        price {
+        value
+        }
+    }
       totalPrice{
         value
       }

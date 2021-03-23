@@ -9,6 +9,9 @@ items {
         lang
         value
     }
+    category{
+      _id
+    }
     bottomMaterial{
         material{
         name{
@@ -17,9 +20,22 @@ items {
         }
         }
     }
+    mainMaterial{
+      color{
+        _id
+        name{
+          lang
+          value
+        }
+      }
+    }
+    pattern{
+      _id
+    }
     images{
         primary{
         small
+        thumbnail
         }
     }
     

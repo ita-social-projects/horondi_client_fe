@@ -68,6 +68,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
+    console.log(productToSend);
     if (product || selectedSize) {
       const newCartItem = getProductDataForCart(productToSend, sizeToSend);
       if (userData) {

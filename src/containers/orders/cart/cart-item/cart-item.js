@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import DoneIcon from '@material-ui/icons/Done';
 import { Checkbox, TableCell, TableRow } from '@material-ui/core';
@@ -14,6 +14,7 @@ import {
   changeCartItemUserQuantity
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
+
 const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
@@ -39,9 +40,7 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell data-cy='cart-item-img'>
         <Link to={`/product/${item.product._id}`}>
-        <img
-          src={`${IMG_URL}${item.product.images.primary.thumbnail}`}
-        />
+          <img src={`${IMG_URL}${item.product.images.primary.thumbnail} `} alt='product-img' />
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
@@ -70,7 +69,9 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
         <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
-        <span>{item.price[currency].value / 100}</span>
+        <span>
+          {item.price[currency].value / 100} {item.price[currency].currency}
+        </span>
         {isCartEditing && (
           <Checkbox
             className={styles.checkbox}

@@ -12,9 +12,6 @@ import { toastSettings } from '../../../configs/index';
 
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
-import { isProductInCartAlready } from '../../../utils/productDetails';
-import { getProductDataForCart } from '../../../utils/makeItemForCart';
-
 import {
   addItemToWishlist,
   removeItemFromWishlist
@@ -29,19 +26,13 @@ import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems, cartList, userData } = useSelector(
+  const { language, productToSend, product, wishlistItems, userData } = useSelector(
     selectLanguageProductsUserWishlist
   );
-  const { selectedSize } = productToSend;
 
   const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
     product._id,
     wishlistItems
-  ]);
-
-  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize._id), [
-    selectedSize,
-    sizes
   ]);
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
@@ -68,17 +59,16 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    console.log(productToSend);
-    if (product || selectedSize) {
-      const newCartItem = getProductDataForCart(productToSend, sizeToSend);
+    if (product) {
       if (userData) {
         const newCartItemWithUserId = {
           userId: userData._id,
-          cartItem: newCartItem
+          cartItem: productToSend
         };
+        console.log(newCartItemWithUserId);
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
-        dispatch(addItemToCart(newCartItem));
+        dispatch(addItemToCart(productToSend));
       }
       dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));
@@ -88,7 +78,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if (product || selectedSize) {
+    if (product) {
       onAddToCart();
       dispatch(push('/cart'));
     } else {

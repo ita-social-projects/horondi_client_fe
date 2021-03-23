@@ -51,31 +51,38 @@ export const initialState = {
   commentsLoading: false,
   updatingComment: null,
   productToSend: {
-    _id: '',
-    name: [],
-    image: '',
-    selectedSize: false,
-    bottomMaterial: {
-      material: {},
-      color: {}
+    product: {
+      _id: '',
+      category: {
+        _id: ''
+      },
+      name: [],
+      mainMaterial: {
+        color: {
+          _id: ''
+        }
+      },
+      bottomMaterial: {
+        material: {},
+        color: {}
+      },
+      pattern: {
+        _id: ''
+      },
+      images: {}
     },
-    bagBottom: {
-      value: '',
-      name: [
-        { lang: 'uk', value: '' },
-        { lang: 'en', value: '' }
-      ]
+    quantity: 1,
+    price: [],
+    options: {
+      size: {
+        _id: ''
+      }
     },
     sidePocket: false,
-    totalPrice: 0,
-    quantity: 1,
     dimensions: {
       weightInKg: null,
       volumeInLiters: null
-    },
-    categoryID: '',
-    mainMaterialColorID: '',
-    patternID: ''
+    }
   },
   filterStatus: false
 };

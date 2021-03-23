@@ -66,6 +66,8 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
         getPaymentCheckout(data: $data) {
           ... on Order {
             _id
+            orderNumber
+            paymentUrl
             items {
               product {
                 name {

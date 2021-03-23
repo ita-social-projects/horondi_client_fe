@@ -18,7 +18,7 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, DEFAULT_CURRENCY } from '../../../configs';
+import { CY_CODE_ERR } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
@@ -37,7 +37,7 @@ import {
 import { validationSchema } from '../../../validators/chekout';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
-const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType, order }) => {
+const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
     isLightTheme
   });
@@ -216,7 +216,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <button type='submit' className={styles.submitBtn}>
                 {checkoutFormBtnValue(values, language)}
               </button>
-              <Link to={routes.pathToMain}>
+              <Link to={routes.pathToPurchases}>
                 <span className={`${styles.totalSumTitle} ${styles.goods}`}>
                   {CART_BUTTON_TITLES[language].goods}
                 </span>

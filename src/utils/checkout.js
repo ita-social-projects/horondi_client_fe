@@ -99,8 +99,7 @@ const productItemsInput = (cartItems) =>
     quantity: item.quantity,
     isFromConstructor: !item._id,
     options: {
-      size: item.selectedSize._id,
-      sidePocket: item.sidePocket
+      size: item.selectedSize._id
     }
   }));
 

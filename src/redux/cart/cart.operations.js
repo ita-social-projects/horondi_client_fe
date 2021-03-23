@@ -142,7 +142,6 @@ const cleanCart = async (userId) => {
     `,
     fetchPolicy: 'no-cache'
   });
-  console.log(result);
   return result.data.cleanCart;
 };
 

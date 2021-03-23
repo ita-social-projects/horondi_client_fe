@@ -13,7 +13,6 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
     language: Language.language,
     size: Products.productToSend.options.size
   }));
-  console.log(size);
 
   const sizeButtons =
     sizes &&

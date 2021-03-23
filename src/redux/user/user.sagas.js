@@ -330,7 +330,6 @@ export function* handleUserPreserve() {
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
     const userCart = yield call(getCartByUserId, user._id);
-    console.log(userCart);
     yield put(setCart(userCart.cart.items));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);

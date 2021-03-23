@@ -65,7 +65,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           userId: userData._id,
           cartItem: productToSend
         };
-        console.log(newCartItemWithUserId);
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
         dispatch(addItemToCart(productToSend));

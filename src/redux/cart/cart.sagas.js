@@ -63,7 +63,6 @@ export function* handleSetDeliveryType({ payload }) {
 }
 
 export function* handleAddCartItem({ payload }) {
-  console.log(payload);
   const cart = getFromLocalStorage(cartKey);
   const possibleItemInCart = cart.find(
     (item) =>
@@ -124,7 +123,6 @@ export function* handleDeleteProductFromUserCart({ payload }) {
   try {
     yield put(setCartLoading(true));
     const newCartList = yield call(DeleteProductFromCart, userId, itemsForDeleteInput);
-    console.log(newCartList);
     yield put(setCart(newCartList.cart.items));
     yield put(setCartLoading(false));
     setToLocalStorage(cartKey, newCartList.cart.items);
@@ -134,7 +132,6 @@ export function* handleDeleteProductFromUserCart({ payload }) {
 }
 
 export function* handleSetCartItemQuantity({ payload }) {
-  console.log(payload);
   const { item, value } = payload;
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((el) => {

@@ -17,7 +17,6 @@ import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice }) => {
-  console.log(items);
   const language = useSelector(({ Language }) => Language.language);
   const user = useSelector(({ User }) => User.userData);
   const styles = useStyles();

@@ -1,10 +1,8 @@
 import React, { useRef, useMemo, useLayoutEffect } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
-import { useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { useStyles } from './images-constructor.style';
-import { selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
@@ -20,11 +18,10 @@ import {
 
 const ImagesConstructor = () => {
   const styles = useStyles();
-  const { values, images, prices, methods } = useConstructor();
+  const { values, images, prices, methods, language, currency } = useConstructor();
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-  const { language, currency } = useSelector(selectLangAndCurrency);
   const {
     MODEL,
     BASIC,
@@ -34,7 +31,6 @@ const ImagesConstructor = () => {
     TOTAL_PRICE,
     END_PRICE
   } = CONSTRUCTOR_TITLES[language];
-  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
@@ -90,26 +86,6 @@ const ImagesConstructor = () => {
   const availableBottoms = useMemo(() =>
     _.map(values.bottoms, options, [values.bottoms, language])
   );
-
-  const priceTotal = useMemo(() => {
-    if (prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice) {
-      return (
-        prices.basicPrice[currency].value +
-        prices.frontPocketPrice[currency].value +
-        prices.bottomPrice[currency].value
-      );
-    }
-  }, [prices.basicPrice, prices.frontPocketPrice, prices.bottomPrice, currency]);
-
-  const priceBasic = useMemo(() => {
-    if (prices.basicPrice) return prices.basicPrice[currency].value;
-  }, [prices.basicPrice, currency]);
-  const priceGobelen = useMemo(() => {
-    if (prices.frontPocketPrice) return prices.frontPocketPrice[currency].value;
-  }, [prices.frontPocketPrice, currency]);
-  const priceBottom = useMemo(() => {
-    if (prices.bottomPrice) return prices.bottomPrice[currency].value;
-  }, [prices.bottomPrice, currency]);
 
   return (
     <div className={styles.constructorWrapper}>
@@ -173,24 +149,26 @@ const ImagesConstructor = () => {
               <li className={styles.priceItem}>
                 <span>{DEFAULT_PRICE}</span>
                 <span>
-                  {DEFAULT_PRICE_VALUE}
+                  {prices.DEFAULT_PRICE_VALUE}
                   {currentCurrencyValue(language, currency)}
                 </span>
               </li>
-              {constructorPartPrice(priceBasic, priceGobelen, priceBottom).map((item, index) => (
-                <li key={index} className={styles.priceItem}>
-                  <span>{constructorPartNames(language)[index]}</span>
-                  <span>
-                    {!item ? 0 : `${item}`}
-                    {currentCurrencyValue(language, currency)}
-                  </span>
-                </li>
-              ))}
+              {constructorPartPrice(prices.priceBasic, prices.priceGobelen, prices.priceBottom).map(
+                (item, index) => (
+                  <li key={index} className={styles.priceItem}>
+                    <span>{constructorPartNames(language)[index]}</span>
+                    <span>
+                      {!item ? 0 : `${item}`}
+                      {currentCurrencyValue(language, currency)}
+                    </span>
+                  </li>
+                )
+              )}
             </ul>
           </div>
           <h2 className={styles.headerWrapper}>
             {END_PRICE}
-            {constructorEndPrice(priceTotal)}
+            {constructorEndPrice(prices.priceTotal)}
             {currentCurrencyValue(language, currency)}
           </h2>
         </div>

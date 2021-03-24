@@ -1,4 +1,4 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
+import { takeEvery, put, call, select } from 'redux-saga/effects';
 
 import {
   setCart,
@@ -152,11 +152,9 @@ export function* handleSetCartItemQuantity({ payload }) {
 }
 export function* handleSetCartItemUserQuantity({ payload }) {
   try {
-    yield put(setCartLoading(true));
     const newCartList = yield call(updateCartItemQuantity, payload);
     yield put(setCart(newCartList.cart.items));
     yield put(setCartTotalPrice(newCartList.cart.totalPrice));
-    yield put(setCartLoading(false));
   } catch (err) {
     yield put(setCartError(err));
     yield put(setCartLoading(true));
@@ -164,7 +162,7 @@ export function* handleSetCartItemUserQuantity({ payload }) {
 }
 export function* handleSetCartItemChecked({ payload }) {
   const { item, isChecked } = payload;
-  const cart = getFromLocalStorage(cartKey);
+  const cart = yield select(({ Cart }) => Cart.list);
   const newCart = cart.map((cartItem) => {
     if (
       cartItem.product._id === item.product._id &&

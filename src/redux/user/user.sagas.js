@@ -33,7 +33,7 @@ import {
 import getItems, { setItems } from '../../utils/client';
 import { REDIRECT_TIMEOUT, cartKey } from '../../configs/index';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { setCart, setCartTotalPrice } from '../cart/cart.actions';
+import { setCart, setCartTotalPrice, setCartLoading } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
 
 export const loginUser = (data) => {
@@ -321,6 +321,7 @@ export function* handleUserRegister({ payload }) {
 export function* handleUserPreserve() {
   try {
     yield put(setUserLoading(true));
+    yield put(setCartLoading(true));
     const refreshToken = getFromLocalStorage('refreshToken');
     if (refreshToken) {
       const newAccessToken = yield call(regenerateAccessToken, refreshToken);
@@ -332,6 +333,7 @@ export function* handleUserPreserve() {
     const userCart = yield call(getCartByUserId, user._id);
     yield put(setCart(userCart.cart.items));
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
+    yield put(setCartLoading(false));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));

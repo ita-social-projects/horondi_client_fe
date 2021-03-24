@@ -49,16 +49,21 @@ const ProductImages = () => {
     });
   }, [isLightTheme, initImages]);
 
-  const styles = useStyles({
-    primaryImage: imagesSet.length ? imagesSet[0].src : IMG_URL + images.primary.large
-  });
+  const styles = useStyles();
 
   const openImage = (idx) => {
     setIsOpen(true);
     setCurrImg(idx);
   };
 
-  const primaryImage = <div className={styles.primaryImage} onClick={() => openImage(0)} />;
+  const primaryImage = (
+    <img
+      className={styles.primaryImage}
+      src={IMG_URL + images.primary.large}
+      onClick={() => openImage(0)}
+      alt={IMG_ALT_INFO[language].value}
+    />
+  );
 
   const sideImages = imagesSet
     .slice(1, imagesSet.length)

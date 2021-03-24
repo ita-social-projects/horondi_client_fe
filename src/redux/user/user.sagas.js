@@ -16,6 +16,7 @@ import {
   setUserOrders
 } from './user.actions';
 import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
+import { megreCartFromLCwithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -30,9 +31,9 @@ import {
   LOGIN_BY_GOOGLE
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
-import { REDIRECT_TIMEOUT } from '../../configs/index';
+import { REDIRECT_TIMEOUT, cartKey } from '../../configs/index';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { setCart } from '../cart/cart.actions';
+import { setCart, setCartTotalPrice, setCartLoading } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
 
 export const loginUser = (data) => {
@@ -78,32 +79,60 @@ export const loginUser = (data) => {
 			  }			  
 			}
 		}
-					cart {
-              _id
-              name {
+    cart{
+      items {
+        product {
+        _id
+        name {
+            lang
+            value
+        }
+        category{
+          _id
+        }
+        bottomMaterial{
+            material{
+            name{
                 lang
                 value
-              }
-                totalPrice {
-                  value
-                  currency
-              }
-              image
-              bagBottom {
-                  name {
-                      value  
-                      lang                    
-                  }
-                  value
-              }
-                quantity 
-                selectedSize
-                sidePocket
-                dimensions {
-                    volumeInLiters
-                    weightInKg
-                }                
             }
+            }
+        }
+        mainMaterial{
+          color{
+            _id
+            name{
+              lang
+              value
+            }
+          }
+        }
+        pattern{
+          _id
+        }
+        images{
+            primary{
+            small
+            thumbnail
+            }
+        }
+        
+        }
+        quantity
+        options {
+        size {
+            _id
+            name
+        }
+        }
+        price {
+        value
+        }
+    }
+      totalPrice{
+        value
+      }
+    }
   }
 }
   `;
@@ -159,15 +188,17 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
-    yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
-    yield put(setCart(user.data.loginUser.cart));
-    yield put(setWishlist(user.data.loginUser.wishlist));
 
     yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
     yield setToLocalStorage('accessToken', user.data.loginUser.token);
     yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
-    yield setToLocalStorage('cart', user.data.loginUser.cart);
-
+    yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
+    yield put(setWishlist(user.data.loginUser.wishlist));
+    const cartFromLc = getFromLocalStorage(cartKey);
+    const mergedCart = yield call(megreCartFromLCwithUserCart, cartFromLc, user.data.loginUser._id);
+    yield put(setCart(mergedCart.cart.items));
+    yield put(setCartTotalPrice(mergedCart.cart.totalPrice));
+    yield setToLocalStorage(cartKey, mergedCart.cart.items);
     yield put(setUserLoading(false));
     yield put(push('/'));
   } catch (error) {
@@ -290,6 +321,7 @@ export function* handleUserRegister({ payload }) {
 export function* handleUserPreserve() {
   try {
     yield put(setUserLoading(true));
+    yield put(setCartLoading(true));
     const refreshToken = getFromLocalStorage('refreshToken');
     if (refreshToken) {
       const newAccessToken = yield call(regenerateAccessToken, refreshToken);
@@ -298,11 +330,16 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
+    const userCart = yield call(getCartByUserId, user._id);
+    yield put(setCart(userCart.cart.items));
+    yield put(setCartTotalPrice(userCart.cart.totalPrice));
+    yield put(setCartLoading(false));
   } catch (error) {
     yield setToLocalStorage('accessToken', null);
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   } finally {
     yield put(setUserIsChecked(true));
+    yield put(setCartLoading(false));
     yield put(setUserLoading(false));
   }
 }

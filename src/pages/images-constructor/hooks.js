@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectConstructor } from '../../redux/selectors/multiple.selectors';
+import { selectConstructor, selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
 import {
   getConstructorModelById,
   getModelForConstructor,
@@ -11,6 +11,7 @@ import { getConstructorBasic } from '../../redux/images-constructor/constructor-
 import { getConstructorFrontPocket } from '../../redux/images-constructor/constructor-front-pocket/constructor-front-pocket.actions';
 import { getConstructorPattern } from '../../redux/images-constructor/constructor-pattern/constructor-pattern.actions';
 import { getConstructorBottom } from '../../redux/images-constructor/constructor-bottom/constructor-bottom.actions';
+import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 
 export const useConstructor = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ export const useConstructor = () => {
     frontPocketPrice,
     bottomPrice
   } = useSelector(selectConstructor);
+  const { language, currency } = useSelector(selectLangAndCurrency);
+  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
   const models = constructorModel.modelsForConstructor;
   const basics = currentModel.constructorBasic;
@@ -71,6 +74,26 @@ export const useConstructor = () => {
     dispatch(getConstructorBottom(id));
   }, []);
 
+  const priceTotal = useMemo(() => {
+    if (basicPrice && frontPocketPrice && bottomPrice) {
+      return (
+        basicPrice[currency].value + frontPocketPrice[currency].value + bottomPrice[currency].value
+      );
+    }
+  }, [basicPrice, frontPocketPrice, bottomPrice, currency]);
+
+  const priceBasic = useMemo(() => {
+    if (basicPrice) return basicPrice[currency].value;
+  }, [basicPrice, currency]);
+
+  const priceGobelen = useMemo(() => {
+    if (frontPocketPrice) return frontPocketPrice[currency].value;
+  }, [frontPocketPrice, currency]);
+
+  const priceBottom = useMemo(() => {
+    if (bottomPrice) return bottomPrice[currency].value;
+  }, [bottomPrice, currency]);
+
   return {
     values: {
       models,
@@ -93,9 +116,13 @@ export const useConstructor = () => {
       changeBottom
     },
     prices: {
-      basicPrice,
-      frontPocketPrice,
-      bottomPrice
-    }
+      priceTotal,
+      priceBasic,
+      priceGobelen,
+      priceBottom,
+      DEFAULT_PRICE_VALUE
+    },
+    language,
+    currency
   };
 };

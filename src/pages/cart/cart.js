@@ -7,7 +7,7 @@ import FilledCart from '../../containers/orders/cart/filled-cart';
 
 const Cart = () => {
   const styles = useStyles();
-  const cartItems = useSelector(({ Cart: cartData }) => cartData.list);
+  const cartItems = useSelector((state) => state.Cart.list);
 
   return (
     <div className={styles.root}>

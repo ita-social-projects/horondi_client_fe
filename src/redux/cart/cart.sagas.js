@@ -1,6 +1,13 @@
-import { takeEvery, put, call, select, all } from 'redux-saga/effects';
+import { takeEvery, put, call, select } from 'redux-saga/effects';
 
-import { setCart, setDeliveryType } from './cart.actions';
+import {
+  setCart,
+  setCartChecked,
+  setDeliveryType,
+  setCartLoading,
+  setCartError,
+  setCartTotalPrice
+} from './cart.actions';
 import {
   GET_CART,
   ADD_ITEM_TO_CART,
@@ -9,26 +16,41 @@ import {
   SET_CART_ITEM_CHECKED,
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE,
-  RESET_CART
+  RESET_CART,
+  ADD_PRODUCT_TO_USER_CART,
+  DELETE_PRODUCT_FROM_USER_CART,
+  CHANGE_CART_ITEM_USER_QUANTITY
 } from './cart.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import {
-  addProductToUserCart,
-  changeQuantityIntoUserCart,
-  removeProductFromUserCart
-} from '../user/user.operations';
 import { cartKey, deliveryTypeKey } from '../../configs/index';
+import {
+  DeleteProductFromCart,
+  addProductToCart,
+  getCartByUserId,
+  updateCartItemQuantity
+} from './cart.operations';
 
 export function* handleCartLoad() {
-  const cart = getFromLocalStorage(cartKey);
+  const cart = yield getFromLocalStorage(cartKey);
   yield put(setCart(cart));
+}
+
+export function* handleCartLoadByUserID(payload) {
+  try {
+    yield put(setCartLoading(true));
+    const userCart = yield call(getCartByUserId, payload);
+    yield put(setCart(userCart));
+    yield put(setCartLoading(false));
+  } catch (err) {
+    yield put(setCartError(err));
+    yield put(setCartLoading(true));
+  }
 }
 
 export function* handleCartReset() {
   setToLocalStorage(cartKey, []);
   setToLocalStorage(deliveryTypeKey, '');
   const cart = getFromLocalStorage(cartKey);
-
   yield put(setCart(cart));
 }
 
@@ -37,35 +59,32 @@ export function* handleDeliveryTypeLoad() {
 
   yield put(setDeliveryType(deliveryType));
 }
+export function* handleSetDeliveryType({ payload }) {
+  yield put(setDeliveryType(payload));
+
+  setToLocalStorage(deliveryTypeKey, payload);
+}
 
 export function* handleAddCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
   const possibleItemInCart = cart.find(
     (item) =>
-      (item._id === payload._id && !item.selectedSize) ||
-      (item._id === payload._id && item.selectedSize === payload.selectedSize)
+      (item.product._id === payload.product._id && !item.options.size._id) ||
+      (item.product._id === payload.product._id &&
+        item.options.size._id === payload.options.size._id)
   );
 
   let newCart;
   if (possibleItemInCart) {
     newCart = cart.map((item) => {
-      item._id === payload._id &&
-        item.selectedSize._id === payload.selectedSize._id &&
-        item.sidePocket === payload.sidePocket &&
+      item.product._id === payload.product._id &&
+        item.options.size._id === payload.options.size._id &&
         item.quantity++;
       return item;
     });
   } else {
     newCart = [...cart, payload];
   }
-
-  yield call(
-    handleUserCartOperation,
-    possibleItemInCart ? changeQuantityIntoUserCart : addProductToUserCart,
-    newCart,
-    payload
-  );
-
   yield put(setCart(newCart));
   setToLocalStorage(cartKey, newCart);
 }
@@ -74,98 +93,87 @@ export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.filter((item) => {
     const foundedItem = payload.some(
-      (el) =>
-        item._id === el._id &&
-        item.selectedSize._id === el.selectedSize._id &&
-        item.sidePocket === el.sidePocket &&
-        item.bottomMaterial.material._id === el.bottomMaterial.material._id
+      (el) => item.product._id === el.product._id && item.options.size._id === el.options.size._id
     );
     return !foundedItem;
   });
-
-  yield all(
-    payload.map(({ _id, selectedSize, sidePocket, bottomMaterial }) =>
-      call(handleUserCartOperation, removeProductFromUserCart, cart, {
-        _id,
-        selectedSize,
-        sidePocket,
-        bottomMaterial
-      })
-    )
-  );
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
 
-export function* handleSetDeliveryType({ payload }) {
-  yield put(setDeliveryType(payload));
-
-  setToLocalStorage(deliveryTypeKey, payload);
+export function* handleAddProductToUserCart({ payload }) {
+  const { userId, cartItem } = payload;
+  try {
+    yield put(setCartLoading(true));
+    const newCartList = yield call(addProductToCart, userId, cartItem);
+    yield put(setCart(newCartList.cart.items));
+    yield put(setCartTotalPrice(newCartList.cart.totalPrice));
+    setToLocalStorage(cartKey, newCartList.cart.items);
+    yield put(setCartLoading(false));
+  } catch (err) {
+    yield put(setCartError(err));
+    yield put(setCartLoading(true));
+  }
 }
 
-export function* handleSetCartItemQuantity({
-  payload: {
-    item: { _id, selectedSize, sidePocket, bottomMaterial },
-    value
-  }
-}) {
-  const cart = getFromLocalStorage(cartKey);
-  const newCart = cart.map((item) => {
-    if (
-      item._id === _id &&
-      item.selectedSize._id === selectedSize._id &&
-      item.sidePocket === sidePocket &&
-      item.bottomMaterial.material._id === bottomMaterial.material._id
-    ) {
-      item.quantity = value;
+export function* handleDeleteProductFromUserCart({ payload }) {
+  const { userId, items } = payload;
+  const itemsForDeleteInput = items.map((item) => ({
+    product: item.product._id,
+    options: {
+      size: item.options.size._id
     }
-    return item;
-  });
+  }));
 
-  yield call(handleUserCartOperation, changeQuantityIntoUserCart, newCart, {
-    _id,
-    selectedSize,
-    bottomMaterial,
-    sidePocket
-  });
-
-  setToLocalStorage(cartKey, newCart);
-  yield put(setCart(newCart));
+  try {
+    yield put(setCartLoading(true));
+    const newCartList = yield call(DeleteProductFromCart, userId, itemsForDeleteInput);
+    yield put(setCart(newCartList.cart.items));
+    yield put(setCartTotalPrice(newCartList.cart.totalPrice));
+    yield put(setCartLoading(false));
+    setToLocalStorage(cartKey, newCartList.cart.items);
+  } catch (err) {
+    yield put(setCartError(err));
+    yield put(setCartLoading(true));
+  }
 }
 
-export function* handleSetCartItemChecked({
-  payload: {
-    item: { _id, selectedSize, sidePocket, bottomMaterial },
-    isChecked
-  }
-}) {
+export function* handleSetCartItemQuantity({ payload }) {
+  const { item, value } = payload;
   const cart = getFromLocalStorage(cartKey);
-  const newCart = cart.map((item) => {
-    if (
-      item._id === _id &&
-      item.selectedSize._id === selectedSize._id &&
-      item.sidePocket === sidePocket &&
-      item.bottomMaterial.material._id === bottomMaterial.material._id
-    ) {
-      item.isChecked = !isChecked;
+  const newCart = cart.map((el) => {
+    if (el.product._id === item.product._id && el.options.size._id === item.options.size._id) {
+      el.quantity = value;
     }
-    return item;
+    return el;
   });
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
-
-function* handleUserCartOperation(handler, list, product) {
-  const userData = yield select(({ User }) => User.userData);
-  if (userData) {
-    yield call(handler, {
-      id: userData._id,
-      product: list.find(
-        (item) => item._id === product._id && item.selectedSize === product.selectedSize
-      ),
-      key: cartKey
-    });
+export function* handleSetCartItemUserQuantity({ payload }) {
+  try {
+    const newCartList = yield call(updateCartItemQuantity, payload);
+    yield put(setCart(newCartList.cart.items));
+    yield put(setCartTotalPrice(newCartList.cart.totalPrice));
+  } catch (err) {
+    yield put(setCartError(err));
+    yield put(setCartLoading(true));
   }
+}
+export function* handleSetCartItemChecked({ payload }) {
+  const { item, isChecked } = payload;
+  const cart = yield select(({ Cart }) => Cart.list);
+  const newCart = cart.map((cartItem) => {
+    if (
+      cartItem.product._id === item.product._id &&
+      cartItem.options.size._id === item.options.size._id
+    ) {
+      cartItem.isChecked = !isChecked;
+    }
+    return cartItem;
+  });
+  setToLocalStorage(cartKey, newCart);
+  yield put(setCartChecked(newCart));
 }
 
 export default function* cartSaga() {
@@ -174,7 +182,10 @@ export default function* cartSaga() {
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
   yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
+  yield takeEvery(CHANGE_CART_ITEM_USER_QUANTITY, handleSetCartItemUserQuantity);
   yield takeEvery(SET_CART_ITEM_CHECKED, handleSetCartItemChecked);
   yield takeEvery(ADD_DELIVERY_TYPE, handleSetDeliveryType);
   yield takeEvery(RESET_CART, handleCartReset);
+  yield takeEvery(ADD_PRODUCT_TO_USER_CART, handleAddProductToUserCart);
+  yield takeEvery(DELETE_PRODUCT_FROM_USER_CART, handleDeleteProductFromUserCart);
 }

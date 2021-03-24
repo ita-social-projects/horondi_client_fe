@@ -59,19 +59,21 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
             {item.product.bottomMaterial.material.name[language].value}
           </div>
         )}
-        {false && (
-          <div>
-            {CART_TABLE_FIELDS[language].sidePocket}: <DoneIcon className={styles.doneIcon} />
-          </div>
-        )}
       </TableCell>
       <TableCell>
         <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
-        <span>
-          {item.price[currency].value / 100} {item.price[currency].currency}
-        </span>
+        {user && (
+          <span>
+            {item.price[currency].value / 100} {item.price[currency].currency}
+          </span>
+        )}
+        {!user && (
+          <span>
+            {calcPrice(item, currency) / 100} {item.price[currency].currency}
+          </span>
+        )}
         {isCartEditing && (
           <Checkbox
             className={styles.checkbox}

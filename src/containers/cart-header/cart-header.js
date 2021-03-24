@@ -14,9 +14,9 @@ const CartHeader = ({ fromSideBar }) => {
   const userData = useSelector(({ User }) => User.userData);
   const styles = useStyles({ fromSideBar });
 
-  useEffect(() => {
+  /*   useEffect(() => {
     dispatch(getCart());
-  }, []);
+  }, []); */
 
   const itemsCount = useMemo(
     () => cartItems.length && cartItems.reduce((acc, item) => acc + item.quantity, 0),

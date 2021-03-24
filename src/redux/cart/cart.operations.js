@@ -48,7 +48,8 @@ items {
     }
     }
     price {
-    value
+      currency
+      value
     }
 }
 `;
@@ -92,7 +93,7 @@ const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
     `,
     fetchPolicy: 'no-cache'
   });
-  return res.data.mergeCartFromLS.cart.items;
+  return res.data.mergeCartFromLS;
 };
 
 const getCartByUserId = async (userId) => {

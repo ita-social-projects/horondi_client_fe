@@ -16,9 +16,8 @@ import { removeItemFromCart, deleteProductFromUserCart } from '../../../../redux
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
-const OrderTable = ({ items, currency, calcPrice }) => {
+const OrderTable = ({ items, currency, calcPrice, user }) => {
   const language = useSelector(({ Language }) => Language.language);
-  const user = useSelector(({ User }) => User.userData);
   const styles = useStyles();
   const dispatch = useDispatch();
 

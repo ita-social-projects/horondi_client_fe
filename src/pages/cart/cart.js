@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './cart.styles';
 import EmptyCart from '../../containers/orders/cart/empty-cart';
 import FilledCart from '../../containers/orders/cart/filled-cart';
+import { Loader } from '../../components/loader/loader';
 
 const Cart = () => {
   const styles = useStyles();
-  const cartItems = useSelector(({Cart}) => Cart.list);
-
+  const cartItems = useSelector(({ Cart }) => Cart.list);
 
   return (
     <div className={styles.root}>

@@ -2,14 +2,18 @@ import {
   SET_CART,
   SET_DELIVERY_TYPE,
   SET_CART_LOADING,
+  SET_CART_ERROR,
   CLEAR_CART,
-  SET_CART_CHECKED
+  SET_CART_CHECKED,
+  SET_CART_TOTAL_PRICE
 } from './cart.types';
 
 const initialState = {
   list: [],
   loading: false,
-  deliveryType: ''
+  deliveryType: '',
+  totalPrice: null,
+  error: null
 };
 
 const itemWithCheck = (cartList) => {
@@ -18,9 +22,8 @@ const itemWithCheck = (cartList) => {
       ...item,
       checked: false
     }));
-  } 
+  }
   return [];
-  
 };
 
 export const cartReducer = (state = initialState, { type, payload } = {}) => {
@@ -43,6 +46,12 @@ export const cartReducer = (state = initialState, { type, payload } = {}) => {
         loading: payload
       };
     }
+    case SET_CART_ERROR: {
+      return {
+        ...state,
+        error: payload
+      };
+    }
     case CLEAR_CART: {
       return {
         list: [],
@@ -54,6 +63,12 @@ export const cartReducer = (state = initialState, { type, payload } = {}) => {
       return {
         ...state,
         deliveryType: payload
+      };
+    }
+    case SET_CART_TOTAL_PRICE: {
+      return {
+        ...state,
+        totalPrice: payload
       };
     }
     default:

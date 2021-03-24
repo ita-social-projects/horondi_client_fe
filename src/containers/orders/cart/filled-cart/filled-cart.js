@@ -45,7 +45,7 @@ const FilledCart = ({ items }) => {
         <>
           <DeliveryType
             language={language}
-            totalPrice={!user.userLoading ? cartUserTotalPrice[currency].value : totalPrice}
+            totalPrice={cartLoading ? cartUserTotalPrice[currency].value : totalPrice}
             currency={currency}
           />
         </>

@@ -339,6 +339,7 @@ export function* handleUserPreserve() {
     yield put(setUserError(error.message.replace('GraphQL error: ', '')));
   } finally {
     yield put(setUserIsChecked(true));
+    yield put(setCartLoading(false));
     yield put(setUserLoading(false));
   }
 }

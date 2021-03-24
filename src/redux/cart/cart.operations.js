@@ -55,8 +55,8 @@ items {
 `;
 
 const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
-  const getCartInput = (cartFromLc) =>
-    cartFromLc.map((item) => ({
+  const getCartInput = (cart) =>
+    cart.map((item) => ({
       product: item.product._id,
       quantity: item.quantity,
       options: {

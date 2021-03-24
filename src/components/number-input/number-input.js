@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Button from '@material-ui/core/Button';

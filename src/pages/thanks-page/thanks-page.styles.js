@@ -1,11 +1,32 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   thanksContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%'
+  },
+  linkToPayment: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 400,
+    fontSize: 17,
+    outline: 'none',
+    background: palette.button.normal.backgroundColor,
+    borderRadius: '10px',
+    width: 250,
+    marginBottom: 50,
+    height: 43,
+    alignSelf: 'flex-end',
+    marginRight: '11%',
+    cursor: 'pointer',
+    color: palette.button.normal.color,
+    '&:hover': {
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
+    }
   },
   thunksTitle: ({ isLightTheme }) => ({
     fontSize: 30,

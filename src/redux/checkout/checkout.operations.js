@@ -61,7 +61,6 @@ export const getNovaPoshtaWarehouses = async (city) => {
 
   return result.data.getNovaPoshtaWarehouses;
 };
-
 export const getUkrPostRegions = async () => {
   const res = await client.query({
     query: gql`
@@ -76,7 +75,6 @@ export const getUkrPostRegions = async () => {
   });
   return res.data.getUkrPoshtaRegions;
 };
-
 export const getUkrPoshtaDistrictsByRegionId = async (id) => {
   const res = await client.query({
     variables: {
@@ -94,7 +92,6 @@ export const getUkrPoshtaDistrictsByRegionId = async (id) => {
   });
   return res.data.getUkrPoshtaDistrictsByRegionId;
 };
-
 export const getUkrPoshtaCitiesByDistrictId = async (id) => {
   const res = await client.query({
     variables: {

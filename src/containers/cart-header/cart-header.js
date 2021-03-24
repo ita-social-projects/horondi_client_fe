@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector , useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';

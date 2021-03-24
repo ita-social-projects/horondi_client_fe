@@ -4,9 +4,10 @@ import {
   CHECKOUT_BUTTON,
   CHECKOUT_INPUT_FIELD,
   CHECKOUT_PAYMENT,
-  CHECKOUT_TEXT_FIELDS
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
 } from '../translations/checkout.translations';
-import { deliveryTypes } from '../configs';
+import { DEFAULT_CURRENCY, deliveryTypes } from '../configs';
 
 export const initialValues = {
   firstName: '',
@@ -98,7 +99,7 @@ const productItemsInput = (cartItems) =>
     quantity: item.quantity,
     isFromConstructor: !item.product._id,
     options: {
-      size: item.options.size._id,
+      size: item.options.size._id
     }
   }));
 
@@ -177,3 +178,6 @@ export const userContactInputLabels = (language) => [
 
 export const POSTOMAT = 'Поштомат';
 export const POST_OFFICE_NUMBER = 'Відділення № ';
+
+export const getCurrentCurrency = (currency, language = 1) =>
+  currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;

@@ -1,40 +1,59 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
-
+import { Redirect, useLocation } from 'react-router';
+import { parse } from 'query-string';
+import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import { THANKS_PAGE_TITLE } from '../../translations/thanks-page.translations';
 import OrderData from './order-data';
-import { getOrder, resetOrder } from '../../redux/order/order.actions';
+import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
 import { resetCart } from '../../redux/cart/cart.actions';
+import { CHECKOUT_PAYMENT } from '../../translations/checkout.translations';
+import { getFromLocalStorage } from '../../services/local-storage.service';
+import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
+import { Loader } from '../../components/loader/loader';
 
 const ThanksPage = () => {
+  const router = useLocation();
+
   const dispatch = useDispatch();
-  const { language, currency, order, loading, isLightTheme } = useSelector(
+  const { language, currency, order, loading, isLightTheme, paidOrderLoading } = useSelector(
     ({ Language, Currency, Order, Theme }) => ({
       language: Language.language,
       currency: Currency.currency,
       order: Order.order,
       loading: Order.loading,
-      isLightTheme: Theme.lightMode
+      isLightTheme: Theme.lightMode,
+      paidOrderLoading: Order.paidOrderLoading
     })
   );
   const styles = useStyles({
     isLightTheme
   });
+  const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
   useEffect(() => {
     dispatch(resetCart());
-    dispatch(getOrder());
-    return () => {
-      dispatch(resetOrder());
-    };
+
+    const { order_id: paidOrderNumber } = parse(router.search);
+
+    if (paidOrderNumber) {
+      dispatch(getPaidOrder(paidOrderNumber));
+    } else {
+      dispatch(getOrder());
+    }
   }, []);
+
+  if (loading || paidOrderLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.thanksContainer}>
-      {!order && <Redirect to={routes.pathToMain} />}
-      {!loading && (
+      {!order && <Redirect to={routes.pathToMain} /> &&
+        paymentMethod !== CHECKOUT_PAYMENT[language].card}
+      {(!loading || !paidOrderLoading) && (
         <>
           <h2 className={styles.thunksTitle}>{THANKS_PAGE_TITLE[language].thanks}</h2>
           <div className={styles.thunksInfo}>
@@ -45,6 +64,16 @@ const ThanksPage = () => {
               isLightTheme={isLightTheme}
             />
           </div>
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING && (
+            <a
+              target='_blank'
+              rel='noreferrer'
+              className={styles.linkToPayment}
+              href={order?.paymentUrl}
+            >
+              {THANKS_PAGE_TITLE[language].linkToPayment}
+            </a>
+          )}
         </>
       )}
     </div>

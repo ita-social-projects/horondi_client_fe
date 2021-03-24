@@ -1,1 +1,4 @@
-export const order = 'order';
+export const orderDataToLS = {
+  order: 'order',
+  paymentMethod: 'paymentMethod'
+};

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { map, filter } from 'lodash';
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
@@ -12,8 +11,9 @@ import { selectInfoForSimilarProducts } from './selector';
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
+import { similarProductForCart } from '../../../utils/productDetails';
 
-const SimilarProducts = ({ currencySign }) => {
+const SimilarProducts = ({ currencySign, cartList }) => {
   const styles = useStyles();
   const { language, similarProducts, currency, product } = useSelector(
     selectInfoForSimilarProducts
@@ -21,26 +21,29 @@ const SimilarProducts = ({ currencySign }) => {
 
   const { title } = SIMILAR_ITEMS[language];
 
-  const imagesList = map(
-    filter(
-      similarProducts,
+  let imagesList = [];
+  if (cartList) {
+    imagesList = similarProductForCart(similarProducts, cartList);
+  } else {
+    imagesList = similarProducts.filter(
       ({ category, mainMaterial, pattern }) =>
         category._id !== product.category._id &&
         (mainMaterial.color._id === product.mainMaterial.color._id ||
           pattern._id === product.pattern._id)
-    ),
-    ({ _id, images, rate, name, basePrice }) => (
-      <SimilarProductsItem
-        currencySign={currencySign}
-        key={_id}
-        price={basePrice[currency].value}
-        name={name}
-        rate={rate}
-        imageUrl={images.primary.medium}
-        id={_id}
-      />
-    )
-  );
+    );
+  }
+
+  imagesList = imagesList.map(({ _id, images, rate, name, basePrice }) => (
+    <SimilarProductsItem
+      currencySign={currencySign}
+      key={_id}
+      price={basePrice[currency].value}
+      name={name}
+      rate={rate}
+      imageUrl={images.primary.medium}
+      id={_id}
+    />
+  ));
 
   return (
     <div>

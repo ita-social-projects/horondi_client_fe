@@ -1,6 +1,8 @@
 import {
   SET_CART,
   GET_CART,
+  SET_CART_CHECKED,
+  GET_CART_BY_USER_ID,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   SET_CART_ITEM_QUANTITY,
@@ -8,16 +10,32 @@ import {
   SET_DELIVERY_TYPE,
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE,
-  RESET_CART
+  RESET_CART,
+  SET_CART_TOTAL_PRICE,
+  ADD_PRODUCT_TO_USER_CART,
+  DELETE_PRODUCT_FROM_USER_CART,
+  MERGE_CART_FROM_LC_WITT_USER_CART,
+  CHANGE_CART_ITEM_USER_QUANTITY,
+  SET_CART_LOADING,
+  CLEAR_CART,
+  SET_CART_ERROR
 } from './cart.types';
 
 const setCart = (cartItems) => ({
   type: SET_CART,
   payload: cartItems
 });
+const setCartChecked = (cartItems) => ({
+  type: SET_CART_CHECKED,
+  payload: cartItems
+});
 
 const getCart = () => ({
   type: GET_CART
+});
+const getCartByUserId = (userId) => ({
+  type: GET_CART_BY_USER_ID,
+  payload: userId
 });
 
 const addItemToCart = (item) => ({
@@ -61,9 +79,48 @@ const resetCart = () => ({
   type: RESET_CART
 });
 
+const addProductToUserCart = (payload) => ({
+  type: ADD_PRODUCT_TO_USER_CART,
+  payload
+});
+
+const deleteProductFromUserCart = (payload) => ({
+  type: DELETE_PRODUCT_FROM_USER_CART,
+  payload
+});
+
+const changeCartItemUserQuantity = (payload) => ({
+  type: CHANGE_CART_ITEM_USER_QUANTITY,
+  payload
+});
+
+const mergeCarts = (payload) => ({
+  type: MERGE_CART_FROM_LC_WITT_USER_CART,
+  payload
+});
+
+const setCartTotalPrice = (payload) => ({
+  type: SET_CART_TOTAL_PRICE,
+  payload
+});
+const setCartLoading = (payload) => ({
+  type: SET_CART_LOADING,
+  payload
+});
+const setCartError = (payload) => ({
+  type: SET_CART_ERROR,
+  payload
+});
+
+const clearCartInstore = () => ({
+  type: CLEAR_CART
+});
+
 export {
   setCart,
   getCart,
+  setCartChecked,
+  getCartByUserId,
   addItemToCart,
   removeItemFromCart,
   setCartItemQuantity,
@@ -71,5 +128,13 @@ export {
   setDeliveryType,
   addDeliveryType,
   getDeliveryType,
-  resetCart
+  resetCart,
+  addProductToUserCart,
+  deleteProductFromUserCart,
+  changeCartItemUserQuantity,
+  mergeCarts,
+  setCartTotalPrice,
+  setCartLoading,
+  setCartError,
+  clearCartInstore
 };

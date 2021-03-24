@@ -1,8 +1,4 @@
-import {
-  DEFAULT_CURRENCY,
-  DEFAULT_LANGUAGE,
-  DEFAULT_COUNT_PER_PAGE
-} from '../configs';
+import { DEFAULT_CURRENCY, DEFAULT_LANGUAGE, DEFAULT_COUNT_PER_PAGE } from '../configs';
 
 export const clearLocalStorage = () => {
   const horondi = {

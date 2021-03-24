@@ -8,7 +8,6 @@ import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
 import { selectCurrencySign } from '../../utils/currency';
-import { DEFAULT_SIZE } from '../../configs/index';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import ProductImages from './product-images';
@@ -36,7 +35,6 @@ const ProductDetails = ({ match }) => {
   );
   const dispatch = useDispatch();
   const styles = useStyles();
-
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
 
   const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
@@ -52,7 +50,7 @@ const ProductDetails = ({ match }) => {
     pattern
   } = product || {};
 
-  const currentSize = sizes ? sizes.find(({ name }) => name === DEFAULT_SIZE) : {};
+  const currentSize = sizes ? sizes[0] : {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -64,19 +62,29 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
-          _id: productId,
-          name: productName,
-          selectedSize: currentSize,
-          bottomMaterial,
-          image: images.additional.small,
-          totalPrice: currentSize.additionalPrice,
+          product: {
+            _id: productId,
+            category: {
+              _id: category._id
+            },
+            name: productName,
+            mainMaterial,
+            bottomMaterial,
+            pattern,
+            images: {
+              primary: {
+                thumbnail: images.additional[0].thumbnail
+              }
+            }
+          },
+          price: currentSize.additionalPrice,
+          options: {
+            size: currentSize
+          },
           dimensions: {
             volumeInLiters: currentSize.volumeInLiters,
             weightInKg: currentSize.weightInKg
-          },
-          categoryID: category._id,
-          mainMaterialColorID: mainMaterial.color._id,
-          patternID: pattern._id
+          }
         })
       );
     }
@@ -103,12 +111,14 @@ const ProductDetails = ({ match }) => {
     dispatch(
       setProductToSend({
         ...productToSend,
-        totalPrice: selectedSize.additionalPrice,
+        price: selectedSize.additionalPrice,
         dimensions: {
           volumeInLiters: selectedSize.volumeInLiters,
           weightInKg: selectedSize.weightInKg
         },
-        selectedSize
+        options: {
+          size: selectedSize
+        }
       })
     );
 

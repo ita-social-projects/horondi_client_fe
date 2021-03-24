@@ -12,13 +12,11 @@ import { toastSettings } from '../../../configs/index';
 
 import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
 
-import { isProductInCartAlready } from '../../../utils/productDetails';
-
 import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
-import { addItemToCart } from '../../../redux/cart/cart.actions';
+import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 
 import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
@@ -28,20 +26,13 @@ import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems, cartList } = useSelector(
+  const { language, productToSend, product, wishlistItems, userData } = useSelector(
     selectLanguageProductsUserWishlist
   );
-
-  const { selectedSize } = productToSend;
 
   const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
     product._id,
     wishlistItems
-  ]);
-
-  const sizeToSend = useMemo(() => sizes.find(({ _id }) => _id === selectedSize._id), [
-    selectedSize,
-    sizes
   ]);
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
@@ -68,17 +59,16 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
-    if (isProductInCartAlready(cartList, productToSend)) {
-      return null;
-    }
-
-    if (product || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend || {}
-        })
-      );
+    if (product) {
+      if (userData) {
+        const newCartItemWithUserId = {
+          userId: userData._id,
+          cartItem: productToSend
+        };
+        dispatch(addProductToUserCart(newCartItemWithUserId));
+      } else {
+        dispatch(addItemToCart(productToSend));
+      }
       dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));
     } else {
@@ -87,7 +77,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCheckout = () => {
-    if (product || selectedSize) {
+    if (product) {
       onAddToCart();
       dispatch(push('/cart'));
     } else {

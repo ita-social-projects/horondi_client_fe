@@ -9,9 +9,9 @@ import { SIZE } from '../../../translations/product-details.translations';
 
 const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const styles = useStyles();
-  const { language, selectedSize } = useSelector(({ Language, Products }) => ({
+  const { language, size } = useSelector(({ Language, Products }) => ({
     language: Language.language,
-    selectedSize: Products.productToSend.selectedSize
+    size: Products.productToSend.options.size
   }));
 
   const sizeButtons =
@@ -22,7 +22,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
       .map(({ _id, name }) => (
         <Button
           key={_id}
-          className={_id === selectedSize._id ? styles.selectedSize : styles.sizeButton}
+          className={_id === size._id ? styles.selectedSize : styles.sizeButton}
           onClick={() => handleSizeChange(_id)}
         >
           {name}

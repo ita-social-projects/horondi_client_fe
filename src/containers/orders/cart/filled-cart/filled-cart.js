@@ -26,7 +26,6 @@ const FilledCart = ({ items }) => {
 
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
   const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
-  console.log(cartLoading);
   if (cartLoading) {
     return <Loader />;
   }

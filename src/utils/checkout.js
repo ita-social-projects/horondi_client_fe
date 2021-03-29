@@ -22,7 +22,10 @@ export const initialValues = {
   house: '',
   flat: '',
   region: '',
-  district: ''
+  district: '',
+  regionId: '',
+  districtId: '',
+  cityId: ''
 };
 
 export const checkoutPropTypes = {
@@ -116,6 +119,9 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
     courierOffice: data.courierOffice || '',
     region: data.region || '',
     district: data.district || '',
+    regionId: data.regionId || '',
+    districtId: data.districtId || '',
+    cityId: data.cityId || '',
     city: data.city || '',
     street: data.street || '',
     house: data.house || '',

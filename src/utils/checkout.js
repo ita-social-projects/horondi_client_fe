@@ -114,6 +114,8 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
     sentBy: deliveryType,
     invoiceNumber: data.invoiceNumber || '',
     courierOffice: data.courierOffice || '',
+    region: data.region || '',
+    district: data.district || '',
     city: data.city || '',
     street: data.street || '',
     house: data.house || '',

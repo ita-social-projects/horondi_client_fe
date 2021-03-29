@@ -15,7 +15,6 @@ const initialState = {
   cities: [],
   warehouses: [],
   price: {},
-  fondyData: {},
   ukrPoshtaCities: [],
   ukrPoshtaRegions: [],
   ukrPoshtaDistricts: [],

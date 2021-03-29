@@ -6,8 +6,6 @@ import {
   SET_DELIVERY_LOADING,
   SET_NOVAPOSHTA_PRICES,
   GET_NOVAPOSHTA_PRICES,
-  GET_FONDY_DATA,
-  SET_FONDY_DATA,
   SET_UKRPOST_REGIONS,
   GET_UKRPOST_REGIONS,
   SET_UKRPOST_DISTRICTS,
@@ -21,16 +19,6 @@ import {
 const setNovaPoshtaPrices = (payload) => ({
   type: SET_NOVAPOSHTA_PRICES,
   payload
-});
-
-const setFondyData = (fondyData) => ({
-  type: SET_FONDY_DATA,
-  payload: fondyData
-});
-
-const getFondyData = (orderDesc) => ({
-  type: GET_FONDY_DATA,
-  payload: orderDesc
 });
 
 const getNovaPoshtaPrices = (payload) => ({
@@ -107,8 +95,6 @@ export {
   setDeliveryLoading,
   setNovaPoshtaPrices,
   getNovaPoshtaPrices,
-  setFondyData,
-  getFondyData,
   getUkrPostCities,
   setUkrPostCities,
   getUkrPostDistricts,

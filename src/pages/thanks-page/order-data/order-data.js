@@ -28,16 +28,18 @@ const OrderData = ({ language, currency, order, isLightTheme }) => {
         </TableHead>
         <TableBody className={styles.tableBody}>
           {order?.items.map((item) => (
-            <OrderItemCard key={item._id} item={item} language={language} currency={currency} />
+            <OrderItemCard key={item} item={item} language={language} currency={currency} />
           ))}
         </TableBody>
       </Table>
       <div className={styles.result}>
         <span className={styles.resultTitle}>{THANKS_PAGE_TITLE[language].result}</span>
         <span className={styles.resultStatus}>
-          {order?.paymentStatus === ORDER_PAYMENT_STATUS.CREATED
-            ? PAYMENT_STATUS[language].created
-            : PAYMENT_STATUS[language].paid}
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.CREATED &&
+            PAYMENT_STATUS[language].created}
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING &&
+            PAYMENT_STATUS[language].processing}
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID && PAYMENT_STATUS[language].paid}
         </span>
         <span className={styles.resultTotalSum}>
           {`${order?.totalPriceToPay[currency].value} ${

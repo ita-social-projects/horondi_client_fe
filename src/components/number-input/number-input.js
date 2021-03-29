@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { useStyles } from './number-input.styles';
+import { TYPES_CONST } from '../../const/types-consts';
+import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
 
 const NumberInput = ({ onChangeQuantity, quantity }) => {
   const styles = useStyles();
@@ -22,12 +24,12 @@ const NumberInput = ({ onChangeQuantity, quantity }) => {
         <RemoveIcon />
       </Button>
       <TextField
-        type='number'
+        type={TYPES_CONST.NUMBER}
         value={quantity}
         id='filled-basic'
-        variant='outlined'
+        variant={TEXT_FIELD_VARIANT.OUTLINED}
         onChange={setQuantityFromInput}
-        inputProps={{ min: 0, style: { textAlign: 'center', width: '25px', height: '15px' } }}
+        inputProps={{ min: 1, style: { textAlign: 'center', width: '25px', height: '15px' } }}
       />
       <Button className={styles.button} onClick={() => onChangeQuantity(quantity + 1)}>
         <AddIcon />

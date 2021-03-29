@@ -76,7 +76,7 @@ const Routes = () => {
                 isAuthed={!userData}
                 redirectTo='/'
               />
-              <Route path='/thanks' exact component={ThanksPage} />
+              <Route path='/thanks' component={ThanksPage} />
               <Route path='/cart' exact component={Cart} />
               <Route path='/checkout' exact component={Checkout} />
               <Route

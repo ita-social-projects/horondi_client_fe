@@ -11,6 +11,7 @@ export const clearLocalStorage = () => {
     theme: 'light',
     countPerPage: DEFAULT_COUNT_PER_PAGE,
     deliveryType: '',
+    paymentMethod: '',
     order: null
   };
   localStorage.setItem('horondi', JSON.stringify(horondi));

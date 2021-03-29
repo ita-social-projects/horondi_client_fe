@@ -18,16 +18,17 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, DEFAULT_CURRENCY } from '../../../configs';
+import { CY_CODE_ERR } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
-import { addOrder } from '../../../redux/order/order.actions';
+import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
   checkoutPropTypes,
+  getCurrentCurrency,
   initialValues,
   orderInputData,
   userContactInputLabels,
@@ -53,7 +54,17 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
     initialValues,
 
     onSubmit: (data) => {
-      dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language)));
+      data.paymentMethod === CHECKOUT_PAYMENT[language].card
+        ? dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].card)) &&
+          dispatch(
+            getFondyData({
+              order: orderInputData(data, deliveryType, cartItems, language),
+              currency: getCurrentCurrency(currency),
+              amount: String(totalPriceToPay)
+            })
+          )
+        : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
+          dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].cash));
     }
   });
 
@@ -199,17 +210,13 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {`${totalPriceToPay / 100} ${
-                    currency === DEFAULT_CURRENCY
-                      ? CHECKOUT_TITLES[language].UAH
-                      : CHECKOUT_TITLES[language].USD
-                  }`}
+                  {`${totalPriceToPay / 100} ${getCurrentCurrency(currency, language)}`}
                 </p>
               </div>
               <button type='submit' className={styles.submitBtn}>
                 {checkoutFormBtnValue(values, language)}
               </button>
-              <Link to={routes.pathToMain}>
+              <Link to={routes.pathToPurchases}>
                 <span className={`${styles.totalSumTitle} ${styles.goods}`}>
                   {CART_BUTTON_TITLES[language].goods}
                 </span>

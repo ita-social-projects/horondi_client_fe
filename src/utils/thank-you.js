@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 
 export const ORDER_PAYMENT_STATUS = {
   CREATED: 'CREATED',
-  PAID: 'PAID'
+  PAID: 'PAID',
+  PROCESSING: 'PROCESSING'
 };
 export const defaultProps = {
   order: null,

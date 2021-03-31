@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
-import { Checkbox, TableCell, TableRow } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Divider, TableCell, TableRow } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
 import {
-  setCartItemChecked,
   setCartItemQuantity,
-  changeCartItemUserQuantity
+  changeCartItemUserQuantity,
+  deleteProductFromUserCart,
+  removeItemFromCart
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
+import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 
-const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) => {
+const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
-
-  const checkedItem = item.isChecked;
 
   const onChangeQuantity = (value) => {
     if (user) {
@@ -27,13 +28,14 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
       dispatch(setCartItemQuantity(item, +value));
     }
   };
-  const onCartItemCheck = () => {
-    dispatch(setCartItemChecked(item, checkedItem));
-  };
 
-  useEffect(() => {
-    dispatch(setCartItemChecked(item, true));
-  }, []);
+  const onDeleteItem = () => {
+    if (user) {
+      dispatch(deleteProductFromUserCart({ userId: user._id, items: [item] }));
+    } else {
+      dispatch(removeItemFromCart([item]));
+    }
+  };
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
@@ -60,27 +62,30 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
         )}
       </TableCell>
       <TableCell>
-        <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
+        {!cartQuantityLoading ? (
+          <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
+        ) : (
+          <CircularProgress
+            className={styles.loadingBar}
+            color={MATERIAL_UI_COLOR.INHERIT}
+            size={30}
+          />
+        )}
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
         {user && (
           <span>
-            {item.price[currency].value / 100} {item.price[currency].currency}
+            {Math.round(item.price[currency].value / 100)} {item.price[currency].currency}
           </span>
         )}
         {!user && (
           <span>
-            {calcPrice(item, currency) / 100} {item.price[currency].currency}
+            {Math.round(calcPrice(item, currency) / 100)} {item.price[currency].currency}
           </span>
         )}
-        {isCartEditing && (
-          <Checkbox
-            className={styles.checkbox}
-            color='default'
-            checked={checkedItem}
-            onChange={onCartItemCheck}
-          />
-        )}
+        <span className={styles.deleteIcon}>
+          <DeleteIcon onClick={onDeleteItem} fontSize='50' />
+        </span>
       </TableCell>
     </TableRow>
   );

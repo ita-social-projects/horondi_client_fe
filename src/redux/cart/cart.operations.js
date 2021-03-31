@@ -130,9 +130,6 @@ const cleanCart = async (userId) => {
         cleanCart(id: $id) {
           ... on User {
             _id
-            firstName
-            cart {
-                ${cartReqBody}
           }
           ... on Error {
             message

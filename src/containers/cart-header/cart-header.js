@@ -4,16 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import { useStyles } from './cart-header.styles';
 import { getCart } from '../../redux/cart/cart.actions';
 
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
-  const { cartItems, user } = useSelector(({ Cart, User }) => ({
+  const { cartItems, user, cartLoading } = useSelector(({ Cart, User }) => ({
     cartItems: Cart.list,
-    user: User.userData
+    user: User.userData,
+    cartLoading: Cart.loading
   }));
 
   const styles = useStyles({ fromSideBar });
@@ -30,13 +33,24 @@ const CartHeader = ({ fromSideBar }) => {
   );
 
   return (
-    <Link to='/cart'>
-      <IconButton className={styles.root} aria-label='cart' tabIndex={-1}>
-        <Badge badgeContent={itemsCount} color='secondary'>
-          <ShoppingBasketIcon />
-        </Badge>
-      </IconButton>
-    </Link>
+    <>
+      {!cartLoading && (
+        <span className={styles.cartIconWrapper}>
+          <Link to='/cart'>
+            <IconButton className={styles.root} aria-label='cart' tabIndex={-1}>
+              <Badge badgeContent={itemsCount} color='secondary'>
+                <ShoppingBasketIcon />
+              </Badge>
+            </IconButton>
+          </Link>
+        </span>
+      )}
+      {cartLoading && (
+        <span className={styles.cartIconWrapper}>
+          <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+        </span>
+      )}
+    </>
   );
 };
 

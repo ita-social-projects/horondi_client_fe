@@ -27,24 +27,25 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor
   },
   price: {
-    position: 'relative',
     textAlign: 'center'
-  },
-  checkbox: {
-    position: 'absolute',
-    right: 10,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    cursor: 'pointer',
-    '@media (max-width: 1050px)': {
-      bottom: 10,
-      top: 'initial',
-      transform: 'none'
-    }
   },
   doneIcon: {
     position: 'relative',
     top: 4,
     fontSize: '1.5em'
+  },
+  quantityWrapper: {
+    width: '200px',
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  loadingBar: {
+    marginLeft: '50px'
+  },
+  deleteIcon: {
+    position: 'relative',
+    marginTop: '15px',
+    marginLeft: '20px',
+    cursor: 'pointer'
   }
 }));

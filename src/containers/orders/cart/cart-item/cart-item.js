@@ -61,31 +61,31 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
           </div>
         )}
       </TableCell>
-      <TableCell>
+      <TableCell className={styles.quantityWrapper}>
         {!cartQuantityLoading ? (
           <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
         ) : (
-          <CircularProgress
-            className={styles.loadingBar}
-            color={MATERIAL_UI_COLOR.INHERIT}
-            size={30}
-          />
+          <span className={styles.loadingBar}>
+            <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={30} />
+          </span>
         )}
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
-        {user && (
-          <span>
-            {Math.round(item.price[currency].value / 100)} {item.price[currency].currency}
+        <div className={styles.priceWrapper}>
+          {user && (
+            <div>
+              {Math.round(item.price[currency].value / 100)} {item.price[currency].currency}
+            </div>
+          )}
+          {!user && (
+            <div>
+              {Math.round(calcPrice(item, currency) / 100)} {item.price[currency].currency}
+            </div>
+          )}
+          <span className={styles.deleteIcon}>
+            <DeleteIcon onClick={onDeleteItem} fontSize='50' />
           </span>
-        )}
-        {!user && (
-          <span>
-            {Math.round(calcPrice(item, currency) / 100)} {item.price[currency].currency}
-          </span>
-        )}
-        <span className={styles.deleteIcon}>
-          <DeleteIcon onClick={onDeleteItem} fontSize='50' />
-        </span>
+        </div>
       </TableCell>
     </TableRow>
   );

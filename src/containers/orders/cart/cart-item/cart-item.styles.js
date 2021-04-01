@@ -34,18 +34,22 @@ export const useStyles = makeStyles((theme) => ({
     top: 4,
     fontSize: '1.5em'
   },
+
   quantityWrapper: {
-    width: '200px',
-    display: 'flex',
-    justifyContent: 'center'
+    width: '250px'
   },
   loadingBar: {
-    marginLeft: '50px'
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'center'
   },
   deleteIcon: {
-    position: 'relative',
-    marginTop: '15px',
     marginLeft: '20px',
     cursor: 'pointer'
+  },
+  priceWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));

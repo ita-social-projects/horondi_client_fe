@@ -36,7 +36,7 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     />
   ));
 
-  const selectedItems = items.filter((item) => item?.isChecked === true);
+  /*   const selectedItems = items.filter((item) => item?.isChecked === true); */
 
   const onModalAction = (action) => {
     if (action) {
@@ -49,11 +49,11 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     }
   };
 
-  const addCartItemsToWishlistHandler = () => {
+  /*   const addCartItemsToWishlistHandler = () => {
     selectedItems.length &&
       dispatch(addCartItemsToWishlist(selectedItems)) &&
       dispatch(setToastMessage(TOAST_MESSAGE[language].addedToWishList));
-  };
+  }; */
 
   return (
     <>
@@ -90,17 +90,16 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
         </TableHead>
         <TableBody>{cartItems}</TableBody>
       </Table>
-      <div className={styles.cartActionButtons}>
+      {/*       <div className={styles.cartActionButtons}>
         <>
           <div
             className={styles.cartButton}
             type='button'
-            onClick={addCartItemsToWishlistHandler}
           >
             {CART_BUTTON_TITLES[language].toWishlist}
           </div>
         </>
-      </div>
+      </div> */}
     </>
   );
 };

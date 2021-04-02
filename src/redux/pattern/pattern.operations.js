@@ -16,7 +16,6 @@ export const getAllPatterns = async (skip, limit) => {
               lang
               value
             }
-            material
             available
             images {
               medium
@@ -27,7 +26,6 @@ export const getAllPatterns = async (skip, limit) => {
       }
     `
   });
-  client.resetStore();
 
   return result.data.getAllPatterns;
 };

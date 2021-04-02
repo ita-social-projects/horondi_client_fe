@@ -1,19 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
+import clsx from 'clsx';
 
+import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { useStyles } from './materials.style.js';
 import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
-import AwesomeSlider from 'react-awesome-slider';
-import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
 
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
-import { getPatterns } from '../../../src/redux/pattern/pattern.actions';
-import clsx from 'clsx';
+import { getPatterns } from '../../redux/pattern/pattern.actions';
 import { getImage } from '../../utils/imageLoad';
+import Slider from './slider';
 
-const AutoplaySlider = withAutoplay(AwesomeSlider);
+const AutoplaySlider = withAutoplay(Slider);
 
 const Materials = () => {
   const [setImage] = useState([]);
@@ -41,8 +41,7 @@ const Materials = () => {
       });
   }, [patterns]);
 
-  const materialPageText =
-    materialsPage.text && parse(materialsPage.text[language].value);
+  const materialPageText = materialsPage.text && parse(materialsPage.text[language].value);
   const styles = useStyles();
   const imagesForSlider = patterns.map((pattern) => (
     <div
@@ -50,11 +49,10 @@ const Materials = () => {
       key={pattern._id}
       data-src={`${IMG_URL}${pattern.images.medium}`}
     >
-      <p className={clsx(styles.hoverArrow, 'arrow')}>
-        {pattern.name[language].value}
-      </p>
+      <p className={clsx(styles.hoverArrow, 'arrow')}>{pattern.name[language].value}</p>
     </div>
   ));
+
   return (
     <div className={styles.root}>
       {materialsPage.title && <h1>{materialsPage.title[language].value}</h1>}
@@ -62,10 +60,13 @@ const Materials = () => {
         <AutoplaySlider
           play
           interval={carouselMaterialInterval}
+          cancelOnInteraction
           className={styles.slider}
           mobileTouch
-          buttons={false}
+          buttons
+          bullets={false}
           infinite
+          bulletsSet={patterns.map((e) => `${IMG_URL}${e.images.medium}`)}
         >
           {imagesForSlider}
         </AutoplaySlider>

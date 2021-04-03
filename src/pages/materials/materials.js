@@ -39,6 +39,8 @@ const Materials = () => {
       });
   }, [patterns]);
 
+  const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
+
   const materialPageText = materialsPage.text && parse(materialsPage.text[language].value);
   const styles = useStyles();
   const imagesForSlider = patterns.map((pattern) => (
@@ -64,7 +66,7 @@ const Materials = () => {
           buttons
           bullets={false}
           infinite
-          bulletsSet={patterns.map((e) => `${IMG_URL}${e.images.small}`)}
+          bulletsSet={bulletSet}
         >
           {imagesForSlider}
         </AutoplaySlider>

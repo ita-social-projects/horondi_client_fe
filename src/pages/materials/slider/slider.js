@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
+
 import { useStyles } from './slider.styles';
 
 const Slider = (props) => {
@@ -9,25 +10,26 @@ const Slider = (props) => {
   const [selected, setSelected] = useState(0);
 
   const onClickHandler = (e) => {
-    slider.current.goTo({ index: +e.target.dataset.index, direction: true });
-    slider.current.onTransitionRequest(+e.target.dataset.index);
+    sliderRef.current.goTo({ index: +e.target.dataset.index, direction: true });
+    sliderRef.current.onTransitionRequest(+e.target.dataset.index);
   };
 
-  const slider = useRef();
+  const onTransitionEnd = (info, ...args) => {
+    props.onTransitionEnd(info, ...args);
+    setSelected(info.currentIndex);
+  };
 
-  useEffect(() => {
-    setSelected(slider.current.index);
-  }, [slider.current?.index]);
+  const sliderRef = useRef();
 
   return (
     <div>
-      <AwesomeSlider ref={slider} {...props} />
+      <AwesomeSlider ref={sliderRef} {...props} onTransitionEnd={onTransitionEnd} />
       <div className={styles.container}>
         {bulletsSet &&
           bulletsSet.map((bullet, i) => (
             <img
               src={bullet}
-              key={`${bullet}${i}`}
+              key={bullet}
               alt={i}
               className={clsx({
                 [styles.image]: true,

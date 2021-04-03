@@ -1,13 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
-import clsx from 'clsx';
-
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
-import { useStyles } from './materials.style.js';
-import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 import 'react-awesome-slider/dist/styles.css';
 
+import { useStyles } from './materials.style.js';
+import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
 import { getPatterns } from '../../redux/pattern/pattern.actions';
 import { getImage } from '../../utils/imageLoad';
@@ -19,7 +17,7 @@ const Materials = () => {
   const [setImage] = useState([]);
   const dispatch = useDispatch();
   const { materialsPage, language, patterns } = useSelector(
-    ({ BusinessPages, Language, Pattern, HomePageSlider }) => ({
+    ({ BusinessPages, Language, Pattern }) => ({
       materialsPage: BusinessPages.pages.materials,
       language: Language.language,
       patterns: Pattern.list
@@ -49,7 +47,7 @@ const Materials = () => {
       key={pattern._id}
       data-src={`${IMG_URL}${pattern.images.medium}`}
     >
-      <p className={clsx(styles.hoverArrow, 'arrow')}>{pattern.name[language].value}</p>
+      <p className={styles.sliderText}>{`"${pattern.name[language].value}"`}</p>
     </div>
   ));
 
@@ -66,7 +64,7 @@ const Materials = () => {
           buttons
           bullets={false}
           infinite
-          bulletsSet={patterns.map((e) => `${IMG_URL}${e.images.medium}`)}
+          bulletsSet={patterns.map((e) => `${IMG_URL}${e.images.small}`)}
         >
           {imagesForSlider}
         </AutoplaySlider>

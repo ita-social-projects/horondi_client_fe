@@ -19,6 +19,7 @@ export const getAllPatterns = async (skip, limit) => {
             available
             images {
               medium
+              small
             }
           }
           count

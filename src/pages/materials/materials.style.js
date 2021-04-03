@@ -54,14 +54,10 @@ export const useStyles = makeStyles((theme) => ({
     '& .awssld__content img': {
       opacity: '50%'
     },
-    '& .awssld__controls button .awssld__controls__arrow-left,\
-    & .awssld__controls button .awssld__controls__arrow-right': {
+    '& .awssld__controls button .awssld__controls__arrow-left, & .awssld__controls button .awssld__controls__arrow-right': {
       opacity: 1
     },
-    '& .awssld__controls__arrow-left:before,\
-    & .awssld__controls__arrow-left:after,\
-    & .awssld__controls__arrow-right:before,\
-    & .awssld__controls__arrow-right:after': {
+    '& .awssld__controls__arrow-left:before, & .awssld__controls__arrow-left:after, & .awssld__controls__arrow-right:before, & .awssld__controls__arrow-right:after': {
       background: '#fff'
     }
   }

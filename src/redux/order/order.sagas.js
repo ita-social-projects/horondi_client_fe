@@ -58,7 +58,7 @@ export function* handleGetFondyUrl({ payload }) {
       payload.currency,
       payload.currency === CURRENCY.UAH
         ? (newOrder.totalPriceToPay[0].value * 100).toString()
-        : (newOrder.totalPriceToPay[1].value * 100).toString
+        : (newOrder.totalPriceToPay[1].value * 100).toString()
     );
 
     setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);

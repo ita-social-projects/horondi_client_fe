@@ -84,6 +84,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
             if (value) {
               setRegionId(value.REGION_ID);
               setFieldValue(CHECKOUT_INPUT_FIELD.region, value.REGION_UA);
+              setFieldValue(CHECKOUT_INPUT_FIELD.regionId, value.REGION_ID);
             } else {
               setRegion('');
               setDistrict('');
@@ -132,6 +133,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
             if (value) {
               setDistrictId(value.DISTRICT_ID);
               setFieldValue(CHECKOUT_INPUT_FIELD.district, value.DISTRICT_UA);
+              setFieldValue(CHECKOUT_INPUT_FIELD.districtId, value.DISTRICT_ID);
             } else {
               setDistrictId('');
               setCity('');
@@ -180,6 +182,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => 
             if (value) {
               setCityId(value.CITY_ID);
               setFieldValue(CHECKOUT_INPUT_FIELD.city, value.CITY_UA);
+              setFieldValue(CHECKOUT_INPUT_FIELD.cityId, value.CITY_ID);
             } else {
               setCityId('');
               setPostOffice('');

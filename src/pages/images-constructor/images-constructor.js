@@ -1,6 +1,7 @@
 import React, { useRef, useMemo, useLayoutEffect } from 'react';
 import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
+import { mergeImages } from 'horondi_merge_images';
 
 import { useStyles } from './images-constructor.style';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
@@ -46,14 +47,6 @@ const ImagesConstructor = () => {
 
       resolve(Promise.all(loadedImages).then((loadedImage) => loadedImage));
     });
-
-  const mergeImages = (imagesToMerge, currentCanvas, width = 1000, height = 1000, x = 0, y = 0) => {
-    const ctx = currentCanvas.getContext('2d');
-    ctx.clearRect(0, 0, width, height);
-    imagesToMerge.forEach((imageToMerge) => {
-      ctx.drawImage(imageToMerge, x, y, width, height);
-    });
-  };
 
   useLayoutEffect(() => {
     if (images.basicImage && images.patternImage && images.frontPocketImage && images.bottomImage) {

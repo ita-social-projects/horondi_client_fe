@@ -79,7 +79,7 @@ export function* handleSetPaymentMethod({ payload }) {
   yield setToLocalStorage(orderDataToLS.paymentMethod, payload);
 }
 
-function* getOrderTillSuccess(payload) {
+export function* getOrderTillSuccess(payload) {
   const paidOrder = yield call(getOrderByPaidOrderNumber, payload);
 
   if (paidOrder.paymentStatus !== ORDER_PAYMENT_STATUS.PAID) {

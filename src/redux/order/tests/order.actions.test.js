@@ -59,14 +59,12 @@ describe('Orders actions test', () => {
   });
 
   it('should add payment method', () => {
-    const paymentMethod = 'CASH';
-
     const result = {
       type: ADD_PAYMENT_METHOD,
-      payload: paymentMethod
+      payload: orderExample.paymentMethod
     };
 
-    expect(addPaymentMethod(paymentMethod)).toEqual(result);
+    expect(addPaymentMethod(orderExample.paymentMethod)).toEqual(result);
   });
 
   it('should return paid order', () => {
@@ -79,14 +77,12 @@ describe('Orders actions test', () => {
   });
 
   it('should return fondy data', () => {
-    const paymentMethod = 'CASH';
-
     const result = {
       type: GET_FONDY_DATA,
-      payload: paymentMethod
+      payload: orderExample.paymentMethod
     };
 
-    expect(getFondyData(paymentMethod)).toEqual(result);
+    expect(getFondyData(orderExample.paymentMethod)).toEqual(result);
   });
 });
 

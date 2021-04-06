@@ -60,3 +60,4 @@ export const payload = {
     userComment: 'send without box'
   }
 };
+export const message = 'error';

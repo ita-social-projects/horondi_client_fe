@@ -16,10 +16,11 @@ import {
   handleOrderError,
   getOrderTillSuccess
 } from '../order.sagas';
-import { orderExample, paidOrder, payload } from './order.variables';
+import { orderExample, paidOrder, payload, message } from './order.variables';
 import { setToLocalStorage, getFromLocalStorage } from '../../../services/local-storage.service';
 import { setError } from '../../error/error.actions';
 import { getOrderByPaidOrderNumber, getPaymentCheckout } from '../order.operations';
+import routes from '../../../configs/routes';
 
 describe('sagas test', () => {
   beforeEach(() => {
@@ -40,11 +41,10 @@ describe('sagas test', () => {
   });
 
   it('fetching order error', () => {
-    const message = 'error';
     expectSaga(handleOrderError, message)
       .put(setOrderLoading(false))
       .put(setError(message))
-      .put(push('/error-page'))
+      .put(push(routes.pathToErrorPage))
       .run();
   });
 

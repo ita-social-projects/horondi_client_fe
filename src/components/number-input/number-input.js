@@ -12,13 +12,11 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
   const setQuantityFromInput = (e) => {
     let num;
-    if(e.target.value<1){
+    if (e.target.value < 1) {
       num = 1;
-    }
-    else {
+    } else {
       num = e.target.value;
     }
-    console.log(num);
     setInputValue(Number(num));
     onChangeQuantity(Number(num));
   };
@@ -30,7 +28,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
         onClick={() => {
           onChangeQuantity(quantity - 1);
           setInputValue(quantity - 1);
-          }}
+        }}
         disabled={quantity <= 1}
       >
         <RemoveIcon />
@@ -43,10 +41,13 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
         onChange={setQuantityFromInput}
         inputProps={{ style: { textAlign: 'center', width: '25px', height: '15px' } }}
       />
-      <Button className={styles.button} onClick={() => {
-        onChangeQuantity(quantity + 1);
-        setInputValue(quantity + 1);
-        }}>
+      <Button
+        className={styles.button}
+        onClick={() => {
+          onChangeQuantity(quantity + 1);
+          setInputValue(quantity + 1);
+        }}
+      >
         <AddIcon />
       </Button>
     </div>

@@ -56,7 +56,7 @@ it.skip('handles errors', () => {
 });
 
 describe('get article saga', () => {
-  it.skip('fetches article', () => {
+  it('fetches article', () => {
     const articleExample = {
       data: {
         getNewsById: {

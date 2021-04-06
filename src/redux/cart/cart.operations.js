@@ -177,13 +177,15 @@ const addProductToCart = async (userId, cartItem) => {
 };
 
 const DeleteProductFromCart = async (userId, cartItems) => {
+  console.log(cartItems);
+  console.log(userId);
   const result = await client.mutate({
     variables: {
       items: cartItems,
       id: userId
     },
     mutation: gql`
-        mutation($items: [RemoveItemsFromCartInput!], $id:ID!) {
+        mutation($items: RemoveItemsFromCartInput!, $id:ID!) {
           removeProductItemsFromCart(items: $items,id:$id) {
                 ... on User {
                     _id

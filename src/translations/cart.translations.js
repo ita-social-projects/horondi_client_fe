@@ -49,7 +49,8 @@ export const CART_TABLE_FIELDS = {
     total: 'Підсумок',
     toPay: 'До сплати',
     photo: 'Фото',
-    delivery: 'Метод доставки'
+    delivery: 'Метод доставки',
+    actions: 'Дії'
   },
   1: {
     item: 'Product name',
@@ -61,7 +62,8 @@ export const CART_TABLE_FIELDS = {
     total: 'Total price',
     toPay: 'Total price to pay',
     photo: 'Photo',
-    delivery: 'Delivery type'
+    delivery: 'Delivery type',
+    actions: 'Action'
   }
 };
 export const DELIVERY_TYPE = {

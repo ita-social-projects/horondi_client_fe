@@ -8,10 +8,7 @@ import {
   CART_TITLES,
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
-import { TOAST_MESSAGE } from '../../../../translations/toast.translations';
 import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
-import { setToastMessage } from '../../../../redux/toast/toast.actions';
-import { addCartItemsToWishlist } from '../../../../redux/wishlist/wishlist.actions';
 import { resetCart, cleanUserCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
@@ -36,7 +33,6 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     />
   ));
 
-  /*   const selectedItems = items.filter((item) => item?.isChecked === true); */
 
   const onModalAction = (action) => {
     if (action) {
@@ -49,11 +45,6 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     }
   };
 
-  /*   const addCartItemsToWishlistHandler = () => {
-    selectedItems.length &&
-      dispatch(addCartItemsToWishlist(selectedItems)) &&
-      dispatch(setToastMessage(TOAST_MESSAGE[language].addedToWishList));
-  }; */
 
   return (
     <>
@@ -86,20 +77,11 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
             <TableCell>{CART_TABLE_FIELDS[language].item}</TableCell>
             <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
             <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{cartItems}</TableBody>
       </Table>
-      {/*       <div className={styles.cartActionButtons}>
-        <>
-          <div
-            className={styles.cartButton}
-            type='button'
-          >
-            {CART_BUTTON_TITLES[language].toWishlist}
-          </div>
-        </>
-      </div> */}
     </>
   );
 };

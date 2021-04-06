@@ -51,5 +51,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  itemImg:{
+    marginLeft: 20
   }
 }));

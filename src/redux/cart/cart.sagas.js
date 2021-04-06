@@ -1,10 +1,9 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, call} from 'redux-saga/effects';
 
 import {
   setCart,
   setDeliveryType,
   setCartLoading,
-  setCartQuantityLoading,
   setCartError,
   setCartTotalPrice
 } from './cart.actions';
@@ -105,12 +104,11 @@ export function* handleAddCartItem({ payload }) {
 
 export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
-  const newCart = cart.filter((item) => {
-    const foundedItem = payload.some(
-      (el) => item.product._id === el.product._id && item.options.size._id === el.options.size._id
-    );
-    return !foundedItem;
-  });
+  const newCart = cart.filter(item => {
+    if(!(item.product._id===payload.product._id&&item.options.size._id===payload.options.size._id)){
+      return item;
+    }
+  })
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
@@ -132,12 +130,12 @@ export function* handleAddProductToUserCart({ payload }) {
 
 export function* handleDeleteProductFromUserCart({ payload }) {
   const { userId, items } = payload;
-  const itemsForDeleteInput = items.map((item) => ({
-    product: item.product._id,
+  const itemsForDeleteInput = {
+    product: items.product._id,
     options: {
-      size: item.options.size._id
+      size: items.options.size._id
     }
-  }));
+  }
 
   try {
     yield put(setCartLoading(true));
@@ -166,11 +164,9 @@ export function* handleSetCartItemQuantity({ payload }) {
 }
 export function* handleSetCartItemUserQuantity({ payload }) {
   try {
-    yield put(setCartQuantityLoading(true));
     const newCartList = yield call(updateCartItemQuantity, payload);
     yield put(setCart(newCartList.cart.items));
     yield put(setCartTotalPrice(newCartList.cart.totalPrice));
-    yield put(setCartQuantityLoading(false));
   } catch (err) {
     yield put(setCartError(err));
     yield put(setCartLoading(true));

@@ -1,13 +1,7 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { push } from 'connected-react-router';
-import {
-  setIsOrderCreated,
-  setOrder,
-  setOrderLoading,
-  setPaidOderLoading,
-  addOrder
-} from '../order.actions';
+import { setIsOrderCreated, setOrder, setOrderLoading, setPaidOderLoading } from '../order.actions';
 import {
   handleAddOrder,
   handleGetCreatedOrder,
@@ -19,7 +13,7 @@ import {
 import { orderExample, paidOrder, payload, message } from './order.variables';
 import { setToLocalStorage, getFromLocalStorage } from '../../../services/local-storage.service';
 import { setError } from '../../error/error.actions';
-import { getOrderByPaidOrderNumber, getPaymentCheckout } from '../order.operations';
+import { getOrderByPaidOrderNumber, getPaymentCheckout, addOrder } from '../order.operations';
 import routes from '../../../configs/routes';
 
 describe('sagas test', () => {
@@ -41,7 +35,7 @@ describe('sagas test', () => {
   });
 
   it('fetching order error', () => {
-    expectSaga(handleOrderError, message)
+    expectSaga(handleOrderError, { message })
       .put(setOrderLoading(false))
       .put(setError(message))
       .put(push(routes.pathToErrorPage))
@@ -58,29 +52,24 @@ describe('sagas test', () => {
   });
 
   it('fetching getting fondy url', () => {
-    expectSaga(handleGetFondyUrl, payload)
+    expectSaga(handleGetFondyUrl, { payload })
       .provide([
         [matchers.call.fn(addOrder, payload.order), orderExample],
         [
-          matchers.call.fn(
-            getPaymentCheckout,
-            orderExample._id,
-            orderExample.currency,
-            orderExample.amount
-          ),
+          matchers.call.fn(getPaymentCheckout, orderExample._id, payload.currency, payload.amount),
           paidOrder
         ]
       ])
       .put(setOrderLoading(true))
-      .put(setOrder(orderExample))
+      .put(setOrder(paidOrder))
       .put(setOrderLoading(false))
       .run();
   });
 
   it('fetching getting order till success', () => {
     expectSaga(getOrderTillSuccess, payload)
-      .provide([[matchers.call.fn(getOrderByPaidOrderNumber), orderExample]])
-      .put(setOrder(orderExample))
+      .provide([[matchers.call.fn(getOrderByPaidOrderNumber, payload), paidOrder]])
+      .put(setOrder(paidOrder))
       .put(setPaidOderLoading(false))
       .run();
   });

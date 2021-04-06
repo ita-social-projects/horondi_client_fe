@@ -62,6 +62,7 @@ describe('sagas test', () => {
       ])
       .put(setOrderLoading(true))
       .put(setOrder(paidOrder))
+      .put(push(`${routes.pathToThanks}/${paidOrder.orderNumber}`))
       .put(setOrderLoading(false))
       .run();
   });

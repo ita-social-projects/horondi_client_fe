@@ -8,9 +8,14 @@ import configureStore from './store/store';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { clearLocalStorage } from './services/local-storage.service';
+import { clearSessionStorage } from './services/session-storage.service';
 
 if (!localStorage.getItem('horondi')) {
   clearLocalStorage();
+}
+
+if (!sessionStorage.getItem('horondi')) {
+  clearSessionStorage();
 }
 
 const store = configureStore();

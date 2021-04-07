@@ -7,7 +7,8 @@ import {
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_TITLES
 } from '../translations/checkout.translations';
-import { DEFAULT_CURRENCY, deliveryTypes } from '../configs';
+import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
+import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 
 export const initialValues = {
   firstName: '',
@@ -189,3 +190,49 @@ export const POST_OFFICE_NUMBER = 'Відділення № ';
 
 export const getCurrentCurrency = (currency, language = 1) =>
   currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;
+
+export const setUserValues = (values, userData, deliveryType) => {
+  const { firstName, lastName, email, phoneNumber } = userData;
+  const result = { ...values, firstName, lastName, email, phoneNumber };
+  if (
+    (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryTypes.UKRPOSTCOURIER) &&
+    userData.address
+  ) {
+    const { city, street, buildingNumber: house, appartment: flat } = userData.address;
+    return {
+      ...result,
+      city,
+      street,
+      house,
+      flat
+    };
+  }
+  return result;
+};
+
+const COURIER = 'COURIER';
+
+export const setDeliveryTypeToStorage = (deliveryType) => {
+  const typeFromStorage = getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE);
+  setToSessionStorage(SESSION_STORAGE.DELIVERY_TYPE, deliveryType);
+  if (deliveryType.includes(COURIER) && typeFromStorage.includes(COURIER)) {
+    return;
+  }
+  if (typeFromStorage !== deliveryType) {
+    const checkoutForm = getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM);
+    setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, {
+      ...checkoutForm,
+      city: '',
+      cityId: '',
+      courierOffice: '',
+      district: '',
+      districtId: '',
+      flat: '',
+      house: '',
+      region: '',
+      regionId: '',
+      street: '',
+      userComment: ''
+    });
+  }
+};

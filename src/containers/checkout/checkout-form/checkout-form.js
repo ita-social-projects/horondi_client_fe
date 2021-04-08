@@ -29,6 +29,7 @@ import {
   checkoutFormBtnValue,
   checkoutPropTypes,
   getCurrentCurrency,
+  handleError,
   initialValues,
   orderInputData,
   setUserValues,
@@ -131,7 +132,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                       label={field.label}
                       value={values[field.name]}
                       onChange={handleChange}
-                      error={touched[field.name] && !!errors[field.name]}
+                      error={handleError(touched[field.name], errors[field.name])}
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
@@ -153,7 +154,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                       label={field.label}
                       value={values[field.name]}
                       onChange={handleChange}
-                      error={touched[field.name] && !!errors[field.name]}
+                      error={handleError(touched[field.name], errors[field.name])}
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
@@ -210,7 +211,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                   variant={TEXT_FIELD_VARIANT.OUTLINED}
                   value={values.userComment}
                   onChange={handleChange}
-                  error={touched.userComment && !!errors.userComment}
+                  error={handleError(touched.userComment, errors.userComment)}
                 />
                 {touched.userComment && errors.userComment && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>

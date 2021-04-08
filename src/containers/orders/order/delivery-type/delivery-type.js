@@ -16,10 +16,7 @@ import { useStyles } from './delivery-type.styles';
 import routes from '../../../../configs/routes';
 import { addDeliveryType } from '../../../../redux/cart/cart.actions';
 import { deliveryTypes, SESSION_STORAGE } from '../../../../configs';
-import {
-  getFromSessionStorage,
-  setToSessionStorage
-} from '../../../../services/session-storage.service';
+import { getFromSessionStorage } from '../../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
 
 const DeliveryType = ({ language, totalPrice, currency }) => {

@@ -225,7 +225,6 @@ export const setDeliveryTypeToStorage = (deliveryType) => {
     return;
   }
   if (typeFromStorage !== deliveryType) {
-    const checkoutForm = getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM);
     setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, {
       ...checkoutForm,
       city: '',
@@ -244,3 +243,5 @@ export const setDeliveryTypeToStorage = (deliveryType) => {
 };
 
 export const RESET = 'reset';
+
+export const handleError = (touched, errors) => touched && !!errors;

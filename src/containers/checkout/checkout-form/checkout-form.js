@@ -132,7 +132,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                       label={field.label}
                       value={values[field.name]}
                       onChange={handleChange}
-                      error={handleError(touched[field.name], errors[field.name])}
+                      error={touched[field.name] && !!errors[field.name]}
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>

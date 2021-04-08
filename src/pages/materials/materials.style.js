@@ -38,6 +38,27 @@ export const useStyles = makeStyles((theme) => ({
     },
     '.sliderImage img , .editor-img': {
       height: 'auto'
+    },
+    '& .awssld__content p': {
+      position: 'absolute',
+      margin: 0,
+      color: '#fff',
+      bottom: '37px',
+      left: '22px',
+      fontSize: '24px',
+      fontWeight: 600
+    },
+    '& .awssld__content': {
+      borderRadius: '10px'
+    },
+    '& .awssld__content img': {
+      opacity: '50%'
+    },
+    '& .awssld__controls button .awssld__controls__arrow-left, & .awssld__controls button .awssld__controls__arrow-right': {
+      opacity: 1
+    },
+    '& .awssld__controls__arrow-left:before, & .awssld__controls__arrow-left:after, & .awssld__controls__arrow-right:before, & .awssld__controls__arrow-right:after': {
+      background: '#fff'
     }
   }
 }));

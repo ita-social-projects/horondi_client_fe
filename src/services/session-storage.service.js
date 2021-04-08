@@ -1,13 +1,15 @@
+import { HORONDI } from '../configs';
+
 export const clearSessionStorage = () => {
   const horondi = {
     checkoutForm: null,
     deliveryType: null
   };
-  sessionStorage.setItem('horondi', JSON.stringify(horondi));
+  sessionStorage.setItem(HORONDI, JSON.stringify(horondi));
 };
 
 export const getFromSessionStorage = (name) => {
-  const sessionObject = JSON.parse(sessionStorage.getItem('horondi'));
+  const sessionObject = JSON.parse(sessionStorage.getItem(HORONDI));
   if (!sessionObject) {
     return null;
   }
@@ -15,7 +17,7 @@ export const getFromSessionStorage = (name) => {
 };
 
 export const setToSessionStorage = (name, item) => {
-  const sessionObject = JSON.parse(sessionStorage.getItem('horondi'));
+  const sessionObject = JSON.parse(sessionStorage.getItem(HORONDI));
   sessionObject[name] = item;
-  sessionStorage.setItem('horondi', JSON.stringify(sessionObject));
+  sessionStorage.setItem(HORONDI, JSON.stringify(sessionObject));
 };

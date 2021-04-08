@@ -459,3 +459,5 @@ export const SESSION_STORAGE = {
   CHECKOUT_FORM: 'checkoutForm',
   DELIVERY_TYPE: 'deliveryType'
 };
+
+export const HORONDI = 'horondi';

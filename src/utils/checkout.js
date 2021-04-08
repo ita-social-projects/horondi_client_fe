@@ -195,7 +195,8 @@ export const setUserValues = (values, userData, deliveryType) => {
   const { firstName, lastName, email, phoneNumber } = userData;
   const result = { ...values, firstName, lastName, email, phoneNumber };
   if (
-    (deliveryType === deliveryTypes.NOVAPOSTCOURIER || deliveryTypes.UKRPOSTCOURIER) &&
+    (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+      deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
     userData.address
   ) {
     const { city, street, buildingNumber: house, appartment: flat } = userData.address;
@@ -215,7 +216,12 @@ const COURIER = 'COURIER';
 export const setDeliveryTypeToStorage = (deliveryType) => {
   const typeFromStorage = getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE);
   setToSessionStorage(SESSION_STORAGE.DELIVERY_TYPE, deliveryType);
-  if (deliveryType.includes(COURIER) && typeFromStorage.includes(COURIER)) {
+  const checkoutForm = getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM);
+  if (
+    (deliveryType.includes(COURIER) && typeFromStorage.includes(COURIER)) ||
+    !typeFromStorage ||
+    !checkoutForm
+  ) {
     return;
   }
   if (typeFromStorage !== deliveryType) {

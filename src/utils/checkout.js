@@ -236,3 +236,5 @@ export const setDeliveryTypeToStorage = (deliveryType) => {
     });
   }
 };
+
+export const RESET = 'reset';

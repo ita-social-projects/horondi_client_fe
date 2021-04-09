@@ -15,6 +15,12 @@ const SelfPickup = ({ isLightTheme, language }) => {
       <h3 className={styles.selfPickupTitle}>{CHECKOUT_DELIVERY_TYPES[language].selfPickUP}</h3>
       <div className={styles.selfPickupData}>
         <div className={styles.selfPickupTitlesWrapper}>
+
+
+
+
+
+
           <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].schedule}</h5>
           <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].address}</h5>
         </div>
@@ -30,6 +36,10 @@ const SelfPickup = ({ isLightTheme, language }) => {
                   {value} {CHECKOUT_TITLES[language].workDay}{' '}
                 </div>
               )
+
+
+
+
             )}
           </p>
           <p className={`${styles.scheduleItem} ${styles.addressTitle}`}>
@@ -41,4 +51,9 @@ const SelfPickup = ({ isLightTheme, language }) => {
   );
 };
 
+
+
+
 export default SelfPickup;
+
+

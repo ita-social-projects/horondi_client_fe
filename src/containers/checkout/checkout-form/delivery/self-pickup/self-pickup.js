@@ -21,6 +21,10 @@ const SelfPickup = ({ isLightTheme, language }) => {
 
 
 
+
+
+
+
           <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].schedule}</h5>
           <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].address}</h5>
         </div>

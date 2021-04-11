@@ -12,7 +12,11 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import { setCurrentPage } from '../../redux/products/products.actions';
+import {
+  getFiltredProducts,
+  setCategoryFilter,
+  setCurrentPage
+} from '../../redux/products/products.actions';
 
 import {
   DRAWER_PERMANENT,
@@ -25,7 +29,7 @@ import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
 import { URL_QUERIES_NAME } from '../../configs';
 
-const ProductListPage = ({ model, width }) => {
+const ProductListPage = ({ category, model, width }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
@@ -66,6 +70,7 @@ const ProductListPage = ({ model, width }) => {
 
   useEffect(() => {
     dispatch(setCurrentPage(searchParams.get(URL_QUERIES_NAME.page)));
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,
@@ -81,6 +86,7 @@ const ProductListPage = ({ model, width }) => {
     filterStatus,
     url
   ]);
+
   const handleDrawerToggle = () => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };

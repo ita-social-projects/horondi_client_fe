@@ -32,7 +32,7 @@ export function* handleFilteredProductsLoad({ payload: { forSearchBar } }) {
     const state = yield select(selectStateProducts);
     const currency = yield select(selectStateCurrency);
     const products = yield call(getFilteredProducts, { state, currency });
-    yield put(setPagesCount(Math.ceil(products.count / state.countPerPage)));
+    yield put(setPagesCount(Math.ceil(products.count / (state.countPerPage || 1))));
     if (forSearchBar) {
       yield put(setProductsForSearchBar(products.items));
       yield put(setSearchBarLoading(false));

@@ -12,11 +12,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import {
-  getFiltredProducts,
-  setCategoryFilter,
-  setCurrentPage
-} from '../../redux/products/products.actions';
+import { getFiltredProducts, setCurrentPage } from '../../redux/products/products.actions';
 
 import {
   DRAWER_PERMANENT,

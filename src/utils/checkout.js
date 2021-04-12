@@ -9,6 +9,7 @@ import {
 } from '../translations/checkout.translations';
 import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
+import { COURIER } from '../const/checkout';
 
 export const initialValues = {
   firstName: '',
@@ -211,8 +212,6 @@ export const setUserValues = (values, userData, deliveryType) => {
   return result;
 };
 
-const COURIER = 'COURIER';
-
 export const setDeliveryTypeToStorage = (deliveryType) => {
   const typeFromStorage = getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE);
   setToSessionStorage(SESSION_STORAGE.DELIVERY_TYPE, deliveryType);
@@ -241,7 +240,5 @@ export const setDeliveryTypeToStorage = (deliveryType) => {
     });
   }
 };
-
-export const RESET = 'reset';
 
 export const handleError = (touched, errors) => touched && !!errors;

@@ -18,8 +18,9 @@ import {
   CHECKOUT_INPUT_FIELD,
   CHECKOUT_TEXT_FIELDS
 } from '../../../../../translations/checkout.translations';
-import { POST_OFFICE_NUMBER, RESET } from '../../../../../utils/checkout';
+import { POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
+import { RESET } from '../../../../../const/checkout';
 
 const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
   const dispatch = useDispatch();

@@ -17,8 +17,9 @@ import {
   getNovaPoshtaWarehouse
 } from '../../../../../redux/checkout/checkout.actions';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
-import { POSTOMAT, RESET } from '../../../../../utils/checkout';
+import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
+import { RESET } from '../../../../../const/checkout';
 
 const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
   const dispatch = useDispatch();
@@ -118,7 +119,7 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
                 setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
               }
             }}
-            disabled={!selectedCity}
+            disabled={!values.city}
             options={_.filter(
               warehouses,
               (warehouseItem) => !warehouseItem.description.includes(POSTOMAT)

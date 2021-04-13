@@ -29,6 +29,7 @@ const Delivery = ({
         errors={errors}
         touched={touched}
         handleChange={handleChange}
+        values={values}
       />
     )}
     {(deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
@@ -52,6 +53,7 @@ const Delivery = ({
         touched={touched}
         handleChange={handleChange}
         setFieldValue={setFieldValue}
+        values={values}
       />
     )}
   </>

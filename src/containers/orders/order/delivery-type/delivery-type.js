@@ -1,43 +1,43 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import {
-  Button,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup
-} from "@material-ui/core";
-import { faDollarSign, faHryvnia } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { useDispatch } from 'react-redux';
 import {
   CART_TITLES,
   CART_TABLE_FIELDS,
   DELIVERY_TYPE,
   CART_BUTTON_TITLES
-} from "../../../../translations/cart.translations";
-import { useStyles } from "./delivery-type.styles";
-import routes from "../../../../configs/routes";
-import { useDispatch } from "react-redux";
-import { addDeliveryType } from "../../../../redux/cart/cart.actions";
+} from '../../../../translations/cart.translations';
+import { useStyles } from './delivery-type.styles';
+import routes from '../../../../configs/routes';
+import { addDeliveryType } from '../../../../redux/cart/cart.actions';
+import { deliveryTypes, SESSION_STORAGE } from '../../../../configs';
+import { getFromSessionStorage } from '../../../../services/session-storage.service';
+import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
 
 const DeliveryType = ({ language, totalPrice, currency }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const [deliveryType, setDeliveryType] = useState("SELFPICKUP");
+  const [deliveryType, setDeliveryType] = useState(
+    getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
+  );
 
   const { pathToBackpacks, pathToCheckout } = routes;
 
   const currencySign = currency ? faDollarSign : faHryvnia;
   const handleAddDeliveryType = () => {
     dispatch(addDeliveryType(deliveryType));
+    setDeliveryTypeToStorage(deliveryType);
   };
   const radioButtons = Object.entries(DELIVERY_TYPE[language]).map((type) => (
     <FormControlLabel
       value={type[0].toUpperCase()}
-      control={<Radio color='default' size='small'/>}
+      control={<Radio color='default' size='small' />}
       label={type[1]}
       key={type[0]}
       classes={{ label: styles.radioBtn }}
@@ -50,15 +50,12 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
       <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
-          {totalPrice / 100} <FontAwesomeIcon icon={currencySign}/>
+          {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div>
         <h3>{CART_TABLE_FIELDS[language].delivery}</h3>
-        <FormControl
-          component='fieldset'
-          classes={{ root: styles.radioBtnWrapper }}
-        >
+        <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
           <RadioGroup
             aria-label='Delivery type'
             name='delivery-type'
@@ -72,21 +69,17 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
       <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
-          {totalPrice / 100} <FontAwesomeIcon icon={currencySign}/>
+          {totalPrice / 100} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div className={styles.btnWrapper}>
-        <Link
-          to={pathToCheckout}
-        >
+        <Link to={pathToCheckout}>
           <Button onClick={handleAddDeliveryType} className={styles.btnCreateOrder}>
             {CART_BUTTON_TITLES[language].checkout}
           </Button>
         </Link>
         <Link to={pathToBackpacks}>
-          <span className={styles.btnCatalogue}>
-            {CART_BUTTON_TITLES[language].goods}
-          </span>
+          <span className={styles.btnCatalogue}>{CART_BUTTON_TITLES[language].goods}</span>
         </Link>
       </div>
     </div>

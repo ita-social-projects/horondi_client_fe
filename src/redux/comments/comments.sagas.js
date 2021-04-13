@@ -1,11 +1,6 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 
-import {
-  setCommentsLoading,
-  setComments,
-  setRate,
-  setUpdatingComment
-} from './comments.actions';
+import { setCommentsLoading, setComments, setRate, setUpdatingComment } from './comments.actions';
 
 import {
   setSnackBarMessage,
@@ -15,12 +10,8 @@ import {
 
 import { SNACKBAR_MESSAGE } from '../../configs';
 import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from './comments.types';
-import {
-  addComment,
-  updateComment,
-  deleteComment,
-  changeRate
-} from './comments.operations';
+import { addComment, updateComment, deleteComment, changeRate } from './comments.operations';
+import { handleIsUserBlockedChecker } from '../order/order.sagas';
 
 const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
 
@@ -28,6 +19,7 @@ export function* handleAddComment({ payload }) {
   try {
     yield put(setCommentsLoading(true));
     const addedComment = yield call(addComment, payload);
+    yield call(handleIsUserBlockedChecker, addedComment);
     if (addedComment) {
       const comments = yield select(({ Comments }) => Comments.comments);
       const newComments = [addedComment, ...comments];
@@ -60,11 +52,10 @@ export function* handleUpdateComment({ payload }) {
   try {
     yield put(setUpdatingComment(payload.comment));
     const updatedComment = yield call(updateComment, payload);
+    yield call(handleIsUserBlockedChecker, updatedComment);
     if (updatedComment) {
       const comments = yield select(({ Comments }) => Comments.comments);
-      const commentToUpdate = comments.findIndex(
-        ({ _id }) => _id === updatedComment._id
-      );
+      const commentToUpdate = comments.findIndex(({ _id }) => _id === updatedComment._id);
       const newComments = [
         ...comments.slice(0, commentToUpdate),
         updatedComment,

@@ -454,3 +454,5 @@ export const deliveryTypes = {
 };
 
 export const CY_CODE_ERR = 'code-error';
+
+export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';

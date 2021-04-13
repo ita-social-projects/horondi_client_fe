@@ -2,11 +2,13 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { SEND_CHAT_MAIL } from './chat.types';
 import { setCommentsLoading, setMessageState } from './chat.actions';
 import { sendMail } from './chat.operations';
+import { handleIsUserBlockedChecker } from '../order/order.sagas';
 
 export function* handleSendMail({ payload }) {
   try {
     yield put(setCommentsLoading(true));
     const res = yield call(sendMail, payload);
+    yield call(handleIsUserBlockedChecker, res);
     yield put(setMessageState(res.data.addEmailQuestion._id));
     yield put(setCommentsLoading(false));
   } catch (e) {

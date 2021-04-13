@@ -17,6 +17,7 @@ import {
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
+import { onChangeQuantityHandler } from '../../../../utils/cart';
 
 const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
@@ -39,8 +40,6 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
       dispatch(removeItemFromCart(item));
     }
   };
-
-  const onChangeQuantityHandler = (user, onChangeUserQuantity, onChangeQuantity) => user ? onChangeUserQuantity : onChangeQuantity;
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>

@@ -462,3 +462,5 @@ export const SNACKBAR_TYPES = {
   error: 'error',
   success: 'success'
 };
+
+export const GRAPHQL_ERROR = 'GraphQL error: ';

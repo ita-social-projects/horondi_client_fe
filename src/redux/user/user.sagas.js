@@ -36,7 +36,8 @@ import {
   cartKey,
   USER_IS_BLOCKED,
   USER_TOKENS,
-  wishlistKey
+  wishlistKey,
+  GRAPHQL_ERROR
 } from '../../configs/index';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
@@ -187,7 +188,7 @@ export function* handleGoogleUserLogin({ payload }) {
     if (error.message === USER_IS_BLOCKED) {
       yield put(setUserError(error.message));
     } else {
-      yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     }
   } finally {
     yield put(setUserLoading(false));
@@ -226,7 +227,7 @@ export function* handleUserLoad({ payload }) {
     if (error.message === USER_IS_BLOCKED) {
       yield put(setUserError(error.message));
     } else {
-      yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     }
   }
 }
@@ -250,7 +251,7 @@ export function* handleUserConfirm({ payload }) {
     if (error.message === USER_IS_BLOCKED) {
       yield put(setUserError(error.message));
     } else {
-      yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     }
   }
 }
@@ -279,7 +280,7 @@ export function* handleUserRecovery({ payload }) {
       yield put(setUserError(error.message));
     } else {
       yield put(setRecoveryLoading(false));
-      yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     }
   }
 }
@@ -305,7 +306,7 @@ export function* handlePasswordReset({ payload }) {
     if (error.message === USER_IS_BLOCKED) {
       yield put(setUserError(error.message));
     } else {
-      yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     }
   }
 }
@@ -325,7 +326,7 @@ export function* handleTokenCheck({ payload }) {
     );
     yield put(setUserLoading(false));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     yield put(push(pathToErrorPage));
   }
 }
@@ -351,7 +352,7 @@ export function* handleUserRegister({ payload }) {
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
   }
 }
 
@@ -374,7 +375,7 @@ export function* handleUserPreserve() {
     yield put(setCartLoading(false));
   } catch (error) {
     yield setToLocalStorage(ACCES_TOKEN, null);
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
   } finally {
     yield put(setUserIsChecked(true));
     yield put(setCartLoading(false));
@@ -424,7 +425,7 @@ export function* handleUpdateUser({ payload }) {
     yield put(setUser({ ...user.data.updateUserById, purchasedProducts }));
     yield put(setUserLoading(false));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
     yield put(push(pathToErrorPage));
   }
 }
@@ -449,7 +450,7 @@ export function* handleSendConfirmation({ payload }) {
       yield put(setUserError(e.message));
     } else {
       yield put(setConfirmationLoading(false));
-      yield put(setUserError(e.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
     }
   }
 }
@@ -492,7 +493,7 @@ export function* handleGetUserOrders() {
     if (e.message === USER_IS_BLOCKED) {
       yield put(setUserError(e.message));
     } else {
-      yield put(setUserError(e.message.replace('GraphQL error: ', '')));
+      yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
       yield put(push(pathToErrorPage));
     }
   }

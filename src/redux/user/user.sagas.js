@@ -42,7 +42,7 @@ import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { setCart, setCartTotalPrice, setCartLoading } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
-import { handleIsUserBlockedChecker } from '../order/order.sagas';
+import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
 
 const { pathToMain, pathToLogin, pathToProfile, pathToErrorPage } = routes;
 const { ACCES_TOKEN, REFRESH_TOKEN } = USER_TOKENS;

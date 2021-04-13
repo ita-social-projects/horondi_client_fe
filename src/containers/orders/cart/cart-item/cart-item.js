@@ -1,10 +1,11 @@
-import React , { useState,useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import _ from 'lodash';
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
@@ -16,22 +17,20 @@ import {
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
 import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
-import _ from 'lodash';
 
 const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const [inputValue, setInputValue] = useState(item.quantity);
 
-   const onChangeUserQuantity = useCallback(
+  const onChangeUserQuantity = useCallback(
     _.debounce((value) => {
       dispatch(changeCartItemUserQuantity({ item, value, userId: user._id }));
     }, 500),
     [dispatch, changeCartItemUserQuantity]
   );
 
-   const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
-
+  const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
 
   const onDeleteItem = () => {
     if (user) {
@@ -41,11 +40,17 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
     }
   };
 
+  const onChangeQuantityHandler = (user, onChangeUserQuantity, onChangeQuantity) => user ? onChangeUserQuantity : onChangeQuantity;
+
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell data-cy='cart-item-img' >
+      <TableCell data-cy='cart-item-img'>
         <Link to={`/product/${item.product._id}`}>
-          <img className={styles.itemImg} src={`${IMG_URL}${item.product.images.primary.thumbnail} `} alt='product-img' />
+          <img
+            className={styles.itemImg}
+            src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
+            alt='product-img'
+          />
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
@@ -67,7 +72,11 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
       </TableCell>
       <TableCell className={styles.quantityWrapper}>
         {!cartQuantityLoading ? (
-          <NumberInput quantity={inputValue} onChangeQuantity={user ? onChangeUserQuantity : onChangeQuantity} setInputValue={setInputValue} />
+          <NumberInput
+            quantity={inputValue}
+            onChangeQuantity={onChangeQuantityHandler(user, onChangeUserQuantity, onChangeQuantity)}
+            setInputValue={setInputValue}
+          />
         ) : (
           <span className={styles.loadingBar}>
             <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={30} />
@@ -87,11 +96,11 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
             </div>
           )}
         </div>
-      </TableCell  >
+      </TableCell>
       <TableCell>
-            <span className={styles.deleteIcon}>
-            <DeleteIcon onClick={onDeleteItem} fontSize={'default'} />
-          </span>
+        <span className={styles.deleteIcon}>
+          <DeleteIcon onClick={onDeleteItem} fontSize='default' />
+        </span>
       </TableCell>
     </TableRow>
   );

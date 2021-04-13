@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useStyles } from './confirmation.styles';
-import {
-  WELCOME_MESSAGE,
-  CONFIRM_ERROR
-} from '../../translations/user.translations';
+import { WELCOME_MESSAGE, CONFIRM_ERROR } from '../../translations/user.translations';
 import { Loader } from '../../components/loader/loader';
-import { confirmUser } from '../../redux/user/user.actions';
 
 const Confirmation = ({ token }) => {
   // HOOKS
@@ -19,10 +15,6 @@ const Confirmation = ({ token }) => {
   }));
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(confirmUser({ token }));
-  }, [dispatch, token]);
 
   // HANDLERS
   const goTo = (path) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
 import {
@@ -18,7 +18,7 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR } from '../../../configs';
+import { CY_CODE_ERR, SESSION_STORAGE } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
@@ -29,18 +29,27 @@ import {
   checkoutFormBtnValue,
   checkoutPropTypes,
   getCurrentCurrency,
+  handleError,
   initialValues,
   orderInputData,
+  setUserValues,
   userContactInputLabels,
   userNameInputLabels
 } from '../../../utils/checkout';
 import { validationSchema } from '../../../validators/chekout';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import {
+  clearSessionStorage,
+  getFromSessionStorage,
+  setToSessionStorage
+} from '../../../services/session-storage.service';
 
 const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
     isLightTheme
   });
+
+  const userData = useSelector(({ User }) => User.userData);
 
   const dispatch = useDispatch();
   const totalPriceToPay = cartItems.reduce(
@@ -49,7 +58,16 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
     0
   );
 
-  const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
+  const {
+    dirty,
+    values,
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    touched,
+    errors,
+    resetForm
+  } = useFormik({
     validationSchema: validationSchema(deliveryType, language),
     initialValues,
 
@@ -65,8 +83,23 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
           )
         : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
           dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].cash));
+      clearSessionStorage();
     }
   });
+
+  useEffect(() => {
+    if (userData && !getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM)) {
+      resetForm({ values: setUserValues(values, userData, deliveryType) });
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    dirty && setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
+  }, [values]);
+
+  useEffect(() => {
+    resetForm({ values: getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM) });
+  }, []);
 
   return (
     <div>
@@ -121,7 +154,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                       label={field.label}
                       value={values[field.name]}
                       onChange={handleChange}
-                      error={touched[field.name] && !!errors[field.name]}
+                      error={handleError(touched[field.name], errors[field.name])}
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
@@ -178,7 +211,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                   variant={TEXT_FIELD_VARIANT.OUTLINED}
                   value={values.userComment}
                   onChange={handleChange}
-                  error={touched.userComment && !!errors.userComment}
+                  error={handleError(touched.userComment, errors.userComment)}
                 />
                 {touched.userComment && errors.userComment && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>

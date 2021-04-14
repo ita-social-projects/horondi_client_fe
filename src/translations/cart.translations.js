@@ -18,7 +18,7 @@ export const CART_BUTTON_TITLES = {
     empty: 'Обрати зараз',
     goods: 'Продовжити покупки',
     checkout: 'Створити замовлення',
-    edit: 'Редагувати корзину',
+    deleteAllCart: 'Очистити всю корзину',
     editCancel: 'Припинити редагування',
     toWishlist: 'Перемістити у вподобані товари',
     remove: 'Видалити',
@@ -29,7 +29,7 @@ export const CART_BUTTON_TITLES = {
     empty: 'Shop now',
     goods: 'Continue shopping',
     checkout: 'Go to checkout',
-    edit: 'Edit cart',
+    deleteAllCart: 'Clean cart',
     editCancel: 'Cancel editing',
     toWishlist: 'Move to wishlist',
     remove: 'Remove',
@@ -49,7 +49,8 @@ export const CART_TABLE_FIELDS = {
     total: 'Підсумок',
     toPay: 'До сплати',
     photo: 'Фото',
-    delivery: 'Метод доставки'
+    delivery: 'Метод доставки',
+    actions: 'Дії'
   },
   1: {
     item: 'Product name',
@@ -61,7 +62,8 @@ export const CART_TABLE_FIELDS = {
     total: 'Total price',
     toPay: 'Total price to pay',
     photo: 'Photo',
-    delivery: 'Delivery type'
+    delivery: 'Delivery type',
+    actions: 'Action'
   }
 };
 export const DELIVERY_TYPE = {

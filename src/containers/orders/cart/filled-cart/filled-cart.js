@@ -13,16 +13,23 @@ import { Loader } from '../../../../components/loader/loader';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
-  const { language, currency, cartList, cartUserTotalPrice, cartLoading, user } = useSelector(
-    ({ Language, Currency, Cart, User }) => ({
-      language: Language.language,
-      currency: Currency.currency,
-      cartList: Cart.list,
-      cartLoading: Cart.loading,
-      cartUserTotalPrice: Cart.totalPrice,
-      user: User.userData
-    })
-  );
+  const {
+    language,
+    currency,
+    cartList,
+    cartUserTotalPrice,
+    cartLoading,
+    cartQuantityLoading,
+    user
+  } = useSelector(({ Language, Currency, Cart, User }) => ({
+    language: Language.language,
+    currency: Currency.currency,
+    cartList: Cart.list,
+    cartLoading: Cart.loading,
+    cartQuantityLoading: Cart.quantityLoading,
+    cartUserTotalPrice: Cart.totalPrice,
+    user: User.userData
+  }));
 
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
   const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
@@ -39,6 +46,8 @@ const FilledCart = ({ items }) => {
             items={items}
             language={language}
             user={user}
+            cartLoading={cartLoading}
+            cartQuantityLoading={cartQuantityLoading}
           />
         </div>
         <>

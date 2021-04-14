@@ -8,30 +8,46 @@ import { useStyles } from './number-input.styles';
 import { TYPES_CONST } from '../../const/types-consts';
 import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
 
-const NumberInput = ({ onChangeQuantity, quantity }) => {
+const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
   const setQuantityFromInput = (e) => {
-    onChangeQuantity(Number(e.target.value));
+    let num;
+    if (e.target.value < 1) {
+      num = 1;
+    } else {
+      num = e.target.value;
+    }
+    setInputValue(Number(num));
+    onChangeQuantity(Number(num));
   };
 
   return (
     <div className={styles.root} data-cy='cart-item-quantity'>
       <Button
         className={styles.button}
-        onClick={() => onChangeQuantity(quantity - 1)}
+        onClick={() => {
+          onChangeQuantity(quantity - 1);
+          setInputValue(quantity - 1);
+        }}
         disabled={quantity <= 1}
       >
         <RemoveIcon />
       </Button>
       <TextField
-        type={TYPES_CONST.NUMBER}
+        type={TYPES_CONST.STRING}
         value={quantity}
         id='filled-basic'
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         onChange={setQuantityFromInput}
-        inputProps={{ min: 1, style: { textAlign: 'center', width: '25px', height: '15px' } }}
+        inputProps={{ style: { textAlign: 'center', width: '25px', height: '15px' } }}
       />
-      <Button className={styles.button} onClick={() => onChangeQuantity(quantity + 1)}>
+      <Button
+        className={styles.button}
+        onClick={() => {
+          onChangeQuantity(quantity + 1);
+          setInputValue(quantity + 1);
+        }}
+      >
         <AddIcon />
       </Button>
     </div>

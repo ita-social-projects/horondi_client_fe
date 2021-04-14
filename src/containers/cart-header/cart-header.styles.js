@@ -9,5 +9,10 @@ export const useStyles = makeStyles(() => ({
       backgroundColor: fromSideBar ? '#000' : '#fff',
       color: fromSideBar ? '#fff' : '#000'
     }
-  })
+  }),
+  cartIconWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '45px'
+  }
 }));

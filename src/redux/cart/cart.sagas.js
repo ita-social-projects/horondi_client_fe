@@ -180,22 +180,6 @@ export function* handleSetCartItemUserQuantity({ payload }) {
   }
 }
 
-export function* handleSetCartItemChecked({ payload }) {
-  const { item, isChecked } = payload;
-  const cart = yield select(({ Cart }) => Cart.list);
-  const newCart = cart.map((cartItem) => {
-    if (
-      cartItem.product._id === item.product._id &&
-      cartItem.options.size._id === item.options.size._id
-    ) {
-      cartItem.isChecked = !isChecked;
-    }
-    return cartItem;
-  });
-  setToLocalStorage(cartKey, newCart);
-  yield put(setCartChecked(newCart));
-}
-
 export default function* cartSaga() {
   yield takeEvery(GET_DELIVERY_TYPE, handleDeliveryTypeLoad);
   yield takeEvery(GET_CART, handleCartLoad);

@@ -16,6 +16,7 @@ import {
   setUserOrders
 } from './user.actions';
 import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
+import { setUserErrorType } from '../../utils/user-helpers';
 import { megreCartFromLCwithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
@@ -335,7 +336,7 @@ export function* handleUserRegister({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(
+    const response = yield call(
       setItems,
       `
       mutation register($user: userRegisterInput!, $language: Int!){
@@ -349,6 +350,9 @@ export function* handleUserRegister({ payload }) {
       `,
       payload
     );
+    if (response.data.registerUser.statusCode) {
+      throw new Error(setUserErrorType(response.data.registerUser.message, payload.language));
+    }
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
   } catch (error) {

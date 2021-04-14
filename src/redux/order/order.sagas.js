@@ -16,6 +16,8 @@ import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
 import { CURRENCY } from '../../const/currency';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
+import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { USER_IS_BLOCKED } from '../../configs';
 
 export function* handleOrderError({ message }) {
   yield put(setOrderLoading(false));
@@ -28,13 +30,17 @@ export function* handleAddOrder({ payload }) {
     yield put(setOrderLoading(true));
 
     const newOrder = yield call(addOrder, payload);
-    setToLocalStorage(orderDataToLS.order, newOrder);
-
-    yield put(setOrder(newOrder));
-    yield put(setIsOrderCreated(true));
-    yield put(setOrderLoading(false));
+    if (newOrder?.message === USER_IS_BLOCKED) {
+      yield call(handleIsUserBlockedChecker);
+    } else {
+      setToLocalStorage(orderDataToLS.order, newOrder);
+      yield put(setOrder(newOrder));
+      yield put(setIsOrderCreated(true));
+      yield put(setOrderLoading(false));
+    }
   } catch (e) {
     yield call(handleOrderError, e);
+    yield put(push(routes.pathToMain));
   }
 }
 
@@ -52,24 +58,29 @@ export function* handleGetFondyUrl({ payload }) {
     yield put(setOrderLoading(true));
 
     const newOrder = yield call(addOrder, payload.order);
-    const orderWithCheckoutUrl = yield call(
-      getPaymentCheckout,
-      newOrder._id,
-      payload.currency,
-      payload.currency === CURRENCY.UAH
-        ? (newOrder.totalPriceToPay[0].value * 100).toString()
-        : (newOrder.totalPriceToPay[1].value * 100).toString()
-    );
 
-    setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);
+    if (newOrder?.message === USER_IS_BLOCKED) {
+      yield call(handleIsUserBlockedChecker);
+    } else {
+      const orderWithCheckoutUrl = yield call(
+        getPaymentCheckout,
+        newOrder._id,
+        payload.currency,
+        payload.currency === CURRENCY.UAH
+          ? (newOrder.totalPriceToPay[0].value * 100).toString()
+          : (newOrder.totalPriceToPay[1].value * 100).toString()
+      );
 
-    yield put(setOrder(orderWithCheckoutUrl));
+      setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);
 
-    if (orderWithCheckoutUrl.paymentUrl) {
-      window.open(orderWithCheckoutUrl.paymentUrl);
+      yield put(setOrder(orderWithCheckoutUrl));
+
+      if (orderWithCheckoutUrl.paymentUrl) {
+        window.open(orderWithCheckoutUrl.paymentUrl);
+      }
+      yield put(push(`${routes.pathToThanks}/${orderWithCheckoutUrl.orderNumber}`));
+      yield put(setOrderLoading(false));
     }
-    yield put(push(`${routes.pathToThanks}/${orderWithCheckoutUrl.orderNumber}`));
-    yield put(setOrderLoading(false));
   } catch (e) {
     yield call(handleOrderError, e);
   }
@@ -79,7 +90,7 @@ export function* handleSetPaymentMethod({ payload }) {
   yield setToLocalStorage(orderDataToLS.paymentMethod, payload);
 }
 
-function* getOrderTillSuccess(payload) {
+export function* getOrderTillSuccess(payload) {
   const paidOrder = yield call(getOrderByPaidOrderNumber, payload);
 
   if (paidOrder.paymentStatus !== ORDER_PAYMENT_STATUS.PAID) {

@@ -11,7 +11,8 @@ import {
   SET_USER_IS_CONFIRMED,
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
-  SET_USER_ORDERS
+  SET_USER_ORDERS,
+  SET_DELETE_USER
 } from './user.types';
 
 export const initialState = {
@@ -103,6 +104,11 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         userOrders: action.payload
+      };
+    case SET_DELETE_USER:
+      return {
+        ...state,
+        userData: null
       };
     default:
       return state;

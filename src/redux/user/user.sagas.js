@@ -16,6 +16,7 @@ import {
   setUserOrders
 } from './user.actions';
 import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
+import { setUserErrorType } from '../../utils/user-helpers';
 import { megreCartFromLCwithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
@@ -31,10 +32,22 @@ import {
   LOGIN_BY_GOOGLE
 } from './user.types';
 import getItems, { setItems } from '../../utils/client';
-import { REDIRECT_TIMEOUT, cartKey } from '../../configs/index';
+import {
+  REDIRECT_TIMEOUT,
+  cartKey,
+  USER_IS_BLOCKED,
+  USER_TOKENS,
+  wishlistKey,
+  GRAPHQL_ERROR
+} from '../../configs/index';
+import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { setCart, setCartTotalPrice, setCartLoading } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
+import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+
+const { pathToMain, pathToLogin, pathToProfile, pathToErrorPage } = routes;
+const { ACCES_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
 export const loginUser = (data) => {
   const query = `
@@ -63,6 +76,11 @@ export const loginUser = (data) => {
       region
       zipcode
 		}
+		banned{
+      blockPeriod
+      blockCount
+      updatedAt
+    }
 		wishlist {
 			_id
 			name {
@@ -165,10 +183,14 @@ export function* handleGoogleUserLogin({ payload }) {
     );
     const purchasedProducts = yield call(getPurchasedProducts, user.data.googleUser._id);
     yield put(setUser({ ...user.data.googleUser, purchasedProducts }));
-    yield setToLocalStorage('accessToken', user.data.googleUser.token);
-    yield put(push('/profile'));
+    yield setToLocalStorage(ACCES_TOKEN, user.data.googleUser.token);
+    yield put(push(pathToProfile));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    if (error.message === USER_IS_BLOCKED) {
+      yield put(setUserError(error.message));
+    } else {
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    }
   } finally {
     yield put(setUserLoading(false));
   }
@@ -187,11 +209,12 @@ export function* handleUserLoad({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
+
     const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
 
-    yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
-    yield setToLocalStorage('accessToken', user.data.loginUser.token);
-    yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
+    yield setToLocalStorage(REFRESH_TOKEN, user.data.loginUser.refreshToken);
+    yield setToLocalStorage(ACCES_TOKEN, user.data.loginUser.token);
+    yield setToLocalStorage(wishlistKey, user.data.loginUser.wishlist);
     yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
     yield put(setWishlist(user.data.loginUser.wishlist));
     const cartFromLc = getFromLocalStorage(cartKey);
@@ -200,9 +223,13 @@ export function* handleUserLoad({ payload }) {
     yield put(setCartTotalPrice(mergedCart.cart.totalPrice));
     yield setToLocalStorage(cartKey, mergedCart.cart.items);
     yield put(setUserLoading(false));
-    yield put(push('/'));
+    yield put(push(pathToMain));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    if (error.message === USER_IS_BLOCKED) {
+      yield put(setUserError(error.message));
+    } else {
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    }
   }
 }
 
@@ -222,7 +249,11 @@ export function* handleUserConfirm({ payload }) {
     yield put(setUserLoading(false));
     yield put(setUserIsConfirmed(true));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    if (error.message === USER_IS_BLOCKED) {
+      yield put(setUserError(error.message));
+    } else {
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    }
   }
 }
 
@@ -243,11 +274,15 @@ export function* handleUserRecovery({ payload }) {
     yield put(userHasRecovered(true));
     if (payload.redirect) {
       yield delay(REDIRECT_TIMEOUT);
-      yield put(push('/login'));
+      yield put(push(pathToLogin));
     }
   } catch (error) {
-    yield put(setRecoveryLoading(false));
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    if (error.message === USER_IS_BLOCKED) {
+      yield put(setUserError(error.message));
+    } else {
+      yield put(setRecoveryLoading(false));
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    }
   }
 }
 
@@ -267,9 +302,13 @@ export function* handlePasswordReset({ payload }) {
     yield put(setUserLoading(false));
     yield put(setPasswordIsReset(true));
     yield delay(REDIRECT_TIMEOUT);
-    yield put(push('/login'));
+    yield put(push(pathToLogin));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    if (error.message === USER_IS_BLOCKED) {
+      yield put(setUserError(error.message));
+    } else {
+      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    }
   }
 }
 
@@ -288,8 +327,8 @@ export function* handleTokenCheck({ payload }) {
     );
     yield put(setUserLoading(false));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    yield put(push(pathToErrorPage));
   }
 }
 
@@ -297,7 +336,7 @@ export function* handleUserRegister({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(
+    const response = yield call(
       setItems,
       `
       mutation register($user: userRegisterInput!, $language: Int!){
@@ -311,10 +350,13 @@ export function* handleUserRegister({ payload }) {
       `,
       payload
     );
+    if (response.data.registerUser.statusCode) {
+      throw new Error(setUserErrorType(response.data.registerUser.message, payload.language));
+    }
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
   }
 }
 
@@ -322,12 +364,13 @@ export function* handleUserPreserve() {
   try {
     yield put(setUserLoading(true));
     yield put(setCartLoading(true));
-    const refreshToken = getFromLocalStorage('refreshToken');
+    const refreshToken = getFromLocalStorage(REFRESH_TOKEN);
     if (refreshToken) {
       const newAccessToken = yield call(regenerateAccessToken, refreshToken);
-      setToLocalStorage('accessToken', newAccessToken);
+      setToLocalStorage(ACCES_TOKEN, newAccessToken);
     }
     const user = yield call(getUserByToken);
+    yield call(handleIsUserBlockedChecker, user);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
     const userCart = yield call(getCartByUserId, user._id);
@@ -335,8 +378,8 @@ export function* handleUserPreserve() {
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
     yield put(setCartLoading(false));
   } catch (error) {
-    yield setToLocalStorage('accessToken', null);
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield setToLocalStorage(ACCES_TOKEN, null);
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
   } finally {
     yield put(setUserIsChecked(true));
     yield put(setCartLoading(false));
@@ -381,12 +424,13 @@ export function* handleUpdateUser({ payload }) {
   `,
       payload
     );
+    yield call(handleIsUserBlockedChecker, user);
     const purchasedProducts = yield call(getPurchasedProducts, user.data.updateUserById._id);
     yield put(setUser({ ...user.data.updateUserById, purchasedProducts }));
     yield put(setUserLoading(false));
   } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+    yield put(push(pathToErrorPage));
   }
 }
 
@@ -406,8 +450,12 @@ export function* handleSendConfirmation({ payload }) {
     yield put(setConfirmationLoading(false));
     yield put(setConfirmationEmailStatus(true));
   } catch (e) {
-    yield put(setConfirmationLoading(false));
-    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
+    if (e.message === USER_IS_BLOCKED) {
+      yield put(setUserError(e.message));
+    } else {
+      yield put(setConfirmationLoading(false));
+      yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
+    }
   }
 }
 
@@ -446,8 +494,12 @@ export function* handleGetUserOrders() {
     yield put(setUserOrders(res.data.getUserOrders));
     yield put(setUserLoading(false));
   } catch (e) {
-    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+    if (e.message === USER_IS_BLOCKED) {
+      yield put(setUserError(e.message));
+    } else {
+      yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
+      yield put(push(pathToErrorPage));
+    }
   }
 }
 

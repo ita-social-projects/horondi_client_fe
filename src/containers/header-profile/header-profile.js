@@ -64,6 +64,7 @@ const HeaderProfile = ({ fromSideBar }) => {
     setToLocalStorage('accessToken', null);
     setToLocalStorage('refreshToken', null);
     setToLocalStorage('cart', []);
+    setAnchorEl(null);
   };
 
   const handleRedirect = (link) => {

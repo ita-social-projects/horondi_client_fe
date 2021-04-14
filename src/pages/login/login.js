@@ -21,6 +21,7 @@ import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { validationSchema } from '../../validators/login';
+import Snackbar from '../../containers/snackbar';
 
 const Login = () => {
   const styles = useStyles();
@@ -137,6 +138,7 @@ const Login = () => {
                           {REGISTER_PROPOSAL[language].value}
                         </Link>
                       </div>
+                      <Snackbar />
                     </>
                   )}
                 </Form>

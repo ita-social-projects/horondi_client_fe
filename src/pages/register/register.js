@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import Grid from '@material-ui/core/Grid';
+
 import { REGISTER_USER_DATA, USER_REGISTER_LABELS, USER_TOKENS } from '../../configs';
 import {
   REGISTER_FORM_LABEL,
@@ -18,7 +19,7 @@ import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
-import { setUserErrorType, setInfoImgByTheme } from '../../utils/user-helpers';
+import { setInfoImgByTheme } from '../../utils/user-helpers';
 import routes from '../../configs/routes';
 import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
 import { IMG_ALT } from '../../const/images-alts';
@@ -128,9 +129,7 @@ export default function Register() {
                           >
                             {REGISTER_FORM_LABEL[language].value}
                           </Button>
-                          <p className={styles.registerError}>
-                            {setUserErrorType(registerError, language)}
-                          </p>
+                          <p className={styles.registerError}>{registerError}</p>
                           <p className={styles.googleText}>{GOOGLE_SIGN_IN_TEXT[language].value}</p>
                           <GoogleBtn />
                         </div>

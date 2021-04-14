@@ -1,3 +1,3 @@
-import { GoogleBtn } from './google-btton';
+import { GoogleBtn } from './google-button';
 
 export default GoogleBtn;

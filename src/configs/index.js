@@ -314,7 +314,8 @@ export const SNACKBAR_MESSAGE = {
   added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
   updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
   deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
-  error: ['Щось пішло не так', 'Something went wrong']
+  error: ['Щось пішло не так', 'Something went wrong'],
+  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.']
 };
 export const COMMENT_DATA = {
   firstName: '',
@@ -454,6 +455,15 @@ export const deliveryTypes = {
 };
 
 export const CY_CODE_ERR = 'code-error';
+
+export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';
+
+export const SNACKBAR_TYPES = {
+  error: 'error',
+  success: 'success'
+};
+
+export const GRAPHQL_ERROR = 'GraphQL error: ';
 
 export const SESSION_STORAGE = {
   CHECKOUT_FORM: 'checkoutForm',

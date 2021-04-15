@@ -1,12 +1,10 @@
 import {
   SET_CART,
   GET_CART,
-  SET_CART_CHECKED,
   GET_CART_BY_USER_ID,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   SET_CART_ITEM_QUANTITY,
-  SET_CART_ITEM_CHECKED,
   SET_DELIVERY_TYPE,
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE,
@@ -17,7 +15,8 @@ import {
   MERGE_CART_FROM_LC_WITT_USER_CART,
   CHANGE_CART_ITEM_USER_QUANTITY,
   SET_CART_LOADING,
-  CLEAR_CART,
+  SET_CART_QUANTITY_LOADER,
+  CLEAN_CART,
   SET_CART_ERROR
 } from './cart.types';
 
@@ -25,11 +24,6 @@ const setCart = (cartItems) => ({
   type: SET_CART,
   payload: cartItems
 });
-const setCartChecked = (cartItems) => ({
-  type: SET_CART_CHECKED,
-  payload: cartItems
-});
-
 const getCart = () => ({
   type: GET_CART
 });
@@ -56,13 +50,6 @@ const setCartItemQuantity = (item, value) => ({
   }
 });
 
-const setCartItemChecked = (item, isChecked) => ({
-  type: SET_CART_ITEM_CHECKED,
-  payload: {
-    item,
-    isChecked
-  }
-});
 const setDeliveryType = (payload) => ({
   type: SET_DELIVERY_TYPE,
   payload
@@ -107,24 +94,28 @@ const setCartLoading = (payload) => ({
   type: SET_CART_LOADING,
   payload
 });
+const setCartQuantityLoading = (payload) => ({
+  type: SET_CART_QUANTITY_LOADER,
+  payload
+});
+
 const setCartError = (payload) => ({
   type: SET_CART_ERROR,
   payload
 });
 
-const clearCartInstore = () => ({
-  type: CLEAR_CART
+const cleanUserCart = (payload) => ({
+  type: CLEAN_CART,
+  payload
 });
 
 export {
   setCart,
   getCart,
-  setCartChecked,
   getCartByUserId,
   addItemToCart,
   removeItemFromCart,
   setCartItemQuantity,
-  setCartItemChecked,
   setDeliveryType,
   addDeliveryType,
   getDeliveryType,
@@ -135,6 +126,7 @@ export {
   mergeCarts,
   setCartTotalPrice,
   setCartLoading,
+  setCartQuantityLoading,
   setCartError,
-  clearCartInstore
+  cleanUserCart
 };

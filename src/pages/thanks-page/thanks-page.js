@@ -8,7 +8,7 @@ import { THANKS_PAGE_TITLE } from '../../translations/thanks-page.translations';
 import OrderData from './order-data';
 import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
-import { resetCart } from '../../redux/cart/cart.actions';
+import { resetCart, cleanUserCart } from '../../redux/cart/cart.actions';
 import { CHECKOUT_PAYMENT } from '../../translations/checkout.translations';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
@@ -18,14 +18,15 @@ const ThanksPage = () => {
   const router = useLocation();
 
   const dispatch = useDispatch();
-  const { language, currency, order, loading, isLightTheme, paidOrderLoading } = useSelector(
-    ({ Language, Currency, Order, Theme }) => ({
+  const { language, currency, order, loading, isLightTheme, paidOrderLoading, user } = useSelector(
+    ({ Language, Currency, Order, Theme, User }) => ({
       language: Language.language,
       currency: Currency.currency,
       order: Order.order,
       loading: Order.loading,
       isLightTheme: Theme.lightMode,
-      paidOrderLoading: Order.paidOrderLoading
+      paidOrderLoading: Order.paidOrderLoading,
+      user: User.userData
     })
   );
   const styles = useStyles({
@@ -34,7 +35,11 @@ const ThanksPage = () => {
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
   useEffect(() => {
-    dispatch(resetCart());
+    if (user) {
+      dispatch(cleanUserCart(user._id));
+    } else {
+      dispatch(resetCart());
+    }
 
     const { order_id: paidOrderNumber } = parse(router.search);
 

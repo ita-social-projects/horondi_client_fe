@@ -1,45 +1,55 @@
-import React, { useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { TableCell, TableRow } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-import { Checkbox, TableCell, TableRow } from '@material-ui/core';
-
+import _ from 'lodash';
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
 import {
-  setCartItemChecked,
   setCartItemQuantity,
-  changeCartItemUserQuantity
+  changeCartItemUserQuantity,
+  deleteProductFromUserCart,
+  removeItemFromCart
 } from '../../../../redux/cart/cart.actions';
 import { IMG_URL } from '../../../../configs';
+import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
+import { onChangeQuantityHandler } from '../../../../utils/cart';
 
-const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) => {
+const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
+  const [inputValue, setInputValue] = useState(item.quantity);
 
-  const checkedItem = item.isChecked;
-
-  const onChangeQuantity = (value) => {
-    if (user) {
+  const onChangeUserQuantity = useCallback(
+    _.debounce((value) => {
       dispatch(changeCartItemUserQuantity({ item, value, userId: user._id }));
+    }, 500),
+    [dispatch, changeCartItemUserQuantity]
+  );
+
+  const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
+
+  const onDeleteItem = () => {
+    if (user) {
+      dispatch(deleteProductFromUserCart({ userId: user._id, items: item }));
     } else {
-      dispatch(setCartItemQuantity(item, +value));
+      dispatch(removeItemFromCart(item));
     }
   };
-  const onCartItemCheck = () => {
-    dispatch(setCartItemChecked(item, checkedItem));
-  };
-
-  useEffect(() => {
-    dispatch(setCartItemChecked(item, true));
-  }, []);
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell data-cy='cart-item-img'>
         <Link to={`/product/${item.product._id}`}>
-          <img src={`${IMG_URL}${item.product.images.primary.thumbnail} `} alt='product-img' />
+          <img
+            className={styles.itemImg}
+            src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
+            alt='product-img'
+          />
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
@@ -59,28 +69,37 @@ const CartItem = ({ item, language, currency, calcPrice, isCartEditing, user }) 
           </div>
         )}
       </TableCell>
-      <TableCell>
-        <NumberInput quantity={item.quantity} onChangeQuantity={onChangeQuantity} />
+      <TableCell className={styles.quantityWrapper}>
+        {!cartQuantityLoading ? (
+          <NumberInput
+            quantity={inputValue}
+            onChangeQuantity={onChangeQuantityHandler(user, onChangeUserQuantity, onChangeQuantity)}
+            setInputValue={setInputValue}
+          />
+        ) : (
+          <span className={styles.loadingBar}>
+            <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={30} />
+          </span>
+        )}
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
-        {user && (
-          <span>
-            {item.price[currency].value / 100} {item.price[currency].currency}
-          </span>
-        )}
-        {!user && (
-          <span>
-            {calcPrice(item, currency) / 100} {item.price[currency].currency}
-          </span>
-        )}
-        {isCartEditing && (
-          <Checkbox
-            className={styles.checkbox}
-            color='default'
-            checked={checkedItem}
-            onChange={onCartItemCheck}
-          />
-        )}
+        <div className={styles.priceWrapper}>
+          {user && (
+            <div>
+              {Math.round(item.price[currency].value / 100)} {item.price[currency].currency}
+            </div>
+          )}
+          {!user && (
+            <div>
+              {Math.round(calcPrice(item, currency) / 100)} {item.price[currency].currency}
+            </div>
+          )}
+        </div>
+      </TableCell>
+      <TableCell>
+        <span className={styles.deleteIcon}>
+          <DeleteIcon onClick={onDeleteItem} fontSize='default' />
+        </span>
       </TableCell>
     </TableRow>
   );

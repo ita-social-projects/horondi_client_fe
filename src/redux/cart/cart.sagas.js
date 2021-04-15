@@ -1,8 +1,7 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, call} from 'redux-saga/effects';
 
 import {
   setCart,
-  setCartChecked,
   setDeliveryType,
   setCartLoading,
   setCartError,
@@ -13,22 +12,24 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   SET_CART_ITEM_QUANTITY,
-  SET_CART_ITEM_CHECKED,
   ADD_DELIVERY_TYPE,
   GET_DELIVERY_TYPE,
   RESET_CART,
+  CLEAN_CART,
   ADD_PRODUCT_TO_USER_CART,
   DELETE_PRODUCT_FROM_USER_CART,
   CHANGE_CART_ITEM_USER_QUANTITY
 } from './cart.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { cartKey, deliveryTypeKey } from '../../configs/index';
+import { cartKey, deliveryTypeKey, USER_IS_BLOCKED } from '../../configs/index';
 import {
   DeleteProductFromCart,
   addProductToCart,
   getCartByUserId,
-  updateCartItemQuantity
+  updateCartItemQuantity,
+  cleanCart
 } from './cart.operations';
+import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
 
 export function* handleCartLoad() {
   const cart = yield getFromLocalStorage(cartKey);
@@ -54,11 +55,25 @@ export function* handleCartReset() {
   yield put(setCart(cart));
 }
 
+export function* handleClearUserCart({ payload }) {
+  try {
+    yield put(setCartLoading(true));
+    yield call(cleanCart, payload);
+    yield put(setCart([]));
+    yield setToLocalStorage(cartKey, []);
+    yield put(setCartLoading(false));
+  } catch (err) {
+    yield put(setCartError(err));
+    yield put(setCartLoading(true));
+  }
+}
+
 export function* handleDeliveryTypeLoad() {
   const deliveryType = getFromLocalStorage(deliveryTypeKey);
 
   yield put(setDeliveryType(deliveryType));
 }
+
 export function* handleSetDeliveryType({ payload }) {
   yield put(setDeliveryType(payload));
 
@@ -91,12 +106,11 @@ export function* handleAddCartItem({ payload }) {
 
 export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
-  const newCart = cart.filter((item) => {
-    const foundedItem = payload.some(
-      (el) => item.product._id === el.product._id && item.options.size._id === el.options.size._id
-    );
-    return !foundedItem;
-  });
+  const newCart = cart.filter(item => {
+    if(!(item.product._id===payload.product._id&&item.options.size._id===payload.options.size._id)){
+      return item;
+    }
+  })
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
@@ -106,10 +120,14 @@ export function* handleAddProductToUserCart({ payload }) {
   try {
     yield put(setCartLoading(true));
     const newCartList = yield call(addProductToCart, userId, cartItem);
-    yield put(setCart(newCartList.cart.items));
-    yield put(setCartTotalPrice(newCartList.cart.totalPrice));
-    setToLocalStorage(cartKey, newCartList.cart.items);
-    yield put(setCartLoading(false));
+    if (newCartList?.message === USER_IS_BLOCKED) {
+      yield call(handleIsUserBlockedChecker);
+    } else {
+      yield put(setCart(newCartList.cart.items));
+      yield put(setCartTotalPrice(newCartList.cart.totalPrice));
+      setToLocalStorage(cartKey, newCartList.cart.items);
+      yield put(setCartLoading(false));
+    }
   } catch (err) {
     yield put(setCartError(err));
     yield put(setCartLoading(true));
@@ -118,12 +136,12 @@ export function* handleAddProductToUserCart({ payload }) {
 
 export function* handleDeleteProductFromUserCart({ payload }) {
   const { userId, items } = payload;
-  const itemsForDeleteInput = items.map((item) => ({
-    product: item.product._id,
+  const itemsForDeleteInput = {
+    product: items.product._id,
     options: {
-      size: item.options.size._id
+      size: items.options.size._id
     }
-  }));
+  }
 
   try {
     yield put(setCartLoading(true));
@@ -150,6 +168,7 @@ export function* handleSetCartItemQuantity({ payload }) {
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
+
 export function* handleSetCartItemUserQuantity({ payload }) {
   try {
     const newCartList = yield call(updateCartItemQuantity, payload);
@@ -160,21 +179,6 @@ export function* handleSetCartItemUserQuantity({ payload }) {
     yield put(setCartLoading(true));
   }
 }
-export function* handleSetCartItemChecked({ payload }) {
-  const { item, isChecked } = payload;
-  const cart = yield select(({ Cart }) => Cart.list);
-  const newCart = cart.map((cartItem) => {
-    if (
-      cartItem.product._id === item.product._id &&
-      cartItem.options.size._id === item.options.size._id
-    ) {
-      cartItem.isChecked = !isChecked;
-    }
-    return cartItem;
-  });
-  setToLocalStorage(cartKey, newCart);
-  yield put(setCartChecked(newCart));
-}
 
 export default function* cartSaga() {
   yield takeEvery(GET_DELIVERY_TYPE, handleDeliveryTypeLoad);
@@ -183,9 +187,9 @@ export default function* cartSaga() {
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
   yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
   yield takeEvery(CHANGE_CART_ITEM_USER_QUANTITY, handleSetCartItemUserQuantity);
-  yield takeEvery(SET_CART_ITEM_CHECKED, handleSetCartItemChecked);
   yield takeEvery(ADD_DELIVERY_TYPE, handleSetDeliveryType);
   yield takeEvery(RESET_CART, handleCartReset);
+  yield takeEvery(CLEAN_CART, handleClearUserCart);
   yield takeEvery(ADD_PRODUCT_TO_USER_CART, handleAddProductToUserCart);
   yield takeEvery(DELETE_PRODUCT_FROM_USER_CART, handleDeleteProductFromUserCart);
 }

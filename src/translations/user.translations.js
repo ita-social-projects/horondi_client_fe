@@ -74,6 +74,14 @@ export const LOGIN_USER_ERROR = {
     {
       value: 'Oops! Something went wrong. Please, try again later.'
     }
+  ],
+  USER_IS_BLOCKED: [
+    {
+      value: 'Вибачте, ваш обліковий запис заблоковано.'
+    },
+    {
+      value: 'Sorry, your account is blocked.'
+    }
   ]
 };
 

@@ -5,7 +5,7 @@ const routes = {
   pathToProducts: '/product',
   pathToErrorPage: '/error-page',
   pathToBackpacks: '/backpacks',
-  patthToCategory: '/:category',
+  pathToCategory: '/:category',
   pathToCheckout: '/checkout',
   pathToCart: '/cart',
   pathToMain: '/',

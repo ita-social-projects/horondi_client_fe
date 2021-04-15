@@ -47,7 +47,7 @@ const ProductInfo = ({ price }) => {
     innerMaterial: product.innerMaterial,
     bottomMaterial: product.bottomMaterial,
     strapLengthInCm: product.strapLengthInCm,
-    currentPrice: productToSend.totalPrice || price,
+    currentPrice: productToSend.price || price,
     currentWeight: productToSend.dimensions.weightInKg,
     currentVolume: productToSend.dimensions.volumeInLiters,
     currency: Currency.currency

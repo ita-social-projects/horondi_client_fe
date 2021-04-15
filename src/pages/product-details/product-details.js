@@ -133,7 +133,7 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
-      <Link to={routes.patthToCategory} className={styles.backBtn}>
+      <Link to={routes.pathToCategory} className={styles.backBtn}>
         <KeyboardBackspaceIcon
           color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
         />

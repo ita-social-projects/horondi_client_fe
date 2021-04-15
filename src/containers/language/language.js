@@ -1,42 +1,45 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
-import {
-  setToLocalStorage,
-  getFromLocalStorage
-} from '../../services/local-storage.service';
+import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
 import Dropdown from '../../components/dropdown';
 
-const languageInLocalStorage =
-  getFromLocalStorage('language') || DEFAULT_LANGUAGE;
+const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;
 
 const Language = ({ fromSideBar }) => {
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(changeLanguage(languageInLocalStorage));
+    if (!fromSideBar) {
+      dispatch(changeLanguage(languageInLocalStorage));
+    }
   }, [dispatch]);
 
   const handleChange = (e) => {
     const targetValue = e.target.value;
-    if (targetValue !== undefined) {
-      setToLocalStorage('language', targetValue);
-      dispatch(changeLanguage(targetValue));
-    }
+    setToLocalStorage('language', targetValue);
+    dispatch(changeLanguage(targetValue));
   };
+
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
     <MenuItem data-cy={`language${value + 1}`} key={value} value={value}>
       {lang}
     </MenuItem>
   ));
+
   return (
     <div data-cy='language'>
       <Dropdown
         mappedItems={mappedLanguages}
         handler={handleChange}
-        defaultValue={languageInLocalStorage}
+        defaultValue={DEFAULT_LANGUAGE}
+        value={language !== languageInLocalStorage ? language : DEFAULT_LANGUAGE}
         fromSideBar={fromSideBar}
       />
     </div>

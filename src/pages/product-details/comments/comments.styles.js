@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '15px',
     '& *': {
       '& .MuiOutlinedInput-root': {
+        background: '#fff',
         '& fieldset': {
           borderColor: theme.palette.textColor
         },
@@ -73,6 +74,7 @@ export const useStyles = makeStyles((theme) => ({
       width: '85vw'
     },
     '& input': {
+      background: '#fff',
       fontFamily: 'Montserrat',
       fontWeight: '500'
     }

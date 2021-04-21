@@ -16,10 +16,10 @@ export const getAllPatterns = async (skip, limit) => {
               lang
               value
             }
-            material
             available
             images {
               medium
+              small
             }
           }
           count
@@ -27,7 +27,6 @@ export const getAllPatterns = async (skip, limit) => {
       }
     `
   });
-  client.resetStore();
 
   return result.data.getAllPatterns;
 };

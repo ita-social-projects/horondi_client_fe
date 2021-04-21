@@ -19,8 +19,9 @@ import {
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
+import { RESET } from '../../../../../const/checkout';
 
-const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) => {
+const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
@@ -32,9 +33,7 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
     warehouses: Checkout.warehouses
   }));
 
-  const [inputValue, setInputValue] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-  const [wareHouse, setWarehouse] = useState('');
+  const [selectedCity, setSelectedCity] = useState(values.city);
 
   const getPostCities = useCallback(
     _.debounce((value) => {
@@ -55,9 +54,11 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
         <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].city}</h4>
         <div className={styles.selectorInfo}>
           <Autocomplete
-            onInputChange={(e, value) => {
-              setInputValue(value);
-              getPostCities(value);
+            onInputChange={(e, value, reason) => {
+              if (reason !== RESET || (reason === RESET && value)) {
+                setFieldValue(CHECKOUT_INPUT_FIELD.city, value);
+              }
+              getPostCities(values.city);
             }}
             noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
             onChange={(event, value) => {
@@ -66,12 +67,12 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
                 setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
               } else {
                 setSelectedCity('');
-                setWarehouse('');
                 setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
               }
+              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
             }}
             options={cities}
-            inputValue={inputValue}
+            inputValue={values.city}
             getOptionLabel={(option) => option?.description || null}
             className={styles.dataInput}
             renderInput={(params) => (
@@ -105,8 +106,10 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
         <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].department}</h4>
         <div className={styles.selectorInfo}>
           <Autocomplete
-            onInputChange={(event, value) => {
-              setWarehouse(value);
+            onInputChange={(event, value, reason) => {
+              if (reason !== RESET || (reason === RESET && value)) {
+                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value);
+              }
             }}
             noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDepartment}
             onChange={(event, value) => {
@@ -114,15 +117,14 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched }) =>
                 setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value.description);
               } else {
                 setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
-                setWarehouse('');
               }
             }}
-            disabled={!selectedCity}
+            disabled={!values.city}
             options={_.filter(
               warehouses,
               (warehouseItem) => !warehouseItem.description.includes(POSTOMAT)
             )}
-            inputValue={wareHouse}
+            inputValue={values.courierOffice}
             getOptionLabel={(option) => option?.description}
             className={styles.dataInput}
             renderInput={(params) => (

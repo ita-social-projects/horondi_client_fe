@@ -1,46 +1,64 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
-import SimilarProducts from '../../../../pages/product-details/similar-products';
 import DeliveryType from '../../order/delivery-type/delivery-type';
-import { calcPrice } from '../../../../utils/priceCalculating';
+import { calcPriceForCart } from '../../../../utils/priceCalculating';
+import { selectCurrencySign } from '../../../../utils/currency';
+import SimilarProducts from '../../../../pages/product-details/similar-products';
+import { Loader } from '../../../../components/loader/loader';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
+  const {
+    language,
+    currency,
+    cartList,
+    cartUserTotalPrice,
+    cartLoading,
+    cartQuantityLoading,
+    user
+  } = useSelector(({ Language, Currency, Cart, User }) => ({
     language: Language.language,
-    currency: Currency.currency
+    currency: Currency.currency,
+    cartList: Cart.list,
+    cartLoading: Cart.loading,
+    cartQuantityLoading: Cart.quantityLoading,
+    cartUserTotalPrice: Cart.totalPrice,
+    user: User.userData
   }));
 
-  const totalPrice = items.reduce(
-    (acc, item) => acc + calcPrice(item, currency),
-    0
-  );
-
+  const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
+  const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
+  if (cartLoading) {
+    return <Loader />;
+  }
   return (
     <div className={styles.root} data-cy='filled-cart'>
       <div className={styles.orderWrapper}>
         <div className={styles.orderTable}>
           <OrderTable
-            calcPrice={calcPrice}
+            calcPrice={calcPriceForCart}
             currency={currency}
             items={items}
             language={language}
+            user={user}
+            cartLoading={cartLoading}
+            cartQuantityLoading={cartQuantityLoading}
           />
         </div>
         <>
           <DeliveryType
             language={language}
-            totalPrice={totalPrice}
+            totalPrice={cartLoading ? cartUserTotalPrice[currency].value : totalPrice}
             currency={currency}
           />
         </>
       </div>
-      <>
-        <SimilarProducts />
-      </>
+      <SimilarProducts currencySign={currencySign} cartList={cartList} />
     </div>
   );
 };

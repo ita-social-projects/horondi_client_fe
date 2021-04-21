@@ -1,45 +1,44 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/rectangle.png';
 
-export const useStyles = makeStyles((theme) => ({
-  thanks: {
-    background: `url(${BG}) no-repeat center`,
-    backgroundSize: 'cover',
-    height: '800px',
-    fontFamily: 'Montserrat',
-    color: '#FFFFFF',
+export const useStyles = makeStyles(({ palette }) => ({
+  thanksContainer: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    padding: 50
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%'
   },
-  thanksWrapper: {
+  linkToPayment: {
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column'
-  },
-  titleStyle: {
-    fontWeight: '600',
-    fontSize: '4em',
-    '@media (max-width: 768px)': {
-      fontSize: '3em'
-    }
-  },
-  buttonStyle: {
-    background: theme.palette.button.normal.backgroundColor,
-    borderRadius: '5px',
-    fontSize: '1.5em',
-    padding: 10,
-    color: theme.palette.button.normal.color,
-    '& a': {
-      color: 'inherit'
-    },
+    justifyContent: 'center',
+    fontWeight: 400,
+    fontSize: 17,
+    outline: 'none',
+    background: palette.button.normal.backgroundColor,
+    borderRadius: '10px',
+    width: 250,
+    marginBottom: 50,
+    height: 43,
+    alignSelf: 'flex-end',
+    marginRight: '11%',
+    cursor: 'pointer',
+    color: palette.button.normal.color,
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
-    },
-    '@media (max-width: 768px)': {
-      fontSize: '1em',
-      padding: 5
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
     }
+  },
+  thunksTitle: ({ isLightTheme }) => ({
+    fontSize: 30,
+    color: !isLightTheme ? '#ffffff' : '#000000',
+    fontWeight: 400,
+    marginBottom: 0
+  }),
+
+  thunksInfo: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }));

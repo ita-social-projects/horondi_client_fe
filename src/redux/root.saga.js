@@ -40,7 +40,6 @@ export function* rootSaga() {
     homeLooksImagesSaga(),
     patternSaga(),
     homePageSliderSaga(),
-    cartSaga(),
     constructorSaga(),
     orderSaga()
   ]);

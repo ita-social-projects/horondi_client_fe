@@ -1,17 +1,31 @@
 export const THANKS_PAGE_TITLE = {
   0: {
-    thanks: 'Дякуємо за покупку!'
+    thanks: 'Дякуємо!',
+    yourOrder: 'Ваше замовлення',
+    size: 'Розмір - ',
+    alt: 'продукт',
+    result: 'Підсумок',
+    linkToPayment: 'Посилання на оплату'
   },
   1: {
-    thanks: 'Thanks for your purchase!'
+    thanks: 'Thank you!',
+    yourOrder: 'Your order',
+    size: 'Size - ',
+    alt: 'product',
+    result: 'Result',
+    linkToPayment: 'Payment link'
   }
 };
 
-export const THANKS_PAGE_BUTTON = {
+export const PAYMENT_STATUS = {
   0: {
-    continueShopping: 'Продовжити покупки'
+    created: 'Замовлення створено',
+    processing: 'Замовлення очікує на оплату',
+    paid: 'Замовлення оплачено'
   },
   1: {
-    continueShopping: 'Continue shopping'
+    created: 'Order is created',
+    processing: 'Order is pending payment',
+    paid: 'Order is paid'
   }
 };

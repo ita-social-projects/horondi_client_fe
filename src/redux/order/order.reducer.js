@@ -1,9 +1,15 @@
-import { SET_ORDER, SET_IS_ORDER_CREATED, SET_LOADING } from "./order.types";
+import {
+  SET_ORDER,
+  SET_IS_ORDER_CREATED,
+  SET_LOADING,
+  SET_PAID_ORDER_LOADING
+} from './order.types';
 
 const initialState = {
   loading: false,
   order: null,
-  isOrderCreated: false
+  isOrderCreated: false,
+  paidOrderLoading: false
 };
 
 export const orderReducer = (state = initialState, action = {}) => {
@@ -22,6 +28,11 @@ export const orderReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: action.payload
+      };
+    case SET_PAID_ORDER_LOADING:
+      return {
+        ...state,
+        paidOrderLoading: action.payload
       };
     default:
       return state;

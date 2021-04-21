@@ -29,6 +29,7 @@ export const useStyles = makeStyles((theme) => ({
   productDetails: {
     wordSpacing: '0.2rem',
     fontWeight: '500',
+    marginLeft: '20px',
     '@media (max-width: 600px)': {
       display: 'flex',
       flexDirection: 'column',
@@ -44,6 +45,16 @@ export const useStyles = makeStyles((theme) => ({
     margin: '22rem auto',
     '@media (max-width: 1400px)': {
       margin: '13rem auto'
+    }
+  },
+  backBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '20px 0 0 20px',
+    width: 120,
+    transition: '0.1s',
+    '&:hover': {
+      transform: 'scale(1.1)'
     }
   }
 }));

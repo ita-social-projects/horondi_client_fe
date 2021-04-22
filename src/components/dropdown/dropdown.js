@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
 import { dropdownStyles } from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue, fromSideBar }) => {
   const styles = dropdownStyles({ fromSideBar });
-
+  const [scroll, setScroll] = useState(false);
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setScroll(window.scrollY > 50);
+    });
+  }, []);
   return (
     <div className={styles.rootItem}>
       <Select
-        className={styles.rootSelect}
+        className={scroll ? styles.rootSelectSticky : styles.rootSelect}
         defaultValue={defaultValue}
         onChange={handler}
       >

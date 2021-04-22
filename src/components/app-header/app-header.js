@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, IconButton as BurgerMenu } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,17 +13,20 @@ import { LOGO } from '../../configs';
 
 const AppHeader = () => {
   const styles = useStyles();
+  const [scroll, setScroll] = useState(false);
 
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setScroll(window.scrollY > 50);
+    });
+  }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className={styles.root}>
-      <AppBar position='static' className={styles.header}>
+      <AppBar position='static' className={scroll ? styles.headerSticky : styles.header}>
         <Toolbar>
-          <BurgerMenu
-            className={styles.menuButton}
-            onClick={() => setIsMenuOpen(true)}
-          >
+          <BurgerMenu className={styles.menuButton} onClick={() => setIsMenuOpen(true)}>
             <MenuIcon />
           </BurgerMenu>
           <Typography variant='h5'>

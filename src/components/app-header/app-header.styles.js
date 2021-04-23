@@ -8,24 +8,26 @@ export const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: '#000000',
     position: 'fixed',
+    transition: 'all 0.5s ease-out',
     '@media (max-width: 768px)': {
       position: 'fixed',
       top: 0,
       zIndex: 1000,
-      height: '40px',
-      transition: 'all 1s linear'
+      height: '40px'
     }
   },
-  headerSticky: {
+  Headerblock: {
+    transition: 'all 0.5s ease-out'
+  },
+  Headerblocksticky: {
+    height: '40px',
+    minHeight: '40px',
+    transition: 'all 0.5s ease-out'
+  },
+  sticky: {
     backgroundColor: '#212121ab',
-    position: 'fixed',
-    '@media (max-width: 768px)': {
-      position: 'fixed',
-      top: 0,
-      zIndex: 1000,
-      height: '40px',
-      transition: 'all 0.5s ease-out'
-    }
+    height: '40px',
+    transition: 'all 0.5s ease-out'
   },
   logo: {
     letterSpacing: '0.2rem',

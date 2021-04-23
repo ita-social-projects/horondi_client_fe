@@ -5,11 +5,13 @@ export const useStyles = makeStyles(() => ({
     height: 61,
     margin: '0 8px',
     display: fromSideBar ? 'none' : 'inline',
+
     '& label.Mui-focused': {
       color: 'white'
     },
     '& .MuiInput-underline:after, & .MuiInput-underline:before': {
-      borderBottomColor: 'white'
+      borderBottomColor: 'white',
+      transition: 'all 0.5s linear'
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
@@ -29,7 +31,19 @@ export const useStyles = makeStyles(() => ({
       color: 'white'
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: '#dedede'
+      borderBottomColor: '#dedede',
+      transition: 'all 0.5s linear'
     }
-  })
+  }),
+  sticky: {
+    '& label.Mui-focused': {
+      display: 'none'
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: '#0000 !important'
+    },
+    '& .MuiInput-underline:after, & .MuiInput-underline:before': {
+      borderBottomColor: '#0000 !important'
+    }
+  }
 }));

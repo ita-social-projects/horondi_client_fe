@@ -13,7 +13,7 @@ export const scrollBarStyles = makeStyles(() => ({
       content: `''`,
       position: 'absolute',
       display: 'block',
-      height: '3px',
+      height: isDarkSection ? '3px' : '1px',
       width: '200px',
       top: '50%',
       left: '-95px',
@@ -44,7 +44,7 @@ export const scrollBarStyles = makeStyles(() => ({
     textTransform: 'uppercase',
     textDecoration: 'underline',
     display: 'none',
-    backgroundColor: isDarkSection ? '#00000020' : '',
+    backgroundColor: isDarkSection ? '#00000020' : '#ffffff80',
     padding: '5px'
   }),
   sectionPoint: ({ isDarkSection }) => ({

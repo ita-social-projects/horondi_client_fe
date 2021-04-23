@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
+import clsx from 'clsx';
 import { dropdownStyles } from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue, fromSideBar }) => {
   const styles = dropdownStyles({ fromSideBar });
-  const [scroll, setScroll] = useState(false);
-  useEffect(() => {
+  const [sticky, setSticky] = useState(false);
+  const stickyLang = clsx({
+    [styles.rootSelect]: true,
+    [styles.sticky]: sticky
+  });
+  useLayoutEffect(() => {
     window.addEventListener('scroll', () => {
-      setScroll(window.scrollY > 50);
+      window.scrollY > 50 ? setSticky(true) : setSticky(false);
     });
   }, []);
   return (
     <div className={styles.rootItem}>
-      <Select
-        className={scroll ? styles.rootSelectSticky : styles.rootSelect}
-        defaultValue={defaultValue}
-        onChange={handler}
-      >
+      <Select className={stickyLang} defaultValue={defaultValue} onChange={handler}>
         {mappedItems}
       </Select>
     </div>

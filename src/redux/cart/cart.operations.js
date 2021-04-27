@@ -54,7 +54,7 @@ items {
 }
 `;
 
-const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
+const mergeCartFromLSWithUserCart = async (cartFromLc, id) => {
   const getCartInput = (cart) =>
     cart.map((item) => ({
       product: item.product._id,
@@ -247,7 +247,7 @@ const updateCartItemQuantity = async (payload) => {
 };
 
 export {
-  megreCartFromLCwithUserCart,
+  mergeCartFromLSWithUserCart,
   getCartByUserId,
   cleanCart,
   addProductToCart,

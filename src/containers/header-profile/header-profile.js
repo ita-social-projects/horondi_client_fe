@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
+import { useHistory } from 'react-router';
 import Menu from '@material-ui/core/Menu';
 import { MenuItem } from '@material-ui/core';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -18,7 +19,7 @@ import { setToLocalStorage } from '../../services/local-storage.service';
 import { setUser } from '../../redux/user/user.actions';
 import { resetCart } from '../../redux/cart/cart.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
-import { DARK_THEME, LIGHT_THEME } from '../../configs';
+import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
 
 const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
@@ -31,6 +32,7 @@ const HeaderProfile = ({ fromSideBar }) => {
 
   const dispatch = useDispatch();
   const styles = useStyles({ fromSideBar });
+  const history = useHistory();
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
 
   useEffect(() => {
@@ -89,7 +91,12 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].logIn,
       icon: <ExitToAppIcon />,
-      clickHandler: () => handleRedirect('/login')
+      clickHandler: () => {
+        const returnUrl = history.location;
+        sessionStorage.setItem(RETURN_PAGE, returnUrl.pathname + returnUrl.search);
+        console.log(history.location);
+        handleRedirect('/login');
+      }
     }
   ];
 

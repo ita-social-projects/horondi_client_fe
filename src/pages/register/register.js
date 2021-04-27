@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import Grid from '@material-ui/core/Grid';
 
-import { REGISTER_USER_DATA, USER_REGISTER_LABELS, USER_TOKENS } from '../../configs';
+import { REGISTER_USER_DATA, USER_REGISTER_LABELS, USER_TOKENS, RETURN_PAGE } from '../../configs';
 import {
   REGISTER_FORM_LABEL,
   LOGIN_FORM_LABEL,
+  CONTINUE_SHOPPING_LABEL,
   placeholders,
   CONFIRM_EMAIL,
   GOOGLE_SIGN_IN_TEXT
@@ -27,11 +28,12 @@ import { validationSchema } from '../../validators/register';
 
 export default function Register() {
   const styles = useStyles();
+  const history = useHistory();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const { pathToLogin } = routes;
   const handleRegister = (user) => {
-    setToLocalStorage(USER_TOKENS.ACCES_TOKEN, null);
+    setToLocalStorage(USER_TOKENS.ACCESS_TOKEN, null);
     dispatch(registerUser({ user, language }));
   };
 
@@ -84,9 +86,14 @@ export default function Register() {
                       />
                       <p>{CONFIRM_EMAIL[language].value}</p>
                     </div>
-                    <Link to={pathToLogin} className={styles.loginBtn}>
-                      {LOGIN_FORM_LABEL[language].value}
-                    </Link>
+                    <Button
+                      className={styles.registerBtn}
+                      onClick={() => {
+                        history.push(sessionStorage.getItem(RETURN_PAGE));
+                      }}
+                    >
+                      {CONTINUE_SHOPPING_LABEL[language].value}
+                    </Button>
                   </div>
                 ) : (
                   <Form className={styles.registerForm}>

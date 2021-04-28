@@ -4,7 +4,10 @@ export const useStyles = makeStyles((theme) => ({
   homeHeader: {
     position: 'relative',
     height: 'calc(100vh - 50px)',
-    alignItems: 'center'
+    alignItems: 'center',
+    '& .awssld__wrapper': {
+      '--loader-bar-color': 'rgba(0, 0, 0, 0.15) !important'
+    }
   },
   sliderInner: {
     opacity: 0,
@@ -19,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: 'rgba(0, 0, 0, 0.7)'
     }
   },
+
   hoverArrow: {
     position: 'absolute',
     display: 'flex',
@@ -53,6 +57,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '36px',
     zIndex: 10
   },
+
   description: {
     position: 'absolute',
     top: '30%',

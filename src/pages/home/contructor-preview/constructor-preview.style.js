@@ -18,6 +18,11 @@ export const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+    },
+    '@media (max-width:768px)': {
+      '& video': {
+        width: '150% !important'
+      }
     }
   }),
   constructorInner: ({ isMouseIn }) => ({

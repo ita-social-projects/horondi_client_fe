@@ -62,7 +62,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '30px 63px 63px',
     boxSizing: 'border-box'
   },
-  registerSucces: {
+  registerSuccess: {
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
     height: '350px',
@@ -72,7 +72,7 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '20px'
     }
   },
-  registerSuccesInfo: {
+  registerSuccessInfo: {
     display: 'flex',
     flexDirection: 'column',
     height: '225px'
@@ -121,7 +121,8 @@ export const useStyles = makeStyles((theme) => ({
     color: 'black',
     '&:hover': {
       color: theme.palette.button.normal.backgroundColor
-    }
+    },
+    alignItems: 'center'
   },
   loginBtn: {
     float: 'right',

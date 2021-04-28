@@ -20,7 +20,9 @@ import { setUser } from '../../redux/user/user.actions';
 import { resetCart } from '../../redux/cart/cart.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
+import routes from '../../configs/routes';
 
+const { pathToRegister, pathToLogin } = routes;
 const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
     userData: User.userData,
@@ -92,9 +94,11 @@ const HeaderProfile = ({ fromSideBar }) => {
       value: PROFILE_OPTIONS_VALUES[language].logIn,
       icon: <ExitToAppIcon />,
       clickHandler: () => {
-        const returnUrl = history.location;
-        sessionStorage.setItem(RETURN_PAGE, returnUrl.pathname + returnUrl.search);
-        console.log(history.location);
+        const pathName = history.location.pathname;
+        const returnPath =
+          (pathName === pathToRegister || pathName === pathToLogin ? '/' : pathName) +
+          history.location.search;
+        sessionStorage.setItem(RETURN_PAGE, returnPath);
         handleRedirect('/login');
       }
     }

@@ -177,8 +177,6 @@ const addProductToCart = async (userId, cartItem) => {
 };
 
 const DeleteProductFromCart = async (userId, cartItems) => {
-  console.log(cartItems);
-  console.log(userId);
   const result = await client.mutate({
     variables: {
       items: cartItems,

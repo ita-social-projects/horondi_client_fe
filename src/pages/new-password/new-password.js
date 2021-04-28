@@ -13,11 +13,7 @@ import {
 } from '../../translations/user.translations';
 import { endAdornment } from '../../utils/eyeToggle';
 import Loader from '../../components/loader';
-import {
-  resetPassword,
-  checkIfTokenValid,
-  resetState
-} from '../../redux/user/user.actions';
+import { resetPassword, checkIfTokenValid, resetState } from '../../redux/user/user.actions';
 
 const NewPassword = ({ token }) => {
   const styles = useStyles();
@@ -27,14 +23,12 @@ const NewPassword = ({ token }) => {
 
   const dispatch = useDispatch();
 
-  const { language, passwordReset, userError, loading } = useSelector(
-    ({ Language, User }) => ({
-      language: Language.language,
-      passwordReset: User.passwordReset,
-      loading: User.userLoading,
-      userError: User.error
-    })
-  );
+  const { language, passwordReset, userError, loading } = useSelector(({ Language, User }) => ({
+    language: Language.language,
+    passwordReset: User.passwordReset,
+    loading: User.userLoading,
+    userError: User.error
+  }));
 
   useEffect(() => {
     dispatch(resetState());
@@ -47,12 +41,8 @@ const NewPassword = ({ token }) => {
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>
-        {NEW_PASSWORD_SUCCESS_MESSAGE[language].h2}
-      </h2>
-      <p className={styles.recoveryText}>
-        {NEW_PASSWORD_SUCCESS_MESSAGE[language].p}
-      </p>
+      <h2 className={styles.heading}>{NEW_PASSWORD_SUCCESS_MESSAGE[language].h2}</h2>
+      <p className={styles.recoveryText}>{NEW_PASSWORD_SUCCESS_MESSAGE[language].p}</p>
     </div>
   );
 
@@ -61,17 +51,12 @@ const NewPassword = ({ token }) => {
       .matches(formRegExp.password, errorMessages[language].value.pass)
       .required(errorMessages[language].value.pass),
     confirmPassword: Yup.string()
-      .oneOf(
-        [Yup.ref('password')],
-        errorMessages[language].value.confirmPassword
-      )
+      .oneOf([Yup.ref('password')], errorMessages[language].value.confirmPassword)
       .when('password', {
         is: (val) => {
           if (val) return val;
         },
-        then: Yup.string().required(
-          errorMessages[language].value.confirmPassword
-        )
+        then: Yup.string().required(errorMessages[language].value.confirmPassword)
       })
   });
 
@@ -92,9 +77,7 @@ const NewPassword = ({ token }) => {
               <Loader />
             ) : (
               <Form className='newPasswordForm'>
-                <h2 className={styles.heading}>
-                  {CHANGE_PASSWORD[language].h2}
-                </h2>
+                <h2 className={styles.heading}>{CHANGE_PASSWORD[language].h2}</h2>
                 <Field
                   name='password'
                   as={TextField}
@@ -115,10 +98,7 @@ const NewPassword = ({ token }) => {
                   className={styles.passwordInput}
                   variant='outlined'
                   fullWidth
-                  InputProps={endAdornment(
-                    showConfirmPassword,
-                    setShowConfirmPassword
-                  )}
+                  InputProps={endAdornment(showConfirmPassword, setShowConfirmPassword)}
                   error={!!errors.confirmPassword}
                   helperText={errors.confirmPassword || ''}
                 />
@@ -127,7 +107,6 @@ const NewPassword = ({ token }) => {
                   fullWidth
                   type='submit'
                   onClick={() => {
-                    console.log(errors);
                     setShouldValidate(true);
                   }}
                 >

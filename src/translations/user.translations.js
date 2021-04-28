@@ -43,10 +43,10 @@ export const REGISTER_FORM_LABEL = [
 
 export const CONTINUE_SHOPPING_LABEL = [
   {
-    value: 'Продовжити'
+    value: 'Продовжити покупки'
   },
   {
-    value: 'Continue'
+    value: 'Continue shopping'
   }
 ];
 

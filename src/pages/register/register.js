@@ -77,23 +77,23 @@ export default function Register() {
               />
               <Grid item xs={12} sm={12} md={6} lg={6}>
                 {hasRegistered ? (
-                  <div className={styles.registerSucces}>
-                    <div className={styles.registerSuccesInfo}>
+                  <div className={styles.registerSuccess}>
+                    <div className={styles.registerSuccessInfo}>
                       <img
                         src={setInfoImgByTheme(isLightTheme)}
                         alt={IMG_ALT.REGISTER_IMG_INFO}
                         className={styles.infoLogo}
                       />
                       <p>{CONFIRM_EMAIL[language].value}</p>
+                      <Button
+                        className={styles.registerBtn}
+                        onClick={() => {
+                          history.push(sessionStorage.getItem(RETURN_PAGE));
+                        }}
+                      >
+                        {CONTINUE_SHOPPING_LABEL[language].value}
+                      </Button>
                     </div>
-                    <Button
-                      className={styles.registerBtn}
-                      onClick={() => {
-                        history.push(sessionStorage.getItem(RETURN_PAGE));
-                      }}
-                    >
-                      {CONTINUE_SHOPPING_LABEL[language].value}
-                    </Button>
                   </div>
                 ) : (
                   <Form className={styles.registerForm}>

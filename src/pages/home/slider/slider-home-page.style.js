@@ -4,7 +4,10 @@ export const useStyles = makeStyles((theme) => ({
   homeHeader: {
     position: 'relative',
     height: 'calc(100vh - 50px)',
-    alignItems: 'center'
+    alignItems: 'center',
+    ' & .awssld__wrapper': {
+      '--loader-bar-color': 'rgba(0, 0, 0, 0.15)'
+    }
   },
   sliderInner: {
     opacity: 0,

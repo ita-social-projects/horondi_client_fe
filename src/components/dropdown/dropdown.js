@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
 import { dropdownStyles } from './dropdown.styles';
 
-const Dropdown = ({ mappedItems, handler, defaultValue, fromSideBar }) => {
+const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) => {
   const styles = dropdownStyles({ fromSideBar });
 
   return (
@@ -11,6 +11,7 @@ const Dropdown = ({ mappedItems, handler, defaultValue, fromSideBar }) => {
       <Select
         className={styles.rootSelect}
         defaultValue={defaultValue}
+        value={value}
         onChange={handler}
       >
         {mappedItems}
@@ -23,6 +24,7 @@ Dropdown.propTypes = {
   mappedItems: propTypes.arrayOf(propTypes.shape({ value: propTypes.number })),
   handler: propTypes.func,
   defaultValue: propTypes.number,
+  value: propTypes.number,
   fromSideBar: propTypes.bool,
   styles: propTypes.shape({
     rootItem: propTypes.string,
@@ -34,6 +36,7 @@ Dropdown.defaultProps = {
   mappedItems: [],
   handler: () => {},
   defaultValue: 0,
+  value: 0,
   fromSideBar: false,
   styles: {
     rootItem: '',

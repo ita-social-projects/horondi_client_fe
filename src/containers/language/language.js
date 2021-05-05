@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
-import {
-  setToLocalStorage,
-  getFromLocalStorage
-} from '../../services/local-storage.service';
+import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
 import Dropdown from '../../components/dropdown';
 
-const languageInLocalStorage =
-  getFromLocalStorage('language') || DEFAULT_LANGUAGE;
+const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;
 
 const Language = ({ fromSideBar }) => {
   const dispatch = useDispatch();
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
 
   useEffect(() => {
-    dispatch(changeLanguage(languageInLocalStorage));
+    if (!fromSideBar) {
+      dispatch(changeLanguage(languageInLocalStorage));
+    }
   }, [dispatch]);
 
   const handleChange = (e) => {
@@ -36,7 +37,8 @@ const Language = ({ fromSideBar }) => {
       <Dropdown
         mappedItems={mappedLanguages}
         handler={handleChange}
-        defaultValue={languageInLocalStorage}
+        defaultValue={DEFAULT_LANGUAGE}
+        value={language}
         fromSideBar={fromSideBar}
       />
     </div>

@@ -22,7 +22,7 @@ import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.transl
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
 import routes from '../../configs/routes';
 
-const { pathToRegister, pathToLogin } = routes;
+const { pathToRegister, pathToLogin, pathToMain } = routes;
 const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
     userData: User.userData,
@@ -96,10 +96,10 @@ const HeaderProfile = ({ fromSideBar }) => {
       clickHandler: () => {
         const pathName = history.location.pathname;
         const returnPath =
-          (pathName === pathToRegister || pathName === pathToLogin ? '/' : pathName) +
+          (pathName === pathToRegister || pathName === pathToLogin ? pathToMain : pathName) +
           history.location.search;
         sessionStorage.setItem(RETURN_PAGE, returnPath);
-        handleRedirect('/login');
+        handleRedirect(pathToLogin);
       }
     }
   ];

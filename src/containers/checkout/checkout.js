@@ -17,7 +17,8 @@ const Checkout = () => {
     cartItems,
     deliveryType,
     loading,
-    isOrderCreated
+    isOrderCreated,
+    order
   } = useSelector(({ Language, Theme, Currency, Cart, Order }) => ({
     language: Language.language,
     isLightTheme: Theme.lightMode,
@@ -25,7 +26,8 @@ const Checkout = () => {
     cartItems: Cart.list,
     deliveryType: Cart.deliveryType,
     loading: Order.loading,
-    isOrderCreated: Order.isOrderCreated
+    isOrderCreated: Order.isOrderCreated,
+    order: Order.order
   }));
   const dispatch = useDispatch();
 
@@ -41,7 +43,8 @@ const Checkout = () => {
 
   return (
     <div className={styles.root}>
-      {(isOrderCreated || !cartItems.length) && <Redirect to={routes.pathToMain} />}
+      {isOrderCreated && <Redirect to={`${routes.pathToThanks}/${order?._id}`} />}
+      {!cartItems.length && <Redirect to={routes.pathToMain} />}
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>

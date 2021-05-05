@@ -5,8 +5,12 @@ const routes = {
   pathToProducts: '/product',
   pathToErrorPage: '/error-page',
   pathToBackpacks: '/backpacks',
+  pathToCategory: '/:category',
   pathToCheckout: '/checkout',
   pathToCart: '/cart',
-  pathToMain: '/'
+  pathToMain: '/',
+  pathToThanks: '/thanks',
+  pathToPurchases: '/products',
+  pathToProfile: '/profile'
 };
 export default routes;

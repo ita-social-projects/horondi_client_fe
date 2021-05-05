@@ -4,9 +4,12 @@ import {
   CHECKOUT_BUTTON,
   CHECKOUT_INPUT_FIELD,
   CHECKOUT_PAYMENT,
-  CHECKOUT_TEXT_FIELDS
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
 } from '../translations/checkout.translations';
-import { deliveryTypes } from '../configs';
+import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
+import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
+import { COURIER } from '../const/checkout';
 
 export const initialValues = {
   firstName: '',
@@ -21,7 +24,10 @@ export const initialValues = {
   house: '',
   flat: '',
   region: '',
-  district: ''
+  district: '',
+  regionId: '',
+  districtId: '',
+  cityId: ''
 };
 
 export const checkoutPropTypes = {
@@ -94,12 +100,11 @@ export const checkoutDefaultProps = {
 
 const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
-    product: item?._id,
+    product: item.product?._id,
     quantity: item.quantity,
-    isFromConstructor: !item._id,
+    isFromConstructor: !item.product._id,
     options: {
-      size: item.selectedSize._id,
-      sidePocket: item.sidePocket
+      size: item.options.size._id
     }
   }));
 
@@ -114,6 +119,11 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
     sentBy: deliveryType,
     invoiceNumber: data.invoiceNumber || '',
     courierOffice: data.courierOffice || '',
+    region: data.region || '',
+    district: data.district || '',
+    regionId: data.regionId || '',
+    districtId: data.districtId || '',
+    cityId: data.cityId || '',
     city: data.city || '',
     street: data.street || '',
     house: data.house || '',
@@ -178,3 +188,57 @@ export const userContactInputLabels = (language) => [
 
 export const POSTOMAT = 'Поштомат';
 export const POST_OFFICE_NUMBER = 'Відділення № ';
+
+export const getCurrentCurrency = (currency, language = 1) =>
+  currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;
+
+export const setUserValues = (values, userData, deliveryType) => {
+  const { firstName, lastName, email, phoneNumber } = userData;
+  const result = { ...values, firstName, lastName, email, phoneNumber };
+  if (
+    (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+      deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+    userData.address
+  ) {
+    const { city, street, buildingNumber: house, appartment: flat } = userData.address;
+    return {
+      ...result,
+      city,
+      street,
+      house,
+      flat
+    };
+  }
+  return result;
+};
+
+export const setDeliveryTypeToStorage = (deliveryType) => {
+  const typeFromStorage = getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE);
+  setToSessionStorage(SESSION_STORAGE.DELIVERY_TYPE, deliveryType);
+  const checkoutForm = getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM);
+  if (
+    (deliveryType.includes(COURIER) && typeFromStorage.includes(COURIER)) ||
+    !typeFromStorage ||
+    !checkoutForm
+  ) {
+    return;
+  }
+  if (typeFromStorage !== deliveryType) {
+    setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, {
+      ...checkoutForm,
+      city: '',
+      cityId: '',
+      courierOffice: '',
+      district: '',
+      districtId: '',
+      flat: '',
+      house: '',
+      region: '',
+      regionId: '',
+      street: '',
+      userComment: ''
+    });
+  }
+};
+
+export const handleError = (touched, errors) => touched && !!errors;

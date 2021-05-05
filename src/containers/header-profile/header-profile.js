@@ -16,17 +16,16 @@ import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setUser } from '../../redux/user/user.actions';
+import { resetCart } from '../../redux/cart/cart.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME } from '../../configs';
 
 const HeaderProfile = ({ fromSideBar }) => {
-  const { userData, language, lightMode } = useSelector(
-    ({ User, Language, Theme }) => ({
-      userData: User.userData,
-      lightMode: Theme.lightMode,
-      language: Language.language
-    })
-  );
+  const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
+    userData: User.userData,
+    lightMode: Theme.lightMode,
+    language: Language.language
+  }));
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -61,8 +60,11 @@ const HeaderProfile = ({ fromSideBar }) => {
 
   const handleLogout = () => {
     dispatch(setUser(null));
+    dispatch(resetCart());
     setToLocalStorage('accessToken', null);
     setToLocalStorage('refreshToken', null);
+    setToLocalStorage('cart', []);
+    setAnchorEl(null);
   };
 
   const handleRedirect = (link) => {
@@ -111,36 +113,23 @@ const HeaderProfile = ({ fromSideBar }) => {
 
   const mappedProfileList = useMemo(
     () =>
-      PROFILE_STATIC_DATA.concat(
-        userData ? PROFILE_LOGGED_DATA : PROFILE_NOT_LOGGED_DATA
-      ).map(({ value, icon, clickHandler }) => (
-        <MenuItem key={value} onClick={clickHandler} disableGutters>
-          {icon}
-          {value}
-        </MenuItem>
-      )),
-    [
-      userData,
-      PROFILE_STATIC_DATA,
-      PROFILE_LOGGED_DATA,
-      PROFILE_NOT_LOGGED_DATA
-    ]
+      PROFILE_STATIC_DATA.concat(userData ? PROFILE_LOGGED_DATA : PROFILE_NOT_LOGGED_DATA).map(
+        ({ value, icon, clickHandler }) => (
+          <MenuItem key={value} onClick={clickHandler} disableGutters>
+            {icon}
+            {value}
+          </MenuItem>
+        )
+      ),
+    [userData, PROFILE_STATIC_DATA, PROFILE_LOGGED_DATA, PROFILE_NOT_LOGGED_DATA]
   );
 
   return (
     <div className={styles.profile} data-cy='profile'>
       {userData ? (
-        <PersonIcon
-          onClick={handleClick}
-          onKeyDown={handleClick}
-          tabIndex={0}
-        />
+        <PersonIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} />
       ) : (
-        <PersonOutlineIcon
-          onClick={handleClick}
-          onKeyDown={handleClick}
-          tabIndex={0}
-        />
+        <PersonOutlineIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} />
       )}
       <Menu
         className={styles.list}

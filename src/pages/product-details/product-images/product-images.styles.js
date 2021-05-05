@@ -35,8 +35,8 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'scale(1.05)'
     },
     '@media (max-width: 1600px)': {
-      width: '330px',
-      height: '350px'
+      width: 'auto',
+      height: 'auto'
     }
   }),
   sideImage: {

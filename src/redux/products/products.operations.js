@@ -119,15 +119,11 @@ const getFilteredProducts = async ({ state, currency }) => {
           ... on PaginatedProducts {
             items {
               _id
-              purchasedCount
-              availableCount
-              name {
-                lang
-                value
-              }
-              basePrice {
-                value
-                currency
+              category {
+                _id
+                name {
+                  value
+                }
               }
               model {
                 _id
@@ -135,17 +131,13 @@ const getFilteredProducts = async ({ state, currency }) => {
                   value
                 }
               }
-              rate
-              images {
-                primary {
-                  large
-                  medium
-                  large
-                  small
-                }
+              name {
+                lang
+                value
               }
               mainMaterial {
                 color {
+                  _id
                   name {
                     lang
                     value
@@ -156,19 +148,28 @@ const getFilteredProducts = async ({ state, currency }) => {
                   }
                 }
               }
+              images {
+                primary {
+                  large
+                  medium
+                  small
+                }
+              }
               pattern {
+                _id
                 name {
                   lang
                   value
                 }
               }
-              category {
-                _id
-                name {
-                  value
-                }
+              basePrice {
+                value
+                currency
               }
               isHotItem
+              purchasedCount
+              availableCount
+              rate
             }
             count
           }
@@ -209,83 +210,109 @@ const getProductById = async (id) => {
               value
             }
             mainMaterial {
-              lang
-              value
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+              color {
+                _id
+                name {
+                  lang
+                  value
+                }
+                colorHex
+                simpleName {
+                  lang
+                  value
+                }
+              }
             }
             innerMaterial {
-              lang
-              value
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+            }
+            bottomMaterial {
+              material {
+                _id
+                name {
+                  lang
+                  value
+                }
+                additionalPrice {
+                  currency
+                  value
+                }
+              }
+              color {
+                _id
+                name {
+                  lang
+                  value
+                }
+                colorHex
+                simpleName {
+                  lang
+                  value
+                }
+              }
             }
             strapLengthInCm
             images {
               primary {
-                medium
                 large
+                medium
+                small
+                thumbnail
               }
               additional {
-                small
                 large
+                medium
+                small
+                thumbnail
               }
             }
-            colors {
-              code
+            closure {
               name {
                 lang
                 value
               }
-              images {
-                thumbnail
-                large
-              }
-              available
             }
             pattern {
-              lang
-              value
-            }
-            closure {
-              lang
-              value
+              _id
+              name {
+                lang
+                value
+              }
             }
             basePrice {
-              value
               currency
+              value
             }
-            options {
-              size {
-                name
-                heightInCm
-                widthInCm
-                depthInCm
-                volumeInLiters
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
+            sizes {
+              _id
+              name
+              simpleName {
+                lang
+                value
               }
-              bottomMaterial {
-                name {
-                  lang
-                  value
-                }
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
+              heightInCm
+              widthInCm
+              depthInCm
+              volumeInLiters
+              weightInKg
+              available
+              additionalPrice {
+                currency
+                value
               }
             }
+            availableCount
             rate
             comments {
               items {
@@ -293,59 +320,20 @@ const getProductById = async (id) => {
                 text
                 date
                 user {
+                  _id
+                  firstName
+                  lastName
                   email
-                  name
                   images {
                     thumbnail
                   }
                 }
               }
             }
-            options {
-              size {
-                _id
-                name
-                volumeInLiters
-                widthInCm
-                weightInKg
-              }
-              bottomMaterial {
-                _id
-                name {
-                  lang
-                  value
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-              additions {
-                name {
-                  value
-                  lang
-                }
-                available
-                additionalPrice {
-                  value
-                  currency
-                }
-              }
-            }
-            availableCount
-            images {
-              primary {
-                thumbnail
-                small
-                large
-                medium
-              }
-              additional {
-                large
-                medium
-              }
-            }
+          }
+          ... on Error {
+            statusCode
+            message
           }
         }
       }

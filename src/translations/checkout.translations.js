@@ -211,5 +211,8 @@ export const CHECKOUT_INPUT_FIELD = {
   paymentMethod: 'paymentMethod',
   courierOffice: 'courierOffice',
   region: 'region',
-  district: 'district'
+  district: 'district',
+  regionId: 'regionId',
+  districtId: 'districtId',
+  cityId: 'cityId'
 };

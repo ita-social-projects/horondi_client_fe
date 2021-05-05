@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/8.jpg';
+import BACKGROUND from '../../images/8.jpg';
+import BACKGROUND_REGISTERED_USER from '../../images/4.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   registerContainer: {
@@ -16,11 +17,12 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     position: 'absolute',
     zIndex: -1,
-    background: `url(${BG}) no-repeat `,
+    background: `url(${BACKGROUND}) no-repeat `,
     backgroundSize: 'cover',
     filter: 'brightness(30%) contrast(90%)'
   },
   formWrapper: {
+    alignItems: 'center',
     margin: theme.spacing(1),
     maxWidth: '960px',
     height: '550px',
@@ -38,7 +40,16 @@ export const useStyles = makeStyles((theme) => ({
   formBackground: {
     height: '100%',
     width: '100%',
-    background: `url(${BG}) no-repeat `,
+    background: `url(${BACKGROUND}) no-repeat `,
+    backgroundSize: 'cover',
+    '@media (max-width: 959px)': {
+      display: 'none'
+    }
+  },
+  formBackgroundRegisteredUser: {
+    height: '350px',
+    width: '275px',
+    background: `url(${BACKGROUND_REGISTERED_USER}) no-repeat `,
     backgroundSize: 'cover',
     '@media (max-width: 959px)': {
       display: 'none'
@@ -48,8 +59,23 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
     height: '550px',
-    padding: '80px 63px 63px',
+    padding: '30px 63px 63px',
     boxSizing: 'border-box'
+  },
+  registerSucces: {
+    backgroundColor: theme.palette.backgroundColor,
+    width: '100%',
+    height: '350px',
+    padding: '30px 63px 63px',
+    '& p': {
+      textAlign: 'center',
+      fontSize: '20px'
+    }
+  },
+  registerSuccesInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '225px'
   },
   heading: {
     fontSize: '1.5rem',
@@ -61,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   dataInput: {
     marginBottom: '10px',
-    paddingBottom: '22.5px',
+    paddingBottom: '15px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -87,14 +113,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   registerBtn: {
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    backgroundColor: theme.palette.button.normal.backgroundColor,
-    color: theme.palette.button.normal.color,
+    border: '1px solid black',
+    borderRadius: '4px',
+    marginBottom: '10px',
     textTransform: 'capitalize',
+    backgroundColor: 'white',
+    color: 'black',
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor
+      color: theme.palette.button.normal.backgroundColor
     }
   },
   loginBtn: {
@@ -110,6 +136,11 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }
+  },
+  googleText: {
+    textAlign: 'center',
+    padding: '0px',
+    margin: '5px'
   },
   registerError: {
     fontSize: '0.75rem',
@@ -134,19 +165,11 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   infoLogo: {
-    width: '30px',
-    height: '30px',
+    width: '34px',
+    height: '34px',
     margin: '0 auto',
     display: 'block',
     marginBottom: '23px'
-  },
-  successText: {
-    color: theme.palette.textColor,
-    margin: 0
-  },
-  successWrapper: {
-    display: 'flex',
-    flexDirection: 'column'
   },
   notchedOutline: {
     borderColor: theme.palette.textColor

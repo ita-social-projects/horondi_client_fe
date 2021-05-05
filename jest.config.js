@@ -11,6 +11,7 @@ module.exports = {
       statements: 0
     }
   },
+  snapshotSerializers: ['enzyme-to-json/serializer'],
   testResultsProcessor: 'jest-sonar-reporter',
   collectCoverage: true,
   coveragePathIgnorePatterns: ['/node_modules/', 'cypress']

@@ -17,7 +17,7 @@ import {
 } from './user.actions';
 import { getUserByToken, regenerateAccessToken, getPurchasedProducts } from './user.operations';
 import { setUserErrorType } from '../../utils/user-helpers';
-import { megreCartFromLCwithUserCart, getCartByUserId } from '../cart/cart.operations';
+import { mergeCartFromLSWithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -38,7 +38,8 @@ import {
   USER_IS_BLOCKED,
   USER_TOKENS,
   wishlistKey,
-  GRAPHQL_ERROR
+  GRAPHQL_ERROR,
+  RETURN_PAGE
 } from '../../configs/index';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
@@ -46,8 +47,8 @@ import { setCart, setCartTotalPrice, setCartLoading } from '../cart/cart.actions
 import { setWishlist } from '../wishlist/wishlist.actions';
 import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
 
-const { pathToMain, pathToLogin, pathToProfile, pathToErrorPage } = routes;
-const { ACCES_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
+const { pathToLogin, pathToProfile, pathToErrorPage } = routes;
+const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
 export const loginUser = (data) => {
   const query = `
@@ -183,7 +184,7 @@ export function* handleGoogleUserLogin({ payload }) {
     );
     const purchasedProducts = yield call(getPurchasedProducts, user.data.googleUser._id);
     yield put(setUser({ ...user.data.googleUser, purchasedProducts }));
-    yield setToLocalStorage(ACCES_TOKEN, user.data.googleUser.token);
+    yield setToLocalStorage(ACCESS_TOKEN, user.data.googleUser.token);
     yield put(push(pathToProfile));
   } catch (error) {
     if (error.message === USER_IS_BLOCKED) {
@@ -213,17 +214,24 @@ export function* handleUserLoad({ payload }) {
     const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
 
     yield setToLocalStorage(REFRESH_TOKEN, user.data.loginUser.refreshToken);
-    yield setToLocalStorage(ACCES_TOKEN, user.data.loginUser.token);
+    yield setToLocalStorage(ACCESS_TOKEN, user.data.loginUser.token);
     yield setToLocalStorage(wishlistKey, user.data.loginUser.wishlist);
     yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
     yield put(setWishlist(user.data.loginUser.wishlist));
     const cartFromLc = getFromLocalStorage(cartKey);
-    const mergedCart = yield call(megreCartFromLCwithUserCart, cartFromLc, user.data.loginUser._id);
-    yield put(setCart(mergedCart.cart.items));
-    yield put(setCartTotalPrice(mergedCart.cart.totalPrice));
-    yield setToLocalStorage(cartKey, mergedCart.cart.items);
+    if (cartFromLc.length) {
+      const mergedCart = yield call(
+        mergeCartFromLSWithUserCart,
+        cartFromLc,
+        user.data.loginUser._id
+      );
+      yield put(setCart(mergedCart.cart.items));
+      yield put(setCartTotalPrice(mergedCart.cart.totalPrice));
+      yield setToLocalStorage(cartKey, mergedCart.cart.items);
+    }
     yield put(setUserLoading(false));
-    yield put(push(pathToMain));
+    const returnPage = sessionStorage.getItem(RETURN_PAGE);
+    yield put(push(returnPage));
   } catch (error) {
     if (error.message === USER_IS_BLOCKED) {
       yield put(setUserError(error.message));
@@ -367,7 +375,7 @@ export function* handleUserPreserve() {
     const refreshToken = getFromLocalStorage(REFRESH_TOKEN);
     if (refreshToken) {
       const newAccessToken = yield call(regenerateAccessToken, refreshToken);
-      setToLocalStorage(ACCES_TOKEN, newAccessToken);
+      setToLocalStorage(ACCESS_TOKEN, newAccessToken);
     }
     const user = yield call(getUserByToken);
     yield call(handleIsUserBlockedChecker, user);
@@ -378,7 +386,7 @@ export function* handleUserPreserve() {
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
     yield put(setCartLoading(false));
   } catch (error) {
-    yield setToLocalStorage(ACCES_TOKEN, null);
+    yield setToLocalStorage(ACCESS_TOKEN, null);
     yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
   } finally {
     yield put(setUserIsChecked(true));

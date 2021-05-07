@@ -20,5 +20,5 @@ export function* handleIsUserBlockedChecker() {
   yield put(setSnackBarMessage(blocked));
   yield put(setSnackBarSeverity(error));
   yield put(push(routes.pathToLogin));
-  setToLocalStorage(USER_TOKENS.ACCES_TOKEN, null);
+  setToLocalStorage(USER_TOKENS.ACCESS_TOKEN, null);
 }

@@ -327,7 +327,10 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@Walleriy](https://avatars.githubusercontent.com/u/39501370?s=200)](https://github.com/Walleriy)
 [![@AndronShermeta](https://avatars.githubusercontent.com/u/73708298?s=200)](https://github.com/AndronShermeta)
 [![@khrystynaDm1307](https://avatars.githubusercontent.com/u/53223985?s=200)](https://github.com/khrystynaDm1307)
-
+[![@YuriiDubnytskyi](https://avatars.githubusercontent.com/u/41127730?s=200)](https://github.com/YuriiDubnytskyi)
+[![@Renfort](https://avatars.githubusercontent.com/u/60984686?s=200)](https://github.com/Renfort)
+[![@sergklukvin](https://avatars.githubusercontent.com/u/76059218?s=200)](https://github.com/sergklukvin)
+[![@mvmoshchovskyi](https://avatars.githubusercontent.com/u/48692693?s=200)](https://github.com/mvmoshchovskyi)
 
 
 ### Quality control team

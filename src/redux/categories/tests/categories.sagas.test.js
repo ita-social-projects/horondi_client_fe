@@ -2,7 +2,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { handleCategoriesLoad } from '../categories.sagas';
-import getItems from '../../../utils/client';
+import { getItems } from '../../../utils/client';
 import { SET_CATEGORIES, SET_CATEGORIES_LOADING } from '../categories.types';
 import { SET_ERROR } from '../../error/error.types';
 

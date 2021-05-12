@@ -2,12 +2,9 @@ import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 
-import getItems from '../../../utils/client';
+import { getItems } from '../../../utils/client';
 import { handleBusinessPageLoad } from '../business-pages.sagas';
-import {
-  SET_BUSINESS_PAGE,
-  SET_BUSINESS_PAGE_LOADING
-} from '../business-pages.types';
+import { SET_BUSINESS_PAGE, SET_BUSINESS_PAGE_LOADING } from '../business-pages.types';
 import { fakeAboutUs } from './business-page.variables';
 import { SET_ERROR } from '../../error/error.types';
 

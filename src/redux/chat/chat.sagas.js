@@ -13,7 +13,7 @@ export function* handleSendMail({ payload }) {
       yield call(handleIsUserBlockedChecker);
     } else {
       yield call(handleIsUserBlockedChecker, res);
-      yield put(setMessageState(res.data.addEmailQuestion._id));
+      yield put(setMessageState(res._id));
       yield put(setCommentsLoading(false));
     }
   } catch (e) {

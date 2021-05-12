@@ -31,7 +31,7 @@ export function* handleAddComment({ payload }) {
       }
       if (payload.rate > 0) {
         const rate = yield call(changeRate, payload);
-        yield put(setRate(rate.data.addRate));
+        yield put(setRate(rate));
       }
     }
   } catch (e) {

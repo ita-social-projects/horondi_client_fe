@@ -1,12 +1,10 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
-import { setPatterns } from './pattern.actions';
+import { push } from 'connected-react-router';
 
+import { setPatterns, setPatternLoading } from './pattern.actions';
 import { getAllPatterns } from './pattern.operations';
-
 import { GET_PATTERNS } from './pattern.types';
 import { setError } from '../error/error.actions';
-import { push } from 'connected-react-router';
-import { setPatternLoading } from '../pattern/pattern.actions';
 
 export function* handlePatternsLoad() {
   try {

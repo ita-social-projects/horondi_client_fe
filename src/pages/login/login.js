@@ -90,32 +90,6 @@ const Login = () => {
                         error={!!errors.password}
                         helperText={errors.password || ''}
                       />
-                      <div className={styles.recoveryContainer}>
-                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
-                          {FORGOT_PASSWORD[language].value}
-                        </Link>
-                      </div>
-                      <div className={styles.loginGroup}>
-                        <Button
-                          className={styles.loginBtn}
-                          fullWidth
-                          type='submit'
-                          onClick={() => setShouldValidate(true)}
-                        >
-                          {LOGIN_FORM_LABEL[language].value}
-                        </Button>
-                        {loginError ? (
-                          <p className={styles.loginError}>
-                            {LOGIN_USER_ERROR[loginError] && loginError
-                              ? LOGIN_USER_ERROR[loginError][language].value
-                              : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
-                          </p>
-                        ) : null}
-                      </div>
-                      <div className={styles.orContainer}>
-                        <span className={styles.orText}>{OR_TEXT[language].value}</span>
-                      </div>
-                      <GoogleBtn />
                       <div className={styles.container}>
                         <FormControlLabel
                           control={
@@ -133,6 +107,32 @@ const Login = () => {
                           }
                         />
                       </div>
+                      <div className={styles.loginGroup}>
+                        <Button
+                          className={styles.loginBtn}
+                          fullWidth
+                          type='submit'
+                          onClick={() => setShouldValidate(true)}
+                        >
+                          {LOGIN_FORM_LABEL[language].value}
+                        </Button>
+                        {loginError ? (
+                          <p className={styles.loginError}>
+                            {LOGIN_USER_ERROR[loginError] && loginError
+                              ? LOGIN_USER_ERROR[loginError][language].value
+                              : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
+                          </p>
+                        ) : null}
+                        <div className={styles.recoveryContainer}>
+                          <Link to={pathToRecovery} className={styles.recoveryBtn}>
+                            {FORGOT_PASSWORD[language].value}
+                          </Link>
+                        </div>
+                      </div>
+                      <div className={styles.orContainer}>
+                        <span className={styles.orText}>{OR_TEXT[language].value}</span>
+                      </div>
+                      <GoogleBtn />
                       <div className={styles.registerContainer}>
                         <Link to={pathToRegister} className={styles.registerBtn}>
                           {REGISTER_PROPOSAL[language].value}

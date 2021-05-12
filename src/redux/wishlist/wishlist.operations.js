@@ -1,4 +1,4 @@
-import setItems from '../../utils/client';
+import { setItems } from '../../utils/client';
 
 const addProductToWishlist = async (userId, productId) => {
   const res = await setItems(
@@ -19,7 +19,7 @@ const addProductToWishlist = async (userId, productId) => {
 	`,
     { id: userId, productId }
   );
-  return res.data.addProductToWishlist;
+  return res?.data?.addProductToWishlist;
 };
 
 const removeProductFromWishlist = async (userId, productId) => {
@@ -33,7 +33,7 @@ const removeProductFromWishlist = async (userId, productId) => {
 	`,
     { id: userId, productId }
   );
-  return res.data.removeProductFromWishlist;
+  return res?.data?.removeProductFromWishlist;
 };
 
 export { addProductToWishlist, removeProductFromWishlist };

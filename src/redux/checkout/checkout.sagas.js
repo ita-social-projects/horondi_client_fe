@@ -29,7 +29,7 @@ import {
   GET_UKRPOST_CITIES,
   GET_UKRPOST_POSTOFFICES
 } from './checkout.types';
-import getItems from '../../utils/client';
+import { getItems } from '../../utils/client';
 import { setError } from '../error/error.actions';
 import routes from '../../configs/routes';
 

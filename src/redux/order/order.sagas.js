@@ -18,11 +18,19 @@ import { CURRENCY } from '../../const/currency';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
 import { USER_IS_BLOCKED } from '../../configs';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { setUserError } from '../user/user.actions';
+import { handleUserLogout } from '../user/user.sagas';
 
 export function* handleOrderError({ message }) {
-  yield put(setOrderLoading(false));
-  yield put(setError(message));
-  yield put(push(routes.pathToErrorPage));
+  if (message === USER_IS_BLOCKED || message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
+    yield call(handleUserLogout);
+    yield put(setUserError(message));
+  } else {
+    yield put(setOrderLoading(false));
+    yield put(setError(message));
+    yield put(push(routes.pathToErrorPage));
+  }
 }
 
 export function* handleAddOrder({ payload }) {
@@ -40,7 +48,6 @@ export function* handleAddOrder({ payload }) {
     }
   } catch (e) {
     yield call(handleOrderError, e);
-    yield put(push(routes.pathToMain));
   }
 }
 

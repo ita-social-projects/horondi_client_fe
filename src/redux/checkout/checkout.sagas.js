@@ -34,6 +34,7 @@ import { setError } from '../error/error.actions';
 import routes from '../../configs/routes';
 
 function* handleErrors({ message }) {
+  yield put(setDeliveryLoading(false));
   yield put(setError(message));
   yield put(push(routes.pathToErrorPage));
 }
@@ -48,7 +49,6 @@ export function* handleNovaPoshtaPrice({ payload }) {
     yield put(setNovaPoshtaPrices(...price));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -62,7 +62,6 @@ export function* handleNovaPoshtaCities({ payload }) {
     yield put(setNovaPoshtaCities(cities));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -76,7 +75,6 @@ export function* handleNovaPoshtaWarehouse({ payload }) {
     yield put(setNovaPoshtaWarehouse(warehouses));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -90,7 +88,6 @@ export function* handleUkrPostRegions() {
     yield put(setUkrPostRegions(regions));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -118,7 +115,6 @@ export function* handleUkrPostCities({ payload }) {
     yield put(setUkrPostCities(cities));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -132,7 +128,6 @@ export function* handleUkrPostPostOffices({ payload }) {
     yield put(setUkrPostPostOffices(offices));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }

@@ -5,6 +5,7 @@ import { setHomePageSliderImages, setHomePageSliderImagesLoading } from './homep
 import { setError } from '../error/error.actions';
 import { GET_HOMEPAGE_SLIDER_IMAGES } from './homepage-slider.types';
 import { getAllSlides } from './homepage-slider.operations';
+import routes from '../../configs/routes';
 
 export function* handleHomePageSliderImagesLoad() {
   yield put(setHomePageSliderImagesLoading(true));
@@ -20,7 +21,7 @@ export function* handleHomePageSliderImagesLoad() {
 function* handleHomePageSliderError(e) {
   yield put(setHomePageSliderImagesLoading(false));
   yield put(setError({ e }));
-  yield put(push('/error-page'));
+  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* homePageSliderSaga() {

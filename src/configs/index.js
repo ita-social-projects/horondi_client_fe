@@ -453,6 +453,7 @@ export const deliveryTypes = {
   NOVAPOSTCOURIER: 'NOVAPOSTCOURIER',
   UKRPOSTCOURIER: 'UKRPOSTCOURIER'
 };
+export const STAY_SIGNED_IN = 'staySignedIn';
 
 export const CY_CODE_ERR = 'code-error';
 

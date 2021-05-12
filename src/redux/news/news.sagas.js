@@ -5,6 +5,7 @@ import { setNews, setArticle, setLoading } from './news.actions';
 import { setError } from '../error/error.actions';
 import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 import { getAllNews, getNewsById } from './news.operations';
+import routes from '../../configs/routes';
 
 export function* handleNewsLoad() {
   try {
@@ -36,7 +37,7 @@ export function* handleArticleLoad({ payload }) {
 export function* handleNewsError({ message }) {
   yield put(setLoading(false));
   yield put(setError(message));
-  yield put(push('/error-page'));
+  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* newsSaga() {

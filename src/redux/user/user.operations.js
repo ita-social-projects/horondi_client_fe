@@ -105,7 +105,8 @@ const loginUser = async (data) => {
   }
 }
   `;
-  const result = await setItems(loginUserMutation, { data });
+  const result = await setItems(loginUserMutation, data);
+
   return result?.data?.loginUser;
 };
 

@@ -5,11 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useStyles } from './profile-page.styles';
 import ProfilePicture from '../../images/profile.png';
-import {
-  updateUser,
-  sendConfirmationEmail,
-  recoverUser
-} from '../../redux/user/user.actions';
+import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
 import {
   PROFILE_LABELS,
@@ -23,6 +19,7 @@ import {
   errorMessages,
   REQUIRED_USER_FIELDS
 } from '../../configs/index';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -58,34 +55,19 @@ const ProfilePage = () => {
           errorMessages[language].value[item]
         );
         REQUIRED_USER_FIELDS.includes(item) &&
-          (fieldSchema = fieldSchema.required(
-            errorMessages[language].value[item]
-          ));
+          (fieldSchema = fieldSchema.required(errorMessages[language].value[item]));
         return [item, fieldSchema];
       })
     )
   );
 
-  const handleSaveUser = ({
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    ...address
-  }) => {
+  const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
     const user = { firstName, lastName, email, phoneNumber, address };
     dispatch(updateUser({ user, id: userData._id, upload }));
     setShouldValidate(false);
   };
 
-  const {
-    errors,
-    values,
-    resetForm,
-    dirty,
-    handleSubmit,
-    handleChange
-  } = useFormik({
+  const { errors, values, resetForm, dirty, handleSubmit, handleChange } = useFormik({
     initialValues: {},
     onSubmit: handleSaveUser,
     validationSchema,
@@ -139,7 +121,7 @@ const ProfilePage = () => {
       <div>
         {userLoading ? (
           <div className={classes.userForm}>
-            <Loader gridColumn={'span 3'} />
+            <Loader gridColumn='span 3' />
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={classes.userForm}>
@@ -155,7 +137,7 @@ const ProfilePage = () => {
                 className={classes.photoUpload}
                 id='photoUpload'
                 onChange={handleImageLoad}
-                multiple={true}
+                multiple
                 accept='image/*'
               />
               <label htmlFor='photoUpload' className={classes.uploadLabel}>
@@ -172,12 +154,11 @@ const ProfilePage = () => {
                 value={values[name] || ''}
                 label={PROFILE_LABELS[language][name]}
                 fullWidth
-                color='primary'
+                color={MATERIAL_UI_COLOR.PRIMARY}
                 error={!!errors[name]}
                 helperText={errors[name] || ''}
                 className={`${classes.dataInput} ${
-                  (name === 'firstName' || name === 'lastName') &&
-                  classes.nameInputs
+                  (name === 'firstName' || name === 'lastName') && classes.nameInputs
                 } ${name === 'email' && classes.afterText}`}
                 onChange={handleChange}
               />
@@ -208,10 +189,7 @@ const ProfilePage = () => {
               {userRecovered ? (
                 <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
               ) : (
-                <Button
-                  className={classes.button}
-                  onClick={handlePasswordChange}
-                >
+                <Button className={classes.button} onClick={handlePasswordChange}>
                   {PROFILE_PASSWORD_CHANGE[language].btnTitle}
                 </Button>
               )}
@@ -228,10 +206,7 @@ const ProfilePage = () => {
                 {confirmationEmailSent ? (
                   <h3>{PROFILE_EMAIL_CONFIRM[language].checkEmailText}</h3>
                 ) : (
-                  <Button
-                    className={classes.button}
-                    onClick={handleConfirmation}
-                  >
+                  <Button className={classes.button} onClick={handleConfirmation}>
                     {PROFILE_EMAIL_CONFIRM[language].btnTitle}
                   </Button>
                 )}

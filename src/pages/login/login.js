@@ -22,6 +22,7 @@ import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 const Login = () => {
   const styles = useStyles();
@@ -73,7 +74,7 @@ const Login = () => {
                         variant='outlined'
                         type='text'
                         name='email'
-                        color='primary'
+                        color={MATERIAL_UI_COLOR.PRIMARY}
                         error={!!errors.email}
                         helperText={errors.email || ''}
                       />
@@ -83,7 +84,7 @@ const Login = () => {
                         className={styles.passwordInput}
                         fullWidth
                         variant='outlined'
-                        color='primary'
+                        color={MATERIAL_UI_COLOR.PRIMARY}
                         type='password'
                         InputProps={endAdornment(showPassword, setShowPassword)}
                         name='password'
@@ -95,8 +96,8 @@ const Login = () => {
                           control={
                             <Field
                               as={Checkbox}
-                              name='staySignedIn'
-                              color='primary'
+                              name={STAY_SIGNED_IN}
+                              color={MATERIAL_UI_COLOR.PRIMARY}
                               checked={values.staySignedIn}
                             />
                           }

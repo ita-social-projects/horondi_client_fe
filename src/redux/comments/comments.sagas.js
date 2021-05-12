@@ -12,6 +12,9 @@ import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
 import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from './comments.types';
 import { addComment, updateComment, deleteComment, changeRate } from './comments.operations';
 import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { setUserError } from '../user/user.actions';
+import { handleUserLogout } from '../user/user.sagas';
 
 const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
 
@@ -35,7 +38,8 @@ export function* handleAddComment({ payload }) {
       }
     }
   } catch (e) {
-    yield call(handleCommentsError);
+    yield put(setCommentsLoading(false));
+    yield call(handleCommentsError, e);
   }
 }
 
@@ -47,7 +51,8 @@ export function* handleDeleteComment({ payload }) {
     yield call(handleSnackbar, deleted);
     yield call(deleteComment, payload);
   } catch (e) {
-    yield call(handleCommentsError);
+    yield put(setCommentsLoading(false));
+    yield call(handleCommentsError, e);
   }
 }
 
@@ -73,17 +78,19 @@ export function* handleUpdateComment({ payload }) {
     }
   } catch (e) {
     yield put(setUpdatingComment(null));
+    yield call(handleCommentsError, e);
+  }
+}
+
+function* handleCommentsError(e) {
+  if (e.message === USER_IS_BLOCKED || e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
+    yield call(handleUserLogout);
+    yield put(setUserError(e.message));
+  } else {
     yield put(setSnackBarSeverity('error'));
     yield put(setSnackBarMessage(error));
     yield put(setSnackBarStatus(true));
   }
-}
-
-function* handleCommentsError() {
-  yield put(setCommentsLoading(false));
-  yield put(setSnackBarSeverity('error'));
-  yield put(setSnackBarMessage(error));
-  yield put(setSnackBarStatus(true));
 }
 
 function* handleSnackbar(message) {

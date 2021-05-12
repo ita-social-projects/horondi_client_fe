@@ -5,6 +5,7 @@ import { setHomeImageLooks, setHomeImageLooksLoading } from './home-page-looks.a
 import { GET_ALL_HOME_IMAGE_LOOKS } from './home-page-looks.types';
 import { setError } from '../error/error.actions';
 import { getHomePageLooksImages } from './home-page-looks.operations';
+import routes from '../../configs/routes';
 
 export function* handleHomeLooksImagesLoad() {
   try {
@@ -22,7 +23,7 @@ export function* handleHomeLooksImagesLoad() {
 export function* handleError(e) {
   yield put(setHomeImageLooksLoading(false));
   yield put(setError(e.message));
-  yield put(push('/error-page'));
+  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* homeLooksImagesSaga() {

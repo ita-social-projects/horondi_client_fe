@@ -17,8 +17,12 @@ export function* handleSendMail({ payload }) {
       yield put(setCommentsLoading(false));
     }
   } catch (e) {
-    yield put(setMessageState(false));
+    yield call(handleChatError, e);
   }
+}
+
+function* handleChatError(e) {
+  yield put(setMessageState(false));
 }
 
 export default function* chatSaga() {

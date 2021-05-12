@@ -43,8 +43,7 @@ export function* handleCartLoadByUserID(payload) {
     yield put(setCart(userCart));
     yield put(setCartLoading(false));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -63,8 +62,7 @@ export function* handleClearUserCart({ payload }) {
     setToLocalStorage(cartKey, []);
     yield put(setCartLoading(false));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -131,8 +129,7 @@ export function* handleAddProductToUserCart({ payload }) {
       yield put(setCartLoading(false));
     }
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -153,8 +150,7 @@ export function* handleDeleteProductFromUserCart({ payload }) {
     yield put(setCartLoading(false));
     setToLocalStorage(cartKey, newCartList.cart.items);
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -177,9 +173,12 @@ export function* handleSetCartItemUserQuantity({ payload }) {
     yield put(setCart(newCartList.cart.items));
     yield put(setCartTotalPrice(newCartList.cart.totalPrice));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
+}
+function* handleCartError(e) {
+  yield put(setCartError(e));
+  yield put(setCartLoading(true));
 }
 
 export default function* cartSaga() {

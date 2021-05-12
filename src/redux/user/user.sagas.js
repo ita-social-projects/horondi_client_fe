@@ -43,7 +43,8 @@ import {
   UPDATE_USER,
   SEND_CONFIRMATION_EMAIL,
   GET_USER_ORDERS,
-  LOGIN_BY_GOOGLE
+  LOGIN_BY_GOOGLE,
+  LOGOUT_USER
 } from './user.types';
 import {
   REDIRECT_TIMEOUT,
@@ -56,9 +57,10 @@ import {
 } from '../../configs/index';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { setCart, setCartTotalPrice, setCartLoading } from '../cart/cart.actions';
+import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
 import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { AUTH_ERRORS } from '../../const/error-messages';
 
 const { pathToLogin, pathToProfile, pathToErrorPage } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
@@ -75,12 +77,8 @@ export function* handleGoogleUserLogin({ payload }) {
     setToLocalStorage(wishlistKey, user.wishlist);
     yield put(setUser({ ...user, purchasedProducts }));
     yield put(push(pathToProfile));
-  } catch (error) {
-    if (error.message === USER_IS_BLOCKED) {
-      yield put(setUserError(error.message));
-    } else {
-      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    }
+  } catch (e) {
+    yield call(handleUserError, e);
   } finally {
     yield put(setUserLoading(false));
   }
@@ -108,12 +106,8 @@ export function* handleUserLoad({ payload }) {
     yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
-  } catch (error) {
-    if (error.message === USER_IS_BLOCKED) {
-      yield put(setUserError(error.message));
-    } else {
-      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    }
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -124,12 +118,8 @@ export function* handleUserConfirm({ payload }) {
     yield call(confirmUserEmail, payload);
     yield put(setUserLoading(false));
     yield put(setUserIsConfirmed(true));
-  } catch (error) {
-    if (error.message === USER_IS_BLOCKED) {
-      yield put(setUserError(error.message));
-    } else {
-      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    }
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -144,13 +134,8 @@ export function* handleUserRecovery({ payload }) {
       yield delay(REDIRECT_TIMEOUT);
       yield put(push(pathToLogin));
     }
-  } catch (error) {
-    if (error.message === USER_IS_BLOCKED) {
-      yield put(setUserError(error.message));
-    } else {
-      yield put(setRecoveryLoading(false));
-      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    }
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -163,12 +148,8 @@ export function* handlePasswordReset({ payload }) {
     yield put(setPasswordIsReset(true));
     yield delay(REDIRECT_TIMEOUT);
     yield put(push(pathToLogin));
-  } catch (error) {
-    if (error.message === USER_IS_BLOCKED) {
-      yield put(setUserError(error.message));
-    } else {
-      yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    }
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -178,9 +159,8 @@ export function* handleTokenCheck({ payload }) {
     yield put(setUserLoading(true));
     yield call(checkIfTokenIsValid, payload);
     yield put(setUserLoading(false));
-  } catch (error) {
-    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    yield put(push(pathToErrorPage));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -194,8 +174,8 @@ export function* handleUserRegister({ payload }) {
     }
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
-  } catch (error) {
-    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -216,9 +196,8 @@ export function* handleUserPreserve() {
     yield put(setCart(userCart.cart.items));
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
     yield put(setCartLoading(false));
-  } catch (error) {
-    setToLocalStorage(ACCESS_TOKEN, null);
-    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
+  } catch (e) {
+    yield call(handleUserError, e);
   } finally {
     yield put(setUserIsChecked(true));
     yield put(setCartLoading(false));
@@ -235,9 +214,8 @@ export function* handleUpdateUser({ payload }) {
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
     yield put(setUserLoading(false));
-  } catch (error) {
-    yield put(setUserError(error.message.replace(GRAPHQL_ERROR, '')));
-    yield put(push(pathToErrorPage));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -249,12 +227,7 @@ export function* handleSendConfirmation({ payload }) {
     yield put(setConfirmationLoading(false));
     yield put(setConfirmationEmailStatus(true));
   } catch (e) {
-    if (e.message === USER_IS_BLOCKED) {
-      yield put(setUserError(e.message));
-    } else {
-      yield put(setConfirmationLoading(false));
-      yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
-    }
+    yield call(handleUserError, e);
   }
 }
 
@@ -265,12 +238,26 @@ export function* handleGetUserOrders() {
     yield put(setUserOrders(orders));
     yield put(setUserLoading(false));
   } catch (e) {
-    if (e.message === USER_IS_BLOCKED) {
-      yield put(setUserError(e.message));
-    } else {
-      yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
-      yield put(push(pathToErrorPage));
-    }
+    yield call(handleUserError, e);
+  }
+}
+
+export function* handleUserLogout() {
+  yield put(setUser(null));
+  yield put(resetCart());
+  setToLocalStorage(ACCESS_TOKEN, null);
+  setToLocalStorage(REFRESH_TOKEN, null);
+  setToLocalStorage(cartKey, []);
+}
+
+function* handleUserError(e) {
+  if (e.message === USER_IS_BLOCKED || e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
+    yield call(handleUserLogout);
+    yield put(setUserError(e.message));
+  } else {
+    yield put(setConfirmationLoading(false));
+    yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
+    yield put(push(pathToErrorPage));
   }
 }
 
@@ -286,4 +273,5 @@ export default function* userSaga() {
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
   yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
   yield takeEvery(LOGIN_BY_GOOGLE, handleGoogleUserLogin);
+  yield takeEvery(LOGOUT_USER, handleUserLogout);
 }

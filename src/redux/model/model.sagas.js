@@ -5,6 +5,7 @@ import { getAllModels, getModelsByCategory } from './model.operations';
 import { setModels, setModelsLoading } from './model.actions';
 import { setError } from '../error/error.actions';
 import { GET_MODELS_BY_CATEGORY, GET_ALL_MODELS } from './model.types';
+import routes from '../../configs/routes';
 
 export function* handleModelsLoadByCategory({ payload }) {
   try {
@@ -30,9 +31,9 @@ export function* handleAllModelsLoad() {
   }
 }
 
-export function* handleModelsErrors(e) {
+function* handleModelsErrors(e) {
   yield put(setError(e.message));
-  yield put(push('/error-page'));
+  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* modelSaga() {

@@ -5,6 +5,9 @@ import { setPatterns, setPatternLoading } from './pattern.actions';
 import { getAllPatterns } from './pattern.operations';
 import { GET_PATTERNS } from './pattern.types';
 import { setError } from '../error/error.actions';
+import routes from '../../configs/routes';
+
+const { pathToErrorPage } = routes;
 
 export function* handlePatternsLoad() {
   try {
@@ -20,7 +23,7 @@ export function* handlePatternsLoad() {
 export function* handlePatternsErrors(e) {
   yield put(setPatternLoading(false));
   yield put(setError(e.message));
-  yield put(push('/error-page'));
+  yield put(push(pathToErrorPage));
 }
 
 export default function* patternSaga() {

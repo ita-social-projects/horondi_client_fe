@@ -12,7 +12,6 @@ import {
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  LOGIN_USER_ERROR,
   STAY_SIGNED_IN
 } from '../../translations/user.translations';
 import { loginUser, resetState } from '../../redux/user/user.actions';
@@ -22,6 +21,7 @@ import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
+import { handleErrorMessage } from '../../utils/handle-login';
 
 const Login = () => {
   const styles = useStyles();
@@ -104,13 +104,7 @@ const Login = () => {
                         >
                           {LOGIN_FORM_LABEL[language].value}
                         </Button>
-                        {loginError ? (
-                          <p className={styles.loginError}>
-                            {LOGIN_USER_ERROR[loginError] && loginError
-                              ? LOGIN_USER_ERROR[loginError][language].value
-                              : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
-                          </p>
-                        ) : null}
+                        {handleErrorMessage(loginError, styles.loginError, language)}
                       </div>
                       <div className={styles.orContainer}>
                         <span className={styles.orText}>{OR_TEXT[language].value}</span>

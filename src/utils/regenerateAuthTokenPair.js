@@ -14,13 +14,11 @@ const refreshAuthToken = async () => {
 
   const newTokenPair = await regenerateUserTokenPairs(refreshToken);
 
-  if (newTokenPair?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
-    return isRegenerateTokens;
+  if (newTokenPair?.message !== AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
+    setToLocalStorage(ACCESS_TOKEN, newTokenPair.token);
+    setToLocalStorage(REFRESH_TOKEN, newTokenPair.refreshToken);
+    isRegenerateTokens = true;
   }
-  setToLocalStorage(ACCESS_TOKEN, newTokenPair.token);
-  setToLocalStorage(REFRESH_TOKEN, newTokenPair.refreshToken);
-
-  isRegenerateTokens = true;
 
   return isRegenerateTokens;
 };

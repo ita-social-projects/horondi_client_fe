@@ -28,9 +28,9 @@ const getAllNews = async () => {
   return result?.data?.getAllNews;
 };
 
-const getNewsById = async (payload) => {
+const getNewsById = async (id) => {
   const getNewsByIdQuery = `
-  query{
+  query($id: ID!){
     getNewsById(id: $id){
     ... on News{
         __typename
@@ -56,7 +56,7 @@ const getNewsById = async (payload) => {
       }
     }
   }`;
-  const result = await getItems(getNewsByIdQuery, { payload });
+  const result = await getItems(getNewsByIdQuery, { id });
 
   return result?.data?.getNewsById;
 };

@@ -1,6 +1,6 @@
 import { getItems } from '../../utils/client';
 
-export const getBusinessTextByCode = async (payload) => {
+export const getBusinessTextByCode = async ({ code }) => {
   const getBusinessTextByCodeQuery = `
     query (
       $code: String!
@@ -23,7 +23,7 @@ export const getBusinessTextByCode = async (payload) => {
           }
         }
     }`;
-  const result = await getItems(getBusinessTextByCodeQuery, { payload });
+  const result = await getItems(getBusinessTextByCodeQuery, { code });
 
   return result?.data?.getBusinessTextByCode;
 };

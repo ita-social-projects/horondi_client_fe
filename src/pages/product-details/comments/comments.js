@@ -17,6 +17,12 @@ import { addComment, setCommentsLimit } from '../../../redux/comments/comments.a
 import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
+import {
+  handleRateTip,
+  handleClassName,
+  handleTextField,
+  handleHelperText
+} from '../../../utils/handle-comments';
 
 const Comments = () => {
   const styles = useStyles();
@@ -61,15 +67,11 @@ const Comments = () => {
     [purchasedProducts, productId]
   );
 
-  const rateTip = useMemo(
-    () =>
-      !userId
-        ? COMMENTS[language].unregisteredTip
-        : !hasBought
-          ? COMMENTS[language].registeredTip
-          : COMMENTS[language].successfulTip,
-    [language, userId, hasBought]
-  );
+  const rateTip = useMemo(() => handleRateTip(userId, language, hasBought), [
+    language,
+    userId,
+    hasBought
+  ]);
 
   const commentsList = comments
     ? comments
@@ -109,17 +111,17 @@ const Comments = () => {
         <div className={styles.form}>
           {Object.values(commentFields).map(
             ({ name, multiline = null, rows = null }) =>
-              ((name !== TEXT_VALUE && !userData) || name === TEXT_VALUE) && (
+              handleTextField(name, userData) && (
                 <div key={name}>
                   <TextField
-                    className={`${name === TEXT_VALUE ? styles.text : styles.input}`}
+                    className={handleClassName(name, styles.text, styles.input)}
                     name={name}
                     onChange={name === TEXT_VALUE ? handleCommentChange : handleChange}
                     onBlur={handleBlur}
                     value={values[name]}
                     label={COMMENTS[language][name]}
                     error={!!errors[name]}
-                    helperText={errors[name] || ''}
+                    helperText={handleHelperText(errors[name])}
                     multiline={multiline}
                     rows={rows}
                     variant='outlined'

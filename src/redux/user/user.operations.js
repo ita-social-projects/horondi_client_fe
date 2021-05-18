@@ -164,7 +164,7 @@ const checkIfTokenIsValid = async (data) => {
   return result?.data?.checkIfTokenIsValid;
 };
 
-const registerUser = async (data) => {
+const registerUser = async ({ user, language }) => {
   const registerUserMutation = `
       mutation register($user: userRegisterInput!, $language: Int!){
         registerUser(
@@ -175,7 +175,7 @@ const registerUser = async (data) => {
         }
         }
       `;
-  const result = await setItems(registerUserMutation, { data });
+  const result = await setItems(registerUserMutation, { user, language });
 
   return result?.data?.registerUser;
 };

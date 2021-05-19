@@ -175,7 +175,7 @@ export function* handleUserRegister({ payload }) {
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
   } catch (e) {
-    yield call(handleUserError, e);
+    yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
   }
 }
 

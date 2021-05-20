@@ -11,7 +11,7 @@ import {
 import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
 import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from './comments.types';
 import { addComment, updateComment, deleteComment, changeRate } from './comments.operations';
-import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { setUserError } from '../user/user.actions';
 import { handleUserLogout } from '../user/user.sagas';
@@ -23,7 +23,7 @@ export function* handleAddComment({ payload }) {
     yield put(setCommentsLoading(true));
     const addedComment = yield call(addComment, payload);
     if (addedComment?.message === USER_IS_BLOCKED) {
-      yield call(handleIsUserBlockedChecker);
+      yield call(handleUserIsBlocked);
     } else {
       if (addedComment) {
         const comments = yield select(({ Comments }) => Comments.comments);
@@ -62,7 +62,7 @@ export function* handleUpdateComment({ payload }) {
     const updatedComment = yield call(updateComment, payload);
     if (updatedComment) {
       if (updatedComment?.message === USER_IS_BLOCKED) {
-        yield call(handleIsUserBlockedChecker);
+        yield call(handleUserIsBlocked);
       } else {
         const comments = yield select(({ Comments }) => Comments.comments);
         const commentToUpdate = comments.findIndex(({ _id }) => _id === updatedComment._id);

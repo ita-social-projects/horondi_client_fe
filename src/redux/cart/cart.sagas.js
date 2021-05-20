@@ -29,7 +29,7 @@ import {
   updateCartItemQuantity,
   cleanCart
 } from './cart.operations';
-import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { handleUserIsBlocked } from '../../utils/user-helpers';
 
 export function* handleCartLoad() {
   const cart = yield getFromLocalStorage(cartKey);
@@ -121,7 +121,7 @@ export function* handleAddProductToUserCart({ payload }) {
     yield put(setCartLoading(true));
     const newCartList = yield call(addProductToCart, userId, cartItem);
     if (newCartList?.message === USER_IS_BLOCKED) {
-      yield call(handleIsUserBlockedChecker);
+      yield call(handleUserIsBlocked);
     } else {
       yield put(setCart(newCartList.cart.items));
       yield put(setCartTotalPrice(newCartList.cart.totalPrice));

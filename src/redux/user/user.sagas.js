@@ -27,10 +27,8 @@ import {
   resetPassword,
   getUserOrders,
   getUserByToken,
-  regenerateUserTokenPairs,
   getPurchasedProducts
 } from './user.operations';
-import { setUserErrorType } from '../../utils/user-helpers';
 import { mergeCartFromLSWithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
@@ -52,17 +50,22 @@ import {
   USER_IS_BLOCKED,
   USER_TOKENS,
   wishlistKey,
-  GRAPHQL_ERROR,
+  LANGUAGE,
   RETURN_PAGE
-} from '../../configs/index';
+} from '../../configs';
 import routes from '../../configs/routes';
-import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
+import {
+  clearLocalStorage,
+  getFromLocalStorage,
+  setToLocalStorage
+} from '../../services/local-storage.service';
 import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/cart.actions';
 import { setWishlist } from '../wishlist/wishlist.actions';
-import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
+import { USER_ERROR } from '../../translations/user.translations';
 
-const { pathToLogin, pathToProfile, pathToErrorPage } = routes;
+const { pathToLogin, pathToProfile } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
 export function* handleGoogleUserLogin({ payload }) {
@@ -84,11 +87,13 @@ export function* handleGoogleUserLogin({ payload }) {
   }
 }
 
-export function* handleUserLoad({ payload }) {
+export function* handleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-
+    if (user?.message) {
+      yield call(handleUserError, user);
+    }
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
 
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
@@ -168,34 +173,37 @@ export function* handleUserRegister({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    const response = yield call(registerUser, payload);
-    if (response.statusCode) {
-      throw new Error(setUserErrorType(response.message, payload.language));
+    const user = yield call(registerUser, payload);
+    if (user?.message) {
+      yield call(handleUserError, user);
     }
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
   } catch (e) {
-    yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
+    yield call(handleUserError, e);
   }
 }
 
 export function* handleUserPreserve() {
   try {
+    const accessToken = getFromLocalStorage(ACCESS_TOKEN);
+    if (!accessToken) {
+      return;
+    }
+
     yield put(setUserLoading(true));
     yield put(setCartLoading(true));
-    const refreshToken = getFromLocalStorage(REFRESH_TOKEN);
-    if (refreshToken) {
-      const newAccessToken = yield call(regenerateUserTokenPairs, refreshToken);
-      setToLocalStorage(ACCESS_TOKEN, newAccessToken);
-    }
     const user = yield call(getUserByToken);
-    yield call(handleIsUserBlockedChecker, user);
-    const purchasedProducts = yield call(getPurchasedProducts, user._id);
-    yield put(setUser({ ...user, purchasedProducts }));
-    const userCart = yield call(getCartByUserId, user._id);
-    yield put(setCart(userCart.cart.items));
-    yield put(setCartTotalPrice(userCart.cart.totalPrice));
-    yield put(setCartLoading(false));
+    if (user?.message) {
+      yield call(handleUserError, user);
+    } else {
+      const purchasedProducts = yield call(getPurchasedProducts, user._id);
+      yield put(setUser({ ...user, purchasedProducts }));
+      const userCart = yield call(getCartByUserId, user._id);
+      yield put(setCart(userCart.cart.items));
+      yield put(setCartTotalPrice(userCart.cart.totalPrice));
+      yield put(setCartLoading(false));
+    }
   } catch (e) {
     yield call(handleUserError, e);
   } finally {
@@ -210,10 +218,13 @@ export function* handleUpdateUser({ payload }) {
     yield put(resetState());
     yield put(setUserLoading(true));
     const user = yield call(updateUserById, payload);
-    yield call(handleIsUserBlockedChecker, user);
-    const purchasedProducts = yield call(getPurchasedProducts, user._id);
-    yield put(setUser({ ...user, purchasedProducts }));
-    yield put(setUserLoading(false));
+    if (user?.message) {
+      yield call(handleUserError, user);
+    } else {
+      const purchasedProducts = yield call(getPurchasedProducts, user._id);
+      yield put(setUser({ ...user, purchasedProducts }));
+      yield put(setUserLoading(false));
+    }
   } catch (e) {
     yield call(handleUserError, e);
   }
@@ -245,24 +256,25 @@ export function* handleGetUserOrders() {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(resetCart());
-  setToLocalStorage(ACCESS_TOKEN, null);
-  setToLocalStorage(REFRESH_TOKEN, null);
-  setToLocalStorage(cartKey, []);
+  clearLocalStorage();
 }
 
 function* handleUserError(e) {
-  if (e.message === USER_IS_BLOCKED || e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
+  const language = getFromLocalStorage(LANGUAGE);
+  if (e?.message === USER_IS_BLOCKED) {
+    yield call(handleUserIsBlocked);
+  } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleUserLogout);
-    yield put(setUserError(e.message));
+    yield put(setUserError(e?.message));
+  } else if (USER_ERROR[e.message]) {
+    yield put(setUserError(USER_ERROR[e.message][language].value));
   } else {
-    yield put(setConfirmationLoading(false));
-    yield put(setUserError(e.message.replace(GRAPHQL_ERROR, '')));
-    yield put(push(pathToErrorPage));
+    yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));
   }
 }
 
 export default function* userSaga() {
-  yield takeEvery(LOGIN_USER, handleUserLoad);
+  yield takeEvery(LOGIN_USER, handleUserLogin);
   yield takeEvery(CONFIRM_USER, handleUserConfirm);
   yield takeEvery(RECOVER_USER, handleUserRecovery);
   yield takeEvery(PASSWORD_RESET, handlePasswordReset);

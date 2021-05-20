@@ -191,7 +191,7 @@ const resetPassword = async (data) => {
   return result?.data?.resetPassword;
 };
 
-const updateUserById = async (data) => {
+const updateUserById = async ({ user, id, upload }) => {
   const updateUserByIdMutation = `
      mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
       updateUserById(user: $user, id: $id, upload: $upload) { 
@@ -221,7 +221,7 @@ const updateUserById = async (data) => {
       }
     }
   `;
-  const result = await setItems(updateUserByIdMutation, { data });
+  const result = await setItems(updateUserByIdMutation, { user, id, upload });
 
   return result?.data?.updateUserById;
 };
@@ -386,8 +386,7 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   const regenerateUserTokenPairsMutation = `
       mutation($refreshToken: String!) {
         regenerateAccessToken(refreshToken: $refreshToken) {
-          ... on Token {
-            __typename
+          ... on Token {          
             token
             refreshToken
           }

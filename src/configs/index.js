@@ -251,25 +251,6 @@ export const URL_QUERIES_NAME = {
   defaultPage: '1'
 };
 
-export const FAKE_PRODUCT_FOR_TEST = {
-  _id: 'xdfgbvc3',
-  name: {
-    0: { value: 'гарбуз' },
-    1: { value: 'Pumpkin' }
-  },
-  bagBottom: 'Натуральна шкіра',
-  selectedSize: 'S',
-  sidePocket: {
-    isSelected: true
-  },
-  totalPrice: 1200,
-  images:
-    'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/47230850_1840441399415884_8917409871041658880_o.jpg?_nc_cat=102&_nc_sid=8bfeb9&_nc_ohc=hm88c7z3vA8AX-1Hz30&_nc_ht=scontent.flwo4-2.fna&oh=72d7ebf7aaa8fee317e60c68bbc8a987&oe=5F47F0CA',
-  quantity: 1,
-  productUrl: '/backpacks/foweoo423'
-};
-
-export const INPUT_VARIANT = 'outlined';
 export const REDIRECT_TIMEOUT = 3000;
 export const RESPONSIVE_PDP = {
   superLargeDesktop: {
@@ -434,13 +415,12 @@ export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Not
 
 export const commentsLimit = 10;
 
-export const DEFAULT_SIZE = 'M';
-
 export const cookiePolicy = {
   SINGLE_HOST_ORIGIN: 'single_host_origin'
 };
 
 export const cartKey = 'cart';
+export const LANGUAGE = 'language';
 export const wishlistKey = 'wishlist';
 export const sort = 'sort';
 export const countPerPage = 'countPerPage';
@@ -453,7 +433,6 @@ export const deliveryTypes = {
   NOVAPOSTCOURIER: 'NOVAPOSTCOURIER',
   UKRPOSTCOURIER: 'UKRPOSTCOURIER'
 };
-export const STAY_SIGNED_IN = 'staySignedIn';
 
 export const CY_CODE_ERR = 'code-error';
 

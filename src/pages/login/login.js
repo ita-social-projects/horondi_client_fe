@@ -12,7 +12,6 @@ import {
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  LOGIN_USER_ERROR,
   STAY_SIGNED_IN
 } from '../../translations/user.translations';
 import { loginUser, resetState } from '../../redux/user/user.actions';
@@ -117,13 +116,7 @@ const Login = () => {
                         >
                           {LOGIN_FORM_LABEL[language].value}
                         </Button>
-                        {loginError ? (
-                          <p className={styles.loginError}>
-                            {LOGIN_USER_ERROR[loginError] && loginError
-                              ? LOGIN_USER_ERROR[loginError][language].value
-                              : LOGIN_USER_ERROR.DEFAULT_ERROR[language].value}
-                          </p>
-                        ) : null}
+                        <p className={styles.loginError}>{loginError}</p>
                         <div className={styles.recoveryContainer}>
                           <Link to={pathToRecovery} className={styles.recoveryBtn}>
                             {FORGOT_PASSWORD[language].value}

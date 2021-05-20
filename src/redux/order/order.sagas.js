@@ -16,7 +16,7 @@ import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
 import { CURRENCY } from '../../const/currency';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
-import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { USER_IS_BLOCKED } from '../../configs';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { setUserError } from '../user/user.actions';
@@ -39,7 +39,7 @@ export function* handleAddOrder({ payload }) {
 
     const newOrder = yield call(addOrder, payload);
     if (newOrder?.message === USER_IS_BLOCKED) {
-      yield call(handleIsUserBlockedChecker);
+      yield call(handleUserIsBlocked);
     } else {
       setToLocalStorage(orderDataToLS.order, newOrder);
       yield put(setOrder(newOrder));
@@ -67,7 +67,7 @@ export function* handleGetFondyUrl({ payload }) {
     const newOrder = yield call(addOrder, payload.order);
 
     if (newOrder?.message === USER_IS_BLOCKED) {
-      yield call(handleIsUserBlockedChecker);
+      yield call(handleUserIsBlocked);
     } else {
       const orderWithCheckoutUrl = yield call(
         getPaymentCheckout,

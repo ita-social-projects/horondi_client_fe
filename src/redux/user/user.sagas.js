@@ -51,7 +51,8 @@ import {
   USER_TOKENS,
   wishlistKey,
   LANGUAGE,
-  RETURN_PAGE
+  RETURN_PAGE,
+  SNACKBAR_TYPES
 } from '../../configs';
 import routes from '../../configs/routes';
 import {
@@ -64,7 +65,13 @@ import { setWishlist } from '../wishlist/wishlist.actions';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_ERROR } from '../../translations/user.translations';
+import {
+  setSnackBarMessage,
+  setSnackBarSeverity,
+  setSnackBarStatus
+} from '../snackbar/snackbar.actions';
 
+const { error } = SNACKBAR_TYPES;
 const { pathToLogin, pathToProfile } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
@@ -72,7 +79,6 @@ export function* handleGoogleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
-
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
 
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
@@ -91,9 +97,6 @@ export function* handleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-    if (user?.message) {
-      yield call(handleUserError, user);
-    }
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
 
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
@@ -171,12 +174,8 @@ export function* handleTokenCheck({ payload }) {
 
 export function* handleUserRegister({ payload }) {
   try {
-    yield put(resetState());
     yield put(setUserLoading(true));
-    const user = yield call(registerUser, payload);
-    if (user?.message) {
-      yield call(handleUserError, user);
-    }
+    yield call(registerUser, payload);
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
   } catch (e) {
@@ -194,16 +193,12 @@ export function* handleUserPreserve() {
     yield put(setUserLoading(true));
     yield put(setCartLoading(true));
     const user = yield call(getUserByToken);
-    if (user?.message) {
-      yield call(handleUserError, user);
-    } else {
-      const purchasedProducts = yield call(getPurchasedProducts, user._id);
-      yield put(setUser({ ...user, purchasedProducts }));
-      const userCart = yield call(getCartByUserId, user._id);
-      yield put(setCart(userCart.cart.items));
-      yield put(setCartTotalPrice(userCart.cart.totalPrice));
-      yield put(setCartLoading(false));
-    }
+    const purchasedProducts = yield call(getPurchasedProducts, user._id);
+    yield put(setUser({ ...user, purchasedProducts }));
+    const userCart = yield call(getCartByUserId, user._id);
+    yield put(setCart(userCart.cart.items));
+    yield put(setCartTotalPrice(userCart.cart.totalPrice));
+    yield put(setCartLoading(false));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {
@@ -218,13 +213,9 @@ export function* handleUpdateUser({ payload }) {
     yield put(resetState());
     yield put(setUserLoading(true));
     const user = yield call(updateUserById, payload);
-    if (user?.message) {
-      yield call(handleUserError, user);
-    } else {
-      const purchasedProducts = yield call(getPurchasedProducts, user._id);
-      yield put(setUser({ ...user, purchasedProducts }));
-      yield put(setUserLoading(false));
-    }
+    const purchasedProducts = yield call(getPurchasedProducts, user._id);
+    yield put(setUser({ ...user, purchasedProducts }));
+    yield put(setUserLoading(false));
   } catch (e) {
     yield call(handleUserError, e);
   }
@@ -265,7 +256,9 @@ function* handleUserError(e) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleUserLogout);
-    yield put(setUserError(e?.message));
+    yield put(setSnackBarStatus(true));
+    yield put(setSnackBarMessage(USER_ERROR[e.message][language].value));
+    yield put(setSnackBarSeverity(error));
   } else if (USER_ERROR[e.message]) {
     yield put(setUserError(USER_ERROR[e.message][language].value));
   } else {

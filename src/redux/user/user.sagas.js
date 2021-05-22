@@ -254,7 +254,6 @@ export function* handleUserLogout() {
 
 function* handleUserError(e) {
   const language = getFromLocalStorage(LANGUAGE);
-  console.log(e);
   if (e?.message === USER_IS_BLOCKED) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
@@ -262,26 +261,12 @@ function* handleUserError(e) {
     yield put(setSnackBarStatus(true));
     yield put(setSnackBarMessage(USER_ERROR[e.message][language].value));
     yield put(setSnackBarSeverity(error));
-  } else if (e.message === 'jwt expired') {
-    yield put(setUserError(USER_ERROR.JWT_EXPIRED[language].value));
   } else if (USER_ERROR[e.message]) {
     yield put(setUserError(USER_ERROR[e.message][language].value));
   } else {
     yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));
   }
 }
-
-// function* handleEmailError(e) {
-//   const language = getFromLocalStorage(LANGUAGE);
-//   console.log(e);
-//   if (e.message === 'jwt expired') {
-//     yield put(setUserError(USER_ERROR.JWT_EXPIRED[language].value));
-//   } else if (USER_ERROR[e.message]) {
-//     yield put(setUserError(USER_ERROR[e.message][language].value));
-//   } else {
-//     yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));
-//   }
-// }
 
 export default function* userSaga() {
   yield takeEvery(LOGIN_USER, handleUserLogin);

@@ -122,6 +122,15 @@ export const USER_ERROR = {
       value: 'You have be logged out. Try to confirm your email in your personal cabinet'
     }
   ],
+  'jwt expired': [
+    {
+      value:
+        'Данні авторизації застарілі. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
+    },
+    {
+      value: 'You have be logged out. Try to confirm your email in your personal cabinet'
+    }
+  ],
   CART_IS_NOT_FOUND: [
     {
       value: 'Данні авторизації застарілі'

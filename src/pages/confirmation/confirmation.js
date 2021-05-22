@@ -3,10 +3,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useStyles } from './confirmation.styles';
-import {
-  WELCOME_MESSAGE,
-  CONFIRM_ERROR
-} from '../../translations/user.translations';
+import { WELCOME_MESSAGE } from '../../translations/user.translations';
 import { Loader } from '../../components/loader/loader';
 import { confirmUser } from '../../redux/user/user.actions';
 
@@ -17,7 +14,6 @@ const Confirmation = ({ token }) => {
     loading: User.userLoading,
     error: User.error
   }));
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +35,7 @@ const Confirmation = ({ token }) => {
           <Loader />
         ) : error ? (
           <>
-            <h3>{CONFIRM_ERROR[language].value}</h3>
+            <h3>{error}</h3>
           </>
         ) : (
           <>

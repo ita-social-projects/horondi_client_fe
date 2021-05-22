@@ -133,14 +133,21 @@ const getGoogleUser = async (payload) => {
   return result?.data?.googleUser;
 };
 
-const confirmUserEmail = async (data) => {
+const confirmUserEmail = async ({ token }) => {
   const confirmUserEmailMutation = `
-  mutation confirmUser($token: String!){
-    confirmUserEmail(token: $token)
+  mutation confirmUserEmail($token: String!){
+    confirmUserEmail(token: $token){
+        token
+        refreshToken
+        confirmed
+    }
   }
   `;
-  const result = await setItems(confirmUserEmailMutation, { data });
+  const result = await setItems(confirmUserEmailMutation, { token });
 
+  if (result?.data?.confirmUserEmail?.message) {
+    throw new Error(result.data.confirmUserEmail.message);
+  }
   return result?.data?.confirmUserEmail;
 };
 
@@ -232,13 +239,13 @@ const updateUserById = async ({ user, id, upload }) => {
   return result?.data?.updateUserById;
 };
 
-const sendEmailConfirmation = async (data) => {
+const sendEmailConfirmation = async ({ email, language }) => {
   const sendEmailConfirmationMutation = `
      mutation sendConfirmation($email: String!, $language: Int!){
       sendEmailConfirmation(email: $email, language: $language)
     }
   `;
-  const result = await setItems(sendEmailConfirmationMutation, { data });
+  const result = await setItems(sendEmailConfirmationMutation, { email, language });
   if (result?.data?.sendEmailConfirmation?.message) {
     throw new Error(result.data.sendEmailConfirmation.message);
   }

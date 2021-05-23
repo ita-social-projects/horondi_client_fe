@@ -54,7 +54,7 @@ items {
 }
 `;
 
-const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
+const mergeCartFromLSWithUserCart = async (cartFromLc, id) => {
   const getCartInput = (cart) =>
     cart.map((item) => ({
       product: item.product._id,
@@ -177,8 +177,6 @@ const addProductToCart = async (userId, cartItem) => {
 };
 
 const DeleteProductFromCart = async (userId, cartItems) => {
-  console.log(cartItems);
-  console.log(userId);
   const result = await client.mutate({
     variables: {
       items: cartItems,
@@ -247,7 +245,7 @@ const updateCartItemQuantity = async (payload) => {
 };
 
 export {
-  megreCartFromLCwithUserCart,
+  mergeCartFromLSWithUserCart,
   getCartByUserId,
   cleanCart,
   addProductToCart,

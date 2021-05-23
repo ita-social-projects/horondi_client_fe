@@ -41,7 +41,7 @@ export const USER_REGISTER_LABELS = {
   text: 'text'
 };
 export const USER_TOKENS = {
-  ACCES_TOKEN: 'accessToken',
+  ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken'
 };
 
@@ -471,3 +471,5 @@ export const SESSION_STORAGE = {
 };
 
 export const HORONDI = 'horondi';
+
+export const RETURN_PAGE = 'returnPage';

@@ -473,3 +473,5 @@ export const SESSION_STORAGE = {
 export const HORONDI = 'horondi';
 
 export const RETURN_PAGE = 'returnPage';
+
+export const HYPHEN = '-';

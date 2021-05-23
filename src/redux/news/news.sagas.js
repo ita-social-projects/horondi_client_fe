@@ -17,6 +17,7 @@ export function* handleNewsLoad() {
             title {
               value
             }
+            slug
             author {
               name {
                 value
@@ -74,9 +75,7 @@ export function* handleArticleLoad({ payload }) {
     );
 
     if (article.data.getNewsById.message) {
-      throw new Error(
-        `${article.data.getNewsById.statusCode} ${article.data.getNewsById.message}`
-      );
+      throw new Error(`${article.data.getNewsById.statusCode} ${article.data.getNewsById.message}`);
     }
 
     yield put(setArticle(article.data.getNewsById));

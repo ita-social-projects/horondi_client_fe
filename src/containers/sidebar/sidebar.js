@@ -10,7 +10,7 @@ import { useStyles } from './sidebar.styles';
 import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
-import HeaderRightBar from '../sidemenu-right-bar/sidemenu-right-bar';
+import SidemenuRightBar from '../sidemenu-right-bar/sidemenu-right-bar';
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
@@ -71,7 +71,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       </Link>
       {subList}
       <FooterLinks socialIconsStyles={styles.socialIconsStyles} position='center' />
-      <HeaderRightBar fromSideBar />
+      <SidemenuRightBar fromSideBar />
     </Drawer>
   );
 };

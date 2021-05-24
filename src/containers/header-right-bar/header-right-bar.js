@@ -19,12 +19,8 @@ const HeaderRightBar = ({ fromSideBar }) => {
       <div className={styles.language}>
         <Language fromSideBar={fromSideBar} />
       </div>
-      <div className={styles.cartHeader}>
-        <CartHeader fromSideBar={fromSideBar} />
-      </div>
-      <div className={styles.headerProfile}>
-        <HeaderProfile fromSideBar={fromSideBar} />
-      </div>
+      <CartHeader fromSideBar={fromSideBar} />
+      <HeaderProfile fromSideBar={fromSideBar} />
     </div>
   );
 };

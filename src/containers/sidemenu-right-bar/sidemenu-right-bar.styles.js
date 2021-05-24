@@ -6,5 +6,17 @@ export const useStyles = makeStyles(() => ({
     marginLeft: 'auto',
     alignItems: 'center',
     marginTop: fromSideBar ? 'auto' : 0
-  })
+  }),
+  currency: {
+    '& div:hover': {
+      background: 'black',
+      transition: '0.5s easy'
+    }
+  },
+  language: {
+    '& div:hover': {
+      background: 'black',
+      transition: '0.5s easy'
+    }
+  }
 }));

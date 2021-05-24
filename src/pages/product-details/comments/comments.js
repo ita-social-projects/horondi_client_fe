@@ -11,38 +11,30 @@ import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 
-import {
-  TEXT_VALUE,
-  commentFields,
-  formRegExp,
-  commentsLimit
-} from '../../../configs';
+import { TEXT_VALUE, commentFields, formRegExp, commentsLimit } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
-import {
-  addComment,
-  setCommentsLimit
-} from '../../../redux/comments/comments.actions';
+import { addComment, setCommentsLimit } from '../../../redux/comments/comments.actions';
 import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
+import {
+  handleRateTip,
+  handleClassName,
+  handleTextField,
+  handleHelperText
+} from '../../../utils/handle-comments';
 
 const Comments = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const {
-    commentsLoading,
-    language,
-    productId,
-    comments,
-    userData,
-    currentLimit
-  } = useSelector(selectProductsIdCommentsLanguageUserData);
+  const { commentsLoading, language, productId, comments, userData, currentLimit } = useSelector(
+    selectProductsIdCommentsLanguageUserData
+  );
 
   const [rate, setRate] = useState(0);
 
-  const { _id: userId, email, firstName, purchasedProducts, images } =
-    userData || {};
+  const { _id: userId, email, firstName, purchasedProducts, images } = userData || {};
 
   const onSubmit = (formValues) => {
     const userFields = userId ? { email, firstName, images, user: userId } : {};
@@ -71,38 +63,25 @@ const Comments = () => {
   } = useCommentValidation(!!userData, onSubmit);
 
   const hasBought = useMemo(
-    () =>
-      !!purchasedProducts &&
-      purchasedProducts.some((product) => product._id === productId),
+    () => !!purchasedProducts && purchasedProducts.some((product) => product._id === productId),
     [purchasedProducts, productId]
   );
 
-  const rateTip = useMemo(
-    () =>
-      !userId
-        ? COMMENTS[language].unregisteredTip
-        : !hasBought
-        ? COMMENTS[language].registeredTip
-        : COMMENTS[language].successfulTip,
-    [language, userId, hasBought]
-  );
+  const rateTip = useMemo(() => handleRateTip(userId, language, hasBought), [
+    language,
+    userId,
+    hasBought
+  ]);
 
   const commentsList = comments
     ? comments
-        .slice(0, currentLimit)
-        .map(({ text, date, _id, user }) => (
-          <CommentsItem
-            key={_id}
-            commentId={_id}
-            user={user}
-            text={text}
-            date={date}
-          />
-        ))
+      .slice(0, currentLimit)
+      .map(({ text, date, _id, user }) => (
+        <CommentsItem key={_id} commentId={_id} user={user} text={text} date={date} />
+      ))
     : [];
 
-  const limitOption =
-    commentsList.length === comments.length && comments.length > commentsLimit;
+  const limitOption = commentsList.length === comments.length && comments.length > commentsLimit;
 
   const handleCommentsReload = () => {
     const newLimit = limitOption ? commentsLimit : currentLimit + commentsLimit;
@@ -132,21 +111,17 @@ const Comments = () => {
         <div className={styles.form}>
           {Object.values(commentFields).map(
             ({ name, multiline = null, rows = null }) =>
-              ((name !== TEXT_VALUE && !userData) || name === TEXT_VALUE) && (
+              handleTextField(name, userData) && (
                 <div key={name}>
                   <TextField
-                    className={`${
-                      name === TEXT_VALUE ? styles.text : styles.input
-                    }`}
+                    className={handleClassName(name, styles.text, styles.input)}
                     name={name}
-                    onChange={
-                      name === TEXT_VALUE ? handleCommentChange : handleChange
-                    }
+                    onChange={name === TEXT_VALUE ? handleCommentChange : handleChange}
                     onBlur={handleBlur}
                     value={values[name]}
                     label={COMMENTS[language][name]}
                     error={!!errors[name]}
-                    helperText={errors[name] || ''}
+                    helperText={handleHelperText(errors[name])}
                     multiline={multiline}
                     rows={rows}
                     variant='outlined'
@@ -160,7 +135,7 @@ const Comments = () => {
           <Button
             type='submit'
             className={styles.commentBtn}
-            onClick={setShouldValidate.bind(this, true)}
+            onClick={() => setShouldValidate(true)}
           >
             {COMMENTS[language].submit}
           </Button>
@@ -177,9 +152,7 @@ const Comments = () => {
           onClick={handleCommentsReload}
           startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}
         >
-          {limitOption
-            ? COMMENTS[language].hideBtn
-            : COMMENTS[language].loadMore}
+          {limitOption ? COMMENTS[language].hideBtn : COMMENTS[language].loadMore}
         </LimitButton>
       )}
       <SnackbarItem />

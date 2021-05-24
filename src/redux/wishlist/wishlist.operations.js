@@ -1,39 +1,43 @@
-import setItems from '../../utils/client';
+import { call, select } from 'redux-saga/effects';
 
-const addProductToWishlist = async (userId, productId) => {
-  const res = await setItems(
-    `
-		mutation($id: ID!, $productId: ID!) {
-			addProductToWishlist(productId: $productId, id: $id) {
-				_id
-				name {
-					lang
-					value
-				}
-				basePrice {
-					currency
-					value
-				}
-			} 
-		}
-	`,
-    { id: userId, productId }
-  );
-  return res.data.addProductToWishlist;
+import { setItems } from '../../utils/client';
+import { WISHLIST_KEY } from '../../configs';
+
+function* handleUserWishlistOperation(handler, productId) {
+  const userData = yield select(({ User }) => User.userData);
+  if (userData) {
+    yield call(handler, {
+      id: userData._id,
+      key: WISHLIST_KEY,
+      productId
+    });
+  }
+}
+
+const addProductToUserWishlist = async ({ id, productId, key }) => {
+  const addProductToUserWishlistMutation = `
+      mutation($id: ID!, $key: String!, $productId: ID!) {
+        addProductToWishlist(id: $id, productId: $productId, key: $key) {
+          _id
+        }
+      }
+    `;
+  const result = await setItems(addProductToUserWishlistMutation, { id, key, productId });
+
+  return result?.data?.addProductToWishlist;
 };
 
-const removeProductFromWishlist = async (userId, productId) => {
-  const res = await setItems(
-    `
-		mutation($id: ID!, $productId: ID!) {
-			removeProductFromWishlist(productId: $productId, id: $id) {
-				_id
-			}
-		}
-	`,
-    { id: userId, productId }
-  );
-  return res.data.removeProductFromWishlist;
+const removeProductFromUserWishlist = async ({ id, productId, key }) => {
+  const removeProductFromUserWishlistMutation = `
+      mutation($id: ID!, $key: String!, $productId: ID!) {
+        removeProductFromWishlist(id: $id, productId: $productId, key: $key) {
+          _id
+        }
+      }
+    `;
+  const result = await setItems(removeProductFromUserWishlistMutation, { id, key, productId });
+
+  return result?.data?.removeProductFromWishlist;
 };
 
-export { addProductToWishlist, removeProductFromWishlist };
+export { handleUserWishlistOperation, addProductToUserWishlist, removeProductFromUserWishlist };

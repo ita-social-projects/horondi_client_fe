@@ -121,7 +121,7 @@ export const COLOR = {
 
 export const SIMILAR_ITEMS = {
   0: {
-    title: 'З цим пасує гарно'
+    title: 'З цим гарно пасує'
   },
   1: {
     title: 'It fits well with this'

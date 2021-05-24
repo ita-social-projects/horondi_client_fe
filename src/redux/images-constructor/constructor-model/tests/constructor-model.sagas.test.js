@@ -12,9 +12,9 @@ import {
 } from '../../constructor.variables';
 import {
   handleConstructorModelByIdLoad,
-  handleConstructorModelsLoad,
-  handleError
+  handleConstructorModelsLoad
 } from '../constructor-model.sagas';
+import { handleError } from '../../constructor.sagas';
 import { getModelForConstructor, getModelById } from '../constructor-model.operations';
 import constructorModel, { initialState } from '../constructor-model.reducer';
 import {

@@ -8,12 +8,14 @@ import { formRegExp } from '../../configs';
 import {
   errorMessages,
   CHANGE_PASSWORD,
-  NEW_PASSWORD_ERROR,
   NEW_PASSWORD_SUCCESS_MESSAGE
 } from '../../translations/user.translations';
 import { endAdornment } from '../../utils/eyeToggle';
-import Loader from '../../components/loader';
 import { resetPassword, checkIfTokenValid, resetState } from '../../redux/user/user.actions';
+import {
+  handleNewPasswodLoaderOrWindow,
+  handleErrorMessage
+} from '../../utils/handle-new-password';
 
 const NewPassword = ({ token }) => {
   const styles = useStyles();
@@ -71,10 +73,8 @@ const NewPassword = ({ token }) => {
       {({ errors }) => (
         <div className={styles.newPassBackground}>
           <div className={styles.newPassForm}>
-            {passwordReset ? (
-              successWindow
-            ) : loading ? (
-              <Loader />
+            {passwordReset || loading ? (
+              handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
             ) : (
               <Form className='newPasswordForm'>
                 <h2 className={styles.heading}>{CHANGE_PASSWORD[language].h2}</h2>
@@ -112,13 +112,7 @@ const NewPassword = ({ token }) => {
                 >
                   {CHANGE_PASSWORD[language].button}
                 </Button>
-                {userError ? (
-                  <p className={styles.serverError}>
-                    {NEW_PASSWORD_ERROR[userError]
-                      ? NEW_PASSWORD_ERROR[userError][language].value
-                      : NEW_PASSWORD_ERROR.DEFAULT_ERROR[language].value}
-                  </p>
-                ) : null}
+                {handleErrorMessage(userError, styles.serverError, language)}
               </Form>
             )}
           </div>

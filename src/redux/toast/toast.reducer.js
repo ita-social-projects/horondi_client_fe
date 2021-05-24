@@ -6,19 +6,20 @@ export const initialState = {
 };
 
 export const toastReducer = (state = initialState, action = {}) => {
-  if (action.type === SET_TOAST_MESSAGE) {
-    return {
-      ...state,
-      toastMessage: action.payload
-    };
+  switch (action.type) {
+    case SET_TOAST_MESSAGE:
+      return {
+        ...state,
+        toastMessage: action.payload
+      };
+    case SET_TOAST_SETTINGS:
+      return {
+        ...state,
+        toastSettings: {
+          ...action.payload
+        }
+      };
+    default:
+      return state;
   }
-  if (action.type === SET_TOAST_SETTINGS) {
-    return {
-      ...state,
-      toastSettings: {
-        ...action.payload
-      }
-    };
-  }
-  return state;
 };

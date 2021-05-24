@@ -296,7 +296,11 @@ export const SNACKBAR_MESSAGE = {
   updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
   deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong'],
-  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.']
+  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.'],
+  tokenExpired: [
+    'Данні авторизації застарілі, будь ласка авторизуйтеся',
+    'You have be logged out, please sign in again'
+  ]
 };
 export const COMMENT_DATA = {
   firstName: '',
@@ -421,7 +425,7 @@ export const cookiePolicy = {
 
 export const cartKey = 'cart';
 export const LANGUAGE = 'language';
-export const wishlistKey = 'wishlist';
+export const WISHLIST_KEY = 'wishlist';
 export const sort = 'sort';
 export const countPerPage = 'countPerPage';
 export const page = 'page';
@@ -440,6 +444,8 @@ export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';
 
 export const SNACKBAR_TYPES = {
   error: 'error',
+  warning: 'warning',
+  info: 'info',
   success: 'success'
 };
 

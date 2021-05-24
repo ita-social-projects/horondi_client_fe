@@ -4,7 +4,8 @@ import {
   SET_CART_LOADING,
   SET_CART_QUANTITY_LOADER,
   SET_CART_ERROR,
-  SET_CART_TOTAL_PRICE
+  SET_CART_TOTAL_PRICE,
+  RESET_CART
 } from './cart.types';
 
 const initialState = {
@@ -52,6 +53,11 @@ export const cartReducer = (state = initialState, { type, payload } = {}) => {
       return {
         ...state,
         totalPrice: payload
+      };
+    }
+    case RESET_CART: {
+      return {
+        ...initialState
       };
     }
     default:

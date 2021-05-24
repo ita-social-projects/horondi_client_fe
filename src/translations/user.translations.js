@@ -63,10 +63,6 @@ export const USER_ERROR = {
     { value: 'Користувач не авториваний' },
     { value: 'User is not authorized' }
   ],
-  REFRESH_TOKEN_IS_NOT_VALID: [
-    { value: 'Данні авторизації застарілі, будь ласка авторизуйтеся' },
-    { value: 'You have be logged out, please sign in again' }
-  ],
   WRONG_CREDENTIALS: [
     {
       value: 'Неправильна електронна адреса або пароль'

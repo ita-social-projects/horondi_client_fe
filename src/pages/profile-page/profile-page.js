@@ -19,6 +19,12 @@ import {
   errorMessages,
   REQUIRED_USER_FIELDS
 } from '../../configs/index';
+import {
+  handleProfilePage,
+  handleClassName,
+  handleText,
+  handleProfileImg
+} from '../../utils/handle-profile-page';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 const ProfilePage = () => {
@@ -127,7 +133,7 @@ const ProfilePage = () => {
           <form onSubmit={handleSubmit} className={classes.userForm}>
             <div className={classes.imageContainer}>
               <img
-                src={userImageUrl || ProfilePicture}
+                src={handleProfileImg(userImageUrl)}
                 alt='profile-logo'
                 className={classes.userImage}
                 onError={handleImageError}
@@ -151,15 +157,18 @@ const ProfilePage = () => {
                 key={name}
                 type='text'
                 name={name}
-                value={values[name] || ''}
+                value={handleText(values, name)}
                 label={PROFILE_LABELS[language][name]}
                 fullWidth
                 color={MATERIAL_UI_COLOR.PRIMARY}
                 error={!!errors[name]}
-                helperText={errors[name] || ''}
-                className={`${classes.dataInput} ${
-                  (name === 'firstName' || name === 'lastName') && classes.nameInputs
-                } ${name === 'email' && classes.afterText}`}
+                helperText={handleText(errors, name)}
+                className={handleClassName(
+                  classes.dataInput,
+                  classes.nameInputs,
+                  classes.afterText,
+                  name
+                )}
                 onChange={handleChange}
               />
             ))}
@@ -186,12 +195,12 @@ const ProfilePage = () => {
               <span className={classes.recoverPasswordText}>
                 {!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}
               </span>
-              {userRecovered ? (
-                <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
-              ) : (
-                <Button className={classes.button} onClick={handlePasswordChange}>
-                  {PROFILE_PASSWORD_CHANGE[language].btnTitle}
-                </Button>
+              {handleProfilePage(
+                userRecovered,
+                PROFILE_PASSWORD_CHANGE,
+                language,
+                handlePasswordChange,
+                classes.button
               )}
             </>
           )}
@@ -203,12 +212,12 @@ const ProfilePage = () => {
             ) : (
               <>
                 <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
-                {confirmationEmailSent ? (
-                  <h3>{PROFILE_EMAIL_CONFIRM[language].checkEmailText}</h3>
-                ) : (
-                  <Button className={classes.button} onClick={handleConfirmation}>
-                    {PROFILE_EMAIL_CONFIRM[language].btnTitle}
-                  </Button>
+                {handleProfilePage(
+                  confirmationEmailSent,
+                  PROFILE_EMAIL_CONFIRM,
+                  language,
+                  handleConfirmation,
+                  classes.button
                 )}
               </>
             )}

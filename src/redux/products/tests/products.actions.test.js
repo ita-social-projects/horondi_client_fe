@@ -22,7 +22,7 @@ import {
 import {
   SET_ALL_FILTER_DATA,
   SET_ALL_PRODUCTS,
-  GET_FILTRED_PRODUCTS,
+  GET_FILTERED_PRODUCTS,
   SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
@@ -72,10 +72,7 @@ describe('Filter actions test', () => {
   });
 
   it('should set category filter to payload property', () => {
-    const categoryFilter = [
-      '54c1cfb719f3bb97c28d762e',
-      'ddc81f5dbac48c38d0403dd3'
-    ];
+    const categoryFilter = ['54c1cfb719f3bb97c28d762e', 'ddc81f5dbac48c38d0403dd3'];
     const result = {
       type: SET_CATEGORY_FILTER,
       payload: categoryFilter
@@ -126,7 +123,7 @@ describe('Filter actions test', () => {
 
   it('should return all products', () => {
     const result = {
-      type: GET_FILTRED_PRODUCTS
+      type: GET_FILTERED_PRODUCTS
     };
 
     expect(getFiltredProducts()).toEqual(result);

@@ -4,6 +4,8 @@ import { setCommentsLoading, setMessageState } from './chat.actions';
 import { sendMail } from './chat.operations';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { USER_IS_BLOCKED } from '../../configs';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { handleUserError } from '../user/user.sagas';
 
 export function* handleSendMail({ payload }) {
   try {
@@ -21,7 +23,11 @@ export function* handleSendMail({ payload }) {
 }
 
 function* handleChatError(e) {
-  yield put(setMessageState(false));
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setMessageState(false));
+  }
 }
 
 export default function* chatSaga() {

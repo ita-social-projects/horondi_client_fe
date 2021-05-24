@@ -29,7 +29,8 @@ import {
   updateCartItemQuantity,
   cleanCart
 } from './cart.operations';
-import { handleUserIsBlocked } from '../../utils/user-helpers';
+import { handleUserError } from '../user/user.sagas';
+import { AUTH_ERRORS } from '../../const/error-messages';
 
 export function* handleCartLoad() {
   const cart = yield getFromLocalStorage(cartKey);
@@ -120,14 +121,10 @@ export function* handleAddProductToUserCart({ payload }) {
   try {
     yield put(setCartLoading(true));
     const newCartList = yield call(addProductToCart, userId, cartItem);
-    if (newCartList?.message === USER_IS_BLOCKED) {
-      yield call(handleUserIsBlocked);
-    } else {
-      yield put(setCart(newCartList.cart.items));
-      yield put(setCartTotalPrice(newCartList.cart.totalPrice));
-      setToLocalStorage(cartKey, newCartList.cart.items);
-      yield put(setCartLoading(false));
-    }
+    yield put(setCart(newCartList.cart.items));
+    yield put(setCartTotalPrice(newCartList.cart.totalPrice));
+    setToLocalStorage(cartKey, newCartList.cart.items);
+    yield put(setCartLoading(false));
   } catch (err) {
     yield call(handleCartError, err);
   }
@@ -177,8 +174,12 @@ export function* handleSetCartItemUserQuantity({ payload }) {
   }
 }
 function* handleCartError(e) {
-  yield put(setCartError(e));
-  yield put(setCartLoading(true));
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setCartError(e.message));
+    yield put(setCartLoading(false));
+  }
 }
 
 export default function* cartSaga() {

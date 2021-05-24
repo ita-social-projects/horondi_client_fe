@@ -106,9 +106,7 @@ const loginUser = async (data) => {
 }
   `;
   const result = await setItems(loginUserMutation, data);
-  if (result?.data?.loginUser?.message) {
-    throw new Error(result.data.loginUser.message);
-  }
+
   return result?.data?.loginUser;
 };
 
@@ -178,9 +176,7 @@ const registerUser = async ({ user, language }) => {
         }
       `;
   const result = await setItems(registerUserMutation, { user, language });
-  if (result?.data?.registerUser?.message) {
-    throw new Error(result.data.registerUser.message);
-  }
+
   return result?.data?.registerUser;
 };
 
@@ -226,9 +222,7 @@ const updateUserById = async ({ user, id, upload }) => {
     }
   `;
   const result = await setItems(updateUserByIdMutation, { user, id, upload });
-  if (result?.data?.updateUserById?.message) {
-    throw new Error(result.data.updateUserById.message);
-  }
+
   return result?.data?.updateUserById;
 };
 
@@ -239,9 +233,7 @@ const sendEmailConfirmation = async (data) => {
     }
   `;
   const result = await setItems(sendEmailConfirmationMutation, { data });
-  if (result?.data?.sendEmailConfirmation?.message) {
-    throw new Error(result.data.sendEmailConfirmation.message);
-  }
+
   return result?.data?.sendEmailConfirmation;
 };
 
@@ -312,10 +304,6 @@ const getUserByToken = async () => {
 
   const result = await getItems(getUserByTokenQuery);
 
-  if (result?.data?.getUserByToken?.statusCode) {
-    throw new Error(result.data.getUserByToken.message);
-  }
-
   return result?.data?.getUserByToken;
 };
 
@@ -351,19 +339,6 @@ const getUserOrders = async () => {
   return result?.data?.getUserOrders;
 };
 
-const removeProductFromUserWishlist = async ({ id, productId, key }) => {
-  const removeProductFromUserWishlistMutation = `
-      mutation($id: ID!, $key: String!, $productId: ID!) {
-        removeProductFromWishlist(id: $id, productId: $productId, key: $key) {
-          _id
-        }
-      }
-    `;
-  const result = await setItems(removeProductFromUserWishlistMutation, { id, productId, key });
-
-  return result?.data?.removeProductFromWishlist;
-};
-
 const getPurchasedProducts = async (id) => {
   const getPurchasedProductsQuery = `
       query($id: ID!) {
@@ -375,19 +350,6 @@ const getPurchasedProducts = async (id) => {
   const result = await getItems(getPurchasedProductsQuery, { id });
 
   return result?.data?.getPurchasedProducts;
-};
-
-const addProductToUserWishlist = async (data) => {
-  const addProductToUserWishlistMutation = `
-      mutation($id: ID!, $key: String!, $productId: ID!) {
-        addProductToWishlist(id: $id, productId: $productId, key: $key) {
-          _id
-        }
-      }
-    `;
-  const result = await setItems(addProductToUserWishlistMutation, { data });
-
-  return result?.data?.addProductToWishlist;
 };
 
 const regenerateUserTokenPairs = async (refreshToken) => {
@@ -422,8 +384,6 @@ export {
   sendEmailConfirmation,
   getUserOrders,
   getUserByToken,
-  removeProductFromUserWishlist,
-  addProductToUserWishlist,
   regenerateUserTokenPairs,
   getPurchasedProducts
 };

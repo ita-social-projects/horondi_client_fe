@@ -461,3 +461,5 @@ export const HORONDI = 'horondi';
 export const FETCH_POLICY = 'no-cache';
 
 export const RETURN_PAGE = 'returnPage';
+
+export const HYPHEN = '-';

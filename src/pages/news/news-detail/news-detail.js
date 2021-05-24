@@ -2,16 +2,11 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  Typography,
-  CardContent,
-  CardHeader,
-  CardMedia
-} from '@material-ui/core';
+import { Card, Typography, CardContent, CardHeader, CardMedia } from '@material-ui/core';
+
 import { getArticle } from '../../../redux/news/news.actions';
 import { useStyles } from './news-detail.style';
-import { IMG_URL, TIME_OPTIONS } from '../../../configs';
+import { IMG_URL, TIME_OPTIONS, HYPHEN } from '../../../configs';
 import { Loader } from '../../../components/loader/loader';
 
 const NewsDetail = ({ match }) => {
@@ -25,7 +20,7 @@ const NewsDetail = ({ match }) => {
 
   useEffect(() => {
     const articleId = match.params.id;
-    dispatch(getArticle(articleId));
+    dispatch(getArticle(articleId.split(HYPHEN)[0]));
     window.scrollTo(0, 0);
   }, [match.params.id, dispatch]);
 
@@ -39,29 +34,19 @@ const NewsDetail = ({ match }) => {
     );
   }
   if (article.text[language].value === null) {
-    return (
-      <h2>Sory, this article is not translated. Try to change language</h2>
-    );
+    return <h2>Sory, this article is not translated. Try to change language</h2>;
   }
   const newsTitle =
-    article.title.length !== 0
-      ? article.title[language].value
-      : 'No title provided';
+    article.title.length !== 0 ? article.title[language].value : 'No title provided';
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
   const dateToShow = new Date(parseInt(article.date));
   const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
-  const newsImage = article.image
-    ? IMG_URL + article.image
-    : 'No photo provided';
+  const newsImage = article.image ? IMG_URL + article.image : 'No photo provided';
   const newsText =
-    article.text.length !== 0
-      ? parse(article.text[language].value)
-      : 'No text provided';
+    article.text.length !== 0 ? parse(article.text[language].value) : 'No text provided';
   const newsAuthor =
-    article.author.name.length !== 0
-      ? article.author.name[language].value
-      : 'No author provided';
+    article.author.name.length !== 0 ? article.author.name[language].value : 'No author provided';
   const newsAuthorAvatar = article.author.image
     ? IMG_URL + article.author.image
     : 'No author provided';
@@ -69,12 +54,7 @@ const NewsDetail = ({ match }) => {
   return (
     <Card className={styles.container}>
       <CardContent>
-        <Typography
-          className={styles.ArticleTitle}
-          gutterBottom
-          variant='h2'
-          component='h2'
-        >
+        <Typography className={styles.ArticleTitle} gutterBottom variant='h2' component='h2'>
           {newsTitle}
         </Typography>
         <CardHeader subheader={newsDate} />

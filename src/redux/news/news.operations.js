@@ -8,6 +8,7 @@ const getAllNews = async () => {
         title {
           value
         }
+        slug
         author {
           name {
             value

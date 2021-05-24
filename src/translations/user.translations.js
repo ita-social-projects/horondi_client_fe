@@ -4,7 +4,7 @@ export const CONFIRM_EMAIL = [
       'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу для входу в аккаунт.'
   },
   {
-    value: 'You successfuly registered! Please, confirm your e-mail for Log In.'
+    value: 'You successfully registered! Please, confirm your e-mail for Log In.'
   }
 ];
 export const GOOGLE_SIGN_IN_TEXT = [
@@ -50,16 +50,19 @@ export const CONTINUE_SHOPPING_LABEL = [
   }
 ];
 
-export const EMPTY_FIELD = [
-  {
-    value: 'Заповніть поле'
-  },
-  {
-    value: 'Empty field'
-  }
-];
-
-export const LOGIN_USER_ERROR = {
+export const USER_ERROR = {
+  USER_ALREADY_EXIST: [
+    {
+      value: 'Користувач за вказаним емейлом вже існує'
+    },
+    {
+      value: 'User with given email already exists'
+    }
+  ],
+  USER_NOT_AUTHORIZED: [
+    { value: 'Користувач не авториваний' },
+    { value: 'User is not authorized' }
+  ],
   WRONG_CREDENTIALS: [
     {
       value: 'Неправильна електронна адреса або пароль'
@@ -73,15 +76,7 @@ export const LOGIN_USER_ERROR = {
       value: 'Ви ввели невірні дані'
     },
     {
-      value: 'You have typed wrong data'
-    }
-  ],
-  DEFAULT_ERROR: [
-    {
-      value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'
-    },
-    {
-      value: 'Oops! Something went wrong. Please, try again later.'
+      value: 'Wrong input data'
     }
   ],
   USER_IS_BLOCKED: [
@@ -90,25 +85,6 @@ export const LOGIN_USER_ERROR = {
     },
     {
       value: 'Sorry, your account is blocked.'
-    }
-  ]
-};
-
-export const REGISTER_USER_ERROR = {
-  USER_ALREADY_EXIST: [
-    {
-      value: 'Користувач за вказаним емейлом вже існує'
-    },
-    {
-      value: 'User with given email already exists'
-    }
-  ],
-  INPUT_NOT_VALID: [
-    {
-      value: 'Невірно введені дані'
-    },
-    {
-      value: 'Wrong input data'
     }
   ],
   DEFAULT_ERROR: [
@@ -149,7 +125,7 @@ export const errorMessages = [
 export const placeholders = {
   firstName: [
     {
-      value: "Введіть Ім'я"
+      value: 'Введіть Ім’я'
     },
     {
       value: 'Enter firstname'
@@ -341,7 +317,7 @@ export const NEW_PASSWORD_SUCCESS_MESSAGE = [
 
 export const PROFILE_LABELS = [
   {
-    firstName: "Ім'я",
+    firstName: 'Ім’я',
     lastName: 'Прізвище',
     email: 'Емейл',
     phoneNumber: 'Номер телефону',
@@ -365,7 +341,7 @@ export const PROFILE_LABELS = [
     city: 'City',
     street: 'Street',
     buildingNumber: 'Building number',
-    appartment: 'Appartment number',
+    appartment: 'Apartment number',
     zipcode: 'Zip Code',
     addPhoto: '+',
     saveBtnTitle: 'Save'

@@ -1,8 +1,5 @@
-import { FAKE_PRODUCT_FOR_TEST } from '../../src/configs';
-import {
-  clearLocalStorage,
-  setToLocalStorage
-} from '../../src/services/local-storage.service';
+import { FAKE_PRODUCT_FOR_TEST } from './test.variables';
+import { clearLocalStorage, setToLocalStorage } from '../../src/services/local-storage.service';
 
 describe('filled wishlist test', () => {
   it('should be visible', () => {
@@ -73,10 +70,7 @@ describe('empty wishlist test', () => {
   });
 
   it('should contain button with link to homepage', () => {
-    cy.get('[data-cy="empty-wishlist"]')
-      .find('button')
-      .should('be.visible')
-      .click();
+    cy.get('[data-cy="empty-wishlist"]').find('button').should('be.visible').click();
   });
 
   it('should contain image', () => {

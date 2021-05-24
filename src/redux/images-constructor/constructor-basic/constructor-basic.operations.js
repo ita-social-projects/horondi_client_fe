@@ -1,32 +1,28 @@
-import { gql } from '@apollo/client';
-import { client } from '../../../utils/client';
+import { getItems } from '../../../utils/client';
 
 export const getConstructorBasicById = async (id) => {
-  const result = await client.query({
-    variables: { id },
-    query: gql`
-      query($id: ID!) {
-        getConstructorBasicById(id: $id) {
-          ... on ConstructorBasic {
-            _id
-            image
-            basePrice {
-              value
-            }
-          }
-          ... on Error {
-            message
-            statusCode
+  const getConstructorBasicByIdQuery = `
+    query($id: ID!) {
+      getConstructorBasicById(id: $id) {
+        ... on ConstructorBasic {
+          _id
+          image
+          basePrice {
+            value
           }
         }
+        ... on Error {
+          message
+          statusCode
+        }
       }
-    `,
-    fetchPolicy: 'no-cache'
-  });
+    }
+  `;
+  const result = await getItems(getConstructorBasicByIdQuery, { id });
 
-  if (result.data.getConstructorBasicById.message) {
+  if (result?.data?.getConstructorBasicById?.message) {
     throw new Error(result.data.getConstructorBasicById.message);
   }
 
-  return result.data.getConstructorBasicById;
+  return result?.data?.getConstructorBasicById;
 };

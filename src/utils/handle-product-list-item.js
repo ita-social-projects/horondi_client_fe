@@ -1,1 +1,1 @@
-export const handleCurrencySign = (currency) => (!!(currency === 0 || currency === 1));
+export const handleCurrencySign = (currency) => !!(currency === 0 || currency === 1);

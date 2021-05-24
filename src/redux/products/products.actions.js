@@ -7,10 +7,9 @@ import {
   SET_ALL_FILTER_DATA,
   SET_PRODUCTS_PER_PAGE,
   SET_SORT_BY_PRICE,
-  SET_SORT_BY_DATE,
   SET_SORT_BY_RATE,
   SET_SORT_BY_POPULARITY,
-  GET_FILTRED_PRODUCTS,
+  GET_FILTERED_PRODUCTS,
   SET_PRODUCTS_LOADING,
   SET_CATEGORY_FILTER,
   SET_PRICE_FILTER,
@@ -52,10 +51,6 @@ export const setSortByPrice = (payload) => ({
   type: SET_SORT_BY_PRICE,
   payload
 });
-export const setSortByDate = (payload) => ({
-  type: SET_SORT_BY_DATE,
-  payload
-});
 export const setSortByRate = (payload) => ({
   type: SET_SORT_BY_RATE,
   payload
@@ -65,7 +60,7 @@ export const setSortByPopularity = (payload) => ({
   payload
 });
 export const getFiltredProducts = (payload) => ({
-  type: GET_FILTRED_PRODUCTS,
+  type: GET_FILTERED_PRODUCTS,
   payload
 });
 export const setProductsLoading = (loading) => ({

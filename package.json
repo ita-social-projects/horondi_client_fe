@@ -140,13 +140,5 @@
       "prettier --write",
       "eslint --fix"
     ]
-  },
-  "jest": {
-    "verbose": true,
-    "clearMocks": true,
-    "collectCoverage": true,
-    "setupFilesAfterEnv": [
-      "./src/setupTest.js"
-    ]
   }
 }

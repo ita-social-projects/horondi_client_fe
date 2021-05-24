@@ -25,6 +25,7 @@ import {
   handleText,
   handleProfileImg
 } from '../../utils/handle-profile-page';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -159,7 +160,7 @@ const ProfilePage = () => {
                 value={handleText(values, name)}
                 label={PROFILE_LABELS[language][name]}
                 fullWidth
-                color='primary'
+                color={MATERIAL_UI_COLOR.PRIMARY}
                 error={!!errors[name]}
                 helperText={handleText(errors, name)}
                 className={handleClassName(

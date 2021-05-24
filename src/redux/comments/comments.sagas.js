@@ -1,17 +1,17 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { setCommentsLoading, setComments, setRate, setUpdatingComment } from './comments.actions';
-
 import {
   setSnackBarMessage,
   setSnackBarSeverity,
   setSnackBarStatus
 } from '../snackbar/snackbar.actions';
-
 import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
 import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from './comments.types';
 import { addComment, updateComment, deleteComment, changeRate } from './comments.operations';
-import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { handleUserIsBlocked } from '../../utils/user-helpers';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { handleUserError } from '../user/user.sagas';
 
 const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
 
@@ -20,7 +20,7 @@ export function* handleAddComment({ payload }) {
     yield put(setCommentsLoading(true));
     const addedComment = yield call(addComment, payload);
     if (addedComment?.message === USER_IS_BLOCKED) {
-      yield call(handleIsUserBlockedChecker);
+      yield call(handleUserIsBlocked);
     } else {
       if (addedComment) {
         const comments = yield select(({ Comments }) => Comments.comments);
@@ -31,11 +31,12 @@ export function* handleAddComment({ payload }) {
       }
       if (payload.rate > 0) {
         const rate = yield call(changeRate, payload);
-        yield put(setRate(rate.data.addRate));
+        yield put(setRate(rate));
       }
     }
   } catch (e) {
-    yield call(handleCommentsError);
+    yield put(setCommentsLoading(false));
+    yield call(handleCommentsError, e);
   }
 }
 
@@ -47,7 +48,8 @@ export function* handleDeleteComment({ payload }) {
     yield call(handleSnackbar, deleted);
     yield call(deleteComment, payload);
   } catch (e) {
-    yield call(handleCommentsError);
+    yield put(setCommentsLoading(false));
+    yield call(handleCommentsError, e);
   }
 }
 
@@ -57,7 +59,7 @@ export function* handleUpdateComment({ payload }) {
     const updatedComment = yield call(updateComment, payload);
     if (updatedComment) {
       if (updatedComment?.message === USER_IS_BLOCKED) {
-        yield call(handleIsUserBlockedChecker);
+        yield call(handleUserIsBlocked);
       } else {
         const comments = yield select(({ Comments }) => Comments.comments);
         const commentToUpdate = comments.findIndex(({ _id }) => _id === updatedComment._id);
@@ -73,17 +75,18 @@ export function* handleUpdateComment({ payload }) {
     }
   } catch (e) {
     yield put(setUpdatingComment(null));
+    yield call(handleCommentsError, e);
+  }
+}
+
+function* handleCommentsError(e) {
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
     yield put(setSnackBarSeverity('error'));
     yield put(setSnackBarMessage(error));
     yield put(setSnackBarStatus(true));
   }
-}
-
-function* handleCommentsError() {
-  yield put(setCommentsLoading(false));
-  yield put(setSnackBarSeverity('error'));
-  yield put(setSnackBarMessage(error));
-  yield put(setSnackBarStatus(true));
 }
 
 function* handleSnackbar(message) {

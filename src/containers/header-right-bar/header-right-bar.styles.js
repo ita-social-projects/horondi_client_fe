@@ -6,5 +6,15 @@ export const useStyles = makeStyles(() => ({
     marginLeft: 'auto',
     alignItems: 'center',
     marginTop: fromSideBar ? 'auto' : 0
-  })
+  }),
+  currency: {
+    '@media (max-width: 450px)': {
+      display: 'none'
+    }
+  },
+  language: {
+    '@media (max-width: 450px)': {
+      display: 'none'
+    }
+  }
 }));

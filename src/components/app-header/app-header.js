@@ -45,6 +45,7 @@ const AppHeader = () => {
           <HeaderRightBar />
         </Toolbar>
       </AppBar>
+      <div className={styles.headerspace} />
       <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
     </div>
   );

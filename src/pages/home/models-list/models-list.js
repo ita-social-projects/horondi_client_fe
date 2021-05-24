@@ -13,13 +13,11 @@ import Loader from '../../../components/loader';
 
 const ModelsList = () => {
   const dispatch = useDispatch();
-  const { models, language, modelsLoading } = useSelector(
-    ({ Model, Language }) => ({
-      models: Model.models,
-      modelsLoading: Model.loading,
-      language: Language.language
-    })
-  );
+  const { models, language, modelsLoading } = useSelector(({ Model, Language }) => ({
+    models: Model.models,
+    modelsLoading: Model.loading,
+    language: Language.language
+  }));
 
   const [isModelsVisible, setIsModelsVisible] = useState(false);
 
@@ -42,26 +40,14 @@ const ModelsList = () => {
     <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>
         {models.map((model) => (
-          <ModelItem key={model._id} model={model} />
+          <ModelItem className={styles.modelItem} key={model._id} model={model} />
         ))}
-        <Link className={modelItemStyles.modelItem} to='/unique'>
-          <div className={modelItemStyles.modelItemTitle}>Unique</div>
-          <div
-            className={modelItemStyles.modelItemImage}
-            style={{
-              background: `url(${UNIQUE_MODEL_IMAGE_LINK}) center center`,
-              backgroundSize: 'cover'
-            }}
-          />
-        </Link>
       </div>
       <ClassicButton
         buttonStyle={isModelsVisible ? 'classic' : 'inverse'}
         buttonType='text'
         innerText={
-          isModelsVisible
-            ? HOME_BUTTONS[language].HIDE_MODELS
-            : HOME_BUTTONS[language].ALL_MODELS
+          isModelsVisible ? HOME_BUTTONS[language].HIDE_MODELS : HOME_BUTTONS[language].ALL_MODELS
         }
         onClickHandler={onShowModels}
       />

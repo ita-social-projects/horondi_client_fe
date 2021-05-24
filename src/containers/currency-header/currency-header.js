@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
-import { useStyles } from './currency.styles';
+import { useStyles } from './currency-header.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeCurrency } from '../../redux/currency/currency.actions';
 import { CURRENCIES_LIST, DEFAULT_CURRENCY, hryvniaUnicode, dollarUnicode } from '../../configs';

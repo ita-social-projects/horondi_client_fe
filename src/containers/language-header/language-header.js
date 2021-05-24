@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
-import { useStyles } from './language.styles';
+import { useStyles } from './language-header.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';

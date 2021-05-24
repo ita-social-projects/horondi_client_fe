@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
   home: {
     boxSizing: 'border-box',
     backgroundColor: theme.palette.backgroundColor,
-    textAlign: 'center',
-    marginTop: '64px'
+    textAlign: 'center'
   }
 }));

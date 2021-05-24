@@ -55,8 +55,8 @@ const PriceFilter = () => {
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
-  const min = minPrice ? minPrice[currency].value / 100 : 0;
-  const max = maxPrice ? maxPrice[currency].value / 100 : 1000;
+  const min = parseInt(minPrice ? minPrice[currency].value / 100 : 0, 10);
+  const max = parseInt(maxPrice ? maxPrice[currency].value / 100 : 1000, 10);
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>

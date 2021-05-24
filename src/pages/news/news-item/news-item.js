@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './news-item.style';
 import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 
-const NewsItem = ({ date, author, image, title, text, id }) => {
+const NewsItem = ({ date, author, image, title, text, id, slug }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -24,20 +24,14 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
   if (text[language].value === null) {
     return null;
   }
-  const newsTitle =
-    title.length !== 0 ? title[language].value : 'No title provided';
+  const newsTitle = title.length !== 0 ? title[language].value : 'No title provided';
   const newsImage = image ? IMG_URL + image : 'No image provided';
   const newsText =
     text.length !== 0 && text[language].value != null
       ? parse(text[language].value)
       : 'No text provided';
-  const newsAuthor =
-    author.name.length !== 0
-      ? author.name[language].value
-      : 'No author provided';
-  const newsAuthorAvatar = author.image
-    ? IMG_URL + author.image
-    : 'No author provided';
+  const newsAuthor = author.name.length !== 0 ? author.name[language].value : 'No author provided';
+  const newsAuthorAvatar = author.image ? IMG_URL + author.image : 'No author provided';
 
   const newsButtonText = ['читати далі', 'read more...'];
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
@@ -78,26 +72,14 @@ const NewsItem = ({ date, author, image, title, text, id }) => {
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
-          <Link to={`/news/${id}`}>
-            <Button
-              variant='contained'
-              className={styles.newsButton}
-              data-cy='readMoreButton'
-            >
+          <Link to={`/news/${id}-${slug}`}>
+            <Button variant='contained' className={styles.newsButton} data-cy='readMoreButton'>
               {newsButtonText[language]}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>
-            <CardHeader
-              subheader={newsAuthor}
-              data-cy='authorName'
-              className={styles.authorName}
-            />
-            <Avatar
-              alt={newsAuthor}
-              src={newsAuthorAvatar}
-              data-cy='authorPhoto'
-            />
+            <CardHeader subheader={newsAuthor} data-cy='authorName' className={styles.authorName} />
+            <Avatar alt={newsAuthor} src={newsAuthorAvatar} data-cy='authorPhoto' />
           </div>
         </div>
       </Card>

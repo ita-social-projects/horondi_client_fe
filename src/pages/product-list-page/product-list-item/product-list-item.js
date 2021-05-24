@@ -13,15 +13,14 @@ import { IMG_URL } from '../../../configs';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../configs/routes';
+import { handleCurrencySign } from '../../../utils/handle-product-list-item';
 
 const ProductListItem = ({ product }) => {
-  const { language, currency, isLightTheme } = useSelector(
-    ({ Language, Currency, Theme }) => ({
-      language: Language.language,
-      currency: Currency.currency,
-      isLightTheme: Theme.lightMode
-    })
-  );
+  const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
+    language: Language.language,
+    currency: Currency.currency,
+    isLightTheme: Theme.lightMode
+  }));
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const { pathToProducts } = routes;
@@ -35,8 +34,7 @@ const ProductListItem = ({ product }) => {
 
   const styles = useStyles({ image, isLightTheme });
 
-  const currencySign =
-    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
+  const currencySign = () => (currency === 0 ? faHryvnia : faDollarSign);
 
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
@@ -48,7 +46,7 @@ const ProductListItem = ({ product }) => {
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />
                 <span>
-                  <FontAwesomeIcon icon={currencySign} />
+                  <FontAwesomeIcon icon={handleCurrencySign(currency) ? currencySign() : ''} />
                   {product.basePrice[currency].value / 100}
                 </span>
               </span>

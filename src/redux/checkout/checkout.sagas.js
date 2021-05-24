@@ -32,11 +32,18 @@ import {
 import { getItems } from '../../utils/client';
 import { setError } from '../error/error.actions';
 import routes from '../../configs/routes';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { USER_IS_BLOCKED } from '../../configs';
+import { handleUserError } from '../user/user.sagas';
 
-function* handleErrors({ message }) {
-  yield put(setDeliveryLoading(false));
-  yield put(setError(message));
-  yield put(push(routes.pathToErrorPage));
+function* handleErrors(e) {
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setDeliveryLoading(false));
+    yield put(setError(e.message));
+    yield put(push(routes.pathToErrorPage));
+  }
 }
 
 export function* handleNovaPoshtaPrice({ payload }) {

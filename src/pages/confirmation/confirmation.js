@@ -14,6 +14,7 @@ const Confirmation = ({ token }) => {
     loading: User.userLoading,
     error: User.error
   }));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const Confirmation = ({ token }) => {
 
   // STYLES
   const styles = useStyles();
+
   return (
     <div className={styles.confirmation}>
       <div className={styles.welcome}>

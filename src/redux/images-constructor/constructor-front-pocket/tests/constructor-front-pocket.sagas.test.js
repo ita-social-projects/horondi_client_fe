@@ -11,7 +11,8 @@ import {
   methodPut,
   mockState
 } from '../../constructor.variables';
-import { handleConstructorFrontPocketLoad, handleError } from '../constructor-front-pocket.sagas';
+import { handleConstructorFrontPocketLoad } from '../constructor-front-pocket.sagas';
+import { handleError } from '../../constructor.sagas';
 import { getConstructorFrontPocketById } from '../constructor-front-pocket.operations';
 import constructorBottom from '../constructor-front-pocket.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';

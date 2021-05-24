@@ -93,8 +93,8 @@ const getFilteredProducts = async ({ state, currency }) => {
           models: $models
           currency: $currency
         }
-        skip: $skip
         limit: $limit
+        skip: $skip
         search: $search
         sort: { rate: $rate, basePrice: $basePrice, purchasedCount: $purchasedCount }
       ) {

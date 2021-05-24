@@ -1,20 +1,17 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 
 import { setCommentsLoading, setComments, setRate, setUpdatingComment } from './comments.actions';
-
 import {
   setSnackBarMessage,
   setSnackBarSeverity,
   setSnackBarStatus
 } from '../snackbar/snackbar.actions';
-
 import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
 import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from './comments.types';
 import { addComment, updateComment, deleteComment, changeRate } from './comments.operations';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
-import { setUserError } from '../user/user.actions';
-import { handleUserLogout } from '../user/user.sagas';
+import { handleUserError } from '../user/user.sagas';
 
 const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
 
@@ -83,9 +80,8 @@ export function* handleUpdateComment({ payload }) {
 }
 
 function* handleCommentsError(e) {
-  if (e.message === USER_IS_BLOCKED || e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
-    yield call(handleUserLogout);
-    yield put(setUserError(e.message));
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
   } else {
     yield put(setSnackBarSeverity('error'));
     yield put(setSnackBarMessage(error));

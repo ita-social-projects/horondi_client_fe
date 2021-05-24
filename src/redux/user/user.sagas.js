@@ -1,5 +1,6 @@
 import { call, put, takeEvery, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+
 import {
   setUser,
   setUserError,
@@ -49,10 +50,11 @@ import {
   cartKey,
   USER_IS_BLOCKED,
   USER_TOKENS,
-  wishlistKey,
+  WISHLIST_KEY,
   LANGUAGE,
   RETURN_PAGE,
-  SNACKBAR_TYPES
+  SNACKBAR_TYPES,
+  SNACKBAR_MESSAGE
 } from '../../configs';
 import routes from '../../configs/routes';
 import {
@@ -61,7 +63,7 @@ import {
   setToLocalStorage
 } from '../../services/local-storage.service';
 import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/cart.actions';
-import { setWishlist } from '../wishlist/wishlist.actions';
+import { setWishlist, resetWishlist } from '../wishlist/wishlist.actions';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_ERROR } from '../../translations/user.translations';
@@ -71,7 +73,7 @@ import {
   setSnackBarStatus
 } from '../snackbar/snackbar.actions';
 
-const { error } = SNACKBAR_TYPES;
+const { warning } = SNACKBAR_TYPES;
 const { pathToLogin, pathToProfile } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
@@ -83,7 +85,7 @@ export function* handleGoogleUserLogin({ payload }) {
 
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
     setToLocalStorage(ACCESS_TOKEN, user.token);
-    setToLocalStorage(wishlistKey, user.wishlist);
+    setToLocalStorage(WISHLIST_KEY, user.wishlist);
     yield put(setUser({ ...user, purchasedProducts }));
     yield put(push(pathToProfile));
   } catch (e) {
@@ -101,16 +103,16 @@ export function* handleUserLogin({ payload }) {
 
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
     setToLocalStorage(ACCESS_TOKEN, user.token);
-    setToLocalStorage(wishlistKey, user.wishlist);
+    setToLocalStorage(WISHLIST_KEY, user.wishlist);
     yield put(setUser({ ...user, purchasedProducts }));
     yield put(setWishlist(user.wishlist));
     const cartFromLc = getFromLocalStorage(cartKey);
-    if (cartFromLc.length) {
-      const mergedCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
-      yield put(setCart(mergedCart.cart.items));
-      yield put(setCartTotalPrice(mergedCart.cart.totalPrice));
-      setToLocalStorage(cartKey, mergedCart.cart.items);
-    }
+    const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
+
+    yield put(setCart(usersCart.cart.items));
+    yield put(setCartTotalPrice(usersCart.cart.totalPrice));
+    setToLocalStorage(cartKey, usersCart.cart.items);
+
     yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
@@ -163,17 +165,6 @@ export function* handlePasswordReset({ payload }) {
   }
 }
 
-export function* handleTokenCheck({ payload }) {
-  try {
-    yield put(resetState());
-    yield put(setUserLoading(true));
-    yield call(checkIfTokenIsValid, payload);
-    yield put(setUserLoading(false));
-  } catch (e) {
-    yield call(handleUserError, e);
-  }
-}
-
 export function* handleUserRegister({ payload }) {
   try {
     yield put(setUserLoading(true));
@@ -187,12 +178,12 @@ export function* handleUserRegister({ payload }) {
 
 export function* handleUserPreserve() {
   try {
+    yield put(setUserLoading(true));
     const accessToken = getFromLocalStorage(ACCESS_TOKEN);
     if (!accessToken) {
       return;
     }
 
-    yield put(setUserLoading(true));
     yield put(setCartLoading(true));
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
@@ -200,7 +191,6 @@ export function* handleUserPreserve() {
     const userCart = yield call(getCartByUserId, user._id);
     yield put(setCart(userCart.cart.items));
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
-    yield put(setCartLoading(false));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {
@@ -249,18 +239,35 @@ export function* handleGetUserOrders() {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(resetCart());
+  yield put(resetWishlist());
   clearLocalStorage();
 }
 
-function* handleUserError(e) {
+export function* handleTokenCheck({ payload }) {
+  try {
+    yield put(resetState());
+    yield put(setUserLoading(true));
+    yield call(checkIfTokenIsValid, payload);
+    yield put(setUserLoading(false));
+  } catch (e) {
+    yield call(handleUserError, e);
+  }
+}
+
+export function* handleRefreshTokenInvalid() {
+  yield call(handleUserLogout);
+  yield put(setSnackBarMessage(SNACKBAR_MESSAGE.tokenExpired));
+  yield put(setSnackBarSeverity(warning));
+  yield put(setSnackBarStatus(true));
+  yield put(push(pathToLogin));
+}
+
+export function* handleUserError(e) {
   const language = getFromLocalStorage(LANGUAGE);
   if (e?.message === USER_IS_BLOCKED) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
-    yield call(handleUserLogout);
-    yield put(setSnackBarStatus(true));
-    yield put(setSnackBarMessage(USER_ERROR[e.message][language].value));
-    yield put(setSnackBarSeverity(error));
+    yield call(handleRefreshTokenInvalid);
   } else if (USER_ERROR[e.message]) {
     yield put(setUserError(USER_ERROR[e.message][language].value));
   } else {

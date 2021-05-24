@@ -358,19 +358,6 @@ const getUserOrders = async () => {
   return result?.data?.getUserOrders;
 };
 
-const removeProductFromUserWishlist = async ({ id, productId, key }) => {
-  const removeProductFromUserWishlistMutation = `
-      mutation($id: ID!, $key: String!, $productId: ID!) {
-        removeProductFromWishlist(id: $id, productId: $productId, key: $key) {
-          _id
-        }
-      }
-    `;
-  const result = await setItems(removeProductFromUserWishlistMutation, { id, productId, key });
-
-  return result?.data?.removeProductFromWishlist;
-};
-
 const getPurchasedProducts = async (id) => {
   const getPurchasedProductsQuery = `
       query($id: ID!) {
@@ -382,19 +369,6 @@ const getPurchasedProducts = async (id) => {
   const result = await getItems(getPurchasedProductsQuery, { id });
 
   return result?.data?.getPurchasedProducts;
-};
-
-const addProductToUserWishlist = async (data) => {
-  const addProductToUserWishlistMutation = `
-      mutation($id: ID!, $key: String!, $productId: ID!) {
-        addProductToWishlist(id: $id, productId: $productId, key: $key) {
-          _id
-        }
-      }
-    `;
-  const result = await setItems(addProductToUserWishlistMutation, { data });
-
-  return result?.data?.addProductToWishlist;
 };
 
 const regenerateUserTokenPairs = async (refreshToken) => {
@@ -429,8 +403,6 @@ export {
   sendEmailConfirmation,
   getUserOrders,
   getUserByToken,
-  removeProductFromUserWishlist,
-  addProductToUserWishlist,
   regenerateUserTokenPairs,
   getPurchasedProducts
 };

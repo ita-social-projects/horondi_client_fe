@@ -6,6 +6,9 @@ import { setError } from '../error/error.actions';
 import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 import { getAllNews, getNewsById } from './news.operations';
 import routes from '../../configs/routes';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { USER_IS_BLOCKED } from '../../configs';
+import { handleUserError } from '../user/user.sagas';
 
 export function* handleNewsLoad() {
   try {
@@ -23,8 +26,8 @@ export function* handleArticleLoad({ payload }) {
     yield put(setLoading(true));
     const article = yield call(getNewsById, payload);
 
-    if (article.message) {
-      throw new Error(`${article.statusCode} ${article.message}`);
+    if (article?.message) {
+      throw new Error(article.message);
     }
 
     yield put(setArticle(article));
@@ -34,10 +37,14 @@ export function* handleArticleLoad({ payload }) {
   }
 }
 
-export function* handleNewsError({ message }) {
-  yield put(setLoading(false));
-  yield put(setError(message));
-  yield put(push(routes.pathToErrorPage));
+export function* handleNewsError(e) {
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setLoading(false));
+    yield put(setError(e.message));
+    yield put(push(routes.pathToErrorPage));
+  }
 }
 
 export default function* newsSaga() {

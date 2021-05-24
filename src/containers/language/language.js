@@ -8,7 +8,7 @@ import Dropdown from '../../components/dropdown';
 
 const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;
 
-const Language = ({ fromSideBar }) => {
+const LanguageComponent = ({ fromSideBar }) => {
   const dispatch = useDispatch();
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
@@ -45,4 +45,4 @@ const Language = ({ fromSideBar }) => {
   );
 };
 
-export default Language;
+export default LanguageComponent;

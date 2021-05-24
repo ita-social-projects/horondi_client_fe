@@ -11,7 +11,8 @@ import {
   methodPut,
   mockState
 } from '../../constructor.variables';
-import { handleConstructorBottomLoad, handleError } from '../constructor-bottom.sagas';
+import { handleConstructorBottomLoad } from '../constructor-bottom.sagas';
+import { handleError } from '../../constructor.sagas';
 import { getConstructorBottomById } from '../constructor-bottom.operations';
 import constructorBottom from '../constructor-bottom.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';

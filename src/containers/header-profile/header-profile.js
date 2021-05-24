@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
+import { useHistory } from 'react-router';
 import Menu from '@material-ui/core/Menu';
 import { MenuItem } from '@material-ui/core';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -15,11 +16,12 @@ import { useStyles } from './header-profile.styles';
 import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
-import { setUser } from '../../redux/user/user.actions';
-import { resetCart } from '../../redux/cart/cart.actions';
+import { logoutUser } from '../../redux/user/user.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
-import { DARK_THEME, LIGHT_THEME } from '../../configs';
+import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
+import routes from '../../configs/routes';
 
+const { pathToRegister, pathToLogin, pathToMain } = routes;
 const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
     userData: User.userData,
@@ -31,6 +33,7 @@ const HeaderProfile = ({ fromSideBar }) => {
 
   const dispatch = useDispatch();
   const styles = useStyles({ fromSideBar });
+  const history = useHistory();
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
 
   useEffect(() => {
@@ -59,11 +62,7 @@ const HeaderProfile = ({ fromSideBar }) => {
   };
 
   const handleLogout = () => {
-    dispatch(setUser(null));
-    dispatch(resetCart());
-    setToLocalStorage('accessToken', null);
-    setToLocalStorage('refreshToken', null);
-    setToLocalStorage('cart', []);
+    dispatch(logoutUser());
     setAnchorEl(null);
   };
 
@@ -89,7 +88,14 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].logIn,
       icon: <ExitToAppIcon />,
-      clickHandler: () => handleRedirect('/login')
+      clickHandler: () => {
+        const pathName = history.location.pathname;
+        const returnPath =
+          (pathName === pathToRegister || pathName === pathToLogin ? pathToMain : pathName) +
+          history.location.search;
+        sessionStorage.setItem(RETURN_PAGE, returnPath);
+        handleRedirect(pathToLogin);
+      }
     }
   ];
 

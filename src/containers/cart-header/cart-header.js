@@ -10,6 +10,7 @@ import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import { useStyles } from './cart-header.styles';
 import { getCart } from '../../redux/cart/cart.actions';
+import { cartKey } from '../../configs';
 
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const CartHeader = ({ fromSideBar }) => {
       {!cartLoading && (
         <span className={styles.cartIconWrapper}>
           <Link to='/cart'>
-            <IconButton className={styles.root} aria-label='cart' tabIndex={-1}>
+            <IconButton className={styles.root} aria-label={cartKey} tabIndex={-1}>
               <Badge badgeContent={itemsCount} color='secondary'>
                 <ShoppingBasketIcon />
               </Badge>

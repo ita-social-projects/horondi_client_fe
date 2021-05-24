@@ -1,5 +1,4 @@
-import { gql } from '@apollo/client';
-import { client } from '../../utils/client';
+import { getItems, setItems } from '../../utils/client';
 
 const cartReqBody = `
 items {
@@ -54,7 +53,7 @@ items {
 }
 `;
 
-const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
+const mergeCartFromLSWithUserCart = async (cartFromLc, id) => {
   const getCartInput = (cart) =>
     cart.map((item) => ({
       product: item.product._id,
@@ -65,192 +64,170 @@ const megreCartFromLCwithUserCart = async (cartFromLc, id) => {
     }));
   const items = getCartInput(cartFromLc);
 
-  const res = await client.mutate({
-    variables: {
-      items,
-      id
-    },
-    mutation: gql`
-        mutation($items: [CartFromLSInput!], $id: ID!) {
-            mergeCartFromLS(items: $items, id: $id) {
-            ... on User {
-                _id
-                firstName
-                cart {
-                    ${cartReqBody}
-                totalPrice{
-                    currency
-                    value
-                }
-                }
-            }
-            ... on Error {
-                message
-                statusCode
-            }
-            }
+  const mergeCartFromLSMutation = `
+    mutation($items: [CartFromLSInput!], $id: ID!) {
+      mergeCartFromLS(items: $items, id: $id) {
+      ... on User {
+        _id
+        firstName
+        cart {
+            ${cartReqBody}
+          totalPrice{
+              currency
+              value
+          }
         }
-    `,
-    fetchPolicy: 'no-cache'
-  });
-  return res.data.mergeCartFromLS;
+      }
+      ... on Error {
+        message
+        statusCode
+      }
+    }
+  }
+  `;
+  const result = await setItems(mergeCartFromLSMutation, { items, id });
+
+  return result?.data?.mergeCartFromLS;
 };
 
 const getCartByUserId = async (userId) => {
-  const result = await client.query({
-    variables: {
-      id: userId
-    },
-    query: gql`
-      query($id:ID!){
-        getCartByUserId(id: $id) {
-          ... on User {
-            cart {
-              ${cartReqBody}
-              totalPrice {
-                value
-              }
+  const getCartByUserIdQuery = `
+    query($id:ID!){
+      getCartByUserId(id: $id) {
+        ... on User {
+          cart {
+            ${cartReqBody}
+            totalPrice {
+              value
             }
           }
         }
       }
-    `,
-    fetchPolicy: 'no-cache'
-  });
-  return result.data.getCartByUserId;
+    }
+  `;
+  const result = await getItems(getCartByUserIdQuery, { id: userId });
+
+  return result?.data?.getCartByUserId;
 };
 
 const cleanCart = async (userId) => {
-  const result = await client.mutate({
-    variables: {
-      id: userId
-    },
-    mutation: gql`
-      mutation($id: ID!) {
-        cleanCart(id: $id) {
-          ... on User {
-            _id
-          }
-          ... on Error {
-            message
-            statusCode
-          }
+  const cleanCartMutation = `
+    mutation($id: ID!) {
+      cleanCart(id: $id) {
+        ... on User {
+          _id
+        }
+        ... on Error {
+          message
+          statusCode
         }
       }
-    `,
-    fetchPolicy: 'no-cache'
-  });
-  return result.data.cleanCart;
+    }
+  `;
+  const result = await setItems(cleanCartMutation, { id: userId });
+
+  return result?.data?.cleanCart;
 };
 
 const addProductToCart = async (userId, cartItem) => {
-  const result = await client.mutate({
-    variables: {
-      productId: cartItem.product._id,
-      sizeId: cartItem.options.size._id,
-      id: userId
-    },
-    mutation: gql`
-        mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
-            addProductToCart(productId: $productId, sizeId: $sizeId,id:$id) {
-                ... on User {
-                    _id
-                    firstName
-                    cart {
-                        ${cartReqBody}
-                    totalPrice{
-                        currency
-                        value
-                    }
-                    }
-                }
-            ... on Error {
-                message
-                statusCode
+  const addProductToCartMutation = `
+    mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
+      addProductToCart(productId: $productId, sizeId: $sizeId,id:$id) {
+        ... on User {
+          _id
+          firstName
+          cart {
+            ${cartReqBody}
+            totalPrice{
+              currency
+              value
             }
-            }
+          }
         }
-      `,
-    fetchPolicy: 'no-cache'
+        ... on Error {
+          message
+          statusCode
+        }
+      }
+    }
+  `;
+  const result = await setItems(addProductToCartMutation, {
+    productId: cartItem.product._id,
+    sizeId: cartItem.options.size._id,
+    id: userId
   });
-  return result.data.addProductToCart;
+
+  return result?.data?.addProductToCart;
 };
 
-const DeleteProductFromCart = async (userId, cartItems) => {
-  console.log(cartItems);
-  console.log(userId);
-  const result = await client.mutate({
-    variables: {
-      items: cartItems,
-      id: userId
-    },
-    mutation: gql`
-        mutation($items: RemoveItemsFromCartInput!, $id:ID!) {
-          removeProductItemsFromCart(items: $items,id:$id) {
-                ... on User {
-                    _id
-                    firstName
-                    cart {
-                        ${cartReqBody}
-                    totalPrice{
-                        currency
-                        value
-                    }
-                    }
-                }
-            ... on Error {
-                message
-                statusCode
-            }
-            }
+const deleteProductFromCart = async (userId, cartItems) => {
+  const deleteProductFromCartMutation = `
+    mutation($items: RemoveItemsFromCartInput!, $id:ID!) {
+      removeProductItemsFromCart(items: $items,id:$id) {
+        ... on User {
+          _id
+          firstName
+          cart {
+            ${cartReqBody}
+          totalPrice{
+            currency
+            value
+          }
+          }
         }
-      `,
-    fetchPolicy: 'no-cache'
+        ... on Error {
+          message
+          statusCode
+        }
+      }
+    }
+  `;
+  const result = await setItems(deleteProductFromCartMutation, {
+    items: cartItems,
+    id: userId
   });
-  return result.data.removeProductItemsFromCart;
+
+  return result?.data?.removeProductItemsFromCart;
 };
 
 const updateCartItemQuantity = async (payload) => {
   const { item, value, userId } = payload;
-
-  const result = await client.mutate({
-    variables: {
-      productId: item.product._id,
-      quantity: value,
-      sizeId: item.options.size._id,
-      id: userId
-    },
-    mutation: gql`
-        mutation($productId: ID!,$quantity:Int!, $sizeId: ID!, $id:ID!) {
-            updateCartItemQuantity(productId: $productId,quantity:$quantity, sizeId: $sizeId,id:$id) {
-                ... on User {
-                    _id
-                    firstName
-                    cart {
-                        ${cartReqBody}
-                    totalPrice{
-                        currency
-                        value
-                    }
-                    }
-                }
-            ... on Error {
-                message
-                statusCode
+  const updateCartItemQuantityMutation = `
+    mutation($productId: ID!,$quantity:Int!, $sizeId: ID!, $id:ID!) {
+      updateCartItemQuantity(productId: $productId,quantity:$quantity, sizeId: $sizeId,id:$id) {
+        ... on User {
+          _id
+          firstName
+          cart {
+            ${cartReqBody}
+            totalPrice{
+              currency
+              value
             }
-            }
+          }
         }
-      `,
-    fetchPolicy: 'no-cache'
+      ... on Error {
+        message
+        statusCode
+      }
+      }
+    }
+  `;
+  const result = await setItems(updateCartItemQuantityMutation, {
+    productId: item.product._id,
+    quantity: value,
+    sizeId: item.options.size._id,
+    id: userId
   });
-  return result.data.updateCartItemQuantity;
+
+  return result?.data?.updateCartItemQuantity;
 };
 
 export {
-  megreCartFromLCwithUserCart,
+  mergeCartFromLSWithUserCart,
   getCartByUserId,
   cleanCart,
   addProductToCart,
-  DeleteProductFromCart,
+  deleteProductFromCart,
   updateCartItemQuantity
 };

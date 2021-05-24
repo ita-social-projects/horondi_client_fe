@@ -16,11 +16,10 @@ import { HOME_BUTTONS } from '../../translations/homepage.translations';
 import { IMG_URL } from '../../configs';
 
 const ModelItem = ({ model }) => {
-  const { language, filterData } = useSelector(({ Language, Products }) => ({
+  const { language, products } = useSelector(({ Language, Products }) => ({
     language: Language.language,
-    filterData: Products.filterData
+    products: Products.products
   }));
-
   const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
@@ -34,8 +33,8 @@ const ModelItem = ({ model }) => {
     dispatch(setHotItemFilter(false));
     dispatch(
       setPriceFilter([
-        Math.min(...filterData.map((product) => product.basePrice[0].value)),
-        Math.max(...filterData.map((product) => product.basePrice[0].value))
+        Math.min(...products.map((product) => product.basePrice[0].value)),
+        Math.max(...products.map((product) => product.basePrice[0].value))
       ])
     );
     history.push(pathToModel);

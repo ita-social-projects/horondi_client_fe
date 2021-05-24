@@ -18,7 +18,7 @@ export const CART_BUTTON_TITLES = {
     empty: 'Обрати зараз',
     goods: 'Продовжити покупки',
     checkout: 'Створити замовлення',
-    deleteAllCart: 'Очистити всю корзину',
+    deleteAllCart: 'Очистити весь кошик',
     editCancel: 'Припинити редагування',
     toWishlist: 'Перемістити у вподобані товари',
     remove: 'Видалити',

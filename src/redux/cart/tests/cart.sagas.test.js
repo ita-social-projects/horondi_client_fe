@@ -1,16 +1,10 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
-import {
-  handleCartLoad,
-  handleAddCartItem,
-  handleRemoveCartItem
-} from '../cart.sagas';
+import { handleCartLoad, handleAddCartItem, handleRemoveCartItem } from '../cart.sagas';
 import { SET_CART } from '../cart.types';
-import {
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../../services/local-storage.service';
 import { addItemToCart, removeItemFromCart } from '../cart.actions';
+import { cartKey } from '../../../configs';
 
 describe('Cart saga', () => {
   let products;
@@ -22,7 +16,7 @@ describe('Cart saga', () => {
       { _id: 1, name: 'Pumpkin', selectedSize: 'M' },
       { _id: 2, name: 'Cherry', selectedSize: 'S' }
     ];
-    setToLocalStorage('cart', products);
+    setToLocalStorage(cartKey, products);
   });
 
   it.skip('fetching cart items from local storage and set to redux store', () =>
@@ -75,7 +69,7 @@ describe('Cart saga', () => {
       { _id: 1, name: 'Pumpkin', selectedSize: 'M' },
       { _id: 1, name: 'Pumpkin', selectedSize: 'L' }
     ];
-    setToLocalStorage('cart', fakeItems);
+    setToLocalStorage(cartKey, fakeItems);
     const productToRemove = removeItemFromCart(fakeItems[0]);
 
     return expectSaga(handleRemoveCartItem, productToRemove)

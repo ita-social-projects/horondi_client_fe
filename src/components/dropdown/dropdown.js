@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
+import { noop } from 'lodash';
 import { dropdownStyles } from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) => {
@@ -34,7 +35,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   mappedItems: [],
-  handler: () => {},
+  handler: noop,
   defaultValue: 0,
   value: 0,
   fromSideBar: false,

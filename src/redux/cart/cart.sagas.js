@@ -1,4 +1,4 @@
-import { takeEvery, put, call} from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 
 import {
   setCart,
@@ -23,13 +23,14 @@ import {
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { cartKey, deliveryTypeKey, USER_IS_BLOCKED } from '../../configs/index';
 import {
-  DeleteProductFromCart,
+  deleteProductFromCart,
   addProductToCart,
   getCartByUserId,
   updateCartItemQuantity,
   cleanCart
 } from './cart.operations';
-import { handleIsUserBlockedChecker } from '../../utils/is-user-blocked-checker';
+import { handleUserError } from '../user/user.sagas';
+import { AUTH_ERRORS } from '../../const/error-messages';
 
 export function* handleCartLoad() {
   const cart = yield getFromLocalStorage(cartKey);
@@ -43,8 +44,7 @@ export function* handleCartLoadByUserID(payload) {
     yield put(setCart(userCart));
     yield put(setCartLoading(false));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -60,11 +60,10 @@ export function* handleClearUserCart({ payload }) {
     yield put(setCartLoading(true));
     yield call(cleanCart, payload);
     yield put(setCart([]));
-    yield setToLocalStorage(cartKey, []);
+    setToLocalStorage(cartKey, []);
     yield put(setCartLoading(false));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -106,11 +105,13 @@ export function* handleAddCartItem({ payload }) {
 
 export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
-  const newCart = cart.filter(item => {
-    if(!(item.product._id===payload.product._id&&item.options.size._id===payload.options.size._id)){
-      return item;
-    }
-  })
+  const newCart = cart.filter(
+    (item) =>
+      !(
+        item.product._id === payload.product._id &&
+        item.options.size._id === payload.options.size._id
+      )
+  );
   setToLocalStorage(cartKey, newCart);
   yield put(setCart(newCart));
 }
@@ -120,17 +121,12 @@ export function* handleAddProductToUserCart({ payload }) {
   try {
     yield put(setCartLoading(true));
     const newCartList = yield call(addProductToCart, userId, cartItem);
-    if (newCartList?.message === USER_IS_BLOCKED) {
-      yield call(handleIsUserBlockedChecker);
-    } else {
-      yield put(setCart(newCartList.cart.items));
-      yield put(setCartTotalPrice(newCartList.cart.totalPrice));
-      setToLocalStorage(cartKey, newCartList.cart.items);
-      yield put(setCartLoading(false));
-    }
+    yield put(setCart(newCartList.cart.items));
+    yield put(setCartTotalPrice(newCartList.cart.totalPrice));
+    setToLocalStorage(cartKey, newCartList.cart.items);
+    yield put(setCartLoading(false));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -141,18 +137,17 @@ export function* handleDeleteProductFromUserCart({ payload }) {
     options: {
       size: items.options.size._id
     }
-  }
+  };
 
   try {
     yield put(setCartLoading(true));
-    const newCartList = yield call(DeleteProductFromCart, userId, itemsForDeleteInput);
+    const newCartList = yield call(deleteProductFromCart, userId, itemsForDeleteInput);
     yield put(setCart(newCartList.cart.items));
     yield put(setCartTotalPrice(newCartList.cart.totalPrice));
     yield put(setCartLoading(false));
     setToLocalStorage(cartKey, newCartList.cart.items);
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
   }
 }
 
@@ -175,8 +170,15 @@ export function* handleSetCartItemUserQuantity({ payload }) {
     yield put(setCart(newCartList.cart.items));
     yield put(setCartTotalPrice(newCartList.cart.totalPrice));
   } catch (err) {
-    yield put(setCartError(err));
-    yield put(setCartLoading(true));
+    yield call(handleCartError, err);
+  }
+}
+function* handleCartError(e) {
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setCartError(e.message));
+    yield put(setCartLoading(false));
   }
 }
 

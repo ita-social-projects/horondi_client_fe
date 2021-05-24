@@ -1,11 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+
 import { getConstructorBasicById } from './constructor-basic.operations';
 import { GET_CONSTRUCTOR_BASIC } from './constructor-basic.types';
 import { setConstructorBasic } from './constructor-basic.actions';
-import { setModelLoading } from '../constructor-model/constructor-model.actions';
-import { setError } from '../../error/error.actions';
-import routes from '../../../configs/routes';
+import { handleError } from '../constructor.sagas';
 
 export function* handleConstructorBasicLoad({ payload: id }) {
   try {
@@ -14,12 +12,6 @@ export function* handleConstructorBasicLoad({ payload: id }) {
   } catch (e) {
     yield call(handleError, e);
   }
-}
-
-export function* handleError(e) {
-  yield put(setModelLoading(true));
-  yield put(setError(e.message));
-  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* constructorBasicSaga() {

@@ -41,7 +41,7 @@ export const USER_REGISTER_LABELS = {
   text: 'text'
 };
 export const USER_TOKENS = {
-  ACCES_TOKEN: 'accessToken',
+  ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken'
 };
 
@@ -59,7 +59,7 @@ export const CHAT_FACEBOOK_DATA = {
 export const LOGIN_USER_DATA = {
   email: '',
   password: '',
-  staySignedIn: false
+  staySignedIn: true
 };
 
 export const PROFILE_USER_DATA = {
@@ -251,25 +251,6 @@ export const URL_QUERIES_NAME = {
   defaultPage: '1'
 };
 
-export const FAKE_PRODUCT_FOR_TEST = {
-  _id: 'xdfgbvc3',
-  name: {
-    0: { value: 'гарбуз' },
-    1: { value: 'Pumpkin' }
-  },
-  bagBottom: 'Натуральна шкіра',
-  selectedSize: 'S',
-  sidePocket: {
-    isSelected: true
-  },
-  totalPrice: 1200,
-  images:
-    'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/47230850_1840441399415884_8917409871041658880_o.jpg?_nc_cat=102&_nc_sid=8bfeb9&_nc_ohc=hm88c7z3vA8AX-1Hz30&_nc_ht=scontent.flwo4-2.fna&oh=72d7ebf7aaa8fee317e60c68bbc8a987&oe=5F47F0CA',
-  quantity: 1,
-  productUrl: '/backpacks/foweoo423'
-};
-
-export const INPUT_VARIANT = 'outlined';
 export const REDIRECT_TIMEOUT = 3000;
 export const RESPONSIVE_PDP = {
   superLargeDesktop: {
@@ -315,7 +296,11 @@ export const SNACKBAR_MESSAGE = {
   updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
   deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong'],
-  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.']
+  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.'],
+  tokenExpired: [
+    'Данні авторизації застарілі, будь ласка авторизуйтеся',
+    'You have be logged out, please sign in again'
+  ]
 };
 export const COMMENT_DATA = {
   firstName: '',
@@ -434,14 +419,13 @@ export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Not
 
 export const commentsLimit = 10;
 
-export const DEFAULT_SIZE = 'M';
-
 export const cookiePolicy = {
   SINGLE_HOST_ORIGIN: 'single_host_origin'
 };
 
 export const cartKey = 'cart';
-export const wishlistKey = 'wishlist';
+export const LANGUAGE = 'language';
+export const WISHLIST_KEY = 'wishlist';
 export const sort = 'sort';
 export const countPerPage = 'countPerPage';
 export const page = 'page';
@@ -460,6 +444,8 @@ export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';
 
 export const SNACKBAR_TYPES = {
   error: 'error',
+  warning: 'warning',
+  info: 'info',
   success: 'success'
 };
 
@@ -471,3 +457,7 @@ export const SESSION_STORAGE = {
 };
 
 export const HORONDI = 'horondi';
+
+export const FETCH_POLICY = 'no-cache';
+
+export const RETURN_PAGE = 'returnPage';

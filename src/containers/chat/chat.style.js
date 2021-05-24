@@ -25,7 +25,8 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       width: '40px',
       height: '40px',
-      boxShadow: ' 0 0 10px white'
+      boxShadow: ' 0 0 10px white',
+      zIndex: 1200
     },
     '&:hover': {
       cursor: 'pointer',
@@ -79,8 +80,14 @@ export const useStyles = makeStyles((theme) => ({
     bottom: '12%',
     width: '320px',
     height: '600px',
+    zIndex: 1200,
     background: themeMode ? 'white' : '#232323',
-    boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)'
+    boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      right: 0,
+      top: '40px'
+    }
   }),
   cancelIcon: {
     position: 'absolute',

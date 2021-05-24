@@ -11,7 +11,8 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       '& .react-multiple-carousel__arrow': {
         width: '40px !important',
-        height: '40px !important'
+        height: '40px !important',
+        zIndex: 0
       }
     },
     '& > div': {

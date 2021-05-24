@@ -41,12 +41,6 @@ const SearchBarListItem = ({ product }) => {
           </div>
         </div>
         <div className={styles.buttons}>
-          {/*  <ClassicButton
-            buttonType='button'
-            innerText={<ShoppingBasketIcon />}
-            onClickHandler={() => {}}
-            buttonStyle='classic'
-          /> */}
           <ClassicButton
             buttonType='button'
             innerText={HOME_BUTTONS[language].DETAILS}

@@ -63,7 +63,9 @@ export const useStyles = makeStyles((theme) => ({
     height: '2rem',
     '@media (max-width: 950px)': {
       marginBottom: '1.5rem',
-      marginTop: '15px'
+      marginTop: '15px',
+      width: '100%',
+      padding: 0
     },
     '& p': {
       position: 'absolute',
@@ -88,7 +90,8 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: '1rem'
     },
     '@media (max-width: 600px)': {
-      width: '78vw'
+      width: '100%',
+      padding: 0
     },
     '& p': {
       position: 'absolute',

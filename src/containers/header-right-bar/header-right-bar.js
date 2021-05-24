@@ -1,8 +1,8 @@
 import React from 'react';
 import { useStyles } from './header-right-bar.styles';
 
-import Currency from '../currency';
-import Language from '../language';
+import Currency from '../currency-header/currency-header';
+import Language from '../language-header/language-header';
 import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';

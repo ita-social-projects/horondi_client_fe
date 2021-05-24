@@ -5,11 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useStyles } from './profile-page.styles';
 import ProfilePicture from '../../images/profile.png';
-import {
-  updateUser,
-  sendConfirmationEmail,
-  recoverUser
-} from '../../redux/user/user.actions';
+import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
 import {
   PROFILE_LABELS,
@@ -23,6 +19,12 @@ import {
   errorMessages,
   REQUIRED_USER_FIELDS
 } from '../../configs/index';
+import {
+  handleProfilePage,
+  handleClassName,
+  handleText,
+  handleProfileImg
+} from '../../utils/handle-profile-page';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -58,34 +60,19 @@ const ProfilePage = () => {
           errorMessages[language].value[item]
         );
         REQUIRED_USER_FIELDS.includes(item) &&
-          (fieldSchema = fieldSchema.required(
-            errorMessages[language].value[item]
-          ));
+          (fieldSchema = fieldSchema.required(errorMessages[language].value[item]));
         return [item, fieldSchema];
       })
     )
   );
 
-  const handleSaveUser = ({
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    ...address
-  }) => {
+  const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
     const user = { firstName, lastName, email, phoneNumber, address };
     dispatch(updateUser({ user, id: userData._id, upload }));
     setShouldValidate(false);
   };
 
-  const {
-    errors,
-    values,
-    resetForm,
-    dirty,
-    handleSubmit,
-    handleChange
-  } = useFormik({
+  const { errors, values, resetForm, dirty, handleSubmit, handleChange } = useFormik({
     initialValues: {},
     onSubmit: handleSaveUser,
     validationSchema,
@@ -139,13 +126,13 @@ const ProfilePage = () => {
       <div>
         {userLoading ? (
           <div className={classes.userForm}>
-            <Loader gridColumn={'span 3'} />
+            <Loader gridColumn='span 3' />
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={classes.userForm}>
             <div className={classes.imageContainer}>
               <img
-                src={userImageUrl || ProfilePicture}
+                src={handleProfileImg(userImageUrl)}
                 alt='profile-logo'
                 className={classes.userImage}
                 onError={handleImageError}
@@ -155,7 +142,7 @@ const ProfilePage = () => {
                 className={classes.photoUpload}
                 id='photoUpload'
                 onChange={handleImageLoad}
-                multiple={true}
+                multiple
                 accept='image/*'
               />
               <label htmlFor='photoUpload' className={classes.uploadLabel}>
@@ -169,16 +156,18 @@ const ProfilePage = () => {
                 key={name}
                 type='text'
                 name={name}
-                value={values[name] || ''}
+                value={handleText(values, name)}
                 label={PROFILE_LABELS[language][name]}
                 fullWidth
                 color='primary'
                 error={!!errors[name]}
-                helperText={errors[name] || ''}
-                className={`${classes.dataInput} ${
-                  (name === 'firstName' || name === 'lastName') &&
-                  classes.nameInputs
-                } ${name === 'email' && classes.afterText}`}
+                helperText={handleText(errors, name)}
+                className={handleClassName(
+                  classes.dataInput,
+                  classes.nameInputs,
+                  classes.afterText,
+                  name
+                )}
                 onChange={handleChange}
               />
             ))}
@@ -205,15 +194,12 @@ const ProfilePage = () => {
               <span className={classes.recoverPasswordText}>
                 {!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}
               </span>
-              {userRecovered ? (
-                <h3>{PROFILE_PASSWORD_CHANGE[language].checkEmailText}</h3>
-              ) : (
-                <Button
-                  className={classes.button}
-                  onClick={handlePasswordChange}
-                >
-                  {PROFILE_PASSWORD_CHANGE[language].btnTitle}
-                </Button>
+              {handleProfilePage(
+                userRecovered,
+                PROFILE_PASSWORD_CHANGE,
+                language,
+                handlePasswordChange,
+                classes.button
               )}
             </>
           )}
@@ -225,15 +211,12 @@ const ProfilePage = () => {
             ) : (
               <>
                 <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
-                {confirmationEmailSent ? (
-                  <h3>{PROFILE_EMAIL_CONFIRM[language].checkEmailText}</h3>
-                ) : (
-                  <Button
-                    className={classes.button}
-                    onClick={handleConfirmation}
-                  >
-                    {PROFILE_EMAIL_CONFIRM[language].btnTitle}
-                  </Button>
+                {handleProfilePage(
+                  confirmationEmailSent,
+                  PROFILE_EMAIL_CONFIRM,
+                  language,
+                  handleConfirmation,
+                  classes.button
                 )}
               </>
             )}

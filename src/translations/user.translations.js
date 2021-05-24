@@ -41,6 +41,15 @@ export const REGISTER_FORM_LABEL = [
   }
 ];
 
+export const CONTINUE_SHOPPING_LABEL = [
+  {
+    value: 'Продовжити покупки'
+  },
+  {
+    value: 'Continue shopping'
+  }
+];
+
 export const EMPTY_FIELD = [
   {
     value: 'Заповніть поле'

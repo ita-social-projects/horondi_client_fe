@@ -2,6 +2,8 @@ import React, { useLayoutEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
 import clsx from 'clsx';
+import { noop } from 'lodash';
+
 import { dropdownStyles } from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue, fromSideBar }) => {
@@ -38,7 +40,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   mappedItems: [],
-  handler: () => {},
+  handler: noop,
   defaultValue: 0,
   fromSideBar: false,
   styles: {

@@ -22,6 +22,11 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     right: '12px',
     transition: 'background 0.3s',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height: '40px',
+      boxShadow: ' 0 0 10px white'
+    },
     '&:hover': {
       cursor: 'pointer',
       background: '#E4B200'
@@ -31,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
-    zIndex: '3',
+    zIndex: '100',
     bottom: '110px',
     top: 'auto',
     height: '60px',
@@ -143,7 +148,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: theme.palette.white,
-    fontSize: '35px'
+    fontSize: '35px',
+    '@media (max-width: 768px)': {
+      fontSize: '25px !important'
+    }
   },
   activeMsgWrapper: {
     height: '65%',

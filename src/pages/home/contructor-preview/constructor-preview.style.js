@@ -19,8 +19,8 @@ export const useStyles = makeStyles((theme) => ({
       zIndex: 1,
       background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
     },
-    '@media (max-width:768px)': {
-      '& video': {
+    '& video': {
+      '@media (max-width: 768px)': {
         width: '150% !important'
       }
     }
@@ -51,6 +51,10 @@ export const useStyles = makeStyles((theme) => ({
     color: 'white',
     fontSize: '3em',
     display: 'flex',
+    '@media (max-width: 768px)': {
+      fontSize: '25px',
+      marginLeft: '25px'
+    },
     '& svg': {
       marginLeft: '10px',
       fontSize: '1.4em'

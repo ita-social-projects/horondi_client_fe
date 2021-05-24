@@ -9,6 +9,9 @@ export const scrollBarStyles = makeStyles(() => ({
     top: '50%',
     transform: 'translateY(-50%)',
     zIndex: 10,
+    '@media (max-width: 768px)': {
+      display: 'none'
+    },
     '&:before': {
       content: `''`,
       position: 'absolute',

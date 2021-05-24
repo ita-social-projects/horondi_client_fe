@@ -43,7 +43,7 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell data-cy='cart-item-img'>
+      <TableCell classes={{ root: styles.photoCart }} data-cy='cart-item-img'>
         <Link to={`/product/${item.product._id}`}>
           <img
             className={styles.itemImg}
@@ -96,7 +96,7 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
           )}
         </div>
       </TableCell>
-      <TableCell>
+      <TableCell classes={{ root: styles.delete }}>
         <span className={styles.deleteIcon}>
           <DeleteIcon onClick={onDeleteItem} fontSize='default' />
         </span>

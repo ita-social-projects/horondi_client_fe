@@ -1,24 +1,33 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 
+import clsx from 'clsx';
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
 import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
-import HeaderRightBar from '../header-right-bar';
+import HeaderRightBar from '../sidemenu-right-bar/sidemenu-right-bar';
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
-  const { language, burgerMenuCategories } = useSelector(
-    ({ Language, BurgerMenu }) => ({
-      language: Language.language,
-      burgerMenuCategories: BurgerMenu.categories
-    })
-  );
+  const [sticky, setSticky] = useState(false);
+  const sidebar = clsx({
+    [styles.drawer]: true,
+    [styles.sticky]: sticky
+  });
+  useLayoutEffect(() => {
+    window.addEventListener('scroll', () => {
+      window.scrollY > 50 ? setSticky(true) : setSticky(false);
+    });
+  }, []);
+  const { language, burgerMenuCategories } = useSelector(({ Language, BurgerMenu }) => ({
+    language: Language.language,
+    burgerMenuCategories: BurgerMenu.categories
+  }));
 
   const categoriesList = useMemo(
     () =>
@@ -51,26 +60,17 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
 
   return (
     <Drawer
-      className={styles.drawer}
+      className={sidebar}
       anchor='left'
       open={isMenuOpen}
       onClose={() => setIsMenuOpen(false)}
     >
       <List>{categoriesList}</List>
-      <Link
-        to='/constructor'
-        className={styles.mainItem}
-        onClick={() => setIsMenuOpen(false)}
-      >
-        <span className={styles.constructorItem}>
-          {CONSTRUCTOR[language].value}
-        </span>
+      <Link to='/constructor' className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
+        <span className={styles.constructorItem}>{CONSTRUCTOR[language].value}</span>
       </Link>
       {subList}
-      <FooterLinks
-        socialIconsStyles={styles.socialIconsStyles}
-        position='center'
-      />
+      <FooterLinks socialIconsStyles={styles.socialIconsStyles} position='center' />
       <HeaderRightBar fromSideBar />
     </Drawer>
   );

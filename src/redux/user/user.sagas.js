@@ -266,7 +266,7 @@ export function* handleUserError(e) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
-  } else if (USER_ERROR[e.message]) {
+  } else if (USER_ERROR[e?.message]) {
     yield put(setUserError(USER_ERROR[e.message][language].value));
   } else {
     yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));

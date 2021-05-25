@@ -1,6 +1,5 @@
 import React from 'react';
 import { WELCOME_MESSAGE } from '../translations/user.translations';
-import Error from '../pages/error-page/error-page';
 
 export const handleMessage = (error, language) =>
   error ? (

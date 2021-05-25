@@ -11,13 +11,11 @@ import { ERROR_PAGE_MESSAGE, LINK_TO_HOMEPAGE } from '../../translations/errorpa
 const ErrorPage = () => {
   const dispatch = useDispatch();
 
-  const { language, isLightTheme, errorMessage } = useSelector(
-    ({ Language, Theme, Error, User }) => ({
-      language: Language.language,
-      isLightTheme: Theme.lightMode,
-      errorMessage: Error.error
-    })
-  );
+  const { language, isLightTheme, errorMessage } = useSelector(({ Language, Theme, Error }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode,
+    errorMessage: Error.error
+  }));
 
   useEffect(() => {
     if (!errorMessage) {

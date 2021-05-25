@@ -10,10 +10,9 @@ import { handleMessage } from '../../utils/handle-confirmation';
 
 const Confirmation = ({ token }) => {
   // HOOKS
-  const { language, loading, error, emailError } = useSelector(({ User, Language }) => ({
+  const { language, loading, emailError } = useSelector(({ User, Language }) => ({
     language: Language.language,
     loading: User.userLoading,
-    error: User.error,
     emailError: User.emailError
   }));
 
@@ -30,7 +29,7 @@ const Confirmation = ({ token }) => {
 
   // STYLES
   const styles = useStyles();
-  console.log('email', emailError);
+
   return (
     <div className={styles.confirmation}>
       <div className={styles.welcome}>

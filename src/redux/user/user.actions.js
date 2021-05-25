@@ -26,7 +26,8 @@ import {
   ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
   REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
   LOGIN_BY_GOOGLE,
-  SET_DELETE_USER
+  SET_DELETE_USER,
+  SET_EMAIL_ERROR
 } from './user.types';
 
 const setUser = (user) => ({
@@ -51,6 +52,11 @@ const confirmUser = (payload) => ({
 
 const setUserError = (error) => ({
   type: SET_USER_ERROR,
+  payload: error
+});
+
+const setEmailError = (error) => ({
+  type: SET_EMAIL_ERROR,
   payload: error
 });
 
@@ -192,5 +198,6 @@ export {
   getUserOrders,
   addProductToUserCartOrWishlist,
   removeProductFromUserCartOrWishlist,
-  deleteUserDataFromStore
+  deleteUserDataFromStore,
+  setEmailError
 };

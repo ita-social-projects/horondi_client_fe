@@ -6,16 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
-import {
-  ERROR_PAGE_MESSAGE,
-  LINK_TO_HOMEPAGE
-} from '../../translations/errorpage.translations';
+import { ERROR_PAGE_MESSAGE, LINK_TO_HOMEPAGE } from '../../translations/errorpage.translations';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
 
   const { language, isLightTheme, errorMessage } = useSelector(
-    ({ Language, Theme, Error }) => ({
+    ({ Language, Theme, Error, User }) => ({
       language: Language.language,
       isLightTheme: Theme.lightMode,
       errorMessage: Error.error
@@ -30,9 +27,7 @@ const ErrorPage = () => {
 
   const styles = useStyles();
 
-  const errorImagePath = isLightTheme
-    ? ERROR_PAGE_IMAGES.light
-    : ERROR_PAGE_IMAGES.dark;
+  const errorImagePath = isLightTheme ? ERROR_PAGE_IMAGES.light : ERROR_PAGE_IMAGES.dark;
 
   return (
     <div className={styles.wrapper}>
@@ -49,9 +44,7 @@ const ErrorPage = () => {
               : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
           </h2>
           <Link to='/' onClick={() => window.location.reload()}>
-            <Button variant='contained'>
-              {LINK_TO_HOMEPAGE[language].value}
-            </Button>
+            <Button variant='contained'>{LINK_TO_HOMEPAGE[language].value}</Button>
           </Link>
         </div>
       </div>

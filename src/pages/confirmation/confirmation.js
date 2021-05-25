@@ -10,10 +10,11 @@ import { handleMessage } from '../../utils/handle-confirmation';
 
 const Confirmation = ({ token }) => {
   // HOOKS
-  const { language, loading, error } = useSelector(({ User, Language }) => ({
+  const { language, loading, error, emailError } = useSelector(({ User, Language }) => ({
     language: Language.language,
     loading: User.userLoading,
-    error: User.error
+    error: User.error,
+    emailError: User.emailError
   }));
 
   const dispatch = useDispatch();
@@ -29,11 +30,11 @@ const Confirmation = ({ token }) => {
 
   // STYLES
   const styles = useStyles();
-
+  console.log('email', emailError);
   return (
     <div className={styles.confirmation}>
       <div className={styles.welcome}>
-        {loading ? <Loader /> : handleMessage(error, language)}
+        {loading ? <Loader /> : handleMessage(emailError, language)}
         <div className={styles.buttonGroup}>
           <Button variant='contained' onClick={() => goTo('/')}>
             {WELCOME_MESSAGE[language].button_goToShop}

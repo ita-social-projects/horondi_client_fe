@@ -12,7 +12,8 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  SET_DELETE_USER
+  SET_DELETE_USER,
+  SET_EMAIL_ERROR
 } from './user.types';
 
 export const initialState = {
@@ -26,7 +27,8 @@ export const initialState = {
   passwordReset: false,
   confirmationEmailSent: false,
   recoveryLoading: false,
-  confirmationLoading: false
+  confirmationLoading: false,
+  emailError: null
 };
 
 const userReducer = (state = initialState, action = {}) => {
@@ -43,6 +45,11 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         userLoading: false,
         error: action.payload
+      };
+    case SET_EMAIL_ERROR:
+      return {
+        ...state,
+        emailError: action.payload
       };
     case SET_USER_LOADING:
       return {

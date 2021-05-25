@@ -14,7 +14,8 @@ import {
   setUserIsConfirmed,
   setConfirmationLoading,
   setRecoveryLoading,
-  setUserOrders
+  setUserOrders,
+  setEmailError
 } from './user.actions';
 import {
   loginUser,
@@ -66,7 +67,7 @@ import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/c
 import { setWishlist, resetWishlist } from '../wishlist/wishlist.actions';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
-import { USER_ERROR } from '../../translations/user.translations';
+import { USER_ERROR, EMAIL_ERROR } from '../../translations/user.translations';
 import {
   setSnackBarMessage,
   setSnackBarSeverity,
@@ -131,7 +132,8 @@ export function* handleUserConfirm({ payload }) {
     yield put(setUserIsConfirmed(true));
     yield put(setUserLoading(false));
   } catch (e) {
-    yield call(handleUserError, e);
+    yield call(handleEmailError, e);
+    yield call(handleUserLogout);
   }
 }
 
@@ -272,6 +274,16 @@ export function* handleUserError(e) {
     yield put(setUserError(USER_ERROR[e.message][language].value));
   } else {
     yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));
+  }
+}
+
+export function* handleEmailError(e) {
+  console.log('email', e);
+  const language = getFromLocalStorage(LANGUAGE);
+  if (EMAIL_ERROR[e?.message]) {
+    yield put(setEmailError(EMAIL_ERROR[e.message][language].value));
+  } else {
+    yield put(setEmailError(EMAIL_ERROR.DEFAULT_ERROR[language].value));
   }
 }
 

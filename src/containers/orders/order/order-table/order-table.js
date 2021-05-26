@@ -8,7 +8,7 @@ import {
   CART_TITLES,
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
-import { MODAL_DELETE_MESSAGES } from '../../../../translations/modal.translations';
+import { MODAL_DELETE_ALL_MESSAGE } from '../../../../translations/modal.translations';
 import { resetCart, cleanUserCart } from '../../../../redux/cart/cart.actions';
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
@@ -33,7 +33,6 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     />
   ));
 
-
   const onModalAction = (action) => {
     if (action) {
       if (user) {
@@ -45,13 +44,12 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     }
   };
 
-
   return (
     <>
       {modalVisibility && (
         <>
           <Modal
-            message={MODAL_DELETE_MESSAGES[language]}
+            message={MODAL_DELETE_ALL_MESSAGE[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
             language={language}

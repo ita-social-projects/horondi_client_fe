@@ -11,7 +11,8 @@ import {
   methodPut,
   mockState
 } from '../../constructor.variables';
-import { handleConstructorPatternLoad, handleError } from '../constructor-pattern.sagas';
+import { handleConstructorPatternLoad } from '../constructor-pattern.sagas';
+import { handleError } from '../../constructor.sagas';
 import { getConstructorPatternById } from '../constructor-pattern.operations';
 import constructorBottom from '../constructor-pattern.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';

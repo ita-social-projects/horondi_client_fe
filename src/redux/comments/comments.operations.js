@@ -1,153 +1,143 @@
-import { gql } from '@apollo/client';
-import { setItems, client } from '../../utils/client';
+import { setItems, getItems, client } from '../../utils/client';
 
 const getComments = async (id) => {
-  const result = await client.query({
-    variables: {
-      id
-    },
-    query: gql`
-      query($id: ID!) {
-        getAllCommentsByProduct(productId: $id) {
-          ... on Comment {
+  const getCommentsQuery = `
+    query($id: ID!) {
+      getAllCommentsByProduct(productId: $id) {
+        ... on Comment {
+          _id
+          text
+          date
+          user {
             _id
-            text
-            date
-            user {
-              _id
-              email
-              firstName
-              lastName
-              images {
-                thumbnail
-              }
+            email
+            firstName
+            lastName
+            images {
+              thumbnail
             }
           }
-          ... on Error {
-            statusCode
-            message
-          }
+        }
+        ... on Error {
+          statusCode
+          message
         }
       }
-    `
-  });
+    }
+  `;
+  const result = await getItems(getCommentsQuery, { id });
   await client.resetStore();
-  return result.data.getAllCommentsByProduct;
+  return result?.data?.getAllCommentsByProduct;
 };
 
-const changeRate = (payload) =>
-  setItems(
-    `mutation($product: ID!, $rate: Int!) {
-        addRate(product: $product, userRate: { rate: $rate }) {
-          ... on Product {
-            rate
-          }
-        }
-    }`,
-    payload
-  );
+const changeRate = async (payload) => {
+  const changeRateMutation = `mutation($product: ID!, $rate: Int!) {
+    addRate(product: $product, userRate: { rate: $rate }) {
+      ... on Product {
+        rate
+      }
+    }
+  }`;
+  const result = await setItems(changeRateMutation, payload);
+
+  return result?.data?.addRate;
+};
 
 const addComment = async (payload) => {
-  const result = await client.mutate({
-    mutation: gql`
-      mutation(
-        $product: ID!
-        $email: String!
-        $firstName: String
-        $show: Boolean!
-        $text: String
-        $images: ImageSetInput
+  const addCommentMutation = `
+    mutation(
+      $product: ID!
+      $email: String!
+      $firstName: String
+      $show: Boolean!
+      $text: String
+      $images: ImageSetInput
+    ) {
+      addComment(
+        productId: $product
+        comment: {
+          text: $text
+          show: $show
+          user: { email: $email, name: $firstName, images: $images }
+          product: $product
+        }
       ) {
-        addComment(
-          productId: $product
-          comment: {
-            text: $text
-            show: $show
-            user: { email: $email, name: $firstName, images: $images }
-            product: $product
-          }
-        ) {
-          ... on Comment {
-            _id
-            text
-            date
-            user {
-              name
-              email
-              images {
-                thumbnail
-              }
+        ... on Comment {
+          _id
+          text
+          date
+          user {
+            name
+            email
+            images {
+              thumbnail
             }
           }
         }
       }
-    `,
-    variables: payload,
-    fetchPolicy: 'no-cache'
-  });
+    }
+  `;
+  const result = await setItems(addCommentMutation, payload);
   await client.resetStore();
-  return result.data.addComment;
+
+  return result?.data?.addComment;
 };
 
 const deleteComment = async (payload) => {
-  const result = await client.mutate({
-    mutation: gql`
-      mutation($comment: ID!) {
-        deleteComment(id: $comment) {
-          ... on Comment {
-            _id
-          }
+  const deleteCommentMutation = `
+    mutation($comment: ID!) {
+      deleteComment(id: $comment) {
+        ... on Comment {
+          _id
         }
       }
-    `,
-    variables: payload,
-    fetchPolicy: 'no-cache'
-  });
+    }
+  `;
+  const result = await setItems(deleteCommentMutation, payload);
   await client.resetStore();
-  return result.data.deleteComment;
+
+  return result?.data?.deleteComment;
 };
 
 const updateComment = async (payload) => {
-  const result = await client.mutate({
-    mutation: gql`
-      mutation(
-        $comment: ID!
-        $product: ID!
-        $email: String!
-        $show: Boolean!
-        $text: String
-        $firstName: String
-        $images: ImageSetInput
+  const updateCommentMutation = `
+    mutation(
+      $comment: ID!
+      $product: ID!
+      $email: String!
+      $show: Boolean!
+      $text: String
+      $firstName: String
+      $images: ImageSetInput
+    ) {
+      updateComment(
+        id: $comment
+        comment: {
+          text: $text
+          show: $show
+          user: { email: $email, name: $firstName, images: $images }
+          product: $product
+        }
       ) {
-        updateComment(
-          id: $comment
-          comment: {
-            text: $text
-            show: $show
-            user: { email: $email, name: $firstName, images: $images }
-            product: $product
-          }
-        ) {
-          ... on Comment {
-            _id
-            text
-            date
-            user {
-              name
-              email
-              images {
-                thumbnail
-              }
+        ... on Comment {
+          _id
+          text
+          date
+          user {
+            name
+            email
+            images {
+              thumbnail
             }
           }
         }
       }
-    `,
-    variables: payload,
-    fetchPolicy: 'no-cache'
-  });
+    }
+  `;
+  const result = await setItems(updateCommentMutation, payload);
   await client.resetStore();
-  return result.data.updateComment;
+
+  return result?.data?.updateComment;
 };
 
 export { getComments, changeRate, addComment, deleteComment, updateComment };

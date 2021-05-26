@@ -16,8 +16,7 @@ import { useStyles } from './header-profile.styles';
 import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
-import { setUser } from '../../redux/user/user.actions';
-import { resetCart } from '../../redux/cart/cart.actions';
+import { logoutUser } from '../../redux/user/user.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
 import routes from '../../configs/routes';
@@ -63,11 +62,7 @@ const HeaderProfile = ({ fromSideBar }) => {
   };
 
   const handleLogout = () => {
-    dispatch(setUser(null));
-    dispatch(resetCart());
-    setToLocalStorage('accessToken', null);
-    setToLocalStorage('refreshToken', null);
-    setToLocalStorage('cart', []);
+    dispatch(logoutUser());
     setAnchorEl(null);
   };
 

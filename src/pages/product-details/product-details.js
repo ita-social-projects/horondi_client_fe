@@ -16,6 +16,7 @@ import ProductSizes from './product-sizes';
 import ProductSubmit from './product-submit';
 import SimilarProducts from './similar-products';
 import Comments from './comments';
+import ToastContainer from '../../containers/toast';
 
 import { Loader } from '../../components/loader/loader';
 import {
@@ -133,7 +134,7 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
-      <Link to={routes.patthToCategory} className={styles.backBtn}>
+      <Link to={routes.pathToCategory} className={styles.backBtn}>
         <KeyboardBackspaceIcon
           color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
         />
@@ -152,6 +153,7 @@ const ProductDetails = ({ match }) => {
       </div>
       <SimilarProducts currencySign={currencySign} />
       <Comments />
+      <ToastContainer />
     </Card>
   );
 };

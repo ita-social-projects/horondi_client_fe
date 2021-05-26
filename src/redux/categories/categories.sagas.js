@@ -2,21 +2,25 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { setCategories, setCategoriesLoading } from './categories.actions';
 import { setError } from '../error/error.actions';
-import getItems from '../../utils/client';
 import { GET_CATEGORIES } from './categories.types';
-import { query } from './categories.operations';
+import { getAllCategories } from './categories.operations';
+import routes from '../../configs/routes';
 
 export function* handleCategoriesLoad() {
   yield put(setCategoriesLoading(true));
   try {
-    const categories = yield call(getItems, query);
-    yield put(setCategories(categories.data.getAllCategories.items));
+    const categories = yield call(getAllCategories);
+    yield put(setCategories(categories.items));
     yield put(setCategoriesLoading(false));
   } catch (e) {
-    yield put(setCategoriesLoading(false));
-    yield put(setError(e.message));
-    yield put(push('/error-page'));
+    yield call(handleCategoriesError, e);
   }
+}
+
+function* handleCategoriesError(e) {
+  yield put(setCategoriesLoading(false));
+  yield put(setError(e.message));
+  yield put(push(routes.pathToErrorPage));
 }
 
 export default function* categoriesSaga() {

@@ -21,7 +21,7 @@ import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
-import { handleErrorMessage } from '../../utils/handle-login';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 const Login = () => {
   const styles = useStyles();
@@ -73,7 +73,7 @@ const Login = () => {
                         variant='outlined'
                         type='text'
                         name='email'
-                        color='primary'
+                        color={MATERIAL_UI_COLOR.PRIMARY}
                         error={!!errors.email}
                         helperText={errors.email || ''}
                       />
@@ -83,40 +83,20 @@ const Login = () => {
                         className={styles.passwordInput}
                         fullWidth
                         variant='outlined'
-                        color='primary'
+                        color={MATERIAL_UI_COLOR.PRIMARY}
                         type='password'
                         InputProps={endAdornment(showPassword, setShowPassword)}
                         name='password'
                         error={!!errors.password}
                         helperText={errors.password || ''}
                       />
-                      <div className={styles.recoveryContainer}>
-                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
-                          {FORGOT_PASSWORD[language].value}
-                        </Link>
-                      </div>
-                      <div className={styles.loginGroup}>
-                        <Button
-                          className={styles.loginBtn}
-                          fullWidth
-                          type='submit'
-                          onClick={() => setShouldValidate(true)}
-                        >
-                          {LOGIN_FORM_LABEL[language].value}
-                        </Button>
-                        {handleErrorMessage(loginError, styles.loginError, language)}
-                      </div>
-                      <div className={styles.orContainer}>
-                        <span className={styles.orText}>{OR_TEXT[language].value}</span>
-                      </div>
-                      <GoogleBtn />
                       <div className={styles.container}>
                         <FormControlLabel
                           control={
                             <Field
                               as={Checkbox}
-                              name='staySignedIn'
-                              color='primary'
+                              name={STAY_SIGNED_IN}
+                              color={MATERIAL_UI_COLOR.PRIMARY}
                               checked={values.staySignedIn}
                             />
                           }
@@ -127,6 +107,26 @@ const Login = () => {
                           }
                         />
                       </div>
+                      <div className={styles.loginGroup}>
+                        <Button
+                          className={styles.loginBtn}
+                          fullWidth
+                          type='submit'
+                          onClick={() => setShouldValidate(true)}
+                        >
+                          {LOGIN_FORM_LABEL[language].value}
+                        </Button>
+                        <p className={styles.loginError}>{loginError}</p>
+                        <div className={styles.recoveryContainer}>
+                          <Link to={pathToRecovery} className={styles.recoveryBtn}>
+                            {FORGOT_PASSWORD[language].value}
+                          </Link>
+                        </div>
+                      </div>
+                      <div className={styles.orContainer}>
+                        <span className={styles.orText}>{OR_TEXT[language].value}</span>
+                      </div>
+                      <GoogleBtn />
                       <div className={styles.registerContainer}>
                         <Link to={pathToRegister} className={styles.registerBtn}>
                           {REGISTER_PROPOSAL[language].value}

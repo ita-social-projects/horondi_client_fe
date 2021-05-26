@@ -1,13 +1,7 @@
-import { gql } from '@apollo/client';
-import { client } from '../../utils/client';
+import { getItems } from '../../utils/client';
 
 export const getAllPatterns = async (skip, limit) => {
-  const result = await client.query({
-    variables: {
-      skip,
-      limit
-    },
-    query: gql`
+  const getAllPatternsQuery = `
       query($skip: Int, $limit: Int) {
         getAllPatterns(skip: $skip, limit: $limit) {
           items {
@@ -25,8 +19,8 @@ export const getAllPatterns = async (skip, limit) => {
           count
         }
       }
-    `
-  });
+    `;
+  const result = await getItems(getAllPatternsQuery, { skip, limit });
 
-  return result.data.getAllPatterns;
+  return result?.data?.getAllPatterns;
 };

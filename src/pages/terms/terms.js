@@ -2,29 +2,29 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
-import { useStyles } from './about-us.style';
+import { useStyles } from './terms.style';
 import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
 
-const AboutUs = () => {
+const Terms = () => {
   const dispatch = useDispatch();
-  const { aboutUsPage, language } = useSelector(({ BusinessPages, Language }) => ({
-    aboutUsPage: BusinessPages.pages.aboutUs,
+  const { termsPage, language } = useSelector(({ BusinessPages, Language }) => ({
+    termsPage: BusinessPages.pages.terms,
     language: Language.language
   }));
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(getBusinessPageByCode('about-us'));
+    dispatch(getBusinessPageByCode('terms'));
   }, [dispatch]);
-
-  const aboutUsText = aboutUsPage.text && parse(aboutUsPage.text[language].value);
+  const termsText = termsPage.text && parse(termsPage.text[language].value);
   const styles = useStyles();
 
   return (
     <div className={styles.root}>
-      {aboutUsPage.title && <h1>{aboutUsPage.title[language].value}</h1>}
-      {aboutUsText}
+      {termsPage.title && <h1>{termsPage.title[language].value}</h1>}
+      {termsText}
     </div>
   );
 };
 
-export default AboutUs;
+export default Terms;

@@ -312,6 +312,12 @@ export const COMMENT_DATA = {
 export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
+export const BUSINESS_PAGES = {
+  ABOUT_US: 'about-us',
+  TERMS: 'terms',
+  USER_AGREEMENT: 'user-agreement'
+};
+
 export const LANGUAGES_LIST = [
   { lang: 'UA', value: 0 },
   { lang: 'EN', value: 1 }

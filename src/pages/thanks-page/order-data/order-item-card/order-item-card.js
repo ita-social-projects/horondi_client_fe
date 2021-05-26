@@ -1,13 +1,15 @@
 import React from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from './order-item-card.styles';
-import { DEFAULT_CURRENCY, IMG_URL } from '../../../../configs';
-import { CHECKOUT_TITLES } from '../../../../translations/checkout.translations';
+import { IMG_URL } from '../../../../configs';
 import { THANKS_PAGE_TITLE } from '../../../../translations/thanks-page.translations';
 
 const OrderItemCard = ({ item, currency, language, isLightTheme }) => {
   const styles = useStyles({ isLightTheme });
+  const currencySign = currency ? faDollarSign : faHryvnia;
 
   return (
     <TableRow classes={{ root: styles.root }}>
@@ -24,11 +26,7 @@ const OrderItemCard = ({ item, currency, language, isLightTheme }) => {
       </TableCell>
       <TableCell className={styles.description}>{item.quantity}</TableCell>
       <TableCell classes={{ root: styles.description }}>
-        {`${item.fixedPrice[currency].value} ${
-          currency === DEFAULT_CURRENCY
-            ? CHECKOUT_TITLES[language].UAH
-            : CHECKOUT_TITLES[language].USD
-        }`}
+        {item.fixedPrice[currency].value} <FontAwesomeIcon icon={currencySign} />
       </TableCell>
     </TableRow>
   );

@@ -13,6 +13,8 @@ import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
 import AboutUs from '../pages/about-us';
+import Terms from '../pages/terms';
+import UserAgreement from '../pages/user-agreement';
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
 const NewsPage = lazy(() => import('../pages/news/news-page'));
@@ -56,6 +58,8 @@ const Routes = () => {
               <Route path='/news' exact component={NewsPage} />
               <Route path='/news/:id' exact component={NewsDetail} />
               <Route path='/about-us' exact component={AboutUs} />
+              <Route path='/terms' exact component={Terms} />
+              <Route path='/user-agreement' exact component={UserAgreement} />
               <Route path='/materials' exact component={Materials} />
               <Route path='/constructor' exact component={ImagesConstructor} />
               <Route path='/payment-and-shipping' exact component={PaymentsAndShipping} />

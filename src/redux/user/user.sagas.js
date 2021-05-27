@@ -278,7 +278,6 @@ export function* handleUserError(e) {
 }
 
 export function* handleEmailError(e) {
-  console.log('email', e);
   const language = getFromLocalStorage(LANGUAGE);
   if (EMAIL_ERROR[e?.message]) {
     yield put(setEmailError(EMAIL_ERROR[e.message][language].value));

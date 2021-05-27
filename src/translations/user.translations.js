@@ -439,6 +439,14 @@ export const EMAIL_ERROR = {
       value: 'You have be logged out. Try to confirm your email in your personal cabinet'
     }
   ],
+  USER_NOT_FOUND: [
+    {
+      value: 'Користувач не знайдений'
+    },
+    {
+      value: 'User has not been found'
+    }
+  ],
   DEFAULT_ERROR: [
     {
       value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'

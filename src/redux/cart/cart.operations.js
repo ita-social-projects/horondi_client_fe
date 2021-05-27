@@ -107,10 +107,7 @@ const getCartByUserId = async (userId) => {
   `;
   const result = await getItems(getCartByUserIdQuery, { id: userId });
 
-  if (
-    result?.data?.getCartByUserId?.message &&
-    result?.data?.getCartByUserId?.message !== 'CART_IS_NOT_FOUND'
-  ) {
+  if (result?.data?.getCartByUserId?.message) {
     throw new Error(result.data.getCartByUserId.message);
   }
 

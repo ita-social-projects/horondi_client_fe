@@ -116,7 +116,7 @@ export const USER_ERROR = {
   TOKEN_IS_EXPIRIED: [
     {
       value:
-        'Данні авторизації застарілі. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
+        'Дані авторизації застаріли. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
     },
     {
       value: 'You have be logged out. Try to confirm your email in your personal cabinet'

@@ -4,6 +4,7 @@ import { MenuItem } from '@material-ui/core';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
+import { languageName } from '../../const/language'
 import Dropdown from '../../components/dropdown';
 
 const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;
@@ -23,12 +24,12 @@ const LanguageComponent = ({ fromSideBar }) => {
   const handleChange = (e) => {
     const targetValue = e.target.value;
     if (targetValue !== undefined) {
-      setToLocalStorage('language', targetValue);
+      setToLocalStorage(languageName, targetValue);
       dispatch(changeLanguage(targetValue));
     }
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
-    <MenuItem data-cy={`language${value + 1}`} key={value} value={value}>
+    <MenuItem data-cy={`${languageName}${value + 1}`} key={value} value={value}>
       {lang}
     </MenuItem>
   ));

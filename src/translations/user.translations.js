@@ -60,8 +60,18 @@ export const USER_ERROR = {
     }
   ],
   USER_NOT_AUTHORIZED: [
-    { value: 'Користувач не авториваний' },
-    { value: 'User is not authorized' }
+    {
+      value: 'Користувач не авториваний'
+    },
+    {
+      value: 'User is not authorized'
+    }
+  ],
+  REFRESH_TOKEN_IS_NOT_VALID: [
+    { value: 'Данні авторизації застарілі, будь ласка авторизуйтеся' },
+    {
+      value: 'You have be logged out, please sign in again'
+    }
   ],
   WRONG_CREDENTIALS: [
     {
@@ -85,6 +95,39 @@ export const USER_ERROR = {
     },
     {
       value: 'Sorry, your account is blocked.'
+    }
+  ],
+  USER_EMAIL_ALREADY_CONFIRMED: [
+    {
+      value: 'Користувач з таким email вже підтверджений'
+    },
+    {
+      value: 'User with this email is already confirmed'
+    }
+  ],
+  USER_NOT_FOUND: [
+    {
+      value: 'Користувач не знайдений'
+    },
+    {
+      value: 'User has not been found'
+    }
+  ],
+  TOKEN_IS_EXPIRIED: [
+    {
+      value:
+        'Дані авторизації застаріли. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
+    },
+    {
+      value: 'You have be logged out. Try to confirm your email in your personal cabinet'
+    }
+  ],
+  CART_IS_NOT_FOUND: [
+    {
+      value: 'Данні авторизації застарілі'
+    },
+    {
+      value: 'You have be logged out'
     }
   ],
   DEFAULT_ERROR: [

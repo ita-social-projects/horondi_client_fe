@@ -12,19 +12,7 @@ export const ERROR_PAGE_MESSAGE = {
   PATTERN_NOT_FOUND: [{ value: 'Гобелен не знайдено' }, { value: 'Pattern not found' }],
   USER_NOT_FOUND: [{ value: 'Користувача не знайдено' }, { value: 'User not found' }],
   IMAGE_NOT_FOUND: [{ value: 'Фото не знайдено' }, { value: 'Image not found' }],
-  DEFAULT_ERROR: [{ value: 'Щось пішло не так...' }, { value: 'Something went wrong...' }],
-  USER_EMAIL_ALREADY_CONFIRMED: [
-    { value: 'Користувач з таким email вже підтверджений' },
-    { value: 'User with this email is already confirmed' }
-  ],
-  JWT_EXPIRED: [
-    {
-      value:
-        'Данні авторизації застарілі. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
-    },
-    { value: 'You have be logged out. Try to confirm your email in your personal cabinet' }
-  ],
-  CART_IS_NOT_FOUND: [{ value: 'Данні авторизації застарілі' }, { value: 'You have be logged out' }]
+  DEFAULT_ERROR: [{ value: 'Щось пішло не так...' }, { value: 'Something went wrong...' }]
 };
 
 export const LINK_TO_HOMEPAGE = [{ value: 'На головну' }, { value: 'Go to homepage' }];

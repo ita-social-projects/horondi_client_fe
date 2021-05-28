@@ -29,6 +29,7 @@ const Confirmation = ({ token }) => {
 
   // STYLES
   const styles = useStyles();
+
   return (
     <div className={styles.confirmation}>
       <div className={styles.welcome}>

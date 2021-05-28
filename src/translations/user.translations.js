@@ -113,7 +113,7 @@ export const USER_ERROR = {
       value: 'User has not been found'
     }
   ],
-  JWT_EXPIRED: [
+  TOKEN_IS_EXPIRIED: [
     {
       value:
         'Данні авторизації застарілі. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
@@ -420,39 +420,3 @@ export const PROFILE_EMAIL_CONFIRM = [
     checkEmailText: 'Please, check your email!'
   }
 ];
-
-export const EMAIL_ERROR = {
-  USER_EMAIL_ALREADY_CONFIRMED: [
-    {
-      value: 'Користувач з таким email вже підтверджений'
-    },
-    {
-      value: 'User with this email is already confirmed'
-    }
-  ],
-  TOKEN_IS_EXPIRIED: [
-    {
-      value:
-        'Данні авторизації застарілі. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
-    },
-    {
-      value: 'You have be logged out. Try to confirm your email in your personal cabinet'
-    }
-  ],
-  USER_NOT_FOUND: [
-    {
-      value: 'Користувач не знайдений'
-    },
-    {
-      value: 'User has not been found'
-    }
-  ],
-  DEFAULT_ERROR: [
-    {
-      value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'
-    },
-    {
-      value: 'Oops! Something went wrong. Please, try again later.'
-    }
-  ]
-};

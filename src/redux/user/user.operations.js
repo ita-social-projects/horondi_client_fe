@@ -106,9 +106,7 @@ const loginUser = async (data) => {
 }
   `;
   const result = await setItems(loginUserMutation, data);
-  if (result?.data?.loginUser?.message) {
-    throw new Error(result.data.loginUser.message);
-  }
+
   return result?.data?.loginUser;
 };
 
@@ -145,9 +143,6 @@ const confirmUserEmail = async ({ token }) => {
   `;
   const result = await setItems(confirmUserEmailMutation, { token });
 
-  if (result?.data?.confirmUserEmail?.message) {
-    throw new Error(result.data.confirmUserEmail.message);
-  }
   return result?.data?.confirmUserEmail;
 };
 
@@ -185,9 +180,7 @@ const registerUser = async ({ user, language }) => {
         }
       `;
   const result = await setItems(registerUserMutation, { user, language });
-  if (result?.data?.registerUser?.message) {
-    throw new Error(result.data.registerUser.message);
-  }
+
   return result?.data?.registerUser;
 };
 
@@ -233,9 +226,7 @@ const updateUserById = async ({ user, id, upload }) => {
     }
   `;
   const result = await setItems(updateUserByIdMutation, { user, id, upload });
-  if (result?.data?.updateUserById?.message) {
-    throw new Error(result.data.updateUserById.message);
-  }
+
   return result?.data?.updateUserById;
 };
 
@@ -246,9 +237,7 @@ const sendEmailConfirmation = async ({ email, language }) => {
     }
   `;
   const result = await setItems(sendEmailConfirmationMutation, { email, language });
-  if (result?.data?.sendEmailConfirmation?.message) {
-    throw new Error(result.data.sendEmailConfirmation.message);
-  }
+
   return result?.data?.sendEmailConfirmation;
 };
 
@@ -318,10 +307,6 @@ const getUserByToken = async () => {
     `;
 
   const result = await getItems(getUserByTokenQuery);
-
-  if (result?.data?.getUserByToken?.statusCode) {
-    throw new Error(result.data.getUserByToken.message);
-  }
 
   return result?.data?.getUserByToken;
 };

@@ -19,6 +19,7 @@
     }
   },
   "plugins": [
+    "prettier",
     "jsx-a11y",
     "react-app",
     "react",
@@ -33,11 +34,10 @@
   },
   "extends": [
     "airbnb",
-    "prettier",
-    "prettier/react",
     "plugin:cypress/recommended",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "semi": "off",

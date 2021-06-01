@@ -5,7 +5,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import _ from 'lodash';
 
 import { useStyles } from './cart-item.styles';
@@ -20,12 +19,13 @@ import {
 import { IMG_URL } from '../../../../configs';
 import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
+import { getCurrencySign } from '../../../../utils/currency';
 
 const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const [inputValue, setInputValue] = useState(item.quantity);
-  const currencySign = currency ? faDollarSign : faHryvnia;
+  const currencySign = getCurrencySign(currency);
 
   const onChangeUserQuantity = useCallback(
     _.debounce((value) => {
@@ -89,12 +89,16 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
         <div className={styles.priceWrapper}>
           {user && (
             <div>
-              {Math.round(item.price[currency].value / 100)} <FontAwesomeIcon icon={currencySign} />
+              {Math.round(item.price[currency].value / 100)}
+              {'\u00A0'}
+              <FontAwesomeIcon icon={currencySign} />
             </div>
           )}
           {!user && (
             <div>
-              {Math.round(calcPrice(item, currency) / 100)} <FontAwesomeIcon icon={currencySign} />
+              {Math.round(calcPrice(item, currency) / 100)}
+              {'\u00A0'}
+              <FontAwesomeIcon icon={currencySign} />
             </div>
           )}
         </div>

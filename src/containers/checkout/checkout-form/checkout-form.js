@@ -10,7 +10,6 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
@@ -32,13 +31,15 @@ import {
   getCurrentCurrency,
   handleError,
   initialValues,
+  getThemeColor,
   orderInputData,
   setUserValues,
   userContactInputLabels,
   userNameInputLabels
 } from '../../../utils/checkout';
+import { getCurrencySign } from '../../../utils/currency';
 import { validationSchema } from '../../../validators/chekout';
-import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 import {
   clearSessionStorage,
   getFromSessionStorage,
@@ -49,7 +50,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
   const styles = useStyles({
     isLightTheme
   });
-  const currencySign = currency ? faDollarSign : faHryvnia;
+  const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
 
   const dispatch = useDispatch();
@@ -128,10 +129,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
             <div className={styles.checkoutTitleInfo}>
               <div className={styles.checkoutTitleInfoData}>
                 <Link to={routes.pathToCart} className={styles.backBtn}>
-                  <KeyboardBackspaceIcon
-                    color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
-                    className={styles.backBtnLine}
-                  />
+                  <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
                 </Link>
                 <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
               </div>
@@ -261,9 +259,11 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
-                <span className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {totalPriceToPay / 100} <FontAwesomeIcon icon={currencySign} />
-                </span>
+                <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
+                  {Math.round(totalPriceToPay / 100)}
+                  {'\u00A0'}
+                  <FontAwesomeIcon icon={currencySign} />
+                </p>
               </div>
               <button type='submit' className={styles.submitBtn}>
                 {checkoutFormBtnValue(values, language)}

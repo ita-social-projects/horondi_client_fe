@@ -8,15 +8,25 @@ const getComments = async (id) => {
           _id
           text
           date
+          show
+          rate
+          replyComments {
+            _id
+            createdAt
+            replyText
+            showReplyComment
+            answerer{
+              firstName
+              email
+            }
+          }
           user {
             _id
             email
             firstName
-            lastName
-            images {
-              thumbnail
-            }
           }
+          userName
+          email
         }
         ... on Error {
           statusCode
@@ -51,28 +61,31 @@ const addComment = async (payload) => {
       $firstName: String
       $show: Boolean!
       $text: String
-      $images: ImageSetInput
+      $user: ID
+      $rate: Int
     ) {
       addComment(
-        productId: $product
         comment: {
           text: $text
           show: $show
-          user: { email: $email, name: $firstName, images: $images }
+          userName:$firstName
+          email: $email
+          user: $user
           product: $product
+          rate: $rate
         }
       ) {
         ... on Comment {
           _id
           text
           date
-          user {
-            name
+          rate
+          user{
+            firstName
             email
-            images {
-              thumbnail
-            }
           }
+          userName
+          email
         }
       }
     }
@@ -85,8 +98,8 @@ const addComment = async (payload) => {
 
 const deleteComment = async (payload) => {
   const deleteCommentMutation = `
-    mutation($comment: ID!) {
-      deleteComment(id: $comment) {
+    mutation($comment: ID!,$id:ID!) {
+      deleteComment(id:$id,commentID: $comment) {
         ... on Comment {
           _id
         }
@@ -99,45 +112,66 @@ const deleteComment = async (payload) => {
   return result?.data?.deleteComment;
 };
 
-const updateComment = async (payload) => {
-  const updateCommentMutation = `
+const addReplyForComment = async (payload) => {
+  const addReplyMutation = `
     mutation(
-      $comment: ID!
-      $product: ID!
-      $email: String!
-      $show: Boolean!
-      $text: String
-      $firstName: String
-      $images: ImageSetInput
+      $id: ID
+      $commentId: ID!
+      $replyText: String!
+      $answerer: ID
     ) {
-      updateComment(
-        id: $comment
-        comment: {
-          text: $text
-          show: $show
-          user: { email: $email, name: $firstName, images: $images }
-          product: $product
+      replyForComment(
+        id: $id
+        commentId: $commentId
+        replyCommentData: {
+          answerer: $answerer
+          replyText: $replyText
+          refToReplyComment: $commentId
         }
       ) {
         ... on Comment {
           _id
-          text
-          date
-          user {
-            name
-            email
-            images {
-              thumbnail
+          replyComments {
+            _id
+            replyText
+            showReplyComment
+            createdAt
+            answerer{
+              firstName
+              email
             }
           }
         }
       }
     }
   `;
-  const result = await setItems(updateCommentMutation, payload);
+  const result = await setItems(addReplyMutation, payload);
   await client.resetStore();
 
-  return result?.data?.updateComment;
+  return result?.data?.replyForComment;
 };
 
-export { getComments, changeRate, addComment, deleteComment, updateComment };
+const deleteReplyComment = async (payload) => {
+  const deleteReplyForCommentMutation = `
+    mutation($replyCommentId: ID!,$id:ID!) {
+      deleteReplyForComment(id:$id,replyCommentId: $replyCommentId) {
+        ... on Comment {
+          _id
+        }
+      }
+    }
+  `;
+  const result = await setItems(deleteReplyForCommentMutation, payload);
+  await client.resetStore();
+
+  return result?.data?.deleteReplyForComment;
+};
+
+export {
+  getComments,
+  changeRate,
+  addComment,
+  deleteComment,
+  addReplyForComment,
+  deleteReplyComment
+};

@@ -1,19 +1,25 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 
-import { setCommentsLoading, setComments, setRate, setUpdatingComment } from './comments.actions';
+import { setCommentsLoading, setComments, setRate, setReplyLoading } from './comments.actions';
 import {
   setSnackBarMessage,
   setSnackBarSeverity,
   setSnackBarStatus
 } from '../snackbar/snackbar.actions';
 import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
-import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from './comments.types';
-import { addComment, updateComment, deleteComment, changeRate } from './comments.operations';
+import { ADD_COMMENT, ADD_REPLY, DELETE_COMMENT, DELETE_REPLY_COMMENT } from './comments.types';
+import {
+  addComment,
+  deleteComment,
+  changeRate,
+  addReplyForComment,
+  deleteReplyComment
+} from './comments.operations';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
 
-const { added, updated, deleted, error } = SNACKBAR_MESSAGE;
+const { added, deleted, error } = SNACKBAR_MESSAGE;
 
 export function* handleAddComment({ payload }) {
   try {
@@ -53,32 +59,6 @@ export function* handleDeleteComment({ payload }) {
   }
 }
 
-export function* handleUpdateComment({ payload }) {
-  try {
-    yield put(setUpdatingComment(payload.comment));
-    const updatedComment = yield call(updateComment, payload);
-    if (updatedComment) {
-      if (updatedComment?.message === USER_IS_BLOCKED) {
-        yield call(handleUserIsBlocked);
-      } else {
-        const comments = yield select(({ Comments }) => Comments.comments);
-        const commentToUpdate = comments.findIndex(({ _id }) => _id === updatedComment._id);
-        const newComments = [
-          ...comments.slice(0, commentToUpdate),
-          updatedComment,
-          ...comments.slice(commentToUpdate + 1)
-        ];
-        yield put(setComments(newComments));
-        yield put(setUpdatingComment(null));
-        yield call(handleSnackbar, updated);
-      }
-    }
-  } catch (e) {
-    yield put(setUpdatingComment(null));
-    yield call(handleCommentsError, e);
-  }
-}
-
 function* handleCommentsError(e) {
   if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
     yield call(handleUserError, e);
@@ -86,6 +66,49 @@ function* handleCommentsError(e) {
     yield put(setSnackBarSeverity('error'));
     yield put(setSnackBarMessage(error));
     yield put(setSnackBarStatus(true));
+  }
+}
+
+export function* handleAddReply({ payload }) {
+  try {
+    yield put(setReplyLoading(true));
+    const addedReply = yield call(addReplyForComment, payload);
+    if (addedReply?.message === USER_IS_BLOCKED) {
+      yield call(handleUserIsBlocked);
+    } else {
+      const comments = yield select(({ Comments }) => Comments.comments);
+      const newComments = comments.map((comment) =>
+        comment._id === addedReply._id
+          ? { ...comment, replyComments: [...addedReply.replyComments] }
+          : comment
+      );
+      yield put(setComments(newComments));
+      yield call(handleSnackbar, added);
+      yield put(setReplyLoading(false));
+    }
+  } catch (e) {
+    yield put(setReplyLoading(false));
+    yield call(handleCommentsError, e);
+  }
+}
+
+export function* handleDeleteReplyForComment({ payload }) {
+  try {
+    const comments = yield select(({ Comments }) => Comments.comments);
+    const newComments = comments.map((comment) =>
+      comment.replyComments.some((item) => item._id === payload.replyCommentId)
+        ? {
+          ...comment,
+          replyComments: comment.replyComments.filter(({ _id }) => _id !== payload.replyCommentId)
+        }
+        : comment
+    );
+    yield put(setComments(newComments));
+    yield call(handleSnackbar, deleted);
+    yield call(deleteReplyComment, payload);
+  } catch (e) {
+    yield put(setCommentsLoading(false));
+    yield call(handleCommentsError, e);
   }
 }
 
@@ -98,5 +121,6 @@ function* handleSnackbar(message) {
 export default function* commentsSaga() {
   yield takeEvery(ADD_COMMENT, handleAddComment);
   yield takeEvery(DELETE_COMMENT, handleDeleteComment);
-  yield takeEvery(UPDATE_COMMENT, handleUpdateComment);
+  yield takeEvery(ADD_REPLY, handleAddReply);
+  yield takeEvery(DELETE_REPLY_COMMENT, handleDeleteReplyForComment);
 }

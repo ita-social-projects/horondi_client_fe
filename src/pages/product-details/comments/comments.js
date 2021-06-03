@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
@@ -28,13 +28,17 @@ const Comments = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { commentsLoading, language, productId, comments, userData, currentLimit } = useSelector(
-    selectProductsIdCommentsLanguageUserData
-  );
+  const {
+    commentsLoading,
+    language,
+    productId,
+    comments,
+    userData,
+    currentLimit,
+    orders
+  } = useSelector(selectProductsIdCommentsLanguageUserData);
 
-  const [rate, setRate] = useState(0);
-
-  const { _id: userId, email, firstName, purchasedProducts, images } = userData || {};
+  const { _id: userId, email, firstName, images } = userData || {};
 
   const onSubmit = (formValues) => {
     const userFields = userId ? { email, firstName, images, user: userId } : {};
@@ -43,7 +47,7 @@ const Comments = () => {
         ...formValues,
         ...userFields,
         product: productId,
-        show: true,
+        show: false,
         rate
       })
     );
@@ -63,22 +67,26 @@ const Comments = () => {
   } = useCommentValidation(!!userData, onSubmit);
 
   const hasBought = useMemo(
-    () => !!purchasedProducts && purchasedProducts.some((product) => product._id === productId),
-    [purchasedProducts, productId]
+    () => !!orders && orders.some((emailOrder) => emailOrder.user.email === email),
+    [orders, userId]
   );
 
+  const [rate, setRate] = useState(0);
+  useEffect(() => {
+    hasBought ? setRate(5) : setRate(0);
+  }, [hasBought]);
   const rateTip = useMemo(() => handleRateTip(userId, language, hasBought), [
     language,
     userId,
     hasBought
   ]);
 
+  const commentsLength = comments.filter((item) => item.show === true).length;
+
   const commentsList = comments
     ? comments
       .slice(0, currentLimit)
-      .map(({ text, date, _id, user }) => (
-        <CommentsItem key={_id} commentId={_id} user={user} text={text} date={date} />
-      ))
+      .map(({ _id, ...rest }) => <CommentsItem key={_id} data={rest} commentId={_id} />)
     : [];
 
   const limitOption = commentsList.length === comments.length && comments.length > commentsLimit;
@@ -147,7 +155,7 @@ const Comments = () => {
         </div>
       </form>
       {commentsList}
-      {comments.length > commentsLimit && (
+      {commentsLength > commentsLimit && (
         <LimitButton
           onClick={handleCommentsReload}
           startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}

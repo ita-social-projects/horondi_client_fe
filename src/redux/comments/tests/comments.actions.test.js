@@ -1,7 +1,6 @@
 import {
   SET_COMMENTS,
   ADD_COMMENT,
-  UPDATE_COMMENT,
   SET_COMMENTS_LOADING,
   SET_RATE,
   DELETE_COMMENT
@@ -12,7 +11,6 @@ import {
   setComments,
   addComment,
   deleteComment,
-  updateComment,
   setCommentsLoading
 } from '../comments.actions';
 
@@ -84,23 +82,6 @@ describe('comments actions tests', () => {
     expect(deleteComment(commentToDelete)).toEqual(result);
   });
 
-  test('should set comment to delete to payload', () => {
-    const commentToUpdate = {
-      data: {
-        updateComment: {
-          comment: 'nice'
-        }
-      }
-    };
-
-    const result = {
-      type: UPDATE_COMMENT,
-      payload: commentToUpdate
-    };
-
-    expect(updateComment(commentToUpdate)).toEqual(result);
-  });
-
   test('should set comments loading', () => {
     const result = {
       type: SET_COMMENTS_LOADING,
@@ -108,16 +89,5 @@ describe('comments actions tests', () => {
     };
 
     expect(setCommentsLoading(true)).toEqual(result);
-  });
-
-  test('should set updating comment', () => {
-    const commentId = '859238jfj3n4fybu5';
-
-    const result = {
-      type: SET_COMMENTS_LOADING,
-      payload: commentId
-    };
-
-    expect(setCommentsLoading(commentId)).toEqual(result);
   });
 });

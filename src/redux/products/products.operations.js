@@ -315,13 +315,11 @@ const getProductById = async (id) => {
               date
               user {
                 _id
-                firstName
-                lastName
                 email
-                images {
-                  thumbnail
-                }
+                firstName
               }
+              userName
+              email
             }
           }
         }
@@ -337,4 +335,21 @@ const getProductById = async (id) => {
   return result?.data?.getProductById;
 };
 
-export { getProductById, getAllFilters, getFilteredProducts };
+const getOrdersByProduct = async (id) => {
+  const getOrdersByProductQuery = `
+    query($id: ID!){
+      getOrdersByProduct(id: $id){
+        ... on Order{
+          user{
+            email
+          }
+        }
+      }
+    }
+  `;
+  const result = await getItems(getOrdersByProductQuery, { id });
+
+  return result?.data?.getOrdersByProduct;
+};
+
+export { getProductById, getAllFilters, getFilteredProducts, getOrdersByProduct };

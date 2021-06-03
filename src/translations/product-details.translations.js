@@ -142,13 +142,15 @@ export const TOOLTIPS = {
     addWishful: 'Додати в бажане',
     removeWishful: 'Видалити з бажаного',
     edit: 'Редагувати',
-    delete: 'Видалити'
+    delete: 'Видалити',
+    unregisteredReply: 'Вам потрібно увійти щоб залишити репліку'
   },
   1: {
     addWishful: 'Add to wishlist',
     removeWishful: 'Remove from wishlist',
     edit: 'Edit',
-    delete: 'Delete'
+    delete: 'Delete',
+    unregisteredReply: 'You should login to leave reply'
   }
 };
 
@@ -183,6 +185,33 @@ export const COMMENTS = {
     email: 'Email',
     text: 'Share your thoughts with others',
     submit: 'Leave comment',
+    unregisteredTip: 'You should login and bought the product to leave rate',
+    registeredTip: 'You should bought the product to leave rate',
+    successfulTip: 'Set rate',
+    loadMore: 'Load more',
+    hideBtn: 'Hide comments'
+  }
+};
+
+export const REPLY = {
+  0: {
+    title: 'Відгуки',
+    firstName: `Ім'я`,
+    email: 'Електронна адреса',
+    text: 'Поділіться своїми враженнями з іншими',
+    submit: 'Залишити репліку',
+    unregisteredTip: 'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
+    registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
+    successfulTip: 'Встановити рейтинг',
+    loadMore: 'Завантажити більше',
+    hideBtn: 'Приховати коментарі'
+  },
+  1: {
+    title: 'Comments',
+    firstName: 'First name',
+    email: 'Email',
+    text: 'Share your thoughts with others',
+    submit: 'Leave reply',
     unregisteredTip: 'You should login and bought the product to leave rate',
     registeredTip: 'You should bought the product to leave rate',
     successfulTip: 'Set rate',

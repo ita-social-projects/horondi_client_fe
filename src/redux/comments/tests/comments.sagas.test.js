@@ -2,24 +2,11 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
 
-import {
-  handleAddComment,
-  handleDeleteComment,
-  handleUpdateComment
-} from '../comments.sagas';
+import { handleAddComment, handleDeleteComment } from '../comments.sagas';
 
-import {
-  addComment,
-  deleteComment,
-  getComments,
-  updateComment
-} from '../comments.operations';
+import { addComment, deleteComment, getComments } from '../comments.operations';
 
-import {
-  SET_COMMENTS_LOADING,
-  SET_COMMENTS,
-  SET_UPDATING_COMMENT
-} from '../comments.types';
+import { SET_COMMENTS_LOADING, SET_COMMENTS } from '../comments.types';
 import { SNACKBAR_MESSAGE } from '../../../configs';
 import {
   SET_SNACKBAR_MESSAGE,
@@ -134,39 +121,6 @@ describe('Delete comments saga', () => {
       .put({ type: SET_COMMENTS_LOADING, payload: false })
       .put({ type: SET_SNACKBAR_SEVERITY, payload: 'error' })
       .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.error })
-      .put({ type: SET_SNACKBAR_STATUS, payload: true })
-      .run();
-  });
-});
-
-describe('Update comments saga', () => {
-  it.skip('should update comment', () => {
-    const args = {
-      payload: {
-        comment: productId
-      }
-    };
-    const updatedComment = {
-      data: {
-        updateComment: {
-          text: 'nice'
-        }
-      }
-    };
-
-    return expectSaga(handleUpdateComment, args)
-      .provide([
-        [matchers.call.fn(updateComment), updatedComment],
-        [matchers.call.fn(getComments), fakeComments]
-      ])
-      .put({ type: SET_UPDATING_COMMENT, payload: args.payload.comment })
-      .put({
-        type: SET_COMMENTS,
-        payload: fakeComments.data.getAllCommentsByProduct
-      })
-      .put({ type: SET_UPDATING_COMMENT, payload: null })
-      .put({ type: SET_SNACKBAR_SEVERITY, payload: 'success' })
-      .put({ type: SET_SNACKBAR_MESSAGE, payload: SNACKBAR_MESSAGE.updated })
       .put({ type: SET_SNACKBAR_STATUS, payload: true })
       .run();
   });

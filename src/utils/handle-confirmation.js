@@ -1,10 +1,10 @@
 import React from 'react';
-import { WELCOME_MESSAGE, CONFIRM_ERROR } from '../translations/user.translations';
+import { WELCOME_MESSAGE } from '../translations/user.translations';
 
 export const handleMessage = (error, language) =>
   error ? (
     <>
-      <h3>{CONFIRM_ERROR[language].value}</h3>
+      <h3>{error}</h3>
     </>
   ) : (
     <>

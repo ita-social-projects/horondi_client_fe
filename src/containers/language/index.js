@@ -1,3 +1,3 @@
-import Language from './language';
+import Language from './language-component';
 
 export default Language;

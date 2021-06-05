@@ -106,7 +106,7 @@ const productsReducer = (state = initialState, action = {}) => {
     case SET_CURRENT_PAGE:
       return {
         ...state,
-        currentPage: action.payload
+        currentPage: action.payload - 1
       };
     case SET_PRODUCTS_PER_PAGE:
       return {

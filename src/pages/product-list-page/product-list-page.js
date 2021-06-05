@@ -12,7 +12,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import { setCurrentPage } from '../../redux/products/products.actions';
+import { getFiltredProducts, setCurrentPage } from '../../redux/products/products.actions';
 
 import {
   DRAWER_PERMANENT,
@@ -66,6 +66,7 @@ const ProductListPage = ({ model, width }) => {
 
   useEffect(() => {
     dispatch(setCurrentPage(searchParams.get(URL_QUERIES_NAME.page)));
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,

@@ -125,9 +125,11 @@ export function* handleUserConfirm({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(confirmUserEmail, payload);
-    yield put(setUserLoading(false));
+    const user = yield call(confirmUserEmail, payload);
+    setToLocalStorage(ACCESS_TOKEN, user.token);
+    setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
     yield put(setUserIsConfirmed(true));
+    yield put(setUserLoading(false));
   } catch (e) {
     yield call(handleUserError, e);
   }

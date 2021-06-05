@@ -1,18 +1,12 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
 import { noop } from 'lodash';
-
 import { dropdownStyles } from './dropdown.styles';
 
 const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) => {
   const styles = dropdownStyles({ fromSideBar });
-  const [sticky, setSticky] = useState(false);
-  useLayoutEffect(() => {
-    window.addEventListener('scroll', () => {
-      window.scrollY > 50 ? setSticky(true) : setSticky(false);
-    });
-  }, []);
+
   return (
     <div className={styles.rootItem}>
       <Select

@@ -2,7 +2,7 @@ import { client, setItems } from '../../utils/client';
 
 export const sendMail = async ({ senderName, text, email, language }) => {
   const sendMailMutation = `
-      mutation{
+      mutation ($senderName: String!, $text: String!, $email: String!, $language: Int!){
   addEmailQuestion(
     question:{
       senderName: $senderName

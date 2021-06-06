@@ -70,7 +70,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
 
   useEffect(() => {
     // VALID FIELDS
-    if (firstNameValidated && emailValidated) {
+    if (firstNameValidated && emailValidated && messageValidated) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
@@ -138,7 +138,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           {CHAT[language].thanksMsg}
         </Alert>
       </Snackbar>
-      <Button className={style.btnSend} onClick={handleValidForms}>
+      <Button className={style.btnSend} onClick={handleValidForms} disabled={!allFieldsValidated}>
         {CHAT[language].sendBtn}
       </Button>
     </form>

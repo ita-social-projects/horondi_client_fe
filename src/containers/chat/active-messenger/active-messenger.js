@@ -26,7 +26,13 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
 
   // USER VALUES
   const [user, setUser] = useState(CHAT_USER_DATA);
-  const { firstName, email, message } = user;
+  let { firstName, email, message } = user;
+
+  const { userData } = useSelector((state) => state.User);
+  if (userData) {
+    firstName = userData.firstName;
+    email = userData.email;
+  }
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -90,7 +96,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           name='firstName'
           size='small'
           multiline
-          rows={1}
           error={!firstNameValidated && shouldValidate}
           helperText={handleHelperText(firstNameValidated, shouldValidate, language, 'firstName')}
           className={style.dataInput}
@@ -107,7 +112,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           name='email'
           size='small'
           multiline
-          rows={1}
           error={!emailValidated && shouldValidate}
           helperText={handleHelperText(emailValidated, shouldValidate, language, 'email')}
           className={style.dataInput}
@@ -124,7 +128,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           name='message'
           size='small'
           multiline
-          rows={3}
           error={!messageValidated && shouldValidate}
           helperText={handleHelperText(messageValidated, shouldValidate, language, 'message')}
           className={style.dataInput}
@@ -138,7 +141,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           {CHAT[language].thanksMsg}
         </Alert>
       </Snackbar>
-      <Button className={style.btnSend} onClick={handleValidForms} disabled={!allFieldsValidated}>
+      <Button className={style.btnSend} onClick={handleValidForms}>
         {CHAT[language].sendBtn}
       </Button>
     </form>

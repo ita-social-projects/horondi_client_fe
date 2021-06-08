@@ -5,7 +5,6 @@ const initialState = {
   pages: {
     aboutUs: {},
     terms: {},
-    contacts: {},
     materials: {},
     privacyPolicy: {},
     paymentAndShipping: {},

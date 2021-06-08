@@ -12,7 +12,7 @@ const routes = {
   pathToThanks: '/thanks',
   pathToPurchases: '/products',
   pathToProfile: '/profile',
-  pathToTerms: '/terms',
-  pathToUserAgreement: '/user-agreement'
+  pathToTerms: '/pages/terms',
+  pathToUserAgreement: '/pages/user-agreement'
 };
 export default routes;

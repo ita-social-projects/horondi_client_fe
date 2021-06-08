@@ -302,21 +302,9 @@ export const SNACKBAR_MESSAGE = {
     'You have be logged out, please sign in again'
   ]
 };
-export const COMMENT_DATA = {
-  firstName: '',
-  text: '',
-  product: '',
-  show: true,
-  email: ''
-};
+
 export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
-
-export const BUSINESS_PAGES = {
-  ABOUT_US: 'about-us',
-  TERMS: 'terms',
-  USER_AGREEMENT: 'user-agreement'
-};
 
 export const LANGUAGES_LIST = [
   { lang: 'UA', value: 0 },

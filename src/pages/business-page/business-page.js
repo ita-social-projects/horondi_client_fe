@@ -18,7 +18,6 @@ const BusinessPage = ({ match }) => {
   }));
 
   useEffect(() => {
-    const pageCode = match.params.page;
     dispatch(getBusinessPageByCode(pageCode));
     window.scrollTo(0, 0);
   }, [match.params.page, dispatch]);

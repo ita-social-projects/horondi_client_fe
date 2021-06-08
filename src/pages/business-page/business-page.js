@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
+import _ from 'lodash';
 
 import { useStyles } from './business-page.style';
 import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
@@ -8,12 +9,9 @@ import { getBusinessPageByCode } from '../../redux/business-pages/business-pages
 const BusinessPage = ({ match }) => {
   const dispatch = useDispatch();
   const pageCode = match.params.page;
-  const pageParam = pageCode
-    .split('-')
-    .map((word, i) => (i !== 0 ? word[0].toUpperCase() + word.slice(1) : word))
-    .join('');
+  const pageCamelCase = _.camelCase(pageCode);
   const { page, language } = useSelector(({ BusinessPages, Language }) => ({
-    page: BusinessPages.pages[pageParam],
+    page: BusinessPages.pages[pageCamelCase],
     language: Language.language
   }));
 

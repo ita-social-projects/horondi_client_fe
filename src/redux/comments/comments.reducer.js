@@ -1,4 +1,4 @@
-import { commentsLimit } from '../../configs';
+import { commentsLimit, commentsReplyLimit } from '../../configs';
 
 import {
   SET_COMMENTS,
@@ -6,7 +6,8 @@ import {
   SET_COMMENTS_LOADING,
   SET_UPDATING_COMMENT,
   SET_COMMENTS_LIMIT,
-  SET_REPLY_LOADING
+  SET_REPLY_LOADING,
+  SET_REPLY_COMMENTS_LIMIT
 } from './comments.types';
 
 export const initialState = {
@@ -14,7 +15,8 @@ export const initialState = {
   commentsLoading: false,
   updatingComment: null,
   comments: [],
-  limit: commentsLimit
+  limit: commentsLimit,
+  replyLimit: commentsReplyLimit
 };
 
 const commentsReducer = (state = initialState, action = {}) => {
@@ -43,6 +45,11 @@ const commentsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         limit: action.payload
+      };
+    case SET_REPLY_COMMENTS_LIMIT:
+      return {
+        ...state,
+        replyLimit: action.payload
       };
     case SET_REPLY_LOADING:
       return {

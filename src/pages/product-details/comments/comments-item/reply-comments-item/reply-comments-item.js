@@ -1,33 +1,27 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Rating from '@material-ui/lab/Rating';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
-import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
-import { Button, Tooltip } from '@material-ui/core';
-import { Loader } from '../../../../../components/loader/loader';
+import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
-
-import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS, IMG_URL } from '../../../../../configs';
-import { TOOLTIPS, REPLY } from '../../../../../translations/product-details.translations';
+import { useStyles } from './reply-comments-item.styles';
+import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../../configs';
+import { TOOLTIPS } from '../../../../../translations/product-details.translations';
+import { handleUserCommentOwner } from '../../../../../utils/handle-comments';
 
 const ReplyCommentsItem = ({ data, replyCommentId }) => {
   const { answerer: user, replyText: text, createdAt: date, showReplyComment: show } = data;
-  console.log(replyCommentId);
-  const { updatingComment, language, userData, orders } = useSelector(
-    ({ Comments, Language, User, Products }) => ({
-      updatingComment: Comments.updatingComment,
-      language: Language.language,
-      userData: User.userData,
-      orders: Products.product.orders
-    })
-  );
 
+  const { language, userData, orders } = useSelector(({ Language, User, Products }) => ({
+    language: Language.language,
+    userData: User.userData,
+    orders: Products.product.orders
+  }));
+  const styles = useStyles();
   const { firstName, email } = user;
 
   const [isModalShown, toggleModal] = useState(false);
-  const [isReplyShown, toggleReply] = useState(false);
 
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
   const dateToShow = new Date(date);
@@ -41,44 +35,45 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
     toggleModal(false);
   };
 
-  const handleReplyOpen = () => {
-    toggleReply(true);
-  };
-
-  const handleReplyClose = () => {
-    toggleReply(false);
-  };
   if (!show && userData?.email !== email) {
     return null;
   }
 
   return (
-    <div>
-      <div>
-        <div>
-          <div>
+    <div className={styles.container}>
+      <div className={styles.comments}>
+        <div className={styles.comment}>
+          <div className={styles.userContainer}>
             <div>
-              {orders.some((el) => el.user.email === email) ? <BeenhereOutlinedIcon /> : ''}
+              {orders.some((el) => el.user.email === email) ? (
+                <Tooltip title={TOOLTIPS[language].bought}>
+                  <BeenhereOutlinedIcon className={styles.boughtIcon} />
+                </Tooltip>
+              ) : (
+                ''
+              )}
             </div>
-            <div>
-              <span>{firstName}</span>
+            <div className={styles.user}>
+              <span className={styles.name}>{firstName}</span>
             </div>
           </div>
-          <div>{commentDate}</div>
-          <div>
-            <div>
-              {(userData ? userData.email === email : false) ? (
-                <div>
-                  <Tooltip title={TOOLTIPS[language].delete}>
-                    <DeleteForeverIcon onClick={handleOpen} />
+          <div className={styles.userIcons}>
+            <div className={styles.date}>{commentDate}</div>
+            {handleUserCommentOwner(userData, email) ? (
+              <div className={styles.icons}>
+                <div className={styles.commentActions}>
+                  <Tooltip title={TOOLTIPS[language].feedbackReply}>
+                    <FeedbackOutlinedIcon />
                   </Tooltip>
-                  <FeedbackOutlinedIcon />
+                  <Tooltip title={TOOLTIPS[language].delete}>
+                    <DeleteForeverIcon className={styles.deleteIcon} onClick={handleOpen} />
+                  </Tooltip>
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
           </div>
         </div>
-        <div>{text}</div>
+        <div className={styles.text}>{text}</div>
       </div>
       <CommentDialog
         handleClose={handleClose}

@@ -21,7 +21,9 @@ import {
   handleRateTip,
   handleClassName,
   handleTextField,
-  handleHelperText
+  handleHelperText,
+  handleCommentsLength,
+  handleCommentsLimit
 } from '../../../utils/handle-comments';
 
 const Comments = () => {
@@ -81,7 +83,7 @@ const Comments = () => {
     hasBought
   ]);
 
-  const commentsLength = comments.filter((item) => item.show === true).length;
+  const commentsLength = handleCommentsLength(comments, email);
 
   const commentsList = comments
     ? comments
@@ -92,7 +94,7 @@ const Comments = () => {
   const limitOption = commentsList.length === comments.length && comments.length > commentsLimit;
 
   const handleCommentsReload = () => {
-    const newLimit = limitOption ? commentsLimit : currentLimit + commentsLimit;
+    const newLimit = handleCommentsLimit(limitOption, commentsLimit, currentLimit);
     dispatch(setCommentsLimit(newLimit));
   };
 

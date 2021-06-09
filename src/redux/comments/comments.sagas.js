@@ -19,7 +19,7 @@ import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
 
-const { added, deleted, error } = SNACKBAR_MESSAGE;
+const { added, deleted, error, addedReply, deletedReply } = SNACKBAR_MESSAGE;
 
 export function* handleAddComment({ payload }) {
   try {
@@ -72,18 +72,18 @@ function* handleCommentsError(e) {
 export function* handleAddReply({ payload }) {
   try {
     yield put(setReplyLoading(true));
-    const addedReply = yield call(addReplyForComment, payload);
-    if (addedReply?.message === USER_IS_BLOCKED) {
+    const addedReplyComment = yield call(addReplyForComment, payload);
+    if (addedReplyComment?.message === USER_IS_BLOCKED) {
       yield call(handleUserIsBlocked);
     } else {
       const comments = yield select(({ Comments }) => Comments.comments);
       const newComments = comments.map((comment) =>
-        comment._id === addedReply._id
-          ? { ...comment, replyComments: [...addedReply.replyComments] }
+        comment._id === addedReplyComment._id
+          ? { ...comment, replyComments: [...addedReplyComment.replyComments] }
           : comment
       );
       yield put(setComments(newComments));
-      yield call(handleSnackbar, added);
+      yield call(handleSnackbar, addedReply);
       yield put(setReplyLoading(false));
     }
   } catch (e) {
@@ -104,7 +104,7 @@ export function* handleDeleteReplyForComment({ payload }) {
         : comment
     );
     yield put(setComments(newComments));
-    yield call(handleSnackbar, deleted);
+    yield call(handleSnackbar, deletedReply);
     yield call(deleteReplyComment, payload);
   } catch (e) {
     yield put(setCommentsLoading(false));

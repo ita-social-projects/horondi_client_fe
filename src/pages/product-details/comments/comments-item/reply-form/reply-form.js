@@ -1,24 +1,24 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
-
+import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
 import { addReply } from '../../../../../redux/comments/comments.actions';
 
-import { PDP_BUTTONS } from '../../../../../translations/product-details.translations';
+import { PDP_BUTTONS, REPLY } from '../../../../../translations/product-details.translations';
 
-const ReplyForm = ({ cancel, commentId, firstName }) => {
+const ReplyForm = ({ cancel, commentId }) => {
   const dispatch = useDispatch();
 
-  const { language, product, userData } = useSelector(({ Products, Language, User }) => ({
-    product: Products.product._id,
+  const styles = useStyles();
+  const { language, userData } = useSelector(({ Language, User }) => ({
     language: Language.language,
     userData: User.userData
   }));
 
-  const { email, _id } = userData;
+  const { _id } = userData;
 
   const onSubmit = ({ text: fieldText }) => {
     dispatch(
@@ -49,21 +49,24 @@ const ReplyForm = ({ cancel, commentId, firstName }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField
-        multiline
-        rows={commentFields.text.rows}
-        value={values.text}
-        // className={styles.editableText}
-        variant='outlined'
-        onChange={handleCommentChange}
-        onBlur={handleBlur}
-        error={!!errors.text}
-        helperText={errors.text || ''}
-        name={TEXT_VALUE}
-      />
-      <div>
-        <Button onClick={cancel}>{PDP_BUTTONS[language].cancelButton}</Button>
-        <Button type='submit' onClick={() => setShouldValidate(true)}>
+      <div className={styles.form}>
+        <TextField
+          multiline
+          rows={commentFields.text.rows}
+          value={values.text}
+          variant='outlined'
+          onChange={handleCommentChange}
+          onBlur={handleBlur}
+          error={!!errors.text}
+          helperText={errors.text || ''}
+          name={TEXT_VALUE}
+          className={styles.input}
+          label={REPLY[language].text}
+        />
+        <Button onClick={cancel} className={styles.replyBtn}>
+          {PDP_BUTTONS[language].cancelButton}
+        </Button>
+        <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
           {PDP_BUTTONS[language].submitButton}
         </Button>
       </div>

@@ -143,14 +143,20 @@ export const TOOLTIPS = {
     removeWishful: 'Видалити з бажаного',
     edit: 'Редагувати',
     delete: 'Видалити',
-    unregisteredReply: 'Вам потрібно увійти щоб залишити репліку'
+    unregisteredReply: 'Вам потрібно увійти щоб залишити репліку',
+    bought: 'Користувач купив даний товар',
+    feedbackComment: 'Ваш коментар не підтверджений адміністратором',
+    feedbackReply: 'Ваша репліка не підтвердженна адміністратором'
   },
   1: {
     addWishful: 'Add to wishlist',
     removeWishful: 'Remove from wishlist',
     edit: 'Edit',
     delete: 'Delete',
-    unregisteredReply: 'You should login to leave reply'
+    unregisteredReply: 'You should login to leave reply',
+    bought: 'The user bought this product',
+    feedbackComment: 'Your comment has not been confirmed by the administrator ',
+    feedbackReply: 'Your reply has not been confirmed by the administrator '
   }
 };
 
@@ -163,6 +169,18 @@ export const DIALOG = {
     title: 'Delete comment?',
     description:
       'Are you sure you want to delete the comment? After deleting you will not be able to restore the comment.'
+  }
+};
+
+export const DIALOG_REPLY = {
+  0: {
+    title: 'Видалити репліку?',
+    description: 'Ви дійсно хочете видалити репліку? Після видалення Ви не зможете його відновити.'
+  },
+  1: {
+    title: 'Delete reply?',
+    description:
+      'Are you sure you want to delete the reply? After deleting you will not be able to restore the reply.'
   }
 };
 
@@ -195,27 +213,15 @@ export const COMMENTS = {
 
 export const REPLY = {
   0: {
-    title: 'Відгуки',
-    firstName: `Ім'я`,
-    email: 'Електронна адреса',
-    text: 'Поділіться своїми враженнями з іншими',
     submit: 'Залишити репліку',
-    unregisteredTip: 'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
-    registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
-    successfulTip: 'Встановити рейтинг',
     loadMore: 'Завантажити більше',
-    hideBtn: 'Приховати коментарі'
+    hideBtn: 'Приховати репліки',
+    text: 'Поділіться своїми враженнями з іншими'
   },
   1: {
-    title: 'Comments',
-    firstName: 'First name',
-    email: 'Email',
-    text: 'Share your thoughts with others',
     submit: 'Leave reply',
-    unregisteredTip: 'You should login and bought the product to leave rate',
-    registeredTip: 'You should bought the product to leave rate',
-    successfulTip: 'Set rate',
     loadMore: 'Load more',
-    hideBtn: 'Hide comments'
+    hideBtn: 'Hide replicas',
+    text: 'Share your thoughts with others'
   }
 };

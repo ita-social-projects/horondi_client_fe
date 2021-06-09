@@ -7,7 +7,10 @@ export const useStyles = makeStyles((theme) => {
     container: {
       color,
       borderTop: '2px solid #C2C2C2',
-      padding: '10px 0'
+      width: '90%',
+      margin: '0 0 0 auto',
+      paddingLeft: '20px',
+      borderLeft: '10px solid #C2C2C2'
     },
     comments: {
       fontWeight: '500'
@@ -94,9 +97,6 @@ export const useStyles = makeStyles((theme) => {
     replyIcon: {
       transform: 'rotate(180deg)',
       marginRight: '15px'
-    },
-    reply: {
-      marginBottom: '2rem'
     }
   };
 });

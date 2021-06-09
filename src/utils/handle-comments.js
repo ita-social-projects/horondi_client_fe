@@ -15,3 +15,26 @@ export const handleTextField = (name, userData) =>
   (name !== TEXT_VALUE && !userData) || name === TEXT_VALUE;
 
 export const handleHelperText = (errorsName) => errorsName || '';
+
+export const handleCommentsLength = (arr, email) => {
+  if (email) {
+    return arr?.filter(
+      (item) => item.show === true || item?.email === email || item.user?.email === email
+    ).length;
+  }
+  return arr?.filter((item) => item.show === true).length;
+};
+
+export const handleReplyCommentsLength = (arr, email) => {
+  if (email) {
+    return arr?.filter((item) => item.showReplyComment === true || item?.answerer?.email === email)
+      .length;
+  }
+  return arr?.filter((item) => item.showReplyComment === true).length;
+};
+
+export const handleCommentsLimit = (limitOption, commentsLimit, currentLimit) =>
+  limitOption ? commentsLimit : currentLimit + commentsLimit;
+
+export const handleUserCommentOwner = (userData, email) =>
+  userData ? userData.email === email : false;

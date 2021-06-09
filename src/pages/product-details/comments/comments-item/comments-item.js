@@ -1,30 +1,42 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import { Button, Tooltip } from '@material-ui/core';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { useStyles } from './comments-item.styles';
-import { Loader } from '../../../../components/loader/loader';
-// import EditableField from './editable-field';
+import LimitButton from '../limit-button/limit-button';
 import CommentDialog from './comment-dialog';
-import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS, IMG_URL } from '../../../../configs';
+import {
+  COMMENTS_TIME_OPTIONS,
+  DATE_LANGUAGE_OPTIONS,
+  commentsReplyLimit
+} from '../../../../configs';
+import { setReplyCommentsLimit } from '../../../../redux/comments/comments.actions';
 import { TOOLTIPS, REPLY } from '../../../../translations/product-details.translations';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
+import {
+  handleReplyCommentsLength,
+  handleCommentsLimit,
+  handleUserCommentOwner
+} from '../../../../utils/handle-comments';
 
 const CommentsItem = ({ data, commentId }) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
   const { email: userEmail, userName, user, text, date, show, rate, replyComments } = data;
 
-  const { updatingComment, language, userData, orders } = useSelector(
+  const { language, userData, orders, currentLimit } = useSelector(
     ({ Comments, Language, User, Products }) => ({
-      updatingComment: Comments.updatingComment,
       language: Language.language,
       userData: User.userData,
-      orders: Products.product.orders
+      orders: Products.product.orders,
+      currentLimit: Comments.replyLimit
     })
   );
 
@@ -56,51 +68,61 @@ const CommentsItem = ({ data, commentId }) => {
     return null;
   }
 
-  if (updatingComment === commentId) {
-    return (
-      <div className={styles.loader}>
-        <Loader />
-      </div>
-    );
-  }
+  const commentsReplyLength = handleReplyCommentsLength(replyComments, email);
+
   const replyCommentsList = replyComments
-    ? replyComments.map(({ _id, ...rest }) => (
-      <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
-    ))
+    ? replyComments
+      .slice(0, currentLimit)
+      .map(({ _id, ...rest }) => <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />)
     : [];
+
+  const limitOption =
+    replyCommentsList.length === replyComments?.length && replyComments.length > commentsReplyLimit;
+
+  const handleReplyCommentsReload = () => {
+    const newLimit = handleCommentsLimit(limitOption, commentsReplyLimit, currentLimit);
+    dispatch(setReplyCommentsLimit(newLimit));
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.comments}>
         <div className={styles.comment}>
-          <div>
+          <div className={styles.userContainer}>
             <div>
-              {orders.some((el) => el.user.email === email) ? <BeenhereOutlinedIcon /> : ''}
+              {orders.some((el) => el.user.email === email) ? (
+                <Tooltip title={TOOLTIPS[language].bought}>
+                  <BeenhereOutlinedIcon className={styles.boughtIcon} />
+                </Tooltip>
+              ) : (
+                ''
+              )}
             </div>
             <div className={styles.user}>
               <span className={styles.name}>{firstName}</span>
             </div>
           </div>
-          <div className={styles.date}>{commentDate}</div>
-          <div className={styles.icons}>
-            <div className={styles.commentActions}>
-              {(userData ? userData.email === email : false) ? (
-                <div>
+          <div className={styles.userIcons}>
+            <div className={styles.date}>{commentDate}</div>
+            {handleUserCommentOwner(userData, email) ? (
+              <div className={styles.icons}>
+                <div className={styles.commentActions}>
+                  <Tooltip title={TOOLTIPS[language].feedbackComment}>
+                    <FeedbackOutlinedIcon />
+                  </Tooltip>
                   <Tooltip title={TOOLTIPS[language].delete}>
                     <DeleteForeverIcon className={styles.deleteIcon} onClick={handleOpen} />
                   </Tooltip>
-                  <FeedbackOutlinedIcon />
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
           </div>
         </div>
-
-        <Rating data-cy='rate' name='edit-rate' value={rate} disabled />
+        {rate > 0 ? <Rating data-cy='rate' name='edit-rate' value={rate} disabled /> : null}
         <div className={styles.text}>{text}</div>
         <Tooltip title={userData ? '' : TOOLTIPS[language].unregisteredReply}>
-          <div>
-            <ReplyOutlinedIcon />
+          <div className={styles.reply}>
+            <ReplyOutlinedIcon className={styles.replyIcon} />
             <Button
               type='submit'
               className={styles.button}
@@ -113,6 +135,14 @@ const CommentsItem = ({ data, commentId }) => {
         </Tooltip>
         {isReplyShown ? <ReplyForm cancel={handleReplyClose} commentId={commentId} /> : null}
         {replyCommentsList}
+        {commentsReplyLength > commentsReplyLimit && (
+          <LimitButton
+            onClick={handleReplyCommentsReload}
+            startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}
+          >
+            {limitOption ? REPLY[language].hideBtn : REPLY[language].loadMore}
+          </LimitButton>
+        )}
       </div>
       <CommentDialog
         handleClose={handleClose}

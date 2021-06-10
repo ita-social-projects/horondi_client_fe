@@ -11,6 +11,8 @@ const routes = {
   pathToMain: '/',
   pathToThanks: '/thanks',
   pathToPurchases: '/products',
-  pathToProfile: '/profile'
+  pathToProfile: '/profile',
+  pathToTerms: '/pages/terms',
+  pathToUserAgreement: '/pages/user-agreement'
 };
 export default routes;

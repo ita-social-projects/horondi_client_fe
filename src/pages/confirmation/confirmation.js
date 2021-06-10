@@ -9,7 +9,6 @@ import { confirmUser } from '../../redux/user/user.actions';
 import { handleMessage } from '../../utils/handle-confirmation';
 
 const Confirmation = ({ token }) => {
-  // HOOKS
   const { language, loading, error } = useSelector(({ User, Language }) => ({
     language: Language.language,
     loading: User.userLoading,
@@ -22,12 +21,10 @@ const Confirmation = ({ token }) => {
     dispatch(confirmUser({ token }));
   }, [dispatch, token]);
 
-  // HANDLERS
   const goTo = (path) => {
     dispatch(push(path));
   };
 
-  // STYLES
   const styles = useStyles();
 
   return (

@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
@@ -18,10 +19,9 @@ import {
   CHECKOUT_TITLES
 } from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, SESSION_STORAGE } from '../../../configs';
+import { CY_CODE_ERR, SESSION_STORAGE, LANGUAGES_LIST } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
-import { CART_BUTTON_TITLES } from '../../../translations/cart.translations';
 import routes from '../../../configs/routes';
 import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
 import {
@@ -31,13 +31,15 @@ import {
   getCurrentCurrency,
   handleError,
   initialValues,
+  getThemeColor,
   orderInputData,
   setUserValues,
   userContactInputLabels,
   userNameInputLabels
 } from '../../../utils/checkout';
+import { getCurrencySign } from '../../../utils/currency';
 import { validationSchema } from '../../../validators/chekout';
-import { MATERIAL_UI_COLOR, TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 import {
   clearSessionStorage,
   getFromSessionStorage,
@@ -48,7 +50,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
   const styles = useStyles({
     isLightTheme
   });
-
+  const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
 
   const dispatch = useDispatch();
@@ -57,6 +59,24 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
       previousValue + calcPriceForCart(currentValue, currency, currentValue.quantity),
     0
   );
+  const consentLink =
+    language === LANGUAGES_LIST[0].value ? (
+      <div className={styles.consentMessage}>
+        {' '}
+        {CHECKOUT_ADDITIONAL_INFORMATION[language].consent[0]}
+        <Link
+          className={styles.consentLink}
+          to={routes.pathToUserAgreement}
+          target='_blank'
+          rel='noreferrer'
+        >
+          {' '}
+          {CHECKOUT_ADDITIONAL_INFORMATION[language].consent[1]}{' '}
+        </Link>
+      </div>
+    ) : (
+      ''
+    );
 
   const {
     dirty,
@@ -109,10 +129,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
             <div className={styles.checkoutTitleInfo}>
               <div className={styles.checkoutTitleInfoData}>
                 <Link to={routes.pathToCart} className={styles.backBtn}>
-                  <KeyboardBackspaceIcon
-                    color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
-                    className={styles.backBtnLine}
-                  />
+                  <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
                 </Link>
                 <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
               </div>
@@ -243,17 +260,15 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {`${totalPriceToPay / 100} ${getCurrentCurrency(currency, language)}`}
+                  {Math.round(totalPriceToPay / 100)}
+                  {'\u00A0'}
+                  <FontAwesomeIcon icon={currencySign} />
                 </p>
               </div>
               <button type='submit' className={styles.submitBtn}>
                 {checkoutFormBtnValue(values, language)}
               </button>
-              <Link to={routes.pathToPurchases}>
-                <span className={`${styles.totalSumTitle} ${styles.goods}`}>
-                  {CART_BUTTON_TITLES[language].goods}
-                </span>
-              </Link>
+              {consentLink}
             </div>
           </Grid>
         </Grid>

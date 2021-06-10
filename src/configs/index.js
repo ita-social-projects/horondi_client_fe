@@ -369,7 +369,7 @@ export const sideBarSubList = [
   },
   {
     name: ['Про нас', 'About us'],
-    link: '/about-us'
+    link: '/pages/about-us'
   },
   {
     name: ['Новини', 'News'],

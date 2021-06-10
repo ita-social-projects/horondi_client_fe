@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
       textAlign: 'center'
     },
     '& > h2': {
+      textDecoration: 'underline orangered',
       textAlign: 'left'
     },
     '& > p > strong': {

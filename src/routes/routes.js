@@ -30,10 +30,7 @@ const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
 const Contacts = lazy(() => import('../pages/contacts'));
-const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
-const PaymentsAndShipping = lazy(() => import('../pages/payments-and-shipping'));
 const Materials = lazy(() => import('../pages/materials'));
-const AboutUs = lazy(() => import('../pages/about-us'));
 const BusinessPage = lazy(() => import('../pages/business-page'));
 
 const Routes = () => {
@@ -59,10 +56,7 @@ const Routes = () => {
               <Route path='/constructor' exact component={ImagesConstructor} />
               <Route path='/wishlist' exact component={Wishlist} />
               <Route path='/contacts' exact component={Contacts} />
-              <Route path='/privacy-policy' exact component={PrivacyPolicy} />
-              <Route path='/payment-and-shipping' exact component={PaymentsAndShipping} />
               <Route path='/materials' exact component={Materials} />
-              <Route path='/about-us' exact component={AboutUs} />
               <Route path='/pages/:page' exact component={BusinessPage} />
               <ProtectedRoute
                 path='/login'

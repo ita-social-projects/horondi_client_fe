@@ -1,0 +1,23 @@
+export const PATHS = {
+  root: '/',
+  errorPage: '/recovery',
+  news: '/news',
+  newsId: '/news/:id',
+  constructor: '/constructor',
+  wishlist: '/wishlish',
+  contacts: '/contacts',
+  materials: '/materials',
+  pagesId: '/pages/:page',
+  login: '/login',
+  register: '/register',
+  thanks: '/thanks',
+  cart: '/cart',
+  checkout: '/checkout',
+  confirmationToken: '/confirmation/:token',
+  recovery: '/recovery',
+  recoveryToken: '/recovery/:token',
+  profile: '/profile',
+  orderHistory: '/order-history',
+  category: '/:category',
+  productId: '/product/:id'
+};

@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { useStyles } from './product-details.styles';
 
-import { selectCurrencySign } from '../../utils/currency';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 import ProductImages from './product-images';
@@ -34,11 +32,10 @@ const ProductDetails = ({ match }) => {
   const { isLightTheme, isLoading, productToSend, currency, product } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
+
   const dispatch = useDispatch();
   const styles = useStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
-
-  const currencySign = selectCurrencySign(currency, faHryvnia, faDollarSign);
 
   const {
     _id: productId,
@@ -142,7 +139,7 @@ const ProductDetails = ({ match }) => {
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo currencySign={currencySign} price={currentSize.additionalPrice} />
+          <ProductInfo price={currentSize.additionalPrice} />
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}
@@ -151,7 +148,7 @@ const ProductDetails = ({ match }) => {
           <ProductSubmit sizes={sizes} setSizeIsNotSelectedError={setSizeIsNotSelectedError} />
         </div>
       </div>
-      <SimilarProducts currencySign={currencySign} />
+      <SimilarProducts />
       <Comments />
       <ToastContainer />
     </Card>

@@ -211,5 +211,21 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 920px)': {
       width: 400
     }
+  },
+
+  consentMessage: {
+    fontSize: 12,
+    letterSpacing: '.3px',
+    color: '#929292',
+    lineHeight: '16px'
+  },
+
+  consentLink: {
+    color: '#929292',
+    textDecoration: 'underline',
+    '&:hover': {
+      color: '#1976D2',
+      backgroundColor: 'transparent'
+    }
   }
 }));

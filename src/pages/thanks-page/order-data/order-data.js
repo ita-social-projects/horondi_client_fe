@@ -1,16 +1,17 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
 import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
 import { useStyles } from './order-data.styles';
 import { PAYMENT_STATUS, THANKS_PAGE_TITLE } from '../../../translations/thanks-page.translations';
 import OrderItemCard from './order-item-card';
 import { defaultProps, ORDER_PAYMENT_STATUS, thanksPropTypes } from '../../../utils/thank-you';
-import { CHECKOUT_TITLES } from '../../../translations/checkout.translations';
-import { DEFAULT_CURRENCY } from '../../../configs';
 
 const OrderData = ({ language, currency, order, isLightTheme }) => {
   const styles = useStyles({ isLightTheme });
+  const currencySign = currency ? faDollarSign : faHryvnia;
 
   return (
     <div className={styles.orderDataContainer}>
@@ -42,11 +43,7 @@ const OrderData = ({ language, currency, order, isLightTheme }) => {
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID && PAYMENT_STATUS[language].paid}
         </span>
         <span className={styles.resultTotalSum}>
-          {`${order?.totalPriceToPay[currency].value} ${
-            currency === DEFAULT_CURRENCY
-              ? CHECKOUT_TITLES[language].UAH
-              : CHECKOUT_TITLES[language].USD
-          }`}
+          {order?.totalPriceToPay[currency].value} <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
     </div>

@@ -41,6 +41,15 @@ export const REGISTER_FORM_LABEL = [
   }
 ];
 
+export const REGISTER_FORM_CONSENT = [
+  {
+    value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
+  },
+  {
+    value: ['Registering, you agree with our', 'terms of service']
+  }
+];
+
 export const CONTINUE_SHOPPING_LABEL = [
   {
     value: 'Продовжити покупки'
@@ -168,34 +177,34 @@ export const errorMessages = [
 export const placeholders = {
   firstName: [
     {
-      value: 'Введіть Ім’я'
+      value: 'Ім’я'
     },
     {
-      value: 'Enter firstname'
+      value: 'Firstname'
     }
   ],
   lastName: [
     {
-      value: 'Введіть прізвище'
+      value: 'Прізвище'
     },
     {
-      value: 'Enter lastname'
+      value: 'Lastname'
     }
   ],
   email: [
     {
-      value: 'Введіть email'
+      value: 'Електронна пошта'
     },
     {
-      value: 'Enter email'
+      value: 'Email'
     }
   ],
   password: [
     {
-      value: 'Введіть пароль'
+      value: 'Пароль'
     },
     {
-      value: 'Enter password'
+      value: 'Password'
     }
   ],
   confirmPassword: [
@@ -263,8 +272,7 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p:
-      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
@@ -394,15 +402,13 @@ export const PROFILE_LABELS = [
 export const PROFILE_PASSWORD_CHANGE = [
   {
     heading: 'Зміна паролю',
-    text:
-      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
     btnTitle: 'Змінити пароль',
     checkEmailText: 'Будь ласка, перевірте ваш емейл!'
   },
   {
     heading: 'Change password',
-    text:
-      'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
     btnTitle: 'Change password',
     checkEmailText: 'Please, check your email!'
   }

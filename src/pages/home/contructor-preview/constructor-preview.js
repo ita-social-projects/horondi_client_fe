@@ -11,6 +11,7 @@ import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
+import { PATHS } from '../../../const/paths';
 
 const ConstructorPreview = () => {
   const language = useSelector(({ Language }) => Language.language);
@@ -26,11 +27,7 @@ const ConstructorPreview = () => {
   }, [dispatch]);
 
   return (
-    <div
-      className={styles.constructorPreview}
-      id='constructor'
-      data-section-style='dark'
-    >
+    <div className={styles.constructorPreview} id='constructor' data-section-style='dark'>
       <ReactPlayer
         width='100%'
         height='100%'
@@ -45,7 +42,7 @@ const ConstructorPreview = () => {
         onMouseEnter={() => setIsMouseIn(true)}
       >
         <ExpandLessIcon className={styles.constructorInnerIcon} />
-        <Link to='/constructor' className={styles.constructorInnerLink}>
+        <Link to={PATHS.pathToConstructor} className={styles.constructorInnerLink}>
           {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
           <ArrowRightAltIcon />
         </Link>

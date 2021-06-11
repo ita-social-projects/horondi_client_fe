@@ -10,15 +10,14 @@ import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import HeaderRightBar from '../header-right-bar';
+import { PATHS } from '../../const/paths';
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
-  const { language, burgerMenuCategories } = useSelector(
-    ({ Language, BurgerMenu }) => ({
-      language: Language.language,
-      burgerMenuCategories: BurgerMenu.categories
-    })
-  );
+  const { language, burgerMenuCategories } = useSelector(({ Language, BurgerMenu }) => ({
+    language: Language.language,
+    burgerMenuCategories: BurgerMenu.categories
+  }));
 
   const categoriesList = useMemo(
     () =>
@@ -58,19 +57,14 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
     >
       <List>{categoriesList}</List>
       <Link
-        to='/constructor'
+        to={PATHS.pathToConstructor}
         className={styles.mainItem}
         onClick={() => setIsMenuOpen(false)}
       >
-        <span className={styles.constructorItem}>
-          {CONSTRUCTOR[language].value}
-        </span>
+        <span className={styles.constructorItem}>{CONSTRUCTOR[language].value}</span>
       </Link>
       {subList}
-      <FooterLinks
-        socialIconsStyles={styles.socialIconsStyles}
-        position='center'
-      />
+      <FooterLinks socialIconsStyles={styles.socialIconsStyles} position='center' />
       <HeaderRightBar fromSideBar />
     </Drawer>
   );

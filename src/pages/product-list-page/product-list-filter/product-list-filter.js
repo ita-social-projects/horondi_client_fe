@@ -20,6 +20,7 @@ import ProductsFiltersContainer from '../../../containers/products-filters-conta
 import { selectFilterData } from '../../../redux/selectors/multiple.selectors';
 import { countPerPage, sort } from '../../../configs';
 import useProductFilters from '../../../hooks/use-product-filters';
+import { PATHS } from '../../../const/paths';
 
 const ProductListFilter = () => {
   const styles = useStyles();
@@ -33,7 +34,9 @@ const ProductListFilter = () => {
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(sort);
     const quantityPerPage = searchParams.get(countPerPage);
-    history.push(`/products?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
+    history.push(
+      `${PATHS.pathToPurchases}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`
+    );
     dispatch(getFiltredProducts({}));
     dispatch(setPriceFilter([]));
     dispatch(setModelsFilter([]));

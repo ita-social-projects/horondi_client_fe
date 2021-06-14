@@ -144,6 +144,7 @@ export const TOOLTIPS = {
     edit: 'Редагувати',
     delete: 'Видалити',
     unregisteredReply: 'Вам потрібно увійти щоб залишити репліку',
+    unregisteredComment: 'Вам потрібно увійти щоб залишити коментар',
     bought: 'Користувач купив даний товар',
     feedbackComment: 'Ваш коментар не підтверджений адміністратором',
     feedbackReply: 'Ваша репліка не підтвердженна адміністратором'
@@ -154,6 +155,7 @@ export const TOOLTIPS = {
     edit: 'Edit',
     delete: 'Delete',
     unregisteredReply: 'You should login to leave reply',
+    unregisteredComment: 'You should login to leave comment',
     bought: 'The user bought this product',
     feedbackComment: 'Your comment has not been confirmed by the administrator ',
     feedbackReply: 'Your reply has not been confirmed by the administrator '

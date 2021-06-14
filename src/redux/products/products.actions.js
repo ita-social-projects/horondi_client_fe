@@ -22,8 +22,7 @@ import {
   SET_PRODUCT_LOADING,
   SET_PRODUCT_TO_SEND,
   CLEAR_PRODUCT_TO_SEND,
-  CHANGE_FILTER_STATUS,
-  SET_ORDERS
+  CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const setProduct = (item) => ({
@@ -123,10 +122,5 @@ export const clearProductToSend = () => ({
 
 export const changeFilterStatus = (payload) => ({
   type: CHANGE_FILTER_STATUS,
-  payload
-});
-
-export const setOrders = (payload) => ({
-  type: SET_ORDERS,
   payload
 });

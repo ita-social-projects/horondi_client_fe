@@ -1,19 +1,32 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 
-import { setCommentsLoading, setComments, setRate, setReplyLoading } from './comments.actions';
+import {
+  setCommentsLoading,
+  setComments,
+  setRate,
+  setReplyLoading,
+  setGetCommentsLoading
+} from './comments.actions';
 import {
   setSnackBarMessage,
   setSnackBarSeverity,
   setSnackBarStatus
 } from '../snackbar/snackbar.actions';
 import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
-import { ADD_COMMENT, ADD_REPLY, DELETE_COMMENT, DELETE_REPLY_COMMENT } from './comments.types';
+import {
+  ADD_COMMENT,
+  ADD_REPLY,
+  DELETE_COMMENT,
+  DELETE_REPLY_COMMENT,
+  GET_COMMENTS
+} from './comments.types';
 import {
   addComment,
   deleteComment,
   changeRate,
   addReplyForComment,
-  deleteReplyComment
+  deleteReplyComment,
+  getComments
 } from './comments.operations';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
@@ -71,7 +84,7 @@ function* handleCommentsError(e) {
 
 export function* handleAddReply({ payload }) {
   try {
-    yield put(setReplyLoading(true));
+    yield put(setReplyLoading({ loader: true, commentId: payload.commentId }));
     const addedReplyComment = yield call(addReplyForComment, payload);
     if (addedReplyComment?.message === USER_IS_BLOCKED) {
       yield call(handleUserIsBlocked);
@@ -84,10 +97,10 @@ export function* handleAddReply({ payload }) {
       );
       yield put(setComments(newComments));
       yield call(handleSnackbar, addedReply);
-      yield put(setReplyLoading(false));
+      yield put(setReplyLoading({ loader: false, commentId: '' }));
     }
   } catch (e) {
-    yield put(setReplyLoading(false));
+    yield put(setReplyLoading({ loader: false, commentId: '' }));
     yield call(handleCommentsError, e);
   }
 }
@@ -118,9 +131,25 @@ function* handleSnackbar(message) {
   yield put(setSnackBarStatus(true));
 }
 
+export function* handleGetComments({ payload }) {
+  try {
+    yield put(setGetCommentsLoading(true));
+    const comments = yield call(getComments, payload);
+    console.log(comments);
+    if (comments) {
+      yield put(setComments(comments));
+    }
+    yield put(setGetCommentsLoading(false));
+  } catch (e) {
+    yield put(setGetCommentsLoading(false));
+    yield call(handleCommentsError, e);
+  }
+}
+
 export default function* commentsSaga() {
   yield takeEvery(ADD_COMMENT, handleAddComment);
   yield takeEvery(DELETE_COMMENT, handleDeleteComment);
   yield takeEvery(ADD_REPLY, handleAddReply);
   yield takeEvery(DELETE_REPLY_COMMENT, handleDeleteReplyForComment);
+  yield takeEvery(GET_COMMENTS, handleGetComments);
 }

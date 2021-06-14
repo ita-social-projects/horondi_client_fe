@@ -7,20 +7,12 @@ import {
   setAllFilterData,
   setPagesCount,
   setProduct,
-  setProductLoading,
-  setOrders
+  setProductLoading
 } from './products.actions';
 import { setError } from '../error/error.actions';
 import { setProductsForSearchBar, setSearchBarLoading } from '../search-bar/search-bar.actions';
 import { GET_ALL_FILTERS, GET_FILTERED_PRODUCTS, GET_PRODUCT } from './products.types';
-import {
-  getFilteredProducts,
-  getProductById,
-  getAllFilters,
-  getOrdersByProduct
-} from './products.operations';
-import { getComments } from '../comments/comments.operations';
-import { setComments } from '../comments/comments.actions';
+import { getFilteredProducts, getProductById, getAllFilters } from './products.operations';
 import routes from '../../configs/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
@@ -68,13 +60,6 @@ export function* handleProductLoading({ payload }) {
     yield put(setProductLoading(true));
     const product = yield call(getProductById, payload);
     yield put(setProduct(product));
-    const orders = yield call(getOrdersByProduct, payload);
-    console.log(orders);
-    yield put(setOrders(orders));
-    const comments = yield call(getComments, payload);
-    if (comments) {
-      yield put(setComments(comments));
-    }
     yield put(setProductLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);

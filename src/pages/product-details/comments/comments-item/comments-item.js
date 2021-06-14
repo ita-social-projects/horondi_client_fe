@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -20,31 +20,41 @@ import { setReplyCommentsLimit } from '../../../../redux/comments/comments.actio
 import { TOOLTIPS, REPLY } from '../../../../translations/product-details.translations';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
+import { Loader } from '../../../../components/loader/loader';
 import {
   handleReplyCommentsLength,
   handleCommentsLimit,
-  handleUserCommentOwner
+  handleUserCommentOwner,
+  handleReplyCommentsFilter
 } from '../../../../utils/handle-comments';
 
 const CommentsItem = ({ data, commentId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { email: userEmail, userName, user, text, date, show, rate, replyComments } = data;
+  const { user, text, date, show, rate, replyComments, isSelled } = data;
 
-  const { language, userData, orders, currentLimit } = useSelector(
-    ({ Comments, Language, User, Products }) => ({
+  const { language, userData, currentLimit, replyLoading, replyLoadingId } = useSelector(
+    ({ Comments, Language, User }) => ({
       language: Language.language,
       userData: User.userData,
-      orders: Products.product.orders,
-      currentLimit: Comments.replyLimit
+      currentLimit: Comments.replyLimit,
+      replyLoading: Comments.replyLoading.loader,
+      replyLoadingId: Comments.replyLoading.commentId
     })
   );
 
-  const { firstName, email } = user || { firstName: userName, email: userEmail };
+  const { firstName, email, _id: id } = user || {
+    firstName: 'Deleted User',
+    email: 'Deleted Email',
+    _id: 'deleted'
+  };
 
   const [isModalShown, toggleModal] = useState(false);
   const [isReplyShown, toggleReply] = useState(false);
-
+  const [replyCommentsListFilter, setReplyCommentsListFilter] = useState([]);
+  useEffect(() => {
+    setReplyCommentsListFilter(handleReplyCommentsFilter(replyComments, userData?._id));
+  }, [replyComments]);
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
   const dateToShow = new Date(date);
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
@@ -64,20 +74,21 @@ const CommentsItem = ({ data, commentId }) => {
   const handleReplyClose = () => {
     toggleReply(false);
   };
-  if (!show && userData?.email !== email) {
+  if (!show && userData?._id !== id) {
     return null;
   }
 
-  const commentsReplyLength = handleReplyCommentsLength(replyComments, email);
+  const commentsReplyLength = handleReplyCommentsLength(replyComments, userData?._id);
 
-  const replyCommentsList = replyComments
-    ? replyComments
+  const replyCommentsList = replyCommentsListFilter
+    ? replyCommentsListFilter
       .slice(0, currentLimit)
       .map(({ _id, ...rest }) => <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />)
     : [];
 
   const limitOption =
-    replyCommentsList.length === replyComments?.length && replyComments.length > commentsReplyLimit;
+    replyCommentsList.length === replyCommentsListFilter?.length &&
+    replyCommentsListFilter.length > commentsReplyLimit;
 
   const handleReplyCommentsReload = () => {
     const newLimit = handleCommentsLimit(limitOption, commentsReplyLimit, currentLimit);
@@ -90,7 +101,7 @@ const CommentsItem = ({ data, commentId }) => {
         <div className={styles.comment}>
           <div className={styles.userContainer}>
             <div>
-              {orders.some((el) => el.user.email === email) ? (
+              {isSelled ? (
                 <Tooltip title={TOOLTIPS[language].bought}>
                   <BeenhereOutlinedIcon className={styles.boughtIcon} />
                 </Tooltip>
@@ -120,6 +131,7 @@ const CommentsItem = ({ data, commentId }) => {
         </div>
         {rate > 0 ? <Rating data-cy='rate' name='edit-rate' value={rate} disabled /> : null}
         <div className={styles.text}>{text}</div>
+
         <Tooltip title={userData ? '' : TOOLTIPS[language].unregisteredReply}>
           <div className={styles.reply}>
             <ReplyOutlinedIcon className={styles.replyIcon} />
@@ -131,8 +143,14 @@ const CommentsItem = ({ data, commentId }) => {
             >
               {REPLY[language].submit}
             </Button>
+            {replyLoading && replyLoadingId === commentId && (
+              <div className={styles.loader}>
+                <Loader width={40} height={40} heightWrap={90} />
+              </div>
+            )}
           </div>
         </Tooltip>
+
         {isReplyShown ? <ReplyForm cancel={handleReplyClose} commentId={commentId} /> : null}
         {replyCommentsList}
         {commentsReplyLength > commentsReplyLimit && (

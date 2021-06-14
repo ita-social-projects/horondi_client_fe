@@ -19,7 +19,8 @@ export const selectProductsIdCommentsLanguageUserData = ({
   productId: Products.product._id,
   language: Language.language,
   userData: User.userData,
-  orders: Products.product.orders
+  userOrders: User.userOrders,
+  getCommentsLoading: Comments.getCommentsLoading
 });
 
 export const selectCurrencyProductsCategoryFilter = ({

@@ -23,8 +23,7 @@ import {
   SET_UPDATING_COMMENT,
   SET_PRODUCT_TO_SEND,
   CLEAR_PRODUCT_TO_SEND,
-  CHANGE_FILTER_STATUS,
-  SET_ORDERS
+  CHANGE_FILTER_STATUS
 } from './products.types';
 
 export const initialState = {
@@ -225,14 +224,6 @@ const productsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         commentsLoading: action.payload
-      };
-    case SET_ORDERS:
-      return {
-        ...state,
-        product: {
-          ...state.product,
-          orders: action.payload
-        }
       };
     case SET_UPDATING_COMMENT:
       return {

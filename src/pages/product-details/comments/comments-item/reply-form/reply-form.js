@@ -13,9 +13,10 @@ const ReplyForm = ({ cancel, commentId }) => {
   const dispatch = useDispatch();
 
   const styles = useStyles();
-  const { language, userData } = useSelector(({ Language, User }) => ({
+  const { language, userData, productId } = useSelector(({ Language, User, Products }) => ({
     language: Language.language,
-    userData: User.userData
+    userData: User.userData,
+    productId: Products.product._id
   }));
 
   const { _id } = userData;
@@ -26,7 +27,8 @@ const ReplyForm = ({ cancel, commentId }) => {
         id: _id,
         answerer: _id,
         replyText: fieldText,
-        commentId
+        commentId,
+        productId
       })
     );
     setShouldValidate(false);

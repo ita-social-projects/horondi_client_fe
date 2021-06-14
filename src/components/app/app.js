@@ -12,7 +12,7 @@ import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { setThemeMode } from '../../redux/theme/theme.actions';
 import { getCategories } from '../../redux/categories/categories.actions';
-import { preserveUser } from '../../redux/user/user.actions';
+import { preserveUser, getUserOrders } from '../../redux/user/user.actions';
 import {
   getAllFilters,
   setCountPerPage,
@@ -36,6 +36,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(preserveUser());
+    dispatch(getUserOrders());
     dispatch(getBurgerMenuLinks());
     dispatch(getCategories());
     dispatch(getContacts());

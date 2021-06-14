@@ -6,20 +6,34 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
-import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../../configs';
+import {
+  COMMENTS_TIME_OPTIONS,
+  DATE_LANGUAGE_OPTIONS,
+  COMMENT_OWNER_STATUS
+} from '../../../../../configs';
 import { TOOLTIPS } from '../../../../../translations/product-details.translations';
 import { handleUserCommentOwner } from '../../../../../utils/handle-comments';
 
 const ReplyCommentsItem = ({ data, replyCommentId }) => {
-  const { answerer: user, replyText: text, createdAt: date, showReplyComment: show } = data;
+  const {
+    answerer: user,
+    replyText: text,
+    createdAt: date,
+    showReplyComment: show,
+    isSelled
+  } = data;
 
-  const { language, userData, orders } = useSelector(({ Language, User, Products }) => ({
+  const { language, userData } = useSelector(({ Language, User, Products }) => ({
     language: Language.language,
-    userData: User.userData,
-    orders: Products.product.orders
+    userData: User.userData
   }));
   const styles = useStyles();
-  const { firstName, email } = user;
+  const { firstName, email, _id, role } = user || {
+    firstName: 'Deleted User',
+    email: 'Deleted Email',
+    _id: 'deleted',
+    role: 'deleted'
+  };
 
   const [isModalShown, toggleModal] = useState(false);
 
@@ -35,7 +49,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
     toggleModal(false);
   };
 
-  if (!show && userData?.email !== email) {
+  if (!show && userData?._id !== _id) {
     return null;
   }
 
@@ -45,7 +59,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
         <div className={styles.comment}>
           <div className={styles.userContainer}>
             <div>
-              {orders.some((el) => el.user.email === email) ? (
+              {isSelled ? (
                 <Tooltip title={TOOLTIPS[language].bought}>
                   <BeenhereOutlinedIcon className={styles.boughtIcon} />
                 </Tooltip>
@@ -54,7 +68,11 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
               )}
             </div>
             <div className={styles.user}>
-              <span className={styles.name}>{firstName}</span>
+              <span className={styles.name}>
+                {role === 'admin' || role === 'superadmin'
+                  ? `${COMMENT_OWNER_STATUS.isAdmin[language]} ${firstName}`
+                  : firstName}
+              </span>
             </div>
           </div>
           <div className={styles.userIcons}>

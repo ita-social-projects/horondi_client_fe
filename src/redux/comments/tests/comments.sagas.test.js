@@ -8,6 +8,7 @@ import { addComment, deleteComment, getComments } from '../comments.operations';
 
 import { SET_COMMENTS_LOADING, SET_COMMENTS } from '../comments.types';
 import { SNACKBAR_MESSAGE } from '../../../configs';
+
 import {
   SET_SNACKBAR_MESSAGE,
   SET_SNACKBAR_SEVERITY,
@@ -15,6 +16,7 @@ import {
 } from '../../snackbar/snackbar.types';
 
 const productId = 'c3a84a5b9866c30390366168';
+const userId = 'c3a84a5b9866c30390366169';
 const fakeComments = {
   data: {
     getAllCommentsByProduct: {
@@ -27,8 +29,11 @@ describe('Add comments saga', () => {
   it.skip('should add comment', () => {
     const args = {
       payload: {
-        rate: 0,
-        product: productId
+        rate: 1,
+        product: productId,
+        show: false,
+        text: 'nice',
+        user: userId
       }
     };
     const addedComment = {
@@ -40,10 +45,7 @@ describe('Add comments saga', () => {
     };
 
     return expectSaga(handleAddComment, args)
-      .provide([
-        [matchers.call.fn(addComment), addedComment],
-        [matchers.call.fn(getComments), fakeComments]
-      ])
+      .provide([[matchers.call.fn(addComment), addedComment]])
       .put({ type: SET_COMMENTS_LOADING, payload: true })
       .put({
         type: SET_COMMENTS,

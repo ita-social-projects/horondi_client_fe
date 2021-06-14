@@ -337,8 +337,6 @@ export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
 export const commentFields = {
-  firstName: { name: 'firstName' },
-  email: { name: 'email' },
   text: { name: 'text', multiline: true, rows: 7 }
 };
 
@@ -467,3 +465,7 @@ export const FETCH_POLICY = 'no-cache';
 export const RETURN_PAGE = 'returnPage';
 
 export const HYPHEN = '-';
+
+export const COMMENT_OWNER_STATUS = {
+  isAdmin: ['Менеджер', 'Manager']
+};

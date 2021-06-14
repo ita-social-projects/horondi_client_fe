@@ -10,23 +10,26 @@ const getComments = async (id) => {
           date
           show
           rate
+          isSelled
           replyComments {
             _id
             createdAt
             replyText
+            isSelled
             showReplyComment
             answerer{
+              _id
               firstName
               email
+              role
             }
           }
           user {
             _id
             email
             firstName
+            role
           }
-          userName
-          email
         }
         ... on Error {
           statusCode
@@ -57,19 +60,16 @@ const addComment = async (payload) => {
   const addCommentMutation = `
     mutation(
       $product: ID!
-      $email: String!
-      $firstName: String
       $show: Boolean!
       $text: String
       $user: ID
       $rate: Int
     ) {
       addComment(
+        id: $user
         comment: {
           text: $text
           show: $show
-          userName:$firstName
-          email: $email
           user: $user
           product: $product
           rate: $rate
@@ -80,12 +80,14 @@ const addComment = async (payload) => {
           text
           date
           rate
+          show
           user{
+            _id
             firstName
             email
+            role
           }
-          userName
-          email
+          isSelled
         }
       }
     }
@@ -118,6 +120,7 @@ const addReplyForComment = async (payload) => {
       $id: ID
       $commentId: ID!
       $replyText: String!
+      $productId: ID
       $answerer: ID
     ) {
       replyForComment(
@@ -127,6 +130,7 @@ const addReplyForComment = async (payload) => {
           answerer: $answerer
           replyText: $replyText
           refToReplyComment: $commentId
+          productId: $productId
         }
       ) {
         ... on Comment {
@@ -136,9 +140,12 @@ const addReplyForComment = async (payload) => {
             replyText
             showReplyComment
             createdAt
+            isSelled
             answerer{
+              _id
               firstName
               email
+              role
             }
           }
         }

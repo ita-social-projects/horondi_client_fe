@@ -307,21 +307,7 @@ const getProductById = async (id) => {
             }
           }
           availableCount
-          rate
-          comments {
-            items {
-              _id
-              text
-              date
-              user {
-                _id
-                email
-                firstName
-              }
-              userName
-              email
-            }
-          }
+          rate          
         }
         ... on Error {
           statusCode
@@ -335,21 +321,4 @@ const getProductById = async (id) => {
   return result?.data?.getProductById;
 };
 
-const getOrdersByProduct = async (id) => {
-  const getOrdersByProductQuery = `
-    query($id: ID!){
-      getOrdersByProduct(id: $id){
-        ... on Order{
-          user{
-            email
-          }
-        }
-      }
-    }
-  `;
-  const result = await getItems(getOrdersByProductQuery, { id });
-
-  return result?.data?.getOrdersByProduct;
-};
-
-export { getProductById, getAllFilters, getFilteredProducts, getOrdersByProduct };
+export { getProductById, getAllFilters, getFilteredProducts };

@@ -16,25 +16,28 @@ export const handleTextField = (name, userData) =>
 
 export const handleHelperText = (errorsName) => errorsName || '';
 
-export const handleCommentsLength = (arr, email) => {
-  if (email) {
-    return arr?.filter(
-      (item) => item.show === true || item?.email === email || item.user?.email === email
-    ).length;
+export const handleCommentsFilter = (arr, id) => {
+  if (id) {
+    return arr?.filter((item) => item.show === true || item.user?._id === id);
   }
-  return arr?.filter((item) => item.show === true).length;
+  return arr?.filter((item) => item.show === true);
 };
 
-export const handleReplyCommentsLength = (arr, email) => {
-  if (email) {
-    return arr?.filter((item) => item.showReplyComment === true || item?.answerer?.email === email)
-      .length;
+export const handleReplyCommentsFilter = (arr, id) => {
+  if (id) {
+    return arr?.filter((item) => item.showReplyComment === true || item?.answerer?._id === id);
   }
-  return arr?.filter((item) => item.showReplyComment === true).length;
+  return arr?.filter((item) => item.showReplyComment === true);
 };
+
+export const handleCommentsLength = (arr, id) => handleCommentsFilter(arr, id).length;
+
+export const handleReplyCommentsLength = (arr, id) => handleReplyCommentsFilter(arr, id).length;
 
 export const handleCommentsLimit = (limitOption, commentsLimit, currentLimit) =>
   limitOption ? commentsLimit : currentLimit + commentsLimit;
 
 export const handleUserCommentOwner = (userData, email) =>
   userData ? userData.email === email : false;
+
+export const handleHasBought = (isBought) => (isBought ? 5 : 0);

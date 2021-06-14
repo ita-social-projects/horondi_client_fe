@@ -12,8 +12,12 @@ import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 
 import { TEXT_VALUE, commentFields, formRegExp, commentsLimit } from '../../../configs';
-import { COMMENTS } from '../../../translations/product-details.translations';
-import { addComment, setCommentsLimit } from '../../../redux/comments/comments.actions';
+import { COMMENTS, TOOLTIPS } from '../../../translations/product-details.translations';
+import {
+  addComment,
+  setCommentsLimit,
+  getComments
+} from '../../../redux/comments/comments.actions';
 import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
@@ -23,7 +27,9 @@ import {
   handleTextField,
   handleHelperText,
   handleCommentsLength,
-  handleCommentsLimit
+  handleCommentsLimit,
+  handleCommentsFilter,
+  handleHasBought
 } from '../../../utils/handle-comments';
 
 const Comments = () => {
@@ -37,13 +43,18 @@ const Comments = () => {
     comments,
     userData,
     currentLimit,
-    orders
+    userOrders,
+    getCommentsLoading
   } = useSelector(selectProductsIdCommentsLanguageUserData);
 
-  const { _id: userId, email, firstName, images } = userData || {};
+  const { _id: userId } = userData || {};
+
+  useEffect(() => {
+    dispatch(getComments(productId));
+  }, [productId]);
 
   const onSubmit = (formValues) => {
-    const userFields = userId ? { email, firstName, images, user: userId } : {};
+    const userFields = userId ? { user: userId } : {};
     dispatch(
       addComment({
         ...formValues,
@@ -69,29 +80,40 @@ const Comments = () => {
   } = useCommentValidation(!!userData, onSubmit);
 
   const hasBought = useMemo(
-    () => !!orders && orders.some((emailOrder) => emailOrder.user.email === email),
-    [orders, userId]
+    () =>
+      userOrders?.some(
+        (order) =>
+          order?.items.some((product) => product.product._id === productId) &&
+          order?.status === 'DELIVERED'
+      ),
+    [userId, userOrders]
   );
 
   const [rate, setRate] = useState(0);
+
   useEffect(() => {
-    hasBought ? setRate(5) : setRate(0);
+    setRate(handleHasBought(hasBought));
   }, [hasBought]);
+
   const rateTip = useMemo(() => handleRateTip(userId, language, hasBought), [
     language,
     userId,
     hasBought
   ]);
+  const [commentsListFilter, setCommentsListFilter] = useState([]);
+  useEffect(() => {
+    setCommentsListFilter(handleCommentsFilter(comments, userId));
+  }, [comments]);
+  const commentsLength = handleCommentsLength(comments, userId);
 
-  const commentsLength = handleCommentsLength(comments, email);
-
-  const commentsList = comments
-    ? comments
+  const commentsList = commentsListFilter
+    ? commentsListFilter
       .slice(0, currentLimit)
       .map(({ _id, ...rest }) => <CommentsItem key={_id} data={rest} commentId={_id} />)
     : [];
 
-  const limitOption = commentsList.length === comments.length && comments.length > commentsLimit;
+  const limitOption =
+    commentsList.length === commentsListFilter.length && commentsListFilter.length > commentsLimit;
 
   const handleCommentsReload = () => {
     const newLimit = handleCommentsLimit(limitOption, commentsLimit, currentLimit);
@@ -102,6 +124,10 @@ const Comments = () => {
     const value = e.target.value.replace(formRegExp.link, '');
     setFieldValue(commentFields.text.name, value);
   };
+
+  if (getCommentsLoading) {
+    return <Loader width={40} height={40} />;
+  }
 
   return (
     <div className={styles.comment}>
@@ -141,20 +167,24 @@ const Comments = () => {
               )
           )}
         </div>
-        <div className={styles.submit}>
-          <Button
-            type='submit'
-            className={styles.commentBtn}
-            onClick={() => setShouldValidate(true)}
-          >
-            {COMMENTS[language].submit}
-          </Button>
-          {commentsLoading && (
-            <div className={styles.loader}>
-              <Loader width={40} height={40} />
-            </div>
-          )}
-        </div>
+        <Tooltip title={userData ? '' : TOOLTIPS[language].unregisteredComment}>
+          <div className={styles.submit}>
+            <Button
+              type='submit'
+              className={styles.commentBtn}
+              disabled={!userData}
+              onClick={() => setShouldValidate(true)}
+            >
+              {COMMENTS[language].submit}
+            </Button>
+
+            {commentsLoading && (
+              <div className={styles.loader}>
+                <Loader width={40} height={40} heightWrap={90} />
+              </div>
+            )}
+          </div>
+        </Tooltip>
       </form>
       {commentsList}
       {commentsLength > commentsLimit && (

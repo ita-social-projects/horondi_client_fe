@@ -100,11 +100,12 @@ export function* handleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
-
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
     setToLocalStorage(ACCESS_TOKEN, user.token);
     setToLocalStorage(WISHLIST_KEY, user.wishlist);
     yield put(setUser({ ...user, purchasedProducts }));
+    const orders = yield call(getUserOrders);
+    yield put(setUserOrders(orders));
     yield put(setWishlist(user.wishlist));
     const cartFromLc = getFromLocalStorage(cartKey);
     const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
@@ -183,12 +184,11 @@ export function* handleUserPreserve() {
     if (!accessToken) {
       return;
     }
-
-    yield put(setCartLoading(true));
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
     const userCart = yield call(getCartByUserId, user._id);
+    yield put(setCartLoading(true));
     yield put(setCart(userCart.cart.items));
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
   } catch (e) {
@@ -238,6 +238,7 @@ export function* handleGetUserOrders() {
 
 export function* handleUserLogout() {
   yield put(setUser(null));
+  yield put(setUserOrders(null));
   yield put(resetCart());
   yield put(resetWishlist());
   clearLocalStorage();

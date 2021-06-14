@@ -10,7 +10,9 @@ import {
   SET_REPLY_LOADING,
   DELETE_REPLY_COMMENT,
   ADD_REPLY,
-  SET_REPLY_COMMENTS_LIMIT
+  SET_REPLY_COMMENTS_LIMIT,
+  GET_COMMENTS,
+  SET_GET_COMMENTS_LOADING
 } from './comments.types';
 
 export const setRate = (rate) => ({
@@ -70,5 +72,14 @@ export const deleteReplyComment = (payload) => ({
 
 export const setReplyCommentsLimit = (payload) => ({
   type: SET_REPLY_COMMENTS_LIMIT,
+  payload
+});
+export const getComments = (id) => ({
+  type: GET_COMMENTS,
+  payload: id
+});
+
+export const setGetCommentsLoading = (payload) => ({
+  type: SET_GET_COMMENTS_LOADING,
   payload
 });

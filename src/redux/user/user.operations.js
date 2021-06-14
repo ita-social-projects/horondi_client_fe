@@ -319,17 +319,10 @@ const getUserOrders = async () => {
         dateOfCreation
         status
         items {
-          name {
-            value
-          }
-          bottomMaterial{
-            value
+          product{
+            _id
           }
           quantity
-          actualPrice {
-            value
-            currency
-          }
         }
         totalItemsPrice {
           value

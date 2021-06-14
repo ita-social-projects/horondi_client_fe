@@ -29,7 +29,7 @@ import {
   handleCommentsLength,
   handleCommentsLimit,
   handleCommentsFilter,
-  handleHasBought
+  handleUserLogin
 } from '../../../utils/handle-comments';
 
 const Comments = () => {
@@ -43,7 +43,6 @@ const Comments = () => {
     comments,
     userData,
     currentLimit,
-    userOrders,
     getCommentsLoading
   } = useSelector(selectProductsIdCommentsLanguageUserData);
 
@@ -79,31 +78,17 @@ const Comments = () => {
     setShouldValidate
   } = useCommentValidation(!!userData, onSubmit);
 
-  const hasBought = useMemo(
-    () =>
-      userOrders?.some(
-        (order) =>
-          order?.items.some((product) => product.product._id === productId) &&
-          order?.status === 'DELIVERED'
-      ),
-    [userId, userOrders]
-  );
-
   const [rate, setRate] = useState(0);
 
   useEffect(() => {
-    setRate(handleHasBought(hasBought));
-  }, [hasBought]);
+    setRate(handleUserLogin(userData));
+  }, [userData]);
 
-  const rateTip = useMemo(() => handleRateTip(userId, language, hasBought), [
-    language,
-    userId,
-    hasBought
-  ]);
+  const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
   const [commentsListFilter, setCommentsListFilter] = useState([]);
   useEffect(() => {
     setCommentsListFilter(handleCommentsFilter(comments, userId));
-  }, [comments]);
+  }, [comments, userId]);
   const commentsLength = handleCommentsLength(comments, userId);
 
   const commentsList = commentsListFilter
@@ -125,10 +110,6 @@ const Comments = () => {
     setFieldValue(commentFields.text.name, value);
   };
 
-  if (getCommentsLoading) {
-    return <Loader width={40} height={40} />;
-  }
-
   return (
     <div className={styles.comment}>
       <h2 className={styles.title}>{COMMENTS[language].title}</h2>
@@ -136,7 +117,7 @@ const Comments = () => {
         <span className={styles.rate}>
           <Rating
             data-cy='rate'
-            disabled={!hasBought}
+            disabled={!userData}
             name='edit-rate'
             value={rate}
             onChange={(e, newRate) => setRate(newRate)}
@@ -155,6 +136,7 @@ const Comments = () => {
                     onChange={name === TEXT_VALUE ? handleCommentChange : handleChange}
                     onBlur={handleBlur}
                     value={values[name]}
+                    disabled={!userData}
                     label={COMMENTS[language][name]}
                     error={!!errors[name]}
                     helperText={handleHelperText(errors[name])}
@@ -186,7 +168,7 @@ const Comments = () => {
           </div>
         </Tooltip>
       </form>
-      {commentsList}
+      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : commentsList}
       {commentsLength > commentsLimit && (
         <LimitButton
           onClick={handleCommentsReload}

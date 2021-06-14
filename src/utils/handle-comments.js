@@ -1,11 +1,11 @@
 import { COMMENTS } from '../translations/product-details.translations';
 import { TEXT_VALUE } from '../configs';
 
-export const handleRateTip = (userId, language, hasBought) => {
+export const handleRateTip = (userId, language) => {
   if (!userId) {
     return COMMENTS[language].unregisteredTip;
   }
-  return !hasBought ? COMMENTS[language].registeredTip : COMMENTS[language].successfulTip;
+  return COMMENTS[language].successfulTip;
 };
 
 export const handleClassName = (name, stylesText, stylesInput) =>
@@ -40,4 +40,4 @@ export const handleCommentsLimit = (limitOption, commentsLimit, currentLimit) =>
 export const handleUserCommentOwner = (userData, email) =>
   userData ? userData.email === email : false;
 
-export const handleHasBought = (isBought) => (isBought ? 5 : 0);
+export const handleUserLogin = (isLogin) => (isLogin ? 5 : 0);

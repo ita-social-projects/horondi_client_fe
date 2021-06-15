@@ -47,13 +47,18 @@ export const useConstructor = () => {
 
   useEffect(() => {
     if (currentModel.eligibleOptions) {
+      const {
+        constructorBasic,
+        constructorFrontPocket,
+        constructorPattern,
+        constructorBottom
+      } = currentModel.eligibleOptions;
+
       dispatch(setModelLoading(true));
-      dispatch(getConstructorBasic(currentModel.eligibleOptions.constructorBasic[0]._id));
-      dispatch(
-        getConstructorFrontPocket(currentModel.eligibleOptions.constructorFrontPocket[0]._id)
-      );
-      dispatch(getConstructorPattern(currentModel.eligibleOptions.constructorPattern[0]._id));
-      dispatch(getConstructorBottom(currentModel.eligibleOptions.constructorBottom[0]._id));
+      dispatch(getConstructorBasic(constructorBasic[0]._id));
+      dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
+      dispatch(getConstructorPattern(constructorPattern[0]._id));
+      dispatch(getConstructorBottom(constructorBottom[0]._id));
     }
   }, [currentModel]);
 

@@ -22,47 +22,6 @@ export const getModelForConstructor = async () => {
   return result?.data?.getModelsForConstructor;
 };
 
-// export const getModelById = async (id) => {
-//   const getModelByIdQuery = `
-//  query($id: ID!) {
-//       getModelById(id: $id) {
-//         ... on Model {
-//           _id
-//           name {
-//             value
-//           }
-//           # constructorBasic {
-//           #   _id
-//           #   name {
-//           #     value
-//           #   }
-//           # }
-//           # constructorPattern {
-//           #   _id
-//           #   name {
-//           #     value
-//           #   }
-//           # }
-//           # constructorFrontPocket {
-//           #   _id
-//           #   name {
-//           #     value
-//           #   }
-//           # }
-//           # constructorBottom {
-//           #   _id
-//           #   name {
-//           #     value
-//           #   }
-//           # }
-//         }
-//         ... on Error {
-//           message
-//           statusCode
-//         }
-//       }
-//     }
-//   `;
 export const getModelById = async (id) => {
   const getModelByIdQuery = `
  query($id: ID!) {

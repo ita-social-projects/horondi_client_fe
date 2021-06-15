@@ -12,12 +12,9 @@ import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
-import AboutUs from '../pages/about-us';
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
 const NewsPage = lazy(() => import('../pages/news/news-page'));
-const PaymentsAndShipping = lazy(() => import('../pages/payments-and-shipping'));
-const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
 const Wishlist = lazy(() => import('../pages/wishlist'));
 const NewsDetail = lazy(() => import('../pages/news/news-detail'));
 const ProductListPage = lazy(() => import('../pages/product-list-page'));
@@ -28,12 +25,13 @@ const Recovery = lazy(() => import('../pages/recovery'));
 const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
-const Contacts = lazy(() => import('../pages/contacts'));
 const Cart = lazy(() => import('../pages/cart'));
 const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
+const Contacts = lazy(() => import('../pages/contacts'));
 const Materials = lazy(() => import('../pages/materials'));
+const BusinessPage = lazy(() => import('../pages/business-page'));
 
 const Routes = () => {
   const styles = useStyles();
@@ -55,13 +53,11 @@ const Routes = () => {
               <Route path='/error-page' exact component={ErrorPage} />
               <Route path='/news' exact component={NewsPage} />
               <Route path='/news/:id' exact component={NewsDetail} />
-              <Route path='/about-us' exact component={AboutUs} />
-              <Route path='/materials' exact component={Materials} />
               <Route path='/constructor' exact component={ImagesConstructor} />
-              <Route path='/payment-and-shipping' exact component={PaymentsAndShipping} />
-              <Route path='/privacy-policy' exact component={PrivacyPolicy} />
               <Route path='/wishlist' exact component={Wishlist} />
               <Route path='/contacts' exact component={Contacts} />
+              <Route path='/materials' exact component={Materials} />
+              <Route path='/pages/:page' exact component={BusinessPage} />
               <ProtectedRoute
                 path='/login'
                 exact

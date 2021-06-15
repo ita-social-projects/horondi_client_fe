@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
-
+import { getCurrencySign } from '../../../utils/currency';
 import {
   COLOR,
   PATTERN,
@@ -15,8 +16,6 @@ import {
   PRODUCT_DESCRIPTION,
   WEIGHT
 } from '../../../translations/product-details.translations';
-
-import { CURRENCIES_LIST } from '../../../configs/index';
 import Detail from '../detail';
 
 const ProductInfo = ({ price }) => {
@@ -52,6 +51,8 @@ const ProductInfo = ({ price }) => {
     currentVolume: productToSend.dimensions.volumeInLiters,
     currency: Currency.currency
   }));
+
+  const currencySign = getCurrencySign(currency);
 
   return (
     <div>
@@ -96,8 +97,9 @@ const ProductInfo = ({ price }) => {
       <div className={styles.priceContainer}>
         <span className={styles.subtitle}>{PRODUCT_PRICE[language].price}: </span>
         <span data-cy='price' className={styles.price}>
-          {currentPrice[currency].value / 100}&nbsp;
-          {CURRENCIES_LIST[currency].currency}
+          {Math.round(currentPrice[currency].value / 100)}
+          {'\u00A0'}
+          <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div className={styles.look}>

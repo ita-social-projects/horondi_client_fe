@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from '@material-ui/lab';
 
-import { getUserOrders , setCurrentPage } from '../../redux/user/user.actions';
+import { getUserOrders, setCurrentPage } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
 import OrderHistoryOrder from '../../containers/orders/order-history/order-history-order';
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import { useStyles } from './order-history.styles';
-
+import { limitHistoryOrders } from '../../const/user-order-history';
 import { ORDER_HISTORY_TITLES } from '../../translations/order.translations';
 
 const OrderHistory = () => {
@@ -22,31 +22,22 @@ const OrderHistory = () => {
   );
   const dispatch = useDispatch();
   const styles = useStyles();
-  // const history = useHistory();
-  // const { search } = useLocation();
-  // const searchParams = new URLSearchParams(search);
-  // const url = searchParams.toString();
 
-  const curPage = Math.ceil(countPerPage / 2);
+  const quantityPages = Math.ceil(countPerPage / limitHistoryOrders);
+
   useEffect(() => {
     dispatch(
       getUserOrders({
         pagination: {
-          limit: 2,
-          skip: 0
+          limit: limitHistoryOrders,
+          skip: currentPage * limitHistoryOrders
         }
       })
     );
-  }, [dispatch]);
+  }, [dispatch, currentPage]);
 
   const changeHandler = (e, value) => {
-    console.log(value);
-
-    setCurrentPage(3);
-
-    // console.log('changeHandler');
-    // searchParams.set('page', value);
-    // history.push(`?${searchParams.toString()}`);
+    dispatch(setCurrentPage(value - 1));
   };
 
   if (loading) {
@@ -67,15 +58,17 @@ const OrderHistory = () => {
               <OrderHistoryOrder order={item} key={index} />
             ))}
           </div>
-          <div className={styles.paginationDiv}>
-            <Pagination
-              count={curPage}
-              variant='outlined'
-              shape='rounded'
-              page={currentPage + 1}
-              onChange={changeHandler}
-            />
-          </div>
+          {quantityPages >= 2 ? (
+            <div className={styles.paginationDiv}>
+              <Pagination
+                count={quantityPages}
+                variant='outlined'
+                shape='rounded'
+                page={currentPage + 1}
+                onChange={changeHandler}
+              />
+            </div>
+          ) : null}
         </>
       ) : (
         <EmptyOrderHistory />

@@ -15,8 +15,7 @@ import {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  setUserCountOrders,
-  setCurrentPage
+  setUserCountOrders
 } from './user.actions';
 import {
   loginUser,

@@ -96,7 +96,9 @@ const OrderHistoryOrder = ({ order }) => {
           </div>
         </AccordionSummary>
         <AccordionDetails className={styles.accordion}>
-          <div><OrderHistoryTable items={orderHistoryList} totalPrice={totalPrice} /></div>
+          <div>
+            <OrderHistoryTable items={orderHistoryList} totalPrice={totalPrice} />
+          </div>
           <div className={styles.bottom}>
             <div className={styles.totalText}>{ORDER_TABLE_FIELDS[language].amountOfOrder}:</div>
             <div className={styles.totalText}>

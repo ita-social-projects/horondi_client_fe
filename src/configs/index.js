@@ -128,7 +128,8 @@ export const formRegExp = {
   firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
   lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
   password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,30}$/,
-  phoneNumber: /^(?:\+?38)?(?:\(0[0-9]{2}\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|0[0-9]{2}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|0[0-9]{2}[0-9]{7})$/,
+  phoneNumber:
+    /^(?:\+?38)?(?:\(0[0-9]{2}\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|0[0-9]{2}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|0[0-9]{2}[0-9]{7})$/,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
   country: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   city: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
@@ -302,13 +303,7 @@ export const SNACKBAR_MESSAGE = {
     'You have be logged out, please sign in again'
   ]
 };
-export const COMMENT_DATA = {
-  firstName: '',
-  text: '',
-  product: '',
-  show: true,
-  email: ''
-};
+
 export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
@@ -375,7 +370,7 @@ export const sideBarSubList = [
   },
   {
     name: ['Про нас', 'About us'],
-    link: '/about-us'
+    link: '/pages/about-us'
   },
   {
     name: ['Новини', 'News'],

@@ -10,6 +10,7 @@ import {
 import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { COURIER } from '../const/checkout';
+import { MATERIAL_UI_COLOR } from '../const/material-ui';
 
 export const initialValues = {
   firstName: '',
@@ -240,5 +241,8 @@ export const setDeliveryTypeToStorage = (deliveryType) => {
     });
   }
 };
+
+export const getThemeColor = (isLightTheme) =>
+  isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION;
 
 export const handleError = (touched, errors) => touched && !!errors;

@@ -1,39 +1,39 @@
 import React from 'react';
+import { TableCell, TableRow } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useStyles } from './order-history-order-item.styles';
+
+import { getCurrencySign } from '../../../../utils/currency';
 import { ORDER_TABLE_FIELDS } from '../../../../translations/order.translations';
+import { IMG_URL } from '../../../../configs';
 
 const OrderHistoryOrderItem = ({ item, language, currency }) => {
   const styles = useStyles();
 
-  const bottomMaterial = item.bottomMaterial.length && (
-    <span>
-      {ORDER_TABLE_FIELDS[language].bagBottom}:{' '}
-      {item.bottomMaterial[language].value}
-    </span>
-  );
+  const data = item.props.item;
+  const currencySign = getCurrencySign(currency);
 
   return (
-    <div className={styles.root} data-cy='order-history-order-item'>
-      <div className={styles.itemData}>
-        <div className={styles.image} data-cy='order-history-order-item-img' />
-        <div
-          className={styles.description}
-          data-cy='order-history-order-item-description'
-        >
-          <span className={styles.itemName}>{item.name[language].value}</span>
-          {bottomMaterial || null}
-        </div>
-      </div>
-      <div>
-        <span>{item.quantity}</span>
-      </div>
-      <div className={styles.price}>
-        <span>
-          {(item.actualPrice[currency].value / 100).toFixed(2)}
-          {item.actualPrice[currency].currency}
-        </span>
-      </div>
-    </div>
+    <>
+      <TableRow classes={{ root: styles.root }}>
+        <TableCell classes={{ root: styles.image }}>
+          <img
+            src={`${IMG_URL}${data.product.images.primary.thumbnail}`}
+            alt='img-product'
+            className={styles.imgItem}
+          />
+        </TableCell>
+        <TableCell classes={{ root: styles.description }}>
+          <p>{data.product.name[language].value}</p>
+          <p>{`${ORDER_TABLE_FIELDS[language].size} - ${data.options.size.name}`}</p>
+        </TableCell>
+        <TableCell className={styles.description}>{data.quantity}</TableCell>
+        <TableCell classes={{ root: styles.description }}>
+          {(data.fixedPrice[currency].value / 100).toFixed()}{' '}
+          <FontAwesomeIcon icon={currencySign} />
+        </TableCell>
+      </TableRow>
+    </>
   );
 };
 

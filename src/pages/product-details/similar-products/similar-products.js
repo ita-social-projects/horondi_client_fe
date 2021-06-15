@@ -12,16 +12,18 @@ import { SIMILAR_ITEMS } from '../../../translations/product-details.translation
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
+import { getCurrencySign } from '../../../utils/currency';
 
-const SimilarProducts = ({ currencySign, cartList }) => {
+const SimilarProducts = ({ cartList }) => {
   const styles = useStyles();
   const { language, similarProducts, currency, product } = useSelector(
     selectInfoForSimilarProducts
   );
 
   const { title } = SIMILAR_ITEMS[language];
+  const currencySign = getCurrencySign(currency);
 
-  let imagesList = [];
+  let imagesList;
   if (cartList) {
     imagesList = similarProductForCart(similarProducts, cartList);
   } else {

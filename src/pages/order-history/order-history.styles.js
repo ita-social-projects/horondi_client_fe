@@ -6,7 +6,19 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 1280,
     margin: '0 auto'
   },
+  mainTitle: {
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 400,
+    marginBottom: 0,
+    marginTop: 20
+  },
   loader: {
     margin: '100px auto'
+  },
+  paginationDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: 20
   }
 }));

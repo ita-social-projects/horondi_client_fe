@@ -34,7 +34,7 @@ const OrderHistory = () => {
         }
       })
     );
-  }, [currentPage]);
+  }, [currentPage, countPerPage]);
 
   const changeHandler = (e, value) => {
     dispatch(setCurrentPage(value - 1));

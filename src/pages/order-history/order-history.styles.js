@@ -15,10 +15,5 @@ export const useStyles = makeStyles((theme) => ({
   },
   loader: {
     margin: '100px auto'
-  },
-  paginationDiv: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: 20
   }
 }));

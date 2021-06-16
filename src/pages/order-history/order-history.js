@@ -6,6 +6,7 @@ import { getUserOrders, setCurrentPage } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
 import OrderHistoryOrder from '../../containers/orders/order-history/order-history-order';
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
+import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
 import { limitHistoryOrders } from '../../const/user-order-history';
 import { ORDER_HISTORY_TITLES } from '../../translations/order.translations';
@@ -36,7 +37,7 @@ const OrderHistory = () => {
     );
   }, [currentPage, countPerPage]);
 
-  const changeHandler = (e, value) => {
+  const changeHandler = (value) => {
     dispatch(setCurrentPage(value - 1));
   };
 
@@ -58,17 +59,9 @@ const OrderHistory = () => {
               <OrderHistoryOrder order={item} key={index} />
             ))}
           </div>
-          {quantityPages >= 2 ? (
-            <div className={styles.paginationDiv}>
-              <Pagination
-                count={quantityPages}
-                variant='outlined'
-                shape='rounded'
-                page={currentPage + 1}
-                onChange={changeHandler}
-              />
-            </div>
-          ) : null}
+          {quantityPages >= 2 && (
+            <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
+          )}
         </>
       ) : (
         <EmptyOrderHistory />

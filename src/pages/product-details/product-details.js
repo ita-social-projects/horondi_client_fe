@@ -48,7 +48,7 @@ const ProductDetails = ({ match }) => {
     pattern
   } = product || {};
 
-  const currentSize = sizes ? sizes[0] : {};
+  const currentSize = sizes ? sizes.find(({ available, name }) => available && name) : {};
 
   useEffect(() => {
     dispatch(getProduct(id));

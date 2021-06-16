@@ -51,6 +51,8 @@
         "argsIgnorePattern": "res|next|^err"
       }
     ],
+    "react/button-has-type": 0,
+    "react/destructuring-assignment": [0, "always", { "ignoreClassFields": true }],
     "no-debugger": 0,
     "no-alert": 0,
     "no-use-before-define": "off",

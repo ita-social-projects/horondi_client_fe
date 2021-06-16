@@ -20,7 +20,7 @@ const OrderHistoryTable = ({ items, totalPrice }) => {
 
   return (
     <>
-      <Table className={styles.table}>
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell className={styles.tableCell}>{ORDER_TABLE_FIELDS[language].photo}</TableCell>

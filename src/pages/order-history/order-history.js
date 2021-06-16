@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Pagination } from '@material-ui/lab';
 
 import { getUserOrders, setCurrentPage } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';

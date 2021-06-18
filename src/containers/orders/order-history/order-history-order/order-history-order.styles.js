@@ -66,6 +66,10 @@ export const useStyles = makeStyles((visible) => ({
   totalText: {
     width: '25%',
     textAlign: 'center',
-    padding: 16
+    padding: 16,
+    '& div': {
+      width: '60%',
+      textAlign: 'right'
+    }
   }
 }));

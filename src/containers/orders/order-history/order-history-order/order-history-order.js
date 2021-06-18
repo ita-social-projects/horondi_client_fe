@@ -66,6 +66,7 @@ const OrderHistoryOrder = ({ order }) => {
 
   const totalPrice = (order.totalItemsPrice[currency].value / 100).toFixed(0);
   const currencySign = getCurrencySign(currency);
+  const orderStatus = ORDER_STATUSES[order.status][language].toLowerCase();
 
   return (
     <div className={styles.root}>
@@ -80,10 +81,10 @@ const OrderHistoryOrder = ({ order }) => {
             <div className={styles.info}>
               <div>
                 № {order.orderNumber} {ORDER_HISTORY_TABLE_FIELDS[language].dated}{' '}
-                {new Intl.DateTimeFormat('en-GB').format(order.dateOfCreation)}
+                {new Intl.DateTimeFormat('en-GB').format(order.dateOfCreation).replaceAll('/', '.')}
               </div>
               <div className={styles.status} style={{ color }}>
-                {ORDER_STATUSES[order.status][language].toLowerCase()}
+                {`${orderStatus[0].toUpperCase()}${orderStatus.slice(1)}`}
               </div>
             </div>
             <div className={visible ? styles.total : styles.blockNone}>
@@ -102,7 +103,9 @@ const OrderHistoryOrder = ({ order }) => {
           <div className={styles.bottom}>
             <div className={styles.totalText}>{ORDER_TABLE_FIELDS[language].amountOfOrder}:</div>
             <div className={styles.totalText}>
-              {totalPrice} <FontAwesomeIcon icon={currencySign} />
+              <div>
+                {totalPrice} <FontAwesomeIcon icon={currencySign} />
+              </div>
             </div>
           </div>
         </AccordionDetails>

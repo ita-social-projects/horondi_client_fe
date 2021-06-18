@@ -5,6 +5,10 @@ export const useStyles = makeStyles(() => ({
     textAlign: 'center',
     width: '25%',
     fontSize: 15,
-    fontWeight: 500
+    fontWeight: 500,
+    '& div': {
+      width: '60%',
+      textAlign: 'right'
+    }
   }
 }));

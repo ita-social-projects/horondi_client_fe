@@ -15,5 +15,9 @@ export const useStyles = makeStyles(() => ({
   },
   itemImg: {
     marginLeft: 20
+  },
+  sumTotal: {
+    width: '60%',
+    textAlign: 'right'
   }
 }));

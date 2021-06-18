@@ -28,7 +28,9 @@ const OrderHistoryTable = ({ items, totalPrice }) => {
             <TableCell className={styles.tableCell}>
               {ORDER_TABLE_FIELDS[language].quantity}
             </TableCell>
-            <TableCell className={styles.tableCell}>{ORDER_TABLE_FIELDS[language].price}</TableCell>
+            <TableCell className={styles.tableCell}>
+              <div>{ORDER_TABLE_FIELDS[language].price}</div>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{orderHistoryItems}</TableBody>

@@ -15,22 +15,24 @@ const OrderHistoryOrderItem = ({ item, language, currency }) => {
 
   return (
     <>
-      <TableRow classes={{ root: styles.root }}>
-        <TableCell classes={{ root: styles.image }}>
+      <TableRow className={styles.root}>
+        <TableCell className={styles.image}>
           <img
             src={`${IMG_URL}${data.product.images.primary.thumbnail}`}
             alt='img-product'
             className={styles.imgItem}
           />
         </TableCell>
-        <TableCell classes={{ root: styles.description }}>
+        <TableCell className={styles.description}>
           <p>{data.product.name[language].value}</p>
           <p>{`${ORDER_TABLE_FIELDS[language].size} - ${data.options.size.name}`}</p>
         </TableCell>
         <TableCell className={styles.description}>{data.quantity}</TableCell>
-        <TableCell classes={{ root: styles.description }}>
-          {(data.fixedPrice[currency].value / 100).toFixed()}{' '}
-          <FontAwesomeIcon icon={currencySign} />
+        <TableCell className={styles.description}>
+          <div className={styles.sumTotal}>
+            {(data.fixedPrice[currency].value / 100).toFixed()}{' '}
+            <FontAwesomeIcon icon={currencySign} />
+          </div>
         </TableCell>
       </TableRow>
     </>

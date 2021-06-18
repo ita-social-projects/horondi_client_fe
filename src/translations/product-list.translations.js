@@ -182,7 +182,10 @@ export const SORT_BY_SELECT_OPTIONS = [
       { lang: 'uk', value: 'від дешевих до дорогих' },
       { lang: 'eng', value: 'price (low to high) ' }
     ],
-    optionValue: { name: 'sortAsc', value: 1 }
+    optionValue: {
+      name: 'sortAsc',
+      value: -1 
+      }
   },
   {
     lang: [

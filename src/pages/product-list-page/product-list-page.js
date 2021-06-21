@@ -12,7 +12,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import {getFiltredProducts , setCountPerPage, setCurrentPage } from '../../redux/products/products.actions';
+import {getFiltredProducts , setCurrentPage } from '../../redux/products/products.actions';
 import {
   DRAWER_PERMANENT,
   DRAWER_TEMPORARY,
@@ -23,7 +23,7 @@ import {
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
 import { URL_QUERIES_NAME } from '../../configs';
-import { useState } from 'react';
+
 
 const ProductListPage = ({ model, width }) => {
   const dispatch = useDispatch();
@@ -110,7 +110,21 @@ const ProductListPage = ({ model, width }) => {
         page={currentPage + 1}
         onChange={changeHandler}
       />
-    
+  const paginationCondition = () => {
+        if(products?.length < searchParams.get(URL_QUERIES_NAME.countPerPage) && searchParams.get(URL_QUERIES_NAME.page) == 1){
+          return (
+          <div className={styles.invisiblePaginationDiv}>
+            {paginationToShow}
+          </div>
+          )
+        }else{
+          return(
+          <div className={styles.paginationDiv}>
+            {paginationToShow}
+          </div>
+          )
+        }
+      }
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3' />
@@ -145,15 +159,7 @@ const ProductListPage = ({ model, width }) => {
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}
             </Grid>
-            {products?.length < searchParams.get(URL_QUERIES_NAME.countPerPage) && searchParams.get(URL_QUERIES_NAME.page) == 1 ? (
-            <div className={styles.invisiblePaginationDiv}>
-              {paginationToShow}
-            </div>
-            ) : (
-            <div className={styles.paginationDiv}>
-              {paginationToShow}
-            </div>
-            )}
+            {paginationCondition()}
           </div>
         ) : (
           <div className={styles.defaultBlock}>

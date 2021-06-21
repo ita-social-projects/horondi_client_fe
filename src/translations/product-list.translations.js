@@ -152,7 +152,10 @@ export const SORT_BY_TEXT = [
   { lang: 'uk', value: 'Сортувати за:' },
   { lang: 'eng', value: 'Sort by:' }
 ];
-
+export const COUNT_PER_PAGE = [
+  { lang: 'uk', value: 'Кількість на сторінці:' },
+  { lang: 'eng', value: 'Count per page:' }
+];
 export const SORT_BY_SELECT_OPTIONS = [
   {
     lang: [

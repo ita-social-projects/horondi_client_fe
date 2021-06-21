@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 export const useStyles = makeStyles((theme) => ({
   items: {
     height: '25px !important',
+    marginLeft: '.5rem',
     lineHeight: '25px !important',
     '& .MuiButton-outlined': {
       boxSizing: 'border-box',

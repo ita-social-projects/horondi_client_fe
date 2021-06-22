@@ -40,8 +40,8 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
       } else {
         dispatch(resetCart());
       }
-      setModalVisibility(false);
     }
+    setModalVisibility(false);
   };
 
   return (

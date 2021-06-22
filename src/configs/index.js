@@ -304,13 +304,7 @@ export const SNACKBAR_MESSAGE = {
     'You have be logged out, please sign in again'
   ]
 };
-export const COMMENT_DATA = {
-  firstName: '',
-  text: '',
-  product: '',
-  show: true,
-  email: ''
-};
+
 export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
@@ -375,7 +369,7 @@ export const sideBarSubList = [
   },
   {
     name: ['Про нас', 'About us'],
-    link: '/about-us'
+    link: '/pages/about-us'
   },
   {
     name: ['Новини', 'News'],

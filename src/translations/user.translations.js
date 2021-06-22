@@ -41,6 +41,15 @@ export const REGISTER_FORM_LABEL = [
   }
 ];
 
+export const REGISTER_FORM_CONSENT = [
+  {
+    value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
+  },
+  {
+    value: ['Registering, you agree with our', 'terms of service']
+  }
+];
+
 export const CONTINUE_SHOPPING_LABEL = [
   {
     value: 'Продовжити покупки'
@@ -168,34 +177,34 @@ export const errorMessages = [
 export const placeholders = {
   firstName: [
     {
-      value: 'Введіть Ім’я'
+      value: 'Ім’я'
     },
     {
-      value: 'Enter firstname'
+      value: 'Firstname'
     }
   ],
   lastName: [
     {
-      value: 'Введіть прізвище'
+      value: 'Прізвище'
     },
     {
-      value: 'Enter lastname'
+      value: 'Lastname'
     }
   ],
   email: [
     {
-      value: 'Введіть email'
+      value: 'Електронна пошта'
     },
     {
-      value: 'Enter email'
+      value: 'Email'
     }
   ],
   password: [
     {
-      value: 'Введіть пароль'
+      value: 'Пароль'
     },
     {
-      value: 'Enter password'
+      value: 'Password'
     }
   ],
   confirmPassword: [

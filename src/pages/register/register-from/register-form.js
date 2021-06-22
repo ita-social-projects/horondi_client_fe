@@ -3,18 +3,23 @@ import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
-import { USER_REGISTER_LABELS } from '../../../configs';
+import { USER_REGISTER_LABELS, LANGUAGES_LIST } from '../../../configs';
 import {
   REGISTER_FORM_LABEL,
+  REGISTER_FORM_CONSENT,
   LOGIN_FORM_LABEL,
   placeholders,
   GOOGLE_SIGN_IN_TEXT
 } from '../../../translations/user.translations';
+
 import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
 import { Loader } from '../../../components/loader/loader';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import routes from '../../../configs/routes';
+
+const { pathToLogin, pathToTerms } = routes;
 
 export default function RegisterForm({
   loading,
@@ -24,10 +29,22 @@ export default function RegisterForm({
   showPassword,
   setShowPassword,
   registerError,
-  pathToLogin,
   setShouldValidate
 }) {
   const styles = useStyles();
+  const consentLink =
+    language === LANGUAGES_LIST[0].value ? (
+      <div className={styles.consentMessage}>
+        {' '}
+        {REGISTER_FORM_CONSENT[language].value[0]}
+        <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
+          {' '}
+          {REGISTER_FORM_CONSENT[language].value[1]}{' '}
+        </Link>
+      </div>
+    ) : (
+      ''
+    );
 
   return (
     <Form className={styles.registerForm}>
@@ -57,6 +74,7 @@ export default function RegisterForm({
               }
             />
           ))}
+          {consentLink}
           <div className={styles.registerGroup}>
             <Button
               className={styles.registerBtn}

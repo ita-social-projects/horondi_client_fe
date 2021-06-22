@@ -2,6 +2,7 @@ import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { select } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
+
 import {
   handleAddComment,
   handleDeleteComment,
@@ -23,6 +24,7 @@ import {
   SET_REPLY_LOADING,
   SET_GET_COMMENTS_LOADING
 } from '../comments.types';
+
 import { SNACKBAR_MESSAGE } from '../../../configs';
 
 import {

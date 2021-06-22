@@ -11,7 +11,6 @@ import { useStyles } from './register.styles';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
-import routes from '../../configs/routes';
 import { IMG_ALT } from '../../const/images-alts';
 import { validationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
@@ -21,7 +20,6 @@ export default function Register() {
   const history = useHistory();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const { pathToLogin } = routes;
   const handleRegister = (user) => {
     setToLocalStorage(USER_TOKENS.ACCESS_TOKEN, null);
     dispatch(registerUser({ user, language }));
@@ -94,7 +92,6 @@ export default function Register() {
                     showPassword={showPassword}
                     setShowPassword={setShowPassword}
                     registerError={registerError}
-                    pathToLogin={pathToLogin}
                     setShouldValidate={() => {
                       setShouldValidate(true);
                     }}

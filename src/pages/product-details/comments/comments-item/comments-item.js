@@ -52,7 +52,9 @@ const CommentsItem = ({ data, commentId }) => {
   const [isReplyShown, toggleReply] = useState(false);
 
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
+
   const dateToShow = new Date(date);
+
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
   const handleOpen = () => {

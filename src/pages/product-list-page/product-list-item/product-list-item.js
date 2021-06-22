@@ -11,7 +11,7 @@ import { IMG_URL } from '../../../configs';
 
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import routes from '../../../configs/routes';
+import routes from '../../../const/routes';
 import { getCurrencySign } from '../../../utils/currency';
 
 const ProductListItem = ({ product }) => {

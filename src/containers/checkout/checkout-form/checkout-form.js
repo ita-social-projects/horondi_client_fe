@@ -22,7 +22,7 @@ import { useStyles } from './checkout-form.styles';
 import { CY_CODE_ERR, SESSION_STORAGE, LANGUAGES_LIST } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
-import routes from '../../../configs/routes';
+import routes from '../../../const/routes';
 import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
@@ -46,6 +46,8 @@ import {
   setToSessionStorage
 } from '../../../services/session-storage.service';
 
+const { pathToUserAgreement, pathToCart } = routes;
+
 const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
     isLightTheme
@@ -66,7 +68,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
         {CHECKOUT_ADDITIONAL_INFORMATION[language].consent[0]}
         <Link
           className={styles.consentLink}
-          to={routes.pathToUserAgreement}
+          to={pathToUserAgreement}
           target='_blank'
           rel='noreferrer'
         >
@@ -120,7 +122,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
           <Grid item className={styles.userInfoContainer}>
             <div className={styles.checkoutTitleInfo}>
               <div className={styles.checkoutTitleInfoData}>
-                <Link to={routes.pathToCart} className={styles.backBtn}>
+                <Link to={pathToCart} className={styles.backBtn}>
                   <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
                 </Link>
                 <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>

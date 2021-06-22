@@ -5,12 +5,14 @@ import { setBusinessPage, setLoading } from './business-pages.actions';
 import { GET_BUSINESS_PAGE_BY_CODE } from './business-pages.types';
 import { getBusinessTextByCode } from './business-pages.operations';
 import { setError } from '../error/error.actions';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+
+const { pathToErrorPage } = routes;
 
 export function* handleBusinessPageError({ message }) {
   yield put(setLoading(false));
   yield put(setError(message));
-  yield put(push(routes.pathToErrorPage));
+  yield put(push(pathToErrorPage));
 }
 
 export function* handleBusinessPageLoad({ payload }) {

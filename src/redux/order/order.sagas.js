@@ -13,12 +13,14 @@ import {
 } from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { CURRENCY } from '../../const/currency';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { USER_IS_BLOCKED } from '../../configs';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
+
+const { pathToThanks, pathToErrorPage } = routes;
 
 export function* handleAddOrder({ payload }) {
   try {
@@ -65,7 +67,7 @@ export function* handleGetFondyUrl({ payload }) {
     if (orderWithCheckoutUrl.paymentUrl) {
       window.open(orderWithCheckoutUrl.paymentUrl);
     }
-    yield put(push(`${routes.pathToThanks}/${orderWithCheckoutUrl.orderNumber}`));
+    yield put(push(`${pathToThanks}/${orderWithCheckoutUrl.orderNumber}`));
     yield put(setOrderLoading(false));
   } catch (e) {
     yield call(handleOrderError, e);
@@ -105,7 +107,7 @@ export function* handleOrderError(e) {
   } else {
     yield put(setOrderLoading(false));
     yield put(setError(e.message));
-    yield put(push(routes.pathToErrorPage));
+    yield put(push(pathToErrorPage));
   }
 }
 

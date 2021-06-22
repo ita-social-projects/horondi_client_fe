@@ -14,10 +14,12 @@ import { setProductsForSearchBar, setSearchBarLoading } from '../search-bar/sear
 import { GET_ALL_FILTERS, GET_FILTERED_PRODUCTS, GET_PRODUCT } from './products.types';
 import { getFilteredProducts, getProductById, getAllFilters } from './products.operations';
 import { setComments } from '../comments/comments.actions';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
+
+const { pathToErrorPage } = routes;
 
 const selectStateProducts = (state) => state.Products;
 const selectStateCurrency = (state) => state.Currency.currency;
@@ -77,7 +79,7 @@ export function* handleProductsErrors(e) {
     yield put(setProductsLoading(false));
     yield put(setSearchBarLoading(false));
     yield put(setError(e.message));
-    yield put(push(routes.pathToErrorPage));
+    yield put(push(pathToErrorPage));
   }
 }
 

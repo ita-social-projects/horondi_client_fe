@@ -1,4 +1,4 @@
-const PATHS = {
+const routes = {
   pathToNews: '/news',
   pathToSingleNews: '/news/:id',
   pathToConstructor: '/constructor',
@@ -27,4 +27,4 @@ const PATHS = {
   pathToUserAgreement: '/pages/user-agreement'
 };
 
-export default PATHS;
+export default routes;

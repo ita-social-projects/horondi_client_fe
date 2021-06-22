@@ -10,9 +10,9 @@ import { IMG_URL } from '../../../../configs';
 
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
-import PATHS from '../../../../const/paths';
+import routes from '../../../../const/routes';
 
-const { pathToProduct } = PATHS;
+const { pathToProduct } = routes;
 
 const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) => {
   const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({

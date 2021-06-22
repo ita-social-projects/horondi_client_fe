@@ -5,11 +5,13 @@ import { setHeaderLinks } from './header-links.actions';
 import { GET_ALL_HEADER_LINKS } from './header-links.types';
 import { setError } from '../error/error.actions';
 import { getAllHeaders } from './header-links.operations';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+
+const { pathToErrorPage } = routes;
 
 export function* handleError(e) {
   yield put(setError(e.message));
-  yield put(push(routes.pathToErrorPage));
+  yield put(push(pathToErrorPage));
 }
 
 export function* handleHeaderLinksLoad() {

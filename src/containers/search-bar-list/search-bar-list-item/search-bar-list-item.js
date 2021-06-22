@@ -10,9 +10,9 @@ import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
-import PATHS from '../../../const/paths';
+import routes from '../../../const/routes';
 
-const { pathToProduct } = PATHS;
+const { pathToProduct } = routes;
 
 const SearchBarListItem = ({ product }) => {
   const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({

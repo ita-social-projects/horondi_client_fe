@@ -20,9 +20,9 @@ import ProductsFiltersContainer from '../../../containers/products-filters-conta
 import { selectFilterData } from '../../../redux/selectors/multiple.selectors';
 import { countPerPage, sort } from '../../../configs';
 import useProductFilters from '../../../hooks/use-product-filters';
-import PATHS from '../../../const/paths';
+import routes from '../../../const/routes';
 
-const { pathToPurchases } = PATHS;
+const { pathToPurchases } = routes;
 
 const ProductListFilter = () => {
   const styles = useStyles();

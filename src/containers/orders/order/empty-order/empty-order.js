@@ -6,9 +6,9 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './empty-order.styles';
 import { CART_IMAGES } from '../../../../configs';
-import PATHS from '../../../../const/paths';
+import routes from '../../../../const/routes';
 
-const { pathToBackpacks } = PATHS;
+const { pathToBackpacks } = routes;
 
 const EmptyOrder = ({ title, buttonTitle, name }) => {
   const { isLightTheme } = useSelector(({ Theme }) => ({

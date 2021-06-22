@@ -20,9 +20,9 @@ import { IMG_URL } from '../../../../configs';
 import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
 import { getCurrencySign } from '../../../../utils/currency';
-import PATHS from '../../../../const/paths';
+import routes from '../../../../const/routes';
 
-const { pathToProduct } = PATHS;
+const { pathToProduct } = routes;
 
 const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();

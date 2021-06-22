@@ -4,7 +4,9 @@ import { setCategories, setCategoriesLoading } from './categories.actions';
 import { setError } from '../error/error.actions';
 import { GET_CATEGORIES } from './categories.types';
 import { getAllCategories } from './categories.operations';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+
+const { pathToErrorPage } = routes;
 
 export function* handleCategoriesLoad() {
   yield put(setCategoriesLoading(true));
@@ -20,7 +22,7 @@ export function* handleCategoriesLoad() {
 function* handleCategoriesError(e) {
   yield put(setCategoriesLoading(false));
   yield put(setError(e.message));
-  yield put(push(routes.pathToErrorPage));
+  yield put(push(pathToErrorPage));
 }
 
 export default function* categoriesSaga() {

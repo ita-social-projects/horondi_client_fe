@@ -9,9 +9,9 @@ import { useStyles } from './wishlist-item.styles';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
 import { IMG_URL } from '../../../configs';
 import { getCurrencySign } from '../../../utils/currency';
-import PATHS from '../../../const/paths';
+import routes from '../../../const/routes';
 
-const { pathToProduct } = PATHS;
+const { pathToProduct } = routes;
 
 const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
   const { language, currency } = useSelector(({ Language, Currency }) => ({

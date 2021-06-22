@@ -19,12 +19,17 @@ import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
-import routes from '../../configs/routes';
-import PATHS from '../../const/paths';
+import routes from '../../const/routes';
 
-const { pathToWishlist, pathToProfile, pathToOrderHistory } = PATHS;
+const {
+  pathToWishlist,
+  pathToProfile,
+  pathToOrderHistory,
+  pathToRegister,
+  pathToLogin,
+  pathToMain
+} = routes;
 
-const { pathToRegister, pathToLogin, pathToMain } = routes;
 const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
     userData: User.userData,

@@ -23,8 +23,10 @@ import {
   setModelLoading
 } from '../constructor-model.actions';
 import { setError } from '../../../error/error.actions';
-import routes from '../../../../configs/routes';
+import routes from '../../../../const/routes';
 import { errorReducer } from '../../../error/error.reducer';
+
+const { pathToErrorPage } = routes;
 
 describe('test for model sagas', () => {
   it('should load model by id', () =>
@@ -84,7 +86,7 @@ describe('test for model sagas', () => {
       .withReducer(errorReducer, { error: null })
       .put(setError(mockError.message))
       .hasFinalState({ error: mockError.message })
-      .put(push(routes.pathToErrorPage))
+      .put(push(pathToErrorPage))
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;

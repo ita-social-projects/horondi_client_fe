@@ -7,9 +7,9 @@ import { WELCOME_MESSAGE } from '../../translations/user.translations';
 import { Loader } from '../../components/loader/loader';
 import { confirmUser } from '../../redux/user/user.actions';
 import { handleMessage } from '../../utils/handle-confirmation';
-import PATHS from '../../const/paths';
+import routes from '../../const/routes';
 
-const { pathToMain, pathToLogin } = PATHS;
+const { pathToMain, pathToLogin } = routes;
 
 const Confirmation = ({ token }) => {
   const { language, loading, error } = useSelector(({ User, Language }) => ({

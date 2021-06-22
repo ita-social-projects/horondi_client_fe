@@ -17,7 +17,7 @@ import {
   removeProductFromUserWishlist
 } from './wishlist.operations';
 import { USER_IS_BLOCKED, WISHLIST_KEY } from '../../configs/index';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
 

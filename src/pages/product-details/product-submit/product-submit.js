@@ -22,9 +22,9 @@ import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.ac
 import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
 
 import { TOAST_MESSAGE } from '../../../translations/toast.translations';
-import PATHS from '../../../const/paths';
+import routes from '../../../const/routes';
 
-const { pathToCart } = PATHS;
+const { pathToCart } = routes;
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();

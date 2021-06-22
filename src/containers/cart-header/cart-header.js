@@ -11,9 +11,9 @@ import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 import { useStyles } from './cart-header.styles';
 import { getCart } from '../../redux/cart/cart.actions';
 import { cartKey } from '../../configs';
-import PATHS from '../../const/paths';
+import routes from '../../const/routes';
 
-const { pathToCart } = PATHS;
+const { pathToCart } = routes;
 
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();

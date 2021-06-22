@@ -10,9 +10,9 @@ import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import HeaderRightBar from '../header-right-bar';
-import PATHS from '../../const/paths';
+import routes from '../../const/routes';
 
-const { pathToConstructor } = PATHS;
+const { pathToConstructor } = routes;
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });

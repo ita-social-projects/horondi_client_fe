@@ -12,7 +12,7 @@ import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
-import PATHS from '../const/paths';
+import routes from '../const/routes';
 
 const {
   pathToMain,
@@ -36,7 +36,7 @@ const {
   pathToOrderHistory,
   pathToCategory,
   pathToChosenProduct
-} = PATHS;
+} = routes;
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
 const NewsPage = lazy(() => import('../pages/news/news-page'));

@@ -11,9 +11,9 @@ import {
   FOOTER_CONTACTS,
   FOOTER_CATALOGS
 } from '../../translations/footer.translations';
-import PATHS from '../../const/paths';
+import routes from '../../const/routes';
 
-const { pathToContacts } = PATHS;
+const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();

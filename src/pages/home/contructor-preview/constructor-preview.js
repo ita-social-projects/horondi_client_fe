@@ -11,9 +11,9 @@ import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
-import PATHS from '../../../const/paths';
+import routes from '../../../const/routes';
 
-const { pathToConstructor } = PATHS;
+const { pathToConstructor } = routes;
 
 const ConstructorPreview = () => {
   const language = useSelector(({ Language }) => Language.language);

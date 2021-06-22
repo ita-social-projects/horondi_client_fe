@@ -11,7 +11,9 @@ import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
 import { setModelLoading } from './constructor-model/constructor-model.actions';
 import { setError } from '../error/error.actions';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+
+const { pathToErrorPage } = routes;
 
 export function* handleError(e) {
   if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
@@ -19,7 +21,7 @@ export function* handleError(e) {
   } else {
     yield put(setModelLoading(true));
     yield put(setError(e.message));
-    yield put(push(routes.pathToErrorPage));
+    yield put(push(pathToErrorPage));
   }
 }
 

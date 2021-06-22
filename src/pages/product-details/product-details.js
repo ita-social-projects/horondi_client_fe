@@ -25,7 +25,9 @@ import {
 } from '../../redux/products/products.actions';
 
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+
+const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
@@ -131,7 +133,7 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
-      <Link to={routes.pathToCategory} className={styles.backBtn}>
+      <Link to={pathToCategory} className={styles.backBtn}>
         <KeyboardBackspaceIcon
           color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
         />

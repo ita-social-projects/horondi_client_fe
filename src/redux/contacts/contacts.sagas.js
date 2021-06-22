@@ -6,7 +6,9 @@ import { getContacts } from './contacts.operations';
 import { setError } from '../error/error.actions';
 import { setContacts, setLoading } from './contacts.actions';
 import { GET_CONTACTS } from './contacts.types';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+
+const { pathToErrorPage } = routes;
 
 export function* handleContactsLoad() {
   try {
@@ -23,7 +25,7 @@ export function* handleContactsLoad() {
 function* handleContactsError(e) {
   yield put(setLoading(false));
   yield put(setError(e.message));
-  yield put(push(routes.pathToErrorPage));
+  yield put(push(pathToErrorPage));
 }
 
 export default function* contactsSaga() {

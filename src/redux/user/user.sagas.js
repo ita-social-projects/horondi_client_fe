@@ -56,7 +56,7 @@ import {
   SNACKBAR_TYPES,
   SNACKBAR_MESSAGE
 } from '../../configs';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import {
   clearLocalStorage,
   getFromLocalStorage,

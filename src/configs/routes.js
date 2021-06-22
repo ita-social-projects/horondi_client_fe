@@ -1,20 +1,38 @@
-import { PATHS } from '../const/paths';
+import PATHS from '../const/paths';
+
+const {
+  pathToLogin,
+  pathToRecovery,
+  pathToRegister,
+  pathToProducts,
+  pathToErrorPage,
+  pathToBackpacks,
+  pathToCategory,
+  pathToCheckout,
+  pathToCart,
+  pathToMain,
+  pathToThanks,
+  pathToPurchases,
+  pathToProfile,
+  pathToTerms,
+  pathToUserAgreement
+} = PATHS;
 
 const routes = {
-  pathToLogin: PATHS.pathToLogin,
-  pathToRecovery: PATHS.pathToRecovery,
-  pathToRegister: PATHS.pathToRegister,
-  pathToProducts: PATHS.pathToProduct,
-  pathToErrorPage: PATHS.pathToErrorPage,
-  pathToBackpacks: PATHS.pathToBackpacks,
-  pathToCategory: PATHS.pathToCategory,
-  pathToCheckout: PATHS.pathToCheckout,
-  pathToCart: PATHS.pathToCart,
-  pathToMain: PATHS.pathToMain,
-  pathToThanks: PATHS.pathToThanks,
-  pathToPurchases: PATHS.pathToPurchases,
-  pathToProfile: PATHS.pathToProfile,
-  pathToTerms: PATHS.pathToTerms,
-  pathToUserAgreement: PATHS.pathToUserAgreement
+  pathToLogin,
+  pathToRecovery,
+  pathToRegister,
+  pathToProducts,
+  pathToErrorPage,
+  pathToBackpacks,
+  pathToCategory,
+  pathToCheckout,
+  pathToCart,
+  pathToMain,
+  pathToThanks,
+  pathToPurchases,
+  pathToProfile,
+  pathToTerms,
+  pathToUserAgreement
 };
 export default routes;

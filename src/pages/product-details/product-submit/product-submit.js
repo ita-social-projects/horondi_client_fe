@@ -22,7 +22,9 @@ import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.ac
 import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
 
 import { TOAST_MESSAGE } from '../../../translations/toast.translations';
-import { PATHS } from '../../../const/paths';
+import PATHS from '../../../const/paths';
+
+const { pathToCart } = PATHS;
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
@@ -80,7 +82,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const onAddToCheckout = () => {
     if (product) {
       onAddToCart();
-      dispatch(push(PATHS.pathToCart));
+      dispatch(push(pathToCart));
     } else {
       setSizeIsNotSelectedError(true);
     }

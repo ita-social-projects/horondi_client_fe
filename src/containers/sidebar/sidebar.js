@@ -10,7 +10,9 @@ import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import HeaderRightBar from '../header-right-bar';
-import { PATHS } from '../../const/paths';
+import PATHS from '../../const/paths';
+
+const { pathToConstructor } = PATHS;
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
@@ -56,11 +58,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       onClose={() => setIsMenuOpen(false)}
     >
       <List>{categoriesList}</List>
-      <Link
-        to={PATHS.pathToConstructor}
-        className={styles.mainItem}
-        onClick={() => setIsMenuOpen(false)}
-      >
+      <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
         <span className={styles.constructorItem}>{CONSTRUCTOR[language].value}</span>
       </Link>
       {subList}

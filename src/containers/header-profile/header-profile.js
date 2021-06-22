@@ -20,7 +20,9 @@ import { logoutUser } from '../../redux/user/user.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
 import routes from '../../configs/routes';
-import { PATHS } from '../../const/paths';
+import PATHS from '../../const/paths';
+
+const { pathToWishlist, pathToProfile, pathToOrderHistory } = PATHS;
 
 const { pathToRegister, pathToLogin, pathToMain } = routes;
 const HeaderProfile = ({ fromSideBar }) => {
@@ -76,7 +78,7 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].wishlist,
       icon: <FavoriteIcon />,
-      clickHandler: () => handleRedirect(PATHS.pathToWishlist)
+      clickHandler: () => handleRedirect(pathToWishlist)
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].changeTheme,
@@ -104,12 +106,12 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].profile,
       icon: <PersonOutlineIcon />,
-      clickHandler: () => handleRedirect(PATHS.pathToProfile)
+      clickHandler: () => handleRedirect(pathToProfile)
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].orderHistory,
       icon: <HistoryIcon />,
-      clickHandler: () => handleRedirect(PATHS.pathToOrderHistory)
+      clickHandler: () => handleRedirect(pathToOrderHistory)
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].logOut,

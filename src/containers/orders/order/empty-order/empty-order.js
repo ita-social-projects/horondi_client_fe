@@ -6,7 +6,9 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './empty-order.styles';
 import { CART_IMAGES } from '../../../../configs';
-import { PATHS } from '../../../../const/paths';
+import PATHS from '../../../../const/paths';
+
+const { pathToBackpacks } = PATHS;
 
 const EmptyOrder = ({ title, buttonTitle, name }) => {
   const { isLightTheme } = useSelector(({ Theme }) => ({
@@ -19,7 +21,7 @@ const EmptyOrder = ({ title, buttonTitle, name }) => {
     <div className={styles.root} data-cy={name}>
       <Typography variant='h2'>{title}</Typography>
       <img src={emptyOrderImgLink} alt={name} />
-      <Link to={`${PATHS.pathToBackpacks}/rolltop`}>
+      <Link to={`${pathToBackpacks}/rolltop`}>
         <Button className={styles.button} variant='contained'>
           {buttonTitle}
         </Button>

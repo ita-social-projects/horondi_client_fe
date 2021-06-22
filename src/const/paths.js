@@ -1,4 +1,4 @@
-export const PATHS = {
+const PATHS = {
   pathToNews: '/news',
   pathToSingleNews: '/news/:id',
   pathToConstructor: '/constructor',
@@ -13,7 +13,7 @@ export const PATHS = {
   pathToLogin: '/login',
   pathToRecovery: '/recovery',
   pathToRegister: '/register',
-  pathToProduct: '/product',
+  pathToProducts: '/product',
   pathToErrorPage: '/error-page',
   pathToBackpacks: '/backpacks',
   pathToCategory: '/:category',
@@ -26,3 +26,5 @@ export const PATHS = {
   pathToTerms: '/pages/terms',
   pathToUserAgreement: '/pages/user-agreement'
 };
+
+export default PATHS;

@@ -1,35 +1,26 @@
 import { setItems, getItems, client } from '../../utils/client';
 
-const getComments = async (id) => {
+const getComments = async ({ filter, pagination }) => {
   const getCommentsQuery = `
-    query($id: ID!) {
-      getAllCommentsByProduct(productId: $id) {
-        ... on Comment {
-          _id
-          text
-          date
-          show
-          rate
-          isSelled
-          replyComments {
+    query($filter: ProductCommentFilterInput, $pagination: Pagination) {
+      getCommentsByProduct(filter: $filter, pagination: $pagination) {
+        ... on PaginatedComments {
+          items{
             _id
-            createdAt
-            replyText
+            text
+            date
+            show
+            rate
             isSelled
-            showReplyComment
-            answerer{
+            replyCommentsCount 
+            user {
               _id
-              firstName
               email
+              firstName
               role
             }
           }
-          user {
-            _id
-            email
-            firstName
-            role
-          }
+          count
         }
         ... on Error {
           statusCode
@@ -38,9 +29,42 @@ const getComments = async (id) => {
       }
     }
   `;
-  const result = await getItems(getCommentsQuery, { id });
-  await client.resetStore();
-  return result?.data?.getAllCommentsByProduct;
+  const result = await getItems(getCommentsQuery, { filter, pagination });
+  return result?.data?.getCommentsByProduct;
+};
+
+const getReplyComments = async ({ filter, pagination }) => {
+  const getReplyCommentsQuery = `
+    query($filter: ReplyCommentFilterInput, $pagination: Pagination) {
+      getReplyCommentsByComment(filter: $filter, pagination: $pagination) {
+        ... on PaginatedComments {
+          items{
+            _id
+            replyComments{
+              _id
+              replyText
+              showReplyComment
+              createdAt
+              isSelled
+              answerer{
+                _id
+                firstName
+                email
+                role
+              }
+            }
+          }
+          count
+        }
+        ... on Error {
+          statusCode
+          message
+        }
+      }
+    }
+  `;
+  const result = await getItems(getReplyCommentsQuery, { filter, pagination });
+  return result?.data?.getReplyCommentsByComment;
 };
 
 const changeRate = async (payload) => {
@@ -180,5 +204,6 @@ export {
   addComment,
   deleteComment,
   addReplyForComment,
-  deleteReplyComment
+  deleteReplyComment,
+  getReplyComments
 };

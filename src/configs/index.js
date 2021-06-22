@@ -418,7 +418,7 @@ export const toastSettings = {
 export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
 
 export const commentsLimit = 10;
-
+export const commentsSkip = 0;
 export const commentsReplyLimit = 3;
 
 export const cookiePolicy = {

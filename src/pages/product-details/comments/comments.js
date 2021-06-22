@@ -11,12 +11,13 @@ import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 
-import { TEXT_VALUE, commentFields, formRegExp, commentsLimit } from '../../../configs';
+import { TEXT_VALUE, commentFields, formRegExp } from '../../../configs';
 import { COMMENTS, TOOLTIPS } from '../../../translations/product-details.translations';
 import {
   addComment,
-  setCommentsLimit,
-  getComments
+  setCommentsSkip,
+  getComments,
+  clearComments
 } from '../../../redux/comments/comments.actions';
 import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
@@ -26,9 +27,6 @@ import {
   handleClassName,
   handleTextField,
   handleHelperText,
-  handleCommentsLength,
-  handleCommentsLimit,
-  handleCommentsFilter,
   handleUserLogin
 } from '../../../utils/handle-comments';
 
@@ -43,14 +41,21 @@ const Comments = () => {
     comments,
     userData,
     currentLimit,
-    getCommentsLoading
+    getCommentsLoading,
+    commentsCount,
+    skip
   } = useSelector(selectProductsIdCommentsLanguageUserData);
 
   const { _id: userId } = userData || {};
-
+  useEffect(
+    () => () => {
+      dispatch(clearComments());
+    },
+    []
+  );
   useEffect(() => {
-    dispatch(getComments(productId));
-  }, [productId]);
+    dispatch(getComments({ productId, skip, currentLimit }));
+  }, [productId, userData?._id]);
 
   const onSubmit = (formValues) => {
     const userFields = userId ? { user: userId } : {};
@@ -85,24 +90,19 @@ const Comments = () => {
   }, [userData]);
 
   const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
-  const [commentsListFilter, setCommentsListFilter] = useState([]);
-  useEffect(() => {
-    setCommentsListFilter(handleCommentsFilter(comments, userId));
-  }, [comments, userId]);
-  const commentsLength = handleCommentsLength(comments, userId);
 
-  const commentsList = commentsListFilter
-    ? commentsListFilter
-      .slice(0, currentLimit)
-      .map(({ _id, ...rest }) => <CommentsItem key={_id} data={rest} commentId={_id} />)
+  const commentsLength = comments?.length;
+
+  const commentsList = comments
+    ? comments.map(({ _id, ...rest }) => <CommentsItem key={_id} data={rest} commentId={_id} />)
     : [];
 
-  const limitOption =
-    commentsList.length === commentsListFilter.length && commentsListFilter.length > commentsLimit;
+  const limitOption = commentsList?.length === comments?.length && comments?.length > commentsCount;
 
   const handleCommentsReload = () => {
-    const newLimit = handleCommentsLimit(limitOption, commentsLimit, currentLimit);
-    dispatch(setCommentsLimit(newLimit));
+    const newSkip = skip + currentLimit;
+    dispatch(setCommentsSkip(newSkip));
+    dispatch(getComments({ productId, skip: newSkip, currentLimit }));
   };
 
   const handleCommentChange = (e) => {
@@ -168,8 +168,9 @@ const Comments = () => {
           </div>
         </Tooltip>
       </form>
-      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : commentsList}
-      {commentsLength > commentsLimit && (
+      {commentsList}
+      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
+      {commentsLength < commentsCount && (
         <LimitButton
           onClick={handleCommentsReload}
           startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}

@@ -5,20 +5,23 @@ import {
   setComments,
   setRate,
   setReplyLoading,
-  setGetCommentsLoading
+  setGetCommentsLoading,
+  setCommentsCount,
+  getReplyLoading
 } from './comments.actions';
 import {
   setSnackBarMessage,
   setSnackBarSeverity,
   setSnackBarStatus
 } from '../snackbar/snackbar.actions';
-import { SNACKBAR_MESSAGE, USER_IS_BLOCKED } from '../../configs';
+import { SNACKBAR_MESSAGE, USER_IS_BLOCKED, commentsReplyLimit } from '../../configs';
 import {
   ADD_COMMENT,
   ADD_REPLY,
   DELETE_COMMENT,
   DELETE_REPLY_COMMENT,
-  GET_COMMENTS
+  GET_COMMENTS,
+  GET_REPLY_COMMENTS
 } from './comments.types';
 import {
   addComment,
@@ -26,8 +29,10 @@ import {
   changeRate,
   addReplyForComment,
   deleteReplyComment,
-  getComments
+  getComments,
+  getReplyComments
 } from './comments.operations';
+import { handleReply, handleAddReplyCount } from '../../utils/handle-comments';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
@@ -43,6 +48,7 @@ export function* handleAddComment({ payload }) {
     } else {
       if (addedComment) {
         const comments = yield select(({ Comments }) => Comments.comments);
+        addedComment.replyCommentsCount = 0;
         const newComments = [addedComment, ...comments];
         yield put(setComments(newComments));
         yield call(handleSnackbar, added);
@@ -90,12 +96,33 @@ export function* handleAddReply({ payload }) {
       yield call(handleUserIsBlocked);
     } else {
       const comments = yield select(({ Comments }) => Comments.comments);
-      const newComments = comments.map((comment) =>
-        comment._id === addedReplyComment._id
-          ? { ...comment, replyComments: [...addedReplyComment.replyComments] }
-          : comment
-      );
-      yield put(setComments(newComments));
+      const existReply = comments.filter((comment) => comment._id === addedReplyComment._id);
+      const isEmptyCount = existReply[0]?.replyComments?.count || 0;
+      const replyCount = existReply[0].replyCommentsCount;
+      const isEmptyArr = existReply[0]?.replyComments?.items || [];
+      if (handleReply(isEmptyCount, replyCount, commentsReplyLimit)) {
+        const newComments = comments.map((comment) =>
+          comment._id === addedReplyComment._id
+            ? {
+              ...comment,
+              replyCommentsCount: comment.replyCommentsCount + 1,
+              replyComments: {
+                items: [
+                  ...isEmptyArr,
+                  addedReplyComment.replyComments[addedReplyComment.replyComments.length - 1]
+                ],
+                count: comment?.replyComments?.count + 1
+              }
+            }
+            : comment
+        );
+        yield put(setComments(newComments));
+      } else {
+        const newComments = comments.map((comment) =>
+          handleAddReplyCount(comment, addedReplyComment)
+        );
+        yield put(setComments(newComments));
+      }
       yield call(handleSnackbar, addedReply);
       yield put(setReplyLoading({ loader: false, commentId: '' }));
     }
@@ -109,10 +136,16 @@ export function* handleDeleteReplyForComment({ payload }) {
   try {
     const comments = yield select(({ Comments }) => Comments.comments);
     const newComments = comments.map((comment) =>
-      comment.replyComments.some((item) => item._id === payload.replyCommentId)
+      comment?.replyComments?.items?.some((item) => item._id === payload.replyCommentId)
         ? {
           ...comment,
-          replyComments: comment.replyComments.filter(({ _id }) => _id !== payload.replyCommentId)
+          replyCommentsCount: comment.replyCommentsCount - 1,
+          replyComments: {
+            items: comment?.replyComments?.items?.filter(
+              ({ _id }) => _id !== payload.replyCommentId
+            ),
+            count: comment?.replyComments?.count - 1
+          }
         }
         : comment
     );
@@ -134,14 +167,53 @@ function* handleSnackbar(message) {
 export function* handleGetComments({ payload }) {
   try {
     yield put(setGetCommentsLoading(true));
-    const comments = yield call(getComments, payload);
-    console.log(comments);
+    const existComments = yield select(({ Comments }) => Comments.comments);
+    const comments = yield call(getComments, {
+      filter: { productId: payload.productId, filters: false },
+      pagination: { skip: payload.skip, limit: payload.currentLimit }
+    });
+
     if (comments) {
-      yield put(setComments(comments));
+      yield put(setComments([...existComments, ...comments.items]));
+      yield put(setCommentsCount(comments.count));
     }
     yield put(setGetCommentsLoading(false));
   } catch (e) {
     yield put(setGetCommentsLoading(false));
+    yield call(handleCommentsError, e);
+  }
+}
+
+export function* handleGetReplyComments({ payload }) {
+  try {
+    yield put(getReplyLoading({ loader: true, commentId: payload.commentId }));
+    const existComments = yield select(({ Comments }) => Comments.comments);
+    const replyComments = yield call(getReplyComments, {
+      filter: { commentId: payload.commentId, filters: false },
+      pagination: { skip: payload.skip, limit: payload.limit }
+    });
+    const existReply = existComments.filter(
+      (comment) => comment._id === replyComments.items[0]._id
+    );
+    const isEmptyArr = existReply[0]?.replyComments?.items || [];
+    const isEmptyCount = existReply[0]?.replyComments?.count || 0;
+    const newComments = existComments.map((comment) =>
+      comment._id === replyComments.items[0]._id
+        ? {
+          ...comment,
+          replyComments: {
+            count: replyComments.count + isEmptyCount,
+            items: [...isEmptyArr, ...replyComments.items[0].replyComments]
+          }
+        }
+        : comment
+    );
+    if (newComments) {
+      yield put(setComments(newComments));
+    }
+    yield put(getReplyLoading({ loader: false, commentId: '' }));
+  } catch (e) {
+    yield put(getReplyLoading({ loader: false, commentId: '' }));
     yield call(handleCommentsError, e);
   }
 }
@@ -152,4 +224,5 @@ export default function* commentsSaga() {
   yield takeEvery(ADD_REPLY, handleAddReply);
   yield takeEvery(DELETE_REPLY_COMMENT, handleDeleteReplyForComment);
   yield takeEvery(GET_COMMENTS, handleGetComments);
+  yield takeEvery(GET_REPLY_COMMENTS, handleGetReplyComments);
 }

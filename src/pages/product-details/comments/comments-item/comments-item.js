@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -11,37 +11,36 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { useStyles } from './comments-item.styles';
 import LimitButton from '../limit-button/limit-button';
 import CommentDialog from './comment-dialog';
-import {
-  COMMENTS_TIME_OPTIONS,
-  DATE_LANGUAGE_OPTIONS,
-  commentsReplyLimit
-} from '../../../../configs';
-import { setReplyCommentsLimit } from '../../../../redux/comments/comments.actions';
+import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../configs';
+import { getReplyComments } from '../../../../redux/comments/comments.actions';
 import { TOOLTIPS, REPLY } from '../../../../translations/product-details.translations';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
 import { Loader } from '../../../../components/loader/loader';
-import {
-  handleReplyCommentsLength,
-  handleCommentsLimit,
-  handleUserCommentOwner,
-  handleReplyCommentsFilter
-} from '../../../../utils/handle-comments';
+import { handleUserCommentOwner } from '../../../../utils/handle-comments';
 
 const CommentsItem = ({ data, commentId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { user, text, date, show, rate, replyComments, isSelled } = data;
+  const { user, text, date, show, rate, replyCommentsCount, isSelled, replyComments } = data;
 
-  const { language, userData, currentLimit, replyLoading, replyLoadingId } = useSelector(
-    ({ Comments, Language, User }) => ({
-      language: Language.language,
-      userData: User.userData,
-      currentLimit: Comments.replyLimit,
-      replyLoading: Comments.replyLoading.loader,
-      replyLoadingId: Comments.replyLoading.commentId
-    })
-  );
+  const {
+    language,
+    userData,
+    currentLimit,
+    replyLoading,
+    replyLoadingId,
+    getReplyLoading,
+    getReplyLoadingId
+  } = useSelector(({ Comments, Language, User }) => ({
+    language: Language.language,
+    userData: User.userData,
+    currentLimit: Comments.replyLimit,
+    replyLoading: Comments.replyLoading.loader,
+    replyLoadingId: Comments.replyLoading.commentId,
+    getReplyLoading: Comments.getReplyLoading.loader,
+    getReplyLoadingId: Comments.getReplyLoading.commentId
+  }));
 
   const { firstName, email, _id: id } = user || {
     firstName: 'Deleted User',
@@ -51,10 +50,7 @@ const CommentsItem = ({ data, commentId }) => {
 
   const [isModalShown, toggleModal] = useState(false);
   const [isReplyShown, toggleReply] = useState(false);
-  const [replyCommentsListFilter, setReplyCommentsListFilter] = useState([]);
-  useEffect(() => {
-    setReplyCommentsListFilter(handleReplyCommentsFilter(replyComments, userData?._id));
-  }, [replyComments]);
+
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
   const dateToShow = new Date(date);
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
@@ -74,26 +70,28 @@ const CommentsItem = ({ data, commentId }) => {
   const handleReplyClose = () => {
     toggleReply(false);
   };
+
+  const getReplyCommentsByComment = () => {
+    dispatch(
+      getReplyComments({ commentId, limit: currentLimit, skip: replyComments?.items?.length || 0 })
+    );
+  };
+
   if (!show && userData?._id !== id) {
     return null;
   }
 
-  const commentsReplyLength = handleReplyCommentsLength(replyComments, userData?._id);
+  const commentsReplyLength = replyComments?.items.length;
 
-  const replyCommentsList = replyCommentsListFilter
-    ? replyCommentsListFilter
-      .slice(0, currentLimit)
-      .map(({ _id, ...rest }) => <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />)
+  const replyCommentsList = replyComments?.items
+    ? replyComments.items.map(({ _id, ...rest }) => (
+      <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+    ))
     : [];
 
   const limitOption =
-    replyCommentsList.length === replyCommentsListFilter?.length &&
-    replyCommentsListFilter.length > commentsReplyLimit;
-
-  const handleReplyCommentsReload = () => {
-    const newLimit = handleCommentsLimit(limitOption, commentsReplyLimit, currentLimit);
-    dispatch(setReplyCommentsLimit(newLimit));
-  };
+    replyCommentsList.length === replyComments?.items?.length &&
+    replyComments?.items?.length > replyCommentsCount;
 
   return (
     <div className={styles.container}>
@@ -152,10 +150,18 @@ const CommentsItem = ({ data, commentId }) => {
         </Tooltip>
 
         {isReplyShown ? <ReplyForm cancel={handleReplyClose} commentId={commentId} /> : null}
+        <Button type='submit' className={styles.button} onClick={getReplyCommentsByComment}>
+          {replyCommentsCount}
+        </Button>
         {replyCommentsList}
-        {commentsReplyLength > commentsReplyLimit && (
+        {getReplyLoading && getReplyLoadingId === commentId && (
+          <div className={styles.loader}>
+            <Loader width={40} height={40} heightWrap={90} />
+          </div>
+        )}
+        {commentsReplyLength < replyCommentsCount && (
           <LimitButton
-            onClick={handleReplyCommentsReload}
+            onClick={getReplyCommentsByComment}
             startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}
           >
             {limitOption ? REPLY[language].hideBtn : REPLY[language].loadMore}

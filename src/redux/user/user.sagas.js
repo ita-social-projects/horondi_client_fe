@@ -16,6 +16,7 @@ import {
   setRecoveryLoading,
   setUserOrders
 } from './user.actions';
+import { clearComments } from '../comments/comments.actions';
 import {
   loginUser,
   getGoogleUser,
@@ -235,6 +236,7 @@ export function* handleGetUserOrders() {
 }
 
 export function* handleUserLogout() {
+  yield put(clearComments());
   yield put(setUser(null));
   yield put(setUserOrders(null));
   yield put(resetCart());

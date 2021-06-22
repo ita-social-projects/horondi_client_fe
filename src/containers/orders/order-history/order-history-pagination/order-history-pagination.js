@@ -2,6 +2,7 @@ import React from 'react';
 import { Pagination } from '@material-ui/lab';
 
 import { useStyles } from './order-history-pagination.style';
+import { TEXT_FIELD_VARIANT } from '../../../../const/material-ui';
 
 const OrderHistoryPagination = ({ data }) => {
   const styles = useStyles();
@@ -15,8 +16,8 @@ const OrderHistoryPagination = ({ data }) => {
     <div className={styles.paginationDiv}>
       <Pagination
         count={quantityPages}
-        variant='outlined'
-        shape='rounded'
+        variant={TEXT_FIELD_VARIANT.OUTLINED}
+        shape={TEXT_FIELD_VARIANT.ROUNTED}
         page={currentPage + 1}
         onChange={changeHandlerClick}
       />

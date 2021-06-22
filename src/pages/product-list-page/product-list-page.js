@@ -89,9 +89,7 @@ const ProductListPage = ({ model, width }) => {
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
   const changeHandler = (e, value) => {
-    console.log(e);
     searchParams.set('page', value);
-    console.log(searchParams.toString());
     history.push(`?${searchParams.toString()}`);
   };
 

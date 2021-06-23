@@ -27,12 +27,10 @@ const CountPerPage = () => {
     searchParams.set(countPerPage, value);
     history.push(`?${searchParams.toString()}`);
   };
-  console.log(searchParams.get("countPerPage"))
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
       className={searchParams.get("countPerPage") == item.value ? (styles.selectedButton):("")}
       data-cy={item.title}
-      title={item.title}
       key={item.value}
       type='button'
       value={item.value}

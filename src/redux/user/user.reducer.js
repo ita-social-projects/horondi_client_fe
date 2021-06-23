@@ -29,7 +29,7 @@ export const initialState = {
   confirmationEmailSent: false,
   recoveryLoading: false,
   confirmationLoading: false,
-  currentPage: 0,
+  currentPage: 1,
   countPerPage: null
 };
 

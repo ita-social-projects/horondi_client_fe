@@ -30,14 +30,14 @@ const OrderHistory = () => {
       getUserOrders({
         pagination: {
           limit: limitHistoryOrders,
-          skip: currentPage * limitHistoryOrders
+          skip: (currentPage - 1) * limitHistoryOrders
         }
       })
     );
   }, [currentPage, countPerPage]);
 
   const changeHandler = (value) => {
-    dispatch(setCurrentPage(value - 1));
+    dispatch(setCurrentPage(value));
   };
 
   if (loading) {

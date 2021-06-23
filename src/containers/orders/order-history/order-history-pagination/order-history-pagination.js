@@ -18,7 +18,7 @@ const OrderHistoryPagination = ({ data }) => {
         count={quantityPages}
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         shape={TEXT_FIELD_VARIANT.ROUNTED}
-        page={currentPage + 1}
+        page={currentPage}
         onChange={changeHandlerClick}
       />
     </div>

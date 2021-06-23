@@ -5,7 +5,9 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import _ from 'lodash';
 
+import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
 import OrderHistoryTable from '../order-history-table/index';
@@ -66,7 +68,8 @@ const OrderHistoryOrder = ({ order }) => {
 
   const totalPrice = (order.totalItemsPrice[currency].value / 100).toFixed(0);
   const currencySign = getCurrencySign(currency);
-  const orderStatus = ORDER_STATUSES[order.status][language].toLowerCase();
+  const orderStatus = _.capitalize(ORDER_STATUSES[order.status][language]);
+  const dateInFormat = getFormatDate(order.dateOfCreation);
 
   return (
     <div className={styles.root}>
@@ -80,11 +83,10 @@ const OrderHistoryOrder = ({ order }) => {
           <div className={styles.heading}>
             <div className={styles.info}>
               <div>
-                № {order.orderNumber} {ORDER_HISTORY_TABLE_FIELDS[language].dated}{' '}
-                {new Intl.DateTimeFormat('en-GB').format(order.dateOfCreation).replaceAll('/', '.')}
+                № {order.orderNumber} {ORDER_HISTORY_TABLE_FIELDS[language].dated} {dateInFormat}
               </div>
               <div className={styles.status} style={{ color }}>
-                {`${orderStatus[0].toUpperCase()}${orderStatus.slice(1)}`}
+                {orderStatus}
               </div>
             </div>
             <div className={visible ? styles.total : styles.blockNone}>

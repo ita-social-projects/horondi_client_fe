@@ -4,7 +4,6 @@ import {
   SET_COMMENTS,
   SET_RATE,
   SET_COMMENTS_LOADING,
-  SET_UPDATING_COMMENT,
   SET_COMMENTS_SKIP,
   SET_REPLY_LOADING,
   SET_REPLY_COMMENTS_LIMIT,
@@ -62,11 +61,6 @@ const commentsReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         commentsLoading: action.payload
-      };
-    case SET_UPDATING_COMMENT:
-      return {
-        ...state,
-        updatingComment: action.payload
       };
     case SET_COMMENTS_SKIP:
       return {

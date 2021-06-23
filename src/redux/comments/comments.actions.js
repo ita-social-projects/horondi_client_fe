@@ -1,11 +1,9 @@
 import {
   SET_RATE,
   ADD_COMMENT,
-  UPDATE_COMMENT,
   DELETE_COMMENT,
   SET_COMMENTS,
   SET_COMMENTS_LOADING,
-  SET_UPDATING_COMMENT,
   SET_COMMENTS_SKIP,
   SET_REPLY_LOADING,
   DELETE_REPLY_COMMENT,
@@ -29,11 +27,6 @@ export const addComment = (payload) => ({
   payload
 });
 
-export const updateComment = (payload) => ({
-  type: UPDATE_COMMENT,
-  payload
-});
-
 export const deleteComment = (payload) => ({
   type: DELETE_COMMENT,
   payload
@@ -46,11 +39,6 @@ export const setComments = (payload) => ({
 
 export const setCommentsLoading = (payload) => ({
   type: SET_COMMENTS_LOADING,
-  payload
-});
-
-export const setUpdatingComment = (payload) => ({
-  type: SET_UPDATING_COMMENT,
   payload
 });
 
@@ -78,6 +66,7 @@ export const setReplyCommentsLimit = (payload) => ({
   type: SET_REPLY_COMMENTS_LIMIT,
   payload
 });
+
 export const getComments = (payload) => ({
   type: GET_COMMENTS,
   payload
@@ -97,9 +86,11 @@ export const getReplyComments = (payload) => ({
   type: GET_REPLY_COMMENTS,
   payload
 });
+
 export const clearComments = () => ({
   type: CLEAR_COMMENTS
 });
+
 export const getReplyLoading = (payload) => ({
   type: GET_REPLY_LOADING,
   payload

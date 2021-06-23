@@ -44,6 +44,7 @@ export function* handleAddComment({ payload }) {
     yield put(setCommentsLoading(true));
     const addedComment = yield call(addComment, payload);
     if (addedComment?.message === USER_IS_BLOCKED) {
+      yield put(setCommentsLoading(false));
       yield call(handleUserIsBlocked);
     } else {
       if (addedComment) {
@@ -73,7 +74,6 @@ export function* handleDeleteComment({ payload }) {
     yield call(handleSnackbar, deleted);
     yield call(deleteComment, payload);
   } catch (e) {
-    yield put(setCommentsLoading(false));
     yield call(handleCommentsError, e);
   }
 }
@@ -93,6 +93,7 @@ export function* handleAddReply({ payload }) {
     yield put(setReplyLoading({ loader: true, commentId: payload.commentId }));
     const addedReplyComment = yield call(addReplyForComment, payload);
     if (addedReplyComment?.message === USER_IS_BLOCKED) {
+      yield put(setReplyLoading({ loader: false, commentId: '' }));
       yield call(handleUserIsBlocked);
     } else {
       const comments = yield select(({ Comments }) => Comments.comments);
@@ -109,9 +110,11 @@ export function* handleAddReply({ payload }) {
               replyComments: {
                 items: [
                   ...isEmptyArr,
-                  addedReplyComment.replyComments[addedReplyComment.replyComments.length - 1]
+                  addedReplyComment.replyComments.items[
+                    addedReplyComment.replyComments.items.length - 1
+                  ]
                 ],
-                count: comment?.replyComments?.count + 1
+                count: isEmptyCount + 1
               }
             }
             : comment
@@ -153,7 +156,6 @@ export function* handleDeleteReplyForComment({ payload }) {
     yield call(handleSnackbar, deletedReply);
     yield call(deleteReplyComment, payload);
   } catch (e) {
-    yield put(setCommentsLoading(false));
     yield call(handleCommentsError, e);
   }
 }

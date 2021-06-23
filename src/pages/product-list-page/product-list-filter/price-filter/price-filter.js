@@ -9,7 +9,7 @@ import {
   PRICE_FROM,
   PRICE_TO
 } from '../../../../translations/product-list.translations';
-import { min,max } from '../../../../utils/priceCalculating';
+import { getMin,getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
@@ -55,8 +55,8 @@ const PriceFilter = () => {
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
-  const setMin = min(minPrice,currency)
-  const setMax = max(maxPrice,currency)
+  const min = getMin(minPrice,currency)
+  const max = getMax(maxPrice,currency)
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
@@ -70,8 +70,8 @@ const PriceFilter = () => {
         onChange={handlePriceChange}
         onChangeCommitted={handlePriceFilter}
         valueLabelDisplay='auto'
-        min={setMin}
-        max={setMax}
+        min={min}
+        max={max}
         aria-labelledby='range-slider'
       />
     </FormGroup>

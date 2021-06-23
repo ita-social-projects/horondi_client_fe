@@ -159,7 +159,7 @@ describe('Product reducer test', () => {
   it('should set current page to 3', () => {
     const state = {
       ...initialState,
-      currentPage: 3
+      currentPage: 4
     };
     expect(productReducer(initialState, setCurrentPage(4))).toEqual(state);
   });

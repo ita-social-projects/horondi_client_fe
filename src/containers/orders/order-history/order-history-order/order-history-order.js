@@ -62,10 +62,7 @@ const OrderHistoryOrder = ({ order }) => {
   if (order.items.length > 3) {
     imagesList.push(
       <div className={styles.imagesEmpty}>
-        <span>
-          {'\u002B'}
-          {order.items.length - quantityImg}
-        </span>
+        <span>+{order.items.length - quantityImg}</span>
       </div>
     );
   }
@@ -87,8 +84,7 @@ const OrderHistoryOrder = ({ order }) => {
           <div className={styles.heading}>
             <div className={styles.info}>
               <div>
-                {'\u2116'}
-                {order.orderNumber} {ORDER_HISTORY_TABLE_FIELDS[language].dated} {dateInFormat}
+                №{order.orderNumber} {ORDER_HISTORY_TABLE_FIELDS[language].dated} {dateInFormat}
               </div>
               <div className={styles.status} style={{ color }}>
                 {orderStatus}
@@ -108,10 +104,7 @@ const OrderHistoryOrder = ({ order }) => {
             <OrderHistoryTable items={orderHistoryList} totalPrice={totalPrice} />
           </div>
           <div className={styles.bottom}>
-            <div className={styles.totalText}>
-              {ORDER_TABLE_FIELDS[language].amountOfOrder}
-              {'\u003A'}
-            </div>
+            <div className={styles.totalText}>{ORDER_TABLE_FIELDS[language].amountOfOrder}:</div>
             <div className={styles.totalText}>
               <div>
                 {totalPrice} <FontAwesomeIcon icon={currencySign} />

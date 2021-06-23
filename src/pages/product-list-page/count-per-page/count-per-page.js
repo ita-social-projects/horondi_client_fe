@@ -18,7 +18,6 @@ const CountPerPage = () => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-  const countPerPageValue = useSelector(({ Products: { countPerPages } }) => countPerPages);
   const countPerPageText = COUNT_PER_PAGE[language].value;
   useEffect(() => {
     dispatch(setCountPerPage(+searchParams.get(countPerPage)));
@@ -28,10 +27,10 @@ const CountPerPage = () => {
     searchParams.set(countPerPage, value);
     history.push(`?${searchParams.toString()}`);
   };
-
+  console.log(searchParams.get("countPerPage"))
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
-      className={countPerPageValue === item.value && styles.selectedButton}
+      className={searchParams.get("countPerPage") == item.value ? (styles.selectedButton):("")}
       data-cy={item.title}
       title={item.title}
       key={item.value}

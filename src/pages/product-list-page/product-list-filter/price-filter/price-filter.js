@@ -70,7 +70,7 @@ const PriceFilter = () => {
         onChangeCommitted={handlePriceFilter}
         valueLabelDisplay='auto'
         min={min}
-        max={max+1}
+        max={max}
         aria-labelledby='range-slider'
       />
     </FormGroup>

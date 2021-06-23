@@ -29,7 +29,7 @@ import {
 export const initialState = {
   productLoading: false,
   loading: true,
-  currentPage: 0,
+  currentPage: 1,
   countPerPage: 9,
   sortByPrice: 0,
   sortByRate: 0,
@@ -106,7 +106,7 @@ const productsReducer = (state = initialState, action = {}) => {
     case SET_CURRENT_PAGE:
       return {
         ...state,
-        currentPage: action.payload - 1 
+        currentPage: action.payload
       };
     case SET_PRODUCTS_PER_PAGE:
       return {

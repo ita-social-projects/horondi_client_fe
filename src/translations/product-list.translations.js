@@ -187,7 +187,7 @@ export const SORT_BY_SELECT_OPTIONS = [
     ],
     optionValue: {
       name: 'sortAsc',
-      value: -1 
+      value: 1 
       }
   },
   {
@@ -210,6 +210,12 @@ export const ITEMS_PER_PAGE = [
     title: 'nine products per page',
     value: 9
   },
-  { title: 'eighteen products per page', value: 18 },
-  { title: 'thirty products per page', value: 30 }
+  {
+    title: 'eighteen products per page',
+    value: 18 
+  },
+  {
+    title: 'thirty products per page',
+    value: 30 
+  }
 ];

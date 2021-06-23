@@ -63,7 +63,7 @@ const ProductListPage = ({ model, width }) => {
   }));
   const { modelsFilter, categoryFilter, colorsFilter, patternsFilter, isHotItemFilter } = filters;
   useEffect(() => {
-    dispatch(setCurrentPage(searchParams.get(URL_QUERIES_NAME.page)));
+    dispatch(setCurrentPage(+searchParams.get(URL_QUERIES_NAME.page)));
     dispatch(getFiltredProducts({}));
   }, [
     dispatch,
@@ -107,7 +107,7 @@ const ProductListPage = ({ model, width }) => {
         count={pagesCount}
         variant='outlined'
         shape='rounded'
-        page={currentPage + 1}
+        page={currentPage}
         onChange={changeHandler}
       />
   const paginationCondition = () => {

@@ -35,22 +35,24 @@ const ProductSort = () => {
   }
   useEffect(() => {
     SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }) => {
-      switch(query){
-        case Sortname.sortDesc:{
-          dispatch(setSortByPrice(optionValue.value));
-          break
-        }
-        case(Sortname.rate):{
-          dispatch(setSortByRate(optionValue.value));
-          break
-        }
-        case(Sortname.popularity):{
-          dispatch(setSortByPopularity(optionValue.value));
-          break
-        }
-        case Sortname.sortAsc:{
-          dispatch(setSortByPrice(optionValue.value+2));
-          break
+      if(query === optionValue.name){
+        switch(query){
+          case Sortname.sortDesc:{
+            dispatch(setSortByPrice(optionValue.value));
+            break
+          }
+          case(Sortname.rate):{
+            dispatch(setSortByRate(optionValue.value));
+            break
+          }
+          case(Sortname.popularity):{
+            dispatch(setSortByPopularity(optionValue.value));
+            break
+          }
+          case Sortname.sortAsc:{
+            dispatch(setSortByPrice(optionValue.value));
+            break
+          }
         }
       }
     });

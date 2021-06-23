@@ -17,10 +17,10 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   selectedButton: {
-    backgroundColor: theme.palette.card.selectedButton.backgroundColor,
-    color: theme.palette.card.selectedButton.color,
+    backgroundColor: "rgba(0, 0, 0, 0.08)",
+    color: "rgba(0, 0, 0, 0.54)",
     '&:hover': {
-      backgroundColor: theme.palette.card.selectedButton.backgroundColor
+      backgroundColor: "rgba(0, 0, 0, 0.10)"
     }
   }
 }));

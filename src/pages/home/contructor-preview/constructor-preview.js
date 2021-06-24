@@ -11,6 +11,9 @@ import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
+import routes from '../../../const/routes';
+
+const { pathToConstructor } = routes;
 
 const ConstructorPreview = () => {
   const language = useSelector(({ Language }) => Language.language);
@@ -41,7 +44,7 @@ const ConstructorPreview = () => {
         onMouseEnter={() => setIsMouseIn(true)}
       >
         <ExpandLessIcon className={styles.constructorInnerIcon} />
-        <Link to='/constructor' className={styles.constructorInnerLink}>
+        <Link to={pathToConstructor} className={styles.constructorInnerLink}>
           {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
           <ArrowRightAltIcon />
         </Link>

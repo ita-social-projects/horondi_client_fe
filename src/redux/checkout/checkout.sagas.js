@@ -31,10 +31,12 @@ import {
 } from './checkout.types';
 import { getItems } from '../../utils/client';
 import { setError } from '../error/error.actions';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
+
+const { pathToErrorPage } = routes;
 
 function* handleErrors(e) {
   if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
@@ -42,7 +44,7 @@ function* handleErrors(e) {
   } else {
     yield put(setDeliveryLoading(false));
     yield put(setError(e.message));
-    yield put(push(routes.pathToErrorPage));
+    yield put(push(pathToErrorPage));
   }
 }
 

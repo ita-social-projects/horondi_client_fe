@@ -38,14 +38,8 @@ const EditableField = ({ setEditable, text, handleOpen, commentId, firstName }) 
     setEditable(false);
   };
 
-  const {
-    values,
-    errors,
-    handleSubmit,
-    handleBlur,
-    setFieldValue,
-    setShouldValidate
-  } = useCommentValidation(!!userData, onSubmit, text);
+  const { values, errors, handleSubmit, handleBlur, setFieldValue, setShouldValidate } =
+    useCommentValidation(!!userData, onSubmit, text);
 
   const handleCommentChange = (e) => {
     const value = e.target.value.replace(formRegExp.link, '');

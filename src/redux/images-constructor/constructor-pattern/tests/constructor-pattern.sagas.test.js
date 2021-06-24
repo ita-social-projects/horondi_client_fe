@@ -17,9 +17,11 @@ import { getConstructorPatternById } from '../constructor-pattern.operations';
 import constructorBottom from '../constructor-pattern.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';
 import { setError } from '../../../error/error.actions';
-import routes from '../../../../configs/routes';
+import routes from '../../../../const/routes';
 import { errorReducer } from '../../../error/error.reducer';
 import constructorModel, { initialState } from '../../constructor-model/constructor-model.reducer';
+
+const { pathToErrorPage } = routes;
 
 describe('test for front pocket sagas', () => {
   it('should load constructor front pocket data', () =>
@@ -55,7 +57,7 @@ describe('test for front pocket sagas', () => {
       .withReducer(errorReducer, { error: null })
       .put(setError(mockError.message))
       .hasFinalState({ error: mockError.message })
-      .put(push(routes.pathToErrorPage))
+      .put(push(pathToErrorPage))
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;

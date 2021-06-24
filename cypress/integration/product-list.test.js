@@ -40,9 +40,10 @@ describe('products tests', () => {
     const products = () => cy.window().its('store').invoke('getState').its('Products');
     cy.visit('/bags');
     cy.get('[data-cy=model-name]').click();
-    cy.get(
-      '.MuiFormControl-root > .MuiInputBase-root > .MuiSelect-root'
-    ).select('від дорогих до дешевих', { log: true });
+    cy.get('.MuiFormControl-root > .MuiInputBase-root > .MuiSelect-root').select(
+      'від дорогих до дешевих',
+      { log: true }
+    );
     cy.wait(3000);
     products().its('sortByPopularity').should('be.equal', 0);
     products().its('sortByPrice').should('be.equal', -1);

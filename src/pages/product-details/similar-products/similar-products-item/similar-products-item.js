@@ -10,6 +10,9 @@ import { IMG_URL } from '../../../../configs';
 
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
+import routes from '../../../../const/routes';
+
+const { pathToProduct } = routes;
 
 const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) => {
   const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
@@ -28,7 +31,7 @@ const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) 
   const styles = useStyles({ image, isLightTheme });
 
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`${pathToProduct}/${id}`}>
       <div className={styles.similarItem}>
         <div className={styles.info}>
           <span>{name[language].value}</span>

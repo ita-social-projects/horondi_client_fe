@@ -5,10 +5,12 @@ import { setNews, setArticle, setLoading } from './news.actions';
 import { setError } from '../error/error.actions';
 import { GET_NEWS, GET_NEWS_ARTICLE } from './news.types';
 import { getAllNews, getNewsById } from './news.operations';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
+
+const { pathToErrorPage } = routes;
 
 export function* handleNewsLoad() {
   try {
@@ -43,7 +45,7 @@ export function* handleNewsError(e) {
   } else {
     yield put(setLoading(false));
     yield put(setError(e.message));
-    yield put(push(routes.pathToErrorPage));
+    yield put(push(pathToErrorPage));
   }
 }
 

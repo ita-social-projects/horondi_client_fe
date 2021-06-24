@@ -17,9 +17,11 @@ import { getConstructorBottomById } from '../constructor-bottom.operations';
 import constructorBottom from '../constructor-bottom.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';
 import { setError } from '../../../error/error.actions';
-import routes from '../../../../configs/routes';
+import routes from '../../../../const/routes';
 import { errorReducer } from '../../../error/error.reducer';
 import constructorModel, { initialState } from '../../constructor-model/constructor-model.reducer';
+
+const { pathToErrorPage } = routes;
 
 describe('test for bottom sagas', () => {
   it('should load constructor bottom data', () =>
@@ -55,7 +57,7 @@ describe('test for bottom sagas', () => {
       .withReducer(errorReducer, { error: null })
       .put(setError(mockError.message))
       .hasFinalState({ error: mockError.message })
-      .put(push(routes.pathToErrorPage))
+      .put(push(pathToErrorPage))
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;

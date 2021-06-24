@@ -38,21 +38,14 @@ const useCommentValidation = (isAuth, onSubmit, commentValue) => {
     text: commentValue || ''
   };
 
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    setFieldValue,
-    resetForm
-  } = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-    validateOnBlur: shouldValidate,
-    validateOnChange: shouldValidate
-  });
+  const { handleSubmit, handleChange, handleBlur, values, errors, setFieldValue, resetForm } =
+    useFormik({
+      initialValues,
+      onSubmit,
+      validationSchema,
+      validateOnBlur: shouldValidate,
+      validateOnChange: shouldValidate
+    });
 
   return {
     handleSubmit,

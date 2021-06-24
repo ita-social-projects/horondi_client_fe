@@ -1,40 +1,68 @@
-import userReducer, { initialState } from '../user.reducer';
-import { setUserError, setUser, logoutUser, setUserLoading } from '../user.actions';
+import userReducer from '../user.reducer';
+import {
+  setUserError,
+  setUser,
+  logoutUser,
+  setUserLoading,
+  resetState,
+  userHasRegistered,
+  userHasRecovered
+} from '../user.actions';
 
-const user = {
-  name: 'user',
-  id: '12345'
-};
+import { userMocks, initialStateMock } from './user.mocks';
 
-describe('test language reducer', () => {
+describe('test user.reducer', () => {
   test('should return initial states state', () => {
-    expect(userReducer(undefined, 'UNSUPPORTED_ACTION')).toEqual(initialState);
+    expect(userReducer(undefined, 'UNSUPPORTED_ACTION')).toEqual(initialStateMock);
   });
-  test.skip('should set user', () => {
-    expect(userReducer(initialState, setUser(user))).toEqual({
+  test('should set user', () => {
+    expect(userReducer(initialStateMock, setUser(userMocks))).toEqual({
       error: false,
       userLoading: false,
+      ...initialStateMock,
       userData: {
-        id: user.id,
-        name: user.name
-      },
-      ...initialState
+        id: userMocks.id,
+        name: userMocks.name,
+        curPage: userMocks.curPage,
+        ordersCount: userMocks.ordersCount
+      }
     });
   });
   test('should set error to true', () => {
-    expect(userReducer(initialState, setUserError(true))).toEqual({
-      ...initialState,
+    expect(userReducer(initialStateMock, setUserError(true))).toEqual({
+      ...initialStateMock,
       error: true,
       userLoading: false
     });
   });
   test('should logout user', () => {
-    expect(userReducer(initialState, logoutUser())).toEqual(initialState);
+    expect(userReducer(initialStateMock, logoutUser())).toEqual(initialStateMock);
   });
   test('should user loading', () => {
-    expect(userReducer(initialState, setUserLoading(true))).toEqual({
-      ...initialState,
+    expect(userReducer(initialStateMock, setUserLoading(true))).toEqual({
+      ...initialStateMock,
       userLoading: true
+    });
+  });
+  test('should user state reset', () => {
+    expect(userReducer(initialStateMock, resetState(true))).toEqual({
+      ...initialStateMock,
+      userData: initialStateMock.userData,
+      userIsChecked: initialStateMock.userIsChecked,
+      confirmationEmailSent: initialStateMock.confirmationEmailSent,
+      userRecovered: initialStateMock.userRecovered
+    });
+  });
+  test('should test userHasRegistered', () => {
+    expect(userReducer(initialStateMock, userHasRegistered(true))).toEqual({
+      ...initialStateMock,
+      userRegistered: true
+    });
+  });
+  test('should test userHasRecovered', () => {
+    expect(userReducer(initialStateMock, userHasRecovered(false))).toEqual({
+      ...initialStateMock,
+      userRegistered: false
     });
   });
 });

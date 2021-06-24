@@ -80,34 +80,26 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
       ''
     );
 
-  const {
-    dirty,
-    values,
-    handleSubmit,
-    handleChange,
-    setFieldValue,
-    touched,
-    errors,
-    resetForm
-  } = useFormik({
-    validationSchema: validationSchema(deliveryType, language),
-    initialValues,
+  const { dirty, values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
+    useFormik({
+      validationSchema: validationSchema(deliveryType, language),
+      initialValues,
 
-    onSubmit: (data) => {
-      data.paymentMethod === CHECKOUT_PAYMENT[language].card
-        ? dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].card)) &&
-          dispatch(
-            getFondyData({
-              order: orderInputData(data, deliveryType, cartItems, language),
-              currency: getCurrentCurrency(currency),
-              amount: String(totalPriceToPay)
-            })
-          )
-        : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
-          dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].cash));
-      clearSessionStorage();
-    }
-  });
+      onSubmit: (data) => {
+        data.paymentMethod === CHECKOUT_PAYMENT[language].card
+          ? dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].card)) &&
+            dispatch(
+              getFondyData({
+                order: orderInputData(data, deliveryType, cartItems, language),
+                currency: getCurrentCurrency(currency),
+                amount: String(totalPriceToPay)
+              })
+            )
+          : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
+            dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].cash));
+        clearSessionStorage();
+      }
+    });
 
   useEffect(() => {
     if (userData && !getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM)) {

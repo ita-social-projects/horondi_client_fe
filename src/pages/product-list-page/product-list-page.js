@@ -143,7 +143,7 @@ const ProductListPage = ({ model, width }) => {
                 count={pagesCount}
                 variant='outlined'
                 shape='rounded'
-                page={currentPage + 1}
+                page={currentPage}
                 onChange={changeHandler}
               />
             </div>

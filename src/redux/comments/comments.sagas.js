@@ -110,9 +110,7 @@ export function* handleAddReply({ payload }) {
               replyComments: {
                 items: [
                   ...isEmptyArr,
-                  addedReplyComment.replyComments.items[
-                    addedReplyComment.replyComments.items.length - 1
-                  ]
+                  addedReplyComment.replyComments[addedReplyComment.replyComments.length - 1]
                 ],
                 count: isEmptyCount + 1
               }

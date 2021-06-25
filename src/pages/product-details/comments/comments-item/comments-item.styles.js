@@ -4,6 +4,18 @@ export const useStyles = makeStyles((theme) => {
   const color = theme.palette.textColor;
 
   return {
+    loadMore: {
+      width: '95%',
+      margin: '0 0 0 auto',
+      display: 'flex',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      borderTop: '2px solid #c2c2c2',
+      paddingTop: '10px',
+      '&:hover': {
+        cursor: 'pointer'
+      }
+    },
     container: {
       color,
       borderTop: '2px solid #C2C2C2',
@@ -13,16 +25,15 @@ export const useStyles = makeStyles((theme) => {
       fontWeight: '500'
     },
     date: {
-      color,
-      paddingRight: '15px'
+      color
     },
     comment: {
       display: 'flex',
       justifyContent: 'space-between'
     },
     commentActions: {
-      width: '60px',
-      justifySelf: 'flex-end'
+      paddingLeft: '20px',
+      display: 'flex'
     },
     editIcon: {
       marginRight: '5px',
@@ -31,39 +42,43 @@ export const useStyles = makeStyles((theme) => {
         cursor: 'pointer'
       }
     },
+    textContent: {
+      display: 'flex'
+    },
+
     deleteIcon: {
-      color: 'tomato',
       '&:hover': {
         cursor: 'pointer'
       }
     },
     text: {
       flexGrow: 1,
-      marginRight: '10px',
-      marginTop: '20px',
-      marginBottom: '20px'
+      maxWidth: '90%'
+    },
+    notAproveText: {
+      color: '#d3d3d3'
     },
     button: {
-      textTransform: 'none',
-      textAlign: 'center',
-      fontSize: '1rem',
-      backgroundColor: theme.palette.button.normal.backgroundColor,
-      color: theme.palette.button.normal.color,
+      margin: '0',
+      height: '30px',
       '&:hover': {
-        backgroundColor: theme.palette.button.hover.backgroundColor,
-        color: theme.palette.button.hover.color
+        cursor: 'pointer',
+        borderBottom: '2px solid #000000'
+      }
+    },
+    replyCount: {
+      display: 'flex',
+      marginLeft: '15px',
+      fontSize: '14px',
+      '&:hover': {
+        cursor: 'pointer'
       }
     },
     user: {
       display: 'flex'
     },
-    avatar: {
-      width: '60px',
-      height: '60px'
-    },
     name: {
-      marginTop: '23px',
-      marginLeft: '15px',
+      marginBottom: '10px',
       fontSize: '1rem',
       fontWeight: '700'
     },
@@ -71,8 +86,7 @@ export const useStyles = makeStyles((theme) => {
       height: '30px'
     },
     loader: {
-      borderTop: '2px solid #C2C2C2',
-      padding: '55px 0'
+      padding: '0'
     },
     line: {
       marginTop: '45px'
@@ -82,21 +96,48 @@ export const useStyles = makeStyles((theme) => {
     },
     userContainer: {
       display: 'flex',
-      alignItems: 'baseline'
+      alignItems: 'end'
     },
     userIcons: {
       display: 'flex',
-      alignItems: 'flex-end'
+      margin: 'auto'
     },
     boughtIcon: {
-      color: '#01a00d'
+      color: '#01a00d',
+      fontSize: '30px'
+    },
+    replyText: {
+      paddingLeft: '10px',
+      '&:hover': {
+        borderBottom: '2px solid #000000'
+      }
+    },
+    checkIcon: {
+      position: 'relative',
+      '&:before': {
+        top: '4px',
+        left: '13px',
+        width: '6px',
+        height: '9px',
+        content: "' '",
+        position: 'absolute',
+        transform: 'rotate(45deg)',
+        borderRight: '2px solid #ffffff',
+        borderBottom: '2px solid #ffffff'
+      }
     },
     replyIcon: {
-      transform: 'rotate(180deg)',
-      marginRight: '15px'
+      marginRight: '15px',
+      alignSelf: 'baseline'
     },
     reply: {
-      marginBottom: '2rem'
+      display: 'flex',
+      alignItems: 'center',
+      marginTop: '10px',
+      marginBottom: '10px'
+    },
+    icon: {
+      color: `rgb(${color} / 87%)`
     }
   };
 });

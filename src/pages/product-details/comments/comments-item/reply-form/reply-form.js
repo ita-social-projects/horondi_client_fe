@@ -65,12 +65,14 @@ const ReplyForm = ({ cancel, commentId }) => {
           className={styles.input}
           label={REPLY[language].text}
         />
-        <Button onClick={cancel} className={styles.replyBtn}>
-          {PDP_BUTTONS[language].cancelButton}
-        </Button>
-        <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
-          {PDP_BUTTONS[language].submitButton}
-        </Button>
+        <div className={styles.btnContainer}>
+          <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
+            {PDP_BUTTONS[language].leaveReply}
+          </Button>
+          <Button onClick={cancel} className={styles.replyBtn}>
+            {PDP_BUTTONS[language].cancelButton}
+          </Button>
+        </div>
       </div>
     </form>
   );

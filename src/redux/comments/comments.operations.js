@@ -11,7 +11,7 @@ const getComments = async ({ filter, pagination }) => {
             date
             show
             rate
-            isSelled
+            verifiedPurchase
             replyCommentsCount 
             user {
               _id
@@ -45,7 +45,7 @@ const getReplyComments = async ({ filter, pagination }) => {
               replyText
               showReplyComment
               createdAt
-              isSelled
+              verifiedPurchase
               answerer{
                 _id
                 firstName
@@ -111,7 +111,7 @@ const addComment = async (payload) => {
             email
             role
           }
-          isSelled
+          verifiedPurchase
         }
       }
     }
@@ -164,7 +164,7 @@ const addReplyForComment = async (payload) => {
             replyText
             showReplyComment
             createdAt
-            isSelled
+            verifiedPurchase
             answerer{
               _id
               firstName

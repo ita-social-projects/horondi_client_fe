@@ -4,9 +4,20 @@ export const useStyles = makeStyles((theme) => {
   const color = theme.palette.textColor;
 
   return {
+    btnContainer: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      '@media (max-width: 500px)': {
+        justifyContent: 'flex-start',
+        paddingTop: '10px'
+      }
+    },
     form: {
       marginTop: '15px',
       paddingLeft: '3rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
       '& *': {
         '& .MuiOutlinedInput-root': {
           background: '#fff',

@@ -1,4 +1,6 @@
-import { COMMENTS } from '../translations/product-details.translations';
+import React from 'react';
+import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
+import { COMMENTS, TOOLTIPS } from '../translations/product-details.translations';
 import { TEXT_VALUE } from '../configs';
 
 export const handleRateTip = (userId, language) => {
@@ -19,6 +21,9 @@ export const handleHelperText = (errorsName) => errorsName || '';
 export const handleUserCommentOwner = (userData, email) =>
   userData ? userData.email === email : false;
 
+export const handleUserCommentApprove = (userData, email, show) =>
+  handleUserCommentOwner(userData, email) && !show;
+
 export const handleUserLogin = (isLogin) => (isLogin ? 5 : 0);
 
 export const handleReply = (isEmptyCount, replyCount, replyLimit) => {
@@ -33,3 +38,8 @@ export const handleAddReplyCount = (comment, addedReplyComment) =>
       replyCommentsCount: comment.replyCommentsCount + 1
     }
     : comment;
+
+export const handleTitleSubmit = (userData, language, label) =>
+  userData ? '' : TOOLTIPS[language][label];
+
+export const handleArrowIcon = (limitOption) => (limitOption ? null : <ArrowDownwardRoundedIcon />);

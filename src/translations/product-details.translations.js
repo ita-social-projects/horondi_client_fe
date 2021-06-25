@@ -91,13 +91,15 @@ export const PDP_BUTTONS = {
     cartButton: 'В кошик',
     buyButton: 'Купити зараз',
     submitButton: 'Підтвердити',
-    cancelButton: 'Відхилити'
+    cancelButton: 'Відхилити',
+    leaveReply: 'Залишити відповідь'
   },
   1: {
     cartButton: 'Add to cart',
     buyButton: 'Buy now',
     submitButton: 'Submit',
-    cancelButton: 'Cancel'
+    cancelButton: 'Cancel',
+    leaveReply: 'Leave reply'
   }
 };
 
@@ -196,7 +198,7 @@ export const COMMENTS = {
     unregisteredTip: 'Вам потрібно увійти щоб залишити рейтинг',
     registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
     successfulTip: 'Встановити рейтинг',
-    loadMore: 'Завантажити більше',
+    loadMore: 'Показати ще...',
     hideBtn: 'Приховати коментарі'
   },
   1: {
@@ -208,22 +210,24 @@ export const COMMENTS = {
     unregisteredTip: 'You should login to leave rate',
     registeredTip: 'You should bought the product to leave rate',
     successfulTip: 'Set rate',
-    loadMore: 'Load more',
+    loadMore: 'Load more...',
     hideBtn: 'Hide comments'
   }
 };
 
 export const REPLY = {
   0: {
-    submit: 'Залишити репліку',
-    loadMore: 'Завантажити більше',
+    submit: 'Відповісти',
+    loadMore: 'Більше відповідей',
     hideBtn: 'Приховати репліки',
-    text: 'Поділіться своїми враженнями з іншими'
+    text: 'Поділіться своїми враженнями з іншими',
+    answers: 'Кількість відповідей :'
   },
   1: {
     submit: 'Leave reply',
-    loadMore: 'Load more',
+    loadMore: 'More answers',
     hideBtn: 'Hide replicas',
-    text: 'Share your thoughts with others'
+    text: 'Share your thoughts with others',
+    answers: 'Count of answers'
   }
 };

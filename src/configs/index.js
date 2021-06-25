@@ -331,7 +331,7 @@ export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
 export const commentFields = {
-  text: { name: 'text', multiline: true, rows: 7 }
+  text: { name: 'text', multiline: true, rows: 5 }
 };
 
 export const profileFields = [
@@ -413,7 +413,7 @@ export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Not
 
 export const commentsLimit = 10;
 export const commentsSkip = 0;
-export const commentsReplyLimit = 3;
+export const commentsReplyLimit = 10;
 
 export const cookiePolicy = {
   SINGLE_HOST_ORIGIN: 'single_host_origin'

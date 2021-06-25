@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
 import { Button, Tooltip, TextField } from '@material-ui/core';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { useStyles } from './comments.styles';
 
 import CommentsItem from './comments-item';
@@ -12,7 +10,7 @@ import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 
 import { TEXT_VALUE, commentFields, formRegExp } from '../../../configs';
-import { COMMENTS, TOOLTIPS } from '../../../translations/product-details.translations';
+import { COMMENTS } from '../../../translations/product-details.translations';
 import {
   addComment,
   setCommentsSkip,
@@ -27,7 +25,9 @@ import {
   handleClassName,
   handleTextField,
   handleHelperText,
-  handleUserLogin
+  handleUserLogin,
+  handleTitleSubmit,
+  handleArrowIcon
 } from '../../../utils/handle-comments';
 
 const Comments = () => {
@@ -54,8 +54,10 @@ const Comments = () => {
     []
   );
   useEffect(() => {
-    dispatch(getComments({ productId, skip, currentLimit }));
-  }, [productId, userData?._id]);
+    if (comments?.length === 0) {
+      dispatch(getComments({ productId, skip, currentLimit }));
+    }
+  }, [userData?._id]);
 
   const onSubmit = (formValues) => {
     const userFields = userId ? { user: userId } : {};
@@ -149,35 +151,39 @@ const Comments = () => {
               )
           )}
         </div>
-        <Tooltip title={userData ? '' : TOOLTIPS[language].unregisteredComment}>
-          <div className={styles.submit}>
-            <Button
-              type='submit'
-              className={styles.commentBtn}
-              disabled={!userData}
-              onClick={() => setShouldValidate(true)}
-            >
-              {COMMENTS[language].submit}
-            </Button>
 
-            {commentsLoading && (
-              <div className={styles.loader}>
-                <Loader width={40} height={40} heightWrap={90} />
-              </div>
-            )}
-          </div>
-        </Tooltip>
+        <div className={styles.submit}>
+          <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredComment')}>
+            <div>
+              <Button
+                type='submit'
+                className={styles.commentBtn}
+                disabled={!userData}
+                onClick={() => setShouldValidate(true)}
+              >
+                {COMMENTS[language].submit}
+              </Button>
+            </div>
+          </Tooltip>
+
+          {commentsLoading && (
+            <div className={styles.loader}>
+              <Loader width={40} height={40} heightWrap={90} />
+            </div>
+          )}
+        </div>
       </form>
       {commentsList}
-      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
+
       {commentsLength < commentsCount && (
-        <LimitButton
-          onClick={handleCommentsReload}
-          startIcon={limitOption ? <VisibilityOffIcon /> : <GetAppIcon />}
-        >
-          {limitOption ? COMMENTS[language].hideBtn : COMMENTS[language].loadMore}
-        </LimitButton>
+        <div className={styles.loadMore}>
+          {handleArrowIcon(limitOption)}
+          <span onClick={handleCommentsReload}>
+            {limitOption ? COMMENTS[language].hideBtn : COMMENTS[language].loadMore}
+          </span>
+        </div>
       )}
+      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
       <SnackbarItem />
     </div>
   );

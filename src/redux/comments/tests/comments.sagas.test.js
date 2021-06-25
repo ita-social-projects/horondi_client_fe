@@ -388,14 +388,11 @@ describe('Add reply comment saga', () => {
       data: {
         replyForComment: {
           _id: 'c3a84a5b9866c30390366111',
-          replyComments: {
-            count: 1,
-            items: [
-              {
-                replyText: 'text reply'
-              }
-            ]
-          }
+          replyComments: [
+            {
+              replyText: 'text reply'
+            }
+          ]
         }
       }
     };

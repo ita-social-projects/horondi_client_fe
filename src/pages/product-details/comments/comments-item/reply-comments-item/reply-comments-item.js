@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
@@ -12,7 +12,10 @@ import {
   COMMENT_OWNER_STATUS
 } from '../../../../../configs';
 import { TOOLTIPS } from '../../../../../translations/product-details.translations';
-import { handleUserCommentOwner } from '../../../../../utils/handle-comments';
+import {
+  handleUserCommentOwner,
+  handleUserCommentApprove
+} from '../../../../../utils/handle-comments';
 
 const ReplyCommentsItem = ({ data, replyCommentId }) => {
   const {
@@ -20,7 +23,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
     replyText: text,
     createdAt: date,
     showReplyComment: show,
-    isSelled
+    verifiedPurchase
   } = data;
 
   const { language, userData } = useSelector(({ Language, User, Products }) => ({
@@ -58,15 +61,6 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
       <div className={styles.comments}>
         <div className={styles.comment}>
           <div className={styles.userContainer}>
-            <div>
-              {isSelled ? (
-                <Tooltip title={TOOLTIPS[language].bought}>
-                  <BeenhereOutlinedIcon className={styles.boughtIcon} />
-                </Tooltip>
-              ) : (
-                ''
-              )}
-            </div>
             <div className={styles.user}>
               <span className={styles.name}>
                 {role === 'admin' || role === 'superadmin'
@@ -74,24 +68,39 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
                   : firstName}
               </span>
             </div>
-          </div>
-          <div className={styles.userIcons}>
-            <div className={styles.date}>{commentDate}</div>
-            {handleUserCommentOwner(userData, email) ? (
-              <div className={styles.icons}>
-                <div className={styles.commentActions}>
-                  <Tooltip title={TOOLTIPS[language].feedbackReply}>
-                    <FeedbackOutlinedIcon />
-                  </Tooltip>
-                  <Tooltip title={TOOLTIPS[language].delete}>
-                    <DeleteForeverIcon className={styles.deleteIcon} onClick={handleOpen} />
+            <div className={styles.commentActions}>
+              {verifiedPurchase ? (
+                <div className={styles.checkIcon}>
+                  <Tooltip title={TOOLTIPS[language].bought}>
+                    <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
+              ) : (
+                ''
+              )}
+              {handleUserCommentApprove(userData, email, show) ? (
+                <Tooltip title={TOOLTIPS[language].feedbackReply}>
+                  <FeedbackOutlinedIcon className={styles.icon} />
+                </Tooltip>
+              ) : null}
+            </div>
+          </div>
+          <div className={styles.date}>{commentDate}</div>
+        </div>
+        <div className={styles.textContent}>
+          <div className={show ? styles.text : `${styles.notAproveText} ${styles.text}`}>
+            {text}
+          </div>
+          <div className={styles.userIcons}>
+            {handleUserCommentOwner(userData, email) ? (
+              <div className={styles.icons}>
+                <Tooltip title={TOOLTIPS[language].delete}>
+                  <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
+                </Tooltip>
               </div>
             ) : null}
           </div>
         </div>
-        <div className={styles.text}>{text}</div>
       </div>
       <CommentDialog
         handleClose={handleClose}

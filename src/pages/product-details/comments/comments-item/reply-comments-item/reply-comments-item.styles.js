@@ -7,25 +7,24 @@ export const useStyles = makeStyles((theme) => {
     container: {
       color,
       borderTop: '2px solid #C2C2C2',
-      width: '90%',
+      width: '95%',
       margin: '0 0 0 auto',
       paddingLeft: '20px',
-      borderLeft: '10px solid #C2C2C2'
+      paddingTop: '10px'
     },
     comments: {
       fontWeight: '500'
     },
     date: {
-      color,
-      paddingRight: '15px'
+      color
     },
     comment: {
       display: 'flex',
       justifyContent: 'space-between'
     },
     commentActions: {
-      width: '60px',
-      justifySelf: 'flex-end'
+      paddingLeft: '20px',
+      display: 'flex'
     },
     editIcon: {
       marginRight: '5px',
@@ -34,27 +33,27 @@ export const useStyles = makeStyles((theme) => {
         cursor: 'pointer'
       }
     },
+    textContent: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    },
     deleteIcon: {
-      color: 'tomato',
       '&:hover': {
         cursor: 'pointer'
       }
     },
     text: {
       flexGrow: 1,
-      marginRight: '10px',
-      marginTop: '20px',
-      marginBottom: '20px'
+      maxWidth: '89%',
+      paddingBottom: '5px'
+    },
+    notAproveText: {
+      color: '#d3d3d3',
+      paddingBottom: '5px'
     },
     button: {
-      textTransform: 'none',
-      textAlign: 'center',
-      fontSize: '1rem',
-      backgroundColor: theme.palette.button.normal.backgroundColor,
-      color: theme.palette.button.normal.color,
       '&:hover': {
-        backgroundColor: theme.palette.button.hover.backgroundColor,
-        color: theme.palette.button.hover.color
+        cursor: 'pointer'
       }
     },
     user: {
@@ -65,8 +64,7 @@ export const useStyles = makeStyles((theme) => {
       height: '60px'
     },
     name: {
-      marginTop: '23px',
-      marginLeft: '15px',
+      marginBottom: '10px',
       fontSize: '1rem',
       fontWeight: '700'
     },
@@ -74,7 +72,6 @@ export const useStyles = makeStyles((theme) => {
       height: '30px'
     },
     loader: {
-      borderTop: '2px solid #C2C2C2',
       padding: '55px 0'
     },
     line: {
@@ -85,18 +82,35 @@ export const useStyles = makeStyles((theme) => {
     },
     userContainer: {
       display: 'flex',
-      alignItems: 'baseline'
+      alignItems: 'end'
     },
     userIcons: {
-      display: 'flex',
-      alignItems: 'flex-end'
+      margin: 'auto'
     },
     boughtIcon: {
-      color: '#01a00d'
+      color: '#01a00d',
+      fontSize: '30px'
     },
     replyIcon: {
       transform: 'rotate(180deg)',
       marginRight: '15px'
+    },
+    checkIcon: {
+      position: 'relative',
+      '&:before': {
+        top: '4px',
+        left: '13px',
+        width: '6px',
+        height: '9px',
+        content: "' '",
+        position: 'absolute',
+        transform: 'rotate(45deg)',
+        borderRight: '2px solid #ffffff',
+        borderBottom: '2px solid #ffffff'
+      }
+    },
+    icon: {
+      color: `rgb(${color} / 87%)`
     }
   };
 });

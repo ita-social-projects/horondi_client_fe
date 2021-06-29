@@ -17,7 +17,6 @@ import {
   getComments,
   clearComments
 } from '../../../redux/comments/comments.actions';
-import LimitButton from './limit-button/limit-button';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 import {
@@ -77,7 +76,6 @@ const Comments = () => {
   const {
     values,
     errors,
-    handleChange,
     handleSubmit,
     handleBlur,
     resetForm,
@@ -135,7 +133,7 @@ const Comments = () => {
                   <TextField
                     className={handleClassName(name, styles.text, styles.input)}
                     name={name}
-                    onChange={name === TEXT_VALUE ? handleCommentChange : handleChange}
+                    onChange={name === TEXT_VALUE ? handleCommentChange : null}
                     onBlur={handleBlur}
                     value={values[name]}
                     disabled={!userData}
@@ -179,7 +177,7 @@ const Comments = () => {
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
           <span onClick={handleCommentsReload}>
-            {limitOption ? COMMENTS[language].hideBtn : COMMENTS[language].loadMore}
+            {limitOption ? null : COMMENTS[language].loadMore}
           </span>
         </div>
       )}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Rating from '@material-ui/lab/Rating';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
@@ -19,7 +18,12 @@ import {
   handleUserCommentOwner,
   handleTitleSubmit,
   handleArrowIcon,
-  handleUserCommentApprove
+  handleUserCommentApprove,
+  handleUserId,
+  handleTextStyle,
+  handleRate,
+  handleLoadMoreText,
+  handleLimitOptions
 } from '../../../../utils/handle-comments';
 
 const CommentsItem = ({ data, commentId }) => {
@@ -54,10 +58,9 @@ const CommentsItem = ({ data, commentId }) => {
     getReplyLoadingId: Comments.getReplyLoading.commentId
   }));
 
-  const { firstName, email, _id: id } = user || {
+  const { firstName, email } = user || {
     firstName: 'Deleted User',
-    email: 'Deleted Email',
-    _id: 'deleted'
+    email: 'Deleted Email'
   };
 
   const [isModalShown, toggleModal] = useState(false);
@@ -91,7 +94,7 @@ const CommentsItem = ({ data, commentId }) => {
       return toggleReplyList(false);
     }
     toggleReplyList(true);
-    return !commentsReplyLength ? getReplyCommentsByComment() : null;
+    return !commentsReplyLength && getReplyCommentsByComment();
   };
 
   const getReplyCommentsByComment = () => {
@@ -108,9 +111,7 @@ const CommentsItem = ({ data, commentId }) => {
     ))
     : [];
 
-  const limitOption =
-    replyCommentsList.length === replyComments?.items?.length &&
-    replyComments?.items?.length > replyCommentsCount;
+  const limitOption = handleLimitOptions(replyCommentsList, replyComments, replyCommentsCount);
 
   return (
     <div className={styles.container}>
@@ -137,9 +138,11 @@ const CommentsItem = ({ data, commentId }) => {
           </div>
           <div className={styles.date}>{commentDate}</div>
         </div>
-        {rate > 0 ? <Rating data-cy='rate' name='edit-rate' value={rate} disabled /> : null}
+        {handleRate(rate)}
         <div className={styles.textContent}>
-          <div className={show ? styles.text : `${styles.notAproveText} ${styles.text}`}>
+          <div
+            className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}
+          >
             {text}
           </div>
           <div className={styles.userIcons}>
@@ -181,15 +184,15 @@ const CommentsItem = ({ data, commentId }) => {
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
                 <span onClick={getReplyCommentsByComment}>
-                  {limitOption ? REPLY[language].hideBtn : REPLY[language].loadMore}
+                  {handleLoadMoreText(limitOption, language)}
                 </span>
               </div>
             )}
           </div>
         ) : null}
-        {isReplyShown && userData?._id ? (
+        {isReplyShown && userData?._id && (
           <ReplyForm cancel={handleReplyClose} commentId={commentId} />
-        ) : null}
+        )}
         {getReplyLoading && getReplyLoadingId === commentId && (
           <div className={styles.loader}>
             <Loader width={40} height={40} heightWrap={90} />
@@ -205,7 +208,7 @@ const CommentsItem = ({ data, commentId }) => {
         handleClose={handleClose}
         isModalShown={isModalShown}
         commentId={commentId}
-        userId={userData ? userData._id : ''}
+        userId={handleUserId(userData)}
         isDeleteComment={1}
       />
     </div>

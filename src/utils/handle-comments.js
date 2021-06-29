@@ -1,6 +1,7 @@
 import React from 'react';
 import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
-import { COMMENTS, TOOLTIPS } from '../translations/product-details.translations';
+import Rating from '@material-ui/lab/Rating';
+import { COMMENTS, TOOLTIPS, REPLY } from '../translations/product-details.translations';
 import { TEXT_VALUE } from '../configs';
 
 export const handleRateTip = (userId, language) => {
@@ -43,3 +44,17 @@ export const handleTitleSubmit = (userData, language, label) =>
   userData ? '' : TOOLTIPS[language][label];
 
 export const handleArrowIcon = (limitOption) => (limitOption ? null : <ArrowDownwardRoundedIcon />);
+
+export const handleUserId = (userData) => (userData ? userData._id : '');
+
+export const handleRate = (rate) =>
+  rate > 0 ? <Rating data-cy='rate' name='edit-rate' value={rate} disabled /> : null;
+
+export const handleTextStyle = (show, text, notAproveText) => (show ? text : notAproveText);
+
+export const handleLoadMoreText = (limitOption, language) =>
+  limitOption && REPLY[language].loadMore;
+
+export const handleLimitOptions = (replyCommentsList, replyComments, replyCommentsCount) =>
+  replyCommentsList.length === replyComments?.items?.length &&
+  replyComments?.items?.length > replyCommentsCount;

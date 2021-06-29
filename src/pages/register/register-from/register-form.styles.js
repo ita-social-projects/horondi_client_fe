@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
     height: '550px',
-    padding: '30px 63px 63px',
+    padding: '20px 63px 40px',
     boxSizing: 'border-box'
   },
   heading: {
@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor
   },
   dataInput: {
-    marginBottom: '10px',
+    marginBottom: '5px',
     paddingBottom: '15px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
@@ -43,6 +43,22 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   },
+  consentMessage: {
+    fontSize: 12,
+    letterSpacing: '.3px',
+    color: '#929292',
+    lineHeight: '16px'
+  },
+
+  consentLink: {
+    color: '#929292',
+    textDecoration: 'underline',
+    '&:hover': {
+      color: '#1976D2',
+      backgroundColor: 'transparent'
+    }
+  },
+
   registerBtn: {
     border: '1px solid black',
     borderRadius: '4px',
@@ -57,12 +73,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   loginBtn: {
     float: 'right',
-    fontSize: '0.825rem',
-    lineHeight: '17px',
-    color: theme.palette.button.disabled.backgroundColor,
-    textTransform: 'capitalize',
+    fontSize: '0.875rem',
+    color: theme.palette.textColor,
     textDecoration: 'none',
-    marginTop: '3px',
+    textTransform: 'capitalize',
     '&:hover': {
       color: '#1976D2',
       textDecoration: 'underline',

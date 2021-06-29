@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import { map } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import {
@@ -10,6 +9,7 @@ import {
   PRICE_FROM,
   PRICE_TO
 } from '../../../../translations/product-list.translations';
+import { getMin,getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
@@ -55,8 +55,9 @@ const PriceFilter = () => {
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
-  const min = parseInt(minPrice ? minPrice[currency].value / 100 : 0, 10);
-  const max = parseInt(maxPrice ? maxPrice[currency].value / 100 : 1000, 10);
+
+  const min = getMin(minPrice,currency)
+  const max = getMax(maxPrice,currency)
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>

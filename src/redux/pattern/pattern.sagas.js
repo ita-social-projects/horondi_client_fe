@@ -5,7 +5,7 @@ import { setPatterns, setPatternLoading } from './pattern.actions';
 import { getAllPatterns } from './pattern.operations';
 import { GET_PATTERNS } from './pattern.types';
 import { setError } from '../error/error.actions';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   constructorPreview: ({ isMouseIn }) => ({
     width: '100%',
     position: 'relative',
@@ -18,11 +18,14 @@ export const useStyles = makeStyles((theme) => ({
       bottom: 0,
       zIndex: 1,
       background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+<<<<<<< HEAD
     },
     '& video': {
       '@media (max-width: 768px)': {
         width: '150% !important'
       }
+=======
+>>>>>>> 98e63ecc16f2144a207c004e388c5853c28d999f
     }
   }),
   constructorInner: ({ isMouseIn }) => ({

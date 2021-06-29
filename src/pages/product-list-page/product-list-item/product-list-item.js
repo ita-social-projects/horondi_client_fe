@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
@@ -12,8 +11,8 @@ import { IMG_URL } from '../../../configs';
 
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import routes from '../../../configs/routes';
-import { handleCurrencySign } from '../../../utils/handle-product-list-item';
+import routes from '../../../const/routes';
+import { getCurrencySign } from '../../../utils/currency';
 
 const ProductListItem = ({ product }) => {
   const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
@@ -33,8 +32,7 @@ const ProductListItem = ({ product }) => {
   }, [isLightTheme, product.images.primary.small]);
 
   const styles = useStyles({ image, isLightTheme });
-
-  const currencySign = () => (currency === 0 ? faHryvnia : faDollarSign);
+  const currencySign = getCurrencySign(currency);
 
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
@@ -46,8 +44,9 @@ const ProductListItem = ({ product }) => {
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />
                 <span>
-                  <FontAwesomeIcon icon={handleCurrencySign(currency) ? currencySign() : ''} />
-                  {product.basePrice[currency].value / 100}
+                  {Math.round(product.basePrice[currency].value / 100)}
+                  {'\u00A0'}
+                  <FontAwesomeIcon icon={currencySign} />
                 </span>
               </span>
             </div>

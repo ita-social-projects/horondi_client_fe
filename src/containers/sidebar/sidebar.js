@@ -10,7 +10,10 @@ import { useStyles } from './sidebar.styles';
 import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
-import SidemenuRightBar from '../sidemenu-right-bar/sidemenu-right-bar';
+import HeaderRightBar from '../header-right-bar';
+import routes from '../../const/routes';
+
+const { pathToConstructor } = routes;
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
@@ -66,12 +69,13 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       onClose={() => setIsMenuOpen(false)}
     >
       <List>{categoriesList}</List>
-      <Link to='/constructor' className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
+      <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
         <span className={styles.constructorItem}>{CONSTRUCTOR[language].value}</span>
       </Link>
       {subList}
       <FooterLinks socialIconsStyles={styles.socialIconsStyles} position='center' />
       <SidemenuRightBar fromSideBar />
+      <HeaderRightBar fromSideBar />
     </Drawer>
   );
 };

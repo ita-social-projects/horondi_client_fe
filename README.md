@@ -61,10 +61,10 @@ $ npm install
 ### How to run local
 
 1. Open terminal.
-2. Run `npm run start` to start application.<sup>[*](#footnote)</sup>
+2. Run `npm run start` to start application.<sup>[\*](#footnote)</sup>
 3. Open http://localhost:3000 to view it in the browser.
 
-###### <a name="footnote">*</a> - to run the project you need an `.env` file in root folder
+###### <a name="footnote">\*</a> - to run the project you need an `.env` file in root folder
 
 ### How to run Docker
 
@@ -260,7 +260,7 @@ if issue is in work it should be placed in proper column on dashboard according 
 
 ---
 
-### Chat.
+### Chat
 
 For run Facebook chat on your site you need two variables - pageId and appId and write them
 in 'src -> configs -> index and find a variable CHAT_FACEBOOK_DATA.
@@ -316,7 +316,17 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@MMashivskij](https://avatars.githubusercontent.com/u/54583764?s=200&u=dc606bf0c27c3f9f5133a12db5534c9d948b470e&v=4)](https://github.com/MMashivskij)
 [![@Haytham1337](https://avatars.githubusercontent.com/u/36926670?s=200&u=230bf6465c39383069786fdfb1ac1fe27185aecb&v=4)](https://github.com/Haytham1337)
 [![@RevylaV](https://avatars.githubusercontent.com/u/51852361?s=200&u=99815076ec15cb804b541d5c1b336ae28d53061d&v=4)](https://github.com/RevylaV)
-
+[![@dmytro07](https://avatars.githubusercontent.com/u/62848596?s=200)](https://github.com/dmytro07)
+[![@yuliiakucher](https://avatars.githubusercontent.com/u/61886864?s=200)](https://github.com/yuliiakucher)
+[![@fulljsdev](https://avatars.githubusercontent.com/u/77093538?s=200)](https://github.com/fulljsdev)
+[![@IlyaBelik](https://avatars.githubusercontent.com/u/37375602?s=200)](https://github.com/IlyaBelik)
+[![@grebiniuk](https://avatars.githubusercontent.com/u/32039216?s=200)](https://github.com/grebiniuk)
+[![@AnastasiiaKolodiazhna](https://avatars.githubusercontent.com/u/47612654?s=200)](https://github.com/AnastasiiaKolodiazhna)
+[![@twihell](https://avatars.githubusercontent.com/u/14165251?s=200)](https://github.com/twihell)
+[![@100vbaSasha](https://avatars.githubusercontent.com/u/55619101?s=200)](https://github.com/100vbaSasha)
+[![@Walleriy](https://avatars.githubusercontent.com/u/39501370?s=200)](https://github.com/Walleriy)
+[![@AndronShermeta](https://avatars.githubusercontent.com/u/73708298?s=200)](https://github.com/AndronShermeta)
+[![@khrystynaDm1307](https://avatars.githubusercontent.com/u/53223985?s=200)](https://github.com/khrystynaDm1307)
 
 ### Quality control team
 
@@ -324,7 +334,6 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@LiliiK](https://avatars.githubusercontent.com/u/65678768?s=200&u=2c968beb250d7b155441ab05d28e0a7be616606b&v=4)](https://github.com/LiliiK)
 [![@IrynaVakhula](https://avatars.githubusercontent.com/u/65680712?s=200&u=d0785408325af9d2c9d8dcb9a18e71c11fa005a8&v=4)](https://github.com/IrynaVakhula)
 [![@MartaZyhmund](https://avatars.githubusercontent.com/u/65674403?s=200&u=ff0b2c38b52b422ac58138ad9f38f2b81b7d8957&v=4)](https://github.com/MartaZyhmund)
-
 
 ### ISTQB team
 
@@ -336,6 +345,15 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@kirkchernyshkov](https://avatars.githubusercontent.com/u/75264827?s=200&u=ba90664860143e53146be7f6956483d9b883618f&v=4)](https://github.com/kirkchernyshkov)
 [![@runner-on-waves](https://avatars.githubusercontent.com/u/75261055?s=200&u=d2b87ed36b47dcc16b934cf0ad2aab1327155fb8&v=4)](https://github.com/runner-on-waves)
 [Serhii Datsiuk](https://github.com/SerhiiDatsiuk)
+[![@MariyaRashkevych](https://avatars.githubusercontent.com/u/6838192?s=200)](https://github.com/MariyaRashkevych)
+[![@MarianaZemba](https://avatars.githubusercontent.com/u/79637539?s=200)](https://github.com/MarianaZemba)
+[![@anastas184](https://avatars.githubusercontent.com/u/61836366?s=200)](https://github.com/anastas184)
+[![@OleksiySverdlov](https://avatars.githubusercontent.com/u/77245713?s=200)](https://github.com/OleksiySverdlov)
+[![@MariiaHnatiuk](https://avatars.githubusercontent.com/u/80684837?s=200)](https://github.com/MariiaHnatiuk)
+[![@Nikcoll-in](https://avatars.githubusercontent.com/u/80674462?s=200)](https://github.com/Nikcoll-in)
+[![@Evgeniya-Volkova](https://avatars.githubusercontent.com/u/76967400?s=200)](https://github.com/Evgeniya-Volkova)
+[![@nadiya17](https://avatars.githubusercontent.com/u/47214428?s=200)](https://github.com/nadiya17)
+[YevgeniiSt](https://github.com/YevgeniiSt)
 
 ### Database team
 
@@ -346,6 +364,7 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@SofiaDemyanovska](https://avatars1.githubusercontent.com/u/48492789?s=200&u=cb0520a8498667594ded0db8e29cdd3ec5529578&v=4)](https://github.com/SofiaDemyanovska)
 [![@ikoblyk](https://avatars3.githubusercontent.com/u/45568834?s=200&u=5d8790e8e58a7966e2d6d6bc6a4f0d15c8cb2e9c&v=4)](https://github.com/IKoblyk)
 [![@vitaliy-pavlyshyn](https://avatars0.githubusercontent.com/u/24523962?s=200&u=db2f3b6459c080079c5c5e4b52da61cd18b4e223&v=4)](https://github.com/vitaliy-pavlyshyn)
+[![@rholovchak](https://avatars.githubusercontent.com/u/68376355?s=200)](https://github.com/rholovchak)
 
 ---
 

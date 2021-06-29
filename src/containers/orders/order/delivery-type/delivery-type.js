@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useDispatch } from 'react-redux';
@@ -13,11 +12,12 @@ import {
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
 import { useStyles } from './delivery-type.styles';
-import routes from '../../../../configs/routes';
+import routes from '../../../../const/routes';
 import { addDeliveryType } from '../../../../redux/cart/cart.actions';
 import { deliveryTypes, SESSION_STORAGE } from '../../../../configs';
 import { getFromSessionStorage } from '../../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
+import { getCurrencySign } from '../../../../utils/currency';
 
 const DeliveryType = ({ language, totalPrice, currency }) => {
   const styles = useStyles();
@@ -29,7 +29,7 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
 
   const { pathToBackpacks, pathToCheckout } = routes;
 
-  const currencySign = currency ? faDollarSign : faHryvnia;
+  const currencySign = getCurrencySign(currency);
   const handleAddDeliveryType = () => {
     dispatch(addDeliveryType(deliveryType));
     setDeliveryTypeToStorage(deliveryType);
@@ -50,7 +50,9 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
       <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
-          {Math.round(totalPrice / 100)} <FontAwesomeIcon icon={currencySign}/>
+          {Math.round(totalPrice / 100)}
+          {'\u00A0'}
+          <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div>
@@ -69,7 +71,9 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
       <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
-          {Math.round(totalPrice / 100)} <FontAwesomeIcon icon={currencySign}/>
+          {Math.round(totalPrice / 100)}
+          {'\u00A0'}
+          <FontAwesomeIcon icon={currencySign} />
         </span>
       </div>
       <div className={styles.btnWrapper}>

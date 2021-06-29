@@ -6,8 +6,10 @@ import { useStyles } from './checkout.styles';
 import CheckoutForm from './checkout-form';
 import { getDeliveryType } from '../../redux/cart/cart.actions';
 import { Loader } from '../../components/loader/loader';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
+
+const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
   const {
@@ -43,8 +45,8 @@ const Checkout = () => {
 
   return (
     <div className={styles.root}>
-      {isOrderCreated && <Redirect to={`${routes.pathToThanks}/${order?._id}`} />}
-      {!cartItems.length && <Redirect to={routes.pathToMain} />}
+      {isOrderCreated && <Redirect to={`${pathToThanks}/${order?._id}`} />}
+      {!cartItems.length && <Redirect to={pathToMain} />}
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>

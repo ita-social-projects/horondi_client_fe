@@ -10,15 +10,11 @@ import { IMG_URL } from '../../../../configs';
 
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
+import routes from '../../../../const/routes';
 
-const SimilarProductsItem = ({
-  imageUrl,
-  id,
-  name,
-  rate,
-  price,
-  currencySign
-}) => {
+const { pathToProducts } = routes;
+
+const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) => {
   const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
     language: Language.language,
     isLightTheme: Theme.lightMode
@@ -35,14 +31,15 @@ const SimilarProductsItem = ({
   const styles = useStyles({ image, isLightTheme });
 
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`${pathToProducts}/${id}`}>
       <div className={styles.similarItem}>
         <div className={styles.info}>
           <span>{name[language].value}</span>
           <Rating value={rate} readOnly size='small' />
           <span>
+            {Math.round(price / 100)}
+            {'\u00A0'}
             <FontAwesomeIcon icon={currencySign} />
-            {price / 100}
           </span>
         </div>
       </div>

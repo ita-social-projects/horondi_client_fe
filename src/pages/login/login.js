@@ -18,7 +18,7 @@ import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';

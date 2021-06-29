@@ -25,7 +25,7 @@ const ScrollBar = ({ homeRef }) => {
     const sectionsData = Array.from(homeElement.children)
       .slice(0, 5)
       .filter((item) => item.id)
-      .map((item, i) => {
+      .map((item) => {
         const sectionStyles = window.getComputedStyle(item);
         const margin = parseFloat(sectionStyles.marginTop) + parseFloat(sectionStyles.marginBottom);
 
@@ -57,6 +57,11 @@ const ScrollBar = ({ homeRef }) => {
 
   return (
     <>
+      {window.scrollY >= 200 && (
+        <BurgerMenu className={styles.fixedBurgerMenu} onClick={() => setIsMenuOpen(true)}>
+          <MenuIcon />
+        </BurgerMenu>
+      )}
       <div className={styles.scrollBar}>
         {SCROLL_BAR_DATA.map((item) => (
           <a key={item.href} href={item.href} className={styles.scrollBarItem}>

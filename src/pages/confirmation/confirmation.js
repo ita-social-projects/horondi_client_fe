@@ -7,9 +7,11 @@ import { WELCOME_MESSAGE } from '../../translations/user.translations';
 import { Loader } from '../../components/loader/loader';
 import { confirmUser } from '../../redux/user/user.actions';
 import { handleMessage } from '../../utils/handle-confirmation';
+import routes from '../../const/routes';
+
+const { pathToMain, pathToLogin } = routes;
 
 const Confirmation = ({ token }) => {
-  // HOOKS
   const { language, loading, error } = useSelector(({ User, Language }) => ({
     language: Language.language,
     loading: User.userLoading,
@@ -22,12 +24,10 @@ const Confirmation = ({ token }) => {
     dispatch(confirmUser({ token }));
   }, [dispatch, token]);
 
-  // HANDLERS
   const goTo = (path) => {
     dispatch(push(path));
   };
 
-  // STYLES
   const styles = useStyles();
 
   return (
@@ -35,10 +35,10 @@ const Confirmation = ({ token }) => {
       <div className={styles.welcome}>
         {loading ? <Loader /> : handleMessage(error, language)}
         <div className={styles.buttonGroup}>
-          <Button variant='contained' onClick={() => goTo('/')}>
+          <Button variant='contained' onClick={() => goTo(pathToMain)}>
             {WELCOME_MESSAGE[language].button_goToShop}
           </Button>
-          <Button variant='contained' onClick={() => goTo('/login')}>
+          <Button variant='contained' onClick={() => goTo(pathToLogin)}>
             {WELCOME_MESSAGE[language].button_logIn}
           </Button>
         </div>

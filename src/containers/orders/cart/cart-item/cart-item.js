@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
+
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
@@ -18,11 +19,16 @@ import {
 import { IMG_URL } from '../../../../configs';
 import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
+import { getCurrencySign } from '../../../../utils/currency';
+import routes from '../../../../const/routes';
+
+const { pathToProduct } = routes;
 
 const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const [inputValue, setInputValue] = useState(item.quantity);
+  const currencySign = getCurrencySign(currency);
 
   const onChangeUserQuantity = useCallback(
     _.debounce((value) => {
@@ -43,8 +49,8 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell classes={{ root: styles.photoCart }} data-cy='cart-item-img'>
-        <Link to={`/product/${item.product._id}`}>
+      <TableCell data-cy='cart-item-img'>
+        <Link to={`${pathToProduct}/${item.product._id}`}>
           <img
             className={styles.itemImg}
             src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
@@ -53,7 +59,7 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
-        <Link to={`/product/${item.product._id}`}>
+        <Link to={`${pathToProduct}/${item.product._id}`}>
           <span className={styles.itemName}>{item.product.name[language].value}</span>
         </Link>
         {item.options.size && (
@@ -86,12 +92,16 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
         <div className={styles.priceWrapper}>
           {user && (
             <div>
-              {Math.round(item.price[currency].value / 100)} {item.price[currency].currency}
+              {Math.round(item.price[currency].value / 100)}
+              {'\u00A0'}
+              <FontAwesomeIcon icon={currencySign} />
             </div>
           )}
           {!user && (
             <div>
-              {Math.round(calcPrice(item, currency) / 100)} {item.price[currency].currency}
+              {Math.round(calcPrice(item, currency) / 100)}
+              {'\u00A0'}
+              <FontAwesomeIcon icon={currencySign} />
             </div>
           )}
         </div>

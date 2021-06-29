@@ -12,8 +12,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import { setCurrentPage } from '../../redux/products/products.actions';
-
+import {getFiltredProducts , setCurrentPage } from '../../redux/products/products.actions';
 import {
   DRAWER_PERMANENT,
   DRAWER_TEMPORARY,
@@ -24,6 +23,7 @@ import {
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
 import { URL_QUERIES_NAME } from '../../configs';
+
 
 const ProductListPage = ({ model, width }) => {
   const dispatch = useDispatch();
@@ -61,11 +61,10 @@ const ProductListPage = ({ model, width }) => {
     currentPage: Products.currentPage,
     filterStatus: Products.filterStatus
   }));
-
   const { modelsFilter, categoryFilter, colorsFilter, patternsFilter, isHotItemFilter } = filters;
-
   useEffect(() => {
-    dispatch(setCurrentPage(searchParams.get(URL_QUERIES_NAME.page)));
+    dispatch(setCurrentPage(+searchParams.get(URL_QUERIES_NAME.page)));
+    dispatch(getFiltredProducts({}));
   }, [
     dispatch,
     sortByRate,
@@ -94,16 +93,38 @@ const ProductListPage = ({ model, width }) => {
   };
 
   const handleFilterShow = () => dispatch(setFilterMenuStatus(!filterMenuStatus));
+  
 
   if (loading || filterData.length) {
     return <Loader />;
   }
-
   const itemsToShow =
     products?.length > 0
       ? products.map((product) => <ProductListItem key={product._id} product={product} />)
       : null;
-
+  const paginationToShow =
+        <Pagination
+        count={pagesCount}
+        variant='outlined'
+        shape='rounded'
+        page={currentPage}
+        onChange={changeHandler}
+      />
+  const paginationCondition = () => {
+        if(products?.length < searchParams.get(URL_QUERIES_NAME.countPerPage) && searchParams.get(URL_QUERIES_NAME.page) == 1){
+          return (
+          <div className={styles.invisiblePaginationDiv}>
+            {paginationToShow}
+          </div>
+          )
+        }else{
+          return(
+          <div className={styles.paginationDiv}>
+            {paginationToShow}
+          </div>
+          )
+        }
+      }
   return (
     <div className={styles.root}>
       <Typography className={styles.paginationDiv} variant='h3' />
@@ -138,15 +159,7 @@ const ProductListPage = ({ model, width }) => {
             <Grid container spacing={3} className={styles.productsDiv}>
               {itemsToShow}
             </Grid>
-            <div className={styles.paginationDiv}>
-              <Pagination
-                count={pagesCount}
-                variant='outlined'
-                shape='rounded'
-                page={currentPage + 1}
-                onChange={changeHandler}
-              />
-            </div>
+            {paginationCondition()}
           </div>
         ) : (
           <div className={styles.defaultBlock}>

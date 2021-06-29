@@ -8,10 +8,12 @@ import 'react-awesome-slider/dist/styles.css';
 import { useStyles } from './slider-home-page.style';
 
 import { carouselInterval } from '../../../configs';
-import routes from '../../../configs/routes';
+import routes from '../../../const/routes';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { getImage } from '../../../utils/imageLoad';
 import { SLIDER_HOME_PAGE } from '../../../const/style-consts';
+
+const { pathToMain } = routes;
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
@@ -47,7 +49,7 @@ const SliderHomePage = () => {
         {images.items.map((item, index) => (
           <div key={item._id} data-src={imagesLinks[index]}>
             <Link
-              to={item.link || routes.pathToMain}
+              to={item.link || pathToMain}
               className={clsx(styles.hoverArrow, SLIDER_HOME_PAGE.ARROW)}
             >
               {HOME_BUTTONS[language].SEE_MORE}

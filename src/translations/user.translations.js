@@ -41,6 +41,15 @@ export const REGISTER_FORM_LABEL = [
   }
 ];
 
+export const REGISTER_FORM_CONSENT = [
+  {
+    value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
+  },
+  {
+    value: ['Registering, you agree with our', 'terms of service']
+  }
+];
+
 export const CONTINUE_SHOPPING_LABEL = [
   {
     value: 'Продовжити покупки'
@@ -60,8 +69,18 @@ export const USER_ERROR = {
     }
   ],
   USER_NOT_AUTHORIZED: [
-    { value: 'Користувач не авториваний' },
-    { value: 'User is not authorized' }
+    {
+      value: 'Користувач не авториваний'
+    },
+    {
+      value: 'User is not authorized'
+    }
+  ],
+  REFRESH_TOKEN_IS_NOT_VALID: [
+    { value: 'Данні авторизації застарілі, будь ласка авторизуйтеся' },
+    {
+      value: 'You have be logged out, please sign in again'
+    }
   ],
   WRONG_CREDENTIALS: [
     {
@@ -85,6 +104,39 @@ export const USER_ERROR = {
     },
     {
       value: 'Sorry, your account is blocked.'
+    }
+  ],
+  USER_EMAIL_ALREADY_CONFIRMED: [
+    {
+      value: 'Користувач з таким email вже підтверджений'
+    },
+    {
+      value: 'User with this email is already confirmed'
+    }
+  ],
+  USER_NOT_FOUND: [
+    {
+      value: 'Користувач не знайдений'
+    },
+    {
+      value: 'User has not been found'
+    }
+  ],
+  TOKEN_IS_EXPIRIED: [
+    {
+      value:
+        'Дані авторизації застаріли. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
+    },
+    {
+      value: 'You have be logged out. Try to confirm your email in your personal cabinet'
+    }
+  ],
+  CART_IS_NOT_FOUND: [
+    {
+      value: 'Данні авторизації застарілі'
+    },
+    {
+      value: 'You have be logged out'
     }
   ],
   DEFAULT_ERROR: [
@@ -125,34 +177,34 @@ export const errorMessages = [
 export const placeholders = {
   firstName: [
     {
-      value: 'Введіть Ім’я'
+      value: 'Ім’я'
     },
     {
-      value: 'Enter firstname'
+      value: 'Firstname'
     }
   ],
   lastName: [
     {
-      value: 'Введіть прізвище'
+      value: 'Прізвище'
     },
     {
-      value: 'Enter lastname'
+      value: 'Lastname'
     }
   ],
   email: [
     {
-      value: 'Введіть email'
+      value: 'Електронна пошта'
     },
     {
-      value: 'Enter email'
+      value: 'Email'
     }
   ],
   password: [
     {
-      value: 'Введіть пароль'
+      value: 'Пароль'
     },
     {
-      value: 'Enter password'
+      value: 'Password'
     }
   ],
   confirmPassword: [
@@ -220,8 +272,7 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p:
-      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
@@ -351,15 +402,13 @@ export const PROFILE_LABELS = [
 export const PROFILE_PASSWORD_CHANGE = [
   {
     heading: 'Зміна паролю',
-    text:
-      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
     btnTitle: 'Змінити пароль',
     checkEmailText: 'Будь ласка, перевірте ваш емейл!'
   },
   {
     heading: 'Change password',
-    text:
-      'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
     btnTitle: 'Change password',
     checkEmailText: 'Please, check your email!'
   }

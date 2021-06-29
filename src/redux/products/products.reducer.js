@@ -29,7 +29,7 @@ import {
 export const initialState = {
   productLoading: false,
   loading: true,
-  currentPage: 0,
+  currentPage: 1,
   countPerPage: 9,
   sortByPrice: 0,
   sortByRate: 0,

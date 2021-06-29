@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
@@ -48,13 +48,25 @@ const FooterLists = () => {
   const contactsList = contacts.map((item) => (
     <div key={item._id}>
       <div>
-        <Typography variant='subtitle2'>+{item.phoneNumber}</Typography>
+        <Typography variant='subtitle2'>
+          <Link className={styles.cardLink} to={pathToContacts}>
+            +{item.phoneNumber}
+          </Link>
+        </Typography>
       </div>
       <div>
-        <Typography variant='subtitle2'>{item.email}</Typography>
+        <Typography variant='subtitle2'>
+          <Link className={styles.cardLink} to={pathToContacts}>
+            {item.email}
+          </Link>
+        </Typography>
       </div>
       <div>
-        <Typography variant='subtitle2'>{item.address[language].value}</Typography>
+        <Typography variant='subtitle2'>
+          <Link className={styles.cardLink} to={pathToContacts}>
+            {item.address[language].value}
+          </Link>
+        </Typography>
       </div>
     </div>
   ));

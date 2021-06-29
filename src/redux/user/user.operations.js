@@ -311,18 +311,41 @@ const getUserByToken = async () => {
   return result?.data?.getUserByToken;
 };
 
-const getUserOrders = async () => {
+const getUserOrders = async (pagination) => {
   const getUserOrdersQuery = `
-      query {
-        getUserOrders {
+      query ($pagination: Pagination){
+        getUserOrders (pagination: $pagination){
         _id
         dateOfCreation
         status
+        orderNumber
         items {
-          product{
-            _id
-          }
           quantity
+          fixedPrice {
+            currency
+            value
+          }
+          options {
+            size {
+              name
+            }
+          }
+          product {
+            name {
+              lang
+              value
+            }
+            model {
+              sizes {
+                name
+              }
+            }
+            images {
+              primary {
+                thumbnail
+              }
+            }
+          }
         }
         totalItemsPrice {
           value
@@ -331,7 +354,7 @@ const getUserOrders = async () => {
       }
       }
   `;
-  const result = await getItems(getUserOrdersQuery);
+  const result = await getItems(getUserOrdersQuery, { pagination });
 
   return result?.data?.getUserOrders;
 };
@@ -369,6 +392,18 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
+const getCountUserOrders = async () => {
+  const getCountUserOrdersQuery = `
+      query($id: ID) {
+        getCountUserOrders (id: $id){
+          countOrder
+        }
+      }
+    `;
+  const result = await getItems(getCountUserOrdersQuery);
+  return result?.data?.getCountUserOrders;
+};
+
 export {
   loginUser,
   getGoogleUser,
@@ -382,5 +417,6 @@ export {
   getUserOrders,
   getUserByToken,
   regenerateUserTokenPairs,
-  getPurchasedProducts
+  getPurchasedProducts,
+  getCountUserOrders
 };

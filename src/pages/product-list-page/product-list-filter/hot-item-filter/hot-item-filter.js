@@ -18,7 +18,7 @@ const HotItemFilter = ({ language }) => {
   useEffect(() => {
     if (searchParams.get(isHotItemFilter)) {
       setHotItem(!hotItem);
-      dispatch(setHotItemFilter(hotItem));
+      dispatch(setHotItemFilter(!hotItem));
     }
   }, [dispatch, searchParams.toString()]);
 
@@ -28,7 +28,7 @@ const HotItemFilter = ({ language }) => {
     } else {
       searchParams.delete(isHotItemFilter);
       setHotItem(!hotItem);
-      dispatch(setHotItemFilter(hotItem));
+      dispatch(setHotItemFilter(!hotItem));
     }
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);

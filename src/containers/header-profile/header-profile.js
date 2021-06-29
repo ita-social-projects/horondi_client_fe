@@ -19,9 +19,17 @@ import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
 import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 
-const { pathToRegister, pathToLogin, pathToMain } = routes;
+const {
+  pathToWishlist,
+  pathToProfile,
+  pathToOrderHistory,
+  pathToRegister,
+  pathToLogin,
+  pathToMain
+} = routes;
+
 const HeaderProfile = ({ fromSideBar }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
     userData: User.userData,
@@ -75,7 +83,7 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].wishlist,
       icon: <FavoriteIcon />,
-      clickHandler: () => handleRedirect('/wishlist')
+      clickHandler: () => handleRedirect(pathToWishlist)
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].changeTheme,
@@ -103,12 +111,12 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].profile,
       icon: <PersonOutlineIcon />,
-      clickHandler: () => handleRedirect('/profile')
+      clickHandler: () => handleRedirect(pathToProfile)
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].orderHistory,
       icon: <HistoryIcon />,
-      clickHandler: () => handleRedirect('/order-history')
+      clickHandler: () => handleRedirect(pathToOrderHistory)
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].logOut,

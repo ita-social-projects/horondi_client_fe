@@ -47,12 +47,8 @@ export const useConstructor = () => {
 
   useEffect(() => {
     if (currentModel.eligibleOptions) {
-      const {
-        constructorBasic,
-        constructorFrontPocket,
-        constructorPattern,
-        constructorBottom
-      } = currentModel.eligibleOptions;
+      const { constructorBasic, constructorFrontPocket, constructorPattern, constructorBottom } =
+        currentModel.eligibleOptions;
 
       dispatch(setModelLoading(true));
       dispatch(getConstructorBasic(constructorBasic[0]._id));

@@ -11,6 +11,9 @@ import {
   FOOTER_CONTACTS,
   FOOTER_CATALOGS
 } from '../../translations/footer.translations';
+import routes from '../../const/routes';
+
+const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
@@ -76,7 +79,7 @@ const FooterLists = () => {
         {contactsList}
         <div key={FOOTER_CONTACTS[language].map.id}>
           <Typography variant='subtitle2'>
-            <Link to='/contacts' className={styles.cardLink}>
+            <Link to={pathToContacts} className={styles.cardLink}>
               <span>{FOOTER_CONTACTS[language].map.item}</span>
             </Link>
           </Typography>

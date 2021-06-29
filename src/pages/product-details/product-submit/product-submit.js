@@ -22,6 +22,9 @@ import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.ac
 import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
 
 import { TOAST_MESSAGE } from '../../../translations/toast.translations';
+import routes from '../../../const/routes';
+
+const { pathToCart } = routes;
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
@@ -30,10 +33,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     selectLanguageProductsUserWishlist
   );
 
-  const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
-    product._id,
-    wishlistItems
-  ]);
+  const isWishful = useMemo(
+    () => wishlistItems.find((item) => product._id === item._id),
+    [product._id, wishlistItems]
+  );
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
 
@@ -79,7 +82,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const onAddToCheckout = () => {
     if (product) {
       onAddToCart();
-      dispatch(push('/cart'));
+      dispatch(push(pathToCart));
     } else {
       setSizeIsNotSelectedError(true);
     }

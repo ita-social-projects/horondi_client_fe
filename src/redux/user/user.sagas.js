@@ -14,7 +14,8 @@ import {
   setUserIsConfirmed,
   setConfirmationLoading,
   setRecoveryLoading,
-  setUserOrders
+  setUserOrders,
+  setUserCountOrders
 } from './user.actions';
 import { clearComments } from '../comments/comments.actions';
 import {
@@ -29,7 +30,8 @@ import {
   resetPassword,
   getUserOrders,
   getUserByToken,
-  getPurchasedProducts
+  getPurchasedProducts,
+  getCountUserOrders
 } from './user.operations';
 import { mergeCartFromLSWithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
@@ -57,7 +59,7 @@ import {
   SNACKBAR_TYPES,
   SNACKBAR_MESSAGE
 } from '../../configs';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
 import {
   clearLocalStorage,
   getFromLocalStorage,
@@ -224,10 +226,12 @@ export function* handleSendConfirmation({ payload }) {
   }
 }
 
-export function* handleGetUserOrders() {
+export function* handleGetUserOrders({ payload: { pagination } }) {
   try {
     yield put(setUserLoading(true));
-    const orders = yield call(getUserOrders);
+    const { countOrder } = yield call(getCountUserOrders);
+    yield put(setUserCountOrders(countOrder));
+    const orders = yield call(getUserOrders, pagination);
     yield put(setUserOrders(orders));
     yield put(setUserLoading(false));
   } catch (e) {

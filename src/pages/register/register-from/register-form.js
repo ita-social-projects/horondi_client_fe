@@ -17,7 +17,7 @@ import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
 import { Loader } from '../../../components/loader/loader';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
-import routes from '../../../configs/routes';
+import routes from '../../../const/routes';
 
 const { pathToLogin, pathToTerms } = routes;
 

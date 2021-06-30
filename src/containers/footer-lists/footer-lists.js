@@ -48,25 +48,13 @@ const FooterLists = () => {
   const contactsList = contacts.map((item) => (
     <div key={item._id}>
       <div>
-        <Typography variant='subtitle2'>
-          <Link className={styles.cardLink} to={pathToContacts}>
-            +{item.phoneNumber}
-          </Link>
-        </Typography>
+        <Typography variant='subtitle2'>+{item.phoneNumber}</Typography>
       </div>
       <div>
-        <Typography variant='subtitle2'>
-          <Link className={styles.cardLink} to={pathToContacts}>
-            {item.email}
-          </Link>
-        </Typography>
+        <Typography variant='subtitle2'>{item.email}</Typography>
       </div>
       <div>
-        <Typography variant='subtitle2'>
-          <Link className={styles.cardLink} to={pathToContacts}>
-            {item.address[language].value}
-          </Link>
-        </Typography>
+        <Typography variant='subtitle2'>{item.address[language].value}</Typography>
       </div>
     </div>
   ));
@@ -86,9 +74,13 @@ const FooterLists = () => {
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>{FOOTER_CONTACTS[language].title}</Typography>
+          <Typography variant='h5'>
+            <Link to={pathToContacts} className={styles.cardLink}>
+              {FOOTER_CONTACTS[language].title}
+            </Link>
+          </Typography>
         </div>
-        {contactsList}
+        {contactsList[0]}
         <div key={FOOTER_CONTACTS[language].map.id}>
           <Typography variant='subtitle2'>
             <Link to={pathToContacts} className={styles.cardLink}>

@@ -11,9 +11,13 @@ export const useStyles = makeStyles((theme) => {
       justifyContent: 'flex-end',
       alignItems: 'center',
       borderTop: '2px solid #c2c2c2',
-      paddingTop: '10px',
+      paddingTop: '10px'
+    },
+    loadMoreText: {
       '&:hover': {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        borderBottom: '2px solid #000000',
+        height: '20px'
       }
     },
     container: {
@@ -56,7 +60,7 @@ export const useStyles = makeStyles((theme) => {
       maxWidth: '90%'
     },
     notAproveText: {
-      color: '#d3d3d3'
+      color: '#989898'
     },
     button: {
       margin: '0',

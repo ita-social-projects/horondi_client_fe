@@ -18,6 +18,12 @@ const dataSuperAdmin = {
   answerer: { firstName: 'user', email: 'test@gmail.com', _id: '111', role: 'superadmin' },
   ...data
 };
+const dataWithOutVerifing = {
+  ...data,
+  answerer: { firstName: 'user', email: 'test@gmail.com', _id: '111', role: 'user' },
+  verifiedPurchase: false,
+  showReplyComment: false
+};
 const replyCommentId = '1';
 
 module.exports = {
@@ -25,5 +31,6 @@ module.exports = {
   replyCommentId,
   dataSecond,
   dataAdmin,
-  dataSuperAdmin
+  dataSuperAdmin,
+  dataWithOutVerifing
 };

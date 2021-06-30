@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
-import { render, fireEvent, act } from '@testing-library/react';
+import Enzyme, { mount } from 'enzyme';
+import { act } from '@testing-library/react';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';

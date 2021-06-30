@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => {
       paddingBottom: '5px'
     },
     notAproveText: {
-      color: '#d3d3d3',
+      color: '#989898',
       paddingBottom: '5px'
     },
     button: {

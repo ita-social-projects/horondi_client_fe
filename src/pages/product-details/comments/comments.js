@@ -73,15 +73,8 @@ const Comments = () => {
     resetForm();
   };
 
-  const {
-    values,
-    errors,
-    handleSubmit,
-    handleBlur,
-    resetForm,
-    setFieldValue,
-    setShouldValidate
-  } = useCommentValidation(!!userData, onSubmit);
+  const { values, errors, handleSubmit, handleBlur, resetForm, setFieldValue, setShouldValidate } =
+    useCommentValidation(!!userData, onSubmit);
 
   const [rate, setRate] = useState(0);
 
@@ -176,7 +169,7 @@ const Comments = () => {
       {commentsLength < commentsCount && (
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
-          <span onClick={handleCommentsReload}>
+          <span onClick={handleCommentsReload} className={styles.loadMoreText}>
             {limitOption ? null : COMMENTS[language].loadMore}
           </span>
         </div>

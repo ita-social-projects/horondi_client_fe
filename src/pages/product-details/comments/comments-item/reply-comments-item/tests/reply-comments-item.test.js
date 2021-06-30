@@ -10,8 +10,10 @@ import {
   replyCommentId,
   dataSecond,
   dataAdmin,
-  dataSuperAdmin
-} from './reply-comments-tem.variables';
+  dataSuperAdmin,
+  dataWithOutVerifing
+} from './reply-comments-item.variables';
+import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -56,12 +58,27 @@ describe('Comments test', () => {
         <ReplyCommentsItem data={dataAdmin} replyCommentId={replyCommentId} />
       </ThemeProvider>
     );
+    expect(wrapper.find('span').text()).toBe(
+      `${COMMENT_OWNER_STATUS.isAdmin[0]} ${dataAdmin.answerer.firstName}`
+    );
     expect(wrapper).toBeDefined();
   });
   it('Should render ReplyCommentsItem with superadmin role', () => {
     wrapper = mount(
       <ThemeProvider theme={themeValue}>
         <ReplyCommentsItem data={dataSuperAdmin} replyCommentId={replyCommentId} />
+      </ThemeProvider>
+    );
+    expect(wrapper.find('span').text()).toBe(
+      `${COMMENT_OWNER_STATUS.isAdmin[0]} ${dataSuperAdmin.answerer.firstName}`
+    );
+    expect(wrapper).toBeDefined();
+  });
+
+  it('Should render not aprove style and without verifing icon', () => {
+    wrapper = mount(
+      <ThemeProvider theme={themeValue}>
+        <ReplyCommentsItem data={dataWithOutVerifing} replyCommentId={replyCommentId} />
       </ThemeProvider>
     );
     expect(wrapper).toBeDefined();

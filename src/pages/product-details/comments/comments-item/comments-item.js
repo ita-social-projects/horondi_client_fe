@@ -29,16 +29,8 @@ import {
 const CommentsItem = ({ data, commentId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const {
-    user,
-    text,
-    date,
-    show,
-    rate,
-    replyCommentsCount,
-    verifiedPurchase,
-    replyComments
-  } = data;
+  const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
+    data;
 
   const {
     language,
@@ -183,7 +175,7 @@ const CommentsItem = ({ data, commentId }) => {
             {commentsReplyLength < replyCommentsCount && (
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
-                <span onClick={getReplyCommentsByComment}>
+                <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>
                   {handleLoadMoreText(limitOption, language)}
                 </span>
               </div>

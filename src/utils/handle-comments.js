@@ -53,7 +53,7 @@ export const handleRate = (rate) =>
 export const handleTextStyle = (show, text, notAproveText) => (show ? text : notAproveText);
 
 export const handleLoadMoreText = (limitOption, language) =>
-  limitOption && REPLY[language].loadMore;
+  limitOption ? null : REPLY[language].loadMore;
 
 export const handleLimitOptions = (replyCommentsList, replyComments, replyCommentsCount) =>
   replyCommentsList.length === replyComments?.items?.length &&

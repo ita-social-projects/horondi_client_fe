@@ -10,9 +10,13 @@ export const useStyles = makeStyles((theme) => {
       fontSize: '14px',
       color,
       borderTop: '4px solid #c2c2c2',
-      padding: '15px 0',
+      padding: '15px 0'
+    },
+    loadMoreText: {
       '&:hover': {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        borderBottom: '2px solid #000000',
+        height: '20px'
       }
     },
     comment: {

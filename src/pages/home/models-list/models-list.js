@@ -42,16 +42,6 @@ const ModelsList = () => {
         {models.map((model) => (
           <ModelItem key={model._id} model={model} />
         ))}
-        <Link className={modelItemStyles.modelItem} to='/unique'>
-          <div className={modelItemStyles.modelItemTitle}>Unique</div>
-          <div
-            className={modelItemStyles.modelItemImage}
-            style={{
-              background: `url(${UNIQUE_MODEL_IMAGE_LINK}) center center`,
-              backgroundSize: 'cover'
-            }}
-          />
-        </Link>
       </div>
       <ClassicButton
         buttonStyle={isModelsVisible ? 'classic' : 'inverse'}

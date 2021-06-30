@@ -18,14 +18,11 @@ export const useStyles = makeStyles(() => ({
       bottom: 0,
       zIndex: 1,
       background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
-<<<<<<< HEAD
     },
     '& video': {
       '@media (max-width: 768px)': {
         width: '150% !important'
       }
-=======
->>>>>>> 98e63ecc16f2144a207c004e388c5853c28d999f
     }
   }),
   constructorInner: ({ isMouseIn }) => ({

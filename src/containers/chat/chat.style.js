@@ -46,7 +46,11 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     background: 'none',
     display: 'block',
-    right: '12px'
+    right: '12px',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height:'40px'
+    }
   },
   msgIcon: {
     ...flexCenter,
@@ -56,7 +60,12 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginBottom: '20px',
     cursor: 'pointer',
+    boxShadow: 'white 0px 0px 10px',
     transition: 'background 0.3s',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height:'40px'
+    },
     '&:hover': {
       background: '#E4B200'
     }

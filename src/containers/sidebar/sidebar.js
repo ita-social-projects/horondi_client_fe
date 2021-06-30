@@ -10,7 +10,7 @@ import { useStyles } from './sidebar.styles';
 import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
-import HeaderRightBar from '../header-right-bar';
+import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../const/routes';
 
 const { pathToConstructor } = routes;
@@ -75,7 +75,6 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       {subList}
       <FooterLinks socialIconsStyles={styles.socialIconsStyles} position='center' />
       <SidemenuRightBar fromSideBar />
-      <HeaderRightBar fromSideBar />
     </Drawer>
   );
 };

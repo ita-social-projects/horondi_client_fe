@@ -1,3 +1,3 @@
-import HeaderRightbar from './header-right-bar';
+import SidemenuRightBar from './sidemenu-right-bar';
 
-export default HeaderRightbar;
+export default SidemenuRightBar;

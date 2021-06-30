@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
@@ -74,17 +74,13 @@ const FooterLists = () => {
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>
-            <Link to={pathToContacts} className={styles.cardLink}>
-              {FOOTER_CONTACTS[language].title}
-            </Link>
-          </Typography>
+          <Typography variant='h5'>{FOOTER_CONTACTS[language].title}</Typography>
         </div>
         {contactsList[0]}
-        <div key={FOOTER_CONTACTS[language].map.id}>
+        <div key={FOOTER_CONTACTS[language].more.id}>
           <Typography variant='subtitle2'>
             <Link to={pathToContacts} className={styles.cardLink}>
-              <span>{FOOTER_CONTACTS[language].map.item}</span>
+              <span>{FOOTER_CONTACTS[language].more.item}</span>
             </Link>
           </Typography>
         </div>

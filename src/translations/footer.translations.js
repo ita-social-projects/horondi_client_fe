@@ -28,12 +28,18 @@ export const FOOTER_CONTACTS = {
     title: 'Контакти',
     map: {
       item: 'Показати на мапі'
+    },
+    more: {
+      item: 'Більше інформації'
     }
   },
   1: {
     title: 'Contacts',
     map: {
       item: 'Show on map'
+    },
+    more: {
+      item: 'More information'
     }
   }
 };

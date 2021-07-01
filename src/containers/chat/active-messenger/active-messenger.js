@@ -3,6 +3,8 @@ import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 
+import { get } from 'lodash';
+
 import { formRegExp, CHAT_USER_DATA } from '../../../configs';
 import { CHAT } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';
@@ -15,22 +17,29 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
+
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
+  const defaultFirstName = get(userData, 'firstName', '');
+  const defaultEmail = get(userData, 'email', '');
+
+  // USER VALUES
+  const [user, setUser] = useState({
+    ...CHAT_USER_DATA,
+    firstName: defaultFirstName,
+    email: defaultEmail
+  });
+  const { firstName, email, message } = user;
 
   // VALIDATED && CONFIRMED
-  const [firstNameValidated, setFirstNameValidated] = useState(false);
-  const [emailValidated, setEmailValidated] = useState(false);
+  const [firstNameValidated, setFirstNameValidated] = useState(!!defaultFirstName);
+  const [emailValidated, setEmailValidated] = useState(!!defaultEmail);
 
   const [messageValidated, setMessageValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const [open, setOpen] = useState(false);
-
-  // USER VALUES
-  const [user, setUser] = useState(CHAT_USER_DATA);
-  const { firstName, email, message } = user;
 
   // HANDLERS
   const handleChange = (event, setValid, regExp) => {
@@ -98,8 +107,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           helperText={handleHelperText(firstNameValidated, shouldValidate, language, 'firstName')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setFirstNameValidated, formRegExp.text)}
-          // value={firstName}
-          value={userData ? userData.firstName : user.firstName}
+          value={firstName}
+          // value={userData ? userData.firstName : user.firstName}
           type='text'
         />
         <TextField
@@ -115,8 +124,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           helperText={handleHelperText(emailValidated, shouldValidate, language, 'email')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setEmailValidated, formRegExp.email)}
-          // value={email}
-          value={userData ? userData.email : user.email}
+          value={email}
+          // value={userData ? userData.email : user.email}
           // disabled={!!userData}
           type='text'
         />

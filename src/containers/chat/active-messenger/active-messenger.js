@@ -108,7 +108,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           className={style.dataInput}
           onChange={(e) => handleChange(e, setFirstNameValidated, formRegExp.text)}
           value={firstName}
-          // value={userData ? userData.firstName : user.firstName}
           type='text'
         />
         <TextField
@@ -125,12 +124,9 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           className={style.dataInput}
           onChange={(e) => handleChange(e, setEmailValidated, formRegExp.email)}
           value={email}
-          // value={userData ? userData.email : user.email}
-          // disabled={!!userData}
           type='text'
         />
         <TextField
-          // required
           fullWidth
           key={CHAT[language].msgText}
           label={CHAT[language].msgText}

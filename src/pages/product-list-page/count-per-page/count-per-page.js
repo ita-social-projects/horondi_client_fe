@@ -29,7 +29,7 @@ const CountPerPage = () => {
   };
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
-      className={searchParams.get('countPerPage') === item.value ? styles.selectedButton : ''}
+      className={searchParams.get('countPerPage') == item.value ? styles.selectedButton : ''}
       data-cy={item.title}
       key={item.value}
       type='button'

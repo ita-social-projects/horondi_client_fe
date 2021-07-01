@@ -22,7 +22,7 @@ import { onChangeQuantityHandler } from '../../../../utils/cart';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../const/routes';
 
-const { pathToProduct } = routes;
+const { pathToProducts } = routes;
 
 const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell data-cy='cart-item-img'>
-        <Link to={`${pathToProduct}/${item.product._id}`}>
+        <Link to={`${pathToProducts}/${item.product._id}`}>
           <img
             className={styles.itemImg}
             src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
@@ -59,7 +59,7 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
         </Link>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
-        <Link to={`${pathToProduct}/${item.product._id}`}>
+        <Link to={`${pathToProducts}/${item.product._id}`}>
           <span className={styles.itemName}>{item.product.name[language].value}</span>
         </Link>
         {item.options.size && (

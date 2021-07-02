@@ -87,6 +87,6 @@ describe('Comments test', () => {
         <CommentsItem data={dataWithOutUser} commentId={commentId} />
       </ThemeProvider>
     );
-    expect(wrapper.find('span').at(1).prop('children', 'Deleted User'));
+    expect(wrapper.find('span').at(1).prop('children', 'Видалений користувач'));
   });
 });

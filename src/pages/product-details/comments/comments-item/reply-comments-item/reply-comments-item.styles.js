@@ -24,7 +24,8 @@ export const useStyles = makeStyles((theme) => {
     },
     commentActions: {
       paddingLeft: '20px',
-      display: 'flex'
+      display: 'flex',
+      alignItems: 'center'
     },
     editIcon: {
       marginRight: '5px',
@@ -57,14 +58,14 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     user: {
-      display: 'flex'
+      display: 'flex',
+      alignItems: 'center'
     },
     avatar: {
       width: '60px',
       height: '60px'
     },
     name: {
-      marginBottom: '10px',
       fontSize: '1rem',
       fontWeight: '700'
     },
@@ -81,15 +82,15 @@ export const useStyles = makeStyles((theme) => {
       marginTop: '15px'
     },
     userContainer: {
-      display: 'flex',
-      alignItems: 'end'
+      display: 'flex'
     },
     userIcons: {
       margin: 'auto'
     },
     boughtIcon: {
       color: '#01a00d',
-      fontSize: '30px'
+      fontSize: '30px',
+      marginRight: '5px'
     },
     replyIcon: {
       transform: 'rotate(180deg)',
@@ -97,6 +98,7 @@ export const useStyles = makeStyles((theme) => {
     },
     checkIcon: {
       position: 'relative',
+      height: '30px',
       '&:before': {
         top: '4px',
         left: '13px',

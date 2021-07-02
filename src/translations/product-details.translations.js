@@ -145,22 +145,22 @@ export const TOOLTIPS = {
     removeWishful: 'Видалити з бажаного',
     edit: 'Редагувати',
     delete: 'Видалити',
-    unregisteredReply: 'Вам потрібно увійти щоб залишити репліку',
+    unregisteredReply: 'Вам потрібно увійти щоб залишити відповідь',
     unregisteredComment: 'Вам потрібно увійти щоб залишити коментар',
     bought: 'Користувач купив даний товар',
     feedbackComment: 'Ваш коментар не підтверджений адміністратором',
-    feedbackReply: 'Ваша репліка не підтвердженна адміністратором'
+    feedbackReply: 'Ваша відповідь не підтвердженна адміністратором'
   },
   1: {
     addWishful: 'Add to wishlist',
     removeWishful: 'Remove from wishlist',
     edit: 'Edit',
     delete: 'Delete',
-    unregisteredReply: 'You should login to leave reply',
+    unregisteredReply: 'You should login to leave answer',
     unregisteredComment: 'You should login to leave comment',
     bought: 'The user bought this product',
     feedbackComment: 'Your comment has not been confirmed by the administrator ',
-    feedbackReply: 'Your reply has not been confirmed by the administrator '
+    feedbackReply: 'Your answer has not been confirmed by the administrator '
   }
 };
 
@@ -178,13 +178,14 @@ export const DIALOG = {
 
 export const DIALOG_REPLY = {
   0: {
-    title: 'Видалити репліку?',
-    description: 'Ви дійсно хочете видалити репліку? Після видалення Ви не зможете його відновити.'
+    title: 'Видалити відповідь?',
+    description:
+      'Ви дійсно хочете видалити відповідь? Після видалення Ви не зможете його відновити.'
   },
   1: {
-    title: 'Delete reply?',
+    title: 'Delete answer?',
     description:
-      'Are you sure you want to delete the reply? After deleting you will not be able to restore the reply.'
+      'Are you sure you want to delete the answer? After deleting you will not be able to restore the reply.'
   }
 };
 
@@ -219,15 +220,30 @@ export const REPLY = {
   0: {
     submit: 'Відповісти',
     loadMore: 'Більше відповідей',
-    hideBtn: 'Приховати репліки',
+    hideBtn: 'Приховати відповіді',
     text: 'Поділіться своїми враженнями з іншими',
     answers: 'Кількість відповідей :'
   },
   1: {
     submit: 'Leave reply',
     loadMore: 'More answers',
-    hideBtn: 'Hide replicas',
+    hideBtn: 'Hide answers',
     text: 'Share your thoughts with others',
     answers: 'Count of answers'
+  }
+};
+
+export const USER_DATA = {
+  0: {
+    firstName: 'Видалений користувач',
+    email: 'Deleted Email',
+    _id: 'deleted',
+    role: 'deleted'
+  },
+  1: {
+    firstName: 'Deleted User',
+    email: 'Deleted Email',
+    _id: 'deleted',
+    role: 'deleted'
   }
 };

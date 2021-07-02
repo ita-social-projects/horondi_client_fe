@@ -11,7 +11,7 @@ import {
   DATE_LANGUAGE_OPTIONS,
   COMMENT_OWNER_STATUS
 } from '../../../../../configs';
-import { TOOLTIPS } from '../../../../../translations/product-details.translations';
+import { TOOLTIPS, USER_DATA } from '../../../../../translations/product-details.translations';
 import {
   handleUserCommentOwner,
   handleUserCommentApprove
@@ -32,10 +32,10 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
   }));
   const styles = useStyles();
   const { firstName, email, _id, role } = user || {
-    firstName: 'Deleted User',
-    email: 'Deleted Email',
-    _id: 'deleted',
-    role: 'deleted'
+    firstName: USER_DATA[language].firstName,
+    email: USER_DATA[language].email,
+    _id: USER_DATA[language]._id,
+    role: USER_DATA[language].role
   };
 
   const [isModalShown, toggleModal] = useState(false);

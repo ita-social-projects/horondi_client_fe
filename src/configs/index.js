@@ -295,8 +295,8 @@ export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
   added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
   updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
-  addedReply: ['Вашу репліку успішно створений', 'Your reply is successfully added'],
-  deletedReply: ['Вашу репліку успішно видалено', 'Your reply is successfully deleted'],
+  addedReply: ['Вашу відповідь успішно створений', 'Your answer is successfully added'],
+  deletedReply: ['Вашу відповідь успішно видалено', 'Your answer is successfully deleted'],
   deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong'],
   blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.'],

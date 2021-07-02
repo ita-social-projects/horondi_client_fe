@@ -10,7 +10,7 @@ import { useStyles } from './comments-item.styles';
 import CommentDialog from './comment-dialog';
 import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../configs';
 import { getReplyComments } from '../../../../redux/comments/comments.actions';
-import { TOOLTIPS, REPLY } from '../../../../translations/product-details.translations';
+import { TOOLTIPS, REPLY, USER_DATA } from '../../../../translations/product-details.translations';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
 import { Loader } from '../../../../components/loader/loader';
@@ -51,8 +51,8 @@ const CommentsItem = ({ data, commentId }) => {
   }));
 
   const { firstName, email } = user || {
-    firstName: 'Deleted User',
-    email: 'Deleted Email'
+    firstName: USER_DATA[language].firstName,
+    email: USER_DATA[language].email
   };
 
   const [isModalShown, toggleModal] = useState(false);

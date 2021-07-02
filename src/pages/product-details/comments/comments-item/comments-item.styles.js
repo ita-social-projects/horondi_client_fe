@@ -33,11 +33,13 @@ export const useStyles = makeStyles((theme) => {
     },
     comment: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      marginBottom: '10px'
     },
     commentActions: {
       paddingLeft: '20px',
-      display: 'flex'
+      display: 'flex',
+      alignItems: 'center'
     },
     editIcon: {
       marginRight: '5px',
@@ -79,10 +81,10 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     user: {
-      display: 'flex'
+      display: 'flex',
+      alignItems: 'center'
     },
     name: {
-      marginBottom: '10px',
       fontSize: '1rem',
       fontWeight: '700'
     },
@@ -99,8 +101,7 @@ export const useStyles = makeStyles((theme) => {
       marginTop: '15px'
     },
     userContainer: {
-      display: 'flex',
-      alignItems: 'end'
+      display: 'flex'
     },
     userIcons: {
       display: 'flex',
@@ -108,7 +109,8 @@ export const useStyles = makeStyles((theme) => {
     },
     boughtIcon: {
       color: '#01a00d',
-      fontSize: '30px'
+      fontSize: '30px',
+      marginRight: '5px'
     },
     replyText: {
       paddingLeft: '10px',
@@ -118,6 +120,7 @@ export const useStyles = makeStyles((theme) => {
     },
     checkIcon: {
       position: 'relative',
+      height: '30px',
       '&:before': {
         top: '4px',
         left: '13px',

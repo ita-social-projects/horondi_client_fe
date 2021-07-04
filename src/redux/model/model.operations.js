@@ -2,8 +2,8 @@ import { getItems } from '../../utils/client';
 
 const getAllModels = async () => {
   const getAllModelsQuery = `
-    query($skip: Int, $limit: Int) {
-      getAllModels(skip: $skip, limit: $limit) {
+    query {
+      getAllModels {
         items {
           _id
           category {
@@ -23,7 +23,8 @@ const getAllModels = async () => {
       }
     }
   `;
-  const result = await getItems(getAllModelsQuery, { skip: 0, limit: 0 });
+
+  const result = await getItems(getAllModelsQuery);
 
   return result?.data?.getAllModels;
 };

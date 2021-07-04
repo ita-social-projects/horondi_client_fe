@@ -166,7 +166,7 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
-      pass: 'From 6 to 30 characters with one capital letter and one digit',
+      pass: 'From 6 to 30 characters with one capital  letter and one digit',
       confirmPassword: 'Passwords do not match',
       wrongFormat: 'Wrong format',
       empty: 'Field should not to be empty'
@@ -272,7 +272,8 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    p:
+      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
@@ -402,13 +403,15 @@ export const PROFILE_LABELS = [
 export const PROFILE_PASSWORD_CHANGE = [
   {
     heading: 'Зміна паролю',
-    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    text:
+      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
     btnTitle: 'Змінити пароль',
     checkEmailText: 'Будь ласка, перевірте ваш емейл!'
   },
   {
     heading: 'Change password',
-    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    text:
+      'If you want to change your password, please click the button below and we will send you the instructions on your email',
     btnTitle: 'Change password',
     checkEmailText: 'Please, check your email!'
   }

@@ -9,7 +9,7 @@ module.exports = {
             debug: false
           }
         ],
-
+        '@babel/preset-flow',
         '@babel/preset-react'
       ],
       plugins: [
@@ -19,7 +19,11 @@ module.exports = {
       ]
     },
     production: {
-      presets: [['@babel/preset-env', { modules: false }], '@babel/preset-react'],
+      presets: [
+        ['@babel/preset-env', { modules: false }],
+        '@babel/preset-flow',
+        '@babel/preset-react'
+      ],
       plugins: [
         '@babel/plugin-transform-runtime',
         '@babel/plugin-syntax-dynamic-import',
@@ -29,7 +33,7 @@ module.exports = {
     development: {
       presets: [
         ['@babel/preset-env', { modules: false, targets: { node: 6 } }],
-
+        '@babel/preset-flow',
         '@babel/preset-react'
       ],
       plugins: [

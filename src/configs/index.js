@@ -294,6 +294,8 @@ export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
   added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
   updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
+  addedReply: ['Вашу відповідь успішно створений', 'Your answer is successfully added'],
+  deletedReply: ['Вашу відповідь успішно видалено', 'Your answer is successfully deleted'],
   deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
   error: ['Щось пішло не так', 'Something went wrong'],
   blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.'],
@@ -329,9 +331,7 @@ export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
 export const commentFields = {
-  firstName: { name: 'firstName' },
-  email: { name: 'email' },
-  text: { name: 'text', multiline: true, rows: 7 }
+  text: { name: 'text', multiline: true, rows: 5 }
 };
 
 export const profileFields = [
@@ -412,6 +412,8 @@ export const toastSettings = {
 export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
 
 export const commentsLimit = 10;
+export const commentsSkip = 0;
+export const commentsReplyLimit = 10;
 
 export const cookiePolicy = {
   SINGLE_HOST_ORIGIN: 'single_host_origin'
@@ -457,3 +459,7 @@ export const FETCH_POLICY = 'no-cache';
 export const RETURN_PAGE = 'returnPage';
 
 export const HYPHEN = '-';
+
+export const COMMENT_OWNER_STATUS = {
+  isAdmin: ['Менеджер', 'Manager']
+};

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: '100%',
-    height: 'calc(100vh - 200px)',
+    height: (props) => (props.heightWrap ? props.heightWrap : 'calc(100vh - 200px)'),
     overflow: 'hidden',
     display: 'flex',
     animationName: '',

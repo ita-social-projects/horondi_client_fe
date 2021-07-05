@@ -29,7 +29,7 @@ const CountPerPage = () => {
   };
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
-      className={searchParams.get("countPerPage") == item.value ? (styles.selectedButton):("")}
+      className={searchParams.get('countPerPage') == item.value ? styles.selectedButton : ''}
       data-cy={item.title}
       key={item.value}
       type='button'
@@ -41,12 +41,10 @@ const CountPerPage = () => {
     </Button>
   ));
   return (
-  <div>
-    {countPerPageText}
-    <ButtonGroup className={styles.items}>
-      {productsOnPage}
-    </ButtonGroup>
-  </div>
-  )
+    <div>
+      {countPerPageText}
+      <ButtonGroup className={styles.items}>{productsOnPage}</ButtonGroup>
+    </div>
+  );
 };
 export default CountPerPage;

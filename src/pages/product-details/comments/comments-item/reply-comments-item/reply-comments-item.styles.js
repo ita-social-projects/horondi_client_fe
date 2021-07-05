@@ -4,26 +4,13 @@ export const useStyles = makeStyles((theme) => {
   const color = theme.palette.textColor;
 
   return {
-    loadMore: {
-      width: '95%',
-      margin: '0 0 0 auto',
-      display: 'flex',
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      borderTop: '2px solid #c2c2c2',
-      paddingTop: '10px'
-    },
-    loadMoreText: {
-      '&:hover': {
-        cursor: 'pointer',
-        borderBottom: '2px solid #000000',
-        height: '20px'
-      }
-    },
     container: {
       color,
       borderTop: '2px solid #C2C2C2',
-      padding: '10px 0'
+      width: '95%',
+      margin: '0 0 0 auto',
+      paddingLeft: '20px',
+      paddingTop: '10px'
     },
     comments: {
       fontWeight: '500'
@@ -33,8 +20,7 @@ export const useStyles = makeStyles((theme) => {
     },
     comment: {
       display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: '10px'
+      justifyContent: 'space-between'
     },
     commentActions: {
       paddingLeft: '20px',
@@ -49,9 +35,9 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     textContent: {
-      display: 'flex'
+      display: 'flex',
+      justifyContent: 'space-between'
     },
-
     deleteIcon: {
       '&:hover': {
         cursor: 'pointer'
@@ -59,23 +45,14 @@ export const useStyles = makeStyles((theme) => {
     },
     text: {
       flexGrow: 1,
-      maxWidth: '90%'
+      maxWidth: '89%',
+      paddingBottom: '5px'
     },
     notAproveText: {
-      color: '#989898'
+      color: '#989898',
+      paddingBottom: '5px'
     },
     button: {
-      margin: '0',
-      height: '30px',
-      '&:hover': {
-        cursor: 'pointer',
-        borderBottom: '2px solid #000000'
-      }
-    },
-    replyCount: {
-      display: 'flex',
-      marginLeft: '15px',
-      fontSize: '14px',
       '&:hover': {
         cursor: 'pointer'
       }
@@ -83,6 +60,10 @@ export const useStyles = makeStyles((theme) => {
     user: {
       display: 'flex',
       alignItems: 'center'
+    },
+    avatar: {
+      width: '60px',
+      height: '60px'
     },
     name: {
       fontSize: '1rem',
@@ -92,7 +73,7 @@ export const useStyles = makeStyles((theme) => {
       height: '30px'
     },
     loader: {
-      padding: '0'
+      padding: '55px 0'
     },
     line: {
       marginTop: '45px'
@@ -104,7 +85,6 @@ export const useStyles = makeStyles((theme) => {
       display: 'flex'
     },
     userIcons: {
-      display: 'flex',
       margin: 'auto'
     },
     boughtIcon: {
@@ -112,11 +92,9 @@ export const useStyles = makeStyles((theme) => {
       fontSize: '30px',
       marginRight: '5px'
     },
-    replyText: {
-      paddingLeft: '10px',
-      '&:hover': {
-        borderBottom: '2px solid #000000'
-      }
+    replyIcon: {
+      transform: 'rotate(180deg)',
+      marginRight: '15px'
     },
     checkIcon: {
       position: 'relative',
@@ -132,16 +110,6 @@ export const useStyles = makeStyles((theme) => {
         borderRight: '2px solid #ffffff',
         borderBottom: '2px solid #ffffff'
       }
-    },
-    replyIcon: {
-      marginRight: '15px',
-      alignSelf: 'baseline'
-    },
-    reply: {
-      display: 'flex',
-      alignItems: 'center',
-      marginTop: '10px',
-      marginBottom: '10px'
     },
     icon: {
       color: `rgb(${color} / 87%)`

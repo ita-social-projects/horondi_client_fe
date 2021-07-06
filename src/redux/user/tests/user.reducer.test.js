@@ -6,7 +6,17 @@ import {
   setUserLoading,
   resetState,
   userHasRegistered,
-  userHasRecovered
+  userHasRecovered,
+  setUserIsChecked,
+  setPasswordIsReset,
+  setConfirmationEmailStatus,
+  setUserIsConfirmed,
+  setConfirmationLoading,
+  setRecoveryLoading,
+  setUserOrders,
+  deleteUserDataFromStore,
+  setUserCountOrders,
+  setCurrentPage
 } from '../user.actions';
 
 import { userMocks, initialStateMock } from './user.mocks';
@@ -60,9 +70,70 @@ describe('test user.reducer', () => {
     });
   });
   test('should test userHasRecovered', () => {
-    expect(userReducer(initialStateMock, userHasRecovered(false))).toEqual({
+    expect(userReducer(initialStateMock, userHasRecovered(true))).toEqual({
       ...initialStateMock,
-      userRegistered: false
+      userRecovered: true
+    });
+  });
+  test('should test setPasswordIsReset', () => {
+    expect(userReducer(initialStateMock, setPasswordIsReset(true))).toEqual({
+      ...initialStateMock,
+      passwordReset: true
+    });
+  });
+  test('should test setUserIsChecked', () => {
+    expect(userReducer(initialStateMock, setUserIsChecked(true))).toEqual({
+      ...initialStateMock,
+      userIsChecked: true
+    });
+  });
+  test('should test setConfirmationEmailStatus', () => {
+    expect(userReducer(initialStateMock, setConfirmationEmailStatus(true))).toEqual({
+      ...initialStateMock,
+      confirmationEmailSent: true
+    });
+  });
+  test('should test setUserIsConfirmed', () => {
+    expect(userReducer(initialStateMock, setUserIsConfirmed(true))).toEqual({
+      ...initialStateMock,
+      userData: {
+        confirmed: true
+      }
+    });
+  });
+  test('should test setConfirmationLoading', () => {
+    expect(userReducer(initialStateMock, setConfirmationLoading(true))).toEqual({
+      ...initialStateMock,
+      confirmationLoading: true
+    });
+  });
+  test('should test setRecoveryLoading', () => {
+    expect(userReducer(initialStateMock, setRecoveryLoading(true))).toEqual({
+      ...initialStateMock,
+      recoveryLoading: true
+    });
+  });
+  test('should test setUserOrders', () => {
+    expect(userReducer(initialStateMock, setUserOrders(true))).toEqual({
+      ...initialStateMock,
+      userOrders: true
+    });
+  });
+  test('should test deleteUserDataFromStore', () => {
+    expect(userReducer(initialStateMock, deleteUserDataFromStore())).toEqual({
+      ...initialStateMock
+    });
+  });
+  test('should test setUserCountOrders', () => {
+    expect(userReducer(initialStateMock, setUserCountOrders(1))).toEqual({
+      ...initialStateMock,
+      countPerPage: 1
+    });
+  });
+  test('should test setCurrentPage', () => {
+    expect(userReducer(initialStateMock, setCurrentPage(1))).toEqual({
+      ...initialStateMock,
+      currentPage: 1
     });
   });
 });

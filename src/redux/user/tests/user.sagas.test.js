@@ -22,7 +22,7 @@ import {
   payload,
   initialStateMock,
   email,
-  password,
+  pass,
   staySignedIn,
   user,
   purchasedProducts,
@@ -122,7 +122,7 @@ describe('user sagas tests', () => {
     expectSaga(handleUserLogin, { payload })
       .put(setUserLoading(true))
       .provide([
-        [call(loginUser, { user: { email, password, staySignedIn } }), user],
+        [call(loginUser, { user: { email, pass, staySignedIn } }), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
         [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
       ])
@@ -216,11 +216,11 @@ describe('user sagas tests', () => {
       .run());
 
   it('should handle password reset', () =>
-    expectSaga(handlePasswordReset, { payload: { password, token } })
+    expectSaga(handlePasswordReset, { payload: { pass, token } })
       .withReducer(userReducer)
       .put(resetState())
       .put(setUserLoading(true))
-      .provide([[call(resetPassword, { password, token })]])
+      .provide([[call(resetPassword, { pass, token })]])
       .put(setUserLoading(false))
       .put(setPasswordIsReset(true))
       .hasFinalState({

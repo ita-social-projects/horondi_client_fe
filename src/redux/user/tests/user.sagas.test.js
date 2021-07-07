@@ -83,7 +83,7 @@ import { AUTH_ERRORS } from '../../../const/error-messages';
 import { USER_ERROR } from '../../../translations/user.translations';
 
 describe('user sagas tests', () => {
-  it('should handle google user login', () =>
+  it('should handle google user login ', () =>
     expectSaga(handleGoogleUserLogin, { payload })
       .withReducer(userReducer)
       .put(setUserLoading(true))

@@ -11,7 +11,7 @@ import {
   NEW_PASSWORD_SUCCESS_MESSAGE
 } from '../../translations/user.translations';
 import { endAdornment } from '../../utils/eyeToggle';
-import { resetPassword, checkIfTokenValid, resetState } from '../../redux/user/user.actions';
+import { resetPassword, resetState } from '../../redux/user/user.actions';
 import {
   handleNewPasswodLoaderOrWindow,
   handleErrorMessage

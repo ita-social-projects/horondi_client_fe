@@ -34,8 +34,7 @@ const NewPassword = ({ token }) => {
 
   useEffect(() => {
     dispatch(resetState());
-    dispatch(checkIfTokenValid({ token }));
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   const handleRecovery = async ({ password }) => {
     dispatch(resetPassword({ password, token }));
@@ -81,7 +80,7 @@ const NewPassword = ({ token }) => {
                 <Field
                   name='password'
                   as={TextField}
-                  type='text'
+                  type='password'
                   label={CHANGE_PASSWORD[language].pass_label}
                   className={styles.passwordInput}
                   variant='outlined'
@@ -93,7 +92,7 @@ const NewPassword = ({ token }) => {
                 <Field
                   name='confirmPassword'
                   as={TextField}
-                  type='text'
+                  type='password'
                   label={CHANGE_PASSWORD[language].confirm_label}
                   className={styles.passwordInput}
                   variant='outlined'

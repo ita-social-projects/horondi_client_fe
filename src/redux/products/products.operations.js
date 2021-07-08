@@ -291,10 +291,6 @@ const getProductById = async (id) => {
           sizes {
             _id
             name
-            simpleName {
-              lang
-              value
-            }
             heightInCm
             widthInCm
             depthInCm

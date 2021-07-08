@@ -169,7 +169,7 @@ const getFilteredProducts = async ({ state, currency }) => {
     patterns: state.filters.patternsFilter,
     price: state.filters.priceFilter,
     currency,
-    skip: (state.currentPage-1) * state.countPerPage,
+    skip: (state.currentPage - 1) * state.countPerPage,
     limit: state.countPerPage,
     rate: state.sortByRate || undefined,
     basePrice: state.sortByPrice || undefined,
@@ -307,23 +307,7 @@ const getProductById = async (id) => {
             }
           }
           availableCount
-          rate
-          comments {
-            items {
-              _id
-              text
-              date
-              user {
-                _id
-                firstName
-                lastName
-                email
-                images {
-                  thumbnail
-                }
-              }
-            }
-          }
+          rate          
         }
         ... on Error {
           statusCode

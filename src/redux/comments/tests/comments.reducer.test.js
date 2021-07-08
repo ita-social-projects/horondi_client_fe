@@ -1,6 +1,13 @@
 import commentsReducer, { initialState } from '../comments.reducer';
 
-import { setComments, setCommentsLoading, setRate, setUpdatingComment } from '../comments.actions';
+import {
+  setComments,
+  setCommentsLoading,
+  setRate,
+  setReplyCommentsLimit,
+  setCommentsSkip,
+  clearComments
+} from '../comments.actions';
 
 describe('comments reducer', () => {
   it('should set comments loading to true', () => {
@@ -10,16 +17,6 @@ describe('comments reducer', () => {
     };
 
     expect(commentsReducer(initialState, setCommentsLoading(true))).toEqual(state);
-  });
-
-  it('should set updating comment to state', () => {
-    const commentId = 'fnr89g4g49g85g80';
-    const state = {
-      ...initialState,
-      updatingComment: commentId
-    };
-
-    expect(commentsReducer(initialState, setUpdatingComment(commentId))).toEqual(state);
   });
 
   it('should set rate to state', () => {
@@ -49,5 +46,35 @@ describe('comments reducer', () => {
     };
 
     expect(commentsReducer(initialState, setComments(payload))).toEqual(state);
+  });
+
+  it('should set comments skip to state', () => {
+    const payload = 5;
+
+    const state = {
+      ...initialState,
+      skip: payload
+    };
+
+    expect(commentsReducer(initialState, setCommentsSkip(payload))).toEqual(state);
+  });
+
+  it('should set reply comments limit to state', () => {
+    const payload = 10;
+
+    const state = {
+      ...initialState,
+      replyLimit: payload
+    };
+
+    expect(commentsReducer(initialState, setReplyCommentsLimit(payload))).toEqual(state);
+  });
+
+  it('should clear comments', () => {
+    expect(commentsReducer(undefined, clearComments())).toEqual(initialState);
+  });
+
+  it('should return default state', () => {
+    expect(commentsReducer()).toEqual(initialState);
   });
 });

@@ -76,11 +76,11 @@ const FooterLists = () => {
         <div className={styles.cardTitle}>
           <Typography variant='h5'>{FOOTER_CONTACTS[language].title}</Typography>
         </div>
-        {contactsList}
-        <div key={FOOTER_CONTACTS[language].map.id}>
+        {contactsList[0]}
+        <div key={FOOTER_CONTACTS[language].more.id}>
           <Typography variant='subtitle2'>
             <Link to={pathToContacts} className={styles.cardLink}>
-              <span>{FOOTER_CONTACTS[language].map.item}</span>
+              <span>{FOOTER_CONTACTS[language].more.item}</span>
             </Link>
           </Typography>
         </div>

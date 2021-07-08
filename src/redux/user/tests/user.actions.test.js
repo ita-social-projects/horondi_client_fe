@@ -17,7 +17,12 @@ import {
   updateUser,
   setUserIsConfirmed,
   setConfirmationLoading,
-  setRecoveryLoading
+  setRecoveryLoading,
+  setUserOrders,
+  getUserOrders,
+  addProductToUserCartOrWishlist,
+  removeProductFromUserCartOrWishlist,
+  deleteUserDataFromStore
 } from '../user.actions';
 import {
   SET_USER_ERROR,
@@ -38,9 +43,14 @@ import {
   UPDATE_USER,
   SET_USER_IS_CONFIRMED,
   SET_CONFIRMATION_LOADING,
-  SET_RECOVERY_LOADING
+  SET_RECOVERY_LOADING,
+  SET_USER_ORDERS,
+  GET_USER_ORDERS,
+  ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  SET_DELETE_USER
 } from '../user.types';
-import { userMocks } from './user.mocks';
+import { initialStateMock, userMocks } from './user.mocks';
 
 describe('test User actions', () => {
   test('should set error to false', () => {
@@ -155,6 +165,35 @@ describe('test User actions', () => {
     expect(setRecoveryLoading(true)).toEqual({
       type: SET_RECOVERY_LOADING,
       payload: true
+    });
+  });
+  test('should test setUserOrders', () => {
+    expect(setUserOrders(null)).toEqual({
+      type: SET_USER_ORDERS,
+      payload: initialStateMock.userOrders
+    });
+  });
+  test('should test getUserOrders', () => {
+    expect(getUserOrders(true)).toEqual({
+      type: GET_USER_ORDERS,
+      payload: true
+    });
+  });
+  test('should test addProductToUserCartOrWishlist', () => {
+    expect(addProductToUserCartOrWishlist(1)).toEqual({
+      type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+      payload: userMocks.id
+    });
+  });
+  test('should test removeProductFromUserCartOrWishlist', () => {
+    expect(removeProductFromUserCartOrWishlist(1)).toEqual({
+      type: REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+      payload: userMocks.id
+    });
+  });
+  test('should test deleteUserDataFromStore', () => {
+    expect(deleteUserDataFromStore()).toEqual({
+      type: SET_DELETE_USER
     });
   });
 });

@@ -187,8 +187,8 @@ export const SORT_BY_SELECT_OPTIONS = [
     ],
     optionValue: {
       name: 'sortAsc',
-      value: 1 
-      }
+      value: 1
+    }
   },
   {
     lang: [
@@ -212,10 +212,10 @@ export const ITEMS_PER_PAGE = [
   },
   {
     title: 'eighteen products per page',
-    value: 18 
+    value: 18
   },
   {
     title: 'thirty products per page',
-    value: 30 
+    value: 30
   }
 ];

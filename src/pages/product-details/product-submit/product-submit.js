@@ -33,10 +33,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     selectLanguageProductsUserWishlist
   );
 
-  const isWishful = useMemo(() => wishlistItems.find((item) => product._id === item._id), [
-    product._id,
-    wishlistItems
-  ]);
+  const isWishful = useMemo(
+    () => wishlistItems.find((item) => product._id === item._id),
+    [product._id, wishlistItems]
+  );
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
 

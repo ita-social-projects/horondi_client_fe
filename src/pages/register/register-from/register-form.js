@@ -32,6 +32,7 @@ export default function RegisterForm({
   setShouldValidate
 }) {
   const styles = useStyles();
+
   const consentLink =
     language === LANGUAGES_LIST[0].value ? (
       <div className={styles.consentMessage}>

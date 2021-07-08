@@ -13,7 +13,6 @@ import { setError } from '../error/error.actions';
 import { setProductsForSearchBar, setSearchBarLoading } from '../search-bar/search-bar.actions';
 import { GET_ALL_FILTERS, GET_FILTERED_PRODUCTS, GET_PRODUCT } from './products.types';
 import { getFilteredProducts, getProductById, getAllFilters } from './products.operations';
-import { setComments } from '../comments/comments.actions';
 import routes from '../../const/routes';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
@@ -63,9 +62,6 @@ export function* handleProductLoading({ payload }) {
     yield put(setProductLoading(true));
     const product = yield call(getProductById, payload);
     yield put(setProduct(product));
-    if (product.comments.items) {
-      yield put(setComments(product.comments?.items));
-    }
     yield put(setProductLoading(false));
   } catch (e) {
     yield call(handleProductsErrors, e);

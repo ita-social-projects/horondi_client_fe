@@ -1,35 +1,68 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
-import Avatar from '@material-ui/core/Avatar';
+import { useSelector, useDispatch } from 'react-redux';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
+import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
+import { Tooltip } from '@material-ui/core';
 import { useStyles } from './comments-item.styles';
-
-import { Loader } from '../../../../components/loader/loader';
-import EditableField from './editable-field';
 import CommentDialog from './comment-dialog';
+import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../configs';
+import { getReplyComments } from '../../../../redux/comments/comments.actions';
+import { TOOLTIPS, REPLY, USER_DATA } from '../../../../translations/product-details.translations';
+import ReplyForm from './reply-form';
+import ReplyCommentsItem from './reply-comments-item';
+import { Loader } from '../../../../components/loader/loader';
+import {
+  handleUserCommentOwner,
+  handleTitleSubmit,
+  handleArrowIcon,
+  handleUserCommentApprove,
+  handleUserId,
+  handleTextStyle,
+  handleRate,
+  handleLoadMoreText,
+  handleLimitOptions
+} from '../../../../utils/handle-comments';
 
-import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS, IMG_URL } from '../../../../configs';
-import { TOOLTIPS } from '../../../../translations/product-details.translations';
-
-const CommentsItem = ({ user, text, date, commentId }) => {
+const CommentsItem = ({ data, commentId }) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
+  const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
+    data;
 
-  const { updatingComment, language, userData } = useSelector(({ Comments, Language, User }) => ({
-    updatingComment: Comments.updatingComment,
+  const {
+    language,
+    userData,
+    currentLimit,
+    replyLoading,
+    replyLoadingId,
+    getReplyLoading,
+    getReplyLoadingId
+  } = useSelector(({ Comments, Language, User }) => ({
     language: Language.language,
-    userData: User.userData
+    userData: User.userData,
+    currentLimit: Comments.replyLimit,
+    replyLoading: Comments.replyLoading.loader,
+    replyLoadingId: Comments.replyLoading.commentId,
+    getReplyLoading: Comments.getReplyLoading.loader,
+    getReplyLoadingId: Comments.getReplyLoading.commentId
   }));
 
-  const { name, images } = user;
+  const { firstName, email } = user || {
+    firstName: USER_DATA[language].firstName,
+    email: USER_DATA[language].email
+  };
 
-  const [isEditable, setEditable] = useState(false);
   const [isModalShown, toggleModal] = useState(false);
+  const [isReplyShown, toggleReply] = useState(false);
+  const [isReplyListShown, toggleReplyList] = useState(false);
 
   const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
-  const dateToShow = new Date(parseInt(date));
+
+  const dateToShow = new Date(date);
+
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
   const handleOpen = () => {
@@ -40,57 +73,136 @@ const CommentsItem = ({ user, text, date, commentId }) => {
     toggleModal(false);
   };
 
-  if (updatingComment === commentId) {
-    return (
-      <div className={styles.loader}>
-        <Loader />
-      </div>
+  const handleReplyOpen = () => {
+    toggleReply(true);
+  };
+
+  const handleReplyClose = () => {
+    toggleReply(false);
+  };
+
+  const showReplyList = () => {
+    if (isReplyListShown) {
+      return toggleReplyList(false);
+    }
+    toggleReplyList(true);
+    return !commentsReplyLength && getReplyCommentsByComment();
+  };
+
+  const getReplyCommentsByComment = () => {
+    dispatch(
+      getReplyComments({ commentId, limit: currentLimit, skip: replyComments?.items?.length || 0 })
     );
-  }
+  };
+
+  const commentsReplyLength = replyComments?.items.length;
+
+  const replyCommentsList = replyComments?.items
+    ? replyComments.items.map(({ _id, ...rest }) => (
+      <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+    ))
+    : [];
+
+  const limitOption = handleLimitOptions(replyCommentsList, replyComments, replyCommentsCount);
 
   return (
     <div className={styles.container}>
       <div className={styles.comments}>
         <div className={styles.comment}>
-          <div>
+          <div className={styles.userContainer}>
             <div className={styles.user}>
-              <Avatar
-                alt={name}
-                src={images ? `${IMG_URL}${images.thumbnail}` : ''}
-                className={styles.avatar}
-              />
-              <span className={styles.name}>{name}</span>
+              <span className={styles.name}>{firstName}</span>
             </div>
-          </div>
-          <div className={styles.icons}>
             <div className={styles.commentActions}>
-              {!isEditable && (userData ? userData.email === user.email : false) ? (
-                <div>
-                  <Tooltip title={TOOLTIPS[language].edit}>
-                    <EditIcon className={styles.editIcon} onClick={() => setEditable(true)} />
-                  </Tooltip>
-                  <Tooltip title={TOOLTIPS[language].delete}>
-                    <DeleteForeverIcon className={styles.deleteIcon} onClick={handleOpen} />
+              {verifiedPurchase ? (
+                <div className={styles.checkIcon}>
+                  <Tooltip title={TOOLTIPS[language].bought}>
+                    <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
               ) : null}
+              {handleUserCommentApprove(userData, email, show) ? (
+                <Tooltip title={TOOLTIPS[language].feedbackComment}>
+                  <FeedbackOutlinedIcon className={styles.icon} />
+                </Tooltip>
+              ) : null}
             </div>
           </div>
+          <div className={styles.date}>{commentDate}</div>
         </div>
-        {isEditable ? (
-          <EditableField
-            setEditable={setEditable}
-            text={text}
-            handleOpen={handleOpen}
-            commentId={commentId}
-            firstName={name}
-          />
-        ) : (
-          <div className={styles.text}>{text}</div>
+        {handleRate(rate)}
+        <div className={styles.textContent}>
+          <div
+            className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}
+          >
+            {text}
+          </div>
+          <div className={styles.userIcons}>
+            {handleUserCommentOwner(userData, email) ? (
+              <div className={styles.icons}>
+                <Tooltip title={TOOLTIPS[language].delete}>
+                  <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
+                </Tooltip>
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        <div className={styles.reply}>
+          <ReplyOutlinedIcon className={styles.replyIcon} />
+          <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredReply')}>
+            <p className={styles.button} onClick={handleReplyOpen}>
+              {REPLY[language].submit}
+            </p>
+          </Tooltip>
+
+          {replyCommentsCount > 0 ? (
+            <div className={styles.replyCount} onClick={showReplyList}>
+              <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
+              <span className={styles.replyText}>
+                {REPLY[language].answers}
+                {'\u00A0'}
+                {replyCommentsCount}
+              </span>
+            </div>
+          ) : null}
+        </div>
+
+        {isReplyListShown ? (
+          <div>
+            {replyCommentsList}
+
+            {commentsReplyLength < replyCommentsCount && (
+              <div className={styles.loadMore}>
+                {handleArrowIcon(limitOption)}
+                <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>
+                  {handleLoadMoreText(limitOption, language)}
+                </span>
+              </div>
+            )}
+          </div>
+        ) : null}
+        {isReplyShown && userData?._id && (
+          <ReplyForm cancel={handleReplyClose} commentId={commentId} />
         )}
-        <div className={styles.date}>{commentDate}</div>
+        {getReplyLoading && getReplyLoadingId === commentId && (
+          <div className={styles.loader}>
+            <Loader width={40} height={40} heightWrap={90} />
+          </div>
+        )}
+        {replyLoading && replyLoadingId === commentId && (
+          <div className={styles.loader}>
+            <Loader width={40} height={40} heightWrap={90} />
+          </div>
+        )}
       </div>
-      <CommentDialog handleClose={handleClose} isModalShown={isModalShown} commentId={commentId} />
+      <CommentDialog
+        handleClose={handleClose}
+        isModalShown={isModalShown}
+        commentId={commentId}
+        userId={handleUserId(userData)}
+        isDeleteComment={1}
+      />
     </div>
   );
 };

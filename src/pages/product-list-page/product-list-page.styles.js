@@ -32,8 +32,8 @@ export const useStyles = makeStyles((theme) => ({
       marginRight: 0
     }
   },
-  invisiblePaginationDiv:{
-    display: 'none !important',
+  invisiblePaginationDiv: {
+    display: 'none !important'
   },
   paginationDiv: {
     display: 'flex',

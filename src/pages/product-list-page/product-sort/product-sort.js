@@ -28,30 +28,33 @@ const ProductSort = () => {
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
   const query = searchParams.get(sort);
   const Sortname = {
-    sortAsc : "sortAsc",
-    sortDesc : "sortDesc",
-    rate : "rate",
-    popularity : "popularity"
-  }
+    sortAsc: 'sortAsc',
+    sortDesc: 'sortDesc',
+    rate: 'rate',
+    popularity: 'popularity'
+  };
   useEffect(() => {
     SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }) => {
-      if(query === optionValue.name){
-        switch(query){
-          case Sortname.sortDesc:{
+      if (query === optionValue.name) {
+        switch (query) {
+          case Sortname.sortDesc: {
             dispatch(setSortByPrice(optionValue.value));
-            break
+            break;
           }
-          case(Sortname.rate):{
+          case Sortname.rate: {
             dispatch(setSortByRate(optionValue.value));
-            break
+            break;
           }
-          case(Sortname.popularity):{
+          case Sortname.popularity: {
             dispatch(setSortByPopularity(optionValue.value));
-            break
+            break;
           }
-          case Sortname.sortAsc:{
+          case Sortname.sortAsc: {
             dispatch(setSortByPrice(optionValue.value));
-            break
+            break;
+          }
+          default: {
+            break;
           }
         }
       }

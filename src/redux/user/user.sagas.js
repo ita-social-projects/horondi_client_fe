@@ -17,6 +17,7 @@ import {
   setUserOrders,
   setUserCountOrders
 } from './user.actions';
+import { clearComments } from '../comments/comments.actions';
 import {
   loginUser,
   getGoogleUser,
@@ -102,7 +103,6 @@ export function* handleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
-
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
     setToLocalStorage(ACCESS_TOKEN, user.token);
     setToLocalStorage(WISHLIST_KEY, user.wishlist);
@@ -185,12 +185,11 @@ export function* handleUserPreserve() {
     if (!accessToken) {
       return;
     }
-
-    yield put(setCartLoading(true));
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
     const userCart = yield call(getCartByUserId, user._id);
+    yield put(setCartLoading(true));
     yield put(setCart(userCart.cart.items));
     yield put(setCartTotalPrice(userCart.cart.totalPrice));
   } catch (e) {
@@ -241,7 +240,9 @@ export function* handleGetUserOrders({ payload: { pagination } }) {
 }
 
 export function* handleUserLogout() {
+  yield put(clearComments());
   yield put(setUser(null));
+  yield put(setUserOrders(null));
   yield put(resetCart());
   yield put(resetWishlist());
   clearLocalStorage();

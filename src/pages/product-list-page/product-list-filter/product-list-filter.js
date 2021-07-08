@@ -44,9 +44,7 @@ const ProductListFilter = () => {
     dispatch(setCategoryFilter([]));
     dispatch(setPatternsFilter([]));
   };
-  const filterButtons = Object.values(
-    filtersOptions
-  ).map(
+  const filterButtons = Object.values(filtersOptions).map(
     ({
       filterName,
       productFilter,

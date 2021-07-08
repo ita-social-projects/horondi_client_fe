@@ -26,14 +26,14 @@ export const FOOTER_INFORMATION = {
 export const FOOTER_CONTACTS = {
   0: {
     title: 'Контакти',
-    map: {
-      item: 'Показати на мапі'
+    more: {
+      item: 'Більше інформації'
     }
   },
   1: {
     title: 'Contacts',
-    map: {
-      item: 'Show on map'
+    more: {
+      item: 'More information'
     }
   }
 };

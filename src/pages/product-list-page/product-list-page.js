@@ -112,7 +112,7 @@ const ProductListPage = ({ model, width }) => {
   const paginationCondition = () => {
     if (
       products?.length < searchParams.get(URL_QUERIES_NAME.countPerPage) &&
-      searchParams.get(URL_QUERIES_NAME.page) == 1
+      Number(searchParams.get(URL_QUERIES_NAME.page)) === 1
     ) {
       return <div className={styles.invisiblePaginationDiv}>{paginationToShow}</div>;
     }

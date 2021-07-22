@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import { useStyles } from './business-page.style';
 import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
+import Contacts from '../contacts/contacts';
 
 const BusinessPage = ({ match }) => {
   const dispatch = useDispatch();

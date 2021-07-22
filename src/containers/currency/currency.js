@@ -27,6 +27,8 @@ const Currency = ({ fromSideBar }) => {
       {currency === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
+
+  const checkFun = () => null;
   return (
     <div data-cy='currency'>
       <Dropdown

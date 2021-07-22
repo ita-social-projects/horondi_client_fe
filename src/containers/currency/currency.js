@@ -23,12 +23,11 @@ const Currency = ({ fromSideBar }) => {
     }
   };
   const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
-    <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
+    <MenuItem data-cy={`currency${value + 1}`} value={value}>
       {currency === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
 
-  const checkFun = () => null;
   return (
     <div data-cy='currency'>
       <Dropdown

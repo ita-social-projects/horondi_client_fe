@@ -90,7 +90,7 @@ const Login = () => {
                         error={!!errors.password}
                         helperText={errors.password || ''}
                       />
-                      <div className={styles.container}>
+                      <div>
                         <FormControlLabel
                           control={
                             <Field

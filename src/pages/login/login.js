@@ -95,9 +95,8 @@ const Login = () => {
                           control={
                             <Field
                               as={Checkbox}
-                              name={STAY_SIGNED_IN}
+                              name='staySignedIn'
                               color={MATERIAL_UI_COLOR.PRIMARY}
-                              checked={values.staySignedIn}
                             />
                           }
                           label={

@@ -23,15 +23,8 @@ const ImagesConstructor = () => {
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-  const {
-    MODEL,
-    BASIC,
-    PATTERN,
-    BOTTOM,
-    DEFAULT_PRICE,
-    TOTAL_PRICE,
-    END_PRICE
-  } = CONSTRUCTOR_TITLES[language];
+  const { MODEL, BASIC, PATTERN, BOTTOM, DEFAULT_PRICE, TOTAL_PRICE, END_PRICE } =
+    CONSTRUCTOR_TITLES[language];
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
@@ -40,7 +33,10 @@ const ImagesConstructor = () => {
           new Promise((resolveImage, rejectImage) => {
             const img = new Image();
             img.onload = () => resolveImage(img);
-            img.onerror = () => rejectImage(new Error());
+            img.onerror = () => {
+              console.log(source);
+              rejectImage(new Error());
+            };
             img.src = `${IMG_URL}${source}`;
           })
       );
@@ -149,7 +145,7 @@ const ImagesConstructor = () => {
               {constructorPartPrice(prices.priceBasic, prices.priceGobelen, prices.priceBottom).map(
                 (item, index) => (
                   <li key={index} className={styles.priceItem}>
-                    <span>{constructorPartNames(language)[index]}</span>
+                    <span>{constructorPartNames(!language)[index]}</span>
                     <span>
                       {!item ? 0 : `${item}`}
                       {currentCurrencyValue(language, currency)}

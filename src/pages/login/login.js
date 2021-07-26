@@ -52,7 +52,7 @@ const Login = () => {
       validateOnChange={shouldValidate}
       validateOnBlur={shouldValidate}
     >
-      {({ values, errors, isValid }) => (
+      {({ errors }) => (
         <div className={styles.container}>
           <div className={styles.background} />
           <div className={styles.wrapper}>

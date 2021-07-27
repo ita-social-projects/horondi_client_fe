@@ -117,7 +117,7 @@ export const useStyles = makeStyles((theme) => ({
   loginBtn: {
     border: '1px solid black',
     borderRadius: '4px',
-    marginBottom: '10px',
+    marginBottom: '20px',
     textTransform: 'capitalize',
     backgroundColor: 'white',
     color: 'black',

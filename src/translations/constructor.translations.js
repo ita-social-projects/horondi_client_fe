@@ -4,9 +4,9 @@ export const CONSTRUCTOR_TITLES = {
     BASIC: 'Основа',
     PATTERN: 'Гобелен',
     BOTTOM: 'Низ',
-    DEFAULT_PRICE: 'Ціна товару без змін:',
-    TOTAL_PRICE: 'Загальна Вартість:',
-    END_PRICE: 'Кінцева Ціна: ',
+    DEFAULT_PRICE: 'Базова ціна товару:',
+    TOTAL_PRICE: 'Загальна вартість',
+    END_PRICE: 'Кінцева ціна: ',
     DEFAULT_PRICE_VALUE: '1400 '
   },
   1: {
@@ -16,7 +16,7 @@ export const CONSTRUCTOR_TITLES = {
     BOTTOM: 'Bottom',
     DEFAULT_PRICE: 'Default item price:',
     TOTAL_PRICE: 'Total item price',
-    END_PRICE: 'End Price: ',
+    END_PRICE: 'End price: ',
     DEFAULT_PRICE_VALUE: '50 '
   }
 };

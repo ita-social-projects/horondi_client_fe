@@ -12,7 +12,7 @@ export const GoogleBtn = () => {
   const dispatch = useDispatch();
 
   const responseGoogleSuccess = (response) => {
-    dispatch(loginByGoogle({ tokenId: response.tokenId }));
+    dispatch(loginByGoogle({ idToken: response.tokenId }));
   };
   const responseGoogleFailure = (response) => response;
 

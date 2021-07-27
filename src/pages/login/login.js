@@ -52,7 +52,7 @@ const Login = () => {
       validateOnChange={shouldValidate}
       validateOnBlur={shouldValidate}
     >
-      {({ values, errors, isValid }) => (
+      {({ errors }) => (
         <div className={styles.container}>
           <div className={styles.background} />
           <div className={styles.wrapper}>
@@ -90,14 +90,13 @@ const Login = () => {
                         error={!!errors.password}
                         helperText={errors.password || ''}
                       />
-                      <div className={styles.container}>
+                      <div>
                         <FormControlLabel
                           control={
                             <Field
                               as={Checkbox}
-                              name={STAY_SIGNED_IN}
+                              name='staySignedIn'
                               color={MATERIAL_UI_COLOR.PRIMARY}
-                              checked={values.staySignedIn}
                             />
                           }
                           label={

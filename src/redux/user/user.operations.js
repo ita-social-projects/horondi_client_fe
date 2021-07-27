@@ -110,7 +110,7 @@ const loginUser = async (data) => {
   return result?.data?.loginUser;
 };
 
-const getGoogleUser = async (payload) => {
+const getGoogleUser = async ({ idToken }) => {
   const getGoogleUserMutation = `
     mutation($idToken:String!){googleUser(idToken:$idToken){
       _id
@@ -126,7 +126,7 @@ const getGoogleUser = async (payload) => {
 
 }
   `;
-  const result = await getItems(getGoogleUserMutation, { payload });
+  const result = await getItems(getGoogleUserMutation, { idToken });
 
   return result?.data?.googleUser;
 };

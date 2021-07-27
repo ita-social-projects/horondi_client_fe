@@ -4,12 +4,9 @@ export const getConstructorSizeById = async (id) => {
   const getConstructorSizeByIdQuery = `
       query($id: ID!) {
         getSizeById(id: $id) {
-          ... on Size {
-            _id
-          }
-          ... on Error {
-            message
-            statusCode
+          _id
+          additionalPrice {
+            value
           }
         }
       }

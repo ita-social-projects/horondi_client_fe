@@ -2,19 +2,19 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
-import { setConstructorPattern } from '../constructor-pattern.actions';
+import { setConstructorSize } from '../constructor-size.actions';
 import {
   mockId,
-  mockConstructorPattern,
+  mockConstructorSize,
   mockError,
   methodCall,
   methodPut,
   mockState
 } from '../../constructor.variables';
-import { handleConstructorPatternLoad } from '../constructor-pattern.sagas';
+import { handleConstructorSizeLoad } from '../constructor-size.sagas';
 import { handleError } from '../../constructor.sagas';
-import { getConstructorPatternById } from '../constructor-pattern.operations';
-import constructorBottom from '../constructor-pattern.reducer';
+import { getConstructorSizeById } from '../constructor-size.operations';
+import constructorSize from '../constructor-size.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';
 import { setError } from '../../../error/error.actions';
 import routes from '../../../../const/routes';
@@ -25,11 +25,11 @@ const { pathToErrorPage } = routes;
 
 describe('test for front pocket sagas', () => {
   it('should load constructor front pocket data', () =>
-    expectSaga(handleConstructorPatternLoad, { payload: mockId })
-      .provide([[call(getConstructorPatternById, mockId), mockConstructorPattern]])
-      .withReducer(constructorBottom, mockState)
-      .put(setConstructorPattern(mockConstructorPattern))
-      .hasFinalState(mockConstructorPattern)
+    expectSaga(handleConstructorSizeLoad, { payload: mockId })
+      .provide([[call(getConstructorSizeById, mockId), mockConstructorSize]])
+      .withReducer(constructorSize, mockState)
+      .put(setConstructorSize(mockConstructorSize))
+      .hasFinalState(mockConstructorSize)
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
@@ -38,7 +38,7 @@ describe('test for front pocket sagas', () => {
         expect(analysisPut).toHaveLength(1);
         expect(analysisCall).toHaveLength(1);
       }));
-  it('should set loading to true if error in constructor pattern', () =>
+  it('should set loading to true if error in constructor size', () =>
     expectSaga(handleError, mockError)
       .withReducer(constructorModel, initialState)
       .put(setModelLoading(true))
@@ -52,7 +52,7 @@ describe('test for front pocket sagas', () => {
         const analysisPut = analysis.filter((e) => e.type === methodPut);
         expect(analysisPut).toHaveLength(3);
       }));
-  it('should set error message if error in constructor pattern', () =>
+  it('should set error message if error in constructor size', () =>
     expectSaga(handleError, mockError)
       .withReducer(errorReducer, { error: null })
       .put(setError(mockError.message))

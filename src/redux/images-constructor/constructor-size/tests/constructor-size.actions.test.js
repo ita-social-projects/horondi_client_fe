@@ -2,7 +2,7 @@ import { getConstructorSize, setConstructorSize } from '../constructor-size.acti
 import { GET_CONSTRUCTOR_SIZE, SET_CONSTRUCTOR_SIZE } from '../constructor-size.types';
 import { mockId, mockConstructorSize } from '../../constructor.variables';
 
-describe('tests for pattern actions', () => {
+describe('tests for size actions', () => {
   it('should get constructor size id', () => {
     expect(getConstructorSize(mockId)).toEqual({
       type: GET_CONSTRUCTOR_SIZE,

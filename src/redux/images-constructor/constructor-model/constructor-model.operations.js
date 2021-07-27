@@ -43,6 +43,10 @@ export const getModelById = async (id) => {
       priority
       show
       availableForConstructor
+      sizes {
+        _id
+        name
+      }
       eligibleOptions {
         constructorBasic {
           _id

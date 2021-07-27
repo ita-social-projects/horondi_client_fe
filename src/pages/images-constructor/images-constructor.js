@@ -23,7 +23,7 @@ const ImagesConstructor = () => {
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-  const { MODEL, BASIC, PATTERN, BOTTOM, DEFAULT_PRICE, TOTAL_PRICE, END_PRICE } =
+  const { MODEL, BASIC, PATTERN, BOTTOM, SIZE, DEFAULT_PRICE, TOTAL_PRICE, END_PRICE } =
     CONSTRUCTOR_TITLES[language];
 
   const loadImages = (sources = []) =>
@@ -62,10 +62,16 @@ const ImagesConstructor = () => {
       {obj.name[language].value}
     </option>
   );
-
+  const sizeOptions = (obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name}
+    </option>
+  );
   const availableModels = useMemo(() => _.map(values.models, options, [values.models, language]));
 
   const availableBasics = useMemo(() => _.map(values.basics, options, [values.basics, language]));
+
+  const availableSizes = useMemo(() => _.map(values.sizes, sizeOptions));
 
   const availablePatterns = useMemo(() =>
     _.map(values.patterns, options, [values.patterns, language])
@@ -93,6 +99,12 @@ const ImagesConstructor = () => {
       onChange: (e) => methods.changeBottom(e.target.value),
       available: availableBottoms,
       helperText: BOTTOM
+    },
+    {
+      name: constructorImageInput.SIZE,
+      onChange: (e) => methods.changeSize(e.target.value),
+      available: availableSizes,
+      helperText: SIZE
     }
   ];
 
@@ -113,15 +125,15 @@ const ImagesConstructor = () => {
 
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
-          {forForms.map((el) => (
-            <FormControl key={el.name}>
-              <NativeSelect name={el.name} onChange={el.onChange}>
+          {/* {forForms.map((el, index) => (
+            <FormControl key={index}>
+              <NativeSelect key={index} name={el.name} onChange={el.onChange}>
                 {el.available}
               </NativeSelect>
               <FormHelperText>{el.helperText}</FormHelperText>
             </FormControl>
-          ))}
-          {/* <FormControl>
+          ))} */}
+          <FormControl>
             <NativeSelect
               name={constructorImageInput.BASIC}
               onChange={(e) => methods.changeBasic(e.target.value)}
@@ -147,7 +159,16 @@ const ImagesConstructor = () => {
               {availableBottoms}
             </NativeSelect>
             <FormHelperText>{BOTTOM}</FormHelperText>
-          </FormControl> */}
+          </FormControl>
+          <FormControl>
+            <NativeSelect
+              name={constructorImageInput.SIZE}
+              onChange={(e) => methods.changeSize(e.target.value)}
+            >
+              {availableSizes}
+            </NativeSelect>
+            <FormHelperText>{SIZE}</FormHelperText>
+          </FormControl>
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
@@ -172,19 +193,23 @@ const ImagesConstructor = () => {
               </li>
               <div className={`${styles.line} ${styles.topLine}`} />
 
-              {constructorPartPrice(prices.priceBasic, prices.priceGobelen, prices.priceBottom).map(
-                (item, index) =>
-                  item ? (
-                    <li key={index} className={styles.priceItem}>
-                      <span>{constructorPartNames(!language)[index]}</span>
-                      <span>
-                        +{item}
-                        {currentCurrencyValue(language, currency)}
-                      </span>
-                    </li>
-                  ) : (
-                    <div />
-                  )
+              {constructorPartPrice(
+                prices.priceBasic,
+                prices.priceGobelen,
+                prices.priceBottom,
+                prices.priceSize
+              ).map((item, index) =>
+                item ? (
+                  <li key={index} className={styles.priceItem}>
+                    <span>{constructorPartNames(!language)[index]}</span>
+                    <span>
+                      +{item}
+                      {currentCurrencyValue(language, currency)}
+                    </span>
+                  </li>
+                ) : (
+                  <div />
+                )
               )}
               <div className={`${styles.line} ${styles.bottomLine}`} />
             </ul>

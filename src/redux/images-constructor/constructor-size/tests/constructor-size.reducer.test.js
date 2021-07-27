@@ -6,7 +6,7 @@ describe('reducer tests', () => {
   it('should return default store', () => {
     expect(constructorSize(mockState)).toEqual(mockState);
   });
-  it('should set constructor pattern data to store', () => {
+  it('should set constructor size data to store', () => {
     expect(constructorSize(mockState, setConstructorSize(mockConstructorSize))).toEqual(
       mockConstructorSize
     );

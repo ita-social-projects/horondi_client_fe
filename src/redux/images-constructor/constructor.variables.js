@@ -18,7 +18,7 @@ export const mockConstructorPattern = {
   constructorImg: 'large_cc6kbawkl0a665o_гобелен-3.png'
 };
 export const mockConstructorSize = {
-  _id: '6024a1aff38a1b3938db6fd9'
+  _id: '12345f3bf38a1b3938db6fd7'
 };
 export const mockConstructorModels = [
   {
@@ -63,6 +63,16 @@ export const mockConstructorModelData = {
     }
   ],
   constructorFrontPattern: [
+    {
+      _id: '6024a1aff38a1b3938db6f9',
+      name: [{ value: 'Name_1' }, { value: 'Name_1' }]
+    },
+    {
+      _id: '6024s1aff38a1b3938db6f9',
+      name: [{ value: 'Name_2' }, { value: 'Name_2' }]
+    }
+  ],
+  constructorSize: [
     {
       _id: '6024a1aff38a1b3938db6f9',
       name: [{ value: 'Name_1' }, { value: 'Name_1' }]

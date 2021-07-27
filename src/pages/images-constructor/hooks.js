@@ -11,6 +11,7 @@ import { getConstructorBasic } from '../../redux/images-constructor/constructor-
 import { getConstructorFrontPocket } from '../../redux/images-constructor/constructor-front-pocket/constructor-front-pocket.actions';
 import { getConstructorPattern } from '../../redux/images-constructor/constructor-pattern/constructor-pattern.actions';
 import { getConstructorBottom } from '../../redux/images-constructor/constructor-bottom/constructor-bottom.actions';
+import { getConstructorSize } from '../../redux/images-constructor/constructor-size/constructor-size.actions';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 
 export const useConstructor = () => {
@@ -25,7 +26,8 @@ export const useConstructor = () => {
     modelLoading,
     basicPrice,
     frontPocketPrice,
-    bottomPrice
+    bottomPrice,
+    sizePrice
   } = useSelector(selectConstructor);
   const { language, currency } = useSelector(selectLangAndCurrency);
   const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
@@ -34,6 +36,7 @@ export const useConstructor = () => {
   const basics = currentModel.eligibleOptions?.constructorBasic;
   const patterns = currentModel.eligibleOptions?.constructorPattern;
   const bottoms = currentModel.eligibleOptions?.constructorBottom;
+  const {sizes} = currentModel;
 
   useEffect(() => {
     dispatch(getModelForConstructor());
@@ -55,6 +58,7 @@ export const useConstructor = () => {
       dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
       dispatch(getConstructorPattern(constructorPattern[0]._id));
       dispatch(getConstructorBottom(constructorBottom[0]._id));
+      dispatch(getConstructorSize(currentModel.sizes[0]._id));
     }
   }, [currentModel]);
 
@@ -77,13 +81,20 @@ export const useConstructor = () => {
     dispatch(getConstructorBottom(id));
   }, []);
 
+  const changeSize = useCallback((id) => {
+    dispatch(getConstructorSize(id));
+  }, []);
+
   const priceTotal = useMemo(() => {
-    if (basicPrice && frontPocketPrice && bottomPrice) {
+    if (basicPrice && frontPocketPrice && bottomPrice && sizePrice) {
       return (
-        basicPrice[currency].value + frontPocketPrice[currency].value + bottomPrice[currency].value
+        basicPrice[currency].value +
+        frontPocketPrice[currency].value +
+        bottomPrice[currency].value +
+        sizePrice[currency].value
       );
     }
-  }, [basicPrice, frontPocketPrice, bottomPrice, currency]);
+  }, [basicPrice, frontPocketPrice, bottomPrice, sizePrice, currency]);
 
   const priceBasic = useMemo(() => {
     if (basicPrice) return basicPrice[currency].value;
@@ -92,6 +103,10 @@ export const useConstructor = () => {
   const priceGobelen = useMemo(() => {
     if (frontPocketPrice) return frontPocketPrice[currency].value;
   }, [frontPocketPrice, currency]);
+
+  const priceSize = useMemo(() => {
+    if (sizePrice) return sizePrice[currency].value;
+  }, [sizePrice, currency]);
 
   const priceBottom = useMemo(() => {
     if (bottomPrice) return bottomPrice[currency].value;
@@ -103,6 +118,7 @@ export const useConstructor = () => {
       basics,
       patterns,
       bottoms,
+      sizes,
       modelLoading
     },
     images: {
@@ -116,13 +132,15 @@ export const useConstructor = () => {
       changeModel,
       changeBasic,
       changePattern,
-      changeBottom
+      changeBottom,
+      changeSize
     },
     prices: {
       priceTotal,
       priceBasic,
       priceGobelen,
       priceBottom,
+      priceSize,
       DEFAULT_PRICE_VALUE
     },
     language,

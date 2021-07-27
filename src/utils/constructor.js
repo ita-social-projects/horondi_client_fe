@@ -12,8 +12,8 @@ export const constructorPartPrice = (priceBasic, priceGobelen, priceBottom) => [
 ];
 export const constructorPartNames = (language) =>
   language
-    ? ['Матеріал основи:', 'Гобелен:', 'Матеріал низу:']
-    : ['Basic material:', 'Front-Pocket material:', 'Bottom material:'];
+    ? ['Матеріал основи:', 'Гобелен:', 'Матеріал дна:', 'Розмір:', 'Спинка:']
+    : ['Basic material:', 'Front-Pocket material:', 'Bottom material:', 'Size:', 'Back:'];
 
 export const constructorEndPrice = (priceTotal) => {
   if (!priceTotal) {

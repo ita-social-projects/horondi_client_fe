@@ -33,10 +33,9 @@ const ImagesConstructor = () => {
           new Promise((resolveImage, rejectImage) => {
             const img = new Image();
             img.onload = () => resolveImage(img);
-            img.onerror = () => {
-              console.log(source);
-              rejectImage(new Error());
-            };
+            // img.onerror = () => {
+            //   rejectImage(new Error());
+            // };
             img.src = `${IMG_URL}${source}`;
           })
       );
@@ -76,6 +75,27 @@ const ImagesConstructor = () => {
     _.map(values.bottoms, options, [values.bottoms, language])
   );
 
+  const forForms = [
+    {
+      name: constructorImageInput.BASIC,
+      onChange: (e) => methods.changeBasic(e.target.value),
+      available: availableBasics,
+      helperText: BASIC
+    },
+    {
+      name: constructorImageInput.PATTERN,
+      onChange: (e) => methods.changePattern(e.target.value),
+      available: availablePatterns,
+      helperText: PATTERN
+    },
+    {
+      name: constructorImageInput.BOTTOM,
+      onChange: (e) => methods.changeBottom(e.target.value),
+      available: availableBottoms,
+      helperText: BOTTOM
+    }
+  ];
+
   return (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
@@ -93,7 +113,15 @@ const ImagesConstructor = () => {
 
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
-          <FormControl>
+          {forForms.map((el) => (
+            <FormControl key={el.name}>
+              <NativeSelect name={el.name} onChange={el.onChange}>
+                {el.available}
+              </NativeSelect>
+              <FormHelperText>{el.helperText}</FormHelperText>
+            </FormControl>
+          ))}
+          {/* <FormControl>
             <NativeSelect
               name={constructorImageInput.BASIC}
               onChange={(e) => methods.changeBasic(e.target.value)}
@@ -119,7 +147,7 @@ const ImagesConstructor = () => {
               {availableBottoms}
             </NativeSelect>
             <FormHelperText>{BOTTOM}</FormHelperText>
-          </FormControl>
+          </FormControl> */}
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
@@ -142,23 +170,31 @@ const ImagesConstructor = () => {
                   {currentCurrencyValue(language, currency)}
                 </span>
               </li>
+              <div className={`${styles.line} ${styles.topLine}`} />
+
               {constructorPartPrice(prices.priceBasic, prices.priceGobelen, prices.priceBottom).map(
-                (item, index) => (
-                  <li key={index} className={styles.priceItem}>
-                    <span>{constructorPartNames(!language)[index]}</span>
-                    <span>
-                      {!item ? 0 : `${item}`}
-                      {currentCurrencyValue(language, currency)}
-                    </span>
-                  </li>
-                )
+                (item, index) =>
+                  item ? (
+                    <li key={index} className={styles.priceItem}>
+                      <span>{constructorPartNames(!language)[index]}</span>
+                      <span>
+                        +{item}
+                        {currentCurrencyValue(language, currency)}
+                      </span>
+                    </li>
+                  ) : (
+                    <div />
+                  )
               )}
+              <div className={`${styles.line} ${styles.bottomLine}`} />
             </ul>
           </div>
           <h2 className={styles.headerWrapper}>
             {END_PRICE}
-            {constructorEndPrice(prices.priceTotal)}
-            {currentCurrencyValue(language, currency)}
+            <span>
+              {constructorEndPrice(prices.priceTotal)}
+              {currentCurrencyValue(language, currency)}
+            </span>
           </h2>
         </div>
       </div>

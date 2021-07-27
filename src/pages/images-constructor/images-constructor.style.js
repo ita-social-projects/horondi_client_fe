@@ -56,14 +56,16 @@ export const useStyles = makeStyles(() => ({
     }
   },
   headerWrapper: {
-    marginLeft: '5%',
-    '@media (max-width: 768px)': {
-      marginLeft: 0
-    }
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   textWrapper: {
     fontSize: '17px',
     marginBottom: '12px',
+    '& ul': {
+      position: 'relative',
+      padding: 0
+    },
     '@media (max-width: 768px)': {
       '& ul': {
         padding: 0
@@ -86,5 +88,16 @@ export const useStyles = makeStyles(() => ({
   },
   li: {
     marginTop: '25px'
+  },
+  line: {
+    width: '100%',
+    background: '#00000050',
+    margin: '10px 0 10px 0'
+  },
+  bottomLine: {
+    height: '2px'
+  },
+  topLine: {
+    height: '1px'
   }
 }));

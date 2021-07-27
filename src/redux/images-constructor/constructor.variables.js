@@ -17,6 +17,9 @@ export const mockConstructorPattern = {
   _id: '12345f3bf38a1b3938db6fd7',
   constructorImg: 'large_cc6kbawkl0a665o_гобелен-3.png'
 };
+export const mockConstructorSize = {
+  _id: '6024a1aff38a1b3938db6fd9'
+};
 export const mockConstructorModels = [
   {
     _id: '6024a1aff38a1b3938db6fd9',

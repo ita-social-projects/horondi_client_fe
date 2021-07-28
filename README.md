@@ -337,6 +337,13 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@NetkachovaAnastasiya](https://avatars.githubusercontent.com/u/60103758?s=200&u=181e62bf4f25b07122f06ce677e73ddd34021391&v=4)](https://github.com/NetkachovaAnastasiya)
 [![@Serhii-Ahafonov](https://avatars.githubusercontent.com/u/61708033?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Serhii-Ahafonov)
 [![@Palidovych](https://avatars.githubusercontent.com/u/54260733?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Palidovych)
+[![@halaburdataras](https://avatars.githubusercontent.com/u/36608907?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/halaburdataras)
+[![@chortex](https://avatars.githubusercontent.com/u/39667486?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/chortex)
+[![@TanyaTop](https://avatars.githubusercontent.com/u/71588357?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/TanyaTop)
+[![@oni-hash](https://avatars.githubusercontent.com/u/60193440?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/oni-hash)
+[![@Hai-Vasyl](https://avatars.githubusercontent.com/u/64915099?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Hai-Vasyl)
+[![@Wasya1212](https://avatars.githubusercontent.com/u/15053168?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Wasya1212)
+[![@BohdanShchur](https://avatars.githubusercontent.com/u/50678261?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/BohdanShchur)
 
 ### Quality control team
 

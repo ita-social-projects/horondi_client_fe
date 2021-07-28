@@ -6,7 +6,17 @@ import Popper from '@material-ui/core/Popper';
 import { MODAL_BUTTONS } from '../../translations/modal.translations';
 import { useStyles } from './modal.styles';
 
-const Modal = ({ message, itemName = [], onAction, isOpen, language, isCartModal = false }) => {
+const Modal = ({
+  message,
+  itemName = [],
+  onAction,
+  isOpen,
+  language,
+  isCartModal = false,
+  isEmpty = false,
+  isFullscreen = false,
+  content
+}) => {
   const [open, setOpen] = useState(isOpen);
   const styles = useStyles();
 
@@ -33,6 +43,18 @@ const Modal = ({ message, itemName = [], onAction, isOpen, language, isCartModal
     </div>
   );
 
+  const emptyBody = (
+    <div
+      className={isFullscreen ? `${styles.paper} ${styles.fullscreen}` : styles.paper}
+      data-cy='removing-modal'
+    >
+      <Button onClick={handleClose} variant='contained'>
+        {MODAL_BUTTONS[language].cancel}
+      </Button>
+      {content}
+    </div>
+  );
+
   return (
     <div>
       <Popper
@@ -41,7 +63,7 @@ const Modal = ({ message, itemName = [], onAction, isOpen, language, isCartModal
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >
-        <SimpleModal open={open}>{body}</SimpleModal>
+        <SimpleModal open={open}>{isEmpty ? emptyBody : body}</SimpleModal>
       </Popper>
     </div>
   );

@@ -23,7 +23,10 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   },
-
+  fullscreen: {
+    width: '90vw',
+    height: '90vh'
+  },
   buttonGroup: {
     display: 'flex',
     justifyContent: 'space-around',

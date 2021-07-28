@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   constructorWrapper: {
     padding: '20px',
     display: 'flex',
@@ -37,10 +37,12 @@ export const useStyles = makeStyles(() => ({
     }
   },
   imageContainer: {
-    maxHeight: '470px',
+    maxHeight: '650px',
     width: '35%',
     '@media (max-width: 768px)': {
-      width: '100%'
+      width: '100%',
+      marginTop: '50px',
+      marginBottom: '50px'
     }
   },
   image: {
@@ -99,5 +101,17 @@ export const useStyles = makeStyles(() => ({
   },
   topLine: {
     height: '1px'
+  },
+  button: {
+    color: theme.palette.button.normal.color,
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    '&:hover': {
+      color: theme.palette.button.hover.color,
+      backgroundColor: theme.palette.button.hover.backgroundColor
+    }
+  },
+  modal: {
+    width: '90vw',
+    height: '90vh'
   }
 }));

@@ -1,5 +1,5 @@
-import React, { useRef, useMemo, useLayoutEffect } from 'react';
-import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
+import React, { useRef, useMemo, useLayoutEffect, useState } from 'react';
+import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
 import { mergeImages } from 'horondi_merge_images';
 
@@ -16,15 +16,27 @@ import {
   constructorPartPrice,
   constructorPartNames
 } from '../../utils/constructor';
+import Modal from '../../components/modal';
+import ConstructorSubmit from './constructor-sumbit';
 
 const ImagesConstructor = () => {
+  const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
   const { values, images, prices, methods, language, currency } = useConstructor();
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-  const { MODEL, BASIC, PATTERN, BOTTOM, SIZE, DEFAULT_PRICE, TOTAL_PRICE, END_PRICE } =
-    CONSTRUCTOR_TITLES[language];
+  const {
+    MODEL,
+    BASIC,
+    PATTERN,
+    BOTTOM,
+    SIZE,
+    DEFAULT_PRICE,
+    TOTAL_PRICE,
+    END_PRICE,
+    MORE_OPTIONS
+  } = CONSTRUCTOR_TITLES[language];
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
@@ -57,6 +69,26 @@ const ImagesConstructor = () => {
     }
   }, [images.basicImage, images.patternImage, images.frontPocketImage, images.bottomImage]);
 
+  const showModal = () => {
+    setModalVisibility(true);
+  };
+
+  const onModalAction = (action) => {
+    setModalVisibility(false);
+  };
+
+  const onWishfulHandler = () => {
+    // if (isWishful) {
+    //   dispatch(removeItemFromWishlist(_id));
+    //   dispatch(setToastMessage(toastMessages.removedFromWishList));
+    //   dispatch(setToastSettings(toastSettings));
+    // } else {
+    //   dispatch(addItemToWishlist({ _id, name, basePrice, images: { primary } }));
+    //   dispatch(setToastMessage(toastMessages.addedToWishList));
+    //   dispatch(setToastSettings(toastSettings));
+    // }
+  };
+
   const options = (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[language].value}
@@ -81,32 +113,32 @@ const ImagesConstructor = () => {
     _.map(values.bottoms, options, [values.bottoms, language])
   );
 
-  const forForms = [
-    {
-      name: constructorImageInput.BASIC,
-      onChange: (e) => methods.changeBasic(e.target.value),
-      available: availableBasics,
-      helperText: BASIC
-    },
-    {
-      name: constructorImageInput.PATTERN,
-      onChange: (e) => methods.changePattern(e.target.value),
-      available: availablePatterns,
-      helperText: PATTERN
-    },
-    {
-      name: constructorImageInput.BOTTOM,
-      onChange: (e) => methods.changeBottom(e.target.value),
-      available: availableBottoms,
-      helperText: BOTTOM
-    },
-    {
-      name: constructorImageInput.SIZE,
-      onChange: (e) => methods.changeSize(e.target.value),
-      available: availableSizes,
-      helperText: SIZE
-    }
-  ];
+  // const forForms = [
+  //   {
+  //     name: constructorImageInput.BASIC,
+  //     onChange: (e) => methods.changeBasic(e.target.value),
+  //     available: availableBasics,
+  //     helperText: BASIC
+  //   },
+  //   {
+  //     name: constructorImageInput.PATTERN,
+  //     onChange: (e) => methods.changePattern(e.target.value),
+  //     available: availablePatterns,
+  //     helperText: PATTERN
+  //   },
+  //   {
+  //     name: constructorImageInput.BOTTOM,
+  //     onChange: (e) => methods.changeBottom(e.target.value),
+  //     available: availableBottoms,
+  //     helperText: BOTTOM
+  //   },
+  //   {
+  //     name: constructorImageInput.SIZE,
+  //     onChange: (e) => methods.changeSize(e.target.value),
+  //     available: availableSizes,
+  //     helperText: SIZE
+  //   }
+  // ];
 
   return (
     <div className={styles.constructorWrapper}>
@@ -169,6 +201,9 @@ const ImagesConstructor = () => {
             </NativeSelect>
             <FormHelperText>{SIZE}</FormHelperText>
           </FormControl>
+          <Button className={styles.button} onClick={showModal}>
+            {MORE_OPTIONS}
+          </Button>
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
@@ -221,8 +256,21 @@ const ImagesConstructor = () => {
               {currentCurrencyValue(language, currency)}
             </span>
           </h2>
+          <ConstructorSubmit onWishfulHandler={onWishfulHandler} />
         </div>
       </div>
+      {modalVisibility && (
+        <Modal
+          className={styles.modal}
+          setModalVisibility={setModalVisibility}
+          onAction={onModalAction}
+          isOpen={modalVisibility}
+          language={language}
+          isEmpty
+          isFullscreen
+          content={<h3>MODAL FOR CONSTRUCTOR</h3>}
+        />
+      )}
     </div>
   );
 };

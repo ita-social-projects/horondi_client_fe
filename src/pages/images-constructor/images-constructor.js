@@ -45,9 +45,9 @@ const ImagesConstructor = () => {
           new Promise((resolveImage, rejectImage) => {
             const img = new Image();
             img.onload = () => resolveImage(img);
-            // img.onerror = () => {
-            //   rejectImage(new Error());
-            // };
+            img.onerror = () => {
+              rejectImage(new Error());
+            };
             img.src = `${IMG_URL}${source}`;
           })
       );
@@ -77,18 +77,6 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  const onWishfulHandler = () => {
-    // if (isWishful) {
-    //   dispatch(removeItemFromWishlist(_id));
-    //   dispatch(setToastMessage(toastMessages.removedFromWishList));
-    //   dispatch(setToastSettings(toastSettings));
-    // } else {
-    //   dispatch(addItemToWishlist({ _id, name, basePrice, images: { primary } }));
-    //   dispatch(setToastMessage(toastMessages.addedToWishList));
-    //   dispatch(setToastSettings(toastSettings));
-    // }
-  };
-
   const options = (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[language].value}
@@ -113,33 +101,6 @@ const ImagesConstructor = () => {
     _.map(values.bottoms, options, [values.bottoms, language])
   );
 
-  // const forForms = [
-  //   {
-  //     name: constructorImageInput.BASIC,
-  //     onChange: (e) => methods.changeBasic(e.target.value),
-  //     available: availableBasics,
-  //     helperText: BASIC
-  //   },
-  //   {
-  //     name: constructorImageInput.PATTERN,
-  //     onChange: (e) => methods.changePattern(e.target.value),
-  //     available: availablePatterns,
-  //     helperText: PATTERN
-  //   },
-  //   {
-  //     name: constructorImageInput.BOTTOM,
-  //     onChange: (e) => methods.changeBottom(e.target.value),
-  //     available: availableBottoms,
-  //     helperText: BOTTOM
-  //   },
-  //   {
-  //     name: constructorImageInput.SIZE,
-  //     onChange: (e) => methods.changeSize(e.target.value),
-  //     available: availableSizes,
-  //     helperText: SIZE
-  //   }
-  // ];
-
   return (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
@@ -157,14 +118,6 @@ const ImagesConstructor = () => {
 
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
-          {/* {forForms.map((el, index) => (
-            <FormControl key={index}>
-              <NativeSelect key={index} name={el.name} onChange={el.onChange}>
-                {el.available}
-              </NativeSelect>
-              <FormHelperText>{el.helperText}</FormHelperText>
-            </FormControl>
-          ))} */}
           <FormControl>
             <NativeSelect
               name={constructorImageInput.BASIC}
@@ -256,7 +209,7 @@ const ImagesConstructor = () => {
               {currentCurrencyValue(language, currency)}
             </span>
           </h2>
-          <ConstructorSubmit onWishfulHandler={onWishfulHandler} />
+          <ConstructorSubmit />
         </div>
       </div>
       {modalVisibility && (

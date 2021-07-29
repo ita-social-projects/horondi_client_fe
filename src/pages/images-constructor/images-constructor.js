@@ -243,7 +243,7 @@ const ImagesConstructor = () => {
                     </span>
                   </li>
                 ) : (
-                  <div />
+                  <div key={index} />
                 )
               )}
               <div className={`${styles.line} ${styles.bottomLine}`} />

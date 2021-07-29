@@ -26,7 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   formWrapper: {
-    width: '25%',
+    width: '30%',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 768px)': {
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     maxHeight: '650px',
-    width: '35%',
+    width: '30%',
     '@media (max-width: 768px)': {
       width: '100%',
       marginTop: '50px',
@@ -52,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex'
   },
   pricesInfoWrapper: {
-    width: '25%',
+    width: '30%',
     '@media (max-width: 768px)': {
       width: '100%'
     }

@@ -15,6 +15,7 @@ const routes = {
   pathToRegister: '/register',
   pathToProducts: '/product',
   pathToErrorPage: '/error-page',
+  pathToNotFoundPage: '/not-found',
   pathToBackpacks: '/backpacks',
   pathToCategory: '/:category',
   pathToCheckout: '/checkout',

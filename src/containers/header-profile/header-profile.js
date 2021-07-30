@@ -102,7 +102,8 @@ const HeaderProfile = ({ fromSideBar }) => {
           (pathName === pathToRegister || pathName === pathToLogin ? pathToMain : pathName) +
           history.location.search;
         sessionStorage.setItem(RETURN_PAGE, returnPath);
-        handleRedirect(pathToLogin);
+        handleRedirect('/not-found');
+        // handleRedirect(pathToLogin);
       }
     }
   ];

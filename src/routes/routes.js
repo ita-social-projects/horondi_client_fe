@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
 import { history } from '../store/store';
@@ -20,6 +20,7 @@ const {
   pathToThanks,
   pathToRegister,
   pathToErrorPage,
+  pathToNotFoundPage,
   pathToNews,
   pathToSingleNews,
   pathToConstructor,
@@ -49,6 +50,7 @@ const Confirmation = lazy(() => import('../pages/confirmation'));
 const Recovery = lazy(() => import('../pages/recovery'));
 const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
+const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
 const Cart = lazy(() => import('../pages/cart'));
 const Checkout = lazy(() => import('../containers/checkout'));
@@ -76,6 +78,7 @@ const Routes = () => {
             <Switch>
               <Route path={pathToMain} exact component={Home} />
               <Route path={pathToErrorPage} exact component={ErrorPage} />
+              <Route path={pathToNotFoundPage} exact component={NotFoundPage} />
               <Route path={pathToNews} exact component={NewsPage} />
               <Route path={pathToSingleNews} exact component={NewsDetail} />
               <Route path={pathToConstructor} exact component={ImagesConstructor} />
@@ -139,6 +142,7 @@ const Routes = () => {
                 }}
               />
               <Route path={pathToChosenProduct} exact component={ProductDetails} />
+              <Route component={NotFoundPage} />
             </Switch>
           </div>
           <AppFooter />

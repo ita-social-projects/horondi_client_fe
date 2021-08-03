@@ -132,6 +132,7 @@ const Routes = () => {
                 path={pathToCategory}
                 exact
                 render={(data) => {
+                  console.log('DASFBDHLSFLDFLHSDFLSDLSDFLDFLUSDFLS', data.match.params);
                   const { category, model } = data.match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>
@@ -142,7 +143,7 @@ const Routes = () => {
                 }}
               />
               <Route path={pathToChosenProduct} exact component={ProductDetails} />
-              <Route component={NotFoundPage} />
+              <Redirect to={pathToNotFoundPage} />
             </Switch>
           </div>
           <AppFooter />

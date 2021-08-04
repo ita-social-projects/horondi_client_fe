@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useStyles } from './not-found-page.styles';
 import {
@@ -18,7 +18,6 @@ import routes from '../../const/routes';
 const { pathToMain } = routes;
 
 const NotFoundPage = () => {
-  const dispatch = useDispatch();
   const styles = useStyles();
 
   const history = useHistory();

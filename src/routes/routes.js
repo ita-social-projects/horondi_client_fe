@@ -132,7 +132,6 @@ const Routes = () => {
                 path={pathToCategory}
                 exact
                 render={(data) => {
-                  console.log('DASFBDHLSFLDFLHSDFLSDLSDFLDFLUSDFLS', data.match.params);
                   const { category, model } = data.match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>

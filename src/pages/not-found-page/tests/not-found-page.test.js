@@ -57,7 +57,6 @@ describe('', () => {
   });
 
   it('Should click back-page button', () => {
-    console.log(Object.keys(wrapper));
     const btn = wrapper.find('button');
     btn.simulate('click');
 

@@ -19,6 +19,11 @@ export const ERROR_PAGE_IMAGES = {
   dark: './images/error-page/error-dark.png'
 };
 
+export const NOT_FOUND_PAGE_IMAGES = {
+  light: './images/not-found-page/bag.png',
+  dark: './images/not-found-page/bag.png'
+};
+
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
 

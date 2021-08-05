@@ -23,7 +23,7 @@ const ModelItem = ({ model }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
-  const pathToModel = `/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`;
+  const pathToModel = `/catalog/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`;
 
   const handleClickToModel = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));

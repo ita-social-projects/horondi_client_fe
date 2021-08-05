@@ -92,7 +92,8 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               getFondyData({
                 order: orderInputData(data, deliveryType, cartItems, language),
                 currency: getCurrentCurrency(currency),
-                amount: String(totalPriceToPay)
+                amount: String(totalPriceToPay),
+                language
               })
             )
           : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&

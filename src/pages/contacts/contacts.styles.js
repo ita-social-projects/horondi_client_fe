@@ -66,6 +66,9 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: '30px'
     }
   },
+  mapImageInactive: {
+    display: 'none'
+  },
   mapImage: {
     width: '100%',
     float: 'none',

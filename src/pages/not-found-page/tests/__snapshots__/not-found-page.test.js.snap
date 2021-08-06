@@ -367,7 +367,7 @@ exports[`Should render 404 page 1`] = `
                 Ой! Щось пішло не так
               </h3>
               <p>
-                Сторінка, яку ти шукав не знайдена.
+                Сторінку, яку ти шукав, не знайдено.
                  
                 <Link
                   className="makeStyles-link-2"

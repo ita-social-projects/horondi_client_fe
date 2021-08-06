@@ -22,7 +22,6 @@ const routes = {
   pathToCart: '/cart',
   pathToMain: '/',
   pathToThanks: '/thanks',
-  pathToPurchases: '/products',
   pathToProfile: '/profile',
   pathToTerms: '/pages/terms',
   pathToUserAgreement: '/pages/user-agreement'

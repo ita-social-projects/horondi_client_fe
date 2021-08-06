@@ -144,7 +144,7 @@ export const formRegExp = {
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
-  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
+  link: /\b(?:(?:https?|ftp|http):\/\/|www\.)[-a-z0-9+&@#%?=~_|!:,.;]*[-a-z0-9+&@#%=~_|]/gm
 };
 
 export const placeholders = {

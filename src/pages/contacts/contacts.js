@@ -52,8 +52,7 @@ const Contacts = ({ fromCheckout }) => {
                 const i = language ? 4 : 3;
                 return (
                   <div key={el}>
-                    <span className={styles.day}>{el.slice(0, i)}</span>
-                    <span className={styles.time}>{el.slice(i)}</span>
+                    <span className={styles.day}>{el.slice(i - (language ? 4 : 3))}</span>
                   </div>
                 );
               })}

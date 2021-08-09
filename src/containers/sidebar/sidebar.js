@@ -52,7 +52,12 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
     () => (
       <div className={styles.subList}>
         {sideBarSubList.map((item) => (
-          <Link key={item.link} to={item.link} className={styles.subItem}>
+          <Link
+            key={item.link}
+            to={item.link}
+            className={styles.subItem}
+            onClick={() => setIsMenuOpen(false)}
+          >
             <span>{item.name[language]}</span>
           </Link>
         ))}
@@ -73,8 +78,12 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
         <span className={styles.constructorItem}>{CONSTRUCTOR[language].value}</span>
       </Link>
       {subList}
-      <FooterLinks socialIconsStyles={styles.socialIconsStyles} position='center' />
-      <SidemenuRightBar fromSideBar />
+      <FooterLinks
+        socialIconsStyles={styles.socialIconsStyles}
+        position='center'
+        setIsMenuOpen={setIsMenuOpen}
+      />
+      <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
     </Drawer>
   );
 };

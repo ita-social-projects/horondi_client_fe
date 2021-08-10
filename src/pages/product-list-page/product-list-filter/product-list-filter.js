@@ -22,7 +22,7 @@ import { countPerPage, sort } from '../../../configs';
 import useProductFilters from '../../../hooks/use-product-filters';
 import routes from '../../../const/routes';
 
-const { pathToPurchases } = routes;
+const { pathToCategory } = routes;
 
 const ProductListFilter = () => {
   const styles = useStyles();
@@ -37,7 +37,7 @@ const ProductListFilter = () => {
     const sortQuery = searchParams.get(sort);
     const quantityPerPage = searchParams.get(countPerPage);
 
-    history.push(`${pathToPurchases}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
+    history.push(`${pathToCategory}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
     dispatch(getFiltredProducts({}));
     dispatch(setPriceFilter([]));
     dispatch(setModelsFilter([]));

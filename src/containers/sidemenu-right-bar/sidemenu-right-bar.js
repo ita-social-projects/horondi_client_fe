@@ -23,7 +23,7 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
         <CartHeader fromSideBar={fromSideBar} />
       </div>
       <div className={styles.headerProfile}>
-        <HeaderProfile fromSideBar={fromSideBar} />
+        <HeaderProfile fromSideBar={fromSideBar} setIsMenuOpen={setIsMenuOpen} />
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
   const setQuantityFromInput = (e) => {
     let num;
+
     if (e.target.value.match(/[^0-9]/g)) {
       num = 1;
     } else if (e.target.value < 1) {

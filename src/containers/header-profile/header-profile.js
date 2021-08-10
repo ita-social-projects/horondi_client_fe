@@ -30,7 +30,7 @@ const {
   pathToMain
 } = routes;
 
-const HeaderProfile = ({ fromSideBar }) => {
+const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
     userData: User.userData,
     lightMode: Theme.lightMode,
@@ -83,7 +83,10 @@ const HeaderProfile = ({ fromSideBar }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].wishlist,
       icon: <FavoriteIcon />,
-      clickHandler: () => handleRedirect(pathToWishlist)
+      clickHandler: () => {
+        setIsMenuOpen(false);
+        return handleRedirect(pathToWishlist);
+      }
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].changeTheme,
@@ -97,6 +100,7 @@ const HeaderProfile = ({ fromSideBar }) => {
       value: PROFILE_OPTIONS_VALUES[language].logIn,
       icon: <ExitToAppIcon />,
       clickHandler: () => {
+        setIsMenuOpen(false);
         const pathName = history.location.pathname;
         const returnPath =
           (pathName === pathToRegister || pathName === pathToLogin ? pathToMain : pathName) +

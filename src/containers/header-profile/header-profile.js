@@ -115,17 +115,26 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     {
       value: PROFILE_OPTIONS_VALUES[language].profile,
       icon: <PersonOutlineIcon />,
-      clickHandler: () => handleRedirect(pathToProfile)
+      clickHandler: () => {
+        setIsMenuOpen(false);
+        return handleRedirect(pathToProfile);
+      }
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].orderHistory,
       icon: <HistoryIcon />,
-      clickHandler: () => handleRedirect(pathToOrderHistory)
+      clickHandler: () => {
+        setIsMenuOpen(false);
+        return handleRedirect(pathToOrderHistory);
+      }
     },
     {
       value: PROFILE_OPTIONS_VALUES[language].logOut,
       icon: <ExitToAppIcon />,
-      clickHandler: handleLogout
+      clickHandler: () => {
+        setIsMenuOpen(false);
+        return handleLogout();
+      }
     }
   ];
 

@@ -117,7 +117,7 @@ export function* handleUserLogin({ payload }) {
 
     yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
-    // yield put(push(returnPage));
+    yield put(push(returnPage));
   } catch (e) {
     yield call(handleUserError, e);
   }

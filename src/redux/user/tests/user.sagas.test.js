@@ -118,7 +118,7 @@ describe('user sagas tests', () => {
       })
       .run());
 
-  it.skip('should handle user login', () =>
+  it('should handle user login', () =>
     expectSaga(handleUserLogin, { payload })
       .put(setUserLoading(true))
       .provide([

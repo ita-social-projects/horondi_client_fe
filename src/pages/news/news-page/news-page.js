@@ -23,7 +23,7 @@ const NewsPage = () => {
   const styles = useStyles();
   if (loading) {
     return (
-      <div className={styles.center}>
+      <div>
         <Loader />
       </div>
     );

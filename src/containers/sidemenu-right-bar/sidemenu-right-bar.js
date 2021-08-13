@@ -7,7 +7,7 @@ import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';
 
-const SidemenuRightBar = ({ fromSideBar }) => {
+const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
 
   return (
@@ -19,11 +19,11 @@ const SidemenuRightBar = ({ fromSideBar }) => {
       <div className={styles.language}>
         <Language fromSideBar={fromSideBar} />
       </div>
-      <div className={styles.cartHeader}>
+      <div className={styles.cartHeader} onClick={() => setIsMenuOpen(false)}>
         <CartHeader fromSideBar={fromSideBar} />
       </div>
       <div className={styles.headerProfile}>
-        <HeaderProfile fromSideBar={fromSideBar} />
+        <HeaderProfile fromSideBar={fromSideBar} setIsMenuOpen={setIsMenuOpen} />
       </div>
     </div>
   );

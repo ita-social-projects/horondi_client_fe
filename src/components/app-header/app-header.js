@@ -42,7 +42,7 @@ const AppHeader = () => {
               {LOGO}
             </Link>
           </Typography>
-          <HeaderRightBar />
+          <HeaderRightBar setIsMenuOpen={setIsMenuOpen} />
         </Toolbar>
       </AppBar>
       <div className={styles.headerspace} />

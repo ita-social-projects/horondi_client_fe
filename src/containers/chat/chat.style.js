@@ -87,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     right: '160px',
     top: '10%',
-    bottom: '12%',
+    bottom: '10%',
     width: '320px',
     height: '600px',
     zIndex: 1200,
@@ -97,6 +97,10 @@ export const useStyles = makeStyles((theme) => ({
       width: '90%',
       right: '5%',
       top: '8%'
+    },
+    '@media (max-height: 750px)': {
+      height: '80%',
+      top: '15%'
     }
   }),
   cancelIcon: {

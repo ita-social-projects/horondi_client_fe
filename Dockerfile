@@ -16,5 +16,5 @@ COPY --from=build /app/get-env.sh /usr/share/nginx/html/get-env.sh
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 RUN chmod +x /usr/share/nginx/html/get-env.sh
 RUN cat /etc/nginx/conf.d/default.conf
-EXPOSE 80 2222
+EXPOSE 80
 CMD sh /usr/share/nginx/html/get-env.sh && nginx -g 'daemon off;'

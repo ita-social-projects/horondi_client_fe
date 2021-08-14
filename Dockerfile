@@ -1,7 +1,7 @@
 # build environment
 FROM node:14.15.4-alpine3.10 as build
 WORKDIR /app
-COPY package.json ./
+COPY package*.json ./
 RUN apk update && \
     apk upgrade && \
     apk add git

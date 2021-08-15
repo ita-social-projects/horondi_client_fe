@@ -3,13 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
+
 import {
   CART_TABLE_FIELDS,
   CART_TITLES,
   CART_BUTTON_TITLES
 } from '../../../../translations/cart.translations';
-import { MODAL_DELETE_ALL_MESSAGE } from '../../../../translations/modal.translations';
-import { resetCart, cleanUserCart } from '../../../../redux/cart/cart.actions';
+
+import {
+  MODAL_DELETE_ITEM_MESSAGE,
+  MODAL_DELETE_ALL_MESSAGE
+} from '../../../../translations/modal.translations';
+
+import {
+  resetCart,
+  cleanUserCart,
+  deleteProductFromUserCart,
+  removeItemFromCart
+} from '../../../../redux/cart/cart.actions';
+
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
@@ -19,6 +31,8 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
   const dispatch = useDispatch();
 
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
+  const [modalItem, setModalItem] = useState({});
 
   const cartItems = items.map((item) => (
     <CartItem
@@ -30,6 +44,8 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
       user={user}
       cartLoading={cartLoading}
       cartQuantityLoading={cartQuantityLoading}
+      setModalVisibility={setRemoveOneModalVisibility}
+      setModalItem={setModalItem}
     />
   ));
 
@@ -44,6 +60,18 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     setModalVisibility(false);
   };
 
+  const onRemoveOneModalAction = (action) => {
+    if (action) {
+      if (user) {
+        dispatch(deleteProductFromUserCart({ userId: user._id, items: modalItem }));
+      } else {
+        dispatch(removeItemFromCart(modalItem));
+      }
+    }
+
+    setRemoveOneModalVisibility(false);
+  };
+
   return (
     <>
       {modalVisibility && (
@@ -52,6 +80,17 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
             message={MODAL_DELETE_ALL_MESSAGE[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
+            language={language}
+            isCartModal
+          />
+        </>
+      )}
+      {removeOneModalVisibility && (
+        <>
+          <Modal
+            message={MODAL_DELETE_ITEM_MESSAGE[language]}
+            isOpen={removeOneModalVisibility}
+            onAction={onRemoveOneModalAction}
             language={language}
             isCartModal
           />

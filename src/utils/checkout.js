@@ -110,7 +110,7 @@ const productItemsInput = (cartItems) =>
   }));
 
 export const orderInputData = (data, deliveryType, cartItems, language) => ({
-  user: {
+  recipient: {
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,

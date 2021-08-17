@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
     right: '12px',
     '@media (max-width: 768px)': {
       width: '40px',
-      height:'40px'
+      height: '40px'
     }
   },
   msgIcon: {
@@ -64,7 +64,7 @@ export const useStyles = makeStyles((theme) => ({
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
       width: '40px',
-      height:'40px'
+      height: '40px'
     },
     '&:hover': {
       background: '#E4B200'
@@ -86,16 +86,21 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     right: '160px',
-    bottom: '12%',
+    top: '10%',
+    bottom: '10%',
     width: '320px',
     height: '600px',
     zIndex: 1200,
     background: themeMode ? 'white' : '#232323',
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
-      width: '100%',
-      right: 0,
-      top: '40px'
+      width: '90%',
+      right: '5%',
+      top: '8%'
+    },
+    '@media (max-height: 750px)': {
+      height: '80%',
+      top: '15%'
     }
   }),
   cancelIcon: {

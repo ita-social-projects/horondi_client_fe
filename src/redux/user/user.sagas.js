@@ -90,6 +90,14 @@ export function* handleGoogleUserLogin({ payload }) {
     setToLocalStorage(ACCESS_TOKEN, user.token);
     setToLocalStorage(WISHLIST_KEY, user.wishlist);
     yield put(setUser({ ...user, purchasedProducts }));
+    yield put(setWishlist(user.wishlist));
+    const cartFromLc = getFromLocalStorage(cartKey);
+    const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
+
+    yield put(setCart(usersCart.cart.items));
+    yield put(setCartTotalPrice(usersCart.cart.totalPrice));
+    setToLocalStorage(cartKey, usersCart.cart.items);
+
     yield put(push(pathToProfile));
   } catch (e) {
     yield call(handleUserError, e);

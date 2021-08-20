@@ -81,6 +81,7 @@ import {
 import { handleUserIsBlocked } from '../../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../../const/error-messages';
 import { USER_ERROR } from '../../../translations/user.translations';
+import { clearLocalStorage } from '../../../services/local-storage.service';
 
 describe('user sagas tests', () => {
   it('should handle google user login ', () =>
@@ -89,9 +90,13 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getGoogleUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
       ])
       .put(setUser({ ...user, purchasedProducts }))
+      .put(setWishlist(user.wishlist))
+      .put(setCart(userCart.cart.items))
+      .put(setCartTotalPrice(userCart.cart.totalPrice))
       .put(push(routes.pathToProfile))
       .put(setUserLoading(false))
       .hasFinalState({
@@ -103,8 +108,9 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(7);
+        expect(analysisCall).toHaveLength(3);
+        clearLocalStorage();
       }));
 
   it('should hangle google login error', () =>

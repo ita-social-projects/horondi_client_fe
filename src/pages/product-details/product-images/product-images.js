@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
+import Zoom from 'react-img-zoom';
 import { useStyles } from './product-images.styles';
 
 import { IMGS_VIEWER, IMG_ALT_INFO } from '../../../translations/product-details.translations';
@@ -21,6 +22,8 @@ const ProductImages = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
+  const [isOpenZoom, setIsOpenZoom] = useState(false);
+  const [isZoomChange, setIsZoomChange] = useState(false);
 
   const initImages = useMemo(
     () => [images.primary.large, ...images.additional.map(({ large }) => large)],
@@ -56,13 +59,24 @@ const ProductImages = () => {
     setCurrImg(idx);
   };
 
+  const getOffset = (el) => {
+    const rect = el.getBoundingClientRect();
+    return {
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY
+    };
+  };
+
   const primaryImage = (
-    <img
-      className={styles.primaryImage}
-      src={IMG_URL + images.primary.large}
-      onClick={() => openImage(0)}
-      alt={IMG_ALT_INFO[language].value}
-    />
+    <div className={styles.imageContainer}>
+      <img
+        className={styles.primaryImage}
+        src={IMG_URL + images.primary.large}
+        onClick={() => openImage(0)}
+        alt={IMG_ALT_INFO[language].value}
+      />
+      <div className={styles.zoomArea} />
+    </div>
   );
 
   const sideImages = imagesSet
@@ -77,7 +91,7 @@ const ProductImages = () => {
         onClick={() => openImage(i + 1)}
       />
     ));
-
+  console.log(`img${  IMG_URL  }${images.primary.large}`);
   return (
     <div>
       <ImgsViewer
@@ -94,8 +108,16 @@ const ProductImages = () => {
         rightArrowTitle={IMGS_VIEWER[language].next}
       />
       <div className={styles.images}>
-        {sideImages}
-        {primaryImage}
+        <div>{sideImages}</div>
+        <div className={styles.imagePreviewContainer}>
+          <Zoom
+            img={IMG_URL + images.primary.large}
+            zoomScale={3}
+            height={400}
+            width={400}
+            transitionTime={0.5}
+          />
+        </div>
       </div>
     </div>
   );

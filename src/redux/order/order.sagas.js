@@ -56,8 +56,8 @@ export function* handleGetFondyUrl({ payload }) {
       newOrder._id,
       payload.currency,
       payload.currency === CURRENCY.UAH
-        ? (newOrder.totalPriceToPay[0].value * 100).toString()
-        : (newOrder.totalPriceToPay[1].value * 100).toString(),
+        ? newOrder.totalPriceToPay[0].value.toString()
+        : newOrder.totalPriceToPay[1].value.toString(),
       payload.language
     );
 

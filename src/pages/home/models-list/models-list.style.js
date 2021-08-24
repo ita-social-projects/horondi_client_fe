@@ -20,7 +20,7 @@ export const useStyles = makeStyles(() => ({
   modelsWrapper: ({ isModelsVisible }) => ({
     display: 'flex',
     flexFlow: 'wrap',
-    width: 1280,
+    width: '85%',
     height: isModelsVisible ? '66%' : 210,
     boxSizing: 'border-box',
     justifyContent: 'center',

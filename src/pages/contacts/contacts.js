@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
@@ -9,6 +9,9 @@ import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 
 const Contacts = ({ fromCheckout }) => {
+  const [imageStatus, setImageStatus] = useState(true);
+  const [imageVisibility, setImageVisibility] = useState(false);
+
   const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
   const styles = useStyles();
   if (loading) {
@@ -19,12 +22,22 @@ const Contacts = ({ fromCheckout }) => {
     );
   }
 
+  const onLoadImageError = () => {
+    setImageStatus(false);
+  };
+
+  const onImageLoad = () => {
+    setImageVisibility(true);
+  };
+
+  const cardVisibilityStyles = imageStatus && imageVisibility;
+
   const contactsDisplay = contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
           <Tooltip title={CONTACTS_PAGE_TITLES[language].showOnGoogleMaps}>
-            <Card>
+            <Card className={!cardVisibilityStyles && styles.mapImageInactive}>
               <a
                 target='_blank'
                 rel='noopener noreferrer'
@@ -33,6 +46,8 @@ const Contacts = ({ fromCheckout }) => {
               >
                 <img
                   className={styles.mapImage}
+                  onError={onLoadImageError}
+                  onLoad={onImageLoad}
                   src={`${IMG_URL}${contact.images[language].value.medium}`}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
@@ -52,8 +67,7 @@ const Contacts = ({ fromCheckout }) => {
                 const i = language ? 4 : 3;
                 return (
                   <div key={el}>
-                    <span className={styles.day}>{el.slice(0, i)}</span>
-                    <span className={styles.time}>{el.slice(i)}</span>
+                    <span className={styles.day}>{el.slice(i - (language ? 4 : 3))}</span>
                   </div>
                 );
               })}

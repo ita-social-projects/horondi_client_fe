@@ -327,7 +327,12 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@Walleriy](https://avatars.githubusercontent.com/u/39501370?s=200)](https://github.com/Walleriy)
 [![@AndronShermeta](https://avatars.githubusercontent.com/u/73708298?s=200)](https://github.com/AndronShermeta)
 [![@khrystynaDm1307](https://avatars.githubusercontent.com/u/53223985?s=200)](https://github.com/khrystynaDm1307)
-
+[![@Vlodkojr](https://avatars.githubusercontent.com/u/45718327?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Vlodkojr)
+[![@Elugormo](https://avatars.githubusercontent.com/u/53963530?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Elugormo)
+[![@Mabonik](https://avatars.githubusercontent.com/u/61788391?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Mabonik)
+[![@NetkachovaAnastasiya](https://avatars.githubusercontent.com/u/60103758?s=200&u=181e62bf4f25b07122f06ce677e73ddd34021391&v=4)](https://github.com/NetkachovaAnastasiya)
+[![@Serhii-Ahafonov](https://avatars.githubusercontent.com/u/61708033?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Serhii-Ahafonov)
+[![@Palidovych](https://avatars.githubusercontent.com/u/54260733?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Palidovych)
 ### Quality control team
 
 [![@HrytsykOlya](https://avatars1.githubusercontent.com/u/65678737?s=200&u=181e62bf4f25b07122f06ce677e73ddd34021391&v=4)](https://github.com/HrytsykOlya)
@@ -354,11 +359,17 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@Evgeniya-Volkova](https://avatars.githubusercontent.com/u/76967400?s=200)](https://github.com/Evgeniya-Volkova)
 [![@nadiya17](https://avatars.githubusercontent.com/u/47214428?s=200)](https://github.com/nadiya17)
 [YevgeniiSt](https://github.com/YevgeniiSt)
+[![@asIgnat](https://avatars.githubusercontent.com/u/62054774?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/asIgnat)
+[![@rrarock](https://avatars.githubusercontent.com/u/84689435?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/rrarock)
+[![@olesmack](https://avatars.githubusercontent.com/u/84582793?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/olesmack)
+[![@NataliaAndriiets](https://avatars.githubusercontent.com/u/84592689?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/NataliaAndriiets)
+[![@xfightr](https://avatars.githubusercontent.com/u/85612818?s=200&u=285aa0df8435a6ec16edb6ba26b4718d82693bf9&v=4)](https://github.com/xfightr)
 
 ### Database team
 
 [![@YukiAmeka](https://avatars2.githubusercontent.com/u/42378468?s=200&u=c749e6713546c371b801786ecdd678dd1d152f42&v=4)](https://github.com/YukiAmeka)
-
+[![@yaremich](https://avatars.githubusercontent.com/u/58247822?s=200&u=db2f3b6459c080079c5c5e4b52da61cd18b4e223&v=4)](https://github.com/yaremich)
+[![@Meamzy](https://avatars.githubusercontent.com/u/48360177?s=200&u=db2f3b6459c080079c5c5e4b52da61cd18b4e223&v=4)](https://github.com/Meamzy)
 ### DevOps team
 
 [![@SofiaDemyanovska](https://avatars1.githubusercontent.com/u/48492789?s=200&u=cb0520a8498667594ded0db8e29cdd3ec5529578&v=4)](https://github.com/SofiaDemyanovska)
@@ -367,6 +378,8 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@rholovchak](https://avatars.githubusercontent.com/u/68376355?s=200)](https://github.com/rholovchak)
 
 ---
+### Designer team
+[![@Nikadsgn](https://avatars.githubusercontent.com/u/87034205?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Nikadsgn)
 
 ## FAQ
 

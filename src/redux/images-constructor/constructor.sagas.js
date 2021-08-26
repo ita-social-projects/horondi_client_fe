@@ -6,6 +6,7 @@ import constructorBottomSaga from './constructor-bottom/constructor-bottom.sagas
 import constructorFrontPocketSaga from './constructor-front-pocket/constructor-front-pocket.sagas';
 import constructorModelSaga from './constructor-model/constructor-model.sagas';
 import constructorPatternSaga from './constructor-pattern/constructor-pattern.sagas';
+import constructorSizeSaga from './constructor-size/constructor-size.sagas';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
@@ -31,6 +32,7 @@ export function* constructorSaga() {
     constructorBottomSaga(),
     constructorFrontPocketSaga(),
     constructorModelSaga(),
-    constructorPatternSaga()
+    constructorPatternSaga(),
+    constructorSizeSaga()
   ]);
 }

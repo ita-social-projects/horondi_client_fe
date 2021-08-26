@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   constructorWrapper: {
     padding: '20px',
     display: 'flex',
@@ -19,19 +19,31 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '50px 100px'
+    padding: '50px 100px',
+    '@media (max-width: 768px)': {
+      padding: 0,
+      flexDirection: 'column'
+    }
   },
   formWrapper: {
-    width: '25%',
+    width: '30%',
     display: 'flex',
     flexDirection: 'column',
+    '@media (max-width: 768px)': {
+      width: '100%'
+    },
     '& > div': {
       margin: '15px 0'
     }
   },
   imageContainer: {
-    maxHeight: '470px',
-    width: '35%'
+    maxHeight: '650px',
+    width: '30%',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      marginTop: '50px',
+      marginBottom: '50px'
+    }
   },
   image: {
     width: '100%'
@@ -40,14 +52,27 @@ export const useStyles = makeStyles(() => ({
     display: 'flex'
   },
   pricesInfoWrapper: {
-    width: '25%'
+    width: '30%',
+    '@media (max-width: 768px)': {
+      width: '100%'
+    }
   },
   headerWrapper: {
-    marginLeft: '5%'
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   textWrapper: {
     fontSize: '17px',
-    marginBottom: '12px'
+    marginBottom: '12px',
+    '& ul': {
+      position: 'relative',
+      padding: 0
+    },
+    '@media (max-width: 768px)': {
+      '& ul': {
+        padding: 0
+      }
+    }
   },
   priceWrapper: {
     '& ul': {
@@ -65,5 +90,28 @@ export const useStyles = makeStyles(() => ({
   },
   li: {
     marginTop: '25px'
+  },
+  line: {
+    width: '100%',
+    background: '#00000050',
+    margin: '10px 0 10px 0'
+  },
+  bottomLine: {
+    height: '2px'
+  },
+  topLine: {
+    height: '1px'
+  },
+  button: {
+    color: theme.palette.button.normal.color,
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    '&:hover': {
+      color: theme.palette.button.hover.color,
+      backgroundColor: theme.palette.button.hover.backgroundColor
+    }
+  },
+  modal: {
+    width: '90vw',
+    height: '90vh'
   }
 }));

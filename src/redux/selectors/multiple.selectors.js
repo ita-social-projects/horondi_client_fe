@@ -72,7 +72,8 @@ export const selectConstructor = ({ Constructor }) => ({
   modelLoading: Constructor.constructorModel.modelLoading,
   basicPrice: Constructor.constructorBasic.basePrice,
   frontPocketPrice: Constructor.constructorFrontPocket.basePrice,
-  bottomPrice: Constructor.constructorBottom.basePrice
+  bottomPrice: Constructor.constructorBottom.basePrice,
+  sizePrice: Constructor.constructorSize.additionalPrice
 });
 export const selectLangAndCurrency = ({ Language, Currency }) => ({
   language: Language.language,

@@ -110,7 +110,7 @@ const loginUser = async (data) => {
   return result?.data?.loginUser;
 };
 
-const getGoogleUser = async (payload) => {
+const getGoogleUser = async ({ idToken }) => {
   const getGoogleUserMutation = `
     mutation($idToken:String!){googleUser(idToken:$idToken){
       _id
@@ -126,7 +126,7 @@ const getGoogleUser = async (payload) => {
 
 }
   `;
-  const result = await getItems(getGoogleUserMutation, { payload });
+  const result = await getItems(getGoogleUserMutation, { idToken });
 
   return result?.data?.googleUser;
 };
@@ -152,7 +152,7 @@ const recoverUser = async (data) => {
     recoverUser(email: $email, language: $language)
   }
   `;
-  const result = await setItems(recoverUserMutation, { data });
+  const result = await setItems(recoverUserMutation, data);
 
   return result?.data?.recoverUser;
 };
@@ -190,7 +190,7 @@ const resetPassword = async (data) => {
     resetPassword(password: $password, token: $token)
   }
   `;
-  const result = await setItems(resetPasswordMutation, { data });
+  const result = await setItems(resetPasswordMutation, data);
 
   return result?.data?.resetPassword;
 };

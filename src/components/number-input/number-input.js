@@ -12,8 +12,12 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
   const setQuantityFromInput = (e) => {
     let num;
-    if (e.target.value < 1) {
+    if (e.target.value.match(/[^0-9]/g)) {
       num = 1;
+    } else if (e.target.value < 1) {
+      num = 1;
+    } else if (e.target.value > 1000) {
+      num = 1000;
     } else {
       num = e.target.value;
     }
@@ -39,7 +43,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
         id='filled-basic'
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         onChange={setQuantityFromInput}
-        inputProps={{ style: { textAlign: 'center', width: '25px', height: '15px' } }}
+        inputProps={{ style: { textAlign: 'center', width: '40px', height: '15px' } }}
       />
       <Button
         className={styles.button}
@@ -47,6 +51,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
           onChangeQuantity(quantity + 1);
           setInputValue(quantity + 1);
         }}
+        disabled={quantity >= 1000}
       >
         <AddIcon />
       </Button>

@@ -66,6 +66,9 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: '30px'
     }
   },
+  mapImageInactive: {
+    display: 'none'
+  },
   mapImage: {
     width: '100%',
     float: 'none',
@@ -82,11 +85,6 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '1em',
       lineHeight: '1.43'
     }
-  },
-  day: {
-    display: 'inline-block',
-    marginBottom: '10px',
-    width: 40
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1

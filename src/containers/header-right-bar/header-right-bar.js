@@ -7,16 +7,20 @@ import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';
 
-const HeaderRightBar = ({ fromSideBar }) => {
+const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
 
   return (
     <div className={styles.root}>
       <SearchBar fromSideBar={fromSideBar} />
-      <Currency fromSideBar={fromSideBar} />
-      <Language fromSideBar={fromSideBar} />
+      <div className={styles.currency}>
+        <Currency fromSideBar={fromSideBar} />
+      </div>
+      <div className={styles.language}>
+        <Language fromSideBar={fromSideBar} />
+      </div>
       <CartHeader fromSideBar={fromSideBar} />
-      <HeaderProfile fromSideBar={fromSideBar} />
+      <HeaderProfile fromSideBar={fromSideBar} setIsMenuOpen={setIsMenuOpen} />
     </div>
   );
 };

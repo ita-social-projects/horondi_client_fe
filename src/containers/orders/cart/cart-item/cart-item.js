@@ -10,12 +10,12 @@ import _ from 'lodash';
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
+
 import {
   setCartItemQuantity,
-  changeCartItemUserQuantity,
-  deleteProductFromUserCart,
-  removeItemFromCart
+  changeCartItemUserQuantity
 } from '../../../../redux/cart/cart.actions';
+
 import { IMG_URL } from '../../../../configs';
 import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
@@ -24,7 +24,16 @@ import routes from '../../../../const/routes';
 
 const { pathToProducts } = routes;
 
-const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoading }) => {
+const CartItem = ({
+  item,
+  language,
+  currency,
+  calcPrice,
+  user,
+  cartQuantityLoading,
+  setModalVisibility,
+  setModalItem
+}) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const [inputValue, setInputValue] = useState(item.quantity);
@@ -40,11 +49,8 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
   const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
 
   const onDeleteItem = () => {
-    if (user) {
-      dispatch(deleteProductFromUserCart({ userId: user._id, items: item }));
-    } else {
-      dispatch(removeItemFromCart(item));
-    }
+    setModalVisibility(true);
+    setModalItem(item);
   };
 
   return (
@@ -106,7 +112,7 @@ const CartItem = ({ item, language, currency, calcPrice, user, cartQuantityLoadi
           )}
         </div>
       </TableCell>
-      <TableCell>
+      <TableCell classes={{ root: styles.delete }}>
         <span className={styles.deleteIcon}>
           <DeleteIcon onClick={onDeleteItem} fontSize='default' />
         </span>

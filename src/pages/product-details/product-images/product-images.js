@@ -22,8 +22,6 @@ const ProductImages = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
-  const [isOpenZoom, setIsOpenZoom] = useState(false);
-  const [isZoomChange, setIsZoomChange] = useState(false);
 
   const initImages = useMemo(
     () => [images.primary.large, ...images.additional.map(({ large }) => large)],
@@ -59,26 +57,6 @@ const ProductImages = () => {
     setCurrImg(idx);
   };
 
-  const getOffset = (el) => {
-    const rect = el.getBoundingClientRect();
-    return {
-      left: rect.left + window.scrollX,
-      top: rect.top + window.scrollY
-    };
-  };
-
-  const primaryImage = (
-    <div className={styles.imageContainer}>
-      <img
-        className={styles.primaryImage}
-        src={IMG_URL + images.primary.large}
-        onClick={() => openImage(0)}
-        alt={IMG_ALT_INFO[language].value}
-      />
-      <div className={styles.zoomArea} />
-    </div>
-  );
-
   const sideImages = imagesSet
     .slice(1, imagesSet.length)
     .filter((img, i) => i < 3)
@@ -91,7 +69,7 @@ const ProductImages = () => {
         onClick={() => openImage(i + 1)}
       />
     ));
-  console.log(`img${  IMG_URL  }${images.primary.large}`);
+  console.log(`img${IMG_URL}${images.primary.large}`);
   return (
     <div>
       <ImgsViewer

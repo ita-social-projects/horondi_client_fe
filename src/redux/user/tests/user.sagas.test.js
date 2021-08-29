@@ -23,7 +23,7 @@ import {
   initialStateMock,
   email,
   pass,
-  staySignedIn,
+  rememberMe,
   user,
   purchasedProducts,
   token,
@@ -122,7 +122,7 @@ describe('user sagas tests', () => {
     expectSaga(handleUserLogin, { payload })
       .put(setUserLoading(true))
       .provide([
-        [call(loginUser, { user: { email, pass, staySignedIn } }), user],
+        [call(loginUser, { user: { email, pass, rememberMe } }), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
         [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
       ])

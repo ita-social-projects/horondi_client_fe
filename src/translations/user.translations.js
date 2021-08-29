@@ -226,12 +226,12 @@ export const FORGOT_PASSWORD = [
   }
 ];
 
-export const STAY_SIGNED_IN = [
+export const REMEMBER_ME = [
   {
-    value: 'Залишитись авторизованим'
+    value: `Запам'ятати мене`
   },
   {
-    value: 'Stay signed in'
+    value: 'Remember me'
   }
 ];
 
@@ -272,8 +272,7 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p:
-      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
@@ -403,15 +402,13 @@ export const PROFILE_LABELS = [
 export const PROFILE_PASSWORD_CHANGE = [
   {
     heading: 'Зміна паролю',
-    text:
-      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
     btnTitle: 'Змінити пароль',
     checkEmailText: 'Будь ласка, перевірте ваш емейл!'
   },
   {
     heading: 'Change password',
-    text:
-      'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
     btnTitle: 'Change password',
     checkEmailText: 'Please, check your email!'
   }

@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
     height: '550px',
-    padding: '80px 63px 63px',
+    padding: '80px 45px 45px',
     boxSizing: 'border-box'
   },
   heading: {

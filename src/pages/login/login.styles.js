@@ -117,7 +117,6 @@ export const useStyles = makeStyles((theme) => ({
   loginBtn: {
     border: '1px solid black',
     borderRadius: '4px',
-    marginBottom: '20px',
     textTransform: 'capitalize',
     backgroundColor: 'white',
     color: 'black',
@@ -126,13 +125,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   loginGroup: {
-    position: 'relative',
-    paddingBottom: '19px',
-    paddingTop: '8px'
+    position: 'relative'
   },
   loginError: {
     fontSize: '0.75rem',
-    margin: '3px 14px 0px',
     textAlign: 'left',
     fontFamily: 'Roboto,Helvetica,Arial,sans-serif',
     fontWeight: '400',
@@ -141,7 +137,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#f44336',
     wordWrap: 'break-word',
     position: 'absolute',
-    top: '50px',
+    top: '33px',
     left: '0px'
   },
   recoveryBtn: {
@@ -157,12 +153,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   recoveryContainer: {
     width: '100%',
-    minHeight: '18px'
+    minHeight: '18px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   orContainer: {
     width: '100%',
-    minHeight: '10px',
-    marginBottom: '10px'
+    marginTop: '20px',
+    marginBottom: '20px',
+    minHeight: '10px'
   },
   orText: {
     display: 'table',
@@ -172,6 +172,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   registerContainer: {
     width: '100%',
+    marginTop: '5px',
     minHeight: '18px'
   },
   registerBtn: {

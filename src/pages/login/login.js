@@ -12,7 +12,8 @@ import {
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  STAY_SIGNED_IN
+  STAY_SIGNED_IN,
+  errorMessages
 } from '../../translations/user.translations';
 import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
@@ -70,7 +71,9 @@ const Login = () => {
                       data-cy='email'
                       id='email'
                       label={placeholders.email[language].value}
-                      className={`${styles.emailInput} ${styles.afterText}`}
+                      className={`${styles.emailInput} ${
+                        errors.email === errorMessages[language].value.email && styles.afterText
+                      }`}
                       fullWidth
                       variant='outlined'
                       type='text'

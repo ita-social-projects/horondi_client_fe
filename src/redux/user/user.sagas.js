@@ -80,24 +80,27 @@ const { warning } = SNACKBAR_TYPES;
 const { pathToLogin, pathToProfile } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
+function* setUserCartAndWishlist(user) {
+  const purchasedProducts = yield call(getPurchasedProducts, user._id);
+
+  setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
+  setToLocalStorage(ACCESS_TOKEN, user.token);
+  setToLocalStorage(WISHLIST_KEY, user.wishlist);
+  yield put(setUser({ ...user, purchasedProducts }));
+  yield put(setWishlist(user.wishlist));
+  const cartFromLc = getFromLocalStorage(cartKey);
+  const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
+
+  yield put(setCart(usersCart.cart.items));
+  yield put(setCartTotalPrice(usersCart.cart.totalPrice));
+  setToLocalStorage(cartKey, usersCart.cart.items);
+}
+
 export function* handleGoogleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
-    const purchasedProducts = yield call(getPurchasedProducts, user._id);
-
-    setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
-    setToLocalStorage(ACCESS_TOKEN, user.token);
-    setToLocalStorage(WISHLIST_KEY, user.wishlist);
-    yield put(setUser({ ...user, purchasedProducts }));
-    yield put(setWishlist(user.wishlist));
-    const cartFromLc = getFromLocalStorage(cartKey);
-    const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
-
-    yield put(setCart(usersCart.cart.items));
-    yield put(setCartTotalPrice(usersCart.cart.totalPrice));
-    setToLocalStorage(cartKey, usersCart.cart.items);
-
+    yield setUserCartAndWishlist(user);
     yield put(push(pathToProfile));
   } catch (e) {
     yield call(handleUserError, e);
@@ -110,19 +113,7 @@ export function* handleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-    const purchasedProducts = yield call(getPurchasedProducts, user._id);
-    setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
-    setToLocalStorage(ACCESS_TOKEN, user.token);
-    setToLocalStorage(WISHLIST_KEY, user.wishlist);
-    yield put(setUser({ ...user, purchasedProducts }));
-    yield put(setWishlist(user.wishlist));
-    const cartFromLc = getFromLocalStorage(cartKey);
-    const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
-
-    yield put(setCart(usersCart.cart.items));
-    yield put(setCartTotalPrice(usersCart.cart.totalPrice));
-    setToLocalStorage(cartKey, usersCart.cart.items);
-
+    yield setUserCartAndWishlist(user);
     yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));

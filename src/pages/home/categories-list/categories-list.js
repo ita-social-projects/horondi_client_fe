@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 
 import CategoryItem from './category-item';
-import { URL_LANGUAGE, RESPONSIVE_CATEGORIES } from '../../../configs';
+import { URL_LANGUAGE, RESPONSIVE_CATEGORIES, URL_QUERIES_NAME } from '../../../configs';
 
 import { useStyles } from './categories-list.style';
 import './categories-carousel.css';
@@ -20,7 +20,7 @@ const CategoriesList = () => {
       .map(({ _id, name, images }) => (
         <CategoryItem
           key={_id}
-          categoryUrl={getCategoryURL(name)}
+          categoryUrl={`${getCategoryURL(name)}?${URL_QUERIES_NAME.categoryFilter}=${_id}&page=1`}
           categoryName={name[language].value}
           categoryImageUrl={images.large}
           language={language}
@@ -42,7 +42,7 @@ export const getCategoryURL = (category) => {
   const [filteredCategory] = category.filter((item) => item.lang === URL_LANGUAGE);
 
   if (filteredCategory.value) {
-    return `catalog/${  filteredCategory.value.toLowerCase()}`;
+    return `catalog/${filteredCategory.value.toLowerCase()}`;
   }
 };
 

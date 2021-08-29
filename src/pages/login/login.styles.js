@@ -88,7 +88,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   emailInput: {
-    marginBottom: '29px',
+    marginBottom: '35px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },

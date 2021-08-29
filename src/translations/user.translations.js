@@ -155,6 +155,7 @@ export const errorMessages = [
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
+      emailLength: 'Поле повинно містити від 8 до 60 символів',
       pass: 'Від 6 до 30 символів з однією великою літерою та цифрою',
       confirmPassword: 'Паролі не збігаються',
       wrongFormat: 'Некоректний формат',
@@ -166,6 +167,7 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
+      emailLength: `Field should contain from 8 to 60 characters`,
       pass: 'From 6 to 30 characters with one capital  letter and one digit',
       confirmPassword: 'Passwords do not match',
       wrongFormat: 'Wrong format',
@@ -272,8 +274,7 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p:
-      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
@@ -403,15 +404,13 @@ export const PROFILE_LABELS = [
 export const PROFILE_PASSWORD_CHANGE = [
   {
     heading: 'Зміна паролю',
-    text:
-      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
     btnTitle: 'Змінити пароль',
     checkEmailText: 'Будь ласка, перевірте ваш емейл!'
   },
   {
     heading: 'Change password',
-    text:
-      'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
     btnTitle: 'Change password',
     checkEmailText: 'Please, check your email!'
   }

@@ -44,11 +44,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   consentMessage: {
-    fontSize: 12,
+    fontSize: 11,
     letterSpacing: '.3px',
     color: '#929292',
-    lineHeight: '16px',
-    'text-align': 'center'
+    lineHeight: '16px'
   },
 
   consentLink: {

@@ -156,7 +156,10 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: '18px',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 425px)': {
+      marginBottom: '10px'
+    }
   },
   orContainer: {
     width: '100%',

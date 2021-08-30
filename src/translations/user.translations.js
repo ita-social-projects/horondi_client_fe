@@ -46,7 +46,7 @@ export const REGISTER_FORM_CONSENT = [
     value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
   },
   {
-    value: ['by clicking Register, you agree with our', 'terms of service']
+    value: ['By clicking Register, you agree with our', 'terms of service']
   }
 ];
 

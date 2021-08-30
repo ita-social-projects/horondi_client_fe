@@ -9,7 +9,7 @@ export const email = 'mock@gmail.com';
 export const pass = 'testpass';
 export const token = '1111bGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
 export const userId = '1111bGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
-export const staySignedIn = true;
+export const rememberMe = true;
 export const language = 0;
 export const upload = null;
 export const countOrder = { countOrder: 0 };
@@ -21,7 +21,7 @@ export const payload = {
   user: {
     email,
     pass,
-    staySignedIn
+    rememberMe
   }
 };
 

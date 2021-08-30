@@ -3,7 +3,7 @@ import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
-import { USER_REGISTER_LABELS, LANGUAGES_LIST } from '../../../configs';
+import { USER_REGISTER_LABELS } from '../../../configs';
 import {
   REGISTER_FORM_LABEL,
   REGISTER_FORM_CONSENT,
@@ -33,20 +33,6 @@ export default function RegisterForm({
 }) {
   const styles = useStyles();
 
-  const consentLink =
-    language === LANGUAGES_LIST[0].value ? (
-      <div className={styles.consentMessage}>
-        {' '}
-        {REGISTER_FORM_CONSENT[language].value[0]}
-        <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
-          {' '}
-          {REGISTER_FORM_CONSENT[language].value[1]}{' '}
-        </Link>
-      </div>
-    ) : (
-      ''
-    );
-
   return (
     <Form className={styles.registerForm}>
       {loading ? (
@@ -75,7 +61,14 @@ export default function RegisterForm({
               }
             />
           ))}
-          {consentLink}
+          <div className={styles.consentMessage}>
+            {' '}
+            {REGISTER_FORM_CONSENT[language].value[0]}
+            <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
+              {' '}
+              {REGISTER_FORM_CONSENT[language].value[1]}{' '}
+            </Link>
+          </div>
           <div className={styles.registerGroup}>
             <Button
               className={styles.registerBtn}

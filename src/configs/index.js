@@ -64,7 +64,7 @@ export const CHAT_FACEBOOK_DATA = {
 export const LOGIN_USER_DATA = {
   email: '',
   password: '',
-  staySignedIn: false
+  rememberMe: false
 };
 
 export const PROFILE_USER_DATA = {

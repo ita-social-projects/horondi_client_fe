@@ -12,22 +12,29 @@ import {
   FOOTER_CATALOGS
 } from '../../translations/footer.translations';
 import routes from '../../const/routes';
+import { countPerPage } from '../../configs';
 
 const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
-  const { categories, language, contacts } = useSelector(({ Categories, Language, Contacts }) => ({
-    categories: Categories.list,
-    language: Language.language,
-    contacts: Contacts.contacts
-  }));
+  const { categories, language, contacts, quantityPerPage } = useSelector(
+    ({ Categories, Language, Contacts, Products }) => ({
+      categories: Categories.list,
+      language: Language.language,
+      contacts: Contacts.contacts,
+      quantityPerPage: Products.countPerPage
+    })
+  );
 
   const categoriesList = categories
     ? categories.map(({ _id, name }) => (
       <div key={_id}>
         <Typography variant='subtitle2'>
-          <Link className={styles.cardLink} to={`/${getCategoryURL(name)}`}>
+          <Link
+            className={styles.cardLink}
+            to={`/${getCategoryURL(name)}?page=1&${countPerPage}=${quantityPerPage}`}
+          >
             {name[language].value}
           </Link>
         </Typography>

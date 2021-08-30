@@ -47,7 +47,8 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     letterSpacing: '.3px',
     color: '#929292',
-    lineHeight: '16px'
+    lineHeight: '16px',
+    'text-align': 'center'
   },
 
   consentLink: {
@@ -63,6 +64,7 @@ export const useStyles = makeStyles((theme) => ({
     border: '1px solid black',
     borderRadius: '4px',
     marginBottom: '10px',
+    marginTop: '10px',
     textTransform: 'capitalize',
     backgroundColor: 'white',
     color: 'black',

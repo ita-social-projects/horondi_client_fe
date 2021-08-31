@@ -62,8 +62,6 @@ const Login = () => {
       }
     });
 
-  console.log(touched);
-
   return (
     <form onSubmit={(e) => eventPreventHandler(e)}>
       <div className={styles.container}>

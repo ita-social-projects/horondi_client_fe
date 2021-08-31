@@ -10,5 +10,5 @@ export const validationSchema = (language) =>
     password: Yup.string()
       .matches(formRegExp.password, errorMessages[language].value.pass)
       .required(errorMessages[language].value.empty),
-    staySignedIn: Yup.bool()
+    rememberMe: Yup.bool()
   });

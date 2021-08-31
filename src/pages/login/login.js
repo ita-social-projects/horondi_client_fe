@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
-import { LOGIN_USER_DATA } from '../../configs';
+import { LIGHT_THEME, LOGIN_USER_DATA } from '../../configs';
 import {
   placeholders,
   OR_TEXT,
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  STAY_SIGNED_IN
+  REMEMBER_ME
 } from '../../translations/user.translations';
 import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
@@ -22,8 +22,10 @@ import routes from '../../const/routes';
 import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
+import { getFromLocalStorage } from '../../services/local-storage.service';
 
 const Login = () => {
+  const theme = getFromLocalStorage('theme');
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
@@ -33,6 +35,13 @@ const Login = () => {
     userLoading: User.userLoading,
     language: Language.language
   }));
+
+  const checkTheme = () => {
+    if (theme === LIGHT_THEME) {
+      return MATERIAL_UI_COLOR.PRIMARY;
+    }
+    return MATERIAL_UI_COLOR.INHERIT;
+  };
 
   const dispatch = useDispatch();
 
@@ -92,16 +101,10 @@ const Login = () => {
                       />
                       <div>
                         <FormControlLabel
-                          control={
-                            <Field
-                              as={Checkbox}
-                              name='staySignedIn'
-                              color={MATERIAL_UI_COLOR.PRIMARY}
-                            />
-                          }
+                          control={<Field as={Checkbox} name='rememberMe' color={checkTheme()} />}
                           label={
                             <Typography className={styles.text}>
-                              {STAY_SIGNED_IN[language].value}
+                              {REMEMBER_ME[language].value}
                             </Typography>
                           }
                         />

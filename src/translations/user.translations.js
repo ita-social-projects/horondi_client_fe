@@ -46,7 +46,7 @@ export const REGISTER_FORM_CONSENT = [
     value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
   },
   {
-    value: ['Registering, you agree with our', 'terms of service']
+    value: ['By clicking Register, you agree with our', 'terms of service']
   }
 ];
 
@@ -228,12 +228,12 @@ export const FORGOT_PASSWORD = [
   }
 ];
 
-export const STAY_SIGNED_IN = [
+export const REMEMBER_ME = [
   {
-    value: 'Залишитись авторизованим'
+    value: `Запам'ятати мене`
   },
   {
-    value: 'Stay signed in'
+    value: 'Remember me'
   }
 ];
 

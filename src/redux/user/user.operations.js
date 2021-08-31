@@ -121,6 +121,22 @@ const getGoogleUser = async ({ idToken }) => {
         source,
         tokenPass
       }
+      wishlist {
+        _id
+        name {
+          lang
+          value
+        }
+        basePrice {
+          currency
+          value
+        }
+        images {
+          primary {
+            small
+          }
+        }
+      }
       token
 } 
 

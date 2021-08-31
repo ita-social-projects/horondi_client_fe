@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
-import { LOGIN_USER_DATA } from '../../configs';
+import { LIGHT_THEME, LOGIN_USER_DATA } from '../../configs';
 import {
   placeholders,
   OR_TEXT,
   LOGIN_FORM_LABEL,
   FORGOT_PASSWORD,
   REGISTER_PROPOSAL,
-  STAY_SIGNED_IN,
-  errorMessages
+  errorMessages,
+  REMEMBER_ME
 } from '../../translations/user.translations';
 import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
@@ -23,8 +23,10 @@ import routes from '../../const/routes';
 import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
+import { getFromLocalStorage } from '../../services/local-storage.service';
 
 const Login = () => {
+  const theme = getFromLocalStorage('theme');
   const styles = useStyles();
   const [showPassword, setShowPassword] = useState(true);
   const { pathToRecovery, pathToRegister } = routes;
@@ -33,6 +35,13 @@ const Login = () => {
     userLoading: User.userLoading,
     language: Language.language
   }));
+
+  const checkTheme = () => {
+    if (theme === LIGHT_THEME) {
+      return MATERIAL_UI_COLOR.PRIMARY;
+    }
+    return MATERIAL_UI_COLOR.INHERIT;
+  };
 
   const dispatch = useDispatch();
 
@@ -52,6 +61,8 @@ const Login = () => {
         dispatch(loginUser({ user: values }));
       }
     });
+
+  console.log(touched);
 
   return (
     <form onSubmit={(e) => eventPreventHandler(e)}>
@@ -82,8 +93,8 @@ const Login = () => {
                       onChange={handleChange}
                       value={values.email}
                       color={MATERIAL_UI_COLOR.PRIMARY}
-                      error={(touched.email && !!errors.email) || ''}
-                      helperText={errors.email || ''}
+                      error={touched.email && errors.email}
+                      helperText={touched.email && errors.email}
                     />
                     <TextField
                       data-cy='password'
@@ -99,19 +110,19 @@ const Login = () => {
                       name='password'
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      error={(touched.password && !!errors.password) || ''}
-                      helperText={errors.password || ''}
+                      error={touched.password && errors.password}
+                      helperText={touched.password && errors.password}
                     />
                     <div>
                       <FormControlLabel
                         data-cy='staySignedIn'
-                        key={STAY_SIGNED_IN[language].value}
-                        value={values.staySignedIn}
-                        checked={values.staySignedIn}
-                        control={<Checkbox color='primary' />}
-                        label={STAY_SIGNED_IN[language].value}
+                        key={REMEMBER_ME[language].value}
+                        value={values.rememberMe}
+                        checked={values.rememberMe}
+                        control={<Checkbox color={checkTheme()} />}
+                        label={REMEMBER_ME[language].value}
                         labelPlacement='end'
-                        onChange={() => setFieldValue('staySignedIn', !values.staySignedIn)}
+                        onChange={() => setFieldValue('rememberMe', !values.rememberMe)}
                       />
                     </div>
                     <div className={styles.loginGroup}>

@@ -111,18 +111,24 @@ const Login = () => {
                       error={touched.password && errors.password}
                       helperText={touched.password && errors.password}
                     />
-                    <div>
-                      <FormControlLabel
-                        data-cy='staySignedIn'
-                        key={REMEMBER_ME[language].value}
-                        value={values.rememberMe}
-                        checked={values.rememberMe}
-                        control={<Checkbox color={checkTheme()} />}
-                        label={REMEMBER_ME[language].value}
-                        labelPlacement='end'
-                        onChange={() => setFieldValue('rememberMe', !values.rememberMe)}
-                      />
+                    <div className={styles.recoveryContainer}>
+                      <div>
+                        <FormControlLabel
+                          data-cy='staySignedIn'
+                          key={REMEMBER_ME[language].value}
+                          value={values.rememberMe}
+                          checked={values.rememberMe}
+                          control={<Checkbox color={checkTheme()} />}
+                          label={REMEMBER_ME[language].value}
+                          labelPlacement='end'
+                          onChange={() => setFieldValue('rememberMe', !values.rememberMe)}
+                        />
+                      </div>
+                      <Link to={pathToRecovery} className={styles.recoveryBtn}>
+                        {FORGOT_PASSWORD[language].value}
+                      </Link>
                     </div>
+
                     <div className={styles.loginGroup}>
                       <Button
                         className={styles.loginBtn}
@@ -133,11 +139,6 @@ const Login = () => {
                         {LOGIN_FORM_LABEL[language].value}
                       </Button>
                       <p className={styles.loginError}>{loginError}</p>
-                      <div className={styles.recoveryContainer}>
-                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
-                          {FORGOT_PASSWORD[language].value}
-                        </Link>
-                      </div>
                     </div>
                     <div className={styles.orContainer}>
                       <span className={styles.orText}>{OR_TEXT[language].value}</span>

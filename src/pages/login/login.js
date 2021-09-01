@@ -99,16 +99,22 @@ const Login = () => {
                         error={!!errors.password}
                         helperText={errors.password || ''}
                       />
-                      <div>
-                        <FormControlLabel
-                          control={<Field as={Checkbox} name='rememberMe' color={checkTheme()} />}
-                          label={
-                            <Typography className={styles.text}>
-                              {REMEMBER_ME[language].value}
-                            </Typography>
-                          }
-                        />
+                      <div className={styles.recoveryContainer}>
+                        <div>
+                          <FormControlLabel
+                            control={<Field as={Checkbox} name='rememberMe' color={checkTheme()} />}
+                            label={
+                              <Typography className={styles.text}>
+                                {REMEMBER_ME[language].value}
+                              </Typography>
+                            }
+                          />
+                        </div>
+                        <Link to={pathToRecovery} className={styles.recoveryBtn}>
+                          {FORGOT_PASSWORD[language].value}
+                        </Link>
                       </div>
+
                       <div className={styles.loginGroup}>
                         <Button
                           className={styles.loginBtn}
@@ -119,11 +125,6 @@ const Login = () => {
                           {LOGIN_FORM_LABEL[language].value}
                         </Button>
                         <p className={styles.loginError}>{loginError}</p>
-                        <div className={styles.recoveryContainer}>
-                          <Link to={pathToRecovery} className={styles.recoveryBtn}>
-                            {FORGOT_PASSWORD[language].value}
-                          </Link>
-                        </div>
                       </div>
                       <div className={styles.orContainer}>
                         <span className={styles.orText}>{OR_TEXT[language].value}</span>

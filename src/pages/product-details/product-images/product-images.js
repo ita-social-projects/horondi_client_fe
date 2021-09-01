@@ -92,7 +92,6 @@ const ProductImages = () => {
             img={IMG_URL + images.primary.large}
             zoomScale={3}
             height={400}
-            width={400}
             transitionTime={0.5}
           />
         </div>

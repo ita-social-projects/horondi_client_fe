@@ -35,7 +35,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   const isWishful = useMemo(
     () => wishlistItems.find((item) => product._id === item._id),
-    [product._id, wishlistItems]
+    [product?._id, wishlistItems]
   );
 
   const isItemInCart = useMemo(
@@ -45,7 +45,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           productToSend.product._id === item.product._id &&
           productToSend.options.size._id === item.options.size._id
       ),
-    [productToSend.product._id, productToSend.options.size._id, cartList]
+    [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
   );
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
@@ -56,7 +56,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
 
   const cartButtonLabel = isItemInCart
     ? PDP_BUTTONS[language].inCart
-    : PDP_BUTTONS[language].buyButton;
+    : PDP_BUTTONS[language].cartButton;
 
   const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
@@ -102,14 +102,20 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     }
   };
 
+  const goToCheckout = () => {
+    dispatch(push(pathToCart));
+  };
+
   const onAddToCheckout = () => {
     if (product) {
       onAddToCart();
-      dispatch(push(pathToCart));
+      goToCheckout();
     } else {
       setSizeIsNotSelectedError(true);
     }
   };
+
+  const cartButtonFunc = isItemInCart ? goToCheckout : onAddToCart;
 
   return (
     <div className={styles.submit}>
@@ -125,7 +131,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
         )}
       </Tooltip>
       <Tooltip title={cartTootipTitle} placement='bottom'>
-        <Button className={buttonStyle} onClick={onAddToCart}>
+        <Button className={buttonStyle} onClick={cartButtonFunc}>
           {cartButtonLabel}
         </Button>
       </Tooltip>

@@ -93,7 +93,7 @@ export const PDP_BUTTONS = {
     submitButton: 'Підтвердити',
     cancelButton: 'Відхилити',
     leaveReply: 'Залишити відповідь',
-    inCart: 'В кошику'
+    inCart: 'Перейти в кошик'
   },
   1: {
     cartButton: 'Add to cart',
@@ -101,7 +101,7 @@ export const PDP_BUTTONS = {
     submitButton: 'Submit',
     cancelButton: 'Cancel',
     leaveReply: 'Leave reply',
-    inCart: 'In Cart'
+    inCart: 'View in Cart'
   }
 };
 

@@ -29,16 +29,36 @@ const { pathToCart } = routes;
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems, userData } = useSelector(
+  const { language, productToSend, product, wishlistItems, userData, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
 
   const isWishful = useMemo(
     () => wishlistItems.find((item) => product._id === item._id),
-    [product._id, wishlistItems]
+    [product?._id, wishlistItems]
+  );
+
+  const isItemInCart = useMemo(
+    () =>
+      cartList.find(
+        (item) =>
+          productToSend.product._id === item.product._id &&
+          productToSend.options.size._id === item.options.size._id
+      ),
+    [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
   );
 
   const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
+
+  const cartTootipTitle = isItemInCart
+    ? TOOLTIPS[language].itemInCart
+    : TOOLTIPS[language].itemInCartAlready;
+
+  const cartButtonLabel = isItemInCart
+    ? PDP_BUTTONS[language].inCart
+    : PDP_BUTTONS[language].cartButton;
+
+  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
   const toastMessages = TOAST_MESSAGE[language];
 
@@ -62,6 +82,9 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   };
 
   const onAddToCart = () => {
+    if (isItemInCart) {
+      return;
+    }
     if (product) {
       if (userData) {
         const newCartItemWithUserId = {
@@ -79,14 +102,20 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     }
   };
 
+  const goToCheckout = () => {
+    dispatch(push(pathToCart));
+  };
+
   const onAddToCheckout = () => {
     if (product) {
       onAddToCart();
-      dispatch(push(pathToCart));
+      goToCheckout();
     } else {
       setSizeIsNotSelectedError(true);
     }
   };
+
+  const cartButtonFunc = isItemInCart ? goToCheckout : onAddToCart;
 
   return (
     <div className={styles.submit}>
@@ -101,9 +130,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           />
         )}
       </Tooltip>
-      <Button className={styles.submitButton} onClick={onAddToCart}>
-        {PDP_BUTTONS[language].cartButton}
-      </Button>
+      <Tooltip title={cartTootipTitle} placement='bottom'>
+        <Button className={buttonStyle} onClick={cartButtonFunc}>
+          {cartButtonLabel}
+        </Button>
+      </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
         {PDP_BUTTONS[language].buyButton}
       </Button>

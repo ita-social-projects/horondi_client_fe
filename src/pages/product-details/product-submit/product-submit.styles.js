@@ -13,6 +13,20 @@ export const useStyles = makeStyles((theme) => {
     }
   };
 
+  const button = {
+    marginRight: '1rem',
+    marginTop: '1rem',
+    padding: '0.4rem 0.9rem',
+    minWidth: '9rem',
+    textTransform: 'none',
+    textAlign: 'center',
+    fontSize: '1rem',
+    '@media (max-width: 600px)': {
+      padding: '0.2rem 0.6rem',
+      fontSize: '0.9rem'
+    }
+  };
+
   return {
     heart: {
       ...heart
@@ -41,23 +55,17 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     submitButton: {
-      marginRight: '1rem',
-      marginTop: '1rem',
-      padding: '0.4rem 0.9rem',
-      minWidth: '9rem',
-      textTransform: 'none',
-      textAlign: 'center',
-      fontSize: '1rem',
+      ...button,
       backgroundColor: theme.palette.button.normal.backgroundColor,
       color: theme.palette.button.normal.color,
       '&:hover': {
         backgroundColor: theme.palette.button.hover.backgroundColor,
         color: theme.palette.button.hover.color
-      },
-      '@media (max-width: 600px)': {
-        padding: '0.2rem 0.6rem',
-        fontSize: '0.9rem'
       }
+    },
+    unavailableButton: {
+      ...button,
+      backgroundColor: 'none'
     }
   };
 });

@@ -27,7 +27,7 @@ const FooterLists = () => {
     })
   );
 
-  const categoriesList = categories
+  const categoriesList = categories.length
     ? categories.map(({ _id, name }) => (
       <div key={_id}>
         <Typography variant='subtitle2'>

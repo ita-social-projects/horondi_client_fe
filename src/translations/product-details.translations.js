@@ -93,7 +93,7 @@ export const PDP_BUTTONS = {
     submitButton: 'Підтвердити',
     cancelButton: 'Відхилити',
     leaveReply: 'Залишити відповідь',
-    inCart: 'Перейти в кошик'
+    inCart: 'Перейти до кошика'
   },
   1: {
     cartButton: 'Add to cart',
@@ -152,8 +152,8 @@ export const TOOLTIPS = {
     bought: 'Користувач купив даний товар',
     feedbackComment: 'Ваш коментар не підтверджений адміністратором',
     feedbackReply: 'Ваша відповідь не підтвердженна адміністратором',
-    itemInCart: 'Товар чекає на вас у кошику',
-    itemInCartAlready: 'Нажміть, щоб додати товар у кошик'
+    itemInCart: 'Товар вже в кошику',
+    itemInCartAlready: 'Додати товар у кошик'
   },
   1: {
     addWishful: 'Add to wishlist',
@@ -166,7 +166,7 @@ export const TOOLTIPS = {
     feedbackComment: 'Your comment has not been confirmed by the administrator ',
     feedbackReply: 'Your answer has not been confirmed by the administrator ',
     itemInCart: 'Product is already in cart',
-    itemInCartAlready: 'Click to add product to cart'
+    itemInCartAlready: 'Add product to the cart'
   }
 };
 

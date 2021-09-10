@@ -39,7 +39,7 @@ const PriceFilter = () => {
           searchParams
             .get(priceFilter)
             .split(',')
-            .map((price) => price * 100)
+            .map((price) => price)
         )
       );
     } else if (minPrice && maxPrice) {
@@ -48,10 +48,10 @@ const PriceFilter = () => {
   }, [dispatch, searchParams.toString()]);
 
   const handlePriceChange = (event, newValue) => {
-    dispatch(setPriceFilter(newValue.map((value) => value * 100)));
+    dispatch(setPriceFilter(newValue.map((value) => value)));
   };
   const handlePriceFilter = () => {
-    searchParams.set(priceFilter, filters.map((price) => price / 100).join());
+    searchParams.set(priceFilter, filters.map((price) => price).join());
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };

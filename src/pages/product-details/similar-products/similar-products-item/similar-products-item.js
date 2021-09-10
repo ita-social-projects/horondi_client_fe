@@ -37,7 +37,7 @@ const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) 
           <span>{name[language].value}</span>
           <Rating value={rate} readOnly size='small' />
           <span>
-            {Math.round(price / 100)}
+            {price}
             {'\u00A0'}
             <FontAwesomeIcon icon={currencySign} />
           </span>

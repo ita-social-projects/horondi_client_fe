@@ -52,7 +52,6 @@ const CartItem = ({
     setModalVisibility(true);
     setModalItem(item);
   };
-
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell data-cy='cart-item-img'>
@@ -98,14 +97,14 @@ const CartItem = ({
         <div className={styles.priceWrapper}>
           {user && (
             <div>
-              {Math.round(item.price[currency].value / 100)}
+              {Math.round(item.price[currency].value)}
               {'\u00A0'}
               <FontAwesomeIcon icon={currencySign} />
             </div>
           )}
           {!user && (
             <div>
-              {Math.round(calcPrice(item, currency) / 100)}
+              {Math.round(calcPrice(item, currency))}
               {'\u00A0'}
               <FontAwesomeIcon icon={currencySign} />
             </div>

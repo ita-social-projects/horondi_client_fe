@@ -131,8 +131,8 @@ const cleanCart = async (userId) => {
 
 const addProductToCart = async (userId, cartItem) => {
   const addProductToCartMutation = `
-    mutation($productId: ID!, $sizeId: ID!, $id:ID!) {
-      addProductToCart(productId: $productId, sizeId: $sizeId,id:$id) {
+    mutation($productId: ID!, $sizeId: ID!, $id:ID!, $price: [CurrencySetInput]!) {
+      addProductToCart(productId: $productId, sizeId: $sizeId, id:$id, price: $price) {
         ... on User {
           _id
           firstName
@@ -154,7 +154,8 @@ const addProductToCart = async (userId, cartItem) => {
   const result = await setItems(addProductToCartMutation, {
     productId: cartItem.product._id,
     sizeId: cartItem.options.size._id,
-    id: userId
+    id: userId,
+    price: cartItem.price
   });
 
   return result?.data?.addProductToCart;

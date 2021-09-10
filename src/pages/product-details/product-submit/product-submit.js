@@ -67,6 +67,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       _id,
       name,
       basePrice,
+      sizes,
       images: { primary }
     } = product;
 
@@ -75,7 +76,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       dispatch(setToastMessage(toastMessages.removedFromWishList));
       dispatch(setToastSettings(toastSettings));
     } else {
-      dispatch(addItemToWishlist({ _id, name, basePrice, images: { primary } }));
+      dispatch(addItemToWishlist({ _id, name, basePrice, sizes, images: { primary } }));
       dispatch(setToastMessage(toastMessages.addedToWishList));
       dispatch(setToastSettings(toastSettings));
     }

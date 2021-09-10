@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from './wishlist-item.styles';
 import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
+import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 import { IMG_URL } from '../../../configs';
 import { getCurrencySign } from '../../../utils/currency';
 import routes from '../../../const/routes';
@@ -23,6 +24,16 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);
+  };
+
+  const checkSizes = () => {
+    const availableSizes = item?.sizes.filter(
+      ({ size, price }) => size.available && { size, price }
+    );
+
+    return availableSizes
+      ? PRICE_FROM[language].value + availableSizes[0].price[currency].value
+      : SIZE_NOT_AVAILABLE[language].value;
   };
 
   return (
@@ -42,7 +53,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
       </td>
       <td className={styles.price}>
         <span>
-          {Math.round(item.basePrice[currency].value / 100)}
+          {checkSizes()}
           {'\u00A0'}
           <FontAwesomeIcon icon={currencySign} />
         </span>

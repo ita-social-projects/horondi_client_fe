@@ -3,7 +3,6 @@ import { TableCell, TableRow } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useStyles } from './order-history-order-item.styles';
 
-import { getPriceOfProduct } from '../../../../utils/price';
 import { getCurrencySign } from '../../../../utils/currency';
 import { ORDER_TABLE_FIELDS } from '../../../../translations/order.translations';
 import { IMG_URL } from '../../../../configs';
@@ -13,7 +12,7 @@ const OrderHistoryOrderItem = ({ item, language, currency }) => {
 
   const data = item.props.item;
   const currencySign = getCurrencySign(currency);
-  const fixedPriceProduct = getPriceOfProduct(data.fixedPrice[currency].value);
+  const fixedPriceProduct = data.fixedPrice[currency].value;
 
   return (
     <>

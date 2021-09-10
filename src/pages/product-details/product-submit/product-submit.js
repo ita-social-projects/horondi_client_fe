@@ -67,7 +67,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       _id,
       name,
       basePrice,
-      sizes,
       images: { primary }
     } = product;
 

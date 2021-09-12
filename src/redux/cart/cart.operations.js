@@ -60,7 +60,8 @@ const mergeCartFromLSWithUserCart = async (cartFromLc, id) => {
       quantity: item.quantity,
       options: {
         size: item.options.size._id
-      }
+      },
+      price: item.price
     }));
   const items = getCartInput(cartFromLc);
 
@@ -99,6 +100,7 @@ const getCartByUserId = async (userId) => {
             ${cartReqBody}
             totalPrice {
               value
+              currency
             }
           }
         }

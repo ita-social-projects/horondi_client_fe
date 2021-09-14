@@ -93,11 +93,21 @@ describe('Register component tests', () => {
     expect(mockPush).toHaveBeenCalled();
   });
 
-  // it('Should validate on register form', () => {
-  //   mockStore.hasRegistered = false;
-  //   act(() => {
-  //     wrapper.find(RegisterForm).props().setShouldValidate();
-  //   });
-  //   expect(mockSetShouldValidate).toHaveBeenCalled();
-  // });
+  it('Should validate on register form', () => {
+    spyOnUseSelector.mockImplementation(() => ({ ...mockStore, hasRegistered: false }));
+    wrapper = mount(
+      <BrowserRouter>
+        <ThemeProvider theme={themeValue}>
+          <Register />
+        </ThemeProvider>
+      </BrowserRouter>
+    );
+
+    console.log(wrapper.find(RegisterForm).props());
+    act(() => {
+      wrapper.find(RegisterForm).props().setShouldValidate();
+    });
+    console.log(wrapper.find(Formik).props().validateOnBlur);
+    expect(wrapper.find(Formik).props().validateOnBlur).toBe(true);
+  });
 });

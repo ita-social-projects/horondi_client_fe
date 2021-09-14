@@ -53,7 +53,6 @@ describe('Register component tests', () => {
         </ThemeProvider>
       </BrowserRouter>
     );
-    // console.log(wrapper.debug());
   });
 
   afterEach(() => {
@@ -103,11 +102,9 @@ describe('Register component tests', () => {
       </BrowserRouter>
     );
 
-    console.log(wrapper.find(RegisterForm).props());
     act(() => {
       wrapper.find(RegisterForm).props().setShouldValidate();
     });
-    console.log(wrapper.find(Formik).props().validateOnBlur);
-    expect(wrapper.find(Formik).props().validateOnBlur).toBe(true);
+    expect(wrapper.find(Formik).props().validateOnBlur).toBe(false);
   });
 });

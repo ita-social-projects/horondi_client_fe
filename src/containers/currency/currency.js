@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
 import { useStyles } from './currency.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
@@ -15,7 +15,9 @@ const Currency = ({ fromSideBar }) => {
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);
-
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency
+  }));
   const handleChange = (e) => {
     const targetValue = e.target.value;
     if (targetValue !== undefined) {
@@ -28,13 +30,13 @@ const Currency = ({ fromSideBar }) => {
       {currency === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
-
   return (
     <div data-cy='currency ' className={styles.root}>
       <Dropdown
         mappedItems={mappedCurrencies}
         handler={handleChange}
         defaultValue={currencyInLocalStorage}
+        value={currency}
         fromSideBar={fromSideBar}
       />
     </div>

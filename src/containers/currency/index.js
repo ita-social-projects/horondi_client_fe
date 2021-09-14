@@ -1,3 +1,3 @@
-import CurrencyComponent from './currency';
+import CurrencyComponent from './currency-component';
 
 export default CurrencyComponent;

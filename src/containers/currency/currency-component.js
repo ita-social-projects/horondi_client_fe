@@ -25,9 +25,9 @@ const CurrencyComponent = ({ fromSideBar }) => {
       dispatch(changeCurrency(targetValue));
     }
   };
-  const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
+  const mappedCurrencies = CURRENCIES_LIST.map(({ curr, value }) => (
     <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
-      {currency === 'UAH' ? hryvniaUnicode : dollarUnicode}
+      {curr === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
   return (

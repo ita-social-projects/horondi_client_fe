@@ -9,7 +9,7 @@ import Dropdown from '../../components/dropdown';
 
 const currencyInLocalStorage = getFromLocalStorage('currency') || DEFAULT_CURRENCY;
 
-const Currency = ({ fromSideBar }) => {
+const CurrencyComponent = ({ fromSideBar }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   useEffect(() => {
@@ -43,4 +43,4 @@ const Currency = ({ fromSideBar }) => {
   );
 };
 
-export default Currency;
+export default CurrencyComponent;

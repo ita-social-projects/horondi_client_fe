@@ -15,8 +15,8 @@ const CurrencyComponent = ({ fromSideBar }) => {
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
+  const { curr } = useSelector(({ Currency }) => ({
+    curr: Currency.curr
   }));
   const handleChange = (e) => {
     const targetValue = e.target.value;
@@ -25,9 +25,9 @@ const CurrencyComponent = ({ fromSideBar }) => {
       dispatch(changeCurrency(targetValue));
     }
   };
-  const mappedCurrencies = CURRENCIES_LIST.map(({ curr, value }) => (
+  const mappedCurrencies = CURRENCIES_LIST.map(({ currency, value }) => (
     <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
-      {curr === 'UAH' ? hryvniaUnicode : dollarUnicode}
+      {currency === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
   return (
@@ -36,7 +36,7 @@ const CurrencyComponent = ({ fromSideBar }) => {
         mappedItems={mappedCurrencies}
         handler={handleChange}
         defaultValue={currencyInLocalStorage}
-        value={currency}
+        value={curr}
         fromSideBar={fromSideBar}
       />
     </div>

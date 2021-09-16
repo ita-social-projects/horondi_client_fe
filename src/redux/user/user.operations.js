@@ -132,9 +132,14 @@ const getGoogleUser = async ({ idToken }) => {
           lang
           value
         }
-        basePrice {
-          currency
-          value
+        sizes {
+          size {
+            available
+          }
+          price {
+            value
+            currency
+          }
         }
         images {
           primary {

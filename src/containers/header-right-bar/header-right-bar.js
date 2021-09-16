@@ -19,8 +19,12 @@ const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
       <div className={styles.language}>
         <Language fromSideBar={fromSideBar} />
       </div>
-      <CartHeader fromSideBar={fromSideBar} />
-      <HeaderProfile fromSideBar={fromSideBar} setIsMenuOpen={setIsMenuOpen} />
+      <div className={styles.cart}>
+        <CartHeader fromSideBar={fromSideBar} />
+      </div>
+      <div className={styles.profile}>
+        <HeaderProfile fromSideBar={fromSideBar} setIsMenuOpen={setIsMenuOpen} />
+      </div>
     </div>
   );
 };

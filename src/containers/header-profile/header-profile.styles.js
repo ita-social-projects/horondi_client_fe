@@ -6,6 +6,11 @@ export const useStyles = makeStyles(() => ({
     position: 'relative',
     cursor: 'pointer',
     zIndex: 20,
+    transition: '1s',
+    height: '33px',
+    width: '50px',
+    textAlign: 'center',
+
     '&:hover': {
       backgroundColor: fromSideBar ? '#000' : '#fff',
       '& ul': {
@@ -15,13 +20,17 @@ export const useStyles = makeStyles(() => ({
         color: fromSideBar ? '#fff' : '#000'
       }
     },
+
     '& svg': {
       position: 'relative',
       zIndex: 5,
       fontSize: '2rem',
-      color: fromSideBar ? '#000' : '#fff'
+      color: fromSideBar ? '#000' : '#fff',
+      border: 'none',
+      outline: 'none'
     }
   }),
+
   list: {
     '& .MuiMenuItem-root': {
       flexDirection: 'row',

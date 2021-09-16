@@ -50,7 +50,7 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
       <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].total}</span>
         <span>
-          {Math.round(totalPrice / 100)}
+          {Math.round(totalPrice)}
           {'\u00A0'}
           <FontAwesomeIcon icon={currencySign} />
         </span>
@@ -71,7 +71,7 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
       <div className={styles.sumContainer}>
         <span>{CART_TABLE_FIELDS[language].toPay}</span>
         <span>
-          {Math.round(totalPrice / 100)}
+          {Math.round(totalPrice)}
           {'\u00A0'}
           <FontAwesomeIcon icon={currencySign} />
         </span>

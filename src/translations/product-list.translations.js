@@ -120,11 +120,21 @@ export const PRODUCT_NOT_FOUND = {
 export const PRICE_FROM = {
   0: {
     lang: 'uk',
-    value: 'від'
+    value: 'від '
   },
   1: {
     lang: 'eng',
-    value: 'from'
+    value: 'from '
+  }
+};
+export const SIZE_NOT_AVAILABLE = {
+  0: {
+    lang: 'uk',
+    value: 'Товар недоступний'
+  },
+  1: {
+    lang: 'eng',
+    value: `Product isn't available`
   }
 };
 export const PRICE_TO = {

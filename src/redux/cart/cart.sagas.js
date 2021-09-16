@@ -156,6 +156,8 @@ export function* handleSetCartItemQuantity({ payload }) {
   const cart = getFromLocalStorage(cartKey);
   const newCart = cart.map((el) => {
     if (el.product._id === item.product._id && el.options.size._id === item.options.size._id) {
+      el.price[0].value = (el.price[0].value / el.quantity) * value;
+      el.price[1].value = (el.price[1].value / el.quantity) * value;
       el.quantity = value;
     }
     return el;

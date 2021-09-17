@@ -9,27 +9,28 @@ import { SIZE } from '../../../translations/product-details.translations';
 
 const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const styles = useStyles();
-  const { language, selectedSize } = useSelector(({ Language, Products }) => ({
+  const { language, size: currentSize } = useSelector(({ Language, Products }) => ({
     language: Language.language,
-    selectedSize: Products.productToSend.selectedSize
+    size: Products.productToSend.options.size
   }));
 
   const sizeButtons =
     sizes &&
     !!sizes.length &&
-    sizes
-      .filter(({ available, name }) => available && name)
-      .map(({ _id, name }) => (
-        <Button
-          key={_id}
-          className={
-            _id === selectedSize ? styles.selectedSize : styles.sizeButton
-          }
-          onClick={() => handleSizeChange(_id)}
-        >
-          {name}
-        </Button>
-      ));
+    sizes.map(({ size }, index) => {
+      if (size.available) {
+        return (
+          <Button
+            key={size._id}
+            className={size._id === currentSize._id ? styles.selectedSize : styles.sizeButton}
+            onClick={() => handleSizeChange(index)}
+          >
+            {size.name}
+          </Button>
+        );
+      }
+      return null;
+    });
 
   return (
     <div className={styles.sizeButtons}>
@@ -41,9 +42,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
           </div>
         </div>
       ) : null}
-      {sizeIsNotSelectedError ? (
-        <div className={styles.error}>{SIZE[language].error}</div>
-      ) : null}
+      {sizeIsNotSelectedError ? <div className={styles.error}>{SIZE[language].error}</div> : null}
     </div>
   );
 };

@@ -1,10 +1,9 @@
-import React, { useRef, useMemo, useLayoutEffect } from 'react';
-import { FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import React, { useRef, useMemo, useLayoutEffect, useState } from 'react';
+import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
+import { mergeImages } from 'horondi_merge_images';
 
 import { useStyles } from './images-constructor.style';
-import { selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
@@ -17,24 +16,27 @@ import {
   constructorPartPrice,
   constructorPartNames
 } from '../../utils/constructor';
+import Modal from '../../components/modal';
+import ConstructorSubmit from './constructor-sumbit';
 
 const ImagesConstructor = () => {
+  const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
-  const { values, images, prices, methods } = useConstructor();
+  const { values, images, prices, methods, language, currency } = useConstructor();
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-  const { language, currency } = useSelector(selectLangAndCurrency);
   const {
     MODEL,
     BASIC,
     PATTERN,
     BOTTOM,
+    SIZE,
     DEFAULT_PRICE,
     TOTAL_PRICE,
-    END_PRICE
+    END_PRICE,
+    MORE_OPTIONS
   } = CONSTRUCTOR_TITLES[language];
-  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
@@ -43,21 +45,15 @@ const ImagesConstructor = () => {
           new Promise((resolveImage, rejectImage) => {
             const img = new Image();
             img.onload = () => resolveImage(img);
-            img.onerror = () => rejectImage(new Error());
+            img.onerror = () => {
+              rejectImage(new Error());
+            };
             img.src = `${IMG_URL}${source}`;
           })
       );
 
       resolve(Promise.all(loadedImages).then((loadedImage) => loadedImage));
     });
-
-  const mergeImages = (imagesToMerge, currentCanvas, width = 1000, height = 1000, x = 0, y = 0) => {
-    const ctx = currentCanvas.getContext('2d');
-    ctx.clearRect(0, 0, width, height);
-    imagesToMerge.forEach((imageToMerge) => {
-      ctx.drawImage(imageToMerge, x, y, width, height);
-    });
-  };
 
   useLayoutEffect(() => {
     if (images.basicImage && images.patternImage && images.frontPocketImage && images.bottomImage) {
@@ -73,15 +69,29 @@ const ImagesConstructor = () => {
     }
   }, [images.basicImage, images.patternImage, images.frontPocketImage, images.bottomImage]);
 
+  const showModal = () => {
+    setModalVisibility(true);
+  };
+
+  const onModalAction = (action) => {
+    setModalVisibility(false);
+  };
+
   const options = (obj) => (
     <option key={obj._id} value={obj._id}>
       {obj.name[language].value}
     </option>
   );
-
+  const sizeOptions = (obj) => (
+    <option key={obj._id} value={obj._id}>
+      {obj.name}
+    </option>
+  );
   const availableModels = useMemo(() => _.map(values.models, options, [values.models, language]));
 
   const availableBasics = useMemo(() => _.map(values.basics, options, [values.basics, language]));
+
+  const availableSizes = useMemo(() => _.map(values.sizes, sizeOptions));
 
   const availablePatterns = useMemo(() =>
     _.map(values.patterns, options, [values.patterns, language])
@@ -90,26 +100,6 @@ const ImagesConstructor = () => {
   const availableBottoms = useMemo(() =>
     _.map(values.bottoms, options, [values.bottoms, language])
   );
-
-  const priceTotal = useMemo(() => {
-    if (prices.basicPrice && prices.frontPocketPrice && prices.bottomPrice) {
-      return (
-        prices.basicPrice[currency].value +
-        prices.frontPocketPrice[currency].value +
-        prices.bottomPrice[currency].value
-      );
-    }
-  }, [prices.basicPrice, prices.frontPocketPrice, prices.bottomPrice, currency]);
-
-  const priceBasic = useMemo(() => {
-    if (prices.basicPrice) return prices.basicPrice[currency].value;
-  }, [prices.basicPrice, currency]);
-  const priceGobelen = useMemo(() => {
-    if (prices.frontPocketPrice) return prices.frontPocketPrice[currency].value;
-  }, [prices.frontPocketPrice, currency]);
-  const priceBottom = useMemo(() => {
-    if (prices.bottomPrice) return prices.bottomPrice[currency].value;
-  }, [prices.bottomPrice, currency]);
 
   return (
     <div className={styles.constructorWrapper}>
@@ -155,10 +145,28 @@ const ImagesConstructor = () => {
             </NativeSelect>
             <FormHelperText>{BOTTOM}</FormHelperText>
           </FormControl>
+          <FormControl>
+            <NativeSelect
+              name={constructorImageInput.SIZE}
+              onChange={(e) => methods.changeSize(e.target.value)}
+            >
+              {availableSizes}
+            </NativeSelect>
+            <FormHelperText>{SIZE}</FormHelperText>
+          </FormControl>
+          <Button className={styles.button} onClick={showModal}>
+            {MORE_OPTIONS}
+          </Button>
         </form>
         <div className={styles.imageContainer}>
           {values.modelLoading && <Loader />}
-          <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
+          <canvas
+            style={{ display: values.modelLoading ? 'none' : 'block' }}
+            className={styles.image}
+            width={canvasW}
+            height={canvasH}
+            ref={canvas}
+          />
         </div>
         <div className={styles.pricesInfoWrapper}>
           <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>
@@ -167,28 +175,55 @@ const ImagesConstructor = () => {
               <li className={styles.priceItem}>
                 <span>{DEFAULT_PRICE}</span>
                 <span>
-                  {DEFAULT_PRICE_VALUE}
+                  {prices.DEFAULT_PRICE_VALUE}
                   {currentCurrencyValue(language, currency)}
                 </span>
               </li>
-              {constructorPartPrice(priceBasic, priceGobelen, priceBottom).map((item, index) => (
-                <li key={index} className={styles.priceItem}>
-                  <span>{constructorPartNames(language)[index]}</span>
-                  <span>
-                    {!item ? 0 : `${item}`}
-                    {currentCurrencyValue(language, currency)}
-                  </span>
-                </li>
-              ))}
+              <div className={`${styles.line} ${styles.topLine}`} />
+
+              {constructorPartPrice(
+                prices.priceBasic,
+                prices.priceGobelen,
+                prices.priceBottom,
+                prices.priceSize
+              ).map((item, index) =>
+                item ? (
+                  <li key={index} className={styles.priceItem}>
+                    <span>{constructorPartNames(!language)[index]}</span>
+                    <span>
+                      +{item}
+                      {currentCurrencyValue(language, currency)}
+                    </span>
+                  </li>
+                ) : (
+                  <div key={index} />
+                )
+              )}
+              <div className={`${styles.line} ${styles.bottomLine}`} />
             </ul>
           </div>
           <h2 className={styles.headerWrapper}>
             {END_PRICE}
-            {constructorEndPrice(priceTotal)}
-            {currentCurrencyValue(language, currency)}
+            <span>
+              {constructorEndPrice(prices.priceTotal)}
+              {currentCurrencyValue(language, currency)}
+            </span>
           </h2>
+          <ConstructorSubmit />
         </div>
       </div>
+      {modalVisibility && (
+        <Modal
+          className={styles.modal}
+          setModalVisibility={setModalVisibility}
+          onAction={onModalAction}
+          isOpen={modalVisibility}
+          language={language}
+          isEmpty
+          isFullscreen
+          content={<h3>MODAL FOR CONSTRUCTOR</h3>}
+        />
+      )}
     </div>
   );
 };

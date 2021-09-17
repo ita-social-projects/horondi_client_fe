@@ -1,15 +1,82 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
 import { useStyles } from './similar-products.styles';
 
-const SimilarProducts = () => {
+import { selectInfoForSimilarProducts } from './selector';
+
+import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
+import { RESPONSIVE_PDP } from '../../../configs';
+import SimilarProductsItem from './similar-products-item';
+import { similarProductForCart } from '../../../utils/productDetails';
+import { getCurrencySign } from '../../../utils/currency';
+import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
+
+const SimilarProducts = ({ cartList }) => {
   const styles = useStyles();
+  const { language, similarProducts, currency, product } = useSelector(
+    selectInfoForSimilarProducts
+  );
+
+  const { title } = SIMILAR_ITEMS[language];
+  const currencySign = getCurrencySign(currency);
+
+  let imagesList;
+  if (cartList) {
+    imagesList = similarProductForCart(similarProducts, cartList);
+  } else {
+    imagesList = similarProducts.filter(
+      ({ category, mainMaterial, pattern }) =>
+        category._id !== product.category._id &&
+        (mainMaterial.color._id === product.mainMaterial.color._id ||
+          pattern._id === product.pattern._id)
+    );
+  }
+
+  imagesList = imagesList.map(({ _id, images, rate, name, sizes }) => {
+    const availableSize =
+      sizes && sizes.filter(({ size, price }) => size.available && price)[0].price[currency].value;
+
+    return (
+      <SimilarProductsItem
+        currencySign={currencySign}
+        key={_id}
+        price={
+          availableSize
+            ? PRICE_FROM[language].value + Math.round(availableSize)
+            : SIZE_NOT_AVAILABLE[language].value
+        }
+        name={name}
+        rate={rate}
+        imageUrl={images.primary.medium}
+        id={_id}
+      />
+    );
+  });
 
   return (
-    <div id='similar-products'>
-      <div className={styles.similarItems} />
+    <div>
+      {imagesList.length ? (
+        <div className={styles.similarItems}>
+          <div>
+            <h2 className={styles.title}>{title}</h2>
+          </div>
+          <Carousel
+            className={styles.carousel}
+            responsive={RESPONSIVE_PDP}
+            swipeable={false}
+            autoPlay
+            autoPlaySpeed={5000}
+            infinite
+            transitionDuration={1000}
+          >
+            {imagesList}
+          </Carousel>
+        </div>
+      ) : null}
     </div>
   );
 };

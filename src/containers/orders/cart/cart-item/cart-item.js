@@ -1,87 +1,120 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
-import DoneIcon from '@material-ui/icons/Done';
-import { Checkbox, TableCell, TableRow } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { TableCell, TableRow } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import _ from 'lodash';
 
 import { useStyles } from './cart-item.styles';
 import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
+
 import {
-  setCartItemChecked,
-  setCartItemQuantity
+  setCartItemQuantity,
+  changeCartItemUserQuantity
 } from '../../../../redux/cart/cart.actions';
+
 import { IMG_URL } from '../../../../configs';
+import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
+import { onChangeQuantityHandler } from '../../../../utils/cart';
+import { getCurrencySign } from '../../../../utils/currency';
+import routes from '../../../../const/routes';
 
-const CartItem = ({ item, language, currency, calcPrice, isCartEditing }) => {
+const { pathToProducts } = routes;
+
+const CartItem = ({
+  item,
+  language,
+  currency,
+  calcPrice,
+  user,
+  cartQuantityLoading,
+  setModalVisibility,
+  setModalItem
+}) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ image: `${IMG_URL}${item.images.primary.small}` });
-  const [checkedItem, setCheckedItem] = useState(false);
+  const styles = useStyles();
+  const [inputValue, setInputValue] = useState(item.quantity);
+  const currencySign = getCurrencySign(currency);
 
-  const onChangeQuantity = (value) => {
-    dispatch(setCartItemQuantity(item, +value));
+  const onChangeUserQuantity = useCallback(
+    _.debounce((value) => {
+      dispatch(changeCartItemUserQuantity({ item, value, userId: user._id }));
+    }, 500),
+    [dispatch, changeCartItemUserQuantity]
+  );
+
+  const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
+
+  const onDeleteItem = () => {
+    setModalVisibility(true);
+    setModalItem(item);
   };
-  const onCartItemCheck = () => {
-    setCheckedItem(!checkedItem);
-    dispatch(setCartItemChecked(item, checkedItem));
-  };
-
-  useEffect(() => {
-    dispatch(setCartItemChecked(item, true));
-  }, []);
-
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell classes={{ root: styles.image }} data-cy='cart-item-img'>
-        <Link to={`/product/${item._id}`}>
-          <b />
+      <TableCell data-cy='cart-item-img'>
+        <Link to={`${pathToProducts}/${item.product._id}`}>
+          <img
+            className={styles.itemImg}
+            src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
+            alt='product-img'
+          />
         </Link>
       </TableCell>
-      <TableCell
-        classes={{ root: styles.description }}
-        data-cy='cart-item-description'
-      >
-        <Link to={`/product/${item._id}`}>
-          <span className={styles.itemName}>{item.name[language].value}</span>
+      <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
+        <Link to={`${pathToProducts}/${item.product._id}`}>
+          <span className={styles.itemName}>{item.product.name[language].value}</span>
         </Link>
-        {item.selectedSize && (
+        {item.options.size && (
           <div>
-            {CART_TABLE_FIELDS[language].size}: {item.selectedSize.name}
+            {CART_TABLE_FIELDS[language].size}: {item.options.size.name}
           </div>
         )}
-        {item.bottomMaterial && (
+        {item.product.bottomMaterial && (
           <div>
             {CART_TABLE_FIELDS[language].bottomMaterial}:
             <br />
-            {item.bottomMaterial.material.name[language].value}
-          </div>
-        )}
-        {item.sidePocket && (
-          <div>
-            {CART_TABLE_FIELDS[language].sidePocket}:{' '}
-            <DoneIcon className={styles.doneIcon} />
+            {item.product.bottomMaterial.material.name[language].value}
           </div>
         )}
       </TableCell>
-      <TableCell>
-        <NumberInput
-          quantity={item.quantity}
-          onChangeQuantity={onChangeQuantity}
-        />
+      <TableCell className={styles.quantityWrapper}>
+        {!cartQuantityLoading ? (
+          <NumberInput
+            quantity={inputValue}
+            onChangeQuantity={onChangeQuantityHandler(user, onChangeUserQuantity, onChangeQuantity)}
+            setInputValue={setInputValue}
+          />
+        ) : (
+          <span className={styles.loadingBar}>
+            <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={30} />
+          </span>
+        )}
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
-        <span>
-          {calcPrice(item, currency) / 100} {item.basePrice[currency].currency}
+        <div className={styles.priceWrapper}>
+          {user && (
+            <div>
+              {Math.round(item.price[currency].value)}
+              {'\u00A0'}
+              <FontAwesomeIcon icon={currencySign} />
+            </div>
+          )}
+          {!user && (
+            <div>
+              {Math.round(calcPrice(item, currency))}
+              {'\u00A0'}
+              <FontAwesomeIcon icon={currencySign} />
+            </div>
+          )}
+        </div>
+      </TableCell>
+      <TableCell classes={{ root: styles.delete }}>
+        <span className={styles.deleteIcon}>
+          <DeleteIcon onClick={onDeleteItem} fontSize='default' />
         </span>
-        {isCartEditing && (
-          <Checkbox
-            className={styles.checkbox}
-            color='default'
-            checked={checkedItem}
-            onChange={onCartItemCheck}
-          />
-        )}
       </TableCell>
     </TableRow>
   );

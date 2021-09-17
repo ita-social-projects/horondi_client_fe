@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHryvnia, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
@@ -12,16 +11,16 @@ import { IMG_URL } from '../../../configs';
 
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import routes from '../../../configs/routes';
+import routes from '../../../const/routes';
+import { getCurrencySign } from '../../../utils/currency';
+import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 
 const ProductListItem = ({ product }) => {
-  const { language, currency, isLightTheme } = useSelector(
-    ({ Language, Currency, Theme }) => ({
-      language: Language.language,
-      currency: Currency.currency,
-      isLightTheme: Theme.lightMode
-    })
-  );
+  const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
+    language: Language.language,
+    currency: Currency.currency,
+    isLightTheme: Theme.lightMode
+  }));
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const { pathToProducts } = routes;
@@ -33,11 +32,18 @@ const ProductListItem = ({ product }) => {
     return () => setImage(null);
   }, [isLightTheme, product.images.primary.small]);
 
+  const checkSizes = () => {
+    const availableSizes = product.sizes.filter(
+      ({ size, price }) => size.available && { size, price }
+    );
+
+    return availableSizes
+      ? PRICE_FROM[language].value + availableSizes[0].price[currency].value
+      : SIZE_NOT_AVAILABLE[language].value;
+  };
+
   const styles = useStyles({ image, isLightTheme });
-
-  const currencySign =
-    currency === 0 ? faHryvnia : currency === 1 ? faDollarSign : '';
-
+  const currencySign = getCurrencySign(currency);
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
       <Link to={`${pathToProducts}/${product._id}`}>
@@ -48,8 +54,9 @@ const ProductListItem = ({ product }) => {
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />
                 <span>
+                  {checkSizes()}
+                  {'\u00A0'}
                   <FontAwesomeIcon icon={currencySign} />
-                  {product.basePrice[currency].value / 100}
                 </span>
               </span>
             </div>
@@ -93,6 +100,19 @@ ProductListItem.defaultProps = {
     basePrice: [
       {
         value: 1
+      }
+    ],
+    sizes: [
+      {
+        size: {
+          _id: ''
+        },
+        price: [
+          {
+            value: 1,
+            currency: ''
+          }
+        ]
       }
     ],
     images: {

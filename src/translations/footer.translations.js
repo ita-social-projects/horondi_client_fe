@@ -6,19 +6,19 @@ export const FOOTER_INFORMATION = {
   0: {
     title: 'Інформація',
     items: [
-      { id: 1, url: '/about-us', item: 'Про нас' },
+      { id: 1, url: '/pages/about-us', item: 'Про нас' },
       { id: 2, url: '/materials', item: 'Матеріали' },
-      { id: 3, url: '/payment-and-shipping', item: 'Оплата і доставка' },
-      { id: 4, url: '/privacy-policy', item: 'Умови конфіденційності' }
+      { id: 3, url: '/pages/payment-and-shipping', item: 'Оплата і доставка' },
+      { id: 4, url: '/pages/privacy-policy', item: 'Умови конфіденційності' }
     ]
   },
   1: {
     title: 'Information',
     items: [
-      { id: 1, url: '/about-us', item: 'About us' },
+      { id: 1, url: '/pages/about-us', item: 'About us' },
       { id: 2, url: '/materials', item: 'Materials' },
-      { id: 3, url: '/payment-and-shipping', item: 'Payment & shipping' },
-      { id: 4, url: '/privacy-policy', item: 'Privacy policy' }
+      { id: 3, url: '/pages/payment-and-shipping', item: 'Payment & shipping' },
+      { id: 4, url: '/pages/privacy-policy', item: 'Privacy policy' }
     ]
   }
 };
@@ -26,14 +26,14 @@ export const FOOTER_INFORMATION = {
 export const FOOTER_CONTACTS = {
   0: {
     title: 'Контакти',
-    map: {
-      item: 'Показати на мапі'
+    more: {
+      item: 'Більше інформації'
     }
   },
   1: {
     title: 'Contacts',
-    map: {
-      item: 'Show on map'
+    more: {
+      item: 'More information'
     }
   }
 };

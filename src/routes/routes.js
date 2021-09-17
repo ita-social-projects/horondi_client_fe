@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
 import { history } from '../store/store';
@@ -12,14 +12,35 @@ import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
-import AboutUs from '../pages/about-us';
+import routes from '../const/routes';
+
+const {
+  pathToMain,
+  pathToLogin,
+  pathToThanks,
+  pathToRegister,
+  pathToErrorPage,
+  pathToNotFoundPage,
+  pathToNews,
+  pathToSingleNews,
+  pathToConstructor,
+  pathToCart,
+  pathToCheckout,
+  pathToWishlist,
+  pathToContacts,
+  pathToMaterials,
+  pathToChosenPage,
+  pathToConfirmationToken,
+  pathToRecovery,
+  pathToRecoveryToken,
+  pathToProfile,
+  pathToOrderHistory,
+  pathToCategory,
+  pathToChosenProduct
+} = routes;
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
 const NewsPage = lazy(() => import('../pages/news/news-page'));
-const PaymentsAndShipping = lazy(() =>
-  import('../pages/payments-and-shipping')
-);
-const PrivacyPolicy = lazy(() => import('../pages/privacy-policy'));
 const Wishlist = lazy(() => import('../pages/wishlist'));
 const NewsDetail = lazy(() => import('../pages/news/news-detail'));
 const ProductListPage = lazy(() => import('../pages/product-list-page'));
@@ -29,24 +50,24 @@ const Confirmation = lazy(() => import('../pages/confirmation'));
 const Recovery = lazy(() => import('../pages/recovery'));
 const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
+const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
-const Contacts = lazy(() => import('../pages/contacts'));
 const Cart = lazy(() => import('../pages/cart'));
 const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
+const Contacts = lazy(() => import('../pages/contacts'));
 const Materials = lazy(() => import('../pages/materials'));
+const BusinessPage = lazy(() => import('../pages/business-page'));
 
 const Routes = () => {
   const styles = useStyles();
 
-  const { categories, userData, userIsChecked } = useSelector(
-    ({ Categories, User }) => ({
-      categories: Categories.list,
-      userIsChecked: User.userIsChecked,
-      userData: User.userData
-    })
-  );
+  const { categories, userData, userIsChecked } = useSelector(({ Categories, User }) => ({
+    categories: Categories.list,
+    userIsChecked: User.userIsChecked,
+    userData: User.userData
+  }));
 
   return (
     <ConnectedRouter history={history}>
@@ -55,85 +76,73 @@ const Routes = () => {
           <AppHeader />
           <div className={styles.root}>
             <Switch>
-              <Route path='/' exact component={Home} />
-              <Route path='/error-page' exact component={ErrorPage} />
-              <Route path='/news' exact component={NewsPage} />
-              <Route path='/news/:id' exact component={NewsDetail} />
-              <Route path='/about-us' exact component={AboutUs} />
-              <Route path='/materials' exact component={Materials} />
-              <Route path='/constructor' exact component={ImagesConstructor} />
-              <Route
-                path='/payment-and-shipping'
-                exact
-                component={PaymentsAndShipping}
-              />
-              <Route path='/privacy-policy' exact component={PrivacyPolicy} />
-              <Route path='/wishlist' exact component={Wishlist} />
-              <Route path='/contacts' exact component={Contacts} />
+              <Route path={pathToMain} exact component={Home} />
+              <Route path={pathToErrorPage} exact component={ErrorPage} />
+              <Route path={pathToNotFoundPage} exact component={NotFoundPage} />
+              <Route path={pathToNews} exact component={NewsPage} />
+              <Route path={pathToSingleNews} exact component={NewsDetail} />
+              <Route path={pathToConstructor} exact component={ImagesConstructor} />
+              <Route path={pathToWishlist} exact component={Wishlist} />
+              <Route path={pathToContacts} exact component={Contacts} />
+              <Route path={pathToMaterials} exact component={Materials} />
+              <Route path={pathToChosenPage} exact component={BusinessPage} />
               <ProtectedRoute
-                path='/login'
+                path={pathToLogin}
                 exact
                 component={Login}
                 isAuthed={!userData}
-                redirectTo='/'
+                redirectTo={pathToMain}
               />
               <ProtectedRoute
-                path='/register'
+                path={pathToRegister}
                 exact
                 component={Register}
                 isAuthed={!userData}
-                redirectTo='/'
+                redirectTo={pathToMain}
               />
-              <Route path='/thanks' exact component={ThanksPage} />
-              <Route path='/cart' exact component={Cart} />
-              <Route path='/checkout' exact component={Checkout} />
+              <Route path={pathToThanks} component={ThanksPage} />
+              <Route path={pathToCart} exact component={Cart} />
+              <Route path={pathToCheckout} exact component={Checkout} />
               <Route
-                path='/confirmation/:token'
+                path={pathToConfirmationToken}
                 exact
-                render={({ match }) => (
-                  <Confirmation token={match.params.token} />
-                )}
+                render={({ match }) => <Confirmation token={match.params.token} />}
               />
-              <Route path='/recovery' exact component={Recovery} />
+              <Route path={pathToRecovery} exact component={Recovery} />
               <Route
-                path='/recovery/:token'
+                path={pathToRecoveryToken}
                 exact
-                render={({ match }) => (
-                  <NewPassword token={match.params.token} />
-                )}
+                render={({ match }) => <NewPassword token={match.params.token} />}
               />
               <ProtectedRoute
                 component={ProfilePage}
-                path='/profile'
+                path={pathToProfile}
                 isAuthed={userIsChecked && userData}
                 exact
-                redirectTo='/login'
+                redirectTo={pathToLogin}
               />
               <ProtectedRoute
                 component={OrderHistory}
-                path='/order-history'
+                path={pathToOrderHistory}
                 isAuthed={userIsChecked && userData}
                 exact
-                redirectTo='/login'
+                redirectTo={pathToLogin}
               />
               <Route
-                path='/products/:category/:model'
+                path={pathToCategory}
                 exact
-                render={({ match }) => {
-                  const { category, model } = match.params;
+                render={(data) => {
+                  const { category, model } = data.match.params;
                   const categoryParam = categories.find(
                     (categoryFound) =>
-                      categoryFound.name[1].value.toLowerCase() ===
-                      category.toLowerCase()
+                      categoryFound.name[1].value.toLowerCase() === category.toLowerCase()
                   );
 
-                  return (
-                    <ProductListPage category={categoryParam} model={model} />
-                  );
+                  return <ProductListPage category={categoryParam} model={model} />;
                 }}
               />
-              <Route path='/product/:id' exact component={ProductDetails} />
-              <Route path='/products' exact component={ProductListPage} />
+              <Route path={pathToChosenProduct} exact component={ProductDetails} />
+              <Redirect to={pathToNotFoundPage} />
             </Switch>
           </div>
           <AppFooter />

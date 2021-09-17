@@ -120,11 +120,21 @@ export const PRODUCT_NOT_FOUND = {
 export const PRICE_FROM = {
   0: {
     lang: 'uk',
-    value: 'від'
+    value: 'від '
   },
   1: {
     lang: 'eng',
-    value: 'from'
+    value: 'from '
+  }
+};
+export const SIZE_NOT_AVAILABLE = {
+  0: {
+    lang: 'uk',
+    value: 'Товар недоступний'
+  },
+  1: {
+    lang: 'eng',
+    value: `Product isn't available`
   }
 };
 export const PRICE_TO = {
@@ -152,7 +162,10 @@ export const SORT_BY_TEXT = [
   { lang: 'uk', value: 'Сортувати за:' },
   { lang: 'eng', value: 'Sort by:' }
 ];
-
+export const COUNT_PER_PAGE = [
+  { lang: 'uk', value: 'Кількість на сторінці:' },
+  { lang: 'eng', value: 'Count per page:' }
+];
 export const SORT_BY_SELECT_OPTIONS = [
   {
     lang: [
@@ -182,7 +195,10 @@ export const SORT_BY_SELECT_OPTIONS = [
       { lang: 'uk', value: 'від дешевих до дорогих' },
       { lang: 'eng', value: 'price (low to high) ' }
     ],
-    optionValue: { name: 'sortAsc', value: 1 }
+    optionValue: {
+      name: 'sortAsc',
+      value: 1
+    }
   },
   {
     lang: [
@@ -204,6 +220,12 @@ export const ITEMS_PER_PAGE = [
     title: 'nine products per page',
     value: 9
   },
-  { title: 'eighteen products per page', value: 18 },
-  { title: 'thirty products per page', value: 30 }
+  {
+    title: 'eighteen products per page',
+    value: 18
+  },
+  {
+    title: 'thirty products per page',
+    value: 30
+  }
 ];

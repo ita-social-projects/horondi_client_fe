@@ -8,11 +8,14 @@ import { useStyles } from './modal.styles';
 
 const Modal = ({
   message,
-  itemName,
+  itemName = [],
   onAction,
   isOpen,
   language,
-  isCartModal = false
+  isCartModal = false,
+  isEmpty = false,
+  isFullscreen = false,
+  content
 }) => {
   const [open, setOpen] = useState(isOpen);
   const styles = useStyles();
@@ -27,19 +30,28 @@ const Modal = ({
       <p>
         {message}
         <br />
-        {isCartModal ? <b>{itemName.join()}</b> : <b>{itemName}</b>}
+        {isCartModal ? null : <b>{itemName}</b>}
       </p>
       <div className={styles.buttonGroup}>
         <Button onClick={handleClose} variant='contained'>
           {MODAL_BUTTONS[language].cancel}
         </Button>
-        <Button
-          onClick={() => handleClose(null, null, true)}
-          variant='contained'
-        >
+        <Button onClick={() => handleClose(null, null, true)} variant='contained'>
           {MODAL_BUTTONS[language].confirm}
         </Button>
       </div>
+    </div>
+  );
+
+  const emptyBody = (
+    <div
+      className={isFullscreen ? `${styles.paper} ${styles.fullscreen}` : styles.paper}
+      data-cy='removing-modal'
+    >
+      <Button onClick={handleClose} variant='contained'>
+        {MODAL_BUTTONS[language].cancel}
+      </Button>
+      {content}
     </div>
   );
 
@@ -51,7 +63,7 @@ const Modal = ({
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >
-        <SimpleModal open={open}>{body}</SimpleModal>
+        <SimpleModal open={open}>{isEmpty ? emptyBody : body}</SimpleModal>
       </Popper>
     </div>
   );

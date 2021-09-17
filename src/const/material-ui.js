@@ -1,5 +1,6 @@
 export const TEXT_FIELD_VARIANT = {
-  OUTLINED: 'outlined'
+  OUTLINED: 'outlined',
+  ROUNTED: 'rounded'
 };
 export const TEXT_FIELD_SIZE = {
   SMALL: 'small'

@@ -4,10 +4,22 @@ export const useStyles = makeStyles(() => ({
   root: ({ fromSideBar }) => ({
     color: fromSideBar ? '#000' : '#fff',
     borderRadius: 0,
-    height: 32,
+    height: 33,
     '&:hover': {
       backgroundColor: fromSideBar ? '#000' : '#fff',
       color: fromSideBar ? '#fff' : '#000'
     }
-  })
+  }),
+  cartIconWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '45px',
+    '@media (max-width: 768px)': {
+      '& .MuiBadge-badge': {
+        minWidth: '15px',
+        height: '15px',
+        width: '15px'
+      }
+    }
+  }
 }));

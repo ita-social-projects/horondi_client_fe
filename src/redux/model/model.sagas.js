@@ -5,6 +5,12 @@ import { getAllModels, getModelsByCategory } from './model.operations';
 import { setModels, setModelsLoading } from './model.actions';
 import { setError } from '../error/error.actions';
 import { GET_MODELS_BY_CATEGORY, GET_ALL_MODELS } from './model.types';
+import routes from '../../const/routes';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { USER_IS_BLOCKED } from '../../configs';
+import { handleUserError } from '../user/user.sagas';
+
+const { pathToErrorPage } = routes;
 
 export function* handleModelsLoadByCategory({ payload }) {
   try {
@@ -30,9 +36,13 @@ export function* handleAllModelsLoad() {
   }
 }
 
-export function* handleModelsErrors(e) {
-  yield put(setError(e.message));
-  yield put(push('/error-page'));
+function* handleModelsErrors(e) {
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setError(e.message));
+    yield put(push(pathToErrorPage));
+  }
 }
 
 export default function* modelSaga() {

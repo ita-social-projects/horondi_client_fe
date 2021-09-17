@@ -1,8 +1,5 @@
-import {
-  clearLocalStorage,
-  setToLocalStorage
-} from '../../src/services/local-storage.service';
-import { FAKE_PRODUCT_FOR_TEST } from '../../src/configs';
+import { clearLocalStorage, setToLocalStorage } from '../../src/services/local-storage.service';
+import { FAKE_PRODUCT_FOR_TEST } from './test.variables';
 
 describe('filled cart test', () => {
   beforeEach(() => {
@@ -16,9 +13,7 @@ describe('filled cart test', () => {
   });
 
   it('after click to "continue shopping" button should to redirect to home page', () => {
-    cy.get('[data-cy="control-buttons"]')
-      .find('a:first-child > button')
-      .click();
+    cy.get('[data-cy="control-buttons"]').find('a:first-child > button').click();
   });
 
   it('should to contain 2 linked buttons "continue shopping" and "checkout"', () => {
@@ -69,23 +64,15 @@ describe('cart item test', () => {
   });
 
   it('should have button to decrease quantity by 1', () => {
-    cy.get('[data-cy="cart-item-quantity"] > input')
-      .should('be.visible')
-      .type('1');
+    cy.get('[data-cy="cart-item-quantity"] > input').should('be.visible').type('1');
 
-    cy.get('[data-cy="cart-item-quantity"] > button:first-child')
-      .should('be.visible')
-      .click();
+    cy.get('[data-cy="cart-item-quantity"] > button:first-child').should('be.visible').click();
   });
 
   it('should have button to increase quantity by 1', () => {
-    cy.get('[data-cy="cart-item-quantity"] > input')
-      .should('be.visible')
-      .type('1');
+    cy.get('[data-cy="cart-item-quantity"] > input').should('be.visible').type('1');
 
-    cy.get('[data-cy="cart-item-quantity"] > button:last-child')
-      .should('be.visible')
-      .click();
+    cy.get('[data-cy="cart-item-quantity"] > button:last-child').should('be.visible').click();
   });
 
   it('should to show modal window', () => {
@@ -121,9 +108,6 @@ describe('empty cart test', () => {
   });
 
   it('should contain button with link to homepage', () => {
-    cy.get('[data-cy="empty-cart"]')
-      .find('button')
-      .should('be.visible')
-      .click();
+    cy.get('[data-cy="empty-cart"]').find('button').should('be.visible').click();
   });
 });

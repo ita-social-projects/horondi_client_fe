@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
+import { get } from 'lodash';
 
 import { formRegExp, CHAT_USER_DATA } from '../../../configs';
-import { CHAT, errorMessages } from '../../../translations/chat.translation';
+import { CHAT } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';
 import { sendEmail } from '../../../redux/chat/chat.actions';
+import { handleHelperText } from '../../../utils/handle-active-massenger';
 
 export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const dispatch = useDispatch();
@@ -15,19 +17,27 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     language: Language.language
   }));
 
-  // VALIDATED && CONFIRMED
-  const [firstNameValidated, setFirstNameValidated] = useState(false);
-  const [emailValidated, setEmailValidated] = useState(false);
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
+  }));
+  const defaultFirstName = get(userData, 'firstName', '');
+  const defaultEmail = get(userData, 'email', '');
+
+  const [user, setUser] = useState({
+    ...CHAT_USER_DATA,
+    firstName: defaultFirstName,
+    email: defaultEmail
+  });
+  const { firstName, email, message } = user;
+
+  const [firstNameValidated, setFirstNameValidated] = useState(!!defaultFirstName);
+  const [emailValidated, setEmailValidated] = useState(!!defaultEmail);
+
   const [messageValidated, setMessageValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // USER VALUES
-  const [user, setUser] = useState(CHAT_USER_DATA);
-  const { firstName, email, message } = user;
-
-  // HANDLERS
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
     const inputName = event.target.name;
@@ -65,18 +75,16 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
     setOpen(false);
   };
 
-  const Alert = (props) => (
-    <MuiAlert elevation={6} variant='filled' {...props} />
-  );
+  const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
 
   useEffect(() => {
     // VALID FIELDS
-    if (firstNameValidated && emailValidated) {
+    if (firstNameValidated && emailValidated && messageValidated) {
       setAllFieldsValidated(true);
     } else {
       setAllFieldsValidated(false);
     }
-  }, [firstNameValidated, emailValidated]);
+  }, [firstNameValidated, emailValidated, messageValidated]);
 
   return (
     <form className={style.formField}>
@@ -90,18 +98,11 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           variant='outlined'
           name='firstName'
           size='small'
-          multiline
           rows={1}
           error={!firstNameValidated && shouldValidate}
-          helperText={
-            !firstNameValidated && shouldValidate
-              ? `${errorMessages[language].value.firstName}`
-              : ''
-          }
+          helperText={handleHelperText(firstNameValidated, shouldValidate, language, 'firstName')}
           className={style.dataInput}
-          onChange={(e) =>
-            handleChange(e, setFirstNameValidated, formRegExp.text)
-          }
+          onChange={(e) => handleChange(e, setFirstNameValidated, formRegExp.text)}
           value={firstName}
           type='text'
         />
@@ -113,21 +114,15 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           variant='outlined'
           name='email'
           size='small'
-          multiline
           rows={1}
           error={!emailValidated && shouldValidate}
-          helperText={
-            !emailValidated && shouldValidate
-              ? `${errorMessages[language].value.email}`
-              : ''
-          }
+          helperText={handleHelperText(emailValidated, shouldValidate, language, 'email')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setEmailValidated, formRegExp.email)}
           value={email}
           type='text'
         />
         <TextField
-          required
           fullWidth
           key={CHAT[language].msgText}
           label={CHAT[language].msgText}
@@ -135,19 +130,15 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           name='message'
           size='small'
           multiline
-          rows={3}
+          rowsMax={4}
+          inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
-          helperText={
-            !messageValidated && shouldValidate
-              ? `${errorMessages[language].value.message}`
-              : ''
-          }
+          helperText={handleHelperText(messageValidated, shouldValidate, language, 'message')}
           className={style.dataInput}
-          onChange={(e) =>
-            handleChange(e, setMessageValidated, formRegExp.text)
-          }
+          onChange={(e) => handleChange(e, setMessageValidated, formRegExp.text)}
           value={message}
           type='text'
+          required
         />
       </>
       <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>

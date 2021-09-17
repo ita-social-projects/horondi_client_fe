@@ -7,24 +7,31 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'space-around',
     alignItems: 'flex-start',
     width: '100%',
-    marginBottom: '3%'
-  },
-  selfPickupTitlesWrapper:{
+    marginBottom: '3%',
+    '@media (max-width: 768px)': {
+      width: '100%'
+    }
+  }, 
+  selfPickupTitlesWrapper: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width:'40%'
+    width: '40%'
   },
   selfPickupData: ({ isLightTheme }) => ({
     display: 'flex',
     width: '80%',
     background: isLightTheme ? '#f6f4f4' : null,
-    paddingLeft: 5
+    paddingLeft: 5,
+    '@media (max-width: 768px)': {
+      width: '100%'
+    }
   }),
   selfPickupTitle: ({ isLightTheme }) => ({
     fontWeight: 400,
     fontSize: 18,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff'
+    color: isLightTheme ? '#1D1C1C' : '#ffffff',
+    marginLeft:'2%'
   }),
   schedule: {
     display: 'flex',

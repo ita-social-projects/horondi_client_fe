@@ -6,7 +6,6 @@ import {
   setNovaPoshtaWarehouse,
   setDeliveryLoading,
   setNovaPoshtaPrices,
-  setFondyData,
   setUkrPostRegions,
   setUkrPostDistricts,
   setUkrPostCities,
@@ -25,40 +24,27 @@ import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
   GET_NOVAPOSHTA_PRICES,
-  GET_FONDY_DATA,
   GET_UKRPOST_REGIONS,
   GET_UKRPOST_DISTRICTS,
   GET_UKRPOST_CITIES,
   GET_UKRPOST_POSTOFFICES
 } from './checkout.types';
-import getItems from '../../utils/client';
+import { getItems } from '../../utils/client';
 import { setError } from '../error/error.actions';
-import routes from '../../configs/routes';
+import routes from '../../const/routes';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { USER_IS_BLOCKED } from '../../configs';
+import { handleUserError } from '../user/user.sagas';
 
-function* handleErrors({ message }) {
-  yield put(setError(message));
-  yield put(push(routes.pathToErrorPage));
-}
+const { pathToErrorPage } = routes;
 
-export function* handleFondyUrl({ payload }) {
-  try {
-    const dataFromFondy = yield call(
-      getItems,
-      `query{
-              getPaymentCheckout(data: {
-                orderId: "${payload.orderID}",
-                orderDesc: "${payload.orderID}",
-                currency: "UAH",
-                amount: ${payload.amount}
-              }){
-                paymentId
-                checkoutUrl
-              }
-            }`
-    );
-    yield put(setFondyData(dataFromFondy.data.getPaymentCheckout));
-  } catch (e) {
-    yield call(handleErrors, e);
+function* handleErrors(e) {
+  if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
+    yield call(handleUserError, e);
+  } else {
+    yield put(setDeliveryLoading(false));
+    yield put(setError(e.message));
+    yield put(push(pathToErrorPage));
   }
 }
 
@@ -72,7 +58,6 @@ export function* handleNovaPoshtaPrice({ payload }) {
     yield put(setNovaPoshtaPrices(...price));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -86,7 +71,6 @@ export function* handleNovaPoshtaCities({ payload }) {
     yield put(setNovaPoshtaCities(cities));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -100,7 +84,6 @@ export function* handleNovaPoshtaWarehouse({ payload }) {
     yield put(setNovaPoshtaWarehouse(warehouses));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -114,7 +97,6 @@ export function* handleUkrPostRegions() {
     yield put(setUkrPostRegions(regions));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -142,7 +124,6 @@ export function* handleUkrPostCities({ payload }) {
     yield put(setUkrPostCities(cities));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -156,7 +137,6 @@ export function* handleUkrPostPostOffices({ payload }) {
     yield put(setUkrPostPostOffices(offices));
     yield put(setDeliveryLoading(false));
   } catch (e) {
-    yield put(setDeliveryLoading(false));
     yield call(handleErrors, e);
   }
 }
@@ -165,7 +145,6 @@ export default function* checkoutSaga() {
   yield takeEvery(GET_NOVAPOSHTA_CITIES, handleNovaPoshtaCities);
   yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleNovaPoshtaWarehouse);
   yield takeEvery(GET_NOVAPOSHTA_PRICES, handleNovaPoshtaPrice);
-  yield takeEvery(GET_FONDY_DATA, handleFondyUrl);
   yield takeEvery(GET_UKRPOST_REGIONS, handleUkrPostRegions);
   yield takeEvery(GET_UKRPOST_DISTRICTS, handleUkrPostDistricts);
   yield takeEvery(GET_UKRPOST_CITIES, handleUkrPostCities);

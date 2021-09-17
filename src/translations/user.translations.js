@@ -1,14 +1,20 @@
 export const CONFIRM_EMAIL = [
   {
     value:
-      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу.'
+      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу для входу в аккаунт.'
   },
   {
-    value:
-      'You have successfully registered! Please, confirm your email address.'
+    value: 'You successfully registered! Please, confirm your e-mail for Log In.'
   }
 ];
-
+export const GOOGLE_SIGN_IN_TEXT = [
+  {
+    value: 'або увійдіть за допомогою'
+  },
+  {
+    value: 'or use your Google account to register'
+  }
+];
 export const LOGIN_FORM_LABEL = [
   {
     value: 'увійти'
@@ -35,16 +41,47 @@ export const REGISTER_FORM_LABEL = [
   }
 ];
 
-export const EMPTY_FIELD = [
+export const REGISTER_FORM_CONSENT = [
   {
-    value: 'Заповніть поле'
+    value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
   },
   {
-    value: 'Empty field'
+    value: ['By clicking Register, you agree with our', 'terms of service']
   }
 ];
 
-export const LOGIN_USER_ERROR = {
+export const CONTINUE_SHOPPING_LABEL = [
+  {
+    value: 'Продовжити покупки'
+  },
+  {
+    value: 'Continue shopping'
+  }
+];
+
+export const USER_ERROR = {
+  USER_ALREADY_EXIST: [
+    {
+      value: 'Користувач за вказаним емейлом вже існує'
+    },
+    {
+      value: 'User with given email already exists'
+    }
+  ],
+  USER_NOT_AUTHORIZED: [
+    {
+      value: 'Користувач не авториваний'
+    },
+    {
+      value: 'User is not authorized'
+    }
+  ],
+  REFRESH_TOKEN_IS_NOT_VALID: [
+    { value: 'Данні авторизації застарілі, будь ласка авторизуйтеся' },
+    {
+      value: 'You have be logged out, please sign in again'
+    }
+  ],
   WRONG_CREDENTIALS: [
     {
       value: 'Неправильна електронна адреса або пароль'
@@ -58,34 +95,48 @@ export const LOGIN_USER_ERROR = {
       value: 'Ви ввели невірні дані'
     },
     {
-      value: 'You have typed wrong data'
-    }
-  ],
-  DEFAULT_ERROR: [
-    {
-      value: 'Ой! Щось пішло не так. Спробуйте будь ласка пізніше.'
-    },
-    {
-      value: 'Oops! Something went wrong. Please, try again later.'
-    }
-  ]
-};
-
-export const REGISTER_USER_ERROR = {
-  USER_ALREADY_EXIST: [
-    {
-      value: 'Користувач за вказаним емейлом вже існує'
-    },
-    {
-      value: 'User with given email already exists'
-    }
-  ],
-  INPUT_NOT_VALID: [
-    {
-      value: 'Невірно введені дані'
-    },
-    {
       value: 'Wrong input data'
+    }
+  ],
+  USER_IS_BLOCKED: [
+    {
+      value: 'Вибачте, ваш обліковий запис заблоковано.'
+    },
+    {
+      value: 'Sorry, your account is blocked.'
+    }
+  ],
+  USER_EMAIL_ALREADY_CONFIRMED: [
+    {
+      value: 'Користувач з таким email вже підтверджений'
+    },
+    {
+      value: 'User with this email is already confirmed'
+    }
+  ],
+  USER_NOT_FOUND: [
+    {
+      value: 'Користувач не знайдений'
+    },
+    {
+      value: 'User has not been found'
+    }
+  ],
+  TOKEN_IS_EXPIRIED: [
+    {
+      value:
+        'Дані авторизації застаріли. Будь ласка, підтвердіть свою електронну адресу в особистому кабінеті'
+    },
+    {
+      value: 'You have be logged out. Try to confirm your email in your personal cabinet'
+    }
+  ],
+  CART_IS_NOT_FOUND: [
+    {
+      value: 'Данні авторизації застарілі'
+    },
+    {
+      value: 'You have be logged out'
     }
   ],
   DEFAULT_ERROR: [
@@ -104,8 +155,11 @@ export const errorMessages = [
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат, ',
+      emailLength: 'Поле повинно містити від 8 до 60 символів',
       pass: 'Від 6 до 30 символів з однією великою літерою та цифрою',
-      confirmPassword: 'Паролі не збігаються'
+      confirmPassword: 'Паролі не збігаються',
+      wrongFormat: 'Некоректний формат',
+      empty: 'Поле не повинне бути порожнім'
     }
   },
   {
@@ -113,8 +167,11 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address, `,
-      pass: 'From 6 to 30 characters with one capital letter and one digit',
-      confirmPassword: 'Passwords do not match'
+      emailLength: `Field should contain from 8 to 60 characters`,
+      pass: 'From 6 to 30 characters with one capital  letter and one digit',
+      confirmPassword: 'Passwords do not match',
+      wrongFormat: 'Wrong format',
+      empty: 'Field should not to be empty'
     }
   }
 ];
@@ -122,34 +179,34 @@ export const errorMessages = [
 export const placeholders = {
   firstName: [
     {
-      value: "Введіть Ім'я"
+      value: 'Ім’я'
     },
     {
-      value: 'Enter firstname'
+      value: 'Firstname'
     }
   ],
   lastName: [
     {
-      value: 'Введіть прізвище'
+      value: 'Прізвище'
     },
     {
-      value: 'Enter lastname'
+      value: 'Lastname'
     }
   ],
   email: [
     {
-      value: 'Введіть email'
+      value: 'Електронна пошта'
     },
     {
-      value: 'Enter email'
+      value: 'Email'
     }
   ],
   password: [
     {
-      value: 'Введіть пароль'
+      value: 'Пароль'
     },
     {
-      value: 'Enter password'
+      value: 'Password'
     }
   ],
   confirmPassword: [
@@ -171,12 +228,12 @@ export const FORGOT_PASSWORD = [
   }
 ];
 
-export const STAY_SIGNED_IN = [
+export const REMEMBER_ME = [
   {
-    value: 'Залишитись авторизованим'
+    value: `Запам'ятати мене`
   },
   {
-    value: 'Stay signed in'
+    value: 'Remember me'
   }
 ];
 
@@ -217,15 +274,13 @@ export const RECOVERY_MESSAGES = [
   {
     h2: 'Відновлення паролю',
     label: 'Електронна адреса',
-    p:
-      'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
+    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
     button: 'Відправити'
   },
   {
     h2: 'Password recovery',
     label: 'E-mail  ',
-    p:
-      'Specify your e-mail to reset the password and we will send recovery instructions.',
+    p: 'Specify your e-mail to reset the password and we will send recovery instructions.',
     button: 'Send'
   }
 ];
@@ -294,8 +349,7 @@ export const NEW_PASSWORD_ERROR = {
   ],
   DEFAULT_ERROR: [
     {
-      value:
-        'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
+      value: 'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
     },
     {
       value: 'An error occurred! Please, reload your page and try again.'
@@ -316,7 +370,7 @@ export const NEW_PASSWORD_SUCCESS_MESSAGE = [
 
 export const PROFILE_LABELS = [
   {
-    firstName: "Ім'я",
+    firstName: 'Ім’я',
     lastName: 'Прізвище',
     email: 'Емейл',
     phoneNumber: 'Номер телефону',
@@ -340,7 +394,7 @@ export const PROFILE_LABELS = [
     city: 'City',
     street: 'Street',
     buildingNumber: 'Building number',
-    appartment: 'Appartment number',
+    appartment: 'Apartment number',
     zipcode: 'Zip Code',
     addPhoto: '+',
     saveBtnTitle: 'Save'
@@ -350,15 +404,13 @@ export const PROFILE_LABELS = [
 export const PROFILE_PASSWORD_CHANGE = [
   {
     heading: 'Зміна паролю',
-    text:
-      'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
+    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
     btnTitle: 'Змінити пароль',
     checkEmailText: 'Будь ласка, перевірте ваш емейл!'
   },
   {
     heading: 'Change password',
-    text:
-      'If you want to change your password, please click the button below and we will send you the instructions on your email',
+    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
     btnTitle: 'Change password',
     checkEmailText: 'Please, check your email!'
   }

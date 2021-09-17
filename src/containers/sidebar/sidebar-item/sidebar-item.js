@@ -14,14 +14,7 @@ const SideBarItem = ({ category, handlerItem, models, language, name, mainItemSt
   const styles = useStyles();
   const history = useHistory();
   const [isListOpen, setIsListOpen] = useState(false);
-  const {
-    sort,
-    page,
-    countPerPage,
-    categoryFilter,
-    modelsFilter,
-    defaultPage
-  } = URL_QUERIES_NAME;
+  const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
   const handleClick = () => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
@@ -31,7 +24,7 @@ const SideBarItem = ({ category, handlerItem, models, language, name, mainItemSt
   const handleModelClick = (productModels, categoryId) => {
     history.push('/');
     history.push(
-      `products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
+      `catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
     );
   };
   return (

@@ -19,6 +19,11 @@ export const ERROR_PAGE_IMAGES = {
   dark: './images/error-page/error-dark.png'
 };
 
+export const NOT_FOUND_PAGE_IMAGES = {
+  light: './images/not-found-page/bag.png',
+  dark: './images/not-found-page/bag.png'
+};
+
 export const LOGO = 'HORONDI';
 export const URL_LANGUAGE = 'en';
 
@@ -35,6 +40,15 @@ export const REGISTER_USER_DATA = {
   email: '',
   password: ''
 };
+export const USER_REGISTER_LABELS = {
+  email: 'email',
+  pass: 'password',
+  text: 'text'
+};
+export const USER_TOKENS = {
+  ACCESS_TOKEN: 'accessToken',
+  REFRESH_TOKEN: 'refreshToken'
+};
 
 export const CHAT_USER_DATA = {
   firstName: '',
@@ -50,7 +64,7 @@ export const CHAT_FACEBOOK_DATA = {
 export const LOGIN_USER_DATA = {
   email: '',
   password: '',
-  staySignedIn: false
+  rememberMe: false
 };
 
 export const PROFILE_USER_DATA = {
@@ -76,7 +90,7 @@ export const errorMessages = [
       firstName: 'Поле повинно містити від 2 до 30 символів',
       lastName: 'Поле повинно містити від 2 до 30 символів',
       email: 'Некоректний формат пошти',
-      pass: 'Від 8 до 30 символів з однією літерою та цифрою',
+      pass: 'Від 6 до 30 символів з однією літерою та цифрою',
       confirmPassword: 'Паролі не співпадають',
       text: 'Поле повинно містити від 2 до 700 символів',
       phoneNumber: 'Некоректний формат телефону',
@@ -96,7 +110,7 @@ export const errorMessages = [
       firstName: 'Field should contain from 2 to 30 characters',
       lastName: 'Field should contain from 2 to 30 characters',
       email: `Wrong email address `,
-      pass: 'From 8 to 30 characters with one letter and one digit',
+      pass: 'From 6 to 30 characters with one letter and one digit',
       confirmPassword: 'Passwords do not match',
       text: 'Field should contain from 2 to 700 characters',
       phoneNumber: 'Wrong phone format',
@@ -115,23 +129,27 @@ export const errorMessages = [
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
-  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
-  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
-  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/u,
-  pass: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,30}$/,
-  phoneNumber: /^\+?[0-9]{3}-?[0-9]{9}$/g,
+  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
+  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
+  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
+  password: /^(?=.*[a-zA-Zа-яА-Яіїє])^(?=.*[A-ZА-ЯІЇЄ])(?=.*\d)[a-zA-Zа-яА-ЯіїєІЇЄ\d]{6,30}$/,
+  phoneNumber:
+    /^(?:\+?38)?(?:\(0[0-9]{2}\)[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|0[0-9]{2}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|0[0-9]{2}[0-9]{7})$/,
   zipcode: /^\d{5}(?:[-\s]\d{4})?$/,
-  country: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  city: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  region: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
-  street: "^(?=.{2,40}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
+  country:
+    "^(?=.{2,40}$)[a-zA-Zа-яА-ЯІіЇїЄєЙй]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєЙй])?[a-zA-Zа-яА-ЯІіЇїЄєЙй]*)*$",
+  city: "^(?=.{2,40}$)[a-zA-Zа-яА-ЯІіЇїЄєЙй]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєЙй])?[a-zA-Zа-яА-ЯІіЇїЄєЙй]*)*$",
+  region:
+    "^(?=.{2,40}$)[a-zA-Zа-яА-ЯІіЇїЄєЙй]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєЙй])?[a-zA-Zа-яА-ЯІіЇїЄєЙй]*)*$",
+  street:
+    "^(?=.{2,40}$)[a-zA-Zа-яА-ЯІіЇїЄєЙй]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєЙй])?[a-zA-Zа-яА-ЯІіЇїЄєЙй]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   text: /^.{2,700}$/gm,
-  link: /(^|\s)(.+)?((https?:\/\/)?[\w-]+(\.[a-z0-9-]+)+\.?(:\d+)?(\/\S*)?)/gim
+  link: /\b(?:(?:https?|ftp|http):\/\/|www\.)[-a-z0-9+&@#%?=~_|!:,.;]*[-a-z0-9+&@#%=~_|]/gm
 };
 
 export const placeholders = {
@@ -242,25 +260,6 @@ export const URL_QUERIES_NAME = {
   defaultPage: '1'
 };
 
-export const FAKE_PRODUCT_FOR_TEST = {
-  _id: 'xdfgbvc3',
-  name: {
-    0: { value: 'гарбуз' },
-    1: { value: 'Pumpkin' }
-  },
-  bagBottom: 'Натуральна шкіра',
-  selectedSize: 'S',
-  sidePocket: {
-    isSelected: true
-  },
-  totalPrice: 1200,
-  images:
-    'https://scontent.flwo4-2.fna.fbcdn.net/v/t1.0-9/47230850_1840441399415884_8917409871041658880_o.jpg?_nc_cat=102&_nc_sid=8bfeb9&_nc_ohc=hm88c7z3vA8AX-1Hz30&_nc_ht=scontent.flwo4-2.fna&oh=72d7ebf7aaa8fee317e60c68bbc8a987&oe=5F47F0CA',
-  quantity: 1,
-  productUrl: '/backpacks/foweoo423'
-};
-
-export const INPUT_VARIANT = 'outlined';
 export const REDIRECT_TIMEOUT = 3000;
 export const RESPONSIVE_PDP = {
   superLargeDesktop: {
@@ -304,16 +303,17 @@ export const SNACKBAR_DURATION = 4000;
 export const SNACKBAR_MESSAGE = {
   added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
   updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
+  addedReply: ['Вашу відповідь успішно створений', 'Your answer is successfully added'],
+  deletedReply: ['Вашу відповідь успішно видалено', 'Your answer is successfully deleted'],
   deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
-  error: ['Щось пішло не так', 'Something went wrong']
+  error: ['Щось пішло не так', 'Something went wrong'],
+  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.'],
+  tokenExpired: [
+    'Данні авторизації застарілі, будь ласка авторизуйтеся',
+    'You have be logged out, please sign in again'
+  ]
 };
-export const COMMENT_DATA = {
-  firstName: '',
-  text: '',
-  product: '',
-  show: true,
-  email: ''
-};
+
 export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
@@ -340,9 +340,7 @@ export const hryvniaUnicode = '\u20b4';
 export const dollarUnicode = '\u0024';
 
 export const commentFields = {
-  firstName: { name: 'firstName' },
-  email: { name: 'email' },
-  text: { name: 'text', multiline: true, rows: 7 }
+  text: { name: 'text', multiline: true, rows: 5 }
 };
 
 export const profileFields = [
@@ -380,7 +378,7 @@ export const sideBarSubList = [
   },
   {
     name: ['Про нас', 'About us'],
-    link: '/about-us'
+    link: '/pages/about-us'
   },
   {
     name: ['Новини', 'News'],
@@ -423,15 +421,16 @@ export const toastSettings = {
 export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
 
 export const commentsLimit = 10;
-
-export const DEFAULT_SIZE = 'M';
+export const commentsSkip = 0;
+export const commentsReplyLimit = 10;
 
 export const cookiePolicy = {
   SINGLE_HOST_ORIGIN: 'single_host_origin'
 };
 
 export const cartKey = 'cart';
-export const wishlistKey = 'wishlist';
+export const LANGUAGE = 'language';
+export const WISHLIST_KEY = 'wishlist';
 export const sort = 'sort';
 export const countPerPage = 'countPerPage';
 export const page = 'page';
@@ -445,3 +444,31 @@ export const deliveryTypes = {
 };
 
 export const CY_CODE_ERR = 'code-error';
+
+export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';
+
+export const SNACKBAR_TYPES = {
+  error: 'error',
+  warning: 'warning',
+  info: 'info',
+  success: 'success'
+};
+
+export const GRAPHQL_ERROR = 'GraphQL error: ';
+
+export const SESSION_STORAGE = {
+  CHECKOUT_FORM: 'checkoutForm',
+  DELIVERY_TYPE: 'deliveryType'
+};
+
+export const HORONDI = 'horondi';
+
+export const FETCH_POLICY = 'no-cache';
+
+export const RETURN_PAGE = 'returnPage';
+
+export const HYPHEN = '-';
+
+export const COMMENT_OWNER_STATUS = {
+  isAdmin: ['Менеджер', 'Manager']
+};

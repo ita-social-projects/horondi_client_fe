@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   constructorPreview: ({ isMouseIn }) => ({
-    height: '100vh',
+    width: '100%',
     position: 'relative',
     margin: '50px 0',
     boxSizing: 'border-box',
@@ -17,8 +17,12 @@ export const useStyles = makeStyles((theme) => ({
       left: 0,
       bottom: 0,
       zIndex: 1,
-      background:
-        'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+      background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+    },
+    '& video': {
+      '@media (max-width: 768px)': {
+        width: '150% !important'
+      }
     }
   }),
   constructorInner: ({ isMouseIn }) => ({
@@ -34,22 +38,23 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     padding: 30,
     zIndex: 5,
-    background:
-      'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);'
+    background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);'
   }),
   constructorInnerIcon: ({ isMouseIn }) => ({
     position: 'absolute',
     left: '50%',
     top: 20,
-    transform: `translateX(-50%) ${
-      isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'
-    }`,
+    transform: `translateX(-50%) ${isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'}`,
     fontSize: '4em'
   }),
   constructorInnerLink: {
     color: 'white',
     fontSize: '3em',
     display: 'flex',
+    '@media (max-width: 768px)': {
+      fontSize: '25px',
+      marginLeft: '25px'
+    },
     '& svg': {
       marginLeft: '10px',
       fontSize: '1.4em'

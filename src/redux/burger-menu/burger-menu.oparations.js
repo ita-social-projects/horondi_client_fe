@@ -1,4 +1,8 @@
-export const getCategoriesForBurgerMenuQuery = `query {
+import { getItems } from '../../utils/client';
+
+export const getCategoriesForBurgerMenu = async () => {
+  const getCategoriesForBurgerMenuQuery = `
+  query {
     getCategoriesForBurgerMenu{
       category {
         _id
@@ -16,3 +20,7 @@ export const getCategoriesForBurgerMenuQuery = `query {
       }
     }
   }`;
+  const result = await getItems(getCategoriesForBurgerMenuQuery);
+
+  return result?.data?.getCategoriesForBurgerMenu;
+};

@@ -5,7 +5,7 @@ import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
 import { WISHLIST_TABLE_FIELDS } from '../../../translations/wishlist.translations';
 import Modal from '../../../components/modal';
-import { MODAL_DELETE_MESSAGES } from '../../../translations/modal.translations';
+import { MODAL_DELETE_FROM_WISHLIST_MESSAGE } from '../../../translations/modal.translations';
 import { removeItemFromWishlist } from '../../../redux/wishlist/wishlist.actions';
 
 const FilledWishlist = ({ items }) => {
@@ -45,7 +45,7 @@ const FilledWishlist = ({ items }) => {
         <div>
           <Modal
             itemName={modalItem.name[language].value}
-            message={MODAL_DELETE_MESSAGES[language]}
+            message={MODAL_DELETE_FROM_WISHLIST_MESSAGE[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
             language={language}

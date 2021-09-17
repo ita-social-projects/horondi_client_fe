@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectConstructor } from '../../redux/selectors/multiple.selectors';
+import { selectConstructor, selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
 import {
   getConstructorModelById,
   getModelForConstructor,
@@ -11,6 +11,8 @@ import { getConstructorBasic } from '../../redux/images-constructor/constructor-
 import { getConstructorFrontPocket } from '../../redux/images-constructor/constructor-front-pocket/constructor-front-pocket.actions';
 import { getConstructorPattern } from '../../redux/images-constructor/constructor-pattern/constructor-pattern.actions';
 import { getConstructorBottom } from '../../redux/images-constructor/constructor-bottom/constructor-bottom.actions';
+import { getConstructorSize } from '../../redux/images-constructor/constructor-size/constructor-size.actions';
+import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 
 export const useConstructor = () => {
   const dispatch = useDispatch();
@@ -24,13 +26,17 @@ export const useConstructor = () => {
     modelLoading,
     basicPrice,
     frontPocketPrice,
-    bottomPrice
+    bottomPrice,
+    sizePrice
   } = useSelector(selectConstructor);
+  const { language, currency } = useSelector(selectLangAndCurrency);
+  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
   const models = constructorModel.modelsForConstructor;
-  const basics = currentModel.constructorBasic;
-  const patterns = currentModel.constructorPattern;
-  const bottoms = currentModel.constructorBottom;
+  const basics = currentModel.eligibleOptions?.constructorBasic;
+  const patterns = currentModel.eligibleOptions?.constructorPattern;
+  const bottoms = currentModel.eligibleOptions?.constructorBottom;
+  const {sizes} = currentModel;
 
   useEffect(() => {
     dispatch(getModelForConstructor());
@@ -43,12 +49,16 @@ export const useConstructor = () => {
   }, [models]);
 
   useEffect(() => {
-    if (currentModel) {
+    if (currentModel.eligibleOptions) {
+      const { constructorBasic, constructorFrontPocket, constructorPattern, constructorBottom } =
+        currentModel.eligibleOptions;
+
       dispatch(setModelLoading(true));
-      dispatch(getConstructorBasic(currentModel.constructorBasic[0]._id));
-      dispatch(getConstructorFrontPocket(currentModel.constructorFrontPocket[0]._id));
-      dispatch(getConstructorPattern(currentModel.constructorPattern[0]._id));
-      dispatch(getConstructorBottom(currentModel.constructorBottom[0]._id));
+      dispatch(getConstructorBasic(constructorBasic[0]._id));
+      dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
+      dispatch(getConstructorPattern(constructorPattern[0]._id));
+      dispatch(getConstructorBottom(constructorBottom[0]._id));
+      dispatch(getConstructorSize(currentModel.sizes[0]._id));
     }
   }, [currentModel]);
 
@@ -71,12 +81,44 @@ export const useConstructor = () => {
     dispatch(getConstructorBottom(id));
   }, []);
 
+  const changeSize = useCallback((id) => {
+    dispatch(getConstructorSize(id));
+  }, []);
+
+  const priceTotal = useMemo(() => {
+    if (basicPrice && frontPocketPrice && bottomPrice && sizePrice) {
+      return (
+        basicPrice[currency].value +
+        frontPocketPrice[currency].value +
+        bottomPrice[currency].value +
+        sizePrice[currency].value
+      );
+    }
+  }, [basicPrice, frontPocketPrice, bottomPrice, sizePrice, currency]);
+
+  const priceBasic = useMemo(() => {
+    if (basicPrice) return basicPrice[currency].value;
+  }, [basicPrice, currency]);
+
+  const priceGobelen = useMemo(() => {
+    if (frontPocketPrice) return frontPocketPrice[currency].value;
+  }, [frontPocketPrice, currency]);
+
+  const priceSize = useMemo(() => {
+    if (sizePrice) return sizePrice[currency].value;
+  }, [sizePrice, currency]);
+
+  const priceBottom = useMemo(() => {
+    if (bottomPrice) return bottomPrice[currency].value;
+  }, [bottomPrice, currency]);
+
   return {
     values: {
       models,
       basics,
       patterns,
       bottoms,
+      sizes,
       modelLoading
     },
     images: {
@@ -90,12 +132,18 @@ export const useConstructor = () => {
       changeModel,
       changeBasic,
       changePattern,
-      changeBottom
+      changeBottom,
+      changeSize
     },
     prices: {
-      basicPrice,
-      frontPocketPrice,
-      bottomPrice
-    }
+      priceTotal,
+      priceBasic,
+      priceGobelen,
+      priceBottom,
+      priceSize,
+      DEFAULT_PRICE_VALUE
+    },
+    language,
+    currency
   };
 };

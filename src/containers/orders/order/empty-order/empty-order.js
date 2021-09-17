@@ -6,21 +6,22 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './empty-order.styles';
 import { CART_IMAGES } from '../../../../configs';
+import routes from '../../../../const/routes';
+
+const { pathToCategory } = routes;
 
 const EmptyOrder = ({ title, buttonTitle, name }) => {
   const { isLightTheme } = useSelector(({ Theme }) => ({
     isLightTheme: Theme.lightMode
   }));
   const styles = useStyles();
-  const emptyOrderImgLink = isLightTheme
-    ? CART_IMAGES.lightTheme
-    : CART_IMAGES.darkTheme;
+  const emptyOrderImgLink = isLightTheme ? CART_IMAGES.lightTheme : CART_IMAGES.darkTheme;
 
   return (
     <div className={styles.root} data-cy={name}>
       <Typography variant='h2'>{title}</Typography>
       <img src={emptyOrderImgLink} alt={name} />
-      <Link to='/backpacks/rolltop'>
+      <Link to={pathToCategory}>
         <Button className={styles.button} variant='contained'>
           {buttonTitle}
         </Button>

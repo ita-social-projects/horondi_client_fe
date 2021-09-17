@@ -16,41 +16,49 @@ import {
   addItemToWishlist,
   removeItemFromWishlist
 } from '../../../redux/wishlist/wishlist.actions';
-import { addItemToCart } from '../../../redux/cart/cart.actions';
-import {
-  setToastMessage,
-  setToastSettings
-} from '../../../redux/toast/toast.actions';
+import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
+import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 
-import {
-  PDP_BUTTONS,
-  TOOLTIPS
-} from '../../../translations/product-details.translations';
+import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
 
 import { TOAST_MESSAGE } from '../../../translations/toast.translations';
+import routes from '../../../const/routes';
+
+const { pathToCart } = routes;
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems } = useSelector(
+  const { language, productToSend, product, wishlistItems, userData, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
 
-  const { selectedSize } = productToSend;
-
   const isWishful = useMemo(
     () => wishlistItems.find((item) => product._id === item._id),
-    [product._id, wishlistItems]
+    [product?._id, wishlistItems]
   );
 
-  const sizeToSend = useMemo(
-    () => sizes.find(({ _id }) => _id === selectedSize),
-    [selectedSize, sizes]
+  const isItemInCart = useMemo(
+    () =>
+      cartList.find(
+        (item) =>
+          productToSend.product._id === item.product._id &&
+          productToSend.options.size._id === item.options.size._id
+      ),
+    [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
   );
 
-  const wishlistTip = isWishful
-    ? TOOLTIPS[language].removeWishful
-    : TOOLTIPS[language].addWishful;
+  const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
+
+  const cartTootipTitle = isItemInCart
+    ? TOOLTIPS[language].itemInCart
+    : TOOLTIPS[language].itemInCartAlready;
+
+  const cartButtonLabel = isItemInCart
+    ? PDP_BUTTONS[language].inCart
+    : PDP_BUTTONS[language].cartButton;
+
+  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
   const toastMessages = TOAST_MESSAGE[language];
 
@@ -61,27 +69,32 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
       basePrice,
       images: { primary }
     } = product;
+
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
       dispatch(setToastMessage(toastMessages.removedFromWishList));
       dispatch(setToastSettings(toastSettings));
     } else {
-      dispatch(
-        addItemToWishlist({ _id, name, basePrice, images: { primary } })
-      );
+      dispatch(addItemToWishlist({ _id, name, basePrice, sizes, images: { primary } }));
       dispatch(setToastMessage(toastMessages.addedToWishList));
       dispatch(setToastSettings(toastSettings));
     }
   };
 
   const onAddToCart = () => {
-    if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
-        })
-      );
+    if (isItemInCart) {
+      return;
+    }
+    if (product) {
+      if (userData) {
+        const newCartItemWithUserId = {
+          userId: userData._id,
+          cartItem: productToSend
+        };
+        dispatch(addProductToUserCart(newCartItemWithUserId));
+      } else {
+        dispatch(addItemToCart(productToSend));
+      }
       dispatch(setToastMessage(toastMessages.addedToCard));
       dispatch(setToastSettings(toastSettings));
     } else {
@@ -89,29 +102,26 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
     }
   };
 
+  const goToCheckout = () => {
+    dispatch(push(pathToCart));
+  };
+
   const onAddToCheckout = () => {
-    if ((product && !product.options[0].size) || selectedSize) {
-      dispatch(
-        addItemToCart({
-          ...productToSend,
-          selectedSize: sizeToSend ? sizeToSend.name : ''
-        })
-      );
-      dispatch(push('/cart'));
+    if (product) {
+      onAddToCart();
+      goToCheckout();
     } else {
       setSizeIsNotSelectedError(true);
     }
   };
 
+  const cartButtonFunc = isItemInCart ? goToCheckout : onAddToCart;
+
   return (
     <div className={styles.submit}>
       <Tooltip title={wishlistTip} placement='bottom'>
         {isWishful ? (
-          <FavoriteIcon
-            data-cy='wishful'
-            className={styles.redHeart}
-            onClick={onWishfulHandler}
-          />
+          <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={onWishfulHandler} />
         ) : (
           <FavouriteBorderIcon
             data-cy='not-wishful'
@@ -120,9 +130,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
           />
         )}
       </Tooltip>
-      <Button className={styles.submitButton} onClick={onAddToCart}>
-        {PDP_BUTTONS[language].cartButton}
-      </Button>
+      <Tooltip title={cartTootipTitle} placement='bottom'>
+        <Button className={buttonStyle} onClick={cartButtonFunc}>
+          {cartButtonLabel}
+        </Button>
+      </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
         {PDP_BUTTONS[language].buyButton}
       </Button>

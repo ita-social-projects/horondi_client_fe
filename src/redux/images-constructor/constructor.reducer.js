@@ -4,11 +4,13 @@ import constructorBottom from './constructor-bottom/constructor-bottom.reducer';
 import constructorFrontPocket from './constructor-front-pocket/constructor-front-pocket.reducer';
 import constructorModel from './constructor-model/constructor-model.reducer';
 import constructorPattern from './constructor-pattern/constructor-pattern.reducer';
+import constructorSize from './constructor-size/constructor-size.reducer';
 
 export default combineReducers({
   constructorBasic,
   constructorBottom,
   constructorFrontPocket,
   constructorModel,
-  constructorPattern
+  constructorPattern,
+  constructorSize
 });

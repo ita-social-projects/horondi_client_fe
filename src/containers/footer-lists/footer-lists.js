@@ -11,16 +11,17 @@ import {
   FOOTER_CONTACTS,
   FOOTER_CATALOGS
 } from '../../translations/footer.translations';
+import routes from '../../const/routes';
+
+const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
-  const { categories, language, contacts } = useSelector(
-    ({ Categories, Language, Contacts }) => ({
-      categories: Categories.list,
-      language: Language.language,
-      contacts: Contacts.contacts
-    })
-  );
+  const { categories, language, contacts } = useSelector(({ Categories, Language, Contacts }) => ({
+    categories: Categories.list,
+    language: Language.language,
+    contacts: Contacts.contacts
+  }));
 
   const categoriesList = categories
     ? categories.map(({ _id, name }) => (
@@ -53,9 +54,7 @@ const FooterLists = () => {
         <Typography variant='subtitle2'>{item.email}</Typography>
       </div>
       <div>
-        <Typography variant='subtitle2'>
-          {item.address[language].value}
-        </Typography>
+        <Typography variant='subtitle2'>{item.address[language].value}</Typography>
       </div>
     </div>
   ));
@@ -63,31 +62,25 @@ const FooterLists = () => {
     <>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>
-            {FOOTER_CATALOGS[language].title}
-          </Typography>
+          <Typography variant='h5'>{FOOTER_CATALOGS[language].title}</Typography>
         </div>
         {categoriesList}
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>
-            {FOOTER_INFORMATION[language].title}
-          </Typography>
+          <Typography variant='h5'>{FOOTER_INFORMATION[language].title}</Typography>
         </div>
         {informationList}
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>
-            {FOOTER_CONTACTS[language].title}
-          </Typography>
+          <Typography variant='h5'>{FOOTER_CONTACTS[language].title}</Typography>
         </div>
-        {contactsList}
-        <div key={FOOTER_CONTACTS[language].map.id}>
+        {contactsList[0]}
+        <div key={FOOTER_CONTACTS[language].more.id}>
           <Typography variant='subtitle2'>
-            <Link to='/contacts' className={styles.cardLink}>
-              <span>{FOOTER_CONTACTS[language].map.item}</span>
+            <Link to={pathToContacts} className={styles.cardLink}>
+              <span>{FOOTER_CONTACTS[language].more.item}</span>
             </Link>
           </Typography>
         </div>

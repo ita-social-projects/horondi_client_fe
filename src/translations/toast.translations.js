@@ -1,12 +1,12 @@
 export const TOAST_MESSAGE = {
   0: {
-    addedToWishList: 'Додано до Вподобань',
-    removedFromWishList: 'Видалено з Вподобань',
-    addedToCard: 'Додано до Кошику'
+    addedToWishList: 'Додано до вподобань',
+    removedFromWishList: 'Видалено з вподобань',
+    addedToCard: 'Додано в кошик'
   },
   1: {
-    addedToWishList: 'Added to Wishlist',
-    removedFromWishList: 'Removed from Wishlist',
-    addedToCard: 'Added to Cart'
+    addedToWishList: 'Added to wishlist',
+    removedFromWishList: 'Removed from wishlist',
+    addedToCard: 'Added to cart'
   }
 };

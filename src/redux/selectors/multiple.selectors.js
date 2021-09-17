@@ -18,10 +18,15 @@ export const selectProductsIdCommentsLanguageUserData = ({
   currentLimit: Comments.limit,
   productId: Products.product._id,
   language: Language.language,
-  userData: User.userData
+  userData: User.userData,
+  userOrders: User.userOrders,
+  getCommentsLoading: Comments.getCommentsLoading,
+  commentsCount: Comments.commentsCount,
+  skip: Comments.skip
 });
 
 export const selectCurrencyProductsCategoryFilter = ({
+  Theme,
   Currency,
   Products: { product, productLoading, productToSend, filters }
 }) => ({
@@ -29,15 +34,23 @@ export const selectCurrencyProductsCategoryFilter = ({
   categoryFilter: filters.categoryFilter,
   isLoading: productLoading,
   product,
-  productToSend
+  productToSend,
+  isLightTheme: Theme.lightMode
 });
 
-export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Wishlist }) => ({
+export const selectLanguageProductsUserWishlist = ({
+  Language,
+  Products,
+  User,
+  Wishlist,
+  Cart
+}) => ({
   language: Language.language,
   productToSend: Products.productToSend,
   product: Products.product,
   userData: User.userData,
-  wishlistItems: Wishlist.list
+  wishlistItems: Wishlist.list,
+  cartList: Cart.list
 });
 
 export const selectLightModeAndLocation = ({ Theme, router }) => ({
@@ -59,7 +72,8 @@ export const selectConstructor = ({ Constructor }) => ({
   modelLoading: Constructor.constructorModel.modelLoading,
   basicPrice: Constructor.constructorBasic.basePrice,
   frontPocketPrice: Constructor.constructorFrontPocket.basePrice,
-  bottomPrice: Constructor.constructorBottom.basePrice
+  bottomPrice: Constructor.constructorBottom.basePrice,
+  sizePrice: Constructor.constructorSize.additionalPrice
 });
 export const selectLangAndCurrency = ({ Language, Currency }) => ({
   language: Language.language,

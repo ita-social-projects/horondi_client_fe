@@ -14,12 +14,14 @@ export const PRODUCT_DESCRIPTION = {
     description: 'Опис продукту',
     mainMaterial: 'Основна тканина ',
     innerMaterial: 'Внутрішній матеріал ',
+    bottomMaterial: 'Матеріал низу',
     strapLengthInCm: 'Довжина лямок(см) '
   },
   1: {
     description: 'Product description',
     mainMaterial: 'Main material ',
     innerMaterial: 'Inner material ',
+    bottomMaterial: 'Bottom material ',
     strapLengthInCm: 'Strap length(cm) '
   }
 };
@@ -89,13 +91,17 @@ export const PDP_BUTTONS = {
     cartButton: 'В кошик',
     buyButton: 'Купити зараз',
     submitButton: 'Підтвердити',
-    cancelButton: 'Відхилити'
+    cancelButton: 'Відхилити',
+    leaveReply: 'Залишити відповідь',
+    inCart: 'Перейти до кошика'
   },
   1: {
     cartButton: 'Add to cart',
     buyButton: 'Buy now',
     submitButton: 'Submit',
-    cancelButton: 'Cancel'
+    cancelButton: 'Cancel',
+    leaveReply: 'Leave reply',
+    inCart: 'View in Cart'
   }
 };
 
@@ -119,10 +125,10 @@ export const COLOR = {
 
 export const SIMILAR_ITEMS = {
   0: {
-    title: 'Схожі товари'
+    title: 'З цим гарно пасує'
   },
   1: {
-    title: 'Similar items'
+    title: 'It fits well with this'
   }
 };
 
@@ -140,21 +146,34 @@ export const TOOLTIPS = {
     addWishful: 'Додати в бажане',
     removeWishful: 'Видалити з бажаного',
     edit: 'Редагувати',
-    delete: 'Видалити'
+    delete: 'Видалити',
+    unregisteredReply: 'Вам потрібно увійти щоб залишити відповідь',
+    unregisteredComment: 'Вам потрібно увійти щоб залишити коментар',
+    bought: 'Користувач купив даний товар',
+    feedbackComment: 'Ваш коментар не підтверджений адміністратором',
+    feedbackReply: 'Ваша відповідь не підтвердженна адміністратором',
+    itemInCart: 'Товар вже в кошику',
+    itemInCartAlready: 'Додати товар у кошик'
   },
   1: {
     addWishful: 'Add to wishlist',
     removeWishful: 'Remove from wishlist',
     edit: 'Edit',
-    delete: 'Delete'
+    delete: 'Delete',
+    unregisteredReply: 'You should login to leave answer',
+    unregisteredComment: 'You should login to leave comment',
+    bought: 'The user bought this product',
+    feedbackComment: 'Your comment has not been confirmed by the administrator ',
+    feedbackReply: 'Your answer has not been confirmed by the administrator ',
+    itemInCart: 'Product is already in cart',
+    itemInCartAlready: 'Add product to the cart'
   }
 };
 
 export const DIALOG = {
   0: {
     title: 'Видалити коментар?',
-    description:
-      'Ви дійсно хочете видалити коментар? Після видалення Ви не зможете його відновити.'
+    description: 'Ви дійсно хочете видалити коментар? Після видалення Ви не зможете його відновити.'
   },
   1: {
     title: 'Delete comment?',
@@ -163,18 +182,30 @@ export const DIALOG = {
   }
 };
 
+export const DIALOG_REPLY = {
+  0: {
+    title: 'Видалити відповідь?',
+    description:
+      'Ви дійсно хочете видалити відповідь? Після видалення Ви не зможете його відновити.'
+  },
+  1: {
+    title: 'Delete answer?',
+    description:
+      'Are you sure you want to delete the answer? After deleting you will not be able to restore the reply.'
+  }
+};
+
 export const COMMENTS = {
   0: {
-    title: 'Коментарі',
+    title: 'Відгуки',
     firstName: `Ім'я`,
     email: 'Електронна адреса',
     text: 'Поділіться своїми враженнями з іншими',
     submit: 'Залишити коментар',
-    unregisteredTip:
-      'Вам потрібно увійти і купити продукт, щоб залишити рейтинг',
+    unregisteredTip: 'Вам потрібно увійти щоб залишити рейтинг',
     registeredTip: 'Вам потрібно купити продукт, щоб залишити рейтинг',
     successfulTip: 'Встановити рейтинг',
-    loadMore: 'Завантажити більше',
+    loadMore: 'Показати ще...',
     hideBtn: 'Приховати коментарі'
   },
   1: {
@@ -183,10 +214,42 @@ export const COMMENTS = {
     email: 'Email',
     text: 'Share your thoughts with others',
     submit: 'Leave comment',
-    unregisteredTip: 'You should login and bought the product to leave rate',
+    unregisteredTip: 'You should login to leave rate',
     registeredTip: 'You should bought the product to leave rate',
     successfulTip: 'Set rate',
-    loadMore: 'Load more',
+    loadMore: 'Load more...',
     hideBtn: 'Hide comments'
+  }
+};
+
+export const REPLY = {
+  0: {
+    submit: 'Відповісти',
+    loadMore: 'Більше відповідей',
+    hideBtn: 'Приховати відповіді',
+    text: 'Поділіться своїми враженнями з іншими',
+    answers: 'Кількість відповідей :'
+  },
+  1: {
+    submit: 'Leave reply',
+    loadMore: 'More answers',
+    hideBtn: 'Hide answers',
+    text: 'Share your thoughts with others',
+    answers: 'Count of answers'
+  }
+};
+
+export const USER_DATA = {
+  0: {
+    firstName: 'Видалений користувач',
+    email: 'Deleted Email',
+    _id: 'deleted',
+    role: 'deleted'
+  },
+  1: {
+    firstName: 'Deleted User',
+    email: 'Deleted Email',
+    _id: 'deleted',
+    role: 'deleted'
   }
 };

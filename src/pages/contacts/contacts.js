@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
@@ -9,9 +9,10 @@ import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 
 const Contacts = ({ fromCheckout }) => {
-  const { contacts, loading, language } = useSelector(
-    selectLanguageAndContactsLoadingContacts
-  );
+  const [imageStatus, setImageStatus] = useState(true);
+  const [imageVisibility, setImageVisibility] = useState(false);
+
+  const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
   const styles = useStyles();
   if (loading) {
     return (
@@ -21,12 +22,22 @@ const Contacts = ({ fromCheckout }) => {
     );
   }
 
+  const onLoadImageError = () => {
+    setImageStatus(false);
+  };
+
+  const onImageLoad = () => {
+    setImageVisibility(true);
+  };
+
+  const cardVisibilityStyles = imageStatus && imageVisibility;
+
   const contactsDisplay = contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
           <Tooltip title={CONTACTS_PAGE_TITLES[language].showOnGoogleMaps}>
-            <Card>
+            <Card className={!cardVisibilityStyles && styles.mapImageInactive}>
               <a
                 target='_blank'
                 rel='noopener noreferrer'
@@ -35,6 +46,8 @@ const Contacts = ({ fromCheckout }) => {
               >
                 <img
                   className={styles.mapImage}
+                  onError={onLoadImageError}
+                  onLoad={onImageLoad}
                   src={`${IMG_URL}${contact.images[language].value.medium}`}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
@@ -44,34 +57,25 @@ const Contacts = ({ fromCheckout }) => {
         </div>
         <div className={styles.contacts}>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>
-              {CONTACTS_PAGE_TITLES[language].phone}
-            </span>
+            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].phone}</span>
             <span>+{contact.phoneNumber}</span>
           </div>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>
-              {CONTACTS_PAGE_TITLES[language].schedule}
-            </span>
+            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].schedule}</span>
             <div className={styles.schedule}>
               {contact.openHours[language].value.split('|').map((el) => {
                 const i = language ? 4 : 3;
                 return (
                   <div key={el}>
-                    <span className={styles.day}>{el.slice(0, i)}</span>
-                    <span className={styles.time}>{el.slice(i)}</span>
+                    <span className={styles.day}>{el.slice(i - (language ? 4 : 3))}</span>
                   </div>
                 );
               })}
             </div>
           </div>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>
-              {CONTACTS_PAGE_TITLES[language].address}
-            </span>
-            <div className={styles.contactAddress}>
-              {contact.address[language].value}
-            </div>
+            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].address}</span>
+            <div className={styles.contactAddress}>{contact.address[language].value}</div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>
@@ -85,9 +89,7 @@ const Contacts = ({ fromCheckout }) => {
   return (
     <div className={styles.wrapper}>
       {!fromCheckout && (
-        <h2 className={styles.contactsTitle}>
-          {CONTACTS_PAGE_TITLES[language].title}
-        </h2>
+        <h2 className={styles.contactsTitle}>{CONTACTS_PAGE_TITLES[language].title}</h2>
       )}
       {contactsDisplay}
     </div>

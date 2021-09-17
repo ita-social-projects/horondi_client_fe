@@ -23,25 +23,24 @@ const NewsPage = () => {
   const styles = useStyles();
   if (loading) {
     return (
-      <div className={styles.center}>
+      <div>
         <Loader />
       </div>
     );
   }
 
-  const newsItems = newslist.map(
-    ({ _id, date, author, image, title, text }) => (
-      <NewsItem
-        date={date}
-        key={_id}
-        id={_id}
-        author={author}
-        image={image}
-        title={title}
-        text={text}
-      />
-    )
-  );
+  const newsItems = newslist.map(({ _id, date, author, image, title, text, slug }) => (
+    <NewsItem
+      date={date}
+      key={_id}
+      id={_id}
+      author={author}
+      image={image}
+      title={title}
+      slug={slug}
+      text={text}
+    />
+  ));
   return (
     <>
       <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>

@@ -1,47 +1,10 @@
-import { gql } from '@apollo/client';
-import { client } from '../../utils/client';
+import { getItems } from '../../utils/client';
 
 const getAllModels = async () => {
-  const result = await client.query({
-    variables: {
-      skip: 0,
-      limit: 0
-    },
-    query: gql`
-      query($skip: Int, $limit: Int) {
-        getAllModels(skip: $skip, limit: $limit) {
-          items {
-            _id
-            category {
-              name {
-                value
-              }
-            }
-            name {
-              value
-            }
-            images {
-              small
-            }
-            show
-          }
-          count
-        }
-      }
-    `
-  });
-
-  return result.data.getAllModels;
-};
-
-const getModelsByCategory = async (payload) => {
-  const result = await client.query({
-    variables: {
-      category: payload
-    },
-    query: gql`
-      query($category: ID!) {
-        getModelsByCategory(id: $category) {
+  const getAllModelsQuery = `
+    query {
+      getAllModels {
+        items {
           _id
           category {
             name {
@@ -52,18 +15,46 @@ const getModelsByCategory = async (payload) => {
             value
           }
           images {
-            large
             small
           }
-          description {
+          show
+        }
+        count
+      }
+    }
+  `;
+
+  const result = await getItems(getAllModelsQuery);
+
+  return result?.data?.getAllModels;
+};
+
+const getModelsByCategory = async (payload) => {
+  const getModelsByCategoryQuery = `
+    query($category: ID!) {
+      getModelsByCategory(id: $category) {
+        _id
+        category {
+          name {
             value
           }
         }
+        name {
+          value
+        }
+        images {
+          large
+          small
+        }
+        description {
+          value
+        }
       }
-    `
-  });
+    }
+  `;
+  const result = await getItems(getModelsByCategoryQuery, { category: payload });
 
-  return result.data.getModelsByCategory;
+  return result?.data?.getModelsByCategory;
 };
 
 export { getModelsByCategory, getAllModels };

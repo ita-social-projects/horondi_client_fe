@@ -9,20 +9,18 @@ import { FOOTER_SOCIAL_NETWORK_LINKS } from '../../translations/footer.translati
 
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
+const FooterLinks = ({ showTitle, socialIconsStyles, position, setIsMenuOpen }) => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
   const styles = useStyles({ position });
 
   return (
-    <div className={styles.cardBody}>
+    <div className={styles.cardBody} onClick={() => setIsMenuOpen(false)}>
       <div className={styles.iconsBox}>
         {showTitle && (
           <div className={styles.cardTitle}>
-            <Typography variant='h5'>
-              {FOOTER_SOCIAL_NETWORK_LINKS[language].title}
-            </Typography>
+            <Typography variant='h5'>{FOOTER_SOCIAL_NETWORK_LINKS[language].title}</Typography>
           </div>
         )}
         <div className={styles.iconsContainer}>

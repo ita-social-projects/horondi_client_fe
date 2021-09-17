@@ -6,5 +6,37 @@ export const useStyles = makeStyles(() => ({
     marginLeft: 'auto',
     alignItems: 'center',
     marginTop: fromSideBar ? 'auto' : 0
-  })
+  }),
+
+  currency: {
+    '@media (max-width: 450px)': {
+      display: 'none'
+    },
+    height: '42px',
+    paddingTop: '5px'
+  },
+
+  language: {
+    '@media (max-width: 450px)': {
+      display: 'none'
+    },
+    height: '42px',
+    paddingTop: '5px'
+  },
+
+  cart: {
+    '@media (max-width: 450px)': {
+      display: 'none'
+    },
+    height: '42px',
+    paddingTop: '5px'
+  },
+
+  profile: {
+    '@media (max-width: 450px)': {
+      display: 'none'
+    },
+    height: '42px',
+    paddingTop: '5px'
+  }
 }));

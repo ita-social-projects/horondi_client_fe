@@ -14,26 +14,23 @@ const useCommentValidation = (isAuth, onSubmit, commentValue) => {
 
   const guestFields = !isAuth
     ? {
-        email: Yup.string().email(emailError).required(emailError),
-        firstName: Yup.string()
-          .matches(formRegExp.firstName, firstNameError)
-          .required(firstNameError)
-      }
+      email: Yup.string().email(emailError).required(emailError),
+      firstName: Yup.string()
+        .matches(formRegExp.firstName, firstNameError)
+        .required(firstNameError)
+    }
     : {};
 
   const guestValues = !isAuth
     ? {
-        email: '',
-        firstName: ''
-      }
+      email: '',
+      firstName: ''
+    }
     : {};
 
   const validationSchema = Yup.object({
     ...guestFields,
-    text: Yup.string(textError)
-      .min(2, textError)
-      .max(700, textError)
-      .required(textError)
+    text: Yup.string(textError).min(2, textError).max(700, textError).required(textError)
   });
 
   const initialValues = {
@@ -41,21 +38,14 @@ const useCommentValidation = (isAuth, onSubmit, commentValue) => {
     text: commentValue || ''
   };
 
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    setFieldValue,
-    resetForm
-  } = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-    validateOnBlur: shouldValidate,
-    validateOnChange: shouldValidate
-  });
+  const { handleSubmit, handleChange, handleBlur, values, errors, setFieldValue, resetForm } =
+    useFormik({
+      initialValues,
+      onSubmit,
+      validationSchema,
+      validateOnBlur: shouldValidate,
+      validateOnChange: shouldValidate
+    });
 
   return {
     handleSubmit,

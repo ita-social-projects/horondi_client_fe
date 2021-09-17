@@ -1,5 +1,6 @@
 import { call, put, takeEvery, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+
 import {
   setUser,
   setUserError,
@@ -13,13 +14,26 @@ import {
   setUserIsConfirmed,
   setConfirmationLoading,
   setRecoveryLoading,
-  setUserOrders
+  setUserOrders,
+  setUserCountOrders
 } from './user.actions';
+import { clearComments } from '../comments/comments.actions';
 import {
+  loginUser,
+  getGoogleUser,
+  confirmUserEmail,
+  recoverUser,
+  checkIfTokenIsValid,
+  registerUser,
+  updateUserById,
+  sendEmailConfirmation,
+  resetPassword,
+  getUserOrders,
   getUserByToken,
-  regenerateAccessToken,
-  getPurchasedProducts
+  getPurchasedProducts,
+  getCountUserOrders
 } from './user.operations';
+import { mergeCartFromLSWithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
   LOGIN_USER,
   CONFIRM_USER,
@@ -31,151 +45,80 @@ import {
   UPDATE_USER,
   SEND_CONFIRMATION_EMAIL,
   GET_USER_ORDERS,
-  LOGIN_BY_GOOGLE
+  LOGIN_BY_GOOGLE,
+  LOGOUT_USER
 } from './user.types';
-import getItems, { setItems } from '../../utils/client';
-import { REDIRECT_TIMEOUT } from '../../configs/index';
-import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { setCart } from '../cart/cart.actions';
-import { setWishlist } from '../wishlist/wishlist.actions';
+import {
+  REDIRECT_TIMEOUT,
+  cartKey,
+  USER_IS_BLOCKED,
+  USER_TOKENS,
+  WISHLIST_KEY,
+  LANGUAGE,
+  RETURN_PAGE,
+  SNACKBAR_TYPES,
+  SNACKBAR_MESSAGE
+} from '../../configs';
+import routes from '../../const/routes';
+import {
+  clearLocalStorage,
+  getFromLocalStorage,
+  setToLocalStorage
+} from '../../services/local-storage.service';
+import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/cart.actions';
+import { setWishlist, resetWishlist } from '../wishlist/wishlist.actions';
+import { handleUserIsBlocked } from '../../utils/user-helpers';
+import { AUTH_ERRORS } from '../../const/error-messages';
+import { USER_ERROR } from '../../translations/user.translations';
+import {
+  setSnackBarMessage,
+  setSnackBarSeverity,
+  setSnackBarStatus
+} from '../snackbar/snackbar.actions';
 
-export const loginUser = (data) => {
-  const query = `
-  mutation login($user: LoginInput!){
-  loginUser(
-    loginInput: $user
-  ) {    
-    orders
-    token
-    refreshToken
-    _id
-    email
-    firstName
-    lastName
-    phoneNumber
-    confirmed
-    images {
-      thumbnail
-    }
-    address {
-      country
-      city
-      street
-      buildingNumber
-      appartment
-      region
-      zipcode
-		}
-		wishlist {
-			_id
-			name {
-				lang
-				value
-			}
-			basePrice {
-				currency
-				value
-			}
-			images {
-			  primary {
-			    small
-			  }			  
-			}
-		}
-					cart {
-              _id
-              name {
-                lang
-                value
-              }
-                totalPrice {
-                  value
-                  currency
-              }
-              image
-              bagBottom {
-                  name {
-                      value  
-                      lang                    
-                  }
-                  value
-              }
-                quantity 
-                selectedSize
-                sidePocket
-                dimensions {
-                    volumeInLiters
-                    weightInKg
-                }                
-            }
-  }
+const { warning } = SNACKBAR_TYPES;
+const { pathToLogin, pathToProfile } = routes;
+const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
+
+function* setUserCartAndWishlist(user) {
+  const purchasedProducts = yield call(getPurchasedProducts, user._id);
+
+  setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
+  setToLocalStorage(ACCESS_TOKEN, user.token);
+  setToLocalStorage(WISHLIST_KEY, user.wishlist);
+  yield put(setUser({ ...user, purchasedProducts }));
+  yield put(setWishlist(user.wishlist));
+  const cartFromLc = getFromLocalStorage(cartKey);
+  const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
+
+  yield put(setCart(usersCart.cart.items));
+  yield put(setCartTotalPrice(usersCart.cart.totalPrice));
+  setToLocalStorage(cartKey, usersCart.cart.items);
 }
-  `;
-  return setItems(query, data);
-};
 
 export function* handleGoogleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
-    const user = yield call(
-      getItems,
-      `
-    mutation($idToken:String!){googleUser(idToken:$idToken){
-      _id
-      firstName,
-      lastName,
-      email,
-      credentials{
-        source,
-        tokenPass
-      }
-      token
-} 
-
-}
-  `,
-      {
-        idToken: payload.tokenId
-      }
-    );
-    const purchasedProducts = yield call(getPurchasedProducts, user.data.googleUser._id);
-    yield put(setUser({ ...user.data.googleUser, purchasedProducts }));
-    yield setToLocalStorage('accessToken', user.data.googleUser.token);
-    yield put(push('/profile'));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    const user = yield call(getGoogleUser, payload);
+    yield setUserCartAndWishlist(user);
+    yield put(push(pathToProfile));
+  } catch (e) {
+    yield call(handleUserError, e);
   } finally {
     yield put(setUserLoading(false));
   }
 }
 
-export const resetPassword = (data) => {
-  const query = `
-  mutation reset($password: String!, $token: String!){
-    resetPassword(password: $password, token: $token)
-  }
-  `;
-  return setItems(query, data);
-};
-
-export function* handleUserLoad({ payload }) {
+export function* handleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-    const purchasedProducts = yield call(getPurchasedProducts, user.data.loginUser._id);
-    yield put(setUser({ ...user.data.loginUser, purchasedProducts }));
-    yield put(setCart(user.data.loginUser.cart));
-    yield put(setWishlist(user.data.loginUser.wishlist));
-
-    yield setToLocalStorage('refreshToken', user.data.loginUser.refreshToken);
-    yield setToLocalStorage('accessToken', user.data.loginUser.token);
-    yield setToLocalStorage('wishlist', user.data.loginUser.wishlist);
-    yield setToLocalStorage('cart', user.data.loginUser.cart);
-
+    yield setUserCartAndWishlist(user);
     yield put(setUserLoading(false));
-    yield put(push('/'));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    const returnPage = sessionStorage.getItem(RETURN_PAGE);
+    yield put(push(returnPage));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -183,19 +126,13 @@ export function* handleUserConfirm({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(
-      setItems,
-      `
-  mutation confirmUser($token: String!){
-    confirmUserEmail(token: $token)
-  }
-  `,
-      payload
-    );
-    yield put(setUserLoading(false));
+    const user = yield call(confirmUserEmail, payload);
+    setToLocalStorage(ACCESS_TOKEN, user.token);
+    setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
     yield put(setUserIsConfirmed(true));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    yield put(setUserLoading(false));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -203,24 +140,15 @@ export function* handleUserRecovery({ payload }) {
   try {
     yield put(resetState());
     yield put(setRecoveryLoading(true));
-    yield call(
-      setItems,
-      `
-  mutation recovery($email: String!, $language: Int!){
-    recoverUser(email: $email, language: $language)
-  }
-  `,
-      payload
-    );
+    yield call(recoverUser, payload);
     yield put(setRecoveryLoading(false));
     yield put(userHasRecovered(true));
     if (payload.redirect) {
       yield delay(REDIRECT_TIMEOUT);
-      yield put(push('/login'));
+      yield put(push(pathToLogin));
     }
-  } catch (error) {
-    yield put(setRecoveryLoading(false));
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -228,87 +156,46 @@ export function* handlePasswordReset({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(
-      setItems,
-      `
-  mutation reset($password: String!, $token: String!){
-    resetPassword(password: $password, token: $token)
-  }
-  `,
-      payload
-    );
+    yield call(resetPassword, payload);
     yield put(setUserLoading(false));
     yield put(setPasswordIsReset(true));
     yield delay(REDIRECT_TIMEOUT);
-    yield put(push('/login'));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-  }
-}
-
-export function* handleTokenCheck({ payload }) {
-  try {
-    yield put(resetState());
-    yield put(setUserLoading(true));
-    yield call(
-      setItems,
-      `
-  mutation checkToken($token: String!){
-    checkIfTokenIsValid(token: $token)
-  }
-  `,
-      payload
-    );
-    yield put(setUserLoading(false));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+    yield put(push(pathToLogin));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
 export function* handleUserRegister({ payload }) {
   try {
-    yield put(resetState());
     yield put(setUserLoading(true));
-    yield call(
-      setItems,
-      `
-      mutation register($user: userRegisterInput!, $language: Int!){
-        registerUser(
-          user: $user
-          language: $language
-        ) {
-          email
-        }
-        }
-      `,
-      payload
-    );
+    yield call(registerUser, payload);
     yield put(setUserLoading(false));
     yield put(userHasRegistered(true));
-    yield delay(REDIRECT_TIMEOUT);
-    yield put(push('/login'));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
 export function* handleUserPreserve() {
   try {
     yield put(setUserLoading(true));
-    const refreshToken = getFromLocalStorage('refreshToken');
-    if (refreshToken) {
-      const newAccessToken = yield call(regenerateAccessToken, refreshToken);
-      setToLocalStorage('accessToken', newAccessToken);
+    const accessToken = getFromLocalStorage(ACCESS_TOKEN);
+    if (!accessToken) {
+      return;
     }
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
-  } catch (error) {
-    yield setToLocalStorage('accessToken', null);
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
+    const userCart = yield call(getCartByUserId, user._id);
+    yield put(setCartLoading(true));
+    yield put(setCart(userCart.cart.items));
+    yield put(setCartTotalPrice(userCart.cart.totalPrice));
+  } catch (e) {
+    yield call(handleUserError, e);
   } finally {
     yield put(setUserIsChecked(true));
+    yield put(setCartLoading(false));
     yield put(setUserLoading(false));
   }
 }
@@ -317,45 +204,12 @@ export function* handleUpdateUser({ payload }) {
   try {
     yield put(resetState());
     yield put(setUserLoading(true));
-    const user = yield call(
-      setItems,
-      `
-     mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
-      updateUserById(user: $user, id: $id, upload: $upload) { 
-        orders
-        _id
-        email
-        firstName
-        lastName
-        phoneNumber
-        confirmed
-        images {
-          thumbnail
-          large
-          small
-          medium
-        }
-        address {
-          country
-          city
-          street
-          buildingNumber
-          appartment
-          region
-          zipcode
-        }
-        confirmed
-      }
-    }
-  `,
-      payload
-    );
-    const purchasedProducts = yield call(getPurchasedProducts, user.data.updateUserById._id);
-    yield put(setUser({ ...user.data.updateUserById, purchasedProducts }));
+    const user = yield call(updateUserById, payload);
+    const purchasedProducts = yield call(getPurchasedProducts, user._id);
+    yield put(setUser({ ...user, purchasedProducts }));
     yield put(setUserLoading(false));
-  } catch (error) {
-    yield put(setUserError(error.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+  } catch (e) {
+    yield call(handleUserError, e);
   }
 }
 
@@ -363,65 +217,70 @@ export function* handleSendConfirmation({ payload }) {
   try {
     yield put(resetState());
     yield put(setConfirmationLoading(true));
-    yield call(
-      setItems,
-      `
-     mutation sendConfirmation($email: String!, $language: Int!){
-      sendEmailConfirmation(email: $email, language: $language)
-    }
-  `,
-      payload
-    );
+    yield call(sendEmailConfirmation, payload);
     yield put(setConfirmationLoading(false));
     yield put(setConfirmationEmailStatus(true));
   } catch (e) {
-    yield put(setConfirmationLoading(false));
-    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
+    yield call(handleUserError, e);
   }
 }
 
-export function* handleGetUserOrders() {
+export function* handleGetUserOrders({ payload: { pagination } }) {
   try {
     yield put(setUserLoading(true));
-    const res = yield call(
-      getItems,
-      `
-       {
-        getUserOrders {
-          _id
-          dateOfCreation
-          status
-          items {
-            name {
-              value
-            }
-            bottomMaterial{
-              value
-            }
-            quantity
-            actualPrice {
-              value
-              currency
-            }
-          }
-          totalItemsPrice {
-            value
-            currency
-          }
-        }
-      }
-    `
-    );
-    yield put(setUserOrders(res.data.getUserOrders));
+    const { countOrder } = yield call(getCountUserOrders);
+    yield put(setUserCountOrders(countOrder));
+    const orders = yield call(getUserOrders, pagination);
+    yield put(setUserOrders(orders));
     yield put(setUserLoading(false));
   } catch (e) {
-    yield put(setUserError(e.message.replace('GraphQL error: ', '')));
-    yield put(push('/error-page'));
+    yield call(handleUserError, e);
+  }
+}
+
+export function* handleUserLogout() {
+  yield put(clearComments());
+  yield put(setUser(null));
+  yield put(setUserOrders(null));
+  yield put(resetCart());
+  yield put(resetWishlist());
+  clearLocalStorage();
+}
+
+export function* handleTokenCheck({ payload }) {
+  try {
+    yield put(resetState());
+    yield put(setUserLoading(true));
+    yield call(checkIfTokenIsValid, payload);
+    yield put(setUserLoading(false));
+  } catch (e) {
+    yield call(handleUserError, e);
+  }
+}
+
+export function* handleRefreshTokenInvalid() {
+  yield call(handleUserLogout);
+  yield put(setSnackBarMessage(SNACKBAR_MESSAGE.tokenExpired));
+  yield put(setSnackBarSeverity(warning));
+  yield put(setSnackBarStatus(true));
+  yield put(push(pathToLogin));
+}
+
+export function* handleUserError(e) {
+  const language = getFromLocalStorage(LANGUAGE);
+  if (e?.message === USER_IS_BLOCKED) {
+    yield call(handleUserIsBlocked);
+  } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
+    yield call(handleRefreshTokenInvalid);
+  } else if (USER_ERROR[e?.message]) {
+    yield put(setUserError(USER_ERROR[e.message][language].value));
+  } else {
+    yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));
   }
 }
 
 export default function* userSaga() {
-  yield takeEvery(LOGIN_USER, handleUserLoad);
+  yield takeEvery(LOGIN_USER, handleUserLogin);
   yield takeEvery(CONFIRM_USER, handleUserConfirm);
   yield takeEvery(RECOVER_USER, handleUserRecovery);
   yield takeEvery(PASSWORD_RESET, handlePasswordReset);
@@ -432,4 +291,5 @@ export default function* userSaga() {
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
   yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
   yield takeEvery(LOGIN_BY_GOOGLE, handleGoogleUserLogin);
+  yield takeEvery(LOGOUT_USER, handleUserLogout);
 }

@@ -159,14 +159,16 @@ export const CHECKOUT_ADDITIONAL_INFORMATION = {
     noOneCity: 'Жодного міста не знайдено',
     noOneDepartment: 'Жодного відділення не знайдено',
     noOneRegion: 'Жодної області не знайдено',
-    noOneDistrict: 'Жодного району не знайдено'
+    noOneDistrict: 'Жодного району не знайдено',
+    consent: ['Підтверджуючи замовлення, я приймаю', ' угоду користувача']
   },
   1: {
     additionalInfo: '* Order will be shipped within 10 business days.',
     noOneCity: 'City not found',
     noOneDepartment: 'Department not found',
     noOneRegion: 'Region not found',
-    noOneDistrict: 'District not found'
+    noOneDistrict: 'District not found',
+    consent: ['Making order you agree with', ' terms and conditions']
   }
 };
 export const CHECKOUT_ERROR = {
@@ -211,5 +213,8 @@ export const CHECKOUT_INPUT_FIELD = {
   paymentMethod: 'paymentMethod',
   courierOffice: 'courierOffice',
   region: 'region',
-  district: 'district'
+  district: 'district',
+  regionId: 'regionId',
+  districtId: 'districtId',
+  cityId: 'cityId'
 };

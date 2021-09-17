@@ -13,15 +13,21 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
-    zIndex: '3',
+    zIndex: '900',
     bottom: '30px',
     top: 'auto',
     height: '60px',
     width: '60px',
     borderRadius: '29px',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
-    right: '12px',
+    right: '5%',
     transition: 'background 0.3s',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height: '40px',
+      boxShadow: ' 0 0 10px white',
+      zIndex: 900
+    },
     '&:hover': {
       cursor: 'pointer',
       background: '#E4B200'
@@ -31,7 +37,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
-    zIndex: '3',
+    zIndex: '900',
     bottom: '110px',
     top: 'auto',
     height: '60px',
@@ -40,17 +46,28 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     background: 'none',
     display: 'block',
-    right: '12px'
+    right: '5%',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height: '40px'
+    }
   },
   msgIcon: {
     ...flexCenter,
     width: '60px',
     height: '60px',
     background: 'black',
+    position: 'fixed',
+    zIndex: '900',
     borderRadius: '50%',
     marginBottom: '20px',
     cursor: 'pointer',
+    boxShadow: 'white 0px 0px 10px',
     transition: 'background 0.3s',
+    '@media (max-width: 768px)': {
+      width: '45px',
+      height: '45px'
+    },
     '&:hover': {
       background: '#E4B200'
     }
@@ -62,7 +79,13 @@ export const useStyles = makeStyles((theme) => ({
     background: mailFormVisible ? '#E4B200' : 'black',
     borderRadius: '50%',
     marginBottom: '20px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    position: 'fixed',
+    zIndex: '900',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height: '40px'
+    }
   }),
   mailForm: ({ themeMode }) => ({
     borderRadius: '4px',
@@ -70,12 +93,27 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    right: '160px',
-    bottom: '12%',
+    right: '15%',
+    top: '10%',
+    bottom: '10%',
     width: '320px',
     height: '600px',
+    zIndex: 899,
     background: themeMode ? 'white' : '#232323',
-    boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)'
+    boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
+    '@media (max-width: 768px)': {
+      width: '70%',
+      right: '15%',
+      top: '8%'
+    },
+    '@media (max-width: 420px)': {
+      width: '90%',
+      right: '5%'
+    },
+    '@media (max-height: 750px)': {
+      height: '80%',
+      top: '15%'
+    }
   }),
   cancelIcon: {
     position: 'absolute',
@@ -139,11 +177,14 @@ export const useStyles = makeStyles((theme) => ({
   dataInput: {
     height: '100%',
     marginBottom: '15px',
-    width: '280px'
+    width: '90%'
   },
   icon: {
     color: theme.palette.white,
-    fontSize: '35px'
+    fontSize: '35px',
+    '@media (max-width: 768px)': {
+      fontSize: '25px !important'
+    }
   },
   activeMsgWrapper: {
     height: '65%',

@@ -11,12 +11,16 @@ import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
+import routes from '../../../const/routes';
+
+const { pathToConstructor } = routes;
 
 const ConstructorPreview = () => {
   const language = useSelector(({ Language }) => Language.language);
 
   const [isMouseIn, setIsMouseIn] = useState(false);
-  const [isMuted, setIsMuted] = useState(0);
+  const [isZeroVolume, setIsZeroVolume] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
 
   const styles = useStyles({ isMouseIn });
   const dispatch = useDispatch();
@@ -26,16 +30,13 @@ const ConstructorPreview = () => {
   }, [dispatch]);
 
   return (
-    <div
-      className={styles.constructorPreview}
-      id='constructor'
-      data-section-style='dark'
-    >
+    <div className={styles.constructorPreview} id='constructor' data-section-style='dark'>
       <ReactPlayer
         width='100%'
         height='100%'
         playing
-        volume={isMuted}
+        volume={isZeroVolume}
+        muted={isMuted}
         loop
         url={CONSTRUCTOR_VIDEO_LINK}
       />
@@ -45,16 +46,26 @@ const ConstructorPreview = () => {
         onMouseEnter={() => setIsMouseIn(true)}
       >
         <ExpandLessIcon className={styles.constructorInnerIcon} />
-        <Link to='/constructor' className={styles.constructorInnerLink}>
+        <Link to={pathToConstructor} className={styles.constructorInnerLink}>
           {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
           <ArrowRightAltIcon />
         </Link>
       </div>
       <div className={styles.playerSoundControl}>
-        {isMuted ? (
-          <VolumeUpIcon onClick={() => setIsMuted(0)} />
+        {isZeroVolume ? (
+          <VolumeUpIcon
+            onClick={() => {
+              setIsZeroVolume(0);
+              setIsMuted(true);
+            }}
+          />
         ) : (
-          <VolumeOffIcon onClick={() => setIsMuted(1)} />
+          <VolumeOffIcon
+            onClick={() => {
+              setIsZeroVolume(1);
+              setIsMuted(false);
+            }}
+          />
         )}
       </div>
     </div>

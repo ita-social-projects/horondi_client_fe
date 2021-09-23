@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => {
         }
       },
       '@media (max-width: 1300px)': {
-        display: 'contents',
+        display: 'flex',
         marginTop: '0'
       }
     },

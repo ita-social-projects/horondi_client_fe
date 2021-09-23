@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     borderRadius: '5px',
     '@media (max-width: 600px)': {
-      width: '100vw',
+      width: '100%',
       margin: '0'
     }
   },

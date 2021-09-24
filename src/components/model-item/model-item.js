@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import { useStyles } from './model-item.style';
+
 import {
   setColorsFilter,
   setHotItemFilter,
@@ -22,8 +24,6 @@ const ModelItem = ({ model }) => {
   }));
   const dispatch = useDispatch();
   const styles = useStyles();
-  const history = useHistory();
-  const pathToModel = `/catalog/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`;
 
   const handleClickToModel = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));
@@ -37,11 +37,11 @@ const ModelItem = ({ model }) => {
         Math.max(...products.map((product) => product.basePrice[0].value))
       ])
     );
-    history.push(pathToModel);
   };
 
   return (
-    <div
+    <Link
+      to={`/catalog/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
       key={model.name[1].value}
       className={styles.modelItem}
       onClick={() => handleClickToModel(model)}
@@ -50,11 +50,11 @@ const ModelItem = ({ model }) => {
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>
-      <Link className={styles.link} to={pathToModel}>
+      <footer className={styles.link}>
         {HOME_BUTTONS[language].MOVE_TO_MODEL}
         <ArrowRightAltIcon />
-      </Link>
-    </div>
+      </footer>
+    </Link>
   );
 };
 

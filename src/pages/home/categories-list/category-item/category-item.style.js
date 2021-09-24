@@ -13,6 +13,7 @@ export const useStyles = makeStyles(() => ({
     boxShadow: '0px 5px 8px #c5c5c5',
     padding: 20,
     position: 'relative',
+    color: 'inherit',
     '&:after': {
       opacity: 0,
       transition: 'all .2s ease',
@@ -25,7 +26,7 @@ export const useStyles = makeStyles(() => ({
       bottom: 0,
       backgroundColor: 'rgba(0, 0, 0, 0.7)'
     },
-    '&:hover:after, &:hover > a': {
+    '&:hover:after, &:hover > div': {
       opacity: 1
     },
     '&:hover > span:first-child': {

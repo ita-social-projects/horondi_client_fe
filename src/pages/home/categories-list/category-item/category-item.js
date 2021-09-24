@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useStyles } from './category-item.style';
 import { getImage } from '../../../../utils/imageLoad';
@@ -7,13 +7,6 @@ import { HOME_BUTTONS } from '../../../../translations/homepage.translations';
 
 const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl, language }) => {
   const [image, setImage] = useState(categoryImageUrl);
-  const history = useHistory();
-
-  const path = `/${categoryUrl}`;
-
-  const changeRouteHandler = () => {
-    history.push(path);
-  };
 
   useEffect(() => {
     getImage(categoryImageUrl)
@@ -24,13 +17,13 @@ const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl, language })
   const styles = useStyles({ image });
 
   return (
-    <div className={styles.categoryItem} data-cy='category-item' onClick={changeRouteHandler}>
+    <Link className={styles.categoryItem} to={`/${categoryUrl}`}>
       <span className={styles.categoryName}>{categoryName}</span>
-      <Link to={path} className={styles.categoryInner}>
+      <div className={styles.categoryInner}>
         {HOME_BUTTONS[language].MOVE_TO_CATEGORY}
         <span>&#8594;</span>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 

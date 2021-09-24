@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
-import Collapse from '@material-ui/core/Collapse';
-import ListItemText from '@material-ui/core/ListItemText';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+import { Collapse, ListItemText, ListItem, List } from '@material-ui/core';
+
+import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
+
 import { useStyles } from './sidebar-items.style';
+
 import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
 
 const SideBarItem = ({ category, handlerItem, models, language, name, mainItemStyles }) => {
-  const styles = useStyles();
-  const history = useHistory();
-  const [isListOpen, setIsListOpen] = useState(false);
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
-  const handleClick = () => {
-    setIsListOpen((prevValue) => setIsListOpen(!prevValue));
-  };
+
+  const styles = useStyles();
+  const [isListOpen, setIsListOpen] = useState(false);
   const { quantityPerPage } = useSelector(({ Products }) => ({
     quantityPerPage: Products.countPerPage
   }));
-  const handleModelClick = (productModels, categoryId) => {
-    history.push('/');
-    history.push(
-      `catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
-    );
+
+  const handleClick = () => {
+    setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
+
   return (
     <>
       <li className={mainItemStyles}>
@@ -39,14 +35,16 @@ const SideBarItem = ({ category, handlerItem, models, language, name, mainItemSt
           {models.map((model) => (
             <ListItem
               button
+              component={Link}
               className={styles.nested}
               key={model._id}
-              onClick={() => {
-                handlerItem();
-                handleModelClick(model, category);
-              }}
+              onClick={handlerItem}
             >
-              <ListItemText primary={model.name[language].value} />
+              <Link
+                to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
+              >
+                <ListItemText primary={model.name[language].value} />
+              </Link>
             </ListItem>
           ))}
         </List>

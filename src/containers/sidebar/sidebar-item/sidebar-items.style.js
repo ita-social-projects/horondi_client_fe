@@ -33,6 +33,9 @@ export const useStyles = makeStyles((theme) => ({
       textTransform: 'uppercase',
       fontSize: '1.2em'
     },
+    '& a': {
+      color: 'inherit'
+    },
     '&:before': {
       content: `''`,
       display: 'block',

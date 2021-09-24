@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Collapse, ListItemText, ListItem, List } from '@material-ui/core';
-
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 
-import { useStyles } from './sidebar-items.style';
-
 import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
+
+import { useStyles } from './sidebar-items.style';
 
 const SideBarItem = ({ category, handlerItem, models, language, name, mainItemStyles }) => {
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;

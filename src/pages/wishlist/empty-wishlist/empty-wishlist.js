@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+
+import { Typography, Button } from '@material-ui/core';
 
 import { useStyles } from './empty-wishlist.styles';
 import { WISHLIST_TITTLES, WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';

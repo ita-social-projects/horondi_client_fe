@@ -37,7 +37,7 @@ export const useStyles = makeStyles(() => ({
     '&:hover:after': {
       opacity: '.5'
     },
-    '&:hover a': {
+    '&:hover footer': {
       opacity: 1
     }
   },

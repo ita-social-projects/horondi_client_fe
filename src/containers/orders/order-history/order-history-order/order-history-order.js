@@ -7,7 +7,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 
-import { getPriceOfProduct } from '../../../../utils/price';
 import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
@@ -67,7 +66,7 @@ const OrderHistoryOrder = ({ order }) => {
     );
   }
 
-  const totalPrice = getPriceOfProduct(order.totalItemsPrice[currency].value);
+  const totalPrice = order.totalItemsPrice[currency].value;
   const currencySign = getCurrencySign(currency);
   const orderStatus = _.capitalize(ORDER_STATUSES[order.status][language]);
   const dateInFormat = getFormatDate(order.dateOfCreation);

@@ -255,7 +255,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {Math.round(totalPriceToPay / 100)}
+                  {Math.round(totalPriceToPay)}
                   {'\u00A0'}
                   <FontAwesomeIcon icon={currencySign} />
                 </p>

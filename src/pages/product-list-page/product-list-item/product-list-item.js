@@ -13,6 +13,7 @@ import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../const/routes';
 import { getCurrencySign } from '../../../utils/currency';
+import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 
 const ProductListItem = ({ product }) => {
   const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
@@ -31,9 +32,18 @@ const ProductListItem = ({ product }) => {
     return () => setImage(null);
   }, [isLightTheme, product.images.primary.small]);
 
+  const checkSizes = () => {
+    const availableSizes = product.sizes.filter(
+      ({ size, price }) => size.available && { size, price }
+    );
+
+    return availableSizes
+      ? PRICE_FROM[language].value + availableSizes[0].price[currency].value
+      : SIZE_NOT_AVAILABLE[language].value;
+  };
+
   const styles = useStyles({ image, isLightTheme });
   const currencySign = getCurrencySign(currency);
-
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
       <Link to={`${pathToProducts}/${product._id}`}>
@@ -44,7 +54,7 @@ const ProductListItem = ({ product }) => {
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />
                 <span>
-                  {Math.round(product.basePrice[currency].value / 100)}
+                  {checkSizes()}
                   {'\u00A0'}
                   <FontAwesomeIcon icon={currencySign} />
                 </span>
@@ -90,6 +100,19 @@ ProductListItem.defaultProps = {
     basePrice: [
       {
         value: 1
+      }
+    ],
+    sizes: [
+      {
+        size: {
+          _id: ''
+        },
+        price: [
+          {
+            value: 1,
+            currency: ''
+          }
+        ]
       }
     ],
     images: {

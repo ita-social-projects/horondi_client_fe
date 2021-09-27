@@ -41,7 +41,12 @@ const CartHeader = ({ fromSideBar }) => {
       {!cartLoading && (
         <span className={styles.cartIconWrapper}>
           <Link to={pathToCart}>
-            <IconButton className={styles.root} aria-label={cartKey} tabIndex={-1}>
+            <IconButton
+              className={styles.root}
+              aria-label={cartKey}
+              tabIndex={-1}
+              disableRipple
+            >
               <Badge badgeContent={itemsCount} color='secondary'>
                 <ShoppingBasketIcon />
               </Badge>

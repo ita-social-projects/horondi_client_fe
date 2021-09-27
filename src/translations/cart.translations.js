@@ -75,10 +75,10 @@ export const DELIVERY_TYPE = {
     ukrPostCourier: "Кур'єр укрпошти"
   },
   1: {
-    novaPost: 'Nova Post',
-    ukrPost: 'Ukr Post',
-    selfPickup: 'Self pickup',
-    novaPostCourier: 'Nova Post courier',
-    ukrPostCourier: 'Ukr Post courier'
+    novaPost: 'Nova Poshta',
+    ukrPost: 'Ukrposhta',
+    selfPickup: 'Self Pickup',
+    novaPostCourier: 'Nova Poshta Courier',
+    ukrPostCourier: 'Ukrposhta Courier'
   }
 };

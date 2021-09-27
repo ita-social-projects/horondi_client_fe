@@ -38,10 +38,15 @@ const loginUser = async (data) => {
 				lang
 				value
 			}
-			basePrice {
-				currency
-				value
-			}
+      sizes {
+        size {
+          available
+        }
+        price {
+          value
+          currency
+        }
+      }
 			images {
 			  primary {
 			    small
@@ -120,6 +125,27 @@ const getGoogleUser = async ({ idToken }) => {
       credentials{
         source,
         tokenPass
+      }
+      wishlist {
+        _id
+        name {
+          lang
+          value
+        }
+        sizes {
+          size {
+            available
+          }
+          price {
+            value
+            currency
+          }
+        }
+        images {
+          primary {
+            small
+          }
+        }
       }
       token
 } 

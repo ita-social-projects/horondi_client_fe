@@ -49,8 +49,10 @@ const ProductDetails = ({ match }) => {
     bottomMaterial,
     pattern
   } = product || {};
+  const availableSizes =
+    sizes && sizes.filter(({ size, price }) => size.available && { size, price });
 
-  const currentSize = sizes ? sizes.find(({ available, name }) => available && name) : {};
+  const currentSize = availableSizes ? availableSizes[0] : {};
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -77,13 +79,13 @@ const ProductDetails = ({ match }) => {
               }
             }
           },
-          price: currentSize.additionalPrice,
+          price: currentSize.price,
           options: {
-            size: currentSize
+            size: currentSize.size
           },
           dimensions: {
-            volumeInLiters: currentSize.volumeInLiters,
-            weightInKg: currentSize.weightInKg
+            volumeInLiters: currentSize.size.volumeInLiters,
+            weightInKg: currentSize.size.weightInKg
           }
         })
       );
@@ -94,8 +96,8 @@ const ProductDetails = ({ match }) => {
       dispatch(clearProductToSend());
     };
   }, [
-    currentSize.volumeInLiters,
-    currentSize.weightInKg,
+    currentSize,
+    currentSize,
     product,
     category,
     dispatch,
@@ -105,19 +107,19 @@ const ProductDetails = ({ match }) => {
     currency
   ]);
 
-  const handleSizeChange = (selectedId) => {
-    const selectedSize = sizes.find(({ _id }) => _id === selectedId);
+  const handleSizeChange = (selectedPosition) => {
+    const selectedSize = sizes[selectedPosition];
 
     dispatch(
       setProductToSend({
         ...productToSend,
-        price: selectedSize.additionalPrice,
+        price: selectedSize.price,
         dimensions: {
           volumeInLiters: selectedSize.volumeInLiters,
           weightInKg: selectedSize.weightInKg
         },
         options: {
-          size: selectedSize
+          size: selectedSize.size
         }
       })
     );
@@ -141,7 +143,7 @@ const ProductDetails = ({ match }) => {
       <div className={styles.product}>
         <ProductImages />
         <div className={styles.productDetails}>
-          <ProductInfo price={currentSize.additionalPrice} />
+          <ProductInfo price={currentSize.size.price} />
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}

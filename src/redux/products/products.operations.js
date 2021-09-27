@@ -70,7 +70,7 @@ const getFilteredProducts = async ({ state, currency }) => {
   const getFilteredProductsQuery = `
     query(
       $search: String
-      $price: [Int]
+      $price: [Float]
       $colors: [String]
       $patterns: [String]
       $isHotItem: Boolean
@@ -153,6 +153,15 @@ const getFilteredProducts = async ({ state, currency }) => {
             purchasedCount
             availableCount
             rate
+            sizes {
+              size {
+                available
+              }
+              price {
+                value
+                currency
+              }
+            }
           }
           count
         }
@@ -289,17 +298,19 @@ const getProductById = async (id) => {
             value
           }
           sizes {
-            _id
-            name
-            heightInCm
-            widthInCm
-            depthInCm
-            volumeInLiters
-            weightInKg
-            available
-            additionalPrice {
-              currency
+            size {
+              _id
+              name
+              heightInCm
+              widthInCm
+              depthInCm
+              volumeInLiters
+              weightInKg
+              available
+            }
+            price {
               value
+              currency
             }
           }
           availableCount

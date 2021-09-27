@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
     height: '550px',
-    padding: '80px 63px 63px',
+    padding: '80px 45px 45px',
     boxSizing: 'border-box'
   },
   heading: {
@@ -88,7 +88,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   emailInput: {
-    marginBottom: '29px',
+    marginBottom: '35px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -117,7 +117,6 @@ export const useStyles = makeStyles((theme) => ({
   loginBtn: {
     border: '1px solid black',
     borderRadius: '4px',
-    marginBottom: '20px',
     textTransform: 'capitalize',
     backgroundColor: 'white',
     color: 'black',
@@ -126,13 +125,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   loginGroup: {
-    position: 'relative',
-    paddingBottom: '19px',
-    paddingTop: '8px'
+    position: 'relative'
   },
   loginError: {
     fontSize: '0.75rem',
-    margin: '3px 14px 0px',
     textAlign: 'left',
     fontFamily: 'Roboto,Helvetica,Arial,sans-serif',
     fontWeight: '400',
@@ -141,7 +137,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#f44336',
     wordWrap: 'break-word',
     position: 'absolute',
-    top: '50px',
+    top: '33px',
     left: '0px'
   },
   recoveryBtn: {
@@ -157,12 +153,19 @@ export const useStyles = makeStyles((theme) => ({
   },
   recoveryContainer: {
     width: '100%',
-    minHeight: '18px'
+    minHeight: '18px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '@media (max-width: 425px)': {
+      marginBottom: '10px'
+    }
   },
   orContainer: {
     width: '100%',
-    minHeight: '10px',
-    marginBottom: '10px'
+    marginTop: '20px',
+    marginBottom: '20px',
+    minHeight: '10px'
   },
   orText: {
     display: 'table',
@@ -172,6 +175,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   registerContainer: {
     width: '100%',
+    marginTop: '5px',
     minHeight: '18px'
   },
   registerBtn: {

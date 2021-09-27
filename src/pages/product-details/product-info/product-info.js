@@ -46,7 +46,7 @@ const ProductInfo = ({ price }) => {
     innerMaterial: product.innerMaterial,
     bottomMaterial: product.bottomMaterial,
     strapLengthInCm: product.strapLengthInCm,
-    currentPrice: productToSend.totalPrice || price,
+    currentPrice: productToSend.price || price,
     currentWeight: productToSend.dimensions.weightInKg,
     currentVolume: productToSend.dimensions.volumeInLiters,
     currency: Currency.currency
@@ -97,7 +97,7 @@ const ProductInfo = ({ price }) => {
       <div className={styles.priceContainer}>
         <span className={styles.subtitle}>{PRODUCT_PRICE[language].price}: </span>
         <span data-cy='price' className={styles.price}>
-          {Math.round(currentPrice[currency].value / 100)}
+          {Math.round(currentPrice[currency]?.value)}
           {'\u00A0'}
           <FontAwesomeIcon icon={currencySign} />
         </span>

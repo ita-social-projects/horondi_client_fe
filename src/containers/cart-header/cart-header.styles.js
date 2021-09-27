@@ -4,7 +4,7 @@ export const useStyles = makeStyles(() => ({
   root: ({ fromSideBar }) => ({
     color: fromSideBar ? '#000' : '#fff',
     borderRadius: 0,
-    height: 32,
+    height: 33,
     '&:hover': {
       backgroundColor: fromSideBar ? '#000' : '#fff',
       color: fromSideBar ? '#fff' : '#000'

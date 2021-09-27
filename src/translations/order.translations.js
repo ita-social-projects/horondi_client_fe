@@ -2,7 +2,7 @@ export const ORDER_TABLE_FIELDS = {
   0: {
     item: 'Назва товару',
     quantity: 'Кількість',
-    price: 'Ціна',
+    price: 'Ціна одиниці',
     size: 'Розмір',
     bagBottom: 'Дно рюкзака',
     sidePocket: 'Бокова кишеня',
@@ -14,7 +14,7 @@ export const ORDER_TABLE_FIELDS = {
   1: {
     item: 'Product name',
     quantity: 'Quantity',
-    price: 'Price',
+    price: 'Single item price',
     size: 'Size',
     bagBottom: 'Bag bottom',
     sidePocket: 'Side pocket',

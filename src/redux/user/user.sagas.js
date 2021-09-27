@@ -77,7 +77,7 @@ import {
 } from '../snackbar/snackbar.actions';
 
 const { warning } = SNACKBAR_TYPES;
-const { pathToLogin, pathToProfile } = routes;
+const { pathToLogin, pathToMain } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
 export function* handleGoogleUserLogin({ payload }) {
@@ -90,7 +90,7 @@ export function* handleGoogleUserLogin({ payload }) {
     setToLocalStorage(ACCESS_TOKEN, user.token);
     setToLocalStorage(WISHLIST_KEY, user.wishlist);
     yield put(setUser({ ...user, purchasedProducts }));
-    yield put(push(pathToProfile));
+    yield put(push(pathToMain));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {

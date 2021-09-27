@@ -2,15 +2,42 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
-import Zoom from 'react-img-zoom';
+import { GlassMagnifier } from 'react-image-magnifiers';
 import { useStyles } from './product-images.styles';
-
 import { IMGS_VIEWER, IMG_ALT_INFO } from '../../../translations/product-details.translations';
 import { getImage } from '../../../utils/imageLoad';
 
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import { IMG_URL } from '../../../configs';
+
+const ZoomImage = ({ images }) => {
+  const state = {
+    allowOverflow: false,
+    magnifierBorderSize: 0,
+    magnifierBorderColor: 'rgba(255, 255, 255, 1)',
+    magnifierSize: '200%',
+    square: true
+  };
+
+  return (
+    <div>
+      <GlassMagnifier
+        className='input-position'
+        imageSrc={IMG_URL + images.primary.large}
+        largeImageSrc={IMG_URL + images.primary.large}
+        allowOverflow={state.allowOverflow}
+        magnifierSize={state.magnifierSize}
+        magnifierBackgroundColor='#F5F5F5'
+        previewOverlayOpacity={0}
+        magnifierBorderSize={state.magnifierBorderSize}
+        magnifierBorderColor={state.magnifierBorderColor}
+        overlayOpacity={state.overlayOpacity}
+        square={state.square}
+      />
+    </div>
+  );
+};
 
 const ProductImages = () => {
   const { language, images, isLightTheme } = useSelector(({ Language, Products, Theme }) => ({
@@ -69,7 +96,6 @@ const ProductImages = () => {
         onClick={() => openImage(i + 1)}
       />
     ));
-  console.log(`img${IMG_URL}${images.primary.large}`);
   return (
     <div>
       <ImgsViewer
@@ -88,12 +114,7 @@ const ProductImages = () => {
       <div className={styles.images}>
         <div>{sideImages}</div>
         <div className={styles.imagePreviewContainer}>
-          <Zoom
-            img={IMG_URL + images.primary.large}
-            zoomScale={3}
-            height={400}
-            transitionTime={0.5}
-          />
+          <ZoomImage images={images} />
         </div>
       </div>
     </div>

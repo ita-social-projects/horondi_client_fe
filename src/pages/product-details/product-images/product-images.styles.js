@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2)
     },
     '& img': {
-      transition: 'all 0.3s',
       transform: 'scale(1)',
       width: '100%'
     }

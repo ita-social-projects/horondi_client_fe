@@ -344,6 +344,12 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@Hai-Vasyl](https://avatars.githubusercontent.com/u/64915099?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Hai-Vasyl)
 [![@Wasya1212](https://avatars.githubusercontent.com/u/15053168?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Wasya1212)
 [![@BohdanShchur](https://avatars.githubusercontent.com/u/50678261?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/BohdanShchur)
+[![@VasylLymych](https://avatars.githubusercontent.com/u/69967761?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/VasylLymych)
+[![@martagorpinchuk](https://avatars.githubusercontent.com/u/32914557?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/martagorpinchuk)
+[![@olga-gchak](https://avatars.githubusercontent.com/u/67831961?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/olga-gchak)
+[![@AnastasiaKhukhra](https://avatars.githubusercontent.com/u/62055382?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/AnastasiaKhukhra)
+[![@ElitKondor](https://avatars.githubusercontent.com/u/44610067?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/ElitKondor)
+[![@Skrekliam](https://avatars.githubusercontent.com/u/36624127?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Skrekliam)
 
 ### Quality control team
 

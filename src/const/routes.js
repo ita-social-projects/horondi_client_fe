@@ -16,7 +16,7 @@ const routes = {
   pathToProducts: '/product',
   pathToErrorPage: '/error-page',
   pathToNotFoundPage: '/not-found',
-  pathToBackpacks: '/backpacks',
+  pathToBackpacks: '/catalog/products?page=1&sort=popularity&countPerPage=0',
   pathToCategory: '/catalog/:category',
   pathToCheckout: '/checkout',
   pathToCart: '/cart',

@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import { TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +15,8 @@ import NumberInput from '../../../../components/number-input';
 
 import {
   setCartItemQuantity,
-  changeCartItemUserQuantity
+  changeCartItemUserQuantity,
+  setCartItemSize
 } from '../../../../redux/cart/cart.actions';
 
 import { IMG_URL } from '../../../../configs';
@@ -38,6 +41,9 @@ const CartItem = ({
   const styles = useStyles();
   const [inputValue, setInputValue] = useState(item.quantity);
   const currencySign = getCurrencySign(currency);
+  const [currentSize, setCurrentSize] = useState(item.options.size);
+  const [currentPrice, setCurrentPrice] = useState(item.price[currency].value);
+  const [firstlyMounted, toggleFirtslyMounted] = useState(false);
 
   const onChangeUserQuantity = useCallback(
     _.debounce((value) => {
@@ -52,9 +58,34 @@ const CartItem = ({
     setModalVisibility(true);
     setModalItem(item);
   };
+  const handleSizeChange = (event) => {
+    item.options.allSizes.map(({ size, price }) => {
+      if (event.target.value === size._id) {
+        setCurrentSize(size);
+        setCurrentPrice(price[currency].value);
+      }
+      return null;
+    });
+  };
+
+  useEffect(() => {
+    toggleFirtslyMounted(true);
+  }, []);
+  useEffect(() => {
+    if (firstlyMounted)
+      dispatch(
+        setCartItemSize(item, { currentSize, currentPrice, currency, quantity: inputValue })
+      );
+  }, [currentSize]);
+  useEffect(() => {
+    if (firstlyMounted) {
+      setInputValue(item.quantity);
+      setCurrentPrice(item.price[currency].value);
+    }
+  }, [item, currency]);
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell data-cy='cart-item-img'>
+      <TableCell classes={{ root: styles.product }} data-cy='cart-item-img'>
         <Link to={`${pathToProducts}/${item.product._id}`}>
           <img
             className={styles.itemImg}
@@ -62,23 +93,40 @@ const CartItem = ({
             alt='product-img'
           />
         </Link>
+        <div>
+          <Link to={`${pathToProducts}/${item.product._id}`}>
+            <span className={styles.itemName}>{item.product.name[language].value}</span>
+          </Link>
+          {item.product.bottomMaterial && (
+            <div className={styles.itemDescription}>
+              {CART_TABLE_FIELDS[language].bottomMaterial}:
+              {item.product.bottomMaterial.material.name[language].value}
+            </div>
+          )}
+        </div>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
-        <Link to={`${pathToProducts}/${item.product._id}`}>
-          <span className={styles.itemName}>{item.product.name[language].value}</span>
-        </Link>
-        {item.options.size && (
-          <div>
-            {CART_TABLE_FIELDS[language].size}: {item.options.size.name}
-          </div>
-        )}
-        {item.product.bottomMaterial && (
-          <div>
-            {CART_TABLE_FIELDS[language].bottomMaterial}:
-            <br />
-            {item.product.bottomMaterial.material.name[language].value}
-          </div>
-        )}
+        <Select
+          label='title'
+          data-cy='size'
+          name='size'
+          value={currentSize._id}
+          onChange={handleSizeChange}
+          className={styles.selectSizeStyle}
+        >
+          {item.options.allSizes.map(({ size, price }) => (
+            <MenuItem key={size._id} value={size._id}>
+              {size.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </TableCell>
+      <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
+        <div>
+          <FontAwesomeIcon icon={currencySign} />
+          {'\u00A0'}
+          {Math.round(currentPrice / inputValue) || null}
+        </div>
       </TableCell>
       <TableCell className={styles.quantityWrapper}>
         {!cartQuantityLoading ? (
@@ -97,16 +145,16 @@ const CartItem = ({
         <div className={styles.priceWrapper}>
           {user && (
             <div>
-              {Math.round(item.price[currency].value)}
-              {'\u00A0'}
               <FontAwesomeIcon icon={currencySign} />
+              {'\u00A0'}
+              {Math.round(item.price[currency].value)}
             </div>
           )}
           {!user && (
             <div>
-              {Math.round(calcPrice(item, currency))}
-              {'\u00A0'}
               <FontAwesomeIcon icon={currencySign} />
+              {'\u00A0'}
+              {Math.round(calcPrice(item, currency))}
             </div>
           )}
         </div>

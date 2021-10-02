@@ -18,7 +18,8 @@ import {
   CLEAN_CART,
   ADD_PRODUCT_TO_USER_CART,
   DELETE_PRODUCT_FROM_USER_CART,
-  CHANGE_CART_ITEM_USER_QUANTITY
+  CHANGE_CART_ITEM_USER_QUANTITY,
+  SET_CART_ITEM_SIZE
 } from './cart.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { cartKey, deliveryTypeKey, USER_IS_BLOCKED } from '../../configs/index';
@@ -166,6 +167,43 @@ export function* handleSetCartItemQuantity({ payload }) {
   yield put(setCart(newCart));
 }
 
+export function* handleSetCartItemSize({ payload }) {
+  try {
+    const { item, value } = payload;
+    const cart = getFromLocalStorage(cartKey);
+
+    const changedItems = cart.map((el) => {
+      if (el._id === item._id) {
+        el.options.size = value.currentSize;
+        el.price[value.currency].value = value.currentPrice * value.quantity;
+      }
+      return el;
+    });
+
+    for (let i = 0; i < changedItems.length; i++) {
+      for (let j = 0; j < changedItems.length; j++) {
+        if (
+          changedItems[i].product._id === changedItems[j].product._id &&
+          changedItems[i].options.size._id === changedItems[j].options.size._id &&
+          i !== j
+        ) {
+          changedItems[i].quantity += changedItems[j].quantity;
+          changedItems[i].price[0].value += changedItems[j].price[0].value;
+          changedItems[i].price[1].value += changedItems[j].price[1].value;
+
+          changedItems.splice(j, 1);
+        }
+      }
+    }
+
+    setToLocalStorage(cartKey, changedItems);
+
+    yield put(setCart(changedItems));
+  } catch (err) {
+    yield call(handleCartError, err);
+  }
+}
+
 export function* handleSetCartItemUserQuantity({ payload }) {
   try {
     const newCartList = yield call(updateCartItemQuantity, payload);
@@ -175,6 +213,7 @@ export function* handleSetCartItemUserQuantity({ payload }) {
     yield call(handleCartError, err);
   }
 }
+
 function* handleCartError(e) {
   if (e.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID || e.message === USER_IS_BLOCKED) {
     yield call(handleUserError, e);
@@ -190,6 +229,7 @@ export default function* cartSaga() {
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
   yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
+  yield takeEvery(SET_CART_ITEM_SIZE, handleSetCartItemSize);
   yield takeEvery(CHANGE_CART_ITEM_USER_QUANTITY, handleSetCartItemUserQuantity);
   yield takeEvery(ADD_DELIVERY_TYPE, handleSetDeliveryType);
   yield takeEvery(RESET_CART, handleCartReset);

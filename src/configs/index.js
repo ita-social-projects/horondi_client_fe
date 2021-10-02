@@ -5,8 +5,8 @@ export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
 export const UNIQUE_MODEL_IMAGE_LINK = 'https://i.imgur.com/ygJaph4.jpg';
 
 export const CART_IMAGES = {
-  lightTheme: './images/cart/cart-light-theme-img.png',
-  darkTheme: './images/cart/cart-dark-theme-img.png'
+  lightTheme: './images/cart/empty-cart-light-theme-image.png',
+  darkTheme: './images/cart/empty-cart-black-theme-image.png'
 };
 
 export const WISHLIST_IMAGES = {

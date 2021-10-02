@@ -74,7 +74,8 @@ export const initialState = {
     price: [],
     options: {
       size: {
-        _id: ''
+        _id: '',
+        allSizes: []
       }
     },
     sidePocket: false,

@@ -36,10 +36,22 @@ export const useStyles = makeStyles((theme) => ({
       border: 0
     }
   },
+  itemDescription: {
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    lineHeight: '22px',
+    letterSpacing: '0.0025em',
+    color: '#242424'
+  },
   itemName: {
-    fontSize: '1.7em',
-    textDecoration: 'none',
-    color: theme.palette.textColor
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '24px',
+    lineHeight: '32px',
+    color: '#242424'
   },
   price: {
     textAlign: 'center',
@@ -56,13 +68,21 @@ export const useStyles = makeStyles((theme) => ({
     top: 4,
     fontSize: '1.5em'
   },
-
+  product: {
+    display: 'flex',
+    alignItems: 'center'
+  },
   quantityWrapper: {
     width: '250px',
     '@media (max-width: 450px)': {
       gridArea: '3 / 1 / 4 / 2',
       width: 'auto'
     }
+  },
+  selectSizeStyle: {
+    border: '1px solid rgba(91, 91, 91, 0.2)',
+    width: '71px',
+    height: '40px'
   },
   loadingBar: {
     display: 'flex',

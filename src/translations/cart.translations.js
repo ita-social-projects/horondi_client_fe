@@ -15,8 +15,11 @@ export const CART_TITLES = {
 
 export const CART_BUTTON_TITLES = {
   0: {
-    empty: 'Обрати зараз',
+    empty: 'До каталогу',
     goods: 'Продовжити покупки',
+    pathToMain: 'Головна',
+    pathToCatalog: 'Каталог',
+    yourCart: 'Ваш кошик',
     checkout: 'Створити замовлення',
     deleteAllCart: 'Очистити весь кошик',
     editCancel: 'Припинити редагування',
@@ -26,8 +29,11 @@ export const CART_BUTTON_TITLES = {
     pay: 'Перейти до оплати'
   },
   1: {
-    empty: 'Shop now',
+    empty: 'Continue shopping',
     goods: 'Continue shopping',
+    pathToMain: 'Home',
+    pathToCatalog: 'Catalog',
+    yourCart: 'Your cart',
     checkout: 'Go to checkout',
     deleteAllCart: 'Clean cart',
     editCancel: 'Cancel editing',
@@ -41,18 +47,20 @@ export const CART_BUTTON_TITLES = {
 export const CART_TABLE_FIELDS = {
   0: {
     item: 'Назва товару',
+    product: 'Продукт',
     quantity: 'Кількість',
     price: 'Ціна',
     size: 'Розмір',
     bottomMaterial: 'Матеріал низу',
     sidePocket: 'Бокова кишеня',
     total: 'Підсумок',
-    toPay: 'До сплати',
+    toPay: 'До оплати',
     photo: 'Фото',
     delivery: 'Метод доставки',
-    actions: 'Дії'
+    actions: 'Дія'
   },
   1: {
+    product: 'Product',
     item: 'Product name',
     quantity: 'Quantity',
     price: 'Price',
@@ -60,7 +68,7 @@ export const CART_TABLE_FIELDS = {
     bottomMaterial: 'Bottom material',
     sidePocket: 'Side pocket',
     total: 'Total price',
-    toPay: 'Total price to pay',
+    toPay: 'Total price',
     photo: 'Photo',
     delivery: 'Delivery type',
     actions: 'Action'

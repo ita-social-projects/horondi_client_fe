@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   similarItem: (props) => ({
     background: `url(${props.image}) center center ${props.isLightTheme ? '#e3e7ea' : '#262626'}`,
-    width: '280px',
-    height: '330px',
+    width: '350px',
+    height: '325px',
     backgroundSize: 'cover',
     '&:hover': {
       cursor: 'pointer'
@@ -14,17 +14,26 @@ export const useStyles = makeStyles(() => ({
     borderRadius: '5px'
   }),
   info: {
-    height: '70px',
+    height: '69px',
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
+    flexWrap: 'wrap',
     padding: '10px',
     backgroundColor: 'rgb(3, 3, 3,.6)',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '20px',
+    lineHeight: '28px',
     color: 'white',
     position: 'absolute',
     bottom: 0,
-    width: '280px',
+    width: '350px',
     borderRadius: '0px 0px 5px 5px'
+  },
+  rating: {
+    width: '350px',
+    height: '20px'
   }
 }));

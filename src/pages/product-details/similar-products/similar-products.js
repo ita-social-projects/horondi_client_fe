@@ -13,13 +13,16 @@ import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
-import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
+import { SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 
 const SimilarProducts = ({ cartList }) => {
   const styles = useStyles();
   const { language, similarProducts, currency, product } = useSelector(
     selectInfoForSimilarProducts
   );
+  const { isLightTheme } = useSelector(({ Theme }) => ({
+    isLightTheme: Theme.lightMode
+  }));
 
   const { title } = SIMILAR_ITEMS[language];
   const currencySign = getCurrencySign(currency);
@@ -44,11 +47,7 @@ const SimilarProducts = ({ cartList }) => {
       <SimilarProductsItem
         currencySign={currencySign}
         key={_id}
-        price={
-          availableSize
-            ? PRICE_FROM[language].value + Math.round(availableSize)
-            : SIZE_NOT_AVAILABLE[language].value
-        }
+        price={availableSize ? Math.round(availableSize) : SIZE_NOT_AVAILABLE[language].value}
         name={name}
         rate={rate}
         imageUrl={images.primary.medium}
@@ -62,7 +61,9 @@ const SimilarProducts = ({ cartList }) => {
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
-            <h2 className={styles.title}>{title}</h2>
+            <h2 className={isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle}>
+              {title}
+            </h2>
           </div>
           <Carousel
             className={styles.carousel}

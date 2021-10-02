@@ -21,3 +21,23 @@ export const mockedDataForDarkTheme = {
   ...mockedDataForLightTheme,
   Theme: { lightMode: false }
 };
+export const mockedUtilsData = {
+  images: {
+    primary: {
+      medium: ''
+    }
+  },
+  sizes: [
+    {
+      size: {
+        available: true
+      },
+      price: [
+        {
+          currency: 'ua',
+          value: 10
+        }
+      ]
+    }
+  ]
+};

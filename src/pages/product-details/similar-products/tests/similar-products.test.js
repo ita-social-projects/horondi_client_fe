@@ -4,7 +4,11 @@ import Enzyme, { mount } from 'enzyme';
 import * as reactRedux from 'react-redux';
 import * as utils from '../../../../utils/productDetails';
 import SimilarProducts from '../index';
-import { mockedDataForLightTheme, mockedDataForDarkTheme } from './similar-products.variables';
+import {
+  mockedDataForLightTheme,
+  mockedDataForDarkTheme,
+  mockedUtilsData
+} from './similar-products.variables';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -25,28 +29,7 @@ describe('Similar products test', () => {
     jest
       .spyOn(reactRedux, 'useSelector')
       .mockImplementation((selector) => selector(mockedDataForDarkTheme));
-    jest.spyOn(utils, 'similarProductForCart').mockImplementation(() => [
-      {
-        images: {
-          primary: {
-            medium: ''
-          }
-        },
-        sizes: [
-          {
-            size: {
-              available: true
-            },
-            price: [
-              {
-                currency: 'ua',
-                value: 10
-              }
-            ]
-          }
-        ]
-      }
-    ]);
+    jest.spyOn(utils, 'similarProductForCart').mockImplementation(() => [mockedUtilsData]);
 
     wrapper = mount(<SimilarProducts cartList={[{}]} />);
   });

@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -41,10 +41,9 @@ const CartItem = ({
   const styles = useStyles();
   const [inputValue, setInputValue] = useState(item.quantity);
   const currencySign = getCurrencySign(currency);
+  const [firstlyMounted, toggleFirstlyMounted] = useState(false);
   const [currentSize, setCurrentSize] = useState(item.options.size);
-  const [currentPrice, setCurrentPrice] = useState(item.price[currency].value);
-  const [firstlyMounted, toggleFirtslyMounted] = useState(false);
-
+  const [currentPrice, setCurrentPrice] = useState(item.options.price);
   const onChangeUserQuantity = useCallback(
     _.debounce((value) => {
       dispatch(changeCartItemUserQuantity({ item, value, userId: user._id }));
@@ -52,37 +51,44 @@ const CartItem = ({
     [dispatch, changeCartItemUserQuantity]
   );
 
+  const { isLightTheme } = useSelector(({ Language, Theme }) => ({
+    isLightTheme: Theme.lightMode
+  }));
+
   const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
 
   const onDeleteItem = () => {
     setModalVisibility(true);
     setModalItem(item);
   };
+
   const handleSizeChange = (event) => {
-    item.options.allSizes.map(({ size, price }) => {
-      if (event.target.value === size._id) {
+    item.allSizes.map(({ size, price }) => {
+      if (event.target.value === size._id && firstlyMounted) {
         setCurrentSize(size);
-        setCurrentPrice(price[currency].value);
+        setCurrentPrice(price);
       }
+
       return null;
     });
   };
 
   useEffect(() => {
-    toggleFirtslyMounted(true);
+    toggleFirstlyMounted(true);
   }, []);
-  useEffect(() => {
-    if (firstlyMounted)
-      dispatch(
-        setCartItemSize(item, { currentSize, currentPrice, currency, quantity: inputValue })
-      );
-  }, [currentSize]);
+
   useEffect(() => {
     if (firstlyMounted) {
       setInputValue(item.quantity);
-      setCurrentPrice(item.price[currency].value);
     }
-  }, [item, currency]);
+  }, [item.quantity]);
+  useEffect(() => {
+    if (firstlyMounted)
+      dispatch(
+        setCartItemSize(item, { size: currentSize, price: currentPrice, quantity: inputValue })
+      );
+  }, [currentSize]);
+
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell classes={{ root: styles.product }} data-cy='cart-item-img'>
@@ -95,11 +101,17 @@ const CartItem = ({
         </Link>
         <div>
           <Link to={`${pathToProducts}/${item.product._id}`}>
-            <span className={styles.itemName}>{item.product.name[language].value}</span>
+            <span className={isLightTheme ? styles.lightThemeItemName : styles.darkThemeItemName}>
+              {item.product.name[language].value}
+            </span>
           </Link>
           {item.product.bottomMaterial && (
-            <div className={styles.itemDescription}>
-              {CART_TABLE_FIELDS[language].bottomMaterial}:
+            <div
+              className={
+                isLightTheme ? styles.lightThemeItemDescription : styles.darkThemeItemDescription
+              }
+            >
+              {CART_TABLE_FIELDS[language].bottomMaterial}:{' '}
               {item.product.bottomMaterial.material.name[language].value}
             </div>
           )}
@@ -110,11 +122,13 @@ const CartItem = ({
           label='title'
           data-cy='size'
           name='size'
-          value={currentSize._id}
+          value={item.options.size._id}
           onChange={handleSizeChange}
-          className={styles.selectSizeStyle}
+          className={
+            isLightTheme ? styles.lightThemeSelectSizeStyle : styles.darkThemeSelectSizeStyle
+          }
         >
-          {item.options.allSizes.map(({ size, price }) => (
+          {item.allSizes.map(({ size }) => (
             <MenuItem key={size._id} value={size._id}>
               {size.name}
             </MenuItem>
@@ -125,7 +139,7 @@ const CartItem = ({
         <div>
           <FontAwesomeIcon icon={currencySign} />
           {'\u00A0'}
-          {Math.round(currentPrice / inputValue) || null}
+          {Math.round(item.price[currency].value / inputValue) || null}
         </div>
       </TableCell>
       <TableCell className={styles.quantityWrapper}>

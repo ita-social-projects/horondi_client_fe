@@ -81,9 +81,9 @@ const ProductDetails = ({ match }) => {
           },
           price: currentSize.price,
           options: {
-            size: currentSize.size,
-            allSizes: availableSizes
+            size: currentSize.size
           },
+          allSizes: availableSizes,
           dimensions: {
             volumeInLiters: currentSize.size.volumeInLiters,
             weightInKg: currentSize.size.weightInKg
@@ -121,9 +121,9 @@ const ProductDetails = ({ match }) => {
           weightInKg: selectedSize.weightInKg
         },
         options: {
-          size: selectedSize.size,
-          allSizes: availableSizes
-        }
+          size: selectedSize.size
+        },
+        allSizes: availableSizes
       })
     );
 

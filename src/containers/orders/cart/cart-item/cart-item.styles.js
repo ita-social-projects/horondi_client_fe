@@ -1,5 +1,21 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const name = {
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontWeight: 'bold',
+  fontSize: '24px',
+  lineHeight: '32px'
+};
+const description = {
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  fontSize: '14px',
+  lineHeight: '22px',
+  letterSpacing: '0.0025em'
+};
+
 export const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -10,24 +26,6 @@ export const useStyles = makeStyles((theme) => ({
       gridRowGap: '0px'
     }
   },
-  photoCart: {
-    '@media (max-width: 450px)': {
-      gridArea: '1 / 1 / 3 / 2',
-      border: 0
-    }
-  },
-  image: (props) => ({
-    '& > a': {
-      background: `url('${props.image}')no-repeat center center`,
-      backgroundSize: 'cover',
-      borderRadius: 5,
-      width: '100px',
-      height: '100px',
-      '@media (max-width: 768px)': {
-        borderRadius: '50%'
-      }
-    }
-  }),
   description: {
     textAlign: 'center',
     lineHeight: '30px',
@@ -36,22 +34,21 @@ export const useStyles = makeStyles((theme) => ({
       border: 0
     }
   },
-  itemDescription: {
-    fontFamily: 'Open Sans',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '14px',
-    lineHeight: '22px',
-    letterSpacing: '0.0025em',
+  lightThemeItemDescription: {
+    ...description,
     color: '#242424'
   },
-  itemName: {
-    fontFamily: 'Open Sans',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '24px',
-    lineHeight: '32px',
+  darkThemeItemDescription: {
+    ...description,
+    color: '#FEFEFE'
+  },
+  lightThemeItemName: {
+    ...name,
     color: '#242424'
+  },
+  darkThemeItemName: {
+    ...name,
+    color: '#FEFEFE'
   },
   price: {
     textAlign: 'center',
@@ -62,11 +59,6 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 377px)': {
       marginTop: 5
     }
-  },
-  doneIcon: {
-    position: 'relative',
-    top: 4,
-    fontSize: '1.5em'
   },
   product: {
     display: 'flex',
@@ -79,8 +71,13 @@ export const useStyles = makeStyles((theme) => ({
       width: 'auto'
     }
   },
-  selectSizeStyle: {
+  lightThemeSelectSizeStyle: {
     border: '1px solid rgba(91, 91, 91, 0.2)',
+    width: '71px',
+    height: '40px'
+  },
+  darkThemeSelectSizeStyle: {
+    border: '1px solid #5B5B5B',
     width: '71px',
     height: '40px'
   },

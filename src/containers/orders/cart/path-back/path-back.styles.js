@@ -6,11 +6,7 @@ const path = {
   fontWeight: 'normal',
   fontSize: '17px',
   lineHeight: '22px',
-  letterSpacing: '0.0025em',
-  '& a:hover': {
-    fontWeight: 'bold',
-    transition: '0.5s'
-  }
+  letterSpacing: '0.0025em'
 };
 export const useStyles = makeStyles((theme) => ({
   whiteThemePath: {
@@ -23,6 +19,10 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: 600,
       display: 'flex',
       justifyContent: 'flex-start'
+    },
+    '& a:hover': {
+      fontWeight: 'bold',
+      transition: '0.5s'
     }
   },
   darkThemePath: {
@@ -35,6 +35,11 @@ export const useStyles = makeStyles((theme) => ({
       color: '#FEFEFE',
       display: 'flex',
       justifyContent: 'flex-start'
+    },
+    '& a:hover': {
+      color: '#FEFEFE',
+      fontWeight: 'bold',
+      transition: '0.5s'
     }
   }
 }));

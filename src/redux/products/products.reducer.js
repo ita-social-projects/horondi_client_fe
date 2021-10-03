@@ -74,10 +74,10 @@ export const initialState = {
     price: [],
     options: {
       size: {
-        _id: '',
-        allSizes: []
+        _id: ''
       }
     },
+    allSizes: [],
     sidePocket: false,
     dimensions: {
       weightInKg: null,

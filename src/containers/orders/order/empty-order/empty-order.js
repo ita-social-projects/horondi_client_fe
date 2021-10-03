@@ -16,6 +16,7 @@ const EmptyOrder = ({ title, buttonTitle, name }) => {
     isLightTheme: Theme.lightMode
   }));
   const styles = useStyles();
+
   const emptyOrderImgLink = isLightTheme ? CART_IMAGES.lightTheme : CART_IMAGES.darkTheme;
 
   return (

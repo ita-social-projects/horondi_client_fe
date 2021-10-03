@@ -22,7 +22,10 @@ import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantityLoading }) => {
-  const language = useSelector(({ Language }) => Language.language);
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
+  }));
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -93,7 +96,9 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
           />
         </>
       )}
-      <h2 className={styles.titleWrapper}>{CART_TITLES[language].filled} </h2>
+      <h2 className={isLightTheme ? styles.lightThemeTitleWrapper : styles.darkThemeTitleWrapper}>
+        {CART_TITLES[language].filled}{' '}
+      </h2>
       <Table>
         <TableHead>
           <TableRow classes={{ root: styles.tableHeader }}>

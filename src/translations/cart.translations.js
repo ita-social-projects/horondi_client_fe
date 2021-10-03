@@ -3,13 +3,17 @@ export const CART_TITLES = {
     empty: 'Ваш кошик порожній',
     filled: 'Ваш кошик',
     order: 'Ваше замовлення',
-    quantity: 'шт'
+    quantity: 'шт',
+    totalPrice: 'До оплати',
+    promoPlaceHolder: 'Промокод або сертифікат'
   },
   1: {
     empty: 'Your cart is empty',
     filled: 'Your cart',
     order: 'Your order',
-    quantity: 'pcs'
+    quantity: 'pcs',
+    totalPrice: 'Total price',
+    promoPlaceHolder: 'Promocode or certificate'
   }
 };
 
@@ -20,7 +24,8 @@ export const CART_BUTTON_TITLES = {
     pathToMain: 'Головна',
     pathToCatalog: 'Каталог',
     yourCart: 'Ваш кошик',
-    checkout: 'Створити замовлення',
+    checkout: 'Оформити замовлення',
+    applyPromoCode: 'Застосувати',
     deleteAllCart: 'Очистити весь кошик',
     editCancel: 'Припинити редагування',
     toWishlist: 'Перемістити у вподобані товари',
@@ -35,6 +40,7 @@ export const CART_BUTTON_TITLES = {
     pathToCatalog: 'Catalog',
     yourCart: 'Your cart',
     checkout: 'Go to checkout',
+    applyPromoCode: 'Add',
     deleteAllCart: 'Clean cart',
     editCancel: 'Cancel editing',
     toWishlist: 'Move to wishlist',

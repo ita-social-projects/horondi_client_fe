@@ -32,6 +32,7 @@ import {
 } from './cart.operations';
 import { handleUserError } from '../user/user.sagas';
 import { AUTH_ERRORS } from '../../const/error-messages';
+import changeCartItemSizeHandler from '../../utils/changeCartItemSizeHandler';
 
 export function* handleCartLoad() {
   const cart = yield getFromLocalStorage(cartKey);
@@ -170,31 +171,10 @@ export function* handleSetCartItemQuantity({ payload }) {
 export function* handleSetCartItemSize({ payload }) {
   try {
     const { item, value } = payload;
+
     const cart = getFromLocalStorage(cartKey);
 
-    const changedItems = cart.map((el) => {
-      if (el._id === item._id) {
-        el.options.size = value.currentSize;
-        el.price[value.currency].value = value.currentPrice * value.quantity;
-      }
-      return el;
-    });
-
-    for (let i = 0; i < changedItems.length; i++) {
-      for (let j = 0; j < changedItems.length; j++) {
-        if (
-          changedItems[i].product._id === changedItems[j].product._id &&
-          changedItems[i].options.size._id === changedItems[j].options.size._id &&
-          i !== j
-        ) {
-          changedItems[i].quantity += changedItems[j].quantity;
-          changedItems[i].price[0].value += changedItems[j].price[0].value;
-          changedItems[i].price[1].value += changedItems[j].price[1].value;
-
-          changedItems.splice(j, 1);
-        }
-      }
-    }
+    const changedItems = changeCartItemSizeHandler(item, value, cart);
 
     setToLocalStorage(cartKey, changedItems);
 

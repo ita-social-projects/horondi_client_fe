@@ -1,15 +1,24 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const title = {
+  display: 'block',
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontHeight: 'normal',
+  fontWeight: 'normal',
+  fontSize: '34px',
+  lineHeight: '46px',
+  letterSpacing: '0.0025em'
+};
+
 export const useStyles = makeStyles((theme) => ({
-  titleWrapper: {
-    display: 'block',
-    fontFamily: 'Open Sans',
-    fontStyle: 'normal',
-    fontHeight: 'normal',
-    fontSize: '34px',
-    lineHeight: '46px',
-    letterSpacing: '0.0025em',
+  lightThemeTitleWrapper: {
+    ...title,
     color: '#242424'
+  },
+  darkThemeTitleWrapper: {
+    ...title,
+    color: '#FEFEFE'
   },
   root: {
     maxWidth: '1440px',
@@ -17,24 +26,6 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center'
-  },
-  cartActionButtons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    minHeight: 40
-  },
-  cartButton: {
-    margin: '10px 0 10px 20px',
-    cursor: 'pointer',
-    alignSelf: 'flex-end',
-    color: '#363636',
-    outline: 'none',
-    '&:active': {
-      color: theme.palette.textColor
-    },
-    '&:hover': {
-      textDecoration: 'underline'
-    }
   },
   tableHeader: {
     borderTop: '1px solid #DADADA',
@@ -55,9 +46,5 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 450px)': {
       display: 'none'
     }
-  },
-  quantity: {
-    color: 'grey',
-    fontWeight: 'lighter'
   }
 }));

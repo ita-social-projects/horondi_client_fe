@@ -41,5 +41,8 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: 'bold',
       transition: '0.5s'
     }
+  },
+  pathLine: {
+    paddingLeft: '20px'
   }
 }));

@@ -1,12 +1,12 @@
-export default function changedCartItemSizeHandler(item, value, cart) {
+export default function changeCartItemSizeHandler(item, value, cart) {
   const changedItems = cart.map((el) => {
     if (el.id === item.id) {
       el.options.size = value.size;
       el.price = value.price;
 
-      for (let i = 0; i < el.price.length; i++) {
-        el.price[i].value *= value.quantity;
-      }
+      el.price.forEach((price) => {
+        price.value *= value.quantity;
+      });
     }
     return el;
   });

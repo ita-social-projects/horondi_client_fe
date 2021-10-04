@@ -51,7 +51,7 @@ const CartItem = ({
     [dispatch, changeCartItemUserQuantity]
   );
 
-  const { isLightTheme } = useSelector(({ Language, Theme }) => ({
+  const { isLightTheme } = useSelector(({ Theme }) => ({
     isLightTheme: Theme.lightMode
   }));
 
@@ -63,14 +63,15 @@ const CartItem = ({
   };
 
   const handleSizeChange = (event) => {
-    item.allSizes.map(({ size, price }) => {
-      if (event.target.value === size._id && firstlyMounted) {
-        setCurrentSize(size);
-        setCurrentPrice(price);
-      }
+    item.allSizes &&
+      item.allSizes.map(({ size, price }) => {
+        if (event.target.value === size._id && firstlyMounted) {
+          setCurrentSize(size);
+          setCurrentPrice(price);
+        }
 
-      return null;
-    });
+        return null;
+      });
   };
 
   useEffect(() => {
@@ -124,22 +125,24 @@ const CartItem = ({
           name='size'
           value={item.options.size._id}
           onChange={handleSizeChange}
+          disablePortal
           className={
             isLightTheme ? styles.lightThemeSelectSizeStyle : styles.darkThemeSelectSizeStyle
           }
         >
-          {item.allSizes.map(({ size }) => (
-            <MenuItem key={size._id} value={size._id}>
-              {size.name}
-            </MenuItem>
-          ))}
+          {item.allSizes &&
+            item.allSizes.map(({ size }) => (
+              <MenuItem key={size._id} value={size._id}>
+                {size.name}
+              </MenuItem>
+            ))}
         </Select>
       </TableCell>
-      <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
+      <TableCell classes={{ root: styles.price }} data-cy='cart-item-description'>
         <div>
           <FontAwesomeIcon icon={currencySign} />
           {'\u00A0'}
-          {Math.round(item.price[currency].value / inputValue) || null}
+          {Math.round(item?.price[currency]?.value / inputValue)}
         </div>
       </TableCell>
       <TableCell className={styles.quantityWrapper}>

@@ -99,19 +99,27 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
       <h2 className={isLightTheme ? styles.lightThemeTitleWrapper : styles.darkThemeTitleWrapper}>
         {CART_TITLES[language].filled}{' '}
       </h2>
-      <Table>
-        <TableHead>
-          <TableRow classes={{ root: styles.tableHeader }}>
-            <TableCell>{CART_TABLE_FIELDS[language].product}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].size}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].toPay}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{cartItems}</TableBody>
-      </Table>
+      <div className={styles.table}>
+        <Table>
+          <TableHead>
+            <TableRow
+              classes={
+                isLightTheme
+                  ? { root: styles.lightThemeTableHeader }
+                  : { root: styles.darkThemeTableHeader }
+              }
+            >
+              <TableCell>{CART_TABLE_FIELDS[language].product}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].size}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].toPay}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{cartItems}</TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

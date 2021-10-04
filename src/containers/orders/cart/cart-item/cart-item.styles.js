@@ -19,20 +19,11 @@ const description = {
 export const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    justifyContent: 'space-between',
-    '@media (max-width: 450px)': {
-      display: 'grid',
-      gridColumnGap: '0px',
-      gridRowGap: '0px'
-    }
+    justifyContent: 'space-between'
   },
   description: {
     textAlign: 'center',
-    lineHeight: '30px',
-    '@media (max-width: 450px)': {
-      gridArea: '1 / 2 / 3 / 4',
-      border: 0
-    }
+    lineHeight: '30px'
   },
   lightThemeItemDescription: {
     ...description,
@@ -51,25 +42,14 @@ export const useStyles = makeStyles((theme) => ({
     color: '#FEFEFE'
   },
   price: {
-    textAlign: 'center',
-    '@media (max-width: 450px)': {
-      gridArea: '3 / 2 / 4 / 3',
-      marginTop: '15px'
-    },
-    '@media (max-width: 377px)': {
-      marginTop: 5
-    }
+    textAlign: 'center'
   },
   product: {
     display: 'flex',
     alignItems: 'center'
   },
   quantityWrapper: {
-    width: '250px',
-    '@media (max-width: 450px)': {
-      gridArea: '3 / 1 / 4 / 2',
-      width: 'auto'
-    }
+    width: '250px'
   },
   lightThemeSelectSizeStyle: {
     border: '1px solid rgba(91, 91, 91, 0.2)',
@@ -88,10 +68,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   deleteIcon: {
     marginLeft: '20px',
-    cursor: 'pointer',
-    '@media (max-width: 450px)': {
-      margin: 0
-    }
+    cursor: 'pointer'
   },
   priceWrapper: {
     display: 'flex',
@@ -99,14 +76,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center'
   },
   itemImg: {
-    marginLeft: 20,
-    '@media (max-width: 450px)': {
-      width: '150%',
-      marginLeft: '-25%'
-    }
+    marginLeft: 20
   },
   delete: {
-    gridArea: '3 / 3 / 4 / 4',
     marginTop: '15px'
   }
 }));

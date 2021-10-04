@@ -20,7 +20,8 @@ const lightThemeButtonHover = {
 const darkThemeButtonHover = {
   '&:hover': {
     backgroundColor: '#020202',
-    color: '#FEFEFE'
+    color: '#FEFEFE',
+    border: 'none'
   }
 };
 const promoInput = {
@@ -33,7 +34,8 @@ const promoInput = {
   lineHeight: '24px',
   letterSpacing: '0.005em',
   textAlign: 'center',
-  border: '1px solid rgba(91, 91, 91, 0.2)'
+  border: '1px solid rgba(91, 91, 91, 0.2)',
+  padding: 10
 };
 const totalWrapper = {
   width: '255px',
@@ -46,7 +48,10 @@ const totalWrapper = {
   fontWeight: '600',
   fontSize: '20px',
   lineHeight: '28px',
-  letterSpacing: '0.0015em'
+  letterSpacing: '0.0015em',
+  '@media (max-width: 850px)': {
+    marginTop: '20px'
+  }
 };
 
 export const useStyles = makeStyles((theme) => ({
@@ -139,9 +144,6 @@ export const useStyles = makeStyles((theme) => ({
     ...totalWrapper,
     color: '#FEFEFE'
   },
-  similarProductsWrapper: {
-    textAlign: 'center'
-  },
   promoAndTotalWrapper: {
     maxWidth: '1200px',
     display: 'flex',
@@ -149,7 +151,13 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: '50px',
-    marginBottom: '100px'
+    marginBottom: '100px',
+    '@media (max-width: 850px)': {
+      width: '100%',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'flex-start'
+    }
   },
   totalPrice: {
     marginBottom: '20px'

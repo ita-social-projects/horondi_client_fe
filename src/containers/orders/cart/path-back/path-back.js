@@ -16,7 +16,7 @@ const PathBack = () => {
 
   return (
     <div className={isLightTheme ? styles.whiteThemePath : styles.darkThemePath}>
-      <div>
+      <div className={styles.pathLine}>
         <Link to={pathToMain}>{CART_BUTTON_TITLES[language].pathToMain}</Link> /{' '}
         <Link to={pathToCategory}>{CART_BUTTON_TITLES[language].pathToCatalog}</Link> /{' '}
         {CART_BUTTON_TITLES[language].yourCart}

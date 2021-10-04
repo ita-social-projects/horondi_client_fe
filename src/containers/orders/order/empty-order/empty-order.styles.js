@@ -51,7 +51,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   root: {
     height: '611px',
-    maxWidth: '1440px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',

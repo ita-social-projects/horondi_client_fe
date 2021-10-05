@@ -17,6 +17,7 @@ import confirmation from './confirmation.json';
 import newPassword from './new-password.json';
 import orderHistory from './order-history.json';
 import notFoundPage from './not-found-page.json';
+import productListPage from './product-list-page.json';
 
 export default {
   translations: {
@@ -38,6 +39,7 @@ export default {
     confirmation,
     newPassword,
     orderHistory,
-    notFoundPage
+    notFoundPage,
+    productListPage
   }
 };

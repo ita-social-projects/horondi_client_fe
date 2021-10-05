@@ -85,7 +85,7 @@ const Login = () => {
                       value={values.email}
                       color={MATERIAL_UI_COLOR.PRIMARY}
                       error={touched.email && errors.email}
-                      helperText={touched.email && errors.email}
+                      helperText={touched.email && errors.email && t('login.errorMessages.email')}
                     />
                     <TextField
                       data-cy='password'

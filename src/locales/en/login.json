@@ -1,13 +1,13 @@
 {
     "forgotPassword": "Forgot password?",
-    "formLabel": "log in",
+    "formLabel": "Log in",
     "rememberMe": "Remember me",
     "registerProposal": "Registration",
     "placeholders": {       
         "email": "Email",
         "password": "Password"        
     },
-    "orText": "or",
+    "orText": "or Register with",
     "errorMessages": {        
         "email": "Wrong email address, "       
     }

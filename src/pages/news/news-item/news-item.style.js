@@ -53,11 +53,9 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   newsFooter: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(18rem, auto))',
-    gridColumnGap: '10px',
     '& > *': {
-      padding: '10px'
+      display: 'inline-block',
+      margin: '10px'
     }
   },
   newsButton: {

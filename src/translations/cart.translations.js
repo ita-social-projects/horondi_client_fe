@@ -3,21 +3,29 @@ export const CART_TITLES = {
     empty: 'Ваш кошик порожній',
     filled: 'Ваш кошик',
     order: 'Ваше замовлення',
-    quantity: 'шт'
+    quantity: 'шт',
+    totalPrice: 'До оплати',
+    promoPlaceHolder: 'Промокод або сертифікат'
   },
   1: {
     empty: 'Your cart is empty',
     filled: 'Your cart',
     order: 'Your order',
-    quantity: 'pcs'
+    quantity: 'pcs',
+    totalPrice: 'Total price',
+    promoPlaceHolder: 'Promocode or certificate'
   }
 };
 
 export const CART_BUTTON_TITLES = {
   0: {
-    empty: 'Обрати зараз',
+    empty: 'До каталогу',
     goods: 'Продовжити покупки',
-    checkout: 'Створити замовлення',
+    pathToMain: 'Головна',
+    pathToCatalog: 'Каталог',
+    yourCart: 'Ваш кошик',
+    checkout: 'Оформити замовлення',
+    applyPromoCode: 'Застосувати',
     deleteAllCart: 'Очистити весь кошик',
     editCancel: 'Припинити редагування',
     toWishlist: 'Перемістити у вподобані товари',
@@ -26,9 +34,13 @@ export const CART_BUTTON_TITLES = {
     pay: 'Перейти до оплати'
   },
   1: {
-    empty: 'Shop now',
+    empty: 'Continue shopping',
     goods: 'Continue shopping',
+    pathToMain: 'Home',
+    pathToCatalog: 'Catalog',
+    yourCart: 'Your cart',
     checkout: 'Go to checkout',
+    applyPromoCode: 'Add',
     deleteAllCart: 'Clean cart',
     editCancel: 'Cancel editing',
     toWishlist: 'Move to wishlist',
@@ -41,18 +53,20 @@ export const CART_BUTTON_TITLES = {
 export const CART_TABLE_FIELDS = {
   0: {
     item: 'Назва товару',
+    product: 'Продукт',
     quantity: 'Кількість',
     price: 'Ціна',
     size: 'Розмір',
     bottomMaterial: 'Матеріал низу',
     sidePocket: 'Бокова кишеня',
     total: 'Підсумок',
-    toPay: 'До сплати',
+    toPay: 'До оплати',
     photo: 'Фото',
     delivery: 'Метод доставки',
-    actions: 'Дії'
+    actions: 'Дія'
   },
   1: {
+    product: 'Product',
     item: 'Product name',
     quantity: 'Quantity',
     price: 'Price',
@@ -60,7 +74,7 @@ export const CART_TABLE_FIELDS = {
     bottomMaterial: 'Bottom material',
     sidePocket: 'Side pocket',
     total: 'Total price',
-    toPay: 'Total price to pay',
+    toPay: 'Total price',
     photo: 'Photo',
     delivery: 'Delivery type',
     actions: 'Action'

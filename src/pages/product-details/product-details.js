@@ -38,7 +38,6 @@ const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
-
   const {
     _id: productId,
     name: productName,
@@ -64,6 +63,7 @@ const ProductDetails = ({ match }) => {
       dispatch(setCategoryFilter([category._id]));
       dispatch(
         setProductToSend({
+          id: Date.now().toString(),
           product: {
             _id: productId,
             category: {
@@ -83,6 +83,7 @@ const ProductDetails = ({ match }) => {
           options: {
             size: currentSize.size
           },
+          allSizes: availableSizes,
           dimensions: {
             volumeInLiters: currentSize.size.volumeInLiters,
             weightInKg: currentSize.size.weightInKg
@@ -113,6 +114,7 @@ const ProductDetails = ({ match }) => {
     dispatch(
       setProductToSend({
         ...productToSend,
+        id: Date.now().toString(),
         price: selectedSize.price,
         dimensions: {
           volumeInLiters: selectedSize.volumeInLiters,
@@ -120,7 +122,8 @@ const ProductDetails = ({ match }) => {
         },
         options: {
           size: selectedSize.size
-        }
+        },
+        allSizes: availableSizes
       })
     );
 

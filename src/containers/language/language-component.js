@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
@@ -22,9 +23,12 @@ const LanguageComponent = ({ fromSideBar }) => {
     }
   }, [dispatch]);
 
+  const { i18n } = useTranslation();
+
   const handleChange = (e) => {
     const targetValue = e.target.value;
     if (targetValue !== undefined) {
+      i18n.changeLanguage(targetValue === 0 ? 'ua' : 'en');
       setToLocalStorage(languageName, targetValue);
       dispatch(changeLanguage(targetValue));
     }

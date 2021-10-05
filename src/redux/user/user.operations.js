@@ -55,6 +55,7 @@ const loginUser = async (data) => {
 		}
     cart{
       items {
+        _id
         product {
         _id
         name {
@@ -97,6 +98,16 @@ const loginUser = async (data) => {
         size {
             _id
             name
+        }
+        }
+        allSizes {
+        size {
+            _id
+            name
+        }
+        price {
+            currency
+            value
         }
         }
         price {

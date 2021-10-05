@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useTransition, useTranslation } from 'react-i18next';
 import SimpleModal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 
 import Popper from '@material-ui/core/Popper';
-import { MODAL_BUTTONS } from '../../translations/modal.translations';
 import { useStyles } from './modal.styles';
 
 const Modal = ({
@@ -18,6 +18,7 @@ const Modal = ({
   content
 }) => {
   const [open, setOpen] = useState(isOpen);
+  const { t } = useTranslation();
   const styles = useStyles();
 
   const handleClose = (_, __, action) => {
@@ -34,10 +35,10 @@ const Modal = ({
       </p>
       <div className={styles.buttonGroup}>
         <Button onClick={handleClose} variant='contained'>
-          {MODAL_BUTTONS[language].cancel}
+          {t('modal.modalButtons.cancel')}
         </Button>
         <Button onClick={() => handleClose(null, null, true)} variant='contained'>
-          {MODAL_BUTTONS[language].confirm}
+          {t('modal.modalButtons.confirm')}
         </Button>
       </div>
     </div>
@@ -49,7 +50,7 @@ const Modal = ({
       data-cy='removing-modal'
     >
       <Button onClick={handleClose} variant='contained'>
-        {MODAL_BUTTONS[language].cancel}
+        {t('modal.modalButtons.cancel')}
       </Button>
       {content}
     </div>

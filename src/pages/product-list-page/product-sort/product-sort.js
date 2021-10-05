@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
@@ -9,14 +10,12 @@ import {
   setSortByRate,
   setSortByPopularity
 } from '../../../redux/products/products.actions';
-import {
-  SORT_BY_SELECT_OPTIONS,
-  SORT_BY_TEXT
-} from '../../../translations/product-list.translations';
+import { SORT_BY_SELECT_OPTIONS } from '../../../translations/product-list.translations';
 import { URL_QUERIES_NAME } from '../../../configs';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const ProductSort = () => {
+  const { t } = useTranslation();
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
@@ -68,7 +67,7 @@ const ProductSort = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const sortByText = SORT_BY_TEXT[language].value;
+  const sortByText = t('productListPage.sortByText');
 
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
     <option

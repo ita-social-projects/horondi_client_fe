@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import { IS_HOT_TEXT } from '../../../../translations/product-list.translations';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { setHotItemFilter } from '../../../../redux/products/products.actions';
 
-const HotItemFilter = ({ language }) => {
+const HotItemFilter = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
@@ -37,7 +38,7 @@ const HotItemFilter = ({ language }) => {
   return (
     <FormGroup data-cy='hot_item_filter'>
       <Typography id='isHot' gutterBottom>
-        {IS_HOT_TEXT[language].value}:
+        {t('productListPage.isHotText')}:
         <Switch
           color='default'
           checked={hotItem}

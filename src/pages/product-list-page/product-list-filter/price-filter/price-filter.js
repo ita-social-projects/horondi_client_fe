@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import {
-  PRICE_TEXT,
-  PRICE_FROM,
-  PRICE_TO
-} from '../../../../translations/product-list.translations';
 import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { setPriceFilter } from '../../../../redux/products/products.actions';
 
 const PriceFilter = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
@@ -22,7 +19,7 @@ const PriceFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
 
-  const { filters, language, currency, maxPrice, minPrice } = useSelector(
+  const { filters, currency, maxPrice, minPrice } = useSelector(
     ({ Products, Language, Currency }) => ({
       filters: Products.filters.priceFilter,
       language: Language.language,
@@ -61,8 +58,9 @@ const PriceFilter = () => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {PRICE_TEXT[language].value}: {PRICE_FROM[language].value} {Math.round(filters[0] / 100)}-{' '}
-        {PRICE_TO[language].value} {Math.round(filters[1] / 100)}
+        {t('productListPage.priceText')}: {t('productListPage.priceFrom')}{' '}
+        {Math.round(filters[0] / 100)}- {t('productListPage.priceTo')}{' '}
+        {Math.round(filters[1] / 100)}
       </Typography>
       <Slider
         className={styles.slider}

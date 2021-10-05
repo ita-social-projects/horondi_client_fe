@@ -1,0 +1,68 @@
+{ 
+    "showFilterButtonText" : "Show Filter",
+    "availableCountLabelText": "Available",
+    "searchText": "Search",
+    "priceText": "Price Range",
+    "categoryText": "Category",
+    "colorsText": "Colors",
+    "patternText": "Pattern",
+    "modelText": "Model", 
+    "isHotText": "Hot Products",
+    "filterButtonText": "Filter",
+    "productNotFound": "No products found in this product category",
+    "priceFrom": "from",
+    "sizeNotAvailable": "Product isn't available",
+    "priceTo": "to",
+    "clearFilterButtonText": "Clear Filter",
+    "sortByText": "Sort by:",
+    "countPerPage": "Count per page:",
+    "sortBySelectOptions": [
+        {
+            "value": "popularity",
+            "optionValue": {
+                "name": "popularity",
+                "value": -1
+            }
+        },
+        {
+            "value": "price (high to low)",
+            "optionValue": {
+                "name": "sortDesc",
+                "value": -1
+              }
+        },
+        {
+            "value": "price (low to high)",
+            "optionValue": {
+                "name": "sortAsc",
+                "value": 1
+              }
+        },
+        {
+            "value": "rate",
+            "optionValue": {
+                "name": "rate",
+                "value": -1
+              }
+        }
+        
+    ], 
+    "drawerTemporary": "temporary",
+    "drawerPermanent": "permanent",
+    "temporaryWidths": ["sm", "xs"],
+    "itemsPerPage": [
+        {
+            "title": "nine products per page",
+            "value": 9
+        },
+        {
+            "title": "eighteen products per page",
+            "value": 18
+        },
+        {
+            "title": "thirty products per page",
+            "value": 30
+        }
+    ]
+}
+  

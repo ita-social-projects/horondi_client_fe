@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,9 +14,9 @@ import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../const/routes';
 import { getCurrencySign } from '../../../utils/currency';
-import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 
 const ProductListItem = ({ product }) => {
+  const { t } = useTranslation();
   const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
     language: Language.language,
     currency: Currency.currency,
@@ -38,8 +39,8 @@ const ProductListItem = ({ product }) => {
     );
 
     return availableSizes
-      ? PRICE_FROM[language].value + availableSizes[0].price[currency].value
-      : SIZE_NOT_AVAILABLE[language].value;
+      ? t('productListPage.priceFrom') + availableSizes[0].price[currency].value
+      : t('productListPage.sizeNotAvailable');
   };
 
   const styles = useStyles({ image, isLightTheme });

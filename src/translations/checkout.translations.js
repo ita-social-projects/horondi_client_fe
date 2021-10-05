@@ -63,6 +63,7 @@ export const SCHEDULE = {
     sunday: 'Sun:  '
   }
 };
+
 export const CHECKOUT_TEXT_FIELDS = {
   0: {
     firstName: "Ім'я *",

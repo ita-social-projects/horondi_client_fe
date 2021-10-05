@@ -1,0 +1,16 @@
+{
+    "thanksPageTitle": {
+        "thanks": "Thank you!",
+        "yourOrder": "Your order",
+        "size": "Size - ",
+        "alt": "product",
+        "result": "Result",
+        "linkToPayment": "Payment link"
+    },
+    "paymentStatus": {
+        "created": "Order is created",
+        "processing": "Order is pending payment",
+        "paid": "Order is paid"
+      }
+}
+  

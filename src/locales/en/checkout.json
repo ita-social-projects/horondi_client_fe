@@ -1,0 +1,6 @@
+{
+    "checkoutPayment": {
+        "card": "Card",
+        "cash": "Cash"
+    }
+}

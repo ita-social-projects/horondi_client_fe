@@ -1,0 +1,6 @@
+{
+    "checkoutPayment": {
+        "card": "Картою",
+        "cash": "Готівкою"
+    }
+}

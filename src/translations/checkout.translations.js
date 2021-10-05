@@ -125,8 +125,8 @@ export const CHECKOUT_DELIVERY_TYPES = {
     selfPickUP: 'Self pick-up',
     novaPoshta: 'Nova Poshta',
     ukrPoshta: 'Ukrposhta',
-    courierNovaPoshta: 'Nova posht courier',
-    courierUkrPoshta: 'Ukrposhta courier'
+    courierNovaPoshta: 'Nova Poshta Courier',
+    courierUkrPoshta: 'Ukrposhta Courier'
   }
 };
 export const CHECKOUT_BUTTON = {

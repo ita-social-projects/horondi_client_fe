@@ -1,0 +1,14 @@
+{
+    "forgotPassword": "Forgot password?",
+    "formLabel": "log in",
+    "rememberMe": "Remember me",
+    "registerProposal": "Registration",
+    "placeholders": {       
+        "email": "Email",
+        "password": "Password"        
+    },
+    "orText": "or",
+    "errorMessages": {        
+        "email": "Wrong email address, "       
+    }
+}

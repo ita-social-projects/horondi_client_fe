@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, TextField, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,15 +7,6 @@ import { useFormik } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
 import { LIGHT_THEME, LOGIN_USER_DATA } from '../../configs';
-import {
-  placeholders,
-  OR_TEXT,
-  LOGIN_FORM_LABEL,
-  FORGOT_PASSWORD,
-  REGISTER_PROPOSAL,
-  errorMessages,
-  REMEMBER_ME
-} from '../../translations/user.translations';
 import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
@@ -29,6 +21,7 @@ const Login = () => {
   const theme = getFromLocalStorage('theme');
   const styles = useStyles();
   const [showPassword, setShowPassword] = useState(true);
+  const { t } = useTranslation();
   const { pathToRecovery, pathToRegister } = routes;
   const { loginError, userLoading, language } = useSelector(({ User, Language }) => ({
     loginError: User.error,
@@ -75,13 +68,13 @@ const Login = () => {
                   <Loader />
                 ) : (
                   <>
-                    <h2 className={styles.heading}>{LOGIN_FORM_LABEL[language].value}</h2>
+                    <h2 className={styles.heading}>{t('login.formLabel')}</h2>
                     <TextField
                       data-cy='email'
                       id='email'
-                      label={placeholders.email[language].value}
+                      label={t('login.placeholders.email')}
                       className={`${styles.emailInput} ${
-                        errors.email === errorMessages[language].value.email && styles.afterText
+                        errors.email === t('login.errorMessages.email') && styles.afterText
                       }`}
                       fullWidth
                       variant='outlined'
@@ -97,7 +90,7 @@ const Login = () => {
                     <TextField
                       data-cy='password'
                       id='password'
-                      label={placeholders.password[language].value}
+                      label={t('login.placeholders.password')}
                       className={styles.passwordInput}
                       fullWidth
                       variant='outlined'
@@ -115,17 +108,17 @@ const Login = () => {
                       <div>
                         <FormControlLabel
                           data-cy='staySignedIn'
-                          key={REMEMBER_ME[language].value}
+                          key={t('login.rememberMe')}
                           value={values.rememberMe}
                           checked={values.rememberMe}
                           control={<Checkbox color={checkTheme()} />}
-                          label={REMEMBER_ME[language].value}
+                          label={t('login.rememberMe')}
                           labelPlacement='end'
                           onChange={() => setFieldValue('rememberMe', !values.rememberMe)}
                         />
                       </div>
                       <Link to={pathToRecovery} className={styles.recoveryBtn}>
-                        {FORGOT_PASSWORD[language].value}
+                        {t('login.forgotPassword')}
                       </Link>
                     </div>
 
@@ -136,17 +129,17 @@ const Login = () => {
                         type='submit'
                         onClick={handleSubmit}
                       >
-                        {LOGIN_FORM_LABEL[language].value}
+                        {t('login.formLabel')}
                       </Button>
                       <p className={styles.loginError}>{loginError}</p>
                     </div>
                     <div className={styles.orContainer}>
-                      <span className={styles.orText}>{OR_TEXT[language].value}</span>
+                      <span className={styles.orText}>{t('login.orText')}</span>
                     </div>
                     <GoogleBtn />
                     <div className={styles.registerContainer}>
                       <Link to={pathToRegister} className={styles.registerBtn}>
-                        {REGISTER_PROPOSAL[language].value}
+                        {t('login.registerProposal')}
                       </Link>
                     </div>
                     <Snackbar />

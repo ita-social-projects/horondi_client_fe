@@ -1,0 +1,14 @@
+{
+    "forgotPassword": "Забули пароль?",
+    "formLabel": "Увійти",
+    "rememberMe": "Запам'ятати мене",
+    "registerProposal": "Реєстрація",
+    "placeholders": {       
+        "email": "Електронна пошта",
+        "password": "Пароль"        
+    },
+    "orText": "або",
+    "errorMessages": {       
+        "email": "Некоректний формат, "        
+    }
+}

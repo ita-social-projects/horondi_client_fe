@@ -77,6 +77,7 @@ export const initialState = {
         _id: ''
       }
     },
+    allSizes: [],
     sidePocket: false,
     dimensions: {
       weightInKg: null,

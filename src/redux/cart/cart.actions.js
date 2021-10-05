@@ -17,7 +17,9 @@ import {
   SET_CART_LOADING,
   SET_CART_QUANTITY_LOADER,
   CLEAN_CART,
-  SET_CART_ERROR
+  SET_CART_ERROR,
+  SET_CART_ITEM_SIZE,
+  SET_USER_CART_ITEM_SIZE
 } from './cart.types';
 
 const setCart = (cartItems) => ({
@@ -50,6 +52,21 @@ const setCartItemQuantity = (item, value) => ({
   }
 });
 
+const setCartItemSize = (item, value) => ({
+  type: SET_CART_ITEM_SIZE,
+  payload: {
+    item,
+    value
+  }
+});
+const setUserCartItemSize = (user, item, value) => ({
+  type: SET_USER_CART_ITEM_SIZE,
+  payload: {
+    item,
+    value,
+    user
+  }
+});
 const setDeliveryType = (payload) => ({
   type: SET_DELIVERY_TYPE,
   payload
@@ -128,5 +145,7 @@ export {
   setCartLoading,
   setCartQuantityLoading,
   setCartError,
-  cleanUserCart
+  cleanUserCart,
+  setCartItemSize,
+  setUserCartItemSize
 };

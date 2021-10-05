@@ -4,11 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 
-import {
-  CART_TABLE_FIELDS,
-  CART_TITLES,
-  CART_BUTTON_TITLES
-} from '../../../../translations/cart.translations';
+import { CART_TABLE_FIELDS, CART_TITLES } from '../../../../translations/cart.translations';
 
 import {
   MODAL_DELETE_ITEM_MESSAGE,
@@ -26,7 +22,10 @@ import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantityLoading }) => {
-  const language = useSelector(({ Language }) => Language.language);
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
+  }));
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -38,6 +37,7 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
     <CartItem
       key={item.product.product_id}
       item={item}
+      initialPrice={item.price}
       calcPrice={calcPrice}
       language={language}
       currency={currency}
@@ -73,7 +73,7 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
   };
 
   return (
-    <>
+    <div className={styles.root}>
       {modalVisibility && (
         <>
           <Modal
@@ -96,30 +96,31 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
           />
         </>
       )}
-      <div className={styles.titleWrapper}>
-        <h2>
-          {CART_TITLES[language].filled}{' '}
-          <span className={styles.quantity}>
-            ({items.length} {CART_TITLES[language].quantity})
-          </span>
-        </h2>
-        <span className={styles.cartButton} onClick={() => setModalVisibility(true)}>
-          {CART_BUTTON_TITLES[language].deleteAllCart}
-        </span>
+      <h2 className={isLightTheme ? styles.lightThemeTitleWrapper : styles.darkThemeTitleWrapper}>
+        {CART_TITLES[language].filled}{' '}
+      </h2>
+      <div className={styles.table}>
+        <Table>
+          <TableHead>
+            <TableRow
+              classes={
+                isLightTheme
+                  ? { root: styles.lightThemeTableHeader }
+                  : { root: styles.darkThemeTableHeader }
+              }
+            >
+              <TableCell>{CART_TABLE_FIELDS[language].product}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].size}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].toPay}</TableCell>
+              <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{cartItems}</TableBody>
+        </Table>
       </div>
-      <Table>
-        <TableHead>
-          <TableRow classes={{ root: styles.tableHeader }}>
-            <TableCell>{CART_TABLE_FIELDS[language].photo}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].item}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
-            <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{cartItems}</TableBody>
-      </Table>
-    </>
+    </div>
   );
 };
 

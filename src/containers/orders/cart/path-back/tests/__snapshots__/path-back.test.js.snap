@@ -1,21 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Cart page tests should match snapshot 1`] = `
+exports[`Path back component tests should match snapshot 1`] = `
 <div
   className="makeStyles-whiteThemePath-1"
 >
-  <Link
-    to="/"
+  <div
+    className="makeStyles-pathLine-3"
   >
-    Головна
-  </Link>
-   / 
-  <Link
-    to="/catalog/:category"
-  >
-    Каталог
-  </Link>
-   / 
-  Ваш кошик
+    <Link
+      to="/"
+    >
+      Головна
+    </Link>
+     /
+     
+    <Link
+      to="/catalog/:category"
+    >
+      Каталог
+    </Link>
+     /
+     
+    Ваш кошик
+  </div>
 </div>
 `;

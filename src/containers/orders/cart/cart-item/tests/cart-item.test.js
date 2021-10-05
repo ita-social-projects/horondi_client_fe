@@ -3,23 +3,13 @@ import { configure, mount } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
 import Adapter from 'enzyme-adapter-react-16';
 import * as reactRedux from 'react-redux';
+
 import CartItem from '../cart-item';
+import { props, item } from './cart-item.variables';
 
 configure({ adapter: new Adapter() });
 
 let wrapper;
-
-const item = {
-  price: [{ currency: 'ua', value: 100 }],
-  quantity: 1,
-  options: { size: { _id: 'some id' } },
-  product: {
-    _id: 'some id',
-    images: { primary: { thumbnail: '/img' } },
-    name: [{ value: 'ua' }]
-  },
-  allSizes: [{ size: { _id: 'some id', name: 'some name' } }]
-};
 
 function spyOnSelector(lightMode, loading) {
   jest.spyOn(reactRedux, 'useSelector').mockImplementation((cb) =>
@@ -32,17 +22,6 @@ function spyOnSelector(lightMode, loading) {
     })
   );
 }
-
-const props = {
-  item,
-  language: 0,
-  calcPrice: () => 10,
-  currency: 0,
-  user: {},
-  cartQuantityLoading: false,
-  setModalVisibility: () => null,
-  setModalItem: () => null
-};
 
 describe('Filled cart component tests', () => {
   beforeAll(() => {

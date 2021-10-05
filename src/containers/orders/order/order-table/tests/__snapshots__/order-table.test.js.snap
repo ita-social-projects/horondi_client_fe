@@ -10,57 +10,61 @@ exports[`Order table component tests should match snapshot 1`] = `
     Ваш кошик
      
   </h2>
-  <WithStyles(ForwardRef(Table))>
-    <WithStyles(ForwardRef(TableHead))>
-      <WithStyles(ForwardRef(TableRow))
-        classes={
-          Object {
-            "root": "makeStyles-tableHeader-6",
+  <div
+    className="makeStyles-table-4"
+  >
+    <WithStyles(ForwardRef(Table))>
+      <WithStyles(ForwardRef(TableHead))>
+        <WithStyles(ForwardRef(TableRow))
+          classes={
+            Object {
+              "root": "makeStyles-darkThemeTableHeader-6",
+            }
           }
-        }
-      >
-        <WithStyles(ForwardRef(TableCell))>
-          Продукт
-        </WithStyles(ForwardRef(TableCell))>
-        <WithStyles(ForwardRef(TableCell))>
-          Розмір
-        </WithStyles(ForwardRef(TableCell))>
-        <WithStyles(ForwardRef(TableCell))>
-          Ціна
-        </WithStyles(ForwardRef(TableCell))>
-        <WithStyles(ForwardRef(TableCell))>
-          Кількість
-        </WithStyles(ForwardRef(TableCell))>
-        <WithStyles(ForwardRef(TableCell))>
-          До оплати
-        </WithStyles(ForwardRef(TableCell))>
-        <WithStyles(ForwardRef(TableCell))>
-          Дія
-        </WithStyles(ForwardRef(TableCell))>
-      </WithStyles(ForwardRef(TableRow))>
-    </WithStyles(ForwardRef(TableHead))>
-    <WithStyles(ForwardRef(TableBody))>
-      <CartItem
-        calcPrice={100}
-        cartLoading={false}
-        cartQuantityLoading={false}
-        currency={0}
-        initialPrice={10}
-        item={
-          Object {
-            "price": 10,
-            "product": Object {
-              "product_id": "some id",
-            },
+        >
+          <WithStyles(ForwardRef(TableCell))>
+            Продукт
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            Розмір
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            Ціна
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            Кількість
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            До оплати
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            Дія
+          </WithStyles(ForwardRef(TableCell))>
+        </WithStyles(ForwardRef(TableRow))>
+      </WithStyles(ForwardRef(TableHead))>
+      <WithStyles(ForwardRef(TableBody))>
+        <CartItem
+          calcPrice={100}
+          cartLoading={false}
+          cartQuantityLoading={false}
+          currency={0}
+          initialPrice={10}
+          item={
+            Object {
+              "price": 10,
+              "product": Object {
+                "product_id": "some id",
+              },
+            }
           }
-        }
-        key="some id"
-        language={0}
-        setModalItem={[Function]}
-        setModalVisibility={[Function]}
-        user={Object {}}
-      />
-    </WithStyles(ForwardRef(TableBody))>
-  </WithStyles(ForwardRef(Table))>
+          key="some id"
+          language={0}
+          setModalItem={[Function]}
+          setModalVisibility={[Function]}
+          user={Object {}}
+        />
+      </WithStyles(ForwardRef(TableBody))>
+    </WithStyles(ForwardRef(Table))>
+  </div>
 </div>
 `;

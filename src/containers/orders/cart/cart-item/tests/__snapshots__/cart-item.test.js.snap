@@ -205,7 +205,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                   <WithStyles(ForwardRef(Select))
                     className="makeStyles-lightThemeSelectSizeStyle-10"
                     data-cy="size"
-                    disablePortal={true}
                     label="title"
                     name="size"
                     onChange={[Function]}
@@ -229,7 +228,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                         }
                       }
                       data-cy="size"
-                      disablePortal={true}
                       label="title"
                       name="size"
                       onChange={[Function]}
@@ -238,7 +236,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                       <WithStyles(ForwardRef(Input))
                         className="makeStyles-lightThemeSelectSizeStyle-10"
                         data-cy="size"
-                        disablePortal={true}
                         inputComponent={
                           Object {
                             "$$typeof": Symbol(react.forward_ref),
@@ -346,7 +343,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                             }
                           }
                           data-cy="size"
-                          disablePortal={true}
                           inputComponent={
                             Object {
                               "$$typeof": Symbol(react.forward_ref),
@@ -454,7 +450,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                               }
                             }
                             data-cy="size"
-                            disablePortal={true}
                             fullWidth={false}
                             inputComponent={
                               Object {
@@ -569,7 +564,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                                 }
                               }
                               data-cy="size"
-                              disablePortal={true}
                               fullWidth={false}
                               inputComponent={
                                 Object {
@@ -662,7 +656,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                               <div
                                 className="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-lightThemeSelectSizeStyle-10"
                                 data-cy="size"
-                                disablePortal={true}
                                 onClick={[Function]}
                               >
                                 <ForwardRef(SelectInput)
@@ -955,7 +948,7 @@ exports[`Filled cart component tests should match snapshot 1`] = `
             <WithStyles(ForwardRef(TableCell))
               classes={
                 Object {
-                  "root": "makeStyles-description-2",
+                  "root": "makeStyles-price-7",
                 }
               }
               data-cy="cart-item-description"
@@ -972,7 +965,7 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                     "head": "MuiTableCell-head",
                     "paddingCheckbox": "MuiTableCell-paddingCheckbox",
                     "paddingNone": "MuiTableCell-paddingNone",
-                    "root": "MuiTableCell-root makeStyles-description-2",
+                    "root": "MuiTableCell-root makeStyles-price-7",
                     "sizeSmall": "MuiTableCell-sizeSmall",
                     "stickyHeader": "MuiTableCell-stickyHeader",
                   }
@@ -981,7 +974,7 @@ exports[`Filled cart component tests should match snapshot 1`] = `
               >
                 <td
                   aria-sort={null}
-                  className="MuiTableCell-root makeStyles-description-2"
+                  className="MuiTableCell-root makeStyles-price-7"
                   data-cy="cart-item-description"
                 >
                   <div>
@@ -1205,9 +1198,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                         inputProps={
                           Object {
                             "style": Object {
-                              "height": "15px",
+                              "height": "3px",
                               "textAlign": "center",
-                              "width": "40px",
+                              "width": "20px",
                             },
                           }
                         }
@@ -1226,9 +1219,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                           inputProps={
                             Object {
                               "style": Object {
-                                "height": "15px",
+                                "height": "3px",
                                 "textAlign": "center",
-                                "width": "40px",
+                                "width": "20px",
                               },
                             }
                           }
@@ -1273,9 +1266,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                                   inputProps={
                                     Object {
                                       "style": Object {
-                                        "height": "15px",
+                                        "height": "3px",
                                         "textAlign": "center",
-                                        "width": "40px",
+                                        "width": "20px",
                                       },
                                     }
                                   }
@@ -1310,9 +1303,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                                     inputProps={
                                       Object {
                                         "style": Object {
-                                          "height": "15px",
+                                          "height": "3px",
                                           "textAlign": "center",
-                                          "width": "40px",
+                                          "width": "20px",
                                         },
                                       }
                                     }
@@ -1348,9 +1341,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                                       inputProps={
                                         Object {
                                           "style": Object {
-                                            "height": "15px",
+                                            "height": "3px",
                                             "textAlign": "center",
-                                            "width": "40px",
+                                            "width": "20px",
                                           },
                                         }
                                       }
@@ -1390,9 +1383,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                                         inputProps={
                                           Object {
                                             "style": Object {
-                                              "height": "15px",
+                                              "height": "3px",
                                               "textAlign": "center",
-                                              "width": "40px",
+                                              "width": "20px",
                                             },
                                           }
                                         }
@@ -1419,9 +1412,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                                             required={false}
                                             style={
                                               Object {
-                                                "height": "15px",
+                                                "height": "3px",
                                                 "textAlign": "center",
-                                                "width": "40px",
+                                                "width": "20px",
                                               }
                                             }
                                             type="string"

@@ -16,7 +16,8 @@ import NumberInput from '../../../../components/number-input';
 import {
   setCartItemQuantity,
   changeCartItemUserQuantity,
-  setCartItemSize
+  setCartItemSize,
+  setUserCartItemSize
 } from '../../../../redux/cart/cart.actions';
 
 import { IMG_URL } from '../../../../configs';
@@ -85,9 +86,18 @@ const CartItem = ({
   }, [item.quantity]);
   useEffect(() => {
     if (firstlyMounted)
-      dispatch(
-        setCartItemSize(item, { size: currentSize, price: currentPrice, quantity: inputValue })
-      );
+      if (!user)
+        dispatch(
+          setCartItemSize(item, { size: currentSize, price: currentPrice, quantity: inputValue })
+        );
+      else
+        dispatch(
+          setUserCartItemSize(user, item, {
+            size: currentSize,
+            price: currentPrice,
+            quantity: inputValue
+          })
+        );
   }, [currentSize]);
 
   return (
@@ -125,7 +135,6 @@ const CartItem = ({
           name='size'
           value={item.options.size._id}
           onChange={handleSizeChange}
-          disablePortal
           className={
             isLightTheme ? styles.lightThemeSelectSizeStyle : styles.darkThemeSelectSizeStyle
           }

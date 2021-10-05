@@ -1,34 +1,36 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 import {
   setCart,
-  setDeliveryType,
-  setCartLoading,
   setCartError,
-  setCartTotalPrice
+  setCartLoading,
+  setCartTotalPrice,
+  setDeliveryType
 } from './cart.actions';
 import {
-  GET_CART,
-  ADD_ITEM_TO_CART,
-  REMOVE_ITEM_FROM_CART,
-  SET_CART_ITEM_QUANTITY,
   ADD_DELIVERY_TYPE,
-  GET_DELIVERY_TYPE,
-  RESET_CART,
-  CLEAN_CART,
+  ADD_ITEM_TO_CART,
   ADD_PRODUCT_TO_USER_CART,
-  DELETE_PRODUCT_FROM_USER_CART,
   CHANGE_CART_ITEM_USER_QUANTITY,
-  SET_CART_ITEM_SIZE
+  CLEAN_CART,
+  DELETE_PRODUCT_FROM_USER_CART,
+  GET_CART,
+  GET_DELIVERY_TYPE,
+  REMOVE_ITEM_FROM_CART,
+  RESET_CART,
+  SET_CART_ITEM_QUANTITY,
+  SET_CART_ITEM_SIZE,
+  SET_USER_CART_ITEM_SIZE
 } from './cart.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { cartKey, deliveryTypeKey, USER_IS_BLOCKED } from '../../configs/index';
 import {
-  deleteProductFromCart,
   addProductToCart,
+  cleanCart,
+  deleteProductFromCart,
   getCartByUserId,
   updateCartItemQuantity,
-  cleanCart
+  changeUserCartItemSize
 } from './cart.operations';
 import { handleUserError } from '../user/user.sagas';
 import { AUTH_ERRORS } from '../../const/error-messages';
@@ -122,6 +124,9 @@ export function* handleAddProductToUserCart({ payload }) {
   const { userId, cartItem } = payload;
   try {
     yield put(setCartLoading(true));
+
+    cartItem.allSizes = cartItem.allSizes.map(({ size, price }) => ({ size: size._id, price }));
+
     const newCartList = yield call(addProductToCart, userId, cartItem);
     yield put(setCart(newCartList.cart.items));
     yield put(setCartTotalPrice(newCartList.cart.totalPrice));
@@ -184,6 +189,21 @@ export function* handleSetCartItemSize({ payload }) {
   }
 }
 
+export function* handleSetUserCartItemSize({ payload }) {
+  try {
+    const { user, item, value } = payload;
+
+    yield put(setCartLoading(true));
+
+    const newCart = yield call(changeUserCartItemSize, user._id, item, value);
+
+    yield put(setCart(newCart.cart.items));
+    yield put(setCartLoading(false));
+  } catch (err) {
+    yield call(handleCartError, err);
+  }
+}
+
 export function* handleSetCartItemUserQuantity({ payload }) {
   try {
     const newCartList = yield call(updateCartItemQuantity, payload);
@@ -210,6 +230,7 @@ export default function* cartSaga() {
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
   yield takeEvery(SET_CART_ITEM_QUANTITY, handleSetCartItemQuantity);
   yield takeEvery(SET_CART_ITEM_SIZE, handleSetCartItemSize);
+  yield takeEvery(SET_USER_CART_ITEM_SIZE, handleSetUserCartItemSize);
   yield takeEvery(CHANGE_CART_ITEM_USER_QUANTITY, handleSetCartItemUserQuantity);
   yield takeEvery(ADD_DELIVERY_TYPE, handleSetDeliveryType);
   yield takeEvery(RESET_CART, handleCartReset);

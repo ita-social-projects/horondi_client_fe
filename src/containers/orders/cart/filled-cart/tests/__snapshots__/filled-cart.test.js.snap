@@ -11,7 +11,7 @@ exports[`Filled cart component tests should match snapshot 1`] = `
       className="makeStyles-orderWrapper-11"
     >
       <div
-        className="makeStyles-orderTable-17"
+        className="makeStyles-orderTable-16"
       >
         <OrderTable
           calcPrice={[Function]}
@@ -37,7 +37,7 @@ exports[`Filled cart component tests should match snapshot 1`] = `
     </div>
     <div>
       <div
-        className="makeStyles-promoAndTotalWrapper-15"
+        className="makeStyles-promoAndTotalWrapper-14"
       >
         <div
           className="makeStyles-promoWrapper-4"
@@ -48,33 +48,37 @@ exports[`Filled cart component tests should match snapshot 1`] = `
                 "className": "makeStyles-lightThemePromoInput-2",
               }
             }
-            placeholder="Промокод"
+            placeholder="Промокод або сертифікат"
           />
           <WithStyles(ForwardRef(Button))
             className="makeStyles-lightThemePromoButton-5"
             variant="contained"
           >
-            Додати
+            Застосувати
           </WithStyles(ForwardRef(Button))>
-          <WithStyles(ForwardRef(Button))
-            className="makeStyles-lightThemeShoppingButton-7"
-            variant="contained"
+          <Link
+            to="/catalog/:category"
           >
-            Продовжити покупки
-          </WithStyles(ForwardRef(Button))>
+            <WithStyles(ForwardRef(Button))
+              className="makeStyles-lightThemeShoppingButton-7"
+              variant="contained"
+            >
+              Продовжити покупки
+            </WithStyles(ForwardRef(Button))>
+          </Link>
         </div>
         <div
           className="makeStyles-lightThemeTotalWrapper-12"
         >
           <div
-            className="makeStyles-totalPrice-16"
+            className="makeStyles-totalPrice-15"
           >
             <span>
-              Total price
+              До оплати
             </span>
           </div>
           <div
-            className="makeStyles-totalPrice-16"
+            className="makeStyles-totalPrice-15"
           >
             <FontAwesomeIcon
               border={false}
@@ -110,12 +114,16 @@ exports[`Filled cart component tests should match snapshot 1`] = `
              
             100
           </div>
-          <WithStyles(ForwardRef(Button))
-            className="makeStyles-lightThemeOrdersButton-9"
-            variant="contained"
+          <Link
+            to="/checkout"
           >
-            До замовлень
-          </WithStyles(ForwardRef(Button))>
+            <WithStyles(ForwardRef(Button))
+              className="makeStyles-lightThemeOrdersButton-9"
+              variant="contained"
+            >
+              Оформити замовлення
+            </WithStyles(ForwardRef(Button))>
+          </Link>
         </div>
       </div>
     </div>

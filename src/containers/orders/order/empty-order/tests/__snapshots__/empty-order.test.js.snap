@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty order component tests should match snapshot 1`] = `
+<Fragment>
+  <PathBack />
+  <div
+    className="makeStyles-root-6"
+    data-cy=""
+  >
+    <WithStyles(ForwardRef(Typography))
+      className="makeStyles-whiteThemeTitle-3"
+      variant="h2"
+    />
+    <img
+      alt=""
+      className="makeStyles-image-5"
+      src="./images/cart/empty-cart-light-theme-image.png"
+    />
+    <Link
+      to="/catalog/:category"
+    >
+      <WithStyles(ForwardRef(Button))
+        className="makeStyles-whiteThemeButton-1"
+        variant="contained"
+      />
+    </Link>
+  </div>
+</Fragment>
+`;

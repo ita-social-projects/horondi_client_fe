@@ -91,7 +91,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   registerError: {
     fontSize: '0.75rem',
-    margin: '3px 14px 0px',
+    margin: '10px 14px 0px',
     textAlign: 'left',
     fontFamily: 'Roboto,Helvetica,Arial,sans-serif',
     fontWeight: '400',

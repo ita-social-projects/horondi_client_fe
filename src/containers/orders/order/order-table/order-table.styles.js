@@ -1,50 +1,70 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const title = {
+  display: 'block',
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontHeight: 'normal',
+  fontWeight: 'normal',
+  fontSize: '34px',
+  lineHeight: '46px',
+  letterSpacing: '0.0025em'
+};
+const tableHeader = {
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontWeight: '600',
+  fontSize: '14px',
+  lineHeight: '20px',
+  letterSpacing: '0.001em',
+  color: '#242424',
+  paddingBottom: 10,
+  paddingTop: 10,
+  '& >th': {
+    padding: 8,
+    textAlign: 'center'
+  }
+};
+
 export const useStyles = makeStyles((theme) => ({
-  titleWrapper: {
+  lightThemeTitleWrapper: {
+    ...title,
+    color: '#242424'
+  },
+  darkThemeTitleWrapper: {
+    ...title,
+    color: '#FEFEFE'
+  },
+  root: {
+    maxWidth: '1440px',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    '@media (max-width: 450px)': {
-      flexDirection: 'column',
-      ' & span': {
-        width: '100%'
-      }
-    }
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
-  cartActionButtons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    minHeight: 40
-  },
-  cartButton: {
-    margin: '10px 0 10px 20px',
-    cursor: 'pointer',
-    alignSelf: 'flex-end',
-    color: '#363636',
-    outline: 'none',
-    '&:active': {
-      color: theme.palette.textColor
+  table: {
+    width: '100%',
+    '@media (max-width: 750px)': {
+      width: '600px',
+      overflowX: 'auto'
     },
-    '&:hover': {
-      textDecoration: 'underline'
-    }
-  },
-  tableHeader: {
-    borderTop: '1px solid #DADADA',
-    borderBottom: '1px solid #DADADA',
-    paddingBottom: 10,
-    paddingTop: 10,
-    '& >th': {
-      padding: 8,
-      textAlign: 'center'
+    '@media (max-width: 600px)': {
+      width: '400px',
+      overflowX: 'auto'
     },
-    '@media (max-width: 450px)': {
-      display: 'none'
+    '@media (max-width: 400px)': {
+      width: '300px',
+      overflowX: 'auto'
     }
   },
-  quantity: {
-    color: 'grey',
-    fontWeight: 'lighter'
+  lightThemeTableHeader: {
+    ...tableHeader,
+    borderTop: '1px solid rgba(91, 91, 91, 0.2)',
+    borderBottom: '1px solid rgba(91, 91, 91, 0.2)'
+  },
+  darkThemeTableHeader: {
+    ...tableHeader,
+    borderTop: '1px solid #5B5B5B',
+    borderBottom: '1px solid #5B5B5B'
   }
 }));

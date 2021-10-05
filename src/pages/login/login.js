@@ -102,7 +102,9 @@ const Login = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       error={touched.password && errors.password}
-                      helperText={touched.password && errors.password}
+                      helperText={
+                        touched.password && errors.password && t('login.errorMessages.password')
+                      }
                     />
                     <div className={styles.recoveryContainer}>
                       <div>
@@ -131,7 +133,7 @@ const Login = () => {
                       >
                         {t('login.formLabel')}
                       </Button>
-                      <p className={styles.loginError}>{loginError}</p>
+                      <p className={styles.loginError}>{t('login.wrongCredentials')}</p>
                     </div>
                     <div className={styles.orContainer}>
                       <span className={styles.orText}>{t('login.orText')}</span>

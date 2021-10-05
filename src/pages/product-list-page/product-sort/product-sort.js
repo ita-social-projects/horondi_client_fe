@@ -68,7 +68,6 @@ const ProductSort = () => {
   };
 
   const sortByText = t('common.sortBy');
-
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
     <option
       key={lang[1].value}

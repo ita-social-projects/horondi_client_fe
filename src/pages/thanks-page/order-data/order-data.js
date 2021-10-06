@@ -21,8 +21,8 @@ const OrderData = ({ language, currency, order, isLightTheme }) => {
           <TableRow>
             <TableCell className={styles.tableCell}>{t('cart.cartTableFields.photo')}</TableCell>
             <TableCell className={styles.tableCell}>{t('cart.cartTableFields.item')}</TableCell>
-            <TableCell className={styles.tableCell}>{t('cart.cartTableFields.quantity')}</TableCell>
-            <TableCell className={styles.tableCell}>{t('cart.cartTableFields.price')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('common.quantity')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('common.price')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody className={styles.tableBody}>

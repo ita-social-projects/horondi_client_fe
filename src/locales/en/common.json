@@ -1,0 +1,10 @@
+{
+    "product": "Product",
+        "quantity": "Quantity",
+        "price": "Price",
+        "size": "Size",
+        "buttons": {
+            "confirm": "Yes",
+            "camcel": "No"
+          }
+}

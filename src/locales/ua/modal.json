@@ -1,9 +1,5 @@
 {
     "modalDeleteAllMessage": "Видалити всі товари з кошику?",
     "modalDeleteItemMessage": "Видалити товар з кошику?",
-    "modalDeleteFromWishlistMessage": "Видалити товар зі списку вподобань?",
-    "modalButtons": {
-        "confirm": "Так",
-        "camcel": "Ні"
-    }
+    "modalDeleteFromWishlistMessage": "Видалити товар зі списку вподобань?"
 }

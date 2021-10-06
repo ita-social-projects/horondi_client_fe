@@ -5,7 +5,8 @@ import cart from './cart.json';
 import wishlist from './wishlist.json';
 import modal from './modal.json';
 import productList from './productList.json';
+import common from './common.json';
 
 export default {
-  translations: { login, thanksPage, checkout, cart, wishlist, modal, productList }
+  translations: { login, thanksPage, checkout, cart, wishlist, modal, productList, common }
 };

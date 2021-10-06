@@ -1,0 +1,10 @@
+{
+    "product": "Продукт",
+    "quantity": "Кількість",
+    "price": "Ціна",
+    "size": "Розмір",
+    "buttons": {
+        "confirm": "Так",
+        "camcel": "Ні"
+    }
+}

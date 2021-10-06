@@ -9,8 +9,7 @@ import { useStyles } from './empty-wishlist.styles';
 import { WISHLIST_IMAGES } from '../../../configs';
 
 const EmptyWishlist = () => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
+  const { isLightTheme } = useSelector(({ Theme }) => ({
     isLightTheme: Theme.lightMode
   }));
   const styles = useStyles();

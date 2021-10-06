@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonGroup } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './count-per-page.styles';
 import { setCountPerPage } from '../../../redux/products/products.actions';

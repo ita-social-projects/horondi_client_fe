@@ -5,11 +5,11 @@ import clsx from 'clsx';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './slider-home-page.style';
 
 import { carouselInterval } from '../../../configs';
 import routes from '../../../const/routes';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { getImage } from '../../../utils/imageLoad';
 import { SLIDER_HOME_PAGE } from '../../../const/style-consts';
 
@@ -20,6 +20,7 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 const SliderHomePage = () => {
   const [imagesLinks, setImage] = useState([]);
   const styles = useStyles();
+  const { t } = useTranslation();
 
   const { images, language } = useSelector(({ HomePageSlider, Language }) => ({
     images: HomePageSlider.images,
@@ -58,7 +59,7 @@ const SliderHomePage = () => {
               to={item.link || pathToMain}
               className={clsx(styles.hoverArrow, SLIDER_HOME_PAGE.ARROW)}
             >
-              {HOME_BUTTONS[language].SEE_MORE}
+              {t('common.seeMore')}
               <span>&#8594;</span>
             </Link>
             <div className={clsx(styles.sliderInner, SLIDER_HOME_PAGE.SLIDER)}>

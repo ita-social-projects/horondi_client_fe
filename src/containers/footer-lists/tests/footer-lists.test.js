@@ -128,7 +128,6 @@ describe('tests for footer lists', () => {
     expect(wrapper.find(Link).at(0).props()).toHaveProperty('children', 'Рюкзаки');
     expect(wrapper.find(Link).at(1).props()).toHaveProperty('children', 'Сумки');
     expect(wrapper.find(Link).at(2).props()).toHaveProperty('children', 'Аксесуари');
-    console.log(wrapper.debug());
   });
 
   it('should return null if there are no categories', () => {

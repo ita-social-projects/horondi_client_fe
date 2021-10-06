@@ -86,7 +86,6 @@ describe('tests for categories list', () => {
     const Language = { language: 0 };
     const Categories = { list: [] };
     const Products = { countPerPage: 9 };
-    console.log(wrapper.debug());
     mockUseSelector.mockImplementation((callback) => callback({ Categories, Language, Products }));
     expect(wrapper).toBeDefined();
   });

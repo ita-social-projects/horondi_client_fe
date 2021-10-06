@@ -63,6 +63,7 @@ export const SCHEDULE = {
     sunday: 'Sun:  '
   }
 };
+
 export const CHECKOUT_TEXT_FIELDS = {
   0: {
     firstName: "Ім'я *",
@@ -125,8 +126,8 @@ export const CHECKOUT_DELIVERY_TYPES = {
     selfPickUP: 'Self pick-up',
     novaPoshta: 'Nova Poshta',
     ukrPoshta: 'Ukrposhta',
-    courierNovaPoshta: 'Courier from Nova Poshta',
-    courierUkrPoshta: 'Courier from Ukrposhta'
+    courierNovaPoshta: 'Nova Poshta Courier',
+    courierUkrPoshta: 'Ukrposhta Courier'
   }
 };
 export const CHECKOUT_BUTTON = {

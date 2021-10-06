@@ -7,11 +7,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useStyles } from './product-sizes.styles';
 
 const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
+  const { t } = useTranslation();
   const styles = useStyles();
   const { size: currentSize } = useSelector(({ Products }) => ({
     size: Products.productToSend.options.size
   }));
-  const { t } = useTranslation();
 
   const sizeButtons =
     sizes &&

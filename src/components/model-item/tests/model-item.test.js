@@ -21,7 +21,7 @@ let wrapper;
 const name = [{}, { value: 'test' }];
 const model = { category: { name }, name, images: { small: '' } };
 
-describe('Register component tests', () => {
+describe('Model Item component tests', () => {
   beforeEach(() => {
     spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
     spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
@@ -46,7 +46,7 @@ describe('Register component tests', () => {
     wrapper = null;
   });
 
-  it('Should render Register', () => {
+  it('Should render Model Item', () => {
     expect(wrapper).toBeDefined();
   });
 });

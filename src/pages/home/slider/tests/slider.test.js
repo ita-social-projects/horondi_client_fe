@@ -19,7 +19,7 @@ let spyOnUseDispatch;
 let mockDispatch;
 let wrapper;
 
-describe('Register component tests', () => {
+describe('Slider component tests', () => {
   beforeEach(() => {
     spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
     spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
@@ -44,7 +44,7 @@ describe('Register component tests', () => {
     wrapper = null;
   });
 
-  it('Should render Register', () => {
+  it('Should render Slider', () => {
     expect(wrapper).toBeDefined();
   });
 });

@@ -21,7 +21,7 @@ let spyOnUseDispatch;
 let mockDispatch;
 let wrapper;
 
-describe('Register component tests', () => {
+describe('Models list component tests', () => {
   beforeEach(() => {
     spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
     spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');

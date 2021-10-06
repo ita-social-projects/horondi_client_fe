@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './search-bar-list-item.styles';
 import { getImage } from '../../../utils/imageLoad';
@@ -9,7 +10,6 @@ import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import routes from '../../../const/routes';
 
 const { pathToProducts } = routes;
@@ -20,6 +20,7 @@ const SearchBarListItem = ({ product }) => {
     currency: Currency.currency,
     isLightTheme: Theme.lightMode
   }));
+  const { t } = useTranslation();
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const SearchBarListItem = ({ product }) => {
         <div className={styles.buttons}>
           <ClassicButton
             buttonType='button'
-            innerText={HOME_BUTTONS[language].DETAILS}
+            innerText={t('common.details')}
             onClickHandler={() => dispatch(push(`${pathToProducts}/${product._id}`))}
             buttonStyle='classic'
           />

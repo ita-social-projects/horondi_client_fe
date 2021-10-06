@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import { useStyles } from './model-item.style';
@@ -14,7 +14,6 @@ import {
   setPriceFilter,
   setSearchFilter
 } from '../../redux/products/products.actions';
-import { HOME_BUTTONS } from '../../translations/homepage.translations';
 import { IMG_URL } from '../../configs';
 
 const ModelItem = ({ model }) => {
@@ -24,6 +23,7 @@ const ModelItem = ({ model }) => {
   }));
   const dispatch = useDispatch();
   const styles = useStyles();
+  const { t } = useTranslation();
 
   const handleClickToModel = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));
@@ -51,7 +51,7 @@ const ModelItem = ({ model }) => {
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>
       <footer className={styles.link}>
-        {HOME_BUTTONS[language].MOVE_TO_MODEL}
+        {t('home.moveToModel')}
         <ArrowRightAltIcon />
       </footer>
     </Link>

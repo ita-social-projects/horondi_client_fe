@@ -1,10 +1,12 @@
 import React, { useMemo, useState, useLayoutEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 
 import clsx from 'clsx';
+import { push } from 'connected-react-router';
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
 import { CONSTRUCTOR } from '../../translations/sidebar.translations';
@@ -12,8 +14,9 @@ import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../const/routes';
+import { getCategoriesForBurgerMenu } from '../../operations/burger-menu/burger-menu.queries';
 
-const { pathToConstructor } = routes;
+const { pathToConstructor, pathToErrorPage } = routes;
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
@@ -27,14 +30,17 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       window.scrollY > 50 ? setSticky(true) : setSticky(false);
     });
   }, []);
-  const { language, burgerMenuCategories } = useSelector(({ Language, BurgerMenu }) => ({
-    language: Language.language,
-    burgerMenuCategories: BurgerMenu.categories
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
   }));
+
+  const { error, data } = useQuery(getCategoriesForBurgerMenu);
+
+  if (error) push(pathToErrorPage);
 
   const categoriesList = useMemo(
     () =>
-      burgerMenuCategories.map(({ category, models }) => (
+      data?.getCategoriesForBurgerMenu?.map(({ category, models }) => (
         <SideBarItem
           category={category._id}
           name={category.name}
@@ -45,7 +51,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           handlerItem={() => setIsMenuOpen(false)}
         />
       )),
-    [burgerMenuCategories, styles]
+    [data, styles]
   );
 
   const subList = useMemo(

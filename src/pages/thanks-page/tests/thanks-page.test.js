@@ -46,4 +46,8 @@ describe('ThanksPage component tests', () => {
   it('Should render ThanksPage', () => {
     expect(wrapper).toBeDefined();
   });
+
+  it('Cart table should renders', () => {
+    expect(wrapper.find('.MuiTableHead-root')).toHaveLength(1);
+  });
 });

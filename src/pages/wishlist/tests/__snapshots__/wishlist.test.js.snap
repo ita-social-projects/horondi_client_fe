@@ -1,0 +1,545 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wishlist component tests Should render 404 page 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <ThemeProvider
+      theme={
+        Object {
+          "breakpoints": Object {
+            "between": [Function],
+            "down": [Function],
+            "keys": Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ],
+            "only": [Function],
+            "up": [Function],
+            "values": Object {
+              "lg": 1280,
+              "md": 960,
+              "sm": 600,
+              "xl": 1920,
+              "xs": 0,
+            },
+            "width": [Function],
+          },
+          "direction": "ltr",
+          "mixins": Object {
+            "gutters": [Function],
+            "toolbar": Object {
+              "@media (min-width:0px) and (orientation: landscape)": Object {
+                "minHeight": 48,
+              },
+              "@media (min-width:600px)": Object {
+                "minHeight": 64,
+              },
+              "minHeight": 56,
+            },
+          },
+          "overrides": Object {},
+          "palette": Object {
+            "action": Object {
+              "activatedOpacity": 0.12,
+              "active": "rgba(0, 0, 0, 0.54)",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "disabledBackground": "rgba(0, 0, 0, 0.12)",
+              "disabledOpacity": 0.38,
+              "focus": "rgba(0, 0, 0, 0.12)",
+              "focusOpacity": 0.12,
+              "hover": "rgba(0, 0, 0, 0.04)",
+              "hoverOpacity": 0.04,
+              "selected": "rgba(0, 0, 0, 0.08)",
+              "selectedOpacity": 0.08,
+            },
+            "augmentColor": [Function],
+            "background": Object {
+              "default": "#fafafa",
+              "paper": "#fff",
+            },
+            "backgroundColor": "#FFFFFF",
+            "black": "#000000",
+            "button": Object {
+              "disabled": Object {
+                "backgroundColor": "#999999",
+                "color": "#C2C2C2",
+              },
+              "hover": Object {
+                "backgroundColor": "#000000",
+                "color": "#FFFFFF",
+              },
+              "normal": Object {
+                "backgroundColor": "#3F3F3F",
+                "color": "#FFFFFF",
+              },
+            },
+            "card": Object {
+              "backgroundColor": "#F5F5F5",
+              "border": "1px solid #D3D3D3",
+              "childrenBackgroundColor": "#FFFFFF",
+              "selectedButton": Object {
+                "backgroundColor": "#000000",
+                "color": "#FFFFFF",
+              },
+            },
+            "common": Object {
+              "black": "#000",
+              "white": "#fff",
+            },
+            "contrastThreshold": 3,
+            "divider": "rgba(0, 0, 0, 0.12)",
+            "error": Object {
+              "contrastText": "#FFFFFF",
+              "dark": "#b71c1c",
+              "light": "#ef5350",
+              "main": "#e53935",
+            },
+            "getContrastText": [Function],
+            "grey": Object {
+              "100": "#f5f5f5",
+              "200": "#eeeeee",
+              "300": "#e0e0e0",
+              "400": "#bdbdbd",
+              "50": "#fafafa",
+              "500": "#9e9e9e",
+              "600": "#757575",
+              "700": "#616161",
+              "800": "#424242",
+              "900": "#212121",
+              "A100": "#d5d5d5",
+              "A200": "#aaaaaa",
+              "A400": "#303030",
+              "A700": "#616161",
+            },
+            "icon": "#546e7a",
+            "info": Object {
+              "contrastText": "#FFFFFF",
+              "dark": "#0d47a1",
+              "light": "#42a5f5",
+              "main": "#1e88e5",
+            },
+            "primary": Object {
+              "contrastText": "#FFFFFF",
+              "dark": "#212121",
+              "light": "#212121",
+              "main": "#212121",
+            },
+            "secondary": Object {
+              "contrastText": "#FFFFFF",
+              "dark": "#0d47a1",
+              "light": "#2979ff",
+              "main": "#2979ff",
+            },
+            "success": Object {
+              "contrastText": "#FFFFFF",
+              "dark": "#1b5e20",
+              "light": "#66bb6a",
+              "main": "#43a047",
+            },
+            "text": Object {
+              "disabled": "rgba(0, 0, 0, 0.38)",
+              "hint": "rgba(0, 0, 0, 0.38)",
+              "primary": "rgba(0, 0, 0, 0.87)",
+              "secondary": "rgba(0, 0, 0, 0.54)",
+            },
+            "textColor": "#000000",
+            "tonalOffset": 0.2,
+            "type": "light",
+            "warning": Object {
+              "contrastText": "#FFFFFF",
+              "dark": "#e65100",
+              "light": "#ffa726",
+              "main": "#fb8c00",
+            },
+            "white": "#FFFFFF",
+          },
+          "props": Object {},
+          "shadows": Array [
+            "none",
+            "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
+            "0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)",
+            "0px 3px 3px -2px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 1px 8px 0px rgba(0,0,0,0.12)",
+            "0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)",
+            "0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12)",
+            "0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12)",
+            "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
+            "0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)",
+            "0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12)",
+            "0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12)",
+            "0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12)",
+            "0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12)",
+            "0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12)",
+            "0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12)",
+            "0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12)",
+            "0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12)",
+            "0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12)",
+            "0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12)",
+            "0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12)",
+            "0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12)",
+            "0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12)",
+            "0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12)",
+            "0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
+            "0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
+          ],
+          "shape": Object {
+            "borderRadius": 4,
+          },
+          "spacing": [Function],
+          "transitions": Object {
+            "create": [Function],
+            "duration": Object {
+              "complex": 375,
+              "enteringScreen": 225,
+              "leavingScreen": 195,
+              "short": 250,
+              "shorter": 200,
+              "shortest": 150,
+              "standard": 300,
+            },
+            "easing": Object {
+              "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+              "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+              "easeOut": "cubic-bezier(0.0, 0, 0.2, 1)",
+              "sharp": "cubic-bezier(0.4, 0, 0.6, 1)",
+            },
+            "getAutoHeightDuration": [Function],
+          },
+          "typography": Object {
+            "body1": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": 400,
+              "lineHeight": 1.5,
+            },
+            "body2": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": 400,
+              "lineHeight": 1.43,
+            },
+            "button": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "16px",
+              "fontWeight": 500,
+              "lineHeight": 1.75,
+              "textTransform": "uppercase",
+            },
+            "caption": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "11px",
+              "fontWeight": 400,
+              "letterSpacing": "0.33px",
+              "lineHeight": "13px",
+            },
+            "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+            "fontSize": 14,
+            "fontWeightBold": 700,
+            "fontWeightLight": 300,
+            "fontWeightMedium": 500,
+            "fontWeightRegular": 400,
+            "h1": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "35px",
+              "fontWeight": 500,
+              "letterSpacing": "-0.24px",
+              "lineHeight": "40px",
+            },
+            "h2": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "29px",
+              "fontWeight": 500,
+              "letterSpacing": "-0.24px",
+              "lineHeight": "32px",
+            },
+            "h3": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "24px",
+              "fontWeight": 500,
+              "letterSpacing": "-0.06px",
+              "lineHeight": "28px",
+            },
+            "h4": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "20px",
+              "fontWeight": 500,
+              "letterSpacing": "-0.06px",
+              "lineHeight": "24px",
+            },
+            "h5": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "16px",
+              "fontWeight": 500,
+              "letterSpacing": "-0.05px",
+              "lineHeight": "20px",
+            },
+            "h6": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "14px",
+              "fontWeight": 500,
+              "letterSpacing": "-0.05px",
+              "lineHeight": "20px",
+            },
+            "htmlFontSize": 16,
+            "overline": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "11px",
+              "fontWeight": 500,
+              "letterSpacing": "0.33px",
+              "lineHeight": "13px",
+              "textTransform": "uppercase",
+            },
+            "pxToRem": [Function],
+            "round": [Function],
+            "subtitle1": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "16px",
+              "fontWeight": 400,
+              "letterSpacing": "-0.05px",
+              "lineHeight": "25px",
+            },
+            "subtitle2": Object {
+              "fontFamily": "Montserrat,-apple-system,Arial,sans-serif",
+              "fontSize": "14px",
+              "fontWeight": 400,
+              "letterSpacing": "-0.05px",
+              "lineHeight": "21px",
+            },
+          },
+          "zIndex": Object {
+            "appBar": 1100,
+            "drawer": 1200,
+            "mobileStepper": 1000,
+            "modal": 1300,
+            "snackbar": 1400,
+            "speedDial": 1050,
+            "tooltip": 1500,
+          },
+          Symbol(mui.nested): false,
+        }
+      }
+    >
+      <Wishlist>
+        <div
+          className="makeStyles-root-1"
+        >
+          <EmptyWishlist>
+            <div
+              className="makeStyles-root-3"
+              data-cy="empty-wishlist"
+            >
+              <WithStyles(ForwardRef(Typography))
+                variant="h2"
+              >
+                <ForwardRef(Typography)
+                  classes={
+                    Object {
+                      "alignCenter": "MuiTypography-alignCenter",
+                      "alignJustify": "MuiTypography-alignJustify",
+                      "alignLeft": "MuiTypography-alignLeft",
+                      "alignRight": "MuiTypography-alignRight",
+                      "body1": "MuiTypography-body1",
+                      "body2": "MuiTypography-body2",
+                      "button": "MuiTypography-button",
+                      "caption": "MuiTypography-caption",
+                      "colorError": "MuiTypography-colorError",
+                      "colorInherit": "MuiTypography-colorInherit",
+                      "colorPrimary": "MuiTypography-colorPrimary",
+                      "colorSecondary": "MuiTypography-colorSecondary",
+                      "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                      "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                      "displayBlock": "MuiTypography-displayBlock",
+                      "displayInline": "MuiTypography-displayInline",
+                      "gutterBottom": "MuiTypography-gutterBottom",
+                      "h1": "MuiTypography-h1",
+                      "h2": "MuiTypography-h2",
+                      "h3": "MuiTypography-h3",
+                      "h4": "MuiTypography-h4",
+                      "h5": "MuiTypography-h5",
+                      "h6": "MuiTypography-h6",
+                      "noWrap": "MuiTypography-noWrap",
+                      "overline": "MuiTypography-overline",
+                      "paragraph": "MuiTypography-paragraph",
+                      "root": "MuiTypography-root",
+                      "srOnly": "MuiTypography-srOnly",
+                      "subtitle1": "MuiTypography-subtitle1",
+                      "subtitle2": "MuiTypography-subtitle2",
+                    }
+                  }
+                  variant="h2"
+                >
+                  <h2
+                    className="MuiTypography-root MuiTypography-h2"
+                  >
+                    wishlist.wishlistTitles.empty
+                  </h2>
+                </ForwardRef(Typography)>
+              </WithStyles(ForwardRef(Typography))>
+              <img
+                alt="empty wishlist"
+                src="./images/wishlist/wishlist-light-theme-img.png"
+              />
+              <Link
+                to="/catalog/products?page=1&sort=null&countPerPage=9"
+              >
+                <LinkAnchor
+                  href="/catalog/products?page=1&sort=null&countPerPage=9"
+                  navigate={[Function]}
+                >
+                  <a
+                    href="/catalog/products?page=1&sort=null&countPerPage=9"
+                    onClick={[Function]}
+                  >
+                    <WithStyles(ForwardRef(Button))
+                      className="makeStyles-button-4"
+                      variant="contained"
+                    >
+                      <ForwardRef(Button)
+                        className="makeStyles-button-4"
+                        classes={
+                          Object {
+                            "colorInherit": "MuiButton-colorInherit",
+                            "contained": "MuiButton-contained",
+                            "containedPrimary": "MuiButton-containedPrimary",
+                            "containedSecondary": "MuiButton-containedSecondary",
+                            "containedSizeLarge": "MuiButton-containedSizeLarge",
+                            "containedSizeSmall": "MuiButton-containedSizeSmall",
+                            "disableElevation": "MuiButton-disableElevation",
+                            "disabled": "Mui-disabled",
+                            "endIcon": "MuiButton-endIcon",
+                            "focusVisible": "Mui-focusVisible",
+                            "fullWidth": "MuiButton-fullWidth",
+                            "iconSizeLarge": "MuiButton-iconSizeLarge",
+                            "iconSizeMedium": "MuiButton-iconSizeMedium",
+                            "iconSizeSmall": "MuiButton-iconSizeSmall",
+                            "label": "MuiButton-label",
+                            "outlined": "MuiButton-outlined",
+                            "outlinedPrimary": "MuiButton-outlinedPrimary",
+                            "outlinedSecondary": "MuiButton-outlinedSecondary",
+                            "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
+                            "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
+                            "root": "MuiButton-root",
+                            "sizeLarge": "MuiButton-sizeLarge",
+                            "sizeSmall": "MuiButton-sizeSmall",
+                            "startIcon": "MuiButton-startIcon",
+                            "text": "MuiButton-text",
+                            "textPrimary": "MuiButton-textPrimary",
+                            "textSecondary": "MuiButton-textSecondary",
+                            "textSizeLarge": "MuiButton-textSizeLarge",
+                            "textSizeSmall": "MuiButton-textSizeSmall",
+                          }
+                        }
+                        variant="contained"
+                      >
+                        <WithStyles(ForwardRef(ButtonBase))
+                          className="MuiButton-root MuiButton-contained makeStyles-button-4"
+                          component="button"
+                          disabled={false}
+                          focusRipple={true}
+                          focusVisibleClassName="Mui-focusVisible"
+                          type="button"
+                        >
+                          <ForwardRef(ButtonBase)
+                            className="MuiButton-root MuiButton-contained makeStyles-button-4"
+                            classes={
+                              Object {
+                                "disabled": "Mui-disabled",
+                                "focusVisible": "Mui-focusVisible",
+                                "root": "MuiButtonBase-root",
+                              }
+                            }
+                            component="button"
+                            disabled={false}
+                            focusRipple={true}
+                            focusVisibleClassName="Mui-focusVisible"
+                            type="button"
+                          >
+                            <button
+                              className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-4"
+                              disabled={false}
+                              onBlur={[Function]}
+                              onDragLeave={[Function]}
+                              onFocus={[Function]}
+                              onKeyDown={[Function]}
+                              onKeyUp={[Function]}
+                              onMouseDown={[Function]}
+                              onMouseLeave={[Function]}
+                              onMouseUp={[Function]}
+                              onTouchEnd={[Function]}
+                              onTouchMove={[Function]}
+                              onTouchStart={[Function]}
+                              tabIndex={0}
+                              type="button"
+                            >
+                              <span
+                                className="MuiButton-label"
+                              >
+                                wishlist.wishlistButtons.empty
+                              </span>
+                              <WithStyles(memo)
+                                center={false}
+                              >
+                                <ForwardRef(TouchRipple)
+                                  center={false}
+                                  classes={
+                                    Object {
+                                      "child": "MuiTouchRipple-child",
+                                      "childLeaving": "MuiTouchRipple-childLeaving",
+                                      "childPulsate": "MuiTouchRipple-childPulsate",
+                                      "ripple": "MuiTouchRipple-ripple",
+                                      "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                      "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                      "root": "MuiTouchRipple-root",
+                                    }
+                                  }
+                                >
+                                  <span
+                                    className="MuiTouchRipple-root"
+                                  >
+                                    <TransitionGroup
+                                      childFactory={[Function]}
+                                      component={null}
+                                      exit={true}
+                                    />
+                                  </span>
+                                </ForwardRef(TouchRipple)>
+                              </WithStyles(memo)>
+                            </button>
+                          </ForwardRef(ButtonBase)>
+                        </WithStyles(ForwardRef(ButtonBase))>
+                      </ForwardRef(Button)>
+                    </WithStyles(ForwardRef(Button))>
+                  </a>
+                </LinkAnchor>
+              </Link>
+            </div>
+          </EmptyWishlist>
+        </div>
+      </Wishlist>
+    </ThemeProvider>
+  </Router>
+</BrowserRouter>
+`;

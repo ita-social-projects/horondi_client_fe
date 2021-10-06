@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTransition, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import SimpleModal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 

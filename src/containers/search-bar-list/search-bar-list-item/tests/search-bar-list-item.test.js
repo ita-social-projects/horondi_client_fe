@@ -4,14 +4,12 @@ import Adapter from 'enzyme-adapter-react-16';
 import * as reactRedux from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 
-import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
 import { theme } from '../../../../components/app/app-theme/app.theme';
 
 import mockStore from './mockStore';
-import ModelsList from '../models-list';
-import ClassicButton from '../../../../components/classic-button';
+import SearchBarListItem from '../search-bar-list-item';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -20,6 +18,11 @@ let spyOnUseSelector;
 let spyOnUseDispatch;
 let mockDispatch;
 let wrapper;
+const product = {
+  images: { primary: { small: 'test' } },
+  name: { 0: { value: 'test' } },
+  basePrice: { 0: { value: 'test', currency: 'test' } }
+};
 
 describe('Register component tests', () => {
   beforeEach(() => {
@@ -34,7 +37,7 @@ describe('Register component tests', () => {
     wrapper = mount(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
-          <ModelsList />
+          <SearchBarListItem product={product} />
         </ThemeProvider>
       </BrowserRouter>
     );
@@ -46,15 +49,7 @@ describe('Register component tests', () => {
     wrapper = null;
   });
 
-  it('Should render models-list', () => {
+  it('Should render Register', () => {
     expect(wrapper).toBeDefined();
-  });
-
-  it('Should render another button', () => {
-    act(() => {
-      wrapper.find(ClassicButton).props().onClickHandler();
-    });
-
-    expect(wrapper.find(ClassicButton).props().buttonStyle).toBe('inverse');
   });
 });

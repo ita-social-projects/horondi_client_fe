@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './category-item.style';
 import { getImage } from '../../../../utils/imageLoad';
 
-const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl, language }) => {
+const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const [image, setImage] = useState(categoryImageUrl);
   const { t } = useTranslation();
 

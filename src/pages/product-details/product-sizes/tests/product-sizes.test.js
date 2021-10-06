@@ -1,7 +1,13 @@
 import React from 'react';
+<<<<<<< HEAD
 import { useSelector } from 'react-redux';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
+=======
+import {useDispatch, useSelector} from 'react-redux';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, {shallow} from 'enzyme';
+>>>>>>> f2907b40... roduct-details translations + test
 import ProductSizes from '../product-sizes';
 
 jest.mock('../product-sizes.styles', () => ({
@@ -9,6 +15,7 @@ jest.mock('../product-sizes.styles', () => ({
 }));
 
 jest.mock('react-redux');
+<<<<<<< HEAD
 Enzyme.configure({ adapter: new Adapter() });
 
 const size = {
@@ -48,4 +55,29 @@ describe('Product component', () => {
       <ProductSizes handleSizeChange={handleSizeChange} sizes={sizes} sizeIsNotSelectedError />
     );
   });
+=======
+Enzyme.configure({adapter: new Adapter()});
+
+const size = {
+  _id: '1'
+}
+
+useSelector.mockImplementation(() => ({size
+}));
+
+const handleSizeChange = jest.fn();
+const sizes = [{
+  size
+}]
+
+describe('Product component', () =>{
+
+  it('Should render', () =>{
+    const component = shallow(
+      <ProductSizes handleSizeChange={handleSizeChange}  sizes={sizes} sizeIsNotSelectedError={false} />
+    );
+   expect(component).toBeDefined(); 
+  });
+
+>>>>>>> f2907b40... roduct-details translations + test
 });

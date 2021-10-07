@@ -1,45 +1,27 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import { useDispatch, useSelector } from 'react-redux';
 import Adapter from 'enzyme-adapter-react-16';
-import * as reactRedux from 'react-redux';
-import { ThemeProvider } from '@material-ui/styles';
-import { BrowserRouter } from 'react-router-dom';
 import NewPassword from '../new-password';
-import { theme } from '../../../components/app/app-theme/app.theme';
-import mockStore from './mockStore';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const themeValue = theme('light');
-let spyOnUseSelector;
-let spyOnUseDispatch;
-let mockDispatch;
-let wrapper;
+jest.mock('../../new-password/new-password.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('react-redux');
 
-describe('Recovery component tests', () => {
-  beforeEach(() => {
-    spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
-    spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
-    mockDispatch = jest.fn();
-    spyOnUseSelector.mockImplementation(() => mockStore);
-    spyOnUseDispatch.mockReturnValue(mockDispatch);
+const dispatch = jest.fn();
+const state = {
+  userError: '',
+  loading: false,
+  passwordReset: '',
+  language: 0
+};
 
-    wrapper = mount(
-      <BrowserRouter>
-        <ThemeProvider theme={themeValue}>
-          <NewPassword />
-        </ThemeProvider>
-      </BrowserRouter>
-    );
-  });
+useDispatch.mockImplementation(() => dispatch);
+useSelector.mockImplementation(() => state);
 
-  afterEach(() => {
-    jest.restoreAllMocks();
-    spyOnUseSelector.mockClear();
-    wrapper = null;
-  });
-
-  it('Should render Recovery', () => {
-    expect(wrapper).toBeDefined();
+describe('NewPassword component', () => {
+  it('should render', () => {
+    const component = shallow(<NewPassword />);
   });
 });

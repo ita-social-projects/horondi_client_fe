@@ -2,36 +2,18 @@ import React from 'react';
 import { TextField } from '@material-ui/core';
 
 import { useStyles } from './courier.styles';
-import {
-  CHECKOUT_DELIVERY_TYPES,
-  CHECKOUT_TITLES
-} from '../../../../../translations/checkout.translations';
-import { CY_CODE_ERR, deliveryTypes } from '../../../../../configs';
+import { CHECKOUT_TITLES } from '../../../../../translations/checkout.translations';
+import { CY_CODE_ERR } from '../../../../../configs';
 import { courierInputLabels } from '../../../../../utils/checkout';
 import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 
-const Courier = ({
-  isLightTheme,
-  language,
-  deliveryType,
-  values,
-  handleChange,
-  touched,
-  errors
-}) => {
+const Courier = ({ isLightTheme, language, values, handleChange, touched, errors }) => {
   const styles = useStyles({ isLightTheme });
 
   return (
     <div className={styles.courierContainer}>
-      <h3 className={styles.courierTitle}>
-        {deliveryType === deliveryTypes.NOVAPOSTCOURIER
-          ? CHECKOUT_DELIVERY_TYPES[language].courierNovaPoshta
-          : CHECKOUT_DELIVERY_TYPES[language].courierUkrPoshta}
-      </h3>
       <div className={styles.inputData}>
-        <h4 className={styles.courierInputDataTitle}>
-          {CHECKOUT_TITLES[language].deliveryAddress}
-        </h4>
+        <h3 className={styles.courierTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h3>
         <div className={styles.inputWrapper}>
           {courierInputLabels(language).map((field) => (
             <>

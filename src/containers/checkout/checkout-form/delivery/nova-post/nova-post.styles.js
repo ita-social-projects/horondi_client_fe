@@ -7,32 +7,33 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'space-around',
     alignItems: 'flex-start',
     width: '100%',
-    marginBottom: '5%'
+    marginBottom: '2%'
   },
   error: {
     color: '#e60000',
     marginTop: 15
   },
   novaPostTitle: ({ isLightTheme }) => ({
-    fontWeight: 400,
-    fontSize: 18,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff'
-  }),
-  novaPostDataTitle: ({ isLightTheme }) => ({
-    fontWeight: 400,
-    fontSize: 16,
-    color: isLightTheme ? '#4E4E4E' : '#ffffff'
+    fontWeight: 700,
+    fontSize: 23,
+    color: isLightTheme ? '#1D1C1C' : '#ffffff',
+    marginLeft: '10%',
+    '@media (max-width: 920px)': {
+      width: '100%'
+    }
   }),
   novaPostData: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    marginBottom: '3%'
+    marginBottom: '2%',
+    marginLeft: '10%'
   },
   dataInput: {
-    width: '80%',
+    width: '60%',
+    marginBottom: '3%',
     '@media (max-width: 768px)': {
-      width: '100%',
+      width: '100%'
     }
   },
   disabled: {

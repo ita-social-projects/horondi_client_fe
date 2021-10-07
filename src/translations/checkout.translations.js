@@ -3,10 +3,10 @@ export const CHECKOUT_TITLES = {
     address: 'Адреса:',
     addressHorondi: 'Львів, вул. Заводська,31',
     orderComment: 'Коментар до замовлення',
-    checkoutTitle: 'Оплата та доставка',
+    checkoutTitle: 'Оформлення замовлення',
     yourOrderTitle: 'Ваше замовлення',
     orderForm: 'Форма замовлення',
-    contactInfo: 'Контактна інформація',
+    contactInfo: 'Контакти',
     delivery: 'Доставка',
     payment: 'Метод оплати',
     deliveryPrice: 'Ціна доставки',
@@ -23,13 +23,13 @@ export const CHECKOUT_TITLES = {
   1: {
     address: 'Address:',
     addressHorondi: 'Lviv, st. Zavodska,31',
-    orderComment: 'Order comment',
-    checkoutTitle: 'Payment and delivery',
+    orderComment: 'Order Comment',
+    checkoutTitle: 'Checkout Process',
     yourOrderTitle: 'Your order',
     orderForm: 'Order form',
-    contactInfo: 'Contact information',
-    delivery: 'Delivery',
-    payment: 'Payment method',
+    contactInfo: 'Contact Information',
+    delivery: 'Delivery Method',
+    payment: 'Payment Method',
     deliveryPrice: 'Delivery price',
     totalPrice: 'Total price',
     schedule: 'Schedule:',
@@ -39,7 +39,7 @@ export const CHECKOUT_TITLES = {
     USD: 'USD',
     region: 'Region',
     orderNumber: 'Order № ',
-    deliveryAddress: 'Delivery address'
+    deliveryAddress: 'Delivery Address'
   }
 };
 
@@ -80,13 +80,13 @@ export const CHECKOUT_TEXT_FIELDS = {
     delivery: 'Тип доставки',
     total: 'Загальна сума',
     region: 'Область *',
-    district: 'Район *'
+    district: 'Район '
   },
   1: {
     firstName: 'First name *',
     lastName: 'Last name *',
     email: 'Email *',
-    contactPhoneNumber: 'Contact phone number *',
+    contactPhoneNumber: 'Phone *',
     city: 'City *',
     house: 'Building *',
     street: 'Street *',
@@ -101,32 +101,20 @@ export const CHECKOUT_TEXT_FIELDS = {
     district: 'District *'
   }
 };
-export const CHECKOUT_DROP_LIST = {
+export const DELIVERY_TYPE = {
   0: {
-    deliveryType: 'Тип доставки',
-    paymentMethod: 'Метод оплати',
-    department: 'Відділення'
+    novaPost: 'Нова пошта',
+    ukrPost: 'Укрпошта',
+    selfPickup: 'Самовивіз',
+    novaPostCourier: "Кур'єр нової пошти",
+    ukrPostCourier: "Кур'єр укрпошти"
   },
   1: {
-    deliveryType: 'Delivery type',
-    paymentMethod: 'Payment method',
-    department: 'Department'
-  }
-};
-export const CHECKOUT_DELIVERY_TYPES = {
-  0: {
-    selfPickUP: 'Самовивіз',
-    novaPoshta: 'Нова Пошта',
-    ukrPoshta: 'Укрпошта',
-    courierNovaPoshta: "Новa Пошта кур'єр",
-    courierUkrPoshta: "Укрпошта кур'єр"
-  },
-  1: {
-    selfPickUP: 'Self pick-up',
-    novaPoshta: 'Nova Poshta',
-    ukrPoshta: 'Ukrposhta',
-    courierNovaPoshta: 'Courier from Nova Poshta',
-    courierUkrPoshta: 'Courier from Ukrposhta'
+    novaPost: 'Nova Poshta',
+    ukrPost: 'Ukrposhta',
+    selfPickup: 'Self Pickup',
+    novaPostCourier: 'Nova Poshta Courier',
+    ukrPostCourier: 'Ukrposhta Courier'
   }
 };
 export const CHECKOUT_BUTTON = {

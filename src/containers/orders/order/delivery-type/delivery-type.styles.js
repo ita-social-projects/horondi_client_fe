@@ -27,9 +27,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   radioBtnWrapper: {
     paddingBottom: 20,
-    '@media (max-width: 813px)': {
-      marginLeft: 40
-    }
+    marginLeft: '11%'
   },
   btnCreateOrder: {
     margin: '20px 0',
@@ -49,6 +47,14 @@ export const useStyles = makeStyles((theme) => ({
     },
     '&:hover': {
       textDecoration: 'underline'
+    }
+  },
+  deliveryTitle: {
+    fontSize: 23,
+    fontWeight: 700,
+    marginLeft: '10%',
+    '@media (max-width: 920px)': {
+      width: '100%'
     }
   }
 }));

@@ -7,29 +7,33 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '0 auto'
   },
   formControl: {
-    width: 260,
-    marginLeft: '2%',
-    marginBottom: '3%',
+    // width: 260,
+    // //marginLeft: '8%',
+    // marginBottom: '3%',
+    // '@media (max-width: 768px)': {
+    //   flexDirection: 'column',
+    //   width: '100%',
+    //   margin: 0
+    // }
+    width: '66%',
+    marginBottom: '1%',
     '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      width: '100%',
-      margin:0
+      width: '100%'
     }
   },
   paymentSelect: {
     height: 50,
-    width: 280,
+    // width: 280,
+    width: '100%',
     marginBottom: 10,
     '@media (max-width: 768px)': {
-      width: '100%',
-    },
+      width: '100%'
+    }
   },
-  contactInfoTitle: ({ isLightTheme }) => ({
-    fontSize: 18,
-    fontWeight: 400,
-    color: isLightTheme ? '#4E4E4E' : '#fffff',
-    width: '40%',
-    marginLeft: '2%',
+  title: ({ isLightTheme }) => ({
+    fontSize: 23,
+    fontWeight: 700,
+    color: isLightTheme ? '#1D1C1C' : '#ffffff',
     '@media (max-width: 920px)': {
       width: '100%'
     }
@@ -48,14 +52,17 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   contactInfoFields: {
     display: 'flex',
-    alignItems: 'flex-start',
-    width: '100%',
-    marginLeft: 10,
+    // alignItems: 'flex-start',
+    flexDirection: 'column',
     '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      width: '100%',
-      margin:0
+      width: '100%'
+      // margin:0
     }
+    // display: 'flex',
+    // flexDirection: 'column',
+    // width: '100%',
+    // marginBottom: '2%',
+    // marginLeft: '10%',
   },
   a: {
     margin: 0
@@ -63,13 +70,14 @@ export const useStyles = makeStyles(({ palette }) => ({
   contactPaymentInfo: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '1%'
+    marginLeft: '10%'
   },
   checkoutFormContainer: {
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     width: '100%',
+    marginBottom: '2%',
     '@media (max-width: 1150px)': {
       flexDirection: 'column'
     }
@@ -81,38 +89,49 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   contactInfoWrapper: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // width: '100%',
+    // marginLeft: '10%',
+    // //marginBottom: '5%',
+    // alignItems: 'flex-start',
+    // '@media (max-width: 768px)': {
+    //   width: '100%'
+    // }
     display: 'flex',
+    marginLeft: '10%',
     flexDirection: 'column',
-    width: '100%',
-    alignItems: 'flex-start',
-    '@media (max-width: 768px)': {
-      width: '100%'
-    }
+    width: '100%'
   },
   error: {
     color: '#e60000',
     marginLeft: '3%'
   },
   textField: {
-    width: 300,
-    margin: 10,
+    // width: '100%',
+    // marginBottom: '8%',
+    // '@media (max-width: 768px)': {
+    //   width: '100%',
+    //   margin: "10px 0px 10px"
+    // }
+    width: '60%',
+    marginBottom: '1%',
     '@media (max-width: 768px)': {
-      width: '100%',
-      margin:"10px 0px 10px"
+      width: '100%'
     }
   },
   textAreaField: {
-    width: 500,
-    marginLeft: '2%',
+    width: '66%',
     '@media (max-width: 768px)': {
       width: '100%',
       margin: 0
     }
   },
-  submitInfo:{
-        '@media (max-width: 768px)': {
-      width: '100%',
-      margin: 0
+  submitInfo: {
+    marginLeft: '10%',
+    '@media (max-width: 768px)': {
+      width: '80%'
+      // margin: 0
     }
   },
   submitBtn: {
@@ -170,8 +189,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     width: '55%'
   }),
-  delivery:{
-    width:'100%',
+  delivery: {
+    width: '100%'
   },
   deliveryContainer: {
     display: 'flex',
@@ -186,16 +205,21 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginRight: '2%'
   },
   inputData: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // '@media (max-width: 768px)': {
+    //   width: '100%'
+    // }
     display: 'flex',
     flexDirection: 'column',
-    '@media (max-width: 768px)': {
-      width: '100%'
-    }
+    width: '100%',
+    marginBottom: '2%'
   },
   checkoutTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%'
+    width: '100%',
+    marginLeft: '6%'
   },
   checkoutTitleInfoData: {
     display: 'flex',
@@ -216,10 +240,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   checkoutTitle: ({ isLightTheme }) => ({
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 400,
+    textAlign: 'center',
     color: isLightTheme ? '#000000' : '#ffffff',
-    margin: '10px 0 10px 2%',
     width: '100%',
     '@media (max-width: 920px)': {
       width: '100%'
@@ -228,12 +252,14 @@ export const useStyles = makeStyles(({ palette }) => ({
   checkoutYourOrderTitleData: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%'
+    width: '100%',
+    marginLeft: '10%'
   },
   checkoutTitleLine: {
-    width: '80%',
+    width: '100%',
     background: '#636262',
     height: 1,
+    marginTop: '2%',
     '@media (max-width: 920px)': {
       width: '100%'
     }

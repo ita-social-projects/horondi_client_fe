@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-import { Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux';
-import {
-  CART_TITLES,
-  CART_TABLE_FIELDS,
-  DELIVERY_TYPE,
-  CART_BUTTON_TITLES
-} from '../../../../translations/cart.translations';
+import { CHECKOUT_TITLES , DELIVERY_TYPE } from '../../../../translations/checkout.translations';
+
 import { useStyles } from './delivery-type.styles';
-import routes from '../../../../const/routes';
 import { addDeliveryType } from '../../../../redux/cart/cart.actions';
 import { deliveryTypes, SESSION_STORAGE } from '../../../../configs';
 import { getFromSessionStorage } from '../../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
-import { getCurrencySign } from '../../../../utils/currency';
 
-const DeliveryType = ({ language, totalPrice, currency }) => {
+const DeliveryType = ({ language }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -27,13 +19,15 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
   );
 
-  const { pathToBackpacks, pathToCheckout } = routes;
-
-  const currencySign = getCurrencySign(currency);
   const handleAddDeliveryType = () => {
     dispatch(addDeliveryType(deliveryType));
     setDeliveryTypeToStorage(deliveryType);
   };
+
+  useEffect(() => {
+    handleAddDeliveryType();
+  }, [deliveryType]);
+
   const radioButtons = Object.entries(DELIVERY_TYPE[language]).map((type) => (
     <FormControlLabel
       value={type[0].toUpperCase()}
@@ -46,45 +40,19 @@ const DeliveryType = ({ language, totalPrice, currency }) => {
 
   return (
     <div className={styles.root}>
-      <h2>{CART_TITLES[language].order}</h2>
-      <div className={styles.sumContainer}>
-        <span>{CART_TABLE_FIELDS[language].total}</span>
-        <span>
-          {Math.round(totalPrice)}
-          {'\u00A0'}
-          <FontAwesomeIcon icon={currencySign} />
-        </span>
-      </div>
       <div>
-        <h3>{CART_TABLE_FIELDS[language].delivery}</h3>
+        <h3 className={styles.deliveryTitle}>{CHECKOUT_TITLES[language].delivery}</h3>
         <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
           <RadioGroup
             aria-label='Delivery type'
             name='delivery-type'
             value={deliveryType}
+            onClick={handleAddDeliveryType}
             onChange={(e) => setDeliveryType(e.target.value)}
           >
             {radioButtons}
           </RadioGroup>
         </FormControl>
-      </div>
-      <div className={styles.sumContainer}>
-        <span>{CART_TABLE_FIELDS[language].toPay}</span>
-        <span>
-          {Math.round(totalPrice)}
-          {'\u00A0'}
-          <FontAwesomeIcon icon={currencySign} />
-        </span>
-      </div>
-      <div className={styles.btnWrapper}>
-        <Link to={pathToCheckout}>
-          <Button onClick={handleAddDeliveryType} className={styles.btnCreateOrder}>
-            {CART_BUTTON_TITLES[language].checkout}
-          </Button>
-        </Link>
-        <Link to={pathToBackpacks}>
-          <span className={styles.btnCatalogue}>{CART_BUTTON_TITLES[language].goods}</span>
-        </Link>
       </div>
     </div>
   );

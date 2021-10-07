@@ -8,9 +8,9 @@ import _ from 'lodash';
 import { useStyles } from './nova-post.styles';
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_DELIVERY_TYPES,
   CHECKOUT_INPUT_FIELD,
-  CHECKOUT_TEXT_FIELDS
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
 } from '../../../../../translations/checkout.translations';
 import {
   getNovaPoshtaCities,
@@ -49,9 +49,8 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
 
   return (
     <div className={styles.novaPostContainer}>
-      <h3 className={styles.novaPostTitle}>{CHECKOUT_DELIVERY_TYPES[language].novaPoshta}</h3>
+      <h3 className={styles.novaPostTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h3>
       <div className={styles.novaPostData}>
-        <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].city}</h4>
         <div className={styles.selectorInfo}>
           <Autocomplete
             onInputChange={(e, value, reason) => {
@@ -103,7 +102,6 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
         </div>
       </div>
       <div className={styles.novaPostData}>
-        <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].department}</h4>
         <div className={styles.selectorInfo}>
           <Autocomplete
             onInputChange={(event, value, reason) => {

@@ -19,7 +19,7 @@ import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
 import { URL_QUERIES_NAME } from '../../configs';
 
-const ProductListPage = ({ model, width }) => {
+const ProductListPage = ({ width }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();

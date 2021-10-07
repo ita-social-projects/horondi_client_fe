@@ -84,9 +84,6 @@ describe('', () => {
       </BrowserRouter>
     );
 
-    expect(mockUseSelector).toHaveBeenCalled();
-    expect(mockUseSelector).toHaveBeenCalledTimes(2);
-
     mockUseSelector.mockClear();
   });
 });

@@ -1,41 +1,28 @@
 import React from 'react';
-import * as redux from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
+import * as reactRedux from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
-import { theme } from '../../../components/app/app-theme/app.theme';
-
+import { BrowserRouter } from 'react-router-dom';
 import NewPassword from '../new-password';
+import { theme } from '../../../components/app/app-theme/app.theme';
+import mockStore from './mockStore';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const mockDispatch = jest.fn();
-const mockUseHistory = jest.fn();
+const themeValue = theme('light');
+let spyOnUseSelector;
+let spyOnUseDispatch;
+let mockDispatch;
+let wrapper;
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useHistory: () => ({
-    goBack: mockUseHistory
-  })
-}));
-
-const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
-const mockUseSelector = jest.spyOn(redux, 'useSelector');
-
-describe('', () => {
-  let wrapper;
-
+describe('Recovery component tests', () => {
   beforeEach(() => {
-    const themeValue = theme('light');
-
-    mockUseDispatch.mockImplementation(() => mockDispatch);
-    mockUseSelector.mockReturnValue({
-      language: '0',
-      isLightTheme: true
-    });
+    spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
+    spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
+    mockDispatch = jest.fn();
+    spyOnUseSelector.mockImplementation(() => mockStore);
+    spyOnUseDispatch.mockReturnValue(mockDispatch);
 
     wrapper = mount(
       <BrowserRouter>
@@ -47,46 +34,12 @@ describe('', () => {
   });
 
   afterEach(() => {
-    wrapper.unmount();
-    mockUseDispatch.mockClear();
-    mockUseSelector.mockClear();
+    jest.restoreAllMocks();
+    spyOnUseSelector.mockClear();
+    wrapper = null;
   });
 
-  it('Should render 404 page', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('Should click back-page button', () => {
-    const btn = wrapper.find('button');
-    btn.simulate('click');
-
-    expect(mockUseHistory).toHaveBeenCalledTimes(1);
-  });
-
-  it('Should work with dark theme', () => {
-    const themeValue = theme('dark');
-
-    mockUseSelector.mockReturnValue({
-      language: '0',
-      isLightTheme: true
-    });
-
-    const Language = { language: 1 };
-    const Theme = { lightMode: false };
-
-    mockUseSelector.mockImplementation((callback) => callback({ Language, Theme }));
-
-    wrapper = mount(
-      <BrowserRouter>
-        <ThemeProvider theme={themeValue}>
-          <NewPassword />
-        </ThemeProvider>
-      </BrowserRouter>
-    );
-
-    expect(mockUseSelector).toHaveBeenCalled();
-    expect(mockUseSelector).toHaveBeenCalledTimes(2);
-
-    mockUseSelector.mockClear();
+  it('Should render Recovery', () => {
+    expect(wrapper).toBeDefined();
   });
 });

@@ -149,14 +149,6 @@ export const checkoutFormBtnValue = (values, language) =>
 
 export const courierInputLabels = (language) => [
   {
-    name: CHECKOUT_INPUT_FIELD.region,
-    label: CHECKOUT_TEXT_FIELDS[language].region
-  },
-  {
-    name: CHECKOUT_INPUT_FIELD.district,
-    label: CHECKOUT_TEXT_FIELDS[language].district
-  },
-  {
     name: CHECKOUT_INPUT_FIELD.city,
     label: CHECKOUT_TEXT_FIELDS[language].city
   },

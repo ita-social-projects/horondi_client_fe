@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 768px)': {
       width: '100%'
     }
-  }, 
+  },
   selfPickupTitlesWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -20,18 +20,19 @@ export const useStyles = makeStyles(() => ({
   },
   selfPickupData: ({ isLightTheme }) => ({
     display: 'flex',
-    width: '80%',
     background: isLightTheme ? '#f6f4f4' : null,
     paddingLeft: 5,
+    marginLeft: '10%',
+    width: 600,
     '@media (max-width: 768px)': {
-      width: '100%'
+      width: '80%'
     }
   }),
   selfPickupTitle: ({ isLightTheme }) => ({
     fontWeight: 400,
     fontSize: 18,
     color: isLightTheme ? '#1D1C1C' : '#ffffff',
-    marginLeft:'2%'
+    marginLeft: '2%'
   }),
   schedule: {
     display: 'flex',
@@ -56,8 +57,8 @@ export const useStyles = makeStyles(() => ({
     fontWeight: 400,
     fontSize: 14
   }),
-  scheduleData: ({ isLightTheme }) => ({
+  scheduleData: {
     display: 'flex',
     flexDirection: 'column'
-  })
+  }
 }));

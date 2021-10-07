@@ -10,7 +10,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import DeliveryType from '../../orders/order/delivery-type/delivery-type';
+import DeliveryType from '../delivery-type/delivery-type';
 
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
@@ -126,21 +126,11 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               <Link to={pathToCart} className={styles.backBtn}>
                 <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
               </Link>
-              {/* <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2> */}
             </div>
             <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
             <div className={styles.checkoutTitleLine} />
           </div>
           <Grid item className={styles.userInfoContainer}>
-            {/* <div className={styles.checkoutTitleInfo}>
-              <div className={styles.checkoutTitleInfoData}>
-                <Link to={pathToCart} className={styles.backBtn}>
-                  <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
-                </Link>
-                <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
-              </div>
-              <div className={styles.checkoutTitleLine} />
-            </div> */}
             <div className={styles.contactInfoWrapper}>
               <h3 className={styles.title}>{CHECKOUT_TITLES[language].contactInfo}</h3>
               <div className={styles.contactInfoFields}>

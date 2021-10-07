@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux';
-import { CHECKOUT_TITLES , DELIVERY_TYPE } from '../../../../translations/checkout.translations';
+import { CHECKOUT_TITLES, DELIVERY_TYPE } from '../../../translations/checkout.translations';
 
 import { useStyles } from './delivery-type.styles';
-import { addDeliveryType } from '../../../../redux/cart/cart.actions';
-import { deliveryTypes, SESSION_STORAGE } from '../../../../configs';
-import { getFromSessionStorage } from '../../../../services/session-storage.service';
-import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
+import { addDeliveryType } from '../../../redux/cart/cart.actions';
+import { deliveryTypes, SESSION_STORAGE } from '../../../configs';
+import { getFromSessionStorage } from '../../../services/session-storage.service';
+import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 
 const DeliveryType = ({ language }) => {
   const styles = useStyles();

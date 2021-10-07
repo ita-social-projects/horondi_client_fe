@@ -35,12 +35,12 @@ const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) 
       <div className={styles.similarItem}>
         <div className={styles.info}>
           <span>{name[language].value}</span>
-          <Rating value={rate} readOnly size='small' />
           <span>
             {price}
             {'\u00A0'}
             <FontAwesomeIcon icon={currencySign} />
           </span>
+          <Rating className={styles.rating} value={rate} readOnly size='small' />
         </div>
       </div>
     </Link>

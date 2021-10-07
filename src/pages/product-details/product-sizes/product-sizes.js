@@ -12,7 +12,6 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const { size: currentSize } = useSelector(({ Products }) => ({
     size: Products.productToSend.options.size
   }));
-
   const sizeButtons =
     sizes &&
     !!sizes.length &&

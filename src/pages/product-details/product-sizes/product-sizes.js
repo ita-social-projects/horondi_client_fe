@@ -8,8 +8,7 @@ import { useStyles } from './product-sizes.styles';
 
 const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const styles = useStyles();
-  const { language, size: currentSize } = useSelector(({ Language, Products }) => ({
-    language: Language.language,
+  const { size: currentSize } = useSelector(({ Products }) => ({
     size: Products.productToSend.options.size
   }));
   const { t } = useTranslation();

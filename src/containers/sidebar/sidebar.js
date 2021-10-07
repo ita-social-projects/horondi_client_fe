@@ -33,6 +33,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       window.scrollY > 50 ? setSticky(true) : setSticky(false);
     });
   }, []);
+
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
@@ -56,7 +57,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           handlerItem={() => setIsMenuOpen(false)}
         />
       )),
-    [data, styles]
+    [categories, styles]
   );
 
   const subList = useMemo(

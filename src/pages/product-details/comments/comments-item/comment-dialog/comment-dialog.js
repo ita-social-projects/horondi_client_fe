@@ -6,15 +6,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './comment-dialog.styles';
 
 import { deleteComment, deleteReplyComment } from '../../../../../redux/comments/comments.actions';
-import {
-  DIALOG,
-  PDP_BUTTONS,
-  DIALOG_REPLY
-} from '../../../../../translations/product-details.translations';
 
 const CommentDialog = ({
   isModalShown,
@@ -26,6 +22,7 @@ const CommentDialog = ({
 }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
@@ -56,21 +53,23 @@ const CommentDialog = ({
     <div>
       <Dialog open={isModalShown} onClose={handleClose}>
         <DialogTitle className={styles.title}>
-          {isDeleteComment === 1 ? DIALOG[language].title : DIALOG_REPLY[language].title}
+          {isDeleteComment === 1
+            ? t('commentDialog.dialog.title')
+            : t('commentDialog.dialogRiply.title')}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
             {isDeleteComment === 1
-              ? DIALOG[language].description
-              : DIALOG_REPLY[language].description}
+              ? t('commentDialog.dialog.description')
+              : t('commentDialog.dialogRiply.description')}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className={styles.button}>
-            {PDP_BUTTONS[language].cancelButton}
+            {t('commentDialog.pdpButtons.cancelButton')}
           </Button>
           <Button onClick={handleDelete} className={styles.button}>
-            {PDP_BUTTONS[language].submitButton}
+            {t('commentDialog.pdpButtons.submitButton')}
           </Button>
         </DialogActions>
       </Dialog>

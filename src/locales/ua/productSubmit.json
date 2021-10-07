@@ -1,0 +1,28 @@
+{
+    "pdpButtons": {
+        "cartButton": "В кошик",
+        "buyButton": "Купити зараз",
+        "submitButton": "Підтвердити",
+        "cancelButton": "Відхилити",
+        "leaveReply": "Залишити відповідь",
+        "inCart": "Перейти до кошика"
+    },
+    "tooltips": {
+        "addWishful": "Додати в бажане",
+        "removeWishful": "Видалити з бажаного",
+        "edit": "Редагувати",
+        "delete": "Видалити",
+        "unregisteredReply": "Вам потрібно увійти щоб залишити відповідь",
+        "unregisteredComment": "Вам потрібно увійти щоб залишити коментар",
+        "bought": "ористувач купив даний товар",
+        "feedbackComment": "Ваш коментар не підтверджений адміністратором",
+        "feedbackReply": "Ваша відповідь не підтвердженна адміністратором",
+        "itemInCart": "Товар вже в кошику",
+        "itemInCartAlready": "Додати товар у кошик"
+    },
+    "toastMessage": {
+        "addedToWishList": "Додано до вподобань",
+        "removedFromWishList": "Видалено з вподобань",
+        "addedToCard": "Додано в кошик"
+    }
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useStyles } from './product-sizes.styles';
-
-import { SIZE } from '../../../translations/product-details.translations';
 
 const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const styles = useStyles();
@@ -13,6 +12,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
     language: Language.language,
     size: Products.productToSend.options.size
   }));
+  const { t } = useTranslation();
 
   const sizeButtons =
     sizes &&
@@ -36,13 +36,15 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
     <div className={styles.sizeButtons}>
       {sizeButtons ? (
         <div className={styles.container}>
-          <div className={styles.label}>{SIZE[language].size}:</div>
+          <div className={styles.label}>{t('productSizes.size.carrentSize')}:</div>
           <div>
             <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
           </div>
         </div>
       ) : null}
-      {sizeIsNotSelectedError ? <div className={styles.error}>{SIZE[language].error}</div> : null}
+      {sizeIsNotSelectedError ? (
+        <div className={styles.error}>{t('productSizes.size.error')}</div>
+      ) : null}
     </div>
   );
 };

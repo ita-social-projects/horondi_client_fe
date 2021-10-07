@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import ProductSubmit from '../product-submit';
-import { PDP_BUTTONS } from '../../../../translations/product-details.translations';
 
 import { Language, Wishlist, Cart, Products, User, product } from './product-details.variables';
 
@@ -48,14 +47,12 @@ describe('Product submit tests', () => {
   });
 
   it('should click to Cart button', () => {
-    const child = PDP_BUTTONS[Language.language].cartButton;
     const button = wrapper.find(Button).at(0);
     button.simulate('click');
-    expect(button.props().children).toBe(child);
+    expect(button.props().children).toBe('productSubmit.pdpButtons.cartButton');
   });
 
   it('should click to inCart button', () => {
-    const child = PDP_BUTTONS[Language.language].inCart;
     const Cart = {
       list: [
         {
@@ -80,13 +77,12 @@ describe('Product submit tests', () => {
     );
     const button = wrapper.find(Button).at(0);
     button.simulate('click');
-    expect(button.props().children).toBe(child);
+    expect(button.props().children).toBe('productSubmit.pdpButtons.inCart');
   });
 
   it('should click to BuyNow button', () => {
-    const child = PDP_BUTTONS[Language.language].buyButton;
     const button = wrapper.find(Button).at(1);
-    expect(button.props().children).toBe(child);
+    expect(button.props().children).toBe('productSubmit.pdpButtons.buyButton');
     button.simulate('click');
   });
 });

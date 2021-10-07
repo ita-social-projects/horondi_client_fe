@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
@@ -10,7 +11,6 @@ import { useStyles } from './comments-item.styles';
 import CommentDialog from './comment-dialog';
 import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../configs';
 import { getReplyComments } from '../../../../redux/comments/comments.actions';
-import { TOOLTIPS, REPLY, USER_DATA } from '../../../../translations/product-details.translations';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
 import { Loader } from '../../../../components/loader/loader';
@@ -50,9 +50,11 @@ const CommentsItem = ({ data, commentId, productId }) => {
     getReplyLoadingId: Comments.getReplyLoading.commentId
   }));
 
+  const { t } = useTranslation();
+
   const { firstName, email } = user || {
-    firstName: USER_DATA[language].firstName,
-    email: USER_DATA[language].email
+    firstName: t('commentsItem.userData.firstName'),
+    email: t('commentsItem.userData.email')
   };
 
   const [isModalShown, toggleModal] = useState(false);
@@ -116,13 +118,13 @@ const CommentsItem = ({ data, commentId, productId }) => {
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <div className={styles.checkIcon}>
-                  <Tooltip title={TOOLTIPS[language].bought}>
+                  <Tooltip title={t('commentsItem.tooltips.bought')}>
                     <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
               ) : null}
               {handleUserCommentApprove(userData, email, show) ? (
-                <Tooltip title={TOOLTIPS[language].feedbackComment}>
+                <Tooltip title={t('commentsItem.tooltips.feedbackComment')}>
                   <FeedbackOutlinedIcon className={styles.icon} />
                 </Tooltip>
               ) : null}
@@ -140,7 +142,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
           <div className={styles.userIcons}>
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
-                <Tooltip title={TOOLTIPS[language].delete}>
+                <Tooltip title={t('commentsItem.tooltips.delete')}>
                   <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>
@@ -152,7 +154,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
           <ReplyOutlinedIcon className={styles.replyIcon} />
           <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredReply')}>
             <p className={styles.button} onClick={handleReplyOpen}>
-              {REPLY[language].submit}
+              {t('commentsItem.reply.submit')}
             </p>
           </Tooltip>
 
@@ -160,7 +162,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
             <div className={styles.replyCount} onClick={showReplyList}>
               <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
               <span className={styles.replyText}>
-                {REPLY[language].answers}
+                {t('commentsItem.reply.answers')}
                 {'\u00A0'}
                 {replyCommentsCount}
               </span>

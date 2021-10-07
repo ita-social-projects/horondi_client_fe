@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
@@ -11,7 +12,7 @@ import {
   DATE_LANGUAGE_OPTIONS,
   COMMENT_OWNER_STATUS
 } from '../../../../../configs';
-import { TOOLTIPS, USER_DATA } from '../../../../../translations/product-details.translations';
+
 import {
   handleUserCommentOwner,
   handleUserCommentApprove
@@ -26,16 +27,18 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
     verifiedPurchase
   } = data;
 
+  const { t } = useTranslation();
+
   const { language, userData } = useSelector(({ Language, User, Products }) => ({
     language: Language.language,
     userData: User.userData
   }));
   const styles = useStyles();
   const { firstName, email, _id, role } = user || {
-    firstName: USER_DATA[language].firstName,
-    email: USER_DATA[language].email,
-    _id: USER_DATA[language]._id,
-    role: USER_DATA[language].role
+    firstName: t('replyCommentsItem.userData.firstName'),
+    email: t('replyCommentsItem.userData.email'),
+    _id: t('replyCommentsItem.userData._id'),
+    role: t('replyCommentsItem.userData.role')
   };
 
   const [isModalShown, toggleModal] = useState(false);
@@ -71,7 +74,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <div className={styles.checkIcon}>
-                  <Tooltip title={TOOLTIPS[language].bought}>
+                  <Tooltip title={t('replyCommentsItem.tooltips.bought')}>
                     <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
@@ -79,7 +82,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
                 ''
               )}
               {handleUserCommentApprove(userData, email, show) ? (
-                <Tooltip title={TOOLTIPS[language].feedbackReply}>
+                <Tooltip title={t('replyCommentsItem.tooltips.feedbackReply')}>
                   <FeedbackOutlinedIcon className={styles.icon} />
                 </Tooltip>
               ) : null}
@@ -94,7 +97,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
           <div className={styles.userIcons}>
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
-                <Tooltip title={TOOLTIPS[language].delete}>
+                <Tooltip title={t('replyCommentsItem.tooltips.delete')}>
                   <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>

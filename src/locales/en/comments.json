@@ -1,0 +1,14 @@
+{
+    "CurrentComments": {
+        "title": "Comments",
+        "firstName": "First name",
+        "email": "Email",
+        "text": "Share your thoughts with others",
+        "submit": "Leave comment",
+        "unregisteredTip": "You should login to leave rate",
+        "registeredTip": "You should bought the product to leave rate",
+        "successfulTip": "Set rate",
+        "loadMore": "Load more...",
+        "hideBtn": "Hide comments"
+    }
+}

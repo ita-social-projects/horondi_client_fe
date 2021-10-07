@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
 import { GlassMagnifier } from 'react-image-magnifiers';
 import { useStyles } from './product-images.styles';
-import { IMGS_VIEWER, IMG_ALT_INFO } from '../../../translations/product-details.translations';
 import { getImage } from '../../../utils/imageLoad';
 
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
@@ -41,16 +41,13 @@ const ZoomImage = ({ images }) => {
 };
 
 const ProductImages = ({ images }) => {
-  const { language } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
-  }));
-
-  const isLightTheme = useContext(ThemeContext);
-
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
+
+  const { t } = useTranslation();
+  
+  const isLightTheme = useContext(ThemeContext);
 
   const initImages = useMemo(
     () => [images.primary.large, ...images.additional.map(({ large }) => large)],
@@ -94,7 +91,7 @@ const ProductImages = ({ images }) => {
         className={styles.sideImage}
         src={image.src}
         key={i}
-        alt={IMG_ALT_INFO[language].value}
+        alt={t('productImages.imgAltInfo')}
         onClick={() => openImage(i + 1)}
       />
     ));
@@ -109,9 +106,9 @@ const ProductImages = ({ images }) => {
         onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
         onClose={() => setIsOpen(false)}
-        closeBtnTitle={IMGS_VIEWER[language].close}
-        leftArrowTitle={IMGS_VIEWER[language].prev}
-        rightArrowTitle={IMGS_VIEWER[language].next}
+        closeBtnTitle={t('productImages.imgsViewer.close')}
+        leftArrowTitle={t('productImages.imgsViewer.prev')}
+        rightArrowTitle={t('productImages.imgsViewer.next')}
       />
       <div className={styles.images}>
         <div>{sideImages}</div>

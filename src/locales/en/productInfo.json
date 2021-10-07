@@ -1,0 +1,16 @@
+{
+    "color": "Color",
+    "pattern": "Pattern",
+    "productPrice": "Price",
+    "productDescription": {
+        "description": "Product description",
+        "mainMaterial": "Main material",
+        "innerMaterial": "Inner material",
+        "bottomMaterial": "Bottom material",
+        "strapLengthInCm": "Strap length(cm)"
+    },
+    "weight": {
+        "weightLabel": "Weight(kg)",
+        "volumeLabel": "Volume(L)"
+    }
+}

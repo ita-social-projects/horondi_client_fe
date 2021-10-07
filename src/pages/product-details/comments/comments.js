@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Rating from '@material-ui/lab/Rating';
 import { Button, Tooltip, TextField } from '@material-ui/core';
@@ -32,6 +33,8 @@ import {
 const Comments = ({ productId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const {
     commentsLoading,
@@ -131,7 +134,7 @@ const Comments = ({ productId }) => {
                     onBlur={handleBlur}
                     value={values[name]}
                     disabled={!userData}
-                    label={COMMENTS[language][name]}
+                    label={t(`comments.CurrentComments.${name}`)}
                     error={!!errors[name]}
                     helperText={handleHelperText(errors[name])}
                     multiline={multiline}
@@ -153,7 +156,7 @@ const Comments = ({ productId }) => {
                 disabled={!userData}
                 onClick={() => setShouldValidate(true)}
               >
-                {COMMENTS[language].submit}
+                {t('comments.CurrentComments.submit')}
               </Button>
             </div>
           </Tooltip>
@@ -171,7 +174,7 @@ const Comments = ({ productId }) => {
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
           <span onClick={handleCommentsReload} className={styles.loadMoreText}>
-            {limitOption ? null : COMMENTS[language].loadMore}
+            {limitOption ? null : t('comments.CurrentComments.loadMore')}
           </span>
         </div>
       )}

@@ -153,19 +153,5 @@
       "prettier --write",
       "eslint --fix"
     ]
-  },
-  "jest": {
-    "verbose": true,
-    "clearMocks": true,
-    "collectCoverage": true,
-    "setupFilesAfterEnv": [
-      "./src/setupTest.js"
-    ],
-    "snapshotSerializers": [
-      "./node_modules/enzyme-to-json/serializer"
-    ],
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    }
   }
 }

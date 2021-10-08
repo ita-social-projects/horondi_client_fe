@@ -13,7 +13,7 @@ const ReplyForm = ({ cancel, commentId }) => {
   const { t } = useTranslation();
 
   const styles = useStyles();
-  const { language, userData, productId } = useSelector(({ Language, User, Products }) => ({
+  const { userData, productId } = useSelector(({ Language, User, Products }) => ({
     language: Language.language,
     userData: User.userData,
     productId: Products.productToSend._id

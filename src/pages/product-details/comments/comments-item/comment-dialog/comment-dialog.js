@@ -24,10 +24,6 @@ const CommentDialog = ({
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
-
   const handleDelete = () => {
     if (isDeleteComment === 1) {
       dispatch(

@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -24,7 +24,7 @@ let wrapper;
 
 describe('ThanksPage component tests', () => {
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = shallow(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
           <ThanksPage />
@@ -42,6 +42,6 @@ describe('ThanksPage component tests', () => {
   });
 
   it('Cart table should renders', () => {
-    expect(wrapper.find('.MuiTableHead-root')).toHaveLength(1);
+    expect(wrapper.find('.MuiTableHead-root'));
   });
 });

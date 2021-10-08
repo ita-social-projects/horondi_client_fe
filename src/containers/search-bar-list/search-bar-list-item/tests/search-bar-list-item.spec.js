@@ -8,6 +8,9 @@ let wrapper;
 
 jest.mock('react-redux');
 
+jest.mock('connected-react-router',() => ({
+  push: 0
+}));
 const mockStore = {
   language: 0,
   currency: 0,

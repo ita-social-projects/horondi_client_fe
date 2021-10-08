@@ -35,7 +35,7 @@ const OrderData = ({ language, currency, order, isLightTheme }) => {
         <span className={styles.resultTitle}>{t('thanksPage.thanksPageTitle.result')}</span>
         <span className={styles.resultStatus}>
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.CREATED &&
-            t('thanksPage.thanksPageTitle.created')}
+            t('thanksPage.paymentStatus.created')}
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING &&
             t('thanksPage.thanksPageTitle.processing')}
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID &&

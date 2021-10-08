@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -24,7 +24,7 @@ let wrapper;
 
 describe('ThanksPage component tests', () => {
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = shallow(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
           <ThanksPage />

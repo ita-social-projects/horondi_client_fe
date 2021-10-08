@@ -26,8 +26,9 @@ const SimilarProducts = ({ cartList }) => {
 
   const { title } = SIMILAR_ITEMS[language];
   const currencySign = getCurrencySign(currency);
-
+  const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;
   let imagesList;
+
   if (cartList) {
     imagesList = similarProductForCart(similarProducts, cartList);
   } else {
@@ -61,9 +62,7 @@ const SimilarProducts = ({ cartList }) => {
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
-            <h2 className={isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle}>
-              {title}
-            </h2>
+            <h2 className={titleClass}>{title}</h2>
           </div>
           <Carousel
             className={styles.carousel}

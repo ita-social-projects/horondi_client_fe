@@ -6,7 +6,7 @@
     "1": "terms of service"
   },
   "formLabel": "Register",
-  "loginFormLabel": "log in",
+  "loginFormLabel": "Log in",
   "placeholders": {
     "firstName": "Firstname",
     "lastName": "Lastname",

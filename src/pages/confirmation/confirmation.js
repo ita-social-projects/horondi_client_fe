@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTranslation, i18n } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';

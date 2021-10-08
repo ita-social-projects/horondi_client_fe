@@ -55,10 +55,10 @@ export default function RegisterForm({
           ))}
           <div className={styles.consentMessage}>
             {' '}
-            {t('register.formConsent.0')}
+            {t('register.formConsent.start')}
             <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
               {' '}
-              {t('register.formConsent.1')}{' '}
+              {t('register.formConsent.end')}{' '}
             </Link>
           </div>
           <div className={styles.registerGroup}>

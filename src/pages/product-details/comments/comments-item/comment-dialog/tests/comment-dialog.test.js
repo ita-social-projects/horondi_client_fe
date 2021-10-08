@@ -1,28 +1,23 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
-import * as redux from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CommentDialog from '../index';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import { isModalShown, commentId, userId, isDeleteComment } from './comment-dialog.variable';
 
-Enzyme.configure({ adapter: new Adapter() });
-
 const mockHandleClose = jest.fn();
-
 const mockDispatch = jest.fn();
 
-const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
-const mockUseSelector = jest.spyOn(redux, 'useSelector');
+jest.mock('react-redux');
+
 const themeValue = theme('light');
 
 describe('Comments test', () => {
   let wrapper;
 
   beforeEach(() => {
-    mockUseDispatch.mockImplementation(() => mockDispatch);
-    mockUseSelector.mockReturnValue({
+    useDispatch.mockImplementation(() => mockDispatch);
+    useSelector.mockReturnValue({
       language: '0',
       productId: '111'
     });
@@ -41,8 +36,8 @@ describe('Comments test', () => {
 
   afterEach(() => {
     wrapper.unmount();
-    mockUseDispatch.mockClear();
-    mockUseSelector.mockClear();
+    useDispatch.mockClear();
+    useSelector.mockClear();
   });
 
   it('Should render comment dialog', () => {
@@ -57,7 +52,7 @@ describe('Comments test', () => {
   it('Should simulate delete reply event', () => {
     wrapper.find('button').at(1).props().onClick();
     expect(mockDispatch).toHaveBeenCalledTimes(1);
-    expect(mockHandleClose).toHaveBeenCalledTimes(2);
+    expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 
   it('Should simulate delete comment event', () => {
@@ -73,7 +68,7 @@ describe('Comments test', () => {
       </ThemeProvider>
     );
     wrapper.find('button').at(1).props().onClick();
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
-    expect(mockHandleClose).toHaveBeenCalledTimes(3);
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 });

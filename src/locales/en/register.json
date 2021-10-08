@@ -2,8 +2,8 @@
   "confirmEmail": "You successfully registered! Please, confirm your e-mail for Log In.",
   "continueShopping": "Continue shopping",
   "formConsent": {
-    "start": "By clicking Register, you agree with our",
-    "end": "terms of service"
+    "text": "By clicking Register, you agree with our",
+    "link": "terms of service"
   },
   "formLabel": "Register",
   "loginFormLabel": "Log in",

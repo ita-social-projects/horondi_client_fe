@@ -6,7 +6,7 @@
     "1": "угодою користувача"
   },
   "formLabel": "Реєстрація",
-  "loginFormLabel": "увійти",
+  "loginFormLabel": "Увійти",
   "placeholders": {
     "firstName": "Ім’я",
     "lastName": "Прізвище",

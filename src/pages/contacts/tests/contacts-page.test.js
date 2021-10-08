@@ -15,16 +15,25 @@ const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
   language: 0,
-  loading: true,
+  loading: false,
   contacts: []
 }));
 
-let wrapper;
+describe('<Contacts/>', () => {
+  it('should render contacts', () => {
+    const component = shallow(<Contacts />);
+    expect(component).toBeDefined();
+  });
 
-describe('Contacts is valid', () => {
-  it('Should render contacts', () => {
-    wrapper = shallow(<Contacts />);
+  it('should render page title if fromCheckout is false', () => {
+    const component = shallow(<Contacts fromCheckout={false} />);
+    const pageTitle = component.find('h2');
+    expect(pageTitle.length).toBe(1);
+  });
 
-    expect(wrapper).toBeDefined();
+  it('shouldn`t render page title if fromCheckout is true', () => {
+    const component = shallow(<Contacts fromCheckout />);
+    const pageTitle = component.find('h2');
+    expect(pageTitle.length).toBe(0);
   });
 });

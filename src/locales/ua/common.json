@@ -5,6 +5,6 @@
     "size": "Розмір",
     "buttons": {
         "confirm": "Так",
-        "camcel": "Ні"
+        "cancel": "Ні"
     }
 }

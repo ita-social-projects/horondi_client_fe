@@ -8,8 +8,8 @@
   "formLabel": "Register",
   "loginFormLabel": "Log in",
   "placeholders": {
-    "firstName": "Firstname",
-    "lastName": "Lastname",
+    "firstName": "First Name",
+    "lastName": "Last Name",
     "email": "Email",
     "password": "Password"
   },

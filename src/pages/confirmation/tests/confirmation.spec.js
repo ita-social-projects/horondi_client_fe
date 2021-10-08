@@ -19,7 +19,6 @@ jest.mock('connected-react-router', () => ({
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
-  language: 0,
   loading: true,
   error: ''
 }));

@@ -10,13 +10,14 @@ import { ERROR_PAGE_MESSAGE } from '../../translations/errorpage.translations';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const { language, isLightTheme, errorMessage } = useSelector(({ Language, Theme, Error }) => ({
-    language: Language.language,
+  const { isLightTheme, errorMessage } = useSelector(({ Theme, Error }) => ({
     isLightTheme: Theme.lightMode,
     errorMessage: Error.error
   }));
+
+  const getLanguage = i18n.language === 'ua' ? 0 : 1;
 
   useEffect(() => {
     if (!errorMessage) {
@@ -39,8 +40,8 @@ const ErrorPage = () => {
         <div className={styles.info}>
           <h2>
             {errorMessage && ERROR_PAGE_MESSAGE[errorMessage]
-              ? ERROR_PAGE_MESSAGE[errorMessage][language].value
-              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
+              ? ERROR_PAGE_MESSAGE[errorMessage][getLanguage].value
+              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[getLanguage].value}
           </h2>
 
           <Link to='/' onClick={() => window.location.reload()}>

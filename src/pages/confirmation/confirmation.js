@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, i18n } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -12,13 +12,14 @@ import routes from '../../const/routes';
 const { pathToMain, pathToLogin } = routes;
 
 const Confirmation = ({ token }) => {
-  const { t } = useTranslation();
-  const { language, loading, error } = useSelector(({ User, Language }) => ({
-    language: Language.language,
+  const { t, i18n } = useTranslation();
+
+  const { loading, error } = useSelector(({ User }) => ({
     loading: User.userLoading,
     error: User.error
   }));
 
+  const getLanguage = i18n.language === 'ua' ? 0 : 1;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const Confirmation = ({ token }) => {
   return (
     <div className={styles.confirmation}>
       <div className={styles.welcome}>
-        {loading ? <Loader /> : handleMessage(error, language)}
+        {loading ? <Loader /> : handleMessage(error, getLanguage)}
         <div className={styles.buttonGroup}>
           <Button variant='contained' onClick={() => goTo(pathToMain)}>
             {t('confirmation.welcomeMessage.goToShop')}

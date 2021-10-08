@@ -1,0 +1,510 @@
+[33mcommit 93a37010a7f9002578642b40aa0adcf585d5248d[m[33m ([m[1;36mHEAD -> [m[1;32m976/refactor/home-internalization[m[33m, [m[1;31morigin/976/refactor/home-internalization[m[33m)[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 17:43:47 2021 +0300
+
+    remove unused import
+
+[33mcommit f4fbd5f3cbc0adf063d3840942e51074e5e03d67[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 17:24:52 2021 +0300
+
+    Remove mockStore files
+
+[33mcommit 9db9791b382c5acec9ce9eca69e6d49152d23dd8[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 17:18:06 2021 +0300
+
+    Refactor category-item test
+
+[33mcommit 9abc1d59decc26a1509977700b3bf3130a770d8b[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 17:05:19 2021 +0300
+
+    Refactor search bar list item test
+
+[33mcommit a0558e52a031eab4fef67944dba1fd024e85e6ec[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 16:31:57 2021 +0300
+
+    Refactor model item test
+
+[33mcommit 788e4d9793afa7c8fdcad3572a503aee422254f3[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 15:50:31 2021 +0300
+
+    Refactor slider test
+
+[33mcommit 93b76c183996be26155969047fc273338a3d7b73[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 15:45:15 2021 +0300
+
+    Change file name
+
+[33mcommit 3d78edd0201c6c32f0f26626adbd804bf595b296[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 15:39:22 2021 +0300
+
+    Refactor test for models list
+
+[33mcommit 944dd34b5712a8d939b2f01e28657850df38afc0[m
+Author: Skrekliam <typnickman@gmail.com>
+Date:   Fri Oct 8 15:26:51 2021 +0300
+
+    Refactor test for constructor preview
+
+[33mcommit 6f0f63f000ca9bd7f8bb2b75c06889d36ecc4dd9[m
+Author: unknown <typnickman@gmail.com>
+Date:   Fri Oct 8 13:31:12 2021 +0300
+
+    Add eslintrc
+
+[33mcommit 91d6d94e909b03115e636a0f5b5eed6e3a77184a[m
+Author: unknown <typnickman@gmail.com>
+Date:   Thu Oct 7 18:11:49 2021 +0300
+
+    Fix mock
+
+[33mcommit f7d703f733ce3ddd4601eae05807cdfc8a81a702[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Wed Oct 6 09:19:38 2021 +0300
+
+    955/refactoring Improved responsive design
+
+[33mcommit 8d422fa8c95bdadfac35cea1475d186e994d470b[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Sat Oct 2 18:23:45 2021 +0300
+
+    955/refactoring Added variables
+
+[33mcommit d8cd4aa8d972013b3249d14fb5e35b25909fab64[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Sat Oct 2 18:13:05 2021 +0300
+
+    955/refactoring Increased coverage and removed code smells
+
+[33mcommit 9822592d3e6595b8c43ca369ed81afd5affd4b88[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Sat Oct 2 17:07:03 2021 +0300
+
+    955/refactoring Refactored similar products component
+
+[33mcommit 9d1a3d12e71b258903c8435da6064d0d5a291a98[m
+Author: unknown <typnickman@gmail.com>
+Date:   Thu Oct 7 00:43:25 2021 +0300
+
+    Change description
+
+[33mcommit 18ed775eca1804ef83df869f11d2143367d526fe[m
+Author: unknown <typnickman@gmail.com>
+Date:   Thu Oct 7 00:41:52 2021 +0300
+
+    Increase coverage
+
+[33mcommit f84e644bdc9af6a9aec0759410bf65c81910a8dc[m
+Author: unknown <typnickman@gmail.com>
+Date:   Thu Oct 7 00:14:09 2021 +0300
+
+    Add test coverage
+
+[33mcommit 7ffd71ef06a1323a52ba79120e002e714328940f[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 23:32:13 2021 +0300
+
+    Clearing unused translations
+
+[33mcommit 2881801cffd7482cb41f157d900712035050691f[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 23:25:59 2021 +0300
+
+    Refactor model-item and search bar
+
+[33mcommit 024a8ca7f12f033fbf0337e6318f59b6d17daddd[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 23:13:25 2021 +0300
+
+    Refactor slider
+
+[33mcommit 7c25a6e8a71a77dba67ced79c57bf024367a88eb[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 23:09:17 2021 +0300
+
+    Refactor models list and add import for common
+
+[33mcommit 12ef2f19ec2da31068b53c5dfcab567bf32cb1bd[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 23:04:41 2021 +0300
+
+    Refactor preview and remove unused
+
+[33mcommit 239f1fcf4b9816e13803c8bc1dd74314a19825fd[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 22:57:35 2021 +0300
+
+    Add imports and refactor item page
+
+[33mcommit 9010aa9b1e5b093a0ce021d4d575f4ab8166537e[m
+Author: unknown <typnickman@gmail.com>
+Date:   Wed Oct 6 22:47:24 2021 +0300
+
+    Create new files with translations
+
+[33mcommit 1cfe2c8740aa9b52762a607d63ba1ad6d9b9e4f9[m
+Merge: 06fb3638 48019261
+Author: Taras Halaburda <36608907+halaburdataras@users.noreply.github.com>
+Date:   Wed Oct 6 13:04:14 2021 +0300
+
+    Merge pull request #1005 from ita-social-projects/feature/1004/common_error
+    
+    Create common.json and error.json #1004
+
+[33mcommit 06fb3638060074c39cc313c38b1937a1ea6787f6[m
+Merge: 01c33973 5b4f6673
+Author: Volodymyr Romanovskyi <45718327+Vlodkojr@users.noreply.github.com>
+Date:   Wed Oct 6 13:02:21 2021 +0300
+
+    Merge pull request #944 from ita-social-projects/eslint-fix-console-log
+    
+    changed no-console rule
+
+[33mcommit 48019261ad10ae149a792d720f3b27ac997605a3[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Wed Oct 6 12:27:51 2021 +0300
+
+    New changes in development
+
+[33mcommit aabc676e107b3247c5079e96bd9075d960a19729[m
+Merge: 52c9ae05 01c33973
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Wed Oct 6 12:26:11 2021 +0300
+
+    Merge branch 'development' of https://github.com/ita-social-projects/horondi_client_fe into feature/1004/common_error
+
+[33mcommit 52c9ae05d4b196ee04b2168c5e0bc3eca1fdc99b[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Wed Oct 6 12:23:09 2021 +0300
+
+    Add 4 files common.json and error.json
+
+[33mcommit 01c33973aeaa7e08e4700435fd15bc72e78ecbf7[m
+Merge: 538dcfae a5dc4960
+Author: Roman Basarab <39667486+chortex@users.noreply.github.com>
+Date:   Wed Oct 6 11:26:43 2021 +0300
+
+    Merge pull request #951 from ita-social-projects/bugfix/785/post
+    
+    Bugfix/785/post
+
+[33mcommit a5dc4960c406e9725118b27d9c07147bbeeaea10[m
+Author: olga-gchak <67831961+olga-gchak@users.noreply.github.com>
+Date:   Tue Oct 5 19:09:29 2021 +0300
+
+    Update checkout.translations.js
+
+[33mcommit 538dcfae13df2f768169c95bbd2fc26bf736e044[m
+Merge: 55cf3a35 337137f1
+Author: Roman Basarab <39667486+chortex@users.noreply.github.com>
+Date:   Tue Oct 5 18:46:51 2021 +0300
+
+    Merge pull request #966 from ita-social-projects/feature/961/react18next_login
+    
+    Install React I 18 Next and refactor login page
+
+[33mcommit 337137f1f42898556b0ab81c4dfc889c15d582de[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Tue Oct 5 18:04:59 2021 +0300
+
+    Add 1 row
+
+[33mcommit 0055f0856c2d3f5445354597421b6dfac8250166[m
+Author: olga-gchak <67831961+olga-gchak@users.noreply.github.com>
+Date:   Tue Oct 5 17:48:01 2021 +0300
+
+    Update checkout.translations.js
+
+[33mcommit 55cf3a35a0ad434d20e7dc2d08ac3a37cc4e6611[m
+Merge: 563cb453 6188a16d
+Author: olga-gchak <67831961+olga-gchak@users.noreply.github.com>
+Date:   Tue Oct 5 17:06:58 2021 +0300
+
+    Merge pull request #957 from ita-social-projects/949/refactoring/refactor-cart-page
+    
+    949/refactoring/refactor cart page
+
+[33mcommit 714f11c273f45f26d9a14d072e224865e3540fcd[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Tue Oct 5 17:04:25 2021 +0300
+
+    Add i18n for errorVtssages
+
+[33mcommit 563cb453a6fc8ec2af69b6ffdc8abf9e5e28bd48[m
+Merge: db129343 cf397694
+Author: VasylLymych <69967761+VasylLymych@users.noreply.github.com>
+Date:   Tue Oct 5 16:15:54 2021 +0300
+
+    Merge pull request #960 from ita-social-projects/bugfix/712/password_special_characters
+    
+    Add in password functionality that allow to contain special characters
+
+[33mcommit db12934387b43336da4914f8a1be6fa90b75dd4c[m
+Merge: 6adbc788 ef06263d
+Author: olga-gchak <67831961+olga-gchak@users.noreply.github.com>
+Date:   Tue Oct 5 16:12:38 2021 +0300
+
+    Merge pull request #963 from ita-social-projects/bugfix/726/new
+    
+    bugfix/726/new fix button style
+
+[33mcommit e46688830b4e02194ef93d7240fb537353b21bd5[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Tue Oct 5 16:04:12 2021 +0300
+
+    New changes according to comments and new mockup
+
+[33mcommit 6adbc7889e92660ddbe008affa4606c8b1194986[m
+Merge: a56a194f 15624f86
+Author: marian muzyka <64384450+mrjnmzk@users.noreply.github.com>
+Date:   Tue Oct 5 15:33:20 2021 +0300
+
+    Merge pull request #967 from ita-social-projects/bugfix/1082/comment-text-color
+    
+    1082/Comment text color
+
+[33mcommit a56a194f12c5a5392b35ba8f6ece056596f7e761[m
+Merge: 1bf07445 a6697edb
+Author: Nelia Zbishko <78971099+domnelkin@users.noreply.github.com>
+Date:   Tue Oct 5 15:31:31 2021 +0300
+
+    Merge pull request #958 from ita-social-projects/bugfix/954/error-position
+    
+    954/Added a few css changes
+
+[33mcommit 15624f86271fc01a354fe3354a6ee46a022a7125[m
+Author: Ruslan Mjahcich <elitkondor@gmail.com>
+Date:   Tue Oct 5 13:30:41 2021 +0300
+
+    Final commit
+
+[33mcommit 042a22d2be9fe87a53a99d111896c1771f79f6fd[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Tue Oct 5 13:24:20 2021 +0300
+
+    Add newline at end of files
+
+[33mcommit 870577e88afa84590b17feddd0e640db7a52862a[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Tue Oct 5 13:12:44 2021 +0300
+
+    Install ReactI18next and refactor login page
+
+[33mcommit 6188a16da16f030d7e5fd54609d6b0c14547a4ca[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Tue Oct 5 12:52:01 2021 +0300
+
+    949/refactoring Added change size opportunity for logined user cart
+
+[33mcommit ef06263d7334675c2988d7732b065d8df24599f2[m
+Author: Alice <alice@progmam.com>
+Date:   Mon Oct 4 20:31:33 2021 +0200
+
+    fix button style
+
+[33mcommit 94438d75b31371cb7832d8870f4d0cdbb5d666f7[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Mon Oct 4 17:09:57 2021 +0300
+
+    949/refactoring Deleted code smells
+
+[33mcommit cf39769464b8619134623fd9b9b56b1e0b9dd114[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Sun Oct 3 23:02:09 2021 +0300
+
+    Add '
+
+[33mcommit 2c32056da251417adb74ba160fdbf9ec7885abf2[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Sun Oct 3 21:57:54 2021 +0300
+
+    Remove '
+
+[33mcommit d38940ccb5bf2026fa872872e2a4272cf85d508d[m
+Author: Volodymyr Romanovskyi <volodymyrrom1@gmail.com>
+Date:   Sun Oct 3 20:58:27 2021 +0300
+
+    Add in password functionality that allow to contain special characters
+
+[33mcommit a6697edba24fe9c28d96d755c2c418319ceee804[m
+Author: Ruslan Mjahcich <elitkondor@gmail.com>
+Date:   Sun Oct 3 17:13:28 2021 +0300
+
+    Added a few css changes
+
+[33mcommit 6036b8a7553ab4f7902f9a3d7b6012b16e5929fa[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Sun Oct 3 16:38:17 2021 +0300
+
+    949/refactoring Refactored cart page
+
+[33mcommit 1a7a9b5efbd9a6d6b37dbddc113a97d523c68a6f[m
+Author: VasylLymych <vasyllymych20001002@gmail.com>
+Date:   Sat Oct 2 15:30:57 2021 +0300
+
+    Redesigned empty cart page
+
+[33mcommit a36ccc55f9d6386588c431289a30099abf295d06[m
+Author: olga-gchak <67831961+olga-gchak@users.noreply.github.com>
+Date:   Fri Oct 1 11:18:06 2021 +0300
+
+    Update checkout.translations.js
+
+[33mcommit e55185209e30dda873fa30190e7fc5c4c2bd181e[m
+Author: Olga Ganushchak <ganushchakolia@gmail.com>
+Date:   Thu Sep 30 20:30:59 2021 +0300
+
+    fixed items of delivery type
+
+[33mcommit 1bf07445f14b570ac70f50df5af3ff0c255ef047[m
+Merge: 7bfee56f 2de2c929
+Author: Volodymyr Romanovskyi <45718327+Vlodkojr@users.noreply.github.com>
+Date:   Thu Sep 30 16:33:50 2021 +0300
+
+    Merge pull request #945 from ita-social-projects/Skrekliam-patch-1
+    
+    Add LV-512.11 Team
+
+[33mcommit 5b4f6673b00ad930d97d936b8164cfa54e3994ba[m
+Author: halaburdataras <Taras.Galaburda@outlook.com>
+Date:   Thu Sep 30 16:19:02 2021 +0300
+
+    changed console.log to console.error
+
+[33mcommit 2de2c9294d6e95a6d27bdf9f849b285057f7cbf8[m
+Author: Maksym Skreklia <36624127+Skrekliam@users.noreply.github.com>
+Date:   Thu Sep 30 16:14:09 2021 +0300
+
+    Add LV-512.11 Team
+
+[33mcommit 0f4f0b4b92751d033465f37a20c7ed28ea8793bc[m
+Author: halaburdataras <Taras.Galaburda@outlook.com>
+Date:   Thu Sep 30 15:56:29 2021 +0300
+
+    changed no-console rule
+
+[33mcommit 7bfee56f6733dd0edd4d9e13af3b776884534480[m
+Merge: 80db1594 25fea65b
+Author: Maksym Skreklia <36624127+Skrekliam@users.noreply.github.com>
+Date:   Thu Sep 30 15:36:37 2021 +0300
+
+    Merge pull request #942 from ita-social-projects/bugfix/759/validation
+    
+    Register page validation for firstname and lastname
+
+[33mcommit 25fea65b2fc796964bf41df3fd3d6b3a199f1bd0[m
+Author: Анастасія Хухра <anastasiahuhra@Anastasias-MacBook-Air.local>
+Date:   Wed Sep 29 19:54:30 2021 +0300
+
+    fixed validation for firstname and lastname on register page
+
+[33mcommit 80db15946910dd2bfc06c9c7012b3b5acf094b67[m
+Merge: ec645493 ab66f256
+Author: Maksym Skreklia <36624127+Skrekliam@users.noreply.github.com>
+Date:   Mon Sep 27 16:33:13 2021 +0300
+
+    Merge pull request #901 from ita-social-projects/task-842-fix-the-size-of-the-image
+    
+    Task-842 "fix the size of the image"
+
+[33mcommit ab66f256643196b6306dbe4a87dec94fb1717515[m
+Author: Taras Halaburda <36608907+halaburdataras@users.noreply.github.com>
+Date:   Mon Sep 27 16:16:30 2021 +0300
+
+    Delete settings.json
+
+[33mcommit 8fb3db5f1babb4f00e2acbf6e1d12931ca99bc6a[m
+Author: halaburdataras <Taras.Galaburda@outlook.com>
+Date:   Mon Sep 27 16:15:12 2021 +0300
+
+    fixed image zoom
+
+[33mcommit 67c7fc12751a3c36ea40fb55f1c515b8828fb9a8[m
+Merge: fcc891ea ec645493
+Author: halaburdataras <Taras.Galaburda@outlook.com>
+Date:   Mon Sep 27 16:12:23 2021 +0300
+
+    Merge branch 'development' of github.com:ita-social-projects/horondi_client_fe into task-842-fix-the-size-of-the-image
+
+[33mcommit ec645493acc3f9d90eba6ef55d439692490a8d57[m
+Merge: 62d24d4e fc63da66
+Author: Ruslan Mjahcich <elitkondor@gmail.com>
+Date:   Mon Sep 27 14:25:22 2021 +0300
+
+    Merge pull request #938 from ita-social-projects/922/bugfix/links-should-work-like-links
+    
+    922/bugfix/links should work like links
+
+[33mcommit fcc891ea62f2a3f71e20ebe8b8d373ad1add2aea[m
+Merge: ae6b3435 12a78643
+Author: halaburdataras <Taras.Galaburda@outlook.com>
+Date:   Mon Sep 27 14:03:40 2021 +0300
+
+    Merge branch 'task-842-fix-the-size-of-the-image' of github.com:ita-social-projects/horondi_client_fe into task-842-fix-the-size-of-the-image
+
+[33mcommit ae6b343568a063f826ce5124b0e87f78797c2251[m
+Merge: 07dd1f1f 62d24d4e
+Author: halaburdataras <Taras.Galaburda@outlook.com>
+Date:   Mon Sep 27 14:03:32 2021 +0300
+
+    Merge branch 'development' of github.com:ita-social-projects/horondi_client_fe into task-842-fix-the-size-of-the-image
+
+[33mcommit fc63da668063e6a4763dba72c5abfa8eb57c4ccd[m
+Author: wasya1212 <wasya1212cool@gmail.com>
+Date:   Fri Sep 24 20:16:22 2021 +0300
+
+    prety import int empty wishlist
+
+[33mcommit e529c2def98d32b4db11e89a638d484217165a53[m
+Author: wasya1212 <wasya1212cool@gmail.com>
+Date:   Fri Sep 24 20:14:49 2021 +0300
+
+    changed link path in favorites to all products
+
+[33mcommit 4e9c5dbcd966351e19061ea2d7d5fde2f4023161[m
+Author: wasya1212 <wasya1212cool@gmail.com>
+Date:   Fri Sep 24 20:07:28 2021 +0300
+
+    added links support to model-item
+
+[33mcommit a4c212697c6f2c6c97a6dedb6c2caea57a67510f[m
+Author: wasya1212 <wasya1212cool@gmail.com>
+Date:   Fri Sep 24 19:47:06 2021 +0300
+
+    added links support to category-item
+
+[33mcommit 5362c6f9148507c59aace8fc81b965e4cfb9b6ec[m
+Author: wasya1212 <wasya1212cool@gmail.com>
+Date:   Fri Sep 24 19:13:58 2021 +0300
+
+    pretify sidebar imports
+
+[33mcommit 83e3571dae5ce9bb1aeb8b791b02d45d2bf8e02b[m
+Author: wasya1212 <wasya1212cool@gmail.com>
+Date:   Fri Sep 24 19:12:48 2021 +0300
+
+    added links to left navbar
+
+[33mcommit 3f19d172e078c54ed9a63de562e35e7758579c20[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 8c885c0e 62d24d4e
+Author: Ruslan Mjahcich <elitkondor@gmail.com>
+Date:   Fri Sep 24 16:38:46 2021 +0300
+
+    Merge pull request #937 from ita-social-projects/development
+    
+    Merge Development into master
+
+[33mcommit 62d24d4e4d179e6d8074f9b6e5119d43a6fa06a0[m
+Merge: ee09e094 9f896cbd
+Author: Ukrainets Vasyl <wasya1212cool@gmail.com>
+Date:   Thu Sep 23 15:11:23 2021 +0300
+
+    Merge pull request #902 from ita-social-projects/bugfix/826
+    
+    Bugs/responsive design #826

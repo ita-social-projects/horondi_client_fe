@@ -1,35 +1,32 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import * as reactRedux from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 
-import mockStore from './mockStore';
 import ModelsList from '../models-list';
 import ClassicButton from '../../../../components/classic-button';
 
-Enzyme.configure({ adapter: new Adapter() });
+jest.mock('react-redux');
+
+const mockStore = {
+  loading: false,
+  models: []
+};
 
 const themeValue = theme('light');
-let spyOnUseSelector;
-let spyOnUseDispatch;
 let mockDispatch;
 let wrapper;
 
 describe('Models list component tests', () => {
   beforeEach(() => {
-    spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
-    spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
-
     mockDispatch = jest.fn();
 
-    spyOnUseSelector.mockImplementation(() => mockStore);
-    spyOnUseDispatch.mockReturnValue(mockDispatch);
+    useSelector.mockImplementation(() => mockStore);
+    useDispatch.mockReturnValue(mockDispatch);
 
     wrapper = mount(
       <BrowserRouter>
@@ -41,8 +38,6 @@ describe('Models list component tests', () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
-    spyOnUseSelector.mockClear();
     wrapper = null;
   });
 

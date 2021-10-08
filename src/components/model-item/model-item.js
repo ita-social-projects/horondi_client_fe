@@ -17,13 +17,12 @@ import {
 import { IMG_URL } from '../../configs';
 
 const ModelItem = ({ model }) => {
-  const { language, products } = useSelector(({ Language, Products }) => ({
-    language: Language.language,
+  const { products } = useSelector(({ Products }) => ({
     products: Products.products
   }));
   const dispatch = useDispatch();
   const styles = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleClickToModel = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));
@@ -46,7 +45,9 @@ const ModelItem = ({ model }) => {
       className={styles.modelItem}
       onClick={() => handleClickToModel(model)}
     >
-      <div className={styles.modelItemTitle}>{model.name[language].value}</div>
+      <div className={styles.modelItemTitle}>
+        {model.name[i18n.language === 'ua' ? 0 : 1].value}
+      </div>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>

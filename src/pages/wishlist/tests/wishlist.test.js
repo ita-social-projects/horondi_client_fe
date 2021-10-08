@@ -5,30 +5,26 @@ import * as reactRedux from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { BrowserRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { theme } from '../../../components/app/app-theme/app.theme';
 import Wishlist from '../wishlist';
-import checkSizes from '../wishlist-item';
 import mockStore from './mockStore';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 const themeValue = theme('light');
-let spyOnUseSelector;
-let spyOnUseDispatch;
-let mockDispatch;
+jest.mock('react-redux');
+
+const dispatch = jest.fn();
+const state = mockStore;
+
+useDispatch.mockImplementation(() => dispatch);
+useSelector.mockImplementation(() => state);
 
 let wrapper;
 
 describe('Wishlist component tests', () => {
   beforeEach(() => {
-    spyOnUseSelector = jest.spyOn(reactRedux, 'useSelector');
-    spyOnUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
-
-    mockDispatch = jest.fn();
-
-    spyOnUseSelector.mockImplementation(() => mockStore);
-    spyOnUseDispatch.mockReturnValue(mockDispatch);
-
     wrapper = mount(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
@@ -39,8 +35,6 @@ describe('Wishlist component tests', () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
-    spyOnUseSelector.mockClear();
     wrapper = null;
   });
 

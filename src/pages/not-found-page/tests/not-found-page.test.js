@@ -1,16 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
+import { mount } from 'enzyme';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../../../components/app/app-theme/app.theme';
-
 import NotFoundPage from '../not-found-page';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const mockDispatch = jest.fn();
 const mockUseHistory = jest.fn();

@@ -1,5 +1,4 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter } from 'react-router-dom';

@@ -39,8 +39,8 @@ const NewPassword = ({ token }) => {
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>{t('newPassword.newMessage.success')}</h2>
-      <p className={styles.recoveryText}>{t('newPassword.newMessage.redirect')}</p>
+      <h2 className={styles.heading}>{t('newPassword.success')}</h2>
+      <p className={styles.recoveryText}>{t('newPassword.redirect')}</p>
     </div>
   );
 
@@ -71,12 +71,12 @@ const NewPassword = ({ token }) => {
               handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
             ) : (
               <Form className='newPasswordForm'>
-                <h2 className={styles.heading}>{t('newPassword.change.new')}</h2>
+                <h2 className={styles.heading}>{t('common.enterNew')}</h2>
                 <Field
                   name='password'
                   as={TextField}
                   type='password'
-                  label={t('newPassword.change.passLabel')}
+                  label={t('common.newPass')}
                   className={styles.passwordInput}
                   variant='outlined'
                   fullWidth
@@ -88,7 +88,7 @@ const NewPassword = ({ token }) => {
                   name='confirmPassword'
                   as={TextField}
                   type='password'
-                  label={t('newPassword.change.confirmLabel')}
+                  label={t('common.newPass')}
                   className={styles.passwordInput}
                   variant='outlined'
                   fullWidth
@@ -104,7 +104,7 @@ const NewPassword = ({ token }) => {
                     setShouldValidate(true);
                   }}
                 >
-                  {t('newPassword.change.button')}
+                  {t('common.change')}
                 </Button>
                 {handleErrorMessage(userError, styles.serverError, language)}
               </Form>

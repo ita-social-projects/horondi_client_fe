@@ -5,8 +5,7 @@ import routes from '../const/routes';
 
 export default function errorOrLoadingHandler(error, loading) {
   const { pathToErrorPage } = routes;
-  if (error) {
-    return <Redirect to={pathToErrorPage} />;
-  }
+
+  if (error) return <Redirect to={pathToErrorPage} />;
   if (loading) return <Loader />;
 }

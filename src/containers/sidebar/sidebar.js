@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useLayoutEffect, useEffect } from 'react';
+import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import List from '@material-ui/core/List';
@@ -21,7 +21,7 @@ const { pathToConstructor } = routes;
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const [sticky, setSticky] = useState(false);
-  const [categories, setCategories] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -38,11 +38,9 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
     language: Language.language
   }));
 
-  const { loading, error, data } = useQuery(getCategoriesForBurgerMenu);
-
-  useEffect(() => {
-    if (data) setCategories(data.getCategoriesForBurgerMenu);
-  }, [data]);
+  const { loading, error } = useQuery(getCategoriesForBurgerMenu, {
+    onCompleted: (data) => setCategories(data.getCategoriesForBurgerMenu)
+  });
 
   const categoriesList = useMemo(
     () =>

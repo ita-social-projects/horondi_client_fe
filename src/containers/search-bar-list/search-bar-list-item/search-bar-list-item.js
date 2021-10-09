@@ -15,12 +15,11 @@ import routes from '../../../const/routes';
 const { pathToProducts } = routes;
 
 const SearchBarListItem = ({ product }) => {
-  const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
-    language: Language.language,
+  const { currency, isLightTheme } = useSelector(({ Currency, Theme }) => ({
     currency: Currency.currency,
     isLightTheme: Theme.lightMode
   }));
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const dispatch = useDispatch();
@@ -39,7 +38,7 @@ const SearchBarListItem = ({ product }) => {
       <div className={styles.image} style={{ backgroundSize: 'cover' }} />
       <div className={styles.content}>
         <div className={styles.title}>
-          <Typography variant='h4'>{product.name[language].value}</Typography>
+          <Typography variant='h4'>{product.name[i18n.language === 'ua' ? 0 : 1].value}</Typography>
           <div>
             {product.basePrice[currency].value / 100} {product.basePrice[currency].currency}
           </div>

@@ -11,6 +11,9 @@ import wishlist from './wishlist.json';
 import modal from './modal.json';
 import productList from './productList.json';
 import common from './common.json';
+import contacts from './contacts.json';
+import errorPage from './errorPage.json';
+import confirmation from './confirmation.json';
 
 export default {
   translations: {
@@ -26,6 +29,9 @@ export default {
     wishlist,
     modal,
     productList,
-    common
+    common,
+    contacts,
+    errorPage,
+    confirmation
   }
 };

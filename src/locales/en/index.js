@@ -6,4 +6,4 @@ import register from './register.json';
 import recovery from './recovery.json';
 import profilePage from './profilePage.json';
 
-export default { translations: { login,home, common, error, register, recovery, profilePage } };
+export default { translations: { login, home, common, error, register, recovery, profilePage } };

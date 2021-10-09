@@ -2,8 +2,8 @@
     "thanksPageTitle": {
         "thanks": "Thank you!",
         "yourOrder": "Your order",
-        "size": "Size - ",
-        "alt": "product",
+        "size": "Size -",
+        "alt": "Product",
         "result": "Result",
         "linkToPayment": "Payment link"
     },

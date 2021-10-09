@@ -2,8 +2,8 @@
     "thanksPageTitle": {
         "thanks": "Дякуємо!",
         "yourOrder": "Ваше замовлення",
-        "size": "Розмір - ",
-        "alt": "продукт",
+        "size": "Розмір -",
+        "alt": "Продукт",
         "result": "Підсумок",
         "linkToPayment": "Посилання на оплату"
     },

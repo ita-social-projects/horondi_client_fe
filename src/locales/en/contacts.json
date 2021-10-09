@@ -1,0 +1,12 @@
+{
+    "pageTitles": {
+        "title": "Contacts",
+        "phone": "Phone",
+        "schedule": "Schedule",
+        "address": "Address:",
+        "street": "str.",
+        "location": "Location on the map",
+        "showOnGoogleMaps": "View on google maps"
+        }
+
+}

@@ -1,0 +1,11 @@
+{
+    "pageTitles": {
+        "title": "Контакти",
+        "phone": "Телефон",
+        "schedule": "Графік роботи:",
+        "address": "Адреса:",
+        "street": "вул",
+        "location": "Місцезнаходження на мапі",
+        "showOnGoogleMaps": "Переглянути на google карті"
+        }
+}

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const getAllSlides = gql`
+export const getAllSlides = gql`
   query {
     getAllSlides {
       items {
@@ -22,5 +22,3 @@ const getAllSlides = gql`
     }
   }
 `;
-
-export default getAllSlides;

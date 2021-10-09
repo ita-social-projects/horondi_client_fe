@@ -13,7 +13,7 @@ import routes from '../../../const/routes';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { getImage } from '../../../utils/imageLoad';
 import { SLIDER_HOME_PAGE } from '../../../const/style-consts';
-import getAllSlides from '../operations/slider/slider.queries';
+import { getAllSlides } from '../operations/slider/slider.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const { pathToMain } = routes;

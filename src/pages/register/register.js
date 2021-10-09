@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +7,6 @@ import { Formik } from 'formik';
 import Grid from '@material-ui/core/Grid';
 
 import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE } from '../../configs';
-import { CONTINUE_SHOPPING_LABEL, CONFIRM_EMAIL } from '../../translations/user.translations';
 import { useStyles } from './register.styles';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
@@ -18,6 +18,7 @@ import RegisterForm from './register-from/index';
 export default function Register() {
   const styles = useStyles();
   const history = useHistory();
+  const { t } = useTranslation();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const handleRegister = (user) => {
@@ -72,14 +73,14 @@ export default function Register() {
                         alt={IMG_ALT.REGISTER_IMG_INFO}
                         className={styles.infoLogo}
                       />
-                      <p>{CONFIRM_EMAIL[language].value}</p>
+                      <p>{t('register.confirmEmail')}</p>
                       <Button
                         className={styles.registerBtn}
                         onClick={() => {
                           history.push(sessionStorage.getItem(RETURN_PAGE));
                         }}
                       >
-                        {CONTINUE_SHOPPING_LABEL[language].value}
+                        {t('register.continueShopping')}
                       </Button>
                     </div>
                   </div>
@@ -87,7 +88,6 @@ export default function Register() {
                   <RegisterForm
                     loading={loading}
                     values={values}
-                    language={language}
                     errors={errors}
                     showPassword={showPassword}
                     setShowPassword={setShowPassword}

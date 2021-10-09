@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './constructor-preview.style';
 import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
 import routes from '../../../const/routes';
 
 const { pathToConstructor } = routes;
 
 const ConstructorPreview = () => {
-  const language = useSelector(({ Language }) => Language.language);
+  const { t } = useTranslation();
 
   const [isMouseIn, setIsMouseIn] = useState(false);
   const [isZeroVolume, setIsZeroVolume] = useState(0);
@@ -47,7 +47,7 @@ const ConstructorPreview = () => {
       >
         <ExpandLessIcon className={styles.constructorInnerIcon} />
         <Link to={pathToConstructor} className={styles.constructorInnerLink}>
-          {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
+          {t('home.createStyle')}
           <ArrowRightAltIcon />
         </Link>
       </div>

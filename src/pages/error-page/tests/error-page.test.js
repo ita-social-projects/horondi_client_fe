@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { shallow } from 'enzyme';
 import ErrorPage from '../error-page';
 
 jest.mock('react-redux');

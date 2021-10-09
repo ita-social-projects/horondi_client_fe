@@ -5,6 +5,9 @@ import SearchBarListItem from '../search-bar-list-item';
 
 jest.mock('react-redux');
 
+jest.mock('connected-react-router',() => ({
+  push: 0
+}));
 const mockStore = {
   currency: 0,
   lightMode: true

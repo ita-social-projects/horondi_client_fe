@@ -1,13 +1,13 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import { useDispatch, useSelector } from 'react-redux';
-import Enzyme, { shallow } from 'enzyme';
 import ProductListPage from '../product-list-page';
 
-Enzyme.configure({ adapter: new Adapter() });
 const dispatch = jest.fn();
-
 const state = {
+  filterData: {},
+  sortByPrice: 0,
+  sortByRate: 0,
+  pagesCount: 1,
   filterMenuStatus: false,
   loading: false,
   language: 0,
@@ -26,9 +26,7 @@ jest.mock('react-router', () => ({
   useHistory: () => jest.fn()
 }));
 jest.mock('react-redux');
-jest.mock('../product-list-page.styles', () => ({
-  useStyles: () => ({})
-}));
+
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
   state

@@ -102,7 +102,7 @@ const ImagesConstructor = () => {
           >
             {availableModels}
           </NativeSelect>
-          <FormHelperText>{t('constructor.titles.model')}</FormHelperText>
+          <FormHelperText>{t('common.model')}</FormHelperText>
         </FormControl>
       </div>
 
@@ -115,7 +115,7 @@ const ImagesConstructor = () => {
             >
               {availableBasics}
             </NativeSelect>
-            <FormHelperText>{t('constructor.titles.basis')}</FormHelperText>
+            <FormHelperText>{t('common.basis')}</FormHelperText>
           </FormControl>
           <FormControl>
             <NativeSelect
@@ -124,7 +124,7 @@ const ImagesConstructor = () => {
             >
               {availablePatterns}
             </NativeSelect>
-            <FormHelperText>{t('constructor.titles.pattern')}</FormHelperText>
+            <FormHelperText>{t('common.pattern')}</FormHelperText>
           </FormControl>
           <FormControl>
             <NativeSelect
@@ -133,7 +133,7 @@ const ImagesConstructor = () => {
             >
               {availableBottoms}
             </NativeSelect>
-            <FormHelperText>{t('constructor.titles.bottom')}</FormHelperText>
+            <FormHelperText>{t('common.bottom')}</FormHelperText>
           </FormControl>
           <FormControl>
             <NativeSelect
@@ -142,10 +142,10 @@ const ImagesConstructor = () => {
             >
               {availableSizes}
             </NativeSelect>
-            <FormHelperText>{t('constructor.titles.size')}</FormHelperText>
+            <FormHelperText>{t('common.size')}</FormHelperText>
           </FormControl>
           <Button className={styles.button} onClick={showModal}>
-            {t('constructor.titles.moreOptions')}
+            {t('buttons.moreOptions')}
           </Button>
         </form>
         <div className={styles.imageContainer}>
@@ -159,11 +159,11 @@ const ImagesConstructor = () => {
           />
         </div>
         <div className={styles.pricesInfoWrapper}>
-          <h2 className={styles.headerWrapper}>{t('constructor.titles.totalPrice')}</h2>
+          <h2 className={styles.headerWrapper}>{t('common.totalPrice')}</h2>
           <div className={styles.textWrapper}>
             <ul>
               <li className={styles.priceItem}>
-                <span>{t('constructor.titles.defaultPrice')}</span>
+                <span>{t('common.defaultPrice')}</span>
                 <span>
                   {prices.DEFAULT_PRICE_VALUE}
                   {currentCurrencyValue(language, currency)}
@@ -193,7 +193,7 @@ const ImagesConstructor = () => {
             </ul>
           </div>
           <h2 className={styles.headerWrapper}>
-            {t('constructor.titles.endPrice')}
+            {t('common.endPrice')}
             <span>
               {constructorEndPrice(prices.priceTotal)}
               {currentCurrencyValue(language, currency)}

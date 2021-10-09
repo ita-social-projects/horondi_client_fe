@@ -11,9 +11,7 @@ const ConstructorSubmit = ({ onAddToCart, onAddToCheckout, isWishful }) => {
 
   const { t } = useTranslation();
 
-  const wishlistTip = isWishful
-    ? t('productDetails.tooltips.removeWishful')
-    : t('productDetails.tooltips.addWishful');
+  const wishlistTip = isWishful ? t('buttons.removeWishful') : t('buttons.addWishful');
 
   return (
     <div className={styles.submitContainer}>
@@ -25,10 +23,10 @@ const ConstructorSubmit = ({ onAddToCart, onAddToCheckout, isWishful }) => {
         )}
       </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCart}>
-        {t('productDetails.pdpButtons.cartButton')}
+        {t('buttons.cartButton')}
       </Button>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('productDetails.pdpButtons.buyButton')}
+        {t('buttons.buyButton')}
       </Button>
     </div>
   );

@@ -5,5 +5,17 @@ import error from './error.json';
 import register from './register.json';
 import recovery from './recovery.json';
 import profilePage from './profilePage.json';
+import buttons from './buttons.json';
 
-export default { translations: { login, home, common, error, register, recovery, profilePage } };
+export default {
+  translations: {
+    login,
+    home,
+    common,
+    error,
+    register,
+    recovery,
+    profilePage,
+    buttons
+  }
+};

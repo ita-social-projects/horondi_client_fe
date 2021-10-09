@@ -41,4 +41,8 @@ describe('Wishlist component tests', () => {
   it('Should render Wishlist', () => {
     expect(wrapper).toBeDefined();
   });
+
+  it('Should contains wishlist component', () => {
+    expect(wrapper.exists(Wishlist)).toBe(true);
+  });
 });

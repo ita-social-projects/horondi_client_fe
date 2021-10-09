@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { theme } from '../../../components/app/app-theme/app.theme';
 import ThanksPage from '../thanks-page';
 import mockStore from './mockStore';
+import { Loader } from '../../../components/loader/loader';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -24,7 +25,7 @@ let wrapper;
 
 describe('ThanksPage component tests', () => {
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = shallow(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
           <ThanksPage />
@@ -41,7 +42,7 @@ describe('ThanksPage component tests', () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('Cart table should renders', () => {
-    expect(wrapper.find('.MuiTableHead-root')).toHaveLength(1);
+  it('Should contains ThanksPage component', () => {
+    expect(wrapper.exists(ThanksPage)).toBe(true);
   });
 });

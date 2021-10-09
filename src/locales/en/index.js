@@ -10,4 +10,3 @@ import errorPage from './errorPage.json';
 import confirmation from './confirmation.json';
 
 export default { translations: { login,home, common, error, register, recovery, profilePage, contacts, errorPage, confirmation } };
-

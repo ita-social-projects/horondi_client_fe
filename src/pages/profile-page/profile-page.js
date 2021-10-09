@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import { useFormik } from 'formik';
@@ -7,11 +8,6 @@ import { useStyles } from './profile-page.styles';
 import ProfilePicture from '../../images/profile.png';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
-import {
-  PROFILE_LABELS,
-  PROFILE_PASSWORD_CHANGE,
-  PROFILE_EMAIL_CONFIRM
-} from '../../translations/user.translations';
 import {
   IMG_URL,
   formRegExp,
@@ -31,6 +27,7 @@ const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const { t } = useTranslation();
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -148,7 +145,7 @@ const ProfilePage = () => {
               />
               <label htmlFor='photoUpload' className={classes.uploadLabel}>
                 <Button component='span' className={classes.uploadBtn}>
-                  {PROFILE_LABELS[language].addPhoto}
+                  {t('profilePage.labels.addPhoto')}
                 </Button>
               </label>
             </div>
@@ -158,7 +155,7 @@ const ProfilePage = () => {
                 type='text'
                 name={name}
                 value={handleText(values, name)}
-                label={PROFILE_LABELS[language][name]}
+                label={t(`profilePage.labels.${name}`)}
                 fullWidth
                 color={MATERIAL_UI_COLOR.PRIMARY}
                 error={!!errors[name]}
@@ -179,7 +176,7 @@ const ProfilePage = () => {
                 type='submit'
                 onClick={() => setShouldValidate(true)}
               >
-                {PROFILE_LABELS[language].saveBtnTitle}
+                {t('profilePage.labels.saveBtnTitle')}
               </Button>
             )}
           </form>
@@ -191,13 +188,13 @@ const ProfilePage = () => {
             <Loader />
           ) : (
             <>
-              <h2>{PROFILE_PASSWORD_CHANGE[language].heading}</h2>
+              <h2>{t('profilePage.passwordChange.heading')}</h2>
               <span className={classes.recoverPasswordText}>
-                {!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}
+                {!userRecovered && t('profilePage.passwordChange.text')}
               </span>
               {handleProfilePage(
                 userRecovered,
-                PROFILE_PASSWORD_CHANGE,
+                t('profilePage.passwordChange'),
                 language,
                 handlePasswordChange,
                 classes.button
@@ -211,10 +208,10 @@ const ProfilePage = () => {
               <Loader />
             ) : (
               <>
-                <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
+                <h2>{t('profilePage.emailConfirm.heading')}</h2>
                 {handleProfilePage(
                   confirmationEmailSent,
-                  PROFILE_EMAIL_CONFIRM,
+                  t('profilePage.emailConfirm'),
                   language,
                   handleConfirmation,
                   classes.button

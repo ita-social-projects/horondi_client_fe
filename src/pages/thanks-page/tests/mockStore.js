@@ -1,6 +1,6 @@
 const mockStore = {
   isLightTheme: true,
-  language: 0,
+  language: 1,
   loading: false
 };
 export default mockStore;

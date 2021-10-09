@@ -1,14 +1,14 @@
 import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { TrainOutlined } from '@material-ui/icons';
 import { theme } from '../../../components/app/app-theme/app.theme';
 import ThanksPage from '../thanks-page';
 import mockStore from './mockStore';
-import { Loader } from '../../../components/loader/loader';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -25,7 +25,7 @@ let wrapper;
 
 describe('ThanksPage component tests', () => {
   beforeEach(() => {
-    wrapper = shallow(
+    wrapper = mount(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
           <ThanksPage />
@@ -42,7 +42,11 @@ describe('ThanksPage component tests', () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('Should contains ThanksPage component', () => {
-    expect(wrapper.exists(ThanksPage)).toBe(true);
+  it('Cart table should renders', () => {
+    expect(wrapper.find('.MuiTableHead-root')).toHaveLength(1);
+  });
+
+  it('Cart should contain title', () => {
+    expect(wrapper.exists('h2')).toBe(true);
   });
 });

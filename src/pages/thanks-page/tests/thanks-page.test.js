@@ -9,6 +9,7 @@ import { theme } from '../../../components/app/app-theme/app.theme';
 import ThanksPage from '../thanks-page';
 import mockStore from './mockStore';
 import OrderData from '../order-data/order-data';
+import { Loader } from '../../../components/loader/loader';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -40,6 +41,10 @@ describe('ThanksPage component tests', () => {
 
   it('Should render ThanksPage', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('Loader should not be rendered', () => {
+    expect(wrapper.exists(Loader)).toBe(false);
   });
 
   it('ThanksPage should contain OrderData', () => {

@@ -61,9 +61,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     marginLeft: '10%'
   },
-  checkoutFormContainer: {
+  checkoutFormContainer: ({ isLightTheme }) => ({
     display: 'flex',
     fontFamily: 'Open Sans',
+    color: isLightTheme ? '#242424' : '#FEFEFE',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     width: '100%',
@@ -71,7 +72,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 1150px)': {
       flexDirection: 'column'
     }
-  },
+  }),
   userInfoContainer: {
     width: '60%',
     '@media (max-width: 768px)': {

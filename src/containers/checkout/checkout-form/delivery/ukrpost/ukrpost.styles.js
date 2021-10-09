@@ -13,15 +13,14 @@ export const useStyles = makeStyles(() => ({
     color: '#e60000',
     marginTop: 15
   },
-  ukrPostTitle: ({ isLightTheme }) => ({
+  ukrPostTitle: {
     fontWeight: 700,
     fontSize: 23,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff',
     marginLeft: '10%',
     '@media (max-width: 920px)': {
       width: '100%'
     }
-  }),
+  },
   dataInput: {
     width: 600,
     marginBottom: '1%',

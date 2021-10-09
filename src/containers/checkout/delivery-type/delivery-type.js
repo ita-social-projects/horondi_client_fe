@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 
 import { useDispatch } from 'react-redux';
-import { CHECKOUT_TITLES, DELIVERY_TYPE } from '../../../translations/checkout.translations';
-
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './delivery-type.styles';
 import { addDeliveryType } from '../../../redux/cart/cart.actions';
 import { deliveryTypes, SESSION_STORAGE } from '../../../configs';
 import { getFromSessionStorage } from '../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 
-const DeliveryType = ({ language }) => {
+const DeliveryType = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
@@ -28,7 +28,9 @@ const DeliveryType = ({ language }) => {
     handleAddDeliveryType();
   }, [deliveryType]);
 
-  const radioButtons = Object.entries(DELIVERY_TYPE[language]).map((type) => (
+  const getDeliveryType = i18n.t('checkout.deliveryType', { returnObjects: true });
+
+  const radioButtons = Object.entries(getDeliveryType).map((type) => (
     <FormControlLabel
       value={type[0].toUpperCase()}
       control={<Radio color='default' size='small' />}
@@ -41,7 +43,7 @@ const DeliveryType = ({ language }) => {
   return (
     <div className={styles.root}>
       <div>
-        <h3 className={styles.deliveryTitle}>{CHECKOUT_TITLES[language].delivery}</h3>
+        <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
         <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
           <RadioGroup
             aria-label='Delivery type'

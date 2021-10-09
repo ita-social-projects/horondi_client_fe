@@ -25,13 +25,12 @@ export const useStyles = makeStyles(() => ({
       width: '80%'
     }
   },
-  courierTitle: ({ isLightTheme }) => ({
+  courierTitle: {
     fontWeight: 700,
     fontSize: 23,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff',
     marginLeft: '10%',
     '@media (max-width: 920px)': {
       width: '100%'
     }
-  })
+  }
 }));

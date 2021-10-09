@@ -7,7 +7,6 @@ export const CHECKOUT_TITLES = {
     yourOrderTitle: 'Ваше замовлення',
     orderForm: 'Форма замовлення',
     contactInfo: 'Контакти',
-    delivery: 'Доставка',
     payment: 'Метод оплати',
     deliveryPrice: 'Ціна доставки',
     totalPrice: 'До сплати',
@@ -28,7 +27,6 @@ export const CHECKOUT_TITLES = {
     yourOrderTitle: 'Your order',
     orderForm: 'Order form',
     contactInfo: 'Contact Information',
-    delivery: 'Delivery Method',
     payment: 'Payment Method',
     deliveryPrice: 'Delivery price',
     totalPrice: 'Total price',
@@ -100,22 +98,6 @@ export const CHECKOUT_TEXT_FIELDS = {
     total: 'Total',
     region: 'Region *',
     district: 'District *'
-  }
-};
-export const DELIVERY_TYPE = {
-  0: {
-    novaPost: 'Нова пошта',
-    ukrPost: 'Укрпошта',
-    selfPickup: 'Самовивіз',
-    novaPostCourier: "Кур'єр нової пошти",
-    ukrPostCourier: "Кур'єр укрпошти"
-  },
-  1: {
-    novaPost: 'Nova Poshta',
-    ukrPost: 'Ukrposhta',
-    selfPickup: 'Self pickup',
-    novaPostCourier: 'Nova Poshta Courier',
-    ukrPostCourier: 'Ukrposhta Courier'
   }
 };
 export const CHECKOUT_BUTTON = {

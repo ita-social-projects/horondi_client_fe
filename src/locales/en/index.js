@@ -8,5 +8,24 @@ import profilePage from './profilePage.json';
 import contacts from './contacts.json';
 import errorPage from './errorPage.json';
 import confirmation from './confirmation.json';
+import newPassword from './new-password.json';
+import orderHistory from './order-history.json';
+import notFoundPage from './not-found-page.json';
 
-export default { translations: { login,home, common, error, register, recovery, profilePage, contacts, errorPage, confirmation } };
+export default {
+  translations: {
+    login,
+    home,
+    common,
+    error,
+    register,
+    recovery,
+    profilePage,
+    contacts,
+    errorPage,
+    confirmation,
+    newPassword,
+    orderHistory,
+    notFoundPage
+  }
+};

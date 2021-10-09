@@ -1,3 +1,5 @@
 {
-  "wrongEmail": "Wrong email address"
+  "wrongEmail": "Wrong email address",
+  "pass": "From 6 to 30 characters with one capital  letter and one digit",
+  "confirmPassword": "Passwords do not match"
 }

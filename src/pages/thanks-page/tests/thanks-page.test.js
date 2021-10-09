@@ -41,4 +41,8 @@ describe('ThanksPage component tests', () => {
   it('Should render ThanksPage', () => {
     expect(wrapper).toBeDefined();
   });
+
+  it('Should contains ThanksPage component', () => {
+    expect(wrapper.exists(ThanksPage)).toBe(true);
+  });
 });

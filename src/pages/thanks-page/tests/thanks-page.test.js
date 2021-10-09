@@ -5,10 +5,10 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { TrainOutlined } from '@material-ui/icons';
 import { theme } from '../../../components/app/app-theme/app.theme';
 import ThanksPage from '../thanks-page';
 import mockStore from './mockStore';
+import OrderData from '../order-data/order-data';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -40,6 +40,10 @@ describe('ThanksPage component tests', () => {
 
   it('Should render ThanksPage', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('ThanksPage should contain OrderData', () => {
+    expect(wrapper.exists(OrderData)).toBe(true);
   });
 
   it('Cart table should renders', () => {

@@ -20,11 +20,10 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 const SliderHomePage = () => {
   const [imagesLinks, setImage] = useState([]);
   const styles = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const { images, language } = useSelector(({ HomePageSlider, Language }) => ({
-    images: HomePageSlider.images,
-    language: Language.language
+  const { images } = useSelector(({ HomePageSlider }) => ({
+    images: HomePageSlider.images
   }));
 
   const items = images.items.filter((item) => item.show === true);
@@ -63,8 +62,12 @@ const SliderHomePage = () => {
               <span>&#8594;</span>
             </Link>
             <div className={clsx(styles.sliderInner, SLIDER_HOME_PAGE.SLIDER)}>
-              <p className={styles.title}>{item.title[language].value || ''}</p>
-              <p className={styles.description}>{item.description[language].value || ''}</p>
+              <p className={styles.title}>
+                {item.title[i18n.language === 'ua' ? 0 : 1].value || ''}
+              </p>
+              <p className={styles.description}>
+                {item.description[i18n.language === 'ua' ? 0 : 1].value || ''}
+              </p>
             </div>
           </div>
         ))}

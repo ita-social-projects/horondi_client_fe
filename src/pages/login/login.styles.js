@@ -192,7 +192,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   afterText: {
     '& p::after': {
-      content: `' example@mail.com'`,
+      content: `', example@mail.com'`,
       color: '#828282'
     }
   },

@@ -46,7 +46,7 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.textColor
       },
       '& label': {
-        color: '#000000',
+        color: 'gray',
         transform: 'translate(14px, 14px) scale(1)'
       },
       '& div > input': {

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './models-list.style';
 import { getAllModels } from '../../../redux/model/model.actions';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import Loader from '../../../components/loader';
 
 const ModelsList = () => {
   const dispatch = useDispatch();
-  const { models, language, modelsLoading } = useSelector(({ Model, Language }) => ({
+  const { models, modelsLoading } = useSelector(({ Model }) => ({
     models: Model.models,
-    modelsLoading: Model.loading,
-    language: Language.language
+    modelsLoading: Model.loading
   }));
+  const { t } = useTranslation();
 
   const [isModelsVisible, setIsModelsVisible] = useState(false);
 
@@ -42,9 +42,7 @@ const ModelsList = () => {
       <ClassicButton
         buttonStyle={isModelsVisible ? 'classic' : 'inverse'}
         buttonType='button'
-        innerText={
-          isModelsVisible ? HOME_BUTTONS[language].HIDE_MODELS : HOME_BUTTONS[language].ALL_MODELS
-        }
+        innerText={isModelsVisible ? t('common.hide') : t('home.allModels')}
         onClickHandler={onShowModels}
       />
     </div>

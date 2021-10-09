@@ -1,64 +1,3 @@
-export const CONFIRM_EMAIL = [
-  {
-    value:
-      'Ви успішно зареєструвались! Будь ласка, підтвердіть свою електронну адресу для входу в аккаунт.'
-  },
-  {
-    value: 'You successfully registered! Please, confirm your e-mail for Log In.'
-  }
-];
-export const GOOGLE_SIGN_IN_TEXT = [
-  {
-    value: 'або увійдіть за допомогою'
-  },
-  {
-    value: 'or use your Google account to register'
-  }
-];
-export const LOGIN_FORM_LABEL = [
-  {
-    value: 'увійти'
-  },
-  {
-    value: 'log in'
-  }
-];
-export const OR_TEXT = [
-  {
-    value: 'або'
-  },
-  {
-    value: 'or'
-  }
-];
-
-export const REGISTER_FORM_LABEL = [
-  {
-    value: 'Реєстрація'
-  },
-  {
-    value: 'Register'
-  }
-];
-
-export const REGISTER_FORM_CONSENT = [
-  {
-    value: ['Реєструючись, ви погоджуєтеся з', 'угодою користувача']
-  },
-  {
-    value: ['By clicking Register, you agree with our', 'terms of service']
-  }
-];
-
-export const CONTINUE_SHOPPING_LABEL = [
-  {
-    value: 'Продовжити покупки'
-  },
-  {
-    value: 'Continue shopping'
-  }
-];
-
 export const USER_ERROR = {
   USER_ALREADY_EXIST: [
     {
@@ -219,33 +158,6 @@ export const placeholders = {
   ]
 };
 
-export const FORGOT_PASSWORD = [
-  {
-    value: 'Забули пароль?'
-  },
-  {
-    value: 'Forgot password?'
-  }
-];
-
-export const REMEMBER_ME = [
-  {
-    value: `Запам'ятати мене`
-  },
-  {
-    value: 'Remember me'
-  }
-];
-
-export const REGISTER_PROPOSAL = [
-  {
-    value: 'Реєстрація'
-  },
-  {
-    value: 'Registration'
-  }
-];
-
 export const WELCOME_MESSAGE = [
   {
     h2: 'Вітаємо',
@@ -258,41 +170,6 @@ export const WELCOME_MESSAGE = [
     h3: 'Registration was successful!',
     button_goToShop: 'Go to shop',
     button_logIn: 'Log in'
-  }
-];
-
-export const CONFIRM_ERROR = [
-  {
-    value: 'Ой! Щось пішло не так.'
-  },
-  {
-    value: 'Oops! Something went wrong.'
-  }
-];
-
-export const RECOVERY_MESSAGES = [
-  {
-    h2: 'Відновлення паролю',
-    label: 'Електронна адреса',
-    p: 'Вкажіть свою електронну пошту для скидання паролю і ми надішлемо інструкції для відновлення.',
-    button: 'Відправити'
-  },
-  {
-    h2: 'Password recovery',
-    label: 'E-mail  ',
-    p: 'Specify your e-mail to reset the password and we will send recovery instructions.',
-    button: 'Send'
-  }
-];
-
-export const RECOVERY_SUCCESS_MESSAGE = [
-  {
-    h2: 'Успішно!',
-    p: 'Будь ласка виконайте інструкції у листі, який ми вам надіслали.'
-  },
-  {
-    h2: 'Success!',
-    p: 'Please follow the instructions in the message, we have just sent you.'
   }
 ];
 
@@ -365,66 +242,5 @@ export const NEW_PASSWORD_SUCCESS_MESSAGE = [
   {
     h2: 'Your password is successfully changed!',
     p: 'You will be directed to login page'
-  }
-];
-
-export const PROFILE_LABELS = [
-  {
-    firstName: 'Ім’я',
-    lastName: 'Прізвище',
-    email: 'Емейл',
-    phoneNumber: 'Номер телефону',
-    country: 'Країна',
-    region: 'Область',
-    city: 'Місто',
-    street: 'Вулиця',
-    buildingNumber: 'Будинок',
-    appartment: 'Квартира',
-    zipcode: 'Почтовий індекс',
-    addPhoto: '+',
-    saveBtnTitle: 'Зберегти'
-  },
-  {
-    firstName: 'First name',
-    lastName: 'Last name',
-    email: 'Email',
-    phoneNumber: 'Contact phone number',
-    country: 'Country',
-    region: 'Region',
-    city: 'City',
-    street: 'Street',
-    buildingNumber: 'Building number',
-    appartment: 'Apartment number',
-    zipcode: 'Zip Code',
-    addPhoto: '+',
-    saveBtnTitle: 'Save'
-  }
-];
-
-export const PROFILE_PASSWORD_CHANGE = [
-  {
-    heading: 'Зміна паролю',
-    text: 'Якщо ви бажаєте змінити пароль, будь ласка, натисніть кнопку нижче і ми надішлемо Вам відповідні інструкції на емейл',
-    btnTitle: 'Змінити пароль',
-    checkEmailText: 'Будь ласка, перевірте ваш емейл!'
-  },
-  {
-    heading: 'Change password',
-    text: 'If you want to change your password, please click the button below and we will send you the instructions on your email',
-    btnTitle: 'Change password',
-    checkEmailText: 'Please, check your email!'
-  }
-];
-
-export const PROFILE_EMAIL_CONFIRM = [
-  {
-    heading: 'Підтвердження емейлу',
-    btnTitle: 'Підтвердити',
-    checkEmailText: 'Будь ласка, перевірте ваш емейл!'
-  },
-  {
-    heading: 'Confirm email',
-    btnTitle: 'Resend confirmation letter',
-    checkEmailText: 'Please, check your email!'
   }
 ];

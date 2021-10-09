@@ -1,17 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
 import { USER_REGISTER_LABELS } from '../../../configs';
-import {
-  REGISTER_FORM_LABEL,
-  REGISTER_FORM_CONSENT,
-  LOGIN_FORM_LABEL,
-  placeholders,
-  GOOGLE_SIGN_IN_TEXT
-} from '../../../translations/user.translations';
-
 import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
@@ -24,7 +17,6 @@ const { pathToLogin, pathToTerms } = routes;
 export default function RegisterForm({
   loading,
   values,
-  language,
   errors,
   showPassword,
   setShowPassword,
@@ -32,21 +24,21 @@ export default function RegisterForm({
   setShouldValidate
 }) {
   const styles = useStyles();
-
+  const { t } = useTranslation();
   return (
     <Form className={styles.registerForm}>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <h2 className={styles.heading}>{REGISTER_FORM_LABEL[language].value}</h2>
+          <h2 className={styles.heading}>{t('register.formLabel')}</h2>
           {Object.keys(values).map((name) => (
             <Field
               key={name}
               type={name === USER_REGISTER_LABELS.pass ? name : USER_REGISTER_LABELS.text}
               name={name}
               as={TextField}
-              label={placeholders[name][language].value}
+              label={t(`register.placeholders.${name}`)}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               fullWidth
               error={!!errors[name]}
@@ -63,10 +55,10 @@ export default function RegisterForm({
           ))}
           <div className={styles.consentMessage}>
             {' '}
-            {REGISTER_FORM_CONSENT[language].value[0]}
+            {t('register.formConsent.text')}
             <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
               {' '}
-              {REGISTER_FORM_CONSENT[language].value[1]}{' '}
+              {t('register.formConsent.link')}{' '}
             </Link>
           </div>
           <div className={styles.registerGroup}>
@@ -76,15 +68,15 @@ export default function RegisterForm({
               type='submit'
               onClick={setShouldValidate}
             >
-              {REGISTER_FORM_LABEL[language].value}
+              {t('register.formLabel')}
             </Button>
             <p className={styles.registerError}>{registerError}</p>
-            <p className={styles.googleText}>{GOOGLE_SIGN_IN_TEXT[language].value}</p>
+            <p className={styles.googleText}>{t('register.googleSignIn')}</p>
             <GoogleBtn />
           </div>
           <div>
             <Link to={pathToLogin} className={styles.loginBtn}>
-              {LOGIN_FORM_LABEL[language].value}
+              {t('register.loginFormLabel')}
             </Link>
           </div>
         </>

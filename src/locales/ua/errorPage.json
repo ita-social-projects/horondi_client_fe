@@ -1,0 +1,17 @@
+{
+    "pageMessage":{
+       "defaultError":  "Щось пішло не так...",
+       "categoryNotValid": "Категорія не вірна",
+       "categoryNotFound": "Категорію не знайдено",
+       "newsNotFound": "Новин не знайдено",
+       "materialNotFound": "Матеріал не знайдено'",
+       "productNotFound": "Товар не знайдено",
+       "orderNotFound": "Замовлення не знайдено",
+       "patternNotFound": "Гобелен не знайдено",
+       "userNotFound":"Користувача не знайдено",
+       "imageNotFound": "Фото не знайдено"
+
+    },
+    "linkToHomePage": "На головну",
+    "BusinessTextNotFound": "Текст бізнесу не знайдений"
+}

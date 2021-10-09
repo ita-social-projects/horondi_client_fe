@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
-import { getBurgerMenuLinks } from '../../redux/burger-menu/burger-menu.actions';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
 import SearchBarList from '../../containers/search-bar-list';
@@ -36,7 +35,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(preserveUser());
-    dispatch(getBurgerMenuLinks());
     dispatch(getCategories());
     dispatch(getContacts());
     dispatch(getAllFilters());

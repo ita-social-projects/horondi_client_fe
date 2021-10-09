@@ -1,11 +1,7 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../../../components/app/app-theme/app.theme';
 import ImagesConstructor from '../images-constructor';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const themeValue = theme('light');
 

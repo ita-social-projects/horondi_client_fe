@@ -1,10 +1,13 @@
 {
-    "product": "Продукт",
-    "quantity": "Кількість",
-    "price": "Ціна",
-    "size": "Розмір",
-    "buttons": {
-        "confirm": "Так",
-        "cancel": "Ні"
-    }
+  "product": "Продукт",
+  "quantity": "Кількість",
+  "price": "Ціна",
+  "size": "Розмір",
+  "seeMore": "Дізнатись більше",
+  "hide": "Приховати",
+  "details": "Деталі",
+  "buttons": {
+    "confirm": "Так",
+    "cancel": "Ні"
+  }
 }

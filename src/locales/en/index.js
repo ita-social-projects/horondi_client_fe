@@ -1,4 +1,9 @@
 import login from './login.json';
+import home from './home.json';
+import error from './error.json';
+import register from './register.json';
+import recovery from './recovery.json';
+import profilePage from './profilePage.json';
 import thanksPage from './thanksPage.json';
 import checkout from './checkout.json';
 import cart from './cart.json';
@@ -8,5 +13,19 @@ import productList from './productList.json';
 import common from './common.json';
 
 export default {
-  translations: { login, thanksPage, checkout, cart, wishlist, modal, productList, common }
+  translations: {
+    login,
+    home,
+    error,
+    register,
+    recovery,
+    profilePage,
+    thanksPage,
+    checkout,
+    cart,
+    wishlist,
+    modal,
+    productList,
+    common
+  }
 };

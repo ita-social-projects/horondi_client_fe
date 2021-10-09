@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './slider-home-page.style';
 
 import { carouselInterval } from '../../../configs';
@@ -12,6 +13,8 @@ import routes from '../../../const/routes';
 import { HOME_BUTTONS } from '../../../translations/homepage.translations';
 import { getImage } from '../../../utils/imageLoad';
 import { SLIDER_HOME_PAGE } from '../../../const/style-consts';
+import getAllSlides from '../operations/slider/slider.queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const { pathToMain } = routes;
 
@@ -19,14 +22,18 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const SliderHomePage = () => {
   const [imagesLinks, setImage] = useState([]);
+  const [items, setItems] = useState([]);
   const styles = useStyles();
 
-  const { images, language } = useSelector(({ HomePageSlider, Language }) => ({
-    images: HomePageSlider.images,
+  const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
 
-  const items = images.items.filter((item) => item.show === true);
+  const { error, loading } = useQuery(getAllSlides, {
+    onCompleted: (data) => {
+      setItems(data.getAllSlides.items.filter((item) => item.show === true));
+    }
+  });
 
   useEffect(() => {
     items &&
@@ -35,11 +42,9 @@ const SliderHomePage = () => {
           .then((src) => setImage((prev) => [...prev, src]))
           .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
       });
-  }, [images]);
+  }, [items]);
 
-  if (!items.length) {
-    items.push(images.items[0]);
-  }
+  if (error || loading) return errorOrLoadingHandler(error, loading);
 
   return (
     <div id='slider' data-section-style='light' className={styles.homeHeader}>

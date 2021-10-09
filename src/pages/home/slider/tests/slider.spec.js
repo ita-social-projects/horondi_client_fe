@@ -5,7 +5,7 @@ import SliderHomePage from '../slider-home-page';
 
 jest.mock('react-redux');
 
-const testData = { 0: { value: 'test' } };
+const testData = { 0: { value: 'test' }, 1: { value: 'test' } };
 const mockStore = {
   images: {
     items: [{ show: true, title: testData, description: testData, images: { large: 'test' } }]

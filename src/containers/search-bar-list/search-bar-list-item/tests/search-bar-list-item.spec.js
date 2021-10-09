@@ -5,7 +5,7 @@ import SearchBarListItem from '../search-bar-list-item';
 
 jest.mock('react-redux');
 
-jest.mock('connected-react-router',() => ({
+jest.mock('connected-react-router', () => ({
   push: 0
 }));
 const mockStore = {
@@ -14,7 +14,7 @@ const mockStore = {
 };
 const product = {
   images: { primary: { small: 'test' } },
-  name: { 0: { value: 'test' } },
+  name: { 0: { value: 'test' }, 1: { value: 'test' } },
   basePrice: { 0: { value: 'test', currency: 'test' } }
 };
 const mockDispatch = jest.fn();

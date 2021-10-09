@@ -5,31 +5,34 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { theme } from '../../../components/app/app-theme/app.theme';
-import ThanksPage from '../thanks-page';
-import mockStore from './mockStore';
-import OrderData from '../order-data/order-data';
-import { Loader } from '../../../components/loader/loader';
+import { theme } from '../../../../components/app/app-theme/app.theme';
+import FilledWishlist from '../filled-wishlist';
+import WishlistItem from '../../wishlist-item/wishlist-item';
+import items from './mockedItems';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const state = {
+  language: 1,
+  currency: 1
+};
 
 const themeValue = theme('light');
 jest.mock('react-redux');
 
 const dispatch = jest.fn();
-const state = mockStore;
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => state);
 
 let wrapper;
 
-describe('ThanksPage component tests', () => {
+describe('Wishlist component tests', () => {
   beforeEach(() => {
     wrapper = mount(
       <BrowserRouter>
         <ThemeProvider theme={themeValue}>
-          <ThanksPage />
+          <FilledWishlist items={items} />
         </ThemeProvider>
       </BrowserRouter>
     );
@@ -39,19 +42,11 @@ describe('ThanksPage component tests', () => {
     wrapper = null;
   });
 
-  it('Should render ThanksPage', () => {
+  it('Should render filled-wishlist', () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('ThanksPage should contain OrderData', () => {
-    expect(wrapper.exists(OrderData)).toBe(true);
-  });
-
-  it('Cart table should renders', () => {
-    expect(wrapper.find('.MuiTableHead-root')).toHaveLength(1);
-  });
-
-  it('Cart should contain title', () => {
-    expect(wrapper.exists('h2')).toBe(true);
+  it('Should contain item', () => {
+    expect(wrapper.exists(WishlistItem)).toBe(true);
   });
 });

@@ -1,7 +1,6 @@
 const mockStore = {
   isLightTheme: true,
   language: 0,
-  loading: false,
-  registerError: ''
+  loading: false
 };
 export default mockStore;

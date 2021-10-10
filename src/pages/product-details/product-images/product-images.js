@@ -93,6 +93,7 @@ const ProductImages = ({ images }) => {
         key={i}
         alt={t('productImages.imgAltInfo')}
         onClick={() => openImage(i + 1)}
+        data-cy='test'
       />
     ));
   return (

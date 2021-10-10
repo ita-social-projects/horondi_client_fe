@@ -1,47 +1,3 @@
-// import React from 'react';
-// import { mount, configure } from 'enzyme';
-// import Adapter from 'enzyme-adapter-react-16';
-// import { ThemeProvider } from '@material-ui/styles';
-// import * as redux from 'react-redux';
-// import ProductImages from '../product-images';
-// import { Products, Theme } from './product-images.variables';
-// import { theme } from '../../../../components/app/app-theme/app.theme';
-
-// const mockUseSelector = jest.spyOn(redux, 'useSelector');
-// configure({ adapter: new Adapter() });
-
-// describe('Product submit tests', () => {
-//   let wrapper;
-//   const themeValue = theme('light');
-
-//   beforeEach(() => {
-//     mockUseSelector.mockImplementation((fn) => fn({ Products, Theme }));
-
-//     wrapper = mount(
-//       <ThemeProvider theme={themeValue}>
-//         <ProductImages />
-//       </ThemeProvider>
-//     );
-//   });
-
-//   afterEach(() => {
-//     wrapper.unmount();
-//     mockUseSelector.mockClear();
-//   });
-
-//   it('Should render component', () => {
-//     expect(wrapper.exists('div')).toBe(true);
-//   });
-
-//   it('Should semilar change', () => {
-//     const imgViewer = wrapper.find('ImgsViewer').props();
-//     imgViewer.onClickPrev();
-//     imgViewer.onClickNext();
-//     imgViewer.onClickThumbnail();
-//     imgViewer.onClose();
-//   });
-// });
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Adapter from 'enzyme-adapter-react-16';
@@ -57,15 +13,61 @@ jest.mock('../product-images.styles', () => ({
 
 useSelector.mockImplementation(() => ({
   images: {
-    primary: { large: 'large_4051pm10kty4giwt_8.png' },
-    additional: [{ large: 'large_4051pm10ktv8hrl6_9.png' }]
+    primary: {
+      large: 'large_4051pm10kty4dhv5_37.png',
+      medium: 'medium_4051pm10kty4dhv5_37.png',
+      small: 'small_4051pm10kty4dhv5_37.png',
+      thumbnail: 'thumbnail_4051pm10kty4dhv5_37.png'
+    },
+    additional: [
+      {
+        large: 'large_4051pm10ktv87b4m_40.png',
+        medium: 'medium_4051pm10ktv87b4m_40.png',
+        small: 'small_4051pm10ktv87b4m_40.png',
+        thumbnail: 'thumbnail_4051pm10ktv87b4m_40.png'
+      },
+      {
+        large: 'large_1cwxwm8ycko1gnhag_38.png',
+        medium: 'medium_1cwxwm8ycko1gnhag_38.png',
+        small: 'small_1cwxwm8ycko1gnhag_38.png',
+        thumbnail: 'thumbnail_1cwxwm8ycko1gnhag_38.png'
+      },
+      {
+        large: 'large_1cwxwm8ycko1gnhbe_41.png',
+        medium: 'medium_1cwxwm8ycko1gnhbe_41.png',
+        small: 'small_1cwxwm8ycko1gnhbe_41.png',
+        thumbnail: 'thumbnail_1cwxwm8ycko1gnhbe_41.png'
+      }
+    ]
   },
   isLightTheme: true
 }));
 
 describe('Product info', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<ProductImages />);
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+  });
+
   it('Should render', () => {
-    const component = shallow(<ProductImages />);
-    expect(component).toBeDefined();
+    expect(wrapper.exists('div')).toBe(true);
+  });
+
+  it('Should semilar change', () => {
+    const imgViewer = wrapper.find('ImgsViewer').props();
+    imgViewer.onClickPrev();
+    imgViewer.onClickNext();
+    imgViewer.onClickThumbnail();
+    imgViewer.onClose();
+  });
+
+  it('Should click', () => {
+    const img = wrapper.find("[data-cy='test']");
+    expect(img).toBeDefined();
   });
 });

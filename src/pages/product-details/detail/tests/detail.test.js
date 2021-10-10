@@ -13,5 +13,6 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('Detail component', () => {
   it('Should render', () => {
     const component = shallow(<Detail />);
+    expect(component.exists('span')).toBe(true);
   });
 });

@@ -1,8 +1,8 @@
 import React from 'react';
-import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';
+import Enzyme,{ shallow, mount, configure } from 'enzyme';
 import Button from '@material-ui/core/Button';
 
 import { theme } from '../../../../components/app/app-theme/app.theme';
@@ -14,6 +14,9 @@ configure({ adapter: new Adapter() });
 
 const mockSetSizeIsNotSelectedError = jest.fn();
 const mockDispatch = jest.fn();
+jest.mock('../product-submit.styles', () => ({
+  useStyles: () => ({})
+}));
 
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');
@@ -37,7 +40,6 @@ describe('Product submit tests', () => {
   });
 
   afterEach(() => {
-    wrapper.unmount();
     mockUseDispatch.mockClear();
     mockUseSelector.mockClear();
   });

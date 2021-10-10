@@ -6,6 +6,10 @@
   "seeMore": "Дізнатись більше",
   "hide": "Приховати",
   "details": "Деталі",
+  "enterNew": "Введіть новий пароль",
+  "newPass": "Новий пароль",
+  "confirmPass": "Підтвердіть пароль",
+  "change": "Змінити",
   "buttons": {
     "confirm": "Так",
     "cancel": "Ні"

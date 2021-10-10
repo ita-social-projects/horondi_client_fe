@@ -6,6 +6,10 @@
   "seeMore": "See more",
   "hide": "Hide",
   "details": "Details",
+  "enterNew": "Enter new password",
+  "newPass": "New password",
+  "confirmPass": "Confirm password",
+  "change": "Change",
   "buttons": {
     "confirm": "Yes",
     "cancel": "No"

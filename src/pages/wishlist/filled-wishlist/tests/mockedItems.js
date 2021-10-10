@@ -1,4 +1,4 @@
-const items = [
+const mockedItems = [
   {
     _id: '605658df158e2fdb53498442',
     category: {
@@ -112,4 +112,4 @@ const items = [
   }
 ];
 
-export default items;
+export default mockedItems;

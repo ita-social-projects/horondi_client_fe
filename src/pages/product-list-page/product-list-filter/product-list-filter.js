@@ -32,11 +32,9 @@ const ProductListFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { language } = useSelector(selectFilterData);
   const filtersOptions = useProductFilters();
-
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(sort);
     const quantityPerPage = searchParams.get(countPerPage);
-
     history.push(`${pathToCategory}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
     dispatch(getFiltredProducts({}));
     dispatch(setPriceFilter([]));
@@ -77,7 +75,7 @@ const ProductListFilter = () => {
           variant='contained'
           onClick={handleClearFilter}
         >
-          {t('productListPage.clearFilterButtonText')}
+          {t('common.clearFilter')}
         </Button>
         <PriceFilter />
         <HotItemFilter language={language} />

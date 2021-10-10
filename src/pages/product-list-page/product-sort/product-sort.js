@@ -67,7 +67,7 @@ const ProductSort = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const sortByText = t('productListPage.sortByText');
+  const sortByText = t('common.sortBy');
 
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
     <option

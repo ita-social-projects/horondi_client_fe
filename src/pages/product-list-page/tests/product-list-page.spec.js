@@ -21,6 +21,10 @@ const state = {
   currentPage: 1,
   filterStatus: false
 };
+jest.mock('../product-list-page.styles', () => ({
+  useStyles: () => ({})
+}));
+
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()
@@ -32,8 +36,8 @@ useSelector.mockImplementation(() => ({
   state
 }));
 
-describe('Recovery component tests', () => {
-  it('Should render Recovery', () => {
+describe('ProductListPage component tests', () => {
+  it('Should render ProductListPage', () => {
     const component = shallow(<ProductListPage />);
     expect(component).toBeDefined();
   });

@@ -9,7 +9,6 @@ import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import { getImage } from '../../../utils/imageLoad';
 import { IMG_URL } from '../../../configs';
-
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../const/routes';
@@ -22,7 +21,6 @@ const ProductListItem = ({ product }) => {
     currency: Currency.currency,
     isLightTheme: Theme.lightMode
   }));
-
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const { pathToProducts } = routes;
   useEffect(() => {
@@ -39,7 +37,7 @@ const ProductListItem = ({ product }) => {
     );
 
     return availableSizes
-      ? t('productListPage.priceFrom') + availableSizes[0].price[currency].value
+      ? t('common.from') + availableSizes[0].price[currency].value
       : t('productListPage.sizeNotAvailable');
   };
 

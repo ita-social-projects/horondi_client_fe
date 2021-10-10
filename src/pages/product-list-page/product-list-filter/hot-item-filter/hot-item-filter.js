@@ -38,7 +38,7 @@ const HotItemFilter = () => {
   return (
     <FormGroup data-cy='hot_item_filter'>
       <Typography id='isHot' gutterBottom>
-        {t('productListPage.isHotText')}:
+        {t('common.popular')}:
         <Switch
           color='default'
           checked={hotItem}

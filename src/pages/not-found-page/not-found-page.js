@@ -1,17 +1,9 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './not-found-page.styles';
-import {
-  LINK_BACK,
-  NOT_FOUND_PAGE_MESSAGE,
-  TO_HOMEPAGE_MESSAGE,
-  LINK_TO_HOMEPAGE
-} from '../../translations/not-found-page.translations';
-
-import { NOT_FOUND_PAGE_IMAGES } from '../../configs';
 
 import routes from '../../const/routes';
 
@@ -25,12 +17,7 @@ const NotFoundPage = () => {
     history.goBack();
   };
 
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
-  }));
-
-  const imagePath = isLightTheme ? NOT_FOUND_PAGE_IMAGES.light : NOT_FOUND_PAGE_IMAGES.dark;
+  const { t } = useTranslation();
 
   return (
     <div className={styles.wrapper}>
@@ -39,23 +26,19 @@ const NotFoundPage = () => {
           <h2>
             4
             <span className={styles.imageContainer}>
-              <img
-                className={styles.image}
-                src={imagePath}
-                alt={NOT_FOUND_PAGE_MESSAGE[language].value}
-              />
+              <img className={styles.image} alt='img' src={t('notFoundPage.message')} />
             </span>
             4
           </h2>
-          <h3>{NOT_FOUND_PAGE_MESSAGE[language].value}</h3>
+          <h3>{t('notFoundPage.message')}</h3>
           <p>
-            {TO_HOMEPAGE_MESSAGE[language].value}{' '}
+            {t('notFoundPage.toHome')}{' '}
             <Link className={styles.link} to={pathToMain}>
-              {LINK_TO_HOMEPAGE[language].value}
+              {t('notFoundPage.linkHome')}
             </Link>
           </p>
           <Button className={styles.button} onClick={goBack} variant='contained'>
-            {LINK_BACK[language].value}
+            {t('notFoundPage.linkBack')}
           </Button>
         </div>
       </div>

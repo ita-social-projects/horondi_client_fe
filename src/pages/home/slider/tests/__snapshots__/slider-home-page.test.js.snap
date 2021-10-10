@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`slider home page tests should match snapshot 1`] = `
+<div
+  className="makeStyles-homeHeader-1"
+  data-section-style="light"
+  id="slider"
+>
+  <_class
+    buttons={false}
+    cancelOnInteraction={true}
+    cssModule={null}
+    fillParent={true}
+    infinite={true}
+    interval={5000}
+    mobileTouch={true}
+    onTransitionEnd={null}
+    onTransitionRequest={null}
+    onTransitionStart={null}
+    play={true}
+    rootElement="awssld"
+    showTimer={true}
+    timerBackgroundColor="rgba(0, 0, 0, 0.15)"
+    timerHeight="6px"
+  />
+</div>
+`;

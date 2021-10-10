@@ -13,7 +13,7 @@ import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 const DeliveryType = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
@@ -28,7 +28,7 @@ const DeliveryType = () => {
     handleAddDeliveryType();
   }, [deliveryType]);
 
-  const getDeliveryType = i18n.t('checkout.deliveryType', { returnObjects: true });
+  const getDeliveryType = t('checkout.deliveryType', { returnObjects: true });
 
   const radioButtons = Object.entries(getDeliveryType).map((type) => (
     <FormControlLabel

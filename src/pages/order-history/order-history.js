@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import { getUserOrders, setCurrentPage } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
 import OrderHistoryOrder from '../../containers/orders/order-history/order-history-order';
@@ -8,18 +8,15 @@ import EmptyOrderHistory from '../../containers/orders/order-history/empty-order
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
 import { limitHistoryOrders } from '../../const/user-order-history';
-import { ORDER_HISTORY_TITLES } from '../../translations/order.translations';
 
 const OrderHistory = () => {
-  const { orders, loading, language, currentPage, countPerPage } = useSelector(
-    ({ User, Language }) => ({
-      orders: User.userOrders,
-      loading: User.userLoading,
-      language: Language.language,
-      currentPage: User.currentPage,
-      countPerPage: User.countPerPage
-    })
-  );
+  const { orders, loading, currentPage, countPerPage } = useSelector(({ User }) => ({
+    orders: User.userOrders,
+    loading: User.userLoading,
+    currentPage: User.currentPage,
+    countPerPage: User.countPerPage
+  }));
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
 
@@ -52,7 +49,7 @@ const OrderHistory = () => {
     <div className={styles.root}>
       {orders && orders.length ? (
         <>
-          <div className={styles.mainTitle}>{ORDER_HISTORY_TITLES[language].title}</div>
+          <div className={styles.mainTitle}>{t('orderHistory.titles.title')}</div>
           <div>
             {orders.map((item, index) => (
               <OrderHistoryOrder order={item} key={index} />

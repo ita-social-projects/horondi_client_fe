@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 let wrapper;
 beforeEach(() => {
-  wrapper = shallow(<Delivery deliveryType='NOVAPOSTCOURIER' isLightTheme />);
+  wrapper = shallow(<Delivery deliveryType='NOVAPOSTCOURIER' />);
 });
 
 describe('Delivery component tests', () => {
@@ -19,11 +19,7 @@ describe('Delivery component tests', () => {
   it('should render zero <NovaPost>', () => {
     expect(wrapper.find(NovaPost)).toHaveLength(0);
   });
-  // it('should render zero <NovaPost>', () => {
-  //     wrapper = shallow(<Delivery deliveryType='NOVAPOSTCOURIER' isLightTheme={false} />);
-  //     expect(wrapper.find(Courier)).toHave;
-  // });
-  it('should handle change', () => {
+  it('should match snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });

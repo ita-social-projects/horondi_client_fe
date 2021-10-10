@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Adapter from 'enzyme-adapter-react-16';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
-import { getFromSessionStorage } from '../../../../services/session-storage.service';
+import DeliveryType from '../../delivery-type/delivery-type';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
+jest.mock('../../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 
+const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
 const dispatch = jest.fn();
-
 const props = {
   language: 1,
   isLightTheme: true,
@@ -20,7 +21,6 @@ const props = {
   cartItems: [{ price: [{ currency: 'ua', value: 100 }] }],
   deliveryType: 'NOVAPOSTCOURIER'
 };
-
 const userData = {
   loginError: '',
   userLoading: false,
@@ -33,14 +33,21 @@ const userData = {
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
 
-// getFromSessionStorage.mockImplementation(() => userData)
 describe('<CheckoutForm />', () => {
-  it('should contain <CheckoutForm /> components', () => {
+  it('should contain <CheckoutForm /> component <Delivery />', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     expect(wrapper.find(Delivery).length).toEqual(1);
   });
-  it('should ', () => {
+  it('should match snapshot', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
-    expect(wrapper.find(Delivery).length).toEqual(1);
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should submit add payment method', async () => {
+    const wrapper = shallow(<CheckoutForm {...props} myOnSubmit={myOnSubmit} />);
+    wrapper.find('form').simulate('submit');
+  });
+  it('should contain <CheckoutForm /> component <DeliveryType />', () => {
+    const wrapper = shallow(<CheckoutForm {...props} />);
+    expect(wrapper.find(DeliveryType).length).toEqual(1);
   });
 });

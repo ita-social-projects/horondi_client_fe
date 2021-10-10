@@ -2,7 +2,6 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Courier from '../courier';
-// import useStyles from '../courier.styles'
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -23,32 +22,16 @@ const props = {
   errors: jest.fn()
 };
 
-describe('Courier component tests', () => {
-  it('Should render Courier', () => {
+describe('<Courier />', () => {
+  it('should render <Courier />', () => {
     const wrapper = shallow(<Courier {...props} />);
     expect(wrapper).toBeDefined();
   });
 
-  it('Should render ', () => {
+  it('should find text', () => {
     const courier = shallow(<Courier {...props} />);
     const actual = courier.find('h3').text();
     const expected = 'Delivery Address';
     expect(actual).toEqual(expected);
   });
-
-  // it('Should render ', () => {
-  //     const courier = shallow(
-  //         <Courier {...props} />
-  //     );
-  //     console.log(courier.toHaveProperty(2))
-  //     expect(courier).toHaveProperty('isLightTheme', true)
-
-  // });
-
-  // it('should render one <useStyles>', () => {
-  //         const wrapper = shallow(
-  //                 <Courier {...props} />
-  //         );
-  //     expect(wrapper.find(useStyles)).toHaveLength(1);
-  // });
 });

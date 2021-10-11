@@ -1,6 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
-
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { useHistory, useLocation } from 'react-router';
@@ -15,7 +15,6 @@ import {
   setPriceFilter
 } from '../../../redux/products/products.actions';
 
-import { CLEAR_FILTER_BUTTON_TEXT } from '../../../translations/product-list.translations';
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
 import { selectFilterData } from '../../../redux/selectors/multiple.selectors';
 import { countPerPage, sort } from '../../../configs';
@@ -25,6 +24,7 @@ import routes from '../../../const/routes';
 const { pathToCategory } = routes;
 
 const ProductListFilter = () => {
+  const { t } = useTranslation();
   const styles = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -32,11 +32,9 @@ const ProductListFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { language } = useSelector(selectFilterData);
   const filtersOptions = useProductFilters();
-
   const handleClearFilter = () => {
     const sortQuery = searchParams.get(sort);
     const quantityPerPage = searchParams.get(countPerPage);
-
     history.push(`${pathToCategory}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
     dispatch(getFiltredProducts({}));
     dispatch(setPriceFilter([]));
@@ -77,7 +75,7 @@ const ProductListFilter = () => {
           variant='contained'
           onClick={handleClearFilter}
         >
-          {CLEAR_FILTER_BUTTON_TEXT[language].value}
+          {t('common.clearFilter')}
         </Button>
         <PriceFilter />
         <HotItemFilter language={language} />

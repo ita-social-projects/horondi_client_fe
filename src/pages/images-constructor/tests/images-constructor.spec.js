@@ -1,42 +1,38 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
-// import { Button } from '@material-ui/core';
-// import { Typography } from '@material-ui/core';
 import { theme } from '../../../components/app/app-theme/app.theme';
-// import { useDispatch, useSelector } from 'react-redux';
+// import { theme } from '../../../src/components/app/app-theme/app.theme';
 import ImagesConstructor from '../images-constructor';
 
 const themeValue = theme('light');
-
+jest.mock('react-redux');
+const dispatch = jest.fn();
 jest.mock('horondi_merge_images', () => ({ DEFAULT_PRICE_VALUE: '1400' }));
-jest.mock('../images-constructor.style', () => ({
-  useStyles: () => ({})
+
+useDispatch.mockImplementation(() => dispatch);
+useSelector.mockImplementation(() => ({
+  values: {},
+  images: {},
+  prices: {},
+  methods: {},
+  language: 0,
+  currency: 0,
+  constructorModel: {
+    modelsForConstructor: ''
+  },
+  currentModel: {
+    eligibleOptions: ''
+  }
 }));
-// jest.mock('react-redux');
-
-// useDispatch.mockImplementation(() => jest.fn());
-// useSelector.mockImplementation(() => jest.fn());
-
-let wrapper;
 
 describe('ImagesConstructor component tests', () => {
-  beforeEach(() => {
-    wrapper = shallow(
+  it('Should render ImagesConstructor', () => {
+    const component = mount(
       <ThemeProvider theme={themeValue}>
         <ImagesConstructor />
       </ThemeProvider>
     );
-  });
-
-  afterEach(() => {
-    wrapper = null;
-  });
-
-  it('Should render ImagesConstructor', () => {
-    expect(wrapper).toBeDefined();
-  });
-
-  it('ImagesConstructor should contain button', () => {
-    expect(wrapper.find('h2')).toBeDefined();
+    expect(component).toBeDefined();
   });
 });

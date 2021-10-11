@@ -11,7 +11,6 @@ import { defaultProps, ORDER_PAYMENT_STATUS, thanksPropTypes } from '../../../ut
 const OrderData = ({ currency, order, isLightTheme }) => {
   const styles = useStyles({ isLightTheme });
   const { t, i18n } = useTranslation();
-
   const language = i18n.language === 'ua' ? 0 : 1;
   const currencySign = currency ? faDollarSign : faHryvnia;
 
@@ -39,9 +38,8 @@ const OrderData = ({ currency, order, isLightTheme }) => {
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.CREATED &&
             t('thanksPage.paymentStatus.created')}
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING &&
-            t('thanksPage.thanksPageTitle.processing')}
-          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID &&
-            t('thanksPage.thanksPageTitle.paid')}
+            t('thanksPage.paymentStatus.processing')}
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID && t('thanksPage.paymentStatus.paid')}
         </span>
         <span className={styles.resultTotalSum}>
           {order?.totalPriceToPay[currency].value} <FontAwesomeIcon icon={currencySign} />

@@ -35,25 +35,4 @@ describe('Product component', () => {
     );
     expect(component).toBeDefined();
   });
-
-  it('Should render', () => {
-    const component = shallow(
-      <ProductSizes
-        handleSizeChange={handleSizeChange}
-        sizes={sizes}
-        sizeIsNotSelectedError
-      />
-    );
-    expect(component).toBeDefined();
-  });
-
-  it('Should render', () => {
-    const component = shallow(
-      <ProductSizes
-        handleSizeChange={handleSizeChange}
-        sizes={sizes}
-        sizeIsNotSelectedError
-      />
-    );
-  });
 });

@@ -11,8 +11,7 @@ import ModelsList from './models-list';
 import { Loader } from '../../components/loader/loader';
 
 const Home = () => {
-  const { ourLooksLoading, categoriesLoading } = useSelector(({ HomePageImages, Categories }) => ({
-    ourLooksLoading: HomePageImages.loading,
+  const { categoriesLoading } = useSelector(({ Categories }) => ({
     categoriesLoading: Categories.loading
   }));
 
@@ -21,7 +20,7 @@ const Home = () => {
   const homeRef = useRef(null);
   const homeElement = useMemo(() => homeRef, [homeRef.current]);
 
-  if (ourLooksLoading || categoriesLoading) {
+  if (categoriesLoading) {
     return <Loader />;
   }
 

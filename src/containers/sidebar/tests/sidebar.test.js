@@ -22,6 +22,15 @@ jest.mock('react-redux', () => ({
 jest.mock('@apollo/client');
 
 describe('sidebar tests', () => {
+  it('should be defined', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+    wrapper = shallow(<Sidebar {...props} />);
+
+    expect(wrapper).toBeDefined();
+  });
+
   it('should match snapshot', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData

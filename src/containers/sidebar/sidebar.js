@@ -5,10 +5,10 @@ import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
-import { CONSTRUCTOR } from '../../translations/sidebar.translations';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
@@ -22,6 +22,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
+  const { t } = useTranslation();
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -87,7 +88,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
     >
       <List>{categoriesList}</List>
       <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
-        <span className={styles.constructorItem}>{CONSTRUCTOR[language].value}</span>
+        <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
       </Link>
       {subList}
       <FooterLinks

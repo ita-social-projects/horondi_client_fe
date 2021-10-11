@@ -9,8 +9,8 @@ import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './products-filters-container.styles';
-import { CLEAR_FILTER_BUTTON_TEXT } from '../../translations/product-list.translations';
 
 const ProductsFiltersContainer = ({
   productFilter,
@@ -30,6 +30,7 @@ const ProductsFiltersContainer = ({
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const [isListOpen, setIsListOpen] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (searchParams.get(labels)) {
@@ -61,7 +62,7 @@ const ProductsFiltersContainer = ({
         <List>
           {productFilter.length ? (
             <ListItem onClick={clearFilter} className={styles.clearFilter}>
-              {CLEAR_FILTER_BUTTON_TEXT[language].value}
+              {t('productFilter.clearFilter')}
               <CloseIcon fontSize='small' />
             </ListItem>
           ) : null}

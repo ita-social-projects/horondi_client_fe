@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Wishlist from '../wishlist';
+import EmptyWishlist from '../empty-wishlist';
 
 jest.mock('../wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
@@ -31,5 +32,9 @@ describe('Wishlist component tests', () => {
 
   it('Should render Wishlist', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('Should render Empty-Wishlist if there are no items', () => {
+    expect(wrapper.exists(EmptyWishlist)).toBe(true);
   });
 });

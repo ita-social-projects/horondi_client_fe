@@ -1,14 +1,12 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
 
-import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import shallow from 'enzyme/build/shallow';
+import { shallow } from 'enzyme';
 import FilledWishlist from '../filled-wishlist';
 import WishlistItem from '../../wishlist-item/wishlist-item';
 import items from './mockedItems';
 
-jest.mock('../../wishlist.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../filled-wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../../services/local-storage.service');
 

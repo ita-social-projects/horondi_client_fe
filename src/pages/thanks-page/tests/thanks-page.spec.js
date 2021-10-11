@@ -1,23 +1,24 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { ThemeProvider } from '@material-ui/styles';
 
-import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { theme } from '../../../components/app/app-theme/app.theme';
+import { Table } from '@material-ui/core';
+import { shallow } from 'enzyme';
 import ThanksPage from '../thanks-page';
-import mockStore from './mockStore';
 import OrderData from '../order-data/order-data';
-import { Loader } from '../../../components/loader/loader';
 
-Enzyme.configure({ adapter: new Adapter() });
-
-const themeValue = theme('light');
+jest.mock('react-router', () => ({
+  useLocation: () => ({ search: jest.fn() })
+}));
+jest.mock('../thanks-page.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
+jest.mock('../../../services/local-storage.service');
 
 const dispatch = jest.fn();
-const state = mockStore;
+const state = {
+  isLightTheme: true,
+  language: 1,
+  loading: false
+};
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => state);
@@ -26,13 +27,7 @@ let wrapper;
 
 describe('ThanksPage component tests', () => {
   beforeEach(() => {
-    wrapper = mount(
-      <BrowserRouter>
-        <ThemeProvider theme={themeValue}>
-          <ThanksPage />
-        </ThemeProvider>
-      </BrowserRouter>
-    );
+    wrapper = shallow(<ThanksPage />);
   });
 
   afterEach(() => {
@@ -48,7 +43,7 @@ describe('ThanksPage component tests', () => {
   });
 
   it('Cart table should renders', () => {
-    expect(wrapper.find('.MuiTableHead-root')).toHaveLength(1);
+    expect(wrapper.find(OrderData).dive().find(Table)).toHaveLength(1);
   });
 
   it('Cart should contain title', () => {

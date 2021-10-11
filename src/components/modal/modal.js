@@ -35,10 +35,10 @@ const Modal = ({
       </p>
       <div className={styles.buttonGroup}>
         <Button onClick={handleClose} variant='contained'>
-          {t('common.button.cancel')}
+          {t('common.buttons.cancel')}
         </Button>
         <Button onClick={() => handleClose(null, null, true)} variant='contained'>
-          {t('common.button.confirm')}
+          {t('common.buttons.confirm')}
         </Button>
       </div>
     </div>
@@ -50,7 +50,7 @@ const Modal = ({
       data-cy='removing-modal'
     >
       <Button onClick={handleClose} variant='contained'>
-        {t('common.button.cancel')}
+        {t('common.buttons.cancel')}
       </Button>
       {content}
     </div>

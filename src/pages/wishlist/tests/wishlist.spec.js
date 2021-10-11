@@ -1,5 +1,4 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Wishlist from '../wishlist';

@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from '@material-ui/core';
-import { shallow } from 'enzyme';
 import ThanksPage from '../thanks-page';
 import OrderData from '../order-data/order-data';
 

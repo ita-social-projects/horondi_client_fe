@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { shallow } from 'enzyme';
 import { Button, Typography } from '@material-ui/core';
 import EmptyWishlist from '../empty-wishlist';
 

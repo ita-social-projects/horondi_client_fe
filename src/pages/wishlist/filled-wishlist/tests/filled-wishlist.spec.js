@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { shallow } from 'enzyme';
 import FilledWishlist from '../filled-wishlist';
 import WishlistItem from '../../wishlist-item/wishlist-item';
 import items from './mockedItems';

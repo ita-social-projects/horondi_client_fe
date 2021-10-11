@@ -13,6 +13,7 @@ const SearchBarList = () => {
     searchBarLoading: SearchBar.loading
   }));
   const { i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const styles = useStyles();
 
@@ -22,11 +23,7 @@ const SearchBarList = () => {
         <div className={styles.searchBarList}>
           {products.length
             ? products.map((item) => <SearchBarListItem key={item._id} product={item} />)
-            : handleSearchListLoading(
-              searchBarLoading,
-              styles.emptyList,
-              i18n.language === 'ua' ? 0 : 1
-            )}
+            : handleSearchListLoading(searchBarLoading, styles.emptyList, language)}
         </div>
       )}
     </>

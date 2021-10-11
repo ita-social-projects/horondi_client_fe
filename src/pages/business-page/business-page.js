@@ -5,8 +5,20 @@ import _ from 'lodash';
 
 import { useStyles } from './business-page.style';
 import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
+// import { getBusinessTextByCode } from './operations/business-page.queries';
+
+// import { useQuery } from '@apollo/client';
 
 const BusinessPage = ({ match }) => {
+  // const [businessPage, setBusinessPage] = useState({
+  //   aboutUs: {},
+  //   terms: {},
+  //   materials: {},
+  //   privacyPolicy: {},
+  //   paymentAndShipping: {},
+  //   userAgreement: {}
+  // });
+
   const dispatch = useDispatch();
   const pageCode = match.params.page;
   const pageCamelCase = _.camelCase(pageCode);
@@ -15,10 +27,15 @@ const BusinessPage = ({ match }) => {
     language: Language.language
   }));
 
+  // const something = useQuery(getBusinessTextByCode, {
+  //   onCompleted: (data) => console.log(data)
+  // });
+  // console.log(pageCode);
+
   useEffect(() => {
     dispatch(getBusinessPageByCode(pageCode));
     window.scrollTo(0, 0);
-  }, [match.params.page, dispatch]);
+  }, [pageCode, dispatch]);
 
   const addressText = page?.text && parse(page?.text[language].value);
   const styles = useStyles();

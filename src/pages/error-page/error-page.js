@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { push } from 'connected-react-router';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
-import { ERROR_PAGE_MESSAGE, LINK_TO_HOMEPAGE } from '../../translations/errorpage.translations';
+import { ERROR_PAGE_MESSAGE } from '../../translations/errorpage.translations';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
-  const { language, isLightTheme, errorMessage } = useSelector(({ Language, Theme, Error }) => ({
-    language: Language.language,
+  const { isLightTheme, errorMessage } = useSelector(({ Theme, Error }) => ({
     isLightTheme: Theme.lightMode,
     errorMessage: Error.error
   }));
+
+  const getLanguage = i18n.language === 'ua' ? 0 : 1;
 
   useEffect(() => {
     if (!errorMessage) {
@@ -33,16 +35,17 @@ const ErrorPage = () => {
         <img
           className={styles.errorImage}
           src={errorImagePath}
-          alt={ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
+          alt={t('errorPage.pageMessage.defaultError')}
         />
         <div className={styles.info}>
           <h2>
             {errorMessage && ERROR_PAGE_MESSAGE[errorMessage]
-              ? ERROR_PAGE_MESSAGE[errorMessage][language].value
-              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
+              ? ERROR_PAGE_MESSAGE[errorMessage][getLanguage].value
+              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[getLanguage].value}
           </h2>
+
           <Link to='/' onClick={() => window.location.reload()}>
-            <Button variant='contained'>{LINK_TO_HOMEPAGE[language].value}</Button>
+            <Button variant='contained'>{t('errorPage.linkToHomePage')}</Button>
           </Link>
         </div>
       </div>

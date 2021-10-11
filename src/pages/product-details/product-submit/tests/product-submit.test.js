@@ -139,6 +139,6 @@ describe('Product submit tests', () => {
     );
     const button1 = wrapper.find(Button).at(0);
     button1.simulate('click');
-    expect(mockDispatch).toHaveBeenCalledTimes(17);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
   });
 });

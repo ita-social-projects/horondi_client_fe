@@ -1,0 +1,8 @@
+{
+    "welcomeMessage":{
+        "goToShop" :"Go to shop",
+        "logIn": "Log in",
+        "welcome":"Welcome",
+        "successRegistration": "Registration was successful!"
+    }
+}

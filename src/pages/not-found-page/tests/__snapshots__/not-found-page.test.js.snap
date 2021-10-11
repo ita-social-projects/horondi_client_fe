@@ -356,18 +356,18 @@ exports[`Should render 404 page 1`] = `
                   className="makeStyles-imageContainer-4"
                 >
                   <img
-                    alt="Ой! Щось пішло не так"
+                    alt="img"
                     className="makeStyles-image-5"
-                    src="./images/not-found-page/bag.png"
+                    src="notFoundPage.message"
                   />
                 </span>
                 4
               </h2>
               <h3>
-                Ой! Щось пішло не так
+                notFoundPage.message
               </h3>
               <p>
-                Сторінку, яку ти шукав, не знайдено.
+                notFoundPage.toHome
                  
                 <Link
                   className="makeStyles-link-2"
@@ -383,7 +383,7 @@ exports[`Should render 404 page 1`] = `
                       href="/"
                       onClick={[Function]}
                     >
-                      На головну
+                      notFoundPage.linkHome
                     </a>
                   </LinkAnchor>
                 </Link>
@@ -477,7 +477,7 @@ exports[`Should render 404 page 1`] = `
                         <span
                           className="MuiButton-label"
                         >
-                          На попередню сторінку
+                          notFoundPage.linkBack
                         </span>
                         <WithStyles(memo)
                           center={false}

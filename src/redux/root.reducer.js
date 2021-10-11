@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import BurgerMenu from './burger-menu/burger-menu.reducer';
 import { newsReducer as News } from './news/news.reducer';
 import User from './user/user.reducer';
 import { categoriesReducer as Categories } from './categories/categories.reducer';
@@ -21,7 +20,6 @@ import Chat from './chat/chat.reducer';
 import { businessPagesReducer as HeaderLinks } from './header-links/header-links.reducer';
 import HomePageImages from './home-page-looks/home-page-looks.reducer';
 import Pattern from './pattern/pattern.reducer';
-import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
 import Constructor from './images-constructor/constructor.reducer';
 import { toastReducer as Toast } from './toast/toast.reducer';
@@ -48,10 +46,8 @@ export const rootReducer = (history) =>
     Checkout,
     BusinessPages,
     Chat,
-    BurgerMenu,
     HeaderLinks,
     HomePageImages,
-    HomePageSlider,
     SearchBar,
     Pattern,
     Constructor,

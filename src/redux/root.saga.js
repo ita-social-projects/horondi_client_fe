@@ -1,5 +1,4 @@
 import { all } from 'redux-saga/effects';
-import burgerMenuSaga from './burger-menu/burger-menu.sagas';
 import newsSaga from './news/news.sagas';
 import categoriesSaga from './categories/categories.sagas';
 import productsSaga from './products/products.sagas';
@@ -15,7 +14,6 @@ import chatSaga from './chat/chat.sagas';
 import headerLinksSaga from './header-links/header-links.sagas';
 import homeLooksImagesSaga from './home-page-looks/home-page-looks.sagas';
 import patternSaga from './pattern/pattern.sagas';
-import homePageSliderSaga from './homepage-slider/homepage-slider.sagas';
 import toastSaga from './toast/toast.sagas';
 import { constructorSaga } from './images-constructor/constructor.sagas';
 import orderSaga from './order/order.sagas';
@@ -35,11 +33,9 @@ export function* rootSaga() {
     checkoutSaga(),
     businessPagesSaga(),
     chatSaga(),
-    burgerMenuSaga(),
     headerLinksSaga(),
     homeLooksImagesSaga(),
     patternSaga(),
-    homePageSliderSaga(),
     constructorSaga(),
     orderSaga()
   ]);

@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sidebar tests should match snapshot 1`] = `
+<WithStyles(ForwardRef(Drawer))
+  anchor="left"
+  className="makeStyles-drawer-1 makeStyles-drawer-8"
+  onClose={[Function]}
+  open={true}
+>
+  <WithStyles(ForwardRef(List)) />
+  <Link
+    className="makeStyles-mainItem-3"
+    onClick={[Function]}
+    to="/constructor"
+  >
+    <span
+      className="makeStyles-constructorItem-7"
+    >
+      Створи сам
+    </span>
+  </Link>
+  <div
+    className="makeStyles-subList-4"
+  >
+    <Link
+      className="makeStyles-subItem-5"
+      key="/materials"
+      onClick={[Function]}
+      to="/materials"
+    >
+      <span>
+        Матеріали
+      </span>
+    </Link>
+    <Link
+      className="makeStyles-subItem-5"
+      key="/pages/about-us"
+      onClick={[Function]}
+      to="/pages/about-us"
+    >
+      <span>
+        Про нас
+      </span>
+    </Link>
+    <Link
+      className="makeStyles-subItem-5"
+      key="/news"
+      onClick={[Function]}
+      to="/news"
+    >
+      <span>
+        Новини
+      </span>
+    </Link>
+    <Link
+      className="makeStyles-subItem-5"
+      key="/contacts"
+      onClick={[Function]}
+      to="/contacts"
+    >
+      <span>
+        Контакти
+      </span>
+    </Link>
+  </div>
+  <FooterLinks
+    position="center"
+    setIsMenuOpen={[Function]}
+    socialIconsStyles="makeStyles-socialIconsStyles-6"
+  />
+  <SidemenuRightBar
+    fromSideBar={true}
+    setIsMenuOpen={[Function]}
+  />
+</WithStyles(ForwardRef(Drawer))>
+`;

@@ -18,6 +18,7 @@
       "impliedStrict": true
     }
   },
+
   "plugins": ["jsx-a11y", "react-app", "react", "import"],
   "env": {
     "browser": true,
@@ -25,6 +26,11 @@
     "node": true,
     "jquery": true,
     "jest": true
+  },
+  "globals": {
+    "shallow": true,
+    "render": true,
+    "mount": true
   },
   "extends": [
     "airbnb",
@@ -36,7 +42,7 @@
   ],
   "rules": {
     "semi": ["error", "always"],
-    "semi-style" : ["error", "last"],
+    "semi-style": ["error", "last"],
     "no-var": "warn",
     "no-unused-vars": [
       1,

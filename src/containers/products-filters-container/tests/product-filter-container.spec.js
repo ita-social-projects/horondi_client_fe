@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductsFiltersContainer from '../products-filters-container';
-import { testData } from './product-filter-container.variables';
 
 jest.mock('../products-filters-container.styles.js', () => ({
   useStyles: () => ({})
@@ -11,7 +10,6 @@ jest.mock('react-redux');
 const dispatch = jest.fn();
 
 useDispatch.mockImplementation(() => dispatch);
-// useLocation;
 useSelector.mockImplementation(() => ({
   language: 0
 }));

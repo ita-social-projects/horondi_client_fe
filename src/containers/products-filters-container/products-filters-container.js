@@ -62,7 +62,7 @@ const ProductsFiltersContainer = ({
         <List>
           {productFilter.length ? (
             <ListItem onClick={clearFilter} className={styles.clearFilter}>
-              {t('productFilter.clearFilter')}
+              {t('common.clearFilter')}
               <CloseIcon fontSize='small' />
             </ListItem>
           ) : null}

@@ -17,13 +17,9 @@ import confirmation from './confirmation.json';
 import newPassword from './new-password.json';
 import orderHistory from './order-history.json';
 import notFoundPage from './not-found-page.json';
-<<<<<<< HEAD
 import productListPage from './product-list-page.json';
-=======
-import productFilter from './productFilter.json';
 import searchBar from './searchBar.json';
 import sidebar from './sidebar.json';
->>>>>>> ff2f4f32 (Final commit #1)
 
 export default {
   translations: {
@@ -34,27 +30,20 @@ export default {
     register,
     recovery,
     profilePage,
-<<<<<<< HEAD
     thanksPage,
     checkout,
     cart,
     wishlist,
     modal,
     productList,
-=======
-    productFilter,
->>>>>>> ff2f4f32 (Final commit #1)
     contacts,
     errorPage,
     confirmation,
     newPassword,
     orderHistory,
     notFoundPage,
-<<<<<<< HEAD
-    productListPage
-=======
+    productListPage,
     searchBar,
     sidebar
->>>>>>> ff2f4f32 (Final commit #1)
   }
 };

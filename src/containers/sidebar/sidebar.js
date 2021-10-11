@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { useSelector } from 'react-redux';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
@@ -22,7 +21,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -35,10 +34,6 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
     });
   }, []);
 
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
-
   const { loading, error } = useQuery(getCategoriesForBurgerMenu, {
     onCompleted: (data) => setCategories(data.getCategoriesForBurgerMenu)
   });
@@ -50,7 +45,6 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           category={category._id}
           name={category.name}
           mainItemStyles={styles.mainItem}
-          language={language}
           key={category._id}
           models={models}
           handlerItem={() => setIsMenuOpen(false)}
@@ -69,7 +63,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
             className={styles.subItem}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span>{item.name[language]}</span>
+            <span>{item.name[i18n.language === 'ua' ? 0 : 1]}</span>
           </Link>
         ))}
       </div>

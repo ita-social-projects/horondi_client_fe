@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import SearchBar from '../search-bar';
 
 jest.mock('../search-bar.styles.js', () => ({

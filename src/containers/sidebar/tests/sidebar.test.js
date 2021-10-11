@@ -16,8 +16,7 @@ const useQueryData = {
 const props = { fromSideBar: {}, isMenuOpen: true, setIsMenuOpen: () => null };
 
 jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: () => ({ language: 0 })
+  ...jest.requireActual('react-redux')
 }));
 jest.mock('@apollo/client');
 

@@ -14,9 +14,9 @@ import {
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_DELIVERY_TYPES,
   CHECKOUT_INPUT_FIELD,
-  CHECKOUT_TEXT_FIELDS
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
 } from '../../../../../translations/checkout.translations';
 import { POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
@@ -66,7 +66,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
 
   return (
     <div className={styles.ukrPostContainer}>
-      <h3 className={styles.ukrPostTitle}>{CHECKOUT_DELIVERY_TYPES[language].ukrPoshta}</h3>
+      <h3 className={styles.ukrPostTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h3>
       <div className={styles.selectorInfo}>
         <Autocomplete
           onInputChange={(e, value, reason) => {

@@ -9,27 +9,12 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: 50
     }
   },
-  sumContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    borderTop: '1px solid #DADADA',
-    borderBottom: '1px solid #DADADA',
-    padding: '10px 0',
-    '@media (max-width: 813px)': {
-      padding: '10px 40px'
-    },
-    '& svg': {
-      fontSize: 'small'
-    }
-  },
   radioBtn: {
     fontSize: 14
   },
   radioBtnWrapper: {
     paddingBottom: 20,
-    '@media (max-width: 813px)': {
-      marginLeft: 40
-    }
+    marginLeft: '11%'
   },
   btnCreateOrder: {
     margin: '20px 0',
@@ -49,6 +34,15 @@ export const useStyles = makeStyles((theme) => ({
     },
     '&:hover': {
       textDecoration: 'underline'
+    }
+  },
+  deliveryTitle: {
+    fontSize: 23,
+    fontWeight: 700,
+    marginLeft: '10%',
+    marginBottom: 10,
+    '@media (max-width: 920px)': {
+      width: '100%'
     }
   }
 }));

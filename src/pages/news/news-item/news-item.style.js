@@ -44,11 +44,7 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: '20rem',
     textAlign: 'justify',
     maxHeight: '20rem',
-    overflow: 'hidden',
-    color: 'red',
-    '& > *': {
-      color: 'green'
-    }
+    overflow: 'hidden'
   },
 
   newsFooter: {

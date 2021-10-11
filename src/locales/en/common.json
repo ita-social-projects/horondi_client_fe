@@ -9,5 +9,9 @@
   "size": "Size",
   "defaultPrice": "Default item price:",
   "totalPrice": "Total item price:",
-  "endPrice": "End price:"
+  "endPrice": "End price:",
+  "enterNew": "Enter new password",
+  "newPass": "New password",
+  "confirmPass": "Confirm password",
+  "change": "Change"
 }

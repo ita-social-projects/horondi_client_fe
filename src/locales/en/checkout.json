@@ -1,4 +1,8 @@
 {
+    "checkoutPayment": {
+        "card": "Card",
+        "cash": "Cash"
+    },
     "checkoutTitles": {
         "delivery": "Delivery Method"
     },

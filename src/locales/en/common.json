@@ -1,4 +1,8 @@
 {
+  "product": "Product",
+  "quantity": "Quantity",
+  "price": "Price",
+  "size": "Size",
   "seeMore": "See more",
   "hide": "Hide",
   "details": "Details",
@@ -13,5 +17,9 @@
   "enterNew": "Enter new password",
   "newPass": "New password",
   "confirmPass": "Confirm password",
-  "change": "Change"
+  "change": "Change",
+  "buttons": {
+    "confirm": "Yes",
+    "cancel": "No"
+  }
 }

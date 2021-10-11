@@ -1,0 +1,16 @@
+{
+    "cartTableFields": {
+        "item": "Product name",
+        "product": "Product",
+        "quantity": "Quantity",
+        "price": "Price",
+        "size": "Size",
+        "bottomMaterial": "Bottom material",
+        "sidePocket": "Side pocket",
+        "total": "Total price",
+        "toPay": "Total price",
+        "photo": "Photo",
+        "delivery": "Delivery type",
+        "actions": "Action"
+    }
+}

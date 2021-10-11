@@ -1,4 +1,8 @@
 {
+    "checkoutPayment": {
+        "card": "Картою",
+        "cash": "Готівкою"
+    },
     "checkoutTitles": {
         "delivery": "Доставка"
     },

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './product-sort.styles';

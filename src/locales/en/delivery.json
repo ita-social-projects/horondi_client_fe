@@ -1,7 +1,10 @@
 {
-  "schedule": "Графік роботи:",
-  "address": "Адреса:",
-  "restDay": "Вихідний",
+  "schedule": "Schedule:",
+  "address": "Address:",
+  "restDay": "Day off",
   "workDay": "10:00 - 19:00",
-  "addressHorondi": "Львів, вул. Заводська,31"
+  "addressHorondi": "Lviv, st. Zavodska,31",
+  "selfPickup": "Self pick-up",
+  "saturday": "Sat:  ",
+  "sunday": "Sun:  "
 }

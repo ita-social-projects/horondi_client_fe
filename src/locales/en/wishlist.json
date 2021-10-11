@@ -1,0 +1,14 @@
+{
+    "wishlistTitles": {
+        "empty": "Your wishlist is empty",
+        "filled": "Wishlist"
+    },
+    "wishlistButtons": {
+        "empty": "Wish now",
+        "toItem": "Go to product"
+    },
+    "wishlistTableFields": {
+        "item": "PRODUCT",
+        "price": "PRICE"
+    }
+}

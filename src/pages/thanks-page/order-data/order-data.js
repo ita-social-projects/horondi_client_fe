@@ -1,30 +1,29 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
-import { CART_TABLE_FIELDS } from '../../../translations/cart.translations';
 import { useStyles } from './order-data.styles';
-import { PAYMENT_STATUS, THANKS_PAGE_TITLE } from '../../../translations/thanks-page.translations';
 import OrderItemCard from './order-item-card';
 import { defaultProps, ORDER_PAYMENT_STATUS, thanksPropTypes } from '../../../utils/thank-you';
 
-const OrderData = ({ language, currency, order, isLightTheme }) => {
+const OrderData = ({ currency, order, isLightTheme }) => {
   const styles = useStyles({ isLightTheme });
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
   const currencySign = currency ? faDollarSign : faHryvnia;
 
   return (
     <div className={styles.orderDataContainer}>
-      <h3 className={styles.thunksInfoTitle}>{THANKS_PAGE_TITLE[language].yourOrder}</h3>
+      <h3 className={styles.thunksInfoTitle}>{t('thanksPage.thanksPageTitle.yourOrder')}</h3>
       <Table classes={{ root: styles.tableHeader }}>
         <TableHead>
           <TableRow>
-            <TableCell className={styles.tableCell}>{CART_TABLE_FIELDS[language].photo}</TableCell>
-            <TableCell className={styles.tableCell}>{CART_TABLE_FIELDS[language].item}</TableCell>
-            <TableCell className={styles.tableCell}>
-              {CART_TABLE_FIELDS[language].quantity}
-            </TableCell>
-            <TableCell className={styles.tableCell}>{CART_TABLE_FIELDS[language].price}</TableCell>
+            <TableCell className={styles.tableCell}>{t('cart.cartTableFields.photo')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('cart.cartTableFields.item')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('common.quantity')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('common.price')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody className={styles.tableBody}>
@@ -34,13 +33,13 @@ const OrderData = ({ language, currency, order, isLightTheme }) => {
         </TableBody>
       </Table>
       <div className={styles.result}>
-        <span className={styles.resultTitle}>{THANKS_PAGE_TITLE[language].result}</span>
+        <span className={styles.resultTitle}>{t('thanksPage.thanksPageTitle.result')}</span>
         <span className={styles.resultStatus}>
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.CREATED &&
-            PAYMENT_STATUS[language].created}
+            t('thanksPage.paymentStatus.created')}
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING &&
-            PAYMENT_STATUS[language].processing}
-          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID && PAYMENT_STATUS[language].paid}
+            t('thanksPage.paymentStatus.processing')}
+          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PAID && t('thanksPage.paymentStatus.paid')}
         </span>
         <span className={styles.resultTotalSum}>
           {order?.totalPriceToPay[currency].value} <FontAwesomeIcon icon={currencySign} />

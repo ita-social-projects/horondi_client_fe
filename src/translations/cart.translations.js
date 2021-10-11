@@ -62,7 +62,6 @@ export const CART_TABLE_FIELDS = {
     total: 'Підсумок',
     toPay: 'До оплати',
     photo: 'Фото',
-    delivery: 'Метод доставки',
     actions: 'Дія'
   },
   1: {
@@ -76,23 +75,6 @@ export const CART_TABLE_FIELDS = {
     total: 'Total price',
     toPay: 'Total price',
     photo: 'Photo',
-    delivery: 'Delivery type',
     actions: 'Action'
-  }
-};
-export const DELIVERY_TYPE = {
-  0: {
-    novaPost: 'Нова пошта',
-    ukrPost: 'Укрпошта',
-    selfPickup: 'Самовивіз',
-    novaPostCourier: "Кур'єр нової пошти",
-    ukrPostCourier: "Кур'єр укрпошти"
-  },
-  1: {
-    novaPost: 'Nova Poshta',
-    ukrPost: 'Ukrposhta',
-    selfPickup: 'Self Pickup',
-    novaPostCourier: 'Nova Poshta Courier',
-    ukrPostCourier: 'Ukrposhta Courier'
   }
 };

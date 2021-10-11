@@ -11,53 +11,49 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 768px)': {
       width: '100%'
     }
-  }, 
+  },
   selfPickupTitlesWrapper: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     width: '40%'
   },
-  selfPickupData: ({ isLightTheme }) => ({
+  selfPickupData: {
     display: 'flex',
-    width: '80%',
-    background: isLightTheme ? '#f6f4f4' : null,
     paddingLeft: 5,
+    marginLeft: '10%',
+    width: 600,
     '@media (max-width: 768px)': {
-      width: '100%'
+      width: '80%'
     }
-  }),
-  selfPickupTitle: ({ isLightTheme }) => ({
+  },
+  selfPickupTitle: {
     fontWeight: 400,
     fontSize: 18,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff',
-    marginLeft:'2%'
-  }),
+    marginLeft: '2%'
+  },
   schedule: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
     width: '60%'
   },
-  scheduleTitle: ({ isLightTheme }) => ({
+  scheduleTitle: {
     marginRight: '4%',
-    color: isLightTheme ? '#000000' : '#ffffffff',
     fontWeight: 'bolder',
     fontSize: 14
-  }),
-  addressTitle: ({ isLightTheme }) => ({
+  },
+  addressTitle: {
     margin: ' 0 0 7.5% 0',
-    color: isLightTheme ? '#000000' : '#ffffffff',
     fontWeight: 'bolder',
     fontSize: 14
-  }),
-  scheduleItem: ({ isLightTheme }) => ({
-    color: isLightTheme ? '#1D1C1C' : '#ffffff',
+  },
+  scheduleItem: {
     fontWeight: 400,
     fontSize: 14
-  }),
-  scheduleData: ({ isLightTheme }) => ({
+  },
+  scheduleData: {
     display: 'flex',
     flexDirection: 'column'
-  })
+  }
 }));

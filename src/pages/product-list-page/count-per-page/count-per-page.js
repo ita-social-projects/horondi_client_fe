@@ -5,8 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './count-per-page.styles';
 import { setCountPerPage } from '../../../redux/products/products.actions';
-import { ITEMS_PER_PAGE } from '../../../translations/product-list.translations';
-import { URL_QUERIES_NAME } from '../../../configs/index';
+import { URL_QUERIES_NAME, ITEMS_PER_PAGE } from '../../../configs/index';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const CountPerPage = () => {

@@ -13,23 +13,28 @@ const product = {
   mainMaterial: {},
   model: {},
   name: {
-    0: { value: '' }
+    0: { value: '' },
+    1: { value: '' }
   },
   pattern: {},
   purchasedCount: 1214,
   rate: 4,
   sizes: [
     {
-      price: {
-        0: { currency: '', value: 1954 },
-        1: { currency: '', value: 1954 }
-      },
+      price: [
+        { currency: '', value: 1954 },
+        { currency: '', value: 1954 }
+      ],
+      size: { available: true }
+    },
+    {
+      price: [
+        { currency: '', value: 1954 },
+        { currency: '', value: 1954 }
+      ],
       size: { available: true }
     }
-  ],
-  size: {
-    available: ''
-  }
+  ]
 };
 
 jest.mock('react-redux');

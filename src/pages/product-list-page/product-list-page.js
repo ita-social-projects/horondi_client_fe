@@ -14,10 +14,14 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
 import { getFiltredProducts, setCurrentPage } from '../../redux/products/products.actions';
-import { TEMPORARY_WIDTHS } from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
-import { URL_QUERIES_NAME } from '../../configs';
+import {
+  URL_QUERIES_NAME,
+  TEMPORARY_WIDTHS,
+  DRAWER_PERMANENT,
+  DRAWER_TEMPORARY
+} from '../../configs';
 
 const ProductListPage = ({ width }) => {
   const { t } = useTranslation();
@@ -40,10 +44,9 @@ const ProductListPage = ({ width }) => {
     filterData,
     sortByPopularity,
     filterStatus
-  } = useSelector(({ Theme, Language, Products }) => ({
+  } = useSelector(({ Theme, Products }) => ({
     filterMenuStatus: Theme.filterMenuStatus,
     loading: Products.loading,
-    language: Language.language,
     products: Products.products,
     pagesCount: Products.pagesCount,
     sortByRate: Products.sortByRate,
@@ -78,9 +81,7 @@ const ProductListPage = ({ width }) => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };
   const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
-  const drawerVariant = checkWidth()
-    ? t('productListPage.drawerTemporary')
-    : t('productListPage.drawerPermanent');
+  const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
   const changeHandler = (e, value) => {
     searchParams.set('page', value);

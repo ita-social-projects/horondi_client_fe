@@ -13,7 +13,6 @@ useDispatch.mockImplementation(() => dispatch);
 
 useSelector.mockImplementation(() => ({
   filters: [],
-  language: 0,
   currency: 0,
   maxPrice: 0,
   minPrice: 0

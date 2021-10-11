@@ -15,9 +15,8 @@ import routes from '../../../const/routes';
 import { getCurrencySign } from '../../../utils/currency';
 
 const ProductListItem = ({ product }) => {
-  const { t } = useTranslation();
-  const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
-    language: Language.language,
+  const { t, i18n } = useTranslation();
+  const { currency, isLightTheme } = useSelector(({ Currency, Theme }) => ({
     currency: Currency.currency,
     isLightTheme: Theme.lightMode
   }));
@@ -35,7 +34,6 @@ const ProductListItem = ({ product }) => {
     const availableSizes = product.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
-
     return availableSizes
       ? t('common.from') + availableSizes[0].price[currency].value
       : t('productListPage.sizeNotAvailable');
@@ -48,7 +46,7 @@ const ProductListItem = ({ product }) => {
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>
-            {product.name[language].value}
+            {i18n.language === 'ua' ? product.name[0].value : product.name[1].value}
             <div>
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />

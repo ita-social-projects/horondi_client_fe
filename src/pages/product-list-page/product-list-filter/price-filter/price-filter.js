@@ -19,15 +19,12 @@ const PriceFilter = () => {
   const searchParams = new URLSearchParams(search);
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
 
-  const { filters, currency, maxPrice, minPrice } = useSelector(
-    ({ Products, Language, Currency }) => ({
-      filters: Products.filters.priceFilter,
-      language: Language.language,
-      currency: Currency.currency,
-      maxPrice: Products.filterData.maxPrice,
-      minPrice: Products.filterData.minPrice
-    })
-  );
+  const { filters, currency, maxPrice, minPrice } = useSelector(({ Products, Currency }) => ({
+    filters: Products.filters.priceFilter,
+    currency: Currency.currency,
+    maxPrice: Products.filterData.maxPrice,
+    minPrice: Products.filterData.minPrice
+  }));
 
   useEffect(() => {
     if (searchParams.get(priceFilter)) {

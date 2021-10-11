@@ -10,15 +10,11 @@ import {
   setSortByRate,
   setSortByPopularity
 } from '../../../redux/products/products.actions';
-import { SORT_BY_SELECT_OPTIONS } from '../../../translations/product-list.translations';
-import { URL_QUERIES_NAME } from '../../../configs';
+import { URL_QUERIES_NAME, SORT_BY_SELECT_OPTIONS } from '../../../configs';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const ProductSort = () => {
-  const { t } = useTranslation();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { t, i18n } = useTranslation();
   const styles = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -74,7 +70,7 @@ const ProductSort = () => {
       value={JSON.stringify(optionValue)}
       selected={optionValue.name === query}
     >
-      {lang[language].value}
+      {i18n.language === 'ua' ? lang[0].value : lang[1].value}
     </option>
   ));
 

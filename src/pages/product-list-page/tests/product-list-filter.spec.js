@@ -8,13 +8,7 @@ jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()
 }));
-// jest.mock('../../../hooks/use-product-filters', () => ({
-//   filtersData: {
-//     categories: {},
-//     models: {},
-//     patterns: {}
-//   }
-// }));
+
 useDispatch.mockImplementation(() => dispatch);
 
 useSelector.mockImplementation(() => ({

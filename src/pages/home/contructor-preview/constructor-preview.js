@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -9,7 +8,6 @@ import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './constructor-preview.style';
-import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
 import routes from '../../../const/routes';
 
@@ -23,11 +21,6 @@ const ConstructorPreview = () => {
   const [isMuted, setIsMuted] = useState(true);
 
   const styles = useStyles({ isMouseIn });
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllHomeImageLooks());
-  }, [dispatch]);
 
   return (
     <div className={styles.constructorPreview} id='constructor' data-section-style='dark'>

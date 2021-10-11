@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
 
 import { formRegExp, CHAT_USER_DATA } from '../../../configs';
-import { CHAT } from '../../../translations/chat.translation';
 import { useStyles } from '../chat.style';
 import { sendEmail } from '../../../redux/chat/chat.actions';
 import { handleHelperText } from '../../../utils/handle-active-massenger';
@@ -13,6 +13,7 @@ import { handleHelperText } from '../../../utils/handle-active-massenger';
 export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const dispatch = useDispatch();
   const style = useStyles({ visible, mailFormVisible, themeMode });
+  const { t } = useTranslation();
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
@@ -88,13 +89,13 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
 
   return (
     <form className={style.formField}>
-      <span className={style.mailTitle}>{CHAT[language].sendMail}.</span>
+      <span className={style.mailTitle}>{t('chat.sendMail')}.</span>
       <>
         <TextField
           required
           fullWidth
-          key={CHAT[language].name}
-          label={CHAT[language].name}
+          key={t('common.name')}
+          label={t('common.name')}
           variant='outlined'
           name='firstName'
           size='small'
@@ -109,8 +110,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
         <TextField
           required
           fullWidth
-          key={CHAT[language].email}
-          label={CHAT[language].email}
+          key={t('common.email')}
+          label={t('common.email')}
           variant='outlined'
           name='email'
           size='small'
@@ -124,8 +125,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
         />
         <TextField
           fullWidth
-          key={CHAT[language].msgText}
-          label={CHAT[language].msgText}
+          key={t('chat.msgText')}
+          label={t('chat.msgText')}
           variant='outlined'
           name='message'
           size='small'
@@ -143,11 +144,11 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
       </>
       <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
         <Alert onClose={handleClose} severity='success'>
-          {CHAT[language].thanksMsg}
+          {t('chat.thanksMsg')}
         </Alert>
       </Snackbar>
       <Button className={style.btnSend} onClick={handleValidForms}>
-        {CHAT[language].sendBtn}
+        {t('buttons.sendBtn')}
       </Button>
     </form>
   );

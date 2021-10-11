@@ -7,39 +7,38 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '0 auto'
   },
   formControl: {
-    width: 260,
-    marginLeft: '2%',
-    marginBottom: '3%',
+    width: 600,
+    marginBottom: 10,
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '100%',
-      margin:0
+      width: '89%',
+      margin: 0
     }
   },
   paymentSelect: {
     height: 50,
-    width: 280,
+    width: '100%',
     marginBottom: 10,
     '@media (max-width: 768px)': {
-      width: '100%',
-    },
+      width: '100%'
+    }
   },
-  contactInfoTitle: ({ isLightTheme }) => ({
-    fontSize: 18,
-    fontWeight: 400,
-    color: isLightTheme ? '#4E4E4E' : '#fffff',
-    width: '40%',
-    marginLeft: '2%',
+  title: ({ isLightTheme }) => ({
+    fontSize: 23,
+    fontWeight: 700,
+    color: isLightTheme ? '#1D1C1C' : '#ffffff',
     '@media (max-width: 920px)': {
       width: '100%'
     }
   }),
-  paymentTitle: {
-    marginTop: '3%'
-  },
   contactInfoAdditional: {
     fontSize: 13,
-    marginLeft: '2%'
+    marginLeft: '2%',
+    width: 600,
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      width: '80%'
+    }
   },
   orderCommentTitle: {
     fontSize: 18,
@@ -50,30 +49,30 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'flex-start',
     width: '100%',
-    marginLeft: 10,
+    flexDirection: 'column',
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '100%',
-      margin:0
+      width: '80%',
+      margin: 0
     }
-  },
-  a: {
-    margin: 0
   },
   contactPaymentInfo: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '1%'
+    marginLeft: '10%'
   },
-  checkoutFormContainer: {
+  checkoutFormContainer: ({ isLightTheme }) => ({
     display: 'flex',
+    fontFamily: 'Open Sans',
+    color: isLightTheme ? '#242424' : '#FEFEFE',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     width: '100%',
+    marginBottom: 10,
     '@media (max-width: 1150px)': {
       flexDirection: 'column'
     }
-  },
+  }),
   userInfoContainer: {
     width: '60%',
     '@media (max-width: 768px)': {
@@ -82,37 +81,33 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   contactInfoWrapper: {
     display: 'flex',
+    marginLeft: '10%',
     flexDirection: 'column',
-    width: '100%',
-    alignItems: 'flex-start',
-    '@media (max-width: 768px)': {
-      width: '100%'
-    }
+    width: '100%'
   },
   error: {
     color: '#e60000',
     marginLeft: '3%'
   },
   textField: {
-    width: 300,
-    margin: 10,
+    width: 600,
     '@media (max-width: 768px)': {
-      width: '100%',
-      margin:"10px 0px 10px"
+      width: '100%'
     }
   },
   textAreaField: {
-    width: 500,
-    marginLeft: '2%',
+    width: 600,
     '@media (max-width: 768px)': {
-      width: '100%',
+      width: '89%',
       margin: 0
     }
   },
-  submitInfo:{
-        '@media (max-width: 768px)': {
-      width: '100%',
-      margin: 0
+  submitInfo: {
+    marginLeft: '6%',
+    width: 334,
+    '@media (max-width: 768px)': {
+      width: '80%',
+      marginLeft: '10%'
     }
   },
   submitBtn: {
@@ -161,17 +156,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   totalSumValue: {
     justifyContent: 'flex-end'
   },
-  goods: ({ isLightTheme }) => ({
-    fontSize: 13,
-    transition: '0.2s',
-    '&:hover': {
-      transform: 'scale(1.05)',
-      transition: '0.2s'
-    },
-    width: '55%'
-  }),
-  delivery:{
-    width:'100%',
+  delivery: {
+    width: '100%'
   },
   deliveryContainer: {
     display: 'flex',
@@ -182,20 +168,23 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 1150px)': {
       width: '100%',
       marginTop: '2%'
-    },
-    marginRight: '2%'
+    }
   },
   inputData: {
     display: 'flex',
     flexDirection: 'column',
-    '@media (max-width: 768px)': {
-      width: '100%'
-    }
+    width: '100%',
+    marginBottom: 10
   },
   checkoutTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%'
+    marginLeft: '6%',
+    width: '100%',
+    '@media (max-width: 768px)': {
+      marginLeft: '10%',
+      width: '89%'
+    }
   },
   checkoutTitleInfoData: {
     display: 'flex',
@@ -216,26 +205,32 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   checkoutTitle: ({ isLightTheme }) => ({
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 400,
+    textAlign: 'center',
     color: isLightTheme ? '#000000' : '#ffffff',
-    margin: '10px 0 10px 2%',
     width: '100%',
-    '@media (max-width: 920px)': {
+    '@media (max-width: 768px)': {
       width: '100%'
     }
   }),
   checkoutYourOrderTitleData: {
     display: 'flex',
     flexDirection: 'column',
-    width: '100%'
+    width: 370,
+    marginLeft: '6%',
+    '@media (max-width: 768px)': {
+      width: '89%',
+      marginLeft: '10%'
+    }
   },
   checkoutTitleLine: {
-    width: '80%',
+    width: '90%',
     background: '#636262',
     height: 1,
-    '@media (max-width: 920px)': {
-      width: '100%'
+    marginTop: 15,
+    '@media (max-width: 768px)': {
+      width: '90%'
     }
   },
 

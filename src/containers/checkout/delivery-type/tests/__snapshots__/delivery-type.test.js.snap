@@ -1,0 +1,364 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeliveryType /> should match snapshot 1`] = `
+<div>
+  <div>
+    <h3>
+      checkout.checkoutTitles.delivery
+    </h3>
+    <WithStyles(ForwardRef(FormControl))
+      classes={
+        Object {
+          "root": undefined,
+        }
+      }
+      component="fieldset"
+    >
+      <ForwardRef(RadioGroup)
+        aria-label="Delivery type"
+        name="delivery-type"
+        onChange={[Function]}
+        onClick={[Function]}
+        value="SELFPICKUP"
+      >
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="0"
+          label="c"
+          value="0"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="1"
+          label="h"
+          value="1"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="2"
+          label="e"
+          value="2"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="3"
+          label="c"
+          value="3"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="4"
+          label="k"
+          value="4"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="5"
+          label="o"
+          value="5"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="6"
+          label="u"
+          value="6"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="7"
+          label="t"
+          value="7"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="8"
+          label="."
+          value="8"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="9"
+          label="d"
+          value="9"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="10"
+          label="e"
+          value="10"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="11"
+          label="l"
+          value="11"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="12"
+          label="i"
+          value="12"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="13"
+          label="v"
+          value="13"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="14"
+          label="e"
+          value="14"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="15"
+          label="r"
+          value="15"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="16"
+          label="y"
+          value="16"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="17"
+          label="T"
+          value="17"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="18"
+          label="y"
+          value="18"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="19"
+          label="p"
+          value="19"
+        />
+        <WithStyles(ForwardRef(FormControlLabel))
+          classes={
+            Object {
+              "label": undefined,
+            }
+          }
+          control={
+            <ForwardRef(WithStyles)
+              color="default"
+              size="small"
+            />
+          }
+          key="20"
+          label="e"
+          value="20"
+        />
+      </ForwardRef(RadioGroup)>
+    </WithStyles(ForwardRef(FormControl))>
+  </div>
+</div>
+`;

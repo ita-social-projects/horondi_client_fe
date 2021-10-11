@@ -1,25 +1,21 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { theme } from '../../../../components/app/app-theme/app.theme';
+import shallow from 'enzyme/build/shallow';
 import FilledWishlist from '../filled-wishlist';
 import WishlistItem from '../../wishlist-item/wishlist-item';
 import items from './mockedItems';
 
-Enzyme.configure({ adapter: new Adapter() });
+jest.mock('../../wishlist.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('react-redux');
+jest.mock('../../../../services/local-storage.service');
 
 const state = {
   language: 1,
   currency: 1
 };
-
-const themeValue = theme('light');
-jest.mock('react-redux');
-
 const dispatch = jest.fn();
 
 useDispatch.mockImplementation(() => dispatch);
@@ -29,13 +25,7 @@ let wrapper;
 
 describe('Wishlist component tests', () => {
   beforeEach(() => {
-    wrapper = mount(
-      <BrowserRouter>
-        <ThemeProvider theme={themeValue}>
-          <FilledWishlist items={items} />
-        </ThemeProvider>
-      </BrowserRouter>
-    );
+    wrapper = shallow(<FilledWishlist items={items} />);
   });
 
   afterEach(() => {

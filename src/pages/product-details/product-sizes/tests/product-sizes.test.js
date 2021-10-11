@@ -1,7 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow } from 'enzyme';
 import ProductSizes from '../product-sizes';
 
 jest.mock('../product-sizes.styles', () => ({
@@ -9,7 +7,6 @@ jest.mock('../product-sizes.styles', () => ({
 }));
 
 jest.mock('react-redux');
-Enzyme.configure({ adapter: new Adapter() });
 
 const size = {
   _id: '1'

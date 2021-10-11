@@ -1,11 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow } from 'enzyme';
 import ProductInfo from '../product-info';
 
 jest.mock('react-redux');
-Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../product-info.styles', () => ({
   useStyles: () => ({})

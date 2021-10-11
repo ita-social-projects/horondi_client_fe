@@ -2,7 +2,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';
-import Enzyme,{ shallow, mount, configure } from 'enzyme';
+import { mount, configure } from 'enzyme';
 import Button from '@material-ui/core/Button';
 
 import { theme } from '../../../../components/app/app-theme/app.theme';

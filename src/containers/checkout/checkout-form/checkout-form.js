@@ -10,6 +10,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import DeliveryType from '../delivery-type/delivery-type';
 
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
@@ -120,18 +121,18 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
     <div>
       <form onSubmit={handleSubmit} className={styles.root}>
         <Grid item className={styles.checkoutFormContainer}>
-          <Grid item className={styles.userInfoContainer}>
-            <div className={styles.checkoutTitleInfo}>
-              <div className={styles.checkoutTitleInfoData}>
-                <Link to={pathToCart} className={styles.backBtn}>
-                  <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
-                </Link>
-                <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
-              </div>
-              <div className={styles.checkoutTitleLine} />
+          <div className={styles.checkoutTitleInfo}>
+            <div className={styles.checkoutTitleInfoData}>
+              <Link to={pathToCart} className={styles.backBtn}>
+                <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
+              </Link>
             </div>
+            <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
+            <div className={styles.checkoutTitleLine} />
+          </div>
+          <Grid item className={styles.userInfoContainer}>
             <div className={styles.contactInfoWrapper}>
-              <h2 className={styles.contactInfoTitle}>{CHECKOUT_TITLES[language].contactInfo}</h2>
+              <h3 className={styles.title}>{CHECKOUT_TITLES[language].contactInfo}</h3>
               <div className={styles.contactInfoFields}>
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
@@ -177,10 +178,19 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                 ))}
               </div>
             </div>
+            <DeliveryType language={language} />
+            <Delivery
+              deliveryType={deliveryType}
+              language={language}
+              isLightTheme={isLightTheme}
+              values={values}
+              errors={errors}
+              touched={touched}
+              handleChange={handleChange}
+              setFieldValue={setFieldValue}
+            />
             <div className={styles.contactPaymentInfo}>
-              <h2 className={`${styles.contactInfoTitle} ${styles.paymentTitle}`}>
-                {CHECKOUT_TITLES[language].payment}
-              </h2>
+              <h2 className={styles.title}>{CHECKOUT_TITLES[language].payment}</h2>
               <FormControl
                 error={touched.paymentMethod && !!errors.paymentMethod}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
@@ -211,7 +221,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               </FormControl>
             </div>
             <div className={styles.contactPaymentInfo}>
-              <h2 className={styles.contactInfoTitle}>{CHECKOUT_TITLES[language].orderComment}</h2>
+              <h2 className={styles.title}>{CHECKOUT_TITLES[language].orderComment}</h2>
               <div>
                 <TextField
                   size={TEXT_FIELD_SIZE.SMALL}
@@ -238,19 +248,9 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
           </Grid>
           <Grid item className={styles.deliveryContainer}>
             <div className={styles.checkoutYourOrderTitleData}>
-              <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].yourOrderTitle}</h2>
+              <h2 className={styles.title}>{CHECKOUT_TITLES[language].yourOrderTitle}</h2>
               <div className={styles.checkoutTitleLine} />
             </div>
-            <Delivery
-              deliveryType={deliveryType}
-              language={language}
-              isLightTheme={isLightTheme}
-              values={values}
-              errors={errors}
-              touched={touched}
-              handleChange={handleChange}
-              setFieldValue={setFieldValue}
-            />
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
                 <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>

@@ -1,0 +1,14 @@
+{
+    "wishlistTitles": {
+        "empty": "Ваш список уподобань порожній",
+        "filled": "Список уподобань"
+    },
+    "wishlistButtons": {
+        "empty": "Обрати зараз",
+        "toItem": "Перейти до товару"
+    },
+    "wishlistTableFields": {
+        "item": "ПРОДУКТ",
+        "price": "ЦІНА"
+    }
+}

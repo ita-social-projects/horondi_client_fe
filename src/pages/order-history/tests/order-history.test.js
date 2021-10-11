@@ -22,6 +22,6 @@ useSelector.mockImplementation(() => state);
 
 describe('OrderHistory component', () => {
   it('should render', () => {
-    const component = shallow(<OrderHistory />);
+    shallow(<OrderHistory />);
   });
 });

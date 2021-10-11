@@ -22,6 +22,6 @@ useSelector.mockImplementation(() => state);
 
 describe('NewPassword component', () => {
   it('should render', () => {
-    const component = shallow(<NewPassword />);
+    shallow(<NewPassword />);
   });
 });

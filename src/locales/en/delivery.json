@@ -6,5 +6,7 @@
   "addressHorondi": "Lviv, st. Zavodska,31",
   "selfPickup": "Self pick-up",
   "saturday": "Sat:  ",
-  "sunday": "Sun:  "
+  "sunday": "Sun:  ",
+  "noOneCity": "City not found",
+  "noOneDepartment": "Department not found"
 }

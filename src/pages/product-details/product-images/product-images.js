@@ -82,7 +82,6 @@ const ProductImages = ({ images }) => {
 
   const sideImages = imagesSet
     .slice(1, imagesSet.length)
-    .filter((img, i) => i < 3)
     .map((image, i) => (
       <img
         className={styles.sideImage}
@@ -109,7 +108,7 @@ const ProductImages = ({ images }) => {
         rightArrowTitle={t('common.next')}
       />
       <div className={styles.images}>
-        <div>{sideImages}</div>
+        <div className={styles.additionalImagePreview}>{sideImages}</div>
         <div className={styles.imagePreviewContainer}>
           <ZoomImage images={images} />
         </div>

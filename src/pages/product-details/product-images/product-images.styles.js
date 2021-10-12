@@ -42,5 +42,23 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 500px)': {
       display: 'none'
     }
+  },
+
+  additionalImagePreview: {
+    overflow: 'hidden',
+    overflowY: 'scroll',
+    scrollBehavior: 'smooth',
+    maxHeight: '500px',
+    '&::-webkit-scrollbar': {
+      width: '0.4em',
+      borderRadius: '0.2em'
+    },
+    '&::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.4)',
+      borderRadius: '0.2em'
+    }
   }
 }));

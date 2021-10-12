@@ -46,42 +46,42 @@ const ProductInfo = ({ price, product }) => {
       </div>
       <div className={styles.details}>
         <Detail
-          subtitle={`${t('productInfo.productDescription.description')}: `}
+          subtitle={`${t('product.productDescription.description')}: `}
           description={parse(description[language].value)}
         />
         <Detail
-          subtitle={t('productInfo.productDescription.mainMaterial')}
+          subtitle={t('product.productDescription.mainMaterial')}
           description={` - ${mainMaterial.material.name[language].value}`}
         />
         <Detail
-          subtitle={t('productInfo.productDescription.innerMaterial')}
+          subtitle={t('product.productDescription.innerMaterial')}
           description={` - ${innerMaterial.material.name[language].value}`}
         />
         <Detail
-          subtitle={t('productInfo.productDescription.bottomMaterial')}
+          subtitle={t('product.productDescription.bottomMaterial')}
           description={` - ${bottomMaterial.material.name[language].value}`}
         />
         {strapLengthInCm ? (
           <Detail
-            subtitle={t('productInfo.productDescription.strapLengthInCm')}
+            subtitle={t('product.productDescription.strapLengthInCm')}
             description={`- ${strapLengthInCm}`}
           />
         ) : null}
         {currentVolume && currentWeight ? (
           <div>
             <Detail
-              subtitle={t('productInfo.weight.volumeLabel')}
+              subtitle={t('product.weight.volumeLabel')}
               description={` - ${currentVolume}`}
             />
             <Detail
-              subtitle={t('productInfo.weight.weightLabel')}
+              subtitle={t('product.weight.weightLabel')}
               description={` - ${currentWeight}`}
             />
           </div>
         ) : null}
       </div>
       <div className={styles.priceContainer}>
-        <span className={styles.subtitle}>{t('productInfo.productPrice')}: </span>
+        <span className={styles.subtitle}>{t('product.productPrice')}: </span>
         <span data-cy='price' className={styles.price}>
           {Math.round(currentPrice[currency]?.value)}
           {'\u00A0'}
@@ -89,9 +89,9 @@ const ProductInfo = ({ price, product }) => {
         </span>
       </div>
       <div className={styles.look}>
-        <span className={styles.subtitle}>{t('productInfo.color')}:</span>
+        <span className={styles.subtitle}>{t('product.color')}:</span>
         <div className={styles.colorCircle} />
-        <span className={styles.subtitle}>{t('productInfo.pattern')}:</span>
+        <span className={styles.subtitle}>{t('product.pattern')}:</span>
         <div className={styles.patternCircle} />
         <br />
       </div>

@@ -48,20 +48,20 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes}) => {
   );
 
   const wishlistTip = isWishful
-    ? t('productSubmit.tooltips.removeWishful')
-    : t('productSubmit.tooltips.addWishful');
+    ? t('product.tooltips.removeWishful')
+    : t('product.tooltips.addWishful');
 
   const cartTootipTitle = isItemInCart
-    ? t('productSubmit.tooltips.itemInCart')
-    : t('productSubmit.tooltips.itemInCartAlready');
+    ? t('product.tooltips.itemInCart')
+    : t('product.tooltips.itemInCartAlready');
 
   const cartButtonLabel = isItemInCart
-    ? t('productSubmit.pdpButtons.inCart')
-    : t('productSubmit.pdpButtons.cartButton');
+    ? t('product.pdpButtons.inCart')
+    : t('product.pdpButtons.cartButton');
 
   const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
-  const toastMessages = t('productSubmit.toastMessage');
+  const toastMessages = t('product.toastMessage');
 
   const onWishfulHandler = () => {
     const {
@@ -137,7 +137,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes}) => {
         </Button>
       </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('productSubmit.pdpButtons.buyButton')}
+        {t('product.pdpButtons.buyButton')}
       </Button>
     </div>
   );

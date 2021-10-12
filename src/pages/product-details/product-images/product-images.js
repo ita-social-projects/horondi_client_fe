@@ -91,7 +91,7 @@ const ProductImages = ({ images }) => {
         className={styles.sideImage}
         src={image.src}
         key={i}
-        alt={t('productImages.imgAltInfo')}
+        alt={t('product.imgAltInfo')}
         onClick={() => openImage(i + 1)}
         data-cy='test'
       />
@@ -107,9 +107,9 @@ const ProductImages = ({ images }) => {
         onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
         onClose={() => setIsOpen(false)}
-        closeBtnTitle={t('productImages.imgsViewer.close')}
-        leftArrowTitle={t('productImages.imgsViewer.prev')}
-        rightArrowTitle={t('productImages.imgsViewer.next')}
+        closeBtnTitle={t('product.imgsViewer.close')}
+        leftArrowTitle={t('product.imgsViewer.prev')}
+        rightArrowTitle={t('product.imgsViewer.next')}
       />
       <div className={styles.images}>
         <div>{sideImages}</div>

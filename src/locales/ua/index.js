@@ -24,6 +24,13 @@ import sidebar from './sidebar.json';
 import chat from './chat.json';
 import delivery from './delivery.json';
 import footer from './footer.json';
+import product from './product.json';
+import commentDialog from './commentDialog';
+import replyCommentsItem from './replyCommentsItem';
+import replyForm from './replyForm';
+import commentsItem from './commentsItem';
+import comments from './comments';
+import similarProducts from './similarProducts';
 
 export default {
   translations: {
@@ -52,6 +59,13 @@ export default {
     sidebar,
     chat,
     delivery,
-    footer
+    footer,
+    product,
+    commentDialog,
+    replyCommentsItem,
+    replyForm,
+    commentsItem,
+    comments,
+    similarProducts
   }
 };

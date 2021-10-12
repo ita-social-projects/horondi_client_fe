@@ -1,4 +1,34 @@
 {
+    "imgAltInfo": "Фото продукту",
+    "imgsViewer" : {
+        "prev": "Попередній",
+        "next": "Наступний",
+        "close": "Закрити"
+    },
+    "color": "Колір",
+    "pattern": "Візерунок",
+    "productPrice": "Ціна",
+    "productDescription": {
+        "description": "Опис продукту",
+        "mainMaterial": "Основна тканина",
+        "innerMaterial": "Внутрішній матеріал",
+        "bottomMaterial": "Матеріал низу",
+        "strapLengthInCm": "Довжина лямок(см)"
+    },
+    "weight": {
+        "weightLabel": "Вага(кг)",
+        "volumeLabel": "Об'єм(л)"
+    },
+    "priceFrom": {
+        "value": "від"
+    },
+    "sizeNotAvailable": {
+        "lang": "uk",
+        "value": "Товар недоступний"
+    },
+    "size": {
+        "carrentSize": "Розмір"
+    },
     "pdpButtons": {
         "cartButton": "В кошик",
         "buyButton": "Купити зараз",

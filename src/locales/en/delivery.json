@@ -8,5 +8,6 @@
   "saturday": "Sat:  ",
   "sunday": "Sun:  ",
   "noOneCity": "City not found",
-  "noOneDepartment": "Department not found"
+  "noOneDepartment": "Department not found",
+  "deliveryAddress": "Delivery Address"
 }

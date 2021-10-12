@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,20 +9,17 @@ import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import { getImage } from '../../../utils/imageLoad';
 import { IMG_URL } from '../../../configs';
-
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../const/routes';
 import { getCurrencySign } from '../../../utils/currency';
-import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 
 const ProductListItem = ({ product }) => {
-  const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
-    language: Language.language,
+  const { t, i18n } = useTranslation();
+  const { currency, isLightTheme } = useSelector(({ Currency, Theme }) => ({
     currency: Currency.currency,
     isLightTheme: Theme.lightMode
   }));
-
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const { pathToProducts } = routes;
   useEffect(() => {
@@ -36,10 +34,9 @@ const ProductListItem = ({ product }) => {
     const availableSizes = product.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
-
     return availableSizes
-      ? PRICE_FROM[language].value + availableSizes[0].price[currency].value
-      : SIZE_NOT_AVAILABLE[language].value;
+      ? t('common.from') + availableSizes[0].price[currency].value
+      : t('productListPage.sizeNotAvailable');
   };
 
   const styles = useStyles({ image, isLightTheme });
@@ -49,7 +46,7 @@ const ProductListItem = ({ product }) => {
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>
-            {product.name[language].value}
+            {i18n.language === 'ua' ? product.name[0].value : product.name[1].value}
             <div>
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />

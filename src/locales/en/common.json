@@ -6,6 +6,14 @@
   "seeMore": "See more",
   "hide": "Hide",
   "details": "Details",
+  "model": "Model",
+  "basis": "Basis",
+  "pattern": "Pattern",
+  "bottom": "Bottom",
+  "size": "Size",
+  "defaultPrice": "Default item price:",
+  "totalPrice": "Total item price:",
+  "endPrice": "End price:",
   "enterNew": "Enter new password",
   "newPass": "New password",
   "confirmPass": "Confirm password",
@@ -13,5 +21,18 @@
   "buttons": {
     "confirm": "Yes",
     "cancel": "No"
-  }
+  },
+  "to": "to ",
+  "from": "from ",
+  "price": "Price Range",
+  "search": "Search",
+  "showFilters": "Show Filters",
+  "color": "Colors",
+  "filter": "Filter",
+  "clearFilter": "Clear Filter",
+  "sortBy": "Sort by:",
+  "popular": "Hot Products",
+  "model": "Model",
+  "category": "Category",
+  "pattern": "Pattern"
 }

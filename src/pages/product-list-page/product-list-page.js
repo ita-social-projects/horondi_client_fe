@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
@@ -13,18 +14,17 @@ import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
 import { getFiltredProducts, setCurrentPage } from '../../redux/products/products.actions';
-import {
-  DRAWER_PERMANENT,
-  DRAWER_TEMPORARY,
-  PRODUCT_NOT_FOUND,
-  SHOW_FILTER_BUTTON_TEXT,
-  TEMPORARY_WIDTHS
-} from '../../translations/product-list.translations';
 import { Loader } from '../../components/loader/loader';
 import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
-import { URL_QUERIES_NAME } from '../../configs';
+import {
+  URL_QUERIES_NAME,
+  TEMPORARY_WIDTHS,
+  DRAWER_PERMANENT,
+  DRAWER_TEMPORARY
+} from '../../configs';
 
-const ProductListPage = ({ model, width }) => {
+const ProductListPage = ({ width }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
@@ -34,7 +34,6 @@ const ProductListPage = ({ model, width }) => {
   const {
     filterMenuStatus,
     loading,
-    language,
     products,
     pagesCount,
     currentPage,
@@ -45,10 +44,9 @@ const ProductListPage = ({ model, width }) => {
     filterData,
     sortByPopularity,
     filterStatus
-  } = useSelector(({ Theme, Language, Products }) => ({
+  } = useSelector(({ Theme, Products }) => ({
     filterMenuStatus: Theme.filterMenuStatus,
     loading: Products.loading,
-    language: Language.language,
     products: Products.products,
     pagesCount: Products.pagesCount,
     sortByRate: Products.sortByRate,
@@ -83,7 +81,6 @@ const ProductListPage = ({ model, width }) => {
     dispatch(setFilterMenuStatus(!filterMenuStatus));
   };
   const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
-
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
   const changeHandler = (e, value) => {
@@ -126,7 +123,7 @@ const ProductListPage = ({ model, width }) => {
       </div>
       <div className={styles.filterButtonBlock}>
         <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
-          {SHOW_FILTER_BUTTON_TEXT[language].value}
+          {t('productListPage.showFilterButtonText')}
         </Button>
       </div>
       <div className={styles.list}>
@@ -156,7 +153,7 @@ const ProductListPage = ({ model, width }) => {
           </div>
         ) : (
           <div className={styles.defaultBlock}>
-            <div>{PRODUCT_NOT_FOUND[language].value}</div>
+            <div>{t('productListPage.productNotFound')}</div>
             <div>
               <MoodBadIcon className={styles.defaultIcon} />
             </div>

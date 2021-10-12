@@ -7,10 +7,10 @@ import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './products-filters-container.styles';
-import { CLEAR_FILTER_BUTTON_TEXT } from '../../translations/product-list.translations';
 
 const ProductsFiltersContainer = ({
   productFilter,
@@ -23,13 +23,11 @@ const ProductsFiltersContainer = ({
   labels
 }) => {
   const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
   const dispatch = useDispatch();
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const [isListOpen, setIsListOpen] = useState(true);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (searchParams.get(labels)) {
@@ -46,7 +44,9 @@ const ProductsFiltersContainer = ({
     setIsListOpen(!isListOpen);
   };
   const checkCategory = (category) => {
-    const categoryName = categories.filter((element) => element.name[language].value === category);
+    const categoryName = categories.filter(
+      (element) => element.name[i18n.language === 'ua' ? 0 : 1].value === category
+    );
     if (categoryName.length && productFilter.find((filter) => filter === categoryName[0]._id)) {
       return true;
     }
@@ -61,7 +61,7 @@ const ProductsFiltersContainer = ({
         <List>
           {productFilter.length ? (
             <ListItem onClick={clearFilter} className={styles.clearFilter}>
-              {CLEAR_FILTER_BUTTON_TEXT[language].value}
+              {t('common.clearFilter')}
               <CloseIcon fontSize='small' />
             </ListItem>
           ) : null}

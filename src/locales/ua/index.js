@@ -14,9 +14,13 @@ import common from './common.json';
 import contacts from './contacts.json';
 import errorPage from './errorPage.json';
 import confirmation from './confirmation.json';
+import buttons from './buttons.json';
 import newPassword from './new-password.json';
 import orderHistory from './order-history.json';
 import notFoundPage from './not-found-page.json';
+import productListPage from './product-list-page.json';
+import searchBar from './searchBar.json';
+import sidebar from './sidebar.json';
 
 export default {
   translations: {
@@ -34,10 +38,14 @@ export default {
     modal,
     productList,
     contacts,
+    buttons,
     errorPage,
     confirmation,
     newPassword,
     orderHistory,
-    notFoundPage
+    notFoundPage,
+    productListPage,
+    searchBar,
+    sidebar
   }
 };

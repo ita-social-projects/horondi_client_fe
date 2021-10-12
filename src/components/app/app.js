@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
+import { ThemeContext } from '../../context/theme-context';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
 import SearchBarList from '../../containers/search-bar-list';
@@ -21,6 +22,7 @@ import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLightModeAndLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
+  const [appTheme, setAppTheme] = useState(true);
   const { lightMode, location } = useSelector(selectLightModeAndLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
@@ -46,16 +48,18 @@ const App = () => {
   }, [dispatch, productsCount]);
 
   useEffect(() => {
-    dispatch(setThemeMode(themeMode));
-  }, [lightMode, dispatch, themeMode]);
+    setAppTheme(themeMode);
+  });
 
   return (
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>
-        <CssBaseline />
-        <Routes />
-        <Chat />
-        <SearchBarList />
+        <ThemeContext.Provider value={appTheme}>
+          <CssBaseline />
+          <Routes />
+          <Chat />
+          <SearchBarList />
+        </ThemeContext.Provider>
       </ThemeProvider>
     </div>
   );

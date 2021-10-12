@@ -1,0 +1,16 @@
+{
+    "checkoutPayment": {
+        "card": "Картою",
+        "cash": "Готівкою"
+    },
+    "checkoutTitles": {
+        "delivery": "Доставка"
+    },
+    "deliveryType": {
+        "novaPost": "Нова пошта",
+        "ukrPost": "Укрпошта",
+        "selfPickup": "Самовивіз",
+        "novaPostCourier": "Кур'єр нової пошти",
+        "ukrPostCourier": "Кур'єр укрпошти"
+    }
+}

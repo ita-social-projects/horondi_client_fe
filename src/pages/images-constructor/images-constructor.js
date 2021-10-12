@@ -1,10 +1,10 @@
 import React, { useRef, useMemo, useLayoutEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
 import { mergeImages } from 'horondi_merge_images';
 
 import { useStyles } from './images-constructor.style';
-import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
 import { useConstructor } from './hooks';
@@ -22,21 +22,11 @@ import ConstructorSubmit from './constructor-sumbit';
 const ImagesConstructor = () => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
+  const { t } = useTranslation();
   const { values, images, prices, methods, language, currency } = useConstructor();
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-  const {
-    MODEL,
-    BASIC,
-    PATTERN,
-    BOTTOM,
-    SIZE,
-    DEFAULT_PRICE,
-    TOTAL_PRICE,
-    END_PRICE,
-    MORE_OPTIONS
-  } = CONSTRUCTOR_TITLES[language];
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {
@@ -112,7 +102,7 @@ const ImagesConstructor = () => {
           >
             {availableModels}
           </NativeSelect>
-          <FormHelperText>{MODEL}</FormHelperText>
+          <FormHelperText>{t('common.model')}</FormHelperText>
         </FormControl>
       </div>
 
@@ -125,7 +115,7 @@ const ImagesConstructor = () => {
             >
               {availableBasics}
             </NativeSelect>
-            <FormHelperText>{BASIC}</FormHelperText>
+            <FormHelperText>{t('common.basis')}</FormHelperText>
           </FormControl>
           <FormControl>
             <NativeSelect
@@ -134,7 +124,7 @@ const ImagesConstructor = () => {
             >
               {availablePatterns}
             </NativeSelect>
-            <FormHelperText>{PATTERN}</FormHelperText>
+            <FormHelperText>{t('common.pattern')}</FormHelperText>
           </FormControl>
           <FormControl>
             <NativeSelect
@@ -143,7 +133,7 @@ const ImagesConstructor = () => {
             >
               {availableBottoms}
             </NativeSelect>
-            <FormHelperText>{BOTTOM}</FormHelperText>
+            <FormHelperText>{t('common.bottom')}</FormHelperText>
           </FormControl>
           <FormControl>
             <NativeSelect
@@ -152,10 +142,10 @@ const ImagesConstructor = () => {
             >
               {availableSizes}
             </NativeSelect>
-            <FormHelperText>{SIZE}</FormHelperText>
+            <FormHelperText>{t('common.size')}</FormHelperText>
           </FormControl>
           <Button className={styles.button} onClick={showModal}>
-            {MORE_OPTIONS}
+            {t('buttons.moreOptions')}
           </Button>
         </form>
         <div className={styles.imageContainer}>
@@ -169,11 +159,11 @@ const ImagesConstructor = () => {
           />
         </div>
         <div className={styles.pricesInfoWrapper}>
-          <h2 className={styles.headerWrapper}>{TOTAL_PRICE}</h2>
+          <h2 className={styles.headerWrapper}>{t('common.totalPrice')}</h2>
           <div className={styles.textWrapper}>
             <ul>
               <li className={styles.priceItem}>
-                <span>{DEFAULT_PRICE}</span>
+                <span>{t('common.defaultPrice')}</span>
                 <span>
                   {prices.DEFAULT_PRICE_VALUE}
                   {currentCurrencyValue(language, currency)}
@@ -203,7 +193,7 @@ const ImagesConstructor = () => {
             </ul>
           </div>
           <h2 className={styles.headerWrapper}>
-            {END_PRICE}
+            {t('common.endPrice')}
             <span>
               {constructorEndPrice(prices.priceTotal)}
               {currentCurrencyValue(language, currency)}

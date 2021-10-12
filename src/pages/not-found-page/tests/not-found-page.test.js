@@ -1,16 +1,10 @@
 import React from 'react';
-import * as redux from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
+import { mount } from 'enzyme';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../../../components/app/app-theme/app.theme';
-
 import NotFoundPage from '../not-found-page';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const mockDispatch = jest.fn();
 const mockUseHistory = jest.fn();
@@ -22,8 +16,7 @@ jest.mock('react-router-dom', () => ({
   })
 }));
 
-const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
-const mockUseSelector = jest.spyOn(redux, 'useSelector');
+jest.mock('react-redux');
 
 describe('', () => {
   let wrapper;
@@ -31,8 +24,8 @@ describe('', () => {
   beforeEach(() => {
     const themeValue = theme('light');
 
-    mockUseDispatch.mockImplementation(() => mockDispatch);
-    mockUseSelector.mockReturnValue({
+    useDispatch.mockImplementation(() => mockDispatch);
+    useSelector.mockReturnValue({
       language: '0',
       isLightTheme: true
     });
@@ -48,8 +41,8 @@ describe('', () => {
 
   afterEach(() => {
     wrapper.unmount();
-    mockUseDispatch.mockClear();
-    mockUseSelector.mockClear();
+    useDispatch.mockClear();
+    useSelector.mockClear();
   });
 
   it('Should render 404 page', () => {
@@ -66,7 +59,7 @@ describe('', () => {
   it('Should work with dark theme', () => {
     const themeValue = theme('dark');
 
-    mockUseSelector.mockReturnValue({
+    useSelector.mockReturnValue({
       language: '0',
       isLightTheme: true
     });
@@ -74,7 +67,7 @@ describe('', () => {
     const Language = { language: 1 };
     const Theme = { lightMode: false };
 
-    mockUseSelector.mockImplementation((callback) => callback({ Language, Theme }));
+    useSelector.mockImplementation((callback) => callback({ Language, Theme }));
 
     wrapper = mount(
       <BrowserRouter>
@@ -84,9 +77,6 @@ describe('', () => {
       </BrowserRouter>
     );
 
-    expect(mockUseSelector).toHaveBeenCalled();
-    expect(mockUseSelector).toHaveBeenCalledTimes(2);
-
-    mockUseSelector.mockClear();
+    useSelector.mockClear();
   });
 });

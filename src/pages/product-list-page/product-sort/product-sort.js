@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './product-sort.styles';
@@ -9,17 +10,11 @@ import {
   setSortByRate,
   setSortByPopularity
 } from '../../../redux/products/products.actions';
-import {
-  SORT_BY_SELECT_OPTIONS,
-  SORT_BY_TEXT
-} from '../../../translations/product-list.translations';
-import { URL_QUERIES_NAME } from '../../../configs';
+import { URL_QUERIES_NAME, SORT_BY_SELECT_OPTIONS } from '../../../configs';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const ProductSort = () => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { t, i18n } = useTranslation();
   const styles = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -68,15 +63,14 @@ const ProductSort = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const sortByText = SORT_BY_TEXT[language].value;
-
+  const sortByText = t('common.sortBy');
   const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
     <option
       key={lang[1].value}
       value={JSON.stringify(optionValue)}
       selected={optionValue.name === query}
     >
-      {lang[language].value}
+      {i18n.language === 'ua' ? lang[0].value : lang[1].value}
     </option>
   ));
 

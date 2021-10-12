@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
-
+import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import Loader from '../../components/loader';
-import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
 import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 
 const Contacts = ({ fromCheckout }) => {
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
   const [mapUrl, setmMapUrl] = useState('');
+  const { t } = useTranslation();
 
   const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
   useEffect(() => {
@@ -43,12 +44,11 @@ const Contacts = ({ fromCheckout }) => {
   };
 
   const cardVisibilityStyles = imageStatus && imageVisibility;
-
   const contactsDisplay = contacts.map((contact) => (
     <div key={contact._id} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.mapContainer}>
-          <Tooltip title={CONTACTS_PAGE_TITLES[language].showOnGoogleMaps}>
+          <Tooltip title={t('contacts.pageTitles.showOnGoogleMaps')}>
             <Card className={!cardVisibilityStyles && styles.mapImageInactive}>
               <a
                 target='_blank'
@@ -61,7 +61,7 @@ const Contacts = ({ fromCheckout }) => {
                   onError={onLoadImageError}
                   onLoad={onImageLoad}
                   src={mapUrl}
-                  alt={CONTACTS_PAGE_TITLES[language].location}
+                  alt={t('contacts.pageTitles.location')}
                 />
               </a>
             </Card>
@@ -69,11 +69,11 @@ const Contacts = ({ fromCheckout }) => {
         </div>
         <div className={styles.contacts}>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].phone}</span>
+            <span className={styles.contactName}>{t('contacts.pageTitles.phone')}</span>
             <span>+{contact.phoneNumber}</span>
           </div>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].schedule}</span>
+            <span className={styles.contactName}>{t('contacts.pageTitles.schedule')}</span>
             <div className={styles.schedule}>
               {contact.openHours[language].value.split('|').map((el) => {
                 const i = language ? 4 : 3;
@@ -86,8 +86,8 @@ const Contacts = ({ fromCheckout }) => {
             </div>
           </div>
           <div className={styles.contactsItem}>
-            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].address}</span>
-            <div className={styles.contactAddress}>{contact.address[language].value}</div>
+            <span className={styles.contactName}>{t('contacts.pageTitles.address')}</span>
+            <div className={styles.contactAddress}>{t('contacts.pageTitles.address')}</div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>
@@ -100,9 +100,7 @@ const Contacts = ({ fromCheckout }) => {
 
   return (
     <div className={styles.wrapper}>
-      {!fromCheckout && (
-        <h2 className={styles.contactsTitle}>{CONTACTS_PAGE_TITLES[language].title}</h2>
-      )}
+      {!fromCheckout && <h2 className={styles.contactsTitle}>{t('contacts.pageTitles.title')}</h2>}
       {contactsDisplay}
     </div>
   );

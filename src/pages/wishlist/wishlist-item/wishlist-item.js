@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -6,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from './wishlist-item.styles';
-import { WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
-import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 import { IMG_URL } from '../../../configs';
 import { getCurrencySign } from '../../../utils/currency';
 import routes from '../../../const/routes';
@@ -20,6 +19,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
     currency: Currency.currency
   }));
   const styles = useStyles();
+  const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
   const onRemoveItem = () => {
     setModalVisibility(true);
@@ -32,8 +32,8 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
     );
 
     return availableSizes
-      ? PRICE_FROM[language].value + availableSizes[0].price[currency].value
-      : SIZE_NOT_AVAILABLE[language].value;
+      ? t('productList.priceFrom.value') + availableSizes[0].price[currency].value
+      : t('productList.sizeNotAvailable.value');
   };
 
   return (
@@ -47,7 +47,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
         <div className={styles.description} data-cy='wishlist-item-description'>
           <span className={styles.itemName}>{item.name[language].value}</span>
           <Button variant='contained'>
-            <Link to={`${pathToProducts}/${item._id}`}>{WISHLIST_BUTTONS[language].toItem}</Link>
+            <Link to={`${pathToProducts}/${item._id}`}>{t('wishlist.wishlistButtons.toItem')}</Link>
           </Button>
         </div>
       </td>

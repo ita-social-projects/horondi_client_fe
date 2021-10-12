@@ -1,0 +1,53 @@
+{
+  "available": "В наявності",
+  "productNotFound": "В цій категорії продуктів не знайдено",
+  "sizeNotAvailable": "Товар недоступний",
+  "countPerPage": "Кількість на сторінці:",
+  "sortBySelectOptions": [
+    {
+      "value": "популярністю",
+      "optionValue": {
+        "name": "popularity",
+        "value": -1
+      }
+    },
+    {
+      "value": "від дорогих до дешевих",
+      "optionValue": {
+        "name": "sortDesc",
+        "value": -1
+      }
+    },
+    {
+      "value": "від дешевих до дорогих",
+      "optionValue": {
+        "name": "sortAsc",
+        "value": 1
+      }
+    },
+    {
+      "value": "рейтингом",
+      "optionValue": {
+        "name": "rate",
+        "value": -1
+      }
+    }
+  ],
+  "drawerTemporary": "temporary",
+  "drawerPermanent": "permanent",
+  "temporaryWidths": ["sm", "xs"],
+  "itemsPerPage": [
+    {
+      "title": "nine products per page",
+      "value": 9
+    },
+    {
+      "title": "eighteen products per page",
+      "value": 18
+    },
+    {
+      "title": "thirty products per page",
+      "value": 30
+    }
+  ]
+}

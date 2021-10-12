@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import { useStyles } from './model-item.style';
@@ -14,16 +14,15 @@ import {
   setPriceFilter,
   setSearchFilter
 } from '../../redux/products/products.actions';
-import { HOME_BUTTONS } from '../../translations/homepage.translations';
 import { IMG_URL } from '../../configs';
 
 const ModelItem = ({ model }) => {
-  const { language, products } = useSelector(({ Language, Products }) => ({
-    language: Language.language,
+  const { products } = useSelector(({ Products }) => ({
     products: Products.products
   }));
   const dispatch = useDispatch();
   const styles = useStyles();
+  const { t, i18n } = useTranslation();
 
   const handleClickToModel = (selectedModel) => {
     dispatch(setModelsFilter([selectedModel.name[1].value]));
@@ -46,12 +45,14 @@ const ModelItem = ({ model }) => {
       className={styles.modelItem}
       onClick={() => handleClickToModel(model)}
     >
-      <div className={styles.modelItemTitle}>{model.name[language].value}</div>
+      <div className={styles.modelItemTitle}>
+        {model.name[i18n.language === 'ua' ? 0 : 1].value}
+      </div>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>
       <footer className={styles.link}>
-        {HOME_BUTTONS[language].MOVE_TO_MODEL}
+        {t('home.moveToModel')}
         <ArrowRightAltIcon />
       </footer>
     </Link>

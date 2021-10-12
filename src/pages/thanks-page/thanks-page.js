@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
 import { parse } from 'query-string';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
-import { THANKS_PAGE_TITLE } from '../../translations/thanks-page.translations';
 import OrderData from './order-data';
 import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
 import routes from '../../const/routes';
 import { resetCart, cleanUserCart } from '../../redux/cart/cart.actions';
-import { CHECKOUT_PAYMENT } from '../../translations/checkout.translations';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { Loader } from '../../components/loader/loader';
@@ -36,6 +35,8 @@ const ThanksPage = () => {
   });
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (user) {
       dispatch(cleanUserCart(user._id));
@@ -58,10 +59,11 @@ const ThanksPage = () => {
 
   return (
     <div className={styles.thanksContainer}>
-      {!order && <Redirect to={pathToMain} /> && paymentMethod !== CHECKOUT_PAYMENT[language].card}
+      {!order && <Redirect to={pathToMain} /> &&
+        paymentMethod !== t('checkout.checkoutPayment.card')}
       {(!loading || !paidOrderLoading) && (
         <>
-          <h2 className={styles.thunksTitle}>{THANKS_PAGE_TITLE[language].thanks}</h2>
+          <h2 className={styles.thunksTitle}>{t('thanksPage.thanksPageTitle.thanks')}</h2>
           <div className={styles.thunksInfo}>
             <OrderData
               order={order}
@@ -77,7 +79,7 @@ const ThanksPage = () => {
               className={styles.linkToPayment}
               href={order?.paymentUrl}
             >
-              {THANKS_PAGE_TITLE[language].linkToPayment}
+              {t('thanksPage.thanksPageTitle.linkToPayment')}
             </a>
           )}
         </>

@@ -18,9 +18,7 @@ import Comments from './comments/comments.reducer';
 import { checkoutReducer as Checkout } from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 import { businessPagesReducer as HeaderLinks } from './header-links/header-links.reducer';
-import HomePageImages from './home-page-looks/home-page-looks.reducer';
 import Pattern from './pattern/pattern.reducer';
-import HomePageSlider from './homepage-slider/homepage-slider.reducer';
 import SearchBar from './search-bar/search-bar.reducer';
 import Constructor from './images-constructor/constructor.reducer';
 import { toastReducer as Toast } from './toast/toast.reducer';
@@ -48,8 +46,6 @@ export const rootReducer = (history) =>
     BusinessPages,
     Chat,
     HeaderLinks,
-    HomePageImages,
-    HomePageSlider,
     SearchBar,
     Pattern,
     Constructor,

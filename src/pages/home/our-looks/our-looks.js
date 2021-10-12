@@ -1,18 +1,20 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
 
 import { useStyles } from './our-looks.style';
 import { IMG_URL } from '../../../configs';
-import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
+import { getAllHomeImageLooks } from '../operations/our-looks/our-looks.queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const OurLooks = () => {
-  const looksImages = useSelector(({ HomePageImages }) => HomePageImages.imageList);
   const styles = useStyles();
-  const dispatch = useDispatch();
+  const [looksImages, setLooksImages] = useState([]);
 
-  useEffect(() => {
-    dispatch(getAllHomeImageLooks());
-  }, [dispatch]);
+  const { error, loading } = useQuery(getAllHomeImageLooks, {
+    onCompleted: (data) => setLooksImages(data.getHomePageLooksImages)
+  });
+
+  if (error || loading) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.horondiStyle} data-section-style='light' id='horondiStyle'>

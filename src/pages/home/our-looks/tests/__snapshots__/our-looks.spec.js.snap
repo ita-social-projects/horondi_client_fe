@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`slider home page tests should match snapshot 1`] = `
+<div
+  className="makeStyles-horondiStyle-1"
+  data-section-style="light"
+  id="horondiStyle"
+>
+  <div
+    className="makeStyles-imageSection-2"
+  />
+</div>
+`;

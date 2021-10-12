@@ -1,0 +1,17 @@
+{
+    "pageMessage":{
+        "defaultError": "Something went wrong...",
+        "categoryNotValid": "Category is not valid",
+        "categoryNotFound": "Category not found",
+        "newsNotFound": "News not found",
+        "materialNotFound": "Material not found",
+        "productNotFound": "Product not found",
+        "orderNotFound": "Order not found",
+        "patternNotFound": "Pattern not found",
+        "userNotFound": "User not found",
+        "imageNotFound": "Image not found"
+        
+    },
+    "linkToHomePage": "Go to homepage",
+    "BusinessTextNotFound": "Business text not found"
+}

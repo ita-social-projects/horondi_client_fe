@@ -1,6 +1,10 @@
 {
     "cartTableFields": {
         "item": "Назва товару",
+        "product": "Продукт",
+        "quantity": "Кількість",
+        "price": "Ціна",
+        "size": "Розмір",
         "bottomMaterial": "Матеріал низу",
         "sidePocket": "Бокова кишеня",
         "total": "Підсумок",

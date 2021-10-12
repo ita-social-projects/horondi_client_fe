@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 
-import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import Loader from '../../components/loader';
 import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
@@ -11,8 +10,21 @@ import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/
 const Contacts = ({ fromCheckout }) => {
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
+  const [mapUrl, setmMapUrl] = useState('');
 
   const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
+  useEffect(() => {
+    const q = contacts[0]?.address[0].value.trim();
+    const url = `https://api.locationiq.com/v1/autocomplete.php?key=pk.d250de696729be2d1744cbfc919a178d&limit=1&accept-language=ua&q=${q}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const url = `https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${data[0].lat},${data[0].lon}&size=500x300&zoom=16&markers=size:small|color:red|${data[0].lat},${data[0].lon}`;
+        setmMapUrl(url);
+      })
+      .catch((err) => console.error(err));
+  }, [contacts]);
+
   const styles = useStyles();
   if (loading) {
     return (
@@ -48,7 +60,7 @@ const Contacts = ({ fromCheckout }) => {
                   className={styles.mapImage}
                   onError={onLoadImageError}
                   onLoad={onImageLoad}
-                  src={`${IMG_URL}${contact.images[language].value.medium}`}
+                  src={mapUrl}
                   alt={CONTACTS_PAGE_TITLES[language].location}
                 />
               </a>

@@ -10,9 +10,8 @@ const { pathToCategory, pathToMain } = routes;
 const PathBack = () => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { isLightTheme, language } = useSelector(({ Theme, Language }) => ({
-    isLightTheme: Theme.lightMode,
-    language: Language.language
+  const { isLightTheme } = useSelector(({ Theme }) => ({
+    isLightTheme: Theme.lightMode
   }));
 
   return (

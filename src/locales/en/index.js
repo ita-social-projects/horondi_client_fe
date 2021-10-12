@@ -14,6 +14,7 @@ import common from './common.json';
 import contacts from './contacts.json';
 import errorPage from './errorPage.json';
 import confirmation from './confirmation.json';
+import buttons from './buttons.json';
 import newPassword from './new-password.json';
 import orderHistory from './order-history.json';
 import notFoundPage from './not-found-page.json';
@@ -35,6 +36,7 @@ export default {
     modal,
     productList,
     contacts,
+    buttons,
     errorPage,
     confirmation,
     newPassword,

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
-import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
 import Loader from '../../components/loader';
 import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
@@ -20,8 +19,8 @@ const Contacts = ({ fromCheckout }) => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        const url = `https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${data[0].lat},${data[0].lon}&size=500x300&zoom=16&markers=size:small|color:red|${data[0].lat},${data[0].lon}`;
-        setmMapUrl(url);
+        const MapUrl = `https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${data[0].lat},${data[0].lon}&size=500x300&zoom=16&markers=size:small|color:red|${data[0].lat},${data[0].lon}`;
+        setmMapUrl(MapUrl);
       })
       .catch((err) => console.error(err));
   }, [contacts]);

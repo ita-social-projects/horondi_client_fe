@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { Collapse, ListItemText, ListItem, List } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
@@ -9,8 +10,9 @@ import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
 
 import { useStyles } from './sidebar-items.style';
 
-const SideBarItem = ({ category, handlerItem, models, language, name, mainItemStyles }) => {
+const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) => {
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
+  const { i18n } = useTranslation();
 
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);
@@ -25,7 +27,11 @@ const SideBarItem = ({ category, handlerItem, models, language, name, mainItemSt
   return (
     <>
       <li className={mainItemStyles}>
-        <ListItemText button='true' onClick={handleClick} primary={name[language].value} />
+        <ListItemText
+          button='true'
+          onClick={handleClick}
+          primary={name[i18n.language === 'ua' ? 0 : 1].value}
+        />
         {isListOpen ? <RemoveIcon onClick={handleClick} /> : <AddIcon onClick={handleClick} />}
       </li>
 
@@ -42,7 +48,7 @@ const SideBarItem = ({ category, handlerItem, models, language, name, mainItemSt
               <Link
                 to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
               >
-                <ListItemText primary={model.name[language].value} />
+                <ListItemText primary={model.name[i18n.language === 'ua' ? 0 : 1].value} />
               </Link>
             </ListItem>
           ))}

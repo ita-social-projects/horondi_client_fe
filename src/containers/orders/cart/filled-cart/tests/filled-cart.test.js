@@ -11,30 +11,36 @@ const mockUseContext = jest.fn().mockImplementation(() => ({
 React.useContext = mockUseContext;
 
 const dispatch = jest.fn();
-const state = {
-  language: 0,
-  loading: false,
-  currency: 0,
-  userData: {},
-  list: [],
-  totalPrice: 100
-};
-
 useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => state);
+const mockUseSelector = (loading = false) => {
+  useSelector.mockImplementation(() => ({
+    language: 0,
+    cartLoading: loading,
+    currency: 0,
+    userData: {},
+    cartList: [],
+    cartQuantityLoading: false,
+    cartUserTotalPrice: 100
+  }));
+};
 
 let wrapper;
 const items = [{ price: [{ currency: 'ua', value: 100 }] }];
 
 describe('Filled cart component tests', () => {
+  beforeEach(() => {
+    mockUseSelector();
+  });
+
   it('should match snapshot', () => {
     wrapper = shallow(<FilledCart items={items} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should find loader', () => {
+    mockUseSelector(true);
     wrapper = shallow(<FilledCart items={items} />);
-    expect(wrapper.exists(Loader)).toBeDefined();
+    expect(wrapper.exists(Loader)).toBe(true);
   });
 
   it('should cover other branches', () => {

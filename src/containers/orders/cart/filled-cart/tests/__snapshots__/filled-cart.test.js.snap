@@ -10,6 +10,8 @@ exports[`Filled cart component tests should match snapshot 1`] = `
       <div>
         <OrderTable
           calcPrice={[Function]}
+          cartLoading={false}
+          cartQuantityLoading={false}
           currency={0}
           items={
             Array [
@@ -106,7 +108,9 @@ exports[`Filled cart component tests should match snapshot 1`] = `
         </div>
       </div>
     </div>
-    <SimilarProducts />
+    <SimilarProducts
+      cartList={Array []}
+    />
   </div>
 </Fragment>
 `;

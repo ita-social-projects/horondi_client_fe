@@ -5,13 +5,10 @@ const initialState = {
 };
 
 export const themeState = (state = initialState, { type, payload } = {}) => {
-  switch (type) {
-    case SET_FILTER_MENU_STATUS:
-      return {
-        ...state,
-        filterMenuStatus: payload
-      };
-    default:
-      return state;
-  }
+  if (type === SET_FILTER_MENU_STATUS) {
+    return {
+      ...state,
+      filterMenuStatus: payload
+    };
+  } return state;
 };

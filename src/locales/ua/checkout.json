@@ -4,7 +4,27 @@
         "cash": "Готівкою"
     },
     "checkoutTitles": {
-        "delivery": "Доставка"
+        "delivery": "Доставка",
+        "checkoutTitle": "Оформлення замовлення",
+        "contactInfo": "Контакти",
+        "payment": "Метод оплати",
+        "orderComment": "Коментар до замовлення",
+        "yourOrderTitle": "Ваше замовлення",
+        "schedule": "Графік роботи:",
+        "address": "Адреса:",
+        "addressHorondi": "Львів, вул. Заводська, 31",
+        "workDay": "10:00 - 19:00",
+        "restDay": "Вихідний"
+    },
+    "checkoutTextFields": {
+        "paymentMethod": "Виберіть метод оплати *"
+    },
+    "checkoutAdditionalInfo": {
+        "additionalInfo": "* Замовлення буде відправлено протягом десяти робочих днів.",
+        "consent": [
+            "Підтверджуючи замовлення, я приймаю",
+            " угоду користувача"
+        ]
     },
     "deliveryType": {
         "novaPost": "Нова пошта",
@@ -12,5 +32,14 @@
         "selfPickup": "Самовивіз",
         "novaPostCourier": "Кур'єр нової пошти",
         "ukrPostCourier": "Кур'єр укрпошти"
+    },
+    "schedule": {
+        "monday": "Пн:  ",
+        "tuesday": "Вт:  ",
+        "wednesday": "Ср:  ",
+        "thursday": "Чт:  ",
+        "friday": "Пт:  ",
+        "saturday": "Сб:  ",
+        "sunday": "Нд:  "
     }
 }

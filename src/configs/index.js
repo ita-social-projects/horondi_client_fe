@@ -545,3 +545,22 @@ export const ITEMS_PER_PAGE = [
     value: 30
   }
 ];
+
+export const CHECKOUT_INPUT_FIELD = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+  city: 'city',
+  street: 'street',
+  house: 'house',
+  flat: 'flat',
+  userComment: 'userComment',
+  paymentMethod: 'paymentMethod',
+  courierOffice: 'courierOffice',
+  region: 'region',
+  district: 'district',
+  regionId: 'regionId',
+  districtId: 'districtId',
+  cityId: 'cityId'
+};

@@ -2,12 +2,11 @@ import PropTypes from 'prop-types';
 
 import {
   CHECKOUT_BUTTON,
-  CHECKOUT_INPUT_FIELD,
   CHECKOUT_PAYMENT,
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_TITLES
 } from '../translations/checkout.translations';
-import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
+import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE, CHECKOUT_INPUT_FIELD } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { COURIER } from '../const/checkout';
 import { MATERIAL_UI_COLOR } from '../const/material-ui';

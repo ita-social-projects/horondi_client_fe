@@ -19,7 +19,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
           </Link>
         </div>
         <h2>
-          Checkout Process
+          checkout.checkoutTitles.checkoutTitle
         </h2>
         <div />
       </div>
@@ -28,7 +28,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
       >
         <div>
           <h3>
-            Contact Information
+            checkout.checkoutTitles.contactInfo
           </h3>
           <div>
             <div
@@ -87,9 +87,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
             </div>
           </div>
         </div>
-        <DeliveryType
-          language={1}
-        />
+        <DeliveryType />
         <Delivery
           deliveryType="NOVAPOSTCOURIER"
           errors={Object {}}
@@ -121,7 +119,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
         />
         <div>
           <h2>
-            Payment Method
+            checkout.checkoutTitles.payment
           </h2>
           <WithStyles(ForwardRef(FormControl))
             variant="outlined"
@@ -129,33 +127,165 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
             <WithStyles(ForwardRef(InputLabel))
               variant="outlined"
             >
-              Choose a payment method *
+              checkout.checkoutTextFields.paymentMethod
             </WithStyles(ForwardRef(InputLabel))>
             <WithStyles(ForwardRef(Select))
               data-cy="paymentMethod"
-              label="Choose a payment method *"
+              label="checkout.checkoutTextFields.paymentMethod"
               name="paymentMethod"
               onChange={[Function]}
               value=""
             >
               <WithStyles(ForwardRef(MenuItem))
-                key="Card"
-                value="Card"
+                key="c"
+                value="c"
               >
-                Card
+                c
               </WithStyles(ForwardRef(MenuItem))>
               <WithStyles(ForwardRef(MenuItem))
-                key="Cash"
-                value="Cash"
+                key="h"
+                value="h"
               >
-                Cash
+                h
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="e"
+                value="e"
+              >
+                e
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="c"
+                value="c"
+              >
+                c
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="k"
+                value="k"
+              >
+                k
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="o"
+                value="o"
+              >
+                o
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="u"
+                value="u"
+              >
+                u
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="t"
+                value="t"
+              >
+                t
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="."
+                value="."
+              >
+                .
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="c"
+                value="c"
+              >
+                c
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="h"
+                value="h"
+              >
+                h
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="e"
+                value="e"
+              >
+                e
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="c"
+                value="c"
+              >
+                c
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="k"
+                value="k"
+              >
+                k
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="o"
+                value="o"
+              >
+                o
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="u"
+                value="u"
+              >
+                u
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="t"
+                value="t"
+              >
+                t
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="P"
+                value="P"
+              >
+                P
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="a"
+                value="a"
+              >
+                a
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="y"
+                value="y"
+              >
+                y
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="m"
+                value="m"
+              >
+                m
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="e"
+                value="e"
+              >
+                e
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="n"
+                value="n"
+              >
+                n
+              </WithStyles(ForwardRef(MenuItem))>
+              <WithStyles(ForwardRef(MenuItem))
+                key="t"
+                value="t"
+              >
+                t
               </WithStyles(ForwardRef(MenuItem))>
             </WithStyles(ForwardRef(Select))>
           </WithStyles(ForwardRef(FormControl))>
         </div>
         <div>
           <h2>
-            Order Comment
+            checkout.checkoutTitles.orderComment
           </h2>
           <div>
             <WithStyles(ForwardRef(TextField))
@@ -170,7 +300,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
             />
           </div>
           <p>
-            * Order will be shipped within 10 business days.
+            checkout.checkoutAdditionalInfo.additionalInfo
           </p>
         </div>
       </WithStyles(ForwardRef(Grid))>
@@ -179,14 +309,14 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
       >
         <div>
           <h2>
-            Your order
+            checkout.checkoutTitles.yourOrderTitle
           </h2>
           <div />
         </div>
         <div>
           <div>
             <h4>
-              Total price
+              common.toPay
             </h4>
             <p
               className="undefined undefined"
@@ -231,6 +361,19 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
           >
             Confirm order
           </button>
+          <div>
+             
+            checkout.checkoutAdditionalInfo.consent.0
+            <Link
+              rel="noreferrer"
+              target="_blank"
+              to="/pages/user-agreement"
+            >
+               
+              checkout.checkoutAdditionalInfo.consent.1
+               
+            </Link>
+          </div>
         </div>
       </WithStyles(ForwardRef(Grid))>
     </WithStyles(ForwardRef(Grid))>

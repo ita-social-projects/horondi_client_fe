@@ -14,12 +14,11 @@ import {
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_INPUT_FIELD,
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_TITLES
 } from '../../../../../translations/checkout.translations';
 import { POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
-import { CY_CODE_ERR } from '../../../../../configs';
+import { CY_CODE_ERR, CHECKOUT_INPUT_FIELD } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
 
 const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {

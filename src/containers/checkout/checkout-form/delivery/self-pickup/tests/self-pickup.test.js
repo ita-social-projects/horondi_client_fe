@@ -18,13 +18,6 @@ describe('SelfPickup component tests', () => {
     const wrapper = shallow(<SelfPickup {...props} />);
     expect(wrapper).toBeDefined();
   });
-
-  it('should find first element text', () => {
-    const wrapper = shallow(<SelfPickup {...props} />);
-    const actual = wrapper.find('h5').first().text();
-    const expected = 'Графік роботи:';
-    expect(actual).toEqual(expected);
-  });
   it('should change props', () => {
     const wrapper = shallow(<SelfPickup isLightTheme='dark' language='1' />);
     expect(wrapper).toBeDefined();

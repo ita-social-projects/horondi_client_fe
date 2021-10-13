@@ -8,7 +8,6 @@ import _ from 'lodash';
 import { useStyles } from './nova-post.styles';
 import {
   CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_INPUT_FIELD,
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_TITLES
 } from '../../../../../translations/checkout.translations';
@@ -18,7 +17,7 @@ import {
 } from '../../../../../redux/checkout/checkout.actions';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POSTOMAT } from '../../../../../utils/checkout';
-import { CY_CODE_ERR } from '../../../../../configs';
+import { CY_CODE_ERR, CHECKOUT_INPUT_FIELD } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
 
 const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {

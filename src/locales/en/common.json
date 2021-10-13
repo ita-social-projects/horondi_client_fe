@@ -34,5 +34,6 @@
   "popular": "Hot Products",
   "model": "Model",
   "category": "Category",
-  "pattern": "Pattern"
+  "pattern": "Pattern",
+  "toPay": "Total price"
 }

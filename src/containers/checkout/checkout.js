@@ -12,25 +12,16 @@ import { setIsOrderCreated } from '../../redux/order/order.actions';
 const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
-  const {
-    language,
-    isLightTheme,
-    currency,
-    cartItems,
-    deliveryType,
-    loading,
-    isOrderCreated,
-    order
-  } = useSelector(({ Language, Theme, Currency, Cart, Order }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode,
-    currency: Currency.currency,
-    cartItems: Cart.list,
-    deliveryType: Cart.deliveryType,
-    loading: Order.loading,
-    isOrderCreated: Order.isOrderCreated,
-    order: Order.order
-  }));
+  const { isLightTheme, currency, cartItems, deliveryType, loading, isOrderCreated, order } =
+    useSelector(({ Theme, Currency, Cart, Order }) => ({
+      isLightTheme: Theme.lightMode,
+      currency: Currency.currency,
+      cartItems: Cart.list,
+      deliveryType: Cart.deliveryType,
+      loading: Order.loading,
+      isOrderCreated: Order.isOrderCreated,
+      order: Order.order
+    }));
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,7 +42,6 @@ const Checkout = () => {
       {!loading && (
         <div className={styles.checkoutContainer}>
           <CheckoutForm
-            language={language}
             isLightTheme={isLightTheme}
             currency={currency}
             cartItems={cartItems}

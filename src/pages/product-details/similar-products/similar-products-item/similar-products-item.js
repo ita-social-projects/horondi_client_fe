@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,14 +11,15 @@ import { IMG_URL } from '../../../../configs';
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
 import routes from '../../../../const/routes';
+import ThemeContext from '../../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
 const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
   }));
+  const isLightTheme = useContext(ThemeContext);
 
   const [image, setImage] = useState(IMG_URL + imageUrl);
 

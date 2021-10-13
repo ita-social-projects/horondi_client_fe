@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { setInfoImgByTheme } from '../../utils/user-helpers';
 import { IMG_ALT } from '../../const/images-alts';
 import { validationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
+import ThemeContext from '../../context/theme-context';
 
 export default function Register() {
   const styles = useStyles();
@@ -26,16 +27,14 @@ export default function Register() {
     dispatch(registerUser({ user, language }));
   };
 
-  const { isLightTheme, language, hasRegistered, registerError, loading } = useSelector(
-    ({ Theme, Language, User }) => ({
-      isLightTheme: Theme.lightMode,
-      language: Language.language,
-      loading: User.userLoading,
-      registerError: User.error,
-      hasRegistered: User.userRegistered
-    })
-  );
+  const { language, hasRegistered, registerError, loading } = useSelector(({ Language, User }) => ({
+    language: Language.language,
+    loading: User.userLoading,
+    registerError: User.error,
+    hasRegistered: User.userRegistered
+  }));
 
+  const isLightTheme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   useEffect(() => {

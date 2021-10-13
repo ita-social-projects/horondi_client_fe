@@ -26,7 +26,6 @@ export const selectProductsIdCommentsLanguageUserData = ({
 });
 
 export const selectCurrencyProductsCategoryFilter = ({
-  Theme,
   Currency,
   Products: { product, productLoading, productToSend, filters }
 }) => ({
@@ -34,8 +33,7 @@ export const selectCurrencyProductsCategoryFilter = ({
   categoryFilter: filters.categoryFilter,
   isLoading: productLoading,
   product,
-  productToSend,
-  isLightTheme: Theme.lightMode
+  productToSend
 });
 
 export const selectLanguageProductsUserWishlist = ({
@@ -53,8 +51,7 @@ export const selectLanguageProductsUserWishlist = ({
   cartList: Cart.list
 });
 
-export const selectLightModeAndLocation = ({ Theme, router }) => ({
-  lightMode: Theme.lightMode,
+export const selectLocation = ({ router }) => ({
   location: router.location.pathname
 });
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
 import { parse } from 'query-string';
-import { ThemeContext } from '../../context/theme-context';
+import ThemeContext from '../../context/theme-context';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import OrderData from './order-data';
@@ -21,7 +21,7 @@ const ThanksPage = () => {
 
   const dispatch = useDispatch();
   const { language, currency, order, loading, paidOrderLoading, user } = useSelector(
-    ({ Language, Currency, Order, Theme, User }) => ({
+    ({ Language, Currency, Order, User }) => ({
       language: Language.language,
       currency: Currency.currency,
       order: Order.order,
@@ -32,7 +32,6 @@ const ThanksPage = () => {
   );
 
   const isLightTheme = useContext(ThemeContext);
-
   const styles = useStyles({
     isLightTheme
   });

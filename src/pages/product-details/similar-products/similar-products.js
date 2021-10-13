@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 
 import './similar-products.css';
@@ -14,16 +14,15 @@ import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
 import { SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
+import ThemeContext from '../../../context/theme-context';
 
 const SimilarProducts = ({ cartList }) => {
   const styles = useStyles();
   const { language, similarProducts, currency, product } = useSelector(
     selectInfoForSimilarProducts
   );
-  const { isLightTheme } = useSelector(({ Theme }) => ({
-    isLightTheme: Theme.lightMode
-  }));
 
+  const isLightTheme = useContext(ThemeContext);
   const { title } = SIMILAR_ITEMS[language];
   const currencySign = getCurrencySign(currency);
   const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;

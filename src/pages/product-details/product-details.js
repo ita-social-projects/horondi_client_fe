@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
@@ -26,12 +26,13 @@ import {
 
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
 import routes from '../../const/routes';
+import ThemeContext from '../../context/theme-context';
 
 const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { isLightTheme, isLoading, productToSend, currency, product } = useSelector(
+  const { isLoading, productToSend, currency, product } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
 
@@ -52,6 +53,7 @@ const ProductDetails = ({ match }) => {
     sizes && sizes.filter(({ size, price }) => size.available && { size, price });
 
   const currentSize = availableSizes ? availableSizes[0] : {};
+  const isLightTheme = useContext(ThemeContext);
 
   useEffect(() => {
     dispatch(getProduct(id));

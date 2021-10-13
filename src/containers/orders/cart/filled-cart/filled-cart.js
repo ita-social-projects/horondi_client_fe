@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
@@ -14,24 +14,26 @@ import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../const/routes';
+import ThemeContext from '../../../../context/theme-context';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { pathToCategory, pathToCheckout } = routes;
 
-  const { language, currency, cartList, cartLoading, cartQuantityLoading, user, isLightTheme } =
-    useSelector(({ Language, Currency, Cart, User, Theme }) => ({
+  const { language, currency, cartList, cartLoading, cartQuantityLoading, user } = useSelector(
+    ({ Language, Currency, Cart, User }) => ({
       language: Language.language,
       currency: Currency.currency,
       cartList: Cart.list,
       cartLoading: Cart.loading,
       cartQuantityLoading: Cart.quantityLoading,
       cartUserTotalPrice: Cart.totalPrice,
-      user: User.userData,
-      isLightTheme: Theme.lightMode
-    }));
+      user: User.userData
+    })
+  );
 
+  const isLightTheme = useContext(ThemeContext);
   const currencySign = getCurrencySign(currency);
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
 

@@ -15,8 +15,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
       >
         <OrderTable
           calcPrice={[Function]}
-          cartLoading={false}
-          cartQuantityLoading={false}
           currency={0}
           items={
             Array [
@@ -30,8 +28,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
               },
             ]
           }
-          language={0}
-          user={Object {}}
         />
       </div>
     </div>
@@ -45,36 +41,36 @@ exports[`Filled cart component tests should match snapshot 1`] = `
           <WithStyles(ForwardRef(TextField))
             InputProps={
               Object {
-                "className": "makeStyles-lightThemePromoInput-2",
+                "className": "makeStyles-darkThemePromoInput-3",
               }
             }
-            placeholder="Промокод або сертифікат"
+            placeholder="cart.promoPlaceHolder"
           />
           <WithStyles(ForwardRef(Button))
-            className="makeStyles-lightThemePromoButton-5"
+            className="makeStyles-darkThemePromoButton-6"
             variant="contained"
           >
-            Застосувати
+            cart.applyPromoCode
           </WithStyles(ForwardRef(Button))>
           <Link
             to="/catalog/:category"
           >
             <WithStyles(ForwardRef(Button))
-              className="makeStyles-lightThemeShoppingButton-7"
+              className="makeStyles-darkThemeShoppingButton-8"
               variant="contained"
             >
-              Продовжити покупки
+              cart.continue
             </WithStyles(ForwardRef(Button))>
           </Link>
         </div>
         <div
-          className="makeStyles-lightThemeTotalWrapper-12"
+          className="makeStyles-darkThemeTotalWrapper-13"
         >
           <div
             className="makeStyles-totalPrice-15"
           >
             <span>
-              До оплати
+              cart.totalPrice
             </span>
           </div>
           <div
@@ -118,18 +114,16 @@ exports[`Filled cart component tests should match snapshot 1`] = `
             to="/checkout"
           >
             <WithStyles(ForwardRef(Button))
-              className="makeStyles-lightThemeOrdersButton-9"
+              className="makeStyles-darkThemeOrdersButton-10"
               variant="contained"
             >
-              Оформити замовлення
+              cart.checkout
             </WithStyles(ForwardRef(Button))>
           </Link>
         </div>
       </div>
     </div>
-    <SimilarProducts
-      cartList={Array []}
-    />
+    <SimilarProducts />
   </div>
 </Fragment>
 `;

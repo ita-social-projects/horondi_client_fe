@@ -1,11 +1,8 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import * as reactRedux from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import EmptyOrder from '../index';
-
-configure({ adapter: new Adapter() });
 
 let wrapper;
 

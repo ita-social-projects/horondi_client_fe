@@ -1,39 +1,43 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../../../../../components/loader/loader';
 import FilledCart from '../filled-cart';
 
 jest.mock('react-redux');
+jest.mock('../filled-cart.styles.js', () => ({ useStyles: () => ({}) }));
+const mockUseContext = jest.fn().mockImplementation(() => ({
+  isLight: true
+}));
+React.useContext = mockUseContext;
+
+const dispatch = jest.fn();
+const state = {
+  language: 0,
+  loading: false,
+  currency: 0,
+  userData: {},
+  list: [],
+  totalPrice: 100
+};
+
+useDispatch.mockImplementation(() => dispatch);
+useSelector.mockImplementation(() => state);
 
 let wrapper;
 const items = [{ price: [{ currency: 'ua', value: 100 }] }];
 
-function spyOnSelector(lightMode, loading) {
-  useSelector.mockImplementation(() => ({
-    currency: 0,
-    Language: { language: 0 },
-    Currency: { currency: 0 },
-    Cart: { list: [], loading, quantityLoading: loading, totalPrice: 100 },
-    User: { userData: {} },
-    Theme: { lightMode }
-  }));
-}
-
 describe('Filled cart component tests', () => {
   it('should match snapshot', () => {
-    spyOnSelector(true, false);
     wrapper = shallow(<FilledCart items={items} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should find loader', () => {
-    spyOnSelector(true, true);
     wrapper = shallow(<FilledCart items={items} />);
     expect(wrapper.exists(Loader)).toBeDefined();
   });
 
   it('should cover other branches', () => {
-    spyOnSelector(false, false);
     wrapper = shallow(<FilledCart items={items} />);
   });
 });

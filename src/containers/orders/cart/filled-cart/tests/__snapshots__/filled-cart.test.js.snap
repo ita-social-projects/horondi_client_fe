@@ -4,15 +4,10 @@ exports[`Filled cart component tests should match snapshot 1`] = `
 <Fragment>
   <PathBack />
   <div
-    className="makeStyles-root-1"
     data-cy="filled-cart"
   >
-    <div
-      className="makeStyles-orderWrapper-11"
-    >
-      <div
-        className="makeStyles-orderTable-16"
-      >
+    <div>
+      <div>
         <OrderTable
           calcPrice={[Function]}
           currency={0}
@@ -28,26 +23,22 @@ exports[`Filled cart component tests should match snapshot 1`] = `
               },
             ]
           }
+          language={0}
         />
       </div>
     </div>
     <div>
-      <div
-        className="makeStyles-promoAndTotalWrapper-14"
-      >
-        <div
-          className="makeStyles-promoWrapper-4"
-        >
+      <div>
+        <div>
           <WithStyles(ForwardRef(TextField))
             InputProps={
               Object {
-                "className": "makeStyles-darkThemePromoInput-3",
+                "className": undefined,
               }
             }
             placeholder="cart.promoPlaceHolder"
           />
           <WithStyles(ForwardRef(Button))
-            className="makeStyles-darkThemePromoButton-6"
             variant="contained"
           >
             cart.applyPromoCode
@@ -56,26 +47,19 @@ exports[`Filled cart component tests should match snapshot 1`] = `
             to="/catalog/:category"
           >
             <WithStyles(ForwardRef(Button))
-              className="makeStyles-darkThemeShoppingButton-8"
               variant="contained"
             >
               cart.continue
             </WithStyles(ForwardRef(Button))>
           </Link>
         </div>
-        <div
-          className="makeStyles-darkThemeTotalWrapper-13"
-        >
-          <div
-            className="makeStyles-totalPrice-15"
-          >
+        <div>
+          <div>
             <span>
               cart.totalPrice
             </span>
           </div>
-          <div
-            className="makeStyles-totalPrice-15"
-          >
+          <div>
             <FontAwesomeIcon
               border={false}
               className=""
@@ -114,7 +98,6 @@ exports[`Filled cart component tests should match snapshot 1`] = `
             to="/checkout"
           >
             <WithStyles(ForwardRef(Button))
-              className="makeStyles-darkThemeOrdersButton-10"
               variant="contained"
             >
               cart.checkout

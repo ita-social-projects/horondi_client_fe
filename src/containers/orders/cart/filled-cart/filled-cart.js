@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
@@ -12,12 +13,11 @@ import SimilarProducts from '../../../../pages/product-details/similar-products'
 import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
-import { CART_BUTTON_TITLES, CART_TITLES } from '../../../../translations/cart.translations';
 import routes from '../../../../const/routes';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
-
+  const { t } = useTranslation();
   const { pathToCategory, pathToCheckout } = routes;
 
   const { language, currency, cartList, cartLoading, cartQuantityLoading, user, isLightTheme } =
@@ -63,7 +63,7 @@ const FilledCart = ({ items }) => {
                 InputProps={{
                   className: isLightTheme ? styles.lightThemePromoInput : styles.darkThemePromoInput
                 }}
-                placeholder={CART_TITLES[language].promoPlaceHolder}
+                placeholder={t('cart.promoPlaceHolder')}
               />
               <Button
                 variant='contained'
@@ -71,7 +71,7 @@ const FilledCart = ({ items }) => {
                   isLightTheme ? styles.lightThemePromoButton : styles.darkThemePromoButton
                 }
               >
-                {CART_BUTTON_TITLES[language].applyPromoCode}
+                {t('cart.applyPromoCode')}
               </Button>
               <Link to={pathToCategory}>
                 <Button
@@ -80,7 +80,7 @@ const FilledCart = ({ items }) => {
                     isLightTheme ? styles.lightThemeShoppingButton : styles.darkThemeShoppingButton
                   }
                 >
-                  {CART_BUTTON_TITLES[language].goods}
+                  {t('cart.continue')}
                 </Button>
               </Link>
             </div>
@@ -90,7 +90,7 @@ const FilledCart = ({ items }) => {
               }
             >
               <div className={styles.totalPrice}>
-                <span>{CART_TITLES[language].totalPrice}</span>
+                <span>{t('cart.totalPrice')}</span>
               </div>
               <div className={styles.totalPrice}>
                 <FontAwesomeIcon icon={currencySign} /> {totalPrice}
@@ -102,7 +102,7 @@ const FilledCart = ({ items }) => {
                     isLightTheme ? styles.lightThemeOrdersButton : styles.darkThemeOrdersButton
                   }
                 >
-                  {CART_BUTTON_TITLES[language].checkout}
+                  {t('cart.checkout')}
                 </Button>
               </Link>
             </div>

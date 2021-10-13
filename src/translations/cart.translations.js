@@ -17,39 +17,6 @@ export const CART_TITLES = {
   }
 };
 
-export const CART_BUTTON_TITLES = {
-  0: {
-    empty: 'До каталогу',
-    goods: 'Продовжити покупки',
-    pathToMain: 'Головна',
-    pathToCatalog: 'Каталог',
-    yourCart: 'Ваш кошик',
-    checkout: 'Оформити замовлення',
-    applyPromoCode: 'Застосувати',
-    deleteAllCart: 'Очистити весь кошик',
-    editCancel: 'Припинити редагування',
-    toWishlist: 'Перемістити у вподобані товари',
-    remove: 'Видалити',
-    confirm: 'Підтвердити замовлення',
-    pay: 'Перейти до оплати'
-  },
-  1: {
-    empty: 'Continue shopping',
-    goods: 'Continue shopping',
-    pathToMain: 'Home',
-    pathToCatalog: 'Catalog',
-    yourCart: 'Your cart',
-    checkout: 'Go to checkout',
-    applyPromoCode: 'Add',
-    deleteAllCart: 'Clean cart',
-    editCancel: 'Cancel editing',
-    toWishlist: 'Move to wishlist',
-    remove: 'Remove',
-    confirm: 'Confirm order',
-    pay: 'Go to payment'
-  }
-};
-
 export const CART_TABLE_FIELDS = {
   0: {
     item: 'Назва товару',

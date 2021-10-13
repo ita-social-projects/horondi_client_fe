@@ -20,8 +20,8 @@ const OrderData = ({ currency, order, isLightTheme }) => {
       <Table classes={{ root: styles.tableHeader }}>
         <TableHead>
           <TableRow>
-            <TableCell className={styles.tableCell}>{t('cart.cartTableFields.photo')}</TableCell>
-            <TableCell className={styles.tableCell}>{t('cart.cartTableFields.item')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('cart.photo')}</TableCell>
+            <TableCell className={styles.tableCell}>{t('cart.item')}</TableCell>
             <TableCell className={styles.tableCell}>{t('common.quantity')}</TableCell>
             <TableCell className={styles.tableCell}>{t('common.price')}</TableCell>
           </TableRow>

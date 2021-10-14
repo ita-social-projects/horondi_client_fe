@@ -21,15 +21,13 @@ const Login = () => {
   const theme = getFromLocalStorage('theme');
   const styles = useStyles();
   const [showPassword, setShowPassword] = useState(true);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { pathToRecovery, pathToRegister } = routes;
 
-  const { loginError, userLoading, language } = useSelector(({ User, Language }) => ({
+  const { loginError, userLoading } = useSelector(({ User }) => ({
     loginError: User.error,
-    userLoading: User.userLoading,
-    language: Language.language
+    userLoading: User.userLoading
   }));
-
   const checkTheme = () => {
     if (theme === LIGHT_THEME) {
       return MATERIAL_UI_COLOR.PRIMARY;
@@ -49,12 +47,16 @@ const Login = () => {
 
   const { handleSubmit, errors, values, handleChange, handleBlur, setFieldValue, touched } =
     useFormik({
-      validationSchema: validationSchema(language),
+      validationSchema: validationSchema(i18n.language === 'ua' ? 0 : 1),
       initialValues: LOGIN_USER_DATA,
       onSubmit: () => {
         dispatch(loginUser({ user: values }));
       }
     });
+
+  const wrongCredentials = loginError ? (
+    <p className={styles.loginError}>{t('error.wrongCredentials')}</p>
+  ) : null;
 
   return (
     <form onSubmit={(e) => eventPreventHandler(e)}>
@@ -75,7 +77,7 @@ const Login = () => {
                       id='email'
                       label={t('login.placeholders.email')}
                       className={`${styles.emailInput} ${
-                        errors.email === t('login.errorMessages.email') && styles.afterText
+                        errors.email === t('error.wrongEmail') && styles.afterText
                       }`}
                       fullWidth
                       variant='outlined'
@@ -86,7 +88,7 @@ const Login = () => {
                       value={values.email}
                       color={MATERIAL_UI_COLOR.PRIMARY}
                       error={touched.email && errors.email}
-                      helperText={touched.email && errors.email && t('login.errorMessages.email')}
+                      helperText={touched.email && errors.email && t('error.wrongEmail')}
                     />
                     <TextField
                       data-cy='password'
@@ -103,9 +105,7 @@ const Login = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       error={touched.password && errors.password}
-                      helperText={
-                        touched.password && errors.password && t('login.errorMessages.password')
-                      }
+                      helperText={touched.password && errors.password && t('error.pass')}
                     />
                     <div className={styles.recoveryContainer}>
                       <div>
@@ -134,6 +134,7 @@ const Login = () => {
                       >
                         {t('login.formLabel')}
                       </Button>
+                      {wrongCredentials}
                     </div>
                     <div className={styles.orContainer}>
                       <span className={styles.orText}>{t('login.orText')}</span>

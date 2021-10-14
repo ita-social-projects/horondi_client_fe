@@ -2,8 +2,8 @@
 
 exports[`Empty cart component tests should match snapshot 1`] = `
 <EmptyOrder
-  buttonTitle="До каталогу"
+  buttonTitle="cart.empty"
   name="empty-cart"
-  title="Ваш кошик порожній"
+  title="cart.emptyCart"
 />
 `;

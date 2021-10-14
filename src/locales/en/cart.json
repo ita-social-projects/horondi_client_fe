@@ -1,16 +1,17 @@
 {
-    "cartTableFields": {
-        "item": "Product name",
-        "product": "Product",
-        "quantity": "Quantity",
-        "price": "Price",
-        "size": "Size",
-        "bottomMaterial": "Bottom material",
-        "sidePocket": "Side pocket",
-        "total": "Total price",
-        "toPay": "Total price",
-        "photo": "Photo",
-        "delivery": "Delivery type",
-        "actions": "Action"
+    "item": "Product name",
+    "photo": "Photo",
+    "bottomMaterial": "Bottom material",
+    "empty": "To cart",
+    "emptyCart": "Your cart is empty",
+    "promoPlaceHolder": "Promocode or certificate",
+    "applyPromoCode": "Add",
+    "continue": "Continue shopping",
+    "totalPrice": "Total price",
+    "checkout": "Go to checkout",
+    "pathBack": {
+        "toMain": "Home",
+        "toCatalog": "Catalog",
+        "yourCart": "Your cart"
     }
 }

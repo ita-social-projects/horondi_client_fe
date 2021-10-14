@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
@@ -27,6 +28,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
   const styles = useStyles({
     isLightTheme
   });
+  const { t } = useTranslation();
 
   const {
     deliveryLoading,
@@ -66,7 +68,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
 
   return (
     <div className={styles.ukrPostContainer}>
-      <h3 className={styles.ukrPostTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h3>
+      <h3 className={styles.ukrPostTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.selectorInfo}>
         <Autocomplete
           onInputChange={(e, value, reason) => {
@@ -74,7 +76,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
               setFieldValue(CHECKOUT_INPUT_FIELD.region, value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneRegion}
+          noOptionsText={t('delivery.noRegion')}
           onChange={(event, value) => {
             if (value) {
               setFieldValue(CHECKOUT_INPUT_FIELD.region, value.REGION_UA);
@@ -98,7 +100,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.region && !!errors.region}
-              label={CHECKOUT_TEXT_FIELDS[language].region}
+              label={`${t('delivery.region')} *`}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -127,7 +129,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
               setFieldValue(CHECKOUT_INPUT_FIELD.district, value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDistrict}
+          noOptionsText={t('delivery.noDistrict')}
           onChange={(event, value) => {
             if (value) {
               setFieldValue(CHECKOUT_INPUT_FIELD.district, value.DISTRICT_UA);
@@ -148,7 +150,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.district && !!errors.district}
-              label={CHECKOUT_TEXT_FIELDS[language].district}
+              label={`${t('delivery.district')} *`}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -177,7 +179,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
               setFieldValue(CHECKOUT_INPUT_FIELD.city, value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+          noOptionsText={t('delivery.noCity')}
           onChange={(event, value) => {
             if (value) {
               setFieldValue(CHECKOUT_INPUT_FIELD.city, value.CITY_UA);
@@ -197,7 +199,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.city && !!errors.city}
-              label={CHECKOUT_TEXT_FIELDS[language].city}
+              label={t('delivery.city')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -227,7 +229,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
               setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDepartment}
+          noOptionsText={t('delivery.noDepartment')}
           onChange={(event, value) => {
             if (value) {
               setFieldValue(
@@ -253,7 +255,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.courierOffice && !!errors.courierOffice}
-              label={CHECKOUT_TEXT_FIELDS[language].department}
+              label={t('delivery.department')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,

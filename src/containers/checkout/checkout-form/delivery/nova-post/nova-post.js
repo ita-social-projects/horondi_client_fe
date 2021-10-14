@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import { useStyles } from './nova-post.styles';
-import { CHECKOUT_INPUT_FIELD } from '../../../../../translations/checkout.translations'; // ?
 import {
   getNovaPoshtaCities,
   getNovaPoshtaWarehouse
@@ -52,7 +51,7 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
           <Autocomplete
             onInputChange={(e, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value);
+                setFieldValue('city', value);
               }
               getPostCities(values.city);
             }}
@@ -60,12 +59,12 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             onChange={(event, value) => {
               if (value) {
                 setSelectedCity(value.description);
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
+                setFieldValue('city', value.description);
               } else {
                 setSelectedCity('');
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
+                setFieldValue('city', '');
               }
-              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+              setFieldValue('courierOffice', '');
             }}
             options={cities}
             inputValue={values.city}
@@ -103,15 +102,15 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
           <Autocomplete
             onInputChange={(event, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value);
+                setFieldValue('courierOffice', value);
               }
             }}
             noOptionsText={t('delivery.noDepartment')}
             onChange={(event, value) => {
               if (value) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value.description);
+                setFieldValue('courierOffice', value.description);
               } else {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+                setFieldValue('courierOffice', '');
               }
             }}
             disabled={!values.city}

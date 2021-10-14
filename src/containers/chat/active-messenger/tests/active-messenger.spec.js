@@ -1,15 +1,8 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import * as redux from 'react-redux';
 import { TextField, Snackbar, Button } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
-
-import { theme } from '../../../../components/app/app-theme/app.theme';
 import { ActiveMessenger } from '../active-messenger';
 import { CHAT_USER_DATA } from '../../../../configs';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const visible = true;
 
@@ -26,8 +19,7 @@ const useStateSpy = jest.spyOn(React, 'useState');
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');
 
-const themeValue = theme('light');
-
+jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../../redux/chat/chat.actions', () => ({
   __esModule: true,
   default: () => ({
@@ -50,14 +42,11 @@ describe('Active-messenger component test', () => {
       userData: { firstName: 'Test', email: 'test@gmail.com', text: 'Want to ask sth...' }
     });
     wrapper = mount(
-      <ThemeProvider theme={themeValue}>
-        <ActiveMessenger
-          theme={themeValue}
-          visible={visible}
-          HandleMailFormVisible={mockHandleMailFormVisible}
-          props={CHAT_USER_DATA}
-        />
-      </ThemeProvider>
+      <ActiveMessenger
+        visible={visible}
+        HandleMailFormVisible={mockHandleMailFormVisible}
+        props={CHAT_USER_DATA}
+      />
     );
   });
 
@@ -78,26 +67,14 @@ describe('Active-messenger component test', () => {
   });
   it('Should renders', () => {
     const wrapper = mount(
-      <ThemeProvider theme={themeValue}>
-        <ActiveMessenger
-          theme={themeValue}
-          visible={visible}
-          HandleMailFormVisible={mockHandleMailFormVisible}
-        />
-      </ThemeProvider>
+      <ActiveMessenger visible={visible} HandleMailFormVisible={mockHandleMailFormVisible} />
     );
     expect(wrapper).not.toBeNull();
   });
 
   it('Should render alert', () => {
     wrapper = mount(
-      <ThemeProvider theme={themeValue}>
-        <ActiveMessenger
-          theme={themeValue}
-          visible={visible}
-          HandleMailFormVisible={mockHandleMailFormVisible}
-        />
-      </ThemeProvider>
+      <ActiveMessenger visible={visible} HandleMailFormVisible={mockHandleMailFormVisible} />
     );
     expect(
       wrapper

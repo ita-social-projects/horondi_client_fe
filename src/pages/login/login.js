@@ -21,7 +21,7 @@ const Login = () => {
   const theme = getFromLocalStorage('theme');
   const styles = useStyles();
   const [showPassword, setShowPassword] = useState(true);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { pathToRecovery, pathToRegister } = routes;
 
   const { loginError, userLoading } = useSelector(({ User }) => ({
@@ -47,7 +47,7 @@ const Login = () => {
 
   const { handleSubmit, errors, values, handleChange, handleBlur, setFieldValue, touched } =
     useFormik({
-      validationSchema: validationSchema(i18n.language === 'ua' ? 0 : 1),
+      validationSchema: validationSchema(t),
       initialValues: LOGIN_USER_DATA,
       onSubmit: () => {
         dispatch(loginUser({ user: values }));

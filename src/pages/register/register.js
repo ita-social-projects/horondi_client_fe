@@ -45,7 +45,7 @@ export default function Register() {
     <Formik
       initialValues={REGISTER_USER_DATA}
       onSubmit={handleRegister}
-      validationSchema={validationSchema(language)}
+      validationSchema={validationSchema(t)}
       validateOnBlur={shouldValidate}
       validateOnChange={shouldValidate}
     >

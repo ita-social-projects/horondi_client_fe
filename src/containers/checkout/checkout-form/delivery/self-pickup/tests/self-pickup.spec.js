@@ -3,6 +3,11 @@ import SelfPickup from '../self-pickup';
 
 jest.mock('../self-pickup.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: () => ({ schedule: 'saturday' })
+  })
+}));
 
 const props = {
   isLightTheme: 'light',

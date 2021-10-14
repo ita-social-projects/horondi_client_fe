@@ -9,8 +9,8 @@ jest.mock('../../delivery-type/delivery-type.styles', () => ({ useStyles: () => 
 jest.mock('react-redux');
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key) => key,
-    i18n: { language: 'ua' }
+    t: () => ({ paymentMethod: 'card' }),
+    i18n: { language: 'en' }
   })
 }));
 
@@ -49,7 +49,7 @@ describe('CheckoutForm component tests', () => {
     wrapper.find('form').simulate('submit');
   });
   it('should contain <CheckoutForm /> component <DeliveryType />', () => {
-    const wrapper = shallow(<CheckoutForm {...props} />);
+    const wrapper = shallow(<CheckoutForm {...props} language={0} />);
     expect(wrapper.find(DeliveryType).length).toEqual(1);
   });
 });

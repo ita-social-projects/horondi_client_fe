@@ -19,7 +19,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
           </Link>
         </div>
         <h2>
-          checkout.checkoutTitles.checkoutTitle
+          <Component />
         </h2>
         <div />
       </div>
@@ -28,7 +28,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
       >
         <div>
           <h3>
-            checkout.checkoutTitles.contactInfo
+            <Component />
           </h3>
           <div>
             <div
@@ -36,7 +36,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="firstName"
-                label="Ім'я *"
+                label="First name *"
                 name="firstName"
                 onChange={[Function]}
                 size="small"
@@ -49,7 +49,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="lastName"
-                label="Прізвище *"
+                label="Last name *"
                 name="lastName"
                 onChange={[Function]}
                 size="small"
@@ -77,7 +77,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="phoneNumber"
-                label="Номер телефону *"
+                label="Phone *"
                 name="phoneNumber"
                 onChange={[Function]}
                 size="small"
@@ -93,7 +93,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
           errors={Object {}}
           handleChange={[Function]}
           isLightTheme={true}
-          language={0}
+          language={1}
           setFieldValue={[Function]}
           touched={Object {}}
           values={
@@ -119,7 +119,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
         />
         <div>
           <h2>
-            checkout.checkoutTitles.payment
+            <Component />
           </h2>
           <WithStyles(ForwardRef(FormControl))
             variant="outlined"
@@ -127,165 +127,31 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             <WithStyles(ForwardRef(InputLabel))
               variant="outlined"
             >
-              checkout.checkoutTextFields.paymentMethod
+              <Component />
             </WithStyles(ForwardRef(InputLabel))>
             <WithStyles(ForwardRef(Select))
               data-cy="paymentMethod"
-              label="checkout.checkoutTextFields.paymentMethod"
+              label={
+                Object {
+                  "paymentMethod": "card",
+                }
+              }
               name="paymentMethod"
               onChange={[Function]}
               value=""
             >
               <WithStyles(ForwardRef(MenuItem))
-                key="c"
-                value="c"
+                key="card"
+                value="card"
               >
-                c
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="h"
-                value="h"
-              >
-                h
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="e"
-                value="e"
-              >
-                e
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="c"
-                value="c"
-              >
-                c
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="k"
-                value="k"
-              >
-                k
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="o"
-                value="o"
-              >
-                o
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="u"
-                value="u"
-              >
-                u
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="t"
-                value="t"
-              >
-                t
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="."
-                value="."
-              >
-                .
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="c"
-                value="c"
-              >
-                c
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="h"
-                value="h"
-              >
-                h
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="e"
-                value="e"
-              >
-                e
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="c"
-                value="c"
-              >
-                c
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="k"
-                value="k"
-              >
-                k
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="o"
-                value="o"
-              >
-                o
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="u"
-                value="u"
-              >
-                u
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="t"
-                value="t"
-              >
-                t
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="P"
-                value="P"
-              >
-                P
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="a"
-                value="a"
-              >
-                a
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="y"
-                value="y"
-              >
-                y
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="m"
-                value="m"
-              >
-                m
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="e"
-                value="e"
-              >
-                e
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="n"
-                value="n"
-              >
-                n
-              </WithStyles(ForwardRef(MenuItem))>
-              <WithStyles(ForwardRef(MenuItem))
-                key="t"
-                value="t"
-              >
-                t
+                card
               </WithStyles(ForwardRef(MenuItem))>
             </WithStyles(ForwardRef(Select))>
           </WithStyles(ForwardRef(FormControl))>
         </div>
         <div>
           <h2>
-            checkout.checkoutTitles.orderComment
+            <Component />
           </h2>
           <div>
             <WithStyles(ForwardRef(TextField))
@@ -300,7 +166,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             />
           </div>
           <p>
-            checkout.checkoutAdditionalInfo.additionalInfo
+            <Component />
           </p>
         </div>
       </WithStyles(ForwardRef(Grid))>
@@ -309,14 +175,14 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
       >
         <div>
           <h2>
-            checkout.checkoutTitles.yourOrderTitle
+            <Component />
           </h2>
           <div />
         </div>
         <div>
           <div>
             <h4>
-              common.toPay
+              <Component />
             </h4>
             <p
               className="undefined undefined"
@@ -359,18 +225,18 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
           <button
             type="submit"
           >
-            Підтвердити замовлення
+            Confirm order
           </button>
           <div>
              
-            checkout.checkoutAdditionalInfo.consent.0
+            <Component />
             <Link
               rel="noreferrer"
               target="_blank"
               to="/pages/user-agreement"
             >
                
-              checkout.checkoutAdditionalInfo.consent.1
+              <Component />
                
             </Link>
           </div>

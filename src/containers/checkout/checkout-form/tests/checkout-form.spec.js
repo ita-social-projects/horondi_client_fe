@@ -7,6 +7,12 @@ import DeliveryType from '../../delivery-type/delivery-type';
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key) => key,
+    i18n: { language: 'ua' }
+  })
+}));
 
 const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
 const dispatch = jest.fn();

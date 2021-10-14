@@ -17,7 +17,7 @@ import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
 
-const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
+const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme

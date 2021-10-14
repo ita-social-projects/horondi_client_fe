@@ -19,28 +19,21 @@ useSelector.mockImplementation(() => ({
 
 let wrapper;
 
-const touched = {};
-const values = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: null,
-  paymentMethod: '',
-  userComment: '',
-  courierOffice: '',
-  city: '',
-  street: '',
-  house: '',
-  flat: '',
-  region: '',
-  district: '',
-  regionId: '',
-  districtId: '',
-  cityId: ''
+const props = {
+  isLightTheme: true,
+  values: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: null
+  },
+  touched: {},
+  errors: {},
+  setFieldValue: jest.fn()
 };
 
 describe('ConstructorSubmit component tests', () => {
-  wrapper = shallow(<UkrPost values={values} touched={touched} />);
+  wrapper = shallow(<UkrPost {...props} />);
 
   it('Should render UkrPost', () => {
     expect(wrapper).toBeDefined();

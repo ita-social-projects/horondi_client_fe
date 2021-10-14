@@ -7,7 +7,6 @@ jest.mock('../nova-post.styles.js', () => ({
 }));
 jest.mock('react-redux');
 const dispatch = jest.fn();
-const setFieldValue = jest.fn();
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
@@ -18,38 +17,21 @@ useSelector.mockImplementation(() => ({
 
 let wrapper;
 
-const isLightTheme = true;
-const touched = {};
-const errors = {};
-const values = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: null,
-  paymentMethod: '',
-  userComment: '',
-  courierOffice: '',
-  city: '',
-  street: '',
-  house: '',
-  flat: '',
-  region: '',
-  district: '',
-  regionId: '',
-  districtId: '',
-  cityId: ''
+const props = {
+  isLightTheme: true,
+  values: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: null
+  },
+  touched: {},
+  errors: {},
+  setFieldValue: jest.fn()
 };
 
 describe('ConstructorSubmit component tests', () => {
-  wrapper = shallow(
-    <NovaPost
-      errors={errors}
-      setFieldValue={setFieldValue}
-      isLightTheme={isLightTheme}
-      values={values}
-      touched={touched}
-    />
-  );
+  wrapper = shallow(<NovaPost {...props} />);
 
   it('Should render NovaPost', () => {
     expect(wrapper).toBeDefined();

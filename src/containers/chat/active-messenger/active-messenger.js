@@ -4,7 +4,6 @@ import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
-
 import { formRegExp, CHAT_USER_DATA } from '../../../configs';
 import { useStyles } from '../chat.style';
 import { sendEmail } from '../../../redux/chat/chat.actions';
@@ -33,7 +32,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
 
   const [firstNameValidated, setFirstNameValidated] = useState(!!defaultFirstName);
   const [emailValidated, setEmailValidated] = useState(!!defaultEmail);
-
   const [messageValidated, setMessageValidated] = useState(false);
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);

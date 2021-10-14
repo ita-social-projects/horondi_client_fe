@@ -8,6 +8,8 @@
   "saturday": "Сб:  ",
   "sunday": "Нд:  ",
   "noCity": "Жодного міста не знайдено",
-  "noOneDepartment": "Жодного відділення не знайдено",
-  "deliveryAddress": "Адреса доставки"
+  "noDepartment": "Жодного відділення не знайдено",
+  "deliveryAddress": "Адреса доставки",
+  "city": "Місто",
+  "department": "Відділення"
 }

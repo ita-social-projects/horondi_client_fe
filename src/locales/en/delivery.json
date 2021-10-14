@@ -7,7 +7,9 @@
   "selfPickup": "Self pick-up",
   "saturday": "Sat:  ",
   "sunday": "Sun:  ",
-  "noOneCity": "City not found",
-  "noOneDepartment": "Department not found",
-  "deliveryAddress": "Delivery Address"
+  "noCity": "City not found",
+  "noDepartment": "Department not found",
+  "deliveryAddress": "Delivery Address",
+  "city": "City",
+  "department": "Department"
 }

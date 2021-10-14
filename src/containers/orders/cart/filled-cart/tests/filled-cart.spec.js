@@ -20,7 +20,10 @@ const mockUseSelector = (loading = false) => {
     userData: {},
     cartList: [],
     cartQuantityLoading: false,
-    cartUserTotalPrice: 100
+    cartUserTotalPrice: 100,
+    user: {
+      userData: null
+    }
   }));
 };
 
@@ -32,7 +35,7 @@ describe('Filled cart component tests', () => {
     mockUseSelector();
   });
 
-  it('should match snapshot', () => {
+  it('Should match snapshot', () => {
     wrapper = shallow(<FilledCart items={items} />);
     expect(wrapper).toMatchSnapshot();
   });

@@ -16,12 +16,20 @@ const useQueryData = {
 const props = { fromSideBar: {}, isMenuOpen: true, setIsMenuOpen: () => null };
 
 jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: () => ({ language: 0 })
+  ...jest.requireActual('react-redux')
 }));
 jest.mock('@apollo/client');
 
 describe('sidebar tests', () => {
+  it('should be defined', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+    wrapper = shallow(<Sidebar {...props} />);
+
+    expect(wrapper).toBeDefined();
+  });
+
   it('should match snapshot', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData

@@ -20,17 +20,6 @@ export const AVAILABLE_COUNT_LABEL_TEXT = {
   }
 };
 
-export const SEARCH_TEXT = {
-  0: {
-    lang: 'uk',
-    value: 'Пошук'
-  },
-  1: {
-    lang: 'eng',
-    value: 'Search '
-  }
-};
-
 export const PRICE_TEXT = {
   0: {
     lang: 'uk',

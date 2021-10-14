@@ -134,7 +134,6 @@ const Login = () => {
                       >
                         {t('login.formLabel')}
                       </Button>
-                      <p className={styles.loginError}>{t('login.wrongCredentials')}</p>
                     </div>
                     <div className={styles.orContainer}>
                       <span className={styles.orText}>{t('login.orText')}</span>

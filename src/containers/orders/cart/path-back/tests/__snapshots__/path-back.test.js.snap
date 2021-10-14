@@ -2,7 +2,7 @@
 
 exports[`Path back component tests should match snapshot 1`] = `
 <div
-  className="makeStyles-whiteThemePath-1"
+  className="makeStyles-darkThemePath-2"
 >
   <div
     className="makeStyles-pathLine-3"
@@ -10,18 +10,18 @@ exports[`Path back component tests should match snapshot 1`] = `
     <Link
       to="/"
     >
-      Головна
+      cart.pathBack.toMain
     </Link>
      /
      
     <Link
       to="/catalog/:category"
     >
-      Каталог
+      cart.pathBack.toCatalog
     </Link>
      /
      
-    Ваш кошик
+    cart.pathBack.yourCart
   </div>
 </div>
 `;

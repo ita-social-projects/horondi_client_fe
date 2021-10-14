@@ -1,17 +1,16 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './search-bar.styles';
 import { setSearchFilter, getFiltredProducts } from '../../redux/products/products.actions';
 import { setSearchBarVisibility } from '../../redux/search-bar/search-bar.actions';
-import { SEARCH_TEXT } from '../../translations/product-list.translations';
 
 const SearchBar = ({ fromSideBar }) => {
-  const language = useSelector(({ Language }) => Language.language);
-
   const styles = useStyles({ fromSideBar });
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
 
@@ -47,7 +46,7 @@ const SearchBar = ({ fromSideBar }) => {
   return (
     <TextField
       className={stickySearch}
-      label={SEARCH_TEXT[language].value}
+      label={t('searchBar.search')}
       onChange={handleSearch}
       onBlur={handleOnBlur}
       onFocus={handleSearch}

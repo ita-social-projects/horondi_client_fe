@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Select from '@material-ui/core/Select';
@@ -10,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 
 import { useStyles } from './cart-item.styles';
-import { CART_TABLE_FIELDS } from '../../../../translations/cart.translations';
 import NumberInput from '../../../../components/number-input';
 
 import {
@@ -40,6 +40,7 @@ const CartItem = ({
 }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState(item.quantity);
   const currencySign = getCurrencySign(currency);
   const [firstlyMounted, toggleFirstlyMounted] = useState(false);
@@ -122,7 +123,7 @@ const CartItem = ({
                 isLightTheme ? styles.lightThemeItemDescription : styles.darkThemeItemDescription
               }
             >
-              {CART_TABLE_FIELDS[language].bottomMaterial}:{' '}
+              {t('cart.bottomMaterial')}:{' '}
               {item.product.bottomMaterial.material.name[language].value}
             </div>
           )}

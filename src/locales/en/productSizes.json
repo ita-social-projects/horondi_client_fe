@@ -1,6 +1,5 @@
 {
     "size": {
-        "carrentSize": "Size",
-        "error": "Select products size "
+        "carrentSize": "Size"
     }
 }

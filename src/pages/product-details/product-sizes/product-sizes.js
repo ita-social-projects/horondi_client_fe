@@ -41,9 +41,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
           </div>
         </div>
       ) : null}
-      {sizeIsNotSelectedError ? (
-        <div className={styles.error}>{t('productSizes.size.error')}</div>
-      ) : null}
+      {sizeIsNotSelectedError ? <div className={styles.error}>{t('error.errorSize')}</div> : null}
     </div>
   );
 };

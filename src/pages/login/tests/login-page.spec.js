@@ -12,11 +12,7 @@ jest.mock('../../../services/local-storage.service');
 const dispatch = jest.fn();
 let storage = {
   loginError: '',
-  userLoading: false,
-  language: 0,
-  snackBarStatus: '',
-  snackBarSeverity: '',
-  snackBarMessage: ['']
+  userLoading: false
 };
 
 useDispatch.mockImplementation(() => dispatch);
@@ -65,11 +61,7 @@ describe('Login page test', () => {
   it('Should render Loader', () => {
     storage = {
       loginError: '',
-      userLoading: true,
-      language: 1,
-      snackBarStatus: '',
-      snackBarSeverity: '',
-      snackBarMessage: ['']
+      userLoading: true
     };
     const component = shallow(<Login />);
     expect(component.exists(Loader)).toBe(true);

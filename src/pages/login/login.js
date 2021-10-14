@@ -54,6 +54,8 @@ const Login = () => {
       }
     });
 
+  const wrongCredentials = <p className={styles.loginError}>{t('error.wrongCredentials')}</p>;
+
   return (
     <form onSubmit={(e) => eventPreventHandler(e)}>
       <div className={styles.container}>
@@ -130,9 +132,7 @@ const Login = () => {
                       >
                         {t('login.formLabel')}
                       </Button>
-                      {loginError ? (
-                        <p className={styles.loginError}>{t('error.wrongCredentials')}</p>
-                      ) : null}
+                      {loginError ? wrongCredentials : null}
                     </div>
                     <div className={styles.orContainer}>
                       <span className={styles.orText}>{t('login.orText')}</span>

@@ -64,6 +64,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
       <h3 className={styles.ukrPostTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.selectorInfo}>
         <Autocomplete
+          name='region'
           onInputChange={(e, value, reason) => {
             if (reason !== RESET || (reason === RESET && value)) {
               setFieldValue('region', value);

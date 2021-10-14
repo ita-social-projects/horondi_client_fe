@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import UkrPost from '../ukrpost';
 
 jest.mock('../ukrpost.styles.js', () => ({
@@ -18,6 +19,7 @@ useSelector.mockImplementation(() => ({
 }));
 
 let wrapper;
+let inputs;
 
 const props = {
   isLightTheme: true,
@@ -32,10 +34,21 @@ const props = {
   setFieldValue: jest.fn()
 };
 
-describe('ConstructorSubmit component tests', () => {
+describe('UkrPost component tests', () => {
   wrapper = shallow(<UkrPost {...props} />);
 
   it('Should render UkrPost', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('UkrPost inputs test', () => {
+    wrapper.find(Autocomplete).forEach((i) => {
+      i.props().onChange('event', 'test');
+      i.props().onChange('event');
+      i.props().onInputChange('event', 'value', 'reason');
+      i.props().onInputChange('event', 'value', 'reset');
+      i.props().getOptionLabel('');
+      expect(i).toBeDefined();
+    });
   });
 });

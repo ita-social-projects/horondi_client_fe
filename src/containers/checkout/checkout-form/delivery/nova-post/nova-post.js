@@ -5,7 +5,6 @@ import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-
 import { useStyles } from './nova-post.styles';
 import {
   getNovaPoshtaCities,

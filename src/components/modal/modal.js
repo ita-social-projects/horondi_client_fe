@@ -34,11 +34,11 @@ const Modal = ({
         {isCartModal ? null : <b>{itemName}</b>}
       </p>
       <div className={styles.buttonGroup}>
-        <Button onClick={handleClose} variant='contained'>
-          {t('common.buttons.cancel')}
-        </Button>
         <Button onClick={() => handleClose(null, null, true)} variant='contained'>
           {t('common.buttons.confirm')}
+        </Button>
+        <Button onClick={handleClose} variant='contained'>
+          {t('common.buttons.cancel')}
         </Button>
       </div>
     </div>

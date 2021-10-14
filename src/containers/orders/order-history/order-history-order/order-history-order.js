@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -13,11 +14,7 @@ import { IMG_URL } from '../../../../configs';
 import OrderHistoryTable from '../order-history-table/index';
 import OrderHistoryOrderItem from '../order-history-order-item';
 import { useStyles } from './order-history-order.styles';
-import {
-  ORDER_HISTORY_TABLE_FIELDS,
-  ORDER_STATUSES,
-  ORDER_TABLE_FIELDS
-} from '../../../../translations/order.translations';
+
 import { statusColors } from '../../../../const/style-consts';
 
 const OrderHistoryOrder = ({ order }) => {
@@ -25,6 +22,7 @@ const OrderHistoryOrder = ({ order }) => {
     language: Language.language,
     currency: Currency.currency
   }));
+  const { t } = useTranslation();
 
   const { color } = statusColors.find((item) => item.label === order.status);
 
@@ -68,7 +66,8 @@ const OrderHistoryOrder = ({ order }) => {
 
   const totalPrice = order.totalItemsPrice[currency].value;
   const currencySign = getCurrencySign(currency);
-  const orderStatus = _.capitalize(ORDER_STATUSES[order.status][language]);
+  // const orderStatus = _.capitalize(ORDER_STATUSES[order.status][language]);
+  const orderStatus = _.capitalize(t(`orderHistory.statuses.${[order.status]}`));
   const dateInFormat = getFormatDate(order.dateOfCreation);
 
   return (
@@ -83,14 +82,14 @@ const OrderHistoryOrder = ({ order }) => {
           <div className={styles.heading}>
             <div className={styles.info}>
               <div>
-                №{order.orderNumber} {ORDER_HISTORY_TABLE_FIELDS[language].dated} {dateInFormat}
+                №{order.orderNumber} {t(`orderHistory.tableField`.dated)} {dateInFormat}
               </div>
               <div className={styles.status} style={{ color }}>
                 {orderStatus}
               </div>
             </div>
             <div className={visible ? styles.total : styles.blockNone}>
-              <div>{ORDER_TABLE_FIELDS[language].amountOfOrder}:</div>
+              <div>{t('orderHistory.amountOfOrder')}:</div>
               <div className={styles.status}>
                 {totalPrice} <FontAwesomeIcon icon={currencySign} />
               </div>
@@ -103,7 +102,7 @@ const OrderHistoryOrder = ({ order }) => {
             <OrderHistoryTable items={orderHistoryList} totalPrice={totalPrice} />
           </div>
           <div className={styles.bottom}>
-            <div className={styles.totalText}>{ORDER_TABLE_FIELDS[language].amountOfOrder}:</div>
+            <div className={styles.totalText}>{t('orderHistory.amountOfOrder')}:</div>
             <div className={styles.totalText}>
               <div>
                 {totalPrice} <FontAwesomeIcon icon={currencySign} />

@@ -11,7 +11,6 @@ const Modal = ({
   itemName = [],
   onAction,
   isOpen,
-  language,
   isCartModal = false,
   isEmpty = false,
   isFullscreen = false,

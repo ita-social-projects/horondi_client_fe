@@ -38,7 +38,7 @@ describe('Checkout component tests', () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('should match snapshot', () => {
+  it('Should match snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -51,7 +51,7 @@ describe('Product submit tests', () => {
   it('should click to Cart button', () => {
     const button = wrapper.find(Button).at(0);
     button.simulate('click');
-    expect(button.props().children).toBe('productSubmit.pdpButtons.cartButton');
+    expect(button.props().children).toBe('product.pdpButtons.cartButton');
   });
 
   it('should click to inCart button', () => {
@@ -79,12 +79,12 @@ describe('Product submit tests', () => {
     );
     const button = wrapper.find(Button).at(0);
     button.simulate('click');
-    expect(button.props().children).toBe('productSubmit.pdpButtons.inCart');
+    expect(button.props().children).toBe('product.pdpButtons.inCart');
   });
 
   it('should click to BuyNow button', () => {
     const button = wrapper.find(Button).at(1);
-    expect(button.props().children).toBe('productSubmit.pdpButtons.buyButton');
+    expect(button.props().children).toBe('product.pdpButtons.buyButton');
     button.simulate('click');
   });
 });

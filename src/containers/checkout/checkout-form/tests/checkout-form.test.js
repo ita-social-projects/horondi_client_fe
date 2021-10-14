@@ -33,7 +33,7 @@ const userData = {
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
 
-describe('<CheckoutForm />', () => {
+describe('CheckoutForm component tests', () => {
   it('should contain <CheckoutForm /> component <Delivery />', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     expect(wrapper.find(Delivery).length).toEqual(1);
@@ -43,7 +43,7 @@ describe('<CheckoutForm />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should submit add payment method', async () => {
-    const wrapper = shallow(<CheckoutForm {...props} myOnSubmit={myOnSubmit} />);
+    const wrapper = shallow(<CheckoutForm {...props} onSubmit={myOnSubmit} />);
     wrapper.find('form').simulate('submit');
   });
   it('should contain <CheckoutForm /> component <DeliveryType />', () => {

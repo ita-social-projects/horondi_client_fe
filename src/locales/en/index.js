@@ -19,6 +19,8 @@ import newPassword from './new-password.json';
 import orderHistory from './order-history.json';
 import notFoundPage from './not-found-page.json';
 import productListPage from './product-list-page.json';
+import footer from './footer.json';
+import headerProfile from './header-profile.json';
 
 export default {
   translations: {
@@ -42,6 +44,8 @@ export default {
     newPassword,
     orderHistory,
     notFoundPage,
-    productListPage
+    productListPage,
+    footer,
+    headerProfile
   }
 };

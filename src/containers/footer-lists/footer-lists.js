@@ -3,14 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { useTranslation } from 'react-i18next';
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
-
-import {
-  FOOTER_INFORMATION,
-  FOOTER_CONTACTS,
-  FOOTER_CATALOGS
-} from '../../translations/footer.translations';
 import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
 
@@ -18,6 +13,9 @@ const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
+  const { t } = useTranslation();
+  const getFooterInfo = t('footer.footerInformation.items', { returnObjects: true });
+
   const { categories, language, contacts, quantityPerPage } = useSelector(
     ({ Categories, Language, Contacts, Products }) => ({
       categories: Categories.list,
@@ -42,7 +40,7 @@ const FooterLists = () => {
     ))
     : null;
 
-  const informationList = FOOTER_INFORMATION[language].items.map((item) => (
+  const informationList = getFooterInfo.map((item) => (
     <div key={item.id}>
       <Typography variant='subtitle2'>
         <Link className={styles.cardLink} to={item.url}>
@@ -69,25 +67,25 @@ const FooterLists = () => {
     <>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>{FOOTER_CATALOGS[language].title}</Typography>
+          <Typography variant='h5'>{t('footer.catalogs')}</Typography>
         </div>
         {categoriesList}
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>{FOOTER_INFORMATION[language].title}</Typography>
+          <Typography variant='h5'>{t('footer.footerInformation.title')}</Typography>
         </div>
         {informationList}
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>{FOOTER_CONTACTS[language].title}</Typography>
+          <Typography variant='h5'>{t('footer.footerContacts.title')}</Typography>
         </div>
         {contactsList[0]}
-        <div key={FOOTER_CONTACTS[language].more.id}>
+        <div>
           <Typography variant='subtitle2'>
             <Link to={pathToContacts} className={styles.cardLink}>
-              <span>{FOOTER_CONTACTS[language].more.item}</span>
+              <span>{t('footer.footerContacts.more')}</span>
             </Link>
           </Typography>
         </div>

@@ -1,0 +1,37 @@
+{
+    "catalogs": "Каталоги",
+    "socialNetworkLinks": {
+        "title": "Ми в соцмережах",
+        "facebook": "https://www.facebook.com/Horondi",
+        "instagram": "https://www.instagram.com/horondi"
+    },
+    "footerInformation": {
+        "title": "Інформація",
+        "items": [
+            {
+                "id": 1,
+                "url": "/pages/about-us",
+                "item": "Про нас"
+            },
+            {
+                "id": 2,
+                "url": "/materials",
+                "item": "Матеріали"
+            },
+            {
+                "id": 3,
+                "url": "/pages/payment-and-shipping",
+                "item": "Оплата і доставка"
+            },
+            {
+                "id": 4,
+                "url": "/pages/privacy-policy",
+                "item": "Умови конфіденційності"
+            }
+        ]
+    },
+    "footerContacts": {
+        "title": "Контакти",
+        "more": "Більше інформації"
+    }
+}

@@ -35,5 +35,7 @@
   "model": "Model",
   "category": "Category",
   "pattern": "Pattern",
-  "toPay": "Total price"
+  "toPay": "Total price",
+  "logIn": "Log in",
+  "logOut": "Log out"
 }

@@ -16,7 +16,6 @@ import { validationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 import { getFromLocalStorage } from '../../services/local-storage.service';
-import { translations } from '../../locales/index';
 
 const Login = () => {
   const theme = getFromLocalStorage('theme');

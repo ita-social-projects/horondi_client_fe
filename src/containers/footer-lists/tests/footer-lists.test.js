@@ -1,11 +1,7 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import FooterLists from '../footer-lists';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../footer-lists.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-i18next', () => ({ useTranslation: () => ({ t: () => [] }) }));

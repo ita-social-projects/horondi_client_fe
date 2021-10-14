@@ -1,12 +1,8 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
 import { useDispatch, useSelector } from 'react-redux';
-import Adapter from 'enzyme-adapter-react-16';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
 import DeliveryType from '../../delivery-type/delivery-type';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));

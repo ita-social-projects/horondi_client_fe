@@ -1,13 +1,9 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
 import HeaderProfile from '../header-profile';
 import { getFromLocalStorage } from '../../../services/local-storage.service';
 import { DARK_THEME, LIGHT_THEME } from '../../../configs';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('../header-profile.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../services/local-storage.service');

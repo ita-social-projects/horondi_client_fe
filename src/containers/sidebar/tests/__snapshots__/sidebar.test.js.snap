@@ -3,7 +3,7 @@
 exports[`sidebar tests should match snapshot 1`] = `
 <WithStyles(ForwardRef(Drawer))
   anchor="left"
-  className="makeStyles-drawer-1 makeStyles-drawer-8"
+  className="makeStyles-drawer-1 makeStyles-drawer-10"
   onClose={[Function]}
   open={true}
 >
@@ -16,7 +16,7 @@ exports[`sidebar tests should match snapshot 1`] = `
     <span
       className="makeStyles-constructorItem-7"
     >
-      Створи сам
+      sidebar.constructorCreate
     </span>
   </Link>
   <div
@@ -29,7 +29,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/materials"
     >
       <span>
-        Матеріали
+        Materials
       </span>
     </Link>
     <Link
@@ -39,7 +39,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/pages/about-us"
     >
       <span>
-        Про нас
+        About us
       </span>
     </Link>
     <Link
@@ -49,7 +49,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/news"
     >
       <span>
-        Новини
+        News
       </span>
     </Link>
     <Link
@@ -59,7 +59,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/contacts"
     >
       <span>
-        Контакти
+        Contacts
       </span>
     </Link>
   </div>

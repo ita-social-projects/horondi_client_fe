@@ -63,7 +63,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {parse(text[language]?.value) || t('newsDetail.noText')}
+            {parse(text[language].value) || t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<Fragment>
+  <h1
+    className="makeStyles-newsTitle-1"
+  >
+    News
+  </h1>
+  <div
+    className="makeStyles-NewsPageItem-2"
+  />
+</Fragment>
+`;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -13,13 +13,14 @@ import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../const/routes';
 import { getCurrencySign } from '../../../utils/currency';
+import ThemeContext from '../../../context/theme-context';
 
 const ProductListItem = ({ product }) => {
   const { t, i18n } = useTranslation();
-  const { currency, isLightTheme } = useSelector(({ Currency, Theme }) => ({
-    currency: Currency.currency,
-    isLightTheme: Theme.lightMode
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency
   }));
+  const isLightTheme = useContext(ThemeContext);
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const { pathToProducts } = routes;
   useEffect(() => {

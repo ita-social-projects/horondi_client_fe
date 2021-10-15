@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThanksPage component tests should match snapshot 1`] = `
+<div>
+  <Redirect
+    to="/"
+  />
+  <div>
+    <CheckoutForm
+      cartItems={Array []}
+      currency={0}
+      deliveryType=""
+      errors={Object {}}
+      isLightTheme={
+        Object {
+          "isLight": true,
+        }
+      }
+      language={1}
+      touched={Object {}}
+      values={Object {}}
+    />
+  </div>
+</div>
+`;

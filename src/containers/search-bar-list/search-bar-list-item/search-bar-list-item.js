@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
@@ -11,15 +11,16 @@ import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
 import routes from '../../../const/routes';
+import ThemeContext from '../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
 const SearchBarListItem = ({ product }) => {
-  const { currency, isLightTheme } = useSelector(({ Currency, Theme }) => ({
-    currency: Currency.currency,
-    isLightTheme: Theme.lightMode
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency
   }));
   const { t, i18n } = useTranslation();
+  const isLightTheme = useContext(ThemeContext);
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const dispatch = useDispatch();

@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Typography, Button } from '@material-ui/core';
 
 import { useStyles } from './empty-wishlist.styles';
 import { WISHLIST_IMAGES } from '../../../configs';
+import ThemeContext from '../../../context/theme-context';
 
 const EmptyWishlist = () => {
-  const { isLightTheme } = useSelector(({ Theme }) => ({
-    isLightTheme: Theme.lightMode
-  }));
+  const isLightTheme = useContext(ThemeContext);
   const styles = useStyles();
   const { t } = useTranslation();
   const emptyWishlistImgLink = isLightTheme

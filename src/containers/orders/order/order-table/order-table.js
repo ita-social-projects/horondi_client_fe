@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
@@ -20,14 +20,15 @@ import {
 
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
+import ThemeContext from '../../../../context/theme-context';
 
 const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantityLoading }) => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
   }));
   const styles = useStyles();
   const dispatch = useDispatch();
+  const isLightTheme = useContext(ThemeContext);
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);

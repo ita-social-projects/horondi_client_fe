@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -25,6 +25,7 @@ import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../const/routes';
+import ThemeContext from '../../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
@@ -53,10 +54,7 @@ const CartItem = ({
     [dispatch, changeCartItemUserQuantity]
   );
 
-  const { isLightTheme } = useSelector(({ Theme }) => ({
-    isLightTheme: Theme.lightMode
-  }));
-
+  const isLightTheme = useContext(ThemeContext);
   const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
 
   const onDeleteItem = () => {

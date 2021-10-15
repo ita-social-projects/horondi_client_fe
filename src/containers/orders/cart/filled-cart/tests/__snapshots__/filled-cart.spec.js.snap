@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filled cart component tests should match snapshot 1`] = `
+exports[`Filled cart component tests Should match snapshot 1`] = `
 <Fragment>
   <PathBack />
   <div
@@ -26,6 +26,11 @@ exports[`Filled cart component tests should match snapshot 1`] = `
             ]
           }
           language={0}
+          user={
+            Object {
+              "userData": null,
+            }
+          }
         />
       </div>
     </div>

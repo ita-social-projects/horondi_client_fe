@@ -16,7 +16,11 @@ const dispatch = jest.fn();
 const state = {
   isLightTheme: true,
   language: 1,
-  loading: false
+  loading: false,
+  currency: 0,
+  order: null,
+  paidOrderLoading: false,
+  user: {}
 };
 
 useDispatch.mockImplementation(() => dispatch);

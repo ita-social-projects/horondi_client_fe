@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
@@ -7,16 +7,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
 import { ERROR_PAGE_MESSAGE } from '../../translations/errorpage.translations';
+import ThemeContext from '../../context/theme-context';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
-  const { isLightTheme, errorMessage } = useSelector(({ Theme, Error }) => ({
-    isLightTheme: Theme.lightMode,
+  const { errorMessage } = useSelector(({ Error }) => ({
     errorMessage: Error.error
   }));
 
+  const isLightTheme = useContext(ThemeContext);
   const getLanguage = i18n.language === 'ua' ? 0 : 1;
 
   useEffect(() => {

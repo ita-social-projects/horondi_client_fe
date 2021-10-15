@@ -26,28 +26,21 @@ const useProductFilters = (filters, filterData) => {
         (element) => element.name[language].value === target.name
       )[0]._id;
       if (query) {
-        if (!target.checked) {
-          query = query.replace(categoryId, '');
-        } else {
-          query = query.concat(',', categoryId);
-        }
+        !target.checked
+          ? (query = query.replace(categoryId, ''))
+          : (query = query.concat(',', categoryId));
       } else {
         query = categoryId;
       }
     } else if (query) {
-      if (!target.checked) {
-        query = query.replace(target.name, '');
-      } else {
-        query = query.concat(',', target.name);
-      }
+      !target.checked
+        ? (query = query.replace(target.name, ''))
+        : (query = query.concat(',', target.name));
     } else {
       query = target.name;
     }
-    if (query) {
-      searchParams.set(queryName, query);
-    } else {
-      searchParams.delete(queryName);
-    }
+    query ? searchParams.set(queryName, query) : searchParams.delete(queryName);
+
     searchParams.set(page, 1);
     history.push(`?${searchParams.toString()}`);
   };
@@ -61,7 +54,7 @@ const useProductFilters = (filters, filterData) => {
     categories: {
       filterName: CATERGORY_TEXT[language].value,
       productFilter: category || [],
-      list: map(filterData.categories, (category) => category.name[language].value),
+      list: map(filterData.categories, (el) => el.name[language].value),
       categories: filterData.categories,
       clearFilter: () => handleFilterClear(URL_QUERIES_NAME.categoryFilter),
       filterHandler: (e) =>

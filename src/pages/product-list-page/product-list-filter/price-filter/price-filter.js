@@ -34,7 +34,6 @@ const PriceFilter = ({ priceRange }) => {
     if (prices.length === 0 && priceRange.minPrice)
       setPrices([priceRange.minPrice[currency].value, priceRange.maxPrice[currency].value]);
   }, [priceRange]);
-
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
   };

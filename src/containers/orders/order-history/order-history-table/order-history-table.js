@@ -5,7 +5,7 @@ import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/c
 import OrderHistoryOrderItem from '../order-history-order-item/index';
 import { useStyles } from './order-history-table.style';
 
-const OrderHistoryTable = ({ items, totalPrice }) => {
+const OrderHistoryTable = ({ items }) => {
   const { language, currency } = useSelector(({ Language, Currency }) => ({
     language: Language.language,
     currency: Currency.currency
@@ -13,9 +13,13 @@ const OrderHistoryTable = ({ items, totalPrice }) => {
 
   const styles = useStyles();
   const { t } = useTranslation();
-
-  const orderHistoryItems = items.map((item, idx) => (
-    <OrderHistoryOrderItem key={idx} item={item} language={language} currency={currency} />
+  const orderHistoryItems = items.map((item) => (
+    <OrderHistoryOrderItem
+      key={item._owner.key}
+      item={item}
+      language={language}
+      currency={currency}
+    />
   ));
 
   return (

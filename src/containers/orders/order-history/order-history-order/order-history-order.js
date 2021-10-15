@@ -66,7 +66,6 @@ const OrderHistoryOrder = ({ order }) => {
 
   const totalPrice = order.totalItemsPrice[currency].value;
   const currencySign = getCurrencySign(currency);
-  // const orderStatus = _.capitalize(ORDER_STATUSES[order.status][language]);
   const orderStatus = _.capitalize(t(`orderHistory.statuses.${[order.status]}`));
   const dateInFormat = getFormatDate(order.dateOfCreation);
 

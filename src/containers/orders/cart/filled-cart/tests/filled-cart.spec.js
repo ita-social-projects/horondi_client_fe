@@ -45,8 +45,4 @@ describe('Filled cart component tests', () => {
     wrapper = shallow(<FilledCart items={items} />);
     expect(wrapper.exists(Loader)).toBe(true);
   });
-
-  it('should cover other branches', () => {
-    wrapper = shallow(<FilledCart items={items} />);
-  });
 });

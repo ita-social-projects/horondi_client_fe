@@ -17,6 +17,10 @@ const useProductFilters = (filters, filterData) => {
   const searchParams = new URLSearchParams(search);
   const language = i18n.language === 'ua' ? 0 : 1;
   const { category, patterns, models } = filters;
+  const checkFirstCondition = (query, target, categoryId) =>
+    !target.checked ? query.replace(categoryId, '') : query.concat(',', categoryId);
+  const checkSecondCondition = (query, target) =>
+    !target.checked ? query.replace(target.name, '') : query.concat(',', target.name);
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
     let query = searchParams.get(queryName);
@@ -26,21 +30,20 @@ const useProductFilters = (filters, filterData) => {
         (element) => element.name[language].value === target.name
       )[0]._id;
       if (query) {
-        !target.checked
-          ? (query = query.replace(categoryId, ''))
-          : (query = query.concat(',', categoryId));
+        query = checkFirstCondition(query, target, categoryId);
       } else {
         query = categoryId;
       }
     } else if (query) {
-      !target.checked
-        ? (query = query.replace(target.name, ''))
-        : (query = query.concat(',', target.name));
+      query = checkSecondCondition(query, target);
     } else {
       query = target.name;
     }
-    query ? searchParams.set(queryName, query) : searchParams.delete(queryName);
-
+    if (query) {
+      searchParams.set(queryName, query);
+    } else {
+      searchParams.delete(queryName);
+    }
     searchParams.set(page, 1);
     history.push(`?${searchParams.toString()}`);
   };

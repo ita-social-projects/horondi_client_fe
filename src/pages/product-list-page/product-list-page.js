@@ -123,7 +123,7 @@ const ProductListPage = ({ width }) => {
       </div>
       <div className={styles.filterButtonBlock}>
         <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
-          {t('productListPage.showFilterButtonText')}
+          {t('common.showFilters')}
         </Button>
       </div>
       <div className={styles.list}>

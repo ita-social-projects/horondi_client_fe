@@ -13,13 +13,8 @@ const OrderHistoryTable = ({ items }) => {
 
   const styles = useStyles();
   const { t } = useTranslation();
-  const orderHistoryItems = items.map((item) => (
-    <OrderHistoryOrderItem
-      key={item._owner.key}
-      item={item}
-      language={language}
-      currency={currency}
-    />
+  const orderHistoryItems = items.map((item, idx) => (
+    <OrderHistoryOrderItem key={idx} item={item} language={language} currency={currency} />
   ));
 
   return (

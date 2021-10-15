@@ -2,5 +2,18 @@
   "wrongEmail": "Wrong email address",
   "pass": "From 6 to 30 characters with one capital  letter and one digit",
   "wrongCredentials": "Wrong e-mail address or password",
-  "confirmPassword": "Passwords do not match"
+  "confirmPassword": "Passwords do not match",
+  "requiredField": "Field should not to be empty",
+  "firstName": "Field should contain from 2 to 30 characters",
+  "lastName": "Field should contain from 2 to 30 characters",
+  "email": "Incorrect email format",
+  "phoneNumber": "Incorrect phone number format",
+  "userComment": "Field should contain from 2 to 500 characters",
+  "city": "Field should contain from 2 to 50 characters",
+  "street": "Field should contain from 2 to 100 characters",
+  "house": "Min value is 1 character",
+  "flat": "Min value is 1 character",
+  "onlyLetter": "Field should contain only letters",
+  "emailLength": "Field should contain from 8 to 60 characters",
+  "wrongFormat": "Wrong format"
 }

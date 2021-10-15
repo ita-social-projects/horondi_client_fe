@@ -1,23 +1,20 @@
 import * as Yup from 'yup';
 import { formRegExp } from '../configs';
-import { errorMessages } from '../translations/user.translations';
 
-export const validationSchema = (language) =>
+export const validationSchema = (t) =>
   Yup.object().shape({
     firstName: Yup.string()
-      .min(2, errorMessages[language].value.firstName)
-      .max(30, errorMessages[language].value.firstName)
-      .matches(formRegExp.firstName, errorMessages[language].value.wrongFormat)
-      .required(errorMessages[language].value.empty),
+      .min(2, t('error.firstName'))
+      .max(30, t('error.firstName'))
+      .matches(formRegExp.firstName, t('error.wrongFormat'))
+      .required(t('error.requiredField')),
     lastName: Yup.string()
-      .min(2, errorMessages[language].value.firstName)
-      .max(30, errorMessages[language].value.firstName)
-      .matches(formRegExp.firstName, errorMessages[language].value.wrongFormat)
-      .required(errorMessages[language].value.empty),
-    email: Yup.string()
-      .email(errorMessages[language].value.email)
-      .required(errorMessages[language].value.email),
+      .min(2, t('error.firstName'))
+      .max(30, t('error.firstName'))
+      .matches(formRegExp.firstName, t('error.wrongFormat'))
+      .required(t('error.requiredField')),
+    email: Yup.string().email(t('error.email')).required(t('error.email')),
     password: Yup.string()
-      .matches(formRegExp.password, errorMessages[language].value.pass)
-      .required(errorMessages[language].value.empty)
+      .matches(formRegExp.password, t('error.pass'))
+      .required(t('error.requiredField'))
   });

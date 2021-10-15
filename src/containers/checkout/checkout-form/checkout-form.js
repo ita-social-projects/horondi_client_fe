@@ -10,6 +10,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 import DeliveryType from '../delivery-type/delivery-type';
 
 import {
@@ -55,6 +56,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
   });
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const totalPriceToPay = cartItems.reduce(
@@ -83,7 +85,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
 
   const { dirty, values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
     useFormik({
-      validationSchema: validationSchema(deliveryType, language),
+      validationSchema: validationSchema(deliveryType, t),
       initialValues,
 
       onSubmit: (data) => {

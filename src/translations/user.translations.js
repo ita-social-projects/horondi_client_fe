@@ -88,33 +88,6 @@ export const USER_ERROR = {
   ]
 };
 
-export const errorMessages = [
-  {
-    value: {
-      firstName: 'Поле повинно містити від 2 до 30 символів',
-      lastName: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат, ',
-      emailLength: 'Поле повинно містити від 8 до 60 символів',
-      pass: 'Від 6 до 30 символів з однією великою літерою та цифрою',
-      confirmPassword: 'Паролі не збігаються',
-      wrongFormat: 'Некоректний формат',
-      empty: 'Поле не повинне бути порожнім'
-    }
-  },
-  {
-    value: {
-      firstName: 'Field should contain from 2 to 30 characters',
-      lastName: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address, `,
-      emailLength: `Field should contain from 8 to 60 characters`,
-      pass: 'From 6 to 30 characters with one capital  letter and one digit',
-      confirmPassword: 'Passwords do not match',
-      wrongFormat: 'Wrong format',
-      empty: 'Field should not to be empty'
-    }
-  }
-];
-
 export const placeholders = {
   firstName: [
     {

@@ -21,6 +21,8 @@ import notFoundPage from './not-found-page.json';
 import productListPage from './product-list-page.json';
 import searchBar from './searchBar.json';
 import sidebar from './sidebar.json';
+import chat from './chat.json';
+import delivery from './delivery.json';
 
 export default {
   translations: {
@@ -46,6 +48,8 @@ export default {
     notFoundPage,
     productListPage,
     searchBar,
-    sidebar
+    sidebar,
+    chat,
+    delivery,
   }
 };

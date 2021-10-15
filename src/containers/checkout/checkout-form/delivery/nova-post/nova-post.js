@@ -1,17 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-
 import { useStyles } from './nova-post.styles';
-import {
-  CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_INPUT_FIELD,
-  CHECKOUT_TEXT_FIELDS,
-  CHECKOUT_TITLES
-} from '../../../../../translations/checkout.translations';
 import {
   getNovaPoshtaCities,
   getNovaPoshtaWarehouse
@@ -21,11 +15,12 @@ import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
 
-const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
+const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
+  const { t } = useTranslation();
 
   const { deliveryLoading, cities, warehouses } = useSelector(({ Checkout }) => ({
     deliveryLoading: Checkout.deliveryLoading,
@@ -49,26 +44,26 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
 
   return (
     <div className={styles.novaPostContainer}>
-      <h3 className={styles.novaPostTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h3>
+      <h3 className={styles.novaPostTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.novaPostData}>
         <div className={styles.selectorInfo}>
           <Autocomplete
             onInputChange={(e, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value);
+                setFieldValue('city', value);
               }
               getPostCities(values.city);
             }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+            noOptionsText={t('delivery.noCity')}
             onChange={(event, value) => {
               if (value) {
                 setSelectedCity(value.description);
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
+                setFieldValue('city', value.description);
               } else {
                 setSelectedCity('');
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
+                setFieldValue('city', '');
               }
-              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+              setFieldValue('courierOffice', '');
             }}
             options={cities}
             inputValue={values.city}
@@ -78,7 +73,7 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
               <TextField
                 {...params}
                 error={touched.city && !!errors.city}
-                label={CHECKOUT_TEXT_FIELDS[language].city}
+                label={`${t('delivery.city')} *`}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
@@ -106,15 +101,15 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
           <Autocomplete
             onInputChange={(event, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value);
+                setFieldValue('courierOffice', value);
               }
             }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDepartment}
+            noOptionsText={t('delivery.noDepartment')}
             onChange={(event, value) => {
               if (value) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value.description);
+                setFieldValue('courierOffice', value.description);
               } else {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+                setFieldValue('courierOffice', '');
               }
             }}
             disabled={!values.city}
@@ -129,7 +124,7 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
               <TextField
                 {...params}
                 error={touched.courierOffice && !!errors.courierOffice}
-                label={CHECKOUT_TEXT_FIELDS[language].department}
+                label={`${t('delivery.department')} *`}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,

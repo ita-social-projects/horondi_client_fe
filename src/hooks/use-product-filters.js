@@ -1,28 +1,26 @@
 import { useHistory, useLocation } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 import { map } from 'lodash';
-import { selectFilterData } from '../redux/selectors/multiple.selectors';
+import { useTranslation } from 'react-i18next';
 import { page, URL_QUERIES_NAME } from '../configs';
-import {
-  setCategoryFilter,
-  setModelsFilter,
-  setPatternsFilter
-} from '../redux/products/products.actions';
+
 import {
   CATERGORY_TEXT,
   MODEL_TEXT,
   PATTERN_TEXT
 } from '../translations/product-list.translations';
 
-const useProductFilters = () => {
+const useProductFilters = (filters, filterData) => {
   const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const { language, filterData, filters } = useSelector(selectFilterData);
-  const { categoryFilter, patternsFilter, modelsFilter } = filters;
-  const dispatch = useDispatch();
+  const { i18n } = useTranslation();
   const history = useHistory();
+
+  const searchParams = new URLSearchParams(search);
+  const language = i18n.language === 'ua' ? 0 : 1;
+  const { category, patterns, models } = filters;
+
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
     let query = searchParams.get(queryName);
+
     if (categoriesList) {
       const categoryId = categoriesList.filter(
         (element) => element.name[language].value === target.name
@@ -54,42 +52,35 @@ const useProductFilters = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const handleFilterClear = (setFilter, queryName) => {
+  const handleFilterClear = (queryName) => {
     searchParams.set(page, 1);
-    dispatch(setFilter([]));
     searchParams.delete(queryName);
     history.push(`?${searchParams.toString()}`);
   };
   return {
     categories: {
       filterName: CATERGORY_TEXT[language].value,
-      productFilter: categoryFilter,
+      productFilter: category || [],
       list: map(filterData.categories, (category) => category.name[language].value),
       categories: filterData.categories,
-      filterAction: setCategoryFilter,
-      labels: URL_QUERIES_NAME.categoryFilter,
-      clearFilter: () => handleFilterClear(setCategoryFilter, URL_QUERIES_NAME.categoryFilter),
+      clearFilter: () => handleFilterClear(URL_QUERIES_NAME.categoryFilter),
       filterHandler: (e) =>
         handleFilterChange(e, URL_QUERIES_NAME.categoryFilter, filterData.categories)
     },
     models: {
       filterName: MODEL_TEXT[language].value,
-      productFilter: modelsFilter,
+      productFilter: models || [],
       list: map(filterData.models, (model) => model.name[language].value),
       categories: filterData.models,
-      filterAction: setModelsFilter,
-      labels: URL_QUERIES_NAME.modelsFilter,
-      clearFilter: () => handleFilterClear(setModelsFilter, URL_QUERIES_NAME.modelsFilter),
+      clearFilter: () => handleFilterClear(URL_QUERIES_NAME.modelsFilter),
       filterHandler: (e) => handleFilterChange(e, URL_QUERIES_NAME.modelsFilter, filterData.models)
     },
     patterns: {
       filterName: PATTERN_TEXT[language].value,
-      productFilter: patternsFilter,
+      productFilter: patterns || [],
       list: map(filterData.patterns, (pattern) => pattern.name[language].value),
       categories: filterData.patterns,
-      filterAction: setPatternsFilter,
-      labels: URL_QUERIES_NAME.patternsFilter,
-      clearFilter: () => handleFilterClear(setPatternsFilter, URL_QUERIES_NAME.patternsFilter),
+      clearFilter: () => handleFilterClear(URL_QUERIES_NAME.patternsFilter),
       filterHandler: (e) =>
         handleFilterChange(e, URL_QUERIES_NAME.patternsFilter, filterData.patterns)
     }

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
 import { ListItemText, Checkbox } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
@@ -7,8 +8,6 @@ import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './products-filters-container.styles';
 
@@ -18,28 +17,12 @@ const ProductsFiltersContainer = ({
   categories,
   filterHandler,
   clearFilter,
-  filterName,
-  filterAction,
-  labels
+  filterName
 }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
   const [isListOpen, setIsListOpen] = useState(true);
   const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    if (searchParams.get(labels)) {
-      const query = searchParams
-        .get(labels)
-        .split(',')
-        .filter((el) => el !== '');
-      dispatch(filterAction(query));
-    } else {
-      dispatch(filterAction([]));
-    }
-  }, [dispatch, searchParams.toString()]);
   const handleClick = () => {
     setIsListOpen(!isListOpen);
   };
@@ -51,6 +34,7 @@ const ProductsFiltersContainer = ({
       return true;
     }
   };
+
   return (
     <Grid className={styles.container}>
       <li className={styles.mainItem} onClick={handleClick}>

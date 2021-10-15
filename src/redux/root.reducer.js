@@ -17,7 +17,6 @@ import { checkoutReducer as Checkout } from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 import { businessPagesReducer as HeaderLinks } from './header-links/header-links.reducer';
 import Pattern from './pattern/pattern.reducer';
-import SearchBar from './search-bar/search-bar.reducer';
 import Constructor from './images-constructor/constructor.reducer';
 import { toastReducer as Toast } from './toast/toast.reducer';
 import { orderReducer as Order } from './order/order.reducer';
@@ -44,7 +43,6 @@ export const rootReducer = (history) =>
     Checkout,
     Chat,
     HeaderLinks,
-    SearchBar,
     Pattern,
     Constructor,
     Order

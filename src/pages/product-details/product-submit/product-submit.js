@@ -26,10 +26,10 @@ import routes from '../../../const/routes';
 
 const { pathToCart } = routes;
 
-const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { language, productToSend, product, wishlistItems, userData, cartList } = useSelector(
+  const { language, productToSend, wishlistItems, userData, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
 

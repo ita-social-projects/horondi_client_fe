@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useStyles } from './product-details.styles';
-
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
-
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -15,30 +14,27 @@ import ProductSubmit from './product-submit';
 import SimilarProducts from './similar-products';
 import Comments from './comments';
 import ToastContainer from '../../containers/toast';
+import { getProductById } from './operations/product-details.queries';
 
-import { Loader } from '../../components/loader/loader';
-import {
-  clearProductToSend,
-  getProduct,
-  setCategoryFilter,
-  setProductToSend
-} from '../../redux/products/products.actions';
-
+import { clearProductToSend, setProductToSend } from '../../redux/products/products.actions';
 import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
+
 import routes from '../../const/routes';
 import ThemeContext from '../../context/theme-context';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { isLoading, productToSend, currency, product } = useSelector(
+  const { productToSend, currency } = useSelector(
     selectCurrencyProductsCategoryFilter
   );
 
   const dispatch = useDispatch();
   const styles = useStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
+  const [product, setProduct] = useState({});
   const {
     _id: productId,
     name: productName,
@@ -55,14 +51,17 @@ const ProductDetails = ({ match }) => {
   const currentSize = availableSizes ? availableSizes[0] : {};
   const isLightTheme = useContext(ThemeContext);
 
+  const { loading, error } = useQuery(getProductById, {
+    variables: { id },
+    onCompleted: (data) => setProduct(data.getProductById)
+  });
+
   useEffect(() => {
-    dispatch(getProduct(id));
     window.scrollTo(0, 0);
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (product) {
-      dispatch(setCategoryFilter([category._id]));
+    if (product.category) {
       dispatch(
         setProductToSend({
           id: Date.now().toString(),
@@ -134,9 +133,7 @@ const ProductDetails = ({ match }) => {
     }
   };
 
-  if (isLoading || !product) {
-    return <Loader />;
-  }
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <Card className={styles.container}>
@@ -146,19 +143,27 @@ const ProductDetails = ({ match }) => {
         />
       </Link>
       <div className={styles.product}>
-        <ProductImages />
+        {product.images ? <ProductImages images={product.images} /> : null}
         <div className={styles.productDetails}>
-          <ProductInfo price={currentSize.size.price} />
+          {currentSize.size ? (
+            <ProductInfo price={currentSize.size.price} product={product} />
+          ) : null}
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}
             sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
-          <ProductSubmit sizes={sizes} setSizeIsNotSelectedError={setSizeIsNotSelectedError} />
+          {sizes ? (
+            <ProductSubmit
+              sizes={sizes}
+              product={product}
+              setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+            />
+          ) : null}
         </div>
       </div>
-      <SimilarProducts />
-      <Comments />
+      {product._id ? <SimilarProducts product={product} /> : null}
+      {product._id ? <Comments productId={product._id} /> : null}
       <ToastContainer />
     </Card>
   );

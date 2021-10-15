@@ -40,11 +40,12 @@ const ZoomImage = ({ images }) => {
   );
 };
 
-const ProductImages = () => {
-  const { language, images } = useSelector(({ Language, Products }) => ({
+const ProductImages = ({ images }) => {
+  const { language } = useSelector(({ Language, Theme }) => ({
     language: Language.language,
-    images: Products.product.images
+    isLightTheme: Theme.lightMode
   }));
+
   const isLightTheme = useContext(ThemeContext);
 
   const [isOpen, setIsOpen] = useState(false);

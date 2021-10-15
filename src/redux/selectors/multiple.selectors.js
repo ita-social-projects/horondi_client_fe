@@ -7,16 +7,10 @@ export const selectLanguageAndContactsLoadingContacts = ({
   language: Language.language
 });
 
-export const selectProductsIdCommentsLanguageUserData = ({
-  Products,
-  Language,
-  User,
-  Comments
-}) => ({
+export const selectProductsIdCommentsLanguageUserData = ({ Language, User, Comments }) => ({
   commentsLoading: Comments.commentsLoading,
   comments: Comments.comments,
   currentLimit: Comments.limit,
-  productId: Products.product._id,
   language: Language.language,
   userData: User.userData,
   userOrders: User.userOrders,
@@ -27,13 +21,10 @@ export const selectProductsIdCommentsLanguageUserData = ({
 
 export const selectCurrencyProductsCategoryFilter = ({
   Currency,
-  Products: { product, productLoading, productToSend, filters }
+  Products: { productToSend }
 }) => ({
   currency: Currency.currency,
-  categoryFilter: filters.categoryFilter,
-  isLoading: productLoading,
-  product,
-  productToSend
+  productToSend,
 });
 
 export const selectLanguageProductsUserWishlist = ({
@@ -45,7 +36,6 @@ export const selectLanguageProductsUserWishlist = ({
 }) => ({
   language: Language.language,
   productToSend: Products.productToSend,
-  product: Products.product,
   userData: User.userData,
   wishlistItems: Wishlist.list,
   cartList: Cart.list
@@ -78,9 +68,3 @@ export const selectLangAndCurrency = ({ Language, Currency }) => ({
 });
 
 export const selectToastSettings = (state) => state.Toast.toastSettings;
-
-export const selectFilterData = ({ Products, Language }) => ({
-  filters: Products.filters,
-  language: Language.language,
-  filterData: Products.filterData
-});

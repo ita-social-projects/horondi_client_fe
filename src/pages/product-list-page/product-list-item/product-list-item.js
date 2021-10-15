@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Grid from '@material-ui/core/Grid';
+
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
 import { getImage } from '../../../utils/imageLoad';
@@ -17,12 +18,17 @@ import ThemeContext from '../../../context/theme-context';
 
 const ProductListItem = ({ product }) => {
   const { t, i18n } = useTranslation();
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+
   const isLightTheme = useContext(ThemeContext);
+
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency,
+  }));
+
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
+
   const { pathToProducts } = routes;
+
   useEffect(() => {
     getImage(product.images.primary.small)
       .then((src) => setImage(src))

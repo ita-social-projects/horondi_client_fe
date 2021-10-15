@@ -12,19 +12,22 @@ import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { getCategories } from '../../redux/categories/categories.actions';
 import { preserveUser } from '../../redux/user/user.actions';
-import {
-  getAllFilters,
-  setCountPerPage,
-  getFiltredProducts
-} from '../../redux/products/products.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLocation } from '../../redux/selectors/multiple.selectors';
+
+export const SearchContext = React.createContext();
 
 const App = () => {
   const [appTheme, setAppTheme] = useState(true);
   const { location } = useSelector(selectLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
+  const [searchParams, setSearchParams] = useState({
+    searchFilter: '',
+    products: [],
+    searchBarVisibility: false,
+    loading: false
+  });
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
@@ -32,20 +35,13 @@ const App = () => {
     localStorageThemeMode = LIGHT_THEME;
   }
   const themeValue = theme(localStorageThemeMode);
-  const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
     dispatch(preserveUser());
     dispatch(getCategories());
     dispatch(getContacts());
-    dispatch(getAllFilters());
-    dispatch(getFiltredProducts({}));
   }, []);
-
-  useEffect(() => {
-    dispatch(setCountPerPage(productsCount));
-  }, [dispatch, productsCount]);
-
+  
   useEffect(() => {
     setAppTheme(themeMode);
   });
@@ -54,10 +50,12 @@ const App = () => {
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>
         <ThemeContext.Provider value={[appTheme, setAppTheme]}>
-          <CssBaseline />
-          <Routes />
-          <Chat />
-          <SearchBarList />
+          <SearchContext.Provider value={{ searchParams, setSearchParams }}>
+            <CssBaseline />
+            <Routes />
+            <Chat />
+            <SearchBarList />
+          </SearchContext.Provider>
         </ThemeContext.Provider>
       </ThemeProvider>
     </div>

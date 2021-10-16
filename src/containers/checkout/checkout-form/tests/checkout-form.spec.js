@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
 import DeliveryType from '../../delivery-type/delivery-type';
@@ -39,6 +40,7 @@ describe('CheckoutForm component tests', () => {
   it('should contain <CheckoutForm /> component <Delivery />', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     expect(wrapper.find(Delivery).length).toEqual(1);
+    expect(wrapper.find(Link).at(1).props().children[1].paymentMethod).toEqual('card');
   });
   it('should match snapshot', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);

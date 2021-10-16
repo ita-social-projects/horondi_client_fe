@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import routes from '../../../../const/routes';
 import { useStyles } from './path-back.styles';
+import ThemeContext from '../../../../context/theme-context';
 
 const { pathToCategory, pathToMain } = routes;
 
 const PathBack = () => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { isLightTheme } = useSelector(({ Theme }) => ({
-    isLightTheme: Theme.lightMode
-  }));
+  const isLightTheme = useContext(ThemeContext);
 
   return (
     <div className={isLightTheme ? styles.whiteThemePath : styles.darkThemePath}>

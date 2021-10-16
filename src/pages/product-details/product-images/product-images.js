@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { useSelector } from 'react-redux';
 
 import ImgsViewer from 'react-images-viewer';
@@ -10,6 +10,7 @@ import { getImage } from '../../../utils/imageLoad';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import { IMG_URL } from '../../../configs';
+import ThemeContext from '../../../context/theme-context';
 
 const ZoomImage = ({ images }) => {
   const state = {
@@ -40,11 +41,11 @@ const ZoomImage = ({ images }) => {
 };
 
 const ProductImages = () => {
-  const { language, images, isLightTheme } = useSelector(({ Language, Products, Theme }) => ({
+  const { language, images } = useSelector(({ Language, Products }) => ({
     language: Language.language,
-    images: Products.product.images,
-    isLightTheme: Theme.lightMode
+    images: Products.product.images
   }));
+  const isLightTheme = useContext(ThemeContext);
 
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);

@@ -2,52 +2,5 @@
   "availableCountLabelText": "Available",
   "productNotFound": "No products found in this product category",
   "sizeNotAvailable": "Product isn't available",
-  "countPerPage": "Count per page:",
-  "sortBySelectOptions": [
-    {
-      "value": "popularity",
-      "optionValue": {
-        "name": "popularity",
-        "value": -1
-      }
-    },
-    {
-      "value": "price (high to low)",
-      "optionValue": {
-        "name": "sortDesc",
-        "value": -1
-      }
-    },
-    {
-      "value": "price (low to high)",
-      "optionValue": {
-        "name": "sortAsc",
-        "value": 1
-      }
-    },
-    {
-      "value": "rate",
-      "optionValue": {
-        "name": "rate",
-        "value": -1
-      }
-    }
-  ],
-  "drawerTemporary": "temporary",
-  "drawerPermanent": "permanent",
-  "temporaryWidths": ["sm", "xs"],
-  "itemsPerPage": [
-    {
-      "title": "nine products per page",
-      "value": 9
-    },
-    {
-      "title": "eighteen products per page",
-      "value": 18
-    },
-    {
-      "title": "thirty products per page",
-      "value": 30
-    }
-  ]
+  "countPerPage": "Count per page:"
 }

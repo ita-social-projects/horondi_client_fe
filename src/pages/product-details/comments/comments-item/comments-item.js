@@ -9,20 +9,18 @@ import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { Tooltip } from '@material-ui/core';
 import { useStyles } from './comments-item.styles';
 import CommentDialog from './comment-dialog';
-import { COMMENTS_TIME_OPTIONS, DATE_LANGUAGE_OPTIONS } from '../../../../configs';
+import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
 import { getReplyComments } from '../../../../redux/comments/comments.actions';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
 import { Loader } from '../../../../components/loader/loader';
 import {
   handleUserCommentOwner,
-  handleTitleSubmit,
   handleArrowIcon,
   handleUserCommentApprove,
   handleUserId,
   handleTextStyle,
   handleRate,
-  handleLoadMoreText,
   handleLimitOptions
 } from '../../../../utils/handle-comments';
 
@@ -33,15 +31,13 @@ const CommentsItem = ({ data, commentId, productId }) => {
     data;
 
   const {
-    language,
     userData,
     currentLimit,
     replyLoading,
     replyLoadingId,
     getReplyLoading,
     getReplyLoadingId
-  } = useSelector(({ Comments, Language, User }) => ({
-    language: Language.language,
+  } = useSelector(({ Comments, User }) => ({
     userData: User.userData,
     currentLimit: Comments.replyLimit,
     replyLoading: Comments.replyLoading.loader,
@@ -61,7 +57,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
   const [isReplyShown, toggleReply] = useState(false);
   const [isReplyListShown, toggleReplyList] = useState(false);
 
-  const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
+  const dateLanguage = t('common.dateLanguageOption');
 
   const dateToShow = new Date(date);
 
@@ -152,7 +148,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
 
         <div className={styles.reply}>
           <ReplyOutlinedIcon className={styles.replyIcon} />
-          <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredReply')}>
+          <Tooltip title={userData ? '' : t(`commentsItem.tooltips.unregisteredReply`)}>
             <p className={styles.button} onClick={handleReplyOpen}>
               {t('commentsItem.reply.submit')}
             </p>
@@ -178,7 +174,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
                 <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>
-                  {handleLoadMoreText(limitOption, language)}
+                  {limitOption ? null : t('product.reply.loadMore')}
                 </span>
               </div>
             )}

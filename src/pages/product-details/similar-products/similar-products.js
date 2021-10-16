@@ -31,7 +31,7 @@ const SimilarProducts = ({ cartList, product }) => {
 
   const { t } = useTranslation();
 
-  const { title } = t('similarProducts.similarItems');
+  const { title } = t('product.similarItems');
   const currencySign = getCurrencySign(currency);
   const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;
   let imagesList;

@@ -1,17 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
 import Rating from '@material-ui/lab/Rating';
 import { Button, Tooltip, TextField } from '@material-ui/core';
 import { useStyles } from './comments.styles';
-
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-
 import { TEXT_VALUE, commentFields, formRegExp } from '../../../configs';
-import { COMMENTS } from '../../../translations/product-details.translations';
 import {
   addComment,
   setCommentsSkip,
@@ -21,12 +17,10 @@ import {
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 import {
-  handleRateTip,
   handleClassName,
   handleTextField,
   handleHelperText,
   handleUserLogin,
-  handleTitleSubmit,
   handleArrowIcon
 } from '../../../utils/handle-comments';
 
@@ -84,7 +78,12 @@ const Comments = ({ productId }) => {
     setRate(handleUserLogin(userData));
   }, [userData]);
 
-  const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
+  const rateTip = useMemo(() => {
+    if (!userId) {
+      return t('product.comments.unregisteredTip');
+    }
+    return t('product.comments.successfulTip');
+  }, [language, userId]);
 
   const commentsLength = comments?.length;
 
@@ -109,7 +108,7 @@ const Comments = ({ productId }) => {
 
   return (
     <div className={styles.comment}>
-      <h2 className={styles.title}>{COMMENTS[language].title}</h2>
+      <h2 className={styles.title}>{t('product.comments.title')}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
           <Rating
@@ -148,7 +147,7 @@ const Comments = ({ productId }) => {
         </div>
 
         <div className={styles.submit}>
-          <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredComment')}>
+          <Tooltip title={userData ? '' : t(`commentsItem.tooltips.unregisteredComment`)}>
             <div>
               <Button
                 type='submit'

@@ -27,10 +27,8 @@ import footer from './footer.json';
 import product from './product.json';
 import commentDialog from './commentDialog';
 import replyCommentsItem from './replyCommentsItem';
-import replyForm from './replyForm';
 import commentsItem from './commentsItem';
 import comments from './comments';
-import similarProducts from './similarProducts';
 
 export default {
   translations: {
@@ -63,9 +61,7 @@ export default {
     product,
     commentDialog,
     replyCommentsItem,
-    replyForm,
     commentsItem,
-    comments,
-    similarProducts
+    comments
   }
 };

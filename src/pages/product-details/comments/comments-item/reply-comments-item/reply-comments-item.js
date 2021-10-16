@@ -7,11 +7,7 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
-import {
-  COMMENTS_TIME_OPTIONS,
-  DATE_LANGUAGE_OPTIONS,
-  COMMENT_OWNER_STATUS
-} from '../../../../../configs';
+import { COMMENTS_TIME_OPTIONS, COMMENT_OWNER_STATUS } from '../../../../../configs';
 
 import {
   handleUserCommentOwner,
@@ -29,8 +25,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
 
   const { t } = useTranslation();
 
-  const { language, userData } = useSelector(({ Language, User, Products }) => ({
-    language: Language.language,
+  const { language, userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
   const styles = useStyles();
@@ -42,8 +37,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
   };
 
   const [isModalShown, toggleModal] = useState(false);
-
-  const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
+  const dateLanguage = t('common.dateLanguageOption');
   const dateToShow = new Date(date);
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 

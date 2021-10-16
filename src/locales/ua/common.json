@@ -32,5 +32,6 @@
   "popular": "Популярні",
   "category": "Категорії",
   "name": "Ім'я",
-  "email": "Електронна пошта"
+  "email": "Електронна пошта",
+  "dateLanguageOption": "ukr-UA"
 }

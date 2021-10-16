@@ -57,14 +57,14 @@ const ReplyForm = ({ cancel, commentId }) => {
           helperText={errors.text || ''}
           name={TEXT_VALUE}
           className={styles.input}
-          label={t('replyForm.reply.text')}
+          label={t('product.reply.text')}
         />
         <div className={styles.btnContainer}>
           <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
-            {t('replyForm.pdpButtons.leaveReply')}
+            {t('product.pdpButtons.leaveReply')}
           </Button>
           <Button onClick={cancel} className={styles.replyBtn}>
-            {t('replyForm.pdpButtons.cancelButton')}
+            {t('product.pdpButtons.cancelButton')}
           </Button>
         </div>
       </div>

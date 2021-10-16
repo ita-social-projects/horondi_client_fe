@@ -32,5 +32,6 @@
   "popular": "Hot Products",
   "category": "Category",
   "name": "Name",
-  "email": "Email"
+  "email": "Email",
+  "dateLanguageOption": "en-US"
 }

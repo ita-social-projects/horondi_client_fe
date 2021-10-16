@@ -54,5 +54,28 @@
         "addedToWishList": "Added to wishlist",
         "removedFromWishList": "Removed from wishlist",
         "addedToCard": "Added to cart"
+    },
+    "similarItems": {
+        "title": "It fits well with this"
+    },
+    "replyForm":{
+        "submit": "Leave reply",
+        "loadMore": "More answers",
+        "hideBtn": "Hide answers",
+        "text": "Share your thoughts with others",
+        "answers": "Count of answers"
+    },
+    "comments": {
+        "title": "Comments",
+        "firstName": "First name",
+        "email": "Email",
+        "text": "Share your thoughts with others",
+        "submit": "Leave comment",
+        "unregisteredTip": "You should login to leave rate",
+        "registeredTip": "You should bought the product to leave rate",
+        "successfulTip": "Set rate",
+        "loadMore": "Load more...",
+        "hideBtn": "Hide comments"
     }
+
 }

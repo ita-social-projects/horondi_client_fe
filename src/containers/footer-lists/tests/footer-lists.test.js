@@ -8,7 +8,7 @@ jest.mock('@apollo/client');
 
 useSelector.mockImplementation(() => ({
   language: 0,
-  contacts: [],
+  categories: [],
   quantityPerPage: 9
 }));
 

@@ -3,7 +3,7 @@ export const LIGHT_THEME = 'light';
 
 export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
 export const UNIQUE_MODEL_IMAGE_LINK = 'https://i.imgur.com/ygJaph4.jpg';
-export const GOOGLE_MAP_URL = 'http://maps.google.com/maps?q=';
+export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
 
 export const CART_IMAGES = {
   lightTheme: './images/cart/empty-cart-light-theme-image.png',

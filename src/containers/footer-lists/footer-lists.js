@@ -12,7 +12,7 @@ import {
 } from '../../translations/footer.translations';
 import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
-import { getContactsForFuterListContacts } from './operations/footer-lists-contacts-query';
+import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const { pathToContacts } = routes;
@@ -29,7 +29,7 @@ const FooterLists = () => {
   );
 
   const [contacts, setContacts] = useState([]);
-  const { loading, error } = useQuery(getContactsForFuterListContacts, {
+  const { loading, error } = useQuery(getContactsForFooterListContacts, {
     onCompleted: (data) => setContacts(data.getContacts.items)
   });
   if (loading || error) return errorOrLoadingHandler(error, loading);

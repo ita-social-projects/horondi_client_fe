@@ -6,21 +6,11 @@ export const getContactsForChat = gql`
       items {
         _id
         phoneNumber
-        openHours {
-          lang
-          value
-        }
         address {
           lang
           value
         }
         email
-        images {
-          value {
-            medium
-          }
-        }
-        link
       }
     }
   }

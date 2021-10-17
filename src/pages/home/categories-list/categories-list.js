@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
+import { useQuery } from '@apollo/client';
 
 import CategoryItem from './category-item';
 import {
@@ -9,23 +10,27 @@ import {
   URL_QUERIES_NAME,
   countPerPage
 } from '../../../configs';
-
+import { getAllCategoriesQuery } from './operations/categories.queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import { useStyles } from './categories-list.style';
+
 import './categories-carousel.css';
 
 const CategoriesList = () => {
-  const { categories, language, quantityPerPage } = useSelector(
-    ({ Categories, Language, Products }) => ({
-      categories: Categories.list,
-      language: Language.language,
-      quantityPerPage: Products.countPerPage
-    })
-  );
   const styles = useStyles();
+  const [categories, setCategories] = useState([]);
+  const { language, quantityPerPage } = useSelector(({ Language, Products }) => ({
+    language: Language.language,
+    quantityPerPage: Products.countPerPage
+  }));
 
-  const categoriesList = categories
-    ? categories
-      .map(({ _id, name, images }) => (
+  const { loading, error } = useQuery(getAllCategoriesQuery, {
+    onCompleted: (data) => setCategories(data.getAllCategories.items)
+  });
+
+  const categoriesList = useMemo(
+    () =>
+      categories.map(({ _id, name, images }) => (
         <CategoryItem
           key={_id}
           categoryUrl={`${getCategoryURL(name)}?${
@@ -35,9 +40,11 @@ const CategoriesList = () => {
           categoryImageUrl={images.large}
           language={language}
         />
-      ))
-      .filter((val) => val)
-    : null;
+      )),
+    [categories, styles]
+  );
+
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>

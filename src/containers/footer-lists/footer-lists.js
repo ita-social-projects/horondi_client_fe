@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
 

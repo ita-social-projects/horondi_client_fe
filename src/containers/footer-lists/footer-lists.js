@@ -19,6 +19,7 @@ const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
+  const [contacts, setContacts] = useState([]);
 
   const { t } = useTranslation();
 
@@ -30,10 +31,10 @@ const FooterLists = () => {
     })
   );
 
-  const [contacts, setContacts] = useState([]);
   const { loading, error } = useQuery(getContactsForFooterListContacts, {
     onCompleted: (data) => setContacts(data.getContacts.items)
   });
+  
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   const categoriesList = categories.length

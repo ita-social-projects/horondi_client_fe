@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import FooterLists from '../footer-lists';
@@ -23,5 +24,33 @@ const wrapper = shallow(<FooterLists />);
 describe('tests for footer lists', () => {
   it('should render footer list', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('should render category list', () => {
+    expect(wrapper.find(Link).at(0).props()).toHaveProperty('children', 'Про нас');
+    expect(wrapper.find(Link).at(1).props()).toHaveProperty('children', 'Матеріали');
+    expect(wrapper.find(Link).at(2).props()).toHaveProperty('children', 'Оплата і доставка');
+    expect(wrapper.find(Link).at(3).props()).toHaveProperty('children', 'Умови конфіденційності');
+  });
+
+  it('should return null if there are no categories', () => {
+    const Categories = { list: [] };
+    const Language = { language: 0 };
+    const Contacts = { contacts: [] };
+    const Products = { countPerPage: 9 };
+
+    useSelector.mockImplementation((callback) =>
+      callback({ Categories, Language, Contacts, Products })
+    );
+
+    const wrapper = mount(
+      <BrowserRouter>
+        <FooterLists />
+      </BrowserRouter>
+    );
+
+    expect(wrapper.find(Link).at(0).props()).not.toHaveProperty('children', 'Рюкзаки');
+    expect(wrapper.find(Link).at(1).props()).not.toHaveProperty('children', 'Сумки');
+    expect(wrapper.find(Link).at(2).props()).not.toHaveProperty('children', 'Аксесуари');
   });
 });

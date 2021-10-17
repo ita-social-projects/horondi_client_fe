@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Backdrop, Card, Tooltip } from '@material-ui/core';
 import { useStyles } from './contacts.styles';
 import Loader from '../../components/loader';
 import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
+import { GOOGLE_MAP_URL } from '../../configs/index';
 
 const Contacts = ({ fromCheckout }) => {
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
-  const [mapUrl, setmMapUrl] = useState('');
   const { t } = useTranslation();
 
   const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
-  useEffect(() => {
-    const q = contacts[0]?.address[0].value.trim();
-    const url = `https://api.locationiq.com/v1/autocomplete.php?key=pk.d250de696729be2d1744cbfc919a178d&limit=1&accept-language=ua&q=${q}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const MapUrl = `https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${data[0].lat},${data[0].lon}&size=500x300&zoom=16&markers=size:small|color:red|${data[0].lat},${data[0].lon}`;
-        setmMapUrl(MapUrl);
-      })
-      .catch((err) => console.error(err));
-  }, [contacts]);
 
   const styles = useStyles();
   if (loading) {
@@ -52,14 +41,14 @@ const Contacts = ({ fromCheckout }) => {
               <a
                 target='_blank'
                 rel='noopener noreferrer'
-                href={contact.link}
+                href={`${GOOGLE_MAP_URL}${contact.link.lat},${contact.link.lon}`}
                 className={styles.link}
               >
                 <img
                   className={styles.mapImage}
                   onError={onLoadImageError}
                   onLoad={onImageLoad}
-                  src={mapUrl}
+                  src={`https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${contact.link.lat},${contact.link.lon}&size=500x300&zoom=16&markers=size:small|color:red|${contact.link.lat},${contact.link.lon}`}
                   alt={t('contacts.pageTitles.location')}
                 />
               </a>
@@ -69,7 +58,7 @@ const Contacts = ({ fromCheckout }) => {
         <div className={styles.contacts}>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.phone')}</span>
-            <span>+{contact.phoneNumber}</span>
+            <span>{contact.phoneNumber}</span>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.schedule')}</span>

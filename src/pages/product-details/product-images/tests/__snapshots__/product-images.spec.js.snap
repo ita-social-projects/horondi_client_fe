@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductImages page test Should match snapshot 1`] = `
+<div>
+  <ImgsViewer
+    closeBtnTitle="product.imgsViewer.close"
+    currImg={0}
+    enableKeyboardInput={true}
+    imgCountSeparator=" / "
+    imgs={Array []}
+    isOpen={false}
+    leftArrowTitle="product.imgsViewer.prev"
+    onClickNext={[Function]}
+    onClickPrev={[Function]}
+    onClickShowNextImg={true}пше
+    onClickThumbnail={[Function]}
+    onClose={[Function]}
+    preloadNextImg={true}
+    preventScroll={true}
+    rightArrowTitle="product.imgsViewer.next"
+    showCloseBtn={true}
+    showImgCount={true}
+    showThumbnails={true}
+    spinner={[Function]}
+    spinnerColor="#fff"
+    spinnerSize={50}
+    theme={Object {}}
+    thumbnailOffset={2}
+    width={1024}
+  />
+  <div>
+    <div />
+    <div>
+      <ZoomImage
+        images={
+          Object {
+            "additional": Array [],
+            "primary": Object {
+              "large": "",
+              "medium": "",
+              "small": "",
+            },
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

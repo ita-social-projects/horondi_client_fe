@@ -16,12 +16,10 @@ const getContacts = async () => {
             value
           }
           email
-          images {
-            value {
-              medium
-            }
+          link {
+            lat
+            lon
           }
-          link
         }
       }
     }`;

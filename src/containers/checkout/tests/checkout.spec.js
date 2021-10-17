@@ -6,19 +6,23 @@ import Loader from '../../../components/loader';
 
 jest.mock('react-redux');
 jest.mock('../checkout.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
+const mockUseContext = jest.fn().mockImplementation(() => ({
+  isLight: true
+}));
+React.useContext = mockUseContext;
 
-const mockStore = {
-  isLightTheme: 'light',
-  currency: '',
+const state = {
+  language: 1,
+  currency: 0,
   cartItems: [],
-  deliveryType: 'SELFPICKUP',
+  deliveryType: '',
   loading: false,
-  isOrderCreated: true,
-  order: []
+  isOrderCreated: false,
+  order: null
 };
 const mockDispatch = jest.fn();
 
-useSelector.mockImplementation(() => mockStore);
+useSelector.mockImplementation(() => state);
 useDispatch.mockReturnValue(mockDispatch);
 
 describe('<Checkout />', () => {
@@ -28,7 +32,7 @@ describe('<Checkout />', () => {
     expect(wrapper.find(Loader)).toHaveLength(0);
   });
   it('should render one <Loader />', () => {
-    mockStore.loading = true;
+    state.loading = true;
     const wrapper = shallow(<Checkout />);
     expect(wrapper.find(Loader)).toHaveLength(1);
   });

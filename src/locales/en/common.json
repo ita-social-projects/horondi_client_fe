@@ -10,7 +10,6 @@
   "basis": "Basis",
   "pattern": "Pattern",
   "bottom": "Bottom",
-  "size": "Size",
   "defaultPrice": "Default item price:",
   "totalPrice": "Total item price:",
   "endPrice": "End price:",
@@ -24,7 +23,6 @@
   },
   "to": "to ",
   "from": "from ",
-  "price": "Price Range",
   "search": "Search",
   "showFilters": "Show Filters",
   "color": "Colors",
@@ -32,10 +30,10 @@
   "clearFilter": "Clear Filter",
   "sortBy": "Sort by:",
   "popular": "Hot Products",
-  "model": "Model",
   "category": "Category",
-  "pattern": "Pattern",
   "toPay": "Total price",
   "logIn": "Log in",
-  "logOut": "Log out"
+  "logOut": "Log out",
+  "name": "Name",
+  "email": "Email"
 }

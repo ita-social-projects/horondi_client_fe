@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
@@ -8,20 +8,22 @@ import { getDeliveryType } from '../../redux/cart/cart.actions';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../const/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
+import ThemeContext from '../../context/theme-context';
 
 const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
-  const { isLightTheme, currency, cartItems, deliveryType, loading, isOrderCreated, order } =
-    useSelector(({ Theme, Currency, Cart, Order }) => ({
-      isLightTheme: Theme.lightMode,
+  const { currency, cartItems, deliveryType, loading, isOrderCreated, order } = useSelector(
+    ({ Currency, Cart, Order }) => ({
       currency: Currency.currency,
       cartItems: Cart.list,
       deliveryType: Cart.deliveryType,
       loading: Order.loading,
       isOrderCreated: Order.isOrderCreated,
       order: Order.order
-    }));
+    })
+  );
+  const isLightTheme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   useEffect(() => {

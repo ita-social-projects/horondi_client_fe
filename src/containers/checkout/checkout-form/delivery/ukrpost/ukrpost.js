@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import { useStyles } from './ukrpost.styles';
 import {
   getUkrPostCities,
@@ -12,20 +12,16 @@ import {
   getUkrPostRegions
 } from '../../../../../redux/checkout/checkout.actions';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
-import {
-  CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_TEXT_FIELDS,
-  CHECKOUT_TITLES
-} from '../../../../../translations/checkout.translations';
 import { POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
-import { CY_CODE_ERR, CHECKOUT_INPUT_FIELD } from '../../../../../configs';
+import { CY_CODE_ERR } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
 
-const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
+const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
+  const { t } = useTranslation();
 
   const {
     deliveryLoading,
@@ -65,29 +61,30 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
 
   return (
     <div className={styles.ukrPostContainer}>
-      <h3 className={styles.ukrPostTitle}>{CHECKOUT_TITLES[language].deliveryAddress}</h3>
+      <h3 className={styles.ukrPostTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.selectorInfo}>
         <Autocomplete
+          name='region'
           onInputChange={(e, value, reason) => {
             if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.region, value);
+              setFieldValue('region', value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneRegion}
+          noOptionsText={t('delivery.noRegion')}
           onChange={(event, value) => {
             if (value) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.region, value.REGION_UA);
-              setFieldValue(CHECKOUT_INPUT_FIELD.regionId, value.REGION_ID);
-              setFieldValue(CHECKOUT_INPUT_FIELD.district, '');
-              setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
-              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+              setFieldValue('region', value.REGION_UA);
+              setFieldValue('regionId', value.REGION_ID);
+              setFieldValue('district', '');
+              setFieldValue('city', '');
+              setFieldValue('courierOffice', '');
             } else {
-              setFieldValue(CHECKOUT_INPUT_FIELD.region, '');
-              setFieldValue(CHECKOUT_INPUT_FIELD.regionId, '');
+              setFieldValue('region', '');
+              setFieldValue('regionId', '');
             }
-            setFieldValue(CHECKOUT_INPUT_FIELD.district, '');
-            setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
-            setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+            setFieldValue('district', '');
+            setFieldValue('city', '');
+            setFieldValue('courierOffice', '');
           }}
           options={ukrPoshtaRegions}
           inputValue={values.region}
@@ -97,7 +94,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.region && !!errors.region}
-              label={CHECKOUT_TEXT_FIELDS[language].region}
+              label={`${t('delivery.region')} *`}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -123,20 +120,20 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
         <Autocomplete
           onInputChange={(e, value, reason) => {
             if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.district, value);
+              setFieldValue('district', value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDistrict}
+          noOptionsText={t('delivery.noDistrict')}
           onChange={(event, value) => {
             if (value) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.district, value.DISTRICT_UA);
-              setFieldValue(CHECKOUT_INPUT_FIELD.districtId, value.DISTRICT_ID);
+              setFieldValue('district', value.DISTRICT_UA);
+              setFieldValue('districtId', value.DISTRICT_ID);
             } else {
-              setFieldValue(CHECKOUT_INPUT_FIELD.districtId, '');
-              setFieldValue(CHECKOUT_INPUT_FIELD.district, '');
+              setFieldValue('districtId', '');
+              setFieldValue('district', '');
             }
-            setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
-            setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+            setFieldValue('city', '');
+            setFieldValue('courierOffice', '');
           }}
           disabled={!values.region}
           options={ukrPoshtaDistricts}
@@ -147,7 +144,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.district && !!errors.district}
-              label={CHECKOUT_TEXT_FIELDS[language].district}
+              label={`${t('delivery.district')} *`}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -173,19 +170,19 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
         <Autocomplete
           onInputChange={(e, value, reason) => {
             if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.city, value);
+              setFieldValue('city', value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+          noOptionsText={t('delivery.noCity')}
           onChange={(event, value) => {
             if (value) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.city, value.CITY_UA);
-              setFieldValue(CHECKOUT_INPUT_FIELD.cityId, value.CITY_ID);
+              setFieldValue('city', value.CITY_UA);
+              setFieldValue('cityId', value.CITY_ID);
             } else {
-              setFieldValue(CHECKOUT_INPUT_FIELD.cityId, '');
-              setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
+              setFieldValue('cityId', '');
+              setFieldValue('city', '');
             }
-            setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+            setFieldValue('courierOffice', '');
           }}
           disabled={!values.district}
           options={ukrPoshtaCities}
@@ -196,7 +193,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.city && !!errors.city}
-              label={CHECKOUT_TEXT_FIELDS[language].city}
+              label={t('delivery.city')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -223,20 +220,20 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
         <Autocomplete
           onInputChange={(e, value, reason) => {
             if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value);
+              setFieldValue('courierOffice', value);
             }
           }}
-          noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDepartment}
+          noOptionsText={t('delivery.noDepartment')}
           onChange={(event, value) => {
             if (value) {
               setFieldValue(
-                CHECKOUT_INPUT_FIELD.courierOffice,
+                'courierOffice',
                 `${POST_OFFICE_NUMBER} ${value.POSTCODE}, ${
                   value?.STREET_UA_VPZ ? value?.STREET_UA_VPZ : ''
                 }`
               );
             } else {
-              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+              setFieldValue('courierOffice', '');
             }
           }}
           disabled={!values.city}
@@ -252,7 +249,7 @@ const UkrPost = ({ isLightTheme, language, setFieldValue, errors, touched, value
             <TextField
               {...params}
               error={touched.courierOffice && !!errors.courierOffice}
-              label={CHECKOUT_TEXT_FIELDS[language].department}
+              label={t('delivery.department')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,

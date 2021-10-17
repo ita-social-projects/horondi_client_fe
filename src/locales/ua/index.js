@@ -23,6 +23,8 @@ import footer from './footer.json';
 import headerProfile from './header-profile.json';
 import searchBar from './searchBar.json';
 import sidebar from './sidebar.json';
+import chat from './chat.json';
+import delivery from './delivery.json';
 
 export default {
   translations: {
@@ -50,6 +52,8 @@ export default {
     footer,
     headerProfile,
     searchBar,
-    sidebar
+    sidebar,
+    chat,
+    delivery
   }
 };

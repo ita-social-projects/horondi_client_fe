@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -15,11 +15,11 @@ import HistoryIcon from '@material-ui/icons/History';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './header-profile.styles';
 import { getWishlist } from '../../redux/wishlist/wishlist.actions';
-import { setThemeMode } from '../../redux/theme/theme.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
 import routes from '../../const/routes';
+import ThemeContext from '../../context/theme-context';
 
 const {
   pathToWishlist,
@@ -31,11 +31,11 @@ const {
 } = routes;
 
 const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
-  const { userData, lightMode } = useSelector(({ User, Theme }) => ({
-    userData: User.userData,
-    lightMode: Theme.lightMode
+  const { userData } = useSelector((User) => ({
+    userData: User.userData
   }));
 
+  const [lightMode, setLightMode] = useContext(ThemeContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const { t } = useTranslation();
 
@@ -63,7 +63,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
 
   const handleChangeTheme = (e) => {
     if (handleKeyDown(e)) {
-      dispatch(setThemeMode(!lightMode));
+      setLightMode(!lightMode);
       setAnchorEl(null);
       setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
     }

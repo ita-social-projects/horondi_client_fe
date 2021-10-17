@@ -76,7 +76,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
 
   const { dirty, values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
     useFormik({
-      validationSchema: validationSchema(deliveryType, language),
+      validationSchema: validationSchema(deliveryType, t),
       initialValues,
 
       onSubmit: (data) => {

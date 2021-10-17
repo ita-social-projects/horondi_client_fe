@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from '../../../components/app/app-theme/app.theme';
-// import { theme } from '../../../src/components/app/app-theme/app.theme';
 import ImagesConstructor from '../images-constructor';
 
 const themeValue = theme('light');

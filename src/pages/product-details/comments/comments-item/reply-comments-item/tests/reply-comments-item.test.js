@@ -1,12 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { shallow } from 'enzyme';
 import { ThemeProvider } from '@material-ui/styles';
 import ReplyCommentsItem from '../reply-comments-item';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import {
-  dataUser,
   replyCommentId,
   dataSecond,
   dataAdmin,
@@ -17,7 +15,9 @@ import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
 jest.mock('react-redux');
 
-jest.mock('../reply-comments-item.styles', () => ({}));
+jest.mock('../reply-comments-item.styles', () => ({
+  useStyles: () => ({})
+}));
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -46,8 +46,9 @@ const props = {
 };
 
 const themeValue = theme('light');
-let wrapper;
+
 describe('component', () => {
+  let wrapper;
   beforeEach(() => {
     useSelector.mockImplementation(() => SelectorsState);
     wrapper = shallow(<ReplyCommentsItem {...props} />);
@@ -58,7 +59,7 @@ describe('component', () => {
   });
 
   it('Should render ReplyCommentsItem with admin role', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <ThemeProvider theme={themeValue}>
         <ReplyCommentsItem data={dataAdmin} replyCommentId={replyCommentId} />
       </ThemeProvider>

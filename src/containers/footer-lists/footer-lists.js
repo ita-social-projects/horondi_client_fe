@@ -12,12 +12,6 @@ import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
 import { footerNavItems } from '../footer-links/const';
 
-import {
-  FOOTER_INFORMATION,
-  FOOTER_CONTACTS,
-  FOOTER_CATALOGS
-} from '../../translations/footer.translations';
-import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
 import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';

@@ -17,6 +17,7 @@ import {
   setCountPerPage,
   getFiltredProducts
 } from '../../redux/products/products.actions';
+import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
   useEffect(() => {
     dispatch(preserveUser());
     dispatch(getCategories());
+    dispatch(getContacts());
     dispatch(getAllFilters());
     dispatch(getFiltredProducts({}));
   }, []);

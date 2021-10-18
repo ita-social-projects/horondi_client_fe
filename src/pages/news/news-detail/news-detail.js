@@ -15,8 +15,6 @@ const NewsDetail = ({ match }) => {
   const articleId = match.params.id;
   const id = articleId.split('-')[0];
 
-  const id = articleId.split('-');
-
   const { loading, error } = useQuery(getNewsById, {
     onCompleted: (data) => setArticle(data.getNewsById),
     variables: { id }

@@ -78,8 +78,6 @@ export const getFilteredProductsQuery = gql`
             value
             currency
           }
-          isHotItem
-          purchasedCount
           availableCount
           rate
           sizes {

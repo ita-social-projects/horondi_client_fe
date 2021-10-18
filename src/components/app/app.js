@@ -5,7 +5,6 @@ import { CssBaseline } from '@material-ui/core';
 import ThemeContext from '../../context/theme-context';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
-import SearchBarList from '../../containers/search-bar-list';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
@@ -15,19 +14,11 @@ import { preserveUser } from '../../redux/user/user.actions';
 import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLocation } from '../../redux/selectors/multiple.selectors';
 
-export const SearchContext = React.createContext();
-
 const App = () => {
   const [appTheme, setAppTheme] = useState(true);
   const { location } = useSelector(selectLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
-  const [searchParams, setSearchParams] = useState({
-    searchFilter: '',
-    products: [],
-    searchBarVisibility: false,
-    loading: false
-  });
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
@@ -41,7 +32,7 @@ const App = () => {
     dispatch(getCategories());
     dispatch(getContacts());
   }, []);
-  
+
   useEffect(() => {
     setAppTheme(themeMode);
   });
@@ -50,12 +41,9 @@ const App = () => {
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>
         <ThemeContext.Provider value={[appTheme, setAppTheme]}>
-          <SearchContext.Provider value={{ searchParams, setSearchParams }}>
-            <CssBaseline />
-            <Routes />
-            <Chat />
-            <SearchBarList />
-          </SearchContext.Provider>
+          <CssBaseline />
+          <Routes />
+          <Chat />
         </ThemeContext.Provider>
       </ThemeProvider>
     </div>

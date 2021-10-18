@@ -11,18 +11,29 @@ jest.mock('react-redux', () => ({
   useDispatch: () => () => null
 }));
 jest.mock('@apollo/client');
-jest.mock('../../../components/app/app', () => ({
-  SearchContext: {}
-}));
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useContext: () => ({ searchParams: {}, setSearchParams: () => null })
-}));
-useQuery.mockImplementation(() => ({ error: null, loading: false }));
+
+useQuery.mockImplementation((query, options) => {
+  options.onCompleted();
+  return { error: null, loading: false };
+});
+
+const initialSearchState = {
+  searchFilter: '',
+  products: [],
+  searchBarVisibility: false,
+  loading: false
+};
 
 describe('SearchBar component tests', () => {
   it('Should render SearchBar component', () => {
-    const component = shallow(<SearchBar fromSideBar='' />);
+    const component = shallow(
+      <SearchBar
+        fromSideBar=''
+        initialSearchState={initialSearchState}
+        searchParams={initialSearchState}
+        setSearchParams={() => null}
+      />
+    );
 
     expect(component).toBeDefined();
   });

@@ -1,19 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './search-bar-list.styles';
 import SearchBarListItem from './search-bar-list-item';
 import { handleSearchListLoading } from '../../utils/handle-search-bar-list';
-import { SearchContext } from '../../components/app/app';
 
-const SearchBarList = () => {
+const SearchBarList = ({ searchParams }) => {
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const styles = useStyles();
-  const {
-    searchParams: { products, searchBarVisibility, loading }
-  } = useContext(SearchContext);
+  const { products, searchBarVisibility, loading } = searchParams;
 
   return (
     <>

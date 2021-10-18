@@ -3,7 +3,6 @@ import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { page, URL_QUERIES_NAME } from '../../configs';
-import { checkFirstCondition, checkSecondCondition } from './condition-checkers';
 import {
   CATERGORY_TEXT,
   MODEL_TEXT,
@@ -20,28 +19,16 @@ const useProductFilters = (filters, filterData) => {
   const { category, patterns, models } = filters;
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
-    let query = searchParams.get(queryName);
+    const query = searchParams.get(queryName);
+    const currentCategory = categoriesList.find((el) => el.name[language].value === target.name);
 
-    if (categoriesList) {
-      const categoryId = categoriesList.filter(
-        (element) => element.name[language].value === target.name
-      )[0]._id;
-      if (query) {
-        query = checkFirstCondition(query, target, categoryId);
-      } else {
-        query = categoryId;
-      }
+    if (target.checked) {
+      if (query) searchParams.set(queryName, query.concat(',', currentCategory._id));
+      else searchParams.set(queryName, currentCategory._id);
     } else if (query) {
-      query = checkSecondCondition(query, target);
-    } else {
-      query = target.name;
-    }
-    if (query) {
-      searchParams.set(queryName, query);
-    } else {
-      searchParams.delete(queryName);
-    }
-    searchParams.set(page, 1);
+      searchParams.set(queryName, query.replace(currentCategory._id, ''));
+    } else searchParams.set(queryName, '');
+
     history.push(`?${searchParams.toString()}`);
   };
 

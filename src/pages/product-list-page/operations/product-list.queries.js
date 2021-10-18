@@ -13,6 +13,7 @@ export const getFilteredProductsQuery = gql`
     $purchasedCount: Int
     $category: [String]
     $models: [String]
+    $currency: Int
   ) {
     getProducts(
       filter: {
@@ -21,6 +22,7 @@ export const getFilteredProductsQuery = gql`
         category: $category
         isHotItem: $isHotItem
         models: $models
+        currency: $currency
       }
       limit: $limit
       skip: $skip

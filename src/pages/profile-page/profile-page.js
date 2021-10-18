@@ -8,13 +8,7 @@ import { useStyles } from './profile-page.styles';
 import ProfilePicture from '../../images/profile.png';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
-import {
-  IMG_URL,
-  formRegExp,
-  PROFILE_USER_DATA,
-  errorMessages,
-  REQUIRED_USER_FIELDS
-} from '../../configs/index';
+import { IMG_URL, formRegExp, PROFILE_USER_DATA, REQUIRED_USER_FIELDS } from '../../configs/index';
 import {
   handleProfilePage,
   handleClassName,
@@ -53,12 +47,9 @@ const ProfilePage = () => {
   const validationSchema = Yup.object(
     Object.fromEntries(
       Object.keys(PROFILE_USER_DATA).map((item) => {
-        let fieldSchema = Yup.string().matches(
-          formRegExp[item],
-          errorMessages[language].value[item]
-        );
+        let fieldSchema = Yup.string().matches(formRegExp[item], t(`error.profile.${item}`));
         REQUIRED_USER_FIELDS.includes(item) &&
-          (fieldSchema = fieldSchema.required(errorMessages[language].value[item]));
+          (fieldSchema = fieldSchema.required(t(`error.profile.${item}`)));
         return [item, fieldSchema];
       })
     )

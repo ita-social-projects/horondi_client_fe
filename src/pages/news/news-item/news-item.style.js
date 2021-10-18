@@ -39,14 +39,19 @@ export const useStyles = makeStyles((theme) => ({
   },
   ArticleTitle: {
     minHeight: '3rem',
-    textAlign: 'center'
+    color: 'green'
   },
   newsText: {
     minHeight: '20rem',
     textAlign: 'justify',
     maxHeight: '20rem',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    color: 'red',
+    '& > *': {
+      color: 'green'
+    }
   },
+
   newsFooter: {
     '& > *': {
       display: 'inline-block',

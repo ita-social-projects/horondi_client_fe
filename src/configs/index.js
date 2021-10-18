@@ -80,7 +80,7 @@ export const PROFILE_USER_DATA = {
   city: '',
   street: '',
   buildingNumber: '',
-  appartment: '',
+  apartment: '',
   zipcode: ''
 };
 
@@ -148,7 +148,7 @@ export const formRegExp = {
   street:
     "^(?=.{2,40}$)[a-zA-Zа-яА-ЯІіЇїЄєЙй]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєЙй])?[a-zA-Zа-яА-ЯІіЇїЄєЙй]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
+  apartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
@@ -208,37 +208,6 @@ export const placeholders = {
     }
   ]
 };
-
-export const FORGOT_PASSWORD = [
-  {
-    lang: 'uk',
-    value: 'Забули пароль?'
-  },
-  {
-    lang: 'eng',
-    value: 'Forgot password?'
-  }
-];
-
-export const REGISTER_PROPOSAL = [
-  {
-    lang: 'uk',
-    value: 'Реєстрація'
-  },
-  {
-    lang: 'eng',
-    value: 'Registration'
-  }
-];
-
-export const CONFIRM_ERROR = [
-  {
-    value: 'Ой! Щось пішло не так.'
-  },
-  {
-    value: 'Oops! Something went wrong.'
-  }
-];
 
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
@@ -477,14 +446,6 @@ export const COMMENT_OWNER_STATUS = {
   isAdmin: ['Менеджер', 'Manager']
 };
 
-export const SORT_BY_TEXT = [
-  { lang: 'uk', value: 'Сортувати за:' },
-  { lang: 'eng', value: 'Sort by:' }
-];
-export const COUNT_PER_PAGE = [
-  { lang: 'uk', value: 'Кількість на сторінці:' },
-  { lang: 'eng', value: 'Count per page:' }
-];
 export const SORT_BY_SELECT_OPTIONS = [
   {
     lang: [

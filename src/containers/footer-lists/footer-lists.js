@@ -1,27 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
+
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
+
 import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
 import { footerNavItems } from '../footer-links/const';
+
+import {
+  FOOTER_INFORMATION,
+  FOOTER_CONTACTS,
+  FOOTER_CATALOGS
+} from '../../translations/footer.translations';
+import routes from '../../const/routes';
+import { countPerPage } from '../../configs';
+import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
+
   const { t } = useTranslation();
   const { categories, language, contacts, quantityPerPage } = useSelector(
     ({ Categories, Language, Contacts, Products }) => ({
+
+  const { categories, language, quantityPerPage } = useSelector(
+    ({ Categories, Language, Products }) => ({
       categories: Categories.list,
       language: Language.language,
-      contacts: Contacts.contacts,
       quantityPerPage: Products.countPerPage
     })
   );
+
+  const [contacts, setContacts] = useState([]);
+  const { loading, error } = useQuery(getContactsForFooterListContacts, {
+    onCompleted: (data) => setContacts(data.getContacts.items)
+  });
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   const categoriesList = categories.length
     ? categories.map(({ _id, name }) => (

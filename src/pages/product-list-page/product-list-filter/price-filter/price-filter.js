@@ -55,7 +55,7 @@ const PriceFilter = () => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {t('common.price')}: {t('common.from')} {Math.round(filters[0] / 100)}- {t('common.to')}{' '}
+        {t('common.price')}: {t('common.from')} {Math.round(filters[0] / 100)} - {t('common.to')}{' '}
         {Math.round(filters[1] / 100)}
       </Typography>
       <Slider

@@ -28,8 +28,8 @@ export const getAllNews = gql`
 export const getNewsById = gql`
   query ($id: ID!) {
     getNewsById(id: $id) {
+      __typename
       ... on News {
-        __typename
         _id
         title {
           value

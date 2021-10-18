@@ -1,13 +1,14 @@
 import { useHistory, useLocation } from 'react-router';
 import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { page, URL_QUERIES_NAME } from '../configs';
 
+import { page, URL_QUERIES_NAME } from '../../configs';
+import { checkFirstCondition, checkSecondCondition } from './condition-checkers';
 import {
   CATERGORY_TEXT,
   MODEL_TEXT,
   PATTERN_TEXT
-} from '../translations/product-list.translations';
+} from '../../translations/product-list.translations';
 
 const useProductFilters = (filters, filterData) => {
   const { search } = useLocation();
@@ -17,10 +18,6 @@ const useProductFilters = (filters, filterData) => {
   const searchParams = new URLSearchParams(search);
   const language = i18n.language === 'ua' ? 0 : 1;
   const { category, patterns, models } = filters;
-  const checkFirstCondition = (query, target, categoryId) =>
-    !target.checked ? query.replace(categoryId, '') : query.concat(',', categoryId);
-  const checkSecondCondition = (query, target) =>
-    !target.checked ? query.replace(target.name, '') : query.concat(',', target.name);
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
     let query = searchParams.get(queryName);

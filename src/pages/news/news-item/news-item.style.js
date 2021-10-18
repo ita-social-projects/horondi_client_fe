@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     height: '25rem',
-    width: '25rem',
+    width: '100%',
     overflow: 'hidden',
     borderRadius: '5px'
   },

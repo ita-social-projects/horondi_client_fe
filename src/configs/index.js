@@ -509,26 +509,3 @@ export const ITEMS_PER_PAGE = [
     value: 30
   }
 ];
-
-export const itemsUA = [
-  {
-    id: '1',
-    url: '/pages/about-us',
-    item: 'Про нас'
-  },
-  {
-    id: '2',
-    url: '/materials',
-    item: 'Матеріали'
-  },
-  {
-    id: '3',
-    url: '/pages/payment-and-shipping',
-    item: 'Оплата і доставка'
-  },
-  {
-    id: '4',
-    url: '/pages/privacy-policy',
-    item: 'Умови конфіденційності'
-  }
-];

@@ -22,6 +22,7 @@ import SearchBar from './search-bar/search-bar.reducer';
 import Constructor from './images-constructor/constructor.reducer';
 import { toastReducer as Toast } from './toast/toast.reducer';
 import { orderReducer as Order } from './order/order.reducer';
+import { contactsReducer as Contacts } from './contacts/contacts.reducer';
 
 export const rootReducer = (history) =>
   combineReducers({
@@ -36,6 +37,7 @@ export const rootReducer = (history) =>
     Products,
     Wishlist,
     Cart,
+    Contacts,
     Snackbar,
     Model,
     Currency,

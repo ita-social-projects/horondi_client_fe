@@ -5,9 +5,6 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { useSelector } from 'react-redux';
 import { config } from 'react-spring';
 import { Transition } from 'react-spring/renderprops';
-import { useQuery } from '@apollo/client';
-import { getContactsForChat } from './operations/chat-contacts-query';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 import { CHAT_FACEBOOK_DATA } from '../../configs/index';
@@ -15,19 +12,14 @@ import { CHAT_FACEBOOK_DATA } from '../../configs/index';
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const { language, themeMode } = useSelector((state) => ({
+  const { language, themeMode, contacts } = useSelector((state) => ({
     language: state.Language.language,
-    themeMode: state.Theme.lightMode
+    themeMode: state.Theme.lightMode,
+    contacts: state.Contacts.contacts
   }));
 
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
-
-  const [contacts, setContacts] = useState([]);
-  const { loading, error } = useQuery(getContactsForChat, {
-    onCompleted: (data) => setContacts(data.getContacts.items)
-  });
-  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <>

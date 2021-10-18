@@ -57,7 +57,6 @@ export default function RegisterForm({
             {' '}
             {t('register.formConsent.text')}
             <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
-              {' '}
               {t('register.formConsent.link')}{' '}
             </Link>
           </div>

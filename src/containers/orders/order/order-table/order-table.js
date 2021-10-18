@@ -1,15 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
-
-import { CART_TABLE_FIELDS, CART_TITLES } from '../../../../translations/cart.translations';
-
-import {
-  MODAL_DELETE_ITEM_MESSAGE,
-  MODAL_DELETE_ALL_MESSAGE
-} from '../../../../translations/modal.translations';
 
 import {
   resetCart,
@@ -29,7 +22,7 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
   const styles = useStyles();
   const dispatch = useDispatch();
   const isLightTheme = useContext(ThemeContext);
-
+  const { t } = useTranslation();
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
@@ -78,10 +71,9 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
       {modalVisibility && (
         <>
           <Modal
-            message={MODAL_DELETE_ALL_MESSAGE[language]}
+            message={t('cart.deleteAllItems')}
             isOpen={modalVisibility}
             onAction={onModalAction}
-            language={language}
             isCartModal
           />
         </>
@@ -89,16 +81,15 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
       {removeOneModalVisibility && (
         <>
           <Modal
-            message={MODAL_DELETE_ITEM_MESSAGE[language]}
+            message={t('cart.deleteItem')}
             isOpen={removeOneModalVisibility}
             onAction={onRemoveOneModalAction}
-            language={language}
             isCartModal
           />
         </>
       )}
       <h2 className={isLightTheme ? styles.lightThemeTitleWrapper : styles.darkThemeTitleWrapper}>
-        {CART_TITLES[language].filled}{' '}
+        {t('cart.titleFilled')}{' '}
       </h2>
       <div className={styles.table}>
         <Table>
@@ -110,12 +101,12 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
                   : { root: styles.darkThemeTableHeader }
               }
             >
-              <TableCell>{CART_TABLE_FIELDS[language].product}</TableCell>
-              <TableCell>{CART_TABLE_FIELDS[language].size}</TableCell>
-              <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
-              <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
-              <TableCell>{CART_TABLE_FIELDS[language].toPay}</TableCell>
-              <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
+              <TableCell>{t('cart.product')}</TableCell>
+              <TableCell>{t('cart.size')}</TableCell>
+              <TableCell>{t('cart.price')}</TableCell>
+              <TableCell>{t('cart.quantity')}</TableCell>
+              <TableCell>{t('cart.toPay')}</TableCell>
+              <TableCell>{t('cart.actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{cartItems}</TableBody>

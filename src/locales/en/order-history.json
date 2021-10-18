@@ -1,6 +1,26 @@
 {
-"titles":  {
-    "empty": "Your order history is empty",
-    "title": "Orders history"
-}
+    "title": "Orders history",
+    "emptyTitle": "Your order history is empty",
+    "buttonEmpty": "Shop now",
+    "tableField": {
+        "order": "ORDER",
+        "date": "DATE",
+        "status": "STATUS",
+        "dated": "dated"
+    },
+    "amountOfOrder": "Order amount",
+    "item": "Product name",
+    "photo": "Photo",
+    "size": "Size",
+    "quantity": "Quantity",
+    "price": "Single item price",
+    "statuses": {
+        "CREATED": "CREATED",
+        "CONFIRMED": "CONFIRMED",
+        "CANCELLED": "CANCELLED",
+        "REFUNDED": "REFUNDED",
+        "SENT": "SENT",
+        "DELIVERED": "DELIVERED",
+        "PRODUCED":  "PRODUCED"
+    }
 }

@@ -6,10 +6,10 @@ export const validationSchema = (t) =>
     email: Yup.string()
       .min(8, t('error.emailLength'))
       .max(60, t('error.emailLength'))
-      .email(t('error.email'))
+      .email(t('error.profile.email'))
       .required(t('error.requiredField')),
     password: Yup.string()
-      .matches(formRegExp.password, t('error.pass'))
+      .matches(formRegExp.password, t('error.profile.pass'))
       .required(t('error.requiredField')),
     rememberMe: Yup.bool()
   });

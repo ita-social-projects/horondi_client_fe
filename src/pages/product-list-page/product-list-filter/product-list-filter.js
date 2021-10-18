@@ -10,7 +10,7 @@ import { useStyles } from './product-list-filter.styles';
 
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
 import { countPerPage, sort } from '../../../configs';
-import useProductFilters from '../../../hooks/use-product-filters/use-product-filters';
+import useProductFilters from '../../../hooks/use-product-filters';
 import routes from '../../../const/routes';
 import { getAllFiltersQuery } from '../operations/product-list.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';

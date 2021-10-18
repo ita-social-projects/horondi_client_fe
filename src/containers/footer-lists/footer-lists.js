@@ -21,8 +21,6 @@ const FooterLists = () => {
   const styles = useStyles();
 
   const { t } = useTranslation();
-  const { categories, language, contacts, quantityPerPage } = useSelector(
-    ({ Categories, Language, Contacts, Products }) => ({
 
   const { categories, language, quantityPerPage } = useSelector(
     ({ Categories, Language, Products }) => ({

@@ -103,6 +103,8 @@ const CommentsItem = ({ data, commentId, productId }) => {
 
   const limitOption = handleLimitOptions(replyCommentsList, replyComments, replyCommentsCount);
 
+  const loadMore = limitOption ? null : t('product.reply.loadMore');
+
   return (
     <div className={styles.container}>
       <div className={styles.comments}>
@@ -174,7 +176,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
                 <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>
-                  {limitOption ? '' : t('product.reply.loadMore')}
+                  {loadMore}
                 </span>
               </div>
             )}

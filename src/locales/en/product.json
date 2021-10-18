@@ -19,13 +19,9 @@
         "weightLabel": "Weight(kg)",
         "volumeLabel": "Volume(L)"
     },
-    "priceFrom": {
-        "value": "from"
-    },
-    "sizeNotAvailable": {
-        "lang": "eng",
-        "value": "Product isn't available"
-    },
+    "priceFrom": "from",
+    "sizeNotAvailable": "Product isn't available",
+
     "size": {
         "carrentSize": "Size"
     },
@@ -42,8 +38,8 @@
         "removeWishful": "Remove from wishlist",
         "edit": "Edit",
         "delete": "Delete",
-        "unregisteredReply": "You should login to leave answer",
-        "unregisteredComment": "You should login to leave comment",
+        "unregisteredReply": "You should login, to leave answer",
+        "unregisteredComment": "You should login, to leave comment",
         "bought": "The user bought this product",
         "feedbackComment": "Your comment has not been confirmed by the administrator",
         "feedbackReply": "Your answer has not been confirmed by the administrator",
@@ -71,7 +67,7 @@
         "email": "Email",
         "text": "Share your thoughts with others",
         "submit": "Leave comment",
-        "unregisteredTip": "You should login to leave rate",
+        "unregisteredTip": "You should login, to leave rate",
         "registeredTip": "You should bought the product to leave rate",
         "successfulTip": "Set rate",
         "loadMore": "Load more...",

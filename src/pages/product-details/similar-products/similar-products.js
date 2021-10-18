@@ -59,8 +59,8 @@ const SimilarProducts = ({ cartList, product }) => {
         key={_id}
         price={
           availableSize
-            ? t('product.priceFrom.value') + Math.round(availableSize)
-            : t('product.sizeNotAvailable.value')
+            ? t('product.priceFrom') + Math.round(availableSize)
+            : t('product.sizeNotAvailable')
         }
         name={name}
         rate={rate}

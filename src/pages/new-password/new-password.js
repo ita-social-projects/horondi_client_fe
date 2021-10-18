@@ -45,7 +45,7 @@ const NewPassword = ({ token }) => {
   );
 
   const validationSchema = Yup.object({
-    password: Yup.string().matches(formRegExp.password, t('error.pass')).required(t('error.pass')),
+    password: Yup.string().matches(formRegExp.password, t('error.profile.pass')).required(t('error.profile.pass')),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password')], t('error.confirmPassword'))
       .when('password', {

@@ -9,7 +9,7 @@
     "city": "Місто",
     "street": "Вулиця",
     "buildingNumber": "Будинок",
-    "appartment": "Квартира",
+    "apartment": "Квартира",
     "zipcode": "Почтовий індекс",
     "addPhoto": "+",
     "saveBtnTitle": "Зберегти"

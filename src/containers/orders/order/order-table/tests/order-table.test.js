@@ -1,22 +1,21 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import * as reactRedux from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import OrderTable from '../order-table';
 
-configure({ adapter: new Adapter() });
+jest.mock('../order-table.styles', () => ({
+  useStyles: () => ({})
+}));
+jest.mock('react-redux');
 
+const dispatch = jest.fn();
+useDispatch.mockImplementation(() => dispatch);
+const testUseSelector = (lang, theme) => {
+  useSelector.mockImplementation(() => ({
+    isLightTheme: theme,
+    language: lang
+  }));
+};
 let wrapper;
-
-function spyOnSelector(language, lightMode) {
-  jest.spyOn(reactRedux, 'useSelector').mockImplementation((cb) =>
-    cb({
-      Language: { language },
-      Theme: { lightMode }
-    })
-  );
-}
 
 const props = {
   currency: 0,
@@ -27,22 +26,9 @@ const props = {
   user: {}
 };
 describe('Order table component tests', () => {
-  beforeAll(() => {
-    jest.spyOn(reactRedux, 'useDispatch').mockImplementation(() => (cb) => cb());
-  });
-
   it('should match snapshot', () => {
-    spyOnSelector(0, false);
-
+    testUseSelector(0, false);
     wrapper = shallow(<OrderTable {...props} />);
-
     expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should cover other branches', () => {
-    spyOnSelector(0, true);
-    jest.spyOn(React, 'useState').mockImplementation(() => [true, () => null]);
-
-    wrapper = shallow(<OrderTable {...props} />);
   });
 });

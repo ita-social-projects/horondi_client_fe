@@ -4,18 +4,18 @@ import { deliveryTypes, formRegExp } from '../configs';
 export const validationSchema = (deliveryType, t) =>
   Yup.object().shape({
     firstName: Yup.string()
-      .min(2, t('error.firstName'))
-      .max(20, t('error.firstName'))
+      .min(2, t('error.profile.firstName'))
+      .max(20, t('error.profile.firstName'))
       .matches(formRegExp.firstName, t('error.onlyLetter'))
       .required(t('error.requiredField')),
     lastName: Yup.string()
-      .min(2, t('error.lastName'))
-      .max(20, t('error.lastName'))
+      .min(2, t('error.profile.lastName'))
+      .max(20, t('error.profile.lastName'))
       .matches(formRegExp.lastName, t('error.onlyLetter'))
       .required(t('error.requiredField')),
-    email: Yup.string().email(t('error.email')).required(t('error.requiredField')),
+    email: Yup.string().email(t('error.profile.email')).required(t('error.requiredField')),
     phoneNumber: Yup.string()
-      .matches(formRegExp.phoneNumber, t('error.phoneNumber'))
+      .matches(formRegExp.phoneNumber, t('error.profile.phoneNumber'))
       .required(t('error.requiredField')),
     paymentMethod: Yup.string().required(t('error.requiredField')),
     userComment: Yup.string().min(2, t('error.userComment')).max(500, t('error.userComment')),
@@ -29,15 +29,15 @@ export const validationSchema = (deliveryType, t) =>
     city:
       deliveryType !== deliveryTypes.SELFPICKUP &&
       Yup.string()
-        .min(2, t('error.city'))
-        .max(50, t('error.city'))
+        .min(2, t('error.profile.city'))
+        .max(50, t('error.profile.city'))
         .required(t('error.requiredField')),
     street:
       (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
         deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
       Yup.string()
-        .min(2, t('error.street'))
-        .max(100, t('error.street'))
+        .min(2, t('error.streetLong'))
+        .max(100, t('error.streetLong'))
         .required(t('error.requiredField')),
     house:
       (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||

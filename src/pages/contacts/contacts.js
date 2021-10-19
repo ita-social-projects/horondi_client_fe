@@ -75,7 +75,7 @@ const Contacts = ({ fromCheckout }) => {
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.address')}</span>
-            <div className={styles.contactAddress}>{t('contacts.pageTitles.address')}</div>
+            <div className={styles.contactAddress}>{contact.address[language].value}</div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>

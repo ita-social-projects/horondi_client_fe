@@ -43,7 +43,7 @@ const Recovery = () => {
   );
 
   const validationSchema = Yup.object({
-    email: Yup.string().email(t('error.wrongEmail'))
+    email: Yup.string().email(t('error.profile.email'))
   });
 
   return (

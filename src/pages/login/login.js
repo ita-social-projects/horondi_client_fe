@@ -77,7 +77,7 @@ const Login = () => {
                       id='email'
                       label={t('login.placeholders.email')}
                       className={`${styles.emailInput} ${
-                        errors.email === t('error.wrongEmail') && styles.afterText
+                        errors.email === t('error.profile.email') && styles.afterText
                       }`}
                       fullWidth
                       variant='outlined'

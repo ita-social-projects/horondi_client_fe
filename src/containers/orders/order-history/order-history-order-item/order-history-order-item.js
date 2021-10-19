@@ -1,10 +1,10 @@
 import React from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useStyles } from './order-history-order-item.styles';
+import { useTranslation } from 'react-i18next';
 
+import { useStyles } from './order-history-order-item.styles';
 import { getCurrencySign } from '../../../../utils/currency';
-import { ORDER_TABLE_FIELDS } from '../../../../translations/order.translations';
 import { IMG_URL } from '../../../../configs';
 
 const OrderHistoryOrderItem = ({ item, language, currency }) => {
@@ -13,6 +13,7 @@ const OrderHistoryOrderItem = ({ item, language, currency }) => {
   const data = item.props.item;
   const currencySign = getCurrencySign(currency);
   const fixedPriceProduct = data.fixedPrice[currency].value;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -26,7 +27,7 @@ const OrderHistoryOrderItem = ({ item, language, currency }) => {
         </TableCell>
         <TableCell className={styles.description}>
           <p>{data.product.name[language].value}</p>
-          <p>{`${ORDER_TABLE_FIELDS[language].size} - ${data.options.size.name}`}</p>
+          <p>{`${t('orderHistory.size')} - ${data.options.size.name}`}</p>
         </TableCell>
         <TableCell className={styles.description}>{data.quantity}</TableCell>
         <TableCell className={styles.description}>

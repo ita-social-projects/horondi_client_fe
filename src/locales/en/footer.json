@@ -1,37 +1,14 @@
 {
-    "catalogs": "Catalogs",
-    "socialNetworkLinks": {
-        "title": "Social networks",
-        "facebook": "https://www.facebook.com/Horondi",
-        "instagram": "https://www.instagram.com/horondi"
-    },
-    "footerInformation": {
-        "title": "Information",
-        "items": [
-            {
-                "id": 1,
-                "url": "/pages/about-us",
-                "item": "About us"
-            },
-            {
-                "id": 2,
-                "url": "/materials",
-                "item": "Materials"
-            },
-            {
-                "id": 3,
-                "url": "/pages/payment-and-shipping",
-                "item": "Payment & shipping"
-            },
-            {
-                "id": 4,
-                "url": "/pages/privacy-policy",
-                "item": "Privacy policy"
-            }
-        ]
-    },
-    "footerContacts": {
-        "title": "Contacts",
-        "more": "More information"
-    }
+  "catalogs": "Catalogs",
+  "footerInformation": {
+    "title": "Information",
+    "aboutUs": "About us",
+     "materials": "Materials" ,
+     "paymentAndShipping": "Payment & shipping" ,
+     "privacyPolicy": "Privacy policy"
+  },
+  "contacts": "Contacts",
+  "moreInformation": "More information",
+
+  "socialNetworkLinks": "Social networks"
 }

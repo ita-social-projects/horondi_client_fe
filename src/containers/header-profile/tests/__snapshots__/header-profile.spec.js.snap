@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HeaderProfile /> Should match snapshot 1`] = `
+<div
+  data-cy="profile"
+>
+  <Memo(ForwardRef(PersonIcon))
+    data-cy="iconIn"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
+  />
+  <WithStyles(ForwardRef(Menu))
+    anchorEl={null}
+    anchorOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "bottom",
+      }
+    }
+    data-cy="menu"
+    elevation={0}
+    getContentAnchorEl={null}
+    keepMounted={true}
+    onClose={[Function]}
+    open={false}
+    transformOrigin={
+      Object {
+        "horizontal": "right",
+        "vertical": "top",
+      }
+    }
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
+      disableGutters={true}
+      key="wishlist.wishlistTitles.filled"
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(FavoriteIcon)) />
+      wishlist.wishlistTitles.filled
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
+      disableGutters={true}
+      key="headerProfile.changeTheme"
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(Brightness7Icon)) />
+      headerProfile.changeTheme
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
+      disableGutters={true}
+      key="headerProfile.profile"
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(PersonOutlineIcon)) />
+      headerProfile.profile
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
+      disableGutters={true}
+      key="headerProfile.orderHistory"
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(HistoryIcon)) />
+      headerProfile.orderHistory
+    </WithStyles(ForwardRef(MenuItem))>
+    <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
+      disableGutters={true}
+      key="common.logOut"
+      onClick={[Function]}
+    >
+      <Memo(ForwardRef(ExitToAppIcon)) />
+      common.logOut
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Menu))>
+</div>
+`;

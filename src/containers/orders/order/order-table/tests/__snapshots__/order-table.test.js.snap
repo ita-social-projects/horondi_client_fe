@@ -1,44 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Order table component tests should match snapshot 1`] = `
-<div
-  className="makeStyles-root-3"
->
-  <h2
-    className="makeStyles-lightThemeTitleWrapper-1"
-  >
-    Ваш кошик
+<div>
+  <h2>
+    cart.titleFilled
      
   </h2>
-  <div
-    className="makeStyles-table-4"
-  >
+  <div>
     <WithStyles(ForwardRef(Table))>
       <WithStyles(ForwardRef(TableHead))>
         <WithStyles(ForwardRef(TableRow))
           classes={
             Object {
-              "root": "makeStyles-lightThemeTableHeader-5",
+              "root": undefined,
             }
           }
         >
           <WithStyles(ForwardRef(TableCell))>
-            Продукт
+            cart.product
           </WithStyles(ForwardRef(TableCell))>
           <WithStyles(ForwardRef(TableCell))>
-            Розмір
+            cart.size
           </WithStyles(ForwardRef(TableCell))>
           <WithStyles(ForwardRef(TableCell))>
-            Ціна
+            cart.price
           </WithStyles(ForwardRef(TableCell))>
           <WithStyles(ForwardRef(TableCell))>
-            Кількість
+            cart.quantity
           </WithStyles(ForwardRef(TableCell))>
           <WithStyles(ForwardRef(TableCell))>
-            До оплати
+            cart.toPay
           </WithStyles(ForwardRef(TableCell))>
           <WithStyles(ForwardRef(TableCell))>
-            Дія
+            cart.actions
           </WithStyles(ForwardRef(TableCell))>
         </WithStyles(ForwardRef(TableRow))>
       </WithStyles(ForwardRef(TableHead))>

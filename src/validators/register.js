@@ -4,17 +4,17 @@ import { formRegExp } from '../configs';
 export const validationSchema = (t) =>
   Yup.object().shape({
     firstName: Yup.string()
-      .min(2, t('error.firstName'))
-      .max(30, t('error.firstName'))
+      .min(2, t('error.profile.firstName'))
+      .max(30, t('error.profile.firstName'))
       .matches(formRegExp.firstName, t('error.wrongFormat'))
       .required(t('error.requiredField')),
     lastName: Yup.string()
-      .min(2, t('error.firstName'))
-      .max(30, t('error.firstName'))
+      .min(2, t('error.profile.firstName'))
+      .max(30, t('error.profile.firstName'))
       .matches(formRegExp.firstName, t('error.wrongFormat'))
       .required(t('error.requiredField')),
-    email: Yup.string().email(t('error.email')).required(t('error.email')),
+    email: Yup.string().email(t('error.profile.email')).required(t('error.profile.email')),
     password: Yup.string()
-      .matches(formRegExp.password, t('error.pass'))
+      .matches(formRegExp.password, t('error.profile.pass'))
       .required(t('error.requiredField'))
   });

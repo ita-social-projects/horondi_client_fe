@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     height: '25rem',
-    width: '25rem',
+    width: '100%',
     overflow: 'hidden',
     borderRadius: '5px'
   },
@@ -38,14 +38,20 @@ export const useStyles = makeStyles((theme) => ({
     padding: '16px 16px 0'
   },
   ArticleTitle: {
-    minHeight: '3rem'
+    minHeight: '3rem',
+    color: 'green'
   },
   newsText: {
     minHeight: '20rem',
     textAlign: 'justify',
     maxHeight: '20rem',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    color: 'red',
+    '& > *': {
+      color: 'green'
+    }
   },
+
   newsFooter: {
     '& > *': {
       display: 'inline-block',

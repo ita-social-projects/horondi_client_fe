@@ -2,7 +2,7 @@
     "item": "Product name",
     "photo": "Photo",
     "bottomMaterial": "Bottom material",
-    "empty": "To cart",
+    "empty": "To catalog",
     "emptyCart": "Your cart is empty",
     "promoPlaceHolder": "Promocode or certificate",
     "applyPromoCode": "Add",
@@ -13,5 +13,14 @@
         "toMain": "Home",
         "toCatalog": "Catalog",
         "yourCart": "Your cart"
-    }
+    },
+    "deleteAllItems": "Remove all items from the cart?",
+    "deleteItem": "Remove item from the cart?",
+    "titleFilled": "Your cart",
+    "product": "Product",
+    "size": "Size",
+    "price": "Price",
+    "quantity": "Quantity",
+    "toPay": "Total price",
+    "actions": "Action"
 }

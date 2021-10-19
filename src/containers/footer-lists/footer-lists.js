@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
 import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
+import { footerNavItems } from '../footer-links/const';
+
+import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
-  const { t } = useTranslation();
-  const getFooterInfo = t('footer.footerInformation.items', { returnObjects: true });
 
-  const { categories, language, contacts, quantityPerPage } = useSelector(
-    ({ Categories, Language, Contacts, Products }) => ({
+  const { t } = useTranslation();
+
+  const { categories, language, quantityPerPage } = useSelector(
+    ({ Categories, Language, Products }) => ({
       categories: Categories.list,
       language: Language.language,
-      contacts: Contacts.contacts,
       quantityPerPage: Products.countPerPage
     })
   );
+
+  const [contacts, setContacts] = useState([]);
+  const { loading, error } = useQuery(getContactsForFooterListContacts, {
+    onCompleted: (data) => setContacts(data.getContacts.items)
+  });
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   const categoriesList = categories.length
     ? categories.map(({ _id, name }) => (
@@ -40,11 +50,11 @@ const FooterLists = () => {
     ))
     : null;
 
-  const informationList = getFooterInfo.map((item) => (
+  const informationList = footerNavItems.map((item) => (
     <div key={item.id}>
       <Typography variant='subtitle2'>
         <Link className={styles.cardLink} to={item.url}>
-          {item.item}
+          {t(`footer.footerInformation.${item.label}`)}
         </Link>
       </Typography>
     </div>
@@ -53,7 +63,7 @@ const FooterLists = () => {
   const contactsList = contacts.map((item) => (
     <div key={item._id}>
       <div>
-        <Typography variant='subtitle2'>+{item.phoneNumber}</Typography>
+        <Typography variant='subtitle2'>{item.phoneNumber}</Typography>
       </div>
       <div>
         <Typography variant='subtitle2'>{item.email}</Typography>
@@ -79,13 +89,13 @@ const FooterLists = () => {
       </div>
       <div className={styles.cardBody}>
         <div className={styles.cardTitle}>
-          <Typography variant='h5'>{t('footer.footerContacts.title')}</Typography>
+          <Typography variant='h5'>{t('footer.contacts')}</Typography>
         </div>
         {contactsList[0]}
-        <div>
+        <div key={t('footer.moreInformation')}>
           <Typography variant='subtitle2'>
             <Link to={pathToContacts} className={styles.cardLink}>
-              <span>{t('footer.footerContacts.more')}</span>
+              <span>{t('footer.moreInformation')}</span>
             </Link>
           </Typography>
         </div>

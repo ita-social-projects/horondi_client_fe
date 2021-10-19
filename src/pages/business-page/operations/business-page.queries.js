@@ -18,22 +18,3 @@ export const getBusinessTextByCode = gql`
     }
   }
 `;
-
-// export const getBusinessTextByCode = gql`
-//   query {
-//     getHomePageLooksImages {
-//       _id
-//       images {
-//         medium
-//       }
-//     }
-//   }
-// `;
-
-// title {
-//   value
-// }
-// text {
-//   value
-// }
-// date

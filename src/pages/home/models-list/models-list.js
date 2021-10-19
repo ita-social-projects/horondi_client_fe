@@ -1,41 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { useQuery } from '@apollo/client';
 import { useStyles } from './models-list.style';
-import { getAllModels } from '../../../redux/model/model.actions';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
 import Loader from '../../../components/loader';
+import { getAllModelsQuery } from './operations/getAllModels.queries';
 
 const ModelsList = () => {
-  const dispatch = useDispatch();
-  const { models, modelsLoading } = useSelector(({ Model }) => ({
-    models: Model.models,
-    modelsLoading: Model.loading
-  }));
+  const [models, setModels] = useState([]);
   const { t } = useTranslation();
 
   const [isModelsVisible, setIsModelsVisible] = useState(false);
 
   const styles = useStyles({ isModelsVisible, modelsCount: models.length });
 
-  useEffect(() => {
-    dispatch(getAllModels());
-  }, [dispatch]);
-
   const onShowModels = () => {
     setIsModelsVisible(!isModelsVisible);
   };
 
-  if (modelsLoading) {
+  const { loading, error } = useQuery(getAllModelsQuery, {
+    onCompleted: (data) => setModels(data.getAllModels.items)
+  });
+
+  if (loading || error) {
     return <Loader />;
   }
-
   return (
     <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>
-        {models.map((model) => (
+        {models?.map((model) => (
           <ModelItem key={model._id} model={model} />
         ))}
       </div>

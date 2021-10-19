@@ -9,7 +9,6 @@ import Products from './products/products.reducer';
 import { wishlistReducer as Wishlist } from './wishlist/wishlist.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
 import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
-import Model from './model/model.reducer';
 import Currency from './currency/currency.reducer';
 import Comments from './comments/comments.reducer';
 import { checkoutReducer as Checkout } from './checkout/checkout.reducer';
@@ -35,7 +34,6 @@ export const rootReducer = (history) =>
     Cart,
     Contacts,
     Snackbar,
-    Model,
     Currency,
     Comments,
     Checkout,

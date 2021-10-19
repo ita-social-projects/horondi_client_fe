@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkout component tests Should match snapshot 1`] = `
+exports[`ThanksPage component tests should match snapshot 1`] = `
 <div>
   <Redirect
     to="/"

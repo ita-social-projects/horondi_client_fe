@@ -16,19 +16,12 @@ const BusinessPage = ({ match }) => {
   const { loading, error } = useQuery(getBusinessTextByCode, {
     variables: { code },
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
-    // onCompleted: (data) => setSomeData(data)
   });
-  // console.log(page);
-  // console.log(page1);
 
   useEffect(() => {
-    // dispatch(getBusinessPageByCode(code));
     window.scrollTo(0, 0);
   }, [code]);
 
-  // console.log(language);
-  // console.log(language1);
-  // console.log()
   const addressText = page?.text && parse(page?.text[language].value);
   const styles = useStyles();
 

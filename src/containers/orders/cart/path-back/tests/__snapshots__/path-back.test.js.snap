@@ -2,7 +2,7 @@
 
 exports[`Path back component tests should match snapshot 1`] = `
 <div
-  className="makeStyles-darkThemePath-2"
+  className="makeStyles-whiteThemePath-1"
 >
   <div
     className="makeStyles-pathLine-3"

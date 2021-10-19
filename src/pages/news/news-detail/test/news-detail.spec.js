@@ -1,13 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { useQuery } from '@apollo/client';
-import NewsPage from '../news-page';
+import { useSelector } from 'react-redux';
+import NewsDetail from '../news-detail';
 
 let wrapper;
 const useQueryData = {
   loading: false,
   error: false,
-  data: {}
+  data: { getNewsById: {} }
 };
 
 jest.mock('react-redux', () => ({
@@ -23,7 +24,7 @@ describe('', () => {
       ...useQueryData
     }));
 
-    wrapper = shallow(<NewsPage />);
+    wrapper = shallow(<NewsDetail />);
   });
 
   it('', () => {
@@ -32,6 +33,6 @@ describe('', () => {
       loading: true
     }));
 
-    wrapper = shallow(<NewsPage />);
+    wrapper = shallow(<NewsDetail />);
   });
 });

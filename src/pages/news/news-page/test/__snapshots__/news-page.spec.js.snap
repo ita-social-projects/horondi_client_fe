@@ -5,7 +5,11 @@ exports[` 1`] = `
   <h1
     className="makeStyles-newsTitle-1"
   >
+<<<<<<< HEAD
     News
+=======
+    Новини
+>>>>>>> 0edd262b... test
   </h1>
   <div
     className="makeStyles-NewsPageItem-2"

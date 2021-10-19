@@ -1,0 +1,14 @@
+{
+  "catalogs": "Каталоги",
+  "footerInformation": {
+    "title": "Інформація",
+    "aboutUs": "Про нас",
+     "materials": "Матеріали" ,
+     "paymentAndShipping": "Оплата і доставка" ,
+     "privacyPolicy": "Умови конфіденційності"
+  },
+  "contacts": "Контакти",
+  "moreInformation": "Більше інформації",
+
+  "socialNetworkLinks": "Ми в соцмережаx"
+}

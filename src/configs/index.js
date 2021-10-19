@@ -4,6 +4,8 @@ export const LIGHT_THEME = 'light';
 export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
 export const UNIQUE_MODEL_IMAGE_LINK = 'https://i.imgur.com/ygJaph4.jpg';
 export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
+export const HORONDI_FB_LINK = 'https://www.facebook.com/Horondi';
+export const HORONDI_INST_LINK = 'https://www.instagram.com/horondi';
 
 export const CART_IMAGES = {
   lightTheme: './images/cart/empty-cart-light-theme-image.png',

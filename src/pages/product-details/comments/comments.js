@@ -133,7 +133,7 @@ const Comments = ({ productId }) => {
                     onBlur={handleBlur}
                     value={values[name]}
                     disabled={!userData}
-                    label={t(`comments.CurrentComments.${name}`)}
+                    label={t(`product.comments.${name}`)}
                     error={!!errors[name]}
                     helperText={handleHelperText(errors[name])}
                     multiline={multiline}
@@ -155,7 +155,7 @@ const Comments = ({ productId }) => {
                 disabled={!userData}
                 onClick={() => setShouldValidate(true)}
               >
-                {t('comments.CurrentComments.submit')}
+                {t('product.comments.submit')}
               </Button>
             </div>
           </Tooltip>
@@ -173,7 +173,7 @@ const Comments = ({ productId }) => {
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
           <span onClick={handleCommentsReload} className={styles.loadMoreText}>
-            {limitOption ? null : t('comments.CurrentComments.loadMore')}
+            {limitOption ? null : t('product.comments.loadMore')}
           </span>
         </div>
       )}

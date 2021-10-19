@@ -28,7 +28,6 @@ import product from './product.json';
 import commentDialog from './commentDialog';
 import replyCommentsItem from './replyCommentsItem';
 import commentsItem from './commentsItem';
-import comments from './comments';
 
 export default {
   translations: {
@@ -61,7 +60,6 @@ export default {
     product,
     commentDialog,
     replyCommentsItem,
-    commentsItem,
-    comments
+    commentsItem
   }
 };

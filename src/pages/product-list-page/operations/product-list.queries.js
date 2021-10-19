@@ -122,36 +122,6 @@ export const getAllFiltersQuery = gql`
           value
         }
       }
-      closures {
-        _id
-        name {
-          value
-        }
-      }
-      mainMaterial {
-        _id
-        name {
-          value
-        }
-      }
-      mainMaterialColor {
-        _id
-        name {
-          value
-        }
-      }
-      innerMaterialColor {
-        _id
-        name {
-          value
-        }
-      }
-      bottomMaterial {
-        _id
-        name {
-          value
-        }
-      }
       maxPrice {
         value
       }

@@ -220,6 +220,7 @@ export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
 export const POPULARITY = 'popularity';
+export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 export const URL_QUERIES_NAME = {
   page: 'page',
   sort: 'sort',

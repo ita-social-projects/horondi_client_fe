@@ -5,11 +5,21 @@ jest.mock('react-router', () => ({
   useHistory: () => ({ push: () => null })
 }));
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ i18n: () => null })
+  useTranslation: () => ({ i18n: { language: 'ua' } })
 }));
+jest.mock('react', () => ({
+  useState: () => [{}, () => null],
+  useEffect: (cb) => cb()
+}));
+
+const args = {
+  category: [{ name: [{ value: '' }] }],
+  patterns: {},
+  models: {}
+};
 
 describe('use-product-filters tests', () => {
   it('should return expected result', () => {
-    useProductFilters({ category: {}, patterns: {}, models: {} }, {});
+    useProductFilters(args, args);
   });
 });

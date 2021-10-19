@@ -35,7 +35,11 @@ const ProductListFilter = ({ filterParams }) => {
         maxPrice: data.getProductsFilters.maxPrice,
         minPrice: data.getProductsFilters.minPrice
       });
-      setFilters(data.getProductsFilters);
+      setFilters({
+        categories: data.getProductsFilters.categories,
+        models: data.getProductsFilters.models,
+        patterns: data.getProductsFilters.patterns
+      });
     }
   });
 

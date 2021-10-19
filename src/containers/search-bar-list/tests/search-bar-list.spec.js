@@ -13,13 +13,6 @@ jest.mock('connected-react-router', () => ({
   push: 0
 }));
 jest.mock('@apollo/client');
-jest.mock('../../../components/app/app', () => ({
-  SearchContext: {}
-}));
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useContext: () => ({ searchParams: {}, setSearchParams: () => null })
-}));
 
 useQuery.mockImplementation(() => ({ error: null, loading: false }));
 useSelector.mockImplementation(() => ({

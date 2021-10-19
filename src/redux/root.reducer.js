@@ -8,7 +8,6 @@ import { errorReducer as Error } from './error/error.reducer';
 import Language from './language/language.reducer';
 import Products from './products/products.reducer';
 import { wishlistReducer as Wishlist } from './wishlist/wishlist.reducer';
-import { businessPagesReducer as BusinessPages } from './business-pages/business-pages.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
 import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
 import Model from './model/model.reducer';
@@ -43,7 +42,6 @@ export const rootReducer = (history) =>
     Currency,
     Comments,
     Checkout,
-    BusinessPages,
     Chat,
     HeaderLinks,
     SearchBar,

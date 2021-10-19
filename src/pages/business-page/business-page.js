@@ -1,44 +1,38 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import parse from 'html-react-parser';
-import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 
+import { useQuery } from '@apollo/client';
 import { useStyles } from './business-page.style';
-import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
-// import { getBusinessTextByCode } from './operations/business-page.queries';
-
-// import { useQuery } from '@apollo/client';
+import { getBusinessTextByCode } from './operations/business-page.queries';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const BusinessPage = ({ match }) => {
-  // const [businessPage, setBusinessPage] = useState({
-  //   aboutUs: {},
-  //   terms: {},
-  //   materials: {},
-  //   privacyPolicy: {},
-  //   paymentAndShipping: {},
-  //   userAgreement: {}
-  // });
+  const [page, setPage] = useState({});
+  const code = match.params.page;
+  const { i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
-  const dispatch = useDispatch();
-  const pageCode = match.params.page;
-  const pageCamelCase = _.camelCase(pageCode);
-  const { page, language } = useSelector(({ BusinessPages, Language }) => ({
-    page: BusinessPages.pages[pageCamelCase],
-    language: Language.language
-  }));
-
-  // const something = useQuery(getBusinessTextByCode, {
-  //   onCompleted: (data) => console.log(data)
-  // });
-  // console.log(pageCode);
+  const { loading, error } = useQuery(getBusinessTextByCode, {
+    variables: { code },
+    onCompleted: (data) => setPage(data.getBusinessTextByCode)
+    // onCompleted: (data) => setSomeData(data)
+  });
+  // console.log(page);
+  // console.log(page1);
 
   useEffect(() => {
-    dispatch(getBusinessPageByCode(pageCode));
+    // dispatch(getBusinessPageByCode(code));
     window.scrollTo(0, 0);
-  }, [pageCode, dispatch]);
+  }, [code]);
 
+  // console.log(language);
+  // console.log(language1);
+  // console.log()
   const addressText = page?.text && parse(page?.text[language].value);
   const styles = useStyles();
+
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.root}>

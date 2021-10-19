@@ -11,7 +11,6 @@ import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
-import { getCategories } from '../../redux/categories/categories.actions';
 import { preserveUser } from '../../redux/user/user.actions';
 import {
   getAllFilters,
@@ -37,7 +36,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(preserveUser());
-    dispatch(getCategories());
     dispatch(getContacts());
     dispatch(getAllFilters());
     dispatch(getFiltredProducts({}));

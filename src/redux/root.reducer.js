@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { newsReducer as News } from './news/news.reducer';
 import User from './user/user.reducer';
-import { categoriesReducer as Categories } from './categories/categories.reducer';
 import { themeState as Theme } from './theme/theme.reducer';
 import { errorReducer as Error } from './error/error.reducer';
 import Language from './language/language.reducer';
@@ -29,7 +28,6 @@ export const rootReducer = (history) =>
     router: connectRouter(history),
     User,
     News,
-    Categories,
     Theme,
     Error,
     Language,

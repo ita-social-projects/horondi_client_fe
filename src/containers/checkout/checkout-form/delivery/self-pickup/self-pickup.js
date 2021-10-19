@@ -2,19 +2,22 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './self-pickup.styles';
+import { days } from './const';
 
 const SelfPickup = ({ isLightTheme }) => {
   const styles = useStyles({ isLightTheme });
   const { t } = useTranslation();
-  const getSchedule = t('checkout.schedule', { returnObjects: true });
-  const schedule = Object.values(getSchedule).map((value) =>
-    value === t('checkout.schedule.saturday') || value === t('checkout.schedule.sunday') ? (
+
+  const schedule = Object.values(days).map((value) =>
+    value.label === days[5].label || value.label === days[6].label ? (
       <div className={styles.scheduleItem}>
-        {value} {t('checkout.checkoutTitles.restDay')}{' '}
+        {t(`checkout.schedule.${value.label}`)}
+        {t('checkout.checkoutTitles.restDay')}{' '}
       </div>
     ) : (
       <div className={styles.scheduleItem}>
-        {value} {t('checkout.checkoutTitles.workDay')}{' '}
+        {t(`checkout.schedule.${value.label}`)}
+        {t('checkout.checkoutTitles.workDay')}{' '}
       </div>
     )
   );

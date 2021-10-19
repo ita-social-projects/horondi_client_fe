@@ -13,7 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeliveryType from '../delivery-type/delivery-type';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, SESSION_STORAGE, CHECKOUT_INPUT_FIELD } from '../../../configs';
+import { CY_CODE_ERR, SESSION_STORAGE } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import routes from '../../../const/routes';
@@ -39,6 +39,7 @@ import {
   getFromSessionStorage,
   setToSessionStorage
 } from '../../../services/session-storage.service';
+import { checkoutPayMethod } from './const';
 
 const { pathToUserAgreement, pathToCart } = routes;
 
@@ -49,7 +50,6 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
-  const getCheckoutPayment = t('checkout.checkoutPayment', { returnObjects: true });
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const dispatch = useDispatch();
@@ -80,17 +80,18 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
       initialValues,
 
       onSubmit: (data) => {
-        data.paymentMethod === t('checkout.checkoutPayment.card')
-          ? dispatch(addPaymentMethod(t('checkout.checkoutPayment.card'))) &&
+        data.paymentMethod === checkoutPayMethod[0].label
+          ? dispatch(addPaymentMethod(checkoutPayMethod[0].label)) &&
             dispatch(
               getFondyData({
-                order: orderInputData(data, deliveryType, cartItems),
+                order: orderInputData(data, deliveryType, cartItems, language),
                 currency: getCurrentCurrency(currency),
-                amount: String(totalPriceToPay)
+                amount: String(totalPriceToPay),
+                language
               })
             )
-          : dispatch(addOrder(orderInputData(data, deliveryType, cartItems))) &&
-            dispatch(addPaymentMethod(t('checkout.checkoutPayment.cash')));
+          : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
+            dispatch(addPaymentMethod(checkoutPayMethod[1].label));
         clearSessionStorage();
       }
     });
@@ -130,8 +131,8 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                   <div key={field.name} className={styles.inputData}>
                     <TextField
                       size={TEXT_FIELD_SIZE.SMALL}
-                      data-cy={CHECKOUT_INPUT_FIELD[field.name]}
-                      name={CHECKOUT_INPUT_FIELD[field.name]}
+                      data-cy={field.name}
+                      name={field.name}
                       className={styles.textField}
                       variant={TEXT_FIELD_VARIANT.OUTLINED}
                       label={field.label}
@@ -152,8 +153,8 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                   <div key={field.name} className={styles.inputData}>
                     <TextField
                       size={TEXT_FIELD_SIZE.SMALL}
-                      data-cy={CHECKOUT_INPUT_FIELD[field.name]}
-                      name={CHECKOUT_INPUT_FIELD[field.name]}
+                      data-cy={field.name}
+                      name={field.name}
                       className={styles.textField}
                       variant={TEXT_FIELD_VARIANT.OUTLINED}
                       label={field.label}
@@ -194,14 +195,14 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 <Select
                   label={t('checkout.checkoutTextFields.paymentMethod')}
                   className={styles.paymentSelect}
-                  data-cy={CHECKOUT_INPUT_FIELD.paymentMethod}
-                  name={CHECKOUT_INPUT_FIELD.paymentMethod}
+                  data-cy='paymentMethod'
+                  name='paymentMethod'
                   value={values.paymentMethod}
                   onChange={handleChange}
                 >
-                  {Object.values(getCheckoutPayment).map((value) => (
-                    <MenuItem key={value} value={value}>
-                      {value}
+                  {Object.values(checkoutPayMethod).map((value) => (
+                    <MenuItem key={value.label} value={value.label}>
+                      {t(`checkout.checkoutPayment.${value.label}`)}
                     </MenuItem>
                   ))}
                 </Select>
@@ -217,8 +218,8 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
               <div>
                 <TextField
                   size={TEXT_FIELD_SIZE.SMALL}
-                  data-cy={CHECKOUT_INPUT_FIELD.userComment}
-                  name={CHECKOUT_INPUT_FIELD.userComment}
+                  data-cy='userComment'
+                  name='userComment'
                   multiline
                   rows={4}
                   className={styles.textAreaField}

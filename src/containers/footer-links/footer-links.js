@@ -1,32 +1,28 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@material-ui/core/Typography';
 
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { FOOTER_SOCIAL_NETWORK_LINKS } from '../../translations/footer.translations';
-
+import { HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ showTitle, socialIconsStyles, position, setIsMenuOpen }) => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
+  const { t } = useTranslation();
   const styles = useStyles({ position });
 
   return (
-    <div className={styles.cardBody} onClick={() => setIsMenuOpen(false)}>
+    <div className={styles.cardBody}>
       <div className={styles.iconsBox}>
         {showTitle && (
           <div className={styles.cardTitle}>
-            <Typography variant='h5'>{FOOTER_SOCIAL_NETWORK_LINKS[language].title}</Typography>
+            <Typography variant='h5'>{t('footer.socialNetworkLinks')}</Typography>
           </div>
         )}
         <div className={styles.iconsContainer}>
           <a
             className={styles.iconWrap}
-            href={FOOTER_SOCIAL_NETWORK_LINKS.facebook}
+            href={HORONDI_FB_LINK}
             target='_blank'
             rel='noopener noreferrer'
           >
@@ -34,7 +30,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position, setIsMenuOpen }) 
           </a>
           <a
             className={styles.iconWrap}
-            href={FOOTER_SOCIAL_NETWORK_LINKS.instagram}
+            href={HORONDI_INST_LINK}
             target='_blank'
             rel='noopener noreferrer'
           >

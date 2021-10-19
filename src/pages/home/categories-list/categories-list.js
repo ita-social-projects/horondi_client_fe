@@ -1,7 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
-import { useQuery } from '@apollo/client';
 
 import CategoryItem from './category-item';
 import {
@@ -10,23 +9,18 @@ import {
   URL_QUERIES_NAME,
   countPerPage
 } from '../../../configs';
-import { getAllCategoriesQuery } from './operations/categories.queries';
-import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import { CategoriesContext } from '../../../context/categories-context';
 import { useStyles } from './categories-list.style';
 
 import './categories-carousel.css';
 
 const CategoriesList = () => {
   const styles = useStyles();
-  const [categories, setCategories] = useState([]);
+  const { categories } = useContext(CategoriesContext);
   const { language, quantityPerPage } = useSelector(({ Language, Products }) => ({
     language: Language.language,
     quantityPerPage: Products.countPerPage
   }));
-
-  const { loading, error } = useQuery(getAllCategoriesQuery, {
-    onCompleted: (data) => setCategories(data.getAllCategories.items)
-  });
 
   const categoriesList = useMemo(
     () =>
@@ -43,8 +37,6 @@ const CategoriesList = () => {
       )),
     [categories, styles]
   );
-
-  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>

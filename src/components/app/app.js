@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import ThemeContext from '../../context/theme-context';
+import CategoriesContextProvider from '../../context/categories-context';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
 import SearchBarList from '../../containers/search-bar-list';
@@ -54,10 +55,12 @@ const App = () => {
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>
         <ThemeContext.Provider value={[appTheme, setAppTheme]}>
-          <CssBaseline />
-          <Routes />
-          <Chat />
-          <SearchBarList />
+          <CategoriesContextProvider>
+            <CssBaseline />
+            <Routes />
+            <Chat />
+            <SearchBarList />
+          </CategoriesContextProvider>
         </ThemeContext.Provider>
       </ThemeProvider>
     </div>

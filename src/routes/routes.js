@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { useContext, Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
 import routes from '../const/routes';
+import { CategoriesContext } from '../context/categories-context';
 
 const {
   pathToMain,
@@ -62,9 +63,8 @@ const BusinessPage = lazy(() => import('../pages/business-page'));
 
 const Routes = () => {
   const styles = useStyles();
-
-  const { categories, userData, userIsChecked } = useSelector(({ Categories, User }) => ({
-    categories: Categories.list,
+  const { categories } = useContext(CategoriesContext);
+  const { userData, userIsChecked } = useSelector(({ Categories, User }) => ({
     userIsChecked: User.userIsChecked,
     userData: User.userData
   }));

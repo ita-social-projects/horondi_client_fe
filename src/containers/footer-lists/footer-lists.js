@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
@@ -15,43 +15,39 @@ import { footerNavItems } from '../footer-links/const';
 
 import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import { CategoriesContext } from '../../context/categories-context';
 
 const { pathToContacts } = routes;
 
 const FooterLists = () => {
   const styles = useStyles();
   const [contacts, setContacts] = useState([]);
+  const { categories } = useContext(CategoriesContext);
 
   const { t } = useTranslation();
-
-  const { categories, language, quantityPerPage } = useSelector(
-    ({ Categories, Language, Products }) => ({
-      categories: Categories.list,
-      language: Language.language,
-      quantityPerPage: Products.countPerPage
-    })
-  );
+  const { language, quantityPerPage } = useSelector(({ Language, Products }) => ({
+    language: Language.language,
+    quantityPerPage: Products.countPerPage
+  }));
 
   const { loading, error } = useQuery(getContactsForFooterListContacts, {
     onCompleted: (data) => setContacts(data.getContacts.items)
   });
-  
+
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
-  const categoriesList = categories.length
-    ? categories.map(({ _id, name }) => (
-      <div key={_id}>
-        <Typography variant='subtitle2'>
-          <Link
-            className={styles.cardLink}
-            to={`/${getCategoryURL(name)}?page=1&${countPerPage}=${quantityPerPage}`}
-          >
-            {name[language].value}
-          </Link>
-        </Typography>
-      </div>
-    ))
-    : null;
+  const categoriesList = categories.map(({ _id, name }) => (
+    <div key={_id}>
+      <Typography variant='subtitle2'>
+        <Link
+          className={styles.cardLink}
+          to={`/${getCategoryURL(name)}?page=1&${countPerPage}=${quantityPerPage}`}
+        >
+          {name[language].value}
+        </Link>
+      </Typography>
+    </div>
+  ));
 
   const informationList = footerNavItems.map((item) => (
     <div key={item.id}>

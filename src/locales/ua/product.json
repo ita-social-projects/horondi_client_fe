@@ -7,8 +7,7 @@
     },
     "color": "Колір",
     "pattern": "Візерунок",
-    "productPrice": "Ціна",
-    "productDescription": {
+     "productDescription": {
         "description": "Опис продукту",
         "mainMaterial": "Основна тканина",
         "innerMaterial": "Внутрішній матеріал",
@@ -22,10 +21,7 @@
     "priceFrom": "від",
     "sizeNotAvailable": "Товар недоступний",
 
-    "size": {
-        "carrentSize": "Розмір"
-    },
-    "pdpButtons": {
+     "pdpButtons": {
         "cartButton": "В кошик",
         "buyButton": "Купити зараз",
         "submitButton": "Підтвердити",
@@ -63,7 +59,6 @@
     },
     "comments": {
         "title": "Відгуки",
-        "firstName": "Ім'я",
         "email": "Електронна адреса",
         "text": "Поділіться своїми враженнями з іншими",
         "submit": "Залишити коментар",

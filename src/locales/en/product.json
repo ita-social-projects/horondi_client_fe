@@ -7,7 +7,6 @@
     },
     "color": "Color",
     "pattern": "Pattern",
-    "productPrice": "Price",
     "productDescription": {
         "description": "Product description",
         "mainMaterial": "Main material",
@@ -22,10 +21,7 @@
     "priceFrom": "from",
     "sizeNotAvailable": "Product isn't available",
 
-    "size": {
-        "carrentSize": "Size"
-    },
-    "pdpButtons": {
+     "pdpButtons": {
         "cartButton": "Add to cart",
         "buyButton": "Buy now",
         "submitButton": "Submit",
@@ -63,7 +59,6 @@
     },
     "comments": {
         "title": "Comments",
-        "firstName": "First name",
         "email": "Email",
         "text": "Share your thoughts with others",
         "submit": "Leave comment",

@@ -81,7 +81,7 @@ const ProductInfo = ({ price, product }) => {
         ) : null}
       </div>
       <div className={styles.priceContainer}>
-        <span className={styles.subtitle}>{t('product.productPrice')}: </span>
+        <span className={styles.subtitle}>{t('common.price')}: </span>
         <span data-cy='price' className={styles.price}>
           {Math.round(currentPrice[currency]?.value)}
           {'\u00A0'}

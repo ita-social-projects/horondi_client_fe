@@ -25,9 +25,7 @@ import {
   ADD_PRODUCT_TO_USER_CART,
   REMOVE_PRODUCT_FROM_USER_CART,
   LOGIN_BY_GOOGLE,
-  SET_DELETE_USER,
-  SET_ORDERS_COUNT,
-  SET_CURRENT_PAGE
+  SET_DELETE_USER
 } from './user.types';
 
 const setUser = (user) => ({
@@ -147,16 +145,6 @@ const setUserOrders = (payload) => ({
   payload
 });
 
-const setUserCountOrders = (payload) => ({
-  type: SET_ORDERS_COUNT,
-  payload
-});
-
-const setCurrentPage = (payload) => ({
-  type: SET_CURRENT_PAGE,
-  payload
-});
-
 const addProductToUserCart = (productId) => ({
   type: ADD_PRODUCT_TO_USER_CART,
   payload: productId
@@ -199,6 +187,4 @@ export {
   addProductToUserCart,
   removeProductFromUserCart,
   deleteUserDataFromStore,
-  setUserCountOrders,
-  setCurrentPage
 };

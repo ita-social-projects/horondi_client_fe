@@ -1,8 +1,6 @@
 import {
   setUserError,
   setUser,
-  setUserCountOrders,
-  setCurrentPage,
   loginUser,
   loginByGoogle,
   logoutUser,
@@ -19,16 +17,19 @@ import {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
+<<<<<<< HEAD:src/redux/user/tests/user.actions.test.js
   getUserOrders,
   addProductToUserCart,
   removeProductFromUserCart,
+=======
+  addProductToUserCartOrWishlist,
+  removeProductFromUserCartOrWishlist,
+>>>>>>> 21284896 (fixed tests):src/redux/user/tests/user.actions.spec.js
   deleteUserDataFromStore
 } from '../user.actions';
 import {
   SET_USER_ERROR,
   SET_USER,
-  SET_ORDERS_COUNT,
-  SET_CURRENT_PAGE,
   LOGIN_USER,
   LOGIN_BY_GOOGLE,
   LOGOUT_USER,
@@ -45,9 +46,14 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
+<<<<<<< HEAD:src/redux/user/tests/user.actions.test.js
   GET_USER_ORDERS,
   ADD_PRODUCT_TO_USER_CART,
   REMOVE_PRODUCT_FROM_USER_CART,
+=======
+  ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+>>>>>>> 21284896 (fixed tests):src/redux/user/tests/user.actions.spec.js
   SET_DELETE_USER
 } from '../user.types';
 import { initialStateMock, userMocks } from './user.mocks';
@@ -66,19 +72,6 @@ describe('test User actions', () => {
       payload: userMocks
     };
     expect(setUser(userMocks)).toEqual(result);
-  });
-  test('should setCountUserOrders', () => {
-    const result = {
-      type: SET_ORDERS_COUNT,
-      payload: userMocks.ordersCount
-    };
-    expect(setUserCountOrders(3)).toEqual(result);
-  });
-  test('should setCurrentPage', () => {
-    expect(setCurrentPage(1)).toEqual({
-      type: SET_CURRENT_PAGE,
-      payload: userMocks.curPage
-    });
   });
   test('should test loginUser', () => {
     expect(loginUser('user')).toEqual({
@@ -173,6 +166,7 @@ describe('test User actions', () => {
       payload: initialStateMock.userOrders
     });
   });
+<<<<<<< HEAD:src/redux/user/tests/user.actions.test.js
   test('should test getUserOrders', () => {
     expect(getUserOrders(true)).toEqual({
       type: GET_USER_ORDERS,
@@ -182,6 +176,11 @@ describe('test User actions', () => {
   test('should test addProductToUserCart', () => {
     expect(addProductToUserCart(1)).toEqual({
       type: ADD_PRODUCT_TO_USER_CART,
+=======
+  test('should test addProductToUserCartOrWishlist', () => {
+    expect(addProductToUserCartOrWishlist(1)).toEqual({
+      type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+>>>>>>> 21284896 (fixed tests):src/redux/user/tests/user.actions.spec.js
       payload: userMocks.id
     });
   });

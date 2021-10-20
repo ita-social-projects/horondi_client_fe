@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './models-list.style';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
-import Loader from '../../../components/loader';
 import { getAllModelsQuery } from './operations/getAllModels.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 

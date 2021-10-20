@@ -30,10 +30,10 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
   }));
   const styles = useStyles();
   const { firstName, email, _id, role } = user || {
-    firstName: t('replyCommentsItem.userData.firstName'),
-    email: t('replyCommentsItem.userData.email'),
-    _id: t('replyCommentsItem.userData._id'),
-    role: t('replyCommentsItem.userData.role')
+    firstName: t('common.userData.firstName'),
+    email: t('common.userData.email'),
+    _id: t('common.userData._id'),
+    role: t('common.userData.role')
   };
 
   const [isModalShown, toggleModal] = useState(false);
@@ -68,7 +68,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <div className={styles.checkIcon}>
-                  <Tooltip title={t('replyCommentsItem.tooltips.bought')}>
+                  <Tooltip title={t('product.tooltips.bought')}>
                     <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
@@ -76,7 +76,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
                 ''
               )}
               {handleUserCommentApprove(userData, email, show) ? (
-                <Tooltip title={t('replyCommentsItem.tooltips.feedbackReply')}>
+                <Tooltip title={t('product.tooltips.feedbackReply')}>
                   <FeedbackOutlinedIcon className={styles.icon} />
                 </Tooltip>
               ) : null}
@@ -91,7 +91,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
           <div className={styles.userIcons}>
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
-                <Tooltip title={t('replyCommentsItem.tooltips.delete')}>
+                <Tooltip title={t('product.tooltips.delete')}>
                   <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>

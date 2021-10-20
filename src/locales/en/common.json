@@ -43,5 +43,11 @@
     "title": "Delete answer?",
     "description":
       "Are you sure you want to delete the answer? After deleting you will not be able to restore the reply."
+},
+   "userData": {
+  "firstName": "Deleted User",
+  "email": "Deleted Email",
+  "_id": "deleted",
+  "role": "deleted"
 }
 }

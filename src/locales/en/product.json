@@ -59,7 +59,6 @@
     },
     "comments": {
         "title": "Comments",
-        "email": "Email",
         "text": "Share your thoughts with others",
         "submit": "Leave comment",
         "unregisteredTip": "You should login, to leave rate",

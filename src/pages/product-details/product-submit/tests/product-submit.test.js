@@ -1,16 +1,13 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';
-import { mount, configure } from 'enzyme';
+import { mount } from 'enzyme';
 import Button from '@material-ui/core/Button';
 
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import ProductSubmit from '../product-submit';
 
 import { Language, Wishlist, Cart, Products, User, product } from './product-details.variables';
-
-configure({ adapter: new Adapter() });
 
 const mockSetSizeIsNotSelectedError = jest.fn();
 const mockDispatch = jest.fn();

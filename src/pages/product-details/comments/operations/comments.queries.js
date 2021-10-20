@@ -29,3 +29,27 @@ export const getCommentsQuery = gql`
     }
   }
 `;
+
+export const addCommentMutation = gql`
+  mutation ($product: ID!, $show: Boolean!, $text: String, $user: ID, $rate: Int) {
+    addComment(
+      id: $user
+      comment: { text: $text, show: $show, user: $user, product: $product, rate: $rate }
+    ) {
+      ... on Comment {
+        _id
+        text
+        date
+        rate
+        show
+        user {
+          _id
+          firstName
+          email
+          role
+        }
+        verifiedPurchase
+      }
+    }
+  }
+`;

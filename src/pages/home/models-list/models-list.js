@@ -4,13 +4,8 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './models-list.style';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
-<<<<<<< HEAD
 import { getAllModelsQuery } from './operations/getAllModels.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-=======
-import Loader from '../../../components/loader';
-import { getAllModelsQuery } from './operations/getAllModels.queries';
->>>>>>> f9e1a3ff (refactor models list, delete products table, remake tests)
 
 const ModelsList = () => {
   const [models, setModels] = useState([]);
@@ -28,14 +23,8 @@ const ModelsList = () => {
     onCompleted: (data) => setModels(data.getAllModels.items)
   });
 
-<<<<<<< HEAD
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
-=======
-  if (loading || error) {
-    return <Loader />;
-  }
->>>>>>> f9e1a3ff (refactor models list, delete products table, remake tests)
   return (
     <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>

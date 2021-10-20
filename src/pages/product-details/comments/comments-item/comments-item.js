@@ -46,7 +46,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
     getReplyLoadingId: Comments.getReplyLoading.commentId
   }));
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { firstName, email } = user || {
     firstName: t('common.userData.firstName'),
@@ -57,8 +57,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
   const [isReplyShown, toggleReply] = useState(false);
   const [isReplyListShown, toggleReplyList] = useState(false);
 
-  const dateLanguage = t('common.dateLanguageOption');
-
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
 
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);

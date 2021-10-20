@@ -23,7 +23,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
     verifiedPurchase
   } = data;
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { language, userData } = useSelector(({ User }) => ({
     userData: User.userData
@@ -37,7 +37,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
   };
 
   const [isModalShown, toggleModal] = useState(false);
-  const dateLanguage = t('common.dateLanguageOption');
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 

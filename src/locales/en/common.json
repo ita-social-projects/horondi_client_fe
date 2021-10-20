@@ -36,7 +36,6 @@
   "category": "Category",
   "name": "Name",
   "email": "Email",
-  "dateLanguageOption": "en-US",
   "dialog": {
     "title": "Delete comment?",
     "description":

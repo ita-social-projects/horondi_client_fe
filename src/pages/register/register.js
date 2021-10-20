@@ -23,6 +23,7 @@ export default function Register() {
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const handleRegister = (user) => {
+    // 2
     setToLocalStorage(USER_TOKENS.ACCESS_TOKEN, null);
     dispatch(registerUser({ user, language }));
   };
@@ -38,13 +39,14 @@ export default function Register() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // 3
     dispatch(resetState());
   }, [dispatch]);
 
   return (
     <Formik
       initialValues={REGISTER_USER_DATA}
-      onSubmit={handleRegister}
+      onSubmit={handleRegister} // 1
       validationSchema={validationSchema(t)}
       validateOnBlur={shouldValidate}
       validateOnChange={shouldValidate}

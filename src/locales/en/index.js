@@ -25,7 +25,6 @@ import chat from './chat.json';
 import delivery from './delivery.json';
 import footer from './footer.json';
 import product from './product.json';
-import commentDialog from './commentDialog';
 import replyCommentsItem from './replyCommentsItem';
 import commentsItem from './commentsItem';
 
@@ -58,7 +57,6 @@ export default {
     delivery,
     footer,
     product,
-    commentDialog,
     replyCommentsItem,
     commentsItem
   }

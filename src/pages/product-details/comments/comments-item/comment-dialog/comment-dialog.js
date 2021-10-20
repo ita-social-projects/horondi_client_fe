@@ -49,23 +49,21 @@ const CommentDialog = ({
     <div>
       <Dialog open={isModalShown} onClose={handleClose}>
         <DialogTitle className={styles.title}>
-          {isDeleteComment === 1
-            ? t('commentDialog.dialog.title')
-            : t('commentDialog.dialogRiply.title')}
+          {isDeleteComment === 1 ? t('common.dialog.title') : t('common.dialogRiply.title')}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
             {isDeleteComment === 1
-              ? t('commentDialog.dialog.description')
-              : t('commentDialog.dialogRiply.description')}
+              ? t('common.dialog.description')
+              : t('common.dialogRiply.description')}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className={styles.button}>
-            {t('commentDialog.pdpButtons.cancelButton')}
+            {t('product.pdpButtons.cancelButton')}
           </Button>
           <Button onClick={handleDelete} className={styles.button}>
-            {t('commentDialog.pdpButtons.submitButton')}
+            {t('product.pdpButtons.submitButton')}
           </Button>
         </DialogActions>
       </Dialog>

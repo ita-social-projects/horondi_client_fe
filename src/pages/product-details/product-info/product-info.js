@@ -89,7 +89,7 @@ const ProductInfo = ({ price, product }) => {
         </span>
       </div>
       <div className={styles.look}>
-        <span className={styles.subtitle}>{t('product.color')}:</span>
+        <span className={styles.subtitle}>{t('common.color')}:</span>
         <div className={styles.colorCircle} />
         <span className={styles.subtitle}>{t('product.pattern')}:</span>
         <div className={styles.patternCircle} />

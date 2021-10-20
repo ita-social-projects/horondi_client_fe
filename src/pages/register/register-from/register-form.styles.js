@@ -4,8 +4,8 @@ export const useStyles = makeStyles((theme) => ({
   registerForm: {
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
-    height: '550px',
-    padding: '20px 63px 40px',
+    height: '590px',
+    padding: '11px 63px 40px 63px',
     boxSizing: 'border-box'
   },
   heading: {
@@ -78,6 +78,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     textDecoration: 'none',
     textTransform: 'capitalize',
+
     '&:hover': {
       color: '#1976D2',
       textDecoration: 'underline',

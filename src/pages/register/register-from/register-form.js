@@ -19,8 +19,6 @@ export default function RegisterForm({
   values,
   errors,
   showPassword,
-  showPasswordConfirm,
-  setShowPasswordConfirm,
   setShowPassword,
   registerError,
   setShouldValidate

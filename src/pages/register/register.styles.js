@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: theme.spacing(1),
     maxWidth: '960px',
-    height: '550px',
+    height: '590px',
     filter: 'drop-shadow(8px 8px 10px dark-gray)',
     '& .MuiGrid-item': {
       padding: '0px !important'

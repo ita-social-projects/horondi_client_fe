@@ -348,54 +348,6 @@ const getUserByToken = async () => {
   return result?.data?.getUserByToken;
 };
 
-const getUserOrders = async (pagination) => {
-  const getUserOrdersQuery = `
-      query ($pagination: Pagination){
-        getUserOrders (pagination: $pagination){
-        _id
-        dateOfCreation
-        status
-        orderNumber
-        items {
-          quantity
-          fixedPrice {
-            currency
-            value
-          }
-          options {
-            size {
-              name
-            }
-          }
-          product {
-            name {
-              lang
-              value
-            }
-            model {
-              sizes {
-                name
-              }
-            }
-            images {
-              primary {
-                thumbnail
-              }
-            }
-          }
-        }
-        totalItemsPrice {
-          value
-          currency
-        }
-      }
-      }
-  `;
-  const result = await getItems(getUserOrdersQuery, { pagination });
-
-  return result?.data?.getUserOrders;
-};
-
 const getPurchasedProducts = async (id) => {
   const getPurchasedProductsQuery = `
       query($id: ID!) {
@@ -429,18 +381,6 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
-// const getCountUserOrders = async () => {
-//   const getCountUserOrdersQuery = `
-//       query($id: ID) {
-//         getCountUserOrders (id: $id){
-//           countOrder
-//         }
-//       }
-//     `;
-//   const result = await getItems(getCountUserOrdersQuery);
-//   return result?.data?.getCountUserOrders;
-// };
-
 export {
   loginUser,
   getGoogleUser,
@@ -451,9 +391,8 @@ export {
   resetPassword,
   updateUserById,
   sendEmailConfirmation,
-  getUserOrders,
+  // getUserOrders,
   getUserByToken,
   regenerateUserTokenPairs,
   getPurchasedProducts
-  // getCountUserOrders
 };

@@ -22,7 +22,6 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  GET_USER_ORDERS,
   ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
   REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
   LOGIN_BY_GOOGLE,
@@ -148,11 +147,6 @@ const setUserOrders = (payload) => ({
   payload
 });
 
-const getUserOrders = (payload) => ({
-  type: GET_USER_ORDERS,
-  payload
-});
-
 const setUserCountOrders = (payload) => ({
   type: SET_ORDERS_COUNT,
   payload
@@ -202,7 +196,6 @@ export {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  getUserOrders,
   addProductToUserCartOrWishlist,
   removeProductFromUserCartOrWishlist,
   deleteUserDataFromStore,

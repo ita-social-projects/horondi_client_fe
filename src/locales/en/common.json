@@ -17,6 +17,9 @@
   "newPass": "New password",
   "confirmPass": "Confirm password",
   "change": "Change",
+  "prev": "Previous",
+  "next": "Next",
+  "close": "Close",
   "buttons": {
     "confirm": "Yes",
     "cancel": "No"
@@ -45,9 +48,14 @@
       "Are you sure you want to delete the answer? After deleting you will not be able to restore the reply."
 },
    "userData": {
-  "firstName": "Deleted User",
-  "email": "Deleted Email",
-  "_id": "deleted",
-  "role": "deleted"
+     "firstName": "Deleted User",
+     "email": "Deleted Email"
+},
+    "reply":{
+      "submit": "Leave reply",
+      "loadMore": "More answers",
+      "hideBtn": "Hide answers",
+      "text": "Share your thoughts with others",
+      "answers": "Count of answers"
 }
 }

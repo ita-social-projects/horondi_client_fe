@@ -47,10 +47,6 @@ describe('Product info', () => {
     wrapper = shallow(<ProductImages />);
   });
 
-  afterEach(() => {
-    wrapper.unmount();
-  });
-
   it('Should render', () => {
     expect(wrapper.exists('div')).toBe(true);
   });

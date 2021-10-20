@@ -147,7 +147,7 @@ const Comments = ({ productId }) => {
         </div>
 
         <div className={styles.submit}>
-          <Tooltip title={userData ? '' : t(`commentsItem.tooltips.unregisteredComment`)}>
+          <Tooltip title={userData ? '' : t(`product.tooltips.unregisteredComment`)}>
             <div>
               <Button
                 type='submit'

@@ -25,7 +25,6 @@ import chat from './chat.json';
 import delivery from './delivery.json';
 import footer from './footer.json';
 import product from './product.json';
-import commentsItem from './commentsItem';
 
 export default {
   translations: {
@@ -55,7 +54,6 @@ export default {
     chat,
     delivery,
     footer,
-    product,
-    commentsItem
+    product
   }
 };

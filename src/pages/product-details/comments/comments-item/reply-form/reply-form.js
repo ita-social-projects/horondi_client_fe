@@ -57,7 +57,7 @@ const ReplyForm = ({ cancel, commentId }) => {
           helperText={errors.text || ''}
           name={TEXT_VALUE}
           className={styles.input}
-          label={t('product.reply.text')}
+          label={t('common.reply.text')}
         />
         <div className={styles.btnContainer}>
           <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>

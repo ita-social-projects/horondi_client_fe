@@ -3,13 +3,13 @@
 exports[`ProductImages page test Should match snapshot 1`] = `
 <div>
   <ImgsViewer
-    closeBtnTitle="product.imgsViewer.close"
+    closeBtnTitle="common.close"
     currImg={0}
     enableKeyboardInput={true}
     imgCountSeparator=" / "
     imgs={Array []}
     isOpen={false}
-    leftArrowTitle="product.imgsViewer.prev"
+    leftArrowTitle="common.prev"
     onClickNext={[Function]}
     onClickPrev={[Function]}
     onClickShowNextImg={true}пше
@@ -17,7 +17,7 @@ exports[`ProductImages page test Should match snapshot 1`] = `
     onClose={[Function]}
     preloadNextImg={true}
     preventScroll={true}
-    rightArrowTitle="product.imgsViewer.next"
+    rightArrowTitle="common.next"
     showCloseBtn={true}
     showImgCount={true}
     showThumbnails={true}

@@ -107,9 +107,9 @@ const ProductImages = ({ images }) => {
         onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
         onClose={() => setIsOpen(false)}
-        closeBtnTitle={t('product.imgsViewer.close')}
-        leftArrowTitle={t('product.imgsViewer.prev')}
-        rightArrowTitle={t('product.imgsViewer.next')}
+        closeBtnTitle={t('common.close')}
+        leftArrowTitle={t('common.prev')}
+        rightArrowTitle={t('common.next')}
       />
       <div className={styles.images}>
         <div>{sideImages}</div>

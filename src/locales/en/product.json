@@ -1,10 +1,5 @@
 {
     "imgAltInfo": "Product image",
-    "imgsViewer" : {
-        "prev": "Previous",
-        "next": "Next",
-        "close": "Close"
-    },
     "color": "Color",
     "pattern": "Pattern",
     "productDescription": {
@@ -49,13 +44,6 @@
     },
     "similarItems": {
         "title": "It fits well with this"
-    },
-    "replyForm":{
-        "submit": "Leave reply",
-        "loadMore": "More answers",
-        "hideBtn": "Hide answers",
-        "text": "Share your thoughts with others",
-        "answers": "Count of answers"
     },
     "comments": {
         "title": "Comments",

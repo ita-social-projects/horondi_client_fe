@@ -49,8 +49,8 @@ const CommentsItem = ({ data, commentId, productId }) => {
   const { t } = useTranslation();
 
   const { firstName, email } = user || {
-    firstName: t('commentsItem.userData.firstName'),
-    email: t('commentsItem.userData.email')
+    firstName: t('common.userData.firstName'),
+    email: t('common.userData.email')
   };
 
   const [isModalShown, toggleModal] = useState(false);
@@ -103,7 +103,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
 
   const limitOption = handleLimitOptions(replyCommentsList, replyComments, replyCommentsCount);
 
-  const loadMore = limitOption ? null : t('product.reply.loadMore');
+  const loadMore = limitOption ? null : t('common.reply.loadMore');
 
   return (
     <div className={styles.container}>
@@ -116,13 +116,13 @@ const CommentsItem = ({ data, commentId, productId }) => {
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <div className={styles.checkIcon}>
-                  <Tooltip title={t('commentsItem.tooltips.bought')}>
+                  <Tooltip title={t('product.tooltips.bought')}>
                     <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
               ) : null}
               {handleUserCommentApprove(userData, email, show) ? (
-                <Tooltip title={t('commentsItem.tooltips.feedbackComment')}>
+                <Tooltip title={t('product.tooltips.feedbackComment')}>
                   <FeedbackOutlinedIcon className={styles.icon} />
                 </Tooltip>
               ) : null}
@@ -140,7 +140,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
           <div className={styles.userIcons}>
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
-                <Tooltip title={t('commentsItem.tooltips.delete')}>
+                <Tooltip title={t('product.tooltips.delete')}>
                   <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>
@@ -150,9 +150,9 @@ const CommentsItem = ({ data, commentId, productId }) => {
 
         <div className={styles.reply}>
           <ReplyOutlinedIcon className={styles.replyIcon} />
-          <Tooltip title={userData ? '' : t(`commentsItem.tooltips.unregisteredReply`)}>
+          <Tooltip title={userData ? '' : t(`product.tooltips.unregisteredReply`)}>
             <p className={styles.button} onClick={handleReplyOpen}>
-              {t('commentsItem.reply.submit')}
+              {t('common.reply.submit')}
             </p>
           </Tooltip>
 
@@ -160,7 +160,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
             <div className={styles.replyCount} onClick={showReplyList}>
               <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
               <span className={styles.replyText}>
-                {t('commentsItem.reply.answers')}
+                {t('common.reply.answers')}
                 {'\u00A0'}
                 {replyCommentsCount}
               </span>

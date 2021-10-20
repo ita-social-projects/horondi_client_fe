@@ -3,6 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';
+import { useMutation, useQuery } from '@apollo/client';
 import Comments from '../comments';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import { Loader } from '../../../../components/loader/loader';
@@ -17,6 +18,10 @@ const mockHandlerSubmit = jest.fn();
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');
 
+jest.mock('@apollo/client');
+
+useQuery.mockImplementation(() => ({ refetch: () => jest.fn() }));
+useMutation.mockImplementation(() => [jest.fn()]);
 jest.mock('../../../../hooks/use-comment-validation', () => ({
   __esModule: true,
   default: () => ({
@@ -67,7 +72,7 @@ describe('Comments test', () => {
       skip: 10,
       snackBarMessage: ['Message']
     });
-    wrapper = mount(
+    wrapper = shallow(
       <ThemeProvider theme={themeValue}>
         <Comments />
       </ThemeProvider>
@@ -78,10 +83,6 @@ describe('Comments test', () => {
     wrapper.unmount();
     mockUseDispatch.mockClear();
     mockUseSelector.mockClear();
-  });
-  it('Should simulate loadmore event', () => {
-    wrapper.find('span').last().props().onClick();
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 
   it('Should render two Loader', () => {

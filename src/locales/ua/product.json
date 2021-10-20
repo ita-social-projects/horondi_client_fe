@@ -6,13 +6,13 @@
         "mainMaterial": "Основна тканина",
         "innerMaterial": "Внутрішній матеріал",
         "bottomMaterial": "Матеріал низу",
-        "strapLengthInCm": "Довжина лямок(см)"
+        "strapLengthInCm": "Довжина лямок(см) "
     },
     "weight": {
         "weightLabel": "Вага(кг)",
         "volumeLabel": "Об'єм(л)"
     },
-    "priceFrom": "від",
+    "priceFrom": "від ",
     "sizeNotAvailable": "Товар недоступний",
 
      "pdpButtons": {

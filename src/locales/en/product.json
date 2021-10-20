@@ -6,13 +6,13 @@
         "mainMaterial": "Main material",
         "innerMaterial": "Inner material",
         "bottomMaterial": "Bottom material",
-        "strapLengthInCm": "Strap length(cm)"
+        "strapLengthInCm": "Strap length(cm) "
     },
     "weight": {
         "weightLabel": "Weight(kg)",
         "volumeLabel": "Volume(L)"
     },
-    "priceFrom": "from",
+    "priceFrom": "from ",
     "sizeNotAvailable": "Product isn't available",
 
      "pdpButtons": {

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import CategoriesList from '../categories-list';
-import CategoriesContextProvider from '../../../../context/categories-context';
+import CategoriesContextProvider from '../../../../context/categories/categories-context';
 
 const useState = jest.fn();
 const setState = jest.fn();

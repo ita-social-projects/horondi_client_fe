@@ -10,7 +10,7 @@ import {
   URL_QUERIES_NAME,
   countPerPage
 } from '../../../configs';
-import { CategoriesContext } from '../../../context/categories-context';
+import { CategoriesContext } from '../../../context/categories/categories-context';
 import { useStyles } from './categories-list.style';
 
 import './categories-carousel.css';

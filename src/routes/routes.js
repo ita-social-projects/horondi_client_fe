@@ -13,7 +13,7 @@ import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
 import routes from '../const/routes';
-import { CategoriesContext } from '../context/categories-context';
+import { CategoriesContext } from '../context/categories/categories-context';
 
 const {
   pathToMain,

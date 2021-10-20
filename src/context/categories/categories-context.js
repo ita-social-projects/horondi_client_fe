@@ -1,28 +1,9 @@
 import React, { useState, createContext } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import errorOrLoadingHandler from '../utils/errorOrLoadingHandler';
+import { useQuery } from '@apollo/client';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import { getAllCategoriesQuery } from './constants';
 
 export const CategoriesContext = createContext();
-
-const getAllCategoriesQuery = gql`
-  query {
-    getAllCategories {
-      items {
-        _id
-        code
-        name {
-          lang
-          value
-        }
-        images {
-          large
-        }
-        available
-      }
-      count
-    }
-  }
-`;
 
 const CategoriesContextProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);

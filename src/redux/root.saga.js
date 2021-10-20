@@ -1,6 +1,5 @@
 import { all } from 'redux-saga/effects';
 import newsSaga from './news/news.sagas';
-import productsSaga from './products/products.sagas';
 import wishlistSaga from './wishlist/wishlist.sagas';
 import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
@@ -21,7 +20,6 @@ export function* rootSaga() {
     newsSaga(),
     userSaga(),
     wishlistSaga(),
-    productsSaga(),
     toastSaga(),
     cartSaga(),
     modelSaga(),

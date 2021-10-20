@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import FooterLists from '../footer-lists';
-import CategoriesContextProvider from '../../../context/categories-context';
+import CategoriesContextProvider from '../../../context/categories/categories-context';
 
 const useState = jest.fn();
 const setState = jest.fn();

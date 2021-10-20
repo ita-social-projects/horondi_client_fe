@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import ThemeContext from '../../context/theme-context';
-import CategoriesContextProvider from '../../context/categories-context';
+import CategoriesContextProvider from '../../context/categories/categories-context';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
-import SearchBarList from '../../containers/search-bar-list/search-bar-list';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
@@ -45,7 +44,6 @@ const App = () => {
             <CssBaseline />
             <Routes />
             <Chat />
-            <SearchBarList />
           </CategoriesContextProvider>
         </ThemeContext.Provider>
       </ThemeProvider>

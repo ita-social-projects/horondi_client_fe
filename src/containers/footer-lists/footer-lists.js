@@ -15,7 +15,7 @@ import { footerNavItems } from '../footer-links/const';
 
 import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import { CategoriesContext } from '../../context/categories-context';
+import { CategoriesContext } from '../../context/categories/categories-context';
 
 const { pathToContacts } = routes;
 

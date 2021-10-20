@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import ThemeContext from '../../context/theme-context';
+import CategoriesContextProvider from '../../context/categories/categories-context';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
-import { getCategories } from '../../redux/categories/categories.actions';
 import { preserveUser } from '../../redux/user/user.actions';
 import { selectLocation } from '../../redux/selectors/multiple.selectors';
 
@@ -28,7 +28,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(preserveUser());
-    dispatch(getCategories());
   }, []);
 
   useEffect(() => {
@@ -39,9 +38,11 @@ const App = () => {
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>
         <ThemeContext.Provider value={[appTheme, setAppTheme]}>
-          <CssBaseline />
-          <Routes />
-          <Chat />
+          <CategoriesContextProvider>
+            <CssBaseline />
+            <Routes />
+            <Chat />
+          </CategoriesContextProvider>
         </ThemeContext.Provider>
       </ThemeProvider>
     </div>

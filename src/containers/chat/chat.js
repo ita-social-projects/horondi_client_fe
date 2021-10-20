@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { config } from 'react-spring';
 import { Transition } from 'react-spring/renderprops';
 import { useQuery } from '@apollo/client';
-import { getContactsForChat } from './operations/chat-contacts-query';
+import { getContactsForChat } from './operations/chat-contacts.query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';

@@ -371,17 +371,17 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
-const getCountUserOrders = async () => {
-  const getCountUserOrdersQuery = `
-      query($id: ID) {
-        getCountUserOrders (id: $id){
-          countOrder
-        }
-      }
-    `;
-  const result = await getItems(getCountUserOrdersQuery);
-  return result?.data?.getCountUserOrders;
-};
+// const getCountUserOrders = async () => {
+//   const getCountUserOrdersQuery = `
+//       query($id: ID) {
+//         getCountUserOrders (id: $id){
+//           countOrder
+//         }
+//       }
+//     `;
+//   const result = await getItems(getCountUserOrdersQuery);
+//   return result?.data?.getCountUserOrders;
+// };
 
 export {
   loginUser,
@@ -396,6 +396,6 @@ export {
   getUserOrders,
   getUserByToken,
   regenerateUserTokenPairs,
-  getPurchasedProducts,
-  getCountUserOrders
+  getPurchasedProducts
+  // getCountUserOrders
 };

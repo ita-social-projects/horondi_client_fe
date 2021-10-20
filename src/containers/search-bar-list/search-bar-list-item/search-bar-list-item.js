@@ -41,7 +41,7 @@ const SearchBarListItem = ({ product }) => {
         <div className={styles.title}>
           <Typography variant='h4'>{product.name[i18n.language === 'ua' ? 0 : 1].value}</Typography>
           <div>
-            {product.basePrice[currency].value / 100} {product.basePrice[currency].currency}
+            {product.basePrice[currency].value} {product.basePrice[currency].currency}
           </div>
         </div>
         <div className={styles.buttons}>

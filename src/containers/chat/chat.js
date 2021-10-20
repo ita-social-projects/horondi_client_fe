@@ -15,9 +15,8 @@ import { CHAT_FACEBOOK_DATA } from '../../configs/index';
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const { language, themeMode } = useSelector((state) => ({
-    language: state.Language.language,
-    themeMode: state.Theme.lightMode
+  const { language } = useSelector((state) => ({
+    language: state.Language.language
   }));
 
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });

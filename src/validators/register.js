@@ -16,5 +16,8 @@ export const validationSchema = (t) =>
     email: Yup.string().email(t('error.profile.email')).required(t('error.profile.email')),
     password: Yup.string()
       .matches(formRegExp.password, t('error.profile.pass'))
+      .required(t('error.requiredField')),
+    passwordConfirm: Yup.string()
+      .oneOf([Yup.ref('password'), null], "Passwords don't match!")
       .required(t('error.requiredField'))
   });

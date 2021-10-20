@@ -19,6 +19,8 @@ export default function RegisterForm({
   values,
   errors,
   showPassword,
+  showPasswordConfirm,
+  setShowPasswordConfirm,
   setShowPassword,
   registerError,
   setShouldValidate
@@ -35,7 +37,13 @@ export default function RegisterForm({
           {Object.keys(values).map((name) => (
             <Field
               key={name}
-              type={name === USER_REGISTER_LABELS.pass ? name : USER_REGISTER_LABELS.text}
+              type={
+                name === USER_REGISTER_LABELS.pass
+                  ? name
+                  : name === USER_REGISTER_LABELS.passConfirm
+                    ? USER_REGISTER_LABELS.pass
+                    : USER_REGISTER_LABELS.text
+              }
               name={name}
               as={TextField}
               label={t(`register.placeholders.${name}`)}
@@ -47,7 +55,7 @@ export default function RegisterForm({
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}
               InputProps={
-                name === USER_REGISTER_LABELS.pass
+                name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm
                   ? endAdornment(showPassword, setShowPassword)
                   : {}
               }

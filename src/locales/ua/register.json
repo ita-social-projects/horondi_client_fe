@@ -12,8 +12,7 @@
     "lastName": "Прізвище",
     "email": "Електронна пошта",
     "password": "Пароль",
-    "passwordConfirm": "Підтвердіть пароль",
-    "passwordValidate": "Підтвердіть пароль"
+    "passwordConfirm": "Підтвердіть пароль"
   },
   "googleSignIn": "або увійдіть за допомогою"
 }

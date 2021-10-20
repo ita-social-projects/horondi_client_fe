@@ -42,11 +42,12 @@ export const REGISTER_USER_DATA = {
   lastName: '',
   email: '',
   password: '',
-  passwordValidate: ''
+  passwordConfirm: ''
 };
 export const USER_REGISTER_LABELS = {
   email: 'email',
   pass: 'password',
+  passConfirm: 'passwordConfirm',
   text: 'text'
 };
 export const USER_TOKENS = {

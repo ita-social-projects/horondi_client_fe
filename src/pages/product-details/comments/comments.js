@@ -29,14 +29,13 @@ import {
   handleArrowIcon
 } from '../../../utils/handle-comments';
 
-const Comments = () => {
+const Comments = ({ productId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
   const {
     commentsLoading,
     language,
-    productId,
     comments,
     userData,
     currentLimit,
@@ -87,7 +86,9 @@ const Comments = () => {
   const commentsLength = comments?.length;
 
   const commentsList = comments
-    ? comments.map(({ _id, ...rest }) => <CommentsItem key={_id} data={rest} commentId={_id} />)
+    ? comments.map(({ _id, ...rest }) => (
+      <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
+    ))
     : [];
 
   const limitOption = commentsList?.length === comments?.length && comments?.length > commentsCount;

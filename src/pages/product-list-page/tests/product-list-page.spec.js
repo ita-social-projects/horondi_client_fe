@@ -1,17 +1,18 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 import ProductListPage from '../product-list-page';
 
-const dispatch = jest.fn();
 jest.mock('react-redux');
 jest.mock('../product-list-page.styles', () => ({
   useStyles: () => ({})
 }));
-
+jest.mock('@apollo/client');
 jest.mock('react-router', () => ({
-  useLocation: () => ({ search: jest.fn() }),
+  useLocation: () => ({ search: 10 }),
   useHistory: () => jest.fn()
 }));
+
 const filters = {
   modelsFilter: [],
   categoryFilter: [],
@@ -19,7 +20,7 @@ const filters = {
   patternsFilter: [],
   isHotItemFilter: false
 };
-useDispatch.mockImplementation(() => dispatch);
+
 useSelector.mockImplementation(() => ({
   filterMenuStatus: true,
   loading: true,
@@ -39,7 +40,18 @@ useSelector.mockImplementation(() => ({
 
 describe('ProductListPage component tests', () => {
   it('Should render ProductListPage', () => {
+    useQuery.mockImplementation(() => ({ refetch: () => null, loading: false, error: false }));
+
     const component = mount(<ProductListPage width='sm' />);
+
+    expect(component).toBeDefined();
+  });
+
+  it('Should cover other branches', () => {
+    useQuery.mockImplementation(() => ({ refetch: () => null, loading: true, error: false }));
+
+    const component = mount(<ProductListPage width='sm' />);
+
     expect(component).toBeDefined();
   });
 });

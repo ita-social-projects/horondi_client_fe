@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
-import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -9,90 +8,97 @@ import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import { useHistory, useLocation } from 'react-router';
+import { useQuery } from '@apollo/client';
+
+import { useSelector } from 'react-redux';
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import { getFiltredProducts, setCurrentPage } from '../../redux/products/products.actions';
-import { Loader } from '../../components/loader/loader';
-import { setFilterMenuStatus } from '../../redux/theme/theme.actions';
 import {
   URL_QUERIES_NAME,
   TEMPORARY_WIDTHS,
   DRAWER_PERMANENT,
   DRAWER_TEMPORARY
 } from '../../configs';
+import { getFilteredProductsQuery } from './operations/product-list.queries';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import getSortParamsFromQuery from '../../utils/getSortParamsFromQuery';
+import getFilterParamsFromQuery from '../../utils/getFilterParamsFromQuery';
 
 const ProductListPage = ({ width }) => {
+  const { search } = useLocation();
+
+  const searchParams = new URLSearchParams(search);
+  const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
+
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const url = searchParams.toString();
-  const {
-    filterMenuStatus,
-    loading,
-    products,
-    pagesCount,
-    currentPage,
-    countPerPage,
-    sortByRate,
-    sortByPrice,
-    filters,
-    filterData,
-    sortByPopularity,
-    filterStatus
-  } = useSelector(({ Theme, Products }) => ({
-    filterMenuStatus: Theme.filterMenuStatus,
-    loading: Products.loading,
-    products: Products.products,
-    pagesCount: Products.pagesCount,
-    sortByRate: Products.sortByRate,
-    sortByPrice: Products.sortByPrice,
-    filters: Products.filters,
-    filterData: Products.filterData,
-    sortByPopularity: Products.sortByPopularity,
-    countPerPage: Products.countPerPage,
-    currentPage: Products.currentPage,
-    filterStatus: Products.filterStatus
+  const [products, setProducts] = useState([]);
+
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency
   }));
-  const { modelsFilter, categoryFilter, colorsFilter, patternsFilter, isHotItemFilter } = filters;
-  useEffect(() => {
-    dispatch(setCurrentPage(+searchParams.get(URL_QUERIES_NAME.page)));
-    dispatch(getFiltredProducts({}));
-  }, [
-    dispatch,
-    sortByRate,
-    sortByPrice,
-    sortByPopularity,
-    countPerPage,
-    modelsFilter.length,
-    categoryFilter.length,
-    colorsFilter.length,
-    patternsFilter.length,
-    isHotItemFilter,
-    currentPage,
-    filterStatus,
-    url
-  ]);
+  const [paginationParams, setPaginationParams] = useState({
+    pagesCount: 1,
+    currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
+    countPerPage: +searchParams.get(URL_QUERIES_NAME.countPerPage) || 9
+  });
+  const [sortParams, setSortParams] = useState(() => getSortParamsFromQuery(sortParamsFromQuery));
+  const [filterParams, setFilterParams] = useState(() => getFilterParamsFromQuery(searchParams));
+  const [filterMenuStatus, setFilterMenuStatus] = useState(false);
+
+  const { pagesCount, currentPage, countPerPage } = paginationParams;
+  const variables = {
+    ...sortParams,
+    ...filterParams,
+    currency,
+    limit: Math.ceil(Math.abs(countPerPage)) || 9,
+    skip:
+      Math.ceil(Math.abs(currentPage)) > 1
+        ? Math.ceil(Math.abs(countPerPage)) * (Math.ceil(Math.abs(currentPage)) - 1)
+        : 0
+  };
+
   const handleDrawerToggle = () => {
-    dispatch(setFilterMenuStatus(!filterMenuStatus));
+    setFilterMenuStatus((prevState) => !prevState);
   };
   const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
+  const { error, loading, refetch } = useQuery(getFilteredProductsQuery, {
+    onCompleted: (data) => {
+      setProducts(data.getProducts.items);
+      setPaginationParams((prevState) => ({
+        ...prevState,
+        pagesCount: Math.ceil(data.getProducts.count / countPerPage)
+      }));
+    },
+    variables
+  });
+
+  useEffect(() => {
+    setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));
+    setPaginationParams((prevState) => ({
+      ...prevState,
+      currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
+      countPerPage: +searchParams.get(URL_QUERIES_NAME.countPerPage) || 9
+    }));
+    setFilterParams(getFilterParamsFromQuery(searchParams));
+
+    refetch();
+  }, [search]);
+
   const changeHandler = (e, value) => {
-    searchParams.set('page', value);
+    searchParams.set(URL_QUERIES_NAME.page, value);
     history.push(`?${searchParams.toString()}`);
   };
 
-  const handleFilterShow = () => dispatch(setFilterMenuStatus(!filterMenuStatus));
+  const handleFilterShow = () => setFilterMenuStatus((prevState) => !prevState);
 
-  if (loading || filterData.length) {
-    return <Loader />;
-  }
+  if (loading || error) return errorOrLoadingHandler(error, loading);
+
   const itemsToShow =
     products?.length > 0
       ? products.map((product) => <ProductListItem key={product._id} product={product} />)
@@ -138,11 +144,11 @@ const ProductListPage = ({ width }) => {
           }}
         >
           <div className={styles.drawerContainer}>
-            <ProductFilter />
+            <ProductFilter filterParams={filterParams} />
           </div>
         </Drawer>
         <div className={styles.filterMenu}>
-          <ProductFilter />
+          <ProductFilter filterParams={filterParams} />
         </div>
         {products?.length > 0 ? (
           <div className={styles.productsWrapper}>

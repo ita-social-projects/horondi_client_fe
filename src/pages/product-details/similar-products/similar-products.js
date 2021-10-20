@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
-
-import './similar-products.css';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
+import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
+
+import './similar-products.css';
 import { useStyles } from './similar-products.styles';
-
-import { selectInfoForSimilarProducts } from './selector';
-
 import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
@@ -15,18 +14,30 @@ import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
 import { SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 import ThemeContext from '../../../context/theme-context';
+import { getFilteredProductsQuery } from '../../product-list-page/operations/product-list.queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
-const SimilarProducts = ({ cartList }) => {
+const SimilarProducts = ({ cartList, product }) => {
+  const [similarProducts, setSimilarProducts] = useState([]);
   const styles = useStyles();
-  const { language, similarProducts, currency, product } = useSelector(
-    selectInfoForSimilarProducts
-  );
+
+  const { i18n } = useTranslation();
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency,
+  }));
+  const language = i18n.language === 'ua' ? 0 : 1;
+
+  const { error, loading } = useQuery(getFilteredProductsQuery, {
+    onCompleted: (data) => setSimilarProducts(data.getProducts.items)
+  });
 
   const isLightTheme = useContext(ThemeContext);
   const { title } = SIMILAR_ITEMS[language];
   const currencySign = getCurrencySign(currency);
   const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;
   let imagesList;
+
+  if (error || loading) return errorOrLoadingHandler(error, loading);
 
   if (cartList) {
     imagesList = similarProductForCart(similarProducts, cartList);

@@ -30,12 +30,10 @@ useSelector.mockImplementation(() => storage);
 
 describe('ProductImages page test', () => {
   it('Should render ProductImages', () => {
-    const component = shallow(<ProductImages />);
+    const component = shallow(<ProductImages images={{
+      primary: { large: '' },
+      additional: [{ large: '' }]
+    }} />);
     expect(component).toBeDefined();
-  });
-
-  it('Should match snapshot', () => {
-    const component = shallow(<ProductImages />);
-    expect(component).toMatchSnapshot();
   });
 });

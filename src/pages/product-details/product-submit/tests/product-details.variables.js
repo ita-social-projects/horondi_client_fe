@@ -1,8 +1,8 @@
-const Language = {
+export const Language = {
   language: 0
 };
 
-const product = {
+export const product = {
   _id: '60896f073cb33b2d5422a3cf',
   category: {
     _id: '6043bdeb3e06ad3edcdb7b2d',
@@ -53,7 +53,7 @@ const product = {
   }
 };
 
-const Products = {
+export const Products = {
   product: {
     ...product,
     _id: '123'
@@ -69,24 +69,16 @@ const Products = {
   }
 };
 
-const Cart = {
+export const Cart = {
   list: []
 };
 
-const Wishlist = {
+export const Wishlist = {
   list: []
 };
 
-const User = {
+export const User = {
   userData: {
     _id: '1123'
   }
-};
-
-module.exports = {
-  Language,
-  Products,
-  User,
-  Cart,
-  Wishlist
 };

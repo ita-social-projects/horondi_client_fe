@@ -39,7 +39,7 @@ const ModelsList = () => {
   return (
     <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>
-        {models?.map((model) => (
+        {models.map((model) => (
           <ModelItem key={model._id} model={model} />
         ))}
       </div>

@@ -5,27 +5,15 @@ export default function useTranslationsLoad() {
   const { i18n } = useTranslation();
 
   const loadedTranslationsHandler = (data) => {
-    const translationsItem = { ua: {}, en: {} };
-    const translations = [];
+    const keys = ['ua', 'en'];
 
-    if (data.length) {
-      data.forEach((el) => {
-        translationsItem.ua[el._id] = el.ua;
-        translationsItem.en[el._id] = el.en;
-
-        translations.push(translationsItem);
-      });
-      translations.forEach((item) => {
-        Object.keys(item).forEach((key) => {
-          Object.keys(item[key]).forEach((subKey) => {
-            i18n.addResource(key, 'translations', subKey, item[key][subKey]);
-          });
-        });
-      });
-    }
+    data.forEach((el) => {
+      i18n.addResource(el._id, 'translations', keys[0], el[keys[0]]);
+      i18n.addResource(el._id, 'translations', keys[1], el[keys[1]]);
+    });
   };
 
-  axios
-    .get('http://localhost:5000/translations')
-    .then((response) => loadedTranslationsHandler(response.data));
+  axios.get('http://localhost:5000/translations').then((response) => {
+    if (response.data.length) loadedTranslationsHandler(response.data);
+  });
 }

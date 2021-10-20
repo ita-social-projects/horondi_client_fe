@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   images: {
     display: 'grid',
-    gridTemplateColumns: '150px 1fr',
+    gridTemplateRows: '540px 150px',
 
     gridGap: '20px',
     '@media (max-width: 500px)': {
@@ -35,22 +35,25 @@ export const useStyles = makeStyles((theme) => ({
   }),
 
   sideImage: {
-    width: '100%',
+    width: '160px',
+    height: '120px',
+    objectFit: 'cover'
 
-    objectFit: 'cover',
-
-    '@media (max-width: 500px)': {
-      display: 'none'
-    }
+    // '@media (max-height: 150px)': {
+    //   display: 'none'
+    // }
   },
 
   additionalImagePreview: {
-    overflow: 'hidden',
-    overflowY: 'scroll',
+    overflow: 'auto',
+    overflowX: 'scroll',
     scrollBehavior: 'smooth',
-    maxHeight: '500px',
+    display: 'flex',
+    flexDirection: 'row',
+    maxHeight: '150px',
     '&::-webkit-scrollbar': {
-      width: '0.4em',
+      height: '0.4em',
+      widht: '100%',
       borderRadius: '0.2em'
     },
     '&::-webkit-scrollbar-track': {

@@ -92,6 +92,7 @@ const ProductImages = ({ images }) => {
         data-cy='test'
       />
     ));
+
   return (
     <div>
       <ImgsViewer
@@ -108,10 +109,10 @@ const ProductImages = ({ images }) => {
         rightArrowTitle={t('common.next')}
       />
       <div className={styles.images}>
-        <div className={styles.additionalImagePreview}>{sideImages}</div>
         <div className={styles.imagePreviewContainer}>
           <ZoomImage images={images} />
         </div>
+        <div className={styles.additionalImagePreview}>{sideImages}</div>
       </div>
     </div>
   );

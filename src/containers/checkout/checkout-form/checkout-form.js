@@ -80,8 +80,8 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
       initialValues,
 
       onSubmit: (data) => {
-        data.paymentMethod === checkoutPayMethod[0].label
-          ? dispatch(addPaymentMethod(checkoutPayMethod[0].label)) &&
+        data.paymentMethod === checkoutPayMethod.card.label
+          ? dispatch(addPaymentMethod(checkoutPayMethod.card.label)) &&
             dispatch(
               getFondyData({
                 order: orderInputData(data, deliveryType, cartItems, language),
@@ -91,7 +91,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
               })
             )
           : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
-            dispatch(addPaymentMethod(checkoutPayMethod[1].label));
+            dispatch(addPaymentMethod(checkoutPayMethod.cash.label));
         clearSessionStorage();
       }
     });

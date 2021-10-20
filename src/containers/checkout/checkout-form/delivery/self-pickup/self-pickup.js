@@ -9,7 +9,7 @@ const SelfPickup = ({ isLightTheme }) => {
   const { t } = useTranslation();
 
   const schedule = Object.values(days).map((value) =>
-    value.label === days[5].label || value.label === days[6].label ? (
+    value.label === days.saturday.label || value.label === days.sunday.label ? (
       <div className={styles.scheduleItem}>
         {t(`checkout.schedule.${value.label}`)}
         {t('checkout.checkoutTitles.restDay')}{' '}

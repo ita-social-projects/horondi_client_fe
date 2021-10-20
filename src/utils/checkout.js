@@ -143,7 +143,7 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
 });
 
 export const checkoutFormBtnValue = (values, language) =>
-  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod[1].label
+  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash.label
     ? CHECKOUT_BUTTON[language].confirmOrder
     : CHECKOUT_BUTTON[language].payOrder;
 

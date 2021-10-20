@@ -5,7 +5,6 @@ import productsSaga from './products/products.sagas';
 import wishlistSaga from './wishlist/wishlist.sagas';
 import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
-import businessPagesSaga from './business-pages/business-pages.sagas';
 import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
 import checkoutSaga from './checkout/checkout.sagas';
@@ -29,7 +28,6 @@ export function* rootSaga() {
     modelSaga(),
     commentsSaga(),
     checkoutSaga(),
-    businessPagesSaga(),
     chatSaga(),
     contactsSaga(),
     headerLinksSaga(),

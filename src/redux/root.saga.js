@@ -3,7 +3,6 @@ import newsSaga from './news/news.sagas';
 import wishlistSaga from './wishlist/wishlist.sagas';
 import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
-import modelSaga from './model/model.sagas';
 import commentsSaga from './comments/comments.sagas';
 import checkoutSaga from './checkout/checkout.sagas';
 import chatSaga from './chat/chat.sagas';
@@ -21,7 +20,6 @@ export function* rootSaga() {
     wishlistSaga(),
     toastSaga(),
     cartSaga(),
-    modelSaga(),
     commentsSaga(),
     checkoutSaga(),
     chatSaga(),

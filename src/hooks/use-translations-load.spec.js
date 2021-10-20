@@ -4,21 +4,12 @@ jest.mock('axios', () => ({
   __esModule: true,
   default: {
     get: () => ({
-      then: (cb) =>
-        cb({
-          data: [
-            {
-              _id: 'some id',
-              ua: { name: 'Імя' },
-              en: { name: 'some name' }
-            }
-          ]
-        })
+      then: (cb) => cb({ data: { ua: {}, en: {} } })
     })
   }
 }));
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ i18n: { addResource: () => null } })
+  useTranslation: () => ({ i18n: { addResourceBundle: () => null } })
 }));
 
 describe('use-translations-load tests', () => {

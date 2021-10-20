@@ -6,6 +6,7 @@ import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
 import Loader from '../../../components/loader';
 import { getAllModelsQuery } from './operations/getAllModels.queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const ModelsList = () => {
   const [models, setModels] = useState([]);
@@ -23,13 +24,12 @@ const ModelsList = () => {
     onCompleted: (data) => setModels(data.getAllModels.items)
   });
 
-  if (loading || error) {
-    return <Loader />;
-  }
+  if (loading || error) return errorOrLoadingHandler(error, loading);
+
   return (
     <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>
-        {models?.map((model) => (
+        {models.map((model) => (
           <ModelItem key={model._id} model={model} />
         ))}
       </div>

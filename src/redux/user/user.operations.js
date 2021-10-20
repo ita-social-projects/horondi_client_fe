@@ -391,7 +391,6 @@ export {
   resetPassword,
   updateUserById,
   sendEmailConfirmation,
-  // getUserOrders,
   getUserByToken,
   regenerateUserTokenPairs,
   getPurchasedProducts

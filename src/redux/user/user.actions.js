@@ -25,9 +25,7 @@ import {
   ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
   REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
   LOGIN_BY_GOOGLE,
-  SET_DELETE_USER,
-  SET_ORDERS_COUNT,
-  SET_CURRENT_PAGE
+  SET_DELETE_USER
 } from './user.types';
 
 const setUser = (user) => ({
@@ -147,16 +145,6 @@ const setUserOrders = (payload) => ({
   payload
 });
 
-const setUserCountOrders = (payload) => ({
-  type: SET_ORDERS_COUNT,
-  payload
-});
-
-const setCurrentPage = (payload) => ({
-  type: SET_CURRENT_PAGE,
-  payload
-});
-
 const addProductToUserCartOrWishlist = (productId) => ({
   type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
   payload: productId
@@ -198,7 +186,5 @@ export {
   setUserOrders,
   addProductToUserCartOrWishlist,
   removeProductFromUserCartOrWishlist,
-  deleteUserDataFromStore,
-  setUserCountOrders,
-  setCurrentPage
+  deleteUserDataFromStore
 };

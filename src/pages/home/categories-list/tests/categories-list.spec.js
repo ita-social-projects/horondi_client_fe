@@ -1,8 +1,10 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 import CategoriesList from '../categories-list';
+import CategoriesContextProvider from '../../../../context/categories-context';
 
+jest.mock('../categories-list.style', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 
@@ -13,13 +15,15 @@ useSelector.mockImplementation(() => ({
 
 useQuery.mockImplementation(() => ({
   loading: false,
-  error: false,
-  data: {}
+  error: false
 }));
 
-const wrapper = shallow(<CategoriesList />);
-
 describe('tests for categories list', () => {
+  const wrapper = shallow(
+    <CategoriesContextProvider>
+      <CategoriesList />
+    </CategoriesContextProvider>
+  );
   it('category list should exist', () => {
     expect(wrapper).toBeDefined();
   });

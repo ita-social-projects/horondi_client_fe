@@ -15,7 +15,6 @@ jest.mock('@apollo/client');
 useState.mockImplementation(() => [[], setState]);
 
 useSelector.mockImplementation(() => ({
-  language: 0,
   quantityPerPage: 9
 }));
 

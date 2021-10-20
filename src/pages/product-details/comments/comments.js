@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Rating from '@material-ui/lab/Rating';
 import { Button, TextField, Tooltip } from '@material-ui/core';
@@ -12,7 +12,6 @@ import { Loader } from '../../../components/loader/loader';
 
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
-import { getComments, setCommentsSkip } from '../../../redux/comments/comments.actions';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 import {
@@ -30,12 +29,10 @@ import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 const Comments = ({ productId }) => {
   const commentsInit = { items: [], count: 0 };
   const styles = useStyles();
-  const dispatch = useDispatch();
   const [comments, setComments] = useState(commentsInit);
   const [commentsLoading, setCommentsLoading] = useState(true);
-  const { language, userData, currentLimit, commentsCount, skip } = useSelector(
-    selectProductsIdCommentsLanguageUserData
-  );
+  const [currentLimit, setCurrentLimit] = useState(10);
+  const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
 
   const { refetch: refetchComments } = useQuery(getCommentsQuery, {
     variables: {
@@ -90,7 +87,8 @@ const Comments = ({ productId }) => {
 
   const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
 
-  const commentsLength = comments?.count;
+  const commentsLength = currentLimit;
+  const commentsCount = comments?.count;
 
   const commentsList = comments?.items
     ? comments.items.map(({ _id, ...rest }) => (
@@ -101,9 +99,8 @@ const Comments = ({ productId }) => {
   const limitOption = commentsList?.length === comments?.count && comments?.count > commentsCount;
 
   const handleCommentsReload = () => {
-    const newSkip = skip + currentLimit;
-    dispatch(setCommentsSkip(newSkip));
-    dispatch(getComments({ productId, skip: newSkip, currentLimit }));
+    setCommentsLoading(true);
+    setCurrentLimit((prev) => prev + 10);
   };
 
   const handleCommentChange = (e) => {

@@ -72,7 +72,7 @@ describe('Comments test', () => {
       skip: 10,
       snackBarMessage: ['Message']
     });
-    wrapper = shallow(
+    wrapper = mount(
       <ThemeProvider theme={themeValue}>
         <Comments />
       </ThemeProvider>

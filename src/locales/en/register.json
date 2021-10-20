@@ -12,7 +12,8 @@
     "lastName": "Last Name",
     "email": "Email",
     "password": "Password",
-    "passwordConfirm": "Password Confirm"
+    "passwordConfirm": "Password Confirm",
+    "passwordValidate": "Confirm the password"
   },
   "googleSignIn": "or use your Google account to register"
 }

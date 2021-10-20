@@ -41,7 +41,8 @@ export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  password: ''
+  password: '',
+  passwordValidate: ''
 };
 export const USER_REGISTER_LABELS = {
   email: 'email',

@@ -1,6 +1,7 @@
 import React, { useMemo, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
+import { useTranslation } from 'react-i18next';
 
 import CategoryItem from './category-item';
 import {
@@ -17,8 +18,9 @@ import './categories-carousel.css';
 const CategoriesList = () => {
   const styles = useStyles();
   const { categories } = useContext(CategoriesContext);
-  const { language, quantityPerPage } = useSelector(({ Language, Products }) => ({
-    language: Language.language,
+  const { i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
+  const { quantityPerPage } = useSelector(({ Products }) => ({
     quantityPerPage: Products.countPerPage
   }));
 

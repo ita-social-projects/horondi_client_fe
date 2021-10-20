@@ -23,10 +23,9 @@ const FooterLists = () => {
   const styles = useStyles();
   const [contacts, setContacts] = useState([]);
   const { categories } = useContext(CategoriesContext);
-
-  const { t } = useTranslation();
-  const { language, quantityPerPage } = useSelector(({ Language, Products }) => ({
-    language: Language.language,
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
+  const { quantityPerPage } = useSelector(({ Products }) => ({
     quantityPerPage: Products.countPerPage
   }));
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 import { useTranslation } from 'react-i18next';
@@ -24,21 +24,17 @@ const CategoriesList = () => {
     quantityPerPage: Products.countPerPage
   }));
 
-  const categoriesList = useMemo(
-    () =>
-      categories.map(({ _id, name, images }) => (
-        <CategoryItem
-          key={_id}
-          categoryUrl={`${getCategoryURL(name)}?${
-            URL_QUERIES_NAME.categoryFilter
-          }=${_id}&page=1&${countPerPage}=${quantityPerPage}`}
-          categoryName={name[language].value}
-          categoryImageUrl={images.large}
-          language={language}
-        />
-      )),
-    [categories, styles]
-  );
+  const categoriesList = categories.map(({ _id, name, images }) => (
+    <CategoryItem
+      key={_id}
+      categoryUrl={`${getCategoryURL(name)}?${
+        URL_QUERIES_NAME.categoryFilter
+      }=${_id}&page=1&${countPerPage}=${quantityPerPage}`}
+      categoryName={name[language].value}
+      categoryImageUrl={images.large}
+      language={language}
+    />
+  ));
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>

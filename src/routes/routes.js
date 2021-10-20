@@ -2,8 +2,8 @@ import React, { useContext, Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
-import { history } from '../store/store';
 
+import { history } from '../store/store';
 import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
 import Loader from '../components/loader';

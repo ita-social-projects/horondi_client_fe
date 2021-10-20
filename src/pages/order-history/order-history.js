@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { getUserOrders, setCurrentPage } from '../../redux/user/user.actions';
+import { getUserOrders } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
 import OrderHistoryOrder from '../../containers/orders/order-history/order-history-order';
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
 import { limitHistoryOrders } from '../../const/user-order-history';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import { getUserOrdersCountQuery } from './operations/order-history.queries';
 
 const OrderHistory = () => {
-  const { orders, loading, currentPage, countPerPage } = useSelector(({ User }) => ({
+  const [currentPage, setCurrentPage] = useState(1);
+  const [countPerPage, setCountPerPage] = useState(null);
+  const { orders, loading } = useSelector(({ User }) => ({
     orders: User.userOrders,
-    loading: User.userLoading,
-    currentPage: User.currentPage,
-    countPerPage: User.countPerPage
+    loading: User.userLoading
   }));
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
+
+  const { loadingCount, error } = useQuery(getUserOrdersCountQuery, {
+    variables: {
+      id: '617036ea0f1341197c925321'
+    },
+    onCompleted: (data) => {
+      setCountPerPage(data.getCountUserOrders.countOrder);
+    }
+  });
 
   const quantityPages = Math.ceil(countPerPage / limitHistoryOrders);
 
@@ -34,7 +46,7 @@ const OrderHistory = () => {
   }, [currentPage, countPerPage]);
 
   const changeHandler = (value) => {
-    dispatch(setCurrentPage(value));
+    setCurrentPage(value);
   };
 
   if (loading) {
@@ -44,6 +56,8 @@ const OrderHistory = () => {
       </div>
     );
   }
+
+  if (loadingCount || error) return errorOrLoadingHandler(error, loadingCount);
 
   return (
     <div className={styles.root}>

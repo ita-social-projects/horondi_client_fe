@@ -21,6 +21,7 @@ export const useStyles = makeStyles(() => ({
   title: {
     padding: 10,
     display: 'flex',
+    color: '#000000',
     justifyContent: 'space-between',
     '& :last-child': {
       color: '#5a5a5a',

@@ -16,12 +16,18 @@ import {
   DIALOG_REPLY
 } from '../../../../../translations/product-details.translations';
 
-const CommentDialog = ({ isModalShown, handleClose, commentId, userId, isDeleteComment = 0 }) => {
+const CommentDialog = ({
+  isModalShown,
+  handleClose,
+  commentId,
+  userId,
+  isDeleteComment = 0,
+  productId
+}) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const { language, productId } = useSelector(({ Products, Language }) => ({
-    productId: Products.product._id,
+  const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
 

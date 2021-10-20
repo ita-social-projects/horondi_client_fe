@@ -16,7 +16,7 @@ const ReplyForm = ({ cancel, commentId }) => {
   const { language, userData, productId } = useSelector(({ Language, User, Products }) => ({
     language: Language.language,
     userData: User.userData,
-    productId: Products.product._id
+    productId: Products.productToSend._id
   }));
 
   const { _id } = userData;
@@ -35,14 +35,8 @@ const ReplyForm = ({ cancel, commentId }) => {
     cancel(false);
   };
 
-  const {
-    values,
-    errors,
-    handleSubmit,
-    handleBlur,
-    setFieldValue,
-    setShouldValidate
-  } = useCommentValidation(!!userData, onSubmit);
+  const { values, errors, handleSubmit, handleBlur, setFieldValue, setShouldValidate } =
+    useCommentValidation(!!userData, onSubmit);
 
   const handleCommentChange = (e) => {
     const value = e.target.value.replace(formRegExp.link, '');

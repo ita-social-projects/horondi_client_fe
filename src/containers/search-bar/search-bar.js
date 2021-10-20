@@ -1,46 +1,54 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
-import { setSearchFilter, getFiltredProducts } from '../../redux/products/products.actions';
-import { setSearchBarVisibility } from '../../redux/search-bar/search-bar.actions';
+import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 
-const SearchBar = ({ fromSideBar }) => {
+const SearchBar = ({ searchParams, setSearchParams, initialSearchState, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const { loading, refetch } = useQuery(getFilteredProductsQuery, {
+    onCompleted: (data) =>
+      setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
+    variables: { search: searchParams.searchFilter }
+  });
 
   const handleSearch = ({ target }) => {
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-
     if (target.value && target.value.trim()) {
       setSearchTimeout(
         setTimeout(() => {
-          dispatch(setSearchFilter(target.value));
-          dispatch(getFiltredProducts({ forSearchBar: true }));
-          dispatch(setSearchBarVisibility(!!target.value));
+          setSearchParams(() => ({
+            products: [],
+            searchFilter: target.value,
+            searchBarVisibility: !!target.value
+          }));
+          refetch();
         }, 1000)
       );
     }
   };
+
   const [sticky, setSticky] = useState(false);
   const stickySearch = clsx({
     [styles.root]: true,
     [styles.sticky]: sticky
   });
+
   useLayoutEffect(() => {
     window.addEventListener('scroll', () => {
       window.scrollY > 50 ? setSticky(true) : setSticky(false);
     });
   }, []);
+
   const handleOnBlur = () => {
-    setTimeout(() => dispatch(setSearchBarVisibility(false)), 100);
+    setTimeout(() => setSearchParams(initialSearchState), 100);
   };
 
   return (

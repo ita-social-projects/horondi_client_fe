@@ -87,15 +87,12 @@ const Comments = ({ productId }) => {
   const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
 
   const commentsLength = currentLimit;
-  const commentsCount = comments?.count;
+  const commentsCount = comments.count;
 
-  const commentsList = comments?.items
-    ? comments.items.map(({ _id, ...rest }) => (
-      <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
-    ))
-    : [];
-
-  const limitOption = commentsList?.length === comments?.count && comments?.count > commentsCount;
+  const commentsList = comments.items.map(({ _id, ...rest }) => (
+    <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
+  ));
+  const limitOption = commentsList.length === comments.count && comments.count > commentsCount;
 
   const handleCommentsReload = () => {
     setCurrentLimit((prev) => prev + 10);

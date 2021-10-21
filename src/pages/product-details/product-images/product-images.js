@@ -4,7 +4,6 @@ import ImgsViewer from 'react-images-viewer';
 import { GlassMagnifier } from 'react-image-magnifiers';
 import { useStyles } from './product-images.styles';
 import { getImage } from '../../../utils/imageLoad';
-
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import { IMG_URL } from '../../../configs';

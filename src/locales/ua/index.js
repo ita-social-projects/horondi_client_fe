@@ -29,7 +29,6 @@ import user from './user.json';
 import footer from './footer.json';
 import newsDetail from './newDetail.json';
 
-
 export default {
   translations: {
     login,
@@ -62,6 +61,5 @@ export default {
     user,
     footer,
     newsDetail
-
   }
 };

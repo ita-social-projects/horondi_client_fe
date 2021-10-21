@@ -35,4 +35,13 @@ describe('', () => {
 
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
   });
+
+  it('', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      error: true
+    }));
+
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+  });
 });

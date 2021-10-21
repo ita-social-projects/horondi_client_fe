@@ -8,7 +8,7 @@ import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const NewsPage = () => {
   const [news, setNews] = useState([]);
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const { loading, error } = useQuery(getAllNews, {

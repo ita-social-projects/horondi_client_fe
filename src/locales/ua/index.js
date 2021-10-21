@@ -25,6 +25,7 @@ import searchBar from './searchBar.json';
 import sidebar from './sidebar.json';
 import chat from './chat.json';
 import delivery from './delivery.json';
+import product from './product.json';
 
 export default {
   translations: {
@@ -54,6 +55,7 @@ export default {
     searchBar,
     sidebar,
     chat,
-    delivery
+    delivery,
+    product
   }
 };

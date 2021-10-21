@@ -1,12 +1,10 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
-import * as redux from 'react-redux';
-import ReplyCommentsItem from '../index';
+import ReplyCommentsItem from '../reply-comments-item';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import {
-  dataUser,
   replyCommentId,
   dataSecond,
   dataAdmin,
@@ -15,40 +13,49 @@ import {
 } from './reply-comments-item.variables';
 import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
-Enzyme.configure({ adapter: new Adapter() });
+jest.mock('react-redux');
 
-const mockSetState = jest.fn();
+jest.mock('../reply-comments-item.styles', () => ({
+  useStyles: () => ({})
+}));
 
-const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
-const mockUseSelector = jest.spyOn(redux, 'useSelector');
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: () => ({ firstName: 'user' }),
+    i18n: () => ({ dateLanguage: 'ukr-UA' })
+  })
+}));
+
+const SelectorsState = {
+  userData: {
+    _id: '111',
+    firstName: 'user',
+    email: 'test@gmail.com',
+    role: 'admin'
+  },
+  language: 0
+};
+
+const props = {
+  data: {
+    replyText: 'text',
+    createdAt: '1',
+    verifiedPurchase: true,
+    showReplyComment: true
+  },
+  replyCommentId: '1'
+};
+
 const themeValue = theme('light');
 
-const useStateSpy = jest.spyOn(React, 'useState');
-
-describe('Comments test', () => {
+describe('component', () => {
   let wrapper;
-
   beforeEach(() => {
-    useStateSpy.mockImplementation(() => [false, mockSetState]);
-    mockUseDispatch.mockImplementation(() => jest.fn());
-    mockUseSelector.mockReturnValue({
-      language: '0',
-      userData: { _id: '111', email: 'test@gmail.com' }
-    });
-    wrapper = mount(
-      <ThemeProvider theme={themeValue}>
-        <ReplyCommentsItem data={dataUser} replyCommentId={replyCommentId} />
-      </ThemeProvider>
-    );
+    useSelector.mockImplementation(() => SelectorsState);
+    wrapper = shallow(<ReplyCommentsItem {...props} />);
   });
 
-  afterEach(() => {
-    wrapper.unmount();
-    useStateSpy.mockClear();
-    mockUseSelector.mockClear();
-  });
-
-  it('Should render ReplyCommentsItem', () => {
+  it('should render', () => {
     expect(wrapper).toBeDefined();
   });
 
@@ -63,6 +70,7 @@ describe('Comments test', () => {
     );
     expect(wrapper).toBeDefined();
   });
+
   it('Should render ReplyCommentsItem with superadmin role', () => {
     wrapper = mount(
       <ThemeProvider theme={themeValue}>

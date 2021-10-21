@@ -17,7 +17,7 @@ const OrderHistory = () => {
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const { loading, errorOrders } = useQuery(getUserOrdersQuery, {
+  const { loading: loadingOrders, error: errorOrders } = useQuery(getUserOrdersQuery, {
     variables: {
       pagination: {
         limit: limitHistoryOrders,
@@ -29,9 +29,9 @@ const OrderHistory = () => {
     }
   });
 
-  const { loadingCount, errorCount } = useQuery(getUserOrdersCountQuery, {
+  const { loadind: loadingCount, error: errorCount } = useQuery(getUserOrdersCountQuery, {
     variables: {
-      id: '617036ea0f1341197c925321'
+      id: 'jarslghahsjeh'
     },
     onCompleted: (data) => {
       setCountPerPage(data.getCountUserOrders.countOrder);
@@ -44,7 +44,7 @@ const OrderHistory = () => {
     setCurrentPage(value);
   };
 
-  if (loading) {
+  if (loadingOrders) {
     return (
       <div className={styles.loader}>
         <Loader className={styles.loader} />
@@ -52,8 +52,9 @@ const OrderHistory = () => {
     );
   }
 
-  if (loadingCount || errorCount || errorOrders)
-    return errorOrLoadingHandler(loadingCount, errorCount, errorOrders);
+  if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
+
+  if (loadingCount || errorCount) return errorOrLoadingHandler(errorCount, loadingCount);
 
   return (
     <div className={styles.root}>

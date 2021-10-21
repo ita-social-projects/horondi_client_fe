@@ -8,7 +8,8 @@ jest.mock('@apollo/client');
 useQuery.mockImplementation(() => ({}));
 
 describe('OrderHistory component', () => {
+  const wrapper = shallow(<OrderHistory />);
   it('should render', () => {
-    shallow(<OrderHistory />);
+    expect(wrapper).toBeDefined();
   });
 });

@@ -11,7 +11,6 @@ import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { preserveUser } from '../../redux/user/user.actions';
-import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
@@ -29,7 +28,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(preserveUser());
-    dispatch(getContacts());
   }, []);
 
   useEffect(() => {

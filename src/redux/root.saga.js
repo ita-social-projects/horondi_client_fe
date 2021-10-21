@@ -10,7 +10,6 @@ import headerLinksSaga from './header-links/header-links.sagas';
 import patternSaga from './pattern/pattern.sagas';
 import toastSaga from './toast/toast.sagas';
 import { constructorSaga } from './images-constructor/constructor.sagas';
-import contactsSaga from './contacts/contacts.sagas';
 import orderSaga from './order/order.sagas';
 
 export function* rootSaga() {
@@ -23,7 +22,6 @@ export function* rootSaga() {
     commentsSaga(),
     checkoutSaga(),
     chatSaga(),
-    contactsSaga(),
     headerLinksSaga(),
     patternSaga(),
     constructorSaga(),

@@ -8,20 +8,12 @@ import Select from '@material-ui/core/Select';
 import { Link } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useTranslation } from 'react-i18next';
 import DeliveryType from '../delivery-type/delivery-type';
-
-import {
-  CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_INPUT_FIELD,
-  CHECKOUT_PAYMENT,
-  CHECKOUT_TEXT_FIELDS,
-  CHECKOUT_TITLES
-} from '../../../translations/checkout.translations';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, SESSION_STORAGE, LANGUAGES_LIST } from '../../../configs';
+import { CY_CODE_ERR, SESSION_STORAGE } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import routes from '../../../const/routes';
@@ -47,16 +39,18 @@ import {
   getFromSessionStorage,
   setToSessionStorage
 } from '../../../services/session-storage.service';
+import { checkoutPayMethod } from './const';
 
 const { pathToUserAgreement, pathToCart } = routes;
 
-const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryType }) => {
+const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
     isLightTheme
   });
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const dispatch = useDispatch();
   const totalPriceToPay = cartItems.reduce(
@@ -64,24 +58,21 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
       previousValue + calcPriceForCart(currentValue, currency, currentValue.quantity),
     0
   );
-  const consentLink =
-    language === LANGUAGES_LIST[0].value ? (
-      <div className={styles.consentMessage}>
+  const consentLink = (
+    <div className={styles.consentMessage}>
+      {' '}
+      {t('checkout.checkoutAdditionalInfo.consent.0')}
+      <Link
+        className={styles.consentLink}
+        to={pathToUserAgreement}
+        target='_blank'
+        rel='noreferrer'
+      >
         {' '}
-        {CHECKOUT_ADDITIONAL_INFORMATION[language].consent[0]}
-        <Link
-          className={styles.consentLink}
-          to={pathToUserAgreement}
-          target='_blank'
-          rel='noreferrer'
-        >
-          {' '}
-          {CHECKOUT_ADDITIONAL_INFORMATION[language].consent[1]}{' '}
-        </Link>
-      </div>
-    ) : (
-      ''
-    );
+        {t('checkout.checkoutAdditionalInfo.consent.1')}{' '}
+      </Link>
+    </div>
+  );
 
   const { dirty, values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
     useFormik({
@@ -89,8 +80,8 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
       initialValues,
 
       onSubmit: (data) => {
-        data.paymentMethod === CHECKOUT_PAYMENT[language].card
-          ? dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].card)) &&
+        data.paymentMethod === checkoutPayMethod.card.label
+          ? dispatch(addPaymentMethod(checkoutPayMethod.card.label)) &&
             dispatch(
               getFondyData({
                 order: orderInputData(data, deliveryType, cartItems, language),
@@ -100,7 +91,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               })
             )
           : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
-            dispatch(addPaymentMethod(CHECKOUT_PAYMENT[language].cash));
+            dispatch(addPaymentMethod(checkoutPayMethod.cash.label));
         clearSessionStorage();
       }
     });
@@ -129,19 +120,19 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                 <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
               </Link>
             </div>
-            <h2 className={styles.checkoutTitle}>{CHECKOUT_TITLES[language].checkoutTitle}</h2>
+            <h2 className={styles.checkoutTitle}>{t('checkout.checkoutTitles.checkoutTitle')}</h2>
             <div className={styles.checkoutTitleLine} />
           </div>
           <Grid item className={styles.userInfoContainer}>
             <div className={styles.contactInfoWrapper}>
-              <h3 className={styles.title}>{CHECKOUT_TITLES[language].contactInfo}</h3>
+              <h3 className={styles.title}>{t('checkout.checkoutTitles.contactInfo')}</h3>
               <div className={styles.contactInfoFields}>
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
                       size={TEXT_FIELD_SIZE.SMALL}
-                      data-cy={CHECKOUT_INPUT_FIELD[field.name]}
-                      name={CHECKOUT_INPUT_FIELD[field.name]}
+                      data-cy={field.name}
+                      name={field.name}
                       className={styles.textField}
                       variant={TEXT_FIELD_VARIANT.OUTLINED}
                       label={field.label}
@@ -162,8 +153,8 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                   <div key={field.name} className={styles.inputData}>
                     <TextField
                       size={TEXT_FIELD_SIZE.SMALL}
-                      data-cy={CHECKOUT_INPUT_FIELD[field.name]}
-                      name={CHECKOUT_INPUT_FIELD[field.name]}
+                      data-cy={field.name}
+                      name={field.name}
                       className={styles.textField}
                       variant={TEXT_FIELD_VARIANT.OUTLINED}
                       label={field.label}
@@ -180,7 +171,7 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                 ))}
               </div>
             </div>
-            <DeliveryType language={language} />
+            <DeliveryType />
             <Delivery
               deliveryType={deliveryType}
               language={language}
@@ -192,26 +183,26 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               setFieldValue={setFieldValue}
             />
             <div className={styles.contactPaymentInfo}>
-              <h2 className={styles.title}>{CHECKOUT_TITLES[language].payment}</h2>
+              <h2 className={styles.title}>{t('checkout.checkoutTitles.payment')}</h2>
               <FormControl
                 error={touched.paymentMethod && !!errors.paymentMethod}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 className={styles.formControl}
               >
                 <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
-                  {CHECKOUT_TEXT_FIELDS[language].paymentMethod}
+                  {t('checkout.checkoutTextFields.paymentMethod')}
                 </InputLabel>
                 <Select
-                  label={CHECKOUT_TEXT_FIELDS[language].paymentMethod}
+                  label={t('checkout.checkoutTextFields.paymentMethod')}
                   className={styles.paymentSelect}
-                  data-cy={CHECKOUT_INPUT_FIELD.paymentMethod}
-                  name={CHECKOUT_INPUT_FIELD.paymentMethod}
+                  data-cy='paymentMethod'
+                  name='paymentMethod'
                   value={values.paymentMethod}
                   onChange={handleChange}
                 >
-                  {Object.values(CHECKOUT_PAYMENT[language]).map((value) => (
-                    <MenuItem key={value} value={value}>
-                      {value}
+                  {Object.values(checkoutPayMethod).map((value) => (
+                    <MenuItem key={value.label} value={value.label}>
+                      {t(`checkout.checkoutPayment.${value.label}`)}
                     </MenuItem>
                   ))}
                 </Select>
@@ -223,12 +214,12 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
               </FormControl>
             </div>
             <div className={styles.contactPaymentInfo}>
-              <h2 className={styles.title}>{CHECKOUT_TITLES[language].orderComment}</h2>
+              <h2 className={styles.title}>{t('checkout.checkoutTitles.orderComment')}</h2>
               <div>
                 <TextField
                   size={TEXT_FIELD_SIZE.SMALL}
-                  data-cy={CHECKOUT_INPUT_FIELD.userComment}
-                  name={CHECKOUT_INPUT_FIELD.userComment}
+                  data-cy='userComment'
+                  name='userComment'
                   multiline
                   rows={4}
                   className={styles.textAreaField}
@@ -244,18 +235,18 @@ const CheckoutForm = ({ language, isLightTheme, currency, cartItems, deliveryTyp
                 )}
               </div>
               <p className={styles.contactInfoAdditional}>
-                {CHECKOUT_ADDITIONAL_INFORMATION[language].additionalInfo}
+                {t('checkout.checkoutAdditionalInfo.additionalInfo')}
               </p>
             </div>
           </Grid>
           <Grid item className={styles.deliveryContainer}>
             <div className={styles.checkoutYourOrderTitleData}>
-              <h2 className={styles.title}>{CHECKOUT_TITLES[language].yourOrderTitle}</h2>
+              <h2 className={styles.title}>{t('checkout.checkoutTitles.yourOrderTitle')}</h2>
               <div className={styles.checkoutTitleLine} />
             </div>
             <div className={styles.submitInfo}>
               <div className={styles.totalSum}>
-                <h4 className={styles.totalSumTitle}>{CHECKOUT_TITLES[language].totalPrice}</h4>
+                <h4 className={styles.totalSumTitle}>{t('common.toPay')}</h4>
                 <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
                   {Math.round(totalPriceToPay)}
                   {'\u00A0'}

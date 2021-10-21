@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 
 import {
   CHECKOUT_BUTTON,
-  CHECKOUT_INPUT_FIELD,
   CHECKOUT_PAYMENT,
   CHECKOUT_TEXT_FIELDS,
   CHECKOUT_TITLES
@@ -11,6 +10,7 @@ import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { COURIER } from '../const/checkout';
 import { MATERIAL_UI_COLOR } from '../const/material-ui';
+import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
 export const initialValues = {
   firstName: '',
@@ -143,47 +143,47 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
 });
 
 export const checkoutFormBtnValue = (values, language) =>
-  values.paymentMethod === '' || values.paymentMethod === CHECKOUT_PAYMENT[language].cash
+  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash.label
     ? CHECKOUT_BUTTON[language].confirmOrder
     : CHECKOUT_BUTTON[language].payOrder;
 
 export const courierInputLabels = (language) => [
   {
-    name: CHECKOUT_INPUT_FIELD.city,
+    name: 'city',
     label: CHECKOUT_TEXT_FIELDS[language].city
   },
   {
-    name: CHECKOUT_INPUT_FIELD.street,
+    name: 'street',
     label: CHECKOUT_TEXT_FIELDS[language].street
   },
   {
-    name: CHECKOUT_INPUT_FIELD.house,
+    name: 'house',
     label: CHECKOUT_TEXT_FIELDS[language].house
   },
   {
-    name: CHECKOUT_INPUT_FIELD.flat,
+    name: 'flat',
     label: CHECKOUT_TEXT_FIELDS[language].flat
   }
 ];
 
 export const userNameInputLabels = (language) => [
   {
-    name: CHECKOUT_INPUT_FIELD.firstName,
+    name: 'firstName',
     label: CHECKOUT_TEXT_FIELDS[language].firstName
   },
   {
-    name: CHECKOUT_INPUT_FIELD.lastName,
+    name: 'lastName',
     label: CHECKOUT_TEXT_FIELDS[language].lastName
   }
 ];
 
 export const userContactInputLabels = (language) => [
   {
-    name: CHECKOUT_INPUT_FIELD.email,
+    name: 'email',
     label: CHECKOUT_TEXT_FIELDS[language].email
   },
   {
-    name: CHECKOUT_INPUT_FIELD.phoneNumber,
+    name: 'phoneNumber',
     label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber
   }
 ];

@@ -1,18 +1,7 @@
 export const CHECKOUT_TITLES = {
   0: {
-    address: 'Адреса:',
-    addressHorondi: 'Львів, вул. Заводська,31',
-    orderComment: 'Коментар до замовлення',
-    checkoutTitle: 'Оформлення замовлення',
-    yourOrderTitle: 'Ваше замовлення',
     orderForm: 'Форма замовлення',
-    contactInfo: 'Контакти',
-    payment: 'Метод оплати',
     deliveryPrice: 'Ціна доставки',
-    totalPrice: 'До сплати',
-    schedule: 'Графік роботи:',
-    workDay: '10:00 - 19:00',
-    restDay: 'Вихідний',
     UAH: 'грн',
     USD: 'долл',
     region: 'Регіон',
@@ -20,45 +9,13 @@ export const CHECKOUT_TITLES = {
     deliveryAddress: 'Адреса доставки'
   },
   1: {
-    address: 'Address:',
-    addressHorondi: 'Lviv, st. Zavodska,31',
-    orderComment: 'Order Comment',
-    checkoutTitle: 'Checkout Process',
-    yourOrderTitle: 'Your order',
     orderForm: 'Order form',
-    contactInfo: 'Contact Information',
-    payment: 'Payment Method',
     deliveryPrice: 'Delivery price',
-    totalPrice: 'Total price',
-    schedule: 'Schedule:',
-    workDay: '10:00 - 19:00',
-    restDay: 'Day off',
     UAH: 'UAH',
     USD: 'USD',
     region: 'Region',
     orderNumber: 'Order № ',
     deliveryAddress: 'Delivery Address'
-  }
-};
-
-export const SCHEDULE = {
-  0: {
-    monday: 'Пн:  ',
-    tuesday: 'Вт:  ',
-    wednesday: 'Ср:  ',
-    thursday: 'Чт:  ',
-    friday: 'Пт:  ',
-    saturday: 'Сб:  ',
-    sunday: 'Нд:  '
-  },
-  1: {
-    monday: 'Mon:  ',
-    tuesday: 'Tue:  ',
-    wednesday: 'Wed:  ',
-    thursday: 'Thu:  ',
-    friday: 'Fri:  ',
-    saturday: 'Sat:  ',
-    sunday: 'Sun:  '
   }
 };
 
@@ -73,7 +30,6 @@ export const CHECKOUT_TEXT_FIELDS = {
     street: 'Вулиця *',
     flat: 'Квартира ',
     orderComment: 'Коментар до замовлення...',
-    paymentMethod: 'Виберіть метод оплати *',
     deliveryType: 'Виберіть тип доставки',
     department: 'Відділення *',
     delivery: 'Тип доставки',
@@ -91,7 +47,6 @@ export const CHECKOUT_TEXT_FIELDS = {
     street: 'Street *',
     flat: 'Apartment ',
     orderComment: 'Order comment...',
-    paymentMethod: 'Choose a payment method *',
     deliveryType: 'Select a delivery type',
     department: 'Department *',
     delivery: 'Delivery type',
@@ -126,38 +81,43 @@ export const CHECKOUT_PAYMENT = {
 };
 export const CHECKOUT_ADDITIONAL_INFORMATION = {
   0: {
-    additionalInfo: '* Замовлення буде відправлено протягом десяти робочих днів.',
     noOneCity: 'Жодного міста не знайдено',
     noOneDepartment: 'Жодного відділення не знайдено',
     noOneRegion: 'Жодної області не знайдено',
-    noOneDistrict: 'Жодного району не знайдено',
-    consent: ['Підтверджуючи замовлення, я приймаю', ' угоду користувача']
+    noOneDistrict: 'Жодного району не знайдено'
   },
   1: {
-    additionalInfo: '* Order will be shipped within 10 business days.',
     noOneCity: 'City not found',
     noOneDepartment: 'Department not found',
     noOneRegion: 'Region not found',
-    noOneDistrict: 'District not found',
-    consent: ['Making order you agree with', ' terms and conditions']
+    noOneDistrict: 'District not found'
   }
 };
-
-export const CHECKOUT_INPUT_FIELD = {
-  firstName: 'firstName',
-  lastName: 'lastName',
-  email: 'email',
-  phoneNumber: 'phoneNumber',
-  city: 'city',
-  street: 'street',
-  house: 'house',
-  flat: 'flat',
-  userComment: 'userComment',
-  paymentMethod: 'paymentMethod',
-  courierOffice: 'courierOffice',
-  region: 'region',
-  district: 'district',
-  regionId: 'regionId',
-  districtId: 'districtId',
-  cityId: 'cityId'
+export const CHECKOUT_ERROR = {
+  0: {
+    requiredField: 'Поле не повинне бути порожнім',
+    firstName: 'Поле повинно містити від 2 до 30 символів',
+    lastName: 'Поле повинно містити від 2 до 30 символів',
+    email: 'Некоректний формат електронної пошти ',
+    phoneNumber: 'Некоректний формат номеру телефону',
+    userComment: 'Поле повинно містити від 2 до 500 символів',
+    city: 'Поле повинно містити від 2 до 50 символів',
+    street: 'Поле повинно містити від 2 до 100 символів',
+    house: 'Мінімальне значення не повинно бути меншим 1 символу',
+    flat: 'Мінімальне значення не повинно бути меншим 1 символу',
+    onlyLetter: 'Поле повинно містити лише літери'
+  },
+  1: {
+    requiredField: 'Field should not to be empty',
+    firstName: 'Field should contain from 2 to 30 characters',
+    lastName: 'Field should contain from 2 to 30 characters',
+    email: `Incorrect email format`,
+    phoneNumber: 'Incorrect phone number format',
+    userComment: 'Field should contain from 2 to 500 characters',
+    city: 'Field should contain from 2 to 50 characters',
+    street: 'Field should contain from 2 to 100 characters',
+    house: 'Min value is 1 character',
+    flat: 'Min value is 1 character',
+    onlyLetter: 'Field should contain only letters'
+  }
 };

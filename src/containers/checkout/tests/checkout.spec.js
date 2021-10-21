@@ -1,15 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Checkout from '../checkout';
+import CheckoutForm from '../checkout-form';
+import Loader from '../../../components/loader';
 
 jest.mock('react-redux');
-jest.mock('../checkout.styles.js', () => ({ useStyles: () => ({}) }));
+jest.mock('../checkout.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 const mockUseContext = jest.fn().mockImplementation(() => ({
   isLight: true
 }));
 React.useContext = mockUseContext;
 
-const dispatch = jest.fn();
 const state = {
   language: 1,
   currency: 0,
@@ -19,26 +20,20 @@ const state = {
   isOrderCreated: false,
   order: null
 };
+const mockDispatch = jest.fn();
 
-useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => state);
+useDispatch.mockReturnValue(mockDispatch);
 
-let wrapper;
-
-describe('Checkout component tests', () => {
-  beforeEach(() => {
-    wrapper = shallow(<Checkout />);
+describe('<Checkout />', () => {
+  it('should render one <CheckoutForm />', () => {
+    const wrapper = shallow(<Checkout />);
+    expect(wrapper.find(CheckoutForm)).toHaveLength(1);
+    expect(wrapper.find(Loader)).toHaveLength(0);
   });
-
-  afterEach(() => {
-    wrapper = null;
-  });
-
-  it('Should render Checkout', () => {
-    expect(wrapper).toBeDefined();
-  });
-
-  it('Should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
+  it('should render one <Loader />', () => {
+    state.loading = true;
+    const wrapper = shallow(<Checkout />);
+    expect(wrapper.find(Loader)).toHaveLength(1);
   });
 });

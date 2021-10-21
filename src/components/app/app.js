@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
+import useTranslationsLoad from '../../hooks/use-translations-load';
+
 import ThemeContext from '../../context/theme-context';
 import CategoriesContextProvider from '../../context/categories/categories-context';
 import Routes from '../../routes';
@@ -11,7 +13,6 @@ import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { preserveUser } from '../../redux/user/user.actions';
-import { getContacts } from '../../redux/contacts/contacts.actions';
 import { selectLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
@@ -27,9 +28,9 @@ const App = () => {
   }
   const themeValue = theme(localStorageThemeMode);
 
+  useTranslationsLoad();
   useEffect(() => {
     dispatch(preserveUser());
-    dispatch(getContacts());
   }, []);
 
   useEffect(() => {

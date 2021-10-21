@@ -4,7 +4,27 @@
         "cash": "Cash"
     },
     "checkoutTitles": {
-        "delivery": "Delivery Method"
+        "delivery": "Delivery Method",
+        "checkoutTitle": "Checkout Process",
+        "contactInfo": "Contact Information",
+        "payment": "Payment Method",
+        "orderComment": "Order Comment",
+        "yourOrderTitle": "Your order",
+        "schedule": "Schedule:",
+        "address": "Address:",
+        "addressHorondi": "Lviv, st. Zavodska, 31",
+        "workDay": "10:00 - 19:00",
+        "restDay": "Day off"
+    },
+    "checkoutTextFields": {
+        "paymentMethod": "Choose a payment method *"
+    },
+    "checkoutAdditionalInfo": {
+        "additionalInfo": "* Order will be shipped within 10 business days.",
+        "consent": [
+            "Making order you agree with",
+            " terms and conditions"
+        ]
     },
     "deliveryType": {
         "novaPost": "Nova Poshta",
@@ -12,5 +32,14 @@
         "selfPickup": "Self pickup",
         "novaPostCourier": "Nova Poshta Courier",
         "ukrPostCourier": "Ukrposhta Courier"
+    },
+    "schedule": {
+        "monday": "Mon:  ",
+        "tuesday": "Tue:  ",
+        "wednesday": "Wed:  ",
+        "thursday": "Thu:  ",
+        "friday": "Fri:  ",
+        "saturday": "Sat:  ",
+        "sunday": "Sun:  "
     }
 }

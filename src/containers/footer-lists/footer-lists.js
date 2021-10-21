@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
-
 import routes from '../../const/routes';
 import { countPerPage } from '../../configs';
 import { footerNavItems } from '../footer-links/const';

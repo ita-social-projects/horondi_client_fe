@@ -17,7 +17,7 @@ export const MailForm = ({ themeMode, contacts, cancelIconHandler }) => {
         <span className={style.contactsTitle}>{t('chat.ourContacts')}</span>
         {contacts.map((contact) => (
           <span className={style.phoneNumbers} key={contact.phoneNumber}>
-            +{contact.phoneNumber}
+            {contact.phoneNumber}
           </span>
         ))}
       </div>

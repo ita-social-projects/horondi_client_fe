@@ -12,11 +12,11 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import HistoryIcon from '@material-ui/icons/History';
 
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './header-profile.styles';
 import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
-import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
 import routes from '../../const/routes';
 import ThemeContext from '../../context/theme-context';
@@ -31,13 +31,13 @@ const {
 } = routes;
 
 const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
-  const { userData, language } = useSelector(({ User, Language }) => ({
-    userData: User.userData,
-    language: Language.language
+  const { userData } = useSelector((User) => ({
+    userData: User.userData
   }));
 
   const [lightMode, setLightMode] = useContext(ThemeContext);
   const [anchorEl, setAnchorEl] = useState(null);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const styles = useStyles({ fromSideBar });
@@ -81,7 +81,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
 
   const PROFILE_STATIC_DATA = [
     {
-      value: PROFILE_OPTIONS_VALUES[language].wishlist,
+      value: t('wishlist.wishlistTitles.filled'),
       icon: <FavoriteIcon />,
       clickHandler: () => {
         setIsMenuOpen(false);
@@ -89,7 +89,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       }
     },
     {
-      value: PROFILE_OPTIONS_VALUES[language].changeTheme,
+      value: t('headerProfile.changeTheme'),
       icon: themeIcon,
       clickHandler: handleChangeTheme
     }
@@ -97,7 +97,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
 
   const PROFILE_NOT_LOGGED_DATA = [
     {
-      value: PROFILE_OPTIONS_VALUES[language].logIn,
+      value: t('common.logIn'),
       icon: <ExitToAppIcon />,
       clickHandler: () => {
         setIsMenuOpen(false);
@@ -113,7 +113,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
 
   const PROFILE_LOGGED_DATA = [
     {
-      value: PROFILE_OPTIONS_VALUES[language].profile,
+      value: t('headerProfile.profile'),
       icon: <PersonOutlineIcon />,
       clickHandler: () => {
         setIsMenuOpen(false);
@@ -121,7 +121,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       }
     },
     {
-      value: PROFILE_OPTIONS_VALUES[language].orderHistory,
+      value: t('headerProfile.orderHistory'),
       icon: <HistoryIcon />,
       clickHandler: () => {
         setIsMenuOpen(false);
@@ -129,7 +129,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       }
     },
     {
-      value: PROFILE_OPTIONS_VALUES[language].logOut,
+      value: t('common.logOut'),
       icon: <ExitToAppIcon />,
       clickHandler: () => {
         setIsMenuOpen(false);
@@ -142,7 +142,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     () =>
       PROFILE_STATIC_DATA.concat(userData ? PROFILE_LOGGED_DATA : PROFILE_NOT_LOGGED_DATA).map(
         ({ value, icon, clickHandler }) => (
-          <MenuItem key={value} onClick={clickHandler} disableGutters>
+          <MenuItem key={value} onClick={clickHandler} disableGutters data-cy='menuItem'>
             {icon}
             {value}
           </MenuItem>
@@ -154,11 +154,17 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   return (
     <div className={styles.profile} data-cy='profile'>
       {userData ? (
-        <PersonIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} />
+        <PersonIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} data-cy='iconIn' />
       ) : (
-        <PersonOutlineIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} />
+        <PersonOutlineIcon
+          onClick={handleClick}
+          onKeyDown={handleClick}
+          tabIndex={0}
+          data-cy='iconOut'
+        />
       )}
       <Menu
+        data-cy='menu'
         className={styles.list}
         anchorEl={anchorEl}
         keepMounted

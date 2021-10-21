@@ -17,9 +17,7 @@ const Delivery = ({
   setFieldValue
 }) => (
   <>
-    {deliveryType === deliveryTypes.SELFPICKUP && (
-      <SelfPickup language={language} isLightTheme={isLightTheme} />
-    )}
+    {deliveryType === deliveryTypes.SELFPICKUP && <SelfPickup isLightTheme={isLightTheme} />}
 
     {deliveryType === deliveryTypes.NOVAPOST && (
       <NovaPost

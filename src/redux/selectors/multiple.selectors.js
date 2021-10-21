@@ -1,12 +1,3 @@
-export const selectLanguageAndContactsLoadingContacts = ({
-  Language,
-  Contacts: { loading, contacts }
-}) => ({
-  contacts,
-  loading,
-  language: Language.language
-});
-
 export const selectProductsIdCommentsLanguageUserData = ({ Language, User, Comments }) => ({
   commentsLoading: Comments.commentsLoading,
   comments: Comments.comments,
@@ -24,7 +15,7 @@ export const selectCurrencyProductsCategoryFilter = ({
   Products: { productToSend }
 }) => ({
   currency: Currency.currency,
-  productToSend,
+  productToSend
 });
 
 export const selectLanguageProductsUserWishlist = ({

@@ -5,6 +5,7 @@ exports[`<HeaderProfile /> Should match snapshot 1`] = `
   data-cy="profile"
 >
   <Memo(ForwardRef(PersonIcon))
+    data-cy="iconIn"
     onClick={[Function]}
     onKeyDown={[Function]}
     tabIndex={0}
@@ -17,6 +18,7 @@ exports[`<HeaderProfile /> Should match snapshot 1`] = `
         "vertical": "bottom",
       }
     }
+    data-cy="menu"
     elevation={0}
     getContentAnchorEl={null}
     keepMounted={true}
@@ -30,44 +32,49 @@ exports[`<HeaderProfile /> Should match snapshot 1`] = `
     }
   >
     <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
       disableGutters={true}
-      key="Список уподобань"
+      key="wishlist.wishlistTitles.filled"
       onClick={[Function]}
     >
       <Memo(ForwardRef(FavoriteIcon)) />
-      Список уподобань
+      wishlist.wishlistTitles.filled
     </WithStyles(ForwardRef(MenuItem))>
     <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
       disableGutters={true}
-      key="Змінити тему"
+      key="headerProfile.changeTheme"
       onClick={[Function]}
     >
       <Memo(ForwardRef(Brightness7Icon)) />
-      Змінити тему
+      headerProfile.changeTheme
     </WithStyles(ForwardRef(MenuItem))>
     <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
       disableGutters={true}
-      key="Профіль"
+      key="headerProfile.profile"
       onClick={[Function]}
     >
       <Memo(ForwardRef(PersonOutlineIcon)) />
-      Профіль
+      headerProfile.profile
     </WithStyles(ForwardRef(MenuItem))>
     <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
       disableGutters={true}
-      key="Історія замовлень"
+      key="headerProfile.orderHistory"
       onClick={[Function]}
     >
       <Memo(ForwardRef(HistoryIcon)) />
-      Історія замовлень
+      headerProfile.orderHistory
     </WithStyles(ForwardRef(MenuItem))>
     <WithStyles(ForwardRef(MenuItem))
+      data-cy="menuItem"
       disableGutters={true}
-      key="Вийти"
+      key="common.logOut"
       onClick={[Function]}
     >
       <Memo(ForwardRef(ExitToAppIcon)) />
-      Вийти
+      common.logOut
     </WithStyles(ForwardRef(MenuItem))>
   </WithStyles(ForwardRef(Menu))>
 </div>

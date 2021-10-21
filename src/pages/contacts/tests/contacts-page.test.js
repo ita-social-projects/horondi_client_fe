@@ -1,34 +1,39 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
+
 import Contacts from '../contacts';
 
-jest.mock('react-redux');
-jest.mock('../contacts.styles', () => ({
-  useStyles: () => ({})
-}));
-
-const dispatch = jest.fn();
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => ({
+let component;
+const useQueryData = {
   loading: false,
-  contacts: []
-}));
+  error: false,
+  data: { getContacts: [{}] }
+};
 
-describe('<Contacts/>', () => {
-  it('should render contacts', () => {
-    const component = shallow(<Contacts />);
+jest.mock('@apollo/client');
+
+describe('slider home page tests', () => {
+  it('should match snapshot', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+    component = shallow(<Contacts />);
     expect(component).toBeDefined();
   });
 
-  it('should render page title if fromCheckout is false', () => {
-    const component = shallow(<Contacts fromCheckout={false} />);
-    const pageTitle = component.find('h2');
-    expect(pageTitle.length).toBe(1);
+  it('should cover other branches', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      loading: true
+    }));
+    component = shallow(<Contacts />);
   });
 
-  it('shouldn`t render page title if fromCheckout is true', () => {
-    const component = shallow(<Contacts fromCheckout />);
-    const pageTitle = component.find('h2');
-    expect(pageTitle.length).toBe(0);
+  it('should cover rest branches', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      error: {}
+    }));
+    component = shallow(<Contacts />);
   });
 });

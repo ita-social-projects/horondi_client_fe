@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { Backdrop, Card, Tooltip } from '@material-ui/core';
+import { Card, Tooltip } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './contacts.styles';
-import Loader from '../../components/loader';
-import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 import { GOOGLE_MAP_URL } from '../../configs/index';
+import { getContacts } from './operations/contacts.queries';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const Contacts = ({ fromCheckout }) => {
+  const styles = useStyles();
+  const { t, i18n } = useTranslation();
+
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
-  const { t } = useTranslation();
+  const [contacts, setContacts] = useState([]);
 
-  const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
+  const language = i18n.language === 'ua' ? 0 : 1;
 
-  const styles = useStyles();
-  if (loading) {
-    return (
-      <Backdrop className={styles.backdrop} open={loading} invisible>
-        <Loader color='inherit' />
-      </Backdrop>
-    );
-  }
+  const { loading, error } = useQuery(getContacts, {
+    onCompleted: (data) => setContacts(data.getContacts.items)
+  });
+
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   const onLoadImageError = () => {
     setImageStatus(false);

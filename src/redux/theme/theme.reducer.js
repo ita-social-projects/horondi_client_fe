@@ -10,5 +10,6 @@ export const themeState = (state = initialState, { type, payload } = {}) => {
       ...state,
       filterMenuStatus: payload
     };
-  } return state;
+  }
+  return state;
 };

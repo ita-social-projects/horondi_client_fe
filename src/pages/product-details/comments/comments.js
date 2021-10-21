@@ -1,15 +1,14 @@
+
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
 import { Button, TextField, Tooltip } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/client';
 import { useStyles } from './comments.styles';
-
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../configs';
 import { COMMENTS } from '../../../translations/product-details.translations';
 import useCommentValidation from '../../../hooks/use-comment-validation';
@@ -32,7 +31,7 @@ const Comments = ({ productId }) => {
   const [comments, setComments] = useState({ items: [], count: 0 });
   const [currentLimit, setCurrentLimit] = useState(10);
   const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
-
+  const { t } = useTranslation();
   const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
       filter: { productId, filters: false },
@@ -52,7 +51,6 @@ const Comments = ({ productId }) => {
   });
 
   const { isLoading } = useIsLoading([addCommentLoading, getCommentsLoading]);
-
   const { _id: userId } = userData || {};
 
   const onSubmit = async (formValues) => {
@@ -82,7 +80,12 @@ const Comments = ({ productId }) => {
     setRate(handleUserLogin(userData));
   }, [userData]);
 
-  const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
+  const rateTip = useMemo(() => {
+    if (!userId) {
+      return t('product.comments.unregisteredTip');
+    }
+    return t('product.comments.successfulTip');
+  }, [language, userId]);
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
@@ -100,7 +103,7 @@ const Comments = ({ productId }) => {
 
   return (
     <div className={styles.comment}>
-      <h2 className={styles.title}>{COMMENTS[language].title}</h2>
+      <h2 className={styles.title}>{t('product.comments.title')}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
           <Rating
@@ -125,7 +128,7 @@ const Comments = ({ productId }) => {
                     onBlur={handleBlur}
                     value={values[name]}
                     disabled={!userData}
-                    label={COMMENTS[language][name]}
+                    label={t(`product.comments.${name}`)}
                     error={!!errors[name]}
                     helperText={handleHelperText(errors[name])}
                     multiline={multiline}
@@ -139,7 +142,7 @@ const Comments = ({ productId }) => {
         </div>
 
         <div className={styles.submit}>
-          <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredComment')}>
+          <Tooltip title={userData ? '' : t(`product.tooltips.unregisteredComment`)}>
             <div>
               <Button
                 type='submit'
@@ -147,7 +150,7 @@ const Comments = ({ productId }) => {
                 disabled={!userData || isLoading}
                 onClick={() => setShouldValidate(true)}
               >
-                {COMMENTS[language].submit}
+                {t('product.comments.submit')}
               </Button>
             </div>
           </Tooltip>
@@ -165,7 +168,7 @@ const Comments = ({ productId }) => {
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
           <span onClick={handleCommentsReload} className={styles.loadMoreText}>
-            {limitOption ? null : COMMENTS[language].loadMore}
+            {limitOption ? null : t('product.comments.loadMore')}
           </span>
         </div>
       )}

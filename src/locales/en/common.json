@@ -17,6 +17,9 @@
   "newPass": "New password",
   "confirmPass": "Confirm password",
   "change": "Change",
+  "prev": "Previous",
+  "next": "Next",
+  "close": "Close",
   "buttons": {
     "confirm": "Yes",
     "cancel": "No"
@@ -31,6 +34,30 @@
   "sortBy": "Sort by:",
   "popular": "Hot Products",
   "category": "Category",
+  "toPay": "Total price",
+  "logIn": "Log in",
+  "logOut": "Log out",
   "name": "Name",
-  "email": "Email"
+  "email": "Email",
+  "dialog": {
+    "title": "Delete comment?",
+    "description":
+      "Are you sure you want to delete the comment? After deleting you will not be able to restore the comment."
+},
+   "dialogRiply":{
+    "title": "Delete answer?",
+    "description":
+      "Are you sure you want to delete the answer? After deleting you will not be able to restore the reply."
+},
+   "userData": {
+     "firstName": "Deleted User",
+     "email": "Deleted Email"
+},
+    "reply":{
+      "submit": "Leave reply",
+      "loadMore": "More answers",
+      "hideBtn": "Hide answers",
+      "text": "Share your thoughts with others",
+      "answers": "Count of answers"
+}
 }

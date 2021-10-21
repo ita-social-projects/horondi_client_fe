@@ -13,16 +13,16 @@ import ThemeContext from '../../context/theme-context';
 const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
-  const { language, currency, cartItems, deliveryType, loading, isOrderCreated, order } =
-    useSelector(({ Language, Currency, Cart, Order }) => ({
-      language: Language.language,
+  const { currency, cartItems, deliveryType, loading, isOrderCreated, order } = useSelector(
+    ({ Currency, Cart, Order }) => ({
       currency: Currency.currency,
       cartItems: Cart.list,
       deliveryType: Cart.deliveryType,
       loading: Order.loading,
       isOrderCreated: Order.isOrderCreated,
       order: Order.order
-    }));
+    })
+  );
   const isLightTheme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
@@ -44,7 +44,6 @@ const Checkout = () => {
       {!loading && (
         <div className={styles.checkoutContainer}>
           <CheckoutForm
-            language={language}
             isLightTheme={isLightTheme}
             currency={currency}
             cartItems={cartItems}

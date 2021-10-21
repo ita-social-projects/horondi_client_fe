@@ -1,4 +1,3 @@
-
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -10,16 +9,13 @@ import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../configs';
-import { COMMENTS } from '../../../translations/product-details.translations';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 import {
   handleArrowIcon,
   handleClassName,
   handleHelperText,
-  handleRateTip,
   handleTextField,
-  handleTitleSubmit,
   handleUserLogin
 } from '../../../utils/handle-comments';
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
@@ -32,6 +28,7 @@ const Comments = ({ productId }) => {
   const [currentLimit, setCurrentLimit] = useState(10);
   const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
   const { t } = useTranslation();
+
   const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
       filter: { productId, filters: false },

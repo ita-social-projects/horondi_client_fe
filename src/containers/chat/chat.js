@@ -11,6 +11,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 import { CHAT_FACEBOOK_DATA } from '../../configs/index';
+import ThemeContext from '../../context/theme-context';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
@@ -18,6 +19,8 @@ export const Chat = () => {
   const { language } = useSelector((state) => ({
     language: state.Language.language
   }));
+
+  const themeMode = useContext(ThemeContext);
 
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);

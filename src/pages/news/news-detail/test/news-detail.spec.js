@@ -1,24 +1,24 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { useQuery } from '@apollo/client';
-import { useSelector } from 'react-redux';
 import NewsDetail from '../news-detail';
+
+const useState = jest.fn();
+const setState = jest.fn();
+
+jest.mock('../../news-detail/news-detail.style', () => ({ useStyles: () => ({}) }));
+jest.mock('@apollo/client');
+jest.mock('react-redux');
+
+useState.mockImplementation(() => [[], setState]);
 
 let wrapper;
 const useQueryData = {
   loading: false,
   error: false,
-  data: { getNewsById: {} }
+  data: {}
 };
 
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: () => ({ language: 0 })
-}));
-
-jest.mock('@apollo/client');
-
-describe('', () => {
+describe('test newsDetail', () => {
   it('', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
@@ -27,19 +27,10 @@ describe('', () => {
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
   });
 
-  it('', () => {
+  it('should cover', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,
       loading: true
-    }));
-
-    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
-  });
-
-  it('', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      error: true
     }));
 
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);

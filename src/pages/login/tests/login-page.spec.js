@@ -13,20 +13,6 @@ jest.mock('formik');
 jest.mock('../../../services/local-storage.service');
 
 const dispatch = jest.fn();
-
-const storage = {
-  loginError: '',
-  userLoading: false,
-  snackBarStatus: false,
-  snackBarSeverity: '',
-  snackBarMessage: '',
-  language: 0
-};
-
-let theme = LIGHT_THEME;
-
-getFromLocalStorage.mockImplementation(() => theme);
-
 const mockSubmit = jest.fn();
 const mockChange = jest.fn();
 const mockSetFieldValue = jest.fn();
@@ -40,24 +26,37 @@ const formik = {
   setFieldValue: mockSetFieldValue,
   handleBlur: mockBlur
 };
+const storage = {
+  loginError: '',
+  userLoading: false,
+  snackBarStatus: false,
+  snackBarSeverity: '',
+  snackBarMessage: '',
+  language: 0
+};
+
+let theme = LIGHT_THEME;
+let component;
+
+getFromLocalStorage.mockImplementation(() => theme);
+
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => storage);
 useFormik.mockImplementation(() => formik);
 
 describe('Login page test', () => {
+  beforeEach(() => {
+    component = shallow(<Login />);
+  });
   it('Should render with Light theme', () => {
-    const component = shallow(<Login />);
     expect(component.find('form')).toBeDefined();
   });
-
   it('Should render with Dark theme', () => {
     theme = DARK_THEME;
-    const component = shallow(<Login />);
     expect(component.find('form')).toBeDefined();
   });
 
   it('Should simulate submit event', async () => {
-    const component = shallow(<Login />);
     const input = component.find('[data-cy="staySignedIn"]');
     input.simulate('change', { target: { value: 'Hello' } });
   });
@@ -69,23 +68,20 @@ describe('Login page test', () => {
     storage.userLoading = false;
   });
 
-  it('should simulate change', async () => {
-    const component = shallow(<Login />);
+  it('email should call useFormik method onChange', async () => {
     const inputEmail = component.find('#email');
     const value = { target: { value: 'Hello' } };
     inputEmail.simulate('change', value);
     expect(mockChange).toHaveBeenCalledWith(value);
   });
 
-  it('should simulate click', () => {
-    const component = shallow(<Login />);
+  it('input form should call useFormik method onClick', () => {
     const submitButton = component.find(Button);
     submitButton.simulate('click');
     expect(mockSubmit).toHaveBeenCalled();
   });
 
-  it('should simulate blur', () => {
-    const component = shallow(<Login />);
+  it('email should call useFormik method onBlur', () => {
     const submitButton = component.find(Button);
     const inputEmail = component.find('#email');
     submitButton.simulate('click');

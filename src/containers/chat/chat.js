@@ -16,6 +16,8 @@ import ThemeContext from '../../context/theme-context';
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
+  const [contacts, setContacts] = useState([]);
+  
   const { language } = useSelector((state) => ({
     language: state.Language.language
   }));
@@ -25,7 +27,6 @@ export const Chat = () => {
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
-  const [contacts, setContacts] = useState([]);
   const { loading, error } = useQuery(getContactsForChat, {
     onCompleted: (data) => setContacts(data.getContacts.items)
   });

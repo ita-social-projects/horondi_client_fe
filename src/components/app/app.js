@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
+import useTranslationsLoad from '../../hooks/use-translations-load';
+
 import ThemeContext from '../../context/theme-context';
 import CategoriesContextProvider from '../../context/categories/categories-context';
 import Routes from '../../routes';
@@ -26,6 +28,7 @@ const App = () => {
   }
   const themeValue = theme(localStorageThemeMode);
 
+  useTranslationsLoad();
   useEffect(() => {
     dispatch(preserveUser());
   }, []);

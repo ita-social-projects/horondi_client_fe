@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBarListItem from '../search-bar-list-item';
 
-const basePrice = 1312;
+const minPrice = 1312;
 
 jest.mock('react-redux');
 
@@ -17,7 +17,17 @@ const mockStore = {
 const product = {
   images: { primary: { small: 'test' } },
   name: { 0: { value: 'test' }, 1: { value: 'test' } },
-  basePrice: { 0: { value: basePrice, currency: 'test' } }
+  basePrice: { 0: { value: 0, currency: 'UAH' } },
+  sizes: [
+    {
+      price: [
+        {
+          value: minPrice,
+          currency: 'UAH'
+        }
+      ]
+    }
+  ]
 };
 const mockDispatch = jest.fn();
 
@@ -32,6 +42,6 @@ describe('Register component tests', () => {
   });
 
   it('Should display correct price', () => {
-    expect(wrapper.find('div.makeStyles-title-4 > div').text()).toContain(basePrice);
+    expect(wrapper.find('div.makeStyles-title-4 > div').text()).toContain(minPrice);
   });
 });

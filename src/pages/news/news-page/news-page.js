@@ -1,35 +1,23 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getNews } from '../../../redux/news/news.actions';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './news-page.style';
 import NewsItem from '../news-item';
-import { Loader } from '../../../components/loader/loader';
+import { getAllNews } from '../operations/news-queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const NewsPage = () => {
-  const { newslist, loading, language } = useSelector(({ News, Language }) => ({
-    newslist: News.list.sort((a, b) => b.date - a.date),
-    loading: News.loading,
-    language: Language.language
-  }));
+  const [news, setNews] = useState([]);
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getNews());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
+  const { loading, error } = useQuery(getAllNews, {
+    onCompleted: (data) => setNews(data.getAllNews.items)
+  });
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  if (loading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
-
-  const newsItems = newslist.map(({ _id, date, author, image, title, text, slug }) => (
+  const newsItems = news?.map(({ _id, date, author, image, title, text, slug }) => (
     <NewsItem
       date={date}
       key={_id}
@@ -41,6 +29,9 @@ const NewsPage = () => {
       text={text}
     />
   ));
+
+  if (loading || error) return errorOrLoadingHandler(error, loading);
+
   return (
     <>
       <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>

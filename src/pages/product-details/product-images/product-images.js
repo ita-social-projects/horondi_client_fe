@@ -58,9 +58,14 @@ const ProductImages = ({ images }) => {
     .map((image, i) => {
       if (i === 2) {
         return (
-          <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)} >
-            <div className={styles.lastImageText}>View All Photos</div>
-            <img className={styles.lastImage} src={image.src} alt={t('product.imgAltInfo')} data-cy='image'/>
+          <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
+            <div className={styles.lastImageText}>{t('product.allPhotos')}</div>
+            <img
+              className={styles.lastImage}
+              src={image.src}
+              alt={t('product.imgAltInfo')}
+              data-cy='image'
+            />
           </div>
         );
       }
@@ -109,7 +114,7 @@ const ProductImages = ({ images }) => {
             <img
               src={IMG_URL + initImages[currImg]}
               className={styles.primaryImage}
-              alt={initImages[currImg]}
+              alt={t('product.imgAltInfo')}
             />
           </div>
           <button

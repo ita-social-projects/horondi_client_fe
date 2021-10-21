@@ -1,5 +1,6 @@
 {
     "imgAltInfo": "Product image",
+    "allPhotos": "View All Photos",
     "pattern": "Pattern",
     "productDescription": {
         "description": "Product description",
@@ -53,6 +54,9 @@
         "successfulTip": "Set rate",
         "loadMore": "Load more...",
         "hideBtn": "Hide comments"
+    },
+    "images": {
+        
     }
 
 }

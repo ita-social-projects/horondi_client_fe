@@ -371,15 +371,18 @@ exports[`Should render 404 page 1`] = `
                  
                 <Link
                   className="makeStyles-link-2"
+                  data-cy="home"
                   to="/"
                 >
                   <LinkAnchor
                     className="makeStyles-link-2"
+                    data-cy="home"
                     href="/"
                     navigate={[Function]}
                   >
                     <a
                       className="makeStyles-link-2"
+                      data-cy="home"
                       href="/"
                       onClick={[Function]}
                     >
@@ -390,6 +393,7 @@ exports[`Should render 404 page 1`] = `
               </p>
               <WithStyles(ForwardRef(Button))
                 className="makeStyles-button-3"
+                data-cy="back"
                 onClick={[Function]}
                 variant="contained"
               >
@@ -428,12 +432,14 @@ exports[`Should render 404 page 1`] = `
                       "textSizeSmall": "MuiButton-textSizeSmall",
                     }
                   }
+                  data-cy="back"
                   onClick={[Function]}
                   variant="contained"
                 >
                   <WithStyles(ForwardRef(ButtonBase))
                     className="MuiButton-root MuiButton-contained makeStyles-button-3"
                     component="button"
+                    data-cy="back"
                     disabled={false}
                     focusRipple={true}
                     focusVisibleClassName="Mui-focusVisible"
@@ -450,6 +456,7 @@ exports[`Should render 404 page 1`] = `
                         }
                       }
                       component="button"
+                      data-cy="back"
                       disabled={false}
                       focusRipple={true}
                       focusVisibleClassName="Mui-focusVisible"
@@ -458,6 +465,7 @@ exports[`Should render 404 page 1`] = `
                     >
                       <button
                         className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-button-3"
+                        data-cy="back"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}

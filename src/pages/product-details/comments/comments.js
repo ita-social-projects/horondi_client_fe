@@ -28,9 +28,8 @@ import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import { useIsLoading } from '../../../hooks/useIsLoading';
 
 const Comments = ({ productId }) => {
-  const commentsInit = { items: [], count: 0 };
   const styles = useStyles();
-  const [comments, setComments] = useState(commentsInit);
+  const [comments, setComments] = useState({ items: [], count: 0 });
   const [currentLimit, setCurrentLimit] = useState(10);
   const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
 
@@ -52,7 +51,7 @@ const Comments = ({ productId }) => {
     onError: (err) => errorOrLoadingHandler(err)
   });
 
-  const isLoading = useIsLoading([addCommentLoading, getCommentsLoading]);
+  const { isLoading } = useIsLoading([addCommentLoading, getCommentsLoading]);
 
   const { _id: userId } = userData || {};
 
@@ -86,13 +85,10 @@ const Comments = ({ productId }) => {
 
   const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
 
-  const commentsLength = currentLimit;
-  const commentsCount = comments.count;
-
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
   ));
-  const limitOption = commentsList.length === comments.count && comments.count > commentsCount;
+  const limitOption = commentsList.length === comments.count;
 
   const handleCommentsReload = () => {
     setCurrentLimit((prev) => prev + 10);
@@ -166,7 +162,7 @@ const Comments = ({ productId }) => {
       </form>
       {commentsList}
 
-      {commentsLength < commentsCount && (
+      {currentLimit < comments.count && (
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
           <span onClick={handleCommentsReload} className={styles.loadMoreText}>

@@ -7,5 +7,5 @@ export const useIsLoading = (loadingsArray = []) => {
     setIsLoading(loadingsArray.some((item) => item));
   }, [...loadingsArray]);
 
-  return isLoading;
+  return { isLoading };
 };

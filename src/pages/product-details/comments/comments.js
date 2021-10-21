@@ -55,10 +55,10 @@ const Comments = ({ productId }) => {
 
   const { _id: userId } = userData || {};
 
-  const onSubmit = (formValues) => {
+  const onSubmit = async (formValues) => {
     const userFields = userId ? { user: userId } : {};
 
-    addComment({
+    await addComment({
       variables: {
         ...formValues,
         ...userFields,
@@ -66,12 +66,11 @@ const Comments = ({ productId }) => {
         show: false,
         rate
       }
-    }).then(() => {
-      refetchComments().then(() => {
-        setShouldValidate(false);
-        resetForm();
-      });
     });
+    await refetchComments();
+
+    setShouldValidate(false);
+    resetForm();
   };
 
   const { values, errors, handleSubmit, handleBlur, resetForm, setFieldValue, setShouldValidate } =

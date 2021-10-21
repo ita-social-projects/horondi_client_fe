@@ -33,11 +33,11 @@ const NotFoundPage = () => {
           <h3>{t('notFoundPage.message')}</h3>
           <p>
             {t('notFoundPage.toHome')}{' '}
-            <Link className={styles.link} to={pathToMain}>
+            <Link data-cy='home' className={styles.link} to={pathToMain}>
               {t('notFoundPage.linkHome')}
             </Link>
           </p>
-          <Button className={styles.button} onClick={goBack} variant='contained'>
+          <Button data-cy='back' className={styles.button} onClick={goBack} variant='contained'>
             {t('notFoundPage.linkBack')}
           </Button>
         </div>

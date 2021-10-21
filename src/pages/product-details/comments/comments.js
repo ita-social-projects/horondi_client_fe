@@ -25,16 +25,16 @@ import {
 } from '../../../utils/handle-comments';
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import { useIsLoading } from '../../../hooks/useIsLoading';
 
 const Comments = ({ productId }) => {
   const commentsInit = { items: [], count: 0 };
   const styles = useStyles();
   const [comments, setComments] = useState(commentsInit);
-  const [commentsLoading, setCommentsLoading] = useState(true);
   const [currentLimit, setCurrentLimit] = useState(10);
   const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
 
-  const { refetch: refetchComments } = useQuery(getCommentsQuery, {
+  const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
       filter: { productId, filters: false },
       pagination: { skip, limit: currentLimit }
@@ -44,20 +44,20 @@ const Comments = ({ productId }) => {
     nextFetchPolicy: 'cache-first',
     onCompleted: (data) => {
       setComments(data.getCommentsByProduct);
-      setCommentsLoading(false);
     },
     onError: (err) => errorOrLoadingHandler(err)
   });
 
-  const [addComment] = useMutation(addCommentMutation, {
+  const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
     onError: (err) => errorOrLoadingHandler(err)
   });
+
+  const isLoading = useIsLoading([addCommentLoading, getCommentsLoading]);
 
   const { _id: userId } = userData || {};
 
   const onSubmit = (formValues) => {
     const userFields = userId ? { user: userId } : {};
-    setCommentsLoading(true);
 
     addComment({
       variables: {
@@ -69,7 +69,6 @@ const Comments = ({ productId }) => {
       }
     }).then(() => {
       refetchComments().then(() => {
-        setCommentsLoading(false);
         setShouldValidate(false);
         resetForm();
       });
@@ -99,7 +98,6 @@ const Comments = ({ productId }) => {
   const limitOption = commentsList?.length === comments?.count && comments?.count > commentsCount;
 
   const handleCommentsReload = () => {
-    setCommentsLoading(true);
     setCurrentLimit((prev) => prev + 10);
   };
 
@@ -154,7 +152,7 @@ const Comments = ({ productId }) => {
               <Button
                 type='submit'
                 className={styles.commentBtn}
-                disabled={!userData || commentsLoading}
+                disabled={!userData || isLoading}
                 onClick={() => setShouldValidate(true)}
               >
                 {COMMENTS[language].submit}
@@ -162,7 +160,7 @@ const Comments = ({ productId }) => {
             </div>
           </Tooltip>
 
-          {commentsLoading && (
+          {isLoading && (
             <div className={styles.loader}>
               <Loader width={40} height={40} heightWrap={90} />
             </div>
@@ -179,7 +177,7 @@ const Comments = ({ productId }) => {
           </span>
         </div>
       )}
-      {commentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
+      {isLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
       <SnackbarItem />
     </div>
   );

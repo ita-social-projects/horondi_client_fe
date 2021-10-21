@@ -69,8 +69,50 @@ useSelector.mockImplementation(() => ({
 }));
 
 describe('Product info', () => {
+  const props = {
+    product: {
+      rate: 5,
+      name: [
+        {
+          lang: 'ua'
+        }
+      ],
+      description: [
+        {
+          value: 'test'
+        }
+      ],
+      mainMaterial: {
+        color: {
+          _id: '123'
+        },
+        material: {
+          name: {
+            0: {
+              value: 'test'
+            }
+          }
+        }
+      },
+      innerMaterial: {
+        material: {
+          name: [{ lang: 'ua' }]
+        }
+      },
+      bottomMaterial: {
+        material: {
+          name: {
+            0: {
+              value: 'test'
+            }
+          }
+        }
+      },
+      strapLengthInCm: '100'
+    }
+  };
   it('Should render', () => {
-    const component = shallow(<ProductInfo />);
+    const component = shallow(<ProductInfo {...props} />);
     expect(component).toBeDefined();
   });
 });

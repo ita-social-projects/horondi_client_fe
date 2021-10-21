@@ -20,7 +20,6 @@ const ProductInfo = ({ price, product }) => {
   });
   const { rate, name, description, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm } =
     product;
-
   const { t } = useTranslation();
   const { language, currentPrice, currentWeight, currentVolume, currency } = useSelector(
     ({ Language, Products: { productToSend }, Currency }) => ({

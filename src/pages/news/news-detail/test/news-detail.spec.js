@@ -24,7 +24,7 @@ describe('', () => {
       ...useQueryData
     }));
 
-    wrapper = shallow(<NewsDetail />);
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
   });
 
   it('', () => {
@@ -33,6 +33,6 @@ describe('', () => {
       loading: true
     }));
 
-    wrapper = shallow(<NewsDetail />);
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
   });
 });

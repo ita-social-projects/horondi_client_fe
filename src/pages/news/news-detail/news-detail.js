@@ -33,7 +33,7 @@ const NewsDetail = ({ match }) => {
   }
 
   if (article.text[language].value === null) {
-    return <h2>Sorry, this article is not translated. Try to change language</h2>;
+    return <h2>{t('newsDetail.change')}</h2>;
   }
 
   return (

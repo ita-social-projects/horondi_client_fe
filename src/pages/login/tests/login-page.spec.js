@@ -75,7 +75,7 @@ describe('Login page test', () => {
     expect(mockChange).toHaveBeenCalledWith(value);
   });
 
-  it('input form should call useFormik method onClick', () => {
+  it('form should call useFormik method onClick', () => {
     const submitButton = component.find(Button);
     submitButton.simulate('click');
     expect(mockSubmit).toHaveBeenCalled();

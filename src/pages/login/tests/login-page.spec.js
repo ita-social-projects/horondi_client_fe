@@ -63,8 +63,8 @@ describe('Login page test', () => {
 
   it('Should render Loader', () => {
     storage.userLoading = true;
-    const component = shallow(<Login />);
-    expect(component.exists(Loader)).toBe(true);
+    const componentWithLoader = shallow(<Login />);
+    expect(componentWithLoader.exists(Loader)).toBe(true);
     storage.userLoading = false;
   });
 

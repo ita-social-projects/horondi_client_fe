@@ -132,9 +132,8 @@ export const errorMessages = [
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
-  name: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
-  firstName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
-  lastName: /^(?=.{2,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$/i,
+  firstName: /^([a-zа-яіїє]|[',. -][a-zа-яіїє])*$/i,
+  lastName: /^([a-zа-яіїє]|[',. -][a-zа-яіїє])*$/i,
   password:
     /^(?=.*[A-ZА-ЯІЇЄ])(?=.*\d)[a-zA-Zа-яА-ЯіїєІЇЄ\d!@#$%^&*()~¥=_+}{":;'?/>.<,\\`|[\]-]{6,30}$/,
   phoneNumber:
@@ -220,6 +219,7 @@ export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
 export const POPULARITY = 'popularity';
+export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 export const URL_QUERIES_NAME = {
   page: 'page',
   sort: 'sort',

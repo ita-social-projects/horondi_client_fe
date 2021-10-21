@@ -1,11 +1,7 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { useQuery } from '@apollo/client';
 
 import Sidebar from '../sidebar';
-
-configure({ adapter: new Adapter() });
 
 let wrapper;
 const useQueryData = {
@@ -15,10 +11,11 @@ const useQueryData = {
 };
 const props = { fromSideBar: {}, isMenuOpen: true, setIsMenuOpen: () => null };
 
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux')
-}));
 jest.mock('@apollo/client');
+jest.mock('../../sidemenu-right-bar', () => ({
+  __esModule: true,
+  default: () => null
+}));
 
 describe('sidebar tests', () => {
   it('should be defined', () => {

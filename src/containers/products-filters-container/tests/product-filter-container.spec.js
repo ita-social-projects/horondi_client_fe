@@ -1,15 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import ProductsFiltersContainer from '../products-filters-container';
 
 jest.mock('../products-filters-container.styles.js', () => ({
   useStyles: () => ({})
 }));
-jest.mock('react-redux');
-
-const dispatch = jest.fn();
-
-useDispatch.mockImplementation(() => dispatch);
 
 jest.mock('react-router', () => ({
   ...jest.requireActual('react-router'),

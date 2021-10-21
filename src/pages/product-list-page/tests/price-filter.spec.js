@@ -20,7 +20,9 @@ useSelector.mockImplementation(() => ({
 
 describe('PriceFilter component tests', () => {
   it('Should render PriceFilter', () => {
-    const component = shallow(<PriceFilter />);
+    const component = shallow(
+      <PriceFilter priceRange={{ minPrice: [{ value: 1 }], maxPrice: [{ value: 10 }] }} />
+    );
     expect(component).toBeDefined();
   });
 });

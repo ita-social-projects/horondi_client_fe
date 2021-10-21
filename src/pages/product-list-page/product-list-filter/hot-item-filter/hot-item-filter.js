@@ -3,25 +3,23 @@ import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
-import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
-import { setHotItemFilter } from '../../../../redux/products/products.actions';
 
 const HotItemFilter = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
+
   const { isHotItemFilter, page, defaultPage } = URL_QUERIES_NAME;
   const searchParams = new URLSearchParams(search);
   const [hotItem, setHotItem] = useState(false);
+
   useEffect(() => {
     if (searchParams.get(isHotItemFilter)) {
       setHotItem(!hotItem);
-      dispatch(setHotItemFilter(!hotItem));
     }
-  }, [dispatch, searchParams.toString()]);
+  }, [searchParams.toString()]);
 
   const handleChange = (event) => {
     if (event.target.checked) {
@@ -29,7 +27,6 @@ const HotItemFilter = () => {
     } else {
       searchParams.delete(isHotItemFilter);
       setHotItem(!hotItem);
-      dispatch(setHotItemFilter(!hotItem));
     }
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);

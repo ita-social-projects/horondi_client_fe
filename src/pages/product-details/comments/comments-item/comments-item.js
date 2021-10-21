@@ -26,7 +26,7 @@ import {
   handleLimitOptions
 } from '../../../../utils/handle-comments';
 
-const CommentsItem = ({ data, commentId }) => {
+const CommentsItem = ({ data, commentId, productId }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
@@ -202,6 +202,7 @@ const CommentsItem = ({ data, commentId }) => {
         commentId={commentId}
         userId={handleUserId(userData)}
         isDeleteComment={1}
+        productId={productId}
       />
     </div>
   );

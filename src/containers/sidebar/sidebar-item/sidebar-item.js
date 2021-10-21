@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { Collapse, ListItemText, ListItem, List } from '@material-ui/core';
@@ -16,9 +15,6 @@ const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) =>
 
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);
-  const { quantityPerPage } = useSelector(({ Products }) => ({
-    quantityPerPage: Products.countPerPage
-  }));
 
   const handleClick = () => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
@@ -46,7 +42,7 @@ const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) =>
               onClick={handlerItem}
             >
               <Link
-                to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
+                to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=9&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
               >
                 <ListItemText primary={model.name[i18n.language === 'ua' ? 0 : 1].value} />
               </Link>

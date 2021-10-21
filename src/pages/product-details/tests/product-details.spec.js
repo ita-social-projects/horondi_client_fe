@@ -1,51 +1,47 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ProductDetails from '../product-details';
-import { Loader } from '../../../components/loader/loader';
+import { useQuery } from '@apollo/client';
 
-jest.mock('connected-react-router', () => {
-  jest.fn();
-});
-jest.mock('../product-details.styles', () => ({ useStyles: () => ({}) }));
-jest.mock('react-redux');
+import ProductDetails from '../index';
+
 const mockUseContext = jest.fn().mockImplementation(() => ({
   isLight: true
 }));
 React.useContext = mockUseContext;
 
-const dispatch = jest.fn();
-let storage = {
-  currency: 0,
-  categoryFilter: [],
-  isLoading: false,
-  product: null,
-  productToSend: {}
+const useQueryData = {
+  loading: false,
+  error: false
 };
 
-const match = {
-  params: {
-    id: 0
-  }
-};
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: (selector) => ({ currency: 0, isLightTheme: true, productToSend: {} }),
+  useDispatch: () => () => null
+}));
+jest.mock('@apollo/client');
+jest.mock('../product-details.styles', () => ({
+  useStyles: () => ({ container: '' })
+}));
 
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => storage);
+describe('Product details test', () => {
+  let wrapper;
 
-describe('ProductDetails page test', () => {
-  it('Should render ProductDetails', () => {
-    const component = shallow(<ProductDetails match={match} />);
-    expect(component).toBeDefined();
+  it('Should render product details component', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+
+    wrapper = shallow(<ProductDetails match={{ params: { id: 1 } }} />);
+
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('Should render Loader', () => {
-    storage = {
-      currency: 0,
-      categoryFilter: [],
-      isLoading: true,
-      product: null,
-      productToSend: {}
-    };
-    const component = shallow(<ProductDetails match={match} />);
-    expect(component.exists(Loader)).toBe(true);
+  it('should cover other branches', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      loading: true
+    }));
+
+    wrapper = shallow(<ProductDetails match={{ params: { id: 1 } }} />);
   });
 });

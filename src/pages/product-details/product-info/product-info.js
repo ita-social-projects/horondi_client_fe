@@ -18,39 +18,23 @@ import {
 } from '../../../translations/product-details.translations';
 import Detail from '../detail';
 
-const ProductInfo = ({ price }) => {
+const ProductInfo = ({ price, product }) => {
   const styles = useStyles({
     colorUrl: colorImage,
     patternUrl: patternImage
   });
+  const { rate, name, description, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm } =
+    product;
 
-  const {
-    language,
-    rate,
-    name,
-    description,
-    mainMaterial,
-    innerMaterial,
-    bottomMaterial,
-    strapLengthInCm,
-    currentPrice,
-    currentWeight,
-    currentVolume,
-    currency
-  } = useSelector(({ Language, Products: { product, productToSend }, Currency }) => ({
-    language: Language.language,
-    rate: product.rate,
-    name: product.name,
-    description: product.description,
-    mainMaterial: product.mainMaterial,
-    innerMaterial: product.innerMaterial,
-    bottomMaterial: product.bottomMaterial,
-    strapLengthInCm: product.strapLengthInCm,
-    currentPrice: productToSend.price || price,
-    currentWeight: productToSend.dimensions.weightInKg,
-    currentVolume: productToSend.dimensions.volumeInLiters,
-    currency: Currency.currency
-  }));
+  const { language, currentPrice, currentWeight, currentVolume, currency } = useSelector(
+    ({ Language, Products: { productToSend }, Currency }) => ({
+      language: Language.language,
+      currentPrice: productToSend.price || price,
+      currentWeight: productToSend.dimensions.weightInKg,
+      currentVolume: productToSend.dimensions.volumeInLiters,
+      currency: Currency.currency
+    })
+  );
 
   const currencySign = getCurrencySign(currency);
 

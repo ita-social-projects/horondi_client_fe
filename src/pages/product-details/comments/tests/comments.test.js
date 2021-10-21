@@ -20,8 +20,8 @@ const mockUseSelector = jest.spyOn(redux, 'useSelector');
 
 jest.mock('@apollo/client');
 
-useQuery.mockImplementation(() => ({ refetch: () => jest.fn() }));
-useMutation.mockImplementation(() => [jest.fn()]);
+useQuery.mockImplementation(() => ({ refetch: () => jest.fn(), loading: true }));
+useMutation.mockImplementation(() => [jest.fn(), { loading: true }]);
 jest.mock('../../../../hooks/use-comment-validation', () => ({
   __esModule: true,
   default: () => ({

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-
 import ImgsViewer from 'react-images-viewer';
 import { GlassMagnifier } from 'react-image-magnifiers';
 import { useStyles } from './product-images.styles';
@@ -46,7 +44,7 @@ const ProductImages = ({ images }) => {
   const [currImg, setCurrImg] = useState(0);
 
   const { t } = useTranslation();
-  
+
   const isLightTheme = useContext(ThemeContext);
 
   const initImages = useMemo(

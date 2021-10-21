@@ -19,7 +19,6 @@ useSelector.mockImplementation(() => ({
 }));
 
 let wrapper;
-let inputs;
 
 const props = {
   isLightTheme: true,

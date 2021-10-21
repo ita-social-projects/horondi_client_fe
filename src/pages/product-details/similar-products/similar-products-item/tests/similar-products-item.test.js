@@ -1,10 +1,14 @@
 import React from 'react';
+import Adapter from 'enzyme-adapter-react-16';
 import { BrowserRouter } from 'react-router-dom';
+import Enzyme, { mount } from 'enzyme';
 import * as reactRedux from 'react-redux';
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
 
 import { Rating } from '@material-ui/lab';
 import SimilarProductsItem from '../index';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Similar products test', () => {
   let wrapper;

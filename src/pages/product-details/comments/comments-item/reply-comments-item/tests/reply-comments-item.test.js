@@ -1,10 +1,12 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
-import ReplyCommentsItem from '../reply-comments-item';
+import * as redux from 'react-redux';
+import ReplyCommentsItem from '../index';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import {
+  dataUser,
   replyCommentId,
   dataSecond,
   dataAdmin,
@@ -13,49 +15,40 @@ import {
 } from './reply-comments-item.variables';
 import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
-jest.mock('react-redux');
+Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('../reply-comments-item.styles', () => ({
-  useStyles: () => ({})
-}));
+const mockSetState = jest.fn();
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: () => ({ firstName: 'user' }),
-    i18n: () => ({ dateLanguage: 'ukr-UA' })
-  })
-}));
-
-const SelectorsState = {
-  userData: {
-    _id: '111',
-    firstName: 'user',
-    email: 'test@gmail.com',
-    role: 'admin'
-  },
-  language: 0
-};
-
-const props = {
-  data: {
-    replyText: 'text',
-    createdAt: '1',
-    verifiedPurchase: true,
-    showReplyComment: true
-  },
-  replyCommentId: '1'
-};
-
+const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
+const mockUseSelector = jest.spyOn(redux, 'useSelector');
 const themeValue = theme('light');
 
-describe('component', () => {
+const useStateSpy = jest.spyOn(React, 'useState');
+
+describe('Comments test', () => {
   let wrapper;
+
   beforeEach(() => {
-    useSelector.mockImplementation(() => SelectorsState);
-    wrapper = shallow(<ReplyCommentsItem {...props} />);
+    useStateSpy.mockImplementation(() => [false, mockSetState]);
+    mockUseDispatch.mockImplementation(() => jest.fn());
+    mockUseSelector.mockReturnValue({
+      language: '0',
+      userData: { _id: '111', email: 'test@gmail.com' }
+    });
+    wrapper = mount(
+      <ThemeProvider theme={themeValue}>
+        <ReplyCommentsItem data={dataUser} replyCommentId={replyCommentId} />
+      </ThemeProvider>
+    );
   });
 
-  it('should render', () => {
+  afterEach(() => {
+    wrapper.unmount();
+    useStateSpy.mockClear();
+    mockUseSelector.mockClear();
+  });
+
+  it('Should render ReplyCommentsItem', () => {
     expect(wrapper).toBeDefined();
   });
 
@@ -70,7 +63,6 @@ describe('component', () => {
     );
     expect(wrapper).toBeDefined();
   });
-
   it('Should render ReplyCommentsItem with superadmin role', () => {
     wrapper = mount(
       <ThemeProvider theme={themeValue}>

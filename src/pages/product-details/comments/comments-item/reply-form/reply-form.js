@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import { useStyles } from './reply-form.styles';
@@ -8,12 +7,13 @@ import useCommentValidation from '../../../../../hooks/use-comment-validation';
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
 import { addReply } from '../../../../../redux/comments/comments.actions';
 
+import { PDP_BUTTONS, REPLY } from '../../../../../translations/product-details.translations';
+
 const ReplyForm = ({ cancel, commentId }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
 
   const styles = useStyles();
-  const { userData, productId } = useSelector(({ Language, User, Products }) => ({
+  const { language, userData, productId } = useSelector(({ Language, User, Products }) => ({
     language: Language.language,
     userData: User.userData,
     productId: Products.productToSend._id
@@ -57,14 +57,14 @@ const ReplyForm = ({ cancel, commentId }) => {
           helperText={errors.text || ''}
           name={TEXT_VALUE}
           className={styles.input}
-          label={t('common.reply.text')}
+          label={REPLY[language].text}
         />
         <div className={styles.btnContainer}>
           <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
-            {t('product.pdpButtons.leaveReply')}
+            {PDP_BUTTONS[language].leaveReply}
           </Button>
           <Button onClick={cancel} className={styles.replyBtn}>
-            {t('product.pdpButtons.cancelButton')}
+            {PDP_BUTTONS[language].cancelButton}
           </Button>
         </div>
       </div>

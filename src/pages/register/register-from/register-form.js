@@ -53,7 +53,6 @@ export default function RegisterForm({
               }
             />
           ))}
-
           <div className={styles.consentMessage}>
             {' '}
             {t('register.formConsent.text')}

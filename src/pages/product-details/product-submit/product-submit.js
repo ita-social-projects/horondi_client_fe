@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -19,18 +18,20 @@ import {
 } from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
+
+import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
+
+import { TOAST_MESSAGE } from '../../../translations/toast.translations';
 import routes from '../../../const/routes';
 
 const { pathToCart } = routes;
 
-const ProductSubmit = ({ setSizeIsNotSelectedError, sizes}) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { productToSend, product, wishlistItems, userData, cartList } = useSelector(
+  const { language, productToSend, wishlistItems, userData, cartList } = useSelector(
     selectLanguageProductsUserWishlist
   );
-
-  const { t } = useTranslation();
 
   const isWishful = useMemo(
     () => wishlistItems.find((item) => product._id === item._id),
@@ -47,21 +48,19 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes}) => {
     [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
   );
 
-  const wishlistTip = isWishful
-    ? t('product.tooltips.removeWishful')
-    : t('product.tooltips.addWishful');
+  const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
 
   const cartTootipTitle = isItemInCart
-    ? t('product.tooltips.itemInCart')
-    : t('product.tooltips.itemInCartAlready');
+    ? TOOLTIPS[language].itemInCart
+    : TOOLTIPS[language].itemInCartAlready;
 
   const cartButtonLabel = isItemInCart
-    ? t('product.pdpButtons.inCart')
-    : t('product.pdpButtons.cartButton');
+    ? PDP_BUTTONS[language].inCart
+    : PDP_BUTTONS[language].cartButton;
 
   const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
-  const toastMessages = t('product.toastMessage');
+  const toastMessages = TOAST_MESSAGE[language];
 
   const onWishfulHandler = () => {
     const {
@@ -137,7 +136,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes}) => {
         </Button>
       </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('product.pdpButtons.buyButton')}
+        {PDP_BUTTONS[language].buyButton}
       </Button>
     </div>
   );

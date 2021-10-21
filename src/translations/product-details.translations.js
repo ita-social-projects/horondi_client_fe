@@ -12,7 +12,7 @@ export const WEIGHT = {
 export const PRODUCT_DESCRIPTION = {
   0: {
     description: 'Опис продукту',
-    mainMaterial: 'Основна тканина',
+    mainMaterial: 'Основна тканина ',
     innerMaterial: 'Внутрішній матеріал ',
     bottomMaterial: 'Матеріал низу',
     strapLengthInCm: 'Довжина лямок(см) '

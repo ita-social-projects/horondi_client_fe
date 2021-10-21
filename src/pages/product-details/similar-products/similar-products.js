@@ -7,10 +7,12 @@ import { useTranslation } from 'react-i18next';
 
 import './similar-products.css';
 import { useStyles } from './similar-products.styles';
+import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
+import { SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 import ThemeContext from '../../../context/theme-context';
 import { getFilteredProductsQuery } from '../../product-list-page/operations/product-list.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
@@ -19,19 +21,18 @@ const SimilarProducts = ({ cartList, product }) => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const styles = useStyles();
 
+  const { i18n } = useTranslation();
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency,
   }));
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => setSimilarProducts(data.getProducts.items)
   });
 
   const isLightTheme = useContext(ThemeContext);
-
-  const { t } = useTranslation();
-
-  const { title } = t('product.similarItems');
+  const { title } = SIMILAR_ITEMS[language];
   const currencySign = getCurrencySign(currency);
   const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;
   let imagesList;
@@ -57,11 +58,7 @@ const SimilarProducts = ({ cartList, product }) => {
       <SimilarProductsItem
         currencySign={currencySign}
         key={_id}
-        price={
-          availableSize
-            ? t('product.priceFrom') + Math.round(availableSize)
-            : t('product.sizeNotAvailable')
-        }
+        price={availableSize ? Math.round(availableSize) : SIZE_NOT_AVAILABLE[language].value}
         name={name}
         rate={rate}
         imageUrl={images.primary.medium}

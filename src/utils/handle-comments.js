@@ -1,7 +1,15 @@
 import React from 'react';
 import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
 import Rating from '@material-ui/lab/Rating';
+import { COMMENTS, TOOLTIPS, REPLY } from '../translations/product-details.translations';
 import { TEXT_VALUE } from '../configs';
+
+export const handleRateTip = (userId, language) => {
+  if (!userId) {
+    return COMMENTS[language].unregisteredTip;
+  }
+  return COMMENTS[language].successfulTip;
+};
 
 export const handleClassName = (name, stylesText, stylesInput) =>
   `${name === TEXT_VALUE ? stylesText : stylesInput}`;
@@ -32,6 +40,9 @@ export const handleAddReplyCount = (comment, addedReplyComment) =>
     }
     : comment;
 
+export const handleTitleSubmit = (userData, language, label) =>
+  userData ? '' : TOOLTIPS[language][label];
+
 export const handleArrowIcon = (limitOption) => (limitOption ? null : <ArrowDownwardRoundedIcon />);
 
 export const handleUserId = (userData) => (userData ? userData._id : '');
@@ -40,6 +51,9 @@ export const handleRate = (rate) =>
   rate > 0 ? <Rating data-cy='rate' name='edit-rate' value={rate} disabled /> : null;
 
 export const handleTextStyle = (show, text, notAproveText) => (show ? text : notAproveText);
+
+export const handleLoadMoreText = (limitOption, language) =>
+  limitOption ? null : REPLY[language].loadMore;
 
 export const handleLimitOptions = (replyCommentsList, replyComments, replyCommentsCount) =>
   replyCommentsList.length === replyComments?.items?.length &&

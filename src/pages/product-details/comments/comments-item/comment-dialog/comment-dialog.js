@@ -1,16 +1,20 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './comment-dialog.styles';
 
 import { deleteComment, deleteReplyComment } from '../../../../../redux/comments/comments.actions';
+import {
+  DIALOG,
+  PDP_BUTTONS,
+  DIALOG_REPLY
+} from '../../../../../translations/product-details.translations';
 
 const CommentDialog = ({
   isModalShown,
@@ -22,7 +26,10 @@ const CommentDialog = ({
 }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
 
   const handleDelete = () => {
     if (isDeleteComment === 1) {
@@ -49,21 +56,21 @@ const CommentDialog = ({
     <div>
       <Dialog open={isModalShown} onClose={handleClose}>
         <DialogTitle className={styles.title}>
-          {isDeleteComment === 1 ? t('common.dialog.title') : t('common.dialogRiply.title')}
+          {isDeleteComment === 1 ? DIALOG[language].title : DIALOG_REPLY[language].title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
             {isDeleteComment === 1
-              ? t('common.dialog.description')
-              : t('common.dialogRiply.description')}
+              ? DIALOG[language].description
+              : DIALOG_REPLY[language].description}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className={styles.button}>
-            {t('product.pdpButtons.cancelButton')}
+            {PDP_BUTTONS[language].cancelButton}
           </Button>
           <Button onClick={handleDelete} className={styles.button}>
-            {t('product.pdpButtons.submitButton')}
+            {PDP_BUTTONS[language].submitButton}
           </Button>
         </DialogActions>
       </Dialog>

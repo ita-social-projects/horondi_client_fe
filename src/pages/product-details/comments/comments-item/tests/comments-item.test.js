@@ -11,7 +11,8 @@ jest.mock('../comments-item.styles', () => ({
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: () => ({ common: 'ua-Ukr' })
+    t: () => ({ common: 'ua-Ukr' }),
+    i18n: () => ({ dateLanguage: 'ukr-UA' })
   })
 }));
 

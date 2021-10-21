@@ -21,7 +21,8 @@ jest.mock('../reply-comments-item.styles', () => ({
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: () => ({ firstName: 'user' })
+    t: () => ({ firstName: 'user' }),
+    i18n: () => ({ dateLanguage: 'ukr-UA' })
   })
 }));
 

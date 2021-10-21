@@ -32,10 +32,6 @@ const NewsDetail = ({ match }) => {
     return <h2>{t('newsDetail.change')}</h2>;
   }
 
-  if (article.text[language].value === null) {
-    return <h2>{t('newsDetail.change')}</h2>;
-  }
-
   return (
     <Card className={styles.container}>
       <CardContent>

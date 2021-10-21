@@ -54,7 +54,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {title[language]?.value || t('newsDetail.noTitle')}
+            {parse(title[language]?.value || '') || t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'
@@ -63,7 +63,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {parse(text[language].value) || t('newsDetail.noText')}
+            {text[language]?.value || t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>

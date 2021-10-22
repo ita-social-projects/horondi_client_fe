@@ -1,6 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CommentsItem from '../comments-item';
 
 jest.mock('react-redux');
@@ -33,25 +32,22 @@ useSelector.mockImplementation(() => state);
 const props = {
   data: {
     user: { firstName: 'user', email: 'test@gmail.com', _id: '111', role: 'user' },
-    replyComments: {
-      count: 2,
-      items: [
-        {
-          replyText: 'text',
-          createdAt: '1',
-          verifiedPurchase: false,
-          showReplyComment: false,
-          _id: '1'
-        },
-        {
-          replyText: 'text2',
-          createdAt: '1',
-          verifiedPurchase: true,
-          showReplyComment: true,
-          _id: '2'
-        }
-      ]
-    }
+    replyComments: [
+      {
+        replyText: 'text',
+        createdAt: '1',
+        verifiedPurchase: false,
+        showReplyComment: false,
+        _id: '1'
+      },
+      {
+        replyText: 'text2',
+        createdAt: '1',
+        verifiedPurchase: true,
+        showReplyComment: true,
+        _id: '2'
+      }
+    ]
   },
   commentId: '111222'
 };

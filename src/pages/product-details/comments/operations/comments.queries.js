@@ -96,3 +96,35 @@ export const getReplyCommentsQuery = gql`
     }
   }
 `;
+
+export const addReplyMutation = gql`
+  mutation ($id: ID, $commentId: ID!, $replyText: String!, $productId: ID, $answerer: ID) {
+    replyForComment(
+      id: $id
+      commentId: $commentId
+      replyCommentData: {
+        answerer: $answerer
+        replyText: $replyText
+        refToReplyComment: $commentId
+        productId: $productId
+      }
+    ) {
+      ... on Comment {
+        _id
+        replyComments {
+          _id
+          replyText
+          showReplyComment
+          createdAt
+          verifiedPurchase
+          answerer {
+            _id
+            firstName
+            email
+            role
+          }
+        }
+      }
+    }
+  }
+`;

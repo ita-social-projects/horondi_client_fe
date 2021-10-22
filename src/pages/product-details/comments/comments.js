@@ -85,7 +85,13 @@ const Comments = ({ productId }) => {
   }, [language, userId]);
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
-    <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
+    <CommentsItem
+      key={_id}
+      data={rest}
+      refetch={refetchComments}
+      commentId={_id}
+      productId={productId}
+    />
   ));
   const limitOption = commentsList.length === comments.count;
 

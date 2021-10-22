@@ -22,7 +22,7 @@ import {
   handleUserId
 } from '../../../../utils/handle-comments';
 
-const CommentsItem = ({ data, commentId, productId }) => {
+const CommentsItem = ({ data, commentId, productId, refetch }) => {
   const styles = useStyles();
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
     data;
@@ -167,7 +167,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
           </div>
         ) : null}
         {isReplyShown && userData?._id && (
-          <ReplyForm cancel={handleReplyClose} commentId={commentId} />
+          <ReplyForm cancel={handleReplyClose} refetch={refetch} commentId={commentId} />
         )}
         {getReplyLoading && getReplyLoadingId === commentId && (
           <div className={styles.loader}>

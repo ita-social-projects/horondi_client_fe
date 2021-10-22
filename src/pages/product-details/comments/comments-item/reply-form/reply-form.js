@@ -1,15 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
-import { addReply } from '../../../../../redux/comments/comments.actions';
+import { addReplyMutation } from '../../operations/comments.queries';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { Loader } from '../../../../../components/loader/loader';
 
-const ReplyForm = ({ cancel, commentId }) => {
-  const dispatch = useDispatch();
+const ReplyForm = ({ cancel, commentId, refetch }) => {
   const { t } = useTranslation();
 
   const styles = useStyles();
@@ -18,19 +20,23 @@ const ReplyForm = ({ cancel, commentId }) => {
     userData: User.userData,
     productId: Products.productToSend._id
   }));
+  const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
+    onError: (err) => errorOrLoadingHandler(err)
+  });
 
   const { _id } = userData;
 
-  const onSubmit = ({ text: fieldText }) => {
-    dispatch(
-      addReply({
+  const onSubmit = async ({ text: fieldText }) => {
+    await addReply({
+      variables: {
         id: _id,
         answerer: _id,
         replyText: fieldText,
         commentId,
         productId
-      })
-    );
+      }
+    });
+    await refetch();
     setShouldValidate(false);
     cancel(false);
   };
@@ -60,10 +66,20 @@ const ReplyForm = ({ cancel, commentId }) => {
           label={t('common.reply.text')}
         />
         <div className={styles.btnContainer}>
-          <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
+          {addReplyLoading && (
+            <div className={styles.loader}>
+              <Loader width={20} height={20} heightWrap={90} />
+            </div>
+          )}
+          <Button
+            type='submit'
+            onClick={() => setShouldValidate(true)}
+            disabled={addReplyLoading}
+            className={styles.replyBtn}
+          >
             {t('product.pdpButtons.leaveReply')}
           </Button>
-          <Button onClick={cancel} className={styles.replyBtn}>
+          <Button onClick={cancel} disabled={addReplyLoading} className={styles.replyBtn}>
             {t('product.pdpButtons.cancelButton')}
           </Button>
         </div>

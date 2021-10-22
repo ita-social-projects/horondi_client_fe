@@ -31,7 +31,7 @@ const {
 } = routes;
 
 const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
-  const { userData } = useSelector((User) => ({
+  const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
 

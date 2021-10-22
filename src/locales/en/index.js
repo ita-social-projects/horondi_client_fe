@@ -27,7 +27,7 @@ import delivery from './delivery.json';
 import product from './product.json';
 import user from './user.json';
 import footer from './footer.json';
-import newsDetail from './newsDatail.json';
+import newsDetail from './newsDetail.json';
 
 export default {
   translations: {

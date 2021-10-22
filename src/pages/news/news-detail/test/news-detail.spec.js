@@ -2,9 +2,13 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { MockedProvider } from '@apollo/client/testing';
 import { mount } from 'enzyme';
+import { Redirect } from 'react-router-dom';
 import NewsDetail from '../news-detail';
 import { getNewsById } from '../../operations/news-queries';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })
+}));
 jest.mock('../../news-detail/news-detail.style', () => ({ useStyles: () => ({}) }));
 jest.mock('@apollo/client');
 jest.mock('react-redux');
@@ -16,45 +20,70 @@ const useQueryData = {
   data: {}
 };
 
-const mocks = [
-  {
-    request: {
-      query: getNewsById,
-      variables: {
-        id: '604398f9a7532c33dcb326dc'
-      }
-    },
-    result: {
-      data: {
-        _id: '604398f9a7532c33dcb326dc',
-        title: { value: 'Співачка GARZA про бренд HORONDI' },
-        text: {
-          value:
-            '<p>Українська співачка <strong>GARZA </strong>— ді… підкреслить колір ваших очей і настрій.</em></p>'
-        },
-        image: 'large_id73d2kkm22ie1z_accessories - Copy.jpg',
-        author: {
-          name: { value: 'Олександр Хоронді' },
-          image:
-            'large_4051pm10kompup3s_[HorribleSubs] Hibike! Euphonium S2 - 01 [720p].mkv_snapshot_09.54_[2021.02.17_18.37.28].jpg'
-        },
-        date: '1621708925959'
-      }
-    }
-  }
-];
+// const mocks = [
+//   {
+//     request: {
+//       query: getNewsById,
+//       variables: {
+//         id: '604398f9a7532c33dcb326dc'
+//       }
+//     },
+//     result: {
+//       data: {
+//         _id: '604398f9a7532c33dcb326dc',
+//         title: { value: 'Співачка GARZA про бренд HORONDI' },
+//         text: {
+//           value:
+//             '<p>Українська співачка <strong>GARZA </strong>— ді… підкреслить колір ваших очей і настрій.</em></p>'
+//         },
+//         image: 'large_id73d2kkm22ie1z_accessories - Copy.jpg',
+//         author: {
+//           name: { value: 'Олександр Хоронді' },
+//           image:
+//             'large_4051pm10kompup3s_[HorribleSubs] Hibike! Euphonium S2 - 01 [720p].mkv_snapshot_09.54_[2021.02.17_18.37.28].jpg'
+//         },
+//         date: '1621708925959'
+//       }
+//     }
+//   }
+// ];
+//
+// const mocksError = {
+//   request: {
+//     query: getNewsById
+//   },
+//   error: new Error()
+// };
 
-it('renders without error', async () => {
-  let wrapper;
-  await (async () => {
-    wrapper = mount(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <NewsDetail id='604398f9a7532c33dcb326dc' />
-      </MockedProvider>
-    );
-    expect(wrapper).toBeDefined();
-  });
-});
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: () => [{ _id: [0], text: [''], title: [''], author: [''] }, () => null]
+}));
+
+// it('renders without error', async () => {
+//   let wrapper;
+//   await (async () => {
+//     wrapper = mount(
+//       <MockedProvider mocks={mocks} addTypename={false}>
+//         <NewsDetail id='604398f9a7532c33dcb326dc' />
+//       </MockedProvider>
+//     );
+//     expect(wrapper).toBeTruthy();
+//   });
+// });
+//
+// it('renders error',  async() => {
+//   let wrapper;
+//   await(async () => {
+//     const wrapper = mount(
+//       <MockedProvider mocks={mocks} addTypename={false}>
+//         <NewsDetail id='604398f9a7532c33dcb326dc' />
+//       </MockedProvider>
+//     );
+//     expect(wrapper).toBeDefined();
+//     expect(wrapper.find('<Redirect to={pathToErrorPage} />')).toBe(true);
+//   });
+// });
 
 describe('test newsDetail', () => {
   it('should cover branches', () => {

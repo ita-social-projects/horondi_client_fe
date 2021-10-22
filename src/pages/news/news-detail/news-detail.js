@@ -63,13 +63,13 @@ const NewsDetail = ({ match }) => {
         <hr />
         <div className={styles.newsAuthorFooter}>
           <CardHeader
-            subheader={article.author.name[language].value || t('newsDetail.noAutor')}
+            subheader={article.author.name[language].value || t('newsDetail.noAuthor')}
             id='newsAuthor'
           />
           <CardMedia
             className={styles.authorAvatar}
-            image={IMG_URL + article.author.image || t('newsDetail.noAutor')}
-            title={article.title.value || t('newsDetail.noTitle')}
+            image={IMG_URL + article.author.image || t('newsDetail.noAuthor')}
+            title={article.title[language].value || t('newsDetail.noTitle')}
             component='div'
             id='newsAuthorAvatar'
           />

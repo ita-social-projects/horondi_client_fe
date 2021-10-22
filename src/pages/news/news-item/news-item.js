@@ -73,13 +73,13 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           </Link>
           <div className={styles.newsAuthorFooter}>
             <CardHeader
-              subheader={author.name[language]?.value || t('newsDetail.noAutor')}
+              subheader={author.name[language]?.value || t('newsDetail.noAuthor')}
               data-cy='authorName'
               className={styles.authorName}
             />
             <Avatar
-              alt={author.name[language]?.value || t('newsDetail.noAutor')}
-              src={IMG_URL + author.image || t('newsDetail.noAutor')}
+              alt={author.name[language]?.value || t('newsDetail.noAuthor')}
+              src={IMG_URL + author.image || t('newsDetail.noAuthor')}
               data-cy='authorPhoto'
             />
           </div>

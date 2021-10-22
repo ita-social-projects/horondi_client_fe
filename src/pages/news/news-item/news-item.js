@@ -36,7 +36,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           <CardMedia
             className={styles.media}
             image={IMG_URL + image || t('newsDetail.noPhoto')}
-            title={title[language]?.value || t('newsDetail.noTitle')}
+            title={parse(title[language]?.value || '') || t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />

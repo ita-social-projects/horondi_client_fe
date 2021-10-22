@@ -58,12 +58,12 @@ const NewsDetail = ({ match }) => {
           className={styles.newsText}
           id='fullText'
         >
-          {parse(article.text[language].value) || t('newsDetail.noText')}
+          {parse(article?.text[language].value || '') || t('newsDetail.noText')}
         </Typography>
         <hr />
         <div className={styles.newsAuthorFooter}>
           <CardHeader
-            subheader={article.author.name[language].value || t('newsDetail.noAuthor')}
+            subheader={article.author.name[language]?.value || t('newsDetail.noAuthor')}
             id='newsAuthor'
           />
           <CardMedia

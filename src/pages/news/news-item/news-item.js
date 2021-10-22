@@ -26,7 +26,6 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
     return null;
   }
 
-  const newsButtonText = t('buttons.readMore');
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
 
@@ -69,7 +68,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}-${slug}`}>
             <Button variant='contained' className={styles.newsButton} data-cy='readMoreButton'>
-              {newsButtonText}
+              {t('buttons.readMore')}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>

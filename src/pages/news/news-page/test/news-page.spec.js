@@ -17,21 +17,19 @@ jest.mock('react-redux', () => ({
 
 jest.mock('@apollo/client');
 
-describe('', () => {
-  it('', () => {
+describe('Test newsPage', () => {
+  it('should cover branches', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));
-
     wrapper = shallow(<NewsPage />);
   });
 
-  it('', () => {
+  it('should cover other branches', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,
       loading: true
     }));
-
     wrapper = shallow(<NewsPage />);
   });
 });

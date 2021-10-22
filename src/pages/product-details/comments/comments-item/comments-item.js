@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
@@ -10,41 +10,31 @@ import { Tooltip } from '@material-ui/core';
 import { useStyles } from './comments-item.styles';
 import CommentDialog from './comment-dialog';
 import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
-import { getReplyComments } from '../../../../redux/comments/comments.actions';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
 import { Loader } from '../../../../components/loader/loader';
 import {
-  handleUserCommentOwner,
   handleArrowIcon,
-  handleUserCommentApprove,
-  handleUserId,
-  handleTextStyle,
   handleRate,
-  handleLimitOptions
+  handleTextStyle,
+  handleUserCommentApprove,
+  handleUserCommentOwner,
+  handleUserId
 } from '../../../../utils/handle-comments';
 
 const CommentsItem = ({ data, commentId, productId }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
     data;
 
-  const {
-    userData,
-    currentLimit,
-    replyLoading,
-    replyLoadingId,
-    getReplyLoading,
-    getReplyLoadingId
-  } = useSelector(({ Comments, User }) => ({
-    userData: User.userData,
-    currentLimit: Comments.replyLimit,
-    replyLoading: Comments.replyLoading.loader,
-    replyLoadingId: Comments.replyLoading.commentId,
-    getReplyLoading: Comments.getReplyLoading.loader,
-    getReplyLoadingId: Comments.getReplyLoading.commentId
-  }));
+  const { userData, replyLoading, replyLoadingId, getReplyLoading, getReplyLoadingId } =
+    useSelector(({ Comments, User }) => ({
+      userData: User.userData,
+      replyLoading: Comments.replyLoading.loader,
+      replyLoadingId: Comments.replyLoading.commentId,
+      getReplyLoading: Comments.getReplyLoading.loader,
+      getReplyLoadingId: Comments.getReplyLoading.commentId
+    }));
 
   const { t, i18n } = useTranslation();
 
@@ -56,7 +46,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
   const [isModalShown, toggleModal] = useState(false);
   const [isReplyShown, toggleReply] = useState(false);
   const [isReplyListShown, toggleReplyList] = useState(false);
-
+  const [currentLimit, setCurrentLimit] = useState(10);
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
 
@@ -83,24 +73,19 @@ const CommentsItem = ({ data, commentId, productId }) => {
       return toggleReplyList(false);
     }
     toggleReplyList(true);
-    return !commentsReplyLength && getReplyCommentsByComment();
+    return !replyComments?.length;
   };
 
   const getReplyCommentsByComment = () => {
-    dispatch(
-      getReplyComments({ commentId, limit: currentLimit, skip: replyComments?.items?.length || 0 })
-    );
+    setCurrentLimit((prev) => prev + 10);
   };
 
-  const commentsReplyLength = replyComments?.items.length;
+  const replyCommentsList = replyComments.map(
+    ({ _id, ...rest }, index) =>
+      index <= currentLimit && <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+  );
 
-  const replyCommentsList = replyComments?.items
-    ? replyComments.items.map(({ _id, ...rest }) => (
-      <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
-    ))
-    : [];
-
-  const limitOption = handleLimitOptions(replyCommentsList, replyComments, replyCommentsCount);
+  const limitOption = replyCommentsList.length === replyComments.count;
 
   const loadMore = limitOption ? null : t('common.reply.loadMore');
 
@@ -155,7 +140,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
             </p>
           </Tooltip>
 
-          {replyCommentsCount > 0 ? (
+          {replyCommentsCount ? (
             <div className={styles.replyCount} onClick={showReplyList}>
               <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
               <span className={styles.replyText}>
@@ -171,7 +156,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
           <div>
             {replyCommentsList}
 
-            {commentsReplyLength < replyCommentsCount && (
+            {replyComments?.length > currentLimit && (
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
                 <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>

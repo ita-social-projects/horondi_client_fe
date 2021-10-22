@@ -19,6 +19,19 @@ export const getCommentsQuery = gql`
             firstName
             role
           }
+          replyComments {
+            _id
+            replyText
+            showReplyComment
+            createdAt
+            verifiedPurchase
+            answerer {
+              _id
+              firstName
+              email
+              role
+            }
+          }
         }
         count
       }
@@ -49,6 +62,36 @@ export const addCommentMutation = gql`
           role
         }
         verifiedPurchase
+      }
+    }
+  }
+`;
+
+export const getReplyCommentsQuery = gql`
+  query ($filter: ReplyCommentFilterInput, $pagination: Pagination) {
+    getReplyCommentsByComment(filter: $filter, pagination: $pagination) {
+      ... on PaginatedComments {
+        items {
+          _id
+          replyComments {
+            _id
+            replyText
+            showReplyComment
+            createdAt
+            verifiedPurchase
+            answerer {
+              _id
+              firstName
+              email
+              role
+            }
+          }
+        }
+        count
+      }
+      ... on Error {
+        statusCode
+        message
       }
     }
   }

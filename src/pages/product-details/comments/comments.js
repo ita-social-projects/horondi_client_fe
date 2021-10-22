@@ -24,7 +24,7 @@ import { useIsLoading } from '../../../hooks/useIsLoading';
 
 const Comments = ({ productId }) => {
   const styles = useStyles();
-  const [comments, setComments] = useState({ items: [], count: 0 });
+  const [comments, setComments] = useState({ items: [], count: 0, replyComments: [] });
   const [currentLimit, setCurrentLimit] = useState(10);
   const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
   const { t } = useTranslation();

@@ -61,8 +61,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
 
   const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
-  const toastMessages = t('product.toastMessage');
-
   const onWishfulHandler = () => {
     const {
       _id,
@@ -73,11 +71,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
 
     if (isWishful) {
       dispatch(removeItemFromWishlist(_id));
-      dispatch(setToastMessage(toastMessages.removedFromWishList));
+      dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
       dispatch(setToastSettings(toastSettings));
     } else {
       dispatch(addItemToWishlist({ _id, name, basePrice, sizes, images: { primary } }));
-      dispatch(setToastMessage(toastMessages.addedToWishList));
+      dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
       dispatch(setToastSettings(toastSettings));
     }
   };
@@ -96,7 +94,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
       } else {
         dispatch(addItemToCart(productToSend));
       }
-      dispatch(setToastMessage(toastMessages.addedToCard));
+      dispatch(setToastMessage(t('product.toastMessage.addedToCard')));
       dispatch(setToastSettings(toastSettings));
     } else {
       setSizeIsNotSelectedError(true);

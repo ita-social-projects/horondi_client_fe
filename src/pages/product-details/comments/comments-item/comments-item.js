@@ -156,7 +156,7 @@ const CommentsItem = ({ data, commentId, productId, refetch }) => {
           <div>
             {replyCommentsList}
 
-            {replyComments?.length > currentLimit && (
+            {replyComments.length > currentLimit && (
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
                 <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>

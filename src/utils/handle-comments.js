@@ -42,4 +42,5 @@ export const handleRate = (rate) =>
 export const handleTextStyle = (show, text, notAproveText) => (show ? text : notAproveText);
 
 export const handleLimitOptions = (replyCommentsList, replyComments, replyCommentsCount) =>
-  replyCommentsList.length === replyComments?.length && replyComments?.length > replyCommentsCount;
+  replyCommentsList.length === replyComments?.items?.length &&
+  replyComments?.items?.length > replyCommentsCount;

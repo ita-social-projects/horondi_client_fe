@@ -4,10 +4,11 @@ export const useStyles = makeStyles((theme) => ({
   registerForm: {
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
-    height: '590px',
+    height: '100%',
     padding: '11px 63px 40px 63px',
     boxSizing: 'border-box'
   },
+
   heading: {
     fontSize: '1.5rem',
     lineHeight: '29px',

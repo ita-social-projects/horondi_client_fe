@@ -75,7 +75,7 @@ const Recovery = () => {
                   fullWidth
                   error={!!errors.email || !!error}
                   onChange={(e) => handleChange(e) || (error && dispatch(resetState()))}
-                  helperText={handleHelperText(errors.email, error, language)}
+                  helperText={handleHelperText(errors.email, error)}
                 />
                 <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
                 <Button

@@ -26,6 +26,7 @@ import sidebar from './sidebar.json';
 import chat from './chat.json';
 import delivery from './delivery.json';
 import product from './product.json';
+import user from './user.json';
 
 export default {
   translations: {
@@ -56,6 +57,7 @@ export default {
     sidebar,
     chat,
     delivery,
-    product
+    product,
+    user
   }
 };

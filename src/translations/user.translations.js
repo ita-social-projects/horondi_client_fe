@@ -9,7 +9,7 @@ export const USER_ERROR = {
   ],
   USER_NOT_AUTHORIZED: [
     {
-      value: 'Користувач не авториваний'
+      value: 'Користувач не авторизований'
     },
     {
       value: 'User is not authorized'
@@ -55,10 +55,10 @@ export const USER_ERROR = {
   ],
   USER_NOT_FOUND: [
     {
-      value: 'Користувач не знайдений'
+      value: 'Користувач не знайдений!!!'
     },
     {
-      value: 'User has not been found'
+      value: 'User has not been found!'
     }
   ],
   TOKEN_IS_EXPIRIED: [
@@ -84,49 +84,6 @@ export const USER_ERROR = {
     },
     {
       value: 'Oops! Something went wrong. Please, try again later.'
-    }
-  ]
-};
-
-export const placeholders = {
-  firstName: [
-    {
-      value: 'Ім’я'
-    },
-    {
-      value: 'Firstname'
-    }
-  ],
-  lastName: [
-    {
-      value: 'Прізвище'
-    },
-    {
-      value: 'Lastname'
-    }
-  ],
-  email: [
-    {
-      value: 'Електронна пошта'
-    },
-    {
-      value: 'Email'
-    }
-  ],
-  password: [
-    {
-      value: 'Пароль'
-    },
-    {
-      value: 'Password'
-    }
-  ],
-  confirmPassword: [
-    {
-      value: 'Підтвердіть пароль'
-    },
-    {
-      value: 'Confirm password'
     }
   ]
 };
@@ -164,56 +121,3 @@ export const RECOVERY_ERROR_MESSAGE = {
     }
   ]
 };
-
-export const CHANGE_PASSWORD = [
-  {
-    h2: 'Введіть новий пароль',
-    pass_label: 'Новий пароль',
-    confirm_label: 'Підтвердіть пароль',
-    button: 'Змінити'
-  },
-  {
-    h2: 'Enter new password',
-    pass_label: 'New password',
-    confirm_label: 'Confirm password',
-    button: 'Change'
-  }
-];
-
-export const NEW_PASSWORD_ERROR = {
-  USER_NOT_FOUND: [
-    {
-      value: 'Користувача не знайдено'
-    },
-    {
-      value: 'User is not found'
-    }
-  ],
-  PASSWORD_RECOVERY_ATTEMPTS_LIMIT_EXCEEDED: [
-    {
-      value: 'Перевищено максимальну кількість спроб відновлення'
-    },
-    {
-      value: 'Exceeded password recovery limit'
-    }
-  ],
-  DEFAULT_ERROR: [
-    {
-      value: 'Відбулась помилка! Будь ласка перезавантажте сторінку та спробуйте ще раз.'
-    },
-    {
-      value: 'An error occurred! Please, reload your page and try again.'
-    }
-  ]
-};
-
-export const NEW_PASSWORD_SUCCESS_MESSAGE = [
-  {
-    h2: 'Ваш пароль успішно змінено!',
-    p: 'Вас буде спрямовано на сторінку логінування'
-  },
-  {
-    h2: 'Your password is successfully changed!',
-    p: 'You will be directed to login page'
-  }
-];

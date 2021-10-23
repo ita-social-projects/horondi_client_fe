@@ -1,6 +1,6 @@
 import React from 'react';
+import i18next from 'i18next';
 import { Loader } from '../components/loader/loader';
-import { NEW_PASSWORD_ERROR } from '../translations/user.translations';
 
 export const handleNewPasswodLoaderOrWindow = (passwordReset, successWindow) => {
   if (passwordReset) {
@@ -9,13 +9,14 @@ export const handleNewPasswodLoaderOrWindow = (passwordReset, successWindow) => 
   return <Loader />;
 };
 
-export const handleErrorMessage = (userError, className, language) => {
+export const handleErrorMessage = (userError, className) => {
   if (userError) {
     return (
       <p className={className}>
-        {NEW_PASSWORD_ERROR[userError]
-          ? NEW_PASSWORD_ERROR[userError][language].value
-          : NEW_PASSWORD_ERROR.DEFAULT_ERROR[language].value}
+        {i18next.t(
+          `user.newPasswordError.${userError}`,
+          i18next.t('user.newPasswordError.DEFAULT_ERROR')
+        )}
       </p>
     );
   }

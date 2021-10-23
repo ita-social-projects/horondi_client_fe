@@ -1,4 +1,4 @@
-import { CONSTRUCTOR_TITLES } from '../translations/constructor.translations';
+import i18next from 'i18next';
 
 export const constructorPartPrice = (priceBasic, priceGobelen, priceBottom, priceSize) => [
   priceBasic,
@@ -13,7 +13,7 @@ export const constructorPartNames = (language) =>
 
 export const constructorEndPrice = (priceTotal) => {
   if (!priceTotal) {
-    return CONSTRUCTOR_TITLES.END_PRICE;
+    return i18next.t('common.endPrice');
   }
   return `${priceTotal} `;
 };

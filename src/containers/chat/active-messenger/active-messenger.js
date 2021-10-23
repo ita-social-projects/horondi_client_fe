@@ -77,7 +77,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
 
   useEffect(() => {
-    // VALID FIELDS
     if (firstNameValidated && emailValidated && messageValidated) {
       setAllFieldsValidated(true);
     } else {

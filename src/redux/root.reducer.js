@@ -10,7 +10,6 @@ import { wishlistReducer as Wishlist } from './wishlist/wishlist.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
 import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
 import Currency from './currency/currency.reducer';
-import Comments from './comments/comments.reducer';
 import { checkoutReducer as Checkout } from './checkout/checkout.reducer';
 import Chat from './chat/chat.reducer';
 import { businessPagesReducer as HeaderLinks } from './header-links/header-links.reducer';
@@ -33,7 +32,6 @@ export const rootReducer = (history) =>
     Cart,
     Snackbar,
     Currency,
-    Comments,
     Checkout,
     Chat,
     HeaderLinks,

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CheckoutForm /> should match snapshot 1`] = `
+exports[`CheckoutForm component tests should match snapshot 1`] = `
 <div>
   <form
     onSubmit={[Function]}
@@ -19,7 +19,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
           </Link>
         </div>
         <h2>
-          Checkout Process
+          <Component />
         </h2>
         <div />
       </div>
@@ -28,7 +28,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
       >
         <div>
           <h3>
-            Contact Information
+            <Component />
           </h3>
           <div>
             <div
@@ -87,9 +87,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
             </div>
           </div>
         </div>
-        <DeliveryType
-          language={1}
-        />
+        <DeliveryType />
         <Delivery
           deliveryType="NOVAPOSTCOURIER"
           errors={Object {}}
@@ -121,7 +119,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
         />
         <div>
           <h2>
-            Payment Method
+            <Component />
           </h2>
           <WithStyles(ForwardRef(FormControl))
             variant="outlined"
@@ -129,33 +127,37 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
             <WithStyles(ForwardRef(InputLabel))
               variant="outlined"
             >
-              Choose a payment method *
+              <Component />
             </WithStyles(ForwardRef(InputLabel))>
             <WithStyles(ForwardRef(Select))
               data-cy="paymentMethod"
-              label="Choose a payment method *"
+              label={
+                Object {
+                  "paymentMethod": "card",
+                }
+              }
               name="paymentMethod"
               onChange={[Function]}
               value=""
             >
               <WithStyles(ForwardRef(MenuItem))
-                key="Card"
-                value="Card"
+                key="card"
+                value="card"
               >
-                Card
+                <Component />
               </WithStyles(ForwardRef(MenuItem))>
               <WithStyles(ForwardRef(MenuItem))
-                key="Cash"
-                value="Cash"
+                key="cash"
+                value="cash"
               >
-                Cash
+                <Component />
               </WithStyles(ForwardRef(MenuItem))>
             </WithStyles(ForwardRef(Select))>
           </WithStyles(ForwardRef(FormControl))>
         </div>
         <div>
           <h2>
-            Order Comment
+            <Component />
           </h2>
           <div>
             <WithStyles(ForwardRef(TextField))
@@ -170,7 +172,7 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
             />
           </div>
           <p>
-            * Order will be shipped within 10 business days.
+            <Component />
           </p>
         </div>
       </WithStyles(ForwardRef(Grid))>
@@ -179,14 +181,14 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
       >
         <div>
           <h2>
-            Your order
+            <Component />
           </h2>
           <div />
         </div>
         <div>
           <div>
             <h4>
-              Total price
+              <Component />
             </h4>
             <p
               className="undefined undefined"
@@ -231,6 +233,19 @@ exports[`<CheckoutForm /> should match snapshot 1`] = `
           >
             Confirm order
           </button>
+          <div>
+             
+            <Component />
+            <Link
+              rel="noreferrer"
+              target="_blank"
+              to="/pages/user-agreement"
+            >
+               
+              <Component />
+               
+            </Link>
+          </div>
         </div>
       </WithStyles(ForwardRef(Grid))>
     </WithStyles(ForwardRef(Grid))>

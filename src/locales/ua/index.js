@@ -19,11 +19,13 @@ import newPassword from './new-password.json';
 import orderHistory from './order-history.json';
 import notFoundPage from './not-found-page.json';
 import productListPage from './product-list-page.json';
+import footer from './footer.json';
+import headerProfile from './header-profile.json';
 import searchBar from './searchBar.json';
 import sidebar from './sidebar.json';
 import chat from './chat.json';
 import delivery from './delivery.json';
-import footer from './footer.json';
+import product from './product.json';
 
 export default {
   translations: {
@@ -48,10 +50,12 @@ export default {
     orderHistory,
     notFoundPage,
     productListPage,
+    footer,
+    headerProfile,
     searchBar,
     sidebar,
     chat,
     delivery,
-    footer
+    product
   }
 };

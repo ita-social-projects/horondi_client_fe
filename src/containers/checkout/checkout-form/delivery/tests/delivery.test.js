@@ -1,11 +1,8 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import Delivery from '../delivery';
 import Courier from '../courier/courier';
 import NovaPost from '../nova-post';
-
-Enzyme.configure({ adapter: new Adapter() });
+import SelfPickup from '../self-pickup';
 
 let wrapper;
 beforeEach(() => {
@@ -21,5 +18,9 @@ describe('Delivery component tests', () => {
   });
   it('should match snapshot', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+  it('should render one <SelfPickup />', () => {
+    const wrapper = shallow(<Delivery deliveryType='SELFPICKUP' />);
+    expect(wrapper.find(SelfPickup)).toHaveLength(1);
   });
 });

@@ -38,18 +38,13 @@ export const useStyles = makeStyles((theme) => ({
     padding: '16px 16px 0'
   },
   ArticleTitle: {
-    minHeight: '3rem',
-    color: 'green'
+    minHeight: '3rem'
   },
   newsText: {
     minHeight: '20rem',
     textAlign: 'justify',
     maxHeight: '20rem',
-    overflow: 'hidden',
-    color: 'red',
-    '& > *': {
-      color: 'green'
-    }
+    overflow: 'hidden'
   },
 
   newsFooter: {

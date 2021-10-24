@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -9,13 +10,7 @@ import { useStyles } from './product-info.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
 import { getCurrencySign } from '../../../utils/currency';
-import {
-  COLOR,
-  PATTERN,
-  PRODUCT_PRICE,
-  PRODUCT_DESCRIPTION,
-  WEIGHT
-} from '../../../translations/product-details.translations';
+
 import Detail from '../detail';
 
 const ProductInfo = ({ price, product }) => {
@@ -25,7 +20,7 @@ const ProductInfo = ({ price, product }) => {
   });
   const { rate, name, description, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm } =
     product;
-
+  const { t } = useTranslation();
   const { language, currentPrice, currentWeight, currentVolume, currency } = useSelector(
     ({ Language, Products: { productToSend }, Currency }) => ({
       language: Language.language,
@@ -50,36 +45,42 @@ const ProductInfo = ({ price, product }) => {
       </div>
       <div className={styles.details}>
         <Detail
-          subtitle={`${PRODUCT_DESCRIPTION[language].description}: `}
+          subtitle={`${t('product.productDescription.description')}: `}
           description={parse(description[language].value)}
         />
         <Detail
-          subtitle={PRODUCT_DESCRIPTION[language].mainMaterial}
+          subtitle={t('product.productDescription.mainMaterial')}
           description={` - ${mainMaterial.material.name[language].value}`}
         />
         <Detail
-          subtitle={PRODUCT_DESCRIPTION[language].innerMaterial}
+          subtitle={t('product.productDescription.innerMaterial')}
           description={` - ${innerMaterial.material.name[language].value}`}
         />
         <Detail
-          subtitle={PRODUCT_DESCRIPTION[language].bottomMaterial}
+          subtitle={t('product.productDescription.bottomMaterial')}
           description={` - ${bottomMaterial.material.name[language].value}`}
         />
         {strapLengthInCm ? (
           <Detail
-            subtitle={PRODUCT_DESCRIPTION[language].strapLengthInCm}
+            subtitle={t('product.productDescription.strapLengthInCm')}
             description={`- ${strapLengthInCm}`}
           />
         ) : null}
         {currentVolume && currentWeight ? (
           <div>
-            <Detail subtitle={WEIGHT[language].volumeLabel} description={` - ${currentVolume}`} />
-            <Detail subtitle={WEIGHT[language].weightLabel} description={` - ${currentWeight}`} />
+            <Detail
+              subtitle={t('product.weight.volumeLabel')}
+              description={` - ${currentVolume}`}
+            />
+            <Detail
+              subtitle={t('product.weight.weightLabel')}
+              description={` - ${currentWeight}`}
+            />
           </div>
         ) : null}
       </div>
       <div className={styles.priceContainer}>
-        <span className={styles.subtitle}>{PRODUCT_PRICE[language].price}: </span>
+        <span className={styles.subtitle}>{t('common.price')}: </span>
         <span data-cy='price' className={styles.price}>
           {Math.round(currentPrice[currency]?.value)}
           {'\u00A0'}
@@ -87,9 +88,9 @@ const ProductInfo = ({ price, product }) => {
         </span>
       </div>
       <div className={styles.look}>
-        <span className={styles.subtitle}>{COLOR[language].color}:</span>
+        <span className={styles.subtitle}>{t('common.color')}:</span>
         <div className={styles.colorCircle} />
-        <span className={styles.subtitle}>{PATTERN[language].pattern}:</span>
+        <span className={styles.subtitle}>{t('product.pattern')}:</span>
         <div className={styles.patternCircle} />
         <br />
       </div>

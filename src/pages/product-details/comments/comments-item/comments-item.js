@@ -22,8 +22,9 @@ import {
   handleUserId
 } from '../../../../utils/handle-comments';
 
-const CommentsItem = ({ data, commentId, productId, refetch }) => {
+const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
   const styles = useStyles();
+
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
     data;
 
@@ -82,7 +83,14 @@ const CommentsItem = ({ data, commentId, productId, refetch }) => {
 
   const replyCommentsList = replyComments.map(
     ({ _id, ...rest }, index) =>
-      index <= currentLimit && <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+      index <= currentLimit && (
+        <ReplyCommentsItem
+          key={_id}
+          data={rest}
+          replyCommentId={_id}
+          refetchComments={refetchComments}
+        />
+      )
   );
 
   const limitOption = replyCommentsList.length === replyComments.count;
@@ -167,7 +175,11 @@ const CommentsItem = ({ data, commentId, productId, refetch }) => {
           </div>
         ) : null}
         {isReplyShown && userData?._id && (
-          <ReplyForm cancel={handleReplyClose} refetch={refetch} commentId={commentId} />
+          <ReplyForm
+            cancel={handleReplyClose}
+            refetchComments={refetchComments}
+            commentId={commentId}
+          />
         )}
         {getReplyLoading && getReplyLoadingId === commentId && (
           <div className={styles.loader}>
@@ -187,6 +199,7 @@ const CommentsItem = ({ data, commentId, productId, refetch }) => {
         userId={handleUserId(userData)}
         isDeleteComment={1}
         productId={productId}
+        refetchComments={refetchComments}
       />
     </div>
   );

@@ -128,3 +128,13 @@ export const addReplyMutation = gql`
     }
   }
 `;
+
+export const deleteCommentMutation = gql`
+  mutation ($comment: ID!, $id: ID!) {
+    deleteComment(id: $id, commentID: $comment) {
+      ... on Comment {
+        _id
+      }
+    }
+  }
+`;

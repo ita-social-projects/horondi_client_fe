@@ -88,7 +88,7 @@ const Comments = ({ productId }) => {
     <CommentsItem
       key={_id}
       data={rest}
-      refetch={refetchComments}
+      refetchComments={refetchComments}
       commentId={_id}
       productId={productId}
     />

@@ -11,7 +11,7 @@ import { addReplyMutation } from '../../operations/comments.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';
 
-const ReplyForm = ({ cancel, commentId, refetch }) => {
+const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
   const styles = useStyles();
@@ -36,7 +36,7 @@ const ReplyForm = ({ cancel, commentId, refetch }) => {
         productId
       }
     });
-    await refetch();
+    await refetchComments();
     setShouldValidate(false);
     cancel(false);
   };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,9 +7,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './comment-dialog.styles';
-
-import { deleteComment, deleteReplyComment } from '../../../../../redux/comments/comments.actions';
+import { deleteCommentMutation } from '../../operations/comments.queries';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 
 const CommentDialog = ({
   isModalShown,
@@ -18,31 +18,19 @@ const CommentDialog = ({
   commentId,
   userId,
   isDeleteComment = 0,
-  productId
+  productId,
+  refetchComments
 }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
+    onError: (err) => errorOrLoadingHandler(err)
+  });
 
-  const handleDelete = () => {
-    if (isDeleteComment === 1) {
-      dispatch(
-        deleteComment({
-          product: productId,
-          comment: commentId,
-          id: userId
-        })
-      );
-      handleClose();
-    } else {
-      dispatch(
-        deleteReplyComment({
-          replyCommentId: commentId,
-          id: userId
-        })
-      );
-      handleClose();
-    }
+  const handleDelete = async () => {
+    await deleteComment({ variables: { comment: commentId, id: userId } });
+    await refetchComments();
+    handleClose();
   };
 
   return (

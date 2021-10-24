@@ -10,12 +10,12 @@ import Loader from '../../components/loader';
 import { useConstructor } from './hooks';
 import { IMG_URL } from '../../configs';
 import {
-  currentCurrencyValue,
   constructorImageInput,
   constructorEndPrice,
   constructorPartPrice,
   constructorPartNames
 } from '../../utils/constructor';
+import { getCurrentCurrency } from '../../utils/checkout';
 import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 
@@ -166,7 +166,7 @@ const ImagesConstructor = () => {
                 <span>{t('common.defaultPrice')}</span>
                 <span>
                   {prices.DEFAULT_PRICE_VALUE}
-                  {currentCurrencyValue(language, currency)}
+                  {getCurrentCurrency(currency)}
                 </span>
               </li>
               <div className={`${styles.line} ${styles.topLine}`} />
@@ -182,7 +182,7 @@ const ImagesConstructor = () => {
                     <span>{constructorPartNames(!language)[index]}</span>
                     <span>
                       +{item}
-                      {currentCurrencyValue(language, currency)}
+                      {getCurrentCurrency(currency)}
                     </span>
                   </li>
                 ) : (
@@ -196,7 +196,7 @@ const ImagesConstructor = () => {
             {t('common.endPrice')}
             <span>
               {constructorEndPrice(prices.priceTotal)}
-              {currentCurrencyValue(language, currency)}
+              {getCurrentCurrency(currency)}
             </span>
           </h2>
           <ConstructorSubmit />

@@ -22,8 +22,7 @@ const NewPassword = ({ token }) => {
 
   const dispatch = useDispatch();
 
-  const { language, passwordReset, userError, loading } = useSelector(({ Language, User }) => ({
-    language: Language.language,
+  const { passwordReset, userError, loading } = useSelector(({ User }) => ({
     passwordReset: User.passwordReset,
     loading: User.userLoading,
     userError: User.error
@@ -108,7 +107,7 @@ const NewPassword = ({ token }) => {
                 >
                   {t('common.change')}
                 </Button>
-                {handleErrorMessage(userError, styles.serverError, language)}
+                {handleErrorMessage(userError, styles.serverError)}
               </Form>
             )}
           </div>

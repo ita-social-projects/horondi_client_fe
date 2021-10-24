@@ -8,11 +8,11 @@ import OrderHistoryPagination from '../../containers/orders/order-history/order-
 import { useStyles } from './order-history.styles';
 import { limitHistoryOrders } from '../../const/user-order-history';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import { getUserOrdersCountQuery, getUserOrdersQuery } from './operations/order-history.queries';
+import { getUserOrdersQuery } from './operations/order-history.queries';
 
 const OrderHistory = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [countPerPage, setCountPerPage] = useState(null);
+  const [ordersCount, setOrdersCount] = useState(null);
   const [orders, setOrders] = useState([]);
   const { t } = useTranslation();
   const styles = useStyles();
@@ -25,20 +25,12 @@ const OrderHistory = () => {
       }
     },
     onCompleted: (data) => {
-      setOrders(data.getUserOrders);
+      setOrders(data.getUserOrders.userOrders);
+      setOrdersCount(data.getUserOrders.ordersCount);
     }
   });
 
-  const { loadind: loadingCount, error: errorCount } = useQuery(getUserOrdersCountQuery, {
-    variables: {
-      id: 'jarslghahsjeh'
-    },
-    onCompleted: (data) => {
-      setCountPerPage(data.getCountUserOrders.countOrder);
-    }
-  });
-
-  const quantityPages = Math.ceil(countPerPage / limitHistoryOrders);
+  const quantityPages = Math.ceil(ordersCount / limitHistoryOrders);
 
   const changeHandler = (value) => {
     setCurrentPage(value);
@@ -53,8 +45,6 @@ const OrderHistory = () => {
   }
 
   if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
-
-  if (loadingCount || errorCount) return errorOrLoadingHandler(errorCount, loadingCount);
 
   return (
     <div className={styles.root}>

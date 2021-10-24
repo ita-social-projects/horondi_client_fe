@@ -12,7 +12,6 @@ import CommentDialog from './comment-dialog';
 import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
 import ReplyForm from './reply-form';
 import ReplyCommentsItem from './reply-comments-item';
-import { Loader } from '../../../../components/loader/loader';
 import {
   handleArrowIcon,
   handleRate,
@@ -28,14 +27,9 @@ const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
     data;
 
-  const { userData, replyLoading, replyLoadingId, getReplyLoading, getReplyLoadingId } =
-    useSelector(({ Comments, User }) => ({
-      userData: User.userData,
-      replyLoading: Comments.replyLoading.loader,
-      replyLoadingId: Comments.replyLoading.commentId,
-      getReplyLoading: Comments.getReplyLoading.loader,
-      getReplyLoadingId: Comments.getReplyLoading.commentId
-    }));
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
+  }));
 
   const { t, i18n } = useTranslation();
 
@@ -180,16 +174,6 @@ const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
             refetchComments={refetchComments}
             commentId={commentId}
           />
-        )}
-        {getReplyLoading && getReplyLoadingId === commentId && (
-          <div className={styles.loader}>
-            <Loader width={40} height={40} heightWrap={90} />
-          </div>
-        )}
-        {replyLoading && replyLoadingId === commentId && (
-          <div className={styles.loader}>
-            <Loader width={40} height={40} heightWrap={90} />
-          </div>
         )}
       </div>
       <CommentDialog

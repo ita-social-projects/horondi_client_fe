@@ -15,8 +15,7 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
   const styles = useStyles();
-  const { userData, productId } = useSelector(({ Language, User, Products }) => ({
-    language: Language.language,
+  const { userData, productId } = useSelector(({ User, Products }) => ({
     userData: User.userData,
     productId: Products.productToSend._id
   }));

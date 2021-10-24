@@ -18,12 +18,11 @@ const CommentDialog = ({
   commentId,
   userId,
   isDeleteComment = 0,
-  productId,
   refetchComments
 }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
+  const [deleteComment] = useMutation(deleteCommentMutation, {
     onError: (err) => errorOrLoadingHandler(err)
   });
 

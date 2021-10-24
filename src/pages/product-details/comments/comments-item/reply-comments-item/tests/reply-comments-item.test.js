@@ -1,15 +1,15 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
+import { useMutation, useQuery } from '@apollo/client';
 import ReplyCommentsItem from '../reply-comments-item';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import {
-  replyCommentId,
-  dataSecond,
   dataAdmin,
+  dataSecond,
   dataSuperAdmin,
-  dataWithOutVerifing
+  dataWithOutVerifing,
+  replyCommentId
 } from './reply-comments-item.variables';
 import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
@@ -25,6 +25,11 @@ jest.mock('react-i18next', () => ({
     i18n: () => ({ dateLanguage: 'ukr-UA' })
   })
 }));
+
+jest.mock('@apollo/client');
+
+useQuery.mockImplementation(() => ({ refetch: () => jest.fn(), loading: true }));
+useMutation.mockImplementation(() => [jest.fn(), { loading: true }]);
 
 const SelectorsState = {
   userData: {

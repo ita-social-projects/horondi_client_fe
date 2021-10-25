@@ -185,8 +185,8 @@ const ProfilePage = () => {
               </span>
               {handleProfilePage(
                 userRecovered,
-                t('profilePage.passwordChange'),
-                language,
+                t('profilePage.passwordChange.btnTitle'),
+                t('profilePage.checkEmailText'),
                 handlePasswordChange,
                 classes.button
               )}
@@ -202,8 +202,8 @@ const ProfilePage = () => {
                 <h2>{t('profilePage.emailConfirm.heading')}</h2>
                 {handleProfilePage(
                   confirmationEmailSent,
-                  t('profilePage.emailConfirm'),
-                  language,
+                  t('profilePage.emailConfirm.btnTitle'),
+                  t('profilePage.checkEmailText'),
                   handleConfirmation,
                   classes.button
                 )}

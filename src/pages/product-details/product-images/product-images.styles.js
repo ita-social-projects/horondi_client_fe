@@ -38,9 +38,8 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '6px'
   },
 
-  primaryImage: (props) => ({
+  primaryImage: {
     gridRow: '1 / -1',
-    background: `url(${props.primaryImage}) no-repeat center`,
     backgroundSize: 'cover',
     maxHeight: 450,
     width: 'auto',
@@ -51,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
       width: 'auto',
       height: 'auto'
     }
-  }),
+  },
 
   sideImage: {
     ...imgSides

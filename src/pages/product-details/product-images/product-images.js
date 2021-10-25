@@ -13,6 +13,7 @@ const ProductImages = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
+  const [primaryImage, setPrimaryImage] = useState(0);
 
   const { t } = useTranslation();
 
@@ -56,7 +57,7 @@ const ProductImages = ({ images }) => {
     .slice(1, imagesSet.length)
     .filter((_, i) => i < 3)
     .map((image, i) => {
-      if (i === 2) {
+      if (i === 2 || i === imagesSet.length) {
         return (
           <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
             <div className={styles.lastImageText}>{t('product.allPhotos')}</div>
@@ -75,7 +76,7 @@ const ProductImages = ({ images }) => {
             className={styles.sideImage}
             src={image.src}
             alt={t('product.imgAltInfo')}
-            onClick={() => setCurrImg(i + 1)}
+            onClick={() => setPrimaryImage(i + 1)}
             data-cy='image'
           />
         </div>
@@ -83,11 +84,11 @@ const ProductImages = ({ images }) => {
     });
 
   const nextImg = () => {
-    setCurrImg((prev) => prev + 1);
+    setPrimaryImage((prev) => prev + 1);
   };
 
   const prevImg = () => {
-    setCurrImg((prev) => prev - 1);
+    setPrimaryImage((prev) => prev - 1);
   };
 
   return (
@@ -107,12 +108,12 @@ const ProductImages = ({ images }) => {
       />
       <div className={styles.images}>
         <div className={styles.imagePreviewContainer}>
-          <button className={styles.circle} onClick={prevImg} disabled={currImg === 0}>
+          <button className={styles.circle} onClick={prevImg} disabled={primaryImage === 0}>
             <ArrowBackIosRounded />
           </button>
           <div className={styles.imageContainer}>
             <img
-              src={IMG_URL + initImages[currImg]}
+              src={IMG_URL + initImages[primaryImage]}
               className={styles.primaryImage}
               alt={t('product.imgAltInfo')}
             />
@@ -120,7 +121,7 @@ const ProductImages = ({ images }) => {
           <button
             className={styles.circle}
             onClick={nextImg}
-            disabled={currImg === initImages.length - 1}
+            disabled={primaryImage === initImages.length - 1}
           >
             <ArrowForwardIosRounded />
           </button>

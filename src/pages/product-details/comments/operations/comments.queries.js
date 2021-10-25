@@ -19,19 +19,6 @@ export const getCommentsQuery = gql`
             firstName
             role
           }
-          replyComments {
-            _id
-            replyText
-            showReplyComment
-            createdAt
-            verifiedPurchase
-            answerer {
-              _id
-              firstName
-              email
-              role
-            }
-          }
         }
         count
       }
@@ -71,6 +58,7 @@ export const getReplyCommentsQuery = gql`
   query ($filter: ReplyCommentFilterInput, $pagination: Pagination) {
     getReplyCommentsByComment(filter: $filter, pagination: $pagination) {
       ... on PaginatedComments {
+        __typename
         items {
           _id
           replyComments {

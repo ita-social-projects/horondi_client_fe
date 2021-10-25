@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import parse from 'html-react-parser';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { useQuery } from '@apollo/client';
@@ -27,10 +27,6 @@ const Materials = () => {
   const code = 'materials';
   const skip = 0;
   const limit = 1000;
-
-  // const { patterns } = useSelector(({ Pattern }) => ({
-  //   patterns: Pattern.list
-  // }));
 
   useEffect(() => {
     window.scrollTo(0, 0);

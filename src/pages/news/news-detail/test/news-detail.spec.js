@@ -22,18 +22,9 @@ jest.mock('react', () => ({
 }));
 
 describe('test newsDetail', () => {
-  it('should cover branches', () => {
+  it('should match snapshot', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
-    }));
-
-    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
-  });
-
-  it('should cover other branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      loading: true
     }));
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
   });

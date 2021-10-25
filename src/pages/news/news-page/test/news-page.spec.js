@@ -3,6 +3,13 @@ import { shallow } from 'enzyme';
 import { useQuery } from '@apollo/client';
 import NewsPage from '../news-page';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })
+}));
+jest.mock('../../news-page/news-page.style', () => ({ useStyles: () => ({}) }));
+jest.mock('@apollo/client');
+jest.mock('react-redux');
+
 let wrapper;
 const useQueryData = {
   loading: false,
@@ -10,25 +17,10 @@ const useQueryData = {
   data: {}
 };
 
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: () => ({ language: 0 })
-}));
-
-jest.mock('@apollo/client');
-
 describe('Test newsPage', () => {
-  it('should cover branches', () => {
+  it('should match snapshot', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
-    }));
-    wrapper = shallow(<NewsPage />);
-  });
-
-  it('should cover other branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      loading: true
     }));
     wrapper = shallow(<NewsPage />);
   });

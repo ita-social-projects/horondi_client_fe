@@ -32,11 +32,6 @@ const Materials = () => {
   //   patterns: Pattern.list
   // }));
 
-  const { loading, error } = useQuery(getAllPatterns, {
-    variables: { skip, limit },
-    onCompleted: (data) => setPatterns(data.getAllPatterns.items)
-  });
-
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getPatterns());
@@ -51,10 +46,15 @@ const Materials = () => {
       });
   }, [patterns]);
 
-  // const { loading, error } = useQuery(getBusinessTextByCode, {
-  //   variables: { code },
-  //   onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
-  // });
+  const { loading, error } = useQuery(getAllPatterns, {
+    variables: { skip, limit },
+    onCompleted: (data) => setPatterns(data.getAllPatterns.items)
+  });
+
+  const { newLoading, newError } = useQuery(getBusinessTextByCode, {
+    variables: { code },
+    onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
+  });
 
   const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
 
@@ -71,6 +71,7 @@ const Materials = () => {
   ));
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
+  if (newLoading || newError) return errorOrLoadingHandler(newLoading, newError);
 
   return (
     <div className={styles.root}>

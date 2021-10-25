@@ -4,6 +4,13 @@
         "cash": "Cash"
     },
     "checkoutTitles": {
+        "orderForm": "Order form",
+        "deliveryPrice": "Delivery price",
+        "UAH": "UAH",
+        "USD": "USD",
+        "region": "Region",
+        "orderNumber": "Order № ",
+        "deliveryAddress": "Delivery Address",
         "delivery": "Delivery Method",
         "checkoutTitle": "Checkout Process",
         "contactInfo": "Contact Information",
@@ -17,14 +24,36 @@
         "restDay": "Day off"
     },
     "checkoutTextFields": {
-        "paymentMethod": "Choose a payment method *"
+        "paymentMethod": "Choose a payment method *",
+        "firstName": "First name *",
+        "lastName": "Last name *",
+        "email": "Email *",
+        "contactPhoneNumber": "Phone *",
+        "city": "City *",
+        "house": "Building *",
+        "street": "Street *",
+        "flat": "Apartment ",
+        "orderComment": "Order comment...",
+        "deliveryType": "Select a delivery type",
+        "department": "Department *",
+        "delivery": "Delivery type",
+        "total": "Total",
+        "region": "Region *",
+        "district": "District *"
     },
+    "createOrder": "Create order",
+    "confirmOrder": "Confirm order",
+    
     "checkoutAdditionalInfo": {
         "additionalInfo": "* Order will be shipped within 10 business days.",
         "consent": [
             "Making order you agree with",
             " terms and conditions"
-        ]
+        ],
+        "noOneCity": "City not found",
+        "noOneDepartment": "Department not found",
+        "noOneRegion": "Region not found",
+        "noOneDistrict": "District not found"
     },
     "deliveryType": {
         "novaPost": "Nova Poshta",
@@ -41,5 +70,18 @@
         "friday": "Fri:  ",
         "saturday": "Sat:  ",
         "sunday": "Sun:  "
+    },
+    "checkoutError": {
+        "requiredField": "Field should not to be empty",
+        "firstName": "Field should contain from 2 to 30 characters",
+        "lastName": "Field should contain from 2 to 30 characters",
+        "email": "Incorrect email format ",
+        "phoneNumber": "Incorrect phone number format",
+        "userComment": "Field should contain from 2 to 500 characters",
+        "city": "Field should contain from 2 to 50 characters",
+        "street": "Field should contain from 2 to 100 characters",
+        "house": "Min value is 1 character",
+        "flat": "Min value is 1 character",
+        "onlyLetter": "Field should contain only letters"
     }
 }

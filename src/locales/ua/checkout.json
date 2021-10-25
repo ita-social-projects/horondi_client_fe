@@ -4,6 +4,8 @@
         "cash": "Готівкою"
     },
     "checkoutTitles": {
+        "orderForm": "Форма замовлення",
+        "deliveryPrice": "Ціна доставки",
         "delivery": "Доставка",
         "checkoutTitle": "Оформлення замовлення",
         "contactInfo": "Контакти",

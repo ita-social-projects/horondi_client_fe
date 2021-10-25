@@ -8,6 +8,7 @@ import 'react-awesome-slider/dist/styles.css';
 
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
+import { getAllPatternsQuery } from './operations/getAllPatterns.queries';
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
 import { getPatterns } from '../../redux/pattern/pattern.actions';
 import { getImage } from '../../utils/imageLoad';
@@ -19,13 +20,22 @@ const AutoplaySlider = withAutoplay(Slider);
 const Materials = () => {
   const [setImage] = useState([]);
   const [materialsPage, setMaterialsPage] = useState({});
+  const [patterns, setPatterns] = useState([]);
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const dispatch = useDispatch();
   const code = 'materials';
-  const { patterns } = useSelector(({ Pattern }) => ({
-    patterns: Pattern.list
-  }));
+  const skip = 0;
+  const limit = 1000;
+
+  // const { patterns } = useSelector(({ Pattern }) => ({
+  //   patterns: Pattern.list
+  // }));
+
+  const { loading, error } = useQuery(getAllPatternsQuery, {
+    variables: { skip, limit },
+    onCompleted: (data) => setPatterns(data.getAllPatternsQuery.items)
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,10 +51,10 @@ const Materials = () => {
       });
   }, [patterns]);
 
-  const { loading, error } = useQuery(getBusinessTextByCode, {
-    variables: { code },
-    onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
-  });
+  // const { loading, error } = useQuery(getBusinessTextByCode, {
+  //   variables: { code },
+  //   onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
+  // });
 
   const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
 

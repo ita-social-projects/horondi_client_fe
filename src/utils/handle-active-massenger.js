@@ -1,4 +1,4 @@
-import { errorMessages } from '../translations/chat.translation';
+import i18next from 'i18next';
 
-export const handleHelperText = (validation, shouldValidate, language, label) =>
-  !validation && shouldValidate ? `${errorMessages[language].value[label]}` : '';
+export const handleHelperText = (validation, shouldValidate, label) =>
+  !validation && shouldValidate ? i18next.t(`error.profile.${label}`) : '';

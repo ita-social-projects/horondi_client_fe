@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMutation, useQuery } from '@apollo/client';
 import CommentsItem from '../comments-item';
 
 jest.mock('react-redux');
@@ -14,6 +15,10 @@ jest.mock('react-i18next', () => ({
     i18n: () => ({ dateLanguage: 'ukr-UA' })
   })
 }));
+jest.mock('@apollo/client');
+
+useQuery.mockImplementation(() => ({ refetch: () => jest.fn(), loading: true }));
+useMutation.mockImplementation(() => [jest.fn(), { loading: true }]);
 
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);

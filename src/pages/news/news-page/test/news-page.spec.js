@@ -1,5 +1,4 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { useQuery } from '@apollo/client';
 import NewsPage from '../news-page';
 

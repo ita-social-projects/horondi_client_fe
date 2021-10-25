@@ -69,7 +69,6 @@ import {
   getCountUserOrders
 } from '../user.operations';
 import routes from '../../../const/routes';
-import { resetWishlist, setWishlist } from '../../wishlist/wishlist.actions';
 import { getCartByUserId, mergeCartFromLSWithUserCart } from '../../cart/cart.operations';
 import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../../cart/cart.actions';
 import { SNACKBAR_MESSAGE, SNACKBAR_TYPES, USER_IS_BLOCKED } from '../../../configs';
@@ -94,7 +93,6 @@ describe('user sagas tests', () => {
         [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
       ])
       .put(setUser({ ...user, purchasedProducts }))
-      .put(setWishlist(user.wishlist))
       .put(setCart(userCart.cart.items))
       .put(setCartTotalPrice(userCart.cart.totalPrice))
       .put(push(routes.pathToProfile))
@@ -108,7 +106,7 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(7);
+        expect(analysisPut).toHaveLength(6);
         expect(analysisCall).toHaveLength(3);
         clearLocalStorage();
       }));
@@ -133,7 +131,6 @@ describe('user sagas tests', () => {
         [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
       ])
       .put(setUser({ ...user, purchasedProducts }))
-      .put(setWishlist(user.wishlist))
       .put(setCart(userCart.cart.items))
       .put(setCartTotalPrice(userCart.cart.totalPrice))
       .run()
@@ -141,7 +138,7 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(7);
+        expect(analysisPut).toHaveLength(6);
         expect(analysisCall).toHaveLength(3);
       }));
 
@@ -440,13 +437,12 @@ describe('user sagas tests', () => {
     expectSaga(handleUserLogout)
       .put(setUser(null))
       .put(resetCart())
-      .put(resetWishlist())
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(5);
+        expect(analysisPut).toHaveLength(4);
         expect(analysisCall).toHaveLength(0);
       }));
 

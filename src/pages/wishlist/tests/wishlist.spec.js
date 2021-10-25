@@ -2,11 +2,14 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Wishlist from '../wishlist';
-import EmptyWishlist from '../empty-wishlist';
 
 jest.mock('../wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../services/local-storage.service');
+jest.mock('../../../hooks/use-wishlist-loader', () => ({
+  __esModule: true,
+  default: () => ({ loading: false, error: null, wishlist: {} })
+}));
 
 const dispatch = jest.fn();
 const state = {
@@ -31,9 +34,5 @@ describe('Wishlist component tests', () => {
 
   it('Should render Wishlist', () => {
     expect(wrapper).toBeDefined();
-  });
-
-  it('Should render Empty-Wishlist if there are no items', () => {
-    expect(wrapper.exists(EmptyWishlist)).toBe(true);
   });
 });

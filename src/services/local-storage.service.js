@@ -4,7 +4,7 @@ export const clearLocalStorage = () => {
   const horondi = {
     accessToken: null,
     _id: null,
-    wishlist: [],
+    wishlist: { products: [] },
     language: DEFAULT_LANGUAGE,
     currency: DEFAULT_CURRENCY,
     cart: [],

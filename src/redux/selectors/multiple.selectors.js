@@ -18,17 +18,10 @@ export const selectCurrencyProductsCategoryFilter = ({
   productToSend
 });
 
-export const selectLanguageProductsUserWishlist = ({
-  Language,
-  Products,
-  User,
-  Wishlist,
-  Cart
-}) => ({
+export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Cart }) => ({
   language: Language.language,
   productToSend: Products.productToSend,
   userData: User.userData,
-  wishlistItems: Wishlist.list,
   cartList: Cart.list
 });
 

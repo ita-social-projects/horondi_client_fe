@@ -42,6 +42,7 @@
         "district": "District *"
     },
     "createOrder": "Create order",
+    "payOrder": "Перейти до оплати",
     "confirmOrder": "Confirm order",
     
     "checkoutAdditionalInfo": {

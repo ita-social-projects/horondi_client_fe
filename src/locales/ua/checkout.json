@@ -34,7 +34,6 @@
         "lastName": "Прізвище *",
         "email": "Email *",
         "contactPhoneNumber": "Номер телефону *",
-
         "paymentMethod": "Виберіть метод оплати *",
         "orderComment": "Коментар до замовлення...",
         "deliveryType": "Виберіть тип доставки",

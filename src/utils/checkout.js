@@ -136,10 +136,9 @@ export const orderInputData = (data, deliveryType, cartItems) => ({
   userComment: data.userComment
 });
 
-export const checkoutFormBtnValue = (values) =>
-  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash.label
-    ? i18next.t(`checkout.confirmOrder`)
-    : i18next.t(`checkout.payOrder`);
+export const checkoutFormBtnValue = (values) => values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash.label
+  ? i18next.t(`checkout.confirmOrder`)
+  : i18next.t(`checkout.payOrder`);
 
 export const courierInputLabels = () => [
   {

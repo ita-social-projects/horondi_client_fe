@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const getWishlistByUserId = gql`
+export const getWishlistByUserId = gql`
   query {
     getWishlistByUserId {
       ... on Wishlist {
@@ -62,5 +62,3 @@ const getWishlistByUserId = gql`
     }
   }
 `;
-
-export default getWishlistByUserId;

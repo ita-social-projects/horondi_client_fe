@@ -15,8 +15,8 @@ export default function useAddProductToWishlistHandler(product) {
 
   const [addProductMutation, { data, error }] = useMutation(addProductToWishlist);
 
-  const checkIsInWishlist = (wishlist, product) => {
-    wishlist.products.find((el) => JSON.stringify(el._id) === JSON.stringify(product._id))
+  const checkIsInWishlist = (list, productItem) => {
+    list.products.find((el) => JSON.stringify(el._id) === JSON.stringify(productItem._id))
       ? toggleIsInWishlist(true)
       : toggleIsInWishlist(false);
   };

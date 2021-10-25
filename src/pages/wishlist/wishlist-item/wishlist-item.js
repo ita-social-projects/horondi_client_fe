@@ -55,12 +55,12 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
     }
   };
 
-  const checkSizes = () => {
-    const availableSizes = item?.sizes.filter(
+  const getPrice = () => {
+    const availableSizes = item.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
 
-    return availableSizes
+    return availableSizes.length
       ? availableSizes[0].price[currency].value
       : t('productList.sizeNotAvailable.value');
   };
@@ -93,7 +93,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
         <div className={styles.priceWrapper}>
           <FontAwesomeIcon icon={currencySign} />
           {'\u00A0'}
-          {checkSizes()}
+          {getPrice()}
         </div>
       </TableCell>
       <TableCell>

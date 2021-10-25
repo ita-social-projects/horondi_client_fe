@@ -1,5 +1,4 @@
 import React from 'react';
-import i18next from 'i18next';
 import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
 import Rating from '@material-ui/lab/Rating';
 import { TEXT_VALUE } from '../configs';

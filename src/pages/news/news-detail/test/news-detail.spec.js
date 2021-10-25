@@ -27,5 +27,24 @@ describe('test newsDetail', () => {
       ...useQueryData
     }));
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should cover other branches', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      loading: true
+    }));
+
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+  });
+
+  it('should cover rest branches', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      error: {}
+    }));
+
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
   });
 });

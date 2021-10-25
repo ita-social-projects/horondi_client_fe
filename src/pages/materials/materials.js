@@ -8,7 +8,7 @@ import 'react-awesome-slider/dist/styles.css';
 
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
-import { getAllPatternsQuery } from './operations/getAllPatterns.queries';
+import { getAllPatterns } from './operations/getAllPatterns.queries';
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
 import { getPatterns } from '../../redux/pattern/pattern.actions';
 import { getImage } from '../../utils/imageLoad';
@@ -32,9 +32,9 @@ const Materials = () => {
   //   patterns: Pattern.list
   // }));
 
-  const { loading, error } = useQuery(getAllPatternsQuery, {
+  const { loading, error } = useQuery(getAllPatterns, {
     variables: { skip, limit },
-    onCompleted: (data) => setPatterns(data.getAllPatternsQuery.items)
+    onCompleted: (data) => setPatterns(data.getAllPatterns.items)
   });
 
   useEffect(() => {

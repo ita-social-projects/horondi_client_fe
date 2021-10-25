@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const getAllPatternsQuery = gql`
+export const getAllPatterns = gql`
   query ($skip: Int, $limit: Int) {
-    getAllPatternsQuery(skip: $skip, limit: $limit) {
+    getAllPatterns(skip: $skip, limit: $limit) {
       items {
         _id
         name {

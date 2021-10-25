@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { useQuery } from '@apollo/client';
 import NewsPage from '../news-page';
-import NewsDetail from '../../news-detail';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })
@@ -33,14 +32,6 @@ describe('Test newsPage', () => {
     }));
 
     wrapper = shallow(<NewsPage />);
-  });
-
-  it('should cover rest branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      error: {}
-    }));
-
-    wrapper = shallow(<NewsPage />);
+    expect(wrapper).toBeDefined();
   });
 });

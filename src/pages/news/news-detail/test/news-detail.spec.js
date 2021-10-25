@@ -37,14 +37,6 @@ describe('test newsDetail', () => {
     }));
 
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
-  });
-
-  it('should cover rest branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      error: {}
-    }));
-
-    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+    expect(wrapper).toBeDefined();
   });
 });

@@ -3,70 +3,70 @@ import { call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   resetState,
+  setConfirmationEmailStatus,
   setConfirmationLoading,
   setPasswordIsReset,
   setRecoveryLoading,
   setUser,
+  setUserCountOrders,
+  setUserError,
   setUserIsChecked,
   setUserIsConfirmed,
   setUserLoading,
-  userHasRegistered,
-  setConfirmationEmailStatus,
   setUserOrders,
   userHasRecovered,
-  setUserCountOrders,
-  setUserError
+  userHasRegistered
 } from '../user.actions';
 import userReducer from '../user.reducer';
 import {
-  payload,
-  initialStateMock,
+  cartFromLc,
+  countOrder,
   email,
-  pass,
-  rememberMe,
-  user,
-  purchasedProducts,
-  token,
-  userWithProducts,
+  error,
+  initialStateMock,
   language,
+  pagination,
+  pass,
+  payload,
+  purchasedProducts,
+  rememberMe,
+  token,
+  upload,
+  user,
   userCart,
   userId,
-  upload,
-  pagination,
-  error,
-  countOrder,
-  cartFromLc
+  userWithProducts
 } from './user.mocks';
 import {
-  handleUserLogin,
-  handleUserConfirm,
-  handleUserRecovery,
-  handlePasswordReset,
-  handleTokenCheck,
-  handleUserRegister,
-  handleUserPreserve,
-  handleUpdateUser,
-  handleSendConfirmation,
   handleGetUserOrders,
   handleGoogleUserLogin,
-  handleUserLogout,
+  handlePasswordReset,
   handleRefreshTokenInvalid,
-  handleUserError
+  handleSendConfirmation,
+  handleTokenCheck,
+  handleUpdateUser,
+  handleUserConfirm,
+  handleUserError,
+  handleUserLogin,
+  handleUserLogout,
+  handleUserPreserve,
+  handleUserRecovery,
+  handleUserRegister
 } from '../user.sagas';
 import {
-  loginUser,
-  getGoogleUser,
-  confirmUserEmail,
-  recoverUser,
   checkIfTokenIsValid,
+  confirmUserEmail,
+  getCountUserOrders,
+  getGoogleUser,
+  getPurchasedProducts,
+  getUserByToken,
+  getUserOrders,
+  loginUser,
+  recoverUser,
   registerUser,
   resetPassword,
-  updateUserById,
   sendEmailConfirmation,
-  getUserOrders,
-  getUserByToken,
-  getPurchasedProducts,
-  getCountUserOrders
+  updateUserById
 } from '../user.operations';
 import routes from '../../../const/routes';
 import { resetWishlist, setWishlist } from '../../wishlist/wishlist.actions';
@@ -446,7 +446,7 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(5);
+        expect(analysisPut).toHaveLength(4);
         expect(analysisCall).toHaveLength(0);
       }));
 

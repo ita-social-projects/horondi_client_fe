@@ -7,7 +7,9 @@ import items from './mockedItems';
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
-  useContext: () => [{}]
+  useContext: () => [{}],
+  useEffect: (cb) => cb(),
+  useState: (value) => [value, () => null]
 }));
 jest.mock('../../../../context/theme-context', () => ({}));
 jest.mock('../../../../hooks/use-delete-product-from-wishlist-handler', () => ({

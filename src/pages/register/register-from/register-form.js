@@ -25,15 +25,14 @@ export default function RegisterForm({
 }) {
   const styles = useStyles();
   const { t } = useTranslation();
-  function type(name) {
-    if (name === USER_REGISTER_LABELS.pass) {
-      return name;
-    }
-    if (name === USER_REGISTER_LABELS.passConfirm) {
+
+  const type = (name) => {
+    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
       return USER_REGISTER_LABELS.pass;
     }
     return USER_REGISTER_LABELS.text;
-  }
+  };
+
   return (
     <Form className={styles.registerForm}>
       {loading ? (

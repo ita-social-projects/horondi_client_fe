@@ -4,6 +4,7 @@ import NewsItem from '../news-item';
 
 describe('Test NewsItem', () => {
   it('should render component', () => {
-    shallow(<NewsItem />);
+    const component = shallow(<NewsItem />);
+    expect(component).toBeDefined();
   });
 });

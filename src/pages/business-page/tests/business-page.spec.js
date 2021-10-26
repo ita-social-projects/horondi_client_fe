@@ -12,11 +12,22 @@ beforeEach(() => {
   );
 });
 
-it('should render the transmitted text', async () => {
-  expect(screen.queryByText('Sashko Horondi')).toBeNull();
-  expect(await screen.findByText('Sashko Horondi')).toBeInTheDocument();
-});
+describe('Business page tests', () => {
+  it('should not render the text before responce will be received', () => {
+    const emptyTextWithHorondi = screen.queryByAltText(/Sashko Horondi/i);
 
-it('should render transmitted images', async () => {
-  expect(await screen.findAllByAltText(/img/i)).toHaveLength(2);
+    expect(emptyTextWithHorondi).toBeNull();
+  });
+
+  it('should render the text after responce will be received', async () => {
+    const textWithHorondi = await screen.findByText(/Sashko Horondi/i);
+
+    expect(textWithHorondi).toBeInTheDocument();
+  });
+
+  it('should render transmitted images', async () => {
+    const arrayOfImages = await screen.findAllByAltText(/img/i);
+
+    expect(arrayOfImages).toHaveLength(2);
+  });
 });

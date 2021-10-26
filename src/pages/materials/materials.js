@@ -42,12 +42,12 @@ const Materials = () => {
       });
   }, [patterns]);
 
-  const { loading, error } = useQuery(getAllPatterns, {
+  const { loadingPatterns, errorPatterns } = useQuery(getAllPatterns, {
     variables: { skip, limit },
     onCompleted: (data) => setPatterns(data.getAllPatterns.items)
   });
 
-  const { newLoading, newError } = useQuery(getBusinessTextByCode, {
+  const { loading, error } = useQuery(getBusinessTextByCode, {
     variables: { code },
     onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
   });
@@ -67,7 +67,8 @@ const Materials = () => {
   ));
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
-  if (newLoading || newError) return errorOrLoadingHandler(newLoading, newError);
+  if (loadingPatterns || errorPatterns)
+    return errorOrLoadingHandler(errorPatterns, loadingPatterns);
 
   return (
     <div className={styles.root}>

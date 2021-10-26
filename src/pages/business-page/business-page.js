@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import parse from 'html-react-parser';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';

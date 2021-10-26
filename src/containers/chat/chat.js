@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-import { useSelector } from 'react-redux';
 import { config } from 'react-spring';
 import { Transition } from 'react-spring/renderprops';
 import { useQuery } from '@apollo/client';
@@ -17,11 +16,6 @@ export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
   const [contacts, setContacts] = useState([]);
-  
-  const { language } = useSelector((state) => ({
-    language: state.Language.language
-  }));
-
   const themeMode = useContext(ThemeContext);
 
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
@@ -62,8 +56,9 @@ export const Chat = () => {
                   <MailForm
                     contacts={contacts}
                     themeMode={themeMode}
-                    language={language}
                     cancelIconHandler={cancelIconHandler}
+                    iconsVisible={iconsVisible}
+                    mailFormVisible={mailFormVisible}
                   />
                 </div>
               ))

@@ -4,8 +4,14 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import ActiveMessenger from '../active-messenger';
 import { useStyles } from '../chat.style';
 
-export const MailForm = ({ themeMode, contacts, cancelIconHandler }) => {
-  const style = useStyles({ themeMode });
+export const MailForm = ({
+  themeMode,
+  contacts,
+  cancelIconHandler,
+  iconsVisible,
+  mailFormVisible
+}) => {
+  const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
   const { t } = useTranslation();
 
   return (
@@ -21,7 +27,11 @@ export const MailForm = ({ themeMode, contacts, cancelIconHandler }) => {
           </span>
         ))}
       </div>
-      <ActiveMessenger visible mailFormVisible themeMode={themeMode} />
+      <ActiveMessenger
+        iconsVisible={iconsVisible}
+        mailFormVisible={mailFormVisible}
+        themeMode={themeMode}
+      />
     </div>
   );
 };

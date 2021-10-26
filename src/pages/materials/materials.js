@@ -26,7 +26,7 @@ const Materials = () => {
   const dispatch = useDispatch();
   const code = 'materials';
   const skip = 0;
-  const limit = 1000;
+  const limit = 20;
 
   useEffect(() => {
     window.scrollTo(0, 0);

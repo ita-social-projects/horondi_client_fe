@@ -1,7 +1,7 @@
 {
     "checkoutPayment": {
-        "card": "Card",
-        "cash": "Cash"
+        "card": "CARD",
+        "cash": "CASH"
     },
     "checkoutTitles": {
         "orderForm": "Order form",

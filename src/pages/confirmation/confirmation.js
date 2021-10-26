@@ -38,10 +38,10 @@ const Confirmation = ({ token }) => {
         {loading ? <Loader /> : handleMessage(error, getLanguage)}
         <div className={styles.buttonGroup}>
           <Button variant='contained' onClick={() => goTo(pathToMain)}>
-            {t('confirmation.welcomeMessage.goToShop')}
+            {t('confirmation.goToShop')}
           </Button>
           <Button variant='contained' onClick={() => goTo(pathToLogin)}>
-            {t('confirmation.welcomeMessage.logIn')}
+            {t('confirmation.logIn')}
           </Button>
         </div>
       </div>

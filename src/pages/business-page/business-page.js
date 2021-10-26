@@ -18,10 +18,6 @@ const BusinessPage = ({ match }) => {
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [code]);
-
   const addressText = page?.text && parse(page?.text[language].value);
   const styles = useStyles();
 

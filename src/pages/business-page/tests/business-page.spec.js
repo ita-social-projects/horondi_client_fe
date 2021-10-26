@@ -1,26 +1,33 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { render, screen } from '@testing-library/react';
+import { MockedProvider } from '@apollo/react-testing';
+import { mockData, mockRequest } from './business-page.variables';
 import BusinessPage from '../business-page';
 
-jest.mock('../business-page.style.js', () => ({
-  useStyles: () => ({})
-}));
-const mockData = {
-  params: {
-    page: 'about-us'
-  }
-};
+beforeEach(() => {
+  render(
+    <MockedProvider mocks={mockRequest} addTypename={false}>
+      <BusinessPage match={mockData} />
+    </MockedProvider>
+  );
+});
 
-jest.mock('@apollo/client');
-jest.mock('react-router', () => ({
-  ...jest.requireActual('react-router')
-}));
+describe('Business page tests', () => {
+  it('should not render the text before responce will be received', () => {
+    const emptyTextWithHorondi = screen.queryByAltText(/Sashko Horondi/i);
 
-useQuery.mockImplementation(() => ({ error: null, loading: false }));
+    expect(emptyTextWithHorondi).toBeNull();
+  });
 
-describe('BusinessPage component tests', () => {
-  it('Should render BusinessPage', () => {
-    const component = shallow(<BusinessPage match={mockData} />);
-    expect(component).toBeDefined();
+  it('should render the text after responce will be received', async () => {
+    const textWithHorondi = await screen.findByText(/Sashko Horondi/i);
+
+    expect(textWithHorondi).toBeInTheDocument();
+  });
+
+  it('should render transmitted images', async () => {
+    const arrayOfImages = await screen.findAllByAltText(/img/i);
+
+    expect(arrayOfImages).toHaveLength(2);
   });
 });

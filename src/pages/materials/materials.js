@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import 'react-awesome-slider/dist/styles.css';
 import { useIsLoading } from '../../hooks/useIsLoading';
+import { useError } from '../../hooks/useError';
 
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
@@ -21,7 +22,6 @@ const AutoplaySlider = withAutoplay(Slider);
 const Materials = () => {
   const [setImage] = useState([]);
   const [materialsPage, setMaterialsPage] = useState({});
-  const [bullet, setBullet] = useState([]);
   const [patterns, setPatterns] = useState([]);
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
@@ -29,8 +29,6 @@ const Materials = () => {
   const code = 'materials';
   const skip = 0;
   const limit = 20;
-
-  const styles = useStyles();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,41 +42,22 @@ const Materials = () => {
           .then((src) => setImage((prev) => [...prev, src]))
           .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
       });
-    setBullet(patterns.map((e) => `${IMG_URL}${e.images.small}`));
   }, [patterns]);
 
-  // const { loading: loadingPatterns} = useQuery(getAllPatterns, {
-  //   variables: { skip, limit },
-  //   onCompleted: (data) => setPatterns(data.getAllPatterns.items),
-  //   onError: (err) => errorOrLoadingHandler(err)
-  // });
-
-  // const { loading: loadingMaterials} = useQuery(getBusinessTextByCode, {
-  //   variables: { code },
-  //   onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode),
-  //   onError: (err) => errorOrLoadingHandler(err)
-  // });
-
-  // const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
-
-  // const {isLoading} = useIsLoading([loadingPatterns, loadingMaterials]);
-  // if (isLoading) return errorOrLoadingHandler(isLoading);
-
-  const { loading, error } = useQuery(getAllPatterns, {
+  const { loading: loadingPatterns, error: errorPatterns } = useQuery(getAllPatterns, {
     variables: { skip, limit },
     onCompleted: (data) => setPatterns(data.getAllPatterns.items)
   });
 
-  const { loading: newLoading, error: newError } = useQuery(getBusinessTextByCode, {
+  const { loading: loadingMaterials, error: errorMaterials } = useQuery(getBusinessTextByCode, {
     variables: { code },
     onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
   });
 
-  if (loading || error) return errorOrLoadingHandler(error, loading);
-  if (loading || error) return errorOrLoadingHandler(newLoading, newError);
+  const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
 
   const materialPageText = materialsPage.text && parse(materialsPage.text[language].value);
-
+  const styles = useStyles();
   const imagesForSlider = patterns.map((pattern) => (
     <div
       className={styles.sliderImage}
@@ -88,6 +67,10 @@ const Materials = () => {
       <p className={styles.sliderText}>{`"${pattern.name[language].value}"`}</p>
     </div>
   ));
+
+  const { isLoading } = useIsLoading([loadingPatterns, loadingMaterials]);
+  const { isError } = useError([errorPatterns, errorMaterials]);
+  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
     <div className={styles.root}>
@@ -102,7 +85,7 @@ const Materials = () => {
           buttons
           bullets={false}
           infinite
-          bulletsSet={bullet}
+          bulletsSet={bulletSet}
         >
           {imagesForSlider}
         </AutoplaySlider>

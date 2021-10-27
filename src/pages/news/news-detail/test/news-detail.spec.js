@@ -2,7 +2,6 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Redirect } from 'react-router';
 import NewsDetail from '../news-detail';
-import { getNewsById } from '../../operations/news-queries';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })
@@ -12,10 +11,18 @@ jest.mock('@apollo/client');
 jest.mock('react-redux');
 
 let wrapper;
+
 const useQueryData = {
   loading: false,
   error: false,
-  data: {}
+  data: {
+    getNewsById: {
+      text: [{ value: '' }, { value: '' }],
+      title: [{ value: '' }],
+      name: [{ value: '' }],
+      author: { name: [{ value: '' }] }
+    }
+  }
 };
 
 describe('test newsDetail', () => {
@@ -24,7 +31,7 @@ describe('test newsDetail', () => {
       ...useQueryData
     }));
 
-    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+    wrapper = mount(<NewsDetail match={{ params: { id: '' } }} />);
     expect(wrapper).toBeDefined();
   });
   it('should cover other branches', () => {
@@ -36,6 +43,7 @@ describe('test newsDetail', () => {
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
     expect(wrapper).toBeTruthy();
   });
+
   it('if error loading data, should redirect to error page', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,

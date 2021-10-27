@@ -28,7 +28,7 @@ const NewsDetail = ({ match }) => {
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
 
-  if (!article?.text[language].value) {
+  if (!article.text[language].value) {
     return <h2>{t('newsDetail.change')}</h2>;
   }
 
@@ -58,12 +58,12 @@ const NewsDetail = ({ match }) => {
           className={styles.newsText}
           id='fullText'
         >
-          {parse(article?.text[language].value) || t('newsDetail.noText')}
+          {parse(article.text[language].value) || t('newsDetail.noText')}
         </Typography>
         <hr />
         <div className={styles.newsAuthorFooter}>
           <CardHeader
-            subheader={article.author.name[language]?.value || t('newsDetail.noAuthor')}
+            subheader={article.author.name[language].value || t('newsDetail.noAuthor')}
             id='newsAuthor'
           />
           <CardMedia

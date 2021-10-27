@@ -22,7 +22,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
-  if (!text[language]?.value) {
+  if (!text[language].value) {
     return null;
   }
 
@@ -36,7 +36,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           <CardMedia
             className={styles.media}
             image={IMG_URL + image}
-            title={parse(title[language]?.value) || t('newsDetail.noTitle')}
+            title={parse(title[language].value) || t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
@@ -53,7 +53,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {parse(title[language]?.value) || t('newsDetail.noTitle')}
+            {parse(title[language].value) || t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'
@@ -62,7 +62,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {parse(text[language]?.value) || t('newsDetail.noText')}
+            {parse(text[language].value) || t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
@@ -73,12 +73,12 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           </Link>
           <div className={styles.newsAuthorFooter}>
             <CardHeader
-              subheader={author.name[language]?.value || t('newsDetail.noAuthor')}
+              subheader={author.name[language].value || t('newsDetail.noAuthor')}
               data-cy='authorName'
               className={styles.authorName}
             />
             <Avatar
-              alt={author.name[language]?.value || t('newsDetail.noAuthor')}
+              alt={author.name[language].value || t('newsDetail.noAuthor')}
               src={IMG_URL + author.image}
               data-cy='authorPhoto'
             />

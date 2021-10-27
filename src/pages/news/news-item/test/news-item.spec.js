@@ -11,11 +11,11 @@ const props = {
   date: '',
   key: '',
   id: '',
-  author: {},
+  author: { name: [{ value: '' }] },
   image: {},
-  title: [],
+  title: [{ value: 'true' }],
   slug: '',
-  text: []
+  text: [{ value: 'true' }]
 };
 describe('Test NewsItem', () => {
   it('should render component', () => {

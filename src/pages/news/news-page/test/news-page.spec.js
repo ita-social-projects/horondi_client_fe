@@ -23,6 +23,7 @@ describe('Test newsPage', () => {
     }));
     wrapper = shallow(<NewsPage />);
     expect(wrapper.find('h1').props().children).toEqual('Новини');
+    // expect(wrapper).toMatchSnapshot();
   });
 
   it('should cover other branches', () => {

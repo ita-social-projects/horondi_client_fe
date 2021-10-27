@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Redirect } from 'react-router';
 import NewsDetail from '../news-detail';
+import { getNewsById } from '../../operations/news-queries';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })

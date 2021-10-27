@@ -7,9 +7,19 @@ jest.mock('react-i18next', () => ({
 jest.mock('../../news-item/news-item.style', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 
+const props = {
+  date: '',
+  key: '',
+  id: '',
+  author: {},
+  image: {},
+  title: [],
+  slug: '',
+  text: []
+};
 describe('Test NewsItem', () => {
   it('should render component', () => {
-    const component = shallow(<NewsItem />);
+    const component = shallow(<NewsItem {...props} />);
     expect(component).toBeDefined();
   });
 });

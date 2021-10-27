@@ -3,46 +3,18 @@ import {
   SET_NOVAPOSHTA_WAREHOUSES,
   SET_NOVAPOSHTA_PRICES,
   SET_FONDY_DATA,
-  SET_DELIVERY_LOADING,
-  SET_UKRPOST_REGIONS,
-  SET_UKRPOST_DISTRICTS,
-  SET_UKRPOST_CITIES,
-  SET_UKRPOST_POSTOFFICES
+  SET_DELIVERY_LOADING
 } from './checkout.types';
 
 const initialState = {
   deliveryLoading: false,
   cities: [],
   warehouses: [],
-  price: {},
-  ukrPoshtaCities: [],
-  ukrPoshtaRegions: [],
-  ukrPoshtaDistricts: [],
-  ukrPoshtaPostOffices: []
+  price: {}
 };
 
 export const checkoutReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_UKRPOST_REGIONS:
-      return {
-        ...state,
-        ukrPoshtaRegions: action.payload
-      };
-    case SET_UKRPOST_DISTRICTS:
-      return {
-        ...state,
-        ukrPoshtaDistricts: action.payload
-      };
-    case SET_UKRPOST_CITIES:
-      return {
-        ...state,
-        ukrPoshtaCities: action.payload
-      };
-    case SET_UKRPOST_POSTOFFICES:
-      return {
-        ...state,
-        ukrPoshtaPostOffices: action.payload
-      };
     case SET_NOVAPOSHTA_CITIES:
       return {
         ...state,

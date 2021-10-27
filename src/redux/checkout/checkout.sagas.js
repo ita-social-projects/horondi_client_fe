@@ -5,29 +5,17 @@ import {
   setNovaPoshtaCities,
   setNovaPoshtaWarehouse,
   setDeliveryLoading,
-  setNovaPoshtaPrices,
-  setUkrPostRegions,
-  setUkrPostDistricts,
-  setUkrPostCities,
-  setUkrPostPostOffices
+  setNovaPoshtaPrices
 } from './checkout.actions';
 import {
   getNovaPoshtaCities,
   getNovaPoshtaPrices,
-  getNovaPoshtaWarehouses,
-  getUkrPoshtaCitiesByDistrictId,
-  getUkrPoshtaDistrictsByRegionId,
-  getUkrPoshtaPostOfficesByCityId,
-  getUkrPostRegions
+  getNovaPoshtaWarehouses
 } from './checkout.operations';
 import {
   GET_NOVAPOSHTA_CITIES,
   GET_NOVAPOSHTA_WAREHOUSES,
-  GET_NOVAPOSHTA_PRICES,
-  GET_UKRPOST_REGIONS,
-  GET_UKRPOST_DISTRICTS,
-  GET_UKRPOST_CITIES,
-  GET_UKRPOST_POSTOFFICES
+  GET_NOVAPOSHTA_PRICES
 } from './checkout.types';
 import { getItems } from '../../utils/client';
 import { setError } from '../error/error.actions';
@@ -88,65 +76,8 @@ export function* handleNovaPoshtaWarehouse({ payload }) {
   }
 }
 
-export function* handleUkrPostRegions() {
-  try {
-    yield put(setDeliveryLoading(true));
-
-    const regions = yield call(getUkrPostRegions);
-
-    yield put(setUkrPostRegions(regions));
-    yield put(setDeliveryLoading(false));
-  } catch (e) {
-    yield call(handleErrors, e);
-  }
-}
-
-export function* handleUkrPostDistricts({ payload }) {
-  try {
-    yield put(setDeliveryLoading(true));
-
-    const districts = yield call(getUkrPoshtaDistrictsByRegionId, payload);
-
-    yield put(setUkrPostDistricts(districts));
-    yield put(setDeliveryLoading(false));
-  } catch (e) {
-    yield put(setDeliveryLoading(false));
-    yield call(handleErrors, e);
-  }
-}
-
-export function* handleUkrPostCities({ payload }) {
-  try {
-    yield put(setDeliveryLoading(true));
-
-    const cities = yield call(getUkrPoshtaCitiesByDistrictId, payload);
-
-    yield put(setUkrPostCities(cities));
-    yield put(setDeliveryLoading(false));
-  } catch (e) {
-    yield call(handleErrors, e);
-  }
-}
-
-export function* handleUkrPostPostOffices({ payload }) {
-  try {
-    yield put(setDeliveryLoading(true));
-
-    const offices = yield call(getUkrPoshtaPostOfficesByCityId, payload);
-
-    yield put(setUkrPostPostOffices(offices));
-    yield put(setDeliveryLoading(false));
-  } catch (e) {
-    yield call(handleErrors, e);
-  }
-}
-
 export default function* checkoutSaga() {
   yield takeEvery(GET_NOVAPOSHTA_CITIES, handleNovaPoshtaCities);
   yield takeEvery(GET_NOVAPOSHTA_WAREHOUSES, handleNovaPoshtaWarehouse);
   yield takeEvery(GET_NOVAPOSHTA_PRICES, handleNovaPoshtaPrice);
-  yield takeEvery(GET_UKRPOST_REGIONS, handleUkrPostRegions);
-  yield takeEvery(GET_UKRPOST_DISTRICTS, handleUkrPostDistricts);
-  yield takeEvery(GET_UKRPOST_CITIES, handleUkrPostCities);
-  yield takeEvery(GET_UKRPOST_POSTOFFICES, handleUkrPostPostOffices);
 }

@@ -1,63 +1,74 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from './ukrpost.styles';
-import {
-  getUkrPostCities,
-  getUkrPostDistricts,
-  getUkrPostPostOffices,
-  getUkrPostRegions
-} from '../../../../../redux/checkout/checkout.actions';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
+import {
+  getUkrPoshtaRegions,
+  getUkrPoshtaDistricts,
+  getUkrPoshtaCities,
+  getUkrPoshtaPostOffices
+} from './operations/get-ukrpost-data.queries';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { useIsLoading } from '../../../../../hooks/useIsLoading';
 
 const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
-  const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
   const { t } = useTranslation();
+  const [ukrPoshtaRegions, setUkrPoshtaRegions] = useState([]);
+  const [ukrPoshtaDistricts, setUkrPoshtaDistricts] = useState([]);
+  const [ukrPoshtaCities, setUkrPoshtaCities] = useState([]);
+  const [ukrPoshtaPostOffices, setUkrPoshtaPostOffices] = useState([]);
 
-  const {
-    deliveryLoading,
-    ukrPoshtaCities,
-    ukrPoshtaRegions,
-    ukrPoshtaDistricts,
-    ukrPoshtaPostOffices
-  } = useSelector(({ Checkout }) => ({
-    deliveryLoading: Checkout.deliveryLoading,
-    ukrPoshtaCities: Checkout.ukrPoshtaCities,
-    ukrPoshtaRegions: Checkout.ukrPoshtaRegions,
-    ukrPoshtaDistricts: Checkout.ukrPoshtaDistricts,
-    ukrPoshtaPostOffices: Checkout.ukrPoshtaPostOffices
-  }));
+  const { loading: getRegionsLoading, error: getRegionsError } = useQuery(getUkrPoshtaRegions, {
+    onCompleted: (data) => setUkrPoshtaRegions(data.getUkrPoshtaRegions)
+  });
 
-  useEffect(() => {
-    dispatch(getUkrPostRegions());
-  }, []);
-
-  useEffect(() => {
-    if (values.regionId) {
-      dispatch(getUkrPostDistricts(values.regionId));
+  const { loading: getDistrictsLoading, error: getDistrictsError } = useQuery(
+    getUkrPoshtaDistricts,
+    {
+      variables: {
+        id: values.regionId
+      },
+      onCompleted: (data) => setUkrPoshtaDistricts(data.getUkrPoshtaDistrictsByRegionId)
     }
-  }, [dispatch, values.regionId]);
+  );
 
-  useEffect(() => {
-    if (values.districtId) {
-      dispatch(getUkrPostCities(values.districtId));
-    }
-  }, [dispatch, values.districtId]);
+  const { loading: getCitiesLoading, error: getCitiesError } = useQuery(getUkrPoshtaCities, {
+    variables: {
+      id: values.districtId
+    },
+    onCompleted: (data) => setUkrPoshtaCities(data.getUkrPoshtaCitiesByDistrictId)
+  });
 
-  useEffect(() => {
-    if (values.cityId) {
-      dispatch(getUkrPostPostOffices(values.cityId));
+  const { loading: getPostOfficesLoading, error: getPostOfficesError } = useQuery(
+    getUkrPoshtaPostOffices,
+    {
+      variables: {
+        id: values.cityId
+      },
+      onCompleted: (data) => setUkrPoshtaPostOffices(data.getUkrPoshtaPostofficesCityId)
     }
-  }, [dispatch, values.cityId]);
+  );
+
+  const { isLoading } = useIsLoading(
+    [getRegionsLoading, getDistrictsLoading, getCitiesLoading, getPostOfficesLoading]
+    // [
+    //   getRegionsError,
+    //   getDistrictsError,
+    //   getCitiesError,
+    //   getPostOfficesError
+    // ]
+  );
+  // if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
     <div className={styles.ukrPostContainer}>
@@ -100,9 +111,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
-                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                    )}
+                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
                     {params.InputProps.endAdornment}
                   </>
                 )
@@ -150,9 +159,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
-                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                    )}
+                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
                     {params.InputProps.endAdornment}
                   </>
                 )
@@ -199,9 +206,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
-                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                    )}
+                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
                     {params.InputProps.endAdornment}
                   </>
                 )
@@ -255,9 +260,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
-                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                    )}
+                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
                     {params.InputProps.endAdornment}
                   </>
                 )

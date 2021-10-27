@@ -18,6 +18,14 @@ const useQueryData = {
 };
 
 describe('test newsDetail', () => {
+  it('should render component', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+    expect(wrapper).toBeDefined();
+  });
   it('should cover other branches', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,
@@ -25,7 +33,7 @@ describe('test newsDetail', () => {
     }));
 
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
-    expect(wrapper).toBeDefined();
+    expect(wrapper).toBeTruthy();
   });
   it('if error loading data, should redirect to error page', () => {
     useQuery.mockImplementation(() => ({

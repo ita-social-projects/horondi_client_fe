@@ -28,7 +28,7 @@ const NewsDetail = ({ match }) => {
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
 
-  if (!article.text[language].value) {
+  if (!article?.text[language].value) {
     return <h2>{t('newsDetail.change')}</h2>;
   }
 

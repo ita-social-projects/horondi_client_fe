@@ -20,7 +20,7 @@ import {
 } from '../../../utils/handle-comments';
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { useIsLoading } from '../../../hooks/useIsLoading';
+import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
 
 const Comments = ({ productId }) => {
   const styles = useStyles();
@@ -47,7 +47,7 @@ const Comments = ({ productId }) => {
     onError: (err) => errorOrLoadingHandler(err)
   });
 
-  const { isLoading } = useIsLoading([addCommentLoading, getCommentsLoading]);
+  const { isLoading } = useIsLoadingOrError([addCommentLoading, getCommentsLoading]);
   const { _id: userId } = userData || {};
 
   const onSubmit = async (formValues) => {

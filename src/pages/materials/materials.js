@@ -1,18 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo, useState } from 'react';
 import parse from 'html-react-parser';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import 'react-awesome-slider/dist/styles.css';
-import { useIsLoading } from '../../hooks/useIsLoading';
-import { useError } from '../../hooks/useError';
+import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
 import { getAllPatterns } from './operations/getAllPatterns.queries';
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
-import { getPatterns } from '../../redux/pattern/pattern.actions';
 import { getImage } from '../../utils/imageLoad';
 import Slider from './slider';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
@@ -25,15 +22,7 @@ const Materials = () => {
   const [patterns, setPatterns] = useState([]);
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const dispatch = useDispatch();
   const code = 'materials';
-  const skip = 0;
-  const limit = 20;
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    dispatch(getPatterns());
-  }, [dispatch]);
 
   useMemo(() => {
     patterns.images &&
@@ -45,7 +34,6 @@ const Materials = () => {
   }, [patterns]);
 
   const { loading: loadingPatterns, error: errorPatterns } = useQuery(getAllPatterns, {
-    variables: { skip, limit },
     onCompleted: (data) => setPatterns(data.getAllPatterns.items)
   });
 
@@ -68,8 +56,10 @@ const Materials = () => {
     </div>
   ));
 
-  const { isLoading } = useIsLoading([loadingPatterns, loadingMaterials]);
-  const { isError } = useError([errorPatterns, errorMaterials]);
+  const { isLoading, isError } = useIsLoadingOrError(
+    [loadingPatterns, loadingMaterials],
+    [errorPatterns, errorMaterials]
+  );
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (

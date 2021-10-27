@@ -9,13 +9,11 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const Contacts = ({ fromCheckout }) => {
   const styles = useStyles();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
   const [contacts, setContacts] = useState([]);
-
-  const language = i18n.language === 'ua' ? 0 : 1;
 
   const { loading, error } = useQuery(getContacts, {
     onCompleted: (data) => setContacts(data.getContacts.items)
@@ -63,19 +61,18 @@ const Contacts = ({ fromCheckout }) => {
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.schedule')}</span>
             <div className={styles.schedule}>
-              {contact.openHours[language].value.split('|').map((el) => {
-                const i = language ? 4 : 3;
-                return (
+              {t(`${contact.translations_key}.openHours`)
+                .split('|')
+                .map((el) => (
                   <div key={el}>
-                    <span className={styles.day}>{el.slice(i - (language ? 4 : 3))}</span>
+                    <span className={styles.day}>{el}</span>
                   </div>
-                );
-              })}
+                ))}
             </div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.address')}</span>
-            <div className={styles.contactAddress}>{contact.address[language].value}</div>
+            <div className={styles.contactAddress}>{t(`${contact.translations_key}.address`)}</div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>

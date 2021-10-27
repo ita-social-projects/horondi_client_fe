@@ -11,6 +11,9 @@ const useQueryData = {
 };
 
 jest.mock('@apollo/client');
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({ t: () => 'a|b' })
+}));
 
 describe('slider home page tests', () => {
   it('should match snapshot', () => {

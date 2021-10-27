@@ -1,20 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useQuery } from '@apollo/client';
 import NovaPost from '../nova-post';
 
 jest.mock('../nova-post.styles.js', () => ({
   useStyles: () => ({})
 }));
 jest.mock('react-redux');
-const dispatch = jest.fn();
 
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => ({
-  deliveryLoading: false,
-  cities: [],
-  warehouses: []
-}));
+jest.mock('@apollo/client');
+
+useQuery.mockImplementation(() => ({ refetch: () => jest.fn() }));
 
 let wrapper;
 

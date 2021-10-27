@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { mockData, mockRequest } from './business-page.variables';
-import BusinessPage from '../business-page';
+import BusinessPage from '../../../../pages/business-page/business-page';
 
 beforeEach(() => {
   render(

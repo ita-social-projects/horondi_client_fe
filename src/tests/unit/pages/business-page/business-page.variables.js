@@ -1,4 +1,4 @@
-import { getBusinessTextByCode } from '../operations/business-page.queries';
+import { getBusinessTextByCode } from '../../../../pages/business-page/operations/business-page.queries';
 
 export const mockData = {
   params: {

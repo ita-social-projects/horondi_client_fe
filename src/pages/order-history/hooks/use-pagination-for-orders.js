@@ -16,7 +16,9 @@ export default function usePaginationForOrders(limit, query) {
     onCompleted: (data) => {
       setOrders(data.getUserOrders.userOrders);
       setOrdersCount(data.getUserOrders.ordersCount);
-    }
+    },
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'cache-first'
   });
 
   const quantityPages = Math.ceil(ordersCount / limit);

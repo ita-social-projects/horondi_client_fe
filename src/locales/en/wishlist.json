@@ -1,11 +1,13 @@
 {
     "wishlistTitles": {
         "empty": "Your wishlist is empty",
-        "filled": "Wishlist"
+        "filled": "Wishlist",
+        "bottomMaterial": "Bottom material"
     },
     "wishlistButtons": {
-        "empty": "Wish now",
-        "toItem": "Go to product"
+        "empty": "Shop now",
+        "toItem": "View details",
+        "toCart": "Add to cart"
     },
     "wishlistTableFields": {
         "item": "PRODUCT",

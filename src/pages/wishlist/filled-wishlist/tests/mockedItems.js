@@ -34,6 +34,7 @@ const mockedItems = [
       }
     ],
     mainMaterial: {
+      material: { _id: 1 },
       color: {
         _id: '6043a9bb3e06ad3edcdb7b0d',
         name: [

@@ -6,7 +6,6 @@ import { themeState as Theme } from './theme/theme.reducer';
 import { errorReducer as Error } from './error/error.reducer';
 import Language from './language/language.reducer';
 import Products from './products/products.reducer';
-import { wishlistReducer as Wishlist } from './wishlist/wishlist.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
 import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
 import Currency from './currency/currency.reducer';
@@ -29,7 +28,6 @@ export const rootReducer = (history) =>
     Language,
     Toast,
     Products,
-    Wishlist,
     Cart,
     Snackbar,
     Currency,

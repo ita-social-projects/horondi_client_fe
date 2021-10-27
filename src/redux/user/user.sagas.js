@@ -53,7 +53,6 @@ import {
   cartKey,
   USER_IS_BLOCKED,
   USER_TOKENS,
-  WISHLIST_KEY,
   LANGUAGE,
   RETURN_PAGE,
   SNACKBAR_TYPES,
@@ -66,7 +65,6 @@ import {
   setToLocalStorage
 } from '../../services/local-storage.service';
 import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/cart.actions';
-import { setWishlist, resetWishlist } from '../wishlist/wishlist.actions';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_ERROR } from '../../translations/user.translations';
@@ -80,14 +78,12 @@ const { warning } = SNACKBAR_TYPES;
 const { pathToLogin, pathToProfile } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
-function* setUserCartAndWishlist(user) {
+function* setUserCart(user) {
   const purchasedProducts = yield call(getPurchasedProducts, user._id);
 
   setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
   setToLocalStorage(ACCESS_TOKEN, user.token);
-  setToLocalStorage(WISHLIST_KEY, user.wishlist);
   yield put(setUser({ ...user, purchasedProducts }));
-  yield put(setWishlist(user.wishlist));
   const cartFromLc = getFromLocalStorage(cartKey);
   const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
 
@@ -100,7 +96,7 @@ export function* handleGoogleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
-    yield setUserCartAndWishlist(user);
+    yield setUserCart(user);
     yield put(push(pathToProfile));
   } catch (e) {
     yield call(handleUserError, e);
@@ -113,7 +109,7 @@ export function* handleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-    yield setUserCartAndWishlist(user);
+    yield setUserCart(user);
     yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
@@ -243,7 +239,6 @@ export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(setUserOrders(null));
   yield put(resetCart());
-  yield put(resetWishlist());
   clearLocalStorage();
 }
 

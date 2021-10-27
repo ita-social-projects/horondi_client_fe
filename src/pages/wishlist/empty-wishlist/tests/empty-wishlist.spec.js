@@ -4,10 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Typography } from '@material-ui/core';
 import EmptyWishlist from '../empty-wishlist';
 
-jest.mock('../empty-wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../../services/local-storage.service');
-
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useContext: () => [{}]
+}));
+jest.mock('../../../../context/theme-context', () => ({}));
+jest.mock('../../../../containers/orders/order/empty-order/empty-order.styles', () => ({
+  useStyles: () => ({})
+}));
 useDispatch.mockImplementation(() => jest.fn());
 useSelector.mockImplementation(() => jest.fn());
 

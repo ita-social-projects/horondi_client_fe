@@ -42,7 +42,6 @@ export const user = {
     blockCount: 0,
     updatedAt: '2020-01-01T08:25:45.304Z'
   },
-  wishlist: [],
   cart: null
 };
 

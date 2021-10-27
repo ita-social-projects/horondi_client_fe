@@ -23,8 +23,8 @@ import {
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
   GET_USER_ORDERS,
-  ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
-  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  ADD_PRODUCT_TO_USER_CART,
+  REMOVE_PRODUCT_FROM_USER_CART,
   LOGIN_BY_GOOGLE,
   SET_DELETE_USER,
   SET_ORDERS_COUNT,
@@ -163,13 +163,13 @@ const setCurrentPage = (payload) => ({
   payload
 });
 
-const addProductToUserCartOrWishlist = (productId) => ({
-  type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+const addProductToUserCart = (productId) => ({
+  type: ADD_PRODUCT_TO_USER_CART,
   payload: productId
 });
 
-const removeProductFromUserCartOrWishlist = (productId) => ({
-  type: REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+const removeProductFromUserCart = (productId) => ({
+  type: REMOVE_PRODUCT_FROM_USER_CART,
   payload: productId
 });
 
@@ -203,8 +203,8 @@ export {
   setRecoveryLoading,
   setUserOrders,
   getUserOrders,
-  addProductToUserCartOrWishlist,
-  removeProductFromUserCartOrWishlist,
+  addProductToUserCart,
+  removeProductFromUserCart,
   deleteUserDataFromStore,
   setUserCountOrders,
   setCurrentPage

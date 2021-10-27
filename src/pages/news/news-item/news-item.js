@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -16,9 +16,6 @@ import { useStyles } from './news-item.style';
 import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 
 const NewsItem = ({ date, author, image, title, text, id, slug }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
@@ -28,7 +25,6 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
 
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
-
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
@@ -36,7 +32,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           <CardMedia
             className={styles.media}
             image={IMG_URL + image}
-            title={parse(title[language].value) || t('newsDetail.noTitle')}
+            title={title[language].value || t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
@@ -53,7 +49,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {parse(title[language].value) || t('newsDetail.noTitle')}
+            {title[language].value || t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'

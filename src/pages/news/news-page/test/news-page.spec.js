@@ -22,8 +22,9 @@ describe('Test newsPage', () => {
       ...useQueryData
     }));
     wrapper = shallow(<NewsPage />);
-    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find('h1').props().children).toEqual('Новини');
   });
+
   it('should cover other branches', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,

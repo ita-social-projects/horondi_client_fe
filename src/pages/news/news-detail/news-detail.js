@@ -10,25 +10,25 @@ import { getNewsById } from '../operations/news-queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const NewsDetail = ({ match }) => {
-  const [article, setArticle] = useState({});
-
   const articleId = match.params.id;
   const id = articleId.split('-')[0];
 
-  const { loading, error } = useQuery(getNewsById, {
-    onCompleted: (data) => setArticle(data.getNewsById),
-    variables: { id }
-  });
+  const {
+    loading,
+    error,
+    data: { getNewsById: article } = {}
+  } = useQuery(getNewsById, { variables: { id } });
+
+  const styles = useStyles();
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const styles = useStyles();
 
-  if (loading || error || !article._id) return errorOrLoadingHandler(error, loading);
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
 
-  if (article.text[language].value === null) {
+  if (!article.text[language].value) {
     return <h2>{t('newsDetail.change')}</h2>;
   }
 
@@ -45,7 +45,7 @@ const NewsDetail = ({ match }) => {
         <div className={styles.imagesContainer}>
           <CardMedia
             className={styles.media}
-            image={IMG_URL + article.image || t('newsDetail.noPhoto')}
+            image={IMG_URL + article.image}
             title={article.title[language].value || t('newsDetail.noTitle')}
             alt={article.title[language].value || t('newsDetail.noTitle')}
             component='div'
@@ -58,7 +58,7 @@ const NewsDetail = ({ match }) => {
           className={styles.newsText}
           id='fullText'
         >
-          {parse(article?.text[language].value || '') || t('newsDetail.noText')}
+          {parse(article?.text[language].value) || t('newsDetail.noText')}
         </Typography>
         <hr />
         <div className={styles.newsAuthorFooter}>
@@ -68,7 +68,7 @@ const NewsDetail = ({ match }) => {
           />
           <CardMedia
             className={styles.authorAvatar}
-            image={IMG_URL + article.author.image || t('newsDetail.noAuthor')}
+            image={IMG_URL + article.author.image}
             title={article.title[language].value || t('newsDetail.noTitle')}
             component='div'
             id='newsAuthorAvatar'

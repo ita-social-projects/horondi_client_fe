@@ -22,7 +22,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
-  if (text[language]?.value === null) {
+  if (!text[language]?.value) {
     return null;
   }
 
@@ -35,8 +35,8 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
         <div className={styles.imagesContainer}>
           <CardMedia
             className={styles.media}
-            image={IMG_URL + image || t('newsDetail.noPhoto')}
-            title={parse(title[language]?.value || '') || t('newsDetail.noTitle')}
+            image={IMG_URL + image}
+            title={parse(title[language]?.value) || t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
@@ -53,7 +53,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {parse(title[language]?.value || '') || t('newsDetail.noTitle')}
+            {parse(title[language]?.value) || t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'
@@ -62,7 +62,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {text[language]?.value || t('newsDetail.noText')}
+            {parse(text[language]?.value) || t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
@@ -79,7 +79,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             />
             <Avatar
               alt={author.name[language]?.value || t('newsDetail.noAuthor')}
-              src={IMG_URL + author.image || t('newsDetail.noAuthor')}
+              src={IMG_URL + author.image}
               data-cy='authorPhoto'
             />
           </div>

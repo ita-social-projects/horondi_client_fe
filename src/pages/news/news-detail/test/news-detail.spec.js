@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { Redirect } from 'react-router';
 import NewsDetail from '../news-detail';
 
 jest.mock('react-i18next', () => ({
@@ -16,20 +17,7 @@ const useQueryData = {
   data: {}
 };
 
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: () => [{ _id: [0], text: [''], title: [''], author: { name: '' } }, () => null]
-}));
-
 describe('test newsDetail', () => {
-  it('should match snapshot', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should cover other branches', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,
@@ -37,6 +25,15 @@ describe('test newsDetail', () => {
     }));
 
     wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
+    expect(wrapper).toBeDefined();
+  });
+  it('if error loading data, should redirect to error page', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      error: true
+    }));
+
+    wrapper = shallow(<Redirect to='/error-page' />);
     expect(wrapper).toBeDefined();
   });
 });

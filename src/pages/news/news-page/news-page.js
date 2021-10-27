@@ -17,7 +17,7 @@ const NewsPage = () => {
 
   const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  const newsItems = news?.map(({ _id, date, author, image, title, text, slug }) => (
+  const newsItems = news.map(({ _id, date, author, image, title, text, slug }) => (
     <NewsItem
       date={date}
       key={_id}

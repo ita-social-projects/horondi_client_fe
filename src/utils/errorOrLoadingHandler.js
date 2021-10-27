@@ -8,5 +8,4 @@ export default function errorOrLoadingHandler(error, loading) {
 
   if (error) return <Redirect to={pathToErrorPage} />;
   if (loading) return <Loader />;
-  return null;
 }

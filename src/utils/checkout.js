@@ -1,11 +1,5 @@
 import PropTypes from 'prop-types';
-
-import {
-  CHECKOUT_BUTTON,
-  CHECKOUT_PAYMENT,
-  CHECKOUT_TEXT_FIELDS,
-  CHECKOUT_TITLES
-} from '../translations/checkout.translations';
+import i18next from 'i18next';
 import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { COURIER } from '../const/checkout';
@@ -110,7 +104,7 @@ const productItemsInput = (cartItems) =>
     }
   }));
 
-export const orderInputData = (data, deliveryType, cartItems, language) => ({
+export const orderInputData = (data, deliveryType, cartItems) => ({
   recipient: {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -136,63 +130,65 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
   },
   items: productItemsInput(cartItems),
   paymentMethod:
-    data.paymentMethod === CHECKOUT_PAYMENT[language].card
-      ? CHECKOUT_PAYMENT[1].card.toUpperCase()
-      : CHECKOUT_PAYMENT[1].cash.toUpperCase(),
+    data.paymentMethod === i18next.t(`checkout.checkoutPayment.card`)
+      ? i18next.t(`checkout.checkoutPayment.card`)
+      : i18next.t(`checkout.checkoutPayment.cash`),
   userComment: data.userComment
 });
 
-export const checkoutFormBtnValue = (values, language) =>
+export const checkoutFormBtnValue = (values) =>
   values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash.label
-    ? CHECKOUT_BUTTON[language].confirmOrder
-    : CHECKOUT_BUTTON[language].payOrder;
+    ? i18next.t(`checkout.confirmOrder`)
+    : i18next.t(`checkout.payOrder`);
 
-export const courierInputLabels = (language) => [
+export const courierInputLabels = () => [
   {
     name: 'city',
-    label: CHECKOUT_TEXT_FIELDS[language].city
+    label: i18next.t(`checkout.checkoutTextFields.city`)
   },
   {
     name: 'street',
-    label: CHECKOUT_TEXT_FIELDS[language].street
+    label: i18next.t(`checkout.checkoutTextFields.street`)
   },
   {
     name: 'house',
-    label: CHECKOUT_TEXT_FIELDS[language].house
+    label: i18next.t(`checkout.checkoutTextFields.house`)
   },
   {
     name: 'flat',
-    label: CHECKOUT_TEXT_FIELDS[language].flat
+    label: i18next.t(`checkout.checkoutTextFields.flat`)
   }
 ];
 
-export const userNameInputLabels = (language) => [
+export const userNameInputLabels = () => [
   {
     name: 'firstName',
-    label: CHECKOUT_TEXT_FIELDS[language].firstName
+    label: i18next.t(`checkout.checkoutTextFields.firstName`)
   },
   {
     name: 'lastName',
-    label: CHECKOUT_TEXT_FIELDS[language].lastName
+    label: i18next.t(`checkout.checkoutTextFields.lastName`)
   }
 ];
 
-export const userContactInputLabels = (language) => [
+export const userContactInputLabels = () => [
   {
     name: 'email',
-    label: CHECKOUT_TEXT_FIELDS[language].email
+    label: i18next.t(`checkout.checkoutTextFields.email`)
   },
   {
     name: 'phoneNumber',
-    label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber
+    label: i18next.t(`checkout.checkoutTextFields.contactPhoneNumber`)
   }
 ];
 
 export const POSTOMAT = 'Поштомат';
 export const POST_OFFICE_NUMBER = 'Відділення № ';
 
-export const getCurrentCurrency = (currency, language = 1) =>
-  currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;
+export const getCurrentCurrency = (currency) =>
+  currency === DEFAULT_CURRENCY
+    ? i18next.t(`checkout.checkoutTitles.UAH`)
+    : i18next.t(`checkout.checkoutTitles.USD`);
 
 export const setUserValues = (values, userData, deliveryType) => {
   const { firstName, lastName, email, phoneNumber } = userData;

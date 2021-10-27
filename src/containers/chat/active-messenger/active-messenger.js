@@ -13,9 +13,6 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const dispatch = useDispatch();
   const style = useStyles({ visible, mailFormVisible, themeMode });
   const { t } = useTranslation();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
 
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData
@@ -60,8 +57,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
       sendEmail({
         email,
         senderName: firstName,
-        text: message,
-        language
+        text: message
       })
     );
     handleClick();
@@ -98,7 +94,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           size='small'
           rows={1}
           error={!firstNameValidated && shouldValidate}
-          helperText={handleHelperText(firstNameValidated, shouldValidate, language, 'firstName')}
+          helperText={handleHelperText(firstNameValidated, shouldValidate, 'firstName')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setFirstNameValidated, formRegExp.text)}
           value={firstName}
@@ -114,7 +110,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           size='small'
           rows={1}
           error={!emailValidated && shouldValidate}
-          helperText={handleHelperText(emailValidated, shouldValidate, language, 'email')}
+          helperText={handleHelperText(emailValidated, shouldValidate, 'email')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setEmailValidated, formRegExp.email)}
           value={email}
@@ -131,7 +127,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
           rowsMax={4}
           inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
-          helperText={handleHelperText(messageValidated, shouldValidate, language, 'message')}
+          helperText={handleHelperText(messageValidated, shouldValidate, 'message')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setMessageValidated, formRegExp.text)}
           value={message}

@@ -2,12 +2,12 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import ProfilePicture from '../images/profile.png';
 
-export const handleProfilePage = (title, constant, language, onClick, className) =>
+export const handleProfilePage = (title, buttonTitle, checkEmailText, onClick, className) =>
   title ? (
-    <h3>{constant[language].checkEmailText}</h3>
+    <h3>{checkEmailText}</h3>
   ) : (
     <Button className={className} onClick={onClick}>
-      {constant[language].btnTitle}
+      {buttonTitle}
     </Button>
   );
 

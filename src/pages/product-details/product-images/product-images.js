@@ -6,7 +6,6 @@ import { useStyles } from './product-images.styles';
 import { getImage } from '../../../utils/imageLoad';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import { IMG_URL } from '../../../configs';
 import ThemeContext from '../../../context/theme-context';
 
 const ProductImages = ({ images }) => {
@@ -25,25 +24,21 @@ const ProductImages = ({ images }) => {
   );
 
   useEffect(() => {
-    initImages.forEach((item, i) => {
-      getImage(item)
-        .then((src) => {
-          setImagesSet((prev) => {
-            const arr = [...prev];
-            arr.splice(i, prev.length >= initImages.length ? 1 : 0, { src });
-            return arr;
-          });
+    const initialPhotos = async () => {
+      const mapImages = await Promise.all(
+        initImages.map(async (item) => {
+          try {
+            const result = await getImage(item);
+            return { src: result };
+          } catch (e) {
+            return { src: isLightTheme ? productPlugLight : productPlugDark };
+          }
         })
-        .catch(() =>
-          setImagesSet((prev) => {
-            const arr = [...prev];
-            arr.splice(i, prev.length >= initImages.length ? 1 : 0, {
-              src: isLightTheme ? productPlugLight : productPlugDark
-            });
-            return arr;
-          })
-        );
-    });
+      );
+
+      setImagesSet(mapImages);
+    };
+    initialPhotos();
   }, [isLightTheme, initImages]);
 
   const styles = useStyles();
@@ -57,7 +52,7 @@ const ProductImages = ({ images }) => {
     .slice(1, imagesSet.length)
     .filter((_, i) => i < 3)
     .map((image, i) => {
-      if (i === 2 || i === imagesSet.length) {
+      if (i === imagesSet.length || i === 2) {
         return (
           <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
             <div className={styles.lastImageText}>{t('product.allPhotos')}</div>
@@ -113,7 +108,7 @@ const ProductImages = ({ images }) => {
           </button>
           <div className={styles.imageContainer}>
             <img
-              src={IMG_URL + initImages[primaryImage]}
+              src={imagesSet[primaryImage]?.src}
               className={styles.primaryImage}
               alt={t('product.imgAltInfo')}
             />

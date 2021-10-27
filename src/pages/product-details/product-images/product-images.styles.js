@@ -35,16 +35,17 @@ export const useStyles = makeStyles((theme) => ({
     display: 'block',
     padding: '10px',
     maxHeight: 500,
-    borderRadius: '6px'
+    borderRadius: '6px',
+    hidden: 'overflow'
   },
 
   primaryImage: {
     gridRow: '1 / -1',
     backgroundSize: 'cover',
-    maxHeight: 450,
+    maxHeight: '450px',
     width: 'auto',
-
-    cursor: 'pointer',
+    // cursor: 'pointer',
+    objectFit: 'cover',
 
     '@media (max-width: 1600px)': {
       width: 'auto',

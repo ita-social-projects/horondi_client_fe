@@ -9,7 +9,7 @@ jest.mock('react-redux');
 
 describe('Test NewsItem', () => {
   it('should render component', () => {
-    const component = shallow(<NewsItem />);
+    const component = mount(<NewsItem />);
     expect(component).toBeDefined();
   });
 });

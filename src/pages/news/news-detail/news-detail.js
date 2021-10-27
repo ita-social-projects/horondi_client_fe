@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';

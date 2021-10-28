@@ -18,11 +18,25 @@ const AutoplaySlider = withAutoplay(Slider);
 
 const Materials = () => {
   const [setImage] = useState([]);
-  const [materialsPage, setMaterialsPage] = useState({});
-  const [patterns, setPatterns] = useState([]);
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const code = 'materials';
+
+  const {
+    loading: loadingPatterns,
+    error: errorPatterns,
+    data: dataPattern
+  } = useQuery(getAllPatterns, {});
+  const patterns = loadingPatterns ? [] : dataPattern.getAllPatterns.items;
+
+  const {
+    loading: loadingMaterials,
+    error: errorMaterials,
+    data: dataMaterials
+  } = useQuery(getBusinessTextByCode, {
+    variables: { code }
+  });
+  const materialsPage = loadingMaterials ? {} : dataMaterials.getBusinessTextByCode;
 
   useMemo(() => {
     patterns.images &&
@@ -31,16 +45,7 @@ const Materials = () => {
           .then((src) => setImage((prev) => [...prev, src]))
           .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
       });
-  }, [patterns]);
-
-  const { loading: loadingPatterns, error: errorPatterns } = useQuery(getAllPatterns, {
-    onCompleted: (data) => setPatterns(data.getAllPatterns.items)
-  });
-
-  const { loading: loadingMaterials, error: errorMaterials } = useQuery(getBusinessTextByCode, {
-    variables: { code },
-    onCompleted: (data) => setMaterialsPage(data.getBusinessTextByCode)
-  });
+  }, [patterns.images]);
 
   const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
 

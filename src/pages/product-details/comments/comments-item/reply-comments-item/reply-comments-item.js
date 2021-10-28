@@ -7,11 +7,11 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
-import { COMMENTS_TIME_OPTIONS, COMMENT_OWNER_STATUS } from '../../../../../configs';
+import { COMMENT_OWNER_STATUS, COMMENTS_TIME_OPTIONS } from '../../../../../configs';
 
 import {
-  handleUserCommentOwner,
-  handleUserCommentApprove
+  handleUserCommentApprove,
+  handleUserCommentOwner
 } from '../../../../../utils/handle-comments';
 
 const ReplyCommentsItem = ({ data, replyCommentId }) => {

@@ -1,49 +1,37 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { Tooltip } from '@material-ui/core';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './comments-item.styles';
 import CommentDialog from './comment-dialog';
 import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
-import { getReplyComments } from '../../../../redux/comments/comments.actions';
 import ReplyForm from './reply-form';
-import ReplyCommentsItem from './reply-comments-item';
-import { Loader } from '../../../../components/loader/loader';
 import {
-  handleUserCommentOwner,
   handleArrowIcon,
-  handleUserCommentApprove,
-  handleUserId,
-  handleTextStyle,
   handleRate,
-  handleLimitOptions
+  handleSkip,
+  handleTextStyle,
+  handleUserCommentApprove,
+  handleUserCommentOwner,
+  handleUserId
 } from '../../../../utils/handle-comments';
+import { getReplyCommentsQuery } from '../operations/comments.queries';
+import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
+import ReplyCommentsItem from './reply-comments-item';
+import Loader from '../../../../components/loader';
 
-const CommentsItem = ({ data, commentId, productId }) => {
+const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
-  const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase, replyComments } =
-    data;
+  const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase } = commentItem;
 
-  const {
-    userData,
-    currentLimit,
-    replyLoading,
-    replyLoadingId,
-    getReplyLoading,
-    getReplyLoadingId
-  } = useSelector(({ Comments, User }) => ({
-    userData: User.userData,
-    currentLimit: Comments.replyLimit,
-    replyLoading: Comments.replyLoading.loader,
-    replyLoadingId: Comments.replyLoading.commentId,
-    getReplyLoading: Comments.getReplyLoading.loader,
-    getReplyLoadingId: Comments.getReplyLoading.commentId
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
   }));
 
   const { t, i18n } = useTranslation();
@@ -56,9 +44,26 @@ const CommentsItem = ({ data, commentId, productId }) => {
   const [isModalShown, toggleModal] = useState(false);
   const [isReplyShown, toggleReply] = useState(false);
   const [isReplyListShown, toggleReplyList] = useState(false);
-
+  const [currentLimit, setCurrentLimit] = useState(3);
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
+
+  const {
+    loading,
+    data: replyCommentsData,
+    error
+  } = useQuery(getReplyCommentsQuery, {
+    variables: {
+      filter: { commentId, filters: false },
+      pagination: { skip: handleSkip(replyCommentsCount, currentLimit), limit: currentLimit }
+    },
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'cache-first'
+  });
+
+  if (error || loading) return errorOrLoadingHandler(error, loading);
+
+  const { replyComments } = replyCommentsData.getReplyCommentsByComment.items[0];
 
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
@@ -78,29 +83,22 @@ const CommentsItem = ({ data, commentId, productId }) => {
     toggleReply(false);
   };
 
-  const showReplyList = () => {
+  const showReplyList = async () => {
     if (isReplyListShown) {
       return toggleReplyList(false);
     }
     toggleReplyList(true);
-    return !commentsReplyLength && getReplyCommentsByComment();
   };
 
-  const getReplyCommentsByComment = () => {
-    dispatch(
-      getReplyComments({ commentId, limit: currentLimit, skip: replyComments?.items?.length || 0 })
-    );
+  const getMoreComments = () => {
+    setCurrentLimit((prev) => prev + 10);
   };
 
-  const commentsReplyLength = replyComments?.items.length;
+  const replyCommentsList = replyComments.map(({ _id, ...rest }) => (
+    <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+  ));
 
-  const replyCommentsList = replyComments?.items
-    ? replyComments.items.map(({ _id, ...rest }) => (
-      <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
-    ))
-    : [];
-
-  const limitOption = handleLimitOptions(replyCommentsList, replyComments, replyCommentsCount);
+  const limitOption = replyCommentsList.length === replyCommentsCount;
 
   const loadMore = limitOption ? null : t('common.reply.loadMore');
 
@@ -155,7 +153,7 @@ const CommentsItem = ({ data, commentId, productId }) => {
             </p>
           </Tooltip>
 
-          {replyCommentsCount > 0 ? (
+          {replyCommentsCount ? (
             <div className={styles.replyCount} onClick={showReplyList}>
               <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
               <span className={styles.replyText}>
@@ -169,30 +167,29 @@ const CommentsItem = ({ data, commentId, productId }) => {
 
         {isReplyListShown ? (
           <div>
-            {replyCommentsList}
-
-            {commentsReplyLength < replyCommentsCount && (
+            {replyCommentsCount > currentLimit && (
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
-                <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>
+                <span onClick={getMoreComments} className={styles.loadMoreText}>
                   {loadMore}
                 </span>
               </div>
             )}
+
+            {loading && (
+              <div className={styles.loader}>
+                <Loader width={40} height={40} heightWrap={90} />
+              </div>
+            )}
+            {replyCommentsList}
           </div>
         ) : null}
         {isReplyShown && userData?._id && (
-          <ReplyForm cancel={handleReplyClose} commentId={commentId} />
-        )}
-        {getReplyLoading && getReplyLoadingId === commentId && (
-          <div className={styles.loader}>
-            <Loader width={40} height={40} heightWrap={90} />
-          </div>
-        )}
-        {replyLoading && replyLoadingId === commentId && (
-          <div className={styles.loader}>
-            <Loader width={40} height={40} heightWrap={90} />
-          </div>
+          <ReplyForm
+            cancel={handleReplyClose}
+            refetchComments={refetchComments}
+            commentId={commentId}
+          />
         )}
       </div>
       <CommentDialog

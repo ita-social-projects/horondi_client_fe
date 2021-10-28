@@ -3,6 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';
+import { useMutation, useQuery } from '@apollo/client';
 import ReplyForm from '../index';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 
@@ -13,6 +14,10 @@ const mockSetFieldValue = jest.fn();
 const mockDispatch = jest.fn();
 const mockHandlerSubmit = jest.fn();
 
+jest.mock('@apollo/client');
+
+useQuery.mockImplementation(() => ({ refetch: () => jest.fn(), loading: true }));
+useMutation.mockImplementation(() => [jest.fn(), { loading: true }]);
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');
 

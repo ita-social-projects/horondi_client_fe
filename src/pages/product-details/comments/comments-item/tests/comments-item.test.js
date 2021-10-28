@@ -35,7 +35,7 @@ const state = {
 useSelector.mockImplementation(() => state);
 
 const props = {
-  data: {
+  commentItem: {
     user: { firstName: 'user', email: 'test@gmail.com', _id: '111', role: 'user' },
     replyComments: [
       {

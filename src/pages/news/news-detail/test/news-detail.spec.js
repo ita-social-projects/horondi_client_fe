@@ -18,7 +18,7 @@ const useQueryData = {
   data: {
     getNewsById: {
       text: [{ value: '' }, { value: '' }],
-      title: [{ value: '' }],
+      title: [{ value: '' }, { value: '' }],
       name: [{ value: '' }],
       author: { name: [{ value: '' }] }
     }
@@ -31,7 +31,7 @@ describe('test newsDetail', () => {
       ...useQueryData
     }));
 
-    wrapper = mount(<NewsDetail match={{ params: { id: '' } }} />);
+    wrapper = shallow(<NewsDetail match={{ params: { id: '' } }} />);
     expect(wrapper).toBeDefined();
   });
   it('should cover other branches', () => {

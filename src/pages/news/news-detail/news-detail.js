@@ -13,11 +13,7 @@ const NewsDetail = ({ match }) => {
   const articleId = match.params.id;
   const id = articleId.split('-')[0];
 
-  const {
-    loading,
-    error,
-    data: { getNewsById: article } = {}
-  } = useQuery(getNewsById, { variables: { id } });
+  const { loading, error, data } = useQuery(getNewsById, { variables: { id } });
 
   const styles = useStyles();
   const { t, i18n } = useTranslation();
@@ -25,6 +21,7 @@ const NewsDetail = ({ match }) => {
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
+  const article = data.getNewsById;
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
 

@@ -22,16 +22,9 @@ describe('Test NewsItem', () => {
     const component = shallow(<NewsItem {...props} />);
     expect(component).toBeDefined();
   });
-  it('yyyy', () => {
+  it('should cover branch when we get empty string', () => {
     props = {
-      date: '',
-      key: '',
-      id: '',
-      author: { name: [{ value: '' }] },
-      image: {},
-      title: [{ value: 'i' }, { value: 'i' }],
-      slug: '',
-      text: [{ value: 'i' }, { value: 'i' }]
+      text: [{ value: '' }, { value: '' }]
     };
     const component = shallow(<NewsItem {...props} />);
     expect(component).toBeDefined();

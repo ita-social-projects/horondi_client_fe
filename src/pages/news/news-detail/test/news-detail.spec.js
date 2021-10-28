@@ -17,8 +17,8 @@ const useQueryData = {
   error: false,
   data: {
     getNewsById: {
-      text: [{ value: '' }, { value: '' }],
-      title: [{ value: '' }, { value: '' }],
+      text: [{ value: 'true' }],
+      title: [{ value: '' }],
       name: [{ value: '' }],
       author: { name: [{ value: '' }] }
     }

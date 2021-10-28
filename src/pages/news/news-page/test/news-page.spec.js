@@ -17,7 +17,7 @@ const useQueryData = {
 };
 
 describe('Test newsPage', () => {
-  it('should match snapshot', () => {
+  it('should find children tag', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));
@@ -25,13 +25,13 @@ describe('Test newsPage', () => {
     expect(wrapper.find('h1').props().children).toEqual('Новини');
   });
 
-  it('should cover other branches', () => {
+  it('should render component when Loading true', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,
       loading: true
     }));
 
     wrapper = shallow(<NewsPage />);
-    expect(wrapper).toBeDefined();
+    expect(wrapper).toBeTruthy();
   });
 });

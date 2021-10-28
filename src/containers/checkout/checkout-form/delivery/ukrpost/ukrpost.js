@@ -15,8 +15,8 @@ import {
   getUkrPoshtaCities,
   getUkrPoshtaPostOffices
 } from './operations/get-ukrpost-data.queries';
-// import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
-import { useIsLoading } from '../../../../../hooks/useIsLoading';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 
 const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   const styles = useStyles({
@@ -48,18 +48,12 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
     data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
   } = useQuery(getUkrPoshtaPostOffices, { variables: { id: values.cityId } });
 
-  // const { isLoading, isError } = useIsLoadingOrError(
-  //   [getRegionsLoading, getDistrictsLoading, getCitiesLoading, getPostOfficesLoading]
-  //   [getRegionsError, getDistrictsError, getCitiesError, getPostOfficesError]
-  // );
-  // if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
-
-  const { isLoading } = useIsLoading([
-    getRegionsLoading,
-    getDistrictsLoading,
-    getCitiesLoading,
-    getPostOfficesLoading
-  ]);
+  const { isLoading, isError } = useIsLoadingOrError(
+    [getRegionsLoading, getDistrictsLoading, getCitiesLoading, getPostOfficesLoading][
+      (getRegionsError, getDistrictsError, getCitiesError, getPostOfficesError)
+    ]
+  );
+  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
     <div className={styles.ukrPostContainer}>

@@ -1,22 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useQuery } from '@apollo/client';
 import UkrPost from '../ukrpost';
 
 jest.mock('../ukrpost.styles.js', () => ({
   useStyles: () => ({})
 }));
 jest.mock('react-redux');
-const dispatch = jest.fn();
+jest.mock('@apollo/client');
 
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => ({
-  deliveryLoading: false,
-  ukrPoshtaCities: {},
-  ukrPoshtaRegions: {},
-  ukrPoshtaDistricts: {},
-  ukrPoshtaPostOffices: {}
-}));
+useQuery.mockImplementation(() => ({ error: null, loading: false, data: [] }));
 
 let wrapper;
 

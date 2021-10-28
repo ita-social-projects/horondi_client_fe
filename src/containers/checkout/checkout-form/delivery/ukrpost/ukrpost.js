@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -15,7 +15,7 @@ import {
   getUkrPoshtaCities,
   getUkrPoshtaPostOffices
 } from './operations/get-ukrpost-data.queries';
-import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+// import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoading } from '../../../../../hooks/useIsLoading';
 
 const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
@@ -23,52 +23,43 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
     isLightTheme
   });
   const { t } = useTranslation();
-  const [ukrPoshtaRegions, setUkrPoshtaRegions] = useState([]);
-  const [ukrPoshtaDistricts, setUkrPoshtaDistricts] = useState([]);
-  const [ukrPoshtaCities, setUkrPoshtaCities] = useState([]);
-  const [ukrPoshtaPostOffices, setUkrPoshtaPostOffices] = useState([]);
 
-  const { loading: getRegionsLoading, error: getRegionsError } = useQuery(getUkrPoshtaRegions, {
-    onCompleted: (data) => setUkrPoshtaRegions(data.getUkrPoshtaRegions)
-  });
+  const {
+    loading: getRegionsLoading,
+    error: getRegionsError,
+    data: { getUkrPoshtaRegions: ukrPoshtaRegions } = []
+  } = useQuery(getUkrPoshtaRegions);
 
-  const { loading: getDistrictsLoading, error: getDistrictsError } = useQuery(
-    getUkrPoshtaDistricts,
-    {
-      variables: {
-        id: values.regionId
-      },
-      onCompleted: (data) => setUkrPoshtaDistricts(data.getUkrPoshtaDistrictsByRegionId)
-    }
-  );
+  const {
+    loading: getDistrictsLoading,
+    error: getDistrictsError,
+    data: { getUkrPoshtaDistrictsByRegionId: ukrPoshtaDistricts } = []
+  } = useQuery(getUkrPoshtaDistricts, { variables: { id: values.regionId } });
 
-  const { loading: getCitiesLoading, error: getCitiesError } = useQuery(getUkrPoshtaCities, {
-    variables: {
-      id: values.districtId
-    },
-    onCompleted: (data) => setUkrPoshtaCities(data.getUkrPoshtaCitiesByDistrictId)
-  });
+  const {
+    loading: getCitiesLoading,
+    error: getCitiesError,
+    data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = []
+  } = useQuery(getUkrPoshtaCities, { variables: { id: values.districtId } });
 
-  const { loading: getPostOfficesLoading, error: getPostOfficesError } = useQuery(
-    getUkrPoshtaPostOffices,
-    {
-      variables: {
-        id: values.cityId
-      },
-      onCompleted: (data) => setUkrPoshtaPostOffices(data.getUkrPoshtaPostofficesCityId)
-    }
-  );
+  const {
+    loading: getPostOfficesLoading,
+    error: getPostOfficesError,
+    data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
+  } = useQuery(getUkrPoshtaPostOffices, { variables: { id: values.cityId } });
 
-  const { isLoading } = useIsLoading(
-    [getRegionsLoading, getDistrictsLoading, getCitiesLoading, getPostOfficesLoading]
-    // [
-    //   getRegionsError,
-    //   getDistrictsError,
-    //   getCitiesError,
-    //   getPostOfficesError
-    // ]
-  );
+  // const { isLoading, isError } = useIsLoadingOrError(
+  //   [getRegionsLoading, getDistrictsLoading, getCitiesLoading, getPostOfficesLoading]
+  //   [getRegionsError, getDistrictsError, getCitiesError, getPostOfficesError]
+  // );
   // if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+
+  const { isLoading } = useIsLoading([
+    getRegionsLoading,
+    getDistrictsLoading,
+    getCitiesLoading,
+    getPostOfficesLoading
+  ]);
 
   return (
     <div className={styles.ukrPostContainer}>
@@ -97,7 +88,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             setFieldValue('city', '');
             setFieldValue('courierOffice', '');
           }}
-          options={ukrPoshtaRegions}
+          options={ukrPoshtaRegions || []}
           inputValue={values.region}
           getOptionLabel={(option) => option?.REGION_UA || ''}
           className={styles.dataInput}
@@ -145,7 +136,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             setFieldValue('courierOffice', '');
           }}
           disabled={!values.region}
-          options={ukrPoshtaDistricts}
+          options={ukrPoshtaDistricts || []}
           inputValue={values.district}
           getOptionLabel={(option) => option?.DISTRICT_UA || ''}
           className={styles.dataInput}
@@ -192,7 +183,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             setFieldValue('courierOffice', '');
           }}
           disabled={!values.district}
-          options={ukrPoshtaCities}
+          options={ukrPoshtaCities || []}
           inputValue={values.city}
           getOptionLabel={(option) => option?.CITY_UA || ''}
           className={styles.dataInput}
@@ -242,7 +233,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             }
           }}
           disabled={!values.city}
-          options={ukrPoshtaPostOffices}
+          options={ukrPoshtaPostOffices || []}
           inputValue={values.courierOffice}
           getOptionLabel={(option) =>
             `${POST_OFFICE_NUMBER} ${option?.POSTCODE}, ${

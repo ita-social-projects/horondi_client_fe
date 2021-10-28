@@ -7,26 +7,29 @@ import {
 } from '../containers/checkout/checkout-form/delivery/nova-post/operations/nova-post.queries.js';
 
 export default function useNovaPost(values, seletedCity) {
-  const [cities, setCities] = useState([]);
-  const [wareHouses, setHouse] = useState([]);
-
-  const { refetch: refetchCities } = useQuery(getNovaPoshtaCities, {
+  const {
+    refetch: refetchCities,
+    data,
+    loading: citiesLoading
+  } = useQuery(getNovaPoshtaCities, {
     variables: {
       city: values.city
-    },
-    onCompleted: (data) => {
-      setCities(data.getNovaPoshtaCities);
     }
   });
 
-  const { refetch: refetchHouse, loading } = useQuery(getNovaPoshtaWarehouses, {
+  const cities = citiesLoading ? [] : data.getNovaPoshtaCities;
+
+  const {
+    refetch: refetchHouse,
+    data: dataHouses,
+    loading: housesLoading
+  } = useQuery(getNovaPoshtaWarehouses, {
     variables: {
       city: values.city
-    },
-    onCompleted: (data) => {
-      setHouse(data.getNovaPoshtaWarehouses);
     }
   });
+
+  const wareHouses = housesLoading ? [] : dataHouses.getNovaPoshtaWarehouses;
 
   const refetchCitiesHandler = useRef(
     _.debounce(() => {
@@ -40,5 +43,5 @@ export default function useNovaPost(values, seletedCity) {
     }
   }, [seletedCity]);
 
-  return [{ cities, wareHouses, loading }, refetchCitiesHandler];
+  return [{ cities, wareHouses, housesLoading }, refetchCitiesHandler];
 }

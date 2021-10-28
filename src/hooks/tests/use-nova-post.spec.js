@@ -6,17 +6,28 @@ jest.mock('react', () => ({
   useRef: (value) => ({ current: value })
 }));
 jest.mock('react-redux');
-
+let mockLoading = false;
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
-  useQuery: (query, options) => {
-    options.onCompleted({ getNovaPostCities: [] });
-    return { loading: false, error: null, refetch: () => null };
-  }
+  useQuery: () => ({
+    loading: mockLoading,
+    error: null,
+    refetch: () => null,
+    data: {
+      getNovaPoshtaCities: ['Львів']
+    }
+  })
 }));
 
 describe('use-nova-post hook tests', () => {
   it('should return expected result ', () => {
     const result = useNovaPost({ city: 'Львів' }, true);
+    expect(result[0].cities[0]).toBe('Львів');
+  });
+
+  it('should return expected result ', () => {
+    mockLoading = true;
+    const result = useNovaPost({ city: 'Львів' }, true);
+    expect(result[0].cities).toStrictEqual([]);
   });
 });

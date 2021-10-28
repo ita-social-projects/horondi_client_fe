@@ -18,7 +18,10 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   const { t } = useTranslation();
 
   const [selectedCity, setSelectedCity] = useState(values.city);
-  const [{ cities, wareHouses, loading }, refetchCitiesHandler] = useNovaPost(values, selectedCity);
+  const [{ cities, wareHouses, housesLoading }, refetchCitiesHandler] = useNovaPost(
+    values,
+    selectedCity
+  );
 
   return (
     <div className={styles.novaPostContainer}>
@@ -101,7 +104,9 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {loading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
+                      {housesLoading && (
+                        <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                      )}
                       {params.InputProps.endAdornment}
                     </>
                   )

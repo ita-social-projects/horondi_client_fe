@@ -1,70 +1,50 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useQuery } from '@apollo/client';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import { Card, Typography, CardContent, CardHeader, CardMedia } from '@material-ui/core';
-
-import { getArticle } from '../../../redux/news/news.actions';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-detail.style';
-import { IMG_URL, TIME_OPTIONS, HYPHEN } from '../../../configs';
-import { Loader } from '../../../components/loader/loader';
+import { IMG_URL, TIME_OPTIONS } from '../../../configs';
+import { getNewsById } from '../operations/news-queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
 const NewsDetail = ({ match }) => {
-  const { article, loading, language } = useSelector(({ News, Language }) => ({
-    article: News.activeArticle,
-    loading: News.loading,
-    language: Language.language
-  }));
+  const articleId = match.params.id;
+  const id = articleId.split('-')[0];
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const articleId = match.params.id;
-    dispatch(getArticle(articleId.split(HYPHEN)[0]));
-    window.scrollTo(0, 0);
-  }, [match.params.id, dispatch]);
+  const { loading, error, data } = useQuery(getNewsById, { variables: { id } });
 
   const styles = useStyles();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
-  if (loading || !article) {
-    return (
-      <div className={styles.center}>
-        <Loader />
-      </div>
-    );
-  }
-  if (article.text[language].value === null) {
-    return <h2>Sory, this article is not translated. Try to change language</h2>;
-  }
-  const newsTitle =
-    article.title.length !== 0 ? article.title[language].value : 'No title provided';
+  if (loading || error) return errorOrLoadingHandler(error, loading);
+
+  const article = data.getNewsById;
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
-  const dateToShow = new Date(parseInt(article.date));
-  const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
-  const newsImage = article.image ? IMG_URL + article.image : 'No photo provided';
-  const newsText =
-    article.text.length !== 0 ? parse(article.text[language].value) : 'No text provided';
-  const newsAuthor =
-    article.author.name.length !== 0 ? article.author.name[language].value : 'No author provided';
-  const newsAuthorAvatar = article.author.image
-    ? IMG_URL + article.author.image
-    : 'No author provided';
+
+  if (!article.text[language].value) {
+    return <h2>{t('newsDetail.change')}</h2>;
+  }
 
   return (
     <Card className={styles.container}>
       <CardContent>
         <Typography className={styles.ArticleTitle} gutterBottom variant='h2' component='h2'>
-          {newsTitle}
+          {article.title[language].value || t('newsDetail.noTitle')}
         </Typography>
-        <CardHeader subheader={newsDate} />
+        <CardHeader
+          subheader={new Date(parseInt(article.date)).toLocaleString(dateLanguage, TIME_OPTIONS)}
+        />
         <hr />
         <div className={styles.imagesContainer}>
           <CardMedia
             className={styles.media}
-            image={newsImage}
-            title={newsTitle}
-            alt={newsTitle}
+            image={IMG_URL + article.image}
+            title={article.title[language].value || t('newsDetail.noTitle')}
+            alt={article.title[language].value || t('newsDetail.noTitle')}
             component='div'
           />
         </div>
@@ -75,15 +55,18 @@ const NewsDetail = ({ match }) => {
           className={styles.newsText}
           id='fullText'
         >
-          {newsText}
+          {parse(article.text[language].value) || t('newsDetail.noText')}
         </Typography>
         <hr />
         <div className={styles.newsAuthorFooter}>
-          <CardHeader subheader={newsAuthor} id='newsAuthor' />
+          <CardHeader
+            subheader={article.author.name[language].value || t('newsDetail.noAuthor')}
+            id='newsAuthor'
+          />
           <CardMedia
             className={styles.authorAvatar}
-            image={newsAuthorAvatar}
-            title={newsTitle}
+            image={IMG_URL + article.author.image}
+            title={article.title[language].value || t('newsDetail.noTitle')}
             component='div'
             id='newsAuthorAvatar'
           />

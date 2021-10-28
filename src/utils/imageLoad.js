@@ -6,7 +6,11 @@ export const getImage = (imageUrlData) =>
     const imageUrl = `${IMG_URL}${imageUrlData}`;
 
     const img = new Image();
-    img.onload = () => resolve(imageUrl);
-    img.onerror = () => reject(notLoaded);
+    img.onload = () => {
+      resolve(imageUrl);
+    };
+    img.onerror = () => {
+      reject(notLoaded);
+    };
     img.src = imageUrl;
   });

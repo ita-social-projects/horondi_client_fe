@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import _ from 'lodash';
 import { useQuery } from '@apollo/client';
 import {

@@ -2,11 +2,9 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { newsReducer as News } from './news/news.reducer';
 import User from './user/user.reducer';
-import { themeState as Theme } from './theme/theme.reducer';
 import { errorReducer as Error } from './error/error.reducer';
 import Language from './language/language.reducer';
 import Products from './products/products.reducer';
-import { wishlistReducer as Wishlist } from './wishlist/wishlist.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
 import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
 import Currency from './currency/currency.reducer';
@@ -23,12 +21,10 @@ export const rootReducer = (history) =>
     router: connectRouter(history),
     User,
     News,
-    Theme,
     Error,
     Language,
     Toast,
     Products,
-    Wishlist,
     Cart,
     Snackbar,
     Currency,

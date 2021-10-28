@@ -7,14 +7,9 @@ export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
 export const HORONDI_FB_LINK = 'https://www.facebook.com/Horondi';
 export const HORONDI_INST_LINK = 'https://www.instagram.com/horondi';
 
-export const CART_IMAGES = {
+export const CART_AND_WISHLIST_IMAGES = {
   lightTheme: './images/cart/empty-cart-light-theme-image.png',
   darkTheme: './images/cart/empty-cart-black-theme-image.png'
-};
-
-export const WISHLIST_IMAGES = {
-  lightTheme: './images/wishlist/wishlist-light-theme-img.png',
-  darkTheme: './images/wishlist/wishlist-dark-theme-img.png'
 };
 
 export const ERROR_PAGE_IMAGES = {
@@ -41,11 +36,13 @@ export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  password: ''
+  password: '',
+  passwordConfirm: ''
 };
 export const USER_REGISTER_LABELS = {
   email: 'email',
   pass: 'password',
+  passConfirm: 'passwordConfirm',
   text: 'text'
 };
 export const USER_TOKENS = {

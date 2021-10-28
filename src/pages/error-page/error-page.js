@@ -6,19 +6,17 @@ import { push } from 'connected-react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
-import { ERROR_PAGE_MESSAGE } from '../../translations/errorpage.translations';
 import ThemeContext from '../../context/theme-context';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const { errorMessage } = useSelector(({ Error }) => ({
     errorMessage: Error.error
   }));
 
   const isLightTheme = useContext(ThemeContext);
-  const getLanguage = i18n.language === 'ua' ? 0 : 1;
 
   useEffect(() => {
     if (!errorMessage) {
@@ -36,13 +34,13 @@ const ErrorPage = () => {
         <img
           className={styles.errorImage}
           src={errorImagePath}
-          alt={t('errorPage.pageMessage.defaultError')}
+          alt={t('errorPage.pageMessage.DEFAULT_ERROR')}
         />
         <div className={styles.info}>
           <h2>
-            {errorMessage && ERROR_PAGE_MESSAGE[errorMessage]
-              ? ERROR_PAGE_MESSAGE[errorMessage][getLanguage].value
-              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[getLanguage].value}
+            {errorMessage && t(`errorPage.pageMessage.${errorMessage.error}`)
+              ? t(`errorPage.pageMessage.${errorMessage.error}`)
+              : t('errorPage.pageMessage.DEFAULT_ERROR')}
           </h2>
 
           <Link to='/' onClick={() => window.location.reload()}>

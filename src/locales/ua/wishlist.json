@@ -1,14 +1,16 @@
 {
-    "wishlistTitles": {
-        "empty": "Ваш список уподобань порожній",
-        "filled": "Список уподобань"
-    },
-    "wishlistButtons": {
-        "empty": "Обрати зараз",
-        "toItem": "Перейти до товару"
-    },
-    "wishlistTableFields": {
-        "item": "ПРОДУКТ",
-        "price": "ЦІНА"
-    }
+  "wishlistTitles": {
+    "empty": "Ваш список вподобань порожній",
+    "filled": "Список вподобань",
+    "bottomMaterial": "Матеріал внизу"
+  },
+  "wishlistButtons": {
+    "empty": "До каталогу",
+    "toItem": "Переглянути деталі",
+    "toCart": "Додати до кошика"
+  },
+  "wishlistTableFields": {
+    "item": "ПРОДУКТ",
+    "price": "ЦІНА"
+  }
 }

@@ -25,6 +25,14 @@ export default function RegisterForm({
 }) {
   const styles = useStyles();
   const { t } = useTranslation();
+
+  const type = (name) => {
+    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
+      return USER_REGISTER_LABELS.pass;
+    }
+    return USER_REGISTER_LABELS.text;
+  };
+
   return (
     <Form className={styles.registerForm}>
       {loading ? (
@@ -35,7 +43,7 @@ export default function RegisterForm({
           {Object.keys(values).map((name) => (
             <Field
               key={name}
-              type={name === USER_REGISTER_LABELS.pass ? name : USER_REGISTER_LABELS.text}
+              type={type(name)}
               name={name}
               as={TextField}
               label={t(`register.placeholders.${name}`)}
@@ -47,7 +55,7 @@ export default function RegisterForm({
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}
               InputProps={
-                name === USER_REGISTER_LABELS.pass
+                name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm
                   ? endAdornment(showPassword, setShowPassword)
                   : {}
               }

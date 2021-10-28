@@ -1,6 +1,5 @@
 import { all } from 'redux-saga/effects';
 import newsSaga from './news/news.sagas';
-import wishlistSaga from './wishlist/wishlist.sagas';
 import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
 import commentsSaga from './comments/comments.sagas';
@@ -15,7 +14,6 @@ export function* rootSaga() {
   yield all([
     newsSaga(),
     userSaga(),
-    wishlistSaga(),
     toastSaga(),
     cartSaga(),
     commentsSaga(),

@@ -23,8 +23,15 @@ export default function Register() {
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const handleRegister = (user) => {
+    const userData = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
+    };
     setToLocalStorage(USER_TOKENS.ACCESS_TOKEN, null);
-    dispatch(registerUser({ user, language }));
+
+    dispatch(registerUser({ user: userData, language }));
   };
 
   const { language, hasRegistered, registerError, loading } = useSelector(({ Language, User }) => ({

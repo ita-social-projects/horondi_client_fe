@@ -26,9 +26,9 @@ import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import ReplyCommentsItem from './reply-comments-item';
 import Loader from '../../../../components/loader';
 
-const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
+const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) => {
   const styles = useStyles();
-  const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase } = data;
+  const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase } = commentItem;
 
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData

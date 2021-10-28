@@ -15,7 +15,7 @@ const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
   isLightTheme: true,
-  errorMessage: ''
+  errorMessage: { error: 'DEFAULT_ERROR' }
 }));
 
 describe('ErrorPage is valid', () => {
@@ -23,5 +23,11 @@ describe('ErrorPage is valid', () => {
     const component = shallow(<ErrorPage />);
 
     expect(component).toBeDefined();
+  });
+
+  it('Should contains default error', () => {
+    const component = shallow(<ErrorPage />);
+
+    expect(component.find('h2').text()).toBe('errorPage.pageMessage.DEFAULT_ERROR');
   });
 });

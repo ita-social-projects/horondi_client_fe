@@ -1,15 +1,15 @@
 {
     "pageMessage":{
-        "defaultError": "Something went wrong...",
-        "categoryNotValid": "Category is not valid",
-        "categoryNotFound": "Category not found",
-        "newsNotFound": "News not found",
-        "materialNotFound": "Material not found",
-        "productNotFound": "Product not found",
-        "orderNotFound": "Order not found",
-        "patternNotFound": "Pattern not found",
-        "userNotFound": "User not found",
-        "imageNotFound": "Image not found"
+        "DEFAULT_ERROR": "Something went wrong...",
+        "CATEGORY_NOT_VALID": "Category is not valid",
+        "CATEGORY_NOT_FOUND ": "Category not found",
+        "NEWS_NOT_FOUND": "News not found",
+        "MATERIAL_NOT_FOUND": "Material not found",
+        "PRODUCT_NOT_FOUND": "Product not found",
+        "ORDER_NOT_FOUND": "Order not found",
+        "PATTERN_NOT_FOUND": "Pattern not found",
+        "USER_NOT_FOUND": "User not found",
+        "IMAGE_NOT_FOUND": "Image not found"
         
     },
     "linkToHomePage": "Go to homepage",

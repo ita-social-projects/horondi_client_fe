@@ -10,14 +10,12 @@ import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
 import { getAllPatterns } from './operations/getAllPatterns.queries';
 import { carouselMaterialInterval, IMG_URL } from '../../configs';
-import { getImage } from '../../utils/imageLoad';
 import Slider from './slider';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const AutoplaySlider = withAutoplay(Slider);
 
 const Materials = () => {
-  const [setImage] = useState([]);
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const code = 'materials';
@@ -37,15 +35,6 @@ const Materials = () => {
     variables: { code }
   });
   const materialsPage = loadingMaterials ? {} : dataMaterials.getBusinessTextByCode;
-
-  useMemo(() => {
-    patterns.images &&
-      patterns.images.forEach((item) => {
-        getImage(patterns.images.medium)
-          .then((src) => setImage((prev) => [...prev, src]))
-          .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
-      });
-  }, [patterns.images]);
 
   const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
 

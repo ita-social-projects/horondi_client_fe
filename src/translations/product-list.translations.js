@@ -1,14 +1,3 @@
-export const SHOW_FILTER_BUTTON_TEXT = {
-  0: {
-    lang: 'uk',
-    value: 'Показати фільтри'
-  },
-  1: {
-    lang: 'eng',
-    value: 'Show Filter'
-  }
-};
-
 export const AVAILABLE_COUNT_LABEL_TEXT = {
   0: {
     lang: 'uk',
@@ -86,16 +75,6 @@ export const IS_HOT_TEXT = {
   }
 };
 
-export const FILTER_BUTTON_TEXT = {
-  0: {
-    lang: 'uk',
-    value: 'Фільтр'
-  },
-  1: {
-    lang: 'eng',
-    value: 'Filter'
-  }
-};
 export const PRODUCT_NOT_FOUND = {
   0: {
     lang: 'uk',
@@ -106,16 +85,7 @@ export const PRODUCT_NOT_FOUND = {
     value: 'No products found in this product category'
   }
 };
-export const PRICE_FROM = {
-  0: {
-    lang: 'uk',
-    value: 'від '
-  },
-  1: {
-    lang: 'eng',
-    value: 'from '
-  }
-};
+
 export const SIZE_NOT_AVAILABLE = {
   0: {
     lang: 'uk',
@@ -124,25 +94,5 @@ export const SIZE_NOT_AVAILABLE = {
   1: {
     lang: 'eng',
     value: `Product isn't available`
-  }
-};
-export const PRICE_TO = {
-  0: {
-    lang: 'uk',
-    value: 'до'
-  },
-  1: {
-    lang: 'eng',
-    value: 'to'
-  }
-};
-export const CLEAR_FILTER_BUTTON_TEXT = {
-  0: {
-    lang: 'uk',
-    value: 'Очистити фільтр'
-  },
-  1: {
-    lang: 'eng',
-    value: 'Clear Filter '
   }
 };

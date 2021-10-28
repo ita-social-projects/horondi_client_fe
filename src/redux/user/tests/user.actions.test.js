@@ -20,8 +20,8 @@ import {
   setRecoveryLoading,
   setUserOrders,
   getUserOrders,
-  addProductToUserCartOrWishlist,
-  removeProductFromUserCartOrWishlist,
+  addProductToUserCart,
+  removeProductFromUserCart,
   deleteUserDataFromStore
 } from '../user.actions';
 import {
@@ -46,8 +46,8 @@ import {
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
   GET_USER_ORDERS,
-  ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
-  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  ADD_PRODUCT_TO_USER_CART,
+  REMOVE_PRODUCT_FROM_USER_CART,
   SET_DELETE_USER
 } from '../user.types';
 import { initialStateMock, userMocks } from './user.mocks';
@@ -179,15 +179,15 @@ describe('test User actions', () => {
       payload: true
     });
   });
-  test('should test addProductToUserCartOrWishlist', () => {
-    expect(addProductToUserCartOrWishlist(1)).toEqual({
-      type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+  test('should test addProductToUserCart', () => {
+    expect(addProductToUserCart(1)).toEqual({
+      type: ADD_PRODUCT_TO_USER_CART,
       payload: userMocks.id
     });
   });
-  test('should test removeProductFromUserCartOrWishlist', () => {
-    expect(removeProductFromUserCartOrWishlist(1)).toEqual({
-      type: REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  test('should test removeProductFromUserCart', () => {
+    expect(removeProductFromUserCart(1)).toEqual({
+      type: REMOVE_PRODUCT_FROM_USER_CART,
       payload: userMocks.id
     });
   });

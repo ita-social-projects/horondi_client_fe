@@ -32,27 +32,6 @@ const loginUser = async (data) => {
       blockCount
       updatedAt
     }
-		wishlist {
-			_id
-			name {
-				lang
-				value
-			}
-      sizes {
-        size {
-          available
-        }
-        price {
-          value
-          currency
-        }
-      }
-			images {
-			  primary {
-			    small
-			  }			  
-			}
-		}
     cart{
       items {
         _id
@@ -136,27 +115,6 @@ const getGoogleUser = async ({ idToken }) => {
       credentials{
         source,
         tokenPass
-      }
-      wishlist {
-        _id
-        name {
-          lang
-          value
-        }
-        sizes {
-          size {
-            available
-          }
-          price {
-            value
-            currency
-          }
-        }
-        images {
-          primary {
-            small
-          }
-        }
       }
       token
 } 
@@ -302,22 +260,6 @@ const getUserByToken = async () => {
               region
             }
             confirmed
-            wishlist {
-              _id
-              name {
-                lang
-                value
-              }
-              basePrice {
-                currency
-                value
-              }
-              images {
-                primary {
-                  small
-                }
-              }
-            }
             cart {
               items {
                 product {

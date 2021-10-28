@@ -1,87 +1,87 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+const button = {
+  width: '255px',
+  height: '52px',
+  borderRadius: '4px',
+  fontFamily: 'Open Sans',
+  fontStyle: 'normal',
+  fontWeight: '600',
+  fontSize: '14px',
+  lineHeight: '20px',
+  letterSpacing: '0.0125em',
+  textTransform: 'uppercase'
+};
+
+export const useStyles = makeStyles(() => ({
   root: {
-    margin: '10px 0',
-    display: 'flex',
-    width: '100%',
-    '& td:first-child': {
-      display: 'flex',
-      flex: 1
-    },
-    '& td:not(:first-child)': {
-      width: 200,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }
-  },
-  image: {
-    flexBasis: 100,
-    '& img': {
-      width: '100%',
-      borderRadius: 5,
-      minWidth: 60,
-      '@media (max-width: 610px)': {
-        float: 'left'
-      }
-    }
-  },
-  description: {
-    display: 'flex',
-    textAlign: 'center',
-    flexDirection: 'column',
+    width: '1110px',
     justifyContent: 'space-between',
-    padding: 20,
-    '@media (max-width: 610px)': {
-      fontSize: '0.8em'
-    },
-    '& button': {
-      margin: '10px 0 0',
-      color: theme.palette.button.normal.color,
-      width: '230px',
-      backgroundColor: theme.palette.button.normal.backgroundColor,
-      fontSize: '1em',
-      padding: '5px 10px',
-      '@media (max-width: 610px)': {
-        width: '120px',
-        marginRight: '16em',
-        fontSize: '0.7em'
-      },
-      '&:hover': {
-        color: theme.palette.button.hover.color,
-        backgroundColor: theme.palette.button.hover.backgroundColor
-      }
-    },
-    '& a': {
-      color: 'inherit'
-    }
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
   },
-  itemName: {
-    fontSize: '1.7em',
-    '@media (max-width: 610px)': {
-      fontSize: '1em',
-      fontWeight: 'bold',
-      marginRight: '12em'
-    }
+  product: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '300px',
+    marginRight: '50px'
   },
-  price: {
-    position: 'relative',
-    '@media (max-width: 550px)': {
-      left: -110,
-      fontSize: '0.8em',
-      fontWeight: 'bold'
-    }
+  itemName: (isLightTheme) => ({
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '24px',
+    lineHeight: '32px',
+    color: isLightTheme ? '#242424' : '#FEFEFE'
+  }),
+  description: (isLightTheme) => ({
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    lineHeight: '22px',
+    letterSpacing: '0.0025em',
+    color: isLightTheme ? '#242424' : '#FEFEFE'
+  }),
+  delete: {
+    display: 'flex',
+    width: '760px',
+    justifyContent: 'flex-end'
   },
-  trash: {
-    position: 'absolute',
-    right: 10,
-    cursor: 'pointer',
-    '@media (max-width: 768px)': {
-      right: 1
+  deleteIcon: {
+    marginLeft: '20px',
+    cursor: 'pointer'
+  },
+  priceWrapper: {
+    textAlign: 'center',
+    width: '100px'
+  },
+  deleteWrapper: {
+    display: 'flex',
+    width: '300px',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center'
+  },
+  cartButton: (isLightTheme) => ({
+    ...button,
+    '&:hover': {
+      backgroundColor: isLightTheme ? '#3F3F3F' : '#020202',
+      color: '#FEFEFE'
     },
-    '@media (max-width: 425px)': {
-      right: -35
-    }
-  }
+    background: isLightTheme ? '#020202' : '#FEFEFE',
+    color: isLightTheme ? '#FEFEFE' : '#020202'
+  }),
+  detailsButton: (isLightTheme) => ({
+    ...button,
+    marginTop: '15px',
+    '&:hover': {
+      backgroundColor: isLightTheme ? '#3F3F3F' : '#020202',
+      color: '#FEFEFE'
+    },
+    background: isLightTheme ? '#FEFEFE' : 'none',
+    border: isLightTheme ? 'none' : '1px solid #FEFEFE',
+    color: isLightTheme ? '#020202' : '#FEFEFE'
+  })
 }));

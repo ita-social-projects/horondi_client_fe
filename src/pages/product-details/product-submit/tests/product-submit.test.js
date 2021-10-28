@@ -14,6 +14,10 @@ const mockDispatch = jest.fn();
 jest.mock('../product-submit.styles', () => ({
   useStyles: () => ({})
 }));
+jest.mock('../../../../hooks/use-add-product-to-wishlist-handler', () => ({
+  __esModule: true,
+  default: () => [true, () => null]
+}));
 
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');

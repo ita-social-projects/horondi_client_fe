@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -14,7 +14,6 @@ import HistoryIcon from '@material-ui/icons/History';
 
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './header-profile.styles';
-import { getWishlist } from '../../redux/wishlist/wishlist.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
@@ -43,10 +42,6 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
   const history = useHistory();
   const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
-
-  useEffect(() => {
-    dispatch(getWishlist());
-  }, [dispatch]);
 
   const handleKeyDown = (e) => {
     e.persist();

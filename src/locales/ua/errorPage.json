@@ -1,15 +1,15 @@
 {
     "pageMessage":{
-       "defaultError":  "Щось пішло не так...",
-       "categoryNotValid": "Категорія не вірна",
-       "categoryNotFound": "Категорію не знайдено",
-       "newsNotFound": "Новин не знайдено",
-       "materialNotFound": "Матеріал не знайдено'",
-       "productNotFound": "Товар не знайдено",
-       "orderNotFound": "Замовлення не знайдено",
-       "patternNotFound": "Гобелен не знайдено",
-       "userNotFound":"Користувача не знайдено",
-       "imageNotFound": "Фото не знайдено"
+       "DEFAULT_ERROR":  "Щось пішло не так...",
+       "CATEGORY_NOT_VALID": "Категорія не вірна",
+       "CATEGORY_NOT_FOUND": "Категорію не знайдено",
+       "NEWS_NOT_FOUND": "Новин не знайдено",
+       "MATERIAL_NOT_FOUND": "Матеріал не знайдено'",
+       "PRODUCT_NOT_FOUND": "Товар не знайдено",
+       "ORDER_NOT_FOUND": "Замовлення не знайдено",
+       "PATTERN_NOT_FOUND": "Гобелен не знайдено",
+       "USER_NOT_FOUND":"Користувача не знайдено",
+       "IMAGE_NOT_FOUND": "Фото не знайдено"
 
     },
     "linkToHomePage": "На головну",

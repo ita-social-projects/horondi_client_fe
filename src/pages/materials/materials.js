@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import parse from 'html-react-parser';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { useQuery } from '@apollo/client';

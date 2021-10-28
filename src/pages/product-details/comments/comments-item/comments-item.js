@@ -30,14 +30,9 @@ const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
   const styles = useStyles();
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase } = data;
 
-  const { userData, replyLoading, replyLoadingId, getReplyLoading, getReplyLoadingId } =
-    useSelector(({ Comments, User }) => ({
-      userData: User.userData,
-      replyLoading: Comments.replyLoading.loader,
-      replyLoadingId: Comments.replyLoading.commentId,
-      getReplyLoading: Comments.getReplyLoading.loader,
-      getReplyLoadingId: Comments.getReplyLoading.commentId
-    }));
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
+  }));
 
   const { t, i18n } = useTranslation();
 
@@ -50,25 +45,26 @@ const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
   const [isReplyShown, toggleReply] = useState(false);
   const [isReplyListShown, toggleReplyList] = useState(false);
   const [currentLimit, setCurrentLimit] = useState(3);
-  const [replyComments, setReplyComments] = useState({ count: 0, items: [] });
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
 
-  const { loading: getReplyCommentsLoading } = useQuery(getReplyCommentsQuery, {
+  const {
+    loading,
+    data: replyCommentsData,
+    error
+  } = useQuery(getReplyCommentsQuery, {
     variables: {
       filter: { commentId, filters: false },
       pagination: { skip: handleSkip(replyCommentsCount, currentLimit), limit: currentLimit }
     },
     fetchPolicy: 'network-only',
-    nextFetchPolicy: 'cache-first',
-    onCompleted: (data) => {
-      setReplyComments({
-        count: data.getReplyCommentsByComment.count,
-        items: data.getReplyCommentsByComment.items[0].replyComments
-      });
-    },
-    OnError: (err) => errorOrLoadingHandler(err)
+    nextFetchPolicy: 'cache-first'
   });
+
+  if (error || loading) return errorOrLoadingHandler(error, loading);
+
+  const { replyComments } = replyCommentsData.getReplyCommentsByComment.items[0];
+
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
   const handleOpen = () => {
@@ -92,14 +88,13 @@ const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
       return toggleReplyList(false);
     }
     toggleReplyList(true);
-    return !replyComments?.length;
   };
 
-  const getReplyCommentsByComment = () => {
+  const getMoreComments = () => {
     setCurrentLimit((prev) => prev + 10);
   };
 
-  const replyCommentsList = replyComments.items.map(({ _id, ...rest }) => (
+  const replyCommentsList = replyComments.map(({ _id, ...rest }) => (
     <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
   ));
 
@@ -175,13 +170,13 @@ const CommentsItem = ({ data, commentId, productId, refetchComments }) => {
             {replyCommentsCount > currentLimit && (
               <div className={styles.loadMore}>
                 {handleArrowIcon(limitOption)}
-                <span onClick={getReplyCommentsByComment} className={styles.loadMoreText}>
+                <span onClick={getMoreComments} className={styles.loadMoreText}>
                   {loadMore}
                 </span>
               </div>
             )}
 
-            {getReplyCommentsLoading && (
+            {loading && (
               <div className={styles.loader}>
                 <Loader width={40} height={40} heightWrap={90} />
               </div>

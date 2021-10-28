@@ -1,7 +1,6 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useQuery } from '@apollo/client';
-import { TextField } from '@material-ui/core';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import NovaPost from '../nova-post';
 
 jest.mock('../nova-post.styles.js', () => ({
@@ -13,13 +12,15 @@ jest.mock('@apollo/client');
 
 useQuery.mockImplementation(() => ({
   refetch: () => jest.fn(),
-  housesLoading: true,
   data: {
-    getNovaPoshtaCities: [],
-    getNovaPoshtaWarehouses: []
+    getNovaPoshtaCities: []
   }
 }));
 
+useLazyQuery.mockImplementation(() => [
+  () => null,
+  { loading: false, data: { getNovaPoshtaWarehouses: [] } }
+]);
 let wrapper;
 
 const props = {

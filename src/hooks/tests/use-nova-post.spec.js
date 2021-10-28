@@ -16,7 +16,8 @@ jest.mock('@apollo/client', () => ({
     data: {
       getNovaPoshtaCities: ['Львів']
     }
-  })
+  }),
+  useLazyQuery: () => [() => null, { loading: false, data: { getNovaPoshtaWarehouses: [] } }]
 }));
 
 describe('use-nova-post hook tests', () => {

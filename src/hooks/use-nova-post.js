@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import _ from 'lodash';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import {
   getNovaPoshtaCities,
   getNovaPoshtaWarehouses
@@ -8,7 +8,7 @@ import {
 
 export default function useNovaPost(values, seletedCity) {
   const {
-    refetch: refetchCities,
+    refetch: getCities,
     data: dataCities,
     loading: citiesLoading
   } = useQuery(getNovaPoshtaCities, {
@@ -19,29 +19,29 @@ export default function useNovaPost(values, seletedCity) {
 
   const cities = citiesLoading ? [] : dataCities.getNovaPoshtaCities;
 
-  const {
-    refetch: refetchHouse,
-    data: dataHouses,
-    loading: housesLoading
-  } = useQuery(getNovaPoshtaWarehouses, {
-    variables: {
-      city: values.city
+  const [getHouse, { data: dataHouses, loading: housesLoading = true }] = useLazyQuery(
+    getNovaPoshtaWarehouses,
+    {
+      variables: {
+        city: values.city
+      }
     }
-  });
-
-  const wareHouses = housesLoading ? [] : dataHouses.getNovaPoshtaWarehouses;
+  );
 
   const refetchCitiesHandler = useRef(
     _.debounce(() => {
-      refetchCities();
+      getCities();
     }, 1000)
   );
 
   useEffect(() => {
     if (seletedCity) {
-      refetchHouse();
+      getHouse();
     }
   }, [seletedCity]);
 
-  return [{ cities, wareHouses, housesLoading }, refetchCitiesHandler];
+  return [
+    { cities, wareHouses: dataHouses?.getNovaPoshtaWarehouses, housesLoading },
+    refetchCitiesHandler
+  ];
 }

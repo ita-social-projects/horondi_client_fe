@@ -9,7 +9,7 @@ import {
 export default function useNovaPost(values, seletedCity) {
   const {
     refetch: refetchCities,
-    data,
+    data: dataCities,
     loading: citiesLoading
   } = useQuery(getNovaPoshtaCities, {
     variables: {
@@ -17,7 +17,7 @@ export default function useNovaPost(values, seletedCity) {
     }
   });
 
-  const cities = citiesLoading ? [] : data.getNovaPoshtaCities;
+  const cities = citiesLoading ? [] : dataCities.getNovaPoshtaCities;
 
   const {
     refetch: refetchHouse,

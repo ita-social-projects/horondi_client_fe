@@ -9,7 +9,7 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
 import { getAllPatterns } from './operations/getAllPatterns.queries';
-import { carouselMaterialInterval, IMG_URL } from '../../configs';
+import { carouselMaterialInterval } from '../../configs';
 import Slider from './slider';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getImage } from '../../utils/imageLoad';
@@ -41,8 +41,7 @@ const Materials = () => {
       const mapImages = await Promise.all(
         initImages.map(async (item) => {
           try {
-            const result = await getImage(item);
-            return result;
+            return await getImage(item);
           } catch (e) {
             return isLightTheme ? productPlugLight : productPlugDark;
           }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useQuery } from '@apollo/client';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import UkrPost from '../ukrpost';
 
 jest.mock('../ukrpost.styles.js', () => ({
@@ -10,16 +10,16 @@ jest.mock('../ukrpost.styles.js', () => ({
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 
-useQuery.mockImplementation(() => ({
-  error: null,
+const useQueryData = {
   loading: false,
+  error: false,
   data: {
     getUkrPoshtaRegions: [],
     getUkrPoshtaDistrictsByRegionId: [],
     getUkrPoshtaCitiesByDistrictId: [],
     getUkrPoshtaPostofficesCityId: []
   }
-}));
+};
 
 let wrapper;
 
@@ -31,10 +31,13 @@ const props = {
     email: '',
     phoneNumber: null
   },
-  touched: {},
-  errors: {},
+  touched: { region: 'Житомирська', district: 'Житомирський', city: 'Житомир', courierOffice: '1' },
+  errors: { region: 'Житомирська', district: 'Житомирський', city: 'Житомир', courierOffice: '1' },
   setFieldValue: jest.fn()
 };
+useQuery.mockImplementation(() => ({
+  ...useQueryData
+}));
 
 describe('UkrPost component tests', () => {
   wrapper = mount(<UkrPost {...props} />);

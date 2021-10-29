@@ -12,9 +12,7 @@ import {
   setUserLoading,
   userHasRegistered,
   setConfirmationEmailStatus,
-  setUserOrders,
   userHasRecovered,
-  setUserCountOrders,
   setUserError
 } from '../user.actions';
 import userReducer from '../user.reducer';
@@ -32,9 +30,7 @@ import {
   userCart,
   userId,
   upload,
-  pagination,
   error,
-  countOrder,
   cartFromLc
 } from './user.mocks';
 import {
@@ -47,7 +43,6 @@ import {
   handleUserPreserve,
   handleUpdateUser,
   handleSendConfirmation,
-  handleGetUserOrders,
   handleGoogleUserLogin,
   handleUserLogout,
   handleRefreshTokenInvalid,
@@ -63,10 +58,8 @@ import {
   resetPassword,
   updateUserById,
   sendEmailConfirmation,
-  getUserOrders,
   getUserByToken,
-  getPurchasedProducts,
-  getCountUserOrders
+  getPurchasedProducts
 } from '../user.operations';
 import routes from '../../../const/routes';
 import { getCartByUserId, mergeCartFromLSWithUserCart } from '../../cart/cart.operations';
@@ -393,42 +386,6 @@ describe('user sagas tests', () => {
       .hasFinalState({
         ...initialStateMock,
         confirmationLoading: true,
-        error: USER_ERROR.DEFAULT_ERROR[language].value
-      })
-      .run());
-
-  it('should handle get user orders', () =>
-    expectSaga(handleGetUserOrders, { payload: { pagination } })
-      .withReducer(userReducer)
-      .put(setUserLoading(true))
-      .provide([
-        [call(getCountUserOrders), countOrder],
-        [call(getUserOrders, pagination), user.orders]
-      ])
-      .put(setUserCountOrders(countOrder.countOrder))
-      .put(setUserOrders(user.orders))
-      .put(setUserLoading(false))
-      .hasFinalState({
-        ...initialStateMock,
-        countPerPage: 0,
-        userOrders: []
-      })
-      .run()
-      .then((result) => {
-        const { allEffects: analysis } = result;
-        const analysisPut = analysis.filter((e) => e.type === 'PUT');
-        const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
-      }));
-
-  it('should handle get user orders error', () =>
-    expectSaga(handleGetUserOrders, { payload: { pagination: null } })
-      .provide([[call(handleUserError, error)]])
-      .withReducer(userReducer)
-      .put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value))
-      .hasFinalState({
-        ...initialStateMock,
         error: USER_ERROR.DEFAULT_ERROR[language].value
       })
       .run());

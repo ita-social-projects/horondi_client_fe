@@ -12,9 +12,7 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  SET_DELETE_USER,
-  SET_ORDERS_COUNT,
-  SET_CURRENT_PAGE
+  SET_DELETE_USER
 } from './user.types';
 
 export const initialState = {
@@ -28,9 +26,7 @@ export const initialState = {
   passwordReset: false,
   confirmationEmailSent: false,
   recoveryLoading: false,
-  confirmationLoading: false,
-  currentPage: 1,
-  countPerPage: null
+  confirmationLoading: false
 };
 
 const userReducer = (state = initialState, action = {}) => {
@@ -113,16 +109,6 @@ const userReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         userData: null
-      };
-    case SET_ORDERS_COUNT:
-      return {
-        ...state,
-        countPerPage: action.payload
-      };
-    case SET_CURRENT_PAGE:
-      return {
-        ...state,
-        currentPage: action.payload
       };
     default:
       return state;

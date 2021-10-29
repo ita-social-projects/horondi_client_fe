@@ -14,8 +14,7 @@ import {
   setUserIsConfirmed,
   setConfirmationLoading,
   setRecoveryLoading,
-  setUserOrders,
-  setUserCountOrders
+  setUserOrders
 } from './user.actions';
 import { clearComments } from '../comments/comments.actions';
 import {
@@ -28,10 +27,8 @@ import {
   updateUserById,
   sendEmailConfirmation,
   resetPassword,
-  getUserOrders,
   getUserByToken,
-  getPurchasedProducts,
-  getCountUserOrders
+  getPurchasedProducts
 } from './user.operations';
 import { mergeCartFromLSWithUserCart, getCartByUserId } from '../cart/cart.operations';
 import {
@@ -44,7 +41,6 @@ import {
   PRESERVE_USER,
   UPDATE_USER,
   SEND_CONFIRMATION_EMAIL,
-  GET_USER_ORDERS,
   LOGIN_BY_GOOGLE,
   LOGOUT_USER
 } from './user.types';
@@ -221,19 +217,6 @@ export function* handleSendConfirmation({ payload }) {
   }
 }
 
-export function* handleGetUserOrders({ payload: { pagination } }) {
-  try {
-    yield put(setUserLoading(true));
-    const { countOrder } = yield call(getCountUserOrders);
-    yield put(setUserCountOrders(countOrder));
-    const orders = yield call(getUserOrders, pagination);
-    yield put(setUserOrders(orders));
-    yield put(setUserLoading(false));
-  } catch (e) {
-    yield call(handleUserError, e);
-  }
-}
-
 export function* handleUserLogout() {
   yield put(clearComments());
   yield put(setUser(null));
@@ -284,7 +267,6 @@ export default function* userSaga() {
   yield takeEvery(PRESERVE_USER, handleUserPreserve);
   yield takeEvery(UPDATE_USER, handleUpdateUser);
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
-  yield takeEvery(GET_USER_ORDERS, handleGetUserOrders);
   yield takeEvery(LOGIN_BY_GOOGLE, handleGoogleUserLogin);
   yield takeEvery(LOGOUT_USER, handleUserLogout);
 }

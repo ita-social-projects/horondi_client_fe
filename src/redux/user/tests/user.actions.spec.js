@@ -1,8 +1,6 @@
 import {
   setUserError,
   setUser,
-  setUserCountOrders,
-  setCurrentPage,
   loginUser,
   loginByGoogle,
   logoutUser,
@@ -19,7 +17,6 @@ import {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  getUserOrders,
   addProductToUserCart,
   removeProductFromUserCart,
   deleteUserDataFromStore
@@ -27,8 +24,6 @@ import {
 import {
   SET_USER_ERROR,
   SET_USER,
-  SET_ORDERS_COUNT,
-  SET_CURRENT_PAGE,
   LOGIN_USER,
   LOGIN_BY_GOOGLE,
   LOGOUT_USER,
@@ -45,7 +40,6 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  GET_USER_ORDERS,
   ADD_PRODUCT_TO_USER_CART,
   REMOVE_PRODUCT_FROM_USER_CART,
   SET_DELETE_USER
@@ -66,19 +60,6 @@ describe('test User actions', () => {
       payload: userMocks
     };
     expect(setUser(userMocks)).toEqual(result);
-  });
-  test('should setCountUserOrders', () => {
-    const result = {
-      type: SET_ORDERS_COUNT,
-      payload: userMocks.ordersCount
-    };
-    expect(setUserCountOrders(3)).toEqual(result);
-  });
-  test('should setCurrentPage', () => {
-    expect(setCurrentPage(1)).toEqual({
-      type: SET_CURRENT_PAGE,
-      payload: userMocks.curPage
-    });
   });
   test('should test loginUser', () => {
     expect(loginUser('user')).toEqual({
@@ -171,12 +152,6 @@ describe('test User actions', () => {
     expect(setUserOrders(null)).toEqual({
       type: SET_USER_ORDERS,
       payload: initialStateMock.userOrders
-    });
-  });
-  test('should test getUserOrders', () => {
-    expect(getUserOrders(true)).toEqual({
-      type: GET_USER_ORDERS,
-      payload: true
     });
   });
   test('should test addProductToUserCart', () => {

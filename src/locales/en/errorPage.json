@@ -9,9 +9,8 @@
         "ORDER_NOT_FOUND": "Order not found",
         "PATTERN_NOT_FOUND": "Pattern not found",
         "USER_NOT_FOUND": "User not found",
-        "IMAGE_NOT_FOUND": "Image not found"
-        
+        "IMAGE_NOT_FOUND": "Image not found",
+        "BUSINESS_TEXT_NOT_FOUND": "Business text not found"
     },
-    "linkToHomePage": "Go to homepage",
-    "BusinessTextNotFound": "Business text not found"
+    "linkToHomePage": "Go to homepage"
 }

@@ -66,7 +66,10 @@ describe('Register component tests', () => {
   it('Should call setToLocalStorage', () => {
     mockStore.hasRegistered = true;
     act(() => {
-      wrapper.find(Formik).props().onSubmit();
+      wrapper
+        .find(Formik)
+        .props()
+        .onSubmit({ firstName: '', lastName: '', email: '', password: '' });
     });
     expect(mockToLocalStorage).toHaveBeenCalled();
   });

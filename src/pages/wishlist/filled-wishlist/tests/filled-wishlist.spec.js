@@ -5,6 +5,17 @@ import FilledWishlist from '../filled-wishlist';
 import WishlistItem from '../../wishlist-item/wishlist-item';
 import items from './mockedItems';
 
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useContext: () => [{}],
+  useEffect: (cb) => cb(),
+  useState: (value) => [value, () => null]
+}));
+jest.mock('../../../../context/theme-context', () => ({}));
+jest.mock('../../../../hooks/use-delete-product-from-wishlist-handler', () => ({
+  __esModule: true,
+  default: () => [{ error: null, loading: false, wishlist: {} }, () => null]
+}));
 jest.mock('../filled-wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../../services/local-storage.service');

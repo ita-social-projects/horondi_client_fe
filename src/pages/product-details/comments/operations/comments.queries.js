@@ -53,3 +53,66 @@ export const addCommentMutation = gql`
     }
   }
 `;
+
+export const getReplyCommentsQuery = gql`
+  query ($filter: ReplyCommentFilterInput, $pagination: Pagination) {
+    getReplyCommentsByComment(filter: $filter, pagination: $pagination) {
+      ... on PaginatedComments {
+        __typename
+        items {
+          _id
+          replyComments {
+            _id
+            replyText
+            showReplyComment
+            createdAt
+            verifiedPurchase
+            answerer {
+              _id
+              firstName
+              email
+              role
+            }
+          }
+        }
+        count
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+`;
+
+export const addReplyMutation = gql`
+  mutation ($id: ID, $commentId: ID!, $replyText: String!, $productId: ID, $answerer: ID) {
+    replyForComment(
+      id: $id
+      commentId: $commentId
+      replyCommentData: {
+        answerer: $answerer
+        replyText: $replyText
+        refToReplyComment: $commentId
+        productId: $productId
+      }
+    ) {
+      ... on Comment {
+        _id
+        replyComments {
+          _id
+          replyText
+          showReplyComment
+          createdAt
+          verifiedPurchase
+          answerer {
+            _id
+            firstName
+            email
+            role
+          }
+        }
+      }
+    }
+  }
+`;

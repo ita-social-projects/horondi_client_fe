@@ -20,18 +20,17 @@ const SimilarProducts = ({ cartList, product }) => {
   const styles = useStyles();
 
   const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency,
+    currency: Currency.currency
   }));
 
   const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => setSimilarProducts(data.getProducts.items)
   });
 
-  const isLightTheme = useContext(ThemeContext);
+  const [isLightTheme] = useContext(ThemeContext);
 
   const { t } = useTranslation();
 
-  const { title } = t('product.similarItems');
   const currencySign = getCurrencySign(currency);
   const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;
   let imagesList;
@@ -75,7 +74,7 @@ const SimilarProducts = ({ cartList, product }) => {
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
-            <h2 className={titleClass}>{title}</h2>
+            <h2 className={titleClass}>{t('product.similarItems.title')}</h2>
           </div>
           <Carousel
             className={styles.carousel}

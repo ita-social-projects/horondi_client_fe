@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import parse from 'html-react-parser';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
@@ -17,10 +17,6 @@ const BusinessPage = ({ match }) => {
     variables: { code },
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [code]);
 
   const addressText = page?.text && parse(page?.text[language].value);
   const styles = useStyles();

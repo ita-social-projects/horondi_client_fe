@@ -12,6 +12,12 @@ const useQueryData = {
 };
 
 jest.mock('react-redux');
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useContext: () => [{}]
+}));
+jest.mock('../../../../context/theme-context', () => ({}));
+jest.mock('../similar-products.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('@apollo/client');
 jest.mock('../../../../utils/productDetails', () => ({ similarProductForCart: [{}] }));
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
+import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
 import Rating from '@material-ui/lab/Rating';
 import { TEXT_VALUE } from '../configs';
 
@@ -32,7 +32,7 @@ export const handleAddReplyCount = (comment, addedReplyComment) =>
     }
     : comment;
 
-export const handleArrowIcon = (limitOption) => (limitOption ? null : <ArrowDownwardRoundedIcon />);
+export const handleArrowIcon = (limitOption) => (limitOption ? null : <ArrowUpwardRoundedIcon />);
 
 export const handleUserId = (userData) => (userData ? userData._id : '');
 
@@ -44,3 +44,11 @@ export const handleTextStyle = (show, text, notAproveText) => (show ? text : not
 export const handleLimitOptions = (replyCommentsList, replyComments, replyCommentsCount) =>
   replyCommentsList.length === replyComments?.items?.length &&
   replyComments?.items?.length > replyCommentsCount;
+
+export const handleSkip = (replyCommentsCount, currentLimit) => {
+  const value = replyCommentsCount - currentLimit;
+  if (value < 0) {
+    return 0;
+  }
+  return value;
+};

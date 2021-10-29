@@ -20,7 +20,7 @@ import {
 } from '../../../utils/handle-comments';
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { useIsLoading } from '../../../hooks/useIsLoading';
+import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
 
 const Comments = ({ productId }) => {
   const styles = useStyles();
@@ -47,7 +47,7 @@ const Comments = ({ productId }) => {
     onError: (err) => errorOrLoadingHandler(err)
   });
 
-  const { isLoading } = useIsLoading([addCommentLoading, getCommentsLoading]);
+  const { isLoading } = useIsLoadingOrError([addCommentLoading, getCommentsLoading]);
   const { _id: userId } = userData || {};
 
   const onSubmit = async (formValues) => {
@@ -85,7 +85,13 @@ const Comments = ({ productId }) => {
   }, [language, userId]);
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
-    <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
+    <CommentsItem
+      key={_id}
+      commentItem={rest}
+      refetchComments={refetchComments}
+      commentId={_id}
+      productId={productId}
+    />
   ));
   const limitOption = commentsList.length === comments.count;
 

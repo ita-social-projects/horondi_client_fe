@@ -199,6 +199,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
         userId={handleUserId(userData)}
         isDeleteComment={1}
         productId={productId}
+        refetchComments={refetchComments}
       />
     </div>
   );

@@ -11,7 +11,6 @@ import {
   dataSuperAdmin,
   dataWithOutVerifing
 } from './reply-comments-item.variables';
-import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
 jest.mock('react-redux');
 
@@ -25,7 +24,7 @@ jest.mock('react-i18next', () => ({
     i18n: () => ({ dateLanguage: 'ukr-UA' })
   })
 }));
-
+const { t } = useTranslation();
 const SelectorsState = {
   userData: {
     _id: '111',
@@ -66,7 +65,7 @@ describe('component', () => {
       </ThemeProvider>
     );
     expect(wrapper.find('span').text()).toBe(
-      `${COMMENT_OWNER_STATUS.isAdmin[0]} ${dataAdmin.answerer.firstName}`
+      `${t('common.reply.isAdmin')} ${dataAdmin.answerer.firstName}`
     );
     expect(wrapper).toBeDefined();
   });
@@ -78,7 +77,7 @@ describe('component', () => {
       </ThemeProvider>
     );
     expect(wrapper.find('span').text()).toBe(
-      `${COMMENT_OWNER_STATUS.isAdmin[0]} ${dataSuperAdmin.answerer.firstName}`
+      `${t('common.reply.isAdmin')} ${dataSuperAdmin.answerer.firstName}`
     );
     expect(wrapper).toBeDefined();
   });

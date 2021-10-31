@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
 import ThemeContext from '../../context/theme-context';
+import * as errorPage from '../../locales/en/errorPage.json';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ErrorPage = () => {
         />
         <div className={styles.info}>
           <h2>
-            {errorMessage && t(`errorPage.pageMessage.${errorMessage.error}`)
+            {errorMessage && errorPage.pageMessage[errorMessage.error]
               ? t(`errorPage.pageMessage.${errorMessage.error}`)
               : t('errorPage.pageMessage.DEFAULT_ERROR')}
           </h2>

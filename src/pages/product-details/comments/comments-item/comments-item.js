@@ -95,7 +95,12 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   };
 
   const replyCommentsList = replyComments.map(({ _id, ...rest }) => (
-    <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+    <ReplyCommentsItem
+      key={_id}
+      data={rest}
+      replyCommentId={_id}
+      refetchComments={refetchComments}
+    />
   ));
 
   const limitOption = replyCommentsList.length === replyCommentsCount;

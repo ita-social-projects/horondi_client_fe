@@ -16,7 +16,6 @@ import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/mul
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../const/routes';
-import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
 
 const { pathToCart } = routes;
 
@@ -81,9 +80,9 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
     }
   };
 
-  const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
-    useAddProductToWishlistHandler(product);
-
+  // const [isInWishlist, addOrRemoveItemFromWishlistHandler] =    useAddProductToWishlistHandler(product);
+  const isInWishlist = false;
+  const addOrRemoveItemFromWishlistHandler = () => {};
   const wishlistTip = isInWishlist
     ? t('product.tooltips.removeWishful')
     : t('product.tooltips.addWishful');

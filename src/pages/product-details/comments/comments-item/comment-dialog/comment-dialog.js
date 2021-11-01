@@ -8,9 +8,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './comment-dialog.styles';
-
-import { deleteComment, deleteReplyComment } from '../../../../../redux/comments/comments.actions';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { deleteCommentMutation } from '../../operations/comments.queries';
+import Loader from '../../../../../components/loader';
 
 const CommentDialog = ({
   isModalShown,
@@ -18,31 +20,24 @@ const CommentDialog = ({
   commentId,
   userId,
   isDeleteComment = 0,
-  productId
+  productId,
+  refetchComments
 }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
+    onError: (err) => errorOrLoadingHandler(err)
+  });
 
-  const handleDelete = () => {
-    if (isDeleteComment === 1) {
-      dispatch(
-        deleteComment({
-          product: productId,
-          comment: commentId,
-          id: userId
-        })
-      );
-      handleClose();
-    } else {
-      dispatch(
-        deleteReplyComment({
-          replyCommentId: commentId,
-          id: userId
-        })
-      );
-      handleClose();
-    }
+  const handleDelete = async () => {
+    await deleteComment({
+      variables: {
+        id: commentId
+      }
+    });
+    await refetchComments();
+    handleClose();
   };
 
   return (
@@ -65,6 +60,11 @@ const CommentDialog = ({
           <Button onClick={handleDelete} className={styles.button}>
             {t('product.pdpButtons.submitButton')}
           </Button>
+          {deleteCommentLoading && (
+            <div className={styles.loader}>
+              <Loader width={40} height={40} heightWrap={90} />
+            </div>
+          )}
         </DialogActions>
       </Dialog>
     </div>

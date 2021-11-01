@@ -1,7 +1,7 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useQuery } from '@apollo/client';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import UkrPost from '../ukrpost';
 
 jest.mock('../ukrpost.styles.js', () => ({
@@ -31,8 +31,18 @@ const props = {
     email: '',
     phoneNumber: null
   },
-  touched: { region: 'Житомирська', district: 'Житомирський', city: 'Житомир', courierOffice: '1' },
-  errors: { region: 'Житомирська', district: 'Житомирський', city: 'Житомир', courierOffice: '1' },
+  touched: {
+    region: 'Житомирська',
+    district: 'Житомирський',
+    city: 'Житомир',
+    courierOffice: '1'
+  },
+  errors: {
+    region: 'Cannot be empty',
+    district: 'Cannot be empty',
+    city: 'Cannot be empty',
+    courierOffice: 'Cannot be empty'
+  },
   setFieldValue: jest.fn()
 };
 useQuery.mockImplementation(() => ({

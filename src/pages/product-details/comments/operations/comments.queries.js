@@ -119,8 +119,8 @@ export const addReplyMutation = gql`
 `;
 
 export const deleteCommentMutation = gql`
-  mutation ($id: ID!) {
-    deleteComment(id: $id) {
+  mutation ($commentID: ID!) {
+    deleteComment(commentID: $commentID) {
       ... on Comment {
         __typename
         _id

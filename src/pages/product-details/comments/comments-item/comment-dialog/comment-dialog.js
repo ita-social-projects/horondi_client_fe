@@ -33,7 +33,7 @@ const CommentDialog = ({
   const handleDelete = async () => {
     await deleteComment({
       variables: {
-        id: commentId
+        commentID: commentId
       }
     });
     await refetchComments();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
+import { useTranslation } from 'react-i18next';
 import ReplyCommentsItem from '../reply-comments-item';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import {
@@ -16,14 +17,14 @@ jest.mock('react-redux');
 jest.mock('../reply-comments-item.styles', () => ({
   useStyles: () => ({})
 }));
-
+const { t } = useTranslation();
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: () => ({ firstName: 'user' }),
     i18n: () => ({ dateLanguage: 'ukr-UA' })
   })
 }));
-const { t } = useTranslation();
+
 const SelectorsState = {
   userData: {
     _id: '111',

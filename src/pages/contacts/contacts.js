@@ -13,13 +13,12 @@ const Contacts = ({ fromCheckout }) => {
 
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
-  const [contacts, setContacts] = useState([]);
 
-  const { loading, error } = useQuery(getContacts, {
-    onCompleted: (data) => setContacts(data.getContacts.items)
-  });
+  const { loading, error, data } = useQuery(getContacts, {});
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
+
+  const contacts = data.getContacts.items;
 
   const onLoadImageError = () => {
     setImageStatus(false);

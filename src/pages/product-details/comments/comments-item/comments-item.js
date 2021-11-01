@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
@@ -51,6 +51,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   const {
     loading,
     data: replyCommentsData,
+    refetch: refetchReply,
     error
   } = useQuery(getReplyCommentsQuery, {
     variables: {
@@ -60,6 +61,10 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'cache-first'
   });
+
+  useEffect(() => {
+    refetchReply();
+  }, [commentItem]);
 
   if (error || loading) return errorOrLoadingHandler(error, loading);
 
@@ -95,7 +100,12 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   };
 
   const replyCommentsList = replyComments.map(({ _id, ...rest }) => (
-    <ReplyCommentsItem key={_id} data={rest} replyCommentId={_id} />
+    <ReplyCommentsItem
+      key={_id}
+      replyItem={rest}
+      replyCommentId={_id}
+      refetchComments={refetchComments}
+    />
   ));
 
   const limitOption = replyCommentsList.length === replyCommentsCount;
@@ -199,6 +209,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
         userId={handleUserId(userData)}
         isDeleteComment={1}
         productId={productId}
+        refetchComments={refetchComments}
       />
     </div>
   );

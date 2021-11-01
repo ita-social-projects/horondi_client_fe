@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
 import { Button, TextField, Tooltip } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/client';
+import i18n from 'i18next';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
 import { commentFields, formRegExp, TEXT_VALUE } from '../../../configs';
 import useCommentValidation from '../../../hooks/use-comment-validation';
-import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 import {
   handleArrowIcon,
   handleClassName,
@@ -26,13 +26,13 @@ const Comments = ({ productId }) => {
   const styles = useStyles();
   const [comments, setComments] = useState({ items: [], count: 0 });
   const [currentLimit, setCurrentLimit] = useState(10);
-  const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
+  const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
 
   const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
       filter: { productId, filters: false },
-      pagination: { skip, limit: currentLimit }
+      pagination: { skip: 0, limit: currentLimit }
     },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
@@ -82,7 +82,7 @@ const Comments = ({ productId }) => {
       return t('product.comments.unregisteredTip');
     }
     return t('product.comments.successfulTip');
-  }, [language, userId]);
+  }, [i18n.language === 'ua' ? 0 : 1, userId]);
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem

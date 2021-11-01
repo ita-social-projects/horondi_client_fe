@@ -7,11 +7,9 @@ export const getContacts = gql`
         _id
         phoneNumber
         openHours {
-          lang
           value
         }
         address {
-          lang
           value
         }
         email

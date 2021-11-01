@@ -7,25 +7,25 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
-import { COMMENT_OWNER_STATUS, COMMENTS_TIME_OPTIONS } from '../../../../../configs';
+import { COMMENTS_TIME_OPTIONS } from '../../../../../configs';
 
 import {
   handleUserCommentApprove,
   handleUserCommentOwner
 } from '../../../../../utils/handle-comments';
 
-const ReplyCommentsItem = ({ data, replyCommentId }) => {
+const ReplyCommentsItem = ({ replyItem, replyCommentId, refetchComments }) => {
   const {
     answerer: user,
     replyText: text,
     createdAt: date,
     showReplyComment: show,
     verifiedPurchase
-  } = data;
+  } = replyItem;
 
   const { t, i18n } = useTranslation();
 
-  const { language, userData } = useSelector(({ User }) => ({
+  const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
   const styles = useStyles();
@@ -61,7 +61,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
             <div className={styles.user}>
               <span className={styles.name}>
                 {role === 'admin' || role === 'superadmin'
-                  ? `${COMMENT_OWNER_STATUS.isAdmin[language]} ${firstName}`
+                  ? `${t('common.reply.isAdmin')} ${firstName}`
                   : firstName}
               </span>
             </div>
@@ -103,6 +103,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
         handleClose={handleClose}
         isModalShown={isModalShown}
         commentId={replyCommentId}
+        refetchComments={refetchComments}
         userId={userData ? userData._id : ''}
       />
     </div>

@@ -31,14 +31,19 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   } = useQuery(getUkrPoshtaRegions);
 
   const {
+    loading: getDistrictsLoading,
     error: getDistrictsError,
     data: { getUkrPoshtaDistrictsByRegionId: ukrPoshtaDistricts } = []
   } = useQuery(getUkrPoshtaDistricts, { variables: { id: values.regionId } });
 
-  const { error: getCitiesError, data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = [] } =
-    useQuery(getUkrPoshtaCities, { variables: { id: values.districtId } });
+  const {
+    loading: getCitiesLoading,
+    error: getCitiesError,
+    data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = []
+  } = useQuery(getUkrPoshtaCities, { variables: { id: values.districtId } });
 
   const {
+    loading: getPostOfficesLoading,
     error: getPostOfficesError,
     data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
   } = useQuery(getUkrPoshtaPostOffices, { variables: { id: values.cityId } });
@@ -140,7 +145,14 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
-                endAdornment: <>{params.InputProps.endAdornment}</>
+                endAdornment: (
+                  <>
+                    {getDistrictsLoading && (
+                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                    )}
+                    {params.InputProps.endAdornment}
+                  </>
+                )
               }}
             />
           )}
@@ -182,7 +194,14 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
-                endAdornment: <>{params.InputProps.endAdornment}</>
+                endAdornment: (
+                  <>
+                    {getCitiesLoading && (
+                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                    )}
+                    {params.InputProps.endAdornment}
+                  </>
+                )
               }}
             />
           )}
@@ -231,7 +250,14 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
-                endAdornment: <>{params.InputProps.endAdornment}</>
+                endAdornment: (
+                  <>
+                    {getPostOfficesLoading && (
+                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                    )}
+                    {params.InputProps.endAdornment}
+                  </>
+                )
               }}
             />
           )}

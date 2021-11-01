@@ -1,11 +1,4 @@
 import {
-  SET_NOVAPOSHTA_CITIES,
-  GET_NOVAPOSHTA_CITIES,
-  GET_NOVAPOSHTA_WAREHOUSES,
-  SET_NOVAPOSHTA_WAREHOUSES,
-  SET_DELIVERY_LOADING,
-  SET_NOVAPOSHTA_PRICES,
-  GET_NOVAPOSHTA_PRICES,
   SET_UKRPOST_REGIONS,
   GET_UKRPOST_REGIONS,
   SET_UKRPOST_DISTRICTS,
@@ -13,38 +6,9 @@ import {
   SET_UKRPOST_CITIES,
   GET_UKRPOST_CITIES,
   SET_UKRPOST_POSTOFFICES,
-  GET_UKRPOST_POSTOFFICES
+  GET_UKRPOST_POSTOFFICES,
+  SET_DELIVERY_LOADING
 } from './checkout.types';
-
-const setNovaPoshtaPrices = (payload) => ({
-  type: SET_NOVAPOSHTA_PRICES,
-  payload
-});
-
-const getNovaPoshtaPrices = (payload) => ({
-  type: GET_NOVAPOSHTA_PRICES,
-  payload
-});
-
-const setNovaPoshtaCities = (cities) => ({
-  type: SET_NOVAPOSHTA_CITIES,
-  payload: cities
-});
-
-const getNovaPoshtaCities = (payload) => ({
-  type: GET_NOVAPOSHTA_CITIES,
-  payload
-});
-
-const setNovaPoshtaWarehouse = (payload) => ({
-  type: SET_NOVAPOSHTA_WAREHOUSES,
-  payload
-});
-
-const getNovaPoshtaWarehouse = (payload) => ({
-  type: GET_NOVAPOSHTA_WAREHOUSES,
-  payload
-});
 
 const setUkrPostRegions = (payload) => ({
   type: SET_UKRPOST_REGIONS,
@@ -88,13 +52,7 @@ const setDeliveryLoading = (payload) => ({
 });
 
 export {
-  getNovaPoshtaCities,
-  setNovaPoshtaCities,
-  getNovaPoshtaWarehouse,
-  setNovaPoshtaWarehouse,
   setDeliveryLoading,
-  setNovaPoshtaPrices,
-  getNovaPoshtaPrices,
   getUkrPostCities,
   setUkrPostCities,
   getUkrPostDistricts,

@@ -1,44 +1,51 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useQuery } from '@apollo/client';
 import NovaPost from '../nova-post';
 
 jest.mock('../nova-post.styles.js', () => ({
   useStyles: () => ({})
 }));
 jest.mock('react-redux');
-const dispatch = jest.fn();
 
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => ({
-  deliveryLoading: false,
-  cities: [],
-  warehouses: []
+jest.mock('@apollo/client');
+
+const useQueryData = {
+  loading: false,
+  error: false,
+  data: {
+    getNovaPoshtaCities: [],
+    getNovaPoshtaWarehouses: []
+  }
+};
+useQuery.mockImplementation(() => ({
+  ...useQueryData
 }));
 
 let wrapper;
 
 const props = {
-  isLightTheme: true,
   values: {
     firstName: '',
     lastName: '',
     email: '',
     phoneNumber: null
   },
-  touched: {},
-  errors: {},
+  touched: { city: 'test', courierOffice: 'test' },
+  errors: { city: 'test', courierOffice: 'test' },
   setFieldValue: jest.fn()
 };
 
 describe('NovaPost component tests', () => {
-  wrapper = shallow(<NovaPost {...props} />);
+  wrapper = mount(<NovaPost {...props} />);
 
   it('Should render NovaPost', () => {
+    wrapper = mount(<NovaPost {...props} />);
     expect(wrapper).toBeDefined();
   });
 
   it('NovaPost inputs test', () => {
+    wrapper = mount(<NovaPost {...props} />);
     wrapper.find(Autocomplete).forEach((i) => {
       i.props().onChange('event', 'test');
       i.props().onChange('event');

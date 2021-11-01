@@ -1,46 +1,61 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './nova-post.styles';
-import {
-  getNovaPoshtaCities,
-  getNovaPoshtaWarehouse
-} from '../../../../../redux/checkout/checkout.actions';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
+import { getNovaPoshtaCities, getNovaPoshtaWarehouses } from './operations/nova-post.queries.js';
 
-const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
-  const dispatch = useDispatch();
-  const styles = useStyles({
-    isLightTheme
-  });
+const NovaPost = ({ setFieldValue, errors, touched, values }) => {
+  const [citySearchValue, setCitySearchValue] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [cities, setCities] = useState([]);
+  const [wareHouses, setWareHouses] = useState([]);
+  const searchHandlerTimeout = useRef(null);
+
+  const styles = useStyles({});
+
   const { t } = useTranslation();
 
-  const { deliveryLoading, cities, warehouses } = useSelector(({ Checkout }) => ({
-    deliveryLoading: Checkout.deliveryLoading,
-    cities: Checkout.cities,
-    warehouses: Checkout.warehouses
-  }));
+  const {
+    refetch: getCities,
+    data: dataCities,
+    loading: citiesLoading
+  } = useQuery(getNovaPoshtaCities);
 
-  const [selectedCity, setSelectedCity] = useState(values.city);
+  const { data: dataHouses, loading: houseLoading } = useQuery(getNovaPoshtaWarehouses, {
+    variables: { city: selectedCity },
+    skip: !selectedCity,
+    notifyOnNetworkStatusChange: true
+  });
 
-  const getPostCities = useCallback(
-    _.debounce((value) => {
-      dispatch(getNovaPoshtaCities(value));
-    }, 500),
-    [dispatch, getNovaPoshtaCities]
-  );
   useEffect(() => {
-    if (selectedCity) {
-      dispatch(getNovaPoshtaWarehouse(selectedCity));
+    !citySearchValue && clearTimeout(searchHandlerTimeout.current);
+    if (!citiesLoading && citySearchValue) {
+      clearTimeout(searchHandlerTimeout.current);
+      searchHandlerTimeout.current = setTimeout(() => {
+        getCities({ city: citySearchValue });
+      }, 1000);
     }
-  }, [dispatch, selectedCity]);
+  }, [citySearchValue]);
+
+  useEffect(() => {
+    if (dataCities) {
+      setCities(dataCities.getNovaPoshtaCities);
+    }
+  }, [dataCities]);
+
+  useEffect(() => {
+    if (dataHouses) {
+      setWareHouses(dataHouses.getNovaPoshtaWarehouses);
+    }
+  }, [dataHouses]);
 
   return (
     <div className={styles.novaPostContainer}>
@@ -50,9 +65,9 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
           <Autocomplete
             onInputChange={(e, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue('city', value);
+                value = value.trim().charAt(0).toUpperCase() + value.slice(1);
+                setCitySearchValue(value);
               }
-              getPostCities(values.city);
             }}
             noOptionsText={t('delivery.noCity')}
             onChange={(event, value) => {
@@ -66,7 +81,7 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               setFieldValue('courierOffice', '');
             }}
             options={cities}
-            inputValue={values.city}
+            inputValue={citySearchValue}
             getOptionLabel={(option) => option?.description || null}
             className={styles.dataInput}
             renderInput={(params) => (
@@ -77,14 +92,7 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
-                  endAdornment: (
-                    <>
-                      {deliveryLoading && (
-                        <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                      )}
-                      {params.InputProps.endAdornment}
-                    </>
-                  )
+                  endAdornment: <>{params.InputProps.endAdornment}</>
                 }}
               />
             )}
@@ -112,9 +120,9 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 setFieldValue('courierOffice', '');
               }
             }}
-            disabled={!values.city}
+            disabled={!selectedCity || !wareHouses.length}
             options={_.filter(
-              warehouses,
+              wareHouses,
               (warehouseItem) => !warehouseItem.description.includes(POSTOMAT)
             )}
             inputValue={values.courierOffice}
@@ -130,7 +138,7 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && (
+                      {houseLoading && (
                         <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
                       )}
                       {params.InputProps.endAdornment}
@@ -140,6 +148,7 @@ const NovaPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               />
             )}
           />
+
           {touched.courierOffice && errors.courierOffice && (
             <div data-cy={CY_CODE_ERR} className={styles.error}>
               {errors.courierOffice}

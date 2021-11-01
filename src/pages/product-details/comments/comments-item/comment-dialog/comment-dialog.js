@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -18,13 +17,10 @@ const CommentDialog = ({
   isModalShown,
   handleClose,
   commentId,
-  userId,
   isDeleteComment = 0,
-  productId,
   refetchComments
 }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
     onError: (err) => errorOrLoadingHandler(err)

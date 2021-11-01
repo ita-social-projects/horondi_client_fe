@@ -22,7 +22,6 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   const styles = useStyles({
     isLightTheme
   });
-
   const { t } = useTranslation();
 
   const {
@@ -32,29 +31,25 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
   } = useQuery(getUkrPoshtaRegions);
 
   const {
-    loading: getDistrictsLoading,
     error: getDistrictsError,
     data: { getUkrPoshtaDistrictsByRegionId: ukrPoshtaDistricts } = []
   } = useQuery(getUkrPoshtaDistricts, { variables: { id: values.regionId } });
 
-  const {
-    loading: getCitiesLoading,
-    error: getCitiesError,
-    data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = []
-  } = useQuery(getUkrPoshtaCities, { variables: { id: values.districtId } });
+  const { error: getCitiesError, data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = [] } =
+    useQuery(getUkrPoshtaCities, { variables: { id: values.districtId } });
 
   const {
-    loading: getPostOfficesLoading,
     error: getPostOfficesError,
     data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
   } = useQuery(getUkrPoshtaPostOffices, { variables: { id: values.cityId } });
 
-  const { isLoading, isError } = useIsLoadingOrError(
-    [getRegionsLoading, getDistrictsLoading, getCitiesLoading, getPostOfficesLoading][
-      (getRegionsError, getDistrictsError, getCitiesError, getPostOfficesError)
-    ]
-  );
-  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+  const { isError } = useIsLoadingOrError([
+    getRegionsError,
+    getDistrictsError,
+    getCitiesError,
+    getPostOfficesError
+  ]);
+  if (isError) return errorOrLoadingHandler(isError);
 
   return (
     <div className={styles.ukrPostContainer}>
@@ -97,7 +92,9 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
+                    {getRegionsLoading && (
+                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                    )}
                     {params.InputProps.endAdornment}
                   </>
                 )
@@ -143,12 +140,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
-                    {params.InputProps.endAdornment}
-                  </>
-                )
+                endAdornment: <>{params.InputProps.endAdornment}</>
               }}
             />
           )}
@@ -190,12 +182,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
-                    {params.InputProps.endAdornment}
-                  </>
-                )
+                endAdornment: <>{params.InputProps.endAdornment}</>
               }}
             />
           )}
@@ -244,12 +231,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {isLoading && <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />}
-                    {params.InputProps.endAdornment}
-                  </>
-                )
+                endAdornment: <>{params.InputProps.endAdornment}</>
               }}
             />
           )}

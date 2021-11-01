@@ -14,14 +14,14 @@ import {
   handleUserCommentOwner
 } from '../../../../../utils/handle-comments';
 
-const ReplyCommentsItem = ({ data, replyCommentId, refetchComments }) => {
+const ReplyCommentsItem = ({ replyItem, replyCommentId, refetchComments }) => {
   const {
     answerer: user,
     replyText: text,
     createdAt: date,
     showReplyComment: show,
     verifiedPurchase
-  } = data;
+  } = replyItem;
 
   const { t, i18n } = useTranslation();
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { act } from '@testing-library/react';
 import { useQuery } from '@apollo/client';
 import Materials from '../materials';
 
@@ -8,6 +9,9 @@ const dispatch = jest.fn();
 
 jest.mock('../materials.style.js', () => ({
   useStyles: () => ({})
+}));
+jest.mock('../../../utils/imageLoad', () => ({
+  getImage: () => 'LARGE'
 }));
 jest.mock('@apollo/client');
 jest.mock('react-router', () => ({
@@ -70,7 +74,18 @@ useQuery.mockImplementation(() => ({
 
 describe('Materials component tests', () => {
   it('Should render Materials', () => {
-    const component = shallow(<Materials />);
+    const component = mount(<Materials />);
     expect(component).toBeDefined();
+  });
+
+  it('Set materials images into state', async () => {
+    const component = mount(<Materials />);
+    await act(async () => {
+      await Promise.resolve(component);
+      await new Promise((resolve) => setImmediate(resolve));
+      component.update();
+
+      expect(component.find('AwesomeSlider').props().bulletsSet.length).toBe(1);
+    });
   });
 });

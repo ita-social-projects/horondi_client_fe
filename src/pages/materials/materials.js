@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect, useContext } from 'react';
 import parse from 'html-react-parser';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { useQuery } from '@apollo/client';
@@ -9,14 +9,21 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
 import { getAllPatterns } from './operations/getAllPatterns.queries';
-import { carouselMaterialInterval, IMG_URL } from '../../configs';
+import { carouselMaterialInterval } from '../../configs';
 import Slider from './slider';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import { getImage } from '../../utils/imageLoad';
+import ThemeContext from '../../context/theme-context';
+
+import productPlugDark from '../../images/product-plug-dark-theme-img.png';
+import productPlugLight from '../../images/product-plug-light-theme-img.png';
 
 const AutoplaySlider = withAutoplay(Slider);
 
 const Materials = () => {
+  const [patternImages, setPatternImages] = useState([]);
   const { i18n } = useTranslation();
+  const isLightTheme = useContext(ThemeContext);
   const language = i18n.language === 'ua' ? 0 : 1;
   const code = 'materials';
 
@@ -27,6 +34,26 @@ const Materials = () => {
   } = useQuery(getAllPatterns, {});
   const patterns = loadingPatterns ? [] : dataPattern.getAllPatterns.items;
 
+  const initImages = useMemo(() => patterns.map((e) => e.images.small), [loadingPatterns]);
+
+  useEffect(() => {
+    const initialPhotos = async () => {
+      const mapImages = await Promise.all(
+        initImages.map(async (item) => {
+          try {
+            return await getImage(item);
+          } catch (e) {
+            return isLightTheme ? productPlugLight : productPlugDark;
+          }
+        })
+      );
+
+      setPatternImages(mapImages);
+    };
+
+    initialPhotos();
+  }, [loadingPatterns]);
+
   const {
     loading: loadingMaterials,
     error: errorMaterials,
@@ -36,16 +63,10 @@ const Materials = () => {
   });
   const materialsPage = loadingMaterials ? {} : dataMaterials.getBusinessTextByCode;
 
-  const bulletSet = useMemo(() => patterns.map((e) => `${IMG_URL}${e.images.small}`), [patterns]);
-
   const materialPageText = materialsPage.text && parse(materialsPage.text[language].value);
   const styles = useStyles();
-  const imagesForSlider = patterns.map((pattern) => (
-    <div
-      className={styles.sliderImage}
-      key={pattern._id}
-      data-src={`${IMG_URL}${pattern.images.medium}`}
-    >
+  const imagesForSlider = patterns.map((pattern, i) => (
+    <div className={styles.sliderImage} key={pattern._id} data-src={patternImages[i]}>
       <p className={styles.sliderText}>{`"${pattern.name[language].value}"`}</p>
     </div>
   ));
@@ -69,7 +90,7 @@ const Materials = () => {
           buttons
           bullets={false}
           infinite
-          bulletsSet={bulletSet}
+          bulletsSet={patternImages}
         >
           {imagesForSlider}
         </AutoplaySlider>

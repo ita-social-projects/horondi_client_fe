@@ -98,6 +98,7 @@ export const addReplyMutation = gql`
       }
     ) {
       ... on Comment {
+        __typename
         _id
         replyComments {
           _id
@@ -112,6 +113,17 @@ export const addReplyMutation = gql`
             role
           }
         }
+      }
+    }
+  }
+`;
+
+export const deleteCommentMutation = gql`
+  mutation ($commentID: ID!) {
+    deleteComment(commentID: $commentID) {
+      ... on Comment {
+        __typename
+        _id
       }
     }
   }

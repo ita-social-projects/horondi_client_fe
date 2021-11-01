@@ -14,14 +14,14 @@ import {
   handleUserCommentOwner
 } from '../../../../../utils/handle-comments';
 
-const ReplyCommentsItem = ({ data, replyCommentId }) => {
+const ReplyCommentsItem = ({ replyItem, replyCommentId, refetchComments }) => {
   const {
     answerer: user,
     replyText: text,
     createdAt: date,
     showReplyComment: show,
     verifiedPurchase
-  } = data;
+  } = replyItem;
 
   const { t, i18n } = useTranslation();
 
@@ -103,6 +103,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
         handleClose={handleClose}
         isModalShown={isModalShown}
         commentId={replyCommentId}
+        refetchComments={refetchComments}
         userId={userData ? userData._id : ''}
       />
     </div>

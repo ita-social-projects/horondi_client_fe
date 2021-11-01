@@ -1,9 +1,9 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CommentDialog from '../index';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
-import { isModalShown, commentId, userId, isDeleteComment } from './comment-dialog.variable';
+import { commentId, isDeleteComment, isModalShown, userId } from './comment-dialog.variable';
 
 const mockHandleClose = jest.fn();
 const mockDispatch = jest.fn();
@@ -12,7 +12,7 @@ jest.mock('react-redux');
 
 const themeValue = theme('light');
 
-describe('Comments test', () => {
+xdescribe('Comments test', () => {
   let wrapper;
 
   beforeEach(() => {

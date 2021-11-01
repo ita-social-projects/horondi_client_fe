@@ -14,9 +14,7 @@ import {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  deleteUserDataFromStore,
-  setUserCountOrders,
-  setCurrentPage
+  deleteUserDataFromStore
 } from '../user.actions';
 
 import { userMocks, initialStateMock } from './user.mocks';
@@ -122,18 +120,6 @@ describe('test user.reducer', () => {
   test('should test deleteUserDataFromStore', () => {
     expect(userReducer(initialStateMock, deleteUserDataFromStore())).toEqual({
       ...initialStateMock
-    });
-  });
-  test('should test setUserCountOrders', () => {
-    expect(userReducer(initialStateMock, setUserCountOrders(1))).toEqual({
-      ...initialStateMock,
-      countPerPage: 1
-    });
-  });
-  test('should test setCurrentPage', () => {
-    expect(userReducer(initialStateMock, setCurrentPage(1))).toEqual({
-      ...initialStateMock,
-      currentPage: 1
     });
   });
 });

@@ -122,7 +122,5 @@ export const initialStateMock = {
   passwordReset: false,
   confirmationEmailSent: false,
   recoveryLoading: false,
-  confirmationLoading: false,
-  currentPage: 1,
-  countPerPage: null
+  confirmationLoading: false
 };

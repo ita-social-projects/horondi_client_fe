@@ -424,8 +424,6 @@ export const SNACKBAR_TYPES = {
   success: 'success'
 };
 
-export const GRAPHQL_ERROR = 'GraphQL error: ';
-
 export const SESSION_STORAGE = {
   CHECKOUT_FORM: 'checkoutForm',
   DELIVERY_TYPE: 'deliveryType'
@@ -436,12 +434,6 @@ export const HORONDI = 'horondi';
 export const FETCH_POLICY = 'no-cache';
 
 export const RETURN_PAGE = 'returnPage';
-
-export const HYPHEN = '-';
-
-export const COMMENT_OWNER_STATUS = {
-  isAdmin: ['Менеджер', 'Manager']
-};
 
 export const SORT_BY_SELECT_OPTIONS = [
   {

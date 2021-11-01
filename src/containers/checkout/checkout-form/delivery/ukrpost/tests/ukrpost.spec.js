@@ -1,7 +1,6 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useQuery } from '@apollo/client';
-import { mount } from 'enzyme';
 import UkrPost from '../ukrpost';
 
 jest.mock('../ukrpost.styles.js', () => ({
@@ -13,12 +12,7 @@ jest.mock('@apollo/client');
 const useQueryData = {
   loading: false,
   error: false,
-  data: {
-    getUkrPoshtaRegions: [],
-    getUkrPoshtaDistrictsByRegionId: [],
-    getUkrPoshtaCitiesByDistrictId: [],
-    getUkrPoshtaPostofficesCityId: []
-  }
+  data: {}
 };
 
 let wrapper;
@@ -64,6 +58,22 @@ describe('UkrPost component tests', () => {
       i.props().onInputChange('event', 'value', 'reset');
       i.props().getOptionLabel('');
       expect(i).toBeDefined();
+      expect(i.props().options).toEqual([]);
+    });
+  });
+  it('should add data to UkrPost fields', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData,
+      data: {
+        getUkrPoshtaRegions: ['test', 'test2'],
+        getUkrPoshtaDistrictsByRegionId: ['test', 'test2'],
+        getUkrPoshtaCitiesByDistrictId: ['test', 'test2'],
+        getUkrPoshtaPostofficesCityId: ['test', 'test2']
+      }
+    }));
+    wrapper = mount(<UkrPost {...props} />);
+    wrapper.find(Autocomplete).forEach((i) => {
+      expect(i.props().options).toEqual(['test', 'test2']);
     });
   });
 });

@@ -10,22 +10,21 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 const BusinessPage = ({ match }) => {
   const [page, setPage] = useState({});
   const code = match.params.page;
-  const { i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
 
   const { loading, error } = useQuery(getBusinessTextByCode, {
     variables: { code },
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
 
-  const addressText = page?.text && parse(page?.text[language].value);
+  const addressText = page?.text && parse(t(`${page.translations_key}.text`));
   const styles = useStyles();
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.root}>
-      {page.title && <h1>{page.title[language].value}</h1>}
+      {page.title && <h1>{t(`${page.translations_key}.title`)}</h1>}
       {addressText}
     </div>
   );

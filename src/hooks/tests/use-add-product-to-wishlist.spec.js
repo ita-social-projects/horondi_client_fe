@@ -7,7 +7,8 @@ jest.mock('../use-wishlist-loader');
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: () => [true, () => null],
-  useEffect: (cb) => cb()
+  useEffect: (cb) => cb(),
+  useRef: () => ({ current: false })
 }));
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),

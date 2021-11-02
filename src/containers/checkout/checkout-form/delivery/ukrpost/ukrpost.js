@@ -1,63 +1,69 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@apollo/client';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useStyles } from './ukrpost.styles';
-import {
-  getUkrPostCities,
-  getUkrPostDistricts,
-  getUkrPostPostOffices,
-  getUkrPostRegions
-} from '../../../../../redux/checkout/checkout.actions';
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
 import { CY_CODE_ERR } from '../../../../../configs';
 import { RESET } from '../../../../../const/checkout';
+import {
+  getUkrPoshtaRegions,
+  getUkrPoshtaDistricts,
+  getUkrPoshtaCities,
+  getUkrPoshtaPostOffices
+} from './operations/get-ukrpost-data.queries';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 
 const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
-  const dispatch = useDispatch();
   const styles = useStyles({
     isLightTheme
   });
   const { t } = useTranslation();
 
   const {
-    deliveryLoading,
-    ukrPoshtaCities,
-    ukrPoshtaRegions,
-    ukrPoshtaDistricts,
-    ukrPoshtaPostOffices
-  } = useSelector(({ Checkout }) => ({
-    deliveryLoading: Checkout.deliveryLoading,
-    ukrPoshtaCities: Checkout.ukrPoshtaCities,
-    ukrPoshtaRegions: Checkout.ukrPoshtaRegions,
-    ukrPoshtaDistricts: Checkout.ukrPoshtaDistricts,
-    ukrPoshtaPostOffices: Checkout.ukrPoshtaPostOffices
-  }));
+    loading: getRegionsLoading,
+    error: getRegionsError,
+    data: { getUkrPoshtaRegions: ukrPoshtaRegions } = []
+  } = useQuery(getUkrPoshtaRegions);
 
-  useEffect(() => {
-    dispatch(getUkrPostRegions());
-  }, []);
+  const {
+    loading: getDistrictsLoading,
+    error: getDistrictsError,
+    data: { getUkrPoshtaDistrictsByRegionId: ukrPoshtaDistricts } = []
+  } = useQuery(getUkrPoshtaDistricts, {
+    variables: { id: values.regionId },
+    skip: !values.regionId
+  });
 
-  useEffect(() => {
-    if (values.regionId) {
-      dispatch(getUkrPostDistricts(values.regionId));
-    }
-  }, [dispatch, values.regionId]);
+  const {
+    loading: getCitiesLoading,
+    error: getCitiesError,
+    data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = []
+  } = useQuery(getUkrPoshtaCities, {
+    variables: { id: values.districtId },
+    skip: !values.districtId
+  });
 
-  useEffect(() => {
-    if (values.districtId) {
-      dispatch(getUkrPostCities(values.districtId));
-    }
-  }, [dispatch, values.districtId]);
+  const {
+    loading: getPostOfficesLoading,
+    error: getPostOfficesError,
+    data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
+  } = useQuery(getUkrPoshtaPostOffices, {
+    variables: { id: values.cityId },
+    skip: !values.cityId
+  });
 
-  useEffect(() => {
-    if (values.cityId) {
-      dispatch(getUkrPostPostOffices(values.cityId));
-    }
-  }, [dispatch, values.cityId]);
+  const { isError } = useIsLoadingOrError([
+    getRegionsError,
+    getDistrictsError,
+    getCitiesError,
+    getPostOfficesError
+  ]);
+  if (isError) return errorOrLoadingHandler(isError);
 
   return (
     <div className={styles.ukrPostContainer}>
@@ -86,7 +92,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             setFieldValue('city', '');
             setFieldValue('courierOffice', '');
           }}
-          options={ukrPoshtaRegions}
+          options={ukrPoshtaRegions || []}
           inputValue={values.region}
           getOptionLabel={(option) => option?.REGION_UA || ''}
           className={styles.dataInput}
@@ -100,7 +106,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
+                    {getRegionsLoading && (
                       <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
                     )}
                     {params.InputProps.endAdornment}
@@ -136,7 +142,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             setFieldValue('courierOffice', '');
           }}
           disabled={!values.region}
-          options={ukrPoshtaDistricts}
+          options={ukrPoshtaDistricts || []}
           inputValue={values.district}
           getOptionLabel={(option) => option?.DISTRICT_UA || ''}
           className={styles.dataInput}
@@ -150,7 +156,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
+                    {getDistrictsLoading && (
                       <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
                     )}
                     {params.InputProps.endAdornment}
@@ -185,7 +191,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             setFieldValue('courierOffice', '');
           }}
           disabled={!values.district}
-          options={ukrPoshtaCities}
+          options={ukrPoshtaCities || []}
           inputValue={values.city}
           getOptionLabel={(option) => option?.CITY_UA || ''}
           className={styles.dataInput}
@@ -199,7 +205,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
+                    {getCitiesLoading && (
                       <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
                     )}
                     {params.InputProps.endAdornment}
@@ -237,7 +243,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
             }
           }}
           disabled={!values.city}
-          options={ukrPoshtaPostOffices}
+          options={ukrPoshtaPostOffices || []}
           inputValue={values.courierOffice}
           getOptionLabel={(option) =>
             `${POST_OFFICE_NUMBER} ${option?.POSTCODE}, ${
@@ -255,7 +261,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
                 ...params.InputProps,
                 endAdornment: (
                   <>
-                    {deliveryLoading && (
+                    {getPostOfficesLoading && (
                       <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
                     )}
                     {params.InputProps.endAdornment}

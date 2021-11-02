@@ -5,8 +5,14 @@ import { getWishlistByUserId } from '../pages/wishlist/operations/wishlist.queri
 
 export default function useWishlistLoader() {
   const user = getFromLocalStorage('accessToken');
+  const userWishlist = (data) =>
+    data?.getWishlistByUserId.products ? data.getWishlistByUserId : { products: [] };
 
-  const { loading, error, data } = useQuery(getWishlistByUserId, {
+  const {
+    loading,
+    error,
+    data: wishlist
+  } = useQuery(getWishlistByUserId, {
     skip: !user,
     fetchPolicy: 'no-cache'
   });
@@ -14,10 +20,6 @@ export default function useWishlistLoader() {
   return {
     loading: !user ? false : loading,
     error: !user ? null : error,
-    wishlist: !user
-      ? getFromLocalStorage('wishlist')
-      : data?.getWishlistByUserId.products
-        ? data.getWishlistByUserId
-        : { products: [] }
+    wishlist: !user ? getFromLocalStorage('wishlist') : userWishlist(wishlist)
   };
 }

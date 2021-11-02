@@ -14,6 +14,7 @@ export const getAllCategoriesQuery = gql`
           large
         }
         available
+        translations_key
       }
       count
     }

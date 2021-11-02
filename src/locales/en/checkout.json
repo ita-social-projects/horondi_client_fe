@@ -1,7 +1,7 @@
 {
     "checkoutPayment": {
-        "card": "CARD",
-        "cash": "CASH"
+        "CARD": "CARD",
+        "CASH": "CASH"
     },
     "checkoutTitles": {
         "orderForm": "Order form",
@@ -42,7 +42,7 @@
         "district": "District *"
     },
     "createOrder": "Create order",
-    "payOrder": "Перейти до оплати",
+    "payOrder": "Pay",
     "confirmOrder": "Confirm order",
     
     "checkoutAdditionalInfo": {

@@ -2,8 +2,8 @@
     "payOrder": "Перейти до оплати",
     "confirmOrder": "Підтвердити замовлення",
     "checkoutPayment": {
-        "card": "КАРТОЮ",
-        "cash": "ГОТІВКОЮ"
+        "CARD": "КАРТОЮ",
+        "CASH": "ГОТІВКОЮ"
     },
     "checkoutTitles": {
         "orderForm": "Форма замовлення",

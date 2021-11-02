@@ -9,9 +9,7 @@ import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { Tooltip } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
 import { useStyles } from './comments-item.styles';
-import CommentDialog from './comment-dialog';
 import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
-import ReplyForm from './reply-form';
 import {
   handleArrowIcon,
   handleRate,
@@ -22,9 +20,11 @@ import {
   handleUserId
 } from '../../../../utils/handle-comments';
 import { getReplyCommentsQuery } from '../operations/comments.queries';
-import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import ReplyCommentsItem from './reply-comments-item';
+import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import Loader from '../../../../components/loader';
+import ReplyForm from './reply-form';
+import CommentDialog from './comment-dialog';
 
 const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) => {
   const styles = useStyles();

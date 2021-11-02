@@ -37,6 +37,7 @@ export const addCommentMutation = gql`
       comment: { text: $text, show: $show, user: $user, product: $product, rate: $rate }
     ) {
       ... on Comment {
+        __typename
         _id
         text
         date
@@ -57,8 +58,8 @@ export const addCommentMutation = gql`
 export const getReplyCommentsQuery = gql`
   query ($filter: ReplyCommentFilterInput, $pagination: Pagination) {
     getReplyCommentsByComment(filter: $filter, pagination: $pagination) {
+      __typename
       ... on PaginatedComments {
-        __typename
         items {
           _id
           replyComments {

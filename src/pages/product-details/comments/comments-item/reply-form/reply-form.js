@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
@@ -6,14 +6,22 @@ import { useMutation } from '@apollo/client';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
-import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
+import {
+  commentFields,
+  formRegExp,
+  SNACKBAR_MESSAGE,
+  SNACKBAR_TYPES,
+  TEXT_VALUE
+} from '../../../../../configs';
 import { addReplyMutation } from '../../operations/comments.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';
+import { SnackBarContext } from '../../../../../containers/snackbar/snackbar-context';
 
 const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
+  const snackbar = useContext(SnackBarContext);
   const styles = useStyles();
   const { userData, productId } = useSelector(({ User, Products }) => ({
     userData: User.userData,
@@ -21,7 +29,11 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   }));
 
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
-    onError: (err) => errorOrLoadingHandler(err)
+    onError: (err) => {
+      errorOrLoadingHandler(err);
+      snackbar.setMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+    },
+    onCompleted: () => snackbar.setMessage(SNACKBAR_MESSAGE.addedReply)
   });
 
   const { _id } = userData;

@@ -1,35 +1,20 @@
 import React, { useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import i18n from 'i18next';
 
 import BaseSnackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { SnackBarContext } from './snackbar-context';
 
-import { setSnackBarStatus } from '../../redux/snackbar/snackbar.actions';
-
 const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
 
 const Snackbar = () => {
-  const dispatch = useDispatch();
-  const state = useContext(SnackBarContext);
-
-  const { snackBarStatus, snackBarSeverity, snackBarMessage, language } = useSelector(
-    ({ Snackbar: snackbar, Language }) => ({
-      snackBarStatus: snackbar.snackBarStatus,
-      snackBarSeverity: snackbar.snackBarSeverity,
-      snackBarMessage: snackbar.snackBarMessage,
-      language: Language.language
-    })
-  );
+  const snackbar = useContext(SnackBarContext);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    state.changeState({ message: '', severity: '' });
-    // dispatch(setSnackBarStatus(false));
-    dispatch(setSnackBarStatus(false));
+    snackbar.close();
   };
 
   return (

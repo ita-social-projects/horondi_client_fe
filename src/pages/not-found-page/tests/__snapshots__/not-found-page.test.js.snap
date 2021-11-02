@@ -356,9 +356,9 @@ exports[`Should render 404 page 1`] = `
                   className="makeStyles-imageContainer-4"
                 >
                   <img
-                    alt="img"
+                    alt="notFoundPage.message"
                     className="makeStyles-image-5"
-                    src="notFoundPage.message"
+                    src="./images/not-found-page/bag.png"
                   />
                 </span>
                 4

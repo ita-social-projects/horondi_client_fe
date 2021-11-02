@@ -137,14 +137,14 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
               value=""
             >
               <WithStyles(ForwardRef(MenuItem))
-                key="card"
-                value="card"
+                key="CARD"
+                value="CARD"
               >
                 <Component />
               </WithStyles(ForwardRef(MenuItem))>
               <WithStyles(ForwardRef(MenuItem))
-                key="cash"
-                value="cash"
+                key="CASH"
+                value="CASH"
               >
                 <Component />
               </WithStyles(ForwardRef(MenuItem))>

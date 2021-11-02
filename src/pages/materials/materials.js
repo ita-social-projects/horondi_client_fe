@@ -22,7 +22,7 @@ const AutoplaySlider = withAutoplay(Slider);
 
 const Materials = () => {
   const [patternImages, setPatternImages] = useState([]);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const isLightTheme = useContext(ThemeContext);
   const language = i18n.language === 'ua' ? 0 : 1;
   const code = 'materials';
@@ -67,7 +67,7 @@ const Materials = () => {
   const styles = useStyles();
   const imagesForSlider = patterns.map((pattern, i) => (
     <div className={styles.sliderImage} key={pattern._id} data-src={patternImages[i]}>
-      <p className={styles.sliderText}>{`"${pattern.name[language].value}"`}</p>
+      <p className={styles.sliderText}>{t(`${pattern.translations_key}.name`)}</p>
     </div>
   ));
 

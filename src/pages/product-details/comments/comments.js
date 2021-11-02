@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
@@ -9,7 +9,13 @@ import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-import { commentFields, formRegExp, TEXT_VALUE } from '../../../configs';
+import {
+  commentFields,
+  formRegExp,
+  SNACKBAR_MESSAGE,
+  SNACKBAR_TYPES,
+  TEXT_VALUE
+} from '../../../configs';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import {
   handleArrowIcon,
@@ -21,6 +27,7 @@ import {
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
+import { SnackBarContext } from '../../../context/snackbar-context';
 
 const Comments = ({ productId }) => {
   const styles = useStyles();
@@ -28,6 +35,7 @@ const Comments = ({ productId }) => {
   const [currentLimit, setCurrentLimit] = useState(10);
   const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
+  const { setSnackBarMessage } = useContext(SnackBarContext);
 
   const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
@@ -44,7 +52,11 @@ const Comments = ({ productId }) => {
   });
 
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
-    onError: (err) => errorOrLoadingHandler(err)
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.added),
+    onError: (err) => {
+      errorOrLoadingHandler(err);
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+    }
   });
 
   const { isLoading } = useIsLoadingOrError([addCommentLoading, getCommentsLoading]);

@@ -115,6 +115,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "jest-sonar-reporter": "^2.0.0",
     "lint-staged": "^10.5.4",
+    "prettier": "^2.3.0",
     "redux-saga-test-plan": "^4.0.3"
   },
   "husky": {

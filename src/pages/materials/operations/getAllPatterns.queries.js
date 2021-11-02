@@ -9,6 +9,7 @@ export const getAllPatterns = gql`
           lang
           value
         }
+        translations_key
         available
         images {
           medium

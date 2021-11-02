@@ -9,9 +9,8 @@
        "ORDER_NOT_FOUND": "Замовлення не знайдено",
        "PATTERN_NOT_FOUND": "Гобелен не знайдено",
        "USER_NOT_FOUND":"Користувача не знайдено",
-       "IMAGE_NOT_FOUND": "Фото не знайдено"
-
+       "IMAGE_NOT_FOUND": "Фото не знайдено",
+       "BUSINESS_TEXT_NOT_FOUND": "Текст бізнесу не знайдений"
     },
-    "linkToHomePage": "На головну",
-    "BusinessTextNotFound": "Текст бізнесу не знайдений"
+    "linkToHomePage": "На головну"
 }

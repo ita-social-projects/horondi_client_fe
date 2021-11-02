@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,6 +12,8 @@ import { useStyles } from './comment-dialog.styles';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { deleteCommentMutation } from '../../operations/comments.queries';
 import Loader from '../../../../../components/loader';
+import { SNACKBAR_MESSAGE, SNACKBAR_TYPES } from '../../../../../configs';
+import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const CommentDialog = ({
   isModalShown,
@@ -22,8 +24,15 @@ const CommentDialog = ({
 }) => {
   const styles = useStyles();
   const { t } = useTranslation();
+
+  const { setSnackBarMessage } = useContext(SnackBarContext);
+
   const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
-    onError: (err) => errorOrLoadingHandler(err)
+    onError: (err) => {
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+      errorOrLoadingHandler(err);
+    },
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.deleted)
   });
 
   const handleDelete = async () => {

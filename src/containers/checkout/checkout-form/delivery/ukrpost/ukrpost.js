@@ -34,19 +34,28 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
     loading: getDistrictsLoading,
     error: getDistrictsError,
     data: { getUkrPoshtaDistrictsByRegionId: ukrPoshtaDistricts } = []
-  } = useQuery(getUkrPoshtaDistricts, { variables: { id: values.regionId } });
+  } = useQuery(getUkrPoshtaDistricts, {
+    variables: { id: values.regionId },
+    skip: !values.regionId
+  });
 
   const {
     loading: getCitiesLoading,
     error: getCitiesError,
     data: { getUkrPoshtaCitiesByDistrictId: ukrPoshtaCities } = []
-  } = useQuery(getUkrPoshtaCities, { variables: { id: values.districtId } });
+  } = useQuery(getUkrPoshtaCities, {
+    variables: { id: values.districtId },
+    skip: !values.districtId
+  });
 
   const {
     loading: getPostOfficesLoading,
     error: getPostOfficesError,
     data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
-  } = useQuery(getUkrPoshtaPostOffices, { variables: { id: values.cityId } });
+  } = useQuery(getUkrPoshtaPostOffices, {
+    variables: { id: values.cityId },
+    skip: !values.cityId
+  });
 
   const { isError } = useIsLoadingOrError([
     getRegionsError,

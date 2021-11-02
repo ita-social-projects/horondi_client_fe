@@ -7,6 +7,8 @@ import { useStyles } from './not-found-page.styles';
 
 import routes from '../../const/routes';
 
+import { NOT_FOUND_PAGE_IMAGES } from '../../configs';
+
 const { pathToMain } = routes;
 
 const NotFoundPage = () => {
@@ -19,6 +21,8 @@ const NotFoundPage = () => {
 
   const { t } = useTranslation();
 
+  const imagePath = NOT_FOUND_PAGE_IMAGES.light || NOT_FOUND_PAGE_IMAGES.dark;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.error}>
@@ -26,7 +30,7 @@ const NotFoundPage = () => {
           <h2>
             4
             <span className={styles.imageContainer}>
-              <img className={styles.image} alt='img' src={t('notFoundPage.message')} />
+              <img className={styles.image} src={imagePath} alt={t('notFoundPage.message')} />
             </span>
             4
           </h2>

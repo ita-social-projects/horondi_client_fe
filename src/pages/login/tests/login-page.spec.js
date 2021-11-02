@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { useFormik } from 'formik';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { getFromLocalStorage } from '../../../services/local-storage.service';
 import { DARK_THEME, LIGHT_THEME } from '../../../configs/index';
 import Login from '../login';
@@ -28,11 +30,7 @@ const formik = {
 };
 const storage = {
   loginError: '',
-  userLoading: false,
-  snackBarStatus: false,
-  snackBarSeverity: '',
-  snackBarMessage: '',
-  language: 0
+  userLoading: false
 };
 
 let theme = LIGHT_THEME;
@@ -47,6 +45,19 @@ useFormik.mockImplementation(() => formik);
 describe('Login page test', () => {
   beforeEach(() => {
     component = shallow(<Login />);
+  });
+
+  it('Should do something', () => {
+    render(
+      <Router>
+        <Login />
+      </Router>
+    );
+    // const result = screen.getByText(/log in/i);
+    screen.debug();
+
+    expect(1 + 1).toBe(2);
+    // expect(result).toBeInTheDocument();
   });
   it('Should render with Light theme', () => {
     expect(component.find('form')).toBeDefined();

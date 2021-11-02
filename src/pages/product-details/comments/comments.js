@@ -27,7 +27,7 @@ import {
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
-import { SnackBarContext } from '../../../containers/snackbar/snackbar-context';
+import { SnackBarContext } from '../../../context/snackbar-context';
 
 const Comments = ({ productId }) => {
   const styles = useStyles();
@@ -35,7 +35,7 @@ const Comments = ({ productId }) => {
   const [currentLimit, setCurrentLimit] = useState(10);
   const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
-  const snackbar = useContext(SnackBarContext);
+  const { setSnackBarMessage } = useContext(SnackBarContext);
 
   const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
@@ -52,10 +52,10 @@ const Comments = ({ productId }) => {
   });
 
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
-    onCompleted: () => snackbar.setMessage(SNACKBAR_MESSAGE.added),
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.added),
     onError: (err) => {
       errorOrLoadingHandler(err);
-      snackbar.setMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
     }
   });
 

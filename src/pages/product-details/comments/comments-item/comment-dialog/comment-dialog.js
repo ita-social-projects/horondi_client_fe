@@ -13,7 +13,7 @@ import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { deleteCommentMutation } from '../../operations/comments.queries';
 import Loader from '../../../../../components/loader';
 import { SNACKBAR_MESSAGE, SNACKBAR_TYPES } from '../../../../../configs';
-import { SnackBarContext } from '../../../../../containers/snackbar/snackbar-context';
+import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const CommentDialog = ({
   isModalShown,
@@ -25,14 +25,14 @@ const CommentDialog = ({
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const snackbar = useContext(SnackBarContext);
+  const { setSnackBarMessage } = useContext(SnackBarContext);
 
   const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
     onError: (err) => {
-      snackbar.setMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
       errorOrLoadingHandler(err);
     },
-    onCompleted: () => snackbar.setMessage(SNACKBAR_MESSAGE.deleted)
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.deleted)
   });
 
   const handleDelete = async () => {

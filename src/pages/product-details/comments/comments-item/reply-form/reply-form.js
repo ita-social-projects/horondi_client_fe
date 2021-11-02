@@ -16,12 +16,12 @@ import {
 import { addReplyMutation } from '../../operations/comments.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';
-import { SnackBarContext } from '../../../../../containers/snackbar/snackbar-context';
+import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
-  const snackbar = useContext(SnackBarContext);
+  const { setSnackBarMessage } = useContext(SnackBarContext);
   const styles = useStyles();
   const { userData, productId } = useSelector(({ User, Products }) => ({
     userData: User.userData,
@@ -31,9 +31,9 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
     onError: (err) => {
       errorOrLoadingHandler(err);
-      snackbar.setMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
     },
-    onCompleted: () => snackbar.setMessage(SNACKBAR_MESSAGE.addedReply)
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.addedReply)
   });
 
   const { _id } = userData;

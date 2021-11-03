@@ -31,8 +31,7 @@ const OrderHistory = () => {
 
   if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
 
-  const orders = data.getUserOrders.userOrders;
-  const { ordersCount } = data.getUserOrders;
+  const { ordersCount, userOrders } = data.getUserOrders;
   const quantityPages = Math.ceil(ordersCount / limitHistoryOrders);
 
   const changeHandler = (value) => {
@@ -41,11 +40,11 @@ const OrderHistory = () => {
 
   return (
     <div className={styles.root}>
-      {orders && orders.length ? (
+      {userOrders && userOrders.length ? (
         <>
           <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
           <div>
-            {orders.map((item) => (
+            {userOrders.map((item) => (
               <OrderHistoryOrder order={item} key={item._id} />
             ))}
           </div>

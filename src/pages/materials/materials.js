@@ -79,7 +79,7 @@ const Materials = () => {
 
   return (
     <div className={styles.root}>
-      {materialsPage.title && <h1>{materialsPage.title[language].value}</h1>}
+      {materialsPage.title && <h1>{t('common.materials')}</h1>}
       <div className={styles.captionBlock}>
         <AutoplaySlider
           play

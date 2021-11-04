@@ -9,6 +9,7 @@ export const getCategoriesForBurgerMenu = gql`
           lang
           value
         }
+        translationsKey
       }
       models {
         _id

@@ -40,7 +40,7 @@ const OrderHistory = () => {
 
   return (
     <div className={styles.root}>
-      {userOrders && userOrders.length ? (
+      {userOrders.length ? (
         <>
           <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
           <div>

@@ -35,7 +35,7 @@ const ProductDetails = ({ match }) => {
     variables: { id }
   });
   const { isLoading, isError } = useIsLoadingOrError([loading], [error]);
-  const product = data?.getProductById || {};
+  const product = !loading ? data.getProductById : {};
   const {
     _id: productId,
     name: productName,

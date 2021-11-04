@@ -4,9 +4,9 @@
     "pattern": "Pattern",
     "productDescription": {
         "description": "Product description",
-        "mainMaterial": "Main material",
-        "innerMaterial": "Inner material",
-        "bottomMaterial": "Bottom material",
+        "mainMaterial": "Main material - ",
+        "innerMaterial": "Inner material - ",
+        "bottomMaterial": "Bottom material - ",
         "strapLengthInCm": "Strap length(cm) "
     },
     "weight": {

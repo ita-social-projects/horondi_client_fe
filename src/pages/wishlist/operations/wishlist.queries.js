@@ -36,6 +36,7 @@ export const getWishlistByUserId = gql`
           }
           mainMaterial {
             material {
+              translations_key
               _id
               colors {
                 _id
@@ -44,6 +45,7 @@ export const getWishlistByUserId = gql`
           }
           bottomMaterial {
             material {
+              translations_key
               _id
               name {
                 value

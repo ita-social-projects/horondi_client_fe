@@ -14,10 +14,11 @@ items {
     }
     bottomMaterial{
         material{
-        name{
-            lang
-            value
-        }
+          translations_key
+          name{
+              lang
+              value
+          }
         }
     }
     mainMaterial{

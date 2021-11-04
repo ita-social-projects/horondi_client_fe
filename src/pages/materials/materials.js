@@ -22,9 +22,8 @@ const AutoplaySlider = withAutoplay(Slider);
 
 const Materials = () => {
   const [patternImages, setPatternImages] = useState([]);
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   const isLightTheme = useContext(ThemeContext);
-  const language = i18n.language === 'ua' ? 0 : 1;
   const code = 'materials';
 
   const {
@@ -63,7 +62,7 @@ const Materials = () => {
   });
   const materialsPage = loadingMaterials ? {} : dataMaterials.getBusinessTextByCode;
 
-  const materialPageText = materialsPage.text && parse(materialsPage.text[language].value);
+  const materialPageText = materialsPage.text && parse(t(`${materialsPage.translations_key}.text`));
   const styles = useStyles();
   const imagesForSlider = patterns.map((pattern, i) => (
     <div className={styles.sliderImage} key={pattern._id} data-src={patternImages[i]}>
@@ -79,7 +78,7 @@ const Materials = () => {
 
   return (
     <div className={styles.root}>
-      {materialsPage.title && <h1>{t('common.materials')}</h1>}
+      {materialsPage.title && <h1>{t(`${materialsPage.translations_key}.title`)}</h1>}
       <div className={styles.captionBlock}>
         <AutoplaySlider
           play

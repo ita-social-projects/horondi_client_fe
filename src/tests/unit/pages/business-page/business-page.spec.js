@@ -14,20 +14,14 @@ beforeEach(() => {
 
 describe('Business page tests', () => {
   it('should not render the text before responce will be received', () => {
-    const emptyTextWithHorondi = screen.queryByAltText(/Sashko Horondi/i);
+    const emptyTextWithHorondi = screen.queryByText(/Sashko Horondi/i);
 
     expect(emptyTextWithHorondi).toBeNull();
   });
 
   it('should render the text after responce will be received', async () => {
-    const textWithHorondi = await screen.findByText(/Sashko Horondi/i);
+    const textWithHorondi = await screen.findAllByText(/61801f62d63e5d40d8f09f07/i);
 
-    expect(textWithHorondi).toBeInTheDocument();
-  });
-
-  it('should render transmitted images', async () => {
-    const arrayOfImages = await screen.findAllByAltText(/img/i);
-
-    expect(arrayOfImages).toHaveLength(2);
+    expect(textWithHorondi).toHaveLength(2);
   });
 });

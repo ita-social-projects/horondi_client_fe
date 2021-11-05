@@ -18,8 +18,7 @@ import './categories-carousel.css';
 const CategoriesList = () => {
   const styles = useStyles();
   const { categories } = useContext(CategoriesContext);
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
   const { quantityPerPage } = useSelector(({ Products }) => ({
     quantityPerPage: Products.countPerPage
   }));
@@ -32,7 +31,6 @@ const CategoriesList = () => {
       }=${_id}&page=1&${countPerPage}=${quantityPerPage}`}
       categoryName={t(`${translationsKey}.name`)}
       categoryImageUrl={images.large}
-      language={language}
     />
   ));
 

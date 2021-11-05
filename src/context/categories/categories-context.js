@@ -10,10 +10,12 @@ const CategoriesContextProvider = ({ children }) => {
 
   const { loading, error } = useQuery(getAllCategoriesQuery, {
     onCompleted: (data) => {
-      const categoriesList = data.getAllCategories.items;
-      categoriesList.forEach((categorie) => {
-        categorie.translationsKey = categorie.translations_key;
-        delete categorie.translations_key;
+      const categoriesList = data.getAllCategories.items.map(categorie => {
+        const { translations_key, ...otherProps } = categorie;
+        return {
+          translationsKey: translations_key,
+          ...otherProps
+        }
       });
       setCategories(categoriesList);
     }

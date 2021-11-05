@@ -63,19 +63,13 @@ const ProductInfo = ({ price, product }) => {
         {strapLengthInCm ? (
           <Detail
             subtitle={t('product.productDescription.strapLengthInCm')}
-            description={`- ${strapLengthInCm}`}
+            description={`${strapLengthInCm}`}
           />
         ) : null}
         {currentVolume && currentWeight ? (
           <div>
-            <Detail
-              subtitle={t('product.weight.volumeLabel')}
-              description={` - ${currentVolume}`}
-            />
-            <Detail
-              subtitle={t('product.weight.weightLabel')}
-              description={` - ${currentWeight}`}
-            />
+            <Detail subtitle={t('product.weight.volumeLabel')} description={`${currentVolume}`} />
+            <Detail subtitle={t('product.weight.weightLabel')} description={`${currentWeight}`} />
           </div>
         ) : null}
       </div>

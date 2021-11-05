@@ -10,7 +10,6 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeliveryType from '../delivery-type/delivery-type';
 import { useStyles } from './checkout-form.styles';
 import { CY_CODE_ERR, SESSION_STORAGE } from '../../../configs';
@@ -40,6 +39,7 @@ import {
   setToSessionStorage
 } from '../../../services/session-storage.service';
 import { checkoutPayMethod } from './const';
+import YourOrder from '../../orders/order/your-order';
 
 const { pathToUserAgreement, pathToCart } = routes;
 
@@ -257,24 +257,17 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
             </div>
           </Grid>
           <Grid item className={styles.deliveryContainer}>
-            <div className={styles.checkoutYourOrderTitleData}>
-              <h2 className={styles.title}>{t('checkout.checkoutTitles.yourOrderTitle')}</h2>
-              <div className={styles.checkoutTitleLine} />
-            </div>
-            <div className={styles.submitInfo}>
-              <div className={styles.totalSum}>
-                <h4 className={styles.totalSumTitle}>{t('common.toPay')}</h4>
-                <p className={`${styles.totalSumTitle} ${styles.totalSumValue}`}>
-                  {Math.round(totalPriceToPay)}
-                  {'\u00A0'}
-                  <FontAwesomeIcon icon={currencySign} />
-                </p>
-              </div>
-              <button type='submit' className={styles.submitBtn}>
-                {checkoutFormBtnValue(values, language)}
-              </button>
-              {consentLink}
-            </div>
+            <YourOrder
+              checkoutFormBtnValue={checkoutFormBtnValue}
+              consentLink={consentLink}
+              t={t}
+              currencySign={currencySign}
+              totalPriceToPay={totalPriceToPay}
+              values={values}
+              language={language}
+              isLightTheme={isLightTheme}
+              styles={styles}
+            />
           </Grid>
         </Grid>
       </form>

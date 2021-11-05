@@ -76,9 +76,7 @@ const Login = () => {
                       data-cy='email'
                       id='email'
                       label={t('login.placeholders.email')}
-                      className={`${styles.emailInput} ${
-                        errors.email === t('error.profile.email') && styles.afterText
-                      }`}
+                      className={`${styles.emailInput} ${errors.email && styles.afterText}`}
                       fullWidth
                       variant='outlined'
                       type='text'
@@ -87,8 +85,8 @@ const Login = () => {
                       onChange={handleChange}
                       value={values.email}
                       color={MATERIAL_UI_COLOR.PRIMARY}
-                      error={touched.email && errors.email}
-                      helperText={touched.email && errors.email}
+                      error={touched.email && t(errors.email)}
+                      helperText={touched.email && t(errors.email)}
                     />
                     <TextField
                       data-cy='password'
@@ -104,8 +102,8 @@ const Login = () => {
                       name='password'
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      error={touched.password && errors.password}
-                      helperText={touched.password && errors.password}
+                      error={touched.password && t(errors.password)}
+                      helperText={touched.password && t(errors.password)}
                     />
                     <div className={styles.recoveryContainer}>
                       <div>

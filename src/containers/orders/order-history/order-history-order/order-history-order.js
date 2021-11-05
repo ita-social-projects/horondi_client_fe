@@ -37,7 +37,12 @@ const OrderHistoryOrder = ({ order }) => {
   const styles = useStyles();
 
   const orderHistoryList = order.items.map((item) => (
-    <OrderHistoryOrderItem key={item._id} item={item} language={language} currency={currency} />
+    <OrderHistoryOrderItem
+      key={item.product._id}
+      item={item}
+      language={language}
+      currency={currency}
+    />
   ));
 
   const imagesList = [];
@@ -46,7 +51,7 @@ const OrderHistoryOrder = ({ order }) => {
 
   order.items.slice(0, quantityImg).map((item) =>
     imagesList.push(
-      <div className={styles.imagesRow}>
+      <div className={styles.imagesRow} key={item.product._id}>
         <img
           src={`${IMG_URL}${item.product.images.primary.thumbnail}`}
           alt='product-img'
@@ -57,9 +62,10 @@ const OrderHistoryOrder = ({ order }) => {
   );
 
   if (order.items.length > 3) {
+    const restOrderItems = order.items.length - quantityImg;
     imagesList.push(
-      <div className={styles.imagesEmpty}>
-        <span>+{order.items.length - quantityImg}</span>
+      <div className={styles.imagesEmpty} key={`rest${restOrderItems}orderItems`}>
+        <span>+{restOrderItems}</span>
       </div>
     );
   }

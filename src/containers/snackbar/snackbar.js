@@ -22,7 +22,7 @@ const Snackbar = () => {
       {({ snackBarState }) => (
         <BaseSnackbar
           id='snack-bar'
-          open={snackBarState.message}
+          open={Boolean(snackBarState.message)}
           autoHideDuration={4000}
           onClose={handleClose}
         >

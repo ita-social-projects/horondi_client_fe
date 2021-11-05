@@ -11,7 +11,7 @@ import { useStyles } from './sidebar-items.style';
 
 const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) => {
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);
@@ -44,7 +44,7 @@ const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) =>
               <Link
                 to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=9&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
               >
-                <ListItemText primary={model.name[i18n.language === 'ua' ? 0 : 1].value} />
+                <ListItemText primary={t(`${model.translations_key}.name`)} />
               </Link>
             </ListItem>
           ))}

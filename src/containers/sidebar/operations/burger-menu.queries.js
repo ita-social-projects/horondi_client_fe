@@ -16,6 +16,7 @@ export const getCategoriesForBurgerMenu = gql`
           lang
           value
         }
+        translations_key
       }
     }
   }

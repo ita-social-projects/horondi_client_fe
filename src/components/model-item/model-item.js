@@ -9,7 +9,7 @@ import { IMG_URL } from '../../configs';
 
 const ModelItem = ({ model }) => {
   const styles = useStyles();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Link
@@ -17,9 +17,7 @@ const ModelItem = ({ model }) => {
       key={model.name[1].value}
       className={styles.modelItem}
     >
-      <div className={styles.modelItemTitle}>
-        {model.name[i18n.language === 'ua' ? 0 : 1].value}
-      </div>
+      <div className={styles.modelItemTitle}>{t(`${model.translations_key}.name`)}</div>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>

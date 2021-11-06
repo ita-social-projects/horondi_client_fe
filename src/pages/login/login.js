@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../const/routes';
-import { validationSchema } from '../../validators/login';
+import { loginValidationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 import { getFromLocalStorage } from '../../services/local-storage.service';
@@ -47,7 +47,7 @@ const Login = () => {
 
   const { handleSubmit, errors, values, handleChange, handleBlur, setFieldValue, touched } =
     useFormik({
-      validationSchema: validationSchema(t),
+      validationSchema: loginValidationSchema,
       initialValues: LOGIN_USER_DATA,
       onSubmit: () => {
         dispatch(loginUser({ user: values }));
@@ -57,6 +57,11 @@ const Login = () => {
   const wrongCredentials = loginError ? (
     <p className={styles.loginError}>{t('error.wrongCredentials')}</p>
   ) : null;
+
+  const emailStyles = useMemo(
+    () => (errors.email === 'error.profile.email' ? styles.afterText : ''),
+    [errors.email]
+  );
 
   return (
     <form onSubmit={(e) => eventPreventHandler(e)}>
@@ -76,7 +81,7 @@ const Login = () => {
                       data-cy='email'
                       id='email'
                       label={t('login.placeholders.email')}
-                      className={`${styles.emailInput} ${errors.email && styles.afterText}`}
+                      className={`${styles.emailInput} ${emailStyles}`}
                       fullWidth
                       variant='outlined'
                       type='text'

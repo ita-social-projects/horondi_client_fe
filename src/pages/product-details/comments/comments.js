@@ -173,9 +173,9 @@ const Comments = ({ productId }) => {
             </div>
           </Tooltip>
 
-          {isLoading && (
+          {addCommentLoading && (
             <div className={styles.loader}>
-              <Loader width={40} height={40} heightWrap={90} />
+              <Loader width={40} height={40} heightWrap={40} />
             </div>
           )}
         </div>
@@ -190,7 +190,7 @@ const Comments = ({ productId }) => {
           </span>
         </div>
       )}
-      {isLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
+      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={40} /> : null}
       <SnackbarItem />
     </div>
   );

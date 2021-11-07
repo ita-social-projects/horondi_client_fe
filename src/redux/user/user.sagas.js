@@ -1,58 +1,57 @@
-import { call, put, takeEvery, delay } from 'redux-saga/effects';
+import { call, delay, put, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import {
+  resetState,
+  setConfirmationEmailStatus,
+  setConfirmationLoading,
+  setPasswordIsReset,
+  setRecoveryLoading,
   setUser,
   setUserError,
-  setUserLoading,
-  resetState,
-  userHasRecovered,
-  userHasRegistered,
   setUserIsChecked,
-  setPasswordIsReset,
-  setConfirmationEmailStatus,
   setUserIsConfirmed,
-  setConfirmationLoading,
-  setRecoveryLoading,
-  setUserOrders
+  setUserLoading,
+  setUserOrders,
+  userHasRecovered,
+  userHasRegistered
 } from './user.actions';
-import { clearComments } from '../comments/comments.actions';
 import {
-  loginUser,
-  getGoogleUser,
-  confirmUserEmail,
-  recoverUser,
   checkIfTokenIsValid,
-  registerUser,
-  updateUserById,
-  sendEmailConfirmation,
-  resetPassword,
+  confirmUserEmail,
+  getGoogleUser,
+  getPurchasedProducts,
   getUserByToken,
-  getPurchasedProducts
+  loginUser,
+  recoverUser,
+  registerUser,
+  resetPassword,
+  sendEmailConfirmation,
+  updateUserById
 } from './user.operations';
-import { mergeCartFromLSWithUserCart, getCartByUserId } from '../cart/cart.operations';
+import { getCartByUserId, mergeCartFromLSWithUserCart } from '../cart/cart.operations';
 import {
-  LOGIN_USER,
-  CONFIRM_USER,
-  RECOVER_USER,
-  PASSWORD_RESET,
   CHECK_IF_TOKEN_VALID,
-  REGISTER_USER,
-  PRESERVE_USER,
-  UPDATE_USER,
-  SEND_CONFIRMATION_EMAIL,
+  CONFIRM_USER,
   LOGIN_BY_GOOGLE,
-  LOGOUT_USER
+  LOGIN_USER,
+  LOGOUT_USER,
+  PASSWORD_RESET,
+  PRESERVE_USER,
+  RECOVER_USER,
+  REGISTER_USER,
+  SEND_CONFIRMATION_EMAIL,
+  UPDATE_USER
 } from './user.types';
 import {
-  REDIRECT_TIMEOUT,
   cartKey,
-  USER_IS_BLOCKED,
-  USER_TOKENS,
   LANGUAGE,
+  REDIRECT_TIMEOUT,
   RETURN_PAGE,
+  SNACKBAR_MESSAGE,
   SNACKBAR_TYPES,
-  SNACKBAR_MESSAGE
+  USER_IS_BLOCKED,
+  USER_TOKENS
 } from '../../configs';
 import routes from '../../const/routes';
 import {
@@ -60,7 +59,7 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../../services/local-storage.service';
-import { setCart, setCartTotalPrice, setCartLoading, resetCart } from '../cart/cart.actions';
+import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../cart/cart.actions';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_ERROR } from '../../translations/user.translations';
@@ -218,7 +217,6 @@ export function* handleSendConfirmation({ payload }) {
 }
 
 export function* handleUserLogout() {
-  yield put(clearComments());
   yield put(setUser(null));
   yield put(setUserOrders(null));
   yield put(resetCart());

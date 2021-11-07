@@ -7,7 +7,6 @@ import Products from './products/products.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
 import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
 import Currency from './currency/currency.reducer';
-import Comments from './comments/comments.reducer';
 import Chat from './chat/chat.reducer';
 import Pattern from './pattern/pattern.reducer';
 import Constructor from './images-constructor/constructor.reducer';
@@ -25,7 +24,6 @@ export const rootReducer = (history) =>
     Cart,
     Snackbar,
     Currency,
-    Comments,
     Chat,
     Pattern,
     Constructor,

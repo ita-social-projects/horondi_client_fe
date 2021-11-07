@@ -59,17 +59,17 @@ const CommentDialog = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          {deleteCommentLoading && (
+            <div className={styles.loader}>
+              <Loader width={20} height={20} heightWrap={40} />
+            </div>
+          )}
           <Button onClick={handleClose} className={styles.button}>
             {t('product.pdpButtons.cancelButton')}
           </Button>
           <Button onClick={handleDelete} className={styles.button}>
             {t('product.pdpButtons.submitButton')}
           </Button>
-          {deleteCommentLoading && (
-            <div className={styles.loader}>
-              <Loader width={40} height={40} heightWrap={90} />
-            </div>
-          )}
         </DialogActions>
       </Dialog>
     </div>

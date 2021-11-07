@@ -14,7 +14,7 @@ import {
   handleUserCommentOwner
 } from '../../../../../utils/handle-comments';
 
-const ReplyCommentsItem = ({ replyItem, replyCommentId, refetchComments }) => {
+const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
   const {
     answerer: user,
     replyText: text,
@@ -103,7 +103,7 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, refetchComments }) => {
         handleClose={handleClose}
         isModalShown={isModalShown}
         commentId={replyCommentId}
-        refetchComments={refetchComments}
+        refetchComments={updateReplies}
         userId={userData ? userData._id : ''}
       />
     </div>

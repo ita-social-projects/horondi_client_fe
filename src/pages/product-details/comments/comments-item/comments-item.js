@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
@@ -7,7 +7,7 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { Tooltip } from '@material-ui/core';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useStyles } from './comments-item.styles';
 import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
 import {
@@ -48,29 +48,31 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
 
-  const {
-    loading,
-    data: replyCommentsData,
-    refetch: refetchReply,
-    error
-  } = useQuery(getReplyCommentsQuery, {
-    variables: {
-      filter: { commentId, filters: false },
-      pagination: { skip: handleSkip(replyCommentsCount, currentLimit), limit: currentLimit }
-    },
-    fetchPolicy: 'network-only',
-    nextFetchPolicy: 'cache-first'
-  });
-
-  useEffect(() => {
-    refetchReply();
-  }, [commentItem]);
+  const [getReplyCommentsByID, { loading, data: replyCommentsData, error, called }] = useLazyQuery(
+    getReplyCommentsQuery,
+    {
+      variables: {
+        filter: { commentId, filters: false },
+        pagination: { skip: handleSkip(replyCommentsCount, currentLimit), limit: currentLimit }
+      },
+      fetchPolicy: 'network-only',
+      nextFetchPolicy: 'cache-first'
+    }
+  );
 
   if (error || loading) return errorOrLoadingHandler(error, loading);
 
-  const { replyComments } = replyCommentsData.getReplyCommentsByComment.items[0];
+  const { replyComments } = replyCommentsData
+    ? replyCommentsData.getReplyCommentsByComment.items[0]
+    : { replyComments: [] };
 
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
+
+  const reloadCommentsData = async () => {
+    toggleReplyList(true);
+    await refetchComments();
+    await getReplyCommentsByID();
+  };
 
   const handleOpen = () => {
     toggleModal(true);
@@ -89,13 +91,12 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   };
 
   const showReplyList = async () => {
-    if (isReplyListShown) {
-      return toggleReplyList(false);
-    }
-    toggleReplyList(true);
+    !called && (await getReplyCommentsByID());
+    toggleReplyList((prevIsReplyListShown) => !prevIsReplyListShown);
   };
 
-  const getMoreComments = () => {
+  const getMoreComments = async () => {
+    await getReplyCommentsByID();
     setCurrentLimit((prev) => prev + 10);
   };
 
@@ -104,7 +105,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
       key={_id}
       replyItem={rest}
       replyCommentId={_id}
-      refetchComments={refetchComments}
+      updateReplies={reloadCommentsData}
     />
   ));
 
@@ -188,7 +189,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
 
             {loading && (
               <div className={styles.loader}>
-                <Loader width={40} height={40} heightWrap={90} />
+                <Loader width={20} height={20} heightWrap={40} />
               </div>
             )}
             {replyCommentsList}
@@ -197,7 +198,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
         {isReplyShown && userData?._id && (
           <ReplyForm
             cancel={handleReplyClose}
-            refetchComments={refetchComments}
+            refetchComments={reloadCommentsData}
             commentId={commentId}
           />
         )}

@@ -41,7 +41,7 @@ import {
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
 
-const { pathToUserAgreement, pathToCart } = routes;
+const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 
 const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
   const styles = useStyles({
@@ -70,6 +70,11 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
       >
         {' '}
         {t('checkout.checkoutAdditionalInfo.consent.1')}{' '}
+      </Link>{' '}
+      {t('checkout.checkoutAdditionalInfo.consent.2')}
+      <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
+        {' '}
+        {t('checkout.checkoutAdditionalInfo.consent.3')}{' '}
       </Link>
     </div>
   );
@@ -261,6 +266,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
               checkoutFormBtnValue={checkoutFormBtnValue}
               consentLink={consentLink}
               t={t}
+              currency={currency}
               currencySign={currencySign}
               totalPriceToPay={totalPriceToPay}
               values={values}

@@ -9,13 +9,7 @@ const CategoriesContextProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
 
   const { loading, error } = useQuery(getAllCategoriesQuery, {
-    onCompleted: (data) => {
-      const categoriesList = data.getAllCategories.items.map((category) => ({
-        translationsKey: category.translations_key,
-        ...category
-      }));
-      setCategories(categoriesList);
-    }
+    onCompleted: (data) => setCategories(data.getAllCategories.items)
   });
 
   if (loading || error) return errorOrLoadingHandler(error, loading);

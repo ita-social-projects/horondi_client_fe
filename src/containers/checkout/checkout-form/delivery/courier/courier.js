@@ -15,7 +15,7 @@ const Courier = ({ isLightTheme, language, values, handleChange, touched, errors
       <h3 className={styles.courierTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.inputWrapper}>
         {courierInputLabels(language).map((field) => (
-          <>
+          <div key={field.name}>
             <TextField
               size={TEXT_FIELD_SIZE.SMALL}
               id='standard-start-adornment'
@@ -33,7 +33,7 @@ const Courier = ({ isLightTheme, language, values, handleChange, touched, errors
                 {errors[field.name]}
               </div>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

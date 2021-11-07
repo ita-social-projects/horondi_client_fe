@@ -9,8 +9,6 @@ export const useStyles = makeStyles(() => ({
     width: '100%'
   },
   inputWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
     width: '100%',
     marginLeft: '10%'
   },
@@ -20,7 +18,7 @@ export const useStyles = makeStyles(() => ({
   },
   textField: {
     width: 600,
-    marginBottom: '3%',
+    marginBottom: 16,
     '@media (max-width: 768px)': {
       width: '80%'
     }

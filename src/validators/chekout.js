@@ -23,9 +23,15 @@ export const validationSchema = (deliveryType, t) =>
       (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) &&
       Yup.string().required(t('error.requiredField')),
     region:
-      deliveryType === deliveryTypes.UKRPOST && Yup.string().required(t('error.requiredField')),
+      (deliveryType === deliveryTypes.UKRPOST ||
+        deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      Yup.string().required(t('error.requiredField')),
     district:
-      deliveryType === deliveryTypes.UKRPOST && Yup.string().required(t('error.requiredField')),
+      (deliveryType === deliveryTypes.UKRPOST ||
+        deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      Yup.string().required(t('error.requiredField')),
     city:
       deliveryType !== deliveryTypes.SELFPICKUP &&
       Yup.string()

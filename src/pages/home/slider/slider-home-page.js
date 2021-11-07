@@ -23,7 +23,7 @@ const SliderHomePage = () => {
   const [imagesLinks, setImage] = useState([]);
   const [items, setItems] = useState([]);
   const styles = useStyles();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const { error, loading } = useQuery(getAllSlides, {
     onCompleted: (data) => {

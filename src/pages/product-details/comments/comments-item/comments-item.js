@@ -71,7 +71,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   const reloadCommentsData = async () => {
     toggleReplyList(true);
     await refetchComments();
-    await getReplyCommentsByID();
+    getReplyCommentsByID();
   };
 
   const handleOpen = () => {
@@ -91,12 +91,12 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   };
 
   const showReplyList = async () => {
-    !called && (await getReplyCommentsByID());
+    !called && getReplyCommentsByID();
     toggleReplyList((prevIsReplyListShown) => !prevIsReplyListShown);
   };
 
   const getMoreComments = async () => {
-    await getReplyCommentsByID();
+    getReplyCommentsByID();
     setCurrentLimit((prev) => prev + 10);
   };
 

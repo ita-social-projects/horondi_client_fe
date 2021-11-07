@@ -1,36 +1,54 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
-import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
-import { addReply } from '../../../../../redux/comments/comments.actions';
+import {
+  commentFields,
+  formRegExp,
+  SNACKBAR_MESSAGE,
+  SNACKBAR_TYPES,
+  TEXT_VALUE
+} from '../../../../../configs';
+import { addReplyMutation } from '../../operations/comments.queries';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { Loader } from '../../../../../components/loader/loader';
+import { SnackBarContext } from '../../../../../context/snackbar-context';
 
-const ReplyForm = ({ cancel, commentId }) => {
-  const dispatch = useDispatch();
+const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
+  const { setSnackBarMessage } = useContext(SnackBarContext);
   const styles = useStyles();
-  const { userData, productId } = useSelector(({ Language, User, Products }) => ({
-    language: Language.language,
+  const { userData, productId } = useSelector(({ User, Products }) => ({
     userData: User.userData,
     productId: Products.productToSend._id
   }));
 
+  const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
+    onError: (err) => {
+      errorOrLoadingHandler(err);
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+    },
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.addedReply)
+  });
+
   const { _id } = userData;
 
-  const onSubmit = ({ text: fieldText }) => {
-    dispatch(
-      addReply({
+  const onSubmit = async ({ text: fieldText }) => {
+    await addReply({
+      variables: {
         id: _id,
         answerer: _id,
         replyText: fieldText,
         commentId,
         productId
-      })
-    );
+      }
+    });
+    await refetchComments();
     setShouldValidate(false);
     cancel(false);
   };
@@ -60,10 +78,20 @@ const ReplyForm = ({ cancel, commentId }) => {
           label={t('common.reply.text')}
         />
         <div className={styles.btnContainer}>
-          <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
+          {addReplyLoading && (
+            <div className={styles.loader}>
+              <Loader width={20} height={20} heightWrap={90} />
+            </div>
+          )}
+          <Button
+            type='submit'
+            onClick={() => setShouldValidate(true)}
+            disabled={addReplyLoading}
+            className={styles.replyBtn}
+          >
             {t('product.pdpButtons.leaveReply')}
           </Button>
-          <Button onClick={cancel} className={styles.replyBtn}>
+          <Button onClick={cancel} disabled={addReplyLoading} className={styles.replyBtn}>
             {t('product.pdpButtons.cancelButton')}
           </Button>
         </div>

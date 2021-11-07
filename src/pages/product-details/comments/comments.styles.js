@@ -122,9 +122,14 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: '500'
     }
   },
-  commentBtn: {
+  commentBtnContainer: {
+    display: 'inline-block',
     marginTop: 25,
-    marginBottom: 40,
+    marginBottom: 40
+  },
+  commentBtn: {
+    marginTop: 0,
+    marginBottom: 0,
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '1rem',

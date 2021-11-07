@@ -37,6 +37,7 @@ export const addCommentMutation = gql`
       comment: { text: $text, show: $show, user: $user, product: $product, rate: $rate }
     ) {
       ... on Comment {
+        __typename
         _id
         text
         date
@@ -49,6 +50,81 @@ export const addCommentMutation = gql`
           role
         }
         verifiedPurchase
+      }
+    }
+  }
+`;
+
+export const getReplyCommentsQuery = gql`
+  query ($filter: ReplyCommentFilterInput, $pagination: Pagination) {
+    getReplyCommentsByComment(filter: $filter, pagination: $pagination) {
+      __typename
+      ... on PaginatedComments {
+        items {
+          _id
+          replyComments {
+            _id
+            replyText
+            showReplyComment
+            createdAt
+            verifiedPurchase
+            answerer {
+              _id
+              firstName
+              email
+              role
+            }
+          }
+        }
+        count
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+`;
+
+export const addReplyMutation = gql`
+  mutation ($id: ID, $commentId: ID!, $replyText: String!, $productId: ID, $answerer: ID) {
+    replyForComment(
+      id: $id
+      commentId: $commentId
+      replyCommentData: {
+        answerer: $answerer
+        replyText: $replyText
+        refToReplyComment: $commentId
+        productId: $productId
+      }
+    ) {
+      ... on Comment {
+        __typename
+        _id
+        replyComments {
+          _id
+          replyText
+          showReplyComment
+          createdAt
+          verifiedPurchase
+          answerer {
+            _id
+            firstName
+            email
+            role
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const deleteCommentMutation = gql`
+  mutation ($commentID: ID!) {
+    deleteComment(commentID: $commentID) {
+      ... on Comment {
+        __typename
+        _id
       }
     }
   }

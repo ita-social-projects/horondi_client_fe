@@ -1,5 +1,6 @@
 {
     "imgAltInfo": "Product image",
+    "allPhotos": "View All Photos",
     "pattern": "Pattern",
     "productDescription": {
         "description": "Product description",
@@ -15,7 +16,7 @@
     "priceFrom": "from ",
     "sizeNotAvailable": "Product isn't available",
 
-     "pdpButtons": {
+    "pdpButtons": {
         "cartButton": "Add to cart",
         "buyButton": "Buy now",
         "submitButton": "Submit",
@@ -28,8 +29,8 @@
         "removeWishful": "Remove from wishlist",
         "edit": "Edit",
         "delete": "Delete",
-        "unregisteredReply": "You should login, to leave answer",
-        "unregisteredComment": "You should login, to leave comment",
+        "unregisteredReply": "You should be logged in to leave answer",
+        "unregisteredComment": "You should be logged in to leave comment",
         "bought": "The user bought this product",
         "feedbackComment": "Your comment has not been confirmed by the administrator",
         "feedbackReply": "Your answer has not been confirmed by the administrator",
@@ -48,11 +49,13 @@
         "title": "Comments",
         "text": "Share your thoughts with others",
         "submit": "Leave comment",
-        "unregisteredTip": "You should login, to leave rate",
-        "registeredTip": "You should bought the product to leave rate",
+        "unregisteredTip": "You should be logged in to leave rate",
+        "registeredTip": "You should buy the product to leave rate",
         "successfulTip": "Set rate",
         "loadMore": "Load more...",
         "hideBtn": "Hide comments"
+    },
+    "images": {
+        
     }
-
 }

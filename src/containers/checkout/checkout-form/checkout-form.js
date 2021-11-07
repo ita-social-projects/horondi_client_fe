@@ -80,8 +80,8 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
       initialValues,
 
       onSubmit: (data) => {
-        data.paymentMethod === checkoutPayMethod.card.label
-          ? dispatch(addPaymentMethod(checkoutPayMethod.card.label)) &&
+        data.paymentMethod === checkoutPayMethod.card
+          ? dispatch(addPaymentMethod(checkoutPayMethod.card)) &&
             dispatch(
               getFondyData({
                 order: orderInputData(data, deliveryType, cartItems, language),
@@ -91,7 +91,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
               })
             )
           : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
-            dispatch(addPaymentMethod(checkoutPayMethod.cash.label));
+            dispatch(addPaymentMethod(checkoutPayMethod.cash));
         clearSessionStorage();
       }
     });
@@ -201,8 +201,8 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                   onChange={handleChange}
                 >
                   {Object.values(checkoutPayMethod).map((value) => (
-                    <MenuItem key={value.label} value={value.label}>
-                      {t(`checkout.checkoutPayment.${value.label}`)}
+                    <MenuItem key={value} value={value}>
+                      {t(`checkout.checkoutPayment.${value}`)}
                     </MenuItem>
                   ))}
                 </Select>

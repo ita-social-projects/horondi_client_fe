@@ -83,7 +83,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
 
   const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
     useAddProductToWishlistHandler(product);
-
   const wishlistTip = isInWishlist
     ? t('product.tooltips.removeWishful')
     : t('product.tooltips.addWishful');

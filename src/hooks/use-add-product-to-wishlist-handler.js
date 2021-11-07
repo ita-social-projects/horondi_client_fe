@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import useWishlistLoader from './use-wishlist-loader';
 import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
@@ -10,15 +10,16 @@ import { WISHLIST_KEY, USER_TOKENS } from '../configs';
 export default function useAddProductToWishlistHandler(product) {
   const [isInWishlist, toggleIsInWishlist] = useState(false);
   const user = getFromLocalStorage(USER_TOKENS.ACCESS_TOKEN);
-
   const { wishlist } = useWishlistLoader();
-
+  const firstlyChecked = useRef(false);
   const [addProductMutation, { data, error }] = useMutation(addProductToWishlist);
 
   const checkIsInWishlist = (list, productItem) => {
     list.products.find((el) => JSON.stringify(el._id) === JSON.stringify(productItem._id))
       ? toggleIsInWishlist(true)
       : toggleIsInWishlist(false);
+
+    firstlyChecked.current = true;
   };
 
   error && errorOrLoadingHandler(error, false);
@@ -27,7 +28,7 @@ export default function useAddProductToWishlistHandler(product) {
     data && checkIsInWishlist(data.addProductToWishlist, product);
   }, [data, product]);
   useEffect(() => {
-    wishlist && checkIsInWishlist(wishlist, product);
+    !firstlyChecked.current && wishlist.products.length && checkIsInWishlist(wishlist, product);
   }, [wishlist, product]);
 
   return [

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -11,46 +11,36 @@ import {
   Button,
   Avatar
 } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-item.style';
 import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 
 const NewsItem = ({ date, author, image, title, text, id, slug }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  const language = useSelector(({ Language }) => Language.language);
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
-  if (text[language].value === null) {
+  if (!text[language].value) {
     return null;
   }
-  const newsTitle = title.length !== 0 ? title[language].value : 'No title provided';
-  const newsImage = image ? IMG_URL + image : 'No image provided';
-  const newsText =
-    text.length !== 0 && text[language].value != null
-      ? parse(text[language].value)
-      : 'No text provided';
-  const newsAuthor = author.name.length !== 0 ? author.name[language].value : 'No author provided';
-  const newsAuthorAvatar = author.image ? IMG_URL + author.image : 'No author provided';
 
-  const newsButtonText = ['читати далі', 'read more...'];
   const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
   const dateLanguage = newsDateLanguageOptions[language];
-  const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
         <div className={styles.imagesContainer}>
           <CardMedia
             className={styles.media}
-            image={newsImage}
-            title={newsTitle}
+            image={IMG_URL + image}
+            title={title[language].value || t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
         </div>
-        <CardHeader subheader={newsDate} data-cy='date' />
+        <CardHeader
+          subheader={new Date(parseInt(date)).toLocaleString(dateLanguage, TIME_OPTIONS)}
+          data-cy='date'
+        />
         <CardContent className={styles.newsItemContent}>
           <Typography
             className={styles.ArticleTitle}
@@ -59,7 +49,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {newsTitle}
+            {title[language].value || t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'
@@ -68,18 +58,26 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {newsText}
+            {parse(text[language].value) || t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}-${slug}`}>
             <Button variant='contained' className={styles.newsButton} data-cy='readMoreButton'>
-              {newsButtonText[language]}
+              {t('buttons.readMore')}
             </Button>
           </Link>
           <div className={styles.newsAuthorFooter}>
-            <CardHeader subheader={newsAuthor} data-cy='authorName' className={styles.authorName} />
-            <Avatar alt={newsAuthor} src={newsAuthorAvatar} data-cy='authorPhoto' />
+            <CardHeader
+              subheader={author.name[language].value || t('newsDetail.noAuthor')}
+              data-cy='authorName'
+              className={styles.authorName}
+            />
+            <Avatar
+              alt={author.name[language].value || t('newsDetail.noAuthor')}
+              src={IMG_URL + author.image}
+              data-cy='authorPhoto'
+            />
           </div>
         </div>
       </Card>

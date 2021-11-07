@@ -110,7 +110,7 @@ const Login = () => {
                     <div className={styles.recoveryContainer}>
                       <div>
                         <FormControlLabel
-                          data-cy='staySignedIn'
+                          data-testid='staySignedIn'
                           key={t('login.rememberMe')}
                           value={values.rememberMe}
                           checked={values.rememberMe}

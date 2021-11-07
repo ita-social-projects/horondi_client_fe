@@ -36,7 +36,6 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="firstName"
-                label="First name *"
                 name="firstName"
                 onChange={[Function]}
                 size="small"
@@ -49,7 +48,6 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="lastName"
-                label="Last name *"
                 name="lastName"
                 onChange={[Function]}
                 size="small"
@@ -64,7 +62,6 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="email"
-                label="Email *"
                 name="email"
                 onChange={[Function]}
                 size="small"
@@ -77,7 +74,6 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             >
               <WithStyles(ForwardRef(TextField))
                 data-cy="phoneNumber"
-                label="Phone *"
                 name="phoneNumber"
                 onChange={[Function]}
                 size="small"
@@ -141,14 +137,14 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
               value=""
             >
               <WithStyles(ForwardRef(MenuItem))
-                key="card"
-                value="card"
+                key="CARD"
+                value="CARD"
               >
                 <Component />
               </WithStyles(ForwardRef(MenuItem))>
               <WithStyles(ForwardRef(MenuItem))
-                key="cash"
-                value="cash"
+                key="CASH"
+                value="CASH"
               >
                 <Component />
               </WithStyles(ForwardRef(MenuItem))>
@@ -230,9 +226,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
           </div>
           <button
             type="submit"
-          >
-            Confirm order
-          </button>
+          />
           <div>
              
             <Component />

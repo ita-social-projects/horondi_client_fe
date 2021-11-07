@@ -130,14 +130,12 @@ export const orderInputData = (data, deliveryType, cartItems) => ({
   },
   items: productItemsInput(cartItems),
   paymentMethod:
-    data.paymentMethod === i18next.t(`checkout.checkoutPayment.card`)
-      ? i18next.t(`checkout.checkoutPayment.card`)
-      : i18next.t(`checkout.checkoutPayment.cash`),
+    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash,
   userComment: data.userComment
 });
 
 export const checkoutFormBtnValue = (values) =>
-  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash.label
+  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash
     ? i18next.t(`checkout.confirmOrder`)
     : i18next.t(`checkout.payOrder`);
 

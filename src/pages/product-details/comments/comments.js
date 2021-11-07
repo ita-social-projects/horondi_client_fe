@@ -1,16 +1,22 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
 import { Button, TextField, Tooltip } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/client';
+import i18n from 'i18next';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-import { commentFields, formRegExp, TEXT_VALUE } from '../../../configs';
+import {
+  commentFields,
+  formRegExp,
+  SNACKBAR_MESSAGE,
+  SNACKBAR_TYPES,
+  TEXT_VALUE
+} from '../../../configs';
 import useCommentValidation from '../../../hooks/use-comment-validation';
-import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
 import {
   handleArrowIcon,
   handleClassName,
@@ -20,19 +26,21 @@ import {
 } from '../../../utils/handle-comments';
 import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { useIsLoading } from '../../../hooks/useIsLoading';
+import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
+import { SnackBarContext } from '../../../context/snackbar-context';
 
 const Comments = ({ productId }) => {
   const styles = useStyles();
   const [comments, setComments] = useState({ items: [], count: 0 });
   const [currentLimit, setCurrentLimit] = useState(10);
-  const { language, userData, skip } = useSelector(selectProductsIdCommentsLanguageUserData);
+  const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
+  const { setSnackBarMessage } = useContext(SnackBarContext);
 
   const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
     variables: {
       filter: { productId, filters: false },
-      pagination: { skip, limit: currentLimit }
+      pagination: { skip: 0, limit: currentLimit }
     },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'network-only',
@@ -44,10 +52,14 @@ const Comments = ({ productId }) => {
   });
 
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
-    onError: (err) => errorOrLoadingHandler(err)
+    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.added),
+    onError: (err) => {
+      errorOrLoadingHandler(err);
+      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+    }
   });
 
-  const { isLoading } = useIsLoading([addCommentLoading, getCommentsLoading]);
+  const { isLoading } = useIsLoadingOrError([addCommentLoading, getCommentsLoading]);
   const { _id: userId } = userData || {};
 
   const onSubmit = async (formValues) => {
@@ -82,10 +94,16 @@ const Comments = ({ productId }) => {
       return t('product.comments.unregisteredTip');
     }
     return t('product.comments.successfulTip');
-  }, [language, userId]);
+  }, [i18n.language === 'ua' ? 0 : 1, userId]);
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
-    <CommentsItem key={_id} data={rest} commentId={_id} productId={productId} />
+    <CommentsItem
+      key={_id}
+      commentItem={rest}
+      refetchComments={refetchComments}
+      commentId={_id}
+      productId={productId}
+    />
   ));
   const limitOption = commentsList.length === comments.count;
 
@@ -139,8 +157,11 @@ const Comments = ({ productId }) => {
         </div>
 
         <div className={styles.submit}>
-          <Tooltip title={userData ? '' : t(`product.tooltips.unregisteredComment`)}>
-            <div>
+          <Tooltip
+            title={userData ? '' : t(`product.tooltips.unregisteredComment`)}
+            placement='right'
+          >
+            <div className={styles.commentBtnContainer}>
               <Button
                 type='submit'
                 className={styles.commentBtn}

@@ -2,15 +2,15 @@
     "payOrder": "Перейти до оплати",
     "confirmOrder": "Підтвердити замовлення",
     "checkoutPayment": {
-        "card": "КАРТОЮ",
-        "cash": "ГОТІВКОЮ"
+        "CARD": "КАРТОЮ",
+        "CASH": "ГОТІВКОЮ"
     },
     "checkoutTitles": {
         "orderForm": "Форма замовлення",
         "deliveryPrice": "Ціна доставки",
         "delivery": "Доставка",
-        "UAH": "грн",
-        "USD": "долл",
+        "UAH": "UAH",
+        "USD": "USD",
         "region": "Регіон",
         "orderNumber": "Замовлення № ",
         "deliveryAddress": "Адреса доставки",

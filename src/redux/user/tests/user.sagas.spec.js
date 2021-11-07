@@ -3,63 +3,63 @@ import { call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   resetState,
+  setConfirmationEmailStatus,
   setConfirmationLoading,
   setPasswordIsReset,
   setRecoveryLoading,
   setUser,
+  setUserError,
   setUserIsChecked,
   setUserIsConfirmed,
   setUserLoading,
-  userHasRegistered,
-  setConfirmationEmailStatus,
   userHasRecovered,
-  setUserError
+  userHasRegistered
 } from '../user.actions';
 import userReducer from '../user.reducer';
 import {
-  payload,
-  initialStateMock,
+  cartFromLc,
   email,
-  pass,
-  rememberMe,
-  user,
-  purchasedProducts,
-  token,
-  userWithProducts,
+  error,
+  initialStateMock,
   language,
+  pass,
+  payload,
+  purchasedProducts,
+  rememberMe,
+  token,
+  upload,
+  user,
   userCart,
   userId,
-  upload,
-  error,
-  cartFromLc
+  userWithProducts
 } from './user.mocks';
 import {
-  handleUserLogin,
-  handleUserConfirm,
-  handleUserRecovery,
-  handlePasswordReset,
-  handleTokenCheck,
-  handleUserRegister,
-  handleUserPreserve,
-  handleUpdateUser,
-  handleSendConfirmation,
   handleGoogleUserLogin,
-  handleUserLogout,
+  handlePasswordReset,
   handleRefreshTokenInvalid,
-  handleUserError
+  handleSendConfirmation,
+  handleTokenCheck,
+  handleUpdateUser,
+  handleUserConfirm,
+  handleUserError,
+  handleUserLogin,
+  handleUserLogout,
+  handleUserPreserve,
+  handleUserRecovery,
+  handleUserRegister
 } from '../user.sagas';
 import {
-  loginUser,
-  getGoogleUser,
-  confirmUserEmail,
-  recoverUser,
   checkIfTokenIsValid,
+  confirmUserEmail,
+  getGoogleUser,
+  getPurchasedProducts,
+  getUserByToken,
+  loginUser,
+  recoverUser,
   registerUser,
   resetPassword,
-  updateUserById,
   sendEmailConfirmation,
-  getUserByToken,
-  getPurchasedProducts
+  updateUserById
 } from '../user.operations';
 import routes from '../../../const/routes';
 import { getCartByUserId, mergeCartFromLSWithUserCart } from '../../cart/cart.operations';
@@ -399,7 +399,7 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
+        expect(analysisPut).toHaveLength(3);
         expect(analysisCall).toHaveLength(0);
       }));
 

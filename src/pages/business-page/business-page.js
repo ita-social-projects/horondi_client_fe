@@ -17,7 +17,7 @@ const BusinessPage = ({ match }) => {
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
 
-  const addressText = page?.text && parse(t(`${page.translations_key}.text`));
+  const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
   const styles = useStyles();
 
   if (loading || error) return errorOrLoadingHandler(error, loading);

@@ -17,7 +17,7 @@ const ModelItem = ({ model }) => {
       key={model.name[1].value}
       className={styles.modelItem}
     >
-      <div className={styles.modelItemTitle}>{t(`${model.translations_key}.name`)}</div>
+      <div className={styles.modelItemTitle}>{t(`${model.translationsKey}.name`)}</div>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>

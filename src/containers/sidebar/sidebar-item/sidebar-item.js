@@ -44,7 +44,7 @@ const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) =>
               <Link
                 to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=9&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
               >
-                <ListItemText primary={t(`${model.translations_key}.name`)} />
+                <ListItemText primary={t(`${model.translationsKey}.name`)} />
               </Link>
             </ListItem>
           ))}

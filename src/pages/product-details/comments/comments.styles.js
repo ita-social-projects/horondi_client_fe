@@ -112,7 +112,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& p': {
       position: 'absolute',
-      top: '170px',
+      top: '130px',
       fontSize: '10px'
     },
     '& textarea': {

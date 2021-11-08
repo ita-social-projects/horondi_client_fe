@@ -35,6 +35,7 @@ export const getNewsById = gql`
         title {
           value
         }
+        translationsKey
         text {
           value
         }

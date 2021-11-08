@@ -39,7 +39,7 @@ export const mockRequest = [
                 '<h3>Sashko Horondi</h3><img class="editor-img" src="https://horondi.blob.core.windows.net/horondi/images/small_519cbe8km3v4htv_IMG_0120.jpg" alt="IMG_0120.jpg" width="150px"><img class="editor-img" src="https://horondi.blob.core.windows.net/horondi/images/small_519cbe8km3v4htw_IMG_0428.jpg" alt="IMG_0428.jpg" width="150px">'
             }
           ],
-          translations_key: '61801f62d63e5d40d8f09f07',
+          translationsKey: '61801f62d63e5d40d8f09f07',
           date: '1604334592591'
         }
       }

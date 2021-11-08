@@ -41,7 +41,7 @@
         "delivery": "Тип доставки",
         "total": "Загальна сума",
         "region": "Область *",
-        "district": "Район "
+        "district": "Район *"
     },
     
     "checkoutAdditionalInfo": {

@@ -1,3 +1,0 @@
-export const SEND_CHAT_MAIL = 'SEND_CHAT_MAIL';
-export const SET_CHAT_LOADING = 'SET_CHAT_LOADING';
-export const SET_MESSAGE_STATE = 'SET_MESSAGE_STATE';

@@ -13,7 +13,7 @@ export const getBusinessTextByCode = gql`
         text {
           value
         }
-        translations_key
+        translationsKey
         date
       }
     }

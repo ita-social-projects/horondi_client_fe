@@ -34,14 +34,14 @@ const FooterLists = () => {
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
-  const categoriesList = categories.map(({ _id, name }) => (
+  const categoriesList = categories.map(({ _id, name, translationsKey }) => (
     <div key={_id}>
       <Typography variant='subtitle2'>
         <Link
           className={styles.cardLink}
           to={`/${getCategoryURL(name)}?page=1&${countPerPage}=${quantityPerPage}`}
         >
-          {name[language].value}
+          {t(`${translationsKey}.name`)}
         </Link>
       </Typography>
     </div>

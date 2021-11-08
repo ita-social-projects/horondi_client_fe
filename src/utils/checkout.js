@@ -141,6 +141,14 @@ export const checkoutFormBtnValue = (values) =>
 
 export const courierInputLabels = () => [
   {
+    name: 'region',
+    label: i18next.t(`checkout.checkoutTextFields.region`)
+  },
+  {
+    name: 'district',
+    label: i18next.t(`checkout.checkoutTextFields.district`)
+  },
+  {
     name: 'city',
     label: i18next.t(`checkout.checkoutTextFields.city`)
   },

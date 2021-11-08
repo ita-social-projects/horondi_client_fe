@@ -9,9 +9,9 @@ import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
 
 import { useStyles } from './sidebar-items.style';
 
-const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) => {
+const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);
@@ -23,11 +23,7 @@ const SideBarItem = ({ category, handlerItem, models, name, mainItemStyles }) =>
   return (
     <>
       <li className={mainItemStyles}>
-        <ListItemText
-          button='true'
-          onClick={handleClick}
-          primary={name[i18n.language === 'ua' ? 0 : 1].value}
-        />
+        <ListItemText button='true' onClick={handleClick} primary={t(`${translationsKey}.name`)} />
         {isListOpen ? <RemoveIcon onClick={handleClick} /> : <AddIcon onClick={handleClick} />}
       </li>
 

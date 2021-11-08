@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useMutation } from '@apollo/client';
 import { TextField, Button, Snackbar } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
 import { formRegExp, CHAT_USER_DATA } from '../../../configs';
 import { useStyles } from '../chat.style';
-import { sendEmail } from '../../../redux/chat/chat.actions';
 import { handleHelperText } from '../../../utils/handle-active-massenger';
+import { sendEmailMutation } from '../operations/chat.mutations';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
-export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
-  const dispatch = useDispatch();
-  const style = useStyles({ visible, mailFormVisible, themeMode });
-  const { t } = useTranslation();
+export const ActiveMessenger = ({ themeMode, iconsVisible, mailFormVisible }) => {
+  const style = useStyles({ iconsVisible, mailFormVisible, themeMode });
+  const { t, i18n } = useTranslation();
 
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
   const defaultFirstName = get(userData, 'firstName', '');
   const defaultEmail = get(userData, 'email', '');
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const [user, setUser] = useState({
     ...CHAT_USER_DATA,
@@ -33,6 +35,7 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
   const [allFieldsValidated, setAllFieldsValidated] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const [open, setOpen] = useState(false);
+  const [sendEmail, { loading, error }] = useMutation(sendEmailMutation);
 
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
@@ -53,13 +56,14 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
 
   const sendHandler = () => {
     setAllFieldsValidated(false);
-    dispatch(
-      sendEmail({
+    sendEmail({
+      variables: {
         email,
         senderName: firstName,
-        text: message
-      })
-    );
+        text: message,
+        language
+      }
+    });
     handleClick();
   };
 
@@ -79,6 +83,8 @@ export const ActiveMessenger = ({ themeMode, visible, mailFormVisible }) => {
       setAllFieldsValidated(false);
     }
   }, [firstNameValidated, emailValidated, messageValidated]);
+
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <form className={style.formField}>

@@ -1,60 +1,54 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { TextField, Snackbar, Button } from '@material-ui/core';
+import { useMutation } from '@apollo/client';
 import { ActiveMessenger } from '../active-messenger';
-import { CHAT_USER_DATA } from '../../../../configs';
 
 const visible = true;
-
-const dispatch = jest.fn();
-const useState = jest.fn();
-const setState = jest.fn();
-
-const mockHandleMailFormVisible = jest.fn();
-const mockSetShouldValidate = jest.fn();
-const mockSetFieldValue = jest.fn();
-const mockHandlerSubmit = jest.fn();
+const themeMode = [true, () => ({})];
+const mockStore = {
+  userData: {},
+  language: 0
+};
+const mockHandleMailFormVisible = true;
+const loading = false;
 
 jest.mock('react-redux');
+jest.mock('@apollo/client');
 jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));
-jest.mock('../../../../redux/chat/chat.actions', () => ({
-  __esModule: true,
-  default: () => ({
-    handleSubmit: mockHandlerSubmit,
-    handleBlur: jest.fn(),
-    setFieldValue: mockSetFieldValue,
-    values: { firstName: 'Test', email: 'test@gmail.com', text: 'Want to ask sth...' },
-    errors: {},
-    setShouldValidate: mockSetShouldValidate
-  })
+jest.mock('react-router', () => ({
+  useLocation: () => ({ search: jest.fn() }),
+  useHistory: () => jest.fn()
 }));
+
+useSelector.mockImplementation(() => mockStore);
+useMutation.mockImplementation(() => [
+  jest.fn(),
+  {
+    loading,
+    error: null,
+    data: { sendEmailMutation: [{ addEmailQuestion: { question: { senderName: 'name' } } }] }
+  }
+]);
 
 let wrapper;
 
 describe('Active-messenger component test', () => {
   beforeEach(() => {
-    useState.mockImplementation(() => [false, setState]);
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockReturnValue({
-      language: '0',
-      userData: { firstName: 'Test', email: 'test@gmail.com', text: 'Want to ask sth...' }
-    });
-    wrapper = mount(
+    wrapper = shallow(
       <ActiveMessenger
         visible={visible}
-        HandleMailFormVisible={mockHandleMailFormVisible}
-        props={CHAT_USER_DATA}
+        mailFormVisible={mockHandleMailFormVisible}
+        themeMode={themeMode}
       />
     );
   });
 
   afterEach(() => {
-    wrapper.unmount();
     useSelector.mockClear();
-    useState.mockClear();
   });
 
-  it('Should render Active-messenger', () => {
+  it('Should render Active-Messenger', () => {
     expect(wrapper).toBeDefined();
   });
   it('Should test if TextField, Snackbar, Button exist', () => {
@@ -62,7 +56,7 @@ describe('Active-messenger component test', () => {
     expect(wrapper.find(Snackbar)).toBeDefined();
     expect(wrapper.find(Button)).toBeDefined();
   });
-  it('Should renders', () => {
+  it('Should renders component', () => {
     const wrapper = mount(
       <ActiveMessenger visible={visible} HandleMailFormVisible={mockHandleMailFormVisible} />
     );

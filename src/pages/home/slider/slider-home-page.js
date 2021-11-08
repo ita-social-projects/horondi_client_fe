@@ -23,7 +23,7 @@ const SliderHomePage = () => {
   const [imagesLinks, setImage] = useState([]);
   const [items, setItems] = useState([]);
   const styles = useStyles();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const { error, loading } = useQuery(getAllSlides, {
     onCompleted: (data) => {
@@ -63,12 +63,8 @@ const SliderHomePage = () => {
               <span>&#8594;</span>
             </Link>
             <div className={clsx(styles.sliderInner, SLIDER_HOME_PAGE.SLIDER)}>
-              <p className={styles.title}>
-                {item.title[i18n.language === 'ua' ? 0 : 1].value || ''}
-              </p>
-              <p className={styles.description}>
-                {item.description[i18n.language === 'ua' ? 0 : 1].value || ''}
-              </p>
+              <p className={styles.title}>{t(`${item.translations_key}.title`)}</p>
+              <p className={styles.description}>{t(`${item.translations_key}.description`)}</p>
             </div>
           </div>
         ))}

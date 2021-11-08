@@ -15,16 +15,13 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-item.style';
 import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 
-const NewsItem = ({ date, author, image, title, text, id, slug }) => {
+const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey }) => {
   const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const styles = useStyles();
-  if (!text[language].value) {
+  if (!t(`${translationsKey}.text`)) {
     return null;
   }
-
-  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
-  const dateLanguage = newsDateLanguageOptions[language];
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
@@ -32,7 +29,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           <CardMedia
             className={styles.media}
             image={IMG_URL + image}
-            title={title[language].value || t('newsDetail.noTitle')}
+            title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
@@ -49,7 +46,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {title[language].value || t('newsDetail.noTitle')}
+            {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'
@@ -58,7 +55,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {parse(text[language].value) || t('newsDetail.noText')}
+            {translationsKey ? parse(t(`${translationsKey}.text`)) : t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
@@ -69,12 +66,12 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
           </Link>
           <div className={styles.newsAuthorFooter}>
             <CardHeader
-              subheader={author.name[language].value || t('newsDetail.noAuthor')}
+              subheader={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
               data-cy='authorName'
               className={styles.authorName}
             />
             <Avatar
-              alt={author.name[language].value || t('newsDetail.noAuthor')}
+              alt={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
               src={IMG_URL + author.image}
               data-cy='authorPhoto'
             />

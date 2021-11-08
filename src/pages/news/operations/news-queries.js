@@ -5,6 +5,7 @@ export const getAllNews = gql`
     getAllNews {
       items {
         _id
+        translationsKey
         title {
           value
         }

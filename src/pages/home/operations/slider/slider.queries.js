@@ -18,6 +18,7 @@ export const getAllSlides = gql`
           lang
           value
         }
+        translations_key
       }
     }
   }

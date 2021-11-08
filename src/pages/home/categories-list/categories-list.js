@@ -18,21 +18,19 @@ import './categories-carousel.css';
 const CategoriesList = () => {
   const styles = useStyles();
   const { categories } = useContext(CategoriesContext);
-  const { i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
   const { quantityPerPage } = useSelector(({ Products }) => ({
     quantityPerPage: Products.countPerPage
   }));
 
-  const categoriesList = categories.map(({ _id, name, images }) => (
+  const categoriesList = categories.map(({ _id, name, images, translationsKey }) => (
     <CategoryItem
       key={_id}
       categoryUrl={`${getCategoryURL(name)}?${
         URL_QUERIES_NAME.categoryFilter
       }=${_id}&page=1&${countPerPage}=${quantityPerPage}`}
-      categoryName={name[language].value}
+      categoryName={t(`${translationsKey}.name`)}
       categoryImageUrl={images.large}
-      language={language}
     />
   ));
 

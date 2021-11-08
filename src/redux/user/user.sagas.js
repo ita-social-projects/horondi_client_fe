@@ -48,8 +48,6 @@ import {
   LANGUAGE,
   REDIRECT_TIMEOUT,
   RETURN_PAGE,
-  SNACKBAR_MESSAGE,
-  SNACKBAR_TYPES,
   USER_IS_BLOCKED,
   USER_TOKENS
 } from '../../configs';
@@ -63,13 +61,7 @@ import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../cart/c
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_ERROR } from '../../translations/user.translations';
-import {
-  setSnackBarMessage,
-  setSnackBarSeverity,
-  setSnackBarStatus
-} from '../snackbar/snackbar.actions';
 
-const { warning } = SNACKBAR_TYPES;
 const { pathToLogin, pathToProfile } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
@@ -236,9 +228,6 @@ export function* handleTokenCheck({ payload }) {
 
 export function* handleRefreshTokenInvalid() {
   yield call(handleUserLogout);
-  yield put(setSnackBarMessage(SNACKBAR_MESSAGE.tokenExpired));
-  yield put(setSnackBarSeverity(warning));
-  yield put(setSnackBarStatus(true));
   yield put(push(pathToLogin));
 }
 

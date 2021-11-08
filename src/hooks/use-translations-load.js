@@ -6,12 +6,18 @@ export default function useTranslationsLoad() {
   const { i18n } = useTranslation();
 
   useMemo(() => {
-    axios.get('http://localhost:5000/translations').then((response) => {
-      if (response.data) {
-        Object.keys(response.data).forEach((key) =>
-          i18n.addResourceBundle(key, 'translations', response.data[key])
-        );
-      }
-    });
+    axios
+      .get(
+        process.env.NODE_ENV === 'development'
+          ? process.env.REACT_APP_API_TRANSLATION_DEV
+          : process.env.REACT_APP_API_TRANSLATION_PROD
+      )
+      .then((response) => {
+        if (response.data) {
+          Object.keys(response.data).forEach((key) =>
+            i18n.addResourceBundle(key, 'translations', response.data[key])
+          );
+        }
+      });
   }, []);
 }

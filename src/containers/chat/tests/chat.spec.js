@@ -6,7 +6,7 @@ let wrapper;
 const useQueryData = {
   loading: false,
   error: false,
-  data: { getContactsForChat: [{}] }
+  data: { getContacts: [{}] }
 };
 
 jest.mock('react-redux');

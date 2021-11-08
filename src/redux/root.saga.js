@@ -2,7 +2,6 @@ import { all } from 'redux-saga/effects';
 import cartSaga from './cart/cart.sagas';
 import userSaga from './user/user.sagas';
 import commentsSaga from './comments/comments.sagas';
-import chatSaga from './chat/chat.sagas';
 import patternSaga from './pattern/pattern.sagas';
 import toastSaga from './toast/toast.sagas';
 import { constructorSaga } from './images-constructor/constructor.sagas';
@@ -14,7 +13,6 @@ export function* rootSaga() {
     toastSaga(),
     cartSaga(),
     commentsSaga(),
-    chatSaga(),
     patternSaga(),
     constructorSaga(),
     orderSaga()

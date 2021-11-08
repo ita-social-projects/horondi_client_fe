@@ -17,14 +17,14 @@ const BusinessPage = ({ match }) => {
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
 
-  const addressText = page?.text && parse(t(`${page.translations_key}.text`));
+  const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
   const styles = useStyles();
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.root}>
-      {page.title && <h1>{t(`${page.translations_key}.title`)}</h1>}
+      {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
       {addressText}
     </div>
   );

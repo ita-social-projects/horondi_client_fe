@@ -43,7 +43,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       categories?.map(({ category, models }) => (
         <SideBarItem
           category={category._id}
-          name={category.name}
+          translationsKey={category.translationsKey}
           mainItemStyles={styles.mainItem}
           key={category._id}
           models={models}

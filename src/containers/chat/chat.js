@@ -15,16 +15,14 @@ import ThemeContext from '../../context/theme-context';
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const [contacts, setContacts] = useState([]);
   const themeMode = useContext(ThemeContext);
 
   const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
-  const { loading, error } = useQuery(getContactsForChat, {
-    onCompleted: (data) => setContacts(data.getContacts.items)
-  });
+  const { loading, error, data } = useQuery(getContactsForChat);
   if (loading || error) return errorOrLoadingHandler(error, loading);
+  const contacts = data.getContacts.items;
 
   return (
     <>

@@ -23,26 +23,7 @@ describe('chat tests', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));
-
     wrapper = shallow(<Chat />);
     expect(wrapper).toBeDefined();
-  });
-
-  it('should cover other branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      loading: true
-    }));
-
-    wrapper = shallow(<Chat />);
-  });
-
-  it('should cover rest branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      error: {}
-    }));
-
-    wrapper = shallow(<Chat />);
   });
 });

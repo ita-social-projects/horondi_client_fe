@@ -20,6 +20,7 @@ export const getUserOrdersQuery = gql`
             }
           }
           product {
+            _id
             name {
               lang
               value

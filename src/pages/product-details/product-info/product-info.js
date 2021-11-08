@@ -50,15 +50,15 @@ const ProductInfo = ({ price, product }) => {
         />
         <Detail
           subtitle={t('product.productDescription.mainMaterial')}
-          description={t(`${mainMaterial.material.translations_key}.name`)}
+          description={t(`${mainMaterial.material.translationsKey}.name`)}
         />
         <Detail
           subtitle={t('product.productDescription.innerMaterial')}
-          description={t(`${innerMaterial.material.translations_key}.name`)}
+          description={t(`${innerMaterial.material.translationsKey}.name`)}
         />
         <Detail
           subtitle={t('product.productDescription.bottomMaterial')}
-          description={t(`${bottomMaterial.material.translations_key}.name`)}
+          description={t(`${bottomMaterial.material.translationsKey}.name`)}
         />
         {strapLengthInCm ? (
           <Detail

@@ -122,7 +122,7 @@ const CartItem = ({
               }
             >
               {t('cart.bottomMaterial')}:{' '}
-              {t(`${item.product.bottomMaterial.material.translations_key}.name`)}
+              {t(`${item.product.bottomMaterial.material.translationsKey}.name`)}
             </div>
           )}
         </div>

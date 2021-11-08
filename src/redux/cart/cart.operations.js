@@ -14,7 +14,7 @@ items {
     }
     bottomMaterial{
         material{
-          translations_key
+          translationsKey
           name{
               lang
               value

@@ -48,9 +48,5 @@ export const validationSchema = (deliveryType, t) =>
     house:
       (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
         deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-      Yup.string().min(1, t('error.house')).required(t('error.requiredField')),
-    flat:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-      Yup.string().min(1, t('error.flat'))
+      Yup.string().min(1, t('error.house')).required(t('error.requiredField'))
   });

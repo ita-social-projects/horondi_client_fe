@@ -39,7 +39,7 @@
         "delivery": "Delivery type",
         "total": "Total",
         "region": "Region *",
-        "district": "District"
+        "district": "District *"
     },
     "createOrder": "Create order",
     "payOrder": "Pay",

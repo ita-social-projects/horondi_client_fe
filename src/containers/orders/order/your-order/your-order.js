@@ -14,29 +14,26 @@ import { Loader } from '../../../../components/loader/loader';
 import { IMG_URL } from '../../../../configs';
 import { useStyles } from '../../cart/filled-cart/filled-cart.styles';
 
-const props = {
-  isSelfpickup: false
-};
+const isSelfpickup = false;
 
-const YourOrder = ({
-  currency,
-  checkoutFormBtnValue,
-  consentLink,
-  t,
-  currencySign,
-  totalPriceToPay,
-  values,
-  language,
-  styles,
-  isLightTheme
-}) => {
-  const { isSelfpickup } = props;
+const YourOrder = ({ ...props }) => {
   const btnStyles = useStyles();
-
   const { cartItems, cartLoading } = useSelector((state) => ({
     cartItems: state.Cart.list,
     cartLoading: state.Cart.loading
   }));
+  const {
+    currency,
+    checkoutFormBtnValue,
+    consentLink,
+    t,
+    currencySign,
+    totalPriceToPay,
+    values,
+    language,
+    styles,
+    isLightTheme
+  } = props;
 
   if (cartLoading) {
     return <Loader />;
@@ -106,7 +103,6 @@ const YourOrder = ({
           <Divider variant='fullWidth' />
         </>
       )}
-
       <Typography className={styles.checkoutYourOrderTitleData} style={{ margin: '20px 0' }}>
         {t('common.toPay')}:{' '}
         <div>

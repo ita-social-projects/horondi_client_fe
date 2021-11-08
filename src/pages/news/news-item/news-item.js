@@ -29,7 +29,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey 
           <CardMedia
             className={styles.media}
             image={IMG_URL + image}
-            title={t(`${translationsKey}.title`) || t('newsDetail.noTitle')}
+            title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
@@ -46,7 +46,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey 
             component='h2'
             data-cy='newsTitle'
           >
-            {t(`${translationsKey}.title`) || t('newsDetail.noTitle')}
+            {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
           </Typography>
           <Typography
             variant='body2'
@@ -55,7 +55,7 @@ const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey 
             className={styles.newsText}
             data-cy='newsText'
           >
-            {parse(t(`${translationsKey}.text`)) || t('newsDetail.noText')}
+            {translationsKey ? parse(t(`${translationsKey}.text`)) : t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
@@ -66,12 +66,12 @@ const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey 
           </Link>
           <div className={styles.newsAuthorFooter}>
             <CardHeader
-              subheader={t(`${translationsKey}.name`) || t('newsDetail.noAuthor')}
+              subheader={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
               data-cy='authorName'
               className={styles.authorName}
             />
             <Avatar
-              alt={t(`${translationsKey}.name`) || t('newsDetail.noAuthor')}
+              alt={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
               src={IMG_URL + author.image}
               data-cy='authorPhoto'
             />

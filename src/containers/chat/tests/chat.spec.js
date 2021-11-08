@@ -19,7 +19,7 @@ jest.mock('react', () => ({
 }));
 
 describe('chat tests', () => {
-  it('should render chat', () => {
+  it('Should render chat', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));

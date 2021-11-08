@@ -24,7 +24,7 @@ const BusinessPage = ({ match }) => {
 
   return (
     <div className={styles.root}>
-      {page.title && <h1>{t(`${page.translations_key}.title`)}</h1>}
+      {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
       {addressText}
     </div>
   );

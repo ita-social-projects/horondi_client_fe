@@ -1,3 +1,1 @@
-import YourOrder from './your-order';
-
-export default YourOrder;
+export { default } from './your-order';

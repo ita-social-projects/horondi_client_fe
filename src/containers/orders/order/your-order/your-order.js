@@ -66,35 +66,37 @@ const YourOrder = ({ ...props }) => {
       </Typography>
       <Divider variant='fullWidth' />
       <List gutterBottom>
-        {cartItems.map((item) => (
-          <ListItem key={item._id} alignItems='center'>
-            <div>
-              <Typography>x {item.quantity}</Typography>
-            </div>
-            <img
-              className={styles.itemImg}
-              src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
-              alt='product-img'
-            />
-            <ListItemText
-              primary={`${item.product.name[language].value}`}
-              secondary={
-                <div>
+        {cartItems
+          ? cartItems.map((item) => (
+            <ListItem key={item._id} alignItems='center'>
+              <div>
+                <Typography>x {item.quantity}</Typography>
+              </div>
+              <img
+                className={styles.itemImg}
+                src={`${IMG_URL}${item.product.images.primary.thumbnail} `}
+                alt='product-img'
+              />
+              <ListItemText
+                primary={`${item.product.name[language].value}`}
+                secondary={
                   <div>
-                    {t('product.productDescription.bottomMaterial')}:{' '}
-                    {item.product.bottomMaterial.material.name[language].value}
+                    <div>
+                      {t('product.productDescription.bottomMaterial')}:{' '}
+                      {item.product.bottomMaterial.material.name[language].value}
+                    </div>
+                    <div>
+                      {t('common.size')}: {item.options.size.name}
+                    </div>
                   </div>
-                  <div>
-                    {t('common.size')}: {item.options.size.name}
-                  </div>
-                </div>
-              }
-            />
-            <Typography style={{ fontWeight: 'bold' }}>
-              {item.price[currency].value} <FontAwesomeIcon icon={currencySign} />
-            </Typography>
-          </ListItem>
-        ))}
+                }
+              />
+              <Typography style={{ fontWeight: 'bold' }}>
+                {item.price[currency].value} <FontAwesomeIcon icon={currencySign} />
+              </Typography>
+            </ListItem>
+          ))
+          : null}
       </List>
       <Divider variant='fullWidth' />
       {isSelfpickup && (

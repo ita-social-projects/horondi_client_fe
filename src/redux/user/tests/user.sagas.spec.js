@@ -64,12 +64,7 @@ import {
 import routes from '../../../const/routes';
 import { getCartByUserId, mergeCartFromLSWithUserCart } from '../../cart/cart.operations';
 import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../../cart/cart.actions';
-import { SNACKBAR_MESSAGE, SNACKBAR_TYPES, USER_IS_BLOCKED } from '../../../configs';
-import {
-  setSnackBarMessage,
-  setSnackBarSeverity,
-  setSnackBarStatus
-} from '../../snackbar/snackbar.actions';
+import { USER_IS_BLOCKED } from '../../../configs';
 import { handleUserIsBlocked } from '../../../utils/user-helpers';
 import { AUTH_ERRORS } from '../../../const/error-messages';
 import { USER_ERROR } from '../../../translations/user.translations';
@@ -432,16 +427,13 @@ describe('user sagas tests', () => {
   it('should handle refresh token invalid', () =>
     expectSaga(handleRefreshTokenInvalid)
       .provide([[call(handleUserLogout)]])
-      .put(setSnackBarMessage(SNACKBAR_MESSAGE.tokenExpired))
-      .put(setSnackBarSeverity(SNACKBAR_TYPES.warning))
-      .put(setSnackBarStatus(true))
       .put(push(routes.pathToLogin))
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
+        expect(analysisPut).toHaveLength(1);
         expect(analysisCall).toHaveLength(1);
       }));
 

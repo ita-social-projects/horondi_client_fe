@@ -66,7 +66,7 @@ const Materials = () => {
   const styles = useStyles();
   const imagesForSlider = patterns.map((pattern, i) => (
     <div className={styles.sliderImage} key={pattern._id} data-src={patternImages[i]}>
-      <p className={styles.sliderText}>{t(`${pattern.translations_key}.name`)}</p>
+      <p className={styles.sliderText}>{t(`${pattern.translationsKey}.name`)}</p>
     </div>
   ));
 

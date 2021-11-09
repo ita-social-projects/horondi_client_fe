@@ -5,6 +5,7 @@ export const getAllModelsQuery = gql`
     getAllModels {
       items {
         _id
+        translationsKey
         category {
           name {
             value

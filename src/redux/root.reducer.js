@@ -5,7 +5,6 @@ import { errorReducer as Error } from './error/error.reducer';
 import Language from './language/language.reducer';
 import Products from './products/products.reducer';
 import { cartReducer as Cart } from './cart/cart.reducer';
-import { snackbarReducer as Snackbar } from './snackbar/snackbar.reducer';
 import Currency from './currency/currency.reducer';
 import Pattern from './pattern/pattern.reducer';
 import Constructor from './images-constructor/constructor.reducer';
@@ -21,7 +20,6 @@ export const rootReducer = (history) =>
     Toast,
     Products,
     Cart,
-    Snackbar,
     Currency,
     Pattern,
     Constructor,

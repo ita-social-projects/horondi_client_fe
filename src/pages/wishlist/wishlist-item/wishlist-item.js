@@ -83,7 +83,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
             {item.bottomMaterial && (
               <div className={styles.description}>
                 {t('wishlist.wishlistTitles.bottomMaterial')}:{' '}
-                {item.bottomMaterial.material.name[language].value}
+                {t(`${item.bottomMaterial.material.translationsKey}.name`)}
               </div>
             )}
           </div>

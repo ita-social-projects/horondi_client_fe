@@ -23,6 +23,7 @@ export const getProductById = gql`
         }
         mainMaterial {
           material {
+            translationsKey
             name {
               lang
               value
@@ -43,6 +44,7 @@ export const getProductById = gql`
         }
         innerMaterial {
           material {
+            translationsKey
             name {
               lang
               value
@@ -51,6 +53,7 @@ export const getProductById = gql`
         }
         bottomMaterial {
           material {
+            translationsKey
             _id
             name {
               lang

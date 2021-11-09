@@ -17,15 +17,14 @@ const NewsDetail = ({ match }) => {
 
   const styles = useStyles();
   const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   const article = data.getNewsById;
-  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
-  const dateLanguage = newsDateLanguageOptions[language];
+  const { translationsKey } = article;
 
-  if (!article.text[language].value) {
+  if (!t(`${translationsKey}.text`)) {
     return <h2>{t('newsDetail.change')}</h2>;
   }
 
@@ -33,7 +32,7 @@ const NewsDetail = ({ match }) => {
     <Card className={styles.container}>
       <CardContent>
         <Typography className={styles.ArticleTitle} gutterBottom variant='h2' component='h2'>
-          {article.title[language].value || t('newsDetail.noTitle')}
+          {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
         </Typography>
         <CardHeader
           subheader={new Date(parseInt(article.date)).toLocaleString(dateLanguage, TIME_OPTIONS)}
@@ -43,8 +42,8 @@ const NewsDetail = ({ match }) => {
           <CardMedia
             className={styles.media}
             image={IMG_URL + article.image}
-            title={article.title[language].value || t('newsDetail.noTitle')}
-            alt={article.title[language].value || t('newsDetail.noTitle')}
+            title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
+            alt={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
             component='div'
           />
         </div>
@@ -55,18 +54,18 @@ const NewsDetail = ({ match }) => {
           className={styles.newsText}
           id='fullText'
         >
-          {parse(article.text[language].value) || t('newsDetail.noText')}
+          {translationsKey ? parse(t(`${translationsKey}.text`)) : t('newsDetail.noText')}
         </Typography>
         <hr />
         <div className={styles.newsAuthorFooter}>
           <CardHeader
-            subheader={article.author.name[language].value || t('newsDetail.noAuthor')}
+            subheader={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
             id='newsAuthor'
           />
           <CardMedia
             className={styles.authorAvatar}
             image={IMG_URL + article.author.image}
-            title={article.title[language].value || t('newsDetail.noTitle')}
+            title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
             component='div'
             id='newsAuthorAvatar'
           />

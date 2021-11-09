@@ -60,7 +60,7 @@ const Contacts = ({ fromCheckout }) => {
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.schedule')}</span>
             <div className={styles.schedule}>
-              {t(`${contact.translations_key}.openHours`)
+              {t(`${contact.translationsKey}.openHours`)
                 .split('|')
                 .map((el) => (
                   <div key={el}>
@@ -71,7 +71,7 @@ const Contacts = ({ fromCheckout }) => {
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>{t('contacts.pageTitles.address')}</span>
-            <div className={styles.contactAddress}>{t(`${contact.translations_key}.address`)}</div>
+            <div className={styles.contactAddress}>{t(`${contact.translationsKey}.address`)}</div>
           </div>
           <div className={styles.contactsItem}>
             <span className={styles.contactName}>Email:</span>

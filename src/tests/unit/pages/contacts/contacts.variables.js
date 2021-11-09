@@ -31,7 +31,7 @@ export const mockRequest = [
               ],
               email: mockedEmail,
               link: { lat: '1', lon: '2' },
-              translations_key: '5fa034039a59a906f0610e37'
+              translationsKey: '5fa034039a59a906f0610e37'
             }
           ]
         }

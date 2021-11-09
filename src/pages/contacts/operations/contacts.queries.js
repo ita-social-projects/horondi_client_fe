@@ -17,7 +17,7 @@ export const getContacts = gql`
           lat
           lon
         }
-        translations_key
+        translationsKey
       }
     }
   }

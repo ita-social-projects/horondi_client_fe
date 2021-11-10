@@ -32,7 +32,7 @@ import {
   userNameInputLabels
 } from '../../../utils/checkout';
 import { getCurrencySign } from '../../../utils/currency';
-import { validationSchema } from '../../../validators/chekout';
+import { validationSchema } from '../../../validators/checkout';
 import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 import {
   clearSessionStorage,
@@ -142,7 +142,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
-                        {errors[field.name]}
+                        {t(errors[field.name])}
                       </div>
                     )}
                   </div>
@@ -164,7 +164,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
-                        {errors[field.name]}
+                        {t(errors[field.name])}
                       </div>
                     )}
                   </div>
@@ -208,7 +208,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 </Select>
                 {touched.paymentMethod && errors.paymentMethod && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>
-                    {errors.paymentMethod}
+                    {t(errors.paymentMethod)}
                   </div>
                 )}
               </FormControl>
@@ -230,7 +230,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 />
                 {touched.userComment && errors.userComment && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>
-                    {errors.userComment}
+                    {t(errors.userComment)}
                   </div>
                 )}
               </div>

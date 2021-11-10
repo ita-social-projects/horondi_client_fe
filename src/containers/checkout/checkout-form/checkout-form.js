@@ -32,7 +32,7 @@ import {
   userNameInputLabels
 } from '../../../utils/checkout';
 import { getCurrencySign } from '../../../utils/currency';
-import { validationSchema } from '../../../validators/chekout';
+import { validationSchema } from '../../../validators/checkout';
 import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 import {
   clearSessionStorage,
@@ -208,7 +208,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 </Select>
                 {touched.paymentMethod && errors.paymentMethod && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>
-                    {errors.paymentMethod}
+                    {t(errors.paymentMethod)}
                   </div>
                 )}
               </FormControl>

@@ -99,7 +99,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
           />
           {touched.city && errors.city && (
             <div data-cy={CY_CODE_ERR} className={styles.error}>
-              {errors.city}
+              {t(errors.city)}
             </div>
           )}
         </div>
@@ -151,7 +151,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
 
           {touched.courierOffice && errors.courierOffice && (
             <div data-cy={CY_CODE_ERR} className={styles.error}>
-              {errors.courierOffice}
+              {t(errors.courierOffice)}
             </div>
           )}
         </div>

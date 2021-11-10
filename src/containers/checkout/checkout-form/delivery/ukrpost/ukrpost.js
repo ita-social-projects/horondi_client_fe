@@ -118,7 +118,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
         />
         {touched.region && errors.region && (
           <div data-cy={CY_CODE_ERR} className={styles.error}>
-            {errors.region}
+            {t(errors.region)}
           </div>
         )}
       </div>
@@ -168,7 +168,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
         />
         {touched.district && errors.district && (
           <div data-cy={CY_CODE_ERR} className={styles.error}>
-            {errors.district}
+            {t(errors.district)}
           </div>
         )}
       </div>
@@ -218,7 +218,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
 
         {touched.city && errors.city && (
           <div data-cy={CY_CODE_ERR} className={styles.error}>
-            {errors.city}
+            {t(errors.city)}
           </div>
         )}
       </div>
@@ -273,7 +273,7 @@ const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
         />
         {touched.courierOffice && errors.courierOffice && (
           <div data-cy={CY_CODE_ERR} className={styles.error}>
-            {errors.courierOffice}
+            {t(errors.courierOffice)}
           </div>
         )}
       </div>

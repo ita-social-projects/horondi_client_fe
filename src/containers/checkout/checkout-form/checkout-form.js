@@ -142,7 +142,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
-                        {t(errors[field.name])}
+                        {errors[field.name]}
                       </div>
                     )}
                   </div>
@@ -164,7 +164,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                     />
                     {touched[field.name] && errors[field.name] && (
                       <div data-cy={CY_CODE_ERR} className={styles.error}>
-                        {t(errors[field.name])}
+                        {errors[field.name]}
                       </div>
                     )}
                   </div>
@@ -230,7 +230,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 />
                 {touched.userComment && errors.userComment && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>
-                    {t(errors.userComment)}
+                    {errors.userComment}
                   </div>
                 )}
               </div>

@@ -145,7 +145,7 @@ const Comments = ({ productId }) => {
                     disabled={!userData}
                     label={t(`product.comments.${name}`)}
                     error={!!errors[name]}
-                    helperText={handleHelperText(errors[name])}
+                    helperText={errors.text && t('common.reply.error')}
                     multiline={multiline}
                     rows={rows}
                     variant='outlined'

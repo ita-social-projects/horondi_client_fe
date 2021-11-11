@@ -10,7 +10,7 @@ const { pathToCategory, pathToMain } = routes;
 const PathBack = () => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const isLightTheme = useContext(ThemeContext);
+  const [isLightTheme] = useContext(ThemeContext);
 
   return (
     <div className={isLightTheme ? styles.whiteThemePath : styles.darkThemePath}>

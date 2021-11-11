@@ -21,7 +21,7 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
   }));
   const styles = useStyles();
   const dispatch = useDispatch();
-  const isLightTheme = useContext(ThemeContext);
+  const [isLightTheme] = useContext(ThemeContext);
   const { t } = useTranslation();
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);

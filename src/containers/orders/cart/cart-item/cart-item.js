@@ -54,7 +54,7 @@ const CartItem = ({
     [dispatch, changeCartItemUserQuantity]
   );
 
-  const isLightTheme = useContext(ThemeContext);
+  const [isLightTheme] = useContext(ThemeContext);
   const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
 
   const onDeleteItem = () => {

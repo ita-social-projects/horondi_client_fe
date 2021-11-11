@@ -33,7 +33,7 @@ const FilledCart = ({ items }) => {
     })
   );
 
-  const isLightTheme = useContext(ThemeContext);
+  const [isLightTheme] = useContext(ThemeContext);
   const currencySign = getCurrencySign(currency);
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
 

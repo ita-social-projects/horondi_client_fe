@@ -20,7 +20,6 @@ import useCommentValidation from '../../../hooks/use-comment-validation';
 import {
   handleArrowIcon,
   handleClassName,
-  handleHelperText,
   handleTextField,
   handleUserLogin
 } from '../../../utils/handle-comments';

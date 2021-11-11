@@ -20,7 +20,6 @@ import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
-
   const { setSnackBarMessage } = useContext(SnackBarContext);
   const styles = useStyles();
   const { userData, productId } = useSelector(({ User, Products }) => ({

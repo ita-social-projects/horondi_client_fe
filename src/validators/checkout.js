@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { deliveryTypes, formRegExp } from '../configs';
 
-export const validationSchema = (deliveryType, t) =>
+export const validationSchema = (deliveryType) =>
   Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'error.profile.firstName')

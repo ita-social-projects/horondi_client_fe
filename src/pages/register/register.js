@@ -12,7 +12,7 @@ import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
 import { IMG_ALT } from '../../const/images-alts';
-import { validationSchema } from '../../validators/register';
+import { regValidationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
 import ThemeContext from '../../context/theme-context';
 
@@ -52,7 +52,7 @@ export default function Register() {
     <Formik
       initialValues={REGISTER_USER_DATA}
       onSubmit={handleRegister}
-      validationSchema={validationSchema(t)}
+      validationSchema={regValidationSchema}
       validateOnBlur={shouldValidate}
       validateOnChange={shouldValidate}
     >

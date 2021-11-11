@@ -50,7 +50,7 @@ export default function RegisterForm({
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               fullWidth
               error={!!errors[name]}
-              helperText={errors[name] || ''}
+              helperText={t(errors[name])}
               className={`${styles.dataInput} ${
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}

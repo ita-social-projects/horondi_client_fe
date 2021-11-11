@@ -171,7 +171,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 ))}
               </div>
             </div>
-            <DeliveryType />
+            <DeliveryType resetForm={resetForm} values={values} />
             <Delivery
               deliveryType={deliveryType}
               language={language}

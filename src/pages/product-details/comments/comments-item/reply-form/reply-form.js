@@ -20,7 +20,6 @@ import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
-
   const { setSnackBarMessage } = useContext(SnackBarContext);
   const styles = useStyles();
   const { userData, productId } = useSelector(({ User, Products }) => ({
@@ -72,7 +71,7 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
           onChange={handleCommentChange}
           onBlur={handleBlur}
           error={!!errors.text}
-          helperText={errors.text || ''}
+          helperText={errors.text ? t('error.text') : ''}
           name={TEXT_VALUE}
           className={styles.input}
           label={t('common.reply.text')}

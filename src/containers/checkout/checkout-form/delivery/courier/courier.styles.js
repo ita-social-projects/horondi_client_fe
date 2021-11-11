@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   courierContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -19,6 +19,17 @@ export const useStyles = makeStyles(() => ({
   textField: {
     width: 600,
     marginBottom: 16,
+    '& label.Mui-focused': {
+      color: palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: palette.textColor
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.textColor
+      }
+    },
     '@media (max-width: 768px)': {
       width: '80%'
     }
@@ -26,6 +37,7 @@ export const useStyles = makeStyles(() => ({
   courierTitle: {
     fontWeight: 700,
     fontSize: 23,
+    color: palette.textColor,
     marginLeft: '10%',
     '@media (max-width: 920px)': {
       width: '100%'

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   btnWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -10,7 +10,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   radioBtn: {
-    fontSize: 14
+    fontSize: 14,
+    color: palette.textColor
   },
   radioBtnWrapper: {
     paddingBottom: 20,
@@ -19,18 +20,18 @@ export const useStyles = makeStyles((theme) => ({
   btnCreateOrder: {
     margin: '20px 0',
     borderRadius: 5,
-    color: theme.palette.button.normal.color,
-    backgroundColor: theme.palette.button.normal.backgroundColor,
+    color: palette.button.normal.color,
+    backgroundColor: palette.button.normal.backgroundColor,
     '&:hover': {
-      color: theme.palette.button.hover.color,
-      backgroundColor: theme.palette.button.hover.backgroundColor
+      color: palette.button.hover.color,
+      backgroundColor: palette.button.hover.backgroundColor
     }
   },
   btnCatalogue: {
     cursor: 'pointer',
     color: '#363636',
     '&:active': {
-      color: theme.palette.textColor
+      color: palette.textColor
     },
     '&:hover': {
       textDecoration: 'underline'
@@ -39,6 +40,7 @@ export const useStyles = makeStyles((theme) => ({
   deliveryTitle: {
     fontSize: 23,
     fontWeight: 700,
+    color: palette.textColor,
     marginLeft: '10%',
     marginBottom: 10,
     '@media (max-width: 920px)': {

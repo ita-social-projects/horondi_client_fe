@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   selfPickupContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -41,7 +41,8 @@ export const useStyles = makeStyles(() => ({
   scheduleTitle: {
     marginRight: '4%',
     fontWeight: 'bolder',
-    fontSize: 14
+    fontSize: 14,
+    color: palette.textColor
   },
   addressTitle: {
     margin: ' 0 0 7.5% 0',
@@ -50,7 +51,8 @@ export const useStyles = makeStyles(() => ({
   },
   scheduleItem: {
     fontWeight: 400,
-    fontSize: 14
+    fontSize: 14,
+    color: palette.textColor
   },
   scheduleData: {
     display: 'flex',

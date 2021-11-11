@@ -58,7 +58,6 @@
     "hideBtn": "Hide answers",
     "text": "Share your thoughts with others",
     "answers": "Count of answers",
-    "isAdmin": "Manager",
-    "error": "Field should contain from 2 to 700 characters"
+    "isAdmin": "Manager"
   }
 }

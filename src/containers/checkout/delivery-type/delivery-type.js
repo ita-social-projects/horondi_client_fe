@@ -10,7 +10,7 @@ import { deliveryTypes, SESSION_STORAGE } from '../../../configs';
 import { getFromSessionStorage } from '../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 
-const DeliveryType = ({ resetForm, values }) => {
+const DeliveryType = () => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -29,24 +29,6 @@ const DeliveryType = ({ resetForm, values }) => {
   }, [deliveryType]);
 
   const getDeliveryType = t('checkout.deliveryType', { returnObjects: true });
-
-  const handleChange = (targetValue) => {
-    resetForm({
-      values: {
-        ...values,
-        courierOffice: '',
-        city: '',
-        street: '',
-        flat: '',
-        region: '',
-        district: '',
-        regionId: '',
-        districtId: '',
-        cityId: ''
-      }
-    });
-    setDeliveryType(targetValue);
-  };
 
   const radioButtons = Object.entries(getDeliveryType).map((type) => (
     <FormControlLabel
@@ -68,7 +50,7 @@ const DeliveryType = ({ resetForm, values }) => {
             name='delivery-type'
             value={deliveryType}
             onClick={handleAddDeliveryType}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e) => setDeliveryType(e.target.value)}
           >
             {radioButtons}
           </RadioGroup>

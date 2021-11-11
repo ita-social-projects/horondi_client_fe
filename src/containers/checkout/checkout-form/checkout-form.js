@@ -110,6 +110,23 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
     resetForm({ values: getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM) });
   }, []);
 
+  useEffect(() => {
+    resetForm({
+      values: {
+        ...values,
+        courierOffice: '',
+        city: '',
+        street: '',
+        flat: '',
+        region: '',
+        district: '',
+        regionId: '',
+        districtId: '',
+        cityId: ''
+      }
+    });
+  }, [deliveryType]);
+
   return (
     <div>
       <form onSubmit={handleSubmit} className={styles.root}>
@@ -171,7 +188,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 ))}
               </div>
             </div>
-            <DeliveryType resetForm={resetForm} values={values} />
+            <DeliveryType />
             <Delivery
               deliveryType={deliveryType}
               language={language}

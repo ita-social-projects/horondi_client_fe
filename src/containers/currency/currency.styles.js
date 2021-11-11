@@ -10,6 +10,9 @@ export const useStyles = makeStyles(() => ({
       '&:hover': {
         position: 'static'
       }
+    },
+    '& .MuiInput-underline:after, & .MuiInput-underline:before': {
+      borderBottomColor: '#0000 !important'
     }
   }
 }));

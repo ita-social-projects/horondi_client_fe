@@ -230,7 +230,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 />
                 {touched.userComment && errors.userComment && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>
-                    {errors.userComment}
+                    {t(errors.userComment)}
                   </div>
                 )}
               </div>

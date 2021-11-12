@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
@@ -10,14 +10,12 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 import { CHAT_FACEBOOK_DATA } from '../../configs/index';
-import ThemeContext from '../../context/theme-context';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const themeMode = useContext(ThemeContext);
 
-  const style = useStyles({ themeMode, iconsVisible, mailFormVisible });
+  const style = useStyles({ iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
   const { loading, error, data } = useQuery(getContactsForChat);
@@ -53,7 +51,6 @@ export const Chat = () => {
                 <div style={styles}>
                   <MailForm
                     contacts={contacts}
-                    themeMode={themeMode}
                     cancelIconHandler={cancelIconHandler}
                     iconsVisible={iconsVisible}
                     mailFormVisible={mailFormVisible}

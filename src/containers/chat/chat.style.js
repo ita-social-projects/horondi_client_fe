@@ -87,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '40px'
     }
   }),
-  mailForm: ({ themeMode }) => ({
+  mailForm: () => ({
     borderRadius: '4px',
     position: 'fixed',
     display: 'flex',
@@ -99,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '320px',
     height: '600px',
     zIndex: 899,
-    background: themeMode ? 'white' : '#232323',
+    background: theme.palette.type === 'light' ? 'white' : '#232323',
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
       width: '70%',
@@ -147,9 +147,9 @@ export const useStyles = makeStyles((theme) => ({
     height: '15px',
     width: '15px'
   },
-  formField: ({ themeMode }) => ({
+  formField: () => ({
     ...flexCenter,
-    background: themeMode ? '#efefef' : '#232323',
+    background: theme.palette.type === 'light' ? '#efefef' : '#232323',
     flexDirection: 'column',
     width: '100%',
     height: '100%',

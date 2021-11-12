@@ -11,8 +11,8 @@ import { handleHelperText } from '../../../utils/handle-active-massenger';
 import { sendEmailMutation } from '../operations/chat.mutations';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
-export const ActiveMessenger = ({ themeMode, iconsVisible, mailFormVisible }) => {
-  const style = useStyles({ iconsVisible, mailFormVisible, themeMode });
+export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
+  const style = useStyles({ iconsVisible, mailFormVisible });
   const { t, i18n } = useTranslation();
 
   const { userData } = useSelector(({ User }) => ({

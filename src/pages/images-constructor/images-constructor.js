@@ -85,6 +85,7 @@ const ImagesConstructor = () => {
       {obj.name}
     </option>
   );
+
   const {
     loading: lodingAll,
     error: errorAll,
@@ -112,19 +113,19 @@ const ImagesConstructor = () => {
     _.map(values.bottoms, options, [values.bottoms, language])
   );
 
-  // const { loading: loadingId, error: errorId, data: dataId } = useQuery(getConstructorById, {
-  //   variables: {id : '618c2b5ae8a0004e70888d59'}});
-  // const constructorById = loadingId ? [] : dataId.getConstructorById;
+  const {
+    loading: loadingId,
+    error: errorId,
+    data: dataId
+  } = useQuery(getConstructorById, {
+    variables: { id: '6177dea5b856e5002477781e' }
+  });
 
-  const { isLoading, isError } = useIsLoadingOrError([lodingAll], [errorAll]);
+  const constructorById = loadingId ? [] : dataId.getConstructorById.patterns;
+
+  const { isLoading, isError } = useIsLoadingOrError([lodingAll, loadingId], [errorAll, errorId]);
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
-
-  // console.log(constructorById);
-
-  // if (loading || error) return errorOrLoadingHandler(error, loading);
-
-  // constuctorData.map(items => setModels(items));
 
   // const getConstructorById = (id) => {
 

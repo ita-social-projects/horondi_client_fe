@@ -9,14 +9,6 @@ export const getAllConstructors = gql`
           lang
           value
         }
-        model {
-          images {
-            large
-            medium
-            small
-            thumbnail
-          }
-        }
       }
     }
   }

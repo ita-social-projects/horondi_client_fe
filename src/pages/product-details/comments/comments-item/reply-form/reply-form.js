@@ -71,7 +71,7 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
           onChange={handleCommentChange}
           onBlur={handleBlur}
           error={!!errors.text}
-          helperText={errors.text ? t('error.replyCommentField') : ''}
+          helperText={errors.text && t('error.textLength')}
           name={TEXT_VALUE}
           className={styles.input}
           label={t('common.reply.text')}

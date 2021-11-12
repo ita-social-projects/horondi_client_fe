@@ -87,7 +87,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       height: '40px'
     }
   }),
-  mailForm: () => ({
+  mailForm: {
     borderRadius: '4px',
     position: 'fixed',
     display: 'flex',
@@ -114,7 +114,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       height: '80%',
       top: '15%'
     }
-  }),
+  },
   cancelIcon: {
     position: 'absolute',
     right: '1px',
@@ -147,14 +147,14 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '15px',
     width: '15px'
   },
-  formField: () => ({
+  formField: {
     ...flexCenter,
     background: palette.type === 'light' ? '#efefef' : '#232323',
     flexDirection: 'column',
     width: '100%',
     height: '100%',
     borderRadius: '4px'
-  }),
+  },
   btnSend: {
     marginBottom: '20px',
     background: palette.button.normal.backgroundColor,

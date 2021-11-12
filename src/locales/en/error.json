@@ -9,6 +9,7 @@
   "onlyLetter": "Field should contain only letters",
   "emailLength": "Field should contain from 8 to 60 characters",
   "wrongFormat": "Wrong format",
+  "textLength": "Field should contain from 2 to 700 characters",
 
   "profile": {
     "firstName": "Field should contain from 2 to 30 characters",

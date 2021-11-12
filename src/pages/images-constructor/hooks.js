@@ -29,6 +29,7 @@ export const useConstructor = () => {
     bottomPrice,
     sizePrice
   } = useSelector(selectConstructor);
+
   const { language, currency } = useSelector(selectLangAndCurrency);
 
   const defaultPrice = constructorDefaultPrice[currency];

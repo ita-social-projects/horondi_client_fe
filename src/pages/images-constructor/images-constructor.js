@@ -3,6 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
 import { mergeImages } from 'horondi_merge_images';
+import { useQuery } from '@apollo/client';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import { getAllConstructors } from './operations/getAllConstructors.queries';
+import { getConstructorById } from './operations/getConstructorById.queries';
+import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
 import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
@@ -24,6 +29,9 @@ const ImagesConstructor = () => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { values, images, prices, methods, language, currency } = useConstructor();
+  // const [constuctorData, setConstructorData] = useState([]);
+  // const [constructorDataId, setConstructorDataId] = useState([]);
+
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
@@ -77,7 +85,20 @@ const ImagesConstructor = () => {
       {obj.name}
     </option>
   );
-  const availableModels = useMemo(() => _.map(values.models, options, [values.models, language]));
+  const {
+    loading: lodingAll,
+    error: errorAll,
+    data: dataAll
+  } = useQuery(getAllConstructors, {
+    variables: { limit: 10, skip: 0 }
+  });
+  const constructorAll = lodingAll ? [] : dataAll.getAllConstructors.items;
+
+  // const availableModels = useMemo(() => _.map(values.models, options, [values.models, language]));
+
+  const availableModels2 = useMemo(() =>
+    _.map(constructorAll, options, [constructorAll, language])
+  );
 
   const availableBasics = useMemo(() => _.map(values.basics, options, [values.basics, language]));
 
@@ -91,6 +112,24 @@ const ImagesConstructor = () => {
     _.map(values.bottoms, options, [values.bottoms, language])
   );
 
+  // const { loading: loadingId, error: errorId, data: dataId } = useQuery(getConstructorById, {
+  //   variables: {id : '618c2b5ae8a0004e70888d59'}});
+  // const constructorById = loadingId ? [] : dataId.getConstructorById;
+
+  const { isLoading, isError } = useIsLoadingOrError([lodingAll], [errorAll]);
+
+  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+
+  // console.log(constructorById);
+
+  // if (loading || error) return errorOrLoadingHandler(error, loading);
+
+  // constuctorData.map(items => setModels(items));
+
+  // const getConstructorById = (id) => {
+
+  // };
+
   return (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
@@ -98,9 +137,9 @@ const ImagesConstructor = () => {
           <NativeSelect
             className={styles.mainHeader}
             name={constructorImageInput.MODEL}
-            onChange={(e) => methods.changeModel(e.target.value)}
+            onChange={(e) => getConstructorById(e.target.value)}
           >
-            {availableModels}
+            {availableModels2}
           </NativeSelect>
           <FormHelperText>{t('common.model')}</FormHelperText>
         </FormControl>

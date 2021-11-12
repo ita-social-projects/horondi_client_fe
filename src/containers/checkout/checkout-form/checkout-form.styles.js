@@ -9,6 +9,17 @@ export const useStyles = makeStyles(({ palette }) => ({
   formControl: {
     width: 600,
     marginBottom: 10,
+    '& label.Mui-focused': {
+      color: palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: palette.textColor
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.textColor
+      }
+    },
     '@media (max-width: 768px)': {
       flexDirection: 'column',
       width: '89%',
@@ -23,18 +34,19 @@ export const useStyles = makeStyles(({ palette }) => ({
       width: '100%'
     }
   },
-  title: ({ isLightTheme }) => ({
+  title: {
     fontSize: 23,
     fontWeight: 700,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff',
+    color: palette.textColor,
     '@media (max-width: 920px)': {
       width: '100%'
     }
-  }),
+  },
   contactInfoAdditional: {
     fontSize: 13,
     marginLeft: '2%',
     width: 600,
+    color: palette.textColor,
     '@media (max-width: 768px)': {
       flexDirection: 'column',
       width: '80%'
@@ -61,10 +73,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     marginLeft: '10%'
   },
-  checkoutFormContainer: ({ isLightTheme }) => ({
+  checkoutFormContainer: {
     display: 'flex',
     fontFamily: 'Open Sans',
-    color: isLightTheme ? '#242424' : '#FEFEFE',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     width: '100%',
@@ -72,7 +83,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 1150px)': {
       flexDirection: 'column'
     }
-  }),
+  },
   userInfoContainer: {
     width: '60%',
     '@media (max-width: 768px)': {
@@ -90,6 +101,17 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginLeft: '3%'
   },
   textField: {
+    '& label.Mui-focused': {
+      color: palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: palette.textColor
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.textColor
+      }
+    },
     width: 600,
     '@media (max-width: 768px)': {
       width: '100%'
@@ -97,6 +119,14 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   textAreaField: {
     width: 600,
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: palette.textColor
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.textColor
+      }
+    },
     '@media (max-width: 768px)': {
       width: '89%',
       margin: 0
@@ -142,17 +172,17 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '9% 0 7% 0',
     height: 50
   },
-  totalSumTitle: ({ isLightTheme }) => ({
+  totalSumTitle: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
     fontSize: 16,
     fontWeight: 400,
-    color: isLightTheme ? '#363636' : '#fff',
+    color: palette.textColor,
     margin: 0,
     width: '100%',
     height: 20
-  }),
+  },
   totalSumValue: {
     justifyContent: 'flex-end'
   },
@@ -204,16 +234,16 @@ export const useStyles = makeStyles(({ palette }) => ({
       transition: '0.1s'
     }
   },
-  checkoutTitle: ({ isLightTheme }) => ({
+  checkoutTitle: {
     fontSize: 30,
     fontWeight: 400,
     textAlign: 'center',
-    color: isLightTheme ? '#000000' : '#ffffff',
+    color: palette.textColor,
     width: '100%',
     '@media (max-width: 768px)': {
       width: '100%'
     }
-  }),
+  },
   checkoutYourOrderTitleData: {
     display: 'flex',
     flexDirection: 'column',
@@ -237,12 +267,12 @@ export const useStyles = makeStyles(({ palette }) => ({
   consentMessage: {
     fontSize: 12,
     letterSpacing: '.3px',
-    color: '#929292',
+    color: palette.textColor,
     lineHeight: '16px'
   },
 
   consentLink: {
-    color: '#929292',
+    color: palette.textColor,
     textDecoration: 'underline',
     '&:hover': {
       color: '#1976D2',

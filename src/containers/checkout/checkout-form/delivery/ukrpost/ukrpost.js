@@ -18,10 +18,8 @@ import {
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 
-const UkrPost = ({ isLightTheme, setFieldValue, errors, touched, values }) => {
-  const styles = useStyles({
-    isLightTheme
-  });
+const UkrPost = ({ setFieldValue, errors, touched, values }) => {
+  const styles = useStyles();
   const { t } = useTranslation();
 
   const {

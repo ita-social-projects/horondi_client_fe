@@ -7,7 +7,6 @@ import Courier from './courier';
 import UkrPost from './ukrpost';
 
 const Delivery = ({
-  isLightTheme,
   language,
   deliveryType,
   values,
@@ -17,13 +16,12 @@ const Delivery = ({
   setFieldValue
 }) => (
   <>
-    {deliveryType === deliveryTypes.SELFPICKUP && <SelfPickup isLightTheme={isLightTheme} />}
+    {deliveryType === deliveryTypes.SELFPICKUP && <SelfPickup />}
 
     {deliveryType === deliveryTypes.NOVAPOST && (
       <NovaPost
         setFieldValue={setFieldValue}
         language={language}
-        isLightTheme={isLightTheme}
         errors={errors}
         touched={touched}
         handleChange={handleChange}
@@ -34,7 +32,6 @@ const Delivery = ({
       deliveryType === deliveryTypes.UKRPOSTCOURIER) && (
       <Courier
         language={language}
-        isLightTheme={isLightTheme}
         deliveryType={deliveryType}
         values={values}
         errors={errors}
@@ -45,7 +42,6 @@ const Delivery = ({
     {deliveryType === deliveryTypes.UKRPOST && (
       <UkrPost
         language={language}
-        isLightTheme={isLightTheme}
         deliveryType={deliveryType}
         errors={errors}
         touched={touched}

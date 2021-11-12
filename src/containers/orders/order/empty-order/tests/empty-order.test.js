@@ -1,7 +1,5 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
-import { useDispatch, useSelector } from 'react-redux';
-
 import EmptyOrder from '../index';
 
 let wrapper;

@@ -43,10 +43,8 @@ import { checkoutPayMethod } from './const';
 
 const { pathToUserAgreement, pathToCart } = routes;
 
-const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
-  const styles = useStyles({
-    isLightTheme
-  });
+const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
+  const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
@@ -175,7 +173,6 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
             <Delivery
               deliveryType={deliveryType}
               language={language}
-              isLightTheme={isLightTheme}
               values={values}
               errors={errors}
               touched={touched}

@@ -43,12 +43,7 @@ const Checkout = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>
-          <CheckoutForm
-            isLightTheme={isLightTheme}
-            currency={currency}
-            cartItems={cartItems}
-            deliveryType={deliveryType}
-          />
+          <CheckoutForm currency={currency} cartItems={cartItems} deliveryType={deliveryType} />
         </div>
       )}
     </div>

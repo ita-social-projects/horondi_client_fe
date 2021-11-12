@@ -23,10 +23,10 @@ export const useStyles = makeStyles(({ palette }) => ({
       width: '100%'
     }
   },
-  title: ({ isLightTheme }) => ({
+  title: () => ({
     fontSize: 23,
     fontWeight: 700,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff',
+    color: palette.type === 'light' ? '#1D1C1C' : '#ffffff',
     '@media (max-width: 920px)': {
       width: '100%'
     }
@@ -61,10 +61,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     marginLeft: '10%'
   },
-  checkoutFormContainer: ({ isLightTheme }) => ({
+  checkoutFormContainer: () => ({
     display: 'flex',
     fontFamily: 'Open Sans',
-    color: isLightTheme ? '#242424' : '#FEFEFE',
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     width: '100%',
@@ -142,13 +142,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '9% 0 7% 0',
     height: 50
   },
-  totalSumTitle: ({ isLightTheme }) => ({
+  totalSumTitle: () => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
     fontSize: 16,
     fontWeight: 400,
-    color: isLightTheme ? '#363636' : '#fff',
+    color: palette.type === 'light' ? '#363636' : '#fff',
     margin: 0,
     width: '100%',
     height: 20
@@ -204,11 +204,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       transition: '0.1s'
     }
   },
-  checkoutTitle: ({ isLightTheme }) => ({
+  checkoutTitle: () => ({
     fontSize: 30,
     fontWeight: 400,
     textAlign: 'center',
-    color: isLightTheme ? '#000000' : '#ffffff',
+    color: palette.type === 'light' ? '#000000' : '#ffffff',
     width: '100%',
     '@media (max-width: 768px)': {
       width: '100%'

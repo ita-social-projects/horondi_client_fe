@@ -6,7 +6,7 @@ const flexCenter = {
   alignItems: 'center'
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
     background: iconsVisible ? '#E4B200' : 'black',
@@ -87,7 +87,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '40px'
     }
   }),
-  mailForm: ({ themeMode }) => ({
+  mailForm: () => ({
     borderRadius: '4px',
     position: 'fixed',
     display: 'flex',
@@ -99,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '320px',
     height: '600px',
     zIndex: 899,
-    background: themeMode ? 'white' : '#232323',
+    background: palette.type === 'light' ? 'white' : '#232323',
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
       width: '70%',
@@ -124,7 +124,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   contacts: {
     ...flexCenter,
-    background: theme.palette.backgroundColor,
+    background: palette.backgroundColor,
     width: '100%',
     height: '40%',
     fontSize: '1.1rem',
@@ -136,7 +136,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.3rem'
   },
   phoneNumbers: {
-    color: theme.palette.textColor
+    color: palette.textColor
   },
   mailTitle: {
     marginTop: '5%',
@@ -147,9 +147,9 @@ export const useStyles = makeStyles((theme) => ({
     height: '15px',
     width: '15px'
   },
-  formField: ({ themeMode }) => ({
+  formField: () => ({
     ...flexCenter,
-    background: themeMode ? '#efefef' : '#232323',
+    background: palette.type === 'light' ? '#efefef' : '#232323',
     flexDirection: 'column',
     width: '100%',
     height: '100%',
@@ -157,17 +157,17 @@ export const useStyles = makeStyles((theme) => ({
   }),
   btnSend: {
     marginBottom: '20px',
-    background: theme.palette.button.normal.backgroundColor,
+    background: palette.button.normal.backgroundColor,
     borderRadius: '5px',
     fontSize: '1.5em',
     padding: 10,
-    color: theme.palette.button.normal.color,
+    color: palette.button.normal.color,
     '& a': {
       color: 'inherit'
     },
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
     },
     '@media (max-width: 768px)': {
       fontSize: '1em',
@@ -180,7 +180,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '90%'
   },
   icon: {
-    color: theme.palette.white,
+    color: palette.white,
     fontSize: '35px',
     '@media (max-width: 768px)': {
       fontSize: '25px !important'

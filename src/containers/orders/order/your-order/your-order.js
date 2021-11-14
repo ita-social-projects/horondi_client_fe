@@ -12,12 +12,10 @@ import {
 } from '@material-ui/core';
 import { Loader } from '../../../../components/loader/loader';
 import { IMG_URL } from '../../../../configs';
-import { useStyles } from '../../cart/filled-cart/filled-cart.styles';
 
 const isSelfpickup = false;
 
 const YourOrder = ({ ...props }) => {
-  const btnStyles = useStyles();
   const { cartItems, cartLoading } = useSelector((state) => ({
     cartItems: state.Cart.list,
     cartLoading: state.Cart.loading
@@ -31,8 +29,7 @@ const YourOrder = ({ ...props }) => {
     totalPriceToPay,
     values,
     language,
-    styles,
-    isLightTheme
+    styles
   } = props;
 
   if (cartLoading) {
@@ -48,13 +45,7 @@ const YourOrder = ({ ...props }) => {
       <List className={styles.yourOrderList} gutterBottom>
         {cartItems
           ? cartItems.map((item) => (
-            <ListItem
-              style={{
-                height: '56px'
-              }}
-              key={item._id}
-              alignItems='center'
-            >
+            <ListItem className={styles.yourOrderListItem} key={item._id} alignItems='center'>
               <Typography component='div'>
                 <div>x {item.quantity}</div>
               </Typography>

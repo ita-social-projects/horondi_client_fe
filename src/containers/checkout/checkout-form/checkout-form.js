@@ -271,7 +271,6 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
               totalPriceToPay={totalPriceToPay}
               values={values}
               language={language}
-              isLightTheme={isLightTheme}
               styles={styles}
             />
           </Grid>

@@ -5,8 +5,7 @@ import { SCROLL_BAR_DATA } from '../../configs';
 import Sidebar from '../../containers/sidebar';
 
 const ScrollBar = ({ homeRef }) => {
-  const { i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState({});
 
@@ -59,9 +58,11 @@ const ScrollBar = ({ homeRef }) => {
     <>
       <div className={styles.scrollBar}>
         {SCROLL_BAR_DATA.map((item) => (
-          <a key={item.href} href={item.href} className={styles.scrollBarItem}>
-            <div className={styles.sectionPoint} data-id={item.href === currentSection.id} />
-            <span className={styles.sectionTitle}>{item.name[language]}</span>
+          <a key={item} href={item} className={styles.scrollBarItem}>
+            <div className={styles.sectionPoint} data-id={item === currentSection.id} />
+            <span className={styles.sectionTitle}>
+              {t(`common.scrollbar.${item.replace('#', '')}`)}
+            </span>
           </a>
         ))}
       </div>

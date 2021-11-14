@@ -48,7 +48,7 @@ const Comments = ({ productId }) => {
     onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
     onError: (err) => {
       errorOrLoadingHandler(err);
-      setSnackBarMessage(t('product.snackBar.error'), SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), SNACKBAR_TYPES.error);
     }
   });
 

@@ -25,7 +25,7 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
     onError: (err) => {
       errorOrLoadingHandler(err);
-      setSnackBarMessage(t('product.snackBar.error'), SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), SNACKBAR_TYPES.error);
     },
     onCompleted: () => setSnackBarMessage(t('product.snackBar.addedReply'))
   });

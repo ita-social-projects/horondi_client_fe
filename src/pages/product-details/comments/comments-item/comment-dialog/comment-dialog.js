@@ -29,7 +29,7 @@ const CommentDialog = ({
 
   const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
     onError: (err) => {
-      setSnackBarMessage(t('product.snackBar.error'), SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), SNACKBAR_TYPES.error);
       errorOrLoadingHandler(err);
     },
     onCompleted: () => setSnackBarMessage(t('product.snackBar.deleted'))

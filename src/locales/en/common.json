@@ -59,5 +59,18 @@
     "text": "Share your thoughts with others",
     "answers": "Count of answers",
     "isAdmin": "Manager"
+  },
+  "sortOptions": {
+    "popularity": "popularity",
+    "sortDesc": "price (high to low) ",
+    "sortAsc": "price (low to high) ",
+    "rate": "rate"
+  },
+  "scrollbar": {
+    "models": "Models",
+    "horondiStyle": "Horondi style",
+    "constructor": "Create by yourself",
+    "catalog": "Catalog",
+    "slider": "Slider"
   }
 }

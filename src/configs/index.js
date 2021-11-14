@@ -232,28 +232,7 @@ export const sideBarSubList = [
   }
 ];
 
-export const SCROLL_BAR_DATA = [
-  {
-    name: ['Слайдер', 'Slider'],
-    href: '#slider'
-  },
-  {
-    name: ['Каталог', 'Catalog'],
-    href: '#catalog'
-  },
-  {
-    name: ['Створи сам', 'Create by yourself'],
-    href: '#constructor'
-  },
-  {
-    name: ['Моделі', 'Models'],
-    href: '#models'
-  },
-  {
-    name: ['Стиль горонді', 'Horondi style'],
-    href: '#horondiStyle'
-  }
-];
+export const SCROLL_BAR_DATA = ['#slider', '#catalog', '#constructor', '#models', '#horondiStyle'];
 
 export const toastSettings = {
   autoClose: 3000,
@@ -306,49 +285,10 @@ export const FETCH_POLICY = 'no-cache';
 export const RETURN_PAGE = 'returnPage';
 
 export const SORT_BY_SELECT_OPTIONS = [
-  {
-    lang: [
-      {
-        lang: 'uk',
-        value: 'популярністю'
-      },
-      { lang: 'eng', value: 'popularity' }
-    ],
-    optionValue: {
-      name: 'popularity',
-      value: -1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'від дорогих до дешевих' },
-      { lang: 'eng', value: 'price (high to low) ' }
-    ],
-    optionValue: {
-      name: 'sortDesc',
-      value: -1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'від дешевих до дорогих' },
-      { lang: 'eng', value: 'price (low to high) ' }
-    ],
-    optionValue: {
-      name: 'sortAsc',
-      value: 1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'рейтингом' },
-      { lang: 'eng', value: 'rate' }
-    ],
-    optionValue: {
-      name: 'rate',
-      value: -1
-    }
-  }
+  { name: 'popularity', value: -1 },
+  { name: 'sortDesc', value: -1 },
+  { name: 'sortAsc', value: 1 },
+  { name: 'rate', value: -1 }
 ];
 
 export const DRAWER_TEMPORARY = 'temporary';

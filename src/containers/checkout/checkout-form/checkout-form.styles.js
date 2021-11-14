@@ -294,6 +294,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     overflowX: 'hidden',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
+<<<<<<< HEAD
       width: '0px'
     },
     '&::-webkit-scrollbar-thumb': {
@@ -301,6 +302,19 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '&::-webkit-scrollbar-track': {
       borderRadius: '10px'
+=======
+      width: '1px',
+      backgroundColor: 'inherit'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '10px',
+      backgroundColor: 'red'
+    },
+    '&::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.2)',
+      borderRadius: '10px',
+      backgroundColor: 'white'
+>>>>>>> aa0f2f41 (styled scrollbar)
     }
   },
   yourOrderListImg: {

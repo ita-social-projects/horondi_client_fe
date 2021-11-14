@@ -38,7 +38,13 @@ const YourOrder = ({ ...props }) => {
 
   return (
     <Paper className={styles.yourOrderContainer}>
-      <Typography margin={20} gutterBottom variant='h3' component='div'>
+      <Typography
+        margin={20}
+        gutterBottom
+        variant='h3'
+        component='div'
+        style={{ fontWeight: '600' }}
+      >
         {t('checkout.checkoutTitles.yourOrderTitle')}
       </Typography>
       <Divider variant='fullWidth' />

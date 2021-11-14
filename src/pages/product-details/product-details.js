@@ -16,7 +16,7 @@ import Comments from './comments';
 import ToastContainer from '../../containers/toast';
 import { getProductById } from './operations/product-details.queries';
 import { clearProductToSend, setProductToSend } from '../../redux/products/products.actions';
-import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
+import { selectCurrencyProductsCategoryFilter } from '../../utils/multiple.selectors';
 import routes from '../../const/routes';
 import ThemeContext from '../../context/theme-context';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';

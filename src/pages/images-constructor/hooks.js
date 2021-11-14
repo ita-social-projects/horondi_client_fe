@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectConstructor, selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
+import { selectConstructor, selectLangAndCurrency } from '../../utils/multiple.selectors';
 import {
   getConstructorModelById,
   getModelForConstructor,
@@ -36,7 +36,7 @@ export const useConstructor = () => {
   const basics = currentModel.eligibleOptions?.constructorBasic;
   const patterns = currentModel.eligibleOptions?.constructorPattern;
   const bottoms = currentModel.eligibleOptions?.constructorBottom;
-  const {sizes} = currentModel;
+  const { sizes } = currentModel;
 
   useEffect(() => {
     dispatch(getModelForConstructor());

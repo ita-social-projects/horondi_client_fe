@@ -18,11 +18,13 @@ const { pathToMain } = routes;
 
 const ThanksPage = () => {
   const router = useLocation();
-
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  const { language, currency, order, loading, paidOrderLoading, user } = useSelector(
-    ({ Language, Currency, Order, User }) => ({
-      language: Language.language,
+
+  const language = i18n.language === 'ua' ? 0 : 1;
+
+  const { currency, order, loading, paidOrderLoading, user } = useSelector(
+    ({ Currency, Order, User }) => ({
       currency: Currency.currency,
       order: Order.order,
       loading: Order.loading,
@@ -36,8 +38,6 @@ const ThanksPage = () => {
     isLightTheme
   });
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) {

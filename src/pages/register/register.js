@@ -19,7 +19,7 @@ import ThemeContext from '../../context/theme-context';
 export default function Register() {
   const styles = useStyles();
   const history = useHistory();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const handleRegister = (user) => {
@@ -34,8 +34,9 @@ export default function Register() {
     dispatch(registerUser({ user: userData, language }));
   };
 
-  const { language, hasRegistered, registerError, loading } = useSelector(({ Language, User }) => ({
-    language: Language.language,
+  const language = i18n.language === 'ua' ? 0 : 1;
+
+  const { hasRegistered, registerError, loading } = useSelector(({ User }) => ({
     loading: User.userLoading,
     registerError: User.error,
     hasRegistered: User.userRegistered

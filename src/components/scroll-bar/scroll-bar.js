@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { scrollBarStyles } from './scroll-bar.styles';
 import { SCROLL_BAR_DATA } from '../../configs';
 import Sidebar from '../../containers/sidebar';
-const ScrollBar = ({ homeRef }) => {
-  const language = useSelector(({ Language }) => Language.language);
 
+const ScrollBar = ({ homeRef }) => {
+  const { i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState({});
 

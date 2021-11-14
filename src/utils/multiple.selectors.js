@@ -1,15 +1,3 @@
-export const selectProductsIdCommentsLanguageUserData = ({ Language, User, Comments }) => ({
-  commentsLoading: Comments.commentsLoading,
-  comments: Comments.comments,
-  currentLimit: Comments.limit,
-  language: Language.language,
-  userData: User.userData,
-  userOrders: User.userOrders,
-  getCommentsLoading: Comments.getCommentsLoading,
-  commentsCount: Comments.commentsCount,
-  skip: Comments.skip
-});
-
 export const selectCurrencyProductsCategoryFilter = ({
   Currency,
   Products: { productToSend }
@@ -27,10 +15,6 @@ export const selectLanguageProductsUserWishlist = ({ Language, Products, User, C
 
 export const selectLocation = ({ router }) => ({
   location: router.location.pathname
-});
-
-export const selectHotItemFilter = ({ Products }) => ({
-  filterStatus: Products.filterStatus
 });
 
 export const selectConstructor = ({ Constructor }) => ({

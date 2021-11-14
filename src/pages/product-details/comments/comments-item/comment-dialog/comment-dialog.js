@@ -12,7 +12,7 @@ import { useStyles } from './comment-dialog.styles';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { deleteCommentMutation } from '../../operations/comments.queries';
 import Loader from '../../../../../components/loader';
-import { SNACKBAR_MESSAGE, SNACKBAR_TYPES } from '../../../../../configs';
+import { SNACKBAR_TYPES } from '../../../../../configs';
 import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const CommentDialog = ({
@@ -29,10 +29,10 @@ const CommentDialog = ({
 
   const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
     onError: (err) => {
-      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('product.snackBar.error'), SNACKBAR_TYPES.error);
       errorOrLoadingHandler(err);
     },
-    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.deleted)
+    onCompleted: () => setSnackBarMessage(t('product.snackBar.deleted'))
   });
 
   const handleDelete = async () => {

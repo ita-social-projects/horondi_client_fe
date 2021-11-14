@@ -9,13 +9,7 @@ import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-import {
-  commentFields,
-  formRegExp,
-  SNACKBAR_MESSAGE,
-  SNACKBAR_TYPES,
-  TEXT_VALUE
-} from '../../../configs';
+import { commentFields, formRegExp, SNACKBAR_TYPES, TEXT_VALUE } from '../../../configs';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import {
   handleArrowIcon,
@@ -51,10 +45,10 @@ const Comments = ({ productId }) => {
   });
 
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
-    onCompleted: () => setSnackBarMessage(SNACKBAR_MESSAGE.added),
+    onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
     onError: (err) => {
       errorOrLoadingHandler(err);
-      setSnackBarMessage(SNACKBAR_MESSAGE.error, SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('product.snackBar.error'), SNACKBAR_TYPES.error);
     }
   });
 

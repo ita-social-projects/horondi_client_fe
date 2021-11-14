@@ -284,7 +284,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '360px',
     position: 'fixed',
     padding: '32px 24px',
-    top: '210px',
     marginTop: '20px'
   },
   yourOrderList: {

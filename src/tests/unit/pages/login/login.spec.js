@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { useFormik } from 'formik';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { SnackBarContextProvider } from '../../../../context/snackbar-context';

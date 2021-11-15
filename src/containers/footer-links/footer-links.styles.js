@@ -3,14 +3,31 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   cardBody: ({ position }) => ({
     flex: position === 'center' ? 0 : 1,
-    padding: '25px',
+    padding: '50px 25px 25px',
     '@media screen and (max-width: 552px)': {
       width: '50%'
     }
   }),
+  logo: {
+    boxSizing: 'border-box',
+    letterSpacing: '0.2rem',
+    fontSize: '1.5rem',
+    color: '#ffffff',
+    textDecoration: 'none',
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    '@media (max-width: 768px)': {
+      display: 'flex',
+      justifyContent: 'center',
+      textAlign: 'center',
+      marginLeft: '0px',
+      fontSize: '1rem'
+    }
+  },
   iconsBox: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingTop: '50px'
   },
   cardTitle: {
     fontSize: '1.25rem',
@@ -21,7 +38,10 @@ export const useStyles = makeStyles(() => ({
   },
   iconsContainer: ({ position }) => ({
     display: 'flex',
-    justifyContent: position
+    justifyContent: position,
+    '@media screen and (max-width: 552px)': {
+      justifyContent: 'space-around'
+    }
   }),
   iconWrap: {
     margin: '0.5rem'

@@ -6,22 +6,21 @@ jest.mock('react-redux');
 
 let wrapper;
 
-const testSelector = (lightMode, language) => {
+const testSelector = (language) => {
   useSelector.mockImplementation(() => ({
-    lightMode,
     language
   }));
 };
 
 describe('Path back component tests', () => {
   it('should match snapshot', () => {
-    testSelector(true, 0);
+    testSelector(0);
     wrapper = shallow(<PathBack />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should cover other branches', () => {
-    testSelector(false, 1);
+    testSelector(1);
     wrapper = shallow(<PathBack />);
   });
 });

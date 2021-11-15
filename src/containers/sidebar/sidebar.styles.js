@@ -52,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   socialIconsStyles: {
-    color: '#000',
+    color: theme.palette.textColor,
     fontSize: '3rem',
     transition: 'all 0.5s',
     padding: '0.5rem',
@@ -60,8 +60,8 @@ export const useStyles = makeStyles((theme) => ({
     width: '40px !important',
     height: '40px',
     '&:hover': {
-      color: '#fff',
-      backgroundColor: '#000'
+      color: theme.palette.backgroundColor,
+      backgroundColor: theme.palette.textColor
     }
   },
   constructorItem: {

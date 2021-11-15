@@ -6,8 +6,8 @@ import { CY_CODE_ERR } from '../../../../../configs';
 import { courierInputLabels } from '../../../../../utils/checkout';
 import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 
-const Courier = ({ isLightTheme, language, values, handleChange, touched, errors }) => {
-  const styles = useStyles({ isLightTheme });
+const Courier = ({ language, values, handleChange, touched, errors }) => {
+  const styles = useStyles();
   const { t } = useTranslation();
 
   return (

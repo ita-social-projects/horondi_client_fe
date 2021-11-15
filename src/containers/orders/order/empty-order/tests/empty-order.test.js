@@ -1,5 +1,4 @@
 import React from 'react';
-
 import EmptyOrder from '../index';
 
 let wrapper;

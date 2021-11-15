@@ -1,5 +1,5 @@
 import { getCart, setCart, setUserCartItemSize, setCartItemSize } from '../cart.actions';
-import { SET_CART, GET_CART, SET_USER_CART_ITEM_SIZE, SET_CART_ITEM_SIZE } from '../cart.types';
+import { SET_CART, GET_CART } from '../cart.types';
 
 describe('setCart action test', () => {
   let type;

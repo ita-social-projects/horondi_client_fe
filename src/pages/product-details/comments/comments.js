@@ -20,7 +20,6 @@ import useCommentValidation from '../../../hooks/use-comment-validation';
 import {
   handleArrowIcon,
   handleClassName,
-  handleHelperText,
   handleTextField,
   handleUserLogin
 } from '../../../utils/handle-comments';
@@ -145,7 +144,7 @@ const Comments = ({ productId }) => {
                     disabled={!userData}
                     label={t(`product.comments.${name}`)}
                     error={!!errors[name]}
-                    helperText={handleHelperText(errors[name])}
+                    helperText={errors.text && t('error.text')}
                     multiline={multiline}
                     rows={rows}
                     variant='outlined'

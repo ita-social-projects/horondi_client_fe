@@ -53,9 +53,8 @@ export const useConstructor = () => {
     if (currentModel.eligibleOptions) {
       const { constructorBasic, constructorFrontPocket, constructorPattern, constructorBottom } =
         currentModel.eligibleOptions;
-
       dispatch(setModelLoading(true));
-      dispatch(getConstructorBasic(constructorBasic[0]._id));
+      // dispatch(getConstructorBasic(constructorBasic[0]._id));
       dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
       dispatch(getConstructorPattern(constructorPattern[0]._id));
       dispatch(getConstructorBottom(constructorBottom[0]._id));
@@ -67,10 +66,10 @@ export const useConstructor = () => {
     dispatch(getConstructorModelById(id));
   }, []);
 
-  const changeBasic = useCallback((id) => {
-    dispatch(setModelLoading(true));
-    dispatch(getConstructorBasic(id));
-  }, []);
+  // const changeBasic = useCallback((id) => {
+  //   dispatch(setModelLoading(true));
+  //   dispatch(getConstructorBasic(id));
+  // }, []);
 
   const changePattern = useCallback((id) => {
     dispatch(setModelLoading(true));
@@ -131,7 +130,7 @@ export const useConstructor = () => {
     methods: {
       dispatch,
       changeModel,
-      changeBasic,
+      // changeBasic,
       changePattern,
       changeBottom,
       changeSize

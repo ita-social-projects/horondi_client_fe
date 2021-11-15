@@ -4,68 +4,65 @@ export const getConstructorById = gql`
   query ($id: ID!) {
     getConstructorById(id: $id) {
       ... on Constructor {
+        __typename
         _id
-        model {
+        name {
+          lang
+          value
+        }
+        basics {
           _id
           name {
             lang
             value
           }
-        }
-        name {
-          lang
-          value
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+          available
+          additionalPrice {
+            currency
+            value
+          }
         }
         bottoms {
           _id
-        }
-        basics {
-          _id
+          name {
+            lang
+            value
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+          additionalPrice {
+            currency
+            value
+          }
+          available
         }
         patterns {
           _id
-        }
-        backs {
-          _id
-        }
-        straps {
-          _id
-        }
-        closures {
-          _id
-        }
-        pocketsWithRestrictions {
-          currentPocketWithPosition {
-            pocket {
-              _id
-              name {
-                lang
-                value
-              }
-              images {
-                thumbnail
-              }
-              additionalPrice {
-                value
-                currency
-              }
-            }
-            position {
-              _id
-              name {
-                lang
-                value
-              }
-            }
+          name {
+            lang
+            value
           }
-          otherPocketsWithAvailablePositions {
-            pocket {
-              _id
-            }
-            position {
-              _id
-            }
+          images {
+            large
+            medium
+            small
+            thumbnail
           }
+          additionalPrice {
+            currency
+            value
+          }
+          available
         }
       }
       ... on Error {

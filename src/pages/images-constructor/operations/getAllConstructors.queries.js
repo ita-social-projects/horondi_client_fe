@@ -9,6 +9,57 @@ export const getAllConstructors = gql`
           lang
           value
         }
+        basics {
+          _id
+          name {
+            lang
+            value
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+          available
+        }
+        bottoms {
+          _id
+          name {
+            lang
+            value
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+        }
+        patterns {
+          _id
+          name {
+            lang
+            value
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+          additionalPrice {
+            currency
+            value
+          }
+        }
+        model {
+          _id
+          name {
+            lang
+            value
+          }
+        }
       }
     }
   }

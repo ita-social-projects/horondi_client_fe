@@ -42,5 +42,23 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 920px)': {
       width: '100%'
     }
+  },
+  dataInput: {
+    width: 600,
+    marginBottom: '1%',
+    '& label.Mui-focused': {
+      color: palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: palette.textColor
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.textColor
+      }
+    },
+    '@media (max-width: 768px)': {
+      width: '80%'
+    }
   }
 }));

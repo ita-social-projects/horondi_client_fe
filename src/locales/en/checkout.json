@@ -29,6 +29,7 @@
         "lastName": "Last name *",
         "email": "Email *",
         "contactPhoneNumber": "Phone *",
+        "courier": "Courier organization *",
         "city": "City *",
         "house": "Building *",
         "street": "Street *",
@@ -60,8 +61,11 @@
         "novaPost": "Nova Poshta",
         "ukrPost": "Ukrposhta",
         "selfPickup": "Self pickup",
-        "novaPostCourier": "Nova Poshta Courier",
-        "ukrPostCourier": "Ukrposhta Courier"
+        "courier": "Courier"
+    },
+    "courierOrganization": {
+        "novaPostCourier": "Nova Poshta",
+        "ukrPostCourier": "Ukrposhta"
     },
     "schedule": {
         "monday": "Mon:  ",

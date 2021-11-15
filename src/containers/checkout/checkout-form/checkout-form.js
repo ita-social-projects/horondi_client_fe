@@ -111,20 +111,22 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
   }, []);
 
   useEffect(() => {
-    resetForm({
-      values: {
-        ...values,
-        courierOffice: '',
-        city: '',
-        street: '',
-        flat: '',
-        region: '',
-        district: '',
-        regionId: '',
-        districtId: '',
-        cityId: ''
-      }
-    });
+    if (deliveryType !== 'NOVAPOSTCOURIER' && deliveryType !== 'UKRPOSTCOURIER') {
+      resetForm({
+        values: {
+          ...values,
+          courierOffice: '',
+          city: '',
+          street: '',
+          flat: '',
+          region: '',
+          district: '',
+          regionId: '',
+          districtId: '',
+          cityId: ''
+        }
+      });
+    }
   }, [deliveryType]);
 
   return (
@@ -188,7 +190,7 @@ const CheckoutForm = ({ isLightTheme, currency, cartItems, deliveryType }) => {
                 ))}
               </div>
             </div>
-            <DeliveryType />
+            <DeliveryType setFieldValue={setFieldValue} errors={errors} touched={touched} />
             <Delivery
               deliveryType={deliveryType}
               language={language}

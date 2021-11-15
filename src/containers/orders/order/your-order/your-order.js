@@ -82,13 +82,7 @@ const YourOrder = ({ ...props }) => {
               />
               <Typography className={styles.yourOrderListItemPrice} component='div'>
                 <div>{item.price[currency].value}</div>
-                <div
-                  style={{
-                    width: '3px'
-                  }}
-                >
-                  {' '}
-                </div>
+                <div style={{ width: '3px' }} />
                 <div>
                   <FontAwesomeIcon icon={currencySign} />
                 </div>

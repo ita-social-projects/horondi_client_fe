@@ -242,16 +242,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%',
     '@media (max-width: 768px)': {
       width: '100%'
-  },
-  },
-  checkoutYourOrderTitleData: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 370,
-    marginLeft: '6%',
-    '@media (max-width: 768px)': {
-      width: '89%',
-      marginLeft: '10%'
     }
   },
   checkoutTitleLine: {
@@ -282,9 +272,15 @@ export const useStyles = makeStyles(({ palette }) => ({
   yourOrderContainer: {
     height: 'max-content',
     width: '360px',
-    position: 'fixed',
+    position: 'sticky',
+    top: '60px',
     padding: '32px 24px',
-    marginTop: '20px'
+    marginTop: '20px',
+    '@media (max-width: 1150px)': {
+      position: 'inherit',
+      marginLeft: '60px',
+      marginBottom: '20px'
+    }
   },
   yourOrderList: {
     marginTop: '10px',
@@ -293,6 +289,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '105%',
     overflowX: 'hidden',
     overflowY: 'scroll',
+    scrollBehavour: 'smooth',
     '&::-webkit-scrollbar': {
       width: '0px'
     },
@@ -407,6 +404,5 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '312px',
     left: '24px',
     margin: '16px 0px 0px 0px'
-  },
-}
-));
+  }
+}));

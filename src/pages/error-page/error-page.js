@@ -1,12 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { useTheme } from '@material-ui/styles';
 import { push } from 'connected-react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
-import ThemeContext from '../../context/theme-context';
 import * as errorPage from '../../locales/en/errorPage.json';
 
 const ErrorPage = () => {
@@ -17,8 +17,6 @@ const ErrorPage = () => {
     errorMessage: Error.error
   }));
 
-  const isLightTheme = useContext(ThemeContext);
-
   useEffect(() => {
     if (!errorMessage) {
       dispatch(push('/'));
@@ -26,6 +24,9 @@ const ErrorPage = () => {
   }, [dispatch, errorMessage]);
 
   const styles = useStyles();
+  const { palette } = useTheme();
+
+  const isLightTheme = palette.type === 'light';
 
   const errorImagePath = isLightTheme ? ERROR_PAGE_IMAGES.light : ERROR_PAGE_IMAGES.dark;
 

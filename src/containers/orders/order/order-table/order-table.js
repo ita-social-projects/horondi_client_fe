@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
@@ -13,7 +13,6 @@ import {
 
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
-import ThemeContext from '../../../../context/theme-context';
 
 const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantityLoading }) => {
   const { language } = useSelector(({ Language }) => ({
@@ -21,7 +20,6 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
   }));
   const styles = useStyles();
   const dispatch = useDispatch();
-  const isLightTheme = useContext(ThemeContext);
   const { t } = useTranslation();
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
@@ -88,18 +86,14 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
           />
         </>
       )}
-      <h2 className={isLightTheme ? styles.lightThemeTitleWrapper : styles.darkThemeTitleWrapper}>
-        {t('cart.titleFilled')}{' '}
-      </h2>
+      <h2 className={styles.titleWrapper}>{t('cart.titleFilled')} </h2>
       <div className={styles.table}>
         <Table>
           <TableHead>
             <TableRow
-              classes={
-                isLightTheme
-                  ? { root: styles.lightThemeTableHeader }
-                  : { root: styles.darkThemeTableHeader }
-              }
+              classes={{
+                root: styles.tableHeader
+              }}
             >
               <TableCell>{t('cart.product')}</TableCell>
               <TableCell>{t('cart.size')}</TableCell>

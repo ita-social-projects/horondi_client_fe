@@ -11,7 +11,7 @@ import { useStyles } from './sidebar-items.style';
 
 const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const styles = useStyles();
   const [isListOpen, setIsListOpen] = useState(false);

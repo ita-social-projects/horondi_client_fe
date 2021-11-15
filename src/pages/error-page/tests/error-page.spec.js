@@ -11,10 +11,18 @@ jest.mock('connected-react-router', () => ({
   push: 0
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
-  isLightTheme: true,
   errorMessage: { error: 'DEFAULT_ERROR' }
 }));
 

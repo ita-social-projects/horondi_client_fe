@@ -8,7 +8,6 @@ const dispatch = jest.fn();
 
 function testSelection(loading) {
   useSelector.mockImplementation(() => ({
-    isLightTheme: true,
     language: 0,
     currency: 0,
     list: [],

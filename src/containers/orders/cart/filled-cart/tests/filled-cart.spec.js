@@ -5,10 +5,6 @@ import FilledCart from '../filled-cart';
 
 jest.mock('react-redux');
 jest.mock('../filled-cart.styles.js', () => ({ useStyles: () => ({}) }));
-const mockUseContext = jest.fn().mockImplementation(() => ({
-  isLight: true
-}));
-React.useContext = mockUseContext;
 
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { scrollBarStyles } from './scroll-bar.styles';
 import { SCROLL_BAR_DATA } from '../../configs';
 import Sidebar from '../../containers/sidebar';
+
 const ScrollBar = ({ homeRef }) => {
   const language = useSelector(({ Language }) => Language.language);
 

@@ -16,7 +16,7 @@ const description = {
   letterSpacing: '0.0025em'
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   root: {
     width: '100%',
     justifyContent: 'space-between'
@@ -25,21 +25,13 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     lineHeight: '30px'
   },
-  lightThemeItemDescription: {
+  itemDescription: {
     ...description,
-    color: '#242424'
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
   },
-  darkThemeItemDescription: {
-    ...description,
-    color: '#FEFEFE'
-  },
-  lightThemeItemName: {
+  itemName: {
     ...name,
-    color: '#242424'
-  },
-  darkThemeItemName: {
-    ...name,
-    color: '#FEFEFE'
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
   },
   price: {
     textAlign: 'center'
@@ -51,13 +43,10 @@ export const useStyles = makeStyles((theme) => ({
   quantityWrapper: {
     width: '250px'
   },
-  lightThemeSelectSizeStyle: {
-    border: '1px solid rgba(91, 91, 91, 0.2)',
-    width: '71px',
-    height: '40px'
-  },
-  darkThemeSelectSizeStyle: {
-    border: '1px solid #5B5B5B',
+  selectSizeStyle: {
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: palette.type === 'light' ? 'rgba(91, 91, 91, 0.2)' : '#5B5B5B',
     width: '71px',
     height: '40px'
   },

@@ -28,8 +28,9 @@ const Delivery = ({
         values={values}
       />
     )}
-    {(deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER) && (
+    {(deliveryType === deliveryTypes.COURIER ||
+      deliveryType === deliveryTypes.UKRPOSTCOURIER ||
+      deliveryType === deliveryTypes.NOVAPOSTCOURIER) && (
       <Courier
         language={language}
         deliveryType={deliveryType}
@@ -37,6 +38,7 @@ const Delivery = ({
         errors={errors}
         touched={touched}
         handleChange={handleChange}
+        setFieldValue={setFieldValue}
       />
     )}
     {deliveryType === deliveryTypes.UKRPOST && (

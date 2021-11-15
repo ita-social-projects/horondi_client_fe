@@ -22,13 +22,17 @@ export const validationSchema = (deliveryType) =>
     courierOffice:
       (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) &&
       Yup.string().required('error.requiredField'),
+    courierOrganization:
+      deliveryType === deliveryTypes.COURIER && Yup.string().required('error.requiredField'),
     region:
       (deliveryType === deliveryTypes.UKRPOST ||
+        deliveryType === deliveryTypes.COURIER ||
         deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
         deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
       Yup.string().required('error.requiredField'),
     district:
       (deliveryType === deliveryTypes.UKRPOST ||
+        deliveryType === deliveryTypes.COURIER ||
         deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
         deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
       Yup.string().required('error.requiredField'),
@@ -39,14 +43,16 @@ export const validationSchema = (deliveryType) =>
         .max(50, 'error.profile.city')
         .required('error.requiredField'),
     street:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+      (deliveryType === deliveryTypes.COURIER ||
+        deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
         deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
       Yup.string()
         .min(2, 'error.streetLong')
         .max(100, 'error.streetLong')
         .required('error.requiredField'),
     house:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+      (deliveryType === deliveryTypes.COURIER ||
+        deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
         deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
       Yup.string().min(1, 'error.house').required('error.requiredField')
   });

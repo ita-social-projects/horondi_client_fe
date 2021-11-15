@@ -13,6 +13,7 @@ export const initialValues = {
   phoneNumber: '',
   paymentMethod: '',
   userComment: '',
+  courierOrganization: '',
   courierOffice: '',
   city: '',
   street: '',
@@ -42,6 +43,7 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
+    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -57,6 +59,7 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
+    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -72,6 +75,7 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
+    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -140,22 +144,6 @@ export const checkoutFormBtnValue = (values) =>
     : i18next.t(`checkout.payOrder`);
 
 export const courierInputLabels = () => [
-  {
-    name: 'region',
-    label: i18next.t(`checkout.checkoutTextFields.region`)
-  },
-  {
-    name: 'district',
-    label: i18next.t(`checkout.checkoutTextFields.district`)
-  },
-  {
-    name: 'city',
-    label: i18next.t(`checkout.checkoutTextFields.city`)
-  },
-  {
-    name: 'street',
-    label: i18next.t(`checkout.checkoutTextFields.street`)
-  },
   {
     name: 'house',
     label: i18next.t(`checkout.checkoutTextFields.house`)

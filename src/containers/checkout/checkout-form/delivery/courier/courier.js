@@ -62,6 +62,79 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
     getCitiesError,
     getStreetsError
   ]);
+
+  const handleRegionInputChange = (value, reason) => {
+    if (reason !== RESET || (reason === RESET && value)) {
+      setFieldValue('region', value);
+    }
+  };
+  const handleRegionChange = (value) => {
+    if (value) {
+      setFieldValue('region', value.REGION_UA);
+      setFieldValue('regionId', value.REGION_ID);
+      setFieldValue('district', '');
+      setFieldValue('city', '');
+      setFieldValue('courierOffice', '');
+    } else {
+      setFieldValue('region', '');
+      setFieldValue('regionId', '');
+    }
+    setFieldValue('district', '');
+    setFieldValue('city', '');
+    setFieldValue('street', '');
+    setFieldValue('house', '');
+    setFieldValue('flat', '');
+  };
+  const handleDistrictInputChange = (value, reason) => {
+    if (reason !== RESET || (reason === RESET && value)) {
+      setFieldValue('district', value);
+    }
+  };
+  const handleDistrictChange = (value) => {
+    if (value) {
+      setFieldValue('district', value.DISTRICT_UA);
+      setFieldValue('districtId', value.DISTRICT_ID);
+    } else {
+      setFieldValue('districtId', '');
+      setFieldValue('district', '');
+    }
+    setFieldValue('city', '');
+    setFieldValue('street', '');
+    setFieldValue('house', '');
+    setFieldValue('flat', '');
+  };
+  const handleCityInputChange = (value, reason) => {
+    if (reason !== RESET || (reason === RESET && value)) {
+      setFieldValue('city', value);
+    }
+  };
+  const handleCityChange = (value) => {
+    if (value) {
+      setFieldValue('city', value.CITY_UA);
+      setFieldValue('cityId', value.CITY_ID);
+    } else {
+      setFieldValue('cityId', '');
+      setFieldValue('city', '');
+    }
+    setFieldValue('street', '');
+    setFieldValue('house', '');
+    setFieldValue('flat', '');
+  };
+  const handleStreetInputChange = (value, reason) => {
+    if (reason !== RESET || (reason === RESET && value)) {
+      setFieldValue('street', value);
+    }
+  };
+  const handleStreetChange = (value) => {
+    if (value) {
+      setFieldValue('street', value.STREET_UA);
+    } else {
+      setFieldValue('street', '');
+    }
+    setFieldValue('house', '');
+    setFieldValue('flat', '');
+  };
+
   if (isError) return errorOrLoadingHandler(isError);
   return (
     <div className={styles.courierContainer}>
@@ -70,27 +143,11 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
         <Autocomplete
           name='region'
           onInputChange={(e, value, reason) => {
-            if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue('region', value);
-            }
+            handleRegionInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noRegion')}
           onChange={(event, value) => {
-            if (value) {
-              setFieldValue('region', value.REGION_UA);
-              setFieldValue('regionId', value.REGION_ID);
-              setFieldValue('district', '');
-              setFieldValue('city', '');
-              setFieldValue('courierOffice', '');
-            } else {
-              setFieldValue('region', '');
-              setFieldValue('regionId', '');
-            }
-            setFieldValue('district', '');
-            setFieldValue('city', '');
-            setFieldValue('street', '');
-            setFieldValue('house', '');
-            setFieldValue('flat', '');
+            handleRegionChange(value);
           }}
           options={ukrPoshtaRegions || []}
           inputValue={values.region}
@@ -123,23 +180,11 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
         )}
         <Autocomplete
           onInputChange={(e, value, reason) => {
-            if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue('district', value);
-            }
+            handleDistrictInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noDistrict')}
           onChange={(event, value) => {
-            if (value) {
-              setFieldValue('district', value.DISTRICT_UA);
-              setFieldValue('districtId', value.DISTRICT_ID);
-            } else {
-              setFieldValue('districtId', '');
-              setFieldValue('district', '');
-            }
-            setFieldValue('city', '');
-            setFieldValue('street', '');
-            setFieldValue('house', '');
-            setFieldValue('flat', '');
+            handleDistrictChange(value);
           }}
           disabled={!values.region}
           options={ukrPoshtaDistricts || []}
@@ -173,22 +218,11 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
         )}
         <Autocomplete
           onInputChange={(e, value, reason) => {
-            if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue('city', value);
-            }
+            handleCityInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noCity')}
           onChange={(event, value) => {
-            if (value) {
-              setFieldValue('city', value.CITY_UA);
-              setFieldValue('cityId', value.CITY_ID);
-            } else {
-              setFieldValue('cityId', '');
-              setFieldValue('city', '');
-            }
-            setFieldValue('street', '');
-            setFieldValue('house', '');
-            setFieldValue('flat', '');
+            handleCityChange(value);
           }}
           disabled={!values.district}
           options={ukrPoshtaCities || []}
@@ -222,19 +256,11 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
         )}
         <Autocomplete
           onInputChange={(e, value, reason) => {
-            if (reason !== RESET || (reason === RESET && value)) {
-              setFieldValue('street', value);
-            }
+            handleStreetInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noStreet')}
           onChange={(event, value) => {
-            if (value) {
-              setFieldValue('street', value.STREET_UA);
-            } else {
-              setFieldValue('street', '');
-            }
-            setFieldValue('house', '');
-            setFieldValue('flat', '');
+            handleStreetChange(value);
           }}
           disabled={!values.city}
           options={ukrPoshtaStreets || []}
@@ -276,6 +302,7 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               label={field.label}
               value={values[field.name]}
+              disabled={!values.street}
               onChange={handleChange}
               error={touched[field.name] && !!errors[field.name]}
             />

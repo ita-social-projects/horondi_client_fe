@@ -5,7 +5,8 @@ export const useStyles = makeStyles(() => ({
     flex: position === 'center' ? 0 : 1,
     padding: '50px 25px 25px',
     '@media screen and (max-width: 552px)': {
-      width: '50%'
+      width: '50%',
+      padding: '20px 25px 10px'
     }
   }),
   logo: {
@@ -27,7 +28,10 @@ export const useStyles = makeStyles(() => ({
   iconsBox: {
     display: 'flex',
     flexDirection: 'column',
-    paddingTop: '50px'
+    paddingTop: '50px',
+    '@media (max-width: 552px)': {
+      paddingTop: '20px'
+    }
   },
   cardTitle: {
     fontSize: '1.25rem',

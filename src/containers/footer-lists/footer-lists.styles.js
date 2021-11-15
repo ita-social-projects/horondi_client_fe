@@ -15,7 +15,7 @@ export const useStyles = makeStyles(() => ({
     '@media screen and (max-width: 552px)': {
       textAlign: 'center',
       width: '100%',
-      padding: '25px 25px 20px',
+      padding: '10px 25px',
       borderBottom: '1px solid #9d9d9d'
     }
   },
@@ -32,6 +32,15 @@ export const useStyles = makeStyles(() => ({
     fontSize: '12px',
     '&:hover': {
       color: '#ffffff'
+    }
+  },
+  contactsListContainer: {
+    display: 'flex',
+    '&>img': {
+      paddingRight: '18px'
+    },
+    '@media screen and (max-width: 552px)': {
+      justifyContent: 'center'
     }
   }
 }));

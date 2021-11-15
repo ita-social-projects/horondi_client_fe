@@ -1,11 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@material-ui/core/Typography';
 
 import { Link } from 'react-router-dom';
 
-import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import facebookIcon from '../../images/footer-icons/fb.svg';
+import finstagramIcon from '../../images/footer-icons/insta.svg';
+
 import { HORONDI_FB_LINK, HORONDI_INST_LINK, LOGO } from '../../configs';
 import { useStyles } from './footer-links.styles';
 
@@ -33,7 +34,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FontAwesomeIcon className={socialIconsStyles} icon={faFacebook} />
+            <img alt='Facebook' src={facebookIcon} />
           </a>
           <a
             className={styles.iconWrap}
@@ -41,7 +42,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FontAwesomeIcon className={socialIconsStyles} icon={faInstagram} />
+            <img alt='Instagram' src={finstagramIcon} />
           </a>
         </div>
       </div>

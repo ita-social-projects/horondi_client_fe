@@ -150,7 +150,7 @@ const CartItem = ({
         <div>
           <FontAwesomeIcon icon={currencySign} />
           {'\u00A0'}
-          {Math.round(item?.price[currency]?.value / inputValue)}
+          {Math.round(item?.price[currency]?.value)}
         </div>
       </TableCell>
       <TableCell className={styles.quantityWrapper}>
@@ -172,7 +172,7 @@ const CartItem = ({
             <div>
               <FontAwesomeIcon icon={currencySign} />
               {'\u00A0'}
-              {Math.round(item.price[currency].value)}
+              {Math.round(item.price[currency].value * inputValue)}
             </div>
           )}
           {!user && (

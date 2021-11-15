@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
@@ -8,7 +8,6 @@ import { getDeliveryType } from '../../redux/cart/cart.actions';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../const/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
-import ThemeContext from '../../context/theme-context';
 
 const { pathToThanks, pathToMain } = routes;
 
@@ -23,7 +22,6 @@ const Checkout = () => {
       order: Order.order
     })
   );
-  const isLightTheme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,9 +30,7 @@ const Checkout = () => {
 
   useEffect(() => () => dispatch(setIsOrderCreated(false)), [dispatch, isOrderCreated]);
 
-  const styles = useStyles({
-    isLightTheme
-  });
+  const styles = useStyles();
 
   return (
     <div className={styles.root}>
@@ -43,12 +39,7 @@ const Checkout = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>
-          <CheckoutForm
-            isLightTheme={isLightTheme}
-            currency={currency}
-            cartItems={cartItems}
-            deliveryType={deliveryType}
-          />
+          <CheckoutForm currency={currency} cartItems={cartItems} deliveryType={deliveryType} />
         </div>
       )}
     </div>

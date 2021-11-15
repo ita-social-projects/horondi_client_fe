@@ -37,7 +37,7 @@ const YourOrder = ({ ...props }) => {
   }
 
   return (
-    <Paper className={styles.yourOrderContainer}>
+    <Paper className={styles.yourOrderContainer} elevation={4}>
       <Typography
         margin={20}
         gutterBottom

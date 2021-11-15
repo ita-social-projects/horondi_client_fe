@@ -280,6 +280,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       position: 'inherit',
       marginLeft: '60px',
       marginBottom: '20px'
+    },
+    '&.MuiPaper-root': {
+      backgroundColor: 'inherit'
     }
   },
   yourOrderList: {
@@ -384,16 +387,11 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   yourOrderButton: {
     color: palette.button.normal.color,
-    backgroundColor: palette.button.normal.backgroundColor,
+    backgroundColor: palette.button.hover.backgroundColor,
     '&:hover': {
       color: palette.button.normal.color,
-      backgroundColor: palette.button.hover.backgroundColor
+      backgroundColor: palette.button.normal.backgroundColor
     },
-    // '&:hover': {
-    //   background: '#FEFEFE',
-    //   color: '#020202',
-    //   border: '1px solid #020202'
-    // },
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

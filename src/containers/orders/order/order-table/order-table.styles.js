@@ -26,14 +26,10 @@ const tableHeader = {
   }
 };
 
-export const useStyles = makeStyles((theme) => ({
-  lightThemeTitleWrapper: {
+export const useStyles = makeStyles(({ palette }) => ({
+  titleWrapper: {
     ...title,
-    color: '#242424'
-  },
-  darkThemeTitleWrapper: {
-    ...title,
-    color: '#FEFEFE'
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
   },
   root: {
     maxWidth: '1440px',
@@ -57,14 +53,13 @@ export const useStyles = makeStyles((theme) => ({
       overflowX: 'auto'
     }
   },
-  lightThemeTableHeader: {
+  tableHeader: {
     ...tableHeader,
-    borderTop: '1px solid rgba(91, 91, 91, 0.2)',
-    borderBottom: '1px solid rgba(91, 91, 91, 0.2)'
-  },
-  darkThemeTableHeader: {
-    ...tableHeader,
-    borderTop: '1px solid #5B5B5B',
-    borderBottom: '1px solid #5B5B5B'
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: palette.type === 'light' ? 'rgba(91, 91, 91, 0.2)' : '#5B5B5B',
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderBottomColor: palette.type === 'light' ? 'rgba(91, 91, 91, 0.2)' : '#5B5B5B'
   }
 }));

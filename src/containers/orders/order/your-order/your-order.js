@@ -52,9 +52,7 @@ const YourOrder = ({ ...props }) => {
         {cartItems
           ? cartItems.map((item) => (
             <ListItem className={styles.yourOrderListItem} key={item._id} alignItems='center'>
-              <Typography component='div'>
-                <div>x {item.quantity}</div>
-              </Typography>
+              <Typography component='div'>x {item.quantity}</Typography>
               <img
                 className={styles.yourOrderListImg}
                 src={`${IMG_URL}${item.product.images.primary.thumbnail} `}

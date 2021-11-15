@@ -10,6 +10,16 @@ jest.mock('react-redux');
 jest.mock('connected-react-router', () => ({
   push: 0
 }));
+
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 const mockStore = {
   currency: 0,
   lightMode: true

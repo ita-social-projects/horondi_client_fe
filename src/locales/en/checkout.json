@@ -48,8 +48,10 @@
     "checkoutAdditionalInfo": {
         "additionalInfo": "* Order will be shipped within 10 business days.",
         "consent": [
-            "Making order you agree with",
-            " terms and conditions"
+            "By confirming this order, I agree to HORONDI's ",
+            "Public Offer",
+            " and ",
+            "Privacy Policy"
         ],
         "noOneCity": "City not found",
         "noOneDepartment": "Department not found",

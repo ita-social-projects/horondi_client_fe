@@ -57,6 +57,12 @@ const ProfilePage = () => {
 
   const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
     const user = { firstName, lastName, email, phoneNumber, address };
+    Object.keys(address).forEach((key) => {
+      if (address[key] === null) {
+        address[key] = '';
+      }
+    });
+
     dispatch(updateUser({ user, id: userData._id, upload }));
     setShouldValidate(false);
   };

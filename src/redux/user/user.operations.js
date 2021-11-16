@@ -190,10 +190,10 @@ const resetPassword = async (data) => {
   return result?.data?.resetPassword;
 };
 
-const updateUserById = async ({ user, id, image }) => {
+const updateUserById = async ({ user, id, upload }) => {
   const updateUserByIdMutation = `
-     mutation updateUser($user: UserUpdateInput!, $id: ID!, $image: Upload){
-      updateUserById(user: $user, id: $id, image: $image) { 
+     mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
+      updateUserById(user: $user, id: $id, image: $upload) { 
         orders
         _id
         email
@@ -221,7 +221,7 @@ const updateUserById = async ({ user, id, image }) => {
     }
   `;
 
-  const result = await setItems(updateUserByIdMutation, { user, id, image });
+  const result = await setItems(updateUserByIdMutation, { user, id, upload });
 
   return result?.data?.updateUserById;
 };

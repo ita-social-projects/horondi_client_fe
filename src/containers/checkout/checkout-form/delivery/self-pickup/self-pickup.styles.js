@@ -42,17 +42,19 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginRight: '4%',
     fontWeight: 'bolder',
     fontSize: 14,
-    color: palette.textColor
+    marginTop: 10
   },
   addressTitle: {
-    margin: ' 0 0 7.5% 0',
-    fontWeight: 'bolder',
-    fontSize: 14
+    marginBottom: 18,
+    fontWeight: 400,
+    fontSize: 14,
+    color: palette.textColor
   },
   scheduleItem: {
     fontWeight: 400,
     fontSize: 14,
-    color: palette.textColor
+    color: palette.textColor,
+    marginTop: 10
   },
   scheduleData: {
     display: 'flex',

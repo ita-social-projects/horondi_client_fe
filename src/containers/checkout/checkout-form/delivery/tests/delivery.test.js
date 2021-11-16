@@ -1,6 +1,6 @@
 import React from 'react';
 import Delivery from '../delivery';
-import UkrpostAndCourier from '../ukrpostAndCourier';
+import UkrpostAndCourier from '../ukrpost-and-courier';
 import NovaPost from '../nova-post';
 import SelfPickup from '../self-pickup';
 

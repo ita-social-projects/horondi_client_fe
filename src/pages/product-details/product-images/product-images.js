@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import ImgsViewer from 'react-images-viewer';
 import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@material-ui/icons';
+import { useTheme } from '@material-ui/styles';
+
 import { useStyles } from './product-images.styles';
 import { getImage } from '../../../utils/imageLoad';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import ThemeContext from '../../../context/theme-context';
 
 const ProductImages = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +16,9 @@ const ProductImages = ({ images }) => {
   const [primaryImage, setPrimaryImage] = useState(0);
 
   const { t } = useTranslation();
+  const { palette } = useTheme();
 
-  const isLightTheme = useContext(ThemeContext);
+  const isLightTheme = palette.type === 'light';
 
   const initImages = useMemo(
     () => [images.primary.large, ...images.additional.map(({ large }) => large)],

@@ -2,7 +2,6 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
-
 export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
 export const HORONDI_FB_LINK = 'https://www.facebook.com/Horondi';
 export const HORONDI_INST_LINK = 'https://www.instagram.com/horondi';

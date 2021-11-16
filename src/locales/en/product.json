@@ -59,7 +59,6 @@
     "snackBar": {
         "added": "Your comment is successfully added",
         "addedReply": "Your answer is successfully added",
-        "deleted":  "Your comment is successfully deleted",
-        "error":  "Something went wrong"
+        "deleted":  "Your comment is successfully deleted"
     }
 }

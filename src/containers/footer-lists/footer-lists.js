@@ -5,6 +5,9 @@ import { useQuery } from '@apollo/client';
 
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import phoneNumberIcon from '../../images/footer-icons/phone.svg';
+import emailIcon from '../../images/footer-icons/email.svg';
+import locationIcon from '../../images/footer-icons/location.svg';
 
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
@@ -59,13 +62,18 @@ const FooterLists = () => {
 
   const contactsList = contacts.map((item) => (
     <div key={item._id}>
-      <div>
-        <Typography variant='subtitle2'>{item.phoneNumber}</Typography>
+      <div className={styles.contactsListContainer}>
+        <img alt='phone icon' src={phoneNumberIcon} />
+        <Typography className='phoneN' variant='subtitle2'>
+          {item.phoneNumber}
+        </Typography>
       </div>
-      <div>
+      <div className={styles.contactsListContainer}>
+        <img alt='email icon' src={emailIcon} />
         <Typography variant='subtitle2'>{item.email}</Typography>
       </div>
-      <div>
+      <div className={styles.contactsListContainer}>
+        <img alt='location icon' src={locationIcon} />
         <Typography variant='subtitle2'>{item.address[language].value}</Typography>
       </div>
     </div>

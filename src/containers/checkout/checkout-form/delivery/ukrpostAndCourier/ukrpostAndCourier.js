@@ -1,28 +1,36 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useStyles } from './courier.styles';
+import { useStyles } from './ukrpostAndCourier.styles';
 import { CY_CODE_ERR } from '../../../../../configs';
-import { courierInputLabels } from '../../../../../utils/checkout';
+import { courierInputLabels , POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
 import { RESET } from '../../../../../const/checkout';
 import {
   getUkrPoshtaRegions,
   getUkrPoshtaDistricts,
   getUkrPoshtaCities,
-  getUkrPoshtaStreets
-} from '../ukrpost/operations/get-ukrpost-data.queries';
+  getUkrPoshtaStreets,
+  getUkrPoshtaPostOffices
+} from './operations/get--ukrPost-address-data.queries';
 
 import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 
-const Courier = ({ language, values, handleChange, touched, errors, setFieldValue }) => {
+const UkrpostAndCourier = ({
+  deliveryType,
+  setFieldValue,
+  handleChange,
+  errors,
+  touched,
+  values,
+  language
+}) => {
   const styles = useStyles();
   const { t } = useTranslation();
-
   const {
     loading: getRegionsLoading,
     error: getRegionsError,
@@ -56,11 +64,21 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
     skip: !values.cityId
   });
 
+  const {
+    loading: getPostOfficesLoading,
+    error: getPostOfficesError,
+    data: { getUkrPoshtaPostofficesCityId: ukrPoshtaPostOffices } = []
+  } = useQuery(getUkrPoshtaPostOffices, {
+    variables: { id: values.cityId },
+    skip: !values.cityId
+  });
+
   const { isError } = useIsLoadingOrError([
     getRegionsError,
     getDistrictsError,
     getCitiesError,
-    getStreetsError
+    getStreetsError,
+    getPostOfficesError
   ]);
 
   const handleRegionInputChange = (value, reason) => {
@@ -120,9 +138,26 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
     setFieldValue('house', '');
     setFieldValue('flat', '');
   };
+  const handleCourierOfficeInputChange = (value, reason) => {
+    if (reason !== RESET || (reason === RESET && value)) {
+      setFieldValue('courierOffice', value);
+    }
+  };
   const handleStreetInputChange = (value, reason) => {
     if (reason !== RESET || (reason === RESET && value)) {
       setFieldValue('street', value);
+    }
+  };
+  const handleCourierOfficeChange = (value) => {
+    if (value) {
+      setFieldValue(
+        'courierOffice',
+        `${POST_OFFICE_NUMBER} ${value.POSTCODE}, ${
+          value?.STREET_UA_VPZ ? value?.STREET_UA_VPZ : ''
+        }`
+      );
+    } else {
+      setFieldValue('courierOffice', '');
     }
   };
   const handleStreetChange = (value) => {
@@ -136,9 +171,10 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
   };
 
   if (isError) return errorOrLoadingHandler(isError);
+
   return (
-    <div className={styles.courierContainer}>
-      <h3 className={styles.courierTitle}>{t('delivery.deliveryAddress')}</h3>
+    <div className={styles.addressContainer}>
+      <h3 className={styles.addressTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.inputWrapper}>
         <Autocomplete
           name='region'
@@ -157,7 +193,7 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
             <TextField
               {...params}
               error={touched.region && !!errors.region}
-              label={`${t('delivery.region')} *`}
+              label={t('checkout.checkoutTextFields.region')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -195,7 +231,7 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
             <TextField
               {...params}
               error={touched.district && !!errors.district}
-              label={`${t('delivery.district')} *`}
+              label={t('checkout.checkoutTextFields.district')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -233,7 +269,7 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
             <TextField
               {...params}
               error={touched.city && !!errors.city}
-              label={t('delivery.city')}
+              label={t('checkout.checkoutTextFields.city')}
               variant={TEXT_FIELD_VARIANT.OUTLINED}
               InputProps={{
                 ...params.InputProps,
@@ -254,68 +290,117 @@ const Courier = ({ language, values, handleChange, touched, errors, setFieldValu
             {t(errors.city)}
           </div>
         )}
-        <Autocomplete
-          onInputChange={(e, value, reason) => {
-            handleStreetInputChange(value, reason);
-          }}
-          noOptionsText={t('delivery.noStreet')}
-          onChange={(event, value) => {
-            handleStreetChange(value);
-          }}
-          disabled={!values.city}
-          options={ukrPoshtaStreets || []}
-          inputValue={values.street}
-          getOptionLabel={(option) => option?.STREET_UA || ''}
-          className={styles.dataInput}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              error={touched.street && !!errors.street}
-              label={t('delivery.street')}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {getStreetsLoading && (
-                      <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                    )}
-                    {params.InputProps.endAdornment}
-                  </>
-                )
+        {deliveryType === 'UKRPOST' ? (
+          <>
+            <Autocomplete
+              onInputChange={(e, value, reason) => {
+                handleCourierOfficeInputChange(value, reason);
               }}
+              noOptionsText={t('delivery.noDepartment')}
+              onChange={(event, value) => {
+                handleCourierOfficeChange(value);
+              }}
+              disabled={!values.city}
+              options={ukrPoshtaPostOffices || []}
+              inputValue={values.courierOffice}
+              getOptionLabel={(option) =>
+                `${POST_OFFICE_NUMBER} ${option?.POSTCODE}, ${
+                  option?.STREET_UA_VPZ ? option?.STREET_UA_VPZ : ''
+                }` || ''
+              }
+              className={styles.dataInput}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={touched.courierOffice && !!errors.courierOffice}
+                  label={t('checkout.checkoutTextFields.department')}
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {getPostOfficesLoading && (
+                          <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                        )}
+                        {params.InputProps.endAdornment}
+                      </>
+                    )
+                  }}
+                />
+              )}
             />
-          )}
-        />
-        {touched.street && errors.street && (
-          <div data-cy={CY_CODE_ERR} className={styles.error}>
-            {t(errors.street)}
-          </div>
-        )}
-        {courierInputLabels(language).map((field) => (
-          <div key={field.name}>
-            <TextField
-              id='standard-start-adornment'
-              data-cy={field.name}
-              name={field.name}
-              className={styles.textField}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              label={field.label}
-              value={values[field.name]}
-              disabled={!values.street}
-              onChange={handleChange}
-              error={touched[field.name] && !!errors[field.name]}
-            />
-            {touched[field.name] && errors[field.name] && (
-              <div className={styles.error} data-cy={CY_CODE_ERR}>
-                {t(errors[field.name])}
+            {touched.courierOffice && errors.courierOffice && (
+              <div data-cy={CY_CODE_ERR} className={styles.error}>
+                {t(errors.courierOffice)}
               </div>
             )}
-          </div>
-        ))}
+          </>
+        ) : (
+          <>
+            <Autocomplete
+              onInputChange={(e, value, reason) => {
+                handleStreetInputChange(value, reason);
+              }}
+              noOptionsText={t('delivery.noStreet')}
+              onChange={(event, value) => {
+                handleStreetChange(value);
+              }}
+              disabled={!values.city}
+              options={ukrPoshtaStreets || []}
+              inputValue={values.street}
+              getOptionLabel={(option) => option?.STREET_UA || ''}
+              className={styles.dataInput}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={touched.street && !!errors.street}
+                  label={t('checkout.checkoutTextFields.street')}
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {getStreetsLoading && (
+                          <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
+                        )}
+                        {params.InputProps.endAdornment}
+                      </>
+                    )
+                  }}
+                />
+              )}
+            />
+            {touched.street && errors.street && (
+              <div data-cy={CY_CODE_ERR} className={styles.error}>
+                {t(errors.street)}
+              </div>
+            )}
+            {courierInputLabels(language).map((field) => (
+              <div key={field.name}>
+                <TextField
+                  id='standard-start-adornment'
+                  data-cy={field.name}
+                  name={field.name}
+                  className={styles.textField}
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                  label={field.label}
+                  value={values[field.name]}
+                  disabled={!values.street}
+                  onChange={handleChange}
+                  error={touched[field.name] && !!errors[field.name]}
+                />
+                {touched[field.name] && errors[field.name] && (
+                  <div className={styles.error} data-cy={CY_CODE_ERR}>
+                    {t(errors[field.name])}
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
 };
 
-export default Courier;
+export default UkrpostAndCourier;

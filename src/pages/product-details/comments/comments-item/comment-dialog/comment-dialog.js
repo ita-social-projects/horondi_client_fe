@@ -60,7 +60,7 @@ const CommentDialog = ({
         </DialogContent>
         <DialogActions>
           {deleteCommentLoading && (
-            <div className={styles.loader}>
+            <div className={styles.loader} data-testid='deleteCommentLoader'>
               <Loader width={20} height={20} heightWrap={40} />
             </div>
           )}

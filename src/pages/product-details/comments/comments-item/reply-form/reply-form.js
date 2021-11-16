@@ -76,6 +76,7 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
           name={TEXT_VALUE}
           className={styles.input}
           label={t('common.reply.text')}
+          data-testid='replyForm'
         />
         <div className={styles.btnContainer}>
           {addReplyLoading && (

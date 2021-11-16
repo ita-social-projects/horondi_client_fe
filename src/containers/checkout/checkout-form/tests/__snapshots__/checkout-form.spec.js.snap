@@ -88,7 +88,6 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
           deliveryType="NOVAPOSTCOURIER"
           errors={Object {}}
           handleChange={[Function]}
-          isLightTheme={true}
           language={1}
           setFieldValue={[Function]}
           touched={Object {}}

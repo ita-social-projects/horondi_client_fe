@@ -23,6 +23,15 @@ jest.mock('../product-details.styles', () => ({
   useStyles: () => ({ container: '' })
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 describe('Product details test', () => {
   let wrapper;
 

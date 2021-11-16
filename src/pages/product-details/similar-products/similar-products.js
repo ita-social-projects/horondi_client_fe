@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
@@ -11,7 +11,6 @@ import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
-import ThemeContext from '../../../context/theme-context';
 import { getFilteredProductsQuery } from '../../product-list-page/operations/product-list.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 
@@ -27,12 +26,9 @@ const SimilarProducts = ({ cartList, product }) => {
     onCompleted: (data) => setSimilarProducts(data.getProducts.items)
   });
 
-  const [isLightTheme] = useContext(ThemeContext);
-
   const { t } = useTranslation();
 
   const currencySign = getCurrencySign(currency);
-  const titleClass = isLightTheme ? styles.lightThemeTitle : styles.darkThemeTitle;
   let imagesList;
 
   if (error || loading) return errorOrLoadingHandler(error, loading);
@@ -74,7 +70,7 @@ const SimilarProducts = ({ cartList, product }) => {
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
-            <h2 className={titleClass}>{t('product.similarItems.title')}</h2>
+            <h2 className={styles.title}>{t('product.similarItems.title')}</h2>
           </div>
           <Carousel
             className={styles.carousel}

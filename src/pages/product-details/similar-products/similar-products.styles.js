@@ -20,12 +20,8 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
     paddingBottom: '25px'
   },
-  lightThemeTitle: {
+  title: {
     ...title,
-    color: '#242424'
-  },
-  darkThemeTitle: {
-    ...title,
-    color: '#FEFEFE'
+    color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE'
   }
 }));

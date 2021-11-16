@@ -4,8 +4,8 @@ import Typography from '@material-ui/core/Typography';
 
 import { Link } from 'react-router-dom';
 
-import facebookIcon from '../../images/footer-icons/fb.svg';
-import finstagramIcon from '../../images/footer-icons/insta.svg';
+import facebookIcon from '../../images/footer-icons/facebook.svg';
+import instagramIcon from '../../images/footer-icons/instagram.svg';
 
 import { HORONDI_FB_LINK, HORONDI_INST_LINK, LOGO } from '../../configs';
 import { useStyles } from './footer-links.styles';
@@ -42,7 +42,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img alt='Instagram' src={finstagramIcon} />
+            <img alt='Instagram' src={instagramIcon} />
           </a>
         </div>
       </div>

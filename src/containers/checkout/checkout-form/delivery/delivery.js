@@ -3,8 +3,7 @@ import React from 'react';
 import SelfPickup from './self-pickup';
 import { deliveryTypes } from '../../../../configs';
 import NovaPost from './nova-post';
-import Courier from './courier';
-import UkrPost from './ukrpost';
+import UkrpostAndCourier from './ukrpostAndCourier';
 
 const Delivery = ({
   language,
@@ -29,27 +28,17 @@ const Delivery = ({
       />
     )}
     {(deliveryType === deliveryTypes.COURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER ||
-      deliveryType === deliveryTypes.NOVAPOSTCOURIER) && (
-      <Courier
-        language={language}
+      deliveryType === deliveryTypes.UKRPOST ||
+      deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+      deliveryType === deliveryTypes.UKRPOSTCOURIER) && (
+      <UkrpostAndCourier
         deliveryType={deliveryType}
-        values={values}
+        setFieldValue={setFieldValue}
+        handleChange={handleChange}
         errors={errors}
         touched={touched}
-        handleChange={handleChange}
-        setFieldValue={setFieldValue}
-      />
-    )}
-    {deliveryType === deliveryTypes.UKRPOST && (
-      <UkrPost
-        language={language}
-        deliveryType={deliveryType}
-        errors={errors}
-        touched={touched}
-        handleChange={handleChange}
-        setFieldValue={setFieldValue}
         values={values}
+        language={language}
       />
     )}
   </>

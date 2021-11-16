@@ -47,7 +47,9 @@ const ProfilePage = () => {
   const validationSchema = Yup.object(
     Object.fromEntries(
       Object.keys(PROFILE_USER_DATA).map((item) => {
-        let fieldSchema = Yup.string().matches(formRegExp[item], t(`error.profile.${item}`));
+        let fieldSchema = Yup.string()
+          .nullable()
+          .matches(formRegExp[item], t(`error.profile.${item}`));
         REQUIRED_USER_FIELDS.includes(item) &&
           (fieldSchema = fieldSchema.required(t(`error.profile.${item}`)));
         return [item, fieldSchema];

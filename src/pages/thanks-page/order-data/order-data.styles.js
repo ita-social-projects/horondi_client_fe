@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
-  tableCell: ({ isLightTheme }) => ({
+export const useStyles = makeStyles(({ palette }) => ({
+  tableCell: () => ({
     textAlign: 'center',
     width: '25%',
-    color: !isLightTheme ? '#ffffffff' : '#363636',
+    color: palette.type === 'light' ? '#363636' : '#ffffff',
     fontSize: 15,
     fontWeight: 500,
-    borderTop: isLightTheme ? '1px solid #636262' : '1px solid #ffffffff',
-    borderBottom: isLightTheme ? '1px solid #636262' : '1px solid #ffffffff'
+    borderTop: palette.type === 'light' ? '1px solid #636262' : '1px solid #ffffff',
+    borderBottom: palette.type === 'light' ? '1px solid #636262' : '1px solid #ffffff'
   }),
   titleWrapper: {
     display: 'flex',
@@ -20,9 +20,9 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'flex-end',
     minHeight: 40
   },
-  thunksInfoTitle: ({ isLightTheme }) => ({
+  thunksInfoTitle: () => ({
     fontSize: 19,
-    color: !isLightTheme ? '#ffffff' : '#000000',
+    color: palette.type === 'light' ? '#000000' : '#ffffff',
     fontWeight: 500,
     alignSelf: 'flex-start'
   }),
@@ -31,7 +31,7 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column'
   },
-  tableHeader: ({ isLightTheme }) => ({
+  tableHeader: () => ({
     width: '100%',
     paddingBottom: 10,
     paddingTop: 10,
@@ -40,32 +40,32 @@ export const useStyles = makeStyles(() => ({
       textAlign: 'center'
     }
   }),
-  result: ({ isLightTheme }) => ({
+  result: () => ({
     width: '100%',
-    borderBottom: isLightTheme ? '1px solid #636262' : '1px solid #ffffffff',
+    borderBottom: palette.type === 'light' ? '1px solid #636262' : '1px solid #ffffffff',
     display: 'flex',
     marginBottom: '5%',
     padding: '2% 0 2% 0'
   }),
 
-  resultTitle: ({ isLightTheme }) => ({
+  resultTitle: () => ({
     width: '50%',
-    color: !isLightTheme ? '#ffffffff' : '#363636',
+    color: palette.type === 'light' ? '#363636' : '#ffffff',
     fontSize: 16,
     fontWeight: 600,
     textAlign: 'start',
     paddingLeft: '8%'
   }),
-  resultStatus: ({ isLightTheme }) => ({
+  resultStatus: () => ({
     width: '25%',
-    color: !isLightTheme ? '#ffffffff' : '#363636',
+    color: palette.type === 'light' ? '#363636' : '#ffffff',
     fontSize: 16,
     fontWeight: 600,
     textAlign: 'center'
   }),
-  resultTotalSum: ({ isLightTheme }) => ({
+  resultTotalSum: () => ({
     width: '25%',
-    color: !isLightTheme ? '#ffffffff' : '#343434',
+    color: palette.type === 'light' ? '#343434' : '#ffffff',
     fontSize: 16,
     fontWeight: 600,
     textAlign: 'center'

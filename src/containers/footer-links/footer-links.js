@@ -1,10 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Typography from '@material-ui/core/Typography';
 
-import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
+import { Link } from 'react-router-dom';
+
+import facebookIcon from '../../images/footer-icons/facebook.svg';
+import instagramIcon from '../../images/footer-icons/instagram.svg';
+
+import { HORONDI_FB_LINK, HORONDI_INST_LINK, LOGO } from '../../configs';
 import { useStyles } from './footer-links.styles';
 
 const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
@@ -13,6 +16,11 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
 
   return (
     <div className={styles.cardBody}>
+      <Typography variant='h5'>
+        <Link to='/' className={styles.logo}>
+          {LOGO}
+        </Link>
+      </Typography>
       <div className={styles.iconsBox}>
         {showTitle && (
           <div className={styles.cardTitle}>
@@ -26,7 +34,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FontAwesomeIcon className={socialIconsStyles} icon={faFacebook} />
+            <img alt='Facebook' src={facebookIcon} />
           </a>
           <a
             className={styles.iconWrap}
@@ -34,7 +42,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <FontAwesomeIcon className={socialIconsStyles} icon={faInstagram} />
+            <img alt='Instagram' src={instagramIcon} />
           </a>
         </div>
       </div>

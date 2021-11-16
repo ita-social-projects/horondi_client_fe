@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
@@ -14,7 +14,6 @@ import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../const/routes';
-import ThemeContext from '../../../../context/theme-context';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();
@@ -33,7 +32,6 @@ const FilledCart = ({ items }) => {
     })
   );
 
-  const isLightTheme = useContext(ThemeContext);
   const currencySign = getCurrencySign(currency);
   const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
 
@@ -63,34 +61,20 @@ const FilledCart = ({ items }) => {
             <div className={styles.promoWrapper}>
               <TextField
                 InputProps={{
-                  className: isLightTheme ? styles.lightThemePromoInput : styles.darkThemePromoInput
+                  className: styles.promoInput
                 }}
                 placeholder={t('cart.promoPlaceHolder')}
               />
-              <Button
-                variant='contained'
-                className={
-                  isLightTheme ? styles.lightThemePromoButton : styles.darkThemePromoButton
-                }
-              >
+              <Button variant='contained' className={styles.promoButton}>
                 {t('cart.applyPromoCode')}
               </Button>
               <Link to={pathToCategory}>
-                <Button
-                  variant='contained'
-                  className={
-                    isLightTheme ? styles.lightThemeShoppingButton : styles.darkThemeShoppingButton
-                  }
-                >
+                <Button variant='contained' className={styles.shoppingButton}>
                   {t('cart.continue')}
                 </Button>
               </Link>
             </div>
-            <div
-              className={
-                isLightTheme ? styles.lightThemeTotalWrapper : styles.darkThemeTotalWrapper
-              }
-            >
+            <div className={styles.totalWrapper}>
               <div className={styles.totalPrice}>
                 <span>{t('cart.totalPrice')}</span>
               </div>
@@ -98,12 +82,7 @@ const FilledCart = ({ items }) => {
                 <FontAwesomeIcon icon={currencySign} /> {totalPrice}
               </div>
               <Link to={pathToCheckout}>
-                <Button
-                  variant='contained'
-                  className={
-                    isLightTheme ? styles.lightThemeOrdersButton : styles.darkThemeOrdersButton
-                  }
-                >
+                <Button variant='contained' className={styles.ordersButton}>
                   {t('cart.checkout')}
                 </Button>
               </Link>

@@ -2,10 +2,10 @@
 
 exports[`Path back component tests should match snapshot 1`] = `
 <div
-  className="makeStyles-whiteThemePath-1"
+  className="makeStyles-path-1"
 >
   <div
-    className="makeStyles-pathLine-3"
+    className="makeStyles-pathLine-2"
   >
     <Link
       to="/"

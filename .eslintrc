@@ -45,7 +45,7 @@
     "semi-style": ["error", "last"],
     "no-var": "warn",
     "no-unused-vars": [
-      1,
+      2,
       {
         "vars": "all",
         "args": "none",

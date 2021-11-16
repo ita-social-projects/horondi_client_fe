@@ -12,6 +12,7 @@ const button = {
   letterSpacing: '0.0125em',
   textTransform: 'uppercase'
 };
+
 const lightThemeButtonHover = {
   '&:hover': {
     backgroundColor: '#3F3F3F'
@@ -54,22 +55,18 @@ const totalWrapper = {
   }
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     padding: 15
   },
-  lightThemePromoInput: {
+  promoInput: {
     '&, &::placeholder': {
       ...promoInput,
-      color: 'rgba(36, 36, 36, 0.75)'
+      color: palette.type === 'light' ? 'rgba(36, 36, 36, 0.75)' : '#FEFEFE'
     }
-  },
-  darkThemePromoInput: {
-    ...promoInput,
-    color: '#FEFEFE'
   },
   promoWrapper: {
     display: 'flex',
@@ -78,55 +75,32 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  lightThemePromoButton: {
+  promoButton: {
     ...button,
-    background: '#020202',
-    color: '#FEFEFE',
-    ...lightThemeButtonHover
+    background: palette.type === 'light' ? '#020202' : '#FFFFFF',
+    color: palette.type === 'light' ? '#FEFEFE' : '#242424',
+    '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
   },
-  darkThemePromoButton: {
-    ...button,
-    background: '#FFFFFF',
-    color: '#242424',
-    ...darkThemeButtonHover
-  },
-  lightThemeShoppingButton: {
+  shoppingButton: {
     ...button,
     width: '298px',
     height: '44px',
-    border: '1px solid #020202',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: palette.type === 'light' ? '#020202' : '#FEFEFE',
     marginTop: '18px',
-    background: '#FEFEFE',
-    color: '#242424',
-    ...darkThemeButtonHover
+    background: palette.type === 'light' ? '#FEFEFE' : '#242424',
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE',
+    '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
   },
-  darkThemeShoppingButton: {
-    ...button,
-    width: '298px',
-    height: '44px',
-    border: '1px solid #FEFEFE',
-    marginTop: '18px',
-    background: '#242424',
-    color: '#FEFEFE',
-    ...darkThemeButtonHover
-  },
-  lightThemeOrdersButton: {
+  ordersButton: {
     ...button,
     width: '255px',
     height: '52px',
-    background: '#020202',
-    color: '#FEFEFE',
+    background: palette.type === 'light' ? '#020202' : '#FFFFFF',
+    color: palette.type === 'light' ? '#FEFEFE' : '#242424',
     marginBottom: '20px',
-    ...lightThemeButtonHover
-  },
-  darkThemeOrdersButton: {
-    ...button,
-    width: '255px',
-    height: '52px',
-    background: '#FFFFFF',
-    color: '#242424',
-    marginBottom: '20px',
-    ...darkThemeButtonHover
+    '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
   },
   orderWrapper: {
     display: 'flex',
@@ -136,13 +110,9 @@ export const useStyles = makeStyles((theme) => ({
       flexDirection: 'column'
     }
   },
-  lightThemeTotalWrapper: {
+  totalWrapper: {
     ...totalWrapper,
-    color: '#242424'
-  },
-  darkThemeTotalWrapper: {
-    ...totalWrapper,
-    color: '#FEFEFE'
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
   },
   promoAndTotalWrapper: {
     maxWidth: '1200px',

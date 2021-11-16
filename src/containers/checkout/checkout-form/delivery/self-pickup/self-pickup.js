@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './self-pickup.styles';
 import { days } from './const';
 
-const SelfPickup = ({ isLightTheme }) => {
-  const styles = useStyles({ isLightTheme });
+const SelfPickup = () => {
+  const styles = useStyles();
   const { t } = useTranslation();
 
   const schedule = Object.values(days).map((value) =>

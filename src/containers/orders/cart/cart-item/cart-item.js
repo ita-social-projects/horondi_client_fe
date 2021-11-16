@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -25,7 +25,6 @@ import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../const/routes';
-import ThemeContext from '../../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
@@ -54,7 +53,6 @@ const CartItem = ({
     [dispatch, changeCartItemUserQuantity]
   );
 
-  const isLightTheme = useContext(ThemeContext);
   const onChangeQuantity = (value) => dispatch(setCartItemQuantity(item, +value));
 
   const onDeleteItem = () => {
@@ -111,16 +109,10 @@ const CartItem = ({
         </Link>
         <div>
           <Link to={`${pathToProducts}/${item.product._id}`}>
-            <span className={isLightTheme ? styles.lightThemeItemName : styles.darkThemeItemName}>
-              {item.product.name[language].value}
-            </span>
+            <span className={styles.itemName}>{item.product.name[language].value}</span>
           </Link>
           {item.product.bottomMaterial && (
-            <div
-              className={
-                isLightTheme ? styles.lightThemeItemDescription : styles.darkThemeItemDescription
-              }
-            >
+            <div className={styles.itemDescription}>
               {t('cart.bottomMaterial')}:{' '}
               {t(`${item.product.bottomMaterial.material.translationsKey}.name`)}
             </div>
@@ -134,9 +126,7 @@ const CartItem = ({
           name='size'
           value={item.options.size._id}
           onChange={handleSizeChange}
-          className={
-            isLightTheme ? styles.lightThemeSelectSizeStyle : styles.darkThemeSelectSizeStyle
-          }
+          className={styles.selectSizeStyle}
         >
           {item.allSizes &&
             item.allSizes.map(({ size }) => (

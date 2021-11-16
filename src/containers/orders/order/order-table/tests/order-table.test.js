@@ -9,9 +9,8 @@ jest.mock('react-redux');
 
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
-const testUseSelector = (lang, theme) => {
+const testUseSelector = (lang) => {
   useSelector.mockImplementation(() => ({
-    isLightTheme: theme,
     language: lang
   }));
 };
@@ -27,7 +26,7 @@ const props = {
 };
 describe('Order table component tests', () => {
   it('should match snapshot', () => {
-    testUseSelector(0, false);
+    testUseSelector(0);
     wrapper = shallow(<OrderTable {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

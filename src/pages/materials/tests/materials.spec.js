@@ -18,6 +18,15 @@ jest.mock('react-router', () => ({
   ...jest.requireActual('react-router')
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 useDispatch.mockImplementation(() => dispatch);
 
 const useQueryData = {

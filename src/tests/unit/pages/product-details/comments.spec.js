@@ -65,7 +65,7 @@ describe('Comments page tests', () => {
   it('Add comment is locked when user is logged in', () => {
     const noUserMessage = screen.queryByTitle('product.tooltips.unregisteredComment');
     const activeUserMessage = screen.queryByTitle('product.comments.successfulTip');
-    screen.debug();
+
     expect(noUserMessage).toBeFalsy();
     expect(activeUserMessage).toBeTruthy();
   });
@@ -73,7 +73,7 @@ describe('Comments page tests', () => {
   it('Call setting event on textarea change', async () => {
     const testText = 'Good product';
     const field = await screen.findByRole('textbox');
-    screen.debug();
+
     fireEvent.change(field, { target: { value: testText } });
 
     expect(mockSetFieldValue.mock.calls).toHaveLength(1);
@@ -90,7 +90,7 @@ describe('Comments page tests', () => {
 
   it('Call validation on button click', () => {
     const button = screen.getByRole('button');
-    screen.debug();
+
     fireEvent.click(button);
 
     expect(mockShouldValidate).toBeTruthy();

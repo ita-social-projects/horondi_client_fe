@@ -99,7 +99,6 @@ describe('<CommentItem /> tests', () => {
       const replySubmitButton = screen.queryByText('common.reply.submit');
 
       fireEvent.click(replySubmitButton);
-      screen.debug();
     });
 
     it('Reply form is open', () => {
@@ -123,7 +122,7 @@ describe('<CommentItem /> tests', () => {
       const cancelButton = screen.queryByText('product.pdpButtons.cancelButton');
 
       fireEvent.click(cancelButton);
-      screen.debug();
+
       const replyForm = screen.queryByTestId('replyForm');
 
       expect(replyForm).toBe(null);

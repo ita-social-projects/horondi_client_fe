@@ -6,7 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './delivery-type.styles';
 import { addDeliveryType } from '../../../redux/cart/cart.actions';
-import { deliveryTypes, SESSION_STORAGE , CY_CODE_ERR } from '../../../configs';
+import { deliveryTypes, SESSION_STORAGE, CY_CODE_ERR } from '../../../configs';
 import { getFromSessionStorage } from '../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 
@@ -20,7 +20,7 @@ const DeliveryType = ({ setFieldValue, touched, errors }) => {
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
   );
-  const [courierOrganization, setcourierOrganization] = useState('');
+  const [courierOrganization, setcourierOrganization] = useState(deliveryTypes.NOVAPOSTCOURIER);
 
   const handleAddDeliveryType = () => {
     if (deliveryType === 'COURIER' && courierOrganization) {
@@ -61,7 +61,6 @@ const DeliveryType = ({ setFieldValue, touched, errors }) => {
             aria-label='Delivery type'
             name='delivery-type'
             value={deliveryType}
-            // onClick={handleAddDeliveryType}
             onChange={(e) => setDeliveryType(e.target.value)}
           >
             {radioButtons}

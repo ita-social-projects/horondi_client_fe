@@ -1,9 +1,9 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useQuery } from '@apollo/client';
-import UkrpostAndCourier from '../ukrpostAndCourier';
+import UkrpostAndCourier from '../ukrpost-and-courier';
 
-jest.mock('../ukrpostAndCourier.styles.js', () => ({
+jest.mock('../ukrpost-and-courier.styles.js', () => ({
   useStyles: () => ({})
 }));
 jest.mock('react-redux');

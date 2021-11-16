@@ -3,7 +3,7 @@ import React from 'react';
 import SelfPickup from './self-pickup';
 import { deliveryTypes } from '../../../../configs';
 import NovaPost from './nova-post';
-import UkrpostAndCourier from './ukrpostAndCourier';
+import UkrpostAndCourier from './ukrpost-and-courier';
 
 const Delivery = ({
   language,

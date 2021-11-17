@@ -10,10 +10,12 @@ const SelfPickup = () => {
 
   const schedule = Object.values(days).map((value) => (
     <div className={styles.scheduleItem} key={value.id}>
-      {t(`checkout.schedule.${value.label}`)}
-      {value.label === days.saturday.label || value.label === days.sunday.label
-        ? t('checkout.checkoutTitles.restDay')
-        : t('checkout.checkoutTitles.workDay')}
+      <div className={styles.scheduleItemName}>{t(`checkout.schedule.${value.label}`)}</div>
+      <div className={styles.scheduleItemHours}>
+        {value.label === days.saturday.label || value.label === days.sunday.label
+          ? t('checkout.checkoutTitles.restDay')
+          : t('checkout.checkoutTitles.workDay')}
+      </div>
     </div>
   ));
 
@@ -22,11 +24,11 @@ const SelfPickup = () => {
       <div className={styles.selfPickupData}>
         <div className={styles.selfPickupTitlesWrapper}>
           <h5 className={styles.scheduleTitle}>{t('checkout.checkoutTitles.schedule')}</h5>
-          <h5 className={styles.scheduleTitle}>{t('checkout.checkoutTitles.address')}</h5>
+          <h5 className={styles.addressTitle}>{t('checkout.checkoutTitles.address')}</h5>
         </div>
-        <div className={styles.schedule}>
-          <div className={styles.scheduleData}>{schedule}</div>
-          <p className={styles.addressTitle}>{t('checkout.checkoutTitles.addressHorondi')}</p>
+        <div className={styles.scheduleWrapper}>
+          <div className={styles.schedule}>{schedule}</div>
+          <div className={styles.address}>{t('checkout.checkoutTitles.addressHorondi')}</div>
         </div>
       </div>
     </div>

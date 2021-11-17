@@ -224,7 +224,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
               "prefix": "fas",
             }
           }
-          isLightTheme={true}
+          deliveryType="NOVAPOSTCOURIER"
           language={1}
           styles={
             Object {

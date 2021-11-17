@@ -269,6 +269,7 @@ const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
               values={values}
               language={language}
               styles={styles}
+              deliveryType={deliveryType}
             />
           </Grid>
         </Grid>

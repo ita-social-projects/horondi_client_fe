@@ -6,58 +6,58 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-    width: '100%',
-    marginBottom: '3%',
+    width: 312,
+    height: 287,
+    marginTop: 16,
+    '@media (max-width: 768px)': {
+      width: '100%'
+    }
+  },
+  selfPickupData: {
+    display: 'flex',
+    width: 304,
+    height: 239,
+    color: palette.textColor,
     '@media (max-width: 768px)': {
       width: '100%'
     }
   },
   selfPickupTitlesWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: '40%'
+    width: 172
   },
-  selfPickupData: {
-    display: 'flex',
-    paddingLeft: 5,
-    marginLeft: '10%',
-    width: 600,
-    '@media (max-width: 768px)': {
-      width: '80%'
-    }
+  scheduleWrapper: {
+    width: 132
   },
-  selfPickupTitle: {
-    fontWeight: 400,
-    fontSize: 18,
-    marginLeft: '2%'
+  scheduleTitle: {
+    fontWeight: 'bolder',
+    fontSize: 14,
+    marginTop: 0
+  },
+  addressTitle: {
+    fontWeight: 'bolder',
+    fontSize: 14,
+    marginTop: 199
   },
   schedule: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    width: '60%'
+    flexDirection: 'column'
   },
-  scheduleTitle: {
-    marginRight: '4%',
-    fontWeight: 'bolder',
-    fontSize: 14,
-    marginTop: 10
-  },
-  addressTitle: {
-    marginBottom: 18,
-    fontWeight: 400,
-    fontSize: 14,
-    color: palette.textColor
+  address: {
+    marginTop: 23,
+    fontSize: 14
   },
   scheduleItem: {
-    fontWeight: 400,
     fontSize: 14,
-    color: palette.textColor,
-    marginTop: 10
+    marginBottom: 8,
+    height: 20,
+    display: 'flex'
   },
-  scheduleData: {
-    display: 'flex',
-    flexDirection: 'column'
+  scheduleItemName: {
+    width: 36,
+    fontWeight: 'bolder'
+  },
+  scheduleItemHours: {
+    width: 84,
+    marginLeft: 12
   }
 }));

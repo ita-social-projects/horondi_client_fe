@@ -47,7 +47,7 @@ const ProductListItem = ({ product }) => {
         <FontAwesomeIcon icon={currencySign} />
       </>
     ) : (
-      t('productListPage.sizeNotAvailable')
+      <>{t('productListPage.sizeNotAvailable')} </>
     );
   };
 

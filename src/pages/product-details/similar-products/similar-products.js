@@ -60,7 +60,7 @@ const SimilarProducts = ({ cartList, product }) => {
           <FontAwesomeIcon icon={currencySign} />{' '}
         </>
       ) : (
-        t('product.sizeNotAvailable')
+        <> {t('product.sizeNotAvailable')} </>
       );
 
     return (

@@ -244,16 +244,6 @@ export const useStyles = makeStyles(({ palette }) => ({
       width: '100%'
     }
   },
-  checkoutYourOrderTitleData: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: 370,
-    marginLeft: '6%',
-    '@media (max-width: 768px)': {
-      width: '89%',
-      marginLeft: '10%'
-    }
-  },
   checkoutTitleLine: {
     width: '90%',
     background: '#636262',
@@ -278,5 +268,139 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: '#1976D2',
       backgroundColor: 'transparent'
     }
+  },
+  yourOrderContainer: {
+    height: 'max-content',
+    width: '360px',
+    position: 'sticky',
+    top: '60px',
+    padding: '32px 24px',
+    marginTop: '20px',
+    '@media (max-width: 1150px)': {
+      position: 'inherit',
+      marginLeft: '60px',
+      marginBottom: '20px'
+    },
+    '&.MuiPaper-root': {
+      backgroundColor: 'inherit'
+    }
+  },
+  yourOrderList: {
+    marginTop: '10px',
+    position: 'static',
+    height: '136px',
+    width: '105%',
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    scrollBehavour: 'smooth',
+    '&::-webkit-scrollbar': {
+      width: '0px'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '10px'
+    },
+    '&::-webkit-scrollbar-track': {
+      borderRadius: '10px'
+    }
+  },
+  yourOrderListImg: {
+    position: 'absolute',
+    width: '56px',
+    height: '56px',
+    left: '25px',
+    top: '0px'
+  },
+  yourOrderListItem: {
+    height: '56px'
+  },
+  yourOrderListItemDescriptionContainer: {
+    position: 'absolute',
+    height: '53px',
+    left: '93px',
+    top: '1px'
+  },
+  yourOrderListItemDescriptionPrimary: {
+    top: '1px',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '14px',
+    lineHeight: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    letterSpacing: '0.001em'
+  },
+  yourOrderListItemDescriptionSecondary: {
+    position: 'absolute',
+    height: '32px',
+    width: 'max-content',
+    top: '23px',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '12px',
+    lineHeight: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    letterSpacing: '0.004em'
+  },
+  yourOrderListItemPrice: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    width: '28px',
+    height: '20px',
+    left: '284px',
+    top: '7px',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '14px',
+    lineHeight: '20px',
+    textAlign: 'right',
+    letterSpacing: '0.001em'
+  },
+  yourOrderTotalPrice: {
+    position: 'static',
+    height: '40px',
+    width: '312px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    left: '24px',
+    flex: 'none',
+    order: '3',
+    flexGrow: '0',
+    margin: '16px 0px 0px 0px',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '20px',
+    lineHeight: '28px',
+    letterSpacing: '0.0015em'
+  },
+  yourOrderConsentLink: {
+    height: '30px',
+    width: '312px',
+    marginTop: '10px',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '11px',
+    lineHeight: '15px',
+    letterSpacing: '0.015em'
+  },
+  yourOrderButton: {
+    color: palette.button.normal.color,
+    backgroundColor: palette.button.hover.backgroundColor,
+    '&:hover': {
+      color: palette.button.normal.color,
+      backgroundColor: palette.button.normal.backgroundColor
+    },
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '12px 48px',
+    position: 'static',
+    height: '52px',
+    width: '312px',
+    left: '24px',
+    margin: '16px 0px 0px 0px'
   }
 }));

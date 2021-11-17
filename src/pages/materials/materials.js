@@ -1,8 +1,9 @@
-import React, { useMemo, useState, useEffect, useContext } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import parse from 'html-react-parser';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '@material-ui/styles';
 import 'react-awesome-slider/dist/styles.css';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
@@ -13,7 +14,6 @@ import { carouselMaterialInterval } from '../../configs';
 import Slider from './slider';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getImage } from '../../utils/imageLoad';
-import ThemeContext from '../../context/theme-context';
 
 import productPlugDark from '../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../images/product-plug-light-theme-img.png';
@@ -23,7 +23,10 @@ const AutoplaySlider = withAutoplay(Slider);
 const Materials = () => {
   const [patternImages, setPatternImages] = useState([]);
   const { t } = useTranslation();
-  const isLightTheme = useContext(ThemeContext);
+  const { palette } = useTheme();
+
+  const isLightTheme = palette.type === 'light';
+
   const code = 'materials';
 
   const {

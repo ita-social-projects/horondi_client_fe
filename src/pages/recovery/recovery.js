@@ -14,11 +14,11 @@ import {
 
 const Recovery = () => {
   const styles = useStyles();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
   const [shouldValidate, setShouldValidate] = useState(false);
 
-  const { language, error, userRecovered, recoveryLoading } = useSelector(({ Language, User }) => ({
-    language: Language.language,
+  const { error, userRecovered, recoveryLoading } = useSelector(({ User }) => ({
     recoveryLoading: User.recoveryLoading,
     error: User.error,
     userRecovered: User.userRecovered

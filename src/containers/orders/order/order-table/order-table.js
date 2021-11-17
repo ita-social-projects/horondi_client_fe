@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
@@ -15,19 +15,18 @@ import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
 const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantityLoading }) => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
 
   const cartItems = items.map((item) => (
     <CartItem
-      key={item.product.product_id}
+      key={item.product._id}
       item={item}
       initialPrice={item.price}
       calcPrice={calcPrice}

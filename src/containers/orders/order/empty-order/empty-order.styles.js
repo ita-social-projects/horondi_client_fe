@@ -19,31 +19,19 @@ const buttonStyles = {
   borderRadius: '4px'
 };
 
-export const useStyles = makeStyles((theme) => ({
-  whiteThemeButton: {
+export const useStyles = makeStyles(({ palette }) => ({
+  button: {
     ...buttonStyles,
-    color: '#FEFEFE',
-    backgroundColor: '#020202',
+    color: palette.type === 'light' ? '#FEFEFE' : '#242424',
+    backgroundColor: palette.type === 'light' ? '#020202' : '#FFFFFF',
     '&:hover': {
-      backgroundColor: '#3F3F3F'
+      backgroundColor: palette.type === 'light' ? '#3F3F3F' : '#020202',
+      color: palette.type === 'light' ? '#242424' : '#FEFEFE'
     }
   },
-  darkThemeButton: {
-    ...buttonStyles,
-    color: '#242424',
-    backgroundColor: '#FFFFFF',
-    '&:hover': {
-      backgroundColor: '#020202',
-      color: '#FEFEFE'
-    }
-  },
-  whiteThemeTitle: {
+  title: {
     ...titleStyles,
-    color: '#242424'
-  },
-  darkThemeTitle: {
-    ...titleStyles,
-    color: '#FEFEFE'
+    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
   },
   image: {
     height: '182px',

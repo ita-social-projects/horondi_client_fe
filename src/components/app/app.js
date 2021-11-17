@@ -13,7 +13,7 @@ import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { preserveUser } from '../../redux/user/user.actions';
-import { selectLocation } from '../../redux/selectors/multiple.selectors';
+import { selectLocation } from '../../utils/multiple.selectors';
 import { SnackBarContextProvider } from '../../context/snackbar-context';
 
 const App = () => {

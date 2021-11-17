@@ -21,7 +21,8 @@ const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -29,15 +30,13 @@ const ProfilePage = () => {
   const {
     userData,
     userLoading,
-    language,
     confirmationEmailSent,
     userRecovered,
     confirmationLoading,
     recoveryLoading
-  } = useSelector(({ User, Language }) => ({
+  } = useSelector(({ User }) => ({
     userData: User.userData,
     userLoading: User.userLoading,
-    language: Language.language,
     confirmationEmailSent: User.confirmationEmailSent,
     userRecovered: User.userRecovered,
     confirmationLoading: User.confirmationLoading,
@@ -47,7 +46,9 @@ const ProfilePage = () => {
   const validationSchema = Yup.object(
     Object.fromEntries(
       Object.keys(PROFILE_USER_DATA).map((item) => {
-        let fieldSchema = Yup.string().matches(formRegExp[item], t(`error.profile.${item}`));
+        let fieldSchema = Yup.string()
+          .nullable()
+          .matches(formRegExp[item], t(`error.profile.${item}`));
         REQUIRED_USER_FIELDS.includes(item) &&
           (fieldSchema = fieldSchema.required(t(`error.profile.${item}`)));
         return [item, fieldSchema];
@@ -57,6 +58,12 @@ const ProfilePage = () => {
 
   const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
     const user = { firstName, lastName, email, phoneNumber, address };
+    Object.keys(address).forEach((key) => {
+      if (address[key] === null) {
+        address[key] = '';
+      }
+    });
+
     dispatch(updateUser({ user, id: userData._id, upload }));
     setShouldValidate(false);
   };

@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
 import { parse } from 'query-string';
-import ThemeContext from '../../context/theme-context';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import OrderData from './order-data';
@@ -18,11 +17,13 @@ const { pathToMain } = routes;
 
 const ThanksPage = () => {
   const router = useLocation();
-
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  const { language, currency, order, loading, paidOrderLoading, user } = useSelector(
-    ({ Language, Currency, Order, User }) => ({
-      language: Language.language,
+
+  const language = i18n.language === 'ua' ? 0 : 1;
+
+  const { currency, order, loading, paidOrderLoading, user } = useSelector(
+    ({ Currency, Order, User }) => ({
       currency: Currency.currency,
       order: Order.order,
       loading: Order.loading,
@@ -31,13 +32,8 @@ const ThanksPage = () => {
     })
   );
 
-  const isLightTheme = useContext(ThemeContext);
-  const styles = useStyles({
-    isLightTheme
-  });
+  const styles = useStyles();
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) {
@@ -67,12 +63,7 @@ const ThanksPage = () => {
         <>
           <h2 className={styles.thunksTitle}>{t('thanksPage.thanksPageTitle.thanks')}</h2>
           <div className={styles.thunksInfo}>
-            <OrderData
-              order={order}
-              language={language}
-              currency={currency}
-              isLightTheme={isLightTheme}
-            />
+            <OrderData order={order} language={language} currency={currency} />
           </div>
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING && (
             <a

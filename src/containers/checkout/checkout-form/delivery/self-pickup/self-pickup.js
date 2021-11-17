@@ -8,19 +8,14 @@ const SelfPickup = () => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const schedule = Object.values(days).map((value) =>
-    value.label === days.saturday.label || value.label === days.sunday.label ? (
-      <div className={styles.scheduleItem}>
-        {t(`checkout.schedule.${value.label}`)}
-        {t('checkout.checkoutTitles.restDay')}{' '}
-      </div>
-    ) : (
-      <div className={styles.scheduleItem}>
-        {t(`checkout.schedule.${value.label}`)}
-        {t('checkout.checkoutTitles.workDay')}{' '}
-      </div>
-    )
-  );
+  const schedule = Object.values(days).map((value) => (
+    <div className={styles.scheduleItem} key={value.id}>
+      {t(`checkout.schedule.${value.label}`)}
+      {value.label === days.saturday.label || value.label === days.sunday.label
+        ? t('checkout.checkoutTitles.restDay')
+        : t('checkout.checkoutTitles.workDay')}
+    </div>
+  ));
 
   return (
     <div className={styles.selfPickupContainer}>
@@ -30,10 +25,8 @@ const SelfPickup = () => {
           <h5 className={styles.scheduleTitle}>{t('checkout.checkoutTitles.address')}</h5>
         </div>
         <div className={styles.schedule}>
-          <p className={styles.scheduleData}>{schedule}</p>
-          <p className={`${styles.scheduleItem} ${styles.addressTitle}`}>
-            {t('checkout.checkoutTitles.addressHorondi')}
-          </p>
+          <div className={styles.scheduleData}>{schedule}</div>
+          <p className={styles.addressTitle}>{t('checkout.checkoutTitles.addressHorondi')}</p>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ const props = {
 describe('SelfPickup component tests', () => {
   it('should render SelfPickup', () => {
     const wrapper = shallow(<SelfPickup {...props} />);
-    expect(wrapper.find('p').at(1).props().children[0]).toEqual('sunday');
+    expect(wrapper.find('h5').at(1).props().children[0]).toEqual('sunday');
   });
   it('should change props', () => {
     const wrapper = shallow(<SelfPickup isLightTheme='dark' language='1' />);

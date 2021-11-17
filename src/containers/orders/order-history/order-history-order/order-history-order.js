@@ -18,11 +18,11 @@ import { useStyles } from './order-history-order.styles';
 import { statusColors } from '../../../../const/style-consts';
 
 const OrderHistoryOrder = ({ order }) => {
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
-    language: Language.language,
+  const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const { color } = statusColors.find((item) => item.label === order.status);
 

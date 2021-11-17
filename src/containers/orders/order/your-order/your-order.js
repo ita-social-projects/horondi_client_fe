@@ -48,10 +48,14 @@ const YourOrder = ({ ...props }) => {
         {t('checkout.checkoutTitles.yourOrderTitle')}
       </Typography>
       <Divider variant='fullWidth' />
-      <List className={styles.yourOrderList} gutterBottom>
+      <List className={styles.yourOrderList}>
         {cartItems
           ? cartItems.map((item) => (
-            <ListItem className={styles.yourOrderListItem} key={item._id} alignItems='center'>
+            <ListItem
+              className={styles.yourOrderListItem}
+              key={item.product._id}
+              alignItems='center'
+            >
               <Typography component='div'>x {item.quantity}</Typography>
               <img
                 className={styles.yourOrderListImg}
@@ -60,14 +64,16 @@ const YourOrder = ({ ...props }) => {
               />
               <ListItemText
                 className={styles.yourOrderListItemDescriptionContainer}
-                component='div'
                 primary={
                   <div className={styles.yourOrderListItemDescriptionPrimary}>
                     {item.product.name[language].value}
                   </div>
                 }
                 secondary={
-                  <div className={styles.yourOrderListItemDescriptionSecondary}>
+                  <Typography
+                    className={styles.yourOrderListItemDescriptionSecondary}
+                    component='div'
+                  >
                     <div>
                       {t('product.productDescription.bottomMaterial')}:{' '}
                       {item.product.bottomMaterial.material.name[language].value}
@@ -75,7 +81,7 @@ const YourOrder = ({ ...props }) => {
                     <div>
                       {t('common.size')}: {item.options.size.name}
                     </div>
-                  </div>
+                  </Typography>
                 }
               />
               <Typography className={styles.yourOrderListItemPrice} component='div'>
@@ -96,7 +102,7 @@ const YourOrder = ({ ...props }) => {
           <Divider variant='fullWidth' />
         </>
       )}
-      <Typography className={styles.yourOrderTotalPrice}>
+      <Typography className={styles.yourOrderTotalPrice} component='div'>
         {t('common.toPay')}:
         <div>
           {Math.ceil(totalPriceToPay)} <FontAwesomeIcon icon={currencySign} />

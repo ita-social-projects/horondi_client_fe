@@ -18,11 +18,10 @@ import ThemeContext from '../../../context/theme-context';
 
 const ProductListItem = ({ product }) => {
   const { t, i18n } = useTranslation();
-
   const isLightTheme = useContext(ThemeContext);
 
   const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency,
+    currency: Currency.currency
   }));
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
@@ -41,8 +40,8 @@ const ProductListItem = ({ product }) => {
     const availableSizes = product.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
-    return availableSizes
-      ? t('common.from') + availableSizes[0].price[currency].value
+    return availableSizes && availableSizes[0]
+      ? t('common.from') + availableSizes[0]?.price[currency].value
       : t('productListPage.sizeNotAvailable');
   };
 

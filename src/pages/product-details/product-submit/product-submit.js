@@ -20,7 +20,7 @@ import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wi
 
 const { pathToCart } = routes;
 
-const ProductSubmit = ({ setSizeIsNotSelectedError, sizes, product }) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { productToSend, userData, cartList } = useSelector(selectLanguageProductsUserWishlist);

@@ -50,7 +50,7 @@ const SimilarProducts = ({ cartList, product }) => {
 
   imagesList = imagesList.map(({ _id, images, rate, name, sizes }) => {
     const availableSize =
-      sizes && sizes.filter(({ size, price }) => size.available && price)[0].price[currency].value;
+      sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price[currency].value;
 
     return (
       <SimilarProductsItem

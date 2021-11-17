@@ -158,20 +158,11 @@ const CartItem = ({
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
         <div className={styles.priceWrapper}>
-          {user && (
-            <div>
-              <FontAwesomeIcon icon={currencySign} />
-              {'\u00A0'}
-              {Math.round(item.price[currency].value * inputValue)}
-            </div>
-          )}
-          {!user && (
-            <div>
-              <FontAwesomeIcon icon={currencySign} />
-              {'\u00A0'}
-              {Math.round(calcPrice(item, currency))}
-            </div>
-          )}
+          <div>
+            <FontAwesomeIcon icon={currencySign} />
+            {'\u00A0'}
+            {Math.round(calcPrice(item, currency))}
+          </div>
         </div>
       </TableCell>
       <TableCell classes={{ root: styles.delete }}>

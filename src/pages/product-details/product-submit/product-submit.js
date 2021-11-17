@@ -11,7 +11,7 @@ import { useStyles } from './product-submit.styles';
 
 import { toastSettings } from '../../../configs/index';
 
-import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
+import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
 
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';

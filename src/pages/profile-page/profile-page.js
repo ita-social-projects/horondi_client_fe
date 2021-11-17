@@ -21,7 +21,8 @@ const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -29,15 +30,13 @@ const ProfilePage = () => {
   const {
     userData,
     userLoading,
-    language,
     confirmationEmailSent,
     userRecovered,
     confirmationLoading,
     recoveryLoading
-  } = useSelector(({ User, Language }) => ({
+  } = useSelector(({ User }) => ({
     userData: User.userData,
     userLoading: User.userLoading,
-    language: Language.language,
     confirmationEmailSent: User.confirmationEmailSent,
     userRecovered: User.userRecovered,
     confirmationLoading: User.confirmationLoading,

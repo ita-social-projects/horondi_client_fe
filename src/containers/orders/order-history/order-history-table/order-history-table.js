@@ -6,13 +6,15 @@ import OrderHistoryOrderItem from '../order-history-order-item/index';
 import { useStyles } from './order-history-table.style';
 
 const OrderHistoryTable = ({ items }) => {
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
-    language: Language.language,
+  const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
 
   const styles = useStyles();
-  const { t } = useTranslation();
+
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
+
   const orderHistoryItems = items.map((item, idx) => (
     <OrderHistoryOrderItem key={idx} item={item} language={language} currency={currency} />
   ));

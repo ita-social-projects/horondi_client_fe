@@ -51,7 +51,8 @@ exports[`Order table component tests should match snapshot 1`] = `
               },
             }
           }
-          language={0}
+          key="some id"
+          language={1}
           setModalItem={[Function]}
           setModalVisibility={[Function]}
           user={Object {}}

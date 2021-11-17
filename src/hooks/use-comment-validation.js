@@ -1,11 +1,13 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { errorMessages, formRegExp } from '../configs';
 
 const useCommentValidation = (isAuth, onSubmit, commentValue) => {
-  const language = useSelector(({ Language }) => Language.language);
+  const { i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
+
   const [shouldValidate, setShouldValidate] = useState(false);
 
   const emailError = errorMessages[language].value.email;

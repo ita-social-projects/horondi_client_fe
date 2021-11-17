@@ -19,7 +19,7 @@ const Confirmation = ({ token }) => {
     error: User.error
   }));
 
-  const getLanguage = i18n.language === 'ua' ? 0 : 1;
+  const language = i18n.language === 'ua' ? 0 : 1;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Confirmation = ({ token }) => {
   return (
     <div className={styles.confirmation}>
       <div className={styles.welcome}>
-        {loading ? <Loader /> : handleMessage(error, getLanguage)}
+        {loading ? <Loader /> : handleMessage(error, language)}
         <div className={styles.buttonGroup}>
           <Button variant='contained' onClick={() => goTo(pathToMain)}>
             {t('confirmation.goToShop')}

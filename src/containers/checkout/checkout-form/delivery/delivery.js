@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { deliveryTypes } from '../../../../configs';
+import { deliveryTypes, isCourier } from '../../../../configs';
 import NovaPost from './nova-post';
-import Courier from './courier';
-import UkrPost from './ukrpost';
+import UkrpostAndCourier from './ukrpost-and-courier';
 
 const Delivery = ({
   language,
@@ -25,26 +24,15 @@ const Delivery = ({
         values={values}
       />
     )}
-    {(deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER) && (
-      <Courier
-        language={language}
+    {(deliveryType === deliveryTypes.UKRPOST || isCourier(deliveryType)) && (
+      <UkrpostAndCourier
         deliveryType={deliveryType}
-        values={values}
-        errors={errors}
-        touched={touched}
-        handleChange={handleChange}
-      />
-    )}
-    {deliveryType === deliveryTypes.UKRPOST && (
-      <UkrPost
-        language={language}
-        deliveryType={deliveryType}
-        errors={errors}
-        touched={touched}
-        handleChange={handleChange}
         setFieldValue={setFieldValue}
+        handleChange={handleChange}
+        errors={errors}
+        touched={touched}
         values={values}
+        language={language}
       />
     )}
   </>

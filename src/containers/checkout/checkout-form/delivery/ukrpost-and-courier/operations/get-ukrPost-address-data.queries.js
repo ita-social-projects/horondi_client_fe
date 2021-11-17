@@ -27,6 +27,14 @@ export const getUkrPoshtaCities = gql`
   }
 `;
 
+export const getUkrPoshtaStreets = gql`
+  query ($id: ID!) {
+    getUkrPoshtaStreetsByCityId(id: $id) {
+      STREET_UA
+    }
+  }
+`;
+
 export const getUkrPoshtaPostOffices = gql`
   query ($id: ID!) {
     getUkrPoshtaPostofficesCityId(id: $id) {

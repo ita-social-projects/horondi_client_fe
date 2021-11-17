@@ -40,9 +40,15 @@ const ProductListItem = ({ product }) => {
     const availableSizes = product.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
-    return availableSizes && availableSizes[0]
-      ? t('common.from') + availableSizes[0]?.price[currency].value
-      : t('productListPage.sizeNotAvailable');
+    return availableSizes && availableSizes[0] ? (
+      <>
+        {t('common.from') + availableSizes[0]?.price[currency].value}
+        {'\u00A0'}
+        <FontAwesomeIcon icon={currencySign} />
+      </>
+    ) : (
+      t('productListPage.sizeNotAvailable')
+    );
   };
 
   const styles = useStyles({ image, isLightTheme });
@@ -56,11 +62,7 @@ const ProductListItem = ({ product }) => {
             <div>
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />
-                <span>
-                  {checkSizes()}
-                  {'\u00A0'}
-                  <FontAwesomeIcon icon={currencySign} />
-                </span>
+                <span>{checkSizes()}</span>
               </span>
             </div>
           </div>

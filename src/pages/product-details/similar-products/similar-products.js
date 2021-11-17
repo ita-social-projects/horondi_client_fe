@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import './similar-products.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useStyles } from './similar-products.styles';
 import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
@@ -51,16 +52,22 @@ const SimilarProducts = ({ cartList, product }) => {
   imagesList = imagesList.map(({ _id, images, rate, name, sizes }) => {
     const availableSize =
       sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price[currency].value;
+    const checkPrice = () =>
+      availableSize ? (
+        <>
+          {t('product.priceFrom') + Math.round(availableSize)}
+          {'\u00A0'}
+          <FontAwesomeIcon icon={currencySign} />{' '}
+        </>
+      ) : (
+        t('product.sizeNotAvailable')
+      );
 
     return (
       <SimilarProductsItem
         currencySign={currencySign}
         key={_id}
-        price={
-          availableSize
-            ? t('product.priceFrom') + Math.round(availableSize)
-            : t('product.sizeNotAvailable')
-        }
+        price={checkPrice()}
         name={name}
         rate={rate}
         imageUrl={images.primary.medium}

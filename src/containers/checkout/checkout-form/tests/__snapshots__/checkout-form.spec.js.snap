@@ -83,7 +83,11 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
             </div>
           </div>
         </div>
-        <DeliveryType />
+        <DeliveryType
+          errors={Object {}}
+          setFieldValue={[Function]}
+          touched={Object {}}
+        />
         <Delivery
           deliveryType="NOVAPOSTCOURIER"
           errors={Object {}}
@@ -96,6 +100,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
               "city": "",
               "cityId": "",
               "courierOffice": "",
+              "courierOrganization": "",
               "district": "",
               "districtId": "",
               "email": "",
@@ -237,6 +242,7 @@ exports[`CheckoutForm component tests should match snapshot 1`] = `
               "city": "",
               "cityId": "",
               "courierOffice": "",
+              "courierOrganization": "",
               "district": "",
               "districtId": "",
               "email": "",

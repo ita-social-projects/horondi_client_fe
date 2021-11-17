@@ -10,12 +10,25 @@ jest.mock('../delivery-type.styles', () => ({ useStyles: () => ({ Theme: 'lightM
 const mockStore = { language: 0 };
 const mockDispatch = jest.fn();
 
+const props = {
+  values: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: null
+  },
+  touched: { courierOrganization: 'test' },
+  errors: { courierOrganization: 'test' },
+  setFieldValue: jest.fn()
+};
+
 useSelector.mockImplementation(() => mockStore);
 useDispatch.mockReturnValue(mockDispatch);
 
-const wrapper = shallow(<DeliveryType />);
+const wrapper = shallow(<DeliveryType {...props} />);
 
 describe('<DeliveryType />', () => {
+  const radioGroup = wrapper.find(`[name='delivery-type']`);
   it('should render <DeliveryType />', () => {
     expect(wrapper).toBeDefined();
   });
@@ -23,8 +36,13 @@ describe('<DeliveryType />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should handle change', () => {
-    const radioGroup = wrapper.find(`[name='delivery-type']`);
     radioGroup.props().onChange({ target: { value: 'SELFPICKUP' } });
     expect(radioGroup.props().value).toEqual('SELFPICKUP');
+  });
+  it('should handle courierOrganization change', () => {
+    radioGroup.props().onChange({ target: { value: 'COURIER' } });
+    const select = wrapper.find(`[name='courierOrganization']`);
+    select.props().onChange({ target: { value: 'NOVAPOSTCOURIER' } });
+    expect(select.props().value).toEqual('NOVAPOSTCOURIER');
   });
 });

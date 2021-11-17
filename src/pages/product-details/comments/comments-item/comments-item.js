@@ -119,7 +119,9 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
         <div className={styles.comment}>
           <div className={styles.userContainer}>
             <div className={styles.user}>
-              <span className={styles.name}>{firstName}</span>
+              <span className={styles.name} data-testid='firstName'>
+                {firstName}
+              </span>
             </div>
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
@@ -142,6 +144,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
         <div className={styles.textContent}>
           <div
             className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}
+            data-testid='commentText'
           >
             {text}
           </div>

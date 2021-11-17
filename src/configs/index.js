@@ -77,7 +77,7 @@ export const PROFILE_USER_DATA = {
   city: '',
   street: '',
   buildingNumber: '',
-  apartment: '',
+  appartment: '',
   zipcode: ''
 };
 
@@ -144,7 +144,7 @@ export const formRegExp = {
   street:
     "^(?=.{2,40}$)[a-zA-Zа-яА-ЯІіЇїЄєЙй]+(([',. -][a-zA-Zа-яА-ЯІіЇїЄєЙй])?[a-zA-Zа-яА-ЯІіЇїЄєЙй]*)*$",
   buildingNumber: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
-  apartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
+  appartment: '^(?=.{1,6}$)[a-zA-Z0-9_.-]*$',
   deliveryType: "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",
   deliveryMethod:
     "^(?=.{1,30}$)[a-zA-Zа-яА-Яіїє]+(([',. -][a-zA-Zа-яА-Яіїє])?[a-zA-Zа-яА-Яіїє]*)*$",

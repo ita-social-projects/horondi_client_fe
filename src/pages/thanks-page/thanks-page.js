@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
 import { parse } from 'query-string';
-import ThemeContext from '../../context/theme-context';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import OrderData from './order-data';
@@ -33,10 +32,7 @@ const ThanksPage = () => {
     })
   );
 
-  const isLightTheme = useContext(ThemeContext);
-  const styles = useStyles({
-    isLightTheme
-  });
+  const styles = useStyles();
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
   useEffect(() => {
@@ -67,12 +63,7 @@ const ThanksPage = () => {
         <>
           <h2 className={styles.thunksTitle}>{t('thanksPage.thanksPageTitle.thanks')}</h2>
           <div className={styles.thunksInfo}>
-            <OrderData
-              order={order}
-              language={language}
-              currency={currency}
-              isLightTheme={isLightTheme}
-            />
+            <OrderData order={order} language={language} currency={currency} />
           </div>
           {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING && (
             <a

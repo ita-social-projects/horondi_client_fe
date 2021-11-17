@@ -4,7 +4,7 @@ export default {
     backgroundColor: '#FFFFFF',
     button: {
       normal: {
-        backgroundColor: '#3F3F3F',
+        backgroundColor: '#020202',
         color: '#FFFFFF'
       },
       hover: {
@@ -31,8 +31,8 @@ export default {
     backgroundColor: '#353333',
     button: {
       normal: {
-        backgroundColor: '#C2C2C2',
-        color: '#000000'
+        backgroundColor: '#020202',
+        color: '#FFFFFF'
       },
       hover: {
         backgroundColor: '#FFFFFF',

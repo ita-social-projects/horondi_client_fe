@@ -31,7 +31,7 @@ const ProductSort = () => {
     <option
       key={lang[1].value}
       value={JSON.stringify(optionValue)}
-      selected={optionValue.name === query}
+      defaultValue={optionValue.name === query}
     >
       {i18n.language === 'ua' ? lang[0].value : lang[1].value}
     </option>

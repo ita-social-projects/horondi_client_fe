@@ -193,7 +193,7 @@ const resetPassword = async (data) => {
 const updateUserById = async ({ user, id, upload }) => {
   const updateUserByIdMutation = `
      mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
-      updateUserById(user: $user, id: $id, upload: $upload) { 
+      updateUserById(user: $user, id: $id, image: $upload) { 
         orders
         _id
         email
@@ -220,6 +220,7 @@ const updateUserById = async ({ user, id, upload }) => {
       }
     }
   `;
+
   const result = await setItems(updateUserByIdMutation, { user, id, upload });
 
   return result?.data?.updateUserById;

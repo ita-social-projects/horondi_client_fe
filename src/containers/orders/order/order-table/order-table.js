@@ -26,7 +26,7 @@ const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantit
 
   const cartItems = items.map((item) => (
     <CartItem
-      key={item.product.product_id}
+      key={item.product._id}
       item={item}
       initialPrice={item.price}
       calcPrice={calcPrice}

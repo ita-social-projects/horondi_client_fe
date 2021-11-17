@@ -56,5 +56,9 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       transform: 'scale(1.1)'
     }
+  },
+  notAvailable: {
+    color: theme.palette.color,
+    fontSize: '24px'
   }
 }));

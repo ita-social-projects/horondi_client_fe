@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './product-details.styles';
 import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 import ProductImages from './product-images';
@@ -27,7 +28,7 @@ const { pathToCategory } = routes;
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
   const { productToSend, currency } = useSelector(selectCurrencyProductsCategoryFilter);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
@@ -72,18 +73,18 @@ const ProductDetails = ({ match }) => {
             pattern,
             images: {
               primary: {
-                thumbnail: images.additional[0].thumbnail
+                thumbnail: images.additional[0]?.thumbnail
               }
             }
           },
-          price: currentSize.price,
+          price: currentSize?.price,
           options: {
-            size: currentSize.size
+            size: currentSize?.size
           },
           allSizes: availableSizes,
           dimensions: {
-            volumeInLiters: currentSize.size.volumeInLiters,
-            weightInKg: currentSize.size.weightInKg
+            volumeInLiters: currentSize?.size.volumeInLiters,
+            weightInKg: currentSize?.size.weightInKg
           }
         })
       );
@@ -131,21 +132,27 @@ const ProductDetails = ({ match }) => {
       <div className={styles.product}>
         {product.images ? <ProductImages images={product.images} /> : null}
         <div className={styles.productDetails}>
-          {currentSize.size ? (
-            <ProductInfo price={currentSize.size.price} product={product} />
-          ) : null}
-          <ProductSizes
-            handleSizeChange={handleSizeChange}
-            sizes={sizes}
-            sizeIsNotSelectedError={sizeIsNotSelectedError}
-          />
-          {sizes ? (
-            <ProductSubmit
-              sizes={sizes}
+          {!loading && (
+            <ProductInfo
+              price={currentSize?.size ? currentSize.size.price : {}}
               product={product}
-              setSizeIsNotSelectedError={setSizeIsNotSelectedError}
             />
-          ) : null}
+          )}
+          {currentSize ? (
+            <>
+              <ProductSizes
+                handleSizeChange={handleSizeChange}
+                sizes={sizes}
+                sizeIsNotSelectedError={sizeIsNotSelectedError}
+              />
+              <ProductSubmit
+                product={product}
+                setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+              />
+            </>
+          ) : (
+            <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+          )}
         </div>
       </div>
       {product._id ? <SimilarProducts product={product} /> : null}

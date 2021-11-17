@@ -414,6 +414,9 @@ export const deliveryTypes = {
   COURIER: 'COURIER'
 };
 
+const courierArray = ['NOVAPOSTCOURIER', 'UKRPOSTCOURIER', 'COURIER'];
+export const isCourier = (type) => courierArray.some((arrType) => arrType === type);
+
 export const CY_CODE_ERR = 'code-error';
 
 export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';

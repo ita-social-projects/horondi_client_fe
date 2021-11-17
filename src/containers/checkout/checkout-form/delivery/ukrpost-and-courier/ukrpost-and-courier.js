@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useStyles } from './ukrpost-and-courier.styles';
-import { CY_CODE_ERR } from '../../../../../configs';
+import { CY_CODE_ERR, deliveryTypes } from '../../../../../configs';
 import { courierInputLabels, POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
 import { RESET } from '../../../../../const/checkout';
 import {
@@ -290,7 +290,7 @@ const UkrpostAndCourier = ({
             {t(errors.city)}
           </div>
         )}
-        {deliveryType === 'UKRPOST' ? (
+        {deliveryType === deliveryTypes.UKRPOST ? (
           <>
             <Autocomplete
               onInputChange={(e, value, reason) => {

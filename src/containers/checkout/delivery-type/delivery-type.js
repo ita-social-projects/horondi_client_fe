@@ -23,7 +23,7 @@ const DeliveryType = ({ setFieldValue, touched, errors }) => {
   const [courierOrganization, setcourierOrganization] = useState(deliveryTypes.NOVAPOSTCOURIER);
 
   const handleAddDeliveryType = () => {
-    if (deliveryType === 'COURIER' && courierOrganization) {
+    if (deliveryType === deliveryTypes.COURIER && courierOrganization) {
       dispatch(addDeliveryType(courierOrganization));
     } else {
       dispatch(addDeliveryType(deliveryType));
@@ -66,7 +66,7 @@ const DeliveryType = ({ setFieldValue, touched, errors }) => {
             {radioButtons}
           </RadioGroup>
         </FormControl>
-        {deliveryType === 'COURIER' && (
+        {deliveryType === deliveryTypes.COURIER && (
           <div className={styles.inputWrapper}>
             <FormControl
               error={touched.courierOrganization && !!errors.courierOrganization}

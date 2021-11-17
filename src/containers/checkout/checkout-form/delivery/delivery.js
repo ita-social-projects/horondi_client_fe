@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SelfPickup from './self-pickup';
-import { deliveryTypes } from '../../../../configs';
+import { deliveryTypes, isCourier } from '../../../../configs';
 import NovaPost from './nova-post';
 import UkrpostAndCourier from './ukrpost-and-courier';
 
@@ -27,10 +27,7 @@ const Delivery = ({
         values={values}
       />
     )}
-    {(deliveryType === deliveryTypes.COURIER ||
-      deliveryType === deliveryTypes.UKRPOST ||
-      deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER) && (
+    {(deliveryType === deliveryTypes.UKRPOST || isCourier(deliveryType)) && (
       <UkrpostAndCourier
         deliveryType={deliveryType}
         setFieldValue={setFieldValue}

@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
 import DeliveryType from '../delivery-type/delivery-type';
 import { useStyles } from './checkout-form.styles';
-import { CY_CODE_ERR, SESSION_STORAGE } from '../../../configs';
+import { CY_CODE_ERR, SESSION_STORAGE, deliveryTypes } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import routes from '../../../const/routes';
@@ -99,6 +99,9 @@ const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
       }
     });
 
+  const courierDependencyArr = [deliveryTypes.NOVAPOSTCOURIER, deliveryTypes.UKRPOSTCOURIER];
+  const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
+
   useEffect(() => {
     if (userData && !getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM)) {
       resetForm({ values: setUserValues(values, userData, deliveryType) });
@@ -114,7 +117,7 @@ const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
   }, []);
 
   useEffect(() => {
-    if (deliveryType !== 'NOVAPOSTCOURIER' && deliveryType !== 'UKRPOSTCOURIER') {
+    if (!isCourier(deliveryType)) {
       resetForm({
         values: {
           ...values,

@@ -8,8 +8,8 @@ import { useStyles } from './order-data.styles';
 import OrderItemCard from './order-item-card';
 import { defaultProps, ORDER_PAYMENT_STATUS, thanksPropTypes } from '../../../utils/thank-you';
 
-const OrderData = ({ currency, order, isLightTheme }) => {
-  const styles = useStyles({ isLightTheme });
+const OrderData = ({ currency, order }) => {
+  const styles = useStyles();
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const currencySign = currency ? faDollarSign : faHryvnia;

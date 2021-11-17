@@ -410,8 +410,12 @@ export const deliveryTypes = {
   UKRPOST: 'UKRPOST',
   SELFPICKUP: 'SELFPICKUP',
   NOVAPOSTCOURIER: 'NOVAPOSTCOURIER',
-  UKRPOSTCOURIER: 'UKRPOSTCOURIER'
+  UKRPOSTCOURIER: 'UKRPOSTCOURIER',
+  COURIER: 'COURIER'
 };
+
+const courierArray = ['NOVAPOSTCOURIER', 'UKRPOSTCOURIER', 'COURIER'];
+export const isCourier = (type) => courierArray.some((arrType) => arrType === type);
 
 export const CY_CODE_ERR = 'code-error';
 

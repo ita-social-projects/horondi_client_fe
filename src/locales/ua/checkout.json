@@ -34,6 +34,7 @@
         "lastName": "Прізвище *",
         "email": "Email *",
         "contactPhoneNumber": "Номер телефону *",
+        "courier": "Кур'єрська служба *",
         "paymentMethod": "Виберіть метод оплати *",
         "orderComment": "Коментар до замовлення...",
         "deliveryType": "Виберіть тип доставки",
@@ -61,8 +62,11 @@
         "novaPost": "Нова пошта",
         "ukrPost": "Укрпошта",
         "selfPickup": "Самовивіз",
-        "novaPostCourier": "Кур'єр нової пошти",
-        "ukrPostCourier": "Кур'єр укрпошти"
+        "courier": "Кур'єр"
+    },
+    "courierOrganization": {
+        "novaPostCourier": "Нова Пошта",
+        "ukrPostCourier": "Укрпошта"
     },
     "schedule": {
         "monday": "Пн:  ",

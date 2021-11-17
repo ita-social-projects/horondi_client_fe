@@ -28,9 +28,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.hover.color
     }
   },
-  thunksTitle: ({ isLightTheme }) => ({
+  thunksTitle: () => ({
     fontSize: 30,
-    color: !isLightTheme ? '#ffffff' : '#000000',
+    color: palette.type === 'light' ? '#000000' : '#ffffff',
     fontWeight: 400,
     marginBottom: 0
   }),

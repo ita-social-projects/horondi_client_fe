@@ -67,12 +67,7 @@ describe('Active-messenger component test', () => {
     wrapper = mount(
       <ActiveMessenger visible={visible} HandleMailFormVisible={mockHandleMailFormVisible} />
     );
-    expect(
-      wrapper
-        .find('span')
-        .at(1)
-        .prop('message', 'Thank you for your letter, we will contact you soon')
-    );
+    expect(wrapper.find('span').at(0).text()).toBe('chat.sendMail');
   });
   it('Should set value to state when input is changed', () => {
     const container = mount(<TextField />);

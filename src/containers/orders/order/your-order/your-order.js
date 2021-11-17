@@ -12,8 +12,7 @@ import {
 } from '@material-ui/core';
 import { Loader } from '../../../../components/loader/loader';
 import { IMG_URL } from '../../../../configs';
-
-const isSelfpickup = false;
+import SelfPickup from '../../../checkout/checkout-form/delivery/self-pickup/self-pickup';
 
 const YourOrder = ({ ...props }) => {
   const { cartItems, cartLoading } = useSelector((state) => ({
@@ -29,7 +28,8 @@ const YourOrder = ({ ...props }) => {
     totalPriceToPay,
     values,
     language,
-    styles
+    styles,
+    deliveryType
   } = props;
 
   if (cartLoading) {
@@ -90,9 +90,9 @@ const YourOrder = ({ ...props }) => {
           : null}
       </List>
       <Divider variant='fullWidth' />
-      {isSelfpickup && (
+      {deliveryType === 'SELFPICKUP' && (
         <>
-          <Typography>isSelfpickup Section</Typography>
+          <SelfPickup />
           <Divider variant='fullWidth' />
         </>
       )}

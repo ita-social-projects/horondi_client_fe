@@ -1,6 +1,5 @@
 import React from 'react';
 
-import SelfPickup from './self-pickup';
 import { deliveryTypes } from '../../../../configs';
 import NovaPost from './nova-post';
 import Courier from './courier';
@@ -16,8 +15,6 @@ const Delivery = ({
   setFieldValue
 }) => (
   <>
-    {deliveryType === deliveryTypes.SELFPICKUP && <SelfPickup />}
-
     {deliveryType === deliveryTypes.NOVAPOST && (
       <NovaPost
         setFieldValue={setFieldValue}

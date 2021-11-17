@@ -3,7 +3,8 @@ export const mockedProps = {
   t: jest.fn(),
   currency: 0,
   language: 0,
-  checkoutFormBtnValue: jest.fn()
+  checkoutFormBtnValue: jest.fn(),
+  deliveryType: ''
 };
 
 export const mockedCartItemsData = [

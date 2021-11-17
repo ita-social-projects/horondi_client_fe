@@ -22,7 +22,6 @@ describe('<YourOrder /> component tests', () => {
     const wrapper = shallow(<YourOrder />);
     expect(wrapper.find(Loader).length).toEqual(1);
   });
-
   it('renders list of Cart Items', () => {
     const userData = {
       cartItems: mockedCartItemsData,
@@ -32,5 +31,23 @@ describe('<YourOrder /> component tests', () => {
     render(<YourOrder {...mockedProps} />);
     expect(screen.getByText(/роллтоп/i)).toBeInTheDocument();
     expect(screen.getByRole('list')).toBeTruthy();
+  });
+  it('should not render <SelfPickup />', () => {
+    const userData = {
+      cartItems: mockedCartItemsData,
+      cartLoading: false
+    };
+    useSelector.mockImplementation(() => userData);
+    render(<YourOrder {...mockedProps} />);
+    expect(screen.queryByText(/addressHorondi/i)).toBeNull();
+  });
+  it('should render <SelfPickup />', () => {
+    const userData = {
+      cartItems: mockedCartItemsData,
+      cartLoading: false
+    };
+    useSelector.mockImplementation(() => userData);
+    render(<YourOrder {...mockedProps} deliveryType='SELFPICKUP' />);
+    expect(screen.getByText(/addressHorondi/i)).toBeInTheDocument();
   });
 });

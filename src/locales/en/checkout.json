@@ -17,11 +17,11 @@
         "payment": "Payment Method",
         "orderComment": "Order Comment",
         "yourOrderTitle": "Your order",
-        "schedule": "Schedule:",
+        "schedule": "Opening Hours:",
         "address": "Address:",
-        "addressHorondi": "Lviv, st. Zavodska, 31",
-        "workDay": "10:00 - 19:00",
-        "restDay": "Day off"
+        "addressHorondi": "Lviv, Zavodska, 31",
+        "workDay": "10:00 - 20:00",
+        "restDay": "Closed"
     },
     "checkoutTextFields": {
         "paymentMethod": "Choose a payment method *",

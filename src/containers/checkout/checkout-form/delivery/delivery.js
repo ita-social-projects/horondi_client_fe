@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { deliveryTypes, isCourier } from '../../../../configs';
 import NovaPost from './nova-post';
+import { deliveryTypes, isCourier } from '../../../../configs';
 import UkrpostAndCourier from './ukrpost-and-courier';
 
 const Delivery = ({

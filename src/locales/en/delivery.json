@@ -9,6 +9,8 @@
   "sunday": "Sun:  ",
   "noCity": "City not found",
   "noDepartment": "Department not found",
+  "street": "Street",
+  "noStreet": "Street not found",
   "deliveryAddress": "Delivery Address",
   "city": "City",
   "department": "Department",

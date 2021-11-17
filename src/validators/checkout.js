@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { deliveryTypes, formRegExp } from '../configs';
+import { deliveryTypes, formRegExp, isCourier } from '../configs';
 
 export const validationSchema = (deliveryType) =>
   Yup.object().shape({
@@ -22,15 +22,13 @@ export const validationSchema = (deliveryType) =>
     courierOffice:
       (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) &&
       Yup.string().required('error.requiredField'),
+    courierOrganization:
+      deliveryType === deliveryTypes.COURIER && Yup.string().required('error.requiredField'),
     region:
-      (deliveryType === deliveryTypes.UKRPOST ||
-        deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      (deliveryType === deliveryTypes.UKRPOST || isCourier(deliveryType)) &&
       Yup.string().required('error.requiredField'),
     district:
-      (deliveryType === deliveryTypes.UKRPOST ||
-        deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      (deliveryType === deliveryTypes.UKRPOST || isCourier(deliveryType)) &&
       Yup.string().required('error.requiredField'),
     city:
       deliveryType !== deliveryTypes.SELFPICKUP &&
@@ -39,14 +37,11 @@ export const validationSchema = (deliveryType) =>
         .max(50, 'error.profile.city')
         .required('error.requiredField'),
     street:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+      isCourier(deliveryType) &&
       Yup.string()
         .min(2, 'error.streetLong')
         .max(100, 'error.streetLong')
         .required('error.requiredField'),
     house:
-      (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-        deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-      Yup.string().min(1, 'error.house').required('error.requiredField')
+      isCourier(deliveryType) && Yup.string().min(1, 'error.house').required('error.requiredField')
   });

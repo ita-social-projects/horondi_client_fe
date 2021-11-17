@@ -21,7 +21,6 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: '25px'
   },
   title: {
-    ...title,
-    color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE'
+    ...title
   }
 }));

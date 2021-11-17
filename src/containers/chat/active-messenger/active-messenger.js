@@ -88,7 +88,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
 
   return (
     <form className={style.formField}>
-      <span className={style.mailTitle}>{t('chat.sendMail')}.</span>
+      <span className={style.mailTitle}>{t('chat.sendMail')}</span>
       <>
         <TextField
           required

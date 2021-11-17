@@ -42,10 +42,6 @@ describe('CheckoutForm component tests', () => {
     expect(wrapper.find(Delivery).length).toEqual(1);
     expect(wrapper.find(Link).at(1).props().children[1].paymentMethod).toEqual('card');
   });
-  it('should match snapshot', () => {
-    const wrapper = shallow(<CheckoutForm {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
   it('should submit add payment method', async () => {
     const wrapper = shallow(<CheckoutForm {...props} onSubmit={myOnSubmit} />);
     wrapper.find('form').simulate('submit');

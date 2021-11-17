@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Rating from '@material-ui/lab/Rating';
 
 import { useStyles } from './similar-products-item.styles';
@@ -36,11 +35,7 @@ const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) 
       <div className={styles.similarItem}>
         <div className={styles.info}>
           <span>{name[language].value}</span>
-          <span>
-            {price}
-            {'\u00A0'}
-            <FontAwesomeIcon icon={currencySign} />
-          </span>
+          <span>{price}</span>
           <Rating className={styles.rating} value={rate} readOnly size='small' />
         </div>
       </div>

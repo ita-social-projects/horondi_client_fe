@@ -40,10 +40,6 @@ describe('CheckoutForm component tests', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     expect(wrapper.find(Delivery).length).toEqual(1);
   });
-  it('should match snapshot', () => {
-    const wrapper = shallow(<CheckoutForm {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
   it('should submit add payment method', async () => {
     const wrapper = shallow(<CheckoutForm {...props} onSubmit={myOnSubmit} />);
     wrapper.find('form').simulate('submit');

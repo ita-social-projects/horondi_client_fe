@@ -25,8 +25,8 @@ const ProductInfo = ({ price, product }) => {
     ({ Language, Products: { productToSend }, Currency }) => ({
       language: Language.language,
       currentPrice: productToSend.price || price,
-      currentWeight: productToSend.dimensions.weightInKg,
-      currentVolume: productToSend.dimensions.volumeInLiters,
+      currentWeight: productToSend.dimensions.weightInKg || 0,
+      currentVolume: productToSend.dimensions.volumeInLiters || 0,
       currency: Currency.currency
     })
   );
@@ -73,14 +73,16 @@ const ProductInfo = ({ price, product }) => {
           </div>
         ) : null}
       </div>
-      <div className={styles.priceContainer}>
-        <span className={styles.subtitle}>{t('common.price')}: </span>
-        <span data-cy='price' className={styles.price}>
-          {Math.round(currentPrice[currency]?.value)}
-          {'\u00A0'}
-          <FontAwesomeIcon icon={currencySign} />
-        </span>
-      </div>
+      {Object.keys(currentPrice).length ? (
+        <div className={styles.priceContainer}>
+          <span className={styles.subtitle}>{t('common.price')}: </span>
+          <span data-cy='price' className={styles.price}>
+            {Math.round(currentPrice[currency]?.value)}
+            {'\u00A0'}
+            <FontAwesomeIcon icon={currencySign} />
+          </span>
+        </div>
+      ) : null}
       <div className={styles.look}>
         <span className={styles.subtitle}>{t('common.color')}:</span>
         <div className={styles.colorCircle} />

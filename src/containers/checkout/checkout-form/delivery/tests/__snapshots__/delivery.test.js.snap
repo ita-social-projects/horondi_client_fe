@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delivery component tests should match snapshot 1`] = `
+<Fragment>
+  <UkrpostAndCourier
+    deliveryType="NOVAPOSTCOURIER"
+  />
+</Fragment>
+`;

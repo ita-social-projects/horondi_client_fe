@@ -93,7 +93,7 @@ exports[`Should render 404 page 1`] = `
                 "color": "#FFFFFF",
               },
               "normal": Object {
-                "backgroundColor": "#3F3F3F",
+                "backgroundColor": "#020202",
                 "color": "#FFFFFF",
               },
             },

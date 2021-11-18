@@ -340,7 +340,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     lineHeight: '16px',
     display: 'flex',
     flexDirection: 'column',
-    letterSpacing: '0.004em'
+    letterSpacing: '0.004em',
+    opacity: '75%'
   },
   yourOrderListItemPrice: {
     position: 'absolute',
@@ -401,6 +402,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '52px',
     width: '312px',
     left: '24px',
-    margin: '16px 0px 0px 0px'
+    margin: '24px 0px 0px 0px'
   }
 }));

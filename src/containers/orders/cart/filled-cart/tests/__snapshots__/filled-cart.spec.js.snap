@@ -99,7 +99,7 @@ exports[`Filled cart component tests Should match snapshot 1`] = `
               transform={null}
             />
              
-            100
+            NaN
           </div>
           <Link
             to="/checkout"

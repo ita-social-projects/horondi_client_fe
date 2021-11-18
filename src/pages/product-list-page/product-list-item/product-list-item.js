@@ -12,7 +12,7 @@ import { getImage } from '../../../utils/imageLoad';
 import { IMG_URL } from '../../../configs';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 import { getCurrencySign } from '../../../utils/currency';
 import ThemeContext from '../../../context/theme-context';
 

@@ -49,9 +49,10 @@ import {
   REDIRECT_TIMEOUT,
   RETURN_PAGE,
   USER_IS_BLOCKED,
-  USER_TOKENS
+  USER_TOKENS,
+  AUTH_ERRORS
 } from '../../configs';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import {
   clearLocalStorage,
   getFromLocalStorage,
@@ -59,7 +60,6 @@ import {
 } from '../../services/local-storage.service';
 import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../cart/cart.actions';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
-import { AUTH_ERRORS } from '../../const/error-messages';
 import { USER_ERROR } from '../../translations/user.translations';
 
 const { pathToLogin, pathToProfile } = routes;

@@ -10,7 +10,7 @@ import { TableCell, TableRow } from '@material-ui/core';
 import { useStyles } from './wishlist-item.styles';
 import { IMG_URL } from '../../../configs';
 import { getCurrencySign } from '../../../utils/currency';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 import ThemeContext from '../../../context/theme-context';
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 

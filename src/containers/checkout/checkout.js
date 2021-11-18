@@ -6,7 +6,7 @@ import { useStyles } from './checkout.styles';
 import CheckoutForm from './checkout-form';
 import { getDeliveryType } from '../../redux/cart/cart.actions';
 import { Loader } from '../../components/loader/loader';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
 
 const { pathToThanks, pathToMain } = routes;

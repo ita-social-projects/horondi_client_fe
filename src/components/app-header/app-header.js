@@ -9,7 +9,7 @@ import { useStyles } from './app-header.styles';
 import Sidebar from '../../containers/sidebar';
 import HeaderRightBar from '../../containers/header-right-bar';
 
-import { LOGO } from '../../configs';
+import { HORONDI } from '../../configs';
 
 const AppHeader = () => {
   const styles = useStyles();
@@ -39,7 +39,7 @@ const AppHeader = () => {
           </BurgerMenu>
           <Typography variant='h5'>
             <Link to='/' className={styles.logo}>
-              {LOGO}
+              {HORONDI.toUpperCase()}
             </Link>
           </Typography>
           <HeaderRightBar setIsMenuOpen={setIsMenuOpen} />

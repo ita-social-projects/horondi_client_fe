@@ -5,9 +5,14 @@ import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useStyles } from './ukrpost-and-courier.styles';
-import { CY_CODE_ERR, deliveryTypes } from '../../../../../configs';
+import {
+  CY_CODE_ERR,
+  deliveryTypes,
+  RESET,
+  MATERIAL_UI_COLOR,
+  TEXT_FIELD_VARIANT
+} from '../../../../../configs';
 import { courierInputLabels, POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
-import { RESET } from '../../../../../const/checkout';
 import {
   getUkrPoshtaRegions,
   getUkrPoshtaDistricts,
@@ -16,7 +21,6 @@ import {
   getUkrPoshtaPostOffices
 } from './operations/get-ukrPost-address-data.queries';
 
-import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 

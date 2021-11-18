@@ -6,11 +6,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './delivery-type.styles';
 import { addDeliveryType } from '../../../redux/cart/cart.actions';
-import { deliveryTypes, SESSION_STORAGE, CY_CODE_ERR } from '../../../configs';
+import { deliveryTypes, SESSION_STORAGE, CY_CODE_ERR, TEXT_FIELD_VARIANT } from '../../../configs';
 import { getFromSessionStorage } from '../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../utils/checkout';
-
-import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const DeliveryType = ({ setFieldValue, touched, errors }) => {
   const styles = useStyles();

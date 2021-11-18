@@ -12,7 +12,7 @@ import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
-import routes from '../const/routes';
+import routes from '../configs/routes';
 import { CategoriesContext } from '../context/categories/categories-context';
 
 const {

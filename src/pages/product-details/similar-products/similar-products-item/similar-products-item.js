@@ -9,12 +9,12 @@ import { IMG_URL } from '../../../../configs';
 
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
-import routes from '../../../../const/routes';
+import routes from '../../../../configs/routes';
 import ThemeContext from '../../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
-const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) => {
+const SimilarProductsItem = ({ imageUrl, id, name, rate, price }) => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));

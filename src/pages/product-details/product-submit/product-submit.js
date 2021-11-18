@@ -15,7 +15,7 @@ import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.sele
 
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
 
 const { pathToCart } = routes;

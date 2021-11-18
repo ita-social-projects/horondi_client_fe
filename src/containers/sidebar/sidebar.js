@@ -11,7 +11,7 @@ import { useStyles } from './sidebar.styles';
 import { sideBarSubList } from '../../configs';
 import FooterLinks from '../footer-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 

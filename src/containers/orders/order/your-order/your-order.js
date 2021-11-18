@@ -53,7 +53,7 @@ const YourOrder = ({ ...props }) => {
           ? cartItems.map((item) => (
             <ListItem
               className={styles.yourOrderListItem}
-              key={item.product._id}
+              key={item._id || item.id}
               alignItems='center'
             >
               <Typography component='div'>x {item.quantity}</Typography>

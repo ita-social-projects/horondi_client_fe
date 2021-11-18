@@ -402,6 +402,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '52px',
     width: '312px',
     left: '24px',
-    margin: '16px 0px 0px 0px'
+    margin: '24px 0px 0px 0px'
   }
 }));

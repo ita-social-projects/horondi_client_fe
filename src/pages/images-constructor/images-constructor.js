@@ -89,7 +89,7 @@ const ImagesConstructor = () => {
   const [constructorModel, setConstructorModel] = useState('');
   const currentConstructorModel = useRef({});
   const allModels = useRef([]);
-  const currentPrices = useRef({});
+  const [allPrices, setAllPrice] = useState({});
 
   const {
     loading: constructorsLoading,
@@ -145,12 +145,19 @@ const ImagesConstructor = () => {
           return acc;
         }, {})
       );
-
+      // console.log(constructorValues);
+      // console.log(oneConstractor[0]);
+      // console.log(currentConstructorModel);
       currentConstructorModel.current = oneConstractor[0];
     }
+    setAllPrice(
+      Object.keys(constructorValues).reduce((acc, key) => {
+        if (key === 'patterns') acc.pattern = constructorValues[key].additionalPrice[0].value;
+        if (key === 'bottoms') acc.bottom = constructorValues[key].additionalPrice[0].value;
+        return acc;
+      }, {})
+    );
   }, [constructorByModel]);
-
-  // console.log(currentConstructorModel);
 
   useEffect(() => {
     !called && constructorModel && getConstructorByModelHandler();
@@ -333,18 +340,12 @@ const ImagesConstructor = () => {
                 </span>
               </li>
               <div className={`${styles.line} ${styles.topLine}`} />
-              {constructorPartPrice(
-                prices.priceBasic,
-                prices.priceGobelen,
-                prices.priceBottom,
-                prices.priceSize
-              ).map((item, index) =>
+              {constructorPartPrice(allPrices.pattern, allPrices.bottom).map((item, index) =>
                 item ? (
                   <li key={index} className={styles.priceItem}>
                     <span>{constructorPartNames(!language)[index]}</span>
                     <span>
-                      +{item}
-                      {/* {constructorValues.sizes.additionalPrice?.map(item => item.value)} */}
+                      {item}
                       {getCurrentCurrency(currency)}
                     </span>
                   </li>
@@ -358,7 +359,9 @@ const ImagesConstructor = () => {
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
             <span>
-              {constructorEndPrice(prices.priceTotal)}
+              {constructorEndPrice(
+                +prices.DEFAULT_PRICE_VALUE + allPrices.pattern + allPrices.bottom
+              )}
               {getCurrentCurrency(currency)}
             </span>
           </h2>

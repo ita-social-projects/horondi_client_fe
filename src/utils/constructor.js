@@ -1,15 +1,17 @@
 import i18next from 'i18next';
 
-export const constructorPartPrice = (priceBasic, priceGobelen, priceBottom, priceSize) => [
-  priceBasic,
+export const constructorPartPrice = (priceGobelen, priceBottom) => [
+  // priceBasic,
   priceGobelen,
-  priceBottom,
-  priceSize
+  priceBottom
+  // priceSize
 ];
 export const constructorPartNames = (language) =>
   language
-    ? ['Матеріал основи:', 'Гобелен:', 'Матеріал дна:', 'Розмір:', 'Спинка:']
-    : ['Basic material:', 'Front-Pocket material:', 'Bottom material:', 'Size:', 'Back:'];
+    ? // ? ['Матеріал основи:', 'Гобелен:', 'Матеріал дна:', 'Розмір:', 'Спинка:']
+      // : ['Basic material:', 'Front-Pocket material:', 'Bottom material:', 'Size:', 'Back:'];
+    ['Гобелен:', 'Матеріал дна:']
+    : ['Front-Pocket material:', 'Bottom material:'];
 
 export const constructorEndPrice = (priceTotal) => {
   if (!priceTotal) {

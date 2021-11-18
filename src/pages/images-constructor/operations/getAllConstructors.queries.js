@@ -25,6 +25,10 @@ export const getAllConstructors = gql`
             thumbnail
           }
           available
+          additionalPrice {
+            value
+            currency
+          }
         }
         bottoms {
           _id
@@ -37,6 +41,10 @@ export const getAllConstructors = gql`
             medium
             small
             thumbnail
+          }
+          additionalPrice {
+            value
+            currency
           }
         }
         patterns {
@@ -53,8 +61,8 @@ export const getAllConstructors = gql`
             thumbnail
           }
           additionalPrice {
-            currency
             value
+            currency
           }
         }
         model {
@@ -65,6 +73,10 @@ export const getAllConstructors = gql`
           }
           sizes {
             name
+            additionalPrice {
+              value
+              currency
+            }
           }
         }
       }

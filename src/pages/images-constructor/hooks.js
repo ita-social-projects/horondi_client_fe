@@ -54,11 +54,11 @@ export const useConstructor = () => {
       const { constructorBasic, constructorFrontPocket, constructorPattern, constructorBottom } =
         currentModel.eligibleOptions;
       dispatch(setModelLoading(true));
-      // dispatch(getConstructorBasic(constructorBasic[0]._id));
+      dispatch(getConstructorBasic(constructorBasic[0]._id));
       // dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
       // dispatch(getConstructorPattern(constructorPattern[0]._id));
       // dispatch(getConstructorBottom(constructorBottom[0]._id));
-      dispatch(getConstructorSize(currentModel.sizes[0]._id));
+      // dispatch(getConstructorSize(currentModel.sizes[0]._id));
     }
   }, [currentModel]);
 

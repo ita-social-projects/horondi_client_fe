@@ -7,7 +7,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './product-details.styles';
-import { MATERIAL_UI_COLOR } from '../../configs/const';
+import { MATERIAL_UI_COLOR } from '../../configs';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';

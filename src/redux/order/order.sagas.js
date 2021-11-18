@@ -14,9 +14,8 @@ import {
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
-import { CURRENCY, AUTH_ERRORS } from '../../configs/const';
+import { USER_IS_BLOCKED, AUTH_ERRORS, CURRENCY } from '../../configs';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
-import { USER_IS_BLOCKED } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
 
 const { pathToThanks, pathToErrorPage } = routes;

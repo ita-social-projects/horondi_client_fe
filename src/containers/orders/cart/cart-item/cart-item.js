@@ -20,8 +20,7 @@ import {
   setUserCartItemSize
 } from '../../../../redux/cart/cart.actions';
 
-import { IMG_URL } from '../../../../configs';
-import { MATERIAL_UI_COLOR } from '../../../../configs/const';
+import { IMG_URL, MATERIAL_UI_COLOR } from '../../../../configs';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';

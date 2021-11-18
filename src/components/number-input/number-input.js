@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { useStyles } from './number-input.styles';
-import { TEXT_FIELD_VARIANT, TYPES_CONST } from '../../configs/const';
+import { TEXT_FIELD_VARIANT, TYPES_CONST } from '../../configs';
 
 const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();

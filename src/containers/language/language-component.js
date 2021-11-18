@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
-import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
-import { languageName } from '../../configs/const';
+import { LANGUAGES_LIST, DEFAULT_LANGUAGE, languageName } from '../../configs';
 import Dropdown from '../../components/dropdown';
 
 const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;

@@ -4,12 +4,11 @@ import { TextField, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
-import { USER_REGISTER_LABELS } from '../../../configs';
+import { USER_REGISTER_LABELS, TEXT_FIELD_VARIANT } from '../../../configs';
 import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
 import { Loader } from '../../../components/loader/loader';
-import { TEXT_FIELD_VARIANT } from '../../../configs/const';
 import routes from '../../../configs/routes';
 
 const { pathToLogin, pathToTerms } = routes;

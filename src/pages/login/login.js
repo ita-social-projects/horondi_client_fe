@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import { useStyles } from './login.styles';
-import { LIGHT_THEME, LOGIN_USER_DATA } from '../../configs';
+import { LIGHT_THEME, LOGIN_USER_DATA, MATERIAL_UI_COLOR } from '../../configs';
 import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
@@ -14,7 +14,6 @@ import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { loginValidationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
-import { MATERIAL_UI_COLOR } from '../../configs/const';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 
 const Login = () => {

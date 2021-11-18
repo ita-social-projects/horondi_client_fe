@@ -23,7 +23,7 @@ import {
   SET_USER_CART_ITEM_SIZE
 } from './cart.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { cartKey, deliveryTypeKey, USER_IS_BLOCKED } from '../../configs/index';
+import { cartKey, deliveryTypeKey, USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
 import {
   addProductToCart,
   cleanCart,
@@ -33,7 +33,6 @@ import {
   changeUserCartItemSize
 } from './cart.operations';
 import { handleUserError } from '../user/user.sagas';
-import { AUTH_ERRORS } from '../../configs/const';
 import changeCartItemSizeHandler from '../../utils/changeCartItemSizeHandler';
 
 export function* handleCartLoad() {

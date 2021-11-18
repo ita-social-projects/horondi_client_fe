@@ -4,8 +4,7 @@ import fetch from 'unfetch';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client/public';
 
-import { USER_TOKENS, FETCH_POLICY } from '../configs';
-import { AUTH_ERRORS } from '../configs/const';
+import { USER_TOKENS, FETCH_POLICY, AUTH_ERRORS } from '../configs';
 import { getFromLocalStorage } from '../services/local-storage.service';
 import refreshAuthToken from './regenerateAuthTokenPair';
 

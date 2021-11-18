@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
 import i18next from 'i18next';
-import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
+import {
+  DEFAULT_CURRENCY,
+  deliveryTypes,
+  SESSION_STORAGE,
+  COURIER,
+  MATERIAL_UI_COLOR
+} from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
-import { COURIER, MATERIAL_UI_COLOR } from '../configs/const';
 import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
 export const initialValues = {

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/3.jpg';
+import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   recoveryBackground: {
@@ -9,13 +9,15 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative'
   },
   recoveryForm: {
-    width: '400px',
-    minHeight: '100px',
+    width: '684px',
+    minHeight: '340px',
     background: theme.palette.backgroundColor,
     textAlign: 'center',
     position: 'absolute',
-    top: '202px',
-    right: '56px',
+    top: 'calc(50% - 174px)',
+    right: '0',
+    left: '0',
+    margin: '0 auto',
     padding: '50px'
   },
   heading: {

@@ -2,7 +2,6 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
-export const UNIQUE_MODEL_IMAGE_LINK = 'https://i.imgur.com/ygJaph4.jpg';
 export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
 export const HORONDI_FB_LINK = 'https://www.facebook.com/Horondi';
 export const HORONDI_INST_LINK = 'https://www.instagram.com/horondi';
@@ -83,49 +82,6 @@ export const PROFILE_USER_DATA = {
 
 export const REQUIRED_USER_FIELDS = ['firstName', 'lastName', 'email'];
 
-export const errorMessages = [
-  {
-    lang: 'uk',
-    value: {
-      firstName: 'Поле повинно містити від 2 до 30 символів',
-      lastName: 'Поле повинно містити від 2 до 30 символів',
-      email: 'Некоректний формат пошти',
-      pass: 'Від 6 до 30 символів з однією літерою та цифрою',
-      confirmPassword: 'Паролі не співпадають',
-      text: 'Поле повинно містити від 2 до 700 символів',
-      phoneNumber: 'Некоректний формат телефону',
-      zipcode: 'Некоректний формат почтового індексу',
-      country: 'Поле повинно містити від 2 до 40 символів',
-      region: 'Поле повинно містити від 2 до 40 символів',
-      city: 'Поле повинно містити від 2 до 40 символів',
-      street: 'Поле повинно містити від 2 до 40 символів',
-      buildingNumber: 'Поле повинно містити від 1 до 6 символів',
-      appartment: 'Поле повинно містити від 1 до 6 символів',
-      empty: 'Поле не повинне бути порожнім'
-    }
-  },
-  {
-    lang: 'eng',
-    value: {
-      firstName: 'Field should contain from 2 to 30 characters',
-      lastName: 'Field should contain from 2 to 30 characters',
-      email: `Wrong email address `,
-      pass: 'From 6 to 30 characters with one letter and one digit',
-      confirmPassword: 'Passwords do not match',
-      text: 'Field should contain from 2 to 700 characters',
-      phoneNumber: 'Wrong phone format',
-      zipcode: 'Wrong zipcode format',
-      country: 'Field should contain from 2 to 40 characters',
-      region: 'Field should contain from 2 to 40 characters',
-      city: 'Field should contain from 2 to 40 characters',
-      street: 'Field should contain from 2 to 40 characters',
-      buildingNumber: 'Field should contain from 1 to 6 characters',
-      appartment: 'Field should contain from 1 to 6 characters',
-      empty: 'Field should not to be empty'
-    }
-  }
-];
-
 export const formRegExp = {
   email:
     '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$',
@@ -152,66 +108,12 @@ export const formRegExp = {
   link: /\b(?:(?:https?|ftp|http):\/\/|www\.)[-a-z0-9+&@#%?=~_|!:,.;]*[-a-z0-9+&@#%=~_|]/gm
 };
 
-export const placeholders = {
-  firstName: [
-    {
-      lang: 'uk',
-      value: "Введіть Ім'я"
-    },
-    {
-      lang: 'eng',
-      value: 'Enter firstname'
-    }
-  ],
-  lastName: [
-    {
-      lang: 'uk',
-      value: 'Введіть прізвище'
-    },
-    {
-      lang: 'eng',
-      value: 'Enter lastname'
-    }
-  ],
-  email: [
-    {
-      lang: 'uk',
-      value: 'Введіть емейл'
-    },
-    {
-      lang: 'eng',
-      value: 'Enter email'
-    }
-  ],
-  password: [
-    {
-      lang: 'uk',
-      value: 'Введіть пароль'
-    },
-    {
-      lang: 'eng',
-      value: 'Enter password'
-    }
-  ],
-  confirmPassword: [
-    {
-      lang: 'uk',
-      value: 'Підтвердіть пароль'
-    },
-    {
-      lang: 'eng',
-      value: 'Confirm password'
-    }
-  ]
-};
-
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
   month: 'numeric',
   day: 'numeric'
 };
 
-export const DATE_LANGUAGE_OPTIONS = ['ukr-UA', 'en-US'];
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
@@ -269,21 +171,6 @@ export const RESPONSIVE_CATEGORIES = {
   }
 };
 
-export const SNACKBAR_DURATION = 4000;
-export const SNACKBAR_MESSAGE = {
-  added: ['Ваш коментар успішно створений', 'Your comment is successfully added'],
-  updated: ['Ваш коментар успішно оновлений', 'Your comment is successfully updated'],
-  addedReply: ['Вашу відповідь успішно створено', 'Your answer is successfully added'],
-  deletedReply: ['Вашу відповідь успішно видалено', 'Your answer is successfully deleted'],
-  deleted: ['Ваш коментар успішно видалений', 'Your comment is successfully deleted'],
-  error: ['Щось пішло не так', 'Something went wrong'],
-  blocked: ['Вибачте, ваш обліковий запис заблоковано.', 'Sorry, your account is blocked.'],
-  tokenExpired: [
-    'Данні авторизації застарілі, будь ласка авторизуйтеся',
-    'You have be logged out, please sign in again'
-  ]
-};
-
 export const TEXT_VALUE = 'text';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
@@ -295,11 +182,6 @@ export const LANGUAGES_LIST = [
 export const CURRENCIES_LIST = [
   { currency: 'UAH', value: 0 },
   { currency: 'USD', value: 1 }
-];
-
-export const DEFAULT_PRICE = [
-  { value: 0, currency: 'UAH' },
-  { value: 0, currency: 'USD' }
 ];
 
 export const DEFAULT_CURRENCY = 0;
@@ -330,17 +212,6 @@ export const profileFields = [
 export const carouselInterval = 5000;
 export const carouselMaterialInterval = 2000;
 
-export const moreHeaderButton = [
-  {
-    lang: 'uk',
-    value: 'Більше'
-  },
-  {
-    lang: 'en',
-    value: 'More'
-  }
-];
-
 export const sideBarSubList = [
   {
     name: ['Матеріали', 'Materials'],
@@ -360,28 +231,7 @@ export const sideBarSubList = [
   }
 ];
 
-export const SCROLL_BAR_DATA = [
-  {
-    name: ['Слайдер', 'Slider'],
-    href: '#slider'
-  },
-  {
-    name: ['Каталог', 'Catalog'],
-    href: '#catalog'
-  },
-  {
-    name: ['Створи сам', 'Create by yourself'],
-    href: '#constructor'
-  },
-  {
-    name: ['Моделі', 'Models'],
-    href: '#models'
-  },
-  {
-    name: ['Стиль горонді', 'Horondi style'],
-    href: '#horondiStyle'
-  }
-];
+export const SCROLL_BAR_DATA = ['#slider', '#catalog', '#constructor', '#models', '#horondiStyle'];
 
 export const toastSettings = {
   autoClose: 3000,
@@ -390,8 +240,6 @@ export const toastSettings = {
 
 export const NOTHING_FOUND_MESSAGE = ['Нічого не знайдено', 'Nothing found'];
 
-export const commentsLimit = 10;
-export const commentsSkip = 0;
 export const commentsReplyLimit = 10;
 
 export const cookiePolicy = {
@@ -440,49 +288,10 @@ export const FETCH_POLICY = 'no-cache';
 export const RETURN_PAGE = 'returnPage';
 
 export const SORT_BY_SELECT_OPTIONS = [
-  {
-    lang: [
-      {
-        lang: 'uk',
-        value: 'популярністю'
-      },
-      { lang: 'eng', value: 'popularity' }
-    ],
-    optionValue: {
-      name: 'popularity',
-      value: -1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'від дорогих до дешевих' },
-      { lang: 'eng', value: 'price (high to low) ' }
-    ],
-    optionValue: {
-      name: 'sortDesc',
-      value: -1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'від дешевих до дорогих' },
-      { lang: 'eng', value: 'price (low to high) ' }
-    ],
-    optionValue: {
-      name: 'sortAsc',
-      value: 1
-    }
-  },
-  {
-    lang: [
-      { lang: 'uk', value: 'рейтингом' },
-      { lang: 'eng', value: 'rate' }
-    ],
-    optionValue: {
-      name: 'rate',
-      value: -1
-    }
-  }
+  { name: 'popularity', value: -1 },
+  { name: 'sortDesc', value: -1 },
+  { name: 'sortAsc', value: 1 },
+  { name: 'rate', value: -1 }
 ];
 
 export const DRAWER_TEMPORARY = 'temporary';

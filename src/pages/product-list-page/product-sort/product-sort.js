@@ -9,7 +9,7 @@ import { URL_QUERIES_NAME, SORT_BY_SELECT_OPTIONS } from '../../../configs';
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const ProductSort = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const styles = useStyles();
   const history = useHistory();
   const { search } = useLocation();
@@ -27,13 +27,13 @@ const ProductSort = () => {
   };
 
   const sortByText = t('common.sortBy');
-  const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
+  const selectOptions = SORT_BY_SELECT_OPTIONS.map((optionValue) => (
     <option
-      key={lang[1].value}
+      key={optionValue.name}
       value={JSON.stringify(optionValue)}
       defaultValue={optionValue.name === query}
     >
-      {i18n.language === 'ua' ? lang[0].value : lang[1].value}
+      {t(`common.sortOptions.${optionValue.name}`)}
     </option>
   ));
 

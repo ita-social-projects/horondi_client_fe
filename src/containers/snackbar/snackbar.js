@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import i18n from 'i18next';
-
 import BaseSnackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { SnackBarContext } from '../../context/snackbar-context';
@@ -27,7 +25,7 @@ const Snackbar = () => {
           onClose={handleClose}
         >
           <Alert onClose={handleClose} severity={snackBarState.severity}>
-            {snackBarState.message[i18n.language === 'ua' ? 0 : 1]}
+            {snackBarState.message}
           </Alert>
         </BaseSnackbar>
       )}

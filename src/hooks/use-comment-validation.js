@@ -2,17 +2,15 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import { errorMessages, formRegExp } from '../configs';
+import { formRegExp } from '../configs';
 
 const useCommentValidation = (isAuth, onSubmit, commentValue) => {
-  const { i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
-
   const [shouldValidate, setShouldValidate] = useState(false);
+  const { t } = useTranslation();
 
-  const emailError = errorMessages[language].value.email;
-  const firstNameError = errorMessages[language].value.firstName;
-  const textError = errorMessages[language].value.text;
+  const emailError = t('error.profile.email');
+  const firstNameError = t('error.profile.firstName');
+  const textError = t('error.profile.text');
 
   const guestFields = !isAuth
     ? {

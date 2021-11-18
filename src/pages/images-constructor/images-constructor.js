@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useLayoutEffect, useState, useEffect } from 'react';
+import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
@@ -89,6 +89,7 @@ const ImagesConstructor = () => {
   const [constructorModel, setConstructorModel] = useState('');
   const currentConstructorModel = useRef({});
   const allModels = useRef([]);
+  const currentPrices = useRef({});
 
   const {
     loading: constructorsLoading,
@@ -149,6 +150,8 @@ const ImagesConstructor = () => {
     }
   }, [constructorByModel]);
 
+  // console.log(currentConstructorModel);
+
   useEffect(() => {
     !called && constructorModel && getConstructorByModelHandler();
     called && refetch();
@@ -173,8 +176,8 @@ const ImagesConstructor = () => {
       </div>
 
       <div className={styles.contentWrapper}>
-        <div>
-          <div>
+        <form className={styles.formWrapper}>
+          <FormControl>
             <Select
               label='title'
               data-cy='model'
@@ -188,9 +191,10 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-          </div>
+            <FormHelperText>{t('common.model')}</FormHelperText>
+          </FormControl>
 
-          <div>
+          <FormControl>
             <Select
               label='title'
               data-cy='basics'
@@ -211,9 +215,10 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-          </div>
+            <FormHelperText>{t('common.basis')}</FormHelperText>
+          </FormControl>
 
-          <div>
+          <FormControl>
             <Select
               label='title'
               data-cy='patern'
@@ -234,9 +239,10 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-          </div>
+            <FormHelperText>{t('common.pattern')}</FormHelperText>
+          </FormControl>
 
-          <div>
+          <FormControl>
             <Select
               label='title'
               data-cy='bottom'
@@ -257,9 +263,10 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-          </div>
+            <FormHelperText>{t('common.bottom')}</FormHelperText>
+          </FormControl>
 
-          <div>
+          <FormControl>
             <Select
               label='title'
               data-cy='size'
@@ -280,11 +287,11 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-          </div>
+            <FormHelperText>{t('common.bottom')}</FormHelperText>
+          </FormControl>
 
           <Button className={styles.button} onClick={showModal}>
-            {/* {t('buttons.moreOptions')} */}
-            moreOptions
+            {t('buttons.moreOptions')}
           </Button>
 
           {modalVisibility && (
@@ -299,7 +306,7 @@ const ImagesConstructor = () => {
               content={<h3>MODAL FOR CONSTRUCTOR</h3>}
             />
           )}
-        </div>
+        </form>
 
         <div className={styles.imageContainer}>
           {!constructorValues.patterns && <Loader />}
@@ -337,6 +344,7 @@ const ImagesConstructor = () => {
                     <span>{constructorPartNames(!language)[index]}</span>
                     <span>
                       +{item}
+                      {/* {constructorValues.sizes.additionalPrice?.map(item => item.value)} */}
                       {getCurrentCurrency(currency)}
                     </span>
                   </li>

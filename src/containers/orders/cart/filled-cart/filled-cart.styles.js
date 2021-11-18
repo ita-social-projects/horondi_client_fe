@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
-  width: '131px',
+  width: '48px',
   height: '48px',
   borderRadius: '4px',
   fontFamily: 'Open Sans',
@@ -70,7 +70,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   promoWrapper: {
     display: 'flex',
-    width: '360px',
+    width: '298px',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignItems: 'center'

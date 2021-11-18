@@ -10,7 +10,7 @@ import { deliveryTypes, SESSION_STORAGE, CY_CODE_ERR } from '../../../configs';
 import { getFromSessionStorage } from '../../../services/session-storage.service';
 import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 
-import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { TEXT_FIELD_VARIANT } from '../../../configs/const';
 
 const DeliveryType = ({ setFieldValue, touched, errors }) => {
   const styles = useStyles();

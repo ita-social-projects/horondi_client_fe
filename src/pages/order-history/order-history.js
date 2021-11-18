@@ -5,7 +5,7 @@ import OrderHistoryOrder from '../../containers/orders/order-history/order-histo
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
-import { limitHistoryOrders } from '../../const/user-order-history';
+import { limitHistoryOrders } from '../../configs/const';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getUserOrdersQuery } from './operations/order-history.queries';
 

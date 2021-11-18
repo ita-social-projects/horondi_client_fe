@@ -33,7 +33,7 @@ import {
   changeUserCartItemSize
 } from './cart.operations';
 import { handleUserError } from '../user/user.sagas';
-import { AUTH_ERRORS } from '../../const/error-messages';
+import { AUTH_ERRORS } from '../../configs/const';
 import changeCartItemSizeHandler from '../../utils/changeCartItemSizeHandler';
 
 export function* handleCartLoad() {

@@ -11,7 +11,7 @@ import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 
 const { pathToProducts } = routes;
 

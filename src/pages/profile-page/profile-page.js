@@ -8,14 +8,15 @@ import { useStyles } from './profile-page.styles';
 import ProfilePicture from '../../images/profile.png';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
-import { IMG_URL, formRegExp, PROFILE_USER_DATA, REQUIRED_USER_FIELDS } from '../../configs/index';
+import { IMG_URL, PROFILE_USER_DATA, REQUIRED_USER_FIELDS } from '../../configs/index';
+import { formRegExp } from '../../configs/regexp';
 import {
   handleProfilePage,
   handleClassName,
   handleText,
   handleProfileImg
 } from '../../utils/handle-profile-page';
-import { MATERIAL_UI_COLOR } from '../../const/material-ui';
+import { MATERIAL_UI_COLOR } from '../../configs/const';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);

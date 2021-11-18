@@ -6,10 +6,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import _ from 'lodash';
 import { useQuery } from '@apollo/client';
 import { useStyles } from './nova-post.styles';
-import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POSTOMAT } from '../../../../../utils/checkout';
-import { CY_CODE_ERR } from '../../../../../configs';
-import { RESET } from '../../../../../const/checkout';
+import { CY_CODE_ERR } from '../../../../../configs/index';
+import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT, RESET } from '../../../../../configs/const';
 import { getNovaPoshtaCities, getNovaPoshtaWarehouses } from './operations/nova-post.queries.js';
 
 const NovaPost = ({ setFieldValue, errors, touched, values }) => {

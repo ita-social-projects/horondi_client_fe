@@ -6,7 +6,8 @@ import { useMutation } from '@apollo/client';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
-import { commentFields, formRegExp, SNACKBAR_TYPES, TEXT_VALUE } from '../../../../../configs';
+import { commentFields, SNACKBAR_TYPES, TEXT_VALUE } from '../../../../../configs';
+import { formRegExp } from '../../../../../configs/regexp';
 import { addReplyMutation } from '../../operations/comments.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';

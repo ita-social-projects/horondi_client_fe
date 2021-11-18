@@ -21,10 +21,10 @@ import {
 } from '../../../../redux/cart/cart.actions';
 
 import { IMG_URL } from '../../../../configs';
-import { MATERIAL_UI_COLOR } from '../../../../const/material-ui';
+import { MATERIAL_UI_COLOR } from '../../../../configs/const';
 import { onChangeQuantityHandler } from '../../../../utils/cart';
 import { getCurrencySign } from '../../../../utils/currency';
-import routes from '../../../../const/routes';
+import routes from '../../../../configs/routes';
 
 const { pathToProducts } = routes;
 

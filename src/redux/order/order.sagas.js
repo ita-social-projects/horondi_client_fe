@@ -13,11 +13,10 @@ import {
 } from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
-import routes from '../../const/routes';
-import { CURRENCY } from '../../const/currency';
+import routes from '../../configs/routes';
+import { CURRENCY, AUTH_ERRORS } from '../../configs/const';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { USER_IS_BLOCKED } from '../../configs';
-import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
 
 const { pathToThanks, pathToErrorPage } = routes;

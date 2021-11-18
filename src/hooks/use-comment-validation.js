@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import { formRegExp } from '../configs';
+import { formRegExp } from '../configs/regexp';
 
 const useCommentValidation = (isAuth, onSubmit, commentValue) => {
   const [shouldValidate, setShouldValidate] = useState(false);

@@ -15,7 +15,7 @@ import { useStyles } from './checkout-form.styles';
 import { CY_CODE_ERR, SESSION_STORAGE, deliveryTypes } from '../../../configs';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
@@ -32,7 +32,7 @@ import {
 } from '../../../utils/checkout';
 import { getCurrencySign } from '../../../utils/currency';
 import { validationSchema } from '../../../validators/checkout';
-import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { TEXT_FIELD_SIZE, TEXT_FIELD_VARIANT } from '../../../configs/const';
 import {
   clearSessionStorage,
   getFromSessionStorage,

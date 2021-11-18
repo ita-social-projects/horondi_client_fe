@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Loader } from '../components/loader/loader';
-import routes from '../const/routes';
+import routes from '../configs/routes';
 
 export default function errorOrLoadingHandler(error, loading) {
   const { pathToErrorPage } = routes;

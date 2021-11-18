@@ -7,7 +7,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useStyles } from './ukrpost-and-courier.styles';
 import { CY_CODE_ERR, deliveryTypes } from '../../../../../configs';
 import { courierInputLabels, POST_OFFICE_NUMBER } from '../../../../../utils/checkout';
-import { RESET } from '../../../../../const/checkout';
+import { RESET, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../configs/const';
 import {
   getUkrPoshtaRegions,
   getUkrPoshtaDistricts,
@@ -16,7 +16,6 @@ import {
   getUkrPoshtaPostOffices
 } from './operations/get-ukrPost-address-data.queries';
 
-import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 

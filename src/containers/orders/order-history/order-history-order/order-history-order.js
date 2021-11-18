@@ -15,7 +15,7 @@ import OrderHistoryTable from '../order-history-table/index';
 import OrderHistoryOrderItem from '../order-history-order-item';
 import { useStyles } from './order-history-order.styles';
 
-import { statusColors } from '../../../../const/style-consts';
+import { statusColors } from '../../../../configs/const';
 
 const OrderHistoryOrder = ({ order }) => {
   const { currency } = useSelector(({ Currency }) => ({

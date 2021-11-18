@@ -7,7 +7,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './product-details.styles';
-import { MATERIAL_UI_COLOR } from '../../const/material-ui';
+import { MATERIAL_UI_COLOR } from '../../configs/const';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -18,7 +18,7 @@ import ToastContainer from '../../containers/toast';
 import { getProductById } from './operations/product-details.queries';
 import { clearProductToSend, setProductToSend } from '../../redux/products/products.actions';
 import { selectCurrencyProductsCategoryFilter } from '../../utils/multiple.selectors';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import ThemeContext from '../../context/theme-context';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';

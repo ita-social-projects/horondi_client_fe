@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import { URL_QUERIES_NAME, SORT_BY_SELECT_OPTIONS } from '../../../configs';
-import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { TEXT_FIELD_VARIANT } from '../../../configs/const';
 
 const ProductSort = () => {
   const { t } = useTranslation();

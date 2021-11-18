@@ -61,12 +61,12 @@ import {
   sendEmailConfirmation,
   updateUserById
 } from '../user.operations';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 import { getCartByUserId, mergeCartFromLSWithUserCart } from '../../cart/cart.operations';
 import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../../cart/cart.actions';
 import { USER_IS_BLOCKED } from '../../../configs';
 import { handleUserIsBlocked } from '../../../utils/user-helpers';
-import { AUTH_ERRORS } from '../../../const/error-messages';
+import { AUTH_ERRORS } from '../../../configs/const';
 import { USER_ERROR } from '../../../translations/user.translations';
 import { clearLocalStorage } from '../../../services/local-storage.service';
 

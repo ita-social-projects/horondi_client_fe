@@ -11,7 +11,7 @@ import { useStyles } from './register.styles';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
-import { IMG_ALT } from '../../const/images-alts';
+import { IMG_ALT } from '../../configs/const';
 import { regValidationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
 import ThemeContext from '../../context/theme-context';

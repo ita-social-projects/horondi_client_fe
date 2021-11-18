@@ -11,7 +11,7 @@ import locationIcon from '../../images/footer-icons/location.svg';
 
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import { countPerPage } from '../../configs';
 import { footerNavItems } from '../footer-links/const';
 

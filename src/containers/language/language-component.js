@@ -6,7 +6,7 @@ import { useStyles } from './language.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
 import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
-import { languageName } from '../../const/language';
+import { languageName } from '../../configs/const';
 import Dropdown from '../../components/dropdown';
 
 const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;

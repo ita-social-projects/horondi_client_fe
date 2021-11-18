@@ -5,7 +5,7 @@ import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemo
 import { createUploadLink } from 'apollo-upload-client/public';
 
 import { USER_TOKENS, FETCH_POLICY } from '../configs';
-import { AUTH_ERRORS } from '../const/error-messages';
+import { AUTH_ERRORS } from '../configs/const';
 import { getFromLocalStorage } from '../services/local-storage.service';
 import refreshAuthToken from './regenerateAuthTokenPair';
 

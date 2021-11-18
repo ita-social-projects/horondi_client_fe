@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { formRegExp } from '../configs';
+import { formRegExp } from '../configs/regexp';
 
 export const loginValidationSchema = Yup.object().shape({
   email: Yup.string()

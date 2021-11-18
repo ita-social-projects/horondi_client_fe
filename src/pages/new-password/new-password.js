@@ -5,7 +5,7 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './new-password.styles';
-import { formRegExp } from '../../configs';
+import { formRegExp } from '../../configs/regexp';
 import { endAdornment } from '../../utils/eyeToggle';
 import { resetPassword, resetState } from '../../redux/user/user.actions';
 import {

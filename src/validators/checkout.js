@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
-import { deliveryTypes, formRegExp, isCourier } from '../configs';
+import { deliveryTypes, isCourier } from '../configs/index';
+import { formRegExp } from '../configs/regexp';
 
 export const validationSchema = (deliveryType) =>
   Yup.object().shape({

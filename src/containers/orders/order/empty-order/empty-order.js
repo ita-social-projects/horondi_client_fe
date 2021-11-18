@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/styles';
 
 import { useStyles } from './empty-order.styles';
 import { CART_AND_WISHLIST_IMAGES } from '../../../../configs';
-import routes from '../../../../const/routes';
+import routes from '../../../../configs/routes';
 import PathBack from '../../cart/path-back/path-back';
 
 const { pathToCategory } = routes;

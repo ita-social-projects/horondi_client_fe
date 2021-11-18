@@ -125,7 +125,6 @@ export const RESPONSIVE_PDP = {
     items: 1
   }
 };
-
 export const RESPONSIVE_CATEGORIES = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },

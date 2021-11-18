@@ -1,11 +1,15 @@
 import { gql } from '@apollo/client';
 
-export const getBasicById = gql`
+export const getPocketById = gql`
   query ($id: ID!) {
-    getBasicById(id: $id) {
-      ... on Basics {
+    getPocketById(id: $id) {
+      ... on Pocket {
         __typename
         _id
+        name {
+          lang
+          value
+        }
         images {
           large
           medium
@@ -14,6 +18,7 @@ export const getBasicById = gql`
         }
         additionalPrice {
           value
+          currency
         }
       }
       ... on Error {

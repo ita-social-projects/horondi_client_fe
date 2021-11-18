@@ -5,6 +5,9 @@ export const getAllConstructors = gql`
     getAllConstructors(limit: $limit, skip: $skip, filter: $filter) {
       items {
         _id
+        model {
+          _id
+        }
         name {
           lang
           value
@@ -42,6 +45,7 @@ export const getAllConstructors = gql`
             lang
             value
           }
+          constructorImg
           images {
             large
             medium
@@ -58,6 +62,9 @@ export const getAllConstructors = gql`
           name {
             lang
             value
+          }
+          sizes {
+            name
           }
         }
       }

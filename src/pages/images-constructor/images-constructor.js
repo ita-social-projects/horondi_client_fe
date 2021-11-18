@@ -2,13 +2,14 @@ import React, { useRef, useMemo, useLayoutEffect, useState, useEffect } from 're
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import { mergeImages } from 'horondi_merge_images';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
-import { getConstructorById } from './operations/getConstructorById.queries';
-import { getBasicById } from './operations/getBasicById.queries';
+
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
@@ -61,227 +62,250 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  const options = (obj) => (
-    <option key={obj._id} value={obj._id}>
-      {obj.name[language].value}
-    </option>
-  );
-  const sizeOptions = (obj) => (
-    <option key={obj._id} value={obj._id}>
-      {obj.name}
-    </option>
-  );
-
-  const [isFirtlyFetched, toggleFirstlyFetched] = useState(false);
-  const [models, setModels] = useState([]);
-  const [currentModel, setCurrentModel] = useState('');
+  // const options = (obj) => ( <
+  //   option key = {
+  //     obj._id
+  //   }
+  //   value = {
+  //     obj._id
+  //   } > {
+  //     obj.name[language].value
+  //   } <
+  //   /option>
+  // );
+  // const sizeOptions = (obj) => ( <
+  //   option key = {
+  //     obj._id
+  //   }
+  //   value = {
+  //     obj._id
+  //   } > {
+  //     obj.name
+  //   } <
+  //   /option>
+  // );
 
   const [constructorValues, setConstructorValues] = useState({});
-  const [currentConstructorId, setCurrentConstructorId] = useState('6176d2bbb856e50024776ed1');
-  const [currentConstructorImg, setCurrentConstructorImg] = useState({});
-  const [basicsId, setBasicsId] = useState('619064dd66d4112f588a2d60');
+  const [constructorModel, setConstructorModel] = useState('');
+  const currentConstructorModel = useRef({});
+  const allModels = useRef([]);
 
   const {
     loading: constructorsLoading,
     error: constructorsError,
     data: constructors
   } = useQuery(getAllConstructors, {
-    variables: { limit: 0, skip: 0 }
+    variables: {
+      limit: 0,
+      skip: 0
+    }
   });
-  const constructorsAll = constructorsLoading ? [] : constructors.getAllConstructors.items;
+  const allConstructors = constructorsLoading ? [] : constructors.getAllConstructors;
 
-  const {
-    loading: basicsLoading,
-    error: basicsError,
-    data: basics
-  } = useQuery(getBasicById, {
-    variables: { id: basicsId }
+  const [
+    getConstructorByModelHandler,
+    { loading: constructorByModelLoading, data: constructorByModel, refetch, called }
+  ] = useLazyQuery(getConstructorByModel, {
+    variables: {
+      id: constructorModel
+    }
   });
-
-  const basicsCurrent = basicsLoading ? [] : basics.getBasicById.images;
+  const oneConstractor = constructorByModelLoading ? [] : constructorByModel?.getConstructorByModel;
 
   useEffect(() => {
-    if (constructors) {
-      setConstructorValues(constructorsAll[0]);
-      setCurrentConstructorId(constructorsAll[0]._id);
+    if (constructors?.getAllConstructors) {
+      allModels.current = allConstructors.items.map((item) => item.model);
+      setConstructorValues(
+        Object.keys(allConstructors.items[0]).reduce((acc, key) => {
+          if (key === 'model') {
+            setConstructorModel(allConstructors.items[0][key]._id);
+            acc.sizes = allConstructors.items[0][key].sizes[0];
+          }
+          if (key !== 'name' && key !== '_id' && key !== 'model')
+            acc[key] = allConstructors.items[0][key][0];
+          else acc[key] = allConstructors.items[0][key];
+          return acc;
+        }, {})
+      );
 
-      setCurrentConstructorImg({
-        basics: basicsCurrent.large,
-        bottoms: constructorsAll[0].bottoms,
-        patterns: constructorsAll[0].patterns
-      });
-
-      // setConstructorValues(Object.keys(constructorsAll[0]).reduce((acc, key) => {
-      //   if (key !== 'name' && key !== '_id' && key !== 'model')
-      //     acc[key] = constructorsAll[0][key][0];
-      //   else
-      //     acc[key] = constructorsAll[0][key];
-      //   return acc;
-      // }, {}));
-      // toggleFirstlyFetched(true);
+      currentConstructorModel.current = allConstructors.items[0];
     }
-  }, [constructors, basicsId]);
+  }, [constructors]);
 
-  const {
-    loading: constructorLoadingId,
-    error: constructorErrorId,
-    data: constructorData
-  } = useQuery(getConstructorById, {
-    variables: { id: currentConstructorId }
-  });
-  const constructorById = constructorLoadingId ? [] : constructorData.getConstructorById;
+  useEffect(() => {
+    if (constructorByModel?.getConstructorByModel) {
+      setConstructorValues(
+        Object.keys(oneConstractor[0]).reduce((acc, key) => {
+          if (key === 'model') acc.sizes = oneConstractor[0][key].sizes[0];
+
+          if (key !== 'name' && key !== '_id' && key !== 'model')
+            acc[key] = oneConstractor[0][key][0];
+          else acc[key] = oneConstractor[0][key];
+          return acc;
+        }, {})
+      );
+
+      currentConstructorModel.current = oneConstractor[0];
+    }
+  }, [constructorByModel]);
+
+  useEffect(() => {
+    !called && constructorModel && getConstructorByModelHandler();
+    called && refetch();
+  }, [constructorModel]);
 
   useLayoutEffect(() => {
-    if (
-      currentConstructorImg.basics &&
-      images.patternImage &&
-      images.frontPocketImage &&
-      images.bottomImage
-    ) {
+    if (constructorValues.bottoms && constructorValues.basics && constructorValues.patterns) {
       loadImages([
-        images.frontPocketImage,
-        currentConstructorImg.basics,
-        images.bottomImage,
-        images.patternImage
+        constructorValues.basics.images.small,
+        constructorValues.bottoms.images.small,
+        constructorValues.patterns.constructorImg
       ]).then((loadedImages) => {
         mergeImages(loadedImages, canvas.current, canvasW, canvasH);
-        methods.dispatch(setModelLoading(false));
       });
     }
-  }, [
-    currentConstructorImg.basics,
-    images.patternImage,
-    images.frontPocketImage,
-    images.bottomImage
-  ]);
+  }, [constructorValues]);
 
-  useEffect(() => {
-    if (constructorData) {
-      setConstructorValues(constructorById);
-    }
-
-    // if(constructorData){
-    //   setConstructorValues(Object.keys(constructorById).reduce((acc, key) => {
-    //     if (key !== 'name' && key !== '_id')
-    //       acc[key] = constructorById[key][0];
-    //     else
-    //       acc[key] = constructorById[key];
-    //     return acc;
-    //   }, {}));
-    //   toggleFirstlyFetched(true);
-    // }
-  }, [currentConstructorId]);
-
-  // const {
-  //   loading: constructorLoading,
-  //   error: constructorError,
-  //   data: fetchedConstructor,
-  //   refetch
-  // } = useQuery(getConstructorByModel, {
-  //   variables: { id: '6043c1223e06ad3edcdb7b31'},
-  //   // skip: !isFirtlyFetched
-  // });
-
-  // const constructorByModel = constructorLoading ? [] : fetchedConstructor.getConstructorByModel;
-
-  // useEffect(() => {
-  //   refetch();
-  //   if(fetchedConstructor){
-  //     setConstructorValues(Object.keys(fetchedConstructor.getConstructorByModel).reduce((acc, key) => {
-  //       if (key !== 'name' && key !== '_id' && key !== 'model')
-  //         acc[key] = fetchedConstructor.getConstructorByModel[key][0];
-  //       else
-  //         acc[key] = fetchedConstructor.getConstructorByModel[key];
-
-  //       return acc;
-  //     }, {}));
-  //   }
-  // }, [currentModel]);
-
-  // const { isLoading, isError } = useIsLoadingOrError([constructorsLoading, constructorLoadingId], [constructorsError, constructorErrorId]);
-
-  const availableModels2 = useMemo(() =>
-    _.map(constructorsAll, options, [constructorsAll, language])
-  );
-
-  const availableBasics = useMemo(() =>
-    _.map(constructorValues.basics, options, [constructorValues.basics, language])
-  );
-
-  const availablePatterns = useMemo(() =>
-    _.map(constructorValues.patterns, options, [constructorValues.patterns, language])
-  );
-
-  const availableBottoms = useMemo(() =>
-    _.map(constructorValues.bottoms, options, [constructorValues.bottoms, language])
-  );
-
-  const availableSizes = useMemo(() => _.map(values.sizes, sizeOptions));
-
-  // if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
-
-  return (
+  return constructorValues.patterns && currentConstructorModel ? (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
-        <FormControl>
-          <NativeSelect
-            className={styles.mainHeader}
-            name={constructorImageInput.MODEL}
-            onChange={(e) => setCurrentConstructorId(e.target.value)}
-          >
-            {availableModels2}
-          </NativeSelect>
-          <FormHelperText>{t('common.model')}</FormHelperText>
-        </FormControl>
+        <h1>Create by yourself</h1>
       </div>
 
       <div className={styles.contentWrapper}>
-        <form className={styles.formWrapper}>
-          <FormControl>
-            <NativeSelect
-              name={constructorImageInput.BASIC}
-              onChange={(e) => setBasicsId(e.target.value)}
+        <div>
+          <div>
+            <Select
+              label='title'
+              data-cy='model'
+              name='model'
+              value={constructorModel}
+              onChange={(e) => setConstructorModel(e.target.value)}
             >
-              {availableBasics}
-            </NativeSelect>
-            <FormHelperText>{t('common.basis')}</FormHelperText>
-          </FormControl>
-          <FormControl>
-            <NativeSelect
-              name={constructorImageInput.PATTERN}
-              onChange={(e) => methods.changePattern(e.target.value)}
+              {allModels.current.map((model) => (
+                <MenuItem key={model._id} value={model._id}>
+                  {model.name[0].value}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+
+          <div>
+            <Select
+              label='title'
+              data-cy='basics'
+              name='basics'
+              value={constructorValues.basics._id}
+              onChange={(e) =>
+                setConstructorValues({
+                  ...constructorValues,
+                  basics: currentConstructorModel.current.basics.find(
+                    (basics) => basics._id === e.target.value
+                  )
+                })
+              }
             >
-              {availablePatterns}
-            </NativeSelect>
-            <FormHelperText>{t('common.pattern')}</FormHelperText>
-          </FormControl>
-          <FormControl>
-            <NativeSelect
-              name={constructorImageInput.BOTTOM}
-              onChange={(e) => methods.changeBottom(e.target.value)}
+              {currentConstructorModel.current.basics.map((basics) => (
+                <MenuItem key={basics._id} value={basics._id}>
+                  {basics.name[0].value}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+
+          <div>
+            <Select
+              label='title'
+              data-cy='patern'
+              name='patern'
+              value={constructorValues.patterns._id}
+              onChange={(e) =>
+                setConstructorValues({
+                  ...constructorValues,
+                  patterns: currentConstructorModel.current.patterns.find(
+                    (pattern) => pattern._id === e.target.value
+                  )
+                })
+              }
             >
-              {availableBottoms}
-            </NativeSelect>
-            <FormHelperText>{t('common.bottom')}</FormHelperText>
-          </FormControl>
-          <FormControl>
-            <NativeSelect
-              name={constructorImageInput.SIZE}
-              onChange={(e) => methods.changeSize(e.target.value)}
+              {currentConstructorModel.current.patterns.map((pattern) => (
+                <MenuItem key={pattern._id} value={pattern._id}>
+                  {pattern.name[0].value}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+
+          <div>
+            <Select
+              label='title'
+              data-cy='bottom'
+              name='bottom'
+              value={constructorValues.bottoms._id}
+              onChange={(e) =>
+                setConstructorValues({
+                  ...constructorValues,
+                  bottoms: currentConstructorModel.current.bottoms.find(
+                    (bottom) => bottom._id === e.target.value
+                  )
+                })
+              }
             >
-              {availableSizes}
-            </NativeSelect>
-            <FormHelperText>{t('common.size')}</FormHelperText>
-          </FormControl>
+              {currentConstructorModel.current.bottoms.map((bottom) => (
+                <MenuItem key={bottom._id} value={bottom._id}>
+                  {bottom.name[0].value}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+
+          <div>
+            <Select
+              label='title'
+              data-cy='size'
+              name='size'
+              value={constructorValues.sizes._id || ''}
+              onChange={(e) =>
+                setConstructorValues({
+                  ...constructorValues,
+                  sizes: currentConstructorModel.current.model.sizes.find(
+                    (sizes) => sizes._id === e.target.value
+                  )
+                })
+              }
+            >
+              {currentConstructorModel.current.model.sizes.map((size) => (
+                <MenuItem key={size._id} value={size._id}>
+                  {size.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+
           <Button className={styles.button} onClick={showModal}>
-            {t('buttons.moreOptions')}
+            {/* {t('buttons.moreOptions')} */}
+            moreOptions
           </Button>
-        </form>
+
+          {modalVisibility && (
+            <Modal
+              className={styles.modal}
+              setModalVisibility={setModalVisibility}
+              onAction={onModalAction}
+              isOpen={modalVisibility}
+              language={language}
+              isEmpty
+              isFullscreen
+              content={<h3>MODAL FOR CONSTRUCTOR</h3>}
+            />
+          )}
+        </div>
+
         <div className={styles.imageContainer}>
-          {values.modelLoading && <Loader />}
+          {!constructorValues.patterns && <Loader />}
           <canvas
             style={{
-              display: values.modelLoading ? 'none' : 'block'
+              display: !constructorValues.patterns ? 'none' : 'block'
             }}
             className={styles.image}
             width={canvasW}
@@ -289,6 +313,7 @@ const ImagesConstructor = () => {
             ref={canvas}
           />
         </div>
+
         <div className={styles.pricesInfoWrapper}>
           <h2 className={styles.headerWrapper}>{t('common.totalPrice')}</h2>
           <div className={styles.textWrapper}>
@@ -301,7 +326,6 @@ const ImagesConstructor = () => {
                 </span>
               </li>
               <div className={`${styles.line} ${styles.topLine}`} />
-
               {constructorPartPrice(
                 prices.priceBasic,
                 prices.priceGobelen,
@@ -333,20 +357,126 @@ const ImagesConstructor = () => {
           <ConstructorSubmit />
         </div>
       </div>
-      {modalVisibility && (
-        <Modal
-          className={styles.modal}
-          setModalVisibility={setModalVisibility}
-          onAction={onModalAction}
-          isOpen={modalVisibility}
-          language={language}
-          isEmpty
-          isFullscreen
-          content={<h3>MODAL FOR CONSTRUCTOR</h3>}
-        />
-      )}
     </div>
+  ) : (
+    0
   );
+  // return (
+  //   <div className={styles.constructorWrapper}>
+  //     <div className={styles.headingWrapper}>
+  //       <FormControl>
+  //         <NativeSelect
+  //           className={styles.mainHeader}
+  //           name={constructorImageInput.MODEL}
+  //           onChange={(e) => setCurrentConstructorId(e.target.value)}
+  //         >
+  //           {availableModels2}
+  //         </NativeSelect>
+  //         <FormHelperText>{t('common.model')}</FormHelperText>
+  //       </FormControl>
+  //     </div>
+
+  //     <div className={styles.contentWrapper}>
+  //       <form className={styles.formWrapper}>
+  //         <FormControl>
+  //           <NativeSelect
+  //             name={constructorImageInput.BASIC}
+  //             onChange={(e) => setBasicsId(e.target.value)}
+  //           >
+  //             {availableBasics}
+  //           </NativeSelect>
+  //           <FormHelperText>{t('common.basis')}</FormHelperText>
+  //         </FormControl>
+  //         <FormControl>
+  //           <NativeSelect
+  //             name={constructorImageInput.PATTERN}
+  //             onChange={(e) => setPatternId(e.target.value)}
+  //           >
+  //             {availablePatterns}
+  //           </NativeSelect>
+  //           <FormHelperText>{t('common.pattern')}</FormHelperText>
+  //         </FormControl>
+  //         <FormControl>
+  //           <NativeSelect
+  //             name={constructorImageInput.BOTTOM}
+  //             onChange={(e) => setBottomId(e.target.value)}
+  //           >
+  //             {availableBottoms}
+  //           </NativeSelect>
+  //           <FormHelperText>{t('common.bottom')}</FormHelperText>
+  //         </FormControl>
+  //         <FormControl>
+  //           <NativeSelect
+  //             name={constructorImageInput.SIZE}
+  //             onChange={(e) => methods.changeSize(e.target.value)}
+  //           >
+  //             {availableSizes}
+  //           </NativeSelect>
+  //           <FormHelperText>{t('common.size')}</FormHelperText>
+  //         </FormControl>
+
+  //         <Button className={styles.button} onClick={showModal}>
+  //           {t('buttons.moreOptions')}
+  //         </Button>
+  //       </form>
+  //       <div className={styles.pricesInfoWrapper}>
+  //         <h2 className={styles.headerWrapper}>{t('common.totalPrice')}</h2>
+  //         <div className={styles.textWrapper}>
+  //           <ul>
+  //             <li className={styles.priceItem}>
+  //               <span>{t('common.defaultPrice')}</span>
+  //               <span>
+  //                 {prices.DEFAULT_PRICE_VALUE}
+  //                 {getCurrentCurrency(currency)}
+  //               </span>
+  //             </li>
+  //             <div className={`${styles.line} ${styles.topLine}`} />
+
+  //             {constructorPartPrice(
+  //               prices.priceBasic,
+  //               prices.priceGobelen,
+  //               prices.priceBottom,
+  //               prices.priceSize
+  //             ).map((item, index) =>
+  //               item ? (
+  //                 <li key={index} className={styles.priceItem}>
+  //                   <span>{constructorPartNames(!language)[index]}</span>
+  //                   <span>
+  //                     +{item}
+  //                     {getCurrentCurrency(currency)}
+  //                   </span>
+  //                 </li>
+  //               ) : (
+  //                 <div key={index} />
+  //               )
+  //             )}
+  //             <div className={`${styles.line} ${styles.bottomLine}`} />
+  //           </ul>
+  //         </div>
+  //         <h2 className={styles.headerWrapper}>
+  //           {t('common.endPrice')}
+  //           <span>
+  //             {constructorEndPrice(prices.priceTotal)}
+  //             {getCurrentCurrency(currency)}
+  //           </span>
+  //         </h2>
+  //         <ConstructorSubmit />
+  //       </div>
+  //     </div>
+  //     {modalVisibility && (
+  //       <Modal
+  //         className={styles.modal}
+  //         setModalVisibility={setModalVisibility}
+  //         onAction={onModalAction}
+  //         isOpen={modalVisibility}
+  //         language={language}
+  //         isEmpty
+  //         isFullscreen
+  //         content={<h3>MODAL FOR CONSTRUCTOR</h3>}
+  //       />
+  //     )}
+  //   </div>
+  // );
 };
 
 export default ImagesConstructor;

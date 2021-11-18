@@ -55,31 +55,31 @@ export const useConstructor = () => {
         currentModel.eligibleOptions;
       dispatch(setModelLoading(true));
       // dispatch(getConstructorBasic(constructorBasic[0]._id));
-      dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
-      dispatch(getConstructorPattern(constructorPattern[0]._id));
-      dispatch(getConstructorBottom(constructorBottom[0]._id));
+      // dispatch(getConstructorFrontPocket(constructorFrontPocket[0]._id));
+      // dispatch(getConstructorPattern(constructorPattern[0]._id));
+      // dispatch(getConstructorBottom(constructorBottom[0]._id));
       dispatch(getConstructorSize(currentModel.sizes[0]._id));
     }
   }, [currentModel]);
 
-  const changeModel = useCallback((id) => {
-    dispatch(getConstructorModelById(id));
-  }, []);
+  // const changeModel = useCallback((id) => {
+  //   dispatch(getConstructorModelById(id));
+  // }, []);
 
   // const changeBasic = useCallback((id) => {
   //   dispatch(setModelLoading(true));
   //   dispatch(getConstructorBasic(id));
   // }, []);
 
-  const changePattern = useCallback((id) => {
-    dispatch(setModelLoading(true));
-    dispatch(getConstructorPattern(id));
-  }, []);
+  // const changePattern = useCallback((id) => {
+  //   dispatch(setModelLoading(true));
+  //   dispatch(getConstructorPattern(id));
+  // }, []);
 
-  const changeBottom = useCallback((id) => {
-    dispatch(setModelLoading(true));
-    dispatch(getConstructorBottom(id));
-  }, []);
+  // const changeBottom = useCallback((id) => {
+  //   dispatch(setModelLoading(true));
+  //   dispatch(getConstructorBottom(id));
+  // }, []);
 
   const changeSize = useCallback((id) => {
     dispatch(getConstructorSize(id));
@@ -129,10 +129,10 @@ export const useConstructor = () => {
     },
     methods: {
       dispatch,
-      changeModel,
+      // changeModel,
       // changeBasic,
-      changePattern,
-      changeBottom,
+      // changePattern,
+      // changeBottom,
       changeSize
     },
     prices: {

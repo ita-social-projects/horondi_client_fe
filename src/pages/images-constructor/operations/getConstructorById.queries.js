@@ -10,6 +10,17 @@ export const getConstructorById = gql`
           lang
           value
         }
+        model {
+          _id
+          name {
+            lang
+            value
+          }
+          sizes {
+            _id
+            name
+          }
+        }
         basics {
           _id
           name {

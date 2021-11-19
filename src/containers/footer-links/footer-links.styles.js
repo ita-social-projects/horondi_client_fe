@@ -9,11 +9,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       padding: '20px 25px 10px'
     }
   }),
-  logo: {
+  logo: ({ color }) => ({
     boxSizing: 'border-box',
     letterSpacing: '0.2rem',
     fontSize: '1.5rem',
-    color: palette.textColor,
+    color,
     textDecoration: 'none',
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
@@ -24,7 +24,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       marginLeft: '0px',
       fontSize: '1rem'
     }
-  },
+  }),
   iconsBox: {
     display: 'flex',
     flexDirection: 'column',

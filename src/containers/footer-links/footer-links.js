@@ -10,9 +10,9 @@ import instagramIcon from '../../images/footer-icons/instagram.svg';
 import { HORONDI, HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ showTitle, position }) => {
+const FooterLinks = ({ showTitle, position, color }) => {
   const { t } = useTranslation();
-  const styles = useStyles({ position });
+  const styles = useStyles({ position, color });
 
   return (
     <div className={styles.cardBody}>

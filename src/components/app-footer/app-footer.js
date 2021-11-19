@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useStyles } from './app-footer.styles';
 
 import FooterLists from '../../containers/footer-lists';
@@ -13,6 +12,7 @@ const AppFooter = () => {
         <div className={styles.cardDeck}>
           <FooterLinks
             showTitle
+            color='white'
             socialIconsStyles={styles.socialIconsStyles}
             position='flex-start'
           />

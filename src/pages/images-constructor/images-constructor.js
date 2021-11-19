@@ -3,19 +3,16 @@ import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
-import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
-import _ from 'lodash';
+import { Button, FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { mergeImages } from 'horondi_merge_images';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+// import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
 import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
-import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
-
-import { selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
+// import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
@@ -30,7 +27,11 @@ import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 
 const ImagesConstructor = () => {
-  const { language, currency } = useSelector(selectLangAndCurrency);
+  const { language, currency } = useSelector(({ Language, Currency }) => ({
+    language: Language.language,
+    currency: Currency.currency
+  }));
+
   const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -66,29 +67,6 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  // const options = (obj) => ( <
-  //   option key = {
-  //     obj._id
-  //   }
-  //   value = {
-  //     obj._id
-  //   } > {
-  //     obj.name[language].value
-  //   } <
-  //   /option>
-  // );
-  // const sizeOptions = (obj) => ( <
-  //   option key = {
-  //     obj._id
-  //   }
-  //   value = {
-  //     obj._id
-  //   } > {
-  //     obj.name
-  //   } <
-  //   /option>
-  // );
-
   const [constructorValues, setConstructorValues] = useState({});
   const [constructorModel, setConstructorModel] = useState('');
   const currentConstructorModel = useRef({});
@@ -97,7 +75,7 @@ const ImagesConstructor = () => {
 
   const {
     loading: constructorsLoading,
-    error: constructorsError,
+    // error: constructorsError,
     data: constructors
   } = useQuery(getAllConstructors, {
     variables: {

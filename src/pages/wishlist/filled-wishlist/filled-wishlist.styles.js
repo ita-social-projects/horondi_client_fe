@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -42,7 +42,7 @@ export const useStyles = makeStyles(() => ({
     },
     marginBottom: '150px'
   },
-  tableHeader: (isLightTheme) => ({
+  tableHeader: () => ({
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
@@ -56,7 +56,7 @@ export const useStyles = makeStyles(() => ({
       padding: 8,
       textAlign: 'center'
     },
-    borderTop: isLightTheme ? '1px solid rgba(91, 91, 91, 0.2)' : '1px solid #5B5B5B',
-    borderBottom: isLightTheme ? '1px solid rgba(91, 91, 91, 0.2)' : '1px solid #5B5B5B'
+    borderTop: `1px solid ${palette.cart.borderColor}`,
+    borderBottom: `1px solid ${palette.cart.borderColor}`
   })
 }));

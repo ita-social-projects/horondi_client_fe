@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
-import { sideBarSubList } from '../../configs';
+import { sideBarSubList } from '../../configs/index';
 import FooterLinks from '../footer-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';

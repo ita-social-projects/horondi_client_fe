@@ -25,41 +25,26 @@ export const useStyles = makeStyles(() => ({
       }
     }
   }),
-  constructorInner: ({ isMouseIn }) => ({
-    transition: 'all .2s ease',
-    color: 'white',
-    content: `''`,
-    position: 'absolute',
-    height: '200px',
-    right: 0,
-    left: 0,
-    bottom: isMouseIn ? 0 : -100,
-    display: 'flex',
-    alignItems: 'flex-end',
-    padding: 30,
-    zIndex: 5,
-    background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);'
-  }),
-  constructorInnerIcon: ({ isMouseIn }) => ({
-    position: 'absolute',
-    left: '50%',
-    top: 20,
-    transform: `translateX(-50%) ${isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'}`,
-    fontSize: '4em'
-  }),
-  constructorInnerLink: {
-    color: 'white',
-    fontSize: '3em',
-    display: 'flex',
-    '@media (max-width: 768px)': {
-      fontSize: '25px',
-      marginLeft: '25px'
-    },
-    '& svg': {
-      marginLeft: '10px',
-      fontSize: '1.4em'
-    }
-  },
+  // constructorInnerIcon: ({ isMouseIn }) => ({
+  //   position: 'absolute',
+  //   left: '50%',
+  //   top: 20,
+  //   transform: `translateX(-50%) ${isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'}`,
+  //   fontSize: '4em'
+  // }),
+  // constructorInnerLink: {
+  //   color: 'white',
+  //   fontSize: '3em',
+  //   display: 'flex',
+  //   '@media (max-width: 768px)': {
+  //     fontSize: '25px',
+  //     marginLeft: '25px'
+  //   },
+  //   '& svg': {
+  //     marginLeft: '10px',
+  //     fontSize: '1.4em'
+  //   }
+  // },
   playerSoundControl: {
     position: 'absolute',
     cursor: 'pointer',
@@ -69,5 +54,42 @@ export const useStyles = makeStyles(() => ({
     '& svg': {
       color: 'white'
     }
+  },
+  constructorContent: {
+    width: '50vw',
+    position: 'absolute',
+    top: '25%',
+    left: '25%',
+    zIndex: 10
+  },
+  constructorTitle: {
+    fontFamily: 'Open Sans',
+    fontSize: '34px',
+    lineHeight: '46px',
+    textAlign: 'center',
+    letterSpacing: '0.0025em',
+    color: '#FEFEFE'
+  },
+  constructorDescription: {
+    fontFamily: 'Open Sans',
+    fontSize: '17px',
+    lineHeight: '24px',
+    letterSpacing: '0.005em',
+    color: '#FEFEFE'
+  },
+  buttonStyles: {
+    marginTop: '30px',
+    height: '44px',
+    width: '244px',
+    fontFamily: 'Open Sans',
+    fontWeight: '600',
+    fontSize: '14px',
+    letterSpacing: '0.0125em',
+    textTransform: 'uppercase',
+    lineHeight: '25px',
+    background: 'none',
+    color: '#FEFEFE',
+    border: '1px solid #FEFEFE',
+    cursor: 'pointer'
   }
 }));

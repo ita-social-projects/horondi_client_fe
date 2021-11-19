@@ -1,7 +1,7 @@
 import bgFirst from '../../../images/bg1.jpg';
 import bgSecond from '../../../images/bg3.jpg';
 import bgThird from '../../../images/7.jpg';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 
 const { pathToAllProducts, pathToNews } = routes;
 

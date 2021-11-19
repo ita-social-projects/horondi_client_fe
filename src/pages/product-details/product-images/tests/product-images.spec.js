@@ -18,11 +18,14 @@ jest.mock('react-i18next', () => ({
     t: jest.fn()
   })
 }));
-const mockUseContext = jest.fn().mockImplementation(() => ({
-  isLight: true
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
 }));
-
-React.useContext = mockUseContext;
 
 describe('ProductImages page test', () => {
   let component;

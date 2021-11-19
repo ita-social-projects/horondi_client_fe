@@ -45,10 +45,18 @@ jest.mock('react-router', () => ({
   useHistory: () => jest.fn()
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 useSelector.mockImplementation(() => ({
   language: 0,
-  currency: 0,
-  isLightTheme: true
+  currency: 0
 }));
 
 describe('ProductListItem component tests', () => {

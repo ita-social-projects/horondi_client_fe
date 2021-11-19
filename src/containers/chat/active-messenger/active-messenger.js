@@ -88,7 +88,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
-    <form className={style.formField}>
+    <form className={style.contactForm}>
       <span className={style.mailTitle}>{t('chat.sendMail')}</span>
       <>
         <TextField

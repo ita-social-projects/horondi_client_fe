@@ -106,11 +106,18 @@ exports[`Should render 404 page 1`] = `
                 "color": "#FFFFFF",
               },
             },
+            "cart": Object {
+              "borderColor": "rgba(91, 91, 91, 0.2)",
+            },
             "common": Object {
               "black": "#000",
               "white": "#fff",
             },
+            "contactForm": Object {
+              "background": "#EFEFEF",
+            },
             "contrastThreshold": 3,
+            "darkGray": "#232323",
             "divider": "rgba(0, 0, 0, 0.12)",
             "error": Object {
               "contrastText": "#FFFFFF",
@@ -142,6 +149,8 @@ exports[`Should render 404 page 1`] = `
               "light": "#42a5f5",
               "main": "#1e88e5",
             },
+            "lightGray": "#EFEFEF",
+            "mediumGray": "#353333",
             "primary": Object {
               "contrastText": "#FFFFFF",
               "dark": "#212121",
@@ -176,6 +185,7 @@ exports[`Should render 404 page 1`] = `
               "main": "#fb8c00",
             },
             "white": "#FFFFFF",
+            "yellow": "#E4B200",
           },
           "props": Object {},
           "shadows": Array [

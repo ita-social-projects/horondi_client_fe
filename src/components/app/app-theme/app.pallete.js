@@ -4,10 +4,18 @@ import theme from './theme';
 
 const white = '#FFFFFF';
 const black = '#000000';
+const lightGray = '#EFEFEF';
+const mediumGray = '#353333';
+const darkGray = '#232323';
+const yellow = '#E4B200';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
   white,
+  lightGray,
+  mediumGray,
+  darkGray,
+  yellow,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {
@@ -32,6 +40,12 @@ export const paletteGenerator = (colorSchema) => ({
       backgroundColor: theme[colorSchema].button.disabled.backgroundColor,
       color: theme[colorSchema].button.disabled.color
     }
+  },
+  cart: {
+    borderColor: theme[colorSchema].cart.borderColor
+  },
+  contactForm: {
+    background: theme[colorSchema].contactForm.background
   },
   primary: {
     contrastText: white,

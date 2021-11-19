@@ -10,7 +10,6 @@ import email from '../../images/footer-icons/email.svg';
 import phone from '../../images/footer-icons/phone.svg';
 import location from '../../images/footer-icons/location.svg';
 import clock from '../../images/contacts-icons/clock.svg';
-import map from '../../images/map.jpg';
 
 const Contacts = ({ fromCheckout }) => {
   const styles = useStyles();
@@ -48,7 +47,7 @@ const Contacts = ({ fromCheckout }) => {
               className={styles.mapImage}
               onError={onLoadImageError}
               onLoad={onImageLoad}
-              src={map}
+              src={`https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${contact.link.lat},${contact.link.lon}&size=500x400&zoom=16&markers=icon:small-black-cutout|${contact.link.lat},${contact.link.lon}`}
               alt={t('contacts.pageTitles.location')}
             />
           </a>

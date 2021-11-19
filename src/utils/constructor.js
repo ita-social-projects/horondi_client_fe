@@ -20,10 +20,10 @@ export const constructorEndPrice = (priceTotal) => {
   return `${priceTotal} `;
 };
 
-export const constructorImageInput = {
-  MODEL: 'model',
-  BASIC: 'basic',
-  PATTERN: 'pattern',
-  BOTTOM: 'bottom',
-  SIZE: 'size'
-};
+// export const constructorImageInput = {
+//   MODEL: 'model',
+//   BASIC: 'basic',
+//   PATTERN: 'pattern',
+//   BOTTOM: 'bottom',
+//   SIZE: 'size'
+// };

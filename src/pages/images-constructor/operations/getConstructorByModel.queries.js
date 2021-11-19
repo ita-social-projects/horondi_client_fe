@@ -50,6 +50,7 @@ export const getConstructorByModel = gql`
         }
         patterns {
           _id
+          translationsKey
           name {
             lang
             value

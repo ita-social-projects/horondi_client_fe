@@ -1,4 +1,7 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
+
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText, NativeSelect } from '@material-ui/core';
 import _ from 'lodash';
@@ -9,16 +12,15 @@ import { useLazyQuery, useQuery } from '@apollo/client';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
-
+import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
+import { selectLangAndCurrency } from '../../redux/selectors/multiple.selectors';
+
 import { useStyles } from './images-constructor.style';
-import { setModelLoading } from '../../redux/images-constructor/constructor-model/constructor-model.actions';
 import Loader from '../../components/loader';
-import { useConstructor } from './hooks';
 import { IMG_URL } from '../../configs';
 import {
-  constructorImageInput,
   constructorEndPrice,
   constructorPartPrice,
   constructorPartNames
@@ -28,10 +30,12 @@ import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 
 const ImagesConstructor = () => {
+  const { language, currency } = useSelector(selectLangAndCurrency);
+  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
+
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
   const { t } = useTranslation();
-  const { values, images, prices, methods, language, currency } = useConstructor();
 
   const canvas = useRef({});
   const canvasH = 768;
@@ -145,9 +149,6 @@ const ImagesConstructor = () => {
           return acc;
         }, {})
       );
-      // console.log(constructorValues);
-      // console.log(oneConstractor[0]);
-      // console.log(currentConstructorModel);
       currentConstructorModel.current = oneConstractor[0];
     }
     setAllPrice(
@@ -179,7 +180,7 @@ const ImagesConstructor = () => {
   return constructorValues.patterns && currentConstructorModel ? (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
-        <h1>Create by yourself</h1>
+        <h1>{t('common.title')}</h1>
       </div>
 
       <div className={styles.contentWrapper}>
@@ -194,7 +195,8 @@ const ImagesConstructor = () => {
             >
               {allModels.current.map((model) => (
                 <MenuItem key={model._id} value={model._id}>
-                  {model.name[0].value}
+                  {t(`${model.translationsKey}.name`)}
+                  {/* {model.name[0].value} */}
                 </MenuItem>
               ))}
             </Select>
@@ -242,7 +244,8 @@ const ImagesConstructor = () => {
             >
               {currentConstructorModel.current.patterns.map((pattern) => (
                 <MenuItem key={pattern._id} value={pattern._id}>
-                  {pattern.name[0].value}
+                  {/* {pattern.name[0].value} */}
+                  {t(`${pattern.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
@@ -335,7 +338,7 @@ const ImagesConstructor = () => {
               <li className={styles.priceItem}>
                 <span>{t('common.defaultPrice')}</span>
                 <span>
-                  {prices.defaultPrice}
+                  {DEFAULT_PRICE_VALUE}
                   {getCurrentCurrency(currency)}
                 </span>
               </li>
@@ -359,9 +362,7 @@ const ImagesConstructor = () => {
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
             <span>
-              {constructorEndPrice(
-                +prices.DEFAULT_PRICE_VALUE + allPrices.pattern + allPrices.bottom
-              )}
+              {constructorEndPrice(+DEFAULT_PRICE_VALUE + allPrices.pattern + allPrices.bottom)}
               {getCurrentCurrency(currency)}
             </span>
           </h2>

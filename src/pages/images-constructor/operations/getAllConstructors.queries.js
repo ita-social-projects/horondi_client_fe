@@ -49,6 +49,7 @@ export const getAllConstructors = gql`
         }
         patterns {
           _id
+          translationsKey
           name {
             lang
             value
@@ -67,6 +68,7 @@ export const getAllConstructors = gql`
         }
         model {
           _id
+          translationsKey
           name {
             lang
             value

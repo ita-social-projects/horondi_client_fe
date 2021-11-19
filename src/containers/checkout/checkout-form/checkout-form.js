@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -48,7 +48,7 @@ import YourOrder from '../../orders/order/your-order';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 
-const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
+const CheckoutForm = ({ currency, cartItems }) => {
   const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
@@ -61,6 +61,10 @@ const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
       previousValue + calcPriceForCart(currentValue, currency, currentValue.quantity),
     0
   );
+  const [deliveryType, setDeliveryType] = useState(
+    getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
+  );
+
   const consentLink = (
     <div className={styles.consentMessage}>
       {' '}
@@ -201,7 +205,13 @@ const CheckoutForm = ({ currency, cartItems, deliveryType }) => {
                 ))}
               </div>
             </div>
-            <DeliveryType setFieldValue={setFieldValue} errors={errors} touched={touched} />
+            <DeliveryType
+              errors={errors}
+              touched={touched}
+              setFieldValue={setFieldValue}
+              deliveryType={deliveryType}
+              setDeliveryType={setDeliveryType}
+            />
             <Delivery
               deliveryType={deliveryType}
               language={language}

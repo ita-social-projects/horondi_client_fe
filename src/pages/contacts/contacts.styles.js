@@ -48,6 +48,10 @@ export const useStyles = makeStyles((theme) => ({
       padding: '8% 9% 4% 9%',
       top: '80%',
       right: '18%'
+    },
+    '@media screen and (max-width: 500px)': {
+      top: '80%',
+      right: '12%'
     }
   },
   contactsItem: {
@@ -61,6 +65,12 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.white,
     '&:last-child': {
       marginTop: '45px'
+    },
+    '@media screen and (max-width: 500px)': {
+      fontSize: '.8em',
+      '&:last-child': {
+        marginTop: '35px'
+      }
     }
   },
   schedule: {
@@ -79,11 +89,17 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media screen and (max-width: 768px)': {
       width: '450px'
+    },
+    '@media screen and (max-width: 500px)': {
+      width: '300px'
     }
   },
   icon: {
     marginTop: '3px',
-    marginRight: '16px'
+    marginRight: '16px',
+    '@media screen and (max-width: 500px)': {
+      marginTop: '1px'
+    }
   },
   day: {
     display: 'block',

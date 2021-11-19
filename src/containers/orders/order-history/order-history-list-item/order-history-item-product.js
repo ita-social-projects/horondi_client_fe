@@ -7,12 +7,10 @@ import { useStyles } from './order-history-order-item.styles';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
 
-const OrderHistoryOrderItem = ({ item, language, currency }) => {
+const OrderHistoryItemProduct = ({ item, language, currency }) => {
   const styles = useStyles();
-
-  const data = item.props.item;
   const currencySign = getCurrencySign(currency);
-  const fixedPriceProduct = data.fixedPrice[currency].value;
+  const fixedPriceProduct = item.fixedPrice[currency].value;
   const { t } = useTranslation();
 
   return (
@@ -20,26 +18,28 @@ const OrderHistoryOrderItem = ({ item, language, currency }) => {
       <TableRow className={styles.root}>
         <TableCell className={styles.image}>
           <img
-            src={`${IMG_URL}${data.product.images.primary.thumbnail}`}
+            src={`${IMG_URL}${item.product.images.primary.thumbnail}`}
             alt='img-product'
             className={styles.imgItem}
           />
         </TableCell>
         <TableCell className={styles.description}>
-          <p>{data.product.name[language].value}</p>
-          <p>{`${t('orderHistory.size')} - ${data.options.size.name}`}</p>
+          <p>{item.product.name[language].value}</p>
+          <p>{`${t('cart.bottomMaterial')} - ${item.options.size.name}`}</p>
         </TableCell>
-        <TableCell className={styles.description}>{data.quantity}</TableCell>
+        <TableCell className={styles.description}>{item.options.size.name}</TableCell>
         <TableCell className={styles.description}>
-          <div className={styles.sumTotal}>
-            {fixedPriceProduct}
-            {'\u00A0'}
-            <FontAwesomeIcon icon={currencySign} />
-          </div>
+          <FontAwesomeIcon icon={currencySign} />
+          {fixedPriceProduct}
+        </TableCell>
+        <TableCell className={styles.description}>{item.quantity}</TableCell>
+        <TableCell className={styles.description}>
+          <FontAwesomeIcon icon={currencySign} />
+          {item.quantity * fixedPriceProduct}
         </TableCell>
       </TableRow>
     </>
   );
 };
 
-export default OrderHistoryOrderItem;
+export default OrderHistoryItemProduct;

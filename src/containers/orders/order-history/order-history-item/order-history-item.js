@@ -12,10 +12,10 @@ import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL, statusColors } from '../../../../configs';
 import OrderHistoryTable from '../order-history-table/index';
-import OrderHistoryOrderItem from '../order-history-order-item';
+import OrderHistoryItemProduct from '../order-history-list-item';
 import { useStyles } from './order-history-order.styles';
 
-const OrderHistoryOrder = ({ order }) => {
+const OrderHistoryItem = ({ order }) => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
@@ -34,8 +34,8 @@ const OrderHistoryOrder = ({ order }) => {
 
   const styles = useStyles();
 
-  const orderHistoryList = order.items.map((item) => (
-    <OrderHistoryOrderItem
+  const orderProducts = order.items.map((item) => (
+    <OrderHistoryItemProduct
       key={item.product._id}
       item={item}
       language={language}
@@ -85,7 +85,8 @@ const OrderHistoryOrder = ({ order }) => {
           <div className={styles.heading}>
             <div className={styles.info}>
               <div>
-                №{order.orderNumber} {t(`orderHistory.tableField`.dated)} {dateInFormat}
+                {t(`checkout.checkoutTitles.orderNumber`)}
+                {order.orderNumber} {t(`orderHistory.tableField`.dated)} {dateInFormat}
               </div>
               <div className={styles.status} style={{ color }}>
                 {orderStatus}
@@ -102,7 +103,7 @@ const OrderHistoryOrder = ({ order }) => {
         </AccordionSummary>
         <AccordionDetails className={styles.accordion}>
           <div>
-            <OrderHistoryTable items={orderHistoryList} totalPrice={totalPrice} />
+            <OrderHistoryTable items={orderProducts} totalPrice={totalPrice} />
           </div>
           <div className={styles.bottom}>
             <div className={styles.totalText}>{t('orderHistory.amountOfOrder')}:</div>
@@ -118,4 +119,4 @@ const OrderHistoryOrder = ({ order }) => {
   );
 };
 
-export default OrderHistoryOrder;
+export default OrderHistoryItem;

@@ -13,6 +13,7 @@ const routes = {
   pathToLogin: '/login',
   pathToRecovery: '/recovery',
   pathToRegister: '/register',
+  pathToAllProducts: '/catalog/products',
   pathToProducts: '/product',
   pathToErrorPage: '/error-page',
   pathToNotFoundPage: '/not-found',

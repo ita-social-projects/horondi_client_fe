@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, FormControlLabel, Radio, RadioGroup, Select } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './delivery-type.styles';
-import { addDeliveryType } from '../../../redux/cart/cart.actions';
-import { deliveryTypes, SESSION_STORAGE, CY_CODE_ERR } from '../../../configs';
-import { getFromSessionStorage } from '../../../services/session-storage.service';
+import { deliveryTypes, CY_CODE_ERR } from '../../../configs';
 import { setDeliveryTypeToStorage } from '../../../utils/checkout';
 
 import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
-const DeliveryType = ({ setFieldValue, touched, errors }) => {
+const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliveryType }) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const [deliveryType, setDeliveryType] = useState(
-    getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
-  );
+  const [deliveryTypeValue, setDeliveryTypeValue] = useState(deliveryType);
   const [courierOrganization, setcourierOrganization] = useState(deliveryTypes.NOVAPOSTCOURIER);
 
   const handleAddDeliveryType = () => {
-    if (deliveryType === deliveryTypes.COURIER && courierOrganization) {
-      dispatch(addDeliveryType(courierOrganization));
+    if (deliveryTypeValue === deliveryTypes.COURIER && courierOrganization) {
+      setDeliveryType(courierOrganization);
     } else {
-      dispatch(addDeliveryType(deliveryType));
+      setDeliveryType(deliveryTypeValue);
     }
-    setDeliveryTypeToStorage(deliveryType);
+    setDeliveryTypeToStorage(deliveryTypeValue);
   };
 
   const handleCourierOrganizationChange = (eventValue) => {
@@ -38,7 +32,7 @@ const DeliveryType = ({ setFieldValue, touched, errors }) => {
 
   useEffect(() => {
     handleAddDeliveryType();
-  }, [deliveryType, courierOrganization]);
+  }, [deliveryTypeValue, courierOrganization]);
 
   const getDeliveryType = t('checkout.deliveryType', { returnObjects: true });
   const getCourierOrganization = t('checkout.courierOrganization', { returnObjects: true });
@@ -60,13 +54,13 @@ const DeliveryType = ({ setFieldValue, touched, errors }) => {
           <RadioGroup
             aria-label='Delivery type'
             name='delivery-type'
-            value={deliveryType}
-            onChange={(e) => setDeliveryType(e.target.value)}
+            value={deliveryTypeValue}
+            onChange={(e) => setDeliveryTypeValue(e.target.value)}
           >
             {radioButtons}
           </RadioGroup>
         </FormControl>
-        {deliveryType === deliveryTypes.COURIER && (
+        {deliveryTypeValue === deliveryTypes.COURIER && (
           <div className={styles.inputWrapper}>
             <FormControl
               error={touched.courierOrganization && !!errors.courierOrganization}

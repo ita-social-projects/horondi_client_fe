@@ -18,7 +18,6 @@ exports[`<DeliveryType /> should match snapshot 1`] = `
         aria-label="Delivery type"
         name="delivery-type"
         onChange={[Function]}
-        value="SELFPICKUP"
       >
         <WithStyles(ForwardRef(FormControlLabel))
           classes={

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
-  profile: ({ fromSideBar, logged }) => ({
+export const useStyles = makeStyles(({ palette }) => ({
+  profile: ({ fromSideBar }) => ({
     padding: '0 4px',
     position: 'relative',
     cursor: 'pointer',
@@ -12,12 +12,12 @@ export const useStyles = makeStyles(() => ({
     textAlign: 'center',
 
     '&:hover': {
-      backgroundColor: fromSideBar ? '#000' : '#fff',
+      backgroundColor: fromSideBar ? palette.black : palette.white,
       '& ul': {
         display: 'block'
       },
       '& > svg': {
-        color: fromSideBar ? '#fff' : '#000'
+        color: fromSideBar ? palette.white : palette.black
       }
     },
 
@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
       position: 'relative',
       zIndex: 5,
       fontSize: '2rem',
-      color: fromSideBar ? '#000' : '#fff',
+      color: fromSideBar ? palette.black : palette.white,
       border: 'none',
       outline: 'none'
     }

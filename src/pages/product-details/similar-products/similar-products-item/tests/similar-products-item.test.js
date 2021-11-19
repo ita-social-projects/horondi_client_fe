@@ -6,15 +6,22 @@ import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { Rating } from '@material-ui/lab';
 import SimilarProductsItem from '../index';
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 describe('Similar products test', () => {
   let wrapper;
 
   beforeAll(() => {
     jest
       .spyOn(reactRedux, 'useSelector')
-      .mockImplementation((selector) =>
-        selector({ Language: { language: 0 }, Theme: { lightMode: false } })
-      );
+      .mockImplementation((selector) => selector({ Language: { language: 0 } }));
 
     wrapper = mount(
       <BrowserRouter>

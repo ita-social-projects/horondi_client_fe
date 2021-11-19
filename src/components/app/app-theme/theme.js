@@ -24,6 +24,12 @@ export default {
         backgroundColor: '#000000',
         color: '#FFFFFF'
       }
+    },
+    cart: {
+      borderColor: 'rgba(91, 91, 91, 0.2)'
+    },
+    contactForm: {
+      background: '#EFEFEF'
     }
   },
   dark: {
@@ -51,6 +57,12 @@ export default {
         backgroundColor: '#FFFFFF',
         color: '#000000'
       }
+    },
+    cart: {
+      borderColor: '#5B5B5B'
+    },
+    contactForm: {
+      background: '#232323'
     }
   }
 };

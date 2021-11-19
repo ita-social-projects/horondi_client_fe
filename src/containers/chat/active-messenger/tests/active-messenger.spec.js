@@ -21,6 +21,18 @@ jest.mock('react-router', () => ({
   useHistory: () => jest.fn()
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light',
+      cart: {
+        borderColor: '#000000'
+      }
+    }
+  })
+}));
+
 useSelector.mockImplementation(() => mockStore);
 useMutation.mockImplementation(() => [
   jest.fn(),

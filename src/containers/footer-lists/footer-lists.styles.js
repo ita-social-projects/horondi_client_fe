@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   cardDeck: {
     display: 'flex'
   },
@@ -10,7 +10,7 @@ export const useStyles = makeStyles(() => ({
     '& h6': {
       padding: '4px 0',
       fontSize: '12px',
-      color: '#ffffff'
+      color: palette.white
     },
     '@media screen and (max-width: 552px)': {
       textAlign: 'center',
@@ -28,10 +28,10 @@ export const useStyles = makeStyles(() => ({
     }
   },
   cardLink: {
-    color: '#ffffff',
+    color: palette.white,
     fontSize: '12px',
     '&:hover': {
-      color: '#ffffff'
+      color: palette.white
     }
   },
   contactsListContainer: {

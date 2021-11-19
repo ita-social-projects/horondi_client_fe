@@ -9,7 +9,7 @@ const flexCenter = {
 export const useStyles = makeStyles(({ palette }) => ({
   chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
-    background: iconsVisible ? '#E4B200' : 'black',
+    background: iconsVisible ? palette.yellow : palette.black,
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
@@ -30,7 +30,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '&:hover': {
       cursor: 'pointer',
-      background: '#E4B200'
+      background: palette.yellow
     }
   }),
   iconsMessengers: {
@@ -69,14 +69,14 @@ export const useStyles = makeStyles(({ palette }) => ({
       height: '45px'
     },
     '&:hover': {
-      background: '#E4B200'
+      background: palette.yellow
     }
   },
   msgIconActive: (mailFormVisible) => ({
     ...flexCenter,
     width: '60px',
     height: '60px',
-    background: mailFormVisible ? '#E4B200' : 'black',
+    background: mailFormVisible ? palette.yellow : palette.black,
     borderRadius: '50%',
     marginBottom: '20px',
     cursor: 'pointer',
@@ -99,7 +99,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '320px',
     height: '600px',
     zIndex: 899,
-    background: palette.type === 'light' ? 'white' : '#232323',
+    background: palette.backgroundColor,
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
       width: '70%',
@@ -147,9 +147,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '15px',
     width: '15px'
   },
-  formField: {
+  contactForm: {
     ...flexCenter,
-    background: palette.type === 'light' ? '#efefef' : '#232323',
+    background: palette.contactForm.background,
     flexDirection: 'column',
     width: '100%',
     height: '100%',

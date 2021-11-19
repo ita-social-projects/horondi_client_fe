@@ -15,14 +15,14 @@ const button = {
 
 const lightThemeButtonHover = {
   '&:hover': {
-    backgroundColor: '#3F3F3F'
+    backgroundColor: '#3F3F3F',
+    color: '#FEFEFE'
   }
 };
 const darkThemeButtonHover = {
   '&:hover': {
     backgroundColor: '#020202',
-    color: '#FEFEFE',
-    border: 'none'
+    color: '#FEFEFE'
   }
 };
 const promoInput = {
@@ -35,7 +35,6 @@ const promoInput = {
   lineHeight: '24px',
   letterSpacing: '0.005em',
   textAlign: 'center',
-  border: '1px solid rgba(91, 91, 91, 0.2)',
   padding: 10
 };
 const totalWrapper = {
@@ -65,7 +64,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   promoInput: {
     '&, &::placeholder': {
       ...promoInput,
-      color: palette.type === 'light' ? 'rgba(36, 36, 36, 0.75)' : '#FEFEFE'
+      border: `1px solid ${palette.cart.borderColor}`
     }
   },
   promoWrapper: {
@@ -77,8 +76,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   promoButton: {
     ...button,
-    background: palette.type === 'light' ? '#020202' : '#FFFFFF',
-    color: palette.type === 'light' ? '#FEFEFE' : '#242424',
+    background: palette.textColor,
+    color: palette.backgroundColor,
     '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
   },
   shoppingButton: {
@@ -87,18 +86,18 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '44px',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: palette.type === 'light' ? '#020202' : '#FEFEFE',
+    borderColor: palette.textColor,
     marginTop: '18px',
-    background: palette.type === 'light' ? '#FEFEFE' : '#242424',
-    color: palette.type === 'light' ? '#242424' : '#FEFEFE',
+    background: palette.backgroundColor,
+    color: palette.textColor,
     '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
   },
   ordersButton: {
     ...button,
     width: '255px',
     height: '52px',
-    background: palette.type === 'light' ? '#020202' : '#FFFFFF',
-    color: palette.type === 'light' ? '#FEFEFE' : '#242424',
+    background: palette.textColor,
+    color: palette.backgroundColor,
     marginBottom: '20px',
     '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
   },
@@ -112,7 +111,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   totalWrapper: {
     ...totalWrapper,
-    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+    color: palette.textColor
   },
   promoAndTotalWrapper: {
     maxWidth: '1200px',

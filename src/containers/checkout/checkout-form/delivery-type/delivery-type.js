@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './delivery-type.styles';
-import { deliveryTypes, CY_CODE_ERR } from '../../../configs';
-import { setDeliveryTypeToStorage } from '../../../utils/checkout';
+import { deliveryTypes, CY_CODE_ERR } from '../../../../configs';
+import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
 
-import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import { TEXT_FIELD_VARIANT } from '../../../../const/material-ui';
 
 const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliveryType }) => {
   const styles = useStyles();

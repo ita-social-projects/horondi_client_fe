@@ -1,21 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
+import { setCart, setCartError, setCartLoading, setCartTotalPrice } from './cart.actions';
 import {
-  setCart,
-  setCartError,
-  setCartLoading,
-  setCartTotalPrice,
-  setDeliveryType
-} from './cart.actions';
-import {
-  ADD_DELIVERY_TYPE,
   ADD_ITEM_TO_CART,
   ADD_PRODUCT_TO_USER_CART,
   CHANGE_CART_ITEM_USER_QUANTITY,
   CLEAN_CART,
   DELETE_PRODUCT_FROM_USER_CART,
   GET_CART,
-  GET_DELIVERY_TYPE,
   REMOVE_ITEM_FROM_CART,
   RESET_CART,
   SET_CART_ITEM_QUANTITY,
@@ -23,7 +15,7 @@ import {
   SET_USER_CART_ITEM_SIZE
 } from './cart.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
-import { cartKey, deliveryTypeKey, USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
+import { cartKey, USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
 import {
   addProductToCart,
   cleanCart,
@@ -53,7 +45,6 @@ export function* handleCartLoadByUserID(payload) {
 
 export function* handleCartReset() {
   setToLocalStorage(cartKey, []);
-  setToLocalStorage(deliveryTypeKey, '');
   const cart = getFromLocalStorage(cartKey);
   yield put(setCart(cart));
 }
@@ -68,18 +59,6 @@ export function* handleClearUserCart({ payload }) {
   } catch (err) {
     yield call(handleCartError, err);
   }
-}
-
-export function* handleDeliveryTypeLoad() {
-  const deliveryType = getFromLocalStorage(deliveryTypeKey);
-
-  yield put(setDeliveryType(deliveryType));
-}
-
-export function* handleSetDeliveryType({ payload }) {
-  yield put(setDeliveryType(payload));
-
-  setToLocalStorage(deliveryTypeKey, payload);
 }
 
 export function* handleAddCartItem({ payload }) {
@@ -221,7 +200,6 @@ function* handleCartError(e) {
 }
 
 export default function* cartSaga() {
-  yield takeEvery(GET_DELIVERY_TYPE, handleDeliveryTypeLoad);
   yield takeEvery(GET_CART, handleCartLoad);
   yield takeEvery(ADD_ITEM_TO_CART, handleAddCartItem);
   yield takeEvery(REMOVE_ITEM_FROM_CART, handleRemoveCartItem);
@@ -229,7 +207,6 @@ export default function* cartSaga() {
   yield takeEvery(SET_CART_ITEM_SIZE, handleSetCartItemSize);
   yield takeEvery(SET_USER_CART_ITEM_SIZE, handleSetUserCartItemSize);
   yield takeEvery(CHANGE_CART_ITEM_USER_QUANTITY, handleSetCartItemUserQuantity);
-  yield takeEvery(ADD_DELIVERY_TYPE, handleSetDeliveryType);
   yield takeEvery(RESET_CART, handleCartReset);
   yield takeEvery(CLEAN_CART, handleClearUserCart);
   yield takeEvery(ADD_PRODUCT_TO_USER_CART, handleAddProductToUserCart);

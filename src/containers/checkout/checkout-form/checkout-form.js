@@ -10,7 +10,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
-import DeliveryType from '../delivery-type/delivery-type';
+import DeliveryType from './delivery-type';
 import { useStyles } from './checkout-form.styles';
 import {
   CY_CODE_ERR,

@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
-import DeliveryType from '../../delivery-type/delivery-type';
+import DeliveryType from '../delivery-type/delivery-type';
 
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
-jest.mock('../../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({

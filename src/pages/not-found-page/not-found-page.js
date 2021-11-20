@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './not-found-page.styles';
 
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 
 import { NOT_FOUND_PAGE_IMAGES } from '../../configs';
 

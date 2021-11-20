@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './constructor-preview.style';
 import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
-import routes from '../../../const/routes';
+import routes from '../../../configs/routes';
 
 const { pathToConstructor } = routes;
 

@@ -7,7 +7,7 @@ import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import OrderData from './order-data';
 import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import { resetCart, cleanUserCart } from '../../redux/cart/cart.actions';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';

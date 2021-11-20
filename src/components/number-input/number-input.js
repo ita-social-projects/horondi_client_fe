@@ -5,14 +5,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { useStyles } from './number-input.styles';
-import { TYPES_CONST } from '../../const/types-consts';
-import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
+import { TEXT_FIELD_VARIANT, TYPES_CONST } from '../../configs';
 
 const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
   const setQuantityFromInput = (e) => {
     let num;
-    if (e.target.value.match(/[^0-9]/g)) {
+    if (e.target.value.match(/\D/g)) {
       num = 1;
     } else if (e.target.value < 1) {
       num = 1;

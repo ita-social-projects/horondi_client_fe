@@ -13,7 +13,7 @@ import SimilarProducts from '../../../../pages/product-details/similar-products'
 import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
-import routes from '../../../../const/routes';
+import routes from '../../../../configs/routes';
 
 const FilledCart = ({ items }) => {
   const styles = useStyles();

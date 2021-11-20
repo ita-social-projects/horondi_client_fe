@@ -4,8 +4,7 @@ import fetch from 'unfetch';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client/public';
 
-import { USER_TOKENS, FETCH_POLICY } from '../configs';
-import { AUTH_ERRORS } from '../const/error-messages';
+import { AUTH_ERRORS, FETCH_POLICY, USER_TOKENS } from '../configs';
 import { getFromLocalStorage } from '../services/local-storage.service';
 import refreshAuthToken from './regenerateAuthTokenPair';
 
@@ -34,7 +33,7 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
   fetch,
-  link: authLink.concat(createUploadLink({ uri: REACT_APP_API_URL })),
+  link: authLink.concat(createUploadLink({ uri: `${REACT_APP_API_URL}/graphql` })),
   cache: new InMemoryCache({
     addTypename: false,
     fragmentMatcher

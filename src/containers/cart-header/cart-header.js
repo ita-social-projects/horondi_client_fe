@@ -6,12 +6,11 @@ import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import { MATERIAL_UI_COLOR } from '../../const/material-ui';
+import { cartKey, MATERIAL_UI_COLOR } from '../../configs';
 
 import { useStyles } from './cart-header.styles';
 import { getCart } from '../../redux/cart/cart.actions';
-import { cartKey } from '../../configs';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 
 const { pathToCart } = routes;
 
@@ -41,12 +40,7 @@ const CartHeader = ({ fromSideBar }) => {
       {!cartLoading && (
         <span className={styles.cartIconWrapper}>
           <Link to={pathToCart}>
-            <IconButton
-              className={styles.root}
-              aria-label={cartKey}
-              tabIndex={-1}
-              disableRipple
-            >
+            <IconButton className={styles.root} aria-label={cartKey} tabIndex={-1} disableRipple>
               <Badge badgeContent={itemsCount} color='secondary'>
                 <ShoppingBasketIcon />
               </Badge>

@@ -17,7 +17,7 @@ import { useStyles } from './header-profile.styles';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
 import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 import ThemeContext from '../../context/theme-context';
 
 const {

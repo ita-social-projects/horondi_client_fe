@@ -6,12 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import Grid from '@material-ui/core/Grid';
 
-import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE } from '../../configs';
+import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE, IMG_ALT } from '../../configs';
 import { useStyles } from './register.styles';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
-import { IMG_ALT } from '../../const/images-alts';
 import { regValidationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
 import ThemeContext from '../../context/theme-context';

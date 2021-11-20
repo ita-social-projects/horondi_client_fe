@@ -10,12 +10,10 @@ import _ from 'lodash';
 
 import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
-import { IMG_URL } from '../../../../configs';
+import { IMG_URL, statusColors } from '../../../../configs';
 import OrderHistoryTable from '../order-history-table/index';
 import OrderHistoryOrderItem from '../order-history-order-item';
 import { useStyles } from './order-history-order.styles';
-
-import { statusColors } from '../../../../const/style-consts';
 
 const OrderHistoryOrder = ({ order }) => {
   const { currency } = useSelector(({ Currency }) => ({

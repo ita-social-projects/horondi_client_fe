@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import facebookIcon from '../../images/footer-icons/facebook.svg';
 import instagramIcon from '../../images/footer-icons/instagram.svg';
 
-import { HORONDI_FB_LINK, HORONDI_INST_LINK, LOGO } from '../../configs';
+import { HORONDI, HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
 import { useStyles } from './footer-links.styles';
 
-const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
+const FooterLinks = ({ showTitle, position }) => {
   const { t } = useTranslation();
   const styles = useStyles({ position });
 
@@ -18,7 +18,7 @@ const FooterLinks = ({ showTitle, socialIconsStyles, position }) => {
     <div className={styles.cardBody}>
       <Typography variant='h5'>
         <Link to='/' className={styles.logo}>
-          {LOGO}
+          {HORONDI.toUpperCase()}
         </Link>
       </Typography>
       <div className={styles.iconsBox}>

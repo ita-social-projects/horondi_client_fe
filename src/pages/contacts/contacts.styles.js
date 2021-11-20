@@ -6,49 +6,71 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '50px',
-    '@media screen and (max-width: 768px)': {
-      marginBottom: '30px'
-    }
+    marginBottom: '100px'
   },
   contactsTitle: {
-    fontWeight: '400',
-    fontSize: '2em'
+    fontWeight: '300',
+    fontSize: '3em'
   },
   content: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    width: '80%',
+    marginRight: '400px',
+    position: 'relative',
+    '@media screen and (max-width: 1024px)': {
+      marginRight: '200px'
+    },
     '@media screen and (max-width: 768px)': {
-      flexDirection: 'column',
-      alignItems: 'center',
-      margin: 'auto'
+      marginRight: '0px',
+      marginBottom: '140px'
+    }
+  },
+  mapImageInactive: {
+    display: 'none'
+  },
+  mapImage: {
+    width: '100%',
+    '&:hover': {
+      filter: 'brightness(.8)',
+      transition: '.3s'
     }
   },
   contacts: {
-    marginLeft: '25px',
+    backgroundColor: theme.palette.black,
+    top: '20%',
+    right: '-55%',
+    position: 'absolute',
+    padding: '52px 90px 38px 63px',
+    '@media screen and (max-width: 1024px)': {
+      padding: '8% 10% 5% 10%',
+      top: '20%',
+      right: '-45%'
+    },
     '@media screen and (max-width: 768px)': {
-      margin: '20px 0 0 0'
+      padding: '8% 9% 4% 9%',
+      top: '80%',
+      right: '18%'
+    },
+    '@media screen and (max-width: 500px)': {
+      top: '80%',
+      right: '12%'
     }
   },
   contactsItem: {
     display: 'flex',
-    margin: '0 0 30px 10px',
+    alignItems: 'start',
+    position: 'relative',
+    marginBottom: '15px',
     width: '100%',
-    fontFamily: 'Montserrat',
-    fontSize: '1.1em',
+    fontSize: '1em',
     fontWeight: '500',
-    color: theme.palette.textColor,
-    '@media screen and (max-width: 768px)': {
-      fontSize: '.9em'
-    }
-  },
-  contactName: {
-    width: '130px',
-    fontWeight: '700',
-    marginRight: '15px',
-    '@media screen and (max-width: 768px)': {
-      width: '100px'
+    color: theme.palette.white,
+    '&:last-child': {
+      marginTop: '45px'
+    },
+    '@media screen and (max-width: 500px)': {
+      fontSize: '.8em',
+      '&:last-child': {
+        marginTop: '35px'
+      }
     }
   },
   schedule: {
@@ -58,39 +80,29 @@ export const useStyles = makeStyles((theme) => ({
       width: 'auto'
     }
   },
-  mapContainer: {
-    width: '48%',
-    height: '100%',
-    '@media screen and (max-width: 768px)': {
-      width: 'auto',
-      marginBottom: '30px'
-    }
-  },
-  mapImageInactive: {
-    display: 'none'
-  },
-  mapImage: {
-    width: '100%',
-    float: 'none',
-    maxHeight: '100%',
-    margin: '0',
-    '&:hover': {
-      filter: 'brightness(.8)',
-      transition: '.3s'
-    }
-  },
-  contactAddress: {
-    '& > p': {
-      margin: '0',
-      fontSize: '1em',
-      lineHeight: '1.43'
-    }
-  },
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1
-  },
   link: {
+    width: '600px',
     display: 'block',
-    lineHeight: '0'
+    lineHeight: '0',
+    '@media screen and (max-width: 1024px)': {
+      width: '500px'
+    },
+    '@media screen and (max-width: 768px)': {
+      width: '450px'
+    },
+    '@media screen and (max-width: 500px)': {
+      width: '300px'
+    }
+  },
+  icon: {
+    marginTop: '3px',
+    marginRight: '16px',
+    '@media screen and (max-width: 500px)': {
+      marginTop: '1px'
+    }
+  },
+  day: {
+    display: 'block',
+    marginBottom: '16px'
   }
 }));

@@ -7,7 +7,7 @@ import { useStyles } from './confirmation.styles';
 import { Loader } from '../../components/loader/loader';
 import { confirmUser } from '../../redux/user/user.actions';
 import { handleMessage } from '../../utils/handle-confirmation';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 
 const { pathToMain, pathToLogin } = routes;
 

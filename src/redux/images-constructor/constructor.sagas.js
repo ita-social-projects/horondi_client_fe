@@ -7,12 +7,11 @@ import constructorFrontPocketSaga from './constructor-front-pocket/constructor-f
 import constructorModelSaga from './constructor-model/constructor-model.sagas';
 import constructorPatternSaga from './constructor-pattern/constructor-pattern.sagas';
 import constructorSizeSaga from './constructor-size/constructor-size.sagas';
-import { AUTH_ERRORS } from '../../const/error-messages';
-import { USER_IS_BLOCKED } from '../../configs';
+import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
 import { handleUserError } from '../user/user.sagas';
 import { setModelLoading } from './constructor-model/constructor-model.actions';
 import { setError } from '../error/error.actions';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 
 const { pathToErrorPage } = routes;
 

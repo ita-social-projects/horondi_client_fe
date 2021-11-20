@@ -8,10 +8,9 @@ import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './slider-home-page.style';
 
-import { carouselInterval } from '../../../configs';
-import routes from '../../../const/routes';
+import { carouselInterval, SLIDER_HOME_PAGE } from '../../../configs';
+import routes from '../../../configs/routes';
 import { getImage } from '../../../utils/imageLoad';
-import { SLIDER_HOME_PAGE } from '../../../const/style-consts';
 import { getAllSlides } from '../operations/slider/slider.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 

@@ -5,9 +5,6 @@ import {
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   SET_CART_ITEM_QUANTITY,
-  SET_DELIVERY_TYPE,
-  ADD_DELIVERY_TYPE,
-  GET_DELIVERY_TYPE,
   RESET_CART,
   SET_CART_TOTAL_PRICE,
   ADD_PRODUCT_TO_USER_CART,
@@ -67,17 +64,6 @@ const setUserCartItemSize = (user, item, value) => ({
     user
   }
 });
-const setDeliveryType = (payload) => ({
-  type: SET_DELIVERY_TYPE,
-  payload
-});
-const addDeliveryType = (payload) => ({
-  type: ADD_DELIVERY_TYPE,
-  payload
-});
-const getDeliveryType = () => ({
-  type: GET_DELIVERY_TYPE
-});
 
 const resetCart = () => ({
   type: RESET_CART
@@ -133,9 +119,6 @@ export {
   addItemToCart,
   removeItemFromCart,
   setCartItemQuantity,
-  setDeliveryType,
-  addDeliveryType,
-  getDeliveryType,
   resetCart,
   addProductToUserCart,
   deleteProductFromUserCart,

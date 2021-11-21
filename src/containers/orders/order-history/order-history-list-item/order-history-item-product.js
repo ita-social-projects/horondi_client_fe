@@ -24,8 +24,10 @@ const OrderHistoryItemProduct = ({ item, language, currency }) => {
           />
         </TableCell>
         <TableCell className={styles.description}>
-          <p>{item.product.name[language].value}</p>
-          <p>{`${t('cart.bottomMaterial')} - ${item.options.size.name}`}</p>
+          <p className={styles.productName}>{item.product.name[language].value}</p>
+          <p className={styles.productBottom}>{`${t('cart.bottomMaterial')} - ${
+            item.product.bottomMaterial.material.name[language].value
+          }`}</p>
         </TableCell>
         <TableCell className={styles.description}>{item.options.size.name}</TableCell>
         <TableCell className={styles.description}>

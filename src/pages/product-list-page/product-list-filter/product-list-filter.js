@@ -18,7 +18,7 @@ import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 const { pathToCategory } = routes;
 
 const ProductListFilter = ({ filterParams }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const styles = useStyles();
   const history = useHistory();
   const { search } = useLocation();
@@ -26,7 +26,6 @@ const ProductListFilter = ({ filterParams }) => {
   const [filters, setFilters] = useState({});
   const filtersOptions = useProductFilters(filterParams, filters);
 
-  const language = i18n.language === 'ua' ? 0 : 1;
   const searchParams = new URLSearchParams(search);
 
   const { error, loading } = useQuery(getAllFiltersQuery, {
@@ -76,7 +75,7 @@ const ProductListFilter = ({ filterParams }) => {
           {t('common.clearFilter')}
         </Button>
         <PriceFilter priceRange={priceRange} />
-        <HotItemFilter language={language} />
+        <HotItemFilter />
         {filterButtons}
       </Grid>
     </div>

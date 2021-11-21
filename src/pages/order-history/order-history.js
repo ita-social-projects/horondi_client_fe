@@ -45,7 +45,7 @@ const OrderHistory = () => {
           <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
           <div>
             {userOrders.map((order) => (
-              <OrderHistoryItem order={order} key={order._id} />
+              <OrderHistoryItem order={order} key={order.orderNumber} />
             ))}
           </div>
           {quantityPages >= 2 && (

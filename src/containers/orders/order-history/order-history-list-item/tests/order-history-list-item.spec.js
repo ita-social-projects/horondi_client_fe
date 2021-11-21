@@ -1,17 +1,51 @@
 import React from 'react';
-import OrderHistoryOrderItem from '../order-history-order-item';
+import OrderHistoryItemProduct from '../order-history-item-product';
 
 jest.mock('../order-history-order-item.styles', () => ({
   useStyles: () => ({})
 }));
 const item = {
-  props: {
-    item: {
-      fixedPrice: [{ currency: 'UAH', value: 1950 }],
-      options: { size: { name: 'S' } },
-      product: {
-        name: [{ value: 'Роллтоп синій' }],
-        images: { primary: { thumbnail: '' } }
+  quantity: 1,
+  fixedPrice: [
+    {
+      currency: 'UAH',
+      value: 2050
+    }
+  ],
+  options: {
+    size: {
+      name: 'S'
+    }
+  },
+  product: {
+    _id: '1',
+    name: [
+      {
+        lang: 'ua',
+        value: 'Роллтоп жовтий'
+      },
+      {
+        lang: 'en',
+        value: 'Rolltop yellow'
+      }
+    ],
+    images: {
+      primary: {
+        thumbnail: 'thumbnail_4051pm10kty4jeer_19.png'
+      }
+    },
+    bottomMaterial: {
+      material: {
+        name: [
+          {
+            lang: 'ua',
+            value: 'Шкірзамінник'
+          },
+          {
+            lang: 'en',
+            value: 'Leatherette'
+          }
+        ]
       }
     }
   }
@@ -19,7 +53,7 @@ const item = {
 
 describe('OrderHistoryOrderItem component tests', () => {
   it('Should render OrderHistoryOrderItem', () => {
-    const component = shallow(<OrderHistoryOrderItem item={item} currency={0} language={0} />);
+    const component = shallow(<OrderHistoryItemProduct item={item} currency={0} language={0} />);
     expect(component).toBeDefined();
   });
 });

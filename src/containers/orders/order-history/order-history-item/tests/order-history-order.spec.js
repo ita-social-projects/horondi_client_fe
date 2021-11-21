@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import OrderHistoryList from '../order-history-list.js';
+import OrderHistoryItem from '../order-history-item.js';
 
 jest.mock('react-redux');
 jest.mock('../order-history-order.styles.js', () => ({
@@ -45,7 +45,7 @@ useSelector.mockImplementation(() => ({
 
 describe('OrderHistoryOrder component tests', () => {
   it('Should render OrderHistoryOrder', () => {
-    const component = shallow(<OrderHistoryList order={order} />);
+    const component = shallow(<OrderHistoryItem order={order} />);
     expect(component).toBeDefined();
   });
 });

@@ -12,7 +12,7 @@ import { getConstructorFrontPocket } from '../../redux/images-constructor/constr
 import { getConstructorPattern } from '../../redux/images-constructor/constructor-pattern/constructor-pattern.actions';
 import { getConstructorBottom } from '../../redux/images-constructor/constructor-bottom/constructor-bottom.actions';
 import { getConstructorSize } from '../../redux/images-constructor/constructor-size/constructor-size.actions';
-import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
+import { constructorDefaultPrice } from '../../configs';
 
 export const useConstructor = () => {
   const dispatch = useDispatch();
@@ -30,8 +30,8 @@ export const useConstructor = () => {
     sizePrice
   } = useSelector(selectConstructor);
   const { language, currency } = useSelector(selectLangAndCurrency);
-  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
 
+  const defaultPrice = constructorDefaultPrice[currency];
   const models = constructorModel.modelsForConstructor;
   const basics = currentModel.eligibleOptions?.constructorBasic;
   const patterns = currentModel.eligibleOptions?.constructorPattern;
@@ -141,7 +141,7 @@ export const useConstructor = () => {
       priceGobelen,
       priceBottom,
       priceSize,
-      DEFAULT_PRICE_VALUE
+      defaultPrice
     },
     language,
     currency

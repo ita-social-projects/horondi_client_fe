@@ -330,3 +330,5 @@ export const TYPES_CONST = {
   NUMBER: 'number',
   STRING: 'string'
 };
+
+export const constructorDefaultPrice = ['1400 ', '50 '];

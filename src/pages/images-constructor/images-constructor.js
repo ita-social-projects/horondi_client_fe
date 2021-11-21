@@ -165,7 +165,7 @@ const ImagesConstructor = () => {
               <li className={styles.priceItem}>
                 <span>{t('common.defaultPrice')}</span>
                 <span>
-                  {prices.DEFAULT_PRICE_VALUE}
+                  {prices.defaultPrice}
                   {getCurrentCurrency(currency)}
                 </span>
               </li>

@@ -6,7 +6,13 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 
-const SearchBar = ({ searchParams, setSearchParams, initialSearchState, fromSideBar }) => {
+const SearchBar = ({
+  searchParams,
+  setSearchParams,
+  initialSearchState,
+  fromSideBar,
+  fieldOptions = {}
+}) => {
   const styles = useStyles({ fromSideBar });
   const { t } = useTranslation();
 
@@ -58,6 +64,7 @@ const SearchBar = ({ searchParams, setSearchParams, initialSearchState, fromSide
       onChange={handleSearch}
       onBlur={handleOnBlur}
       onFocus={handleSearch}
+      {...fieldOptions}
     />
   );
 };

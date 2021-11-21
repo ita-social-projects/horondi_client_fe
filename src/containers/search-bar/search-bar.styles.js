@@ -18,17 +18,7 @@ export const useStyles = makeStyles(() => ({
       borderBottomColor: 'white',
       transition: 'all 0.5s linear'
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'red'
-      },
-      '&:hover fieldset': {
-        borderColor: 'yellow'
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'white'
-      }
-    },
+    '& .MuiOutlinedInput-root': {},
     '& .MuiFormLabel-root': {
       color: 'rgb(255 255 255 / 54%)',
       '@media (max-width: 768px)': {

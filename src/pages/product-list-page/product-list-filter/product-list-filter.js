@@ -6,9 +6,11 @@ import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
 import PriceFilter from './price-filter';
 import HotItemFilter from './hot-item-filter';
-import { useStyles } from './product-list-filter.styles';
+import { useStyles, searchStyles } from './product-list-filter.styles';
 
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
+import SearchBar from '../../../containers/search-bar/search-bar';
+import SearchBarList from '../../../containers/search-bar-list/search-bar-list';
 import { countPerPage, sort } from '../../../configs';
 import useProductFilters from '../../../hooks/use-product-filters';
 import routes from '../../../configs/routes';
@@ -25,6 +27,13 @@ const ProductListFilter = ({ filterParams }) => {
   const [priceRange, setPriceRange] = useState({});
   const [filters, setFilters] = useState({});
   const filtersOptions = useProductFilters(filterParams, filters);
+  const initialSearchState = {
+    searchFilter: '',
+    products: [],
+    searchBarVisibility: false,
+    loading: false
+  };
+  const [searchParams1, setSearchParams1] = useState(initialSearchState);
 
   const searchParams = new URLSearchParams(search);
 
@@ -63,13 +72,26 @@ const ProductListFilter = ({ filterParams }) => {
       />
     )
   );
+
+  const something = {
+    variant: 'contained'
+  };
+
   return (
     <div>
       <Grid container direction='column' className={styles.wrapper} spacing={2}>
+        <SearchBar
+          searchParams={searchParams1}
+          setSearchParams={setSearchParams1}
+          initialSearchState={initialSearchState}
+          fieldOptions={searchStyles}
+        />
+        <SearchBarList searchParams={searchParams1} />
         <Button
           className={styles.button}
           data-cy='clear_filter_button'
-          variant='contained'
+          // variant='contained'
+          {...something}
           onClick={handleClearFilter}
         >
           {t('common.clearFilter')}

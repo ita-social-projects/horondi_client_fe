@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
 const drawerWidth = 250;
+export const searchStyles = {
+  variant: 'outlined'
+};
 export const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: '250px',
@@ -40,9 +43,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'inline'
   },
   button: {
-    fontSize: '0.9em',
-    width: '100%',
-    margin: '0 0.2rem 1rem'
+    backgroundColor: theme.palette.primary,
+    fontSize: '0.9em'
   },
   filterName: {
     display: 'flex',

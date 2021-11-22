@@ -23,6 +23,7 @@ export const getConstructorById = gql`
         }
         basics {
           _id
+          translationsKey
           name {
             lang
             value
@@ -41,6 +42,7 @@ export const getConstructorById = gql`
         }
         bottoms {
           _id
+          translationsKey
           name {
             lang
             value

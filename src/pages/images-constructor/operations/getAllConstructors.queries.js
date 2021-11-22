@@ -14,6 +14,7 @@ export const getAllConstructors = gql`
         }
         basics {
           _id
+          translationsKey
           name {
             lang
             value
@@ -32,6 +33,7 @@ export const getAllConstructors = gql`
         }
         bottoms {
           _id
+          translationsKey
           name {
             lang
             value
@@ -45,6 +47,19 @@ export const getAllConstructors = gql`
           additionalPrice {
             value
             currency
+          }
+        }
+        pocketsWithRestrictions {
+          currentPocketWithPosition {
+            pocket {
+              _id
+              images {
+                large
+                medium
+                small
+                thumbnail
+              }
+            }
           }
         }
         patterns {

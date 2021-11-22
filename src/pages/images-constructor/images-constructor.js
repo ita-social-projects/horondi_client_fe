@@ -1,22 +1,17 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
-
 import { useSelector } from 'react-redux';
-
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { mergeImages } from 'horondi_merge_images';
 import { useLazyQuery, useQuery } from '@apollo/client';
-// import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
-import { CONSTRUCTOR_TITLES } from '../../translations/constructor.translations';
-// import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
-import { IMG_URL } from '../../configs';
+import { IMG_URL, constructorDefaultPrice } from '../../configs';
 import {
   constructorEndPrice,
   constructorPartPrice,
@@ -27,12 +22,13 @@ import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 
 const ImagesConstructor = () => {
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
-    language: Language.language,
+  const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
+  const { i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
-  const { DEFAULT_PRICE_VALUE } = CONSTRUCTOR_TITLES[currency];
+  const defaultPrice = constructorDefaultPrice[currency];
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
@@ -73,11 +69,7 @@ const ImagesConstructor = () => {
   const allModels = useRef([]);
   const [allPrices, setAllPrice] = useState({});
 
-  const {
-    loading: constructorsLoading,
-    // error: constructorsError,
-    data: constructors
-  } = useQuery(getAllConstructors, {
+  const { loading: constructorsLoading, data: constructors } = useQuery(getAllConstructors, {
     variables: {
       limit: 0,
       skip: 0
@@ -104,6 +96,11 @@ const ImagesConstructor = () => {
             setConstructorModel(allConstructors.items[0][key]._id);
             acc.sizes = allConstructors.items[0][key].sizes[0];
           }
+
+          if (key === 'pocketsWithRestrictions') {
+            acc.pocket = allConstructors.items[0][key][0].currentPocketWithPosition.pocket;
+          }
+
           if (key !== 'name' && key !== '_id' && key !== 'model')
             acc[key] = allConstructors.items[0][key][0];
           else acc[key] = allConstructors.items[0][key];
@@ -121,6 +118,10 @@ const ImagesConstructor = () => {
         Object.keys(oneConstractor[0]).reduce((acc, key) => {
           if (key === 'model') acc.sizes = oneConstractor[0][key].sizes[0];
 
+          if (key === 'pocketsWithRestrictions') {
+            acc.pocket = oneConstractor[0][key][0]?.currentPocketWithPosition.pocket;
+          }
+
           if (key !== 'name' && key !== '_id' && key !== 'model')
             acc[key] = oneConstractor[0][key][0];
           else acc[key] = oneConstractor[0][key];
@@ -129,22 +130,19 @@ const ImagesConstructor = () => {
       );
       currentConstructorModel.current = oneConstractor[0];
     }
-    setAllPrice(
-      Object.keys(constructorValues).reduce((acc, key) => {
-        if (key === 'patterns') acc.pattern = constructorValues[key].additionalPrice[0].value;
-        if (key === 'bottoms') acc.bottom = constructorValues[key].additionalPrice[0].value;
-        return acc;
-      }, {})
-    );
   }, [constructorByModel]);
 
   useEffect(() => {
     !called && constructorModel && getConstructorByModelHandler();
     called && refetch();
-  }, [constructorModel]);
+  }, [constructorModel, called, refetch, getConstructorByModelHandler]);
 
   useLayoutEffect(() => {
-    if (constructorValues.bottoms && constructorValues.basics && constructorValues.patterns) {
+    if (
+      constructorValues.patterns !== undefined &&
+      constructorValues.basics &&
+      constructorValues.bottoms
+    ) {
       loadImages([
         constructorValues.basics.images.small,
         constructorValues.bottoms.images.small,
@@ -153,9 +151,47 @@ const ImagesConstructor = () => {
         mergeImages(loadedImages, canvas.current, canvasW, canvasH);
       });
     }
+
+    if (
+      constructorValues.patterns !== undefined &&
+      constructorValues.basics &&
+      constructorValues.bottoms &&
+      constructorValues.pocket
+    ) {
+      loadImages([
+        constructorValues.pocket.images.small,
+        constructorValues.basics.images.small,
+        constructorValues.bottoms.images.small,
+        constructorValues.patterns.constructorImg
+      ]).then((loadedImages) => {
+        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
+      });
+    }
+
+    if (
+      constructorValues.patterns === undefined &&
+      constructorValues.basics &&
+      constructorValues.bottoms
+    ) {
+      loadImages([
+        constructorValues.basics.images.small,
+        constructorValues.bottoms.images.small
+      ]).then((loadedImages) => {
+        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
+      });
+    }
+
+    setAllPrice(
+      Object.keys(constructorValues).reduce((acc, key) => {
+        if (key === 'patterns' && constructorValues.patterns !== undefined)
+          acc.pattern = constructorValues[key].additionalPrice[0].value;
+        if (key === 'bottoms') acc.bottom = constructorValues[key].additionalPrice[0].value;
+        return acc;
+      }, {})
+    );
   }, [constructorValues]);
 
-  return constructorValues.patterns && currentConstructorModel ? (
+  return constructorValues.basics && currentConstructorModel ? (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
         <h1>{t('common.title')}</h1>
@@ -174,7 +210,6 @@ const ImagesConstructor = () => {
               {allModels.current.map((model) => (
                 <MenuItem key={model._id} value={model._id}>
                   {t(`${model.translationsKey}.name`)}
-                  {/* {model.name[0].value} */}
                 </MenuItem>
               ))}
             </Select>
@@ -198,7 +233,7 @@ const ImagesConstructor = () => {
             >
               {currentConstructorModel.current.basics.map((basics) => (
                 <MenuItem key={basics._id} value={basics._id}>
-                  {basics.name[0].value}
+                  {t(`${basics.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
@@ -210,19 +245,22 @@ const ImagesConstructor = () => {
               label='title'
               data-cy='patern'
               name='patern'
-              value={constructorValues.patterns._id}
-              onChange={(e) =>
+              value={constructorValues.patterns?._id || ''}
+              onChange={(e) => {
                 setConstructorValues({
                   ...constructorValues,
                   patterns: currentConstructorModel.current.patterns.find(
                     (pattern) => pattern._id === e.target.value
                   )
-                })
-              }
+                });
+                setAllPrice((prevState) => ({
+                  ...prevState,
+                  pattern: constructorValues.patterns.additionalPrice[currency].value
+                }));
+              }}
             >
               {currentConstructorModel.current.patterns.map((pattern) => (
                 <MenuItem key={pattern._id} value={pattern._id}>
-                  {/* {pattern.name[0].value} */}
                   {t(`${pattern.translationsKey}.name`)}
                 </MenuItem>
               ))}
@@ -236,18 +274,22 @@ const ImagesConstructor = () => {
               data-cy='bottom'
               name='bottom'
               value={constructorValues.bottoms._id}
-              onChange={(e) =>
+              onChange={(e) => {
                 setConstructorValues({
                   ...constructorValues,
                   bottoms: currentConstructorModel.current.bottoms.find(
                     (bottom) => bottom._id === e.target.value
                   )
-                })
-              }
+                });
+                setAllPrice((prevState) => ({
+                  ...prevState,
+                  bottom: constructorValues.bottoms.additionalPrice[currency].value
+                }));
+              }}
             >
               {currentConstructorModel.current.bottoms.map((bottom) => (
                 <MenuItem key={bottom._id} value={bottom._id}>
-                  {bottom.name[0].value}
+                  {t(`${bottom.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
@@ -270,7 +312,7 @@ const ImagesConstructor = () => {
               }
             >
               {currentConstructorModel.current.model.sizes.map((size) => (
-                <MenuItem key={size._id} value={size._id}>
+                <MenuItem key={size.name} value={size._id}>
                   {size.name}
                 </MenuItem>
               ))}
@@ -297,16 +339,8 @@ const ImagesConstructor = () => {
         </form>
 
         <div className={styles.imageContainer}>
-          {!constructorValues.patterns && <Loader />}
-          <canvas
-            style={{
-              display: !constructorValues.patterns ? 'none' : 'block'
-            }}
-            className={styles.image}
-            width={canvasW}
-            height={canvasH}
-            ref={canvas}
-          />
+          {!constructorValues.basics && <Loader />}
+          <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
         </div>
 
         <div className={styles.pricesInfoWrapper}>
@@ -316,7 +350,7 @@ const ImagesConstructor = () => {
               <li className={styles.priceItem}>
                 <span>{t('common.defaultPrice')}</span>
                 <span>
-                  {DEFAULT_PRICE_VALUE}
+                  {defaultPrice}
                   {getCurrentCurrency(currency)}
                 </span>
               </li>
@@ -340,7 +374,7 @@ const ImagesConstructor = () => {
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
             <span>
-              {constructorEndPrice(+DEFAULT_PRICE_VALUE + allPrices.pattern + allPrices.bottom)}
+              {constructorEndPrice(+defaultPrice + allPrices.pattern + allPrices.bottom)}
               {getCurrentCurrency(currency)}
             </span>
           </h2>
@@ -351,122 +385,6 @@ const ImagesConstructor = () => {
   ) : (
     0
   );
-  // return (
-  //   <div className={styles.constructorWrapper}>
-  //     <div className={styles.headingWrapper}>
-  //       <FormControl>
-  //         <NativeSelect
-  //           className={styles.mainHeader}
-  //           name={constructorImageInput.MODEL}
-  //           onChange={(e) => setCurrentConstructorId(e.target.value)}
-  //         >
-  //           {availableModels2}
-  //         </NativeSelect>
-  //         <FormHelperText>{t('common.model')}</FormHelperText>
-  //       </FormControl>
-  //     </div>
-
-  //     <div className={styles.contentWrapper}>
-  //       <form className={styles.formWrapper}>
-  //         <FormControl>
-  //           <NativeSelect
-  //             name={constructorImageInput.BASIC}
-  //             onChange={(e) => setBasicsId(e.target.value)}
-  //           >
-  //             {availableBasics}
-  //           </NativeSelect>
-  //           <FormHelperText>{t('common.basis')}</FormHelperText>
-  //         </FormControl>
-  //         <FormControl>
-  //           <NativeSelect
-  //             name={constructorImageInput.PATTERN}
-  //             onChange={(e) => setPatternId(e.target.value)}
-  //           >
-  //             {availablePatterns}
-  //           </NativeSelect>
-  //           <FormHelperText>{t('common.pattern')}</FormHelperText>
-  //         </FormControl>
-  //         <FormControl>
-  //           <NativeSelect
-  //             name={constructorImageInput.BOTTOM}
-  //             onChange={(e) => setBottomId(e.target.value)}
-  //           >
-  //             {availableBottoms}
-  //           </NativeSelect>
-  //           <FormHelperText>{t('common.bottom')}</FormHelperText>
-  //         </FormControl>
-  //         <FormControl>
-  //           <NativeSelect
-  //             name={constructorImageInput.SIZE}
-  //             onChange={(e) => methods.changeSize(e.target.value)}
-  //           >
-  //             {availableSizes}
-  //           </NativeSelect>
-  //           <FormHelperText>{t('common.size')}</FormHelperText>
-  //         </FormControl>
-
-  //         <Button className={styles.button} onClick={showModal}>
-  //           {t('buttons.moreOptions')}
-  //         </Button>
-  //       </form>
-  //       <div className={styles.pricesInfoWrapper}>
-  //         <h2 className={styles.headerWrapper}>{t('common.totalPrice')}</h2>
-  //         <div className={styles.textWrapper}>
-  //           <ul>
-  //             <li className={styles.priceItem}>
-  //               <span>{t('common.defaultPrice')}</span>
-  //               <span>
-  //                 {prices.DEFAULT_PRICE_VALUE}
-  //                 {getCurrentCurrency(currency)}
-  //               </span>
-  //             </li>
-  //             <div className={`${styles.line} ${styles.topLine}`} />
-
-  //             {constructorPartPrice(
-  //               prices.priceBasic,
-  //               prices.priceGobelen,
-  //               prices.priceBottom,
-  //               prices.priceSize
-  //             ).map((item, index) =>
-  //               item ? (
-  //                 <li key={index} className={styles.priceItem}>
-  //                   <span>{constructorPartNames(!language)[index]}</span>
-  //                   <span>
-  //                     +{item}
-  //                     {getCurrentCurrency(currency)}
-  //                   </span>
-  //                 </li>
-  //               ) : (
-  //                 <div key={index} />
-  //               )
-  //             )}
-  //             <div className={`${styles.line} ${styles.bottomLine}`} />
-  //           </ul>
-  //         </div>
-  //         <h2 className={styles.headerWrapper}>
-  //           {t('common.endPrice')}
-  //           <span>
-  //             {constructorEndPrice(prices.priceTotal)}
-  //             {getCurrentCurrency(currency)}
-  //           </span>
-  //         </h2>
-  //         <ConstructorSubmit />
-  //       </div>
-  //     </div>
-  //     {modalVisibility && (
-  //       <Modal
-  //         className={styles.modal}
-  //         setModalVisibility={setModalVisibility}
-  //         onAction={onModalAction}
-  //         isOpen={modalVisibility}
-  //         language={language}
-  //         isEmpty
-  //         isFullscreen
-  //         content={<h3>MODAL FOR CONSTRUCTOR</h3>}
-  //       />
-  //     )}
-  //   </div>
-  // );
 };
 
 export default ImagesConstructor;

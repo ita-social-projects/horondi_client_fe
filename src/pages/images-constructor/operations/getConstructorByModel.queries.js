@@ -15,6 +15,7 @@ export const getConstructorByModel = gql`
         }
         basics {
           _id
+          translationsKey
           name {
             lang
             value
@@ -31,8 +32,22 @@ export const getConstructorByModel = gql`
             currency
           }
         }
+        pocketsWithRestrictions {
+          currentPocketWithPosition {
+            pocket {
+              _id
+              images {
+                large
+                medium
+                small
+                thumbnail
+              }
+            }
+          }
+        }
         bottoms {
           _id
+          translationsKey
           name {
             lang
             value

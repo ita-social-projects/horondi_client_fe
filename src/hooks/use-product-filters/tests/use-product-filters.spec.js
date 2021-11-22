@@ -5,7 +5,7 @@ jest.mock('react-router', () => ({
   useHistory: () => ({ push: () => null })
 }));
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ i18n: { language: 'ua' } })
+  useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })
 }));
 jest.mock('react', () => ({
   useState: () => [{}, () => null],

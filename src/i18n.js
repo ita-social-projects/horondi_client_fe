@@ -7,6 +7,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    wait: false,
     fallbackLng: 'ua',
     detection: {
       order: ['cookie', 'htmlTag', 'localStorage', 'path', 'subdomain'],

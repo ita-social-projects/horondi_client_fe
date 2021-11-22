@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import { useTheme } from '@material-ui/styles';
 
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './product-details.styles';
@@ -19,7 +20,6 @@ import { getProductById } from './operations/product-details.queries';
 import { clearProductToSend, setProductToSend } from '../../redux/products/products.actions';
 import { selectCurrencyProductsCategoryFilter } from '../../utils/multiple.selectors';
 import routes from '../../configs/routes';
-import ThemeContext from '../../context/theme-context';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
@@ -31,6 +31,7 @@ const ProductDetails = ({ match }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
+  const { palette } = useTheme();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
   const { loading, error, data } = useQuery(getProductById, {
     variables: { id }
@@ -51,7 +52,7 @@ const ProductDetails = ({ match }) => {
     sizes && sizes.filter(({ size, price }) => size.available && { size, price });
 
   const currentSize = availableSizes ? availableSizes[0] : {};
-  const isLightTheme = useContext(ThemeContext);
+  const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
     window.scrollTo(0, 0);

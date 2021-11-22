@@ -28,8 +28,7 @@ const tableHeader = {
 
 export const useStyles = makeStyles(({ palette }) => ({
   titleWrapper: {
-    ...title,
-    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+    ...title
   },
   root: {
     maxWidth: '1440px',
@@ -57,9 +56,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     ...tableHeader,
     borderTopWidth: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: palette.type === 'light' ? 'rgba(91, 91, 91, 0.2)' : '#5B5B5B',
-    borderBottomWidth: '1px',
-    borderBottomStyle: 'solid',
-    borderBottomColor: palette.type === 'light' ? 'rgba(91, 91, 91, 0.2)' : '#5B5B5B'
+    borderTopColor: palette.cart.borderColor
   }
 }));

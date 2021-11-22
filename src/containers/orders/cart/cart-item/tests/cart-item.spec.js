@@ -4,6 +4,7 @@ import CartItem from '../cart-item';
 import { props, item } from './cart-item.variables';
 
 jest.mock('react-redux');
+jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
 const dispatch = jest.fn();
 
 function testSelection(loading) {
@@ -19,6 +20,26 @@ function testSelection(loading) {
 }
 
 useDispatch.mockImplementation(() => dispatch);
+
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light',
+      cart: {
+        borderColor: '#000000'
+      }
+    }
+  }),
+  useStyles: () => ({
+    palette: {
+      type: 'light',
+      cart: {
+        borderColor: '#000000'
+      }
+    }
+  })
+}));
 
 let component;
 

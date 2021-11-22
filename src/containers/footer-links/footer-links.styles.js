@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   cardBody: ({ position }) => ({
     flex: position === 'center' ? 0 : 1,
     padding: '50px 25px 25px',
@@ -13,7 +13,7 @@ export const useStyles = makeStyles(() => ({
     boxSizing: 'border-box',
     letterSpacing: '0.2rem',
     fontSize: '1.5rem',
-    color: '#ffffff',
+    color: palette.textColor,
     textDecoration: 'none',
     fontFamily: 'Montserrat',
     fontWeight: 'bold',

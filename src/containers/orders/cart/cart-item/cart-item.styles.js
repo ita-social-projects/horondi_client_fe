@@ -26,12 +26,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     lineHeight: '30px'
   },
   itemDescription: {
-    ...description,
-    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+    ...description
   },
   itemName: {
     ...name,
-    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+    color: palette.textColor
   },
   price: {
     textAlign: 'center'
@@ -46,7 +45,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   selectSizeStyle: {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: palette.type === 'light' ? 'rgba(91, 91, 91, 0.2)' : '#5B5B5B',
+    borderColor: palette.cart.borderColor,
     width: '71px',
     height: '40px'
   },

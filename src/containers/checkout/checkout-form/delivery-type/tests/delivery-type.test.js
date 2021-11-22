@@ -35,10 +35,6 @@ describe('<DeliveryType />', () => {
   it('should match snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
-  it('should handle change', () => {
-    radioGroup.props().onChange({ target: { value: 'SELFPICKUP' } });
-    expect(radioGroup.props().value).toEqual('SELFPICKUP');
-  });
   it('should handle courierOrganization change', () => {
     radioGroup.props().onChange({ target: { value: 'COURIER' } });
     const select = wrapper.find(`[name='courierOrganization']`);

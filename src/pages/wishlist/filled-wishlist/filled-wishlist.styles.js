@@ -15,7 +15,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '38px',
     lineHeight: '65px',
     marginBottom: '80px',
-    color: isLightTheme ? '#242424' : '#FEFEFE'
+    color: isLightTheme ? '#242424' : '#FEFEFE',
+    '@media screen and (max-width:768px)': {
+      fontSize: '28px'
+    }
   }),
   table: {
     flexGrow: 1,

@@ -19,9 +19,10 @@
   "confirmPass": "Підтвердіть пароль",
   "change": "Змінити",
   "buttons": {
-    "confirm": "Так",
-    "cancel": "Ні"
+    "confirm": "Видалити",
+    "cancel": "Скасувати"
   },
+  "modalHeader": "Видалити продукт",
   "to": "до ",
   "from": "від ",
   "search": "Пошук",

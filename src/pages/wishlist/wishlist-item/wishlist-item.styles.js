@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
-  width: '255px',
-  height: '52px',
   borderRadius: '4px',
   fontFamily: 'Open Sans',
   fontStyle: 'normal',
@@ -10,22 +8,41 @@ const button = {
   fontSize: '14px',
   lineHeight: '20px',
   letterSpacing: '0.0125em',
-  textTransform: 'uppercase'
+  textTransform: 'uppercase',
+  '@media (max-width: 768px)': {
+    padding: '4px 2px',
+    fontSize: '10px'
+  },
+  '@media (max-width:500px)': {
+    fontSize: '9px'
+  }
 };
 
 export const useStyles = makeStyles(() => ({
   root: {
-    width: '1110px',
     justifyContent: 'space-between',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden'
   },
+  allItems: {
+    '@media (max-width:768px)': {
+      padding: '3px 0'
+    }
+  },
   product: {
     display: 'flex',
     alignItems: 'center',
-    width: '300px',
-    marginRight: '50px'
+    marginRight: '50px',
+    '@media (max-width: 980px)': {
+      flexDirection: 'column',
+      marginRight: '0'
+    }
+  },
+  itemImg: {
+    '@media (max-width: 768px)': {
+      width: '80px'
+    }
   },
   itemName: (isLightTheme) => ({
     fontFamily: 'Open Sans',
@@ -33,7 +50,11 @@ export const useStyles = makeStyles(() => ({
     fontWeight: 'bold',
     fontSize: '24px',
     lineHeight: '32px',
-    color: isLightTheme ? '#242424' : '#FEFEFE'
+    color: isLightTheme ? '#242424' : '#FEFEFE',
+    '@media (max-width:768px)': {
+      fontSize: '14px',
+      lineHeight: '20px'
+    }
   }),
   description: (isLightTheme) => ({
     fontFamily: 'Open Sans',
@@ -42,26 +63,29 @@ export const useStyles = makeStyles(() => ({
     fontSize: '14px',
     lineHeight: '22px',
     letterSpacing: '0.0025em',
-    color: isLightTheme ? '#242424' : '#FEFEFE'
+    color: isLightTheme ? '#242424' : '#FEFEFE',
+    '@media (max-width:768px)': {
+      display: 'none'
+    }
   }),
   delete: {
     display: 'flex',
-    width: '760px',
     justifyContent: 'flex-end'
   },
   deleteIcon: {
     marginLeft: '20px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 768px)': {
+      marginLeft: '0'
+    }
   },
   priceWrapper: {
     textAlign: 'center',
-    width: '100px'
+    fontSize: '12px'
   },
   deleteWrapper: {
     display: 'flex',
-    width: '300px',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     alignItems: 'center'
   },
   cartButton: (isLightTheme) => ({

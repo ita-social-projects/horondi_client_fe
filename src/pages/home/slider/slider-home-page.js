@@ -13,33 +13,41 @@ const SliderHomePage = () => {
   const { t } = useTranslation();
 
   return (
-    <div style={{ backgroundImage: `url(${images[currImg].img})` }} className={styles.homeHeader}>
+    <div
+      style={{ backgroundImage: `url(${images[currImg].img})`, backgroundPosition: 'center' }}
+      className={styles.homeHeader}
+    >
       <div className={styles.sliderInner}>
         <div className={styles.headerWrapper}>
           <div className={styles.slideNumber}>
             <span>{images[currImg].slideNumber}/ </span> <span> 03</span>
           </div>
-          <h2 className={styles.headerTitle}> {t(images[currImg].title)}</h2>
-          <p className={styles.description}>{t(images[currImg].description)}</p>
-        </div>
-        <Link to={images[currImg].linkTo}>
-          <Button className={styles.buttonStyles}>{t(images[currImg].buttonName)} </Button>
-        </Link>
-        <div className={styles.arrows}>
-          <img
-            onClick={() => {
-              currImg > 0 && setCurrImg(currImg - 1);
-            }}
-            src={arrowLeft}
-            alt='arrow left'
-          />
-          <img
-            onClick={() => {
-              currImg < images.length - 1 && setCurrImg(currImg + 1);
-            }}
-            src={arrowRight}
-            alt='arrow right'
-          />
+          <div className={styles.text}>
+            <h2 className={styles.headerTitle}> {t(images[currImg].title)}</h2>
+            <p className={styles.description}>{t(images[currImg].description)}</p>
+            <div className={styles.navWrapper}>
+              <Link to={images[currImg].linkTo}>
+                <Button className={styles.buttonStyles}>{t(images[currImg].buttonName)} </Button>
+              </Link>
+              <br />
+              <div className={styles.arrows}>
+                <img
+                  onClick={() => {
+                    currImg > 0 && setCurrImg(currImg - 1);
+                  }}
+                  src={arrowLeft}
+                  alt='arrow left'
+                />
+                <img
+                  onClick={() => {
+                    currImg < images.length - 1 && setCurrImg(currImg + 1);
+                  }}
+                  src={arrowRight}
+                  alt='arrow right'
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

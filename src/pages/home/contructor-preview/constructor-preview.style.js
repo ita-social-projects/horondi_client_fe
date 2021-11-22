@@ -25,26 +25,6 @@ export const useStyles = makeStyles(() => ({
       }
     }
   }),
-  // constructorInnerIcon: ({ isMouseIn }) => ({
-  //   position: 'absolute',
-  //   left: '50%',
-  //   top: 20,
-  //   transform: `translateX(-50%) ${isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'}`,
-  //   fontSize: '4em'
-  // }),
-  // constructorInnerLink: {
-  //   color: 'white',
-  //   fontSize: '3em',
-  //   display: 'flex',
-  //   '@media (max-width: 768px)': {
-  //     fontSize: '25px',
-  //     marginLeft: '25px'
-  //   },
-  //   '& svg': {
-  //     marginLeft: '10px',
-  //     fontSize: '1.4em'
-  //   }
-  // },
   playerSoundControl: {
     position: 'absolute',
     cursor: 'pointer',

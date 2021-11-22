@@ -4,25 +4,24 @@ export const useStyles = makeStyles(() => ({
   homeHeader: {
     position: 'relative',
     height: 'calc(100vh - 50px)',
-    alignItems: 'center',
-    display: 'flex',
-    backgroundPosition: 'bottom',
     backgroundSize: 'cover'
   },
   headerWrapper: {
-    width: '30%',
+    width: '32vw',
     position: 'absolute',
-    top: '10%',
-    left: '12%',
-    zIndex: 9,
+    top: 40,
+    left: 140,
+    zIndex: 1,
     textAlign: 'start',
     '@media (max-width: 768px)': {
-      width: '60%'
+      width: '60vw'
     }
   },
   headerTitle: {
-    marginTop: '5%',
-    fontSize: '55px',
+    marginTop: 0,
+    marginBottom: 0,
+    paddingTop: '10px',
+    fontSize: '50px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '300',
@@ -34,25 +33,32 @@ export const useStyles = makeStyles(() => ({
     }
   },
   description: {
-    marginTop: '5%',
-    marginBottom: '10%',
-    fontSize: '17px',
+    marginTop: '15px',
+    marginBottom: '15px',
+    fontSize: '15px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    lineHeight: '25px',
+    lineHeight: '23px',
     letterSpacing: '0.005em',
     color: '#FEFEFE',
     '@media (max-width: 768px)': {
       display: 'none'
     }
   },
-  buttonStyles: {
-    height: '44px',
-    width: '174px',
+  text: {
+    paddingTop: 0,
     position: 'absolute',
-    bottom: '27%',
-    left: '12%',
+    top: 40
+  },
+  navWrapper: {
+    marginTop: '45px',
+    position: 'absolute'
+  },
+  buttonStyles: {
+    height: '43px',
+    width: '174px',
+    display: 'block',
     fontStyle: 'normal',
     fontWeight: '600',
     fontFamily: 'Open Sans',
@@ -67,11 +73,9 @@ export const useStyles = makeStyles(() => ({
     }
   },
   arrows: {
+    paddingTop: '15px',
     display: 'flex',
     columnGap: '24px',
-    position: 'absolute',
-    bottom: '15%',
-    left: '12%',
     '&:hover': {
       cursor: 'pointer'
     },

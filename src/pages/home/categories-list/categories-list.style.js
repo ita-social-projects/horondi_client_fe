@@ -36,9 +36,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   categoryTitle: {
     position: 'absolute',
-    top: '2%',
+    top: 0,
     zIndex: '10',
-    left: '12%',
+    left: 80,
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',

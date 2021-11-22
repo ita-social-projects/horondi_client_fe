@@ -25,7 +25,6 @@ const themeValue = theme('light');
 const dispatch = jest.fn();
 const mockToLocalStorage = jest.fn();
 const mockStore = {
-  isLightTheme: true,
   language: 0,
   loading: false,
   registerError: ''

@@ -86,8 +86,9 @@ const FilledWishlist = ({ items }) => {
         {modalVisibility && (
           <div>
             <Modal
-              itemName={modalItem.name[language].value}
-              message={t('modal.modalDeleteFromWishlistMessage')}
+              message={`${t('modal.modalDeleteFromWishlistMessage')} ${
+                modalItem.name[language].value
+              }?`}
               isOpen={modalVisibility}
               onAction={onModalAction}
               language={language}

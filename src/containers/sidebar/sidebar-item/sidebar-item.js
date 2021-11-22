@@ -30,13 +30,7 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>
         <List className={styles.list}>
           {models.map((model) => (
-            <ListItem
-              button
-              component={Link}
-              className={styles.nested}
-              key={model._id}
-              onClick={handlerItem}
-            >
+            <ListItem button className={styles.nested} key={model._id} onClick={handlerItem}>
               <Link
                 to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=9&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
               >

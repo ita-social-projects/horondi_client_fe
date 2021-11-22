@@ -6,8 +6,7 @@ import SearchBarListItem from './search-bar-list-item';
 import { handleSearchListLoading } from '../../utils/handle-search-bar-list';
 
 const SearchBarList = ({ searchParams }) => {
-  const { i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
 
   const styles = useStyles();
   const { products, searchBarVisibility, loading } = searchParams;
@@ -18,7 +17,7 @@ const SearchBarList = ({ searchParams }) => {
         <div className={styles.searchBarList}>
           {products.length
             ? products.map((item) => <SearchBarListItem key={item._id} product={item} />)
-            : handleSearchListLoading(loading, styles.emptyList, language)}
+            : handleSearchListLoading(loading, styles.emptyList, t('error.nothingFound'))}
         </div>
       )}
     </>

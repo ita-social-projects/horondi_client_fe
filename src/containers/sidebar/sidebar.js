@@ -22,7 +22,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { palette } = useTheme();
 
   const sidebar = clsx({
@@ -71,7 +71,9 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
             className={styles.subItem}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span>{item.name[i18n.language === 'ua' ? 0 : 1]}</span>
+            <span>
+              {item.text ? t(`common.${item.text}`) : t(`common.${item.link.replace('/', '')}`)}
+            </span>
           </Link>
         ))}
       </div>

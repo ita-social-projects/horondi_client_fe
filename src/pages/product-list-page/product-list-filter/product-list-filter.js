@@ -9,7 +9,7 @@ import HotItemFilter from './hot-item-filter';
 import { useStyles } from './product-list-filter.styles';
 
 import ProductsFiltersContainer from '../../../containers/products-filters-container';
-import { countPerPage, sort } from '../../../configs';
+import { countPerPage, TEXT_FIELDS } from '../../../configs';
 import useProductFilters from '../../../hooks/use-product-filters';
 import routes from '../../../configs/routes';
 import { getAllFiltersQuery } from '../operations/product-list.queries';
@@ -45,7 +45,7 @@ const ProductListFilter = ({ filterParams }) => {
   if (error || loading) return errorOrLoadingHandler(error, loading);
 
   const handleClearFilter = () => {
-    const sortQuery = searchParams.get(sort);
+    const sortQuery = searchParams.get(TEXT_FIELDS.SORT);
     const quantityPerPage = searchParams.get(countPerPage);
     history.push(`${pathToCategory}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
   };

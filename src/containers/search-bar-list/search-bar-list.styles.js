@@ -16,6 +16,7 @@ export const useStyles = makeStyles(() => ({
   emptyList: {
     position: 'absolute',
     left: '50%',
+    color: 'black',
     top: '50%',
     transform: 'translate(-50%, -50%)'
   }

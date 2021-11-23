@@ -175,7 +175,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '90%'
   },
   icon: {
-    color: palette.currentColor,
+    color: palette.white,
     fontSize: '35px',
     '@media (max-width: 768px)': {
       fontSize: '25px !important'

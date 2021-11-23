@@ -304,8 +304,7 @@ export const TEXT_FIELD_VARIANT = {
   ROUNTED: 'rounded'
 };
 export const TEXT_FIELD_SIZE = {
-  SMALL: 'small',
-  LARGE: 'large'
+  SMALL: 'small'
 };
 export const MATERIAL_UI_COLOR = {
   INHERIT: 'inherit',

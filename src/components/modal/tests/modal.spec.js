@@ -12,19 +12,21 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('Modal component', () => {
-  it('Should render Modal component', () => {
-    const props = {
-      language: 1,
-      message: 'test',
-      isOpen: true,
-      onAction: jest.fn()
-    };
+  const props = {
+    language: 1,
+    message: 'test',
+    isOpen: true,
+    onAction: jest.fn()
+  };
+  beforeEach(() => {
     render(
       <SnackBarContextProvider>
         <Modal {...props} />
       </SnackBarContextProvider>
     );
+  });
 
+  it('Should render Modal component', () => {
     expect(screen.queryByText(props.message)).toBeInTheDocument();
     expect(screen.queryByText('common.buttons.confirm')).toBeInTheDocument();
     expect(screen.queryByText('common.buttons.cancel')).toBeInTheDocument();
@@ -32,21 +34,9 @@ describe('Modal component', () => {
   });
 
   it('Should call onAction handler with true', () => {
-    const props = {
-      language: 1,
-      message: 'test',
-      isOpen: true,
-      onAction: jest.fn()
-    };
-    render(
-      <SnackBarContextProvider>
-        <Modal {...props} />
-      </SnackBarContextProvider>
-    );
     const confirmButton = screen.queryByText('common.buttons.confirm');
 
     expect(confirmButton).toBeInTheDocument();
-
     act(() => {
       fireEvent.click(confirmButton);
     });
@@ -54,22 +44,9 @@ describe('Modal component', () => {
   });
 
   it('Should call onAction handler with false', () => {
-    const props = {
-      language: 1,
-      message: 'test',
-      isOpen: true,
-      onAction: jest.fn()
-    };
-    render(
-      <SnackBarContextProvider>
-        <Modal {...props} />
-      </SnackBarContextProvider>
-    );
-
     const cancelButton = screen.queryByText('common.buttons.cancel');
 
     expect(cancelButton).toBeInTheDocument();
-
     act(() => {
       fireEvent.click(cancelButton);
     });
@@ -77,22 +54,9 @@ describe('Modal component', () => {
   });
 
   it('Should call onAction handler with false', () => {
-    const props = {
-      language: 1,
-      message: 'test',
-      isOpen: true,
-      onAction: jest.fn()
-    };
-    render(
-      <SnackBarContextProvider>
-        <Modal {...props} />
-      </SnackBarContextProvider>
-    );
-
     const closeModalIcon = screen.queryByTestId('closeModalIcon');
 
     expect(closeModalIcon).toBeInTheDocument();
-
     act(() => {
       fireEvent.click(closeModalIcon);
     });

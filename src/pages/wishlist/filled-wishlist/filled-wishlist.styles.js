@@ -15,7 +15,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '38px',
     lineHeight: '65px',
     marginBottom: '80px',
-    color: isLightTheme ? '#242424' : '#FEFEFE'
+    color: isLightTheme ? '#242424' : '#FEFEFE',
+    '@media screen and (max-width:768px)': {
+      fontSize: '28px'
+    }
   }),
   table: {
     flexGrow: 1,
@@ -23,13 +26,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 813px)': {
       marginRight: 'initial'
     },
-    width: '1110px',
+    width: '1000px',
     '@media (max-width: 1110px)': {
       width: '750px',
       overflowX: 'auto'
     },
-    '@media (max-width: 750px)': {
-      width: '600px',
+    '@media (max-width: 920px)': {
+      width: '550px',
       overflowX: 'auto'
     },
     '@media (max-width: 600px)': {

@@ -6,7 +6,10 @@ const titleStyles = {
   fontWeight: 'normal',
   fontSize: '34px',
   lineHeight: '46px',
-  letterSpacing: '0.0025em'
+  letterSpacing: '0.0025em',
+  '@media (max-width: 600px)': {
+    fontSize: '20px'
+  }
 };
 const buttonStyles = {
   height: '52px',
@@ -42,7 +45,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     alignItems: 'center'
   }
 }));

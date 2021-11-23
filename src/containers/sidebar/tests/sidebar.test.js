@@ -17,6 +17,18 @@ jest.mock('../../sidemenu-right-bar', () => ({
   default: () => null
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light',
+      cart: {
+        borderColor: '#000000'
+      }
+    }
+  })
+}));
+
 describe('sidebar tests', () => {
   it('should be defined', () => {
     useQuery.mockImplementation(() => ({

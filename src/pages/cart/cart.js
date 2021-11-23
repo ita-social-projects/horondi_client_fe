@@ -4,18 +4,15 @@ import { useSelector } from 'react-redux';
 import { useStyles } from './cart.styles';
 import EmptyCart from '../../containers/orders/cart/empty-cart';
 import FilledCart from '../../containers/orders/cart/filled-cart';
-import { Loader } from '../../components/loader/loader';
+import { useCart } from '../../hooks/use-cart';
 
 const Cart = () => {
   const styles = useStyles();
-  const { cartItems, cartLoading } = useSelector((state) => ({
-    cartItems: state.Cart.list,
-    cartLoading: state.Cart.loading
+  const { user } = useSelector(({ User }) => ({
+    user: User.userData
   }));
 
-  if (cartLoading) {
-    return <Loader />;
-  }
+  const { cart: cartItems } = useCart(user);
 
   return (
     <div className={styles.root}>

@@ -17,24 +17,22 @@ import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.ac
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
 import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
+import { useCart } from '../../../hooks/use-cart';
+import { addToCart } from '../../../redux/newCart/cart.actions';
 
 const { pathToCart } = routes;
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { productToSend, userData, cartList } = useSelector(selectLanguageProductsUserWishlist);
+  const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
+  const { addToCart: addToCartHook, isInCart } = useCart(userData);
 
   const { t } = useTranslation();
 
   const isItemInCart = useMemo(
-    () =>
-      cartList.find(
-        (item) =>
-          productToSend.product._id === item.product._id &&
-          productToSend.options.size._id === item.options.size._id
-      ),
-    [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
+    () => isInCart(productToSend?.product?._id),
+    [addToCartHook, productToSend?.product?._id, productToSend?.options?.size?._id]
   );
 
   const cartTootipTitle = isItemInCart
@@ -57,6 +55,15 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
           userId: userData._id,
           cartItem: productToSend
         };
+        const testCart = {
+          productId: productToSend.product._id,
+          size: productToSend.options.size._id,
+          price: productToSend.price,
+          quantity: 1
+        };
+
+        dispatch(addToCart(testCart));
+        addToCartHook(testCart);
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
         dispatch(addItemToCart(productToSend));

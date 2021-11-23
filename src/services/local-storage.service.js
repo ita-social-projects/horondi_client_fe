@@ -1,4 +1,4 @@
-import { HORONDI, DEFAULT_CURRENCY, DEFAULT_LANGUAGE, DEFAULT_COUNT_PER_PAGE } from '../configs';
+import { DEFAULT_COUNT_PER_PAGE, DEFAULT_CURRENCY, DEFAULT_LANGUAGE, HORONDI } from '../configs';
 
 export const clearLocalStorage = () => {
   const horondi = {
@@ -8,6 +8,7 @@ export const clearLocalStorage = () => {
     language: DEFAULT_LANGUAGE,
     currency: DEFAULT_CURRENCY,
     cart: [],
+    test: [],
     theme: 'light',
     countPerPage: DEFAULT_COUNT_PER_PAGE,
     deliveryType: '',

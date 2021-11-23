@@ -3,7 +3,7 @@ import { TableCell, TableRow } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 
-import { useStyles } from './order-history-order-item.styles';
+import { useStyles } from './order-history-item-product.styles';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
 

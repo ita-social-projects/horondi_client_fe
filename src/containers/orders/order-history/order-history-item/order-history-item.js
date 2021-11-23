@@ -7,8 +7,8 @@ import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
 import { statusColors } from '../../../../configs';
 import OrderHistoryTable from '../order-history-table/index';
-import OrderHistoryItemProduct from '../order-history-list-item';
-import { useStyles } from './order-history-order.styles';
+import OrderHistoryItemProduct from '../order-history-item-product';
+import { useStyles } from './order-history-item.styles';
 
 const OrderHistoryItem = ({ order }) => {
   const { currency } = useSelector(({ Currency }) => ({

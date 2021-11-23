@@ -1,7 +1,9 @@
 import React from 'react';
-import OrderHistory from '../order-history';
+import OrderHistory from '../../../../pages/order-history/order-history';
 
-jest.mock('../../order-history/order-history.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../../pages/order-history/order-history.styles', () => ({
+  useStyles: () => ({})
+}));
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
   useQuery: () => ({ loading: false, error: null, data: { getUserOrders: {} } })

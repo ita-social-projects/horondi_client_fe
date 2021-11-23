@@ -14,7 +14,8 @@ const Modal = ({
   isCartModal = false,
   isEmpty = false,
   isFullscreen = false,
-  content
+  content,
+  anchorEl
 }) => {
   const [open, setOpen] = useState(isOpen);
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ const Modal = ({
   return (
     <div>
       <Popper
+        anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         aria-labelledby='simple-modal-title'

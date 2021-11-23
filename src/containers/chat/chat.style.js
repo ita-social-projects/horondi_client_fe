@@ -124,9 +124,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   contacts: {
     ...flexCenter,
     background: palette.backgroundColor,
-    width: '100%',
     height: '40%',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     flexDirection: 'column',
     margin: '0 50px 0 0'
   },
@@ -177,11 +176,15 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   icon: {
     color: palette.currentColor,
-    margin: '0 5px 0 0',
     fontSize: '35px',
     '@media (max-width: 768px)': {
       fontSize: '25px !important'
     }
+  },
+  iconContact: {
+    margin: '0 5px 0 0',
+    fontSize: '20px',
+    paddingTop: '2px'
   },
   activeMsgWrapper: {
     height: '65%',

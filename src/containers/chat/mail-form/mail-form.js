@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CancelIcon from '@material-ui/icons/Cancel';
+import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
+import EmailOutlined from '@material-ui/icons/EmailOutlined';
 import ActiveMessenger from '../active-messenger';
 import { useStyles } from '../chat.style';
-import email from '../../../images/footer-icons/phone.svg';
-import phone from '../../../images/footer-icons/email.svg';
 
 export const MailForm = ({ contacts, cancelIconHandler, iconsVisible, mailFormVisible }) => {
   const style = useStyles({ iconsVisible, mailFormVisible });
@@ -20,11 +20,11 @@ export const MailForm = ({ contacts, cancelIconHandler, iconsVisible, mailFormVi
         {contacts.map((contact) => (
           <div key={contact._id}>
             <div className={style.phoneNumbers}>
-              <img className={style.icon} src={phone} alt='phone' />
+              <PhoneIphoneOutlinedIcon className={style.iconContact} />
               <span>{contact.phoneNumber}</span>
             </div>
             <div className={style.phoneNumbers}>
-              <img className={style.icon} src={email} alt='email' />
+              <EmailOutlined className={style.iconContact} />
               <span>{contact.email}</span>
             </div>
           </div>

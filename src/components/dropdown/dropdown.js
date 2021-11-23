@@ -13,19 +13,22 @@ const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) =>
     [styles.rootSelect]: true,
     [styles.sticky]: sticky
   });
+
   useLayoutEffect(() => {
+    let componentMounted = true;
     window.addEventListener('scroll', () => {
-      window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      if (componentMounted) {
+        window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      }
     });
+    return () => {
+      componentMounted = false;
+    };
   }, []);
+
   return (
     <div className={styles.rootItem}>
-      <Select
-        className={stickyLang}
-        defaultValue={defaultValue}
-        value={value}
-        onChange={handler}
-      >
+      <Select className={stickyLang} defaultValue={defaultValue} value={value} onChange={handler}>
         {mappedItems}
       </Select>
     </div>

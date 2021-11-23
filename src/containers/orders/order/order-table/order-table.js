@@ -8,9 +8,8 @@ import { cleanUserCart, resetCart } from '../../../../redux/cart/cart.actions';
 
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
-import { useCart } from '../../../../hooks/use-cart';
 
-const OrderTable = ({ items, user }) => {
+const OrderTable = ({ items, user, cartOperations }) => {
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
@@ -19,15 +18,17 @@ const OrderTable = ({ items, user }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
-  const { removeFromCart } = useCart(user);
+  const { removeFromCart } = cartOperations;
+
   const cartItems = items.map((item) => (
     <CartItem
-      key={item.productId}
+      key={item.id}
       item={item}
       language={language}
       user={user}
       setModalVisibility={setRemoveOneModalVisibility}
       setModalItem={setModalItem}
+      cartOperations={cartOperations}
     />
   ));
 

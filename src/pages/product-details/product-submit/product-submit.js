@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -26,15 +26,13 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
-  const { addToCart: addToCartHook, isInCart } = useCart(userData);
+  const { cartOperations, isInCart } = useCart(userData);
 
   const { t } = useTranslation();
 
-  const isItemInCart = useMemo(
-    () => isInCart(productToSend?.product?._id),
-    [addToCartHook, productToSend?.product?._id, productToSend?.options?.size?._id]
-  );
+  const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
 
+  const { addToCart: addToCartHook } = cartOperations;
   const cartTootipTitle = isItemInCart
     ? t('product.tooltips.itemInCart')
     : t('product.tooltips.itemInCartAlready');
@@ -50,24 +48,31 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
       return;
     }
     if (product) {
+      const sizeAndPrice = product.sizes.find(
+        (size) => size.size._id === productToSend.options.size._id && size
+      );
+      const testCart = {
+        id: Date.now(),
+        productId: productToSend.product._id,
+        sizeAndPrice,
+        quantity: 1
+      };
+
       if (userData) {
         const newCartItemWithUserId = {
           userId: userData._id,
           cartItem: productToSend
         };
-        const testCart = {
-          productId: productToSend.product._id,
-          size: productToSend.options.size._id,
-          price: productToSend.price,
-          quantity: 1
-        };
 
         dispatch(addToCart(testCart));
-        addToCartHook(testCart);
+
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
         dispatch(addItemToCart(productToSend));
       }
+
+      addToCartHook(testCart);
+
       dispatch(setToastMessage(t('product.toastMessage.addedToCard')));
       dispatch(setToastSettings(toastSettings));
     } else {

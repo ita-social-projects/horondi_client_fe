@@ -12,11 +12,14 @@ const Cart = () => {
     user: User.userData
   }));
 
-  const { cart: cartItems } = useCart(user);
-
+  const { cart: cartItems, cartOperations } = useCart(user);
   return (
     <div className={styles.root}>
-      {cartItems.length ? <FilledCart items={cartItems} /> : <EmptyCart />}
+      {cartItems.length ? (
+        <FilledCart items={cartItems} cartOperations={cartOperations} />
+      ) : (
+        <EmptyCart />
+      )}
     </div>
   );
 };

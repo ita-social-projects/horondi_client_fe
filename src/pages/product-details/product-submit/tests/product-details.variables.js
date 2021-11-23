@@ -1,57 +1,95 @@
+import {
+  mockNameEN,
+  mockNameUA,
+  mockTranslationsKey
+} from '../../../../tests/unit/components/your-order.variables';
+
 export const Language = {
   language: 0
 };
 
 export const product = {
-  _id: '60896f073cb33b2d5422a3cf',
-  category: {
-    _id: '6043bdeb3e06ad3edcdb7b2d',
-    name: [
-      {
-        lang: 'ua',
-        value: 'Рюкзаки '
-      },
-      {
-        lang: 'en',
-        value: 'Рюкзаки '
-      }
-    ]
-  },
+  __typename: 'Product',
+  _id: '61938f3f47ff1a3ccc1ac5e7',
   name: [
     {
       lang: 'ua',
-      value: 'test'
+      value: mockNameUA
     },
     {
       lang: 'en',
-      value: 'test'
+      value: mockNameEN
     }
   ],
+  bottomMaterial: {
+    material: {
+      translationsKey: mockTranslationsKey
+    }
+  },
+  images: {
+    primary: {
+      thumbnail: 'thumbnail_hd0l44okw6h880p_giphy-downsized-large.gif'
+    }
+  },
   sizes: [
     {
-      _id: '12443',
-      name: 'L',
-      heightInCm: 2,
-      widthInCm: 3,
-      depthInCm: 4,
-      weightInKg: 1,
-      available: true,
-      additionalPrice: [
+      size: {
+        _id: '604394a2a7532c33dcb326d5',
+        name: 'L'
+      },
+      price: [
         {
-          currency: 'UAH',
-          value: 1
+          value: 1050,
+          currency: 'UAH'
         },
         {
-          currency: 'EN',
-          value: 1
+          value: 39,
+          currency: 'USD'
+        }
+      ]
+    },
+    {
+      size: {
+        _id: '604394cba7532c33dcb326d6',
+        name: 'M'
+      },
+      price: [
+        {
+          value: 1000,
+          currency: 'UAH'
+        },
+        {
+          value: 38,
+          currency: 'USD'
         }
       ]
     }
-  ],
-  images: {
-    primary: 'img'
-  }
+  ]
 };
+
+export const mockCart = [
+  {
+    id: 1637938395612,
+    productId: '61938f3f47ff1a3ccc1ac5e7',
+    sizeAndPrice: {
+      size: {
+        _id: '604394a2a7532c33dcb326d5',
+        name: 'L'
+      },
+      price: [
+        {
+          value: 1000,
+          currency: 'UAH'
+        },
+        {
+          value: 37,
+          currency: 'USD'
+        }
+      ]
+    },
+    quantity: 4
+  }
+];
 
 export const Products = {
   product: {
@@ -63,7 +101,7 @@ export const Products = {
     quatity: 1,
     options: {
       size: {
-        _id: '12443'
+        _id: '604394cba7532c33dcb326d6'
       }
     }
   }

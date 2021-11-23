@@ -1,70 +1,73 @@
 import { useEffect, useState } from 'react';
 import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
 import { calcPriceForCart } from '../utils/priceCalculating';
+import { CART_KEY } from '../configs';
 
-export const useCart = (userId = false) => {
-  const [cart, setCart] = useState([...getFromLocalStorage('test')]);
+export const useCart = (user = null) => {
+  const [cart, setCart] = useState([...getFromLocalStorage(CART_KEY)]);
 
   useEffect(() => {
-    setToLocalStorage('test', [...cart]);
-    getTotalPrice();
-  }, [addToCart, changeQuantity, removeFromCart, changeSize]);
+    setToLocalStorage(CART_KEY, [...cart]);
+  }, [cart, user]);
 
-  function addToCart(item) {
+  const addToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);
-  }
+  };
 
-  function getCartItem(itemId) {
-    return cart.find((cartItem) => cartItem.productId === itemId);
-  }
+  const clearCart = () => {
+    setCart([]);
+  };
 
-  function removeFromCart(item) {
-    setCart((prevCart) =>
-      prevCart.filter(
-        (cartItem) => !(cartItem.productId === item.productId && cartItem.size === item.size)
-      )
+  const getCartItem = (id) => cart.find((cartItem) => cartItem.id === id);
+
+  const removeFromCart = (item) => {
+    setCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
+  };
+
+  const isInCart = (productId, sizeId) =>
+    cart.find(
+      (cartItem) => productId === cartItem.productId && sizeId === cartItem.sizeAndPrice.size._id
     );
-  }
 
-  function isInCart(item) {
-    return cart.find((cartItem) => item === cartItem.productId);
-  }
-
-  function changeQuantity(item, count) {
-    setCart((prevCart) => [
-      ...prevCart.map((el) => {
-        if (el.productId === item.productId) el.quantity = count;
+  const changeQuantity = (id, count) => {
+    setCart((prevCart) =>
+      prevCart.map((el) => {
+        if (el.id === id) el.quantity = count;
         return el;
       })
-    ]);
-  }
+    );
+  };
 
-  function getTotalPrice(currency = 0) {
-    return cart.reduce(
-      (acc, item) => acc + calcPriceForCart(item.price[currency].value, item.quantity),
+  const getTotalPrice = (currency = 0) =>
+    cart.reduce(
+      (acc, item) => acc + calcPriceForCart(item.sizeAndPrice.price[currency].value, item.quantity),
       0
     );
-  }
 
-  function changeSize(item, size) {
-    setCart((prevCart) => [
-      ...prevCart.map((el) => {
-        if (el.productId === item.productId) {
-          el.size = size;
+  const changeSize = (id, sizeAndPrice) => {
+    setCart((prevCart) =>
+      prevCart.map((el) => {
+        if (el.id === id) {
+          el.sizeAndPrice = sizeAndPrice;
         }
         return el;
       })
-    ]);
-  }
+    );
+  };
 
-  return {
+  const cartOperations = {
     addToCart,
     removeFromCart,
+    changeQuantity,
+    changeSize,
+    getTotalPrice,
+    getCartItem,
+    clearCart
+  };
+
+  return {
     isInCart,
     cart,
-    getCartItem,
-    changeQuantity,
-    getTotalPrice,
-    changeSize
+    cartOperations
   };
 };

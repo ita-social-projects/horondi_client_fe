@@ -8,7 +8,7 @@ export const clearLocalStorage = () => {
     language: DEFAULT_LANGUAGE,
     currency: DEFAULT_CURRENCY,
     cart: [],
-    test: [],
+    newCart: [],
     theme: 'light',
     countPerPage: DEFAULT_COUNT_PER_PAGE,
     deliveryType: '',

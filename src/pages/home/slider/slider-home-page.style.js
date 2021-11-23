@@ -7,61 +7,51 @@ export const useStyles = makeStyles(() => ({
     backgroundSize: 'cover'
   },
   headerWrapper: {
-    width: '32vw',
-    position: 'absolute',
-    top: 40,
-    left: 140,
-    zIndex: 1,
+    width: '35vw',
+    marginLeft: '165px',
     textAlign: 'start',
-    boxSizing: 'border-box',
-    '@media (max-width: 900px)': {
-      width: '60vw'
-    },
-    '@media ( max-height: 400px)': {
+    '@media (max-width: 768px)': {
       width: '60vw',
-      left: 40
+      marginLeft: '50px'
     },
-    '@media (max-width: 756px)': {
-      width: '70vw',
-      left: 40
+    '@media ( max-height: 560px)': {
+      width: '60vw'
     }
   },
   headerTitle: {
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: '10px',
-    fontSize: '50px',
+    marginTop: '38px',
+    fontSize: '59px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: '80px',
     letterSpacing: '-0.005em',
     color: '#FEFEFE',
-    '@media (max-width: 900px)': {
+    '@media (max-width: 768px)': {
       fontSize: '35px',
       lineHeight: '50px'
     }
   },
   description: {
-    marginTop: '15px',
     marginBottom: '15px',
-    fontSize: '15px',
+    fontSize: '16px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    lineHeight: '23px',
+    lineHeight: '24px',
     letterSpacing: '0.005em',
     color: '#FEFEFE',
-    '@media (max-width: 860px)': {
+    '@media (max-width: 768px)': {
       display: 'none'
     }
   },
-  text: {
-    paddingTop: 0,
-    top: 40
-  },
   navWrapper: {
-    marginTop: '45px'
+    marginLeft: '165px',
+    marginTop: '45px',
+    '@media (max-width: 768px)': {
+      marginLeft: '50px',
+      width: '60vw'
+    }
   },
   buttonStyles: {
     height: '43px',
@@ -81,7 +71,7 @@ export const useStyles = makeStyles(() => ({
     }
   },
   arrows: {
-    paddingTop: '15px',
+    marginTop: '25px',
     display: 'flex',
     columnGap: '24px',
     '&:hover': {
@@ -92,6 +82,7 @@ export const useStyles = makeStyles(() => ({
     }
   },
   slideNumber: {
+    marginTop: '85px',
     color: '#E4E7ED',
     fontSize: '15px',
     fontWeight: '700',

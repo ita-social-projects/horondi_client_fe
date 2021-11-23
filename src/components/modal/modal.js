@@ -6,7 +6,15 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import { useStyles } from './modal.styles';
 
-const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = false, content }) => {
+const Modal = ({
+  message,
+  onAction,
+  isOpen,
+  isEmpty = false,
+  isFullscreen = false,
+  content,
+  anchorEl
+}) => {
   const [open, setOpen] = useState(isOpen);
   const { t } = useTranslation();
   const styles = useStyles();
@@ -54,10 +62,11 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
   return (
     <div>
       <SimpleModal
+        anchorEl={anchorEl}
+        open={open}
         onClose={handleClose}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
-        open={open}
       >
         {isEmpty ? emptyBody : body}
       </SimpleModal>

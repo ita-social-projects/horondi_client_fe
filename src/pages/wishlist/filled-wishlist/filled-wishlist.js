@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
@@ -16,6 +16,10 @@ const FilledWishlist = ({ items }) => {
   const [modalItem, setModalItem] = useState({});
   const [wishlist, setWishlist] = useState(items || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const modalAnchorElRef = useRef();
+
   const { t, i18n } = useTranslation();
 
   const [isLightTheme] = useContext(ThemeContext);
@@ -24,6 +28,10 @@ const FilledWishlist = ({ items }) => {
   const styles = useStyles(isLightTheme);
   const [{ error, loading, wishlist: updatedWishlist }, deleteItemFromWishlist] =
     useDeleteProductFromWishlistHandler();
+
+  useEffect(() => {
+    setAnchorEl(modalAnchorElRef.current);
+  }, [modalAnchorElRef]);
 
   useEffect(() => {
     updatedWishlist && setWishlist(updatedWishlist);
@@ -60,7 +68,7 @@ const FilledWishlist = ({ items }) => {
 
   return (
     <>
-      <div className={styles.root}>
+      <div className={styles.root} ref={modalAnchorElRef}>
         <div className={styles.title}>{t('wishlist.wishlistTitles.filled')}</div>
         <div className={styles.table}>
           <Table>
@@ -76,7 +84,10 @@ const FilledWishlist = ({ items }) => {
                 <WishlistItem
                   key={i}
                   item={item}
-                  setModalVisibility={setModalVisibility}
+                  setModalVisibility={() => {
+                    setAnchorEl(modalAnchorElRef.current);
+                    setModalVisibility(!modalVisibility);
+                  }}
                   setModalItem={setModalItem}
                 />
               ))}
@@ -86,9 +97,9 @@ const FilledWishlist = ({ items }) => {
         {modalVisibility && (
           <div>
             <Modal
-              message={`${t('modal.modalDeleteFromWishlistMessage')} ${
-                modalItem.name[language].value
-              }?`}
+              anchorEl={anchorEl}
+              itemName={modalItem.name[language].value}
+              message={t('modal.modalDeleteFromWishlistMessage')}
               isOpen={modalVisibility}
               onAction={onModalAction}
               language={language}

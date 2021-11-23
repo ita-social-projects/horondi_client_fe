@@ -9,12 +9,12 @@ const button = {
   lineHeight: '20px',
   letterSpacing: '0.0125em',
   textTransform: 'uppercase',
-  '@media (max-width: 768px)': {
+  '@media (max-width: 880px)': {
     padding: '4px 2px',
     fontSize: '10px'
   },
   '@media (max-width:500px)': {
-    fontSize: '9px'
+    fontSize: '8px'
   }
 };
 
@@ -26,7 +26,7 @@ export const useStyles = makeStyles(() => ({
     overflow: 'hidden'
   },
   allItems: {
-    '@media (max-width:768px)': {
+    '@media (max-width:868px)': {
       padding: '3px 0'
     }
   },
@@ -34,14 +34,14 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
     marginRight: '50px',
-    '@media (max-width: 980px)': {
+    '@media (max-width: 1100px)': {
       flexDirection: 'column',
       marginRight: '0'
     }
   },
   itemImg: {
     '@media (max-width: 768px)': {
-      width: '80px'
+      width: '70px'
     }
   },
   itemName: (isLightTheme) => ({
@@ -52,7 +52,7 @@ export const useStyles = makeStyles(() => ({
     lineHeight: '32px',
     color: isLightTheme ? '#242424' : '#FEFEFE',
     '@media (max-width:768px)': {
-      fontSize: '14px',
+      fontSize: '13px',
       lineHeight: '20px'
     }
   }),
@@ -75,7 +75,7 @@ export const useStyles = makeStyles(() => ({
   deleteIcon: {
     marginLeft: '20px',
     cursor: 'pointer',
-    '@media (max-width: 768px)': {
+    '@media (max-width: 880px)': {
       marginLeft: '0'
     }
   },

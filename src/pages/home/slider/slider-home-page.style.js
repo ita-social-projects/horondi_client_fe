@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   homeHeader: {
     position: 'relative',
-    height: 'calc(100vh - 50px)',
+    height: '100vh',
     backgroundSize: 'cover'
   },
   headerWrapper: {
@@ -13,8 +13,17 @@ export const useStyles = makeStyles(() => ({
     left: 140,
     zIndex: 1,
     textAlign: 'start',
-    '@media (max-width: 768px)': {
+    boxSizing: 'border-box',
+    '@media (max-width: 900px)': {
       width: '60vw'
+    },
+    '@media ( max-height: 400px)': {
+      width: '60vw',
+      left: 40
+    },
+    '@media (max-width: 756px)': {
+      width: '70vw',
+      left: 40
     }
   },
   headerTitle: {
@@ -28,8 +37,9 @@ export const useStyles = makeStyles(() => ({
     lineHeight: '80px',
     letterSpacing: '-0.005em',
     color: '#FEFEFE',
-    '@media (max-width: 768px)': {
-      fontSize: '35px'
+    '@media (max-width: 900px)': {
+      fontSize: '35px',
+      lineHeight: '50px'
     }
   },
   description: {
@@ -42,18 +52,16 @@ export const useStyles = makeStyles(() => ({
     lineHeight: '23px',
     letterSpacing: '0.005em',
     color: '#FEFEFE',
-    '@media (max-width: 768px)': {
+    '@media (max-width: 860px)': {
       display: 'none'
     }
   },
   text: {
     paddingTop: 0,
-    position: 'absolute',
     top: 40
   },
   navWrapper: {
-    marginTop: '45px',
-    position: 'absolute'
+    marginTop: '45px'
   },
   buttonStyles: {
     height: '43px',

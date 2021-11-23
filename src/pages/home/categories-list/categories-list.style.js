@@ -36,9 +36,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   categoryTitle: {
     position: 'absolute',
-    top: 0,
-    zIndex: '10',
+    margin: 0,
+    top: 10,
     left: 80,
+    zIndex: '10',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',

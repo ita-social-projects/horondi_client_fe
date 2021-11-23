@@ -48,6 +48,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   }),
   iconWrap: {
-    margin: '0.5rem'
+    margin: '0.5rem',
+    color: 'transparent',
+    '&:hover': {
+      color: '#bebebe'
+    }
   }
 }));

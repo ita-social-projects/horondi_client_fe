@@ -25,6 +25,7 @@ const ImagesConstructor = () => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
+
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
 
@@ -85,6 +86,7 @@ const ImagesConstructor = () => {
       id: constructorModel
     }
   });
+
   const oneConstractor = constructorByModelLoading ? [] : constructorByModel?.getConstructorByModel;
 
   useEffect(() => {
@@ -110,7 +112,7 @@ const ImagesConstructor = () => {
 
       currentConstructorModel.current = allConstructors.items[0];
     }
-  }, [constructors]);
+  }, [constructors, allConstructors.items]);
 
   useEffect(() => {
     if (constructorByModel?.getConstructorByModel) {
@@ -130,7 +132,7 @@ const ImagesConstructor = () => {
       );
       currentConstructorModel.current = oneConstractor[0];
     }
-  }, [constructorByModel]);
+  }, [constructorByModel, oneConstractor]);
 
   useEffect(() => {
     !called && constructorModel && getConstructorByModelHandler();
@@ -206,6 +208,7 @@ const ImagesConstructor = () => {
               name='model'
               value={constructorModel}
               onChange={(e) => setConstructorModel(e.target.value)}
+              data-testid='model'
             >
               {allModels.current.map((model) => (
                 <MenuItem key={model._id} value={model._id}>
@@ -374,7 +377,9 @@ const ImagesConstructor = () => {
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
             <span>
-              {constructorEndPrice(+defaultPrice + allPrices.pattern + allPrices.bottom)}
+              {allPrices.pattern
+                ? constructorEndPrice(+defaultPrice + allPrices.pattern + allPrices.bottom)
+                : constructorEndPrice(+defaultPrice + allPrices.bottom)}
               {getCurrentCurrency(currency)}
             </span>
           </h2>

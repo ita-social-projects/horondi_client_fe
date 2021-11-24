@@ -12,8 +12,8 @@
         "orderNumber": "Замовленя №",
         "customer": "Замовник: ",
         "phone": "Телефон: ",
-        "deliveryType:": "Тип доставки: ",
-        "address:": "Адреса: ",
+        "deliveryType": "Тип доставки: ",
+        "address": "Адреса: ",
         "continueShopping": "ПРОДОВЖИТИ ПОКУПКИ",
         "goToHomePage": "НА ГОЛОВНУ СТОРІНКУ",
         "guest": "Гість"

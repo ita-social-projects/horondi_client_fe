@@ -7,13 +7,14 @@
         "result": "Result",
         "linkToPayment": "Payment link"
     },
+    
     "thanksCard": {
         "thanksForBuy": "Thank you for your purchase!",
         "orderNumber": "Order №",
         "customer": "Customer: ",
         "phone": "Phone: ",
-        "deliveryType:": "Delivery type: ",
-        "address:": "Address: ",
+        "deliveryType": "Delivery type: ",
+        "address": "Address: ",
         "continueShopping": "CONTINUE SHOPPING",
         "goToHomePage": "GO TO HOME PAGE",
         "guest": "Guest"

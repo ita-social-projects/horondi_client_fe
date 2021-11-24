@@ -61,7 +61,7 @@ const ThanksPage = () => {
                 orderNumber={order?.orderNumber}
                 customerName='Some Name'
                 phoneNumber='0933895428'
-                deliveryType='N'
+                deliveryType='Nova Poshta'
                 address='Some str.'
               />
             </div>

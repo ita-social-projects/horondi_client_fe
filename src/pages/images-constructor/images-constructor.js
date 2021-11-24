@@ -142,6 +142,7 @@ const ImagesConstructor = () => {
   useLayoutEffect(() => {
     if (
       constructorValues.patterns !== undefined &&
+      constructorValues.pocket === undefined &&
       constructorValues.basics &&
       constructorValues.bottoms
     ) {

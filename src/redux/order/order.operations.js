@@ -6,6 +6,7 @@ export const addOrder = async (order) => {
       addOrder(order: $order) {
         ... on Order {
           _id
+          orderNumber
           recipient {
             firstName
             lastName

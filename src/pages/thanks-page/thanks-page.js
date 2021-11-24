@@ -54,9 +54,10 @@ const ThanksPage = () => {
     const deliveryType = order?.delivery.sentBy;
     const courierOffice = order?.delivery.courierOffice;
     const customerAddress = `${order?.delivery.city}, ${order?.delivery.street}, ${order?.delivery.house}`;
-    if (deliveryType === deliveryTypes.NOVAPOST || deliveryTypes === deliveryTypes.UKRPOST) {
+    if (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) {
       return courierOffice;
-    } if (deliveryType === deliveryTypes.SELFPICKUP) {
+    }
+    if (deliveryType === deliveryTypes.SELFPICKUP) {
       return t('thanksPage.thanksCard.selfDelivery');
     }
     return customerAddress;

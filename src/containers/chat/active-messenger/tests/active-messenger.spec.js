@@ -12,7 +12,6 @@ const mockStore = {
 };
 const mockHandleMailFormVisible = true;
 const loading = false;
-
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));

@@ -1,7 +1,29 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client';
+import { render, screen } from '@testing-library/react';
 import { MailForm } from '../mail-form';
+import { mockedCartItemsData } from '../../../../tests/unit/components/your-order.variables';
 
 jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));
+jest.mock('@apollo/client');
+
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn()
+}));
+useMutation.mockImplementation(() => [
+  jest.fn(),
+  {
+    loading: false,
+    error: null,
+    data: { sendEmailMutation: [{ addEmailQuestion: { question: { senderName: 'name' } } }] }
+  }
+]);
+
+const userData = {
+  cartItems: mockedCartItemsData,
+  cartLoading: false
+};
 
 const props = {
   cancelIconHandler: jest.fn(),
@@ -10,8 +32,19 @@ const props = {
 };
 
 describe('<MailForm />', () => {
-  it('should render <MailForm />', () => {
-    const wrapper = shallow(<MailForm {...props} />);
-    expect(wrapper).toBeDefined();
+  it('should render SendButton', () => {
+    useSelector.mockImplementation(() => userData);
+    render(<MailForm {...props} />);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+  it('should render 3 inputs', () => {
+    useSelector.mockImplementation(() => userData);
+    render(<MailForm {...props} />);
+    const inputs = document.querySelectorAll('input');
+    const spans = document.querySelectorAll('span');
+    screen.debug();
+
+    expect(inputs.length).toBe(2);
+    expect(spans.length).toBe(10);
   });
 });

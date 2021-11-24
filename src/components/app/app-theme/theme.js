@@ -14,6 +14,9 @@ export default {
       disabled: {
         backgroundColor: '#999999',
         color: '#C2C2C2'
+      },
+      border: {
+        borderColor: '#020202'
       }
     },
     card: {
@@ -33,8 +36,15 @@ export default {
     },
     orderHistoryHeading: {
       background: '#DEDEDE'
-    }
-  },
+    },
+    label: {
+      normal: {
+        backgroundColor: 'rgba(196, 196, 196, 0.2)'
+      },
+      hover: {
+        backgroundColor: 'rgba(196, 196, 196, 0.5)'
+      }
+    },
   dark: {
     textColor: '#FFFFFF',
     backgroundColor: '#353333',
@@ -50,6 +60,9 @@ export default {
       disabled: {
         backgroundColor: '#868585',
         color: '#C2C2C2'
+      },
+      border: {
+        borderColor: '#FEFEFE'
       }
     },
     card: {
@@ -69,6 +82,13 @@ export default {
     },
     orderHistoryHeading: {
       background: '#2F2F2F '
+    },
+    label: {
+      normal: {
+        backgroundColor: 'rgba(196, 196, 196, 0.2)'
+      },
+      hover: {
+        backgroundColor: 'rgba(196, 196, 196, 0.5)'
+      }
     }
-  }
 };

@@ -66,11 +66,14 @@ export const LOGIN_USER_DATA = {
   rememberMe: false
 };
 
-export const PROFILE_USER_DATA = {
+export const PROFILE_USER_CONTACT_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  phoneNumber: '',
+  phoneNumber: ''
+};
+
+export const PROFILE_USER_ADRESS_DATA = {
   country: '',
   region: '',
   city: '',

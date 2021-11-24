@@ -4,12 +4,13 @@ import GoogleLogo from '../../images/google.png';
 
 export const useStyles = makeStyles((theme) => ({
   loginBtn: {
-    border: '1px solid black',
+    border: '1px solid',
+    borderColor: theme.palette.textColor,
     borderRadius: '4px',
     marginBottom: '10px',
     textTransform: 'capitalize',
-    backgroundColor: 'white',
-    color: 'black',
+    backgroundColor: theme.palette.backgroundColor,
+    color: theme.palette.textColor,
     '&:hover': {
       color: theme.palette.button.normal.backgroundColor
     }

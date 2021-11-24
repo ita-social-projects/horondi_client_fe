@@ -40,7 +40,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   orderNumber: {
     color: palette.type === 'light' ? blackText : whiteText,
-    fontSize: '18px',
+    fontSize: '22px',
     textAlign: 'center'
   },
   customerInfo: {
@@ -48,23 +48,30 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   infoChunk: {
     margin: '10px 25px 10px 25px',
+    fontSize: '16px',
     color: palette.type === 'light' ? blackText : whiteText
   },
   chunkName: {
-    fontSize: '15px',
     display: 'inline'
   },
   chunkValue: {
-    fontSize: '15px',
-    display: 'inline'
+    display: 'inline',
+    fontWeight: 'bold'
   },
-  controllBlock: {},
+  controllBlock: {
+    marginTop: '7%'
+  },
   continueShopping: {
     margin: '10px 10% 10px 10%',
-    color: palette.type === 'light' ? blackText : whiteText,
+    color: palette.type === 'light' ? whiteText : blackText,
+    backgroundColor: palette.type === 'light' ? blackText : whiteText,
+    '&:hover': {
+      backgroundColor: palette.type === 'light' ? '#151515' : '#d1d1d1'
+    },
     width: '80%',
     height: '44px',
-    borderRadius: '4px',
+    borderRadius: '1px',
+    borderColor: palette.type === 'light' ? blackText : whiteText,
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
@@ -76,9 +83,14 @@ export const useStyles = makeStyles(({ palette }) => ({
   goToHomePage: {
     margin: '10px 10% 10px 10%',
     color: palette.type === 'light' ? blackText : whiteText,
+    '&:hover': {
+      backgroundColor: palette.type === 'light' ? blackText : whiteText,
+      color: palette.type === 'light' ? whiteText : blackText
+    },
     width: '80%',
     height: '44px',
-    borderRadius: '4px',
+    borderRadius: '1px',
+    borderColor: palette.type === 'light' ? blackText : whiteText,
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',

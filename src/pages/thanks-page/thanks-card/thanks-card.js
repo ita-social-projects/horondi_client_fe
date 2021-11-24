@@ -1,4 +1,5 @@
-import { Link, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './thanks-card.styles';
@@ -7,7 +8,7 @@ import routes from '../../../configs/routes';
 const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, address }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { pathToMain } = routes;
+  const { pathToCategory, pathToMain } = routes;
 
   return (
     <div className={styles.thanksCardContainer}>
@@ -36,13 +37,13 @@ const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, addr
           </div>
         </div>
         <div className={styles.controllBlock}>
-          <Link to=''>
-            <Button variant='contained' className={styles.continueShopping}>
+          <Link to={pathToCategory} style={{ textDecoration: 'none' }}>
+            <Button variant='outlined' className={styles.continueShopping}>
               {t('thanksPage.thanksCard.continueShopping')}
             </Button>
           </Link>
-          <Link to={pathToMain}>
-            <Button variant='contained' className={styles.goToHomePage}>
+          <Link to={pathToMain} style={{ textDecoration: 'none' }}>
+            <Button variant='outlined' className={styles.goToHomePage}>
               {t('thanksPage.thanksCard.goToHomePage')}
             </Button>
           </Link>

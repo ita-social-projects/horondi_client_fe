@@ -44,11 +44,17 @@ describe('<MailForm />', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
   it('should render 3 inputs', () => {
-    useSelector.mockImplementation(() => userData);
     render(<MailForm {...props} />);
     const inputs = document.querySelectorAll('input');
     const spans = document.querySelectorAll('span');
     expect(inputs.length).toBe(2);
     expect(spans.length).toBe(12);
+  });
+  it('should render phoneNumber & email', () => {
+    const { getByText } = render(<MailForm {...props} />);
+    const phone = getByText(/069000000/i);
+    const email = getByText(/test@gmail.com/i);
+    expect(phone).toBeInTheDocument();
+    expect(email).toBeInTheDocument();
   });
 });

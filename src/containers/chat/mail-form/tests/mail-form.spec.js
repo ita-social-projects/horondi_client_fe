@@ -27,7 +27,13 @@ const userData = {
 
 const props = {
   cancelIconHandler: jest.fn(),
-  contacts: [],
+  contacts: [
+    {
+      _id: '234',
+      phoneNumber: '0690000000',
+      email: 'test@gmail.com'
+    }
+  ],
   themeMode: true
 };
 
@@ -42,9 +48,7 @@ describe('<MailForm />', () => {
     render(<MailForm {...props} />);
     const inputs = document.querySelectorAll('input');
     const spans = document.querySelectorAll('span');
-    screen.debug();
-
     expect(inputs.length).toBe(2);
-    expect(spans.length).toBe(10);
+    expect(spans.length).toBe(12);
   });
 });

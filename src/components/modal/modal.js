@@ -2,41 +2,37 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SimpleModal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
 
-import Popper from '@material-ui/core/Popper';
 import { useStyles } from './modal.styles';
 
-const Modal = ({
-  message,
-  itemName = [],
-  onAction,
-  isOpen,
-  isCartModal = false,
-  isEmpty = false,
-  isFullscreen = false,
-  content
-}) => {
+const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = false, content }) => {
   const [open, setOpen] = useState(isOpen);
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const handleClose = (_, __, action) => {
-    action ? onAction(true) : onAction(false);
+  const handleClose = (action) => {
+    onAction(!!action);
     setOpen(false);
   };
 
   const body = (
     <div className={styles.paper} data-cy='removing-modal'>
-      <p>
-        {message}
-        <br />
-        {isCartModal ? null : <b>{itemName}</b>}
-      </p>
+      <div className={styles.header}>
+        <span>{t('common.modalHeader')}</span>
+        <CloseIcon
+          className={styles.closeIcon}
+          onClick={() => handleClose(false)}
+          alt='closeModalIcon'
+          data-testid='closeModalIcon'
+        />
+      </div>
+      <p>{message}</p>
       <div className={styles.buttonGroup}>
-        <Button onClick={() => handleClose(null, null, true)} variant='contained'>
+        <Button onClick={() => handleClose(true)} variant='contained'>
           {t('common.buttons.confirm')}
         </Button>
-        <Button onClick={handleClose} variant='contained'>
+        <Button onClick={() => handleClose(false)} variant='contained'>
           {t('common.buttons.cancel')}
         </Button>
       </div>
@@ -57,14 +53,14 @@ const Modal = ({
 
   return (
     <div>
-      <Popper
-        open={open}
+      <SimpleModal
         onClose={handleClose}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
+        open={open}
       >
-        <SimpleModal open={open}>{isEmpty ? emptyBody : body}</SimpleModal>
-      </Popper>
+        {isEmpty ? emptyBody : body}
+      </SimpleModal>
     </div>
   );
 };

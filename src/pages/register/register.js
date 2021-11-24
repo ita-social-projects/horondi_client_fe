@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import Grid from '@material-ui/core/Grid';
+import { useTheme } from '@material-ui/styles';
 
 import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE, IMG_ALT } from '../../configs';
 import { useStyles } from './register.styles';
@@ -13,12 +14,12 @@ import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
 import { regValidationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
-import ThemeContext from '../../context/theme-context';
 
 export default function Register() {
   const styles = useStyles();
   const history = useHistory();
   const { t, i18n } = useTranslation();
+  const { palette } = useTheme();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const handleRegister = (user) => {
@@ -41,7 +42,7 @@ export default function Register() {
     hasRegistered: User.userRegistered
   }));
 
-  const isLightTheme = useContext(ThemeContext);
+  const isLightTheme = palette.type === 'light';
   const dispatch = useDispatch();
 
   useEffect(() => {

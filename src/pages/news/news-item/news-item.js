@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-item.style';
 import { IMG_URL, TIME_OPTIONS } from '../../../configs';
 
-const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey }) => {
+const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
   const { t, i18n } = useTranslation();
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const styles = useStyles();
@@ -82,27 +82,12 @@ const NewsItem = ({ date, author, image, title, text, id, slug, translationsKey 
   );
 };
 
-const primaryShape = PropTypes.shape({
-  medium: PropTypes.string
-});
-
-const valueShape = PropTypes.shape({
-  value: PropTypes.string
-});
-
 const newsItemPropTypes = {
   date: PropTypes.string,
   id: PropTypes.string,
-  text: PropTypes.arrayOf(valueShape),
-  title: PropTypes.arrayOf(valueShape),
-  image: PropTypes.shape({
-    additional: PropTypes.arrayOf(primaryShape),
-    primary: primaryShape
-  }),
+  image: PropTypes.string,
   author: PropTypes.shape({
-    image: PropTypes.shape({
-      small: PropTypes.string
-    }),
+    image: PropTypes.string,
     name: PropTypes.arrayOf(
       PropTypes.shape({
         lang: PropTypes.string,

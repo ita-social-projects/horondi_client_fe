@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -15,7 +15,10 @@ export const useStyles = makeStyles(() => ({
     fontSize: '38px',
     lineHeight: '65px',
     marginBottom: '80px',
-    color: isLightTheme ? '#242424' : '#FEFEFE'
+    color: isLightTheme ? '#242424' : '#FEFEFE',
+    '@media screen and (max-width:768px)': {
+      fontSize: '28px'
+    }
   }),
   table: {
     flexGrow: 1,
@@ -23,13 +26,13 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 813px)': {
       marginRight: 'initial'
     },
-    width: '1110px',
+    width: '1000px',
     '@media (max-width: 1110px)': {
       width: '750px',
       overflowX: 'auto'
     },
-    '@media (max-width: 750px)': {
-      width: '600px',
+    '@media (max-width: 920px)': {
+      width: '550px',
       overflowX: 'auto'
     },
     '@media (max-width: 600px)': {
@@ -42,7 +45,7 @@ export const useStyles = makeStyles(() => ({
     },
     marginBottom: '150px'
   },
-  tableHeader: (isLightTheme) => ({
+  tableHeader: () => ({
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
@@ -56,7 +59,7 @@ export const useStyles = makeStyles(() => ({
       padding: 8,
       textAlign: 'center'
     },
-    borderTop: isLightTheme ? '1px solid rgba(91, 91, 91, 0.2)' : '1px solid #5B5B5B',
-    borderBottom: isLightTheme ? '1px solid rgba(91, 91, 91, 0.2)' : '1px solid #5B5B5B'
+    borderTop: `1px solid ${palette.cart.borderColor}`,
+    borderBottom: `1px solid ${palette.cart.borderColor}`
   })
 }));

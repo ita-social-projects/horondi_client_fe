@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Rating from '@material-ui/lab/Rating';
+import { useTheme } from '@material-ui/styles';
 
 import { useStyles } from './similar-products-item.styles';
 import { getImage } from '../../../../utils/imageLoad';
@@ -10,7 +11,6 @@ import { IMG_URL } from '../../../../configs';
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
 import routes from '../../../../configs/routes';
-import ThemeContext from '../../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
@@ -18,9 +18,11 @@ const SimilarProductsItem = ({ imageUrl, id, name, rate, price }) => {
   const { language } = useSelector(({ Language }) => ({
     language: Language.language
   }));
-  const isLightTheme = useContext(ThemeContext);
 
   const [image, setImage] = useState(IMG_URL + imageUrl);
+  const { palette } = useTheme();
+
+  const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
     getImage(imageUrl)

@@ -67,12 +67,7 @@ const ProductsFiltersContainer = ({
                   onChange={filterHandler}
                   size='small'
                   color='default'
-                  checked={
-                    productFilter
-                      ? productFilter.find((filter) => filter === listItem) ||
-                        checkCategory(listItem)
-                      : false
-                  }
+                  checked={checkCategory(listItem) || false}
                 />
                 <ListItemText primary={listItem} />
               </ListItem>{' '}

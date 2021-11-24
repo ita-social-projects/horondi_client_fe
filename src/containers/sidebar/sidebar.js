@@ -29,9 +29,15 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   });
 
   useLayoutEffect(() => {
+    let componentMounted = true;
     window.addEventListener('scroll', () => {
-      window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      if (componentMounted) {
+        window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      }
     });
+    return () => {
+      componentMounted = false;
+    };
   }, []);
 
   const { loading, error } = useQuery(getCategoriesForBurgerMenu, {

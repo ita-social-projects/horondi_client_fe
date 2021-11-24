@@ -5,32 +5,26 @@ import { Redirect, useLocation } from 'react-router';
 import { parse } from 'query-string';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
-import OrderData from './order-data';
+import ThanksCard from './thanks-card';
 import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
 import { resetCart, cleanUserCart } from '../../redux/cart/cart.actions';
 import { getFromLocalStorage } from '../../services/local-storage.service';
-import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { Loader } from '../../components/loader/loader';
 
 const { pathToMain } = routes;
 
 const ThanksPage = () => {
   const router = useLocation();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const language = i18n.language === 'ua' ? 0 : 1;
-
-  const { currency, order, loading, paidOrderLoading, user } = useSelector(
-    ({ Currency, Order, User }) => ({
-      currency: Currency.currency,
-      order: Order.order,
-      loading: Order.loading,
-      paidOrderLoading: Order.paidOrderLoading,
-      user: User.userData
-    })
-  );
+  const { order, loading, paidOrderLoading, user } = useSelector(({ Currency, Order, User }) => ({
+    order: Order.order,
+    loading: Order.loading,
+    paidOrderLoading: Order.paidOrderLoading,
+    user: User.userData
+  }));
 
   const styles = useStyles();
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
@@ -56,27 +50,24 @@ const ThanksPage = () => {
   }
 
   return (
-    <div className={styles.thanksContainer}>
-      {!order && <Redirect to={pathToMain} /> &&
-        paymentMethod !== t('checkout.checkoutPayment.card')}
-      {(!loading || !paidOrderLoading) && (
-        <>
-          <h2 className={styles.thunksTitle}>{t('thanksPage.thanksPageTitle.thanks')}</h2>
-          <div className={styles.thunksInfo}>
-            <OrderData order={order} language={language} currency={currency} />
-          </div>
-          {order?.paymentStatus === ORDER_PAYMENT_STATUS.PROCESSING && (
-            <a
-              target='_blank'
-              rel='noreferrer'
-              className={styles.linkToPayment}
-              href={order?.paymentUrl}
-            >
-              {t('thanksPage.thanksPageTitle.linkToPayment')}
-            </a>
-          )}
-        </>
-      )}
+    <div className={styles.thanksBackground}>
+      <div className={styles.thanksContainer}>
+        {!order && <Redirect to={pathToMain} /> &&
+          paymentMethod !== t('checkout.checkoutPayment.card')}
+        {(!loading || !paidOrderLoading) && (
+          <>
+            <div className={styles.thunksInfo}>
+              <ThanksCard
+                orderNumber={order?.orderNumber}
+                customerName='Some Name'
+                phoneNumber='0933895428'
+                deliveryType='N'
+                address='Some str.'
+              />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

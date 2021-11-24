@@ -1,0 +1,55 @@
+import { Link, Button } from '@material-ui/core';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useStyles } from './thanks-card.styles';
+import routes from '../../../configs/routes';
+
+const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, address }) => {
+  const styles = useStyles();
+  const { t } = useTranslation();
+  const { pathToMain } = routes;
+
+  return (
+    <div className={styles.thanksCardContainer}>
+      <div className={styles.imageWrapper} />
+      <div className={styles.infoCard}>
+        <div className={styles.thanksForBuy}>{t('thanksPage.thanksCard.thanksForBuy')}</div>
+        <div className={styles.orderNumber}>
+          {`${t('thanksPage.thanksCard.orderNumber')} ${orderNumber}`}
+        </div>
+        <div className={styles.customerInfo}>
+          <div className={styles.infoChunk}>
+            <p className={styles.chunkName}>{t('thanksPage.thanksCard.customer')}</p>
+            <p className={styles.chunkValue}>{customerName}</p>
+          </div>
+          <div className={styles.infoChunk}>
+            <p className={styles.chunkName}>{t('thanksPage.thanksCard.phone')}</p>
+            <p className={styles.chunkValue}>{phoneNumber}</p>
+          </div>
+          <div className={styles.infoChunk}>
+            <p className={styles.chunkName}>{t('thanksPage.thanksCard.deliveryType')}</p>
+            <p className={styles.chunkValue}>{deliveryType}</p>
+          </div>
+          <div className={styles.infoChunk}>
+            <p className={styles.chunkName}>{t('thanksPage.thanksCard.address')}</p>
+            <p className={styles.chunkValue}>{address}</p>
+          </div>
+        </div>
+        <div className={styles.controllBlock}>
+          <Link to=''>
+            <Button variant='contained' className={styles.continueShopping}>
+              {t('thanksPage.thanksCard.continueShopping')}
+            </Button>
+          </Link>
+          <Link to={pathToMain}>
+            <Button variant='contained' className={styles.goToHomePage}>
+              {t('thanksPage.thanksCard.goToHomePage')}
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ThanksCard;

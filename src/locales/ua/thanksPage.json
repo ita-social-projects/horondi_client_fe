@@ -7,6 +7,17 @@
         "result": "Підсумок",
         "linkToPayment": "Посилання на оплату"
     },
+    "thanksCard": {
+        "thanksForBuy": "Дякуємо за Вашу покупку!",
+        "orderNumber": "Замовленя №",
+        "customer": "Замовник: ",
+        "phone": "Телефон: ",
+        "deliveryType:": "Тип доставки: ",
+        "address:": "Адреса: ",
+        "continueShopping": "ПРОДОВЖИТИ ПОКУПКИ",
+        "goToHomePage": "НА ГОЛОВНУ СТОРІНКУ",
+        "guest": "Гість"
+    },
     "paymentStatus": {
         "created": "Замовлення створено",
         "processing": "Замовлення очікує на оплату",

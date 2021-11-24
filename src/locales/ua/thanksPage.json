@@ -16,7 +16,8 @@
         "address": "Адреса: ",
         "continueShopping": "ПРОДОВЖИТИ ПОКУПКИ",
         "goToHomePage": "НА ГОЛОВНУ СТОРІНКУ",
-        "guest": "Гість"
+        "guest": "Гість",
+        "selfDelivery": "Львів, вул. Заводська, 31"
     },
     "paymentStatus": {
         "created": "Замовлення створено",

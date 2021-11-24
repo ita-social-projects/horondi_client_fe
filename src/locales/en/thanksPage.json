@@ -17,7 +17,8 @@
         "address": "Address: ",
         "continueShopping": "CONTINUE SHOPPING",
         "goToHomePage": "GO TO HOME PAGE",
-        "guest": "Guest"
+        "guest": "Guest",
+        "selfDelivery": "Lviv, Zavods'ka st., 31"
     },
     "paymentStatus": {
         "created": "Order is created",

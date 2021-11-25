@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Table } from '@material-ui/core';
 import ThanksPage from '../thanks-page';
-import OrderData from '../order-data/order-data';
+import ThanksCard from '../thanks-card/thanks-card';
 
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() })
@@ -18,7 +17,23 @@ const state = {
   language: 1,
   loading: false,
   currency: 0,
-  order: null,
+  order: {
+    _id: '619eb12f3c53565320f384c6',
+    orderNumber: '1637789999938',
+    recipient: {
+      firstName: 'John',
+      lastName: 'Dou',
+      phoneNumber: '380934850648'
+    },
+    delivery: {
+      byCourier: false,
+      sentBy: 'SELFPICKUP',
+      courierOffice: '',
+      city: '',
+      street: '',
+      house: ''
+    }
+  },
   paidOrderLoading: false,
   user: {}
 };
@@ -41,15 +56,11 @@ describe('ThanksPage component tests', () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('ThanksPage should contain OrderData', () => {
-    expect(wrapper.exists(OrderData)).toBe(true);
+  it('ThanksPage should contain ThanksCard', () => {
+    expect(wrapper.exists(ThanksCard)).toBe(true);
   });
 
-  it('Cart table should renders', () => {
-    expect(wrapper.find(OrderData).dive().find(Table)).toHaveLength(1);
-  });
-
-  it('Cart should contain title', () => {
-    expect(wrapper.exists('h2')).toBe(true);
+  it('ThanksCard should contain self delivery address', () => {
+    expect(wrapper.find(ThanksCard).dive().text()).toContain('thanksPage.thanksCard.selfDelivery');
   });
 });

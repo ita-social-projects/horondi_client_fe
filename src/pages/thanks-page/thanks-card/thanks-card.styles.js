@@ -59,7 +59,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 'bold'
   },
   controllBlock: {
-    marginTop: '7%'
+    marginTop: '5%'
   },
   continueShopping: {
     margin: '10px 10% 10px 10%',

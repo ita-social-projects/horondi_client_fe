@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { FacebookIcon, InstagramIcon } from '../../components/icons';
 
 import { HORONDI, HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
-import { useStyles } from './footer-links.styles';
+import { useStyles } from './social-links.styles';
 
-const FooterLinks = ({ showTitle, position, color }) => {
+const SocialLinks = ({ showTitle, position, color }) => {
   const { t } = useTranslation();
   const styles = useStyles({ position, color });
 
@@ -49,4 +49,4 @@ const FooterLinks = ({ showTitle, position, color }) => {
   );
 };
 
-export default FooterLinks;
+export default SocialLinks;

@@ -1,13 +1,13 @@
 import React from 'react';
-import FooterLinks from '../footer-links';
+import SocialLinks from '../social-links';
 
 jest.mock('react-redux');
 jest.mock('../footer-links.styles', () => ({ useStyles: () => ({}) }));
 
-describe('Footer links tests', () => {
-  const wrapper = shallow(<FooterLinks />);
+describe('Social links tests', () => {
+  const wrapper = shallow(<SocialLinks />);
 
-  it('should render footer list', () => {
+  it('should render social links', () => {
     expect(wrapper).toBeDefined();
   });
 });

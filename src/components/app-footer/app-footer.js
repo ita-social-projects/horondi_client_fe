@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './app-footer.styles';
 
 import FooterLists from '../../containers/footer-lists';
-import FooterLinks from '../../containers/footer-links';
+import FooterLinks from '../../containers/social-links';
 
 const AppFooter = () => {
   const styles = useStyles();

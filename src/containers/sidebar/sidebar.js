@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
 import { sideBarSubList } from '../../configs';
-import FooterLinks from '../footer-links';
+import SocialLinks from '../social-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
@@ -87,7 +87,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
         <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
       </Link>
       {subList}
-      <FooterLinks
+      <SocialLinks
         socialIconsStyles={styles.socialIconsStyles}
         position='center'
         color={palette.textColor}

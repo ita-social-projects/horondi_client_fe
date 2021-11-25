@@ -10,9 +10,9 @@ export const order = {
     byCourier: false,
     sentBy: 'NOVAPOST',
     courierOffice: 'Test office',
-    city: '',
-    street: '',
-    house: ''
+    city: 'Test city',
+    street: 'Test street',
+    house: '1'
   }
 };
 

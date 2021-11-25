@@ -11,7 +11,7 @@ const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, addr
   const { pathToCategory, pathToMain } = routes;
 
   return (
-    <div className={styles.thanksCardContainer}>
+    <div className={styles.thanksCardContainer} data-testid='thanks-card'>
       <div className={styles.imageWrapper} />
       <div className={styles.infoCard}>
         <div className={styles.thanksForBuy}>{t('thanksPage.thanksCard.thanksForBuy')}</div>

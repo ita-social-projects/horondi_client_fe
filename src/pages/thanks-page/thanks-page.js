@@ -47,7 +47,7 @@ const ThanksPage = () => {
   }, []);
 
   if (loading || paidOrderLoading) {
-    return <Loader />;
+    return <Loader data-testid='loader' />;
   }
 
   const getDeliveryAddress = (orderPayload) => {

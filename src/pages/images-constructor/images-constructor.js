@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { mergeImages } from 'horondi_merge_images';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
@@ -38,6 +37,14 @@ const ImagesConstructor = () => {
   const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
+
+  const mergeImages = (imagesToMerge, currentCanvas, width = 1000, height = 1000, x = 0, y = 0) => {
+    const ctx = currentCanvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height);
+    imagesToMerge.forEach((imageToMerge) => {
+      ctx.drawImage(imageToMerge, x, y, width, height);
+    });
+  };
 
   const loadImages = (sources = []) =>
     new Promise((resolve) => {

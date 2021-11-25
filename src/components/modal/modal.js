@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SimpleModal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import { Modal as MuiModal, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { useStyles } from './modal.styles';
 
-const Modal = ({
-  message,
-  onAction,
-  isOpen,
-  isEmpty = false,
-  isFullscreen = false,
-  content,
-  anchorEl
-}) => {
+const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = false, content }) => {
   const [open, setOpen] = useState(isOpen);
   const { t } = useTranslation();
   const styles = useStyles();
@@ -61,15 +52,14 @@ const Modal = ({
 
   return (
     <div>
-      <SimpleModal
-        anchorEl={anchorEl}
+      <MuiModal
         open={open}
         onClose={handleClose}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >
         {isEmpty ? emptyBody : body}
-      </SimpleModal>
+      </MuiModal>
     </div>
   );
 };

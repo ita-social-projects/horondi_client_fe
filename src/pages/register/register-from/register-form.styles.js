@@ -83,7 +83,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.normal.backgroundColor
     },
     '&:disabled': {
-      color: palette.backgroundColor
+      color: palette.button.disabled.backgroundColor
     },
     alignItems: 'center'
   },

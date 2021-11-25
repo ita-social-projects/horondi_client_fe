@@ -23,7 +23,7 @@
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
     "apollo-upload-client": "^14.1.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "clsx": "^1.1.1",
     "connected-react-router": "^6.8.0",
     "cors": "^2.8.5",

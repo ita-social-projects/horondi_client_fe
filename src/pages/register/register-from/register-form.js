@@ -28,12 +28,6 @@ export default function RegisterForm({
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  const type = (name) => {
-    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
-      return USER_REGISTER_LABELS.pass;
-    }
-    return USER_REGISTER_LABELS.text;
-  };
   const consentLink = (
     <div className={styles.consentMessage}>
       {t('register.formConsent.text')}
@@ -53,7 +47,7 @@ export default function RegisterForm({
           {Object.keys(values).map((name) => (
             <Field
               key={name}
-              type={type(name)}
+              type={name}
               name={name}
               as={TextField}
               label={t(`register.placeholders.${name}`)}
@@ -65,7 +59,7 @@ export default function RegisterForm({
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}
               InputProps={
-                name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm
+                name === USER_REGISTER_LABELS.pass
                   ? endAdornment(showPassword, setShowPassword)
                   : {}
               }

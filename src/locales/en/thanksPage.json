@@ -6,8 +6,7 @@
         "alt": "Product",
         "result": "Result",
         "linkToPayment": "Payment link"
-    },
-    
+    },  
     "thanksCard": {
         "thanksForBuy": "Thank you for your purchase!",
         "orderNumber": "Order №",

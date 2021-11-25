@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button';
 import { push } from 'connected-react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './error-page.styles';
-import { ERROR_PAGE_IMAGES } from '../../configs';
-import ThemeContext from '../../context/theme-context';
-import * as errorPage from '../../locales/en/errorPage.json';
+import { ERROR_PAGE_IMAGES } from '../../../../configs';
+import ThemeContext from '../../../../context/theme-context';
+import * as errorPage from '../../../../locales/en/errorPage.json';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();

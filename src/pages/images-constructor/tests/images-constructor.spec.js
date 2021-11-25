@@ -23,7 +23,7 @@ jest.mock('i18next', () => ({
 jest.mock('../../../utils/checkout', () => ({ getCurrentCurrency: () => '1' }));
 jest.mock('../../../utils/constructor', () => ({
   constructorEndPrice: () => '',
-  constructorPartPrice: () => ({ map: () => '' }),
+  constructorPartPrice: () => [1, 2, 3],
   constructorPartNames: () => ''
 }));
 
@@ -32,28 +32,27 @@ const state = {
 };
 useSelector.mockImplementation(() => state);
 
-beforeEach(() => {
+beforeEach(async () => {
   render(
     <MockedProvider mocks={mockAllConstructors} addTypename={false}>
       <ImagesConstructor />
     </MockedProvider>
   );
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 });
 
 describe('ImagesConstructor component tests', () => {
-  it('renders h1', async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+  it('renders h1', () => {
     expect(screen.getByText(/common.title/i)).toBeInTheDocument();
   });
 
-  it('it can change selected item', async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+  it('it can change selected item', () => {
+    screen.debug();
     const select = screen.getByTestId('model');
     expect(select).toBeInTheDocument();
   });
 
-  it('modal', async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+  it('modal', () => {
     const button = screen.getAllByRole('button')[0];
     fireEvent.click(button);
     expect(<Modal />).toBeTruthy();

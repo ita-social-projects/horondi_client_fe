@@ -1,12 +1,11 @@
-import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
+import React, { useRef, useLayoutEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { getAllConstructors } from './operations/getAllConstructors.queries';
-import { getConstructorByModel } from './operations/getConstructorByModel.queries';
+import useConstructorLoader from './use-constructor-loader';
+import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
@@ -19,8 +18,23 @@ import {
 import { getCurrentCurrency } from '../../utils/checkout';
 import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const ImagesConstructor = () => {
+  const {
+    constructorValues,
+    setConstructorValues,
+    constructorModel,
+    setConstructorModel,
+    currentConstructorModel,
+    allPrices,
+    allModels,
+    setAllPrice,
+    constructorsError,
+    constructorError,
+    valuesLoading
+  } = useConstructorLoader();
+
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
@@ -71,122 +85,23 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  const [constructorValues, setConstructorValues] = useState({});
-  const [constructorModel, setConstructorModel] = useState('');
-  const currentConstructorModel = useRef({});
-  const allModels = useRef([]);
-  const [allPrices, setAllPrice] = useState({});
-
-  const { loading: constructorsLoading, data: constructors } = useQuery(getAllConstructors, {
-    variables: {
-      limit: 0,
-      skip: 0
-    }
-  });
-  const allConstructors = constructorsLoading ? [] : constructors.getAllConstructors;
-
-  const [
-    getConstructorByModelHandler,
-    { loading: constructorByModelLoading, data: constructorByModel, refetch, called }
-  ] = useLazyQuery(getConstructorByModel, {
-    variables: {
-      id: constructorModel
-    }
-  });
-
-  const oneConstractor = constructorByModelLoading ? [] : constructorByModel?.getConstructorByModel;
-
-  useEffect(() => {
-    if (constructors?.getAllConstructors) {
-      allModels.current = allConstructors.items.map((item) => item.model);
-      setConstructorValues(
-        Object.keys(allConstructors.items[0]).reduce((acc, key) => {
-          if (key === 'model') {
-            setConstructorModel(allConstructors.items[0][key]._id);
-            acc.sizes = allConstructors.items[0][key].sizes[0];
-          }
-
-          if (key === 'pocketsWithRestrictions') {
-            acc.pocket = allConstructors.items[0][key][0].currentPocketWithPosition.pocket;
-          }
-
-          if (key !== 'name' && key !== '_id' && key !== 'model')
-            acc[key] = allConstructors.items[0][key][0];
-          else acc[key] = allConstructors.items[0][key];
-          return acc;
-        }, {})
-      );
-
-      currentConstructorModel.current = allConstructors.items[0];
-    }
-  }, [constructors, allConstructors.items]);
-
-  useEffect(() => {
-    if (constructorByModel?.getConstructorByModel) {
-      setConstructorValues(
-        Object.keys(oneConstractor[0]).reduce((acc, key) => {
-          if (key === 'model') acc.sizes = oneConstractor[0][key].sizes[0];
-
-          if (key === 'pocketsWithRestrictions') {
-            acc.pocket = oneConstractor[0][key][0]?.currentPocketWithPosition.pocket;
-          }
-
-          if (key !== 'name' && key !== '_id' && key !== 'model')
-            acc[key] = oneConstractor[0][key][0];
-          else acc[key] = oneConstractor[0][key];
-          return acc;
-        }, {})
-      );
-      currentConstructorModel.current = oneConstractor[0];
-    }
-  }, [constructorByModel, oneConstractor]);
-
-  useEffect(() => {
-    !called && constructorModel && getConstructorByModelHandler();
-    called && refetch();
-  }, [constructorModel, called, refetch, getConstructorByModelHandler]);
+  const createImagesArray = (values) => {
+    const result = [];
+    Object.keys(values).forEach((key) => {
+      if (key === 'patterns' && constructorValues.patterns !== undefined)
+        result.push(values[key].constructorImg);
+      else
+        typeof values[key] === 'object' &&
+          !Array.isArray(values[key]) &&
+          values[key].images &&
+          result.push(values[key].images.small);
+    });
+    return result;
+  };
 
   useLayoutEffect(() => {
-    if (
-      constructorValues.patterns !== undefined &&
-      constructorValues.pocket === undefined &&
-      constructorValues.basics &&
-      constructorValues.bottoms
-    ) {
-      loadImages([
-        constructorValues.basics.images.small,
-        constructorValues.bottoms.images.small,
-        constructorValues.patterns.constructorImg
-      ]).then((loadedImages) => {
-        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
-      });
-    }
-
-    if (
-      constructorValues.patterns !== undefined &&
-      constructorValues.basics &&
-      constructorValues.bottoms &&
-      constructorValues.pocket
-    ) {
-      loadImages([
-        constructorValues.pocket.images.small,
-        constructorValues.basics.images.small,
-        constructorValues.bottoms.images.small,
-        constructorValues.patterns.constructorImg
-      ]).then((loadedImages) => {
-        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
-      });
-    }
-
-    if (
-      constructorValues.patterns === undefined &&
-      constructorValues.basics &&
-      constructorValues.bottoms
-    ) {
-      loadImages([
-        constructorValues.basics.images.small,
-        constructorValues.bottoms.images.small
-      ]).then((loadedImages) => {
+    if (constructorValues.basics) {
+      loadImages(createImagesArray(constructorValues)).then((loadedImages) => {
         mergeImages(loadedImages, canvas.current, canvasW, canvasH);
       });
     }
@@ -201,7 +116,17 @@ const ImagesConstructor = () => {
     );
   }, [constructorValues]);
 
-  return constructorValues.basics && currentConstructorModel ? (
+  const { isError } = useIsLoadingOrError([], [constructorsError, constructorError]);
+  if (valuesLoading) return errorOrLoadingHandler(isError, valuesLoading);
+
+  function price() {
+    if (allPrices.pattern) {
+      return constructorEndPrice(+defaultPrice + allPrices.pattern + allPrices.bottom);
+    }
+    return constructorEndPrice(+defaultPrice + allPrices.bottom);
+  }
+
+  return (
     <div className={styles.constructorWrapper}>
       <div className={styles.headingWrapper}>
         <h1>{t('common.title')}</h1>
@@ -256,7 +181,7 @@ const ImagesConstructor = () => {
               label='title'
               data-cy='patern'
               name='patern'
-              value={constructorValues.patterns?._id || ''}
+              value={constructorValues.patterns?._id}
               onChange={(e) => {
                 setConstructorValues({
                   ...constructorValues,
@@ -312,7 +237,7 @@ const ImagesConstructor = () => {
               label='title'
               data-cy='size'
               name='size'
-              value={constructorValues.sizes._id || ''}
+              value={constructorValues.sizes._id}
               onChange={(e) =>
                 setConstructorValues({
                   ...constructorValues,
@@ -384,19 +309,12 @@ const ImagesConstructor = () => {
           </div>
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
-            <span>
-              {allPrices.pattern
-                ? constructorEndPrice(+defaultPrice + allPrices.pattern + allPrices.bottom)
-                : constructorEndPrice(+defaultPrice + allPrices.bottom)}
-              {getCurrentCurrency(currency)}
-            </span>
+            <span>{price}</span>
           </h2>
           <ConstructorSubmit />
         </div>
       </div>
     </div>
-  ) : (
-    0
   );
 };
 

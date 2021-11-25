@@ -1,25 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import ThanksCard from '../thanks-card';
-
-const order = {
-  _id: '619eb12f3c53565320f384c6',
-  orderNumber: '1637789999938',
-  recipient: {
-    firstName: 'John',
-    lastName: 'Dou',
-    phoneNumber: '380934850648'
-  },
-  delivery: {
-    byCourier: false,
-    sentBy: 'NOVAPOST',
-    courierOffice: 'Test office',
-    city: '',
-    street: '',
-    house: ''
-  }
-};
+import ThanksCard from '../../../../pages/thanks-page/thanks-card/thanks-card';
+import { order } from '../../pages/thanks-page/thanks-page.variables';
 
 describe('Tests for Thanks Card', () => {
   beforeEach(() => {

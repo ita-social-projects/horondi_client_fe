@@ -11,7 +11,7 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
   const styles = useStyles();
 
   const handleClose = (action) => {
-    onAction(!!action);
+    onAction(action);
     setOpen(false);
   };
 
@@ -43,7 +43,7 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
       className={isFullscreen ? `${styles.paper} ${styles.fullscreen}` : styles.paper}
       data-cy='removing-modal'
     >
-      <Button onClick={handleClose} variant='contained'>
+      <Button onClick={() => handleClose(false)} variant='contained'>
         {t('common.buttons.cancel')}
       </Button>
       {content}
@@ -54,7 +54,7 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
     <div>
       <MuiModal
         open={open}
-        onClose={handleClose}
+        onClose={() => handleClose(false)}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >

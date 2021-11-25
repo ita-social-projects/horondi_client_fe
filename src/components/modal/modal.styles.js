@@ -52,7 +52,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   closeIcon: {
     color: '#808080',
-    fontSize: '26px'
+    fontSize: '26px',
+    cursor: 'pointer'
   },
   fullscreen: {
     width: '90vw',

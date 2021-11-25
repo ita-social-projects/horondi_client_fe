@@ -50,10 +50,10 @@ const ThanksPage = () => {
     return <Loader />;
   }
 
-  const getDeliveryAddress = (order) => {
-    const deliveryType = order?.delivery.sentBy;
-    const courierOffice = order?.delivery.courierOffice;
-    const customerAddress = `${order?.delivery.city}, ${order?.delivery.street}, ${order?.delivery.house}`;
+  const getDeliveryAddress = (orderPayload) => {
+    const deliveryType = orderPayload?.delivery.sentBy;
+    const courierOffice = orderPayload?.delivery.courierOffice;
+    const customerAddress = `${orderPayload?.delivery.city}, ${orderPayload?.delivery.street}, ${orderPayload?.delivery.house}`;
     if (deliveryType === deliveryTypes.NOVAPOST || deliveryType === deliveryTypes.UKRPOST) {
       return courierOffice;
     }

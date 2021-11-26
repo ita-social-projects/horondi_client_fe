@@ -14,13 +14,15 @@ export const useStyles = makeStyles(() => ({
   },
   description: {
     lineHeight: '30px',
-    fontSize: '1.2em'
+    fontSize: '20px'
   },
   productName: {
     fontWeight: 'bold',
     fontSize: '24px',
     lineHeight: '32px',
-    marginBottom: '0px'
+    marginBottom: '0px',
+    marginTop: '40px',
+    whiteSpace: 'nowrap'
   },
   productBottom: {
     fontSize: '14px',

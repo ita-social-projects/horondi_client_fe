@@ -5,7 +5,6 @@ import { useStyles } from './order-history-table.style';
 
 const OrderHistoryTable = ({ items }) => {
   const styles = useStyles();
-
   const { t } = useTranslation();
 
   return (
@@ -24,7 +23,7 @@ const OrderHistoryTable = ({ items }) => {
             <TableCell style={{ width: '15%' }} className={styles.tableCell}>
               {t('common.price')}
             </TableCell>
-            <TableCell style={{ width: '15%' }} className={styles.tableCell}>
+            <TableCell style={{ width: '12%' }} className={styles.tableCell}>
               {t('common.quantity')}
             </TableCell>
             <TableCell style={{ width: '15%' }} className={styles.tableCell}>

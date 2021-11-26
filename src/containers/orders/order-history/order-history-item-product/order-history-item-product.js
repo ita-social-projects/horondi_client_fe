@@ -7,11 +7,12 @@ import { useStyles } from './order-history-item-product.styles';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
 
-const OrderHistoryItemProduct = ({ item, language, currency }) => {
+const OrderHistoryItemProduct = ({ item, currency }) => {
   const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const fixedPriceProduct = item.fixedPrice[currency].value;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   return (
     <>

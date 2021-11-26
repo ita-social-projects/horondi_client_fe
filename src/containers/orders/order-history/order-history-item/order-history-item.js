@@ -14,9 +14,8 @@ const OrderHistoryItem = ({ order }) => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
+  const { t } = useTranslation();
 
   const { color } = statusColors.find((item) => item.label === order.status);
 
@@ -24,7 +23,6 @@ const OrderHistoryItem = ({ order }) => {
     <OrderHistoryItemProduct
       key={item.product._id + item.options.size.name}
       item={item}
-      language={language}
       currency={currency}
     />
   ));

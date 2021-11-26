@@ -151,6 +151,9 @@ exports[`Should render 404 page 1`] = `
             },
             "lightGray": "#EFEFEF",
             "mediumGray": "#353333",
+            "orderHistoryHeading": Object {
+              "background": "#DEDEDE",
+            },
             "primary": Object {
               "contrastText": "#FFFFFF",
               "dark": "#212121",

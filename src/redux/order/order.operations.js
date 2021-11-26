@@ -6,6 +6,20 @@ export const addOrder = async (order) => {
       addOrder(order: $order) {
         ... on Order {
           _id
+          orderNumber
+          recipient {
+            firstName
+            lastName
+            phoneNumber
+          }
+          delivery {
+            byCourier
+            sentBy
+            courierOffice
+            city
+            street
+            house
+          }
           items {
             product {
               name {
@@ -43,7 +57,6 @@ export const addOrder = async (order) => {
     }
   `;
   const result = await setItems(addOrderMutation, { order });
-
   return result?.data?.addOrder;
 };
 
@@ -53,6 +66,19 @@ export const getPaymentCheckout = async (orderId, currency, amount, language) =>
       getPaymentCheckout(data: $data, language: $language) {
         ... on Order {
           _id
+          recipient {
+            firstName
+            lastName
+            phoneNumber
+          }
+          delivery {
+            byCourier
+            sentBy
+            courierOffice
+            city
+            street
+            house
+          }
           orderNumber
           paymentUrl
           items {

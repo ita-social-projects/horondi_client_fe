@@ -22,13 +22,9 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sortDiv: {
-    alignItems: 'center',
-    padding: '1rem 0',
-    display: 'flex',
-    justifyContent: 'flex-end',
+    padding: '51px 0 0 0',
     '& div': {
       flexWrap: 'wrap',
-      justifyContent: 'center',
       marginRight: 0
     }
   },
@@ -36,9 +32,11 @@ export const useStyles = makeStyles((theme) => ({
     display: 'none !important'
   },
   paginationDiv: {
+    fontSize: '59px',
+    borderBottom: '1px solid gray',
     display: 'flex',
     justifyContent: 'center',
-    padding: '1rem',
+    padding: '80px 1rem 17px 1rem',
     '& Mui-selected': {
       backgroundColor: 'black !important'
     },

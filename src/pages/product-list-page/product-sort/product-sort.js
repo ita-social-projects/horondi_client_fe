@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
-import { useStyles } from './product-sort.styles';
+import { useStyles, searchStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
+import SearchBar from '../../../containers/search-bar/search-bar';
+import SearchBarList from '../../../containers/search-bar-list/search-bar-list';
 import { URL_QUERIES_NAME, SORT_BY_SELECT_OPTIONS, TEXT_FIELD_VARIANT } from '../../../configs';
 
 const ProductSort = () => {
@@ -12,6 +14,14 @@ const ProductSort = () => {
   const styles = useStyles();
   const history = useHistory();
   const { search } = useLocation();
+
+  const initialSearchState = {
+    searchFilter: '',
+    products: [],
+    searchBarVisibility: false,
+    loading: false
+  };
+  const [searchParams1, setSearchParams1] = useState(initialSearchState);
 
   const searchParams = new URLSearchParams(search);
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
@@ -38,7 +48,16 @@ const ProductSort = () => {
 
   return (
     <div data-cy='sort' className={styles.sortDiv}>
-      <div>
+      <SearchBar
+        searchParams={searchParams1}
+        setSearchParams={setSearchParams1}
+        initialSearchState={initialSearchState}
+        fieldOptions={searchStyles}
+        fromNavBar={false}
+      />
+      <SearchBarList searchParams={searchParams1} />
+
+      <div className={styles.sortByText}>
         {sortByText}
         <TextField
           select

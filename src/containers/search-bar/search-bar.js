@@ -10,10 +10,10 @@ const SearchBar = ({
   searchParams,
   setSearchParams,
   initialSearchState,
-  fromSideBar,
-  fieldOptions = {}
+  fieldOptions = {},
+  fromNavBar = true
 }) => {
-  const styles = useStyles({ fromSideBar });
+  const styles = useStyles(fromNavBar);
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -59,6 +59,7 @@ const SearchBar = ({
 
   return (
     <TextField
+      size='small'
       className={stickySearch}
       label={t('searchBar.search')}
       onChange={handleSearch}

@@ -1,36 +1,47 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles((theme) => ({
+export const searchStyles = {
+  variant: 'outlined'
+};
+
+export const useStyles = makeStyles(() => ({
   root: {
-    marginLeft: '.5rem',
+    marginLeft: '1rem',
     marginRight: '17px !important',
     display: 'inline-block',
     '& .MuiOutlinedInput-input': {
-      height: '25px',
-      fontSize: '13px',
-      padding: '0 1.2rem 0 .4rem'
+      height: '39px',
+      fontSize: '14px',
+      padding: '0 1.2rem 0 1rem'
     },
     '& .MuiOutlinedInput-input:focus': {
       borderColor: 'black'
     },
     '& svg': {
-      right: '0'
+      right: '.7rem'
     }
   },
   sortByText: {
-    fontFamily: 'Montserrat',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '13px',
-    '@media (max-width:400px)': {
-      display: 'none'
-    }
+    display: 'flex',
+    alignItems: 'center'
   },
+  // sortByText: {
+  //   fontFamily: 'Montserrat',
+  //   fontStyle: 'normal',
+  //   fontWeight: 'normal',
+  //   fontSize: '13px',
+  //   '@media (max-width:400px)': {
+  //     display: 'none'
+  //   }
+  // },
   sortDiv: {
+    width: '100%',
+    // padding: '20px 0 0 0',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     lineHeight: '25px !important',
-    '@media (max-width:500px)': {
+    '@media (max-width:970px)': {
       justifyContent: 'center !important',
       alignItems: 'baseline'
     },

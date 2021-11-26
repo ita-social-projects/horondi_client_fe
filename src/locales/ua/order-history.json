@@ -9,9 +9,6 @@
         "dated": "від"
     },
     "amountOfOrder": "Сума замовлення",
-    "item": "Назва товару",
-    "photo": "Фото",
-    "size": "Розмір",
     "quantity": "Кількість",
     "price": "Ціна одиниці",
     "statuses": {

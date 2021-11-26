@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { render, screen } from '@testing-library/react';
 import { MailForm } from '../mail-form';
-import { mockedCartItemsData } from '../../../../tests/unit/components/your-order.variables';
+import { mockedCartItemsData } from '../../../../tests/unit/components/your-order/your-order.variables';
 
 jest.mock('../../chat.style.js', () => ({ useStyles: () => ({}) }));
 jest.mock('@apollo/client');

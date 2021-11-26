@@ -94,6 +94,7 @@ exports[`Should render 404 page 1`] = `
               },
               "normal": Object {
                 "backgroundColor": "#020202",
+                "borderColor": "#020202",
                 "color": "#FFFFFF",
               },
             },
@@ -149,8 +150,19 @@ exports[`Should render 404 page 1`] = `
               "light": "#42a5f5",
               "main": "#1e88e5",
             },
+            "label": Object {
+              "hover": Object {
+                "backgroundColor": "rgba(196, 196, 196, 0.5)",
+              },
+              "normal": Object {
+                "backgroundColor": "rgba(196, 196, 196, 0.2)",
+              },
+            },
             "lightGray": "#EFEFEF",
             "mediumGray": "#353333",
+            "orderHistoryHeading": Object {
+              "background": "#DEDEDE",
+            },
             "primary": Object {
               "contrastText": "#FFFFFF",
               "dark": "#212121",

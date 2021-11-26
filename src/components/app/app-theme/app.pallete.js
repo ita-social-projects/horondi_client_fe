@@ -30,7 +30,8 @@ export const paletteGenerator = (colorSchema) => ({
   button: {
     normal: {
       backgroundColor: theme[colorSchema].button.normal.backgroundColor,
-      color: theme[colorSchema].button.normal.color
+      color: theme[colorSchema].button.normal.color,
+      borderColor: theme[colorSchema].button.border.borderColor
     },
     hover: {
       backgroundColor: theme[colorSchema].button.hover.backgroundColor,
@@ -46,6 +47,17 @@ export const paletteGenerator = (colorSchema) => ({
   },
   contactForm: {
     background: theme[colorSchema].contactForm.background
+  },
+  orderHistoryHeading: {
+    background: theme[colorSchema].orderHistoryHeading.background
+  },
+  profilePageLabel: {
+    normal: {
+      backgroundColor: theme[colorSchema].profilePageLabel.normal.backgroundColor
+    },
+    hover: {
+      backgroundColor: theme[colorSchema].profilePageLabel.hover.backgroundColor
+    }
   },
   primary: {
     contrastText: white,

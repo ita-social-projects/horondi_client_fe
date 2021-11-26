@@ -1,4 +1,9 @@
 {
+  "titles": {
+    "mainTitle": "Your Account",
+    "contactTitle": "Contact information",
+    "addressTitle": "Address"
+  },
   "labels": {
     "firstName": "First name",
     "lastName": "Last name",
@@ -12,16 +17,19 @@
     "appartment": "Apartment number",
     "zipcode": "Zip Code",
     "addPhoto": "+",
-    "saveBtnTitle": "Save"
+    "saveBtnTitle": "SAVE CHANGES",
+    "password": "Current Password",
+    "confirmEmail": "Email"
   },
   "passwordChange": {
     "heading": "Change password",
-    "text": "If you want to change your password, please click the button below and we will send you the instructions on your email",
+    "text": "If you want to change your password, please click the button below and we will send you the instructions on your email.",
     "btnTitle": "Change password"
   },
   "emailConfirm": {
     "heading": "Confirm email",
-    "btnTitle": "Resend confirmation letter"
+    "btnTitle": "Confirm Email",
+    "text": "Please confirm this email by clicking the button below."
   },
-  "checkEmailText": "Please, check your email!"
+  "checkEmailText": "Please, check your email address"
 }

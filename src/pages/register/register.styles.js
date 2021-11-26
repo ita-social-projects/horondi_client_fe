@@ -1,19 +1,20 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BACKGROUND from '../../images/8.jpg';
+import BACKGROUND from '../../images/9.jpg';
 import BACKGROUND_REGISTERED_USER from '../../images/4.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   registerContainer: {
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    height: '875px'
   },
   formContainer: {
-    height: '100vh',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: '61px 0'
   },
   registerBackground: {
-    height: '100vh',
+    height: '875px',
     width: '100%',
     position: 'absolute',
     zIndex: -1,
@@ -23,9 +24,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   formWrapper: {
     alignItems: 'center',
-    margin: theme.spacing(1),
-    maxWidth: '960px',
-    height: '601px',
+    width: '684px',
+    height: '753px',
     filter: 'drop-shadow(8px 8px 10px dark-gray)',
     '& .MuiGrid-item': {
       padding: '0px !important'
@@ -35,15 +35,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 525px)': {
       padding: '0 15px'
-    }
-  },
-  formBackground: {
-    height: '100%',
-    width: '100%',
-    background: `url(${BACKGROUND}) no-repeat `,
-    backgroundSize: 'cover',
-    '@media (max-width: 959px)': {
-      display: 'none'
     }
   },
   formBackgroundRegisteredUser: {

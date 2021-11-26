@@ -19,7 +19,7 @@ const HotItemFilter = () => {
     if (searchParams.get(isHotItemFilter)) {
       setHotItem(!hotItem);
     }
-  }, [searchParams.toString()]);
+  }, [searchParams, hotItem, isHotItemFilter]);
 
   const handleChange = (event) => {
     if (event.target.checked) {

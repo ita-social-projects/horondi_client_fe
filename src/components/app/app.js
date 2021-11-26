@@ -32,13 +32,13 @@ const App = () => {
 
   useEffect(() => {
     dispatch(preserveUser());
-  }, []);
+  }, [dispatch]);
 
   const themeValue = theme(localStorageThemeMode);
 
   useEffect(() => {
     setAppTheme(themeMode);
-  });
+  }, [themeMode]);
 
   if (isLoading) return errorOrLoadingHandler(null, isLoading);
 

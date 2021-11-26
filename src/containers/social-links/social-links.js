@@ -22,7 +22,7 @@ const SocialLinks = ({ showTitle, position, color }) => {
       </Typography>
       <div className={styles.iconsBox}>
         {showTitle && (
-          <div className={styles.cardTitle}>
+          <div className={styles.cardTitle} data-testid='title'>
             <Typography variant='h5'>{t('footer.socialNetworkLinks')}</Typography>
           </div>
         )}

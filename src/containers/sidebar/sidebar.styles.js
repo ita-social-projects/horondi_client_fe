@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiDrawer-paper': {
       top: fromSideBar ? 0 : 64,
       padding: theme.spacing(3),
+      zIndex: 11,
       height: fromSideBar ? '100vh' : 'calc(100vh - 64px)',
       width: 'fit-content',
       minWidth: '300px',

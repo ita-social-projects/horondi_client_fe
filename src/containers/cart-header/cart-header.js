@@ -28,7 +28,7 @@ const CartHeader = ({ fromSideBar }) => {
     if (!user) {
       dispatch(getCart());
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   const itemsCount = useMemo(
     () => cartItems.length && cartItems.reduce((acc, item) => acc + item.quantity, 0),

@@ -25,29 +25,29 @@ const SliderHomePage = () => {
           <h2 className={styles.headerTitle}> {t(images[currImg].title)}</h2>
           <p className={styles.description}>{t(images[currImg].description)}</p>
         </div>
-        <div className={styles.navWrapper}>
-          <Link to={images[currImg].linkTo}>
-            <Button className={styles.buttonStyles}>{t(images[currImg].buttonName)} </Button>
-          </Link>
-          <br />
-          <div className={styles.arrows}>
-            <img
-              onClick={() => {
-                (currImg > 0 && setCurrImg(currImg - 1)) ||
-                  (currImg === 0 && setCurrImg(images.length - 1));
-              }}
-              src={arrowLeft}
-              alt='arrow left'
-            />
-            <img
-              onClick={() => {
-                (currImg < images.length - 1 && setCurrImg(currImg + 1)) ||
-                  (currImg === images.length - 1 && setCurrImg(images.length - 1 - currImg));
-              }}
-              src={arrowRight}
-              alt='arrow right'
-            />
-          </div>
+      </div>
+      <div className={styles.navWrapper}>
+        <Link to={images[currImg].linkTo}>
+          <Button className={styles.buttonStyles}>{t(images[currImg].buttonName)} </Button>
+        </Link>
+        <br />
+        <div className={styles.arrows}>
+          <img
+            onClick={() => {
+              (currImg > 0 && setCurrImg(currImg - 1)) ||
+                (currImg === 0 && setCurrImg(images.length - 1));
+            }}
+            src={arrowLeft}
+            alt='arrow left'
+          />
+          <img
+            onClick={() => {
+              (currImg < images.length - 1 && setCurrImg(currImg + 1)) ||
+                (currImg === images.length - 1 && setCurrImg(images.length - 1 - currImg));
+            }}
+            src={arrowRight}
+            alt='arrow right'
+          />
         </div>
       </div>
     </div>

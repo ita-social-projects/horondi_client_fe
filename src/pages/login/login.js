@@ -89,8 +89,8 @@ const Login = () => {
                       onChange={handleChange}
                       value={values.email}
                       color={MATERIAL_UI_COLOR.PRIMARY}
-                      error={touched.email && t(errors.email)}
-                      helperText={touched.email && t(errors.email)}
+                      error={touched.email && Boolean(t(errors.email))}
+                      helperText={t(errors.email)}
                     />
                     <TextField
                       data-cy='password'
@@ -106,8 +106,8 @@ const Login = () => {
                       name='password'
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      error={touched.password && t(errors.password)}
-                      helperText={touched.password && t(errors.password)}
+                      error={touched.password && Boolean(t(errors.password))}
+                      helperText={t(errors.password)}
                     />
                     <div className={styles.recoveryContainer}>
                       <div>

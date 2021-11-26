@@ -22,9 +22,10 @@
   "next": "Next",
   "close": "Close",
   "buttons": {
-    "confirm": "Yes",
-    "cancel": "No"
+    "confirm": "Delete",
+    "cancel": "Cancel"
   },
+  "modalHeader": "Delete product",
   "to": "to ",
   "from": "from ",
   "search": "Search",

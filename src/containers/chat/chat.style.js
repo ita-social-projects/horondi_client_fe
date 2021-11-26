@@ -88,7 +88,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   }),
   mailForm: {
-    borderRadius: '4px',
     position: 'fixed',
     display: 'flex',
     flexDirection: 'column',
@@ -125,14 +124,13 @@ export const useStyles = makeStyles(({ palette }) => ({
   contacts: {
     ...flexCenter,
     background: palette.backgroundColor,
-    width: '100%',
     height: '40%',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     flexDirection: 'column',
-    borderRadius: '4px'
+    margin: '0 50px 0 0'
   },
   contactsTitle: {
-    margin: '3px 0 2px 0',
+    margin: '3px 70px 2px 0',
     fontSize: '1.3rem'
   },
   phoneNumbers: {
@@ -149,16 +147,13 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   contactForm: {
     ...flexCenter,
-    background: palette.contactForm.background,
     flexDirection: 'column',
-    width: '100%',
-    height: '100%',
-    borderRadius: '4px'
+    width: '100%'
   },
   btnSend: {
     marginBottom: '20px',
+    width: '90%',
     background: palette.button.normal.backgroundColor,
-    borderRadius: '5px',
     fontSize: '1.5em',
     padding: 10,
     color: palette.button.normal.color,
@@ -185,6 +180,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 768px)': {
       fontSize: '25px !important'
     }
+  },
+  iconContact: {
+    margin: '0 5px 0 0',
+    fontSize: '20px',
+    paddingTop: '2px'
   },
   activeMsgWrapper: {
     height: '65%',

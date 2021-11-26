@@ -13,9 +13,12 @@ jest.mock('axios', () => ({
     })
   }
 }));
+
 jest.mock('react', () => ({
-  useMemo: (cb) => cb()
+  useEffect: (cb) => cb(),
+  useState: () => [false, () => null]
 }));
+
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({ i18n: { addResourceBundle: () => null } })
 }));

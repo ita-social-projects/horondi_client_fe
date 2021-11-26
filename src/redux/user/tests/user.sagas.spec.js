@@ -82,7 +82,6 @@ describe('user sagas tests', () => {
       .put(setUser({ ...user, purchasedProducts }))
       .put(setCart(userCart.cart.items))
       .put(setCartTotalPrice(userCart.cart.totalPrice))
-      .put(push(routes.pathToProfile))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,

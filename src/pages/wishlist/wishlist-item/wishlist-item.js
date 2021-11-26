@@ -67,7 +67,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
-      <TableCell>
+      <TableCell className={styles.allItems}>
         <div className={styles.product}>
           <Link to={`${pathToProducts}/${item._id}`}>
             <img
@@ -89,27 +89,27 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
           </div>
         </div>
       </TableCell>
-      <TableCell>
+      <TableCell className={styles.allItems}>
         <div className={styles.priceWrapper}>
           <FontAwesomeIcon icon={currencySign} />
           {'\u00A0'}
           {getPrice()}
         </div>
       </TableCell>
-      <TableCell>
+      <TableCell className={styles.allItems}>
         <div className={styles.delete}>
           <div className={styles.deleteWrapper}>
             <Button variant='contained' className={styles.cartButton} onClick={onAddToCart}>
               {t('wishlist.wishlistButtons.toCart')}
             </Button>
-            <div className={styles.deleteIcon}>
-              <DeleteIcon onClick={onRemoveItem} fontSize='default' />
-            </div>
             <Link to={`${pathToProducts}/${item._id}`}>
               <Button variant='contained' className={styles.detailsButton}>
                 {t('wishlist.wishlistButtons.toItem')}
               </Button>
             </Link>
+          </div>
+          <div className={styles.deleteIcon}>
+            <DeleteIcon onClick={onRemoveItem} fontSize='default' />
           </div>
         </div>
       </TableCell>

@@ -2,14 +2,15 @@ import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
+import { useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
-import { sideBarSubList } from '../../configs/index';
-import FooterLinks from '../footer-links';
+import { sideBarSubList } from '../../configs';
+import SocialLinks from '../social-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
@@ -22,6 +23,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t, i18n } = useTranslation();
+  const { palette } = useTheme();
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -91,9 +93,10 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
         <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
       </Link>
       {subList}
-      <FooterLinks
+      <SocialLinks
         socialIconsStyles={styles.socialIconsStyles}
         position='center'
+        color={palette.textColor}
         setIsMenuOpen={setIsMenuOpen}
       />
       <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />

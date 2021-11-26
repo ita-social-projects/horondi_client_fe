@@ -4,15 +4,14 @@ import Typography from '@material-ui/core/Typography';
 
 import { Link } from 'react-router-dom';
 
-import facebookIcon from '../../images/footer-icons/facebook.svg';
-import instagramIcon from '../../images/footer-icons/instagram.svg';
+import { FacebookIcon, InstagramIcon } from '../../components/icons';
 
 import { HORONDI, HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
-import { useStyles } from './footer-links.styles';
+import { useStyles } from './social-links.styles';
 
-const FooterLinks = ({ showTitle, position }) => {
+const SocialLinks = ({ showTitle, position, color }) => {
   const { t } = useTranslation();
-  const styles = useStyles({ position });
+  const styles = useStyles({ position, color });
 
   return (
     <div className={styles.cardBody}>
@@ -23,7 +22,7 @@ const FooterLinks = ({ showTitle, position }) => {
       </Typography>
       <div className={styles.iconsBox}>
         {showTitle && (
-          <div className={styles.cardTitle}>
+          <div className={styles.cardTitle} data-testid='title'>
             <Typography variant='h5'>{t('footer.socialNetworkLinks')}</Typography>
           </div>
         )}
@@ -34,7 +33,7 @@ const FooterLinks = ({ showTitle, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img alt='Facebook' src={facebookIcon} />
+            <FacebookIcon color={color} />
           </a>
           <a
             className={styles.iconWrap}
@@ -42,7 +41,7 @@ const FooterLinks = ({ showTitle, position }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img alt='Instagram' src={instagramIcon} />
+            <InstagramIcon color={color} />
           </a>
         </div>
       </div>
@@ -50,4 +49,4 @@ const FooterLinks = ({ showTitle, position }) => {
   );
 };
 
-export default FooterLinks;
+export default SocialLinks;

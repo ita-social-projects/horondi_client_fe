@@ -83,8 +83,6 @@ export const PROFILE_USER_ADRESS_DATA = {
   zipcode: ''
 };
 
-export const REQUIRED_USER_FIELDS = ['firstName', 'lastName', 'email'];
-
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
   month: 'numeric',

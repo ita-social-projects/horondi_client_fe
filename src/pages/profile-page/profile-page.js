@@ -7,7 +7,13 @@ import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
 import { useStyles } from './profile-page.styles';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
-import { IMG_URL, PROFILE_USER_CONTACT_DATA, PROFILE_USER_ADRESS_DATA, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs/index';
+import {
+  IMG_URL,
+  PROFILE_USER_CONTACT_DATA,
+  PROFILE_USER_ADRESS_DATA,
+  MATERIAL_UI_COLOR,
+  TEXT_FIELD_VARIANT
+} from '../../configs/index';
 import { validationSchema } from '../../validators/profile-page';
 import { handleClassName, initialValues } from '../../utils/handle-profile-page';
 
@@ -36,7 +42,6 @@ const ProfilePage = () => {
     confirmationLoading: User.confirmationLoading,
     recoveryLoading: User.recoveryLoading
   }));
-
   const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
     const user = { firstName, lastName, email, phoneNumber, address };
     Object.keys(address).forEach((key) => {
@@ -96,77 +101,82 @@ const ProfilePage = () => {
     }
   }, [userData, resetForm]);
 
-  const getTextFields = (textFields) => Object.keys(textFields).map((name) => (
-    <TextField
-      key={name}
-      type='text'
-      name={name}
-      variant={TEXT_FIELD_VARIANT.OUTLINED}
-      value={values[name]}
-      label={t(`profilePage.labels.${name}`)}
-      fullWidth
-      color={MATERIAL_UI_COLOR.PRIMARY}
-      onChange={handleChange}
-      error={touched[name] && !!errors[name]}
-      helperText={t(errors[name])}
-      className={handleClassName(classes.dataInput, classes.nameInputs, name)}
-    />
-  ));
+  const getTextFields = (textFields) =>
+    Object.keys(textFields).map((name) => (
+      <TextField
+        key={name}
+        type='text'
+        name={name}
+        variant={TEXT_FIELD_VARIANT.OUTLINED}
+        value={values[name]}
+        label={t(`profilePage.labels.${name}`)}
+        fullWidth
+        color={MATERIAL_UI_COLOR.PRIMARY}
+        onChange={handleChange}
+        error={touched[name] && !!errors[name]}
+        helperText={t(errors[name])}
+        className={handleClassName(classes.dataInput, classes.nameInputs, name)}
+      />
+    ));
 
   const emailSent = (titleText) => (
-    <div className={classes.emailSent}>
+    <div className={classes.emailSent} data-testid='emailSent'>
       <OpenedLetterIcon className={classes.openedLetterIcon} />
       <h3 className={classes.formTitle}>{titleText}</h3>
       <p>{t('profilePage.checkEmailText')}</p>
     </div>
   );
 
-  const passwordChange = () => userRecovered ? (
-    emailSent(t('profilePage.passwordChange.heading'))
-  ) : (
-    <>
-      <h3 className={classes.formTitle}>{t('profilePage.passwordChange.heading')}</h3>
-      <span className={classes.userActionsText}>{t('profilePage.passwordChange.text')}</span>
-      <Button
-        className={`${classes.button} ${classes.userActionsButton}`}
-        onClick={handlePasswordChange}
-      >
-        {t('profilePage.passwordChange.btnTitle')}
-      </Button>
-    </>
-  );
+  const passwordChange = () =>
+    userRecovered ? (
+      emailSent(t('profilePage.passwordChange.heading'))
+    ) : (
+      <>
+        <h3 className={classes.formTitle}>{t('profilePage.passwordChange.heading')}</h3>
+        <span className={classes.userActionsText}>{t('profilePage.passwordChange.text')}</span>
+        <Button
+          className={`${classes.button} ${classes.userActionsButton}`}
+          onClick={handlePasswordChange}
+          data-testid='passwordChangeBtn'
+        >
+          {t('profilePage.passwordChange.btnTitle')}
+        </Button>
+      </>
+    );
 
-  const confirmEmail = () => confirmationEmailSent ? (
-    emailSent(t('profilePage.emailConfirm.heading'))
-  ) : (
-    <>
-      <h3 className={classes.formTitle}>{t('profilePage.emailConfirm.heading')}</h3>
-      <TextField
-        data-cy='confirmEmail'
-        id='confirmEmail'
-        label={t('profilePage.labels.confirmEmail')}
-        className={classes.userActionsInput}
-        fullWidth
-        variant={TEXT_FIELD_VARIANT.OUTLINED}
-        color={MATERIAL_UI_COLOR.PRIMARY}
-        value={values.email}
-        name='confirmEmail'
-        onChange={handleChange}
-        onBlur={handleBlur}
-        error={touched.confirmEmail && t(errors.confirmEmail)}
-        helperText={touched.confirmEmail && t(errors.confirmEmail)}
-      />
-      <span className={classes.userActionsText}>
-        {!confirmationEmailSent && t('profilePage.emailConfirm.text')}
-      </span>
-      <Button
-        className={`${classes.button} ${classes.userActionsButton}`}
-        onClick={handleConfirmation}
-      >
-        {t('profilePage.emailConfirm.btnTitle')}
-      </Button>
-    </>
-  );
+  const confirmEmail = () =>
+    confirmationEmailSent ? (
+      emailSent(t('profilePage.emailConfirm.heading'))
+    ) : (
+      <>
+        <h3 className={classes.formTitle}>{t('profilePage.emailConfirm.heading')}</h3>
+        <TextField
+          data-cy='confirmEmail'
+          id='confirmEmail'
+          label={t('profilePage.labels.confirmEmail')}
+          className={classes.userActionsInput}
+          fullWidth
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
+          color={MATERIAL_UI_COLOR.PRIMARY}
+          value={values.email}
+          name='confirmEmail'
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={touched.confirmEmail && t(errors.confirmEmail)}
+          helperText={touched.confirmEmail && t(errors.confirmEmail)}
+        />
+        <span className={classes.userActionsText}>
+          {!confirmationEmailSent && t('profilePage.emailConfirm.text')}
+        </span>
+        <Button
+          className={`${classes.button} ${classes.userActionsButton}`}
+          onClick={handleConfirmation}
+          data-testid='emailConfirmBtn'
+        >
+          {t('profilePage.emailConfirm.btnTitle')}
+        </Button>
+      </>
+    );
 
   return (
     <div className={classes.profileControl}>
@@ -182,7 +192,7 @@ const ProfilePage = () => {
             </div>
           ) : (
             <div className={classes.userFormControl}>
-              <form onSubmit={handleSubmit} className={classes.userForm}>
+              <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
                 <div className={classes.imageContainer}>
                   {userImageUrl && (
                     <img src={userImageUrl} alt='profile-logo' className={classes.userImage} />
@@ -194,6 +204,7 @@ const ProfilePage = () => {
                     onChange={handleImageLoad}
                     multiple
                     accept='image/*'
+                    data-testid='imageInput'
                   />
                   <label
                     htmlFor='photoUpload'
@@ -213,6 +224,7 @@ const ProfilePage = () => {
                   className={`${classes.button} ${classes.saveBtn}`}
                   type='submit'
                   onClick={() => setShouldValidate(true)}
+                  data-testid='submitBtn'
                 >
                   {t('profilePage.labels.saveBtnTitle')}
                 </Button>

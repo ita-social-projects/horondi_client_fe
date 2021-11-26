@@ -24,7 +24,7 @@ export const validationSchema = Yup.object().shape({
     .matches(formRegExp.country, 'error.wrongFormat')
     .nullable(),
   region: Yup.string()
-    .min(0, 'error.profile.region')
+    .min(2, 'error.profile.region')
     .max(40, 'error.profile.region')
     .matches(formRegExp.region, 'error.wrongFormat')
     .nullable(),

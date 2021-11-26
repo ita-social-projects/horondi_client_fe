@@ -47,7 +47,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
     rowGap: '23px',
-    position: 'relative'
+    position: 'relative',
+    '@media (max-width: 768px)': {
+      padding: '56px 40px'
+    }
   },
   userImage: {
     height: '100%',
@@ -64,14 +67,22 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginRight: 30,
     gridRow: 'span 3',
     alignSelf: 'center',
-    borderRadius: '50%'
+    borderRadius: '50%',
+    '@media (max-width: 768px)': {
+      gridColumn: 'span 3',
+      margin: '0 auto'
+    }
   },
   formTitle: {
     fontSize: 24,
     fontWeight: 700,
     color: palette.textColor,
     margin: 0,
-    gridColumn: 'span 2'
+    gridColumn: 'span 2',
+    '@media (max-width: 768px)': {
+      gridColumn: 'span 3',
+      margin: '0 auto'
+    }
   },
   dataInput: {
     gridColumn: 'span 3',
@@ -84,7 +95,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   nameInputs: {
-    gridColumn: 'span 2'
+    gridColumn: 'span 2',
+    '@media (max-width: 768px)': {
+      gridColumn: 'span 3'
+    }
   },
   photoUpload: {
     display: 'none'
@@ -181,7 +195,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   userActionsText: {
     display: 'block',
-    marginBottom: '15px',
+    margin: '16px 0',
     color: palette.info.main
   },
   emailSent: {

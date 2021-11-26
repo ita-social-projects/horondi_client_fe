@@ -43,6 +43,9 @@ const ProfilePage = () => {
     recoveryLoading: User.recoveryLoading
   }));
   const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
+    if (phoneNumber === null) {
+      phoneNumber = '';
+    }
     const user = { firstName, lastName, email, phoneNumber, address };
     Object.keys(address).forEach((key) => {
       if (address[key] === null) {

@@ -1,9 +1,3 @@
-import {
-  mockNameEN,
-  mockNameUA,
-  mockTranslationsKey
-} from '../../../../../tests/unit/components/your-order.variables';
-
 export const item = {
   id: 1637938395612,
   productId: '61938f3f47ff1a3ccc1ac5e7',
@@ -43,16 +37,16 @@ export const mockQueryData = {
   name: [
     {
       lang: 'ua',
-      value: mockNameUA
+      value: 'Test product UA'
     },
     {
       lang: 'en',
-      value: mockNameEN
+      value: 'Test product EN'
     }
   ],
   bottomMaterial: {
     material: {
-      translationsKey: mockTranslationsKey
+      translationsKey: '61938f3f47ff1a3ccc1ac5e2'
     }
   },
   images: {

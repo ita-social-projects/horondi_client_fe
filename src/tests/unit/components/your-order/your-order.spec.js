@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
-import YourOrder from '../../../containers/orders/order/your-order/your-order';
+
 import {
   mockedCartItemsData,
   mockedProps,
@@ -9,12 +9,13 @@ import {
   mockQueryData,
   mockTranslationsKey
 } from './your-order.variables';
+import YourOrder from '../../../../containers/orders/order/your-order';
 
-jest.mock('../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
+jest.mock('../../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
   useStyles: () => ({})
 }));
 
-jest.mock('../../../containers/checkout/checkout-form/checkout-form.styles.js', () => ({
+jest.mock('../../../../containers/checkout/checkout-form/checkout-form.styles.js', () => ({
   useStyles: () => ({})
 }));
 
@@ -29,7 +30,7 @@ jest.mock('@apollo/client', () => ({
 
 const mockGetTotalPrice = jest.fn(() => '42');
 
-jest.mock('../../../hooks/use-cart', () => ({
+jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
     cart: mockedCartItemsData,
     cartOperations: { getTotalPrice: mockGetTotalPrice }
@@ -62,17 +63,5 @@ describe('<YourOrder /> component tests', () => {
     render(<YourOrder {...mockedProps} />);
 
     expect(screen.queryByText(/addressHorondi/i)).toBeNull();
-  });
-
-  it('should render <SelfPickup />', () => {
-    const userData = {
-      cartItems: mockedCartItemsData,
-      cartLoading: false
-    };
-    useSelector.mockImplementation(() => userData);
-
-    render(<YourOrder {...mockedProps} deliveryType='SELFPICKUP' />);
-
-    expect(screen.getByText(/addressHorondi/i)).toBeInTheDocument();
   });
 });

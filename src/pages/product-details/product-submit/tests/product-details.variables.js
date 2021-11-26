@@ -1,9 +1,3 @@
-import {
-  mockNameEN,
-  mockNameUA,
-  mockTranslationsKey
-} from '../../../../tests/unit/components/your-order.variables';
-
 export const Language = {
   language: 0
 };
@@ -14,16 +8,16 @@ export const product = {
   name: [
     {
       lang: 'ua',
-      value: mockNameUA
+      value: 'Test Product UA'
     },
     {
       lang: 'en',
-      value: mockNameEN
+      value: 'Test Product En'
     }
   ],
   bottomMaterial: {
     material: {
-      translationsKey: mockTranslationsKey
+      translationsKey: '61938f3f47ff1a3ccc1ac522'
     }
   },
   images: {

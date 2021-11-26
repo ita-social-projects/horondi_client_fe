@@ -13,7 +13,7 @@ import { getCategoryURL } from '../../pages/home/categories-list/categories-list
 import { useStyles } from './footer-lists.styles';
 import routes from '../../configs/routes';
 import { countPerPage } from '../../configs';
-import { footerNavItems } from '../footer-links/const';
+import { navItems } from '../social-links/const';
 
 import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
@@ -50,7 +50,7 @@ const FooterLists = () => {
     </div>
   ));
 
-  const informationList = footerNavItems.map((item) => (
+  const informationList = navItems.map((item) => (
     <div key={item.id}>
       <Typography variant='subtitle2'>
         <Link className={styles.cardLink} to={item.url}>

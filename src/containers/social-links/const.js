@@ -1,4 +1,4 @@
-export const footerNavItems = [
+export const navItems = [
   {
     id: '1',
     url: '/pages/about-us',

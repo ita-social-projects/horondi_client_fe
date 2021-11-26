@@ -89,12 +89,12 @@ const ImagesConstructor = () => {
     const result = [];
     Object.keys(values).forEach((key) => {
       if (key === 'patterns' && constructorValues.patterns !== undefined)
-        result.push(values[key].constructorImg);
+        result.unshift(values[key].constructorImg);
       else
         typeof values[key] === 'object' &&
           !Array.isArray(values[key]) &&
           values[key].images &&
-          result.push(values[key].images.small);
+          result.unshift(values[key].images.small);
     });
     return result;
   };
@@ -181,7 +181,7 @@ const ImagesConstructor = () => {
               label='title'
               data-cy='patern'
               name='patern'
-              value={constructorValues.patterns?._id}
+              value={constructorValues.patterns?._id || ''}
               onChange={(e) => {
                 setConstructorValues({
                   ...constructorValues,
@@ -256,7 +256,7 @@ const ImagesConstructor = () => {
             <FormHelperText>{t('common.bottom')}</FormHelperText>
           </FormControl>
 
-          <Button className={styles.button} onClick={showModal}>
+          <Button className={styles.button} onClick={showModal} data-testid='modalButton'>
             {t('buttons.moreOptions')}
           </Button>
 
@@ -309,7 +309,7 @@ const ImagesConstructor = () => {
           </div>
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
-            <span>{price}</span>
+            <span>{price()}</span>
           </h2>
           <ConstructorSubmit />
         </div>

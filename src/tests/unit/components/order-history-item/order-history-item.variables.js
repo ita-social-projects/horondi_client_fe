@@ -1,15 +1,4 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import OrderHistoryOrder from '../order-history-order.js';
-
-jest.mock('react-redux');
-jest.mock('../order-history-order.styles.js', () => ({
-  useStyles: () => ({})
-}));
-jest.mock('../../../../../utils/date', () => ({
-  getFormatDate: () => {}
-}));
-const order = {
+export const order = {
   _id: '61682716c834282f74bf505d',
   dateOfCreation: '1634215702441',
   status: 'CREATED',
@@ -23,6 +12,20 @@ const order = {
       ],
       options: { size: { name: 'S' } },
       product: {
+        bottomMaterial: {
+          material: {
+            name: [
+              {
+                lang: 'ua',
+                value: 'Шкірзамінник'
+              },
+              {
+                lang: 'en',
+                value: 'Leatherette'
+              }
+            ]
+          }
+        },
         name: [
           { lang: 'ua', value: 'Роллтоп синій' },
           { lang: 'en', value: 'Rolltop blue' }
@@ -37,15 +40,3 @@ const order = {
     { value: 74, currency: 'USD' }
   ]
 };
-
-useSelector.mockImplementation(() => ({
-  currency: 1,
-  language: 0
-}));
-
-describe('OrderHistoryOrder component tests', () => {
-  it('Should render OrderHistoryOrder', () => {
-    const component = shallow(<OrderHistoryOrder order={order} />);
-    expect(component).toBeDefined();
-  });
-});

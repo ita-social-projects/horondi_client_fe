@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
-import { Loader } from '../../../components/loader/loader';
-import YourOrder from '../../../containers/orders/order/your-order/your-order';
+import { Loader } from '../../../../components/loader/loader';
+import YourOrder from '../../../../containers/orders/order/your-order/your-order';
 import { mockedCartItemsData, mockedProps } from './your-order.variables';
 
-jest.mock('../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
+jest.mock('../../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
   useStyles: () => ({})
 }));
 jest.mock('react-redux', () => ({

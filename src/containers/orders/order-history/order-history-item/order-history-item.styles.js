@@ -1,12 +1,25 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((visible) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   root: {
+    maxWidth: '1110px',
     margin: '15px auto',
     borderRadius: '5px'
   },
+
   heading: {
+    textTransform: 'uppercase',
+    background: palette.orderHistoryHeading.background,
+    padding: '10px',
+    margin: '30px 0 20px',
+    display: 'flex',
     width: '100%',
+    height: '40px',
+    fontSize: '14px',
+    fontWeight: '600',
+    justifyContent: 'space-between'
+  },
+  headingStatus: {
     display: 'flex'
   },
   info: {
@@ -19,13 +32,6 @@ export const useStyles = makeStyles((visible) => ({
   total: {
     display: 'block',
     width: '25%'
-  },
-  images: {
-    width: '25%',
-    display: visible ? 'flex' : 'none',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginRight: 20
   },
   blockNone: {
     display: 'none'
@@ -57,16 +63,18 @@ export const useStyles = makeStyles((visible) => ({
   },
   bottom: {
     display: 'flex',
-    marginTop: 20,
-    marginBottom: 10,
+    margin: '20px 40px',
     fontSize: '1.2rem',
     textAlign: 'right',
     justifyContent: 'flex-end'
   },
   totalText: {
-    width: '25%',
+    fontWeight: '600',
+    fontSize: '20px',
+    lineHeight: '28px',
     textAlign: 'center',
-    padding: 16,
+    padding: 5,
+    textTransform: 'uppercase',
     '& div': {
       width: '60%',
       textAlign: 'right'

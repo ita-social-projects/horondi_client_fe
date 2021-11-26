@@ -30,6 +30,9 @@ export default {
     },
     contactForm: {
       background: '#EFEFEF'
+    },
+    orderHistoryHeading: {
+      background: '#DEDEDE'
     }
   },
   dark: {
@@ -63,6 +66,9 @@ export default {
     },
     contactForm: {
       background: '#232323'
+    },
+    orderHistoryHeading: {
+      background: '#2F2F2F '
     }
   }
 };

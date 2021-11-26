@@ -35,6 +35,14 @@ export const getUserOrdersQuery = gql`
                 thumbnail
               }
             }
+            bottomMaterial {
+              material {
+                name {
+                  lang
+                  value
+                }
+              }
+            }
           }
         }
         totalItemsPrice {

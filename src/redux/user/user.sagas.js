@@ -62,7 +62,7 @@ import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../cart/c
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { USER_ERROR } from '../../translations/user.translations';
 
-const { pathToLogin, pathToProfile } = routes;
+const { pathToLogin } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
 function* setUserCart(user) {
@@ -84,7 +84,8 @@ export function* handleGoogleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
     yield setUserCart(user);
-    yield put(push(pathToProfile));
+    const returnPage = sessionStorage.getItem(RETURN_PAGE);
+    yield put(push(returnPage));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {

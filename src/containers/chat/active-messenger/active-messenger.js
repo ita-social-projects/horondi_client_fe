@@ -129,9 +129,8 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           label={t('chat.msgText')}
           variant='outlined'
           name='message'
-          size='small'
           multiline
-          rowsMax={4}
+          rows={10}
           inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
           helperText={handleHelperText(messageValidated, shouldValidate, 'message')}

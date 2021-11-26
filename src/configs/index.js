@@ -66,11 +66,14 @@ export const LOGIN_USER_DATA = {
   rememberMe: false
 };
 
-export const PROFILE_USER_DATA = {
+export const PROFILE_USER_CONTACT_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  phoneNumber: '',
+  phoneNumber: ''
+};
+
+export const PROFILE_USER_ADRESS_DATA = {
   country: '',
   region: '',
   city: '',
@@ -79,8 +82,6 @@ export const PROFILE_USER_DATA = {
   appartment: '',
   zipcode: ''
 };
-
-export const REQUIRED_USER_FIELDS = ['firstName', 'lastName', 'email'];
 
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',

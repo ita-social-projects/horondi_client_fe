@@ -126,9 +126,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     transition: 'all 0.5s ease'
   },
   uploadLabel: {
-    backgroundColor: palette.label.normal.backgroundColor,
+    backgroundColor: palette.profilePageLabel.normal.backgroundColor,
     '&:hover': {
-      backgroundColor: palette.label.hover.backgroundColor
+      backgroundColor: palette.profilePageLabel.hover.backgroundColor
     }
   },
   updateLabel: {
@@ -141,7 +141,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   cameraIcon: {
     fontSize: '32px',
-    color: palette.label.normal.backgroundColor
+    color: palette.profilePageLabel.normal.backgroundColor
   },
   button: {
     fontSize: '1rem',

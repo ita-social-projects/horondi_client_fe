@@ -51,12 +51,12 @@ export const paletteGenerator = (colorSchema) => ({
   orderHistoryHeading: {
     background: theme[colorSchema].orderHistoryHeading.background
   },
-  label: {
+  profilePageLabel: {
     normal: {
-      backgroundColor: theme[colorSchema].label.normal.backgroundColor
+      backgroundColor: theme[colorSchema].profilePageLabel.normal.backgroundColor
     },
     hover: {
-      backgroundColor: theme[colorSchema].label.hover.backgroundColor
+      backgroundColor: theme[colorSchema].profilePageLabel.hover.backgroundColor
     }
   },
   primary: {

@@ -1,3 +1,12 @@
+const profilePageLabel = {
+  normal: {
+    backgroundColor: 'rgba(196, 196, 196, 0.2)'
+  },
+  hover: {
+    backgroundColor: 'rgba(196, 196, 196, 0.5)'
+  }
+};
+
 export default {
   light: {
     textColor: '#000000',
@@ -37,14 +46,8 @@ export default {
     orderHistoryHeading: {
       background: '#DEDEDE'
     },
-    label: {
-      normal: {
-        backgroundColor: 'rgba(196, 196, 196, 0.2)'
-      },
-      hover: {
-        backgroundColor: 'rgba(196, 196, 196, 0.5)'
-      }
-    },
+    profilePageLabel: profilePageLabel
+  },
   dark: {
     textColor: '#FFFFFF',
     backgroundColor: '#353333',
@@ -83,12 +86,6 @@ export default {
     orderHistoryHeading: {
       background: '#2F2F2F '
     },
-    label: {
-      normal: {
-        backgroundColor: 'rgba(196, 196, 196, 0.2)'
-      },
-      hover: {
-        backgroundColor: 'rgba(196, 196, 196, 0.5)'
-      }
-    }
+    profilePageLabel: profilePageLabel
+  }
 };

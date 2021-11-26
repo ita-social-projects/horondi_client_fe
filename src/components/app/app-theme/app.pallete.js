@@ -47,6 +47,9 @@ export const paletteGenerator = (colorSchema) => ({
   contactForm: {
     background: theme[colorSchema].contactForm.background
   },
+  orderHistoryHeading: {
+    background: theme[colorSchema].orderHistoryHeading.background
+  },
   primary: {
     contrastText: white,
     dark: colors.grey[900],

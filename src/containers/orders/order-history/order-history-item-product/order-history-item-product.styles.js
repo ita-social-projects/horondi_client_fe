@@ -8,7 +8,8 @@ export const useStyles = makeStyles(() => ({
   },
   image: {
     '& img': {
-      width: '100%'
+      maxHeight: '165px',
+      minHeight: '130px'
     }
   },
   description: {

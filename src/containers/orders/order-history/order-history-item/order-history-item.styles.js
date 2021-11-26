@@ -7,18 +7,18 @@ export const useStyles = makeStyles(({ palette }) => ({
     borderRadius: '5px'
   },
 
-  heading: ({ isLightTheme }) => ({
+  heading: {
     textTransform: 'uppercase',
-    background: isLightTheme ? '#2f2f2f' : '#dedede',
+    background: palette.orderHistoryHeading.background,
     padding: '10px',
-    margin: '20px 0',
+    margin: '30px 0 20px',
     display: 'flex',
     width: '100%',
     height: '40px',
     fontSize: '14px',
     fontWeight: '600',
     justifyContent: 'space-between'
-  }),
+  },
   headingStatus: {
     display: 'flex'
   },
@@ -63,8 +63,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   bottom: {
     display: 'flex',
-    marginTop: 20,
-    marginBottom: 10,
+    margin: '20px 40px',
     fontSize: '1.2rem',
     textAlign: 'right',
     justifyContent: 'flex-end'

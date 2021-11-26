@@ -14,7 +14,7 @@ const OrderHistoryTable = ({ items }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell style={{ width: '15%' }} className={styles.tableCell}>
+            <TableCell style={{ width: '22%' }} className={styles.tableCell}>
               {t('common.product')}
             </TableCell>
             <TableCell style={{ width: '25%' }} className={styles.tableCell} />
@@ -27,7 +27,7 @@ const OrderHistoryTable = ({ items }) => {
             <TableCell style={{ width: '15%' }} className={styles.tableCell}>
               {t('common.quantity')}
             </TableCell>
-            <TableCell style={{ width: '10%' }} className={styles.tableCell}>
+            <TableCell style={{ width: '15%' }} className={styles.tableCell}>
               {t('common.total')}
             </TableCell>
           </TableRow>

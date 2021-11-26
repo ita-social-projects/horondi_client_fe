@@ -9,7 +9,7 @@ import { getContactsForChat } from './operations/chat-contacts.query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
-import { CHAT_FACEBOOK_DATA } from '../../configs/index';
+import { CHAT_FACEBOOK_DATA } from './constants';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);

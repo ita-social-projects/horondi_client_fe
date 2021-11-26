@@ -7,6 +7,7 @@ import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
 import { useStyles } from './profile-page.styles';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
+<<<<<<< HEAD
 import {
   IMG_URL,
   PROFILE_USER_CONTACT_DATA,
@@ -16,6 +17,17 @@ import {
 } from '../../configs/index';
 import { validationSchema } from '../../validators/profile-page';
 import { handleClassName, initialValues } from '../../utils/handle-profile-page';
+=======
+import { IMG_URL, PROFILE_USER_DATA, MATERIAL_UI_COLOR } from '../../configs/index';
+import { formRegExp } from '../../configs/regexp';
+import { REQUIRED_USER_FIELDS } from './constants';
+import {
+  handleProfilePage,
+  handleClassName,
+  handleText,
+  handleProfileImg
+} from '../../utils/handle-profile-page';
+>>>>>>> 8efb3602 (refactor index.js)
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);

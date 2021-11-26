@@ -77,11 +77,6 @@ export const USER_TOKENS = {
   REFRESH_TOKEN: 'refreshToken'
 };
 
-export const CHAT_FACEBOOK_DATA = {
-  pageId: '101134448446261',
-  appId: '713686025904610'
-};
-
 export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 
 export const REDIRECT_TIMEOUT = 3000;

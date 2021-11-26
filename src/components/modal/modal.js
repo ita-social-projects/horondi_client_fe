@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import SimpleModal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import { Modal as MuiModal, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { useStyles } from './modal.styles';
@@ -12,7 +11,7 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
   const styles = useStyles();
 
   const handleClose = (action) => {
-    onAction(!!action);
+    onAction(action);
     setOpen(false);
   };
 
@@ -44,7 +43,7 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
       className={isFullscreen ? `${styles.paper} ${styles.fullscreen}` : styles.paper}
       data-cy='removing-modal'
     >
-      <Button onClick={handleClose} variant='contained'>
+      <Button onClick={() => handleClose(false)} variant='contained'>
         {t('common.buttons.cancel')}
       </Button>
       {content}
@@ -53,14 +52,14 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
 
   return (
     <div>
-      <SimpleModal
-        onClose={handleClose}
+      <MuiModal
+        open={open}
+        onClose={() => handleClose(false)}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
-        open={open}
       >
         {isEmpty ? emptyBody : body}
-      </SimpleModal>
+      </MuiModal>
     </div>
   );
 };

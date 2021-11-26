@@ -36,6 +36,21 @@ describe('SliderHomePage is valid', () => {
     expect(screen.getByText(/02/)).toBeInTheDocument();
   });
 
+  it('should test arrow right if on last slide', () => {
+    render(
+      <Router>
+        {' '}
+        <SliderHomePage />{' '}
+      </Router>
+    );
+    const slider = screen.getByAltText('arrow right');
+
+    fireEvent.click(slider);
+    fireEvent.click(slider);
+    fireEvent.click(slider);
+    expect(screen.getByText(/01/)).toBeInTheDocument();
+  });
+
   it('should test arrow left', () => {
     render(
       <Router>
@@ -47,5 +62,20 @@ describe('SliderHomePage is valid', () => {
 
     fireEvent.click(slider);
     expect(mockHandleSwitch).toHaveBeenCalledTimes(0);
+  });
+
+  it('should test arrow right and left', () => {
+    render(
+      <Router>
+        {' '}
+        <SliderHomePage />{' '}
+      </Router>
+    );
+    const sliderRight = screen.getByAltText('arrow right');
+    const sliderLeft = screen.getByAltText('arrow left');
+
+    fireEvent.click(sliderRight);
+    fireEvent.click(sliderLeft);
+    expect(screen.getByText(/01/)).toBeInTheDocument();
   });
 });

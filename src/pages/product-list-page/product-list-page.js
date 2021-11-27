@@ -28,8 +28,7 @@ import getFilterParamsFromQuery from '../../utils/getFilterParamsFromQuery';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
-
-  const searchParams = new URLSearchParams(search);
+  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
   const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
 
   const { t } = useTranslation();
@@ -79,7 +78,11 @@ const ProductListPage = ({ width }) => {
   });
 
   useEffect(() => {
-    setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));
+    setSearchParams(new URLSearchParams(search));
+  }, [search]);
+
+  useEffect(() => {
+    setSortParams((prevState) => getSortParamsFromQuery(prevState));
     setPaginationParams((prevState) => ({
       ...prevState,
       currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
@@ -88,7 +91,7 @@ const ProductListPage = ({ width }) => {
     setFilterParams(getFilterParamsFromQuery(searchParams));
 
     refetch();
-  }, [search]);
+  }, [searchParams, refetch]);
 
   const changeHandler = (e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);

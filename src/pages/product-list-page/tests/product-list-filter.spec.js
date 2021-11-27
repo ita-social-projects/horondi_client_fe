@@ -6,6 +6,9 @@ import ProductListFilter from '../product-list-filter/product-list-filter';
 
 jest.mock('react-redux');
 jest.mock('@apollo/client');
+jest.mock('../product-list-filter/product-list-filter.styles.js', () => ({
+  useStyles: () => ({})
+}));
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()

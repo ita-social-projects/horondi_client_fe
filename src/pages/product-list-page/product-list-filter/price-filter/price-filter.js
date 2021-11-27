@@ -60,11 +60,9 @@ const PriceFilter = ({ priceRange }) => {
             variant='outlined'
             type='number'
           />
-          {/* {Math.round(prices[0])} */}
 
           {`  ${t('common.to')}`}
           <TextField className={styles.priceRangeInput} variant='outlined' type='number' />
-          {/* {Math.round(prices[1])} */}
         </div>
       </Typography>
       <Slider

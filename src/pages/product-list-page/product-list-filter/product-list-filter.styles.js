@@ -46,40 +46,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   popularSwitch: {
     marginLeft: '90px'
-
-    // width: 42,
-    // height: 24,
-    // padding: 0,
-    // '& .MuiSwitch-switchBase': {
-    //   padding: 0,
-    //   margin: 2,
-    //   transitionDuration: '300ms',
-    //   backgroundColor: '#303030',
-    //   '&.Mui-checked': {
-    //     transform: 'translateX(16px)',
-    //     color: '#fff',
-    //     '& + .MuiSwitch-track': {
-    //       backgroundColor: '#303030',
-    //       border: '1px solid #5B5B5B',
-    //       opacity: 1
-    //     },
-    //     '&.Mui-disabled + .MuiSwitch-track': {
-    //       opacity: 0.5
-    //     }
-    //   },
-    //   '&.Mui-focusVisible .MuiSwitch-thumb': {
-    //     color: '#33cf4d',
-    //     border: '6px solid #fff'
-    //   }
-    // },
-    // '& .MuiSwitch-thumb': {
-    //   boxSizing: 'border-box',
-    //   width: 16,
-    //   height: 16
-    // },
-    // '& .MuiSwitch-track': {
-    //   borderRadius: 26 / 2
-    // }
   },
   checkbox: {
     textTransform: 'capitalize',

@@ -1,4 +1,4 @@
-import { SORT_ASC, SORT_DESC, RATE, POPULARITY } from '../configs/index';
+import { SORT_ASC, SORT_DESC, RATE, POPULARITY } from './constants';
 
 export default function (query) {
   switch (query) {

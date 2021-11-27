@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { SNACKBAR_TYPES } from '../configs';
+import { SNACKBAR_TYPES } from './constants';
 
 export const SnackBarContext = createContext({ state: '', changeState: () => null });
 

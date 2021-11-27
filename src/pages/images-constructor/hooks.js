@@ -12,7 +12,7 @@ import { getConstructorFrontPocket } from '../../redux/images-constructor/constr
 import { getConstructorPattern } from '../../redux/images-constructor/constructor-pattern/constructor-pattern.actions';
 import { getConstructorBottom } from '../../redux/images-constructor/constructor-bottom/constructor-bottom.actions';
 import { getConstructorSize } from '../../redux/images-constructor/constructor-size/constructor-size.actions';
-import { constructorDefaultPrice } from '../../configs';
+import { DEFAULT_PRICE } from './constants';
 
 export const useConstructor = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export const useConstructor = () => {
   } = useSelector(selectConstructor);
   const { language, currency } = useSelector(selectLangAndCurrency);
 
-  const defaultPrice = constructorDefaultPrice[currency];
+  const defaultPrice = DEFAULT_PRICE[currency];
   const models = constructorModel.modelsForConstructor;
   const basics = currentModel.eligibleOptions?.constructorBasic;
   const patterns = currentModel.eligibleOptions?.constructorPattern;

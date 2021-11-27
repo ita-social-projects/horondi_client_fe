@@ -4,3 +4,4 @@ export const SIDEBAR_SUBLIST = [
   { link: '/news' },
   { link: '/contacts' }
 ];
+export const POPULARITY = 'popularity';

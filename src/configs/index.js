@@ -28,47 +28,9 @@ export const USER_TOKENS = {
 export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 
 export const REDIRECT_TIMEOUT = 3000;
-export const constructorDefaultPrice = ['1400 ', '50 '];
 export const DEFAULT_CURRENCY = 0;
 export const DEFAULT_LANGUAGE = 0;
 export const DEFAULT_COUNT_PER_PAGE = 9;
-
-export const RESPONSIVE_PDP = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3
-  },
-  tablet: {
-    breakpoint: { max: 1146, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 810, min: 0 },
-    items: 1
-  }
-};
-export const RESPONSIVE_CATEGORIES = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3
-  },
-  tablet: {
-    breakpoint: { max: 1146, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 760, min: 0 },
-    items: 1
-  }
-};
 
 export const commentFields = {
   text: { name: 'text', multiline: true, rows: 5 }
@@ -91,7 +53,6 @@ const courierArray = ['NOVAPOSTCOURIER', 'UKRPOSTCOURIER', 'COURIER'];
 export const isCourier = (type) => courierArray.some((arrType) => arrType === type);
 
 export const CY_CODE_ERR = 'code-error';
-
 export const USER_IS_BLOCKED = 'USER_IS_BLOCKED';
 
 export const SESSION_STORAGE = {
@@ -100,11 +61,6 @@ export const SESSION_STORAGE = {
 };
 
 export const RETURN_PAGE = 'returnPage';
-
-export const SORT_ASC = 'sortAsc';
-export const SORT_DESC = 'sortDesc';
-export const RATE = 'rate';
-export const POPULARITY = 'popularity';
 
 export const AUTH_ERRORS = {
   ACCESS_TOKEN_IS_NOT_VALID: 'USER_NOT_AUTHORIZED',
@@ -118,11 +74,6 @@ export const TEXT_FIELD_VARIANT = {
   OUTLINED: 'outlined',
   ROUNTED: 'rounded'
 };
-
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
 
 export const CURRENCIES_LIST = [
   { currency: 'UAH', value: 0 },
@@ -144,13 +95,6 @@ export const URL_QUERIES_NAME = {
 };
 
 export const TEXT_VALUE = 'text';
-
-export const SNACKBAR_TYPES = {
-  error: 'error',
-  warning: 'warning',
-  info: 'info',
-  success: 'success'
-};
 
 export const MATERIAL_UI_COLOR = {
   INHERIT: 'inherit',

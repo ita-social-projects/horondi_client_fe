@@ -39,6 +39,8 @@ const NewsDetail = ({ match }) => {
     return <h2>{t('newsDetail.change')}</h2>;
   }
 
+  const title = translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle');
+
   return (
     <div className={styles.root}>
       <Card className={styles.container}>
@@ -60,15 +62,15 @@ const NewsDetail = ({ match }) => {
             }
           />
           <Typography className={styles.articleTitle} gutterBottom variant='h2' component='h2'>
-            {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
+            {title}
           </Typography>
           <hr />
           <div className={styles.imagesContainer}>
             <CardMedia
               className={styles.media}
               image={IMG_URL + article.image}
-              title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
-              alt={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
+              title={title}
+              alt={title}
               component='div'
             />
           </div>
@@ -80,21 +82,13 @@ const NewsDetail = ({ match }) => {
               {t('cart.empty')}
             </Button>
           </NavLink>
-          <div className={styles.focusedText}>
-            {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
-          </div>
+          <div className={styles.focusedText}>{title}</div>
         </CardContent>
-        <iframe
-          src='https://www.youtube.com/embed/rvLpAfcaAQQ'
-          title='YouTube video player'
-          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-          allowFullScreen
-        />
         <div className={styles.newsAuthorFooter}>
           <CardMedia
             className={styles.authorAvatar}
             image={IMG_URL + article.author.image}
-            title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
+            title={title}
             component='div'
             id='newsAuthorAvatar'
           />

@@ -8,6 +8,7 @@ const lightGray = '#EFEFEF';
 const mediumGray = '#353333';
 const darkGray = '#232323';
 const yellow = '#E4B200';
+const blue = '#1976D2';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
@@ -16,6 +17,7 @@ export const paletteGenerator = (colorSchema) => ({
   mediumGray,
   darkGray,
   yellow,
+  blue,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {

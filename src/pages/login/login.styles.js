@@ -46,14 +46,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   loginForm: {
     backgroundColor: theme.palette.backgroundColor,
-    width: '100%',
-    height: '550px',
-    padding: '80px 45px 45px',
+    maxWidth: '685px',
+    padding: '80px 100px 90px',
     boxSizing: 'border-box'
   },
   heading: {
-    fontSize: '1.5rem',
-    lineHeight: '29px',
+    fontFamily: 'Open Sans',
+    fontSize: '34px',
+    lineHeight: '46px',
     textAlign: 'center',
     marginBottom: '25px',
     marginTop: 0,
@@ -61,7 +61,6 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor
   },
   passwordInput: {
-    marginBottom: '16px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -83,7 +82,8 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: theme.palette.blue,
+        borderWidth: '2px'
       }
     }
   },
@@ -110,7 +110,8 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: theme.palette.blue,
+        borderWidth: '2px'
       }
     }
   },
@@ -118,10 +119,11 @@ export const useStyles = makeStyles((theme) => ({
     border: '1px solid black',
     borderRadius: '4px',
     textTransform: 'capitalize',
-    backgroundColor: 'white',
-    color: 'black',
+    background: theme.palette.textColor,
+    color: theme.palette.backgroundColor,
     '&:hover': {
-      color: theme.palette.button.normal.backgroundColor
+      background: theme.palette.textColor,
+      color: theme.palette.backgroundColor
     }
   },
   loginGroup: {
@@ -141,12 +143,13 @@ export const useStyles = makeStyles((theme) => ({
     left: '0px'
   },
   recoveryBtn: {
+    marginTop: '10px',
     float: 'right',
     fontSize: '0.875rem',
-    color: theme.palette.button.disabled.backgroundColor,
+    color: theme.palette.textColor,
     textDecoration: 'none',
     '&:hover': {
-      color: '#1976D2',
+      color: theme.palette.blue,
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }
@@ -157,20 +160,19 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 425px)': {
-      marginBottom: '10px'
-    }
+    marginBottom: '20px',
+    marginTop: '5px'
   },
   orContainer: {
     width: '100%',
-    marginTop: '20px',
-    marginBottom: '20px',
+    marginTop: '50px',
+    marginBottom: '10px',
     minHeight: '10px',
     display: 'flex'
   },
   orText: {
     margin: '0 auto',
-    color: '#636363',
+    color: theme.palette.textColor,
     fontSize: '0.875rem'
   },
   registerContainer: {
@@ -185,7 +187,7 @@ export const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     textTransform: 'capitalize',
     '&:hover': {
-      color: '#1976D2',
+      color: theme.palette.blue,
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }

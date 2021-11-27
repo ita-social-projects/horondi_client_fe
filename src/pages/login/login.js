@@ -128,7 +128,7 @@ const Login = () => {
                       type='submit'
                       onClick={handleSubmit}
                     >
-                      {t('login.formLabel')}
+                      {t('login.formLabel').toUpperCase()}
                     </Button>
                     {wrongCredentials}
                   </div>

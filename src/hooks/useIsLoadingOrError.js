@@ -6,11 +6,11 @@ export const useIsLoadingOrError = (loadingsArray = [], errorsArray = []) => {
 
   useEffect(() => {
     setIsLoading(loadingsArray.some((item) => item));
-  }, [...loadingsArray]);
+  }, [loadingsArray]);
 
   useEffect(() => {
     setIsError(errorsArray.some((item) => item));
-  }, [...errorsArray]);
+  }, [errorsArray]);
 
   return { isLoading, isError };
 };

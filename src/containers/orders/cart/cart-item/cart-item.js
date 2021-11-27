@@ -81,20 +81,23 @@ const CartItem = ({
     }
   }, [item.quantity, firstlyMounted]);
   useEffect(() => {
-    if (firstlyMounted)
-      if (!user)
-        dispatch(
-          setCartItemSize(item, { size: currentSize, price: currentPrice, quantity: inputValue })
-        );
-      else
-        dispatch(
-          setUserCartItemSize(user, item, {
-            size: currentSize,
-            price: currentPrice,
-            quantity: inputValue
-          })
-        );
-  }, [currentSize, firstlyMounted, currentPrice, dispatch, inputValue, item, user]);
+    const cartItemSize = () => {
+      if (firstlyMounted)
+        if (!user)
+          dispatch(
+            setCartItemSize(item, { size: currentSize, price: currentPrice, quantity: inputValue })
+          );
+        else
+          dispatch(
+            setUserCartItemSize(user, item, {
+              size: currentSize,
+              price: currentPrice,
+              quantity: inputValue
+            })
+          );
+    };
+    cartItemSize();
+  }, [currentSize, currentPrice, dispatch, inputValue, item, user, firstlyMounted]);
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>

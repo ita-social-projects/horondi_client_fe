@@ -1,16 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  root: ({ fromSideBar }) => ({
-    color: fromSideBar ? '#000' : '#fff',
+  root: () => ({
     width: '40px',
     height: '40px',
     marginRight: '37px',
+    color: '#fff',
     borderRadius: '50%',
     transition: 'background-color 0.5s linear',
     '&:hover': {
-      backgroundColor: fromSideBar ? '#000' : '#242424',
-      color: '#fff'
+      backgroundColor: '#242424'
     },
     '& .MuiBadge-badge': {
       color: '#fff',

@@ -1,42 +1,49 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles(() => ({
   profile: ({ fromSideBar }) => ({
-    padding: '0 4px',
-    position: 'relative',
+    width: '40px',
+    height: '40px',
     cursor: 'pointer',
-    zIndex: 20,
-    transition: '1s',
-    height: '33px',
-    width: '50px',
-    textAlign: 'center',
-
+    transition: 'background-color 0.5s linear',
+    borderRadius: '50%',
     '&:hover': {
-      backgroundColor: fromSideBar ? palette.black : palette.white,
+      backgroundColor: fromSideBar ? '#000' : '#242424',
       '& ul': {
         display: 'block'
       },
       '& > svg': {
-        color: fromSideBar ? palette.white : palette.black
+        color: '#fff'
       }
     },
 
     '& svg': {
       position: 'relative',
-      zIndex: 5,
+      top: '5%',
+      left: '10%',
       fontSize: '2rem',
-      color: fromSideBar ? palette.black : palette.white,
-      border: 'none',
+      color: fromSideBar ? '#000' : '#fff',
       outline: 'none'
     }
   }),
 
   list: {
+    '& .MuiPaper-root': {
+      marginTop: '22px',
+      marginLeft: `${window.innerWidth - document.body.clientWidth + 1}px`,
+      padding: '8px 0',
+      backgroundColor: '#000',
+      borderRadius: '0px'
+    },
     '& .MuiMenuItem-root': {
+      color: '#fff',
       flexDirection: 'row',
-      padding: 10,
+      paddingRight: '10px',
+      '&:hover': {
+        backgroundColor: '#1b1b1b'
+      },
       '& svg': {
-        marginRight: '5px'
+        margin: '0 16px'
       }
     }
   }

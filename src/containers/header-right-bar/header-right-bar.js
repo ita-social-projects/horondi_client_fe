@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useStyles } from './header-right-bar.styles';
 
-import CurrencyComponent from '../currency';
-import Language from '../language';
 import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';
 import SearchBarList from '../search-bar-list';
+import Wishlist from '../wishlist-header';
 
 const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
@@ -28,11 +27,8 @@ const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
         initialSearchState={initialSearchState}
       />
       <SearchBarList searchParams={searchParams} />
-      <div className={styles.currency}>
-        <CurrencyComponent fromSideBar={fromSideBar} />
-      </div>
-      <div className={styles.language}>
-        <Language fromSideBar={fromSideBar} />
+      <div className={styles.wishlist}>
+        <Wishlist />
       </div>
       <div className={styles.cart}>
         <CartHeader fromSideBar={fromSideBar} />

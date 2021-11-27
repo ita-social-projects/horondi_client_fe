@@ -35,14 +35,14 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontSize: '12px'
     },
     '& label.Mui-focused': {
-      color: palette.textColor
+      color: palette.blue
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: palette.textColor
+        borderColor: palette.blue
       }
     }
   },

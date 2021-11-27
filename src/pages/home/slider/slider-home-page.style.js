@@ -20,11 +20,11 @@ export const useStyles = makeStyles(() => ({
   },
   headerTitle: {
     marginTop: '38px',
-    fontSize: '59px',
+    fontSize: '75px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '300',
-    lineHeight: '80px',
+    lineHeight: '100px',
     letterSpacing: '-0.005em',
     color: '#FEFEFE',
     '@media (max-width: 768px)': {
@@ -34,11 +34,11 @@ export const useStyles = makeStyles(() => ({
   },
   description: {
     marginBottom: '15px',
-    fontSize: '16px',
+    fontSize: '18px',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    lineHeight: '24px',
+    lineHeight: '30px',
     letterSpacing: '0.005em',
     color: '#FEFEFE',
     '@media (max-width: 768px)': {
@@ -47,31 +47,34 @@ export const useStyles = makeStyles(() => ({
   },
   navWrapper: {
     marginLeft: '165px',
-    marginTop: '45px',
+    marginTop: '550px',
+    position: 'absolute',
     '@media (max-width: 768px)': {
       marginLeft: '50px',
       width: '60vw'
     }
   },
   buttonStyles: {
-    height: '43px',
-    width: '174px',
+    height: '50px',
+    width: '210px',
     display: 'block',
     fontStyle: 'normal',
     fontWeight: '600',
     fontFamily: 'Open Sans',
-    fontSize: '14px',
+    fontSize: '16px',
     lineHeight: '25px',
-    backgroundColor: '#020202',
+    backgroundColor: 'rgba(40, 40, 40, 0.2)',
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
+    borderRadius: '0',
     '&:hover': {
       backgroundColor: '#1d1d1d',
       color: '#FEFEFE'
     }
   },
   arrows: {
-    marginTop: '25px',
+    marginTop: '80px',
+    marginLeft: '5px',
     display: 'flex',
     columnGap: '24px',
     '&:hover': {

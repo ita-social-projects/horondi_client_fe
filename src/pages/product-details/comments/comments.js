@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Rating from '@material-ui/lab/Rating';
 import { Button, TextField, Tooltip } from '@material-ui/core';
 import { useMutation, useQuery } from '@apollo/client';
-import i18n from 'i18next';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
@@ -88,7 +87,7 @@ const Comments = ({ productId }) => {
       return t('product.comments.unregisteredTip');
     }
     return t('product.comments.successfulTip');
-  }, [i18n.language === 'ua' ? 0 : 1, userId]);
+  }, [t, userId]); // rerenders as before, nothing changed
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem

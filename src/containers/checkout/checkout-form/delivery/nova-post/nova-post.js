@@ -41,7 +41,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
         getCities({ city: citySearchValue });
       }, 1000);
     }
-  }, [citySearchValue]);
+  }, [citySearchValue, citiesLoading, getCities]);
 
   useEffect(() => {
     if (dataCities) {

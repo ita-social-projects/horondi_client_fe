@@ -10,7 +10,7 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './materials.style.js';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
 import { getAllPatterns } from './operations/getAllPatterns.queries';
-import { carouselMaterialInterval } from '../../configs';
+import { CAROUSE_MATERIAL_INTERVAL } from './constants';
 import Slider from './slider';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getImage } from '../../utils/imageLoad';
@@ -85,7 +85,7 @@ const Materials = () => {
       <div className={styles.captionBlock}>
         <AutoplaySlider
           play
-          interval={carouselMaterialInterval}
+          interval={CAROUSE_MATERIAL_INTERVAL}
           cancelOnInteraction
           className={styles.slider}
           mobileTouch

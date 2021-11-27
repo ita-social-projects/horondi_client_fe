@@ -24,8 +24,6 @@ export const NOT_FOUND_PAGE_IMAGES = {
   dark: './images/not-found-page/bag.png'
 };
 
-export const URL_LANGUAGE = 'en';
-
 export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
@@ -80,8 +78,6 @@ export const USER_TOKENS = {
 export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 
 export const REDIRECT_TIMEOUT = 3000;
-export const carouselMaterialInterval = 2000;
-export const commentsReplyLimit = 10;
 export const constructorDefaultPrice = ['1400 ', '50 '];
 export const DEFAULT_CURRENCY = 0;
 export const DEFAULT_LANGUAGE = 0;

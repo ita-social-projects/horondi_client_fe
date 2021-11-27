@@ -79,7 +79,7 @@ const CartItem = ({
     if (firstlyMounted) {
       setInputValue(item.quantity);
     }
-  }, [item.quantity]);
+  }, [item.quantity, firstlyMounted]);
   useEffect(() => {
     if (firstlyMounted)
       if (!user)
@@ -94,7 +94,7 @@ const CartItem = ({
             quantity: inputValue
           })
         );
-  }, [currentSize]);
+  }, [currentSize, firstlyMounted, currentPrice, dispatch, inputValue, item, user]);
 
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>

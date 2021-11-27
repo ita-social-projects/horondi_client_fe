@@ -59,7 +59,7 @@ const Login = () => {
 
   const emailStyles = useMemo(
     () => (errors.email === 'error.profile.email' ? styles.afterText : ''),
-    [errors.email]
+    [errors.email, styles.afterText]
   );
 
   return (

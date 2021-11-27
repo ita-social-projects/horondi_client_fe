@@ -165,10 +165,10 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: '20px',
     marginBottom: '20px',
-    minHeight: '10px'
+    minHeight: '10px',
+    display: 'flex'
   },
   orText: {
-    display: 'table',
     margin: '0 auto',
     color: '#636363',
     fontSize: '0.875rem'

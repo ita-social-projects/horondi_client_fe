@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   root: (fromNavBar) => ({
     height: fromNavBar && 61,
-    // width: !fromNavBar && 100,
-    // padding: '10px',
-    // padding: ''
     display: 'inline',
     '@media (max-width: 768px)': {
       height: '70px'
@@ -29,7 +26,7 @@ export const useStyles = makeStyles(() => ({
     },
     '& .MuiInputBase-input': {
       color: 'white',
-      padding: !fromNavBar && '10px 18px 10px 0'
+      padding: !fromNavBar && '10px 51px 10px 0'
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
       borderBottomColor: '#dedede',

@@ -25,23 +25,13 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center'
   },
-  // sortByText: {
-  //   fontFamily: 'Montserrat',
-  //   fontStyle: 'normal',
-  //   fontWeight: 'normal',
-  //   fontSize: '13px',
-  //   '@media (max-width:400px)': {
-  //     display: 'none'
-  //   }
-  // },
   sortDiv: {
     width: '100%',
-    // padding: '20px 0 0 0',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     lineHeight: '25px !important',
-    '@media (max-width:970px)': {
+    '@media (max-width:959px)': {
       justifyContent: 'center !important',
       alignItems: 'baseline'
     },

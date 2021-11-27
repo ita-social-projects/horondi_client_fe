@@ -3,7 +3,7 @@ import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { useEffect, useState } from 'react';
-import { page, URL_QUERIES_NAME, FILTERS_KEYS } from '../../configs';
+import { page, URL_QUERIES_NAME } from '../../configs';
 
 const useProductFilters = (filterParams, filtersList) => {
   const { search } = useLocation();
@@ -47,7 +47,7 @@ const useProductFilters = (filterParams, filtersList) => {
     Object.keys(filtersList).forEach((key, index) => {
       data[key] = {
         filterName: t(`common.${filterNames[index]}`),
-        productFilter: filterParams[FILTERS_KEYS[index]] || [],
+        productFilter: filterParams[filterNames[index]] || [],
         list: map(filtersList[key], (el) => el.name[language].value),
         categories: filtersList[key],
         clearFilter: () => handleFilterClear(queriesNames[index]),

@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ListItemText, Checkbox } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
-import Collapse from '@material-ui/core/Collapse';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './products-filters-container.styles';
 
@@ -18,12 +15,8 @@ const ProductsFiltersContainer = ({
   filterName
 }) => {
   const styles = useStyles();
-  const [isListOpen, setIsListOpen] = useState(true);
   const { i18n } = useTranslation();
 
-  const handleClick = () => {
-    setIsListOpen(!isListOpen);
-  };
   const checkCategory = (category) => {
     const categoryName = categories.filter(
       (element) => element.name[i18n.language === 'ua' ? 0 : 1].value === category
@@ -35,38 +28,35 @@ const ProductsFiltersContainer = ({
 
   return (
     <Grid className={styles.container}>
-      <li className={styles.mainItem} onClick={handleClick}>
+      <li className={styles.mainItem}>
         <ListItemText button='true' primary={filterName} />
-        <span className={styles.mainItemIcon}>{isListOpen ? <RemoveIcon /> : <AddIcon />}</span>
       </li>
-      <Collapse in={isListOpen} timeout='auto' unmountOnExit>
-        <List>
-          {list.map((listItem) => (
-            <label key={listItem}>
-              {' '}
-              <ListItem
-                selected={
-                  productFilter
-                    ? productFilter.find((filter) => filter === listItem) || checkCategory(listItem)
-                    : false
-                }
-                button
-                className={styles.nested}
-                key={listItem}
-              >
-                <Checkbox
-                  name={listItem}
-                  onChange={filterHandler}
-                  size='small'
-                  color='default'
-                  checked={checkCategory(listItem) || false}
-                />
-                <ListItemText primary={listItem} />
-              </ListItem>{' '}
-            </label>
-          ))}
-        </List>
-      </Collapse>
+      <List>
+        {list.map((listItem) => (
+          <label key={listItem}>
+            {' '}
+            <ListItem
+              selected={
+                productFilter
+                  ? productFilter.find((filter) => filter === listItem) || checkCategory(listItem)
+                  : false
+              }
+              button
+              className={styles.nested}
+              key={listItem}
+            >
+              <Checkbox
+                name={listItem}
+                onChange={filterHandler}
+                size='small'
+                color='default'
+                checked={checkCategory(listItem) || false}
+              />
+              <ListItemText primary={listItem} />
+            </ListItem>{' '}
+          </label>
+        ))}
+      </List>
     </Grid>
   );
 };

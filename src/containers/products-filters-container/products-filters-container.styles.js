@@ -4,7 +4,10 @@ export const useStyles = makeStyles(() => ({
   container: {
     borderBottom: '1px solid gray',
     borderTop: '1px solid gray',
-    padding: '10px 0px'
+    padding: '24px 0px',
+    '& .Mui-selected': {
+      backgroundColor: 'transparent'
+    }
   },
   mainItem: {
     textTransform: 'uppercase',

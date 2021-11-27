@@ -106,13 +106,7 @@ const ProductListPage = ({ width }) => {
       ? products.map((product) => <ProductListItem key={product._id} product={product} />)
       : null;
   const paginationToShow = (
-    <Pagination
-      count={pagesCount}
-      variant='outlined'
-      shape='rounded'
-      page={currentPage}
-      onChange={changeHandler}
-    />
+    <Pagination count={pagesCount} variant='outlined' page={currentPage} onChange={changeHandler} />
   );
   const paginationCondition = () => {
     if (
@@ -126,7 +120,7 @@ const ProductListPage = ({ width }) => {
   return (
     <Container maxWidth='lg'>
       <div className={styles.root}>
-        <Typography className={styles.paginationDiv}>{t('common.scrollbar.catalog')}</Typography>
+        <Typography className={styles.header}>{t('common.scrollbar.catalog')}</Typography>
         <div className={styles.sortDiv}>
           <ProductSort />
         </div>
@@ -136,7 +130,6 @@ const ProductListPage = ({ width }) => {
           </Button>
         </div>
         <div className={styles.list}>
-          {/* {'This is our Component'} */}
           <Drawer
             id='menuDrawer'
             className={styles.drawer}
@@ -156,7 +149,7 @@ const ProductListPage = ({ width }) => {
           </div>
           {products?.length > 0 ? (
             <div className={styles.productsWrapper}>
-              <Grid container spacing={3} className={styles.productsDiv}>
+              <Grid container spacing={2} className={styles.productsDiv}>
                 {itemsToShow}
               </Grid>
               {paginationCondition()}

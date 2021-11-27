@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
   headerspace: {
     display: 'block',
     width: '100%',
-    height: '107px',
+    height: '106px',
     backgroundColor: '#F1F1F1',
     '@media (max-width: 768px)': {
       height: '72px'

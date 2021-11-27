@@ -26,7 +26,7 @@ exports[`<HeaderProfile /> Should match snapshot 1`] = `
     open={false}
     transformOrigin={
       Object {
-        "horizontal": "right",
+        "horizontal": "left",
         "vertical": "top",
       }
     }
@@ -34,28 +34,10 @@ exports[`<HeaderProfile /> Should match snapshot 1`] = `
     <WithStyles(ForwardRef(MenuItem))
       data-cy="menuItem"
       disableGutters={true}
-      key="wishlist.wishlistTitles.filled"
-      onClick={[Function]}
-    >
-      <Memo(ForwardRef(FavoriteIcon)) />
-      wishlist.wishlistTitles.filled
-    </WithStyles(ForwardRef(MenuItem))>
-    <WithStyles(ForwardRef(MenuItem))
-      data-cy="menuItem"
-      disableGutters={true}
-      key="headerProfile.changeTheme"
-      onClick={[Function]}
-    >
-      <Memo(ForwardRef(Brightness7Icon)) />
-      headerProfile.changeTheme
-    </WithStyles(ForwardRef(MenuItem))>
-    <WithStyles(ForwardRef(MenuItem))
-      data-cy="menuItem"
-      disableGutters={true}
       key="headerProfile.profile"
       onClick={[Function]}
     >
-      <Memo(ForwardRef(PersonOutlineIcon)) />
+      <Memo(ForwardRef(SettingsIcon)) />
       headerProfile.profile
     </WithStyles(ForwardRef(MenuItem))>
     <WithStyles(ForwardRef(MenuItem))

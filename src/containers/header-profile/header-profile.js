@@ -118,12 +118,12 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
         elevation={0}
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
+          horizontal: 'right',
+          vertical: 'bottom'
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left'
+          horizontal: 'left',
+          vertical: 'top'
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}

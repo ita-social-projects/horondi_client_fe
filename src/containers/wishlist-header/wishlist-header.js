@@ -16,9 +16,9 @@ const { pathToWishlist } = routes;
 const WishlistHeader = () => {
   const user = getFromLocalStorage('accessToken');
   const styles = useStyles();
+  const { loading, data } = useQuery(getWishlistByUserId, { skip: !user });
   const [wishlist, setWishlist] = useState();
   const localWishlist = getFromLocalStorage('wishlist');
-  const { loading, data } = useQuery(getWishlistByUserId, { skip: !user });
 
   useEffect(() => {
     if (user) {

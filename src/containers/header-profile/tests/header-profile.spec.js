@@ -1,6 +1,5 @@
 import { Menu, MenuItem } from '@material-ui/core';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import PersonIcon from '@material-ui/icons/Person';
+import { Person } from '@material-ui/icons';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderProfile from '../header-profile';
@@ -8,7 +7,6 @@ import HeaderProfile from '../header-profile';
 jest.mock('../header-profile.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../services/local-storage.service');
 jest.mock('react-redux');
-jest.mock('../../../context/theme-context', () => ({}));
 jest.mock('connected-react-router', () => ({ push: () => 0 }));
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -56,26 +54,18 @@ describe('<HeaderProfile />', () => {
     expect(props.setIsMenuOpen()).toEqual(true);
   });
 
-  it('should work with logout user', () => {
-    const iconOut = wrapper.find(PersonOutlineIcon);
-    iconOut.simulate('click', { persist: jest.fn() });
-    expect(wrapper).toBeDefined();
-  });
-
   it('should work with login user', () => {
     mockStore.userData = true;
-    const iconIn = wrapper.find(PersonIcon);
+    const iconIn = wrapper.find(Person);
     iconIn.simulate('click', { persist: jest.fn(), handleChangeTheme: false });
-    expect(wrapper.find(MenuItem).length).toEqual(5);
+    expect(wrapper.find(MenuItem).length).toEqual(3);
   });
   it('should simulate clicks on children', () => {
     mockStore.userData = true;
+    const menuItem1 = wrapper.find(MenuItem).at(1);
     const menuItem2 = wrapper.find(MenuItem).at(2);
-    const menuItem3 = wrapper.find(MenuItem).at(3);
-    const menuItem4 = wrapper.find(MenuItem).at(4);
+    menuItem1.simulate('click', { persist: jest.fn() });
     menuItem2.simulate('click', { persist: jest.fn(), setIsMenuOpen: false });
-    menuItem3.simulate('click', { persist: jest.fn() });
-    menuItem4.simulate('click', { persist: jest.fn() });
     expect(wrapper).toBeDefined();
   });
   it('should work onClose', () => {

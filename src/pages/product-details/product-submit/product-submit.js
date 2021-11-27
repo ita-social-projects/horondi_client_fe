@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -27,14 +27,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
 
   const { t } = useTranslation();
 
-  const isItemInCart = useMemo(
-    () =>
-      cartList.find(
-        (item) =>
-          productToSend.product._id === item.product._id &&
-          productToSend.options.size._id === item.options.size._id
-      ),
-    [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
+  const isItemInCart = cartList.find(
+    (item) =>
+      productToSend.product._id === item.product._id &&
+      productToSend.options.size._id === item.options.size._id
   );
 
   const cartTootipTitle = isItemInCart

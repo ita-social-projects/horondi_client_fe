@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { Card, Typography, CardContent, CardHeader, CardMedia } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-detail.style';
-import { IMG_URL, TIME_OPTIONS } from '../../../configs';
+import { IMG_URL } from '../../../configs';
+import { TIME_OPTIONS } from '../constants';
 import { getNewsById } from '../operations/news-queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 

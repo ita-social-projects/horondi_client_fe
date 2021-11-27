@@ -35,7 +35,7 @@ const SliderHomePage = () => {
           <img
             onClick={() => {
               (currImg > 0 && setCurrImg(currImg - 1)) ||
-                (currImg === 0 && setCurrImg(images.length - 1));
+              (currImg === 0 && setCurrImg(images.length - 1));
             }}
             src={arrowLeft}
             alt='arrow left'
@@ -43,7 +43,7 @@ const SliderHomePage = () => {
           <img
             onClick={() => {
               (currImg < images.length - 1 && setCurrImg(currImg + 1)) ||
-                (currImg === images.length - 1 && setCurrImg(images.length - 1 - currImg));
+              (currImg === images.length - 1 && setCurrImg(images.length - 1 - currImg));
             }}
             src={arrowRight}
             alt='arrow right'

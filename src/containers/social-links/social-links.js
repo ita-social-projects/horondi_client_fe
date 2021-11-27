@@ -1,12 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Typography from '@material-ui/core/Typography';
-
 import { Link } from 'react-router-dom';
-
 import { FacebookIcon, InstagramIcon } from '../../components/icons';
-
-import { HORONDI, HORONDI_FB_LINK, HORONDI_INST_LINK } from '../../configs';
+import { HORONDI } from '../../configs';
+import { HORONDI_FB_LINK, HORONDI_INST_LINK } from './constants';
 import { useStyles } from './social-links.styles';
 
 const SocialLinks = ({ showTitle, position, color }) => {

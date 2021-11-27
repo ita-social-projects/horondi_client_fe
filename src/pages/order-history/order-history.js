@@ -5,7 +5,7 @@ import OrderHistoryItem from '../../containers/orders/order-history/order-histor
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
-import { limitHistoryOrders } from '../../configs';
+import { LIMIT_HISTORY_ORDERS } from './constants';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getUserOrdersQuery } from './operations/order-history.queries';
 
@@ -21,8 +21,8 @@ const OrderHistory = () => {
   } = useQuery(getUserOrdersQuery, {
     variables: {
       pagination: {
-        limit: limitHistoryOrders,
-        skip: (currentPage - 1) * limitHistoryOrders
+        limit: LIMIT_HISTORY_ORDERS,
+        skip: (currentPage - 1) * LIMIT_HISTORY_ORDERS
       }
     },
     fetchPolicy: 'network-only',
@@ -32,7 +32,7 @@ const OrderHistory = () => {
   if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
 
   const { ordersCount, userOrders } = data.getUserOrders;
-  const quantityPages = Math.ceil(ordersCount / limitHistoryOrders);
+  const quantityPages = Math.ceil(ordersCount / LIMIT_HISTORY_ORDERS);
 
   const changeHandler = (value) => {
     setCurrentPage(value);

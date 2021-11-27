@@ -3,10 +3,6 @@ export const HORONDI = 'horondi';
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
-export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
-export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
-export const HORONDI_FB_LINK = 'https://www.facebook.com/Horondi';
-export const HORONDI_INST_LINK = 'https://www.instagram.com/horondi';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 
 export const CART_AND_WISHLIST_IMAGES = {
@@ -22,52 +18,6 @@ export const ERROR_PAGE_IMAGES = {
 export const NOT_FOUND_PAGE_IMAGES = {
   light: './images/not-found-page/bag.png',
   dark: './images/not-found-page/bag.png'
-};
-
-export const REGISTER_USER_DATA = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: ''
-};
-export const USER_REGISTER_LABELS = {
-  email: 'email',
-  pass: 'password',
-  text: 'text'
-};
-
-export const CHAT_USER_DATA = {
-  firstName: '',
-  email: '',
-  message: ''
-};
-export const LOGIN_USER_DATA = {
-  email: '',
-  password: '',
-  rememberMe: false
-};
-
-export const PROFILE_USER_CONTACT_DATA = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  phoneNumber: ''
-};
-
-export const PROFILE_USER_ADRESS_DATA = {
-  country: '',
-  region: '',
-  city: '',
-  street: '',
-  buildingNumber: '',
-  appartment: '',
-  zipcode: ''
-};
-
-export const COMMENTS_TIME_OPTIONS = {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric'
 };
 
 export const USER_TOKENS = {
@@ -120,25 +70,8 @@ export const RESPONSIVE_CATEGORIES = {
   }
 };
 
-export const hryvniaUnicode = '\u20b4';
-export const dollarUnicode = '\u0024';
-
 export const commentFields = {
   text: { name: 'text', multiline: true, rows: 5 }
-};
-
-export const sideBarSubList = [
-  { link: '/materials' },
-  { link: '/pages/about-us', text: 'about-us' },
-  { link: '/news' },
-  { link: '/contacts' }
-];
-
-export const SCROLL_BAR_DATA = ['#slider', '#catalog', '#constructor', '#models', '#horondiStyle'];
-
-export const toastSettings = {
-  autoClose: 3000,
-  hideProgressBar: true
 };
 
 export const cookiePolicy = {
@@ -166,37 +99,13 @@ export const SESSION_STORAGE = {
   DELIVERY_TYPE: 'deliveryType'
 };
 
-export const FETCH_POLICY = 'no-cache';
 export const RETURN_PAGE = 'returnPage';
 
-export const SORT_BY_SELECT_OPTIONS = [
-  { name: 'popularity', value: -1 },
-  { name: 'sortDesc', value: -1 },
-  { name: 'sortAsc', value: 1 },
-  { name: 'rate', value: -1 }
-];
 export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
 export const POPULARITY = 'popularity';
 
-export const DRAWER_TEMPORARY = 'temporary';
-export const DRAWER_PERMANENT = 'permanent';
-export const TEMPORARY_WIDTHS = ['sm', 'xs'];
-export const ITEMS_PER_PAGE = [
-  {
-    title: 'nine products per page',
-    value: 9
-  },
-  {
-    title: 'eighteen products per page',
-    value: 18
-  },
-  {
-    title: 'thirty products per page',
-    value: 30
-  }
-];
 export const AUTH_ERRORS = {
   ACCESS_TOKEN_IS_NOT_VALID: 'USER_NOT_AUTHORIZED',
   REFRESH_TOKEN_IS_NOT_VALID: 'REFRESH_TOKEN_IS_NOT_VALID'
@@ -205,25 +114,10 @@ export const AUTH_ERRORS = {
 export const COURIER = 'COURIER';
 export const RESET = 'reset';
 
-export const IMG_ALT = {
-  REGISTER_IMG_INFO: 'register info'
-};
-
-export const limitHistoryOrders = 10;
 export const TEXT_FIELD_VARIANT = {
   OUTLINED: 'outlined',
   ROUNTED: 'rounded'
 };
-
-export const statusColors = [
-  { label: 'CREATED', color: '#9e9e9e' },
-  { label: 'CONFIRMED', color: '#4791db' },
-  { label: 'PRODUCED', color: '#81c784' },
-  { label: 'CANCELLED', color: '#e33371' },
-  { label: 'REFUNDED', color: '#ffb74d' },
-  { label: 'SENT', color: '#b39ddb' },
-  { label: 'DELIVERED', color: '#546e7a' }
-];
 
 export const LANGUAGES_LIST = [
   { lang: 'UA', value: 0 },
@@ -235,13 +129,6 @@ export const CURRENCIES_LIST = [
   { currency: 'USD', value: 1 }
 ];
 export const LANGUAGE = 'language';
-
-export const TIME_OPTIONS = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-};
 
 export const URL_QUERIES_NAME = {
   page: 'page',
@@ -274,7 +161,6 @@ export const MATERIAL_UI_COLOR = {
 export const cartKey = 'cart';
 export const WISHLIST_KEY = 'wishlist';
 export const countPerPage = 'countPerPage';
-export const deliveryTypeKey = 'deliveryType';
 
 export const TEXT_FIELDS = {
   STRING: 'string',

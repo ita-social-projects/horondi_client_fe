@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { scrollBarStyles } from './scroll-bar.styles';
-import { SCROLL_BAR_DATA } from '../../configs';
+import { SCROLL_BAR_DATA } from './constants';
 import Sidebar from '../../containers/sidebar';
 
 const ScrollBar = ({ homeRef }) => {

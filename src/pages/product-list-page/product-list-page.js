@@ -66,7 +66,7 @@ const ProductListPage = ({ width }) => {
   const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
-  const { error, loading, refetch } = useQuery(getFilteredProductsQuery, {
+  const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => {
       setProducts(data.getProducts.items);
       setPaginationParams((prevState) => ({
@@ -89,9 +89,7 @@ const ProductListPage = ({ width }) => {
       countPerPage: +searchParams.get(URL_QUERIES_NAME.countPerPage) || 9
     }));
     setFilterParams(getFilterParamsFromQuery(searchParams));
-
-    refetch();
-  }, [searchParams, refetch]);
+  }, [searchParams]);
 
   const changeHandler = (e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);

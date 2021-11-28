@@ -354,9 +354,14 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@bohdanst1914](https://avatars.githubusercontent.com/u/27858056?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/bohdanst1914)
 [![@filiczini](https://avatars.githubusercontent.com/u/51033321?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Filiczini)
 [![@AlexanderBil](https://avatars.githubusercontent.com/u/63557206?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/AlexanderBil)
-[![@ZaitsevaEvelina](https://avatars.githubusercontent.com/u/87185753?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/ZaitsevaEvelina)
 [![@mrjnmzk](https://avatars.githubusercontent.com/u/64384450?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/mrjnmzk)
 [![@boris-giga](https://avatars.githubusercontent.com/u/61072426?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/boris-giga)
+[![@byavdoshniak](https://avatars.githubusercontent.com/u/87911115?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/byavdoshniak)
+[![@rostyslaw27](https://avatars.githubusercontent.com/u/57355852?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/rostyslaw27)
+[![@romanortynskyi](https://avatars.githubusercontent.com/u/50491616?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/romanortynskyi)
+[![@DeLettenhove](https://avatars.githubusercontent.com/u/49168997?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/DeLettenhove)
+[![@tarasSanotskyi](https://avatars.githubusercontent.com/u/79531224?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/tarasSanotskyi)
+[![@IamBohdanSereda](https://avatars.githubusercontent.com/u/89339465?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/IamBohdanSereda)
 
 ### Quality control team
 
@@ -405,7 +410,9 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@rholovchak](https://avatars.githubusercontent.com/u/68376355?s=200)](https://github.com/rholovchak)
 
 ### Designer team
+
 [![@Nikadsgn](https://avatars.githubusercontent.com/u/87034205?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Nikadsgn)
+[![@RubaSonce](https://avatars.githubusercontent.com/u/20723898?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/RubaSonce)
 
 ---
 

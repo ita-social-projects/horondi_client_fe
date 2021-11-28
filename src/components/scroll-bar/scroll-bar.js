@@ -66,7 +66,7 @@ const ScrollBar = ({ homeRef }) => {
           </a>
         ))}
       </div>
-      <Sidebar setIsMenuOpen={setIsMenuOpen} fromSideBar isMenuOpen={isMenuOpen} />
+      <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
     </>
   );
 };

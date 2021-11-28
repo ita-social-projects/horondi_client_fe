@@ -3,6 +3,7 @@ import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { useEffect, useState } from 'react';
+
 import { page, URL_QUERIES_NAME } from '../../configs';
 
 const useProductFilters = (filterParams, filtersList) => {
@@ -14,7 +15,7 @@ const useProductFilters = (filterParams, filtersList) => {
   const searchParams = new URLSearchParams(search);
 
   const language = i18n.language === 'ua' ? 0 : 1;
-  const filterNames = ['category', 'model', 'pattern'];
+  const filterNames = ['category', 'models', 'patterns'];
   const queriesNames = [
     URL_QUERIES_NAME.categoryFilter,
     URL_QUERIES_NAME.modelsFilter,

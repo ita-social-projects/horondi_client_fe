@@ -58,11 +58,16 @@ const PriceFilter = ({ priceRange }) => {
             className={styles.priceRangeInput}
             style={{ marginRight: '1rem' }}
             variant='outlined'
-            type='number'
+            type='tel'
+            defaultValue={prices[0] || min}
           />
-
-          {`  ${t('common.to')}`}
-          <TextField className={styles.priceRangeInput} variant='outlined' type='number' />
+          {t('common.to')}
+          <TextField
+            className={styles.priceRangeInput}
+            variant='outlined'
+            type='tel'
+            defaultValue={prices[1] || max}
+          />
         </div>
       </Typography>
       <Slider

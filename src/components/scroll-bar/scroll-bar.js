@@ -51,7 +51,7 @@ const ScrollBar = ({ homeRef }) => {
     window.addEventListener('scroll', scrollHandler);
 
     return () => window.removeEventListener('scroll', scrollHandler);
-  }, [homeRef, currentSection.id]); // currentSection.id reduced multiple rerenders to 2-3, but caused useEffect call on each section click
+  }, [homeRef, currentSection.id]);
 
   return (
     <>

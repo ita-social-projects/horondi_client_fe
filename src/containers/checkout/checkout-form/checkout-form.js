@@ -117,7 +117,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
   }, [userData, resetForm]);
 
   useEffect(() => {
-    setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values); // after removing nothing changed
+    setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
   }, [values]);
 
   useEffect(() => {

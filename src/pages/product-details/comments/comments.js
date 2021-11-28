@@ -87,7 +87,7 @@ const Comments = ({ productId }) => {
       return t('product.comments.unregisteredTip');
     }
     return t('product.comments.successfulTip');
-  }, [t, userId]); // rerenders as before, nothing changed
+  }, [t, userId]);
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem

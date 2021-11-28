@@ -51,27 +51,22 @@ const ProductListFilter = ({ filterParams }) => {
   };
 
   const filterButtons = Object.values(filtersOptions).map(
-    ({ filterName, productFilter, list, filterHandler, clearFilter, categories }) => (
+    ({ filterName, productFilter, list, filterHandler, categories }) => (
       <ProductsFiltersContainer
         key={filterName}
         filterName={filterName}
         productFilter={productFilter}
         list={list}
         filterHandler={filterHandler}
-        clearFilter={clearFilter}
         categories={categories}
       />
     )
   );
+
   return (
     <div>
       <Grid container direction='column' className={styles.wrapper} spacing={2}>
-        <Button
-          className={styles.button}
-          data-cy='clear_filter_button'
-          variant='contained'
-          onClick={handleClearFilter}
-        >
+        <Button className={styles.button} data-cy='clear_filter_button' onClick={handleClearFilter}>
           {t('common.clearFilter')}
         </Button>
         <PriceFilter priceRange={priceRange} />

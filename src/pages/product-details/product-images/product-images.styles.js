@@ -44,7 +44,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     maxHeight: '450px',
     width: 'auto',
-    // cursor: 'pointer',
     objectFit: 'cover',
 
     '@media (max-width: 1600px)': {

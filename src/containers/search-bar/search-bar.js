@@ -6,8 +6,14 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 
-const SearchBar = ({ searchParams, setSearchParams, initialSearchState, fromSideBar }) => {
-  const styles = useStyles({ fromSideBar });
+const SearchBar = ({
+  searchParams,
+  setSearchParams,
+  initialSearchState,
+  fieldOptions = {},
+  fromNavBar = true
+}) => {
+  const styles = useStyles(fromNavBar);
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -53,11 +59,13 @@ const SearchBar = ({ searchParams, setSearchParams, initialSearchState, fromSide
 
   return (
     <TextField
+      size='small'
       className={stickySearch}
       label={t('searchBar.search')}
       onChange={handleSearch}
       onBlur={handleOnBlur}
       onFocus={handleSearch}
+      {...fieldOptions}
     />
   );
 };

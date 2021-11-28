@@ -4,6 +4,9 @@ import PriceFilter from '../product-list-filter/price-filter/price-filter';
 
 const dispatch = jest.fn();
 jest.mock('react-redux');
+jest.mock('../product-list-filter/product-list-filter.styles.js', () => ({
+  useStyles: () => ({})
+}));
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()

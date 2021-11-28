@@ -29,6 +29,13 @@ export const paletteGenerator = (colorSchema) => ({
       color: theme[colorSchema].card.selectedButton.color
     }
   },
+  catalog: {
+    pageFilterCell: {
+      hover: {
+        backgroundColor: theme[colorSchema].catalogPageFilterCell.hover.backgroundColor
+      }
+    }
+  },
   button: {
     normal: {
       backgroundColor: theme[colorSchema].button.normal.backgroundColor,

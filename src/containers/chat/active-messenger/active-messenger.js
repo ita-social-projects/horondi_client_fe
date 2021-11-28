@@ -5,7 +5,7 @@ import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
-import { CHAT_USER_DATA } from '../../../configs/index';
+import { CHAT_USER_DATA } from '../constants';
 import { formRegExp } from '../../../configs/regexp';
 import { useStyles } from '../chat.style';
 import { handleHelperText } from '../../../utils/handle-active-massenger';

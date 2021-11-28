@@ -9,7 +9,7 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
-import { toastSettings } from '../../../configs/index';
+import { TOAST_SETTINGS } from '../constants';
 
 import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
 
@@ -71,7 +71,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
       addToCart(newCart);
 
       dispatch(setToastMessage(t('product.toastMessage.addedToCard')));
-      dispatch(setToastSettings(toastSettings));
+      dispatch(setToastSettings(TOAST_SETTINGS));
     } else {
       setSizeIsNotSelectedError(true);
     }
@@ -103,10 +103,10 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
 
     if (isInWishlist) {
       dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
-      dispatch(setToastSettings(toastSettings));
+      dispatch(setToastSettings(TOAST_SETTINGS));
     } else {
       dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
-      dispatch(setToastSettings(toastSettings));
+      dispatch(setToastSettings(TOAST_SETTINGS));
     }
   };
 

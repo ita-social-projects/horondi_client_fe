@@ -4,12 +4,8 @@ import Carousel from 'react-multi-carousel';
 import { useTranslation } from 'react-i18next';
 
 import CategoryItem from './category-item';
-import {
-  URL_LANGUAGE,
-  RESPONSIVE_CATEGORIES,
-  URL_QUERIES_NAME,
-  countPerPage
-} from '../../../configs/index';
+import { URL_QUERIES_NAME, countPerPage } from '../../../configs/index';
+import { RESPONSIVE_CATEGORIES } from '../constants';
 
 import { CategoriesContext } from '../../../context/categories/categories-context';
 import { useStyles } from './categories-list.style';
@@ -46,7 +42,7 @@ const CategoriesList = () => {
 };
 
 export const getCategoryURL = (category) => {
-  const [filteredCategory] = category.filter((item) => item.lang === URL_LANGUAGE);
+  const [filteredCategory] = category.filter((item) => item.lang === 'en');
 
   if (filteredCategory.value) {
     return `catalog/${filteredCategory.value.toLowerCase()}`;

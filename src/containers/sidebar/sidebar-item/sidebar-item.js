@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Collapse, ListItemText, ListItem, List } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 
-import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
+import { URL_QUERIES_NAME } from '../../../configs/index';
+import { POPULARITY } from '../constants';
 
 import { useStyles } from './sidebar-items.style';
 

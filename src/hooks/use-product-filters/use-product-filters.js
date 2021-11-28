@@ -1,10 +1,8 @@
 import { useHistory, useLocation } from 'react-router';
 import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
-
 import { useEffect, useState } from 'react';
-
-import { page, URL_QUERIES_NAME } from '../../configs';
+import { TEXT_FIELDS, URL_QUERIES_NAME } from '../../configs';
 
 const useProductFilters = (filterParams, filtersList) => {
   const { search } = useLocation();
@@ -37,7 +35,7 @@ const useProductFilters = (filterParams, filtersList) => {
   };
 
   const handleFilterClear = (queryName) => {
-    searchParams.set(page, 1);
+    searchParams.set(TEXT_FIELDS.PAGE, 1);
     searchParams.delete(queryName);
     history.push(`?${searchParams.toString()}`);
   };

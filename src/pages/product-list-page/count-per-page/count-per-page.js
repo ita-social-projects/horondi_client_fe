@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './count-per-page.styles';
-import { URL_QUERIES_NAME, ITEMS_PER_PAGE, TEXT_FIELD_VARIANT } from '../../../configs';
+import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
+import { ITEMS_PER_PAGE } from '../constants';
 
 const CountPerPage = () => {
   const { t } = useTranslation();

@@ -13,7 +13,8 @@ import {
 } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-item.style';
-import { IMG_URL, TIME_OPTIONS } from '../../../configs';
+import { IMG_URL } from '../../../configs';
+import { TIME_OPTIONS } from '../constants';
 
 const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
   const { t, i18n } = useTranslation();

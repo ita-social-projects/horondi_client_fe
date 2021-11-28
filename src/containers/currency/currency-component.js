@@ -4,7 +4,8 @@ import { MenuItem } from '@material-ui/core';
 import { useStyles } from './currency.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeCurrency } from '../../redux/currency/currency.actions';
-import { CURRENCIES_LIST, DEFAULT_CURRENCY, hryvniaUnicode, dollarUnicode } from '../../configs';
+import { CURRENCIES_LIST, DEFAULT_CURRENCY } from '../../configs';
+import { HRYVNIA_UNICODE, DOLLAR_UNICODE } from './constants';
 import Dropdown from '../../components/dropdown';
 
 const currencyInLocalStorage = getFromLocalStorage('currency') || DEFAULT_CURRENCY;
@@ -27,7 +28,7 @@ const CurrencyComponent = ({ fromSideBar }) => {
   };
   const mappedCurrencies = CURRENCIES_LIST.map(({ currency: curr, value }) => (
     <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
-      {curr === 'UAH' ? hryvniaUnicode : dollarUnicode}
+      {curr === 'UAH' ? HRYVNIA_UNICODE : DOLLAR_UNICODE}
     </MenuItem>
   ));
   return (

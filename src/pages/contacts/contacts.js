@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Tooltip } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
 import { useStyles } from './contacts.styles';
-import { GOOGLE_MAP_URL } from '../../configs/index';
+import { GOOGLE_MAP_URL } from './constants';
 import { getContacts } from './operations/contacts.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import email from '../../images/footer-icons/email.svg';

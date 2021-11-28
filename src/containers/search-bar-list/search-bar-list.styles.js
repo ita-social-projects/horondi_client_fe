@@ -17,6 +17,7 @@ export const useStyles = makeStyles(() => ({
     position: 'absolute',
     left: '50%',
     top: '50%',
+    color: 'black',
     transform: 'translate(-50%, -50%)'
   }
 }));

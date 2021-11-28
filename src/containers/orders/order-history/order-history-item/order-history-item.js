@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
-import { statusColors } from '../../../../configs';
+import { STATUS_COLORS } from '../../constants';
 import OrderHistoryTable from '../order-history-table/index';
 import OrderHistoryItemProduct from '../order-history-item-product';
 import { useStyles } from './order-history-item.styles';
@@ -17,7 +17,7 @@ const OrderHistoryItem = ({ order }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const { color } = statusColors.find((item) => item.label === order.status);
+  const { color } = STATUS_COLORS.find((item) => item.label === order.status);
 
   const orderProducts = order.items.map((item) => (
     <OrderHistoryItemProduct

@@ -16,7 +16,7 @@ import {
   CY_CODE_ERR,
   deliveryTypes,
   SESSION_STORAGE,
-  TEXT_FIELD_SIZE,
+  TEXT_FIELDS,
   TEXT_FIELD_VARIANT
 } from '../../../configs';
 import Delivery from './delivery';
@@ -168,7 +168,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
-                      size={TEXT_FIELD_SIZE.SMALL}
+                      size={TEXT_FIELDS.SMALL}
                       data-cy={field.name}
                       name={field.name}
                       className={styles.textField}
@@ -190,7 +190,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
                 {userContactInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
-                      size={TEXT_FIELD_SIZE.SMALL}
+                      size={TEXT_FIELDS.SMALL}
                       data-cy={field.name}
                       name={field.name}
                       className={styles.textField}
@@ -260,7 +260,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
               <h2 className={styles.title}>{t('checkout.checkoutTitles.orderComment')}</h2>
               <div>
                 <TextField
-                  size={TEXT_FIELD_SIZE.SMALL}
+                  size={TEXT_FIELDS.SMALL}
                   data-cy='userComment'
                   name='userComment'
                   multiline

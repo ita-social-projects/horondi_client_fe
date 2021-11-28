@@ -16,12 +16,8 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
-import {
-  URL_QUERIES_NAME,
-  TEMPORARY_WIDTHS,
-  DRAWER_PERMANENT,
-  DRAWER_TEMPORARY
-} from '../../configs';
+import { URL_QUERIES_NAME } from '../../configs';
+import { TEMPORARY_WIDTHS, DRAWER_PERMANENT, DRAWER_TEMPORARY } from './constants';
 import { getFilteredProductsQuery } from './operations/product-list.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import getSortParamsFromQuery from '../../utils/getSortParamsFromQuery';

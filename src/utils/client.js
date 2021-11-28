@@ -4,7 +4,7 @@ import fetch from 'unfetch';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client/public';
 
-import { AUTH_ERRORS, FETCH_POLICY, USER_TOKENS } from '../configs';
+import { AUTH_ERRORS, USER_TOKENS } from '../configs';
 import { getFromLocalStorage } from '../services/local-storage.service';
 import refreshAuthToken from './regenerateAuthTokenPair';
 
@@ -54,7 +54,7 @@ export const getItems = async (query, variables = {}) => {
           token
         }
       },
-      fetchPolicy: FETCH_POLICY
+      fetchPolicy: 'no-cache'
     });
 
     if (queryResult.data && Object.values(queryResult.data)[0]?.message) {
@@ -86,7 +86,7 @@ export const setItems = async (query, variables) => {
           token
         }
       },
-      fetchPolicy: FETCH_POLICY
+      fetchPolicy: 'no-cache'
     });
 
     if (mutationResult.data && Object.values(mutationResult.data)[0]?.message) {

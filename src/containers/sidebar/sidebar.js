@@ -58,7 +58,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           handlerItem={() => setIsMenuOpen(false)}
         />
       )),
-    [categories, styles]
+    [categories, styles, setIsMenuOpen]
   );
 
   const subList = useMemo(
@@ -76,7 +76,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
         ))}
       </div>
     ),
-    [sideBarSubList, styles]
+    [styles, i18n.language, setIsMenuOpen]
   );
 
   if (loading || error) return errorOrLoadingHandler(error, loading);

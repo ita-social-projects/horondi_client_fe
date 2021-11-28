@@ -40,13 +40,13 @@ export const useConstructor = () => {
 
   useEffect(() => {
     dispatch(getModelForConstructor());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (models) {
       dispatch(getConstructorModelById(models[0]._id));
     }
-  }, [models]);
+  }, [models, dispatch]);
 
   useEffect(() => {
     if (currentModel.eligibleOptions) {
@@ -60,30 +60,45 @@ export const useConstructor = () => {
       dispatch(getConstructorBottom(constructorBottom[0]._id));
       dispatch(getConstructorSize(currentModel.sizes[0]._id));
     }
-  }, [currentModel]);
+  }, [currentModel, dispatch]);
 
-  const changeModel = useCallback((id) => {
-    dispatch(getConstructorModelById(id));
-  }, []);
+  const changeModel = useCallback(
+    (id) => {
+      dispatch(getConstructorModelById(id));
+    },
+    [dispatch]
+  );
 
-  const changeBasic = useCallback((id) => {
-    dispatch(setModelLoading(true));
-    dispatch(getConstructorBasic(id));
-  }, []);
+  const changeBasic = useCallback(
+    (id) => {
+      dispatch(setModelLoading(true));
+      dispatch(getConstructorBasic(id));
+    },
+    [dispatch]
+  );
 
-  const changePattern = useCallback((id) => {
-    dispatch(setModelLoading(true));
-    dispatch(getConstructorPattern(id));
-  }, []);
+  const changePattern = useCallback(
+    (id) => {
+      dispatch(setModelLoading(true));
+      dispatch(getConstructorPattern(id));
+    },
+    [dispatch]
+  );
 
-  const changeBottom = useCallback((id) => {
-    dispatch(setModelLoading(true));
-    dispatch(getConstructorBottom(id));
-  }, []);
+  const changeBottom = useCallback(
+    (id) => {
+      dispatch(setModelLoading(true));
+      dispatch(getConstructorBottom(id));
+    },
+    [dispatch]
+  );
 
-  const changeSize = useCallback((id) => {
-    dispatch(getConstructorSize(id));
-  }, []);
+  const changeSize = useCallback(
+    (id) => {
+      dispatch(getConstructorSize(id));
+    },
+    [dispatch]
+  );
 
   const priceTotal = useMemo(() => {
     if (basicPrice && frontPocketPrice && bottomPrice && sizePrice) {

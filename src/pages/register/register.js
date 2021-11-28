@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
-import Grid from '@material-ui/core/Grid';
+import { Typography, Button } from '@material-ui/core';
 import { useTheme } from '@material-ui/styles';
 
 import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE, IMG_ALT } from '../../configs';
@@ -61,51 +60,40 @@ export default function Register() {
         <div className={styles.registerContainer}>
           <div className={styles.registerBackground} />
           <div className={styles.formContainer}>
-            <Grid container className={styles.formWrapper} spacing={2}>
-              <Grid
-                item
-                sm={12}
-                md={6}
-                lg={6}
-                className={
-                  hasRegistered ? styles.formBackgroundRegisteredUser : styles.formBackground
-                }
-              />
-              <Grid item xs={12} sm={12} md={6} lg={6}>
-                {hasRegistered ? (
-                  <div className={styles.registerSuccess}>
-                    <div className={styles.registerSuccessInfo}>
-                      <img
-                        src={setInfoImgByTheme(isLightTheme)}
-                        alt={IMG_ALT.REGISTER_IMG_INFO}
-                        className={styles.infoLogo}
-                      />
-                      <p>{t('register.confirmEmail')}</p>
-                      <Button
-                        className={styles.registerBtn}
-                        onClick={() => {
-                          history.push(sessionStorage.getItem(RETURN_PAGE));
-                        }}
-                      >
-                        {t('register.continueShopping')}
-                      </Button>
-                    </div>
+            <Typography component='div' className={styles.formWrapper}>
+              {hasRegistered ? (
+                <div className={styles.registerSuccess}>
+                  <div className={styles.registerSuccessInfo}>
+                    <img
+                      src={setInfoImgByTheme(isLightTheme)}
+                      alt={IMG_ALT.REGISTER_IMG_INFO}
+                      className={styles.infoLogo}
+                    />
+                    <p>{t('register.confirmEmail')}</p>
+                    <Button
+                      className={styles.registerBtn}
+                      onClick={() => {
+                        history.push(sessionStorage.getItem(RETURN_PAGE));
+                      }}
+                    >
+                      {t('register.continueShopping')}
+                    </Button>
                   </div>
-                ) : (
-                  <RegisterForm
-                    loading={loading}
-                    values={values}
-                    errors={errors}
-                    showPassword={showPassword}
-                    setShowPassword={setShowPassword}
-                    registerError={registerError}
-                    setShouldValidate={() => {
-                      setShouldValidate(true);
-                    }}
-                  />
-                )}
-              </Grid>
-            </Grid>
+                </div>
+              ) : (
+                <RegisterForm
+                  loading={loading}
+                  values={values}
+                  errors={errors}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  registerError={registerError}
+                  setShouldValidate={() => {
+                    setShouldValidate(true);
+                  }}
+                />
+              )}
+            </Typography>
           </div>
         </div>
       )}

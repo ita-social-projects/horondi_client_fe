@@ -28,8 +28,7 @@ import getFilterParamsFromQuery from '../../utils/getFilterParamsFromQuery';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
-
-  const searchParams = new URLSearchParams(search);
+  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
   const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
 
   const { t } = useTranslation();
@@ -67,7 +66,7 @@ const ProductListPage = ({ width }) => {
   const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
-  const { error, loading, refetch } = useQuery(getFilteredProductsQuery, {
+  const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => {
       setProducts(data.getProducts.items);
       setPaginationParams((prevState) => ({
@@ -79,16 +78,18 @@ const ProductListPage = ({ width }) => {
   });
 
   useEffect(() => {
-    setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));
+    setSearchParams(new URLSearchParams(search));
+  }, [search]);
+
+  useEffect(() => {
+    setSortParams((prevState) => getSortParamsFromQuery(prevState));
     setPaginationParams((prevState) => ({
       ...prevState,
       currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
       countPerPage: +searchParams.get(URL_QUERIES_NAME.countPerPage) || 9
     }));
     setFilterParams(getFilterParamsFromQuery(searchParams));
-
-    refetch();
-  }, [search]);
+  }, [searchParams]);
 
   const changeHandler = (e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);

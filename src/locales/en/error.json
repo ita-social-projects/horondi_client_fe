@@ -8,14 +8,14 @@
   "flat": "Min value is 1 character",
   "onlyLetter": "Field should contain only letters",
   "emailLength": "Field should contain from 8 to 60 characters",
-  "wrongFormat": "Wrong format",
+  "wrongFormat": "Field should contain letters, apostrophes, hyphens and spaces",
   "textLength": "Field should contain from 2 to 700 characters",
 
   "profile": {
     "firstName": "Field should contain from 2 to 30 characters",
     "lastName": "Field should contain from 2 to 30 characters",
     "message": "Field should contain from 2 to 500 characters",
-    "email": "Wrong email address ",
+    "email": "Wrong email address, ",
     "pass": "From 6 to 30 characters with one capital letter and one digit",
     "text": "Field should contain from 2 to 700 characters",
     "phoneNumber": "Incorrect phone number format",

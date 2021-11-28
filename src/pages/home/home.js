@@ -12,7 +12,7 @@ const Home = () => {
   const styles = useStyles();
 
   const homeRef = useRef(null);
-  const homeElement = useMemo(() => homeRef, [homeRef.current]);
+  const homeElement = useMemo(() => homeRef, []);
 
   return (
     <div ref={homeRef} className={styles.home} data-cy='home-page'>

@@ -2,17 +2,16 @@
   "confirmEmail": "You successfully registered! Please, confirm your e-mail for Log In.",
   "continueShopping": "Continue shopping",
   "formConsent": {
-    "text": "By clicking Register, you agree with our",
-    "link": "terms of service"
+    "text": "By clicking Register, you agree to our ",
+    "link": "Public offer"
   },
-  "formLabel": "Register",
+  "formLabel": "Registration",
   "loginFormLabel": "Log in",
   "placeholders": {
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
-    "password": "Password",
-    "passwordConfirm": "Confirm the password"
+    "firstName": "First name*",
+    "lastName": "Last name*",
+    "email": "Email*",
+    "password": "Password*"
   },
-  "googleSignIn": "or use your Google account to register"
+  "googleSignIn": "or Register with"
 }

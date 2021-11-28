@@ -10,6 +10,7 @@ import { useStyles } from '../../../../checkout/checkout-form/checkout-form.styl
 
 import { getCurrencySign } from '../../../../../utils/currency';
 import { getProductById } from '../../../operations/order.queries';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 
 const OrderItem = ({ product }) => {
   const styles = useStyles();
@@ -25,7 +26,7 @@ const OrderItem = ({ product }) => {
 
   if (loading) return <Loader width={90} height={50} heightWrap={50} />;
 
-  if (error) return 'Error when loading product';
+  if (error) return errorOrLoadingHandler(error);
 
   const orderItem = data.getProductById;
 

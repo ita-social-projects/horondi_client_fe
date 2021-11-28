@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
+import {
+  clearNewCart,
+  getFromLocalStorage,
+  setToLocalStorage
+} from '../services/local-storage.service';
 import { calcPriceForCart } from '../utils/priceCalculating';
 import { CART_KEY } from '../configs';
 
 export const useCart = (user = null) => {
-  const [cart, setCart] = useState([...getFromLocalStorage(CART_KEY)]);
+  const [cart, setCart] = useState(getFromLocalStorage(CART_KEY) || []);
 
   useEffect(() => {
     setToLocalStorage(CART_KEY, [...cart]);
@@ -15,7 +19,7 @@ export const useCart = (user = null) => {
   };
 
   const clearCart = () => {
-    setCart([]);
+    clearNewCart();
   };
 
   const getCartItem = (id) => cart.find((cartItem) => cartItem.id === id);

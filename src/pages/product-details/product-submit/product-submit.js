@@ -18,7 +18,6 @@ import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.ac
 import routes from '../../../configs/routes';
 import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
 import { useCart } from '../../../hooks/use-cart';
-import { addToCart } from '../../../redux/newCart/cart.actions';
 
 const { pathToCart } = routes;
 
@@ -32,7 +31,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
 
   const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
 
-  const { addToCart: addToCartHook } = cartOperations;
+  const { addToCart } = cartOperations;
   const cartTootipTitle = isItemInCart
     ? t('product.tooltips.itemInCart')
     : t('product.tooltips.itemInCartAlready');
@@ -51,7 +50,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
       const sizeAndPrice = product.sizes.find(
         (size) => size.size._id === productToSend.options.size._id && size
       );
-      const testCart = {
+      const newCart = {
         id: Date.now(),
         productId: productToSend.product._id,
         sizeAndPrice,
@@ -64,14 +63,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
           cartItem: productToSend
         };
 
-        dispatch(addToCart(testCart));
-
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
         dispatch(addItemToCart(productToSend));
       }
 
-      addToCartHook(testCart);
+      addToCart(newCart);
 
       dispatch(setToastMessage(t('product.toastMessage.addedToCard')));
       dispatch(setToastSettings(toastSettings));
@@ -81,7 +78,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
   };
 
   const goToCheckout = () => {
-    dispatch(push(pathToCart));
+    new Promise((resolve) => resolve()).then(() => dispatch(push(pathToCart)));
   };
 
   const onAddToCheckout = () => {

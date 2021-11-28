@@ -1,10 +1,10 @@
 export const USER_ERROR = {
   USER_ALREADY_EXIST: [
     {
-      value: 'Користувач за вказаним емейлом вже існує'
+      value: 'Користувач з такою електронною поштою вже зареєстрований'
     },
     {
-      value: 'User with given email already exists'
+      value: 'An account with this email already exists'
     }
   ],
   USER_NOT_AUTHORIZED: [

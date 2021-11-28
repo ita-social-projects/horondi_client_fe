@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   categoryItem: (props) => ({
     backgroundImage: `url("${props.image}")`,
     backgroundPosition: 'center',
@@ -29,8 +29,8 @@ export const useStyles = makeStyles(() => ({
     '&:hover:after, &:hover > div': {
       opacity: 1
     },
-    '&:hover > span:first-child': {
-      color: 'white'
+    '&:hover > span': {
+      display: 'none'
     },
     '@media (max-width: 768px)': {
       width: 'calc(100% - 40px)',
@@ -39,22 +39,24 @@ export const useStyles = makeStyles(() => ({
   }),
   categoryInner: {
     position: 'absolute',
-    bottom: 20,
-    left: '50%',
+    bottom: '5%',
+    left: '35%',
     opacity: 0,
     zIndex: 10,
     color: 'white',
-    fontSize: '1.3em',
+    fontFamily: 'Open Sans',
+    fontSize: '1.4em',
+    textTransform: 'uppercase',
     transform: 'translateX(-50%)',
-    width: '100%',
-    '& span': {
-      marginLeft: '5px'
-    }
+    width: '100%'
   },
   categoryName: {
-    fontSize: '2em',
-    textTransform: 'uppercase',
+    position: 'absolute',
+    fontFamily: 'Open Sans',
+    bottom: '5%',
+    fontSize: ' 20px',
     fontWeight: '600',
-    zIndex: 10
+    zIndex: 11,
+    color: theme.palette.textColor
   }
 }));

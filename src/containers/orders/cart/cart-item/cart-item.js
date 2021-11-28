@@ -136,17 +136,11 @@ const CartItem = ({ item, language, user, setModalVisibility, setModalItem }) =>
         </div>
       </TableCell>
       <TableCell className={styles.quantityWrapper}>
-        {/* {!false ? ( */}
         <NumberInput
           quantity={inputValue}
           onChangeQuantity={onChangeQuantity}
           setInputValue={setInputValue}
         />
-        {/* ) : ( */}
-        {/*  <span className={styles.loadingBar}> */}
-        {/*    <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={30} /> */}
-        {/*  </span> */}
-        {/* )} */}
       </TableCell>
       <TableCell classes={{ root: styles.price }}>
         <div className={styles.priceWrapper}>

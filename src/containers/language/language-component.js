@@ -20,7 +20,7 @@ const LanguageComponent = ({ fromSideBar }) => {
     if (!fromSideBar) {
       dispatch(changeLanguage(languageInLocalStorage));
     }
-  }, [dispatch]);
+  }, [dispatch, fromSideBar]);
 
   const { i18n } = useTranslation();
 

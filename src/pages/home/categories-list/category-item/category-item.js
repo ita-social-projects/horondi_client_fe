@@ -19,11 +19,11 @@ const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
 
   return (
     <Link className={styles.categoryItem} to={`/${categoryUrl}`}>
-      <span className={styles.categoryName}>{categoryName}</span>
       <div className={styles.categoryInner}>
-        {t('home.moveToCategory')}
+        {t('home.moveToCategory')} {categoryName}
         <span>&#8594;</span>
       </div>
+      <span className={styles.categoryName}>{categoryName}</span>
     </Link>
   );
 };

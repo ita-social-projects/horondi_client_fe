@@ -9,7 +9,8 @@ import {
   RESPONSIVE_CATEGORIES,
   URL_QUERIES_NAME,
   countPerPage
-} from '../../../configs';
+} from '../../../configs/index';
+
 import { CategoriesContext } from '../../../context/categories/categories-context';
 import { useStyles } from './categories-list.style';
 
@@ -36,6 +37,7 @@ const CategoriesList = () => {
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>
+      <h2 className={styles.categoryTitle}> {t('home.ourProducts')} </h2>
       <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable>
         {categoriesList}
       </Carousel>

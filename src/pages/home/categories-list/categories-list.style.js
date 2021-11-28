@@ -33,5 +33,19 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: '2em',
     color: theme.palette.textColor
+  },
+  categoryTitle: {
+    position: 'absolute',
+    margin: 0,
+    top: 10,
+    left: 80,
+    zIndex: '10',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '40px',
+    lineHeight: '46px',
+    letterSpacing: '0.0025em',
+    color: theme.palette.textColor
   }
 }));

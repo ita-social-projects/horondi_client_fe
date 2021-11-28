@@ -44,7 +44,7 @@ const ThanksPage = () => {
     } else {
       dispatch(getOrder());
     }
-  }, []);
+  }, [dispatch, router.search, user]);
 
   if (loading || paidOrderLoading) {
     return <Loader data-testid='loader' />;

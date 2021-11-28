@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
@@ -24,13 +24,18 @@ export default function RegisterForm({
 }) {
   const styles = useStyles();
   const { t } = useTranslation();
-
-  const type = (name) => {
-    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
-      return USER_REGISTER_LABELS.pass;
-    }
-    return USER_REGISTER_LABELS.text;
+  const [checked, setChecked] = useState(false);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
+  const consentLink = (
+    <div className={styles.consentMessage}>
+      {t('register.formConsent.text')}
+      <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
+        {t('register.formConsent.link')}
+      </Link>
+    </div>
+  );
 
   return (
     <Form className={styles.registerForm}>
@@ -42,7 +47,7 @@ export default function RegisterForm({
           {Object.keys(values).map((name) => (
             <Field
               key={name}
-              type={type(name)}
+              type={name}
               name={name}
               as={TextField}
               label={t(`register.placeholders.${name}`)}
@@ -54,26 +59,25 @@ export default function RegisterForm({
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}
               InputProps={
-                name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm
+                name === USER_REGISTER_LABELS.pass
                   ? endAdornment(showPassword, setShowPassword)
                   : {}
               }
             />
           ))}
-
-          <div className={styles.consentMessage}>
-            {' '}
-            {`${t('register.formConsent.text')} `}
-            <Link className={styles.consentLink} to={pathToTerms} target='_blank' rel='noreferrer'>
-              {t('register.formConsent.link')}{' '}
-            </Link>
-          </div>
+          <FormControlLabel
+            checked={checked}
+            onChange={handleChange}
+            control={<Checkbox className={styles.checkbox} />}
+            label={consentLink}
+          />
           <div className={styles.registerGroup}>
             <Button
               className={styles.registerBtn}
               fullWidth
               type='submit'
               onClick={setShouldValidate}
+              disabled={!checked}
             >
               {t('register.formLabel')}
             </Button>

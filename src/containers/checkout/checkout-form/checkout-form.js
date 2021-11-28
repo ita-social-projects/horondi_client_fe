@@ -14,12 +14,11 @@ import DeliveryType from './delivery-type';
 import { useStyles } from './checkout-form.styles';
 import {
   CY_CODE_ERR,
-  SESSION_STORAGE,
   deliveryTypes,
+  SESSION_STORAGE,
   TEXT_FIELD_SIZE,
   TEXT_FIELD_VARIANT
 } from '../../../configs';
-import { calcPriceForCart } from '../../../utils/priceCalculating';
 import Delivery from './delivery';
 import routes from '../../../configs/routes';
 import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
@@ -28,9 +27,9 @@ import {
   checkoutFormBtnValue,
   checkoutPropTypes,
   getCurrentCurrency,
+  getThemeColor,
   handleError,
   initialValues,
-  getThemeColor,
   orderInputData,
   setUserValues,
   userContactInputLabels,
@@ -45,6 +44,8 @@ import {
 } from '../../../services/session-storage.service';
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
+import { calcPriceForCart } from '../../../utils/priceCalculating';
+import { useCart } from '../../../hooks/use-cart';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 
@@ -54,7 +55,9 @@ const CheckoutForm = ({ currency, cartItems }) => {
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-
+  const {
+    cartOperations: { clearCart }
+  } = useCart(userData);
   const dispatch = useDispatch();
   const totalPriceToPay = cartItems.reduce(
     (previousValue, currentValue) =>
@@ -105,6 +108,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
           : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
             dispatch(addPaymentMethod(checkoutPayMethod.cash));
         clearSessionStorage();
+        clearCart();
       }
     });
 

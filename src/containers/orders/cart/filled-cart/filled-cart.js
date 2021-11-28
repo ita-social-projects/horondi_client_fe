@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
@@ -8,32 +8,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
-import { calcPriceForCart } from '../../../../utils/priceCalculating';
-import SimilarProducts from '../../../../pages/product-details/similar-products';
 import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
+import SimilarProducts from '../../../../pages/product-details/similar-products';
 
-const FilledCart = ({ items }) => {
+const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { pathToCategory, pathToCheckout } = routes;
 
-  const { language, currency, cartList, cartLoading, cartQuantityLoading, user } = useSelector(
-    ({ Language, Currency, Cart, User }) => ({
-      language: Language.language,
+  const { pathToCategory, pathToCheckout } = routes;
+  const [price, setPrice] = useState();
+
+  const { currency, cartLoading, user, cartList } = useSelector(
+    ({ Currency, Cart, User, NewCart }) => ({
       currency: Currency.currency,
       cartList: Cart.list,
       cartLoading: Cart.loading,
+      newCartList: NewCart.list,
       cartQuantityLoading: Cart.quantityLoading,
-      cartUserTotalPrice: Cart.totalPrice,
       user: User.userData
     })
   );
 
   const currencySign = getCurrencySign(currency);
-  const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
+  const { getTotalPrice } = cartOperations;
+
+  useEffect(() => {
+    setPrice(getTotalPrice(currency));
+  }, [items, currency]);
 
   if (cartLoading) {
     return <Loader />;
@@ -45,15 +49,7 @@ const FilledCart = ({ items }) => {
       <div className={styles.root} data-cy='filled-cart'>
         <div className={styles.orderWrapper}>
           <div className={styles.orderTable}>
-            <OrderTable
-              calcPrice={calcPriceForCart}
-              currency={currency}
-              items={items}
-              language={language}
-              user={user}
-              cartLoading={cartLoading}
-              cartQuantityLoading={cartQuantityLoading}
-            />
+            <OrderTable items={items} user={user} cartOperations={cartOperations} />
           </div>
         </div>
         <div>
@@ -79,7 +75,7 @@ const FilledCart = ({ items }) => {
                 <span>{t('cart.totalPrice')}</span>
               </div>
               <div className={styles.totalPrice}>
-                <FontAwesomeIcon icon={currencySign} /> {totalPrice}
+                <FontAwesomeIcon icon={currencySign} /> {price}
               </div>
               <Link to={pathToCheckout}>
                 <Button variant='contained' className={styles.ordersButton}>

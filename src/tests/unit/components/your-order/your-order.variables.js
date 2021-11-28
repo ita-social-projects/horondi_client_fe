@@ -7,205 +7,118 @@ export const mockedProps = {
   deliveryType: ''
 };
 
+export const ids = ['1637938395612', '1637938905565'];
+
 export const mockedCartItemsData = [
   {
-    _id: '1',
-    product: {
-      _id: '1',
-      name: [
-        {
-          lang: 'ua',
-          value: 'Роллтоп жовтий'
-        },
-        {
-          lang: 'en',
-          value: 'Rolltop yellow'
-        }
-      ],
-      category: {
-        _id: '1'
-      },
-      bottomMaterial: {
-        material: {
-          name: [
-            {
-              lang: 'ua',
-              value: 'Шкірзамінник'
-            },
-            {
-              lang: 'en',
-              value: 'Leatherette'
-            }
-          ]
-        }
-      },
-      mainMaterial: {
-        color: {
-          _id: '1',
-          name: [
-            {
-              lang: 'ua',
-              value: 'Синій'
-            },
-            {
-              lang: 'en',
-              value: 'Blue'
-            }
-          ]
-        }
-      },
-      pattern: {
-        _id: '1'
-      },
-      images: {
-        primary: {
-          small: 'small_4051pm10kty4jeer_19.png',
-          thumbnail: 'thumbnail_4051pm10kty4jeer_19.png'
-        }
-      }
-    },
-    quantity: 1,
-    options: {
+    id: ids[0],
+    productId: '61938f3f47ff1a3ccc1ac5e7',
+    sizeAndPrice: {
       size: {
-        _id: '1',
-        name: 'S'
-      }
-    },
-    allSizes: [
-      {
-        size: {
-          _id: '1',
-          name: 'S'
-        },
-        price: [
-          {
-            currency: 'UAH',
-            value: 2050
-          },
-          {
-            currency: 'USD',
-            value: 78
-          }
-        ]
-      }
-    ],
-    price: [
-      {
-        currency: 'UAH',
-        value: 2050
+        _id: '604394a2a7532c33dcb326d5',
+        name: 'L'
       },
-      {
-        currency: 'USD',
-        value: 78
-      }
-    ]
+      price: [
+        {
+          value: 1000,
+          currency: 'UAH'
+        },
+        {
+          value: 37,
+          currency: 'USD'
+        }
+      ]
+    },
+    quantity: 4
   },
   {
-    _id: '2',
-    product: {
-      _id: '1',
-      name: [
-        {
-          lang: 'ua',
-          value: 'Сумка шопер'
-        },
-        {
-          lang: 'en',
-          value: 'Bag shopper'
-        }
-      ],
-      category: {
-        _id: '1'
-      },
-      bottomMaterial: {
-        material: {
-          name: [
-            {
-              lang: 'ua',
-              value: 'Шкіра'
-            },
-            {
-              lang: 'en',
-              value: 'Leather'
-            }
-          ]
-        }
-      },
-      mainMaterial: {
-        color: {
-          _id: '1',
-          name: [
-            {
-              lang: 'ua',
-              value: 'Жовтий'
-            },
-            {
-              lang: 'en',
-              value: 'Yellow'
-            }
-          ]
-        }
-      },
-      pattern: {
-        _id: '1'
-      },
-      images: {
-        primary: {
-          small: 'small_4051pn10ku36orx1_bag4.png',
-          thumbnail: 'thumbnail_4051pn10ku36orx1_bag4.png'
-        }
-      }
-    },
-    quantity: 1,
-    options: {
+    id: ids[1],
+    productId: '6197b469b0263814e80359af',
+    sizeAndPrice: {
       size: {
-        _id: '1',
-        name: 'S'
-      }
+        _id: '604394a2a7532c33dcb326d5',
+        name: 'L',
+        heightInCm: 23,
+        widthInCm: 28,
+        depthInCm: 14,
+        volumeInLiters: 24,
+        weightInKg: 1.5,
+        available: true
+      },
+      price: [
+        {
+          value: 1050,
+          currency: 'UAH'
+        },
+        {
+          value: 39,
+          currency: 'USD'
+        }
+      ]
     },
-    allSizes: [
-      {
-        size: {
-          _id: '1',
-          name: 'S'
-        },
-        price: [
-          {
-            currency: 'UAH',
-            value: 900
-          },
-          {
-            currency: 'USD',
-            value: 35
-          }
-        ]
-      },
-      {
-        size: {
-          _id: '1',
-          name: 'M'
-        },
-        price: [
-          {
-            currency: 'UAH',
-            value: 1000
-          },
-          {
-            currency: 'USD',
-            value: 37
-          }
-        ]
-      }
-    ],
-    price: [
-      {
-        currency: 'UAH',
-        value: 900
-      },
-      {
-        currency: 'USD',
-        value: 35
-      }
-    ]
+    quantity: 1
   }
 ];
+
+export const mockTranslationsKey = '61840da5a40f604a050ce412';
+export const mockNameUA = 'Test Product UA';
+export const mockNameEN = 'Test Product EN';
+
+export const mockQueryData = {
+  __typename: 'Product',
+  _id: '61938f3f47ff1a3ccc1ac5e7',
+  name: [
+    {
+      lang: 'ua',
+      value: mockNameUA
+    },
+    {
+      lang: 'en',
+      value: mockNameEN
+    }
+  ],
+  bottomMaterial: {
+    material: {
+      translationsKey: mockTranslationsKey
+    }
+  },
+  images: {
+    primary: {
+      thumbnail: 'thumbnail_hd0lc0ckw1zhymv_photo_2021-11-16_10-30-29.jpg'
+    }
+  },
+  sizes: [
+    {
+      size: {
+        _id: '604394a2a7532c33dcb326d5',
+        name: 'L'
+      },
+      price: [
+        {
+          value: 1000,
+          currency: 'UAH'
+        },
+        {
+          value: 37,
+          currency: 'USD'
+        }
+      ]
+    },
+    {
+      size: {
+        _id: '604394cba7532c33dcb326d6',
+        name: 'M'
+      },
+      price: [
+        {
+          value: 950,
+          currency: 'UAH'
+        },
+        {
+          value: 36,
+          currency: 'USD'
+        }
+      ]
+    }
+  ]
+};

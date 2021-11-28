@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../cart-item';
-import { props, item } from './cart-item.variables';
+import { mockQueryData, props } from './cart-item.variables';
 
 jest.mock('react-redux');
 jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
@@ -42,17 +42,18 @@ jest.mock('@material-ui/styles', () => ({
 }));
 
 let component;
+const mockChangeQuantity = jest.fn();
+const mockCartOperations = { changeQuantity: mockChangeQuantity };
+
+jest.mock('@apollo/client', () => ({
+  ...jest.requireActual('@apollo/client'),
+  useQuery: () => ({ loading: false, error: null, data: { getProductById: mockQueryData } })
+}));
 
 describe('Filled cart component tests', () => {
   it('should render CartItem ', () => {
     testSelection(false);
-    component = shallow(<CartItem {...props} />);
+    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
     expect(component).toBeDefined();
-  });
-
-  it('should cover other branches', () => {
-    testSelection(true);
-    item.product.bottomMaterial = { material: { name: [{ value: 'value' }] } };
-    component = shallow(<CartItem {...props} user={null} cartQuantityLoading />);
   });
 });

@@ -17,22 +17,21 @@ import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.ac
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
 import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
+import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
 const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { productToSend, userData, cartList } = useSelector(selectLanguageProductsUserWishlist);
+  const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
+  const { cartOperations, isInCart } = useCart(userData);
 
   const { t } = useTranslation();
 
-  const isItemInCart = cartList.find(
-    (item) =>
-      productToSend.product._id === item.product._id &&
-      productToSend.options.size._id === item.options.size._id
-  );
+  const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
 
+  const { addToCart } = cartOperations;
   const cartTootipTitle = isItemInCart
     ? t('product.tooltips.itemInCart')
     : t('product.tooltips.itemInCartAlready');
@@ -48,15 +47,29 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
       return;
     }
     if (product) {
+      const sizeAndPrice = product.sizes.find(
+        (size) => size.size._id === productToSend.options.size._id && size
+      );
+      const newCart = {
+        id: Date.now(),
+        productId: productToSend.product._id,
+        sizeAndPrice,
+        quantity: 1
+      };
+
       if (userData) {
         const newCartItemWithUserId = {
           userId: userData._id,
           cartItem: productToSend
         };
+
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
         dispatch(addItemToCart(productToSend));
       }
+
+      addToCart(newCart);
+
       dispatch(setToastMessage(t('product.toastMessage.addedToCard')));
       dispatch(setToastSettings(toastSettings));
     } else {
@@ -65,7 +78,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
   };
 
   const goToCheckout = () => {
-    dispatch(push(pathToCart));
+    new Promise((resolve) => resolve()).then(() => dispatch(push(pathToCart)));
   };
 
   const onAddToCheckout = () => {

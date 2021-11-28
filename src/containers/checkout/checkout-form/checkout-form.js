@@ -89,7 +89,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
     </div>
   );
 
-  const { dirty, values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
     useFormik({
       validationSchema: validationSchema(deliveryType, t),
       initialValues,
@@ -113,23 +113,23 @@ const CheckoutForm = ({ currency, cartItems }) => {
     });
 
   const courierDependencyArr = [deliveryTypes.NOVAPOSTCOURIER, deliveryTypes.UKRPOSTCOURIER];
-  const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
 
   useEffect(() => {
     if (userData && !getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM)) {
       resetForm({ values: setUserValues(values, userData, deliveryType) });
     }
-  }, [userData]);
+  }, [userData, resetForm]);
 
   useEffect(() => {
-    dirty && setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
+    setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
   }, [values]);
 
   useEffect(() => {
     resetForm({ values: getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM) });
-  }, []);
+  }, [resetForm]);
 
   useEffect(() => {
+    const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
     if (!isCourier(deliveryType)) {
       resetForm({
         values: {
@@ -146,7 +146,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
         }
       });
     }
-  }, [deliveryType]);
+  }, [deliveryType, resetForm]);
 
   return (
     <div>

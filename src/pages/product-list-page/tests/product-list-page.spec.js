@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import ProductListPage from '../product-list-page';
 
@@ -7,35 +6,27 @@ jest.mock('react-redux');
 jest.mock('../product-list-page.styles', () => ({
   useStyles: () => ({})
 }));
+
+jest.mock('../product-list-filter/product-list-filter.styles', () => ({
+  useStyles: () => ({})
+}));
+
+jest.mock('../count-per-page/count-per-page.styles.js', () => ({
+  useStyles: () => ({})
+}));
+
 jest.mock('@apollo/client');
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: 10 }),
   useHistory: () => jest.fn()
 }));
 
-const filters = {
-  modelsFilter: [],
-  categoryFilter: [],
-  colorsFilter: [],
-  patternsFilter: [],
-  isHotItemFilter: false
-};
+jest.mock('connected-react-router', () => ({
+  push: jest.fn()
+}));
 
-useSelector.mockImplementation(() => ({
-  filterMenuStatus: true,
-  loading: true,
-  language: 0,
-  products: [],
-  pagesCount: 1,
-  sortByRate: 0,
-  sortByPrice: 0,
-  filters,
-  filterData: {},
-  sortByPopularity: -1,
-  countPerPage: 9,
-  currentPage: 1,
-  currency: 0,
-  filterStatus: true
+jest.mock('react-redux', () => ({
+  useSelector: () => ({ currency: 0 })
 }));
 
 describe('ProductListPage component tests', () => {

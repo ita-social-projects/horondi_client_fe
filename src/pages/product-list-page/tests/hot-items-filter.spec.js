@@ -6,7 +6,7 @@ jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()
 }));
-jest.mock('../product-list-filter/hot-item-filter/hot-item-filter.styles.js', () => ({
+jest.mock('../product-list-filter/product-list-filter.styles.js', () => ({
   useStyles: () => ({})
 }));
 

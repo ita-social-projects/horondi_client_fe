@@ -27,6 +27,12 @@ export const useStyles = makeStyles(() => ({
     lineHeight: '100px',
     letterSpacing: '-0.005em',
     color: '#FEFEFE',
+    '@media (max-width: 1600px)': {
+      fontSize: '60px'
+    },
+    '@media (max-width: 1200px)': {
+      fontSize: '50px'
+    },
     '@media (max-width: 768px)': {
       fontSize: '35px',
       lineHeight: '50px'
@@ -49,8 +55,17 @@ export const useStyles = makeStyles(() => ({
     marginLeft: '165px',
     marginTop: '550px',
     position: 'absolute',
+    '@media (max-width: 1600px)': {
+      marginLeft: '165px',
+      marginTop: '600px'
+    },
+    '@media (max-width: 1100px)': {
+      marginLeft: '165px',
+      marginTop: '700px'
+    },
     '@media (max-width: 768px)': {
       marginLeft: '50px',
+      marginTop: '450px',
       width: '60vw'
     }
   },

@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -12,28 +12,32 @@ import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
-import { clearCart as clearNewCart } from '../../../../redux/newCart/cart.actions';
-import { resetCart } from '../../../../redux/cart/cart.actions';
-import { useCart } from '../../../../hooks/use-cart';
+import SimilarProducts from '../../../../pages/product-details/similar-products';
 
-const FilledCart = ({ items }) => {
+const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+
   const { pathToCategory, pathToCheckout } = routes;
+  const [price, setPrice] = useState();
 
-  const { currency, cartLoading, user } = useSelector(({ Currency, Cart, User, NewCart }) => ({
-    currency: Currency.currency,
-    cartList: Cart.list,
-    cartLoading: Cart.loading,
-    newCartList: NewCart.list,
-    cartQuantityLoading: Cart.quantityLoading,
-    user: User.userData
-  }));
+  const { currency, cartLoading, user, cartList } = useSelector(
+    ({ Currency, Cart, User, NewCart }) => ({
+      currency: Currency.currency,
+      cartList: Cart.list,
+      cartLoading: Cart.loading,
+      newCartList: NewCart.list,
+      cartQuantityLoading: Cart.quantityLoading,
+      user: User.userData
+    })
+  );
 
-  const { getTotalPrice, cart } = useCart(user);
-  const totalPrice = useMemo(() => getTotalPrice(currency), [cart]);
   const currencySign = getCurrencySign(currency);
+  const { getTotalPrice } = cartOperations;
+
+  useEffect(() => {
+    setPrice(getTotalPrice(currency));
+  }, [items, currency]);
 
   if (cartLoading) {
     return <Loader />;
@@ -45,7 +49,7 @@ const FilledCart = ({ items }) => {
       <div className={styles.root} data-cy='filled-cart'>
         <div className={styles.orderWrapper}>
           <div className={styles.orderTable}>
-            <OrderTable items={items} user={user} />
+            <OrderTable items={items} user={user} cartOperations={cartOperations} />
           </div>
         </div>
         <div>
@@ -71,17 +75,8 @@ const FilledCart = ({ items }) => {
                 <span>{t('cart.totalPrice')}</span>
               </div>
               <div className={styles.totalPrice}>
-                <FontAwesomeIcon icon={currencySign} /> {totalPrice}
+                <FontAwesomeIcon icon={currencySign} /> {price}
               </div>
-              <Button
-                variant='contained'
-                onClick={() => {
-                  dispatch(clearNewCart());
-                  dispatch(resetCart());
-                }}
-              >
-                Clear cart
-              </Button>
               <Link to={pathToCheckout}>
                 <Button variant='contained' className={styles.ordersButton}>
                   {t('cart.checkout')}
@@ -90,7 +85,7 @@ const FilledCart = ({ items }) => {
             </div>
           </div>
         </div>
-        {/* <SimilarProducts cartList={cartList} /> */}
+        <SimilarProducts cartList={cartList} />
       </div>
     </>
   );

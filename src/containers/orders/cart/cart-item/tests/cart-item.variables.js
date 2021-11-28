@@ -1,14 +1,25 @@
 export const item = {
-  price: [{ currency: 'ua', value: 100 }],
-  quantity: 1,
-  options: { size: { _id: 'some id' } },
-  product: {
-    _id: 'some id',
-    images: { primary: { thumbnail: '/img' } },
-    name: [{ value: 'ua' }]
+  id: 1637938395612,
+  productId: '61938f3f47ff1a3ccc1ac5e7',
+  sizeAndPrice: {
+    size: {
+      _id: '604394a2a7532c33dcb326d5',
+      name: 'L'
+    },
+    price: [
+      {
+        value: 1000,
+        currency: 'UAH'
+      },
+      {
+        value: 37,
+        currency: 'USD'
+      }
+    ]
   },
-  allSizes: [{ size: { _id: 'some id', name: 'some name' } }]
+  quantity: 4
 };
+
 export const props = {
   item,
   language: 0,
@@ -18,4 +29,63 @@ export const props = {
   cartQuantityLoading: false,
   setModalVisibility: () => null,
   setModalItem: () => null
+};
+
+export const mockQueryData = {
+  __typename: 'Product',
+  _id: '61938f3f47ff1a3ccc1ac5e7',
+  name: [
+    {
+      lang: 'ua',
+      value: 'Test product UA'
+    },
+    {
+      lang: 'en',
+      value: 'Test product EN'
+    }
+  ],
+  bottomMaterial: {
+    material: {
+      translationsKey: '61938f3f47ff1a3ccc1ac5e2'
+    }
+  },
+  images: {
+    primary: {
+      thumbnail: 'thumbnail_hd0lc0ckw1zhymv_photo_2021-11-16_10-30-29.jpg'
+    }
+  },
+  sizes: [
+    {
+      size: {
+        _id: '604394a2a7532c33dcb326d5',
+        name: 'L'
+      },
+      price: [
+        {
+          value: 1000,
+          currency: 'UAH'
+        },
+        {
+          value: 37,
+          currency: 'USD'
+        }
+      ]
+    },
+    {
+      size: {
+        _id: '604394cba7532c33dcb326d6',
+        name: 'M'
+      },
+      price: [
+        {
+          value: 950,
+          currency: 'UAH'
+        },
+        {
+          value: 36,
+          currency: 'USD'
+        }
+      ]
+    }
+  ]
 };

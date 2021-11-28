@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import i18next from 'i18next';
 import {
+  COURIER,
   DEFAULT_CURRENCY,
   deliveryTypes,
-  SESSION_STORAGE,
-  COURIER,
-  MATERIAL_UI_COLOR
+  MATERIAL_UI_COLOR,
+  SESSION_STORAGE
 } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';

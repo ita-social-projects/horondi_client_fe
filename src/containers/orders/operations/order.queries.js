@@ -10,7 +10,7 @@ export const getProductById = gql`
           lang
           value
         }
-        mainMaterial {
+        bottomMaterial {
           material {
             translationsKey
           }
@@ -24,6 +24,7 @@ export const getProductById = gql`
           size {
             _id
             name
+            available
           }
           price {
             value

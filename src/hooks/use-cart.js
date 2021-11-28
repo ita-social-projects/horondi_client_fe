@@ -28,9 +28,11 @@ export const useCart = (user = null) => {
     setCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
   };
 
-  const isInCart = (productId, sizeId) =>
+  const isInCart = (productId, sizeId = null) =>
     cart.find(
-      (cartItem) => productId === cartItem.productId && sizeId === cartItem.sizeAndPrice.size._id
+      (cartItem) =>
+        productId === cartItem.productId &&
+        (sizeId ? sizeId === cartItem.sizeAndPrice.size._id : true)
     );
 
   const changeQuantity = (id, count) => {

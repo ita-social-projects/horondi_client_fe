@@ -61,7 +61,13 @@ const NewsDetail = ({ match }) => {
               </Typography>
             }
           />
-          <Typography className={styles.articleTitle} gutterBottom variant='h2' component='h2'>
+          <Typography
+            id='mainTitle'
+            className={styles.articleTitle}
+            gutterBottom
+            variant='h2'
+            component='h2'
+          >
             {title}
           </Typography>
           <hr />
@@ -93,7 +99,7 @@ const NewsDetail = ({ match }) => {
             id='newsAuthorAvatar'
           />
           <div className={styles.madeByAuthor}>{t('newsDetail.madeByAuthor')}</div>
-          <Typography className={styles.authorName}>
+          <Typography id='author' className={styles.authorName}>
             {translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
           </Typography>
         </div>

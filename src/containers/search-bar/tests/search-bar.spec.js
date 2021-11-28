@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 
 import SearchBar from '../search-bar';
+import SearchIcon from '../SearchIcon';
 
 jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
@@ -35,6 +36,10 @@ describe('SearchBar component tests', () => {
       />
     );
 
+    expect(component).toBeDefined();
+  });
+  it('Should render SearchIcon component', () => {
+    const component = shallow(<SearchIcon />);
     expect(component).toBeDefined();
   });
 });

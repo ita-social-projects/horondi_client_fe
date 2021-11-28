@@ -6,10 +6,12 @@ const Cart = createSvgIcon(
   'Cart'
 );
 
-export default function CartIcon() {
+function CartIcon() {
   return (
     <>
       <Cart />
     </>
   );
 }
+
+export default CartIcon;

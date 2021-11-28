@@ -28,9 +28,9 @@ import {
   checkoutFormBtnValue,
   checkoutPropTypes,
   getCurrentCurrency,
+  getThemeColor,
   handleError,
   initialValues,
-  getThemeColor,
   orderInputData,
   setUserValues,
   userContactInputLabels,
@@ -45,6 +45,7 @@ import {
 } from '../../../services/session-storage.service';
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
+import { useCart } from '../../../hooks/use-cart';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 
@@ -54,7 +55,9 @@ const CheckoutForm = ({ currency, cartItems }) => {
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-
+  const {
+    cartOperations: { clearCart }
+  } = useCart(userData);
   const dispatch = useDispatch();
   const totalPriceToPay = cartItems.reduce(
     (previousValue, currentValue) =>
@@ -86,7 +89,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
     </div>
   );
 
-  const { dirty, values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
     useFormik({
       validationSchema: validationSchema(deliveryType, t),
       initialValues,
@@ -105,27 +108,28 @@ const CheckoutForm = ({ currency, cartItems }) => {
           : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
             dispatch(addPaymentMethod(checkoutPayMethod.cash));
         clearSessionStorage();
+        clearCart();
       }
     });
 
   const courierDependencyArr = [deliveryTypes.NOVAPOSTCOURIER, deliveryTypes.UKRPOSTCOURIER];
-  const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
 
   useEffect(() => {
     if (userData && !getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM)) {
       resetForm({ values: setUserValues(values, userData, deliveryType) });
     }
-  }, [userData]);
+  }, [userData, resetForm]);
 
   useEffect(() => {
-    dirty && setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
+    setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
   }, [values]);
 
   useEffect(() => {
     resetForm({ values: getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM) });
-  }, []);
+  }, [resetForm]);
 
   useEffect(() => {
+    const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
     if (!isCourier(deliveryType)) {
       resetForm({
         values: {
@@ -142,7 +146,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
         }
       });
     }
-  }, [deliveryType]);
+  }, [deliveryType, resetForm]);
 
   return (
     <div>

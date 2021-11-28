@@ -3,7 +3,7 @@ import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { useEffect, useState } from 'react';
-import { TEXT_FIELDS, URL_QUERIES_NAME, FILTERS_KEYS } from '../../configs';
+import { TEXT_FIELDS, URL_QUERIES_NAME } from '../../configs';
 
 const useProductFilters = (filterParams, filtersList) => {
   const { search } = useLocation();
@@ -14,7 +14,7 @@ const useProductFilters = (filterParams, filtersList) => {
   const searchParams = new URLSearchParams(search);
 
   const language = i18n.language === 'ua' ? 0 : 1;
-  const filterNames = ['category', 'model', 'pattern'];
+  const filterNames = ['category', 'models', 'patterns'];
   const queriesNames = [
     URL_QUERIES_NAME.categoryFilter,
     URL_QUERIES_NAME.modelsFilter,
@@ -47,7 +47,7 @@ const useProductFilters = (filterParams, filtersList) => {
     Object.keys(filtersList).forEach((key, index) => {
       data[key] = {
         filterName: t(`common.${filterNames[index]}`),
-        productFilter: filterParams[FILTERS_KEYS[index]] || [],
+        productFilter: filterParams[filterNames[index]] || [],
         list: map(filtersList[key], (el) => el.name[language].value),
         categories: filtersList[key],
         clearFilter: () => handleFilterClear(queriesNames[index]),

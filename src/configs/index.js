@@ -4,6 +4,7 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
+export const CART_KEY = 'newCart';
 
 export const CART_AND_WISHLIST_IMAGES = {
   lightTheme: './images/cart/empty-cart-light-theme-image.png',
@@ -24,8 +25,6 @@ export const USER_TOKENS = {
   ACCESS_TOKEN: 'accessToken',
   REFRESH_TOKEN: 'refreshToken'
 };
-
-export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 
 export const REDIRECT_TIMEOUT = 3000;
 export const DEFAULT_CURRENCY = 0;

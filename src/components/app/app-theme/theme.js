@@ -11,6 +11,11 @@ export default {
   light: {
     textColor: '#000000',
     backgroundColor: '#FFFFFF',
+    catalogPageFilterCell: {
+      hover: {
+        backgroundColor: '#e4e0e0'
+      }
+    },
     button: {
       normal: {
         backgroundColor: '#020202',
@@ -51,6 +56,11 @@ export default {
   dark: {
     textColor: '#FFFFFF',
     backgroundColor: '#353333',
+    catalogPageFilterCell: {
+      hover: {
+        backgroundColor: '#7c7b7b'
+      }
+    },
     button: {
       normal: {
         backgroundColor: '#020202',

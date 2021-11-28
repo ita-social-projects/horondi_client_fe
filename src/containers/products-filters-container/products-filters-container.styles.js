@@ -1,12 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   container: {
     borderBottom: '1px solid gray',
-    padding: '10px 0px'
+    borderTop: '1px solid gray',
+    padding: '24px 0px',
+    '& .Mui-selected': {
+      backgroundColor: 'transparent'
+    }
   },
   mainItem: {
-    color: theme.palette.textColor,
     textTransform: 'uppercase',
     display: 'flex',
     justifyContent: 'space-between',
@@ -19,14 +22,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     '&:hover span': {
       textDecoration: 'underline'
-    }
-  },
-  clearFilter: {
-    cursor: 'pointer',
-    color: 'gray',
-    '&:hover': {
-      textDecoration: 'underline',
-      color: 'red'
     }
   },
   mainItemIcon: {

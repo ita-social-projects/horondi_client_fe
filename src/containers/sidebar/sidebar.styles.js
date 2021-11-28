@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
-      top: fromSideBar ? 0 : 64,
+      top: 64,
       padding: theme.spacing(3),
       zIndex: 11,
       height: fromSideBar ? '100vh' : 'calc(100vh - 64px)',

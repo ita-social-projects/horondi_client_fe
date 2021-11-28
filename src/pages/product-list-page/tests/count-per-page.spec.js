@@ -5,6 +5,9 @@ jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),
   useHistory: () => jest.fn()
 }));
+jest.mock('../count-per-page/count-per-page.styles.js', () => ({
+  useStyles: () => ({})
+}));
 
 describe('Recovery component tests', () => {
   it('Should render Recovery', () => {

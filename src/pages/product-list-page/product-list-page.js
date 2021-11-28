@@ -4,6 +4,7 @@ import { Pagination } from '@material-ui/lab';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
@@ -105,13 +106,7 @@ const ProductListPage = ({ width }) => {
       ? products.map((product) => <ProductListItem key={product._id} product={product} />)
       : null;
   const paginationToShow = (
-    <Pagination
-      count={pagesCount}
-      variant='outlined'
-      shape='rounded'
-      page={currentPage}
-      onChange={changeHandler}
-    />
+    <Pagination count={pagesCount} variant='outlined' page={currentPage} onChange={changeHandler} />
   );
   const paginationCondition = () => {
     if (
@@ -123,51 +118,53 @@ const ProductListPage = ({ width }) => {
     return <div className={styles.paginationDiv}>{paginationToShow}</div>;
   };
   return (
-    <div className={styles.root}>
-      <Typography className={styles.paginationDiv} variant='h3' />
-      <div className={styles.sortDiv}>
-        <ProductSort />
-      </div>
-      <div className={styles.filterButtonBlock}>
-        <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
-          {t('common.showFilters')}
-        </Button>
-      </div>
-      <div className={styles.list}>
-        <Drawer
-          id='menuDrawer'
-          className={styles.drawer}
-          variant={drawerVariant}
-          open={filterMenuStatus}
-          onClose={handleDrawerToggle}
-          classes={{
-            paper: styles.drawerPaper
-          }}
-        >
-          <div className={styles.drawerContainer}>
+    <Container maxWidth='lg'>
+      <div className={styles.root}>
+        <Typography className={styles.header}>{t('common.scrollbar.catalog')}</Typography>
+        <div className={styles.sortDiv}>
+          <ProductSort />
+        </div>
+        <div className={styles.filterButtonBlock}>
+          <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
+            {t('common.showFilters')}
+          </Button>
+        </div>
+        <div className={styles.list}>
+          <Drawer
+            id='menuDrawer'
+            className={styles.drawer}
+            variant={drawerVariant}
+            open={filterMenuStatus}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: styles.drawerPaper
+            }}
+          >
+            <div className={styles.drawerContainer}>
+              <ProductFilter filterParams={filterParams} />
+            </div>
+          </Drawer>
+          <div className={styles.filterMenu}>
             <ProductFilter filterParams={filterParams} />
           </div>
-        </Drawer>
-        <div className={styles.filterMenu}>
-          <ProductFilter filterParams={filterParams} />
-        </div>
-        {products?.length > 0 ? (
-          <div className={styles.productsWrapper}>
-            <Grid container spacing={3} className={styles.productsDiv}>
-              {itemsToShow}
-            </Grid>
-            {paginationCondition()}
-          </div>
-        ) : (
-          <div className={styles.defaultBlock}>
-            <div>{t('productListPage.productNotFound')}</div>
-            <div>
-              <MoodBadIcon className={styles.defaultIcon} />
+          {products?.length > 0 ? (
+            <div className={styles.productsWrapper}>
+              <Grid container spacing={2} className={styles.productsDiv}>
+                {itemsToShow}
+              </Grid>
+              {paginationCondition()}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className={styles.defaultBlock}>
+              <div>{t('productListPage.productNotFound')}</div>
+              <div>
+                <MoodBadIcon className={styles.defaultIcon} />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

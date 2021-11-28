@@ -7,8 +7,12 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useTheme } from '@material-ui/styles';
 
 import { useTranslation } from 'react-i18next';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
-import { MATERIAL_UI_COLOR } from '../../configs';
+import { useStyles as useSubmitStyles } from './product-submit/product-submit.styles';
+import { MATERIAL_UI_COLOR, toastSettings } from '../../configs';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -22,6 +26,8 @@ import { selectCurrencyProductsCategoryFilter } from '../../utils/multiple.selec
 import routes from '../../configs/routes';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
+import { setToastMessage, setToastSettings } from '../../redux/toast/toast.actions';
+import useAddProductToWishlistHandler from '../../hooks/use-add-product-to-wishlist-handler';
 
 const { pathToCategory } = routes;
 
@@ -31,6 +37,7 @@ const ProductDetails = ({ match }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
+  const productSubmitStyles = useSubmitStyles();
   const { palette } = useTheme();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
   const { loading, error, data } = useQuery(getProductById, {
@@ -97,6 +104,24 @@ const ProductDetails = ({ match }) => {
     };
   }, [currentSize, product, category, dispatch, productId, productName, images, currency]);
 
+  const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
+    useAddProductToWishlistHandler(product);
+  const wishlistHandler = () => {
+    addOrRemoveItemFromWishlistHandler();
+
+    if (isInWishlist) {
+      dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
+      dispatch(setToastSettings(toastSettings));
+    } else {
+      dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
+      dispatch(setToastSettings(toastSettings));
+    }
+  };
+
+  const wishlistTip = isInWishlist
+    ? t('product.tooltips.removeWishful')
+    : t('product.tooltips.addWishful');
+
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
 
@@ -152,7 +177,26 @@ const ProductDetails = ({ match }) => {
               />
             </>
           ) : (
-            <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+            <>
+              <div className={styles.submit}>
+                <Tooltip title={wishlistTip} placement='bottom'>
+                  {isInWishlist ? (
+                    <FavoriteIcon
+                      data-cy='wishful'
+                      className={productSubmitStyles.redHeart}
+                      onClick={wishlistHandler}
+                    />
+                  ) : (
+                    <FavouriteBorderIcon
+                      data-cy='not-wishful'
+                      className={productSubmitStyles.heart}
+                      onClick={wishlistHandler}
+                    />
+                  )}
+                </Tooltip>
+              </div>
+              <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+            </>
           )}
         </div>
       </div>

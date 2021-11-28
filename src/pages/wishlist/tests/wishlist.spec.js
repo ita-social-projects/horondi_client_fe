@@ -3,6 +3,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Wishlist from '../wishlist';
 
+jest.mock('connected-react-router', () => ({
+  push: jest.fn()
+}));
 jest.mock('../wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../services/local-storage.service');

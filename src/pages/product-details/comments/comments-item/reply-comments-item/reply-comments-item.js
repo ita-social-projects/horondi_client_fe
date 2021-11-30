@@ -7,7 +7,7 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
-import { COMMENTS_TIME_OPTIONS } from '../../../../../configs';
+import { COMMENTS_TIME_OPTIONS } from '../../../constants';
 
 import {
   handleUserCommentApprove,

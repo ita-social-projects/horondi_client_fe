@@ -6,7 +6,8 @@ import { useMutation } from '@apollo/client';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
-import { commentFields, SNACKBAR_TYPES, TEXT_VALUE } from '../../../../../configs';
+import { commentFields, TEXT_VALUE } from '../../../../../configs';
+import { ERROR } from '../../../constants';
 import { formRegExp } from '../../../../../configs/regexp';
 import { addReplyMutation } from '../../operations/comments.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
@@ -26,7 +27,7 @@ const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
     onError: (err) => {
       errorOrLoadingHandler(err);
-      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
     },
     onCompleted: () => setSnackBarMessage(t('product.snackBar.addedReply'))
   });

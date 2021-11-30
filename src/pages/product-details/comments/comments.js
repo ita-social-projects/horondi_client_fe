@@ -8,7 +8,8 @@ import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-import { commentFields, SNACKBAR_TYPES, TEXT_VALUE } from '../../../configs/index';
+import { commentFields, TEXT_VALUE } from '../../../configs/index';
+import { ERROR } from '../constants';
 import { formRegExp } from '../../../configs/regexp';
 import useCommentValidation from '../../../hooks/use-comment-validation';
 import {
@@ -48,7 +49,7 @@ const Comments = ({ productId }) => {
     onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
     onError: (err) => {
       errorOrLoadingHandler(err);
-      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), SNACKBAR_TYPES.error);
+      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
     }
   });
 

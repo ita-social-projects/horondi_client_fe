@@ -7,13 +7,8 @@ import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
 import { useStyles } from './profile-page.styles';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
-import {
-  IMG_URL,
-  PROFILE_USER_CONTACT_DATA,
-  PROFILE_USER_ADRESS_DATA,
-  MATERIAL_UI_COLOR,
-  TEXT_FIELD_VARIANT
-} from '../../configs/index';
+import { IMG_URL, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs/index';
+import { PROFILE_USER_CONTACT_DATA, PROFILE_USER_ADDRESS_DATA } from './constants';
 import { validationSchema } from '../../validators/profile-page';
 import { handleClassName, initialValues } from '../../utils/handle-profile-page';
 
@@ -221,7 +216,7 @@ const ProfilePage = () => {
                 <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
                 {getTextFields(PROFILE_USER_CONTACT_DATA)}
                 <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>
-                {getTextFields(PROFILE_USER_ADRESS_DATA)}
+                {getTextFields(PROFILE_USER_ADDRESS_DATA)}
                 <Button
                   fullWidth
                   className={`${classes.button} ${classes.saveBtn}`}

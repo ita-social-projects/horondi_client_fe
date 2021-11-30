@@ -7,7 +7,7 @@ import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './constructor-preview.style';
-import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs/index';
+import { CONSTRUCTOR_VIDEO_LINK } from '../constants';
 import routes from '../../../configs/routes';
 
 const { pathToConstructor } = routes;

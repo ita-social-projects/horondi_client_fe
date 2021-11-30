@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import './similar-products.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useStyles } from './similar-products.styles';
-import { RESPONSIVE_PDP } from '../../../configs';
+import { RESPONSIVE_PDP } from '../constants';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';

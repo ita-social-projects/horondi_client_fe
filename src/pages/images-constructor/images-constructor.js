@@ -10,7 +10,8 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
 
-import { IMG_URL, constructorDefaultPrice } from '../../configs';
+import { IMG_URL } from '../../configs';
+import { CONSTRUCTOR_DEFAULT_PRICE } from './constants';
 import {
   constructorEndPrice,
   constructorPartPrice,
@@ -43,7 +44,7 @@ const ImagesConstructor = () => {
   const { i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
 
-  const defaultPrice = constructorDefaultPrice[currency];
+  const defaultPrice = CONSTRUCTOR_DEFAULT_PRICE[currency];
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();

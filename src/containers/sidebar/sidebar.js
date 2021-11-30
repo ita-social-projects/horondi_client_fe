@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
-import { sideBarSubList } from '../../configs';
+import { SIDEBAR_SUBLIST } from './constants';
 import SocialLinks from '../social-links';
 import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
@@ -22,7 +22,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { palette } = useTheme();
 
   const sidebar = clsx({
@@ -64,19 +64,21 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const subList = useMemo(
     () => (
       <div className={styles.subList}>
-        {sideBarSubList.map((item) => (
+        {SIDEBAR_SUBLIST.map((item) => (
           <Link
             key={item.link}
             to={item.link}
             className={styles.subItem}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span>{item.name[i18n.language === 'ua' ? 0 : 1]}</span>
+            <span>
+              {item.text ? t(`common.${item.text}`) : t(`common.${item.link.replace('/', '')}`)}
+            </span>
           </Link>
         ))}
       </div>
     ),
-    [styles, i18n.language, setIsMenuOpen]
+    [styles, setIsMenuOpen]
   );
 
   if (loading || error) return errorOrLoadingHandler(error, loading);

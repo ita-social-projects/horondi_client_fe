@@ -6,7 +6,8 @@ import { Formik } from 'formik';
 import { Typography, Button } from '@material-ui/core';
 import { useTheme } from '@material-ui/styles';
 
-import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE, IMG_ALT } from '../../configs';
+import { USER_TOKENS, RETURN_PAGE } from '../../configs';
+import { REGISTER_USER_DATA, REGISTER_IMG_INFO } from './constants';
 import { useStyles } from './register.styles';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
@@ -66,7 +67,7 @@ export default function Register() {
                   <div className={styles.registerSuccessInfo}>
                     <img
                       src={setInfoImgByTheme(isLightTheme)}
-                      alt={IMG_ALT.REGISTER_IMG_INFO}
+                      alt={REGISTER_IMG_INFO}
                       className={styles.infoLogo}
                     />
                     <p>{t('register.confirmEmail')}</p>

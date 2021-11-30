@@ -9,7 +9,7 @@ import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { Tooltip } from '@material-ui/core';
 import { useLazyQuery } from '@apollo/client';
 import { useStyles } from './comments-item.styles';
-import { COMMENTS_TIME_OPTIONS } from '../../../../configs';
+import { COMMENTS_TIME_OPTIONS } from '../../constants';
 import {
   handleArrowIcon,
   handleRate,

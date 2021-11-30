@@ -7,7 +7,8 @@ import { useStyles, searchStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import SearchBar from '../../../containers/search-bar/search-bar';
 import SearchBarList from '../../../containers/search-bar-list/search-bar-list';
-import { URL_QUERIES_NAME, SORT_BY_SELECT_OPTIONS, TEXT_FIELD_VARIANT } from '../../../configs';
+import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
+import { SORT_BY_SELECT_OPTIONS } from '../constants';
 
 const ProductSort = () => {
   const { t } = useTranslation();

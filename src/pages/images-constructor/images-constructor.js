@@ -110,12 +110,17 @@ const ImagesConstructor = () => {
     setAllPrice(
       Object.keys(constructorValues).reduce((acc, key) => {
         if (key === 'patterns' && constructorValues.patterns !== undefined)
-          acc.pattern = constructorValues[key].additionalPrice[0].value;
-        if (key === 'bottoms') acc.bottom = constructorValues[key].additionalPrice[0].value;
+          acc.pattern = !currency
+            ? constructorValues[key].additionalPrice[0].value
+            : constructorValues[key].additionalPrice[1].value;
+        if (key === 'bottoms')
+          acc.bottom = !currency
+            ? constructorValues[key].additionalPrice[0].value
+            : constructorValues[key].additionalPrice[1].value;
         return acc;
       }, {})
     );
-  }, [constructorValues]);
+  }, [constructorValues, currency]);
 
   const { isError } = useIsLoadingOrError([], [constructorsError, constructorError]);
   if (valuesLoading) return errorOrLoadingHandler(isError, valuesLoading);
@@ -150,7 +155,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.model')}</FormHelperText>
+            <FormHelperText>{t('common.models')}</FormHelperText>
           </FormControl>
 
           <FormControl>
@@ -180,7 +185,6 @@ const ImagesConstructor = () => {
           <FormControl>
             <Select
               label='title'
-              data-cy='patern'
               name='patern'
               value={constructorValues.patterns?._id || ''}
               onChange={(e) => {
@@ -202,7 +206,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.pattern')}</FormHelperText>
+            <FormHelperText>{t('common.patterns')}</FormHelperText>
           </FormControl>
 
           <FormControl>
@@ -297,8 +301,7 @@ const ImagesConstructor = () => {
                   <li key={index} className={styles.priceItem}>
                     <span>{constructorPartNames(!language)[index]}</span>
                     <span>
-                      {item}
-                      {getCurrentCurrency(currency)}
+                      {item} {getCurrentCurrency(currency)}
                     </span>
                   </li>
                 ) : (
@@ -310,7 +313,10 @@ const ImagesConstructor = () => {
           </div>
           <h2 className={styles.headerWrapper}>
             {t('common.endPrice')}
-            <span>{price()}</span>
+            <span>
+              {price()}
+              {getCurrentCurrency(currency)}
+            </span>
           </h2>
           <ConstructorSubmit />
         </div>

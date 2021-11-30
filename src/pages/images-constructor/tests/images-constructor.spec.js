@@ -1,37 +1,60 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ThemeProvider } from '@material-ui/styles';
-import { theme } from '../../../components/app/app-theme/app.theme';
+import { useSelector } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
+import { render, screen, fireEvent } from '@testing-library/react';
+import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
+import { mockAllConstructors } from './images-constructor.variables';
 
-const themeValue = theme('light');
 jest.mock('react-redux');
-const dispatch = jest.fn();
-jest.mock('horondi_merge_images', () => ({ DEFAULT_PRICE_VALUE: '1400' }));
 
-useDispatch.mockImplementation(() => dispatch);
-useSelector.mockImplementation(() => ({
-  values: {},
-  images: {},
-  prices: {},
-  methods: {},
-  language: 0,
-  currency: 0,
-  constructorModel: {
-    modelsForConstructor: ''
-  },
-  currentModel: {
-    eligibleOptions: ''
-  }
+jest.mock('../images-constructor.style', () => ({
+  useStyles: () => ({})
 }));
 
+jest.mock('../constructor-sumbit/constructor-submit.styles', () => ({
+  useStyles: () => ({})
+}));
+
+jest.mock('i18next', () => ({
+  useTranslation: () => ({ i18n: { language: 'ua' }, t: () => 'test' })
+}));
+
+jest.mock('../../../utils/checkout', () => ({ getCurrentCurrency: () => '1' }));
+jest.mock('../../../utils/constructor', () => ({
+  constructorEndPrice: () => '',
+  constructorPartPrice: () => [1, 2, 3],
+  constructorPartNames: () => ''
+}));
+
+const state = {
+  currency: 0
+};
+useSelector.mockImplementation(() => state);
+
+beforeEach(async () => {
+  render(
+    <MockedProvider mocks={mockAllConstructors} addTypename={false}>
+      <ImagesConstructor />
+    </MockedProvider>
+  );
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+});
+
 describe('ImagesConstructor component tests', () => {
-  it('Should render ImagesConstructor', () => {
-    const component = mount(
-      <ThemeProvider theme={themeValue}>
-        <ImagesConstructor />
-      </ThemeProvider>
-    );
-    expect(component).toBeDefined();
+  it('renders h1', () => {
+    expect(screen.getByText(/common.title/i)).toBeInTheDocument();
+  });
+
+  it('it can change selected item', () => {
+    screen.debug();
+    const select = screen.getByTestId('model');
+    expect(select).toBeInTheDocument();
+  });
+
+  it('modal', () => {
+    const button = screen.getAllByRole('button')[0];
+    fireEvent.click(button);
+    expect(<Modal />).toBeTruthy();
   });
 });

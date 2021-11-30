@@ -12,7 +12,8 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
 import { useStyles as useSubmitStyles } from './product-submit/product-submit.styles';
-import { MATERIAL_UI_COLOR, toastSettings } from '../../configs';
+import { MATERIAL_UI_COLOR } from '../../configs';
+import { TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -111,10 +112,10 @@ const ProductDetails = ({ match }) => {
 
     if (isInWishlist) {
       dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
-      dispatch(setToastSettings(toastSettings));
+      dispatch(setToastSettings(TOAST_SETTINGS));
     } else {
       dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
-      dispatch(setToastSettings(toastSettings));
+      dispatch(setToastSettings(TOAST_SETTINGS));
     }
   };
 

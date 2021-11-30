@@ -47,7 +47,6 @@ describe('ImagesConstructor component tests', () => {
   });
 
   it('it can change selected item', () => {
-    screen.debug();
     const select = screen.getByTestId('model');
     expect(select).toBeInTheDocument();
   });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
-import OrderHistoryOrder from '../../containers/orders/order-history/order-history-order';
+import OrderHistoryItem from '../../containers/orders/order-history/order-history-item';
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
@@ -44,8 +44,8 @@ const OrderHistory = () => {
         <>
           <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
           <div>
-            {userOrders.map((item) => (
-              <OrderHistoryOrder order={item} key={item._id} />
+            {userOrders.map((order) => (
+              <OrderHistoryItem order={order} key={order.orderNumber} />
             ))}
           </div>
           {quantityPages >= 2 && (

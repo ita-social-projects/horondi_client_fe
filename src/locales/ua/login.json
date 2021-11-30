@@ -1,11 +1,11 @@
 {
-    "forgotPassword": "Забули пароль?",
-    "formLabel": "Увійти",
-    "rememberMe": "Запам'ятати мене",
-    "registerProposal": "Реєстрація",
-    "placeholders": {       
-        "email": "Електронна пошта",
-        "password": "Пароль"        
-    },
-    "orText": "або увійдіть за допомогою"   
+  "forgotPassword": "Забув пароль?",
+  "formLabel": "Увійти",
+  "rememberMe": "Запам'ятати мене",
+  "registerProposal": "Зареєструватись",
+  "placeholders": {
+    "email": "Електронна пошта*",
+    "password": "Пароль*"
+  },
+  "orText": "або увійдіть за допомогою"
 }

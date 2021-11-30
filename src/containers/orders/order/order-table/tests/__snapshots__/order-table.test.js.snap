@@ -38,11 +38,11 @@ exports[`Order table component tests should match snapshot 1`] = `
       </WithStyles(ForwardRef(TableHead))>
       <WithStyles(ForwardRef(TableBody))>
         <CartItem
-          calcPrice={100}
-          cartLoading={false}
-          cartQuantityLoading={false}
-          currency={0}
-          initialPrice={10}
+          cartOperations={
+            Object {
+              "removeFromCart": [MockFunction],
+            }
+          }
           item={
             Object {
               "price": 10,

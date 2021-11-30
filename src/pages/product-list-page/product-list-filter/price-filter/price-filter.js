@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+import { TextField } from '@material-ui/core';
 import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
@@ -33,7 +34,7 @@ const PriceFilter = ({ priceRange }) => {
   useEffect(() => {
     if (prices.length === 0 && priceRange.minPrice)
       setPrices([priceRange.minPrice[currency].value, priceRange.maxPrice[currency].value]);
-  }, [priceRange]);
+  }, [priceRange, currency, prices.length]);
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
   };
@@ -50,8 +51,24 @@ const PriceFilter = ({ priceRange }) => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' gutterBottom>
-        {t('common.price')}: {t('common.from')} {Math.round(prices[0])} - {t('common.to')}{' '}
-        {Math.round(prices[1])}
+        {t('common.price')}
+        <div className={styles.priceRange}>
+          {t('common.from')}
+          <TextField
+            className={styles.priceRangeInput}
+            style={{ marginRight: '1rem' }}
+            variant='outlined'
+            type='tel'
+            defaultValue={prices[0] || min}
+          />
+          {t('common.to')}
+          <TextField
+            className={styles.priceRangeInput}
+            variant='outlined'
+            type='tel'
+            defaultValue={prices[1] || max}
+          />
+        </div>
       </Typography>
       <Slider
         className={styles.slider}

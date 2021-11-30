@@ -8,6 +8,7 @@ const lightGray = '#EFEFEF';
 const mediumGray = '#353333';
 const darkGray = '#232323';
 const yellow = '#E4B200';
+const blue = '#1976D2';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
@@ -16,6 +17,7 @@ export const paletteGenerator = (colorSchema) => ({
   mediumGray,
   darkGray,
   yellow,
+  blue,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {
@@ -27,10 +29,18 @@ export const paletteGenerator = (colorSchema) => ({
       color: theme[colorSchema].card.selectedButton.color
     }
   },
+  catalog: {
+    pageFilterCell: {
+      hover: {
+        backgroundColor: theme[colorSchema].catalogPageFilterCell.hover.backgroundColor
+      }
+    }
+  },
   button: {
     normal: {
       backgroundColor: theme[colorSchema].button.normal.backgroundColor,
-      color: theme[colorSchema].button.normal.color
+      color: theme[colorSchema].button.normal.color,
+      borderColor: theme[colorSchema].button.border.borderColor
     },
     hover: {
       backgroundColor: theme[colorSchema].button.hover.backgroundColor,
@@ -46,6 +56,17 @@ export const paletteGenerator = (colorSchema) => ({
   },
   contactForm: {
     background: theme[colorSchema].contactForm.background
+  },
+  orderHistoryHeading: {
+    background: theme[colorSchema].orderHistoryHeading.background
+  },
+  profilePageLabel: {
+    normal: {
+      backgroundColor: theme[colorSchema].profilePageLabel.normal.backgroundColor
+    },
+    hover: {
+      backgroundColor: theme[colorSchema].profilePageLabel.hover.backgroundColor
+    }
   },
   primary: {
     contrastText: white,

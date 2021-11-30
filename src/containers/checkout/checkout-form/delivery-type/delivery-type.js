@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useStyles } from './delivery-type.styles';
-import { deliveryTypes, CY_CODE_ERR , TEXT_FIELD_VARIANT } from '../../../../configs';
+import { deliveryTypes, CY_CODE_ERR, TEXT_FIELD_VARIANT } from '../../../../configs';
 import { setDeliveryTypeToStorage } from '../../../../utils/checkout';
 
 const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliveryType }) => {
@@ -14,23 +14,22 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
   const [deliveryTypeValue, setDeliveryTypeValue] = useState(deliveryType);
   const [courierOrganization, setcourierOrganization] = useState(deliveryTypes.NOVAPOSTCOURIER);
 
-  const handleAddDeliveryType = () => {
-    if (deliveryTypeValue === deliveryTypes.COURIER && courierOrganization) {
-      setDeliveryType(courierOrganization);
-    } else {
-      setDeliveryType(deliveryTypeValue);
-    }
-    setDeliveryTypeToStorage(deliveryTypeValue);
-  };
-
   const handleCourierOrganizationChange = (eventValue) => {
     setFieldValue('courierOrganization', eventValue);
     setcourierOrganization(eventValue);
   };
 
   useEffect(() => {
+    const handleAddDeliveryType = () => {
+      if (deliveryTypeValue === deliveryTypes.COURIER && courierOrganization) {
+        setDeliveryType(courierOrganization);
+      } else {
+        setDeliveryType(deliveryTypeValue);
+      }
+      setDeliveryTypeToStorage(deliveryTypeValue);
+    };
     handleAddDeliveryType();
-  }, [deliveryTypeValue, courierOrganization]);
+  }, [deliveryTypeValue, courierOrganization, setDeliveryType]);
 
   const getDeliveryType = t('checkout.deliveryType', { returnObjects: true });
   const getCourierOrganization = t('checkout.courierOrganization', { returnObjects: true });

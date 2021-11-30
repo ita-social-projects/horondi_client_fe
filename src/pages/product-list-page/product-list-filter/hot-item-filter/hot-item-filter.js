@@ -4,10 +4,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
 import { useHistory, useLocation } from 'react-router';
+import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 
 const HotItemFilter = () => {
   const { t } = useTranslation();
+  const styles = useStyles();
   const history = useHistory();
   const { search } = useLocation();
 
@@ -19,7 +21,7 @@ const HotItemFilter = () => {
     if (searchParams.get(isHotItemFilter)) {
       setHotItem(!hotItem);
     }
-  }, [searchParams.toString()]);
+  }, [isHotItemFilter]);
 
   const handleChange = (event) => {
     if (event.target.checked) {
@@ -34,9 +36,10 @@ const HotItemFilter = () => {
 
   return (
     <FormGroup data-cy='hot_item_filter'>
-      <Typography id='isHot' gutterBottom>
-        {t('common.popular')}:
+      <Typography id='isHot' className={styles.popular} gutterBottom>
+        {t('common.popular')}
         <Switch
+          className={styles.popularSwitch}
           color='default'
           checked={hotItem}
           onChange={handleChange}

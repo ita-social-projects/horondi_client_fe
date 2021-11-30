@@ -7,6 +7,8 @@ jest.mock('../order-table.styles', () => ({
 }));
 jest.mock('react-redux');
 
+const mockCartOperations = { removeFromCart: jest.fn() };
+
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
 const testUseSelector = (lang) => {
@@ -27,7 +29,7 @@ const props = {
 describe('Order table component tests', () => {
   it('should match snapshot', () => {
     testUseSelector(0);
-    wrapper = shallow(<OrderTable {...props} />);
+    wrapper = shallow(<OrderTable {...props} cartOperations={mockCartOperations} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

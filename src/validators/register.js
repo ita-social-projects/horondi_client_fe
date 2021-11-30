@@ -15,8 +15,5 @@ export const regValidationSchema = Yup.object().shape({
   email: Yup.string().email('error.profile.email').required('error.profile.email'),
   password: Yup.string()
     .matches(formRegExp.password, 'error.profile.pass')
-    .required('error.requiredField'),
-  passwordConfirm: Yup.string()
-    .oneOf([Yup.ref('password'), null], "Passwords don't match!")
     .required('error.requiredField')
 });

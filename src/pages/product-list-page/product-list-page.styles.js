@@ -5,13 +5,18 @@ const drawerWidth = 320;
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    fontFamily: 'Open Sans',
     flexDirection: 'column',
     justifyContent: 'center',
     padding: '0 2rem 1rem 2rem',
     width: '100%'
   },
   productsWrapper: {
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   productsDiv: {
     width: '100%',
@@ -22,23 +27,38 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sortDiv: {
-    alignItems: 'center',
-    padding: '1rem 0',
-    display: 'flex',
-    justifyContent: 'flex-end',
+    paddingTop: '51px',
     '& div': {
       flexWrap: 'wrap',
-      justifyContent: 'center',
       marginRight: 0
     }
   },
   invisiblePaginationDiv: {
     display: 'none !important'
   },
+  header: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: '59px',
+    borderBottom: '1px solid gray',
+    padding: '80px 1rem 17px 1rem'
+  },
+
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
-    padding: '1rem',
+    margin: '76px 0 98px 0',
+    '& ul': {
+      '& li': {
+        '& button': {
+          border: '1px solid #FEFEFE',
+          borderRadius: 0,
+          height: '50px',
+          width: '50px',
+          margin: '0 5px'
+        }
+      }
+    },
     '& Mui-selected': {
       backgroundColor: 'black !important'
     },

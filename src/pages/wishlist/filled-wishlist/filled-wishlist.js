@@ -16,6 +16,7 @@ const FilledWishlist = ({ items }) => {
   const [modalItem, setModalItem] = useState({});
   const [wishlist, setWishlist] = useState(items || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
+
   const { t, i18n } = useTranslation();
 
   const [isLightTheme] = useContext(ThemeContext);
@@ -76,7 +77,9 @@ const FilledWishlist = ({ items }) => {
                 <WishlistItem
                   key={i}
                   item={item}
-                  setModalVisibility={setModalVisibility}
+                  setModalVisibility={() => {
+                    setModalVisibility(!modalVisibility);
+                  }}
                   setModalItem={setModalItem}
                 />
               ))}
@@ -86,9 +89,8 @@ const FilledWishlist = ({ items }) => {
         {modalVisibility && (
           <div>
             <Modal
-              message={`${t('modal.modalDeleteFromWishlistMessage')} ${
-                modalItem.name[language].value
-              }?`}
+              itemName={modalItem.name[language].value}
+              message={t('modal.modalDeleteFromWishlistMessage')}
               isOpen={modalVisibility}
               onAction={onModalAction}
               language={language}

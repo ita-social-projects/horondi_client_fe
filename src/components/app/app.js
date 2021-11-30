@@ -15,28 +15,32 @@ import { getFromLocalStorage } from '../../services/local-storage.service';
 import { preserveUser } from '../../redux/user/user.actions';
 import { selectLocation } from '../../utils/multiple.selectors';
 import { SnackBarContextProvider } from '../../context/snackbar-context';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const App = () => {
   const [appTheme, setAppTheme] = useState(true);
   const { location } = useSelector(selectLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
+  const isLoading = useTranslationsLoad();
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
   if (!localStorageThemeMode) {
     localStorageThemeMode = LIGHT_THEME;
   }
-  const themeValue = theme(localStorageThemeMode);
 
-  useTranslationsLoad();
   useEffect(() => {
     dispatch(preserveUser());
-  }, []);
+  }, [dispatch]);
+
+  const themeValue = theme(localStorageThemeMode);
 
   useEffect(() => {
     setAppTheme(themeMode);
-  });
+  }, [themeMode]);
+
+  if (isLoading) return errorOrLoadingHandler(null, isLoading);
 
   return (
     <div className={styles.mainBar}>

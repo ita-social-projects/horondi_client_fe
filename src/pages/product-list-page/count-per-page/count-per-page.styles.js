@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   items: {
-    height: '25px !important',
-    marginLeft: '.5rem',
-    lineHeight: '25px !important',
+    height: '100%',
+    marginLeft: '1rem',
+    lineHeight: '100%',
     '& .MuiButton-outlined': {
       boxSizing: 'border-box',
       padding: '0 1rem',
@@ -16,11 +16,15 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
 
+  pageCounter: {
+    height: '31px'
+  },
+
   selectedButton: {
-    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-    color: 'rgba(0, 0, 0, 0.54)',
+    backgroundColor: '#C4C4C4',
+    color: theme.palette.button.hover.color,
     '&:hover': {
-      backgroundColor: 'rgba(0, 0, 0, 0.10)'
+      backgroundColor: theme.palette.catalog.pageFilterCell.hover.backgroundColor
     }
   }
 }));

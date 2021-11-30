@@ -1,6 +1,6 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,8 +16,8 @@ const { pathToCart } = routes;
 
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
-  const { cartItems, user, cartLoading } = useSelector(({ Cart, User }) => ({
-    cartItems: Cart.list,
+  const { cartItems, user, cartLoading } = useSelector(({ Cart, User, NewCart }) => ({
+    cartItems: NewCart.list,
     user: User.userData,
     cartLoading: Cart.loading
   }));
@@ -28,7 +28,7 @@ const CartHeader = ({ fromSideBar }) => {
     if (!user) {
       dispatch(getCart());
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   const itemsCount = useMemo(
     () => cartItems.length && cartItems.reduce((acc, item) => acc + item.quantity, 0),

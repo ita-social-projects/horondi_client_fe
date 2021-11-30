@@ -5,6 +5,9 @@ import FilledWishlist from '../filled-wishlist';
 import WishlistItem from '../../wishlist-item/wishlist-item';
 import items from './mockedItems';
 
+jest.mock('connected-react-router', () => ({
+  push: jest.fn()
+}));
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => [{}],

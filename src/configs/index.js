@@ -1,6 +1,8 @@
 export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
+export const CART_KEY = 'newCart';
+
 export const CONSTRUCTOR_VIDEO_LINK = 'https://i.imgur.com/DsWy1xp.mp4';
 export const GOOGLE_MAP_URL = 'https://maps.google.com/maps?q=';
 export const HORONDI_FB_LINK = 'https://www.facebook.com/Horondi';
@@ -35,13 +37,11 @@ export const REGISTER_USER_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
-  passwordConfirm: ''
+  password: ''
 };
 export const USER_REGISTER_LABELS = {
   email: 'email',
   pass: 'password',
-  passConfirm: 'passwordConfirm',
   text: 'text'
 };
 export const USER_TOKENS = {
@@ -66,11 +66,14 @@ export const LOGIN_USER_DATA = {
   rememberMe: false
 };
 
-export const PROFILE_USER_DATA = {
+export const PROFILE_USER_CONTACT_DATA = {
   firstName: '',
   lastName: '',
   email: '',
-  phoneNumber: '',
+  phoneNumber: ''
+};
+
+export const PROFILE_USER_ADRESS_DATA = {
   country: '',
   region: '',
   city: '',
@@ -79,8 +82,6 @@ export const PROFILE_USER_DATA = {
   appartment: '',
   zipcode: ''
 };
-
-export const REQUIRED_USER_FIELDS = ['firstName', 'lastName', 'email'];
 
 export const COMMENTS_TIME_OPTIONS = {
   year: 'numeric',
@@ -92,7 +93,6 @@ export const SORT_ASC = 'sortAsc';
 export const SORT_DESC = 'sortDesc';
 export const RATE = 'rate';
 export const POPULARITY = 'popularity';
-export const FILTERS_KEYS = ['category', 'models', 'patterns'];
 export const URL_QUERIES_NAME = {
   page: 'page',
   sort: 'sort',

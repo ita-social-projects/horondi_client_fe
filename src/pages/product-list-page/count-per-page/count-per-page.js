@@ -36,7 +36,7 @@ const CountPerPage = () => {
     </Button>
   ));
   return (
-    <div>
+    <div className={styles.pageCounter}>
       {countPerPageText}
       <ButtonGroup className={styles.items}>{productsOnPage}</ButtonGroup>
     </div>

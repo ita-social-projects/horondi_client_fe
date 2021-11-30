@@ -14,6 +14,10 @@ jest.mock('react', () => ({
 }));
 jest.mock('../../../../context/theme-context', () => ({}));
 
+jest.mock('connected-react-router', () => ({
+  push: jest.fn()
+}));
+
 const dispatch = jest.fn();
 const state = {
   currency: 0,

@@ -26,7 +26,6 @@ const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
         initialSearchState={initialSearchState}
-        fromSideBar={fromSideBar}
       />
       <SearchBarList searchParams={searchParams} />
       <div className={styles.currency}>

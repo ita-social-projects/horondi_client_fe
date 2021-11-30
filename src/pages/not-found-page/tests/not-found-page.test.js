@@ -45,10 +45,6 @@ describe('', () => {
     useSelector.mockClear();
   });
 
-  it('Should render 404 page', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('Should click back-page button', () => {
     const btn = wrapper.find('button');
     btn.simulate('click');

@@ -25,7 +25,7 @@ export const dropdownStyles = makeStyles(() => ({
     width: '60px',
     height: '33px',
     cursor: 'pointer',
-    backgroundColor: fromSideBar ? '#fff' : '#0000',
+    backgroundColor: '#0000',
     color: fromSideBar ? '#000' : '#fff',
     outline: 'none',
     border: 'none',

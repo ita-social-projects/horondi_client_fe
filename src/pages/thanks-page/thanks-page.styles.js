@@ -1,6 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
+import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles(({ palette }) => ({
+  thanksBackground: {
+    background: `url(${BG}) no-repeat `,
+    backgroundSize: 'cover',
+    height: '1000px',
+    position: 'relative'
+  },
   thanksContainer: {
     display: 'flex',
     flexDirection: 'column',

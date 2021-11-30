@@ -29,7 +29,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/materials"
     >
       <span>
-        Materials
+        common.materials
       </span>
     </Link>
     <Link
@@ -39,7 +39,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/pages/about-us"
     >
       <span>
-        About us
+        common.about-us
       </span>
     </Link>
     <Link
@@ -49,7 +49,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/news"
     >
       <span>
-        News
+        common.news
       </span>
     </Link>
     <Link
@@ -59,7 +59,7 @@ exports[`sidebar tests should match snapshot 1`] = `
       to="/contacts"
     >
       <span>
-        Contacts
+        common.contacts
       </span>
     </Link>
   </div>

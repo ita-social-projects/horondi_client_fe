@@ -8,6 +8,7 @@ const useConstructorLoader = () => {
   const [constructorModel, setConstructorModel] = useState('');
   const currentConstructorModel = useRef({});
   const allModels = useRef([]);
+
   const [allPrices, setAllPrice] = useState({});
   const [valuesLoading, setValuesLoading] = useState(true);
 

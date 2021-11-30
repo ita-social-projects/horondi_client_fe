@@ -9,6 +9,7 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
+
 import { IMG_URL, constructorDefaultPrice } from '../../configs';
 import {
   constructorEndPrice,

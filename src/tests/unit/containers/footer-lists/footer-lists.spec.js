@@ -3,21 +3,23 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
-import FooterLists from '../../../containers/footer-lists/footer-lists.js';
-import CategoriesContextProvider from '../../../context/categories/categories-context';
+import FooterLists from '../../../../containers/footer-lists/footer-lists.js';
+import CategoriesContextProvider from '../../../../context/categories/categories-context';
 
 const useState = jest.fn();
 const setState = jest.fn();
 
-jest.mock('../../../../src/containers/footer-lists/footer-lists.styles.js', () => ({
+jest.mock('../../../../containers/footer-lists/footer-lists.styles.js', () => ({
   useStyles: () => ({})
 }));
+
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key) => key,
     i18n: { changeLanguage: jest.fn() }
   })
 }));
+
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 
@@ -43,11 +45,14 @@ describe('tests for footer lists', () => {
     );
   });
 
-  it('should render footer list', () => {
+  it('should render footer lists', () => {
     expect(screen.queryByText('footer.catalogs')).toBeInTheDocument();
     expect(screen.queryByText('footer.contacts')).toBeInTheDocument();
     expect(screen.queryByText('footer.moreInformation')).toBeInTheDocument();
     expect(screen.queryByText('footer.footerInformation.title')).toBeInTheDocument();
+  });
+
+  it('should render footer information list', () => {
     expect(screen.queryByText('footer.footerInformation.privacyPolicy')).toBeInTheDocument();
     expect(screen.queryByText('footer.footerInformation.paymentAndShipping')).toBeInTheDocument();
     expect(screen.queryByText('footer.footerInformation.materials')).toBeInTheDocument();

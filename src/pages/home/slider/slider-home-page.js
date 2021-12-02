@@ -14,6 +14,7 @@ const SliderHomePage = () => {
 
   return (
     <div
+      id='slider'
       style={{ backgroundImage: `url(${images[currImg].img})`, backgroundPosition: 'center' }}
       className={styles.homeHeader}
     >

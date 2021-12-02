@@ -5,6 +5,14 @@ export const useStyles = makeStyles(() => ({
     backgroundSize: 'cover',
     minHeight: '100vh'
   },
+  overlay: {
+    position: 'relative',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100vh',
+    background: 'rgba(0,0,0,0.3)'
+  },
   sliderContent: {
     maxWidth: '40vw',
     minHeight: '90vh',

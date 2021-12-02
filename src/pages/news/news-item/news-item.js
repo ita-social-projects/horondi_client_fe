@@ -2,15 +2,7 @@ import React from 'react';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  CardMedia,
-  CardHeader,
-  CardContent,
-  Typography,
-  Button,
-  Avatar
-} from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-item.style';
 import { IMG_URL } from '../../../configs';
@@ -35,11 +27,13 @@ const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
             data-cy='image'
           />
         </div>
-        <CardHeader
-          subheader={new Date(parseInt(date)).toLocaleString(dateLanguage, TIME_OPTIONS)}
-          data-cy='date'
-        />
-        <CardContent className={styles.newsItemContent}>
+        <div className={styles.newsAuthorFooter}>
+          <Typography variant='h5' component='div' className={styles.newsDateAutor}>
+            <span>{new Date(parseInt(date)).toLocaleString(dateLanguage, TIME_OPTIONS)}</span>
+            <span>{translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}</span>
+          </Typography>
+        </div>
+        <CardContent className={styles.ArticleTitleContainer}>
           <Typography
             className={styles.ArticleTitle}
             gutterBottom
@@ -49,6 +43,8 @@ const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
           >
             {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
           </Typography>
+        </CardContent>
+        <CardContent className={styles.newsItemContent}>
           <Typography
             variant='body2'
             color='textSecondary'
@@ -56,7 +52,9 @@ const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {translationsKey ? parse(t(`${translationsKey}.text`)) : t('newsDetail.noText')}
+            {translationsKey
+              ? parse(t(`${translationsKey}.text`).slice(0, 299))
+              : t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
@@ -65,18 +63,6 @@ const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
               {t('buttons.readMore')}
             </Button>
           </Link>
-          <div className={styles.newsAuthorFooter}>
-            <CardHeader
-              subheader={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
-              data-cy='authorName'
-              className={styles.authorName}
-            />
-            <Avatar
-              alt={translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}
-              src={IMG_URL + author.image}
-              data-cy='authorPhoto'
-            />
-          </div>
         </div>
       </Card>
     </div>

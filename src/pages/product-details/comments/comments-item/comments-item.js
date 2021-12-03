@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
@@ -140,7 +140,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
           </div>
           <div className={styles.date}>{commentDate}</div>
         </div>
-        {handleRate(rate)}
+        <div>{handleRate(rate)}</div>
         <div className={styles.textContent}>
           <div
             className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}
@@ -152,7 +152,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
                 <Tooltip title={t('product.tooltips.delete')}>
-                  <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
+                  <DeleteIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>
             ) : null}
@@ -171,13 +171,23 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
             <div className={styles.replyCount} onClick={showReplyList}>
               <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
               <span className={styles.replyText}>
-                {t('common.reply.answers')}
-                {'\u00A0'}
                 {replyCommentsCount}
+                {'\u00A0'}
+                {t('common.reply.answers')}
               </span>
             </div>
           ) : null}
         </div>
+
+        {isReplyShown && userData?._id && (
+          <ReplyForm
+            user={user}
+            className={styles.replyForm}
+            cancel={handleReplyClose}
+            refetchComments={reloadCommentsData}
+            commentId={commentId}
+          />
+        )}
 
         {isReplyListShown ? (
           <div>
@@ -198,13 +208,6 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
             {replyCommentsList}
           </div>
         ) : null}
-        {isReplyShown && userData?._id && (
-          <ReplyForm
-            cancel={handleReplyClose}
-            refetchComments={reloadCommentsData}
-            commentId={commentId}
-          />
-        )}
       </div>
       <CommentDialog
         handleClose={handleClose}

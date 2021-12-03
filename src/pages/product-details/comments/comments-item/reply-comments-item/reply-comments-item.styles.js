@@ -7,10 +7,18 @@ export const useStyles = makeStyles((theme) => {
     container: {
       color,
       borderTop: '2px solid #C2C2C2',
-      width: '95%',
-      margin: '0 0 0 auto',
-      paddingLeft: '20px',
-      paddingTop: '10px'
+      maxWidth: '756px',
+      margin: '0 80px 0 120px',
+      padding: '24px 0',
+      '@media (max-width: 1100px)': {
+        margin: '0 50px 0 80px'
+      },
+      '@media (max-width: 768px)': {
+        margin: '0 20px 0 40px'
+      },
+      '@media (max-width: 600px)': {
+        margin: '0 10px 0 20px'
+      }
     },
     comments: {
       fontWeight: '500'
@@ -49,7 +57,8 @@ export const useStyles = makeStyles((theme) => {
       paddingBottom: '5px'
     },
     notAproveText: {
-      color: '#989898',
+      fontSize: '16px',
+      fontWeight: '400',
       paddingBottom: '5px'
     },
     button: {
@@ -59,6 +68,7 @@ export const useStyles = makeStyles((theme) => {
     },
     user: {
       display: 'flex',
+      paddingBottom: '12px',
       alignItems: 'center'
     },
     avatar: {
@@ -66,7 +76,7 @@ export const useStyles = makeStyles((theme) => {
       height: '60px'
     },
     name: {
-      fontSize: '1rem',
+      fontSize: '16px',
       fontWeight: '700'
     },
     icons: {
@@ -85,7 +95,8 @@ export const useStyles = makeStyles((theme) => {
       display: 'flex'
     },
     userIcons: {
-      margin: 'auto'
+      margin: 'auto',
+      marginRight: '0'
     },
     boughtIcon: {
       color: '#01a00d',
@@ -112,6 +123,9 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     icon: {
+      width: '28px',
+      height: '28px',
+      paddingBottom: '10px',
       color: `rgb(${color} / 87%)`
     }
   };

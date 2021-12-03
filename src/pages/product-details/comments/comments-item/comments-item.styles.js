@@ -21,12 +21,17 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     container: {
-      color,
-      borderTop: '2px solid #C2C2C2',
-      padding: '10px 0'
+      fontFamily: 'Open sans',
+      border: '1px solid #C2C2C2',
+      padding: '20px'
+    },
+    replyForm: {
+      margin: '0',
+      borderTop: '2px solid #C2C2C2'
     },
     comments: {
-      fontWeight: '500'
+      fontWeight: '700',
+      fontSize: '14px'
     },
     date: {
       color
@@ -53,25 +58,30 @@ export const useStyles = makeStyles((theme) => {
     },
 
     deleteIcon: {
+      marginRight: '0',
       '&:hover': {
         cursor: 'pointer'
       }
     },
     text: {
+      fontSize: '16px',
+      fontWeight: '400',
       flexGrow: 1,
       maxWidth: '90%'
     },
-    notAproveText: {
-      color: '#989898'
-    },
+    // notAproveText: {
+    //   color: '#989898'
+    // },
     button: {
       margin: '0',
-      height: '30px',
+      fontSize: '14px',
+      lineHeight: '20px',
       '&:hover': {
         cursor: 'pointer',
         borderBottom: '2px solid #000000'
       }
     },
+
     replyCount: {
       display: 'flex',
       marginLeft: '15px',
@@ -85,7 +95,7 @@ export const useStyles = makeStyles((theme) => {
       alignItems: 'center'
     },
     name: {
-      fontSize: '1rem',
+      fontSize: '16px',
       fontWeight: '700'
     },
     icons: {
@@ -105,7 +115,8 @@ export const useStyles = makeStyles((theme) => {
     },
     userIcons: {
       display: 'flex',
-      margin: 'auto'
+      margin: 'auto',
+      marginRight: '0'
     },
     boughtIcon: {
       color: '#01a00d',
@@ -144,6 +155,8 @@ export const useStyles = makeStyles((theme) => {
       marginBottom: '10px'
     },
     icon: {
+      height: '20px',
+      width: '20px',
       color: `rgb(${color} / 87%)`
     }
   };

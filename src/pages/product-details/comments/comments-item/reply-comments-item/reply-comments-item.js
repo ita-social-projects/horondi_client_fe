@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+// import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
@@ -92,7 +93,7 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
                 <Tooltip title={t('product.tooltips.delete')}>
-                  <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
+                  <DeleteIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>
             ) : null}

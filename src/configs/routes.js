@@ -25,7 +25,8 @@ const routes = {
   pathToThanks: '/thanks',
   pathToProfile: '/profile',
   pathToTerms: '/pages/terms',
-  pathToUserAgreement: '/pages/user-agreement'
+  pathToUserAgreement: '/pages/user-agreement',
+  pathToAnswersQuestionsPage: '/answers-questions'
 };
 
 export default routes;

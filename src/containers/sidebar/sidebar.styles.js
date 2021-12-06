@@ -22,6 +22,12 @@ export const useStyles = makeStyles((theme) => ({
       height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
     }
   }),
+  closeIcon: {
+    width: '40px',
+    height: '40px',
+    marginLeft: '90%',
+    marginBottom: '5%'
+  },
   mainItem: {
     color: theme.palette.textColor,
     textTransform: 'uppercase',

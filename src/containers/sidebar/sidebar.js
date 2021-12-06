@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
 import { SIDEBAR_SUBLIST } from './constants';
@@ -90,6 +92,9 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       open={isMenuOpen}
       onClose={() => setIsMenuOpen(false)}
     >
+      <IconButton className={styles.closeIcon} onClick={() => setIsMenuOpen(false)}>
+        <CloseIcon />
+      </IconButton>
       <List>{categoriesList}</List>
       <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
         <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>

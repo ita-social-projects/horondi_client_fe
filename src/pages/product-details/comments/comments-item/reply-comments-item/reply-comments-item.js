@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-// import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';

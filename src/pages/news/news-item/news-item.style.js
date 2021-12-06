@@ -4,7 +4,8 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: 'Montserrat',
     boxShadow: 'none',
-    borderRadius: '0px'
+    borderRadius: '0px',
+    background: 'none'
   },
   Link: {
     textDecoration: 'none'

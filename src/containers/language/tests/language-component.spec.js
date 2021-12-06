@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import LanguageComponent from '../language-component';
@@ -17,13 +17,11 @@ jest.mock('react-i18next', () => ({
 const store = createStore(() => [], {});
 
 describe('Language component', () => {
-  it('Should render', () => {
+  it('Should render the component', () => {
     render(
       <Provider store={store}>
         <LanguageComponent />
       </Provider>
     );
-    screen.debug();
-    fireEvent.click(screen.getByText('UA'));
   });
 });

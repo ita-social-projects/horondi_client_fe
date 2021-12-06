@@ -92,7 +92,6 @@ const Comments = ({ productId }) => {
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem
       userFirstName={userFirstName}
-      // as
       key={_id}
       commentItem={rest}
       refetchComments={refetchComments}

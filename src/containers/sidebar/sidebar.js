@@ -2,7 +2,6 @@ import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
-import { useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +24,6 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
-  const { palette } = useTheme();
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -99,11 +97,14 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
         <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
       </Link>
+      <div className={styles.itemHighlighting} />
       {subList}
       <SocialLinks
+        showTitle
+        fromSideBar
         socialIconsStyles={styles.socialIconsStyles}
-        position='center'
-        color={palette.textColor}
+        position='flex-start'
+        color='#4267B2'
         setIsMenuOpen={setIsMenuOpen}
       />
       <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />

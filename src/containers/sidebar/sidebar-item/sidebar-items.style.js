@@ -20,7 +20,11 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper
   },
-
+  itemHighlighting: {
+    width: '100%',
+    marginTop: '3%',
+    borderBottom: '2px solid gray'
+  },
   list: {
     margin: '10px'
   },

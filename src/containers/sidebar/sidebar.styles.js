@@ -24,9 +24,12 @@ export const useStyles = makeStyles((theme) => ({
   }),
   closeIcon: {
     width: '40px',
-    height: '40px',
-    marginLeft: '90%',
-    marginBottom: '5%'
+    height: '40px'
+  },
+  itemHighlighting: {
+    width: '100%',
+    marginTop: '3%',
+    borderBottom: '2px solid gray'
   },
   mainItem: {
     color: theme.palette.textColor,
@@ -36,7 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     width: '100%',
     '& span, & svg': {
-      fontSize: '1.5em'
+      fontSize: '2.5em'
     },
     '&:hover span': {
       textDecoration: 'underline'
@@ -72,6 +75,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   constructorItem: {
-    padding: '30px 0 0'
+    padding: '3% 0 0'
   }
 }));

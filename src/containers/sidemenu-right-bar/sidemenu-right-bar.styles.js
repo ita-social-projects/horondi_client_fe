@@ -5,8 +5,32 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     marginLeft: 'auto',
     alignItems: 'center',
-    marginTop: fromSideBar ? 'auto' : 0
+    marginTop: 'auto'
   }),
+  wishlist: {
+    padding: '0 4px',
+    position: 'relative',
+    cursor: 'pointer',
+    zIndex: 20,
+    transition: '1s',
+    height: '33px',
+    width: '50px',
+    textAlign: 'center',
+    '&:hover': {
+      backgroundColor: 'black',
+      '& svg': {
+        color: 'white'
+      }
+    },
+    '& svg': {
+      position: 'relative',
+      zIndex: 5,
+      fontSize: '2rem',
+      color: 'black',
+      border: 'none',
+      outline: 'none'
+    }
+  },
   currency: {
     '& div:hover': {
       background: 'black',

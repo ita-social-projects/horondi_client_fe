@@ -10,17 +10,19 @@ import { HORONDI } from '../../configs';
 import { HORONDI_FB_LINK, HORONDI_INST_LINK } from './constants';
 import { useStyles } from './social-links.styles';
 
-const SocialLinks = ({ showTitle, position, color }) => {
+const SocialLinks = ({ showTitle, position, color, fromSideBar }) => {
   const { t } = useTranslation();
   const styles = useStyles({ position, color });
 
   return (
     <div className={styles.cardBody}>
-      <Typography variant='h5'>
-        <Link to='/' className={styles.logo}>
-          {HORONDI.toUpperCase()}
-        </Link>
-      </Typography>
+      {fromSideBar ? null : (
+        <Typography variant='h5'>
+          <Link to='/' className={styles.logo}>
+            {HORONDI.toUpperCase()}
+          </Link>
+        </Typography>
+      )}
       <div className={styles.iconsBox}>
         {showTitle && (
           <div className={styles.cardTitle} data-testid='title'>

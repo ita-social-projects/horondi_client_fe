@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import LanguageComponent from '../language-component';
@@ -15,13 +15,16 @@ jest.mock('react-i18next', () => ({
 }));
 
 const store = createStore(() => [], {});
+const handleChange = jest.fn();
 
 describe('Language component', () => {
-  it('Should render the component', () => {
+  it('Should render the component and execute function when you click on language button', () => {
     render(
       <Provider store={store}>
         <LanguageComponent />
       </Provider>
     );
+    fireEvent.click(screen.getAllByRole('button')[0], { handleChange: handleChange() });
+    expect(handleChange).toHaveBeenCalledTimes(1);
   });
 });

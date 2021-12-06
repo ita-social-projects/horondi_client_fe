@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import ImgsViewer from 'react-images-viewer';
 import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@material-ui/icons';
 import { useTheme } from '@material-ui/styles';
+import Loader from '../../../components/loader';
 
 import { useStyles } from './product-images.styles';
 import { getImage } from '../../../utils/imageLoad';
@@ -14,6 +15,7 @@ const ProductImages = ({ images }) => {
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
   const [primaryImage, setPrimaryImage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
   const { palette } = useTheme();
@@ -27,6 +29,7 @@ const ProductImages = ({ images }) => {
 
   useEffect(() => {
     const initialPhotos = async () => {
+      setLoading(true);
       const mapImages = await Promise.all(
         initImages.map(async (item) => {
           try {
@@ -39,6 +42,7 @@ const ProductImages = ({ images }) => {
       );
 
       setImagesSet(mapImages);
+      setLoading(false);
     };
     initialPhotos();
   }, [isLightTheme, initImages]);
@@ -109,11 +113,15 @@ const ProductImages = ({ images }) => {
             <ArrowBackIosRounded />
           </button>
           <div className={styles.imageContainer}>
-            <img
-              src={imagesSet[primaryImage]?.src}
-              className={styles.primaryImage}
-              alt={t('product.imgAltInfo')}
-            />
+            {loading ? (
+              <Loader heightWrap='100px' />
+            ) : (
+              <img
+                src={imagesSet[primaryImage]?.src}
+                className={styles.primaryImage}
+                alt={t('product.imgAltInfo')}
+              />
+            )}
           </div>
           <button
             className={styles.circle}

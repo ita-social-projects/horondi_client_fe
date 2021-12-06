@@ -69,9 +69,6 @@ export const useStyles = makeStyles((theme) => {
       flexGrow: 1,
       maxWidth: '90%'
     },
-    // notAproveText: {
-    //   color: '#989898'
-    // },
     button: {
       margin: '0',
       fontSize: '14px',

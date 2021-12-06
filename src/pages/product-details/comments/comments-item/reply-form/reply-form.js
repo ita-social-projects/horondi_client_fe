@@ -15,7 +15,7 @@ import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';
 import { SnackBarContext } from '../../../../../context/snackbar-context';
 
-const ReplyForm = ({ user, cancel, commentId, refetchComments }) => {
+const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
   const { setSnackBarMessage } = useContext(SnackBarContext);
@@ -67,7 +67,7 @@ const ReplyForm = ({ user, cancel, commentId, refetchComments }) => {
       <div className={styles.form}>
         <div className={styles.formHeader}>
           <span>
-            <span>Your name</span>
+            <span>{userFirstName}</span>
             <ReplyOutlinedIcon className={styles.replyIcon} />
             <span>{firstName}</span>
           </span>

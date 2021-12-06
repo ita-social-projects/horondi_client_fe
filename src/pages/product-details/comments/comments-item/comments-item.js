@@ -26,7 +26,7 @@ import Loader from '../../../../components/loader';
 import ReplyForm from './reply-form';
 import CommentDialog from './comment-dialog';
 
-const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) => {
+const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetchComments }) => {
   const styles = useStyles();
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase } = commentItem;
 
@@ -112,7 +112,6 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
   const limitOption = replyCommentsList.length === replyCommentsCount;
 
   const loadMore = limitOption ? null : t('common.reply.loadMore');
-
   return (
     <div className={styles.container}>
       <div className={styles.comments}>
@@ -181,6 +180,7 @@ const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) =>
 
         {isReplyShown && userData?._id && (
           <ReplyForm
+            userFirstName={userFirstName}
             user={user}
             className={styles.replyForm}
             cancel={handleReplyClose}

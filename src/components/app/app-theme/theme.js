@@ -51,11 +51,11 @@ export default {
     orderHistoryHeading: {
       background: '#DEDEDE'
     },
-    profilePageLabel: profilePageLabel
+    profilePageLabel
   },
   dark: {
     textColor: '#FFFFFF',
-    backgroundColor: '#353333',
+    backgroundColor: '#242424',
     catalogPageFilterCell: {
       hover: {
         backgroundColor: '#7c7b7b'
@@ -96,6 +96,6 @@ export default {
     orderHistoryHeading: {
       background: '#2F2F2F '
     },
-    profilePageLabel: profilePageLabel
+    profilePageLabel
   }
 };

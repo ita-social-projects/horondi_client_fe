@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import OrderHistoryItemProduct from '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product';
-import { item } from './order-history-item-product.variables';
+import { item, translationsKey } from './order-history-item-product.variables';
 
 jest.mock(
   '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product.styles',
@@ -26,7 +26,7 @@ describe('OrderHistoryOrderItem component tests', () => {
     expect(img).toBeTruthy();
   });
   it('product name is displayed in component', () => {
-    render(<OrderHistoryItemProduct item={item} currency={0} />);
-    expect(screen.getByText(/rolltop yellow/i)).toBeInTheDocument();
+    render(<OrderHistoryItemProduct item={item} currency={1} />);
+    expect(screen.getByText(new RegExp(translationsKey, 'i'))).toBeInTheDocument();
   });
 });

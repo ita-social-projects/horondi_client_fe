@@ -82,6 +82,7 @@ export const getFilteredProductsQuery = gql`
           }
           availableCount
           rate
+          translationsKey
           sizes {
             size {
               available

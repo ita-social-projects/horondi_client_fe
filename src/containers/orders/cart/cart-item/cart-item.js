@@ -23,7 +23,7 @@ import Loader from '../../../../components/loader';
 
 const { pathToProducts } = routes;
 
-const CartItem = ({ item, language, setModalVisibility, setModalItem, cartOperations }) => {
+const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) => {
   const dispatch = useDispatch();
   const styles = useStyles();
   const { t } = useTranslation();
@@ -97,7 +97,7 @@ const CartItem = ({ item, language, setModalVisibility, setModalItem, cartOperat
         </Link>
         <div>
           <Link to={`${pathToProducts}/${cartItem._id}`}>
-            <span className={styles.itemName}>{cartItem.name[language].value}</span>
+            <span className={styles.itemName}>{t(`${cartItem.translationsKey}.name`)}</span>
           </Link>
           {cartItem.bottomMaterial && (
             <div className={styles.itemDescription}>

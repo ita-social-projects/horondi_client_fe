@@ -6,10 +6,7 @@ export const getProductById = gql`
       ... on Product {
         __typename
         _id
-        name {
-          lang
-          value
-        }
+        translationsKey
         bottomMaterial {
           material {
             translationsKey

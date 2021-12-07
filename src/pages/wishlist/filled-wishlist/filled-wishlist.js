@@ -89,7 +89,7 @@ const FilledWishlist = ({ items }) => {
         {modalVisibility && (
           <div>
             <Modal
-              itemName={modalItem.name[language].value}
+              itemName={t(`${modalItem.translationsKey}.name`)}
               message={t('modal.modalDeleteFromWishlistMessage')}
               isOpen={modalVisibility}
               onAction={onModalAction}

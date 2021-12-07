@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import {
   mockedCartItemsData,
   mockedProps,
-  mockNameUA,
   mockQueryData,
   mockTranslationsKey
 } from './your-order.variables';
@@ -48,7 +47,6 @@ describe('<YourOrder /> component tests', () => {
     render(<YourOrder {...mockedProps} />);
 
     expect(screen.getAllByText(new RegExp(mockTranslationsKey, 'i'))).toHaveLength(2);
-    expect(screen.getAllByText(new RegExp(mockNameUA, 'i'))).toHaveLength(2);
     expect(mockGetTotalPrice).toHaveBeenCalled();
     expect(screen.getByRole('list')).toBeTruthy();
   });

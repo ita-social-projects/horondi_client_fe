@@ -123,6 +123,20 @@ const ProductDetails = ({ match }) => {
     ? t('product.tooltips.removeWishful')
     : t('product.tooltips.addWishful');
 
+  const favoriteIcon = isInWishlist ? (
+    <FavoriteIcon
+      data-cy='wishful'
+      className={productSubmitStyles.redHeart}
+      onClick={wishlistHandler}
+    />
+  ) : (
+    <FavouriteBorderIcon
+      data-cy='not-wishful'
+      className={productSubmitStyles.heart}
+      onClick={wishlistHandler}
+    />
+  );
+
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
 
@@ -181,19 +195,7 @@ const ProductDetails = ({ match }) => {
             <>
               <div className={styles.submit}>
                 <Tooltip title={wishlistTip} placement='bottom'>
-                  {isInWishlist ? (
-                    <FavoriteIcon
-                      data-cy='wishful'
-                      className={productSubmitStyles.redHeart}
-                      onClick={wishlistHandler}
-                    />
-                  ) : (
-                    <FavouriteBorderIcon
-                      data-cy='not-wishful'
-                      className={productSubmitStyles.heart}
-                      onClick={wishlistHandler}
-                    />
-                  )}
+                  {favoriteIcon}
                 </Tooltip>
               </div>
               <div className={styles.notAvailable}>{t('product.notAvailable')}</div>

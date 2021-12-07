@@ -79,14 +79,14 @@ const ProductListPage = ({ width }) => {
   }, [search]);
 
   useEffect(() => {
-    setSortParams((prevState) => getSortParamsFromQuery(prevState));
+    setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));
     setPaginationParams((prevState) => ({
       ...prevState,
       currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
       countPerPage: +searchParams.get(URL_QUERIES_NAME.countPerPage) || 9
     }));
     setFilterParams(getFilterParamsFromQuery(searchParams));
-  }, [searchParams]);
+  }, [searchParams, sortParamsFromQuery]);
 
   const changeHandler = (e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);

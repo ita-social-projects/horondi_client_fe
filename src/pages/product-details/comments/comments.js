@@ -52,9 +52,8 @@ const Comments = ({ productId }) => {
       setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
     }
   });
-
   const { isLoading } = useIsLoadingOrError([addCommentLoading, getCommentsLoading]);
-  const { _id: userId } = userData || {};
+  const { _id: userId, firstName: userFirstName } = userData || {};
 
   const onSubmit = async (formValues) => {
     const userFields = userId ? { user: userId } : {};
@@ -92,6 +91,7 @@ const Comments = ({ productId }) => {
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem
+      userFirstName={userFirstName}
       key={_id}
       commentItem={rest}
       refetchComments={refetchComments}

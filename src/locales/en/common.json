@@ -60,11 +60,11 @@
     "email": "Deleted Email"
   },
   "reply": {
-    "submit": "Leave reply",
+    "submit": "Answer",
     "loadMore": "More answers",
     "hideBtn": "Hide answers",
     "text": "Share your thoughts with others",
-    "answers": "Count of answers",
+    "answers": "Answers",
     "isAdmin": "Manager"
   },
   "sortOptions": {

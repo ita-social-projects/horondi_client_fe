@@ -22,7 +22,6 @@ export const useStyles = makeStyles((theme) => ({
     '& hr': {
       border: 'none',
       color: '#C2C2C2',
-      backgroundColor: '#C2C2C2',
       height: '0.05rem'
     },
     '@media (max-width: 400px)': {
@@ -34,7 +33,6 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '15px',
     '& *': {
       '& .MuiOutlinedInput-root': {
-        background: '#fff',
         '& fieldset': {
           borderColor: theme.palette.textColor
         },

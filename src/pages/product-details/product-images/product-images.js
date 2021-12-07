@@ -84,13 +84,15 @@ const ProductImages = ({ images }) => {
       }
       return (
         <div key={i}>
-          <img
-            className={styles.sideImage}
-            src={image.src}
-            alt={t('product.imgAltInfo')}
-            onClick={() => setPrimaryImage(imagesSet.indexOf(secondaryImages[i]))}
-            data-cy='image'
-          />
+          {loading ? (
+            <Loader heightWrap='100px' />
+          ) : (
+            <img
+              src={imagesSet[primaryImage]?.src}
+              className={styles.primaryImage}
+              alt={t('product.imgAltInfo')}
+            />
+          )}
         </div>
       );
     });
@@ -124,15 +126,11 @@ const ProductImages = ({ images }) => {
             <ArrowBackIosRounded />
           </button>
           <div className={styles.imageContainer}>
-            {loading ? (
-              <Loader heightWrap='100px' />
-            ) : (
-              <img
-                src={imagesSet[primaryImage]?.src}
-                className={styles.primaryImage}
-                alt={t('product.imgAltInfo')}
-              />
-            )}
+            <img
+              src={imagesSet[primaryImage]?.src}
+              className={styles.primaryImage}
+              alt={t('product.imgAltInfo')}
+            />
           </div>
           <button
             className={styles.circle}

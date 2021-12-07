@@ -17,8 +17,6 @@ const imgSides = {
 export const useStyles = makeStyles((theme) => ({
   images: {
     display: 'grid',
-    gridTemplateRows: '540px 150px',
-
     gridGap: '20px',
     '@media (max-width: 500px)': {
       display: 'flex',
@@ -30,19 +28,31 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%'
     }
   },
+  imagePreviewContainer: {
+    display: 'grid',
+    gridTemplateColumns: '48px 1fr 48px',
+    alignItems: 'center',
+    border: '2px solid #EBEFF2',
+    borderRadius: '6px',
+    padding: '10px',
+    height: '385px',
+    boxShadow: [
+      '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
+      '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
+      '0 12.5px 10px rgba(0, 0, 0, 0.06)'
+    ]
+  },
 
   imageContainer: {
     display: 'block',
-    padding: '10px',
-    maxHeight: 500,
     borderRadius: '6px',
-    hidden: 'overflow'
+    overflow: 'hidden'
   },
 
   primaryImage: {
     gridRow: '1 / -1',
     backgroundSize: 'cover',
-    maxHeight: '450px',
+    maxHeight: '350px',
     width: 'auto',
     objectFit: 'cover',
 
@@ -56,27 +66,13 @@ export const useStyles = makeStyles((theme) => ({
     ...imgSides
   },
 
-  imagePreviewContainer: {
-    display: 'grid',
-    gridTemplateColumns: '48px 1fr 48px',
-    alignItems: 'center',
-    border: '2px solid #EBEFF2',
-    borderRadius: '6px',
-    padding: '10px',
-    height: '540px',
-    boxShadow: [
-      '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
-      '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
-      '0 12.5px 10px rgba(0, 0, 0, 0.06)'
-    ]
-  },
-
   circle: {
     background: 'none',
     display: 'flex',
     width: '48px',
     height: '48px',
     border: 'solid 1px',
+    borderColor: theme.palette.textColor,
     borderRadius: '50%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -85,7 +81,7 @@ export const useStyles = makeStyles((theme) => ({
 
   additionalImagePreview: {
     display: 'flex',
-    flexDirection: 'row',
+    alignItems: 'flex-end',
     maxHeight: '150px',
     justifyContent: 'space-between'
   },

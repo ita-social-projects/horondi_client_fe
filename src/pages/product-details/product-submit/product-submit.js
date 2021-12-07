@@ -40,7 +40,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
     ? t('product.pdpButtons.inCart')
     : t('product.pdpButtons.cartButton');
 
-  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
+  // const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
   const onAddToCart = () => {
     if (isItemInCart) {
@@ -112,6 +112,14 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
 
   return (
     <div className={styles.submit}>
+      <Button className={styles.submitButton} onClick={onAddToCheckout}>
+        {t('product.pdpButtons.buyButton')}
+      </Button>
+      <Tooltip title={cartTootipTitle} placement='bottom'>
+        <Button className={styles.toCart} onClick={cartButtonFunc}>
+          {cartButtonLabel}
+        </Button>
+      </Tooltip>
       <Tooltip title={wishlistTip} placement='bottom'>
         {isInWishlist ? (
           <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={wishlistHandler} />
@@ -123,14 +131,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
           />
         )}
       </Tooltip>
-      <Tooltip title={cartTootipTitle} placement='bottom'>
-        <Button className={buttonStyle} onClick={cartButtonFunc}>
-          {cartButtonLabel}
-        </Button>
-      </Tooltip>
-      <Button className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('product.pdpButtons.buyButton')}
-      </Button>
     </div>
   );
 };

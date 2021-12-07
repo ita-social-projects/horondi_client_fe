@@ -23,7 +23,7 @@ import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
 import { SnackBarContext } from '../../../context/snackbar-context';
 
-const Comments = ({ productId }) => {
+const Comments = ({ productId, checkCountComments }) => {
   const styles = useStyles();
   const [comments, setComments] = useState({ items: [], count: 0 });
   const [currentLimit, setCurrentLimit] = useState(10);
@@ -45,6 +45,7 @@ const Comments = ({ productId }) => {
     onError: (err) => errorOrLoadingHandler(err)
   });
 
+  checkCountComments(comments);
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
     onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
     onError: (err) => {
@@ -111,7 +112,7 @@ const Comments = ({ productId }) => {
   };
 
   return (
-    <div className={styles.comment}>
+    <div className={styles.comment} id='comment'>
       <h2 className={styles.title}>{t('product.comments.title')}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>

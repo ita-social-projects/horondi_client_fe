@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
@@ -26,7 +26,7 @@ import Loader from '../../../../components/loader';
 import ReplyForm from './reply-form';
 import CommentDialog from './comment-dialog';
 
-const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetchComments }) => {
+const CommentsItem = ({ commentItem, commentId, productId, refetchComments }) => {
   const styles = useStyles();
   const { user, text, date, show, rate, replyCommentsCount, verifiedPurchase } = commentItem;
 
@@ -112,6 +112,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
   const limitOption = replyCommentsList.length === replyCommentsCount;
 
   const loadMore = limitOption ? null : t('common.reply.loadMore');
+
   return (
     <div className={styles.container}>
       <div className={styles.comments}>
@@ -139,7 +140,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
           </div>
           <div className={styles.date}>{commentDate}</div>
         </div>
-        <div>{handleRate(rate)}</div>
+        {handleRate(rate)}
         <div className={styles.textContent}>
           <div
             className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}
@@ -151,7 +152,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
                 <Tooltip title={t('product.tooltips.delete')}>
-                  <DeleteIcon className={styles.deleteIcon} onClick={handleOpen} />
+                  <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>
             ) : null}
@@ -170,24 +171,13 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
             <div className={styles.replyCount} onClick={showReplyList}>
               <ChatBubbleOutlineOutlinedIcon className={styles.icon} />
               <span className={styles.replyText}>
-                {replyCommentsCount}
-                {'\u00A0'}
                 {t('common.reply.answers')}
+                {'\u00A0'}
+                {replyCommentsCount}
               </span>
             </div>
           ) : null}
         </div>
-
-        {isReplyShown && userData?._id && (
-          <ReplyForm
-            userFirstName={userFirstName}
-            user={user}
-            className={styles.replyForm}
-            cancel={handleReplyClose}
-            refetchComments={reloadCommentsData}
-            commentId={commentId}
-          />
-        )}
 
         {isReplyListShown ? (
           <div>
@@ -208,6 +198,13 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
             {replyCommentsList}
           </div>
         ) : null}
+        {isReplyShown && userData?._id && (
+          <ReplyForm
+            cancel={handleReplyClose}
+            refetchComments={reloadCommentsData}
+            commentId={commentId}
+          />
+        )}
       </div>
       <CommentDialog
         handleClose={handleClose}

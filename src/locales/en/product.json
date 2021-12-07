@@ -1,64 +1,70 @@
 {
-    "imgAltInfo": "Product image",
-    "allPhotos": "View All Photos",
-    "pattern": "Pattern",
-    "notAvailable": "Not available",
-    "productDescription": {
-        "description": "Product description",
-        "mainMaterial": "Main material",
-        "innerMaterial": "Inner material",
-        "bottomMaterial": "Bottom material",
-        "strapLengthInCm": "Strap length(cm) "
-    },
-    "weight": {
-        "weightLabel": "Weight(kg)",
-        "volumeLabel": "Volume(L)"
-    },
-    "priceFrom": "from ",
-    "sizeNotAvailable": "Product isn't available",
-
-    "pdpButtons": {
-        "cartButton": "Add to cart",
-        "buyButton": "Buy now",
-        "submitButton": "Submit",
-        "cancelButton": "Cancel",
-        "leaveReply": "Leave reply",
-        "inCart": "View in Cart"
-    },
-    "tooltips": {
-        "addWishful": "Add to wishlist",
-        "removeWishful": "Remove from wishlist",
-        "edit": "Edit",
-        "delete": "Delete",
-        "unregisteredReply": "You should be logged in to leave answer",
-        "unregisteredComment": "You should be logged in to leave comment",
-        "bought": "The user bought this product",
-        "feedbackComment": "Your comment has not been confirmed by the administrator",
-        "feedbackReply": "Your answer has not been confirmed by the administrator",
-        "itemInCart": "Product is already in cart",
-        "itemInCartAlready": "Add product to the cart"
-    },
-    "toastMessage": {
-        "addedToWishList": "Added to wishlist",
-        "removedFromWishList": "Removed from wishlist",
-        "addedToCard": "Added to cart"
-    },
-    "similarItems": {
-        "title": "It fits well with this"
-    },
-    "comments": {
-        "title": "Comments",
-        "text": "Share your thoughts with others",
-        "submit": "Leave comment",
-        "unregisteredTip": "You should be logged in to leave rate",
-        "registeredTip": "You should buy the product to leave rate",
-        "successfulTip": "Set rate",
-        "loadMore": "Load more...",
-        "hideBtn": "Hide comments"
-    },
-    "snackBar": {
-        "added": "Your comment is successfully added",
-        "addedReply": "Your answer is successfully added",
-        "deleted":  "Your comment is successfully deleted"
-    }
+  "imgAltInfo": "Product image",
+  "allPhotos": "View All Photos",
+  "pattern": "Pattern",
+  "notAvailable": "Not available",
+  "productDescription": {
+    "description": "Product Description",
+    "mainMaterial": "Main material",
+    "innerMaterial": "Inner material",
+    "bottomMaterial": "Bottom material",
+    "strapLengthInCm": "Strap length(cm) ",
+    "material": "Material",
+    "measurement": "Measurement"
+  },
+  "weight": {
+    "weightLabel": "Weight(kg)",
+    "volumeLabel": "Volume(L)"
+  },
+  "priceFrom": "from ",
+  "sizeNotAvailable": "Product isn't available",
+  "pdpButtons": {
+    "cartButton": "Add to cart",
+    "buyButton": "Buy now",
+    "submitButton": "Submit",
+    "cancelButton": "Cancel",
+    "leaveReply": "Leave reply",
+    "inCart": "View in Cart"
+  },
+  "tooltips": {
+    "addWishful": "Add to wishlist",
+    "removeWishful": "Remove from wishlist",
+    "edit": "Edit",
+    "delete": "Delete",
+    "unregisteredReply": "You should be logged in to leave answer",
+    "unregisteredComment": "You should be logged in to leave comment",
+    "bought": "The user bought this product",
+    "feedbackComment": "Your comment has not been confirmed by the administrator",
+    "feedbackReply": "Your answer has not been confirmed by the administrator",
+    "itemInCart": "Product is already in cart",
+    "itemInCartAlready": "Add product to the cart"
+  },
+  "toastMessage": {
+    "addedToWishList": "Added to wishlist",
+    "removedFromWishList": "Removed from wishlist",
+    "addedToCard": "Added to cart"
+  },
+  "similarItems": {
+    "title": "It fits well with this"
+  },
+  "comments": {
+    "title": "Comments",
+    "text": "Share your thoughts with others",
+    "submit": "Leave comment",
+    "unregisteredTip": "You should be logged in to leave rate",
+    "registeredTip": "You should buy the product to leave rate",
+    "successfulTip": "Set rate",
+    "loadMore": "Load more...",
+    "hideBtn": "Hide comments"
+  },
+  "snackBar": {
+    "added": "Your comment is successfully added",
+    "addedReply": "Your answer is successfully added",
+    "deleted": "Your comment is successfully deleted"
+  },
+  "size": {
+    "S": "Small",
+    "M": "Medium",
+    "L": "Long"
+  }
 }

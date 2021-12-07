@@ -2,22 +2,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
-    fontFamily: 'Montserrat',
+    fontFamily: 'Open San',
     width: '80%',
     minHeight: '1200px',
     margin: '2rem auto',
-    backgroundColor: theme.palette.card.backgroundColor,
-    border: theme.palette.card.border,
     boxSizing: 'border-box',
-    borderRadius: '5px',
     '@media (max-width: 600px)': {
       width: '100%',
       margin: '0'
     }
   },
   product: {
-    display: 'grid',
-    gridTemplateColumns: '50% 50%',
+    display: 'flex',
     padding: '2rem',
     '@media (max-width: 1150px)': {
       display: 'block'
@@ -27,12 +23,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   productDetails: {
+    flex: '1 1 40%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     wordSpacing: '0.2rem',
     fontWeight: '500',
     marginLeft: '20px',
     '@media (max-width: 600px)': {
-      display: 'flex',
-      flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center'
     },
@@ -56,9 +54,5 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       transform: 'scale(1.1)'
     }
-  },
-  notAvailable: {
-    color: theme.palette.color,
-    fontSize: '24px'
   }
 }));

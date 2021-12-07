@@ -10,23 +10,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   form: {
-    margin: '0',
-    padding: '20px 80px 0 120px',
-    maxWidth: '960px',
+    marginTop: '15px',
+    paddingLeft: '3rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
-    '@media (max-width: 1100px)': {
-      padding: '0 50px 0 80px'
-    },
-    '@media (max-width: 768px)': {
-      padding: '0 20px 0 40px'
-    },
-    '@media (max-width: 600px)': {
-      padding: '0 10px 0 20px'
-    },
     '& *': {
       '& .MuiOutlinedInput-root': {
+        background: '#fff',
         '& fieldset': {
           borderColor: theme.palette.textColor
         },
@@ -55,31 +46,16 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   },
-  formHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    width: '100%',
-    '& :first-child': {
-      display: 'flex'
-    }
-  },
-  replyIcon: {
-    margin: '0 5px',
-    transform: 'scaleX(-1)'
-  },
   input: {
     marginTop: '10px',
     width: '100%'
   },
   replyBtn: {
-    padding: '8px 16px',
-    marginTop: '12px',
-    marginBottom: '24px',
+    marginTop: 25,
+    marginBottom: 40,
     textTransform: 'none',
     textAlign: 'center',
-    fontSize: '14px',
-    fontFamily: 'Open sans',
-    fontWeight: '600',
+    fontSize: '1rem',
     backgroundColor: theme.palette.button.normal.backgroundColor,
     color: theme.palette.button.normal.color,
     '&:hover': {
@@ -94,10 +70,5 @@ export const useStyles = makeStyles((theme) => ({
       textAlign: 'left important!'
     },
     marginLeft: '10px'
-  },
-  cancelBtn: {
-    color: theme.palette.black,
-    backgroundColor: theme.palette.white,
-    border: '1px solid'
   }
 }));

@@ -2,23 +2,20 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => {
   const sizeButton = {
-    fontSize: '1rem',
-    width: '45px',
-    height: '45px'
+    // fontSize: '1rem',
+    width: '36px',
+    height: '36px'
   };
 
   return {
     sizeButtons: {
-      position: 'relative',
-      display: 'flex',
-      width: '50px',
-      paddingBottom: '0.55rem',
-      '@media (max-width: 600px)': {
-        justifyContent: 'center',
-        marginLeft: '-20px'
-      }
+      // '@media (max-width: 600px)': {
+      //   justifyContent: 'center',
+      //   marginLeft: '-20px'
+      // }
     },
     label: {
+      display: 'block',
       fontWeight: '700',
       alignSelf: 'center',
       '@media (max-width: 600px)': {
@@ -51,11 +48,9 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     container: {
-      display: 'flex',
-      marginBottom: '1.35rem',
-      '@media (max-width: 600px)': {
-        justifyContent: 'center'
-      }
+      // '@media (max-width: 600px)': {
+      //   justifyContent: 'center'
+      // }
     }
   };
 });

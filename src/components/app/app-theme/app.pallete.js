@@ -9,6 +9,8 @@ const mediumGray = '#353333';
 const darkGray = '#232323';
 const yellow = '#E4B200';
 const blue = '#1976D2';
+const red = '#F44336';
+const lightPing = '#FEEFEF';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
@@ -18,6 +20,8 @@ export const paletteGenerator = (colorSchema) => ({
   darkGray,
   yellow,
   blue,
+  red,
+  lightPing,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {

@@ -30,6 +30,7 @@ export const getProductById = gql`
             }
           }
           color {
+            translations_key
             _id
             name {
               lang

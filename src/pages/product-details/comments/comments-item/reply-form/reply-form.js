@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
-import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
 import { useMutation } from '@apollo/client';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
@@ -15,7 +14,7 @@ import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';
 import { SnackBarContext } from '../../../../../context/snackbar-context';
 
-const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) => {
+const ReplyForm = ({ cancel, commentId, refetchComments }) => {
   const { t } = useTranslation();
 
   const { setSnackBarMessage } = useContext(SnackBarContext);
@@ -24,7 +23,6 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) 
     userData: User.userData,
     productId: Products.productToSend._id
   }));
-  const { firstName } = user;
 
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
     onError: (err) => {
@@ -59,20 +57,9 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) 
     setFieldValue(TEXT_VALUE, value);
   };
 
-  const d = new Date();
-  const currentDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form}>
-        <div className={styles.formHeader}>
-          <span>
-            <span>{userFirstName}</span>
-            <ReplyOutlinedIcon className={styles.replyIcon} />
-            <span>{firstName}</span>
-          </span>
-          <span>{currentDate}</span>
-        </div>
         <TextField
           multiline
           rows={commentFields.text.rows}
@@ -94,19 +81,15 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) 
             </div>
           )}
           <Button
-            onClick={cancel}
-            disabled={addReplyLoading}
-            className={`${styles.replyBtn} ${styles.cancelBtn}`}
-          >
-            {t('product.pdpButtons.cancelButton')}
-          </Button>
-          <Button
             type='submit'
             onClick={() => setShouldValidate(true)}
             disabled={addReplyLoading}
             className={styles.replyBtn}
           >
             {t('product.pdpButtons.leaveReply')}
+          </Button>
+          <Button onClick={cancel} disabled={addReplyLoading} className={styles.replyBtn}>
+            {t('product.pdpButtons.cancelButton')}
           </Button>
         </div>
       </div>

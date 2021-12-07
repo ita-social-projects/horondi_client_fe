@@ -34,7 +34,10 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
     <div className={styles.sizeButtons}>
       {sizeButtons ? (
         <div className={styles.container}>
-          <div className={styles.label}>{t('common.size')}:</div>
+          <div className={styles.label}>
+            <span>{t('common.size')}: </span>
+            <span>{t(`product.size.${sizes[0].size.name}`)}</span>
+          </div>
           <div>
             <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
           </div>

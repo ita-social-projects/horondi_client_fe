@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => {
     marginTop: '1.2rem',
     marginRight: '1.2rem',
     fontSize: '2.5rem',
-    color: '#ed0505',
+    color: theme.palette.white,
     '&:hover': {
       transform: 'scale(1.15)',
       cursor: 'pointer',
@@ -54,10 +54,15 @@ export const useStyles = makeStyles((theme) => {
         marginTop: '0'
       }
     },
+    toCart: {
+      ...button,
+      border: '1px solid'
+    },
+
     submitButton: {
       ...button,
-      backgroundColor: theme.palette.button.normal.backgroundColor,
-      color: theme.palette.button.normal.color,
+      background: theme.palette.textColor,
+      color: theme.palette.backgroundColor,
       '&:hover': {
         backgroundColor: theme.palette.button.hover.backgroundColor,
         color: theme.palette.button.hover.color

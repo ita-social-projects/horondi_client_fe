@@ -11,7 +11,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
-import { useStyles as useSubmitStyles } from './product-submit/product-submit.styles';
 import { MATERIAL_UI_COLOR } from '../../configs';
 import { TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
@@ -29,6 +28,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { setToastMessage, setToastSettings } from '../../redux/toast/toast.actions';
 import useAddProductToWishlistHandler from '../../hooks/use-add-product-to-wishlist-handler';
+import ProductDescription from './product-description';
 
 const { pathToCategory } = routes;
 
@@ -38,7 +38,6 @@ const ProductDetails = ({ match }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
-  const productSubmitStyles = useSubmitStyles();
   const { palette } = useTheme();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
   const { loading, error, data } = useQuery(getProductById, {
@@ -65,6 +64,8 @@ const ProductDetails = ({ match }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id, dispatch]);
+
+  const [countComments, setCountComments] = useState(0);
 
   useEffect(() => {
     if (product.category) {
@@ -122,20 +123,9 @@ const ProductDetails = ({ match }) => {
   const wishlistTip = isInWishlist
     ? t('product.tooltips.removeWishful')
     : t('product.tooltips.addWishful');
-
-  const favoriteIcon = isInWishlist ? (
-    <FavoriteIcon
-      data-cy='wishful'
-      className={productSubmitStyles.redHeart}
-      onClick={wishlistHandler}
-    />
-  ) : (
-    <FavouriteBorderIcon
-      data-cy='not-wishful'
-      className={productSubmitStyles.heart}
-      onClick={wishlistHandler}
-    />
-  );
+  const checkCountComments = (count) => {
+    setCountComments(count);
+  };
 
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
@@ -175,36 +165,46 @@ const ProductDetails = ({ match }) => {
         <div className={styles.productDetails}>
           {!loading && (
             <ProductInfo
+              countComments={countComments}
               price={currentSize?.size ? currentSize.size.price : {}}
               product={product}
             />
           )}
-          {currentSize ? (
-            <>
-              <ProductSizes
-                handleSizeChange={handleSizeChange}
-                sizes={sizes}
-                sizeIsNotSelectedError={sizeIsNotSelectedError}
-              />
-              <ProductSubmit
-                product={product}
-                setSizeIsNotSelectedError={setSizeIsNotSelectedError}
-              />
-            </>
-          ) : (
-            <>
-              <div className={styles.submit}>
-                <Tooltip title={wishlistTip} placement='bottom'>
-                  {favoriteIcon}
-                </Tooltip>
-              </div>
-              <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
-            </>
-          )}
+          <ProductSizes
+            handleSizeChange={handleSizeChange}
+            sizes={sizes}
+            disabled={!currentSize}
+            sizeIsNotSelectedError={sizeIsNotSelectedError}
+          />
+          <div className={styles.test}>
+            <ProductSubmit
+              disabled={!currentSize}
+              product={product}
+              setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+            />
+            <Tooltip title={wishlistTip} placement='bottom'>
+              {isInWishlist ? (
+                <FavoriteIcon
+                  data-cy='wishful'
+                  className={styles.redHeart}
+                  onClick={wishlistHandler}
+                />
+              ) : (
+                <FavouriteBorderIcon
+                  data-cy='not-wishful'
+                  className={styles.heart}
+                  onClick={wishlistHandler}
+                />
+              )}
+            </Tooltip>
+          </div>
         </div>
       </div>
+      {product.description ? <ProductDescription product={product} /> : null}
       {product._id ? <SimilarProducts product={product} /> : null}
-      {product._id ? <Comments productId={product._id} /> : null}
+      {product._id ? (
+        <Comments productId={product._id} checkCountComments={checkCountComments} />
+      ) : null}
       <ToastContainer />
     </Card>
   );

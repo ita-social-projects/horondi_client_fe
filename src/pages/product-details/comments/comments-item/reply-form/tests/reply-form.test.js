@@ -41,9 +41,6 @@ describe('Comments test', () => {
   let wrapper;
 
   beforeEach(() => {
-    const user = {
-      firstName: 'Taras'
-    };
     mockUseDispatch.mockImplementation(() => mockDispatch);
     mockUseSelector.mockReturnValue({
       commentsLoading: false,
@@ -52,13 +49,7 @@ describe('Comments test', () => {
       userData: { _id: '111' }
     });
     wrapper = shallow(
-      <ReplyForm
-        cancel={() => null}
-        userFirstName='Max'
-        user={user}
-        commentId='2131231'
-        refetchComments={() => null}
-      />
+      <ReplyForm cancel={() => null} commentId='2131231' refetchComments={() => null} />
     );
   });
 
@@ -73,7 +64,7 @@ describe('Comments test', () => {
   });
 
   it('Should simulate submit event', () => {
-    wrapper.find(Button).at(1).props().onClick();
+    wrapper.find(Button).at(0).props().onClick();
     expect(mockSetShouldValidate).toHaveBeenCalledTimes(1);
   });
 

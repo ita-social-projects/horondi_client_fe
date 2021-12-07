@@ -17,7 +17,7 @@ import routes from '../../../configs/routes';
 import { getCurrencySign } from '../../../utils/currency';
 
 const ProductListItem = ({ product }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { palette } = useTheme();
 
   const { currency } = useSelector(({ Currency }) => ({
@@ -59,7 +59,7 @@ const ProductListItem = ({ product }) => {
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>
-            {i18n.language === 'ua' ? product.name[0].value : product.name[1].value}
+            {t(`${product.translationsKey}.name`)}
             <div>
               <span className={styles.title}>
                 <StarRating size='small' readOnly rate={product.rate} />

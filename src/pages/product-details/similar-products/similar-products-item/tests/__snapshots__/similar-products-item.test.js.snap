@@ -61,7 +61,9 @@ exports[`Similar products test Should render similar products component 1`] = `
               <div
                 className="makeStyles-info-2"
               >
-                <span />
+                <span>
+                  undefined.name
+                </span>
                 <span>
                   110
                 </span>

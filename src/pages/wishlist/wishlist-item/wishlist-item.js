@@ -24,14 +24,13 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
     userData: User.userData
   }));
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [isLightTheme] = useContext(ThemeContext);
   const styles = useStyles(isLightTheme);
   const dispatch = useDispatch();
   const { cartOperations, isInCart } = useCart(userData);
   const { addToCart } = cartOperations;
   const { pathToCart } = routes;
-  const language = i18n.language === 'ua' ? 0 : 1;
   const currencySign = getCurrencySign(currency);
   const onRemoveItem = () => {
     setModalVisibility(true);
@@ -107,7 +106,7 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
           </Link>
           <div>
             <Link to={`${pathToProducts}/${item._id}`}>
-              <span className={styles.itemName}>{item.name[language].value}</span>
+              <span className={styles.itemName}>{t(`${item.translationsKey}.name`)}</span>
             </Link>
             {item.bottomMaterial && (
               <div className={styles.description}>

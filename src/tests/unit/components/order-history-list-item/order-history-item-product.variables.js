@@ -1,45 +1,40 @@
+export const translationsKey = '61af3a903822cdd2c488175d';
+
 export const item = {
   quantity: 1,
   fixedPrice: [
     {
       currency: 'UAH',
-      value: 2050
+      value: 1000
+    },
+    {
+      currency: 'USD',
+      value: 37
     }
   ],
   options: {
     size: {
-      name: 'S'
+      name: 'M'
     }
   },
   product: {
-    _id: '1',
-    name: [
-      {
-        lang: 'ua',
-        value: 'Роллтоп жовтий'
-      },
-      {
-        lang: 'en',
-        value: 'Rolltop yellow'
-      }
-    ],
+    _id: '614cde2bde89a90024988075',
+    translationsKey,
+    model: {
+      sizes: [
+        {
+          name: 'M'
+        }
+      ]
+    },
     images: {
       primary: {
-        thumbnail: 'thumbnail_4051pm10kty4jeer_19.png'
+        thumbnail: 'thumbnail_eewk311kwgji24t_bagshop.png'
       }
     },
     bottomMaterial: {
       material: {
-        name: [
-          {
-            lang: 'ua',
-            value: 'Шкірзамінник'
-          },
-          {
-            lang: 'en',
-            value: 'Leatherette'
-          }
-        ]
+        translationsKey: '61840da5a40f604a050ce412'
       }
     }
   }

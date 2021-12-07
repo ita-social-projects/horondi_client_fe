@@ -11,8 +11,7 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
   const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const fixedPriceProduct = item.fixedPrice[currency].value;
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
 
   return (
     <>
@@ -25,10 +24,11 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
           />
         </TableCell>
         <TableCell className={styles.description}>
-          <p className={styles.productName}>{item.product.name[language].value}</p>
-          <p className={styles.productBottom}>{`${t('cart.bottomMaterial')} - ${
-            item.product.bottomMaterial.material.name[language].value
-          }`}</p>
+          <p className={styles.productName}>{t(`${item.product.translationsKey}.name`)}</p>
+          <p className={styles.productBottom}>
+            {t('cart.bottomMaterial')} -{' '}
+            {t(`${item.product.bottomMaterial.material.translationsKey}.name`)}
+          </p>
         </TableCell>
         <TableCell className={styles.description}>{item.options.size.name}</TableCell>
         <TableCell className={styles.description}>

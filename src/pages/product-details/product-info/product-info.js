@@ -18,12 +18,11 @@ const ProductInfo = ({ price, product }) => {
     colorUrl: colorImage,
     patternUrl: patternImage
   });
-  const { rate, name, description, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm } =
+  const { rate, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm, translationsKey } =
     product;
   const { t } = useTranslation();
-  const { language, currentPrice, currentWeight, currentVolume, currency } = useSelector(
-    ({ Language, Products: { productToSend }, Currency }) => ({
-      language: Language.language,
+  const { currentPrice, currentWeight, currentVolume, currency } = useSelector(
+    ({ Products: { productToSend }, Currency }) => ({
       currentPrice: productToSend.price || price,
       currentWeight: productToSend.dimensions.weightInKg || 0,
       currentVolume: productToSend.dimensions.volumeInLiters || 0,
@@ -36,7 +35,7 @@ const ProductInfo = ({ price, product }) => {
   return (
     <div>
       <div className={styles.head}>
-        <span className={styles.title}>{name[language].value}</span>
+        <span className={styles.title}>{t(`${translationsKey}.name`)}</span>
         <Tooltip title={rate.toFixed(2)} placement='left'>
           <span>
             <Rating value={rate} readOnly precision={0.1} />
@@ -46,7 +45,7 @@ const ProductInfo = ({ price, product }) => {
       <div className={styles.details}>
         <Detail
           subtitle={`${t('product.productDescription.description')}: `}
-          description={parse(description[language].value)}
+          description={parse(t(`${translationsKey}.description`))}
         />
         <Detail
           subtitle={t('product.productDescription.mainMaterial')}

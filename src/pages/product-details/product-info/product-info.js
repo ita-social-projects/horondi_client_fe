@@ -5,20 +5,15 @@ import parse from 'html-react-parser';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { useStyles } from './product-info.styles';
-import * as colorImage from '../../../images/red.jpg';
-import * as patternImage from '../../../images/pattern_2.jpg';
 import { getCurrencySign } from '../../../utils/currency';
-
 import Detail from '../detail';
+import { IMG_URL } from '../../../configs';
+import Colors from './colors';
 
 const ProductInfo = ({ price, product }) => {
-  const styles = useStyles({
-    colorUrl: colorImage,
-    patternUrl: patternImage
-  });
-  const { rate, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm, translationsKey } =
+  const styles = useStyles();
+  const { rate, name, description, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm } =
     product;
   const { t } = useTranslation();
   const { currentPrice, currentWeight, currentVolume, currency } = useSelector(
@@ -84,9 +79,19 @@ const ProductInfo = ({ price, product }) => {
       ) : null}
       <div className={styles.look}>
         <span className={styles.subtitle}>{t('common.color')}:</span>
-        <div className={styles.colorCircle} />
+        <img
+          className={styles.circle}
+          alt='color'
+          src={Colors[`${product.mainMaterial.color.name[1].value}`]}
+        />
+
         <span className={styles.subtitle}>{t('product.pattern')}:</span>
-        <div className={styles.patternCircle} />
+        <img
+          className={styles.circle}
+          alt='pattern'
+          src={`${IMG_URL}${product.pattern.images.large}`}
+        />
+
         <br />
       </div>
     </div>

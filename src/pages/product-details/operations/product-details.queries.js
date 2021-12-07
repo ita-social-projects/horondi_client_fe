@@ -100,6 +100,9 @@ export const getProductById = gql`
         }
         pattern {
           _id
+          images {
+            large
+          }
           name {
             lang
             value

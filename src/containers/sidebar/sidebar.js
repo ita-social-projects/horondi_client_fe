@@ -90,23 +90,31 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       open={isMenuOpen}
       onClose={() => setIsMenuOpen(false)}
     >
-      <IconButton className={styles.closeIcon} onClick={() => setIsMenuOpen(false)}>
-        <CloseIcon />
-      </IconButton>
-      <List>{categoriesList}</List>
-      <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
-        <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
-      </Link>
-      <div className={styles.itemHighlighting} />
-      {subList}
-      <SocialLinks
-        showTitle
-        fromSideBar
-        socialIconsStyles={styles.socialIconsStyles}
-        position='flex-start'
-        color='#4267B2'
-        setIsMenuOpen={setIsMenuOpen}
-      />
+      <div className={styles.closeIconContainer}>
+        <IconButton className={styles.closeIcon} onClick={() => setIsMenuOpen(false)}>
+          <CloseIcon />
+        </IconButton>
+      </div>
+      <div className={styles.sideMenuContent}>
+        <List>{categoriesList}</List>
+        <Link
+          to={pathToConstructor}
+          className={styles.mainItem}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
+        </Link>
+        <div className={styles.itemHighlighting} />
+        {subList}
+        <SocialLinks
+          showTitle
+          fromSideBar
+          socialIconsStyles={styles.socialIconsStyles}
+          position='flex-start'
+          color='#4267B2'
+          setIsMenuOpen={setIsMenuOpen}
+        />
+      </div>
       <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
     </Drawer>
   );

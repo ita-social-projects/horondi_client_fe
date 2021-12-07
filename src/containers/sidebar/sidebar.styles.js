@@ -8,8 +8,8 @@ export const useStyles = makeStyles((theme) => ({
       zIndex: 11,
       height: fromSideBar ? '100vh' : 'calc(100vh - 64px)',
       width: 'fit-content',
-      minWidth: '300px',
-      maxWidth: '450px',
+      minWidth: '400px',
+      maxWidth: '550px',
       '@media (max-width: 768px)': {
         top: '40px',
         height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
@@ -22,9 +22,18 @@ export const useStyles = makeStyles((theme) => ({
       height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
     }
   }),
+  closeIconContainer: {
+    display: 'flex',
+    alignItems: 'right',
+    justifyContent: 'right'
+  },
   closeIcon: {
     width: '40px',
-    height: '40px'
+    height: '40px',
+    transform: 'scale(1.5)'
+  },
+  sideMenuContent: {
+    width: '85%'
   },
   itemHighlighting: {
     width: '100%',

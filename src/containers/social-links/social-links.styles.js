@@ -40,12 +40,14 @@ export const useStyles = makeStyles(({ palette }) => ({
       textAlign: 'center'
     }
   },
-  iconsContainer: ({ position }) => ({
+  iconsContainer: ({ position, fromSideBar }) => ({
     display: 'flex',
     justifyContent: position,
     '@media screen and (max-width: 552px)': {
       justifyContent: 'space-around'
-    }
+    },
+    transform: fromSideBar ? 'scale(1.4)' : '',
+    margin: fromSideBar ? '1.5rem' : ''
   }),
   iconWrap: {
     margin: '0.5rem',

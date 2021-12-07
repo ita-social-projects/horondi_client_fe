@@ -5,7 +5,9 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     marginLeft: 'auto',
     alignItems: 'center',
-    marginTop: 'auto'
+    justifyContent: 'spaceAround',
+    marginTop: 'auto',
+    width: '100%'
   }),
   wishlist: {
     padding: '0 4px',
@@ -16,6 +18,7 @@ export const useStyles = makeStyles(() => ({
     height: '33px',
     width: '50px',
     textAlign: 'center',
+    transform: 'scale(1.0)',
     '&:hover': {
       backgroundColor: 'black',
       '& svg': {
@@ -31,13 +34,18 @@ export const useStyles = makeStyles(() => ({
       outline: 'none'
     }
   },
+  cartHeader: {
+    transform: 'scale(1.3)'
+  },
   currency: {
+    transform: 'scale(1.3)',
     '& div:hover': {
       background: 'black',
       transition: '0.5s easy'
     }
   },
   language: {
+    transform: 'scale(1.3)',
     '& div:hover': {
       background: 'black',
       transition: '0.5s easy'

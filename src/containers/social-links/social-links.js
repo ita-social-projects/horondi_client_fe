@@ -12,7 +12,7 @@ import { useStyles } from './social-links.styles';
 
 const SocialLinks = ({ showTitle, position, color, fromSideBar }) => {
   const { t } = useTranslation();
-  const styles = useStyles({ position, color });
+  const styles = useStyles({ position, color, fromSideBar });
 
   return (
     <div className={styles.cardBody}>

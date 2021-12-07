@@ -41,7 +41,7 @@ const ProductSort = () => {
     <option
       key={optionValue.name}
       value={JSON.stringify(optionValue)}
-      defaultValue={optionValue.name === query}
+      selected={optionValue.name === query}
     >
       {t(`common.sortOptions.${optionValue.name}`)}
     </option>

@@ -13,7 +13,7 @@ import Colors from './colors';
 
 const ProductInfo = ({ price, product }) => {
   const styles = useStyles();
-  const { rate, name, description, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm } =
+  const { rate, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm, translationsKey } =
     product;
   const { t } = useTranslation();
   const { currentPrice, currentWeight, currentVolume, currency } = useSelector(

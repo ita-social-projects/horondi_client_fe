@@ -32,15 +32,13 @@ const WishlistHeader = () => {
 
   return (
     <>
-      <span className={styles.cartIconWrapper}>
-        <Link to={pathToWishlist}>
-          <IconButton className={styles.root} aria-label={WISHLIST_KEY} tabIndex={-1} disableRipple>
-            <Badge badgeContent={wishlist} color='secondary' onClick>
-              <FavoriteBorderOutlined className={styles.svg} />
-            </Badge>
-          </IconButton>
-        </Link>
-      </span>
+      <Link to={pathToWishlist}>
+        <IconButton className={styles.root} aria-label={WISHLIST_KEY} tabIndex={-1} disableRipple>
+          <Badge badgeContent={wishlist} color='secondary'>
+            <FavoriteBorderOutlined className={styles.svg} />
+          </Badge>
+        </IconButton>
+      </Link>
     </>
   );
 };

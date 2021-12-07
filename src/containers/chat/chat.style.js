@@ -7,9 +7,9 @@ const flexCenter = {
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
-  chatIcon: ({ iconsVisible }) => ({
+  chatIcon: () => ({
     ...flexCenter,
-    background: iconsVisible ? palette.yellow : palette.black,
+    background: palette.black,
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
@@ -20,11 +20,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '60px',
     borderRadius: '29px',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
-    right: '5%',
+    right: '3%',
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
-      width: '40px',
-      height: '40px',
       boxShadow: ' 0 0 10px white',
       zIndex: 900
     },
@@ -46,11 +44,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     background: 'none',
     display: 'block',
-    right: '5%',
-    '@media (max-width: 768px)': {
-      width: '40px',
-      height: '40px'
-    }
+    right: '3%'
   },
   msgIcon: {
     ...flexCenter,
@@ -64,10 +58,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     cursor: 'pointer',
     boxShadow: 'white 0px 0px 10px',
     transition: 'background 0.3s',
-    '@media (max-width: 768px)': {
-      width: '45px',
-      height: '45px'
-    },
     '&:hover': {
       background: palette.yellow
     }
@@ -81,11 +71,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '20px',
     cursor: 'pointer',
     position: 'fixed',
-    zIndex: '900',
-    '@media (max-width: 768px)': {
-      width: '40px',
-      height: '40px'
-    }
+    zIndex: '900'
   }),
   mailForm: {
     position: 'fixed',

@@ -112,7 +112,7 @@ describe('Product info', () => {
     }
   };
   it('Should render', () => {
-    const component = mount(<ProductInfo {...props} />);
+    const component = shallow(<ProductInfo {...props} />);
     expect(component).toBeDefined();
   });
 });

@@ -84,14 +84,12 @@ const ProductInfo = ({ price, product }) => {
           alt='color'
           src={Colors[`${product.mainMaterial.color.name[1].value}`]}
         />
-
         <span className={styles.subtitle}>{t('product.pattern')}:</span>
         <img
           className={styles.circle}
           alt='pattern'
           src={`${IMG_URL}${product.pattern.images.large}`}
         />
-
         <br />
       </div>
     </div>

@@ -87,11 +87,12 @@ export function* handleAddCartItem({ payload }) {
 
 export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
+
   const newCart = cart.filter(
     (item) =>
       !(
-        item.product._id === payload.product._id &&
-        item.options.size._id === payload.options.size._id
+        item.product._id === payload.productId &&
+        item.options.size._id === payload.sizeAndPrice.size._id
       )
   );
   setToLocalStorage(cartKey, newCart);

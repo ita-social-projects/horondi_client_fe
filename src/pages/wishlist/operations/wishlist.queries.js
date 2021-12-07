@@ -9,6 +9,7 @@ export const getWishlistByUserId = gql`
         user_id
         products {
           _id
+          translationsKey
           images {
             primary {
               thumbnail
@@ -16,9 +17,6 @@ export const getWishlistByUserId = gql`
           }
           category {
             _id
-          }
-          name {
-            value
           }
           pattern {
             _id

@@ -14,8 +14,7 @@ import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 
 const OrderItem = ({ product }) => {
   const styles = useStyles();
-  const { language, currency } = useSelector((state) => ({
-    language: state.Language.language,
+  const { currency } = useSelector((state) => ({
     currency: state.Currency.currency
   }));
   const { t } = useTranslation();
@@ -46,7 +45,7 @@ const OrderItem = ({ product }) => {
         className={styles.yourOrderListItemDescriptionContainer}
         primary={
           <div className={styles.yourOrderListItemDescriptionPrimary}>
-            {orderItem.name[language].value}
+            {t(`${orderItem.translationsKey}.name`)}
           </div>
         }
         secondary={

@@ -21,10 +21,7 @@ export const getUserOrdersQuery = gql`
           }
           product {
             _id
-            name {
-              lang
-              value
-            }
+            translationsKey
             model {
               sizes {
                 name
@@ -37,10 +34,7 @@ export const getUserOrdersQuery = gql`
             }
             bottomMaterial {
               material {
-                name {
-                  lang
-                  value
-                }
+                translationsKey
               }
             }
           }

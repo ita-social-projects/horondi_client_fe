@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal as MuiModal, Button } from '@material-ui/core';
+import { Button, Modal as MuiModal } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { useStyles } from './modal.styles';
 
-const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = false, content }) => {
+const Modal = ({
+  message,
+  itemName = '',
+  onAction,
+  isOpen,
+  isEmpty = false,
+  isFullscreen = false,
+  content
+}) => {
   const [open, setOpen] = useState(isOpen);
   const { t } = useTranslation();
   const styles = useStyles();
@@ -26,7 +34,9 @@ const Modal = ({ message, onAction, isOpen, isEmpty = false, isFullscreen = fals
           data-testid='closeModalIcon'
         />
       </div>
-      <p>{message}</p>
+      <p>
+        {message} {itemName}
+      </p>
       <div className={styles.buttonGroup}>
         <Button onClick={() => handleClose(true)} variant='contained'>
           {t('common.buttons.confirm')}

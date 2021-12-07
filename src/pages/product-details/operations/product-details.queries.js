@@ -127,6 +127,7 @@ export const getProductById = gql`
         }
         availableCount
         rate
+        translationsKey
       }
       ... on Error {
         statusCode

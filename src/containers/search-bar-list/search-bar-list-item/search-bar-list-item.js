@@ -19,7 +19,7 @@ const SearchBarListItem = ({ product }) => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const SearchBarListItem = ({ product }) => {
       <div className={styles.image} style={{ backgroundSize: 'cover' }} />
       <div className={styles.content}>
         <div className={styles.title}>
-          <Typography variant='h4'>{product.name[i18n.language === 'ua' ? 0 : 1].value}</Typography>
+          <Typography variant='h4'>{t(`${product.translationsKey}.name`)}</Typography>
           <div>
             {Math.min(...product.sizes.map((size) => size.price[currency].value))}{' '}
             {product.basePrice[currency].currency}

@@ -45,7 +45,7 @@ const SimilarProducts = ({ cartList, product }) => {
     );
   }
 
-  imagesList = imagesList.map(({ _id, images, rate, name, sizes }) => {
+  imagesList = imagesList.map(({ _id, images, rate, sizes, translationsKey }) => {
     const availableSize =
       sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price[currency].value;
     const checkPrice = () =>
@@ -64,8 +64,8 @@ const SimilarProducts = ({ cartList, product }) => {
         currencySign={currencySign}
         key={_id}
         price={checkPrice()}
-        name={name}
         rate={rate}
+        translationsKey={translationsKey}
         imageUrl={images.primary.medium}
         id={_id}
       />

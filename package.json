@@ -36,6 +36,7 @@
     "react": "^16.13.1",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^16.13.1",
+    "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-i18next": "^11.12.0",
     "react-images-viewer": "^1.6.2",

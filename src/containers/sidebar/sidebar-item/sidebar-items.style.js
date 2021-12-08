@@ -26,11 +26,10 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '2px solid gray'
   },
   list: {
-    margin: '10px',
+    margin: '10px 0 0 0',
     listStyle: 'none'
   },
   nested: {
-    marginRight: '2%',
     '&:hover': {
       background: 'none'
     },

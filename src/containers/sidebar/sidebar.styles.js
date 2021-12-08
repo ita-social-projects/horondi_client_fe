@@ -9,11 +9,14 @@ export const useStyles = makeStyles((theme) => ({
       height: fromSideBar ? '100vh' : 'calc(100vh - 64px)',
       width: 'fit-content',
       minWidth: '400px',
-      maxWidth: '550px',
+      maxWidth: '400px',
       '@media (max-width: 768px)': {
         top: '40px',
         height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
       }
+    },
+    '& ::-webkit-scrollbar': {
+      display: 'none;'
     }
   }),
   sticky: ({ fromSideBar }) => ({
@@ -48,7 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     width: '100%',
     '& span, & svg': {
-      fontSize: '2.5em'
+      fontSize: '2rem'
     }
   },
   subList: {
@@ -62,7 +65,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0 0 20px',
     cursor: 'pointer',
     '& span': {
-      fontSize: '1em'
+      fontSize: '1.2rem'
     },
     '&:before': {
       content: "'◆'",

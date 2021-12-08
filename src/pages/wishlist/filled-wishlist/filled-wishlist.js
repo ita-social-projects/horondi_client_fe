@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
 import Modal from '../../../components/modal';
@@ -10,6 +11,8 @@ import useDeleteProductFromWishlistHandler from '../../../hooks/use-delete-produ
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import EmptyWishlist from '../empty-wishlist';
 import SimilarProducts from '../../product-details/similar-products';
+import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
+import { TOAST_SETTINGS } from '../../product-details/constants';
 
 const FilledWishlist = ({ items }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -18,6 +21,7 @@ const FilledWishlist = ({ items }) => {
   const [similarProductsList, setSimilarProductsList] = useState([]);
 
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
 
   const [isLightTheme] = useContext(ThemeContext);
 
@@ -53,10 +57,12 @@ const FilledWishlist = ({ items }) => {
   if (!wishlist.length) return <EmptyWishlist />;
 
   const onModalAction = (action) => {
+    setModalVisibility(false);
     if (action) {
       deleteItemFromWishlist(modalItem);
+      dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
+      dispatch(setToastSettings(TOAST_SETTINGS));
     }
-    setModalVisibility(false);
   };
 
   return (

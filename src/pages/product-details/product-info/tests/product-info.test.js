@@ -84,7 +84,8 @@ describe('Product info', () => {
       ],
       mainMaterial: {
         color: {
-          _id: '123'
+          _id: '123',
+          name: 'Blue'
         },
         material: {
           name: {
@@ -108,10 +109,16 @@ describe('Product info', () => {
           }
         }
       },
+      pattern: {
+        _id: '123',
+        images: {
+          large: 'large_eewk311kwdgr8a4_161.jpg'
+        }
+      },
       strapLengthInCm: '100'
     }
   };
-  it('Should render', () => {
+  it('Should render <ProductInfo />', () => {
     const component = shallow(<ProductInfo {...props} />);
     expect(component).toBeDefined();
   });

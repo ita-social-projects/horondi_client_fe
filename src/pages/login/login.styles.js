@@ -9,7 +9,8 @@ export const useStyles = makeStyles((theme) => ({
     height: '100vh',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex: 2
   },
   background: {
     height: '100vh',
@@ -18,12 +19,12 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     filter: 'brightness(30%) contrast(90%)',
     position: 'absolute',
-    zIndex: -1
+    zIndex: 1
   },
   formWrapper: {
     margin: theme.spacing(1),
+    zIndex: 3,
     maxWidth: '960px',
-    height: '550px',
     filter: 'drop-shadow(8px 8px 10px dark-gray)',
     '& .MuiGrid-item': {
       padding: '0px !important'

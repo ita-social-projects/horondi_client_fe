@@ -16,8 +16,8 @@ const { pathToCart } = routes;
 
 const CartHeader = ({ fromSideBar }) => {
   const dispatch = useDispatch();
-  const { cartItems, user, cartLoading } = useSelector(({ Cart, User, NewCart }) => ({
-    cartItems: NewCart.list,
+  const { cartItems, user, cartLoading } = useSelector(({ Cart, User }) => ({
+    cartItems: Cart.list,
     user: User.userData,
     cartLoading: Cart.loading
   }));

@@ -11,13 +11,14 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: '61px 0'
+    margin: '61px 0',
+    zIndex: 2
   },
   registerBackground: {
     height: '875px',
     width: '100%',
     position: 'absolute',
-    zIndex: -1,
+    zIndex: 1,
     background: `url(${BACKGROUND}) no-repeat `,
     backgroundSize: 'cover',
     filter: 'brightness(30%) contrast(90%)'
@@ -26,6 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '684px',
     height: '753px',
+    zIndex: 3,
     filter: 'drop-shadow(8px 8px 10px dark-gray)',
     '& .MuiGrid-item': {
       padding: '0px !important'

@@ -5,7 +5,7 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     marginLeft: 'auto',
     alignItems: 'center',
-    justifyContent: 'spaceAround',
+    justifyContent: 'space-around',
     marginTop: 'auto',
     width: '100%'
   }),

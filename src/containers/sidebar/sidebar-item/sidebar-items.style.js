@@ -26,10 +26,11 @@ export const useStyles = makeStyles((theme) => ({
     borderBottom: '2px solid gray'
   },
   list: {
-    margin: '10px'
+    margin: '10px',
+    listStyle: 'none'
   },
   nested: {
-    marginLeft: theme.spacing(3),
+    marginLeft: '-2%',
     '&:hover': {
       background: 'none'
     },
@@ -41,14 +42,14 @@ export const useStyles = makeStyles((theme) => ({
       color: 'inherit'
     },
     '&:before': {
-      content: `''`,
+      content: "'◆'",
+      fontSize: '1.2rem',
       display: 'block',
-      width: 10,
-      height: 10,
+      color: '#4267B2',
+      width: 15,
+      height: 27,
       position: 'relative',
       top: '50%',
-      background: '#000',
-      borderRadius: '50%',
       marginRight: 10,
       opacity: 0,
       transition: 'opacity .2s ease'

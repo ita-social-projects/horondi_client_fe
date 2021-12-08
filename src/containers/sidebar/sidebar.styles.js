@@ -55,16 +55,29 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   subList: {
-    marginTop: '50px'
+    marginTop: '40px',
+    fontSize: '1.3rem'
   },
   subItem: {
     color: theme.palette.textColor,
     textTransform: 'uppercase',
     display: 'flex',
-    margin: '0 20px',
+    margin: '0 0 20px',
     cursor: 'pointer',
     '& span': {
       fontSize: '1em'
+    },
+    '&:before': {
+      content: "'◆'",
+      fontSize: '1.2rem',
+      display: 'block',
+      color: '#4267B2',
+      width: 15,
+      height: 27,
+      position: 'relative',
+      top: '50%',
+      marginRight: 10,
+      transition: 'opacity .2s ease'
     },
     '&:hover span': {
       textDecoration: 'underline'

@@ -10,13 +10,13 @@ export const useStyles = makeStyles(() => ({
     width: '100%'
   }),
   wishlist: {
-    padding: '0 4px',
+    padding: '8px 4px',
     position: 'relative',
     cursor: 'pointer',
     zIndex: 20,
     transition: '1s',
-    height: '33px',
-    width: '50px',
+    height: '45px',
+    width: '70px',
     textAlign: 'center',
     transform: 'scale(1.0)',
     '&:hover': {

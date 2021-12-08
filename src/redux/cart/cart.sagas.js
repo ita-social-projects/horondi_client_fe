@@ -87,7 +87,6 @@ export function* handleAddCartItem({ payload }) {
 
 export function* handleRemoveCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
-
   const newCart = cart.filter(
     (item) =>
       !(
@@ -119,9 +118,9 @@ export function* handleAddProductToUserCart({ payload }) {
 export function* handleDeleteProductFromUserCart({ payload }) {
   const { userId, items } = payload;
   const itemsForDeleteInput = {
-    product: items.product._id,
+    product: items.productId,
     options: {
-      size: items.options.size._id
+      size: items.sizeAndPrice.size._id
     }
   };
 

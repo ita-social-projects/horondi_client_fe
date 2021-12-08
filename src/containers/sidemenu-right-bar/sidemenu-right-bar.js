@@ -24,7 +24,7 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
     <div className={styles.root}>
       <div className={styles.wishlist}>
         <MenuItem>
-          <FavoriteIcon onClick={handleWishlistClick} />
+          <FavoriteIcon onClick={handleWishlistClick} data-testid='wishlist-icon' />
         </MenuItem>
       </div>
       <div className={styles.cartHeader} onClick={() => setIsMenuOpen(false)}>

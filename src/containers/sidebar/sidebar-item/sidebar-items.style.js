@@ -30,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
     listStyle: 'none'
   },
   nested: {
-    marginLeft: '-2%',
+    marginRight: '2%',
     '&:hover': {
       background: 'none'
     },

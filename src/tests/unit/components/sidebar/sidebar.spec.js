@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import Sidebar from '../sidebar';
+import Sidebar from '../../../../containers/sidebar/sidebar';
 
 let wrapper;
 const useQueryData = {
@@ -12,7 +12,7 @@ const useQueryData = {
 const props = { fromSideBar: {}, isMenuOpen: true, setIsMenuOpen: () => null };
 
 jest.mock('@apollo/client');
-jest.mock('../../sidemenu-right-bar', () => ({
+jest.mock('../../../../containers/sidemenu-right-bar/sidemenu-right-bar', () => ({
   __esModule: true,
   default: () => null
 }));

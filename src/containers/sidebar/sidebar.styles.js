@@ -49,9 +49,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     '& span, & svg': {
       fontSize: '2.5em'
-    },
-    '&:hover span': {
-      textDecoration: 'underline'
     }
   },
   subList: {

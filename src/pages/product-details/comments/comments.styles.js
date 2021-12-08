@@ -114,7 +114,7 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '10px'
     },
     '& textarea': {
-      color: '#000000',
+      color: theme.palette.textColor,
       fontFamily: 'Montserrat',
       fontSize: '0.875rem',
       fontWeight: '500'

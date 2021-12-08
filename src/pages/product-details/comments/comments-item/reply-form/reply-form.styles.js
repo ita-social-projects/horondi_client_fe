@@ -35,8 +35,7 @@ export const useStyles = makeStyles((theme) => ({
         }
       },
       '& label.Mui-focused': {
-        color: theme.palette.textColor,
-        transform: 'translate(15px, 5px) scale(0.75)'
+        color: theme.palette.textColor
       },
       '& label': {
         transform: 'translate(15px, 20px) scale(1)'
@@ -69,7 +68,7 @@ export const useStyles = makeStyles((theme) => ({
     transform: 'scaleX(-1)'
   },
   input: {
-    paddingTop: '10px',
+    marginTop: '10px',
     width: '100%'
   },
   replyBtn: {

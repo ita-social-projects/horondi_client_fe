@@ -39,16 +39,6 @@ describe('sidebar tests', () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('should match snapshot', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-
-    wrapper = shallow(<Sidebar {...props} />);
-
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should cover other branches', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData,

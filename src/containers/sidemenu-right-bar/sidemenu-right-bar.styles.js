@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: ({ fromSideBar }) => ({
     display: 'flex',
     marginLeft: 'auto',
@@ -29,26 +29,40 @@ export const useStyles = makeStyles(() => ({
       position: 'relative',
       zIndex: 5,
       fontSize: '2rem',
-      color: 'black',
       border: 'none',
-      outline: 'none'
+      outline: 'none',
+      color: theme.palette.textColor
     }
   },
   cartHeader: {
-    transform: 'scale(1.3)'
+    transform: 'scale(1.3)',
+    '& svg': {
+      color: theme.palette.textColor
+    },
+    '& svg:hover': {
+      color: 'white'
+    }
   },
   currency: {
     transform: 'scale(1.3)',
+    '& div': {
+      color: theme.palette.textColor
+    },
     '& div:hover': {
       background: 'black',
-      transition: '0.5s easy'
+      transition: '0.5s easy',
+      color: 'white'
     }
   },
   language: {
     transform: 'scale(1.3)',
+    '& div': {
+      color: theme.palette.textColor
+    },
     '& div:hover': {
       background: 'black',
-      transition: '0.5s easy'
+      transition: '0.5s easy',
+      color: 'white'
     }
   }
 }));

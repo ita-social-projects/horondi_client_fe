@@ -16,7 +16,6 @@ export const useStyles = makeStyles(() => ({
         color: fromSideBar ? '#fff' : 'rgba(254, 254, 254, 0.75)'
       },
       '&:focus': {
-        borderBottom: `1px solid ${fromSideBar ? '#000' : 'rgba(254, 254, 254, 0.75)'}`,
         backgroundColor: 'transparent'
       }
     },
@@ -30,6 +29,7 @@ export const useStyles = makeStyles(() => ({
   item: {
     color: '#fff',
     backgroundColor: '#000',
+    borderRadius: '0px',
     '&.Mui-selected': {
       backgroundColor: '#000',
       '&:hover': {

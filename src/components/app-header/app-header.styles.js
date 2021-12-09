@@ -108,6 +108,7 @@ export const useStyles = makeStyles((theme) => ({
   callUs: {
     width: '185px',
     textAlign: 'right',
+    cursor: 'pointer',
     '@media (max-width: 450px)': {
       display: 'none'
     }

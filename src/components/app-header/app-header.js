@@ -1,5 +1,12 @@
 import React, { useLayoutEffect, useState, useContext } from 'react';
-import { AppBar, IconButton as BurgerMenu, Switch, Typography, Toolbar } from '@material-ui/core';
+import {
+  AppBar,
+  IconButton as BurgerMenu,
+  Switch,
+  Typography,
+  Toolbar,
+  Link as PhoneLink
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
@@ -54,7 +61,9 @@ const AppHeader = () => {
           <div className={styles.currency}>
             <CurrencyComponent />
           </div>
-          <Typography className={styles.callUs}>{t('header.callUs')}</Typography>
+          <PhoneLink href='tel:+380961737361' className={styles.callUs} variant='body1'>
+            {t('header.callUs')}
+          </PhoneLink>
         </Toolbar>
         <Toolbar className={styles.bottomToolbar} disableGutters>
           <BurgerMenu className={styles.menuButton} onClick={() => setIsMenuOpen(true)}>

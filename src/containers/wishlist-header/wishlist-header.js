@@ -28,7 +28,7 @@ const WishlistHeader = () => {
     } else {
       setWishlist(localWishlist.products.length);
     }
-  }, [data, localWishlist]);
+  }, [user, loading, data, localWishlist]);
 
   return (
     <>

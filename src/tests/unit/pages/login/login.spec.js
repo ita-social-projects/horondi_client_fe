@@ -14,6 +14,7 @@ jest.mock('../../../../components/google-log-in-btn/google-button.styles', () =>
 }));
 jest.mock('react-redux');
 jest.mock('formik');
+jest.mock('react-facebook-login');
 jest.mock('../../../../services/local-storage.service');
 
 const dispatch = jest.fn();

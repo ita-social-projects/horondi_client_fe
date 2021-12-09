@@ -18,34 +18,5 @@ export const useStyles = makeStyles((theme) => ({
     '& hr': {
       color: '#242424'
     }
-  },
-  accordion: {
-    boxShadow: 'none',
-    borderBottom: '1px solid #0000001f',
-    backgroundColor: 'transparent',
-    paddingBottom: '10px',
-    paddingTop: '10px'
-  },
-
-  heading: {
-    fontSize: '19px',
-    color: theme.palette.textColor,
-    fontWeight: 'bold',
-    '@media (max-width: 450px)': {
-      fontSize: theme.spacing(2)
-    }
-  },
-  details: {
-    fontWeight: 400,
-    display: 'block',
-    paddingTop: 0,
-    paddingBottom: 0,
-    color: theme.palette.textColor,
-    '@media (max-width: 450px)': {
-      fontSize: theme.spacing(2)
-    },
-    '& > p': {
-      fontSize: '16px'
-    }
   }
 }));

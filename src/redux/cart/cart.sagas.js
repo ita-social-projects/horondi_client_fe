@@ -90,8 +90,8 @@ export function* handleRemoveCartItem({ payload }) {
   const newCart = cart.filter(
     (item) =>
       !(
-        item.product._id === payload.product._id &&
-        item.options.size._id === payload.options.size._id
+        item.product._id === payload.productId &&
+        item.options.size._id === payload.sizeAndPrice.size._id
       )
   );
   setToLocalStorage(cartKey, newCart);
@@ -118,9 +118,9 @@ export function* handleAddProductToUserCart({ payload }) {
 export function* handleDeleteProductFromUserCart({ payload }) {
   const { userId, items } = payload;
   const itemsForDeleteInput = {
-    product: items.product._id,
+    product: items.productId,
     options: {
-      size: items.options.size._id
+      size: items.sizeAndPrice.size._id
     }
   };
 

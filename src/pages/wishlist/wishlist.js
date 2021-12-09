@@ -4,6 +4,7 @@ import { useStyles } from './wishlist.styles';
 import FilledWishlist from './filled-wishlist';
 import useWishlistLoader from '../../hooks/use-wishlist-loader';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import ToastContainer from '../../containers/toast';
 
 const Wishlist = () => {
   const styles = useStyles();
@@ -14,6 +15,7 @@ const Wishlist = () => {
   return (
     <div className={styles.root}>
       <FilledWishlist items={wishlist.products} />
+      <ToastContainer />
     </div>
   );
 };

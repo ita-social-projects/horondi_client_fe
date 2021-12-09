@@ -4,7 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 
-import { cleanUserCart, resetCart } from '../../../../redux/cart/cart.actions';
+import {
+  cleanUserCart,
+  resetCart,
+  deleteProductFromUserCart,
+  removeItemFromCart
+} from '../../../../redux/cart/cart.actions';
 
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
@@ -45,6 +50,11 @@ const OrderTable = ({ items, user, cartOperations }) => {
 
   const onRemoveOneModalAction = (action) => {
     if (action) {
+      if (user) {
+        dispatch(deleteProductFromUserCart({ userId: user._id, items: modalItem }));
+      } else {
+        dispatch(removeItemFromCart(modalItem));
+      }
       removeFromCart(modalItem);
     }
 

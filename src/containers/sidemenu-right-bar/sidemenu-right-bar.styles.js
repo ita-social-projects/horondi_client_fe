@@ -9,6 +9,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 'auto',
     width: '100%'
   }),
+  iconItem: {
+    marginRight: '40px'
+  },
   wishlist: {
     padding: '8px 4px',
     position: 'relative',

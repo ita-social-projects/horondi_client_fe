@@ -44,7 +44,7 @@ export const useStyles = makeStyles((theme) => ({
       content: "'◆'",
       fontSize: '1.2rem',
       display: 'block',
-      color: '#4267B2',
+      color: '#3F51B5',
       width: 15,
       height: 27,
       position: 'relative',

@@ -22,18 +22,21 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.wishlist}>
+      <div className={`${styles.wishlist} ${styles.iconItem}`}>
         <MenuItem>
           <FavoriteIcon onClick={handleWishlistClick} data-testid='wishlist-icon' />
         </MenuItem>
       </div>
-      <div className={styles.cartHeader} onClick={() => setIsMenuOpen(false)}>
+      <div
+        className={`${styles.cartHeader} ${styles.iconItem}`}
+        onClick={() => setIsMenuOpen(false)}
+      >
         <CartHeader fromSideBar={fromSideBar} />
       </div>
-      <div className={styles.language}>
+      <div className={`${styles.language} ${styles.iconItem}`}>
         <Language fromSideBar={fromSideBar} />
       </div>
-      <div className={styles.currency}>
+      <div className={`${styles.currency} ${styles.iconItem}`}>
         <Currency fromSideBar={fromSideBar} />
       </div>
     </div>

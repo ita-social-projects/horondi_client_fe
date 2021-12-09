@@ -111,7 +111,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           fromSideBar
           socialIconsStyles={styles.socialIconsStyles}
           position='flex-start'
-          color='#4267B2'
+          color='#3F51B5'
           setIsMenuOpen={setIsMenuOpen}
         />
       </div>

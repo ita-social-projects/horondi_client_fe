@@ -31,15 +31,15 @@ jest.mock('react-redux', () => ({
 
 describe('ProductListPage component tests', () => {
   it('Should render ProductListPage', () => {
-    useQuery.mockImplementation(() => ({ refetch: () => null, loading: false, error: false }));
+    useQuery.mockImplementation(() => ({ loading: false, error: false }));
 
-    const component = mount(<ProductListPage width='sm' />);
+    const component = shallow(<ProductListPage width='sm' />);
 
     expect(component).toBeDefined();
   });
 
   it('Should cover other branches', () => {
-    useQuery.mockImplementation(() => ({ refetch: () => null, loading: true, error: false }));
+    useQuery.mockImplementation(() => ({ loading: true, error: false }));
 
     const component = mount(<ProductListPage width='sm' />);
 

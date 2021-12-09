@@ -34,7 +34,6 @@ const ProductSort = () => {
     searchParams.set(sort, name);
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
-    setSortType(e.target.value);
   };
 
   useEffect(() => {
@@ -44,7 +43,11 @@ const ProductSort = () => {
       }
       return null;
     });
-  }, [query]);
+    if (!query) {
+      searchParams.set(sort, SORT_BY_SELECT_OPTIONS[0].name);
+      history.push(`?${searchParams.toString()}`);
+    }
+  });
 
   const sortByText = t('common.sortBy');
   const selectOptions = SORT_BY_SELECT_OPTIONS.map((optionValue) => (

@@ -23,25 +23,23 @@ const ProductSort = () => {
     loading: false
   };
   const [searchParams1, setSearchParams1] = useState(initialSearchState);
-  const [sortType, setSortType] = useState('');
+  const [sortType, setSortType] = useState(SORT_BY_SELECT_OPTIONS[0]);
 
   const searchParams = new URLSearchParams(search);
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
   const query = searchParams.get(sort);
   const selectHandler = (e) => {
-    const { name } = JSON.parse(e.target.value);
-
+    const { name } = e.target.value;
     searchParams.set(sort, name);
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
 
   useEffect(() => {
-    SORT_BY_SELECT_OPTIONS.map((optionValue) => {
+    SORT_BY_SELECT_OPTIONS.forEach((optionValue) => {
       if (query === optionValue.name) {
-        setSortType(JSON.stringify(optionValue));
+        setSortType(optionValue);
       }
-      return null;
     });
     if (!query) {
       searchParams.set(sort, SORT_BY_SELECT_OPTIONS[0].name);
@@ -51,7 +49,7 @@ const ProductSort = () => {
 
   const sortByText = t('common.sortBy');
   const selectOptions = SORT_BY_SELECT_OPTIONS.map((optionValue) => (
-    <MenuItem key={optionValue.name} value={JSON.stringify(optionValue)}>
+    <MenuItem key={optionValue.name} value={optionValue}>
       {t(`common.sortOptions.${optionValue.name}`)}
     </MenuItem>
   ));
@@ -74,6 +72,7 @@ const ProductSort = () => {
           className={styles.sortSelect}
           variant={TEXT_FIELD_VARIANT.OUTLINED}
           value={sortType}
+          name='sortType'
         >
           {selectOptions}
         </Select>

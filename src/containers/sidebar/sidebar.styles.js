@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
   closeIcon: {
     width: '40px',
     height: '40px',
-    transform: 'scale(1.5)'
+    transform: 'scale(1.2)'
   },
   sideMenuContent: {
     width: '85%'

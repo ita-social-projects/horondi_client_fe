@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& span': {
       textTransform: 'uppercase',
-      fontSize: '1.2em'
+      fontSize: '14px'
     },
     '& a': {
       color: 'inherit'
@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
       width: 15,
       height: 27,
       position: 'relative',
-      top: '50%',
+      bottom: '1px',
       marginRight: 10,
       opacity: 0,
       transition: 'opacity .2s ease'

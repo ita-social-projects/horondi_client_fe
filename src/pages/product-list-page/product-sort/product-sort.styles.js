@@ -44,6 +44,16 @@ export const useStyles = makeStyles(() => ({
     }
   },
 
+  selectLabel: {
+    marginRight: '5px'
+  },
+
+  sortSelect: {
+    '& .MuiOutlinedInput-input': {
+      padding: '10px 32px 10px 15px'
+    }
+  },
+
   activeButton: {
     backgroundColor: 'black',
     color: 'white'

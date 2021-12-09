@@ -123,7 +123,11 @@ export const useStyles = makeStyles((theme) => ({
   commentBtnContainer: {
     display: 'inline-block',
     marginTop: 25,
-    marginBottom: 40
+    marginBottom: 40,
+    '& .MuiButton-root.Mui-disabled': {
+      color: theme.palette.button.disabled.color,
+      backgroundColor: theme.palette.button.disabled.backgroundColor
+    }
   },
   commentBtn: {
     marginTop: 0,

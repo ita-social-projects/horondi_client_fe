@@ -98,5 +98,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   constructorItem: {
     padding: '3% 0 0'
+  },
+  rightBar: {
+    marginRight: '10%'
   }
 }));

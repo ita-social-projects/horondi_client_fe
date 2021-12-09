@@ -8,7 +8,10 @@ export const dropdownStyles = makeStyles((theme) => ({
 
     '& svg': {
       display: fromSideBar ? null : 'none',
-      left: '40px'
+      left: '40px',
+      '@media screen and (max-width: 552px)': {
+        left: '25px'
+      }
     },
     '&:hover': {
       '&:after': {

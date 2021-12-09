@@ -115,7 +115,9 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           setIsMenuOpen={setIsMenuOpen}
         />
       </div>
-      <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
+      <div className={styles.rightBar}>
+        <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
+      </div>
     </Drawer>
   );
 };

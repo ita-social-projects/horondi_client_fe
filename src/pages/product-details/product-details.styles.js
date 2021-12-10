@@ -22,6 +22,10 @@ export const useStyles = makeStyles((theme) => ({
       padding: '0.5rem'
     }
   },
+  test: {
+    display: 'flex',
+    alignItems: 'center'
+  },
   productDetails: {
     flex: '1 1 40%',
     display: 'flex',

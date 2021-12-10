@@ -2,18 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => {
   const sizeButton = {
-    // fontSize: '1rem',
     width: '36px',
     height: '36px'
   };
 
   return {
-    sizeButtons: {
-      // '@media (max-width: 600px)': {
-      //   justifyContent: 'center',
-      //   marginLeft: '-20px'
-      // }
-    },
     label: {
       display: 'block',
       fontWeight: '700',
@@ -48,9 +41,7 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     container: {
-      // '@media (max-width: 600px)': {
-      //   justifyContent: 'center'
-      // }
+      marginBottom: '25px'
     }
   };
 });

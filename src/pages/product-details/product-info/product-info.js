@@ -23,12 +23,13 @@ const ProductInfo = ({ price, product, countComments }) => {
   }));
 
   const currencySign = getCurrencySign(currency);
-
   return (
     <div className={styles.common}>
       <div className={styles.head}>
         <span className={styles.title}>{t(`${translationsKey}.name`)}</span>
-        <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+        {product.sizes[0].size.available ? null : (
+          <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+        )}
       </div>
       <Tooltip className={styles.rate} title={rate.toFixed(2)} placement='left'>
         <span>

@@ -55,7 +55,6 @@ export const useStyles = makeStyles((theme) => ({
   look: {
     display: 'flex',
     wordSpacing: '0.2rem',
-    maxHeight: '4.5rem',
     '@media (max-width: 600px)': {
       justifyContent: 'center'
     }

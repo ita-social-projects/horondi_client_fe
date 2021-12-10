@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useStyles } from './product-sizes.styles';
 
-const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
+const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError, disabled }) => {
   const { t } = useTranslation();
   const styles = useStyles();
   const { size: currentSize } = useSelector(({ Products }) => ({
@@ -15,20 +15,15 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
   const sizeButtons =
     sizes &&
     !!sizes.length &&
-    sizes.map(({ size }, index) => {
-      if (size.available) {
-        return (
-          <Button
-            key={size._id}
-            className={size._id === currentSize._id ? styles.selectedSize : styles.sizeButton}
-            onClick={() => handleSizeChange(index)}
-          >
-            {size.name}
-          </Button>
-        );
-      }
-      return null;
-    });
+    sizes.map(({ size }, index) => (
+      <Button
+        key={size._id}
+        className={size._id === currentSize._id ? styles.selectedSize : styles.sizeButton}
+        onClick={() => handleSizeChange(index)}
+      >
+        {size.name}
+      </Button>
+    ));
 
   return (
     <div className={styles.sizeButtons}>
@@ -36,10 +31,16 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
         <div className={styles.container}>
           <div className={styles.label}>
             <span>{t('common.size')}: </span>
-            <span>{t(`product.size.${sizes[0].size.name}`)}</span>
+            <span>{disabled ? '-' : t(`product.size.${sizes[0].size.name}`)}</span>
           </div>
           <div>
-            <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
+            {disabled ? (
+              <ButtonGroup data-cy='sizes' disabled>
+                {sizeButtons}
+              </ButtonGroup>
+            ) : (
+              <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
+            )}
           </div>
         </div>
       ) : null}

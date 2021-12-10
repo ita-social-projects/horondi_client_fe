@@ -2,6 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
+import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { ExpandMoreOutlined } from '@material-ui/icons';
 import { useStyles } from './product-description.styles';
 import * as colorImage from '../../../images/red.jpg';
 import * as patternImage from '../../../images/pattern_2.jpg';
@@ -27,33 +30,75 @@ const ProductDescription = ({ product }) => {
   return (
     <div className={styles.details}>
       <div className={styles.description}>
-        <h2>{t('product.productDescription.description')}</h2>
-        <Detail description={parse(description[language].value)} />
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreOutlined />}
+            aria-controls='panel1a-content'
+            id='panel1a-header'
+          >
+            <Typography className={styles.title}>
+              {t('product.productDescription.description')}{' '}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography component='div' className={styles.text}>
+              {parse(description[language].value)}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </div>
 
-      <div className={styles.material}>
-        <h2>{t('product.productDescription.material')}</h2>
-        <Detail
-          subtitle={t('product.productDescription.mainMaterial')}
-          description={t(`${mainMaterial.material.translationsKey}.name`)}
-        />
-        <Detail
-          subtitle={t('product.productDescription.innerMaterial')}
-          description={t(`${innerMaterial.material.translationsKey}.name`)}
-        />
-        <Detail
-          subtitle={t('product.productDescription.bottomMaterial')}
-          description={t(`${bottomMaterial.material.translationsKey}.name`)}
-        />
+      <div className={styles.description}>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreOutlined />}
+            aria-controls='panel1a-content'
+            id='panel1a-header'
+          >
+            <Typography>{t('product.productDescription.material')}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography component='div' className={styles.text}>
+              <Detail
+                subtitle={t('product.productDescription.mainMaterial')}
+                description={t(`${mainMaterial.material.translationsKey}.name`)}
+              />
+              <Detail
+                subtitle={t('product.productDescription.innerMaterial')}
+                description={t(`${innerMaterial.material.translationsKey}.name`)}
+              />
+              <Detail
+                subtitle={t('product.productDescription.bottomMaterial')}
+                description={t(`${bottomMaterial.material.translationsKey}.name`)}
+              />
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
       </div>
 
-      <div className={styles.measurement}>
-        <h2>{t('product.productDescription.measurement')}</h2>
+      <div className={styles.description}>
         {currentVolume && currentWeight ? (
-          <div>
-            <Detail subtitle={t('product.weight.volumeLabel')} description={`${currentVolume}`} />
-            <Detail subtitle={t('product.weight.weightLabel')} description={`${currentWeight}`} />
-          </div>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreOutlined />}
+              aria-controls='panel1a-content'
+              id='panel1a-header'
+            >
+              <Typography>{t('product.productDescription.measurement')} </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography component='div' className={styles.text}>
+                <Detail
+                  subtitle={t('product.weight.volumeLabel')}
+                  description={`${currentVolume}`}
+                />
+                <Detail
+                  subtitle={t('product.weight.weightLabel')}
+                  description={`${currentWeight}`}
+                />
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         ) : null}
       </div>
     </div>

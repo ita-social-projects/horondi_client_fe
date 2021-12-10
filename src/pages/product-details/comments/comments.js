@@ -41,11 +41,11 @@ const Comments = ({ productId, checkCountComments }) => {
     nextFetchPolicy: 'cache-first',
     onCompleted: (data) => {
       setComments(data.getCommentsByProduct);
+      checkCountComments(data.getCommentsByProduct);
     },
     onError: (err) => errorOrLoadingHandler(err)
   });
 
-  checkCountComments(comments);
   const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
     onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
     onError: (err) => {

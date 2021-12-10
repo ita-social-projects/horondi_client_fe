@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => {
     marginTop: '1.2rem',
     marginRight: '1.2rem',
     fontSize: '2.5rem',
-    color: theme.palette.white,
+    color: theme.palette.textColor,
     '&:hover': {
       transform: 'scale(1.15)',
       cursor: 'pointer',
@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => {
 
   const button = {
     marginRight: '1rem',
-    marginTop: '1rem',
     padding: '0.4rem 0.9rem',
     minWidth: '9rem',
     textTransform: 'none',
@@ -66,6 +65,9 @@ export const useStyles = makeStyles((theme) => {
       '&:hover': {
         backgroundColor: theme.palette.button.hover.backgroundColor,
         color: theme.palette.button.hover.color
+      },
+      '&:disabled': {
+        backgroundColor: 'rgba(2, 2, 2, 0.2)'
       }
     },
     unavailableButton: {

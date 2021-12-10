@@ -14,7 +14,10 @@ const ProductImages = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
+
   const [primaryImage, setPrimaryImage] = useState(0);
+  const [secondaryImages, setSecondaryImages] = useState([]);
+
   const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
@@ -47,6 +50,15 @@ const ProductImages = ({ images }) => {
     initialPhotos();
   }, [isLightTheme, initImages]);
 
+  useEffect(() => {
+    setSecondaryImages(imagesSet.slice(1, images.length));
+  }, [imagesSet, images.length]);
+
+  useEffect(() => {
+    const updatedSecondaryImages = imagesSet.filter((_, i) => i !== primaryImage);
+    setSecondaryImages(updatedSecondaryImages);
+  }, [primaryImage, imagesSet]);
+
   const styles = useStyles();
 
   const openImage = (idx) => {
@@ -54,8 +66,7 @@ const ProductImages = ({ images }) => {
     setCurrImg(idx);
   };
 
-  const sideImages = imagesSet
-    .slice(1, imagesSet.length)
+  const sideImages = secondaryImages
     .filter((_, i) => i < 3)
     .map((image, i) => {
       if (i === imagesSet.length || i === 2) {
@@ -77,7 +88,7 @@ const ProductImages = ({ images }) => {
             className={styles.sideImage}
             src={image.src}
             alt={t('product.imgAltInfo')}
-            onClick={() => setPrimaryImage(i + 1)}
+            onClick={() => setPrimaryImage(imagesSet.indexOf(secondaryImages[i]))}
             data-cy='image'
           />
         </div>

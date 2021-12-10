@@ -55,8 +55,8 @@ const ProductImages = ({ images }) => {
   }, [imagesSet, images.length]);
 
   useEffect(() => {
-    const secondaryImages = imagesSet.filter((_, i) => i !== primaryImage);
-    setSecondaryImages(secondaryImages);
+    const updatedSecondaryImages = imagesSet.filter((_, i) => i !== primaryImage);
+    setSecondaryImages(updatedSecondaryImages);
   }, [primaryImage, imagesSet]);
 
   const styles = useStyles();

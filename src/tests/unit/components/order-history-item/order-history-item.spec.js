@@ -19,6 +19,15 @@ useSelector.mockImplementation(() => ({
   currency: 1
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 describe('OrderHistoryOrder component tests', () => {
   it('Should render OrderHistoryOrder', () => {
     const component = shallow(<OrderHistoryItem order={order} />);

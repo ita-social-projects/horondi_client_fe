@@ -68,6 +68,14 @@ export const paletteGenerator = (colorSchema) => ({
       backgroundColor: theme[colorSchema].profilePageLabel.hover.backgroundColor
     }
   },
+  carouselItem: {
+    normal: {
+      backgroundColor: theme[colorSchema].carouselItem.normal.backgroundColor
+    },
+    hover: {
+      border: theme[colorSchema].carouselItem.hover.border
+    }
+  },
   primary: {
     contrastText: white,
     dark: colors.grey[900],

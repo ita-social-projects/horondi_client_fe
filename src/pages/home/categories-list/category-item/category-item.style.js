@@ -5,29 +5,23 @@ export const useStyles = makeStyles((theme) => ({
     backgroundImage: `url("${props.image}")`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
+    backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
     display: 'flex',
+    alignItems: 'flex-end',
     width: 'calc(100% - 40px)',
+    borderRadius: '6px',
     height: '500px',
     margin: '20px',
     cursor: 'pointer',
-    boxShadow: '0px 5px 8px #c5c5c5',
-    padding: 20,
+    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.12)',
+    padding: '26px 24px',
     position: 'relative',
-    color: 'inherit',
-    '&:after': {
-      opacity: 0,
-      transition: 'all .2s ease',
-      color: 'white',
-      content: `''`,
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.7)'
+    color: theme.palette.textColor,
+    '&:hover > div': {
+      display: 'flex'
     },
-    '&:hover:after, &:hover > div': {
-      opacity: 1
+    '&:hover': {
+      border: theme.palette.carouselItem.hover.border
     },
     '&:hover > span': {
       display: 'none'
@@ -38,25 +32,19 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   categoryInner: {
-    position: 'absolute',
-    bottom: '5%',
-    left: '35%',
-    opacity: 0,
-    zIndex: 10,
-    color: 'white',
+    display: 'none',
     fontFamily: 'Open Sans',
-    fontSize: '1.4em',
+    fontSize: '14px',
+    fontWeight: 600,
     textTransform: 'uppercase',
-    transform: 'translateX(-50%)',
-    width: '100%'
+    alignItems: 'center',
+    '& svg': {
+      marginLeft: '4px'
+    }
   },
   categoryName: {
-    position: 'absolute',
     fontFamily: 'Open Sans',
-    bottom: '5%',
     fontSize: ' 20px',
-    fontWeight: '600',
-    zIndex: 11,
-    color: theme.palette.textColor
+    fontWeight: '600'
   }
 }));

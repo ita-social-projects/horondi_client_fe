@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import OrderHistoryItemProduct from '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product';
-import { item, translationsKey } from './order-history-item-product.variables';
+import { item, nullProduct, translationsKey } from './order-history-item-product.variables';
 
 jest.mock(
   '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product.styles',
@@ -9,6 +9,14 @@ jest.mock(
     useStyles: () => ({})
   })
 );
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
 
 describe('OrderHistoryOrderItem component tests', () => {
   it('Should render OrderHistoryOrderItem', () => {
@@ -28,5 +36,10 @@ describe('OrderHistoryOrderItem component tests', () => {
   it('product name is displayed in component', () => {
     render(<OrderHistoryItemProduct item={item} currency={1} />);
     expect(screen.getByText(new RegExp(translationsKey, 'i'))).toBeInTheDocument();
+  });
+
+  it('Renders plug for product', () => {
+    render(<OrderHistoryItemProduct item={nullProduct} currency={1} />);
+    expect(screen.getByText('product.notAvailable')).toBeInTheDocument();
   });
 });

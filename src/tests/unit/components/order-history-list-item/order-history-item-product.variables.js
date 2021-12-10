@@ -1,5 +1,25 @@
 export const translationsKey = '61af3a903822cdd2c488175d';
 
+export const nullProduct = {
+  quantity: 1,
+  fixedPrice: [
+    {
+      currency: 'UAH',
+      value: 1000
+    },
+    {
+      currency: 'USD',
+      value: 37
+    }
+  ],
+  options: {
+    size: {
+      name: 'M'
+    }
+  },
+  product: null
+};
+
 export const item = {
   quantity: 1,
   fixedPrice: [

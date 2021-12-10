@@ -14,7 +14,6 @@ const AnswersQuestionsPage = () => {
   const [expanded, setExpanded] = useState(false);
 
   const { loading, error, data } = useQuery(getAllQuestionsAnswers, {});
-
   const page = loading ? [] : data.getAllQuestionsAnswers.items;
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
@@ -25,7 +24,7 @@ const AnswersQuestionsPage = () => {
 
   return (
     <div className={styles.root}>
-      <h1>{t('answersQuestions.title')}</h1>
+      <h1>{t('common.titleQuestionsAnswers')}</h1>
       {page.map((accordion) => {
         const { _id } = accordion;
         const question = accordion.question && (

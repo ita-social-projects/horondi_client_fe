@@ -8,17 +8,17 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   heading: {
-    fontFamily: 'sans-serif',
+    fontFamily: 'Open Sans',
     letterSpacing: 0.5,
     fontSize: '12px',
     color: theme.palette.textColor,
-    fontWeight: 'bold',
+    fontWeight: '700px',
     '@media (max-width: 450px)': {
       fontSize: theme.spacing(2)
     }
   },
   details: {
-    fontFamily: 'Montserrat',
+    fontFamily: 'Open Sans',
     fontWeight: 400,
     display: 'block',
     paddingTop: 0,
@@ -27,9 +27,11 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 450px)': {
       fontSize: theme.spacing(2)
     },
-    '& > p': {
+    '& > p ': {
       fontSize: '18px',
-      fontFamily: 'Montserrat'
+      fontFamily: 'Open Sans',
+      fontWeight: 400,
+      marginTop: '0px'
     }
   }
 }));

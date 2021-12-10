@@ -52,12 +52,12 @@ const ProductImages = ({ images }) => {
 
   useEffect(() => {
     setSecondaryImages(imagesSet.slice(1, images.length));
-  }, [imagesSet]);
+  }, [imagesSet, images.length]);
 
   useEffect(() => {
     const secondaryImages = imagesSet.filter((_, i) => i !== primaryImage);
     setSecondaryImages(secondaryImages);
-  }, [primaryImage]);
+  }, [primaryImage, imagesSet]);
 
   const styles = useStyles();
 

@@ -1,7 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import GoogleLogo from '../../images/google.png';
-
 export const useStyles = makeStyles((theme) => ({
   loginBtn: {
     border: '1px solid',
@@ -15,11 +13,9 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.button.normal.backgroundColor
     }
   },
-  googleLogo: {
-    background: `url(${GoogleLogo}) no-repeat `,
-    backgroundSize: 'cover',
-    width: '22px',
-    height: '22px',
+  socialLogo: {
+    width: '17px',
+    height: '17px',
     marginRight: '10px'
   }
 }));

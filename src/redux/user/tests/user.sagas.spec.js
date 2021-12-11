@@ -35,6 +35,7 @@ import {
 } from './user.mocks';
 import {
   handleGoogleUserLogin,
+  handleFacebookUserLogin,
   handlePasswordReset,
   handleRefreshTokenInvalid,
   handleSendConfirmation,
@@ -52,6 +53,7 @@ import {
   checkIfTokenIsValid,
   confirmUserEmail,
   getGoogleUser,
+  getFacebookUser,
   getPurchasedProducts,
   getUserByToken,
   loginUser,
@@ -99,6 +101,44 @@ describe('user sagas tests', () => {
 
   it('should hangle google login error', () =>
     expectSaga(handleGoogleUserLogin, { payload: null })
+      .provide([[call(handleUserError, error)]])
+      .withReducer(userReducer)
+      .put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value))
+      .hasFinalState({
+        ...initialStateMock,
+        error: USER_ERROR.DEFAULT_ERROR[language].value
+      })
+      .run());
+
+  it('should handle facebook user login ', () =>
+    expectSaga(handleFacebookUserLogin, { payload })
+      .withReducer(userReducer)
+      .put(setUserLoading(true))
+      .provide([
+        [call(getFacebookUser, payload), user],
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
+      ])
+      .put(setUser({ ...user, purchasedProducts }))
+      .put(setCart(userCart.cart.items))
+      .put(setCartTotalPrice(userCart.cart.totalPrice))
+      .put(setUserLoading(false))
+      .hasFinalState({
+        ...initialStateMock,
+        userData: userWithProducts
+      })
+      .run()
+      .then((result) => {
+        const { allEffects: analysis } = result;
+        const analysisPut = analysis.filter((e) => e.type === 'PUT');
+        const analysisCall = analysis.filter((e) => e.type === 'CALL');
+        expect(analysisPut).toHaveLength(6);
+        expect(analysisCall).toHaveLength(3);
+        clearLocalStorage();
+      }));
+
+  it('should hangle facebook login error', () =>
+    expectSaga(handleFacebookUserLogin, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
       .put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value))

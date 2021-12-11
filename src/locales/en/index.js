@@ -28,6 +28,7 @@ import product from './product.json';
 import user from './user.json';
 import footer from './footer.json';
 import newsDetail from './newsDetail.json';
+import header from './header.json';
 
 export default {
   translations: {
@@ -60,6 +61,7 @@ export default {
     product,
     user,
     footer,
-    newsDetail
+    newsDetail,
+    header
   }
 };

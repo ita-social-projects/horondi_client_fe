@@ -17,6 +17,14 @@ import { changeUserCartItemSize } from '../cart.operations';
 describe('Cart saga', () => {
   let products;
   let product;
+  const testProduct = {
+    productId: 1,
+    sizeAndPrice: {
+      size: {
+        _id: 5
+      }
+    }
+  };
   const fakeCart = [
     {
       product: { _id: 'some id' },
@@ -28,10 +36,10 @@ describe('Cart saga', () => {
   ];
 
   beforeEach(() => {
-    product = { _id: 3, name: 'Orange', selectedSize: 'L' };
+    product = { product: { _id: 3, name: 'Orange' }, options: { size: { _id: 7 } } };
     products = [
-      { _id: 1, name: 'Pumpkin', selectedSize: 'M' },
-      { _id: 2, name: 'Cherry', selectedSize: 'S' }
+      { product: { _id: 1, name: 'Pumpkin' }, options: { size: { _id: 5 } } },
+      { product: { _id: 2, name: 'Cherry' }, options: { size: { _id: 6 } } }
     ];
     localStorageService.setToLocalStorage(cartKey, products);
   });
@@ -69,8 +77,8 @@ describe('Cart saga', () => {
       .run();
   });
 
-  it.skip('should to remove product from cart by id', () => {
-    const productToRemove = removeItemFromCart(products[0]);
+  it('should to remove product from cart by id', () => {
+    const productToRemove = removeItemFromCart(testProduct);
 
     return expectSaga(handleRemoveCartItem, productToRemove)
       .provide([[matchers.call.fn(localStorageService.getFromLocalStorage), products]])
@@ -115,28 +123,29 @@ describe('Cart saga', () => {
       .run();
   });
 
-  it('should change user cart item size', () => expectSaga(handleSetUserCartItemSize, {
-    payload: {
-      item: fakeCart[0],
-      value: { size: { _id: 'some id' }, price: [{ currency: 'UAH', value: 2050 }], quantity: 1 },
-      user: { _id: 'some id' }
-    }
-  })
-    .put(setCartLoading(true))
-    .provide([
-      [
-        call(changeUserCartItemSize, 'some id', fakeCart[0], {
-          size: { _id: 'some id' },
-          price: [{ currency: 'UAH', value: 2050 }],
-          quantity: 1
-        }),
-        { cart: { items: [fakeCart[0]] } }
-      ]
-    ])
-    .put({
-      type: SET_CART,
-      payload: [fakeCart[0]]
+  it('should change user cart item size', () =>
+    expectSaga(handleSetUserCartItemSize, {
+      payload: {
+        item: fakeCart[0],
+        value: { size: { _id: 'some id' }, price: [{ currency: 'UAH', value: 2050 }], quantity: 1 },
+        user: { _id: 'some id' }
+      }
     })
-    .put(setCartLoading(false))
-    .run());
+      .put(setCartLoading(true))
+      .provide([
+        [
+          call(changeUserCartItemSize, 'some id', fakeCart[0], {
+            size: { _id: 'some id' },
+            price: [{ currency: 'UAH', value: 2050 }],
+            quantity: 1
+          }),
+          { cart: { items: [fakeCart[0]] } }
+        ]
+      ])
+      .put({
+        type: SET_CART,
+        payload: [fakeCart[0]]
+      })
+      .put(setCartLoading(false))
+      .run());
 });

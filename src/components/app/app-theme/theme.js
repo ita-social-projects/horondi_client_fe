@@ -51,7 +51,15 @@ export default {
     orderHistoryHeading: {
       background: '#DEDEDE'
     },
-    profilePageLabel
+    profilePageLabel,
+    carouselItem: {
+      normal: {
+        backgroundColor: '#FFFFFF'
+      },
+      hover: {
+        border: '1px solid #5b5b5b'
+      }
+    }
   },
   dark: {
     textColor: '#FFFFFF',
@@ -96,6 +104,14 @@ export default {
     orderHistoryHeading: {
       background: '#2F2F2F '
     },
-    profilePageLabel
+    profilePageLabel,
+    carouselItem: {
+      normal: {
+        backgroundColor: '#333131'
+      },
+      hover: {
+        border: '1px solid #5B5B5B'
+      }
+    }
   }
 };

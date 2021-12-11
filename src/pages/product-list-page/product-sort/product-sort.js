@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
@@ -23,28 +23,35 @@ const ProductSort = () => {
     loading: false
   };
   const [searchParams1, setSearchParams1] = useState(initialSearchState);
+  const [sortType, setSortType] = useState(SORT_BY_SELECT_OPTIONS[0]);
 
   const searchParams = new URLSearchParams(search);
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
   const query = searchParams.get(sort);
-
   const selectHandler = (e) => {
-    const { name } = JSON.parse(e.target.value);
-
+    const { name } = e.target.value;
     searchParams.set(sort, name);
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
 
+  useEffect(() => {
+    SORT_BY_SELECT_OPTIONS.forEach((optionValue) => {
+      if (query === optionValue.name) {
+        setSortType(optionValue);
+      }
+    });
+    if (!query) {
+      searchParams.set(sort, SORT_BY_SELECT_OPTIONS[0].name);
+      history.push(`?${searchParams.toString()}`);
+    }
+  });
+
   const sortByText = t('common.sortBy');
   const selectOptions = SORT_BY_SELECT_OPTIONS.map((optionValue) => (
-    <option
-      key={optionValue.name}
-      value={JSON.stringify(optionValue)}
-      selected={optionValue.name === query}
-    >
+    <MenuItem key={optionValue.name} value={optionValue}>
       {t(`common.sortOptions.${optionValue.name}`)}
-    </option>
+    </MenuItem>
   ));
 
   return (
@@ -59,16 +66,16 @@ const ProductSort = () => {
       <SearchBarList searchParams={searchParams1} />
 
       <div className={styles.sortByText}>
-        {sortByText}
-        <TextField
-          select
-          SelectProps={{ native: true }}
+        <span className={styles.selectLabel}>{sortByText}</span>
+        <Select
           onChange={selectHandler}
-          className={styles.root}
+          className={styles.sortSelect}
           variant={TEXT_FIELD_VARIANT.OUTLINED}
+          value={sortType}
+          name='sortType'
         >
           {selectOptions}
-        </TextField>
+        </Select>
       </div>
       <CountPerPage />
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -24,19 +25,30 @@ const PriceFilter = ({ priceRange }) => {
         .get(priceFilter)
         .split(',')
         .map((price) => +price)
-      : []
+      : ['', '']
   );
 
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
 
+  const min = getMin(priceRange.minPrice, currency);
+  const max = getMax(priceRange.maxPrice, currency);
+
   useEffect(() => {
-    if (prices.length === 0 && priceRange.minPrice)
-      setPrices([priceRange.minPrice[currency].value, priceRange.maxPrice[currency].value]);
-  }, [priceRange, currency, prices.length]);
+    if (prices[0] === '' && priceRange.minPrice) {
+      setPrices([min, max]);
+    }
+  }, [priceRange, currency, prices]);
+
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
+  };
+
+  const handleTextField = (e) => {
+    const newPrices = [...prices];
+    newPrices[e.target.id] = e.target.value;
+    setPrices(newPrices);
   };
 
   const handlePriceFilter = () => {
@@ -45,8 +57,15 @@ const PriceFilter = ({ priceRange }) => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const min = getMin(priceRange.minPrice, currency);
-  const max = getMax(priceRange.maxPrice, currency);
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (prices[0] !== min) {
+        handlePriceFilter();
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [prices]);
 
   return (
     <FormGroup data-cy='price_filter'>
@@ -55,25 +74,28 @@ const PriceFilter = ({ priceRange }) => {
         <div className={styles.priceRange}>
           {t('common.from')}
           <TextField
+            id='0'
             className={styles.priceRangeInput}
             style={{ marginRight: '1rem' }}
             variant='outlined'
+            onChange={handleTextField}
             type='tel'
-            defaultValue={prices[0] || min}
+            value={prices[0]}
           />
           {t('common.to')}
           <TextField
+            id='1'
             className={styles.priceRangeInput}
             variant='outlined'
+            onChange={handleTextField}
             type='tel'
-            defaultValue={prices[1] || max}
+            value={prices[1]}
           />
         </div>
       </Typography>
       <Slider
         className={styles.slider}
         value={prices.map((price) => +price)}
-        defaultValue={prices.map((price) => +price)}
         onChange={handlePriceChange}
         onChangeCommitted={handlePriceFilter}
         valueLabelDisplay='auto'

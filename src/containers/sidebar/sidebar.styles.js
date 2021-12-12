@@ -4,14 +4,14 @@ export const useStyles = makeStyles((theme) => ({
   drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
       padding: theme.spacing(3),
+      backgroundColor: theme.palette.sideBar.backgroundColor,
       zIndex: 11,
       height: '100vh',
       width: 'fit-content',
       minWidth: '300px',
       maxWidth: '450px',
       '@media (max-width: 768px)': {
-        top: '40px',
-        height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
+        width: '100%'
       }
     },
     '& ::-webkit-scrollbar': {

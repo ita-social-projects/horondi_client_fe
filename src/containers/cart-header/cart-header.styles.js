@@ -9,7 +9,7 @@ export const useStyles = makeStyles(() => ({
     borderRadius: '50%',
     transition: 'background-color 0.5s linear',
     '&:hover': {
-      backgroundColor: fromSideBar ? '#000' : '#242424',
+      backgroundColor: '#242424',
       color: '#fff'
     },
     '& .MuiBadge-badge': {

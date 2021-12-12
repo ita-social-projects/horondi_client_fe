@@ -16,6 +16,9 @@ export default {
         backgroundColor: '#e4e0e0'
       }
     },
+    sideBar: {
+      backgroundColor: '#FFFFFF'
+    },
     button: {
       normal: {
         backgroundColor: '#020202',
@@ -68,6 +71,9 @@ export default {
       hover: {
         backgroundColor: '#7c7b7b'
       }
+    },
+    sideBar: {
+      backgroundColor: '#000000'
     },
     button: {
       normal: {

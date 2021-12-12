@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -94,6 +93,7 @@ const PriceFilter = ({ priceRange }) => {
         </div>
       </Typography>
       <Slider
+        id='slider'
         className={styles.slider}
         value={prices.map((price) => +price)}
         onChange={handlePriceChange}

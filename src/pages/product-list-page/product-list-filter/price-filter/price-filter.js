@@ -6,6 +6,7 @@ import Slider from '@material-ui/core/Slider';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { TextField } from '@material-ui/core';
+import CurrencyComponent from '../../../../containers/currency/currency-component';
 import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
@@ -51,7 +52,10 @@ const PriceFilter = ({ priceRange }) => {
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' component='div'>
-        {t('common.price')}
+        <div style={{ display: 'flex' }}>
+          {t('common.price')}
+          <CurrencyComponent fromSideBar />
+        </div>
         <div className={styles.priceRange}>
           {t('common.from')}
           <TextField

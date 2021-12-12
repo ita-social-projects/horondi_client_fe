@@ -9,11 +9,11 @@ export const useStyles = makeStyles(() => ({
       fontWeight: 600,
       fontSize: '12px',
       lineHeight: '16px',
-      color: fromSideBar ? '#000' : 'rgba(254, 254, 254, 0.75)',
+      color: fromSideBar ? 'inherit' : 'rgba(254, 254, 254, 0.75)',
       textAlign: 'center',
       '&:hover': {
-        borderBottom: '1px solid rgba(254, 254, 254, 0.75)',
-        color: fromSideBar ? '#fff' : 'rgba(254, 254, 254, 0.75)'
+        borderBottom: fromSideBar ? '1px solid #fff' : '1px solid rgba(254, 254, 254, 0.75)'
+        // color: fromSideBar ? '#fff' : 'rgba(254, 254, 254, 0.75)'
       },
       '&:focus': {
         backgroundColor: 'transparent'

@@ -2,7 +2,7 @@ import React from 'react';
 import { ExpandMoreOutlined } from '@material-ui/icons';
 import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { useStyles } from './accordion.style';
+import { useStyles } from './accordions.style';
 
 const Accordions = ({ id, title, text, expanded, handleChange }) => {
   const styles = useStyles();

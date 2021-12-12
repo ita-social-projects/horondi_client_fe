@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import parse from 'html-react-parser';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import Accordions from '../../components/accordion/accordion';
+import Accordions from '../../components/accordion/accordions';
 import { useStyles } from './answers-questions-page.style';
 import { getAllQuestionsAnswers } from './operations/answers-questions.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';

@@ -12,7 +12,7 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   return (
     <div className={styles.root}>
       <div className={`${styles.wishlist} ${styles.iconItem}`}>
-        <WishlistHeader />
+        <WishlistHeader data-testid='wishlist-icon' />
       </div>
       <div
         className={`${styles.cartHeader} ${styles.iconItem}`}

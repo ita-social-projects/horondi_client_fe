@@ -32,7 +32,10 @@ export const useStyles = makeStyles((theme) => ({
   closeIcon: {
     width: '30px',
     height: '30px',
-    transform: 'scale(1.2)'
+    transform: 'scale(1.2)',
+    '& svg': {
+      color: theme.palette.sideBar.iconsColor
+    }
   },
   sideMenuContent: {
     width: '85%'
@@ -51,6 +54,9 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '25px',
     '& span, & svg': {
       fontSize: '24px'
+    },
+    '& svg': {
+      color: theme.palette.sideBar.iconsColor
     }
   },
   subList: {

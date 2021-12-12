@@ -17,7 +17,8 @@ export default {
       }
     },
     sideBar: {
-      backgroundColor: '#FFFFFF'
+      backgroundColor: '#FFFFFF',
+      iconsColor: '#000000'
     },
     button: {
       normal: {
@@ -73,7 +74,8 @@ export default {
       }
     },
     sideBar: {
-      backgroundColor: '#000000'
+      backgroundColor: '#000000',
+      iconsColor: '#5B5B5B'
     },
     button: {
       normal: {

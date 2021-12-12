@@ -30,7 +30,8 @@ export const paletteGenerator = (colorSchema) => ({
     }
   },
   sideBar: {
-    backgroundColor: theme[colorSchema].sideBar.backgroundColor
+    backgroundColor: theme[colorSchema].sideBar.backgroundColor,
+    iconsColor: theme[colorSchema].sideBar.iconsColor
   },
   catalog: {
     pageFilterCell: {

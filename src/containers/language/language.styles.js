@@ -1,16 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: ({ fromSideBar }) => ({
     '& .MuiButtonGroup-root': {
       height: '20px',
       '&:hover': {
         backgroundColor: 'none',
         '& .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child)': {
-          borderRight: `1px solid ${fromSideBar ? '#fff' : 'rgba(254, 254, 254, 0.75)'}`
+          borderRight: `1px solid ${fromSideBar ? '' : 'rgba(254, 254, 254, 0.75)'}`
         },
         '& span': {
-          color: 'rgba(254, 254, 254, 0.75)'
+          color: fromSideBar ? '' : 'rgba(254, 254, 254, 0.75)'
         }
       },
       '& .MuiButton-root': {
@@ -20,11 +20,11 @@ export const useStyles = makeStyles(() => ({
         fontWeight: 600,
         fontSize: '12px',
         letterSpacing: '0.0015em',
-        color: fromSideBar ? '#000' : 'rgba(254, 254, 254, 0.75)',
+        color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)',
         borderRadius: '0px',
         '&:hover': {
           backgroundColor: 'transparent',
-          color: fromSideBar ? '#fff' : 'rgba(254, 254, 254, 0.75)',
+          color: fromSideBar ? '' : 'rgba(254, 254, 254, 0.75)',
           textDecoration: 'underline'
         },
         '& > span': {
@@ -36,7 +36,9 @@ export const useStyles = makeStyles(() => ({
       border: 'none'
     },
     '& .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child)': {
-      borderRight: `1px solid ${fromSideBar ? '#000' : 'rgba(254, 254, 254, 0.75)'}`
+      borderRight: `1px solid ${
+        fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
+      }`
     }
   })
 }));

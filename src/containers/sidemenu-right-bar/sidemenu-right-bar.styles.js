@@ -6,35 +6,19 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginTop: 'auto',
+    marginTop: fromSideBar ? 'auto' : 0,
     width: '100%'
   }),
   iconItem: {
-    marginRight: '40px'
+    marginRight: '20px'
   },
   wishlist: {
-    padding: '8px 4px',
-    position: 'relative',
-    cursor: 'pointer',
-    zIndex: 20,
-    transition: '1s',
-    height: '45px',
-    width: '70px',
-    textAlign: 'center',
-    transform: 'scale(1.0)',
-    '&:hover': {
-      backgroundColor: 'black',
-      '& svg': {
-        color: 'white'
-      }
-    },
+    transform: 'scale(1.3)',
     '& svg': {
-      position: 'relative',
-      zIndex: 5,
-      fontSize: '2rem',
-      border: 'none',
-      outline: 'none',
       color: theme.palette.textColor
+    },
+    '& svg:hover': {
+      color: 'white'
     }
   },
   cartHeader: {
@@ -47,25 +31,9 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   currency: {
-    transform: 'scale(1.3)',
-    '& div': {
-      color: theme.palette.textColor
-    },
-    '& div:hover': {
-      background: 'black',
-      transition: '0.5s easy',
-      color: 'white'
-    }
+    transform: 'scale(1.3)'
   },
   language: {
-    transform: 'scale(1.3)',
-    '& div': {
-      color: theme.palette.textColor
-    },
-    '& div:hover': {
-      background: 'black',
-      transition: '0.5s easy',
-      color: 'white'
-    }
+    transform: 'scale(1.3)'
   }
 }));

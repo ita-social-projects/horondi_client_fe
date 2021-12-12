@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useLayoutEffect } from 'react';
+import React, { useMemo, useState, useLayoutEffect, useContext } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,6 +16,7 @@ import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import ThemeContext from '../../context/theme-context';
 
 const { pathToConstructor } = routes;
 
@@ -24,6 +25,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
+  const [isLightTheme] = useContext(ThemeContext);
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -111,13 +113,12 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           fromSideBar
           socialIconsStyles={styles.socialIconsStyles}
           position='flex-start'
-          color='#3F51B5'
+          color={isLightTheme ? '#3F51B5' : '#FFFFFF'}
           setIsMenuOpen={setIsMenuOpen}
         />
       </div>
-      <div className={styles.rightBar}>
-        <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
-      </div>
+
+      <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
     </Drawer>
   );
 };

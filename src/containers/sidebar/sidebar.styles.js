@@ -3,12 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
-      top: 64,
       padding: theme.spacing(3),
       zIndex: 11,
-      height: fromSideBar ? '100vh' : 'calc(100vh - 64px)',
+      height: '100vh',
       width: 'fit-content',
-      maxWidth: '400px',
+      minWidth: '300px',
+      maxWidth: '450px',
       '@media (max-width: 768px)': {
         top: '40px',
         height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
@@ -30,8 +30,8 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'right'
   },
   closeIcon: {
-    width: '40px',
-    height: '40px',
+    width: '30px',
+    height: '30px',
     transform: 'scale(1.2)'
   },
   sideMenuContent: {
@@ -39,7 +39,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   itemHighlighting: {
     width: '100%',
-    marginTop: '3%',
     borderBottom: '2px solid gray'
   },
   mainItem: {
@@ -49,13 +48,14 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     cursor: 'pointer',
     width: '100%',
+    marginTop: '25px',
     '& span, & svg': {
       fontSize: '24px'
     }
   },
   subList: {
-    marginTop: '60px',
-    fontSize: '1.3rem'
+    fontSize: '1.3rem',
+    marginTop: '50px'
   },
   subItem: {
     color: theme.palette.textColor,
@@ -84,7 +84,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   socialIconsStyles: {
     color: theme.palette.textColor,
-    fontSize: '3rem',
     transition: 'all 0.5s',
     padding: '0.5rem',
     '&:hover': {
@@ -93,9 +92,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   constructorItem: {
-    padding: '3% 0 0'
+    padding: '1% 0 0',
+    fontWeight: 'bold'
   },
   rightBar: {
-    marginLeft: '1%'
+    top: '30%'
   }
 }));

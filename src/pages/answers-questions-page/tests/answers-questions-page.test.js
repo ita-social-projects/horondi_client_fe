@@ -24,6 +24,6 @@ beforeEach(async () => {
 
 describe('component tests', () => {
   it('renders h1', () => {
-    expect(screen.getByText(/answersQuestions.title/i)).toBeInTheDocument();
+    expect(screen.getByText(/common.titleQuestionsAnswers/i)).toBeInTheDocument();
   });
 });

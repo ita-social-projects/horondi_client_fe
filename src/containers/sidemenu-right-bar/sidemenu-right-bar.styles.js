@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%'
   }),
   iconItem: {
-    marginRight: '20px'
+    marginRight: '40px'
   },
   wishlist: {
     transform: 'scale(1.3)',

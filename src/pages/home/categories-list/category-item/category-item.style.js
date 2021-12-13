@@ -10,36 +10,33 @@ export const useStyles = makeStyles((theme) => ({
     width: '350px',
     height: '350px',
     cursor: 'pointer',
-    boxShadow: '(0px 8px 16px rgba(0, 0, 0, 0.12))',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
     padding: '0px',
     borderRadius: '6px',
     position: 'relative',
     color: theme.palette.textColor,
-    '&:hover > div': {
-      display: 'flex'
+    '&:hover > div, &:active > div': {
+      display: 'flex',
+      alignItems: 'center'
     },
-    '&:hover': {
+    '&:hover, &:active': {
       border: theme.palette.carouselItem.hover.border
     },
-    '&:hover > span': {
+    '&:hover > span, &:active > span': {
       display: 'none'
-    },
-    '@media (max-width: 768px)': {
-      width: 'calc(100% - 40px)',
-      height: '420px'
     }
   }),
   categoryInner: {
     display: 'none',
+    position: 'absolute',
+    left: '24px',
+    bottom: '24px',
+    fontFamily: 'Open Sans',
     fontSize: '14px',
     fontWeight: 600,
-    textTransform: 'uppercase',
-    transform: 'translateX(-50%)',
-    width: '100%',
-    '&:hover': {
-      left: '42px',
-      transition: 'all 0.5 ease-in'
-    }
+    letterSpacing: '0.0125em',
+    lineHeight: '20px',
+    textTransform: 'uppercase'
   },
   categoryName: {
     position: 'absolute',

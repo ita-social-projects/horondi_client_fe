@@ -1,6 +1,10 @@
 #catalog .react-multi-carousel-list {
-  max-width: 1110px;
   margin: 0 auto;
+}
+
+#catalog .react-multi-carousel-item {
+  max-width: 350px;
+  margin: 24px 15px;
 }
 
 #catalog .react-multiple-carousel__arrow {

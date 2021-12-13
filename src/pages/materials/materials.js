@@ -34,9 +34,12 @@ const Materials = () => {
     error: errorPatterns,
     data: dataPattern
   } = useQuery(getAllPatterns, {});
-  const patterns = loadingPatterns ? [] : dataPattern.getAllPatterns.items;
+  const patterns = useMemo(
+    () => (loadingPatterns ? [] : dataPattern.getAllPatterns.items),
+    [loadingPatterns, dataPattern]
+  );
 
-  const initImages = useMemo(() => patterns.map((e) => e.images.small), [loadingPatterns]);
+  const initImages = useMemo(() => patterns.map((e) => e.images.small), [patterns]);
 
   useEffect(() => {
     const initialPhotos = async () => {
@@ -54,7 +57,7 @@ const Materials = () => {
     };
 
     initialPhotos();
-  }, [loadingPatterns]);
+  }, [loadingPatterns, initImages, isLightTheme]);
 
   const {
     loading: loadingMaterials,

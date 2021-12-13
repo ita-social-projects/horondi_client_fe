@@ -57,7 +57,6 @@ export const useStyles = makeStyles(() => ({
   headerTitle: {
     margin: '0px',
     fontSize: '59px',
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '300',
     lineHeight: 'normal',
@@ -80,7 +79,6 @@ export const useStyles = makeStyles(() => ({
     marginBottom: '15px',
     display: 'block',
     fontSize: '18px',
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',
     lineHeight: '30px',
@@ -117,7 +115,6 @@ export const useStyles = makeStyles(() => ({
     display: 'block',
     fontStyle: 'normal',
     fontWeight: '600',
-    fontFamily: 'Open Sans',
     fontSize: '16px',
     lineHeight: '25px',
     backgroundColor: 'rgba(40, 40, 40, 0.2)',

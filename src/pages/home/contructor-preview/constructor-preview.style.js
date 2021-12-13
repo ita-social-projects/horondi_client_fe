@@ -43,7 +43,6 @@ export const useStyles = makeStyles(() => ({
     zIndex: 10
   },
   constructorTitle: {
-    fontFamily: 'Open Sans',
     fontSize: '34px',
     lineHeight: '46px',
     textAlign: 'center',
@@ -51,7 +50,6 @@ export const useStyles = makeStyles(() => ({
     color: '#FEFEFE'
   },
   constructorDescription: {
-    fontFamily: 'Open Sans',
     fontSize: '17px',
     lineHeight: '24px',
     letterSpacing: '0.005em',

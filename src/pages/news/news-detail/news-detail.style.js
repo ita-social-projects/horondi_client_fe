@@ -20,7 +20,6 @@ export const useStyles = makeStyles((theme) => ({
   container: {
     boxShadow: 'none',
     color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE',
-    fontFamily: 'Open Sans',
     width: '90%',
     margin: '0 auto',
     padding: '2rem',
@@ -131,7 +130,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     width: '196px',
     height: '44px',
-    fontFamily: 'Open Sans',
     fontWeight: '600',
     fontSize: '14px',
     textTransform: 'uppercase',

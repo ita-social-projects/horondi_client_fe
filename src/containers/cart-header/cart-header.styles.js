@@ -5,7 +5,6 @@ export const useStyles = makeStyles(() => ({
     color: fromSideBar ? '#000' : '#fff',
     width: '40px',
     height: '40px',
-    marginRight: '37px',
     borderRadius: '50%',
     transition: 'background-color 0.5s linear',
     '&:hover': {

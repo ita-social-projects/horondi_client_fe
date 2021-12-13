@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
   root: ({ fromSideBar }) => ({
     '& .MuiSelect-root': {
       padding: '0 10px',
-      fontFamily: 'Open Sans',
       fontStyle: 'normal',
       fontWeight: 600,
       fontSize: '12px',

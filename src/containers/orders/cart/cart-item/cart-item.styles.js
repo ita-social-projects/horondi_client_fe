@@ -1,14 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const name = {
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: '24px',
   lineHeight: '32px'
 };
 const description = {
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: 'normal',
   fontSize: '14px',

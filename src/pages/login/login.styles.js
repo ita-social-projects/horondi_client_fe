@@ -52,7 +52,6 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box'
   },
   heading: {
-    fontFamily: 'Open Sans',
     fontSize: '34px',
     lineHeight: '46px',
     textAlign: 'center',

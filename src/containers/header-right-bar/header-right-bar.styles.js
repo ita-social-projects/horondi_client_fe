@@ -10,12 +10,14 @@ export const useStyles = makeStyles(() => ({
   }),
 
   wishlist: {
+    marginRight: '37px',
     '@media (max-width: 450px)': {
       display: 'none'
     }
   },
 
   cart: {
+    marginRight: '37px',
     '@media (max-width: 450px)': {
       display: 'none'
     }

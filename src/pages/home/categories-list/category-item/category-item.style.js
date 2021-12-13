@@ -33,7 +33,6 @@ export const useStyles = makeStyles((theme) => ({
   }),
   categoryInner: {
     display: 'none',
-    fontFamily: 'Open Sans',
     fontSize: '14px',
     fontWeight: 600,
     textTransform: 'uppercase',
@@ -43,7 +42,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   categoryName: {
-    fontFamily: 'Open Sans',
     fontSize: ' 20px',
     fontWeight: '600'
   }

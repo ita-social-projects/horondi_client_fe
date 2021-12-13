@@ -4,7 +4,6 @@ const button = {
   width: '48px',
   height: '48px',
   borderRadius: '4px',
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '14px',
@@ -28,7 +27,6 @@ const darkThemeButtonHover = {
 const promoInput = {
   width: '221px',
   height: '48px',
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: 'normal',
   fontSize: '16px',
@@ -43,7 +41,6 @@ const totalWrapper = {
   flexWrap: 'wrap',
   justifyContent: 'space-between',
   alignItems: 'center',
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '20px',

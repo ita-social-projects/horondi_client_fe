@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
   borderRadius: '4px',
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '14px',
@@ -45,7 +44,6 @@ export const useStyles = makeStyles(() => ({
     }
   },
   itemName: (isLightTheme) => ({
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '24px',
@@ -57,7 +55,6 @@ export const useStyles = makeStyles(() => ({
     }
   }),
   description: (isLightTheme) => ({
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '14px',

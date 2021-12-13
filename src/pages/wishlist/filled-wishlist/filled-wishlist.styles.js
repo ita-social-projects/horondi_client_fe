@@ -8,7 +8,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     justifyContent: 'space-around'
   },
   title: (isLightTheme) => ({
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     marginTop: '50px',
     fontWeight: 'normal',
@@ -46,7 +45,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '150px'
   },
   tableHeader: () => ({
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '14px',

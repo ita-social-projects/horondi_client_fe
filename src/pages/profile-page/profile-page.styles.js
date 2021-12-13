@@ -6,8 +6,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     width: '90%',
     maxWidth: 1100,
-    flexDirection: 'column',
-    fontFamily: 'Open Sans'
+    flexDirection: 'column'
   },
   profileTitleInfo: {
     display: 'flex',
@@ -164,8 +163,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     borderColor: palette.button.normal.borderColor,
     padding: '12px 48px',
     '& span': {
-      fontWeight: 600,
-      fontFamily: 'Open Sans'
+      fontWeight: 600
     }
   },
   saveBtn: {

@@ -75,7 +75,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   checkoutFormContainer: {
     display: 'flex',
-    fontFamily: 'Open Sans',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     width: '100%',

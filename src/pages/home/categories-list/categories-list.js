@@ -33,10 +33,12 @@ const CategoriesList = () => {
 
   return (
     <div id='catalog' data-section-style='light' className={styles.catalog}>
-      <h2 className={styles.categoryTitle}> {t('home.ourProducts')} </h2>
-      <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable>
-        {categoriesList}
-      </Carousel>
+      <div className={styles.catalogInner}>
+        <h2 className={styles.categoryTitle}> {t('home.ourProducts')} </h2>
+        <Carousel responsive={RESPONSIVE_CATEGORIES} swipeable>
+          {categoriesList}
+        </Carousel>
+      </div>
     </div>
   );
 };

@@ -7,14 +7,12 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
     display: 'flex',
-    alignItems: 'flex-end',
-    width: 'calc(100% - 40px)',
-    borderRadius: '6px',
-    height: '500px',
-    margin: '20px',
+    width: '350px',
+    height: '350px',
     cursor: 'pointer',
-    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.12)',
-    padding: '26px 24px',
+    boxShadow: '(0px 8px 16px rgba(0, 0, 0, 0.12))',
+    padding: '0px',
+    borderRadius: '6px',
     position: 'relative',
     color: theme.palette.textColor,
     '&:hover > div': {
@@ -36,13 +34,23 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     fontWeight: 600,
     textTransform: 'uppercase',
-    alignItems: 'center',
-    '& svg': {
-      marginLeft: '4px'
+    transform: 'translateX(-50%)',
+    width: '100%',
+    '&:hover': {
+      left: '42px',
+      transition: 'all 0.5 ease-in'
     }
   },
   categoryName: {
+    position: 'absolute',
+    left: '24px',
+    bottom: '24px',
+    fontFamily: 'Open Sans',
     fontSize: ' 20px',
-    fontWeight: '600'
+    fontWeight: '600',
+    lineHeight: '28px',
+    letterSpacing: '0.0015em',
+    zIndex: 11,
+    color: theme.palette.textColor
   }
 }));

@@ -3,11 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   catalog: {
     height: '100vh',
-    marginTop: 50,
     position: 'relative',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    margin: '96px 165px',
+    '& .react-multi-carousel-item': {
+      maxWidth: '350px'
+    },
+    '& .react-multi-carousel-item:not(:last-child)': {
+      marginRight: '30px'
+    },
     '@media (max-width: 768px)': {
       '& .react-multiple-carousel__arrow': {
         width: '40px !important',
@@ -16,16 +23,16 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& > div': {
-      height: '100%',
       width: '100%'
     },
     '& .react-multi-carousel-list': {
-      height: '100%'
+      marginTop: '24px'
     }
   },
-  categoriesContainer: {
-    margin: '0 auto'
+  catalogInner: {
+    maxWidth: '1110px'
   },
+  categoriesContainer: {},
   carouselContainer: {},
   loadingIndicator: {
     marginTop: '3em'
@@ -35,16 +42,14 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor
   },
   categoryTitle: {
-    position: 'absolute',
-    margin: 0,
-    top: 10,
-    left: 80,
+    marginTop: '0px',
+    marginBottom: '24px',
     zIndex: '10',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '40px',
     lineHeight: '46px',
     letterSpacing: '0.0025em',
+    fontSize: '34px',
     color: theme.palette.textColor
   }
 }));

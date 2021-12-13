@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
     minHeight: '150px',
     overflowY: 'auto',
     position: 'absolute',
-    top: 64,
+    top: 71,
     right: 0,
     backgroundColor: 'white',
     zIndex: 10000

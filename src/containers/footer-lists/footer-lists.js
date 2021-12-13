@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 
@@ -12,7 +11,7 @@ import locationIcon from '../../images/footer-icons/location.svg';
 import { getCategoryURL } from '../../pages/home/categories-list/categories-list';
 import { useStyles } from './footer-lists.styles';
 import routes from '../../configs/routes';
-import { countPerPage } from '../../configs';
+import { URL_QUERIES_NAME, countPerPage } from '../../configs';
 import { navItems } from '../social-links/const';
 
 import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
@@ -27,9 +26,6 @@ const FooterLists = () => {
   const { categories } = useContext(CategoriesContext);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const { quantityPerPage } = useSelector(({ Products }) => ({
-    quantityPerPage: Products.countPerPage
-  }));
 
   const { loading, error } = useQuery(getContactsForFooterListContacts, {
     onCompleted: (data) => setContacts(data.getContacts.items)
@@ -42,7 +38,9 @@ const FooterLists = () => {
       <Typography variant='subtitle2'>
         <Link
           className={styles.cardLink}
-          to={`/${getCategoryURL(name)}?page=1&${countPerPage}=${quantityPerPage}`}
+          to={`/${getCategoryURL(name)}?${
+            URL_QUERIES_NAME.categoryFilter
+          }=${_id}&page=1&${countPerPage}=`}
         >
           {t(`${translationsKey}.name`)}
         </Link>
@@ -64,13 +62,17 @@ const FooterLists = () => {
     <div key={item._id}>
       <div className={styles.contactsListContainer}>
         <img alt='phone icon' src={phoneNumberIcon} />
-        <Typography className='phoneN' variant='subtitle2'>
-          {item.phoneNumber}
-        </Typography>
+        <a href={`tel:${item.phoneNumber}`}>
+          <Typography className='phoneN' variant='subtitle2'>
+            {item.phoneNumber}
+          </Typography>
+        </a>
       </div>
       <div className={styles.contactsListContainer}>
         <img alt='email icon' src={emailIcon} />
-        <Typography variant='subtitle2'>{item.email}</Typography>
+        <a href={`mailto:${item.email}`}>
+          <Typography variant='subtitle2'>{item.email}</Typography>
+        </a>
       </div>
       <div className={styles.contactsListContainer}>
         <img alt='location icon' src={locationIcon} />

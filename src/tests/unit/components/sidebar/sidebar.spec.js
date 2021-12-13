@@ -66,7 +66,7 @@ describe('sidebar tests', () => {
     wrapper = shallow(<Sidebar {...props} />);
   });
 
-  it('should be defined', () => {
+  it('should close sidebar', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));

@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   product: {
     display: 'flex',
+    flexWrap: 'wrap',
     padding: '2rem',
     '@media (max-width: 1150px)': {
       display: 'block'
@@ -33,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     wordSpacing: '0.2rem',
     fontWeight: '500',
-    marginLeft: '20px',
+    paddingLeft: '20px',
     '@media (max-width: 600px)': {
       alignItems: 'center',
       textAlign: 'center'

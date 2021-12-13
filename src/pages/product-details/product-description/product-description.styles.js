@@ -2,10 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   details: {
-    padding: '2rem'
+    flex: '0 1 60%',
+    paddingTop: '50px'
   },
   description: {
-    width: '50%',
     borderBottom: '1px solid #5B5B5B'
   },
   title: {
@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   text: {
     '& p': {
+      display: 'inline',
       fontSize: '14px',
       lineHeight: '19px',
       margin: '0'

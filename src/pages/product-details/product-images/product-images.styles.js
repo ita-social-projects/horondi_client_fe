@@ -15,6 +15,9 @@ const imgSides = {
 };
 
 export const useStyles = makeStyles((theme) => ({
+  imageBody: {
+    flex: '1 1 60%'
+  },
   images: {
     display: 'grid',
     gridGap: '20px',
@@ -76,7 +79,11 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '& svg': {
+      fill: theme.palette.textColor
+    },
+    '&:disabled': { opacity: '0.2' }
   },
 
   additionalImagePreview: {

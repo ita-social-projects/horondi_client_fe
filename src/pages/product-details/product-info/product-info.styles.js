@@ -53,8 +53,11 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   look: {
-    display: 'flex',
+    // display: 'flex',
     wordSpacing: '0.2rem',
+    '& img': {
+      display: 'block'
+    },
     '@media (max-width: 600px)': {
       justifyContent: 'center'
     }
@@ -77,7 +80,11 @@ export const useStyles = makeStyles((theme) => ({
     margin: '16px 0',
     letterSpacing: '0.0125em',
     lineHeight: '20px',
-    fontSize: '14px'
+    fontSize: '14px',
+    '& p': {
+      display: 'inline',
+      margin: '0'
+    }
   },
   circle: {
     margin: '8px 0 16px',

@@ -42,7 +42,7 @@ const ProductDescription = ({ product }) => {
           </AccordionSummary>
           <AccordionDetails>
             <Typography component='div' className={styles.text}>
-              {parse(description[language].value)}
+              {parse(description[language].value.replace(/;/g, '. '))}
             </Typography>
           </AccordionDetails>
         </Accordion>

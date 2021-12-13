@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { IconButton } from '@material-ui/core';
 
 import Sidebar from '../../../../containers/sidebar/sidebar';
 
@@ -9,7 +10,9 @@ const useQueryData = {
   error: false,
   data: { getCategoriesForBurgerMenu: [{ category: { _id: 1 } }] }
 };
-const props = { fromSideBar: {}, isMenuOpen: true, setIsMenuOpen: () => null };
+
+const setIsMenuOpen = jest.fn();
+const props = { fromSideBar: {}, isMenuOpen: true, setIsMenuOpen };
 
 jest.mock('@apollo/client');
 jest.mock('../../../../containers/sidemenu-right-bar/sidemenu-right-bar', () => ({
@@ -22,7 +25,7 @@ jest.mock('react', () => ({
   useContext: () => [{}]
 }));
 jest.mock('../../../../context/theme-context', () => ({}));
-jest.mock('../../../../containers/sidebar/sidebar.styles.js', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../../containers/sidebar/sidebar.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
   useTheme: () => ({
@@ -61,5 +64,15 @@ describe('sidebar tests', () => {
     }));
 
     wrapper = shallow(<Sidebar {...props} />);
+  });
+
+  it('should be defined', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+    wrapper = shallow(<Sidebar {...props} />);
+    wrapper.find(IconButton).simulate('click');
+
+    expect(setIsMenuOpen).toHaveBeenCalled();
   });
 });

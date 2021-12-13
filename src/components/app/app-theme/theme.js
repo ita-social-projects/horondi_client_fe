@@ -16,10 +16,6 @@ export default {
         backgroundColor: '#e4e0e0'
       }
     },
-    sideBar: {
-      backgroundColor: '#FFFFFF',
-      iconsColor: '#000000'
-    },
     button: {
       normal: {
         backgroundColor: '#020202',
@@ -72,10 +68,6 @@ export default {
       hover: {
         backgroundColor: '#7c7b7b'
       }
-    },
-    sideBar: {
-      backgroundColor: '#000000',
-      iconsColor: '#5B5B5B'
     },
     button: {
       normal: {

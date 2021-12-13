@@ -29,10 +29,6 @@ export const paletteGenerator = (colorSchema) => ({
       color: theme[colorSchema].card.selectedButton.color
     }
   },
-  sideBar: {
-    backgroundColor: theme[colorSchema].sideBar.backgroundColor,
-    iconsColor: theme[colorSchema].sideBar.iconsColor
-  },
   catalog: {
     pageFilterCell: {
       hover: {

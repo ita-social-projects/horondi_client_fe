@@ -17,6 +17,12 @@ jest.mock('../../../../containers/sidemenu-right-bar/sidemenu-right-bar', () => 
   default: () => null
 }));
 
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useContext: () => [{}]
+}));
+jest.mock('../../../../context/theme-context', () => ({}));
+jest.mock('../../../../containers/sidebar/sidebar.styles.js', () => ({ useStyles: () => ({}) }));
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
   useTheme: () => ({

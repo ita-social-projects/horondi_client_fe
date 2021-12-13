@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
       padding: theme.spacing(3),
-      backgroundColor: theme.palette.sideBar.backgroundColor,
+      backgroundColor: theme.palette.type === 'light' ? '#FFFFFF' : '#000000',
       zIndex: 11,
       height: '100vh',
       width: 'fit-content',
@@ -34,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '30px',
     transform: 'scale(1.2)',
     '& svg': {
-      color: theme.palette.sideBar.iconsColor
+      color: theme.palette.type === 'light' ? '#000000' : '#5B5B5B'
     }
   },
   sideMenuContent: {
@@ -56,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '24px'
     },
     '& svg': {
-      color: theme.palette.sideBar.iconsColor
+      color: theme.palette.type === 'light' ? '#000000' : '#5B5B5B'
     }
   },
   subList: {

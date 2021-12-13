@@ -4,7 +4,6 @@ export const useStyles = makeStyles(() => ({
   root: () => ({
     width: '40px',
     height: '40px',
-    marginRight: '37px',
     color: '#fff',
     borderRadius: '50%',
     transition: 'background-color 0.5s linear',

@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const titleStyles = {
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: 'normal',
   fontSize: '34px',
@@ -14,7 +13,6 @@ const titleStyles = {
 const buttonStyles = {
   height: '52px',
   width: '255px',
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '14px',

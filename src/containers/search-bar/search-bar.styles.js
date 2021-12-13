@@ -20,7 +20,6 @@ export const useStyles = makeStyles(() => ({
     },
     '& .MuiInput-input': {
       padding: '12px 5px 12px 46px',
-      fontFamily: 'Open Sans',
       fontStyle: 'normal',
       fontWeight: '600',
       fontSize: '14px',

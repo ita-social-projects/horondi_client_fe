@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import BG from '../../../images/thanks.png';
 
-const fontFamily = 'Open Sans';
 const whiteText = '#FEFEFE';
 const blackText = '#242424';
 
@@ -30,7 +29,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   thanksForBuy: {
     margin: '40px 30px 40px 30px',
-    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '26px',
@@ -72,7 +70,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '44px',
     borderRadius: '1px',
     borderColor: palette.type === 'light' ? blackText : whiteText,
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '14px',
@@ -91,7 +88,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '44px',
     borderRadius: '1px',
     borderColor: palette.type === 'light' ? blackText : whiteText,
-    fontFamily: 'Open Sans',
+
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '14px',

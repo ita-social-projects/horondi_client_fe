@@ -5,7 +5,6 @@ const drawerWidth = 320;
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    fontFamily: 'Open Sans',
     flexDirection: 'column',
     justifyContent: 'center',
     padding: '0 2rem 1rem 2rem',

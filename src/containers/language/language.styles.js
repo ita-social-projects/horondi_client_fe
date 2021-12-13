@@ -15,7 +15,6 @@ export const useStyles = makeStyles(() => ({
       },
       '& .MuiButton-root': {
         padding: '5px 8px',
-        fontFamily: 'Open Sans',
         fontStyle: 'normal',
         fontWeight: 600,
         fontSize: '12px',

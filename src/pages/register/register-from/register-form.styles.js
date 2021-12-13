@@ -12,14 +12,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '34px',
     fontWeight: '400',
     textAlign: 'center',
-    fontFamily: 'Open Sans',
     paddingTop: '44px',
     margin: 0,
     color: palette.textColor
   },
   dataInput: {
     marginTop: '24px',
-    fontFamily: 'Open Sans',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -52,9 +50,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   consentMessage: {
     fontSize: '12px',
     letterSpacing: '.3px',
-    fontWeight: '400px',
-    margin: '4px 0 24px',
-    fontFamily: 'Open Sans'
+    fontWeight: '400',
+    margin: '4px 0 24px'
   },
   consentLink: {
     color: palette.textColor,
@@ -70,7 +67,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     borderRadius: '4px',
     marginBottom: '48px',
     height: '44px',
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '14px',
@@ -103,7 +99,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   googleText: {
     textAlign: 'center',
     fontSize: '12px',
-    fontFamily: 'Open Sans',
     marginTop: '0px',
     marginBottom: '8px'
   },

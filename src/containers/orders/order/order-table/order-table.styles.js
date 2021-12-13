@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const title = {
   display: 'block',
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontHeight: 'normal',
   fontWeight: 'normal',
@@ -11,7 +10,6 @@ const title = {
   letterSpacing: '0.0025em'
 };
 const tableHeader = {
-  fontFamily: 'Open Sans',
   fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '14px',

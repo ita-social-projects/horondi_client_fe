@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     textAlign: 'center',
     position: 'absolute',
-    fontFamily: 'Open sans',
+
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -26,7 +26,6 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '16px',
       color: theme.palette.black,
       '& b': {
-        fontFamily: 'Open Sans',
         fontSize: '14px',
         fontStyle: '600'
       },
@@ -43,7 +42,6 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     borderBottom: '2px solid #E2E8F0',
     fontSize: '20px',
-    fontFamily: 'Open sans',
     color: theme.palette.black,
     fontWeight: '700',
     '@media (max-width: 500px)': {

@@ -40,7 +40,6 @@ export const useStyles = makeStyles((theme) => ({
     top: 10,
     left: 80,
     zIndex: '10',
-    fontFamily: 'Open Sans',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '40px',

@@ -19,10 +19,14 @@ const Accordions = ({ id, title, text, expanded, handleChange }) => {
         aria-controls='panel1bh-content'
         id='panel1bh-header'
       >
-        <Typography className={styles.heading}>{title}</Typography>
+        <Typography component='span' className={styles.heading}>
+          {title}
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography className={styles.details}>{text}</Typography>
+        <Typography component='span' className={styles.details}>
+          {text}
+        </Typography>
       </AccordionDetails>
     </Accordion>
   );

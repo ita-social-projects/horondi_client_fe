@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 import { useStyles } from './news-page.style';
+import { NEWS_AMOUNT } from './constants';
 import NewsItem from '../news-item';
 import { getAllNews } from '../operations/news-queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
@@ -9,24 +10,26 @@ import OrderHistoryPagination from '../../../containers/orders/order-history/ord
 
 const NewsPage = () => {
   const [news, setNews] = useState([]);
+  const [count, setCount] = useState([]);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
 
   const { loading, error } = useQuery(getAllNews, {
     variables: {
-      limit: 1,
-      skip: (currentPage - 1) * 1
+      limit: NEWS_AMOUNT,
+      skip: (currentPage - 1) * NEWS_AMOUNT
     },
-    onCompleted: (data, count) => {
+    onCompleted: (data) => {
       setNews(data.getAllNews.items);
+      setCount(data.getAllNews.count);
     },
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'cache-first'
   });
-
   const changeHandler = (value) => {
     setCurrentPage(value);
   };
+
   const styles = useStyles();
   const newsItems = news.map(({ _id, date, author, image, title, text, slug, translationsKey }) => (
     <NewsItem
@@ -41,7 +44,8 @@ const NewsPage = () => {
       translationsKey={translationsKey}
     />
   ));
-  const quantityPages = 3;
+
+  const quantityPages = Math.ceil(count / NEWS_AMOUNT);
   if (loading || error) return errorOrLoadingHandler(error, loading);
   return (
     <>

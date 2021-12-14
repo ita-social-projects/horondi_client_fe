@@ -41,6 +41,8 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
           ))}
         </List>
       </Collapse>
+
+      <div className={styles.itemHighlighting} />
     </>
   );
 };

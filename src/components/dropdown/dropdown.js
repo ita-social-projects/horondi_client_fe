@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
 import clsx from 'clsx';
 import { noop } from 'lodash';
+import { KeyboardArrowDown } from '@material-ui/icons';
 
 import { dropdownStyles } from './dropdown.styles';
 
@@ -28,7 +29,13 @@ const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) =>
 
   return (
     <div className={styles.rootItem}>
-      <Select className={stickyLang} defaultValue={defaultValue} value={value} onChange={handler}>
+      <Select
+        className={stickyLang}
+        defaultValue={defaultValue}
+        value={value}
+        onChange={handler}
+        IconComponent={KeyboardArrowDown}
+      >
         {mappedItems}
       </Select>
     </div>

@@ -1,9 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  cardBody: ({ position }) => ({
+  cardBody: ({ position, fromSideBar }) => ({
     flex: position === 'center' ? 0 : 1,
-    padding: '50px 25px 25px',
+    padding: fromSideBar ? '70px 10px 0 3px' : '55px 10px 50px 40px',
+    margin: fromSideBar ? '35% 0 20% 0' : '',
     '@media screen and (max-width: 552px)': {
       width: '50%',
       padding: '20px 25px 10px'
@@ -34,21 +35,23 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   cardTitle: {
-    fontSize: '1.25rem',
-    marginBottom: '10px',
+    fontSize: '14px',
     '@media screen and (max-width: 552px)': {
       textAlign: 'center'
     }
   },
-  iconsContainer: ({ position }) => ({
+  iconsContainer: ({ position, fromSideBar }) => ({
     display: 'flex',
     justifyContent: position,
     '@media screen and (max-width: 552px)': {
       justifyContent: 'space-around'
-    }
+    },
+    transform: fromSideBar ? 'scale(1.2)' : '',
+    marginTop: '1.5rem',
+    marginLeft: fromSideBar ? '25px' : ''
   }),
   iconWrap: {
-    margin: '0.5rem',
+    marginRight: '1rem',
     color: 'transparent',
     '&:hover': {
       color: '#bebebe'

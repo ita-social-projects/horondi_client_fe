@@ -1,18 +1,30 @@
 import { makeStyles } from '@material-ui/core';
 
-export const dropdownStyles = makeStyles(() => ({
-  rootItem: {
+export const dropdownStyles = makeStyles((theme) => ({
+  rootItem: ({ fromSideBar }) => ({
     '& div': {
       padding: '0 !important'
     },
 
     '& svg': {
-      display: 'none'
+      display: fromSideBar ? null : 'none',
+      left: '40px',
+      '@media screen and (max-width: 552px)': {
+        left: '25px'
+      }
+    },
+    '&:hover': {
+      '&:after': {
+        color: 'white'
+      }
     },
     '& .MuiInput-underline:before ': {
       borderBottom: '#0000'
+    },
+    '& .MuiInput-underline:after ': {
+      borderBottom: 'none'
     }
-  },
+  }),
   rootSelect: ({ fromSideBar }) => ({
     display: 'flex',
     flexDirection: 'row',

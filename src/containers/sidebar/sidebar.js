@@ -1,12 +1,13 @@
-import React, { useMemo, useState, useLayoutEffect } from 'react';
+import React, { useMemo, useState, useLayoutEffect, useContext } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
-import { useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import { IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import SideBarItem from './sidebar-item';
 import { useStyles } from './sidebar.styles';
 import { SIDEBAR_SUBLIST } from './constants';
@@ -15,6 +16,7 @@ import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import ThemeContext from '../../context/theme-context';
 
 const { pathToConstructor } = routes;
 
@@ -23,7 +25,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
-  const { palette } = useTheme();
+  const [isLightTheme] = useContext(ThemeContext);
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -90,17 +92,32 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       open={isMenuOpen}
       onClose={() => setIsMenuOpen(false)}
     >
-      <List>{categoriesList}</List>
-      <Link to={pathToConstructor} className={styles.mainItem} onClick={() => setIsMenuOpen(false)}>
-        <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
-      </Link>
-      {subList}
-      <SocialLinks
-        socialIconsStyles={styles.socialIconsStyles}
-        position='center'
-        color={palette.textColor}
-        setIsMenuOpen={setIsMenuOpen}
-      />
+      <div className={styles.closeIconContainer}>
+        <IconButton className={styles.closeIcon} onClick={() => setIsMenuOpen(false)}>
+          <CloseIcon />
+        </IconButton>
+      </div>
+      <div className={styles.sideMenuContent}>
+        <List>{categoriesList}</List>
+        <Link
+          to={pathToConstructor}
+          className={styles.mainItem}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
+        </Link>
+        <div className={styles.itemHighlighting} />
+        {subList}
+        <SocialLinks
+          showTitle
+          fromSideBar
+          socialIconsStyles={styles.socialIconsStyles}
+          position='flex-start'
+          color={isLightTheme ? '#3F51B5' : '#FFFFFF'}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+      </div>
+
       <SidemenuRightBar fromSideBar setIsMenuOpen={setIsMenuOpen} />
     </Drawer>
   );

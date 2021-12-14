@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: ({ fromSideBar }) => ({
     '& .MuiSelect-root': {
       padding: '0 10px',
@@ -8,11 +8,12 @@ export const useStyles = makeStyles(() => ({
       fontWeight: 600,
       fontSize: '12px',
       lineHeight: '16px',
-      color: fromSideBar ? '#000' : 'rgba(254, 254, 254, 0.75)',
+      color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)',
       textAlign: 'center',
       '&:hover': {
-        borderBottom: '1px solid rgba(254, 254, 254, 0.75)',
-        color: fromSideBar ? '#fff' : 'rgba(254, 254, 254, 0.75)'
+        borderBottom: '1px solid',
+        borderColor: theme.palette.backgroundColor,
+        color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
       },
       '&:focus': {
         backgroundColor: 'transparent'

@@ -18,6 +18,7 @@ const BusinessPage = ({ match }) => {
   });
 
   const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
+
   const styles = useStyles();
 
   if (loading || error) return errorOrLoadingHandler(error, loading);

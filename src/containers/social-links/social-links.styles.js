@@ -4,7 +4,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   cardBody: ({ position, fromSideBar }) => ({
     flex: position === 'center' ? 0 : 1,
     padding: fromSideBar ? '70px 10px 0 3px' : '55px 10px 50px 40px',
-    margin: fromSideBar ? '40% 0 20% 0' : '',
+    margin: fromSideBar ? '35% 0 20% 0' : '',
     '@media screen and (max-width: 552px)': {
       width: '50%',
       padding: '20px 25px 10px'

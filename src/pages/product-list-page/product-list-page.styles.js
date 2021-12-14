@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     fontSize: '59px',
     borderBottom: '1px solid gray',
-    padding: '80px 1rem 17px 1rem'
+    padding: '80px 1rem 50px 1rem'
   },
 
   paginationDiv: {

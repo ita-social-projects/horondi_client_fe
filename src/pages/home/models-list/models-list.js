@@ -38,6 +38,7 @@ const ModelsList = () => {
         ))}
       </div>
       <ClassicButton
+        className={styles.button}
         buttonStyle={isModelsVisible ? 'classic' : 'inverse'}
         buttonType='button'
         innerText={isModelsVisible ? t('common.hide') : t('home.allModels')}

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: ({ isModelsVisible, modelsCount }) => ({
     height: !isModelsVisible ? '100vh' : `${(modelsCount / 3) * 210 + 250}px`,
     minHeight: '100vh',
@@ -11,17 +11,26 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     transition: 'height 1s ease',
     '& button': {
-      zIndex: 10
+      zIndex: 10,
+      color: theme.palette.textColor,
+      backgroundColor: theme.palette.backgroundColor,
+      borderColor: theme.palette.textColor,
+      margin: 50,
+      '&:hover': {
+        color: theme.palette.textColor,
+        backgroundColor: theme.palette.backgroundColor
+      }
     },
     '@media (max-width: 768px)': {
       height: !isModelsVisible ? '100%' : `300px`
     }
   }),
   modelsWrapper: ({ isModelsVisible }) => ({
+    backgroundColor: theme.palette.backgroundColor,
     display: 'flex',
     flexFlow: 'wrap',
     width: '85%',
-    height: isModelsVisible ? '66%' : 210,
+    height: isModelsVisible ? '35%' : 217,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',
@@ -36,9 +45,7 @@ export const useStyles = makeStyles(() => ({
       top: 0,
       right: 5,
       left: 5,
-      bottom: 0,
-      background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);',
-      zIndex: isModelsVisible ? -1 : 5
+      bottom: 0
     }
   })
 }));

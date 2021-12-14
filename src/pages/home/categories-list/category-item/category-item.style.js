@@ -4,8 +4,9 @@ export const useStyles = makeStyles((theme) => ({
   categoryItem: (props) => ({
     backgroundImage: `url("${props.image}")`,
     backgroundPosition: 'center',
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
+    backgroundRepeat: 'no-repeat',
     display: 'flex',
     width: '350px',
     height: '350px',

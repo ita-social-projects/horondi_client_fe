@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: 'center'
     },
     '&:hover, &:active': {
-      border: theme.palette.carouselItem.hover.border
+      outline: theme.palette.carouselItem.hover.border
     },
     '&:hover > span, &:active > span': {
       display: 'none'

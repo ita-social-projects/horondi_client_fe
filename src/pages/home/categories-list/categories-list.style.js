@@ -19,7 +19,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   catalogInner: {
-    margin: '96px 165px'
+    maxWidth: '1140px',
+    '@media (max-width: 1146px)': {
+      maxWidth: '800px'
+    }
   },
   categoryTitle: {
     margin: '0px',
@@ -31,6 +34,9 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: '0.0025em',
     fontSize: '34px',
     color: theme.palette.textColor,
-    zIndex: '10'
+    zIndex: '10',
+    '@media (max-width: 760px)': {
+      textAlign: 'center'
+    }
   }
 }));

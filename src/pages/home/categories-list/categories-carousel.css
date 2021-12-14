@@ -1,10 +1,7 @@
-#catalog .react-multi-carousel-list {
-  margin: 0 auto;
-}
-
 #catalog .react-multi-carousel-item {
-  max-width: 350px;
-  margin: 24px 15px;
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
 }
 
 #catalog .react-multiple-carousel__arrow {
@@ -12,6 +9,24 @@
   height: 50px;
 }
 
+#catalog .react-multiple-carousel__arrow--left {
+  left: 0;
+}
+
+#catalog .react-multiple-carousel__arrow--right {
+  right: 0;
+}
+
 #catalog .react-multiple-carousel__arrow:before {
   font-size: 20px !important;
+}
+
+@media(max-width: 760px) {
+  #catalog .react-multiple-carousel__arrow--left {
+    left: 5%;
+  }
+
+  #catalog .react-multiple-carousel__arrow--right {
+    right: 5%;
+  }
 }

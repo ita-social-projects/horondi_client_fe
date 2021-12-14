@@ -32,7 +32,7 @@ const Login = () => {
     if (theme === LIGHT_THEME) {
       return MATERIAL_UI_COLOR.PRIMARY;
     }
-    return MATERIAL_UI_COLOR.INHERIT;
+    return MATERIAL_UI_COLOR.DEFAULT;
   };
 
   const dispatch = useDispatch();

@@ -97,6 +97,7 @@ export const TEXT_VALUE = 'text';
 
 export const MATERIAL_UI_COLOR = {
   INHERIT: 'inherit',
+  DEFAULT: 'default',
   PRIMARY: 'primary',
   ACTION: 'action'
 };

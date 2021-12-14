@@ -48,7 +48,7 @@ const ProductInfo = ({ price, product, countComments }) => {
         </span>
       </Tooltip>
       <a href={SCROLL_BAR_LINKS} className={styles.comments}>
-        {countComments && countComments.count === 0 ? null : countComments.count}{' '}
+        {countComments.count ? countComments.count : null}{' '}
         {correctCommentsName(countComments.count)}
       </a>
       <div className={styles.text}>{parse(t(`${translationsKey}.description`)).slice(0, 2)}</div>

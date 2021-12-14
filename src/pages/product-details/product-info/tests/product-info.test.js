@@ -94,6 +94,7 @@ useSelector.mockImplementation(() => ({
 
 describe('Product info', () => {
   const props = {
+    countComments: { count: 3 },
     product: {
       rate: 5,
       name: [

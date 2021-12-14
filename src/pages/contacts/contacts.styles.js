@@ -94,6 +94,9 @@ export const useStyles = makeStyles((theme) => ({
       width: '300px'
     }
   },
+  clickedLink: {
+    color: theme.palette.white
+  },
   icon: {
     marginTop: '3px',
     marginRight: '16px',

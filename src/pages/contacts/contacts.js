@@ -56,11 +56,15 @@ const Contacts = ({ fromCheckout }) => {
       <div className={styles.contacts}>
         <div className={styles.contactsItem}>
           <img className={styles.icon} src={phone} alt='phone' />
-          <span>{contact.phoneNumber}</span>
+          <a href={`tel:${contact.phoneNumber}`} className={styles.clickedLink}>
+            <span>{contact.phoneNumber}</span>
+          </a>
         </div>
         <div className={styles.contactsItem}>
           <img className={styles.icon} src={email} alt='email' />
-          <span>{contact.email}</span>
+          <a href={`mailto:${contact.email}`} className={styles.clickedLink}>
+            <span>{contact.email}</span>
+          </a>
         </div>
         <div className={styles.contactsItem}>
           <img className={styles.icon} src={location} alt='location' />

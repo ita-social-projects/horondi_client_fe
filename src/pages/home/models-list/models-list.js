@@ -6,6 +6,7 @@ import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
 import { getAllModelsQuery } from './operations/getAllModels.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import { URL_QUERIES_NAME, countPerPage } from '../../../configs/index';
 
 const ModelsList = () => {
   const [models, setModels] = useState([]);
@@ -29,7 +30,11 @@ const ModelsList = () => {
     <div className={styles.root} data-section-style='light' id='models'>
       <div className={styles.modelsWrapper}>
         {models.map((model) => (
-          <ModelItem key={model._id} model={model} />
+          <ModelItem
+            key={model._id}
+            model={model}
+            modelsUrl={`${URL_QUERIES_NAME.modelsFilter}=${model._id}&page=1&${countPerPage}`}
+          />
         ))}
       </div>
       <ClassicButton

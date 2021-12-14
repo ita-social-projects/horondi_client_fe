@@ -7,16 +7,12 @@ import { useStyles } from './model-item.style';
 
 import { IMG_URL } from '../../configs';
 
-const ModelItem = ({ model }) => {
+const ModelItem = ({ model, modelsUrl }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
   return (
-    <Link
-      to={`/catalog/${model.category.name[1].value.toLowerCase()}/${model.name[1].value.toLowerCase()}`}
-      key={model.name[1].value}
-      className={styles.modelItem}
-    >
+    <Link to={`/catalog/${model.category.name[1].value}?${modelsUrl}`} className={styles.modelItem}>
       <div className={styles.modelItemTitle}>{t(`${model.translationsKey}.name`)}</div>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />

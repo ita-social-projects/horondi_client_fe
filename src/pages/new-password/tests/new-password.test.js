@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import { useDispatch, useSelector } from 'react-redux';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import NewPassword from '../new-password';
 
 Enzyme.configure({ adapter: new Adapter() });

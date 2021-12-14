@@ -32,9 +32,6 @@ describe('<DeliveryType />', () => {
   it('should render <DeliveryType />', () => {
     expect(wrapper).toBeDefined();
   });
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
   it('should handle courierOrganization change', () => {
     radioGroup.props().onChange({ target: { value: 'COURIER' } });
     const select = wrapper.find(`[name='courierOrganization']`);

@@ -156,7 +156,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.models')}</FormHelperText>
+            <FormHelperText>{t('common.model')}</FormHelperText>
           </FormControl>
 
           <FormControl>
@@ -259,7 +259,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.bottom')}</FormHelperText>
+            <FormHelperText>{t('common.size')}</FormHelperText>
           </FormControl>
 
           <Button className={styles.button} onClick={showModal} data-testid='modalButton'>

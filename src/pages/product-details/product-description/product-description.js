@@ -55,7 +55,9 @@ const ProductDescription = ({ product }) => {
             aria-controls='panel1a-content'
             id='panel1a-header'
           >
-            <Typography>{t('product.productDescription.material')}</Typography>
+            <Typography className={styles.title}>
+              {t('product.productDescription.material')}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography component='div' className={styles.text}>
@@ -84,7 +86,9 @@ const ProductDescription = ({ product }) => {
               aria-controls='panel1a-content'
               id='panel1a-header'
             >
-              <Typography>{t('product.productDescription.measurement')} </Typography>
+              <Typography className={styles.title}>
+                {t('product.productDescription.measurement')}{' '}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography component='div' className={styles.text}>

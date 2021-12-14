@@ -6,7 +6,10 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: '50px'
   },
   description: {
-    borderBottom: '1px solid #5B5B5B'
+    borderBottom: '1px solid #5B5B5B',
+    '& div': {
+      background: 'none'
+    }
   },
   title: {
     fontSize: '16px',

@@ -33,9 +33,13 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
   }
 
   const { addToCart } = cartOperations;
-  const cartTootipTitle = isItemInCart
-    ? t('product.tooltips.itemInCart')
-    : t('product.tooltips.itemInCartAlready');
+
+  const cartTootipTitle = () => {
+    if (disabled) return '123213';
+    return isItemInCart
+      ? t('product.tooltips.itemInCart')
+      : t('product.tooltips.itemInCartAlready');
+  };
 
   const cartButtonLabel = isItemInCart
     ? t('product.pdpButtons.inCart')
@@ -96,10 +100,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
       <Button disabled={disabled} className={styles.submitButton} onClick={onAddToCheckout}>
         {t('product.pdpButtons.buyButton')}
       </Button>
-      <Tooltip title={cartTootipTitle} placement='bottom'>
-        <Button disabled={disabled} className={styles.toCart} onClick={cartButtonFunc}>
-          {cartButtonLabel}
-        </Button>
+      <Tooltip title={cartTootipTitle()} placement='bottom'>
+        <div>
+          <Button disabled={disabled} className={styles.toCart} onClick={cartButtonFunc}>
+            {cartButtonLabel}
+          </Button>
+        </div>
       </Tooltip>
     </div>
   );

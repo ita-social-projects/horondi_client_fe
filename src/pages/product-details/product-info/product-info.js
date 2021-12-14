@@ -14,15 +14,14 @@ import { SCROLL_BAR_LINKS } from '../constants';
 
 const ProductInfo = ({ price, product, countComments }) => {
   const styles = useStyles();
-  const { rate, description, mainMaterial, translationsKey } = product;
-  const { t, i18n } = useTranslation();
+  const { rate, mainMaterial, translationsKey } = product;
+  const { t } = useTranslation();
   const { currentPrice, currency } = useSelector(({ Products: { productToSend }, Currency }) => ({
     currentPrice: productToSend.price || price,
     currentWeight: productToSend.dimensions.weightInKg || 0,
     currentVolume: productToSend.dimensions.volumeInLiters || 0,
     currency: Currency.currency
   }));
-  const language = i18n.language === 'ua' ? 0 : 1;
 
   const currencySign = getCurrencySign(currency);
   const checkAvailableProduct = (item) => {
@@ -30,6 +29,12 @@ const ProductInfo = ({ price, product, countComments }) => {
       if (item.sizes[0].size.available) return null;
       return <div className={styles.notAvailable}>{t('product.notAvailable')}</div>;
     }
+  };
+  const correctCommentsName = (count) => {
+    if (count === 0) return t('product.comments.noComments');
+    if (count === 1) return t('product.comments.commentsOne');
+    if (count === 2 || count === 3 || count === 4) return t('product.comments.commentsTwo');
+    if (count > 4) return t('product.comments.title');
   };
   return (
     <div className={styles.common}>
@@ -42,14 +47,11 @@ const ProductInfo = ({ price, product, countComments }) => {
           <Rating value={rate} readOnly precision={0.1} />
         </span>
       </Tooltip>
-      {countComments ? (
-        <a href={SCROLL_BAR_LINKS} className={styles.comments}>
-          {countComments.count} {t('product.comments.title')}
-        </a>
-      ) : null}
-      {product ? (
-        <div className={styles.text}>{parse(description[language].value).slice(2)}</div>
-      ) : null}
+      <a href={SCROLL_BAR_LINKS} className={styles.comments}>
+        {countComments && countComments.count === 0 ? null : countComments.count}{' '}
+        {correctCommentsName(countComments.count)}
+      </a>
+      <div className={styles.text}>{parse(t(`${translationsKey}.description`)).slice(0, 2)}</div>
 
       {Object.keys(currentPrice).length ? (
         <div className={styles.priceContainer}>

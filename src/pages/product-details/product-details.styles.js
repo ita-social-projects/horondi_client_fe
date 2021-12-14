@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: '1200px',
     margin: '2rem auto',
     boxSizing: 'border-box',
+    background: 'none',
     '@media (max-width: 600px)': {
       width: '100%',
       margin: '0'

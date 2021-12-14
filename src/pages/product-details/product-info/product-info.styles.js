@@ -8,11 +8,18 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: '15px',
     '@media (max-width: 600px)': {
       flexDirection: 'column',
       alignItems: 'center'
     },
-    marginBottom: '15px'
+    '@media (max-width: 1280px)': {
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
+    '@media (max-width: 1150px)': {
+      flexDirection: 'row'
+    }
   },
   rate: {
     display: 'block'
@@ -79,9 +86,9 @@ export const useStyles = makeStyles((theme) => ({
   text: {
     margin: '16px 0',
     letterSpacing: '0.0125em',
-    lineHeight: '20px',
-    fontSize: '14px',
     '& p': {
+      lineHeight: '20px',
+      fontSize: '14px',
       display: 'inline',
       margin: '0'
     }

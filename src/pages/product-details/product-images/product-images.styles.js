@@ -16,7 +16,10 @@ const imgSides = {
 
 export const useStyles = makeStyles((theme) => ({
   imageBody: {
-    flex: '1 1 60%'
+    flex: '1 1 60%',
+    '@media (max-width: 1400px)': {
+      flex: '1 1 50%'
+    }
   },
   images: {
     display: 'grid',

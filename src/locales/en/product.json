@@ -48,6 +48,9 @@
     "title": "It fits well with this"
   },
   "comments": {
+    "noComments": "No comments yet",
+    "commentsOne": "Comments",
+    "commentsTwo": "Comments",
     "title": "Comments",
     "text": "Share your thoughts with others",
     "submit": "Leave comment",

@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
     backgroundRepeat: 'no-repeat',
     display: 'flex',
+    overflow: 'hidden',
     width: '350px',
     height: '350px',
     cursor: 'pointer',
@@ -16,19 +17,25 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '6px',
     position: 'relative',
     color: theme.palette.textColor,
+    outline: '1px solid transparent',
+    transition: 'all 0.2s ease-in-out',
+    '&:hover, &:active': {
+      outline: theme.palette.carouselItem.hover.border,
+      transition: 'outline 0.2s ease-in-out'
+    },
     '&:hover > div, &:active > div': {
       display: 'flex',
-      alignItems: 'center'
-    },
-    '&:hover, &:active': {
-      outline: theme.palette.carouselItem.hover.border
+      alignItems: 'center',
+      visibility: 'visible',
+      transform: 'none',
+      transition: 'all 0.2s ease-in-out'
     },
     '&:hover > span, &:active > span': {
       display: 'none'
     }
   }),
   categoryInner: {
-    display: 'none',
+    visibility: 'hidden',
     position: 'absolute',
     left: '24px',
     bottom: '24px',
@@ -37,7 +44,8 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     letterSpacing: '0.0125em',
     lineHeight: '20px',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    transform: 'translateX(-100%)'
   },
   categoryName: {
     position: 'absolute',

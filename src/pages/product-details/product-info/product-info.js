@@ -12,7 +12,7 @@ import Colors from './colors';
 
 import { SCROLL_BAR_LINKS } from '../constants';
 
-const ProductInfo = ({ price, product, countComments }) => {
+const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
@@ -25,8 +25,15 @@ const ProductInfo = ({ price, product, countComments }) => {
 
   const currencySign = getCurrencySign(currency);
   const checkAvailableProduct = (item) => {
-    if (item && item.sizes) {
-      if (item.sizes[0].size.available) return null;
+    if (item) {
+      if (
+        (sizeIndex >= 0 ? item.sizes[sizeIndex].size.available : '') &&
+        item.available &&
+        item.mainMaterial.material.available &&
+        item.bottomMaterial.material.available &&
+        item.innerMaterial.material.available
+      )
+        return null;
       return <div className={styles.notAvailable}>{t('product.notAvailable')}</div>;
     }
   };

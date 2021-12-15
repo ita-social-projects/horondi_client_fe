@@ -53,18 +53,19 @@ const ProductDetails = ({ match }) => {
     sizes,
     mainMaterial,
     bottomMaterial,
-    pattern
+    innerMaterial,
+    pattern,
+    available
   } = product;
-  const availableSizes =
-    sizes && sizes.filter(({ size, price }) => size.available && { size, price });
 
+  const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
+  const currentSizeIndex = sizes ? sizes.indexOf(currentSize) : -1;
   const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id, dispatch]);
-
   const [countComments, setCountComments] = useState(0);
 
   useEffect(() => {
@@ -129,7 +130,6 @@ const ProductDetails = ({ match }) => {
 
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
-
     dispatch(
       setProductToSend({
         ...productToSend,
@@ -150,7 +150,6 @@ const ProductDetails = ({ match }) => {
       setSizeIsNotSelectedError(false);
     }
   };
-
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
@@ -166,6 +165,7 @@ const ProductDetails = ({ match }) => {
           {!loading && (
             <ProductInfo
               countComments={countComments}
+              sizeIndex={currentSizeIndex}
               price={currentSize?.size ? currentSize.size.price : {}}
               product={product}
             />
@@ -173,28 +173,27 @@ const ProductDetails = ({ match }) => {
           <ProductSizes
             handleSizeChange={handleSizeChange}
             sizes={sizes}
-            disabled={!currentSize}
             sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
           <div className={styles.test}>
             <ProductSubmit
-              disabled={!currentSize}
+              disabled={
+                !(
+                  (currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.available : '') &&
+                  available &&
+                  mainMaterial.material.available &&
+                  bottomMaterial.material.available &&
+                  innerMaterial.material.available
+                )
+              }
               product={product}
               setSizeIsNotSelectedError={setSizeIsNotSelectedError}
             />
             <Tooltip title={wishlistTip} placement='bottom'>
               {isInWishlist ? (
-                <FavoriteIcon
-                  data-cy='wishful'
-                  className={styles.redHeart}
-                  onClick={wishlistHandler}
-                />
+                <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
               ) : (
-                <FavouriteBorderIcon
-                  data-cy='not-wishful'
-                  className={styles.heart}
-                  onClick={wishlistHandler}
-                />
+                <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
               )}
             </Tooltip>
           </div>

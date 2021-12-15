@@ -35,7 +35,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
   const { addToCart } = cartOperations;
 
   const cartTootipTitle = () => {
-    if (disabled) return '123213';
+    if (disabled) return t('product.sizeNotAvailable');
     return isItemInCart
       ? t('product.tooltips.itemInCart')
       : t('product.tooltips.itemInCartAlready');

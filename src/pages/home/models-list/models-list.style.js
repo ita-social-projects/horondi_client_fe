@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
   root: ({ isModelsVisible, modelsCount }) => ({
     height: !isModelsVisible ? '100vh' : `${(modelsCount / 3) * 210 + 250}px`,
     minHeight: '100vh',
-    width: '85%',
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',

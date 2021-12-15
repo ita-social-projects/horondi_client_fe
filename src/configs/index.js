@@ -102,6 +102,7 @@ export const MATERIAL_UI_COLOR = {
 };
 
 export const cartKey = 'cart';
+export const newCartKey = 'newCart';
 export const WISHLIST_KEY = 'wishlist';
 export const countPerPage = 'countPerPage';
 

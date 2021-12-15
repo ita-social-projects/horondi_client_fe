@@ -22,7 +22,6 @@ const baseStyles = {
     fontWeight: '600',
     fontSize: '14px',
     lineHeight: '20px',
-    padding: '12px 5px 12px 46px',
     '@media (max-width: 900px)': {
       marginRight: '10px'
     }
@@ -41,11 +40,12 @@ const baseStyles = {
 export const useStyles = makeStyles((theme, color) => ({
   root: () => ({
     background: theme.palette.seachBar.backgroundColor,
-    ...baseStyles
+    ...baseStyles,
+    '& .MuiInput-input': {
+      padding: '12px 5px 12px 46px',
+      color: theme.palette.seachBar.color
+    }
   }),
-  '& .MuiInput-input': {
-    color: theme.palette.seachBar.color
-  },
   notFromNavbar: () => ({
     ...baseStyles,
     background: 'inherit',

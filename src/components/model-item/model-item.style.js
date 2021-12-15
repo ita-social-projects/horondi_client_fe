@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     height: 200,
     position: 'relative',
-    boxShadow: '0px 8px 13px #1e1b1b;',
+    boxShadow: '0px 8px 13px #1e1b1b6b;',
     borderRadius: '6px',
     zIndex: '3',
     '& > *': {

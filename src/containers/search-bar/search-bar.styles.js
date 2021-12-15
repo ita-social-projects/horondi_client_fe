@@ -50,6 +50,9 @@ export const useStyles = makeStyles((theme, color) => ({
     ...baseStyles,
     background: 'inherit',
     border: theme.palette.seachBar.border,
+    '& .MuiInputBase-root': {
+      width: '255px'
+    },
     '& .MuiInput-input': {
       padding: '12px 5px 12px 12px',
       color

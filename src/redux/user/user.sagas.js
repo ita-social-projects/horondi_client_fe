@@ -47,6 +47,7 @@ import {
 } from './user.types';
 import {
   cartKey,
+  newCartKey,
   LANGUAGE,
   REDIRECT_TIMEOUT,
   RETURN_PAGE,
@@ -79,6 +80,16 @@ function* setUserCart(user) {
   yield put(setCart(usersCart.cart.items));
   yield put(setCartTotalPrice(usersCart.cart.totalPrice));
   setToLocalStorage(cartKey, usersCart.cart.items);
+  const newCart = usersCart.cart.items.map((item) => ({
+    id: item._id,
+    productId: item.product._id,
+    quantity: item.quantity,
+    sizeAndPrice: {
+      price: item.price,
+      size: item.options.size
+    }
+  }));
+  setToLocalStorage(newCartKey, newCart);
 }
 
 export function* handleGoogleUserLogin({ payload }) {

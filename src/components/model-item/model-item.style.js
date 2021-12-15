@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   modelItem: {
     cursor: 'pointer',
-    flex: '1 0 31.3333%',
+    flex: '1 0 30%',
     margin: 11,
     boxSizing: 'border-box',
     display: 'flex',

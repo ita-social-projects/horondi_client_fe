@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: ({ isModelsVisible, modelsCount }) => ({
-    height: !isModelsVisible ? '100vh' : `${(modelsCount / 3) * 210 + 250}px`,
+    height: !isModelsVisible ? '100vh' : `${(modelsCount / 3) * 150 + 250}px`,
     minHeight: '100vh',
     position: 'relative',
     display: 'flex',
@@ -20,9 +20,6 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.textColor,
         backgroundColor: theme.palette.backgroundColor
       }
-    },
-    '@media (max-width: 768px)': {
-      height: !isModelsVisible ? '100%' : `300px`
     }
   }),
   modelsWrapper: ({ isModelsVisible }) => ({

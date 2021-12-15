@@ -27,6 +27,7 @@
   "prev": "Previous",
   "next": "Next",
   "close": "Close",
+  "models": "Models",
   "buttons": {
     "confirm": "Delete",
     "cancel": "Cancel"
@@ -74,7 +75,6 @@
     "rate": "rate"
   },
   "scrollbar": {
-    "models": "Models",
     "horondiStyle": "Horondi style",
     "constructor": "Create by yourself",
     "catalog": "Catalog",

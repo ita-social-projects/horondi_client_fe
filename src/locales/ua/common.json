@@ -24,6 +24,7 @@
   "confirmPass": "Підтвердіть пароль",
   "change": "Змінити",
   "title": "Створи сам",
+  "models": "Моделі",
   "buttons": {
     "confirm": "Видалити",
     "cancel": "Скасувати"
@@ -74,7 +75,6 @@
     "rate": "рейтингом"
   },
   "scrollbar": {
-    "models": "Моделі",
     "horondiStyle": "Стиль горонді",
     "constructor": "Створи сам",
     "catalog": "Каталог",

@@ -25,6 +25,7 @@ import {
   ADD_PRODUCT_TO_USER_CART,
   REMOVE_PRODUCT_FROM_USER_CART,
   LOGIN_BY_GOOGLE,
+  LOGIN_BY_FACEBOOK,
   SET_DELETE_USER
 } from './user.types';
 
@@ -38,6 +39,10 @@ const loginUser = (payload) => ({
 });
 const loginByGoogle = (payload) => ({
   type: LOGIN_BY_GOOGLE,
+  payload
+});
+const loginByFacebook = (payload) => ({
+  type: LOGIN_BY_FACEBOOK,
   payload
 });
 const confirmUser = (payload) => ({
@@ -138,6 +143,7 @@ export {
   loginUser,
   setUser,
   loginByGoogle,
+  loginByFacebook,
   setUserError,
   logoutUser,
   setUserLoading,

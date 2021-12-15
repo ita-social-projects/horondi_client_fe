@@ -20,6 +20,7 @@ import {
   checkIfTokenIsValid,
   confirmUserEmail,
   getGoogleUser,
+  getFacebookUser,
   getPurchasedProducts,
   getUserByToken,
   loginUser,
@@ -34,6 +35,7 @@ import {
   CHECK_IF_TOKEN_VALID,
   CONFIRM_USER,
   LOGIN_BY_GOOGLE,
+  LOGIN_BY_FACEBOOK,
   LOGIN_USER,
   LOGOUT_USER,
   PASSWORD_RESET,
@@ -83,6 +85,20 @@ export function* handleGoogleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
+    yield setUserCart(user);
+    const returnPage = sessionStorage.getItem(RETURN_PAGE);
+    yield put(push(returnPage));
+  } catch (e) {
+    yield call(handleUserError, e);
+  } finally {
+    yield put(setUserLoading(false));
+  }
+}
+
+export function* handleFacebookUserLogin({ payload }) {
+  try {
+    yield put(setUserLoading(true));
+    const user = yield call(getFacebookUser, payload);
     yield setUserCart(user);
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
@@ -256,5 +272,6 @@ export default function* userSaga() {
   yield takeEvery(UPDATE_USER, handleUpdateUser);
   yield takeEvery(SEND_CONFIRMATION_EMAIL, handleSendConfirmation);
   yield takeEvery(LOGIN_BY_GOOGLE, handleGoogleUserLogin);
+  yield takeEvery(LOGIN_BY_FACEBOOK, handleFacebookUserLogin);
   yield takeEvery(LOGOUT_USER, handleUserLogout);
 }

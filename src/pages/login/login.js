@@ -10,6 +10,7 @@ import { LOGIN_USER_DATA } from './constants';
 import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
+import FacebookBtn from '../../components/facebook-log-in-btn';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { loginValidationSchema } from '../../validators/login';
@@ -31,7 +32,7 @@ const Login = () => {
     if (theme === LIGHT_THEME) {
       return MATERIAL_UI_COLOR.PRIMARY;
     }
-    return MATERIAL_UI_COLOR.INHERIT;
+    return MATERIAL_UI_COLOR.DEFAULT;
   };
 
   const dispatch = useDispatch();
@@ -140,6 +141,7 @@ const Login = () => {
                     <span className={styles.orText}>{t('login.orText')}</span>
                   </div>
                   <GoogleBtn />
+                  <FacebookBtn />
                   <div className={styles.registerContainer}>
                     <Link to={pathToRegister} className={styles.registerBtn}>
                       {t('login.registerProposal')}

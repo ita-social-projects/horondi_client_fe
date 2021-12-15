@@ -3,6 +3,7 @@ import {
   setUser,
   loginUser,
   loginByGoogle,
+  loginByFacebook,
   logoutUser,
   setUserLoading,
   resetState,
@@ -26,6 +27,7 @@ import {
   SET_USER,
   LOGIN_USER,
   LOGIN_BY_GOOGLE,
+  LOGIN_BY_FACEBOOK,
   LOGOUT_USER,
   SET_USER_LOADING,
   STATE_RESET,
@@ -70,6 +72,12 @@ describe('test User actions', () => {
   test('should test loginByGoogle', () => {
     expect(loginByGoogle('user')).toEqual({
       type: LOGIN_BY_GOOGLE,
+      payload: userMocks.name
+    });
+  });
+  test('should test loginByFacebook', () => {
+    expect(loginByFacebook('user')).toEqual({
+      type: LOGIN_BY_FACEBOOK,
       payload: userMocks.name
     });
   });

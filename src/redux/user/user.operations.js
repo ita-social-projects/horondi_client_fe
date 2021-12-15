@@ -125,6 +125,24 @@ const getGoogleUser = async ({ idToken }) => {
 
   return result?.data?.googleUser;
 };
+const getFacebookUser = async ({ idToken }) => {
+  const getFacebookUserMutation = `
+    mutation($idToken:String!){facebookUser(idToken:$idToken){
+      _id
+      firstName,
+      lastName,
+      email,
+      credentials{
+        source,
+        tokenPass
+      }
+      token
+    }}
+  `;
+  const result = await getItems(getFacebookUserMutation, { idToken });
+
+  return result?.data?.facebookUser;
+};
 
 const confirmUserEmail = async ({ token }) => {
   const confirmUserEmailMutation = `
@@ -327,6 +345,7 @@ const regenerateUserTokenPairs = async (refreshToken) => {
 export {
   loginUser,
   getGoogleUser,
+  getFacebookUser,
   confirmUserEmail,
   recoverUser,
   checkIfTokenIsValid,

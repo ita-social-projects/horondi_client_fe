@@ -28,6 +28,7 @@ const ModelsList = () => {
 
   return (
     <div className={styles.root} data-section-style='light' id='models'>
+      <div className={styles.modelsTitle}>{t('home.models')}</div>
       <div className={styles.modelsWrapper}>
         {models.map((model) => (
           <ModelItem

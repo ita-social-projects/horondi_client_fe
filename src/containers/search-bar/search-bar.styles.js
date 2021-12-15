@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const baseStyles = {
   position: 'relative',
   marginRight: '37px',
-  background: 'rgb(255, 255, 255, 0.2)',
   borderRadius: '6px',
 
   '& .MuiInputBase-root': {
@@ -19,12 +18,11 @@ const baseStyles = {
     }
   },
   '& .MuiInput-input': {
-    padding: '12px 5px 12px 46px',
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '14px',
     lineHeight: '20px',
-    color: 'rgba(254, 254, 254, 0.75);',
+    padding: '12px 5px 12px 46px',
     '@media (max-width: 900px)': {
       marginRight: '10px'
     }
@@ -40,14 +38,18 @@ const baseStyles = {
   }
 };
 
-export const useStyles = makeStyles((color) => ({
+export const useStyles = makeStyles((theme, color) => ({
   root: () => ({
+    background: theme.palette.seachBar.backgroundColor,
     ...baseStyles
   }),
+  '& .MuiInput-input': {
+    color: theme.palette.seachBar.color
+  },
   notFromNavbar: () => ({
     ...baseStyles,
     background: 'inherit',
-    border: '1px solid #949494',
+    border: theme.palette.seachBar.border,
     '& .MuiInput-input': {
       padding: '12px 5px 12px 12px',
       color

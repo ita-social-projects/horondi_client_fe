@@ -8,21 +8,26 @@ jest.mock('react-i18next', () => ({
 jest.mock('../../news-page/news-page.style', () => ({ useStyles: () => ({}) }));
 jest.mock('@apollo/client');
 jest.mock('react-redux');
+const mockSetState = jest.fn();
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: (initial) => [initial, mockSetState]
+}));
 
 let wrapper;
-const useQueryData = {
-  loading: false,
-  error: false,
-  data: {}
-};
+
+useQuery.mockImplementation((query, options) => {
+  options.onCompleted({
+    getAllNews: {
+      items: []
+    }
+  });
+  return { error: null, loading: false };
+});
 
 describe('Test newsPage', () => {
   it('should render component when Loading true', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      loading: true
-    }));
-
     wrapper = shallow(<NewsPage />);
     expect(wrapper).toBeTruthy();
   });

@@ -25,7 +25,10 @@ p {
   font-size: 1rem;
   line-height: 2rem;
 }
-
+.MuiButtonBase-root.MuiPaginationItem-root.MuiPaginationItem-page.MuiPaginationItem-outlined.MuiPaginationItem-rounded.Mui-selected {
+  border: 1px solid black;
+  background-color: white;
+}
 .MuiMenuItem-root {
   display: flex;
   flex-direction: column;

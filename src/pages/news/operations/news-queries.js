@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const getAllNews = gql`
-  query {
-    getAllNews {
+  query ($skip: Int, $limit: Int) {
+    getAllNews(skip: $skip, limit: $limit) {
       items {
         _id
         translationsKey
@@ -22,6 +22,7 @@ export const getAllNews = gql`
         date
         image
       }
+      count
     }
   }
 `;

@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   ArticleTitleContainer: {
     padding: '0px',
-    '@media (min-width: 1200px)': {
+    '@media (min-width: 768px)': {
       height: '100px'
     }
   },

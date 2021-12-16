@@ -105,7 +105,7 @@ export const useStyles = makeStyles((theme) => ({
   lastImageText: {
     position: 'absolute',
     top: 50,
-    left: 50,
+    left: 30,
     zIndex: 3,
     textAlign: 'center',
     fontSize: '16px',

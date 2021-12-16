@@ -43,6 +43,11 @@ const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
     if (count === 2 || count === 3 || count === 4) return t('product.comments.commentsTwo');
     if (count > 4) return t('product.comments.title');
   };
+  const shortProductInfo = (text) => {
+    if (text.length > 2) return text.slice(0, 2);
+    return text;
+  };
+
   return (
     <div className={styles.common}>
       <div className={styles.head}>
@@ -58,7 +63,9 @@ const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
         {countComments.count ? countComments.count : null}{' '}
         {correctCommentsName(countComments.count)}
       </a>
-      <div className={styles.text}>{parse(t(`${translationsKey}.description`)).slice(0, 2)}</div>
+      <div className={styles.text}>
+        {shortProductInfo(parse(t(`${translationsKey}.description`)))}
+      </div>
 
       {Object.keys(currentPrice).length ? (
         <div className={styles.priceContainer}>

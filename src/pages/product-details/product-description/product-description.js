@@ -6,15 +6,10 @@ import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core
 import Typography from '@material-ui/core/Typography';
 import { ExpandMoreOutlined } from '@material-ui/icons';
 import { useStyles } from './product-description.styles';
-import * as colorImage from '../../../images/red.jpg';
-import * as patternImage from '../../../images/pattern_2.jpg';
 import Detail from '../detail';
 
 const ProductDescription = ({ product }) => {
-  const styles = useStyles({
-    colorUrl: colorImage,
-    patternUrl: patternImage
-  });
+  const styles = useStyles();
   const { description, mainMaterial, innerMaterial, bottomMaterial } = product;
   const { currentWeight, currentVolume } = useSelector(
     ({ Language, Products: { productToSend }, Currency }) => ({

@@ -17,7 +17,11 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: '1110px',
     gridTemplateColumns: '1fr 1fr 1fr',
     gridColumnGap: '15px',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    '@media (max-width: 1200px)': {
+      display: 'flex',
+      flexWrap: 'wrap'
+    }
   },
   center: {
     width: '3rem',

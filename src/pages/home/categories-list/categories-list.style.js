@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
+    minHeight: '612px',
     '& > div': {
       width: '100%'
     },
@@ -22,6 +23,9 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: '1140px',
     '@media (max-width: 1146px)': {
       maxWidth: '800px'
+    },
+    '@media (max-width: 760px)': {
+      maxWidth: '370px'
     }
   },
   categoryTitle: {
@@ -33,10 +37,6 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '46px',
     letterSpacing: '0.0025em',
     fontSize: '34px',
-    color: theme.palette.textColor,
-    zIndex: '10',
-    '@media (max-width: 760px)': {
-      textAlign: 'center'
-    }
+    color: theme.palette.textColor
   }
 }));

@@ -20,13 +20,3 @@
 #catalog .react-multiple-carousel__arrow:before {
   font-size: 20px !important;
 }
-
-@media(max-width: 760px) {
-  #catalog .react-multiple-carousel__arrow--left {
-    left: 5%;
-  }
-
-  #catalog .react-multiple-carousel__arrow--right {
-    right: 5%;
-  }
-}

@@ -64,5 +64,31 @@ export const product = {
         }
       ]
     }
-  }
+  },
+  sizes: [
+    {
+      size: {
+        _id: '60439516a7532c33dcb326d7',
+        name: 'S',
+        heightInCm: 35,
+        widthInCm: 26,
+        depthInCm: 14,
+        volumeInLiters: 18,
+        weightInKg: 0.8,
+        available: false
+      },
+      price: [
+        {
+          value: 2000,
+          currency: 'UAH'
+        },
+        {
+          value: 75,
+          currency: 'USD'
+        }
+      ]
+    }
+  ],
+  availableCount: 0,
+  rate: 5
 };

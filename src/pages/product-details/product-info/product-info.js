@@ -25,17 +25,15 @@ const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
 
   const currencySign = getCurrencySign(currency);
   const checkAvailableProduct = (item) => {
-    if (item) {
-      if (
-        (sizeIndex >= 0 ? item.sizes[sizeIndex].size.available : '') &&
-        item.available &&
-        item.mainMaterial.material.available &&
-        item.bottomMaterial.material.available &&
-        item.innerMaterial.material.available
-      )
-        return null;
-      return <div className={styles.notAvailable}>{t('product.notAvailable')}</div>;
-    }
+    if (
+      (sizeIndex >= 0 ? item.sizes[sizeIndex].size.available : '') &&
+      item.available &&
+      item.mainMaterial.material.available &&
+      item.bottomMaterial.material.available &&
+      item.innerMaterial.material.available
+    )
+      return null;
+    return <div className={styles.notAvailable}>{t('product.notAvailable')}</div>;
   };
   const correctCommentsName = (count) => {
     if (count === 0) return t('product.comments.noComments');

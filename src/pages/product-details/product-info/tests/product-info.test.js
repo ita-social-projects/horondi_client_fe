@@ -94,8 +94,10 @@ useSelector.mockImplementation(() => ({
 
 describe('Product info', () => {
   const props = {
+    sizeIndex: 0,
     countComments: { count: 3 },
     product: {
+      available: true,
       rate: 5,
       name: [
         {
@@ -113,6 +115,7 @@ describe('Product info', () => {
           name: 'Blue'
         },
         material: {
+          available: true,
           name: {
             0: {
               value: 'test'
@@ -122,10 +125,12 @@ describe('Product info', () => {
       },
       innerMaterial: {
         material: {
+          available: true,
           name: [{ lang: 'ua' }]
         }
       },
       bottomMaterial: {
+        available: true,
         material: {
           name: {
             0: {
@@ -134,6 +139,30 @@ describe('Product info', () => {
           }
         }
       },
+      sizes: [
+        {
+          size: {
+            _id: '60439516a7532c33dcb326d7',
+            name: 'S',
+            heightInCm: 35,
+            widthInCm: 26,
+            depthInCm: 14,
+            volumeInLiters: 18,
+            weightInKg: 0.8,
+            available: false
+          },
+          price: [
+            {
+              value: 2000,
+              currency: 'UAH'
+            },
+            {
+              value: 75,
+              currency: 'USD'
+            }
+          ]
+        }
+      ],
       pattern: {
         _id: '123',
         images: {
@@ -141,31 +170,7 @@ describe('Product info', () => {
         }
       },
       strapLengthInCm: '100'
-    },
-    sizes: [
-      {
-        size: {
-          _id: '60439516a7532c33dcb326d7',
-          name: 'S',
-          heightInCm: 35,
-          widthInCm: 26,
-          depthInCm: 14,
-          volumeInLiters: 18,
-          weightInKg: 0.8,
-          available: false
-        },
-        price: [
-          {
-            value: 2000,
-            currency: 'UAH'
-          },
-          {
-            value: 75,
-            currency: 'USD'
-          }
-        ]
-      }
-    ]
+    }
   };
   it('Should render <ProductInfo />', () => {
     const component = shallow(<ProductInfo {...props} />);

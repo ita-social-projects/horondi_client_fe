@@ -76,6 +76,11 @@ export const paletteGenerator = (colorSchema) => ({
       border: theme[colorSchema].carouselItem.hover.border
     }
   },
+  seachBar: {
+    backgroundColor: theme[colorSchema].seachBar.backgroundColor,
+    color: theme[colorSchema].seachBar.color,
+    border: theme[colorSchema].seachBar.border
+  },
   primary: {
     contrastText: white,
     dark: colors.grey[900],

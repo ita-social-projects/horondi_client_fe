@@ -41,12 +41,14 @@ const SearchBar = ({
     }
   };
 
+  const mainClass = fromNavBar ? styles.root : styles.notFromNavbar;
+
   const handleOnBlur = () => {
     setTimeout(() => setSearchParams(initialSearchState), 100);
   };
 
   return (
-    <div className={styles.root}>
+    <div className={mainClass}>
       <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}

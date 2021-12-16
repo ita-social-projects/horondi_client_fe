@@ -59,6 +59,11 @@ export default {
       hover: {
         border: '1px solid #5b5b5b'
       }
+    },
+    seachBar: {
+      backgroundColor: 'rgb(255, 255, 255, 0.2)',
+      color: 'rgba(254, 254, 254, 0.75);',
+      border: '1px solid #949494'
     }
   },
   dark: {
@@ -112,6 +117,11 @@ export default {
       hover: {
         border: '1px solid #5B5B5B'
       }
+    },
+    seachBar: {
+      backgroundColor: 'rgb(255, 255, 255, 0.2)',
+      color: 'rgba(254, 254, 254, 0.75);',
+      border: '1px solid #949494'
     }
   }
 };

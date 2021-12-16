@@ -18,8 +18,8 @@ const ModelItem = ({ model, modelsUrl }) => {
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>
       <footer className={styles.link}>
-        {t('home.moveToModel')}
-        <ArrowRightAltIcon />
+        {t('home.moveTo').toUpperCase()} {t(`${model.translationsKey}.name`).toUpperCase()}
+        <ArrowRightAltIcon className={styles.arrow} />
       </footer>
     </Link>
   );

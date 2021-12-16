@@ -56,7 +56,7 @@ describe('PriceFilter component tests', () => {
       <PriceFilter priceRange={{ minPrice: [{ value: 0 }], maxPrice: [{ value: 10 }] }} />
     );
     const slider = component.find('#slider').at(0);
-    slider.simulate('change');
+    slider.simulate('click');
     setTimeout(() => expect(mockHistory.push).toHaveBeenCalled(), 1000);
   });
 

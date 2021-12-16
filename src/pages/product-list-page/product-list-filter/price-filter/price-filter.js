@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
@@ -27,6 +27,9 @@ const PriceFilter = ({ priceRange }) => {
       : ['', '']
   );
 
+  const searchParamsRef = useRef();
+  searchParamsRef.current = searchParams;
+
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
@@ -35,10 +38,10 @@ const PriceFilter = ({ priceRange }) => {
   const max = getMax(priceRange.maxPrice, currency);
 
   useEffect(() => {
-    if (prices[0] === '' && priceRange.minPrice) {
+    if (prices[0] === '' && prices[1] === '' && min && max) {
       setPrices([min, max]);
     }
-  }, [priceRange, currency, prices]);
+  }, [min, max, currency, prices]);
 
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
@@ -50,21 +53,24 @@ const PriceFilter = ({ priceRange }) => {
     setPrices(newPrices);
   };
 
-  const handlePriceFilter = () => {
-    searchParams.set(priceFilter, prices.map((price) => price).join());
-    searchParams.set(page, defaultPage);
-    history.push(`?${searchParams.toString()}`);
-  };
+  const handlePriceFilter = useCallback(
+    (pricesArr) => {
+      searchParamsRef.current.set(priceFilter, pricesArr.map((price) => price).join());
+      searchParamsRef.current.set(page, defaultPage);
+      history.push(`?${searchParamsRef.current.toString()}`);
+    },
+    [defaultPage, page, priceFilter, history]
+  );
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (prices[0] !== min) {
-        handlePriceFilter();
+        handlePriceFilter(prices);
       }
     }, 1000);
 
     return () => clearTimeout(delayDebounce);
-  }, [prices]);
+  }, [prices, min, handlePriceFilter]);
 
   return (
     <FormGroup data-cy='price_filter'>
@@ -97,7 +103,7 @@ const PriceFilter = ({ priceRange }) => {
         className={styles.slider}
         value={prices.map((price) => +price)}
         onChange={handlePriceChange}
-        onChangeCommitted={handlePriceFilter}
+        onClick={() => handlePriceFilter(prices)}
         valueLabelDisplay='auto'
         min={min}
         max={max}

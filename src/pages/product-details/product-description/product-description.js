@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import { Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -8,17 +7,12 @@ import { ExpandMoreOutlined } from '@material-ui/icons';
 import { useStyles } from './product-description.styles';
 import Detail from '../detail';
 
-const ProductDescription = ({ product }) => {
+const ProductDescription = ({ product, currentSizeIndex }) => {
   const styles = useStyles();
-  const { description, mainMaterial, innerMaterial, bottomMaterial } = product;
-  const { currentWeight, currentVolume } = useSelector(
-    ({ Language, Products: { productToSend }, Currency }) => ({
-      language: Language.language,
-      currentWeight: productToSend.dimensions.weightInKg || 0,
-      currentVolume: productToSend.dimensions.volumeInLiters || 0,
-      currency: Currency.currency
-    })
-  );
+  const { description, mainMaterial, innerMaterial, bottomMaterial, sizes } = product;
+
+  const currentWeight = sizes ? sizes[currentSizeIndex].size.weightInKg : '';
+  const currentVolume = sizes ? sizes[currentSizeIndex].size.volumeInLiters : '';
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
 

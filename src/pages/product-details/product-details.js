@@ -198,7 +198,9 @@ const ProductDetails = ({ match }) => {
             </Tooltip>
           </div>
         </div>
-        {product.description ? <ProductDescription product={product} /> : null}
+        {product.description ? (
+          <ProductDescription product={product} currentSizeIndex={currentSizeIndex} />
+        ) : null}
       </div>
 
       {product._id ? <SimilarProducts product={product} /> : null}

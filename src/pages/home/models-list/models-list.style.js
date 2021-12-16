@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexFlow: 'wrap',
     width: '85%',
-    height: isModelsVisible ? 'auto' : 217,
+    height: isModelsVisible ? 480 : 235,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',
@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 34,
     marginBottom: 30,
     marginLeft: 14,
-    fontWeight: 400,
+    fontWeight: '600',
     width: '85%'
   })
 }));

@@ -39,8 +39,8 @@ describe('Product info', () => {
     expect(component).toBeDefined();
   });
 });
-describe('fsdfs', () => {
-  it('.dasd', () => {
+describe('Product info with not available product', () => {
+  it('Should render <ProductInfo /> with not available product', () => {
     const component = shallow(<ProductInfo {...props(false)} />);
     expect(component).toBeDefined();
   });

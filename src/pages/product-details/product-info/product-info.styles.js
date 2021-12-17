@@ -60,7 +60,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   look: {
-    // display: 'flex',
     wordSpacing: '0.2rem',
     '& img': {
       display: 'block'

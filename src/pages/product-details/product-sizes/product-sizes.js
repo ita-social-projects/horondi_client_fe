@@ -6,7 +6,12 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useStyles } from './product-sizes.styles';
 
-const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
+const ProductSizes = ({
+  handleSizeChange,
+  sizes,
+  checkDisabledProduct,
+  sizeIsNotSelectedError
+}) => {
   const { t } = useTranslation();
   const styles = useStyles();
   const { size: currentSize } = useSelector(({ Products }) => ({
@@ -17,7 +22,7 @@ const ProductSizes = ({ handleSizeChange, sizes, sizeIsNotSelectedError }) => {
     !!sizes.length &&
     sizes.map(({ size }, index) => (
       <Button
-        disabled={!size.available}
+        disabled={!size.available && !checkDisabledProduct}
         key={size._id}
         className={size._id === currentSize._id ? styles.selectedSize : styles.sizeButton}
         onClick={() => handleSizeChange(index)}

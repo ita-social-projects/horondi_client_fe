@@ -12,7 +12,7 @@ import Colors from './colors';
 
 import { SCROLL_BAR_LINKS } from '../constants';
 
-const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
+const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
@@ -24,17 +24,10 @@ const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
   }));
 
   const currencySign = getCurrencySign(currency);
-  const checkAvailableProduct = (item) => {
-    if (
-      (sizeIndex >= 0 ? item.sizes[sizeIndex].size.available : '') &&
-      item.available &&
-      item.mainMaterial.material.available &&
-      item.bottomMaterial.material.available &&
-      item.innerMaterial.material.available
-    )
-      return null;
-    return <div className={styles.notAvailable}>{t('product.notAvailable')}</div>;
-  };
+
+  const checkDisabledProductResult = checkDisabledProduct ? null : (
+    <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+  );
   const correctCommentsName = (count) => {
     if (count === 0) return t('product.comments.noComments');
     if (count === 1) return t('product.comments.commentsOne');
@@ -50,7 +43,7 @@ const ProductInfo = ({ price, product, countComments, sizeIndex }) => {
     <div className={styles.common}>
       <div className={styles.head}>
         <span className={styles.title}>{t(`${translationsKey}.name`)}</span>
-        {checkAvailableProduct(product)}
+        {checkDisabledProductResult}
       </div>
       <Tooltip className={styles.rate} title={rate.toFixed(2)} placement='left'>
         <span>

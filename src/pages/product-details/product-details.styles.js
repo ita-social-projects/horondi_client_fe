@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   container: {
-    fontFamily: 'Open San',
+    fontFamily: 'Open Sans',
     width: '80%',
     minHeight: '1200px',
     margin: '2rem auto',

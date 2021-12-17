@@ -60,7 +60,7 @@ const ProductDetails = ({ match }) => {
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
-  const currentSizeIndex = sizes ? sizes.indexOf(currentSize) : -1;
+  const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
   const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
@@ -128,6 +128,13 @@ const ProductDetails = ({ match }) => {
     setCountComments(count);
   };
 
+  const checkDisabledProduct = () =>
+    (currentSizeIndex >= 0 && sizes ? sizes[currentSizeIndex].size.available : '') &&
+    available &&
+    mainMaterial.material.available &&
+    bottomMaterial.material.available &&
+    innerMaterial.material.available;
+
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
     dispatch(
@@ -165,27 +172,20 @@ const ProductDetails = ({ match }) => {
           {!loading && (
             <ProductInfo
               countComments={countComments}
-              sizeIndex={currentSizeIndex}
+              checkDisabledProduct={checkDisabledProduct()}
               price={currentSize?.size ? currentSize.size.price : {}}
               product={product}
             />
           )}
           <ProductSizes
             handleSizeChange={handleSizeChange}
+            checkDisabledProduct={checkDisabledProduct()}
             sizes={sizes}
             sizeIsNotSelectedError={sizeIsNotSelectedError}
           />
           <div className={styles.test}>
             <ProductSubmit
-              disabled={
-                !(
-                  (currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.available : '') &&
-                  available &&
-                  mainMaterial.material.available &&
-                  bottomMaterial.material.available &&
-                  innerMaterial.material.available
-                )
-              }
+              disabled={!checkDisabledProduct()}
               product={product}
               setSizeIsNotSelectedError={setSizeIsNotSelectedError}
             />
@@ -199,7 +199,11 @@ const ProductDetails = ({ match }) => {
           </div>
         </div>
         {product.description ? (
-          <ProductDescription product={product} currentSizeIndex={currentSizeIndex} />
+          <ProductDescription
+            product={product}
+            currentSizeIndex={currentSizeIndex}
+            checkDisabledProduct={checkDisabledProduct()}
+          />
         ) : null}
       </div>
 

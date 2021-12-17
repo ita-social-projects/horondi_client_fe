@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     '& *': {
       '& .MuiOutlinedInput-root': {
-        background: '#fff',
+        background: theme.palette.white,
         '& fieldset': {
           borderColor: theme.palette.textColor
         },
@@ -51,8 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   replyBtn: {
-    marginTop: 25,
-    marginBottom: 40,
+    margin: '25px 0 40px',
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '1rem',

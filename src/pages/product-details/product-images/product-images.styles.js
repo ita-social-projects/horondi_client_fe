@@ -34,20 +34,6 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%'
     }
   },
-  imagePreviewContainer: {
-    display: 'grid',
-    gridTemplateColumns: '48px 1fr 48px',
-    alignItems: 'center',
-    border: '2px solid #EBEFF2',
-    borderRadius: '6px',
-    padding: '10px',
-    height: '385px',
-    boxShadow: [
-      '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
-      '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
-      '0 12.5px 10px rgba(0, 0, 0, 0.06)'
-    ]
-  },
 
   imageContainer: {
     display: 'block',
@@ -70,6 +56,21 @@ export const useStyles = makeStyles((theme) => ({
 
   sideImage: {
     ...imgSides
+  },
+
+  imagePreviewContainer: {
+    display: 'grid',
+    gridTemplateColumns: '48px 1fr 48px',
+    alignItems: 'center',
+    border: '2px solid #EBEFF2',
+    borderRadius: '6px',
+    padding: '10px',
+    height: '385px',
+    boxShadow: [
+      '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
+      '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
+      '0 12.5px 10px rgba(0, 0, 0, 0.06)'
+    ]
   },
 
   circle: {

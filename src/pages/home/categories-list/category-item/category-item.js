@@ -20,13 +20,13 @@ const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
 
   return (
     <Link className={styles.categoryItem} to={`/${categoryUrl}`}>
+      <span className={styles.categoryName}>{categoryName}</span>
       <div className={styles.categoryInner}>
         <span>
           {t('home.moveToCategory')} {categoryName}
         </span>
-        <ArrowRightAltIcon />
+        <ArrowRightAltIcon className={styles.arrow} />
       </div>
-      <span className={styles.categoryName}>{categoryName}</span>
     </Link>
   );
 };

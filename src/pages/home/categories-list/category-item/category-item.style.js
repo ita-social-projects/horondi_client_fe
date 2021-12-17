@@ -25,7 +25,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     '&:hover > div, &:active > div': {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-end',
+      paddingLeft: '24px',
+      paddingBottom: '24px',
       visibility: 'visible',
       transform: 'none',
       transition: 'all 0.2s ease-in-out'
@@ -35,28 +37,32 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   categoryInner: {
+    display: 'flex',
+    alignItems: 'end',
+    paddingLeft: '24px',
+    paddingBottom: '24px',
     visibility: 'hidden',
-    position: 'absolute',
-    left: '24px',
-    bottom: '24px',
     fontFamily: 'Open Sans',
     fontSize: '14px',
     fontWeight: 600,
     letterSpacing: '0.0125em',
     lineHeight: '20px',
     textTransform: 'uppercase',
-    transform: 'translateX(-100%)'
+    transform: 'translateX(-200%)'
+  },
+  arrow: {
+    transform: 'translateY(10%)'
   },
   categoryName: {
-    position: 'absolute',
-    left: '24px',
-    bottom: '24px',
+    display: 'flex',
+    alignItems: 'end',
+    paddingLeft: '24px',
+    paddingBottom: '24px',
     fontFamily: 'Open Sans',
     fontSize: ' 20px',
     fontWeight: '600',
     lineHeight: '28px',
     letterSpacing: '0.0015em',
-    zIndex: 11,
     color: theme.palette.textColor
   }
 }));

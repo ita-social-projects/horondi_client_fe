@@ -12,7 +12,7 @@ export const useCart = (user = null) => {
 
   useEffect(() => {
     setToLocalStorage(CART_KEY, [...cart]);
-  }, [cart, user]);
+  }, [cart]);
 
   const addToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);

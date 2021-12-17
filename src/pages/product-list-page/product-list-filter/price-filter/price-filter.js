@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
@@ -24,29 +24,53 @@ const PriceFilter = ({ priceRange }) => {
         .get(priceFilter)
         .split(',')
         .map((price) => +price)
-      : []
+      : ['', '']
   );
+
+  const searchParamsRef = useRef();
+  searchParamsRef.current = searchParams;
 
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
 
+  const min = getMin(priceRange.minPrice, currency);
+  const max = getMax(priceRange.maxPrice, currency);
+
   useEffect(() => {
-    if (prices.length === 0 && priceRange.minPrice)
-      setPrices([priceRange.minPrice[currency].value, priceRange.maxPrice[currency].value]);
-  }, [priceRange, currency, prices.length]);
+    if (prices[0] === '' && prices[1] === '' && min && max) {
+      setPrices([min, max]);
+    }
+  }, [min, max, currency, prices]);
+
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
   };
 
-  const handlePriceFilter = () => {
-    searchParams.set(priceFilter, prices.map((price) => price).join());
-    searchParams.set(page, defaultPage);
-    history.push(`?${searchParams.toString()}`);
+  const handleTextField = (e) => {
+    const newPrices = [...prices];
+    newPrices[e.target.id] = e.target.value;
+    setPrices(newPrices);
   };
 
-  const min = getMin(priceRange.minPrice, currency);
-  const max = getMax(priceRange.maxPrice, currency);
+  const handlePriceFilter = useCallback(
+    (pricesArr) => {
+      searchParamsRef.current.set(priceFilter, pricesArr.map((price) => price).join());
+      searchParamsRef.current.set(page, defaultPage);
+      history.push(`?${searchParamsRef.current.toString()}`);
+    },
+    [defaultPage, page, priceFilter, history]
+  );
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (prices[0] !== min) {
+        handlePriceFilter(prices);
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [prices, min, handlePriceFilter]);
 
   return (
     <FormGroup data-cy='price_filter'>
@@ -55,27 +79,31 @@ const PriceFilter = ({ priceRange }) => {
         <div className={styles.priceRange}>
           {t('common.from')}
           <TextField
+            id='0'
             className={styles.priceRangeInput}
             style={{ marginRight: '1rem' }}
             variant='outlined'
+            onChange={handleTextField}
             type='tel'
-            defaultValue={prices[0] || min}
+            value={prices[0]}
           />
           {t('common.to')}
           <TextField
+            id='1'
             className={styles.priceRangeInput}
             variant='outlined'
+            onChange={handleTextField}
             type='tel'
-            defaultValue={prices[1] || max}
+            value={prices[1]}
           />
         </div>
       </Typography>
       <Slider
+        id='slider'
         className={styles.slider}
         value={prices.map((price) => +price)}
-        defaultValue={prices.map((price) => +price)}
         onChange={handlePriceChange}
-        onChangeCommitted={handlePriceFilter}
+        onClick={() => handlePriceFilter(prices)}
         valueLabelDisplay='auto'
         min={min}
         max={max}

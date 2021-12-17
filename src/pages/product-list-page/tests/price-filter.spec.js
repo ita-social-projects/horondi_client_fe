@@ -44,7 +44,7 @@ describe('PriceFilter component tests', () => {
   });
 
   it('slider min value should equal 0', () => {
-    const component = mount(
+    const component = shallow(
       <PriceFilter priceRange={{ minPrice: [{ value: 0 }], maxPrice: [{ value: 10 }] }} />
     );
     const textfield = component.find(`[id='slider']`);
@@ -52,7 +52,7 @@ describe('PriceFilter component tests', () => {
   });
 
   it('history.push should be called after changing slider value', () => {
-    const component = mount(
+    const component = shallow(
       <PriceFilter priceRange={{ minPrice: [{ value: 0 }], maxPrice: [{ value: 10 }] }} />
     );
     const slider = component.find('#slider').at(0);
@@ -61,7 +61,7 @@ describe('PriceFilter component tests', () => {
   });
 
   it('first price text box should change value after onChange handler called', () => {
-    const component = mount(
+    const component = shallow(
       <PriceFilter priceRange={{ minPrice: [{ value: 1 }], maxPrice: [{ value: 10 }] }} />
     );
     const textfield = component.find(`[id='0']`).at(0);

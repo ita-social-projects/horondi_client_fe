@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -87,16 +87,12 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     }
   ];
 
-  const mappedProfileList = useMemo(
-    () =>
-      PROFILE_DATA.map(({ value, icon, clickHandler }) => (
-        <MenuItem key={value} onClick={clickHandler} disableGutters data-cy='menuItem'>
-          {icon}
-          {value}
-        </MenuItem>
-      )),
-    [userData, PROFILE_DATA]
-  );
+  const mappedProfileList = PROFILE_DATA.map(({ value, icon, clickHandler }) => (
+    <MenuItem key={value} onClick={clickHandler} disableGutters data-cy='menuItem'>
+      {icon}
+      {value}
+    </MenuItem>
+  ));
 
   return (
     <div className={styles.profile} data-cy='profile'>

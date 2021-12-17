@@ -57,7 +57,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
         id: Date.now(),
         productId: productToSend.product._id,
         sizeAndPrice,
-        quantity: 1
+        quantity: 1,
+        constructor: false
       };
 
       if (userData) {

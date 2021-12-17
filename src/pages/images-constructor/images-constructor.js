@@ -87,21 +87,21 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  const createImagesArray = (values) => {
-    const result = [];
-    Object.keys(values).forEach((key) => {
-      if (key === 'patterns' && constructorValues.patterns !== undefined)
-        result.unshift(values[key].constructorImg);
-      else
-        typeof values[key] === 'object' &&
-          !Array.isArray(values[key]) &&
-          values[key].images &&
-          result.unshift(values[key].images.small);
-    });
-    return result;
-  };
-
   useLayoutEffect(() => {
+    const createImagesArray = (values) => {
+      const result = [];
+      Object.keys(values).forEach((key) => {
+        if (key === 'patterns' && constructorValues.patterns !== undefined)
+          result.unshift(values[key].constructorImg);
+        else
+          typeof values[key] === 'object' &&
+            !Array.isArray(values[key]) &&
+            values[key].images &&
+            result.unshift(values[key].images.small);
+      });
+      return result;
+    };
+
     if (constructorValues.basics) {
       loadImages(createImagesArray(constructorValues)).then((loadedImages) => {
         mergeImages(loadedImages, canvas.current, canvasW, canvasH);
@@ -121,7 +121,7 @@ const ImagesConstructor = () => {
         return acc;
       }, {})
     );
-  }, [constructorValues, currency]);
+  }, [constructorValues, currency, setAllPrice]);
 
   const { isError } = useIsLoadingOrError([], [constructorsError, constructorError]);
   if (valuesLoading) return errorOrLoadingHandler(isError, valuesLoading);
@@ -132,6 +132,38 @@ const ImagesConstructor = () => {
     }
     return constructorEndPrice(+defaultPrice + allPrices.bottom);
   }
+
+  const costPatternUAH = constructorValues.patterns
+    ? constructorValues.patterns.additionalPrice[0].value
+    : null;
+  const costPatternUSD = constructorValues.patterns
+    ? constructorValues.patterns.additionalPrice[1].value
+    : null;
+
+  const sizeAndPrice = {
+    price: [
+      {
+        value:
+          +CONSTRUCTOR_DEFAULT_PRICE[0] +
+          costPatternUAH +
+          constructorValues.bottoms.additionalPrice[0].value,
+        currency: 'UAH'
+      },
+      {
+        value:
+          +CONSTRUCTOR_DEFAULT_PRICE[1] +
+          costPatternUSD +
+          constructorValues.bottoms.additionalPrice[1].value,
+        currency: 'USD'
+      }
+    ],
+    size: {
+      available: constructorValues.sizes.available,
+      name: constructorValues.sizes.name,
+      _id: constructorValues.sizes._id
+    },
+    bottomMaterial: constructorValues.bottoms
+  };
 
   return (
     <div className={styles.constructorWrapper}>
@@ -156,7 +188,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.model')}</FormHelperText>
+            <FormHelperText>{t('common.models')}</FormHelperText>
           </FormControl>
 
           <FormControl>
@@ -259,7 +291,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.size')}</FormHelperText>
+            <FormHelperText>{t('common.bottom')}</FormHelperText>
           </FormControl>
 
           <Button className={styles.button} onClick={showModal} data-testid='modalButton'>
@@ -319,7 +351,7 @@ const ImagesConstructor = () => {
               {getCurrentCurrency(currency)}
             </span>
           </h2>
-          <ConstructorSubmit />
+          <ConstructorSubmit constructorValues={constructorValues} sizeAndPrice={sizeAndPrice} />
         </div>
       </div>
     </div>

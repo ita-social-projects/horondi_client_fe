@@ -10,7 +10,7 @@ import {
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
-export const initialValues = {
+export const stateInitialValues = {
   firstName: '',
   lastName: '',
   email: '',
@@ -188,24 +188,15 @@ export const getCurrentCurrency = (currency) =>
     ? i18next.t(`checkout.checkoutTitles.UAH`)
     : i18next.t(`checkout.checkoutTitles.USD`);
 
-export const setUserValues = (values, userData, deliveryType) => {
-  const { firstName, lastName, email, phoneNumber } = userData;
-  const result = { ...values, firstName, lastName, email, phoneNumber };
-  if (
-    (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-    userData.address
-  ) {
-    const { city, street, buildingNumber: house, appartment: flat } = userData.address;
-    return {
-      ...result,
-      city,
-      street,
-      house,
-      flat
-    };
-  }
-  return result;
+export const updateInitialValues = (data) => {
+  const { firstName, lastName, email, phoneNumber } = data;
+  return {
+    ...stateInitialValues,
+    firstName: firstName || '',
+    lastName: lastName || '',
+    email: email || '',
+    phoneNumber: phoneNumber || ''
+  };
 };
 
 export const setDeliveryTypeToStorage = (deliveryType) => {

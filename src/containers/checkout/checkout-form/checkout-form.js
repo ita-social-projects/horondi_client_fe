@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -29,9 +29,9 @@ import {
   getCurrentCurrency,
   getThemeColor,
   handleError,
-  initialValues,
+  updateInitialValues,
+  stateInitialValues,
   orderInputData,
-  setUserValues,
   userContactInputLabels,
   userNameInputLabels
 } from '../../../utils/checkout';
@@ -68,6 +68,9 @@ const CheckoutForm = ({ currency, cartItems }) => {
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
   );
 
+  const [initialValues, setInitialValues] = useState(stateInitialValues);
+  const valuesRef = useRef();
+
   const consentLink = (
     <div className={styles.consentMessage}>
       {' '}
@@ -91,6 +94,7 @@ const CheckoutForm = ({ currency, cartItems }) => {
 
   const { values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
     useFormik({
+      enableReinitialize: true,
       validationSchema: validationSchema(deliveryType, t),
       initialValues,
 
@@ -112,28 +116,25 @@ const CheckoutForm = ({ currency, cartItems }) => {
       }
     });
 
-  const courierDependencyArr = [deliveryTypes.NOVAPOSTCOURIER, deliveryTypes.UKRPOSTCOURIER];
+  valuesRef.current = values;
 
   useEffect(() => {
-    if (userData && !getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM)) {
-      resetForm({ values: setUserValues(values, userData, deliveryType) });
+    if (userData) {
+      setInitialValues(updateInitialValues(userData));
     }
-  }, [userData, resetForm]);
+  }, [userData]);
 
   useEffect(() => {
     setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
   }, [values]);
 
   useEffect(() => {
-    resetForm({ values: getFromSessionStorage(SESSION_STORAGE.CHECKOUT_FORM) });
-  }, [resetForm]);
-
-  useEffect(() => {
+    const courierDependencyArr = [deliveryTypes.NOVAPOSTCOURIER, deliveryTypes.UKRPOSTCOURIER];
     const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
     if (!isCourier(deliveryType)) {
       resetForm({
         values: {
-          ...values,
+          ...valuesRef.current,
           courierOffice: '',
           city: '',
           street: '',

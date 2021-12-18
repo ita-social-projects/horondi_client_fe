@@ -5,12 +5,14 @@ import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { IMG_URL } from '../../../../../configs';
-import { Loader } from '../../../../../components/loader/loader';
+// import { Loader } from '../../../../../components/loader/loader';
 import { useStyles } from '../../../../checkout/checkout-form/checkout-form.styles';
 
 import { getCurrencySign } from '../../../../../utils/currency';
 import { getProductById } from '../../../operations/order.queries';
+import { getConstructorById } from '../../../operations/getConstructorById.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 
 const OrderItem = ({ product }) => {
   const styles = useStyles();
@@ -19,40 +21,77 @@ const OrderItem = ({ product }) => {
   }));
   const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
-  const { data, loading, error } = useQuery(getProductById, {
-    variables: { id: product.productId }
+
+  // if (loading) return <Loader width={90} height={50} heightWrap={50} />;
+
+  const {
+    data: dataProduct,
+    loading: loadingProduct,
+    error: errorProduct
+  } = useQuery(getProductById, {
+    variables: { id: product?.productId },
+    skip: product.constructor
   });
 
-  if (loading) return <Loader width={90} height={50} heightWrap={50} />;
+  const {
+    data: dataConstructor,
+    loading: loadingConstructor,
+    error: errorConstructor
+  } = useQuery(getConstructorById, {
+    variables: { id: product.productId },
+    skip: !product.constructor
+  });
 
-  if (error) return errorOrLoadingHandler(error);
-
-  const orderItem = data.getProductById;
-
-  const sizeAndPrice = orderItem.sizes.find(
-    (size) => size.size._id === product.sizeAndPrice.size._id && size.size
+  const { isLoading, isError } = useIsLoadingOrError(
+    [loadingConstructor, loadingProduct],
+    [errorConstructor, errorProduct]
   );
 
+  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+
+  // const orderItem = data.getProductById;
+  const orderItem = product.constructor
+    ? dataConstructor?.getConstructorById
+    : dataProduct?.getProductById;
+
+  // console.log(orderItem);
+  // console.log(product);
+
+  const { sizeAndPrice } = product;
   return (
     <ListItem className={styles.yourOrderListItem} key={orderItem._id} alignItems='center'>
       <Typography component='div'>x {product.quantity}</Typography>
       <img
         className={styles.yourOrderListImg}
-        src={`${IMG_URL}${orderItem.images.primary.thumbnail}`}
+        src={`${IMG_URL}${
+          product.constructor
+            ? orderItem.model.images.thumbnail
+            : orderItem.images.primary.thumbnail
+        }`}
         alt='product-img'
       />
       <ListItemText
         className={styles.yourOrderListItemDescriptionContainer}
         primary={
           <div className={styles.yourOrderListItemDescriptionPrimary}>
-            {t(`${orderItem.translationsKey}.name`)}
+            {t(
+              `${
+                product.constructor ? orderItem.model.translationsKey : orderItem.translationsKey
+              }.name`
+            )}
           </div>
         }
         secondary={
           <Typography className={styles.yourOrderListItemDescriptionSecondary} component='div'>
             <div>
               {t('product.productDescription.bottomMaterial')}:{' '}
-              {t(`${orderItem.bottomMaterial.material.translationsKey}.name`)}
+              {t(
+                `${
+                  product.constructor
+                    ? sizeAndPrice.bottomMaterial.translationsKey
+                    : orderItem.bottomMaterial.material.translationsKey
+                }.name`
+              )}
             </div>
             <div>
               {t('common.size')}:{sizeAndPrice.size.name}

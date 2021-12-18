@@ -55,7 +55,6 @@ export const useCart = (user = null) => {
       prevCart.map((el) => {
         if (el.id === id) {
           el.sizeAndPrice = sizeAndPrice;
-          // console.log('sizeAndPrice', sizeAndPrice);
         }
         return el;
       })
@@ -67,7 +66,6 @@ export const useCart = (user = null) => {
       prevCart.map((el) => {
         if (el.id === id) {
           el.sizeAndPrice.size = size;
-          // console.log('sizeAndPrice', sizeAndPrice);
         }
         return el;
       })

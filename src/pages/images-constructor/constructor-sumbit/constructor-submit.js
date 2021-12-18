@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import { useStyles } from './constructor-submit.styles';
 
 import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
+import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
 import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
@@ -19,22 +20,30 @@ const { pathToCart } = routes;
 const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
+  const { cartOperations, isInCart } = useCart(userData);
 
   const { t } = useTranslation();
+
+  const isItemInCart = isInCart(constructorValues._id, constructorValues.sizes._id);
 
   const TOAST_SETTINGS = {
     autoClose: 3000,
     hideProgressBar: true
   };
 
-  // const wishlistTip = isWishful ? t('buttons.removeWishful') : t('buttons.addWishful');
-
-  const { userData } = useSelector(selectLanguageProductsUserWishlist);
-  const { cartOperations, isInCart } = useCart(userData);
-
-  const isItemInCart = isInCart(constructorValues._id, constructorValues.sizes._id);
-
   const { addToCart } = cartOperations;
+  const cartTootipTitle = isItemInCart
+    ? t('product.tooltips.itemInCart')
+    : t('product.tooltips.itemInCartAlready');
+
+  const cartButtonLabel = isItemInCart
+    ? t('product.pdpButtons.inCart')
+    : t('product.pdpButtons.cartButton');
+
+  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
+
+  // const wishlistTip = isWishful ? t('buttons.removeWishful') : t('buttons.addWishful');
 
   const onAddToCart = () => {
     if (isItemInCart) {
@@ -49,16 +58,16 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice }) => {
         constructor: true
       };
 
-      // if (userData) {
-      //   const newCartItemWithUserId = {
-      //     userId: userData._id,
-      //     cartItem: productToSend
-      //   };
+      if (userData) {
+        const newCartItemWithUserId = {
+          userId: userData._id,
+          cartItem: productToSend
+        };
 
-      //   dispatch(addProductToUserCart(newCartItemWithUserId));
-      // } else {
-      //   dispatch(addItemToCart(productToSend));
-      // }
+        dispatch(addProductToUserCart(newCartItemWithUserId));
+      } else {
+        dispatch(addItemToCart(productToSend));
+      }
 
       addToCart(newCart);
 
@@ -111,9 +120,11 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice }) => {
           />
         )}
       </Tooltip>
-      <Button className={styles.submitButton} onClick={cartButtonFunc}>
-        {t('buttons.cartButton')}
-      </Button>
+      <Tooltip title={cartTootipTitle} placement='bottom'>
+        <Button className={buttonStyle} onClick={cartButtonFunc}>
+          {cartButtonLabel}
+        </Button>
+      </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
         {t('buttons.buyButton')}
       </Button>

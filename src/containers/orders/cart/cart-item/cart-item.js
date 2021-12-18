@@ -100,22 +100,19 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     ? dataConstructor?.getConstructorById
     : dataProduct?.getProductById;
 
-  // console.log(cartItem);
   function handleSizeChange(event) {
     !item.constructor
       ? cartItem.sizes &&
         cartItem.sizes.map((cartData) => {
           if (event.target.value === cartData.size._id && firstlyMounted) {
             changeSize(item.id, cartData);
-            // console.log('karta', cartData);
           }
           return null;
         })
       : cartItem.model.sizes &&
         cartItem.model.sizes.map((cartData) => {
           if (event.target.value === cartData._id && firstlyMounted) {
-            changeSizeConstructor(item._id, cartData);
-            // console.log('constructor', cartData);
+            changeSizeConstructor(item.id, cartData);
           }
           return null;
         });

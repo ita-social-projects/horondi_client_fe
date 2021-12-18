@@ -13,19 +13,19 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 768px)': {
       '& .react-multiple-carousel__arrow': {
-        width: '40px !important',
-        height: '40px !important',
+        width: '40px',
+        height: '40px',
         zIndex: 0
       }
     }
   },
   catalogInner: {
-    maxWidth: '1140px',
+    maxWidth: '1170px',
     '@media (max-width: 1146px)': {
       maxWidth: '800px'
     },
     '@media (max-width: 760px)': {
-      maxWidth: '370px'
+      maxWidth: '400px'
     }
   },
   categoryTitle: {

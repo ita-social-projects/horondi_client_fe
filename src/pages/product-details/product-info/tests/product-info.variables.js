@@ -1,6 +1,7 @@
-export const props = (boolType) => ({
+export const props = (boolType, countComments = 1, disabled = true) => ({
   sizeIndex: 0,
-  countComments: { count: 1 },
+  countComments: { count: countComments },
+  checkDisabledProduct: disabled,
   product: {
     available: boolType,
     rate: 5,

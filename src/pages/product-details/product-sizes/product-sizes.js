@@ -22,9 +22,13 @@ const ProductSizes = ({
     !!sizes.length &&
     sizes.map(({ size }, index) => (
       <Button
-        disabled={!size.available && !checkDisabledProduct}
+        disabled={!(size.available && checkDisabledProduct)}
         key={size._id}
-        className={size._id === currentSize._id ? styles.selectedSize : styles.sizeButton}
+        className={
+          size._id === currentSize._id && checkDisabledProduct
+            ? styles.selectedSize
+            : styles.sizeButton
+        }
         onClick={() => handleSizeChange(index)}
       >
         {size.name}

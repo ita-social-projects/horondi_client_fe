@@ -61,7 +61,10 @@ const ProductDetails = ({ match }) => {
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
   const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
-  const isLightTheme = palette.type === 'light';
+  const colorForBackspaceIcon = () => {
+    if (palette.type === 'light') return MATERIAL_UI_COLOR.PRIMARY;
+    return MATERIAL_UI_COLOR.ACTION;
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -162,9 +165,7 @@ const ProductDetails = ({ match }) => {
   return (
     <Card className={styles.container}>
       <Link to={pathToCategory} className={styles.backBtn}>
-        <KeyboardBackspaceIcon
-          color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
-        />
+        <KeyboardBackspaceIcon color={colorForBackspaceIcon()} />
       </Link>
       <div className={styles.product}>
         {product.images ? <ProductImages images={product.images} /> : null}

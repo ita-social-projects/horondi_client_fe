@@ -1,12 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
 
-jest.mock('react-redux');
+// const state = {
+//   currency: 0
+// };
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: () => ({ currency: 0 })
+}));
 
 jest.mock('../images-constructor.style', () => ({
   useStyles: () => ({})
@@ -26,11 +32,6 @@ jest.mock('../../../utils/constructor', () => ({
   constructorPartPrice: () => [1, 2, 3],
   constructorPartNames: () => ''
 }));
-
-const state = {
-  currency: 0
-};
-useSelector.mockImplementation(() => state);
 
 beforeEach(async () => {
   render(

@@ -6,6 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
+// import { date } from 'yup';
 import { useStyles } from './constructor-submit.styles';
 
 import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
@@ -17,13 +18,26 @@ import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
-const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice }) => {
+const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
+  const { userData } = useSelector(selectLanguageProductsUserWishlist);
   const { cartOperations, isInCart } = useCart(userData);
 
   const { t } = useTranslation();
+  const productToSend = {
+    id: Date.now(),
+    allSizes,
+    options: { size: sizeAndPrice.size, price: sizeAndPrice.price },
+    product: {
+      ...constructorValues,
+      isFromConstructor: true,
+      pattern: constructorValues.patterns,
+      mainMaterial: { color: { _id: constructorValues.patterns._id } },
+      category: { _id: constructorValues.patterns._id }
+    },
+    quantity: 1
+  };
 
   const isItemInCart = isInCart(constructorValues._id, constructorValues.sizes._id);
 
@@ -40,10 +54,6 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice }) => {
   const cartButtonLabel = isItemInCart
     ? t('product.pdpButtons.inCart')
     : t('product.pdpButtons.cartButton');
-
-  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
-
-  // const wishlistTip = isWishful ? t('buttons.removeWishful') : t('buttons.addWishful');
 
   const onAddToCart = () => {
     if (isItemInCart) {
@@ -120,14 +130,14 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice }) => {
           />
         )}
       </Tooltip>
-      <Tooltip title={cartTootipTitle} placement='bottom'>
-        <Button className={buttonStyle} onClick={cartButtonFunc}>
-          {cartButtonLabel}
-        </Button>
-      </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
         {t('buttons.buyButton')}
       </Button>
+      <Tooltip title={cartTootipTitle} placement='bottom'>
+        <Button className={styles.buttonStyle} onClick={cartButtonFunc}>
+          {cartButtonLabel}
+        </Button>
+      </Tooltip>
     </div>
   );
 };

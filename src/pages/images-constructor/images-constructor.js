@@ -170,11 +170,13 @@ const ImagesConstructor = () => {
       <div className={styles.headingWrapper}>
         <h1>{t('common.title')}</h1>
       </div>
-
+      <hr />
       <div className={styles.contentWrapper}>
         <form className={styles.formWrapper}>
           <FormControl>
+            <p className={styles.headerWrapperH1}>{t('common.backpack')}</p>
             <Select
+              className={styles.selectItem}
               label='title'
               data-cy='model'
               name='model'
@@ -183,16 +185,17 @@ const ImagesConstructor = () => {
               data-testid='model'
             >
               {allModels.current.map((model) => (
-                <MenuItem key={model._id} value={model._id}>
+                <MenuItem className={styles.menuItem} key={model._id} value={model._id}>
                   {t(`${model.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.models')}</FormHelperText>
+            <FormHelperText className={styles.formHelper}>{t('common.models')}</FormHelperText>
           </FormControl>
 
           <FormControl>
             <Select
+              className={styles.selectItem}
               label='title'
               data-cy='basics'
               name='basics'
@@ -207,16 +210,17 @@ const ImagesConstructor = () => {
               }
             >
               {currentConstructorModel.current.basics.map((basics) => (
-                <MenuItem key={basics._id} value={basics._id}>
+                <MenuItem className={styles.menuItem} key={basics._id} value={basics._id}>
                   {t(`${basics.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.basis')}</FormHelperText>
+            <FormHelperText className={styles.formHelper}>{t('common.basis')}</FormHelperText>
           </FormControl>
 
           <FormControl>
             <Select
+              className={styles.selectItem}
               label='title'
               name='patern'
               value={constructorValues.patterns?._id || ''}
@@ -234,16 +238,17 @@ const ImagesConstructor = () => {
               }}
             >
               {currentConstructorModel.current.patterns.map((pattern) => (
-                <MenuItem key={pattern._id} value={pattern._id}>
+                <MenuItem className={styles.menuItem} key={pattern._id} value={pattern._id}>
                   {t(`${pattern.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.patterns')}</FormHelperText>
+            <FormHelperText className={styles.formHelper}>{t('common.patterns')}</FormHelperText>
           </FormControl>
 
           <FormControl>
             <Select
+              className={styles.selectItem}
               label='title'
               data-cy='bottom'
               name='bottom'
@@ -262,16 +267,17 @@ const ImagesConstructor = () => {
               }}
             >
               {currentConstructorModel.current.bottoms.map((bottom) => (
-                <MenuItem key={bottom._id} value={bottom._id}>
+                <MenuItem className={styles.menuItem} key={bottom._id} value={bottom._id}>
                   {t(`${bottom.translationsKey}.name`)}
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.bottom')}</FormHelperText>
+            <FormHelperText className={styles.formHelper}>{t('common.bottom')}</FormHelperText>
           </FormControl>
 
           <FormControl>
             <Select
+              className={styles.selectItem}
               label='title'
               data-cy='size'
               name='size'
@@ -286,16 +292,16 @@ const ImagesConstructor = () => {
               }
             >
               {currentConstructorModel.current.model.sizes.map((size) => (
-                <MenuItem key={size.name} value={size._id}>
+                <MenuItem className={styles.menuItem} key={size.name} value={size._id}>
                   {size.name}
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>{t('common.bottom')}</FormHelperText>
+            <FormHelperText className={styles.formHelper}>{t('common.bottom')}</FormHelperText>
           </FormControl>
 
-          <Button className={styles.button} onClick={showModal} data-testid='modalButton'>
-            {t('buttons.moreOptions')}
+          <Button className={styles.buttonOptions} onClick={showModal} data-testid='modalButton'>
+            <span className={styles.pluse}>+</span> {t('buttons.moreOptions')}
           </Button>
 
           {modalVisibility && (
@@ -318,9 +324,10 @@ const ImagesConstructor = () => {
         </div>
 
         <div className={styles.pricesInfoWrapper}>
-          <h2 className={styles.headerWrapper}>{t('common.totalPrice')}</h2>
+          <p className={styles.headerWrapperH1}>{t('common.totalPrice')}</p>
           <div className={styles.textWrapper}>
             <ul>
+              <div className={`${styles.line} ${styles.bottomLine}`} />
               <li className={styles.priceItem}>
                 <span>{t('common.defaultPrice')}</span>
                 <span>
@@ -351,7 +358,11 @@ const ImagesConstructor = () => {
               {getCurrentCurrency(currency)}
             </span>
           </h2>
-          <ConstructorSubmit constructorValues={constructorValues} sizeAndPrice={sizeAndPrice} />
+          <ConstructorSubmit
+            constructorValues={constructorValues}
+            sizeAndPrice={sizeAndPrice}
+            allSizes={currentConstructorModel.current.sizes}
+          />
         </div>
       </div>
     </div>

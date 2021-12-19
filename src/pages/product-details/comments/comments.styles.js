@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     fontSize: '14px',
     color: theme.palette.textColor,
-    borderTop: '4px solid #c2c2c2',
     padding: '15px 0'
   },
   loadMoreText: {
@@ -18,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   comment: {
+    backgroundColor: theme.palette.backgroundColor,
     padding: '0 3rem',
     '& hr': {
       border: 'none',

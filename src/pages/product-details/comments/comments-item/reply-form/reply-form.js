@@ -8,7 +8,7 @@ import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
 import { commentFields, TEXT_VALUE } from '../../../../../configs';
-import { ERROR } from '../../../constants';
+import { ERROR, COMMENTS_TIME_OPTIONS } from '../../../constants';
 import { formRegExp } from '../../../../../configs/regexp';
 import { addReplyMutation } from '../../operations/comments.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
@@ -16,7 +16,7 @@ import { Loader } from '../../../../../components/loader/loader';
 import { SnackBarContext } from '../../../../../context/snackbar-context';
 
 const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { setSnackBarMessage } = useContext(SnackBarContext);
   const styles = useStyles();
@@ -35,6 +35,7 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) 
   });
 
   const { _id } = userData;
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
 
   const onSubmit = async ({ text: fieldText }) => {
     await addReply({
@@ -59,8 +60,8 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) 
     setFieldValue(TEXT_VALUE, value);
   };
 
-  const d = new Date();
-  const currentDate = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+  const dateToShow = new Date();
+  const currentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
   return (
     <form onSubmit={handleSubmit}>

@@ -139,7 +139,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
           </div>
           <div className={styles.date}>{commentDate}</div>
         </div>
-        <div>{handleRate(rate)}</div>
+        <div className={styles.rateIcon}>{handleRate(rate)}</div>
         <div className={styles.textContent}>
           <div
             className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}

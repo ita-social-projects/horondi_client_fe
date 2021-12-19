@@ -49,7 +49,7 @@
   "name": "Name",
   "email": "Email",
   "dialog": {
-    "title": "Delete comment?",
+    "title": "Delete comment",
     "description": "Are you sure you want to delete the comment? After deleting you will not be able to restore the comment."
   },
   "dialogRiply": {

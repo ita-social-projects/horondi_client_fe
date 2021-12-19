@@ -21,9 +21,14 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     container: {
+      margin: '20px 0',
+      borderRadius: '4px',
       fontFamily: 'Open sans',
-      border: '1px solid #C2C2C2',
-      padding: '20px'
+      border: theme.palette.comments.border,
+      padding: '20px',
+      '@media (max-width: 768px)': {
+        padding: '10px'
+      }
     },
     replyForm: {
       margin: '0',
@@ -59,6 +64,7 @@ export const useStyles = makeStyles((theme) => {
 
     deleteIcon: {
       marginRight: '0',
+      color: theme.palette.comments.deleteIcon.color,
       '&:hover': {
         cursor: 'pointer'
       }
@@ -155,6 +161,11 @@ export const useStyles = makeStyles((theme) => {
       height: '20px',
       width: '20px',
       color: `rgb(${color} / 87%)`
+    },
+    rateIcon: {
+      '& :first-child': {
+        opacity: '1'
+      }
     }
   };
 });

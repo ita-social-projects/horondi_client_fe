@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => {
   return {
     container: {
       color,
-      borderTop: '2px solid #C2C2C2',
+      borderTop: theme.palette.comments.border,
       maxWidth: '756px',
       margin: '0 80px 0 120px',
       padding: '24px 0',
@@ -47,6 +47,7 @@ export const useStyles = makeStyles((theme) => {
       justifyContent: 'space-between'
     },
     deleteIcon: {
+      color: theme.palette.comments.deleteIcon.color,
       '&:hover': {
         cursor: 'pointer'
       }

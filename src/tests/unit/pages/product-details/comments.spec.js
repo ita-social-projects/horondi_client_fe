@@ -11,6 +11,7 @@ const mockSubmit = jest.fn();
 const mockSetShouldValidate = jest.fn();
 const mockShouldValidate = jest.fn();
 const mockSetFieldValue = jest.fn();
+const mockResetForm = jest.fn();
 
 jest.mock('../../../../hooks/use-comment-validation', () => ({
   __esModule: true,
@@ -19,7 +20,7 @@ jest.mock('../../../../hooks/use-comment-validation', () => ({
     handleChange: mockChangeValue,
     handleBlur: jest.fn(),
     setFieldValue: mockSetFieldValue,
-    resetForm: jest.fn(),
+    resetForm: mockResetForm,
     values: { text: '' },
     errors: {},
     shouldValidate: mockShouldValidate,
@@ -81,7 +82,7 @@ describe('Comments page tests', () => {
   });
 
   it('Call submitting event on submit', () => {
-    const form = screen.getByRole('button');
+    const form = screen.getByText('product.comments.submit');
 
     fireEvent.submit(form);
 
@@ -89,7 +90,7 @@ describe('Comments page tests', () => {
   });
 
   it('Call validation on button click', () => {
-    const button = screen.getByRole('button');
+    const button = screen.getByText('product.comments.submit');
 
     fireEvent.click(button);
 
@@ -102,5 +103,13 @@ describe('Comments page tests', () => {
 
     expect(addCommentLoader).toBe(null);
     expect(getCommentsLoader).toBeTruthy();
+  });
+
+  it('Call cancel button', () => {
+    const cancelButton = screen.queryByText('product.comments.cancel');
+
+    fireEvent.click(cancelButton);
+
+    expect(mockResetForm).toBeTruthy();
   });
 });

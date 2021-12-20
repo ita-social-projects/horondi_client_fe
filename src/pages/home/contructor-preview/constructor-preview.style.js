@@ -33,6 +33,10 @@ export const useStyles = makeStyles(() => ({
     bottom: 30,
     '& svg': {
       color: 'white'
+    },
+    '@media (max-width: 420px)': {
+      right: 10,
+      bottom: 10
     }
   },
   constructorContent: {
@@ -44,20 +48,38 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '@media (max-width: 420px)': {
+      top: '5%',
+      left: '5%',
+      width: '90vw'
+    },
+    '@media (max-width: 321px)': {
+      top: '0%'
+    }
   },
   constructorTitle: {
     fontSize: '34px',
     lineHeight: '46px',
     textAlign: 'center',
     letterSpacing: '0.0025em',
-    color: '#FEFEFE'
+    color: '#FEFEFE',
+    '@media (max-width: 420px)': {
+      fontSize: '25px',
+      lineHeight: '30px'
+    }
   },
   constructorDescription: {
     fontSize: '17px',
     lineHeight: '24px',
     letterSpacing: '0.005em',
-    color: '#FEFEFE'
+    color: '#FEFEFE',
+
+    '@media (max-width: 420px)': {
+      fontSize: '15px',
+      lineHeight: '17px',
+      textAlign: 'center'
+    }
   },
   buttonStyles: {
     marginTop: '30px',
@@ -72,6 +94,12 @@ export const useStyles = makeStyles(() => ({
     background: 'none',
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 420px)': {
+      marginTop: '10px'
+    },
+    '@media (max-width: 321px)': {
+      marginTop: '0px'
+    }
   }
 }));

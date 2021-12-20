@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
-  constructorPreview: ({ isMouseIn }) => ({
+export const useStyles = makeStyles((theme) => ({
+  constructorPreview: () => ({
     width: '100%',
     position: 'relative',
     margin: '50px 0',
     boxSizing: 'border-box',
     overflowY: 'hidden',
     '&:after': {
-      opacity: isMouseIn ? 1 : 0,
+      opacity: 0.5,
       transition: 'opacity .5s ease',
       content: `''`,
       position: 'absolute',
@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() => ({
       left: 0,
       bottom: 0,
       zIndex: 1,
-      background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+      backgroundColor: theme.palette.black
     },
     '& video': {
       '@media (max-width: 768px)': {

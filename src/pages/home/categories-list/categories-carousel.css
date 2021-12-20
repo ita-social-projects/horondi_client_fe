@@ -1,6 +1,7 @@
-#catalog .react-multi-carousel-list {
-  max-width: 1320px;
-  margin: 0 auto;
+#catalog .react-multi-carousel-item {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
 }
 
 #catalog .react-multiple-carousel__arrow {
@@ -8,6 +9,14 @@
   height: 50px;
 }
 
+#catalog .react-multiple-carousel__arrow--left {
+  left: 0;
+}
+
+#catalog .react-multiple-carousel__arrow--right {
+  right: 0;
+}
+
 #catalog .react-multiple-carousel__arrow:before {
-  font-size: 20px !important;
+  font-size: 20px;
 }

@@ -56,6 +56,9 @@ export default {
       normal: {
         backgroundColor: '#FFFFFF'
       },
+      shadow: {
+        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.12)'
+      },
       hover: {
         border: '1px solid #5b5b5b'
       }
@@ -113,6 +116,9 @@ export default {
     carouselItem: {
       normal: {
         backgroundColor: '#333131'
+      },
+      shadow: {
+        boxShadow: '4px 6px 25px rgba(26, 26, 26, 0.8)'
       },
       hover: {
         border: '1px solid #5B5B5B'

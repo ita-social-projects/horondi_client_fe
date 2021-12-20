@@ -72,6 +72,9 @@ export const paletteGenerator = (colorSchema) => ({
     normal: {
       backgroundColor: theme[colorSchema].carouselItem.normal.backgroundColor
     },
+    shadow: {
+      boxShadow: theme[colorSchema].carouselItem.shadow.boxShadow
+    },
     hover: {
       border: theme[colorSchema].carouselItem.hover.border
     }

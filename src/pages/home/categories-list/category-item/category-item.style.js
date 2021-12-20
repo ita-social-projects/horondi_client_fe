@@ -2,47 +2,67 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   categoryItem: (props) => ({
+    position: 'relative',
+    display: 'flex',
+    overflow: 'hidden',
+    width: '350px',
+    height: '350px',
+    padding: '0px',
     backgroundImage: `url("${props.image}")`,
     backgroundPosition: 'center',
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
-    display: 'flex',
-    alignItems: 'flex-end',
-    width: 'calc(100% - 40px)',
-    borderRadius: '6px',
-    height: '500px',
-    margin: '20px',
+    backgroundRepeat: 'no-repeat',
     cursor: 'pointer',
-    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.12)',
-    padding: '26px 24px',
-    position: 'relative',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
+    borderRadius: '6px',
     color: theme.palette.textColor,
-    '&:hover > div': {
-      display: 'flex'
+    outline: '1px solid transparent',
+    transition: 'all 0.2s ease-in-out',
+    '&:hover, &:active': {
+      outline: theme.palette.carouselItem.hover.border,
+      transition: 'outline 0.2s ease-in-out'
     },
-    '&:hover': {
-      border: theme.palette.carouselItem.hover.border
+    '&:hover > div, &:active > div': {
+      display: 'flex',
+      alignItems: 'flex-end',
+      paddingLeft: '24px',
+      paddingBottom: '24px',
+      visibility: 'visible',
+      transform: 'none',
+      transition: 'all 0.2s ease-in-out'
     },
-    '&:hover > span': {
+    '&:hover > span, &:active > span': {
       display: 'none'
-    },
-    '@media (max-width: 768px)': {
-      width: 'calc(100% - 40px)',
-      height: '420px'
     }
   }),
   categoryInner: {
-    display: 'none',
+    display: 'flex',
+    alignItems: 'end',
+    paddingLeft: '24px',
+    paddingBottom: '24px',
+    visibility: 'hidden',
+    fontFamily: 'Open Sans',
     fontSize: '14px',
     fontWeight: 600,
+    letterSpacing: '0.0125em',
+    lineHeight: '20px',
     textTransform: 'uppercase',
-    alignItems: 'center',
-    '& svg': {
-      marginLeft: '4px'
-    }
+    transform: 'translateX(-200%)'
+  },
+  arrow: {
+    transform: 'translateY(10%)'
   },
   categoryName: {
+    display: 'flex',
+    alignItems: 'end',
+    paddingLeft: '24px',
+    paddingBottom: '24px',
+    fontFamily: 'Open Sans',
     fontSize: ' 20px',
-    fontWeight: '600'
+    fontWeight: '600',
+    lineHeight: '28px',
+    letterSpacing: '0.0015em',
+    color: theme.palette.textColor
   }
 }));

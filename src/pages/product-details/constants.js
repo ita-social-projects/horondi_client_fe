@@ -28,3 +28,5 @@ export const RESPONSIVE_PDP = {
   }
 };
 export const ERROR = 'error';
+
+export const SCROLL_BAR_LINKS = '#comment';

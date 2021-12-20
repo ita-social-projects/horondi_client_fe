@@ -72,7 +72,10 @@ const ProductImages = ({ images }) => {
       if (i === imagesSet.length || i === 2) {
         return (
           <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
-            <div className={styles.lastImageText}>{t('product.allPhotos')}</div>
+            <div className={styles.lastImageText}>
+              {t('product.allPhotos.viewAll')} {`(${images.additional.length})`}{' '}
+              {t('product.allPhotos.photo')}
+            </div>
             <img
               className={styles.lastImage}
               src={image.src}
@@ -83,7 +86,7 @@ const ProductImages = ({ images }) => {
         );
       }
       return (
-        <div key={i}>
+        <div key={i} className={styles.imageItem}>
           <img
             className={styles.sideImage}
             src={image.src}
@@ -104,7 +107,7 @@ const ProductImages = ({ images }) => {
   };
 
   return (
-    <div>
+    <div className={styles.imageBody}>
       <ImgsViewer
         imgs={imagesSet}
         currImg={currImg}

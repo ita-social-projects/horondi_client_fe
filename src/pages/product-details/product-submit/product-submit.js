@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import Tooltip from '@material-ui/core/Tooltip';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 
@@ -16,12 +15,11 @@ import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.sele
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
-import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
 import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
-const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
@@ -29,18 +27,23 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
 
   const { t } = useTranslation();
 
-  const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
+  let isItemInCart;
+  if (productToSend && productToSend.product && productToSend.options.size) {
+    isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
+  }
 
   const { addToCart } = cartOperations;
-  const cartTootipTitle = isItemInCart
-    ? t('product.tooltips.itemInCart')
-    : t('product.tooltips.itemInCartAlready');
+
+  const cartTootipTitle = () => {
+    if (disabled) return t('product.sizeNotAvailable');
+    return isItemInCart
+      ? t('product.tooltips.itemInCart')
+      : t('product.tooltips.itemInCartAlready');
+  };
 
   const cartButtonLabel = isItemInCart
     ? t('product.pdpButtons.inCart')
     : t('product.pdpButtons.cartButton');
-
-  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
 
   const onAddToCart = () => {
     if (isItemInCart) {
@@ -90,47 +93,20 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product }) => {
     }
   };
 
-  const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
-    useAddProductToWishlistHandler(product);
-  const wishlistTip = isInWishlist
-    ? t('product.tooltips.removeWishful')
-    : t('product.tooltips.addWishful');
-
   const cartButtonFunc = isItemInCart ? goToCheckout : onAddToCart;
-
-  const wishlistHandler = () => {
-    addOrRemoveItemFromWishlistHandler();
-
-    if (isInWishlist) {
-      dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
-      dispatch(setToastSettings(TOAST_SETTINGS));
-    } else {
-      dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
-      dispatch(setToastSettings(TOAST_SETTINGS));
-    }
-  };
 
   return (
     <div className={styles.submit}>
-      <Tooltip title={wishlistTip} placement='bottom'>
-        {isInWishlist ? (
-          <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={wishlistHandler} />
-        ) : (
-          <FavouriteBorderIcon
-            data-cy='not-wishful'
-            className={styles.heart}
-            onClick={wishlistHandler}
-          />
-        )}
-      </Tooltip>
-      <Tooltip title={cartTootipTitle} placement='bottom'>
-        <Button className={buttonStyle} onClick={cartButtonFunc}>
-          {cartButtonLabel}
-        </Button>
-      </Tooltip>
-      <Button className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('product.pdpButtons.buyButton')}
+      <Button disabled={disabled} className={styles.submitButton} onClick={onAddToCheckout}>
+        {t('product.pdpButtons.buyButton').toLocaleUpperCase()}
       </Button>
+      <Tooltip title={cartTootipTitle()} placement='bottom'>
+        <div>
+          <Button disabled={disabled} className={styles.toCart} onClick={cartButtonFunc}>
+            {cartButtonLabel.toLocaleUpperCase()}
+          </Button>
+        </div>
+      </Tooltip>
     </div>
   );
 };

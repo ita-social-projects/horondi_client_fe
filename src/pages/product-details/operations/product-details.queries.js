@@ -8,6 +8,7 @@ export const getProductById = gql`
         _id
         category {
           _id
+          translationsKey
           name {
             lang
             value
@@ -24,12 +25,14 @@ export const getProductById = gql`
         mainMaterial {
           material {
             translationsKey
+            available
             name {
               lang
               value
             }
           }
           color {
+            translations_key
             _id
             name {
               lang
@@ -45,6 +48,7 @@ export const getProductById = gql`
         innerMaterial {
           material {
             translationsKey
+            available
             name {
               lang
               value
@@ -54,6 +58,7 @@ export const getProductById = gql`
         bottomMaterial {
           material {
             translationsKey
+            available
             _id
             name {
               lang
@@ -100,6 +105,7 @@ export const getProductById = gql`
         }
         pattern {
           _id
+          available
           images {
             large
           }
@@ -114,6 +120,7 @@ export const getProductById = gql`
         }
         sizes {
           size {
+            available
             _id
             name
             heightInCm
@@ -129,6 +136,7 @@ export const getProductById = gql`
           }
         }
         availableCount
+        available
         rate
         translationsKey
       }

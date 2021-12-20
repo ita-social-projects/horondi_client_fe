@@ -1,84 +1,76 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import parse from 'html-react-parser';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import parse from 'html-react-parser';
 import { useStyles } from './product-info.styles';
-import { getCurrencySign } from '../../../utils/currency';
-import Detail from '../detail';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
 
-const ProductInfo = ({ price, product }) => {
-  const styles = useStyles();
-  const { rate, mainMaterial, innerMaterial, bottomMaterial, strapLengthInCm, translationsKey } =
-    product;
-  const { t } = useTranslation();
-  const { currentPrice, currentWeight, currentVolume, currency } = useSelector(
-    ({ Products: { productToSend }, Currency }) => ({
-      currentPrice: productToSend.price || price,
-      currentWeight: productToSend.dimensions.weightInKg || 0,
-      currentVolume: productToSend.dimensions.volumeInLiters || 0,
-      currency: Currency.currency
-    })
-  );
+import { SCROLL_BAR_LINKS } from '../constants';
+import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
 
-  const currencySign = getCurrencySign(currency);
+const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) => {
+  const styles = useStyles();
+  const { rate, mainMaterial, translationsKey } = product;
+  const { t } = useTranslation();
+  const { currentPrice, currency } = useSelector(({ Products: { productToSend }, Currency }) => ({
+    currentPrice: productToSend.price || price,
+    currentWeight: productToSend.dimensions.weightInKg || 0,
+    currentVolume: productToSend.dimensions.volumeInLiters || 0,
+    currency: Currency.currency
+  }));
+
+  const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
+
+  const checkDisabledProductResult = checkDisabledProduct ? null : (
+    <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
+  );
+  const correctCommentsName = (count) => {
+    if (count === 0) return t('product.comments.noComments');
+    if (count === 1) return t('product.comments.commentsOne');
+    if (count === 2 || count === 3 || count === 4) return t('product.comments.commentsTwo');
+    if (count > 4) return t('product.comments.title');
+  };
+  const shortProductInfo = (text) => {
+    if (text.length > 2) return text.slice(0, 2);
+    return text;
+  };
 
   return (
-    <div>
+    <div className={styles.common}>
       <div className={styles.head}>
         <span className={styles.title}>{t(`${translationsKey}.name`)}</span>
-        <Tooltip title={rate.toFixed(2)} placement='left'>
-          <span>
-            <Rating value={rate} readOnly precision={0.1} />
-          </span>
-        </Tooltip>
+        {checkDisabledProductResult}
       </div>
-      <div className={styles.details}>
-        <Detail
-          subtitle={`${t('product.productDescription.description')}: `}
-          description={parse(t(`${translationsKey}.description`))}
-        />
-        <Detail
-          subtitle={t('product.productDescription.mainMaterial')}
-          description={t(`${mainMaterial.material.translationsKey}.name`)}
-        />
-        <Detail
-          subtitle={t('product.productDescription.innerMaterial')}
-          description={t(`${innerMaterial.material.translationsKey}.name`)}
-        />
-        <Detail
-          subtitle={t('product.productDescription.bottomMaterial')}
-          description={t(`${bottomMaterial.material.translationsKey}.name`)}
-        />
-        {strapLengthInCm ? (
-          <Detail
-            subtitle={t('product.productDescription.strapLengthInCm')}
-            description={`${strapLengthInCm}`}
-          />
-        ) : null}
-        {currentVolume && currentWeight ? (
-          <div>
-            <Detail subtitle={t('product.weight.volumeLabel')} description={`${currentVolume}`} />
-            <Detail subtitle={t('product.weight.weightLabel')} description={`${currentWeight}`} />
-          </div>
-        ) : null}
+      <Tooltip className={styles.rate} title={rate.toFixed(2)} placement='left'>
+        <span>
+          <Rating value={rate} readOnly precision={0.1} />
+        </span>
+      </Tooltip>
+      <a href={SCROLL_BAR_LINKS} className={styles.comments}>
+        {countComments.count ? countComments.count : null}{' '}
+        {correctCommentsName(countComments.count)}
+      </a>
+      <div className={styles.text}>
+        {shortProductInfo(parse(t(`${translationsKey}.description`)))}
       </div>
+
       {Object.keys(currentPrice).length ? (
         <div className={styles.priceContainer}>
-          <span className={styles.subtitle}>{t('common.price')}: </span>
           <span data-cy='price' className={styles.price}>
-            {Math.round(currentPrice[currency]?.value)}
-            {'\u00A0'}
-            <FontAwesomeIcon icon={currencySign} />
+            {currencySign}
+            {Math.round(currentPrice[currency]?.value).toFixed(2)}
           </span>
         </div>
       ) : null}
       <div className={styles.look}>
-        <span className={styles.subtitle}>{t('common.color')}:</span>
+        <span className={styles.subtitle}>{t('common.color')}</span>
+        {': '}
+        <span className={styles.subtitleBold}>
+          {t(`${mainMaterial.color.translations_key}.name`)}
+        </span>
         <img
           className={styles.circle}
           alt='color'
@@ -90,7 +82,6 @@ const ProductInfo = ({ price, product }) => {
           alt='pattern'
           src={`${IMG_URL}${product.pattern.images.large}`}
         />
-        <br />
       </div>
     </div>
   );

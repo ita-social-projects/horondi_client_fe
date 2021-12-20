@@ -15,11 +15,18 @@ const imgSides = {
 };
 
 export const useStyles = makeStyles((theme) => ({
+  imageBody: {
+    display: 'flex',
+    flex: '1 1 50%'
+  },
   images: {
+    maxWidth: 540,
     display: 'grid',
-    gridTemplateRows: '540px 150px',
-
     gridGap: '20px',
+    '@media (max-width: 1150px)': {
+      margin: '0 auto',
+      maxWidth: 640
+    },
     '@media (max-width: 500px)': {
       display: 'flex',
       justifyContent: 'center',
@@ -33,16 +40,14 @@ export const useStyles = makeStyles((theme) => ({
 
   imageContainer: {
     display: 'block',
-    padding: '10px',
-    maxHeight: 500,
     borderRadius: '6px',
-    hidden: 'overflow'
+    overflow: 'hidden'
   },
 
   primaryImage: {
     gridRow: '1 / -1',
     backgroundSize: 'cover',
-    maxHeight: '450px',
+    maxHeight: '350px',
     width: 'auto',
     objectFit: 'cover',
 
@@ -53,6 +58,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   sideImage: {
+    flex: '1 1 30%',
     ...imgSides
   },
 
@@ -63,7 +69,7 @@ export const useStyles = makeStyles((theme) => ({
     border: '2px solid #EBEFF2',
     borderRadius: '6px',
     padding: '10px',
-    height: '540px',
+    height: '385px',
     boxShadow: [
       '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
       '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
@@ -77,15 +83,21 @@ export const useStyles = makeStyles((theme) => ({
     width: '48px',
     height: '48px',
     border: 'solid 1px',
+    borderColor: theme.palette.textColor,
     borderRadius: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '& svg': {
+      fill: theme.palette.textColor
+    },
+    '&:disabled': { opacity: '0.2' }
   },
 
   additionalImagePreview: {
     display: 'flex',
-    flexDirection: 'row',
+    alignItems: 'flex-end',
+    gap: 30,
     maxHeight: '150px',
     justifyContent: 'space-between'
   },
@@ -98,8 +110,8 @@ export const useStyles = makeStyles((theme) => ({
 
   lastImageText: {
     position: 'absolute',
-    top: 50,
-    left: 50,
+    top: 30,
+    left: 30,
     zIndex: 3,
     textAlign: 'center',
     fontSize: '16px',
@@ -107,8 +119,11 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '24px',
     width: '80px'
   },
-
+  imageItem: {
+    flex: '1 1 30%'
+  },
   lastImagesBox: {
+    flex: '1 1 30%',
     position: 'relative',
     textAlign: 'center',
     color: 'white',

@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { useTheme } from '@material-ui/styles';
 
 import { useTranslation } from 'react-i18next';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
-import { useStyles as useSubmitStyles } from './product-submit/product-submit.styles';
-import { MATERIAL_UI_COLOR } from '../../configs';
+
 import { TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
@@ -29,6 +26,9 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { setToastMessage, setToastSettings } from '../../redux/toast/toast.actions';
 import useAddProductToWishlistHandler from '../../hooks/use-add-product-to-wishlist-handler';
+import ProductDescription from './product-description';
+import ProductPath from './product-path/product-path';
+import { ArrowIcon } from '../../images/profile-icons';
 
 const { pathToCategory } = routes;
 
@@ -38,8 +38,6 @@ const ProductDetails = ({ match }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
-  const productSubmitStyles = useSubmitStyles();
-  const { palette } = useTheme();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
   const { loading, error, data } = useQuery(getProductById, {
     variables: { id }
@@ -54,17 +52,20 @@ const ProductDetails = ({ match }) => {
     sizes,
     mainMaterial,
     bottomMaterial,
-    pattern
+    innerMaterial,
+    pattern,
+    available,
+    translationsKey
   } = product;
-  const availableSizes =
-    sizes && sizes.filter(({ size, price }) => size.available && { size, price });
 
+  const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
-  const isLightTheme = palette.type === 'light';
+  const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id, dispatch]);
+  const [countComments, setCountComments] = useState(0);
 
   useEffect(() => {
     if (product.category) {
@@ -122,24 +123,19 @@ const ProductDetails = ({ match }) => {
   const wishlistTip = isInWishlist
     ? t('product.tooltips.removeWishful')
     : t('product.tooltips.addWishful');
+  const checkCountComments = (count) => {
+    setCountComments(count);
+  };
 
-  const favoriteIcon = isInWishlist ? (
-    <FavoriteIcon
-      data-cy='wishful'
-      className={productSubmitStyles.redHeart}
-      onClick={wishlistHandler}
-    />
-  ) : (
-    <FavouriteBorderIcon
-      data-cy='not-wishful'
-      className={productSubmitStyles.heart}
-      onClick={wishlistHandler}
-    />
-  );
+  const checkDisabledProduct = () =>
+    (currentSizeIndex >= 0 && sizes ? sizes[currentSizeIndex].size.available : '') &&
+    available &&
+    mainMaterial.material.available &&
+    bottomMaterial.material.available &&
+    innerMaterial.material.available;
 
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
-
     dispatch(
       setProductToSend({
         ...productToSend,
@@ -160,51 +156,60 @@ const ProductDetails = ({ match }) => {
       setSizeIsNotSelectedError(false);
     }
   };
-
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
     <Card className={styles.container}>
-      <Link to={pathToCategory} className={styles.backBtn}>
-        <KeyboardBackspaceIcon
-          color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
-        />
-      </Link>
-      <div className={styles.product}>
-        {product.images ? <ProductImages images={product.images} /> : null}
-        <div className={styles.productDetails}>
-          {!loading && (
-            <ProductInfo
-              price={currentSize?.size ? currentSize.size.price : {}}
-              product={product}
-            />
-          )}
-          {currentSize ? (
-            <>
-              <ProductSizes
-                handleSizeChange={handleSizeChange}
-                sizes={sizes}
-                sizeIsNotSelectedError={sizeIsNotSelectedError}
+      <div className={styles.productContainer}>
+        <ProductPath category={category} translationsKey={translationsKey} />
+        <Link to={pathToCategory} className={styles.backBtn}>
+          <ArrowIcon className={styles.arrowIcon} />
+        </Link>
+        <div className={styles.product}>
+          {product.images ? <ProductImages images={product.images} /> : null}
+          <div className={styles.productDetails}>
+            {!loading && (
+              <ProductInfo
+                countComments={countComments}
+                checkDisabledProduct={checkDisabledProduct()}
+                price={currentSize?.size ? currentSize.size.price : {}}
+                product={product}
               />
+            )}
+            <ProductSizes
+              handleSizeChange={handleSizeChange}
+              checkDisabledProduct={checkDisabledProduct()}
+              sizes={sizes}
+              sizeIsNotSelectedError={sizeIsNotSelectedError}
+            />
+            <div className={styles.test}>
               <ProductSubmit
+                disabled={!checkDisabledProduct()}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
               />
-            </>
-          ) : (
-            <>
-              <div className={styles.submit}>
-                <Tooltip title={wishlistTip} placement='bottom'>
-                  {favoriteIcon}
-                </Tooltip>
-              </div>
-              <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
-            </>
-          )}
+              <Tooltip title={wishlistTip} placement='bottom'>
+                {isInWishlist ? (
+                  <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
+                ) : (
+                  <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
+                )}
+              </Tooltip>
+            </div>
+          </div>
+          {product.description ? (
+            <ProductDescription
+              product={product}
+              currentSizeIndex={currentSizeIndex}
+              checkDisabledProduct={checkDisabledProduct()}
+            />
+          ) : null}
         </div>
       </div>
       {product._id ? <SimilarProducts product={product} /> : null}
-      {product._id ? <Comments productId={product._id} /> : null}
+      {product._id ? (
+        <Comments productId={product._id} checkCountComments={checkCountComments} />
+      ) : null}
       <ToastContainer />
     </Card>
   );

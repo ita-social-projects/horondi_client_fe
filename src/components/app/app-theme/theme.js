@@ -48,6 +48,9 @@ export default {
     contactForm: {
       background: '#EFEFEF'
     },
+    productDescription: {
+      borderColor: 'rgba(230, 230, 230, 0.65)'
+    },
     orderHistoryHeading: {
       background: '#DEDEDE'
     },
@@ -108,6 +111,9 @@ export default {
     },
     contactForm: {
       background: '#232323'
+    },
+    productDescription: {
+      borderColor: '#5B5B5B'
     },
     orderHistoryHeading: {
       background: '#2F2F2F '

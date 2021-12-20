@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { IMG_URL } from '../../../../../configs';
-// import { Loader } from '../../../../../components/loader/loader';
 import { useStyles } from '../../../../checkout/checkout-form/checkout-form.styles';
 
 import { getCurrencySign } from '../../../../../utils/currency';
@@ -21,8 +20,6 @@ const OrderItem = ({ product }) => {
   }));
   const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
-
-  // if (loading) return <Loader width={90} height={50} heightWrap={50} />;
 
   const {
     data: dataProduct,
@@ -49,24 +46,20 @@ const OrderItem = ({ product }) => {
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
-  // const orderItem = data.getProductById;
   const orderItem = product.constructor
     ? dataConstructor?.getConstructorById
     : dataProduct?.getProductById;
 
-  // console.log(orderItem);
-  // console.log(product);
-
   const { sizeAndPrice } = product;
   return (
-    <ListItem className={styles.yourOrderListItem} key={orderItem._id} alignItems='center'>
+    <ListItem className={styles.yourOrderListItem} key={orderItem?._id} alignItems='center'>
       <Typography component='div'>x {product.quantity}</Typography>
       <img
         className={styles.yourOrderListImg}
         src={`${IMG_URL}${
           product.constructor
-            ? orderItem.model.images.thumbnail
-            : orderItem.images.primary.thumbnail
+            ? orderItem?.model.images.thumbnail
+            : orderItem?.images.primary.thumbnail
         }`}
         alt='product-img'
       />
@@ -76,7 +69,7 @@ const OrderItem = ({ product }) => {
           <div className={styles.yourOrderListItemDescriptionPrimary}>
             {t(
               `${
-                product.constructor ? orderItem.model.translationsKey : orderItem.translationsKey
+                product.constructor ? orderItem?.model.translationsKey : orderItem.translationsKey
               }.name`
             )}
           </div>
@@ -88,7 +81,7 @@ const OrderItem = ({ product }) => {
               {t(
                 `${
                   product.constructor
-                    ? sizeAndPrice.bottomMaterial.translationsKey
+                    ? sizeAndPrice.bottomMaterial?.translationsKey
                     : orderItem.bottomMaterial.material.translationsKey
                 }.name`
               )}

@@ -2,12 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 
-import {
-  mockedCartItemsData,
-  mockedProps,
-  mockQueryData,
-  mockTranslationsKey
-} from './your-order.variables';
+import { mockedCartItemsData, mockedProps, mockQueryData } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
 
 jest.mock('../../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
@@ -45,8 +40,6 @@ describe('<YourOrder /> component tests', () => {
     useSelector.mockImplementation(() => userData);
 
     render(<YourOrder {...mockedProps} />);
-
-    expect(screen.getAllByText(new RegExp(mockTranslationsKey, 'i'))).toHaveLength(2);
     expect(mockGetTotalPrice).toHaveBeenCalled();
     expect(screen.getByRole('list')).toBeTruthy();
   });

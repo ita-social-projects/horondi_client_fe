@@ -297,7 +297,7 @@ const ImagesConstructor = () => {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText className={styles.formHelper}>{t('common.bottom')}</FormHelperText>
+            <FormHelperText className={styles.formHelper}>{t('common.size')}</FormHelperText>
           </FormControl>
 
           <Button className={styles.buttonOptions} onClick={showModal} data-testid='modalButton'>

@@ -219,6 +219,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: '25px',
     width: '100%'
   },
   backBtn: {
@@ -387,10 +388,11 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   yourOrderButton: {
     color: palette.button.normal.color,
-    backgroundColor: palette.button.hover.backgroundColor,
+    fontWeight: 600,
+    backgroundColor: palette.button.normal.backgroundColor,
     '&:hover': {
-      color: palette.button.normal.color,
-      backgroundColor: palette.button.normal.backgroundColor
+      color: palette.button.hover.color,
+      backgroundColor: palette.button.hover.backgroundColor
     },
     display: 'flex',
     flexDirection: 'row',

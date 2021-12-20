@@ -56,4 +56,9 @@ describe('Filled cart component tests', () => {
     component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
     expect(component).toBeDefined();
   });
+
+  it('should handleSizeChange start', () => {
+    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
+    expect(component.find('input[name="size"]')).toBeTruthy();
+  });
 });

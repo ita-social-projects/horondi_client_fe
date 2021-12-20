@@ -1,4 +1,5 @@
 import React from 'react';
+import * as redux from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Modal from '../../../components/modal';
@@ -29,7 +30,13 @@ jest.mock('../../../utils/constructor', () => ({
   constructorPartNames: () => ''
 }));
 
+const mockDispatch = jest.fn();
+const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
+
+mockUseDispatch.mockImplementation(() => mockDispatch);
+
 beforeEach(async () => {
+  mockUseDispatch.mockImplementation(() => mockDispatch);
   render(
     <MockedProvider mocks={mockAllConstructors} addTypename={false}>
       <ImagesConstructor />

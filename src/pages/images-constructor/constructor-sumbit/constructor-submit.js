@@ -6,7 +6,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
-// import { date } from 'yup';
 import { useStyles } from './constructor-submit.styles';
 
 import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';

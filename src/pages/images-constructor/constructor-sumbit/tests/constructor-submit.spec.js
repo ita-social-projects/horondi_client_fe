@@ -17,7 +17,6 @@ import {
   Wishlist
 } from './constructor.variables';
 
-// const mockSetSizeIsNotSelectedError = jest.fn();
 const mockDispatch = jest.fn();
 jest.mock('../constructor-submit.styles', () => ({
   useStyles: () => ({})
@@ -47,13 +46,11 @@ describe('Constructor submit tests', () => {
 
   beforeEach(() => {
     mockUseDispatch.mockImplementation(() => mockDispatch);
-    // mockUseSelector.mockImplementation((fn) => fn({ Language, Products, User, Wishlist, Cart }));
     mockUseSelector.mockImplementation((fn) => fn({ Language, User, Products, Wishlist, Cart }));
 
     wrapper = mount(
       <ThemeProvider theme={themeValue}>
         <ConstructorSubmit
-          // setSizeIsNotSelectedError={mockSetSizeIsNotSelectedError}
           product={constructorValues}
           isWishful={false}
           constructorValues={constructorValues}

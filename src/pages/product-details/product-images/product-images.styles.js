@@ -16,14 +16,16 @@ const imgSides = {
 
 export const useStyles = makeStyles((theme) => ({
   imageBody: {
-    flex: '1 1 60%',
-    '@media (max-width: 1400px)': {
-      flex: '1 1 50%'
-    }
+    flex: '1 1 50%'
   },
   images: {
+    maxWidth: 540,
     display: 'grid',
     gridGap: '20px',
+    '@media (max-width: 1150px)': {
+      margin: '0 auto',
+      maxWidth: 640
+    },
     '@media (max-width: 500px)': {
       display: 'flex',
       justifyContent: 'center',
@@ -55,6 +57,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   sideImage: {
+    flex: '1 1 30%',
     ...imgSides
   },
 
@@ -93,6 +96,7 @@ export const useStyles = makeStyles((theme) => ({
   additionalImagePreview: {
     display: 'flex',
     alignItems: 'flex-end',
+    gap: 30,
     maxHeight: '150px',
     justifyContent: 'space-between'
   },
@@ -114,8 +118,11 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '24px',
     width: '80px'
   },
-
+  imageItem: {
+    flex: '1 1 30%'
+  },
   lastImagesBox: {
+    flex: '1 1 30%',
     position: 'relative',
     textAlign: 'center',
     color: 'white',

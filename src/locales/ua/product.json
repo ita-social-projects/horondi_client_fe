@@ -10,7 +10,7 @@
     "bottomMaterial": "Матеріал низу",
     "strapLengthInCm": "Довжина лямок(см) ",
     "material": "Матеріал",
-    "measurement": "Величина"
+    "measurement": "Габарити"
   },
   "weight": {
     "weightLabel": "Вага(кг)",

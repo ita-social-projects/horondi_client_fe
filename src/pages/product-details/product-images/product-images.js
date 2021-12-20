@@ -83,7 +83,7 @@ const ProductImages = ({ images }) => {
         );
       }
       return (
-        <div key={i}>
+        <div key={i} className={styles.imageItem}>
           <img
             className={styles.sideImage}
             src={image.src}

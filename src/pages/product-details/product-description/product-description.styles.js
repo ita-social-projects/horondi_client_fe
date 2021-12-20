@@ -1,13 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   details: {
-    flex: '0 1 60%',
+    flex: '0 1 50%',
     paddingTop: '50px'
   },
   description: {
-    borderBottom: '1px solid #5B5B5B',
+    borderBottom: `1px solid ${palette.productDescription.borderColor}`,
     '& div': {
+      boxShadow: 'none',
       background: 'none'
     }
   },

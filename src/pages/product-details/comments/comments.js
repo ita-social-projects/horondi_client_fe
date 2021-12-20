@@ -112,7 +112,7 @@ const Comments = ({ productId, checkCountComments }) => {
   };
 
   return (
-    <div className={styles.comment}>
+    <div className={styles.comment} id='comment'>
       <h2 className={styles.title}>{t('product.comments.title')}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>

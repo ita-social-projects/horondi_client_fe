@@ -61,6 +61,9 @@ export const paletteGenerator = (colorSchema) => ({
   contactForm: {
     background: theme[colorSchema].contactForm.background
   },
+  productDescription: {
+    borderColor: theme[colorSchema].productDescription.borderColor
+  },
   orderHistoryHeading: {
     background: theme[colorSchema].orderHistoryHeading.background
   },

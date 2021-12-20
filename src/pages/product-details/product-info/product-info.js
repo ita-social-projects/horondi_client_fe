@@ -3,14 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import parse from 'html-react-parser';
 import { useStyles } from './product-info.styles';
-import { getCurrencySign } from '../../../utils/currency';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
 
 import { SCROLL_BAR_LINKS } from '../constants';
+import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
 
 const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) => {
   const styles = useStyles();
@@ -23,7 +22,7 @@ const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) =>
     currency: Currency.currency
   }));
 
-  const currencySign = getCurrencySign(currency);
+  const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
 
   const checkDisabledProductResult = checkDisabledProduct ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
@@ -61,9 +60,8 @@ const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) =>
       {Object.keys(currentPrice).length ? (
         <div className={styles.priceContainer}>
           <span data-cy='price' className={styles.price}>
-            <FontAwesomeIcon icon={currencySign} />
+            {currencySign}
             {Math.round(currentPrice[currency]?.value).toFixed(2)}
-            {'\u00A0'}
           </span>
         </div>
       ) : null}

@@ -13,10 +13,6 @@ export const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center'
     },
-    '@media (max-width: 1280px)': {
-      flexDirection: 'column',
-      alignItems: 'center'
-    },
     '@media (max-width: 1150px)': {
       flexDirection: 'row'
     }
@@ -50,10 +46,17 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '4px'
   },
   price: {
-    fontWeight: 600,
+    display: 'flex',
+    alignItems: 'center',
+    fontWeight: 700,
     fontSize: '24px',
     lineHeight: '33px',
     color: theme.palette.textColor,
+    '& svg': {
+      color: theme.palette.textColor,
+      fontSize: '24px',
+      lineHeight: '33px'
+    },
     '@media (max-width: 600px)': {
       fontSize: '1rem',
       marginLeft: 3

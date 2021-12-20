@@ -8,6 +8,7 @@ export const getProductById = gql`
         _id
         category {
           _id
+          translationsKey
           name {
             lang
             value

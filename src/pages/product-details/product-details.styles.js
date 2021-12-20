@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   container: {
     fontFamily: 'Open Sans',
     width: '80%',
@@ -11,17 +11,20 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 600px)': {
       width: '100%',
       margin: '0'
+    },
+    boxShadow: 'none'
+  },
+  productContainer: {
+    padding: '2rem',
+    '@media (max-width: 400px)': {
+      padding: '0.5rem'
     }
   },
   product: {
     display: 'flex',
     flexWrap: 'wrap',
-    padding: '2rem',
     '@media (max-width: 1150px)': {
       display: 'block'
-    },
-    '@media (max-width: 400px)': {
-      padding: '0.5rem'
     }
   },
   test: {
@@ -29,7 +32,7 @@ export const useStyles = makeStyles(() => ({
     alignItems: 'center'
   },
   productDetails: {
-    flex: '1 1 40%',
+    flex: '1 1 50%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -52,13 +55,15 @@ export const useStyles = makeStyles(() => ({
     }
   },
   backBtn: {
-    display: 'flex',
     alignItems: 'center',
-    padding: '20px 0 0 20px',
     width: 120,
     transition: '0.1s',
     '&:hover': {
       transform: 'scale(1.1)'
     }
+  },
+  arrowIcon: {
+    fontSize: '52px',
+    fill: theme.palette.textColor
   }
 }));

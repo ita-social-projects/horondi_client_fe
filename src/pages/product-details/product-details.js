@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { useTheme } from '@material-ui/styles';
 
 import { useTranslation } from 'react-i18next';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
-import { MATERIAL_UI_COLOR } from '../../configs';
+
 import { TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
@@ -29,6 +27,8 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { setToastMessage, setToastSettings } from '../../redux/toast/toast.actions';
 import useAddProductToWishlistHandler from '../../hooks/use-add-product-to-wishlist-handler';
 import ProductDescription from './product-description';
+import ProductPath from './product-path/product-path';
+import { ArrowIcon } from '../../images/profile-icons';
 
 const { pathToCategory } = routes;
 
@@ -38,7 +38,6 @@ const ProductDetails = ({ match }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
-  const { palette } = useTheme();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
   const { loading, error, data } = useQuery(getProductById, {
     variables: { id }
@@ -55,16 +54,13 @@ const ProductDetails = ({ match }) => {
     bottomMaterial,
     innerMaterial,
     pattern,
-    available
+    available,
+    translationsKey
   } = product;
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
   const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
-  const colorForBackspaceIcon = () => {
-    if (palette.type === 'light') return MATERIAL_UI_COLOR.PRIMARY;
-    return MATERIAL_UI_COLOR.ACTION;
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -164,50 +160,52 @@ const ProductDetails = ({ match }) => {
 
   return (
     <Card className={styles.container}>
-      <Link to={pathToCategory} className={styles.backBtn}>
-        <KeyboardBackspaceIcon color={colorForBackspaceIcon()} />
-      </Link>
-      <div className={styles.product}>
-        {product.images ? <ProductImages images={product.images} /> : null}
-        <div className={styles.productDetails}>
-          {!loading && (
-            <ProductInfo
-              countComments={countComments}
+      <div className={styles.productContainer}>
+        <ProductPath category={category} translationsKey={translationsKey} />
+        <Link to={pathToCategory} className={styles.backBtn}>
+          <ArrowIcon className={styles.arrowIcon} />
+        </Link>
+        <div className={styles.product}>
+          {product.images ? <ProductImages images={product.images} /> : null}
+          <div className={styles.productDetails}>
+            {!loading && (
+              <ProductInfo
+                countComments={countComments}
+                checkDisabledProduct={checkDisabledProduct()}
+                price={currentSize?.size ? currentSize.size.price : {}}
+                product={product}
+              />
+            )}
+            <ProductSizes
+              handleSizeChange={handleSizeChange}
               checkDisabledProduct={checkDisabledProduct()}
-              price={currentSize?.size ? currentSize.size.price : {}}
-              product={product}
+              sizes={sizes}
+              sizeIsNotSelectedError={sizeIsNotSelectedError}
             />
-          )}
-          <ProductSizes
-            handleSizeChange={handleSizeChange}
-            checkDisabledProduct={checkDisabledProduct()}
-            sizes={sizes}
-            sizeIsNotSelectedError={sizeIsNotSelectedError}
-          />
-          <div className={styles.test}>
-            <ProductSubmit
-              disabled={!checkDisabledProduct()}
-              product={product}
-              setSizeIsNotSelectedError={setSizeIsNotSelectedError}
-            />
-            <Tooltip title={wishlistTip} placement='bottom'>
-              {isInWishlist ? (
-                <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
-              ) : (
-                <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
-              )}
-            </Tooltip>
+            <div className={styles.test}>
+              <ProductSubmit
+                disabled={!checkDisabledProduct()}
+                product={product}
+                setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+              />
+              <Tooltip title={wishlistTip} placement='bottom'>
+                {isInWishlist ? (
+                  <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
+                ) : (
+                  <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
+                )}
+              </Tooltip>
+            </div>
           </div>
+          {product.description ? (
+            <ProductDescription
+              product={product}
+              currentSizeIndex={currentSizeIndex}
+              checkDisabledProduct={checkDisabledProduct()}
+            />
+          ) : null}
         </div>
-        {product.description ? (
-          <ProductDescription
-            product={product}
-            currentSizeIndex={currentSizeIndex}
-            checkDisabledProduct={checkDisabledProduct()}
-          />
-        ) : null}
       </div>
-
       {product._id ? <SimilarProducts product={product} /> : null}
       {product._id ? (
         <Comments productId={product._id} checkCountComments={checkCountComments} />

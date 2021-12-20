@@ -52,9 +52,10 @@ const SearchBar = ({
       <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}
-        onChange={handleSearch}
         onBlur={handleOnBlur}
         onFocus={handleSearch}
+        inputProps={{ maxLength: 20 }}
+        onChange={handleSearch}
       />
     </div>
   );

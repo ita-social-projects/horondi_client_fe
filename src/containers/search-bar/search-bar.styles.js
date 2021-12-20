@@ -4,7 +4,9 @@ const baseStyles = {
   position: 'relative',
   marginRight: '37px',
   borderRadius: '6px',
-
+  '$ .MuiFormHelperText-root': {
+    marginLeft: '15px'
+  },
   '& .MuiInputBase-root': {
     width: '350px',
     '@media (max-width: 1000px)': {

@@ -18,6 +18,7 @@ export const useStyles = makeStyles(() => ({
     left: '50%',
     top: '50%',
     color: 'black',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
+    fontSize: 15
   }
 }));

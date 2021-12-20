@@ -13,7 +13,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '& a:hover': {
       fontWeight: 'bold',
-      transition: '0.5s'
+      transition: '0.3s'
     }
   }
 }));

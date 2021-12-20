@@ -41,14 +41,14 @@ const ProductSizes = ({
   };
 
   return (
-    <div className={styles.sizeButtons}>
+    <div>
       {sizeButtons ? (
         <div className={styles.container}>
           <div className={styles.label}>
             <span>{t('common.size')}: </span>
             <span>{checkSizeName()}</span>
           </div>
-          <div>
+          <div className={styles.sizeButtons}>
             <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
           </div>
         </div>

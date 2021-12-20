@@ -86,6 +86,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   text: {
+    color: theme.palette.textColor,
     margin: '16px 0',
     letterSpacing: '0.0125em',
     '& p': {

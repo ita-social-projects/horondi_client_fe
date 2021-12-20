@@ -98,12 +98,12 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
   return (
     <div className={styles.submit}>
       <Button disabled={disabled} className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('product.pdpButtons.buyButton')}
+        {t('product.pdpButtons.buyButton').toLocaleUpperCase()}
       </Button>
       <Tooltip title={cartTootipTitle()} placement='bottom'>
         <div>
           <Button disabled={disabled} className={styles.toCart} onClick={cartButtonFunc}>
-            {cartButtonLabel}
+            {cartButtonLabel.toLocaleUpperCase()}
           </Button>
         </div>
       </Tooltip>

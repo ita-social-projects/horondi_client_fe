@@ -16,6 +16,7 @@ const imgSides = {
 
 export const useStyles = makeStyles((theme) => ({
   imageBody: {
+    display: 'flex',
     flex: '1 1 50%'
   },
   images: {
@@ -109,7 +110,7 @@ export const useStyles = makeStyles((theme) => ({
 
   lastImageText: {
     position: 'absolute',
-    top: 50,
+    top: 30,
     left: 30,
     zIndex: 3,
     textAlign: 'center',

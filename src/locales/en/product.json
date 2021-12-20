@@ -1,6 +1,9 @@
 {
   "imgAltInfo": "Product image",
-  "allPhotos": "View All Photos",
+  "allPhotos": {
+    "viewAll": "View All",
+    "photo": "Photos"
+  },
   "pattern": "Pattern",
   "notAvailable": "Not available",
   "productDescription": {

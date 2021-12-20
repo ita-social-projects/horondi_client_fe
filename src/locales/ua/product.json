@@ -1,6 +1,9 @@
 {
   "imgAltInfo": "Фото продукту",
-  "allPhotos": "Переглянути всі фото",
+  "allPhotos": {
+    "viewAll": "Переглянути всі",
+    "photo": "Фото"
+  },
   "pattern": "Візерунок",
   "notAvailable": "Не доступний",
   "productDescription": {
@@ -19,7 +22,7 @@
   "priceFrom": "від ",
   "sizeNotAvailable": "Товар недоступний",
   "pdpButtons": {
-    "cartButton": "В кошик",
+    "cartButton": "Додати до кошика",
     "buyButton": "Купити зараз",
     "submitButton": "Підтвердити",
     "cancelButton": "Відхилити",

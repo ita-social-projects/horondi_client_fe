@@ -14,12 +14,14 @@ export const useStyles = makeStyles((theme) => {
   };
 
   const button = {
+    fontWeight: 600,
+    fontSize: '14px',
+    lineHeight: '20px',
     marginRight: '1rem',
-    padding: '0.4rem 0.9rem',
+    padding: '14px 25px',
     minWidth: '9rem',
     textTransform: 'none',
     textAlign: 'center',
-    fontSize: '1rem',
     '@media (max-width: 600px)': {
       padding: '0.2rem 0.6rem',
       fontSize: '0.9rem'

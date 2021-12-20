@@ -3,11 +3,21 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => {
   const sizeButton = {
     width: '36px',
-    height: '36px'
+    height: '36px',
+    fontWeight: 600,
+    fontSize: 14,
+    lineHeight: 19
   };
 
   return {
+    sizeButtons: {
+      '& [data-cy="sizes"]': {
+        border: `1px solid ${theme.palette.black}`,
+        borderRadius: '4px'
+      }
+    },
     label: {
+      marginBottom: 8,
       display: 'block',
       fontWeight: '700',
       alignSelf: 'center',
@@ -34,8 +44,8 @@ export const useStyles = makeStyles((theme) => {
     },
     selectedSize: {
       ...sizeButton,
-      backgroundColor: theme.palette.card.selectedButton.backgroundColor,
-      color: theme.palette.card.selectedButton.color,
+      backgroundColor: theme.palette.black,
+      color: theme.palette.white,
       '&:hover': {
         backgroundColor: theme.palette.card.selectedButton.backgroundColor
       }

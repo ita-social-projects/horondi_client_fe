@@ -40,7 +40,11 @@ export const useStyles = makeStyles(() => ({
     position: 'absolute',
     top: '25%',
     left: '25%',
-    zIndex: 10
+    zIndex: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   constructorTitle: {
     fontSize: '34px',

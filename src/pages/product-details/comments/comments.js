@@ -26,6 +26,7 @@ import { SnackBarContext } from '../../../context/snackbar-context';
 const Comments = ({ productId, checkCountComments }) => {
   const styles = useStyles();
   const [comments, setComments] = useState({ items: [], count: 0 });
+  const [commentsCount, setCommentsCount] = useState(comments.items.length);
   const [currentLimit, setCurrentLimit] = useState(10);
   const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
@@ -83,6 +84,10 @@ const Comments = ({ productId, checkCountComments }) => {
     setRate(handleUserLogin(userData));
   }, [userData]);
 
+  useEffect(() => {
+    setCommentsCount(comments.items.length);
+  }, [comments.items.length]);
+
   const rateTip = useMemo(() => {
     if (!userId) {
       return t('product.comments.unregisteredTip');
@@ -116,6 +121,7 @@ const Comments = ({ productId, checkCountComments }) => {
       <h2 className={styles.title}>{t('product.comments.title')}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
+          <span className={styles.textRate}>{t('product.comments.rating')}</span>
           <Rating
             data-cy='rate'
             disabled={!userData}
@@ -158,6 +164,13 @@ const Comments = ({ productId, checkCountComments }) => {
           >
             <div className={styles.commentBtnContainer}>
               <Button
+                className={`${styles.commentBtn} ${styles.cancelBtn}`}
+                disabled={!userData || isLoading}
+                onClick={() => resetForm()}
+              >
+                {t('product.comments.cancel')}
+              </Button>
+              <Button
                 type='submit'
                 className={styles.commentBtn}
                 disabled={!userData || isLoading}
@@ -175,6 +188,9 @@ const Comments = ({ productId, checkCountComments }) => {
           )}
         </div>
       </form>
+      <h2 className={styles.title}>
+        {t('product.comments.commentsTitle')} ({commentsCount})
+      </h2>
       {commentsList}
 
       {currentLimit < comments.count && (

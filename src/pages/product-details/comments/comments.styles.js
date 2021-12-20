@@ -17,8 +17,9 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   comment: {
+    fontFamily: 'Open Sans',
     backgroundColor: theme.palette.backgroundColor,
-    padding: '0 3rem',
+    padding: '90px 28px 0',
     '& hr': {
       border: 'none',
       color: '#C2C2C2',
@@ -28,6 +29,16 @@ export const useStyles = makeStyles((theme) => ({
       padding: '0 1rem',
       marginTop: '0'
     }
+  },
+  rate: {
+    display: 'flex',
+    marginTop: '24px'
+  },
+  textRate: {
+    color: theme.palette.textColor,
+    fontSize: '16px',
+    fontFamily: 'Open Sans',
+    fontWeight: 'bold'
   },
   form: {
     marginTop: '15px',
@@ -89,7 +100,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& input': {
       background: '#fff',
-      fontFamily: 'Montserrat',
       fontWeight: '500'
     }
   },
@@ -120,8 +130,9 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   commentBtnContainer: {
-    display: 'inline-block',
-    marginTop: 25,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: 16,
     marginBottom: 40,
     '& .MuiButton-root.Mui-disabled': {
       color: theme.palette.button.disabled.color,
@@ -145,11 +156,18 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: '1.5rem'
     },
     title: {
-      textAlign: 'left important!',
+      textAlign: 'left',
+      fontSize: '24px',
       submit: {
         display: 'flex',
         justifyContent: 'flex-end'
       }
     }
+  },
+  cancelBtn: {
+    marginRight: '10px',
+    color: theme.palette.textColor,
+    backgroundColor: theme.palette.backgroundColor,
+    border: theme.palette.comments.cancelButtonBorder.border
   }
 }));

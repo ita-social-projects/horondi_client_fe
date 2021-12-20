@@ -104,10 +104,10 @@ export const paletteGenerator = (colorSchema) => ({
         color: theme[colorSchema].comments.modal.closeModalIcon.color
       },
       titleBorder: {
-        border: theme[colorSchema].comments.modal.titleBorder.color
+        border: theme[colorSchema].comments.modal.titleBorder.border
       },
       buttonBorder: {
-        border: theme[colorSchema].comments.modal.buttonBorder.color
+        border: theme[colorSchema].comments.modal.buttonBorder.border
       }
     }
   },

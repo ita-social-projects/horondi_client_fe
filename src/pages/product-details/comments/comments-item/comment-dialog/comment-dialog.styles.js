@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '14px',
-    border: '1px solid black',
+    border: theme.palette.comments.modal.buttonBorder.border,
     backgroundColor: theme.palette.button.normal.backgroundColor,
     color: theme.palette.button.normal.color,
     '@media (max-width: 500px)': {
@@ -41,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     padding: '12px 16px 10px',
     color: theme.palette.black,
-    borderBottom: '2px solid #E2E8F0',
+    borderBottom: theme.palette.comments.modal.titleBorder.border,
     '@media (max-width: 500px)': {
       padding: '5px'
     },
@@ -52,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   icon: {
-    color: '#808080',
+    color: theme.palette.comments.modal.closeModalIcon.color,
     cursor: 'pointer'
   },
   titleContent: {

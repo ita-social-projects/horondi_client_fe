@@ -219,6 +219,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: '25px',
     width: '100%'
   },
   backBtn: {

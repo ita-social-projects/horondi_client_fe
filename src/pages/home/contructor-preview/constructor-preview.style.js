@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
-  constructorPreview: ({ isMouseIn }) => ({
+export const useStyles = makeStyles((theme) => ({
+  constructorPreview: () => ({
     width: '100%',
     position: 'relative',
     margin: '50px 0',
     boxSizing: 'border-box',
     overflowY: 'hidden',
     '&:after': {
-      opacity: isMouseIn ? 1 : 0,
+      opacity: 0.5,
       transition: 'opacity .5s ease',
       content: `''`,
       position: 'absolute',
@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() => ({
       left: 0,
       bottom: 0,
       zIndex: 1,
-      background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+      backgroundColor: theme.palette.black
     },
     '& video': {
       '@media (max-width: 768px)': {
@@ -33,6 +33,10 @@ export const useStyles = makeStyles(() => ({
     bottom: 30,
     '& svg': {
       color: 'white'
+    },
+    '@media (max-width: 420px)': {
+      right: 10,
+      bottom: 10
     }
   },
   constructorContent: {
@@ -40,20 +44,42 @@ export const useStyles = makeStyles(() => ({
     position: 'absolute',
     top: '25%',
     left: '25%',
-    zIndex: 10
+    zIndex: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    '@media (max-width: 420px)': {
+      top: '5%',
+      left: '5%',
+      width: '90vw'
+    },
+    '@media (max-width: 321px)': {
+      top: '0%'
+    }
   },
   constructorTitle: {
     fontSize: '34px',
     lineHeight: '46px',
     textAlign: 'center',
     letterSpacing: '0.0025em',
-    color: '#FEFEFE'
+    color: '#FEFEFE',
+    '@media (max-width: 420px)': {
+      fontSize: '25px',
+      lineHeight: '30px'
+    }
   },
   constructorDescription: {
     fontSize: '17px',
     lineHeight: '24px',
     letterSpacing: '0.005em',
-    color: '#FEFEFE'
+    color: '#FEFEFE',
+
+    '@media (max-width: 420px)': {
+      fontSize: '15px',
+      lineHeight: '17px',
+      textAlign: 'center'
+    }
   },
   buttonStyles: {
     marginTop: '30px',
@@ -68,6 +94,12 @@ export const useStyles = makeStyles(() => ({
     background: 'none',
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '@media (max-width: 420px)': {
+      marginTop: '10px'
+    },
+    '@media (max-width: 321px)': {
+      marginTop: '0px'
+    }
   }
 }));

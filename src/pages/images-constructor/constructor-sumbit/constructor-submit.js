@@ -32,9 +32,18 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
     product: {
       ...constructorValues,
       isFromConstructor: true,
-      pattern: constructorValues.patterns,
-      mainMaterial: { color: { _id: constructorValues.patterns._id } },
-      category: { _id: constructorValues.patterns._id }
+      pattern:
+        constructorValues.patterns !== undefined
+          ? constructorValues.patterns
+          : constructorValues._id,
+      mainMaterial: {
+        color: {
+          _id: constructorValues.patterns ? constructorValues.patterns._id : constructorValues._id
+        }
+      },
+      category: {
+        _id: constructorValues.patterns ? constructorValues.patterns._id : constructorValues._id
+      }
     },
     quantity: 1
   };

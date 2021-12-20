@@ -22,7 +22,7 @@ import routes from '../../../../configs/routes';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
 import { getConstructorById } from '../../operations/getConstructorById.queries';
-// import Loader from '../../../../components/loader';
+import Loader from '../../../../components/loader';
 
 const { pathToProducts } = routes;
 
@@ -87,14 +87,14 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
-  // if (loadingProduct || loadingConstructor)
-  //   return (
-  //     <tr>
-  //       <td>
-  //         <Loader width={50} height={50} heightWrap={50} />
-  //       </td>
-  //     </tr>
-  //   );
+  if (loadingProduct || loadingConstructor)
+    return (
+      <tr>
+        <td>
+          <Loader width={50} height={50} heightWrap={50} />
+        </td>
+      </tr>
+    );
 
   const cartItem = item.constructor
     ? dataConstructor?.getConstructorById

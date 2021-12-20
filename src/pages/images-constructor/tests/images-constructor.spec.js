@@ -5,10 +5,6 @@ import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
 
-// const state = {
-//   currency: 0
-// };
-
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useSelector: () => ({ currency: 0 })

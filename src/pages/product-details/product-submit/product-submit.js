@@ -2,16 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-
 import Tooltip from '@material-ui/core/Tooltip';
-
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
-
 import { TOAST_SETTINGS } from '../constants';
-
 import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
-
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
@@ -27,10 +22,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
 
   const { t } = useTranslation();
 
-  let isItemInCart;
-  if (productToSend && productToSend.product && productToSend.options.size) {
-    isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
-  }
+  const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
 
   const { addToCart } = cartOperations;
 

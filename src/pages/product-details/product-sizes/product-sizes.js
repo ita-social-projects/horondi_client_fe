@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button';
@@ -10,13 +9,12 @@ const ProductSizes = ({
   handleSizeChange,
   sizes,
   checkDisabledProduct,
-  sizeIsNotSelectedError
+  sizeIsNotSelectedError,
+  currentSize
 }) => {
   const { t } = useTranslation();
   const styles = useStyles();
-  const { size: currentSize } = useSelector(({ Products }) => ({
-    size: Products.productToSend.options.size || {}
-  }));
+
   const sizeButtons =
     sizes &&
     !!sizes.length &&

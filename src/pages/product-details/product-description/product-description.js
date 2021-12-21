@@ -9,13 +9,12 @@ import Detail from '../detail';
 
 const ProductDescription = ({ product, currentSizeIndex, checkDisabledProduct }) => {
   const styles = useStyles();
-  const { description, mainMaterial, innerMaterial, bottomMaterial, sizes } = product;
+  const { mainMaterial, innerMaterial, bottomMaterial, sizes, translationsKey } = product;
   const currentWeight =
     sizes && currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.weightInKg : '';
   const currentVolume =
     sizes && currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.volumeInLiters : '';
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
 
   return (
     <div className={styles.details}>
@@ -32,7 +31,11 @@ const ProductDescription = ({ product, currentSizeIndex, checkDisabledProduct })
           </AccordionSummary>
           <AccordionDetails>
             <Typography component='div' className={styles.text}>
-              {parse(description[language].value.replace(/&nbsp;/g, '').replace(/;/g, '. '))}
+              {parse(
+                t(`${translationsKey}.description`)
+                  .replace(/&nbsp;/g, '')
+                  .replace(/;/g, '. ')
+              )}
             </Typography>
           </AccordionDetails>
         </Accordion>

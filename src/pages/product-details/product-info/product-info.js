@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import parse from 'html-react-parser';
@@ -11,16 +10,10 @@ import Colors from './colors';
 import { SCROLL_BAR_LINKS } from '../constants';
 import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
 
-const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) => {
+const ProductInfo = ({ product, countComments, checkDisabledProduct, currency, currentPrice }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
-  const { currentPrice, currency } = useSelector(({ Products: { productToSend }, Currency }) => ({
-    currentPrice: productToSend.price || price,
-    currentWeight: productToSend.dimensions.weightInKg || 0,
-    currentVolume: productToSend.dimensions.volumeInLiters || 0,
-    currency: Currency.currency
-  }));
 
   const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
 

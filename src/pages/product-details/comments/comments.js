@@ -7,6 +7,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
+import CommentsTitle from './comments-item/comments-title/comments-title';
 import { Loader } from '../../../components/loader/loader';
 import { commentFields, TEXT_VALUE } from '../../../configs/index';
 import { ERROR } from '../constants';
@@ -26,7 +27,6 @@ import { SnackBarContext } from '../../../context/snackbar-context';
 const Comments = ({ productId, checkCountComments }) => {
   const styles = useStyles();
   const [comments, setComments] = useState({ items: [], count: 0 });
-  const [commentsCount, setCommentsCount] = useState(comments.items.length);
   const [currentLimit, setCurrentLimit] = useState(10);
   const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
   const { t } = useTranslation();
@@ -84,16 +84,14 @@ const Comments = ({ productId, checkCountComments }) => {
     setRate(handleUserLogin(userData));
   }, [userData]);
 
-  useEffect(() => {
-    setCommentsCount(comments.items.length);
-  }, [comments.items.length]);
-
   const rateTip = useMemo(() => {
     if (!userId) {
       return t('product.comments.unregisteredTip');
     }
     return t('product.comments.successfulTip');
   }, [t, userId]);
+
+  const commentsCount = comments.items.length;
 
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem
@@ -188,11 +186,8 @@ const Comments = ({ productId, checkCountComments }) => {
           )}
         </div>
       </form>
-      <h2 className={styles.title}>
-        {t('product.comments.commentsTitle')} ({commentsCount})
-      </h2>
+      <CommentsTitle className={styles.title} count={commentsCount} />
       {commentsList}
-
       {currentLimit < comments.count && (
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}

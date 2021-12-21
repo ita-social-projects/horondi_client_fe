@@ -53,12 +53,7 @@ jest.mock('@apollo/client', () => ({
 describe('Filled cart component tests', () => {
   it('should render CartItem ', () => {
     testSelection(false);
-    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
+    component = render(<CartItem {...props} cartOperations={mockCartOperations} />);
     expect(component).toBeDefined();
-  });
-
-  it('should handleSizeChange start', () => {
-    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
-    expect(component.find('input[name="size"]')).toBeTruthy();
   });
 });

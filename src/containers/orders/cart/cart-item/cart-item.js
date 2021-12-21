@@ -65,6 +65,25 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     skip: !item.constructor
   });
 
+  const cartItem = item.constructor
+    ? dataConstructor?.getConstructorById
+    : dataProduct?.getProductById;
+
+  const itemFoto = item.constructor
+    ? cartItem?.model.images.thumbnail
+    : cartItem.images.primary.thumbnail;
+  const itemName = item.constructor ? cartItem?.model.translationsKey : cartItem.translationsKey;
+
+  const itemMaterial = cartItem?.bottomMaterial ? (
+    <div className={styles.itemDescription}>
+      {t('cart.bottomMaterial')}: {t(`${cartItem.bottomMaterial.material.translationsKey}.name`)}
+    </div>
+  ) : (
+    <div className={styles.itemDescription}>
+      {t('cart.bottomMaterial')}: {t(`${item.sizeAndPrice.bottomMaterial?.translationsKey}.name`)}
+    </div>
+  );
+
   const { isLoading, isError } = useIsLoadingOrError(
     [loadingConstructor, loadingProduct],
     [errorConstructor, errorProduct]
@@ -96,9 +115,21 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
       </tr>
     );
 
-  const cartItem = item.constructor
-    ? dataConstructor?.getConstructorById
-    : dataProduct?.getProductById;
+  const mapCallback = (obj) => {
+    let size = obj;
+    if (obj.size) size = obj.size;
+    return (
+      size.available && (
+        <MenuItem key={size._id} value={size._id}>
+          {size.name}
+        </MenuItem>
+      )
+    );
+  };
+
+  const itemSize = !item.constructor
+    ? cartItem.sizes && cartItem.sizes.map(mapCallback)
+    : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
   function handleSizeChange(event) {
     !item.constructor
@@ -118,51 +149,17 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
         });
   }
 
-  const mapCallback = (obj) => {
-    let size = obj;
-    if (obj.size) size = obj.size;
-    return (
-      size.available && (
-        <MenuItem key={size._id} value={size._id}>
-          {size.name}
-        </MenuItem>
-      )
-    );
-  };
-
   return cartItem ? (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell classes={{ root: styles.product }} data-cy='cart-item-img'>
         <Link to={`${pathToProducts}/${cartItem._id}`}>
-          <img
-            className={styles.itemImg}
-            src={`${IMG_URL}${
-              item.constructor ? cartItem.model.images.thumbnail : cartItem.images.primary.thumbnail
-            } `}
-            alt='product-img'
-          />
+          <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
         </Link>
         <div>
           <Link to={`${pathToProducts}/${cartItem._id}`}>
-            <span className={styles.itemName}>
-              {t(
-                `${
-                  item.constructor ? cartItem.model.translationsKey : cartItem.translationsKey
-                }.name`
-              )}
-            </span>
+            <span className={styles.itemName}>{t(`${itemName}.name`)}</span>
           </Link>
-          {cartItem.bottomMaterial ? (
-            <div className={styles.itemDescription}>
-              {t('cart.bottomMaterial')}:{' '}
-              {t(`${cartItem.bottomMaterial.material.translationsKey}.name`)}
-            </div>
-          ) : (
-            <div className={styles.itemDescription}>
-              {t('cart.bottomMaterial')}:{' '}
-              {t(`${item.sizeAndPrice.bottomMaterial.translationsKey}.name`)}
-            </div>
-          )}
+          {itemMaterial}
         </div>
       </TableCell>
       <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
@@ -173,10 +170,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
           value={currentSize}
           onChange={handleSizeChange}
           className={styles.selectSizeStyle}
+          data-testid='select'
         >
-          {!item.constructor
-            ? cartItem.sizes && cartItem.sizes.map(mapCallback)
-            : cartItem.model.sizes && cartItem.model.sizes.map(mapCallback)}
+          {itemSize}
         </Select>
       </TableCell>
       <TableCell classes={{ root: styles.price }} data-cy='cart-item-description'>

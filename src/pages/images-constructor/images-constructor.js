@@ -108,16 +108,16 @@ const ImagesConstructor = () => {
       });
     }
 
+    const getPrice = (currency, key) =>
+      !currency
+        ? constructorValues[key].additionalPrice[0].value
+        : constructorValues[key].additionalPrice[1].value;
+
     setAllPrice(
       Object.keys(constructorValues).reduce((acc, key) => {
         if (key === 'patterns' && constructorValues.patterns !== undefined)
-          acc.pattern = !currency
-            ? constructorValues[key].additionalPrice[0].value
-            : constructorValues[key].additionalPrice[1].value;
-        if (key === 'bottoms')
-          acc.bottom = !currency
-            ? constructorValues[key].additionalPrice[0].value
-            : constructorValues[key].additionalPrice[1].value;
+          acc.pattern = getPrice(currency, key);
+        if (key === 'bottoms') acc.bottom = getPrice(currency, key);
         return acc;
       }, {})
     );

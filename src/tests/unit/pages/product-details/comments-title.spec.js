@@ -9,10 +9,7 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('CommentsTitle component', () => {
-  const props = {
-    count: 10
-  };
-  render(<CommentsTitle {...props} />);
+  render(<CommentsTitle />);
 
   it('Should render CommentsTitle component', () => {
     expect(screen.queryByText(/product.comments.commentsTitle/g)).toBeInTheDocument();

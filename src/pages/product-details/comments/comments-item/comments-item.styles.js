@@ -5,18 +5,21 @@ export const useStyles = makeStyles((theme) => {
 
   return {
     loadMore: {
+      color,
       width: '95%',
       margin: '0 0 0 auto',
+      padding: '10px 0',
       display: 'flex',
       justifyContent: 'flex-end',
       alignItems: 'center',
-      borderTop: '2px solid #c2c2c2',
-      paddingTop: '10px'
+      borderTop: '2px solid #c2c2c2'
     },
     loadMoreText: {
+      fontWeight: 600,
+      marginBottom: '5px',
       '&:hover': {
         cursor: 'pointer',
-        borderBottom: '2px solid #000000',
+        borderBottom: theme.palette.comments.border,
         height: '20px'
       }
     },
@@ -35,7 +38,6 @@ export const useStyles = makeStyles((theme) => {
       borderTop: '2px solid #C2C2C2'
     },
     comments: {
-      fontWeight: '700',
       fontSize: '14px'
     },
     date: {
@@ -149,7 +151,8 @@ export const useStyles = makeStyles((theme) => {
     },
     replyIcon: {
       marginRight: '15px',
-      alignSelf: 'baseline'
+      alignSelf: 'baseline',
+      opacity: 0.5
     },
     reply: {
       display: 'flex',
@@ -160,7 +163,14 @@ export const useStyles = makeStyles((theme) => {
     icon: {
       height: '20px',
       width: '20px',
-      color: `rgb(${color} / 87%)`
+      color,
+      opacity: 0.5
+    },
+    iconF: {
+      height: '16px',
+      width: '16px',
+      color,
+      opacity: 0.75
     },
     rateIcon: {
       '& :first-child': {

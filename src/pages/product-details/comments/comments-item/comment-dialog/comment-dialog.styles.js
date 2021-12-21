@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   button: {
-    padding: '8px 15px',
+    padding: '12px 16px',
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '14px',
@@ -46,8 +46,8 @@ export const useStyles = makeStyles((theme) => ({
       padding: '5px'
     },
     '& h2': {
-      fontWeight: 600,
-      lineHeight: '1.4rem',
+      fontWeight: 700,
+      lineHeight: '28px',
       fontSize: '20px'
     }
   },
@@ -63,7 +63,8 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.black,
     fontWeight: 400,
     fontSize: '16px',
-    padding: '16px 0px 40px',
+    lineHeight: '24px',
+    padding: '16px 0px 20px',
     '@media (max-width:500px)': {
       padding: '0',
       fontSize: '14px'

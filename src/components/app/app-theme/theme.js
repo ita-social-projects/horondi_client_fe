@@ -73,6 +73,7 @@ export default {
     },
     comments: {
       border: '1px solid #E6E6E6',
+      formBorder: '1px solid #2020233',
       cancelButtonBorder: {
         border: '1px solid #020202'
       },
@@ -157,6 +158,9 @@ export default {
     },
     comments: {
       border: '1px solid #E6E6E6',
+      formBorder: {
+        borderColor: '1px solid #5B5B5B'
+      },
       cancelButtonBorder: {
         border: '1px solid #C7C7C7'
       },

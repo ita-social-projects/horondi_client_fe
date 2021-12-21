@@ -93,6 +93,9 @@ export const paletteGenerator = (colorSchema) => ({
   },
   comments: {
     border: theme[colorSchema].comments.border,
+    formBorder: {
+      borderColor: theme[colorSchema].comments.formBorder.borderColor
+    },
     cancelButtonBorder: {
       border: theme[colorSchema].comments.cancelButtonBorder.border
     },

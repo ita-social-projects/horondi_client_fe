@@ -5,8 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '@media (max-width: 500px)': {
-      justifyContent: 'flex-start',
-      paddingTop: '10px'
+      justifyContent: 'flex-start'
     }
   },
   form: {
@@ -28,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
-          borderColor: theme.palette.textColor
+          borderColor: theme.palette.comments.formBorder.borderColor
         },
         '&.Mui-focused fieldset': {
           borderColor: theme.palette.textColor
@@ -65,15 +64,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   replyIcon: {
     margin: '0 5px',
-    transform: 'scaleX(-1)'
+    transform: 'scaleX(-1)',
+    opacity: 0.5
   },
   input: {
     marginTop: '10px',
     width: '100%'
   },
   replyBtn: {
-    padding: '8px 16px',
-    margin: '12px 0 24px 10px',
+    padding: '12px 16px',
+    margin: '16px 0 24px 16px',
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '14px',

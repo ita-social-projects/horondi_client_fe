@@ -6,20 +6,22 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '14px',
-    color: theme.palette.textColor,
+    fill: theme.palette.textColor,
     padding: '15px 0'
   },
   loadMoreText: {
+    fontWeight: 600,
+    marginBottom: '5px',
     '&:hover': {
       cursor: 'pointer',
-      borderBottom: '2px solid #000000',
+      borderBottom: theme.palette.comments.border,
       height: '20px'
     }
   },
   comment: {
     fontFamily: 'Open Sans',
     backgroundColor: theme.palette.backgroundColor,
-    padding: '90px 28px 0',
+    padding: '30px 28px 0',
     '& hr': {
       border: 'none',
       color: '#C2C2C2',
@@ -35,6 +37,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '24px'
   },
   textRate: {
+    paddingRight: '8px',
     color: theme.palette.textColor,
     fontSize: '16px',
     fontFamily: 'Open Sans',
@@ -45,7 +48,8 @@ export const useStyles = makeStyles((theme) => ({
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
-          borderColor: theme.palette.textColor
+          // borderColor: theme.palette.textColor
+          borderColor: theme.palette.comments.formBorder.borderColor
         },
         '&.Mui-focused fieldset': {
           borderColor: theme.palette.textColor
@@ -75,10 +79,10 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 950px)': {
       marginTop: '0',
       display: 'flex',
-      flexDirection: 'column',
-      '&:nth-child(1)': {
-        marginBottom: '2rem'
-      }
+      flexDirection: 'column'
+      // '&:nth-child(1)': {
+      //   marginBottom: '2rem'
+      // }
     }
   },
   input: {
@@ -88,7 +92,6 @@ export const useStyles = makeStyles((theme) => ({
     paddingRight: '1rem',
     height: '2rem',
     '@media (max-width: 950px)': {
-      marginBottom: '1.5rem',
       marginTop: '15px',
       width: '100%',
       padding: 0
@@ -142,9 +145,13 @@ export const useStyles = makeStyles((theme) => ({
   commentBtn: {
     marginTop: 0,
     marginBottom: 0,
+    padding: '12px 16px',
     textTransform: 'none',
     textAlign: 'center',
-    fontSize: '1rem',
+    //  fontFamily: Open Sans,
+    fontWeight: 600,
+    fontSize: '14px',
+    lineHeight: '20px',
     backgroundColor: theme.palette.button.normal.backgroundColor,
     color: theme.palette.button.normal.color,
     '&:hover': {
@@ -154,18 +161,21 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 950px)': {
       marginTop: '0',
       marginBottom: '1.5rem'
-    },
-    title: {
-      textAlign: 'left',
-      fontSize: '24px',
-      submit: {
-        display: 'flex',
-        justifyContent: 'flex-end'
-      }
+    }
+  },
+  title: {
+    textAlign: 'left',
+    fontSize: '24px',
+    lineHeight: '32px',
+
+    submit: {
+      display: 'flex',
+      justifyContent: 'flex-end'
     }
   },
   cancelBtn: {
-    marginRight: '10px',
+    marginRight: '16px',
+    fontWeight: 600,
     color: theme.palette.textColor,
     backgroundColor: theme.palette.backgroundColor,
     border: theme.palette.comments.cancelButtonBorder.border

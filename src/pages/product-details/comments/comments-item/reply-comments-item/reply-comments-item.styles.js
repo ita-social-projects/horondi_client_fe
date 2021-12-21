@@ -44,7 +44,8 @@ export const useStyles = makeStyles((theme) => {
     },
     textContent: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      paddingTop: '12px'
     },
     deleteIcon: {
       color: theme.palette.comments.deleteIcon.color,
@@ -69,7 +70,7 @@ export const useStyles = makeStyles((theme) => {
     },
     user: {
       display: 'flex',
-      paddingBottom: '12px',
+      // paddingBottom: '12px',
       alignItems: 'center'
     },
     avatar: {
@@ -124,10 +125,12 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     icon: {
-      width: '28px',
-      height: '28px',
-      paddingBottom: '10px',
-      color: `rgb(${color} / 87%)`
+      // display: 'none',
+      width: '16px',
+      height: '16px',
+      // paddingBottom: '10px',
+      color,
+      opacity: 0.75
     }
   };
 });

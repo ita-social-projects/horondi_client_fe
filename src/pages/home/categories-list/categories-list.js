@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
 import { useTranslation } from 'react-i18next';
 
@@ -11,21 +10,21 @@ import { CategoriesContext } from '../../../context/categories/categories-contex
 import { useStyles } from './categories-list.style';
 
 import './categories-carousel.css';
+import { ITEMS_PER_PAGE } from '../../product-list-page/constants';
 
 const CategoriesList = () => {
   const styles = useStyles();
   const { categories } = useContext(CategoriesContext);
   const { t } = useTranslation();
-  const { quantityPerPage } = useSelector(({ Products }) => ({
-    quantityPerPage: Products.countPerPage
-  }));
+
+  const countPerPageValue = ITEMS_PER_PAGE[0].value;
 
   const categoriesList = categories.map(({ _id, name, images, translationsKey }) => (
     <CategoryItem
       key={_id}
       categoryUrl={`${getCategoryURL(name)}?${
         URL_QUERIES_NAME.categoryFilter
-      }=${_id}&page=1&${countPerPage}=${quantityPerPage}`}
+      }=${_id}&page=1&${countPerPage}=${countPerPageValue}`}
       categoryName={t(`${translationsKey}.name`)}
       categoryImageUrl={images.large}
     />

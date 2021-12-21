@@ -26,7 +26,7 @@
     "buyButton": "Buy now",
     "submitButton": "DELETE",
     "cancelButton": "CANCEL",
-    "leaveReply": "Leave reply",
+    "leaveReply": "LEAVE REPLY",
     "inCart": "View in Cart"
   },
   "tooltips": {
@@ -59,12 +59,12 @@
     "moreComments":"Comments",
     "rating": "Product rating:",
     "text": "Share your thoughts with others",
-    "submit": "LEAVE COMMENT",
+    "submit": "LEAVE A COMMENT",
     "cancel": "CANCEL",
     "unregisteredTip": "You should be logged in to leave rate",
     "registeredTip": "You should buy the product to leave rate",
     "successfulTip": "Set rate",
-    "loadMore": "Load more...",
+    "loadMore": "LOAD MORE",
     "hideBtn": "Hide comments"
   },
   "snackBar": {

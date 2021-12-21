@@ -72,6 +72,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
   const itemFoto = item.constructor
     ? cartItem?.model.images.thumbnail
     : cartItem.images.primary.thumbnail;
+
   const itemName = item.constructor ? cartItem?.model.translationsKey : cartItem.translationsKey;
 
   const itemMaterial = cartItem?.bottomMaterial ? (
@@ -83,6 +84,22 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
       {t('cart.bottomMaterial')}: {t(`${item.sizeAndPrice.bottomMaterial?.translationsKey}.name`)}
     </div>
   );
+
+  const mapCallback = (obj) => {
+    let size = obj;
+    if (obj.size) size = obj.size;
+    return (
+      size.available && (
+        <MenuItem key={size._id} value={size._id}>
+          {size.name}
+        </MenuItem>
+      )
+    );
+  };
+
+  const itemSize = !item.constructor
+    ? cartItem.sizes && cartItem.sizes.map(mapCallback)
+    : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
   const { isLoading, isError } = useIsLoadingOrError(
     [loadingConstructor, loadingProduct],
@@ -114,22 +131,6 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
         </td>
       </tr>
     );
-
-  const mapCallback = (obj) => {
-    let size = obj;
-    if (obj.size) size = obj.size;
-    return (
-      size.available && (
-        <MenuItem key={size._id} value={size._id}>
-          {size.name}
-        </MenuItem>
-      )
-    );
-  };
-
-  const itemSize = !item.constructor
-    ? cartItem.sizes && cartItem.sizes.map(mapCallback)
-    : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
   function handleSizeChange(event) {
     !item.constructor

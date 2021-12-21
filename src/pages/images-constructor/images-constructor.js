@@ -108,8 +108,8 @@ const ImagesConstructor = () => {
       });
     }
 
-    const getPrice = (currency, key) =>
-      !currency
+    const getPrice = (currencyInFanc, key) =>
+      !currencyInFanc
         ? constructorValues[key].additionalPrice[0].value
         : constructorValues[key].additionalPrice[1].value;
 

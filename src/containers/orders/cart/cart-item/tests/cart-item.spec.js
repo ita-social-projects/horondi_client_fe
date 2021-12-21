@@ -1,7 +1,8 @@
+import { shallow } from 'enzyme';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../cart-item';
-import { mockQueryData, props } from './cart-item.variables';
+import { mockQueryData, mockQueryDataConstructor, props } from './cart-item.variables';
 
 jest.mock('react-redux');
 jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
@@ -47,13 +48,20 @@ const mockCartOperations = { changeQuantity: mockChangeQuantity };
 
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
-  useQuery: () => ({ loading: false, error: null, data: { getProductById: mockQueryData } })
+  useQuery: () => ({
+    loading: false,
+    error: null,
+    data: { getProductById: mockQueryData, getConstructorById: mockQueryDataConstructor }
+  })
 }));
 
+beforeEach(() => {
+  testSelection(false);
+  component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
+});
+
 describe('Filled cart component tests', () => {
-  it('should render CartItem ', () => {
-    testSelection(false);
-    component = render(<CartItem {...props} cartOperations={mockCartOperations} />);
+  it('should render CartItem', () => {
     expect(component).toBeDefined();
   });
 });

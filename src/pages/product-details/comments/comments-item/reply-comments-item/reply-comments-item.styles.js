@@ -70,7 +70,6 @@ export const useStyles = makeStyles((theme) => {
     },
     user: {
       display: 'flex',
-      // paddingBottom: '12px',
       alignItems: 'center'
     },
     avatar: {
@@ -125,10 +124,8 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     icon: {
-      // display: 'none',
       width: '16px',
       height: '16px',
-      // paddingBottom: '10px',
       color,
       opacity: 0.75
     }

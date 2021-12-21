@@ -48,7 +48,6 @@ export const useStyles = makeStyles((theme) => ({
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
-          // borderColor: theme.palette.textColor
           borderColor: theme.palette.comments.formBorder.borderColor
         },
         '&.Mui-focused fieldset': {
@@ -80,9 +79,6 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: '0',
       display: 'flex',
       flexDirection: 'column'
-      // '&:nth-child(1)': {
-      //   marginBottom: '2rem'
-      // }
     }
   },
   input: {
@@ -148,7 +144,6 @@ export const useStyles = makeStyles((theme) => ({
     padding: '12px 16px',
     textTransform: 'none',
     textAlign: 'center',
-    //  fontFamily: Open Sans,
     fontWeight: 600,
     fontSize: '14px',
     lineHeight: '20px',

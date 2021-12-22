@@ -17,6 +17,7 @@ import { navItems } from '../social-links/const';
 import { getContactsForFooterListContacts } from './operations/footer-lists-contacts-query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { CategoriesContext } from '../../context/categories/categories-context';
+import { ITEMS_PER_PAGE } from '../../pages/product-list-page/constants';
 
 const { pathToContacts } = routes;
 
@@ -33,14 +34,16 @@ const FooterLists = () => {
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
+  const countPerPageValue = ITEMS_PER_PAGE[0].value;
+
   const categoriesList = categories.map(({ _id, name, translationsKey }) => (
     <div key={_id}>
       <Typography variant='subtitle2'>
         <Link
           className={styles.cardLink}
-          to={`/${getCategoryURL(name)}?${
-            URL_QUERIES_NAME.categoryFilter
-          }=${_id}&page=1&${countPerPage}=`}
+          to={`/${getCategoryURL(name)}?${URL_QUERIES_NAME.categoryFilter}=${_id}&${
+            URL_QUERIES_NAME.page
+          }=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}`}
         >
           {t(`${translationsKey}.name`)}
         </Link>

@@ -6,8 +6,9 @@ import useTranslationsLoad from '../../hooks/use-translations-load';
 
 import ThemeContext from '../../context/theme-context';
 import CategoriesContextProvider from '../../context/categories/categories-context';
-import Routes from '../../routes';
 import Chat from '../../containers/chat';
+import Routes from '../../routes';
+
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';

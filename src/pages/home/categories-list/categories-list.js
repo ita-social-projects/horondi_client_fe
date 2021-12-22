@@ -22,9 +22,9 @@ const CategoriesList = () => {
   const categoriesList = categories.map(({ _id, name, images, translationsKey }) => (
     <CategoryItem
       key={_id}
-      categoryUrl={`${getCategoryURL(name)}?${
-        URL_QUERIES_NAME.categoryFilter
-      }=${_id}&page=1&${countPerPage}=${countPerPageValue}`}
+      categoryUrl={`${getCategoryURL(name)}?${URL_QUERIES_NAME.categoryFilter}=${_id}&${
+        URL_QUERIES_NAME.page
+      }=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}`}
       categoryName={t(`${translationsKey}.name`)}
       categoryImageUrl={images.large}
     />

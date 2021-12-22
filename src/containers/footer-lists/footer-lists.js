@@ -41,9 +41,9 @@ const FooterLists = () => {
       <Typography variant='subtitle2'>
         <Link
           className={styles.cardLink}
-          to={`/${getCategoryURL(name)}?${
-            URL_QUERIES_NAME.categoryFilter
-          }=${_id}&page=1&${countPerPage}=${countPerPageValue}`}
+          to={`/${getCategoryURL(name)}?${URL_QUERIES_NAME.categoryFilter}=${_id}&${
+            URL_QUERIES_NAME.page
+          }=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}`}
         >
           {t(`${translationsKey}.name`)}
         </Link>

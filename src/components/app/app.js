@@ -10,8 +10,8 @@ import Chat from '../../containers/chat';
 import Routes from '../../routes';
 
 import { theme } from './app-theme/app.theme';
-import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
+import { LIGHT_THEME } from '../../configs';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { preserveUser } from '../../redux/user/user.actions';
 import { selectLocation } from '../../utils/multiple.selectors';

@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/client';
 import { useStyles } from './comment-dialog.styles';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
@@ -46,13 +47,17 @@ const CommentDialog = ({
   };
 
   return (
-    <div>
-      <Dialog open={isModalShown} onClose={handleClose}>
+    <div className={styles.root}>
+      <Dialog open={isModalShown} onClose={handleClose} className={styles.dialog}>
         <DialogTitle className={styles.title}>
-          {isDeleteComment === 1 ? t('common.dialog.title') : t('common.dialogRiply.title')}
+          <div className={styles.titleContent}>
+            {isDeleteComment === 1 ? t('common.dialog.title') : t('common.dialogRiply.title')}
+            <CloseIcon className={styles.icon} onClick={handleClose} />
+          </div>
         </DialogTitle>
+
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText className={styles.content}>
             {isDeleteComment === 1
               ? t('common.dialog.description')
               : t('common.dialogRiply.description')}
@@ -64,11 +69,11 @@ const CommentDialog = ({
               <Loader width={20} height={20} heightWrap={40} />
             </div>
           )}
-          <Button onClick={handleClose} className={styles.button}>
-            {t('product.pdpButtons.cancelButton')}
-          </Button>
           <Button onClick={handleDelete} className={styles.button}>
             {t('product.pdpButtons.submitButton')}
+          </Button>
+          <Button onClick={handleClose} className={styles.button}>
+            {t('product.pdpButtons.cancelButton')}
           </Button>
         </DialogActions>
       </Dialog>

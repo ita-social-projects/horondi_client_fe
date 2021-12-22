@@ -7,6 +7,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
+import CommentsTitle from './comments-item/comments-title/comments-title';
 import { Loader } from '../../../components/loader/loader';
 import { commentFields, TEXT_VALUE } from '../../../configs/index';
 import { ERROR } from '../constants';
@@ -90,6 +91,8 @@ const Comments = ({ productId, checkCountComments }) => {
     return t('product.comments.successfulTip');
   }, [t, userId]);
 
+  const commentsCount = comments.items.length;
+
   const commentsList = comments.items.map(({ _id, ...rest }) => (
     <CommentsItem
       userFirstName={userFirstName}
@@ -116,6 +119,7 @@ const Comments = ({ productId, checkCountComments }) => {
       <h2 className={styles.title}>{t('product.comments.title')}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
+          <span className={styles.textRate}>{t('product.comments.rating')}</span>
           <Rating
             data-cy='rate'
             disabled={!userData}
@@ -158,6 +162,13 @@ const Comments = ({ productId, checkCountComments }) => {
           >
             <div className={styles.commentBtnContainer}>
               <Button
+                className={`${styles.commentBtn} ${styles.cancelBtn}`}
+                disabled={!userData || isLoading}
+                onClick={() => resetForm()}
+              >
+                {t('product.comments.cancel')}
+              </Button>
+              <Button
                 type='submit'
                 className={styles.commentBtn}
                 disabled={!userData || isLoading}
@@ -175,8 +186,8 @@ const Comments = ({ productId, checkCountComments }) => {
           )}
         </div>
       </form>
+      <CommentsTitle className={styles.title} count={commentsCount} />
       {commentsList}
-
       {currentLimit < comments.count && (
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}

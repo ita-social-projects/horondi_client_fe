@@ -91,6 +91,29 @@ export const paletteGenerator = (colorSchema) => ({
     color: theme[colorSchema].seachBar.color,
     border: theme[colorSchema].seachBar.border
   },
+  comments: {
+    border: theme[colorSchema].comments.border,
+    formBorder: {
+      borderColor: theme[colorSchema].comments.formBorder.borderColor
+    },
+    cancelButtonBorder: {
+      border: theme[colorSchema].comments.cancelButtonBorder.border
+    },
+    deleteIcon: {
+      color: theme[colorSchema].comments.deleteIcon.color
+    },
+    modal: {
+      closeModalIcon: {
+        color: theme[colorSchema].comments.modal.closeModalIcon.color
+      },
+      titleBorder: {
+        border: theme[colorSchema].comments.modal.titleBorder.border
+      },
+      buttonBorder: {
+        border: theme[colorSchema].comments.modal.buttonBorder.border
+      }
+    }
+  },
   primary: {
     contrastText: white,
     dark: colors.grey[900],

@@ -5,8 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '@media (max-width: 500px)': {
-      justifyContent: 'flex-start',
-      paddingTop: '10px'
+      justifyContent: 'flex-start'
     }
   },
   form: {
@@ -23,12 +22,12 @@ export const useStyles = makeStyles((theme) => ({
       padding: '0 20px 0 40px'
     },
     '@media (max-width: 600px)': {
-      padding: '0 10px 0 20px'
+      padding: '0 10px'
     },
     '& *': {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
-          borderColor: theme.palette.textColor
+          borderColor: theme.palette.comments.formBorder.borderColor
         },
         '&.Mui-focused fieldset': {
           borderColor: theme.palette.textColor
@@ -65,16 +64,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   replyIcon: {
     margin: '0 5px',
-    transform: 'scaleX(-1)'
+    transform: 'scaleX(-1)',
+    opacity: 0.5
   },
   input: {
     marginTop: '10px',
     width: '100%'
   },
   replyBtn: {
-    padding: '8px 16px',
-    marginTop: '12px',
-    marginBottom: '24px',
+    padding: '12px 16px',
+    margin: '16px 0 24px 16px',
     textTransform: 'none',
     textAlign: 'center',
     fontSize: '14px',
@@ -86,18 +85,17 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
     },
-    '@media (max-width: 950px)': {
-      marginTop: '0',
-      marginBottom: '1.5rem'
+    '@media (max-width: 450px)': {
+      marginTop: '0'
     },
     title: {
-      textAlign: 'left important!'
-    },
-    marginLeft: '10px'
+      textAlign: 'left'
+    }
   },
   cancelBtn: {
-    color: theme.palette.black,
-    backgroundColor: theme.palette.white,
-    border: '1px solid'
+    marginLeft: '0',
+    color: theme.palette.textColor,
+    backgroundColor: theme.palette.backgroundColor,
+    border: theme.palette.comments.cancelButtonBorder.border
   }
 }));

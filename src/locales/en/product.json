@@ -24,9 +24,9 @@
   "pdpButtons": {
     "cartButton": "Add to cart",
     "buyButton": "Buy now",
-    "submitButton": "Submit",
-    "cancelButton": "Cancel",
-    "leaveReply": "Leave reply",
+    "submitButton": "DELETE",
+    "cancelButton": "CANCEL",
+    "leaveReply": "LEAVE REPLY",
     "inCart": "View in Cart"
   },
   "tooltips": {
@@ -54,13 +54,17 @@
     "noComments": "No comments yet",
     "commentsOne": "Comments",
     "commentsTwo": "Comments",
-    "title": "Comments",
+    "title": "Write a comment",
+    "commentsTitle":"Comments",
+    "moreComments":"Comments",
+    "rating": "Product rating:",
     "text": "Share your thoughts with others",
-    "submit": "Leave comment",
+    "submit": "LEAVE A COMMENT",
+    "cancel": "CANCEL",
     "unregisteredTip": "You should be logged in to leave rate",
     "registeredTip": "You should buy the product to leave rate",
     "successfulTip": "Set rate",
-    "loadMore": "Load more...",
+    "loadMore": "SHOW MORE",
     "hideBtn": "Hide comments"
   },
   "snackBar": {

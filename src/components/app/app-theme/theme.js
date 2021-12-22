@@ -70,6 +70,27 @@ export default {
       backgroundColor: 'rgb(255, 255, 255, 0.2)',
       color: 'rgba(254, 254, 254, 0.75);',
       border: '1px solid #949494'
+    },
+    comments: {
+      border: '1px solid #E6E6E6',
+      formBorder: '1px solid #2020233',
+      cancelButtonBorder: {
+        border: '1px solid #020202'
+      },
+      deleteIcon: {
+        color: '#808080'
+      },
+      modal: {
+        closeModalIcon: {
+          color: '#808080'
+        },
+        titleBorder: {
+          border: '2px solid #E2E8F0'
+        },
+        buttonBorder: {
+          border: '1px solid black'
+        }
+      }
     }
   },
   dark: {
@@ -134,6 +155,29 @@ export default {
       backgroundColor: 'rgb(255, 255, 255, 0.2)',
       color: 'rgba(254, 254, 254, 0.75);',
       border: '1px solid #949494'
+    },
+    comments: {
+      border: '1px solid #E6E6E6',
+      formBorder: {
+        borderColor: '1px solid #5B5B5B'
+      },
+      cancelButtonBorder: {
+        border: '1px solid #C7C7C7'
+      },
+      deleteIcon: {
+        color: '#808080'
+      },
+      modal: {
+        closeModalIcon: {
+          color: '#808080'
+        },
+        titleBorder: {
+          border: '2px solid #E2E8F0'
+        },
+        buttonBorder: {
+          border: '1px solid black'
+        }
+      }
     }
   }
 };

@@ -31,7 +31,7 @@ const ProductInfo = ({ price, product, countComments, checkDisabledProduct }) =>
     if (count === 0) return t('product.comments.noComments');
     if (count === 1) return t('product.comments.commentsOne');
     if (count === 2 || count === 3 || count === 4) return t('product.comments.commentsTwo');
-    if (count > 4) return t('product.comments.title');
+    if (count > 4) return t('product.comments.moreComments');
   };
   const shortProductInfo = (text) => {
     if (text.length > 2) return text.slice(0, 2);

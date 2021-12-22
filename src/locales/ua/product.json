@@ -24,9 +24,9 @@
   "pdpButtons": {
     "cartButton": "Додати до кошика",
     "buyButton": "Купити зараз",
-    "submitButton": "Підтвердити",
-    "cancelButton": "Відхилити",
-    "leaveReply": "Залишити відповідь",
+    "submitButton": "ВИДАЛИТИ",
+    "cancelButton": "ВІДМІНИТИ",
+    "leaveReply": "ЗАЛИШИТИ ВІДПОВІДЬ",
     "inCart": "Перейти до кошика"
   },
   "tooltips": {
@@ -54,13 +54,17 @@
     "noComments": "Відгуки відсутні",
     "commentsOne": "Відгук",
     "commentsTwo": "Відгуки",
-    "title": "Відгуків",
+    "title": "Написати відгук",
+    "commentsTitle":"Відгуки",
+    "moreComments":"Відгуків",
+    "rating": "Рейтинг товару:",
     "text": "Поділіться своїми враженнями з іншими",
-    "submit": "Залишити коментар",
+    "submit": "ЗАЛИШИТИ ВІДГУК",
+    "cancel": "ВІДМІНИТИ",
     "unregisteredTip": "Вам потрібно увійти, щоб залишити рейтинг",
     "registeredTip": "Вам потрібно купити продукт, щоб залишити рейтинг",
     "successfulTip": "Встановити рейтинг",
-    "loadMore": "Показати ще...",
+    "loadMore": "ПОКАЗАТИ ЩЕ",
     "hideBtn": "Приховати коментарі"
   },
   "snackBar": {

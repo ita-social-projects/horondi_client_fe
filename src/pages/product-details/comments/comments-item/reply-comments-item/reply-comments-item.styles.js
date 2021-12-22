@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => {
   return {
     container: {
       color,
-      borderTop: '2px solid #C2C2C2',
+      borderTop: theme.palette.comments.border,
       maxWidth: '756px',
       margin: '0 80px 0 120px',
       padding: '24px 0',
@@ -44,9 +44,11 @@ export const useStyles = makeStyles((theme) => {
     },
     textContent: {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      paddingTop: '12px'
     },
     deleteIcon: {
+      color: theme.palette.comments.deleteIcon.color,
       '&:hover': {
         cursor: 'pointer'
       }
@@ -68,7 +70,6 @@ export const useStyles = makeStyles((theme) => {
     },
     user: {
       display: 'flex',
-      paddingBottom: '12px',
       alignItems: 'center'
     },
     avatar: {
@@ -123,10 +124,10 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     icon: {
-      width: '28px',
-      height: '28px',
-      paddingBottom: '10px',
-      color: `rgb(${color} / 87%)`
+      width: '16px',
+      height: '16px',
+      color,
+      opacity: 0.75
     }
   };
 });

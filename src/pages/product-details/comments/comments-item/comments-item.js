@@ -111,7 +111,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
 
   const limitOption = replyCommentsList.length === replyCommentsCount;
 
-  const loadMore = limitOption ? null : t('common.reply.loadMore');
+  const loadMore = limitOption ? null : t('product.comments.loadMore');
   return (
     <div className={styles.container}>
       <div className={styles.comments}>
@@ -132,14 +132,14 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
               ) : null}
               {handleUserCommentApprove(userData, email, show) ? (
                 <Tooltip title={t('product.tooltips.feedbackComment')}>
-                  <FeedbackOutlinedIcon className={styles.icon} />
+                  <FeedbackOutlinedIcon className={styles.iconF} />
                 </Tooltip>
               ) : null}
             </div>
           </div>
           <div className={styles.date}>{commentDate}</div>
         </div>
-        <div>{handleRate(rate)}</div>
+        <div className={styles.rateIcon}>{handleRate(rate)}</div>
         <div className={styles.textContent}>
           <div
             className={handleTextStyle(show, styles.text, `${styles.notAproveText} ${styles.text}`)}

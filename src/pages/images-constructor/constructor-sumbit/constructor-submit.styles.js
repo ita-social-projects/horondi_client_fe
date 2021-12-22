@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   heart: {
+    display: 'none',
     fontSize: '2.5rem',
     color: '#ed0505',
     '&:hover': {
@@ -41,7 +42,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
     backgroundColor: theme.palette.textColor,
     color: theme.palette.backgroundColor,
-    margin: '8px 0',
+    margin: '14px 0 18px 0',
     borderRadius: '4px',
     fontWeight: '600',
     '&:hover': {

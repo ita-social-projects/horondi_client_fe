@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../cart-item';
-import { mockQueryData, mockQueryDataConstructor, props } from './cart-item.variables';
+import { mockQueryData, mockQueryDataConstructor, props, item } from './cart-item.variables';
 
 jest.mock('react-redux');
 jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
@@ -63,5 +63,17 @@ beforeEach(() => {
 describe('Filled cart component tests', () => {
   it('should render CartItem', () => {
     expect(component).toBeDefined();
+  });
+
+  it('Select', () => {
+    const select = component.find({ name: 'size' });
+    select.simulate('change', { target: { value: 'L' } });
+  });
+
+  it('Select', () => {
+    item.constructor = false;
+    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
+    const select = component.find({ name: 'size' });
+    select.simulate('change', { target: { value: 'L' } });
   });
 });

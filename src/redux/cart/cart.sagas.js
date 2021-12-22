@@ -63,6 +63,7 @@ export function* handleClearUserCart({ payload }) {
 
 export function* handleAddCartItem({ payload }) {
   const cart = getFromLocalStorage(cartKey);
+
   const possibleItemInCart = cart.find(
     (item) =>
       (item.product._id === payload.product._id && !item.options.size._id) ||

@@ -73,6 +73,7 @@ const ProductSort = () => {
           variant={TEXT_FIELD_VARIANT.OUTLINED}
           value={sortType}
           name='sortType'
+          MenuProps={{ classes: { paper: styles.dropdownMenuStyle }, variant: 'menu' }}
         >
           {selectOptions}
         </Select>

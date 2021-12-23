@@ -39,6 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     fontSize: '59px',
+    fontWeight: 'normal',
     borderBottom: '1px solid gray',
     padding: '80px 1rem 50px 1rem'
   },
@@ -79,6 +80,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '0.9em',
     margin: '0 auto',
     display: 'none',
+    backgroundColor: 'red',
     '@media (max-width: 959px)': {
       display: 'block'
     }

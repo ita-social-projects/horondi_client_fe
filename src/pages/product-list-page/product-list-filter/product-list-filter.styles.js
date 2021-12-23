@@ -45,7 +45,45 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0'
   },
   popularSwitch: {
-    marginLeft: '90px'
+    marginLeft: '160px',
+    width: 28,
+    height: 16,
+    padding: 0,
+    transform: 'scale(1.5)',
+    '&:active': {
+      '& .MuiSwitch-thumb': {
+        width: 15
+      },
+      '& .MuiSwitch-switchBase.Mui-checked': {
+        transform: 'translateX(9px)'
+      }
+    },
+    '& .MuiSwitch-switchBase': {
+      padding: 2,
+      '&.Mui-checked': {
+        transform: 'translateX(12px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff'
+        }
+      }
+    },
+    '& .MuiSwitch-thumb': {
+      boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(['width'], {
+        duration: 200
+      })
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+      boxSizing: 'border-box'
+    }
   },
   checkbox: {
     textTransform: 'capitalize',
@@ -65,10 +103,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginBottom: '13px',
+    fontSize: '14px',
+    fontWeight: 'bold',
     padding: '14px 0',
-    backgroundColor: theme.palette.textColor,
-    color: theme.palette.button.hover.color,
-    fontSize: '14px'
+    background: theme.palette.textColor,
+    color: theme.palette.backgroundColor,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    },
+    '&:disabled': {
+      backgroundColor: 'rgba(2, 2, 2, 0.2)'
+    }
   },
   filterName: {
     display: 'flex',

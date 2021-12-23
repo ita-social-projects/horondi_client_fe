@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,8 +34,8 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
   }));
   const [inputValue, setInputValue] = useState(item.quantity);
   const currencySign = getCurrencySign(currency);
-  const [firstlyMounted, toggleFirstlyMounted] = useState(false);
   const [currentSize, setCurrentSize] = useState(item.sizeAndPrice.size._id);
+  const [firstlyMounted, toggleFirstlyMounted] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(item.sizeAndPrice.price[currency].value);
   const { changeQuantity, changeSize, getCartItem, changeSizeConstructor } = cartOperations;
 

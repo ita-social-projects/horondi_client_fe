@@ -3,18 +3,28 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   accordion: {
     boxShadow: 'none',
-    borderBottom: '1px solid #0000001f',
-    backgroundColor: 'transparent'
+    borderBottom: '1px solid',
+    backgroundColor: 'transparent',
+    '&::before': {
+      borderBottom: '1px solid'
+    },
+    '&:last-child': {
+      borderBottom: '1px solid'
+    }
   },
 
   heading: {
-    fontFamily: 'Open Sans',
-    letterSpacing: 0.5,
-    fontSize: '12px',
-    color: theme.palette.textColor,
-    fontWeight: '700px',
-    '@media (max-width: 450px)': {
-      fontSize: theme.spacing(2)
+    '& h1': {
+      fontStyle: 'normal',
+      lineHeight: '32px',
+      fontFamily: 'Open Sans',
+      letterSpacing: 0.5,
+      fontSize: '24px',
+      color: theme.palette.textColor,
+      fontWeight: 'bold',
+      '@media (max-width: 450px)': {
+        fontSize: theme.spacing(2)
+      }
     }
   },
   details: {

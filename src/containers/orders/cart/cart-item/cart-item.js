@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 
 import { useQuery } from '@apollo/client';
@@ -16,7 +15,7 @@ import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 
 import { changeCartItemUserQuantity } from '../../../../redux/cart/cart.actions';
 
-import { IMG_URL } from '../../../../configs';
+import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
@@ -163,11 +162,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
           {itemMaterial}
         </div>
       </TableCell>
-      <TableCell classes={{ root: styles.description }} data-cy='cart-item-description'>
+      <TableCell data-cy='cart-item-description'>
         <Select
           label='title'
           data-cy='size'
           name='size'
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
           value={currentSize}
           onChange={handleSizeChange}
           className={styles.selectSizeStyle}
@@ -176,32 +176,30 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
           {itemSize}
         </Select>
       </TableCell>
-      <TableCell classes={{ root: styles.price }} data-cy='cart-item-description'>
-        <div>
-          <FontAwesomeIcon icon={currencySign} />
-          {'\u00A0'}
+      <TableCell data-cy='cart-item-description'>
+        <div className={styles.price}>
+          {currencySign}
           {Math.round(currentPrice)}
         </div>
       </TableCell>
-      <TableCell className={styles.quantityWrapper}>
+      <TableCell>
         <NumberInput
           quantity={inputValue}
           onChangeQuantity={onChangeQuantity}
           setInputValue={setInputValue}
         />
       </TableCell>
-      <TableCell classes={{ root: styles.price }}>
-        <div className={styles.priceWrapper}>
-          <div>
-            <FontAwesomeIcon icon={currencySign} />
-            {'\u00A0'}
+      <TableCell>
+        <div>
+          <div className={styles.price}>
+            {currencySign}
             {Math.round(calcPriceForCart(currentPrice, inputValue))}
           </div>
         </div>
       </TableCell>
-      <TableCell classes={{ root: styles.delete }}>
-        <span className={styles.deleteIcon}>
-          <DeleteIcon onClick={onDeleteItem} fontSize='default' />
+      <TableCell>
+        <span>
+          <DeleteIcon onClick={onDeleteItem} className={styles.deleteIcon} />
         </span>
       </TableCell>
     </TableRow>

@@ -43,7 +43,8 @@ export default {
       }
     },
     cart: {
-      borderColor: 'rgba(91, 91, 91, 0.2)'
+      borderColor: 'rgba(91, 91, 91, 0.2)',
+      iconColor: 'rgba(2, 2, 2, 0.5)'
     },
     contactForm: {
       background: '#EFEFEF'
@@ -128,7 +129,8 @@ export default {
       }
     },
     cart: {
-      borderColor: '#5B5B5B'
+      borderColor: '#5B5B5B',
+      iconColor: 'rgba(230, 230, 230, 0.75)'
     },
     contactForm: {
       background: '#232323'

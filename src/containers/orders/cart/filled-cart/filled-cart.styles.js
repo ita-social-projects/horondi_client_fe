@@ -1,47 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
-  width: '48px',
-  height: '48px',
-  borderRadius: '4px',
-  fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '14px',
   lineHeight: '20px',
   letterSpacing: '0.0125em',
   textTransform: 'uppercase'
 };
-
-const lightThemeButtonHover = {
-  '&:hover': {
-    backgroundColor: '#3F3F3F',
-    color: '#FEFEFE'
-  }
-};
-const darkThemeButtonHover = {
-  '&:hover': {
-    backgroundColor: '#020202',
-    color: '#FEFEFE'
-  }
-};
 const promoInput = {
-  width: '221px',
   height: '48px',
-  fontStyle: 'normal',
-  fontWeight: 'normal',
+  fontWeight: '400',
   fontSize: '16px',
-  lineHeight: '24px',
-  letterSpacing: '0.005em',
-  textAlign: 'center',
-  padding: 10
+  lineHeight: '24px'
 };
 const totalWrapper = {
-  width: '255px',
   display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'space-between',
+  gap: '20px',
+  flexDirection: 'column',
   alignItems: 'center',
-  fontStyle: 'normal',
   fontWeight: '600',
   fontSize: '20px',
   lineHeight: '28px',
@@ -66,37 +42,44 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   promoWrapper: {
     display: 'flex',
-    width: '298px',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    flexDirection: 'column',
+    gap: '20px',
+    '& >div': {
+      display: 'flex',
+      gap: '8px'
+    }
   },
   promoButton: {
     ...button,
-    background: palette.textColor,
-    color: palette.backgroundColor,
-    '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
+    background: palette.button.normal.backgroundColor,
+    color: palette.button.normal.color,
+    padding: '12px',
+    '&:hover': {
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
+    }
   },
   shoppingButton: {
     ...button,
-    width: '298px',
-    height: '44px',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: palette.textColor,
-    marginTop: '18px',
-    background: palette.backgroundColor,
-    color: palette.textColor,
-    '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
+    border: '1px solid',
+    borderColor: palette.button.normal.borderColor,
+    padding: '12px',
+    width: '100%',
+    '& span': {
+      fontWeight: 600
+    }
   },
   ordersButton: {
     ...button,
-    width: '255px',
-    height: '52px',
-    background: palette.textColor,
-    color: palette.backgroundColor,
+    width: '100%',
+    padding: '16px',
+    background: palette.button.normal.backgroundColor,
+    color: palette.button.normal.color,
     marginBottom: '20px',
-    '&:hover': palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover
+    '&:hover': {
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
+    }
   },
   orderWrapper: {
     display: 'flex',
@@ -108,7 +91,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   totalWrapper: {
     ...totalWrapper,
-    color: palette.textColor
+    color: palette.textColor,
+    '& a': {
+      width: '100%'
+    }
   },
   promoAndTotalWrapper: {
     maxWidth: '1200px',
@@ -121,12 +107,20 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 850px)': {
       width: '100%',
       flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'flex-start'
+      justifyContent: 'center'
     }
   },
   totalPrice: {
-    marginBottom: '20px'
+    display: 'flex',
+    gap: '90px',
+    '& svg': {
+      marginRight: '5px',
+      fontSize: '20px'
+    },
+    '& >div': {
+      display: 'flex',
+      alignItems: 'center'
+    }
   },
   orderTable: {
     flexGrow: 1,

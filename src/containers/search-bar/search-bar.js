@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
+import { formRegExp } from '../../configs/regexp';
 
 const SearchBar = ({
   searchParams,
@@ -17,16 +18,26 @@ const SearchBar = ({
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const [search, setSearch] = useState();
+  const [errors, setErrors] = useState();
   const { loading, refetch } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
     variables: { search: searchParams.searchFilter }
   });
 
-  const handleSearch = ({ target }) => {
+  const handleSearch = ({ target, event }) => {
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
+    setSearch(target.value);
+    setErrors({ search: '' });
+    const reg = formRegExp.search.test(target.value);
+    if (!reg) {
+      setErrors({ search: t('error.onlyLetter') });
+      return;
+    }
+
     if (target.value && target.value.trim()) {
       setSearchTimeout(
         setTimeout(() => {
@@ -56,6 +67,9 @@ const SearchBar = ({
         onFocus={handleSearch}
         inputProps={{ maxLength: 20 }}
         onChange={handleSearch}
+        error={errors?.search}
+        value={search}
+        helperText={errors?.search}
       />
     </div>
   );

@@ -17,7 +17,7 @@ const SearchBarList = ({ searchParams }) => {
         <div className={styles.searchBarList}>
           {products.length
             ? products.map((item) => <SearchBarListItem key={item._id} product={item} />)
-            : handleSearchListLoading(loading, styles.emptyList, t('error.onlyLetter'))}
+            : handleSearchListLoading(loading, styles.emptyList, t('error.nothingFound'))}
         </div>
       )}
     </>

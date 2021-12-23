@@ -80,7 +80,8 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '0.9em',
     margin: '0 auto',
     display: 'none',
-    backgroundColor: 'red',
+    color: theme.palette.backgroundColor,
+    backgroundColor: theme.palette.button.normal.backgroundColor,
     '@media (max-width: 959px)': {
       display: 'block'
     }

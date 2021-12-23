@@ -49,18 +49,22 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   sortSelect: {
-    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderWidth: '0',
-      borderRadius: '4px'
+    '&.Mui-focused': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderWidth: '0'
+      },
+      '& .MuiOutlinedInput-input': {
+        backgroundColor: 'rgb(220,220,220, 0.2)'
+      }
     },
     '& .MuiOutlinedInput-input': {
       padding: '10px 32px 10px 20px',
-      width: '180px',
+      width: '150px',
       borderRadius: '4px'
     }
   },
   dropdownMenuStyle: {
-    width: '180px',
+    width: '150px',
     '& .Mui-selected': {
       backgroundColor: theme.palette.type === 'light' ? theme.palette.white : '#424242',
       '&:hover': {
@@ -68,13 +72,16 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& ul': {
-      justifyContent: 'flex-start',
       '& li': {
-        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        textIndent: '20px',
         '&:hover': {
           backgroundColor: theme.palette.type === 'light' ? theme.palette.white : '#424242',
           color: '#3F51B5',
           marginLeft: '30px'
+        },
+        '& .MuiTouchRipple-root span': {
+          opacity: 0
         }
       }
     }

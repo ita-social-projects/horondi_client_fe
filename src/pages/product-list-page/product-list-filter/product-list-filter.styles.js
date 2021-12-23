@@ -25,7 +25,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '25px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    fontSize: '12px'
   },
   priceRangeInput: {
     marginLeft: '15px',
@@ -41,14 +42,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   popular: {
     borderTop: '1px solid gray',
-    padding: '25px 0',
-    margin: '0'
+    padding: '25px 0 15px 0',
+    margin: '0',
+    textTransform: 'uppercase',
+    fontSize: '18px',
+    display: 'block'
   },
   popularSwitch: {
-    marginLeft: '160px',
-    width: 28,
+    marginLeft: '210px',
+    width: 35,
     height: 16,
     padding: 0,
+    bottom: '15px',
     transform: 'scale(1.5)',
     '&:active': {
       '& .MuiSwitch-thumb': {
@@ -61,15 +66,16 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiSwitch-switchBase': {
       padding: 2,
       '&.Mui-checked': {
-        transform: 'translateX(12px)',
+        transform: 'translateX(19px)',
         color: '#fff',
         '& + .MuiSwitch-track': {
           opacity: 1,
-          backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff'
+          backgroundColor: theme.palette.backgroundColor
         }
       }
     },
     '& .MuiSwitch-thumb': {
+      backgroundColor: theme.palette.textColor,
       boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
       width: 12,
       height: 12,
@@ -81,8 +87,10 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiSwitch-track': {
       borderRadius: 16 / 2,
       opacity: 1,
-      backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
-      boxSizing: 'border-box'
+      backgroundColor: theme.palette.backgroundColor,
+      boxSizing: 'border-box',
+      border: '0.1rem solid',
+      borderColor: theme.palette.cart.borderColor
     }
   },
   checkbox: {
@@ -123,6 +131,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.2em',
     padding: '0.5em 0',
     color: theme.palette.textColor,
+    textTransform: 'uppercase'
+  },
+  priceName: {
+    fontSize: '18px',
     textTransform: 'uppercase'
   }
 }));

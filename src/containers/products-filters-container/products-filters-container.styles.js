@@ -30,6 +30,7 @@ export const useStyles = makeStyles(() => ({
     top: '5px'
   },
   nested: {
+    right: '10px',
     '&:hover': {
       background: 'none'
     },

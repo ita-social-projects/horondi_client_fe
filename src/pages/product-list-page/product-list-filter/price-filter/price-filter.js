@@ -74,7 +74,7 @@ const PriceFilter = ({ priceRange }) => {
 
   return (
     <FormGroup data-cy='price_filter'>
-      <Typography id='range-slider' component='div'>
+      <Typography id='range-slider' component='div' className={styles.priceName}>
         {t('common.price')}
         <div className={styles.priceRange}>
           {t('common.from')}

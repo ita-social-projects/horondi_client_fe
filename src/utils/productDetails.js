@@ -7,6 +7,10 @@ export const isProductInCartAlready = (cartList, productToSend) =>
 
 export const similarProductForCart = (similarProducts, cartList) => {
   let imagesList = [];
+  if (!similarProducts.length) {
+    return [];
+  }
+
   for (const simProduct of similarProducts) {
     for (const cartProduct of cartList) {
       if (

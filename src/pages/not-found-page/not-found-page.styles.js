@@ -11,6 +11,9 @@ export const useStyles = makeStyles((theme) => ({
     color: '#1976D2'
   },
   button: {
+    fontFamily: 'Open Sans',
+    fontWeight: '600',
+    fontSize: '14px',
     marginBottom: '1.2em',
     color: theme.palette.button.normal.color,
     backgroundColor: theme.palette.button.normal.backgroundColor,

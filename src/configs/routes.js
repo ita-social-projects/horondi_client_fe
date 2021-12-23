@@ -26,7 +26,8 @@ const routes = {
   pathToProfile: '/profile',
   pathToTerms: '/pages/terms',
   pathToUserAgreement: '/pages/user-agreement',
-  pathToAnswersQuestionsPage: '/answers-questions'
+  pathToAnswersQuestionsPage: '/answers-questions',
+  pathToAboutUs: '/pages/about-us'
 };
 
 export default routes;

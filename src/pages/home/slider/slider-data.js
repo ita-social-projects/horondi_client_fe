@@ -3,7 +3,7 @@ import bgSecond from '../../../images/bg3.jpg';
 import bgThird from '../../../images/7.jpg';
 import routes from '../../../configs/routes';
 
-const { pathToAllProducts, pathToNews } = routes;
+const { pathToAllProducts, pathToNews, pathToAboutUs } = routes;
 
 export const images = [
   {
@@ -27,7 +27,7 @@ export const images = [
     slideNumber: '03',
     title: 'home.sliderTitleThird',
     description: 'home.sliderDescriptionThird',
-    linkTo: pathToAllProducts,
-    buttonName: 'wishlist.wishlistButtons.empty'
+    linkTo: pathToAboutUs,
+    buttonName: 'home.aboutUs'
   }
 ];

@@ -29,7 +29,7 @@ export const useStyles = makeStyles(() => ({
 
   list: {
     '& .MuiPaper-root': {
-      marginTop: '22px',
+      marginTop: '21px',
       marginLeft: `${window.innerWidth - document.body.clientWidth + 1}px`,
       padding: '8px 0',
       backgroundColor: '#000',

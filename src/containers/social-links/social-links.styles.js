@@ -47,7 +47,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       justifyContent: 'space-around'
     },
     transform: fromSideBar ? 'scale(1.2)' : '',
-    marginTop: '1.5rem',
+    marginTop: '1.2rem',
     marginLeft: fromSideBar ? '25px' : ''
   }),
   iconWrap: {

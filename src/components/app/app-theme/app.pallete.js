@@ -65,6 +65,9 @@ export const paletteGenerator = (colorSchema) => ({
   productDescription: {
     borderColor: theme[colorSchema].productDescription.borderColor
   },
+  arrowIcon: {
+    arrowColor: theme[colorSchema].arrowIcon.arrowColor
+  },
   orderHistoryHeading: {
     background: theme[colorSchema].orderHistoryHeading.background
   },

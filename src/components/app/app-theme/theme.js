@@ -92,6 +92,9 @@ export default {
           border: '1px solid black'
         }
       }
+    },
+    arrowIcon: {
+      arrowColor: 'rgba(2, 2, 2, 0.5)'
     }
   },
   dark: {

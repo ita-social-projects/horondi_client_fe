@@ -73,6 +73,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   subtitle: {
     alignSelf: 'center',
+    fontSize: '14px',
     '@media (max-width: 600px)': {
       justifyContent: 'center'
     }

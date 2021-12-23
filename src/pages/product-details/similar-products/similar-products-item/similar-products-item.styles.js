@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   similarItem: (props) => ({
     background: `url(${props.image}) center center ${props.isLightTheme ? '#e3e7ea' : '#262626'}`,
     width: '90%',
@@ -11,7 +11,8 @@ export const useStyles = makeStyles(() => ({
     },
     margin: '0 auto',
     fontWeight: '500',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow
   }),
   info: {
     height: '69px',

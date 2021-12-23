@@ -31,7 +31,7 @@ const ProductsFiltersContainer = ({
       <li className={styles.mainItem}>
         <ListItemText button='true' primary={filterName} />
       </li>
-      <List>
+      <List className={styles.nestedBox}>
         {list.map((listItem) => (
           <label key={listItem}>
             {' '}

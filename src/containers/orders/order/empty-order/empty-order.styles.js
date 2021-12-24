@@ -27,7 +27,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     backgroundColor: palette.type === 'light' ? '#020202' : '#FFFFFF',
     '&:hover': {
       backgroundColor: palette.type === 'light' ? '#3F3F3F' : '#020202',
-      color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+      color: palette.type === 'light' ? '#FEFEFE' : '#FEFEFE'
     }
   },
   title: {

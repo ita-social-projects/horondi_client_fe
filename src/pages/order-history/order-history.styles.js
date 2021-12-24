@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 30,
     fontWeight: 400,
     marginBottom: 0,
-    marginTop: 20
+    marginTop: 72
   },
   loader: {
     margin: '100px auto'

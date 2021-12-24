@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useStyles } from './recovery.styles';
+import { MATERIAL_UI_COLOR } from '../../configs';
 import { recoverUser, resetState, userHasRecovered } from '../../redux/user/user.actions';
 import {
   handleHelperText,
@@ -57,37 +58,41 @@ const Recovery = () => {
       {({ errors, handleChange }) => (
         <div className={styles.recoveryBackground}>
           <div className={styles.recoveryForm}>
-            {userRecovered || recoveryLoading ? (
-              handleRecoveryLoaderOrWindow(userRecovered, successWindow)
-            ) : (
-              <Form>
-                <h2 className={styles.heading}>{t('recovery.recoveryTitle')}</h2>
-                <Field
-                  name='email'
-                  as={TextField}
-                  type='text'
-                  label={t('recovery.recoveryEmail')}
-                  className={`${styles.emailInput} ${handleClass(
-                    errors.email,
-                    styles.helperEmail
-                  )}`}
-                  variant='outlined'
-                  fullWidth
-                  error={!!errors.email || !!error}
-                  onChange={(e) => handleChange(e) || (error && dispatch(resetState()))}
-                  helperText={handleHelperText(errors.email, error)}
-                />
-                <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
-                <Button
-                  className={styles.recoverBtn}
-                  fullWidth
-                  type='submit'
-                  onClick={() => setShouldValidate(true)}
-                >
-                  {t('recovery.recoveryButtonText')}
-                </Button>
-              </Form>
-            )}
+            <div className={styles.wrapForm}>
+              {userRecovered || recoveryLoading ? (
+                handleRecoveryLoaderOrWindow(userRecovered, successWindow)
+              ) : (
+                <Form className={styles.background}>
+                  <h2 className={styles.heading}>{t('recovery.recoveryTitle')}</h2>
+                  <Field
+                    name='email'
+                    as={TextField}
+                    type='text'
+                    label={t('recovery.recoveryEmail')}
+                    className={`${styles.emailInput} ${handleClass(
+                      errors.email,
+                      styles.helperEmail
+                    )}`}
+                    variant='outlined'
+                    fullWidth
+                    onChange={(e) => handleChange(e) || (error && dispatch(resetState()))}
+                    helperText={handleHelperText(errors.email, error)}
+                    error={!!errors.email || !!error}
+                    color={MATERIAL_UI_COLOR.PRIMARY}
+                  />
+
+                  <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
+                  <Button
+                    className={styles.recoverBtn}
+                    fullWidth
+                    type='submit'
+                    onClick={() => setShouldValidate(true)}
+                  >
+                    {t('recovery.recoveryButtonText')}
+                  </Button>
+                </Form>
+              )}
+            </div>
           </div>
         </div>
       )}

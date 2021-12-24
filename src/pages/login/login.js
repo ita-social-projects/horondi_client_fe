@@ -71,7 +71,7 @@ const Login = () => {
           <div className={styles.formWrapper}>
             <div className={styles.loginForm}>
               {userLoading ? (
-                <Loader />
+                <Loader style={{ minWidth: '395px' }} />
               ) : (
                 <>
                   <h2 className={styles.heading}>{t('login.formLabel')}</h2>

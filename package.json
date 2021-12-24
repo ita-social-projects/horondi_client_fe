@@ -26,7 +26,7 @@
     "horondi_merge_images": "^1.0.3",
     "html-react-parser": "^0.13.0",
     "husky": "^4.3.5",
-    "i18next": "^21.2.4",
+    "i18next": "^21.6.3",
     "i18next-browser-languagedetector": "^6.1.2",
     "lodash": "^4.17.20",
     "prop-types": "^15.7.2",

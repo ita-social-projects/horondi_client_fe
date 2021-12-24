@@ -49,7 +49,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     maxWidth: '685px',
     padding: '80px 100px 90px',
-    boxSizing: 'border-box'
+    boxSizing: 'content-box',
+    minWidth: '325px',
+    overflow: 'hidden'
   },
   heading: {
     fontSize: '34px',
@@ -61,6 +63,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor
   },
   passwordInput: {
+    marginBottom: '15px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -117,7 +120,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   loginBtn: {
     border: '1px solid black',
-    borderRadius: '4px',
+    borderRadius: '0px',
     textTransform: 'capitalize',
     background: theme.palette.textColor,
     color: theme.palette.backgroundColor,
@@ -160,7 +163,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '20px',
+    marginBottom: '10px',
     marginTop: '5px'
   },
   orContainer: {

@@ -9,24 +9,19 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative'
   },
   recoveryForm: {
-    width: '684px',
-    minHeight: '340px',
-    background: theme.palette.backgroundColor,
-    textAlign: 'center',
-    position: 'absolute',
-    top: 'calc(50% - 174px)',
-    right: '0',
-    left: '0',
-    margin: '0 auto',
-    padding: '50px'
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   heading: {
-    fontSize: '1.5rem',
-    lineHeight: '29px',
+    fontSize: '34px',
+    lineHeight: '46px',
+    textAlign: 'center',
     marginBottom: '25px',
-    marginTop: '0px',
-    fontStyle: 'normal',
-    fontWeight: 'normal'
+    marginTop: 0,
+    textTransform: 'capitalize',
+    color: theme.palette.textColor
   },
   emailInput: {
     marginBottom: '21px',
@@ -54,23 +49,23 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   recoveryText: {
-    marginTop: '0px',
+    margin: '5px 0 15px',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '0.75rem',
     lineHeight: '15px',
-    textAlign: 'left'
+    textAlign: 'left',
+    maxWidth: '400px'
   },
   recoverBtn: {
-    fontSize: '1rem',
-    lineHeight: '20px',
-    height: '42px',
-    backgroundColor: theme.palette.button.normal.backgroundColor,
-    color: theme.palette.button.normal.color,
-    textTransform: 'capitalize',
+    border: '1px solid black',
+    borderRadius: '0px',
+    textTransform: 'uppercase',
+    background: theme.palette.textColor,
+    color: theme.palette.backgroundColor,
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
+      background: theme.palette.textColor,
+      color: theme.palette.backgroundColor
     }
   },
   helperEmail: {
@@ -78,5 +73,13 @@ export const useStyles = makeStyles((theme) => ({
       content: `'example@mail.com'`,
       color: '#828282'
     }
+  },
+  wrapForm: {
+    padding: '50px 100px 60px',
+    maxWidth: '685px',
+    background: theme.palette.backgroundColor,
+    boxSizing: 'content-box',
+    minWidth: '325px',
+    overflow: 'hidden'
   }
 }));

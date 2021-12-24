@@ -75,16 +75,6 @@ describe('Product submit tests', () => {
   });
 
   it('should click to inCart button', () => {
-    mockUseSelector.mockImplementation((fn) => fn({ Language, Products, User, Wishlist, Cart }));
-
-    wrapper = mount(
-      <ThemeProvider theme={themeValue}>
-        <ProductSubmit
-          setSizeIsNotSelectedError={mockSetSizeIsNotSelectedError}
-          product={product}
-        />
-      </ThemeProvider>
-    );
     const button = wrapper.find(Button).at(0);
     button.simulate('click');
     expect(mockAddToCart).toHaveBeenCalled();

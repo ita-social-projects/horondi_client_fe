@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
@@ -13,6 +12,7 @@ import PathBack from '../path-back/path-back';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
+import { TEXT_FIELD_VARIANT } from '../../../../configs';
 
 const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
@@ -37,7 +37,7 @@ const FilledCart = ({ items, cartOperations }) => {
 
   useEffect(() => {
     setPrice(getTotalPrice(currency));
-  }, [items, currency]);
+  }, [items, currency, getTotalPrice]);
 
   if (cartLoading) {
     return <Loader />;
@@ -55,27 +55,29 @@ const FilledCart = ({ items, cartOperations }) => {
         <div>
           <div className={styles.promoAndTotalWrapper}>
             <div className={styles.promoWrapper}>
-              <TextField
-                InputProps={{
-                  className: styles.promoInput
-                }}
-                placeholder={t('cart.promoPlaceHolder')}
-              />
-              <Button variant='contained' className={styles.promoButton}>
-                {t('cart.applyPromoCode')}
-              </Button>
-              <Link to={pathToCategory}>
-                <Button variant='contained' className={styles.shoppingButton}>
-                  {t('cart.continue')}
+              <div>
+                <TextField
+                  InputProps={{
+                    className: styles.promoInput
+                  }}
+                  placeholder={t('cart.promoPlaceHolder')}
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                />
+                <Button variant='contained' className={styles.promoButton}>
+                  {t('cart.applyPromoCode')}
                 </Button>
+              </div>
+              <Link to={pathToCategory}>
+                <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
               </Link>
             </div>
             <div className={styles.totalWrapper}>
               <div className={styles.totalPrice}>
                 <span>{t('cart.totalPrice')}</span>
-              </div>
-              <div className={styles.totalPrice}>
-                <FontAwesomeIcon icon={currencySign} /> {price}
+                <div>
+                  {currencySign}
+                  {price}
+                </div>
               </div>
               <Link to={pathToCheckout}>
                 <Button variant='contained' className={styles.ordersButton}>

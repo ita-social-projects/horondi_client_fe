@@ -10,7 +10,7 @@ const path = {
 
 export const useStyles = makeStyles(({ palette }) => ({
   path: {
-    marginTop: '30px',
+    marginTop: '74px',
     '&, & a': {
       ...path,
       color: palette.textColor

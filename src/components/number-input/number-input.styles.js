@@ -2,9 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    color: theme.palette.textColor,
-    display: 'flex',
-    justifyContent: 'center',
+    '& .MuiOutlinedInput-root': {
+      fontSize: '20px',
+      fontWeight: 400
+    },
     '& input::-webkit-outer-spin-button': {
       WebkitAppearance: 'none',
       margin: 0
@@ -15,19 +16,18 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& input[type=number]': {
       MozAppearance: 'textfield'
+    },
+    '& input': {
+      padding: '18.5px 8px'
     }
   },
   button: {
     cursor: 'pointer',
     '@media (max-width: 768px)': {
-      minWidth: 40
+      minWidth: '40px'
+    },
+    '&.MuiButton-root': {
+      minWidth: 0
     }
-  },
-  inputQuantity: {
-    width: '30px',
-    textAlign: 'center'
-  },
-  inputText: {
-    textAlign: 'center'
   }
 }));

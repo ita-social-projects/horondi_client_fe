@@ -1,14 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const name = {
-  fontStyle: 'normal',
-  fontWeight: 'bold',
+  fontWeight: '700',
   fontSize: '24px',
   lineHeight: '32px'
 };
 const description = {
-  fontStyle: 'normal',
-  fontWeight: 'normal',
+  fontWeight: '400',
   fontSize: '14px',
   lineHeight: '22px',
   letterSpacing: '0.0025em'
@@ -19,33 +17,38 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%',
     justifyContent: 'space-between'
   },
-  description: {
-    textAlign: 'center',
-    lineHeight: '30px'
-  },
   itemDescription: {
-    ...description
+    ...description,
+    color: palette.textColor
   },
   itemName: {
     ...name,
     color: palette.textColor
   },
-  price: {
-    textAlign: 'center'
-  },
   product: {
     display: 'flex',
     alignItems: 'center'
   },
-  quantityWrapper: {
-    width: '250px'
+  price: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '& svg': {
+      marginRight: '5px',
+      fontSize: '20px'
+    }
   },
   selectSizeStyle: {
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: palette.cart.borderColor,
     width: '71px',
-    height: '40px'
+    height: '40px',
+    fontSize: '20px',
+    fontWeight: 400,
+    '& legend': {
+      display: 'none'
+    },
+    '& .MuiSelect-select:focus': {
+      background: 'transparent'
+    }
   },
   loadingBar: {
     display: 'flex',
@@ -53,18 +56,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     textAlign: 'center'
   },
   deleteIcon: {
-    marginLeft: '20px',
+    color: palette.cart.iconColor,
     cursor: 'pointer'
-  },
-  priceWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  itemImg: {
-    marginLeft: 20
-  },
-  delete: {
-    marginTop: '15px'
   }
 }));

@@ -8,14 +8,14 @@ import { calcPriceForCart } from '../utils/priceCalculating';
 import { CART_KEY } from '../configs';
 
 export const useCart = (user = null) => {
-  const [cart, setCart] = useState(getFromLocalStorage(CART_KEY) || []);
+  const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY) || []);
 
   useEffect(() => {
     setToLocalStorage(CART_KEY, [...cart]);
   }, [cart]);
 
   const addToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
+    setNewCart((prevCart) => [...prevCart, item]);
   };
 
   const clearCart = () => {
@@ -25,7 +25,7 @@ export const useCart = (user = null) => {
   const getCartItem = (id) => cart.find((cartItem) => cartItem.id === id);
 
   const removeFromCart = (item) => {
-    setCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
+    setNewCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
   };
 
   const isInCart = (productId, sizeId = null) =>
@@ -36,7 +36,7 @@ export const useCart = (user = null) => {
     );
 
   const changeQuantity = (id, count) => {
-    setCart((prevCart) =>
+    setNewCart((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) el.quantity = count;
         return el;
@@ -51,10 +51,21 @@ export const useCart = (user = null) => {
     );
 
   const changeSize = (id, sizeAndPrice) => {
-    setCart((prevCart) =>
+    setNewCart((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) {
           el.sizeAndPrice = sizeAndPrice;
+        }
+        return el;
+      })
+    );
+  };
+
+  const changeSizeConstructor = (id, size) => {
+    setNewCart((prevCart) =>
+      prevCart.map((el) => {
+        if (el.id === id) {
+          el.sizeAndPrice.size = size;
         }
         return el;
       })
@@ -68,7 +79,8 @@ export const useCart = (user = null) => {
     changeSize,
     getTotalPrice,
     getCartItem,
-    clearCart
+    clearCart,
+    changeSizeConstructor
   };
 
   return {

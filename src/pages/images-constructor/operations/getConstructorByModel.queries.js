@@ -95,6 +95,7 @@ export const getConstructorByModel = gql`
               value
               currency
             }
+            available
           }
         }
       }

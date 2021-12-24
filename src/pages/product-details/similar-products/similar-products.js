@@ -6,7 +6,6 @@ import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import './similar-products.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useStyles } from './similar-products.styles';
 import { RESPONSIVE_PDP } from '../constants';
 import SimilarProductsItem from './similar-products-item';
@@ -50,13 +49,12 @@ const SimilarProducts = ({ cartList, product }) => {
       sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price[currency].value;
     const checkPrice = () =>
       availableSize ? (
-        <>
+        <div>
           {t('product.priceFrom') + Math.round(availableSize)}
-          {'\u00A0'}
-          <FontAwesomeIcon icon={currencySign} />{' '}
-        </>
+          {currencySign}{' '}
+        </div>
       ) : (
-        <> {t('product.sizeNotAvailable')} </>
+        <div> {t('product.sizeNotAvailable')} </div>
       );
 
     return (

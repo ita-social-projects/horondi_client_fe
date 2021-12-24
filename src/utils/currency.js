@@ -1,3 +1,4 @@
-import { faDollarSign, faHryvnia } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import { DollarIcon, HryvniaIcon } from '../images/profile-icons';
 
-export const getCurrencySign = (currency = 0) => (currency ? faDollarSign : faHryvnia);
+export const getCurrencySign = (currency = 0) => (currency ? <DollarIcon /> : <HryvniaIcon />);

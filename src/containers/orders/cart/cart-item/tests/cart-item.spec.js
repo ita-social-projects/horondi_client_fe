@@ -44,7 +44,13 @@ jest.mock('@material-ui/styles', () => ({
 
 let component;
 const mockChangeQuantity = jest.fn();
-const mockCartOperations = { changeQuantity: mockChangeQuantity };
+const mockGetCartItem = jest.fn(() => props.itemData);
+const mockChangeSize = jest.fn();
+const mockCartOperations = {
+  changeQuantity: mockChangeQuantity,
+  getCartItem: mockGetCartItem,
+  changeSize: mockChangeSize
+};
 
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
@@ -75,5 +81,12 @@ describe('Filled cart component tests', () => {
     component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
     const select = component.find({ name: 'size' });
     select.simulate('change', { target: { value: 'L' } });
+  });
+  it('should change select value', () => {
+    testSelection(false);
+    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
+    const select = component.find(`[name='size']`);
+    select.props().onChange({ target: { value: '604394a2a7532c33dcb326d5' } });
+    expect(select.props().value).toEqual('604394a2a7532c33dcb326d5');
   });
 });

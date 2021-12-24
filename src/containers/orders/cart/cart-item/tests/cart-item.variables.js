@@ -1,5 +1,5 @@
 export const item = {
-  id: 1637938395612,
+  id: '61c361217eeb571938b4ecb8',
   productId: '61938f3f47ff1a3ccc1ac5e7',
   sizeAndPrice: {
     size: {
@@ -36,10 +36,29 @@ export const item = {
   constructor: true
 };
 
+const cartData = {
+  size: {
+    _id: '604394a2a7532c33dcb326d5'
+  }
+};
+
+const itemData = {
+  sizeAndPrice: {
+    price: [
+      {
+        value: 2100
+      }
+    ]
+  }
+};
+
 export const props = {
   item,
   language: 0,
+  cartData,
+  itemData,
   calcPrice: () => 10,
+  newPrice: 2150,
   currency: 0,
   user: {},
   cartQuantityLoading: false,

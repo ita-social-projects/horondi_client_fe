@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
@@ -12,6 +12,7 @@ import {
   handleNewPasswodLoaderOrWindow,
   handleErrorMessage
 } from '../../utils/handle-new-password';
+import { AuthWrapper, AuthHeading, AuthButton } from '../../components/auth-form';
 
 const NewPassword = ({ token }) => {
   const styles = useStyles();
@@ -66,52 +67,63 @@ const NewPassword = ({ token }) => {
       validationSchema={validationSchema}
     >
       {({ errors }) => (
-        <div className={styles.newPassBackground}>
-          <div className={styles.newPassForm}>
-            {passwordReset || loading ? (
-              handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
-            ) : (
-              <Form className='newPasswordForm'>
-                <h2 className={styles.heading}>{t('common.enterNew')}</h2>
-                <Field
-                  name='password'
-                  as={TextField}
-                  type='password'
-                  label={t('common.newPass')}
-                  className={styles.passwordInput}
-                  variant='outlined'
-                  fullWidth
-                  InputProps={endAdornment(showPassword, setShowPassword)}
-                  error={!!errors.password}
-                  helperText={errors.password || ''}
-                />
-                <Field
-                  name='confirmPassword'
-                  as={TextField}
-                  type='password'
-                  label={t('common.newPass')}
-                  className={styles.passwordInput}
-                  variant='outlined'
-                  fullWidth
-                  InputProps={endAdornment(showConfirmPassword, setShowConfirmPassword)}
-                  error={!!errors.confirmPassword}
-                  helperText={errors.confirmPassword || ''}
-                />
-                <Button
-                  className={styles.changeBtn}
-                  fullWidth
-                  type='submit'
-                  onClick={() => {
-                    setShouldValidate(true);
-                  }}
-                >
-                  {t('common.change')}
-                </Button>
-                {handleErrorMessage(userError, styles.serverError)}
+        <AuthWrapper>
+          {/* <div className={styles.newPassBackground}>
+          <div className={styles.newPassForm}> */}
+          {passwordReset || loading ? (
+            handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
+          ) : (
+            <Form className='newPasswordForm'>
+              <AuthHeading>{t('common.enterNew')}</AuthHeading>
+              <Field
+                name='password'
+                as={TextField}
+                type='password'
+                label={t('common.newPass')}
+                className={styles.passwordInput}
+                variant='outlined'
+                fullWidth
+                InputProps={endAdornment(showPassword, setShowPassword)}
+                error={!!errors.password}
+                helperText={errors.password || ''}
+              />
+              <Field
+                name='confirmPassword'
+                as={TextField}
+                type='password'
+                label={t('common.newPass')}
+                className={styles.passwordInput}
+                variant='outlined'
+                fullWidth
+                InputProps={endAdornment(showConfirmPassword, setShowConfirmPassword)}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword || ''}
+              />
+              <AuthButton
+                onclick={() => {
+                  setShouldValidate(true);
+                }}
+              >
+                {t('common.change')}
+              </AuthButton>
+              {handleErrorMessage(userError, styles.serverError)}
+            </Form>
+          )}
+          {/*  </div>
+ndleErrorMessage(userError, styles.serverError)}
               </Form>
             )}
-          </div>
-        </div>
+         {/*  </div>
+age(userError, styles.serverError)}
+              </Form>
+            )}
+         {/*  </div>
+sage(userError, styles.serverError)}
+              </Form>
+            )}
+         {/*  </div>
+        </div> */}
+        </AuthWrapper>
       )}
     </Formik>
   );

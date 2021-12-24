@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles((theme) => ({
-  recoveryBackground: {
+
+  /* recoveryBackground: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
     height: '1000px',
@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     textTransform: 'capitalize',
     color: theme.palette.textColor
-  },
+  }, */
   emailInput: {
     marginBottom: '21px',
     '& label': {
@@ -57,7 +57,8 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     maxWidth: '400px'
   },
-  recoverBtn: {
+
+  /* recoverBtn: {
     border: '1px solid black',
     borderRadius: '0px',
     textTransform: 'uppercase',
@@ -67,19 +68,20 @@ export const useStyles = makeStyles((theme) => ({
       background: theme.palette.textColor,
       color: theme.palette.backgroundColor
     }
-  },
+  }, */
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,
       color: '#828282'
     }
-  },
-  wrapForm: {
+  }
+
+  /* wrapForm: {
     padding: '50px 100px 60px',
     maxWidth: '685px',
     background: theme.palette.backgroundColor,
     boxSizing: 'content-box',
     minWidth: '325px',
     overflow: 'hidden'
-  }
+  } */
 }));

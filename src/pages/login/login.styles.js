@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
     overflowX: 'hidden'
   },
-  wrapper: {
+
+  /* wrapper: {
     height: '100vh',
     display: 'flex',
     alignItems: 'center',
@@ -49,9 +49,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     maxWidth: '685px',
     padding: '80px 100px 90px',
-    boxSizing: 'content-box',
-    minWidth: '325px',
-    overflow: 'hidden'
+  
   },
   heading: {
     fontSize: '34px',
@@ -61,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     textTransform: 'capitalize',
     color: theme.palette.textColor
-  },
+  }, */
   passwordInput: {
     marginBottom: '15px',
     '& label': {
@@ -118,7 +116,8 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   },
-  loginBtn: {
+
+  /* loginBtn: {
     border: '1px solid black',
     borderRadius: '0px',
     textTransform: 'capitalize',
@@ -128,7 +127,7 @@ export const useStyles = makeStyles((theme) => ({
       background: theme.palette.textColor,
       color: theme.palette.backgroundColor
     }
-  },
+  }, */
   loginGroup: {
     position: 'relative'
   },
@@ -206,4 +205,8 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     textDecoration: 'none'
   }
+
+  /* minimumWidth: {
+    minWidth: '325px'
+  } */
 }));

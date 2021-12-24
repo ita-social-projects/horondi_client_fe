@@ -45,7 +45,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   newsItemContent: {
     padding: '0px',
-    height: '200px'
+    height: '270px',
+    overflow: 'hidden'
   },
   ArticleTitleContainer: {
     padding: '0px',

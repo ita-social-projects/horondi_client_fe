@@ -66,9 +66,13 @@ export const useStyles = makeStyles((theme) => ({
   button: {
     marginBottom: '13px',
     padding: '14px 0',
-    backgroundColor: theme.palette.textColor,
-    color: theme.palette.button.hover.color,
-    fontSize: '14px'
+    fontSize: '14px',
+    background: theme.palette.textColor,
+    color: theme.palette.backgroundColor,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
   },
   filterName: {
     display: 'flex',

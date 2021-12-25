@@ -40,6 +40,13 @@ export const useStyles = makeStyles(({ palette }) => ({
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    fontSize: '14px'
+    fontSize: '14px',
+    marginTop: '5px',
+    textTransform: 'capitalize'
+  },
+  price: {
+    fontSize: '20px',
+    fontWeight: '600',
+    color: 'white'
   }
 }));

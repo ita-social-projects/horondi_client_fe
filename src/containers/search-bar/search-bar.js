@@ -12,14 +12,16 @@ const SearchBar = ({
   setSearchParams,
   initialSearchState,
   fieldOptions = {},
-  fromNavBar = true
+  fromNavBar = true,
+  handleErrors,
+  errors
 }) => {
   const styles = useStyles(fromNavBar);
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [search, setSearch] = useState();
-  const [errors, setErrors] = useState();
+
   const { loading, refetch } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
@@ -31,11 +33,11 @@ const SearchBar = ({
       clearTimeout(searchTimeout);
     }
     setSearch(target.value);
-    setErrors({ search: '' });
+    handleErrors();
+
     const reg = formRegExp.search.test(target.value);
     if (!reg) {
-      setErrors({ search: t('error.onlyLetter') });
-      return;
+      handleErrors(t('error.onlyLetter'));
     }
 
     if (target.value && target.value.trim()) {
@@ -46,7 +48,7 @@ const SearchBar = ({
             searchFilter: target.value,
             searchBarVisibility: !!target.value
           }));
-          refetch();
+          if (!errors) refetch();
         }, 1000)
       );
     }
@@ -67,9 +69,7 @@ const SearchBar = ({
         onFocus={handleSearch}
         inputProps={{ maxLength: 20 }}
         onChange={handleSearch}
-        error={errors?.search}
         value={search}
-        helperText={errors?.search}
       />
     </div>
   );

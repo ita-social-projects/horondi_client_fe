@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 9px 12px rgba(0, 0, 0, 0.10)',
     borderRadius: '6px',
     zIndex: '3',
+    backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
     '& > *': {
       flex: 1
     },
@@ -85,9 +86,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '14px',
     fontWeight: '600',
     display: 'flex',
+    alignItems: 'center',
     '& svg': {
       marginLeft: '5px',
-      fontSize: '1.2em'
+      fontSize: '27px'
     }
   }
 }));

@@ -5,6 +5,8 @@ import ModelItem from '../model-item';
 
 jest.mock('react-redux');
 
+jest.mock('../model-item.style.js', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
+
 const mockStore = {
   language: 0,
   products: []

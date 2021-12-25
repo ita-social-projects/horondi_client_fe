@@ -18,7 +18,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: 48,
     color: palette.textColor,
     margin: '72px 0px',
-    fontWeight: 'normal'
+    fontWeight: '600',
+    fontFamily: 'Open Sans'
   },
   titleLine: {
     width: '100%',
@@ -74,7 +75,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   formTitle: {
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: 800,
     color: palette.textColor,
     margin: 0,
     gridColumn: 'span 2',
@@ -178,7 +179,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   newPassword: {
     minHeight: 100,
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    borderRadius: 5,
     padding: '22px 32px',
     marginBottom: 20
   },
@@ -188,7 +188,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   confirmUser: {
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
     minHeight: 100,
-    borderRadius: 5,
     padding: '20px 34px'
   },
   userActionsText: {

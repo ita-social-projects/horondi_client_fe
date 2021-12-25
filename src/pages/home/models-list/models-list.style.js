@@ -36,9 +36,6 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 1024px)': {
       width: '100%'
     },
-    // '@media (max-width: 415px)': {
-    //   width: '75%'
-    // },
     '&:after': {
       content: `''`,
       position: 'absolute',

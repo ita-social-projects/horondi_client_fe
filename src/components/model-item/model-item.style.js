@@ -89,7 +89,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     '& svg': {
       marginLeft: '5px',
-      fontSize: '1.7em'
+      fontSize: '27px'
     }
   }
 }));

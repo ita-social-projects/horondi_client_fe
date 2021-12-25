@@ -28,6 +28,6 @@ export const images = [
     title: 'home.sliderTitleThird',
     description: 'home.sliderDescriptionThird',
     linkTo: pathToAboutUs,
-    buttonName: 'home.aboutUs'
+    buttonName: 'common.about-us'
   }
 ];

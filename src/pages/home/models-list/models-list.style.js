@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexFlow: 'wrap',
     width: '85%',
-    height: isModelsVisible ? 480 : 233,
+    height: isModelsVisible ? 480 : 235,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',

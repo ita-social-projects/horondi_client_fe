@@ -82,5 +82,9 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0.5em 0',
     color: theme.palette.textColor,
     textTransform: 'uppercase'
+  },
+  sectionName: {
+    textTransform: 'uppercase',
+    fontSize: '1.2em'
   }
 }));

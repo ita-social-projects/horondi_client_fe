@@ -37,7 +37,7 @@ const HotItemFilter = () => {
   return (
     <FormGroup data-cy='hot_item_filter'>
       <Typography id='isHot' className={styles.popular} gutterBottom>
-        <span style={{ textTransform: 'uppercase', fontSize: '1.2em' }}>{t('common.popular')}</span>
+        <span className={styles.sectionName}>{t('common.popular')}</span>
         <Switch
           className={styles.popularSwitch}
           color='default'

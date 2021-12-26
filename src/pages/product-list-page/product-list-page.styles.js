@@ -51,16 +51,16 @@ export const useStyles = makeStyles((theme) => ({
     '& ul': {
       '& li': {
         '& button': {
-          border: '1px solid #FEFEFE',
           borderRadius: 0,
           height: '50px',
           width: '50px',
           margin: '0 5px'
+        },
+        '& button.Mui-selected': {
+          backgroundColor: theme.palette.backgroundColor,
+          border: theme.palette.type === 'light' ? '1px solid #000000' : '1px solid #FEFEFE'
         }
       }
-    },
-    '& Mui-selected': {
-      backgroundColor: 'black !important'
     },
     '@media (max-width:500px)': {
       padding: '1rem 0',

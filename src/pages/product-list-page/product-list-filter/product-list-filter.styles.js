@@ -42,10 +42,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   popular: {
     borderTop: '1px solid gray',
-    padding: '25px 0 15px 0',
+    padding: '25px 0 10px 0',
     margin: '0',
     textTransform: 'uppercase',
-    fontSize: '18px',
+    fontSize: '1.2em',
     display: 'block'
   },
   popularSwitch: {
@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
     width: 35,
     height: 16,
     padding: 0,
-    bottom: '15px',
+    bottom: '18px',
     transform: 'scale(1.5)',
     '&:active': {
       '& .MuiSwitch-thumb': {

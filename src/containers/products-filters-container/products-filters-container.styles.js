@@ -38,7 +38,7 @@ export const useStyles = makeStyles(() => ({
       background: 'none'
     },
     '& span': {
-      textTransform: 'uppercase',
+      textTransform: 'capitalize',
       fontSize: '0.9em'
     }
   }

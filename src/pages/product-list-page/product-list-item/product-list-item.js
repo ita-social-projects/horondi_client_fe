@@ -43,7 +43,7 @@ const ProductListItem = ({ product }) => {
     );
     return availableSizes && availableSizes[0] ? (
       <>
-        {availableSizes[availableSizes.length - 1]?.price[currency].value}
+        {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
         {'\u00A0'}
         <FontAwesomeIcon icon={currencySign} />
       </>

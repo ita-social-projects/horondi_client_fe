@@ -47,11 +47,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       justifyContent: 'space-around'
     },
     transform: fromSideBar ? 'scale(1.2)' : '',
-    marginTop: '1.5rem',
+    marginTop: '19px',
     marginLeft: fromSideBar ? '25px' : ''
   }),
   iconWrap: {
-    marginRight: '1rem',
+    marginRight: '16px',
     color: 'transparent',
     '&:hover': {
       color: '#bebebe'

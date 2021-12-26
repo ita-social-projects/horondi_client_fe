@@ -11,7 +11,7 @@ import PathBack from '../../cart/path-back/path-back';
 
 const { pathToCategory } = routes;
 
-const EmptyOrder = ({ title, buttonTitle, name }) => {
+const EmptyOrder = ({ emptyTitle, buttonTitle, name }) => {
   const styles = useStyles();
   const { palette } = useTheme();
 
@@ -26,7 +26,7 @@ const EmptyOrder = ({ title, buttonTitle, name }) => {
       <PathBack />
       <div className={styles.root} data-cy={name}>
         <Typography className={styles.title} variant='h2'>
-          {title}
+          {emptyTitle}
         </Typography>
         <img className={styles.image} src={emptyOrderImgLink} alt={name} />
         <Link to={pathToCategory}>

@@ -43,7 +43,7 @@ const OrderHistoryItem = ({ order }) => {
         </div>
         <div className={styles.headingStatus}>
           <div>{t(`orderHistory.tableField.status`)}:&nbsp;</div>
-          <div style={{ color: { color } }}>{order.status}</div>
+          <div style={{ color: { color } }}>{t(`orderHistory.statuses.${order.status}`)}</div>
         </div>
       </div>
       <div>

@@ -22,7 +22,7 @@ export default {
         color: '#FFFFFF'
       },
       hover: {
-        backgroundColor: '#000000',
+        backgroundColor: '#353333',
         color: '#FFFFFF'
       },
       disabled: {

@@ -4,27 +4,43 @@ exports[`Product details test Should render product details component 1`] = `
 <WithStyles(ForwardRef(Card))
   className=""
 >
-  <Link
-    to="/catalog/:category"
-  >
-    <Memo(ForwardRef(KeyboardBackspaceIcon))
-      color="primary"
-    />
-  </Link>
   <div>
+    <ProductPath />
+    <Link
+      to="/catalog/:category"
+    >
+      <ArrowIcon />
+    </Link>
     <div>
-      <ProductInfo
-        price={Object {}}
-        product={Object {}}
-      />
-      <ProductSizes
-        handleSizeChange={[Function]}
-        sizeIsNotSelectedError={false}
-      />
-      <ProductSubmit
-        product={Object {}}
-        setSizeIsNotSelectedError={[Function]}
-      />
+      <div>
+        <ProductInfo
+          checkDisabledProduct=""
+          countComments={0}
+          price={Object {}}
+          product={Object {}}
+        />
+        <ProductSizes
+          checkDisabledProduct=""
+          handleSizeChange={[Function]}
+          sizeIsNotSelectedError={false}
+        />
+        <div>
+          <ProductSubmit
+            disabled={true}
+            product={Object {}}
+            setSizeIsNotSelectedError={[Function]}
+          />
+          <WithStyles(ForwardRef(Tooltip))
+            placement="bottom"
+            title="product.tooltips.removeWishful"
+          >
+            <Memo(ForwardRef(FavoriteIcon))
+              data-cy="wishful"
+              onClick={[Function]}
+            />
+          </WithStyles(ForwardRef(Tooltip))>
+        </div>
+      </div>
     </div>
   </div>
   <Toast />

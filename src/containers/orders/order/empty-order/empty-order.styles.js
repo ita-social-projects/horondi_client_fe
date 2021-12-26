@@ -23,16 +23,16 @@ const buttonStyles = {
 export const useStyles = makeStyles(({ palette }) => ({
   button: {
     ...buttonStyles,
-    color: palette.type === 'light' ? '#FEFEFE' : '#242424',
-    backgroundColor: palette.type === 'light' ? '#020202' : '#FFFFFF',
+    color: palette.button.normal.color,
+    backgroundColor: palette.button.normal.backgroundColor,
     '&:hover': {
-      backgroundColor: palette.type === 'light' ? '#3F3F3F' : '#020202',
-      color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+      color: palette.button.hover.color,
+      backgroundColor: palette.button.hover.backgroundColor
     }
   },
   title: {
     ...titleStyles,
-    color: palette.type === 'light' ? '#242424' : '#FEFEFE'
+    color: palette.textColor
   },
   image: {
     height: '182px',

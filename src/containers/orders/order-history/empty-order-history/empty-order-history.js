@@ -6,7 +6,7 @@ const EmptyOrderHistory = () => {
   const { t } = useTranslation();
   return (
     <EmptyOrder
-      title={t('orderHistory.title')}
+      emptyTitle={t('orderHistory.emptyTitle')}
       buttonTitle={t('orderHistory.buttonEmpty')}
       name='empty-order-history'
     />

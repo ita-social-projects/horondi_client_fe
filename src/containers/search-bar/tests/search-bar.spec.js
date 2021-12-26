@@ -4,6 +4,13 @@ import { useQuery } from '@apollo/client';
 import SearchBar from '../search-bar';
 import SearchIcon from '../SearchIcon';
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key) => key,
+    i18n: { changeLanguage: jest.fn() }
+  })
+}));
+
 jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
@@ -23,6 +30,8 @@ const initialSearchState = {
   products: [],
   searchBarVisibility: false,
   loading: false
+  // handleErrors: '',
+  // errors: null
 };
 
 describe('SearchBar component tests', () => {
@@ -33,6 +42,8 @@ describe('SearchBar component tests', () => {
         initialSearchState={initialSearchState}
         searchParams={initialSearchState}
         setSearchParams={() => null}
+        // handleErrors={handleErrors}
+        // errors={errors}
       />
     );
 

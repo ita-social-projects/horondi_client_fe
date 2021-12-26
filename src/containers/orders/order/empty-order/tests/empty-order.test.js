@@ -3,6 +3,10 @@ import EmptyOrder from '../index';
 
 let wrapper;
 
+jest.mock('../empty-order.styles', () => ({
+  useStyles: () => ({})
+}));
+
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
   useTheme: () => ({

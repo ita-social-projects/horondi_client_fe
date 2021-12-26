@@ -4,23 +4,19 @@ exports[`Empty order component tests should match snapshot 1`] = `
 <Fragment>
   <PathBack />
   <div
-    className="makeStyles-root-4"
     data-cy=""
   >
     <WithStyles(ForwardRef(Typography))
-      className="makeStyles-title-2"
       variant="h2"
     />
     <img
       alt=""
-      className="makeStyles-image-3"
       src="./images/cart/empty-cart-light-theme-image.png"
     />
     <Link
       to="/catalog/:category"
     >
       <WithStyles(ForwardRef(Button))
-        className="makeStyles-button-1"
         variant="contained"
       />
     </Link>

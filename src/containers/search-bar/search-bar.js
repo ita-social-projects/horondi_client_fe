@@ -19,7 +19,7 @@ const SearchBar = ({
 
   const [searchTimeout, setSearchTimeout] = useState(null);
 
-  const { loading, refetch } = useQuery(getFilteredProductsQuery, {
+  const { loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
     variables: { search: searchParams?.searchFilter }
@@ -29,7 +29,6 @@ const SearchBar = ({
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-
     handleErrors();
     if (!formRegExp.search.test(target.value)) {
       handleErrors(t('error.onlyLetter'));
@@ -40,9 +39,8 @@ const SearchBar = ({
           setSearchParams(() => ({
             products: [],
             searchFilter: target.value,
-            searchBarVisibility: !!target.value
+            searchBarVisibility: true
           }));
-          refetch();
         }, 1000)
       );
     }

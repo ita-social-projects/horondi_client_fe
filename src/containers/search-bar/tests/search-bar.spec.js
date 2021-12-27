@@ -30,8 +30,6 @@ const initialSearchState = {
   products: [],
   searchBarVisibility: false,
   loading: false
-  // handleErrors: '',
-  // errors: null
 };
 
 describe('SearchBar component tests', () => {
@@ -42,8 +40,6 @@ describe('SearchBar component tests', () => {
         initialSearchState={initialSearchState}
         searchParams={initialSearchState}
         setSearchParams={() => null}
-        // handleErrors={handleErrors}
-        // errors={errors}
       />
     );
 

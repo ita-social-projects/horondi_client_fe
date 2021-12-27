@@ -11,7 +11,6 @@ const SearchBar = ({
   searchParams,
   setSearchParams,
   initialSearchState,
-  fieldOptions = {},
   fromNavBar = true,
   handleErrors,
   errors
@@ -28,18 +27,15 @@ const SearchBar = ({
     variables: { search: searchParams.searchFilter }
   });
 
-  const handleSearch = ({ target, event }) => {
+  const handleSearch = ({ target }) => {
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
     setSearch(target.value);
     handleErrors();
-
-    const reg = formRegExp.search.test(target.value);
-    if (!reg) {
+    if (!formRegExp.search.test(target.value)) {
       handleErrors(t('error.onlyLetter'));
     }
-
     if (target.value && target.value.trim()) {
       setSearchTimeout(
         setTimeout(() => {
@@ -48,7 +44,7 @@ const SearchBar = ({
             searchFilter: target.value,
             searchBarVisibility: !!target.value
           }));
-          if (!errors) refetch();
+          refetch();
         }, 1000)
       );
     }

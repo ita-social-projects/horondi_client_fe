@@ -16,7 +16,6 @@ exports[`Product details test Should render product details component 1`] = `
         <ProductInfo
           checkDisabledProduct=""
           countComments={0}
-          price={Object {}}
           currency={0}
           product={Object {}}
         />

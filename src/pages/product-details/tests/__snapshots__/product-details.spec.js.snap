@@ -17,10 +17,12 @@ exports[`Product details test Should render product details component 1`] = `
           checkDisabledProduct=""
           countComments={0}
           price={Object {}}
+          currency={0}
           product={Object {}}
         />
         <ProductSizes
           checkDisabledProduct=""
+          currentSize=""
           handleSizeChange={[Function]}
           sizeIsNotSelectedError={false}
         />

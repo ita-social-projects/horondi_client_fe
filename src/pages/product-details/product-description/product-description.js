@@ -32,7 +32,7 @@ const ProductDescription = ({ product, currentSizeIndex, checkDisabledProduct })
           <AccordionDetails>
             <Typography component='div' className={styles.text}>
               {parse(
-                t(`${translationsKey}.description`)
+                String(t(`${translationsKey}.description`))
                   .replace(/&nbsp;/g, '')
                   .replace(/;/g, '. ')
               )}

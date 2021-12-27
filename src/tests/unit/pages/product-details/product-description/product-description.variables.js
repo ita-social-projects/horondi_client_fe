@@ -9,6 +9,10 @@ export const product = {
       value: 'Outside: front pocket - 20x20 and a secret pocket on the back with a padlock'
     }
   ],
+  translationsKey: {
+    description: 'Ззовні: передня кишеня - 20х20 та потаємна кишеня на спинці на замочку;',
+    name: 'Роллтоп синій'
+  },
   mainMaterial: {
     material: {
       translationsKey: '61840d7da40f604a050ce411',

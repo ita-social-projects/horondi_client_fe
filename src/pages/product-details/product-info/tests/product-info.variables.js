@@ -1,5 +1,6 @@
 export const props = (boolType, countComments = 1, disabled = true) => ({
   sizeIndex: 0,
+  currentPrice: 1000,
   countComments: { count: countComments },
   checkDisabledProduct: disabled,
   product: {

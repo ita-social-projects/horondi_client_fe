@@ -9,7 +9,12 @@ jest.mock(
   })
 );
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: () => null, i18n: { language: 'ua' } })
+  useTranslation: () => ({
+    t: () => ({
+      description: 'Ззовні: передня кишеня - 20х20 та потаємна кишеня на спинці на замочку;'
+    }),
+    i18n: { language: 'ua' }
+  })
 }));
 
 let wrapper;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import ProductSizes from '../product-sizes';
 
 jest.mock('../product-sizes.styles', () => ({
@@ -12,14 +11,15 @@ const size = {
   _id: '1'
 };
 
-useSelector.mockImplementation(() => ({ size }));
-
 const handleSizeChange = jest.fn();
 const sizes = [
   {
     size
   }
 ];
+const currentSize = {
+  id: '1'
+};
 
 describe('Product component', () => {
   it('Should render', () => {
@@ -28,6 +28,7 @@ describe('Product component', () => {
         handleSizeChange={handleSizeChange}
         sizes={sizes}
         sizeIsNotSelectedError={false}
+        currentSize={currentSize}
       />
     );
     expect(component).toBeDefined();

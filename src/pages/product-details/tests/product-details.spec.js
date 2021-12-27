@@ -22,7 +22,11 @@ jest.mock('../../../hooks/use-add-product-to-wishlist-handler', () => ({
 }));
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
-  useSelector: (selector) => ({ currency: 0, isLightTheme: true, productToSend: {} }),
+  useSelector: () => ({
+    currency: 0,
+    isLightTheme: true,
+    productToSend: { options: { size: '' } }
+  }),
   useDispatch: () => () => null
 }));
 jest.mock('@apollo/client');

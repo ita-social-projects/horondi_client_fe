@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     position: 'relative',
 
-    /* filter: 'brightness(30%) contrast(90%)', */
     height: '100vh',
     '@media (max-width: 525px)': {
       background: 'none'

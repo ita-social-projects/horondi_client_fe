@@ -1,28 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-
-  /* recoveryBackground: {
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    height: '1000px',
-    position: 'relative'
-  },
-  recoveryForm: {
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  heading: {
-    fontSize: '34px',
-    lineHeight: '46px',
-    textAlign: 'center',
-    marginBottom: '25px',
-    marginTop: 0,
-    textTransform: 'capitalize',
-    color: theme.palette.textColor
-  }, */
   emailInput: {
     marginBottom: '21px',
     '& label': {
@@ -58,30 +36,10 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: '400px'
   },
 
-  /* recoverBtn: {
-    border: '1px solid black',
-    borderRadius: '0px',
-    textTransform: 'uppercase',
-    background: theme.palette.textColor,
-    color: theme.palette.backgroundColor,
-    '&:hover': {
-      background: theme.palette.textColor,
-      color: theme.palette.backgroundColor
-    }
-  }, */
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,
       color: '#828282'
     }
   }
-
-  /* wrapForm: {
-    padding: '50px 100px 60px',
-    maxWidth: '685px',
-    background: theme.palette.backgroundColor,
-    boxSizing: 'content-box',
-    minWidth: '325px',
-    overflow: 'hidden'
-  } */
 }));

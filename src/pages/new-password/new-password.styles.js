@@ -1,32 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-
-  /*  newPassBackground: {
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    height: '1000px',
-    position: 'relative'
-  },
-  newPassForm: {
-    backgroundColor: theme.palette.backgroundColor,
-    width: '400px',
-    minHeight: '100px',
-    textAlign: 'center',
-    position: 'absolute',
-    top: '202px',
-    right: '56px',
-    padding: '50px',
-    paddingBottom: '79px'
-  },
-  heading: {
-    fontSize: '1.5rem',
-    lineHeight: '29px',
-    marginBottom: '25px',
-    marginTop: '0px',
-    fontStyle: 'normal',
-    fontWeight: 'normal'
-  }, */
   passwordInput: {
     marginBottom: '32px',
     '& label': {

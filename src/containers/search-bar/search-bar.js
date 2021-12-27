@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
@@ -16,9 +16,6 @@ const SearchBar = ({
 }) => {
   const styles = useStyles({ fromNavBar });
   const { t } = useTranslation();
-
-  const [searchTimeout, setSearchTimeout] = useState(null);
-
   const { loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
@@ -26,21 +23,16 @@ const SearchBar = ({
   });
 
   const handleSearch = ({ target }) => {
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
     handleErrors();
     if (!formRegExp.search.test(target.value)) {
       handleErrors(t('error.onlyLetter'));
     }
     if (target.value && target.value.trim()) {
-      setSearchTimeout(
-        setSearchParams(() => ({
-          products: [],
-          searchFilter: target.value,
-          searchBarVisibility: true
-        }))
-      );
+      setSearchParams(() => ({
+        products: [],
+        searchFilter: target.value,
+        searchBarVisibility: true
+      }));
     }
   };
 

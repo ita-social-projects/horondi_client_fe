@@ -13,24 +13,29 @@ jest.mock('../../search-bar/search-bar.styles.js', () => ({
 
 jest.mock('@apollo/client');
 
-useQuery.mockImplementation((query, options) => {
-  options.onCompleted();
-  return { error: null, loading: false };
-});
+const useQueryData = {
+  loading: false,
+  error: false,
+  data: {}
+};
+
+useQuery.mockImplementation(() => ({
+  ...useQueryData
+}));
 
 const initialSearchState = {
   searchFilter: '',
   products: [],
   searchBarVisibility: false,
   loading: false,
-  error: false
+  error: true
 };
 describe('SearchBar component tests', () => {
-  it('Should render <HeaderRightBar>> component', () => {
+  it('Should render <HeaderRightBar> component', () => {
     const component = shallow(
       <HeaderRightBar
         fromSideBar=''
-        nitialSearchState={initialSearchState}
+        initialSearchState={initialSearchState}
         setIsMenuOpen={() => null}
       />
     );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useStyles } from './header-right-bar.styles';
-
 import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';

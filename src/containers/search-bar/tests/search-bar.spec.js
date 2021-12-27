@@ -18,14 +18,11 @@ jest.mock('react-i18next', () => ({
 jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
+jest.useFakeTimers();
+jest.spyOn(global, 'setTimeout');
 
 const Test = () => (
-  <TextField
-    placeholder='roll'
-    onBlur={handleOnBlur}
-    onFocus={handleSearch}
-    onChange={inputMock}
-  />
+  <TextField placeholder='roll' onBlur={handleOnBlur} onFocus={handleSearch} onChange={inputMock} />
 );
 
 jest.mock('react-redux', () => ({

@@ -27,8 +27,13 @@ const initialSearchState = {
 };
 describe('SearchBar component tests', () => {
   it('Should render <HeaderRightBar>> component', () => {
-    const component = shallow(<HeaderRightBar fromSideBar='' setIsMenuOpen={() => null} />);
-
+    const component = shallow(
+      <HeaderRightBar
+        fromSideBar=''
+        nitialSearchState={initialSearchState}
+        setIsMenuOpen={() => null}
+      />
+    );
     expect(component).toBeDefined();
   });
 

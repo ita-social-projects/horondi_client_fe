@@ -14,7 +14,7 @@ const SearchBar = ({
   fromNavBar = true,
   handleErrors
 }) => {
-  const styles = useStyles(fromNavBar);
+  const styles = useStyles({ fromNavBar });
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -22,7 +22,7 @@ const SearchBar = ({
   const { loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
-    variables: { search: searchParams?.searchFilter }
+    variables: { search: searchParams.searchFilter }
   });
 
   const handleSearch = ({ target }) => {
@@ -35,13 +35,11 @@ const SearchBar = ({
     }
     if (target.value && target.value.trim()) {
       setSearchTimeout(
-        setTimeout(() => {
-          setSearchParams(() => ({
-            products: [],
-            searchFilter: target.value,
-            searchBarVisibility: true
-          }));
-        }, 1000)
+        setSearchParams(() => ({
+          products: [],
+          searchFilter: target.value,
+          searchBarVisibility: true
+        }))
       );
     }
   };

@@ -1,13 +1,9 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { render, fireEvent } from '@testing-library/react';
-import { TextField } from '@material-ui/core';
+import { shallow } from 'enzyme';
 import SearchBar from '../search-bar';
 import SearchIcon from '../SearchIcon';
 
-const inputMock = jest.fn();
-const handleOnBlur = jest.fn();
-const handleSearch = jest.fn();
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key) => key,
@@ -18,17 +14,7 @@ jest.mock('react-i18next', () => ({
 jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
-jest.useFakeTimers();
-jest.spyOn(global, 'setTimeout');
 
-const Test = () => (
-  <TextField placeholder='roll' onBlur={handleOnBlur} onFocus={handleSearch} onChange={inputMock} />
-);
-
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: () => () => null
-}));
 jest.mock('@apollo/client');
 
 useQuery.mockImplementation((query, options) => {
@@ -45,7 +31,7 @@ const initialSearchState = {
 
 describe('SearchBar component tests', () => {
   it('Should render SearchBar component', () => {
-    const component = render(
+    const component = shallow(
       <SearchBar
         fromSideBar=''
         initialSearchState={initialSearchState}
@@ -56,17 +42,8 @@ describe('SearchBar component tests', () => {
 
     expect(component).toBeDefined();
   });
-  it('Input', () => {
-    const container = render(<Test />);
-
-    const input = container.getByPlaceholderText('roll');
-
-    fireEvent.change(input, { target: { value: 'roll' } });
-    expect(input.value).toBe('roll');
-    expect(inputMock.mock.calls).toHaveLength(1);
-  });
   it('Should render SearchIcon component', () => {
-    const component = render(<SearchIcon />);
+    const component = shallow(<SearchIcon />);
     expect(component).toBeDefined();
   });
 });

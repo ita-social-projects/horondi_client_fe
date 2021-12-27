@@ -45,7 +45,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   newsItemContent: {
     padding: '0px',
-    height: '200px'
+    height: '270px',
+    overflow: 'hidden'
   },
   ArticleTitleContainer: {
     padding: '0px',
@@ -78,11 +79,9 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     padding: '0px',
     textDecoration: 'none',
-    color: '#020202',
-    backgroundColor: '#fff',
     boxShadow: 'none',
     borderRadius: '0px',
-    border: '1px solid #020202',
+    border: '1px solid',
     fontSize: '14px',
     fontWeight: '600',
     lineHeight: '20px',

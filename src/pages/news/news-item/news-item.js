@@ -59,7 +59,7 @@ const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
         </CardContent>
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}-${slug}`}>
-            <Button variant='contained' className={styles.newsButton} data-cy='readMoreButton'>
+            <Button variant='outlined' className={styles.newsButton} data-cy='readMoreButton'>
               {t('buttons.readMore')}
             </Button>
           </Link>

@@ -125,7 +125,10 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <Tooltip className={styles.checkIcon} title={t('product.tooltips.bought')}>
-                  <VerifiedPurchaseIcon className={styles.boughtIcon} />
+                  <VerifiedPurchaseIcon
+                    alt='Verified purchase icon'
+                    className={styles.boughtIcon}
+                  />
                 </Tooltip>
               ) : null}
               {handleUserCommentApprove(userData, email, show) ? (

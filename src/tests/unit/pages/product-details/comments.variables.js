@@ -24,7 +24,7 @@ export const commentItem = {
   date: '2021-03-09T08:32:39.460Z',
   show: true,
   rate: null,
-  verifiedPurchase: false,
+  verifiedPurchase: true,
   replyCommentsCount: 3,
   user: {
     _id: '5fc54971083c163c2c52d96d',

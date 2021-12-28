@@ -20,7 +20,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '60px',
     borderRadius: '29px',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
-    right: '3%',
+    right: '12px',
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
       boxShadow: ' 0 0 10px white',
@@ -44,7 +44,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     background: 'none',
     display: 'block',
-    right: '3%'
+    right: '12px'
   },
   msgIcon: {
     ...flexCenter,

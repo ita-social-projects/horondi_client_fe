@@ -11,7 +11,6 @@ const Cart = () => {
   const { user } = useSelector(({ User }) => ({
     user: User.userData
   }));
-
   const { cart: cartItems, cartOperations } = useCart(user);
   return (
     <div className={styles.root}>

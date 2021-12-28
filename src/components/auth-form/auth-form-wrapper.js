@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStyles } from './auth-form-wrapper.styles';
 
-const AuthWrapper = (props) => {
+const AuthFormWrapper = (props) => {
   const styles = useStyles();
   return (
     <div className={styles.imgBackground}>
@@ -13,4 +13,4 @@ const AuthWrapper = (props) => {
     </div>
   );
 };
-export default AuthWrapper;
+export default AuthFormWrapper;

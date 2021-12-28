@@ -7,7 +7,7 @@ import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import _ from 'lodash';
 
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useStyles } from './cart-item.styles';
 import NumberInput from '../../../../components/number-input';
 import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
@@ -46,33 +46,52 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     [dispatch, changeCartItemUserQuantity]
   );
 
-  const {
-    data: dataProduct,
-    loading: loadingProduct,
-    error: errorProduct
-  } = useQuery(getProductById, {
-    variables: { id: item?.productId },
-    skip: item.constructor
+  const [
+    getProductByIdHandler,
+    {
+      data: constructorByModel,
+      called: calledProduct,
+      error: constructorError,
+      loading: loadingProduct
+    }
+  ] = useLazyQuery(getProductById, {
+    variables: {
+      id: item?.productId
+    }
   });
 
-  const {
-    data: dataConstructor,
-    loading: loadingConstructor,
-    error: errorConstructor
-  } = useQuery(getConstructorById, {
-    variables: { id: item.productId },
-    skip: !item.constructor
+  const [
+    getConstructorByIdHandler,
+    {
+      data: constructorByProduct,
+      called: calledConstructor,
+      error: errorProduct,
+      loading: loadingConstructor
+    }
+  ] = useLazyQuery(getConstructorById, {
+    variables: {
+      id: item.productId
+    }
   });
 
-  const cartItem = item.constructor
-    ? dataConstructor?.getConstructorById
-    : dataProduct?.getProductById;
+  const isConstructor = Object.keys(item.constructor).length !== 0;
 
-  const itemFoto = item.constructor
+  if (!isConstructor && !calledProduct) {
+    getProductByIdHandler();
+  }
+  if (isConstructor && !calledConstructor) {
+    getConstructorByIdHandler();
+  }
+
+  const cartItem = isConstructor
+    ? constructorByProduct?.getConstructorById
+    : constructorByModel?.getProductById;
+
+  const itemFoto = isConstructor
     ? cartItem?.model.images.thumbnail
-    : cartItem.images.primary.thumbnail;
+    : cartItem?.images.primary.thumbnail;
 
-  const itemName = item.constructor ? cartItem?.model.translationsKey : cartItem.translationsKey;
+  const itemName = isConstructor ? cartItem?.model.translationsKey : cartItem?.translationsKey;
 
   const itemMaterial = cartItem?.bottomMaterial ? (
     <div className={styles.itemDescription}>
@@ -96,13 +115,13 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     );
   };
 
-  const itemSize = !item.constructor
-    ? cartItem.sizes && cartItem.sizes.map(mapCallback)
+  const itemSize = !isConstructor
+    ? cartItem?.sizes && cartItem.sizes.map(mapCallback)
     : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
   const { isLoading, isError } = useIsLoadingOrError(
-    [loadingConstructor, loadingProduct],
-    [errorConstructor, errorProduct]
+    [loadingProduct, loadingConstructor],
+    [constructorError, errorProduct]
   );
 
   useEffect(() => {
@@ -122,7 +141,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
-  if (loadingProduct || loadingConstructor)
+  if (loadingProduct)
     return (
       <tr>
         <td>
@@ -132,7 +151,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     );
 
   function handleSizeChange(event) {
-    !item.constructor
+    !isConstructor
       ? cartItem.sizes &&
         cartItem.sizes.map((cartData) => {
           if (event.target.value === cartData.size._id && firstlyMounted) {

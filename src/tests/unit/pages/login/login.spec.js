@@ -7,6 +7,7 @@ import { SnackBarContextProvider } from '../../../../context/snackbar-context';
 import { getFromLocalStorage } from '../../../../services/local-storage.service';
 import { DARK_THEME, LIGHT_THEME } from '../../../../configs/index';
 import Login from '../../../../pages/login/login';
+import { AuthWrapper, AuthButton, AuthHeading } from '../../../../components/auth-form';
 
 jest.mock('../../../../pages/login/login.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../../components/google-log-in-btn/google-button.styles', () => ({
@@ -115,5 +116,18 @@ describe('Login page test', () => {
     const form = getByText(/wrongCredentials/i);
     expect(form).toBeInTheDocument();
     storage.loginError = '';
+  });
+  it('Should contains Auth Components', () => {
+    const component = mount(
+      <SnackBarContextProvider>
+        <Router>
+          <Login />
+        </Router>
+      </SnackBarContextProvider>
+    );
+
+    expect(component.find(AuthHeading).length).toBe(1);
+    expect(component.find(AuthButton).length).toBe(1);
+    expect(component.find(AuthWrapper).length).toBe(1);
   });
 });

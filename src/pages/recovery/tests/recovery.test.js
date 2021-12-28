@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Recovery from '../recovery.js';
+import { AuthWrapper, AuthButton, AuthHeading } from '../../../components/auth-form';
 
 jest.mock('../recovery.styles', () => ({
   useStyles: () => ({})
@@ -21,5 +22,11 @@ describe('Recovery component tests', () => {
   it('Should render Recovery', () => {
     const component = shallow(<Recovery />);
     expect(component).toBeDefined();
+  });
+  it('Should contains Auth Components', () => {
+    const component = mount(<Recovery />);
+    expect(component.find(AuthButton).length).toBe(1);
+    expect(component.find(AuthHeading).length).toBe(1);
+    expect(component.find(AuthWrapper).length).toBe(1);
   });
 });

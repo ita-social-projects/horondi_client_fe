@@ -43,12 +43,13 @@ describe('SearchBar component tests', () => {
   });
 
   it('Should render <SearchBar/> component', () => {
-    const component = shallow(
+    const component = mount(
       <SearchBar
         fromSideBar=''
         initialSearchState={initialSearchState}
         searchParams={initialSearchState}
         setSearchParams={() => null}
+        handleErrors={jest.fn()}
       />
     );
 

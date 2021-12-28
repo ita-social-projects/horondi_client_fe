@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { shallow } from 'enzyme';
+import { TextField } from '@material-ui/core';
 import SearchBar from '../search-bar';
 import SearchIcon from '../SearchIcon';
 
@@ -19,7 +20,7 @@ jest.mock('@apollo/client');
 
 useQuery.mockImplementation((query, options) => {
   options.onCompleted();
-  return { error: null, loading: false };
+  return { error: null, loading: true };
 });
 
 const initialSearchState = {
@@ -30,17 +31,33 @@ const initialSearchState = {
 };
 
 describe('SearchBar component tests', () => {
-  it('Should render SearchBar component', () => {
+  it('Should render one SearchBar component when the input value is typed', () => {
     const component = shallow(
       <SearchBar
         fromSideBar=''
         initialSearchState={initialSearchState}
         searchParams={initialSearchState}
         setSearchParams={() => null}
+        fromNavBar
+        handleErrors={jest.fn()}
       />
     );
-
-    expect(component).toBeDefined();
+    component.find(TextField).simulate('focus', { target: { value: 'test' } });
+    expect(component.find(TextField)).toHaveLength(1);
+  });
+  it('Should render SearchBar component when regExp doesnt match', () => {
+    const component = shallow(
+      <SearchBar
+        fromSideBar=''
+        initialSearchState={initialSearchState}
+        searchParams={initialSearchState}
+        setSearchParams={() => null}
+        fromNavBar
+        handleErrors={jest.fn()}
+      />
+    );
+    component.find(TextField).simulate('focus', { target: { value: '000' } });
+    expect(component.find(TextField).props().inputProps.maxLength).toEqual(20);
   });
   it('Should render SearchIcon component', () => {
     const component = shallow(<SearchIcon />);

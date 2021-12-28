@@ -51,7 +51,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     {
       data: constructorByModel,
       called: calledProduct,
-      error: constructorError,
+      error: errorProduct,
       loading: loadingProduct
     }
   ] = useLazyQuery(getProductById, {
@@ -65,7 +65,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     {
       data: constructorByProduct,
       called: calledConstructor,
-      error: errorProduct,
+      error: constructorError,
       loading: loadingConstructor
     }
   ] = useLazyQuery(getConstructorById, {
@@ -123,7 +123,6 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     [loadingProduct, loadingConstructor],
     [constructorError, errorProduct]
   );
-
   useEffect(() => {
     const itemData = getCartItem(item.id);
     setCurrentSize(itemData.sizeAndPrice.size._id);

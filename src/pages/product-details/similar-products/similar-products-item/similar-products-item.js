@@ -28,7 +28,7 @@ const SimilarProductsItem = ({ imageUrl, id, rate, price, translationsKey }) => 
       .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
   }, [imageUrl, isLightTheme]);
 
-  const styles = useStyles({ image, isLightTheme });
+  const styles = useStyles({ image, isLightTheme, palette });
 
   return (
     <Link to={`${pathToProducts}/${id}`}>

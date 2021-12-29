@@ -8,13 +8,12 @@ import { product, mockStore } from './search-bar-list-item.variables';
 jest.mock('react-redux');
 
 const mockDispatch = jest.fn();
-const etalonString = 'test';
 
 useSelector.mockImplementation(() => mockStore);
 useDispatch.mockReturnValue(mockDispatch);
 
 jest.mock('connected-react-router', () => ({
-  push: () => etalonString
+  push: () => 'test'
 }));
 
 jest.mock('@material-ui/styles', () => ({
@@ -28,12 +27,12 @@ jest.mock('@material-ui/styles', () => ({
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: () => etalonString
+    t: () => 'test'
   })
 }));
 
 jest.mock('../../../../utils/imageLoad', () => ({
-  getImage: () => Promise.resolve(etalonString)
+  getImage: () => Promise.resolve('test')
 }));
 
 jest.mock('../search-bar-list-item.styles', () => ({
@@ -41,6 +40,8 @@ jest.mock('../search-bar-list-item.styles', () => ({
 }));
 
 describe('test SearchBarListItem component', () => {
+  const etalonString = 'test';
+
   it('Component should render appropriate `h4`', () => {
     const { container } = render(<SearchBarListItem product={product} />);
     const el = container.querySelector('h4');

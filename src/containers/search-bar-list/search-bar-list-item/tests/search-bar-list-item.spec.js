@@ -1,14 +1,20 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { render, screen } from '@testing-library/react';
 import SearchBarListItem from '../search-bar-list-item';
-
-const minPrice = 1312;
+import { product, mockStore } from './search-bar-list-item.variables';
 
 jest.mock('react-redux');
 
+const mockDispatch = jest.fn();
+const etalonString = 'test';
+
+useSelector.mockImplementation(() => mockStore);
+useDispatch.mockReturnValue(mockDispatch);
+
 jest.mock('connected-react-router', () => ({
-  push: 0
+  push: () => etalonString
 }));
 
 jest.mock('@material-ui/styles', () => ({
@@ -20,38 +26,37 @@ jest.mock('@material-ui/styles', () => ({
   })
 }));
 
-const mockStore = {
-  currency: 0,
-  lightMode: true
-};
-const product = {
-  images: { primary: { small: 'test' } },
-  name: { 0: { value: 'test' }, 1: { value: 'test' } },
-  basePrice: { 0: { value: 0, currency: 'UAH' } },
-  sizes: [
-    {
-      price: [
-        {
-          value: minPrice,
-          currency: 'UAH'
-        }
-      ]
-    }
-  ]
-};
-const mockDispatch = jest.fn();
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: () => etalonString
+  })
+}));
 
-useSelector.mockImplementation(() => mockStore);
-useDispatch.mockReturnValue(mockDispatch);
+jest.mock('../../../../utils/imageLoad', () => ({
+  getImage: () => Promise.resolve(etalonString)
+}));
 
-const wrapper = shallow(<SearchBarListItem product={product} />);
+jest.mock('../search-bar-list-item.styles', () => ({
+  useStyles: () => ({})
+}));
 
-describe('Register component tests', () => {
-  it('Should render Register', () => {
-    expect(wrapper).toBeDefined();
+describe('test SearchBarListItem component', () => {
+  it('Component should render appropriate `h4`', () => {
+    const { container } = render(<SearchBarListItem product={product} />);
+    const el = container.querySelector('h4');
+    expect(el.textContent).toBe(etalonString);
   });
 
-  it('Should display correct price', () => {
-    expect(wrapper.find('div.makeStyles-title-4 > div').text()).toContain(minPrice);
+  it('after click on button component should call dispatch', () => {
+    const { container } = render(<SearchBarListItem product={product} />);
+    const el = container.querySelector('button');
+    el.click();
+    expect(mockDispatch).toHaveBeenCalled();
+  });
+
+  it('Component should render image', () => {
+    render(<SearchBarListItem product={product} />);
+    const el = screen.getByTestId('image');
+    expect(el).toBeInTheDocument();
   });
 });

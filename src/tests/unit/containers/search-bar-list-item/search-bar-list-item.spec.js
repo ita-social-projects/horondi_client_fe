@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { render, screen } from '@testing-library/react';
-import SearchBarListItem from '../search-bar-list-item';
+import SearchBarListItem from '../../../../containers/search-bar-list/search-bar-list-item/search-bar-list-item';
 import { product, mockStore } from './search-bar-list-item.variables';
 
 jest.mock('react-redux');
@@ -35,9 +35,12 @@ jest.mock('../../../../utils/imageLoad', () => ({
   getImage: () => Promise.resolve('test')
 }));
 
-jest.mock('../search-bar-list-item.styles', () => ({
-  useStyles: () => ({})
-}));
+jest.mock(
+  '../../../../containers/search-bar-list/search-bar-list-item/search-bar-list-item.styles',
+  () => ({
+    useStyles: () => ({})
+  })
+);
 
 describe('test SearchBarListItem component', () => {
   const etalonString = 'test';

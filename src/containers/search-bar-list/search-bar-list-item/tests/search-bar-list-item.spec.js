@@ -41,22 +41,24 @@ jest.mock('../search-bar-list-item.styles', () => ({
 
 describe('test SearchBarListItem component', () => {
   const etalonString = 'test';
+  let container;
+
+  beforeEach(() => {
+    ({ container } = render(<SearchBarListItem product={product} />));
+  });
 
   it('Component should render appropriate `h4`', () => {
-    const { container } = render(<SearchBarListItem product={product} />);
     const el = container.querySelector('h4');
     expect(el.textContent).toBe(etalonString);
   });
 
   it('after click on button component should call dispatch', () => {
-    const { container } = render(<SearchBarListItem product={product} />);
     const el = container.querySelector('button');
     el.click();
     expect(mockDispatch).toHaveBeenCalled();
   });
 
   it('Component should render image', () => {
-    render(<SearchBarListItem product={product} />);
     const el = screen.getByTestId('image');
     expect(el).toBeInTheDocument();
   });

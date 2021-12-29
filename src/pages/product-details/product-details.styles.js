@@ -64,6 +64,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   arrowIcon: {
     fontSize: '52px',
-    fill: theme.palette.textColor
+    fill: theme.palette.arrowIcon.arrowColor
   }
 }));

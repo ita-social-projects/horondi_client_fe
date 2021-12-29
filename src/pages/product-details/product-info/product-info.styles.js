@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  common: {
-    fontFamily: 'Open Sans'
-  },
   head: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -73,6 +70,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   subtitle: {
     alignSelf: 'center',
+    fontSize: '14px',
     '@media (max-width: 600px)': {
       justifyContent: 'center'
     }

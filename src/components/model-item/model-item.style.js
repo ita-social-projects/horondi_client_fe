@@ -39,6 +39,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     '&:hover footer': {
       opacity: 1
+    },
+    '@media (max-width: 480px)': {
+      flex: '1 0 37%'
     }
   },
   modelItemTitle: {

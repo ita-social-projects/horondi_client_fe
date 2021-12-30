@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: ({ isModelsVisible, modelsCount }) => ({
-    height: !isModelsVisible ? '480px' : `${(modelsCount / 3) * 210 + 250}px`,
+    height: !isModelsVisible ? '480px' : `${(modelsCount / 2) * 210 + 250}px`,
     minHeight: '480px',
     position: 'relative',
     display: 'flex',
@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexFlow: 'wrap',
     width: '85%',
-    height: isModelsVisible ? 480 : 235,
+    height: isModelsVisible ? 880 : 235,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',

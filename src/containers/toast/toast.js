@@ -1,14 +1,19 @@
 import React from 'react';
-
 import { ToastContainer } from 'react-toastify';
-
-import { useSelector } from 'react-redux';
-import { selectToastSettings } from '../../utils/multiple.selectors';
+import { useStyles } from './toast.styles';
 
 const Toast = () => {
-  const toastSettings = useSelector(selectToastSettings);
+  const styles = useStyles();
 
-  return <ToastContainer {...toastSettings} />;
+  return (
+    <ToastContainer
+      hideProgressBar
+      className={styles.root}
+      limit={2}
+      newestOnTop
+      pauseOnHover
+    />
+  );
 };
 
 export default Toast;

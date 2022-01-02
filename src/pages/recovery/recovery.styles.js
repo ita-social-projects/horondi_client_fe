@@ -22,7 +22,8 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: theme.palette.blue,
+        borederWidth: '2px'
       }
     }
   },

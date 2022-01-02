@@ -14,8 +14,14 @@ useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => ({
   error: false,
   userRecovered: '',
-  recoveryLoading: '',
-  language: 0
+  recoveryLoading: ''
+}));
+
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key) => key,
+    i18n: { changeLanguage: jest.fn() }
+  })
 }));
 
 describe('Recovery component tests', () => {

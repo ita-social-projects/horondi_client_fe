@@ -67,7 +67,7 @@ const Login = () => {
   return (
     <AuthWrapper>
       {userLoading ? (
-        <Loader style={{ minWidth: '395px' }} />
+        <Loader />
       ) : (
         <form onSubmit={(e) => eventPreventHandler(e)}>
           <AuthHeading>{t('login.formLabel')}</AuthHeading>

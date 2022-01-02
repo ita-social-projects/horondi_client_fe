@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/9.jpg';
+import BG from '../../../images/9.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   imgBackground: {
@@ -25,6 +25,6 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.backgroundColor
   },
   minimumWidth: {
-    minWidth: '325px'
+    minWidth: '280px'
   }
 }));

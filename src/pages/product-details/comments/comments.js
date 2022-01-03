@@ -7,7 +7,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useStyles } from './comments.styles';
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
-import CommentsTitle from './comments-item/comments-title/comments-title';
 import { Loader } from '../../../components/loader/loader';
 import { commentFields, TEXT_VALUE } from '../../../configs/index';
 import { ERROR } from '../constants';
@@ -186,7 +185,9 @@ const Comments = ({ productId, checkCountComments }) => {
           )}
         </div>
       </form>
-      <CommentsTitle className={styles.title} count={commentsCount} />
+      <h2 className={styles.title}>
+        {t('product.comments.commentsTitle')} ({commentsCount})
+      </h2>
       {commentsList}
       {currentLimit < comments.count && (
         <div className={styles.loadMore}>

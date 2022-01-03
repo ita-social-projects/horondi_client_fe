@@ -1,16 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const imgSides = {
-  width: '160px',
-  height: '122px',
+  height: '100%',
   objectFit: 'cover',
-  border: '2px solid #EBEFF2',
   borderRadius: '6px',
-  boxShadow: [
-    '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
-    '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
-    '0 12.5px 10px rgba(0, 0, 0, 0.06)'
-  ],
   cursor: 'pointer'
 };
 
@@ -22,13 +15,13 @@ export const useStyles = makeStyles((theme) => ({
   images: {
     maxWidth: 540,
     display: 'grid',
+    gridTemplateRows: '3fr 1fr',
     gridGap: '20px',
     '@media (max-width: 1150px)': {
       margin: '0 auto',
       maxWidth: 640
     },
     '@media (max-width: 500px)': {
-      display: 'flex',
       justifyContent: 'center',
       padding: theme.spacing(2)
     },
@@ -59,22 +52,19 @@ export const useStyles = makeStyles((theme) => ({
 
   sideImage: {
     flex: '1 1 30%',
-    ...imgSides
+    ...imgSides,
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow
   },
 
   imagePreviewContainer: {
     display: 'grid',
     gridTemplateColumns: '48px 1fr 48px',
     alignItems: 'center',
-    border: '2px solid #EBEFF2',
+    border: theme.palette.imageContainer.border,
     borderRadius: '6px',
     padding: '10px',
-    height: '385px',
-    boxShadow: [
-      '0 2.8px 2.2px rgba(0, 0, 0, 0.034)',
-      '0 6.7px 5.3px rgba(0, 0, 0, 0.048)',
-      '0 12.5px 10px rgba(0, 0, 0, 0.06)'
-    ]
+    maxHeight: '385px',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow
   },
 
   circle: {
@@ -99,34 +89,45 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     gap: 30,
     maxHeight: '150px',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    '@media (max-width: 500px)': {
+      gap: 15
+    }
   },
 
   lastImage: {
     ...imgSides,
-    background: 'rgba(0,0,0, 0.5)',
-    zIndex: 3
+    filter: 'brightness(50%)',
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow
   },
 
   lastImageText: {
     position: 'absolute',
-    top: 30,
-    left: 30,
+    height: '100%',
+    width: '100%',
     zIndex: 3,
     textAlign: 'center',
     fontSize: '16px',
     fontWeight: 600,
     lineHeight: '24px',
-    width: '80px'
+    padding: '20% 10%',
+    '@media (max-width: 500px)': {
+      padding: '5px 5px'
+    }
   },
   imageItem: {
-    flex: '1 1 30%'
+    flex: '1 1 30%',
+    height: '100%',
+    border: theme.palette.imageContainer.border,
+    borderRadius: '6px'
   },
   lastImagesBox: {
     flex: '1 1 30%',
     position: 'relative',
-    textAlign: 'center',
     color: 'white',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    height: '100%',
+    border: theme.palette.imageContainer.border,
+    borderRadius: '6px'
   }
 }));

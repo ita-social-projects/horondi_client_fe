@@ -1,40 +1,56 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import * as reactRedux from 'react-redux';
+import { render, screen } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import CartHeader from '../cart-header';
-import CartIcon from '../CartIcon';
-
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useMemo: (cb) => cb()
-}));
 
 jest.mock('../cart-header.styles.js', () => ({
   useStyles: () => ({})
 }));
 
-const useSelectorMock = jest.spyOn(reactRedux, 'useSelector');
-const store = createStore(() => [], {});
+jest.mock('react-redux');
 
-describe('Currency component', () => {
-  it('Should render the component', () => {
-    useSelectorMock.mockReturnValue({ cartItems: [] });
+const mockDispatch = jest.fn();
+useDispatch.mockReturnValue(mockDispatch);
+
+describe('CartHeader', () => {
+  it('should consist 1 item in <Badge />', () => {
+    const mockStore = {
+      cartItems: [{ quantity: 1 }],
+      user: {}
+    };
+    useSelector.mockImplementation(() => mockStore);
     render(
-      <Provider store={store}>
-        <BrowserRouter>
-          <CartHeader />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <CartHeader />
+      </BrowserRouter>
     );
+    expect(screen.getByText('1')).toBeInTheDocument();
   });
-});
-
-describe('SearchBar component tests', () => {
-  it('Should render CartIcon component', () => {
-    const component = shallow(<CartIcon />);
-    expect(component).toBeDefined();
+  it('after render component should NOT call dispatch', () => {
+    const mockStore = {
+      cartItems: [{ quantity: 1 }],
+      user: {}
+    };
+    useSelector.mockImplementation(() => mockStore);
+    render(
+      <BrowserRouter>
+        <CartHeader />
+      </BrowserRouter>
+    );
+    expect(mockDispatch).not.toHaveBeenCalled();
+  });
+  it('after render component should call dispatch', () => {
+    const mockStore = {
+      cartItems: [{ quantity: 1 }],
+      user: null
+    };
+    useSelector.mockImplementation(() => mockStore);
+    render(
+      <BrowserRouter>
+        <CartHeader />
+      </BrowserRouter>
+    );
+    expect(mockDispatch).toHaveBeenCalled();
   });
 });

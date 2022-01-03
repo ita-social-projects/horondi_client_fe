@@ -91,11 +91,7 @@ const ProductDetails = ({ match }) => {
           options: {
             size: currentSize?.size
           },
-          allSizes: availableSizes,
-          dimensions: {
-            volumeInLiters: currentSize?.size.volumeInLiters,
-            weightInKg: currentSize?.size.weightInKg
-          }
+          allSizes: availableSizes
         })
       );
     }
@@ -170,16 +166,18 @@ const ProductDetails = ({ match }) => {
           <div className={styles.productDetails}>
             {!loading && (
               <ProductInfo
+                product={product}
                 countComments={countComments}
                 checkDisabledProduct={checkDisabledProduct()}
-                price={currentSize?.size ? currentSize.size.price : {}}
-                product={product}
+                currency={currency}
+                currentPrice={productToSend.price}
               />
             )}
             <ProductSizes
               handleSizeChange={handleSizeChange}
               checkDisabledProduct={checkDisabledProduct()}
               sizes={sizes}
+              currentSize={productToSend.options.size}
               sizeIsNotSelectedError={sizeIsNotSelectedError}
             />
             <div className={styles.test}>

@@ -76,9 +76,11 @@ describe('<CommentItem /> tests', () => {
 
       const firstNameText = screen.queryByTestId('firstName');
       const commentText = screen.queryByTestId('commentText');
+      const verifiedPurchaseicon = screen.queryByAltText('Verified purchase icon');
 
       expect(firstNameText.textContent).toBe(mockedFirstName);
       expect(commentText.textContent).toBe(mockedText);
+      expect(verifiedPurchaseicon).toBeDefined();
     });
 
     it('Add reply button is disabled for guest user', () => {

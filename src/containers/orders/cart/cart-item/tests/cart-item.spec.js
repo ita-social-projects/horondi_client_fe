@@ -54,19 +54,22 @@ const mockCartOperations = {
 
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
-  useQuery: () => ({
-    loading: false,
-    error: null,
-    data: { getProductById: mockQueryData, getConstructorById: mockQueryDataConstructor }
-  })
+  useLazyQuery: () => [
+    jest.fn(),
+    {
+      loading: false,
+      error: null,
+      data: { getProductById: mockQueryData, getConstructorById: mockQueryDataConstructor }
+    }
+  ]
 }));
 
-beforeEach(() => {
-  testSelection(false);
-  component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
-});
-
 describe('Filled cart component tests', () => {
+  beforeEach(() => {
+    testSelection(false);
+    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
+  });
+
   it('should render CartItem', () => {
     expect(component).toBeDefined();
   });

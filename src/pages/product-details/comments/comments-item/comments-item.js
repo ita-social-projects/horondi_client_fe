@@ -5,7 +5,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
-import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import { Tooltip } from '@material-ui/core';
 import { useLazyQuery } from '@apollo/client';
 import { useStyles } from './comments-item.styles';
@@ -25,6 +24,7 @@ import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import Loader from '../../../../components/loader';
 import ReplyForm from './reply-form';
 import CommentDialog from './comment-dialog';
+import VerifiedPurchaseIcon from '../../../../images/verifiedPurchaseIcon';
 
 const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetchComments }) => {
   const styles = useStyles();
@@ -124,11 +124,12 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
             </div>
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
-                <div className={styles.checkIcon}>
-                  <Tooltip title={t('product.tooltips.bought')}>
-                    <ShoppingCartRoundedIcon className={styles.boughtIcon} />
-                  </Tooltip>
-                </div>
+                <Tooltip className={styles.checkIcon} title={t('product.tooltips.bought')}>
+                  <VerifiedPurchaseIcon
+                    alt='Verified purchase icon'
+                    className={styles.boughtIcon}
+                  />
+                </Tooltip>
               ) : null}
               {handleUserCommentApprove(userData, email, show) ? (
                 <Tooltip title={t('product.tooltips.feedbackComment')}>

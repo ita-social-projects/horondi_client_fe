@@ -38,7 +38,7 @@ const SearchBarListItem = ({ product }) => {
 
   return (
     <div className={styles.searchBarListItem}>
-      <div className={styles.image} style={{ backgroundSize: 'cover' }} />
+      <div data-testid='image' className={styles.image} style={{ backgroundSize: 'cover' }} />
       <div className={styles.content}>
         <div className={styles.title}>
           <Typography variant='h4'>{t(`${product.translationsKey}.name`)}</Typography>

@@ -11,7 +11,8 @@ export const useStyles = makeStyles(() => ({
     },
     margin: '0 auto',
     fontWeight: '500',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    boxShadow: props.palette.carouselItem.shadow.boxShadow
   }),
   info: {
     height: '69px',

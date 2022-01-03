@@ -73,7 +73,7 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
         productId: constructorValues._id,
         sizeAndPrice,
         quantity: 1,
-        constructor: true
+        constructor: { isConstructor: true }
       };
 
       if (userData) {

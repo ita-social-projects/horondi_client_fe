@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => {
       marginBottom: '10px'
     },
     commentActions: {
-      paddingLeft: '20px',
+      paddingLeft: '5px',
       display: 'flex',
       alignItems: 'center'
     },
@@ -125,7 +125,6 @@ export const useStyles = makeStyles((theme) => {
     },
     boughtIcon: {
       color: '#01a00d',
-      fontSize: '30px',
       marginRight: '5px'
     },
     replyText: {
@@ -136,18 +135,7 @@ export const useStyles = makeStyles((theme) => {
     },
     checkIcon: {
       position: 'relative',
-      height: '30px',
-      '&:before': {
-        top: '4px',
-        left: '13px',
-        width: '6px',
-        height: '9px',
-        content: "' '",
-        position: 'absolute',
-        transform: 'rotate(45deg)',
-        borderRight: '2px solid #ffffff',
-        borderBottom: '2px solid #ffffff'
-      }
+      height: '16px'
     },
     replyIcon: {
       marginRight: '15px',

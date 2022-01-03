@@ -92,6 +92,12 @@ export default {
           border: '1px solid black'
         }
       }
+    },
+    arrowIcon: {
+      arrowColor: 'rgba(2, 2, 2, 0.5)'
+    },
+    imageContainer: {
+      border: '1px solid rgba(91, 91, 91, 0.2)'
     }
   },
   dark: {
@@ -180,6 +186,12 @@ export default {
           border: '1px solid black'
         }
       }
+    },
+    arrowIcon: {
+      arrowColor: 'rgba(254, 254, 254, 0.75)'
+    },
+    imageContainer: {
+      border: '1px solid rgba(91, 91, 91, 1)'
     }
   }
 };

@@ -59,11 +59,11 @@ const ProductListItem = ({ product }) => {
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>
-            {t(`${product.translationsKey}.name`)}
+            <StarRating size='small' readOnly rate={product.rate} />
             <div>
               <span className={styles.title}>
-                <StarRating size='small' readOnly rate={product.rate} />
-                <span>{checkSizes()}</span>
+                {t(`${product.translationsKey}.name`)}
+                <span className={styles.price}>{checkSizes()}</span>
               </span>
             </div>
           </div>

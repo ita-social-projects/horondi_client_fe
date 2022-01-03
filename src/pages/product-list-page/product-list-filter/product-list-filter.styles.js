@@ -136,5 +136,9 @@ export const useStyles = makeStyles((theme) => ({
   priceName: {
     fontSize: '18px',
     textTransform: 'uppercase'
+  },
+  sectionName: {
+    textTransform: 'uppercase',
+    fontSize: '1.2em'
   }
 }));

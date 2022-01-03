@@ -67,6 +67,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '150px',
     '& .Mui-selected': {
       backgroundColor: theme.palette.type === 'light' ? theme.palette.white : '#424242',
+      border: '0',
       '&:hover': {
         backgroundColor: theme.palette.type === 'light' ? theme.palette.white : '#424242'
       }

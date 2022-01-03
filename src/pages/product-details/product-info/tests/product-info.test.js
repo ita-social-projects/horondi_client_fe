@@ -1,6 +1,5 @@
 import React from 'react';
 import i18next from 'i18next';
-import { useSelector } from 'react-redux';
 import ProductInfo from '../product-info';
 import { props } from './product-info.variables';
 
@@ -8,30 +7,6 @@ jest.mock('react-redux');
 
 jest.mock('../product-info.styles', () => ({
   useStyles: () => ({})
-}));
-
-useSelector.mockImplementation(() => ({
-  language: 0,
-  currency: 0,
-  ...props(true).product,
-  strapLengthInCm: '100',
-  currentPrice: {
-    price: [
-      {
-        value: 70
-      }
-    ]
-  },
-  currentWeight: {
-    dimensions: {
-      weightInKg: 1
-    }
-  },
-  currentVolume: {
-    dimensions: {
-      volumeInLiters: 22
-    }
-  }
 }));
 
 describe('Product info', () => {

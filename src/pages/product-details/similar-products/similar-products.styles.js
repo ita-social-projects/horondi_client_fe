@@ -13,7 +13,8 @@ export const useStyles = makeStyles((theme) => ({
   similarItems: {
     width: '90%',
     margin: '0 auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingTop: '70px'
   },
   carousel: {
     marginTop: '2rem',

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { IconButton } from '@material-ui/core';
-
 import Sidebar from '../../../../containers/sidebar/sidebar';
 
 let wrapper;
@@ -73,6 +72,46 @@ describe('sidebar tests', () => {
     wrapper = shallow(<Sidebar {...props} />);
     wrapper.find(IconButton).simulate('click');
 
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('do smth', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+
+    wrapper = shallow(<Sidebar {...props} />);
+    wrapper.find('[data-testid="linkSer"]').simulate('click');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('do smth', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+
+    wrapper = shallow(<Sidebar {...props} />);
+    wrapper.find('[data-testid="linkSer2"]').simulate('click');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('do smth', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+
+    wrapper = shallow(<Sidebar {...props} />);
+    wrapper.find('[data-testid="linkS"]').simulate('close');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('do smth', () => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+
+    wrapper = shallow(<Sidebar {...props} />);
+    wrapper.find('[data-testid="linkR"]').first().simulate('click');
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 });

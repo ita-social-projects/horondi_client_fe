@@ -103,5 +103,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   rightBar: {
     top: '30%'
+  },
+  certificateItem: {
+    color: theme.palette.textColor,
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    width: '100%',
+    marginTop: '25px',
+    marginBottom: '25px',
+    '& span': {
+      fontSize: '14px'
+    }
   }
 }));

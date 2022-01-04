@@ -25,7 +25,8 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '25px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    fontSize: '12px'
   },
   priceRangeInput: {
     marginLeft: '15px',
@@ -41,11 +42,56 @@ export const useStyles = makeStyles((theme) => ({
   },
   popular: {
     borderTop: '1px solid gray',
-    padding: '25px 0',
-    margin: '0'
+    padding: '25px 0 10px 0',
+    margin: '0',
+    textTransform: 'uppercase',
+    fontSize: '1.2em',
+    display: 'block'
   },
   popularSwitch: {
-    marginLeft: '90px'
+    marginLeft: '210px',
+    width: 35,
+    height: 16,
+    padding: 0,
+    bottom: '18px',
+    transform: 'scale(1.5)',
+    '&:active': {
+      '& .MuiSwitch-thumb': {
+        width: 15
+      },
+      '& .MuiSwitch-switchBase.Mui-checked': {
+        transform: 'translateX(9px)'
+      }
+    },
+    '& .MuiSwitch-switchBase': {
+      padding: 2,
+      '&.Mui-checked': {
+        transform: 'translateX(19px)',
+        color: '#fff',
+        '& + .MuiSwitch-track': {
+          opacity: 1,
+          backgroundColor: theme.palette.backgroundColor
+        }
+      }
+    },
+    '& .MuiSwitch-thumb': {
+      backgroundColor: theme.palette.textColor,
+      boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      transition: theme.transitions.create(['width'], {
+        duration: 200
+      })
+    },
+    '& .MuiSwitch-track': {
+      borderRadius: 16 / 2,
+      opacity: 1,
+      backgroundColor: theme.palette.backgroundColor,
+      boxSizing: 'border-box',
+      border: '0.1rem solid',
+      borderColor: theme.palette.cart.borderColor
+    }
   },
   checkbox: {
     textTransform: 'capitalize',
@@ -65,13 +111,17 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginBottom: '13px',
-    padding: '14px 0',
     fontSize: '14px',
+    fontWeight: 'bold',
+    padding: '14px 0',
     background: theme.palette.textColor,
     color: theme.palette.backgroundColor,
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
+    },
+    '&:disabled': {
+      backgroundColor: 'rgba(2, 2, 2, 0.2)'
     }
   },
   filterName: {
@@ -81,6 +131,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.2em',
     padding: '0.5em 0',
     color: theme.palette.textColor,
+    textTransform: 'uppercase'
+  },
+  priceName: {
+    fontSize: '18px',
     textTransform: 'uppercase'
   },
   sectionName: {

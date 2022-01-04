@@ -29,6 +29,10 @@ export const useStyles = makeStyles(() => ({
     right: '15px',
     top: '5px'
   },
+  nestedBox: {
+    marginTop: '10px',
+    right: '10px'
+  },
   nested: {
     '&:hover': {
       background: 'none'

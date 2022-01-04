@@ -26,6 +26,7 @@ const HotItemFilter = () => {
   const handleChange = (event) => {
     if (event.target.checked) {
       searchParams.set(isHotItemFilter, event.target.checked);
+      setHotItem(!hotItem);
     } else {
       searchParams.delete(isHotItemFilter);
       setHotItem(!hotItem);

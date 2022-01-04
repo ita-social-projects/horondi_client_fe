@@ -1,66 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
     overflowX: 'hidden'
   },
-  wrapper: {
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 2
-  },
-  background: {
-    height: '100vh',
-    width: '100%',
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    filter: 'brightness(30%) contrast(90%)',
-    position: 'absolute',
-    zIndex: 1
-  },
-  formWrapper: {
-    margin: theme.spacing(1),
-    zIndex: 3,
-    maxWidth: '960px',
-    filter: 'drop-shadow(8px 8px 10px dark-gray)',
-    '& .MuiGrid-item': {
-      padding: '0px !important'
-    },
-    '@media (max-width: 959px)': {
-      padding: '0 50px'
-    },
-    '@media (max-width: 525px)': {
-      padding: '0 15px'
-    }
-  },
-  fonWrapper: {
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    height: '100%',
-    width: '100%',
-    '@media (max-width: 959px)': {
-      display: 'none'
-    }
-  },
-  loginForm: {
-    backgroundColor: theme.palette.backgroundColor,
-    maxWidth: '685px',
-    padding: '80px 100px 90px',
-    boxSizing: 'border-box'
-  },
-  heading: {
-    fontSize: '34px',
-    lineHeight: '46px',
-    textAlign: 'center',
-    marginBottom: '25px',
-    marginTop: 0,
-    textTransform: 'capitalize',
-    color: theme.palette.textColor
-  },
   passwordInput: {
+    marginBottom: '15px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -115,17 +60,7 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   },
-  loginBtn: {
-    border: '1px solid black',
-    borderRadius: '4px',
-    textTransform: 'capitalize',
-    background: theme.palette.textColor,
-    color: theme.palette.backgroundColor,
-    '&:hover': {
-      background: theme.palette.textColor,
-      color: theme.palette.backgroundColor
-    }
-  },
+
   loginGroup: {
     position: 'relative'
   },
@@ -160,7 +95,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '20px',
+    marginBottom: '10px',
     marginTop: '5px'
   },
   orContainer: {

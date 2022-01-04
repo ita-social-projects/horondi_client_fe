@@ -1,43 +1,26 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-
+import { render, screen } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
+import { mockAllHomeImageLooks } from './our-looks.variables';
 import OurLooks from '../our-looks';
 
-let wrapper;
-const useQueryData = {
-  loading: false,
-  error: false,
-  data: { getHomePageLooksImages: [{}] }
-};
-
-jest.mock('@apollo/client');
-
-describe('slider home page tests', () => {
-  it('should match snapshot', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-
-    wrapper = shallow(<OurLooks />);
-
-    expect(wrapper).toMatchSnapshot();
+describe('our look images tests', () => {
+  beforeEach(() => {
+    render(
+      <MockedProvider mocks={mockAllHomeImageLooks} addTypename={false}>
+        <OurLooks />
+      </MockedProvider>
+    );
   });
 
-  it('should cover other branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      loading: true
-    }));
-
-    wrapper = shallow(<OurLooks />);
+  it('shows images', async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const images = screen.getAllByTestId('ourLooksImage');
+    expect(images).toHaveLength(2);
   });
 
-  it('should cover rest branches', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData,
-      error: {}
-    }));
-
-    wrapper = shallow(<OurLooks />);
+  it('shows loader', () => {
+    const loader = screen.getByTestId('loader');
+    expect(loader).toBeDefined();
   });
 });

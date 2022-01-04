@@ -21,7 +21,7 @@ const OurLooks = () => {
       <div className={styles.imageSection}>
         {looksImages.length
           ? looksImages.slice(0, 7).map((image) => (
-            <div key={image._id} className={styles.imageWrapper}>
+            <div key={image._id} className={styles.imageWrapper} data-testid='ourLooksImage'>
               <div
                 className={styles.image}
                 style={{

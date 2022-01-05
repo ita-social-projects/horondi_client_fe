@@ -1,16 +1,19 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
+import { act } from 'react-dom/test-utils';
 import { mockAllHomeImageLooks } from './our-looks.variables';
-import OurLooks from '../our-looks';
+import OurLooks from '../../../../../pages/home/our-looks/our-looks';
 
 describe('our look images tests', () => {
   beforeEach(() => {
-    render(
-      <MockedProvider mocks={mockAllHomeImageLooks} addTypename={false}>
-        <OurLooks />
-      </MockedProvider>
-    );
+    act(() => {
+      render(
+        <MockedProvider mocks={mockAllHomeImageLooks} addTypename={false}>
+          <OurLooks />
+        </MockedProvider>
+      );
+    });
   });
 
   it('shows images', async () => {

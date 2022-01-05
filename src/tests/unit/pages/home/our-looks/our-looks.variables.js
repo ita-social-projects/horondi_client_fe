@@ -1,4 +1,4 @@
-import { getAllHomeImageLooks } from '../../operations/our-looks/our-looks.queries';
+import { getAllHomeImageLooks } from '../../../../../pages/home/operations/our-looks/our-looks.queries';
 
 export const mockAllHomeImageLooks = [
   {

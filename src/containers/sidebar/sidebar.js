@@ -17,6 +17,7 @@ import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import ThemeContext from '../../context/theme-context';
+import CertificateIcon from './CertificateIcon';
 
 const { pathToConstructor, pathToGiftСertificate } = routes;
 
@@ -58,7 +59,6 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           key={category._id}
           models={models}
           handlerItem={() => setIsMenuOpen(false)}
-          data-testid='linkM'
         />
       )),
     [categories, styles, setIsMenuOpen]
@@ -73,7 +73,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
             to={item.link}
             className={styles.subItem}
             onClick={() => setIsMenuOpen(false)}
-            data-testid='linkR'
+            data-testid='linkToSublist'
           >
             <span>
               {item.text ? t(`common.${item.text}`) : t(`common.${item.link.replace('/', '')}`)}
@@ -93,7 +93,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       anchor='left'
       open={isMenuOpen}
       onClose={() => setIsMenuOpen(false)}
-      data-testid='linkS'
+      data-testid='linkToSidebar'
     >
       <div className={styles.closeIconContainer}>
         <IconButton className={styles.closeIcon} onClick={() => setIsMenuOpen(false)}>
@@ -107,9 +107,10 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           to={pathToGiftСertificate}
           className={styles.certificateItem}
           onClick={() => setIsMenuOpen(false)}
-          data-testid='linkSer'
+          data-testid='linkToCertificate'
         >
           <span className={styles.constructorItem}>{t('sidebar.createСertificate')}</span>
+          <CertificateIcon data-testid='link' alt='tre' />
         </Link>
         <div className={styles.itemHighlighting} />
 
@@ -117,7 +118,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           to={pathToConstructor}
           className={styles.mainItem}
           onClick={() => setIsMenuOpen(false)}
-          data-testid='linkSer2'
+          data-testid='linkToConstructor'
         >
           <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
         </Link>

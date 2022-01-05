@@ -37,13 +37,12 @@ jest.mock('@material-ui/styles', () => ({
   })
 }));
 
-describe('sidebar tests', () => {
+describe('General sidebar tests', () => {
   it('should be defined', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));
     wrapper = shallow(<Sidebar {...props} />);
-
     expect(wrapper).toBeDefined();
   });
 
@@ -52,7 +51,6 @@ describe('sidebar tests', () => {
       ...useQueryData,
       loading: true
     }));
-
     wrapper = shallow(<Sidebar {...props} />);
   });
 
@@ -61,7 +59,6 @@ describe('sidebar tests', () => {
       ...useQueryData,
       error: {}
     }));
-
     wrapper = shallow(<Sidebar {...props} />);
   });
 
@@ -71,47 +68,35 @@ describe('sidebar tests', () => {
     }));
     wrapper = shallow(<Sidebar {...props} />);
     wrapper.find(IconButton).simulate('click');
-
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
+});
 
-  it('do smth', () => {
+describe('Сheck if the setIsMenuOpen function is called for an element with the attribute:', () => {
+  beforeEach(() => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));
-
     wrapper = shallow(<Sidebar {...props} />);
-    wrapper.find('[data-testid="linkSer"]').simulate('click');
+  });
+
+  it('linkToCertificate', () => {
+    wrapper.find('[data-testid="linkToCertificate"]').simulate('click');
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 
-  it('do smth', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-
-    wrapper = shallow(<Sidebar {...props} />);
-    wrapper.find('[data-testid="linkSer2"]').simulate('click');
+  it('linkToConstructor', () => {
+    wrapper.find('[data-testid="linkToConstructor"]').simulate('click');
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 
-  it('do smth', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-
-    wrapper = shallow(<Sidebar {...props} />);
-    wrapper.find('[data-testid="linkS"]').simulate('close');
+  it('linkToSidebar', () => {
+    wrapper.find('[data-testid="linkToSidebar"]').simulate('close');
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 
-  it('do smth', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-
-    wrapper = shallow(<Sidebar {...props} />);
-    wrapper.find('[data-testid="linkR"]').first().simulate('click');
+  it('linkToSublist', () => {
+    wrapper.find('[data-testid="linkToSublist"]').first().simulate('click');
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 });

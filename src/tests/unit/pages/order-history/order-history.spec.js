@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { fullMockedOrders, emptyMockedOrders } from './order-history.variables';
@@ -49,8 +49,6 @@ describe('OrderHistory component', () => {
         <OrderHistory />
       </Router>
     );
-    screen.debug();
-
     const text1 = getAllByText(/orderHistory/i);
     expect(text1).toHaveLength(4);
   });

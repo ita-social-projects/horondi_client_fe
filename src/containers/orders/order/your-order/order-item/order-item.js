@@ -69,7 +69,7 @@ const OrderItem = ({ product }) => {
           <div className={styles.yourOrderListItemDescriptionPrimary}>
             {t(
               `${
-                product.constructor ? orderItem?.model.translationsKey : orderItem.translationsKey
+                product.constructor ? orderItem?.model.translationsKey : orderItem?.translationsKey
               }.name`
             )}
           </div>
@@ -82,7 +82,7 @@ const OrderItem = ({ product }) => {
                 `${
                   product.constructor
                     ? sizeAndPrice.bottomMaterial?.translationsKey
-                    : orderItem.bottomMaterial.material.translationsKey
+                    : orderItem?.bottomMaterial.material.translationsKey
                 }.name`
               )}
             </div>

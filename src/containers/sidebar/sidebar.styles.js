@@ -52,8 +52,10 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     width: '100%',
     marginTop: '25px',
+    marginBottom: '25px',
     '& span, & svg': {
-      fontSize: '24px'
+      fontSize: '24px',
+      fontWeight: '500'
     },
     '& svg': {
       color: theme.palette.type === 'light' ? '#000000' : '#5B5B5B'
@@ -98,10 +100,26 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   constructorItem: {
-    padding: '1% 0 0',
-    fontWeight: 'bold'
+    padding: '1% 0 0'
   },
   rightBar: {
     top: '30%'
+  },
+  certificateItem: {
+    color: theme.palette.textColor,
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    width: '100%',
+    marginTop: '25px',
+    marginBottom: '25px',
+    '& span, & svg': {
+      fontSize: '24px',
+      fontWeight: '500'
+    },
+    '& svg': {
+      marginLeft: '10px'
+    }
   }
 }));

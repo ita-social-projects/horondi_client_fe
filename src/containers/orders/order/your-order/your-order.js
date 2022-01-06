@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Divider, List, Paper, Typography } from '@material-ui/core';
 import SelfPickup from '../../../checkout/checkout-form/delivery/self-pickup/self-pickup';
 import { useCart } from '../../../../hooks/use-cart';
 import OrderItem from './order-item';
+import { getCurrencySign } from '../../../../utils/currency';
 
 const YourOrder = ({ ...props }) => {
   const {
@@ -16,13 +16,14 @@ const YourOrder = ({ ...props }) => {
     checkoutFormBtnValue,
     consentLink,
     t,
-    currencySign,
 
     values,
     language,
     styles,
     deliveryType
   } = props;
+
+  const currencySign = getCurrencySign(currency);
 
   return (
     <Paper className={styles.yourOrderContainer} elevation={4}>
@@ -51,7 +52,8 @@ const YourOrder = ({ ...props }) => {
       <Typography className={styles.yourOrderTotalPrice} component='div'>
         {t('common.toPay')}:
         <div>
-          {Math.ceil(getTotalPrice(currency))} <FontAwesomeIcon icon={currencySign} />
+          {currencySign}
+          {Math.ceil(getTotalPrice(currency))}
         </div>{' '}
       </Typography>
       <Divider variant='fullWidth' />

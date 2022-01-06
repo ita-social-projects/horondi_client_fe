@@ -27,7 +27,8 @@ const routes = {
   pathToTerms: '/pages/terms',
   pathToUserAgreement: '/pages/user-agreement',
   pathToAnswersQuestionsPage: '/answers-questions',
-  pathToAboutUs: '/pages/about-us'
+  pathToAboutUs: '/pages/about-us',
+  pathToGiftСertificate: '/certificates'
 };
 
 export default routes;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { IconButton } from '@material-ui/core';
-
 import Sidebar from '../../../../containers/sidebar/sidebar';
 
 let wrapper;
@@ -38,13 +37,12 @@ jest.mock('@material-ui/styles', () => ({
   })
 }));
 
-describe('sidebar tests', () => {
+describe('General sidebar tests', () => {
   it('should be defined', () => {
     useQuery.mockImplementation(() => ({
       ...useQueryData
     }));
     wrapper = shallow(<Sidebar {...props} />);
-
     expect(wrapper).toBeDefined();
   });
 
@@ -53,7 +51,6 @@ describe('sidebar tests', () => {
       ...useQueryData,
       loading: true
     }));
-
     wrapper = shallow(<Sidebar {...props} />);
   });
 
@@ -62,7 +59,6 @@ describe('sidebar tests', () => {
       ...useQueryData,
       error: {}
     }));
-
     wrapper = shallow(<Sidebar {...props} />);
   });
 
@@ -72,7 +68,35 @@ describe('sidebar tests', () => {
     }));
     wrapper = shallow(<Sidebar {...props} />);
     wrapper.find(IconButton).simulate('click');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+});
 
+describe('Сheck if the setIsMenuOpen function is called for an element with the attribute:', () => {
+  beforeEach(() => {
+    useQuery.mockImplementation(() => ({
+      ...useQueryData
+    }));
+    wrapper = shallow(<Sidebar {...props} />);
+  });
+
+  it('linkToCertificate', () => {
+    wrapper.find('[data-testid="linkToCertificate"]').simulate('click');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('linkToConstructor', () => {
+    wrapper.find('[data-testid="linkToConstructor"]').simulate('click');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('linkToSidebar', () => {
+    wrapper.find('[data-testid="linkToSidebar"]').simulate('close');
+    expect(setIsMenuOpen).toHaveBeenCalled();
+  });
+
+  it('linkToSublist', () => {
+    wrapper.find('[data-testid="linkToSublist"]').first().simulate('click');
     expect(setIsMenuOpen).toHaveBeenCalled();
   });
 });

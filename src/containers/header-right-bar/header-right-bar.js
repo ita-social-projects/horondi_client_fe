@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useStyles } from './header-right-bar.styles';
-
 import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';
@@ -9,7 +8,11 @@ import Wishlist from '../wishlist-header';
 
 const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
+  const [errors, setErrors] = useState();
 
+  const handleErrors = (error) => {
+    setErrors(error);
+  };
   const initialSearchState = {
     searchFilter: '',
     products: [],
@@ -25,8 +28,10 @@ const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
         initialSearchState={initialSearchState}
+        handleErrors={handleErrors}
+        errors={errors}
       />
-      <SearchBarList searchParams={searchParams} />
+      <SearchBarList searchParams={searchParams} errors={errors} />
       <div className={styles.wishlist}>
         <Wishlist />
       </div>

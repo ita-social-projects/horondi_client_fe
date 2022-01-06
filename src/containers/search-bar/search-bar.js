@@ -5,19 +5,21 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
+import { formRegExp } from '../../configs/regexp';
 
 const SearchBar = ({
   searchParams,
   setSearchParams,
   initialSearchState,
-  fieldOptions = {},
-  fromNavBar = true
+  fromNavBar = true,
+  handleErrors
 }) => {
-  const styles = useStyles(fromNavBar);
+  const styles = useStyles({ fromNavBar });
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
-  const { loading, refetch } = useQuery(getFilteredProductsQuery, {
+
+  const { loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
     variables: { search: searchParams.searchFilter }
@@ -27,16 +29,17 @@ const SearchBar = ({
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
+    handleErrors();
+    if (!formRegExp.search.test(target.value)) {
+      handleErrors(t('error.onlyLetter'));
+    }
     if (target.value && target.value.trim()) {
       setSearchTimeout(
-        setTimeout(() => {
-          setSearchParams(() => ({
-            products: [],
-            searchFilter: target.value,
-            searchBarVisibility: !!target.value
-          }));
-          refetch();
-        }, 1000)
+        setSearchParams(() => ({
+          products: [],
+          searchFilter: target.value,
+          searchBarVisibility: true
+        }))
       );
     }
   };
@@ -52,9 +55,10 @@ const SearchBar = ({
       <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}
-        onChange={handleSearch}
         onBlur={handleOnBlur}
         onFocus={handleSearch}
+        inputProps={{ maxLength: 20 }}
+        onChange={handleSearch}
       />
     </div>
   );

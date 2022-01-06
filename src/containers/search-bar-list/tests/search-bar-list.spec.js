@@ -24,7 +24,7 @@ useSelector.mockImplementation(() => ({
 describe('SearchBarList component tests', () => {
   it('Should render SearchBarList', () => {
     const component = shallow(
-      <SearchBarList searchParams={{ products: [], searchBarVisibility: false }} />
+      <SearchBarList searchParams={{ products: [], searchBarVisibility: true }} />
     );
 
     expect(component).toBeDefined();

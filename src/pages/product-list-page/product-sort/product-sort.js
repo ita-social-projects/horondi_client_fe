@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useStyles, searchStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import SearchBar from '../../../containers/search-bar/search-bar';
-import SearchBarList from '../../../containers/search-bar-list/search-bar-list';
 import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
 import { SORT_BY_SELECT_OPTIONS } from '../constants';
 
@@ -22,16 +21,22 @@ const ProductSort = () => {
     searchBarVisibility: false,
     loading: false
   };
-  const [searchParams1, setSearchParams1] = useState(initialSearchState);
+  const [searchState, setSearchState] = useState(initialSearchState);
   const [sortType, setSortType] = useState(SORT_BY_SELECT_OPTIONS[0]);
 
   const searchParams = new URLSearchParams(search);
-  const { sort, page, defaultPage } = URL_QUERIES_NAME;
+  const { sort, nameFilter, page, defaultPage } = URL_QUERIES_NAME;
+  const currentNameFilter = searchParams.get(nameFilter);
   const query = searchParams.get(sort);
   const selectHandler = (e) => {
     const { name } = e.target.value;
     searchParams.set(sort, name);
     searchParams.set(page, defaultPage);
+    history.push(`?${searchParams.toString()}`);
+  };
+
+  const handleSearch = (e) => {
+    searchParams.set(nameFilter, e.target.value);
     history.push(`?${searchParams.toString()}`);
   };
 
@@ -57,13 +62,14 @@ const ProductSort = () => {
   return (
     <div data-cy='sort' className={styles.sortDiv}>
       <SearchBar
-        searchParams={searchParams1}
-        setSearchParams={setSearchParams1}
+        searchParams={searchState}
+        setSearchParams={setSearchState}
         initialSearchState={initialSearchState}
         fieldOptions={searchStyles}
         fromNavBar={false}
+        searchHandler={handleSearch}
+        defaultValue={currentNameFilter}
       />
-      <SearchBarList searchParams={searchParams1} />
 
       <div className={styles.sortByText}>
         <span className={styles.selectLabel}>{sortByText}</span>

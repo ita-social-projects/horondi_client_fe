@@ -27,6 +27,7 @@ const ProductListPage = ({ width }) => {
   const { search } = useLocation();
   const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
   const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
+  const nameFilter = searchParams.get(URL_QUERIES_NAME.nameFilter);
 
   const { t } = useTranslation();
   const styles = useStyles();
@@ -97,10 +98,21 @@ const ProductListPage = ({ width }) => {
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
-  const itemsToShow =
-    products?.length > 0
-      ? products.map((product) => <ProductListItem key={product._id} product={product} />)
-      : null;
+  const itemsToShow = () => {
+    if (products?.length > 0) {
+      if (nameFilter) {
+        const filteredProducts = products.filter((product) =>
+          product.name.some((name) => name.value.toLowerCase().includes(nameFilter.toLowerCase()))
+        );
+        return filteredProducts.map((product) => (
+          <ProductListItem key={product._id} product={product} />
+        ));
+      }
+      return products.map((product) => <ProductListItem key={product._id} product={product} />);
+    } 
+    return null;
+    
+  };
   const paginationToShow = (
     <Pagination count={pagesCount} variant='outlined' page={currentPage} onChange={changeHandler} />
   );
@@ -146,7 +158,7 @@ const ProductListPage = ({ width }) => {
           {products?.length > 0 ? (
             <div className={styles.productsWrapper}>
               <Grid container spacing={2} className={styles.productsDiv}>
-                {itemsToShow}
+                {itemsToShow()}
               </Grid>
               {paginationCondition()}
             </div>

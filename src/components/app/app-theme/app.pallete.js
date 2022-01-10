@@ -5,23 +5,27 @@ import theme from './theme';
 const white = '#FFFFFF';
 const black = '#000000';
 const lightGray = '#EFEFEF';
+const lightGrayShade = '#A9A9A9';
 const mediumGray = '#353333';
 const darkGray = '#232323';
 const yellow = '#E4B200';
 const blue = '#1976D2';
 const red = '#F44336';
 const lightPing = '#FEEFEF';
+const green = '#4CAF50';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
   white,
   lightGray,
+  lightGrayShade,
   mediumGray,
   darkGray,
   yellow,
   blue,
   red,
   lightPing,
+  green,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {

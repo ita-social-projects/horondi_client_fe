@@ -55,7 +55,10 @@ const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
 const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
-const Cart = lazy(() => import('../pages/cart'));
+
+// new
+const Cart = lazy(() => import('../pages/certificates'));
+
 const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));

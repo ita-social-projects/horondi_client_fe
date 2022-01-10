@@ -11,6 +11,7 @@
     "phoneNumber": "Номер телефону",
     "country": "Країна",
     "region": "Область",
+    "district": "Район",
     "city": "Місто",
     "street": "Вулиця",
     "buildingNumber": "Будинок",

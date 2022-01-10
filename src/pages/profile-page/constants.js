@@ -8,6 +8,7 @@ export const PROFILE_USER_CONTACT_DATA = {
 export const PROFILE_USER_ADDRESS_DATA = {
   country: '',
   region: '',
+  district: '',
   city: '',
   street: '',
   buildingNumber: '',

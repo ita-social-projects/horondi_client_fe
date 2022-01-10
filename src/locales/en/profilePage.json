@@ -11,6 +11,7 @@
     "phoneNumber": "Contact phone number",
     "country": "Country",
     "region": "Region",
+    "district": "District",
     "city": "City",
     "street": "Street",
     "buildingNumber": "Building number",

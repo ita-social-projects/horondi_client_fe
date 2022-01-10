@@ -25,6 +25,7 @@ const loginUser = async (data) => {
       buildingNumber
       appartment
       region
+      district
       zipcode
 		}
 		banned{
@@ -232,6 +233,7 @@ const updateUserById = async ({ user, id, upload }) => {
           buildingNumber
           appartment
           region
+          district
           zipcode
         }
         confirmed
@@ -277,6 +279,7 @@ const getUserByToken = async () => {
               appartment
               zipcode
               region
+              district
             }
             confirmed
             cart {

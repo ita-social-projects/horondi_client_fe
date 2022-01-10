@@ -105,9 +105,8 @@ const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
     product: item.product?._id,
     quantity: item.quantity,
-    isFromConstructor: item.product.isFromConstructor,
-    price: item.product.isFromConstructor ? item.options.price : item.price,
-
+    isFromConstructor: !item.product._id,
+    price: item.price,
     options: {
       size: item.options.size._id
     }
@@ -189,15 +188,52 @@ export const getCurrentCurrency = (currency) =>
     ? i18next.t(`checkout.checkoutTitles.UAH`)
     : i18next.t(`checkout.checkoutTitles.USD`);
 
-export const updateInitialValues = (data) => {
-  const { firstName, lastName, email, phoneNumber } = data;
-  return {
-    ...stateInitialValues,
+export const updateInitialValues = (data, deliveryType) => {
+  const { firstName, lastName, email, phoneNumber, address } = data;
+
+  const profileData = {
     firstName: firstName || '',
     lastName: lastName || '',
     email: email || '',
     phoneNumber: phoneNumber || ''
   };
+
+  const initValuesForNovaPost = {
+    ...stateInitialValues,
+    ...profileData,
+    city: address.city || ''
+  };
+  const initValuesForUkrPost = {
+    ...stateInitialValues,
+    ...profileData,
+    region: address.region || '',
+    district: address.district || '',
+    city: address.city || ''
+  };
+  const initValuesForSelfpickup = {
+    ...stateInitialValues,
+    ...profileData
+  };
+
+  switch (deliveryType) {
+    case 'NOVAPOST':
+      return initValuesForNovaPost;
+    case 'UKRPOST':
+      return initValuesForUkrPost;
+    case 'SELFPICKUP':
+      return initValuesForSelfpickup;
+    default:
+      return {
+        ...stateInitialValues,
+        ...profileData,
+        region: address.region || '',
+        district: address.district || '',
+        city: address.city || '',
+        street: address.street || '',
+        house: address.buildingNumber || '',
+        flat: address.appartment || ''
+      };
+  }
 };
 
 export const setDeliveryTypeToStorage = (deliveryType) => {

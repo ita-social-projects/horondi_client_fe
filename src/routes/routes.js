@@ -55,10 +55,7 @@ const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
 const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
-
-// new
-const Cart = lazy(() => import('../pages/certificates'));
-
+const Cart = lazy(() => import('../pages/cart'));
 const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
 const OrderHistory = lazy(() => import('../pages/order-history'));
@@ -66,7 +63,7 @@ const Contacts = lazy(() => import('../pages/contacts'));
 const Materials = lazy(() => import('../pages/materials'));
 const BusinessPage = lazy(() => import('../pages/business-page'));
 const AnswersQuestionsPage = lazy(() => import('../pages/answers-questions-page'));
-const GiftСertificate = lazy(() => import('../pages/not-found-page'));
+const GiftСertificate = lazy(() => import('../pages/certificates'));
 
 const Routes = () => {
   const styles = useStyles();

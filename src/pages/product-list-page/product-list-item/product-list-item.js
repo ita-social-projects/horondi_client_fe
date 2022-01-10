@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/styles';
 
@@ -23,6 +22,8 @@ const ProductListItem = ({ product }) => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
+
+  const currencySign = getCurrencySign(currency);
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
 
@@ -45,7 +46,7 @@ const ProductListItem = ({ product }) => {
       <>
         {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
         {'\u00A0'}
-        <FontAwesomeIcon icon={currencySign} />
+        {currencySign}
       </>
     ) : (
       <>{t('productListPage.sizeNotAvailable')} </>
@@ -53,7 +54,6 @@ const ProductListItem = ({ product }) => {
   };
 
   const styles = useStyles({ image });
-  const currencySign = getCurrencySign(currency);
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
       <Link to={`${pathToProducts}/${product._id}`}>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getFormatDate } from '../../../../utils/date';
 import { getCurrencySign } from '../../../../utils/currency';
@@ -52,7 +51,7 @@ const OrderHistoryItem = ({ order }) => {
       <div className={styles.bottom}>
         <div className={styles.totalText}>{t('common.total')}:</div>
         <div className={styles.totalText}>
-          <FontAwesomeIcon icon={currencySign} />
+          {currencySign}
           {totalPrice}
         </div>
       </div>

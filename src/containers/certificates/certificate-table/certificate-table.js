@@ -1,34 +1,16 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
+
 import { useTranslation } from 'react-i18next';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useStyles } from './certificate-table.styles';
 
-// import {
-//   cleanUserCart,
-//   resetCart,
-//   deleteProductFromUserCart,
-//   removeItemFromCart
-// } from '../../../redux/cart/cart.actions';
-
 import CertificateItem from '../cetrificate-item';
-// import Modal from '../../../components/modal';
 
 const CertificateTable = ({ items }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const certificateItems = items.map((item) => (
-    <CertificateItem
-      item={item}
-      key={item.id}
-      // price={item.price}
-      // expirationDate={item.expirationDate}
-      // status={item.status}
-      // language={language}
-      // user={user}
-    />
-  ));
+  const certificateItems = items.map((item) => <CertificateItem item={item} key={item.id} />);
 
   return (
     <div className={styles.root}>

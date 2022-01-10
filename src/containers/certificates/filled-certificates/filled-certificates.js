@@ -13,10 +13,8 @@ const FilledCertificates = ({ items }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  // change routes
   const { pathToCategory, pathToCheckout } = routes;
 
-  // change "cartList" on certificatesList, change "cartLoading" on certificatesLoading
   const { cartLoading, user } = useSelector(({ Currency, Cart, User, NewCart }) => ({
     currency: Currency.currency,
     cartList: Cart.list,
@@ -40,7 +38,6 @@ const FilledCertificates = ({ items }) => {
         </div>
         <div>
           <div className={styles.buttonWrapper}>
-            {/* change routes */}
             <Link to={pathToCategory}>
               <Button className={styles.buyButton}>{t('certificate.buy')}</Button>
             </Link>

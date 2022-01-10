@@ -12,9 +12,19 @@ export const useStyles = makeStyles(() => ({
       minHeight: '130px'
     }
   },
-  description: {
-    lineHeight: '30px',
-    fontSize: '20px'
+  price: {
+    fontSize: '20px',
+    lineHeight: '28px',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'spaceBetween',
+    marginLeft: '-15px',
+    '& svg': {
+      fontSize: '20px',
+      marginRight: '5px'
+    }
   },
   productName: {
     fontWeight: 'bold',
@@ -30,7 +40,7 @@ export const useStyles = makeStyles(() => ({
     marginTop: '0px'
   },
   itemImg: {
-    marginLeft: 20
+    marginLeft: '20px'
   },
   sumTotal: {
     width: '60%'

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { TableCell, TableRow } from '@material-ui/core';
 import { push } from 'connected-react-router';
@@ -85,9 +84,11 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
 
     return availableSizes.length ? (
       <>
-        <FontAwesomeIcon icon={currencySign} />
-        {'\u00A0'}
-        {availableSizes[0].price[currency].value}
+        <div className={styles.price}>
+          {currencySign}
+          {'\u00A0'}
+          {availableSizes[0].price[currency].value}
+        </div>
       </>
     ) : (
       <>{t('productList.sizeNotAvailable.value')}</>

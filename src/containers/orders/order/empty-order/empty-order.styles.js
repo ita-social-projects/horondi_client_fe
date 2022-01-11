@@ -30,7 +30,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       backgroundColor: palette.button.hover.backgroundColor
     }
   },
-  title: {
+  emptyTitle: {
     ...titleStyles,
     color: palette.textColor
   },

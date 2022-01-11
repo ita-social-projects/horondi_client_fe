@@ -201,14 +201,14 @@ export const updateInitialValues = (data, deliveryType) => {
   const initValuesForNovaPost = {
     ...stateInitialValues,
     ...profileData,
-    city: address.city || ''
+    city: address?.city || ''
   };
   const initValuesForUkrPost = {
     ...stateInitialValues,
     ...profileData,
-    region: address.region || '',
-    district: address.district || '',
-    city: address.city || ''
+    region: address?.region || '',
+    district: address?.district || '',
+    city: address?.city || ''
   };
   const initValuesForSelfpickup = {
     ...stateInitialValues,
@@ -226,12 +226,12 @@ export const updateInitialValues = (data, deliveryType) => {
       return {
         ...stateInitialValues,
         ...profileData,
-        region: address.region || '',
-        district: address.district || '',
-        city: address.city || '',
-        street: address.street || '',
-        house: address.buildingNumber || '',
-        flat: address.appartment || ''
+        region: address?.region || '',
+        district: address?.district || '',
+        city: address?.city || '',
+        street: address?.street || '',
+        house: address?.buildingNumber || '',
+        flat: address?.appartment || ''
       };
   }
 };

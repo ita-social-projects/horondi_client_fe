@@ -12,8 +12,16 @@ import { useStyles } from './header-profile.styles';
 import { logoutUser } from '../../redux/user/user.actions';
 import { RETURN_PAGE } from '../../configs';
 import routes from '../../configs/routes';
+import CardCertificateIcon from './CardCertificateIcon';
 
-const { pathToProfile, pathToOrderHistory, pathToRegister, pathToLogin, pathToMain } = routes;
+const {
+  pathToProfile,
+  pathToOrderHistory,
+  pathToRegister,
+  pathToLogin,
+  pathToMain,
+  pathToGiftСertificate
+} = routes;
 
 const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   const { userData } = useSelector(({ User }) => ({
@@ -75,6 +83,14 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       clickHandler: () => {
         setIsMenuOpen(false);
         return handleRedirect(pathToOrderHistory);
+      }
+    },
+    {
+      value: t('headerProfile.myCertificates'),
+      icon: <CardCertificateIcon />,
+      clickHandler: () => {
+        setIsMenuOpen(false);
+        return handleRedirect(pathToGiftСertificate);
       }
     },
     {

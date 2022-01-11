@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TableCell, TableRow } from '@material-ui/core';
 
@@ -10,14 +10,6 @@ const CertificateItem = ({ item }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const textAreaRef = useRef(null);
-
-  function copyToClipboard(e) {
-    textAreaRef.current.select();
-    document.execCommand('copy');
-    e.target.focus();
-  }
-
   return (
     <TableRow classes={{ root: styles.root }} data-cy='certificate-item'>
       <TableCell classes={styles.image} data-cy='certificate-item-img'>
@@ -25,8 +17,11 @@ const CertificateItem = ({ item }) => {
       </TableCell>
       <TableCell data-cy='certificate-item-code'>
         <div className={styles.code} value={item.code}>
-          <textarea className={styles.area} type='text' ref={textAreaRef} value={item.code} />
-          <button className={styles.iconBtn} onClick={copyToClipboard}>
+          <textarea className={styles.area} type='text' value={item.code} />
+          <button
+            className={styles.iconBtn}
+            onClick={() => navigator.clipboard.writeText(item.code)}
+          >
             <CertificateCodeCopy alt='certificate copy icon' className={styles.copyIcon} />
           </button>
         </div>

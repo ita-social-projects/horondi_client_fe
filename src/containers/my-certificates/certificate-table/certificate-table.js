@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useStyles } from './certificate-table.styles';
 
-// import TableRowItem from '../table-row-item';
 import CertificateItem from '../cetrificate-item';
 
 const CertificateTable = ({ items }) => {

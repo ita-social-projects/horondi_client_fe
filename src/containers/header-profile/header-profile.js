@@ -20,7 +20,7 @@ const {
   pathToRegister,
   pathToLogin,
   pathToMain,
-  pathToMyGiftCertificates
+  pathToMyCertificates
 } = routes;
 
 const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
@@ -90,7 +90,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       icon: <GiftCertificatesIcon viewBox='0 -3 24 24' />,
       clickHandler: () => {
         setIsMenuOpen(false);
-        return handleRedirect(pathToMyGiftCertificates);
+        return handleRedirect(pathToMyCertificates);
       }
     },
     {

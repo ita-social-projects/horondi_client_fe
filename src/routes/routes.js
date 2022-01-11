@@ -138,13 +138,6 @@ const Routes = () => {
                 exact
                 redirectTo={pathToLogin}
               />
-              <ProtectedRoute
-                component={MyGiftCertificates}
-                path={pathToMyGiftCertificates}
-                isAuthed={userIsChecked && userData}
-                exact
-                redirectTo={pathToLogin}
-              />
               <Route
                 path={pathToCategory}
                 exact

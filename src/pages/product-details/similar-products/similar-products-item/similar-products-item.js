@@ -26,6 +26,7 @@ const SimilarProductsItem = ({ imageUrl, id, rate, price, translationsKey }) => 
     getImage(imageUrl)
       .then((src) => setImage(src))
       .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
+    return () => setImage('');
   }, [imageUrl, isLightTheme]);
 
   const styles = useStyles({ image, isLightTheme, palette });

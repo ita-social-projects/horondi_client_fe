@@ -12,7 +12,7 @@ import { useStyles } from './header-profile.styles';
 import { logoutUser } from '../../redux/user/user.actions';
 import { RETURN_PAGE } from '../../configs';
 import routes from '../../configs/routes';
-import CardCertificateIcon from './CardCertificateIcon';
+import { GiftCertificatesIcon } from '../../images/gift-certificates-icon';
 
 const {
   pathToProfile,
@@ -87,7 +87,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     },
     {
       value: t('headerProfile.myCertificates'),
-      icon: <CardCertificateIcon />,
+      icon: <GiftCertificatesIcon viewBox='0 -3 24 24' />,
       clickHandler: () => {
         setIsMenuOpen(false);
         return handleRedirect(pathToMyGiftCertificates);

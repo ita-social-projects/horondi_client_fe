@@ -1,0 +1,80 @@
+{
+  "imgAltInfo": "Фото продукту",
+  "allPhotos": {
+    "viewAll": "Переглянути всі",
+    "photo": "Фото"
+  },
+  "pattern": "Візерунок",
+  "notAvailable": "Не доступний",
+  "productDescription": {
+    "description": "Опис продукту",
+    "mainMaterial": "Основна тканина",
+    "innerMaterial": "Внутрішній матеріал",
+    "bottomMaterial": "Матеріал низу",
+    "strapLengthInCm": "Довжина лямок(см) ",
+    "material": "Матеріал",
+    "measurement": "Габарити"
+  },
+  "weight": {
+    "weightLabel": "Вага(кг)",
+    "volumeLabel": "Об'єм(л)"
+  },
+  "priceFrom": "від ",
+  "sizeNotAvailable": "Товар недоступний",
+  "pdpButtons": {
+    "cartButton": "Додати до кошика",
+    "buyButton": "Купити зараз",
+    "submitButton": "ВИДАЛИТИ",
+    "cancelButton": "ВІДМІНИТИ",
+    "leaveReply": "ЗАЛИШИТИ ВІДПОВІДЬ",
+    "inCart": "Перейти до кошика"
+  },
+  "tooltips": {
+    "addWishful": "Додати в бажане",
+    "removeWishful": "Видалити з бажаного",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "unregisteredReply": "Вам потрібно увійти, щоб залишити відповідь",
+    "unregisteredComment": "Вам потрібно увійти, щоб залишити коментар",
+    "bought": "Користувач купив даний товар",
+    "feedbackComment": "Ваш коментар не підтверджений адміністратором",
+    "feedbackReply": "Ваша відповідь не підтвердженна адміністратором",
+    "itemInCart": "Товар вже в кошику",
+    "itemInCartAlready": "Додати товар у кошик"
+  },
+  "toastMessage": {
+    "addedToWishList": "Додано до вподобань",
+    "removedFromWishList": "Видалено з вподобань",
+    "addedToCard": "Додано в кошик"
+  },
+  "similarItems": {
+    "title": "З цим гарно пасує"
+  },
+  "comments": {
+    "noComments": "Відгуки відсутні",
+    "commentsOne": "Відгук",
+    "commentsTwo": "Відгуки",
+    "title": "Написати відгук",
+    "commentsTitle":"Відгуки",
+    "moreComments":"Відгуків",
+    "rating": "Рейтинг товару:",
+    "text": "Поділіться своїми враженнями з іншими",
+    "submit": "ЗАЛИШИТИ ВІДГУК",
+    "cancel": "ВІДМІНИТИ",
+    "unregisteredTip": "Вам потрібно увійти, щоб залишити рейтинг",
+    "registeredTip": "Вам потрібно купити продукт, щоб залишити рейтинг",
+    "successfulTip": "Встановити рейтинг",
+    "loadMore": "ПОКАЗАТИ ЩЕ",
+    "hideBtn": "Приховати коментарі"
+  },
+  "snackBar": {
+    "added": "Ваш коментар успішно створений",
+    "addedReply": "Вашу відповідь успішно створено",
+    "deleted": "Ваш коментар успішно видалений"
+  },
+  "size": {
+    "S": "S",
+    "M": "M",
+    "L": "L"
+  }
+}

@@ -4,10 +4,24 @@ import theme from './theme';
 
 const white = '#FFFFFF';
 const black = '#000000';
+const lightGray = '#EFEFEF';
+const mediumGray = '#353333';
+const darkGray = '#232323';
+const yellow = '#E4B200';
+const blue = '#1976D2';
+const red = '#F44336';
+const lightPing = '#FEEFEF';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
   white,
+  lightGray,
+  mediumGray,
+  darkGray,
+  yellow,
+  blue,
+  red,
+  lightPing,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {
@@ -19,10 +33,18 @@ export const paletteGenerator = (colorSchema) => ({
       color: theme[colorSchema].card.selectedButton.color
     }
   },
+  catalog: {
+    pageFilterCell: {
+      hover: {
+        backgroundColor: theme[colorSchema].catalogPageFilterCell.hover.backgroundColor
+      }
+    }
+  },
   button: {
     normal: {
       backgroundColor: theme[colorSchema].button.normal.backgroundColor,
-      color: theme[colorSchema].button.normal.color
+      color: theme[colorSchema].button.normal.color,
+      borderColor: theme[colorSchema].button.border.borderColor
     },
     hover: {
       backgroundColor: theme[colorSchema].button.hover.backgroundColor,
@@ -31,6 +53,72 @@ export const paletteGenerator = (colorSchema) => ({
     disabled: {
       backgroundColor: theme[colorSchema].button.disabled.backgroundColor,
       color: theme[colorSchema].button.disabled.color
+    }
+  },
+  cart: {
+    borderColor: theme[colorSchema].cart.borderColor,
+    iconColor: theme[colorSchema].cart.iconColor
+  },
+  contactForm: {
+    background: theme[colorSchema].contactForm.background
+  },
+  productDescription: {
+    borderColor: theme[colorSchema].productDescription.borderColor
+  },
+  arrowIcon: {
+    arrowColor: theme[colorSchema].arrowIcon.arrowColor
+  },
+  imageContainer: {
+    border: theme[colorSchema].imageContainer.border
+  },
+  orderHistoryHeading: {
+    background: theme[colorSchema].orderHistoryHeading.background
+  },
+  profilePageLabel: {
+    normal: {
+      backgroundColor: theme[colorSchema].profilePageLabel.normal.backgroundColor
+    },
+    hover: {
+      backgroundColor: theme[colorSchema].profilePageLabel.hover.backgroundColor
+    }
+  },
+  carouselItem: {
+    normal: {
+      backgroundColor: theme[colorSchema].carouselItem.normal.backgroundColor
+    },
+    shadow: {
+      boxShadow: theme[colorSchema].carouselItem.shadow.boxShadow
+    },
+    hover: {
+      border: theme[colorSchema].carouselItem.hover.border
+    }
+  },
+  seachBar: {
+    backgroundColor: theme[colorSchema].seachBar.backgroundColor,
+    color: theme[colorSchema].seachBar.color,
+    border: theme[colorSchema].seachBar.border
+  },
+  comments: {
+    border: theme[colorSchema].comments.border,
+    formBorder: {
+      borderColor: theme[colorSchema].comments.formBorder.borderColor
+    },
+    cancelButtonBorder: {
+      border: theme[colorSchema].comments.cancelButtonBorder.border
+    },
+    deleteIcon: {
+      color: theme[colorSchema].comments.deleteIcon.color
+    },
+    modal: {
+      closeModalIcon: {
+        color: theme[colorSchema].comments.modal.closeModalIcon.color
+      },
+      titleBorder: {
+        border: theme[colorSchema].comments.modal.titleBorder.border
+      },
+      buttonBorder: {
+        border: theme[colorSchema].comments.modal.buttonBorder.border
+      }
     }
   },
   primary: {

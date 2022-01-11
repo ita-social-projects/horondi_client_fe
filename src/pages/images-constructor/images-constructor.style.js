@@ -5,40 +5,67 @@ export const useStyles = makeStyles((theme) => ({
     padding: '20px',
     display: 'flex',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '& > hr': {
+      border: '1px solid rgba(91, 91, 91, 0.2)',
+      width: '80%',
+      marginTop: '30px',
+      marginBottom: '48px'
+    }
   },
   headingWrapper: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    '& > h1': {
+      marginTop: '72px',
+      fontFamily: 'Montserrat',
+      fontWeight: 400,
+      letterSpacing: 0.5,
+      lineHeight: '65px',
+      fontStyle: 'normal',
+      fontSize: '48px',
+      padding: '0px 165px',
+      '@media (max-width: 670px)': {
+        padding: '0px',
+        fontSize: '32px'
+      }
+    }
   },
   mainHeader: {
     fontSize: '24px'
   },
   contentWrapper: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '50px 100px',
+    width: '80%',
+    display: 'grid',
+    gridTemplateColumns: '255px 1fr 255px',
+    gridGap: '30px',
+    margin: '0 auto 48px auto',
+    '@media (max-width: 1200px)': {
+      gridTemplateColumns: 'repeat(auto-fill, minmax(255px, 1fr))'
+    },
     '@media (max-width: 768px)': {
       padding: 0,
       flexDirection: 'column'
     }
   },
   formWrapper: {
-    width: '30%',
     display: 'flex',
     flexDirection: 'column',
     '@media (max-width: 768px)': {
       width: '100%'
     },
     '& > div': {
-      margin: '15px 0'
+      margin: '10px 0'
     }
   },
   imageContainer: {
-    maxHeight: '650px',
-    width: '30%',
+    boxShadow: '0px 8px 16px #6e6d6d29',
+    borderRadius: '6px',
+    height: '90%',
+    width: '100%',
+    padding: '20px 0px',
+    textAlign: 'center',
     '@media (max-width: 768px)': {
       width: '100%',
       marginTop: '50px',
@@ -46,20 +73,32 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   image: {
-    width: '100%'
+    width: '50%',
+    height: '100%',
+    objectFit: 'contain'
   },
   infoWrapper: {
     display: 'flex'
   },
   pricesInfoWrapper: {
-    width: '30%',
+    paddingTop: '15px',
     '@media (max-width: 768px)': {
       width: '100%'
     }
   },
   headerWrapper: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    fontWeight: '600',
+    paddingBottom: '12px',
+    borderBottom: '1px solid #959292'
+  },
+  headerWrapperH1: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '24px',
+    lineHeight: '8px'
   },
   textWrapper: {
     fontSize: '17px',
@@ -86,18 +125,19 @@ export const useStyles = makeStyles((theme) => ({
   priceItem: {
     display: 'flex',
     justifyContent: 'space-between',
-    minWidth: '100%'
+    minWidth: '100%',
+    fontWeight: '600'
   },
   li: {
-    marginTop: '25px'
+    margin: '7px 0'
   },
   line: {
     width: '100%',
-    background: '#00000050',
-    margin: '10px 0 10px 0'
+    background: '#959292',
+    margin: '18px 0 18px 0'
   },
   bottomLine: {
-    height: '2px'
+    height: '1px'
   },
   topLine: {
     height: '1px'
@@ -113,5 +153,29 @@ export const useStyles = makeStyles((theme) => ({
   modal: {
     width: '90vw',
     height: '90vh'
+  },
+  menuItem: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontSize: '16px'
+  },
+  selectItem: {
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '16px'
+  },
+  formHelper: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontSize: '13px'
+  },
+  buttonOptions: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontSize: '16px'
+  },
+  pluse: {
+    fontSize: '24px',
+    margin: '0 5px'
   }
 }));

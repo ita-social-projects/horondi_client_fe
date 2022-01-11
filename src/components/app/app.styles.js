@@ -11,6 +11,9 @@ export const useStyles = makeStyles(() => ({
       margin: '13rem auto'
     }
   },
+  body: {
+    backgroundColor: '#fff'
+  },
   mainBar: {
     minHeight: '100vh',
     display: 'flex',

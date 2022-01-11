@@ -1,73 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-import AwesomeSlider from 'react-awesome-slider';
-import withAutoplay from 'react-awesome-slider/dist/autoplay';
-import 'react-awesome-slider/dist/styles.css';
+import { useTranslation } from 'react-i18next';
+import { Button } from '@material-ui/core';
 import { useStyles } from './slider-home-page.style';
-
-import { carouselInterval } from '../../../configs';
-import routes from '../../../const/routes';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
-import { getImage } from '../../../utils/imageLoad';
-import { SLIDER_HOME_PAGE } from '../../../const/style-consts';
-
-const { pathToMain } = routes;
-
-const AutoplaySlider = withAutoplay(AwesomeSlider);
+import arrowRight from '../../../images/Arrow 6.svg';
+import arrowLeft from '../../../images/Arrow 5.svg';
+import { images } from './slider-data';
 
 const SliderHomePage = () => {
-  const [imagesLinks, setImage] = useState([]);
+  const [currImg, setCurrImg] = useState(0);
   const styles = useStyles();
-
-  const { images, language } = useSelector(({ HomePageSlider, Language }) => ({
-    images: HomePageSlider.images,
-    language: Language.language
-  }));
-
-  const items = images.items.filter((item) => item.show === true);
-
-  useEffect(() => {
-    items &&
-      items.forEach((item) => {
-        getImage(item.images.large)
-          .then((src) => setImage((prev) => [...prev, src]))
-          .catch((badSrc) => setImage((prev) => [...prev, badSrc]));
-      });
-  }, [images]);
-
-  if (!items.length) {
-    items.push(images.items[0]);
-  }
+  const { t } = useTranslation();
 
   return (
-    <div id='slider' data-section-style='light' className={styles.homeHeader}>
-      <AutoplaySlider
-        play
-        cancelOnInteraction
-        interval={carouselInterval}
-        mobileTouch
-        buttons={false}
-        fillParent
-        infinite
-      >
-        {items.map((item, index) => (
-          <div key={item._id} data-src={imagesLinks[index]}>
-            <Link
-              to={item.link || pathToMain}
-              className={clsx(styles.hoverArrow, SLIDER_HOME_PAGE.ARROW)}
-            >
-              {HOME_BUTTONS[language].SEE_MORE}
-              <span>&#8594;</span>
+    <div
+      id='slider'
+      style={{ backgroundImage: `url(${images[currImg].img})`, backgroundPosition: 'center' }}
+      className={styles.homeHeader}
+    >
+      <div className={styles.overlay}>
+        <div className={styles.sliderContent}>
+          <div className={styles.headerWrapper}>
+            <div className={styles.slideNumber}>
+              <span>{images[currImg].slideNumber} / </span> <span> 03</span>
+            </div>
+            <h2 className={styles.headerTitle}> {t(images[currImg].title)}</h2>
+            <p className={styles.description}>{t(images[currImg].description)}</p>
+          </div>
+          <div className={styles.navWrapper}>
+            <Link to={images[currImg].linkTo}>
+              <Button className={styles.buttonStyles}>{t(images[currImg].buttonName)} </Button>
             </Link>
-            <div className={clsx(styles.sliderInner, SLIDER_HOME_PAGE.SLIDER)}>
-              <p className={styles.title}>{item.title[language].value || ''}</p>
-              <p className={styles.description}>{item.description[language].value || ''}</p>
+            <br />
+            <div className={styles.arrows}>
+              <img
+                onClick={() => {
+                  (currImg > 0 && setCurrImg(currImg - 1)) ||
+                    (currImg === 0 && setCurrImg(images.length - 1));
+                }}
+                src={arrowLeft}
+                alt='arrow left'
+              />
+              <img
+                onClick={() => {
+                  (currImg < images.length - 1 && setCurrImg(currImg + 1)) ||
+                    (currImg === images.length - 1 && setCurrImg(images.length - 1 - currImg));
+                }}
+                src={arrowRight}
+                alt='arrow right'
+              />
             </div>
           </div>
-        ))}
-      </AutoplaySlider>
+        </div>
+      </div>
     </div>
   );
 };

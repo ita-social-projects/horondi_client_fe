@@ -11,7 +11,11 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   productsWrapper: {
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   productsDiv: {
     width: '100%',
@@ -22,25 +26,41 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sortDiv: {
-    alignItems: 'center',
-    padding: '1rem 0',
-    display: 'flex',
-    justifyContent: 'flex-end',
+    paddingTop: '51px',
     '& div': {
       flexWrap: 'wrap',
-      justifyContent: 'center',
       marginRight: 0
     }
   },
   invisiblePaginationDiv: {
     display: 'none !important'
   },
+  header: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: '59px',
+    fontWeight: 'normal',
+    borderBottom: '1px solid gray',
+    padding: '80px 1rem 50px 1rem'
+  },
+
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
-    padding: '1rem',
-    '& Mui-selected': {
-      backgroundColor: 'black !important'
+    margin: '76px 0 98px 0',
+    '& ul': {
+      '& li': {
+        '& button': {
+          borderRadius: 0,
+          height: '50px',
+          width: '50px',
+          margin: '0 5px'
+        },
+        '& button.Mui-selected': {
+          backgroundColor: theme.palette.backgroundColor,
+          border: theme.palette.type === 'light' ? '1px solid #000000' : '1px solid #FEFEFE'
+        }
+      }
     },
     '@media (max-width:500px)': {
       padding: '1rem 0',
@@ -60,6 +80,8 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '0.9em',
     margin: '0 auto',
     display: 'none',
+    color: theme.palette.backgroundColor,
+    backgroundColor: theme.palette.button.normal.backgroundColor,
     '@media (max-width: 959px)': {
       display: 'block'
     }

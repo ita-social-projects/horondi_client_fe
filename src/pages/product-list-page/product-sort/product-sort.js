@@ -1,98 +1,82 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { TextField } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
-import { useStyles } from './product-sort.styles';
+import { useTranslation } from 'react-i18next';
+
+import { useStyles, searchStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
-import {
-  setSortByPrice,
-  setSortByRate,
-  setSortByPopularity
-} from '../../../redux/products/products.actions';
-import {
-  SORT_BY_SELECT_OPTIONS,
-  SORT_BY_TEXT
-} from '../../../translations/product-list.translations';
-import { URL_QUERIES_NAME } from '../../../configs';
-import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
+import SearchBar from '../../../containers/search-bar/search-bar';
+import SearchBarList from '../../../containers/search-bar-list/search-bar-list';
+import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
+import { SORT_BY_SELECT_OPTIONS } from '../constants';
 
 const ProductSort = () => {
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const { t } = useTranslation();
   const styles = useStyles();
-  const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
+
+  const initialSearchState = {
+    searchFilter: '',
+    products: [],
+    searchBarVisibility: false,
+    loading: false
+  };
+  const [searchParams1, setSearchParams1] = useState(initialSearchState);
+  const [sortType, setSortType] = useState(SORT_BY_SELECT_OPTIONS[0]);
+
   const searchParams = new URLSearchParams(search);
   const { sort, page, defaultPage } = URL_QUERIES_NAME;
   const query = searchParams.get(sort);
-  const Sortname = {
-    sortAsc: 'sortAsc',
-    sortDesc: 'sortDesc',
-    rate: 'rate',
-    popularity: 'popularity'
-  };
-  useEffect(() => {
-    SORT_BY_SELECT_OPTIONS.forEach(({ optionValue }) => {
-      if (query === optionValue.name) {
-        switch (query) {
-          case Sortname.sortDesc: {
-            dispatch(setSortByPrice(optionValue.value));
-            break;
-          }
-          case Sortname.rate: {
-            dispatch(setSortByRate(optionValue.value));
-            break;
-          }
-          case Sortname.popularity: {
-            dispatch(setSortByPopularity(optionValue.value));
-            break;
-          }
-          case Sortname.sortAsc: {
-            dispatch(setSortByPrice(optionValue.value));
-            break;
-          }
-          default: {
-            break;
-          }
-        }
-      }
-    });
-  }, [dispatch, searchParams.toString()]);
-
   const selectHandler = (e) => {
-    const { name } = JSON.parse(e.target.value);
+    const { name } = e.target.value;
     searchParams.set(sort, name);
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
 
-  const sortByText = SORT_BY_TEXT[language].value;
+  useEffect(() => {
+    SORT_BY_SELECT_OPTIONS.forEach((optionValue) => {
+      if (query === optionValue.name) {
+        setSortType(optionValue);
+      }
+    });
+    if (!query) {
+      searchParams.set(sort, SORT_BY_SELECT_OPTIONS[0].name);
+      history.push(`?${searchParams.toString()}`);
+    }
+  });
 
-  const selectOptions = SORT_BY_SELECT_OPTIONS.map(({ lang, optionValue }) => (
-    <option
-      key={lang[1].value}
-      value={JSON.stringify(optionValue)}
-      selected={optionValue.name === query}
-    >
-      {lang[language].value}
-    </option>
+  const sortByText = t('common.sortBy');
+  const selectOptions = SORT_BY_SELECT_OPTIONS.map((optionValue) => (
+    <MenuItem key={optionValue.name} value={optionValue}>
+      {t(`common.sortOptions.${optionValue.name}`)}
+    </MenuItem>
   ));
 
   return (
     <div data-cy='sort' className={styles.sortDiv}>
-      <div>
-        {sortByText}
-        <TextField
-          select
-          SelectProps={{ native: true }}
+      <SearchBar
+        searchParams={searchParams1}
+        setSearchParams={setSearchParams1}
+        initialSearchState={initialSearchState}
+        fieldOptions={searchStyles}
+        fromNavBar={false}
+      />
+      <SearchBarList searchParams={searchParams1} />
+
+      <div className={styles.sortByText}>
+        <span className={styles.selectLabel}>{sortByText}</span>
+        <Select
           onChange={selectHandler}
-          className={styles.root}
+          className={styles.sortSelect}
           variant={TEXT_FIELD_VARIANT.OUTLINED}
+          value={sortType}
+          name='sortType'
+          MenuProps={{ classes: { paper: styles.dropdownMenuStyle }, variant: 'menu' }}
         >
           {selectOptions}
-        </TextField>
+        </Select>
       </div>
       <CountPerPage />
     </div>

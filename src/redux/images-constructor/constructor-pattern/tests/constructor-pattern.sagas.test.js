@@ -17,7 +17,7 @@ import { getConstructorPatternById } from '../constructor-pattern.operations';
 import constructorBottom from '../constructor-pattern.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';
 import { setError } from '../../../error/error.actions';
-import routes from '../../../../const/routes';
+import routes from '../../../../configs/routes';
 import { errorReducer } from '../../../error/error.reducer';
 import constructorModel, { initialState } from '../../constructor-model/constructor-model.reducer';
 

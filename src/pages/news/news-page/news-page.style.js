@@ -2,16 +2,26 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   newsTitle: {
-    textAlign: 'center'
+    textAlign: 'center',
+    height: '205px',
+    margin: '0px',
+    padding: '0px',
+    lineHeight: '225px',
+    fontSize: '59px',
+    fontWeight: '300',
+    letterSpacing: '-2px'
   },
   NewsPageItem: {
-    marginTop: '5rem',
-    margin: '5rem auto',
-    marginRight: 'auto',
+    margin: '0px auto',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(27rem, auto))',
+    maxWidth: '1110px',
+    gridTemplateColumns: '1fr 1fr 1fr',
     gridColumnGap: '15px',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    '@media (max-width: 1200px)': {
+      display: 'flex',
+      flexWrap: 'wrap'
+    }
   },
   center: {
     width: '3rem',

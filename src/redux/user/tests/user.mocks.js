@@ -42,7 +42,6 @@ export const user = {
     blockCount: 0,
     updatedAt: '2020-01-01T08:25:45.304Z'
   },
-  wishlist: [],
   cart: null
 };
 
@@ -123,7 +122,5 @@ export const initialStateMock = {
   passwordReset: false,
   confirmationEmailSent: false,
   recoveryLoading: false,
-  confirmationLoading: false,
-  currentPage: 1,
-  countPerPage: null
+  confirmationLoading: false
 };

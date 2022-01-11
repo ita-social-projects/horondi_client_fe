@@ -1,32 +1,12 @@
-import { DEFAULT_CURRENCY } from '../configs';
-import { CHECKOUT_TITLES } from '../translations/checkout.translations';
-import { CONSTRUCTOR_TITLES } from '../translations/constructor.translations';
+import i18next from 'i18next';
 
-export const currentCurrencyValue = (language, currency) =>
-  currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;
-
-export const constructorPartPrice = (priceBasic, priceGobelen, priceBottom, priceSize) => [
-  priceBasic,
-  priceGobelen,
-  priceBottom,
-  priceSize
-];
+export const constructorPartPrice = (priceGobelen, priceBottom) => [priceGobelen, priceBottom];
 export const constructorPartNames = (language) =>
-  language
-    ? ['Матеріал основи:', 'Гобелен:', 'Матеріал дна:', 'Розмір:', 'Спинка:']
-    : ['Basic material:', 'Front-Pocket material:', 'Bottom material:', 'Size:', 'Back:'];
+  language ? ['Гобелен:', 'Матеріал дна:'] : ['Front-Pocket material:', 'Bottom material:'];
 
 export const constructorEndPrice = (priceTotal) => {
   if (!priceTotal) {
-    return CONSTRUCTOR_TITLES.END_PRICE;
+    return i18next.t('common.endPrice');
   }
   return `${priceTotal} `;
-};
-
-export const constructorImageInput = {
-  MODEL: 'model',
-  BASIC: 'basic',
-  PATTERN: 'pattern',
-  BOTTOM: 'bottom',
-  SIZE: 'size'
 };

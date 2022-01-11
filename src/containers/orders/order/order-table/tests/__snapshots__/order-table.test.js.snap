@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order table component tests should match snapshot 1`] = `
+<div>
+  <h2>
+    cart.titleFilled
+     
+  </h2>
+  <div>
+    <WithStyles(ForwardRef(Table))>
+      <WithStyles(ForwardRef(TableHead))>
+        <WithStyles(ForwardRef(TableRow))
+          classes={
+            Object {
+              "root": undefined,
+            }
+          }
+        >
+          <WithStyles(ForwardRef(TableCell))>
+            cart.product
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            cart.size
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            cart.price
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            cart.quantity
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            cart.toPay
+          </WithStyles(ForwardRef(TableCell))>
+          <WithStyles(ForwardRef(TableCell))>
+            cart.actions
+          </WithStyles(ForwardRef(TableCell))>
+        </WithStyles(ForwardRef(TableRow))>
+      </WithStyles(ForwardRef(TableHead))>
+      <WithStyles(ForwardRef(TableBody))>
+        <CartItem
+          cartOperations={
+            Object {
+              "removeFromCart": [MockFunction],
+            }
+          }
+          item={
+            Object {
+              "price": 10,
+              "product": Object {
+                "product_id": "some id",
+              },
+            }
+          }
+          language={1}
+          setModalItem={[Function]}
+          setModalVisibility={[Function]}
+          user={Object {}}
+        />
+      </WithStyles(ForwardRef(TableBody))>
+    </WithStyles(ForwardRef(Table))>
+  </div>
+</div>
+`;

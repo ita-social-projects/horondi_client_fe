@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './new-password.styles';
-import { formRegExp } from '../../configs';
-import {
-  errorMessages,
-  CHANGE_PASSWORD,
-  NEW_PASSWORD_SUCCESS_MESSAGE
-} from '../../translations/user.translations';
+import { formRegExp } from '../../configs/regexp';
 import { endAdornment } from '../../utils/eyeToggle';
 import { resetPassword, resetState } from '../../redux/user/user.actions';
 import {
   handleNewPasswodLoaderOrWindow,
   handleErrorMessage
 } from '../../utils/handle-new-password';
+import { AuthWrapper, AuthHeading, AuthButton } from '../../components/auth-form';
 
 const NewPassword = ({ token }) => {
   const styles = useStyles();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
+  const { t } = useTranslation();
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
   const dispatch = useDispatch();
 
-  const { language, passwordReset, userError, loading } = useSelector(({ Language, User }) => ({
-    language: Language.language,
+  const { passwordReset, userError, loading } = useSelector(({ User }) => ({
     passwordReset: User.passwordReset,
     loading: User.userLoading,
     userError: User.error
@@ -42,22 +39,22 @@ const NewPassword = ({ token }) => {
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>{NEW_PASSWORD_SUCCESS_MESSAGE[language].h2}</h2>
-      <p className={styles.recoveryText}>{NEW_PASSWORD_SUCCESS_MESSAGE[language].p}</p>
+      <h2 className={styles.heading}>{t('newPassword.success')}</h2>
+      <p className={styles.recoveryText}>{t('newPassword.redirect')}</p>
     </div>
   );
 
   const validationSchema = Yup.object({
     password: Yup.string()
-      .matches(formRegExp.password, errorMessages[language].value.pass)
-      .required(errorMessages[language].value.pass),
+      .matches(formRegExp.password, t('error.profile.pass'))
+      .required(t('error.profile.pass')),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], errorMessages[language].value.confirmPassword)
+      .oneOf([Yup.ref('password')], t('error.confirmPassword'))
       .when('password', {
         is: (val) => {
           if (val) return val;
         },
-        then: Yup.string().required(errorMessages[language].value.confirmPassword)
+        then: Yup.string().required(t('error.confirmPassword'))
       })
   });
 
@@ -70,52 +67,47 @@ const NewPassword = ({ token }) => {
       validationSchema={validationSchema}
     >
       {({ errors }) => (
-        <div className={styles.newPassBackground}>
-          <div className={styles.newPassForm}>
-            {passwordReset || loading ? (
-              handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
-            ) : (
-              <Form className='newPasswordForm'>
-                <h2 className={styles.heading}>{CHANGE_PASSWORD[language].h2}</h2>
-                <Field
-                  name='password'
-                  as={TextField}
-                  type='password'
-                  label={CHANGE_PASSWORD[language].pass_label}
-                  className={styles.passwordInput}
-                  variant='outlined'
-                  fullWidth
-                  InputProps={endAdornment(showPassword, setShowPassword)}
-                  error={!!errors.password}
-                  helperText={errors.password || ''}
-                />
-                <Field
-                  name='confirmPassword'
-                  as={TextField}
-                  type='password'
-                  label={CHANGE_PASSWORD[language].confirm_label}
-                  className={styles.passwordInput}
-                  variant='outlined'
-                  fullWidth
-                  InputProps={endAdornment(showConfirmPassword, setShowConfirmPassword)}
-                  error={!!errors.confirmPassword}
-                  helperText={errors.confirmPassword || ''}
-                />
-                <Button
-                  className={styles.changeBtn}
-                  fullWidth
-                  type='submit'
-                  onClick={() => {
-                    setShouldValidate(true);
-                  }}
-                >
-                  {CHANGE_PASSWORD[language].button}
-                </Button>
-                {handleErrorMessage(userError, styles.serverError, language)}
-              </Form>
-            )}
-          </div>
-        </div>
+        <AuthWrapper>
+          {passwordReset || loading ? (
+            handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
+          ) : (
+            <Form className='newPasswordForm'>
+              <AuthHeading>{t('common.enterNew')}</AuthHeading>
+              <Field
+                name='password'
+                as={TextField}
+                type='password'
+                label={t('common.newPass')}
+                className={styles.passwordInput}
+                variant='outlined'
+                fullWidth
+                InputProps={endAdornment(showPassword, setShowPassword)}
+                error={!!errors.password}
+                helperText={errors.password || ''}
+              />
+              <Field
+                name='confirmPassword'
+                as={TextField}
+                type='password'
+                label={t('common.newPass')}
+                className={styles.passwordInput}
+                variant='outlined'
+                fullWidth
+                InputProps={endAdornment(showConfirmPassword, setShowConfirmPassword)}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword || ''}
+              />
+              <AuthButton
+                onclick={() => {
+                  setShouldValidate(true);
+                }}
+              >
+                {t('common.change')}
+              </AuthButton>
+              {handleErrorMessage(userError, styles.serverError)}
+            </Form>
+          )}
+        </AuthWrapper>
       )}
     </Formik>
   );

@@ -1,56 +1,50 @@
 import React, { useState } from 'react';
-import Collapse from '@material-ui/core/Collapse';
-import ListItemText from '@material-ui/core/ListItemText';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
-import { useStyles } from './sidebar-items.style';
-import { POPULARITY, URL_QUERIES_NAME } from '../../../configs/index';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const SideBarItem = ({ category, handlerItem, models, language, name, mainItemStyles }) => {
-  const styles = useStyles();
-  const history = useHistory();
-  const [isListOpen, setIsListOpen] = useState(false);
+import { Collapse, ListItemText, ListItem, List } from '@material-ui/core';
+import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
+
+import { URL_QUERIES_NAME } from '../../../configs/index';
+import { POPULARITY } from '../constants';
+
+import { useStyles } from './sidebar-items.style';
+import { ITEMS_PER_PAGE } from '../../../pages/product-list-page/constants';
+
+const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
   const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
+  const { t } = useTranslation();
+
+  const styles = useStyles();
+  const [isListOpen, setIsListOpen] = useState(false);
+
   const handleClick = () => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
-  const { quantityPerPage } = useSelector(({ Products }) => ({
-    quantityPerPage: Products.countPerPage
-  }));
-  const handleModelClick = (productModels, categoryId) => {
-    history.push('/');
-    history.push(
-      `catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${quantityPerPage}&${categoryFilter}=${categoryId}&${modelsFilter}=${productModels._id}`
-    );
-  };
+  const countPerPageValue = ITEMS_PER_PAGE[0].value;
+
   return (
     <>
       <li className={mainItemStyles}>
-        <ListItemText button='true' onClick={handleClick} primary={name[language].value} />
+        <ListItemText button='true' onClick={handleClick} primary={t(`${translationsKey}.name`)} />
         {isListOpen ? <RemoveIcon onClick={handleClick} /> : <AddIcon onClick={handleClick} />}
       </li>
 
       <Collapse in={isListOpen} timeout='auto' unmountOnExit>
         <List className={styles.list}>
           {models.map((model) => (
-            <ListItem
-              button
-              className={styles.nested}
-              key={model._id}
-              onClick={() => {
-                handlerItem();
-                handleModelClick(model, category);
-              }}
-            >
-              <ListItemText primary={model.name[language].value} />
+            <ListItem button className={styles.nested} key={model._id} onClick={handlerItem}>
+              <Link
+                to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${countPerPageValue}&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
+              >
+                <ListItemText primary={t(`${model.translationsKey}.name`)} />
+              </Link>
             </ListItem>
           ))}
         </List>
       </Collapse>
+
+      <div className={styles.itemHighlighting} />
     </>
   );
 };

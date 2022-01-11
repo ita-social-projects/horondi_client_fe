@@ -1,127 +1,126 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
-
+import { useQuery } from '@apollo/client';
 import { useStyles } from './nova-post.styles';
-import {
-  CHECKOUT_ADDITIONAL_INFORMATION,
-  CHECKOUT_DELIVERY_TYPES,
-  CHECKOUT_INPUT_FIELD,
-  CHECKOUT_TEXT_FIELDS
-} from '../../../../../translations/checkout.translations';
-import {
-  getNovaPoshtaCities,
-  getNovaPoshtaWarehouse
-} from '../../../../../redux/checkout/checkout.actions';
-import { MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../../../../const/material-ui';
 import { POSTOMAT } from '../../../../../utils/checkout';
-import { CY_CODE_ERR } from '../../../../../configs';
-import { RESET } from '../../../../../const/checkout';
+import { CY_CODE_ERR, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT, RESET } from '../../../../../configs';
+import { getNovaPoshtaCities, getNovaPoshtaWarehouses } from './operations/nova-post.queries.js';
 
-const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, values }) => {
-  const dispatch = useDispatch();
-  const styles = useStyles({
-    isLightTheme
+const NovaPost = ({ setFieldValue, errors, touched, values }) => {
+  const [citySearchValue, setCitySearchValue] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [cities, setCities] = useState([]);
+  const [wareHouses, setWareHouses] = useState([]);
+  const searchHandlerTimeout = useRef(null);
+
+  const styles = useStyles({});
+
+  const { t } = useTranslation();
+
+  const {
+    refetch: getCities,
+    data: dataCities,
+    loading: citiesLoading
+  } = useQuery(getNovaPoshtaCities);
+
+  const { data: dataHouses, loading: houseLoading } = useQuery(getNovaPoshtaWarehouses, {
+    variables: { city: selectedCity },
+    skip: !selectedCity,
+    notifyOnNetworkStatusChange: true
   });
 
-  const { deliveryLoading, cities, warehouses } = useSelector(({ Checkout }) => ({
-    deliveryLoading: Checkout.deliveryLoading,
-    cities: Checkout.cities,
-    warehouses: Checkout.warehouses
-  }));
-
-  const [selectedCity, setSelectedCity] = useState(values.city);
-
-  const getPostCities = useCallback(
-    _.debounce((value) => {
-      dispatch(getNovaPoshtaCities(value));
-    }, 500),
-    [dispatch, getNovaPoshtaCities]
-  );
   useEffect(() => {
-    if (selectedCity) {
-      dispatch(getNovaPoshtaWarehouse(selectedCity));
+    !citySearchValue && clearTimeout(searchHandlerTimeout.current);
+    if (!citiesLoading && citySearchValue) {
+      clearTimeout(searchHandlerTimeout.current);
+      searchHandlerTimeout.current = setTimeout(() => {
+        getCities({ city: citySearchValue });
+      }, 1000);
     }
-  }, [dispatch, selectedCity]);
+  }, [citySearchValue, citiesLoading, getCities]);
+
+  useEffect(() => {
+    if (dataCities) {
+      setCities(dataCities.getNovaPoshtaCities);
+    }
+  }, [dataCities]);
+
+  useEffect(() => {
+    if (dataHouses) {
+      setWareHouses(dataHouses.getNovaPoshtaWarehouses);
+    }
+  }, [dataHouses]);
 
   return (
     <div className={styles.novaPostContainer}>
-      <h3 className={styles.novaPostTitle}>{CHECKOUT_DELIVERY_TYPES[language].novaPoshta}</h3>
+      <h3 className={styles.novaPostTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.novaPostData}>
-        <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].city}</h4>
         <div className={styles.selectorInfo}>
           <Autocomplete
             onInputChange={(e, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value);
+                value = value.trim().charAt(0).toUpperCase() + value.slice(1);
+                setCitySearchValue(value);
               }
-              getPostCities(values.city);
             }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneCity}
+            noOptionsText={t('delivery.noCity')}
             onChange={(event, value) => {
               if (value) {
                 setSelectedCity(value.description);
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, value.description);
+                setFieldValue('city', value.description);
               } else {
                 setSelectedCity('');
-                setFieldValue(CHECKOUT_INPUT_FIELD.city, '');
+                setFieldValue('city', '');
               }
-              setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+              setFieldValue('courierOffice', '');
             }}
             options={cities}
-            inputValue={values.city}
+            inputValue={citySearchValue}
             getOptionLabel={(option) => option?.description || null}
             className={styles.dataInput}
             renderInput={(params) => (
               <TextField
                 {...params}
                 error={touched.city && !!errors.city}
-                label={CHECKOUT_TEXT_FIELDS[language].city}
+                label={`${t('delivery.city')} *`}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
-                  endAdornment: (
-                    <>
-                      {deliveryLoading && (
-                        <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
-                      )}
-                      {params.InputProps.endAdornment}
-                    </>
-                  )
+                  endAdornment: <>{params.InputProps.endAdornment}</>
                 }}
               />
             )}
           />
           {touched.city && errors.city && (
             <div data-cy={CY_CODE_ERR} className={styles.error}>
-              {errors.city}
+              {t(errors.city)}
             </div>
           )}
         </div>
       </div>
       <div className={styles.novaPostData}>
-        <h4 className={styles.novaPostDataTitle}>{CHECKOUT_TEXT_FIELDS[language].department}</h4>
         <div className={styles.selectorInfo}>
           <Autocomplete
             onInputChange={(event, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value);
+                setFieldValue('courierOffice', value);
               }
             }}
-            noOptionsText={CHECKOUT_ADDITIONAL_INFORMATION[language].noOneDepartment}
+            noOptionsText={t('delivery.noDepartment')}
             onChange={(event, value) => {
               if (value) {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, value.description);
+                setFieldValue('courierOffice', value.description);
               } else {
-                setFieldValue(CHECKOUT_INPUT_FIELD.courierOffice, '');
+                setFieldValue('courierOffice', '');
               }
             }}
-            disabled={!values.city}
+            disabled={!selectedCity || !wareHouses.length}
             options={_.filter(
-              warehouses,
+              wareHouses,
               (warehouseItem) => !warehouseItem.description.includes(POSTOMAT)
             )}
             inputValue={values.courierOffice}
@@ -131,13 +130,13 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
               <TextField
                 {...params}
                 error={touched.courierOffice && !!errors.courierOffice}
-                label={CHECKOUT_TEXT_FIELDS[language].department}
+                label={`${t('delivery.department')} *`}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
                     <>
-                      {deliveryLoading && (
+                      {houseLoading && (
                         <CircularProgress color={MATERIAL_UI_COLOR.INHERIT} size={20} />
                       )}
                       {params.InputProps.endAdornment}
@@ -147,9 +146,10 @@ const NovaPost = ({ isLightTheme, language, setFieldValue, errors, touched, valu
               />
             )}
           />
+
           {touched.courierOffice && errors.courierOffice && (
             <div data-cy={CY_CODE_ERR} className={styles.error}>
-              {errors.courierOffice}
+              {t(errors.courierOffice)}
             </div>
           )}
         </div>

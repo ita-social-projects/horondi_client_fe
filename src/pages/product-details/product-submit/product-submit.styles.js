@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => {
     marginTop: '1.2rem',
     marginRight: '1.2rem',
     fontSize: '2.5rem',
-    color: '#ed0505',
+    color: theme.palette.textColor,
     '&:hover': {
       transform: 'scale(1.15)',
       cursor: 'pointer',
@@ -14,13 +14,14 @@ export const useStyles = makeStyles((theme) => {
   };
 
   const button = {
+    fontWeight: 600,
+    fontSize: '14px',
+    lineHeight: '20px',
     marginRight: '1rem',
-    marginTop: '1rem',
-    padding: '0.4rem 0.9rem',
+    padding: '14px 25px',
     minWidth: '9rem',
     textTransform: 'none',
     textAlign: 'center',
-    fontSize: '1rem',
     '@media (max-width: 600px)': {
       padding: '0.2rem 0.6rem',
       fontSize: '0.9rem'
@@ -54,13 +55,21 @@ export const useStyles = makeStyles((theme) => {
         marginTop: '0'
       }
     },
+    toCart: {
+      ...button,
+      border: '1px solid'
+    },
+
     submitButton: {
       ...button,
-      backgroundColor: theme.palette.button.normal.backgroundColor,
-      color: theme.palette.button.normal.color,
+      background: theme.palette.textColor,
+      color: theme.palette.backgroundColor,
       '&:hover': {
         backgroundColor: theme.palette.button.hover.backgroundColor,
         color: theme.palette.button.hover.color
+      },
+      '&:disabled': {
+        backgroundColor: 'rgba(2, 2, 2, 0.2)'
       }
     },
     unavailableButton: {

@@ -1,38 +1,50 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   novaPostContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
     width: '100%',
-    marginBottom: '5%'
+    marginBottom: '2%'
   },
   error: {
     color: '#e60000',
     marginTop: 15
   },
-  novaPostTitle: ({ isLightTheme }) => ({
-    fontWeight: 400,
-    fontSize: 18,
-    color: isLightTheme ? '#1D1C1C' : '#ffffff'
-  }),
-  novaPostDataTitle: ({ isLightTheme }) => ({
-    fontWeight: 400,
-    fontSize: 16,
-    color: isLightTheme ? '#4E4E4E' : '#ffffff'
-  }),
+  novaPostTitle: {
+    fontWeight: 700,
+    fontSize: 23,
+    color: palette.textColor,
+    marginLeft: '10%',
+    '@media (max-width: 920px)': {
+      width: '100%'
+    }
+  },
   novaPostData: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    marginBottom: '3%'
+    marginBottom: '2%',
+    marginLeft: '10%'
   },
   dataInput: {
-    width: '80%',
+    width: 600,
+    marginBottom: '1%',
+    '& label.Mui-focused': {
+      color: palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: palette.textColor
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: palette.textColor
+      }
+    },
     '@media (max-width: 768px)': {
-      width: '100%',
+      width: '80%'
     }
   },
   disabled: {

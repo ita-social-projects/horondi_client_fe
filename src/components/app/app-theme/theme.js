@@ -1,19 +1,36 @@
+const profilePageLabel = {
+  normal: {
+    backgroundColor: 'rgba(196, 196, 196, 0.2)'
+  },
+  hover: {
+    backgroundColor: 'rgba(196, 196, 196, 0.5)'
+  }
+};
+
 export default {
   light: {
     textColor: '#000000',
     backgroundColor: '#FFFFFF',
+    catalogPageFilterCell: {
+      hover: {
+        backgroundColor: '#e4e0e0'
+      }
+    },
     button: {
       normal: {
-        backgroundColor: '#3F3F3F',
+        backgroundColor: '#020202',
         color: '#FFFFFF'
       },
       hover: {
-        backgroundColor: '#000000',
+        backgroundColor: '#353333',
         color: '#FFFFFF'
       },
       disabled: {
         backgroundColor: '#999999',
         color: '#C2C2C2'
+      },
+      border: {
+        borderColor: '#020202'
       }
     },
     card: {
@@ -24,15 +41,77 @@ export default {
         backgroundColor: '#000000',
         color: '#FFFFFF'
       }
+    },
+    cart: {
+      borderColor: 'rgba(91, 91, 91, 0.2)',
+      iconColor: 'rgba(2, 2, 2, 0.5)'
+    },
+    contactForm: {
+      background: '#EFEFEF'
+    },
+    productDescription: {
+      borderColor: 'rgba(230, 230, 230, 0.65)'
+    },
+    orderHistoryHeading: {
+      background: '#DEDEDE'
+    },
+    profilePageLabel,
+    carouselItem: {
+      normal: {
+        backgroundColor: '#FFFFFF'
+      },
+      shadow: {
+        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.12)'
+      },
+      hover: {
+        border: '1px solid #5b5b5b'
+      }
+    },
+    seachBar: {
+      backgroundColor: 'rgb(255, 255, 255, 0.2)',
+      color: 'rgba(254, 254, 254, 0.75);',
+      border: '1px solid #949494'
+    },
+    comments: {
+      border: '1px solid #E6E6E6',
+      formBorder: '1px solid #2020233',
+      cancelButtonBorder: {
+        border: '1px solid #020202'
+      },
+      deleteIcon: {
+        color: '#808080'
+      },
+      modal: {
+        closeModalIcon: {
+          color: '#808080'
+        },
+        titleBorder: {
+          border: '2px solid #E2E8F0'
+        },
+        buttonBorder: {
+          border: '1px solid black'
+        }
+      }
+    },
+    arrowIcon: {
+      arrowColor: 'rgba(2, 2, 2, 0.5)'
+    },
+    imageContainer: {
+      border: '1px solid rgba(91, 91, 91, 0.2)'
     }
   },
   dark: {
     textColor: '#FFFFFF',
-    backgroundColor: '#353333',
+    backgroundColor: '#242424',
+    catalogPageFilterCell: {
+      hover: {
+        backgroundColor: '#7c7b7b'
+      }
+    },
     button: {
       normal: {
-        backgroundColor: '#C2C2C2',
-        color: '#000000'
+        backgroundColor: '#020202',
+        color: '#FFFFFF'
       },
       hover: {
         backgroundColor: '#FFFFFF',
@@ -41,6 +120,9 @@ export default {
       disabled: {
         backgroundColor: '#868585',
         color: '#C2C2C2'
+      },
+      border: {
+        borderColor: '#FEFEFE'
       }
     },
     card: {
@@ -51,6 +133,65 @@ export default {
         backgroundColor: '#FFFFFF',
         color: '#000000'
       }
+    },
+    cart: {
+      borderColor: '#5B5B5B',
+      iconColor: 'rgba(230, 230, 230, 0.75)'
+    },
+    contactForm: {
+      background: '#232323'
+    },
+    productDescription: {
+      borderColor: '#5B5B5B'
+    },
+    orderHistoryHeading: {
+      background: '#2F2F2F '
+    },
+    profilePageLabel,
+    carouselItem: {
+      normal: {
+        backgroundColor: '#333131'
+      },
+      shadow: {
+        boxShadow: '4px 6px 25px rgba(26, 26, 26, 0.8)'
+      },
+      hover: {
+        border: '1px solid #5B5B5B'
+      }
+    },
+    seachBar: {
+      backgroundColor: 'rgb(255, 255, 255, 0.2)',
+      color: 'rgba(254, 254, 254, 0.75);',
+      border: '1px solid #949494'
+    },
+    comments: {
+      border: '1px solid #E6E6E6',
+      formBorder: {
+        borderColor: '1px solid #5B5B5B'
+      },
+      cancelButtonBorder: {
+        border: '1px solid #C7C7C7'
+      },
+      deleteIcon: {
+        color: '#808080'
+      },
+      modal: {
+        closeModalIcon: {
+          color: '#808080'
+        },
+        titleBorder: {
+          border: '2px solid #E2E8F0'
+        },
+        buttonBorder: {
+          border: '1px solid black'
+        }
+      }
+    },
+    arrowIcon: {
+      arrowColor: 'rgba(254, 254, 254, 0.75)'
+    },
+    imageContainer: {
+      border: '1px solid rgba(91, 91, 91, 1)'
     }
   }
 };

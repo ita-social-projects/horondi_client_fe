@@ -1,6 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
+import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles(({ palette }) => ({
+  thanksBackground: {
+    background: `url(${BG}) no-repeat `,
+    backgroundSize: 'cover',
+    height: '1000px',
+    position: 'relative'
+  },
   thanksContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,9 +35,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.hover.color
     }
   },
-  thunksTitle: ({ isLightTheme }) => ({
+  thunksTitle: () => ({
     fontSize: 30,
-    color: !isLightTheme ? '#ffffff' : '#000000',
+    color: palette.type === 'light' ? '#000000' : '#ffffff',
     fontWeight: 400,
     marginBottom: 0
   }),

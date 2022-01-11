@@ -1,18 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import EmptyOrder from '../../order/empty-order';
-import {
-  ORDER_BUTTON_TITLES,
-  ORDER_HISTORY_TITLES
-} from '../../../../translations/order.translations';
 
 const EmptyOrderHistory = () => {
-  const language = useSelector(({ Language }) => Language.language);
-
+  const { t } = useTranslation();
   return (
     <EmptyOrder
-      title={ORDER_HISTORY_TITLES[language].empty}
-      buttonTitle={ORDER_BUTTON_TITLES[language].empty}
+      emptyTitle={t('orderHistory.emptyTitle')}
+      buttonTitle={t('orderHistory.buttonEmpty')}
       name='empty-order-history'
     />
   );

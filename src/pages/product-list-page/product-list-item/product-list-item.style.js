@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   productItem: (props) => ({
     background: `url(${props.image}) no-repeat center ${
-      props.isLightTheme ? '#e3e7ea' : '#262626'
+      palette.type === 'light' ? '#e3e7ea' : '#262626'
     }`,
     backgroundSize: 'cover',
     height: '100%',
@@ -40,6 +40,13 @@ export const useStyles = makeStyles(() => ({
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    fontSize: '14px'
+    fontSize: '14px',
+    marginTop: '5px',
+    textTransform: 'capitalize'
+  },
+  price: {
+    fontSize: '20px',
+    fontWeight: '600',
+    color: 'white'
   }
 }));

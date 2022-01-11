@@ -1,30 +1,32 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { Typography, Button } from '@material-ui/core';
 
-import { useStyles } from './empty-wishlist.styles';
-import { WISHLIST_TITTLES, WISHLIST_BUTTONS } from '../../../translations/wishlist.translations';
-import { WISHLIST_IMAGES } from '../../../configs';
+import { useStyles } from '../../../containers/orders/order/empty-order/empty-order.styles';
+import { CART_AND_WISHLIST_IMAGES } from '../../../configs';
+import ThemeContext from '../../../context/theme-context';
 
 const EmptyWishlist = () => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
-  }));
+  const [isLightTheme] = useContext(ThemeContext);
   const styles = useStyles();
+  const { t } = useTranslation();
+
   const emptyWishlistImgLink = isLightTheme
-    ? WISHLIST_IMAGES.lightTheme
-    : WISHLIST_IMAGES.darkTheme;
+    ? CART_AND_WISHLIST_IMAGES.lightTheme
+    : CART_AND_WISHLIST_IMAGES.darkTheme;
+  const titleStyles = isLightTheme ? styles.whiteThemeTitle : styles.darkThemeTitle;
+  const buttonStyles = isLightTheme ? styles.whiteThemeButton : styles.darkThemeButton;
 
   return (
     <div className={styles.root} data-cy='empty-wishlist'>
-      <Typography variant='h2'>{WISHLIST_TITTLES[language].empty}</Typography>
-      <img src={emptyWishlistImgLink} alt='empty wishlist' />
-      <Link to='/'>
-        <Button className={styles.button} variant='contained'>
-          {WISHLIST_BUTTONS[language].empty}
+      <Typography className={titleStyles} variant='h2'>
+        {t('wishlist.wishlistTitles.empty')}
+      </Typography>
+      <img src={emptyWishlistImgLink} className={styles.image} alt='empty wishlist' />
+      <Link to='/catalog/products?page=1&sort=null&countPerPage=9'>
+        <Button className={buttonStyles} variant='contained'>
+          {t('wishlist.wishlistButtons.empty')}
         </Button>
       </Link>
     </div>

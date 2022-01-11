@@ -1,67 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
-import BG from '../../images/2.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
     overflowX: 'hidden'
   },
-  wrapper: {
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  background: {
-    height: '100vh',
-    width: '100%',
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    filter: 'brightness(30%) contrast(90%)',
-    position: 'absolute',
-    zIndex: -1
-  },
-  formWrapper: {
-    margin: theme.spacing(1),
-    maxWidth: '960px',
-    height: '550px',
-    filter: 'drop-shadow(8px 8px 10px dark-gray)',
-    '& .MuiGrid-item': {
-      padding: '0px !important'
-    },
-    '@media (max-width: 959px)': {
-      padding: '0 50px'
-    },
-    '@media (max-width: 525px)': {
-      padding: '0 15px'
-    }
-  },
-  fonWrapper: {
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    height: '100%',
-    width: '100%',
-    '@media (max-width: 959px)': {
-      display: 'none'
-    }
-  },
-  loginForm: {
-    backgroundColor: theme.palette.backgroundColor,
-    width: '100%',
-    height: '550px',
-    padding: '80px 45px 45px',
-    boxSizing: 'border-box'
-  },
-  heading: {
-    fontSize: '1.5rem',
-    lineHeight: '29px',
-    textAlign: 'center',
-    marginBottom: '25px',
-    marginTop: 0,
-    textTransform: 'capitalize',
-    color: theme.palette.textColor
-  },
   passwordInput: {
-    marginBottom: '16px',
+    marginBottom: '15px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
@@ -83,7 +27,8 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: theme.palette.blue,
+        borderWidth: '2px'
       }
     }
   },
@@ -110,20 +55,12 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: theme.palette.blue,
+        borderWidth: '2px'
       }
     }
   },
-  loginBtn: {
-    border: '1px solid black',
-    borderRadius: '4px',
-    textTransform: 'capitalize',
-    backgroundColor: 'white',
-    color: 'black',
-    '&:hover': {
-      color: theme.palette.button.normal.backgroundColor
-    }
-  },
+
   loginGroup: {
     position: 'relative'
   },
@@ -141,12 +78,13 @@ export const useStyles = makeStyles((theme) => ({
     left: '0px'
   },
   recoveryBtn: {
+    marginTop: '10px',
     float: 'right',
     fontSize: '0.875rem',
-    color: theme.palette.button.disabled.backgroundColor,
+    color: theme.palette.textColor,
     textDecoration: 'none',
     '&:hover': {
-      color: '#1976D2',
+      color: theme.palette.blue,
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }
@@ -157,20 +95,19 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    '@media (max-width: 425px)': {
-      marginBottom: '10px'
-    }
+    marginBottom: '10px',
+    marginTop: '5px'
   },
   orContainer: {
     width: '100%',
-    marginTop: '20px',
-    marginBottom: '20px',
-    minHeight: '10px'
+    marginTop: '50px',
+    marginBottom: '10px',
+    minHeight: '10px',
+    display: 'flex'
   },
   orText: {
-    display: 'table',
     margin: '0 auto',
-    color: '#636363',
+    color: theme.palette.textColor,
     fontSize: '0.875rem'
   },
   registerContainer: {
@@ -185,14 +122,14 @@ export const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     textTransform: 'capitalize',
     '&:hover': {
-      color: '#1976D2',
+      color: theme.palette.blue,
       textDecoration: 'underline',
       backgroundColor: 'transparent'
     }
   },
   afterText: {
     '& p::after': {
-      content: `' example@mail.com'`,
+      content: `', example@mail.com'`,
       color: '#828282'
     }
   },

@@ -18,6 +18,7 @@
       "impliedStrict": true
     }
   },
+
   "plugins": ["jsx-a11y", "react-app", "react", "import"],
   "env": {
     "browser": true,
@@ -25,6 +26,11 @@
     "node": true,
     "jquery": true,
     "jest": true
+  },
+  "globals": {
+    "shallow": true,
+    "render": true,
+    "mount": true
   },
   "extends": [
     "airbnb",
@@ -36,10 +42,10 @@
   ],
   "rules": {
     "semi": ["error", "always"],
-    "semi-style" : ["error", "last"],
+    "semi-style": ["error", "last"],
     "no-var": "warn",
     "no-unused-vars": [
-      1,
+      2,
       {
         "vars": "all",
         "args": "none",
@@ -65,7 +71,7 @@
     "arrow-body-style": [2, "as-needed"],
     "no-unused-expressions": 0,
     "no-console": [
-      0,
+      "error",
       {
         "allow": ["warn", "error"]
       }
@@ -110,6 +116,7 @@
     "no-constant-condition": 2,
     "no-extra-parens": [1, "functions"],
     "import/extensions": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "jsx-quotes": [2, "prefer-single"],
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty order component tests should match snapshot 1`] = `
+<Fragment>
+  <PathBack />
+  <div
+    data-cy=""
+  >
+    <WithStyles(ForwardRef(Typography))
+      variant="h2"
+    />
+    <img
+      alt=""
+      src="./images/cart/empty-cart-light-theme-image.png"
+    />
+    <Link
+      to="/catalog/:category"
+    >
+      <WithStyles(ForwardRef(Button))
+        variant="contained"
+      />
+    </Link>
+  </div>
+</Fragment>
+`;

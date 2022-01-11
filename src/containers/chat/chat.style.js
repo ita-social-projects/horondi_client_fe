@@ -6,10 +6,10 @@ const flexCenter = {
   alignItems: 'center'
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(({ palette }) => ({
   chatIcon: ({ iconsVisible }) => ({
     ...flexCenter,
-    background: iconsVisible ? '#E4B200' : 'black',
+    background: iconsVisible ? palette.yellow : palette.black,
     margin: '0px 12px',
     padding: '0px',
     position: 'fixed',
@@ -30,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     '&:hover': {
       cursor: 'pointer',
-      background: '#E4B200'
+      background: palette.yellow
     }
   }),
   iconsMessengers: {
@@ -69,14 +69,14 @@ export const useStyles = makeStyles((theme) => ({
       height: '45px'
     },
     '&:hover': {
-      background: '#E4B200'
+      background: palette.yellow
     }
   },
   msgIconActive: (mailFormVisible) => ({
     ...flexCenter,
     width: '60px',
     height: '60px',
-    background: mailFormVisible ? '#E4B200' : 'black',
+    background: mailFormVisible ? palette.yellow : palette.black,
     borderRadius: '50%',
     marginBottom: '20px',
     cursor: 'pointer',
@@ -87,8 +87,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '40px'
     }
   }),
-  mailForm: ({ themeMode }) => ({
-    borderRadius: '4px',
+  mailForm: {
     position: 'fixed',
     display: 'flex',
     flexDirection: 'column',
@@ -99,7 +98,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '320px',
     height: '600px',
     zIndex: 899,
-    background: themeMode ? 'white' : '#232323',
+    background: palette.backgroundColor,
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
       width: '70%',
@@ -114,7 +113,7 @@ export const useStyles = makeStyles((theme) => ({
       height: '80%',
       top: '15%'
     }
-  }),
+  },
   cancelIcon: {
     position: 'absolute',
     right: '1px',
@@ -124,19 +123,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   contacts: {
     ...flexCenter,
-    background: theme.palette.backgroundColor,
-    width: '100%',
+    background: palette.backgroundColor,
     height: '40%',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     flexDirection: 'column',
-    borderRadius: '4px'
+    margin: '0 50px 0 0'
   },
   contactsTitle: {
-    margin: '3px 0 2px 0',
+    margin: '3px 70px 2px 0',
     fontSize: '1.3rem'
   },
   phoneNumbers: {
-    color: theme.palette.textColor
+    color: palette.textColor
   },
   mailTitle: {
     marginTop: '5%',
@@ -147,27 +145,24 @@ export const useStyles = makeStyles((theme) => ({
     height: '15px',
     width: '15px'
   },
-  formField: ({ themeMode }) => ({
+  contactForm: {
     ...flexCenter,
-    background: themeMode ? '#efefef' : '#232323',
     flexDirection: 'column',
-    width: '100%',
-    height: '100%',
-    borderRadius: '4px'
-  }),
+    width: '100%'
+  },
   btnSend: {
     marginBottom: '20px',
-    background: theme.palette.button.normal.backgroundColor,
-    borderRadius: '5px',
+    width: '90%',
+    background: palette.button.normal.backgroundColor,
     fontSize: '1.5em',
     padding: 10,
-    color: theme.palette.button.normal.color,
+    color: palette.button.normal.color,
     '& a': {
       color: 'inherit'
     },
     '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
     },
     '@media (max-width: 768px)': {
       fontSize: '1em',
@@ -180,11 +175,16 @@ export const useStyles = makeStyles((theme) => ({
     width: '90%'
   },
   icon: {
-    color: theme.palette.white,
+    color: palette.white,
     fontSize: '35px',
     '@media (max-width: 768px)': {
       fontSize: '25px !important'
     }
+  },
+  iconContact: {
+    margin: '0 5px 0 0',
+    fontSize: '20px',
+    paddingTop: '2px'
   },
   activeMsgWrapper: {
     height: '65%',

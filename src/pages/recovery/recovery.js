@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import {
-  errorMessages,
-  RECOVERY_SUCCESS_MESSAGE,
-  RECOVERY_MESSAGES
-} from '../../translations/user.translations';
 import { useStyles } from './recovery.styles';
+import { MATERIAL_UI_COLOR } from '../../configs';
 import { recoverUser, resetState, userHasRecovered } from '../../redux/user/user.actions';
+import { AuthWrapper, AuthButton, AuthHeading } from '../../components/auth-form';
 import {
   handleHelperText,
   handleRecoveryLoaderOrWindow,
@@ -18,10 +16,11 @@ import {
 
 const Recovery = () => {
   const styles = useStyles();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language === 'ua' ? 0 : 1;
   const [shouldValidate, setShouldValidate] = useState(false);
 
-  const { language, error, userRecovered, recoveryLoading } = useSelector(({ Language, User }) => ({
-    language: Language.language,
+  const { error, userRecovered, recoveryLoading } = useSelector(({ User }) => ({
     recoveryLoading: User.recoveryLoading,
     error: User.error,
     userRecovered: User.userRecovered
@@ -40,13 +39,13 @@ const Recovery = () => {
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>{RECOVERY_SUCCESS_MESSAGE[language].h2}</h2>
-      <p className={styles.recoveryText}>{RECOVERY_SUCCESS_MESSAGE[language].p}</p>
+      <h2 className={styles.heading}>{t('recovery.successTitle')}</h2>
+      <p className={styles.recoveryText}>{t('recovery.successText')}</p>
     </div>
   );
 
   const validationSchema = Yup.object({
-    email: Yup.string().email(errorMessages[language].value.email)
+    email: Yup.string().email(t('error.profile.email'))
   });
 
   return (
@@ -58,41 +57,33 @@ const Recovery = () => {
       validateOnChange={shouldValidate}
     >
       {({ errors, handleChange }) => (
-        <div className={styles.recoveryBackground}>
-          <div className={styles.recoveryForm}>
-            {userRecovered || recoveryLoading ? (
-              handleRecoveryLoaderOrWindow(userRecovered, successWindow)
-            ) : (
-              <Form>
-                <h2 className={styles.heading}>{RECOVERY_MESSAGES[language].h2}</h2>
-                <Field
-                  name='email'
-                  as={TextField}
-                  type='text'
-                  label={RECOVERY_MESSAGES[language].label}
-                  className={`${styles.emailInput} ${handleClass(
-                    errors.email,
-                    styles.helperEmail
-                  )}`}
-                  variant='outlined'
-                  fullWidth
-                  error={!!errors.email || !!error}
-                  onChange={(e) => handleChange(e) || (error && dispatch(resetState()))}
-                  helperText={handleHelperText(errors.email, error, language)}
-                />
-                <p className={styles.recoveryText}>{RECOVERY_MESSAGES[language].p}</p>
-                <Button
-                  className={styles.recoverBtn}
-                  fullWidth
-                  type='submit'
-                  onClick={() => setShouldValidate(true)}
-                >
-                  {RECOVERY_MESSAGES[language].button}
-                </Button>
-              </Form>
-            )}
-          </div>
-        </div>
+        <AuthWrapper>
+          {userRecovered || recoveryLoading ? (
+            handleRecoveryLoaderOrWindow(userRecovered, successWindow)
+          ) : (
+            <Form className={styles.background}>
+              <AuthHeading>{t('recovery.recoveryTitle')}</AuthHeading>
+              <Field
+                name='email'
+                as={TextField}
+                type='text'
+                label={t('recovery.recoveryEmail')}
+                className={`${styles.emailInput} ${handleClass(errors.email, styles.helperEmail)}`}
+                variant='outlined'
+                fullWidth
+                onChange={(e) => handleChange(e) || (error && dispatch(resetState()))}
+                helperText={handleHelperText(errors.email, error)}
+                error={!!errors.email || !!error}
+                color={MATERIAL_UI_COLOR.PRIMARY}
+              />
+
+              <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
+              <AuthButton onclick={() => setShouldValidate(true)}>
+                {t('recovery.recoveryButtonText')}
+              </AuthButton>
+            </Form>
+          )}
+        </AuthWrapper>
       )}
     </Formik>
   );

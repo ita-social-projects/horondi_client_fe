@@ -1,52 +1,31 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
 import Menu from '@material-ui/core/Menu';
 import { MenuItem } from '@material-ui/core';
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import PersonIcon from '@material-ui/icons/Person';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import HistoryIcon from '@material-ui/icons/History';
+import { Settings, History, PersonOutlineOutlined, Person } from '@material-ui/icons';
 
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './header-profile.styles';
-import { getWishlist } from '../../redux/wishlist/wishlist.actions';
-import { setThemeMode } from '../../redux/theme/theme.actions';
-import { setToLocalStorage } from '../../services/local-storage.service';
 import { logoutUser } from '../../redux/user/user.actions';
-import { PROFILE_OPTIONS_VALUES } from '../../translations/header-profile.translations';
-import { DARK_THEME, LIGHT_THEME, RETURN_PAGE } from '../../configs';
-import routes from '../../const/routes';
+import { RETURN_PAGE } from '../../configs';
+import routes from '../../configs/routes';
 
-const {
-  pathToWishlist,
-  pathToProfile,
-  pathToOrderHistory,
-  pathToRegister,
-  pathToLogin,
-  pathToMain
-} = routes;
+const { pathToProfile, pathToOrderHistory, pathToRegister, pathToLogin, pathToMain } = routes;
 
 const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
-  const { userData, language, lightMode } = useSelector(({ User, Language, Theme }) => ({
-    userData: User.userData,
-    lightMode: Theme.lightMode,
-    language: Language.language
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
   }));
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const styles = useStyles({ fromSideBar });
   const history = useHistory();
-  const themeIcon = lightMode ? <Brightness7Icon /> : <Brightness4Icon />;
-
-  useEffect(() => {
-    dispatch(getWishlist());
-  }, [dispatch]);
 
   const handleKeyDown = (e) => {
     e.persist();
@@ -61,12 +40,14 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     setAnchorEl(null);
   };
 
-  const handleChangeTheme = (e) => {
-    if (handleKeyDown(e)) {
-      dispatch(setThemeMode(!lightMode));
-      setAnchorEl(null);
-      setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
-    }
+  const handleLogIn = () => {
+    setIsMenuOpen(false);
+    const pathName = history.location.pathname;
+    const returnPath =
+      (pathName === pathToRegister || pathName === pathToLogin ? pathToMain : pathName) +
+      history.location.search;
+    sessionStorage.setItem(RETURN_PAGE, returnPath);
+    handleRedirect(pathToLogin);
   };
 
   const handleLogout = () => {
@@ -79,57 +60,25 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     setAnchorEl(null);
   };
 
-  const PROFILE_STATIC_DATA = [
+  const PROFILE_DATA = [
     {
-      value: PROFILE_OPTIONS_VALUES[language].wishlist,
-      icon: <FavoriteIcon />,
-      clickHandler: () => {
-        setIsMenuOpen(false);
-        return handleRedirect(pathToWishlist);
-      }
-    },
-    {
-      value: PROFILE_OPTIONS_VALUES[language].changeTheme,
-      icon: themeIcon,
-      clickHandler: handleChangeTheme
-    }
-  ];
-
-  const PROFILE_NOT_LOGGED_DATA = [
-    {
-      value: PROFILE_OPTIONS_VALUES[language].logIn,
-      icon: <ExitToAppIcon />,
-      clickHandler: () => {
-        setIsMenuOpen(false);
-        const pathName = history.location.pathname;
-        const returnPath =
-          (pathName === pathToRegister || pathName === pathToLogin ? pathToMain : pathName) +
-          history.location.search;
-        sessionStorage.setItem(RETURN_PAGE, returnPath);
-        handleRedirect(pathToLogin);
-      }
-    }
-  ];
-
-  const PROFILE_LOGGED_DATA = [
-    {
-      value: PROFILE_OPTIONS_VALUES[language].profile,
-      icon: <PersonOutlineIcon />,
+      value: t('headerProfile.profile'),
+      icon: <Settings />,
       clickHandler: () => {
         setIsMenuOpen(false);
         return handleRedirect(pathToProfile);
       }
     },
     {
-      value: PROFILE_OPTIONS_VALUES[language].orderHistory,
-      icon: <HistoryIcon />,
+      value: t('headerProfile.orderHistory'),
+      icon: <History />,
       clickHandler: () => {
         setIsMenuOpen(false);
         return handleRedirect(pathToOrderHistory);
       }
     },
     {
-      value: PROFILE_OPTIONS_VALUES[language].logOut,
+      value: t('common.logOut'),
       icon: <ExitToAppIcon />,
       clickHandler: () => {
         setIsMenuOpen(false);
@@ -138,39 +87,39 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     }
   ];
 
-  const mappedProfileList = useMemo(
-    () =>
-      PROFILE_STATIC_DATA.concat(userData ? PROFILE_LOGGED_DATA : PROFILE_NOT_LOGGED_DATA).map(
-        ({ value, icon, clickHandler }) => (
-          <MenuItem key={value} onClick={clickHandler} disableGutters>
-            {icon}
-            {value}
-          </MenuItem>
-        )
-      ),
-    [userData, PROFILE_STATIC_DATA, PROFILE_LOGGED_DATA, PROFILE_NOT_LOGGED_DATA]
-  );
+  const mappedProfileList = PROFILE_DATA.map(({ value, icon, clickHandler }) => (
+    <MenuItem key={value} onClick={clickHandler} disableGutters data-cy='menuItem'>
+      {icon}
+      {value}
+    </MenuItem>
+  ));
 
   return (
     <div className={styles.profile} data-cy='profile'>
       {userData ? (
-        <PersonIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} />
+        <Person onClick={handleClick} onKeyDown={handleClick} tabIndex={0} data-cy='iconIn' />
       ) : (
-        <PersonOutlineIcon onClick={handleClick} onKeyDown={handleClick} tabIndex={0} />
+        <PersonOutlineOutlined
+          onClick={handleLogIn}
+          onKeyDown={handleLogIn}
+          tabIndex={0}
+          data-cy='iconOut'
+        />
       )}
       <Menu
+        data-cy='menu'
         className={styles.list}
         anchorEl={anchorEl}
         keepMounted
         elevation={0}
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
+          horizontal: 'right',
+          vertical: 'bottom'
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'left',
+          vertical: 'top'
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}

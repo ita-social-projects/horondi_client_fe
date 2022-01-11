@@ -1,57 +1,39 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  CardMedia,
-  CardHeader,
-  CardContent,
-  Typography,
-  Button,
-  Avatar
-} from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { Card, CardMedia, CardContent, Typography, Button } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './news-item.style';
-import { IMG_URL, TIME_OPTIONS } from '../../../configs';
+import { IMG_URL } from '../../../configs';
+import { TIME_OPTIONS } from '../constants';
 
-const NewsItem = ({ date, author, image, title, text, id, slug }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  const language = useSelector(({ Language }) => Language.language);
+const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
+  const { t, i18n } = useTranslation();
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const styles = useStyles();
-  if (text[language].value === null) {
+  if (!t(`${translationsKey}.text`)) {
     return null;
   }
-  const newsTitle = title.length !== 0 ? title[language].value : 'No title provided';
-  const newsImage = image ? IMG_URL + image : 'No image provided';
-  const newsText =
-    text.length !== 0 && text[language].value != null
-      ? parse(text[language].value)
-      : 'No text provided';
-  const newsAuthor = author.name.length !== 0 ? author.name[language].value : 'No author provided';
-  const newsAuthorAvatar = author.image ? IMG_URL + author.image : 'No author provided';
-
-  const newsButtonText = ['читати далі', 'read more...'];
-  const newsDateLanguageOptions = ['ukr-UA', 'en-US'];
-  const dateLanguage = newsDateLanguageOptions[language];
-  const dateToShow = new Date(parseInt(date));
-  const newsDate = dateToShow.toLocaleString(dateLanguage, TIME_OPTIONS);
   return (
     <div className={styles.container}>
       <Card className={styles.root}>
         <div className={styles.imagesContainer}>
           <CardMedia
             className={styles.media}
-            image={newsImage}
-            title={newsTitle}
+            image={IMG_URL + image}
+            title={translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
             component='div'
             data-cy='image'
           />
         </div>
-        <CardHeader subheader={newsDate} data-cy='date' />
-        <CardContent className={styles.newsItemContent}>
+        <div className={styles.newsAuthorFooter}>
+          <Typography variant='h5' component='div' className={styles.newsDateAutor}>
+            <span>{new Date(parseInt(date)).toLocaleString(dateLanguage, TIME_OPTIONS)}</span>
+            <span>{translationsKey ? t(`${translationsKey}.name`) : t('newsDetail.noAuthor')}</span>
+          </Typography>
+        </div>
+        <CardContent className={styles.ArticleTitleContainer}>
           <Typography
             className={styles.ArticleTitle}
             gutterBottom
@@ -59,8 +41,10 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             component='h2'
             data-cy='newsTitle'
           >
-            {newsTitle}
+            {translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle')}
           </Typography>
+        </CardContent>
+        <CardContent className={styles.newsItemContent}>
           <Typography
             variant='body2'
             color='textSecondary'
@@ -68,46 +52,29 @@ const NewsItem = ({ date, author, image, title, text, id, slug }) => {
             className={styles.newsText}
             data-cy='newsText'
           >
-            {newsText}
+            {translationsKey
+              ? parse(t(`${translationsKey}.text`).slice(0, 299))
+              : t('newsDetail.noText')}
           </Typography>
         </CardContent>
         <div className={styles.newsFooter}>
           <Link to={`/news/${id}-${slug}`}>
-            <Button variant='contained' className={styles.newsButton} data-cy='readMoreButton'>
-              {newsButtonText[language]}
+            <Button variant='outlined' className={styles.newsButton} data-cy='readMoreButton'>
+              {t('buttons.readMore')}
             </Button>
           </Link>
-          <div className={styles.newsAuthorFooter}>
-            <CardHeader subheader={newsAuthor} data-cy='authorName' className={styles.authorName} />
-            <Avatar alt={newsAuthor} src={newsAuthorAvatar} data-cy='authorPhoto' />
-          </div>
         </div>
       </Card>
     </div>
   );
 };
 
-const primaryShape = PropTypes.shape({
-  medium: PropTypes.string
-});
-
-const valueShape = PropTypes.shape({
-  value: PropTypes.string
-});
-
 const newsItemPropTypes = {
   date: PropTypes.string,
   id: PropTypes.string,
-  text: PropTypes.arrayOf(valueShape),
-  title: PropTypes.arrayOf(valueShape),
-  image: PropTypes.shape({
-    additional: PropTypes.arrayOf(primaryShape),
-    primary: primaryShape
-  }),
+  image: PropTypes.string,
   author: PropTypes.shape({
-    image: PropTypes.shape({
-      small: PropTypes.string
-    }),
+    image: PropTypes.string,
     name: PropTypes.arrayOf(
       PropTypes.shape({
         lang: PropTypes.string,

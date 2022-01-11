@@ -1,46 +1,43 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import DeleteIcon from '@material-ui/icons/Delete';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
+import { COMMENTS_TIME_OPTIONS } from '../../../constants';
+
 import {
-  COMMENTS_TIME_OPTIONS,
-  DATE_LANGUAGE_OPTIONS,
-  COMMENT_OWNER_STATUS
-} from '../../../../../configs';
-import { TOOLTIPS, USER_DATA } from '../../../../../translations/product-details.translations';
-import {
-  handleUserCommentOwner,
-  handleUserCommentApprove
+  handleUserCommentApprove,
+  handleUserCommentOwner
 } from '../../../../../utils/handle-comments';
 
-const ReplyCommentsItem = ({ data, replyCommentId }) => {
+const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
   const {
     answerer: user,
     replyText: text,
     createdAt: date,
     showReplyComment: show,
     verifiedPurchase
-  } = data;
+  } = replyItem;
 
-  const { language, userData } = useSelector(({ Language, User, Products }) => ({
-    language: Language.language,
+  const { t, i18n } = useTranslation();
+
+  const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
   const styles = useStyles();
   const { firstName, email, _id, role } = user || {
-    firstName: USER_DATA[language].firstName,
-    email: USER_DATA[language].email,
-    _id: USER_DATA[language]._id,
-    role: USER_DATA[language].role
+    firstName: t('common.userData.firstName'),
+    email: t('common.userData.email'),
+    _id: t('common.userData._id'),
+    role: t('common.userData.role')
   };
 
   const [isModalShown, toggleModal] = useState(false);
-
-  const dateLanguage = DATE_LANGUAGE_OPTIONS[language];
+  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const dateToShow = new Date(date);
   const commentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
@@ -64,14 +61,14 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
             <div className={styles.user}>
               <span className={styles.name}>
                 {role === 'admin' || role === 'superadmin'
-                  ? `${COMMENT_OWNER_STATUS.isAdmin[language]} ${firstName}`
+                  ? `${t('common.reply.isAdmin')} ${firstName}`
                   : firstName}
               </span>
             </div>
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <div className={styles.checkIcon}>
-                  <Tooltip title={TOOLTIPS[language].bought}>
+                  <Tooltip title={t('product.tooltips.bought')}>
                     <ShoppingCartRoundedIcon className={styles.boughtIcon} />
                   </Tooltip>
                 </div>
@@ -79,7 +76,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
                 ''
               )}
               {handleUserCommentApprove(userData, email, show) ? (
-                <Tooltip title={TOOLTIPS[language].feedbackReply}>
+                <Tooltip title={t('product.tooltips.feedbackReply')}>
                   <FeedbackOutlinedIcon className={styles.icon} />
                 </Tooltip>
               ) : null}
@@ -94,8 +91,8 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
           <div className={styles.userIcons}>
             {handleUserCommentOwner(userData, email) ? (
               <div className={styles.icons}>
-                <Tooltip title={TOOLTIPS[language].delete}>
-                  <DeleteOutlineOutlinedIcon className={styles.deleteIcon} onClick={handleOpen} />
+                <Tooltip title={t('product.tooltips.delete')}>
+                  <DeleteIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>
               </div>
             ) : null}
@@ -106,6 +103,7 @@ const ReplyCommentsItem = ({ data, replyCommentId }) => {
         handleClose={handleClose}
         isModalShown={isModalShown}
         commentId={replyCommentId}
+        refetchComments={updateReplies}
         userId={userData ? userData._id : ''}
       />
     </div>

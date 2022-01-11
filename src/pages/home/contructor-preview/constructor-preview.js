@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './constructor-preview.style';
-import { getAllHomeImageLooks } from '../../../redux/home-page-looks/home-page-looks.actions';
-import { HOME_BUTTONS } from '../../../translations/homepage.translations';
-import { CONSTRUCTOR_VIDEO_LINK } from '../../../configs';
-import routes from '../../../const/routes';
+import { CONSTRUCTOR_VIDEO_LINK } from '../constants';
+import routes from '../../../configs/routes';
 
 const { pathToConstructor } = routes;
 
 const ConstructorPreview = () => {
-  const language = useSelector(({ Language }) => Language.language);
+  const { t } = useTranslation();
 
-  const [isMouseIn, setIsMouseIn] = useState(false);
   const [isZeroVolume, setIsZeroVolume] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
 
-  const styles = useStyles({ isMouseIn });
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllHomeImageLooks());
-  }, [dispatch]);
+  const styles = useStyles();
 
   return (
     <div className={styles.constructorPreview} id='constructor' data-section-style='dark'>
@@ -40,15 +31,16 @@ const ConstructorPreview = () => {
         loop
         url={CONSTRUCTOR_VIDEO_LINK}
       />
-      <div
-        className={styles.constructorInner}
-        onMouseLeave={() => setIsMouseIn(false)}
-        onMouseEnter={() => setIsMouseIn(true)}
-      >
-        <ExpandLessIcon className={styles.constructorInnerIcon} />
-        <Link to={pathToConstructor} className={styles.constructorInnerLink}>
-          {HOME_BUTTONS[language].MOVE_TO_CONSTRUCTOR}
-          <ArrowRightAltIcon />
+      <div className={styles.constructorContent}>
+        <div>
+          <h2 className={styles.constructorTitle}> {t('home.createUniqueStyle')} </h2>
+          <p className={styles.constructorDescription}>
+            Et has minim elitr intellegat. Mea aeterno eleifend antiopam ad, nam no suscipit
+            quaerendum. At nam minimum ponderum. Est audiam animal molestiae te.
+          </p>
+        </div>
+        <Link to={pathToConstructor}>
+          <button className={styles.buttonStyles}> {t('home.createStyle')} </button>
         </Link>
       </div>
       <div className={styles.playerSoundControl}>

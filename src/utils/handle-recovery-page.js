@@ -1,6 +1,6 @@
 import React from 'react';
+import i18next from 'i18next';
 import { Loader } from '../components/loader/loader';
-import { RECOVERY_ERROR_MESSAGE } from '../translations/user.translations';
 
 export const handleRecoveryLoaderOrWindow = (userRecovered, successWindow) => {
   if (userRecovered) {
@@ -9,15 +9,10 @@ export const handleRecoveryLoaderOrWindow = (userRecovered, successWindow) => {
   return <Loader />;
 };
 
-const handleHelperErorrText = (error, language) =>
-  RECOVERY_ERROR_MESSAGE[error]
-    ? RECOVERY_ERROR_MESSAGE[error][language].value
-    : RECOVERY_ERROR_MESSAGE.EMAIL_ERROR[language].value;
+const handleHelperErorrText = (error) => error
+  ? i18next.t(`user.recoveryError.${error}`, i18next.t('user.recoveryError.EMAIL_ERROR'))
+  : null;
 
-const handleHelperError = (error, language) =>
-  error ? handleHelperErorrText(error, language) : null;
-
-export const handleHelperText = (errorEmail, error, language) =>
-  errorEmail || handleHelperError(error, language);
+export const handleHelperText = (errorEmail, error) => errorEmail || handleHelperErorrText(error);
 
 export const handleClass = (errorEmail, style) => (errorEmail ? style : null);

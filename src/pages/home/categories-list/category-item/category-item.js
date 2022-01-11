@@ -11,9 +11,17 @@ const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
+    let isSubscribed = true;
+
     getImage(categoryImageUrl)
-      .then((src) => setImage(src))
-      .catch((badSrc) => setImage(badSrc));
+      .then((src) => (isSubscribed ? setImage(src) : null))
+      .catch((badSrc) => {
+        if (isSubscribed) {
+          setImage(badSrc);
+        }
+      });
+
+    return () => (isSubscribed = false);
   }, [categoryImageUrl]);
 
   const styles = useStyles({ image });

@@ -13,7 +13,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginBottom ?
     marginBottom: '235px',
     padding: 15
   },

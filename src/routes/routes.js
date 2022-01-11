@@ -38,9 +38,8 @@ const {
   pathToOrderHistory,
   pathToCategory,
   pathToChosenProduct,
-  pathToAnswersQuestionsPage,
-  pathToGiftСertificate,
-  pathToMyCertificates
+  pathToAnswersQuestionsPage
+  // pathToMyCertificates
 } = routes;
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
@@ -64,8 +63,7 @@ const Contacts = lazy(() => import('../pages/contacts'));
 const Materials = lazy(() => import('../pages/materials'));
 const BusinessPage = lazy(() => import('../pages/business-page'));
 const AnswersQuestionsPage = lazy(() => import('../pages/answers-questions-page'));
-const GiftСertificate = lazy(() => import('../pages/not-found-page'));
-const MyCertificates = lazy(() => import('../pages/certificates'));
+// const MyCertificates = lazy(() => import('../pages/certificates'));
 
 const Routes = () => {
   const styles = useStyles();
@@ -93,9 +91,7 @@ const Routes = () => {
               <Route path={pathToMaterials} exact component={Materials} />
               <Route path={pathToChosenPage} exact component={BusinessPage} />
               <Route path={pathToAnswersQuestionsPage} exact component={AnswersQuestionsPage} />
-              <Route path={pathToGiftСertificate} exact component={GiftСertificate} />
-              <Route path={pathToMyCertificates} exact component={MyCertificates} />
-
+              {/* <Route path={pathToMyCertificates} exact component={MyCertificates} /> */}
               <ProtectedRoute
                 path={pathToLogin}
                 exact

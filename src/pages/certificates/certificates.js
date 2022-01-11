@@ -6,21 +6,6 @@ import FilledCertificates from '../../containers/certificates/filled-certificate
 const Certificates = () => {
   const styles = useStyles();
 
-  // що передати в пропрси FilledCertificates ???
-  // як в cart - useCart
-  // const { cart: cartItems, cartOperations } = useCart(user);
-
-  // Maks: запит на сервер через useQuery
-
-  // Olya:
-  // однаковий запит з адмінки і фронта на бек
-  // getSertificates ...
-  // errorOrLoadingHandler - for errors like in contacts
-  // const { loading, error, data } = useQuery(getContacts, {});
-  // if (loading || error) return errorOrLoadingHandler(error, loading);
-  // const contacts = data.getContacts.items;
-
-  // This code will be rewritten after backend part finished
   const items = [
     {
       code: 'HOR22075',

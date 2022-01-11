@@ -22,13 +22,7 @@ const CertificateTable = ({ items }) => {
       <div className={styles.table}>
         <Table>
           <TableHead>
-            <TableRow
-              classes={{
-                root: styles.tableHeader
-              }}
-            >
-              {headerItems}
-            </TableRow>
+            <TableRow className={styles.tableHeader}>{headerItems}</TableRow>
           </TableHead>
           <TableBody>{certificateItems}</TableBody>
         </Table>

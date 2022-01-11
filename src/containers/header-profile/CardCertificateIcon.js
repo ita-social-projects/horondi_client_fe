@@ -42,7 +42,7 @@ const CardCertificate = createSvgIcon(
 function CardCertificateIcon() {
   return (
     <>
-      <CardCertificate style={{ transform: 'translateY(3px)' }} />
+      <CardCertificate style={{ marginTop: 'auto' }} />
     </>
   );
 }

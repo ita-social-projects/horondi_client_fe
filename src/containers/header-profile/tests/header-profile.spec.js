@@ -61,7 +61,7 @@ describe('<HeaderProfile />', () => {
     mockStore.userData = true;
     const iconIn = wrapper.find(Person);
     iconIn.simulate('click', { persist: jest.fn(), handleChangeTheme: false });
-    expect(wrapper.find(MenuItem).length).toEqual(3);
+    expect(wrapper.find(MenuItem).length).toEqual(4);
   });
   it('should simulate clicks on children', () => {
     mockStore.userData = true;

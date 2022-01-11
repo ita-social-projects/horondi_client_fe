@@ -21,11 +21,7 @@ const CertificateItem = ({ item }) => {
   return (
     <TableRow classes={{ root: styles.root }} data-cy='certificate-item'>
       <TableCell classes={styles.image} data-cy='certificate-item-img'>
-        <img
-          src={Images[`image${item.price}`]}
-          className={styles.itemImg}
-          alt='certificate img'
-        />
+        <img src={Images[`image${item.price}`]} className={styles.itemImg} alt='certificate img' />
       </TableCell>
       <TableCell data-cy='certificate-item-code'>
         <div className={styles.code} value={item.code}>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useStyles } from './certificates.styles';
-import FilledCertificates from '../../containers/certificates/filled-certificates/filled-certificates';
+import FilledCertificates from '../../containers/my-certificates/filled-certificates/filled-certificates';
 
 const Certificates = () => {
   const styles = useStyles();

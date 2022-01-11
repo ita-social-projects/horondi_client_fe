@@ -1,7 +1,8 @@
 import { createBrowserHistory } from 'history';
 import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
-import { USER_TOKENS, AUTH_ERRORS } from '../configs';
+import { USER_TOKENS } from '../configs';
 import { regenerateUserTokenPairs } from '../redux/user/user.operations';
+import { AUTH_ERRORS } from '../const/error-messages';
 
 export const history = createBrowserHistory();
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;

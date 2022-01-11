@@ -1,39 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useStyles } from './header-right-bar.styles';
+
+import CurrencyComponent from '../currency';
+import Language from '../language';
 import CartHeader from '../cart-header';
 import HeaderProfile from '../header-profile';
 import SearchBar from '../search-bar';
-import SearchBarList from '../search-bar-list';
-import Wishlist from '../wishlist-header';
 
 const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
-  const [errors, setErrors] = useState();
-
-  const handleErrors = (error) => {
-    setErrors(error);
-  };
-  const initialSearchState = {
-    searchFilter: '',
-    products: [],
-    searchBarVisibility: false,
-    loading: false
-  };
-
-  const [searchParams, setSearchParams] = useState(initialSearchState);
 
   return (
     <div className={styles.root}>
-      <SearchBar
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-        initialSearchState={initialSearchState}
-        handleErrors={handleErrors}
-        errors={errors}
-      />
-      <SearchBarList searchParams={searchParams} errors={errors} />
-      <div className={styles.wishlist}>
-        <Wishlist />
+      <SearchBar fromSideBar={fromSideBar} />
+      <div className={styles.currency}>
+        <CurrencyComponent fromSideBar={fromSideBar} />
+      </div>
+      <div className={styles.language}>
+        <Language fromSideBar={fromSideBar} />
       </div>
       <div className={styles.cart}>
         <CartHeader fromSideBar={fromSideBar} />

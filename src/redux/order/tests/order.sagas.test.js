@@ -14,7 +14,7 @@ import { orderExample, paidOrder, payload, message } from './order.variables';
 import { setToLocalStorage, getFromLocalStorage } from '../../../services/local-storage.service';
 import { setError } from '../../error/error.actions';
 import { getOrderByPaidOrderNumber, getPaymentCheckout, addOrder } from '../order.operations';
-import routes from '../../../configs/routes';
+import routes from '../../../const/routes';
 
 const { pathToErrorPage, pathToThanks } = routes;
 

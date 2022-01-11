@@ -1,95 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { TextField } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 
-import { Link } from 'react-router-dom';
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
-import { Loader } from '../../../../components/loader/loader';
-import PathBack from '../path-back/path-back';
-import { getCurrencySign } from '../../../../utils/currency';
-import routes from '../../../../configs/routes';
+import DeliveryType from '../../order/delivery-type/delivery-type';
+import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
-import { TEXT_FIELD_VARIANT } from '../../../../configs';
+import { Loader } from '../../../../components/loader/loader';
 
-const FilledCart = ({ items, cartOperations }) => {
+const FilledCart = ({ items }) => {
   const styles = useStyles();
-  const { t } = useTranslation();
+  const {
+    language,
+    currency,
+    cartList,
+    cartUserTotalPrice,
+    cartLoading,
+    cartQuantityLoading,
+    user
+  } = useSelector(({ Language, Currency, Cart, User }) => ({
+    language: Language.language,
+    currency: Currency.currency,
+    cartList: Cart.list,
+    cartLoading: Cart.loading,
+    cartQuantityLoading: Cart.quantityLoading,
+    cartUserTotalPrice: Cart.totalPrice,
+    user: User.userData
+  }));
 
-  const { pathToCategory, pathToCheckout } = routes;
-  const [price, setPrice] = useState();
-
-  const { currency, cartLoading, user, cartList } = useSelector(
-    ({ Currency, Cart, User, NewCart }) => ({
-      currency: Currency.currency,
-      cartList: Cart.list,
-      cartLoading: Cart.loading,
-      newCartList: NewCart.list,
-      cartQuantityLoading: Cart.quantityLoading,
-      user: User.userData
-    })
-  );
-
-  const currencySign = getCurrencySign(currency);
-  const { getTotalPrice } = cartOperations;
-
-  useEffect(() => {
-    setPrice(getTotalPrice(currency));
-  }, [items, currency, getTotalPrice]);
-
+  const totalPrice = items.reduce((acc, item) => acc + calcPriceForCart(item, currency), 0);
   if (cartLoading) {
     return <Loader />;
   }
-
   return (
-    <>
-      <PathBack />
-      <div className={styles.root} data-cy='filled-cart'>
-        <div className={styles.orderWrapper}>
-          <div className={styles.orderTable}>
-            <OrderTable items={items} user={user} cartOperations={cartOperations} />
-          </div>
+    <div className={styles.root} data-cy='filled-cart'>
+      <div className={styles.orderWrapper}>
+        <div className={styles.orderTable}>
+          <OrderTable
+            calcPrice={calcPriceForCart}
+            currency={currency}
+            items={items}
+            language={language}
+            user={user}
+            cartLoading={cartLoading}
+            cartQuantityLoading={cartQuantityLoading}
+          />
         </div>
-        <div>
-          <div className={styles.promoAndTotalWrapper}>
-            <div className={styles.promoWrapper}>
-              <div>
-                <TextField
-                  InputProps={{
-                    className: styles.promoInput
-                  }}
-                  placeholder={t('cart.promoPlaceHolder')}
-                  variant={TEXT_FIELD_VARIANT.OUTLINED}
-                />
-                <Button variant='contained' className={styles.promoButton}>
-                  {t('cart.applyPromoCode')}
-                </Button>
-              </div>
-              <Link to={pathToCategory}>
-                <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
-              </Link>
-            </div>
-            <div className={styles.totalWrapper}>
-              <div className={styles.totalPrice}>
-                <span>{t('cart.totalPrice')}</span>
-                <div>
-                  {currencySign}
-                  {price}
-                </div>
-              </div>
-              <Link to={pathToCheckout}>
-                <Button variant='contained' className={styles.ordersButton}>
-                  {t('cart.checkout')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <SimilarProducts cartList={cartList} />
+        <>
+          <DeliveryType
+            language={language}
+            totalPrice={cartLoading ? cartUserTotalPrice[currency].value : totalPrice}
+            currency={currency}
+          />
+        </>
       </div>
-    </>
+      <SimilarProducts cartList={cartList} />
+    </div>
   );
 };
 

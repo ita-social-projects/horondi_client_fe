@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { useStyles } from './app-footer.styles';
 
 import FooterLists from '../../containers/footer-lists';
-import SocialLinks from '../../containers/social-links';
+import FooterLinks from '../../containers/footer-links';
 
 const AppFooter = () => {
   const styles = useStyles();
@@ -10,13 +11,12 @@ const AppFooter = () => {
     <div className={styles.root}>
       <div className={styles.footer}>
         <div className={styles.cardDeck}>
-          <SocialLinks
+          <FooterLists />
+          <FooterLinks
             showTitle
-            color='white'
             socialIconsStyles={styles.socialIconsStyles}
             position='flex-start'
           />
-          <FooterLists />
         </div>
       </div>
     </div>

@@ -4,7 +4,6 @@ import GoogleLogin from 'react-google-login';
 import { Button } from '@material-ui/core';
 
 import { loginByGoogle } from '../../redux/user/user.actions';
-import GoogleLogo from '../../images/google.png';
 import { useStyles } from './google-button.styles';
 import { cookiePolicy } from '../../configs';
 
@@ -28,10 +27,7 @@ export const GoogleBtn = () => {
           className={styles.loginBtn}
           fullWidth
         >
-          <span
-            className={styles.socialLogo}
-            style={{ background: `url(${GoogleLogo}) 0% 0% / contain no-repeat` }}
-          />
+          <span className={styles.googleLogo} />
           Google
         </Button>
       )}

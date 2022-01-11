@@ -4,28 +4,26 @@ import { useStyles } from './sidemenu-right-bar.styles';
 import Currency from '../currency';
 import Language from '../language';
 import CartHeader from '../cart-header';
-import WishlistHeader from '../wishlist-header';
+import HeaderProfile from '../header-profile';
+import SearchBar from '../search-bar';
 
 const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
 
   return (
     <div className={styles.root}>
-      <div className={`${styles.wishlist} ${styles.iconItem}`} data-testid='wishlist-icon'>
-        <WishlistHeader />
+      <SearchBar fromSideBar={fromSideBar} />
+      <div className={styles.currency}>
+        <Currency fromSideBar={fromSideBar} />
       </div>
-      <div
-        className={`${styles.cartHeader} ${styles.iconItem}`}
-        onClick={() => setIsMenuOpen(false)}
-        data-testid='cart-icon'
-      >
-        <CartHeader fromSideBar />
+      <div className={styles.language}>
+        <Language fromSideBar={fromSideBar} />
       </div>
-      <div className={`${styles.language} ${styles.iconItem}`}>
-        <Language fromSideBar />
+      <div className={styles.cartHeader} onClick={() => setIsMenuOpen(false)}>
+        <CartHeader fromSideBar={fromSideBar} />
       </div>
-      <div className={`${styles.currency} ${styles.iconItem}`}>
-        <Currency fromSideBar />
+      <div className={styles.headerProfile}>
+        <HeaderProfile fromSideBar={fromSideBar} setIsMenuOpen={setIsMenuOpen} />
       </div>
     </div>
   );

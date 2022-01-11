@@ -1,63 +1,57 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const baseStyles = {
-  position: 'relative',
-  marginRight: '37px',
-  borderRadius: '6px',
-  '& .MuiInputBase-root': {
-    width: '350px',
-    '@media (max-width: 1000px)': {
-      width: '250px'
+export const useStyles = makeStyles(() => ({
+  root: ({ fromSideBar }) => ({
+    height: 61,
+    margin: '0 8px',
+    display: fromSideBar ? 'none' : 'inline',
+    '@media (max-width: 768px)': {
+      height: '70px'
     },
-    '@media (max-width: 800px)': {
-      width: '200px'
+    '& label.Mui-focused': {
+      color: 'white',
+      '@media (max-width: 768px)': {
+        display: 'none'
+      }
     },
-    '@media (max-width: 600px)': {
-      width: '150px'
-    }
-  },
-  '& .MuiInput-input': {
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    '@media (max-width: 900px)': {
-      marginRight: '10px'
-    }
-  },
-  '& .MuiSvgIcon-root': {
-    stroke: '#FFF',
-    position: 'absolute',
-    top: '11px',
-    left: '12px'
-  },
-  '& .MuiInput-underline:after, & .MuiInput-underline:before': {
-    display: 'none'
-  }
-};
-
-export const useStyles = makeStyles((theme, color) => ({
-  root: () => ({
-    background: theme.palette.seachBar.backgroundColor,
-    ...baseStyles,
-    '& .MuiInput-input': {
-      padding: '12px 5px 12px 46px',
-      color: theme.palette.seachBar.color
+    '& .MuiInput-underline:after, & .MuiInput-underline:before': {
+      borderBottomColor: 'white',
+      transition: 'all 0.5s linear'
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'red'
+      },
+      '&:hover fieldset': {
+        borderColor: 'yellow'
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white'
+      }
+    },
+    '& .MuiFormLabel-root': {
+      color: 'rgb(255 255 255 / 54%)',
+      '@media (max-width: 768px)': {
+        marginTop: '2px'
+      }
+    },
+    '& .MuiInputBase-input': {
+      color: 'white'
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: '#dedede',
+      transition: 'all 0.5s linear'
     }
   }),
-  notFromNavbar: () => ({
-    ...baseStyles,
-    background: 'inherit',
-    border: theme.palette.seachBar.border,
-    '& .MuiInputBase-root': {
-      width: '255px'
-    },
-    '& .MuiInput-input': {
-      padding: '12px 5px 12px 12px',
-      color
-    },
-    '& .MuiSvgIcon-root': {
+  sticky: {
+    '& label.Mui-focused': {
       display: 'none'
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: '#0000 !important'
+    },
+    '& .MuiInput-underline:after, & .MuiInput-underline:before': {
+      borderBottomColor: '#0000 !important'
     }
-  })
+  }
 }));

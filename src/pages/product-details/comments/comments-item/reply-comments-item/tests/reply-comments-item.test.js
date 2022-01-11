@@ -1,61 +1,54 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { ThemeProvider } from '@material-ui/styles';
-import { useTranslation } from 'react-i18next';
-import ReplyCommentsItem from '../reply-comments-item';
+import * as redux from 'react-redux';
+import ReplyCommentsItem from '../index';
 import { theme } from '../../../../../../components/app/app-theme/app.theme';
 import {
-  dataAdmin,
+  dataUser,
+  replyCommentId,
   dataSecond,
+  dataAdmin,
   dataSuperAdmin,
-  dataWithOutVerifing,
-  replyCommentId
+  dataWithOutVerifing
 } from './reply-comments-item.variables';
+import { COMMENT_OWNER_STATUS } from '../../../../../../configs';
 
-jest.mock('react-redux');
+Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('../reply-comments-item.styles', () => ({
-  useStyles: () => ({})
-}));
-const { t } = useTranslation();
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: () => ({ firstName: 'user' }),
-    i18n: () => ({ dateLanguage: 'ukr-UA' })
-  })
-}));
+const mockSetState = jest.fn();
 
-const SelectorsState = {
-  userData: {
-    _id: '111',
-    firstName: 'user',
-    email: 'test@gmail.com',
-    role: 'admin'
-  },
-  language: 0
-};
-
-const props = {
-  replyItem: {
-    user: { firstName: 'user', email: 'test@gmail.com', _id: '111', role: 'user' },
-    replyText: 'text',
-    createdAt: '1',
-    verifiedPurchase: true,
-    showReplyComment: true
-  },
-  replyCommentId: '1'
-};
-
+const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
+const mockUseSelector = jest.spyOn(redux, 'useSelector');
 const themeValue = theme('light');
 
-xdescribe('component', () => {
+const useStateSpy = jest.spyOn(React, 'useState');
+
+describe('Comments test', () => {
   let wrapper;
+
   beforeEach(() => {
-    useSelector.mockImplementation(() => SelectorsState);
-    wrapper = shallow(<ReplyCommentsItem {...props} />);
+    useStateSpy.mockImplementation(() => [false, mockSetState]);
+    mockUseDispatch.mockImplementation(() => jest.fn());
+    mockUseSelector.mockReturnValue({
+      language: '0',
+      userData: { _id: '111', email: 'test@gmail.com' }
+    });
+    wrapper = mount(
+      <ThemeProvider theme={themeValue}>
+        <ReplyCommentsItem data={dataUser} replyCommentId={replyCommentId} />
+      </ThemeProvider>
+    );
   });
 
-  it('should render', () => {
+  afterEach(() => {
+    wrapper.unmount();
+    useStateSpy.mockClear();
+    mockUseSelector.mockClear();
+  });
+
+  it('Should render ReplyCommentsItem', () => {
     expect(wrapper).toBeDefined();
   });
 
@@ -66,11 +59,10 @@ xdescribe('component', () => {
       </ThemeProvider>
     );
     expect(wrapper.find('span').text()).toBe(
-      `${t('common.reply.isAdmin')} ${dataAdmin.answerer.firstName}`
+      `${COMMENT_OWNER_STATUS.isAdmin[0]} ${dataAdmin.answerer.firstName}`
     );
     expect(wrapper).toBeDefined();
   });
-
   it('Should render ReplyCommentsItem with superadmin role', () => {
     wrapper = mount(
       <ThemeProvider theme={themeValue}>
@@ -78,7 +70,7 @@ xdescribe('component', () => {
       </ThemeProvider>
     );
     expect(wrapper.find('span').text()).toBe(
-      `${t('common.reply.isAdmin')} ${dataSuperAdmin.answerer.firstName}`
+      `${COMMENT_OWNER_STATUS.isAdmin[0]} ${dataSuperAdmin.answerer.firstName}`
     );
     expect(wrapper).toBeDefined();
   });

@@ -2,7 +2,6 @@ import { getItems, setItems } from '../../utils/client';
 
 const cartReqBody = `
 items {
-    _id
     product {
     _id
     name {
@@ -14,11 +13,10 @@ items {
     }
     bottomMaterial{
         material{
-          translationsKey
-          name{
-              lang
-              value
-          }
+        name{
+            lang
+            value
+        }
         }
     }
     mainMaterial{
@@ -48,16 +46,6 @@ items {
         name
     }
     }
-    allSizes {
-    size {
-         _id
-         name
-    }
-    price {
-      currency
-      value
-    }
-    }
     price {
       currency
       value
@@ -73,7 +61,6 @@ const mergeCartFromLSWithUserCart = async (cartFromLc, id) => {
       options: {
         size: item.options.size._id
       },
-      allSizes: item.allSizes.map(({ size, price }) => ({ size: size._id, price })),
       price: item.price
     }));
   const items = getCartInput(cartFromLc);
@@ -146,8 +133,8 @@ const cleanCart = async (userId) => {
 
 const addProductToCart = async (userId, cartItem) => {
   const addProductToCartMutation = `
-    mutation($productId: ID!, $sizeId: ID!, $id:ID!, $price: [CurrencySetInput]!, $allSizes: [AllSizesInput!]) {
-      addProductToCart(productId: $productId, sizeId: $sizeId, id:$id, price: $price, allSizes: $allSizes) {
+    mutation($productId: ID!, $sizeId: ID!, $id:ID!, $price: [CurrencySetInput]!) {
+      addProductToCart(productId: $productId, sizeId: $sizeId, id:$id, price: $price) {
         ... on User {
           _id
           firstName
@@ -166,50 +153,14 @@ const addProductToCart = async (userId, cartItem) => {
       }
     }
   `;
-
   const result = await setItems(addProductToCartMutation, {
     productId: cartItem.product._id,
     sizeId: cartItem.options.size._id,
     id: userId,
-    price: cartItem.price,
-    allSizes: cartItem.allSizes
+    price: cartItem.price
   });
 
   return result?.data?.addProductToCart;
-};
-
-const changeUserCartItemSize = async (userId, item, value) => {
-  const changeUserCartItemSizeMutation = `
-    mutation($id:ID!, $itemId: ID!, $price: [CurrencySetInput]!, $size: ID!, $quantity: Int!) {
-      changeCartItemSize(itemId: $itemId, size: $size, id:$id, price: $price, quantity: $quantity) {
-        ... on User {
-          _id
-          firstName
-          cart {
-            ${cartReqBody}
-            totalPrice{
-              currency
-              value
-            }
-          }
-        }
-        ... on Error {
-          message
-          statusCode
-        }
-      }
-    }
-  `;
-
-  const result = await setItems(changeUserCartItemSizeMutation, {
-    itemId: item._id,
-    id: userId,
-    price: value.price,
-    size: value.size._id,
-    quantity: value.quantity
-  });
-
-  return result?.data?.changeCartItemSize;
 };
 
 const deleteProductFromCart = async (userId, cartItems) => {
@@ -281,6 +232,5 @@ export {
   cleanCart,
   addProductToCart,
   deleteProductFromCart,
-  updateCartItemQuantity,
-  changeUserCartItemSize
+  updateCartItemQuantity
 };

@@ -13,9 +13,11 @@ import {
 } from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
-import routes from '../../configs/routes';
-import { USER_IS_BLOCKED, AUTH_ERRORS, CURRENCIES_LIST, DEFAULT_CURRENCY } from '../../configs';
+import routes from '../../const/routes';
+import { CURRENCY } from '../../const/currency';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
+import { USER_IS_BLOCKED } from '../../configs';
+import { AUTH_ERRORS } from '../../const/error-messages';
 import { handleUserError } from '../user/user.sagas';
 
 const { pathToThanks, pathToErrorPage } = routes;
@@ -53,7 +55,7 @@ export function* handleGetFondyUrl({ payload }) {
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      payload.currency === CURRENCIES_LIST[DEFAULT_CURRENCY].currency
+      payload.currency === CURRENCY.UAH
         ? (newOrder.totalPriceToPay[0].value * 100).toString()
         : (newOrder.totalPriceToPay[1].value * 100).toString(),
       payload.language

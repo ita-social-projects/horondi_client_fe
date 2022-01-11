@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import ImgsViewer from 'react-images-viewer';
-import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@material-ui/icons';
-import { useTheme } from '@material-ui/styles';
-import Loader from '../../../components/loader';
+import { useSelector } from 'react-redux';
 
+import ImgsViewer from 'react-images-viewer';
 import { useStyles } from './product-images.styles';
+
+import { IMGS_VIEWER, IMG_ALT_INFO } from '../../../translations/product-details.translations';
 import { getImage } from '../../../utils/imageLoad';
+
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
+import { IMG_URL } from '../../../configs';
 
-const ProductImages = ({ images }) => {
+const ProductImages = () => {
+  const { language, images, isLightTheme } = useSelector(({ Language, Products, Theme }) => ({
+    language: Language.language,
+    images: Products.product.images,
+    isLightTheme: Theme.lightMode
+  }));
+
   const [isOpen, setIsOpen] = useState(false);
   const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
-
-  const [primaryImage, setPrimaryImage] = useState(0);
-  const [secondaryImages, setSecondaryImages] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-
-  const { t } = useTranslation();
-  const { palette } = useTheme();
-
-  const isLightTheme = palette.type === 'light';
 
   const initImages = useMemo(
     () => [images.primary.large, ...images.additional.map(({ large }) => large)],
@@ -31,33 +28,26 @@ const ProductImages = ({ images }) => {
   );
 
   useEffect(() => {
-    const initialPhotos = async () => {
-      setLoading(true);
-      const mapImages = await Promise.all(
-        initImages.map(async (item) => {
-          try {
-            const result = await getImage(item);
-            return { src: result };
-          } catch (e) {
-            return { src: isLightTheme ? productPlugLight : productPlugDark };
-          }
+    initImages.forEach((item, i) => {
+      getImage(item)
+        .then((src) => {
+          setImagesSet((prev) => {
+            const arr = [...prev];
+            arr.splice(i, prev.length >= initImages.length ? 1 : 0, { src });
+            return arr;
+          });
         })
-      );
-
-      setImagesSet(mapImages);
-      setLoading(false);
-    };
-    initialPhotos();
+        .catch(() =>
+          setImagesSet((prev) => {
+            const arr = [...prev];
+            arr.splice(i, prev.length >= initImages.length ? 1 : 0, {
+              src: isLightTheme ? productPlugLight : productPlugDark
+            });
+            return arr;
+          })
+        );
+    });
   }, [isLightTheme, initImages]);
-
-  useEffect(() => {
-    setSecondaryImages(imagesSet.slice(1, images.length));
-  }, [imagesSet, images.length]);
-
-  useEffect(() => {
-    const updatedSecondaryImages = imagesSet.filter((_, i) => i !== primaryImage);
-    setSecondaryImages(updatedSecondaryImages);
-  }, [primaryImage, imagesSet]);
 
   const styles = useStyles();
 
@@ -66,48 +56,30 @@ const ProductImages = ({ images }) => {
     setCurrImg(idx);
   };
 
-  const sideImages = secondaryImages
-    .filter((_, i) => i < 3)
-    .map((image, i) => {
-      if (i === imagesSet.length || i === 2) {
-        return (
-          <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
-            <div className={styles.lastImageText}>
-              {t('product.allPhotos.viewAll')} {`(${images.additional.length})`}{' '}
-              {t('product.allPhotos.photo')}
-            </div>
-            <img
-              className={styles.lastImage}
-              src={image.src}
-              alt={t('product.imgAltInfo')}
-              data-cy='image'
-            />
-          </div>
-        );
-      }
-      return (
-        <div key={i} className={styles.imageItem}>
-          <img
-            className={styles.sideImage}
-            src={image.src}
-            alt={t('product.imgAltInfo')}
-            onClick={() => setPrimaryImage(imagesSet.indexOf(secondaryImages[i]))}
-            data-cy='image'
-          />
-        </div>
-      );
-    });
+  const primaryImage = (
+    <img
+      className={styles.primaryImage}
+      src={IMG_URL + images.primary.large}
+      onClick={() => openImage(0)}
+      alt={IMG_ALT_INFO[language].value}
+    />
+  );
 
-  const nextImg = () => {
-    setPrimaryImage((prev) => prev + 1);
-  };
-
-  const prevImg = () => {
-    setPrimaryImage((prev) => prev - 1);
-  };
+  const sideImages = imagesSet
+    .slice(1, imagesSet.length)
+    .filter((img, i) => i < 3)
+    .map((image, i) => (
+      <img
+        className={styles.sideImage}
+        src={image.src}
+        key={i}
+        alt={IMG_ALT_INFO[language].value}
+        onClick={() => openImage(i + 1)}
+      />
+    ));
 
   return (
-    <div className={styles.imageBody}>
+    <div>
       <ImgsViewer
         imgs={imagesSet}
         currImg={currImg}
@@ -117,35 +89,13 @@ const ProductImages = ({ images }) => {
         onClickNext={() => setCurrImg((prev) => prev + 1)}
         onClickThumbnail={(index) => setCurrImg(index)}
         onClose={() => setIsOpen(false)}
-        closeBtnTitle={t('common.close')}
-        leftArrowTitle={t('common.prev')}
-        rightArrowTitle={t('common.next')}
+        closeBtnTitle={IMGS_VIEWER[language].close}
+        leftArrowTitle={IMGS_VIEWER[language].prev}
+        rightArrowTitle={IMGS_VIEWER[language].next}
       />
       <div className={styles.images}>
-        <div className={styles.imagePreviewContainer}>
-          <button className={styles.circle} onClick={prevImg} disabled={primaryImage === 0}>
-            <ArrowBackIosRounded />
-          </button>
-          <div className={styles.imageContainer}>
-            {loading ? (
-              <Loader heightWrap='100px' />
-            ) : (
-              <img
-                src={imagesSet[primaryImage]?.src}
-                className={styles.primaryImage}
-                alt={t('product.imgAltInfo')}
-              />
-            )}
-          </div>
-          <button
-            className={styles.circle}
-            onClick={nextImg}
-            disabled={primaryImage === initImages.length - 1}
-          >
-            <ArrowForwardIosRounded />
-          </button>
-        </div>
-        <div className={styles.additionalImagePreview}>{sideImages}</div>
+        {sideImages}
+        {primaryImage}
       </div>
     </div>
   );

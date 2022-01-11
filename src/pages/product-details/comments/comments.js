@@ -1,75 +1,74 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import Rating from '@material-ui/lab/Rating';
-import { Button, TextField, Tooltip } from '@material-ui/core';
-import { useMutation, useQuery } from '@apollo/client';
+import { Button, Tooltip, TextField } from '@material-ui/core';
 import { useStyles } from './comments.styles';
+
 import CommentsItem from './comments-item';
 import SnackbarItem from '../../../containers/snackbar';
 import { Loader } from '../../../components/loader/loader';
-import { commentFields, TEXT_VALUE } from '../../../configs/index';
-import { ERROR } from '../constants';
-import { formRegExp } from '../../../configs/regexp';
-import useCommentValidation from '../../../hooks/use-comment-validation';
+
+import { TEXT_VALUE, commentFields, formRegExp } from '../../../configs';
+import { COMMENTS } from '../../../translations/product-details.translations';
 import {
-  handleArrowIcon,
+  addComment,
+  setCommentsSkip,
+  getComments,
+  clearComments
+} from '../../../redux/comments/comments.actions';
+import useCommentValidation from '../../../hooks/use-comment-validation';
+import { selectProductsIdCommentsLanguageUserData } from '../../../redux/selectors/multiple.selectors';
+import {
+  handleRateTip,
   handleClassName,
   handleTextField,
-  handleUserLogin
+  handleHelperText,
+  handleUserLogin,
+  handleTitleSubmit,
+  handleArrowIcon
 } from '../../../utils/handle-comments';
-import { addCommentMutation, getCommentsQuery } from './operations/comments.queries';
-import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { useIsLoadingOrError } from '../../../hooks/useIsLoadingOrError';
-import { SnackBarContext } from '../../../context/snackbar-context';
 
-const Comments = ({ productId, checkCountComments }) => {
+const Comments = () => {
   const styles = useStyles();
-  const [comments, setComments] = useState({ items: [], count: 0 });
-  const [currentLimit, setCurrentLimit] = useState(10);
-  const { userData } = useSelector(({ User }) => ({ userData: User.userData }));
-  const { t } = useTranslation();
-  const { setSnackBarMessage } = useContext(SnackBarContext);
+  const dispatch = useDispatch();
 
-  const { refetch: refetchComments, loading: getCommentsLoading } = useQuery(getCommentsQuery, {
-    variables: {
-      filter: { productId, filters: false },
-      pagination: { skip: 0, limit: currentLimit }
-    },
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'network-only',
-    nextFetchPolicy: 'cache-first',
-    onCompleted: (data) => {
-      setComments(data.getCommentsByProduct);
-      checkCountComments(data.getCommentsByProduct);
-    },
-    onError: (err) => errorOrLoadingHandler(err)
-  });
+  const {
+    commentsLoading,
+    language,
+    productId,
+    comments,
+    userData,
+    currentLimit,
+    getCommentsLoading,
+    commentsCount,
+    skip
+  } = useSelector(selectProductsIdCommentsLanguageUserData);
 
-  const [addComment, { loading: addCommentLoading }] = useMutation(addCommentMutation, {
-    onCompleted: () => setSnackBarMessage(t('product.snackBar.added')),
-    onError: (err) => {
-      errorOrLoadingHandler(err);
-      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
+  const { _id: userId } = userData || {};
+  useEffect(
+    () => () => {
+      dispatch(clearComments());
+    },
+    []
+  );
+  useEffect(() => {
+    if (comments?.length === 0) {
+      dispatch(getComments({ productId, skip, currentLimit }));
     }
-  });
-  const { isLoading } = useIsLoadingOrError([addCommentLoading, getCommentsLoading]);
-  const { _id: userId, firstName: userFirstName } = userData || {};
+  }, [userData?._id]);
 
-  const onSubmit = async (formValues) => {
+  const onSubmit = (formValues) => {
     const userFields = userId ? { user: userId } : {};
-
-    await addComment({
-      variables: {
+    dispatch(
+      addComment({
         ...formValues,
         ...userFields,
         product: productId,
         show: false,
         rate
-      }
-    });
-    await refetchComments();
-
+      })
+    );
     setShouldValidate(false);
     resetForm();
   };
@@ -83,29 +82,20 @@ const Comments = ({ productId, checkCountComments }) => {
     setRate(handleUserLogin(userData));
   }, [userData]);
 
-  const rateTip = useMemo(() => {
-    if (!userId) {
-      return t('product.comments.unregisteredTip');
-    }
-    return t('product.comments.successfulTip');
-  }, [t, userId]);
+  const rateTip = useMemo(() => handleRateTip(userId, language), [language, userId]);
 
-  const commentsCount = comments.items.length;
+  const commentsLength = comments?.length;
 
-  const commentsList = comments.items.map(({ _id, ...rest }) => (
-    <CommentsItem
-      userFirstName={userFirstName}
-      key={_id}
-      commentItem={rest}
-      refetchComments={refetchComments}
-      commentId={_id}
-      productId={productId}
-    />
-  ));
-  const limitOption = commentsList.length === comments.count;
+  const commentsList = comments
+    ? comments.map(({ _id, ...rest }) => <CommentsItem key={_id} data={rest} commentId={_id} />)
+    : [];
+
+  const limitOption = commentsList?.length === comments?.length && comments?.length > commentsCount;
 
   const handleCommentsReload = () => {
-    setCurrentLimit((prev) => prev + 10);
+    const newSkip = skip + currentLimit;
+    dispatch(setCommentsSkip(newSkip));
+    dispatch(getComments({ productId, skip: newSkip, currentLimit }));
   };
 
   const handleCommentChange = (e) => {
@@ -114,11 +104,10 @@ const Comments = ({ productId, checkCountComments }) => {
   };
 
   return (
-    <div className={styles.comment} id='comment'>
-      <h2 className={styles.title}>{t('product.comments.title')}</h2>
+    <div className={styles.comment}>
+      <h2 className={styles.title}>{COMMENTS[language].title}</h2>
       <Tooltip title={rateTip} placement='right'>
         <span className={styles.rate}>
-          <span className={styles.textRate}>{t('product.comments.rating')}</span>
           <Rating
             data-cy='rate'
             disabled={!userData}
@@ -141,9 +130,9 @@ const Comments = ({ productId, checkCountComments }) => {
                     onBlur={handleBlur}
                     value={values[name]}
                     disabled={!userData}
-                    label={t(`product.comments.${name}`)}
+                    label={COMMENTS[language][name]}
                     error={!!errors[name]}
-                    helperText={errors.text && t('error.textLength')}
+                    helperText={handleHelperText(errors[name])}
                     multiline={multiline}
                     rows={rows}
                     variant='outlined'
@@ -155,53 +144,37 @@ const Comments = ({ productId, checkCountComments }) => {
         </div>
 
         <div className={styles.submit}>
-          <Tooltip
-            title={userData ? '' : t(`product.tooltips.unregisteredComment`)}
-            placement='right'
-          >
-            <div className={styles.commentBtnContainer}>
-              <Button
-                className={`${styles.commentBtn} ${styles.cancelBtn}`}
-                disabled={!userData || isLoading}
-                onClick={() => resetForm()}
-              >
-                {t('product.comments.cancel')}
-              </Button>
+          <Tooltip title={handleTitleSubmit(userData, language, 'unregisteredComment')}>
+            <div>
               <Button
                 type='submit'
                 className={styles.commentBtn}
-                disabled={!userData || isLoading}
+                disabled={!userData}
                 onClick={() => setShouldValidate(true)}
               >
-                {t('product.comments.submit')}
+                {COMMENTS[language].submit}
               </Button>
             </div>
           </Tooltip>
 
-          {addCommentLoading && (
-            <div className={styles.loader} data-testid='addCommentLoader'>
-              <Loader width={40} height={40} heightWrap={40} />
+          {commentsLoading && (
+            <div className={styles.loader}>
+              <Loader width={40} height={40} heightWrap={90} />
             </div>
           )}
         </div>
       </form>
-      <h2 className={styles.title}>
-        {t('product.comments.commentsTitle')} ({commentsCount})
-      </h2>
       {commentsList}
-      {currentLimit < comments.count && (
+
+      {commentsLength < commentsCount && (
         <div className={styles.loadMore}>
           {handleArrowIcon(limitOption)}
           <span onClick={handleCommentsReload} className={styles.loadMoreText}>
-            {limitOption ? null : t('product.comments.loadMore')}
+            {limitOption ? null : COMMENTS[language].loadMore}
           </span>
         </div>
       )}
-      {getCommentsLoading ? (
-        <div className={styles.loader} data-testid='getCommentsLoader'>
-          <Loader width={40} height={40} heightWrap={40} />
-        </div>
-      ) : null}
+      {getCommentsLoading ? <Loader width={40} height={40} heightWrap={90} /> : null}
       <SnackbarItem />
     </div>
   );

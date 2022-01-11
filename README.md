@@ -344,24 +344,6 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@Hai-Vasyl](https://avatars.githubusercontent.com/u/64915099?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Hai-Vasyl)
 [![@Wasya1212](https://avatars.githubusercontent.com/u/15053168?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Wasya1212)
 [![@BohdanShchur](https://avatars.githubusercontent.com/u/50678261?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/BohdanShchur)
-[![@VasylLymych](https://avatars.githubusercontent.com/u/69967761?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/VasylLymych)
-[![@martagorpinchuk](https://avatars.githubusercontent.com/u/32914557?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/martagorpinchuk)
-[![@olga-gchak](https://avatars.githubusercontent.com/u/67831961?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/olga-gchak)
-[![@AnastasiaKhukhra](https://avatars.githubusercontent.com/u/62055382?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/AnastasiaKhukhra)
-[![@ElitKondor](https://avatars.githubusercontent.com/u/44610067?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/ElitKondor)
-[![@Skrekliam](https://avatars.githubusercontent.com/u/36624127?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Skrekliam)
-[![@domnelkin](https://avatars.githubusercontent.com/u/78971099?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/domnelkin)
-[![@bohdanst1914](https://avatars.githubusercontent.com/u/27858056?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/bohdanst1914)
-[![@filiczini](https://avatars.githubusercontent.com/u/51033321?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Filiczini)
-[![@AlexanderBil](https://avatars.githubusercontent.com/u/63557206?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/AlexanderBil)
-[![@mrjnmzk](https://avatars.githubusercontent.com/u/64384450?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/mrjnmzk)
-[![@boris-giga](https://avatars.githubusercontent.com/u/61072426?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/boris-giga)
-[![@byavdoshniak](https://avatars.githubusercontent.com/u/87911115?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/byavdoshniak)
-[![@rostyslaw27](https://avatars.githubusercontent.com/u/57355852?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/rostyslaw27)
-[![@romanortynskyi](https://avatars.githubusercontent.com/u/50491616?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/romanortynskyi)
-[![@DeLettenhove](https://avatars.githubusercontent.com/u/49168997?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/DeLettenhove)
-[![@tarasSanotskyi](https://avatars.githubusercontent.com/u/79531224?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/tarasSanotskyi)
-[![@IamBohdanSereda](https://avatars.githubusercontent.com/u/89339465?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/IamBohdanSereda)
 
 ### Quality control team
 
@@ -410,9 +392,7 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@rholovchak](https://avatars.githubusercontent.com/u/68376355?s=200)](https://github.com/rholovchak)
 
 ### Designer team
-
 [![@Nikadsgn](https://avatars.githubusercontent.com/u/87034205?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Nikadsgn)
-[![@RubaSonce](https://avatars.githubusercontent.com/u/20723898?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/RubaSonce)
 
 ---
 

@@ -1,121 +1,87 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const button = {
-  borderRadius: '4px',
-  fontStyle: 'normal',
-  fontWeight: '600',
-  fontSize: '14px',
-  lineHeight: '20px',
-  letterSpacing: '0.0125em',
-  textTransform: 'uppercase',
-  '@media (max-width: 880px)': {
-    padding: '4px 2px',
-    fontSize: '10px'
-  },
-  '@media (max-width:500px)': {
-    fontSize: '8px'
-  }
-};
-
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
-    justifyContent: 'space-between',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
-  },
-  allItems: {
-    '@media (max-width:868px)': {
-      padding: '3px 0'
-    }
-  },
-  product: {
+    margin: '10px 0',
     display: 'flex',
-    alignItems: 'center',
-    marginRight: '50px',
-    '@media (max-width: 1100px)': {
-      flexDirection: 'column',
-      marginRight: '0'
+    width: '100%',
+    '& td:first-child': {
+      display: 'flex',
+      flex: 1
+    },
+    '& td:not(:first-child)': {
+      width: 200,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     }
   },
-  itemImg: {
-    '@media (max-width: 768px)': {
-      width: '70px'
+  image: {
+    flexBasis: 100,
+    '& img': {
+      width: '100%',
+      borderRadius: 5,
+      minWidth: 60,
+      '@media (max-width: 610px)': {
+        float: 'left'
+      }
     }
   },
-  itemName: (isLightTheme) => ({
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '24px',
-    lineHeight: '32px',
-    color: isLightTheme ? '#242424' : '#FEFEFE',
-    '@media (max-width:768px)': {
-      fontSize: '13px',
-      lineHeight: '20px'
-    }
-  }),
-  description: (isLightTheme) => ({
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '14px',
-    lineHeight: '22px',
-    letterSpacing: '0.0025em',
-    color: isLightTheme ? '#242424' : '#FEFEFE',
-    '@media (max-width:768px)': {
-      display: 'none'
-    }
-  }),
-  price: {
-    fontSize: '15px',
+  description: {
+    display: 'flex',
     textAlign: 'center',
-    textTransform: 'uppercase',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'spaceBetween',
-    marginLeft: '5px',
-    '& svg': {
-      fontSize: '15px',
-      marginRight: '5px'
-    }
-  },
-  delete: {
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-  deleteIcon: {
-    marginLeft: '20px',
-    cursor: 'pointer',
-    '@media (max-width: 880px)': {
-      marginLeft: '0'
-    }
-  },
-  priceWrapper: {
-    textAlign: 'center',
-    fontSize: '12px'
-  },
-  deleteWrapper: {
-    display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    justifyContent: 'space-between',
+    padding: 20,
+    '@media (max-width: 610px)': {
+      fontSize: '0.8em'
+    },
+    '& button': {
+      margin: '10px 0 0',
+      color: theme.palette.button.normal.color,
+      width: '230px',
+      backgroundColor: theme.palette.button.normal.backgroundColor,
+      fontSize: '1em',
+      padding: '5px 10px',
+      '@media (max-width: 610px)': {
+        width: '120px',
+        marginRight: '16em',
+        fontSize: '0.7em'
+      },
+      '&:hover': {
+        color: theme.palette.button.hover.color,
+        backgroundColor: theme.palette.button.hover.backgroundColor
+      }
+    },
+    '& a': {
+      color: 'inherit'
+    }
   },
-  cartButton: (isLightTheme) => ({
-    ...button,
-    '&:hover': {
-      backgroundColor: isLightTheme ? '#3F3F3F' : '#020202',
-      color: '#FEFEFE'
+  itemName: {
+    fontSize: '1.7em',
+    '@media (max-width: 610px)': {
+      fontSize: '1em',
+      fontWeight: 'bold',
+      marginRight: '12em'
+    }
+  },
+  price: {
+    position: 'relative',
+    '@media (max-width: 550px)': {
+      left: -110,
+      fontSize: '0.8em',
+      fontWeight: 'bold'
+    }
+  },
+  trash: {
+    position: 'absolute',
+    right: 10,
+    cursor: 'pointer',
+    '@media (max-width: 768px)': {
+      right: 1
     },
-    background: isLightTheme ? '#020202' : '#FEFEFE',
-    color: isLightTheme ? '#FEFEFE' : '#020202'
-  }),
-  detailsButton: (isLightTheme) => ({
-    ...button,
-    marginTop: '15px',
-    '&:hover': {
-      backgroundColor: isLightTheme ? '#3F3F3F' : '#020202',
-      color: '#FEFEFE'
-    },
-    background: isLightTheme ? '#FEFEFE' : 'none',
-    border: isLightTheme ? 'none' : '1px solid #FEFEFE',
-    color: isLightTheme ? '#020202' : '#FEFEFE'
-  })
+    '@media (max-width: 425px)': {
+      right: -35
+    }
+  }
 }));

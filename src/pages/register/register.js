@@ -1,48 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
-import { Typography, Button } from '@material-ui/core';
-import { useTheme } from '@material-ui/styles';
+import Grid from '@material-ui/core/Grid';
 
-import { USER_TOKENS, RETURN_PAGE } from '../../configs';
-import { REGISTER_USER_DATA, REGISTER_IMG_INFO } from './constants';
+import { REGISTER_USER_DATA, USER_TOKENS, RETURN_PAGE } from '../../configs';
+import { CONTINUE_SHOPPING_LABEL, CONFIRM_EMAIL } from '../../translations/user.translations';
 import { useStyles } from './register.styles';
 import { registerUser, resetState } from '../../redux/user/user.actions';
 import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
-import { regValidationSchema } from '../../validators/register';
+import { IMG_ALT } from '../../const/images-alts';
+import { validationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
 
 export default function Register() {
   const styles = useStyles();
   const history = useHistory();
-  const { t, i18n } = useTranslation();
-  const { palette } = useTheme();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const handleRegister = (user) => {
-    const userData = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password
-    };
     setToLocalStorage(USER_TOKENS.ACCESS_TOKEN, null);
-
-    dispatch(registerUser({ user: userData, language }));
+    dispatch(registerUser({ user, language }));
   };
 
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { isLightTheme, language, hasRegistered, registerError, loading } = useSelector(
+    ({ Theme, Language, User }) => ({
+      isLightTheme: Theme.lightMode,
+      language: Language.language,
+      loading: User.userLoading,
+      registerError: User.error,
+      hasRegistered: User.userRegistered
+    })
+  );
 
-  const { hasRegistered, registerError, loading } = useSelector(({ User }) => ({
-    loading: User.userLoading,
-    registerError: User.error,
-    hasRegistered: User.userRegistered
-  }));
-
-  const isLightTheme = palette.type === 'light';
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,7 +45,7 @@ export default function Register() {
     <Formik
       initialValues={REGISTER_USER_DATA}
       onSubmit={handleRegister}
-      validationSchema={regValidationSchema}
+      validationSchema={validationSchema(language)}
       validateOnBlur={shouldValidate}
       validateOnChange={shouldValidate}
     >
@@ -61,40 +53,52 @@ export default function Register() {
         <div className={styles.registerContainer}>
           <div className={styles.registerBackground} />
           <div className={styles.formContainer}>
-            <Typography component='div' className={styles.formWrapper}>
-              {hasRegistered ? (
-                <div className={styles.registerSuccess}>
-                  <div className={styles.registerSuccessInfo}>
-                    <img
-                      src={setInfoImgByTheme(isLightTheme)}
-                      alt={REGISTER_IMG_INFO}
-                      className={styles.infoLogo}
-                    />
-                    <p>{t('register.confirmEmail')}</p>
-                    <Button
-                      className={styles.registerBtn}
-                      onClick={() => {
-                        history.push(sessionStorage.getItem(RETURN_PAGE));
-                      }}
-                    >
-                      {t('register.continueShopping')}
-                    </Button>
+            <Grid container className={styles.formWrapper} spacing={2}>
+              <Grid
+                item
+                sm={12}
+                md={6}
+                lg={6}
+                className={
+                  hasRegistered ? styles.formBackgroundRegisteredUser : styles.formBackground
+                }
+              />
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                {hasRegistered ? (
+                  <div className={styles.registerSuccess}>
+                    <div className={styles.registerSuccessInfo}>
+                      <img
+                        src={setInfoImgByTheme(isLightTheme)}
+                        alt={IMG_ALT.REGISTER_IMG_INFO}
+                        className={styles.infoLogo}
+                      />
+                      <p>{CONFIRM_EMAIL[language].value}</p>
+                      <Button
+                        className={styles.registerBtn}
+                        onClick={() => {
+                          history.push(sessionStorage.getItem(RETURN_PAGE));
+                        }}
+                      >
+                        {CONTINUE_SHOPPING_LABEL[language].value}
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <RegisterForm
-                  loading={loading}
-                  values={values}
-                  errors={errors}
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                  registerError={registerError}
-                  setShouldValidate={() => {
-                    setShouldValidate(true);
-                  }}
-                />
-              )}
-            </Typography>
+                ) : (
+                  <RegisterForm
+                    loading={loading}
+                    values={values}
+                    language={language}
+                    errors={errors}
+                    showPassword={showPassword}
+                    setShowPassword={setShowPassword}
+                    registerError={registerError}
+                    setShouldValidate={() => {
+                      setShouldValidate(true);
+                    }}
+                  />
+                )}
+              </Grid>
+            </Grid>
           </div>
         </div>
       )}

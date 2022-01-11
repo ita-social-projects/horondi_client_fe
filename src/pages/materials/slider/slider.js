@@ -29,7 +29,7 @@ const Slider = (props) => {
           bulletsSet.map((bullet, i) => (
             <img
               src={bullet}
-              key={i}
+              key={bullet}
               alt={i}
               className={clsx({
                 [styles.image]: true,

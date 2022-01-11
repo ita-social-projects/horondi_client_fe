@@ -23,7 +23,7 @@ import {
   setModelLoading
 } from '../constructor-model.actions';
 import { setError } from '../../../error/error.actions';
-import routes from '../../../../configs/routes';
+import routes from '../../../../const/routes';
 import { errorReducer } from '../../../error/error.reducer';
 
 const { pathToErrorPage } = routes;

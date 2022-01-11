@@ -1,79 +1,57 @@
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { Button, TextField } from '@material-ui/core';
-import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
-import { useMutation } from '@apollo/client';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TextField, Button } from '@material-ui/core';
 import { useStyles } from './reply-form.styles';
 import useCommentValidation from '../../../../../hooks/use-comment-validation';
 
-import { commentFields, TEXT_VALUE } from '../../../../../configs';
-import { ERROR, COMMENTS_TIME_OPTIONS } from '../../../constants';
-import { formRegExp } from '../../../../../configs/regexp';
-import { addReplyMutation } from '../../operations/comments.queries';
-import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
-import { Loader } from '../../../../../components/loader/loader';
-import { SnackBarContext } from '../../../../../context/snackbar-context';
+import { commentFields, formRegExp, TEXT_VALUE } from '../../../../../configs';
+import { addReply } from '../../../../../redux/comments/comments.actions';
 
-const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) => {
-  const { t, i18n } = useTranslation();
+import { PDP_BUTTONS, REPLY } from '../../../../../translations/product-details.translations';
 
-  const { setSnackBarMessage } = useContext(SnackBarContext);
+const ReplyForm = ({ cancel, commentId }) => {
+  const dispatch = useDispatch();
+
   const styles = useStyles();
-  const { userData, productId } = useSelector(({ User, Products }) => ({
+  const { language, userData, productId } = useSelector(({ Language, User, Products }) => ({
+    language: Language.language,
     userData: User.userData,
-    productId: Products.productToSend._id
+    productId: Products.product._id
   }));
-  const { firstName } = user;
-
-  const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
-    onError: (err) => {
-      errorOrLoadingHandler(err);
-      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
-    },
-    onCompleted: () => setSnackBarMessage(t('product.snackBar.addedReply'))
-  });
 
   const { _id } = userData;
-  const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
 
-  const onSubmit = async ({ text: fieldText }) => {
-    await addReply({
-      variables: {
+  const onSubmit = ({ text: fieldText }) => {
+    dispatch(
+      addReply({
         id: _id,
         answerer: _id,
         replyText: fieldText,
         commentId,
         productId
-      }
-    });
-    await refetchComments();
+      })
+    );
     setShouldValidate(false);
     cancel(false);
   };
 
-  const { values, errors, handleSubmit, handleBlur, setFieldValue, setShouldValidate } =
-    useCommentValidation(!!userData, onSubmit);
+  const {
+    values,
+    errors,
+    handleSubmit,
+    handleBlur,
+    setFieldValue,
+    setShouldValidate
+  } = useCommentValidation(!!userData, onSubmit);
 
   const handleCommentChange = (e) => {
     const value = e.target.value.replace(formRegExp.link, '');
     setFieldValue(TEXT_VALUE, value);
   };
 
-  const dateToShow = new Date();
-  const currentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
-
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form}>
-        <div className={styles.formHeader}>
-          <span>
-            <span>{userFirstName}</span>
-            <ReplyOutlinedIcon className={styles.replyIcon} />
-            <span>{firstName}</span>
-          </span>
-          <span>{currentDate}</span>
-        </div>
         <TextField
           multiline
           rows={commentFields.text.rows}
@@ -82,32 +60,17 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) 
           onChange={handleCommentChange}
           onBlur={handleBlur}
           error={!!errors.text}
-          helperText={errors.text && t('error.textLength')}
+          helperText={errors.text || ''}
           name={TEXT_VALUE}
           className={styles.input}
-          label={t('common.reply.text')}
-          data-testid='replyForm'
+          label={REPLY[language].text}
         />
         <div className={styles.btnContainer}>
-          {addReplyLoading && (
-            <div className={styles.loader}>
-              <Loader width={20} height={20} heightWrap={90} />
-            </div>
-          )}
-          <Button
-            onClick={cancel}
-            disabled={addReplyLoading}
-            className={`${styles.replyBtn} ${styles.cancelBtn}`}
-          >
-            {t('product.pdpButtons.cancelButton')}
+          <Button type='submit' onClick={() => setShouldValidate(true)} className={styles.replyBtn}>
+            {PDP_BUTTONS[language].leaveReply}
           </Button>
-          <Button
-            type='submit'
-            onClick={() => setShouldValidate(true)}
-            disabled={addReplyLoading}
-            className={styles.replyBtn}
-          >
-            {t('product.pdpButtons.leaveReply')}
+          <Button onClick={cancel} className={styles.replyBtn}>
+            {PDP_BUTTONS[language].cancelButton}
           </Button>
         </div>
       </div>

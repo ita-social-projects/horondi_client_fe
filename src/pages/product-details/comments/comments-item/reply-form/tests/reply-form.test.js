@@ -1,27 +1,18 @@
 import React from 'react';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { ThemeProvider } from '@material-ui/styles';
 import * as redux from 'react-redux';
-import { useMutation } from '@apollo/client';
-import { Button, TextField } from '@material-ui/core';
 import ReplyForm from '../index';
+import { theme } from '../../../../../../components/app/app-theme/app.theme';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const mockSetShouldValidate = jest.fn();
 const mockSetFieldValue = jest.fn();
 const mockDispatch = jest.fn();
 const mockHandlerSubmit = jest.fn();
-const mockAddReply = jest.fn();
 
-jest.mock('@apollo/client');
-jest.mock('../reply-form.styles', () => ({ useStyles: () => ({}) }));
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useContext: () => ({ setSnackBarMessage: () => null })
-}));
-
-useMutation.mockImplementation((query, options) => {
-  options.onCompleted();
-  options.onError();
-  return [mockAddReply, { loading: false }];
-});
 const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 const mockUseSelector = jest.spyOn(redux, 'useSelector');
 
@@ -41,9 +32,7 @@ describe('Comments test', () => {
   let wrapper;
 
   beforeEach(() => {
-    const user = {
-      firstName: 'Taras'
-    };
+    const themeValue = theme('light');
     mockUseDispatch.mockImplementation(() => mockDispatch);
     mockUseSelector.mockReturnValue({
       commentsLoading: false,
@@ -51,14 +40,10 @@ describe('Comments test', () => {
       productId: '111',
       userData: { _id: '111' }
     });
-    wrapper = shallow(
-      <ReplyForm
-        cancel={() => null}
-        userFirstName='Max'
-        user={user}
-        commentId='2131231'
-        refetchComments={() => null}
-      />
+    wrapper = mount(
+      <ThemeProvider theme={themeValue}>
+        <ReplyForm />
+      </ThemeProvider>
     );
   });
 
@@ -73,13 +58,13 @@ describe('Comments test', () => {
   });
 
   it('Should simulate submit event', () => {
-    wrapper.find(Button).at(1).props().onClick();
+    wrapper.find('button').at(0).props().onClick();
     expect(mockSetShouldValidate).toHaveBeenCalledTimes(1);
   });
 
   it('Should simulate onChange event', () => {
     wrapper
-      .find(TextField)
+      .find('textarea')
       .props()
       .onChange({ target: { value: 'Дуже сподобалась покупка' } });
     expect(mockSetFieldValue).toHaveBeenCalledTimes(1);

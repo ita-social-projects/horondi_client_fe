@@ -1,10 +1,9 @@
-import { getCart, setCart, setUserCartItemSize, setCartItemSize } from '../cart.actions';
+import { getCart, setCart } from '../cart.actions';
 import { SET_CART, GET_CART } from '../cart.types';
 
 describe('setCart action test', () => {
   let type;
   let cartAction;
-  const payload = { item: {}, value: 1 };
   const cartItem = {
     id: 1,
     name: 'Garbyz'
@@ -35,16 +34,6 @@ describe('setCart action test', () => {
     const expectation = { name: 'Horondi' };
     cartAction = setCart(expectation);
     expect(cartAction.payload.name).toEqual('Horondi');
-  });
-
-  it('should return expected set cart item size payload', () => {
-    cartAction = setCartItemSize(payload.item, payload.value);
-    expect(cartAction.payload.value).toBe(payload.value);
-  });
-
-  it('should return expected set user cart item size payload', () => {
-    cartAction = setUserCartItemSize({}, payload.item, payload.value);
-    expect(cartAction.payload.value).toBe(payload.value);
   });
 });
 

@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Switch from '@material-ui/core/Switch';
 import Typography from '@material-ui/core/Typography';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import { useStyles } from '../product-list-filter.styles';
+import { IS_HOT_TEXT } from '../../../../translations/product-list.translations';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
+import { setHotItemFilter } from '../../../../redux/products/products.actions';
 
-const HotItemFilter = () => {
-  const { t } = useTranslation();
-  const styles = useStyles();
+const HotItemFilter = ({ language }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { search } = useLocation();
-
   const { isHotItemFilter, page, defaultPage } = URL_QUERIES_NAME;
   const searchParams = new URLSearchParams(search);
   const [hotItem, setHotItem] = useState(false);
-
   useEffect(() => {
     if (searchParams.get(isHotItemFilter)) {
       setHotItem(!hotItem);
+      dispatch(setHotItemFilter(!hotItem));
     }
-  }, [isHotItemFilter]);
+  }, [dispatch, searchParams.toString()]);
 
   const handleChange = (event) => {
     if (event.target.checked) {
       searchParams.set(isHotItemFilter, event.target.checked);
-      setHotItem(!hotItem);
     } else {
       searchParams.delete(isHotItemFilter);
       setHotItem(!hotItem);
+      dispatch(setHotItemFilter(!hotItem));
     }
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
@@ -37,10 +36,9 @@ const HotItemFilter = () => {
 
   return (
     <FormGroup data-cy='hot_item_filter'>
-      <Typography id='isHot' className={styles.popular} gutterBottom>
-        <span className={styles.sectionName}>{t('common.popular')}</span>
+      <Typography id='isHot' gutterBottom>
+        {IS_HOT_TEXT[language].value}:
         <Switch
-          className={styles.popularSwitch}
           color='default'
           checked={hotItem}
           onChange={handleChange}

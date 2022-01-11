@@ -1,9 +1,9 @@
-import React, { useContext, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { useSelector } from 'react-redux';
-
 import { history } from '../store/store';
+
 import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
 import Loader from '../components/loader';
@@ -12,8 +12,7 @@ import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
 import ProductDetails from '../pages/product-details';
-import routes from '../configs/routes';
-import { CategoriesContext } from '../context/categories/categories-context';
+import routes from '../const/routes';
 
 const {
   pathToMain,
@@ -37,9 +36,7 @@ const {
   pathToProfile,
   pathToOrderHistory,
   pathToCategory,
-  pathToChosenProduct,
-  pathToAnswersQuestionsPage,
-  pathToGiftСertificate
+  pathToChosenProduct
 } = routes;
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
@@ -62,13 +59,12 @@ const OrderHistory = lazy(() => import('../pages/order-history'));
 const Contacts = lazy(() => import('../pages/contacts'));
 const Materials = lazy(() => import('../pages/materials'));
 const BusinessPage = lazy(() => import('../pages/business-page'));
-const AnswersQuestionsPage = lazy(() => import('../pages/answers-questions-page'));
-const GiftСertificate = lazy(() => import('../pages/not-found-page'));
 
 const Routes = () => {
   const styles = useStyles();
-  const { categories } = useContext(CategoriesContext);
-  const { userData, userIsChecked } = useSelector(({ Categories, User }) => ({
+
+  const { categories, userData, userIsChecked } = useSelector(({ Categories, User }) => ({
+    categories: Categories.list,
     userIsChecked: User.userIsChecked,
     userData: User.userData
   }));
@@ -90,9 +86,6 @@ const Routes = () => {
               <Route path={pathToContacts} exact component={Contacts} />
               <Route path={pathToMaterials} exact component={Materials} />
               <Route path={pathToChosenPage} exact component={BusinessPage} />
-              <Route path={pathToAnswersQuestionsPage} exact component={AnswersQuestionsPage} />
-              <Route path={pathToGiftСertificate} exact component={GiftСertificate} />
-
               <ProtectedRoute
                 path={pathToLogin}
                 exact

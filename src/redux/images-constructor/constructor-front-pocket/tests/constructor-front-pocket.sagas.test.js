@@ -17,7 +17,7 @@ import { getConstructorFrontPocketById } from '../constructor-front-pocket.opera
 import constructorBottom from '../constructor-front-pocket.reducer';
 import { setModelLoading } from '../../constructor-model/constructor-model.actions';
 import { setError } from '../../../error/error.actions';
-import routes from '../../../../configs/routes';
+import routes from '../../../../const/routes';
 import { errorReducer } from '../../../error/error.reducer';
 import constructorModel, { initialState } from '../../constructor-model/constructor-model.reducer';
 

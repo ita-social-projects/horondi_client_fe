@@ -1,38 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import 'react-multi-carousel/lib/styles.css';
-import Carousel from 'react-multi-carousel';
-import { useQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
 
 import './similar-products.css';
+import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
 import { useStyles } from './similar-products.styles';
-import { RESPONSIVE_PDP } from '../constants';
+
+import { selectInfoForSimilarProducts } from './selector';
+
+import { SIMILAR_ITEMS } from '../../../translations/product-details.translations';
+import { RESPONSIVE_PDP } from '../../../configs';
 import SimilarProductsItem from './similar-products-item';
 import { similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
-import { getFilteredProductsQuery } from '../../product-list-page/operations/product-list.queries';
-import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import { PRICE_FROM, SIZE_NOT_AVAILABLE } from '../../../translations/product-list.translations';
 
-const SimilarProducts = ({ cartList, product }) => {
-  const [similarProducts, setSimilarProducts] = useState([]);
+const SimilarProducts = ({ cartList }) => {
   const styles = useStyles();
+  const { language, similarProducts, currency, product } = useSelector(
+    selectInfoForSimilarProducts
+  );
 
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
-
-  const { error, loading } = useQuery(getFilteredProductsQuery, {
-    onCompleted: (data) => setSimilarProducts(data.getProducts.items)
-  });
-
-  const { t } = useTranslation();
-
+  const { title } = SIMILAR_ITEMS[language];
   const currencySign = getCurrencySign(currency);
+
   let imagesList;
-
-  if (error || loading) return errorOrLoadingHandler(error, loading);
-
   if (cartList) {
     imagesList = similarProductForCart(similarProducts, cartList);
   } else {
@@ -44,26 +36,21 @@ const SimilarProducts = ({ cartList, product }) => {
     );
   }
 
-  imagesList = imagesList.map(({ _id, images, rate, sizes, translationsKey }) => {
+  imagesList = imagesList.map(({ _id, images, rate, name, sizes }) => {
     const availableSize =
-      sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price[currency].value;
-    const checkPrice = () =>
-      availableSize ? (
-        <div>
-          {t('product.priceFrom') + Math.round(availableSize)}
-          {currencySign}{' '}
-        </div>
-      ) : (
-        <div> {t('product.sizeNotAvailable')} </div>
-      );
+      sizes && sizes.filter(({ size, price }) => size.available && price)[0].price[currency].value;
 
     return (
       <SimilarProductsItem
         currencySign={currencySign}
         key={_id}
-        price={checkPrice()}
+        price={
+          availableSize
+            ? PRICE_FROM[language].value + Math.round(availableSize)
+            : SIZE_NOT_AVAILABLE[language].value
+        }
+        name={name}
         rate={rate}
-        translationsKey={translationsKey}
         imageUrl={images.primary.medium}
         id={_id}
       />
@@ -75,7 +62,7 @@ const SimilarProducts = ({ cartList, product }) => {
       {imagesList.length ? (
         <div className={styles.similarItems}>
           <div>
-            <h2 className={styles.title}>{t('product.similarItems.title')}</h2>
+            <h2 className={styles.title}>{title}</h2>
           </div>
           <Carousel
             className={styles.carousel}

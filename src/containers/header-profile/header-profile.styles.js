@@ -1,49 +1,42 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  profile: ({ fromSideBar }) => ({
-    width: '40px',
-    height: '40px',
+  profile: ({ fromSideBar, logged }) => ({
+    padding: '0 4px',
+    position: 'relative',
     cursor: 'pointer',
-    transition: 'background-color 0.5s linear',
-    borderRadius: '50%',
+    zIndex: 20,
+    transition: '1s',
+    height: '33px',
+    width: '50px',
+    textAlign: 'center',
+
     '&:hover': {
-      backgroundColor: fromSideBar ? '#000' : '#242424',
+      backgroundColor: fromSideBar ? '#000' : '#fff',
       '& ul': {
         display: 'block'
       },
       '& > svg': {
-        color: '#fff'
+        color: fromSideBar ? '#fff' : '#000'
       }
     },
 
     '& svg': {
       position: 'relative',
-      top: '5%',
-      left: '10%',
+      zIndex: 5,
       fontSize: '2rem',
       color: fromSideBar ? '#000' : '#fff',
+      border: 'none',
       outline: 'none'
     }
   }),
 
   list: {
-    '& .MuiPaper-root': {
-      marginTop: '21px',
-      marginLeft: `${window.innerWidth - document.body.clientWidth + 1}px`,
-      padding: '8px 0',
-      backgroundColor: '#000',
-      borderRadius: '0px'
-    },
     '& .MuiMenuItem-root': {
-      color: '#fff',
       flexDirection: 'row',
-      paddingRight: '10px',
-      '&:hover': {
-        backgroundColor: '#1b1b1b'
-      },
+      padding: 10,
       '& svg': {
-        margin: '0 16px'
+        marginRight: '5px'
       }
     }
   }

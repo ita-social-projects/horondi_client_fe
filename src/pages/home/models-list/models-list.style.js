@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   root: ({ isModelsVisible, modelsCount }) => ({
-    height: !isModelsVisible ? '480px' : `${(modelsCount / 2) * 210 + 250}px`,
-    minHeight: '480px',
+    height: !isModelsVisible ? '100vh' : `${(modelsCount / 3) * 210 + 250}px`,
+    minHeight: '100vh',
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -11,23 +11,17 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     transition: 'height 1s ease',
     '& button': {
-      zIndex: 10,
-      color: theme.palette.textColor,
-      backgroundColor: theme.palette.backgroundColor,
-      borderColor: theme.palette.textColor,
-      margin: 50,
-      '&:hover': {
-        color: theme.palette.textColor,
-        backgroundColor: theme.palette.backgroundColor
-      }
+      zIndex: 10
+    },
+    '@media (max-width: 768px)': {
+      height: !isModelsVisible ? '100%' : `300px`
     }
   }),
   modelsWrapper: ({ isModelsVisible }) => ({
-    backgroundColor: theme.palette.backgroundColor,
     display: 'flex',
     flexFlow: 'wrap',
     width: '85%',
-    height: isModelsVisible ? 880 : 235,
+    height: isModelsVisible ? '66%' : 210,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',
@@ -42,15 +36,9 @@ export const useStyles = makeStyles((theme) => ({
       top: 0,
       right: 5,
       left: 5,
-      bottom: 0
+      bottom: 0,
+      background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);',
+      zIndex: isModelsVisible ? -1 : 5
     }
-  }),
-  modelsTitle: () => ({
-    color: theme.palette.textColor,
-    fontSize: 34,
-    marginBottom: 30,
-    marginLeft: 14,
-    fontWeight: '600',
-    width: '85%'
   })
 }));

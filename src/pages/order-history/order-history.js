@@ -1,51 +1,61 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useQuery } from '@apollo/client';
-import OrderHistoryItem from '../../containers/orders/order-history/order-history-item';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getUserOrders, setCurrentPage } from '../../redux/user/user.actions';
+import { Loader } from '../../components/loader/loader';
+import OrderHistoryOrder from '../../containers/orders/order-history/order-history-order';
 import EmptyOrderHistory from '../../containers/orders/order-history/empty-order-history';
 import OrderHistoryPagination from '../../containers/orders/order-history/order-history-pagination/index';
 import { useStyles } from './order-history.styles';
-import { LIMIT_HISTORY_ORDERS } from './constants';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import { getUserOrdersQuery } from './operations/order-history.queries';
+import { limitHistoryOrders } from '../../const/user-order-history';
+import { ORDER_HISTORY_TITLES } from '../../translations/order.translations';
 
 const OrderHistory = () => {
-  const { t } = useTranslation();
+  const { orders, loading, language, currentPage, countPerPage } = useSelector(
+    ({ User, Language }) => ({
+      orders: User.userOrders,
+      loading: User.userLoading,
+      language: Language.language,
+      currentPage: User.currentPage,
+      countPerPage: User.countPerPage
+    })
+  );
+  const dispatch = useDispatch();
   const styles = useStyles();
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const {
-    loading: loadingOrders,
-    error: errorOrders,
-    data
-  } = useQuery(getUserOrdersQuery, {
-    variables: {
-      pagination: {
-        limit: LIMIT_HISTORY_ORDERS,
-        skip: (currentPage - 1) * LIMIT_HISTORY_ORDERS
-      }
-    },
-    fetchPolicy: 'network-only',
-    nextFetchPolicy: 'cache-first'
-  });
+  const quantityPages = Math.ceil(countPerPage / limitHistoryOrders);
 
-  if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
-
-  const { ordersCount, userOrders } = data.getUserOrders;
-  const quantityPages = Math.ceil(ordersCount / LIMIT_HISTORY_ORDERS);
+  useEffect(() => {
+    dispatch(
+      getUserOrders({
+        pagination: {
+          limit: limitHistoryOrders,
+          skip: (currentPage - 1) * limitHistoryOrders
+        }
+      })
+    );
+  }, [currentPage, countPerPage]);
 
   const changeHandler = (value) => {
-    setCurrentPage(value);
+    dispatch(setCurrentPage(value));
   };
+
+  if (loading) {
+    return (
+      <div className={styles.loader}>
+        <Loader className={styles.loader} />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.root}>
-      {userOrders && userOrders.length ? (
+      {orders && orders.length ? (
         <>
-          <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
+          <div className={styles.mainTitle}>{ORDER_HISTORY_TITLES[language].title}</div>
           <div>
-            {userOrders.map((order) => (
-              <OrderHistoryItem order={order} key={order.orderNumber} />
+            {orders.map((item, index) => (
+              <OrderHistoryOrder order={item} key={index} />
             ))}
           </div>
           {quantityPages >= 2 && (

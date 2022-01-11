@@ -1,43 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
-  root: ({ fromSideBar }) => ({
-    '& .MuiSelect-root': {
-      padding: '0 10px',
-      fontStyle: 'normal',
-      fontWeight: 600,
-      fontSize: '12px',
-      lineHeight: '16px',
-      color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)',
-      textAlign: 'center',
+export const useStyles = makeStyles(() => ({
+  root: {
+    '@media (max-width: 768px)': {
+      display: 'block'
+    },
+    '& > div > div': {
+      fontSize: '21px !important',
       '&:hover': {
-        borderBottom: '1px solid',
-        borderColor: theme.palette.backgroundColor,
-        color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
-      },
-      '&:focus': {
-        backgroundColor: 'transparent'
+        position: 'static'
       }
-    },
-    '& .MuiInput-underline:after, & .MuiInput-underline:before': {
-      display: 'none'
-    },
-    '& .MuiSelect-icon': {
-      display: 'none'
-    }
-  }),
-  item: {
-    color: '#fff',
-    backgroundColor: '#000',
-    borderRadius: '0px',
-    '&.Mui-selected': {
-      backgroundColor: '#000',
-      '&:hover': {
-        backgroundColor: '#242424'
-      }
-    },
-    '&:hover': {
-      backgroundColor: '#242424'
     }
   }
 }));

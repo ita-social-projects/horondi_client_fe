@@ -2,23 +2,23 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => {
   const sizeButton = {
-    width: '36px',
-    height: '36px',
-    fontWeight: 600,
-    fontSize: 14,
-    lineHeight: 19
+    fontSize: '1rem',
+    width: '45px',
+    height: '45px'
   };
 
   return {
     sizeButtons: {
-      '& [data-cy="sizes"]': {
-        border: `1px solid ${theme.palette.black}`,
-        borderRadius: '4px'
+      position: 'relative',
+      display: 'flex',
+      width: '50px',
+      paddingBottom: '0.55rem',
+      '@media (max-width: 600px)': {
+        justifyContent: 'center',
+        marginLeft: '-20px'
       }
     },
     label: {
-      marginBottom: 8,
-      display: 'block',
       fontWeight: '700',
       alignSelf: 'center',
       '@media (max-width: 600px)': {
@@ -44,14 +44,18 @@ export const useStyles = makeStyles((theme) => {
     },
     selectedSize: {
       ...sizeButton,
-      backgroundColor: theme.palette.black,
-      color: theme.palette.white,
+      backgroundColor: theme.palette.card.selectedButton.backgroundColor,
+      color: theme.palette.card.selectedButton.color,
       '&:hover': {
         backgroundColor: theme.palette.card.selectedButton.backgroundColor
       }
     },
     container: {
-      marginBottom: '25px'
+      display: 'flex',
+      marginBottom: '1.35rem',
+      '@media (max-width: 600px)': {
+        justifyContent: 'center'
+      }
     }
   };
 });

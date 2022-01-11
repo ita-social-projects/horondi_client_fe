@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { useStyles } from './not-found-page.styles';
-
-import routes from '../../configs/routes';
+import {
+  LINK_BACK,
+  NOT_FOUND_PAGE_MESSAGE,
+  TO_HOMEPAGE_MESSAGE,
+  LINK_TO_HOMEPAGE
+} from '../../translations/not-found-page.translations';
 
 import { NOT_FOUND_PAGE_IMAGES } from '../../configs';
+
+import routes from '../../const/routes';
 
 const { pathToMain } = routes;
 
@@ -19,9 +25,12 @@ const NotFoundPage = () => {
     history.goBack();
   };
 
-  const { t } = useTranslation();
+  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode
+  }));
 
-  const imagePath = NOT_FOUND_PAGE_IMAGES.light || NOT_FOUND_PAGE_IMAGES.dark;
+  const imagePath = isLightTheme ? NOT_FOUND_PAGE_IMAGES.light : NOT_FOUND_PAGE_IMAGES.dark;
 
   return (
     <div className={styles.wrapper}>
@@ -30,19 +39,23 @@ const NotFoundPage = () => {
           <h2>
             4
             <span className={styles.imageContainer}>
-              <img className={styles.image} src={imagePath} alt={t('notFoundPage.message')} />
+              <img
+                className={styles.image}
+                src={imagePath}
+                alt={NOT_FOUND_PAGE_MESSAGE[language].value}
+              />
             </span>
             4
           </h2>
-          <h3>{t('notFoundPage.message')}</h3>
+          <h3>{NOT_FOUND_PAGE_MESSAGE[language].value}</h3>
           <p>
-            {t('notFoundPage.toHome')}{' '}
-            <Link data-cy='home' className={styles.link} to={pathToMain}>
-              {t('notFoundPage.linkHome')}
+            {TO_HOMEPAGE_MESSAGE[language].value}{' '}
+            <Link className={styles.link} to={pathToMain}>
+              {LINK_TO_HOMEPAGE[language].value}
             </Link>
           </p>
-          <Button data-cy='back' className={styles.button} onClick={goBack} variant='contained'>
-            {t('notFoundPage.linkBack')}
+          <Button className={styles.button} onClick={goBack} variant='contained'>
+            {LINK_BACK[language].value}
           </Button>
         </div>
       </div>

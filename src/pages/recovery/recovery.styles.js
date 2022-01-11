@@ -1,6 +1,31 @@
 import { makeStyles } from '@material-ui/core/styles';
+import BG from '../../images/3.jpg';
 
 export const useStyles = makeStyles((theme) => ({
+  recoveryBackground: {
+    background: `url(${BG}) no-repeat `,
+    backgroundSize: 'cover',
+    height: '1000px',
+    position: 'relative'
+  },
+  recoveryForm: {
+    width: '400px',
+    minHeight: '100px',
+    background: theme.palette.backgroundColor,
+    textAlign: 'center',
+    position: 'absolute',
+    top: '202px',
+    right: '56px',
+    padding: '50px'
+  },
+  heading: {
+    fontSize: '1.5rem',
+    lineHeight: '29px',
+    marginBottom: '25px',
+    marginTop: '0px',
+    fontStyle: 'normal',
+    fontWeight: 'normal'
+  },
   emailInput: {
     marginBottom: '21px',
     '& label': {
@@ -22,21 +47,30 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.blue,
-        borederWidth: '2px'
+        borderColor: theme.palette.textColor
       }
     }
   },
   recoveryText: {
-    margin: '5px 0 15px',
+    marginTop: '0px',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '0.75rem',
     lineHeight: '15px',
-    textAlign: 'left',
-    maxWidth: '400px'
+    textAlign: 'left'
   },
-
+  recoverBtn: {
+    fontSize: '1rem',
+    lineHeight: '20px',
+    height: '42px',
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    color: theme.palette.button.normal.color,
+    textTransform: 'capitalize',
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
+  },
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,

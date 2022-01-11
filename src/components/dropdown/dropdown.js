@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 import { Select } from '@material-ui/core';
 import clsx from 'clsx';
 import { noop } from 'lodash';
-import { KeyboardArrowDown } from '@material-ui/icons';
 
 import { dropdownStyles } from './dropdown.styles';
 
@@ -14,19 +13,11 @@ const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) =>
     [styles.rootSelect]: true,
     [styles.sticky]: sticky
   });
-
   useLayoutEffect(() => {
-    let componentMounted = true;
     window.addEventListener('scroll', () => {
-      if (componentMounted) {
-        window.scrollY > 50 ? setSticky(true) : setSticky(false);
-      }
+      window.scrollY > 50 ? setSticky(true) : setSticky(false);
     });
-    return () => {
-      componentMounted = false;
-    };
   }, []);
-
   return (
     <div className={styles.rootItem}>
       <Select
@@ -34,7 +25,6 @@ const Dropdown = ({ mappedItems, handler, defaultValue, value, fromSideBar }) =>
         defaultValue={defaultValue}
         value={value}
         onChange={handler}
-        IconComponent={KeyboardArrowDown}
       >
         {mappedItems}
       </Select>

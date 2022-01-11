@@ -1,5 +1,5 @@
 export default {
-  fontFamily: ['Open Sans', 'Montserrat', '-apple-system', 'Arial', 'sans-serif'].join(','),
+  fontFamily: ['Montserrat', '-apple-system', 'Arial', 'sans-serif'].join(','),
   h1: {
     fontWeight: 500,
     fontSize: '35px',
@@ -46,12 +46,6 @@ export default {
     fontSize: '14px',
     letterSpacing: '-0.05px',
     lineHeight: '21px'
-  },
-  body1: {
-    fontSize: '12px',
-    fontStyle: 'normal',
-    fontWeight: 600,
-    lineHeight: '16px'
   },
   button: {
     fontSize: '16px'

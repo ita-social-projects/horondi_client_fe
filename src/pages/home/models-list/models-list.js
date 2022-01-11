@@ -1,48 +1,50 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useStyles } from './models-list.style';
+import { getAllModels } from '../../../redux/model/model.actions';
 import ClassicButton from '../../../components/classic-button';
 import ModelItem from '../../../components/model-item';
-import { getAllModelsQuery } from './operations/getAllModels.queries';
-import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { URL_QUERIES_NAME, countPerPage } from '../../../configs/index';
+import { HOME_BUTTONS } from '../../../translations/homepage.translations';
+import Loader from '../../../components/loader';
 
 const ModelsList = () => {
-  const [models, setModels] = useState([]);
-  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { models, language, modelsLoading } = useSelector(({ Model, Language }) => ({
+    models: Model.models,
+    modelsLoading: Model.loading,
+    language: Language.language
+  }));
 
   const [isModelsVisible, setIsModelsVisible] = useState(false);
 
   const styles = useStyles({ isModelsVisible, modelsCount: models.length });
 
+  useEffect(() => {
+    dispatch(getAllModels());
+  }, [dispatch]);
+
   const onShowModels = () => {
     setIsModelsVisible(!isModelsVisible);
   };
 
-  const { loading, error } = useQuery(getAllModelsQuery, {
-    onCompleted: (data) => setModels(data.getAllModels.items)
-  });
-
-  if (loading || error) return errorOrLoadingHandler(error, loading);
+  if (modelsLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.root} data-section-style='light' id='models'>
-      <div className={styles.modelsTitle}>{t('home.models')}</div>
       <div className={styles.modelsWrapper}>
         {models.map((model) => (
-          <ModelItem
-            key={model._id}
-            model={model}
-            modelsUrl={`${URL_QUERIES_NAME.modelsFilter}=${model._id}&page=1&${countPerPage}`}
-          />
+          <ModelItem key={model._id} model={model} />
         ))}
       </div>
       <ClassicButton
-        className={styles.button}
         buttonStyle={isModelsVisible ? 'classic' : 'inverse'}
         buttonType='button'
-        innerText={isModelsVisible ? t('common.hide') : t('home.allModels')}
+        innerText={
+          isModelsVisible ? HOME_BUTTONS[language].HIDE_MODELS : HOME_BUTTONS[language].ALL_MODELS
+        }
         onClickHandler={onShowModels}
       />
     </div>

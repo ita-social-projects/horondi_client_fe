@@ -2,56 +2,26 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: '0',
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
     position: 'absolute',
-
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 480,
-    backgroundColor: theme.palette.white,
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
     outline: '0',
     boxShadow: theme.shadows[5],
-
-    '@media (max-width: 500px)': {
-      width: '320px'
-    },
+    padding: theme.spacing(2, 4, 3),
     '& p': {
-      display: 'flex',
+      fontSize: '1.2em',
       margin: '0',
-      padding: '20px 20px 50px',
-      fontSize: '16px',
-      color: theme.palette.black,
       '& b': {
-        fontSize: '14px',
-        fontStyle: '600'
-      },
-      '@media (max-width:500px)': {
-        padding: '10px 10px 20px',
-        fontSize: '14px'
+        fontSize: '1.4em'
       }
     }
-  },
-  header: {
-    display: 'flex',
-    padding: '10px 16px',
-    justifyContent: 'space-between',
-    boxSizing: 'border-box',
-    borderBottom: '2px solid #E2E8F0',
-    fontSize: '20px',
-    color: theme.palette.black,
-    fontWeight: '700',
-    '@media (max-width: 500px)': {
-      padding: '5px'
-    }
-  },
-  closeIcon: {
-    color: '#808080',
-    fontSize: '26px',
-    cursor: 'pointer'
   },
   fullscreen: {
     width: '90vw',
@@ -59,27 +29,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   buttonGroup: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-around',
     width: '100%',
     marginTop: '10px',
-    padding: '0 7px 7px 0',
     '& > button': {
-      color: theme.palette.white,
-      backgroundColor: theme.palette.black,
-      fontSize: 14,
+      color: theme.palette.button.normal.color,
+      backgroundColor: theme.palette.button.normal.backgroundColor,
       margin: 5,
-      padding: '8px 15px',
-      '&:first-child': {
-        color: theme.palette.black,
-        backgroundColor: theme.palette.white,
-        border: '1px solid'
-      },
       '&:hover': {
         color: theme.palette.button.hover.color,
         backgroundColor: theme.palette.button.hover.backgroundColor
-      },
-      '@media (max-width: 500px)': {
-        fontSize: '12px'
       }
     }
   }

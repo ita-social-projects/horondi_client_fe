@@ -1,8 +1,0 @@
-{
-  "successTitle": "Success!",
-  "successText": "Please follow the instructions in the message, we have just sent you.",
-  "recoveryTitle": "Password recovery",
-  "recoveryEmail": "E-mail*",
-  "recoveryText": "Specify your e-mail to reset the password and we will send recovery instructions.",
-  "recoveryButtonText": "Send"
-}

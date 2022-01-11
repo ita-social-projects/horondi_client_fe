@@ -75,9 +75,16 @@ export const useStyles = makeStyles(({ palette }) => ({
     textAlign: 'center',
     padding: 5,
     textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
+
     '& div': {
       width: '60%',
       textAlign: 'right'
+    },
+    '& svg': {
+      fontSize: '20px',
+      marginRight: '5px'
     }
   }
 }));

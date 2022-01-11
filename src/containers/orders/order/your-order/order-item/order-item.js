@@ -1,5 +1,4 @@
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
@@ -95,9 +94,7 @@ const OrderItem = ({ product }) => {
       <Typography className={styles.yourOrderListItemPrice} component='div'>
         <div>{sizeAndPrice.price[currency]?.value}</div>
         <div style={{ width: '3px' }} />
-        <div>
-          <FontAwesomeIcon icon={currencySign} />
-        </div>
+        <div>{currencySign}</div>
       </Typography>
     </ListItem>
   );

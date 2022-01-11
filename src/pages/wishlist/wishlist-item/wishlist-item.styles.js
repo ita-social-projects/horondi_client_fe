@@ -65,6 +65,19 @@ export const useStyles = makeStyles(() => ({
       display: 'none'
     }
   }),
+  price: {
+    fontSize: '15px',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'spaceBetween',
+    marginLeft: '5px',
+    '& svg': {
+      fontSize: '15px',
+      marginRight: '5px'
+    }
+  },
   delete: {
     display: 'flex',
     justifyContent: 'flex-end'

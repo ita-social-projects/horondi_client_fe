@@ -31,7 +31,7 @@ const CurrencyComponent = ({ fromSideBar }) => {
     </MenuItem>
   ));
   return (
-    <div data-cy='currency ' className={styles.root}>
+    <div data-cy='currency' className={styles.root}>
       <Select
         labelId='demo-simple-select-label'
         onChange={handleChange}

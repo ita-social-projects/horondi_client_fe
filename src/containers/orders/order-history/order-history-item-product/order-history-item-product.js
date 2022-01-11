@@ -1,6 +1,5 @@
 import React from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 
 import { useTheme } from '@material-ui/styles';
@@ -42,13 +41,17 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
         </TableCell>
         <TableCell className={styles.description}>{item.options.size.name}</TableCell>
         <TableCell className={styles.description}>
-          <FontAwesomeIcon icon={currencySign} />
-          {fixedPriceProduct}
+          <div className={styles.price}>
+            {currencySign}
+            {fixedPriceProduct}
+          </div>
         </TableCell>
         <TableCell className={styles.description}>{item.quantity}</TableCell>
         <TableCell className={styles.description}>
-          <FontAwesomeIcon icon={currencySign} />
-          {item.quantity * fixedPriceProduct}
+          <div className={styles.price}>
+            {currencySign}
+            {item.quantity * fixedPriceProduct}
+          </div>
         </TableCell>
       </TableRow>
     </>

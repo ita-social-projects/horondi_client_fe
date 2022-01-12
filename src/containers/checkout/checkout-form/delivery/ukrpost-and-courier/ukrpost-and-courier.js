@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
@@ -76,6 +76,36 @@ const UkrpostAndCourier = ({
     variables: { id: values.cityId },
     skip: !values.cityId
   });
+
+  useEffect(() => {
+    if (ukrPoshtaRegions) {
+      Object.values(ukrPoshtaRegions).forEach((e) => {
+        if (e.REGION_UA === values.region) {
+          setFieldValue('regionId', e.REGION_ID);
+        }
+      });
+    }
+  }, [ukrPoshtaRegions, values.region, values.regionId, setFieldValue]);
+
+  useEffect(() => {
+    if (ukrPoshtaDistricts) {
+      Object.values(ukrPoshtaDistricts).forEach((e) => {
+        if (e.DISTRICT_UA === values.district) {
+          setFieldValue('districtId', e.DISTRICT_ID);
+        }
+      });
+    }
+  }, [ukrPoshtaDistricts, values.district, setFieldValue]);
+
+  useEffect(() => {
+    if (ukrPoshtaCities) {
+      Object.values(ukrPoshtaCities).forEach((e) => {
+        if (e.CITY_UA === values.city) {
+          setFieldValue('cityId', e.CITY_ID);
+        }
+      });
+    }
+  }, [ukrPoshtaCities, values.city, setFieldValue]);
 
   const { isError } = useIsLoadingOrError([
     getRegionsError,

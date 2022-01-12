@@ -34,6 +34,11 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
   });
 
   useEffect(() => {
+    setCitySearchValue(values.city);
+    setSelectedCity(values.city);
+  }, [values.city]);
+
+  useEffect(() => {
     !citySearchValue && clearTimeout(searchHandlerTimeout.current);
     if (!citiesLoading && citySearchValue) {
       clearTimeout(searchHandlerTimeout.current);

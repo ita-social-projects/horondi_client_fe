@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { TextField } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -69,7 +69,6 @@ const CheckoutForm = ({ currency, cartItems }) => {
   );
 
   const [initialValues, setInitialValues] = useState(stateInitialValues);
-  const valuesRef = useRef();
 
   const consentLink = (
     <div className={styles.consentMessage}>
@@ -92,31 +91,28 @@ const CheckoutForm = ({ currency, cartItems }) => {
     </div>
   );
 
-  const { values, handleSubmit, handleChange, setFieldValue, touched, errors, resetForm } =
-    useFormik({
-      enableReinitialize: true,
-      validationSchema: validationSchema(deliveryType, t),
-      initialValues,
+  const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
+    enableReinitialize: true,
+    validationSchema: validationSchema(deliveryType, t),
+    initialValues,
 
-      onSubmit: (data) => {
-        data.paymentMethod === checkoutPayMethod.card
-          ? dispatch(addPaymentMethod(checkoutPayMethod.card)) &&
-            dispatch(
-              getFondyData({
-                order: orderInputData(data, deliveryType, cartItems, language),
-                currency: getCurrentCurrency(currency),
-                amount: String(totalPriceToPay),
-                language
-              })
-            )
-          : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
-            dispatch(addPaymentMethod(checkoutPayMethod.cash));
-        clearSessionStorage();
-        clearCart();
-      }
-    });
-
-  valuesRef.current = values;
+    onSubmit: (data) => {
+      data.paymentMethod === checkoutPayMethod.card
+        ? dispatch(addPaymentMethod(checkoutPayMethod.card)) &&
+          dispatch(
+            getFondyData({
+              order: orderInputData(data, deliveryType, cartItems, language),
+              currency: getCurrentCurrency(currency),
+              amount: String(totalPriceToPay),
+              language
+            })
+          )
+        : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
+          dispatch(addPaymentMethod(checkoutPayMethod.cash));
+      clearSessionStorage();
+      clearCart();
+    }
+  });
 
   useEffect(() => {
     if (userData) {
@@ -129,25 +125,10 @@ const CheckoutForm = ({ currency, cartItems }) => {
   }, [values]);
 
   useEffect(() => {
-    const courierDependencyArr = [deliveryTypes.NOVAPOSTCOURIER, deliveryTypes.UKRPOSTCOURIER];
-    const isCourier = (type) => courierDependencyArr.some((arrType) => arrType === type);
-    if (!isCourier(deliveryType)) {
-      resetForm({
-        values: {
-          ...valuesRef.current,
-          courierOffice: '',
-          city: '',
-          street: '',
-          flat: '',
-          region: '',
-          district: '',
-          regionId: '',
-          districtId: '',
-          cityId: ''
-        }
-      });
+    if (userData) {
+      setInitialValues(updateInitialValues(userData, deliveryType));
     }
-  }, [deliveryType, resetForm]);
+  }, [userData, deliveryType]);
 
   return (
     <div>

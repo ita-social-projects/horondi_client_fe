@@ -2,11 +2,17 @@ import i18next from 'i18next';
 import { checkoutFormBtnValue, updateInitialValues } from './checkout';
 
 const expectedValues = {
-  firstName: 'firstName'
+  firstName: 'firstName',
+  address: {
+    city: 'city'
+  }
 };
 
 const data = {
-  firstName: 'firstName'
+  firstName: 'firstName',
+  address: {
+    city: 'city'
+  }
 };
 
 describe('Checkout utils tests', () => {

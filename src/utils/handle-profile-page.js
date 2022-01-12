@@ -8,6 +8,7 @@ export const initialValues = {
   phoneNumber: '',
   country: '',
   region: '',
+  district: '',
   city: '',
   street: '',
   buildingNumber: '',

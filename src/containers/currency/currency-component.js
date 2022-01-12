@@ -16,7 +16,7 @@ const CurrencyComponent = ({ fromSideBar }) => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);
   const handleChange = (e) => {
-    const targetValue = +e.target.value;
+    const targetValue = Number(e.target.value);
     if (targetValue !== undefined) {
       setToLocalStorage('currency', targetValue);
       dispatch(changeCurrency(targetValue));

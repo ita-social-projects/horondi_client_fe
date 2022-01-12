@@ -79,6 +79,7 @@ export const CURRENCIES_LIST = [
   { currency: 'USD', value: 1 }
 ];
 export const LANGUAGE = 'language';
+export const CURRENCY = 'currency';
 
 export const URL_QUERIES_NAME = {
   page: 'page',

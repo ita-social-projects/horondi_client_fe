@@ -18,6 +18,30 @@ const Certificates = () => {
       price: '1000',
       expirationDate: '12/10/2021 - 13/10/2022',
       status: 'active'
+    },
+    {
+      code: 'HOR22075',
+      price: '500',
+      expirationDate: '15/11/2021 - 16/11/2022',
+      status: 'active'
+    },
+    {
+      code: 'WTJ77777',
+      price: '1000',
+      expirationDate: '12/10/2021 - 13/10/2022',
+      status: 'active'
+    },
+    {
+      code: 'WTJ77777',
+      price: '1000',
+      expirationDate: '12/10/2021 - 13/10/2022',
+      status: 'active'
+    },
+    {
+      code: 'WTJ77777',
+      price: '1000',
+      expirationDate: '12/10/2021 - 13/10/2022',
+      status: 'active'
     }
   ];
 

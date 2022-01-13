@@ -1,35 +1,44 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import BaseSnackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { SnackBarContext } from '../../context/snackbar-context';
+
+import { setSnackBarStatus } from '../../redux/snackbar/snackbar.actions';
+import { SNACKBAR_DURATION } from '../../configs';
 
 const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
 
 const Snackbar = () => {
-  const { closeSnackBar } = useContext(SnackBarContext);
+  const dispatch = useDispatch();
+
+  const { snackBarStatus, snackBarSeverity, snackBarMessage, language } = useSelector(
+    ({ Snackbar: snackbar, Language }) => ({
+      snackBarStatus: snackbar.snackBarStatus,
+      snackBarSeverity: snackbar.snackBarSeverity,
+      snackBarMessage: snackbar.snackBarMessage,
+      language: Language.language
+    })
+  );
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    closeSnackBar();
+    dispatch(setSnackBarStatus(false));
   };
 
   return (
-    <SnackBarContext.Consumer>
-      {({ snackBarState }) => (
-        <BaseSnackbar
-          id='snack-bar'
-          open={!!snackBarState.message}
-          autoHideDuration={4000}
-          onClose={handleClose}
-        >
-          <Alert onClose={handleClose} severity={snackBarState.severity}>
-            {snackBarState.message}
-          </Alert>
-        </BaseSnackbar>
-      )}
-    </SnackBarContext.Consumer>
+    <BaseSnackbar
+      id='snack-bar'
+      open={snackBarStatus}
+      autoHideDuration={SNACKBAR_DURATION}
+      onClose={handleClose}
+    >
+      <Alert onClose={handleClose} severity={snackBarSeverity}>
+        {snackBarMessage[language]}
+      </Alert>
+    </BaseSnackbar>
   );
 };
 

@@ -1,23 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
+import * as Yup from 'yup';
 import { useStyles } from './profile-page.styles';
+import ProfilePicture from '../../images/profile.png';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
-import { IMG_URL, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs/index';
-import { PROFILE_USER_CONTACT_DATA, PROFILE_USER_ADDRESS_DATA } from './constants';
-import { validationSchema } from '../../validators/profile-page';
-import { handleClassName, initialValues } from '../../utils/handle-profile-page';
+import {
+  PROFILE_LABELS,
+  PROFILE_PASSWORD_CHANGE,
+  PROFILE_EMAIL_CONFIRM
+} from '../../translations/user.translations';
+import {
+  IMG_URL,
+  formRegExp,
+  PROFILE_USER_DATA,
+  errorMessages,
+  REQUIRED_USER_FIELDS
+} from '../../configs/index';
+import {
+  handleProfilePage,
+  handleClassName,
+  handleText,
+  handleProfileImg
+} from '../../utils/handle-profile-page';
+import { MATERIAL_UI_COLOR } from '../../const/material-ui';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
   const [shouldValidate, setShouldValidate] = useState(false);
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -25,35 +38,43 @@ const ProfilePage = () => {
   const {
     userData,
     userLoading,
+    language,
     confirmationEmailSent,
     userRecovered,
     confirmationLoading,
     recoveryLoading
-  } = useSelector(({ User }) => ({
+  } = useSelector(({ User, Language }) => ({
     userData: User.userData,
     userLoading: User.userLoading,
+    language: Language.language,
     confirmationEmailSent: User.confirmationEmailSent,
     userRecovered: User.userRecovered,
     confirmationLoading: User.confirmationLoading,
     recoveryLoading: User.recoveryLoading
   }));
-  const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
-    if (phoneNumber === null) {
-      phoneNumber = '';
-    }
-    const user = { firstName, lastName, email, phoneNumber, address };
-    Object.keys(address).forEach((key) => {
-      if (address[key] === null) {
-        address[key] = '';
-      }
-    });
 
+  const validationSchema = Yup.object(
+    Object.fromEntries(
+      Object.keys(PROFILE_USER_DATA).map((item) => {
+        let fieldSchema = Yup.string().matches(
+          formRegExp[item],
+          errorMessages[language].value[item]
+        );
+        REQUIRED_USER_FIELDS.includes(item) &&
+          (fieldSchema = fieldSchema.required(errorMessages[language].value[item]));
+        return [item, fieldSchema];
+      })
+    )
+  );
+
+  const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
+    const user = { firstName, lastName, email, phoneNumber, address };
     dispatch(updateUser({ user, id: userData._id, upload }));
     setShouldValidate(false);
   };
 
-  const { errors, values, touched, handleBlur, resetForm, handleSubmit, handleChange } = useFormik({
-    initialValues,
+  const { errors, values, resetForm, dirty, handleSubmit, handleChange } = useFormik({
+    initialValues: {},
     onSubmit: handleSaveUser,
     validationSchema,
     validateOnChange: shouldValidate,
@@ -71,14 +92,16 @@ const ProfilePage = () => {
     }
   };
 
-  const handleLableClass = () => (userImageUrl ? classes.updateLabel : classes.uploadLabel);
-
   const handleConfirmation = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
   };
 
   const handlePasswordChange = () => {
     dispatch(recoverUser({ email: userData.email, language }));
+  };
+
+  const handleImageError = (event) => {
+    event.target.src = ProfilePicture;
   };
 
   useEffect(() => {
@@ -99,147 +122,107 @@ const ProfilePage = () => {
     }
   }, [userData, resetForm]);
 
-  const getTextFields = (textFields) =>
-    Object.keys(textFields).map((name) => (
-      <TextField
-        key={name}
-        type='text'
-        name={name}
-        variant={TEXT_FIELD_VARIANT.OUTLINED}
-        value={values[name]}
-        label={t(`profilePage.labels.${name}`)}
-        fullWidth
-        color={MATERIAL_UI_COLOR.PRIMARY}
-        onChange={handleChange}
-        error={touched[name] && !!errors[name]}
-        helperText={t(errors[name])}
-        className={handleClassName(classes.dataInput, classes.nameInputs, name)}
-      />
-    ));
-
-  const emailSent = (titleText) => (
-    <div className={classes.emailSent} data-testid='emailSent'>
-      <OpenedLetterIcon className={classes.openedLetterIcon} />
-      <h3 className={classes.formTitle}>{titleText}</h3>
-      <p>{t('profilePage.checkEmailText')}</p>
-    </div>
-  );
-
-  const passwordChange = () =>
-    userRecovered ? (
-      emailSent(t('profilePage.passwordChange.heading'))
-    ) : (
-      <>
-        <h3 className={classes.formTitle}>{t('profilePage.passwordChange.heading')}</h3>
-        <span className={classes.userActionsText}>{t('profilePage.passwordChange.text')}</span>
-        <Button
-          className={`${classes.button} ${classes.userActionsButton}`}
-          onClick={handlePasswordChange}
-          data-testid='passwordChangeBtn'
-        >
-          {t('profilePage.passwordChange.btnTitle')}
-        </Button>
-      </>
-    );
-
-  const confirmEmail = () =>
-    confirmationEmailSent ? (
-      emailSent(t('profilePage.emailConfirm.heading'))
-    ) : (
-      <>
-        <h3 className={classes.formTitle}>{t('profilePage.emailConfirm.heading')}</h3>
-        <TextField
-          data-cy='confirmEmail'
-          id='confirmEmail'
-          label={t('profilePage.labels.confirmEmail')}
-          className={classes.userActionsInput}
-          fullWidth
-          variant={TEXT_FIELD_VARIANT.OUTLINED}
-          color={MATERIAL_UI_COLOR.PRIMARY}
-          value={values.email}
-          name='confirmEmail'
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.confirmEmail && t(errors.confirmEmail)}
-          helperText={touched.confirmEmail && t(errors.confirmEmail)}
-        />
-        <span className={classes.userActionsText}>
-          {!confirmationEmailSent && t('profilePage.emailConfirm.text')}
-        </span>
-        <Button
-          className={`${classes.button} ${classes.userActionsButton}`}
-          onClick={handleConfirmation}
-          data-testid='emailConfirmBtn'
-        >
-          {t('profilePage.emailConfirm.btnTitle')}
-        </Button>
-      </>
-    );
-
   return (
-    <div className={classes.profileControl}>
-      <div className={classes.profileTitleInfo}>
-        <h2 className={classes.profileTitle}>{t('profilePage.titles.mainTitle')}</h2>
-        <div className={classes.titleLine} />
-      </div>
-      <div className={classes.profile}>
-        <div>
-          {userLoading ? (
-            <div className={classes.userForm}>
-              <Loader gridColumn='span 3' />
-            </div>
-          ) : (
-            <div className={classes.userFormControl}>
-              <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
-                <div className={classes.imageContainer}>
-                  {userImageUrl && (
-                    <img src={userImageUrl} alt='profile-logo' className={classes.userImage} />
-                  )}
-                  <input
-                    type='file'
-                    className={classes.photoUpload}
-                    id='photoUpload'
-                    onChange={handleImageLoad}
-                    multiple
-                    accept='image/*'
-                    data-testid='imageInput'
-                  />
-                  <label
-                    htmlFor='photoUpload'
-                    className={`${classes.imageContainerLabel} ${handleLableClass()}`}
-                  >
-                    <Button component='span' className={classes.uploadBtn}>
-                      <CameraIcon className={classes.cameraIcon} />
-                    </Button>
-                  </label>
-                </div>
-                <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
-                {getTextFields(PROFILE_USER_CONTACT_DATA)}
-                <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>
-                {getTextFields(PROFILE_USER_ADDRESS_DATA)}
-                <Button
-                  fullWidth
-                  className={`${classes.button} ${classes.saveBtn}`}
-                  type='submit'
-                  onClick={() => setShouldValidate(true)}
-                  data-testid='submitBtn'
-                >
-                  {t('profilePage.labels.saveBtnTitle')}
-                </Button>
-              </form>
-            </div>
-          )}
-        </div>
-        <div className={classes.userActions}>
-          <div className={classes.newPassword}>
-            {recoveryLoading ? <Loader /> : passwordChange()}
+    <div className={classes.profile}>
+      <div>
+        {userLoading ? (
+          <div className={classes.userForm}>
+            <Loader gridColumn='span 3' />
           </div>
-          {!userData.confirmed && (
-            <div className={classes.confirmUser}>
-              {confirmationLoading ? <Loader /> : confirmEmail()}
+        ) : (
+          <form onSubmit={handleSubmit} className={classes.userForm}>
+            <div className={classes.imageContainer}>
+              <img
+                src={handleProfileImg(userImageUrl)}
+                alt='profile-logo'
+                className={classes.userImage}
+                onError={handleImageError}
+              />
+              <input
+                type='file'
+                className={classes.photoUpload}
+                id='photoUpload'
+                onChange={handleImageLoad}
+                multiple
+                accept='image/*'
+              />
+              <label htmlFor='photoUpload' className={classes.uploadLabel}>
+                <Button component='span' className={classes.uploadBtn}>
+                  {PROFILE_LABELS[language].addPhoto}
+                </Button>
+              </label>
             </div>
+            {Object.keys(PROFILE_USER_DATA).map((name) => (
+              <TextField
+                key={name}
+                type='text'
+                name={name}
+                value={handleText(values, name)}
+                label={PROFILE_LABELS[language][name]}
+                fullWidth
+                color={MATERIAL_UI_COLOR.PRIMARY}
+                error={!!errors[name]}
+                helperText={handleText(errors, name)}
+                className={handleClassName(
+                  classes.dataInput,
+                  classes.nameInputs,
+                  classes.afterText,
+                  name
+                )}
+                onChange={handleChange}
+              />
+            ))}
+            {dirty && (
+              <Button
+                fullWidth
+                className={`${classes.button} ${classes.saveBtn}`}
+                type='submit'
+                onClick={() => setShouldValidate(true)}
+              >
+                {PROFILE_LABELS[language].saveBtnTitle}
+              </Button>
+            )}
+          </form>
+        )}
+      </div>
+      <div className={classes.userActions}>
+        <div className={classes.newPassword}>
+          {recoveryLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <h2>{PROFILE_PASSWORD_CHANGE[language].heading}</h2>
+              <span className={classes.recoverPasswordText}>
+                {!userRecovered && PROFILE_PASSWORD_CHANGE[language].text}
+              </span>
+              {handleProfilePage(
+                userRecovered,
+                PROFILE_PASSWORD_CHANGE,
+                language,
+                handlePasswordChange,
+                classes.button
+              )}
+            </>
           )}
         </div>
+        {!userData.confirmed && (
+          <div className={classes.confirmUser}>
+            {confirmationLoading ? (
+              <Loader />
+            ) : (
+              <>
+                <h2>{PROFILE_EMAIL_CONFIRM[language].heading}</h2>
+                {handleProfilePage(
+                  confirmationEmailSent,
+                  PROFILE_EMAIL_CONFIRM,
+                  language,
+                  handleConfirmation,
+                  classes.button
+                )}
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

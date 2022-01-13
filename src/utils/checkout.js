@@ -1,23 +1,24 @@
 import PropTypes from 'prop-types';
-import i18next from 'i18next';
-import {
-  COURIER,
-  DEFAULT_CURRENCY,
-  deliveryTypes,
-  MATERIAL_UI_COLOR,
-  SESSION_STORAGE
-} from '../configs';
-import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
-import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
-export const stateInitialValues = {
+import {
+  CHECKOUT_BUTTON,
+  CHECKOUT_INPUT_FIELD,
+  CHECKOUT_PAYMENT,
+  CHECKOUT_TEXT_FIELDS,
+  CHECKOUT_TITLES
+} from '../translations/checkout.translations';
+import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
+import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
+import { COURIER } from '../const/checkout';
+import { MATERIAL_UI_COLOR } from '../const/material-ui';
+
+export const initialValues = {
   firstName: '',
   lastName: '',
   email: '',
   phoneNumber: '',
   paymentMethod: '',
   userComment: '',
-  courierOrganization: '',
   courierOffice: '',
   city: '',
   street: '',
@@ -47,7 +48,6 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
-    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -63,7 +63,6 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
-    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -79,7 +78,6 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
-    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -105,15 +103,14 @@ const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
     product: item.product?._id,
     quantity: item.quantity,
-    isFromConstructor: item.product.isFromConstructor,
-    price: item.product.isFromConstructor ? item.options.price : item.price,
-
+    isFromConstructor: !item.product._id,
+    price: item.price,
     options: {
       size: item.options.size._id
     }
   }));
 
-export const orderInputData = (data, deliveryType, cartItems) => ({
+export const orderInputData = (data, deliveryType, cartItems, language) => ({
   recipient: {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -139,65 +136,82 @@ export const orderInputData = (data, deliveryType, cartItems) => ({
   },
   items: productItemsInput(cartItems),
   paymentMethod:
-    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash,
+    data.paymentMethod === CHECKOUT_PAYMENT[language].card
+      ? CHECKOUT_PAYMENT[1].card.toUpperCase()
+      : CHECKOUT_PAYMENT[1].cash.toUpperCase(),
   userComment: data.userComment
 });
 
-export const checkoutFormBtnValue = (values) =>
-  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash
-    ? i18next.t(`checkout.confirmOrder`)
-    : i18next.t(`checkout.payOrder`);
+export const checkoutFormBtnValue = (values, language) =>
+  values.paymentMethod === '' || values.paymentMethod === CHECKOUT_PAYMENT[language].cash
+    ? CHECKOUT_BUTTON[language].confirmOrder
+    : CHECKOUT_BUTTON[language].payOrder;
 
-export const courierInputLabels = () => [
+export const courierInputLabels = (language) => [
   {
-    name: 'house',
-    label: i18next.t(`checkout.checkoutTextFields.house`)
+    name: CHECKOUT_INPUT_FIELD.city,
+    label: CHECKOUT_TEXT_FIELDS[language].city
   },
   {
-    name: 'flat',
-    label: i18next.t(`checkout.checkoutTextFields.flat`)
+    name: CHECKOUT_INPUT_FIELD.street,
+    label: CHECKOUT_TEXT_FIELDS[language].street
+  },
+  {
+    name: CHECKOUT_INPUT_FIELD.house,
+    label: CHECKOUT_TEXT_FIELDS[language].house
+  },
+  {
+    name: CHECKOUT_INPUT_FIELD.flat,
+    label: CHECKOUT_TEXT_FIELDS[language].flat
   }
 ];
 
-export const userNameInputLabels = () => [
+export const userNameInputLabels = (language) => [
   {
-    name: 'firstName',
-    label: i18next.t(`checkout.checkoutTextFields.firstName`)
+    name: CHECKOUT_INPUT_FIELD.firstName,
+    label: CHECKOUT_TEXT_FIELDS[language].firstName
   },
   {
-    name: 'lastName',
-    label: i18next.t(`checkout.checkoutTextFields.lastName`)
+    name: CHECKOUT_INPUT_FIELD.lastName,
+    label: CHECKOUT_TEXT_FIELDS[language].lastName
   }
 ];
 
-export const userContactInputLabels = () => [
+export const userContactInputLabels = (language) => [
   {
-    name: 'email',
-    label: i18next.t(`checkout.checkoutTextFields.email`)
+    name: CHECKOUT_INPUT_FIELD.email,
+    label: CHECKOUT_TEXT_FIELDS[language].email
   },
   {
-    name: 'phoneNumber',
-    label: i18next.t(`checkout.checkoutTextFields.contactPhoneNumber`)
+    name: CHECKOUT_INPUT_FIELD.phoneNumber,
+    label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber
   }
 ];
 
 export const POSTOMAT = 'Поштомат';
 export const POST_OFFICE_NUMBER = 'Відділення № ';
 
-export const getCurrentCurrency = (currency) =>
-  currency === DEFAULT_CURRENCY
-    ? i18next.t(`checkout.checkoutTitles.UAH`)
-    : i18next.t(`checkout.checkoutTitles.USD`);
+export const getCurrentCurrency = (currency, language = 1) =>
+  currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;
 
-export const updateInitialValues = (data) => {
-  const { firstName, lastName, email, phoneNumber } = data;
-  return {
-    ...stateInitialValues,
-    firstName: firstName || '',
-    lastName: lastName || '',
-    email: email || '',
-    phoneNumber: phoneNumber || ''
-  };
+export const setUserValues = (values, userData, deliveryType) => {
+  const { firstName, lastName, email, phoneNumber } = userData;
+  const result = { ...values, firstName, lastName, email, phoneNumber };
+  if (
+    (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+      deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
+    userData.address
+  ) {
+    const { city, street, buildingNumber: house, appartment: flat } = userData.address;
+    return {
+      ...result,
+      city,
+      street,
+      house,
+      flat
+    };
+  }
+  return result;
 };
 
 export const setDeliveryTypeToStorage = (deliveryType) => {

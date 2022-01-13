@@ -3,7 +3,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import { useSelector } from 'react-redux';
-import { selectToastSettings } from '../../utils/multiple.selectors';
+import { selectToastSettings } from '../../redux/selectors/multiple.selectors';
 
 const Toast = () => {
   const toastSettings = useSelector(selectToastSettings);

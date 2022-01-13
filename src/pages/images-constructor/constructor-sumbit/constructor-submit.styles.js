@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   heart: {
-    display: 'none',
     fontSize: '2.5rem',
     color: '#ed0505',
     '&:hover': {
@@ -35,19 +34,15 @@ export const useStyles = makeStyles((theme) => ({
   submitButton: {
     padding: '0.4rem 0.9rem',
     minWidth: '6rem',
-    width: '100%',
-    height: '56px',
-    textTransform: 'uppercase',
+    width: '40%',
+    textTransform: 'none',
     textAlign: 'center',
     fontSize: '1rem',
-    backgroundColor: theme.palette.textColor,
-    color: theme.palette.backgroundColor,
-    margin: '14px 0 18px 0',
-    borderRadius: '4px',
-    fontWeight: '600',
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    color: theme.palette.button.normal.color,
     '&:hover': {
-      backgroundColor: theme.palette.textColor,
-      color: theme.palette.backgroundColor
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
     },
     '@media (max-width: 600px)': {
       padding: '0.2rem 0.6rem',
@@ -58,19 +53,10 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: '10px'
     }
   },
-  buttonStyle: {
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: theme.textColor,
-    background: theme.backgroundColor,
-    color: theme.textColor,
-    height: '56px',
-    borderRadius: '4px',
-    fontWeight: '600'
-  },
   submitContainer: {
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     '@media (max-width: 1200px)': {
       flexDirection: 'column-reverse'
     }

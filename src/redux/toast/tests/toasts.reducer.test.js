@@ -1,5 +1,6 @@
 import { setToastSettings } from '../toast.actions';
 import { newToastSettings } from './toasts.variables';
+// eslint-disable-next-line import/named
 import { initialState, toastReducer } from '../toast.reducer';
 
 describe('toasts reducer tests', () => {

@@ -20,35 +20,28 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper
   },
-  itemHighlighting: {
-    width: '100%',
-    marginTop: '3%',
-    borderBottom: '2px solid gray'
-  },
+
   list: {
-    margin: '10px 0 0 0',
-    listStyle: 'none'
+    margin: '10px'
   },
   nested: {
+    marginLeft: theme.spacing(3),
     '&:hover': {
       background: 'none'
     },
     '& span': {
       textTransform: 'uppercase',
-      fontSize: '14px'
-    },
-    '& a': {
-      color: 'inherit'
+      fontSize: '1.2em'
     },
     '&:before': {
-      content: "'◆'",
-      fontSize: '1.2rem',
+      content: `''`,
       display: 'block',
-      color: '#3F51B5',
-      width: 15,
-      height: 27,
+      width: 10,
+      height: 10,
       position: 'relative',
-      bottom: '1px',
+      top: '50%',
+      background: '#000',
+      borderRadius: '50%',
       marginRight: 10,
       opacity: 0,
       transition: 'opacity .2s ease'

@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
     minHeight: '150px',
     overflowY: 'auto',
     position: 'absolute',
-    top: 71,
+    top: 64,
     right: 0,
     backgroundColor: 'white',
     zIndex: 10000
@@ -17,8 +17,6 @@ export const useStyles = makeStyles(() => ({
     position: 'absolute',
     left: '50%',
     top: '50%',
-    color: 'black',
-    transform: 'translate(-50%, -50%)',
-    fontSize: 15
+    transform: 'translate(-50%, -50%)'
   }
 }));

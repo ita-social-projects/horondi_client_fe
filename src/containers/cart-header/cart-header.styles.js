@@ -3,24 +3,23 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   root: ({ fromSideBar }) => ({
     color: fromSideBar ? '#000' : '#fff',
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    transition: 'background-color 0.5s linear',
+    borderRadius: 0,
+    height: 33,
     '&:hover': {
-      backgroundColor: '#242424',
-      color: '#fff'
-    },
-    '& .MuiBadge-badge': {
-      color: '#fff',
-      backgroundColor: '#F44336'
-    },
-    '@media (max-width: 900px)': {
-      marginRight: '10px'
+      backgroundColor: fromSideBar ? '#000' : '#fff',
+      color: fromSideBar ? '#fff' : '#000'
     }
   }),
-  svg: {
-    width: '24px',
-    height: '24px'
+  cartIconWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '45px',
+    '@media (max-width: 768px)': {
+      '& .MuiBadge-badge': {
+        minWidth: '15px',
+        height: '15px',
+        width: '15px'
+      }
+    }
   }
 }));

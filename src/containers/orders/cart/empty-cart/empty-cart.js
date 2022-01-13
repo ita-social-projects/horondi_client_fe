@@ -1,10 +1,18 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import EmptyOrder from '../../order/empty-order';
+import { CART_BUTTON_TITLES, CART_TITLES } from '../../../../translations/cart.translations';
 
 const EmptyCart = () => {
-  const { t } = useTranslation();
-  return <EmptyOrder title={t('cart.emptyCart')} buttonTitle={t('cart.empty')} name='empty-cart' />;
+  const language = useSelector(({ Language }) => Language.language);
+
+  return (
+    <EmptyOrder
+      title={CART_TITLES[language].empty}
+      buttonTitle={CART_BUTTON_TITLES[language].empty}
+      name='empty-cart'
+    />
+  );
 };
 
 export default EmptyCart;

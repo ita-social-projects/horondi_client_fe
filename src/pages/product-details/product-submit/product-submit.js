@@ -1,80 +1,109 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
+
 import Tooltip from '@material-ui/core/Tooltip';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
-import { TOAST_SETTINGS } from '../constants';
-import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
+
+import { toastSettings } from '../../../configs/index';
+
+import { selectLanguageProductsUserWishlist } from '../../../redux/selectors/multiple.selectors';
+
+import {
+  addItemToWishlist,
+  removeItemFromWishlist
+} from '../../../redux/wishlist/wishlist.actions';
 import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
-import routes from '../../../configs/routes';
-import { useCart } from '../../../hooks/use-cart';
+
+import { PDP_BUTTONS, TOOLTIPS } from '../../../translations/product-details.translations';
+
+import { TOAST_MESSAGE } from '../../../translations/toast.translations';
+import routes from '../../../const/routes';
 
 const { pathToCart } = routes;
 
-const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, sizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
-  const { cartOperations, isInCart } = useCart(userData);
+  const { language, productToSend, product, wishlistItems, userData, cartList } = useSelector(
+    selectLanguageProductsUserWishlist
+  );
 
-  const { t } = useTranslation();
+  const isWishful = useMemo(
+    () => wishlistItems.find((item) => product._id === item._id),
+    [product?._id, wishlistItems]
+  );
 
-  const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
+  const isItemInCart = useMemo(
+    () =>
+      cartList.find(
+        (item) =>
+          productToSend.product._id === item.product._id &&
+          productToSend.options.size._id === item.options.size._id
+      ),
+    [productToSend?.product?._id, productToSend?.options?.size?._id, cartList]
+  );
 
-  const { addToCart } = cartOperations;
+  const wishlistTip = isWishful ? TOOLTIPS[language].removeWishful : TOOLTIPS[language].addWishful;
 
-  const cartTootipTitle = () => {
-    if (disabled) return t('product.sizeNotAvailable');
-    return isItemInCart
-      ? t('product.tooltips.itemInCart')
-      : t('product.tooltips.itemInCartAlready');
-  };
+  const cartTootipTitle = isItemInCart
+    ? TOOLTIPS[language].itemInCart
+    : TOOLTIPS[language].itemInCartAlready;
 
   const cartButtonLabel = isItemInCart
-    ? t('product.pdpButtons.inCart')
-    : t('product.pdpButtons.cartButton');
+    ? PDP_BUTTONS[language].inCart
+    : PDP_BUTTONS[language].cartButton;
+
+  const buttonStyle = isItemInCart ? styles.unavailableButton : styles.submitButton;
+
+  const toastMessages = TOAST_MESSAGE[language];
+
+  const onWishfulHandler = () => {
+    const {
+      _id,
+      name,
+      basePrice,
+      images: { primary }
+    } = product;
+
+    if (isWishful) {
+      dispatch(removeItemFromWishlist(_id));
+      dispatch(setToastMessage(toastMessages.removedFromWishList));
+      dispatch(setToastSettings(toastSettings));
+    } else {
+      dispatch(addItemToWishlist({ _id, name, basePrice, sizes, images: { primary } }));
+      dispatch(setToastMessage(toastMessages.addedToWishList));
+      dispatch(setToastSettings(toastSettings));
+    }
+  };
 
   const onAddToCart = () => {
     if (isItemInCart) {
       return;
     }
     if (product) {
-      const sizeAndPrice = product.sizes.find(
-        (size) => size.size._id === productToSend.options.size._id && size
-      );
-      const newCart = {
-        id: Date.now(),
-        productId: productToSend.product._id,
-        sizeAndPrice,
-        quantity: 1,
-        constructor: false
-      };
-
       if (userData) {
         const newCartItemWithUserId = {
           userId: userData._id,
           cartItem: productToSend
         };
-
         dispatch(addProductToUserCart(newCartItemWithUserId));
       } else {
         dispatch(addItemToCart(productToSend));
       }
-
-      addToCart(newCart);
-
-      dispatch(setToastMessage(t('product.toastMessage.addedToCard')));
-      dispatch(setToastSettings(TOAST_SETTINGS));
+      dispatch(setToastMessage(toastMessages.addedToCard));
+      dispatch(setToastSettings(toastSettings));
     } else {
       setSizeIsNotSelectedError(true);
     }
   };
 
   const goToCheckout = () => {
-    new Promise((resolve) => resolve()).then(() => dispatch(push(pathToCart)));
+    dispatch(push(pathToCart));
   };
 
   const onAddToCheckout = () => {
@@ -90,17 +119,27 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
 
   return (
     <div className={styles.submit}>
-      <Button disabled={disabled} className={styles.submitButton} onClick={onAddToCheckout}>
-        {t('product.pdpButtons.buyButton').toLocaleUpperCase()}
-      </Button>
-      <Tooltip title={cartTootipTitle()} placement='bottom'>
-        <div>
-          <Button disabled={disabled} className={styles.toCart} onClick={cartButtonFunc}>
-            {cartButtonLabel.toLocaleUpperCase()}
-          </Button>
-        </div>
+      <Tooltip title={wishlistTip} placement='bottom'>
+        {isWishful ? (
+          <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={onWishfulHandler} />
+        ) : (
+          <FavouriteBorderIcon
+            data-cy='not-wishful'
+            className={styles.heart}
+            onClick={onWishfulHandler}
+          />
+        )}
       </Tooltip>
+      <Tooltip title={cartTootipTitle} placement='bottom'>
+        <Button className={buttonStyle} onClick={cartButtonFunc}>
+          {cartButtonLabel}
+        </Button>
+      </Tooltip>
+      <Button className={styles.submitButton} onClick={onAddToCheckout}>
+        {PDP_BUTTONS[language].buyButton}
+      </Button>
     </div>
   );
 };
+
 export default ProductSubmit;

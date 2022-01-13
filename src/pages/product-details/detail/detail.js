@@ -7,7 +7,6 @@ const Detail = ({ subtitle, description }) => {
   return (
     <div>
       <span className={styles.subtitle}>{subtitle}</span>
-      {typeof description !== 'object' ? <span>{' - '}</span> : ''}
       <span className={styles.description}>{description}</span>
     </div>
   );

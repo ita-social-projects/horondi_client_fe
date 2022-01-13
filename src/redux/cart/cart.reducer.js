@@ -1,5 +1,6 @@
 import {
   SET_CART,
+  SET_DELIVERY_TYPE,
   SET_CART_LOADING,
   SET_CART_QUANTITY_LOADER,
   SET_CART_ERROR,
@@ -11,6 +12,7 @@ const initialState = {
   list: [],
   loading: false,
   quantityLoading: false,
+  deliveryType: '',
   totalPrice: null,
   error: null
 };
@@ -39,6 +41,12 @@ export const cartReducer = (state = initialState, { type, payload } = {}) => {
       return {
         ...state,
         error: payload
+      };
+    }
+    case SET_DELIVERY_TYPE: {
+      return {
+        ...state,
+        deliveryType: payload
       };
     }
     case SET_CART_TOTAL_PRICE: {

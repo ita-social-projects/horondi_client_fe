@@ -1,21 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { useStyles } from './wishlist.styles';
 import FilledWishlist from './filled-wishlist';
-import useWishlistLoader from '../../hooks/use-wishlist-loader';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import ToastContainer from '../../containers/toast';
+import EmptyWishlist from './empty-wishlist';
+import { selectWishListList } from '../../redux/wishlist/wishlist.reducer';
 
 const Wishlist = () => {
+  const wishlistItems = useSelector(selectWishListList);
   const styles = useStyles();
-  const { loading, error, wishlist } = useWishlistLoader();
-
-  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.root}>
-      <FilledWishlist items={wishlist.products} />
-      <ToastContainer />
+      {wishlistItems.length ? <FilledWishlist items={wishlistItems} /> : <EmptyWishlist />}
     </div>
   );
 };

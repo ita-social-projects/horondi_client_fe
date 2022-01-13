@@ -1,9 +1,0 @@
-{
-  "modalDeleteAllMessage": "Remove all items from the cart?",
-  "modalDeleteItemMessage": "Remove item from the cart?",
-  "modalDeleteFromWishlistMessage": "Do you realy want to delete ",
-  "modalButtons": {
-    "confirm": "Delete",
-    "camcel": "Cancel"
-  }
-}

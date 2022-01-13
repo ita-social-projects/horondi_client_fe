@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
-import { useTheme } from '@material-ui/styles';
-import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './search-bar-list-item.styles';
 import { getImage } from '../../../utils/imageLoad';
@@ -11,22 +9,21 @@ import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
-import routes from '../../../configs/routes';
+import { HOME_BUTTONS } from '../../../translations/homepage.translations';
+import routes from '../../../const/routes';
 
 const { pathToProducts } = routes;
 
 const SearchBarListItem = ({ product }) => {
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
+  const { language, currency, isLightTheme } = useSelector(({ Language, Currency, Theme }) => ({
+    language: Language.language,
+    currency: Currency.currency,
+    isLightTheme: Theme.lightMode
   }));
-  const { t } = useTranslation();
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
   const dispatch = useDispatch();
-  const styles = useStyles({ image });
-  const { palette } = useTheme();
-
-  const isLightTheme = palette.type === 'light';
+  const styles = useStyles({ image, isLightTheme });
 
   useEffect(() => {
     getImage(product.images.primary.small)
@@ -38,19 +35,18 @@ const SearchBarListItem = ({ product }) => {
 
   return (
     <div className={styles.searchBarListItem}>
-      <div data-testid='image' className={styles.image} style={{ backgroundSize: 'cover' }} />
+      <div className={styles.image} style={{ backgroundSize: 'cover' }} />
       <div className={styles.content}>
         <div className={styles.title}>
-          <Typography variant='h4'>{t(`${product.translationsKey}.name`)}</Typography>
+          <Typography variant='h4'>{product.name[language].value}</Typography>
           <div>
-            {Math.min(...product.sizes.map((size) => size.price[currency].value))}{' '}
-            {product.basePrice[currency].currency}
+            {product.basePrice[currency].value / 100} {product.basePrice[currency].currency}
           </div>
         </div>
         <div className={styles.buttons}>
           <ClassicButton
             buttonType='button'
-            innerText={t('common.details')}
+            innerText={HOME_BUTTONS[language].DETAILS}
             onClickHandler={() => dispatch(push(`${pathToProducts}/${product._id}`))}
             buttonStyle='classic'
           />

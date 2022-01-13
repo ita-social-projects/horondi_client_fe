@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { useTheme } from '@material-ui/styles';
 import { push } from 'connected-react-router';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { useStyles } from './error-page.styles';
 import { ERROR_PAGE_IMAGES } from '../../configs';
-import * as errorPage from '../../locales/en/errorPage.json';
+import { ERROR_PAGE_MESSAGE, LINK_TO_HOMEPAGE } from '../../translations/errorpage.translations';
 
 const ErrorPage = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
 
-  const { errorMessage } = useSelector(({ Error }) => ({
+  const { language, isLightTheme, errorMessage } = useSelector(({ Language, Theme, Error }) => ({
+    language: Language.language,
+    isLightTheme: Theme.lightMode,
     errorMessage: Error.error
   }));
 
@@ -24,9 +24,6 @@ const ErrorPage = () => {
   }, [dispatch, errorMessage]);
 
   const styles = useStyles();
-  const { palette } = useTheme();
-
-  const isLightTheme = palette.type === 'light';
 
   const errorImagePath = isLightTheme ? ERROR_PAGE_IMAGES.light : ERROR_PAGE_IMAGES.dark;
 
@@ -36,17 +33,16 @@ const ErrorPage = () => {
         <img
           className={styles.errorImage}
           src={errorImagePath}
-          alt={t('errorPage.pageMessage.DEFAULT_ERROR')}
+          alt={ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
         />
         <div className={styles.info}>
           <h2>
-            {errorMessage && errorPage.pageMessage[errorMessage.error]
-              ? t(`errorPage.pageMessage.${errorMessage.error}`)
-              : t('errorPage.pageMessage.DEFAULT_ERROR')}
+            {errorMessage && ERROR_PAGE_MESSAGE[errorMessage]
+              ? ERROR_PAGE_MESSAGE[errorMessage][language].value
+              : ERROR_PAGE_MESSAGE.DEFAULT_ERROR[language].value}
           </h2>
-
           <Link to='/' onClick={() => window.location.reload()}>
-            <Button variant='contained'>{t('errorPage.linkToHomePage')}</Button>
+            <Button variant='contained'>{LINK_TO_HOMEPAGE[language].value}</Button>
           </Link>
         </div>
       </div>

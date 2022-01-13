@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Card, Tooltip } from '@material-ui/core';
-import { useQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
+import { Backdrop, Card, Tooltip } from '@material-ui/core';
+
+import { IMG_URL } from '../../configs/index';
 import { useStyles } from './contacts.styles';
-import { GOOGLE_MAP_URL } from './constants';
-import { getContacts } from './operations/contacts.queries';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import email from '../../images/footer-icons/email.svg';
-import phone from '../../images/footer-icons/phone.svg';
-import location from '../../images/footer-icons/location.svg';
-import clock from '../../images/contacts-icons/clock.svg';
+import Loader from '../../components/loader';
+import { CONTACTS_PAGE_TITLES } from '../../translations/contacts.translations';
+import { selectLanguageAndContactsLoadingContacts } from '../../redux/selectors/multiple.selectors';
 
 const Contacts = ({ fromCheckout }) => {
-  const styles = useStyles();
-  const { t } = useTranslation();
-
   const [imageStatus, setImageStatus] = useState(true);
   const [imageVisibility, setImageVisibility] = useState(false);
 
-  const { loading, error, data } = useQuery(getContacts, {});
-
-  if (loading || error) return errorOrLoadingHandler(error, loading);
-
-  const contacts = data.getContacts.items;
+  const { contacts, loading, language } = useSelector(selectLanguageAndContactsLoadingContacts);
+  const styles = useStyles();
+  if (loading) {
+    return (
+      <Backdrop className={styles.backdrop} open={loading} invisible>
+        <Loader color='inherit' />
+      </Backdrop>
+    );
+  }
 
   const onLoadImageError = () => {
     setImageStatus(false);
@@ -33,53 +31,55 @@ const Contacts = ({ fromCheckout }) => {
   };
 
   const cardVisibilityStyles = imageStatus && imageVisibility;
+
   const contactsDisplay = contacts.map((contact) => (
-    <div key={contact._id} className={styles.content}>
-      <Tooltip title={t('contacts.pageTitles.showOnGoogleMaps')}>
-        <Card className={!cardVisibilityStyles && styles.mapImageInactive}>
-          <a
-            target='_blank'
-            rel='noopener noreferrer'
-            href={`${GOOGLE_MAP_URL}${contact.link.lat},${contact.link.lon}`}
-            className={styles.link}
-          >
-            <img
-              className={styles.mapImage}
-              onError={onLoadImageError}
-              onLoad={onImageLoad}
-              src={`https://maps.locationiq.com/v3/staticmap?key=pk.d250de696729be2d1744cbfc919a178d&center=${contact.link.lat},${contact.link.lon}&size=500x400&zoom=16&markers=icon:small-black-cutout|${contact.link.lat},${contact.link.lon}`}
-              alt={t('contacts.pageTitles.location')}
-            />
-          </a>
-        </Card>
-      </Tooltip>
-      <div className={styles.contacts}>
-        <div className={styles.contactsItem}>
-          <img className={styles.icon} src={phone} alt='phone' />
-          <a href={`tel:${contact.phoneNumber}`} className={styles.clickedLink}>
-            <span>{contact.phoneNumber}</span>
-          </a>
+    <div key={contact._id} className={styles.wrapper}>
+      <div className={styles.content}>
+        <div className={styles.mapContainer}>
+          <Tooltip title={CONTACTS_PAGE_TITLES[language].showOnGoogleMaps}>
+            <Card className={!cardVisibilityStyles && styles.mapImageInactive}>
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href={contact.link}
+                className={styles.link}
+              >
+                <img
+                  className={styles.mapImage}
+                  onError={onLoadImageError}
+                  onLoad={onImageLoad}
+                  src={`${IMG_URL}${contact.images[language].value.medium}`}
+                  alt={CONTACTS_PAGE_TITLES[language].location}
+                />
+              </a>
+            </Card>
+          </Tooltip>
         </div>
-        <div className={styles.contactsItem}>
-          <img className={styles.icon} src={email} alt='email' />
-          <a href={`mailto:${contact.email}`} className={styles.clickedLink}>
+        <div className={styles.contacts}>
+          <div className={styles.contactsItem}>
+            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].phone}</span>
+            <span>+{contact.phoneNumber}</span>
+          </div>
+          <div className={styles.contactsItem}>
+            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].schedule}</span>
+            <div className={styles.schedule}>
+              {contact.openHours[language].value.split('|').map((el) => {
+                const i = language ? 4 : 3;
+                return (
+                  <div key={el}>
+                    <span className={styles.day}>{el.slice(i - (language ? 4 : 3))}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.contactsItem}>
+            <span className={styles.contactName}>{CONTACTS_PAGE_TITLES[language].address}</span>
+            <div className={styles.contactAddress}>{contact.address[language].value}</div>
+          </div>
+          <div className={styles.contactsItem}>
+            <span className={styles.contactName}>Email:</span>
             <span>{contact.email}</span>
-          </a>
-        </div>
-        <div className={styles.contactsItem}>
-          <img className={styles.icon} src={location} alt='location' />
-          <div>{t(`${contact.translationsKey}.address`)}</div>
-        </div>
-        <div className={styles.contactsItem}>
-          <img className={styles.icon} src={clock} alt='clock' />
-          <div className={styles.schedule}>
-            {t(`${contact.translationsKey}.openHours`)
-              .split('|')
-              .map((el) => (
-                <div key={el}>
-                  <span className={styles.day}>{el}</span>
-                </div>
-              ))}
           </div>
         </div>
       </div>
@@ -88,7 +88,9 @@ const Contacts = ({ fromCheckout }) => {
 
   return (
     <div className={styles.wrapper}>
-      {!fromCheckout && <h2 className={styles.contactsTitle}>{t('contacts.pageTitles.title')}</h2>}
+      {!fromCheckout && (
+        <h2 className={styles.contactsTitle}>{CONTACTS_PAGE_TITLES[language].title}</h2>
+      )}
       {contactsDisplay}
     </div>
   );

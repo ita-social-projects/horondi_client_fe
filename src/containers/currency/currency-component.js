@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MenuItem, Select } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import { useStyles } from './currency.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeCurrency } from '../../redux/currency/currency.actions';
-import { CURRENCIES_LIST, DEFAULT_CURRENCY } from '../../configs';
-import { HRYVNIA_UNICODE, DOLLAR_UNICODE } from './constants';
+import { CURRENCIES_LIST, DEFAULT_CURRENCY, hryvniaUnicode, dollarUnicode } from '../../configs';
+import Dropdown from '../../components/dropdown';
 
 const currencyInLocalStorage = getFromLocalStorage('currency') || DEFAULT_CURRENCY;
 
 const CurrencyComponent = ({ fromSideBar }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ fromSideBar });
+  const styles = useStyles();
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);
@@ -26,20 +26,19 @@ const CurrencyComponent = ({ fromSideBar }) => {
     }
   };
   const mappedCurrencies = CURRENCIES_LIST.map(({ currency: curr, value }) => (
-    <MenuItem data-cy={`currency${value + 1}`} key={value} value={value} className={styles.item}>
-      {curr === 'UAH' ? HRYVNIA_UNICODE : DOLLAR_UNICODE}
+    <MenuItem data-cy={`currency${value + 1}`} key={value} value={value}>
+      {curr === 'UAH' ? hryvniaUnicode : dollarUnicode}
     </MenuItem>
   ));
   return (
-    <div data-cy='currency' className={styles.root}>
-      <Select
-        labelId='demo-simple-select-label'
-        onChange={handleChange}
+    <div data-cy='currency ' className={styles.root}>
+      <Dropdown
+        mappedItems={mappedCurrencies}
+        handler={handleChange}
         defaultValue={currencyInLocalStorage}
         value={currency}
-      >
-        {mappedCurrencies}
-      </Select>
+        fromSideBar={fromSideBar}
+      />
     </div>
   );
 };

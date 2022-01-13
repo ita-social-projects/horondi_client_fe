@@ -1,21 +1,27 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect } from 'react';
 import { Button, ButtonGroup } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { useStyles } from './count-per-page.styles';
-import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
-import { ITEMS_PER_PAGE } from '../constants';
+import { setCountPerPage } from '../../../redux/products/products.actions';
+import { ITEMS_PER_PAGE, COUNT_PER_PAGE } from '../../../translations/product-list.translations';
+import { URL_QUERIES_NAME } from '../../../configs/index';
+import { TEXT_FIELD_VARIANT } from '../../../const/material-ui';
 
 const CountPerPage = () => {
-  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const styles = useStyles();
   const history = useHistory();
   const { search } = useLocation();
-
   const searchParams = new URLSearchParams(search);
   const { countPerPage, page, defaultPage } = URL_QUERIES_NAME;
-  const countPerPageText = t('productListPage.countPerPage');
-
+  const { language } = useSelector(({ Language }) => ({
+    language: Language.language
+  }));
+  const countPerPageText = COUNT_PER_PAGE[language].value;
+  useEffect(() => {
+    dispatch(setCountPerPage(+searchParams.get(countPerPage)));
+  }, [dispatch, searchParams.toString()]);
   const pickQuantity = (value) => {
     searchParams.set(page, defaultPage);
     searchParams.set(countPerPage, value);
@@ -37,7 +43,7 @@ const CountPerPage = () => {
     </Button>
   ));
   return (
-    <div className={styles.pageCounter}>
+    <div>
       {countPerPageText}
       <ButtonGroup className={styles.items}>{productsOnPage}</ButtonGroup>
     </div>

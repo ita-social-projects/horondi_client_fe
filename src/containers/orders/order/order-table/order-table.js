@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 
 import {
-  cleanUserCart,
+  CART_TABLE_FIELDS,
+  CART_TITLES,
+  CART_BUTTON_TITLES
+} from '../../../../translations/cart.translations';
+
+import {
+  MODAL_DELETE_ITEM_MESSAGE,
+  MODAL_DELETE_ALL_MESSAGE
+} from '../../../../translations/modal.translations';
+
+import {
   resetCart,
+  cleanUserCart,
   deleteProductFromUserCart,
   removeItemFromCart
 } from '../../../../redux/cart/cart.actions';
@@ -14,26 +25,27 @@ import {
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
-const OrderTable = ({ items, user, cartOperations }) => {
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+const OrderTable = ({ items, currency, calcPrice, user, cartLoading, cartQuantityLoading }) => {
+  const language = useSelector(({ Language }) => Language.language);
   const styles = useStyles();
   const dispatch = useDispatch();
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
-  const { removeFromCart } = cartOperations;
 
   const cartItems = items.map((item) => (
     <CartItem
-      key={item.id}
+      key={item.product.product_id}
       item={item}
+      calcPrice={calcPrice}
       language={language}
+      currency={currency}
       user={user}
+      cartLoading={cartLoading}
+      cartQuantityLoading={cartQuantityLoading}
       setModalVisibility={setRemoveOneModalVisibility}
       setModalItem={setModalItem}
-      cartOperations={cartOperations}
     />
   ));
 
@@ -55,20 +67,20 @@ const OrderTable = ({ items, user, cartOperations }) => {
       } else {
         dispatch(removeItemFromCart(modalItem));
       }
-      removeFromCart(modalItem);
     }
 
     setRemoveOneModalVisibility(false);
   };
 
   return (
-    <div className={styles.root}>
+    <>
       {modalVisibility && (
         <>
           <Modal
-            message={t('cart.deleteAllItems')}
+            message={MODAL_DELETE_ALL_MESSAGE[language]}
             isOpen={modalVisibility}
             onAction={onModalAction}
+            language={language}
             isCartModal
           />
         </>
@@ -76,34 +88,38 @@ const OrderTable = ({ items, user, cartOperations }) => {
       {removeOneModalVisibility && (
         <>
           <Modal
-            message={t('cart.deleteItem')}
+            message={MODAL_DELETE_ITEM_MESSAGE[language]}
             isOpen={removeOneModalVisibility}
             onAction={onRemoveOneModalAction}
+            language={language}
             isCartModal
           />
         </>
       )}
-      <h2 className={styles.titleWrapper}>{t('cart.titleFilled')} </h2>
-      <div className={styles.table}>
-        <Table>
-          <TableHead>
-            <TableRow
-              classes={{
-                root: styles.tableHeader
-              }}
-            >
-              <TableCell>{t('cart.product')}</TableCell>
-              <TableCell>{t('cart.size')}</TableCell>
-              <TableCell>{t('cart.price')}</TableCell>
-              <TableCell>{t('cart.quantity')}</TableCell>
-              <TableCell>{t('cart.toPay')}</TableCell>
-              <TableCell>{t('cart.actions')}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{cartItems}</TableBody>
-        </Table>
+      <div className={styles.titleWrapper}>
+        <h2>
+          {CART_TITLES[language].filled}{' '}
+          <span className={styles.quantity}>
+            ({items.length} {CART_TITLES[language].quantity})
+          </span>
+        </h2>
+        <span className={styles.cartButton} onClick={() => setModalVisibility(true)}>
+          {CART_BUTTON_TITLES[language].deleteAllCart}
+        </span>
       </div>
-    </div>
+      <Table>
+        <TableHead>
+          <TableRow classes={{ root: styles.tableHeader }}>
+            <TableCell>{CART_TABLE_FIELDS[language].photo}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].item}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].quantity}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].price}</TableCell>
+            <TableCell>{CART_TABLE_FIELDS[language].actions}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{cartItems}</TableBody>
+      </Table>
+    </>
   );
 };
 

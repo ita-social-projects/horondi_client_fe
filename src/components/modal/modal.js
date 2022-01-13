@@ -1,48 +1,43 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button, Modal as MuiModal } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import SimpleModal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 
+import Popper from '@material-ui/core/Popper';
+import { MODAL_BUTTONS } from '../../translations/modal.translations';
 import { useStyles } from './modal.styles';
 
 const Modal = ({
   message,
-  itemName = '',
+  itemName = [],
   onAction,
   isOpen,
+  language,
+  isCartModal = false,
   isEmpty = false,
   isFullscreen = false,
   content
 }) => {
   const [open, setOpen] = useState(isOpen);
-  const { t } = useTranslation();
   const styles = useStyles();
 
-  const handleClose = (action) => {
-    onAction(action);
+  const handleClose = (_, __, action) => {
+    action ? onAction(true) : onAction(false);
     setOpen(false);
   };
 
   const body = (
     <div className={styles.paper} data-cy='removing-modal'>
-      <div className={styles.header}>
-        <span>{t('common.modalHeader')}</span>
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => handleClose(false)}
-          alt='closeModalIcon'
-          data-testid='closeModalIcon'
-        />
-      </div>
       <p>
-        {message} {itemName}
+        {message}
+        <br />
+        {isCartModal ? null : <b>{itemName}</b>}
       </p>
       <div className={styles.buttonGroup}>
-        <Button onClick={() => handleClose(true)} variant='contained'>
-          {t('common.buttons.confirm')}
+        <Button onClick={handleClose} variant='contained'>
+          {MODAL_BUTTONS[language].cancel}
         </Button>
-        <Button onClick={() => handleClose(false)} variant='contained'>
-          {t('common.buttons.cancel')}
+        <Button onClick={() => handleClose(null, null, true)} variant='contained'>
+          {MODAL_BUTTONS[language].confirm}
         </Button>
       </div>
     </div>
@@ -53,8 +48,8 @@ const Modal = ({
       className={isFullscreen ? `${styles.paper} ${styles.fullscreen}` : styles.paper}
       data-cy='removing-modal'
     >
-      <Button onClick={() => handleClose(false)} variant='contained'>
-        {t('common.buttons.cancel')}
+      <Button onClick={handleClose} variant='contained'>
+        {MODAL_BUTTONS[language].cancel}
       </Button>
       {content}
     </div>
@@ -62,14 +57,14 @@ const Modal = ({
 
   return (
     <div>
-      <MuiModal
+      <Popper
         open={open}
-        onClose={() => handleClose(false)}
+        onClose={handleClose}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >
-        {isEmpty ? emptyBody : body}
-      </MuiModal>
+        <SimpleModal open={open}>{isEmpty ? emptyBody : body}</SimpleModal>
+      </Popper>
     </div>
   );
 };

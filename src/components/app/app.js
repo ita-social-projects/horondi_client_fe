@@ -1,59 +1,63 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
-import useTranslationsLoad from '../../hooks/use-translations-load';
-
-import ThemeContext from '../../context/theme-context';
-import CategoriesContextProvider from '../../context/categories/categories-context';
+import { getBurgerMenuLinks } from '../../redux/burger-menu/burger-menu.actions';
 import Routes from '../../routes';
 import Chat from '../../containers/chat';
+import SearchBarList from '../../containers/search-bar-list';
 import { theme } from './app-theme/app.theme';
 import { LIGHT_THEME } from '../../configs';
 import { useStyles } from './app.styles';
 import { getFromLocalStorage } from '../../services/local-storage.service';
+import { setThemeMode } from '../../redux/theme/theme.actions';
+import { getCategories } from '../../redux/categories/categories.actions';
 import { preserveUser } from '../../redux/user/user.actions';
-import { selectLocation } from '../../utils/multiple.selectors';
-import { SnackBarContextProvider } from '../../context/snackbar-context';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import {
+  getAllFilters,
+  setCountPerPage,
+  getFiltredProducts
+} from '../../redux/products/products.actions';
+import { getContacts } from '../../redux/contacts/contacts.actions';
+import { selectLightModeAndLocation } from '../../redux/selectors/multiple.selectors';
 
 const App = () => {
-  const [appTheme, setAppTheme] = useState(true);
-  const { location } = useSelector(selectLocation);
+  const { lightMode, location } = useSelector(selectLightModeAndLocation);
   const dispatch = useDispatch();
   const styles = useStyles({ isHome: location === '/' });
-  const isLoading = useTranslationsLoad();
 
   let localStorageThemeMode = getFromLocalStorage('theme');
   const themeMode = localStorageThemeMode === LIGHT_THEME;
   if (!localStorageThemeMode) {
     localStorageThemeMode = LIGHT_THEME;
   }
+  const themeValue = theme(localStorageThemeMode);
+  const productsCount = getFromLocalStorage('countPerPage');
 
   useEffect(() => {
     dispatch(preserveUser());
-  }, [dispatch]);
-
-  const themeValue = theme(localStorageThemeMode);
+    dispatch(getBurgerMenuLinks());
+    dispatch(getCategories());
+    dispatch(getContacts());
+    dispatch(getAllFilters());
+    dispatch(getFiltredProducts({}));
+  }, []);
 
   useEffect(() => {
-    setAppTheme(themeMode);
-  }, [themeMode]);
+    dispatch(setCountPerPage(productsCount));
+  }, [dispatch, productsCount]);
 
-  if (isLoading) return errorOrLoadingHandler(null, isLoading);
+  useEffect(() => {
+    dispatch(setThemeMode(themeMode));
+  }, [lightMode, dispatch, themeMode]);
 
   return (
     <div className={styles.mainBar}>
       <ThemeProvider theme={themeValue}>
-        <ThemeContext.Provider value={[appTheme, setAppTheme]}>
-          <CategoriesContextProvider>
-            <SnackBarContextProvider>
-              <CssBaseline />
-              <Routes />
-              <Chat />
-            </SnackBarContextProvider>
-          </CategoriesContextProvider>
-        </ThemeContext.Provider>
+        <CssBaseline />
+        <Routes />
+        <Chat />
+        <SearchBarList />
       </ThemeProvider>
     </div>
   );

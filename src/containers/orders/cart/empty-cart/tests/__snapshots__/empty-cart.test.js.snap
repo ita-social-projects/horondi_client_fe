@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Empty cart component tests should match snapshot 1`] = `
-<EmptyOrder
-  buttonTitle="cart.empty"
-  name="empty-cart"
-  title="cart.emptyCart"
-/>
-`;

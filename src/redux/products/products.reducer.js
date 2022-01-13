@@ -3,24 +3,7 @@ import { SET_PRODUCT_TO_SEND, CLEAR_PRODUCT_TO_SEND } from './products.types';
 export const initialState = {
   productToSend: {
     product: {
-      _id: '',
-      category: {
-        _id: ''
-      },
-      name: [],
-      mainMaterial: {
-        color: {
-          _id: ''
-        }
-      },
-      bottomMaterial: {
-        material: {},
-        color: {}
-      },
-      pattern: {
-        _id: ''
-      },
-      images: {}
+      _id: ''
     },
     quantity: 1,
     price: [],
@@ -28,12 +11,6 @@ export const initialState = {
       size: {
         _id: ''
       }
-    },
-    allSizes: [],
-    sidePocket: false,
-    dimensions: {
-      weightInKg: null,
-      volumeInLiters: null
     }
   }
 };

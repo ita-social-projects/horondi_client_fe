@@ -21,16 +21,10 @@ const FilledCart = ({ items, cartOperations }) => {
   const { pathToCategory, pathToCheckout } = routes;
   const [price, setPrice] = useState();
 
-  const { currency, cartLoading, user, cartList } = useSelector(
-    ({ Currency, Cart, User, NewCart }) => ({
-      currency: Currency.currency,
-      cartList: Cart.list,
-      cartLoading: Cart.loading,
-      newCartList: NewCart.list,
-      cartQuantityLoading: Cart.quantityLoading,
-      user: User.userData
-    })
-  );
+  const { currency, cartLoading, user } = useSelector(({ Currency, User }) => ({
+    currency: Currency.currency,
+    user: User.userData
+  }));
 
   const currencySign = getCurrencySign(currency);
   const { getTotalPrice } = cartOperations;
@@ -87,7 +81,7 @@ const FilledCart = ({ items, cartOperations }) => {
             </div>
           </div>
         </div>
-        <SimilarProducts cartList={cartList} />
+        <SimilarProducts cartList={items} />
       </div>
     </>
   );

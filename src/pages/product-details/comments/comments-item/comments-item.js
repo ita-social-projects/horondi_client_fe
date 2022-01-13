@@ -187,6 +187,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
             cancel={handleReplyClose}
             refetchComments={reloadCommentsData}
             commentId={commentId}
+            productId={productId}
           />
         )}
 

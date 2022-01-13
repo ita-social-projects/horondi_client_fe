@@ -45,19 +45,16 @@ import {
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
-import { useCart } from '../../../hooks/use-cart';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 
-const CheckoutForm = ({ currency, cartItems }) => {
+const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
   const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const {
-    cartOperations: { clearCart }
-  } = useCart(userData);
+  const { clearCart } = cartOperations;
   const dispatch = useDispatch();
   const totalPriceToPay = cartItems.reduce(
     (previousValue, currentValue) =>

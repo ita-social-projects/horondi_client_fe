@@ -22,7 +22,6 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  ADD_PRODUCT_TO_USER_CART,
   REMOVE_PRODUCT_FROM_USER_CART,
   LOGIN_BY_GOOGLE,
   LOGIN_BY_FACEBOOK,
@@ -127,11 +126,6 @@ const setUserOrders = (payload) => ({
   payload
 });
 
-const addProductToUserCart = (productId) => ({
-  type: ADD_PRODUCT_TO_USER_CART,
-  payload: productId
-});
-
 const removeProductFromUserCart = (productId) => ({
   type: REMOVE_PRODUCT_FROM_USER_CART,
   payload: productId
@@ -165,7 +159,6 @@ export {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  addProductToUserCart,
   removeProductFromUserCart,
   deleteUserDataFromStore
 };

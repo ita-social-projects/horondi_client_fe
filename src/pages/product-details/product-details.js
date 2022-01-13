@@ -10,7 +10,7 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
 
-import { TOAST_SETTINGS } from './constants';
+import { defaultProductToSend, TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -19,8 +19,6 @@ import SimilarProducts from './similar-products';
 import Comments from './comments';
 import ToastContainer from '../../containers/toast';
 import { getProductById } from './operations/product-details.queries';
-import { clearProductToSend, setProductToSend } from '../../redux/products/products.actions';
-import { selectCurrencyProductsCategoryFilter } from '../../utils/multiple.selectors';
 import routes from '../../configs/routes';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
@@ -34,11 +32,16 @@ const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { productToSend, currency } = useSelector(selectCurrencyProductsCategoryFilter);
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency
+  }));
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
+  const [productToSend, setProductToSend] = useState(defaultProductToSend);
+  const [countComments, setCountComments] = useState(0);
   const { loading, error, data } = useQuery(getProductById, {
     variables: { id }
   });
@@ -46,14 +49,11 @@ const ProductDetails = ({ match }) => {
   const product = data?.getProductById || {};
   const {
     _id: productId,
-    name: productName,
-    images,
     category,
     sizes,
     mainMaterial,
     bottomMaterial,
     innerMaterial,
-    pattern,
     available,
     translationsKey
   } = product;
@@ -65,42 +65,25 @@ const ProductDetails = ({ match }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id, dispatch]);
-  const [countComments, setCountComments] = useState(0);
 
   useEffect(() => {
     if (product.category) {
-      dispatch(
-        setProductToSend({
-          id: Date.now().toString(),
-          product: {
-            _id: productId,
-            category: {
-              _id: category._id
-            },
-            name: productName,
-            mainMaterial,
-            bottomMaterial,
-            pattern,
-            images: {
-              primary: {
-                thumbnail: images.additional[0]?.thumbnail
-              }
-            }
-          },
-          price: currentSize?.price,
-          options: {
-            size: currentSize?.size
-          },
-          allSizes: availableSizes
-        })
-      );
+      setProductToSend({
+        id: Date.now().toString(),
+        product: {
+          _id: productId
+        },
+        price: currentSize?.price,
+        options: {
+          size: currentSize?.size
+        }
+      });
     }
 
     return () => {
       setSizeIsNotSelectedError(false);
-      dispatch(clearProductToSend());
     };
-  }, [currentSize, product, category, dispatch, productId, productName, images, currency]);
+  }, [currentSize, product, productId]);
 
   const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
     useAddProductToWishlistHandler(product);
@@ -132,21 +115,14 @@ const ProductDetails = ({ match }) => {
 
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
-    dispatch(
-      setProductToSend({
-        ...productToSend,
-        id: Date.now().toString(),
-        price: selectedSize.price,
-        dimensions: {
-          volumeInLiters: selectedSize.size.volumeInLiters,
-          weightInKg: selectedSize.size.weightInKg
-        },
-        options: {
-          size: selectedSize.size
-        },
-        allSizes: availableSizes
-      })
-    );
+    setProductToSend({
+      ...productToSend,
+      id: Date.now().toString(),
+      price: selectedSize.price,
+      options: {
+        size: selectedSize.size
+      }
+    });
 
     if (sizeIsNotSelectedError) {
       setSizeIsNotSelectedError(false);
@@ -185,6 +161,7 @@ const ProductDetails = ({ match }) => {
                 disabled={!checkDisabledProduct()}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+                productToSend={productToSend}
               />
               <Tooltip title={wishlistTip} placement='bottom'>
                 {isInWishlist ? (

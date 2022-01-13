@@ -30,7 +30,6 @@ import {
   sendEmailConfirmation,
   updateUserById
 } from './user.operations';
-import { getCartByUserId, mergeCartFromLSWithUserCart } from '../cart/cart.operations';
 import {
   CHECK_IF_TOKEN_VALID,
   CONFIRM_USER,
@@ -46,8 +45,6 @@ import {
   UPDATE_USER
 } from './user.types';
 import {
-  cartKey,
-  newCartKey,
   LANGUAGE,
   REDIRECT_TIMEOUT,
   RETURN_PAGE,
@@ -56,47 +53,26 @@ import {
   AUTH_ERRORS
 } from '../../configs';
 import routes from '../../configs/routes';
-import {
-  clearLocalStorage,
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../services/local-storage.service';
-import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../cart/cart.actions';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { USER_ERROR } from '../../translations/user.translations';
 
 const { pathToLogin } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
-function* setUserCart(user) {
+function* setLoginUser(user) {
   const purchasedProducts = yield call(getPurchasedProducts, user._id);
 
   setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
   setToLocalStorage(ACCESS_TOKEN, user.token);
   yield put(setUser({ ...user, purchasedProducts }));
-  const cartFromLc = getFromLocalStorage(cartKey);
-  const usersCart = yield call(mergeCartFromLSWithUserCart, cartFromLc, user._id);
-
-  yield put(setCart(usersCart.cart.items));
-  yield put(setCartTotalPrice(usersCart.cart.totalPrice));
-  setToLocalStorage(cartKey, usersCart.cart.items);
-  const newCart = usersCart.cart.items.map((item) => ({
-    id: item._id,
-    productId: item.product._id,
-    quantity: item.quantity,
-    sizeAndPrice: {
-      price: item.price,
-      size: item.options.size
-    }
-  }));
-  setToLocalStorage(newCartKey, newCart);
 }
 
 export function* handleGoogleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
-    yield setUserCart(user);
+    yield setLoginUser(user);
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
   } catch (e) {
@@ -110,7 +86,7 @@ export function* handleFacebookUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(getFacebookUser, payload);
-    yield setUserCart(user);
+    yield setLoginUser(user);
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
   } catch (e) {
@@ -124,7 +100,7 @@ export function* handleUserLogin({ payload }) {
   try {
     yield put(setUserLoading(true));
     const user = yield call(loginUser, payload);
-    yield setUserCart(user);
+    yield setLoginUser(user);
     yield put(setUserLoading(false));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
@@ -198,15 +174,10 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
-    const userCart = yield call(getCartByUserId, user._id);
-    yield put(setCartLoading(true));
-    yield put(setCart(userCart.cart.items));
-    yield put(setCartTotalPrice(userCart.cart.totalPrice));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {
     yield put(setUserIsChecked(true));
-    yield put(setCartLoading(false));
     yield put(setUserLoading(false));
   }
 }
@@ -239,8 +210,6 @@ export function* handleSendConfirmation({ payload }) {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(setUserOrders(null));
-  yield put(resetCart());
-  clearLocalStorage();
 }
 
 export function* handleTokenCheck({ payload }) {

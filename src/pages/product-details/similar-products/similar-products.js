@@ -9,7 +9,7 @@ import './similar-products.css';
 import { useStyles } from './similar-products.styles';
 import { RESPONSIVE_PDP } from '../constants';
 import SimilarProductsItem from './similar-products-item';
-import { similarProductForCart } from '../../../utils/productDetails';
+import { getFullProducts, similarProductForCart } from '../../../utils/productDetails';
 import { getCurrencySign } from '../../../utils/currency';
 import { getFilteredProductsQuery } from '../../product-list-page/operations/product-list.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
@@ -17,11 +17,9 @@ import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 const SimilarProducts = ({ cartList, product }) => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const styles = useStyles();
-
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
-
   const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => setSimilarProducts(data.getProducts.items)
   });
@@ -34,7 +32,8 @@ const SimilarProducts = ({ cartList, product }) => {
   if (error || loading) return errorOrLoadingHandler(error, loading);
 
   if (cartList) {
-    imagesList = similarProductForCart(similarProducts, cartList);
+    const fullCartProducts = getFullProducts(similarProducts, cartList);
+    imagesList = similarProductForCart(similarProducts, fullCartProducts);
   } else {
     imagesList = similarProducts.filter(
       ({ category, mainMaterial, pattern }) =>

@@ -9,6 +9,19 @@ export const TOAST_SETTINGS = {
   hideProgressBar: true
 };
 
+export const defaultProductToSend = {
+  product: {
+    _id: ''
+  },
+  quantity: 1,
+  price: [],
+  options: {
+    size: {
+      _id: ''
+    }
+  }
+};
+
 export const RESPONSIVE_PDP = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },

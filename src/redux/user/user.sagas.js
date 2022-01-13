@@ -50,19 +50,24 @@ import {
   RETURN_PAGE,
   USER_IS_BLOCKED,
   USER_TOKENS,
-  AUTH_ERRORS
+  AUTH_ERRORS,
+  newCartKey
 } from '../../configs';
 import routes from '../../configs/routes';
-import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
+import {
+  clearLocalStorage,
+  getFromLocalStorage,
+  setToLocalStorage
+} from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { USER_ERROR } from '../../translations/user.translations';
+import { setCart } from '../common-store/common.actions';
 
 const { pathToLogin } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
 
 function* setLoginUser(user) {
   const purchasedProducts = yield call(getPurchasedProducts, user._id);
-
   setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
   setToLocalStorage(ACCESS_TOKEN, user.token);
   yield put(setUser({ ...user, purchasedProducts }));
@@ -174,6 +179,8 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
+    const cartFromLc = getFromLocalStorage(newCartKey);
+    yield put(setCart(cartFromLc));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {
@@ -210,6 +217,7 @@ export function* handleSendConfirmation({ payload }) {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(setUserOrders(null));
+  clearLocalStorage();
 }
 
 export function* handleTokenCheck({ payload }) {

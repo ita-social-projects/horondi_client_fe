@@ -17,7 +17,6 @@ import {
 } from '../user.actions';
 import userReducer from '../user.reducer';
 import {
-  cartFromLc,
   email,
   error,
   initialStateMock,
@@ -29,7 +28,6 @@ import {
   token,
   upload,
   user,
-  userCart,
   userId,
   userWithProducts
 } from './user.mocks';
@@ -64,8 +62,6 @@ import {
   updateUserById
 } from '../user.operations';
 import routes from '../../../configs/routes';
-import { getCartByUserId, mergeCartFromLSWithUserCart } from '../../cart/cart.operations';
-import { resetCart, setCart, setCartLoading, setCartTotalPrice } from '../../cart/cart.actions';
 import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../../configs';
 import { handleUserIsBlocked } from '../../../utils/user-helpers';
 import { USER_ERROR } from '../../../translations/user.translations';
@@ -78,12 +74,9 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getGoogleUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
+        [call(getPurchasedProducts, user._id), purchasedProducts]
       ])
       .put(setUser({ ...user, purchasedProducts }))
-      .put(setCart(userCart.cart.items))
-      .put(setCartTotalPrice(userCart.cart.totalPrice))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -94,8 +87,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(6);
-        expect(analysisCall).toHaveLength(3);
+        expect(analysisPut).toHaveLength(4);
+        expect(analysisCall).toHaveLength(2);
         clearLocalStorage();
       }));
 
@@ -116,12 +109,9 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getFacebookUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
+        [call(getPurchasedProducts, user._id), purchasedProducts]
       ])
       .put(setUser({ ...user, purchasedProducts }))
-      .put(setCart(userCart.cart.items))
-      .put(setCartTotalPrice(userCart.cart.totalPrice))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -132,8 +122,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(6);
-        expect(analysisCall).toHaveLength(3);
+        expect(analysisPut).toHaveLength(4);
+        expect(analysisCall).toHaveLength(2);
         clearLocalStorage();
       }));
 
@@ -153,19 +143,16 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(loginUser, { user: { email, pass, rememberMe } }), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(mergeCartFromLSWithUserCart, cartFromLc, user._id), userCart]
+        [call(getPurchasedProducts, user._id), purchasedProducts]
       ])
       .put(setUser({ ...user, purchasedProducts }))
-      .put(setCart(userCart.cart.items))
-      .put(setCartTotalPrice(userCart.cart.totalPrice))
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(6);
-        expect(analysisCall).toHaveLength(3);
+        expect(analysisPut).toHaveLength(4);
+        expect(analysisCall).toHaveLength(2);
       }));
 
   it('should hangle login error', () =>
@@ -311,17 +298,12 @@ describe('user sagas tests', () => {
     expectSaga(handleUserPreserve)
       .withReducer(userReducer)
       .put(setUserLoading(true))
-      .put(setCartLoading(true))
       .provide([
         [call(getUserByToken), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getCartByUserId, user._id), userCart]
+        [call(getPurchasedProducts, user._id), purchasedProducts]
       ])
       .put(setUser({ ...user, purchasedProducts }))
-      .put(setCart(userCart.cart.items))
-      .put(setCartTotalPrice(userCart.cart.totalPrice))
       .put(setUserIsChecked(true))
-      .put(setCartLoading(false))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -336,8 +318,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(8);
-        expect(analysisCall).toHaveLength(3);
+        expect(analysisPut).toHaveLength(5);
+        expect(analysisCall).toHaveLength(2);
       }));
 
   it('should handle user preserve error', () =>
@@ -426,13 +408,12 @@ describe('user sagas tests', () => {
   it('should handle user logout', () =>
     expectSaga(handleUserLogout)
       .put(setUser(null))
-      .put(resetCart())
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(3);
+        expect(analysisPut).toHaveLength(2);
         expect(analysisCall).toHaveLength(0);
       }));
 

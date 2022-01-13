@@ -13,6 +13,7 @@ import {
   mockCart,
   product,
   Products,
+  productToSend,
   User,
   Wishlist
 } from './product-details.variables';
@@ -54,6 +55,7 @@ describe('Product submit tests', () => {
         <ProductSubmit
           setSizeIsNotSelectedError={mockSetSizeIsNotSelectedError}
           product={product}
+          productToSend={productToSend}
         />
       </ThemeProvider>
     );

@@ -13,7 +13,8 @@ jest.mock('react-i18next', () => ({
     i18n: { language: 'en' }
   })
 }));
-
+const mockClearCart = jest.fn();
+const mockCartOperations = { clearCart: mockClearCart };
 const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
 const dispatch = jest.fn();
 const props = {
@@ -21,7 +22,8 @@ const props = {
   isLightTheme: true,
   currency: 0,
   cartItems: [{ price: [{ currency: 'ua', value: 100 }] }],
-  deliveryType: 'NOVAPOSTCOURIER'
+  deliveryType: 'NOVAPOSTCOURIER',
+  cartOperations: mockCartOperations
 };
 const userData = {
   loginError: '',

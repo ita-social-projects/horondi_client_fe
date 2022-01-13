@@ -404,5 +404,24 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '312px',
     left: '24px',
     margin: '24px 0px 0px 0px'
+  },
+  totalPrice: {
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    '& span': {
+      paddingTop: '4px',
+      paddingRight: '3px'
+    },
+    '& svg': {
+      fontSize: '20px'
+    }
+  },
+  priceForItem: {
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    '& svg': {
+      fontSize: '18px',
+      paddingTop: '2px'
+    }
   }
 }));

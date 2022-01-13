@@ -95,5 +95,3 @@ const SimilarProducts = ({ cartList, product }) => {
 };
 
 export default SimilarProducts;
-
-/// ///

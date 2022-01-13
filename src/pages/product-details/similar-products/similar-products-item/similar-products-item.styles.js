@@ -37,7 +37,7 @@ export const useStyles = makeStyles(() => ({
     width: '350px',
     height: '20px'
   },
-  priceOfSimilarPr: {
+  priceOfSimilarProducts: {
     display: 'flex',
     whiteSpace: 'nowrap',
     alignItems: 'center'

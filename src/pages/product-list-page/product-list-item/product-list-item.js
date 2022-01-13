@@ -134,5 +134,3 @@ ProductListItem.defaultProps = {
 };
 
 export default ProductListItem;
-
-/// /// /// /// /// ///

@@ -35,7 +35,7 @@ const SimilarProductsItem = ({ imageUrl, id, rate, price, translationsKey }) => 
       <div className={styles.similarItem}>
         <div className={styles.info}>
           <span>{t(`${translationsKey}.name`)}</span>
-          <div className={styles.priceOfSimilarPr}>
+          <div className={styles.priceOfSimilarProducts}>
             <span>{price}</span>
           </div>
           <Rating className={styles.rating} value={rate} readOnly size='small' />
@@ -46,5 +46,3 @@ const SimilarProductsItem = ({ imageUrl, id, rate, price, translationsKey }) => 
 };
 
 export default SimilarProductsItem;
-
-/// /// /// ///

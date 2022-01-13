@@ -94,7 +94,7 @@ const OrderItem = ({ product }) => {
       <Typography className={styles.yourOrderListItemPrice} component='div'>
         <div>{sizeAndPrice.price[currency]?.value}</div>
         <div style={{ width: '3px' }} />
-        <div>{currencySign}</div>
+        <div className={styles.priceForItem}>{currencySign}</div>
       </Typography>
     </ListItem>
   );

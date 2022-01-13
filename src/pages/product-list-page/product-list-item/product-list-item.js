@@ -44,9 +44,13 @@ const ProductListItem = ({ product }) => {
     );
     return availableSizes && availableSizes[0] ? (
       <>
-        {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
-        {'\u00A0'}
-        {currencySign}
+        <div className={styles.price}>
+          <div className={styles.value}>
+            {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
+            {'\u00A0'}
+          </div>
+          <div className={styles.currency}>{currencySign}</div>
+        </div>
       </>
     ) : (
       <>{t('productListPage.sizeNotAvailable')} </>
@@ -130,3 +134,5 @@ ProductListItem.defaultProps = {
 };
 
 export default ProductListItem;
+
+/// /// /// /// /// ///

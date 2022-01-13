@@ -23,5 +23,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     ...title
+  },
+  price: {
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    paddingTop: '2px',
+    '& span': {
+      paddingTop: '2px'
+    }
   }
 }));

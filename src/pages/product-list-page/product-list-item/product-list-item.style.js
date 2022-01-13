@@ -45,8 +45,15 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'capitalize'
   },
   price: {
+    marginLeft: '10px',
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    alignItems: 'center',
     fontSize: '20px',
     fontWeight: '600',
     color: 'white'
+  },
+  currency: {
+    paddingTop: '5px'
   }
 }));

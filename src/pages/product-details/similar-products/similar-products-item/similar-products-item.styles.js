@@ -36,5 +36,10 @@ export const useStyles = makeStyles(() => ({
   rating: {
     width: '350px',
     height: '20px'
+  },
+  priceOfSimilarPr: {
+    display: 'flex',
+    whiteSpace: 'nowrap',
+    alignItems: 'center'
   }
 }));

@@ -37,6 +37,7 @@ const ProductListPage = ({ width }) => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
+
   const [paginationParams, setPaginationParams] = useState({
     pagesCount: 1,
     currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
@@ -109,9 +110,8 @@ const ProductListPage = ({ width }) => {
         ));
       }
       return products.map((product) => <ProductListItem key={product._id} product={product} />);
-    } 
+    }
     return null;
-    
   };
   const paginationToShow = (
     <Pagination count={pagesCount} variant='outlined' page={currentPage} onChange={changeHandler} />

@@ -51,8 +51,8 @@ const YourOrder = ({ ...props }) => {
       )}
       <Typography className={styles.yourOrderTotalPrice} component='div'>
         {t('common.toPay')}:
-        <div>
-          {currencySign}
+        <div className={styles.totalPrice}>
+          <span>{currencySign}</span>
           {Math.ceil(getTotalPrice(currency))}
         </div>{' '}
       </Typography>

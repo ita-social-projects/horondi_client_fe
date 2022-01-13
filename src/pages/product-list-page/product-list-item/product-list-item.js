@@ -43,13 +43,15 @@ const ProductListItem = ({ product }) => {
       ({ size, price }) => size.available && { size, price }
     );
     return availableSizes && availableSizes[0] ? (
-      <>
-        {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
-        {'\u00A0'}
-        {currencySign}
-      </>
+      <div className={styles.price}>
+        <div>
+          {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
+          {'\u00A0'}
+        </div>
+        <div className={styles.currency}>{currencySign}</div>
+      </div>
     ) : (
-      <>{t('productListPage.sizeNotAvailable')} </>
+      <div>{t('productListPage.sizeNotAvailable')}</div>
     );
   };
 

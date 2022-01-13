@@ -94,19 +94,19 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   language: {
-    marginRight: '40px',
+    marginRight: '37px',
     '@media (max-width: 900px)': {
       marginRight: '0px'
     }
   },
   currency: {
-    marginRight: '40px',
+    marginRight: '37px',
     '@media (max-width: 900px)': {
       marginRight: '0px'
     }
   },
   callUs: {
-    width: '185px',
+    width: '190px',
     textAlign: 'right',
     cursor: 'pointer',
     '@media (max-width: 450px)': {

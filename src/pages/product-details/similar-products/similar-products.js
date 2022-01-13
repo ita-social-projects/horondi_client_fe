@@ -49,9 +49,9 @@ const SimilarProducts = ({ cartList, product }) => {
       sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price[currency].value;
     const checkPrice = () =>
       availableSize ? (
-        <div>
+        <div className={styles.price}>
           {t('product.priceFrom') + Math.round(availableSize)}
-          {currencySign}{' '}
+          <span>{currencySign} </span>
         </div>
       ) : (
         <div> {t('product.sizeNotAvailable')} </div>

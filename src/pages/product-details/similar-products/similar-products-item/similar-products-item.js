@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Rating from '@material-ui/lab/Rating';
+import { useTheme } from '@material-ui/styles';
+import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './similar-products-item.styles';
 import { getImage } from '../../../../utils/imageLoad';
@@ -10,17 +10,17 @@ import { IMG_URL } from '../../../../configs';
 
 import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
-import routes from '../../../../const/routes';
+import routes from '../../../../configs/routes';
 
 const { pathToProducts } = routes;
 
-const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) => {
-  const { language, isLightTheme } = useSelector(({ Language, Theme }) => ({
-    language: Language.language,
-    isLightTheme: Theme.lightMode
-  }));
+const SimilarProductsItem = ({ imageUrl, id, rate, price, translationsKey }) => {
+  const { t } = useTranslation();
 
   const [image, setImage] = useState(IMG_URL + imageUrl);
+  const { palette } = useTheme();
+
+  const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
     getImage(imageUrl)
@@ -28,19 +28,15 @@ const SimilarProductsItem = ({ imageUrl, id, name, rate, price, currencySign }) 
       .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
   }, [imageUrl, isLightTheme]);
 
-  const styles = useStyles({ image, isLightTheme });
+  const styles = useStyles({ image, isLightTheme, palette });
 
   return (
     <Link to={`${pathToProducts}/${id}`}>
       <div className={styles.similarItem}>
         <div className={styles.info}>
-          <span>{name[language].value}</span>
-          <Rating value={rate} readOnly size='small' />
-          <span>
-            {price}
-            {'\u00A0'}
-            <FontAwesomeIcon icon={currencySign} />
-          </span>
+          <span>{t(`${translationsKey}.name`)}</span>
+          <span>{price}</span>
+          <Rating className={styles.rating} value={rate} readOnly size='small' />
         </div>
       </div>
     </Link>

@@ -1,31 +1,32 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import parse from 'html-react-parser';
-import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 
 import { useStyles } from './business-page.style';
-import { getBusinessPageByCode } from '../../redux/business-pages/business-pages.actions';
+import { getBusinessTextByCode } from './operations/business-page.queries';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const BusinessPage = ({ match }) => {
-  const dispatch = useDispatch();
-  const pageCode = match.params.page;
-  const pageCamelCase = _.camelCase(pageCode);
-  const { page, language } = useSelector(({ BusinessPages, Language }) => ({
-    page: BusinessPages.pages[pageCamelCase],
-    language: Language.language
-  }));
+  const [page, setPage] = useState({});
+  const code = match.params.page;
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    dispatch(getBusinessPageByCode(pageCode));
-    window.scrollTo(0, 0);
-  }, [match.params.page, dispatch]);
+  const { loading, error } = useQuery(getBusinessTextByCode, {
+    variables: { code },
+    onCompleted: (data) => setPage(data.getBusinessTextByCode)
+  });
 
-  const addressText = page?.text && parse(page?.text[language].value);
+  const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
+
   const styles = useStyles();
+
+  if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.root}>
-      {page.title && <h1>{page.title[language].value}</h1>}
+      {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
+      <hr />
       {addressText}
     </div>
   );

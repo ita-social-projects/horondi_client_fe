@@ -1,27 +1,27 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   modelItem: {
     cursor: 'pointer',
-    flex: '1 0 31.3333%',
-    margin: 5,
+    flex: '1 0 27%',
+    margin: 11,
     boxSizing: 'border-box',
     display: 'flex',
     overflow: 'hidden',
     height: 200,
     position: 'relative',
-    boxShadow: '0px 5px 8px #c5c5c5',
-    backgroundColor: '#f7f7f7',
+    boxShadow: '0px 9px 12px rgba(0, 0, 0, 0.10)',
+    borderRadius: '6px',
     zIndex: '3',
+    backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
     '& > *': {
       flex: 1
     },
     '&:after': {
       content: `''`,
-      background: 'black',
       opacity: 0,
       position: 'absolute',
-      transition: 'opacity .2s ease',
+      transition: 'opacity 1s ease',
       top: 0,
       right: 0,
       left: 0,
@@ -37,8 +37,11 @@ export const useStyles = makeStyles(() => ({
     '&:hover:after': {
       opacity: '.5'
     },
-    '&:hover a': {
+    '&:hover footer': {
       opacity: 1
+    },
+    '@media (max-width: 480px)': {
+      flex: '1 0 37%'
     }
   },
   modelItemTitle: {
@@ -46,21 +49,23 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'flex-start',
     zIndex: 10,
-    color: 'black',
-    fontSize: '1.6em',
+    color: theme.palette.textColor,
+    fontSize: 20,
     textAlign: 'left',
     transition: 'color .2s ease',
-    textTransform: 'uppercase',
     fontWeight: '600',
     '@media (max-width: 450px)': {
       fontSize: '1.3em'
+    },
+    '&:hover': {
+      opacity: 0
     }
   },
   modelItemImage: {
     width: '50%',
     height: '100%',
     position: 'absolute',
-    right: '30px',
+    right: '70px',
     backgroundSize: 'cover',
     '& img': {
       transition: 'all .2s ease',
@@ -77,15 +82,17 @@ export const useStyles = makeStyles(() => ({
     transition: 'opacity .2s ease',
     position: 'absolute',
     bottom: 20,
-    left: '10%',
+    left: '5%',
     opacity: 0,
     zIndex: 10,
-    color: 'white',
-    fontSize: '1em',
+    color: theme.palette.textColor,
+    fontSize: '14px',
+    fontWeight: '600',
     display: 'flex',
+    alignItems: 'center',
     '& svg': {
       marginLeft: '5px',
-      fontSize: '1.2em'
+      fontSize: '27px'
     }
   }
 }));

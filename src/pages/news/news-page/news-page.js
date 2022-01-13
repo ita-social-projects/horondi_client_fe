@@ -1,35 +1,37 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getNews } from '../../../redux/news/news.actions';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './news-page.style';
+import { NEWS_AMOUNT } from './constants';
 import NewsItem from '../news-item';
-import { Loader } from '../../../components/loader/loader';
+import { getAllNews } from '../operations/news-queries';
+import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import OrderHistoryPagination from '../../../containers/orders/order-history/order-history-pagination/index';
 
 const NewsPage = () => {
-  const { newslist, loading, language } = useSelector(({ News, Language }) => ({
-    newslist: News.list.sort((a, b) => b.date - a.date),
-    loading: News.loading,
-    language: Language.language
-  }));
+  const [news, setNews] = useState([]);
+  const { t } = useTranslation();
+  const [count, setCount] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const dispatch = useDispatch();
+  const { loading, error } = useQuery(getAllNews, {
+    variables: {
+      limit: NEWS_AMOUNT,
+      skip: (currentPage - 1) * NEWS_AMOUNT
+    },
+    onCompleted: (data) => {
+      setNews(data.getAllNews.items);
+      setCount(data.getAllNews.count);
+    },
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'cache-first'
+  });
+  const changeHandler = (value) => {
+    setCurrentPage(value);
+  };
 
-  useEffect(() => {
-    dispatch(getNews());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
-  const newsHeader = ['Новини', 'News'];
   const styles = useStyles();
-  if (loading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
-
-  const newsItems = newslist.map(({ _id, date, author, image, title, text, slug }) => (
+  const newsItems = news.map(({ _id, date, author, image, title, text, slug, translationsKey }) => (
     <NewsItem
       date={date}
       key={_id}
@@ -39,12 +41,18 @@ const NewsPage = () => {
       title={title}
       slug={slug}
       text={text}
+      translationsKey={translationsKey}
     />
   ));
+
+  const quantityPages = Math.ceil(count / NEWS_AMOUNT);
+  if (loading || error) return errorOrLoadingHandler(error, loading);
+
   return (
     <>
-      <h1 className={styles.newsTitle}>{newsHeader[language]}</h1>
+      <h1 className={styles.newsTitle}>{t('common.news')}</h1>
       <div className={styles.NewsPageItem}>{newsItems}</div>
+      <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
     </>
   );
 };

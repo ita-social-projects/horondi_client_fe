@@ -1,48 +1,41 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { MenuItem } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { ButtonGroup, Button } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { changeLanguage } from '../../redux/language/language.actions';
-import { LANGUAGES_LIST, DEFAULT_LANGUAGE } from '../../configs';
-import { languageName } from '../../const/language';
-import Dropdown from '../../components/dropdown';
+import { DEFAULT_LANGUAGE, LANGUAGE } from '../../configs';
+import { LANGUAGES_LIST } from './constants';
 
-const languageInLocalStorage = getFromLocalStorage('language') || DEFAULT_LANGUAGE;
+const languageInLocalStorage = getFromLocalStorage(LANGUAGE) || DEFAULT_LANGUAGE;
 
 const LanguageComponent = ({ fromSideBar }) => {
   const dispatch = useDispatch();
-  const styles = useStyles();
-  const { language } = useSelector(({ Language }) => ({
-    language: Language.language
-  }));
+  const styles = useStyles({ fromSideBar });
+  const { i18n } = useTranslation();
   useEffect(() => {
     if (!fromSideBar) {
       dispatch(changeLanguage(languageInLocalStorage));
     }
-  }, [dispatch]);
+  }, [dispatch, fromSideBar]);
 
   const handleChange = (e) => {
-    const targetValue = e.target.value;
+    const targetValue = parseInt(e.target.value);
     if (targetValue !== undefined) {
-      setToLocalStorage(languageName, targetValue);
+      i18n.changeLanguage(LANGUAGES_LIST[targetValue].lang.toLowerCase());
+      setToLocalStorage(LANGUAGE, targetValue);
       dispatch(changeLanguage(targetValue));
     }
   };
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
-    <MenuItem data-cy={`${languageName}${value + 1}`} key={value} value={value}>
+    <Button data-cy={`${LANGUAGE}${value + 1}`} key={value} value={value}>
       {lang}
-    </MenuItem>
+    </Button>
   ));
   return (
     <div data-cy='language' className={styles.root}>
-      <Dropdown
-        mappedItems={mappedLanguages}
-        handler={handleChange}
-        defaultValue={DEFAULT_LANGUAGE}
-        value={language}
-        fromSideBar={fromSideBar}
-      />
+      <ButtonGroup onClick={handleChange}>{mappedLanguages}</ButtonGroup>
     </div>
   );
 };

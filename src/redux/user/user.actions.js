@@ -22,165 +22,128 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  GET_USER_ORDERS,
-  ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
-  REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+  ADD_PRODUCT_TO_USER_CART,
+  REMOVE_PRODUCT_FROM_USER_CART,
   LOGIN_BY_GOOGLE,
-  SET_DELETE_USER,
-  SET_ORDERS_COUNT,
-  SET_CURRENT_PAGE
+  LOGIN_BY_FACEBOOK,
+  SET_DELETE_USER
 } from './user.types';
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
-
 const loginUser = (payload) => ({
   type: LOGIN_USER,
   payload
 });
-
 const loginByGoogle = (payload) => ({
   type: LOGIN_BY_GOOGLE,
   payload
 });
-
+const loginByFacebook = (payload) => ({
+  type: LOGIN_BY_FACEBOOK,
+  payload
+});
 const confirmUser = (payload) => ({
   type: CONFIRM_USER,
   payload
 });
-
 const setUserError = (error) => ({
   type: SET_USER_ERROR,
   payload: error
 });
-
 const logoutUser = () => ({
   type: LOGOUT_USER
 });
-
 const setUserLoading = (payload) => ({
   type: SET_USER_LOADING,
   payload
 });
-
 const resetState = () => ({
   type: STATE_RESET
 });
-
 const recoverUser = (payload) => ({
   type: RECOVER_USER,
   payload
 });
-
 const resetPassword = (payload) => ({
   type: PASSWORD_RESET,
   payload
 });
-
 const checkIfTokenValid = (payload) => ({
   type: CHECK_IF_TOKEN_VALID,
   payload
 });
-
 const registerUser = (payload) => ({
   type: REGISTER_USER,
   payload
 });
-
 const userHasRecovered = (payload) => ({
   type: USER_HAS_RECOVERED,
   payload
 });
-
 const userHasRegistered = (payload) => ({
   type: USER_HAS_REGISTERED,
   payload
 });
-
 const preserveUser = () => ({
   type: PRESERVE_USER
 });
-
 const setUserIsChecked = (payload) => ({
   type: SET_USER_IS_CHECKED,
   payload
 });
-
 const updateUser = (payload) => ({
   type: UPDATE_USER,
   payload
 });
-
 const setPasswordIsReset = (payload) => ({
   type: PASSWORD_IS_RESET,
   payload
 });
-
 const sendConfirmationEmail = (payload) => ({
   type: SEND_CONFIRMATION_EMAIL,
   payload
 });
-
 const setConfirmationEmailStatus = (payload) => ({
   type: CONFIRMATION_EMAIL_SENT,
   payload
 });
-
 const setUserIsConfirmed = (payload) => ({
   type: SET_USER_IS_CONFIRMED,
   payload
 });
-
 const setConfirmationLoading = (payload) => ({
   type: SET_CONFIRMATION_LOADING,
   payload
 });
-
 const setRecoveryLoading = (payload) => ({
   type: SET_RECOVERY_LOADING,
   payload
 });
-
 const setUserOrders = (payload) => ({
   type: SET_USER_ORDERS,
   payload
 });
 
-const getUserOrders = (payload) => ({
-  type: GET_USER_ORDERS,
-  payload
-});
-
-const setUserCountOrders = (payload) => ({
-  type: SET_ORDERS_COUNT,
-  payload
-});
-
-const setCurrentPage = (payload) => ({
-  type: SET_CURRENT_PAGE,
-  payload
-});
-
-const addProductToUserCartOrWishlist = (productId) => ({
-  type: ADD_PRODUCT_TO_USER_CART_OR_WISHLIST,
+const addProductToUserCart = (productId) => ({
+  type: ADD_PRODUCT_TO_USER_CART,
   payload: productId
 });
 
-const removeProductFromUserCartOrWishlist = (productId) => ({
-  type: REMOVE_PRODUCT_FROM_USER_CART_OR_WISHLIST,
+const removeProductFromUserCart = (productId) => ({
+  type: REMOVE_PRODUCT_FROM_USER_CART,
   payload: productId
 });
-
 const deleteUserDataFromStore = () => ({
   type: SET_DELETE_USER
 });
-
 export {
   loginUser,
   setUser,
   loginByGoogle,
+  loginByFacebook,
   setUserError,
   logoutUser,
   setUserLoading,
@@ -202,10 +165,7 @@ export {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  getUserOrders,
-  addProductToUserCartOrWishlist,
-  removeProductFromUserCartOrWishlist,
-  deleteUserDataFromStore,
-  setUserCountOrders,
-  setCurrentPage
+  addProductToUserCart,
+  removeProductFromUserCart,
+  deleteUserDataFromStore
 };

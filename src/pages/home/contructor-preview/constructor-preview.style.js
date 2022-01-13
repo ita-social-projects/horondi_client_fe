@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
-  constructorPreview: ({ isMouseIn }) => ({
+export const useStyles = makeStyles((theme) => ({
+  constructorPreview: () => ({
     width: '100%',
     position: 'relative',
     margin: '50px 0',
     boxSizing: 'border-box',
     overflowY: 'hidden',
     '&:after': {
-      opacity: isMouseIn ? 1 : 0,
+      opacity: 0.5,
       transition: 'opacity .5s ease',
       content: `''`,
       position: 'absolute',
@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() => ({
       left: 0,
       bottom: 0,
       zIndex: 1,
-      background: 'linear-gradient(rgb(171 171 171 / 13%) 0%, rgb(0, 0, 0) 100%)'
+      backgroundColor: theme.palette.black
     },
     '& video': {
       '@media (max-width: 768px)': {
@@ -25,41 +25,6 @@ export const useStyles = makeStyles(() => ({
       }
     }
   }),
-  constructorInner: ({ isMouseIn }) => ({
-    transition: 'all .2s ease',
-    color: 'white',
-    content: `''`,
-    position: 'absolute',
-    height: '200px',
-    right: 0,
-    left: 0,
-    bottom: isMouseIn ? 0 : -100,
-    display: 'flex',
-    alignItems: 'flex-end',
-    padding: 30,
-    zIndex: 5,
-    background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%);'
-  }),
-  constructorInnerIcon: ({ isMouseIn }) => ({
-    position: 'absolute',
-    left: '50%',
-    top: 20,
-    transform: `translateX(-50%) ${isMouseIn ? 'rotate(180deg)' : 'rotate(0deg)'}`,
-    fontSize: '4em'
-  }),
-  constructorInnerLink: {
-    color: 'white',
-    fontSize: '3em',
-    display: 'flex',
-    '@media (max-width: 768px)': {
-      fontSize: '25px',
-      marginLeft: '25px'
-    },
-    '& svg': {
-      marginLeft: '10px',
-      fontSize: '1.4em'
-    }
-  },
   playerSoundControl: {
     position: 'absolute',
     cursor: 'pointer',
@@ -68,6 +33,73 @@ export const useStyles = makeStyles(() => ({
     bottom: 30,
     '& svg': {
       color: 'white'
+    },
+    '@media (max-width: 420px)': {
+      right: 10,
+      bottom: 10
+    }
+  },
+  constructorContent: {
+    width: '50vw',
+    position: 'absolute',
+    top: '25%',
+    left: '25%',
+    zIndex: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    '@media (max-width: 420px)': {
+      top: '5%',
+      left: '5%',
+      width: '90vw'
+    },
+    '@media (max-width: 321px)': {
+      top: '0%'
+    }
+  },
+  constructorTitle: {
+    fontSize: '34px',
+    lineHeight: '46px',
+    textAlign: 'center',
+    letterSpacing: '0.0025em',
+    color: '#FEFEFE',
+    '@media (max-width: 420px)': {
+      fontSize: '25px',
+      lineHeight: '30px'
+    }
+  },
+  constructorDescription: {
+    fontSize: '17px',
+    lineHeight: '24px',
+    letterSpacing: '0.005em',
+    color: '#FEFEFE',
+
+    '@media (max-width: 420px)': {
+      fontSize: '15px',
+      lineHeight: '17px',
+      textAlign: 'center'
+    }
+  },
+  buttonStyles: {
+    marginTop: '30px',
+    height: '44px',
+    width: '244px',
+    fontFamily: 'Open Sans',
+    fontWeight: '600',
+    fontSize: '14px',
+    letterSpacing: '0.0125em',
+    textTransform: 'uppercase',
+    lineHeight: '25px',
+    background: 'none',
+    color: '#FEFEFE',
+    border: '1px solid #FEFEFE',
+    cursor: 'pointer',
+    '@media (max-width: 420px)': {
+      marginTop: '10px'
+    },
+    '@media (max-width: 321px)': {
+      marginTop: '0px'
     }
   }
 }));

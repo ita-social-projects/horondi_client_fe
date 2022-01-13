@@ -1,27 +1,49 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+const titleStyles = {
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  fontSize: '34px',
+  lineHeight: '46px',
+  letterSpacing: '0.0025em',
+  '@media (max-width: 600px)': {
+    fontSize: '20px'
+  }
+};
+const buttonStyles = {
+  height: '52px',
+  width: '255px',
+  fontStyle: 'normal',
+  fontWeight: '600',
+  fontSize: '14px',
+  lineHeight: '20px',
+  borderRadius: '4px'
+};
+
+export const useStyles = makeStyles(({ palette }) => ({
   button: {
-    color: theme.palette.button.normal.color,
-    backgroundColor: theme.palette.button.normal.backgroundColor,
+    ...buttonStyles,
+    color: palette.button.normal.color,
+    backgroundColor: palette.button.normal.backgroundColor,
     '&:hover': {
-      color: theme.palette.button.hover.color,
-      backgroundColor: theme.palette.button.hover.backgroundColor
+      color: palette.button.hover.color,
+      backgroundColor: palette.button.hover.backgroundColor
     }
   },
+  emptyTitle: {
+    ...titleStyles,
+    color: palette.textColor
+  },
+  image: {
+    height: '182px',
+    width: '167px'
+  },
   root: {
-    margin: '100px auto',
+    height: '611px',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    maxWidth: '800px',
-    '@media (max-width: 768px)': {
-      '& img': {
-        width: '100%'
-      },
-      '& h2': {
-        fontSize: '25px'
-      }
-    }
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
   }
 }));

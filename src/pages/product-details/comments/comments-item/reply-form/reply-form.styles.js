@@ -5,29 +5,36 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '@media (max-width: 500px)': {
-      justifyContent: 'flex-start',
-      paddingTop: '10px'
+      justifyContent: 'flex-start'
     }
   },
   form: {
-    marginTop: '15px',
-    paddingLeft: '3rem',
+    margin: '0',
+    padding: '20px 80px 0 120px',
+    maxWidth: '960px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
+    '@media (max-width: 1100px)': {
+      padding: '0 50px 0 80px'
+    },
+    '@media (max-width: 768px)': {
+      padding: '0 20px 0 40px'
+    },
+    '@media (max-width: 600px)': {
+      padding: '0 10px'
+    },
     '& *': {
       '& .MuiOutlinedInput-root': {
-        background: '#fff',
         '& fieldset': {
-          borderColor: theme.palette.textColor
+          borderColor: theme.palette.comments.formBorder.borderColor
         },
         '&.Mui-focused fieldset': {
           borderColor: theme.palette.textColor
         }
       },
       '& label.Mui-focused': {
-        color: theme.palette.textColor,
-        transform: 'translate(15px, 5px) scale(0.75)'
+        color: theme.palette.textColor
       },
       '& label': {
         transform: 'translate(15px, 20px) scale(1)'
@@ -47,29 +54,48 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   },
+  formHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    '& :first-child': {
+      display: 'flex'
+    }
+  },
+  replyIcon: {
+    margin: '0 5px',
+    transform: 'scaleX(-1)',
+    opacity: 0.5
+  },
   input: {
-    paddingTop: '10px',
-    width: '95%'
+    marginTop: '10px',
+    width: '100%'
   },
   replyBtn: {
-    marginTop: 25,
-    marginBottom: 40,
+    padding: '12px 16px',
+    margin: '16px 0 24px 16px',
     textTransform: 'none',
     textAlign: 'center',
-    fontSize: '1rem',
+    fontSize: '14px',
+    fontFamily: 'Open sans',
+    fontWeight: '600',
     backgroundColor: theme.palette.button.normal.backgroundColor,
     color: theme.palette.button.normal.color,
     '&:hover': {
       backgroundColor: theme.palette.button.hover.backgroundColor,
       color: theme.palette.button.hover.color
     },
-    '@media (max-width: 950px)': {
-      marginTop: '0',
-      marginBottom: '1.5rem'
+    '@media (max-width: 450px)': {
+      marginTop: '0'
     },
     title: {
-      textAlign: 'left important!'
-    },
-    marginLeft: '10px'
+      textAlign: 'left'
+    }
+  },
+  cancelBtn: {
+    marginLeft: '0',
+    color: theme.palette.textColor,
+    backgroundColor: theme.palette.backgroundColor,
+    border: theme.palette.comments.cancelButtonBorder.border
   }
 }));

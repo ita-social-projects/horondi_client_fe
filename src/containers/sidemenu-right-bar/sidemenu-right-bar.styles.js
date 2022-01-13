@@ -1,22 +1,39 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: ({ fromSideBar }) => ({
     display: 'flex',
     marginLeft: 'auto',
     alignItems: 'center',
-    marginTop: fromSideBar ? 'auto' : 0
+    justifyContent: 'space-around',
+    marginTop: fromSideBar ? 'auto' : 0,
+    width: '100%'
   }),
-  currency: {
-    '& div:hover': {
-      background: 'black',
-      transition: '0.5s easy'
+  iconItem: {
+    marginRight: '40px'
+  },
+  wishlist: {
+    transform: 'scale(1.3)',
+    '& svg': {
+      color: theme.palette.textColor
+    },
+    '& svg:hover': {
+      color: 'white'
     }
   },
-  language: {
-    '& div:hover': {
-      background: 'black',
-      transition: '0.5s easy'
+  cartHeader: {
+    transform: 'scale(1.3)',
+    '& svg': {
+      color: theme.palette.textColor
+    },
+    '& svg:hover': {
+      color: 'white'
     }
+  },
+  currency: {
+    transform: 'scale(1.3)'
+  },
+  language: {
+    transform: 'scale(1.3)'
   }
 }));

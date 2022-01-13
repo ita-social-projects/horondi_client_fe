@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+
+import { useTranslation } from 'react-i18next';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
 
-import { MATERIAL_UI_COLOR } from '../../const/material-ui';
-
+import { TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
 import ProductSizes from './product-sizes';
@@ -15,30 +18,32 @@ import ProductSubmit from './product-submit';
 import SimilarProducts from './similar-products';
 import Comments from './comments';
 import ToastContainer from '../../containers/toast';
-
-import { Loader } from '../../components/loader/loader';
-import {
-  clearProductToSend,
-  getProduct,
-  setCategoryFilter,
-  setProductToSend
-} from '../../redux/products/products.actions';
-
-import { selectCurrencyProductsCategoryFilter } from '../../redux/selectors/multiple.selectors';
-import routes from '../../const/routes';
+import { getProductById } from './operations/product-details.queries';
+import { clearProductToSend, setProductToSend } from '../../redux/products/products.actions';
+import { selectCurrencyProductsCategoryFilter } from '../../utils/multiple.selectors';
+import routes from '../../configs/routes';
+import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
+import { setToastMessage, setToastSettings } from '../../redux/toast/toast.actions';
+import useAddProductToWishlistHandler from '../../hooks/use-add-product-to-wishlist-handler';
+import ProductDescription from './product-description';
+import ProductPath from './product-path/product-path';
+import { ArrowIcon } from '../../images/profile-icons';
 
 const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { isLightTheme, isLoading, productToSend, currency, product } = useSelector(
-    selectCurrencyProductsCategoryFilter
-  );
-
+  const { productToSend, currency } = useSelector(selectCurrencyProductsCategoryFilter);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
-
+  const { loading, error, data } = useQuery(getProductById, {
+    variables: { id }
+  });
+  const { isLoading, isError } = useIsLoadingOrError([loading], [error]);
+  const product = data?.getProductById || {};
   const {
     _id: productId,
     name: productName,
@@ -47,23 +52,26 @@ const ProductDetails = ({ match }) => {
     sizes,
     mainMaterial,
     bottomMaterial,
-    pattern
-  } = product || {};
-  const availableSizes =
-    sizes && sizes.filter(({ size, price }) => size.available && { size, price });
+    innerMaterial,
+    pattern,
+    available,
+    translationsKey
+  } = product;
 
+  const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
+  const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
 
   useEffect(() => {
-    dispatch(getProduct(id));
     window.scrollTo(0, 0);
   }, [id, dispatch]);
+  const [countComments, setCountComments] = useState(0);
 
   useEffect(() => {
-    if (product) {
-      dispatch(setCategoryFilter([category._id]));
+    if (product.category) {
       dispatch(
         setProductToSend({
+          id: Date.now().toString(),
           product: {
             _id: productId,
             category: {
@@ -75,18 +83,15 @@ const ProductDetails = ({ match }) => {
             pattern,
             images: {
               primary: {
-                thumbnail: images.additional[0].thumbnail
+                thumbnail: images.additional[0]?.thumbnail
               }
             }
           },
-          price: currentSize.price,
+          price: currentSize?.price,
           options: {
-            size: currentSize.size
+            size: currentSize?.size
           },
-          dimensions: {
-            volumeInLiters: currentSize.size.volumeInLiters,
-            weightInKg: currentSize.size.weightInKg
-          }
+          allSizes: availableSizes
         })
       );
     }
@@ -95,32 +100,51 @@ const ProductDetails = ({ match }) => {
       setSizeIsNotSelectedError(false);
       dispatch(clearProductToSend());
     };
-  }, [
-    currentSize,
-    currentSize,
-    product,
-    category,
-    dispatch,
-    productId,
-    productName,
-    images,
-    currency
-  ]);
+  }, [currentSize, product, category, dispatch, productId, productName, images, currency]);
+
+  const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
+    useAddProductToWishlistHandler(product);
+  const wishlistHandler = () => {
+    addOrRemoveItemFromWishlistHandler();
+
+    if (isInWishlist) {
+      dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
+      dispatch(setToastSettings(TOAST_SETTINGS));
+    } else {
+      dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
+      dispatch(setToastSettings(TOAST_SETTINGS));
+    }
+  };
+
+  const wishlistTip = isInWishlist
+    ? t('product.tooltips.removeWishful')
+    : t('product.tooltips.addWishful');
+  const checkCountComments = (count) => {
+    setCountComments(count);
+  };
+
+  const checkDisabledProduct = () =>
+    (currentSizeIndex >= 0 && sizes ? sizes[currentSizeIndex].size.available : '') &&
+    available &&
+    mainMaterial.material.available &&
+    bottomMaterial.material.available &&
+    innerMaterial.material.available;
 
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
-
     dispatch(
       setProductToSend({
         ...productToSend,
+        id: Date.now().toString(),
         price: selectedSize.price,
         dimensions: {
-          volumeInLiters: selectedSize.volumeInLiters,
-          weightInKg: selectedSize.weightInKg
+          volumeInLiters: selectedSize.size.volumeInLiters,
+          weightInKg: selectedSize.size.weightInKg
         },
         options: {
           size: selectedSize.size
-        }
+        },
+        allSizes: availableSizes
       })
     );
 
@@ -128,32 +152,62 @@ const ProductDetails = ({ match }) => {
       setSizeIsNotSelectedError(false);
     }
   };
-
-  if (isLoading || !product) {
-    return <Loader />;
-  }
+  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
     <Card className={styles.container}>
-      <Link to={pathToCategory} className={styles.backBtn}>
-        <KeyboardBackspaceIcon
-          color={isLightTheme ? MATERIAL_UI_COLOR.PRIMARY : MATERIAL_UI_COLOR.ACTION}
-        />
-      </Link>
-      <div className={styles.product}>
-        <ProductImages />
-        <div className={styles.productDetails}>
-          <ProductInfo price={currentSize.size.price} />
-          <ProductSizes
-            handleSizeChange={handleSizeChange}
-            sizes={sizes}
-            sizeIsNotSelectedError={sizeIsNotSelectedError}
-          />
-          <ProductSubmit sizes={sizes} setSizeIsNotSelectedError={setSizeIsNotSelectedError} />
+      <div className={styles.productContainer}>
+        <ProductPath category={category} translationsKey={translationsKey} />
+        <Link to={pathToCategory} className={styles.backBtn}>
+          <ArrowIcon className={styles.arrowIcon} />
+        </Link>
+        <div className={styles.product}>
+          {product.images ? <ProductImages images={product.images} /> : null}
+          <div className={styles.productDetails}>
+            {!loading && (
+              <ProductInfo
+                product={product}
+                countComments={countComments}
+                checkDisabledProduct={checkDisabledProduct()}
+                currency={currency}
+                currentPrice={productToSend.price}
+              />
+            )}
+            <ProductSizes
+              handleSizeChange={handleSizeChange}
+              checkDisabledProduct={checkDisabledProduct()}
+              sizes={sizes}
+              currentSize={productToSend.options.size}
+              sizeIsNotSelectedError={sizeIsNotSelectedError}
+            />
+            <div className={styles.test}>
+              <ProductSubmit
+                disabled={!checkDisabledProduct()}
+                product={product}
+                setSizeIsNotSelectedError={setSizeIsNotSelectedError}
+              />
+              <Tooltip title={wishlistTip} placement='bottom'>
+                {isInWishlist ? (
+                  <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
+                ) : (
+                  <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
+                )}
+              </Tooltip>
+            </div>
+          </div>
+          {product.description ? (
+            <ProductDescription
+              product={product}
+              currentSizeIndex={currentSizeIndex}
+              checkDisabledProduct={checkDisabledProduct()}
+            />
+          ) : null}
         </div>
       </div>
-      <SimilarProducts />
-      <Comments />
+      {product._id ? <SimilarProducts product={product} /> : null}
+      {product._id ? (
+        <Comments productId={product._id} checkCountComments={checkCountComments} />
+      ) : null}
       <ToastContainer />
     </Card>
   );

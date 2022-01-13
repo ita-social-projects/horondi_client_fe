@@ -1,70 +1,79 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useContext } from 'react';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './comment-dialog.styles';
+import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
+import { deleteCommentMutation } from '../../operations/comments.queries';
+import Loader from '../../../../../components/loader';
+import { ERROR } from '../../../constants';
+import { SnackBarContext } from '../../../../../context/snackbar-context';
 
-import { deleteComment, deleteReplyComment } from '../../../../../redux/comments/comments.actions';
-import {
-  DIALOG,
-  PDP_BUTTONS,
-  DIALOG_REPLY
-} from '../../../../../translations/product-details.translations';
-
-const CommentDialog = ({ isModalShown, handleClose, commentId, userId, isDeleteComment = 0 }) => {
+const CommentDialog = ({
+  isModalShown,
+  handleClose,
+  commentId,
+  isDeleteComment = 0,
+  refetchComments
+}) => {
   const styles = useStyles();
-  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-  const { language, productId } = useSelector(({ Products, Language }) => ({
-    productId: Products.product._id,
-    language: Language.language
-  }));
+  const { setSnackBarMessage } = useContext(SnackBarContext);
 
-  const handleDelete = () => {
-    if (isDeleteComment === 1) {
-      dispatch(
-        deleteComment({
-          product: productId,
-          comment: commentId,
-          id: userId
-        })
-      );
-      handleClose();
-    } else {
-      dispatch(
-        deleteReplyComment({
-          replyCommentId: commentId,
-          id: userId
-        })
-      );
-      handleClose();
-    }
+  const [deleteComment, { loading: deleteCommentLoading }] = useMutation(deleteCommentMutation, {
+    onError: (err) => {
+      setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
+      errorOrLoadingHandler(err);
+    },
+    onCompleted: () => setSnackBarMessage(t('product.snackBar.deleted'))
+  });
+
+  const handleDelete = async () => {
+    await deleteComment({
+      variables: {
+        commentID: commentId
+      }
+    });
+    await refetchComments();
+    handleClose();
   };
 
   return (
-    <div>
-      <Dialog open={isModalShown} onClose={handleClose}>
+    <div className={styles.root}>
+      <Dialog open={isModalShown} onClose={handleClose} className={styles.dialog}>
         <DialogTitle className={styles.title}>
-          {isDeleteComment === 1 ? DIALOG[language].title : DIALOG_REPLY[language].title}
+          <div className={styles.titleContent}>
+            {isDeleteComment === 1 ? t('common.dialog.title') : t('common.dialogRiply.title')}
+            <CloseIcon className={styles.icon} onClick={handleClose} />
+          </div>
         </DialogTitle>
+
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText className={styles.content}>
             {isDeleteComment === 1
-              ? DIALOG[language].description
-              : DIALOG_REPLY[language].description}
+              ? t('common.dialog.description')
+              : t('common.dialogRiply.description')}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} className={styles.button}>
-            {PDP_BUTTONS[language].cancelButton}
-          </Button>
+          {deleteCommentLoading && (
+            <div className={styles.loader} data-testid='deleteCommentLoader'>
+              <Loader width={20} height={20} heightWrap={40} />
+            </div>
+          )}
           <Button onClick={handleDelete} className={styles.button}>
-            {PDP_BUTTONS[language].submitButton}
+            {t('product.pdpButtons.submitButton')}
+          </Button>
+          <Button onClick={handleClose} className={styles.button}>
+            {t('product.pdpButtons.cancelButton')}
           </Button>
         </DialogActions>
       </Dialog>

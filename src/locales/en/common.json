@@ -1,0 +1,86 @@
+{
+  "product": "Product",
+  "quantity": "Quantity",
+  "price": "Price",
+  "size": "Size",
+  "seeMore": "See more",
+  "hide": "Hide",
+  "details": "Details",
+  "home": "Home",
+  "model": "Model",
+  "news": "News",
+  "about-us": "About us",
+  "contacts": "Contacts",
+  "materials": "Materials",
+  "basis": "Basis",
+  "patterns": "Pattern",
+  "bottom": "Bottom",
+  "defaultPrice": "Default item price:",
+  "totalPrice": "Total item price:",
+  "endPrice": "End price:",
+  "total": "Total",
+  "enterNew": "Enter new password",
+  "newPass": "New password",
+  "confirmPass": "Confirm password",
+  "change": "Change",
+  "title": "Create by yourself",
+  "prev": "Previous",
+  "next": "Next",
+  "close": "Close",
+  "models": "Models",
+  "buttons": {
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "modalHeader": "Delete product",
+  "to": "to ",
+  "from": "from ",
+  "search": "Search",
+  "showFilters": "Show Filters",
+  "color": "Colors",
+  "filter": "Filter",
+  "clearFilter": "Clear All Filters",
+  "sortBy": "Sort by:",
+  "popular": "Popular",
+  "category": "Category",
+  "toPay": "Total price",
+  "logIn": "Log in",
+  "logOut": "Log out",
+  "name": "Name",
+  "email": "Email",
+  "dialog": {
+    "title": "Delete comment",
+    "description": "Are you sure you want to delete the comment? After deleting you will not be able to restore the comment."
+  },
+  "dialogRiply": {
+    "title": "Delete answer?",
+    "description": "Are you sure you want to delete the answer? After deleting you will not be able to restore the reply."
+  },
+  "userData": {
+    "firstName": "Deleted User",
+    "email": "Deleted Email"
+  },
+  "reply": {
+    "submit": "Answer",
+    "loadMore": "More answers",
+    "hideBtn": "Hide answers",
+    "text": "Share your thoughts with others",
+    "answers": "Answers",
+    "isAdmin": "Manager"
+  },
+  "sortOptions": {
+    "popularity": "popularity",
+    "sortDesc": "price (high to low) ",
+    "sortAsc": "price (low to high) ",
+    "rate": "rate"
+  },
+  "scrollbar": {
+    "horondiStyle": "Horondi style",
+    "constructor": "Create by yourself",
+    "catalog": "Catalog",
+    "slider": "Slider",
+    "models": "Our models"
+  },
+  "titleQuestionsAnswers": "Questions and answers",
+  "backpack": "Your Backpack"
+}

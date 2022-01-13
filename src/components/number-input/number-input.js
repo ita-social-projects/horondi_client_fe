@@ -5,14 +5,13 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { useStyles } from './number-input.styles';
-import { TYPES_CONST } from '../../const/types-consts';
-import { TEXT_FIELD_VARIANT } from '../../const/material-ui';
+import { TEXT_FIELD_VARIANT, TEXT_FIELDS } from '../../configs';
 
 const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
   const setQuantityFromInput = (e) => {
     let num;
-    if (e.target.value.match(/[^0-9]/g)) {
+    if (e.target.value.match(/\D/g)) {
       num = 1;
     } else if (e.target.value < 1) {
       num = 1;
@@ -38,12 +37,12 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
         <RemoveIcon />
       </Button>
       <TextField
-        type={TYPES_CONST.STRING}
+        type={TEXT_FIELDS.STRING}
         value={quantity}
         id='filled-basic'
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         onChange={setQuantityFromInput}
-        inputProps={{ style: { textAlign: 'center', width: '40px', height: '15px' } }}
+        inputProps={{ style: { textAlign: 'center', width: '20px', height: '3px' } }}
       />
       <Button
         className={styles.button}

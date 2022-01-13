@@ -1,59 +1,68 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   categoryItem: (props) => ({
+    position: 'relative',
+    display: 'flex',
+    overflow: 'hidden',
+    width: '350px',
+    height: '350px',
+    padding: '0px',
     backgroundImage: `url("${props.image}")`,
     backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    display: 'flex',
-    width: 'calc(100% - 40px)',
-    height: '500px',
-    margin: '20px',
+    backgroundSize: 'contain',
+    backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
+    backgroundRepeat: 'no-repeat',
     cursor: 'pointer',
-    boxShadow: '0px 5px 8px #c5c5c5',
-    padding: 20,
-    position: 'relative',
-    '&:after': {
-      opacity: 0,
-      transition: 'all .2s ease',
-      color: 'white',
-      content: `''`,
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.7)'
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
+    borderRadius: '6px',
+    color: theme.palette.textColor,
+    outline: '1px solid transparent',
+    transition: 'all 0.2s ease-in-out',
+    '&:hover, &:active': {
+      outline: theme.palette.carouselItem.hover.border,
+      transition: 'outline 0.2s ease-in-out'
     },
-    '&:hover:after, &:hover > a': {
-      opacity: 1
+    '&:hover > div, &:active > div': {
+      display: 'flex',
+      alignItems: 'flex-end',
+      paddingLeft: '24px',
+      paddingBottom: '24px',
+      visibility: 'visible',
+      transform: 'none',
+      transition: 'all 0.2s ease-in-out'
     },
-    '&:hover > span:first-child': {
-      color: 'white'
-    },
-    '@media (max-width: 768px)': {
-      width: 'calc(100% - 40px)',
-      height: '420px'
+    '&:hover > span, &:active > span': {
+      display: 'none'
     }
   }),
   categoryInner: {
-    position: 'absolute',
-    bottom: 20,
-    left: '50%',
-    opacity: 0,
-    zIndex: 10,
-    color: 'white',
-    fontSize: '1.3em',
-    transform: 'translateX(-50%)',
-    width: '100%',
-    '& span': {
-      marginLeft: '5px'
-    }
+    display: 'flex',
+    alignItems: 'end',
+    paddingLeft: '24px',
+    paddingBottom: '24px',
+    visibility: 'hidden',
+    fontFamily: 'Open Sans',
+    fontSize: '14px',
+    fontWeight: 600,
+    letterSpacing: '0.0125em',
+    lineHeight: '20px',
+    textTransform: 'uppercase',
+    transform: 'translateX(-200%)'
+  },
+  arrow: {
+    transform: 'translateY(10%)'
   },
   categoryName: {
-    fontSize: '2em',
-    textTransform: 'uppercase',
+    display: 'flex',
+    alignItems: 'end',
+    paddingLeft: '24px',
+    paddingBottom: '24px',
+    fontFamily: 'Open Sans',
+    fontSize: ' 20px',
     fontWeight: '600',
-    zIndex: 10
+    lineHeight: '28px',
+    letterSpacing: '0.0015em',
+    color: theme.palette.textColor
   }
 }));

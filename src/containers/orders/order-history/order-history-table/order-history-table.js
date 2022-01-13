@@ -1,39 +1,37 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Table, TableCell, TableHead, TableRow, TableBody } from '@material-ui/core';
-import OrderHistoryOrderItem from '../order-history-order-item/index';
-
-import { ORDER_TABLE_FIELDS } from '../../../../translations/order.translations';
+import { useTranslation } from 'react-i18next';
+import { Table, TableCell, TableHead, TableRow, TableBody, Divider } from '@material-ui/core';
 import { useStyles } from './order-history-table.style';
 
-const OrderHistoryTable = ({ items, totalPrice }) => {
-  const { language, currency } = useSelector(({ Language, Currency }) => ({
-    language: Language.language,
-    currency: Currency.currency
-  }));
-
+const OrderHistoryTable = ({ items }) => {
   const styles = useStyles();
-
-  const orderHistoryItems = items.map((item, idx) => (
-    <OrderHistoryOrderItem key={idx} item={item} language={language} currency={currency} />
-  ));
+  const { t } = useTranslation();
 
   return (
     <>
+      <Divider variant='fullWidth' />
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell className={styles.tableCell}>{ORDER_TABLE_FIELDS[language].photo}</TableCell>
-            <TableCell className={styles.tableCell}>{ORDER_TABLE_FIELDS[language].item}</TableCell>
-            <TableCell className={styles.tableCell}>
-              {ORDER_TABLE_FIELDS[language].quantity}
+            <TableCell style={{ width: '22%' }} className={styles.tableCell}>
+              {t('common.product')}
             </TableCell>
-            <TableCell className={styles.tableCell}>
-              <div>{ORDER_TABLE_FIELDS[language].price}</div>
+            <TableCell style={{ width: '25%' }} className={styles.tableCell} />
+            <TableCell style={{ width: '15%' }} className={styles.tableCell}>
+              {t('common.size')}
+            </TableCell>
+            <TableCell style={{ width: '15%' }} className={styles.tableCell}>
+              {t('common.price')}
+            </TableCell>
+            <TableCell style={{ width: '12%' }} className={styles.tableCell}>
+              {t('common.quantity')}
+            </TableCell>
+            <TableCell style={{ width: '15%' }} className={styles.tableCell}>
+              {t('common.total')}
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{orderHistoryItems}</TableBody>
+        <TableBody>{items}</TableBody>
       </Table>
     </>
   );

@@ -1,11 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { CHAT } from '../../../translations/chat.translation';
+import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
+import EmailOutlined from '@material-ui/icons/EmailOutlined';
 import ActiveMessenger from '../active-messenger';
 import { useStyles } from '../chat.style';
 
-export const MailForm = ({ themeMode, language, contacts, cancelIconHandler }) => {
-  const style = useStyles({ themeMode });
+export const MailForm = ({ contacts, cancelIconHandler, iconsVisible, mailFormVisible }) => {
+  const style = useStyles({ iconsVisible, mailFormVisible });
+  const { t } = useTranslation();
 
   return (
     <div className={style.mailForm}>
@@ -13,14 +16,21 @@ export const MailForm = ({ themeMode, language, contacts, cancelIconHandler }) =
         <CancelIcon />
       </div>
       <div className={style.contacts}>
-        <span className={style.contactsTitle}>{CHAT[language].ourContacts}</span>
+        <span className={style.contactsTitle}>{t('chat.ourContacts')}</span>
         {contacts.map((contact) => (
-          <span className={style.phoneNumbers} key={contact.phoneNumber}>
-            +{contact.phoneNumber}
-          </span>
+          <div key={contact._id}>
+            <div className={style.phoneNumbers}>
+              <PhoneIphoneOutlinedIcon className={style.iconContact} />
+              <span>{contact.phoneNumber}</span>
+            </div>
+            <div className={style.phoneNumbers}>
+              <EmailOutlined className={style.iconContact} />
+              <span>{contact.email}</span>
+            </div>
+          </div>
         ))}
       </div>
-      <ActiveMessenger visible mailFormVisible themeMode={themeMode} language={language} />
+      <ActiveMessenger iconsVisible={iconsVisible} mailFormVisible={mailFormVisible} />
     </div>
   );
 };

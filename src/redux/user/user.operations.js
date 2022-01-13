@@ -25,6 +25,7 @@ const loginUser = async (data) => {
       buildingNumber
       appartment
       region
+      district
       zipcode
 		}
 		banned{
@@ -32,29 +33,9 @@ const loginUser = async (data) => {
       blockCount
       updatedAt
     }
-		wishlist {
-			_id
-			name {
-				lang
-				value
-			}
-      sizes {
-        size {
-          available
-        }
-        price {
-          value
-          currency
-        }
-      }
-			images {
-			  primary {
-			    small
-			  }			  
-			}
-		}
     cart{
       items {
+        _id
         product {
         _id
         name {
@@ -99,6 +80,16 @@ const loginUser = async (data) => {
             name
         }
         }
+        allSizes {
+        size {
+            _id
+            name
+        }
+        price {
+            currency
+            value
+        }
+        }
         price {
         value
         }
@@ -126,27 +117,6 @@ const getGoogleUser = async ({ idToken }) => {
         source,
         tokenPass
       }
-      wishlist {
-        _id
-        name {
-          lang
-          value
-        }
-        sizes {
-          size {
-            available
-          }
-          price {
-            value
-            currency
-          }
-        }
-        images {
-          primary {
-            small
-          }
-        }
-      }
       token
 } 
 
@@ -155,6 +125,24 @@ const getGoogleUser = async ({ idToken }) => {
   const result = await getItems(getGoogleUserMutation, { idToken });
 
   return result?.data?.googleUser;
+};
+const getFacebookUser = async ({ idToken }) => {
+  const getFacebookUserMutation = `
+    mutation($idToken:String!){facebookUser(idToken:$idToken){
+      _id
+      firstName,
+      lastName,
+      email,
+      credentials{
+        source,
+        tokenPass
+      }
+      token
+    }}
+  `;
+  const result = await getItems(getFacebookUserMutation, { idToken });
+
+  return result?.data?.facebookUser;
 };
 
 const confirmUserEmail = async ({ token }) => {
@@ -224,7 +212,7 @@ const resetPassword = async (data) => {
 const updateUserById = async ({ user, id, upload }) => {
   const updateUserByIdMutation = `
      mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
-      updateUserById(user: $user, id: $id, upload: $upload) { 
+      updateUserById(user: $user, id: $id, image: $upload) { 
         orders
         _id
         email
@@ -245,12 +233,14 @@ const updateUserById = async ({ user, id, upload }) => {
           buildingNumber
           appartment
           region
+          district
           zipcode
         }
         confirmed
       }
     }
   `;
+
   const result = await setItems(updateUserByIdMutation, { user, id, upload });
 
   return result?.data?.updateUserById;
@@ -289,24 +279,9 @@ const getUserByToken = async () => {
               appartment
               zipcode
               region
+              district
             }
             confirmed
-            wishlist {
-              _id
-              name {
-                lang
-                value
-              }
-              basePrice {
-                currency
-                value
-              }
-              images {
-                primary {
-                  small
-                }
-              }
-            }
             cart {
               items {
                 product {
@@ -335,54 +310,6 @@ const getUserByToken = async () => {
   const result = await getItems(getUserByTokenQuery);
 
   return result?.data?.getUserByToken;
-};
-
-const getUserOrders = async (pagination) => {
-  const getUserOrdersQuery = `
-      query ($pagination: Pagination){
-        getUserOrders (pagination: $pagination){
-        _id
-        dateOfCreation
-        status
-        orderNumber
-        items {
-          quantity
-          fixedPrice {
-            currency
-            value
-          }
-          options {
-            size {
-              name
-            }
-          }
-          product {
-            name {
-              lang
-              value
-            }
-            model {
-              sizes {
-                name
-              }
-            }
-            images {
-              primary {
-                thumbnail
-              }
-            }
-          }
-        }
-        totalItemsPrice {
-          value
-          currency
-        }
-      }
-      }
-  `;
-  const result = await getItems(getUserOrdersQuery, { pagination });
-
-  return result?.data?.getUserOrders;
 };
 
 const getPurchasedProducts = async (id) => {
@@ -418,21 +345,10 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
-const getCountUserOrders = async () => {
-  const getCountUserOrdersQuery = `
-      query($id: ID) {
-        getCountUserOrders (id: $id){
-          countOrder
-        }
-      }
-    `;
-  const result = await getItems(getCountUserOrdersQuery);
-  return result?.data?.getCountUserOrders;
-};
-
 export {
   loginUser,
   getGoogleUser,
+  getFacebookUser,
   confirmUserEmail,
   recoverUser,
   checkIfTokenIsValid,
@@ -440,9 +356,7 @@ export {
   resetPassword,
   updateUserById,
   sendEmailConfirmation,
-  getUserOrders,
   getUserByToken,
   regenerateUserTokenPairs,
-  getPurchasedProducts,
-  getCountUserOrders
+  getPurchasedProducts
 };

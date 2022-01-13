@@ -10,13 +10,14 @@ export const useStyles = makeStyles(() => ({
   footer: {
     backgroundColor: '#000000',
     color: '#ffffff',
-    padding: '10px',
     display: 'flex',
     clear: 'both'
   },
   cardDeck: {
     display: 'flex',
     width: '100%',
+    boxSizing: 'border-box',
+    paddingRight: '100px',
     '& a': {
       transition: 'color .2s ease'
     },
@@ -28,6 +29,7 @@ export const useStyles = makeStyles(() => ({
       alignItems: 'center'
     },
     '@media screen and (max-width: 770px)': {
+      paddingRight: '0',
       flexWrap: 'wrap'
     }
   },

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Path back component tests should match snapshot 1`] = `
+<div
+  className="makeStyles-path-1"
+>
+  <div
+    className="makeStyles-pathLine-2"
+  >
+    <Link
+      to="/"
+    >
+      cart.pathBack.toMain
+    </Link>
+     /
+     
+    <Link
+      to="/catalog/:category"
+    >
+      cart.pathBack.toCatalog
+    </Link>
+     /
+     
+    cart.pathBack.yourCart
+  </div>
+</div>
+`;

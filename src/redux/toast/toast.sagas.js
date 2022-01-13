@@ -1,12 +1,11 @@
-import { takeEvery, select } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects';
 
 import { toast } from 'react-toastify';
 
 import { SET_TOAST_MESSAGE } from './toast.types';
 
 export function* handleSetToastMessage({ payload: message }) {
-  const isLightTheme = yield select((state) => state.Theme.lightMode);
-  yield isLightTheme ? toast.dark(message) : toast(message);
+  yield toast(message);
 }
 
 export default function* toastSaga() {

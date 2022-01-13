@@ -1,24 +1,23 @@
 import PropTypes from 'prop-types';
-
+import i18next from 'i18next';
 import {
-  CHECKOUT_BUTTON,
-  CHECKOUT_INPUT_FIELD,
-  CHECKOUT_PAYMENT,
-  CHECKOUT_TEXT_FIELDS,
-  CHECKOUT_TITLES
-} from '../translations/checkout.translations';
-import { DEFAULT_CURRENCY, deliveryTypes, SESSION_STORAGE } from '../configs';
+  COURIER,
+  DEFAULT_CURRENCY,
+  deliveryTypes,
+  MATERIAL_UI_COLOR,
+  SESSION_STORAGE
+} from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
-import { COURIER } from '../const/checkout';
-import { MATERIAL_UI_COLOR } from '../const/material-ui';
+import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
-export const initialValues = {
+export const stateInitialValues = {
   firstName: '',
   lastName: '',
   email: '',
   phoneNumber: '',
   paymentMethod: '',
   userComment: '',
+  courierOrganization: '',
   courierOffice: '',
   city: '',
   street: '',
@@ -48,6 +47,7 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
+    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -63,6 +63,7 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
+    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -78,6 +79,7 @@ export const checkoutPropTypes = {
     phoneNumber: PropTypes.string,
     paymentMethod: PropTypes.string,
     userComment: PropTypes.string,
+    courierOrganization: PropTypes.string,
     courierOffice: PropTypes.string,
     city: PropTypes.string,
     street: PropTypes.string,
@@ -110,7 +112,7 @@ const productItemsInput = (cartItems) =>
     }
   }));
 
-export const orderInputData = (data, deliveryType, cartItems, language) => ({
+export const orderInputData = (data, deliveryType, cartItems) => ({
   recipient: {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -136,82 +138,102 @@ export const orderInputData = (data, deliveryType, cartItems, language) => ({
   },
   items: productItemsInput(cartItems),
   paymentMethod:
-    data.paymentMethod === CHECKOUT_PAYMENT[language].card
-      ? CHECKOUT_PAYMENT[1].card.toUpperCase()
-      : CHECKOUT_PAYMENT[1].cash.toUpperCase(),
+    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash,
   userComment: data.userComment
 });
 
-export const checkoutFormBtnValue = (values, language) =>
-  values.paymentMethod === '' || values.paymentMethod === CHECKOUT_PAYMENT[language].cash
-    ? CHECKOUT_BUTTON[language].confirmOrder
-    : CHECKOUT_BUTTON[language].payOrder;
+export const checkoutFormBtnValue = (values) =>
+  values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash
+    ? i18next.t(`checkout.confirmOrder`)
+    : i18next.t(`checkout.payOrder`);
 
-export const courierInputLabels = (language) => [
+export const courierInputLabels = () => [
   {
-    name: CHECKOUT_INPUT_FIELD.city,
-    label: CHECKOUT_TEXT_FIELDS[language].city
+    name: 'house',
+    label: i18next.t(`checkout.checkoutTextFields.house`)
   },
   {
-    name: CHECKOUT_INPUT_FIELD.street,
-    label: CHECKOUT_TEXT_FIELDS[language].street
-  },
-  {
-    name: CHECKOUT_INPUT_FIELD.house,
-    label: CHECKOUT_TEXT_FIELDS[language].house
-  },
-  {
-    name: CHECKOUT_INPUT_FIELD.flat,
-    label: CHECKOUT_TEXT_FIELDS[language].flat
+    name: 'flat',
+    label: i18next.t(`checkout.checkoutTextFields.flat`)
   }
 ];
 
-export const userNameInputLabels = (language) => [
+export const userNameInputLabels = () => [
   {
-    name: CHECKOUT_INPUT_FIELD.firstName,
-    label: CHECKOUT_TEXT_FIELDS[language].firstName
+    name: 'firstName',
+    label: i18next.t(`checkout.checkoutTextFields.firstName`)
   },
   {
-    name: CHECKOUT_INPUT_FIELD.lastName,
-    label: CHECKOUT_TEXT_FIELDS[language].lastName
+    name: 'lastName',
+    label: i18next.t(`checkout.checkoutTextFields.lastName`)
   }
 ];
 
-export const userContactInputLabels = (language) => [
+export const userContactInputLabels = () => [
   {
-    name: CHECKOUT_INPUT_FIELD.email,
-    label: CHECKOUT_TEXT_FIELDS[language].email
+    name: 'email',
+    label: i18next.t(`checkout.checkoutTextFields.email`)
   },
   {
-    name: CHECKOUT_INPUT_FIELD.phoneNumber,
-    label: CHECKOUT_TEXT_FIELDS[language].contactPhoneNumber
+    name: 'phoneNumber',
+    label: i18next.t(`checkout.checkoutTextFields.contactPhoneNumber`)
   }
 ];
 
 export const POSTOMAT = 'Поштомат';
 export const POST_OFFICE_NUMBER = 'Відділення № ';
 
-export const getCurrentCurrency = (currency, language = 1) =>
-  currency === DEFAULT_CURRENCY ? CHECKOUT_TITLES[language].UAH : CHECKOUT_TITLES[language].USD;
+export const getCurrentCurrency = (currency) =>
+  currency === DEFAULT_CURRENCY
+    ? i18next.t(`checkout.checkoutTitles.UAH`)
+    : i18next.t(`checkout.checkoutTitles.USD`);
 
-export const setUserValues = (values, userData, deliveryType) => {
-  const { firstName, lastName, email, phoneNumber } = userData;
-  const result = { ...values, firstName, lastName, email, phoneNumber };
-  if (
-    (deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER) &&
-    userData.address
-  ) {
-    const { city, street, buildingNumber: house, appartment: flat } = userData.address;
-    return {
-      ...result,
-      city,
-      street,
-      house,
-      flat
-    };
+export const updateInitialValues = (data, deliveryType) => {
+  const { firstName, lastName, email, phoneNumber, address } = data;
+
+  const profileData = {
+    firstName: firstName || '',
+    lastName: lastName || '',
+    email: email || '',
+    phoneNumber: phoneNumber || ''
+  };
+
+  const initValuesForNovaPost = {
+    ...stateInitialValues,
+    ...profileData,
+    city: address?.city || ''
+  };
+  const initValuesForUkrPost = {
+    ...stateInitialValues,
+    ...profileData,
+    region: address?.region || '',
+    district: address?.district || '',
+    city: address?.city || ''
+  };
+  const initValuesForSelfpickup = {
+    ...stateInitialValues,
+    ...profileData
+  };
+
+  switch (deliveryType) {
+    case 'NOVAPOST':
+      return initValuesForNovaPost;
+    case 'UKRPOST':
+      return initValuesForUkrPost;
+    case 'SELFPICKUP':
+      return initValuesForSelfpickup;
+    default:
+      return {
+        ...stateInitialValues,
+        ...profileData,
+        region: address?.region || '',
+        district: address?.district || '',
+        city: address?.city || '',
+        street: address?.street || '',
+        house: address?.buildingNumber || '',
+        flat: address?.appartment || ''
+      };
   }
-  return result;
 };
 
 export const setDeliveryTypeToStorage = (deliveryType) => {

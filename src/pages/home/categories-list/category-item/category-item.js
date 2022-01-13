@@ -1,36 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import { useStyles } from './category-item.style';
 import { getImage } from '../../../../utils/imageLoad';
-import { HOME_BUTTONS } from '../../../../translations/homepage.translations';
 
-const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl, language }) => {
+const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const [image, setImage] = useState(categoryImageUrl);
-  const history = useHistory();
-
-  const path = `/${categoryUrl}`;
-
-  const changeRouteHandler = () => {
-    history.push(path);
-  };
+  const { t } = useTranslation();
 
   useEffect(() => {
+    let isSubscribed = true;
+
     getImage(categoryImageUrl)
-      .then((src) => setImage(src))
-      .catch((badSrc) => setImage(badSrc));
+      .then((src) => (isSubscribed ? setImage(src) : null))
+      .catch((badSrc) => {
+        if (isSubscribed) {
+          setImage(badSrc);
+        }
+      });
+
+    return () => (isSubscribed = false);
   }, [categoryImageUrl]);
 
   const styles = useStyles({ image });
 
   return (
-    <div className={styles.categoryItem} data-cy='category-item' onClick={changeRouteHandler}>
+    <Link className={styles.categoryItem} to={`/${categoryUrl}`}>
       <span className={styles.categoryName}>{categoryName}</span>
-      <Link to={path} className={styles.categoryInner}>
-        {HOME_BUTTONS[language].MOVE_TO_CATEGORY}
-        <span>&#8594;</span>
-      </Link>
-    </div>
+      <div className={styles.categoryInner}>
+        <span>
+          {t('home.moveToCategory')} {categoryName}
+        </span>
+        <ArrowRightAltIcon className={styles.arrow} />
+      </div>
+    </Link>
   );
 };
 

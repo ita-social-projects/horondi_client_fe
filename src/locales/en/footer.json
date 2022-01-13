@@ -1,0 +1,15 @@
+{
+  "catalogs": "Catalogs",
+  "footerInformation": {
+    "title": "Information",
+    "aboutUs": "About us",
+     "materials": "Materials" ,
+     "paymentAndShipping": "Payment & delivery" ,
+     "privacyPolicy": "Privacy policy",
+     "answersAndQuestions": "Answers and questions"
+  },
+  "contacts": "Contacts",
+  "moreInformation": "More information",
+
+  "socialNetworkLinks": "Social networks"
+}

@@ -1,40 +1,34 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { useStyles } from './self-pickup.styles';
-import {
-  CHECKOUT_DELIVERY_TYPES,
-  CHECKOUT_TITLES,
-  SCHEDULE
-} from '../../../../../translations/checkout.translations';
+import { days } from './const';
 
-const SelfPickup = ({ isLightTheme, language }) => {
-  const styles = useStyles({ isLightTheme });
+const SelfPickup = () => {
+  const styles = useStyles();
+  const { t } = useTranslation();
+
+  const schedule = Object.values(days).map((value) => (
+    <div className={styles.scheduleItem} key={value.id}>
+      <div className={styles.scheduleItemName}>{t(`checkout.schedule.${value.label}`)}</div>
+      <div className={styles.scheduleItemHours}>
+        {value.label === days.saturday.label || value.label === days.sunday.label
+          ? t('checkout.checkoutTitles.restDay')
+          : t('checkout.checkoutTitles.workDay')}
+      </div>
+    </div>
+  ));
 
   return (
     <div className={styles.selfPickupContainer}>
-      <h3 className={styles.selfPickupTitle}>{CHECKOUT_DELIVERY_TYPES[language].selfPickUP}</h3>
       <div className={styles.selfPickupData}>
         <div className={styles.selfPickupTitlesWrapper}>
-          <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].schedule}</h5>
-          <h5 className={styles.scheduleTitle}>{CHECKOUT_TITLES[language].address}</h5>
+          <h5 className={styles.scheduleTitle}>{t('checkout.checkoutTitles.schedule')}</h5>
+          <h5 className={styles.addressTitle}>{t('checkout.checkoutTitles.address')}</h5>
         </div>
-        <div className={styles.schedule}>
-          <p className={styles.scheduleData}>
-            {Object.values(SCHEDULE[language]).map((value) =>
-              value === SCHEDULE[language].saturday || value === SCHEDULE[language].sunday ? (
-                <div className={styles.scheduleItem}>
-                  {value} {CHECKOUT_TITLES[language].restDay}{' '}
-                </div>
-              ) : (
-                <div className={styles.scheduleItem}>
-                  {value} {CHECKOUT_TITLES[language].workDay}{' '}
-                </div>
-              )
-            )}
-          </p>
-          <p className={`${styles.scheduleItem} ${styles.addressTitle}`}>
-            {CHECKOUT_TITLES[language].addressHorondi}
-          </p>
+        <div className={styles.scheduleWrapper}>
+          <div className={styles.schedule}>{schedule}</div>
+          <div className={styles.address}>{t('checkout.checkoutTitles.addressHorondi')}</div>
         </div>
       </div>
     </div>

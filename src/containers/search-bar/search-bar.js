@@ -1,57 +1,66 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
-import { setSearchFilter, getFiltredProducts } from '../../redux/products/products.actions';
-import { setSearchBarVisibility } from '../../redux/search-bar/search-bar.actions';
-import { SEARCH_TEXT } from '../../translations/product-list.translations';
+import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
+import SearchIcon from './SearchIcon';
+import { formRegExp } from '../../configs/regexp';
 
-const SearchBar = ({ fromSideBar }) => {
-  const language = useSelector(({ Language }) => Language.language);
-
-  const styles = useStyles({ fromSideBar });
-  const dispatch = useDispatch();
+const SearchBar = ({
+  searchParams,
+  setSearchParams,
+  initialSearchState,
+  fromNavBar = true,
+  handleErrors
+}) => {
+  const styles = useStyles({ fromNavBar });
+  const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
+
+  const { loading } = useQuery(getFilteredProductsQuery, {
+    onCompleted: (data) =>
+      setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
+    variables: { search: searchParams.searchFilter }
+  });
 
   const handleSearch = ({ target }) => {
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-
+    handleErrors();
+    if (!formRegExp.search.test(target.value)) {
+      handleErrors(t('error.onlyLetter'));
+    }
     if (target.value && target.value.trim()) {
       setSearchTimeout(
-        setTimeout(() => {
-          dispatch(setSearchFilter(target.value));
-          dispatch(getFiltredProducts({ forSearchBar: true }));
-          dispatch(setSearchBarVisibility(!!target.value));
-        }, 1000)
+        setSearchParams(() => ({
+          products: [],
+          searchFilter: target.value,
+          searchBarVisibility: true
+        }))
       );
     }
   };
-  const [sticky, setSticky] = useState(false);
-  const stickySearch = clsx({
-    [styles.root]: true,
-    [styles.sticky]: sticky
-  });
-  useLayoutEffect(() => {
-    window.addEventListener('scroll', () => {
-      window.scrollY > 50 ? setSticky(true) : setSticky(false);
-    });
-  }, []);
+
+  const mainClass = fromNavBar ? styles.root : styles.notFromNavbar;
+
   const handleOnBlur = () => {
-    setTimeout(() => dispatch(setSearchBarVisibility(false)), 100);
+    setTimeout(() => setSearchParams(initialSearchState), 100);
   };
 
   return (
-    <TextField
-      className={stickySearch}
-      label={SEARCH_TEXT[language].value}
-      onChange={handleSearch}
-      onBlur={handleOnBlur}
-      onFocus={handleSearch}
-    />
+    <div className={mainClass}>
+      <SearchIcon />
+      <TextField
+        placeholder={t('searchBar.search')}
+        onBlur={handleOnBlur}
+        onFocus={handleSearch}
+        inputProps={{ maxLength: 20 }}
+        onChange={handleSearch}
+      />
+    </div>
   );
 };
 

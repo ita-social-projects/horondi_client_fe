@@ -1,0 +1,36 @@
+{
+  "titles": {
+    "mainTitle": "Your Account",
+    "contactTitle": "Contact information",
+    "addressTitle": "Address"
+  },
+  "labels": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phoneNumber": "Contact phone number",
+    "country": "Country",
+    "region": "Region",
+    "district": "District",
+    "city": "City",
+    "street": "Street",
+    "buildingNumber": "Building number",
+    "appartment": "Apartment number",
+    "zipcode": "Zip Code",
+    "addPhoto": "+",
+    "saveBtnTitle": "SAVE CHANGES",
+    "password": "Current Password",
+    "confirmEmail": "Email"
+  },
+  "passwordChange": {
+    "heading": "Change password",
+    "text": "If you want to change your password, please click the button below and we will send you the instructions on your email.",
+    "btnTitle": "Change password"
+  },
+  "emailConfirm": {
+    "heading": "Confirm email",
+    "btnTitle": "Confirm Email",
+    "text": "Please confirm this email by clicking the button below."
+  },
+  "checkEmailText": "Please, check your email address"
+}

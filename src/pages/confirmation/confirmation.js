@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useStyles } from './confirmation.styles';
-import { WELCOME_MESSAGE } from '../../translations/user.translations';
 import { Loader } from '../../components/loader/loader';
 import { confirmUser } from '../../redux/user/user.actions';
 import { handleMessage } from '../../utils/handle-confirmation';
-import routes from '../../const/routes';
+import routes from '../../configs/routes';
 
 const { pathToMain, pathToLogin } = routes;
 
 const Confirmation = ({ token }) => {
-  const { language, loading, error } = useSelector(({ User, Language }) => ({
-    language: Language.language,
+  const { t, i18n } = useTranslation();
+
+  const { loading, error } = useSelector(({ User }) => ({
     loading: User.userLoading,
     error: User.error
   }));
 
+  const language = i18n.language === 'ua' ? 0 : 1;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,10 +38,10 @@ const Confirmation = ({ token }) => {
         {loading ? <Loader /> : handleMessage(error, language)}
         <div className={styles.buttonGroup}>
           <Button variant='contained' onClick={() => goTo(pathToMain)}>
-            {WELCOME_MESSAGE[language].button_goToShop}
+            {t('confirmation.goToShop')}
           </Button>
           <Button variant='contained' onClick={() => goTo(pathToLogin)}>
-            {WELCOME_MESSAGE[language].button_logIn}
+            {t('confirmation.logIn')}
           </Button>
         </div>
       </div>

@@ -91,6 +91,7 @@ export const URL_QUERIES_NAME = {
   patternsFilter: 'patternsFilter',
   isHotItemFilter: 'isHotItemFilter',
   priceFilter: 'priceFilter',
+  nameFilter: 'nameFilter',
   defaultPage: '1'
 };
 

@@ -160,7 +160,7 @@ const ProfilePage = () => {
           name='confirmEmail'
           onChange={handleChange}
           onBlur={handleBlur}
-          error={!!(touched.confirmEmail && t(errors.confirmEmail))}
+          error={Boolean(touched.confirmEmail && t(errors.confirmEmail))}
           helperText={touched.confirmEmail && t(errors.confirmEmail)}
         />
         <span className={classes.userActionsText}>

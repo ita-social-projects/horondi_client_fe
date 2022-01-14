@@ -82,7 +82,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
         ))}
       </div>
     ),
-    [styles, setIsMenuOpen]
+    [styles, setIsMenuOpen, t]
   );
 
   if (loading || error) return errorOrLoadingHandler(error, loading);

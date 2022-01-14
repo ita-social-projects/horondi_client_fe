@@ -1,6 +1,6 @@
 import { SET_CART } from './common.types';
 
-const initialState = {
+export const initialState = {
   cart: []
 };
 

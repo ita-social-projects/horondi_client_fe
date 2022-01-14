@@ -20,6 +20,7 @@ const SimilarProducts = ({ cartList, product }) => {
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
+
   const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => setSimilarProducts(data.getProducts.items)
   });

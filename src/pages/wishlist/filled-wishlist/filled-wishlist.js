@@ -43,17 +43,7 @@ const FilledWishlist = ({ items }) => {
   useEffect(() => {
     setSimilarProductsList(
       items.map((item) => ({
-        product: {
-          ...item,
-          mainMaterial: {
-            _id: item.mainMaterial.material._id,
-            color: {
-              _id: item.mainMaterial.material.colors
-                ? item.mainMaterial.material.colors[0]._id
-                : item.mainMaterial.material.color
-            }
-          }
-        }
+        productId: item._id
       }))
     );
   }, [items]);

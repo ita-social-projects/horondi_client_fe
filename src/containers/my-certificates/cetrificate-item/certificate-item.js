@@ -1,39 +1,61 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TableCell, TableRow } from '@material-ui/core';
 
+import { TableCell, TableRow, Tooltip } from '@material-ui/core';
 import { useStyles } from './certificate-item.styles';
-import CertificateCodeCopy from '../../../images/certificateCodeCopy';
-import Images from './images';
+import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
+import CertificateImages from '../../../images/certificates/certificatesPriceImg';
 
 const CertificateItem = ({ item }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
+  let status = item.isActive ? 'active' : 'used';
+  if (item.isUsed === false && item.isActive === false) status = 'expired';
+
+  const dateStart = item.dateStart.slice(0, 10).split('-').reverse().join('/');
+  const dateEnd = item.dateEnd.slice(0, 10).split('-').reverse().join('/');
+
   return (
-    <TableRow classes={{ root: styles.root }} data-cy='certificate-item'>
-      <TableCell classes={styles.image} data-cy='certificate-item-img'>
-        <img src={Images[`image${item.price}`]} className={styles.itemImg} alt='certificate img' />
+    <TableRow className={styles.root} data-cy='certificate-item'>
+      <TableCell data-cy='certificate-item-img'>
+        <img
+          src={CertificateImages[`image${item.value}`]}
+          className={styles.itemImg}
+          alt='certificate img'
+        />
       </TableCell>
       <TableCell data-cy='certificate-item-code'>
-        <div className={styles.code} value={item.code}>
+        <div className={styles.code}>
           <textarea className={styles.area} type='text' value={item.code} />
-          <button
-            className={styles.iconBtn}
-            onClick={() => navigator.clipboard.writeText(item.code)}
-          >
-            <CertificateCodeCopy alt='certificate copy icon' className={styles.copyIcon} />
-          </button>
+          <Tooltip title={t('certificate.copy')}>
+            <button
+              variant='outlined'
+              className={styles.copyBtn}
+              onClick={() => navigator.clipboard.writeText(item.code)}
+            >
+              <CertificateCodeCopy alt='certificate-copy-icon' className={styles.copyIcon} />
+            </button>
+          </Tooltip>
         </div>
       </TableCell>
       <TableCell data-cy='certificate-item-price'>
-        <div className={styles.price}>{item.price}</div>
+        <div className={styles.price}>
+          {item.value}
+          {` ${t('certificate.currency')}`}
+        </div>
       </TableCell>
       <TableCell data-cy='certificate-item-expiration'>
-        <div className={styles.item}>{item.expirationDate}</div>
+        <div className={styles.date}>{`${dateStart} - ${dateEnd}`}</div>
       </TableCell>
       <TableCell data-cy='certificate-item-status'>
-        <div className={styles.status}>{t(`certificate.${item.status}`)}</div>
+        {status === 'active' && (
+          <div className={styles.statusGreen}>{t(`certificate.${status}`)}</div>
+        )}
+        {status === 'expired' && (
+          <div className={styles.statusBlue}>{t(`certificate.${status}`)}</div>
+        )}
+        {status === 'used' && <div className={styles.statusRed}>{t(`certificate.${status}`)}</div>}
       </TableCell>
     </TableRow>
   );

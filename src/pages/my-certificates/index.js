@@ -1,3 +1,3 @@
-import Certificates from './certificates';
+import MyCertificates from './my-certificates';
 
-export default Certificates;
+export default MyCertificates;

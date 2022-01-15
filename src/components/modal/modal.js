@@ -11,6 +11,7 @@ const Modal = ({
   onAction,
   isOpen,
   isEmpty = false,
+  isInput = false,
   isFullscreen = false,
   content
 }) => {
@@ -26,7 +27,7 @@ const Modal = ({
   const body = (
     <div className={styles.paper} data-cy='removing-modal'>
       <div className={styles.header}>
-        <span>{t('common.modalHeader')}</span>
+        <span>{isInput ? t('common.modalInputHeader') : t('common.modalHeader')}</span>
         <CloseIcon
           className={styles.closeIcon}
           onClick={() => handleClose(false)}
@@ -34,12 +35,18 @@ const Modal = ({
           data-testid='closeModalIcon'
         />
       </div>
-      <p>
-        {message} {itemName}
-      </p>
+      {isInput ? (
+        <form>
+          <input className={styles.input} type='text' name='certificate-code' />
+        </form>
+      ) : (
+        <p>
+          {message} {itemName}
+        </p>
+      )}
       <div className={styles.buttonGroup}>
         <Button onClick={() => handleClose(true)} variant='contained'>
-          {t('common.buttons.confirm')}
+          {isInput ? t('common.buttons.add') : t('common.buttons.confirm')}
         </Button>
         <Button onClick={() => handleClose(false)} variant='contained'>
           {t('common.buttons.cancel')}

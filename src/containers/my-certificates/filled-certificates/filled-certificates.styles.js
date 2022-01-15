@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
-  fontWeight: '500',
+  fontWeight: '600',
   fontSize: '14px',
   letterSpacing: '0.0125em',
   textTransform: 'uppercase'

@@ -1,5 +1,6 @@
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -12,14 +13,13 @@ import { getConstructorById } from '../../../operations/getConstructorById.queri
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 
-const OrderItem = ({ product }) => {
+const OrderItem = ({ product, setProductPrices }) => {
   const styles = useStyles();
-  const { currency } = useSelector((state) => ({
-    currency: state.Currency.currency
+  const { currency } = useSelector(({ Currency }) => ({
+    currency: Currency.currency
   }));
   const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
-
   const {
     data: dataProduct,
     loading: loadingProduct,
@@ -43,13 +43,26 @@ const OrderItem = ({ product }) => {
     [errorConstructor, errorProduct]
   );
 
-  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
-
   const orderItem = product.constructor
     ? dataConstructor?.getConstructorById
     : dataProduct?.getProductById;
 
   const { sizeAndPrice } = product;
+
+  useEffect(() => {
+    const { constructor } = product;
+    const { size, price } = sizeAndPrice;
+    if (!constructor && orderItem) {
+      const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
+      setProductPrices((prevState) => [...prevState, currentSize?.price]);
+    }
+    if (constructor && orderItem) {
+      setProductPrices((prevState) => [...prevState, price]);
+    }
+  }, [setProductPrices, product, orderItem, sizeAndPrice]);
+
+  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+
   return (
     <ListItem className={styles.yourOrderListItem} key={orderItem?._id} alignItems='center'>
       <Typography component='div'>x {product.quantity}</Typography>

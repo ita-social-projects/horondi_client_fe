@@ -103,12 +103,12 @@ export const checkoutDefaultProps = {
 
 const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
-    product: item.product?._id,
+    product: item.productId,
     quantity: item.quantity,
-    isFromConstructor: !item.product._id,
-    price: item.price,
+    isFromConstructor: item.constructor.isConstructor,
+    price: item.sizeAndPrice.price,
     options: {
-      size: item.options.size._id
+      size: item.sizeAndPrice.size._id
     }
   }));
 

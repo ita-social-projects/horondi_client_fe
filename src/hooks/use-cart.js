@@ -17,7 +17,7 @@ export const useCart = (user = null) => {
   useEffect(() => {
     setToLocalStorage(CART_KEY, [...cart]);
     dispatch(setCart(cart));
-  }, [cart, user]);
+  }, [cart, user, dispatch]);
 
   const addToCart = (item) => {
     setNewCart((prevCart) => [...prevCart, item]);

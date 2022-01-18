@@ -56,16 +56,17 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
   const language = i18n.language === 'ua' ? 0 : 1;
   const { clearCart } = cartOperations;
   const dispatch = useDispatch();
-  const totalPriceToPay = cartItems.reduce(
-    (previousValue, currentValue) =>
-      previousValue + calcPriceForCart(currentValue, currency, currentValue.quantity),
-    0
-  );
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
   );
-
   const [initialValues, setInitialValues] = useState(stateInitialValues);
+  const [pricesFromQuery, setPricesFromQuery] = useState([]);
+
+  const totalPriceToPay = pricesFromQuery.reduce(
+    (previousValue, currentValue, index) =>
+      previousValue + calcPriceForCart(currentValue, cartItems[index].quantity),
+    0
+  );
 
   const consentLink = (
     <div className={styles.consentMessage}>
@@ -273,6 +274,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
               language={language}
               styles={styles}
               deliveryType={deliveryType}
+              setPricesFromQuery={setPricesFromQuery}
             />
           </Grid>
         </Grid>

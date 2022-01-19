@@ -22,12 +22,9 @@ jest.mock('@apollo/client', () => ({
   useQuery: () => ({ loading: false, error: null, data: { getProductById: mockQueryData } })
 }));
 
-const mockGetTotalPrice = jest.fn(() => '42');
-
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: mockedCartItemsData,
-    cartOperations: { getTotalPrice: mockGetTotalPrice }
+    cart: mockedCartItemsData
   })
 }));
 
@@ -40,7 +37,6 @@ describe('<YourOrder /> component tests', () => {
     useSelector.mockImplementation(() => userData);
 
     render(<YourOrder {...mockedProps} />);
-    expect(mockGetTotalPrice).toHaveBeenCalled();
     expect(screen.getByRole('list')).toBeTruthy();
   });
 

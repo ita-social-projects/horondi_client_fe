@@ -33,71 +33,6 @@ const loginUser = async (data) => {
       blockCount
       updatedAt
     }
-    cart{
-      items {
-        _id
-        product {
-        _id
-        name {
-            lang
-            value
-        }
-        category{
-          _id
-        }
-        bottomMaterial{
-            material{
-            name{
-                lang
-                value
-            }
-            }
-        }
-        mainMaterial{
-          color{
-            _id
-            name{
-              lang
-              value
-            }
-          }
-        }
-        pattern{
-          _id
-        }
-        images{
-            primary{
-            small
-            thumbnail
-            }
-        }
-        
-        }
-        quantity
-        options {
-        size {
-            _id
-            name
-        }
-        }
-        allSizes {
-        size {
-            _id
-            name
-        }
-        price {
-            currency
-            value
-        }
-        }
-        price {
-        value
-        }
-    }
-      totalPrice{
-        value
-      }
-    }
   }
 }
   `;
@@ -282,22 +217,6 @@ const getUserByToken = async () => {
               district
             }
             confirmed
-            cart {
-              items {
-                product {
-                  _id
-                }
-                quantity
-                options {
-                  size {
-                    _id
-                  }
-                }
-              }
-              totalPrice {
-                value
-              }
-            }
           }
           ... on Error {
             statusCode

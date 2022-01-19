@@ -89,14 +89,15 @@ export const Products = {
   product: {
     ...product,
     _id: '123'
-  },
-  productToSend: {
-    product,
-    quatity: 1,
-    options: {
-      size: {
-        _id: '604394cba7532c33dcb326d6'
-      }
+  }
+};
+
+export const productToSend = {
+  product,
+  quatity: 1,
+  options: {
+    size: {
+      _id: '604394cba7532c33dcb326d6'
     }
   }
 };

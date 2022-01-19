@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -12,8 +12,6 @@ import { useStyles } from './cart-item.styles';
 import NumberInput from '../../../../components/number-input';
 import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
-
-import { changeCartItemUserQuantity } from '../../../../redux/cart/cart.actions';
 
 import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getCurrencySign } from '../../../../utils/currency';
@@ -26,7 +24,6 @@ import Loader from '../../../../components/loader';
 const { pathToProducts } = routes;
 
 const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) => {
-  const dispatch = useDispatch();
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useSelector(({ Currency }) => ({
@@ -42,8 +39,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
   const onChangeQuantity = useCallback(
     _.debounce((value) => {
       changeQuantity(item.id, value);
-    }, 500),
-    [dispatch, changeCartItemUserQuantity]
+    }, 500)
   );
 
   const [

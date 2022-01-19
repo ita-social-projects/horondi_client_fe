@@ -8,7 +8,6 @@ import { useStyles } from './thanks-page.styles';
 import ThanksCard from './thanks-card';
 import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
-import { resetCart, cleanUserCart } from '../../redux/cart/cart.actions';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { Loader } from '../../components/loader/loader';
 import { deliveryTypes } from '../../configs';
@@ -31,12 +30,6 @@ const ThanksPage = () => {
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
   useEffect(() => {
-    if (user) {
-      dispatch(cleanUserCart(user._id));
-    } else {
-      dispatch(resetCart());
-    }
-
     const { order_id: paidOrderNumber } = parse(router.search);
 
     if (paidOrderNumber) {

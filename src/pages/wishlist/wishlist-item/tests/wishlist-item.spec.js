@@ -18,6 +18,10 @@ jest.mock('connected-react-router', () => ({
   push: jest.fn()
 }));
 
+const mockIsInCart = jest.fn();
+const mockAddToCart = jest.fn();
+const mockCartOperations = { addToCart: mockAddToCart };
+
 const dispatch = jest.fn();
 const state = {
   currency: 0,
@@ -35,7 +39,10 @@ const props = {
     name: [{ value: '' }, { value: '' }]
   },
   setModalItem: () => null,
-  setModalVisibility: () => null
+  currency: 0,
+  setModalVisibility: () => null,
+  cartOperations: mockCartOperations,
+  isInCart: mockIsInCart
 };
 describe('WishlistItem component tests', () => {
   it('Should render WishlistItem', () => {

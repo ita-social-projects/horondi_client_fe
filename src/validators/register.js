@@ -12,7 +12,11 @@ export const regValidationSchema = Yup.object().shape({
     .max(30, 'error.profile.firstName')
     .matches(formRegExp.firstName, 'error.wrongFormat')
     .required('error.requiredField'),
-  email: Yup.string().email('error.profile.email').required('error.profile.email'),
+  email: Yup.string()
+    .email('error.profile.email')
+    .required('error.profile.email')
+    .min(8, 'error.emailLength')
+    .max(60, 'error.emailLength'),
   password: Yup.string()
     .matches(formRegExp.password, 'error.profile.pass')
     .required('error.requiredField')

@@ -157,7 +157,7 @@ const Comments = ({ productId, checkCountComments }) => {
         <div className={styles.submit}>
           <Tooltip
             title={userData ? '' : t(`product.tooltips.unregisteredComment`)}
-            placement='right'
+            placement='bottom-end'
           >
             <div className={styles.commentBtnContainer}>
               <Button

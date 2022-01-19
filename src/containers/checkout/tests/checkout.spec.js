@@ -12,13 +12,11 @@ const mockUseContext = jest.fn().mockImplementation(() => ({
 React.useContext = mockUseContext;
 
 const state = {
-  language: 1,
   currency: 0,
-  cartItems: [],
-  deliveryType: '',
   loading: false,
   isOrderCreated: false,
-  order: null
+  order: null,
+  user: null
 };
 const mockDispatch = jest.fn();
 

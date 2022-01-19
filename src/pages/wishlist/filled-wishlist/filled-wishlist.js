@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
 import Modal from '../../../components/modal';
@@ -13,12 +13,18 @@ import EmptyWishlist from '../empty-wishlist';
 import SimilarProducts from '../../product-details/similar-products';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import { TOAST_SETTINGS } from '../../product-details/constants';
+import { useCart } from '../../../hooks/use-cart';
 
 const FilledWishlist = ({ items }) => {
+  const { currency, userData } = useSelector(({ Currency, User }) => ({
+    currency: Currency.currency,
+    userData: User.userData
+  }));
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const [wishlist, setWishlist] = useState(items || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
+  const { cartOperations, isInCart } = useCart(userData);
 
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -37,17 +43,7 @@ const FilledWishlist = ({ items }) => {
   useEffect(() => {
     setSimilarProductsList(
       items.map((item) => ({
-        product: {
-          ...item,
-          mainMaterial: {
-            _id: item.mainMaterial.material._id,
-            color: {
-              _id: item.mainMaterial.material.colors
-                ? item.mainMaterial.material.colors[0]._id
-                : item.mainMaterial.material.color
-            }
-          }
-        }
+        productId: item._id
       }))
     );
   }, [items]);
@@ -86,7 +82,10 @@ const FilledWishlist = ({ items }) => {
                   setModalVisibility={() => {
                     setModalVisibility(!modalVisibility);
                   }}
+                  cartOperations={cartOperations}
+                  isInCart={isInCart}
                   setModalItem={setModalItem}
+                  currency={currency}
                 />
               ))}
             </TableBody>

@@ -6,20 +6,19 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './product-submit.styles';
 import { TOAST_SETTINGS } from '../constants';
-import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
-import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
 import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
-const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
+const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productToSend }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { productToSend, userData } = useSelector(selectLanguageProductsUserWishlist);
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
+  }));
   const { cartOperations, isInCart } = useCart(userData);
-
   const { t } = useTranslation();
 
   const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);
@@ -52,17 +51,6 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled }) => {
         quantity: 1,
         constructor: false
       };
-
-      if (userData) {
-        const newCartItemWithUserId = {
-          userId: userData._id,
-          cartItem: productToSend
-        };
-
-        dispatch(addProductToUserCart(newCartItemWithUserId));
-      } else {
-        dispatch(addItemToCart(productToSend));
-      }
 
       addToCart(newCart);
 

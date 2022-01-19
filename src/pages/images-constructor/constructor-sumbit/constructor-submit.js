@@ -8,8 +8,6 @@ import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './constructor-submit.styles';
 
-import { selectLanguageProductsUserWishlist } from '../../../utils/multiple.selectors';
-import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
 import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
@@ -20,32 +18,12 @@ const { pathToCart } = routes;
 const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSizes }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { userData } = useSelector(selectLanguageProductsUserWishlist);
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
+  }));
   const { cartOperations, isInCart } = useCart(userData);
 
   const { t } = useTranslation();
-  const productToSend = {
-    id: Date.now(),
-    allSizes,
-    options: { size: sizeAndPrice.size, price: sizeAndPrice.price },
-    product: {
-      ...constructorValues,
-      isFromConstructor: true,
-      pattern:
-        constructorValues.patterns !== undefined
-          ? constructorValues.patterns
-          : constructorValues._id,
-      mainMaterial: {
-        color: {
-          _id: constructorValues.patterns ? constructorValues.patterns._id : constructorValues._id
-        }
-      },
-      category: {
-        _id: constructorValues.patterns ? constructorValues.patterns._id : constructorValues._id
-      }
-    },
-    quantity: 1
-  };
 
   const isItemInCart = isInCart(constructorValues._id, constructorValues.sizes._id);
 
@@ -75,17 +53,6 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
         quantity: 1,
         constructor: { isConstructor: true }
       };
-
-      if (userData) {
-        const newCartItemWithUserId = {
-          userId: userData._id,
-          cartItem: productToSend
-        };
-
-        dispatch(addProductToUserCart(newCartItemWithUserId));
-      } else {
-        dispatch(addItemToCart(productToSend));
-      }
 
       addToCart(newCart);
 

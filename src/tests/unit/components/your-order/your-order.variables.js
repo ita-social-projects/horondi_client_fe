@@ -4,6 +4,7 @@ export const mockedProps = {
   currency: 0,
   language: 0,
   checkoutFormBtnValue: jest.fn(),
+  setPricesFromQuery: jest.fn(),
   deliveryType: ''
 };
 

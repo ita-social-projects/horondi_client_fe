@@ -80,7 +80,7 @@ describe('UseEffect', () => {
       );
     });
     waitForElement(() => {
-      expect(getImage).toHaveBeenCalled;
+      expect(getImage).toHaveBeenCalled();
     });
   });
 });

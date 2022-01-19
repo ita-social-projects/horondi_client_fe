@@ -15,14 +15,13 @@ import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { Loader } from '../../../../../components/loader/loader';
 import { SnackBarContext } from '../../../../../context/snackbar-context';
 
-const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments }) => {
+const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, productId }) => {
   const { t, i18n } = useTranslation();
 
   const { setSnackBarMessage } = useContext(SnackBarContext);
   const styles = useStyles();
-  const { userData, productId } = useSelector(({ User, Products }) => ({
-    userData: User.userData,
-    productId: Products.productToSend._id
+  const { userData } = useSelector(({ User }) => ({
+    userData: User.userData
   }));
   const { firstName } = user;
 

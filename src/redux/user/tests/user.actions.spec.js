@@ -18,7 +18,6 @@ import {
   setConfirmationLoading,
   setRecoveryLoading,
   setUserOrders,
-  addProductToUserCart,
   removeProductFromUserCart,
   deleteUserDataFromStore
 } from '../user.actions';
@@ -42,7 +41,6 @@ import {
   SET_CONFIRMATION_LOADING,
   SET_RECOVERY_LOADING,
   SET_USER_ORDERS,
-  ADD_PRODUCT_TO_USER_CART,
   REMOVE_PRODUCT_FROM_USER_CART,
   SET_DELETE_USER
 } from '../user.types';
@@ -160,12 +158,6 @@ describe('test User actions', () => {
     expect(setUserOrders(null)).toEqual({
       type: SET_USER_ORDERS,
       payload: initialStateMock.userOrders
-    });
-  });
-  test('should test addProductToUserCart', () => {
-    expect(addProductToUserCart(1)).toEqual({
-      type: ADD_PRODUCT_TO_USER_CART,
-      payload: userMocks.id
     });
   });
   test('should test removeProductFromUserCart', () => {

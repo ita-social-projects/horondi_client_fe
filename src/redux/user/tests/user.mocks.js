@@ -45,60 +45,6 @@ export const user = {
   cart: null
 };
 
-export const userCart = {
-  cart: {
-    items: [
-      {
-        product: {
-          _id: '605658df158e2fdb53498442',
-          name: [
-            {
-              lang: 'ua',
-              value: 'Роллтоп Синій'
-            },
-            {
-              lang: 'en',
-              value: 'Rolltop Blue'
-            }
-          ],
-          category: {
-            _id: '6043bdeb3e06ad3edcdb7b2d'
-          }
-        },
-        quantity: 1,
-        options: {
-          size: {
-            _id: '604394cba7532c33dcb326d6',
-            name: 'M'
-          }
-        },
-        price: [
-          {
-            currency: 'UAH',
-            value: 1550
-          },
-          {
-            currency: 'USD',
-            value: 5000
-          }
-        ]
-      }
-    ],
-    totalPrice: [
-      {
-        currency: 'UAH',
-        value: 1550
-      },
-      {
-        currency: 'USD',
-        value: 5000
-      }
-    ]
-  }
-};
-
-export const cartFromLc = [];
-
 export const purchasedProducts = [];
 
 export const userWithProducts = {

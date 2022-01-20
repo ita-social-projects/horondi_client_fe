@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     backgroundColor: '#020202',
     boxShadow: '0px 8px 16px 0px #2424241F',
+    zIndex: '1301',
 
     transition: 'all 0.5s ease-out',
     '& .MuiToolbar-regular': {

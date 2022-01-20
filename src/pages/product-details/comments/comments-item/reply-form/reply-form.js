@@ -23,7 +23,6 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, pr
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
-  // const { firstName } = user;
 
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
     onError: (err) => {

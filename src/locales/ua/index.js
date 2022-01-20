@@ -5,6 +5,7 @@ import register from './register.json';
 import recovery from './recovery.json';
 import profilePage from './profilePage.json';
 import thanksPage from './thanksPage.json';
+import certificates from './certificates.json';
 import checkout from './checkout.json';
 import cart from './cart.json';
 import wishlist from './wishlist.json';
@@ -40,6 +41,7 @@ export default {
     register,
     recovery,
     profilePage,
+    certificates,
     thanksPage,
     checkout,
     cart,

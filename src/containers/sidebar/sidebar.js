@@ -92,6 +92,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       className={sidebar}
       anchor='left'
       open={isMenuOpen}
+      style={{ zIndex: 1302 }}
       onClose={() => setIsMenuOpen(false)}
       data-testid='linkToSidebar'
     >

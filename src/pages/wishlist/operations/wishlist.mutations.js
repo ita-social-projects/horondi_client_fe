@@ -26,6 +26,7 @@ export const deleteProductFromWishlist = gql`
         _id
         products {
           _id
+          translationsKey
           images {
             primary {
               thumbnail
@@ -48,6 +49,7 @@ export const deleteProductFromWishlist = gql`
           bottomMaterial {
             material {
               _id
+              translationsKey
               name {
                 value
               }

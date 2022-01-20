@@ -1,30 +1,31 @@
 import * as React from 'react';
 import { Button, Divider, List, Paper, Typography } from '@material-ui/core';
+import { useState, useEffect } from 'react';
 import SelfPickup from '../../../checkout/checkout-form/delivery/self-pickup/self-pickup';
 import { useCart } from '../../../../hooks/use-cart';
 import OrderItem from './order-item';
 import { getCurrencySign } from '../../../../utils/currency';
 
 const YourOrder = ({ ...props }) => {
-  const {
-    cart,
-    cartOperations: { getTotalPrice }
-  } = useCart();
-
+  const { cart } = useCart();
   const {
     currency,
     checkoutFormBtnValue,
     consentLink,
     t,
-
+    totalPriceToPay,
     values,
     language,
     styles,
-    deliveryType
+    deliveryType,
+    setPricesFromQuery
   } = props;
 
+  const [productPrices, setProductPrices] = useState([]);
   const currencySign = getCurrencySign(currency);
-
+  useEffect(() => {
+    setPricesFromQuery(productPrices.map((item) => item[currency].value));
+  }, [setPricesFromQuery, productPrices, currency]);
   return (
     <Paper className={styles.yourOrderContainer} elevation={4}>
       <Typography
@@ -39,7 +40,14 @@ const YourOrder = ({ ...props }) => {
       <Divider variant='fullWidth' />
       <List className={styles.yourOrderList} data-testid='orderList'>
         {cart
-          ? cart.map((item) => <OrderItem key={item.id} product={item} data-testid='orderItem' />)
+          ? cart.map((item) => (
+            <OrderItem
+              key={item.id}
+              product={item}
+              setProductPrices={setProductPrices}
+              data-testid='orderItem'
+            />
+          ))
           : null}
       </List>
       <Divider variant='fullWidth' />
@@ -51,9 +59,9 @@ const YourOrder = ({ ...props }) => {
       )}
       <Typography className={styles.yourOrderTotalPrice} component='div'>
         {t('common.toPay')}:
-        <div>
-          {currencySign}
-          {Math.ceil(getTotalPrice(currency))}
+        <div className={styles.totalPrice}>
+          <span>{currencySign}</span>
+          {totalPriceToPay}
         </div>{' '}
       </Typography>
       <Divider variant='fullWidth' />

@@ -1,18 +1,3 @@
-export const selectCurrencyProductsCategoryFilter = ({
-  Currency,
-  Products: { productToSend }
-}) => ({
-  currency: Currency.currency,
-  productToSend
-});
-
-export const selectLanguageProductsUserWishlist = ({ Language, Products, User, Cart }) => ({
-  language: Language.language,
-  productToSend: Products.productToSend,
-  userData: User.userData,
-  cartList: Cart.list
-});
-
 export const selectLocation = ({ router }) => ({
   location: router.location.pathname
 });

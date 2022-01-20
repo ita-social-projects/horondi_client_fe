@@ -118,11 +118,5 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   registerGroup: {
     position: 'relative'
-  },
-  afterText: {
-    '& p::after': {
-      content: `'example@mail.com'`,
-      color: '#F44336'
-    }
   }
 }));

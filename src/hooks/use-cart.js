@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   clearNewCart,
   getFromLocalStorage,
@@ -6,13 +7,17 @@ import {
 } from '../services/local-storage.service';
 import { calcPriceForCart } from '../utils/priceCalculating';
 import { CART_KEY } from '../configs';
+import { setCart } from '../redux/common-store/common.actions';
 
 export const useCart = (user = null) => {
+  const dispatch = useDispatch();
+
   const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY) || []);
 
   useEffect(() => {
     setToLocalStorage(CART_KEY, [...cart]);
-  }, [cart]);
+    dispatch(setCart(cart));
+  }, [cart, user, dispatch]);
 
   const addToCart = (item) => {
     setNewCart((prevCart) => [...prevCart, item]);

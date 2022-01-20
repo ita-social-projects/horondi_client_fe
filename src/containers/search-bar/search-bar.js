@@ -12,7 +12,9 @@ const SearchBar = ({
   setSearchParams,
   initialSearchState,
   fromNavBar = true,
-  handleErrors
+  handleErrors,
+  searchHandler,
+  defaultValue
 }) => {
   const styles = useStyles({ fromNavBar });
   const { t } = useTranslation();
@@ -29,8 +31,10 @@ const SearchBar = ({
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-    handleErrors();
-    if (!formRegExp.search.test(target.value)) {
+    if (handleErrors) {
+      handleErrors();
+    }
+    if (handleErrors && !formRegExp.search.test(target.value)) {
       handleErrors(t('error.onlyLetter'));
     }
     if (target.value && target.value.trim()) {
@@ -55,10 +59,11 @@ const SearchBar = ({
       <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}
+        value={defaultValue || ''}
         onBlur={handleOnBlur}
         onFocus={handleSearch}
         inputProps={{ maxLength: 20 }}
-        onChange={handleSearch}
+        onChange={searchHandler || handleSearch}
       />
     </div>
   );

@@ -7,20 +7,23 @@ import CheckoutForm from './checkout-form';
 import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
+import { useCart } from '../../hooks/use-cart';
 
 const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
-  const { currency, cartItems, loading, isOrderCreated, order } = useSelector(
-    ({ Currency, Cart, Order }) => ({
+  const { currency, loading, isOrderCreated, order, user } = useSelector(
+    ({ Currency, Order, User }) => ({
       currency: Currency.currency,
-      cartItems: Cart.list,
       loading: Order.loading,
       isOrderCreated: Order.isOrderCreated,
-      order: Order.order
+      order: Order.order,
+      user: User.userData
     })
   );
   const dispatch = useDispatch();
+
+  const { cart: cartItems, cartOperations } = useCart(user);
 
   useEffect(() => () => dispatch(setIsOrderCreated(false)), [dispatch, isOrderCreated]);
 
@@ -33,7 +36,7 @@ const Checkout = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>
-          <CheckoutForm currency={currency} cartItems={cartItems} />
+          <CheckoutForm currency={currency} cartItems={cartItems} cartOperations={cartOperations} />
         </div>
       )}
     </div>

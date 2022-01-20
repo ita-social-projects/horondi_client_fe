@@ -1,33 +1,32 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 
 import { TableCell, TableRow } from '@material-ui/core';
 import { push } from 'connected-react-router';
+import { useDispatch } from 'react-redux';
 import { useStyles } from './wishlist-item.styles';
 import { IMG_URL } from '../../../configs';
 import { getCurrencySign } from '../../../utils/currency';
 import routes from '../../../configs/routes';
 import ThemeContext from '../../../context/theme-context';
-import { addItemToCart, addProductToUserCart } from '../../../redux/cart/cart.actions';
-import { useCart } from '../../../hooks/use-cart';
 
 const { pathToProducts } = routes;
 
-const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
-  const { currency, userData } = useSelector(({ Currency, User }) => ({
-    currency: Currency.currency,
-    userData: User.userData
-  }));
-
+const WishlistItem = ({
+  item,
+  setModalVisibility,
+  setModalItem,
+  cartOperations,
+  currency,
+  isInCart
+}) => {
   const { t } = useTranslation();
   const [isLightTheme] = useContext(ThemeContext);
   const styles = useStyles(isLightTheme);
   const dispatch = useDispatch();
-  const { cartOperations, isInCart } = useCart(userData);
   const { addToCart } = cartOperations;
   const { pathToCart } = routes;
   const currencySign = getCurrencySign(currency);
@@ -45,7 +44,6 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
   const cartButtonLabel = isItemInCart
     ? t('product.pdpButtons.inCart')
     : t('product.pdpButtons.cartButton');
-
   const productForCart = {
     allSizes: item.sizes.filter((el) => el.size?.available),
     id: Date.now().toString(),
@@ -63,15 +61,6 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem }) => {
   };
 
   const onAddToCart = () => {
-    if (userData) {
-      const newCartItemWithUserId = {
-        userId: userData._id,
-        cartItem: productForCart
-      };
-      dispatch(addProductToUserCart(newCartItemWithUserId));
-    } else {
-      dispatch(addItemToCart(productForCart));
-    }
     addToCart(newCart);
   };
 

@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     backgroundColor: '#020202',
     boxShadow: '0px 8px 16px 0px #2424241F',
+    zIndex: '1301',
 
     transition: 'all 0.5s ease-out',
     '& .MuiToolbar-regular': {
@@ -94,19 +95,19 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   language: {
-    marginRight: '40px',
+    marginRight: '37px',
     '@media (max-width: 900px)': {
       marginRight: '0px'
     }
   },
   currency: {
-    marginRight: '40px',
+    marginRight: '37px',
     '@media (max-width: 900px)': {
       marginRight: '0px'
     }
   },
   callUs: {
-    width: '185px',
+    width: '190px',
     textAlign: 'right',
     cursor: 'pointer',
     '@media (max-width: 450px)': {

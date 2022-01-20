@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -49,6 +49,13 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
     toggleModal(false);
   };
 
+  useEffect(
+    () => () => {
+      toggleModal(false);
+    },
+    []
+  );
+
   if (!show && userData?._id !== _id) {
     return null;
   }
@@ -90,7 +97,7 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
           </div>
           <div className={styles.userIcons}>
             {handleUserCommentOwner(userData, email) ? (
-              <div className={styles.icons}>
+              <div className={styles.icons} data-testid='showModal'>
                 <Tooltip title={t('product.tooltips.delete')}>
                   <DeleteIcon className={styles.deleteIcon} onClick={handleOpen} />
                 </Tooltip>

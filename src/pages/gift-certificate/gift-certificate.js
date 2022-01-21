@@ -47,17 +47,19 @@ const GiftCertificate = () => {
   };
 
   const handleCountChange = (count, index) => {
-    setCheckboxesArr(checkboxesArr.map((e, key) => (key === index ? { ...e, count } : e)));
+    setCheckboxesArr(
+      checkboxesArr.map((checkbox, key) => (key === index ? { ...checkbox, count } : checkbox))
+    );
   };
 
-  const checkboxContent = checkboxesArr.map((e, key) => (
+  const checkboxContent = checkboxesArr.map((checkbox, index) => (
     <CertificateCheckbox
       handleAllCheckboxesChange={handleCheckboxChange}
       handleAllCountChange={handleCountChange}
-      checked={e.checked}
-      index={key}
-      key={e.value}
-      value={e.value}
+      checked={checkbox.checked}
+      index={index}
+      key={checkbox.value}
+      value={checkbox.value}
     />
   ));
 

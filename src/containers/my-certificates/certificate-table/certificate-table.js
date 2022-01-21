@@ -15,9 +15,13 @@ const CertificateTable = ({ items }) => {
     if (items.length) setItemsList(items);
   }, [items]);
 
-  const certificateItems = itemsList
-    .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
-    .map((item) => <CertificateItem item={item} key={item._id} />);
+  const sortedCertificatesByDate = itemsList.sort(
+    (a, b) => new Date(b.dateStart) - new Date(a.dateStart)
+  );
+
+  const certificateItems = sortedCertificatesByDate.map((item) => (
+    <CertificateItem item={item} key={item._id} />
+  ));
 
   const headerItems = ROW_FIELDS.map((item) => (
     <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>

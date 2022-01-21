@@ -16,7 +16,6 @@ const EmptyWishlist = () => {
     ? CART_AND_WISHLIST_IMAGES.lightTheme
     : CART_AND_WISHLIST_IMAGES.darkTheme;
   const titleStyles = isLightTheme ? styles.whiteThemeTitle : styles.darkThemeTitle;
-  const buttonStyles = isLightTheme ? styles.whiteThemeButton : styles.darkThemeButton;
 
   return (
     <div className={styles.root} data-cy='empty-wishlist'>
@@ -25,7 +24,7 @@ const EmptyWishlist = () => {
       </Typography>
       <img src={emptyWishlistImgLink} className={styles.image} alt='empty wishlist' />
       <Link to='/catalog/products?page=1&sort=null&countPerPage=9'>
-        <Button className={buttonStyles} variant='contained'>
+        <Button className={styles.button} variant='contained'>
           {t('wishlist.wishlistButtons.empty')}
         </Button>
       </Link>

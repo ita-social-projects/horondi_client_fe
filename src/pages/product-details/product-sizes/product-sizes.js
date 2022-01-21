@@ -15,10 +15,29 @@ const ProductSizes = ({
   const { t } = useTranslation();
   const styles = useStyles();
 
+  const filterDuplicatesNames = (sizes) => {
+    const uniqueSizesNames = new Set(sizes?.map((sizeObject) => sizeObject.size.name));
+    const filteredSizes = [];
+
+    if (uniqueSizesNames?.size < sizes?.length) {
+      for (const sizeObject of sizes) {
+        const nameOfSize = sizeObject.size?.name;
+
+        if (!filteredSizes.some((element) => element.size?.name === nameOfSize)) {
+          filteredSizes.push(sizeObject);
+        }
+      }
+      return filteredSizes;
+    }
+    return sizes;
+  };
+
+  const filteredSizes = filterDuplicatesNames(sizes);
+
   const sizeButtons =
-    sizes &&
-    !!sizes.length &&
-    sizes.map(({ size }, index) => (
+    filteredSizes &&
+    !!filteredSizes.length &&
+    filteredSizes.map(({ size }, index) => (
       <Button
         disabled={!(size.available && checkDisabledProduct)}
         key={size._id}

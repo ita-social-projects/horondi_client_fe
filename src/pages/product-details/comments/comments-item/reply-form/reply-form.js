@@ -23,7 +23,6 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, pr
   const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
-  const { firstName } = user;
 
   const [addReply, { loading: addReplyLoading }] = useMutation(addReplyMutation, {
     onError: (err) => {
@@ -62,6 +61,8 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, pr
   const dateToShow = new Date();
   const currentDate = dateToShow.toLocaleString(dateLanguage, COMMENTS_TIME_OPTIONS);
 
+  const commentsAuthorFirstName = user ? user.firstName : t('common.userData.firstName');
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form}>
@@ -69,7 +70,7 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, pr
           <span>
             <span>{userFirstName}</span>
             <ReplyOutlinedIcon className={styles.replyIcon} />
-            <span>{firstName}</span>
+            <span>{commentsAuthorFirstName}</span>
           </span>
           <span>{currentDate}</span>
         </div>

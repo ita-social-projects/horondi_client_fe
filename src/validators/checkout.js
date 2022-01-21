@@ -14,7 +14,11 @@ export const validationSchema = (deliveryType) =>
       .max(20, 'error.profile.lastName')
       .matches(formRegExp.lastName, 'error.onlyLetter')
       .required('error.requiredField'),
-    email: Yup.string().email('error.profile.email').required('error.requiredField'),
+    email: Yup.string()
+      .email('error.profile.email')
+      .required('error.requiredField')
+      .min(8, 'error.emailLength')
+      .max(60, 'error.emailLength'),
     phoneNumber: Yup.string()
       .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
       .required('error.requiredField'),

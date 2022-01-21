@@ -14,8 +14,14 @@ jest.mock('react-i18next', () => ({
   })
 }));
 const mockClearCart = jest.fn();
+const mockBlur = jest.fn();
+const mockSubmit = jest.fn();
+const mockChange = jest.fn();
+const mockSetFieldValue = jest.fn();
+
 const mockCartOperations = { clearCart: mockClearCart };
 const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
+const handleChange = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
 const dispatch = jest.fn();
 const props = {
   language: 1,
@@ -34,6 +40,19 @@ const userData = {
   snackBarMessage: ''
 };
 
+jest.mock('formik', () => ({
+  ...jest.requireActual('formik'),
+  useFormik: () => ({
+    values: {},
+    handleSubmit: mockSubmit,
+    handleChange: mockChange,
+    touched: {},
+    errors: {},
+    setFieldValue: mockSetFieldValue,
+    handleBlur: mockBlur
+  })
+}));
+
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
 
@@ -49,5 +68,9 @@ describe('CheckoutForm component tests', () => {
   it('<CheckoutForm /> should contain component <DeliveryType />', () => {
     const wrapper = shallow(<CheckoutForm {...props} language={0} />);
     expect(wrapper.find(DeliveryType).length).toEqual(1);
+  });
+  it('should submit add payment method', async () => {
+    const wrapper = shallow(<CheckoutForm {...props} onSubmit={handleChange} />);
+    wrapper.find('form').simulate('submit');
   });
 });

@@ -15,11 +15,13 @@ const GiftCertificate = () => {
   const email = useSelector(({ User }) => User?.userData?.email);
   const [initialValues, setInitialValues] = useState('');
 
-  const [checkboxesArr, setCheckboxesArr] = useState([
+  const CHECKBOXES_STATE = [
     { value: 500, checked: false, count: INITIAL_CERTIFICATE_COUNT },
     { value: 1000, checked: true, count: INITIAL_CERTIFICATE_COUNT },
     { value: 1500, checked: false, count: INITIAL_CERTIFICATE_COUNT }
-  ]);
+  ];
+
+  const [checkboxesArr, setCheckboxesArr] = useState(CHECKBOXES_STATE);
 
   useEffect(() => {
     if (email) {
@@ -33,11 +35,15 @@ const GiftCertificate = () => {
     onSubmit: () => {}
   });
 
-  const handleCheckboxChange = (value, index) => {
-    checkboxesArr.forEach((e) => {
-      e.checked = false;
+  const handleCheckboxChange = (value, checkboxIndex) => {
+    checkboxesArr.forEach((checkbox) => {
+      checkbox.checked = false;
     });
-    setCheckboxesArr(checkboxesArr.map((e, key) => (key === index ? { ...e, checked: value } : e)));
+    setCheckboxesArr(
+      checkboxesArr.map((checkbox, index) =>
+        index === checkboxIndex ? { ...checkbox, checked: value } : checkbox
+      )
+    );
   };
 
   const handleCountChange = (count, index) => {
@@ -65,8 +71,8 @@ const GiftCertificate = () => {
     );
   };
 
-  const certificateRulesContent = certificateRules.map((e, key) => (
-    <CertificateRule key={e} index={key} />
+  const certificateRulesContent = certificateRules.map((certificateRule, index) => (
+    <CertificateRule key={certificateRule} index={index} />
   ));
 
   return (

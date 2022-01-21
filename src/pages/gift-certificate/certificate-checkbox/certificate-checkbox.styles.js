@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import sertificateImg from '../../../images/Sertificate.png';
+import sertificateImg from '../../../images/sertificate.svg';
 
 export const useStyles = makeStyles(({ palette }) => ({
   root: {
@@ -13,7 +13,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'center'
   },
   checkbox: {
-    height: '40px'
+    height: '40px',
+    '& svg': {
+      color: palette.textColor
+    }
   },
   certificate: {
     display: 'flex',
@@ -26,8 +29,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     backgroundSize: '100% 100%',
     fontSize: '10px',
     justifyContent: 'center',
-    paddingTop: '15px',
+    paddingTop: '30px',
+    paddingRight: '15px',
     textTransform: 'uppercase',
     fontWeight: 400
+  },
+  numberInput: {
+    marginLeft: '30px'
   }
 }));

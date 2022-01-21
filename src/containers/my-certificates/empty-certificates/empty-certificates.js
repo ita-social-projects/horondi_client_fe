@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './empty-certificates.styles';
 import routes from '../../../configs/routes';
-import EmptyCertificateImg from '../../../images/certificates/emptyCertificatesImg';
+import EmptyCertificateImg from '../../../images/certificates/EmptyCertificateImg';
 
 const { pathToGiftСertificate } = routes;
 
@@ -30,7 +30,7 @@ const EmptyCertificates = () => {
         </Typography>
         <img src={emptyOrderImgLink} alt='empty certificate icon' />
         <Link to={pathToGiftСertificate}>
-          <Button className={styles.button} variant='contained' onClick={() => {}}>
+          <Button className={styles.button} variant='contained'>
             {t('certificate.buy')}
           </Button>
         </Link>

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { TableCell, TableRow, Tooltip } from '@material-ui/core';
 import { useStyles } from './certificate-item.styles';
 import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
-import CertificateImages from '../../../images/certificates/certificatesPriceImg';
+import CertificateImages from '../../../images/certificates/CertificateImages';
 
 const CertificateItem = ({ item }) => {
   const styles = useStyles();

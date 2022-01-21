@@ -30,7 +30,7 @@ const EmptyCertificates = () => {
         </Typography>
         <img src={emptyOrderImgLink} alt='empty certificate icon' />
         <Link to={pathToGiftСertificate}>
-          <Button className={styles.button} variant='contained'>
+          <Button className={styles.button} variant='contained' onClick={() => {}}>
             {t('certificate.buy')}
           </Button>
         </Link>

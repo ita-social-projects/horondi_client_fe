@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useStyles } from './certificate-table.styles';
-
+import { ROW_FIELDS } from '../../../configs/index';
 import CertificateItem from '../cetrificate-item';
 
 const CertificateTable = ({ items }) => {
+  const [itemsList, setItemsList] = useState([]);
   const styles = useStyles();
   const { t } = useTranslation();
 
-  // useMemo 14 for const variable
-  const rowItems = ['certificate', 'code', 'price', 'expiration', 'status'];
-  // const headerItems = rowItems.map((item) => (
-  //   <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>
-  // ));
+  useEffect(() => {
+    if (items.length) setItemsList(items);
+  }, [items]);
 
-  // const certificateItems = items.map((item) => <CertificateItem item={item} key={item._id} />);
+  const certificateItems = itemsList
+    .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
+    .map((item) => <CertificateItem item={item} key={item._id} />);
+
+  const headerItems = ROW_FIELDS.map((item) => (
+    <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>
+  ));
 
   return (
     <div className={styles.root}>
@@ -24,19 +29,9 @@ const CertificateTable = ({ items }) => {
       <div className={styles.table}>
         <Table>
           <TableHead>
-            {/* <TableRow className={styles.tableHeader}>{headerItems}</TableRow> */}
-            <TableRow className={styles.tableHeader}>
-              {rowItems.map((item) => (
-                <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>
-              ))}
-            </TableRow>
+            <TableRow className={styles.tableHeader}>{headerItems}</TableRow>
           </TableHead>
-          {/* <TableBody>{certificateItems}</TableBody> */}
-          <TableBody>
-            {items.map((item) => (
-              <CertificateItem item={item} key={item._id} />
-            ))}
-          </TableBody>
+          <TableBody>{certificateItems}</TableBody>
         </Table>
       </div>
     </div>

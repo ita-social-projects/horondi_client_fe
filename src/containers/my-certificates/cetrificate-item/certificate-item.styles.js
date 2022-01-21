@@ -23,8 +23,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   }),
   copyBtn: (isLightTheme) => ({
     backgroundColor: isLightTheme ? palette.backgroundColor : palette.backgroundColor,
-    border: 'none',
-    marginLeft: '5px'
+    border: 'none'
   }),
   copyIcon: (isLightTheme) => ({
     backgroundColor: isLightTheme ? palette.backgroundColor : palette.backgroundColor,

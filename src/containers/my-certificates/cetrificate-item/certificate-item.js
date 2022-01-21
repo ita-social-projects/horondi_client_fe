@@ -11,10 +11,9 @@ const CertificateItem = ({ item }) => {
   const { t } = useTranslation();
 
   let status = item.isActive ? 'active' : 'used';
-  if (item.isUsed === false && item.isActive === false) status = 'expired';
+  if (!item.isUsed && !item.isActive) status = 'expired';
 
-  const dateStart = item.dateStart.slice(0, 10).split('-').reverse().join('/');
-  const dateEnd = item.dateEnd.slice(0, 10).split('-').reverse().join('/');
+  const dateHandler = (date) => date.slice(0, 10).split('-').reverse().join('/');
 
   return (
     <TableRow className={styles.root} data-cy='certificate-item'>
@@ -27,10 +26,9 @@ const CertificateItem = ({ item }) => {
       </TableCell>
       <TableCell data-cy='certificate-item-code'>
         <div className={styles.code}>
-          <textarea className={styles.area} type='text' value={item.code} />
+          <textarea className={styles.area} type='text' defaultValue={item.code} />
           <Tooltip title={t('certificate.copy')}>
             <button
-              variant='outlined'
               className={styles.copyBtn}
               onClick={() => navigator.clipboard.writeText(item.code)}
             >
@@ -46,16 +44,18 @@ const CertificateItem = ({ item }) => {
         </div>
       </TableCell>
       <TableCell data-cy='certificate-item-expiration'>
-        <div className={styles.date}>{`${dateStart} - ${dateEnd}`}</div>
+        <div className={styles.date}>{`${dateHandler(item.dateStart)} - ${dateHandler(
+          item.dateEnd
+        )}`}</div>
       </TableCell>
       <TableCell data-cy='certificate-item-status'>
         {status === 'active' && (
           <div className={styles.statusGreen}>{t(`certificate.${status}`)}</div>
         )}
-        {status === 'expired' && (
+        {!item.isUsed && !item.isActive && (
           <div className={styles.statusBlue}>{t(`certificate.${status}`)}</div>
         )}
-        {status === 'used' && <div className={styles.statusRed}>{t(`certificate.${status}`)}</div>}
+        {item.isUsed && <div className={styles.statusRed}>{t(`certificate.${status}`)}</div>}
       </TableCell>
     </TableRow>
   );

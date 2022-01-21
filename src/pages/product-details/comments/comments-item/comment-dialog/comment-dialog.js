@@ -47,7 +47,7 @@ const CommentDialog = ({
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-testid='modal'>
       <Dialog open={isModalShown} onClose={handleClose} className={styles.dialog}>
         <DialogTitle className={styles.title}>
           <div className={styles.titleContent}>

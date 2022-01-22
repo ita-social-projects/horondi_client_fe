@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import _ from 'lodash';
 import { useStyles } from './product-sizes.styles';
 
 const ProductSizes = ({
@@ -15,22 +16,7 @@ const ProductSizes = ({
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const filterDuplicatesNames = (sizes) => {
-    const uniqueSizesNames = new Set(sizes?.map((sizeObject) => sizeObject.size.name));
-    const filteredSizes = [];
-
-    if (uniqueSizesNames?.size < sizes?.length) {
-      for (const sizeObject of sizes) {
-        const nameOfSize = sizeObject.size?.name;
-
-        if (!filteredSizes.some((element) => element.size?.name === nameOfSize)) {
-          filteredSizes.push(sizeObject);
-        }
-      }
-      return filteredSizes;
-    }
-    return sizes;
-  };
+  const filterDuplicatesNames = (sizesArray) => _.uniqBy(sizesArray, 'name');
 
   const filteredSizes = filterDuplicatesNames(sizes);
 

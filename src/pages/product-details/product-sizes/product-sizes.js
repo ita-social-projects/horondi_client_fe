@@ -16,27 +16,22 @@ const ProductSizes = ({
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const filterDuplicatesNames = (sizesArray) => _.uniqBy(sizesArray, 'name');
+  const filteredSizes = _.uniqBy(sizes, 'name');
 
-  const filteredSizes = filterDuplicatesNames(sizes);
-
-  const sizeButtons =
-    filteredSizes &&
-    !!filteredSizes.length &&
-    filteredSizes.map(({ size }, index) => (
-      <Button
-        disabled={!(size.available && checkDisabledProduct)}
-        key={size._id}
-        className={
-          size._id === currentSize._id && checkDisabledProduct
-            ? styles.selectedSize
-            : styles.sizeButton
-        }
-        onClick={() => handleSizeChange(index)}
-      >
-        {size.name}
-      </Button>
-    ));
+  const sizeButtons = filteredSizes?.map(({ size }, index) => (
+    <Button
+      disabled={!(size.available && checkDisabledProduct)}
+      key={size._id}
+      className={
+        size._id === currentSize._id && checkDisabledProduct
+          ? styles.selectedSize
+          : styles.sizeButton
+      }
+      onClick={() => handleSizeChange(index)}
+    >
+      {size.name}
+    </Button>
+  ));
 
   const checkSizeName = () => {
     if (currentSize.available) return t(`product.size.${currentSize.name}`);

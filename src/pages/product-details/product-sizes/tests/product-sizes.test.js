@@ -27,6 +27,7 @@ describe('Product component', () => {
     );
 
     const button = component.find(Button);
+
     expect(button).toHaveLength(1);
   });
 });

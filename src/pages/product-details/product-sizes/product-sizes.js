@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
+import _ from 'lodash';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import _ from 'lodash';
+
 import { useStyles } from './product-sizes.styles';
 
 const ProductSizes = ({

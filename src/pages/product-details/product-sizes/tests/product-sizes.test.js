@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+
 import ProductSizes from '../product-sizes';
 import { sizes } from './product-sizes.variables';
 

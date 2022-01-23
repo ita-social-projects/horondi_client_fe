@@ -1,5 +1,8 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+
 import ProductSizes from '../product-sizes';
+import { sizes } from './product-sizes.variables';
 
 jest.mock('../product-sizes.styles', () => ({
   useStyles: () => ({})
@@ -7,22 +10,14 @@ jest.mock('../product-sizes.styles', () => ({
 
 jest.mock('react-redux');
 
-const size = {
-  _id: '1'
-};
-
 const handleSizeChange = jest.fn();
-const sizes = [
-  {
-    size
-  }
-];
+
 const currentSize = {
   id: '1'
 };
 
 describe('Product component', () => {
-  it('Should render', () => {
+  it('should render buttons for unique sizes names', () => {
     const component = shallow(
       <ProductSizes
         handleSizeChange={handleSizeChange}
@@ -31,6 +26,9 @@ describe('Product component', () => {
         currentSize={currentSize}
       />
     );
-    expect(component).toBeDefined();
+
+    const button = component.find(Button);
+
+    expect(button).toHaveLength(1);
   });
 });

@@ -54,9 +54,17 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: '20px',
     marginBottom: '20px',
+    '@media (max-width: 450px)': {
+      marginTop: '10px',
+      marginBottom: '10px'
+    },
     '& span, & svg': {
       fontSize: '24px',
-      fontWeight: '500'
+      fontWeight: '500',
+      '@media (max-width: 450px)': {
+        fontSize: '16px',
+        fontWeight: '500'
+      }
     },
     '& svg': {
       color: theme.palette.type === 'light' ? '#000000' : '#5B5B5B'
@@ -72,6 +80,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     margin: '0 0 10px',
     cursor: 'pointer',
+    '@media (max-width: 450px)': {
+      margin: '0 0 5px'
+    },
     '& span': {
       fontSize: '14px'
     },
@@ -112,9 +123,17 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: '20px',
     marginBottom: '20px',
+    '@media (max-width: 450px)': {
+      marginTop: '10px',
+      marginBottom: '10px'
+    },
     '& span, & svg': {
       fontSize: '24px',
-      fontWeight: '500'
+      fontWeight: '500',
+      '@media (max-width: 450px)': {
+        fontSize: '16px',
+        fontWeight: '500'
+      }
     },
     '& svg': {
       marginLeft: '10px'

@@ -17,6 +17,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   wishlist: {
     transform: 'scale(1.3)',
+    '@media (max-width: 425px)': {
+      transform: 'scale(1.1)'
+    },
     '& svg': {
       color: theme.palette.textColor
     },
@@ -26,6 +29,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   cartHeader: {
     transform: 'scale(1.3)',
+    '@media (max-width: 425px)': {
+      transform: 'scale(1.1)'
+    },
     '& svg': {
       color: theme.palette.textColor
     },

@@ -1,0 +1,11 @@
+{
+    "giftCertificate": "Gift Certificate",
+    "for": "for",
+    "chooseCertificate": "Choose your certificate",
+    "certificateRules": [
+        "Gift certificate provides a discount of 500, 1000, 1500 UAH, for any Horondi products.",
+        "If the purchase price exceeds the available balance of the gift certificate, you can pay the difference in a convenient way.",
+        "The gift certificate is not refundable or exchangeable for the relevant money equivalent.",
+        "The certificate is valid for 365 days from the date of purchase."
+    ]
+}

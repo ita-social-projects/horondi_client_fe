@@ -9,6 +9,7 @@ import { USER_REGISTER_LABELS } from '../constants';
 import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
+import FacebookBtn from '../../../components/facebook-log-in-btn';
 import { Loader } from '../../../components/loader/loader';
 import routes from '../../../configs/routes';
 
@@ -85,6 +86,7 @@ export default function RegisterForm({
             <p className={styles.registerError}>{registerError}</p>
             <p className={styles.googleText}>{t('register.googleSignIn')}</p>
             <GoogleBtn />
+            <FacebookBtn />
           </div>
           <div>
             <Link to={pathToLogin} className={styles.loginBtn}>

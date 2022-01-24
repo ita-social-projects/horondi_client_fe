@@ -3,12 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
-      padding: theme.spacing(3),
+      padding: '18px 24px 15px 24px',
       backgroundColor: theme.palette.type === 'light' ? '#FFFFFF' : '#000000',
       zIndex: 11,
       height: '100vh',
       width: 'fit-content',
-      minWidth: '400px',
+      minWidth: '360px',
       maxWidth: '450px',
       '@media (max-width: 768px)': {
         width: '100%'
@@ -30,15 +30,15 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'right'
   },
   closeIcon: {
-    width: '30px',
-    height: '30px',
+    width: '3px',
+    height: '3px',
     transform: 'scale(1.2)',
     '& svg': {
       color: theme.palette.type === 'light' ? '#000000' : '#5B5B5B'
     }
   },
   sideMenuContent: {
-    width: '85%'
+    width: '75%'
   },
   itemHighlighting: {
     width: '100%',
@@ -51,11 +51,19 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     cursor: 'pointer',
     width: '100%',
-    marginTop: '25px',
-    marginBottom: '25px',
+    marginTop: '20px',
+    marginBottom: '20px',
+    '@media (max-width: 450px)': {
+      marginTop: '10px',
+      marginBottom: '10px'
+    },
     '& span, & svg': {
       fontSize: '24px',
-      fontWeight: '500'
+      fontWeight: '500',
+      '@media (max-width: 450px)': {
+        fontSize: '16px',
+        fontWeight: '500'
+      }
     },
     '& svg': {
       color: theme.palette.type === 'light' ? '#000000' : '#5B5B5B'
@@ -63,14 +71,17 @@ export const useStyles = makeStyles((theme) => ({
   },
   subList: {
     fontSize: '1.3rem',
-    marginTop: '50px'
+    marginTop: '45px'
   },
   subItem: {
     color: theme.palette.textColor,
     textTransform: 'uppercase',
     display: 'flex',
-    margin: '0 0 15px',
+    margin: '0 0 10px',
     cursor: 'pointer',
+    '@media (max-width: 450px)': {
+      margin: '0 0 5px'
+    },
     '& span': {
       fontSize: '14px'
     },
@@ -112,11 +123,19 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     cursor: 'pointer',
     width: '100%',
-    marginTop: '25px',
-    marginBottom: '25px',
+    marginTop: '20px',
+    marginBottom: '20px',
+    '@media (max-width: 450px)': {
+      marginTop: '10px',
+      marginBottom: '10px'
+    },
     '& span, & svg': {
       fontSize: '24px',
-      fontWeight: '500'
+      fontWeight: '500',
+      '@media (max-width: 450px)': {
+        fontSize: '16px',
+        fontWeight: '500'
+      }
     },
     '& svg': {
       marginLeft: '10px'

@@ -10,10 +10,16 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%'
   }),
   iconItem: {
-    marginRight: '40px'
+    marginRight: '40px',
+    '@media (max-width: 425px)': {
+      marginRight: '0px'
+    }
   },
   wishlist: {
     transform: 'scale(1.3)',
+    '@media (max-width: 425px)': {
+      transform: 'scale(1.1)'
+    },
     '& svg': {
       color: theme.palette.textColor
     },
@@ -23,6 +29,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   cartHeader: {
     transform: 'scale(1.3)',
+    '@media (max-width: 425px)': {
+      transform: 'scale(1.1)'
+    },
     '& svg': {
       color: theme.palette.textColor
     },

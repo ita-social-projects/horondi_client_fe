@@ -21,6 +21,8 @@ export default function RegisterForm({
   errors,
   showPassword,
   setShowPassword,
+  showPasswordConfirm,
+  setShowPasswordConfirm,
   registerError,
   setShouldValidate
 }) {
@@ -38,7 +40,12 @@ export default function RegisterForm({
       </Link>
     </div>
   );
-
+  const type = (name) => {
+    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
+      return USER_REGISTER_LABELS.pass;
+    }
+    return name;
+  };
   return (
     <Form className={styles.registerForm}>
       {loading ? (
@@ -49,7 +56,7 @@ export default function RegisterForm({
           {Object.keys(values).map((name) => (
             <Field
               key={name}
-              type={name}
+              type={type(name)}
               name={name}
               as={TextField}
               label={t(`register.placeholders.${name}`)}
@@ -63,7 +70,9 @@ export default function RegisterForm({
               InputProps={
                 name === USER_REGISTER_LABELS.pass
                   ? endAdornment(showPassword, setShowPassword)
-                  : {}
+                  : name === USER_REGISTER_LABELS.passConfirm
+                    ? endAdornment(showPasswordConfirm, setShowPasswordConfirm)
+                    : {}
               }
             />
           ))}

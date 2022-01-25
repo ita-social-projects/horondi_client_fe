@@ -22,6 +22,7 @@ export default function Register() {
   const { palette } = useTheme();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(true);
   const handleRegister = (user) => {
     const userData = {
       firstName: user.firstName,
@@ -88,6 +89,8 @@ export default function Register() {
                   errors={errors}
                   showPassword={showPassword}
                   setShowPassword={setShowPassword}
+                  showPasswordConfirm={showPasswordConfirm}
+                  setShowPasswordConfirm={setShowPasswordConfirm}
                   registerError={registerError}
                   setShouldValidate={() => {
                     setShouldValidate(true);

@@ -412,6 +412,7 @@ const UkrpostAndCourier = ({
             {courierInputLabels(language).map((field) => (
               <div key={field.name}>
                 <TextField
+                  data-testid='houseAndFlat'
                   id='standard-start-adornment'
                   data-cy={field.name}
                   name={field.name}

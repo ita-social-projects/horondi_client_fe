@@ -27,6 +27,7 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
         setDeliveryType(deliveryTypeValue);
       }
       setDeliveryTypeToStorage(deliveryTypeValue);
+      // console.log(setDeliveryTypeToStorage(deliveryTypeValue));
     };
     handleAddDeliveryType();
   }, [deliveryTypeValue, courierOrganization, setDeliveryType]);

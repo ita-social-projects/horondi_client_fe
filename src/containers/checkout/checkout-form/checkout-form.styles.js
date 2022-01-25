@@ -229,6 +229,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     padding: '0 20px 0 0',
     height: '100%',
     width: 48,
+    color: palette.backspaceIcon.color,
     '&:hover': {
       transform: 'scale(1.1)',
       transition: '0.1s'

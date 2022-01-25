@@ -27,7 +27,6 @@ import {
   checkoutFormBtnValue,
   checkoutPropTypes,
   getCurrentCurrency,
-  getThemeColor,
   handleError,
   updateInitialValues,
   stateInitialValues,
@@ -130,12 +129,12 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className={styles.root}>
+      <form onSubmit={handleSubmit} className={styles.root} data-testid='forma'>
         <Grid item className={styles.checkoutFormContainer}>
           <div className={styles.checkoutTitleInfo}>
             <div className={styles.checkoutTitleInfoData}>
               <Link to={pathToCart} className={styles.backBtn}>
-                <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
+                <KeyboardBackspaceIcon className={styles.backBtnLine} />
               </Link>
             </div>
             <h2 className={styles.checkoutTitle}>{t('checkout.checkoutTitles.checkoutTitle')}</h2>
@@ -148,6 +147,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
+                      data-testid='firstAndLastName'
                       size={TEXT_FIELDS.SMALL}
                       data-cy={field.name}
                       name={field.name}

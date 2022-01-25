@@ -125,6 +125,9 @@ export const paletteGenerator = (colorSchema) => ({
       }
     }
   },
+  backspaceIcon: {
+    color: theme[colorSchema].backspaceIcon.color
+  },
   primary: {
     contrastText: white,
     dark: colors.grey[900],

@@ -52,10 +52,10 @@ const CertificateItem = ({ item }) => {
         {status === 'active' && (
           <div className={styles.statusGreen}>{t(`certificate.${status}`)}</div>
         )}
-        {!item.isUsed && !item.isActive && (
+        {status === 'expired' && (
           <div className={styles.statusBlue}>{t(`certificate.${status}`)}</div>
         )}
-        {item.isUsed && <div className={styles.statusRed}>{t(`certificate.${status}`)}</div>}
+        {status === 'used' && <div className={styles.statusRed}>{t(`certificate.${status}`)}</div>}
       </TableCell>
     </TableRow>
   );

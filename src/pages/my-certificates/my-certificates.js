@@ -17,7 +17,7 @@ const MyCertificates = () => {
       limit: 5,
       skip: 0
     },
-    onCompleted: () => {
+    onCompleted: (data) => {
       setCertificates(data.getAllCertificates.items);
       setCount(data.getAllCertificates.count);
     }

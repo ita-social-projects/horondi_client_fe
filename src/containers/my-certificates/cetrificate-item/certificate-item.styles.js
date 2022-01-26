@@ -9,9 +9,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '168px',
     marginRight: '25px'
   },
-  area: (isLightTheme) => ({
-    backgroundColor: isLightTheme ? palette.backgroundColor : palette.backgroundColor,
-    color: isLightTheme ? palette.textColor : palette.textColor,
+  area: {
+    backgroundColor: palette.backgroundColor,
+    color: palette.textColor,
     font: 'inherit',
     fontWeight: '600',
     border: palette.white,
@@ -20,13 +20,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '110px',
     height: '28px',
     pointerEvents: 'none'
-  }),
-  copyBtn: (isLightTheme) => ({
-    backgroundColor: isLightTheme ? palette.backgroundColor : palette.backgroundColor,
+  },
+  copyBtn: {
+    backgroundColor: palette.backgroundColor,
     border: 'none'
-  }),
-  copyIcon: (isLightTheme) => ({
-    backgroundColor: isLightTheme ? palette.backgroundColor : palette.backgroundColor,
+  },
+  copyIcon: {
+    backgroundColor: palette.backgroundColor,
     display: 'flex',
     alignItems: 'center',
     color: palette.lightGrayShade,
@@ -34,7 +34,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.blue,
       cursor: 'pointer'
     }
-  }),
+  },
   code: {
     fontWeight: '700',
     display: 'flex',

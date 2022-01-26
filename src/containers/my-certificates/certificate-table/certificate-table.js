@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
@@ -7,17 +7,18 @@ import { ROW_FIELDS } from '../../../configs/index';
 import CertificateItem from '../cetrificate-item';
 
 const CertificateTable = ({ items }) => {
-  const [itemsList, setItemsList] = useState([]);
+  const certificatesArr = items;
   const styles = useStyles();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (items.length) setItemsList(items);
-  }, [items]);
+  const memoizedItems = useMemo(
+    () => certificatesArr.sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart)),
+    [certificatesArr]
+  );
 
-  itemsList.sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart));
-
-  const certificateItems = itemsList.map((item) => <CertificateItem item={item} key={item._id} />);
+  const certificateItems = memoizedItems.map((item) => (
+    <CertificateItem item={item} key={item._id} />
+  ));
 
   const headerItems = ROW_FIELDS.map((item) => (
     <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>

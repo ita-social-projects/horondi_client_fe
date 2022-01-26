@@ -7,7 +7,8 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './empty-certificates.styles';
 import routes from '../../../configs/routes';
-import EmptyCertificateImg from '../../../images/certificates/EmptyCertificateImg';
+import EmptyCertificateLight from '../../../images/certificates/emptyCertificateLight';
+import EmptyCertificateDark from '../../../images/certificates/emptyCertificateDark';
 
 const { pathToGiftСertificate } = routes;
 
@@ -16,11 +17,7 @@ const EmptyCertificates = () => {
   const { palette } = useTheme();
   const { t } = useTranslation();
 
-  const isLightTheme = palette.type === 'light';
-
-  const emptyOrderImgLink = isLightTheme
-    ? EmptyCertificateImg.emptyCertificateLight
-    : EmptyCertificateImg.emptyCertificateDark;
+  const EmptyOrderImg = palette.type === 'light' ? EmptyCertificateLight : EmptyCertificateDark;
 
   return (
     <>
@@ -28,7 +25,7 @@ const EmptyCertificates = () => {
         <Typography className={styles.title} variant='h2'>
           {t('certificate.emptyTitle')}
         </Typography>
-        <img src={emptyOrderImgLink} alt='empty certificate icon' />
+        <EmptyOrderImg alt='empty certificate icon' />
         <Link to={pathToGiftСertificate}>
           <Button className={styles.button} variant='contained'>
             {t('certificate.buy')}

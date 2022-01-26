@@ -12,14 +12,11 @@ const FilledCertificates = ({ items }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
   const { t } = useTranslation();
-  const modalHandler = () => {
-    setModalVisibility(true);
-  };
 
   const { pathToGiftСertificate } = routes;
 
-  const onModalAction = () => {
-    setModalVisibility(false);
+  const openModal = () => {
+    !modalVisibility ? setModalVisibility(true) : setModalVisibility(false);
   };
 
   return (
@@ -35,12 +32,12 @@ const FilledCertificates = ({ items }) => {
             <Link to={pathToGiftСertificate}>
               <Button className={styles.buyButton}>{t('certificate.buy')}</Button>
             </Link>
-            <Button className={styles.addButton} onClick={modalHandler}>
+            <Button className={styles.addButton} onClick={openModal}>
               {t('certificate.add')}
             </Button>
             {modalVisibility && (
               <div>
-                <Modal isOpen={modalVisibility} onAction={onModalAction} isInput />
+                <Modal isOpen={modalVisibility} onAction={openModal} isInput />
               </div>
             )}
           </div>

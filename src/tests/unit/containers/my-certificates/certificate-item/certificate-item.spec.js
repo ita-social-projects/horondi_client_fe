@@ -19,13 +19,6 @@ jest.mock('@material-ui/styles', () => ({
   })
 }));
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key) => key,
-    i18n: { language: 'en' }
-  })
-}));
-
 const mockHandleClick = jest.fn();
 
 describe('CertificateItem component test', () => {

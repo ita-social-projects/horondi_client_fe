@@ -40,7 +40,9 @@ describe('<YourOrder /> component tests', () => {
 
     render(
       <MockedProvider>
-        <YourOrder {...mockedProps} />
+        <Router>
+          <YourOrder {...mockedProps} />
+        </Router>
       </MockedProvider>
     );
     expect(screen.getByRole('list')).toBeTruthy();

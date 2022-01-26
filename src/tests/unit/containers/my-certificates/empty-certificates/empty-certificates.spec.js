@@ -35,10 +35,10 @@ describe('EmptyCertificates component test', () => {
     );
   });
 
-  it('should render an image of empty certificate', () => {
-    const img = screen.getByAltText(/empty certificate icon/i);
+  it('should render an svg of empty certificate for light palette', () => {
+    const element = screen.getByTestId('custom-svg-light');
 
-    expect(img).toBeInTheDocument();
+    expect(element).toBeInTheDocument();
   });
 
   it('check if the button is enabled,', () => {

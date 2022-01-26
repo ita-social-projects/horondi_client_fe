@@ -10,8 +10,13 @@ const CertificateItem = ({ item }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  let status = item.isActive ? 'active' : 'used';
-  if (!item.isUsed && !item.isActive) status = 'expired';
+  const status = item.isActive
+    ? 'active'
+    : item.isUsed
+      ? 'used'
+      : item.isUsed === false && item.isActive === false
+        ? 'expired'
+        : null;
 
   const dateHandler = (date) => date.slice(0, 10).split('-').reverse().join('/');
 

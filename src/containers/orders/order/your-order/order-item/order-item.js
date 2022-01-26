@@ -1,7 +1,7 @@
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { IMG_URL } from '../../../../../configs';
@@ -20,30 +20,45 @@ const OrderItem = ({ product, setProductPrices }) => {
   }));
   const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
-  const {
-    data: dataProduct,
-    loading: loadingProduct,
-    error: errorProduct
-  } = useQuery(getProductById, {
-    variables: { id: product?.productId },
-    skip: product.constructor
+
+  const [
+    getProductByIdHandler,
+    { data: dataProduct, called: calledProduct, error: errorProduct, loading: loadingProduct }
+  ] = useLazyQuery(getProductById, {
+    variables: {
+      id: product?.productId
+    }
   });
 
-  const {
-    data: dataConstructor,
-    loading: loadingConstructor,
-    error: errorConstructor
-  } = useQuery(getConstructorById, {
-    variables: { id: product.productId },
-    skip: !product.constructor
+  const [
+    getConstructorByIdHandler,
+    {
+      data: dataConstructor,
+      called: calledConstructor,
+      error: errorConstructor,
+      loading: loadingConstructor
+    }
+  ] = useLazyQuery(getConstructorById, {
+    variables: {
+      id: product.productId
+    }
   });
+
+  const isConstructor = Object.keys(product.constructor).length !== 0;
+
+  if (!isConstructor && !calledProduct) {
+    getProductByIdHandler();
+  }
+  if (isConstructor && !calledConstructor) {
+    getConstructorByIdHandler();
+  }
 
   const { isLoading, isError } = useIsLoadingOrError(
     [loadingConstructor, loadingProduct],
     [errorConstructor, errorProduct]
   );
 
-  const orderItem = product.constructor
+  const orderItem = isConstructor
     ? dataConstructor?.getConstructorById
     : dataProduct?.getProductById;
 
@@ -69,9 +84,7 @@ const OrderItem = ({ product, setProductPrices }) => {
       <img
         className={styles.yourOrderListImg}
         src={`${IMG_URL}${
-          product.constructor
-            ? orderItem?.model.images.thumbnail
-            : orderItem?.images.primary.thumbnail
+          isConstructor ? orderItem?.model.images.thumbnail : orderItem?.images.primary.thumbnail
         }`}
         alt='product-img'
       />
@@ -81,7 +94,7 @@ const OrderItem = ({ product, setProductPrices }) => {
           <div className={styles.yourOrderListItemDescriptionPrimary}>
             {t(
               `${
-                product.constructor ? orderItem?.model.translationsKey : orderItem?.translationsKey
+                isConstructor ? orderItem?.model.translationsKey : orderItem?.translationsKey
               }.name`
             )}
           </div>
@@ -92,7 +105,7 @@ const OrderItem = ({ product, setProductPrices }) => {
               {t('product.productDescription.bottomMaterial')}:{' '}
               {t(
                 `${
-                  product.constructor
+                  isConstructor
                     ? sizeAndPrice.bottomMaterial?.translationsKey
                     : orderItem?.bottomMaterial.material.translationsKey
                 }.name`

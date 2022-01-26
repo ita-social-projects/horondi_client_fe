@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { mockedCartItemsData, mockedProps, mockQueryData } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
@@ -36,7 +38,11 @@ describe('<YourOrder /> component tests', () => {
     };
     useSelector.mockImplementation(() => userData);
 
-    render(<YourOrder {...mockedProps} />);
+    render(
+      <MockedProvider>
+        <YourOrder {...mockedProps} />
+      </MockedProvider>
+    );
     expect(screen.getByRole('list')).toBeTruthy();
   });
 
@@ -47,7 +53,13 @@ describe('<YourOrder /> component tests', () => {
     };
     useSelector.mockImplementation(() => userData);
 
-    render(<YourOrder {...mockedProps} />);
+    render(
+      <MockedProvider>
+        <Router>
+          <YourOrder {...mockedProps} />
+        </Router>
+      </MockedProvider>
+    );
 
     expect(screen.queryByText(/addressHorondi/i)).toBeNull();
   });

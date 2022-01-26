@@ -10,19 +10,19 @@ jest.mock(
   })
 );
 
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key) => key,
+    i18n: { language: 'en' }
+  })
+}));
+
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
   useTheme: () => ({
     palette: {
       type: 'light'
     }
-  })
-}));
-
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key) => key,
-    i18n: { language: 'en' }
   })
 }));
 

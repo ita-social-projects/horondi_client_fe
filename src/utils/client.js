@@ -5,7 +5,7 @@ import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemo
 import { createUploadLink } from 'apollo-upload-client/public';
 
 import { AUTH_ERRORS, USER_TOKENS } from '../configs';
-import { getFromLocalStorage } from '../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
 import refreshAuthToken from './regenerateAuthTokenPair';
 
 const introspectionResult = require('../fragmentTypes');
@@ -64,7 +64,10 @@ export const getItems = async (query, variables = {}) => {
         if (tokenResult) {
           return await getItems(query, variables);
         }
+
+        setToLocalStorage(ACCESS_TOKEN, null);
       }
+
       throw new Error(message);
     }
     return queryResult;
@@ -96,7 +99,10 @@ export const setItems = async (query, variables) => {
         if (tokenResult) {
           return await setItems(query, variables);
         }
+
+        setToLocalStorage(ACCESS_TOKEN, null);
       }
+
       throw new Error(message);
     }
     return mutationResult;

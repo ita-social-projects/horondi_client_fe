@@ -117,7 +117,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           size='small'
           rows={1}
           error={!emailValidated && shouldValidate}
-          helperText={handleHelperText(emailValidated, shouldValidate, 'email')}
+          helperText={handleHelperText(emailValidated, shouldValidate, 'profile.email')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setEmailValidated, formRegExp.email)}
           value={email}
@@ -133,7 +133,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           rows={10}
           inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
-          helperText={handleHelperText(messageValidated, shouldValidate, 'message')}
+          helperText={handleHelperText(messageValidated, shouldValidate, 'profile.message')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setMessageValidated, formRegExp.text)}
           value={message}

@@ -46,6 +46,17 @@ export default function RegisterForm({
     }
     return name;
   };
+
+  const inputProps = (name) => {
+    if (name === USER_REGISTER_LABELS.pass) {
+      return endAdornment(showPassword, setShowPassword);
+    }
+    if (name === USER_REGISTER_LABELS.passConfirm) {
+      return endAdornment(showPasswordConfirm, setShowPasswordConfirm);
+    }
+    return {};
+  };
+
   return (
     <Form className={styles.registerForm}>
       {loading ? (
@@ -67,13 +78,7 @@ export default function RegisterForm({
               className={`${styles.dataInput} ${
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}
-              InputProps={
-                name === USER_REGISTER_LABELS.pass
-                  ? endAdornment(showPassword, setShowPassword)
-                  : name === USER_REGISTER_LABELS.passConfirm
-                    ? endAdornment(showPasswordConfirm, setShowPasswordConfirm)
-                    : {}
-              }
+              InputProps={inputProps(name)}
             />
           ))}
           <FormControlLabel

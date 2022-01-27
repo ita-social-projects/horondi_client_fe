@@ -50,19 +50,17 @@ const props = {
   cartQuantityLoading: false,
   items: [
     {
-      product: { product_id: 'some id' },
       sizeAndPrice: {
+        size: {
+          _id: 'test',
+          name: 'S'
+        },
         price: [
           {
             value: 1000,
             currency: 'UAH'
-          },
-          {
-            value: 37,
-            currency: 'USD'
           }
-        ],
-        size: { _id: 'test', name: 'S' }
+        ]
       }
     }
   ],
@@ -86,10 +84,6 @@ const mockGetCartItem = jest.fn().mockReturnValue({
       {
         value: 1000,
         currency: 'UAH'
-      },
-      {
-        value: 37,
-        currency: 'USD'
       }
     ]
   }
@@ -134,31 +128,28 @@ describe('test <Modal/> component', () => {
 
   it('call onAction with true', () => {
     const confirmButton = screen.queryByText('common.buttons.confirm');
-
-    expect(confirmButton).toBeInTheDocument();
     act(() => {
       fireEvent.click(confirmButton);
     });
+
     expect(modalProps.onAction).toHaveBeenCalledWith(true);
   });
 
   it('call onAction with false', () => {
     const cancelButton = screen.queryByText('common.buttons.cancel');
-
-    expect(cancelButton).toBeInTheDocument();
     act(() => {
       fireEvent.click(cancelButton);
     });
+
     expect(modalProps.onAction).toHaveBeenCalledWith(false);
   });
 
   it('call onAction with false', () => {
     const closeModalIcon = screen.queryByTestId('closeModalIcon');
-
-    expect(closeModalIcon).toBeInTheDocument();
     act(() => {
       fireEvent.click(closeModalIcon);
     });
+
     expect(modalProps.onAction).toHaveBeenCalledWith(false);
   });
 });

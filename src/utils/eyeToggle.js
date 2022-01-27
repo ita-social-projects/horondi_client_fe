@@ -13,7 +13,7 @@ export function toggleInputType(e, showPass) {
   }
 }
 
-export function endAdornment(isVisible, setShowPass) {
+export function endAdornment(isVisible, setShowPass, name) {
   return {
     endAdornment: (
       <InputAdornment position='end'>

@@ -6,12 +6,12 @@ export const validationSchema = (deliveryType) =>
   Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'error.profile.firstName')
-      .max(20, 'error.profile.firstName')
+      .max(30, 'error.profile.firstName')
       .matches(formRegExp.firstName, 'error.onlyLetter')
       .required('error.requiredField'),
     lastName: Yup.string()
       .min(2, 'error.profile.lastName')
-      .max(20, 'error.profile.lastName')
+      .max(30, 'error.profile.lastName')
       .matches(formRegExp.lastName, 'error.onlyLetter')
       .required('error.requiredField'),
     email: Yup.string()

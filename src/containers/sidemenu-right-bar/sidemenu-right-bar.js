@@ -11,7 +11,11 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
 
   return (
     <div className={styles.root}>
-      <div className={`${styles.wishlist} ${styles.iconItem}`} data-testid='wishlist-icon'>
+      <div
+        className={`${styles.wishlist} ${styles.iconItem}`}
+        onClick={() => setIsMenuOpen(false)}
+        data-testid='wishlist-icon'
+      >
         <WishlistHeader />
       </div>
       <div

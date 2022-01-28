@@ -17,7 +17,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     border: palette.white,
     resize: 'none',
     overflow: 'hidden',
-    width: '110px',
+    width: '118px',
     height: '28px',
     pointerEvents: 'none'
   },

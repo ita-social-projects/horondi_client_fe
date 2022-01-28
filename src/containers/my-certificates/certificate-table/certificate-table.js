@@ -7,22 +7,16 @@ import { ROW_FIELDS } from '../../../configs/index';
 import CertificateItem from '../cetrificate-item';
 
 const CertificateTable = ({ items }) => {
-  const certificatesArr = items;
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const memoizedItems = useMemo(
-    () => certificatesArr.sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart)),
-    [certificatesArr]
-  );
+  const certificateItems = useMemo(() => [...items]
+    .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
+    .map((item) => <CertificateItem item={item} key={item._id} />), [items]);
 
-  const certificateItems = memoizedItems.map((item) => (
-    <CertificateItem item={item} key={item._id} />
-  ));
-
-  const headerItems = ROW_FIELDS.map((item) => (
+  const headerItems = useMemo(() => ROW_FIELDS.map((item) => (
     <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>
-  ));
+  )), [ROW_FIELDS]);
 
   return (
     <div className={styles.root}>

@@ -12,7 +12,7 @@ const MyCertificates = () => {
   const [count, setCount] = useState([]);
   const styles = useStyles();
 
-  const { data, loading, error } = useQuery(getAllCertificates, {
+  const { loading, error } = useQuery(getAllCertificates, {
     variables: {
       limit: 5,
       skip: 0
@@ -27,7 +27,7 @@ const MyCertificates = () => {
 
   return (
     <div className={styles.root}>
-      {data.getAllCertificates.items.length ? (
+      {certificates.length ? (
         <FilledCertificates items={certificates} count={count} />
       ) : (
         <EmptyCertificates />

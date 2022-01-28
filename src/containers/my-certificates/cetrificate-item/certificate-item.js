@@ -10,14 +10,6 @@ const CertificateItem = ({ item }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const status = item.isActive
-    ? 'active'
-    : item.isUsed
-      ? 'used'
-      : item.isUsed === false && item.isActive === false
-        ? 'expired'
-        : null;
-
   const dateHandler = (date) => date.slice(0, 10).split('-').reverse().join('/');
 
   return (
@@ -54,13 +46,11 @@ const CertificateItem = ({ item }) => {
         )}`}</div>
       </TableCell>
       <TableCell data-cy='certificate-item-status'>
-        {status === 'active' && (
-          <div className={styles.statusGreen}>{t(`certificate.${status}`)}</div>
+        {item.isActive && <div className={styles.statusGreen}>{t(`certificate.active`)}</div>}
+        {item.isUsed && <div className={styles.statusRed}>{t(`certificate.used`)}</div>}
+        {item.isUsed === false && item.isActive === false && (
+          <div className={styles.statusBlue}>{t(`certificate.expired`)}</div>
         )}
-        {status === 'expired' && (
-          <div className={styles.statusBlue}>{t(`certificate.${status}`)}</div>
-        )}
-        {status === 'used' && <div className={styles.statusRed}>{t(`certificate.${status}`)}</div>}
       </TableCell>
     </TableRow>
   );

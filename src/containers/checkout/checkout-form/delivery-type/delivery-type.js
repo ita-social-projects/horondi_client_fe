@@ -27,7 +27,6 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
         setDeliveryType(deliveryTypeValue);
       }
       setDeliveryTypeToStorage(deliveryTypeValue);
-      // console.log(setDeliveryTypeToStorage(deliveryTypeValue));
     };
     handleAddDeliveryType();
   }, [deliveryTypeValue, courierOrganization, setDeliveryType]);
@@ -50,6 +49,8 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
         <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
         <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
           <RadioGroup
+            id='some-shitty-id'
+            data-testid='delivery-type'
             aria-label='Delivery type'
             name='delivery-type'
             value={deliveryTypeValue}

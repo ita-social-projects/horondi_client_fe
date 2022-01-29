@@ -211,6 +211,7 @@ const UkrpostAndCourier = ({
       <h3 className={styles.addressTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.inputWrapper}>
         <Autocomplete
+          data-testid='region'
           name='region'
           onInputChange={(e, value, reason) => {
             handleRegionInputChange(value, reason);
@@ -412,8 +413,7 @@ const UkrpostAndCourier = ({
             {courierInputLabels(language).map((field) => (
               <div key={field.name}>
                 <TextField
-                  data-testid='houseAndFlat'
-                  id='standard-start-adornment'
+                  data-testid={field.name}
                   data-cy={field.name}
                   name={field.name}
                   className={styles.textField}

@@ -2,12 +2,9 @@ import React from 'react';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { MockedProvider } from '@apollo/client/testing';
 import OrderTable from '../order-table';
 import Modal from '../../../../../components/modal/modal';
-import {
-  mockQueryData,
-  mockQueryDataConstructor
-} from '../../../cart/cart-item/tests/cart-item.variables';
 
 jest.mock('../order-table.styles', () => ({
   useStyles: () => ({})
@@ -15,17 +12,6 @@ jest.mock('../order-table.styles', () => ({
 jest.mock('../../../../../components/modal/modal.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../cart/cart-item/cart-item.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
-jest.mock('@apollo/client', () => ({
-  ...jest.requireActual('@apollo/client'),
-  useLazyQuery: () => [
-    jest.fn(),
-    {
-      loading: false,
-      error: null,
-      data: { getProductById: mockQueryData, getConstructorById: mockQueryDataConstructor }
-    }
-  ]
-}));
 
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);
@@ -106,7 +92,9 @@ describe('test <OrderTable /> component', () => {
     testUseSelector(0);
     const { getByText } = render(
       <BrowserRouter>
-        <OrderTable {...props} cartOperations={mockCartOperations} />
+        <MockedProvider>
+          <OrderTable {...props} cartOperations={mockCartOperations} />
+        </MockedProvider>
       </BrowserRouter>
     );
     const productCell = getByText(/product/i);

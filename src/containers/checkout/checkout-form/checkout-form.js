@@ -286,5 +286,3 @@ CheckoutForm.propTypes = checkoutPropTypes;
 CheckoutForm.defaultProps = checkoutDefaultProps;
 
 export default CheckoutForm;
-
-/// /// /// /// ///

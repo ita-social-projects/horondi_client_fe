@@ -7,18 +7,15 @@ import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
 import DeliveryType from '../delivery-type/delivery-type';
 import {
-  getUkrPoshtaRegions,
-  getUkrPoshtaDistricts,
-  getUkrPoshtaCities,
-  getUkrPoshtaStreets
-} from '../delivery/ukrpost-and-courier/operations/get-ukrPost-address-data.queries';
-// import { clearSessionStorage } from '../../../../services/session-storage.service.js';
+  ukrPostMockRegions,
+  ukrPostMockDistricts,
+  ukrPostMockCities,
+  ukrPostMockStreets
+} from './checkout-form.variables';
 
 const mockClearCart = jest.fn();
 const mockCartOperations = { clearCart: mockClearCart };
-// const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
 const dispatch = jest.fn();
-// const clearStorage = jest.fn();
 
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
@@ -29,76 +26,6 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
   getFromSessionStorage: jest.fn(() => 'UKRPOSTCOURIER'),
   clearSessionStorage: jest.fn()
 }));
-
-const ukrPostMockRegions = [
-  {
-    request: {
-      query: getUkrPoshtaRegions
-    },
-    result: {
-      data: {
-        getUkrPoshtaRegions: [
-          {
-            REGION_UA: 'Вінницька',
-            REGION_ID: '1'
-          }
-        ]
-      }
-    }
-  }
-];
-const ukrPostMockDistricts = [
-  {
-    request: {
-      query: getUkrPoshtaDistricts
-    },
-    result: {
-      data: {
-        getUkrPoshtaDistricts: [
-          {
-            DISTRICT_UA: 'Гайсинський',
-            DISTRICT_ID: '916'
-          }
-        ]
-      }
-    }
-  }
-];
-
-const ukrPostMockCities = [
-  {
-    request: {
-      query: getUkrPoshtaCities
-    },
-    result: {
-      data: {
-        getUkrPoshtaCities: [
-          {
-            CITY_UA: 'Адамівка',
-            CITY_ID: '27942'
-          }
-        ]
-      }
-    }
-  }
-];
-
-const ukrPostMockStreets = [
-  {
-    request: {
-      query: getUkrPoshtaStreets
-    },
-    result: {
-      data: {
-        getUkrPoshtaStreets: [
-          {
-            STREET_UA: 'Південна'
-          }
-        ]
-      }
-    }
-  }
-];
 
 const props = {
   currency: 0,
@@ -118,7 +45,6 @@ const handleSubmit = jest.fn();
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
-// clearSessionStorage.mockImplementation(() => clearStorage);
 
 global.document.createRange = () => ({
   setStart: () => {},
@@ -180,9 +106,6 @@ describe('CheckoutForm tests for: ', () => {
   });
 
   it('region field', async () => {
-    // const radiogrup = screen.getByTestId('delivery-type').querySelector('input');
-    // fireEvent.change(radiogrup, { target: { value: 'UKRPOSTCOURIER' } });
-
     const regionField = screen.getByTestId('region').querySelector('input');
     fireEvent.change(regionField, { target: { value: 'Вінницька' } });
     expect(regionField.value).toEqual('Вінницька');
@@ -251,95 +174,6 @@ describe('CheckoutForm tests for: ', () => {
     fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
 
     fireEvent.click(button);
-    // await waitForElement(() => expect(dispatch).toHaveBeenCalled());
     await expect(dispatch).toHaveBeenCalledTimes(1);
-
-    // act(() => {
-    //   expect(handleSubmit).toHaveBeenCalled();
-    // });
-    // screen.debug()
   });
-
-  // it('click on button action', async () => {
-  //   const firstNameField = screen.getByTestId('firstName').querySelector('input');
-  //   const lastNameField = screen.getByTestId('lastName').querySelector('input');
-  //   const emailField = screen.getByTestId('email').querySelector('input');
-  //   const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
-  //   const regionField = screen.getByTestId('region').querySelector('input');
-  //   const districtsField = screen.getByTestId('district').querySelector('input');
-  //   const citiesField = screen.getByTestId('cities').querySelector('input');
-  //   const streetsField = screen.getByTestId('streets').querySelector('input');
-  //   const buildingField = screen.getByTestId('house').querySelector('input');
-  //   const flatField = screen.getByTestId('flat').querySelector('input');
-  //   const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
-  //   const button = screen.getByTestId('confirmButton');
-
-  //   fireEvent.change(firstNameField, { target: { value: 'Roman' } });
-  //   fireEvent.change(lastNameField, { target: { value: 'Denes' } });
-  //   fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
-  //   fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
-  //   fireEvent.change(regionField, { target: { value: 'Вінницька' } });
-  //   fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
-  //   fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
-  //   fireEvent.change(streetsField, { target: { value: 'Південна' } });
-  //   fireEvent.change(buildingField, { target: { value: '34' } });
-  //   fireEvent.change(flatField, { target: { value: '36' } });
-  //   fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
-
-  //   fireEvent.click(button);
-  //   // await waitForElement(() => expect(dispatch).toHaveBeenCalled());
-  //   await expect(mockClearCart).toHaveBeenCalled()
-
-  //   // act(() => {
-  //   //   expect(handleSubmit).toHaveBeenCalled();
-  //   // });
-  //   logRoles(button);
-  //   // screen.debug()
-  // });
 });
-
-// it('click on button action', async () => {
-//   const handleSubmit = jest.fn();
-//   const firstNameField = screen.getByTestId('firstName').querySelector('input');
-//   fireEvent.change(firstNameField, { target: { value: 'Roman' } });
-
-//   const lastNameField = screen.getByTestId('lastName').querySelector('input');
-//   fireEvent.change(lastNameField, { target: { value: 'Denes' } });
-
-//   const emailField = screen.getByTestId('email').querySelector('input');
-//   fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
-
-//   const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
-//   fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
-
-//   const regionField = screen.getByTestId('region').querySelector('input');
-//   fireEvent.change(regionField, { target: { value: 'Вінницька' } });
-
-//   const districtsField = screen.getByTestId('district').querySelector('input');
-//   fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
-
-//   const citiesField = screen.getByTestId('cities').querySelector('input');
-//   fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
-
-//   const streetsField = screen.getByTestId('streets').querySelector('input');
-//   fireEvent.change(streetsField, { target: { value: 'Південна' } });
-
-//   const buildingField = screen.getByTestId('house').querySelector('input');
-//   fireEvent.change(buildingField, { target: { value: '34' } });
-
-//   const flatField = screen.getByTestId('flat').querySelector('input');
-//   fireEvent.change(flatField, { target: { value: '36' } });
-
-//   const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
-//   fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
-
-//   const button = screen.getByTestId('rety');
-//   fireEvent.click(button);
-//   expect(handleSubmit).toHaveBeenCalled();
-//   // act(() => {
-//   //   expect(handleSubmit).toHaveBeenCalled();
-//   // });
-//   // logRoles(button);
-// });
-
-/// /// /// ///

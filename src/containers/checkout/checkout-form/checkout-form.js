@@ -39,6 +39,7 @@ import { getCurrencySign } from '../../../utils/currency';
 import { validationSchema } from '../../../validators/checkout';
 import {
   clearSessionStorage,
+  getFromSessionStorage,
   setToSessionStorage
 } from '../../../services/session-storage.service';
 import { checkoutPayMethod } from './const';
@@ -55,7 +56,9 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
   const language = i18n.language === 'ua' ? 0 : 1;
   const { clearCart } = cartOperations;
   const dispatch = useDispatch();
-  const [deliveryType, setDeliveryType] = useState(deliveryTypes.UKRPOSTCOURIER);
+  const [deliveryType, setDeliveryType] = useState(
+    getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
+  );
   const [initialValues, setInitialValues] = useState(stateInitialValues);
   const [pricesFromQuery, setPricesFromQuery] = useState([]);
 
@@ -164,6 +167,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
                 {userContactInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
+                      data-testid={field.name}
                       size={TEXT_FIELDS.SMALL}
                       data-cy={field.name}
                       name={field.name}
@@ -191,7 +195,6 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
               setDeliveryType={setDeliveryType}
             />
             <Delivery
-              role='fj'
               deliveryType={deliveryType}
               language={language}
               values={values}
@@ -283,3 +286,5 @@ CheckoutForm.propTypes = checkoutPropTypes;
 CheckoutForm.defaultProps = checkoutDefaultProps;
 
 export default CheckoutForm;
+
+/// /// /// /// ///

@@ -67,8 +67,7 @@ const YourOrder = ({ ...props }) => {
       <Divider variant='fullWidth' />
       <div className={styles.yourOrderConsentLink}>{consentLink}</div>
       <Button
-        data-testid='rety'
-        nivo='ggg'
+        data-testid='confirmButton'
         variant='contained'
         type='submit'
         className={styles.yourOrderButton}

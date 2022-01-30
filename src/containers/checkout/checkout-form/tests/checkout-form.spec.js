@@ -6,20 +6,31 @@ import { MockedProvider } from '@apollo/client/testing';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
 import DeliveryType from '../delivery-type/delivery-type';
-import { getUkrPoshtaRegions } from '../delivery/ukrpost-and-courier/operations/get-ukrPost-address-data.queries';
-import { clearSessionStorage } from '../../../../services/session-storage.service.js';
+import {
+  getUkrPoshtaRegions,
+  getUkrPoshtaDistricts,
+  getUkrPoshtaCities,
+  getUkrPoshtaStreets
+} from '../delivery/ukrpost-and-courier/operations/get-ukrPost-address-data.queries';
+// import { clearSessionStorage } from '../../../../services/session-storage.service.js';
 
 const mockClearCart = jest.fn();
 const mockCartOperations = { clearCart: mockClearCart };
-const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
+// const myOnSubmit = jest.fn().mockResolvedValueOnce({ data: { paymentMethod: 'card' } });
 const dispatch = jest.fn();
-const clearStorage = jest.fn();
+// const clearStorage = jest.fn();
 
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 
-const ukrPostMock = [
+jest.mock('../../../../services/session-storage.service.js', () => ({
+  setToSessionStorage: jest.fn(),
+  getFromSessionStorage: jest.fn(() => 'UKRPOSTCOURIER'),
+  clearSessionStorage: jest.fn()
+}));
+
+const ukrPostMockRegions = [
   {
     request: {
       query: getUkrPoshtaRegions
@@ -30,21 +41,64 @@ const ukrPostMock = [
           {
             REGION_UA: 'Вінницька',
             REGION_ID: '1'
-          },
-          {
-            REGION_UA: 'Волинська',
-            REGION_ID: '2'
           }
         ]
       }
     }
   }
 ];
-jest.mock('../../../../services/session-storage.service.js', () => ({
-  setToSessionStorage: jest.fn(),
-  getFromSessionStorage: jest.fn(() => 'UKRPOSTCOURIER'),
-  clearSessionStorage: jest.fn()
-}));
+const ukrPostMockDistricts = [
+  {
+    request: {
+      query: getUkrPoshtaDistricts
+    },
+    result: {
+      data: {
+        getUkrPoshtaDistricts: [
+          {
+            DISTRICT_UA: 'Гайсинський',
+            DISTRICT_ID: '916'
+          }
+        ]
+      }
+    }
+  }
+];
+
+const ukrPostMockCities = [
+  {
+    request: {
+      query: getUkrPoshtaCities
+    },
+    result: {
+      data: {
+        getUkrPoshtaCities: [
+          {
+            CITY_UA: 'Адамівка',
+            CITY_ID: '27942'
+          }
+        ]
+      }
+    }
+  }
+];
+
+const ukrPostMockStreets = [
+  {
+    request: {
+      query: getUkrPoshtaStreets
+    },
+    result: {
+      data: {
+        getUkrPoshtaStreets: [
+          {
+            STREET_UA: 'Південна'
+          }
+        ]
+      }
+    }
+  }
+];
 
 const props = {
   currency: 0,
@@ -60,17 +114,27 @@ const userData = {
   address: ''
 };
 
+const handleSubmit = jest.fn();
+
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
-clearSessionStorage.mockImplementation(() => clearStorage);
+// clearSessionStorage.mockImplementation(() => clearStorage);
 
+global.document.createRange = () => ({
+  setStart: () => {},
+  setEnd: () => {},
+  commonAncestorContainer: {
+    nodeName: 'BODY',
+    ownerDocument: document
+  }
+});
 describe('CheckoutForm component tests', () => {
   it(' <CheckoutForm /> should contain component <Delivery />', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     expect(wrapper.find(Delivery).length).toEqual(1);
   });
   it('should submit add payment method', async () => {
-    const wrapper = shallow(<CheckoutForm {...props} onSubmit={myOnSubmit} />);
+    const wrapper = shallow(<CheckoutForm {...props} />);
     wrapper.find('form').simulate('submit');
   });
   it('<CheckoutForm /> should contain component <DeliveryType />', () => {
@@ -81,10 +145,11 @@ describe('CheckoutForm component tests', () => {
 
 describe('CheckoutForm tests for: ', () => {
   beforeEach(() => {
-    const handleSubmit = jest.fn();
     render(
       <BrowserRouter>
-        <MockedProvider mocks={ukrPostMock}>
+        <MockedProvider
+          mocks={(ukrPostMockRegions, ukrPostMockDistricts, ukrPostMockCities, ukrPostMockStreets)}
+        >
           <CheckoutForm {...props} onSubmit={handleSubmit} />
         </MockedProvider>
       </BrowserRouter>
@@ -92,8 +157,53 @@ describe('CheckoutForm tests for: ', () => {
   });
   it('first name field', async () => {
     const firstNameField = screen.getByTestId('firstName').querySelector('input');
-    fireEvent.change(firstNameField, { target: { value: 'Andrii' } });
-    expect(firstNameField.value).toEqual('Andrii');
+    fireEvent.change(firstNameField, { target: { value: 'Roman' } });
+    expect(firstNameField.value).toEqual('Roman');
+  });
+
+  it('last name field', async () => {
+    const lastNameField = screen.getByTestId('lastName').querySelector('input');
+    fireEvent.change(lastNameField, { target: { value: 'Denes' } });
+    expect(lastNameField.value).toEqual('Denes');
+  });
+
+  it('email field', async () => {
+    const emailField = screen.getByTestId('email').querySelector('input');
+    fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
+    expect(emailField.value).toEqual('netro@gmail.com');
+  });
+
+  it('phoneNumber field', async () => {
+    const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
+    fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
+    expect(phoneNumberField.value).toEqual('380686717536');
+  });
+
+  it('region field', async () => {
+    // const radiogrup = screen.getByTestId('delivery-type').querySelector('input');
+    // fireEvent.change(radiogrup, { target: { value: 'UKRPOSTCOURIER' } });
+
+    const regionField = screen.getByTestId('region').querySelector('input');
+    fireEvent.change(regionField, { target: { value: 'Вінницька' } });
+    expect(regionField.value).toEqual('Вінницька');
+  });
+
+  it('districts field', async () => {
+    const districtsField = screen.getByTestId('district').querySelector('input');
+    fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
+    expect(districtsField.value).toEqual('Гайсинський');
+  });
+
+  it('cities field', async () => {
+    const citiesField = screen.getByTestId('cities').querySelector('input');
+    fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
+    expect(citiesField.value).toEqual('Адамівка');
+  });
+
+  it('streets field', async () => {
+    const streetsField = screen.getByTestId('streets').querySelector('input');
+    fireEvent.change(streetsField, { target: { value: 'Південна' } });
+    expect(streetsField.value).toEqual('Південна');
   });
 
   it('building field', async () => {
@@ -108,60 +218,128 @@ describe('CheckoutForm tests for: ', () => {
     expect(flatField.value).toEqual('36');
   });
 
+  it('paymentMetod field', async () => {
+    const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
+    fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
+    expect(paymentMetodField.value).toEqual('CASH');
+  });
+
+  it('click on button action', async () => {
+    const firstNameField = screen.getByTestId('firstName').querySelector('input');
+    const lastNameField = screen.getByTestId('lastName').querySelector('input');
+    const emailField = screen.getByTestId('email').querySelector('input');
+    const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
+    const regionField = screen.getByTestId('region').querySelector('input');
+    const districtsField = screen.getByTestId('district').querySelector('input');
+    const citiesField = screen.getByTestId('cities').querySelector('input');
+    const streetsField = screen.getByTestId('streets').querySelector('input');
+    const buildingField = screen.getByTestId('house').querySelector('input');
+    const flatField = screen.getByTestId('flat').querySelector('input');
+    const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
+    const button = screen.getByTestId('confirmButton');
+
+    fireEvent.change(firstNameField, { target: { value: 'Roman' } });
+    fireEvent.change(lastNameField, { target: { value: 'Denes' } });
+    fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
+    fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
+    fireEvent.change(regionField, { target: { value: 'Вінницька' } });
+    fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
+    fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
+    fireEvent.change(streetsField, { target: { value: 'Південна' } });
+    fireEvent.change(buildingField, { target: { value: '34' } });
+    fireEvent.change(flatField, { target: { value: '36' } });
+    fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
+
+    fireEvent.click(button);
+    // await waitForElement(() => expect(dispatch).toHaveBeenCalled());
+    await expect(dispatch).toHaveBeenCalledTimes(1);
+
+    // act(() => {
+    //   expect(handleSubmit).toHaveBeenCalled();
+    // });
+    // screen.debug()
+  });
+
   // it('click on button action', async () => {
-  //   const handleSubmit = jest.fn();
+  //   const firstNameField = screen.getByTestId('firstName').querySelector('input');
+  //   const lastNameField = screen.getByTestId('lastName').querySelector('input');
+  //   const emailField = screen.getByTestId('email').querySelector('input');
+  //   const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
+  //   const regionField = screen.getByTestId('region').querySelector('input');
+  //   const districtsField = screen.getByTestId('district').querySelector('input');
+  //   const citiesField = screen.getByTestId('cities').querySelector('input');
+  //   const streetsField = screen.getByTestId('streets').querySelector('input');
+  //   const buildingField = screen.getByTestId('house').querySelector('input');
+  //   const flatField = screen.getByTestId('flat').querySelector('input');
+  //   const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
+  //   const button = screen.getByTestId('confirmButton');
 
-  //   const button = screen.getByTestId('rety');
-  //   const paymentFiels = screen.getByTestId('paymentMetod').querySelector('input');
-  //   fireEvent.change(paymentFiels, { target: { value: 'CASH' } });
+  //   fireEvent.change(firstNameField, { target: { value: 'Roman' } });
+  //   fireEvent.change(lastNameField, { target: { value: 'Denes' } });
+  //   fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
+  //   fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
+  //   fireEvent.change(regionField, { target: { value: 'Вінницька' } });
+  //   fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
+  //   fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
+  //   fireEvent.change(streetsField, { target: { value: 'Південна' } });
+  //   fireEvent.change(buildingField, { target: { value: '34' } });
+  //   fireEvent.change(flatField, { target: { value: '36' } });
+  //   fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
+
   //   fireEvent.click(button);
-  //   await act(() =>{
-  //     expect(handleSubmit).toHaveBeenCalled()
-  //   })
+  //   // await waitForElement(() => expect(dispatch).toHaveBeenCalled());
+  //   await expect(mockClearCart).toHaveBeenCalled()
 
-  //   // expect(paymentFiels.value).toEqual('CASH');
-
-  //   // fireEvent.click(button);
-  //   // // await expect(handleSubmit).toHaveBeenCalled()
+  //   // act(() => {
+  //   //   expect(handleSubmit).toHaveBeenCalled();
+  //   // });
   //   logRoles(button);
+  //   // screen.debug()
   // });
 });
 
-// fireEvent.change(radiogrup, { target: { value: 'UKRPOSTCOURIER' } });
-
-// const radio =  getByTestId('del');
-// const firstAndLastNameTextField = getByTestId('firstAndLastName');
-// // const userhouseAndFlat = getByTestId('houseAndFlat').querySelector('input');
-// const submitBtn = getByTestId('submit-btn');
-// // fireEvent.change(radiogrup, { target: { value: 'COURIER' } });
-// fireEvent.change(firstAndLastNameTextField, { target: { value: 'sometext' } });
-// // fireEvent.change(userhouseAndFlat, { target: { value: 'anytext' } });
-// fireEvent.click(submitBtn);
-// await act(() => expect(radiogrup.value).toBe('COURIER')
-//   // expect(handleSubmit).toHaveBeenCalledWith({
-//   //   radiogrup: 'COURIER'
-//   // })
-// );
-// console.log(radiogrup)
-// screen.debug(radiogrup);
-// logRoles(radiogrup)
-
-// it('test 3', async () => {
+// it('click on button action', async () => {
 //   const handleSubmit = jest.fn();
-//   const { getByTestId } = render(
-//     <BrowserRouter>
-//       <MockedProvider mocks={ukrPostMock}>
-//         <CheckoutForm {...props} onSubmit={handleSubmit} />
-//       </MockedProvider>
-//     </BrowserRouter>
-//   );
-//   const radiogrup = getByTestId('delivery-type');
-//   const radio = getByTestId('region');
-//   const building = getByTestId('house').querySelector('input');
-//   const hata = getByTestId('flat').querySelector('input');
-//   fireEvent.change(building, { target: { value: '34' } });
-//   fireEvent.change(hata, { target: { value: '36' } });
+//   const firstNameField = screen.getByTestId('firstName').querySelector('input');
+//   fireEvent.change(firstNameField, { target: { value: 'Roman' } });
 
-//   logRoles(building);
-//   logRoles(hata);
+//   const lastNameField = screen.getByTestId('lastName').querySelector('input');
+//   fireEvent.change(lastNameField, { target: { value: 'Denes' } });
+
+//   const emailField = screen.getByTestId('email').querySelector('input');
+//   fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
+
+//   const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
+//   fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
+
+//   const regionField = screen.getByTestId('region').querySelector('input');
+//   fireEvent.change(regionField, { target: { value: 'Вінницька' } });
+
+//   const districtsField = screen.getByTestId('district').querySelector('input');
+//   fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
+
+//   const citiesField = screen.getByTestId('cities').querySelector('input');
+//   fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
+
+//   const streetsField = screen.getByTestId('streets').querySelector('input');
+//   fireEvent.change(streetsField, { target: { value: 'Південна' } });
+
+//   const buildingField = screen.getByTestId('house').querySelector('input');
+//   fireEvent.change(buildingField, { target: { value: '34' } });
+
+//   const flatField = screen.getByTestId('flat').querySelector('input');
+//   fireEvent.change(flatField, { target: { value: '36' } });
+
+//   const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
+//   fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
+
+//   const button = screen.getByTestId('rety');
+//   fireEvent.click(button);
+//   expect(handleSubmit).toHaveBeenCalled();
+//   // act(() => {
+//   //   expect(handleSubmit).toHaveBeenCalled();
+//   // });
+//   // logRoles(button);
 // });
+
+/// /// /// ///

@@ -250,6 +250,7 @@ const UkrpostAndCourier = ({
           </div>
         )}
         <Autocomplete
+          data-testid='district'
           onInputChange={(e, value, reason) => {
             handleDistrictInputChange(value, reason);
           }}
@@ -288,6 +289,7 @@ const UkrpostAndCourier = ({
           </div>
         )}
         <Autocomplete
+          data-testid='cities'
           onInputChange={(e, value, reason) => {
             handleCityInputChange(value, reason);
           }}
@@ -373,6 +375,7 @@ const UkrpostAndCourier = ({
         ) : (
           <>
             <Autocomplete
+              data-testid='streets'
               onInputChange={(e, value, reason) => {
                 handleStreetInputChange(value, reason);
               }}

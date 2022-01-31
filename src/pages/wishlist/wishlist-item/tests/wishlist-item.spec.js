@@ -36,7 +36,8 @@ const props = {
   item: {
     sizes: [{ size: { available: true }, price: [{ value: 10 }, { value: 20 }] }],
     images: { primary: { thumbnail: '' } },
-    name: [{ value: '' }, { value: '' }]
+    name: [{ value: '' }, { value: '' }],
+    category: { name: ['', { value: 'bags' }] }
   },
   setModalItem: () => null,
   currency: 0,

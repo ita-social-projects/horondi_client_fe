@@ -11,7 +11,7 @@ import { useCart } from '../../hooks/use-cart';
 
 const { pathToThanks, pathToMain } = routes;
 
-const Checkout = () => {
+const Checkout = ({ location }) => {
   const { currency, loading, isOrderCreated, order, user } = useSelector(
     ({ Currency, Order, User }) => ({
       currency: Currency.currency,
@@ -36,7 +36,12 @@ const Checkout = () => {
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>
-          <CheckoutForm currency={currency} cartItems={cartItems} cartOperations={cartOperations} />
+          <CheckoutForm
+            currency={currency}
+            cartItems={cartItems}
+            cartOperations={cartOperations}
+            promoCode={location?.props}
+          />
         </div>
       )}
     </div>

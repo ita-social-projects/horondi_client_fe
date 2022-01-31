@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -23,7 +23,7 @@ import Loader from '../../../../components/loader';
 
 const { pathToProducts } = routes;
 
-const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) => {
+const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useSelector(({ Currency }) => ({
@@ -34,7 +34,14 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
   const [currentSize, setCurrentSize] = useState(item.sizeAndPrice.size._id);
   const [firstlyMounted, toggleFirstlyMounted] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(item.sizeAndPrice.price[currency].value);
-  const { changeQuantity, changeSize, getCartItem, changeSizeConstructor } = cartOperations;
+  const {
+    changeQuantity,
+    changeSize,
+    getCartItem,
+    changeSizeConstructor,
+    getProductPriceWithPromoCode,
+    getProductPrice
+  } = cartOperations;
 
   const onChangeQuantity = useCallback(
     _.debounce((value) => {
@@ -115,26 +122,66 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     ? cartItem?.sizes && cartItem.sizes.map(mapCallback)
     : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
-  const { isLoading, isError } = useIsLoadingOrError(
+  const { isError } = useIsLoadingOrError(
     [loadingProduct, loadingConstructor],
     [constructorError, errorProduct]
   );
+
   useEffect(() => {
     const itemData = getCartItem(item.id);
     setCurrentSize(itemData.sizeAndPrice.size._id);
-    setCurrentPrice(itemData.sizeAndPrice.price[currency].value);
-  }, [handleSizeChange]);
+
+    if (promoCode) {
+      setCurrentPrice(getProductPriceWithPromoCode(item.id, currency, promoCode));
+    } else {
+      setCurrentPrice(getProductPrice(item.id, currency));
+    }
+  }, [handleSizeChange, promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice]);
 
   const onDeleteItem = () => {
     setModalVisibility(true);
     setModalItem(item);
   };
 
+  const totalProductPrice = useMemo(() => {
+    if (promoCode) {
+      const { categories } = promoCode.getPromoCodeByCode;
+      const isAllowCategory = categories.find((item) => item === cartItem.category.code);
+
+      if (isAllowCategory) {
+        return (
+          <div className={styles.promo}>
+            <s>
+              {currencySign}
+              {Math.round(calcPriceForCart(item.sizeAndPrice.price[currency].value, inputValue))}
+            </s>
+            <span>
+              {currencySign}
+              {calcPriceForCart(currentPrice, inputValue)}
+            </span>
+          </div>
+        );
+      }
+    }
+
+    return (
+      <div>
+        {currencySign}
+        {Math.round(calcPriceForCart(currentPrice, inputValue))}
+      </div>
+    );
+  }, [promoCode, currencySign, currency]);
+
   useEffect(() => {
     toggleFirstlyMounted(true);
   }, []);
 
-  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+  if (isError)
+    return (
+      <tr>
+        <td>{errorOrLoadingHandler(isError)}</td>
+      </tr>
+    );
 
   if (loadingProduct)
     return (
@@ -205,10 +252,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
       </TableCell>
       <TableCell>
         <div>
-          <div className={styles.price}>
-            {currencySign}
-            {Math.round(calcPriceForCart(currentPrice, inputValue))}
-          </div>
+          <div className={styles.price}>{totalProductPrice}</div>
         </div>
       </TableCell>
       <TableCell>

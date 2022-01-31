@@ -12,14 +12,16 @@ import { getProductById } from '../../../operations/order.queries';
 import { getConstructorById } from '../../../operations/getConstructorById.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
+import { useCart } from '../../../../../hooks/use-cart';
 
-const OrderItem = ({ product, setProductPrices }) => {
+const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const styles = useStyles();
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
   const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
+  const { cartOperations } = useCart();
 
   const [
     getProductByIdHandler,
@@ -64,14 +66,29 @@ const OrderItem = ({ product, setProductPrices }) => {
 
   const { sizeAndPrice } = product;
 
-  useEffect(() => {
-    const { constructor } = product;
-    const { size, price } = sizeAndPrice;
-    if (!constructor && orderItem) {
-      const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
-      setProductPrices((prevState) => [...prevState, currentSize?.price]);
+  const calculatePrice = (promoCode) => {
+    const { size } = sizeAndPrice;
+    const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
+
+    if (promoCode) {
+      const { categories, discount } = promoCode.getPromoCodeByCode;
+      const isAllowCategory = categories.find((item) => item === orderItem.category.code);
+
+      if (isAllowCategory) {
+        return currentSize.price.map((item) => ({ ...item, value: Math.round(item.value - (item.value / 100) * discount) }));
+      }
+      return currentSize.price;
     }
-    if (constructor && orderItem) {
+    return currentSize.price;
+  };
+
+  useEffect(() => {
+    const { price } = sizeAndPrice;
+
+    if (!isConstructor && orderItem) {
+      setProductPrices((prevState) => [...prevState, calculatePrice(promoCode)]);
+    }
+    if (isConstructor && orderItem) {
       setProductPrices((prevState) => [...prevState, price]);
     }
   }, [setProductPrices, product, orderItem, sizeAndPrice]);
@@ -118,7 +135,11 @@ const OrderItem = ({ product, setProductPrices }) => {
         }
       />
       <Typography className={styles.yourOrderListItemPrice} component='div'>
-        <div>{sizeAndPrice.price[currency]?.value}</div>
+        <div>
+          {promoCode
+            ? cartOperations.getProductPriceWithPromoCode(product.productId, currency, promoCode)
+            : sizeAndPrice.price[currency]?.value}
+        </div>
         <div style={{ width: '3px' }} />
         <div className={styles.priceForItem}>{currencySign}</div>
       </Typography>

@@ -8,6 +8,8 @@
   "applyPromoCode": "Add",
   "continue": "Continue shopping",
   "totalPrice": "Total price",
+  "saving": "Save",
+  "notFound": "Promo code not found",
   "checkout": "Go to checkout",
   "pathBack": {
     "toMain": "Home",

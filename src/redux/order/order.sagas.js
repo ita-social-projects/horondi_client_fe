@@ -14,7 +14,7 @@ import {
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
-import { USER_IS_BLOCKED, AUTH_ERRORS, CURRENCIES_LIST, DEFAULT_CURRENCY } from '../../configs';
+import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
 import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { handleUserError } from '../user/user.sagas';
 
@@ -53,9 +53,7 @@ export function* handleGetFondyUrl({ payload }) {
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      payload.currency === CURRENCIES_LIST[DEFAULT_CURRENCY].currency
-        ? (newOrder.totalPriceToPay[0].value * 100).toString()
-        : (newOrder.totalPriceToPay[1].value * 100).toString(),
+      (payload.amount * 100).toString(),
       payload.language
     );
 

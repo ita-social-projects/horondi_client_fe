@@ -101,7 +101,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           size='small'
           rows={1}
           error={!firstNameValidated && shouldValidate}
-          helperText={handleHelperText(firstNameValidated, shouldValidate, 'onlyLetter')}
+          helperText={handleHelperText(firstNameValidated, shouldValidate, 'profile.firstName')}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setFirstNameValidated, formRegExp.firstName)}
           value={firstName}

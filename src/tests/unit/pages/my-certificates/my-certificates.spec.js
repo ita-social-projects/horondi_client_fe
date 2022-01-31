@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { useQuery } from '@apollo/client';
+import { MockedProvider } from '@apollo/client/testing';
 import MyCertificates from '../../../../pages/my-certificates/my-certificates';
+import { getAllCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
 
 jest.mock('../../../../pages/my-certificates/my-certificates.styles', () => ({
   useStyles: () => ({})
@@ -29,8 +30,6 @@ jest.mock(
   })
 );
 
-jest.mock('@apollo/client');
-
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
   useTheme: () => ({
@@ -40,56 +39,110 @@ jest.mock('@material-ui/styles', () => ({
   })
 }));
 
-const data = [
-  {
-    _id: '61e2aea9e07b826a945d45f8',
-    value: 500,
-    isActive: true,
-    isUsed: false,
-    name: 'FreeHorondi',
-    dateStart: '2021-01-10T18:22:16.417Z',
-    dateEnd: '2022-01-11T18:22:16.417Z',
-    code: 'HOR22075'
-  },
-  {
-    _id: '61e2aedde07b826a945d45f9',
-    value: 1000,
-    isActive: false,
-    isUsed: false,
-    name: 'FreeHorondi',
-    dateStart: '2020-12-30T18:22:16.417Z',
-    dateEnd: '2021-12-31T18:22:16.417Z',
-    code: 'HDQ37569'
-  }
-];
+describe('MyCertificates test', () => {
+  it('should render two certificates', async () => {
+    const certificateMock = {
+      request: {
+        query: getAllCertificates,
+        variables: {
+          limit: 5,
+          skip: 0
+        }
+      },
+      result: {
+        data: {
+          getAllCertificates: {
+            items: [
+              {
+                code: 'XYQ332765',
+                dateEnd: '2022-11-08T18:22:16.417Z',
+                dateStart: '2021-11-08T18:22:16.417Z',
+                isActive: true,
+                isUsed: false,
+                name: 'FreeHorondi',
+                value: 1500,
+                _id: '61f3fd57b0b726cad2944501'
+              },
+              {
+                code: 'XYQ332765',
+                dateEnd: '2022-11-08T18:22:16.417Z',
+                dateStart: '2021-11-08T18:22:16.417Z',
+                isActive: true,
+                isUsed: false,
+                name: 'FreeHorondi',
+                value: 1500,
+                _id: '61f3fd57b0b726cad2944501'
+              }
+            ],
+            count: 2
+          }
+        }
+      }
+    };
 
-const getAllCertificates = {
-  loading: false,
-  error: false
-};
-
-useQuery.mockImplementation(() => ({
-  ...getAllCertificates
-}));
-describe('MyCertificates component test', () => {
-  it('should render the component', () => {
-    const wrapper = render(
-      <Router>
-        <MyCertificates {...data} />
-      </Router>
-    );
-
-    expect(wrapper).toBeDefined();
-  });
-
-  it('should render a component title', () => {
     render(
-      <Router>
-        <MyCertificates {...data} />
-      </Router>
+      <MockedProvider mocks={[certificateMock]} addTypename={false}>
+        <Router>
+          <MyCertificates />
+        </Router>
+      </MockedProvider>
     );
-    const title = screen.getByText(/certificate.EmptyTitle/i);
 
-    expect(title).toBeInTheDocument();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    const element = screen.getAllByText(/XYQ332765/i);
+    expect(element).toHaveLength(2);
+  });
+  it('should render title', async () => {
+    const certificateMock = {
+      request: {
+        query: getAllCertificates,
+        variables: {
+          limit: 5,
+          skip: 0
+        }
+      },
+      result: {
+        data: {
+          getAllCertificates: {
+            items: [
+              {
+                code: 'XYQ332765',
+                dateEnd: '2022-11-08T18:22:16.417Z',
+                dateStart: '2021-11-08T18:22:16.417Z',
+                isActive: true,
+                isUsed: false,
+                name: 'FreeHorondi',
+                value: 1500,
+                _id: '61f3fd57b0b726cad2944501'
+              },
+              {
+                code: 'XYQ332765',
+                dateEnd: '2022-11-08T18:22:16.417Z',
+                dateStart: '2021-11-08T18:22:16.417Z',
+                isActive: true,
+                isUsed: false,
+                name: 'FreeHorondi',
+                value: 1500,
+                _id: '61f3fd57b0b726cad2944501'
+              }
+            ],
+            count: 2
+          }
+        }
+      }
+    };
+    render(
+      <MockedProvider mocks={[certificateMock]} addTypename={false}>
+        <Router>
+          <MyCertificates />
+        </Router>
+      </MockedProvider>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    const element = screen.getByText(/certificate.emptyTitle/i);
+    expect(element).toBeInTheDocument();
   });
 });

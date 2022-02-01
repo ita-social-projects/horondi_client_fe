@@ -66,7 +66,12 @@ const YourOrder = ({ ...props }) => {
       </Typography>
       <Divider variant='fullWidth' />
       <div className={styles.yourOrderConsentLink}>{consentLink}</div>
-      <Button variant='contained' type='submit' className={styles.yourOrderButton}>
+      <Button
+        data-testid='confirmButton'
+        variant='contained'
+        type='submit'
+        className={styles.yourOrderButton}
+      >
         {checkoutFormBtnValue(values, language)}
       </Button>
     </Paper>

@@ -95,28 +95,24 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
     initialValues,
 
     onSubmit: (data) => {
-      data.paymentMethod === checkoutPayMethod.card
-        ? dispatch(addPaymentMethod(checkoutPayMethod.card)) &&
-          dispatch(
-            getFondyData({
-              order: orderInputData(data, deliveryType, cartItems, language),
-              currency: getCurrentCurrency(currency),
-              amount: String(totalPriceToPay),
-              language
-            })
-          )
-        : dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language))) &&
-          dispatch(addPaymentMethod(checkoutPayMethod.cash));
+      if (data.paymentMethod === checkoutPayMethod.card) {
+        dispatch(addPaymentMethod(checkoutPayMethod.card));
+        dispatch(
+          getFondyData({
+            order: orderInputData(data, deliveryType, cartItems, language),
+            currency: getCurrentCurrency(currency),
+            amount: String(totalPriceToPay),
+            language
+          })
+        );
+      } else {
+        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language)));
+        dispatch(addPaymentMethod(checkoutPayMethod.cash));
+      }
       clearSessionStorage();
       clearCart();
     }
   });
-
-  useEffect(() => {
-    if (userData) {
-      setInitialValues(updateInitialValues(userData));
-    }
-  }, [userData]);
 
   useEffect(() => {
     setToSessionStorage(SESSION_STORAGE.CHECKOUT_FORM, values);
@@ -148,6 +144,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
                 {userNameInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
+                      data-testid={field.name}
                       size={TEXT_FIELDS.SMALL}
                       data-cy={field.name}
                       name={field.name}
@@ -170,6 +167,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
                 {userContactInputLabels(language).map((field) => (
                   <div key={field.name} className={styles.inputData}>
                     <TextField
+                      data-testid={field.name}
                       size={TEXT_FIELDS.SMALL}
                       data-cy={field.name}
                       name={field.name}
@@ -216,6 +214,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
                   {t('checkout.checkoutTextFields.paymentMethod')}
                 </InputLabel>
                 <Select
+                  data-testid='paymentMetod'
                   label={t('checkout.checkoutTextFields.paymentMethod')}
                   className={styles.paymentSelect}
                   data-cy='paymentMethod'

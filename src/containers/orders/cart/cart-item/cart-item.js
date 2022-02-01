@@ -146,7 +146,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const totalProductPrice = useMemo(() => {
     if (promoCode) {
       const { categories } = promoCode.getPromoCodeByCode;
-      const isAllowCategory = categories.find((item) => item === cartItem.category.code);
+      const isAllowCategory = categories.find((el) => el === cartItem.category.code);
 
       if (isAllowCategory) {
         return (

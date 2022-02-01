@@ -66,7 +66,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   const { sizeAndPrice } = product;
 
-  const calculatePrice = (promoCode) => {
+  const calculatePrice = () => {
     const { size } = sizeAndPrice;
     const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
 
@@ -75,7 +75,10 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
       const isAllowCategory = categories.find((item) => item === orderItem.category.code);
 
       if (isAllowCategory) {
-        return currentSize.price.map((item) => ({ ...item, value: Math.round(item.value - (item.value / 100) * discount) }));
+        return currentSize.price.map((item) => ({
+          ...item,
+          value: Math.round(item.value - (item.value / 100) * discount)
+        }));
       }
       return currentSize.price;
     }
@@ -86,7 +89,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
     const { price } = sizeAndPrice;
 
     if (!isConstructor && orderItem) {
-      setProductPrices((prevState) => [...prevState, calculatePrice(promoCode)]);
+      setProductPrices((prevState) => [...prevState, calculatePrice()]);
     }
     if (isConstructor && orderItem) {
       setProductPrices((prevState) => [...prevState, price]);

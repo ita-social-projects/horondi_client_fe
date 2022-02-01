@@ -85,6 +85,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   helperText={error && t('cart.notFound')}
                 />
                 <Button
+                  data-testid='promoButton'
                   variant='contained'
                   className={`${styles.promoButton} ${styles.promoInput}`}
                   onClick={checkPromoCode}

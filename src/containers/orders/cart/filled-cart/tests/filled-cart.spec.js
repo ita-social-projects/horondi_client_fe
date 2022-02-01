@@ -24,10 +24,37 @@ const mockUseSelector = (loading = false) => {
   }));
 };
 const mockGetTotalPrice = jest.fn(() => '42');
-const mockCartOperations = { getTotalPrice: mockGetTotalPrice };
+const mockGetTotalPricesWithPromoCode = jest.fn(() => '41');
+const mockCartOperations = {
+  getTotalPrice: mockGetTotalPrice,
+  getTotalPricesWithPromoCode: mockGetTotalPricesWithPromoCode
+};
 
 let wrapper;
 const items = [{ price: [{ currency: 'ua', value: 100 }] }];
+
+jest.mock('@apollo/client', () => ({
+  ...jest.requireActual('@apollo/client'),
+  useLazyQuery: () => [
+    jest.fn(),
+    {
+      loading: false,
+      error: null,
+      data: {
+        getPromoCodeByCode: {
+          code: 'test',
+          discount: 10,
+          categories: ['bags']
+        }
+      }
+    }
+  ]
+}));
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useRef: () => ({ current: { value: 'te' } })
+}));
 
 describe('Filled cart component tests', () => {
   beforeEach(() => {
@@ -43,6 +70,15 @@ describe('Filled cart component tests', () => {
   it('should find loader', () => {
     mockUseSelector(true);
     wrapper = shallow(<FilledCart items={items} cartOperations={mockCartOperations} />);
+
     expect(wrapper.exists(Loader)).toBe(true);
+  });
+
+  it('should calculate total price with promo code', () => {
+    wrapper = shallow(<FilledCart items={items} cartOperations={mockCartOperations} />);
+    const button = wrapper.find('[data-testid="promoButton"]');
+    button.simulate('click');
+
+    expect(mockGetTotalPricesWithPromoCode).toHaveBeenCalled();
   });
 });

@@ -6,6 +6,7 @@ import Slider from '@material-ui/core/Slider';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { TextField } from '@material-ui/core';
+import { generalRegExp } from '../../../../configs/regexp';
 import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
@@ -17,15 +18,16 @@ const PriceFilter = ({ priceRange }) => {
   const searchParams = new URLSearchParams(search);
   const styles = useStyles();
   const history = useHistory();
+  const priceFilterValue = searchParams.get(priceFilter);
 
-  const [prices, setPrices] = useState(
-    searchParams.get(priceFilter)
-      ? searchParams
-        .get(priceFilter)
-        .split(',')
-        .map((price) => +price)
-      : ['', '']
-  );
+  const getDefaultPrices = () => priceFilterValue
+    ? searchParams
+      .get(priceFilter)
+      .split(',')
+      .map((price) => +price)
+    : ['', ''];
+
+  const [prices, setPrices] = useState(getDefaultPrices());
 
   const searchParamsRef = useRef();
   searchParamsRef.current = searchParams;
@@ -43,13 +45,21 @@ const PriceFilter = ({ priceRange }) => {
     }
   }, [min, max, currency, prices]);
 
+  useEffect(() => {
+    setPrices(getDefaultPrices());
+  }, [priceFilterValue]);
+
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
   };
 
   const handleTextField = (e) => {
     const newPrices = [...prices];
-    newPrices[e.target.id] = e.target.value;
+    const currentFieldValue = newPrices[e.target.id];
+    const newFieldValue = e.target.value;
+    newPrices[e.target.id] = newFieldValue.match(generalRegExp.numbersOrEmpty)
+      ? newFieldValue
+      : currentFieldValue;
     setPrices(newPrices);
   };
 

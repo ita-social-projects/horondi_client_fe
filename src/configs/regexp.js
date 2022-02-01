@@ -22,3 +22,7 @@ export const formRegExp = {
   link: /\b(?:(?:https?|ftp|http):\/\/|www\.)[-a-z0-9+&@#%?=~_|!:,.;]*[-a-z0-9+&@#%=~_|]/gm,
   search: /^([a-zа-яіїє]|[',. -][a-zа-яіїє])*$/i
 };
+
+export const generalRegExp = {
+  numbersOrEmpty: /^[0-9]+$|^$/
+};

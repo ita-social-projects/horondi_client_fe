@@ -48,5 +48,9 @@ export const validationSchema = (deliveryType) =>
         .max(100, 'error.streetLong')
         .required('error.requiredField'),
     house:
-      isCourier(deliveryType) && Yup.string().min(1, 'error.house').required('error.requiredField')
+      isCourier(deliveryType) &&
+      Yup.string().min(1, 'error.house').max(6, 'error.house').required('error.requiredField'),
+    flat:
+      isCourier(deliveryType) &&
+      Yup.string().min(1, 'error.flat').max(6, 'error.flat').required('error.requiredField')
   });

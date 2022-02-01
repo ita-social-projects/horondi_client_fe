@@ -18,18 +18,9 @@ useDispatch.mockImplementation(() => dispatch);
 
 const testUseSelector = (lang) => {
   useSelector.mockImplementation(() => ({
-    language: lang,
     currency: 0
   }));
 };
-
-jest.mock('react-redux');
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key) => key,
-    i18n: { changeLanguage: jest.fn() }
-  })
-}));
 
 const props = {
   cartLoading: true,

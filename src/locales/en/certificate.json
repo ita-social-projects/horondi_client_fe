@@ -1,13 +1,16 @@
 {
   "title": "My certificates",
+  "emptyTitle": "You don't have certificates",
   "certificate": "Certificate",
   "code": "Code",
   "price": "Price",
   "expiration": "Expiration date",
   "status": "Status",
-  "buy": "Buy new certificate",
+  "buy": "Buy certificate",
   "add": "Add certificate",
   "active": "Active",
   "expired": "Expired",
-  "used": "Used"
+  "used": "Used",
+  "copy": "Copy",
+  "currency": "UAH"
 }

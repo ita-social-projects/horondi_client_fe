@@ -1,20 +1,22 @@
-import React from 'react';
-
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useStyles } from './certificate-table.styles';
-
+import { ROW_FIELDS } from '../../../configs/index';
 import CertificateItem from '../cetrificate-item';
 
 const CertificateTable = ({ items }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const rowItems = ['certificate', 'code', 'price', 'expiration', 'status'];
-  const headerItems = rowItems.map((item) => (
-    <TableCell key={item.id}>{t(`certificate.${item}`)}</TableCell>
-  ));
-  const certificateItems = items.map((item) => <CertificateItem item={item} key={item.id} />);
+  const certificateItems = useMemo(() => [...items]
+    .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
+    .map((item) => <CertificateItem item={item} key={item._id} />), [items]);
+
+  const headerItems = useMemo(() => ROW_FIELDS.map((item) => (
+    <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>
+  )), [ROW_FIELDS]);
 
   return (
     <div className={styles.root}>

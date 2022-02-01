@@ -24,5 +24,5 @@ export const formRegExp = {
 };
 
 export const generalRegExp = {
-  numbersOrEmpty: /^[0-9]+$|^$/
+  numbersOrEmpty: /^(\s*|\d+)$/
 };

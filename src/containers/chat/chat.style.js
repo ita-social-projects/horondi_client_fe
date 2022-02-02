@@ -79,7 +79,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     right: '15%',
-    top: '10%',
+    top: '105px',
     bottom: '10%',
     width: '320px',
     height: '600px',
@@ -88,8 +88,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
       width: '70%',
-      right: '15%',
-      top: '8%'
+      right: '15%'
     },
     '@media (max-width: 420px)': {
       width: '90%',

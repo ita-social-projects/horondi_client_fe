@@ -6,7 +6,6 @@ import Slider from '@material-ui/core/Slider';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { TextField } from '@material-ui/core';
-import { generalRegExp } from '../../../../configs/regexp';
 import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
@@ -20,12 +19,13 @@ const PriceFilter = ({ priceRange }) => {
   const history = useHistory();
   const priceFilterValue = searchParams.get(priceFilter);
 
-  const getDefaultPrices = () => priceFilterValue
-    ? searchParams
-      .get(priceFilter)
-      .split(',')
-      .map((price) => +price)
-    : ['', ''];
+  const getDefaultPrices = () =>
+    priceFilterValue
+      ? searchParams
+        .get(priceFilter)
+        .split(',')
+        .map((price) => +price)
+      : ['', ''];
 
   const [prices, setPrices] = useState(getDefaultPrices());
 
@@ -55,11 +55,7 @@ const PriceFilter = ({ priceRange }) => {
 
   const handleTextField = (e) => {
     const newPrices = [...prices];
-    const currentFieldValue = newPrices[e.target.id];
-    const newFieldValue = e.target.value;
-    newPrices[e.target.id] = newFieldValue.match(generalRegExp.numbersOrEmpty)
-      ? newFieldValue
-      : currentFieldValue;
+    newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
   };
 
@@ -96,6 +92,7 @@ const PriceFilter = ({ priceRange }) => {
             onChange={handleTextField}
             type='tel'
             value={prices[0]}
+            inputProps={{ type: 'number', min: 0 }}
           />
           {t('common.to')}
           <TextField
@@ -105,6 +102,7 @@ const PriceFilter = ({ priceRange }) => {
             onChange={handleTextField}
             type='tel'
             value={prices[1]}
+            inputProps={{ type: 'number', min: 0 }}
           />
         </div>
       </Typography>

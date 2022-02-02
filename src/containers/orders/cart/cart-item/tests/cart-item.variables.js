@@ -33,7 +33,10 @@ export const item = {
     }
   },
   quantity: 4,
-  constructor: true
+  constructor: true,
+  category: {
+    code: 'bags'
+  }
 };
 
 const cartData = {
@@ -48,7 +51,11 @@ const itemData = {
       {
         value: 2100
       }
-    ]
+    ],
+    size: {
+      _id: '60439516a7532c33dcb326d7',
+      name: 'S'
+    }
   }
 };
 
@@ -63,12 +70,22 @@ export const props = {
   user: {},
   cartQuantityLoading: false,
   setModalVisibility: () => null,
-  setModalItem: () => null
+  setModalItem: () => null,
+  promoCode: {
+    getPromoCodeByCode: {
+      code: 'test',
+      discount: 10,
+      categories: ['bags']
+    }
+  }
 };
 
 export const mockQueryData = {
   __typename: 'Product',
   _id: '61938f3f47ff1a3ccc1ac5e7',
+  category: {
+    code: 'bags'
+  },
   name: [
     {
       lang: 'ua',
@@ -128,6 +145,9 @@ export const mockQueryData = {
 export const mockQueryDataConstructor = {
   __typename: 'Constructor',
   _id: '619ea7245bbfb0002540bd29',
+  category: {
+    code: 'bags'
+  },
   name: [
     {
       lang: 'ua',

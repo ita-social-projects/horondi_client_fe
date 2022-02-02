@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { render } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import CartItem from '../cart-item';
 import { mockQueryData, mockQueryDataConstructor, props, item } from './cart-item.variables';
 
@@ -46,10 +48,14 @@ let component;
 const mockChangeQuantity = jest.fn();
 const mockGetCartItem = jest.fn(() => props.itemData);
 const mockChangeSize = jest.fn();
+const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
+const mockGetProductPrice = jest.fn(() => 1100);
 const mockCartOperations = {
   changeQuantity: mockChangeQuantity,
   getCartItem: mockGetCartItem,
-  changeSize: mockChangeSize
+  changeSize: mockChangeSize,
+  getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
+  getProductPrice: mockGetProductPrice
 };
 
 jest.mock('@apollo/client', () => ({
@@ -85,11 +91,32 @@ describe('Filled cart component tests', () => {
     const select = component.find({ name: 'size' });
     select.simulate('change', { target: { value: 'L' } });
   });
+
   it('should change select value', () => {
     testSelection(false);
     component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
     const select = component.find(`[name='size']`);
     select.props().onChange({ target: { value: '604394a2a7532c33dcb326d5' } });
     expect(select.props().value).toEqual('604394a2a7532c33dcb326d5');
+  });
+});
+
+describe('q', () => {
+  it('should calculate price with promoCode', () => {
+    render(
+      <Router>
+        <CartItem {...props} cartOperations={mockCartOperations} />
+      </Router>
+    );
+    expect(mockGetProductPriceWithPromoCode).toHaveBeenCalled();
+  });
+
+  it('should calculate price without promoCode', () => {
+    render(
+      <Router>
+        <CartItem {...props} promoCode={null} cartOperations={mockCartOperations} />
+      </Router>
+    );
+    expect(mockGetProductPrice).toHaveBeenCalled();
   });
 });

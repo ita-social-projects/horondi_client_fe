@@ -128,6 +128,10 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   );
 
   useEffect(() => {
+    toggleFirstlyMounted(true);
+  }, []);
+
+  useEffect(() => {
     const itemData = getCartItem(item.id);
     setCurrentSize(itemData.sizeAndPrice.size._id);
 
@@ -171,10 +175,6 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       </div>
     );
   }, [promoCode, currencySign, currency]);
-
-  useEffect(() => {
-    toggleFirstlyMounted(true);
-  }, []);
 
   if (isError)
     return (

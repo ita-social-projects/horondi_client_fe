@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import OrderTable from '../order-table';
 import Modal from '../../../../../components/modal/modal';
+import { mockGetProductById, props, modalProps, mockCartOperations } from './order-table.variables';
 
 jest.mock('../order-table.styles', () => ({
   useStyles: () => ({})
@@ -22,72 +23,17 @@ const testUseSelector = (lang) => {
   }));
 };
 
-const props = {
-  cartLoading: true,
-  cartQuantityLoading: false,
-  items: [
-    {
-      sizeAndPrice: {
-        size: {
-          _id: 'test',
-          name: 'S'
-        },
-        price: [
-          {
-            value: 1000,
-            currency: 'UAH'
-          }
-        ]
-      }
-    }
-  ],
-  user: {}
-};
-
-const modalProps = {
-  language: 1,
-  message: 'test',
-  isOpen: true,
-  onAction: jest.fn()
-};
-
-const mockGetCartItem = jest.fn().mockReturnValue({
-  sizeAndPrice: {
-    size: {
-      _id: 'test',
-      name: 'S'
-    },
-    price: [
-      {
-        value: 1000,
-        currency: 'UAH'
-      }
-    ]
-  }
-});
-
-const mockGetTotalPrice = jest.fn();
-const mockChangeQuantity = jest.fn();
-const mockChangeSize = jest.fn();
-
-const mockCartOperations = {
-  getTotalPrice: mockGetTotalPrice,
-  changeQuantity: mockChangeQuantity,
-  getCartItem: mockGetCartItem,
-  changeSize: mockChangeSize,
-  removeFromCart: jest.fn()
-};
-
 describe('test <OrderTable /> component', () => {
   it('should render <OrderTable />', () => {
     testUseSelector(0);
     const { getByText } = render(
-      <BrowserRouter>
-        <MockedProvider>
+      <MockedProvider mocks={[mockGetProductById]} addTypename={false}>
+        <BrowserRouter>
           <OrderTable {...props} cartOperations={mockCartOperations} />
-        </MockedProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </MockedProvider>
     );
+
     const productCell = getByText(/product/i);
     expect(productCell).toBeInTheDocument();
   });

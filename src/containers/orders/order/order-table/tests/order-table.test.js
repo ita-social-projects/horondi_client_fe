@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import OrderTable from '../order-table';
 import Modal from '../../../../../components/modal/modal';
@@ -28,9 +27,7 @@ describe('test <OrderTable /> component', () => {
     testUseSelector(0);
     const { getByText } = render(
       <MockedProvider mocks={[mockGetProductById]} addTypename={false}>
-        <BrowserRouter>
-          <OrderTable {...props} cartOperations={mockCartOperations} />
-        </BrowserRouter>
+        <OrderTable {...props} cartOperations={mockCartOperations} />
       </MockedProvider>
     );
 

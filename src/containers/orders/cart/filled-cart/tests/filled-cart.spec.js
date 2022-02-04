@@ -1,84 +1,67 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Loader } from '../../../../../components/loader/loader';
+import { useSelector } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import FilledCart from '../filled-cart';
-import OrderTable from '../../../order/order-table';
+import { itemData, items, mockPromoCode } from './filled-cart.variables';
 
 jest.mock('react-redux');
 jest.mock('../filled-cart.styles.js', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../order/order-table/order-table.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../../cart-item/cart-item.styles', () => ({ useStyles: () => ({}) }));
 
-const dispatch = jest.fn();
-useDispatch.mockImplementation(() => dispatch);
-const mockUseSelector = (loading = false) => {
-  useSelector.mockImplementation(() => ({
-    language: 0,
-    cartLoading: loading,
-    currency: 0,
-    userData: {},
-    cartList: [],
-    cartQuantityLoading: false,
-    cartUserTotalPrice: 100,
-    user: {
-      userData: null
-    }
-  }));
-};
+const mockChangeQuantity = jest.fn();
+const mockChangeSizeConstructor = jest.fn();
+const mockGetCartItem = jest.fn(() => itemData);
+const mockChangeSize = jest.fn();
 const mockGetTotalPrice = jest.fn(() => '42');
 const mockGetTotalPricesWithPromoCode = jest.fn(() => '41');
+const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
+const mockGetProductPrice = jest.fn(() => 1100);
 const mockCartOperations = {
   getTotalPrice: mockGetTotalPrice,
-  getTotalPricesWithPromoCode: mockGetTotalPricesWithPromoCode
+  getTotalPricesWithPromoCode: mockGetTotalPricesWithPromoCode,
+  changeQuantity: mockChangeQuantity,
+  getCartItem: mockGetCartItem,
+  changeSize: mockChangeSize,
+  changeSizeConstructor: mockChangeSizeConstructor,
+  getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
+  getProductPrice: mockGetProductPrice
 };
 
-let wrapper;
-const items = [{ price: [{ currency: 'ua', value: 100 }] }];
-
-jest.mock('@apollo/client', () => ({
-  ...jest.requireActual('@apollo/client'),
-  useLazyQuery: () => [
-    jest.fn(),
-    {
-      loading: false,
-      error: null,
-      data: {
-        getPromoCodeByCode: {
-          code: 'test',
-          discount: 10,
-          categories: ['bags']
-        }
-      }
-    }
-  ]
-}));
-
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useRef: () => ({ current: { value: 'te' } })
-}));
-
 describe('Filled cart component tests', () => {
-  beforeEach(() => {
-    mockUseSelector();
-  });
-
-  it('Calls method for getting total price', () => {
-    wrapper = shallow(<FilledCart items={items} cartOperations={mockCartOperations} />);
-
-    expect(wrapper.find(OrderTable)).toBeDefined();
-  });
-
-  it('should find loader', () => {
-    mockUseSelector(true);
-    wrapper = shallow(<FilledCart items={items} cartOperations={mockCartOperations} />);
-
-    expect(wrapper.exists(Loader)).toBe(true);
-  });
-
   it('should calculate total price with promo code', () => {
-    wrapper = shallow(<FilledCart items={items} cartOperations={mockCartOperations} />);
-    const button = wrapper.find('[data-testid="promoButton"]');
-    button.simulate('click');
+    useSelector.mockImplementation(() => ({
+      cartLoading: false,
+      currency: 0
+    }));
+    render(
+      <Router>
+        <MockedProvider mocks={mockPromoCode} addTypename={false}>
+          <FilledCart items={items} cartOperations={mockCartOperations} />
+        </MockedProvider>
+      </Router>
+    );
+    const button = screen.getByTestId('promoButton');
+    fireEvent.click(button);
 
     expect(mockGetTotalPricesWithPromoCode).toHaveBeenCalled();
+  });
+
+  it('should render Loader', () => {
+    useSelector.mockImplementation(() => ({
+      cartLoading: true,
+      currency: 0
+    }));
+    render(
+      <Router>
+        <MockedProvider mocks={mockPromoCode} addTypename={false}>
+          <FilledCart items={items} cartOperations={mockCartOperations} />
+        </MockedProvider>
+      </Router>
+    );
+
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 });

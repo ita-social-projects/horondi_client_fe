@@ -33,6 +33,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
           setInputValue(quantity - 1);
         }}
         disabled={quantity <= 1}
+        data-testid='decrement'
       >
         <RemoveIcon />
       </Button>
@@ -51,6 +52,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
           setInputValue(quantity + 1);
         }}
         disabled={quantity >= 1000}
+        data-testid='increment'
       >
         <AddIcon />
       </Button>

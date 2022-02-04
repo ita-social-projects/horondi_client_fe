@@ -1,4 +1,36 @@
+import { getProductById } from '../../../operations/order.queries';
+
 export const item = {
+  id: 1643824795572,
+  productId: '605660d9158e2fdb53498490',
+  sizeAndPrice: {
+    size: {
+      available: true,
+      _id: '60439516a7532c33dcb326d7',
+      name: 'S',
+      heightInCm: 35,
+      widthInCm: 26,
+      depthInCm: 14,
+      volumeInLiters: 18,
+      weightInKg: 0.8
+    },
+    price: [
+      {
+        value: 1000,
+        currency: 'UAH'
+      },
+      {
+        value: 36,
+        currency: 'USD'
+      }
+    ]
+  },
+  quantity: 1,
+  constructor: {},
+  category: 'Bags'
+};
+
+export const constructor = {
   id: '61c361217eeb571938b4ecb8',
   productId: '61938f3f47ff1a3ccc1ac5e7',
   sizeAndPrice: {
@@ -33,19 +65,13 @@ export const item = {
     }
   },
   quantity: 4,
-  constructor: true,
+  constructor: { a: 1 },
   category: {
     code: 'bags'
   }
 };
 
-const cartData = {
-  size: {
-    _id: '604394a2a7532c33dcb326d5'
-  }
-};
-
-const itemData = {
+export const itemData = {
   sizeAndPrice: {
     price: [
       {
@@ -53,31 +79,26 @@ const itemData = {
       }
     ],
     size: {
-      _id: '60439516a7532c33dcb326d7',
+      _id: '',
       name: 'S'
     }
+  },
+  category: {
+    code: 'bags'
   }
 };
 
 export const props = {
   item,
-  language: 0,
-  cartData,
-  itemData,
-  calcPrice: () => 10,
-  newPrice: 2150,
-  currency: 0,
-  user: {},
-  cartQuantityLoading: false,
-  setModalVisibility: () => null,
-  setModalItem: () => null,
   promoCode: {
     getPromoCodeByCode: {
       code: 'test',
       discount: 10,
       categories: ['bags']
     }
-  }
+  },
+  setModalVisibility: jest.fn(),
+  setModalItem: jest.fn()
 };
 
 export const mockQueryData = {
@@ -261,3 +282,73 @@ export const mockQueryDataConstructor = {
     }
   ]
 };
+
+export const mockProduct = [
+  {
+    request: {
+      query: getProductById,
+      variables: {
+        id: '605660d9158e2fdb53498490'
+      }
+    },
+    result: {
+      called: false,
+      data: {
+        getProductById: {
+          __typename: 'Product',
+          _id: '605660d9158e2fdb53498490',
+          category: {
+            code: 'bags'
+          },
+          translationsKey: '61af5c3897e964ccc50e2c2b',
+          bottomMaterial: {
+            material: {
+              translationsKey: '61840dc8a40f604a050ce414'
+            }
+          },
+          images: {
+            primary: {
+              thumbnail: 'thumbnail_4051sf11kxg1bqc1_97.png'
+            }
+          },
+          sizes: [
+            {
+              size: {
+                _id: '60439516a7532c33dcb326d7',
+                name: 'S',
+                available: true
+              },
+              price: [
+                {
+                  value: 1000,
+                  currency: 'UAH'
+                },
+                {
+                  value: 36,
+                  currency: 'USD'
+                }
+              ]
+            },
+            {
+              size: {
+                _id: '604787abfc3c0b3b34fd485a',
+                name: 'M',
+                available: true
+              },
+              price: [
+                {
+                  value: 1050,
+                  currency: 'UAH'
+                },
+                {
+                  value: 38,
+                  currency: 'USD'
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+];

@@ -1,52 +1,21 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { render } from '@testing-library/react';
+import { useSelector } from 'react-redux';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { MockedProvider } from '@apollo/client/testing';
 import CartItem from '../cart-item';
-import { mockQueryData, mockQueryDataConstructor, props, item } from './cart-item.variables';
+import { props, mockProduct, constructor, itemData } from './cart-item.variables';
 
 jest.mock('react-redux');
 jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
-const dispatch = jest.fn();
 
-function testSelection(loading) {
-  useSelector.mockImplementation(() => ({
-    language: 0,
-    currency: 0,
-    list: [],
-    loading,
-    quantityLoading: loading,
-    totalPrice: 100,
-    userData: {}
-  }));
-}
-
-useDispatch.mockImplementation(() => dispatch);
-
-jest.mock('@material-ui/styles', () => ({
-  ...jest.requireActual('@material-ui/styles'),
-  useTheme: () => ({
-    palette: {
-      type: 'light',
-      cart: {
-        borderColor: '#000000'
-      }
-    }
-  }),
-  useStyles: () => ({
-    palette: {
-      type: 'light',
-      cart: {
-        borderColor: '#000000'
-      }
-    }
-  })
+useSelector.mockImplementation(() => ({
+  currency: 0
 }));
 
-let component;
 const mockChangeQuantity = jest.fn();
-const mockGetCartItem = jest.fn(() => props.itemData);
+const mockChangeSizeConstructor = jest.fn();
+const mockGetCartItem = jest.fn(() => itemData);
 const mockChangeSize = jest.fn();
 const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
 const mockGetProductPrice = jest.fn(() => 1100);
@@ -54,69 +23,55 @@ const mockCartOperations = {
   changeQuantity: mockChangeQuantity,
   getCartItem: mockGetCartItem,
   changeSize: mockChangeSize,
+  changeSizeConstructor: mockChangeSizeConstructor,
   getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
   getProductPrice: mockGetProductPrice
 };
 
-jest.mock('@apollo/client', () => ({
-  ...jest.requireActual('@apollo/client'),
-  useLazyQuery: () => [
-    jest.fn(),
-    {
-      loading: false,
-      error: null,
-      data: { getProductById: mockQueryData, getConstructorById: mockQueryDataConstructor }
-    }
-  ]
-}));
-
-describe('Filled cart component tests', () => {
-  beforeEach(() => {
-    testSelection(false);
-    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
-  });
-
-  it('should render CartItem', () => {
-    expect(component).toBeDefined();
-  });
-
-  it('Select', () => {
-    const select = component.find({ name: 'size' });
-    select.simulate('change', { target: { value: 'L' } });
-  });
-
-  it('Select', () => {
-    item.constructor = false;
-    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
-    const select = component.find({ name: 'size' });
-    select.simulate('change', { target: { value: 'L' } });
-  });
-
-  it('should change select value', () => {
-    testSelection(false);
-    component = shallow(<CartItem {...props} cartOperations={mockCartOperations} />);
-    const select = component.find(`[name='size']`);
-    select.props().onChange({ target: { value: '604394a2a7532c33dcb326d5' } });
-    expect(select.props().value).toEqual('604394a2a7532c33dcb326d5');
-  });
-});
-
-describe('q', () => {
-  it('should calculate price with promoCode', () => {
+describe('Cart item component tests', () => {
+  it('should calculate price with promoCode', async () => {
     render(
-      <Router>
-        <CartItem {...props} cartOperations={mockCartOperations} />
-      </Router>
+      <MockedProvider mocks={mockProduct} addTypename={false}>
+        <Router>
+          <CartItem {...props} cartOperations={mockCartOperations} />
+        </Router>
+      </MockedProvider>
     );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     expect(mockGetProductPriceWithPromoCode).toHaveBeenCalled();
   });
 
-  it('should calculate price without promoCode', () => {
+  it('should calculate price without promoCode', async () => {
     render(
-      <Router>
-        <CartItem {...props} promoCode={null} cartOperations={mockCartOperations} />
-      </Router>
+      <MockedProvider mocks={mockProduct} addTypename={false}>
+        <Router>
+          <CartItem
+            {...props}
+            item={constructor}
+            promoCode={null}
+            cartOperations={mockCartOperations}
+          />
+        </Router>
+      </MockedProvider>
     );
+
     expect(mockGetProductPrice).toHaveBeenCalled();
+  });
+
+  it('should increment product quantity', async () => {
+    render(
+      <MockedProvider mocks={mockProduct} addTypename={false}>
+        <Router>
+          <CartItem {...props} cartOperations={mockCartOperations} />
+        </Router>
+      </MockedProvider>
+    );
+    fireEvent.click(screen.getByTestId('increment'));
+    expect(document.querySelector('#filled-basic')).toHaveAttribute('value', '2');
+
+    fireEvent.click(screen.getByTestId('decrement'));
+    expect(document.querySelector('#filled-basic')).toHaveAttribute('value', '1');
   });
 });

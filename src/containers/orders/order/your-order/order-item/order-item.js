@@ -80,7 +80,6 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
           value: Math.round(item.value - (item.value / 100) * discount)
         }));
       }
-      return currentSize.price;
     }
     return currentSize.price;
   };

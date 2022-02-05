@@ -107,7 +107,7 @@ export const getProductById = gql`
           _id
           available
           images {
-            large
+            thumbnail
           }
           name {
             lang

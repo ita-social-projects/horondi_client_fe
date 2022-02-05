@@ -25,14 +25,19 @@ const testUseSelector = (lang) => {
 describe('test <OrderTable /> component', () => {
   it('should render <OrderTable />', () => {
     testUseSelector(0);
-    const { getByText } = render(
+    render(
       <MockedProvider mocks={[mockGetProductById]} addTypename={false}>
         <OrderTable {...props} cartOperations={mockCartOperations} />
       </MockedProvider>
     );
 
-    const productCell = getByText(/product/i);
-    expect(productCell).toBeInTheDocument();
+    expect(screen.queryByText(/cart.titleFilled/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cart.product/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cart.size/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cart.price/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cart.quantity/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cart.toPay/i)).toBeInTheDocument();
+    expect(screen.queryByText(/cart.actions/i)).toBeInTheDocument();
   });
 });
 

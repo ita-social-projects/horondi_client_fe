@@ -30,5 +30,6 @@
     "appartment": "Field should contain from 1 to 6 characters",
     "empty": "Field should not to be empty"
   },
-  "nothingFound": "Nothing found"
+  "nothingFound": "Nothing found",
+  "notSpecialCharacters" : "Field shouldn't contain special characters"
 }

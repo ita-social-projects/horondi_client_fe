@@ -11,6 +11,11 @@ export const CART_AND_WISHLIST_IMAGES = {
   darkTheme: './images/cart/empty-cart-black-theme-image.png'
 };
 
+export const EMPTY_PRODUCT_LIST_IMAGES = {
+  lightTheme: '../images/cart/empty-cart-light-theme-image.png',
+  darkTheme: '../images/cart/empty-cart-black-theme-image.png'
+};
+
 export const ERROR_PAGE_IMAGES = {
   light: './images/error-page/error-light.png',
   dark: './images/error-page/error-dark.png'

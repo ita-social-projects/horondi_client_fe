@@ -7,11 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
-import MoodBadIcon from '@material-ui/icons/MoodBad';
 import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
-
 import { useSelector } from 'react-redux';
+
+import EmptyProductList from '../../components/empty-product-list';
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -113,13 +113,15 @@ const ProductListPage = ({ width }) => {
     }
     return null;
   };
+  const showedItems = itemsToShow();
+
   const paginationToShow = (
     <Pagination count={pagesCount} variant='outlined' page={currentPage} onChange={changeHandler} />
   );
   const paginationCondition = () => {
     if (
-      products?.length < searchParams.get(URL_QUERIES_NAME.countPerPage) &&
-      Number(searchParams.get(URL_QUERIES_NAME.page)) === 1
+      (products?.length < countPerPage && Number(searchParams.get(URL_QUERIES_NAME.page)) === 1) ||
+      !showedItems.length
     ) {
       return <div className={styles.invisiblePaginationDiv}>{paginationToShow}</div>;
     }
@@ -155,19 +157,17 @@ const ProductListPage = ({ width }) => {
           <div className={styles.filterMenu}>
             <ProductFilter filterParams={filterParams} />
           </div>
-          {products?.length > 0 ? (
+          {showedItems?.length ? (
             <div className={styles.productsWrapper}>
               <Grid container spacing={2} className={styles.productsDiv}>
-                {itemsToShow()}
+                {showedItems}
               </Grid>
               {paginationCondition()}
             </div>
           ) : (
             <div className={styles.defaultBlock}>
               <div>{t('productListPage.productNotFound')}</div>
-              <div>
-                <MoodBadIcon className={styles.defaultIcon} />
-              </div>
+              <EmptyProductList />
             </div>
           )}
         </div>

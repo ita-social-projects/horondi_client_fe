@@ -11,7 +11,6 @@ import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 
-import EmptyProductList from '../../components/empty-product-list';
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -22,6 +21,7 @@ import { getFilteredProductsQuery } from './operations/product-list.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import getSortParamsFromQuery from '../../utils/getSortParamsFromQuery';
 import getFilterParamsFromQuery from '../../utils/getFilterParamsFromQuery';
+import { BackpackIcon } from '../../images/backpack-icon';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
@@ -167,7 +167,7 @@ const ProductListPage = ({ width }) => {
           ) : (
             <div className={styles.defaultBlock}>
               <div>{t('productListPage.productNotFound')}</div>
-              <EmptyProductList />
+              <BackpackIcon className={styles.defaultBackpackIcon} />
             </div>
           )}
         </div>

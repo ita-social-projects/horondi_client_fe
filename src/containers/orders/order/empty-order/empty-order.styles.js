@@ -45,5 +45,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center'
+  },
+  defaultBackpackIcon: {
+    width: '167px',
+    height: '182px'
   }
 }));

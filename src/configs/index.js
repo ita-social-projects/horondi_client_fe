@@ -6,16 +6,6 @@ export const LIGHT_THEME = 'light';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 export const CART_KEY = 'newCart';
 
-export const CART_AND_WISHLIST_IMAGES = {
-  lightTheme: './images/cart/empty-cart-light-theme-image.png',
-  darkTheme: './images/cart/empty-cart-black-theme-image.png'
-};
-
-export const EMPTY_PRODUCT_LIST_IMAGES = {
-  lightTheme: '../images/cart/empty-cart-light-theme-image.png',
-  darkTheme: '../images/cart/empty-cart-black-theme-image.png'
-};
-
 export const ERROR_PAGE_IMAGES = {
   light: './images/error-page/error-light.png',
   dark: './images/error-page/error-dark.png'

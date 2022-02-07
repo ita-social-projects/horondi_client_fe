@@ -20,7 +20,6 @@ const SearchBar = ({
   const { t } = useTranslation();
 
   const [searchTimeout, setSearchTimeout] = useState(null);
-  const [errorText, setErrorText] = useState(' ');
 
   const { loading, refetch } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
@@ -32,10 +31,11 @@ const SearchBar = ({
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-    if (!formRegExp.search.test(target.value)) {
-      setErrorText(t('error.notSpecialCharacters'));
-    } else {
-      setErrorText(' ');
+    if (handleErrors) {
+      handleErrors();
+    }
+    if (handleErrors && !formRegExp.search.test(target.value)) {
+      handleErrors(t('error.onlyLetter'));
     }
     if (target.value && target.value.trim()) {
       setSearchTimeout(
@@ -67,8 +67,6 @@ const SearchBar = ({
         onFocus={handleSearch}
         inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
-        error
-        helperText={errorText}
       />
     </div>
   );

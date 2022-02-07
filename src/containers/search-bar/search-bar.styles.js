@@ -38,20 +38,17 @@ const baseStyles = {
 
 export const useStyles = makeStyles((theme, color) => ({
   root: () => ({
+    background: theme.palette.seachBar.backgroundColor,
     ...baseStyles,
     '& .MuiInput-input': {
       padding: '12px 5px 12px 46px',
       color: theme.palette.seachBar.color
-    },
-    '& .MuiInputBase-input': {
-      border: theme.palette.seachBar.border,
-      borderRadius: '6px',
-      background: theme.palette.seachBar.backgroundColor
     }
   }),
   notFromNavbar: () => ({
     ...baseStyles,
     background: 'inherit',
+    border: theme.palette.seachBar.border,
     '& .MuiInputBase-root': {
       width: '255px'
     },
@@ -61,10 +58,6 @@ export const useStyles = makeStyles((theme, color) => ({
     },
     '& .MuiSvgIcon-root': {
       display: 'none'
-    },
-    '& .MuiInputBase-input': {
-      border: theme.palette.seachBar.border,
-      borderRadius: '6px'
     }
   })
 }));

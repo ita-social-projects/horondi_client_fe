@@ -3,17 +3,20 @@ import { gql } from '@apollo/client';
 export const getAllCertificates = gql`
   query ($skip: Int, $limit: Int) {
     getAllCertificates(skip: $skip, limit: $limit) {
-      items {
-        _id
-        value
-        isActive
-        isUsed
-        name
-        dateStart
-        dateEnd
-        code
+      __typename
+      ... on PaginatedCertificate {
+        items {
+          _id
+          name
+          value
+          isUsed
+          isActivated
+          isExpired
+          dateStart
+          dateEnd
+        }
+        count
       }
-      count
     }
   }
 `;

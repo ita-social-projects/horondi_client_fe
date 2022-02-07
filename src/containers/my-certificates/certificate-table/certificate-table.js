@@ -10,13 +10,18 @@ const CertificateTable = ({ items }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const certificateItems = useMemo(() => [...items]
-    .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
-    .map((item) => <CertificateItem item={item} key={item._id} />), [items]);
+  const certificateItems = useMemo(
+    () =>
+      [...items]
+        .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
+        .map((item) => <CertificateItem item={item} key={item._id} />),
+    [items]
+  );
 
-  const headerItems = useMemo(() => ROW_FIELDS.map((item) => (
-    <TableCell key={item._id}>{t(`certificate.${item}`)}</TableCell>
-  )), [ROW_FIELDS]);
+  const headerItems = useMemo(
+    () => ROW_FIELDS.map((item) => <TableCell key={item}>{t(`certificate.${item}`)}</TableCell>),
+    [ROW_FIELDS]
+  );
 
   return (
     <div className={styles.root}>

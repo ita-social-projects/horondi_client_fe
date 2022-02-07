@@ -7,8 +7,9 @@ import Modal from '../../../components/modal';
 import routes from '../../../configs/routes';
 import { useStyles } from './filled-certificates.styles';
 import CertificateTable from '../certificate-table';
+import OrderHistoryPagination from '../../orders/order-history/order-history-pagination';
 
-const FilledCertificates = ({ items }) => {
+const FilledCertificates = ({ items, count, pagination }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ const FilledCertificates = ({ items }) => {
           <div className={styles.certificateTable}>
             <CertificateTable items={items} />
           </div>
+          {count > 5 && <OrderHistoryPagination data={pagination} />}
         </div>
         <div>
           <div className={styles.buttonWrapper}>

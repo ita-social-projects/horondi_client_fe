@@ -22,12 +22,12 @@ const CertificateItem = ({ item }) => {
         />
       </TableCell>
       <TableCell data-cy='certificate-item-code'>
-        <div className={styles.code}>
-          <textarea className={styles.area} type='text' defaultValue={item.code} />
+        <div className={styles.name}>
+          <textarea className={styles.area} type='text' defaultValue={item.name} />
           <Tooltip title={t('certificate.copy')}>
             <button
               className={styles.copyBtn}
-              onClick={() => navigator.clipboard.writeText(item.code)}
+              onClick={() => navigator.clipboard.writeText(item.name)}
             >
               <CertificateCodeCopy alt='certificate-copy-icon' className={styles.copyIcon} />
             </button>
@@ -46,9 +46,9 @@ const CertificateItem = ({ item }) => {
         )}`}</div>
       </TableCell>
       <TableCell data-cy='certificate-item-status'>
-        {item.isActive && <div className={styles.statusGreen}>{t(`certificate.active`)}</div>}
+        {item.isActivated && <div className={styles.statusGreen}>{t(`certificate.active`)}</div>}
         {item.isUsed && <div className={styles.statusRed}>{t(`certificate.used`)}</div>}
-        {item.isUsed === false && item.isActive === false && (
+        {item.isUsed === false && item.isActivated === false && (
           <div className={styles.statusBlue}>{t(`certificate.expired`)}</div>
         )}
       </TableCell>

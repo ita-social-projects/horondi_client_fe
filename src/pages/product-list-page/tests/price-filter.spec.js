@@ -66,6 +66,6 @@ describe('PriceFilter component tests', () => {
     );
     const textfield = component.find(`[id='0']`).at(0);
     textfield.simulate('change', { target: { id: 0, value: '100' } });
-    setTimeout(() => expect(textfield.props().value).toEqual(100), 1);
+    setTimeout(() => expect(textfield.props().value).toEqual(100));
   });
 });

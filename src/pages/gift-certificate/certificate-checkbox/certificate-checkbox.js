@@ -30,9 +30,9 @@ const CertificateCheckbox = ({
       <div className={styles.checkboxWrapper}>
         <Checkbox className={styles.checkbox} checked={checked} onChange={handleCheckboxChange} />
         <div className={styles.certificate}>
-          {t('certificates.giftCertificate')}
+          {t('certificate.giftCertificate')}
           <br />
-          {t('certificates.for')} {value}
+          {t('certificate.for')} {value}
         </div>
       </div>
       <div className={styles.numberInput}>

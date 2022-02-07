@@ -51,7 +51,7 @@ const ProductListItem = ({ product }) => {
         <div className={styles.currency}>{currencySign}</div>
       </div>
     ) : (
-      <div>{t('productListPage.sizeNotAvailable')}</div>
+      <div>{t('product.sizeNotAvailable')}</div>
     );
   };
 

@@ -116,7 +116,7 @@ const Comments = ({ productId, checkCountComments }) => {
   return (
     <div className={styles.comment} id='comment'>
       <h2 className={styles.title}>{t('product.comments.title')}</h2>
-      <Tooltip title={rateTip} placement='right'>
+      <Tooltip title={rateTip} placement='top-start'>
         <span className={styles.rate}>
           <span className={styles.textRate}>{t('product.comments.rating')}</span>
           <Rating
@@ -155,28 +155,30 @@ const Comments = ({ productId, checkCountComments }) => {
         </div>
 
         <div className={styles.submit}>
-          <Tooltip
-            title={userData ? '' : t(`product.tooltips.unregisteredComment`)}
-            placement='bottom-end'
-          >
-            <div className={styles.commentBtnContainer}>
-              <Button
-                className={`${styles.commentBtn} ${styles.cancelBtn}`}
-                disabled={!userData || isLoading}
-                onClick={() => resetForm()}
-              >
-                {t('product.comments.cancel')}
-              </Button>
-              <Button
-                type='submit'
-                className={styles.commentBtn}
-                disabled={!userData || isLoading}
-                onClick={() => setShouldValidate(true)}
-              >
-                {t('product.comments.submit')}
-              </Button>
-            </div>
-          </Tooltip>
+          <div className={styles.commentBtnContainer}>
+            <Button
+              className={`${styles.commentBtn} ${styles.cancelBtn}`}
+              disabled={!userData || isLoading}
+              onClick={() => resetForm()}
+            >
+              {t('product.comments.cancel')}
+            </Button>
+            <Tooltip
+              title={userData ? '' : t(`product.tooltips.unregisteredComment`)}
+              placement='bottom'
+            >
+              <div>
+                <Button
+                  type='submit'
+                  className={styles.commentBtn}
+                  disabled={!userData || isLoading}
+                  onClick={() => setShouldValidate(true)}
+                >
+                  {t('product.comments.submit')}
+                </Button>
+              </div>
+            </Tooltip>
+          </div>
 
           {addCommentLoading && (
             <div className={styles.loader} data-testid='addCommentLoader'>

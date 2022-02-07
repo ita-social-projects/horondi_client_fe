@@ -34,10 +34,7 @@ const ConstructorPreview = () => {
       <div className={styles.constructorContent}>
         <div>
           <h2 className={styles.constructorTitle}> {t('home.createUniqueStyle')} </h2>
-          <p className={styles.constructorDescription}>
-            Et has minim elitr intellegat. Mea aeterno eleifend antiopam ad, nam no suscipit
-            quaerendum. At nam minimum ponderum. Est audiam animal molestiae te.
-          </p>
+          <p className={styles.constructorDescription}> {t('home.constructorName')} </p>
         </div>
         <Link to={pathToConstructor}>
           <button className={styles.buttonStyles}> {t('home.createStyle')} </button>

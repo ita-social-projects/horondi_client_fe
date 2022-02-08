@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { mockedCartItemsData, mockedProps, mockPromoCode } from './your-order.variables';
+import { mockedCartItemsData, mockedProps } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
 import { mockProduct } from '../../../../containers/checkout/checkout-form/tests/checkout-form.variables';
 
@@ -35,7 +35,7 @@ jest.mock('../../../../hooks/use-cart', () => ({
 useSelector.mockImplementation(() => userData);
 
 describe('YourOrder component tests', () => {
-  it('renders list of Cart Items', () => {
+  beforeEach(() => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
@@ -43,30 +43,16 @@ describe('YourOrder component tests', () => {
         </Router>
       </MockedProvider>
     );
+  });
+  it('renders list of Cart Items', () => {
     expect(screen.getByRole('list')).toBeTruthy();
   });
 
   it('should not render <SelfPickup />', () => {
-    render(
-      <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <YourOrder {...mockedProps} />
-        </Router>
-      </MockedProvider>
-    );
-
     expect(screen.queryByText(/addressHorondi/i)).toBeNull();
   });
 
   it('should calculate price with promoCode', () => {
-    render(
-      <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <YourOrder {...mockedProps} promoCode={mockPromoCode} />
-        </Router>
-      </MockedProvider>
-    );
-
     expect(mockGetProductPriceWithPromoCode).toHaveBeenCalled();
   });
 });

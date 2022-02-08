@@ -1,7 +1,7 @@
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
 import * as React from 'react';
-import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { useEffect, useCallback } from 'react';
+import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { IMG_URL } from '../../../../../configs';
@@ -23,56 +23,31 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const currencySign = getCurrencySign(currency);
   const { cartOperations } = useCart();
 
-  const [
-    getProductByIdHandler,
-    { data: dataProduct, called: calledProduct, error: errorProduct, loading: loadingProduct }
-  ] = useLazyQuery(getProductById, {
+  const isConstructor = Object.keys(product.constructor).length !== 0;
+
+  const {
+    data: dataProduct,
+    error: errorProduct,
+    loading: loadingProduct
+  } = useQuery(isConstructor ? getConstructorById : getProductById, {
     variables: {
       id: product?.productId
     }
   });
 
-  const [
-    getConstructorByIdHandler,
-    {
-      data: dataConstructor,
-      called: calledConstructor,
-      error: errorConstructor,
-      loading: loadingConstructor
-    }
-  ] = useLazyQuery(getConstructorById, {
-    variables: {
-      id: product.productId
-    }
-  });
+  const { isLoading, isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
-  const isConstructor = Object.keys(product.constructor).length !== 0;
-
-  if (!isConstructor && !calledProduct) {
-    getProductByIdHandler();
-  }
-  if (isConstructor && !calledConstructor) {
-    getConstructorByIdHandler();
-  }
-
-  const { isLoading, isError } = useIsLoadingOrError(
-    [loadingConstructor, loadingProduct],
-    [errorConstructor, errorProduct]
-  );
-
-  const orderItem = isConstructor
-    ? dataConstructor?.getConstructorById
-    : dataProduct?.getProductById;
+  const orderItem = isConstructor ? dataProduct?.getConstructorById : dataProduct?.getProductById;
 
   const { sizeAndPrice } = product;
 
-  const calculatePrice = () => {
+  const calculatePrice = useCallback(() => {
     const { size } = sizeAndPrice;
     const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
 
     if (promoCode) {
       const { categories, discount } = promoCode.getPromoCodeByCode;
-      const isAllowCategory = categories.find((item) => item === orderItem.category.code);
+      const isAllowCategory = categories.find((item) => item === orderItem?.category.code);
 
       if (isAllowCategory) {
         return currentSize.price.map((item) => ({
@@ -82,7 +57,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
       }
     }
     return currentSize.price;
-  };
+  }, [orderItem, promoCode, sizeAndPrice]);
 
   useEffect(() => {
     const { price } = sizeAndPrice;
@@ -93,7 +68,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
     if (isConstructor && orderItem) {
       setProductPrices((prevState) => [...prevState, price]);
     }
-  }, [setProductPrices, product, orderItem, sizeAndPrice]);
+  }, [setProductPrices, product, orderItem, sizeAndPrice, isConstructor, calculatePrice]);
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 

@@ -56,10 +56,10 @@ describe('Cart item component tests', () => {
         </Router>
       </MockedProvider>
     );
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(mockGetProductPrice).toHaveBeenCalled();
   });
-
   it('should increment product quantity', async () => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
@@ -68,6 +68,8 @@ describe('Cart item component tests', () => {
         </Router>
       </MockedProvider>
     );
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     fireEvent.click(screen.getByTestId('increment'));
     expect(document.querySelector('#filled-basic')).toHaveAttribute('value', '2');
 

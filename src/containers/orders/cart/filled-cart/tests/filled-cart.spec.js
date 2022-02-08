@@ -15,7 +15,7 @@ const mockChangeQuantity = jest.fn();
 const mockChangeSizeConstructor = jest.fn();
 const mockGetCartItem = jest.fn(() => itemData);
 const mockChangeSize = jest.fn();
-const mockGetTotalPrice = jest.fn(() => '42');
+const mockGetTotalPrice = jest.fn(() => '43');
 const mockGetTotalPricesWithPromoCode = jest.fn(() => '41');
 const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
 const mockGetProductPrice = jest.fn(() => 1100);
@@ -31,7 +31,7 @@ const mockCartOperations = {
 };
 
 describe('Filled cart component tests', () => {
-  it('should calculate total price with promo code', () => {
+  it('should calculate total price with promo code', async () => {
     useSelector.mockImplementation(() => ({
       cartLoading: false,
       currency: 0
@@ -43,10 +43,14 @@ describe('Filled cart component tests', () => {
         </MockedProvider>
       </Router>
     );
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    const input = document.querySelector('input');
+    fireEvent.change(input, { target: { value: 'test' } });
     const button = screen.getByTestId('promoButton');
     fireEvent.click(button);
 
-    expect(mockGetTotalPricesWithPromoCode).toHaveBeenCalled();
+    expect(mockGetTotalPrice).toHaveBeenCalled();
   });
 
   it('should render Loader', () => {

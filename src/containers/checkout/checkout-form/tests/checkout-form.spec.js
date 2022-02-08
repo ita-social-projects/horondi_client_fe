@@ -10,16 +10,27 @@ import {
   ukrPostMockRegions,
   ukrPostMockDistricts,
   ukrPostMockCities,
-  ukrPostMockStreets
+  ukrPostMockStreets,
+  mockProduct,
+  mockedCartItemsData
 } from './checkout-form.variables';
 
 const mockClearCart = jest.fn();
-const mockCartOperations = { clearCart: mockClearCart };
+const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
 const dispatch = jest.fn();
+const mockCartOperations = {
+  clearCart: mockClearCart
+};
 
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
+jest.mock('../../../../hooks/use-cart', () => ({
+  useCart: () => ({
+    cart: mockedCartItemsData,
+    cartOperations: { getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode }
+  })
+}));
 
 jest.mock('../../../../services/session-storage.service.js', () => ({
   setToSessionStorage: jest.fn(),
@@ -30,7 +41,14 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
 const props = {
   currency: 0,
   cartItems: [{ price: [{ currency: 'ua', value: 100 }] }],
-  cartOperations: mockCartOperations
+  cartOperations: mockCartOperations,
+  promoCode: {
+    getPromoCodeByCode: {
+      code: 'test',
+      discount: 10,
+      categories: ['bags']
+    }
+  }
 };
 
 const userData = {
@@ -74,7 +92,13 @@ describe('CheckoutForm tests for: ', () => {
     render(
       <BrowserRouter>
         <MockedProvider
-          mocks={(ukrPostMockRegions, ukrPostMockDistricts, ukrPostMockCities, ukrPostMockStreets)}
+          mocks={
+            (ukrPostMockRegions,
+            ukrPostMockDistricts,
+            ukrPostMockCities,
+            ukrPostMockStreets,
+            mockProduct)
+          }
         >
           <CheckoutForm {...props} onSubmit={handleSubmit} />
         </MockedProvider>
@@ -171,9 +195,10 @@ describe('CheckoutForm tests for: ', () => {
     fireEvent.change(streetsField, { target: { value: 'Південна' } });
     fireEvent.change(buildingField, { target: { value: '34' } });
     fireEvent.change(flatField, { target: { value: '36' } });
-    fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
+    fireEvent.change(paymentMetodField, { target: { value: 'CARD' } });
 
     fireEvent.click(button);
+    await new Promise((resolve) => setTimeout(resolve, 0));
     await expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

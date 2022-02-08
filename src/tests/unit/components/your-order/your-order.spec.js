@@ -5,8 +5,13 @@ import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { mockedCartItemsData, mockedProps, mockPromoCode } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
+import { mockProduct } from '../../../../containers/checkout/checkout-form/tests/checkout-form.variables';
 
 const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
+const userData = {
+  cartItems: mockedCartItemsData,
+  language: 0
+};
 
 jest.mock('../../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
   useStyles: () => ({})
@@ -27,16 +32,12 @@ jest.mock('../../../../hooks/use-cart', () => ({
   })
 }));
 
-describe('<YourOrder /> component tests', () => {
-  it('renders list of Cart Items', () => {
-    const userData = {
-      cartItems: mockedCartItemsData,
-      language: 0
-    };
-    useSelector.mockImplementation(() => userData);
+useSelector.mockImplementation(() => userData);
 
+describe('YourOrder component tests', () => {
+  it('renders list of Cart Items', () => {
     render(
-      <MockedProvider>
+      <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
           <YourOrder {...mockedProps} />
         </Router>
@@ -46,14 +47,8 @@ describe('<YourOrder /> component tests', () => {
   });
 
   it('should not render <SelfPickup />', () => {
-    const userData = {
-      cartItems: mockedCartItemsData,
-      language: 0
-    };
-    useSelector.mockImplementation(() => userData);
-
     render(
-      <MockedProvider>
+      <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
           <YourOrder {...mockedProps} />
         </Router>
@@ -64,14 +59,8 @@ describe('<YourOrder /> component tests', () => {
   });
 
   it('should calculate price with promoCode', () => {
-    const userData = {
-      cartItems: mockedCartItemsData,
-      language: 0
-    };
-    useSelector.mockImplementation(() => userData);
-
     render(
-      <MockedProvider>
+      <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
           <YourOrder {...mockedProps} promoCode={mockPromoCode} />
         </Router>

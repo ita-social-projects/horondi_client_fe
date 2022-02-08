@@ -43,7 +43,13 @@ export const mockPromoCode = [
     },
     result: {
       data: {
-        getPromoCodeByCode: { code: 'test', discount: 10, categories: ['bags'] }
+        getPromoCodeByCode: {
+          __typename: 'PromoCode',
+          _id: '61edc27490ffbc28a4853000',
+          code: 'test',
+          discount: 10,
+          categories: ['bags']
+        }
       }
     }
   }

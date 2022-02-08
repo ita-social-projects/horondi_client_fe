@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import _ from 'lodash';
 
-import { useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './cart-item.styles';
 import NumberInput from '../../../../components/number-input';
 import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
@@ -48,46 +48,20 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       changeQuantity(item.id, value);
     }, 500)
   );
+  const isConstructor = Object.keys(item.constructor).length !== 0;
 
-  const [
-    getProductByIdHandler,
-    {
-      data: constructorByModel,
-      called: calledProduct,
-      error: errorProduct,
-      loading: loadingProduct
-    }
-  ] = useLazyQuery(getProductById, {
-    variables: {
-      id: item?.productId
-    }
-  });
-
-  const [
-    getConstructorByIdHandler,
-    {
-      data: constructorByProduct,
-      called: calledConstructor,
-      error: constructorError,
-      loading: loadingConstructor
-    }
-  ] = useLazyQuery(getConstructorById, {
+  const {
+    data: constructorByModel,
+    error: errorProduct,
+    loading: loadingProduct
+  } = useQuery(isConstructor ? getConstructorById : getProductById, {
     variables: {
       id: item.productId
     }
   });
 
-  const isConstructor = Object.keys(item.constructor).length !== 0;
-
-  if (!isConstructor && !calledProduct) {
-    getProductByIdHandler();
-  }
-  if (isConstructor && !calledConstructor) {
-    getConstructorByIdHandler();
-  }
-
   const cartItem = isConstructor
-    ? constructorByProduct?.getConstructorById
+    ? constructorByModel?.getConstructorById
     : constructorByModel?.getProductById;
 
   const itemFoto = isConstructor
@@ -122,10 +96,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     ? cartItem?.sizes && cartItem.sizes.map(mapCallback)
     : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
-  const { isError } = useIsLoadingOrError(
-    [loadingProduct, loadingConstructor],
-    [constructorError, errorProduct]
-  );
+  const { isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
   useEffect(() => {
     toggleFirstlyMounted(true);
@@ -140,17 +111,17 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     } else {
       setCurrentPrice(getProductPrice(item.id, currency));
     }
-  }, [handleSizeChange, promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice]);
+  }, [promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice, getCartItem]);
 
   const onDeleteItem = () => {
     setModalVisibility(true);
     setModalItem(item);
   };
 
-  const totalProductPrice = useMemo(() => {
+  const totalProductPrice = () => {
     if (promoCode) {
       const { categories } = promoCode.getPromoCodeByCode;
-      const isAllowCategory = categories.find((el) => el === cartItem.category.code);
+      const isAllowCategory = categories.find((el) => el === cartItem?.category.code);
 
       if (isAllowCategory) {
         return (
@@ -174,7 +145,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
         {Math.round(calcPriceForCart(currentPrice, inputValue))}
       </div>
     );
-  }, [promoCode, currencySign, currency]);
+  };
 
   if (isError)
     return (
@@ -252,12 +223,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       </TableCell>
       <TableCell>
         <div>
-          <div className={styles.price}>{totalProductPrice}</div>
+          <div className={styles.price}>{totalProductPrice()}</div>
         </div>
       </TableCell>
       <TableCell>
         <span>
-          <DeleteIcon onClick={onDeleteItem} className={styles.deleteIcon} />
+          <DeleteIcon data-testid='delete' onClick={onDeleteItem} className={styles.deleteIcon} />
         </span>
       </TableCell>
     </TableRow>

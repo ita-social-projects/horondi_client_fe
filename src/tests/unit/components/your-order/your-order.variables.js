@@ -1,23 +1,37 @@
 export const mockedProps = {
-  styles: {},
-  t: jest.fn(),
   currency: 0,
-  language: 0,
   checkoutFormBtnValue: jest.fn(),
+  consentLink: 'Link',
+  t: jest.fn(),
+  styles: {},
+  language: 0,
   setPricesFromQuery: jest.fn(),
-  deliveryType: ''
+  deliveryType: '',
+  promoCode: {
+    __typename: 'PromoCode',
+    _id: '61edc27490ffbc28a4853000',
+    code: 'test',
+    discount: 10,
+    categories: ['bags']
+  }
 };
 
 export const ids = ['1637938395612', '1637938905565'];
 
 export const mockedCartItemsData = [
   {
-    id: ids[0],
-    productId: '61938f3f47ff1a3ccc1ac5e7',
+    id: 1644262606242,
+    productId: '605660d9158e2fdb53498490',
     sizeAndPrice: {
       size: {
-        _id: '604394a2a7532c33dcb326d5',
-        name: 'L'
+        available: true,
+        _id: '60439516a7532c33dcb326d7',
+        name: 'S',
+        heightInCm: 35,
+        widthInCm: 26,
+        depthInCm: 14,
+        volumeInLiters: 18,
+        weightInKg: 0.8
       },
       price: [
         {
@@ -25,39 +39,14 @@ export const mockedCartItemsData = [
           currency: 'UAH'
         },
         {
-          value: 37,
+          value: 36,
           currency: 'USD'
         }
       ]
     },
-    quantity: 4
-  },
-  {
-    id: ids[1],
-    productId: '6197b469b0263814e80359af',
-    sizeAndPrice: {
-      size: {
-        _id: '604394a2a7532c33dcb326d5',
-        name: 'L',
-        heightInCm: 23,
-        widthInCm: 28,
-        depthInCm: 14,
-        volumeInLiters: 24,
-        weightInKg: 1.5,
-        available: true
-      },
-      price: [
-        {
-          value: 1050,
-          currency: 'UAH'
-        },
-        {
-          value: 39,
-          currency: 'USD'
-        }
-      ]
-    },
-    quantity: 1
+    quantity: 1,
+    constructor: false,
+    category: 'Bags'
   }
 ];
 
@@ -248,7 +237,11 @@ const mockQueryDataConstructor = {
 };
 
 export const mockPromoCode = {
-  getPromoCodeByCode: { code: 'test', discount: 10, categories: ['bags'] }
+  getPromoCodeByCode: {
+    code: 'test',
+    discount: 10,
+    categories: ['bags']
+  }
 };
 
 export const mockUseLazyQuery = [

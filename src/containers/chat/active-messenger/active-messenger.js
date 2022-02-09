@@ -5,7 +5,7 @@ import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
-import { CHAT_USER_DATA, TWO_LETTERS } from '../constants';
+import { CHAT_USER_DATA, TWO_LETTERS, THIRTY_LETTERS } from '../constants';
 import { formRegExp } from '../../../configs/regexp';
 import { useStyles } from '../chat.style';
 import { handleHelperText } from '../../../utils/handle-active-massenger';
@@ -39,7 +39,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
   const [sendEmail, { loading, error }] = useMutation(sendEmailMutation);
 
   const helperTextForName =
-    firstName.length < TWO_LETTERS
+    firstName.length < TWO_LETTERS || firstName.length > THIRTY_LETTERS
       ? handleHelperText(firstNameValidated, shouldValidate, 'profile.firstName')
       : handleHelperText(firstNameValidated, shouldValidate, 'onlyLetter');
 

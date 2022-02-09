@@ -35,3 +35,26 @@ export const mockPromoCode = {
     categories: ['bags']
   }
 };
+
+export const sizeAndPrice = {
+  size: {
+    available: true,
+    _id: '60439516a7532c33dcb326d7',
+    name: 'M',
+    heightInCm: 35,
+    widthInCm: 26,
+    depthInCm: 14,
+    volumeInLiters: 18,
+    weightInKg: 0.8
+  },
+  price: [
+    {
+      value: 1000,
+      currency: 'UAH'
+    },
+    {
+      value: 36,
+      currency: 'USD'
+    }
+  ]
+};

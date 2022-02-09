@@ -1,53 +1,109 @@
 import { useDispatch } from 'react-redux';
+import { renderHook, act } from '@testing-library/react-hooks';
 import { useCart } from '../use-cart';
-import { mockItem, mockPromoCode } from './use-cart.variables';
+import { mockItem, mockPromoCode, sizeAndPrice } from './use-cart.variables';
 
 const dispatch = jest.fn();
 
 jest.mock('react-redux');
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: () => [[mockItem], () => null],
-  useEffect: (cb) => cb()
-}));
 
 useDispatch.mockImplementation(() => dispatch);
 
 describe('use-cart tests', () => {
-  it('should return cart item by id', () => {
-    const { cartOperations } = useCart();
+  it('should add item to cart', () => {
+    const { result } = renderHook(useCart);
+    act(() => {
+      result.current.cartOperations.addToCart(mockItem);
+    });
 
-    const result = cartOperations.getCartItem(mockItem.productId);
-    expect(result).toEqual(mockItem);
+    expect(result.current.cart).toContain(mockItem);
+  });
+  it('should return cart item by id', () => {
+    const { result } = renderHook(useCart);
+    let res;
+    act(() => {
+      res = result.current.cartOperations.getCartItem(mockItem.productId);
+    });
+
+    expect(res).toEqual(mockItem);
   });
   it('should return total price with promo code', () => {
-    const { cartOperations } = useCart();
+    const { result } = renderHook(useCart);
+    let res;
+    act(() => {
+      res = result.current.cartOperations.getTotalPricesWithPromoCode(0, mockPromoCode);
+    });
 
-    const result = cartOperations.getTotalPricesWithPromoCode(0, mockPromoCode);
-    expect(result).toBe(900);
+    expect(res).toBe(900);
   });
   it('should return product price with promo code', () => {
-    const { cartOperations } = useCart();
+    const { result } = renderHook(useCart);
+    let res;
+    act(() => {
+      res = result.current.cartOperations.getProductPriceWithPromoCode(
+        mockItem.id,
+        0,
+        mockPromoCode
+      );
+    });
 
-    const result = cartOperations.getProductPriceWithPromoCode(mockItem.id, 0, mockPromoCode);
-    expect(result).toBe(900);
+    expect(res).toBe(900);
   });
   it('should return product price', () => {
-    const { cartOperations } = useCart();
+    const { result } = renderHook(useCart);
+    let res;
+    act(() => {
+      res = result.current.cartOperations.getProductPrice(mockItem.id, 0);
+    });
 
-    const result = cartOperations.getProductPrice(mockItem.id, 0);
-    expect(result).toBe(1000);
+    expect(res).toBe(1000);
   });
   it('should return total price', () => {
-    const { cartOperations } = useCart();
+    const { result } = renderHook(useCart);
+    let res;
+    act(() => {
+      res = result.current.cartOperations.getTotalPrice();
+    });
 
-    const result = cartOperations.getTotalPrice();
-    expect(result).toBe(1000);
+    expect(res).toBe(1000);
   });
   it('should check is item in cart', () => {
-    const { isInCart } = useCart();
+    const { result } = renderHook(useCart);
+    let res;
+    act(() => {
+      res = result.current.isInCart(mockItem.productId);
+    });
 
-    const result = isInCart(mockItem.productId);
-    expect(result).toBe(mockItem);
+    expect(res).toEqual(mockItem);
+  });
+  it('should change quantity', () => {
+    const { result } = renderHook(useCart);
+
+    act(() => {
+      result.current.cartOperations.changeQuantity(mockItem.id, 2);
+    });
+    const item = result.current.cart.find((el) => (el.id = mockItem.id));
+
+    expect(item.quantity).toEqual(2);
+  });
+  it('should change size', () => {
+    const { result } = renderHook(useCart);
+
+    act(() => {
+      result.current.cartOperations.changeSize(mockItem.id, sizeAndPrice);
+    });
+    const item = result.current.cart.find((el) => (el.id = mockItem.id));
+
+    expect(item.sizeAndPrice).toEqual(sizeAndPrice);
+  });
+  it('should change constructor size', () => {
+    const { result } = renderHook(useCart);
+
+    act(() => {
+      result.current.cartOperations.changeSizeConstructor(mockItem.id, sizeAndPrice.size);
+    });
+    const item = result.current.cart.find((el) => (el.id = mockItem.id));
+
+    expect(item.sizeAndPrice.size).toEqual(sizeAndPrice.size);
   });
 });

@@ -1,6 +1,6 @@
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
 import * as React from 'react';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -41,7 +41,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   const { sizeAndPrice } = product;
 
-  const calculatePrice = useCallback(() => {
+  const calculatePrice = useMemo(() => {
     const { size } = sizeAndPrice;
     const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
 
@@ -50,20 +50,20 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
       const isAllowCategory = categories.find((item) => item === orderItem?.category.code);
 
       if (isAllowCategory) {
-        return currentSize.price.map((item) => ({
+        return currentSize?.price.map((item) => ({
           ...item,
           value: Math.round(item.value - (item.value / 100) * discount)
         }));
       }
     }
-    return currentSize.price;
+    return currentSize?.price;
   }, [orderItem, promoCode, sizeAndPrice]);
 
   useEffect(() => {
     const { price } = sizeAndPrice;
 
     if (!isConstructor && orderItem) {
-      setProductPrices((prevState) => [...prevState, calculatePrice()]);
+      setProductPrices((prevState) => [...prevState, calculatePrice]);
     }
     if (isConstructor && orderItem) {
       setProductPrices((prevState) => [...prevState, price]);

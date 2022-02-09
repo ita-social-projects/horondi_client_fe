@@ -64,7 +64,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
 
   const totalPriceToPay = pricesFromQuery.reduce(
     (previousValue, currentValue, index) =>
-      previousValue + calcPriceForCart(currentValue, cartItems[index].quantity),
+      previousValue + calcPriceForCart(currentValue, cartItems[index]?.quantity),
     0
   );
 

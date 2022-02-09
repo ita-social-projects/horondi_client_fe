@@ -17,15 +17,17 @@ const PriceFilter = ({ priceRange }) => {
   const searchParams = new URLSearchParams(search);
   const styles = useStyles();
   const history = useHistory();
+  const priceFilterValue = searchParams.get(priceFilter);
 
-  const [prices, setPrices] = useState(
-    searchParams.get(priceFilter)
+  const getDefaultPrices = () =>
+    priceFilterValue
       ? searchParams
         .get(priceFilter)
         .split(',')
         .map((price) => +price)
-      : ['', '']
-  );
+      : ['', ''];
+
+  const [prices, setPrices] = useState(getDefaultPrices());
 
   const searchParamsRef = useRef();
   searchParamsRef.current = searchParams;
@@ -42,6 +44,10 @@ const PriceFilter = ({ priceRange }) => {
       setPrices([min, max]);
     }
   }, [min, max, currency, prices]);
+
+  useEffect(() => {
+    setPrices(getDefaultPrices());
+  }, [priceFilterValue]);
 
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
@@ -86,6 +92,7 @@ const PriceFilter = ({ priceRange }) => {
             onChange={handleTextField}
             type='tel'
             value={prices[0]}
+            inputProps={{ type: 'number', min: 0 }}
           />
           {t('common.to')}
           <TextField
@@ -95,6 +102,7 @@ const PriceFilter = ({ priceRange }) => {
             onChange={handleTextField}
             type='tel'
             value={prices[1]}
+            inputProps={{ type: 'number', min: 0 }}
           />
         </div>
       </Typography>

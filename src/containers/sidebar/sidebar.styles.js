@@ -18,12 +18,6 @@ export const useStyles = makeStyles((theme) => ({
       display: 'none;'
     }
   }),
-  sticky: ({ fromSideBar }) => ({
-    '& .MuiDrawer-paper': {
-      top: '40px',
-      height: fromSideBar ? '100vh' : 'calc(100vh - 40px)'
-    }
-  }),
   closeIconContainer: {
     display: 'flex',
     alignItems: 'right',

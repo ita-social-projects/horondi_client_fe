@@ -36,7 +36,7 @@ const MyCertificates = () => {
 
   return (
     <div className={styles.root}>
-      {certificates.length ? (
+      {certificates?.length ? (
         <FilledCertificates
           items={certificates}
           count={count}

@@ -59,7 +59,6 @@ const ProfilePage = () => {
     validateOnChange: shouldValidate,
     validateOnBlur: shouldValidate
   });
-
   const handleImageLoad = ({ target }) => {
     if (target.files && target.files[0]) {
       const reader = new FileReader();

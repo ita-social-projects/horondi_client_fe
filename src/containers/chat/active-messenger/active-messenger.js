@@ -5,7 +5,7 @@ import { TextField, Button, Snackbar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import MuiAlert from '@material-ui/lab/Alert';
 import { get } from 'lodash';
-import { CHAT_USER_DATA } from '../constants';
+import { CHAT_USER_DATA, TWO_LETTERS, THIRTY_LETTERS } from '../constants';
 import { formRegExp } from '../../../configs/regexp';
 import { useStyles } from '../chat.style';
 import { handleHelperText } from '../../../utils/handle-active-massenger';
@@ -37,6 +37,11 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
   const [shouldValidate, setShouldValidate] = useState(false);
   const [open, setOpen] = useState(false);
   const [sendEmail, { loading, error }] = useMutation(sendEmailMutation);
+
+  const helperTextForName =
+    firstName.length < TWO_LETTERS || firstName.length > THIRTY_LETTERS
+      ? handleHelperText(firstNameValidated, shouldValidate, 'profile.firstName')
+      : handleHelperText(firstNameValidated, shouldValidate, 'onlyLetter');
 
   const handleChange = (event, setValid, regExp) => {
     const input = event.target.value;
@@ -101,7 +106,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           size='small'
           rows={1}
           error={!firstNameValidated && shouldValidate}
-          helperText={handleHelperText(firstNameValidated, shouldValidate, 'onlyLetter')}
+          helperText={helperTextForName}
           className={style.dataInput}
           onChange={(e) => handleChange(e, setFirstNameValidated, formRegExp.firstName)}
           value={firstName}

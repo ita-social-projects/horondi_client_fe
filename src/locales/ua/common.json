@@ -26,10 +26,12 @@
   "title": "Створи сам",
   "models": "Моделі",
   "buttons": {
+    "add": "Додати",
     "confirm": "Видалити",
     "cancel": "Скасувати"
   },
   "modalHeader": "Видалити продукт",
+  "modalInputHeader": "Введіть код",
   "to": "до ",
   "from": "від ",
   "search": "Пошук",

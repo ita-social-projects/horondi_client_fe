@@ -7,3 +7,6 @@ export const CHAT_USER_DATA = {
   email: '',
   message: ''
 };
+
+export const TWO_LETTERS = 2;
+export const THIRTY_LETTERS = 30;

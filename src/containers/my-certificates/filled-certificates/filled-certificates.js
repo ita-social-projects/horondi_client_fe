@@ -1,49 +1,47 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import Button from '@material-ui/core/Button';
-
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CertificateTable from '../certificate-table';
-import { useStyles } from './filled-certificates.styles';
-import { Loader } from '../../../components/loader/loader';
-import routes from '../../../configs/routes';
+import { useTranslation } from 'react-i18next';
 
-const FilledCertificates = ({ items }) => {
+import Button from '@material-ui/core/Button';
+import Modal from '../../../components/modal';
+import routes from '../../../configs/routes';
+import { useStyles } from './filled-certificates.styles';
+import CertificateTable from '../certificate-table';
+import OrderHistoryPagination from '../../orders/order-history/order-history-pagination';
+
+const FilledCertificates = ({ items, count, pagination }) => {
+  const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const { pathToCategory, pathToCheckout } = routes;
+  const { pathToGiftСertificate } = routes;
 
-  const { cartLoading, user } = useSelector(({ Currency, Cart, User, NewCart }) => ({
-    currency: Currency.currency,
-    cartList: Cart.list,
-    cartLoading: Cart.loading,
-    newCartList: NewCart.list,
-    cartQuantityLoading: Cart.quantityLoading,
-    user: User.userData
-  }));
-
-  if (cartLoading) {
-    return <Loader />;
-  }
+  const openModal = () => {
+    !modalVisibility ? setModalVisibility(true) : setModalVisibility(false);
+  };
 
   return (
     <>
       <div className={styles.root} data-cy='filled-certificates'>
         <div className={styles.totalWrapper}>
           <div className={styles.certificateTable}>
-            <CertificateTable items={items} user={user} />
+            <CertificateTable items={items} />
           </div>
+          {count > 5 && <OrderHistoryPagination data={pagination} />}
         </div>
         <div>
           <div className={styles.buttonWrapper}>
-            <Link to={pathToCategory}>
+            <Link to={pathToGiftСertificate}>
               <Button className={styles.buyButton}>{t('certificate.buy')}</Button>
             </Link>
-            <Link to={pathToCheckout}>
-              <Button className={styles.addButton}>{t('certificate.add')}</Button>
-            </Link>
+            <Button className={styles.addButton} onClick={openModal}>
+              {t('certificate.add')}
+            </Button>
+            {modalVisibility && (
+              <div>
+                <Modal isOpen={modalVisibility} onAction={openModal} isInput />
+              </div>
+            )}
           </div>
         </div>
       </div>

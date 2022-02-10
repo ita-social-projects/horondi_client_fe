@@ -98,6 +98,9 @@ export default {
     },
     imageContainer: {
       border: '1px solid rgba(91, 91, 91, 0.2)'
+    },
+    backspaceIcon: {
+      color: '#0000008a'
     }
   },
   dark: {
@@ -192,6 +195,9 @@ export default {
     },
     imageContainer: {
       border: '1px solid rgba(91, 91, 91, 1)'
+    },
+    backspaceIcon: {
+      color: '#fff'
     }
   }
 };

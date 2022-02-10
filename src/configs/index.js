@@ -116,3 +116,5 @@ export const TEXT_FIELDS = {
   PAGE: 'page',
   SORT: 'sort'
 };
+
+export const ROW_FIELDS = ['certificate', 'code', 'price', 'expiration', 'status'];

@@ -235,7 +235,6 @@ export const updateInitialValues = (data, deliveryType) => {
       };
   }
 };
-
 export const setDeliveryTypeToStorage = (deliveryType) => {
   const typeFromStorage = getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE);
   setToSessionStorage(SESSION_STORAGE.DELIVERY_TYPE, deliveryType);

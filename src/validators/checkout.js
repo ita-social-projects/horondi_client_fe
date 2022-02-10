@@ -40,17 +40,27 @@ export const validationSchema = (deliveryType) =>
       Yup.string()
         .min(2, 'error.profile.city')
         .max(50, 'error.profile.city')
-        .required('error.requiredField'),
+        .required('error.requiredField')
+        .matches(formRegExp.city, 'error.onlyLetter'),
     street:
       isCourier(deliveryType) &&
       Yup.string()
         .min(2, 'error.streetLong')
         .max(100, 'error.streetLong')
-        .required('error.requiredField'),
+        .required('error.requiredField')
+        .matches(formRegExp.street, 'error.onlyLetter'),
     house:
       isCourier(deliveryType) &&
-      Yup.string().min(1, 'error.house').max(6, 'error.house').required('error.requiredField'),
+      Yup.string()
+        .min(1, 'error.house')
+        .max(6, 'error.house')
+        .matches(formRegExp.buildingNumber, 'error.houseFormatNumber')
+        .required('error.requiredField'),
     flat:
       isCourier(deliveryType) &&
-      Yup.string().min(1, 'error.flat').max(6, 'error.flat').required('error.requiredField')
+      Yup.string()
+        .min(1, 'error.flat')
+        .max(6, 'error.flat')
+        .matches(formRegExp.flat, 'error.onlyNumber')
+        .required('error.requiredField')
   });

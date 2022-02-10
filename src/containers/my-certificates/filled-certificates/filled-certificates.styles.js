@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
-  fontWeight: '500',
+  fontWeight: '600',
   fontSize: '14px',
   letterSpacing: '0.0125em',
   textTransform: 'uppercase'
@@ -25,6 +25,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '20px',
     lineHeight: '28px',
     letterSpacing: '0.0015em',
+    '& > div:nth-child(2n)': {
+      margin: '0 0 45px 0'
+    },
     '@media (max-width: 850px)': {
       marginTop: '20px'
     },

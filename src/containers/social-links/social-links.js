@@ -15,7 +15,7 @@ const SocialLinks = ({ showTitle, position, color, fromSideBar }) => {
   const styles = useStyles({ position, color, fromSideBar });
 
   return (
-    <div className={styles.cardBody}>
+    <div className={fromSideBar ? styles.cardBody : styles.cardBodyFooter}>
       {fromSideBar ? null : (
         <Typography variant='h5'>
           <Link to='/' className={styles.logo}>
@@ -25,7 +25,10 @@ const SocialLinks = ({ showTitle, position, color, fromSideBar }) => {
       )}
       <div className={styles.iconsBox}>
         {showTitle && (
-          <div className={styles.cardTitle} data-testid='title'>
+          <div
+            className={fromSideBar ? styles.cardTitle : styles.cardTitleFooter}
+            data-testid='title'
+          >
             <Typography variant='h5'>{t('footer.socialNetworkLinks')}</Typography>
           </div>
         )}

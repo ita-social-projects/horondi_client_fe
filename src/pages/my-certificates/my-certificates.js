@@ -7,15 +7,18 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import EmptyCertificates from '../../containers/my-certificates/empty-certificates';
 import FilledCertificates from '../../containers/my-certificates/filled-certificates/filled-certificates';
 
+const CERTIFICATES_LIMIT = 5;
+
 const MyCertificates = () => {
   const [certificates, setCertificates] = useState([]);
-  const [count, setCount] = useState([]);
+  const [count, setCount] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const styles = useStyles();
 
   const { loading, error } = useQuery(getAllCertificates, {
     variables: {
-      limit: 5,
-      skip: 0
+      limit: CERTIFICATES_LIMIT,
+      skip: (currentPage - 1) * CERTIFICATES_LIMIT
     },
     onCompleted: (data) => {
       setCertificates(data.getAllCertificates.items);
@@ -23,12 +26,22 @@ const MyCertificates = () => {
     }
   });
 
+  const changePage = (value) => {
+    setCurrentPage(value);
+  };
+
+  const quantityPages = Math.ceil(count / CERTIFICATES_LIMIT);
+
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
     <div className={styles.root}>
-      {certificates.length ? (
-        <FilledCertificates items={certificates} count={count} />
+      {certificates?.length ? (
+        <FilledCertificates
+          items={certificates}
+          count={count}
+          pagination={[currentPage, quantityPages, changePage]}
+        />
       ) : (
         <EmptyCertificates />
       )}

@@ -26,7 +26,8 @@ const ProductSort = () => {
 
   const searchParams = new URLSearchParams(search);
   const { sort, nameFilter, page, defaultPage } = URL_QUERIES_NAME;
-  const currentNameFilter = searchParams.get(nameFilter);
+  const nameFilterValue = searchParams.get(nameFilter);
+  const currentNameFilter = nameFilterValue || '';
   const query = searchParams.get(sort);
   const selectHandler = (e) => {
     const { name } = e.target.value;

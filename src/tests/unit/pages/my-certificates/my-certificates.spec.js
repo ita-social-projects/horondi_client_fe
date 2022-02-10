@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent, waitForElement } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import MyCertificates from '../../../../pages/my-certificates/my-certificates';
-import { getAllCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
+import { certificateMock1, certificateMock2, certificateMock3 } from './my-certificates.variables';
 
 jest.mock('../../../../pages/my-certificates/my-certificates.styles', () => ({
   useStyles: () => ({})
@@ -41,47 +41,8 @@ jest.mock('@material-ui/styles', () => ({
 
 describe('MyCertificates test', () => {
   it('should render two certificates', async () => {
-    const certificateMock = {
-      request: {
-        query: getAllCertificates,
-        variables: {
-          limit: 5,
-          skip: 0
-        }
-      },
-      result: {
-        data: {
-          getAllCertificates: {
-            items: [
-              {
-                code: 'XYQ332765',
-                dateEnd: '2022-11-08T18:22:16.417Z',
-                dateStart: '2021-11-08T18:22:16.417Z',
-                isActive: true,
-                isUsed: false,
-                name: 'FreeHorondi',
-                value: 1500,
-                _id: '61f3fd57b0b726cad2944501'
-              },
-              {
-                code: 'XYQ332765',
-                dateEnd: '2022-11-08T18:22:16.417Z',
-                dateStart: '2021-11-08T18:22:16.417Z',
-                isActive: true,
-                isUsed: false,
-                name: 'FreeHorondi',
-                value: 1500,
-                _id: '61f3fd57b0b726cad2944501'
-              }
-            ],
-            count: 2
-          }
-        }
-      }
-    };
-
     render(
-      <MockedProvider mocks={[certificateMock]} addTypename={false}>
+      <MockedProvider mocks={[certificateMock1]} addTypename={false}>
         <Router>
           <MyCertificates />
         </Router>
@@ -89,51 +50,13 @@ describe('MyCertificates test', () => {
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
-
     const element = screen.getAllByText(/XYQ332765/i);
+
     expect(element).toHaveLength(2);
   });
   it('should render title', async () => {
-    const certificateMock = {
-      request: {
-        query: getAllCertificates,
-        variables: {
-          limit: 5,
-          skip: 0
-        }
-      },
-      result: {
-        data: {
-          getAllCertificates: {
-            items: [
-              {
-                code: 'XYQ332765',
-                dateEnd: '2022-11-08T18:22:16.417Z',
-                dateStart: '2021-11-08T18:22:16.417Z',
-                isActive: true,
-                isUsed: false,
-                name: 'FreeHorondi',
-                value: 1500,
-                _id: '61f3fd57b0b726cad2944501'
-              },
-              {
-                code: 'XYQ332765',
-                dateEnd: '2022-11-08T18:22:16.417Z',
-                dateStart: '2021-11-08T18:22:16.417Z',
-                isActive: true,
-                isUsed: false,
-                name: 'FreeHorondi',
-                value: 1500,
-                _id: '61f3fd57b0b726cad2944501'
-              }
-            ],
-            count: 2
-          }
-        }
-      }
-    };
     render(
-      <MockedProvider mocks={[certificateMock]} addTypename={false}>
+      <MockedProvider mocks={[certificateMock2]} addTypename={false}>
         <Router>
           <MyCertificates />
         </Router>
@@ -141,8 +64,26 @@ describe('MyCertificates test', () => {
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
-
     const element = screen.getByText(/certificate.emptyTitle/i);
+
     expect(element).toBeInTheDocument();
+    cleanup();
+  });
+  it('should change page', async () => {
+    render(
+      <MockedProvider mocks={[certificateMock3]} addTypename={false}>
+        <Router>
+          <MyCertificates />
+        </Router>
+      </MockedProvider>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const nextPageButton = document.querySelector('[aria-label="Go to page 2"]');
+    fireEvent.click(nextPageButton);
+
+    waitForElement(() => {
+      expect(document.querySelector('[aria-current="true"]')).toHaveTextContent('2');
+    });
   });
 });

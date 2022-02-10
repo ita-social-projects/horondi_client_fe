@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { INITIAL_CERTIFICATE_COUNT, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs';
 import { useStyles } from './gift-certificate.styles';
 import { validationSchema } from '../../validators/email';
-import { certificateRules } from '../../locales/en/certificates.json';
+import { certificateRules } from '../../locales/en/certificate.json';
 import CertificateCheckbox from './certificate-checkbox';
 
 const GiftCertificate = () => {
@@ -63,24 +63,19 @@ const GiftCertificate = () => {
     />
   ));
 
-  const CertificateRule = ({ index }) => {
-    const certificate = t(`certificates.certificateRules.${index}`);
-    return (
-      <>
-        {`${index + 1}. ${certificate}`}
-        <br />
-      </>
-    );
-  };
+  const certificateText = (index) => t(`certificate.certificateRules.${index}`);
 
-  const certificateRulesContent = certificateRules.map((certificateRule, index) => (
-    <CertificateRule key={certificateRule} index={index} />
+  const certificateRulesContent = certificateRules.map((_, index) => (
+    <>
+      {`${index + 1}. ${certificateText(index)}`}
+      <br />
+    </>
   ));
 
   return (
     <div className={styles.root}>
-      <h1 className={styles.pageTitle}>{t('certificates.giftCertificate')}</h1>
-      <h2 className={styles.chooseCertificate}>{t('certificates.chooseCertificate')}</h2>
+      <h1 className={styles.pageTitle}>{t('certificate.giftCertificate')}</h1>
+      <h2 className={styles.chooseCertificate}>{t('certificate.chooseCertificate')}</h2>
       <div className={styles.checkboxWrapper}>{checkboxContent}</div>
       <div className={styles.lowerWrapper}>
         <div>{certificateRulesContent}</div>

@@ -73,7 +73,7 @@ const ProductInfo = ({ product, countComments, checkDisabledProduct, currency, c
         <img
           className={styles.circle}
           alt='pattern'
-          src={`${IMG_URL}${product.pattern.images.large}`}
+          src={`${IMG_URL}${product.pattern.images.thumbnail}`}
         />
       </div>
     </div>

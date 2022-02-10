@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   rate: {
-    display: 'flex',
+    display: 'inline-flex',
     marginTop: '24px'
   },
   textRate: {

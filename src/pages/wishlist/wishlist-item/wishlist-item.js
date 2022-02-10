@@ -80,7 +80,7 @@ const WishlistItem = ({
         </div>
       </>
     ) : (
-      <>{t('productList.sizeNotAvailable.value')}</>
+      <>{t('product.sizeNotAvailable')}</>
     );
   };
   return (

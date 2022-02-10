@@ -123,6 +123,33 @@ const ProductListPage = ({ width }) => {
     }
     return <div className={styles.paginationDiv}>{paginationToShow}</div>;
   };
+
+  const productLoadedCondition = () => {
+    if (loading || error) {
+      return errorOrLoadingHandler(error, loading);
+    }
+
+    if (products?.length) {
+      return (
+        <div className={styles.productsWrapper}>
+          <Grid container spacing={2} className={styles.productsDiv}>
+            {itemsToShow()}
+          </Grid>
+          {paginationCondition()}
+        </div>
+      );
+    }
+
+    return (
+      <div className={styles.defaultBlock}>
+        <div>{t('productListPage.productNotFound')}</div>
+        <div>
+          <MoodBadIcon className={styles.defaultIcon} />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Container maxWidth='lg'>
       <div className={styles.root}>
@@ -153,27 +180,7 @@ const ProductListPage = ({ width }) => {
           <div className={styles.filterMenu}>
             <ProductFilter filterParams={filterParams} />
           </div>
-          {loading || error ? (
-            errorOrLoadingHandler(error, loading)
-          ) : (
-            <>
-              {products?.length > 0 ? (
-                <div className={styles.productsWrapper}>
-                  <Grid container spacing={2} className={styles.productsDiv}>
-                    {itemsToShow()}
-                  </Grid>
-                  {paginationCondition()}
-                </div>
-              ) : (
-                <div className={styles.defaultBlock}>
-                  <div>{t('productListPage.productNotFound')}</div>
-                  <div>
-                    <MoodBadIcon className={styles.defaultIcon} />
-                  </div>
-                </div>
-              )}
-            </>
-          )}
+          {productLoadedCondition()}
         </div>
       </div>
     </Container>

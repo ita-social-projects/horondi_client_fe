@@ -25,6 +25,10 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontSize: '1rem'
     }
   }),
+  cardBodyFooter: {
+    flex: 1,
+    padding: '50px 20px 20px'
+  },
   iconsBox: {
     display: 'flex',
     flexDirection: 'column',
@@ -32,6 +36,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 552px)': {
       paddingTop: '20px'
     }
+  },
+  cardTitleFooter: {
+    marginTop: '50px'
   },
   cardTitle: {
     fontSize: '14px',

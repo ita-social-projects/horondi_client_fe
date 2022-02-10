@@ -21,6 +21,8 @@
     "passConfirm": "Passwords don't match!",
     "text": "Field should contain from 2 to 700 characters",
     "phoneNumber": "Incorrect phone number format",
+    "phoneTooShort": "Phone number is too short",
+    "phoneTooLong": "Phone number is too long",
     "zipcode": "Wrong zipcode format",
     "country": "Field should contain from 2 to 40 characters",
     "region": "Field should contain from 2 to 40 characters",

@@ -20,8 +20,10 @@ export const validationSchema = (deliveryType) =>
       .min(8, 'error.emailLength')
       .max(60, 'error.emailLength'),
     phoneNumber: Yup.string()
+      .min(9, 'error.profile.phoneTooShort')
+      .required('error.requiredField')
       .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
-      .required('error.requiredField'),
+      .max(9, 'error.profile.phoneTooLong'),
     paymentMethod: Yup.string().required('error.requiredField'),
     userComment: Yup.string().min(2, 'error.userComment').max(500, 'error.userComment'),
     courierOffice:

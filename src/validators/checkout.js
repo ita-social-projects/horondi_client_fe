@@ -53,12 +53,14 @@ export const validationSchema = (deliveryType) =>
       isCourier(deliveryType) &&
       Yup.string()
         .min(1, 'error.house')
-        .required('error.requiredField')
-        .matches(formRegExp.buildingNumber, 'error.houseFormatNumber'),
+        .max(6, 'error.house')
+        .matches(formRegExp.buildingNumber, 'error.houseFormatNumber')
+        .required('error.requiredField'),
     flat:
       isCourier(deliveryType) &&
       Yup.string()
-        .min(1, 'error.house')
-        .required('error.requiredField')
+        .min(1, 'error.flat')
+        .max(6, 'error.flat')
         .matches(formRegExp.flat, 'error.onlyNumber')
+        .required('error.requiredField')
   });

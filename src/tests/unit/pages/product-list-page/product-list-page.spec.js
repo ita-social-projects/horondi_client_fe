@@ -55,6 +55,10 @@ jest.mock('../../../../pages/product-list-page/count-per-page/count-per-page.sty
   useStyles: () => ({})
 }));
 
+jest.mock('../../../../containers/search-bar/search-bar.styles.js', () => ({
+  useStyles: () => ({})
+}));
+
 jest.mock('@apollo/client');
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: `?countPerPage=9&sort=popularity&nameFilter=${mockedNameFilter}` }),

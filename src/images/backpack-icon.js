@@ -2,7 +2,7 @@ import React from 'react';
 import { SvgIcon } from '@material-ui/core';
 
 export const BackpackIcon = (props) => (
-  <SvgIcon viewBox='0 0 167 182' {...props}>
+  <SvgIcon viewBox='0 0 167 182' {...props} data-testid='backpack-icon'>
     <path
       d={`M122.467 115.267H44.5333C42.9962 115.267 41.75 116.625 41.75 118.3V166.833
       C41.75 168.508 42.9962 169.867 44.5333 169.867H122.467C124.004 169.867 125.25 168.508 125.25 166.833V118.3

@@ -32,9 +32,6 @@ export const useStyles = makeStyles((theme) => ({
       marginRight: 0
     }
   },
-  invisiblePaginationDiv: {
-    display: 'none !important'
-  },
   header: {
     display: 'flex',
     justifyContent: 'center',

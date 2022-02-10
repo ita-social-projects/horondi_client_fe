@@ -1,108 +1,86 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router';
+import { createMemoryHistory } from 'history';
+import { MockedProvider } from '@apollo/client/testing';
 import { ThemeProvider } from '@material-ui/styles';
-import ProductListPage from '../../../../pages/product-list-page/product-list-page';
-import ProductListItem from '../../../../pages/product-list-page/product-list-item/product-list-item';
+
+import { mockAllFilteredProducts } from './product-list-page.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
+import ProductListPage from '../../../../pages/product-list-page/product-list-page';
 
-const useQueryData = {
-  loading: false,
-  error: null,
-  data: {
-    getProducts: {
-      items: [
-        {
-          _id: '1',
-          name: [
-            { lang: 'ua', value: 'Ролтоп' },
-            { lang: 'en', value: 'Rolltop' }
-          ]
-        },
-        {
-          _id: '2',
-          name: [
-            { lang: 'ua', value: 'test' },
-            { lang: 'en', value: 'test' }
-          ]
-        },
-        {
-          _id: '3',
-          name: [
-            { lang: 'ua', value: 'test' },
-            { lang: 'en', value: 'test' }
-          ]
-        }
-      ]
-    }
-  }
-};
+const mockHistoryPush = jest.fn();
+const history = createMemoryHistory();
+const themeValue = theme('light');
+let mockNameFilter = '';
 
-let mockedNameFilter;
-
-jest.mock('react-redux');
-jest.mock('../../../../pages/product-list-page/product-list-page.styles', () => ({
-  useStyles: () => ({})
-}));
-
-jest.mock(
-  '../../../../pages/product-list-page/product-list-filter/product-list-filter.styles',
-  () => ({
-    useStyles: () => ({})
-  })
-);
-
-jest.mock('../../../../pages/product-list-page/count-per-page/count-per-page.styles.js', () => ({
-  useStyles: () => ({})
-}));
-
-jest.mock('@apollo/client');
 jest.mock('react-router', () => ({
-  useLocation: () => ({ search: `?countPerPage=9&sort=popularity&nameFilter=${mockedNameFilter}` }),
-  useHistory: () => ({
-    push: jest.fn()
-  })
-}));
-
-jest.mock('connected-react-router', () => ({
-  push: jest.fn()
+  ...jest.requireActual('react-router'),
+  useLocation: () => ({ search: `?sort=popularity&nameFilter=${mockNameFilter}` }),
+  useHistory: () => ({ push: mockHistoryPush })
 }));
 
 jest.mock('react-redux', () => ({
   useSelector: () => ({ currency: 0 })
 }));
 
-describe('ProductListPage component tests', () => {
-  const themeValue = theme('light');
+jest.mock('../../../../pages/product-list-page/product-list-page.styles', () => ({
+  useStyles: () => ({})
+}));
 
-  it('Should render ProductListPage', () => {
-    useQuery.mockImplementation(() => ({ loading: false, error: false }));
+jest.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (str) => str,
+    i18n: {
+      changeLanguage: () => new Promise(() => {})
+    }
+  })
+}));
 
-    const component = shallow(<ProductListPage width='sm' />);
-
-    expect(component).toBeDefined();
-  });
-
-  it('Should cover other branches', () => {
-    useQuery.mockImplementation(() => ({ loading: true, error: false }));
-
-    const component = mount(<ProductListPage width='sm' />);
-
-    expect(component).toBeDefined();
-  });
-
-  it('Should cover other branches', () => {
-    mockedNameFilter = 'wrong_name';
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
-
-    const component = mount(
-      <ThemeProvider theme={themeValue}>
-        <ProductListPage width='sm' />
-      </ThemeProvider>
+describe('ProductListPage with correct values', () => {
+  beforeEach(() => {
+    render(
+      <MockedProvider mocks={mockAllFilteredProducts} addTypename>
+        <ThemeProvider theme={themeValue}>
+          <Router history={history}>
+            <ProductListPage width='sm' />
+          </Router>
+        </ThemeProvider>
+      </MockedProvider>
     );
-    const items = component.find(ProductListItem);
+  });
 
-    expect(items).toHaveLength(0);
+  it('should render loader', () => {
+    const loader = screen.findByTestId('loader');
+
+    expect(loader).toBeDefined();
+  });
+
+  it('should render products', async () => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const products = await screen.getAllByTestId('product');
+
+    expect(products).toHaveLength(2);
+  });
+});
+
+describe('ProductListPage with uncorrect values', () => {
+  beforeAll(() => {
+    mockNameFilter = 'wrong_text';
+    render(
+      <MockedProvider mocks={mockAllFilteredProducts} addTypename>
+        <ThemeProvider theme={themeValue}>
+          <Router history={history}>
+            <ProductListPage width='sm' />
+          </Router>
+        </ThemeProvider>
+      </MockedProvider>
+    );
+  });
+
+  it('should render not-found-product image', async () => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(screen.getByTestId('backpack-icon')).toBeDefined();
   });
 });

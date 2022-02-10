@@ -97,8 +97,6 @@ const ProductListPage = ({ width }) => {
 
   const handleFilterShow = () => setFilterMenuStatus((prevState) => !prevState);
 
-  if (loading || error) return errorOrLoadingHandler(error, loading);
-
   const itemsToShow = () => {
     if (products?.length > 0) {
       if (nameFilter) {
@@ -155,20 +153,26 @@ const ProductListPage = ({ width }) => {
           <div className={styles.filterMenu}>
             <ProductFilter filterParams={filterParams} />
           </div>
-          {products?.length > 0 ? (
-            <div className={styles.productsWrapper}>
-              <Grid container spacing={2} className={styles.productsDiv}>
-                {itemsToShow()}
-              </Grid>
-              {paginationCondition()}
-            </div>
+          {loading || error ? (
+            errorOrLoadingHandler(error, loading)
           ) : (
-            <div className={styles.defaultBlock}>
-              <div>{t('productListPage.productNotFound')}</div>
-              <div>
-                <MoodBadIcon className={styles.defaultIcon} />
-              </div>
-            </div>
+            <>
+              {products?.length > 0 ? (
+                <div className={styles.productsWrapper}>
+                  <Grid container spacing={2} className={styles.productsDiv}>
+                    {itemsToShow()}
+                  </Grid>
+                  {paginationCondition()}
+                </div>
+              ) : (
+                <div className={styles.defaultBlock}>
+                  <div>{t('productListPage.productNotFound')}</div>
+                  <div>
+                    <MoodBadIcon className={styles.defaultIcon} />
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

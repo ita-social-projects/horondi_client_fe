@@ -32,9 +32,6 @@ export const useStyles = makeStyles((theme) => ({
       marginRight: 0
     }
   },
-  invisiblePaginationDiv: {
-    display: 'none !important'
-  },
   header: {
     display: 'flex',
     justifyContent: 'center',
@@ -140,8 +137,9 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     fontSize: '1.2em'
   },
-  defaultIcon: {
-    width: '100px',
-    height: '100px'
+  defaultBackpackIcon: {
+    width: '167px',
+    height: '182px',
+    margin: '50px auto'
   }
 }));

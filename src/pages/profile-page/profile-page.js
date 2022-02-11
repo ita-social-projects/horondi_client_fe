@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, InputAdornment } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
 import { useStyles } from './profile-page.styles';
@@ -105,7 +105,13 @@ const ProfilePage = () => {
         type='text'
         name={name}
         variant={TEXT_FIELD_VARIANT.OUTLINED}
-        value={values[name]}
+        value={values[name]?.startsWith('+380') ? values[name].slice(4) : values[name]}
+        InputProps={
+          name === 'phoneNumber' && {
+            maxLength: 9,
+            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+          }
+        }
         label={t(`profilePage.labels.${name}`)}
         fullWidth
         color={MATERIAL_UI_COLOR.PRIMARY}

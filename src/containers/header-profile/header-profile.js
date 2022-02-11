@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -10,9 +10,12 @@ import { Settings, History, PersonOutlineOutlined, Person } from '@material-ui/i
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './header-profile.styles';
 import { logoutUser } from '../../redux/user/user.actions';
-import { RETURN_PAGE } from '../../configs';
+import { RETURN_PAGE , DARK_THEME, LIGHT_THEME } from '../../configs';
 import routes from '../../configs/routes';
 import { GiftCertificatesIcon } from '../../images/gift-certificates-icon';
+
+import { setToLocalStorage } from '../../services/local-storage.service';
+import ThemeContext from '../../context/theme-context';
 
 const {
   pathToProfile,
@@ -58,8 +61,11 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     handleRedirect(pathToLogin);
   };
 
+  const [lightMode] = useContext(ThemeContext);
+
   const handleLogout = () => {
     dispatch(logoutUser());
+    setToLocalStorage('theme', lightMode ? LIGHT_THEME : DARK_THEME);
     setAnchorEl(null);
   };
 

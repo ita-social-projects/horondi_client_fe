@@ -9,10 +9,7 @@ exports[`Empty order component tests should match snapshot 1`] = `
     <WithStyles(ForwardRef(Typography))
       variant="h2"
     />
-    <img
-      alt=""
-      src="./images/cart/empty-cart-light-theme-image.png"
-    />
+    <BackpackIcon />
     <Link
       to="/catalog/:category"
     >

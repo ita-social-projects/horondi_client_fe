@@ -28,6 +28,10 @@ jest.mock('../../../../pages/product-list-page/product-list-page.styles', () => 
   useStyles: () => ({})
 }));
 
+jest.mock('../../../../containers/search-bar/search-bar.styles.js', () => ({
+  useStyles: () => ({})
+}));
+
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (str) => str,

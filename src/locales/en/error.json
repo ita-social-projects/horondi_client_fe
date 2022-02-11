@@ -26,6 +26,7 @@
     "zipcode": "Wrong zipcode format",
     "country": "Field should contain from 2 to 40 characters",
     "region": "Field should contain from 2 to 40 characters",
+    "district": "Field should contain from 2 to 40 characters",
     "city": "Field should contain from 2 to 50 characters",
     "street": "Field should contain from 2 to 40 characters",
     "buildingNumber": "Field should contain from 1 to 6 characters",

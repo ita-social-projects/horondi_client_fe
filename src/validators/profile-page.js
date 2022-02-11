@@ -28,6 +28,11 @@ export const validationSchema = Yup.object().shape({
     .max(40, 'error.profile.region')
     .matches(formRegExp.region, 'error.wrongFormat')
     .nullable(),
+  district: Yup.string()
+    .min(2, 'error.profile.district')
+    .max(40, 'error.profile.district')
+    .matches(formRegExp.district, 'error.wrongFormat')
+    .nullable(),
   city: Yup.string()
     .min(2, 'error.profile.city')
     .max(50, 'error.profile.city')

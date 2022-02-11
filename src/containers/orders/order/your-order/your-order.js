@@ -18,7 +18,8 @@ const YourOrder = ({ ...props }) => {
     language,
     styles,
     deliveryType,
-    setPricesFromQuery
+    setPricesFromQuery,
+    promoCode
   } = props;
 
   const [productPrices, setProductPrices] = useState([]);
@@ -46,6 +47,7 @@ const YourOrder = ({ ...props }) => {
               product={item}
               setProductPrices={setProductPrices}
               data-testid='orderItem'
+              promoCode={promoCode}
             />
           ))
           : null}

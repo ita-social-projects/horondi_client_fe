@@ -8,6 +8,8 @@
   "applyPromoCode": "Застосувати",
   "continue": "Продовжити покупки",
   "totalPrice": "До оплати",
+  "saving": "Економія",
+  "notFound": "Промокод не знайдено",
   "checkout": "Оформити замовлення",
   "pathBack": {
     "toMain": "Головна",

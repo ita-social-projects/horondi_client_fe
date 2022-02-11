@@ -48,7 +48,7 @@ import { calcPriceForCart } from '../../../utils/priceCalculating';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 
-const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
+const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
   const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
@@ -64,7 +64,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
 
   const totalPriceToPay = pricesFromQuery.reduce(
     (previousValue, currentValue, index) =>
-      previousValue + calcPriceForCart(currentValue, cartItems[index].quantity),
+      previousValue + calcPriceForCart(currentValue, cartItems[index]?.quantity),
     0
   );
 
@@ -274,6 +274,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations }) => {
               styles={styles}
               deliveryType={deliveryType}
               setPricesFromQuery={setPricesFromQuery}
+              promoCode={promoCode}
             />
           </Grid>
         </Grid>

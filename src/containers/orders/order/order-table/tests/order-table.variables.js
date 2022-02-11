@@ -81,11 +81,12 @@ const mockGetCartItem = jest.fn().mockReturnValue({
 const mockGetTotalPrice = jest.fn();
 const mockChangeQuantity = jest.fn();
 const mockChangeSize = jest.fn();
-
+const mockGetProductPrice = jest.fn();
 export const mockCartOperations = {
   getTotalPrice: mockGetTotalPrice,
   changeQuantity: mockChangeQuantity,
   getCartItem: mockGetCartItem,
   changeSize: mockChangeSize,
+  getProductPrice: mockGetProductPrice,
   removeFromCart: jest.fn()
 };

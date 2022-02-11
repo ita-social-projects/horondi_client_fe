@@ -57,7 +57,8 @@ const WishlistItem = ({
     id: Date.now(),
     productId: productForCart.product._id,
     sizeAndPrice: { size: productForCart.allSizes[0]?.size, price: productForCart.price },
-    quantity: 1
+    quantity: 1,
+    category: productForCart.product.category.name[1].value
   };
 
   const onAddToCart = () => {

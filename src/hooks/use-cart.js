@@ -27,7 +27,41 @@ export const useCart = (user = null) => {
     clearNewCart();
   };
 
-  const getCartItem = (id) => cart.find((cartItem) => cartItem.id === id);
+  const getCartItem = (id) =>
+    cart.find((cartItem) => cartItem.id === id || cartItem.productId === id);
+
+  const getTotalPricesWithPromoCode = (currency, promoCode) => {
+    const { discount, categories } = promoCode.getPromoCodeByCode;
+    const newArr = cart.map((item) => {
+      const price = item.sizeAndPrice.price[currency].value;
+
+      const isAllowCategory = categories.find(
+        (el) => el.toLowerCase() === item.category.toLowerCase()
+      );
+      if (isAllowCategory) {
+        return [Math.round(price - (price / 100) * discount), item.quantity];
+      }
+      return [Math.round(price), item.quantity];
+    });
+    return newArr.reduce((acc, item) => acc + calcPriceForCart(item[0], item[1]), 0);
+  };
+
+  const getProductPriceWithPromoCode = (id, currency, promoCode) => {
+    const product = getCartItem(id);
+    const { discount, categories } = promoCode.getPromoCodeByCode;
+    const isAllowCategory = categories.find(
+      (item) => item.toLowerCase() === product.category.toLowerCase()
+    );
+    const price = product.sizeAndPrice.price[currency].value;
+
+    if (isAllowCategory) {
+      return Math.round(price - (price / 100) * discount);
+    }
+
+    return price;
+  };
+
+  const getProductPrice = (id, currency) => getCartItem(id).sizeAndPrice.price[currency].value;
 
   const removeFromCart = (item) => {
     setNewCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
@@ -85,7 +119,10 @@ export const useCart = (user = null) => {
     getTotalPrice,
     getCartItem,
     clearCart,
-    changeSizeConstructor
+    changeSizeConstructor,
+    getProductPriceWithPromoCode,
+    getTotalPricesWithPromoCode,
+    getProductPrice
   };
 
   return {

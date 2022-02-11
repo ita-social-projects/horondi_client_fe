@@ -3,9 +3,15 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-import { mockedCartItemsData, mockedProps, mockQueryData } from './your-order.variables';
+import { mockedCartItemsData, mockedProps } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
+import { mockProduct } from '../../../../containers/checkout/checkout-form/tests/checkout-form.variables';
+
+const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
+const userData = {
+  cartItems: mockedCartItemsData,
+  language: 0
+};
 
 jest.mock('../../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
   useStyles: () => ({})
@@ -19,50 +25,34 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn()
 }));
 
-jest.mock('@apollo/client', () => ({
-  ...jest.requireActual('@apollo/client'),
-  useQuery: () => ({ loading: false, error: null, data: { getProductById: mockQueryData } })
-}));
-
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: mockedCartItemsData
+    cart: mockedCartItemsData,
+    cartOperations: { getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode }
   })
 }));
 
-describe('<YourOrder /> component tests', () => {
-  it('renders list of Cart Items', () => {
-    const userData = {
-      cartItems: mockedCartItemsData,
-      language: 0
-    };
-    useSelector.mockImplementation(() => userData);
+useSelector.mockImplementation(() => userData);
 
+describe('YourOrder component tests', () => {
+  beforeEach(() => {
     render(
-      <MockedProvider>
+      <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
           <YourOrder {...mockedProps} />
         </Router>
       </MockedProvider>
     );
+  });
+  it('renders list of Cart Items', () => {
     expect(screen.getByRole('list')).toBeTruthy();
   });
 
   it('should not render <SelfPickup />', () => {
-    const userData = {
-      cartItems: mockedCartItemsData,
-      language: 0
-    };
-    useSelector.mockImplementation(() => userData);
-
-    render(
-      <MockedProvider>
-        <Router>
-          <YourOrder {...mockedProps} />
-        </Router>
-      </MockedProvider>
-    );
-
     expect(screen.queryByText(/addressHorondi/i)).toBeNull();
+  });
+
+  it('should calculate price with promoCode', () => {
+    expect(mockGetProductPriceWithPromoCode).toHaveBeenCalled();
   });
 });

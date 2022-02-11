@@ -53,7 +53,7 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, pr
   useEffect(() => () => {
     setShouldValidate(false);
     cancel(false);
-  }, []);
+  });
 
   const { values, errors, handleSubmit, handleBlur, setFieldValue, setShouldValidate } =
     useCommentValidation(!!userData, onSubmit);

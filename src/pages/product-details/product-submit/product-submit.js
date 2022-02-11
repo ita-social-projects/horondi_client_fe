@@ -49,7 +49,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productTo
         productId: productToSend.product._id,
         sizeAndPrice,
         quantity: 1,
-        constructor: false
+        constructor: false,
+        category: product.category.name[1].value
       };
 
       addToCart(newCart);

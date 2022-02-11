@@ -7,7 +7,7 @@ import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import _ from 'lodash';
 
-import { useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './cart-item.styles';
 import NumberInput from '../../../../components/number-input';
 import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
@@ -23,7 +23,7 @@ import Loader from '../../../../components/loader';
 
 const { pathToProducts } = routes;
 
-const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) => {
+const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useSelector(({ Currency }) => ({
@@ -34,53 +34,34 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
   const [currentSize, setCurrentSize] = useState(item.sizeAndPrice.size._id);
   const [firstlyMounted, toggleFirstlyMounted] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(item.sizeAndPrice.price[currency].value);
-  const { changeQuantity, changeSize, getCartItem, changeSizeConstructor } = cartOperations;
+  const {
+    changeQuantity,
+    changeSize,
+    getCartItem,
+    changeSizeConstructor,
+    getProductPriceWithPromoCode,
+    getProductPrice
+  } = cartOperations;
 
   const onChangeQuantity = useCallback(
     _.debounce((value) => {
       changeQuantity(item.id, value);
     }, 500)
   );
+  const isConstructor = Object.keys(item.constructor).length !== 0;
 
-  const [
-    getProductByIdHandler,
-    {
-      data: constructorByModel,
-      called: calledProduct,
-      error: errorProduct,
-      loading: loadingProduct
-    }
-  ] = useLazyQuery(getProductById, {
-    variables: {
-      id: item?.productId
-    }
-  });
-
-  const [
-    getConstructorByIdHandler,
-    {
-      data: constructorByProduct,
-      called: calledConstructor,
-      error: constructorError,
-      loading: loadingConstructor
-    }
-  ] = useLazyQuery(getConstructorById, {
+  const {
+    data: constructorByModel,
+    error: errorProduct,
+    loading: loadingProduct
+  } = useQuery(isConstructor ? getConstructorById : getProductById, {
     variables: {
       id: item.productId
     }
   });
 
-  const isConstructor = Object.keys(item.constructor).length !== 0;
-
-  if (!isConstructor && !calledProduct) {
-    getProductByIdHandler();
-  }
-  if (isConstructor && !calledConstructor) {
-    getConstructorByIdHandler();
-  }
-
   const cartItem = isConstructor
-    ? constructorByProduct?.getConstructorById
+    ? constructorByModel?.getConstructorById
     : constructorByModel?.getProductById;
 
   const itemFoto = isConstructor
@@ -115,26 +96,63 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
     ? cartItem?.sizes && cartItem.sizes.map(mapCallback)
     : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
 
-  const { isLoading, isError } = useIsLoadingOrError(
-    [loadingProduct, loadingConstructor],
-    [constructorError, errorProduct]
-  );
+  const { isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
+
+  useEffect(() => {
+    toggleFirstlyMounted(true);
+  }, []);
+
   useEffect(() => {
     const itemData = getCartItem(item.id);
     setCurrentSize(itemData.sizeAndPrice.size._id);
-    setCurrentPrice(itemData.sizeAndPrice.price[currency].value);
-  }, [handleSizeChange]);
+
+    if (promoCode) {
+      setCurrentPrice(getProductPriceWithPromoCode(item.id, currency, promoCode));
+    } else {
+      setCurrentPrice(getProductPrice(item.id, currency));
+    }
+  }, [promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice, getCartItem]);
 
   const onDeleteItem = () => {
     setModalVisibility(true);
     setModalItem(item);
   };
 
-  useEffect(() => {
-    toggleFirstlyMounted(true);
-  }, []);
+  const totalProductPrice = () => {
+    if (promoCode) {
+      const { categories } = promoCode.getPromoCodeByCode;
+      const isAllowCategory = categories.find((el) => el === cartItem?.category.code);
 
-  if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
+      if (isAllowCategory) {
+        return (
+          <div className={styles.promo}>
+            <s>
+              {currencySign}
+              {Math.round(calcPriceForCart(item.sizeAndPrice.price[currency].value, inputValue))}
+            </s>
+            <span>
+              {currencySign}
+              {calcPriceForCart(currentPrice, inputValue)}
+            </span>
+          </div>
+        );
+      }
+    }
+
+    return (
+      <div>
+        {currencySign}
+        {Math.round(calcPriceForCart(currentPrice, inputValue))}
+      </div>
+    );
+  };
+
+  if (isError)
+    return (
+      <tr>
+        <td>{errorOrLoadingHandler(isError)}</td>
+      </tr>
+    );
 
   if (loadingProduct)
     return (
@@ -205,15 +223,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations }) =>
       </TableCell>
       <TableCell>
         <div>
-          <div className={styles.price}>
-            {currencySign}
-            {Math.round(calcPriceForCart(currentPrice, inputValue))}
-          </div>
+          <div className={styles.price}>{totalProductPrice()}</div>
         </div>
       </TableCell>
       <TableCell>
         <span>
-          <DeleteIcon onClick={onDeleteItem} className={styles.deleteIcon} />
+          <DeleteIcon data-testid='delete' onClick={onDeleteItem} className={styles.deleteIcon} />
         </span>
       </TableCell>
     </TableRow>

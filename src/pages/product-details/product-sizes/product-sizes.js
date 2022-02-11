@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
+import _ from 'lodash';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+
 import { useStyles } from './product-sizes.styles';
 
 const ProductSizes = ({
@@ -15,23 +16,22 @@ const ProductSizes = ({
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const sizeButtons =
-    sizes &&
-    !!sizes.length &&
-    sizes.map(({ size }, index) => (
-      <Button
-        disabled={!(size.available && checkDisabledProduct)}
-        key={size._id}
-        className={
-          size._id === currentSize._id && checkDisabledProduct
-            ? styles.selectedSize
-            : styles.sizeButton
-        }
-        onClick={() => handleSizeChange(index)}
-      >
-        {size.name}
-      </Button>
-    ));
+  const filteredSizes = _.uniqBy(sizes, 'name');
+
+  const sizeButtons = filteredSizes?.map(({ size }, index) => (
+    <Button
+      disabled={!(size.available && checkDisabledProduct)}
+      key={size._id}
+      className={
+        size._id === currentSize._id && checkDisabledProduct
+          ? styles.selectedSize
+          : styles.sizeButton
+      }
+      onClick={() => handleSizeChange(index)}
+    >
+      {size.name}
+    </Button>
+  ));
 
   const checkSizeName = () => {
     if (currentSize.available) return t(`product.size.${currentSize.name}`);

@@ -9,7 +9,6 @@ import checkout from './checkout.json';
 import cart from './cart.json';
 import wishlist from './wishlist.json';
 import modal from './modal.json';
-import productList from './productList.json';
 import common from './common.json';
 import contacts from './contacts.json';
 import errorPage from './errorPage.json';
@@ -45,7 +44,6 @@ export default {
     cart,
     wishlist,
     modal,
-    productList,
     contacts,
     buttons,
     errorPage,

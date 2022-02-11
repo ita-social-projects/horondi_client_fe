@@ -11,7 +11,8 @@
     "firstName": "First name*",
     "lastName": "Last name*",
     "email": "Email*",
-    "password": "Password*"
+    "password": "Password*",
+    "passwordConfirm": "Confirm the password*"
   },
   "googleSignIn": "or Register with"
 }

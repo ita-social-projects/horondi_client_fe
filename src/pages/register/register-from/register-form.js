@@ -9,6 +9,7 @@ import { USER_REGISTER_LABELS } from '../constants';
 import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
+import FacebookBtn from '../../../components/facebook-log-in-btn';
 import { Loader } from '../../../components/loader/loader';
 import routes from '../../../configs/routes';
 
@@ -20,6 +21,8 @@ export default function RegisterForm({
   errors,
   showPassword,
   setShowPassword,
+  showPasswordConfirm,
+  setShowPasswordConfirm,
   registerError,
   setShouldValidate
 }) {
@@ -37,6 +40,22 @@ export default function RegisterForm({
       </Link>
     </div>
   );
+  const type = (name) => {
+    if (name === USER_REGISTER_LABELS.pass || name === USER_REGISTER_LABELS.passConfirm) {
+      return USER_REGISTER_LABELS.pass;
+    }
+    return name;
+  };
+
+  const inputProps = (name) => {
+    if (name === USER_REGISTER_LABELS.pass) {
+      return endAdornment(showPassword, setShowPassword);
+    }
+    if (name === USER_REGISTER_LABELS.passConfirm) {
+      return endAdornment(showPasswordConfirm, setShowPasswordConfirm);
+    }
+    return {};
+  };
 
   return (
     <Form className={styles.registerForm}>
@@ -48,7 +67,7 @@ export default function RegisterForm({
           {Object.keys(values).map((name) => (
             <Field
               key={name}
-              type={name}
+              type={type(name)}
               name={name}
               as={TextField}
               label={t(`register.placeholders.${name}`)}
@@ -59,11 +78,7 @@ export default function RegisterForm({
               className={`${styles.dataInput} ${
                 name === USER_REGISTER_LABELS.email && styles.afterText
               }`}
-              InputProps={
-                name === USER_REGISTER_LABELS.pass
-                  ? endAdornment(showPassword, setShowPassword)
-                  : {}
-              }
+              InputProps={inputProps(name)}
             />
           ))}
           <FormControlLabel
@@ -85,6 +100,7 @@ export default function RegisterForm({
             <p className={styles.registerError}>{registerError}</p>
             <p className={styles.googleText}>{t('register.googleSignIn')}</p>
             <GoogleBtn />
+            <FacebookBtn />
           </div>
           <div>
             <Link to={pathToLogin} className={styles.loginBtn}>

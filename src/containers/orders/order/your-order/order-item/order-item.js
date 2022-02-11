@@ -1,6 +1,6 @@
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -12,54 +12,63 @@ import { getProductById } from '../../../operations/order.queries';
 import { getConstructorById } from '../../../operations/getConstructorById.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
+import { useCart } from '../../../../../hooks/use-cart';
 
-const OrderItem = ({ product, setProductPrices }) => {
+const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const styles = useStyles();
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
   const { t } = useTranslation();
   const currencySign = getCurrencySign(currency);
+  const { cartOperations } = useCart();
+
+  const isConstructor = Object.keys(product.constructor).length !== 0;
+
   const {
     data: dataProduct,
-    loading: loadingProduct,
-    error: errorProduct
-  } = useQuery(getProductById, {
-    variables: { id: product?.productId },
-    skip: product.constructor
+    error: errorProduct,
+    loading: loadingProduct
+  } = useQuery(isConstructor ? getConstructorById : getProductById, {
+    variables: {
+      id: product?.productId
+    }
   });
 
-  const {
-    data: dataConstructor,
-    loading: loadingConstructor,
-    error: errorConstructor
-  } = useQuery(getConstructorById, {
-    variables: { id: product.productId },
-    skip: !product.constructor
-  });
+  const { isLoading, isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
-  const { isLoading, isError } = useIsLoadingOrError(
-    [loadingConstructor, loadingProduct],
-    [errorConstructor, errorProduct]
-  );
-
-  const orderItem = product.constructor
-    ? dataConstructor?.getConstructorById
-    : dataProduct?.getProductById;
+  const orderItem = isConstructor ? dataProduct?.getConstructorById : dataProduct?.getProductById;
 
   const { sizeAndPrice } = product;
 
-  useEffect(() => {
-    const { constructor } = product;
-    const { size, price } = sizeAndPrice;
-    if (!constructor && orderItem) {
-      const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
-      setProductPrices((prevState) => [...prevState, currentSize?.price]);
+  const calculatePrice = useMemo(() => {
+    const { size } = sizeAndPrice;
+    const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
+
+    if (promoCode) {
+      const { categories, discount } = promoCode.getPromoCodeByCode;
+      const isAllowCategory = categories.find((item) => item === orderItem?.category.code);
+
+      if (isAllowCategory) {
+        return currentSize?.price.map((item) => ({
+          ...item,
+          value: Math.round(item.value - (item.value / 100) * discount)
+        }));
+      }
     }
-    if (constructor && orderItem) {
+    return currentSize?.price;
+  }, [orderItem, promoCode, sizeAndPrice]);
+
+  useEffect(() => {
+    const { price } = sizeAndPrice;
+
+    if (!isConstructor && orderItem) {
+      setProductPrices((prevState) => [...prevState, calculatePrice]);
+    }
+    if (isConstructor && orderItem) {
       setProductPrices((prevState) => [...prevState, price]);
     }
-  }, [setProductPrices, product, orderItem, sizeAndPrice]);
+  }, [setProductPrices, product, orderItem, sizeAndPrice, isConstructor, calculatePrice]);
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
@@ -69,9 +78,7 @@ const OrderItem = ({ product, setProductPrices }) => {
       <img
         className={styles.yourOrderListImg}
         src={`${IMG_URL}${
-          product.constructor
-            ? orderItem?.model.images.thumbnail
-            : orderItem?.images.primary.thumbnail
+          isConstructor ? orderItem?.model.images.thumbnail : orderItem?.images.primary.thumbnail
         }`}
         alt='product-img'
       />
@@ -81,7 +88,7 @@ const OrderItem = ({ product, setProductPrices }) => {
           <div className={styles.yourOrderListItemDescriptionPrimary}>
             {t(
               `${
-                product.constructor ? orderItem?.model.translationsKey : orderItem?.translationsKey
+                isConstructor ? orderItem?.model.translationsKey : orderItem?.translationsKey
               }.name`
             )}
           </div>
@@ -92,7 +99,7 @@ const OrderItem = ({ product, setProductPrices }) => {
               {t('product.productDescription.bottomMaterial')}:{' '}
               {t(
                 `${
-                  product.constructor
+                  isConstructor
                     ? sizeAndPrice.bottomMaterial?.translationsKey
                     : orderItem?.bottomMaterial.material.translationsKey
                 }.name`
@@ -105,7 +112,11 @@ const OrderItem = ({ product, setProductPrices }) => {
         }
       />
       <Typography className={styles.yourOrderListItemPrice} component='div'>
-        <div>{sizeAndPrice.price[currency]?.value}</div>
+        <div>
+          {promoCode
+            ? cartOperations.getProductPriceWithPromoCode(product.productId, currency, promoCode)
+            : sizeAndPrice.price[currency]?.value}
+        </div>
         <div style={{ width: '3px' }} />
         <div className={styles.priceForItem}>{currencySign}</div>
       </Typography>

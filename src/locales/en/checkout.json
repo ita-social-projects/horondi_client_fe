@@ -45,7 +45,6 @@
     "createOrder": "Create order",
     "payOrder": "Pay",
     "confirmOrder": "Confirm order",
-    
     "checkoutAdditionalInfo": {
         "additionalInfo": "* Order will be shipped within 10 business days.",
         "consent": [

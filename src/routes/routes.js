@@ -64,7 +64,7 @@ const Contacts = lazy(() => import('../pages/contacts'));
 const Materials = lazy(() => import('../pages/materials'));
 const BusinessPage = lazy(() => import('../pages/business-page'));
 const AnswersQuestionsPage = lazy(() => import('../pages/answers-questions-page'));
-const GiftСertificate = lazy(() => import('../pages/not-found-page'));
+const GiftСertificate = lazy(() => import('../pages/gift-certificate'));
 const MyCertificates = lazy(() => import('../pages/my-certificates'));
 
 const Routes = () => {

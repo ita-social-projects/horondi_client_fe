@@ -6,11 +6,6 @@ export const LIGHT_THEME = 'light';
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
 export const CART_KEY = 'newCart';
 
-export const CART_AND_WISHLIST_IMAGES = {
-  lightTheme: './images/cart/empty-cart-light-theme-image.png',
-  darkTheme: './images/cart/empty-cart-black-theme-image.png'
-};
-
 export const ERROR_PAGE_IMAGES = {
   light: './images/error-page/error-light.png',
   dark: './images/error-page/error-dark.png'
@@ -30,6 +25,7 @@ export const REDIRECT_TIMEOUT = 3000;
 export const DEFAULT_CURRENCY = 0;
 export const DEFAULT_LANGUAGE = 0;
 export const DEFAULT_COUNT_PER_PAGE = 9;
+export const INITIAL_CERTIFICATE_COUNT = 1;
 
 export const commentFields = {
   text: { name: 'text', multiline: true, rows: 5 }
@@ -115,3 +111,5 @@ export const TEXT_FIELDS = {
   PAGE: 'page',
   SORT: 'sort'
 };
+
+export const ROW_FIELDS = ['certificate', 'code', 'price', 'expiration', 'status'];

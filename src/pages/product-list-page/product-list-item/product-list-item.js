@@ -51,13 +51,13 @@ const ProductListItem = ({ product }) => {
         <div className={styles.currency}>{currencySign}</div>
       </div>
     ) : (
-      <div>{t('productListPage.sizeNotAvailable')}</div>
+      <div>{t('product.sizeNotAvailable')}</div>
     );
   };
 
   const styles = useStyles({ image });
   return (
-    <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper}>
+    <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           <div className={styles.name}>

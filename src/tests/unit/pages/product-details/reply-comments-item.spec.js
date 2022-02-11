@@ -1,11 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import ReplyCommentsItem from '../../../../pages/product-details/comments/comments-item/reply-comments-item';
 import { mockRequest, mockSelector, replyItem } from './comments.variables';
+import { handleUserCommentOwner } from '../../../../utils/handle-comments';
 
 const mockUpdateReplies = jest.fn();
+
+jest.mock('../../../../utils/handle-comments');
+handleUserCommentOwner.mockImplementation(() => true);
 
 const {
   _id,
@@ -69,5 +73,15 @@ describe('<ReplyCommentsItem /> tests', () => {
 
     expect(firstName).not.toHaveTextContent('common.reply.isAdmin');
     expect(replyText).toBeInTheDocument();
+  });
+
+  it('should render comment dialog', () => {
+    renderComponent(dataUser);
+    const icon = document.querySelector('.MuiSvgIcon-root');
+    const modal = screen.findByTestId('modal');
+
+    fireEvent.click(icon);
+
+    expect(modal).toBeDefined();
   });
 });

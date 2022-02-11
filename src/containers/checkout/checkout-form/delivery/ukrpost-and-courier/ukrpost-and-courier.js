@@ -211,6 +211,7 @@ const UkrpostAndCourier = ({
       <h3 className={styles.addressTitle}>{t('delivery.deliveryAddress')}</h3>
       <div className={styles.inputWrapper}>
         <Autocomplete
+          data-testid='region'
           name='region'
           onInputChange={(e, value, reason) => {
             handleRegionInputChange(value, reason);
@@ -249,6 +250,7 @@ const UkrpostAndCourier = ({
           </div>
         )}
         <Autocomplete
+          data-testid='district'
           onInputChange={(e, value, reason) => {
             handleDistrictInputChange(value, reason);
           }}
@@ -287,6 +289,7 @@ const UkrpostAndCourier = ({
           </div>
         )}
         <Autocomplete
+          data-testid='cities'
           onInputChange={(e, value, reason) => {
             handleCityInputChange(value, reason);
           }}
@@ -372,6 +375,7 @@ const UkrpostAndCourier = ({
         ) : (
           <>
             <Autocomplete
+              data-testid='streets'
               onInputChange={(e, value, reason) => {
                 handleStreetInputChange(value, reason);
               }}
@@ -412,7 +416,7 @@ const UkrpostAndCourier = ({
             {courierInputLabels(language).map((field) => (
               <div key={field.name}>
                 <TextField
-                  id='standard-start-adornment'
+                  data-testid={field.name}
                   data-cy={field.name}
                   name={field.name}
                   className={styles.textField}

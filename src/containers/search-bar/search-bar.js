@@ -21,7 +21,7 @@ const SearchBar = ({
 
   const [searchTimeout, setSearchTimeout] = useState(null);
 
-  const { loading } = useQuery(getFilteredProductsQuery, {
+  const { loading, refetch } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) =>
       setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
     variables: { search: searchParams.searchFilter }
@@ -39,11 +39,14 @@ const SearchBar = ({
     }
     if (target.value && target.value.trim()) {
       setSearchTimeout(
-        setSearchParams(() => ({
-          products: [],
-          searchFilter: target.value,
-          searchBarVisibility: true
-        }))
+        setTimeout(() => {
+          setSearchParams(() => ({
+            products: [],
+            searchFilter: target.value,
+            searchBarVisibility: true
+          }));
+          refetch();
+        }, 1000)
       );
     }
   };
@@ -59,7 +62,7 @@ const SearchBar = ({
       <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}
-        value={defaultValue || ''}
+        value={defaultValue}
         onBlur={handleOnBlur}
         onFocus={handleSearch}
         inputProps={{ maxLength: 20 }}

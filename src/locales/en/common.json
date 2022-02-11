@@ -29,10 +29,12 @@
   "close": "Close",
   "models": "Models",
   "buttons": {
+    "add": "Add",
     "confirm": "Delete",
     "cancel": "Cancel"
   },
   "modalHeader": "Delete product",
+  "modalInputHeader": "Enter code",
   "to": "to ",
   "from": "from ",
   "search": "Search",

@@ -9,6 +9,10 @@ import toJson from 'enzyme-to-json';
 
 configure({ adapter: new Adapter() });
 
+const fbScript = document.createElement('script');
+fbScript.id = 'facebook-jssdk';
+document.body.appendChild(fbScript);
+
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;

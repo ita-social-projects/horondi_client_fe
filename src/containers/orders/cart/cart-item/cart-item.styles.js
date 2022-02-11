@@ -38,6 +38,10 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontSize: '20px'
     }
   },
+  promo: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
   selectSizeStyle: {
     width: '71px',
     height: '40px',

@@ -361,7 +361,12 @@ https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-
 [![@romanortynskyi](https://avatars.githubusercontent.com/u/50491616?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/romanortynskyi)
 [![@DeLettenhove](https://avatars.githubusercontent.com/u/49168997?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/DeLettenhove)
 [![@tarasSanotskyi](https://avatars.githubusercontent.com/u/79531224?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/tarasSanotskyi)
-[![@IamBohdanSereda](https://avatars.githubusercontent.com/u/89339465?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/IamBohdanSereda)
+[![@afanasieva-anastasiia](https://avatars.githubusercontent.com/u/89595428?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/afanasieva-anastasiia)
+[![@LubomyrKashuba](https://avatars.githubusercontent.com/u/80056472?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/LubomyrKashuba)
+[![@anemyro](https://avatars.githubusercontent.com/u/40118760?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/anemyro)
+[![@OlehProtsak](https://avatars.githubusercontent.com/u/65071268?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/OlehProtsak)
+[![@Skydry333](https://avatars.githubusercontent.com/u/59199055?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/Skydry333)
+[![@SirAndrii](https://avatars.githubusercontent.com/u/24919819?s=200&u=4540d5aba6e388992ca06b9224ed0e0a35f94b1c&v=4)](https://github.com/SirAndrii)
 
 ### Quality control team
 

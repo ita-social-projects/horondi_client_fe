@@ -5,6 +5,7 @@ export const Language = {
 export const product = {
   __typename: 'Product',
   _id: '61938f3f47ff1a3ccc1ac5e7',
+  category: { name: ['', { value: 'bags' }] },
   name: [
     {
       lang: 'ua',

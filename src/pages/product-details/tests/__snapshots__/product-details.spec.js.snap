@@ -17,11 +17,16 @@ exports[`Product details test Should render product details component 1`] = `
           checkDisabledProduct=""
           countComments={0}
           currency={0}
+          currentPrice={Array []}
           product={Object {}}
         />
         <ProductSizes
           checkDisabledProduct=""
-          currentSize=""
+          currentSize={
+            Object {
+              "_id": "",
+            }
+          }
           handleSizeChange={[Function]}
           sizeIsNotSelectedError={false}
         />
@@ -29,6 +34,20 @@ exports[`Product details test Should render product details component 1`] = `
           <ProductSubmit
             disabled={true}
             product={Object {}}
+            productToSend={
+              Object {
+                "options": Object {
+                  "size": Object {
+                    "_id": "",
+                  },
+                },
+                "price": Array [],
+                "product": Object {
+                  "_id": "",
+                },
+                "quantity": 1,
+              }
+            }
             setSizeIsNotSelectedError={[Function]}
           />
           <WithStyles(ForwardRef(Tooltip))

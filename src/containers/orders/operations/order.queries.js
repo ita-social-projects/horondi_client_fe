@@ -3,9 +3,12 @@ import { gql } from '@apollo/client';
 export const getProductById = gql`
   query ($id: ID!) {
     getProductById(id: $id) {
+      __typename
       ... on Product {
-        __typename
         _id
+        category {
+          code
+        }
         translationsKey
         bottomMaterial {
           material {
@@ -28,10 +31,6 @@ export const getProductById = gql`
             currency
           }
         }
-      }
-      ... on Error {
-        statusCode
-        message
       }
     }
   }

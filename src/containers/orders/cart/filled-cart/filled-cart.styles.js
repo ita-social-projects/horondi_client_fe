@@ -40,6 +40,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       border: `1px solid ${palette.cart.borderColor}`
     }
   },
+  textField: {
+    width: '75%'
+  },
   promoWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -53,7 +56,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     ...button,
     background: palette.button.normal.backgroundColor,
     color: palette.button.normal.color,
-    padding: '12px',
+    padding: '20px',
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
@@ -101,7 +104,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginTop: '50px',
     marginBottom: '100px',
     '@media (max-width: 850px)': {
@@ -112,6 +115,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   totalPrice: {
     display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
     gap: '90px',
     '& svg': {
       marginRight: '5px',

@@ -26,8 +26,8 @@ const ProductImages = ({ images }) => {
   const isLightTheme = palette.type === 'light';
 
   const initImages = useMemo(
-    () => [images.primary.large, ...images.additional.map(({ large }) => large)],
-    [images.primary.large, images.additional]
+    () => [images.primary.small, ...images.additional.map(({ small }) => small)],
+    [images.primary.small, images.additional]
   );
 
   useEffect(() => {

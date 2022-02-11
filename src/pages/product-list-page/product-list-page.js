@@ -7,11 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
-import MoodBadIcon from '@material-ui/icons/MoodBad';
 import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
-
 import { useSelector } from 'react-redux';
+
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -22,13 +21,13 @@ import { getFilteredProductsQuery } from './operations/product-list.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import getSortParamsFromQuery from '../../utils/getSortParamsFromQuery';
 import getFilterParamsFromQuery from '../../utils/getFilterParamsFromQuery';
+import { BackpackIcon } from '../../images/backpack-icon';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
   const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
   const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
   const nameFilter = searchParams.get(URL_QUERIES_NAME.nameFilter);
-
   const { t } = useTranslation();
   const styles = useStyles();
   const history = useHistory();
@@ -43,11 +42,13 @@ const ProductListPage = ({ width }) => {
     currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
     countPerPage: +searchParams.get(URL_QUERIES_NAME.countPerPage) || 9
   });
+
   const [sortParams, setSortParams] = useState(() => getSortParamsFromQuery(sortParamsFromQuery));
   const [filterParams, setFilterParams] = useState(() => getFilterParamsFromQuery(searchParams));
   const [filterMenuStatus, setFilterMenuStatus] = useState(false);
 
   const { pagesCount, currentPage, countPerPage } = paginationParams;
+
   const variables = {
     ...sortParams,
     ...filterParams,
@@ -65,14 +66,7 @@ const ProductListPage = ({ width }) => {
   const checkWidth = () => TEMPORARY_WIDTHS.find((element) => element === width);
   const drawerVariant = checkWidth() ? DRAWER_TEMPORARY : DRAWER_PERMANENT;
 
-  const { error, loading } = useQuery(getFilteredProductsQuery, {
-    onCompleted: (data) => {
-      setProducts(data.getProducts.items);
-      setPaginationParams((prevState) => ({
-        ...prevState,
-        pagesCount: Math.ceil(data.getProducts.count / countPerPage)
-      }));
-    },
+  const { data, loading, error } = useQuery(getFilteredProductsQuery, {
     variables
   });
 
@@ -97,7 +91,15 @@ const ProductListPage = ({ width }) => {
 
   const handleFilterShow = () => setFilterMenuStatus((prevState) => !prevState);
 
-  if (loading || error) return errorOrLoadingHandler(error, loading);
+  useEffect(() => {
+    if (data) {
+      setProducts(data.getProducts.items);
+      setPaginationParams((prevState) => ({
+        ...prevState,
+        pagesCount: Math.ceil(data.getProducts.count / countPerPage)
+      }));
+    }
+  }, [data]);
 
   const itemsToShow = () => {
     if (products?.length > 0) {
@@ -113,18 +115,45 @@ const ProductListPage = ({ width }) => {
     }
     return null;
   };
+  const showedItems = itemsToShow();
+
   const paginationToShow = (
     <Pagination count={pagesCount} variant='outlined' page={currentPage} onChange={changeHandler} />
   );
   const paginationCondition = () => {
     if (
-      products?.length < searchParams.get(URL_QUERIES_NAME.countPerPage) &&
-      Number(searchParams.get(URL_QUERIES_NAME.page)) === 1
+      (products?.length < countPerPage && Number(searchParams.get(URL_QUERIES_NAME.page)) === 1) ||
+      !showedItems.length
     ) {
-      return <div className={styles.invisiblePaginationDiv}>{paginationToShow}</div>;
+      return null;
     }
     return <div className={styles.paginationDiv}>{paginationToShow}</div>;
   };
+
+  const productLoadedCondition = () => {
+    if (loading || error) {
+      return errorOrLoadingHandler(error, loading);
+    }
+
+    if (showedItems?.length) {
+      return (
+        <div className={styles.productsWrapper}>
+          <Grid container spacing={2} className={styles.productsDiv}>
+            {showedItems}
+          </Grid>
+          {paginationCondition()}
+        </div>
+      );
+    }
+
+    return (
+      <div className={styles.defaultBlock}>
+        <div>{t('productListPage.productNotFound')}</div>
+        <BackpackIcon className={styles.defaultBackpackIcon} />
+      </div>
+    );
+  };
+
   return (
     <Container maxWidth='lg'>
       <div className={styles.root}>
@@ -155,21 +184,7 @@ const ProductListPage = ({ width }) => {
           <div className={styles.filterMenu}>
             <ProductFilter filterParams={filterParams} />
           </div>
-          {products?.length > 0 ? (
-            <div className={styles.productsWrapper}>
-              <Grid container spacing={2} className={styles.productsDiv}>
-                {itemsToShow()}
-              </Grid>
-              {paginationCondition()}
-            </div>
-          ) : (
-            <div className={styles.defaultBlock}>
-              <div>{t('productListPage.productNotFound')}</div>
-              <div>
-                <MoodBadIcon className={styles.defaultIcon} />
-              </div>
-            </div>
-          )}
+          {productLoadedCondition()}
         </div>
       </div>
     </Container>

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { push } from 'connected-react-router';
 
 import { Link } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -16,14 +18,18 @@ import SimilarProducts from '../../../../pages/product-details/similar-products'
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
 
-const FilledCart = ({ items, cartOperations }) => {
+const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
   const styles = useStyles();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
   const promoCodeInput = useRef(null);
   const { pathToCategory, pathToCheckout } = routes;
   const [price, setPrice] = useState();
   const [promoCodeValue, setPromoCodeValue] = useState('');
+  const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
 
   const { currency, cartLoading, user } = useSelector(({ Currency, User }) => ({
     currency: Currency.currency,
@@ -37,7 +43,7 @@ const FilledCart = ({ items, cartOperations }) => {
   });
 
   const currencySign = getCurrencySign(currency);
-  const { getTotalPrice, getTotalPricesWithPromoCode } = cartOperations;
+  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
 
   const checkPromoCode = () => {
     setPromoCodeValue(promoCodeInput.current.value);
@@ -51,9 +57,52 @@ const FilledCart = ({ items, cartOperations }) => {
       : setPrice(getTotalPrice(currency));
   }, [items, currency, getTotalPrice, promoCode, getTotalPricesWithPromoCode]);
 
-  if (cartLoading) {
+  if (cartLoading || productFromConstructorLoading) {
     return <Loader />;
   }
+
+  const onGoToCheckout = async () => {
+    if (user) {
+      const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
+
+      for (const item of itemsFromConstructor) {
+        const input = {
+          product: {
+            name: item.name,
+            model: item.model?._id,
+            pattern: item.pattern?._id,
+            mainMaterial: {
+              material: item.basic?.features.material._id,
+              color: item.basic?.features.color._id
+            },
+            bottomMaterial: {
+              material: item.bottom?.features.material._id,
+              color: item.bottom?.features.color._id
+            },
+            sizes: [item.sizeAndPrice.size._id],
+            basePrice: item.sizeAndPrice.price.find((p) => p.currency === 'USD').value
+          },
+          upload: []
+        };
+
+        setProductFromConstructorLoading(true);
+
+        const { data } = await addConstructorProduct({
+          variables: {
+            product: input.product,
+            upload: input.upload
+          }
+        });
+
+        setCartItem(item.id, {
+          ...item,
+          productId: data.addProductFromConstructor._id
+        });
+      }
+    }
+
+    dispatch(push(pathToCheckout));
+  };
 
   return (
     <>
@@ -116,9 +165,9 @@ const FilledCart = ({ items, cartOperations }) => {
               </div>
               <Link
                 to={{
-                  pathname: pathToCheckout,
                   props: promoCode
                 }}
+                onClick={onGoToCheckout}
               >
                 <Button variant='contained' className={styles.ordersButton}>
                   {t('cart.checkout')}

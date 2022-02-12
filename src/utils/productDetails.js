@@ -8,9 +8,9 @@ export const similarProductForCart = (similarProducts, cartList) => {
     for (const cartProduct of cartList) {
       if (
         !imagesList.find(({ _id }) => _id === simProduct._id) &&
-        simProduct.category._id !== cartProduct.category._id &&
+        simProduct.category?._id !== cartProduct.category?._id &&
         (simProduct.mainMaterial.color._id === cartProduct.mainMaterial.color._id ||
-          simProduct.pattern._id === cartProduct.pattern._id)
+          simProduct.pattern?._id === cartProduct.pattern._id)
       ) {
         imagesList = [...imagesList, simProduct];
       }

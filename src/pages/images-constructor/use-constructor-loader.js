@@ -38,26 +38,22 @@ const useConstructorLoader = () => {
 
   useEffect(() => {
     if (constructorByModel) {
-      setConstructorValues(
-        Object.keys(constructorByModel.getConstructorByModel[0]).reduce((acc, key) => {
-          switch (key) {
-            case 'model':
-              acc.sizes = constructorByModel.getConstructorByModel[0][key].sizes[0];
-              break;
-            case 'pocketsWithRestrictions':
-              acc.pocket =
-                constructorByModel.getConstructorByModel[0][
-                  key
-                ][0]?.currentPocketWithPosition.pocket;
-              break;
-            default:
-              if (key !== 'name' && key !== '_id' && key !== 'model')
-                acc[key] = constructorByModel.getConstructorByModel[0][key][0];
-              else acc[key] = constructorByModel.getConstructorByModel[0][key];
-          }
-          return acc;
-        }, {})
-      );
+      const pocket =
+        constructorByModel.getConstructorByModel[0].pocketsWithRestrictions[0]
+          ?.currentPocketWithPosition?.pocket;
+
+      const values = {
+        name: constructorByModel.getConstructorByModel[0].name,
+        size: constructorByModel.getConstructorByModel[0].model.sizes[0],
+        pattern: constructorByModel.getConstructorByModel[0].patterns[0],
+        bottom: constructorByModel.getConstructorByModel[0].bottoms[0],
+        basic: constructorByModel.getConstructorByModel[0].basics[0],
+        model: constructorByModel.getConstructorByModel[0].model,
+        pocket
+      };
+
+      setConstructorValues(values);
+
       currentConstructorModel.current = constructorByModel.getConstructorByModel[0];
 
       currentConstructorModel.current.model && setValuesLoading(false);

@@ -20,20 +20,28 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
 
   const plugImage = isLightTheme ? productPlugLight : productPlugDark;
 
+  const defaultProductName = item.product
+    ? t(`${item.product?.translationsKey}.name`)
+    : t('product.notAvailable');
+  const constructorProductName = t('common.backpackFromConstructor');
+  const productName = item.product.isFromConstructor ? constructorProductName : defaultProductName;
+
   return (
     <>
       <TableRow className={styles.root}>
         <TableCell className={styles.image}>
           <img
-            src={item.product ? `${IMG_URL}${item.product.images.primary.thumbnail}` : plugImage}
+            src={
+              item.product.images
+                ? `${IMG_URL}${item.product.images?.primary.thumbnail}`
+                : plugImage
+            }
             alt='img-product'
             className={styles.imgItem}
           />
         </TableCell>
         <TableCell className={styles.description}>
-          <p className={styles.productName}>
-            {item.product ? t(`${item.product?.translationsKey}.name`) : t('product.notAvailable')}
-          </p>
+          <p className={styles.productName}>{productName}</p>
           <p className={styles.productBottom}>
             {item.product && t('cart.bottomMaterial')} -{' '}
             {item.product && t(`${item.product.bottomMaterial.material.translationsKey}.name`)}

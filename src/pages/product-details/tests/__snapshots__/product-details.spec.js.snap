@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Product details test Should render product details component 1`] = `
-<WithStyles(ForwardRef(Card))
-  className=""
->
-  <div>
+<div>
+  <WithStyles(ForwardRef(Card))
+    className="undefined  "
+  >
     <ProductPath />
     <Link
       to="/catalog/:category"
@@ -62,7 +62,7 @@ exports[`Product details test Should render product details component 1`] = `
         </div>
       </div>
     </div>
-  </div>
-  <Toast />
-</WithStyles(ForwardRef(Card))>
+    <Toast />
+  </WithStyles(ForwardRef(Card))>
+</div>
 `;

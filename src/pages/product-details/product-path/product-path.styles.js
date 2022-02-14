@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
   paths: {
-    margin: '30px 0',
+    margin: '60px 0 30px',
     color: palette.textColor,
     display: 'flex',
     justifyContent: 'flex-start',

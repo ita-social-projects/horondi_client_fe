@@ -9,14 +9,6 @@ const buttonStyles = {
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '0 2rem 5rem 2rem',
-    width: '90%',
-    margin: '0 auto'
-  },
   pageTitle: {
     display: 'flex',
     fontWeight: '500',
@@ -36,6 +28,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'center'
   },
   lowerWrapper: {
+    gap: 32,
     display: 'flex',
     justifyContent: 'space-between',
     marginTop: '40px'

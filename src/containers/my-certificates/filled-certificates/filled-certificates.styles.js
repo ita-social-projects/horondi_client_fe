@@ -13,8 +13,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '235px',
-    padding: 15
+    marginBottom: '235px'
   },
   totalWrapper: {
     display: 'flex',

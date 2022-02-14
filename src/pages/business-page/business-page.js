@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 
 import { useStyles } from './business-page.style';
+import { useAppStyles } from '../../components/app/app.styles';
 import { getBusinessTextByCode } from './operations/business-page.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
@@ -20,14 +21,17 @@ const BusinessPage = ({ match }) => {
   const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
 
   const styles = useStyles();
+  const appStyles = useAppStyles();
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
-    <div className={styles.root}>
-      {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
-      <hr />
-      {addressText}
+    <div className={appStyles.rootApp}>
+      <div className={`${appStyles.containerApp} ${styles.root}`}>
+        {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
+        <hr />
+        {addressText}
+      </div>
     </div>
   );
 };

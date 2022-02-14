@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   newsTitle: {
     textAlign: 'center',
     height: '205px',
@@ -12,9 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: '-2px'
   },
   NewsPageItem: {
-    margin: '0px auto',
     display: 'grid',
-    maxWidth: '1110px',
     gridTemplateColumns: '1fr 1fr 1fr',
     gridColumnGap: '15px',
     justifyContent: 'center',

@@ -8,10 +8,12 @@ import { useStyles } from './order-history.styles';
 import { LIMIT_HISTORY_ORDERS } from './constants';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getUserOrdersQuery } from './operations/order-history.queries';
+import { useAppStyles } from '../../components/app/app.styles';
 
 const OrderHistory = () => {
   const { t } = useTranslation();
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const [currentPage, setCurrentPage] = useState(1);
 
   const {
@@ -39,9 +41,9 @@ const OrderHistory = () => {
   };
 
   return (
-    <div className={styles.root}>
+    <div className={appStyles.rootApp}>
       {userOrders && userOrders.length ? (
-        <>
+        <div className={appStyles.containerApp}>
           <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
           <div>
             {userOrders.map((order) => (
@@ -51,7 +53,7 @@ const OrderHistory = () => {
           {quantityPages >= 2 && (
             <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
           )}
-        </>
+        </div>
       ) : (
         <EmptyOrderHistory />
       )}

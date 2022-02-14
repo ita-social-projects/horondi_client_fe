@@ -1,13 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  profileControl: {
-    margin: '0 auto',
-    display: 'flex',
-    width: '90%',
-    maxWidth: 1100,
-    flexDirection: 'column'
-  },
   profileTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,7 +21,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: 37
   },
   profile: {
-    maxWidth: 1110,
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

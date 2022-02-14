@@ -31,8 +31,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: 15
+    justifyContent: 'space-between'
   },
   promoInput: {
     '&, &::placeholder': {
@@ -129,7 +128,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   orderTable: {
     flexGrow: 1,
-    marginRight: 50,
     '@media (max-width: 813px)': {
       marginRight: 'initial'
     }

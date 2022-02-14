@@ -1,12 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   root: {
-    color: theme.palette.textColor,
-    margin: '50px auto',
-    maxWidth: 1280,
-    paddingLeft: 20,
-    paddingRight: 20,
     paddingTop: 30,
     '& h1': {
       textAlign: 'center',
@@ -57,11 +52,13 @@ export const useStyles = makeStyles((theme) => ({
     '& .awssld__content img': {
       opacity: '50%'
     },
-    '& .awssld__controls button .awssld__controls__arrow-left, & .awssld__controls button .awssld__controls__arrow-right': {
-      opacity: 1
-    },
-    '& .awssld__controls__arrow-left:before, & .awssld__controls__arrow-left:after, & .awssld__controls__arrow-right:before, & .awssld__controls__arrow-right:after': {
-      background: '#fff'
-    }
+    '& .awssld__controls button .awssld__controls__arrow-left, & .awssld__controls button .awssld__controls__arrow-right':
+      {
+        opacity: 1
+      },
+    '& .awssld__controls__arrow-left:before, & .awssld__controls__arrow-left:after, & .awssld__controls__arrow-right:before, & .awssld__controls__arrow-right:after':
+      {
+        background: '#fff'
+      }
   }
 }));

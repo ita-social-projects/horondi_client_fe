@@ -11,6 +11,7 @@ import { IMG_URL, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs/in
 import { PROFILE_USER_CONTACT_DATA, PROFILE_USER_ADDRESS_DATA } from './constants';
 import { validationSchema } from '../../validators/profile-page';
 import { handleClassName, initialValues } from '../../utils/handle-profile-page';
+import { useAppStyles } from '../../components/app/app.styles';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -20,6 +21,7 @@ const ProfilePage = () => {
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const classes = useStyles();
+  const appStyles = useAppStyles();
   const dispatch = useDispatch();
 
   const {
@@ -182,68 +184,70 @@ const ProfilePage = () => {
     );
 
   return (
-    <div className={classes.profileControl}>
-      <div className={classes.profileTitleInfo}>
-        <h2 className={classes.profileTitle}>{t('profilePage.titles.mainTitle')}</h2>
-        <div className={classes.titleLine} />
-      </div>
-      <div className={classes.profile}>
-        <div>
-          {userLoading ? (
-            <div className={classes.userForm}>
-              <Loader gridColumn='span 3' />
-            </div>
-          ) : (
-            <div className={classes.userFormControl}>
-              <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
-                <div className={classes.imageContainer}>
-                  {userImageUrl && (
-                    <img src={userImageUrl} alt='profile-logo' className={classes.userImage} />
-                  )}
-                  <input
-                    type='file'
-                    className={classes.photoUpload}
-                    id='photoUpload'
-                    onChange={handleImageLoad}
-                    multiple
-                    accept='image/*'
-                    data-testid='imageInput'
-                  />
-                  <label
-                    htmlFor='photoUpload'
-                    className={`${classes.imageContainerLabel} ${handleLableClass()}`}
-                  >
-                    <Button component='span' className={classes.uploadBtn}>
-                      <CameraIcon className={classes.cameraIcon} />
-                    </Button>
-                  </label>
-                </div>
-                <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
-                {getTextFields(PROFILE_USER_CONTACT_DATA)}
-                <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>
-                {getTextFields(PROFILE_USER_ADDRESS_DATA)}
-                <Button
-                  fullWidth
-                  className={`${classes.button} ${classes.saveBtn}`}
-                  type='submit'
-                  onClick={() => setShouldValidate(true)}
-                  data-testid='submitBtn'
-                >
-                  {t('profilePage.labels.saveBtnTitle')}
-                </Button>
-              </form>
-            </div>
-          )}
+    <div className={appStyles.rootApp}>
+      <div className={appStyles.containerApp}>
+        <div className={classes.profileTitleInfo}>
+          <h2 className={classes.profileTitle}>{t('profilePage.titles.mainTitle')}</h2>
+          <div className={classes.titleLine} />
         </div>
-        <div className={classes.userActions}>
-          <div className={classes.newPassword}>
-            {recoveryLoading ? <Loader /> : passwordChange()}
+        <div className={classes.profile}>
+          <div>
+            {userLoading ? (
+              <div className={classes.userForm}>
+                <Loader gridColumn='span 3' />
+              </div>
+            ) : (
+              <div className={classes.userFormControl}>
+                <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
+                  <div className={classes.imageContainer}>
+                    {userImageUrl && (
+                      <img src={userImageUrl} alt='profile-logo' className={classes.userImage} />
+                    )}
+                    <input
+                      type='file'
+                      className={classes.photoUpload}
+                      id='photoUpload'
+                      onChange={handleImageLoad}
+                      multiple
+                      accept='image/*'
+                      data-testid='imageInput'
+                    />
+                    <label
+                      htmlFor='photoUpload'
+                      className={`${classes.imageContainerLabel} ${handleLableClass()}`}
+                    >
+                      <Button component='span' className={classes.uploadBtn}>
+                        <CameraIcon className={classes.cameraIcon} />
+                      </Button>
+                    </label>
+                  </div>
+                  <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
+                  {getTextFields(PROFILE_USER_CONTACT_DATA)}
+                  <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>
+                  {getTextFields(PROFILE_USER_ADDRESS_DATA)}
+                  <Button
+                    fullWidth
+                    className={`${classes.button} ${classes.saveBtn}`}
+                    type='submit'
+                    onClick={() => setShouldValidate(true)}
+                    data-testid='submitBtn'
+                  >
+                    {t('profilePage.labels.saveBtnTitle')}
+                  </Button>
+                </form>
+              </div>
+            )}
           </div>
-          {!userData.confirmed && (
-            <div className={classes.confirmUser}>
-              {confirmationLoading ? <Loader /> : confirmEmail()}
+          <div className={classes.userActions}>
+            <div className={classes.newPassword}>
+              {recoveryLoading ? <Loader /> : passwordChange()}
             </div>
-          )}
+            {!userData.confirmed && (
+              <div className={classes.confirmUser}>
+                {confirmationLoading ? <Loader /> : confirmEmail()}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

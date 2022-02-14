@@ -8,10 +8,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'flex-start',
     width: '100%'
   },
-  inputWrapper: {
-    width: '100%',
-    marginLeft: '10%'
-  },
   textField: {
     width: 600,
     marginBottom: 16,
@@ -34,7 +30,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 700,
     fontSize: 23,
     color: palette.textColor,
-    marginLeft: '10%',
     '@media (max-width: 920px)': {
       width: '100%'
     }

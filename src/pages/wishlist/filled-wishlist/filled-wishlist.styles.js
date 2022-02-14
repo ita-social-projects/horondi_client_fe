@@ -21,11 +21,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   }),
   table: {
     flexGrow: 1,
-    marginRight: 50,
     '@media (max-width: 813px)': {
       marginRight: 'initial'
     },
-    width: '1000px',
+    width: '100%',
     '@media (max-width: 1110px)': {
       width: '750px',
       overflowX: 'auto'

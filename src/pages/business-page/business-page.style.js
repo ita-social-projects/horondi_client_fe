@@ -2,10 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    color: theme.palette.textColor,
-    margin: '50px auto',
-    maxWidth: 1280,
-    paddingTop: 30,
+    paddingTop: 80,
     '& p, & ul, & li, & span': {
       color: `${theme.palette.textColor} !important`,
       fontSize: '1rem',

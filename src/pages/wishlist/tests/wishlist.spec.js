@@ -6,7 +6,7 @@ import Wishlist from '../wishlist';
 jest.mock('connected-react-router', () => ({
   push: jest.fn()
 }));
-jest.mock('../wishlist.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../components/app/app.styles', () => ({ useAppStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../services/local-storage.service');
 jest.mock('../../../hooks/use-wishlist-loader', () => ({

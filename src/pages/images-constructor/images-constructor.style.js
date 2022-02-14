@@ -2,13 +2,12 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   constructorWrapper: {
-    padding: '20px',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
     '& > hr': {
       border: '1px solid rgba(91, 91, 91, 0.2)',
-      width: '80%',
+      width: '100%',
       marginTop: '30px',
       marginBottom: '48px'
     }
@@ -36,11 +35,10 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '24px'
   },
   contentWrapper: {
-    width: '80%',
     display: 'grid',
     gridTemplateColumns: '255px 1fr 255px',
     gridGap: '30px',
-    margin: '0 auto 48px auto',
+    marginBottom: 48,
     '@media (max-width: 1200px)': {
       gridTemplateColumns: 'repeat(auto-fill, minmax(255px, 1fr))'
     },

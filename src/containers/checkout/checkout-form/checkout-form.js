@@ -44,12 +44,14 @@ import {
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
+import { useAppStyles } from '../../../components/app/app.styles';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
 
 const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
@@ -125,8 +127,8 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
   }, [userData, deliveryType]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className={styles.root}>
+    <div className={appStyles.rootApp}>
+      <form onSubmit={handleSubmit} className={appStyles.containerApp}>
         <Grid item className={styles.checkoutFormContainer}>
           <div className={styles.checkoutTitleInfo}>
             <div className={styles.checkoutTitleInfoData}>
@@ -138,7 +140,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
             <div className={styles.checkoutTitleLine} />
           </div>
           <Grid item className={styles.userInfoContainer}>
-            <div className={styles.contactInfoWrapper}>
+            <div>
               <h3 className={styles.title}>{t('checkout.checkoutTitles.contactInfo')}</h3>
               <div className={styles.contactInfoFields}>
                 {userContactLabels.map((field) => (
@@ -186,7 +188,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
               handleChange={handleChange}
               setFieldValue={setFieldValue}
             />
-            <div className={styles.contactPaymentInfo}>
+            <div>
               <h2 className={styles.title}>{t('checkout.checkoutTitles.payment')}</h2>
               <FormControl
                 error={touched.paymentMethod && !!errors.paymentMethod}

@@ -20,7 +20,7 @@ const CertificateTable = ({ items }) => {
 
   const headerItems = useMemo(
     () => ROW_FIELDS.map((item) => <TableCell key={item}>{t(`certificate.${item}`)}</TableCell>),
-    [ROW_FIELDS]
+    [ROW_FIELDS, t]
   );
 
   return (

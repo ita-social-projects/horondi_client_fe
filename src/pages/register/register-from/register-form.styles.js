@@ -1,31 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  registerForm: {
-    backgroundColor: palette.backgroundColor,
-    width: '100%',
-    height: '100%',
-    padding: '0 119px 0px 118px',
-    boxSizing: 'border-box'
-  },
-  heading: {
-    fontSize: '34px',
-    fontWeight: '400',
-    textAlign: 'center',
-    paddingTop: '44px',
-    margin: 0,
-    color: palette.textColor
-  },
   dataInput: {
     marginTop: '24px',
     '& label': {
       transform: 'translate(14px, 14px) scale(1)'
     },
     '& div > input': {
-      padding: '12px 16px !important',
-      position: 'relative',
-      width: '419px',
-      height: '22px'
+      padding: '11px 14px !important',
+      position: 'relative'
     },
     '& p': {
       position: 'relative',
@@ -61,27 +44,6 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: '#1976D2',
       backgroundColor: 'transparent'
     }
-  },
-  registerBtn: {
-    border: '1px solid black',
-    borderRadius: '4px',
-    marginBottom: '48px',
-    height: '44px',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    letterSpacing: '0.0125em',
-    textTransform: 'uppercase',
-    background: palette.textColor,
-    color: palette.backgroundColor,
-    '&:hover': {
-      color: palette.button.normal.backgroundColor
-    },
-    '&:disabled': {
-      color: palette.button.disabled.backgroundColor
-    },
-    alignItems: 'center'
   },
   loginBtn: {
     float: 'right',

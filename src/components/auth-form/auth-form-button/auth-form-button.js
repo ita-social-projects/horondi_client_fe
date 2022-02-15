@@ -2,10 +2,16 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { useStyles } from './auth-form-button.styles';
 
-const AuthFormButton = ({ onclick, children }) => {
+const AuthFormButton = ({ onclick, disabled, children }) => {
   const styles = useStyles();
   return (
-    <Button className={styles.authBtn} fullWidth type='submit' onClick={onclick}>
+    <Button
+      className={styles.authBtn}
+      fullWidth
+      type='submit'
+      disabled={disabled}
+      onClick={onclick}
+    >
       {children}
     </Button>
   );

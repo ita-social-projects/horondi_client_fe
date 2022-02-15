@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
+import { TextField, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
@@ -12,6 +12,7 @@ import GoogleBtn from '../../../components/google-log-in-btn/index';
 import FacebookBtn from '../../../components/facebook-log-in-btn';
 import { Loader } from '../../../components/loader/loader';
 import routes from '../../../configs/routes';
+import { AuthButton, AuthHeading } from '../../../components/auth-form';
 
 const { pathToLogin, pathToTerms } = routes;
 
@@ -63,7 +64,7 @@ export default function RegisterForm({
         <Loader />
       ) : (
         <>
-          <h2 className={styles.heading}>{t('register.formLabel')}</h2>
+          <AuthHeading>{t('register.formLabel')}</AuthHeading>
           {Object.keys(values).map((name) => (
             <Field
               key={name}
@@ -88,15 +89,10 @@ export default function RegisterForm({
             label={consentLink}
           />
           <div className={styles.registerGroup}>
-            <Button
-              className={styles.registerBtn}
-              fullWidth
-              type='submit'
-              onClick={setShouldValidate}
-              disabled={!checked}
-            >
+            <AuthButton onClick={setShouldValidate} disabled={!checked}>
+              {' '}
               {t('register.formLabel')}
-            </Button>
+            </AuthButton>
             <p className={styles.registerError}>{registerError}</p>
             <p className={styles.googleText}>{t('register.googleSignIn')}</p>
             <GoogleBtn />

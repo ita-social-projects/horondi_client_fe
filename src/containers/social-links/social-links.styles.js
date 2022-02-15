@@ -32,7 +32,7 @@ export const useStyles = makeStyles(() => ({
       flex: '1 1 50%'
     },
     '@media screen and (max-width: 552px)': {
-      flex: '1 1 50%'
+      flex: 1
     }
   },
   iconsBox: {

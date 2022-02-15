@@ -28,7 +28,8 @@ import {
   registerUser,
   resetPassword,
   sendEmailConfirmation,
-  updateUserById
+  updateUserById,
+  getWishlistByUserId
 } from './user.operations';
 import {
   CHECK_IF_TOKEN_VALID,
@@ -52,7 +53,7 @@ import {
   USER_TOKENS,
   AUTH_ERRORS,
   newCartKey
-} from '../../configs';
+  , WISHLIST_KEY } from '../../configs';
 import routes from '../../configs/routes';
 import {
   clearLocalStorage,
@@ -61,7 +62,7 @@ import {
 } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
 import { USER_ERROR } from '../../translations/user.translations';
-import { setCart } from '../common-store/common.actions';
+import { setCart, setNewWishlist } from '../common-store/common.actions';
 
 const { pathToLogin } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
@@ -70,6 +71,9 @@ function* setLoginUser(user) {
   const purchasedProducts = yield call(getPurchasedProducts, user._id);
   setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
   setToLocalStorage(ACCESS_TOKEN, user.token);
+  const wishlist = yield call(getWishlistByUserId, user._id);
+  setToLocalStorage(WISHLIST_KEY, wishlist.products);
+  yield put(setNewWishlist(wishlist.products));
   yield put(setUser({ ...user, purchasedProducts }));
 }
 

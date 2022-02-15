@@ -1,7 +1,8 @@
-import { SET_CART } from './common.types';
+import { SET_CART , SET_WISHLIST } from './common.types';
 
 export const initialState = {
-  cart: []
+  cart: [],
+  wishlist: []
 };
 
 export const commonReducer = (state = initialState, { type, payload } = {}) => {
@@ -9,6 +10,12 @@ export const commonReducer = (state = initialState, { type, payload } = {}) => {
     return {
       ...state,
       cart: payload
+    };
+  }
+  if (type === SET_WISHLIST) {
+    return {
+      ...state,
+      wishlist: payload
     };
   }
 

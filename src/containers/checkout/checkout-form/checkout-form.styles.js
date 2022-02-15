@@ -59,7 +59,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '80%',
+      width: '89%',
       margin: 0
     }
   },

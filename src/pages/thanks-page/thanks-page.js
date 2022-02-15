@@ -15,8 +15,10 @@ const { pathToMain } = routes;
 
 const ThanksPage = () => {
   const router = useLocation();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const { order, loading, paidOrderLoading, user } = useSelector(({ Order, User }) => ({
     order: Order.order,
@@ -32,7 +34,7 @@ const ThanksPage = () => {
     const paidOrderNumber = router.pathname.slice(router.pathname.length - ORDER_NUMBER_LENGTH);
 
     if (paidOrderNumber) {
-      dispatch(getPaidOrder(paidOrderNumber));
+      dispatch(getPaidOrder({ paidOrderNumber, language }));
     } else {
       dispatch(getOrder());
     }

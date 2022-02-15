@@ -58,8 +58,7 @@ export function* handleGetFondyUrl({ payload }) {
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      (payload.amount * 100).toString(),
-      payload.language
+      (payload.amount * 100).toString()
     );
 
     setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);
@@ -81,10 +80,12 @@ export function handleSetPaymentMethod({ payload }) {
 }
 
 export function* getOrderTillSuccess(payload) {
-  const paidOrder = yield call(getOrderByPaidOrderNumber, payload);
+  const { language, paidOrderNumber } = payload;
+
+  const paidOrder = yield call(getOrderByPaidOrderNumber, paidOrderNumber);
 
   if (paidOrder.paymentStatus !== ORDER_PAYMENT_STATUS.PAID) {
-    yield call(checkOrderPaymentStatus, paidOrder.orderNumber);
+    yield call(checkOrderPaymentStatus, paidOrderNumber, language);
     yield call(getOrderTillSuccess, payload);
   } else {
     setToLocalStorage(orderDataToLS.order, paidOrder);

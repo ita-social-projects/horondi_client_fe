@@ -131,6 +131,16 @@ export const getOrderByPaidOrderNumber = async (paidOrderNumber) => {
       getOrderByPaidOrderNumber(paidOrderNumber: $paidOrderNumber) {
         ... on Order {
           _id
+          orderNumber
+          recipient {
+            firstName
+            lastName
+            email
+            phoneNumber
+          }
+          delivery {
+            sentBy
+          }
           items {
             product {
               name {
@@ -170,4 +180,24 @@ export const getOrderByPaidOrderNumber = async (paidOrderNumber) => {
   const result = await getItems(getOrderByPaidOrderNumberQuery, { paidOrderNumber });
 
   return result?.data?.getOrderByPaidOrderNumber;
+};
+
+export const checkOrderPaymentStatus = async (orderId) => {
+  const checkOrderPaymentStatusQuery = `
+  query ($orderId: String!) {
+    checkOrderPaymentStatus(orderId: $orderId) {
+      ... on Order {
+        _id
+        orderNumber
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+  `;
+  const result = await getItems(checkOrderPaymentStatusQuery, { orderId });
+
+  return result?.data?.checkOrderPaymentStatus;
 };

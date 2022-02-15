@@ -1,5 +1,10 @@
 import { orderReducer } from '../order.reducer';
-import { setOrder, setIsOrderCreated, setOrderLoading, setPaidOderLoading } from '../order.actions';
+import {
+  setOrder,
+  setIsOrderCreated,
+  setOrderLoading,
+  setPaidOrderLoading
+} from '../order.actions';
 import { orderExample } from './order.variables';
 
 describe('Orders reducer test', () => {
@@ -59,7 +64,7 @@ describe('Orders reducer test', () => {
       paidOrderLoading: false
     };
 
-    expect(orderReducer(initialState, setPaidOderLoading(false))).toEqual(state);
+    expect(orderReducer(initialState, setPaidOrderLoading(false))).toEqual(state);
   });
 
   it('should set loading paid order to true', () => {
@@ -68,6 +73,6 @@ describe('Orders reducer test', () => {
       paidOrderLoading: true
     };
 
-    expect(orderReducer(initialState, setPaidOderLoading(true))).toEqual(state);
+    expect(orderReducer(initialState, setPaidOrderLoading(true))).toEqual(state);
   });
 });

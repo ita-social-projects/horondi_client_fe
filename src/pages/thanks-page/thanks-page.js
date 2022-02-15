@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
-import { parse } from 'query-string';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import ThanksCard from './thanks-card';
@@ -10,7 +9,7 @@ import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
 import { getFromLocalStorage } from '../../services/local-storage.service';
 import { Loader } from '../../components/loader/loader';
-import { deliveryTypes } from '../../configs';
+import { deliveryTypes, ORDER_NUMBER_LENGTH } from '../../configs';
 
 const { pathToMain } = routes;
 
@@ -19,7 +18,7 @@ const ThanksPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const { order, loading, paidOrderLoading, user } = useSelector(({ Currency, Order, User }) => ({
+  const { order, loading, paidOrderLoading, user } = useSelector(({ Order, User }) => ({
     order: Order.order,
     loading: Order.loading,
     paidOrderLoading: Order.paidOrderLoading,
@@ -30,7 +29,7 @@ const ThanksPage = () => {
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
   useEffect(() => {
-    const { order_id: paidOrderNumber } = parse(router.search);
+    const paidOrderNumber = router.pathname.slice(router.pathname.length - ORDER_NUMBER_LENGTH);
 
     if (paidOrderNumber) {
       dispatch(getPaidOrder(paidOrderNumber));

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { useSelector, useDispatch } from 'react-redux';
+import { useMutation, useLazyQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { push } from 'connected-react-router';
+import { useHistory } from 'react-router';
 
 import { Link } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
+
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import { Loader } from '../../../../components/loader/loader';
@@ -21,7 +21,7 @@ import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries'
 const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
@@ -101,7 +101,7 @@ const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
       }
     }
 
-    dispatch(push(pathToCheckout));
+    history.push(pathToCheckout, { promoCode });
   };
 
   return (
@@ -167,9 +167,12 @@ const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
                 to={{
                   props: promoCode
                 }}
-                onClick={onGoToCheckout}
               >
-                <Button variant='contained' className={styles.ordersButton}>
+                <Button
+                  variant='contained'
+                  className={styles.ordersButton}
+                  onClick={onGoToCheckout}
+                >
                   {t('cart.checkout')}
                 </Button>
               </Link>

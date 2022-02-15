@@ -51,7 +51,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const { isFromConstructor } = item;
 
   const {
-    data: product, //rename
+    data: product,
     error: errorProduct,
     loading: loadingProduct
   } = useQuery(isFromConstructor ? getConstructorByModel : getProductById, {
@@ -60,11 +60,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     }
   });
 
-
-
-  const cartItem = isFromConstructor
-    ? product?.getConstructorByModel[0]
-    : product?.getProductById; // edit
+  const cartItem = isFromConstructor ? product?.getConstructorByModel[0] : product?.getProductById;
 
   const itemFoto = isFromConstructor
     ? cartItem?.model?.images?.thumbnail

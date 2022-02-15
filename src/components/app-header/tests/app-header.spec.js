@@ -5,7 +5,9 @@ import AppHeader from '../app-header';
 jest.mock('../app-header.styles.js', () => ({
   useStyles: () => ({})
 }));
-
+jest.mock('../../app/app.styles', () => ({
+  useAppStyles: () => ({})
+}));
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: () => [true, () => null],

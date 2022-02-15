@@ -14,15 +14,8 @@ const darkThemeButtonHover = {
 };
 
 export const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.type === 'dark' ? '#242424' : '#FEFEFE'
-  },
   container: {
     boxShadow: 'none',
-    color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE',
-    width: '90%',
-    margin: '0 auto',
-    padding: '2rem',
     backgroundColor: theme.palette.type === 'dark' ? '#242424' : '#FEFEFE',
     '& hr': {
       borderStyle: 'solid',
@@ -55,6 +48,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   breadcrumbs: {
     color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE'
+  },
+  content: {
+    padding: 0
   },
   date: {
     textAlign: 'center',

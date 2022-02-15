@@ -10,9 +10,11 @@ import email from '../../images/footer-icons/email.svg';
 import phone from '../../images/footer-icons/phone.svg';
 import location from '../../images/footer-icons/location.svg';
 import clock from '../../images/contacts-icons/clock.svg';
+import { useAppStyles } from '../../components/app/app.styles';
 
 const Contacts = ({ fromCheckout }) => {
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const { t } = useTranslation();
 
   const [imageStatus, setImageStatus] = useState(true);
@@ -87,9 +89,13 @@ const Contacts = ({ fromCheckout }) => {
   ));
 
   return (
-    <div className={styles.wrapper}>
-      {!fromCheckout && <h2 className={styles.contactsTitle}>{t('contacts.pageTitles.title')}</h2>}
-      {contactsDisplay}
+    <div className={appStyles.rootApp}>
+      <div className={`${appStyles.containerApp} ${styles.wrapper}`}>
+        {!fromCheckout && (
+          <h2 className={styles.contactsTitle}>{t('contacts.pageTitles.title')}</h2>
+        )}
+        {contactsDisplay}
+      </div>
     </div>
   );
 };

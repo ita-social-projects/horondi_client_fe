@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
   root: {
-    maxWidth: '1110px',
     margin: '15px auto',
     borderRadius: '5px'
   },

@@ -1,15 +1,18 @@
 import React from 'react';
 import { useStyles } from './app-footer.styles';
+import { useAppStyles } from '../app/app.styles';
 
 import FooterLists from '../../containers/footer-lists';
 import SocialLinks from '../../containers/social-links';
 
 const AppFooter = () => {
   const styles = useStyles();
+  const appStyles = useAppStyles();
+
   return (
     <div className={styles.root}>
       <div className={styles.footer}>
-        <div className={styles.cardDeck}>
+        <div className={`${appStyles.containerWideApp} ${styles.cardDeck}`}>
           <SocialLinks
             showTitle
             color='white'

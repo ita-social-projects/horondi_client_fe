@@ -11,8 +11,6 @@ const title = {
 
 export const useStyles = makeStyles((theme) => ({
   similarItems: {
-    width: '90%',
-    margin: '0 auto',
     textAlign: 'center',
     paddingTop: '70px'
   },

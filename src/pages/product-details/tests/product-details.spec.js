@@ -16,6 +16,9 @@ const useQueryData = {
 jest.mock('../product-submit/product-submit.styles', () => ({
   useStyles: () => ({})
 }));
+jest.mock('../../../components/app/app.styles', () => ({
+  useAppStyles: () => ({})
+}));
 jest.mock('../../../hooks/use-add-product-to-wishlist-handler', () => ({
   __esModule: true,
   default: () => [true, () => null]

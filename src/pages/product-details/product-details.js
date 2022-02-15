@@ -9,7 +9,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useStyles } from './product-details.styles';
-
+import { useAppStyles } from '../../components/app/app.styles';
 import { defaultProductToSend, TOAST_SETTINGS } from './constants';
 import ProductImages from './product-images';
 import ProductInfo from './product-info';
@@ -39,6 +39,7 @@ const ProductDetails = ({ match }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const [sizeIsNotSelectedError, setSizeIsNotSelectedError] = useState(false);
   const [productToSend, setProductToSend] = useState(defaultProductToSend);
   const [countComments, setCountComments] = useState(0);
@@ -131,8 +132,8 @@ const ProductDetails = ({ match }) => {
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
-    <Card className={styles.container}>
-      <div className={styles.productContainer}>
+    <div className={appStyles.rootApp}>
+      <Card className={`${appStyles.containerApp} ${styles.container} `}>
         <ProductPath category={category} translationsKey={translationsKey} />
         <Link to={pathToCategory} className={styles.backBtn}>
           <ArrowIcon className={styles.arrowIcon} />
@@ -180,13 +181,13 @@ const ProductDetails = ({ match }) => {
             />
           ) : null}
         </div>
-      </div>
-      {product._id ? <SimilarProducts product={product} /> : null}
-      {product._id ? (
-        <Comments productId={product._id} checkCountComments={checkCountComments} />
-      ) : null}
-      <ToastContainer />
-    </Card>
+        {product._id ? <SimilarProducts product={product} /> : null}
+        {product._id ? (
+          <Comments productId={product._id} checkCountComments={checkCountComments} />
+        ) : null}
+        <ToastContainer />
+      </Card>
+    </div>
   );
 };
 

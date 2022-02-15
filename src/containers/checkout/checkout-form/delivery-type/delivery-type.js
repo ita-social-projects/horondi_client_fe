@@ -44,53 +44,51 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
   ));
 
   return (
-    <div className={styles.root}>
-      <div className={styles.deliveryTypeContainer}>
-        <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
-        <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
-          <RadioGroup
-            data-testid='delivery-type'
-            aria-label='Delivery type'
-            name='delivery-type'
-            value={deliveryTypeValue}
-            onChange={(e) => setDeliveryTypeValue(e.target.value)}
+    <div className={styles.deliveryTypeContainer}>
+      <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
+      <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
+        <RadioGroup
+          data-testid='delivery-type'
+          aria-label='Delivery type'
+          name='delivery-type'
+          value={deliveryTypeValue}
+          onChange={(e) => setDeliveryTypeValue(e.target.value)}
+        >
+          {radioButtons}
+        </RadioGroup>
+      </FormControl>
+      {deliveryTypeValue === deliveryTypes.COURIER && (
+        <div>
+          <FormControl
+            error={touched.courierOrganization && !!errors.courierOrganization}
+            variant={TEXT_FIELD_VARIANT.OUTLINED}
+            className={styles.formControl}
           >
-            {radioButtons}
-          </RadioGroup>
-        </FormControl>
-        {deliveryTypeValue === deliveryTypes.COURIER && (
-          <div className={styles.inputWrapper}>
-            <FormControl
-              error={touched.courierOrganization && !!errors.courierOrganization}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              className={styles.formControl}
+            <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
+              {t('checkout.checkoutTextFields.courier')}
+            </InputLabel>
+            <Select
+              label={t('checkout.checkoutTextFields.courier')}
+              className={styles.courierSelect}
+              data-cy='courierOrganization'
+              name='courierOrganization'
+              value={courierOrganization}
+              onChange={(e) => handleCourierOrganizationChange(e.target.value)}
             >
-              <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
-                {t('checkout.checkoutTextFields.courier')}
-              </InputLabel>
-              <Select
-                label={t('checkout.checkoutTextFields.courier')}
-                className={styles.courierSelect}
-                data-cy='courierOrganization'
-                name='courierOrganization'
-                value={courierOrganization}
-                onChange={(e) => handleCourierOrganizationChange(e.target.value)}
-              >
-                {Object.entries(getCourierOrganization).map((value) => (
-                  <MenuItem key={value} value={value[0].toUpperCase()}>
-                    {value[1]}
-                  </MenuItem>
-                ))}
-              </Select>
-              {touched.courierOrganization && errors.courierOrganization && (
-                <div data-cy={CY_CODE_ERR} className={styles.error}>
-                  {t(errors.courierOrganization)}
-                </div>
-              )}
-            </FormControl>
-          </div>
-        )}
-      </div>
+              {Object.entries(getCourierOrganization).map((value) => (
+                <MenuItem key={value} value={value[0].toUpperCase()}>
+                  {value[1]}
+                </MenuItem>
+              ))}
+            </Select>
+            {touched.courierOrganization && errors.courierOrganization && (
+              <div data-cy={CY_CODE_ERR} className={styles.error}>
+                {t(errors.courierOrganization)}
+              </div>
+            )}
+          </FormControl>
+        </div>
+      )}
     </div>
   );
 };

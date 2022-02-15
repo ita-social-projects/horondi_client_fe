@@ -8,10 +8,12 @@ import { useStyles } from './gift-certificate.styles';
 import { validationSchema } from '../../validators/email';
 import { certificateRules } from '../../locales/en/certificate.json';
 import CertificateCheckbox from './certificate-checkbox';
+import { useAppStyles } from '../../components/app/app.styles';
 
 const GiftCertificate = () => {
   const { t } = useTranslation();
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const email = useSelector(({ User }) => User?.userData?.email);
   const [initialValues, setInitialValues] = useState('');
 
@@ -73,33 +75,35 @@ const GiftCertificate = () => {
   ));
 
   return (
-    <div className={styles.root}>
-      <h1 className={styles.pageTitle}>{t('certificate.giftCertificate')}</h1>
-      <h2 className={styles.chooseCertificate}>{t('certificate.chooseCertificate')}</h2>
-      <div className={styles.checkboxWrapper}>{checkboxContent}</div>
-      <div className={styles.lowerWrapper}>
-        <div>{certificateRulesContent}</div>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formWrapper}>
-            <TextField
-              id='email'
-              fullWidth
-              label={t('checkout.checkoutTextFields.email')}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              className={styles.textField}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.email}
-              color={MATERIAL_UI_COLOR.PRIMARY}
-              name='email'
-              error={touched.email && Boolean(t(errors.email))}
-              helperText={touched.email && t(errors.email)}
-            />
-            <Button className={styles.purchaseButton} fullWidth type='submit'>
-              {t('buttons.buyButton')}
-            </Button>
-          </div>
-        </form>
+    <div className={appStyles.rootApp}>
+      <div className={appStyles.containerApp}>
+        <h1 className={styles.pageTitle}>{t('certificate.giftCertificate')}</h1>
+        <h2 className={styles.chooseCertificate}>{t('certificate.chooseCertificate')}</h2>
+        <div className={styles.checkboxWrapper}>{checkboxContent}</div>
+        <div className={styles.lowerWrapper}>
+          <div>{certificateRulesContent}</div>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.formWrapper}>
+              <TextField
+                id='email'
+                fullWidth
+                label={t('checkout.checkoutTextFields.email')}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
+                className={styles.textField}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.email}
+                color={MATERIAL_UI_COLOR.PRIMARY}
+                name='email'
+                error={touched.email && Boolean(t(errors.email))}
+                helperText={touched.email && t(errors.email)}
+              />
+              <Button className={styles.purchaseButton} fullWidth type='submit'>
+                {t('buttons.buyButton')}
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -2,10 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
-    fontFamily: 'Open Sans',
-    width: '80%',
     minHeight: '1200px',
-    margin: '2rem auto',
     boxSizing: 'border-box',
     background: 'none',
     '@media (max-width: 600px)': {
@@ -13,12 +10,6 @@ export const useStyles = makeStyles((theme) => ({
       margin: '0'
     },
     boxShadow: 'none'
-  },
-  productContainer: {
-    padding: '2rem',
-    '@media (max-width: 400px)': {
-      padding: '0.5rem'
-    }
   },
   product: {
     display: 'flex',

@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   container: {
     minHeight: '1200px',
     boxSizing: 'border-box',
+    background: 'none',
     '@media (max-width: 600px)': {
       width: '100%',
       margin: '0'

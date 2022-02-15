@@ -14,10 +14,7 @@ export const useStyles = makeStyles(() => ({
     clear: 'both'
   },
   cardDeck: {
-    maxWidth: 1440,
-    margin: '0 auto',
     display: 'flex',
-    width: '100%',
     boxSizing: 'border-box',
     paddingRight: '100px',
     '& a': {

@@ -13,9 +13,6 @@ export const useStyles = makeStyles((theme) => ({
 
     transition: 'all 0.5s ease-out',
     '& .MuiToolbar-regular': {
-      maxWidth: 1440,
-      width: '100%',
-      margin: '0 auto',
       minHeight: '35px'
     },
     '& .MuiTypography-body1': {

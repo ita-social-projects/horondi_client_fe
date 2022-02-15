@@ -27,5 +27,10 @@ export const useAppStyles = makeStyles((theme) => ({
   containerApp: {
     maxWidth: 1100,
     margin: '0 auto'
+  },
+  containerWideApp: {
+    width: '100%',
+    maxWidth: 1440,
+    margin: '0 auto'
   }
 }));

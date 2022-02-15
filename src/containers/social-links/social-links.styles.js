@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles(() => ({
   cardBody: ({ position, fromSideBar }) => ({
     flex: position === 'center' ? 0 : 1,
     '@media screen and (max-width: 552px)': {
@@ -27,7 +27,13 @@ export const useStyles = makeStyles(({ palette }) => ({
   }),
   cardBodyFooter: {
     flex: 1,
-    padding: '50px 20px 20px'
+    padding: '50px 20px 20px',
+    '@media screen and (max-width: 768px)': {
+      flex: '1 1 50%'
+    },
+    '@media screen and (max-width: 552px)': {
+      flex: '1 1 50%'
+    }
   },
   iconsBox: {
     display: 'flex',

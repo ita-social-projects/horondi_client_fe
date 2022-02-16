@@ -26,7 +26,7 @@ const WishlistHeader = () => {
         setWishlist(data.getWishlistByUserId.products.length);
       }
     } else {
-      setWishlist(localWishlist.products.length);
+      setWishlist(localWishlist.products?.length);
     }
   }, [user, loading, data, localWishlist]);
 

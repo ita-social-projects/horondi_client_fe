@@ -20,7 +20,8 @@ export const useStyles = makeStyles((theme) => ({
   carousel: {
     marginTop: '2rem',
     marginBottom: theme.spacing(4),
-    paddingBottom: '25px'
+    paddingBottom: '25px',
+    paddingTop: '15px'
   },
   title: {
     ...title
@@ -28,7 +29,6 @@ export const useStyles = makeStyles((theme) => ({
   price: {
     display: 'flex',
     whiteSpace: 'nowrap',
-    paddingTop: '2px',
     '& span': {
       paddingTop: '2px'
     }

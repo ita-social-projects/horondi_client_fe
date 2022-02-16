@@ -42,9 +42,6 @@ export const useStyles = makeStyles((theme) => {
         flexDirection: 'column',
         alignItems: 'center'
       },
-      '@media (max-width: 400px)': {
-        marginBottom: '1rem'
-      },
       '@media (max-width: 600px)': {
         '& *': {
           justifyContent: 'space-around'

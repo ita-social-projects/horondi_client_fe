@@ -18,7 +18,7 @@ import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
-import { getConstructorById } from '../../operations/getConstructorById.queries';
+import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import Loader from '../../../../components/loader';
 
 const { pathToProducts } = routes;
@@ -48,35 +48,40 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       changeQuantity(item.id, value);
     }, 500)
   );
-  const isConstructor = Object.keys(item.constructor).length !== 0;
+  const { isFromConstructor } = item;
 
   const {
-    data: constructorByModel,
+    data: product,
     error: errorProduct,
     loading: loadingProduct
-  } = useQuery(isConstructor ? getConstructorById : getProductById, {
+  } = useQuery(isFromConstructor ? getConstructorByModel : getProductById, {
     variables: {
-      id: item.productId
+      id: isFromConstructor ? item.model?._id : item.productId
     }
   });
 
-  const cartItem = isConstructor
-    ? constructorByModel?.getConstructorById
-    : constructorByModel?.getProductById;
+  const constructorCartItem = {
+    ...product?.getConstructorByModel[0],
+    category: { code: 'constructor' }
+  };
 
-  const itemFoto = isConstructor
-    ? cartItem?.model.images.thumbnail
+  const cartItem = isFromConstructor ? constructorCartItem : product?.getProductById;
+
+  const itemFoto = isFromConstructor
+    ? cartItem?.model?.images?.thumbnail
     : cartItem?.images.primary.thumbnail;
 
-  const itemName = isConstructor ? cartItem?.model.translationsKey : cartItem?.translationsKey;
+  const defaultItemName = t(`${cartItem?.translationsKey}.name`);
+  const constructorItemName = t('common.backpackFromConstructor');
+  const itemName = isFromConstructor ? constructorItemName : defaultItemName;
 
-  const itemMaterial = cartItem?.bottomMaterial ? (
+  const itemMaterial = isFromConstructor ? (
     <div className={styles.itemDescription}>
-      {t('cart.bottomMaterial')}: {t(`${cartItem.bottomMaterial.material.translationsKey}.name`)}
+      {t('cart.bottomMaterial')}: {t(`${item.bottom?.translationsKey}.name`)}
     </div>
   ) : (
     <div className={styles.itemDescription}>
-      {t('cart.bottomMaterial')}: {t(`${item.sizeAndPrice.bottomMaterial?.translationsKey}.name`)}
+      {t('cart.bottomMaterial')}: {t(`${cartItem?.bottomMaterial.material.translationsKey}.name`)}
     </div>
   );
 
@@ -92,9 +97,27 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     );
   };
 
-  const itemSize = !isConstructor
+  const defaultProductImg = (
+    <Link to={`${pathToProducts}/${cartItem?._id}`}>
+      <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
+    </Link>
+  );
+  const constructorProductImg = (
+    <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
+  );
+  const productImg = isFromConstructor ? constructorProductImg : defaultProductImg;
+
+  const defaultProductName = (
+    <Link to={`${pathToProducts}/${cartItem?._id}`}>
+      <span className={styles.itemName}>{itemName}</span>
+    </Link>
+  );
+  const constructorProductName = <span className={styles.itemName}>{itemName}</span>;
+  const productName = isFromConstructor ? constructorProductName : defaultProductName;
+
+  const itemSize = !isFromConstructor
     ? cartItem?.sizes && cartItem.sizes.map(mapCallback)
-    : cartItem?.model.sizes && cartItem.model.sizes.map(mapCallback);
+    : cartItem?.model?.sizes && cartItem?.model?.sizes.map(mapCallback);
 
   const { isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
@@ -159,7 +182,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     );
 
   function handleSizeChange(event) {
-    !isConstructor
+    !isFromConstructor
       ? cartItem.sizes &&
         cartItem.sizes.map((cartData) => {
           if (event.target.value === cartData.size._id && firstlyMounted) {
@@ -179,13 +202,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   return cartItem ? (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell classes={{ root: styles.product }} data-cy='cart-item-img'>
-        <Link to={`${pathToProducts}/${cartItem._id}`}>
-          <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
-        </Link>
+        {productImg}
         <div>
-          <Link to={`${pathToProducts}/${cartItem._id}`}>
-            <span className={styles.itemName}>{t(`${itemName}.name`)}</span>
-          </Link>
+          {productName}
           {itemMaterial}
         </div>
       </TableCell>

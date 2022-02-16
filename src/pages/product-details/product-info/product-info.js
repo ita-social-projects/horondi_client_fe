@@ -59,22 +59,26 @@ const ProductInfo = ({ product, countComments, checkDisabledProduct, currency, c
         </div>
       ) : null}
       <div className={styles.look}>
-        <span className={styles.subtitle}>{t('common.color')}</span>
-        {': '}
-        <span className={styles.subtitleBold}>
-          {t(`${mainMaterial.color.translations_key}.name`)}
-        </span>
-        <img
-          className={styles.circle}
-          alt='color'
-          src={Colors[`${product.mainMaterial.color.name[1].value}`]}
-        />
-        <span className={styles.subtitle}>{t('product.pattern')}:</span>
-        <img
-          className={styles.circle}
-          alt='pattern'
-          src={`${IMG_URL}${product.pattern.images.thumbnail}`}
-        />
+        <div className={styles.colorAndPatern}>
+          <span className={styles.subtitle}>{t('common.color')}</span>
+          {': '}
+          <span className={styles.subtitleBold}>
+            {t(`${mainMaterial.color.translations_key}.name`)}
+          </span>
+          <img
+            className={styles.circle}
+            alt='color'
+            src={Colors[`${product.mainMaterial.color.name[1].value}`]}
+          />
+        </div>
+        <div className={styles.colorAndPatern}>
+          <span className={styles.subtitle}>{t('product.pattern')}:</span>
+          <img
+            className={styles.circle}
+            alt='pattern'
+            src={`${IMG_URL}${product.pattern.images.thumbnail}`}
+          />
+        </div>
       </div>
     </div>
   );

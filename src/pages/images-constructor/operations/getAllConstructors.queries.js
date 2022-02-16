@@ -15,6 +15,14 @@ export const getAllConstructors = gql`
         basics {
           _id
           translationsKey
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
+          }
           name {
             lang
             value
@@ -34,6 +42,14 @@ export const getAllConstructors = gql`
         bottoms {
           _id
           translationsKey
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
+          }
           name {
             lang
             value
@@ -65,6 +81,15 @@ export const getAllConstructors = gql`
         patterns {
           _id
           translationsKey
+          features {
+            material {
+              _id
+              name {
+                lang
+                value
+              }
+            }
+          }
           name {
             lang
             value

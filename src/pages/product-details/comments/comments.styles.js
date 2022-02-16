@@ -135,6 +135,9 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiButton-root.Mui-disabled': {
       color: theme.palette.button.disabled.color,
       backgroundColor: theme.palette.button.disabled.backgroundColor
+    },
+    '@media (max-width: 950px)': {
+      justifyContent: 'space-around'
     }
   },
   commentBtn: {

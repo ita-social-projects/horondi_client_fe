@@ -1,18 +1,17 @@
+import React, { useEffect, useMemo } from 'react';
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
-import * as React from 'react';
-import { useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+
 import { IMG_URL } from '../../../../../configs';
 import { useStyles } from '../../../../checkout/checkout-form/checkout-form.styles';
-
 import { getCurrencySign } from '../../../../../utils/currency';
 import { getProductById } from '../../../operations/order.queries';
-import { getConstructorById } from '../../../operations/getConstructorById.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 import { useCart } from '../../../../../hooks/use-cart';
+import { getConstructorByModel } from '../../../operations/getConstructorByModel.query';
 
 const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const styles = useStyles();
@@ -23,27 +22,25 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const currencySign = getCurrencySign(currency);
   const { cartOperations } = useCart();
 
-  const isConstructor = Object.keys(product.constructor).length !== 0;
+  const { isFromConstructor, sizeAndPrice } = product;
 
   const {
     data: dataProduct,
     error: errorProduct,
     loading: loadingProduct
-  } = useQuery(isConstructor ? getConstructorById : getProductById, {
+  } = useQuery(isFromConstructor ? getConstructorByModel : getProductById, {
     variables: {
-      id: product?.productId
+      id: isFromConstructor ? product?.model?._id : product?.productId
     }
   });
 
   const { isLoading, isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
-  const orderItem = isConstructor ? dataProduct?.getConstructorById : dataProduct?.getProductById;
-
-  const { sizeAndPrice } = product;
+  const orderItem = isFromConstructor ? dataProduct?.getConstructorByModel : dataProduct?.getProductById;
 
   const calculatePrice = useMemo(() => {
     const { size } = sizeAndPrice;
-    const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
+    const currentSize = orderItem?.sizes?.find((item) => item.size._id === size._id);
 
     if (promoCode) {
       const { categories, discount } = promoCode.getPromoCodeByCode;
@@ -59,16 +56,28 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
     return currentSize?.price;
   }, [orderItem, promoCode, sizeAndPrice]);
 
-  useEffect(() => {
-    const { price } = sizeAndPrice;
+  const productName = isFromConstructor
+    ? t('common.backpackFromConstructor')
+    : t(`${orderItem?.translationsKey}.name`);
 
-    if (!isConstructor && orderItem) {
-      setProductPrices((prevState) => [...prevState, calculatePrice]);
+  const bottomMaterialName = t(
+    `${
+      isFromConstructor
+        ? product.bottom.translationsKey
+        : orderItem?.bottomMaterial.material.translationsKey
+    }.name`
+  );
+
+  useEffect(() => {
+    const { size, price } = sizeAndPrice;
+    if (!isFromConstructor && orderItem) {
+      const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
+      setProductPrices((prevState) => [...prevState, currentSize?.price]);
     }
-    if (isConstructor && orderItem) {
+    if (isFromConstructor && orderItem) {
       setProductPrices((prevState) => [...prevState, price]);
     }
-  }, [setProductPrices, product, orderItem, sizeAndPrice, isConstructor, calculatePrice]);
+  }, [setProductPrices, product, orderItem, sizeAndPrice, isFromConstructor, calculatePrice]);
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
@@ -77,33 +86,16 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
       <Typography component='div'>x {product.quantity}</Typography>
       <img
         className={styles.yourOrderListImg}
-        src={`${IMG_URL}${
-          isConstructor ? orderItem?.model.images.thumbnail : orderItem?.images.primary.thumbnail
-        }`}
+        src={`${IMG_URL}${orderItem?.images?.primary.thumbnail}`}
         alt='product-img'
       />
       <ListItemText
         className={styles.yourOrderListItemDescriptionContainer}
-        primary={
-          <div className={styles.yourOrderListItemDescriptionPrimary}>
-            {t(
-              `${
-                isConstructor ? orderItem?.model.translationsKey : orderItem?.translationsKey
-              }.name`
-            )}
-          </div>
-        }
+        primary={<div className={styles.yourOrderListItemDescriptionPrimary}>{productName}</div>}
         secondary={
           <Typography className={styles.yourOrderListItemDescriptionSecondary} component='div'>
             <div>
-              {t('product.productDescription.bottomMaterial')}:{' '}
-              {t(
-                `${
-                  isConstructor
-                    ? sizeAndPrice.bottomMaterial?.translationsKey
-                    : orderItem?.bottomMaterial.material.translationsKey
-                }.name`
-              )}
+              {t('product.productDescription.bottomMaterial')}: {bottomMaterialName}
             </div>
             <div>
               {t('common.size')}:{sizeAndPrice.size.name}

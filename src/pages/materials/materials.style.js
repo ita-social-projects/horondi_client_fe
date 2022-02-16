@@ -5,14 +5,21 @@ export const useStyles = makeStyles(() => ({
     paddingTop: 30,
     '& h1': {
       textAlign: 'center',
-      fontSize: '45px'
+      fontSize: '45px',
+      '@media (max-width: 670px)': {
+        fontSize: '30px'
+      }
     },
     '& > h2, h3': {
       textDecoration: 'underline orangered',
       textAlign: 'left'
     },
     '& h3': {
-      fontSize: '30px'
+      fontSize: '30px',
+      '@media (max-width: 670px)': {
+        textAlign: 'center',
+        fontSize: '20px'
+      }
     },
     '& > p > strong': {
       margin: 0,
@@ -23,12 +30,22 @@ export const useStyles = makeStyles(() => ({
       fontWeight: 'bold',
       zIndex: 1
     },
+    '& div': {
+      width: 320
+    },
+    '& p': {
+      '@media (max-width: 670px)': {
+        lineHeight: '1rem',
+        textAlign: 'justify'
+      }
+    },
     '& .editor-img ': {
       width: 200,
       float: ' left',
       margin: '0 30px 30px 0',
-      '@media (max-width: 768px)': {
-        width: '100%'
+      '@media (max-width: 670px)': {
+        width: '100px',
+        margin: 3
       }
     },
     '.sliderImage img': {

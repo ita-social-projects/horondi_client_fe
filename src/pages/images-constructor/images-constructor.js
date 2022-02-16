@@ -93,7 +93,7 @@ const ImagesConstructor = () => {
     const createImagesArray = (values) => {
       const result = [];
       Object.keys(values).forEach((key) => {
-        if (key === 'patterns' && constructorValues.patterns !== undefined)
+        if (key === 'pattern' && constructorValues.pattern !== undefined)
           result.unshift(values[key].constructorImg);
         else
           typeof values[key] === 'object' &&
@@ -104,7 +104,7 @@ const ImagesConstructor = () => {
       return result;
     };
 
-    if (constructorValues.basics) {
+    if (constructorValues.basic) {
       loadImages(createImagesArray(constructorValues)).then((loadedImages) => {
         mergeImages(loadedImages, canvas.current, canvasW, canvasH);
       });
@@ -117,9 +117,9 @@ const ImagesConstructor = () => {
 
     setAllPrice(
       Object.keys(constructorValues).reduce((acc, key) => {
-        if (key === 'patterns' && constructorValues.patterns !== undefined)
+        if (key === 'pattern' && constructorValues.pattern !== undefined)
           acc.pattern = getPrice(currency, key);
-        if (key === 'bottoms') acc.bottom = getPrice(currency, key);
+        if (key === 'bottom') acc.bottom = getPrice(currency, key);
         return acc;
       }, {})
     );
@@ -135,11 +135,11 @@ const ImagesConstructor = () => {
     return constructorEndPrice(+defaultPrice + allPrices.bottom);
   }
 
-  const costPatternUAH = constructorValues.patterns
-    ? constructorValues.patterns.additionalPrice[0].value
+  const costPatternUAH = constructorValues.pattern
+    ? constructorValues.pattern.additionalPrice[0].value
     : null;
-  const costPatternUSD = constructorValues.patterns
-    ? constructorValues.patterns.additionalPrice[1].value
+  const costPatternUSD = constructorValues.pattern
+    ? constructorValues.pattern.additionalPrice[1].value
     : null;
 
   const sizeAndPrice = {
@@ -148,23 +148,22 @@ const ImagesConstructor = () => {
         value:
           +CONSTRUCTOR_DEFAULT_PRICE[0] +
           costPatternUAH +
-          constructorValues.bottoms.additionalPrice[0].value,
+          constructorValues.bottom.additionalPrice[0].value,
         currency: 'UAH'
       },
       {
         value:
           +CONSTRUCTOR_DEFAULT_PRICE[1] +
           costPatternUSD +
-          constructorValues.bottoms.additionalPrice[1].value,
+          constructorValues.bottom.additionalPrice[1].value,
         currency: 'USD'
       }
     ],
     size: {
-      available: constructorValues.sizes.available,
-      name: constructorValues.sizes.name,
-      _id: constructorValues.sizes._id
-    },
-    bottomMaterial: constructorValues.bottoms
+      available: constructorValues.size.available,
+      name: constructorValues.size.name,
+      _id: constructorValues.size._id
+    }
   };
 
   return (
@@ -201,20 +200,20 @@ const ImagesConstructor = () => {
                 className={styles.selectItem}
                 label='title'
                 data-cy='basics'
-                name='basics'
-                value={constructorValues.basics._id}
+                name='basic'
+                value={constructorValues.basic._id}
                 onChange={(e) =>
                   setConstructorValues({
                     ...constructorValues,
-                    basics: currentConstructorModel.current.basics.find(
-                      (basics) => basics._id === e.target.value
+                    basic: currentConstructorModel.current.basics.find(
+                      (basic) => basic._id === e.target.value
                     )
                   })
                 }
               >
-                {currentConstructorModel.current.basics.map((basics) => (
-                  <MenuItem className={styles.menuItem} key={basics._id} value={basics._id}>
-                    {t(`${basics.translationsKey}.name`)}
+                {currentConstructorModel.current.basics.map((basic) => (
+                  <MenuItem className={styles.menuItem} key={basic._id} value={basic._id}>
+                    {t(`${basic.translationsKey}.name`)}
                   </MenuItem>
                 ))}
               </Select>
@@ -226,17 +225,17 @@ const ImagesConstructor = () => {
                 className={styles.selectItem}
                 label='title'
                 name='patern'
-                value={constructorValues.patterns?._id || ''}
+                value={constructorValues.pattern?._id || ''}
                 onChange={(e) => {
                   setConstructorValues({
                     ...constructorValues,
-                    patterns: currentConstructorModel.current.patterns.find(
+                    pattern: currentConstructorModel.current.patterns.find(
                       (pattern) => pattern._id === e.target.value
                     )
                   });
                   setAllPrice((prevState) => ({
                     ...prevState,
-                    pattern: constructorValues.patterns.additionalPrice[currency].value
+                    pattern: constructorValues.pattern.additionalPrice[currency].value
                   }));
                 }}
               >
@@ -255,17 +254,17 @@ const ImagesConstructor = () => {
                 label='title'
                 data-cy='bottom'
                 name='bottom'
-                value={constructorValues.bottoms._id}
+                value={constructorValues.bottom._id}
                 onChange={(e) => {
                   setConstructorValues({
                     ...constructorValues,
-                    bottoms: currentConstructorModel.current.bottoms.find(
+                    bottom: currentConstructorModel.current.bottoms.find(
                       (bottom) => bottom._id === e.target.value
                     )
                   });
                   setAllPrice((prevState) => ({
                     ...prevState,
-                    bottom: constructorValues.bottoms.additionalPrice[currency].value
+                    bottom: constructorValues.bottom.additionalPrice[currency].value
                   }));
                 }}
               >
@@ -284,12 +283,12 @@ const ImagesConstructor = () => {
                 label='title'
                 data-cy='size'
                 name='size'
-                value={constructorValues.sizes._id}
+                value={constructorValues.size._id}
                 onChange={(e) =>
                   setConstructorValues({
                     ...constructorValues,
-                    sizes: currentConstructorModel.current.model.sizes.find(
-                      (sizes) => sizes._id === e.target.value
+                    size: currentConstructorModel.current.model.sizes.find(
+                      (size) => size._id === e.target.value
                     )
                   })
                 }
@@ -322,7 +321,7 @@ const ImagesConstructor = () => {
           </form>
 
           <div className={styles.imageContainer}>
-            {!constructorValues.basics && <Loader />}
+            {!constructorValues.basic && <Loader />}
             <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
           </div>
 

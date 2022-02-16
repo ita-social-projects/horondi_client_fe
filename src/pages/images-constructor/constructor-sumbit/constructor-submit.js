@@ -25,7 +25,7 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
 
   const { t } = useTranslation();
 
-  const isItemInCart = isInCart(constructorValues._id, constructorValues.sizes._id);
+  const isItemInCart = isInCart(constructorValues._id, constructorValues.size._id);
 
   const TOAST_SETTINGS = {
     autoClose: 3000,
@@ -48,10 +48,11 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
     if (constructorValues) {
       const newCart = {
         id: Date.now(),
-        productId: constructorValues._id,
+        ...constructorValues,
         sizeAndPrice,
         quantity: 1,
-        constructor: { isConstructor: true }
+        isFromConstructor: true,
+        category: 'constructor'
       };
 
       addToCart(newCart);

@@ -20,18 +20,33 @@ export const useStyles = makeStyles(({ palette }) => ({
   chooseCertificate: {
     fontSize: '24px',
     fontWeight: 'bold',
-    marginTop: '0px'
+    marginTop: '0px',
+    '@media (max-width: 420px)': {
+      display: 'flex',
+      justifyContent: 'center'
+    }
   },
   checkboxWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 420px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }
   },
   lowerWrapper: {
     gap: 32,
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: '40px'
+    marginTop: '40px',
+    marginBottom: '128px',
+    '@media (max-width: 420px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }
   },
   formWrapper: {
     display: 'flex',

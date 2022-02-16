@@ -21,6 +21,7 @@ export const getUserOrdersQuery = gql`
           }
           product {
             _id
+            isFromConstructor
             translationsKey
             model {
               sizes {

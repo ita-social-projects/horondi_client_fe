@@ -50,7 +50,7 @@ const SimilarProducts = ({ cartList, product }) => {
     const checkPrice = () =>
       availableSize ? (
         <div className={styles.price}>
-          {t('product.priceFrom') + Math.round(availableSize)}
+          {Math.round(availableSize)}
           <span>{currencySign} </span>
         </div>
       ) : (

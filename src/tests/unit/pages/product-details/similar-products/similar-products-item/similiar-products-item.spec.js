@@ -10,6 +10,11 @@ import { getImage } from '../../../../../../utils/imageLoad';
 
 const { pathToProducts } = routes;
 
+jest.mock(
+  '../../../../../../pages/product-details/similar-products/similar-products-item/similar-products-item.styles',
+  () => ({ useStyles: () => ({}) })
+);
+
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: () => [{ setImage: [{}] }, () => null]

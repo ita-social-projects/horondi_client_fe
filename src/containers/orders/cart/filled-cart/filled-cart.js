@@ -62,43 +62,41 @@ const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
   }
 
   const onGoToCheckout = async () => {
-    if (user) {
-      const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
+    const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
 
-      for (const item of itemsFromConstructor) {
-        const input = {
-          product: {
-            name: item.name,
-            model: item.model?._id,
-            pattern: item.pattern?._id,
-            mainMaterial: {
-              material: item.basic?.features.material._id,
-              color: item.basic?.features.color._id
-            },
-            bottomMaterial: {
-              material: item.bottom?.features.material._id,
-              color: item.bottom?.features.color._id
-            },
-            sizes: [item.sizeAndPrice.size._id],
-            basePrice: item.sizeAndPrice.price.find((p) => p.currency === 'USD').value
+    for (const item of itemsFromConstructor) {
+      const input = {
+        product: {
+          name: item.name,
+          model: item.model?._id,
+          pattern: item.pattern?._id,
+          mainMaterial: {
+            material: item.basic?.features.material._id,
+            color: item.basic?.features.color._id
           },
-          upload: []
-        };
+          bottomMaterial: {
+            material: item.bottom?.features.material._id,
+            color: item.bottom?.features.color._id
+          },
+          sizes: [item.sizeAndPrice.size._id],
+          basePrice: item.sizeAndPrice.price.find((p) => p.currency === 'USD').value
+        },
+        upload: []
+      };
 
-        setProductFromConstructorLoading(true);
+      setProductFromConstructorLoading(true);
 
-        const { data } = await addConstructorProduct({
-          variables: {
-            product: input.product,
-            upload: input.upload
-          }
-        });
+      const { data } = await addConstructorProduct({
+        variables: {
+          product: input.product,
+          upload: input.upload
+        }
+      });
 
-        setCartItem(item.id, {
-          ...item,
-          productId: data.addProductFromConstructor._id
-        });
-      }
+      setCartItem(item.id, {
+        ...item,
+        productId: data.addProductFromConstructor._id
+      });
     }
 
     history.push(pathToCheckout, { promoCode });
@@ -163,19 +161,9 @@ const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
                   {price}
                 </div>
               </div>
-              <Link
-                to={{
-                  props: promoCode
-                }}
-              >
-                <Button
-                  variant='contained'
-                  className={styles.ordersButton}
-                  onClick={onGoToCheckout}
-                >
-                  {t('cart.checkout')}
-                </Button>
-              </Link>
+              <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
+                {t('cart.checkout')}
+              </Button>
             </div>
           </div>
         </div>

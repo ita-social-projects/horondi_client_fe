@@ -35,7 +35,8 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     paddingLeft: '20px',
     '@media (max-width: 600px)': {
-      padding: '0px'
+      padding: '0px',
+      justifyContent: 'space-between'
     }
   },
   center: {

@@ -67,10 +67,14 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   colorAndPatern: {
-    margin: '10px 0',
-    display: 'flex',
+    margin: '20px 0',
+    display: 'block',
     alignItems: 'center',
-    gap: '5px'
+    gap: '5px',
+    '@media (max-width: 600px)': {
+      display: 'flex',
+      margin: '10px 0'
+    }
   },
   subtitle: {
     alignSelf: 'center',

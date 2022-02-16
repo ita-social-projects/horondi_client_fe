@@ -31,7 +31,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   sticky: {
     transform: 'translateY(-35px)',
-    transition: 'all 0.5s ease-out'
+    transition: 'all 0.5s ease-out',
+    '@media (max-width: 485px)': {
+      transform: 'translateY(-48px)'
+    }
   },
   headerspace: {
     display: 'block',
@@ -40,6 +43,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#F1F1F1',
     '@media (max-width: 768px)': {
       height: '72px'
+    },
+    '@media (max-width: 480px)': {
+      display: 'none'
     }
   },
   upperToolbar: {
@@ -47,7 +53,10 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0px 80px',
-    borderBottom: '1px solid white'
+    borderBottom: '1px solid white',
+    '@media (max-width: 485px)': {
+      display: 'none'
+    }
   },
   theme: {
     display: 'flex',
@@ -128,6 +137,9 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       marginLeft: '0px',
       fontSize: '1rem'
+    },
+    '@media (max-width: 580px)': {
+      display: 'none'
     }
   },
   menuButton: {
@@ -155,6 +167,5 @@ export const useStyles = makeStyles((theme) => ({
     '@media (min-width: 900px)': {
       width: '3px'
     }
-  },
-  rightBar: {}
+  }
 }));

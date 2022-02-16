@@ -37,8 +37,15 @@ const AppHeader = () => {
   });
 
   useLayoutEffect(() => {
+    let lastScrollTop = 0;
     window.addEventListener('scroll', () => {
-      window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      const currPoint = window.scrollY;
+      if (currPoint > lastScrollTop) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+      lastScrollTop = currPoint <= 0 ? 0 : currPoint;
     });
   }, []);
 

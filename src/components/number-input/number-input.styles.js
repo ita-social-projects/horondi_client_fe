@@ -4,7 +4,10 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiOutlinedInput-root': {
       fontSize: '20px',
-      fontWeight: 400
+      fontWeight: 400,
+      '@media (max-width: 420px)': {
+        fontSize: '16px'
+      }
     },
     '& input::-webkit-outer-spin-button': {
       WebkitAppearance: 'none',

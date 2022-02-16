@@ -44,7 +44,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     color: palette.textColor,
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '80%'
+      width: '89%'
     }
   },
   orderCommentTitle: {
@@ -59,7 +59,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '80%',
+      width: '89%',
       margin: 0
     }
   },
@@ -179,8 +179,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   inputData: {
-    marginBottom: 10
+    marginBottom: 10,
+    '@media (max-width: 768px)': {
+      width: '100%'
+    }
   },
+
   checkoutTitleInfo: {
     display: 'flex',
     flexDirection: 'column',

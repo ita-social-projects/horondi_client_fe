@@ -6,14 +6,14 @@ export const useStyles = makeStyles((theme) => ({
     background: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${BG}) no-repeat `,
     backgroundSize: 'cover',
     position: 'relative',
-
-    height: '100vh',
+    padding: '50px 0',
     '@media (max-width: 525px)': {
-      background: 'none'
+      background: 'none',
+      padding: 0
     }
   },
   outerForm: {
-    height: '100vh',
+    minHeight: 'calc(100vh - 320px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

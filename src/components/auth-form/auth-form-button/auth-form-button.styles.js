@@ -10,6 +10,9 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       background: theme.palette.textColor,
       color: theme.palette.backgroundColor
+    },
+    '&:disabled': {
+      color: theme.palette.button.disabled.backgroundColor
     }
   }
 }));

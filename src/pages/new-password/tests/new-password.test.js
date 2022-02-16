@@ -10,6 +10,10 @@ Enzyme.configure({ adapter: new Adapter() });
 jest.mock('../../new-password/new-password.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 
+jest.mock('../../../components/auth-form/auth-form-button/auth-form-button.styles', () => ({
+  useStyles: () => ({})
+}));
+
 const dispatch = jest.fn();
 const state = {
   userError: '',

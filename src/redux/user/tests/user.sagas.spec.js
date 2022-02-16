@@ -29,7 +29,9 @@ import {
   upload,
   user,
   userId,
-  userWithProducts
+  userWithProducts,
+  // new:
+  wishlist
 } from './user.mocks';
 import {
   handleGoogleUserLogin,
@@ -59,7 +61,9 @@ import {
   registerUser,
   resetPassword,
   sendEmailConfirmation,
-  updateUserById
+  updateUserById,
+  //
+  getWishlistByUserId
 } from '../user.operations';
 import routes from '../../../configs/routes';
 import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../../configs';
@@ -74,9 +78,10 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getGoogleUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(getWishlistByUserId, user._id), wishlist]
       ])
-      .put(setUser({ ...user, purchasedProducts }))
+      .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,

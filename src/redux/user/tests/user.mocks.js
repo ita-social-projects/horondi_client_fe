@@ -46,10 +46,15 @@ export const user = {
 };
 
 export const purchasedProducts = [];
+// new:
+export const wishlist = [];
+//
 
 export const userWithProducts = {
   ...user,
-  purchasedProducts
+  purchasedProducts,
+  // new:
+  wishlist
 };
 
 export const pagination = {

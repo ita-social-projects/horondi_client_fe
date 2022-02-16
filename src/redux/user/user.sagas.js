@@ -52,8 +52,9 @@ import {
   USER_IS_BLOCKED,
   USER_TOKENS,
   AUTH_ERRORS,
-  newCartKey
-  , WISHLIST_KEY } from '../../configs';
+  newCartKey,
+  WISHLIST_KEY
+} from '../../configs';
 import routes from '../../configs/routes';
 import {
   clearLocalStorage,

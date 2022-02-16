@@ -157,7 +157,7 @@ const ProductDetails = ({ match }) => {
               currentSize={productToSend.options.size}
               sizeIsNotSelectedError={sizeIsNotSelectedError}
             />
-            <div className={styles.test}>
+            <div className={styles.submitWrapper}>
               <ProductSubmit
                 disabled={!checkDisabledProduct()}
                 product={product}

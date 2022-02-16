@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 500px)': {
       justifyContent: 'center',
-      padding: theme.spacing(2)
+      marginBottom: '10px'
     },
     '& img': {
       transform: 'scale(1)',

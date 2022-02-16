@@ -51,7 +51,8 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
         ...constructorValues,
         sizeAndPrice,
         quantity: 1,
-        isFromConstructor: true
+        isFromConstructor: true,
+        category: 'constructor'
       };
 
       addToCart(newCart);

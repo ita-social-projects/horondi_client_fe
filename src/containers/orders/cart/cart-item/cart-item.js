@@ -60,7 +60,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     }
   });
 
-  const cartItem = isFromConstructor ? product?.getConstructorByModel[0] : product?.getProductById;
+  const constructorCartItem = {
+    ...product?.getConstructorByModel[0],
+    category: { code: 'constructor' }
+  };
+
+  const cartItem = isFromConstructor ? constructorCartItem : product?.getProductById;
 
   const itemFoto = isFromConstructor
     ? cartItem?.model?.images?.thumbnail

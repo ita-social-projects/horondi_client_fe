@@ -139,12 +139,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       }
     }
 
-    return (
-      <div>
-        {/* {currencySign} */}
-        {Math.round(calcPriceForCart(currentPrice, inputValue))}
-      </div>
-    );
+    return <div>{Math.round(calcPriceForCart(currentPrice, inputValue))}</div>;
   };
 
   if (isError)

@@ -38,11 +38,20 @@ const ProductListItem = ({ product }) => {
     return () => setImage(null);
   }, [isLightTheme, product.images.primary.small]);
 
-  const checkSizes = () => {
-    const availableSizes = product.sizes.filter(
-      ({ size, price }) => size.available && { size, price }
-    );
-    return availableSizes && availableSizes[0] ? (
+  const availableSizes = product.sizes.filter(
+    ({ size, price }) => size.available && { size, price }
+  );
+
+  const checkDisabledProduct = () =>
+    availableSizes &&
+    availableSizes[0] &&
+    product.available &&
+    product.mainMaterial.material.available &&
+    product.bottomMaterial.material.available &&
+    product.innerMaterial.material.available;
+
+  const checkSizes = () =>
+    checkDisabledProduct() ? (
       <div className={styles.price}>
         <div>
           {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
@@ -51,15 +60,15 @@ const ProductListItem = ({ product }) => {
         <div className={styles.currency}>{currencySign}</div>
       </div>
     ) : (
-      <div>{t('product.sizeNotAvailable')}</div>
+      <div className={styles.unavailableText}>{t('product.unavailable')}</div>
     );
-  };
 
   const styles = useStyles({ image });
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
+          {checkDisabledProduct() ? '' : <div className={styles.unavailableContainer} />}
           <div className={styles.name}>
             <StarRating size='small' readOnly rate={product.rate} />
             <div>

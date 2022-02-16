@@ -50,6 +50,9 @@ export const getFilteredProductsQuery = gql`
             value
           }
           mainMaterial {
+            material {
+              available
+            }
             color {
               _id
               name {
@@ -60,6 +63,16 @@ export const getFilteredProductsQuery = gql`
                 lang
                 value
               }
+            }
+          }
+          bottomMaterial {
+            material {
+              available
+            }
+          }
+          innerMaterial {
+            material {
+              available
             }
           }
           images {
@@ -81,6 +94,7 @@ export const getFilteredProductsQuery = gql`
             currency
           }
           availableCount
+          available
           rate
           translationsKey
           sizes {

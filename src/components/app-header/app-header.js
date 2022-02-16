@@ -40,11 +40,7 @@ const AppHeader = () => {
     let lastScrollTop = 0;
     window.addEventListener('scroll', () => {
       const currPoint = window.scrollY;
-      if (currPoint > lastScrollTop) {
-        setSticky(true);
-      } else {
-        setSticky(false);
-      }
+      currPoint > lastScrollTop ? setSticky(true) : setSticky(false);
       lastScrollTop = currPoint <= 0 ? 0 : currPoint;
     });
   }, []);

@@ -23,6 +23,7 @@ const routes = {
   pathToCart: '/cart',
   pathToMain: '/',
   pathToThanks: '/thanks',
+  pathToCertificateThanks: '/certificatethanks',
   pathToProfile: '/profile',
   pathToTerms: '/pages/terms',
   pathToUserAgreement: '/pages/user-agreement',

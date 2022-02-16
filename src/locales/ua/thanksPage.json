@@ -10,6 +10,12 @@
     "thanksCard": {
         "thanksForBuy": "Дякуємо за Вашу покупку!",
         "orderNumber": "Замовленя №",
+        "certificateName": "Код сертифікату: ",
+        "certificatePrice": "Ціна: ",
+        "email": "Пошта: ",
+        "certificatePaymentStatus": "Статус оплати: ",
+        "dateStart": "Початкова дата: ",
+        "dateEnd": "Кінцева дата: ",
         "customer": "Замовник: ",
         "phone": "Телефон: ",
         "deliveryType": "Тип доставки: ",

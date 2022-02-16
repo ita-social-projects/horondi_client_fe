@@ -33,6 +33,7 @@ const {
   pathToChosenPage,
   pathToConfirmationToken,
   pathToRecovery,
+  pathToCertificateThanks,
   pathToRecoveryToken,
   pathToProfile,
   pathToOrderHistory,
@@ -56,6 +57,7 @@ const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
 const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
+const CertificateThanksPage = lazy(() => import('../pages/certificate-thanks-page'));
 const Cart = lazy(() => import('../pages/cart'));
 const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
@@ -111,6 +113,7 @@ const Routes = () => {
                 redirectTo={pathToMain}
               />
               <Route path={pathToThanks} component={ThanksPage} />
+              <Route path={pathToCertificateThanks} component={CertificateThanksPage} />
               <Route path={pathToCart} exact component={Cart} />
               <Route path={pathToCheckout} exact component={Checkout} />
               <Route

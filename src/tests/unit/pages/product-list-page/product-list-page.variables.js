@@ -35,7 +35,20 @@ const items = [
         value: 'Rolltop blue'
       }
     ],
+    bottomMaterial: {
+      material: {
+        available: true
+      }
+    },
+    innerMaterial: {
+      material: {
+        available: true
+      }
+    },
     mainMaterial: {
+      material: {
+        available: true
+      },
       color: {
         _id: '6043a9bb3e06ad3edcdb7b0d',
         name: [
@@ -91,6 +104,7 @@ const items = [
       }
     ],
     availableCount: 0,
+    available: true,
     rate: 5,
     translationsKey: '61af5b8d97e964ccc50e2c27',
     sizes: [
@@ -160,7 +174,20 @@ const items = [
         value: 'Rolltop blue'
       }
     ],
+    bottomMaterial: {
+      material: {
+        available: true
+      }
+    },
+    innerMaterial: {
+      material: {
+        available: true
+      }
+    },
     mainMaterial: {
+      material: {
+        available: true
+      },
       color: {
         _id: '6043a9bb3e06ad3edcdb7b0d',
         name: [
@@ -216,6 +243,7 @@ const items = [
       }
     ],
     availableCount: 0,
+    available: true,
     rate: 5,
     translationsKey: '61af5b8d97e964ccc50e2c27',
     sizes: [

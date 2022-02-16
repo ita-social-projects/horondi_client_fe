@@ -52,7 +52,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   unavailableText: {
     fontSize: '10px',
     lineHeight: '28px',
-    letterSpacing: '0.0015em'
+    letterSpacing: '0.0015em',
+    textTransform: 'capitalize'
   },
   price: {
     marginLeft: '10px',

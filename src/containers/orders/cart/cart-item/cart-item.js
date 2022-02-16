@@ -61,7 +61,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   });
 
   const constructorCartItem = {
-    ...product?.getConstructorByModel[0],
+    ...product?.getConstructorByModel,
     category: { code: 'constructor' }
   };
 

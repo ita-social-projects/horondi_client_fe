@@ -36,7 +36,9 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   const { isLoading, isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
-  const orderItem = isFromConstructor ? dataProduct?.getConstructorByModel : dataProduct?.getProductById;
+  const orderItem = isFromConstructor
+    ? dataProduct?.getConstructorByModel[0]
+    : dataProduct?.getProductById;
 
   const calculatePrice = useMemo(() => {
     const { size } = sizeAndPrice;

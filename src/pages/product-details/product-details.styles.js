@@ -15,12 +15,16 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     '@media (max-width: 1150px)': {
-      display: 'block'
+      display: 'block',
+      padding: '10px'
     }
   },
-  test: {
+  submitWrapper: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 600px)': {
+      padding: '10px 0'
+    }
   },
   productDetails: {
     flex: '1 1 50%',
@@ -31,11 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     paddingLeft: '20px',
     '@media (max-width: 600px)': {
-      alignItems: 'center',
-      textAlign: 'center'
-    },
-    '@media (max-width: 300px)': {
-      padding: '0'
+      padding: '0px'
     }
   },
   center: {

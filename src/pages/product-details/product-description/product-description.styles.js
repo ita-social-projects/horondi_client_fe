@@ -3,7 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(({ palette }) => ({
   details: {
     flex: '0 1 50%',
-    paddingTop: '50px'
+    paddingTop: '50px',
+    '@media (max-width: 600px)': {
+      paddingTop: '10px'
+    }
   },
   description: {
     borderBottom: `1px solid ${palette.productDescription.borderColor}`,

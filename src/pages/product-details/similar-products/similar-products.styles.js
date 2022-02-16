@@ -12,7 +12,10 @@ const title = {
 export const useStyles = makeStyles((theme) => ({
   similarItems: {
     textAlign: 'center',
-    paddingTop: '70px'
+    paddingTop: '70px',
+    '@media (max-width: 600px)': {
+      paddingTop: '10px'
+    }
   },
   carousel: {
     marginTop: '2rem',

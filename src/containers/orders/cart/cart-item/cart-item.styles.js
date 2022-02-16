@@ -3,7 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 const name = {
   fontWeight: '700',
   fontSize: '24px',
-  lineHeight: '32px'
+  lineHeight: '32px',
+  '@media (max-width: 420px)': {
+    fontSize: '16px',
+    fontWeight: '700'
+  }
 };
 const description = {
   fontWeight: '400',
@@ -19,7 +23,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   itemDescription: {
     ...description,
-    color: palette.textColor
+    color: palette.textColor,
+    '@media (max-width: 420px)': {
+      fontSize: '12px'
+    }
   },
   itemName: {
     ...name,
@@ -27,15 +34,27 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   product: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 420px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }
   },
   price: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     '& svg': {
-      marginRight: '5px',
-      fontSize: '20px'
+      marginRight: '3px',
+      fontSize: '18px'
+    },
+    '@media (max-width: 420px)': {
+      fontSize: '14px',
+      '& svg': {
+        marginRight: '2px',
+        fontSize: '14px'
+      }
     }
   },
   promo: {
@@ -52,6 +71,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '& .MuiSelect-select:focus': {
       background: 'transparent'
+    },
+    '@media (max-width: 420px)': {
+      fontSize: '14px',
+      width: '55px',
+      height: '35px'
     }
   },
   loadingBar: {
@@ -62,5 +86,12 @@ export const useStyles = makeStyles(({ palette }) => ({
   deleteIcon: {
     color: palette.cart.iconColor,
     cursor: 'pointer'
+  },
+  selectInputStyle: {
+    '@media (max-width: 420px)': {
+      fontSize: '14px',
+      width: '55px',
+      height: '35px'
+    }
   }
 }));

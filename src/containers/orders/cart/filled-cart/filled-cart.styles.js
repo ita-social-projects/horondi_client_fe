@@ -11,7 +11,10 @@ const promoInput = {
   height: '48px',
   fontWeight: '400',
   fontSize: '16px',
-  lineHeight: '24px'
+  lineHeight: '24px',
+  '@media (max-width: 420px)': {
+    fontSize: '11px'
+  }
 };
 const totalWrapper = {
   display: 'flex',
@@ -110,6 +113,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       width: '100%',
       flexDirection: 'column',
       justifyContent: 'center'
+    },
+    '@media (max-width: 420px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   },
   totalPrice: {

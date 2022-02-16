@@ -63,6 +63,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontWeight: 600,
       lineHeight: '20px',
       textAlign: 'center'
+    },
+    '@media (max-width: 420px)': {
+      '& >th': {
+        verticalAlign: 'text-top'
+      }
     }
   }
 }));

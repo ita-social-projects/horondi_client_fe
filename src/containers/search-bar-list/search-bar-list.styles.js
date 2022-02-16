@@ -2,16 +2,20 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
   searchBarList: {
-    width: 450,
+    width: '100%',
     height: 'fit-content',
     maxHeight: '100vh',
     minHeight: '150px',
     overflowY: 'auto',
     position: 'absolute',
-    top: 71,
+    top: 96,
     right: 0,
     backgroundColor: 'white',
-    zIndex: 10000
+    zIndex: 10000,
+    '@media (min-width: 555px)': {
+      top: 52,
+      width: '450px'
+    }
   },
   emptyList: {
     position: 'absolute',

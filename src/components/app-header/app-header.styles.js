@@ -13,7 +13,10 @@ export const useStyles = makeStyles((theme) => ({
 
     transition: 'all 0.5s ease-out',
     '& .MuiToolbar-regular': {
-      minHeight: '35px'
+      minHeight: '35px',
+      padding: 0,
+      width: '95%',
+      margin: 'auto'
     },
     '& .MuiTypography-body1': {
       color: 'rgba(254, 254, 254, 0.75)'
@@ -21,19 +24,14 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       position: 'fixed',
       top: 0,
-      zIndex: 1000,
-      '& .MuiToolbar-regular': {
-        padding: 0,
-        width: '95%',
-        margin: 'auto'
-      }
+      zIndex: 1000
     }
   },
   sticky: {
     transform: 'translateY(-35px)',
     transition: 'all 0.5s ease-out',
     '@media (max-width: 485px)': {
-      transform: 'translateY(-48px)'
+      transform: 'translateY(-95px)'
     }
   },
   headerspace: {
@@ -128,6 +126,7 @@ export const useStyles = makeStyles((theme) => ({
     transition: 'all 0.5s ease-out'
   },
   logo: {
+    marginRight: 'auto 20px',
     letterSpacing: '0.2rem',
     fontSize: '1.5rem',
     color: '#ffffff',
@@ -135,17 +134,12 @@ export const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     '@media (max-width: 768px)': {
-      marginLeft: '0px',
       fontSize: '1rem'
-    },
-    '@media (max-width: 580px)': {
-      display: 'none'
     }
   },
   menuButton: {
     color: '#ffffff',
     marginRight: '24px',
-    padding: '0px',
     '@media (max-width: 768px)': {
       padding: '12px 5px 12px'
     }

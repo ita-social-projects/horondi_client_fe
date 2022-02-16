@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const baseStyles = {
-  position: 'relative',
-  marginRight: '37px',
-  borderRadius: '6px',
   '& .MuiInputBase-root': {
     width: '350px',
     '@media (max-width: 1000px)': {
@@ -39,6 +36,21 @@ const baseStyles = {
 export const useStyles = makeStyles((theme, color) => ({
   root: () => ({
     background: theme.palette.seachBar.backgroundColor,
+    margin: '5px 37px',
+
+    borderRadius: '6px',
+    '@media (min-width: 556px)': {
+      position: 'relative',
+      flex: 'unset'
+    },
+    '@media (max-width: 555px)': {
+      flex: '1',
+      position: 'absolute',
+      top: '50px',
+      margin: '5px 0',
+      width: '100%',
+      background: 'rgba(0, 0, 0, 0.7)'
+    },
     ...baseStyles,
     '& .MuiInput-input': {
       padding: '12px 5px 12px 46px',
@@ -47,6 +59,7 @@ export const useStyles = makeStyles((theme, color) => ({
   }),
   notFromNavbar: () => ({
     ...baseStyles,
+    borderRadius: '4px',
     background: 'inherit',
     border: theme.palette.seachBar.border,
     '& .MuiInputBase-root': {

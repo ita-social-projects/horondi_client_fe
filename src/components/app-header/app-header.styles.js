@@ -25,6 +25,9 @@ export const useStyles = makeStyles((theme) => ({
       position: 'fixed',
       top: 0,
       zIndex: 1000
+    },
+    '@media (max-width: 556px)': {
+      paddingBottom: '45px'
     }
   },
   sticky: {
@@ -41,9 +44,6 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#F1F1F1',
     '@media (max-width: 768px)': {
       height: '72px'
-    },
-    '@media (max-width: 480px)': {
-      display: 'none'
     }
   },
   upperToolbar: {

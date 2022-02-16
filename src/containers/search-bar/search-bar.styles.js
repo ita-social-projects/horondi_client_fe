@@ -46,10 +46,9 @@ export const useStyles = makeStyles((theme, color) => ({
     '@media (max-width: 555px)': {
       flex: '1',
       position: 'absolute',
-      top: '50px',
+      top: '40px',
       margin: '5px 0',
-      width: '100%',
-      background: 'rgba(0, 0, 0, 0.7)'
+      width: '100%'
     },
     ...baseStyles,
     '& .MuiInput-input': {

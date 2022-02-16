@@ -7,7 +7,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       transform: 'translate(14px, 14px) scale(1)'
     },
     '& div > input': {
-      padding: '11px 14px !important',
+      padding: '11px 14px',
       position: 'relative'
     },
     '& p': {
@@ -80,5 +80,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   registerGroup: {
     position: 'relative'
+  },
+  marginHeader: {
+    '@media (min-width: 1024px) and (max-width: 1400px)': {
+      marginTop: '15px'
+    }
   }
 }));

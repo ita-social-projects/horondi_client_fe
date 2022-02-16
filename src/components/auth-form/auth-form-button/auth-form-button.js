@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { useStyles } from './auth-form-button.styles';
 
-const AuthFormButton = ({ onclick, disabled, children }) => {
+const AuthFormButton = ({ onclick, disabled = false, children }) => {
   const styles = useStyles();
   return (
     <Button

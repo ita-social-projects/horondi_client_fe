@@ -23,10 +23,25 @@ const GiftCertificate = () => {
   const styles = useStyles();
   const appStyles = useAppStyles();
   const history = useHistory();
-  const [generateCertificateMutation] = useMutation(generateCertificate, {
+
+  const [getPaymentCheckoutForCertificate] = useLazyQuery(getPaymentCheckoutForCertificates, {
+    onCompleted: (data) => {
+      const { paymentUrl, paymentToken, certificatesOrderId } =
+        data.getPaymentCheckoutForCertificates;
+      window.open(paymentUrl);
+      history.push({
+        pathname: `${pathToCertificateThanks}/${paymentToken}`,
+        state: {
+          certificatesOrderId
+        }
+      });
+    }
+  });
+
+  const [generateCertificates] = useMutation(generateCertificate, {
     onCompleted: (data) => {
       const { certificates, certificatesPrice } = data.generateCertificate;
-      getPaymentCheckoutForCertificatesQuery({
+      getPaymentCheckoutForCertificate({
         variables: {
           data: {
             currency: getCurrentCurrency(currency),
@@ -47,20 +62,6 @@ const GiftCertificate = () => {
     currency: Currency.currency
   }));
 
-  const [getPaymentCheckoutForCertificatesQuery] = useLazyQuery(getPaymentCheckoutForCertificates, {
-    onCompleted: (data) => {
-      const { paymentUrl, paymentToken, certificatesOrderId } =
-        data.getPaymentCheckoutForCertificates;
-      window.open(paymentUrl);
-      history.push({
-        pathname: `${pathToCertificateThanks}/${paymentToken}`,
-        state: {
-          certificatesOrderId
-        }
-      });
-    }
-  });
-
   const CHECKBOXES_STATE = [
     { value: 500, checked: false, count: INITIAL_CERTIFICATE_COUNT },
     { value: 1000, checked: true, count: INITIAL_CERTIFICATE_COUNT },
@@ -74,7 +75,7 @@ const GiftCertificate = () => {
     initialValues,
     onSubmit: () => {
       const newCertificates = findCheckedCertificates(checkboxesArr);
-      generateCertificateMutation({
+      generateCertificates({
         variables: {
           newCertificates,
           email: values.email

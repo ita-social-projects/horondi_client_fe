@@ -18,6 +18,10 @@ jest.mock('formik');
 jest.mock('react-facebook-login/dist/facebook-login-render-props');
 jest.mock('../../../../services/local-storage.service');
 
+jest.mock('../../../../components/auth-form/auth-form-button/auth-form-button.styles', () => ({
+  useStyles: () => ({})
+}));
+
 const dispatch = jest.fn();
 const mockSubmit = jest.fn();
 const mockChange = jest.fn();

@@ -5,11 +5,15 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
+    padding: '0 10px',
     '& > hr': {
       border: '1px solid rgba(91, 91, 91, 0.2)',
       width: '100%',
       marginTop: '30px',
-      marginBottom: '48px'
+      marginBottom: '48px',
+      '@media (max-width: 670px)': {
+        margin: 0
+      }
     }
   },
   headingWrapper: {
@@ -24,10 +28,14 @@ export const useStyles = makeStyles((theme) => ({
       lineHeight: '65px',
       fontStyle: 'normal',
       fontSize: '48px',
-      padding: '0px 165px',
       '@media (max-width: 670px)': {
         padding: '0px',
-        fontSize: '32px'
+        fontSize: '32px',
+        marginTop: '42px'
+      },
+      '@media (max-width: 346px)': {
+        fontSize: '27px',
+        marginTop: '82px'
       }
     }
   },
@@ -168,6 +176,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '13px'
   },
   buttonOptions: {
+    display: 'none',
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontSize: '16px'

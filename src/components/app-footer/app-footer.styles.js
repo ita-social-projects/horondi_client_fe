@@ -27,7 +27,7 @@ export const useStyles = makeStyles(() => ({
       flexDirection: 'column',
       alignItems: 'center'
     },
-    '@media screen and (max-width: 770px)': {
+    '@media screen and (max-width: 992px)': {
       paddingRight: '0',
       flexWrap: 'wrap'
     }

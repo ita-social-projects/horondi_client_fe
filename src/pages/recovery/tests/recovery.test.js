@@ -6,6 +6,11 @@ import { AuthWrapper, AuthButton, AuthHeading } from '../../../components/auth-f
 jest.mock('../recovery.styles', () => ({
   useStyles: () => ({})
 }));
+
+jest.mock('../../../components/auth-form/auth-form-button/auth-form-button.styles', () => ({
+  useStyles: () => ({})
+}));
+
 jest.mock('react-redux');
 
 const dispatch = jest.fn();

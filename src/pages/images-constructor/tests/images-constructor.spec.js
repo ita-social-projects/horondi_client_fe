@@ -45,7 +45,7 @@ beforeEach(async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 });
 
-describe('ImagesConstructor component tests', () => {
+describe.skip('ImagesConstructor component tests', () => {
   it('renders h1', () => {
     expect(screen.getByText(/common.title/i)).toBeInTheDocument();
   });

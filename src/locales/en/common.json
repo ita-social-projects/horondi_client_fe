@@ -1,5 +1,6 @@
 {
   "product": "Product",
+  "backpackFromConstructor": "Backpack from constructor",
   "quantity": "Quantity",
   "price": "Price",
   "size": "Size",

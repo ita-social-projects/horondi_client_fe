@@ -63,6 +63,11 @@ export const useCart = (user = null) => {
 
   const getProductPrice = (id, currency) => getCartItem(id).sizeAndPrice.price[currency].value;
 
+  const setCartItem = (id, item) => {
+    const newCart = cart.map((cartItem) => (cartItem.id === id ? item : cartItem));
+    setNewCart(newCart);
+  };
+
   const removeFromCart = (item) => {
     setNewCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
   };
@@ -113,6 +118,7 @@ export const useCart = (user = null) => {
 
   const cartOperations = {
     addToCart,
+    setCartItem,
     removeFromCart,
     changeQuantity,
     changeSize,

@@ -17,7 +17,10 @@ export const validationSchema = Yup.object().shape({
     .max(60, 'error.emailLength')
     .matches(formRegExp.email, 'error.wrongFormat')
     .required('error.requiredField'),
-  phoneNumber: Yup.string().matches(formRegExp.phoneNumber, 'error.wrongFormat').nullable(),
+  phoneNumber: Yup.string()
+    .min(9, 'error.profile.phoneTooShort')
+    .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
+    .max(9, 'error.profile.phoneTooLong'),
   country: Yup.string()
     .min(2, 'error.profile.country')
     .max(40, 'error.profile.country')

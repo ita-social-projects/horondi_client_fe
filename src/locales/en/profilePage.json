@@ -32,5 +32,10 @@
     "btnTitle": "Confirm Email",
     "text": "Please confirm this email by clicking the button below."
   },
-  "checkEmailText": "Please, check your email address"
+  "checkEmailText": "Please, check your email address",
+  "imageError": {
+    "size": "Size must be less than 5mb",
+    "extension": "Wrong extension",
+    "dimension": "Max dimension is 100x100px"
+  }
 }

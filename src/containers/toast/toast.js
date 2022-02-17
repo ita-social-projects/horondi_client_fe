@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const AlertFunction = (props, alertRef) => (
   <MuiAlert elevation={6} ref={alertRef} variant='filled' {...props} />

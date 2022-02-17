@@ -25,7 +25,7 @@ export const mockItem = {
   },
   quantity: 1,
   constructor: false,
-  category: 'Bags'
+  category: { code: 'Bags' }
 };
 
 export const mockPromoCode = {

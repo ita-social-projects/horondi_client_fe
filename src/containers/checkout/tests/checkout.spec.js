@@ -9,6 +9,9 @@ jest.mock('../checkout.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' 
 const mockUseContext = jest.fn().mockImplementation(() => ({
   isLight: true
 }));
+jest.mock('react-router', () => ({
+  useLocation: () => ({ state: { promoCode: 'HORONDI20' } })
+}));
 React.useContext = mockUseContext;
 
 const state = {

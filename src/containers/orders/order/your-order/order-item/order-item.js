@@ -36,27 +36,13 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   const { isLoading, isError } = useIsLoadingOrError([loadingProduct], [errorProduct]);
 
-  const orderItem = isFromConstructor
-    ? dataProduct?.getConstructorByModel[0]
-    : dataProduct?.getProductById;
-
-  const calculatePrice = useMemo(() => {
-    const { size } = sizeAndPrice;
-    const currentSize = orderItem?.sizes?.find((item) => item.size._id === size._id);
-
-    if (promoCode) {
-      const { categories, discount } = promoCode.getPromoCodeByCode;
-      const isAllowCategory = categories.find((item) => item === orderItem?.category.code);
-
-      if (isAllowCategory) {
-        return currentSize?.price.map((item) => ({
-          ...item,
-          value: Math.round(item.value - (item.value / 100) * discount)
-        }));
-      }
-    }
-    return currentSize?.price;
-  }, [orderItem, promoCode, sizeAndPrice]);
+  const orderItem = useMemo(
+    () =>
+      isFromConstructor
+        ? { ...dataProduct?.getConstructorByModel[0], category: { code: 'constructor' } }
+        : dataProduct?.getProductById,
+    [isFromConstructor, dataProduct]
+  );
 
   const productName = isFromConstructor
     ? t('common.backpackFromConstructor')
@@ -71,15 +57,11 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   );
 
   useEffect(() => {
-    const { size, price } = sizeAndPrice;
-    if (!isFromConstructor && orderItem) {
-      const currentSize = orderItem?.sizes.find((item) => item.size._id === size._id);
-      setProductPrices((prevState) => [...prevState, currentSize?.price]);
-    }
-    if (isFromConstructor && orderItem) {
-      setProductPrices((prevState) => [...prevState, price]);
-    }
-  }, [setProductPrices, product, orderItem, sizeAndPrice, isFromConstructor, calculatePrice]);
+    const { price } = sizeAndPrice;
+    const { category } = orderItem || {};
+
+    setProductPrices((prevState) => [...prevState, { price, category }]);
+  }, [setProductPrices, sizeAndPrice, orderItem]);
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 

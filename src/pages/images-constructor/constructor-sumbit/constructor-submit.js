@@ -52,7 +52,7 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
         sizeAndPrice,
         quantity: 1,
         isFromConstructor: true,
-        category: 'constructor'
+        category: { code: 'constructor' }
       };
 
       addToCart(newCart);

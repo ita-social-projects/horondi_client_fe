@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 
 import { useStyles } from './checkout.styles';
 import CheckoutForm from './checkout-form';
@@ -11,7 +11,10 @@ import { useCart } from '../../hooks/use-cart';
 
 const { pathToThanks, pathToMain } = routes;
 
-const Checkout = ({ location }) => {
+const Checkout = () => {
+  const {
+    state: { promoCode }
+  } = useLocation();
   const { currency, loading, isOrderCreated, order, user } = useSelector(
     ({ Currency, Order, User }) => ({
       currency: Currency.currency,
@@ -40,7 +43,7 @@ const Checkout = ({ location }) => {
             currency={currency}
             cartItems={cartItems}
             cartOperations={cartOperations}
-            promoCode={location?.props}
+            promoCode={promoCode}
           />
         </div>
       )}

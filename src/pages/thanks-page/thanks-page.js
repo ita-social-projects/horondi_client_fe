@@ -38,7 +38,7 @@ const ThanksPage = () => {
     } else {
       dispatch(getOrder());
     }
-  }, [dispatch, router.search, user]);
+  }, [dispatch, router.pathname, language, user]);
 
   if (loading || paidOrderLoading) {
     return <Loader data-testid='loader' />;

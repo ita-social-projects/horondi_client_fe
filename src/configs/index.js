@@ -29,8 +29,6 @@ export const INITIAL_CERTIFICATE_COUNT = 1;
 export const ORDER_NUMBER_LENGTH = 13;
 export const PAYMENT_TOKEN_LENGTH = 40;
 
-export const ORDER_NUMBER_LENGTH = 13;
-
 export const commentFields = {
   text: { name: 'text', multiline: true, rows: 5 }
 };

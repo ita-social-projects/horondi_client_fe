@@ -241,7 +241,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       <TableCell>
         <div className={styles.price}>
           {currencySign}
-          <div className={styles.price}>{totalProductPrice()}</div>
+          {totalProductPrice()}
         </div>
       </TableCell>
       <TableCell>

@@ -109,8 +109,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
           getFondyData({
             order: orderInputData(data, deliveryType, cartItems, language),
             currency: getCurrentCurrency(currency),
-            amount: String(totalPriceToPay),
-            language
+            amount: String(totalPriceToPay)
           })
         );
       } else {

@@ -1,6 +1,6 @@
 export const calcPriceForCart = (price, quantity, discount) => {
   if (discount) {
-    return Math.floor(price * quantity - (price * quantity * discount) / 100);
+    return Math.round(price * quantity - (price * quantity * discount) / 100);
   }
 
   return price * quantity;

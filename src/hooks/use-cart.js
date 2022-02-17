@@ -36,7 +36,7 @@ export const useCart = (user = null) => {
       const price = item.sizeAndPrice.price[currency].value;
 
       const isAllowCategory = categories.find(
-        (el) => el.toLowerCase() === item.category.toLowerCase()
+        (el) => el.toLowerCase() === item.category.code.toLowerCase()
       );
       if (isAllowCategory) {
         return [Math.round(price - (price / 100) * discount), item.quantity];
@@ -50,7 +50,7 @@ export const useCart = (user = null) => {
     const product = getCartItem(id);
     const { discount, categories } = promoCode.getPromoCodeByCode;
     const isAllowCategory = categories.find(
-      (item) => item.toLowerCase() === product.category.toLowerCase()
+      (item) => item.toLowerCase() === product.category.code.toLowerCase()
     );
     const price = product.sizeAndPrice.price[currency].value;
 

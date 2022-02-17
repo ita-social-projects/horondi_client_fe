@@ -50,7 +50,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productTo
         sizeAndPrice,
         quantity: 1,
         constructor: false,
-        category: product.category.name[1].value
+        category: { code: product.category.name[1].value }
       };
 
       addToCart(newCart);

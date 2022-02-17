@@ -14,9 +14,12 @@ export const useStyles = makeStyles((theme) => ({
     transition: 'all 0.5s ease-out',
     '& .MuiToolbar-regular': {
       minHeight: '35px',
-      padding: 0,
+      padding: '10px 85px',
       width: '95%',
-      margin: 'auto'
+      margin: 'auto',
+      '@media (max-width: 870px)': {
+        padding: '0'
+      }
     },
     '& .MuiTypography-body1': {
       color: 'rgba(254, 254, 254, 0.75)'
@@ -51,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0px 80px',
-    borderBottom: '1px solid white',
+    borderBottom: '1px solid rgba(91, 91, 91, 0.6)',
     '@media (max-width: 485px)': {
       display: 'none'
     }
@@ -140,6 +143,7 @@ export const useStyles = makeStyles((theme) => ({
   menuButton: {
     color: '#ffffff',
     marginRight: '24px',
+    paddingLeft: 0,
     '@media (max-width: 768px)': {
       padding: '12px 5px 12px'
     }

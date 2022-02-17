@@ -17,6 +17,10 @@ export const getWishlistByUserId = gql`
           }
           category {
             _id
+            name {
+              lang
+              value
+            }
           }
           pattern {
             _id

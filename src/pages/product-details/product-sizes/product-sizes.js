@@ -16,7 +16,7 @@ const ProductSizes = ({
   const { t } = useTranslation();
   const styles = useStyles();
 
-  const filteredSizes = _.uniqBy(sizes, 'name');
+  const filteredSizes = _.uniqBy(sizes, 'size.name');
 
   const sizeButtons = filteredSizes?.map(({ size }, index) => (
     <Button

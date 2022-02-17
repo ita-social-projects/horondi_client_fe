@@ -33,7 +33,7 @@ const ThanksPage = () => {
   useEffect(() => {
     const paidOrderNumber = router.pathname.slice(router.pathname.length - ORDER_NUMBER_LENGTH);
 
-    if (paidOrderNumber) {
+    if (paidOrderNumber && paymentMethod === 'CARD') {
       dispatch(getPaidOrder({ paidOrderNumber, language }));
     } else {
       dispatch(getOrder());

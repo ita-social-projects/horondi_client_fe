@@ -132,7 +132,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     minWidth: '100%',
-    fontWeight: '600'
+    fontWeight: '600',
+    '&>span:nth-child(2n)': {
+      textAlign: 'right'
+    }
   },
   li: {
     margin: '7px 0'

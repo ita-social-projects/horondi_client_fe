@@ -7,7 +7,13 @@ export const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     margin: 'auto',
-    padding: 0
+    padding: 0,
+    '&>div': {
+      marginLeft: '30px',
+      '@media (max-width: 650px)': {
+        marginLeft: '0'
+      }
+    }
   }),
   wishlist: {
     '@media (max-width: 480px)': {

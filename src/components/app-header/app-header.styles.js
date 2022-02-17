@@ -143,9 +143,10 @@ export const useStyles = makeStyles((theme) => ({
   menuButton: {
     color: '#ffffff',
     marginRight: '24px',
-    paddingLeft: 0,
+    marginLeft: '-15px',
     '@media (max-width: 768px)': {
-      padding: '12px 5px 12px'
+      padding: '12px 5px 12px',
+      marginLeft: 0
     }
   },
   categories: {

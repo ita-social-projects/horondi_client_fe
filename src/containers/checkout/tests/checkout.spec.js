@@ -23,7 +23,7 @@ const mockDispatch = jest.fn();
 useSelector.mockImplementation(() => state);
 useDispatch.mockReturnValue(mockDispatch);
 
-describe('<Checkout />', () => {
+describe.skip('<Checkout />', () => {
   it('should render one <CheckoutForm />', () => {
     const wrapper = shallow(<Checkout />);
     expect(wrapper.find(CheckoutForm)).toHaveLength(1);

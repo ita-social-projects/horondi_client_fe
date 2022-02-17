@@ -64,11 +64,17 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
   const [initialValues, setInitialValues] = useState(stateInitialValues);
   const [pricesFromQuery, setPricesFromQuery] = useState([]);
 
-  const totalPriceToPay = pricesFromQuery.reduce(
-    (previousValue, currentValue, index) =>
-      previousValue + calcPriceForCart(currentValue, cartItems[index]?.quantity),
-    0
-  );
+  const { discount, categories } = promoCode?.getPromoCodeByCode || {};
+
+  const totalPriceToPay = pricesFromQuery
+    .map((item, index) => {
+      const canUsePromoCode = categories?.includes(item.category?.code);
+      const priceWithPromoCode = calcPriceForCart(item.price, cartItems[index]?.quantity, discount);
+      const priceWithoutPromoCode = calcPriceForCart(item.price, cartItems[index]?.quantity);
+
+      return canUsePromoCode ? priceWithPromoCode : priceWithoutPromoCode;
+    })
+    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
   const consentLink = (
     <div className={styles.consentMessage}>

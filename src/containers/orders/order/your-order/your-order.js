@@ -25,7 +25,9 @@ const YourOrder = ({ ...props }) => {
   const [productPrices, setProductPrices] = useState([]);
   const currencySign = getCurrencySign(currency);
   useEffect(() => {
-    setPricesFromQuery(productPrices.map((item) => item[currency].value));
+    setPricesFromQuery(
+      productPrices.map((item) => ({ price: item.price[currency].value, category: item.category }))
+    );
   }, [setPricesFromQuery, productPrices, currency]);
   return (
     <Paper className={styles.yourOrderContainer} elevation={4}>

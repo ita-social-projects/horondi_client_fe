@@ -9,7 +9,7 @@ jest.mock('react-redux');
 
 useDispatch.mockImplementation(() => dispatch);
 
-describe.skip('use-cart tests', () => {
+describe('use-cart tests', () => {
   let wrap;
   let res;
   beforeEach(() => {

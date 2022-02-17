@@ -9,6 +9,9 @@ jest.mock('../checkout.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' 
 const mockUseContext = jest.fn().mockImplementation(() => ({
   isLight: true
 }));
+jest.mock('react-router', () => ({
+  useLocation: () => ({ state: { promoCode: 'HORONDI20' } })
+}));
 React.useContext = mockUseContext;
 
 const state = {
@@ -23,7 +26,7 @@ const mockDispatch = jest.fn();
 useSelector.mockImplementation(() => state);
 useDispatch.mockReturnValue(mockDispatch);
 
-describe.skip('<Checkout />', () => {
+describe('<Checkout />', () => {
   it('should render one <CheckoutForm />', () => {
     const wrapper = shallow(<Checkout />);
     expect(wrapper.find(CheckoutForm)).toHaveLength(1);

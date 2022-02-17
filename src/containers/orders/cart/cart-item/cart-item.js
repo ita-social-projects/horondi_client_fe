@@ -165,12 +165,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       }
     }
 
-    return (
-      <div>
-        {currencySign}
-        {Math.round(calcPriceForCart(currentPrice, inputValue))}
-      </div>
-    );
+    return <div>{Math.round(calcPriceForCart(currentPrice, inputValue))}</div>;
   };
 
   if (isError)
@@ -244,7 +239,8 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
         />
       </TableCell>
       <TableCell>
-        <div>
+        <div className={styles.price}>
+          {currencySign}
           <div className={styles.price}>{totalProductPrice()}</div>
         </div>
       </TableCell>

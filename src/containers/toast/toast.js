@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import { useStyles } from './toast.styles';
 
 const AlertFunction = (props, alertRef) => (
   <MuiAlert elevation={6} ref={alertRef} variant='filled' {...props} />
@@ -9,6 +10,8 @@ const AlertFunction = (props, alertRef) => (
 export const Alert = forwardRef(AlertFunction);
 
 export default function Toast({ isOpenedSnackbar, setIsOpenedSnackbar, message }) {
+  const styles = useStyles();
+
   const handleCloseSnackbar = () => {
     setIsOpenedSnackbar(false);
   };
@@ -18,16 +21,11 @@ export default function Toast({ isOpenedSnackbar, setIsOpenedSnackbar, message }
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isOpenedSnackbar}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         onClose={handleCloseSnackbar}
-        style={{ marginTop: '85px' }}
+        className={styles.root}
       >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity='success'
-          sx={{ width: '100%' }}
-          style={{ backgroundColor: '#08BE05' }}
-        >
+        <Alert onClose={handleCloseSnackbar} severity='success' sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>

@@ -17,7 +17,7 @@ import ProductSizes from './product-sizes';
 import ProductSubmit from './product-submit';
 import SimilarProducts from './similar-products';
 import Comments from './comments';
-import ToastContainer from '../../containers/toast';
+import Toast from '../../containers/toast';
 import { getProductById } from './operations/product-details.queries';
 import routes from '../../configs/routes';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
@@ -63,6 +63,8 @@ const ProductDetails = ({ match }) => {
   const currentSize = availableSizes ? availableSizes[0] : {};
   const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
 
+  const [isOpenedSnackbar, setIsOpenedSnackbar] = React.useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id, dispatch]);
@@ -89,6 +91,7 @@ const ProductDetails = ({ match }) => {
   const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
     useAddProductToWishlistHandler(product);
   const wishlistHandler = () => {
+    setIsOpenedSnackbar(true);
     addOrRemoveItemFromWishlistHandler();
 
     if (isInWishlist) {
@@ -185,7 +188,13 @@ const ProductDetails = ({ match }) => {
         {product._id ? (
           <Comments productId={product._id} checkCountComments={checkCountComments} />
         ) : null}
-        <ToastContainer />
+        <Toast
+          isOpenedSnackbar={isOpenedSnackbar}
+          setIsOpenedSnackbar={setIsOpenedSnackbar}
+          message={t(
+            `product.toastMessage.${isInWishlist ? 'addedToWishList' : 'removedFromWishList'}`
+          )}
+        />
       </Card>
     </div>
   );

@@ -64,7 +64,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       lineHeight: '20px',
       textAlign: 'center'
     },
-    '@media (max-width: 420px)': {
+    '@media (max-width: 425px)': {
       '& >th': {
         verticalAlign: 'text-top'
       }

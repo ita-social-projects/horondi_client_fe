@@ -68,7 +68,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
 
   const totalPriceToPay = pricesFromQuery
     .map((item, index) => {
-      const canUsePromoCode = categories.includes(item.category?.code);
+      const canUsePromoCode = categories?.includes(item.category?.code);
       const priceWithPromoCode = calcPriceForCart(item.price, cartItems[index]?.quantity, discount);
       const priceWithoutPromoCode = calcPriceForCart(item.price, cartItems[index]?.quantity);
 

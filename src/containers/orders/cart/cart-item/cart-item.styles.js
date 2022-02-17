@@ -74,7 +74,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '@media (max-width: 425px)': {
       fontSize: '14px',
-      width: '55px',
+      width: '75px',
       height: '35px'
     }
   },

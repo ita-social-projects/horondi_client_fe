@@ -12,8 +12,8 @@ const promoInput = {
   fontWeight: '400',
   fontSize: '16px',
   lineHeight: '24px',
-  '@media (max-width: 420px)': {
-    fontSize: '11px'
+  '@media (max-width: 425px)': {
+    fontSize: '12px'
   }
 };
 const totalWrapper = {

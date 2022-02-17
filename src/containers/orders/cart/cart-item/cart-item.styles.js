@@ -5,7 +5,7 @@ const name = {
   fontSize: '24px',
   lineHeight: '32px',
   '@media (max-width: 420px)': {
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: '700'
   }
 };
@@ -72,7 +72,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     '& .MuiSelect-select:focus': {
       background: 'transparent'
     },
-    '@media (max-width: 420px)': {
+    '@media (max-width: 425px)': {
       fontSize: '14px',
       width: '55px',
       height: '35px'
@@ -88,7 +88,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     cursor: 'pointer'
   },
   selectInputStyle: {
-    '@media (max-width: 420px)': {
+    '@media (max-width: 425px)': {
       fontSize: '14px',
       width: '55px',
       height: '35px'

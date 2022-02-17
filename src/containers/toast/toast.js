@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { useStyles } from './toast.styles';
 
-import { ToastContainer } from 'react-toastify';
+const AlertFunction = (props, alertRef) => (
+  <MuiAlert elevation={6} ref={alertRef} variant='filled' {...props} />
+);
 
-import { useSelector } from 'react-redux';
-import { selectToastSettings } from '../../utils/multiple.selectors';
+export const Alert = forwardRef(AlertFunction);
 
-const Toast = () => {
-  const toastSettings = useSelector(selectToastSettings);
+export default function Toast({ isOpenedSnackbar, setIsOpenedSnackbar, message }) {
+  const styles = useStyles();
 
-  return <ToastContainer {...toastSettings} />;
-};
+  const handleCloseSnackbar = () => {
+    setIsOpenedSnackbar(false);
+  };
 
-export default Toast;
+  return (
+    <div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isOpenedSnackbar}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        className={styles.root}
+      >
+        <Alert onClose={handleCloseSnackbar} severity='success' sx={{ width: '100%' }}>
+          {message}
+        </Alert>
+      </Snackbar>
+    </div>
+  );
+}

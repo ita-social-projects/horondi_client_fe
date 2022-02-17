@@ -9,6 +9,7 @@ import { TOAST_SETTINGS } from '../constants';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
 import { useCart } from '../../../hooks/use-cart';
+import Toast from '../../../containers/toast';
 
 const { pathToCart } = routes;
 
@@ -25,6 +26,8 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productTo
 
   const { addToCart } = cartOperations;
 
+  const [isOpenedSnackbar, setIsOpenedSnackbar] = React.useState(false);
+
   const cartTootipTitle = () => {
     if (disabled) return t('product.sizeNotAvailable');
     return isItemInCart
@@ -37,6 +40,7 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productTo
     : t('product.pdpButtons.cartButton');
 
   const onAddToCart = () => {
+    setIsOpenedSnackbar(true);
     if (isItemInCart) {
       return;
     }
@@ -89,6 +93,11 @@ const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productTo
           </Button>
         </div>
       </Tooltip>
+      <Toast
+        isOpenedSnackbar={isOpenedSnackbar}
+        setIsOpenedSnackbar={setIsOpenedSnackbar}
+        message={t('product.toastMessage.addedToCard')}
+      />
     </div>
   );
 };

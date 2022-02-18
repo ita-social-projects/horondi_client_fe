@@ -244,8 +244,8 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
         />
       </TableCell>
       <TableCell>
-        <div>
-          <div className={styles.price}>{totalProductPrice()}</div>
+        <div className={styles.price}>
+          <div>{totalProductPrice()}</div>
         </div>
       </TableCell>
       <TableCell>

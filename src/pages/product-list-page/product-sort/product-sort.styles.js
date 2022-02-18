@@ -79,7 +79,7 @@ export const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: theme.palette.type === 'light' ? theme.palette.white : '#424242',
           color: '#3F51B5',
-          marginLeft: '30px'
+          marginLeft: '15px'
         },
         '& .MuiTouchRipple-root span': {
           opacity: 0

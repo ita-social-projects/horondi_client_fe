@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiOutlinedInput-root': {
       fontSize: '20px',
       fontWeight: 400,
-      '@media (max-width: 420px)': {
+      '@media (max-width: 425px)': {
         fontSize: '16px'
       }
     },

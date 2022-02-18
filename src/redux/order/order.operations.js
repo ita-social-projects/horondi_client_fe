@@ -60,10 +60,10 @@ export const addOrder = async (order) => {
   return result?.data?.addOrder;
 };
 
-export const getPaymentCheckout = async (orderId, currency, amount, language) => {
+export const getPaymentCheckout = async (orderId, currency, amount) => {
   const getPaymentCheckoutQuery = `
-    query($data: PaymentInput!, $language: Int!) {
-      getPaymentCheckout(data: $data, language: $language) {
+    query($data: PaymentInput!) {
+      getPaymentCheckout(data: $data) {
         ... on Order {
           _id
           recipient {
@@ -118,8 +118,7 @@ export const getPaymentCheckout = async (orderId, currency, amount, language) =>
     }
   `;
   const result = await getItems(getPaymentCheckoutQuery, {
-    data: { orderId, currency, amount },
-    language
+    data: { orderId, currency, amount }
   });
 
   return result?.data?.getPaymentCheckout;
@@ -131,6 +130,16 @@ export const getOrderByPaidOrderNumber = async (paidOrderNumber) => {
       getOrderByPaidOrderNumber(paidOrderNumber: $paidOrderNumber) {
         ... on Order {
           _id
+          orderNumber
+          recipient {
+            firstName
+            lastName
+            email
+            phoneNumber
+          }
+          delivery {
+            sentBy
+          }
           items {
             product {
               name {
@@ -170,4 +179,24 @@ export const getOrderByPaidOrderNumber = async (paidOrderNumber) => {
   const result = await getItems(getOrderByPaidOrderNumberQuery, { paidOrderNumber });
 
   return result?.data?.getOrderByPaidOrderNumber;
+};
+
+export const checkOrderPaymentStatus = async (orderId, language) => {
+  const checkOrderPaymentStatusQuery = `
+  query ($orderId: String!, $language: Int!) {
+    checkOrderPaymentStatus(orderId: $orderId, language: $language) {
+      ... on Order {
+        _id
+        orderNumber
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+  `;
+  const result = await getItems(checkOrderPaymentStatusQuery, { orderId, language });
+
+  return result?.data?.checkOrderPaymentStatus;
 };

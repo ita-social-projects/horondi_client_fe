@@ -19,7 +19,7 @@ import {
   getPaidOrder,
   getFondyData,
   addPaymentMethod,
-  setPaidOderLoading
+  setPaidOrderLoading
 } from '../order.actions';
 
 describe('Orders actions test', () => {
@@ -102,14 +102,14 @@ describe('loading action', () => {
   });
 
   test('should return paid order loading = true', () => {
-    expect(setPaidOderLoading(true)).toEqual({
+    expect(setPaidOrderLoading(true)).toEqual({
       type: SET_PAID_ORDER_LOADING,
       payload: true
     });
   });
 
   test('should return paid order loading = false', () => {
-    expect(setPaidOderLoading(false)).toEqual({
+    expect(setPaidOrderLoading(false)).toEqual({
       type: SET_PAID_ORDER_LOADING,
       payload: false
     });

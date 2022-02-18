@@ -43,7 +43,7 @@ export const addPaymentMethod = (payload) => ({
   type: ADD_PAYMENT_METHOD,
   payload
 });
-export const setPaidOderLoading = (payload) => ({
+export const setPaidOrderLoading = (payload) => ({
   type: SET_PAID_ORDER_LOADING,
   payload
 });

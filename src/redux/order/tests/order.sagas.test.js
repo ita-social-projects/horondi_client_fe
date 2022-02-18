@@ -1,7 +1,12 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { push } from 'connected-react-router';
-import { setIsOrderCreated, setOrder, setOrderLoading, setPaidOderLoading } from '../order.actions';
+import {
+  setIsOrderCreated,
+  setOrder,
+  setOrderLoading,
+  setPaidOrderLoading
+} from '../order.actions';
 import {
   handleAddOrder,
   handleGetCreatedOrder,
@@ -24,7 +29,7 @@ describe('sagas test', () => {
   });
 
   it('fetching paid order', () =>
-    expectSaga(handleGetOrderByPaidOrderNumber, orderExample).put(setPaidOderLoading(true)).run());
+    expectSaga(handleGetOrderByPaidOrderNumber, orderExample).put(setPaidOrderLoading(true)).run());
 
   it('fetch adding order', () => {
     expectSaga(handleAddOrder, orderExample)
@@ -73,7 +78,7 @@ describe('sagas test', () => {
     expectSaga(getOrderTillSuccess, payload)
       .provide([[matchers.call.fn(getOrderByPaidOrderNumber, payload), paidOrder]])
       .put(setOrder(paidOrder))
-      .put(setPaidOderLoading(false))
+      .put(setPaidOrderLoading(false))
       .run();
   });
 });

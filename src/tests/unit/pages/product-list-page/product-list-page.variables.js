@@ -35,20 +35,7 @@ const items = [
         value: 'Rolltop blue'
       }
     ],
-    bottomMaterial: {
-      material: {
-        available: true
-      }
-    },
-    innerMaterial: {
-      material: {
-        available: true
-      }
-    },
     mainMaterial: {
-      material: {
-        available: true
-      },
       color: {
         _id: '6043a9bb3e06ad3edcdb7b0d',
         name: [
@@ -174,20 +161,7 @@ const items = [
         value: 'Rolltop blue'
       }
     ],
-    bottomMaterial: {
-      material: {
-        available: true
-      }
-    },
-    innerMaterial: {
-      material: {
-        available: true
-      }
-    },
     mainMaterial: {
-      material: {
-        available: true
-      },
       color: {
         _id: '6043a9bb3e06ad3edcdb7b0d',
         name: [

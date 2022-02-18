@@ -9,7 +9,7 @@ import { useStyles } from './product-sizes.styles';
 const ProductSizes = ({
   handleSizeChange,
   sizes,
-  checkDisabledProduct,
+  available,
   sizeIsNotSelectedError,
   currentSize
 }) => {
@@ -20,12 +20,10 @@ const ProductSizes = ({
 
   const sizeButtons = filteredSizes?.map(({ size }, index) => (
     <Button
-      disabled={!(size.available && checkDisabledProduct)}
+      disabled={!(size.available && available)}
       key={size._id}
       className={
-        size._id === currentSize._id && checkDisabledProduct
-          ? styles.selectedSize
-          : styles.sizeButton
+        size._id === currentSize._id && available ? styles.selectedSize : styles.sizeButton
       }
       onClick={() => handleSizeChange(index)}
     >

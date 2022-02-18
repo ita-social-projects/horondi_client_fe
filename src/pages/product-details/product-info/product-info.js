@@ -10,14 +10,14 @@ import Colors from './colors';
 import { SCROLL_BAR_LINKS } from '../constants';
 import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
 
-const ProductInfo = ({ product, countComments, checkDisabledProduct, currency, currentPrice }) => {
+const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
 
   const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
 
-  const checkDisabledProductResult = checkDisabledProduct ? null : (
+  const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
   );
   const correctCommentsName = (count) => {

@@ -20,6 +20,12 @@ export const useStyles = makeStyles(({ palette }) => ({
       height: '320px'
     }
   },
+  unavailableContainer: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    background: 'rgba(255,255,255, 0.5)'
+  },
   name: {
     display: 'flex',
     justifyContent: 'center',
@@ -41,6 +47,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     justifyContent: 'space-between',
     fontSize: '14px',
     marginTop: '5px',
+    textTransform: 'capitalize'
+  },
+  unavailableText: {
+    fontSize: '10px',
+    lineHeight: '28px',
     textTransform: 'capitalize'
   },
   price: {

@@ -51,7 +51,7 @@ export const validationSchema = Yup.object().shape({
   appartment: Yup.string()
     .min(1, 'error.profile.appartment')
     .max(6, 'error.profile.appartment')
-    .matches(formRegExp.appartment, 'error.wrongFormat')
+    .matches(formRegExp.appartment, 'error.appartment')
     .nullable(),
   zipcode: Yup.string()
     .length(5, 'error.profile.zipcode')

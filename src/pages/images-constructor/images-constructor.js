@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText } from '@material-ui/core';
@@ -63,7 +63,7 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const getPrice = (currencyInFanc, key) =>
       !currencyInFanc
         ? constructorValues[key].additionalPrice[0].value

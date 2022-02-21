@@ -33,7 +33,7 @@ describe('Profile=Page test image restrictions', () => {
 
     fireEvent.change(uploader, { target: { files: [file] } });
 
-    expect(screen.getByText('profilePage.imageError.size')).toBeInTheDocument();
+    expect(screen.getByText('error.profile.size')).toBeInTheDocument();
   });
 
   it('should give error for wrong extension', () => {
@@ -41,7 +41,7 @@ describe('Profile=Page test image restrictions', () => {
 
     fireEvent.change(uploader, { target: { files: [file] } });
 
-    expect(screen.getByText('profilePage.imageError.extension')).toBeInTheDocument();
+    expect(screen.getByText('error.profile.extension')).toBeInTheDocument();
   });
 
   it('should give error for wrong dimension of fake file', async () => {
@@ -49,7 +49,7 @@ describe('Profile=Page test image restrictions', () => {
 
     fireEvent.change(uploader, { target: { files: [file] } });
 
-    expect(await screen.findByText('profilePage.imageError.dimension')).toBeInTheDocument();
+    expect(await screen.findByText('error.profile.dimension')).toBeInTheDocument();
   });
 
   it('should give error for wrong dimension of real image file with size 102x1px', async () => {
@@ -63,6 +63,6 @@ describe('Profile=Page test image restrictions', () => {
 
     fireEvent.change(uploader, { target: { files: [file] } });
 
-    expect(await screen.findByText('profilePage.imageError.dimension')).toBeInTheDocument();
+    expect(await screen.findByText('error.profile.dimension')).toBeInTheDocument();
   });
 });

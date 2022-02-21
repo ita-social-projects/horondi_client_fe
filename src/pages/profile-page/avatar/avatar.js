@@ -14,7 +14,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, t }) => {
       return true;
     }
 
-    setErrorMessage(t('profilePage.imageError.size'));
+    setErrorMessage(t('error.profile.size'));
     return false;
   };
 
@@ -27,7 +27,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, t }) => {
       return true;
     }
 
-    setErrorMessage(t('profilePage.imageError.extension'));
+    setErrorMessage(t('error.profile.extension'));
     return false;
   };
 
@@ -62,7 +62,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, t }) => {
           setUserImageUrl(result);
           setUpload(image);
         } else {
-          setErrorMessage(t('profilePage.imageError.dimension'));
+          setErrorMessage(t('error.profile.dimension'));
         }
       };
 

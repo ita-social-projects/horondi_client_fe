@@ -117,8 +117,9 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '24px',
     display: 'flex',
     alignItems: 'center',
+    padding: '0 5px',
     '@media (max-width: 500px)': {
-      padding: '5px 5px',
+      padding: '0',
       fontSize: '14px'
     }
   },

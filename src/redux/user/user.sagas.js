@@ -74,8 +74,8 @@ function* setLoginUser(user) {
   setToLocalStorage(ACCESS_TOKEN, user.token);
   const wishlist = yield call(getWishlistByUserId, user._id);
   setToLocalStorage(WISHLIST_KEY, wishlist.products);
-  yield put(setNewWishlist(wishlist.products));
-  yield put(setUser({ ...user, purchasedProducts }));
+  yield put(setNewWishlist(wishlist.products)); // Redux for wishlist header ?
+  yield put(setUser({ ...user, purchasedProducts, wishlist })); // add wishlist
 }
 
 export function* handleGoogleUserLogin({ payload }) {

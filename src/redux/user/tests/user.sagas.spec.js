@@ -79,9 +79,9 @@ describe('user sagas tests', () => {
       .provide([
         [call(getGoogleUser, payload), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId, user._id), wishlist] // new
       ])
-      .put(setUser({ ...user, purchasedProducts, wishlist }))
+      .put(setUser({ ...user, purchasedProducts, wishlist })) // add wishlist
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -92,8 +92,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(5); // change 4 to 5
+        expect(analysisCall).toHaveLength(3); // change 2 to 3
         clearLocalStorage();
       }));
 
@@ -114,9 +114,10 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getFacebookUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(getWishlistByUserId, user._id), wishlist] // new
       ])
-      .put(setUser({ ...user, purchasedProducts }))
+      .put(setUser({ ...user, purchasedProducts, wishlist })) // add wishlist
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -127,8 +128,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(5); // change 4 to 5
+        expect(analysisCall).toHaveLength(3); // change 2 to 3
         clearLocalStorage();
       }));
 
@@ -148,16 +149,17 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(loginUser, { user: { email, pass, rememberMe } }), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(getWishlistByUserId, user._id), wishlist] // new
       ])
-      .put(setUser({ ...user, purchasedProducts }))
+      .put(setUser({ ...user, purchasedProducts, wishlist })) // add wishlist
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(5); // change 4 to 5
+        expect(analysisCall).toHaveLength(3); // change 2 to 3
       }));
 
   it('should hangle login error', () =>

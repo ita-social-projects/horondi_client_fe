@@ -56,12 +56,14 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
     }.name`
   );
 
-  useEffect(() => {
-    const { price } = sizeAndPrice;
-    const { category } = orderItem || {};
+  const { price } = sizeAndPrice;
+  const { category } = orderItem || {};
 
-    setProductPrices((prevState) => [...prevState, { price, category }]);
-  }, [setProductPrices, sizeAndPrice, orderItem]);
+  useEffect(() => {
+    if (category) {
+      setProductPrices((prevState) => [...prevState, { price, category }]);
+    }
+  }, [setProductPrices, price, category]);
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 

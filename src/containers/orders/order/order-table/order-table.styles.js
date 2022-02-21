@@ -40,9 +40,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '& td:first-child': {
       textAlign: 'left',
-      '& >div': {
-        marginLeft: '5px'
-      },
       '& img': {
         width: '220px',
         height: '133px',

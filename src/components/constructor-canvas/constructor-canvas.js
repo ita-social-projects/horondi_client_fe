@@ -4,12 +4,19 @@ import { IMG_URL } from '../../configs';
 const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
   const canvasRef = useRef();
 
-  const mergeImages = (imagesToMerge, currentCanvas, width = 50, height = 50, x = 0, y = 0) => {
+  const mergeImages = (
+    imagesToMerge,
+    currentCanvas,
+    canvasWidth = 50,
+    canvasHeight = 50,
+    x = 0,
+    y = 0
+  ) => {
     if (currentCanvas) {
       const ctx = currentCanvas.getContext('2d');
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
       imagesToMerge.forEach((imageToMerge) => {
-        ctx.drawImage(imageToMerge, x, y, width, height);
+        ctx.drawImage(imageToMerge, x, y, canvasWidth, canvasHeight);
       });
     }
   };

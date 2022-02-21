@@ -9,7 +9,7 @@
   "houseFormatNumber": "Invalid format",
   "onlyLetter": "Field should contain only letters",
   "onlyNumber": "Field should contain only numbers",
-  "appartment": "Field should be a number (can be with a certain letter)",
+  "appartment": "Field should be a number (can be with a certain capital letter)",
   "emailLength": "Field should contain from 8 to 60 characters",
   "wrongFormat": "Field should contain letters, apostrophes, hyphens and spaces",
   "textLength": "Field should contain from 2 to 700 characters",

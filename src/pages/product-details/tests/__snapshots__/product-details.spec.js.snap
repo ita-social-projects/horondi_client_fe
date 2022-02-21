@@ -14,14 +14,12 @@ exports[`Product details test Should render product details component 1`] = `
     <div>
       <div>
         <ProductInfo
-          checkDisabledProduct=""
           countComments={0}
           currency={0}
           currentPrice={Array []}
           product={Object {}}
         />
         <ProductSizes
-          checkDisabledProduct=""
           currentSize={
             Object {
               "_id": "",
@@ -62,7 +60,11 @@ exports[`Product details test Should render product details component 1`] = `
         </div>
       </div>
     </div>
-    <Toast />
+    <Toast
+      isOpenedSnackbar={false}
+      message="product.toastMessage.addedToWishList"
+      setIsOpenedSnackbar={[Function]}
+    />
   </WithStyles(ForwardRef(Card))>
 </div>
 `;

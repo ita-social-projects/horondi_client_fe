@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     gap: '20px',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     '@media (max-width: 1150px)': {
       margin: '0 auto',
       maxWidth: 640
@@ -90,7 +91,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'flex-end',
     gap: 30,
-    maxHeight: '150px',
+    maxHeight: '120px',
     justifyContent: 'space-between',
     '@media (max-width: 600px)': {
       gap: 15,
@@ -114,9 +115,11 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 600,
     lineHeight: '24px',
-    padding: '20% 10%',
+    display: 'flex',
+    alignItems: 'center',
     '@media (max-width: 500px)': {
-      padding: '5px 5px'
+      padding: '5px 5px',
+      fontSize: '14px'
     }
   },
   imageItem: {

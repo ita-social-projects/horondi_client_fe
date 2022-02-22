@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '100%',
     '& .MuiButton-outlined': {
       boxSizing: 'border-box',
-      padding: '0.3rem 1rem',
+      padding: '5px 15px',
       minWidth: 0,
       fontFamily: 'Montserrat',
       fontStyle: 'normal',

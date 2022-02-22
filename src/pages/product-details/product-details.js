@@ -156,7 +156,7 @@ const ProductDetails = ({ match }) => {
                 productToSend={productToSend}
               />
               <Tooltip title={wishlistTip} placement='bottom'>
-                {isInWishlist ? (
+                {itemInWishlist ? (
                   <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
                 ) : (
                   <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />

@@ -9,14 +9,14 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
     currentCanvas,
     canvasWidth = 50,
     canvasHeight = 50,
-    x = 0,
-    y = 0
+    canvasX = 0,
+    canvasY = 0
   ) => {
     if (currentCanvas) {
       const ctx = currentCanvas.getContext('2d');
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
       imagesToMerge.forEach((imageToMerge) => {
-        ctx.drawImage(imageToMerge, x, y, canvasWidth, canvasHeight);
+        ctx.drawImage(imageToMerge, canvasX, canvasY, canvasWidth, canvasHeight);
       });
     }
   };

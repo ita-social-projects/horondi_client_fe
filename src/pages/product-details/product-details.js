@@ -26,7 +26,7 @@ import { setToastMessage, setToastSettings } from '../../redux/toast/toast.actio
 import ProductDescription from './product-description';
 import ProductPath from './product-path/product-path';
 import { ArrowIcon } from '../../images/profile-icons';
-import useWishlist from '../../hooks/use-wishlist';
+import { useWishlist } from '../../hooks/use-wishlist';
 
 const { pathToCategory } = routes;
 
@@ -104,6 +104,13 @@ const ProductDetails = ({ match }) => {
   const checkCountComments = (count) => {
     setCountComments(count);
   };
+
+  const checkDisabledProduct = () =>
+    (currentSizeIndex >= 0 && sizes ? sizes[currentSizeIndex].size.available : '') &&
+    available &&
+    mainMaterial.material.available &&
+    bottomMaterial.material.available &&
+    innerMaterial.material.available;
 
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];

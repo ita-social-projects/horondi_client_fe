@@ -1,5 +1,7 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 import WishlistHeader from '../wishlist-header';
 
 jest.mock('../wishlist-header.styles.js', () => ({
@@ -14,17 +16,20 @@ jest.mock('react', () => ({
   useEffect: (cb) => cb()
 }));
 
-const useQueryData = {
-  loading: false,
-  data: {}
-};
-
-let wrapper;
+jest.mock('react-redux');
 
 describe('Test for the wishlist-header component', () => {
   it('It should render the wishlist-header component', () => {
-    useQuery.mockImplementation(() => ({ ...useQueryData }));
-    wrapper = shallow(<WishlistHeader />);
-    expect(wrapper).toBeDefined();
+    const mockStore = {
+      wishlistItems: [{ quantity: 1 }],
+      user: {}
+    };
+    useSelector.mockImplementation(() => mockStore);
+    render(
+      <BrowserRouter>
+        <WishlistHeader />
+      </BrowserRouter>
+    );
+    expect(screen.getByText('1')).toBeInTheDocument();
   });
 });

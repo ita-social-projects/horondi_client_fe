@@ -3,14 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './constructor-submit.styles';
 
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import routes from '../../../configs/routes';
-import useAddProductToWishlistHandler from '../../../hooks/use-add-product-to-wishlist-handler';
 import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
@@ -73,39 +70,10 @@ const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSize
     }
   };
 
-  const [isInWishlist, addOrRemoveItemFromWishlistHandler] =
-    useAddProductToWishlistHandler(constructorValues);
-  const wishlistTip = isInWishlist
-    ? t('product.tooltips.removeWishful')
-    : t('product.tooltips.addWishful');
-
   const cartButtonFunc = isItemInCart ? goToCheckout : onAddToCart;
-
-  const wishlistHandler = () => {
-    addOrRemoveItemFromWishlistHandler();
-
-    if (isInWishlist) {
-      dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
-      dispatch(setToastSettings(TOAST_SETTINGS));
-    } else {
-      dispatch(setToastMessage(t('product.toastMessage.addedToWishList')));
-      dispatch(setToastSettings(TOAST_SETTINGS));
-    }
-  };
 
   return (
     <div className={styles.submitContainer}>
-      <Tooltip title={wishlistTip} placement='bottom'>
-        {isWishful ? (
-          <FavoriteIcon data-cy='wishful' className={styles.redHeart} onClick={wishlistHandler} />
-        ) : (
-          <FavouriteBorderIcon
-            data-cy='not-wishful'
-            className={styles.heart}
-            onClick={wishlistHandler}
-          />
-        )}
-      </Tooltip>
       <Button className={styles.submitButton} onClick={onAddToCheckout}>
         {t('buttons.buyButton')}
       </Button>

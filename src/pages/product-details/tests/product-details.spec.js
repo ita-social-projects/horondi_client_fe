@@ -6,7 +6,13 @@ import ProductDetails from '../index';
 const mockUseContext = jest.fn().mockImplementation(() => ({
   isLight: true
 }));
+
 React.useContext = mockUseContext;
+
+const mockIsInWishlist = jest.fn();
+const mockAddToWishlist = jest.fn();
+const mockRemoveFromWishlist = jest.fn();
+const mockWishlist = {};
 
 const useQueryData = {
   loading: false,
@@ -42,6 +48,17 @@ jest.mock('@material-ui/styles', () => ({
   useTheme: () => ({
     palette: {
       type: 'light'
+    }
+  })
+}));
+
+jest.mock('../../../hooks/use-wishlist', () => ({
+  useWishlist: () => ({
+    isInWishlist: mockIsInWishlist,
+    wishlist: mockWishlist,
+    wishlistOperations: {
+      addToWishlist: mockAddToWishlist,
+      removeFromWishlist: mockRemoveFromWishlist
     }
   })
 }));

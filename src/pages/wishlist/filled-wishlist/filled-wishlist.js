@@ -7,16 +7,12 @@ import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
 import Modal from '../../../components/modal';
 import ThemeContext from '../../../context/theme-context';
-// import useDeleteProductFromWishlistHandler from '../../../hooks/use-delete-product-from-wishlist-handler';
-// import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import EmptyWishlist from '../empty-wishlist';
 import SimilarProducts from '../../product-details/similar-products';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import { TOAST_SETTINGS } from '../../product-details/constants';
 import { useCart } from '../../../hooks/use-cart';
-// new:
-import useWishlist from '../../../hooks/use-wishlist';
-//
+import { useWishlist } from '../../../hooks/use-wishlist';
 
 const FilledWishlist = ({ items }) => {
   const { currency, userData } = useSelector(({ Currency, User }) => ({
@@ -36,14 +32,7 @@ const FilledWishlist = ({ items }) => {
 
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles(isLightTheme);
-  // const [{ error, loading, wishlist: updatedWishlist }, deleteItemFromWishlist] =
-  //   useDeleteProductFromWishlistHandler();
 
-  // useEffect(() => {
-  //   updatedWishlist && setWishlist(updatedWishlist);
-  // }, [updatedWishlist]);
-
-  // new:
   const { wishlist: updatedWishlist, wishlistOperations } = useWishlist();
   const { removeFromWishlist } = wishlistOperations;
 
@@ -59,19 +48,12 @@ const FilledWishlist = ({ items }) => {
     );
   }, [items]);
 
-  // if (loading || error) return errorOrLoadingHandler(error, loading);
-  // -------------------------------------------------------
-
   if (!wishlist.length) return <EmptyWishlist />;
 
   const onModalAction = (action) => {
     setModalVisibility(false);
     if (action) {
-      // old:
-      // deleteItemFromWishlist(modalItem);
-      // new:
       removeFromWishlist(modalItem);
-      // ---------------------------------
       dispatch(setToastMessage(t('product.toastMessage.removedFromWishList')));
       dispatch(setToastSettings(TOAST_SETTINGS));
     }

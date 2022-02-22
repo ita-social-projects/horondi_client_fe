@@ -21,6 +21,7 @@
   },
   "priceFrom": "from ",
   "sizeNotAvailable": "Product isn't available",
+  "unavailable": "unavailable",
   "pdpButtons": {
     "cartButton": "Add to cart",
     "buyButton": "Buy now",
@@ -55,8 +56,8 @@
     "commentsOne": "Comments",
     "commentsTwo": "Comments",
     "title": "Write a comment",
-    "commentsTitle":"Comments",
-    "moreComments":"Comments",
+    "commentsTitle": "Comments",
+    "moreComments": "Comments",
     "rating": "Product rating:",
     "text": "Share your thoughts with others",
     "submit": "LEAVE A COMMENT",

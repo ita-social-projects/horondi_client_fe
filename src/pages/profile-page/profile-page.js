@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, InputAdornment } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
+import { OpenedLetterIcon } from '../../images/profile-icons';
 import { useStyles } from './profile-page.styles';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
+import Avatar from './avatar/avatar';
 import { IMG_URL, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs/index';
 import { PROFILE_USER_CONTACT_DATA, PROFILE_USER_ADDRESS_DATA } from './constants';
 import { validationSchema } from '../../validators/profile-page';
@@ -61,18 +62,6 @@ const ProfilePage = () => {
     validateOnChange: shouldValidate,
     validateOnBlur: shouldValidate
   });
-  const handleImageLoad = ({ target }) => {
-    if (target.files && target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = ({ target: { result } }) => {
-        setUserImageUrl(result);
-      };
-      reader.readAsDataURL(target.files[0]);
-      setUpload(target.files[0]);
-    }
-  };
-
-  const handleLableClass = () => (userImageUrl ? classes.updateLabel : classes.uploadLabel);
 
   const handleConfirmation = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
@@ -109,10 +98,12 @@ const ProfilePage = () => {
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         value={values[name]?.startsWith('+380') ? values[name].slice(4) : values[name]}
         InputProps={
-          name === 'phoneNumber' && {
-            maxLength: 9,
-            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
-          }
+          name === 'phoneNumber'
+            ? {
+              maxLength: 9,
+              startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+            }
+            : {}
         }
         label={t(`profilePage.labels.${name}`)}
         fullWidth
@@ -199,28 +190,12 @@ const ProfilePage = () => {
             ) : (
               <div className={classes.userFormControl}>
                 <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
-                  <div className={classes.imageContainer}>
-                    {userImageUrl && (
-                      <img src={userImageUrl} alt='profile-logo' className={classes.userImage} />
-                    )}
-                    <input
-                      type='file'
-                      className={classes.photoUpload}
-                      id='photoUpload'
-                      onChange={handleImageLoad}
-                      multiple
-                      accept='image/*'
-                      data-testid='imageInput'
-                    />
-                    <label
-                      htmlFor='photoUpload'
-                      className={`${classes.imageContainerLabel} ${handleLableClass()}`}
-                    >
-                      <Button component='span' className={classes.uploadBtn}>
-                        <CameraIcon className={classes.cameraIcon} />
-                      </Button>
-                    </label>
-                  </div>
+                  <Avatar
+                    userImageUrl={userImageUrl}
+                    setUserImageUrl={setUserImageUrl}
+                    setUpload={setUpload}
+                    t={t}
+                  />
                   <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
                   {getTextFields(PROFILE_USER_CONTACT_DATA)}
                   <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>

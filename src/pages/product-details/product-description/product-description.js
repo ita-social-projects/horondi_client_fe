@@ -7,7 +7,7 @@ import { ExpandMoreOutlined } from '@material-ui/icons';
 import { useStyles } from './product-description.styles';
 import Detail from '../detail';
 
-const ProductDescription = ({ product, currentSizeIndex, checkDisabledProduct }) => {
+const ProductDescription = ({ product, currentSizeIndex }) => {
   const styles = useStyles();
   const { mainMaterial, innerMaterial, bottomMaterial, sizes, translationsKey } = product;
   const currentWeight =
@@ -72,7 +72,7 @@ const ProductDescription = ({ product, currentSizeIndex, checkDisabledProduct })
       </div>
 
       <div className={styles.description}>
-        {currentVolume && currentWeight && checkDisabledProduct ? (
+        {currentVolume && currentWeight && product.available ? (
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreOutlined />}

@@ -48,16 +48,7 @@ const ProductDetails = ({ match }) => {
   });
   const { isLoading, isError } = useIsLoadingOrError([loading], [error]);
   const product = data?.getProductById || {};
-  const {
-    _id: productId,
-    category,
-    sizes,
-    mainMaterial,
-    bottomMaterial,
-    innerMaterial,
-    available,
-    translationsKey
-  } = product;
+  const { _id: productId, category, sizes, available, translationsKey } = product;
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
@@ -110,13 +101,6 @@ const ProductDetails = ({ match }) => {
     setCountComments(count);
   };
 
-  const checkDisabledProduct = () =>
-    (currentSizeIndex >= 0 && sizes ? sizes[currentSizeIndex].size.available : '') &&
-    available &&
-    mainMaterial.material.available &&
-    bottomMaterial.material.available &&
-    innerMaterial.material.available;
-
   const handleSizeChange = (selectedPosition) => {
     const selectedSize = sizes[selectedPosition];
     setProductToSend({
@@ -148,21 +132,20 @@ const ProductDetails = ({ match }) => {
               <ProductInfo
                 product={product}
                 countComments={countComments}
-                checkDisabledProduct={checkDisabledProduct()}
                 currency={currency}
                 currentPrice={productToSend.price}
               />
             )}
             <ProductSizes
               handleSizeChange={handleSizeChange}
-              checkDisabledProduct={checkDisabledProduct()}
+              available={available}
               sizes={sizes}
               currentSize={productToSend.options.size}
               sizeIsNotSelectedError={sizeIsNotSelectedError}
             />
             <div className={styles.submitWrapper}>
               <ProductSubmit
-                disabled={!checkDisabledProduct()}
+                disabled={!available}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}
@@ -177,11 +160,7 @@ const ProductDetails = ({ match }) => {
             </div>
           </div>
           {product.description ? (
-            <ProductDescription
-              product={product}
-              currentSizeIndex={currentSizeIndex}
-              checkDisabledProduct={checkDisabledProduct()}
-            />
+            <ProductDescription product={product} currentSizeIndex={currentSizeIndex} />
           ) : null}
         </div>
         {product._id ? <SimilarProducts product={product} /> : null}

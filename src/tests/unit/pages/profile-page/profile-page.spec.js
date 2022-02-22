@@ -10,6 +10,8 @@ jest.mock('../../../../pages/profile-page/profile-page.styles', () => ({
   useStyles: () => ({})
 }));
 
+jest.mock('../../../../pages/profile-page/avatar/avatar', () => () => 'AvatarComponent');
+
 jest.mock('react-redux');
 jest.mock('formik');
 

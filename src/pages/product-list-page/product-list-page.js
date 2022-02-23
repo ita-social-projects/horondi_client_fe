@@ -173,6 +173,7 @@ const ProductListPage = ({ width }) => {
             variant={drawerVariant}
             open={filterMenuStatus}
             onClose={handleDrawerToggle}
+            style={{ zIndex: 99999 }}
             classes={{
               paper: styles.drawerPaper
             }}

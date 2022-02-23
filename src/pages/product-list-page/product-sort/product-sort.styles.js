@@ -32,10 +32,16 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     lineHeight: '25px',
     '@media (max-width:959px)': {
+      flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'baseline'
+      alignItems: 'center'
     },
-    '& div': {
+    '&>div': {
+      '@media (max-width:959px)': {
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: '10px'
+      },
       '@media (max-width:500px)': {
         marginRight: '0',
         marginBottom: '.5rem',

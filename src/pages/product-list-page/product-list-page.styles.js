@@ -27,6 +27,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   sortDiv: {
     paddingTop: '51px',
+    '@media (max-width: 960px)': {
+      paddingTop: '21px'
+    },
     '& div': {
       flexWrap: 'wrap',
       marginRight: 0

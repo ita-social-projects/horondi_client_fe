@@ -63,6 +63,6 @@ export const validationSchema = (deliveryType) =>
       Yup.string()
         .min(1, 'error.flat')
         .max(6, 'error.flat')
-        .matches(formRegExp.flat, 'error.onlyNumber')
+        .matches(formRegExp.appartment, 'error.appartment')
         .required('error.requiredField')
   });

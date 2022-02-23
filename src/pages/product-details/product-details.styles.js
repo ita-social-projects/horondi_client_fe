@@ -22,8 +22,12 @@ export const useStyles = makeStyles((theme) => ({
   submitWrapper: {
     display: 'flex',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      padding: '10px 0'
+    '@media (max-width: 400px)': {
+      '& .MuiSvgIcon-root': {
+        margin: '0 10px 0 50px'
+      },
+      padding: '10px 0',
+      justifyContent: 'space-between'
     }
   },
   productDetails: {

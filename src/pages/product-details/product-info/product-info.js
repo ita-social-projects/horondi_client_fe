@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import parse from 'html-react-parser';
+
 import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
-
 import { SCROLL_BAR_LINKS } from '../constants';
 import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
 

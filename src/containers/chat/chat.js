@@ -24,13 +24,16 @@ export const Chat = () => {
 
   return (
     <>
+      <div className={iconsVisible ? style.visibleFbIcon : style.invisibleFbIcon}>
+        <MessengerCustomerChat
+          pageId={CHAT_FACEBOOK_DATA.pageId}
+          appId={CHAT_FACEBOOK_DATA.appId}
+          onClick={() => setMailFormVisible(false)}
+        />
+      </div>
+
       {iconsVisible && (
         <div className={style.iconsMessengers}>
-          <MessengerCustomerChat
-            pageId={CHAT_FACEBOOK_DATA.pageId}
-            appId={CHAT_FACEBOOK_DATA.appId}
-            onClick={() => setMailFormVisible(false)}
-          />
           <div
             className={mailFormVisible ? style.msgIconActive : style.msgIcon}
             onClick={() => setMailFormVisible(!mailFormVisible)}

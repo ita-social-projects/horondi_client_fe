@@ -46,6 +46,18 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'block',
     right: '12px'
   },
+  invisibleFbIcon: {
+    display: 'none'
+  },
+  visibleFbIcon: {
+    right: '22px',
+    bottom: '190px',
+    display: 'block',
+    position: 'fixed',
+    height: '60px',
+    width: '60px',
+    zIndex: '1000'
+  },
   msgIcon: {
     ...flexCenter,
     width: '60px',

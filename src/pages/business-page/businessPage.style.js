@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: '0 20px'
       }
     },
+
     '& h3': {
       '@media (max-width: 670px)': {
         textAlign: 'center',
@@ -75,6 +76,35 @@ export const useStyles = makeStyles((theme) => ({
         width: 305,
         margin: '10px 20px'
       }
+    },
+    '& > .busPage': {
+      display: 'flex'
+    },
+    '& > .busPage > .busPage_block3': {
+      width: '100%',
+      height: '300px'
+    },
+    '& > .busPage > .busPage_block3 img': {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover'
+    },
+    '& > .busPage > .busPage_daughter_img img': {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover'
+    },
+    '& > .busPage > .busPage_daughter': {
+      flex: '0 1 50%',
+      border: '2px solid red'
+    },
+    '& > .busPage > .busPage_daughter > .busPage_daughter_text': {
+      fontSize: '14px',
+      lineHeight: '22px'
+    },
+    '& > .busPage > .busPage_daughter_img': {
+      flex: '0 1 50%',
+      border: '2px solid green'
     }
   }
 }));

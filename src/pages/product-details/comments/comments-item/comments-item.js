@@ -42,7 +42,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
   };
 
   const [isModalShown, toggleModal] = useState(false);
-  const [isReplyShown, toggleReply] = useState(false);
+  const [isReplyShown, toggleReply] = useState();
   const [isReplyListShown, toggleReplyList] = useState(false);
   const [currentLimit, setCurrentLimit] = useState(3);
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
@@ -218,10 +218,9 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
       <CommentDialog
         handleClose={handleClose}
         isModalShown={isModalShown}
-        commentId={commentId}
+        id={commentId}
         userId={handleUserId(userData)}
-        isDeleteComment={1}
-        productId={productId}
+        isDeleteComment
         refetchComments={refetchComments}
       />
     </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button, TextField } from '@material-ui/core';
@@ -49,11 +49,6 @@ const ReplyForm = ({ userFirstName, user, cancel, commentId, refetchComments, pr
     setShouldValidate(false);
     cancel(false);
   };
-
-  useEffect(() => () => {
-    setShouldValidate(false);
-    cancel(false);
-  });
 
   const { values, errors, handleSubmit, handleBlur, setFieldValue, setShouldValidate } =
     useCommentValidation(!!userData, onSubmit);

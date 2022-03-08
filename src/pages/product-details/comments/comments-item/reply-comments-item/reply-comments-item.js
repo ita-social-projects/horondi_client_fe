@@ -49,9 +49,12 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
     toggleModal(false);
   };
 
-  useEffect(() => () => {
-    toggleModal(false);
-  }, []);
+  useEffect(
+    () => () => {
+      toggleModal(false);
+    },
+    []
+  );
 
   if (!show && userData?._id !== _id) {
     return null;
@@ -106,7 +109,7 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
       <CommentDialog
         handleClose={handleClose}
         isModalShown={isModalShown}
-        commentId={replyCommentId}
+        id={replyCommentId}
         refetchComments={updateReplies}
         userId={userData ? userData._id : ''}
       />

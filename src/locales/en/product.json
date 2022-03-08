@@ -71,7 +71,8 @@
   "snackBar": {
     "added": "Your comment is successfully added",
     "addedReply": "Your answer is successfully added",
-    "deleted": "Your comment is successfully deleted"
+    "deletedComment": "Your comment is successfully deleted",
+    "deletedReply": "Your reply is successfully deleted"
   },
   "size": {
     "S": "Small",

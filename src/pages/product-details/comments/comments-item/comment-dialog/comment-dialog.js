@@ -11,7 +11,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useMutation } from '@apollo/client';
 import { useStyles } from './comment-dialog.styles';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
-import { deleteCommentMutation } from '../../operations/comments.queries';
+import {
+  deleteCommentMutation,
+  deleteReplyForCommentMutation
+} from '../../operations/comments.queries';
 import Loader from '../../../../../components/loader';
 import { ERROR } from '../../../constants';
 import { SnackBarContext } from '../../../../../context/snackbar-context';
@@ -19,8 +22,9 @@ import { SnackBarContext } from '../../../../../context/snackbar-context';
 const CommentDialog = ({
   isModalShown,
   handleClose,
-  commentId,
-  isDeleteComment = 0,
+  id,
+  isDeleteComment = false,
+  userId,
   refetchComments
 }) => {
   const styles = useStyles();
@@ -33,15 +37,36 @@ const CommentDialog = ({
       setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
       errorOrLoadingHandler(err);
     },
-    onCompleted: () => setSnackBarMessage(t('product.snackBar.deleted'))
+    onCompleted: () => setSnackBarMessage(t('product.snackBar.deletedComment'))
   });
 
+  const [deleteReplyForComment, { loading: deleteReplyForCommentLoading }] = useMutation(
+    deleteReplyForCommentMutation,
+    {
+      onError: (err) => {
+        setSnackBarMessage(t('errorPage.pageMessage.DEFAULT_ERROR'), ERROR);
+        errorOrLoadingHandler(err);
+      },
+      onCompleted: () => setSnackBarMessage(t('product.snackBar.deletedReply'))
+    }
+  );
+
   const handleDelete = async () => {
-    await deleteComment({
-      variables: {
-        commentID: commentId
-      }
-    });
+    if (isDeleteComment) {
+      await deleteComment({
+        variables: {
+          id: userId,
+          commentID: id
+        }
+      });
+    } else {
+      await deleteReplyForComment({
+        variables: {
+          id: userId,
+          replyCommentId: id
+        }
+      });
+    }
     await refetchComments();
     handleClose();
   };
@@ -51,20 +76,18 @@ const CommentDialog = ({
       <Dialog open={isModalShown} onClose={handleClose} className={styles.dialog}>
         <DialogTitle className={styles.title}>
           <div className={styles.titleContent}>
-            {isDeleteComment === 1 ? t('common.dialog.title') : t('common.dialogRiply.title')}
+            {isDeleteComment ? t('common.dialog.title') : t('common.dialogRiply.title')}
             <CloseIcon className={styles.icon} onClick={handleClose} />
           </div>
         </DialogTitle>
 
         <DialogContent>
           <DialogContentText className={styles.content}>
-            {isDeleteComment === 1
-              ? t('common.dialog.description')
-              : t('common.dialogRiply.description')}
+            {isDeleteComment ? t('common.dialog.description') : t('common.dialogRiply.description')}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {deleteCommentLoading && (
+          {(deleteCommentLoading || deleteReplyForCommentLoading) && (
             <div className={styles.loader} data-testid='deleteCommentLoader'>
               <Loader width={20} height={20} heightWrap={40} />
             </div>

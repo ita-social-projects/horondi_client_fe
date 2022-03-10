@@ -50,7 +50,6 @@ const BusinessPage = ({ match }) => {
           }
           return null;
         });
-        // console.log(addressTextPart);
         setResult((prev) => [...prev, [...addressTextPart]]);
       }
     }
@@ -70,7 +69,7 @@ const BusinessPage = ({ match }) => {
           item[3] ? (
             <div className='busPage' key={index}>
               <div className='busPage_daughter'>
-                <p>{item[1].props.children}</p>
+                <p className='busPageTitle'>{item[1].props.children}</p>
                 <div className='busPage_daughter_text'>{item[2].props.children}</div>
                 <br />
                 <div className='busPage_daughter_text'>{item[3].props.children}</div>

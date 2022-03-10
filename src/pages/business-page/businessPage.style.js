@@ -10,7 +10,8 @@ export const useStyles = makeStyles((theme) => ({
       '@media (max-width: 670px)': {
         lineHeight: '1.5rem',
         textAlign: 'justify',
-        margin: '0 20px'
+        margin: '0 20px',
+        marginBottom: '20px'
       }
     },
 
@@ -83,6 +84,13 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: '40px',
       marginTop: '40px'
     },
+
+    '@media (max-width: 900px)': {
+      '& > .busPage': {
+        flexDirection: 'column'
+      }
+    },
+
     '& > .busPage > .busPage_block3': {
       width: '100%',
       height: '300px',

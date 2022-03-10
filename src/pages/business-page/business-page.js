@@ -41,7 +41,16 @@ const BusinessPage = ({ match }) => {
     setResult([]);
     if (addressText && indexImg) {
       for (let i = 0; i < indexImg.length; i++) {
-        const addressTextPart = addressText.slice(indexImg[i], indexImg[i + 1]);
+        const addressTextPart = addressText.slice(indexImg[i], indexImg[i + 1]).filter((item) => {
+          if (item.type === 'img') {
+            return item;
+          }
+          if (typeof item.props.children === 'string') {
+            return item;
+          }
+          return null;
+        });
+        // console.log(addressTextPart);
         setResult((prev) => [...prev, [...addressTextPart]]);
       }
     }

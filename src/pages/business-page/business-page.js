@@ -11,8 +11,6 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 const BusinessPage = ({ match }) => {
   const [page, setPage] = useState({});
   const [title, setTitle] = useState('');
-  const [loaded, setLoaded] = useState(false);
-
   const [result, setResult] = useState([]);
   const [indexImg, setIndexImg] = useState([]);
 
@@ -27,37 +25,34 @@ const BusinessPage = ({ match }) => {
   const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
 
   useEffect(() => {
+    setIndexImg([]);
     if (addressText) {
-      if (loaded) return;
       setTitle(addressText[0].props.children);
-
       addressText.map((item, index) => {
         if (item.type === 'img') {
           setIndexImg((prev) => [...prev, index]);
         }
         return null;
       });
-      setLoaded(true);
     }
-  }, [addressText, loaded]);
+  }, [addressText?.length]);
 
   useEffect(() => {
+    setResult([]);
     if (addressText && indexImg) {
       for (let i = 0; i < indexImg.length; i++) {
-        const a = addressText.slice(indexImg[i], indexImg[i + 1]);
-        setResult((prev) => [...prev, [...a]]);
+        const addressTextPart = addressText.slice(indexImg[i], indexImg[i + 1]);
+        setResult((prev) => [...prev, [...addressTextPart]]);
       }
     }
   }, [indexImg]);
-
-  useEffect(() => {}, [result]);
 
   const styles = useStyles();
   const appStyles = useAppStyles();
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
-  return (
+  return code === 'about-us' ? (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.root}`}>
         <h1>{title}</h1>
@@ -94,6 +89,14 @@ const BusinessPage = ({ match }) => {
             </div>
           )
         )}
+      </div>
+    </div>
+  ) : (
+    <div className={appStyles.rootApp}>
+      <div className={`${appStyles.containerApp} ${styles.root}`}>
+        {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
+        <hr />
+        {addressText}
       </div>
     </div>
   );

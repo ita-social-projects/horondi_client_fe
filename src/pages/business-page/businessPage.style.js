@@ -78,11 +78,15 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& > .busPage': {
-      display: 'flex'
+      display: 'flex',
+      gap: '40px',
+      marginBottom: '40px',
+      marginTop: '40px'
     },
     '& > .busPage > .busPage_block3': {
       width: '100%',
-      height: '300px'
+      height: '300px',
+      marginBottom: '40px'
     },
     '& > .busPage > .busPage_block3 img': {
       width: '100%',
@@ -96,15 +100,17 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& > .busPage > .busPage_daughter': {
       flex: '0 1 50%',
-      border: '2px solid red'
+      paddingTop: '25px'
+    },
+    '& > .busPage > .busPage_daughter > p': {
+      fontSize: '35px'
     },
     '& > .busPage > .busPage_daughter > .busPage_daughter_text': {
       fontSize: '14px',
       lineHeight: '22px'
     },
     '& > .busPage > .busPage_daughter_img': {
-      flex: '0 1 50%',
-      border: '2px solid green'
+      flex: '0 1 50%'
     }
   }
 }));

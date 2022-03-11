@@ -22,7 +22,8 @@ const BusinessPage = ({ match }) => {
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
 
-  const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
+  const text = page?.text && t(`${page.translationsKey}.text`);
+  const addressText = text && parse(text);
 
   useEffect(() => {
     setIndexImg([]);
@@ -35,7 +36,7 @@ const BusinessPage = ({ match }) => {
         return null;
       });
     }
-  }, [addressText?.length]);
+  }, [page, text]);
 
   useEffect(() => {
     setResult([]);

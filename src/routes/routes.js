@@ -96,7 +96,6 @@ const Routes = () => {
               <Route path={pathToChosenPage} exact component={BusinessPage} />
               <Route path={pathToAnswersQuestionsPage} exact component={AnswersQuestionsPage} />
               <Route path={pathToGiftСertificate} exact component={GiftСertificate} />
-              <Route path={pathToMyCertificates} exact component={MyCertificates} />
 
               <ProtectedRoute
                 path={pathToLogin}
@@ -137,6 +136,13 @@ const Routes = () => {
               <ProtectedRoute
                 component={OrderHistory}
                 path={pathToOrderHistory}
+                isAuthed={userIsChecked && userData}
+                exact
+                redirectTo={pathToLogin}
+              />
+              <ProtectedRoute
+                component={MyCertificates}
+                path={pathToMyCertificates}
                 isAuthed={userIsChecked && userData}
                 exact
                 redirectTo={pathToLogin}

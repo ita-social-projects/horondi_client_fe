@@ -3,11 +3,13 @@ import { Person, PersonOutlineOutlined } from '@material-ui/icons';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useMutation } from '@apollo/client';
 import HeaderProfile from '../header-profile';
 
 jest.mock('../header-profile.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../services/local-storage.service');
 jest.mock('react-redux');
+jest.mock('@apollo/client');
 jest.mock('connected-react-router', () => ({ push: () => 0 }));
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -33,6 +35,7 @@ const mockDispatch = jest.fn();
 
 useSelector.mockImplementation(() => mockStore);
 useDispatch.mockReturnValue(mockDispatch);
+useMutation.mockImplementation(() => [jest.fn()]);
 
 let wrapper;
 

@@ -15,6 +15,11 @@ const loginUser = async (data) => {
     lastName
     phoneNumber
     confirmed
+    configs {
+      language
+      currency
+      theme
+    }
     images {
       thumbnail
     }
@@ -203,6 +208,11 @@ const getUserByToken = async () => {
             firstName
             lastName
             phoneNumber
+            configs {
+              language
+              currency
+              theme
+            }
             images {
               thumbnail
             }

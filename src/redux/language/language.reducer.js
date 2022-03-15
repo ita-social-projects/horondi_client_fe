@@ -1,8 +1,7 @@
 import { CHANGE_LANGUAGE } from './language.types';
-import { DEFAULT_LANGUAGE } from '../../configs';
 
 export const initialState = {
-  language: DEFAULT_LANGUAGE
+  language: 0
 };
 
 const languageReducer = (state = initialState, action = {}) => {

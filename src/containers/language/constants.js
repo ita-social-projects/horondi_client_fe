@@ -1,4 +1,4 @@
 export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
+  { lang: 'ua', value: 0 },
+  { lang: 'en', value: 1 }
 ];

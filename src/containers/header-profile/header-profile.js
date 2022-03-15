@@ -8,7 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Settings, History, PersonOutlineOutlined, Person } from '@material-ui/icons';
 
 import { useTranslation } from 'react-i18next';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './header-profile.styles';
 import { logoutUser } from '../../redux/user/user.actions';
 import { RETURN_PAGE, DARK_THEME, LIGHT_THEME, LANGUAGE } from '../../configs';
@@ -17,10 +17,9 @@ import { GiftCertificatesIcon } from '../../images/gift-certificates-icon';
 
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import ThemeContext from '../../context/theme-context';
-import { saveUserConfigs, userQuery } from './profile.queries';
+import { saveUserConfigs } from './profile.queries';
 import { changeLanguage } from '../../redux/language/language.actions';
 import i18n from '../../i18n';
-import { LANGUAGES_LIST } from '../language/constants';
 import { changeCurrency } from '../../redux/currency/currency.actions';
 
 const {
@@ -46,19 +45,13 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
   const history = useHistory();
 
-  const { data: user, refetch } = useQuery(userQuery, {
-    variables: {
-      id: userData?._id
-    }
-  });
-
   const configsUser = {
     currency: getFromLocalStorage('currency'),
-    language: getFromLocalStorage('language'),
+    language: i18n.language,
     theme: getFromLocalStorage('theme')
   };
 
-  const { firstName, lastName, email } = user?.getUserById || {};
+  const { firstName, lastName, email } = userData || {};
 
   const [saveConfigs] = useMutation(saveUserConfigs, {
     variables: {
@@ -86,23 +79,22 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   };
 
   useEffect(() => {
-    if (user) {
-      refetch();
-      const { theme, language, currency } = user?.getUserById.configs || '';
+    if (userData) {
+      const { theme, language, currency } = userData.configs;
 
       setLightMode(theme === 'light');
       setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
 
-      i18n.changeLanguage(LANGUAGES_LIST[language].lang.toLowerCase());
+      i18n.changeLanguage(language);
       setToLocalStorage(LANGUAGE, language);
       dispatch(changeLanguage(language));
 
       setToLocalStorage('currency', currency);
       dispatch(changeCurrency(currency));
     }
-  }, [user]);
+  }, [userData]);
 
-  const handleLogIn = async () => {
+  const handleLogIn = () => {
     setIsMenuOpen(false);
     const pathName = history.location.pathname;
     const returnPath =

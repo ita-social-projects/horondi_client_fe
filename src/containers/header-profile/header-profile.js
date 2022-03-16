@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
 import { useStyles } from './header-profile.styles';
 import { logoutUser } from '../../redux/user/user.actions';
-import { RETURN_PAGE, DARK_THEME, LIGHT_THEME, LANGUAGE } from '../../configs';
+import { RETURN_PAGE, LANGUAGE } from '../../configs';
 import routes from '../../configs/routes';
 import { GiftCertificatesIcon } from '../../images/gift-certificates-icon';
 
@@ -35,7 +35,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     userData: User.userData
   }));
 
-  const [lightMode, setLightMode] = useContext(ThemeContext);
+  const [, setLightMode] = useContext(ThemeContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const { t } = useTranslation();
@@ -106,7 +106,6 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     setAnchorEl(null);
     await saveConfigs();
     dispatch(logoutUser());
-    setToLocalStorage('theme', lightMode ? LIGHT_THEME : DARK_THEME);
   };
 
   const handleRedirect = (link) => {

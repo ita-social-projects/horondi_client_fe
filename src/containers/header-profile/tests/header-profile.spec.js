@@ -39,7 +39,6 @@ useDispatch.mockReturnValue(mockDispatch);
 useMutation.mockImplementation(() => [jest.fn()]);
 
 let wrapper;
-jest.spyOn(React, 'useEffect').mockImplementationOnce((f) => f());
 
 describe('<HeaderProfile />', () => {
   beforeEach(() => {

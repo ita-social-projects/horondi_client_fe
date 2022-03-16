@@ -8,9 +8,9 @@ import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
 import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
-import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
+import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
 import routes from '../configs/routes';
 import { CategoriesContext } from '../context/categories/categories-context';
@@ -96,7 +96,6 @@ const Routes = () => {
               <Route path={pathToChosenPage} exact component={BusinessPage} />
               <Route path={pathToAnswersQuestionsPage} exact component={AnswersQuestionsPage} />
               <Route path={pathToGiftСertificate} exact component={GiftСertificate} />
-              <Route path={pathToMyCertificates} exact component={MyCertificates} />
 
               <ProtectedRoute
                 path={pathToLogin}
@@ -137,6 +136,13 @@ const Routes = () => {
               <ProtectedRoute
                 component={OrderHistory}
                 path={pathToOrderHistory}
+                isAuthed={userIsChecked && userData}
+                exact
+                redirectTo={pathToLogin}
+              />
+              <ProtectedRoute
+                component={MyCertificates}
+                path={pathToMyCertificates}
                 isAuthed={userIsChecked && userData}
                 exact
                 redirectTo={pathToLogin}

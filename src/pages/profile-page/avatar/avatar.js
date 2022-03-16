@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button, FormHelperText } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 import { CameraIcon } from '../../../images/profile-icons';
 import { useStyles } from './avatar.styles';
 
-const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, t }) => {
+const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }) => {
   const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -72,15 +74,24 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, t }) => {
 
   const handleLableClass = () => (userImageUrl ? classes.updateLabel : classes.uploadLabel);
 
+  const deleteAvatar = () => {
+    setUserImageUrl(null);
+    setUpload(null);
+    setDeleteAvatar(true);
+  };
+
   return (
     <div className={classes.imageContainer}>
       {userImageUrl && (
-        <img
-          src={userImageUrl}
-          alt='profile-logo'
-          className={classes.userImage}
-          data-testid='renderedimage'
-        />
+        <>
+          <DeleteIcon className={classes.deleteIcon} onClick={deleteAvatar} />
+          <img
+            src={userImageUrl}
+            alt='profile-logo'
+            className={classes.userImage}
+            data-testid='renderedimage'
+          />
+        </>
       )}
       <input
         type='file'

@@ -68,5 +68,15 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   formHelper: {
     maxWidth: '100px'
+  },
+  deleteIcon: {
+    position: 'absolute',
+    zIndex: '1',
+    top: '0',
+    right: '0',
+    color: palette.comments.deleteIcon.color,
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 }));

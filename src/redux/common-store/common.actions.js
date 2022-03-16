@@ -5,4 +5,11 @@ const setCart = (cart) => ({
   payload: cart
 });
 
-export { setCart };
+const { SET_WISHLIST } = require('./common.types');
+
+const setNewWishlist = (wishlist) => ({
+  type: SET_WISHLIST,
+  payload: wishlist
+});
+
+export { setCart, setNewWishlist };

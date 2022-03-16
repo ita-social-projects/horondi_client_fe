@@ -29,7 +29,8 @@ import {
   upload,
   user,
   userId,
-  userWithProducts
+  userWithProducts,
+  wishlist
 } from './user.mocks';
 import {
   handleGoogleUserLogin,
@@ -59,7 +60,8 @@ import {
   registerUser,
   resetPassword,
   sendEmailConfirmation,
-  updateUserById
+  updateUserById,
+  getWishlistByUserId
 } from '../user.operations';
 import routes from '../../../configs/routes';
 import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../../configs';
@@ -74,9 +76,10 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getGoogleUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(getWishlistByUserId, user._id), wishlist]
       ])
-      .put(setUser({ ...user, purchasedProducts }))
+      .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -87,8 +90,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(5);
+        expect(analysisCall).toHaveLength(3);
         clearLocalStorage();
       }));
 
@@ -109,9 +112,10 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(getFacebookUser, payload), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(getWishlistByUserId, user._id), wishlist]
       ])
-      .put(setUser({ ...user, purchasedProducts }))
+      .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -122,8 +126,8 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(5);
+        expect(analysisCall).toHaveLength(3);
         clearLocalStorage();
       }));
 
@@ -143,16 +147,17 @@ describe('user sagas tests', () => {
       .put(setUserLoading(true))
       .provide([
         [call(loginUser, { user: { email, pass, rememberMe } }), user],
-        [call(getPurchasedProducts, user._id), purchasedProducts]
+        [call(getPurchasedProducts, user._id), purchasedProducts],
+        [call(getWishlistByUserId, user._id), wishlist]
       ])
-      .put(setUser({ ...user, purchasedProducts }))
+      .put(setUser({ ...user, purchasedProducts, wishlist }))
       .run()
       .then((result) => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(2);
+        expect(analysisPut).toHaveLength(5);
+        expect(analysisCall).toHaveLength(3);
       }));
 
   it('should hangle login error', () =>

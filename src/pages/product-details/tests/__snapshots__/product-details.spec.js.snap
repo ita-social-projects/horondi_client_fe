@@ -50,10 +50,10 @@ exports[`Product details test Should render product details component 1`] = `
           />
           <WithStyles(ForwardRef(Tooltip))
             placement="bottom"
-            title="product.tooltips.removeWishful"
+            title="product.tooltips.addWishful"
           >
-            <Memo(ForwardRef(FavoriteIcon))
-              data-cy="wishful"
+            <Memo(ForwardRef(FavoriteBorderIcon))
+              data-cy="not-wishful"
               onClick={[Function]}
             />
           </WithStyles(ForwardRef(Tooltip))>

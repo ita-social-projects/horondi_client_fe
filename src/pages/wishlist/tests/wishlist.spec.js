@@ -14,6 +14,18 @@ jest.mock('../../../hooks/use-wishlist-loader', () => ({
   default: () => ({ loading: false, error: null, wishlist: {} })
 }));
 
+jest.mock('@apollo/client', () => ({
+  ...jest.requireActual('@apollo/client'),
+  useMutation: () => [
+    () => null,
+    {
+      loading: true,
+      error: null,
+      data: { addProductToWishlist: { products: [{ _id: 1 }] } }
+    }
+  ]
+}));
+
 const dispatch = jest.fn();
 const state = {
   isLightTheme: true,

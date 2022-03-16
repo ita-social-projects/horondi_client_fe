@@ -264,6 +264,74 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
+const getWishlistByUserId = async (id) => {
+  const getWishlistByUseQuery = `
+  query {
+    getWishlistByUserId {
+      ... on Wishlist {
+        __typename
+        _id
+        user_id
+        products {
+          _id
+          translationsKey
+          images {
+            primary {
+              thumbnail
+            }
+          }
+          category {
+            _id
+          }
+          pattern {
+            _id
+          }
+          sizes {
+            size {
+              _id
+              available
+              name
+            }
+            price {
+              currency
+              value
+            }
+          }
+          mainMaterial {
+            material {
+              translationsKey
+              _id
+              colors {
+                _id
+              }
+            }
+          }
+          bottomMaterial {
+            material {
+              translationsKey
+              _id
+              name {
+                value
+              }
+              colors {
+                _id
+              }
+            }
+          }
+        }
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+`;
+  const result = await getItems(getWishlistByUseQuery, { id });
+
+  return result?.data?.getWishlistByUserId;
+};
+
 export {
   loginUser,
   getGoogleUser,
@@ -277,5 +345,6 @@ export {
   sendEmailConfirmation,
   getUserByToken,
   regenerateUserTokenPairs,
-  getPurchasedProducts
+  getPurchasedProducts,
+  getWishlistByUserId
 };

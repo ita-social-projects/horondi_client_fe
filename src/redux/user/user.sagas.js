@@ -242,7 +242,7 @@ export function* handleRefreshTokenInvalid() {
 }
 
 export function* handleUserError(e) {
-  const language = getFromLocalStorage(LANGUAGE) === 'ua' ? 0 : 1;
+  const language = getFromLocalStorage(LANGUAGE);
   if (e?.message === USER_IS_BLOCKED) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {

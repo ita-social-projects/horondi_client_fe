@@ -18,7 +18,6 @@ import { GiftCertificatesIcon } from '../../images/gift-certificates-icon';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import ThemeContext from '../../context/theme-context';
 import { saveUserConfigs } from './profile.queries';
-import { changeLanguage } from '../../redux/language/language.actions';
 import i18n from '../../i18n';
 import { changeCurrency } from '../../redux/currency/currency.actions';
 
@@ -83,11 +82,10 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       const { theme, language, currency } = userData.configs;
 
       setLightMode(theme === 'light');
-      setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
+      setToLocalStorage('theme', theme);
 
       i18n.changeLanguage(language);
       setToLocalStorage(LANGUAGE, language);
-      dispatch(changeLanguage(language));
 
       setToLocalStorage('currency', currency);
       dispatch(changeCurrency(currency));

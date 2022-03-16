@@ -3,7 +3,7 @@ import { ButtonGroup, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
 import { setToLocalStorage } from '../../services/local-storage.service';
-import { DEFAULT_LANGUAGE, LANGUAGE } from '../../configs';
+import { LANGUAGE } from '../../configs';
 import { LANGUAGES_LIST } from './constants';
 
 const LanguageComponent = ({ fromSideBar }) => {
@@ -13,8 +13,7 @@ const LanguageComponent = ({ fromSideBar }) => {
   const handleChange = (e) => {
     const targetValue = e.target.value;
     setToLocalStorage(LANGUAGE, targetValue);
-    const languageInLocalStorage = targetValue || DEFAULT_LANGUAGE;
-    i18n.changeLanguage(languageInLocalStorage);
+    i18n.changeLanguage(targetValue);
   };
 
   const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (

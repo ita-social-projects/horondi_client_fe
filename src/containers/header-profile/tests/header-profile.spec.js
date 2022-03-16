@@ -11,9 +11,10 @@ jest.mock('../../../services/local-storage.service');
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 jest.mock('connected-react-router', () => ({ push: () => 0 }));
+const mockSetLightMode = jest.fn();
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
-  useContext: () => [true, () => null]
+  useContext: () => [true, mockSetLightMode]
 }));
 jest.mock('react-router');
 useHistory.mockReturnValue({
@@ -38,6 +39,7 @@ useDispatch.mockReturnValue(mockDispatch);
 useMutation.mockImplementation(() => [jest.fn()]);
 
 let wrapper;
+jest.spyOn(React, 'useEffect').mockImplementationOnce((f) => f());
 
 describe('<HeaderProfile />', () => {
   beforeEach(() => {
@@ -61,13 +63,11 @@ describe('<HeaderProfile />', () => {
   });
 
   it('should work with login user', () => {
-    mockStore.userData = true;
     const iconIn = wrapper.find(Person);
     iconIn.simulate('click', { persist: jest.fn(), handleChangeTheme: false });
     expect(wrapper.find(MenuItem).length).toEqual(4);
   });
   it('should simulate clicks on children', () => {
-    mockStore.userData = true;
     const menuItem1 = wrapper.find(MenuItem).at(1);
     const menuItem2 = wrapper.find(MenuItem).at(2);
     menuItem1.simulate('click', { persist: jest.fn() });
@@ -81,6 +81,8 @@ describe('<HeaderProfile />', () => {
 
     mockStore.userData = null;
     useSelector.mockImplementation(() => mockStore);
+    const menuItem = wrapper.find(MenuItem).at(3);
+    menuItem.simulate('click', { persist: jest.fn() });
   });
 
   it('simulate click on log in button', () => {

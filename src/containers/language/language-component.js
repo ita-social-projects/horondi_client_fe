@@ -16,8 +16,8 @@ const LanguageComponent = ({ fromSideBar }) => {
     i18n.changeLanguage(targetValue);
   };
 
-  const mappedLanguages = LANGUAGES_LIST.map(({ lang, value }) => (
-    <Button data-cy={`${LANGUAGE}${value + 1}`} key={value} value={lang}>
+  const mappedLanguages = LANGUAGES_LIST.map((lang) => (
+    <Button key={lang} value={lang}>
       {lang}
     </Button>
   ));

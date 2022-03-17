@@ -149,7 +149,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   ];
 
   const mappedProfileList = PROFILE_DATA.map(({ value, icon, clickHandler }) => (
-    <MenuItem key={value} onClick={clickHandler} disableGutters data-cy='menuItem'>
+    <MenuItem key={value} onClick={clickHandler} disableGutters data-testid='menuItem'>
       {icon}
       {value}
     </MenuItem>
@@ -158,7 +158,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   return (
     <div className={styles.profile} data-cy='profile'>
       {userData ? (
-        <Person onClick={handleClick} onKeyDown={handleClick} tabIndex={0} data-cy='iconIn' />
+        <Person onClick={handleClick} onKeyDown={handleClick} tabIndex={0} data-testid='iconIn' />
       ) : (
         <PersonOutlineOutlined
           onClick={handleLogIn}
@@ -168,7 +168,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
         />
       )}
       <Menu
-        data-cy='menu'
+        data-testid='menu'
         className={styles.list}
         anchorEl={anchorEl}
         keepMounted

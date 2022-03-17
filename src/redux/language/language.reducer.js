@@ -1,7 +1,7 @@
 import { CHANGE_LANGUAGE } from './language.types';
 
 export const initialState = {
-  language: 0
+  language: 'ua'
 };
 
 const languageReducer = (state = initialState, action = {}) => {

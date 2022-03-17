@@ -8,6 +8,6 @@ Object {
 
 exports[`test language reducer should return default state 1`] = `
 Object {
-  "language": 0,
+  "language": "ua",
 }
 `;

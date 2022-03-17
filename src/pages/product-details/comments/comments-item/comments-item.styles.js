@@ -61,7 +61,8 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     textContent: {
-      display: 'flex'
+      display: 'flex',
+      wordBreak: 'break-all'
     },
 
     deleteIcon: {

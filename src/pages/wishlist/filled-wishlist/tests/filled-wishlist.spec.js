@@ -23,6 +23,18 @@ jest.mock('../filled-wishlist.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../../services/local-storage.service');
 
+jest.mock('@apollo/client', () => ({
+  ...jest.requireActual('@apollo/client'),
+  useMutation: () => [
+    () => null,
+    {
+      loading: true,
+      error: null,
+      data: { addProductToWishlist: { products: [{ _id: 1 }] } }
+    }
+  ]
+}));
+
 const state = {
   language: 1,
   currency: 1

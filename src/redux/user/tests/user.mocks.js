@@ -47,9 +47,12 @@ export const user = {
 
 export const purchasedProducts = [];
 
+export const wishlist = [];
+
 export const userWithProducts = {
   ...user,
-  purchasedProducts
+  purchasedProducts,
+  wishlist
 };
 
 export const pagination = {

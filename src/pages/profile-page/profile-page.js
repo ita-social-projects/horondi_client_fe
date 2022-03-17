@@ -17,6 +17,7 @@ import { useAppStyles } from '../../components/app/app.styles';
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
+  const [deleteAvatar, setDeleteAvatar] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
@@ -51,7 +52,7 @@ const ProfilePage = () => {
       }
     });
 
-    dispatch(updateUser({ user, id: userData._id, upload }));
+    dispatch(updateUser({ user, id: userData._id, upload, deleteAvatar }));
     setShouldValidate(false);
   };
 
@@ -194,6 +195,7 @@ const ProfilePage = () => {
                     userImageUrl={userImageUrl}
                     setUserImageUrl={setUserImageUrl}
                     setUpload={setUpload}
+                    setDeleteAvatar={setDeleteAvatar}
                     t={t}
                   />
                   <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>

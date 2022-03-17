@@ -15,9 +15,10 @@ export const validationSchema = Yup.object().shape({
   email: Yup.string()
     .min(8, 'error.emailLength')
     .max(60, 'error.emailLength')
-    .matches(formRegExp.email, 'error.wrongFormat')
+    .matches(formRegExp.email, 'error.profile.email')
     .required('error.requiredField'),
   phoneNumber: Yup.string()
+    .matches(formRegExp.wholeNumber, 'error.onlyNumber')
     .min(9, 'error.profile.phoneTooShort')
     .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
     .max(9, 'error.profile.phoneTooLong')
@@ -50,6 +51,7 @@ export const validationSchema = Yup.object().shape({
   buildingNumber: Yup.string()
     .min(1, 'error.profile.buildingNumber')
     .max(6, 'error.profile.buildingNumber')
+    .matches(formRegExp.number, 'error.profile.buildingNumberLackNumber')
     .matches(formRegExp.buildingNumber, 'error.wrongFormat')
     .nullable(),
   appartment: Yup.string()
@@ -59,6 +61,6 @@ export const validationSchema = Yup.object().shape({
     .nullable(),
   zipcode: Yup.string()
     .length(5, 'error.profile.zipcode')
-    .matches(formRegExp.buildingNumber, 'error.zipcode')
+    .matches(formRegExp.buildingNumber, 'error.profile.zipcode')
     .nullable()
 });

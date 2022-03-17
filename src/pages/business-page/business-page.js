@@ -36,7 +36,7 @@ const BusinessPage = ({ match }) => {
         return null;
       });
     }
-  }, [page, text]);
+  }, [text]);
 
   useEffect(() => {
     setResult([]);
@@ -72,7 +72,6 @@ const BusinessPage = ({ match }) => {
               <div className='busPage_daughter'>
                 <p className='busPageTitle'>{item[1].props.children}</p>
                 <div className='busPage_daughter_text'>{item[2].props.children}</div>
-                <br />
                 <div className='busPage_daughter_text'>{item[3].props.children}</div>
               </div>
               <div className='busPage_daughter_img'>
@@ -86,7 +85,6 @@ const BusinessPage = ({ match }) => {
               </div>
               <div className='busPage_daughter'>
                 <div className='busPage_daughter_text'>{item[1].props.children}</div>
-                <br />
                 <div className='busPage_daughter_text'>{item[2].props.children}</div>
               </div>
             </div>

@@ -115,7 +115,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& > .busPage > .busPage_daughter > .busPage_daughter_text': {
       fontSize: '14px',
-      lineHeight: '22px'
+      lineHeight: '22px',
+      marginBottom: '15px'
     },
     '& > .busPage > .busPage_daughter_img': {
       flex: '0 1 50%'

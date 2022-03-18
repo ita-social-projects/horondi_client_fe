@@ -49,10 +49,10 @@ export const validationSchema = Yup.object().shape({
     .matches(formRegExp.street, 'error.wrongFormat')
     .nullable(),
   buildingNumber: Yup.string()
-    .min(1, 'error.profile.buildingNumber')
-    .max(6, 'error.profile.buildingNumber')
+    .min(1, 'error.profile.buildingNumberLength')
+    .max(6, 'error.profile.buildingNumberLength')
     .matches(formRegExp.number, 'error.profile.buildingNumberLackNumber')
-    .matches(formRegExp.buildingNumber, 'error.wrongFormat')
+    .matches(formRegExp.buildingNumber, 'error.profile.buildingNumber')
     .nullable(),
   appartment: Yup.string()
     .min(1, 'error.profile.appartment')

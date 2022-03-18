@@ -7,7 +7,8 @@ import { LANGUAGE } from '../../configs';
 import { LANGUAGES_LIST } from './constants';
 
 const LanguageComponent = ({ fromSideBar }) => {
-  const styles = useStyles({ fromSideBar });
+  const language = getFromLocalStorage(LANGUAGE);
+  const styles = useStyles({ fromSideBar, language });
   const { i18n } = useTranslation();
 
   const handleChange = (e) => {

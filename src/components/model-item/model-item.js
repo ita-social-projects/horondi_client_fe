@@ -13,7 +13,7 @@ const ModelItem = ({ model, modelsUrl }) => {
 
   return (
     <Link to={`/catalog/${model.category.name[1].value}?${modelsUrl}`} className={styles.modelItem}>
-      <div className={styles.modelItemTitle}>{t(`${model.translationsKey}.name`)}</div>
+      <h2 className={styles.modelItemTitle}>{t(`${model.translationsKey}.name`)}</h2>
       <div className={styles.modelItemImage}>
         <img src={IMG_URL + model.images.small} alt='model' />
       </div>

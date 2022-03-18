@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexFlow: 'wrap',
     width: '100%',
-    height: isModelsVisible ? 880 : 235,
+    height: isModelsVisible ? 400 : 200,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',
@@ -49,6 +49,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.textColor,
     fontSize: 34,
     marginBottom: 30,
-    fontWeight: '600'
+    fontWeight: '400',
+    alignSelf: 'flex-start'
   })
 }));

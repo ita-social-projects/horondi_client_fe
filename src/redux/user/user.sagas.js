@@ -46,7 +46,6 @@ import {
   UPDATE_USER
 } from './user.types';
 import {
-  LANGUAGE,
   REDIRECT_TIMEOUT,
   RETURN_PAGE,
   USER_IS_BLOCKED,
@@ -58,8 +57,8 @@ import {
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
-import { USER_ERROR_EN, USER_ERROR_UA } from '../../translations/user.translations';
 import { setCart, setNewWishlist } from '../common-store/common.actions';
+import i18n from '../../i18n';
 
 const { pathToLogin } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
@@ -237,16 +236,14 @@ export function* handleRefreshTokenInvalid() {
 }
 
 export function* handleUserError(e) {
-  const language = getFromLocalStorage(LANGUAGE);
-  const USER_ERROR = language === 'ua' ? USER_ERROR_UA : USER_ERROR_EN;
   if (e?.message === USER_IS_BLOCKED) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
-  } else if (USER_ERROR[e?.message]) {
-    yield put(setUserError(USER_ERROR[e.message]));
+  } else if (i18n.exists(`error.USER_ERROR.${e?.message}`)) {
+    yield put(setUserError(i18n.t(`error.USER_ERROR.${e.message}`)));
   } else {
-    yield put(setUserError(USER_ERROR.DEFAULT_ERROR));
+    yield put(setUserError(i18n.t('error.USER_ERROR.DEFAULT_ERROR')));
   }
 }
 

@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   commentActions: {
-    paddingLeft: '20px',
+    paddingLeft: '5px',
     display: 'flex',
     alignItems: 'center'
   },

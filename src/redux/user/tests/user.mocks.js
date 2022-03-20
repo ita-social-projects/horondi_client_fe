@@ -14,7 +14,7 @@ export const language = 'ua';
 export const upload = null;
 export const countOrder = { countOrder: 0 };
 export const error = {
-  message: 'DEFAULT_ERROR'
+  message: 'defaultError'
 };
 
 export const payload = {

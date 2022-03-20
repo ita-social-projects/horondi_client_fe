@@ -41,17 +41,17 @@
     "dimension": "Dimension is greater than 100x100px"
   },
   "nothingFound": "Nothing found",
-  "USER_ERROR": {
-    "USER_ALREADY_EXIST": "An account with this email already exists",
-    "USER_NOT_AUTHORIZED": "User is not authorized",
-    "REFRESH_TOKEN_IS_NOT_VALID": "You have be logged out, please sign in again",
-    "WRONG_CREDENTIALS": "Wrong e-mail address or password",
-    "INPUT_NOT_VALID": "Wrong input data",
-    "USER_IS_BLOCKED": "Sorry, your account is blocked.",
-    "USER_EMAIL_ALREADY_CONFIRMED": "User with this email is already confirmed",
-    "USER_NOT_FOUND": "User has not been found!",
-    "TOKEN_IS_EXPIRIED": "You have be logged out. Try to confirm your email in your personal cabinet",
-    "CART_IS_NOT_FOUND": "You have be logged out",
-    "DEFAULT_ERROR": "Oops! Something went wrong. Please, try again later."
+  "userError": {
+    "userAlredyExist": "An account with this email already exists",
+    "userNotAuthorized": "User is not authorized",
+    "refreshTokenIsNotValid": "You have be logged out, please sign in again",
+    "wrongCredentials": "Wrong e-mail address or password",
+    "inputNotValid": "Wrong input data",
+    "userIsBlocked": "Sorry, your account is blocked.",
+    "userEmailAlreadyConfirmed": "User with this email is already confirmed",
+    "userNotFound": "User has not been found!",
+    "tokenIsExpired": "You have be logged out. Try to confirm your email in your personal cabinet",
+    "cartIsNotFound": "You have be logged out",
+    "defaultError": "Oops! Something went wrong. Please, try again later."
   }
 }

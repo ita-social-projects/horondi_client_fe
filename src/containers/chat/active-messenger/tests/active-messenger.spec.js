@@ -1,6 +1,7 @@
 import React from 'react';
+import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
-import { TextField, Snackbar, Button } from '@material-ui/core';
+import userEvent from '@testing-library/user-event';
 import { useMutation } from '@apollo/client';
 import { ActiveMessenger } from '../active-messenger';
 
@@ -38,51 +39,97 @@ useMutation.mockImplementation(() => [
   {
     loading,
     error: null,
-    data: { sendEmailMutation: [{ addEmailQuestion: { question: { senderName: 'name' } } }] }
+    data: {
+      sendEmailMutation: [{ addEmailQuestion: { question: { senderName: 'name' } } }]
+    }
   }
 ]);
 
-let wrapper;
-
-describe('Active-messenger component test', () => {
-  beforeEach(() => {
-    wrapper = shallow(
+describe('ActiveMessenger component', () => {
+  it('ActiveMessenger renders', () => {
+    render(
       <ActiveMessenger
-        visible={visible}
+        iconsVisible={visible}
         mailFormVisible={mockHandleMailFormVisible}
         themeMode={themeMode}
       />
     );
+
+    expect(screen.getByText(/chat.sendMail/i)).toBeInTheDocument();
   });
 
-  afterEach(() => {
-    useSelector.mockClear();
-  });
-
-  it('Should render Active-Messenger', () => {
-    expect(wrapper).toBeDefined();
-  });
-  it('Should test if TextField, Snackbar, Button exist', () => {
-    expect(wrapper.find(TextField)).toBeDefined();
-    expect(wrapper.find(Snackbar)).toBeDefined();
-    expect(wrapper.find(Button)).toBeDefined();
-  });
-  it('Should renders component', () => {
-    const wrapper = mount(
-      <ActiveMessenger visible={visible} HandleMailFormVisible={mockHandleMailFormVisible} />
+  it('Input fields works', () => {
+    render(
+      <ActiveMessenger
+        iconsVisible={visible}
+        mailFormVisible={mockHandleMailFormVisible}
+        themeMode={themeMode}
+      />
     );
-    expect(wrapper).not.toBeNull();
+
+    const [nameInput, emailInput, msgInput] = screen.getAllByRole('textbox');
+
+    expect(nameInput).toBeInTheDocument();
+    expect(emailInput).toBeInTheDocument();
+    expect(msgInput).toBeInTheDocument();
+
+    userEvent.type(nameInput, 'Denys');
+    userEvent.type(emailInput, 'zaharkevich.denis@gmail.com');
+    userEvent.type(msgInput, 'abc');
+
+    expect(nameInput).toHaveValue('Denys');
+    expect(emailInput).toHaveValue('zaharkevich.denis@gmail.com');
+    expect(msgInput).toHaveValue('bca');
   });
 
-  it('Should render alert', () => {
-    wrapper = mount(
-      <ActiveMessenger visible={visible} HandleMailFormVisible={mockHandleMailFormVisible} />
+  it('Placeholders works', () => {
+    render(
+      <ActiveMessenger
+        iconsVisible={visible}
+        mailFormVisible={mockHandleMailFormVisible}
+        themeMode={themeMode}
+      />
     );
-    expect(wrapper.find('span').at(0).text()).toBe('chat.sendMail');
+
+    expect(screen.getByText('common.name')).toBeInTheDocument();
+    expect(screen.getByText('common.email')).toBeInTheDocument();
+    expect(screen.getByText('chat.msgText')).toBeInTheDocument();
   });
-  it('Should set value to state when input is changed', () => {
-    const container = mount(<TextField />);
-    const input = container.find(TextField);
-    input.simulate('change', { preventDefault: jest.fn, target: { value: 'foo' } });
+
+  it('Error messages works', async () => {
+    render(
+      <ActiveMessenger
+        iconsVisible={visible}
+        mailFormVisible={mockHandleMailFormVisible}
+        themeMode={themeMode}
+      />
+    );
+
+    const btn = screen.getByRole('button');
+    userEvent.click(btn);
+    // expect(await screen.findByText('error.onlyLetter')).toBeInTheDocument();
+    // expect(screen.getByText('common.email')).toBeInTheDocument();
+    // expect(screen.getByText('chat.msgText')).toBeInTheDocument();
+  });
+
+  it('Alert should appear', () => {
+    render(
+      <ActiveMessenger
+        iconsVisible={visible}
+        mailFormVisible={mockHandleMailFormVisible}
+        themeMode={themeMode}
+      />
+    );
+
+    const [nameInput, emailInput, msgInput] = screen.getAllByRole('textbox');
+    userEvent.type(nameInput, 'Denys');
+    userEvent.type(emailInput, 'zaharkevich.denis@gmail.com');
+    userEvent.type(msgInput, 'Message text');
+
+    // const btn = screen.getByRole('button');
+    // userEvent.click(btn);
+
+    // const alert = await screen.findByText(/chat.thanksMsg/i);
+    // expect(alert).toBeInTheDocument();
   });
 });

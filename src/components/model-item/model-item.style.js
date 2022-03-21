@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     display: 'flex',
     overflow: 'hidden',
-    height: 200,
+    height: 170,
     position: 'relative',
     boxShadow: '0px 9px 12px rgba(0, 0, 0, 0.10)',
     borderRadius: '6px',

@@ -20,6 +20,7 @@ export const validationSchema = (deliveryType) =>
       .min(8, 'error.emailLength')
       .max(60, 'error.emailLength'),
     phoneNumber: Yup.string()
+      .matches(formRegExp.wholeNumber, 'error.onlyNumber')
       .min(9, 'error.profile.phoneTooShort')
       .required('error.requiredField')
       .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')

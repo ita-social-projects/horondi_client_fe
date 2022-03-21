@@ -42,7 +42,8 @@ export const useStyles = makeStyles((theme) => ({
   textContent: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: '12px'
+    paddingTop: '12px',
+    wordBreak: 'break-all'
   },
   deleteIcon: {
     color: theme.palette.comments.deleteIcon.color,

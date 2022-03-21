@@ -1,4 +1,1 @@
-export const LANGUAGES_LIST = [
-  { lang: 'UA', value: 0 },
-  { lang: 'EN', value: 1 }
-];
+export const LANGUAGES_LIST = ['ua', 'en'];

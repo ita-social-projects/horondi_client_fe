@@ -75,12 +75,7 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
                 <Tooltip className={styles.checkIcon} title={t('product.tooltips.bought')}>
-                  <>
-                    <VerifiedPurchaseIcon
-                      alt='Verified purhase icon'
-                      className={styles.boughtIcon}
-                    />
-                  </>
+                  <VerifiedPurchaseIcon alt='Verified purhase icon' className={styles.boughtIcon} />
                 </Tooltip>
               ) : (
                 ''

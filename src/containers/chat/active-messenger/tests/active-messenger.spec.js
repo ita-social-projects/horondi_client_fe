@@ -39,14 +39,12 @@ useMutation.mockImplementation(() => [
   {
     loading,
     error: null,
-    data: {
-      sendEmailMutation: [{ addEmailQuestion: { question: { senderName: 'name' } } }]
-    }
+    data: { sendEmailMutation: [{ addEmailQuestion: { question: { senderName: 'name' } } }] }
   }
 ]);
 
 describe('ActiveMessenger component', () => {
-  it('ActiveMessenger renders', () => {
+  it('ActiveMessenger renders', async () => {
     render(
       <ActiveMessenger
         iconsVisible={visible}
@@ -94,42 +92,5 @@ describe('ActiveMessenger component', () => {
     expect(screen.getByText('common.name')).toBeInTheDocument();
     expect(screen.getByText('common.email')).toBeInTheDocument();
     expect(screen.getByText('chat.msgText')).toBeInTheDocument();
-  });
-
-  it('Error messages works', async () => {
-    render(
-      <ActiveMessenger
-        iconsVisible={visible}
-        mailFormVisible={mockHandleMailFormVisible}
-        themeMode={themeMode}
-      />
-    );
-
-    const btn = screen.getByRole('button');
-    userEvent.click(btn);
-    // expect(await screen.findByText('error.onlyLetter')).toBeInTheDocument();
-    // expect(screen.getByText('common.email')).toBeInTheDocument();
-    // expect(screen.getByText('chat.msgText')).toBeInTheDocument();
-  });
-
-  it('Alert should appear', () => {
-    render(
-      <ActiveMessenger
-        iconsVisible={visible}
-        mailFormVisible={mockHandleMailFormVisible}
-        themeMode={themeMode}
-      />
-    );
-
-    const [nameInput, emailInput, msgInput] = screen.getAllByRole('textbox');
-    userEvent.type(nameInput, 'Denys');
-    userEvent.type(emailInput, 'zaharkevich.denis@gmail.com');
-    userEvent.type(msgInput, 'Message text');
-
-    // const btn = screen.getByRole('button');
-    // userEvent.click(btn);
-
-    // const alert = await screen.findByText(/chat.thanksMsg/i);
-    // expect(alert).toBeInTheDocument();
   });
 });

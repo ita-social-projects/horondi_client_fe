@@ -126,11 +126,6 @@
       ]
     }
   },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "<rootDir>/src/components/constructor-canvas"
-    ]
-  },
   "lint-staged": {
     "*.js": [
       "prettier --write",

@@ -46,7 +46,6 @@ import {
   UPDATE_USER
 } from './user.types';
 import {
-  LANGUAGE,
   REDIRECT_TIMEOUT,
   RETURN_PAGE,
   USER_IS_BLOCKED,
@@ -56,14 +55,10 @@ import {
   WISHLIST_KEY
 } from '../../configs';
 import routes from '../../configs/routes';
-import {
-  clearLocalStorage,
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
-import { USER_ERROR } from '../../translations/user.translations';
 import { setCart, setNewWishlist } from '../common-store/common.actions';
+import i18n from '../../i18n';
 
 const { pathToLogin } = routes;
 const { ACCESS_TOKEN, REFRESH_TOKEN } = USER_TOKENS;
@@ -222,7 +217,6 @@ export function* handleSendConfirmation({ payload }) {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(setUserOrders(null));
-  clearLocalStorage();
 }
 
 export function* handleTokenCheck({ payload }) {
@@ -242,15 +236,14 @@ export function* handleRefreshTokenInvalid() {
 }
 
 export function* handleUserError(e) {
-  const language = getFromLocalStorage(LANGUAGE);
   if (e?.message === USER_IS_BLOCKED) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
-  } else if (USER_ERROR[e?.message]) {
-    yield put(setUserError(USER_ERROR[e.message][language].value));
+  } else if (i18n.exists(`error.userError.${e?.message}`)) {
+    yield put(setUserError(i18n.t(`error.userError.${e.message}`)));
   } else {
-    yield put(setUserError(USER_ERROR.DEFAULT_ERROR[language].value));
+    yield put(setUserError(i18n.t('error.userError.defaultError')));
   }
 }
 

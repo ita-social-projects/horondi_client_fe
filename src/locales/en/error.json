@@ -41,5 +41,18 @@
     "extension": "Wrong file extension",
     "dimension": "Dimension is greater than 100x100px"
   },
-  "nothingFound": "Nothing found"
+  "nothingFound": "Nothing found",
+  "userError": {
+    "userAlredyExist": "An account with this email already exists",
+    "userNotAuthorized": "User is not authorized",
+    "refreshTokenIsNotValid": "You have be logged out, please sign in again",
+    "wrongCredentials": "Wrong e-mail address or password",
+    "inputNotValid": "Wrong input data",
+    "userIsBlocked": "Sorry, your account is blocked.",
+    "userEmailAlreadyConfirmed": "User with this email is already confirmed",
+    "userNotFound": "User has not been found!",
+    "tokenIsExpired": "You have be logged out. Try to confirm your email in your personal cabinet",
+    "cartIsNotFound": "You have be logged out",
+    "defaultError": "Oops! Something went wrong. Please, try again later."
+  }
 }

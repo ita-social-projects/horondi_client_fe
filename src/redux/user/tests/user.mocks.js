@@ -10,11 +10,11 @@ export const pass = 'testpass';
 export const token = '1111bGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
 export const userId = '1111bGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
 export const rememberMe = true;
-export const language = 0;
+export const language = 'ua';
 export const upload = null;
 export const countOrder = { countOrder: 0 };
 export const error = {
-  message: 'error'
+  message: 'defaultError'
 };
 
 export const payload = {

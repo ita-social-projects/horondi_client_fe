@@ -6,7 +6,7 @@ describe('test language reducer', () => {
   test('should return default state', () => {
     expect(languageReducer()).toMatchSnapshot();
     expect(languageReducer()).toEqual({
-      language: 0
+      language: 'ua'
     });
   });
   test('should change language', () => {

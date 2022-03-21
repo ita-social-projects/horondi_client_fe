@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonGroup, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
-import { setToLocalStorage } from '../../services/local-storage.service';
+import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 import { LANGUAGE } from '../../configs';
 import { LANGUAGES_LIST } from './constants';
 

@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { DEFAULT_LANGUAGE } from '../../configs/index';
 
 export const useStyles = makeStyles((theme) => ({
   root: ({ fromSideBar, language }) => ({
@@ -30,10 +31,10 @@ export const useStyles = makeStyles((theme) => ({
       border: 'none'
     },
     '& .MuiButtonGroup-groupedOutlinedHorizontal:last-child': {
-      textDecoration: language ? 'underline' : 'none'
+      textDecoration: language === DEFAULT_LANGUAGE ? 'none' : 'underline'
     },
     '& .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child)': {
-      textDecoration: language ? 'none' : 'underline',
+      textDecoration: language === DEFAULT_LANGUAGE ? 'underline' : 'none',
       borderRight: `1px solid ${
         fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
       }`

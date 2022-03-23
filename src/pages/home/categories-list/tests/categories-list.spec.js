@@ -13,7 +13,6 @@ const setState = jest.fn();
 jest.mock('../categories-list.style', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('@apollo/client');
-jest.mock('react-router-dom');
 
 useState.mockImplementation(() => [[], setState]);
 
@@ -43,10 +42,11 @@ describe('tests for categories list component', () => {
     expect(list).toBeInTheDocument();
   });
 
-  it('getCategoryURL function should return value', () => {
+  it('getCategoryURL function should correct string', () => {
     const res = getCategoryURL(mockCategory);
+    const etalonString = 'catalog/test';
 
-    expect(res).not.toBeUndefined();
+    expect(res).toBe(etalonString);
   });
 
   it('getCategoryURL function should return undefined', () => {

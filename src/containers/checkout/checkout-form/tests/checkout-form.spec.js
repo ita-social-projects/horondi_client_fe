@@ -72,7 +72,7 @@ global.document.createRange = () => ({
     ownerDocument: document
   }
 });
-describe.skip('CheckoutForm component tests', () => {
+describe('CheckoutForm component tests', () => {
   it(' <CheckoutForm /> should contain component <Delivery />', () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     expect(wrapper.find(Delivery).length).toEqual(1);
@@ -87,7 +87,7 @@ describe.skip('CheckoutForm component tests', () => {
   });
 });
 
-describe.skip('CheckoutForm tests for: ', () => {
+describe('CheckoutForm tests for: ', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>

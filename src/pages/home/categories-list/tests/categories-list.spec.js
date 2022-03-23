@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import CategoriesList, { getCategoryURL } from '../categories-list';
-
 import { mockCategory, mockCategoryUndefined } from './categories-list.variables';
 import CategoriesContextProvider from '../../../../context/categories/categories-context';
 
@@ -11,8 +10,8 @@ const useState = jest.fn();
 const setState = jest.fn();
 
 jest.mock('../categories-list.style', () => ({ useStyles: () => ({}) }));
-jest.mock('react-redux');
 jest.mock('@apollo/client');
+jest.mock('react-redux');
 
 useState.mockImplementation(() => [[], setState]);
 

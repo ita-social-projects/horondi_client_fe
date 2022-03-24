@@ -1,10 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { screen, render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import EmptyOrder from '../../../../../../../containers/orders/order/empty-order/index';
-
-let wrapper;
 
 jest.mock('../../../../../../../containers/orders/order/empty-order/empty-order.styles', () => ({
   useStyles: () => ({})
@@ -21,15 +18,17 @@ jest.mock('@material-ui/styles', () => ({
 
 describe('Empty order component tests', () => {
   const buttonTitle = 'до каталогу';
+  const emptyTitle = 'Ваш кошик порожній';
 
-  it('should match snapshot', () => {
-    wrapper = shallow(<EmptyOrder title='' name='' buttonTitle='' />);
+  it('should render title', () => {
+    const { container } = render(
+      <Router>
+        <EmptyOrder emptyTitle={emptyTitle} />
+      </Router>
+    );
+    const findeElement = container.querySelector('h2');
 
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should cover other branches', () => {
-    wrapper = shallow(<EmptyOrder title='' name='' buttonTitle='' />);
+    expect(findeElement.textContent).toBe('Ваш кошик порожній');
   });
 
   it('render text in button', () => {

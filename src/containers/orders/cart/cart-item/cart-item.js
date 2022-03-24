@@ -20,8 +20,14 @@ import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import Loader from '../../../../components/loader';
+import ConstructorCanvas from '../../../../components/constructor-canvas';
 
 const { pathToProducts } = routes;
+
+const canvasW = 230;
+const canvasH = 120;
+const canvasX = 0;
+const canvasY = 0;
 
 const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
   const styles = useStyles();
@@ -106,7 +112,16 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     </Link>
   );
   const constructorProductImg = (
-    <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
+    <div className={styles.constructorProductImgContainer}>
+      <ConstructorCanvas
+        className={styles.constructorProductImg}
+        item={item}
+        width={canvasW}
+        height={canvasH}
+        x={canvasX}
+        y={canvasY}
+      />
+    </div>
   );
   const productImg = isFromConstructor ? constructorProductImg : defaultProductImg;
 

@@ -4,6 +4,9 @@ export const useStyles = makeStyles(({ palette }) => ({
   root: {
     width: '100%'
   },
+  name: {
+    textAlign: 'left'
+  },
   itemImg: {
     height: '79px',
     width: '168px',

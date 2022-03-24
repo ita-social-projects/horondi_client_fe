@@ -32,6 +32,21 @@ export const useStyles = makeStyles(({ palette }) => ({
     ...name,
     color: palette.textColor
   },
+  constructorProductImgContainer: {
+    padding: '0 45px',
+    '@media (max-width: 600px)': {
+      padding: '0 32px'
+    }
+  },
+  constructorProductImg: {
+    width: 130,
+    height: 133,
+    '@media (max-width: 600px)': {
+      width: 60,
+      height: 60
+    }
+  },
+
   product: {
     display: 'flex',
     alignItems: 'center',

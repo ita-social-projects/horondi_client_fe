@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText } from '@material-ui/core';
@@ -10,7 +10,6 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
 
-import { IMG_URL } from '../../configs';
 import { CONSTRUCTOR_DEFAULT_PRICE } from './constants';
 import {
   constructorEndPrice,
@@ -22,6 +21,7 @@ import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useAppStyles } from '../../components/app/app.styles';
+import ConstructorCanvas from '../../components/constructor-canvas';
 
 const ImagesConstructor = () => {
   const {
@@ -52,34 +52,8 @@ const ImagesConstructor = () => {
   const appStyles = useAppStyles();
   const { t } = useTranslation();
 
-  const canvas = useRef({});
   const canvasH = 768;
   const canvasW = 768;
-
-  const mergeImages = (imagesToMerge, currentCanvas, width = 1000, height = 1000, x = 0, y = 0) => {
-    const ctx = currentCanvas.getContext('2d');
-    ctx.clearRect(0, 0, width, height);
-    imagesToMerge.forEach((imageToMerge) => {
-      ctx.drawImage(imageToMerge, x, y, width, height);
-    });
-  };
-
-  const loadImages = (sources = []) =>
-    new Promise((resolve) => {
-      const loadedImages = sources.map(
-        (source) =>
-          new Promise((resolveImage, rejectImage) => {
-            const img = new Image();
-            img.onload = () => resolveImage(img);
-            img.onerror = () => {
-              rejectImage(new Error());
-            };
-            img.src = `${IMG_URL}${source}`;
-          })
-      );
-
-      resolve(Promise.all(loadedImages).then((loadedImage) => loadedImage));
-    });
 
   const showModal = () => {
     setModalVisibility(true);
@@ -89,27 +63,7 @@ const ImagesConstructor = () => {
     setModalVisibility(false);
   };
 
-  useLayoutEffect(() => {
-    const createImagesArray = (values) => {
-      const result = [];
-      Object.keys(values).forEach((key) => {
-        if (key === 'pattern' && constructorValues.pattern !== undefined)
-          result.unshift(values[key].constructorImg);
-        else
-          typeof values[key] === 'object' &&
-            !Array.isArray(values[key]) &&
-            values[key].images &&
-            result.unshift(values[key].images.small);
-      });
-      return result;
-    };
-
-    if (constructorValues.basic) {
-      loadImages(createImagesArray(constructorValues)).then((loadedImages) => {
-        mergeImages(loadedImages, canvas.current, canvasW, canvasH);
-      });
-    }
-
+  useEffect(() => {
     const getPrice = (currencyInFanc, key) =>
       !currencyInFanc
         ? constructorValues[key].additionalPrice[0].value
@@ -322,7 +276,12 @@ const ImagesConstructor = () => {
 
           <div className={styles.imageContainer}>
             {!constructorValues.basic && <Loader />}
-            <canvas className={styles.image} width={canvasW} height={canvasH} ref={canvas} />
+            <ConstructorCanvas
+              className={styles.image}
+              item={constructorValues}
+              width={canvasW}
+              height={canvasH}
+            />
           </div>
 
           <div className={styles.pricesInfoWrapper}>

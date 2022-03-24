@@ -41,9 +41,10 @@ describe('ProductsFiltersContainer component tests', () => {
     );
   });
 
-  test('Checkbox click', () => {
+  test('It should check checkbox click', () => {
     const checkbox = screen.getAllByRole('checkbox')[0];
     fireEvent.click(checkbox);
+
     expect(checkbox).toBeChecked();
   });
 });

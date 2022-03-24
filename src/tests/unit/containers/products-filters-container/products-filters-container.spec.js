@@ -28,7 +28,7 @@ const categoriesInfo = [
 const handler = () => '';
 const blockHeading = 'Category';
 
-describe('ProductsFiltersContainer component tests', () => {
+describe('ProductsFiltersContainer component test', () => {
   beforeEach(() => {
     render(
       <ProductsFiltersContainer

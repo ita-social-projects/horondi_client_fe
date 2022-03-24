@@ -33,9 +33,9 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     transition: 'height 1s ease',
     overflow: 'hidden',
-    '@media (max-width: 1024px)': {
-      width: '100%'
-    },
+    '@media (max-width: 480px)': ({ isModelsVisible }) => ({
+      height: isModelsVisible ? 600 : 200
+    }),
     '&:after': {
       content: `''`,
       position: 'absolute',

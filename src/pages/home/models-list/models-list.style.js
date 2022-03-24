@@ -22,20 +22,16 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   }),
-  modelsWrapper: ({ isModelsVisible }) => ({
+  modelsWrapper: () => ({
     backgroundColor: theme.palette.backgroundColor,
     display: 'flex',
     flexFlow: 'wrap',
     width: '100%',
-    height: isModelsVisible ? 400 : 200,
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',
     transition: 'height 1s ease',
     overflow: 'hidden',
-    '@media (max-width: 480px)': ({ isModelsVisible }) => ({
-      height: isModelsVisible ? 600 : 200
-    }),
     '&:after': {
       content: `''`,
       position: 'absolute',
@@ -43,6 +39,15 @@ export const useStyles = makeStyles((theme) => ({
       right: 5,
       left: 5,
       bottom: 0
+    }
+  }),
+  modelsWrapperClosed: () => ({
+    height: 200
+  }),
+  modelsWrapperOpened: () => ({
+    height: 400,
+    '@media (max-width: 480px)': {
+      height: 600
     }
   }),
   modelsTitle: () => ({

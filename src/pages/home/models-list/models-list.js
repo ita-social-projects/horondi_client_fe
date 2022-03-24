@@ -36,7 +36,11 @@ const ModelsList = () => {
         id='models'
       >
         <div className={styles.modelsTitle}>{t('home.models')}</div>
-        <div className={styles.modelsWrapper}>
+        <div
+          className={`${styles.modelsWrapper} ${
+            isModelsVisible ? styles.modelsWrapperOpened : styles.modelsWrapperClosed
+          }`}
+        >
           {models.map((model) => (
             <ModelItem
               key={model._id}

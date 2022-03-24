@@ -1,6 +1,8 @@
 import React from 'react';
-
+import { BrowserRouter } from 'react-router-dom';
+import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
+
 import CategoryItem from '../category-item';
 
 jest.mock('../category-item.style', () => ({
@@ -13,12 +15,14 @@ const mockDispatch = jest.fn();
 
 useDispatch.mockReturnValue(mockDispatch);
 
-const wrapper = shallow(
-  <CategoryItem categoryName='test' categoryImageUrl='test' categoryUrl='test' />
-);
-
 describe('CategoryItem component tests', () => {
-  it('Should render CategoryItem', () => {
-    expect(wrapper).toBeDefined();
+  const { container } = render(
+    <BrowserRouter>
+      <CategoryItem categoryName='testName' categoryImageUrl='testImageUrl' categoryUrl='testUrl' />
+    </BrowserRouter>
+  );
+
+  test('Should render CategoryItem', () => {
+    expect(container).toBeInTheDocument();
   });
 });

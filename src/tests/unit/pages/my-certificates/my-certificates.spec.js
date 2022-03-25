@@ -5,10 +5,6 @@ import { MockedProvider } from '@apollo/client/testing';
 import MyCertificates from '../../../../pages/my-certificates/my-certificates';
 import { certificateMock1, certificateMock2, certificateMock3 } from './my-certificates.variables';
 
-jest.mock('../../../../pages/my-certificates/my-certificates.styles', () => ({
-  useStyles: () => ({})
-}));
-
 jest.mock(
   '../../../../containers/my-certificates/filled-certificates/filled-certificates.styles',
   () => ({

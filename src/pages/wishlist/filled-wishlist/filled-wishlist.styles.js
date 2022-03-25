@@ -16,33 +16,23 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: '80px',
     color: isLightTheme ? '#242424' : '#FEFEFE',
     '@media screen and (max-width:768px)': {
-      fontSize: '28px'
+      fontSize: '28px',
+      margin: '30px 0 40px'
     }
   }),
   table: {
     flexGrow: 1,
-    marginRight: 50,
-    '@media (max-width: 813px)': {
-      marginRight: 'initial'
+    width: '100%',
+    marginBottom: '150px',
+    '@media (max-width: 996px)': {
+      marginBottom: 100
     },
-    width: '1000px',
-    '@media (max-width: 1110px)': {
-      width: '750px',
-      overflowX: 'auto'
+    '@media (max-width: 768px)': {
+      marginBottom: 50
     },
-    '@media (max-width: 920px)': {
-      width: '550px',
-      overflowX: 'auto'
-    },
-    '@media (max-width: 600px)': {
-      width: '400px',
-      overflowX: 'auto'
-    },
-    '@media (max-width: 400px)': {
-      width: '300px',
-      overflowX: 'auto'
-    },
-    marginBottom: '150px'
+    '@media (max-width: 576px)': {
+      marginBottom: 0
+    }
   },
   tableHeader: () => ({
     fontStyle: 'normal',

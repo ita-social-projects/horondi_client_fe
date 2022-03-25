@@ -1,5 +1,6 @@
 {
   "product": "Продукт",
+  "backpackFromConstructor": "Рюкзак із конструктора",
   "quantity": "Кількість",
   "price": "Ціна",
   "size": "Розмір",

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router';
 
 import { Link } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
+
 import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import { Loader } from '../../../../components/loader/loader';
@@ -16,14 +18,18 @@ import SimilarProducts from '../../../../pages/product-details/similar-products'
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
 
-const FilledCart = ({ items, cartOperations }) => {
+const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
   const styles = useStyles();
   const { t } = useTranslation();
+  const history = useHistory();
+
+  const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
   const promoCodeInput = useRef(null);
   const { pathToCategory, pathToCheckout } = routes;
   const [price, setPrice] = useState();
   const [promoCodeValue, setPromoCodeValue] = useState('');
+  const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
 
   const { currency, cartLoading, user } = useSelector(({ Currency, User }) => ({
     currency: Currency.currency,
@@ -37,7 +43,7 @@ const FilledCart = ({ items, cartOperations }) => {
   });
 
   const currencySign = getCurrencySign(currency);
-  const { getTotalPrice, getTotalPricesWithPromoCode } = cartOperations;
+  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
 
   const checkPromoCode = () => {
     setPromoCodeValue(promoCodeInput.current.value);
@@ -51,9 +57,50 @@ const FilledCart = ({ items, cartOperations }) => {
       : setPrice(getTotalPrice(currency));
   }, [items, currency, getTotalPrice, promoCode, getTotalPricesWithPromoCode]);
 
-  if (cartLoading) {
+  if (cartLoading || productFromConstructorLoading) {
     return <Loader />;
   }
+
+  const onGoToCheckout = async () => {
+    const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
+
+    for (const item of itemsFromConstructor) {
+      const input = {
+        product: {
+          name: item.name,
+          model: item.model?._id,
+          pattern: item.pattern?._id,
+          mainMaterial: {
+            material: item.basic?.features.material._id,
+            color: item.basic?.features.color._id
+          },
+          bottomMaterial: {
+            material: item.bottom?.features.material._id,
+            color: item.bottom?.features.color._id
+          },
+          sizes: [item.sizeAndPrice.size._id],
+          basePrice: item.sizeAndPrice.price.find((p) => p.currency === 'USD').value
+        },
+        upload: []
+      };
+
+      setProductFromConstructorLoading(true);
+
+      const { data } = await addConstructorProduct({
+        variables: {
+          product: input.product,
+          upload: input.upload
+        }
+      });
+
+      setCartItem(item.id, {
+        ...item,
+        productId: data.addProductFromConstructor._id
+      });
+    }
+
+    history.push(pathToCheckout, { promoCode });
+  };
 
   return (
     <>
@@ -114,16 +161,9 @@ const FilledCart = ({ items, cartOperations }) => {
                   {price}
                 </div>
               </div>
-              <Link
-                to={{
-                  pathname: pathToCheckout,
-                  props: promoCode
-                }}
-              >
-                <Button variant='contained' className={styles.ordersButton}>
-                  {t('cart.checkout')}
-                </Button>
-              </Link>
+              <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
+                {t('cart.checkout')}
+              </Button>
             </div>
           </div>
         </div>

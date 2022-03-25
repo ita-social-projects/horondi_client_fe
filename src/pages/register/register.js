@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { useTheme } from '@material-ui/styles';
 
 import { USER_TOKENS, RETURN_PAGE } from '../../configs';
@@ -14,6 +14,7 @@ import { setToLocalStorage } from '../../services/local-storage.service';
 import { setInfoImgByTheme } from '../../utils/user-helpers';
 import { regValidationSchema } from '../../validators/register';
 import RegisterForm from './register-from/index';
+import { AuthWrapper } from '../../components/auth-form';
 
 export default function Register() {
   const styles = useStyles();
@@ -59,47 +60,42 @@ export default function Register() {
       validateOnChange={shouldValidate}
     >
       {({ errors, values }) => (
-        <div className={styles.registerContainer}>
-          <div className={styles.registerBackground} />
-          <div className={styles.formContainer}>
-            <Typography component='div' className={styles.formWrapper}>
-              {hasRegistered ? (
-                <div className={styles.registerSuccess}>
-                  <div className={styles.registerSuccessInfo}>
-                    <img
-                      src={setInfoImgByTheme(isLightTheme)}
-                      alt={REGISTER_IMG_INFO}
-                      className={styles.infoLogo}
-                    />
-                    <p>{t('register.confirmEmail')}</p>
-                    <Button
-                      className={styles.registerBtn}
-                      onClick={() => {
-                        history.push(sessionStorage.getItem(RETURN_PAGE));
-                      }}
-                    >
-                      {t('register.continueShopping')}
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <RegisterForm
-                  loading={loading}
-                  values={values}
-                  errors={errors}
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                  showPasswordConfirm={showPasswordConfirm}
-                  setShowPasswordConfirm={setShowPasswordConfirm}
-                  registerError={registerError}
-                  setShouldValidate={() => {
-                    setShouldValidate(true);
-                  }}
+        <AuthWrapper>
+          {hasRegistered ? (
+            <div className={styles.registerSuccess}>
+              <div className={styles.registerSuccessInfo}>
+                <img
+                  src={setInfoImgByTheme(isLightTheme)}
+                  alt={REGISTER_IMG_INFO}
+                  className={styles.infoLogo}
                 />
-              )}
-            </Typography>
-          </div>
-        </div>
+                <p>{t('register.confirmEmail')}</p>
+                <Button
+                  className={styles.registerBtn}
+                  onClick={() => {
+                    history.push(sessionStorage.getItem(RETURN_PAGE));
+                  }}
+                >
+                  {t('register.continueShopping')}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <RegisterForm
+              loading={loading}
+              values={values}
+              errors={errors}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+              showPasswordConfirm={showPasswordConfirm}
+              setShowPasswordConfirm={setShowPasswordConfirm}
+              registerError={registerError}
+              setShouldValidate={() => {
+                setShouldValidate(true);
+              }}
+            />
+          )}
+        </AuthWrapper>
       )}
     </Formik>
   );

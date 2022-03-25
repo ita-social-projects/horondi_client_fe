@@ -28,7 +28,12 @@ const CertificateCheckbox = ({
   return (
     <div className={styles.root}>
       <div className={styles.checkboxWrapper}>
-        <Checkbox className={styles.checkbox} checked={checked} onChange={handleCheckboxChange} />
+        <Checkbox
+          data-testid='checkbox'
+          className={styles.checkbox}
+          checked={checked}
+          onChange={handleCheckboxChange}
+        />
         <div className={styles.certificate}>
           {t('certificate.giftCertificate')}
           <br />
@@ -37,11 +42,13 @@ const CertificateCheckbox = ({
       </div>
       <div className={styles.numberInput}>
         {checked ? (
-          <NumberInput
-            quantity={count}
-            onChangeQuantity={handleCountChange}
-            setInputValue={setCount}
-          />
+          <div data-testid='number-input'>
+            <NumberInput
+              quantity={count}
+              onChangeQuantity={handleCountChange}
+              setInputValue={setCount}
+            />
+          </div>
         ) : null}
       </div>
     </div>

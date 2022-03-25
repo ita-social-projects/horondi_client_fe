@@ -22,12 +22,11 @@ export const useStyles = makeStyles((theme) => ({
       }
     }
   }),
-  modelsWrapper: ({ isModelsVisible }) => ({
+  modelsWrapper: () => ({
     backgroundColor: theme.palette.backgroundColor,
     display: 'flex',
     flexFlow: 'wrap',
-    width: '85%',
-    height: isModelsVisible ? 880 : 235,
+    width: '100%',
     boxSizing: 'border-box',
     justifyContent: 'center',
     position: 'relative',
@@ -45,12 +44,20 @@ export const useStyles = makeStyles((theme) => ({
       bottom: 0
     }
   }),
+  modelsWrapperClosed: () => ({
+    height: 200
+  }),
+  modelsWrapperOpened: () => ({
+    height: 400,
+    '@media (max-width: 480px)': {
+      height: 600
+    }
+  }),
   modelsTitle: () => ({
     color: theme.palette.textColor,
     fontSize: 34,
     marginBottom: 30,
-    marginLeft: 14,
-    fontWeight: '600',
-    width: '85%'
+    fontWeight: '400',
+    alignSelf: 'flex-start'
   })
 }));

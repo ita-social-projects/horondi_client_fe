@@ -21,6 +21,7 @@
   },
   "priceFrom": "від ",
   "sizeNotAvailable": "Товар недоступний",
+  "unavailable": "немає в наявності",
   "pdpButtons": {
     "cartButton": "Додати до кошика",
     "buyButton": "Купити зараз",
@@ -55,8 +56,8 @@
     "commentsOne": "Відгук",
     "commentsTwo": "Відгуки",
     "title": "Написати відгук",
-    "commentsTitle":"Відгуки",
-    "moreComments":"Відгуків",
+    "commentsTitle": "Відгуки",
+    "moreComments": "Відгуків",
     "rating": "Рейтинг товару:",
     "text": "Поділіться своїми враженнями з іншими",
     "submit": "ЗАЛИШИТИ ВІДГУК",
@@ -70,7 +71,8 @@
   "snackBar": {
     "added": "Ваш коментар успішно створений",
     "addedReply": "Вашу відповідь успішно створено",
-    "deleted": "Ваш коментар успішно видалений"
+    "deletedComment": "Ваш коментар успішно видалений",
+    "deletedReply": "Вашу відповідь успішно видалено"
   },
   "size": {
     "S": "S",

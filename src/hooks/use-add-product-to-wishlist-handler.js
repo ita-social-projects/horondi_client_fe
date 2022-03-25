@@ -28,7 +28,7 @@ export default function useAddProductToWishlistHandler(product) {
     data && checkIsInWishlist(data.addProductToWishlist, product);
   }, [data, product]);
   useEffect(() => {
-    !firstlyChecked.current && wishlist.products.length && checkIsInWishlist(wishlist, product);
+    !firstlyChecked.current && wishlist.products?.length && checkIsInWishlist(wishlist, product);
   }, [wishlist, product]);
 
   return [

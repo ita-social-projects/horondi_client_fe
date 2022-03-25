@@ -12,7 +12,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontSize: '12px',
       color: palette.white
     },
+    '@media screen and (max-width: 768px)': {
+      flex: '1 1 50%'
+    },
     '@media screen and (max-width: 552px)': {
+      flex: 1,
       textAlign: 'center',
       width: '100%',
       padding: '10px 25px',

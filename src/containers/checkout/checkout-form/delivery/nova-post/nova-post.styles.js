@@ -17,17 +17,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 700,
     fontSize: 23,
     color: palette.textColor,
-    marginLeft: '10%',
     '@media (max-width: 920px)': {
       width: '100%'
     }
   },
   novaPostData: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    marginBottom: '2%',
-    marginLeft: '10%'
+    marginBottom: '2%'
   },
   dataInput: {
     width: 600,

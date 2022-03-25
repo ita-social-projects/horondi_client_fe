@@ -21,7 +21,6 @@ export const useStyles = makeStyles((theme) => ({
   comment: {
     fontFamily: 'Open Sans',
     backgroundColor: theme.palette.backgroundColor,
-    padding: '30px 28px 0',
     '& hr': {
       border: 'none',
       color: '#C2C2C2',
@@ -136,6 +135,9 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiButton-root.Mui-disabled': {
       color: theme.palette.button.disabled.color,
       backgroundColor: theme.palette.button.disabled.backgroundColor
+    },
+    '@media (max-width: 950px)': {
+      justifyContent: 'space-around'
     }
   },
   commentBtn: {

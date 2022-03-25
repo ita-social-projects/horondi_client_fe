@@ -2,14 +2,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    color: theme.palette.textColor,
-    margin: '50px auto',
-    maxWidth: 1280,
-    paddingTop: 30,
+    paddingTop: 80,
     '& p, & ul, & li, & span': {
       color: `${theme.palette.textColor} !important`,
       fontSize: '1rem',
-      lineHeight: '2rem'
+      lineHeight: '2rem',
+      '@media (max-width: 670px)': {
+        lineHeight: '1.5rem',
+        textAlign: 'justify',
+        margin: '0 20px'
+      }
+    },
+    '& h3': {
+      '@media (max-width: 670px)': {
+        textAlign: 'center',
+        fontSize: '1.5rem'
+      }
     },
     '& > h1': {
       textAlign: 'center',
@@ -18,7 +26,10 @@ export const useStyles = makeStyles((theme) => ({
       fontWeight: '300',
       fontSize: '59px',
       lineHeight: '46px',
-      letterSpacing: '0.0025em'
+      letterSpacing: '0.0025em',
+      '@media (max-width: 670px)': {
+        fontSize: '35px'
+      }
     },
     '& > pre': {
       padding: '3px',
@@ -32,7 +43,10 @@ export const useStyles = makeStyles((theme) => ({
       display: ' inline-block',
       paddingLeft: '15px',
       fontStyle: 'normal',
-      fontWeight: 'normal'
+      fontWeight: 'normal',
+      '@media (max-width: 670px)': {
+        marginLeft: '45px'
+      }
     },
     '& > p > strong': {
       color: 'white',
@@ -56,7 +70,11 @@ export const useStyles = makeStyles((theme) => ({
       width: 381,
       height: 'auto',
       float: ' left',
-      margin: '0 20px 20px 0'
+      margin: '0 20px 20px 0',
+      '@media (max-width: 670px)': {
+        width: 305,
+        margin: '10px 20px'
+      }
     }
   }
 }));

@@ -1,3 +1,4 @@
 const SET_CART = 'SET_CART';
+const SET_WISHLIST = 'SET_WISHLIST';
 
-export { SET_CART };
+export { SET_CART, SET_WISHLIST };

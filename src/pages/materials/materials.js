@@ -8,6 +8,7 @@ import 'react-awesome-slider/dist/styles.css';
 import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './materials.style.js';
+import { useAppStyles } from '../../components/app/app.styles';
 import { getBusinessTextByCode } from '../business-page/operations/business-page.queries';
 import { getAllPatterns } from './operations/getAllPatterns.queries';
 import { CAROUSE_MATERIAL_INTERVAL } from './constants';
@@ -70,6 +71,7 @@ const Materials = () => {
 
   const materialPageText = materialsPage.text && parse(t(`${materialsPage.translationsKey}.text`));
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const imagesForSlider = patterns.map((pattern, i) => (
     <div className={styles.sliderImage} key={pattern._id} data-src={patternImages[i]}>
       <p className={styles.sliderText}>{t(`${pattern.translationsKey}.name`)}</p>
@@ -83,23 +85,25 @@ const Materials = () => {
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
-    <div className={styles.root}>
-      {materialsPage.title && <h1>{t(`${materialsPage.translationsKey}.title`)}</h1>}
-      <div className={styles.captionBlock}>
-        <AutoplaySlider
-          play
-          interval={CAROUSE_MATERIAL_INTERVAL}
-          cancelOnInteraction
-          className={styles.slider}
-          mobileTouch
-          buttons
-          bullets={false}
-          infinite
-          bulletsSet={patternImages}
-        >
-          {imagesForSlider}
-        </AutoplaySlider>
-        {materialPageText}
+    <div className={`${appStyles.rootApp} ${styles.root}`}>
+      <div className={appStyles.containerApp}>
+        {materialsPage.title && <h1>{t(`${materialsPage.translationsKey}.title`)}</h1>}
+        <div className={styles.captionBlock}>
+          <AutoplaySlider
+            play
+            interval={CAROUSE_MATERIAL_INTERVAL}
+            cancelOnInteraction
+            className={styles.slider}
+            mobileTouch
+            buttons
+            bullets={false}
+            infinite
+            bulletsSet={patternImages}
+          >
+            {imagesForSlider}
+          </AutoplaySlider>
+          {materialPageText}
+        </div>
       </div>
     </div>
   );

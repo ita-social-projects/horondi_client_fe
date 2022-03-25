@@ -54,6 +54,9 @@ const PriceFilter = ({ priceRange }) => {
   };
 
   const handleTextField = (e) => {
+    if (e.target.value < 0) {
+      e.target.value = 0;
+    }
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);

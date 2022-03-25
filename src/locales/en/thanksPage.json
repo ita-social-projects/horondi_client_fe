@@ -10,6 +10,12 @@
     "thanksCard": {
         "thanksForBuy": "Thank you for your purchase!",
         "orderNumber": "Order №",
+        "certificateName": "Certificate code: ",
+        "certificatePrice": "Price: ",
+        "email": "Email: ",
+        "certificatePaymentStatus": "Payment status: ",
+        "dateStart": "Start date: ",
+        "dateEnd": "End date: ",
         "customer": "Customer: ",
         "phone": "Phone: ",
         "deliveryType": "Delivery type: ",

@@ -15,9 +15,14 @@ export const validationSchema = Yup.object().shape({
   email: Yup.string()
     .min(8, 'error.emailLength')
     .max(60, 'error.emailLength')
-    .matches(formRegExp.email, 'error.wrongFormat')
+    .matches(formRegExp.email, 'error.profile.email')
     .required('error.requiredField'),
-  phoneNumber: Yup.string().matches(formRegExp.phoneNumber, 'error.wrongFormat').nullable(),
+  phoneNumber: Yup.string()
+    .matches(formRegExp.wholeNumber, 'error.onlyNumber')
+    .min(9, 'error.profile.phoneTooShort')
+    .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
+    .max(9, 'error.profile.phoneTooLong')
+    .nullable(),
   country: Yup.string()
     .min(2, 'error.profile.country')
     .max(40, 'error.profile.country')
@@ -27,6 +32,11 @@ export const validationSchema = Yup.object().shape({
     .min(2, 'error.profile.region')
     .max(40, 'error.profile.region')
     .matches(formRegExp.region, 'error.wrongFormat')
+    .nullable(),
+  district: Yup.string()
+    .min(2, 'error.profile.district')
+    .max(40, 'error.profile.district')
+    .matches(formRegExp.district, 'error.wrongFormat')
     .nullable(),
   city: Yup.string()
     .min(2, 'error.profile.city')
@@ -39,17 +49,18 @@ export const validationSchema = Yup.object().shape({
     .matches(formRegExp.street, 'error.wrongFormat')
     .nullable(),
   buildingNumber: Yup.string()
-    .min(1, 'error.profile.buildingNumber')
-    .max(6, 'error.profile.buildingNumber')
-    .matches(formRegExp.buildingNumber, 'error.wrongFormat')
+    .min(1, 'error.profile.buildingNumberLength')
+    .max(6, 'error.profile.buildingNumberLength')
+    .matches(formRegExp.number, 'error.profile.buildingNumberLackNumber')
+    .matches(formRegExp.buildingNumber, 'error.profile.buildingNumber')
     .nullable(),
   appartment: Yup.string()
     .min(1, 'error.profile.appartment')
     .max(6, 'error.profile.appartment')
-    .matches(formRegExp.appartment, 'error.wrongFormat')
+    .matches(formRegExp.appartment, 'error.buildAppartFormat')
     .nullable(),
   zipcode: Yup.string()
     .length(5, 'error.profile.zipcode')
-    .matches(formRegExp.buildingNumber, 'error.zipcode')
+    .matches(formRegExp.buildingNumber, 'error.profile.zipcode')
     .nullable()
 });

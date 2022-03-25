@@ -209,7 +209,7 @@ const UkrpostAndCourier = ({
   return (
     <div className={styles.addressContainer}>
       <h3 className={styles.addressTitle}>{t('delivery.deliveryAddress')}</h3>
-      <div className={styles.inputWrapper}>
+      <div>
         <Autocomplete
           data-testid='region'
           name='region'

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import { Tooltip } from '@material-ui/core';
 import CommentDialog from '../comment-dialog';
 import { useStyles } from './reply-comments-item.styles';
 import { COMMENTS_TIME_OPTIONS } from '../../../constants';
+import VerifiedPurchaseIcon from '../../../../../images/verifiedPurchaseIcon';
 
 import {
   handleUserCommentApprove,
@@ -49,9 +49,12 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
     toggleModal(false);
   };
 
-  useEffect(() => () => {
-    toggleModal(false);
-  }, []);
+  useEffect(
+    () => () => {
+      toggleModal(false);
+    },
+    []
+  );
 
   if (!show && userData?._id !== _id) {
     return null;
@@ -71,11 +74,9 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
             </div>
             <div className={styles.commentActions}>
               {verifiedPurchase ? (
-                <div className={styles.checkIcon}>
-                  <Tooltip title={t('product.tooltips.bought')}>
-                    <ShoppingCartRoundedIcon className={styles.boughtIcon} />
-                  </Tooltip>
-                </div>
+                <Tooltip className={styles.checkIcon} title={t('product.tooltips.bought')}>
+                  <VerifiedPurchaseIcon alt='Verified purhase icon' className={styles.boughtIcon} />
+                </Tooltip>
               ) : (
                 ''
               )}
@@ -106,7 +107,7 @@ const ReplyCommentsItem = ({ replyItem, replyCommentId, updateReplies }) => {
       <CommentDialog
         handleClose={handleClose}
         isModalShown={isModalShown}
-        commentId={replyCommentId}
+        id={replyCommentId}
         refetchComments={updateReplies}
         userId={userData ? userData._id : ''}
       />

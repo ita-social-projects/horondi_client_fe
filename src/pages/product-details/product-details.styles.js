@@ -2,10 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   container: {
-    fontFamily: 'Open Sans',
-    width: '80%',
     minHeight: '1200px',
-    margin: '2rem auto',
     boxSizing: 'border-box',
     background: 'none',
     '@media (max-width: 600px)': {
@@ -14,22 +11,24 @@ export const useStyles = makeStyles((theme) => ({
     },
     boxShadow: 'none'
   },
-  productContainer: {
-    padding: '2rem',
-    '@media (max-width: 400px)': {
-      padding: '0.5rem'
-    }
-  },
   product: {
     display: 'flex',
     flexWrap: 'wrap',
     '@media (max-width: 1150px)': {
-      display: 'block'
+      display: 'block',
+      padding: '10px'
     }
   },
-  test: {
+  submitWrapper: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 400px)': {
+      '& .MuiSvgIcon-root': {
+        margin: '0 10px 0 50px'
+      },
+      padding: '10px 0',
+      justifyContent: 'space-between'
+    }
   },
   productDetails: {
     flex: '1 1 50%',
@@ -40,11 +39,8 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     paddingLeft: '20px',
     '@media (max-width: 600px)': {
-      alignItems: 'center',
-      textAlign: 'center'
-    },
-    '@media (max-width: 300px)': {
-      padding: '0'
+      padding: '0px',
+      justifyContent: 'space-between'
     }
   },
   center: {

@@ -27,6 +27,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   sortDiv: {
     paddingTop: '51px',
+    '@media (max-width: 960px)': {
+      paddingTop: '21px'
+    },
     '& div': {
       flexWrap: 'wrap',
       marginRight: 0
@@ -78,7 +81,11 @@ export const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     display: 'none',
     color: theme.palette.backgroundColor,
-    backgroundColor: theme.palette.button.normal.backgroundColor,
+    backgroundColor: theme.palette.textColor,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    },
     '@media (max-width: 959px)': {
       display: 'block'
     }

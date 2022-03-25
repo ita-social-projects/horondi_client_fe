@@ -16,6 +16,14 @@ export const getConstructorByModel = gql`
         basics {
           _id
           translationsKey
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
+          }
           name {
             lang
             value
@@ -27,6 +35,32 @@ export const getConstructorByModel = gql`
             thumbnail
           }
           available
+          additionalPrice {
+            value
+            currency
+          }
+        }
+        bottoms {
+          _id
+          translationsKey
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
+          }
+          name {
+            lang
+            value
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
           additionalPrice {
             value
             currency
@@ -45,31 +79,23 @@ export const getConstructorByModel = gql`
             }
           }
         }
-        bottoms {
-          _id
-          translationsKey
-          name {
-            lang
-            value
-          }
-          images {
-            large
-            medium
-            small
-            thumbnail
-          }
-          additionalPrice {
-            value
-            currency
-          }
-        }
         patterns {
           _id
           translationsKey
+          features {
+            material {
+              _id
+              name {
+                lang
+                value
+              }
+            }
+          }
           name {
             lang
             value
           }
+          constructorImg
           images {
             large
             medium

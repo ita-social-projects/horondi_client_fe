@@ -18,7 +18,7 @@ jest.mock('@material-ui/styles', () => ({
   })
 }));
 
-describe('OrderHistoryOrderItem component tests', () => {
+describe.skip('OrderHistoryOrderItem component tests', () => {
   it('Should render OrderHistoryOrderItem', () => {
     const component = shallow(<OrderHistoryItemProduct item={item} currency={0} />);
     expect(component).toBeDefined();

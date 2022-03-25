@@ -15,6 +15,11 @@ const loginUser = async (data) => {
     lastName
     phoneNumber
     confirmed
+    configs {
+      language
+      currency
+      theme
+    }
     images {
       thumbnail
     }
@@ -144,10 +149,10 @@ const resetPassword = async (data) => {
   return result?.data?.resetPassword;
 };
 
-const updateUserById = async ({ user, id, upload }) => {
+const updateUserById = async ({ user, id, upload, deleteAvatar }) => {
   const updateUserByIdMutation = `
-     mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload){
-      updateUserById(user: $user, id: $id, image: $upload) { 
+     mutation updateUser($user: UserUpdateInput!, $id: ID!, $upload: Upload, $deleteAvatar: Boolean){
+      updateUserById(user: $user, id: $id, image: $upload, deleteAvatar: $deleteAvatar) { 
         orders
         _id
         email
@@ -176,7 +181,7 @@ const updateUserById = async ({ user, id, upload }) => {
     }
   `;
 
-  const result = await setItems(updateUserByIdMutation, { user, id, upload });
+  const result = await setItems(updateUserByIdMutation, { user, id, upload, deleteAvatar });
 
   return result?.data?.updateUserById;
 };
@@ -203,6 +208,11 @@ const getUserByToken = async () => {
             firstName
             lastName
             phoneNumber
+            configs {
+              language
+              currency
+              theme
+            }
             images {
               thumbnail
             }
@@ -264,6 +274,74 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
+const getWishlistByUserId = async (id) => {
+  const getWishlistByUseQuery = `
+  query {
+    getWishlistByUserId {
+      ... on Wishlist {
+        __typename
+        _id
+        user_id
+        products {
+          _id
+          translationsKey
+          images {
+            primary {
+              thumbnail
+            }
+          }
+          category {
+            _id
+          }
+          pattern {
+            _id
+          }
+          sizes {
+            size {
+              _id
+              available
+              name
+            }
+            price {
+              currency
+              value
+            }
+          }
+          mainMaterial {
+            material {
+              translationsKey
+              _id
+              colors {
+                _id
+              }
+            }
+          }
+          bottomMaterial {
+            material {
+              translationsKey
+              _id
+              name {
+                value
+              }
+              colors {
+                _id
+              }
+            }
+          }
+        }
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+`;
+  const result = await getItems(getWishlistByUseQuery, { id });
+
+  return result?.data?.getWishlistByUserId;
+};
+
 export {
   loginUser,
   getGoogleUser,
@@ -277,5 +355,6 @@ export {
   sendEmailConfirmation,
   getUserByToken,
   regenerateUserTokenPairs,
-  getPurchasedProducts
+  getPurchasedProducts,
+  getWishlistByUserId
 };

@@ -7,6 +7,7 @@ import NewsItem from '../news-item';
 import { getAllNews } from '../operations/news-queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import OrderHistoryPagination from '../../../containers/orders/order-history/order-history-pagination/index';
+import { useAppStyles } from '../../../components/app/app.styles';
 
 const NewsPage = () => {
   const [news, setNews] = useState([]);
@@ -31,6 +32,7 @@ const NewsPage = () => {
   };
 
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const newsItems = news.map(({ _id, date, author, image, title, text, slug, translationsKey }) => (
     <NewsItem
       date={date}
@@ -49,11 +51,13 @@ const NewsPage = () => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
-    <>
-      <h1 className={styles.newsTitle}>{t('common.news')}</h1>
-      <div className={styles.NewsPageItem}>{newsItems}</div>
-      <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
-    </>
+    <div className={appStyles.rootApp}>
+      <div className={appStyles.containerApp}>
+        <h1 className={styles.newsTitle}>{t('common.news')}</h1>
+        <div className={styles.NewsPageItem}>{newsItems}</div>
+        <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
+      </div>
+    </div>
   );
 };
 

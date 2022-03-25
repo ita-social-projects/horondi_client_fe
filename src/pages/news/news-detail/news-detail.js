@@ -20,6 +20,7 @@ import { TIME_OPTIONS } from '../constants';
 import { getNewsById } from '../operations/news-queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import routes from '../../../configs/routes';
+import { useAppStyles } from '../../../components/app/app.styles';
 
 const NewsDetail = ({ match }) => {
   const articleId = match.params.id;
@@ -28,6 +29,7 @@ const NewsDetail = ({ match }) => {
   const { loading, error, data } = useQuery(getNewsById, { variables: { id } });
 
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const { t, i18n } = useTranslation();
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
 
@@ -43,9 +45,9 @@ const NewsDetail = ({ match }) => {
   const title = translationsKey ? t(`${translationsKey}.title`) : t('newsDetail.noTitle');
 
   return (
-    <div className={styles.root}>
-      <Card className={styles.container}>
-        <CardContent>
+    <div className={appStyles.rootApp}>
+      <Card className={`${appStyles.containerApp} ${styles.container}`}>
+        <CardContent className={styles.content}>
           <Breadcrumbs className={styles.breadcrumbs} aria-label='breadcrumb'>
             <Link underline='hover' color='inherit' href={routes.pathToMain}>
               {t('common.home')}

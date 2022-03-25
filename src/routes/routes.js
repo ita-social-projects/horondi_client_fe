@@ -8,9 +8,9 @@ import { useStyles } from './routes.style.js';
 import ErrorBoundary from '../components/error-boundary';
 import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
-import Home from '../pages/home';
 import AppHeader from '../components/app-header';
 import AppFooter from '../components/app-footer';
+import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
 import routes from '../configs/routes';
 import { CategoriesContext } from '../context/categories/categories-context';
@@ -33,6 +33,7 @@ const {
   pathToChosenPage,
   pathToConfirmationToken,
   pathToRecovery,
+  pathToCertificateThanks,
   pathToRecoveryToken,
   pathToProfile,
   pathToOrderHistory,
@@ -56,6 +57,7 @@ const NewPassword = lazy(() => import('../pages/new-password'));
 const ErrorPage = lazy(() => import('../pages/error-page'));
 const NotFoundPage = lazy(() => import('../pages/not-found-page'));
 const ThanksPage = lazy(() => import('../pages/thanks-page'));
+const CertificateThanksPage = lazy(() => import('../pages/certificate-thanks-page'));
 const Cart = lazy(() => import('../pages/cart'));
 const Checkout = lazy(() => import('../containers/checkout'));
 const ProfilePage = lazy(() => import('../pages/profile-page'));
@@ -94,7 +96,6 @@ const Routes = () => {
               <Route path={pathToChosenPage} exact component={BusinessPage} />
               <Route path={pathToAnswersQuestionsPage} exact component={AnswersQuestionsPage} />
               <Route path={pathToGiftСertificate} exact component={GiftСertificate} />
-              <Route path={pathToMyCertificates} exact component={MyCertificates} />
 
               <ProtectedRoute
                 path={pathToLogin}
@@ -111,6 +112,7 @@ const Routes = () => {
                 redirectTo={pathToMain}
               />
               <Route path={pathToThanks} component={ThanksPage} />
+              <Route path={pathToCertificateThanks} component={CertificateThanksPage} />
               <Route path={pathToCart} exact component={Cart} />
               <Route path={pathToCheckout} exact component={Checkout} />
               <Route
@@ -134,6 +136,13 @@ const Routes = () => {
               <ProtectedRoute
                 component={OrderHistory}
                 path={pathToOrderHistory}
+                isAuthed={userIsChecked && userData}
+                exact
+                redirectTo={pathToLogin}
+              />
+              <ProtectedRoute
+                component={MyCertificates}
+                path={pathToMyCertificates}
                 isAuthed={userIsChecked && userData}
                 exact
                 redirectTo={pathToLogin}

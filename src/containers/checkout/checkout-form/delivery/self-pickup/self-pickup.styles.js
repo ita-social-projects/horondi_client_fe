@@ -57,7 +57,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontWeight: 'bolder'
   },
   scheduleItemHours: {
-    width: 84,
+    width: 88,
     marginLeft: 12
   }
 }));

@@ -40,9 +40,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '& td:first-child': {
       textAlign: 'left',
-      '& >div': {
-        marginLeft: '5px'
-      },
       '& img': {
         width: '220px',
         height: '133px',
@@ -63,6 +60,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       fontWeight: 600,
       lineHeight: '20px',
       textAlign: 'center'
+    },
+    '@media (max-width: 425px)': {
+      '& >th': {
+        verticalAlign: 'text-top'
+      }
     }
   }
 }));

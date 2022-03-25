@@ -14,9 +14,8 @@ export const useStyles = makeStyles(() => ({
     background: 'rgba(0,0,0,0.3)'
   },
   sliderContent: {
-    maxWidth: '40vw',
     minHeight: '90vh',
-    padding: '50px 0px 50px 150px',
+    padding: '50px 0',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',

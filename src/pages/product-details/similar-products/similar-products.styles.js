@@ -11,15 +11,17 @@ const title = {
 
 export const useStyles = makeStyles((theme) => ({
   similarItems: {
-    width: '90%',
-    margin: '0 auto',
     textAlign: 'center',
-    paddingTop: '70px'
+    paddingTop: '70px',
+    '@media (max-width: 600px)': {
+      paddingTop: '10px'
+    }
   },
   carousel: {
     marginTop: '2rem',
     marginBottom: theme.spacing(4),
-    paddingBottom: '25px'
+    paddingBottom: '25px',
+    paddingTop: '15px'
   },
   title: {
     ...title
@@ -27,7 +29,6 @@ export const useStyles = makeStyles((theme) => ({
   price: {
     display: 'flex',
     whiteSpace: 'nowrap',
-    paddingTop: '2px',
     '& span': {
       paddingTop: '2px'
     }

@@ -20,6 +20,7 @@ import ThemeContext from '../../context/theme-context';
 import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 
 import { HORONDI, DARK_THEME, LIGHT_THEME } from '../../configs';
+import { useAppStyles } from '../app/app.styles';
 
 const AppHeader = () => {
   const { t } = useTranslation();
@@ -28,14 +29,19 @@ const AppHeader = () => {
   const [sticky, setSticky] = useState(false);
   const theme = getFromLocalStorage('theme');
   const styles = useStyles();
+  const appStyles = useAppStyles();
+
   const Header = clsx({
     [styles.header]: true,
     [styles.sticky]: sticky
   });
 
   useLayoutEffect(() => {
+    let lastScrollTop = 0;
     window.addEventListener('scroll', () => {
-      window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      const currPoint = window.scrollY;
+      currPoint > lastScrollTop ? setSticky(true) : setSticky(false);
+      lastScrollTop = currPoint <= 0 ? 0 : currPoint;
     });
   }, []);
 
@@ -48,7 +54,7 @@ const AppHeader = () => {
   return (
     <div className={styles.root}>
       <AppBar position='static' className={Header}>
-        <Toolbar className={styles.upperToolbar} disableGutters>
+        <Toolbar className={`${appStyles.containerWideApp} ${styles.upperToolbar}`} disableGutters>
           <Typography>{t('header.workingDays')}</Typography>
           <div className={styles.theme}>
             <Typography>{t('header.lightTheme')}</Typography>
@@ -65,7 +71,7 @@ const AppHeader = () => {
             {t('header.callUs')}
           </PhoneLink>
         </Toolbar>
-        <Toolbar className={styles.bottomToolbar} disableGutters>
+        <Toolbar className={`${appStyles.containerWideApp} ${styles.bottomToolbar}`} disableGutters>
           <BurgerMenu className={styles.menuButton} onClick={() => setIsMenuOpen(true)}>
             <MenuIcon />
           </BurgerMenu>

@@ -6,10 +6,12 @@ import { useStyles } from './slider-home-page.style';
 import arrowRight from '../../../images/Arrow 6.svg';
 import arrowLeft from '../../../images/Arrow 5.svg';
 import { images } from './slider-data';
+import { useAppStyles } from '../../../components/app/app.styles';
 
 const SliderHomePage = () => {
   const [currImg, setCurrImg] = useState(0);
   const styles = useStyles();
+  const appStyles = useAppStyles();
   const { t } = useTranslation();
 
   return (
@@ -19,7 +21,7 @@ const SliderHomePage = () => {
       className={styles.homeHeader}
     >
       <div className={styles.overlay}>
-        <div className={styles.sliderContent}>
+        <div className={`${appStyles.containerApp} ${styles.sliderContent}`}>
           <div className={styles.headerWrapper}>
             <div className={styles.slideNumber}>
               <span>{images[currImg].slideNumber} / </span> <span> 03</span>

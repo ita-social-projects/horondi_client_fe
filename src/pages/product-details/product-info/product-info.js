@@ -3,21 +3,21 @@ import { useTranslation } from 'react-i18next';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import parse from 'html-react-parser';
+
 import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
-
 import { SCROLL_BAR_LINKS } from '../constants';
 import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
 
-const ProductInfo = ({ product, countComments, checkDisabledProduct, currency, currentPrice }) => {
+const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
 
   const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
 
-  const checkDisabledProductResult = checkDisabledProduct ? null : (
+  const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
   );
   const correctCommentsName = (count) => {
@@ -59,22 +59,26 @@ const ProductInfo = ({ product, countComments, checkDisabledProduct, currency, c
         </div>
       ) : null}
       <div className={styles.look}>
-        <span className={styles.subtitle}>{t('common.color')}</span>
-        {': '}
-        <span className={styles.subtitleBold}>
-          {t(`${mainMaterial.color.translations_key}.name`)}
-        </span>
-        <img
-          className={styles.circle}
-          alt='color'
-          src={Colors[`${product.mainMaterial.color.name[1].value}`]}
-        />
-        <span className={styles.subtitle}>{t('product.pattern')}:</span>
-        <img
-          className={styles.circle}
-          alt='pattern'
-          src={`${IMG_URL}${product.pattern.images.thumbnail}`}
-        />
+        <div className={styles.colorAndPatern}>
+          <span className={styles.subtitle}>{t('common.color')}</span>
+          {': '}
+          <span className={styles.subtitleBold}>
+            {t(`${mainMaterial.color.translations_key}.name`)}
+          </span>
+          <img
+            className={styles.circle}
+            alt='color'
+            src={Colors[`${product.mainMaterial.color.name[1].value}`]}
+          />
+        </div>
+        <div className={styles.colorAndPatern}>
+          <span className={styles.subtitle}>{t('product.pattern')}:</span>
+          <img
+            className={styles.circle}
+            alt='pattern'
+            src={`${IMG_URL}${product.pattern.images.thumbnail}`}
+          />
+        </div>
       </div>
     </div>
   );

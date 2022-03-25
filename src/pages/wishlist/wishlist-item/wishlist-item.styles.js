@@ -39,7 +39,7 @@ export const useStyles = makeStyles(() => ({
     }
   },
   itemImg: {
-    '@media (max-width: 768px)': {
+    '@media (max-width: 576px)': {
       width: '70px'
     }
   },

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -8,14 +8,18 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Settings, History, PersonOutlineOutlined, Person } from '@material-ui/icons';
 
 import { useTranslation } from 'react-i18next';
+import { useMutation } from '@apollo/client';
 import { useStyles } from './header-profile.styles';
 import { logoutUser } from '../../redux/user/user.actions';
-import { RETURN_PAGE , DARK_THEME, LIGHT_THEME } from '../../configs';
+import { RETURN_PAGE, LANGUAGE } from '../../configs';
 import routes from '../../configs/routes';
 import { GiftCertificatesIcon } from '../../images/gift-certificates-icon';
 
-import { setToLocalStorage } from '../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import ThemeContext from '../../context/theme-context';
+import { saveUserConfigs } from './profile.queries';
+import i18n from '../../i18n';
+import { changeCurrency } from '../../redux/currency/currency.actions';
 
 const {
   pathToProfile,
@@ -31,12 +35,34 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     userData: User.userData
   }));
 
+  const [, setLightMode] = useContext(ThemeContext);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const styles = useStyles({ fromSideBar });
   const history = useHistory();
+
+  const configsUser = {
+    currency: getFromLocalStorage('currency'),
+    language: i18n.language,
+    theme: getFromLocalStorage('theme')
+  };
+
+  const { firstName, lastName, email } = userData || {};
+
+  const [saveConfigs] = useMutation(saveUserConfigs, {
+    variables: {
+      user: {
+        firstName,
+        lastName,
+        email,
+        configs: configsUser
+      },
+      id: userData?._id
+    }
+  });
 
   const handleKeyDown = (e) => {
     e.persist();
@@ -51,6 +77,21 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    if (userData) {
+      const { theme, language, currency } = userData.configs;
+
+      setLightMode(theme === 'light');
+      setToLocalStorage('theme', theme);
+
+      i18n.changeLanguage(language);
+      setToLocalStorage(LANGUAGE, language);
+
+      setToLocalStorage('currency', currency);
+      dispatch(changeCurrency(currency));
+    }
+  }, [userData]);
+
   const handleLogIn = () => {
     setIsMenuOpen(false);
     const pathName = history.location.pathname;
@@ -61,12 +102,10 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     handleRedirect(pathToLogin);
   };
 
-  const [lightMode] = useContext(ThemeContext);
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    setToLocalStorage('theme', lightMode ? LIGHT_THEME : DARK_THEME);
+  const handleLogout = async () => {
     setAnchorEl(null);
+    await saveConfigs();
+    dispatch(logoutUser());
   };
 
   const handleRedirect = (link) => {
@@ -110,7 +149,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   ];
 
   const mappedProfileList = PROFILE_DATA.map(({ value, icon, clickHandler }) => (
-    <MenuItem key={value} onClick={clickHandler} disableGutters data-cy='menuItem'>
+    <MenuItem key={value} onClick={clickHandler} disableGutters data-testid='menuItem'>
       {icon}
       {value}
     </MenuItem>
@@ -119,7 +158,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   return (
     <div className={styles.profile} data-cy='profile'>
       {userData ? (
-        <Person onClick={handleClick} onKeyDown={handleClick} tabIndex={0} data-cy='iconIn' />
+        <Person onClick={handleClick} onKeyDown={handleClick} tabIndex={0} data-testid='iconIn' />
       ) : (
         <PersonOutlineOutlined
           onClick={handleLogIn}
@@ -129,7 +168,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
         />
       )}
       <Menu
-        data-cy='menu'
+        data-testid='menu'
         className={styles.list}
         anchorEl={anchorEl}
         keepMounted

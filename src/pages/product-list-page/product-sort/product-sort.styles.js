@@ -32,10 +32,16 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     lineHeight: '25px',
     '@media (max-width:959px)': {
+      flexDirection: 'column',
       justifyContent: 'center',
-      alignItems: 'baseline'
+      alignItems: 'center'
     },
-    '& div': {
+    '&>div': {
+      '@media (max-width:959px)': {
+        display: 'flex',
+        flexDirection: 'column',
+        marginBottom: '10px'
+      },
       '@media (max-width:500px)': {
         marginRight: '0',
         marginBottom: '.5rem',
@@ -79,7 +85,7 @@ export const useStyles = makeStyles((theme) => ({
         '&:hover': {
           backgroundColor: theme.palette.type === 'light' ? theme.palette.white : '#424242',
           color: '#3F51B5',
-          marginLeft: '30px'
+          marginLeft: '15px'
         },
         '& .MuiTouchRipple-root span': {
           opacity: 0

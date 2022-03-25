@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Product details test Should render product details component 1`] = `
-<WithStyles(ForwardRef(Card))
-  className=""
->
-  <div>
+<div>
+  <WithStyles(ForwardRef(Card))
+    className="undefined  "
+  >
     <ProductPath />
     <Link
       to="/catalog/:category"
@@ -14,14 +14,12 @@ exports[`Product details test Should render product details component 1`] = `
     <div>
       <div>
         <ProductInfo
-          checkDisabledProduct=""
           countComments={0}
           currency={0}
           currentPrice={Array []}
           product={Object {}}
         />
         <ProductSizes
-          checkDisabledProduct=""
           currentSize={
             Object {
               "_id": "",
@@ -52,17 +50,21 @@ exports[`Product details test Should render product details component 1`] = `
           />
           <WithStyles(ForwardRef(Tooltip))
             placement="bottom"
-            title="product.tooltips.removeWishful"
+            title="product.tooltips.addWishful"
           >
-            <Memo(ForwardRef(FavoriteIcon))
-              data-cy="wishful"
+            <Memo(ForwardRef(FavoriteBorderIcon))
+              data-cy="not-wishful"
               onClick={[Function]}
             />
           </WithStyles(ForwardRef(Tooltip))>
         </div>
       </div>
     </div>
-  </div>
-  <Toast />
-</WithStyles(ForwardRef(Card))>
+    <Toast
+      isOpenedSnackbar={false}
+      message="product.toastMessage.addedToWishList"
+      setIsOpenedSnackbar={[Function]}
+    />
+  </WithStyles(ForwardRef(Card))>
+</div>
 `;

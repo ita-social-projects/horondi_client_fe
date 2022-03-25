@@ -120,8 +120,19 @@ export const addReplyMutation = gql`
 `;
 
 export const deleteCommentMutation = gql`
-  mutation ($commentID: ID!) {
-    deleteComment(commentID: $commentID) {
+  mutation ($id: ID, $commentID: ID!) {
+    deleteComment(id: $id, commentID: $commentID) {
+      ... on Comment {
+        __typename
+        _id
+      }
+    }
+  }
+`;
+
+export const deleteReplyForCommentMutation = gql`
+  mutation ($id: ID, $replyCommentId: ID!) {
+    deleteReplyForComment(id: $id, replyCommentId: $replyCommentId) {
       ... on Comment {
         __typename
         _id

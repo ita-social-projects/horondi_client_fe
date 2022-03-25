@@ -11,7 +11,8 @@ const currencyInLocalStorage = getFromLocalStorage(CURRENCY) || DEFAULT_CURRENCY
 
 const CurrencyComponent = ({ fromSideBar }) => {
   const dispatch = useDispatch();
-  const styles = useStyles({ fromSideBar });
+  const currency = getFromLocalStorage(CURRENCY);
+  const styles = useStyles({ fromSideBar, currency });
   useEffect(() => {
     dispatch(changeCurrency(currencyInLocalStorage));
   }, [dispatch]);

@@ -47,7 +47,8 @@ export const useStyles = makeStyles((theme) => {
       backgroundColor: theme.palette.black,
       color: theme.palette.white,
       '&:hover': {
-        backgroundColor: theme.palette.card.selectedButton.backgroundColor
+        backgroundColor: theme.palette.card.selectedButton.backgroundColor,
+        color: theme.palette.card.selectedButton.color
       }
     },
     container: {

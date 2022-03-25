@@ -9,9 +9,12 @@
   "houseFormatNumber": "Invalid format",
   "onlyLetter": "Field should contain only letters",
   "onlyNumber": "Field should contain only numbers",
+  "appartment": "Field should be a number (can be with a certain capital letter)",
+  "buildAppartFormat":"This field should contain numbers",
   "emailLength": "Field should contain from 8 to 60 characters",
   "wrongFormat": "Field should contain letters, apostrophes, hyphens and spaces",
   "textLength": "Field should contain from 2 to 700 characters",
+  "noSpecialCharacters": "Field should not contain special characters",
   "profile": {
     "firstName": "Field should contain from 2 to 30 characters",
     "lastName": "Field should contain from 2 to 30 characters",
@@ -21,14 +24,35 @@
     "passConfirm": "Passwords don't match!",
     "text": "Field should contain from 2 to 700 characters",
     "phoneNumber": "Incorrect phone number format",
-    "zipcode": "Wrong zipcode format",
+    "phoneTooShort": "Phone number is too short",
+    "phoneTooLong": "Phone number is too long",
+    "zipcode": "Wrong zip format",
     "country": "Field should contain from 2 to 40 characters",
     "region": "Field should contain from 2 to 40 characters",
+    "district": "Field should contain from 2 to 40 characters",
     "city": "Field should contain from 2 to 50 characters",
     "street": "Field should contain from 2 to 40 characters",
-    "buildingNumber": "Field should contain from 1 to 6 characters",
+    "buildingNumber": "Incorrect building number format",
+    "buildingNumberLength": "Field should contain from 1 to 6 characters",
+    "buildingNumberLackNumber": "This field should contain numbers",
     "appartment": "Field should contain from 1 to 6 characters",
-    "empty": "Field should not to be empty"
+    "empty": "Field should not to be empty",
+    "size": "Size is greater than 5mb",
+    "extension": "Wrong file extension",
+    "dimension": "Dimension is greater than 100x100px"
   },
-  "nothingFound": "Nothing found"
+  "nothingFound": "Nothing found",
+  "userError": {
+    "userAlredyExist": "An account with this email already exists",
+    "userNotAuthorized": "User is not authorized",
+    "refreshTokenIsNotValid": "You have be logged out, please sign in again",
+    "wrongCredentials": "Wrong e-mail address or password",
+    "inputNotValid": "Wrong input data",
+    "userIsBlocked": "Sorry, your account is blocked.",
+    "userEmailAlreadyConfirmed": "User with this email is already confirmed",
+    "userNotFound": "User has not been found!",
+    "tokenIsExpired": "You have be logged out. Try to confirm your email in your personal cabinet",
+    "cartIsNotFound": "You have be logged out",
+    "defaultError": "Oops! Something went wrong. Please, try again later."
+  }
 }

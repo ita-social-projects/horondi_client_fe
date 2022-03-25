@@ -1,11 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  root: {
-    color: palette.textColor,
-    width: '100%',
-    margin: '0 auto'
-  },
   formControl: {
     width: 600,
     marginBottom: 10,
@@ -49,7 +44,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     color: palette.textColor,
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '80%'
+      width: '89%'
     }
   },
   orderCommentTitle: {
@@ -64,14 +59,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     '@media (max-width: 768px)': {
       flexDirection: 'column',
-      width: '80%',
+      width: '89%',
       margin: 0
     }
-  },
-  contactPaymentInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: '10%'
   },
   checkoutFormContainer: {
     display: 'flex',
@@ -88,12 +78,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 768px)': {
       width: '100%'
     }
-  },
-  contactInfoWrapper: {
-    display: 'flex',
-    marginLeft: '10%',
-    flexDirection: 'column',
-    width: '100%'
   },
   error: {
     color: '#e60000',
@@ -189,26 +173,21 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%'
   },
   deliveryContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '36%',
     '@media (max-width: 1150px)': {
       width: '100%',
       marginTop: '2%'
     }
   },
   inputData: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    marginBottom: 10
+    marginBottom: 10,
+    '@media (max-width: 768px)': {
+      width: '100%'
+    }
   },
+
   checkoutTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: '6%',
     width: '100%',
     '@media (max-width: 768px)': {
       marginLeft: '10%',
@@ -246,7 +225,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   checkoutTitleLine: {
-    width: '90%',
     background: '#636262',
     height: 1,
     marginTop: 15,
@@ -279,7 +257,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginTop: '20px',
     '@media (max-width: 1150px)': {
       position: 'inherit',
-      marginLeft: '60px',
       marginBottom: '20px'
     },
     '&.MuiPaper-root': {

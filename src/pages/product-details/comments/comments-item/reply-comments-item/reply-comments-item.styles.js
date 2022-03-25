@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   commentActions: {
-    paddingLeft: '20px',
+    paddingLeft: '5px',
     display: 'flex',
     alignItems: 'center'
   },
@@ -42,7 +42,8 @@ export const useStyles = makeStyles((theme) => ({
   textContent: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: '12px'
+    paddingTop: '12px',
+    wordBreak: 'break-all'
   },
   deleteIcon: {
     color: theme.palette.comments.deleteIcon.color,
@@ -98,7 +99,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   boughtIcon: {
     color: '#01a00d',
-    fontSize: '30px',
     marginRight: '5px'
   },
   replyIcon: {
@@ -107,18 +107,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   checkIcon: {
     position: 'relative',
-    height: '30px',
-    '&:before': {
-      top: '4px',
-      left: '13px',
-      width: '6px',
-      height: '9px',
-      content: "' '",
-      position: 'absolute',
-      transform: 'rotate(45deg)',
-      borderRight: '2px solid #ffffff',
-      borderBottom: '2px solid #ffffff'
-    }
+    height: '16px'
   },
   icon: {
     width: '16px',

@@ -6,12 +6,24 @@ import Wishlist from '../wishlist';
 jest.mock('connected-react-router', () => ({
   push: jest.fn()
 }));
-jest.mock('../wishlist.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../components/app/app.styles', () => ({ useAppStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('../../../services/local-storage.service');
 jest.mock('../../../hooks/use-wishlist-loader', () => ({
   __esModule: true,
   default: () => ({ loading: false, error: null, wishlist: {} })
+}));
+
+jest.mock('@apollo/client', () => ({
+  ...jest.requireActual('@apollo/client'),
+  useMutation: () => [
+    () => null,
+    {
+      loading: true,
+      error: null,
+      data: { addProductToWishlist: { products: [{ _id: 1 }] } }
+    }
+  ]
 }));
 
 const dispatch = jest.fn();

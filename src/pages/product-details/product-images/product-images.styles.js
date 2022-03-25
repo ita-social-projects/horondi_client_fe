@@ -10,20 +10,22 @@ const imgSides = {
 export const useStyles = makeStyles((theme) => ({
   imageBody: {
     display: 'flex',
-    flex: '1 1 50%'
+    flex: '1 1 50%',
+    alignContent: 'space-between'
   },
   images: {
     maxWidth: 540,
-    display: 'grid',
-    gridTemplateRows: '3fr 1fr',
-    gridGap: '20px',
+    display: 'flex',
+    gap: '20px',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     '@media (max-width: 1150px)': {
       margin: '0 auto',
       maxWidth: 640
     },
-    '@media (max-width: 500px)': {
+    '@media (max-width: 600px)': {
       justifyContent: 'center',
-      padding: theme.spacing(2)
+      marginBottom: '10px'
     },
     '& img': {
       transform: 'scale(1)',
@@ -64,7 +66,8 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '6px',
     padding: '10px',
     maxHeight: '385px',
-    boxShadow: theme.palette.carouselItem.shadow.boxShadow
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
+    height: '100%'
   },
 
   circle: {
@@ -88,11 +91,13 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'flex-end',
     gap: 30,
-    maxHeight: '150px',
+    maxHeight: '120px',
     justifyContent: 'space-between',
-    '@media (max-width: 500px)': {
-      gap: 15
-    }
+    '@media (max-width: 600px)': {
+      gap: 15,
+      maxHeight: '100px'
+    },
+    height: '100%'
   },
 
   lastImage: {
@@ -110,9 +115,12 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     fontWeight: 600,
     lineHeight: '24px',
-    padding: '20% 10%',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 5px',
     '@media (max-width: 500px)': {
-      padding: '5px 5px'
+      padding: '0',
+      fontSize: '14px'
     }
   },
   imageItem: {

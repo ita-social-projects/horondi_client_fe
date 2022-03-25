@@ -23,9 +23,11 @@ export const USER_TOKENS = {
 
 export const REDIRECT_TIMEOUT = 3000;
 export const DEFAULT_CURRENCY = 0;
-export const DEFAULT_LANGUAGE = 0;
+export const DEFAULT_LANGUAGE = 'ua';
 export const DEFAULT_COUNT_PER_PAGE = 9;
 export const INITIAL_CERTIFICATE_COUNT = 1;
+export const ORDER_NUMBER_LENGTH = 13;
+export const PAYMENT_TOKEN_LENGTH = 40;
 
 export const commentFields = {
   text: { name: 'text', multiline: true, rows: 5 }

@@ -1,13 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  profileControl: {
-    margin: '0 auto',
-    display: 'flex',
-    width: '90%',
-    maxWidth: 1100,
-    flexDirection: 'column'
-  },
   profileTitleInfo: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,7 +21,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: 37
   },
   profile: {
-    maxWidth: 1110,
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -50,27 +42,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     position: 'relative',
     '@media (max-width: 768px)': {
       padding: '56px 40px'
-    }
-  },
-  userImage: {
-    height: '100%',
-    width: '100%',
-    borderRadius: '50%',
-    '&:hover': {
-      zIndex: -1
-    }
-  },
-  imageContainer: {
-    width: 160,
-    height: 160,
-    position: 'relative',
-    marginRight: 30,
-    gridRow: 'span 3',
-    alignSelf: 'center',
-    borderRadius: '50%',
-    '@media (max-width: 768px)': {
-      gridColumn: 'span 3',
-      margin: '0 auto'
     }
   },
   formTitle: {
@@ -99,49 +70,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 768px)': {
       gridColumn: 'span 3'
     }
-  },
-  photoUpload: {
-    display: 'none'
-  },
-  uploadBtn: {
-    width: '100%',
-    height: '100%',
-    fontWeight: 'bold',
-    background: 'transparent',
-    '&:hover': {
-      backgroundColor: 'transparent'
-    }
-  },
-  imageContainerLabel: {
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    borderRadius: '50%',
-    textAlign: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    transition: 'all 0.5s ease'
-  },
-  uploadLabel: {
-    backgroundColor: palette.profilePageLabel.normal.backgroundColor,
-    '&:hover': {
-      backgroundColor: palette.profilePageLabel.hover.backgroundColor
-    }
-  },
-  updateLabel: {
-    opacity: 0,
-    background: 'transparent',
-
-    '&:hover': {
-      opacity: 1
-    }
-  },
-  cameraIcon: {
-    fontSize: '32px',
-    color: palette.profilePageLabel.normal.backgroundColor
   },
   button: {
     fontSize: '1rem',

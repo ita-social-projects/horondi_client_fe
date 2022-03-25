@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, InputAdornment } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { CameraIcon, OpenedLetterIcon } from '../../images/profile-icons';
+import { OpenedLetterIcon } from '../../images/profile-icons';
 import { useStyles } from './profile-page.styles';
 import { updateUser, sendConfirmationEmail, recoverUser } from '../../redux/user/user.actions';
 import { Loader } from '../../components/loader/loader';
+import Avatar from './avatar/avatar';
 import { IMG_URL, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs/index';
 import { PROFILE_USER_CONTACT_DATA, PROFILE_USER_ADDRESS_DATA } from './constants';
 import { validationSchema } from '../../validators/profile-page';
 import { handleClassName, initialValues } from '../../utils/handle-profile-page';
+import { useAppStyles } from '../../components/app/app.styles';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
+  const [deleteAvatar, setDeleteAvatar] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const classes = useStyles();
+  const appStyles = useAppStyles();
   const dispatch = useDispatch();
 
   const {
@@ -48,7 +52,7 @@ const ProfilePage = () => {
       }
     });
 
-    dispatch(updateUser({ user, id: userData._id, upload }));
+    dispatch(updateUser({ user, id: userData._id, upload, deleteAvatar }));
     setShouldValidate(false);
   };
 
@@ -59,18 +63,6 @@ const ProfilePage = () => {
     validateOnChange: shouldValidate,
     validateOnBlur: shouldValidate
   });
-  const handleImageLoad = ({ target }) => {
-    if (target.files && target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = ({ target: { result } }) => {
-        setUserImageUrl(result);
-      };
-      reader.readAsDataURL(target.files[0]);
-      setUpload(target.files[0]);
-    }
-  };
-
-  const handleLableClass = () => (userImageUrl ? classes.updateLabel : classes.uploadLabel);
 
   const handleConfirmation = () => {
     dispatch(sendConfirmationEmail({ email: userData.email, language }));
@@ -105,7 +97,15 @@ const ProfilePage = () => {
         type='text'
         name={name}
         variant={TEXT_FIELD_VARIANT.OUTLINED}
-        value={values[name]}
+        value={values[name]?.startsWith('+380') ? values[name].slice(4) : values[name]}
+        InputProps={
+          name === 'phoneNumber'
+            ? {
+              maxLength: 9,
+              startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+            }
+            : {}
+        }
         label={t(`profilePage.labels.${name}`)}
         fullWidth
         color={MATERIAL_UI_COLOR.PRIMARY}
@@ -176,68 +176,55 @@ const ProfilePage = () => {
     );
 
   return (
-    <div className={classes.profileControl}>
-      <div className={classes.profileTitleInfo}>
-        <h2 className={classes.profileTitle}>{t('profilePage.titles.mainTitle')}</h2>
-        <div className={classes.titleLine} />
-      </div>
-      <div className={classes.profile}>
-        <div>
-          {userLoading ? (
-            <div className={classes.userForm}>
-              <Loader gridColumn='span 3' />
-            </div>
-          ) : (
-            <div className={classes.userFormControl}>
-              <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
-                <div className={classes.imageContainer}>
-                  {userImageUrl && (
-                    <img src={userImageUrl} alt='profile-logo' className={classes.userImage} />
-                  )}
-                  <input
-                    type='file'
-                    className={classes.photoUpload}
-                    id='photoUpload'
-                    onChange={handleImageLoad}
-                    multiple
-                    accept='image/*'
-                    data-testid='imageInput'
-                  />
-                  <label
-                    htmlFor='photoUpload'
-                    className={`${classes.imageContainerLabel} ${handleLableClass()}`}
-                  >
-                    <Button component='span' className={classes.uploadBtn}>
-                      <CameraIcon className={classes.cameraIcon} />
-                    </Button>
-                  </label>
-                </div>
-                <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
-                {getTextFields(PROFILE_USER_CONTACT_DATA)}
-                <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>
-                {getTextFields(PROFILE_USER_ADDRESS_DATA)}
-                <Button
-                  fullWidth
-                  className={`${classes.button} ${classes.saveBtn}`}
-                  type='submit'
-                  onClick={() => setShouldValidate(true)}
-                  data-testid='submitBtn'
-                >
-                  {t('profilePage.labels.saveBtnTitle')}
-                </Button>
-              </form>
-            </div>
-          )}
+    <div className={appStyles.rootApp}>
+      <div className={appStyles.containerApp}>
+        <div className={classes.profileTitleInfo}>
+          <h2 className={classes.profileTitle}>{t('profilePage.titles.mainTitle')}</h2>
+          <div className={classes.titleLine} />
         </div>
-        <div className={classes.userActions}>
-          <div className={classes.newPassword}>
-            {recoveryLoading ? <Loader /> : passwordChange()}
+        <div className={classes.profile}>
+          <div>
+            {userLoading ? (
+              <div className={classes.userForm}>
+                <Loader gridColumn='span 3' />
+              </div>
+            ) : (
+              <div className={classes.userFormControl}>
+                <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>
+                  <Avatar
+                    userImageUrl={userImageUrl}
+                    setUserImageUrl={setUserImageUrl}
+                    setUpload={setUpload}
+                    setDeleteAvatar={setDeleteAvatar}
+                    t={t}
+                  />
+                  <h3 className={classes.formTitle}>{t('profilePage.titles.contactTitle')}</h3>
+                  {getTextFields(PROFILE_USER_CONTACT_DATA)}
+                  <h3 className={classes.formTitle}>{t('profilePage.titles.addressTitle')}</h3>
+                  {getTextFields(PROFILE_USER_ADDRESS_DATA)}
+                  <Button
+                    fullWidth
+                    className={`${classes.button} ${classes.saveBtn}`}
+                    type='submit'
+                    onClick={() => setShouldValidate(true)}
+                    data-testid='submitBtn'
+                  >
+                    {t('profilePage.labels.saveBtnTitle')}
+                  </Button>
+                </form>
+              </div>
+            )}
           </div>
-          {!userData.confirmed && (
-            <div className={classes.confirmUser}>
-              {confirmationLoading ? <Loader /> : confirmEmail()}
+          <div className={classes.userActions}>
+            <div className={classes.newPassword}>
+              {recoveryLoading ? <Loader /> : passwordChange()}
             </div>
-          )}
+            {!userData.confirmed && (
+              <div className={classes.confirmUser}>
+                {confirmationLoading ? <Loader /> : confirmEmail()}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

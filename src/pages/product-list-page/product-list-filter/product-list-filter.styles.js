@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
   priceRangeInput: {
     marginLeft: '15px',
     '& input': {
-      width: '44px',
+      width: '60px',
       fontSize: '14px',
       padding: '9px .5rem'
     }

@@ -19,12 +19,15 @@ export const useStyles = makeStyles((theme) => {
     lineHeight: '20px',
     marginRight: '1rem',
     padding: '14px 25px',
-    minWidth: '9rem',
     textTransform: 'none',
     textAlign: 'center',
     '@media (max-width: 600px)': {
-      padding: '0.2rem 0.6rem',
+      padding: '10px 15px',
       fontSize: '0.9rem'
+    },
+    '@media (max-width: 400px)': {
+      margin: '5px 0',
+      width: '100%'
     }
   };
 
@@ -38,16 +41,12 @@ export const useStyles = makeStyles((theme) => {
     },
     submit: {
       display: 'flex',
-      '@media (max-width: 350px)': {
-        flexDirection: 'column',
-        alignItems: 'center'
-      },
       '@media (max-width: 400px)': {
-        marginBottom: '1rem'
-      },
-      '@media (max-width: 600px)': {
+        flexDirection: 'column',
+        alignItems: 'center',
         '& *': {
-          justifyContent: 'space-around'
+          justifyContent: 'space-around',
+          wigth: '100%'
         }
       },
       '@media (max-width: 1300px)': {

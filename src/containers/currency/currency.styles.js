@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: ({ fromSideBar }) => ({
+  root: ({ fromSideBar, currency }) => ({
     '& .MuiButtonGroup-root': {
       height: '20px',
       '&:hover': {
@@ -21,11 +21,6 @@ export const useStyles = makeStyles((theme) => ({
         letterSpacing: '0.0015em',
         color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)',
         borderRadius: '0px',
-        '&:hover': {
-          backgroundColor: 'transparent',
-          color: fromSideBar ? '' : 'rgba(254, 254, 254, 0.75)',
-          textDecoration: 'underline'
-        },
         '& > span': {
           zIndex: -1
         }
@@ -34,7 +29,11 @@ export const useStyles = makeStyles((theme) => ({
     '& .MuiButton-outlined': {
       border: 'none'
     },
+    '& .MuiButtonGroup-groupedOutlinedHorizontal:last-child': {
+      textDecoration: currency ? 'underline' : null
+    },
     '& .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child)': {
+      textDecoration: currency ? null : 'underline',
       borderRight: `1px solid ${
         fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
       }`

@@ -8,10 +8,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'flex-start',
     width: '100%'
   },
-  inputWrapper: {
-    width: '100%',
-    marginLeft: '10%'
-  },
   btnWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -26,7 +22,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   radioBtnWrapper: {
     paddingBottom: 20,
-    marginLeft: '11%'
+    marginLeft: '25px'
   },
   btnCreateOrder: {
     margin: '20px 0',
@@ -52,7 +48,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: 23,
     fontWeight: 700,
     color: palette.textColor,
-    marginLeft: '10%',
     marginBottom: 10,
     '@media (max-width: 920px)': {
       width: '100%'

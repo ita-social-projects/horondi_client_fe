@@ -53,10 +53,6 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.textColor,
       fontSize: '24px',
       lineHeight: '33px'
-    },
-    '@media (max-width: 600px)': {
-      fontSize: '1rem',
-      marginLeft: 3
     }
   },
   look: {
@@ -65,7 +61,19 @@ export const useStyles = makeStyles((theme) => ({
       display: 'block'
     },
     '@media (max-width: 600px)': {
-      justifyContent: 'center'
+      justifyContent: 'space-between',
+      display: 'flex',
+      margin: '10px 0'
+    }
+  },
+  colorAndPatern: {
+    margin: '20px 0',
+    display: 'block',
+    alignItems: 'center',
+    gap: '5px',
+    '@media (max-width: 600px)': {
+      display: 'flex',
+      margin: '10px 0'
     }
   },
   subtitle: {
@@ -95,7 +103,6 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   circle: {
-    margin: '8px 0 16px',
     width: '32px',
     height: '32px',
     borderRadius: '50%'

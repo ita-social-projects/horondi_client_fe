@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '100%',
     '& .MuiButton-outlined': {
       boxSizing: 'border-box',
-      padding: '0 1rem',
+      padding: '5px 15px',
       minWidth: 0,
       fontFamily: 'Montserrat',
       fontStyle: 'normal',
@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   pageCounter: {
-    height: '31px'
+    minHeight: '31px'
   },
 
   selectedButton: {

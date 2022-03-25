@@ -13,7 +13,13 @@ export const useStyles = makeStyles((theme) => ({
 
     transition: 'all 0.5s ease-out',
     '& .MuiToolbar-regular': {
-      minHeight: '35px'
+      minHeight: '35px',
+      padding: '10px 85px',
+      width: '95%',
+      margin: 'auto',
+      '@media (max-width: 870px)': {
+        padding: '0'
+      }
     },
     '& .MuiTypography-body1': {
       color: 'rgba(254, 254, 254, 0.75)'
@@ -21,23 +27,24 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       position: 'fixed',
       top: 0,
-      zIndex: 1000,
-      '& .MuiToolbar-regular': {
-        padding: 0,
-        width: '95%',
-        margin: 'auto'
-      }
+      zIndex: 1000
+    },
+    '@media (max-width: 556px)': {
+      paddingBottom: '45px'
     }
   },
   sticky: {
     transform: 'translateY(-35px)',
-    transition: 'all 0.5s ease-out'
+    transition: 'all 0.5s ease-out',
+    '@media (max-width: 485px)': {
+      transform: 'translateY(-95px)'
+    }
   },
   headerspace: {
     display: 'block',
     width: '100%',
     height: '75px',
-    backgroundColor: '#F1F1F1',
+    backgroundColor: theme.palette.background,
     '@media (max-width: 768px)': {
       height: '72px'
     }
@@ -47,7 +54,10 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0px 80px',
-    borderBottom: '1px solid white'
+    borderBottom: '1px solid rgba(91, 91, 91, 0.6)',
+    '@media (max-width: 485px)': {
+      display: 'none'
+    }
   },
   theme: {
     display: 'flex',
@@ -119,6 +129,7 @@ export const useStyles = makeStyles((theme) => ({
     transition: 'all 0.5s ease-out'
   },
   logo: {
+    marginRight: 'auto 20px',
     letterSpacing: '0.2rem',
     fontSize: '1.5rem',
     color: '#ffffff',
@@ -126,16 +137,16 @@ export const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     '@media (max-width: 768px)': {
-      marginLeft: '0px',
       fontSize: '1rem'
     }
   },
   menuButton: {
     color: '#ffffff',
     marginRight: '24px',
-    padding: '0px',
+    marginLeft: '-15px',
     '@media (max-width: 768px)': {
-      padding: '12px 5px 12px'
+      padding: '12px 5px 12px',
+      marginLeft: 0
     }
   },
   categories: {
@@ -155,6 +166,5 @@ export const useStyles = makeStyles((theme) => ({
     '@media (min-width: 900px)': {
       width: '3px'
     }
-  },
-  rightBar: {}
+  }
 }));

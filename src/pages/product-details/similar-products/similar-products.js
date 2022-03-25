@@ -38,9 +38,9 @@ const SimilarProducts = ({ cartList, product }) => {
   } else {
     imagesList = similarProducts.filter(
       ({ category, mainMaterial, pattern }) =>
-        category._id !== product.category._id &&
-        (mainMaterial.color._id === product.mainMaterial.color._id ||
-          pattern._id === product.pattern._id)
+        // category?._id !== product.category?._id &&
+        mainMaterial.color._id === product.mainMaterial.color._id ||
+        pattern?._id === product.pattern?._id
     );
   }
 
@@ -50,7 +50,7 @@ const SimilarProducts = ({ cartList, product }) => {
     const checkPrice = () =>
       availableSize ? (
         <div className={styles.price}>
-          {t('product.priceFrom') + Math.round(availableSize)}
+          {Math.round(availableSize)}
           <span>{currencySign} </span>
         </div>
       ) : (
@@ -64,7 +64,7 @@ const SimilarProducts = ({ cartList, product }) => {
         price={checkPrice()}
         rate={rate}
         translationsKey={translationsKey}
-        imageUrl={images.primary.medium}
+        imageUrl={images?.primary.medium}
         id={_id}
       />
     );

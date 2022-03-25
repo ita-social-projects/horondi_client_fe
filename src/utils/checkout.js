@@ -158,7 +158,7 @@ export const courierInputLabels = () => [
   }
 ];
 
-export const userNameInputLabels = () => [
+export const userContactInputLabels = () => [
   {
     name: 'firstName',
     label: i18next.t(`checkout.checkoutTextFields.firstName`)
@@ -166,10 +166,7 @@ export const userNameInputLabels = () => [
   {
     name: 'lastName',
     label: i18next.t(`checkout.checkoutTextFields.lastName`)
-  }
-];
-
-export const userContactInputLabels = () => [
+  },
   {
     name: 'email',
     label: i18next.t(`checkout.checkoutTextFields.email`)

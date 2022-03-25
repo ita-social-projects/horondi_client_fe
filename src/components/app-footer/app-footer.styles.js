@@ -15,7 +15,6 @@ export const useStyles = makeStyles(() => ({
   },
   cardDeck: {
     display: 'flex',
-    width: '100%',
     boxSizing: 'border-box',
     paddingRight: '100px',
     '& a': {
@@ -28,7 +27,7 @@ export const useStyles = makeStyles(() => ({
       flexDirection: 'column',
       alignItems: 'center'
     },
-    '@media screen and (max-width: 770px)': {
+    '@media screen and (max-width: 992px)': {
       paddingRight: '0',
       flexWrap: 'wrap'
     }

@@ -9,6 +9,7 @@ const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, addr
   const styles = useStyles();
   const { t } = useTranslation();
   const { pathToCategory, pathToMain } = routes;
+  const isFromUkraine = phoneNumber?.length === 9;
 
   return (
     <div className={styles.thanksCardContainer} data-testid='thanks-card'>
@@ -25,7 +26,9 @@ const ThanksCard = ({ orderNumber, customerName, phoneNumber, deliveryType, addr
           </div>
           <div className={styles.infoChunk}>
             <p className={styles.chunkName}>{t('thanksPage.thanksCard.phone')}</p>
-            <p className={styles.chunkValue}>{phoneNumber}</p>
+            <p className={styles.chunkValue}>
+              {isFromUkraine ? `+380${phoneNumber}` : phoneNumber}
+            </p>
           </div>
           <div className={styles.infoChunk}>
             <p className={styles.chunkName}>{t('thanksPage.thanksCard.deliveryType')}</p>

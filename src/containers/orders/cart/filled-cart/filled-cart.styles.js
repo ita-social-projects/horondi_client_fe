@@ -11,7 +11,10 @@ const promoInput = {
   height: '48px',
   fontWeight: '400',
   fontSize: '16px',
-  lineHeight: '24px'
+  lineHeight: '24px',
+  '@media (max-width: 425px)': {
+    fontSize: '12px'
+  }
 };
 const totalWrapper = {
   display: 'flex',
@@ -31,8 +34,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: 15
+    justifyContent: 'space-between'
   },
   promoInput: {
     '&, &::placeholder': {
@@ -111,6 +113,11 @@ export const useStyles = makeStyles(({ palette }) => ({
       width: '100%',
       flexDirection: 'column',
       justifyContent: 'center'
+    },
+    '@media (max-width: 420px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   },
   totalPrice: {
@@ -129,7 +136,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   orderTable: {
     flexGrow: 1,
-    marginRight: 50,
     '@media (max-width: 813px)': {
       marginRight: 'initial'
     }

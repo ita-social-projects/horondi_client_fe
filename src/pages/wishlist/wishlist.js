@@ -1,21 +1,21 @@
 import React from 'react';
 
-import { useStyles } from './wishlist.styles';
+import { useAppStyles } from '../../components/app/app.styles';
 import FilledWishlist from './filled-wishlist';
-import useWishlistLoader from '../../hooks/use-wishlist-loader';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import ToastContainer from '../../containers/toast';
+import { useWishlist } from '../../hooks/use-wishlist';
 
 const Wishlist = () => {
-  const styles = useStyles();
-  const { loading, error, wishlist } = useWishlistLoader();
+  const styles = useAppStyles();
 
-  if (loading || error) return errorOrLoadingHandler(error, loading);
+  const { wishlist } = useWishlist();
 
   return (
-    <div className={styles.root}>
-      <FilledWishlist items={wishlist.products} />
-      <ToastContainer />
+    <div className={styles.rootApp}>
+      <div className={styles.containerApp}>
+        <FilledWishlist items={wishlist} />
+        <ToastContainer />
+      </div>
     </div>
   );
 };

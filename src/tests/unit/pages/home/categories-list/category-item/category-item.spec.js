@@ -2,17 +2,14 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { useDispatch } from 'react-redux';
-
 import CategoryItem from '../../../../../../pages/home/categories-list/category-item/category-item';
 
 jest.mock('../../../../../../pages/home/categories-list/category-item/category-item.style', () => ({
   useStyles: () => ({})
 }));
-
 jest.mock('react-redux');
 
 const mockDispatch = jest.fn();
-
 useDispatch.mockReturnValue(mockDispatch);
 
 describe('CategoryItem component tests', () => {

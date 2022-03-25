@@ -9,25 +9,32 @@ describe('Currency-component', () => {
   const store = createStore(() => [], {});
   const handleChange = jest.fn();
 
+  let dollarButton;
+  let hryvniaButton;
+
   beforeEach(() => {
     render(
       <Provider store={store}>
         <CurrencyComponent />
       </Provider>
     );
+
+    dollarButton = screen.getByText(DOLLAR_UNICODE);
+    hryvniaButton = screen.getByText(HRYVNIA_UNICODE);
   });
 
   it('Should render the component', () => {
-    expect(screen.getByText(DOLLAR_UNICODE)).toBeTruthy();
-    expect(screen.getByText(HRYVNIA_UNICODE)).toBeTruthy();
+    expect(dollarButton).toBeTruthy();
+
+    expect(hryvniaButton).toBeTruthy();
   });
 
   it('Should execute function when you click on one of the currency buttons', () => {
-    fireEvent.click(screen.getByText(HRYVNIA_UNICODE), {
+    fireEvent.click(hryvniaButton, {
       handleChange: handleChange()
     });
 
-    fireEvent.click(screen.getByText(DOLLAR_UNICODE), {
+    fireEvent.click(dollarButton, {
       handleChange: handleChange()
     });
 

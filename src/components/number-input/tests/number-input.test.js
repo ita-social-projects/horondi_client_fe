@@ -3,45 +3,103 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import NumberInput from '../number-input';
 
-const Wrapper = () => {
-  const [quantit, setQuantit] = React.useState(1);
-  const onChangeQuantity = (quantity) => setQuantit(quantity);
-  const setInputValue = (quantity) => setQuantit(quantity);
+const onChangeQuantity = jest.fn(() => {});
+const setInputValue = jest.fn(() => {});
 
-  return (
-    <div>
+describe('Number input block test', () => {
+  const mockQuantity = 1;
+
+  beforeEach(() => {
+    render(
       <NumberInput
         onChangeQuantity={onChangeQuantity}
         setInputValue={setInputValue}
-        quantity={quantit}
+        quantity={mockQuantity}
       />
-    </div>
-  );
-};
-describe('Number input block test', () => {
-  test('Test increment', () => {
-    render(<Wrapper />);
+    );
+  });
+
+  test('Test decrement fn disabeld', () => {
+    const decrementBtn = screen.getByTestId('decrement');
+    const text = screen.getByDisplayValue('1');
+
+    expect(text).toHaveValue('1');
+    fireEvent.click(decrementBtn);
+    expect(setInputValue).toHaveBeenCalledTimes(0);
+  });
+
+  test('Test increment fn works', () => {
     const incrementBtn = screen.getByTestId('increment');
-    const text = screen.getByDisplayValue('1');
-    expect(text).toHaveValue('1');
+
     fireEvent.click(incrementBtn);
-    expect(text).toHaveValue('2');
+    expect(setInputValue).toHaveBeenCalledTimes(1);
   });
-  test('Test decrement', () => {
-    render(<Wrapper />);
-    const decrementBtn = screen.getByTestId('decrement');
-    const text = screen.getByDisplayValue('1');
-    expect(text).toHaveValue('1');
-    fireEvent.click(decrementBtn);
-    expect(text).toHaveValue('1');
+
+  test('Test increment fn works two times', () => {
+    const incrementBtn = screen.getByTestId('increment');
+
+    fireEvent.click(incrementBtn);
+    fireEvent.click(incrementBtn);
+    expect(setInputValue).toHaveBeenCalledTimes(2);
   });
-  test('Test input manual', () => {
-    render(<Wrapper />);
-    const decrementBtn = screen.getByTestId('decrement');
+
+  test('Test textField change', () => {
     const text = screen.getByDisplayValue('1');
+
     expect(text).toHaveValue('1');
-    fireEvent.click(decrementBtn);
     fireEvent.change(text, { target: { value: 2 } });
     expect(text).toHaveValue('2');
+  });
+});
+
+describe('Number input block decrement woks', () => {
+  const mockQuantity = 2;
+
+  beforeEach(() => {
+    render(
+      <NumberInput
+        onChangeQuantity={onChangeQuantity}
+        setInputValue={setInputValue}
+        quantity={mockQuantity}
+      />
+    );
+  });
+
+  test('Test decrement fn works', () => {
+    const decrementBtn = screen.getByTestId('decrement');
+    const text = screen.getByDisplayValue('2');
+
+    expect(text).toHaveValue('2');
+    fireEvent.click(decrementBtn);
+    expect(setInputValue).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('Number input block increment disabled', () => {
+  const mockQuantity = 1000;
+
+  beforeEach(() => {
+    render(
+      <NumberInput
+        onChangeQuantity={onChangeQuantity}
+        setInputValue={setInputValue}
+        quantity={mockQuantity}
+      />
+    );
+  });
+
+  test('Test increment fn disabled', () => {
+    const incrementBtn = screen.getByTestId('increment');
+
+    fireEvent.click(incrementBtn);
+    expect(setInputValue).toHaveBeenCalledTimes(0);
+  });
+
+  test('Test decrement click two times', () => {
+    const decrementBtn = screen.getByTestId('decrement');
+
+    fireEvent.click(decrementBtn);
+    fireEvent.click(decrementBtn);
+    expect(setInputValue).toHaveBeenCalledTimes(2);
   });
 });

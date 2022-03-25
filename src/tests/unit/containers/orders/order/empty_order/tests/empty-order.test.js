@@ -10,28 +10,25 @@ const themeValue = theme('light');
 describe('Empty order component tests', () => {
   const buttonTitle = 'до каталогу';
   const emptyTitle = 'Ваш кошик порожній';
+  let container;
 
-  it('should render title', () => {
-    const { container } = render(
+  beforeEach(() => {
+    ({ container } = render(
       <ThemeProvider theme={themeValue}>
         <Router>
-          <EmptyOrder emptyTitle={emptyTitle} />
+          <EmptyOrder emptyTitle={emptyTitle} buttonTitle={buttonTitle} />
         </Router>
       </ThemeProvider>
-    );
+    ));
+  });
+
+  it('should render title', () => {
     const findeElement = container.querySelector('h2');
 
     expect(findeElement.textContent).toBe('Ваш кошик порожній');
   });
 
   it('render text in button', () => {
-    render(
-      <ThemeProvider theme={themeValue}>
-        <Router>
-          <EmptyOrder buttonTitle={buttonTitle} />
-        </Router>
-      </ThemeProvider>
-    );
     const linkItem = screen.getByText('до каталогу');
 
     expect(linkItem).toBeInTheDocument();

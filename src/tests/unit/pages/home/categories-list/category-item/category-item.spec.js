@@ -16,20 +16,23 @@ const mockDispatch = jest.fn();
 useDispatch.mockReturnValue(mockDispatch);
 
 describe('CategoryItem component tests', () => {
-  const { container } = render(
+  const mockProps = {
+    categoryName: 'testName',
+    categoryImageUrl: 'testImage',
+    categoryUrl: 'testUrl'
+  };
+
+  const { getByRole, getAllByText } = render(
     <BrowserRouter>
-      <CategoryItem categoryName='testName' categoryImageUrl='testImageUrl' categoryUrl='testUrl' />
+      <CategoryItem {...mockProps} />
     </BrowserRouter>
   );
 
-  test('Should render correct structure of CategoryItem component', () => {
-    const linkElement = container.querySelector('div a');
+  test('Should render CategoryItem component', () => {
+    const linkElement = getByRole('link');
     expect(linkElement.getAttribute('href')).toBe('/testUrl');
 
-    const categoryElement = container.querySelector('div a span');
-    expect(categoryElement.textContent).toBe('testName');
-
-    const svgElement = container.querySelector('div a div svg');
-    expect(svgElement).toBeInTheDocument();
+    const contentText = getAllByText(/testName/);
+    expect(contentText).toHaveLength(2);
   });
 });

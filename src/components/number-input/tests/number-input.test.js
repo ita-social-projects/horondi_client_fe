@@ -52,29 +52,6 @@ describe('Number input block test', () => {
   });
 });
 
-describe('Number input block decrement woks', () => {
-  const mockQuantity = 2;
-
-  beforeEach(() => {
-    render(
-      <NumberInput
-        onChangeQuantity={onChangeQuantity}
-        setInputValue={setInputValue}
-        quantity={mockQuantity}
-      />
-    );
-  });
-
-  test('Test decrement fn works', () => {
-    const decrementBtn = screen.getByTestId('decrement');
-    const text = screen.getByDisplayValue('2');
-
-    expect(text).toHaveValue('2');
-    fireEvent.click(decrementBtn);
-    expect(setInputValue).toHaveBeenCalledTimes(1);
-  });
-});
-
 describe('Number input block increment disabled', () => {
   const mockQuantity = 1000;
 

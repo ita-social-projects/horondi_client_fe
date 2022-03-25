@@ -5,6 +5,10 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import { DOLLAR_UNICODE, HRYVNIA_UNICODE } from '../../../../containers/currency/constants';
 import CurrencyComponent from '../../../../containers/currency/currency-component';
 
+jest.mock('../../../../containers/currency/currency.styles', () => ({
+  useStyles: () => ({})
+}));
+
 describe('Currency-component', () => {
   const store = createStore(() => [], {});
   const handleChange = jest.fn();

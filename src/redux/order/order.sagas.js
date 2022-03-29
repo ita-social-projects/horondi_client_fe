@@ -2,28 +2,16 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { setError } from '../error/error.actions';
-import { setOrderLoading, setIsOrderCreated, setOrder, setPaidOrderLoading } from './order.actions';
-import {
-  addOrder,
-  checkOrderPaymentStatus,
-  getOrderByPaidOrderNumber,
-  getPaymentCheckout
-} from './order.operations';
-import {
-  ADD_ORDER,
-  GET_ORDER,
-  GET_FONDY_DATA,
-  ADD_PAYMENT_METHOD,
-  GET_PAID_ORDER
-} from './order.types';
+import { setOrderLoading, setIsOrderCreated, setOrder } from './order.actions';
+import { addOrder, getPaymentCheckout } from './order.operations';
+import { ADD_ORDER, GET_ORDER, GET_FONDY_DATA, ADD_PAYMENT_METHOD } from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
 import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../configs';
-import { ORDER_PAYMENT_STATUS } from '../../utils/thank-you';
 import { handleUserError } from '../user/user.sagas';
 
-const { pathToThanks, pathToErrorPage } = routes;
+const { pathToThanks, pathToErrorPage, pathToAllProducts } = routes;
 
 export function* handleAddOrder({ payload }) {
   try {
@@ -68,7 +56,12 @@ export function* handleGetFondyUrl({ payload }) {
     if (orderWithCheckoutUrl.paymentUrl) {
       window.open(orderWithCheckoutUrl.paymentUrl);
     }
-    yield put(push(`${pathToThanks}/${orderWithCheckoutUrl.orderNumber}`));
+    yield put(push(`${pathToAllProducts}`));
+
+    window.open(
+      `${process.env.REACT_APP_ROOT_PATH}${pathToThanks}/${orderWithCheckoutUrl.orderNumber}`
+    );
+
     yield put(setOrderLoading(false));
   } catch (e) {
     yield call(handleOrderError, e);
@@ -77,32 +70,6 @@ export function* handleGetFondyUrl({ payload }) {
 
 export function handleSetPaymentMethod({ payload }) {
   setToLocalStorage(orderDataToLS.paymentMethod, payload);
-}
-
-export function* getOrderTillSuccess(payload) {
-  const { language, paidOrderNumber } = payload;
-
-  const paidOrder = yield call(getOrderByPaidOrderNumber, paidOrderNumber);
-
-  if (paidOrder.paymentStatus !== ORDER_PAYMENT_STATUS.PAID) {
-    yield call(checkOrderPaymentStatus, paidOrderNumber, language);
-    yield call(getOrderTillSuccess, payload);
-  } else {
-    setToLocalStorage(orderDataToLS.order, paidOrder);
-
-    yield put(setOrder(paidOrder));
-    yield put(setPaidOrderLoading(false));
-  }
-}
-
-export function* handleGetOrderByPaidOrderNumber({ payload }) {
-  try {
-    yield put(setPaidOrderLoading(true));
-
-    yield call(getOrderTillSuccess, payload);
-  } catch (e) {
-    yield call(handleOrderError, e);
-  }
 }
 
 export function* handleOrderError(e) {
@@ -120,5 +87,4 @@ export default function* orderSaga() {
   yield takeEvery(GET_ORDER, handleGetCreatedOrder);
   yield takeEvery(GET_FONDY_DATA, handleGetFondyUrl);
   yield takeEvery(ADD_PAYMENT_METHOD, handleSetPaymentMethod);
-  yield takeEvery(GET_PAID_ORDER, handleGetOrderByPaidOrderNumber);
 }

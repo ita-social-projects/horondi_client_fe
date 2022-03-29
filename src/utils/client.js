@@ -1,8 +1,10 @@
-import { ApolloClient, gql } from '@apollo/client';
+import { ApolloClient, gql, split, ApolloLink } from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
 import fetch from 'unfetch';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client/public';
+import { getMainDefinition } from '@apollo/client/utilities';
 
 import { AUTH_ERRORS, USER_TOKENS } from '../configs';
 import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
@@ -15,25 +17,42 @@ const { ACCESS_TOKEN_IS_NOT_VALID } = AUTH_ERRORS;
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: introspectionResult
 });
+const token = getFromLocalStorage(ACCESS_TOKEN);
 
 export const REACT_APP_API_URL =
   window.env && window.env.REACT_APP_API_URL
     ? window.env.REACT_APP_API_URL
     : process.env.REACT_APP_API_URL;
 
-const authLink = setContext((_, { headers }) => {
-  const token = getFromLocalStorage(ACCESS_TOKEN);
-  return {
-    headers: {
-      ...headers,
-      token: token || ''
+const wsLink = new WebSocketLink({
+  uri: process.env.REACT_APP_WS_API_URL,
+  options: {
+    reconnect: true,
+    connectionParams: {
+      authToken: token
     }
-  };
+  }
 });
+
+const authLink = setContext((_, { headers }) => ({
+  headers: {
+    ...headers,
+    token: token || ''
+  }
+}));
+
+const terminatingLink = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  authLink.concat(createUploadLink({ uri: `${REACT_APP_API_URL}/graphql` }))
+);
 
 export const client = new ApolloClient({
   fetch,
-  link: authLink.concat(createUploadLink({ uri: `${REACT_APP_API_URL}/graphql` })),
+  link: ApolloLink.from([terminatingLink]),
   cache: new InMemoryCache({
     addTypename: false,
     fragmentMatcher
@@ -42,8 +61,6 @@ export const client = new ApolloClient({
 
 export const getItems = async (query, variables = {}) => {
   try {
-    const token = getFromLocalStorage(ACCESS_TOKEN);
-
     const queryResult = await client.query({
       query: gql`
         ${query}
@@ -78,7 +95,6 @@ export const getItems = async (query, variables = {}) => {
 
 export const setItems = async (query, variables) => {
   try {
-    const token = getFromLocalStorage(ACCESS_TOKEN);
     const mutationResult = await client.mutate({
       mutation: gql`
         ${query}

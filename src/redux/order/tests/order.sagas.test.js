@@ -1,24 +1,17 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { push } from 'connected-react-router';
-import {
-  setIsOrderCreated,
-  setOrder,
-  setOrderLoading,
-  setPaidOrderLoading
-} from '../order.actions';
+import { setIsOrderCreated, setOrder, setOrderLoading } from '../order.actions';
 import {
   handleAddOrder,
   handleGetCreatedOrder,
   handleGetFondyUrl,
-  handleGetOrderByPaidOrderNumber,
-  handleOrderError,
-  getOrderTillSuccess
+  handleOrderError
 } from '../order.sagas';
 import { orderExample, paidOrder, payload, message } from './order.variables';
 import { setToLocalStorage, getFromLocalStorage } from '../../../services/local-storage.service';
 import { setError } from '../../error/error.actions';
-import { getOrderByPaidOrderNumber, getPaymentCheckout, addOrder } from '../order.operations';
+import { getPaymentCheckout, addOrder } from '../order.operations';
 import routes from '../../../configs/routes';
 
 const { pathToErrorPage, pathToThanks } = routes;
@@ -27,9 +20,6 @@ describe('sagas test', () => {
   beforeEach(() => {
     setToLocalStorage('order', orderExample);
   });
-
-  it('fetching paid order', () =>
-    expectSaga(handleGetOrderByPaidOrderNumber, orderExample).put(setPaidOrderLoading(true)).run());
 
   it('fetch adding order', () => {
     expectSaga(handleAddOrder, orderExample)
@@ -71,14 +61,6 @@ describe('sagas test', () => {
       .put(setOrder(paidOrder))
       .put(push(`${pathToThanks}/${paidOrder.orderNumber}`))
       .put(setOrderLoading(false))
-      .run();
-  });
-
-  it('fetching getting order till success', () => {
-    expectSaga(getOrderTillSuccess, payload)
-      .provide([[matchers.call.fn(getOrderByPaidOrderNumber, payload), paidOrder]])
-      .put(setOrder(paidOrder))
-      .put(setPaidOrderLoading(false))
       .run();
   });
 });

@@ -55,12 +55,12 @@ export function* handleGetFondyUrl({ payload }) {
 
     if (orderWithCheckoutUrl.paymentUrl) {
       window.open(orderWithCheckoutUrl.paymentUrl);
+      window.open(
+        `${process.env.REACT_APP_ROOT_PATH}${pathToThanks}/${orderWithCheckoutUrl.orderNumber}`
+      );
     }
-    yield put(push(`${pathToAllProducts}`));
 
-    window.open(
-      `${process.env.REACT_APP_ROOT_PATH}${pathToThanks}/${orderWithCheckoutUrl.orderNumber}`
-    );
+    yield put(push(`${pathToAllProducts}`));
 
     yield put(setOrderLoading(false));
   } catch (e) {

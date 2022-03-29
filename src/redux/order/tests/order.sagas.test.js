@@ -14,7 +14,7 @@ import { setError } from '../../error/error.actions';
 import { getPaymentCheckout, addOrder } from '../order.operations';
 import routes from '../../../configs/routes';
 
-const { pathToErrorPage, pathToThanks } = routes;
+const { pathToErrorPage, pathToAllProducts } = routes;
 
 describe('sagas test', () => {
   beforeEach(() => {
@@ -59,7 +59,7 @@ describe('sagas test', () => {
       ])
       .put(setOrderLoading(true))
       .put(setOrder(paidOrder))
-      .put(push(`${pathToThanks}/${paidOrder.orderNumber}`))
+      .put(push(`${pathToAllProducts}`))
       .put(setOrderLoading(false))
       .run();
   });

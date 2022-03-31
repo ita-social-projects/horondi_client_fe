@@ -17,3 +17,4 @@ global.shallow = shallow;
 global.render = render;
 global.mount = mount;
 global.toJson = toJson;
+process.env.REACT_APP_WS_API_URL = 'ws://localhost:5000/graphql';

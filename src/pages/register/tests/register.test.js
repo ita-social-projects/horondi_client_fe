@@ -18,7 +18,8 @@ jest.mock('connected-react-router', () => ({
 }));
 jest.mock('../../../services/local-storage.service', () => ({
   __esModule: true,
-  setToLocalStorage: () => mockToLocalStorage()
+  setToLocalStorage: () => mockToLocalStorage(),
+  getFromLocalStorage: () => jest.fn()
 }));
 
 const themeValue = theme('light');

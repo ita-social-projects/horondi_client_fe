@@ -1,4 +1,4 @@
-import { orderExample, paidOrder } from './order.variables';
+import { orderExample } from './order.variables';
 import {
   SET_LOADING,
   SET_ORDER,
@@ -6,9 +6,7 @@ import {
   GET_ORDER,
   ADD_ORDER,
   GET_FONDY_DATA,
-  GET_PAID_ORDER,
-  ADD_PAYMENT_METHOD,
-  SET_PAID_ORDER_LOADING
+  ADD_PAYMENT_METHOD
 } from '../order.types';
 import {
   setOrder,
@@ -16,10 +14,8 @@ import {
   setOrderLoading,
   setIsOrderCreated,
   getOrder,
-  getPaidOrder,
   getFondyData,
-  addPaymentMethod,
-  setPaidOrderLoading
+  addPaymentMethod
 } from '../order.actions';
 
 describe('Orders actions test', () => {
@@ -67,15 +63,6 @@ describe('Orders actions test', () => {
     expect(addPaymentMethod(orderExample.paymentMethod)).toEqual(result);
   });
 
-  it('should return paid order', () => {
-    const result = {
-      type: GET_PAID_ORDER,
-      payload: paidOrder
-    };
-
-    expect(getPaidOrder(paidOrder)).toEqual(result);
-  });
-
   it('should return fondy data', () => {
     const result = {
       type: GET_FONDY_DATA,
@@ -97,20 +84,6 @@ describe('loading action', () => {
   test('should return order loading = false', () => {
     expect(setOrderLoading(false)).toEqual({
       type: SET_LOADING,
-      payload: false
-    });
-  });
-
-  test('should return paid order loading = true', () => {
-    expect(setPaidOrderLoading(true)).toEqual({
-      type: SET_PAID_ORDER_LOADING,
-      payload: true
-    });
-  });
-
-  test('should return paid order loading = false', () => {
-    expect(setPaidOrderLoading(false)).toEqual({
-      type: SET_PAID_ORDER_LOADING,
       payload: false
     });
   });

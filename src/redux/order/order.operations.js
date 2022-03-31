@@ -1,3 +1,4 @@
+import { gql } from '@apollo/client';
 import { getItems, setItems } from '../../utils/client';
 
 export const addOrder = async (order) => {
@@ -124,70 +125,50 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
   return result?.data?.getPaymentCheckout;
 };
 
-export const getOrderByPaidOrderNumber = async (paidOrderNumber) => {
-  const getOrderByPaidOrderNumberQuery = `
-    query($paidOrderNumber: String!) {
-      getOrderByPaidOrderNumber(paidOrderNumber: $paidOrderNumber) {
-        ... on Order {
-          _id
-          orderNumber
-          recipient {
-            firstName
-            lastName
-            email
-            phoneNumber
-          }
-          delivery {
-            sentBy
-          }
-          items {
-            product {
-              name {
-                lang
-                value
-              }
-              images {
-                primary {
-                  thumbnail
-                }
-              }
-            }
-            fixedPrice {
-              currency
-              value
-            }
-            quantity
-            options {
-              size {
-                name
-              }
-            }
-          }
-          totalPriceToPay {
-            currency
-            value
-          }
-          paymentStatus
-        }
-        ... on Error {
-          statusCode
-          message
-        }
-      }
-    }
-  `;
-  const result = await getItems(getOrderByPaidOrderNumberQuery, { paidOrderNumber });
-
-  return result?.data?.getOrderByPaidOrderNumber;
-};
-
-export const checkOrderPaymentStatus = async (orderId, language) => {
-  const checkOrderPaymentStatusQuery = `
-  query ($orderId: String!, $language: Int!) {
-    checkOrderPaymentStatus(orderId: $orderId, language: $language) {
+export const orderPaidSubscription = gql`
+  subscription OrderPaid($orderId: String!) {
+    paidOrder(orderId: $orderId) {
+      __typename
       ... on Order {
         _id
         orderNumber
+        recipient {
+          firstName
+          lastName
+          email
+          phoneNumber
+        }
+        delivery {
+          sentBy
+        }
+        items {
+          product {
+            name {
+              lang
+              value
+            }
+            images {
+              primary {
+                thumbnail
+              }
+            }
+          }
+          fixedPrice {
+            currency
+            value
+          }
+          quantity
+          options {
+            size {
+              name
+            }
+          }
+        }
+        totalPriceToPay {
+          currency
+          value
+        }
+        paymentStatus
       }
       ... on Error {
         statusCode
@@ -195,8 +176,57 @@ export const checkOrderPaymentStatus = async (orderId, language) => {
       }
     }
   }
-  `;
-  const result = await getItems(checkOrderPaymentStatusQuery, { orderId, language });
+`;
 
-  return result?.data?.checkOrderPaymentStatus;
-};
+export const sendOrderToEmail = gql`
+  query ($language: Int!, $paidOrderNumber: String!) {
+    sendOrderToEmail(language: $language, paidOrderNumber: $paidOrderNumber) {
+      __typename
+      ... on Order {
+        _id
+        orderNumber
+        recipient {
+          firstName
+          lastName
+          email
+          phoneNumber
+        }
+        delivery {
+          sentBy
+        }
+        items {
+          product {
+            name {
+              lang
+              value
+            }
+            images {
+              primary {
+                thumbnail
+              }
+            }
+          }
+          fixedPrice {
+            currency
+            value
+          }
+          quantity
+          options {
+            size {
+              name
+            }
+          }
+        }
+        totalPriceToPay {
+          currency
+          value
+        }
+        paymentStatus
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+`;

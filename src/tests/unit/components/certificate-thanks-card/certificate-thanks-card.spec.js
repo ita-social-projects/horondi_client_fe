@@ -25,8 +25,6 @@ describe('Tests for Certificate Thanks Card', () => {
   });
 
   it('should render Certificate Thanks Card', () => {
-    screen.queryByText(/HOR12345678/);
-    screen.debug();
     expect(screen.queryByText(/HOR12345678/)).toBeInTheDocument();
     expect(screen.queryByText(/500/)).toBeInTheDocument();
     expect(screen.queryByText('sashko@gmail.com')).toBeInTheDocument();

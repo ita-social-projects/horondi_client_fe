@@ -3,9 +3,11 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
 import ThanksPage from '../../../../pages/thanks-page/thanks-page';
-import { state } from './thanks-page.variables';
+import { mocks, state } from './thanks-page.variables';
 import { deliveryTypes } from '../../../../configs';
+import { getFromLocalStorage } from '../../../../services/local-storage.service';
 
 jest.mock('../../../../pages/thanks-page/thanks-page.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
@@ -15,13 +17,16 @@ const dispatch = jest.fn();
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => state);
+getFromLocalStorage.mockImplementation(() => true);
 
 describe('ThanksPage component tests', () => {
   it('ThanksPage should contain ThanksCard with post office address if NOVAPOST delivery chosen', () => {
     const { queryByText } = render(
-      <Router>
-        <ThanksPage />
-      </Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router>
+          <ThanksPage />
+        </Router>
+      </MockedProvider>
     );
     expect(queryByText('Test office')).toBeInTheDocument();
   });
@@ -30,9 +35,11 @@ describe('ThanksPage component tests', () => {
     state.order.delivery.sentBy = deliveryTypes.UKRPOST;
 
     const { queryByText } = render(
-      <Router>
-        <ThanksPage />
-      </Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router>
+          <ThanksPage />
+        </Router>
+      </MockedProvider>
     );
 
     expect(queryByText('Test office')).toBeInTheDocument();
@@ -42,9 +49,11 @@ describe('ThanksPage component tests', () => {
     state.order.delivery.sentBy = deliveryTypes.SELFPICKUP;
 
     const { queryByText } = render(
-      <Router>
-        <ThanksPage />
-      </Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router>
+          <ThanksPage />
+        </Router>
+      </MockedProvider>
     );
 
     expect(queryByText('thanksPage.thanksCard.selfDelivery')).toBeInTheDocument();
@@ -54,9 +63,11 @@ describe('ThanksPage component tests', () => {
     state.order.delivery.sentBy = deliveryTypes.UKRPOSTCOURIER;
 
     const { queryByText } = render(
-      <Router>
-        <ThanksPage />
-      </Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router>
+          <ThanksPage />
+        </Router>
+      </MockedProvider>
     );
 
     expect(queryByText('Test city, Test street, 1')).toBeInTheDocument();
@@ -66,9 +77,11 @@ describe('ThanksPage component tests', () => {
     state.loading = true;
 
     const { getByTestId } = render(
-      <Router>
-        <ThanksPage />
-      </Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router>
+          <ThanksPage />
+        </Router>
+      </MockedProvider>
     );
 
     expect(getByTestId('loader')).toBeInTheDocument();
@@ -78,9 +91,11 @@ describe('ThanksPage component tests', () => {
     state.loading = true;
 
     const { queryByTestId } = render(
-      <Router>
-        <ThanksPage />
-      </Router>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Router>
+          <ThanksPage />
+        </Router>
+      </MockedProvider>
     );
 
     expect(queryByTestId('thanks-card')).toBeNull();

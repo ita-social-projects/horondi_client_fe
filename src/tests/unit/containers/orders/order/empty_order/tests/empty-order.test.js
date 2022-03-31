@@ -10,20 +10,19 @@ const themeValue = theme('light');
 describe('Empty order component tests', () => {
   const buttonTitle = 'до каталогу';
   const emptyTitle = 'Ваш кошик порожній';
-  let container;
 
   beforeEach(() => {
-    ({ container } = render(
+    render(
       <ThemeProvider theme={themeValue}>
         <Router>
           <EmptyOrder emptyTitle={emptyTitle} buttonTitle={buttonTitle} />
         </Router>
       </ThemeProvider>
-    ));
+    );
   });
 
   it('should render title', () => {
-    const findeElement = container.querySelector('h2');
+    const findeElement = screen.getByTestId('title');
 
     expect(findeElement.textContent).toBe('Ваш кошик порожній');
   });

@@ -1,4 +1,5 @@
 export const orderDataToLS = {
   order: 'order',
-  paymentMethod: 'paymentMethod'
+  paymentMethod: 'paymentMethod',
+  certificatesOrderId: 'certificatesOrderId'
 };

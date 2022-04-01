@@ -19,14 +19,14 @@ describe('CategoryItem component tests', () => {
     categoryUrl: 'testUrl'
   };
 
-  const { getByRole, getAllByText } = render(
+  const { getByTestId, getAllByText } = render(
     <BrowserRouter>
       <CategoryItem {...mockProps} />
     </BrowserRouter>
   );
 
   test('Should render CategoryItem component', () => {
-    const linkElement = getByRole('link');
+    const linkElement = getByTestId('test-link');
     expect(linkElement.getAttribute('href')).toBe('/testUrl');
 
     const contentText = getAllByText(/testName/);

@@ -27,7 +27,7 @@ const CategoryItem = ({ categoryName, categoryImageUrl, categoryUrl }) => {
   const styles = useStyles({ image });
 
   return (
-    <Link className={styles.categoryItem} to={`/${categoryUrl}`}>
+    <Link className={styles.categoryItem} to={`/${categoryUrl}`} data-testid='test-link'>
       <span className={styles.categoryName}>{categoryName}</span>
       <div className={styles.categoryInner}>
         <span>

@@ -2,14 +2,18 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import CategoriesList, { getCategoryURL } from '../categories-list';
-import { mockCategory } from './categories-list.variables';
-import CategoriesContextProvider from '../../../../context/categories/categories-context';
+import CategoriesList, {
+  getCategoryURL
+} from '../../../../../pages/home/categories-list/categories-list';
+import { mockCategory, etalonString } from './categories-list.variables';
+import CategoriesContextProvider from '../../../../../context/categories/categories-context';
 
 const useState = jest.fn();
 const setState = jest.fn();
 
-jest.mock('../categories-list.style', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../../../pages/home/categories-list/categories-list.style', () => ({
+  useStyles: () => ({})
+}));
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 
@@ -43,7 +47,6 @@ describe('tests for categories list component', () => {
 
   it('getCategoryURL function should return correct string', () => {
     const res = getCategoryURL(mockCategory);
-    const etalonString = 'catalog/test';
 
     expect(res).toBe(etalonString);
   });

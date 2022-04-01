@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import CategoriesList, { getCategoryURL } from '../categories-list';
-import { mockCategory, mockCategoryUndefined } from './categories-list.variables';
+import { mockCategory } from './categories-list.variables';
 import CategoriesContextProvider from '../../../../context/categories/categories-context';
 
 const useState = jest.fn();
@@ -46,11 +46,5 @@ describe('tests for categories list component', () => {
     const etalonString = 'catalog/test';
 
     expect(res).toBe(etalonString);
-  });
-
-  it('getCategoryURL function should return undefined', () => {
-    const res = getCategoryURL(mockCategoryUndefined);
-
-    expect(res).toBeUndefined();
   });
 });

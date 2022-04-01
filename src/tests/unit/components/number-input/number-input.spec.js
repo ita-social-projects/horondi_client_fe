@@ -2,7 +2,7 @@ import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
-import NumberInput from '../number-input';
+import NumberInput from '../../../../components/number-input/number-input';
 
 describe('Number input block test', () => {
   let mockQuantity = 1;
@@ -22,7 +22,7 @@ describe('Number input block test', () => {
     ));
   });
 
-  test('Test increment fn works', async () => {
+  test('increment button changes value for textfild input', async () => {
     const incrementBtn = screen.getByTestId('increment');
     const decrementBtn = screen.getByTestId('decrement');
     const text = screen.getByTestId('text');
@@ -42,20 +42,20 @@ describe('Number input block test', () => {
     });
   });
 
-  test('Test textField change', () => {
+  test('textField changes when value is typed', () => {
     const text = screen.getByTestId('text');
     fireEvent.change(text, { target: { value: 2 } });
     expect(text).toHaveValue('2');
   });
 });
 
-describe('Test decrement', () => {
+describe('Test increment button changes value fon textfild input', () => {
   let mockQuantity = 2;
   let rerender;
-  const onChangeQuantity = jest.fn(() => {
+  const onChangeQuantity = jest.fn(() => {});
+  const setInputValue = jest.fn(() => {
     mockQuantity -= 1;
   });
-  const setInputValue = jest.fn(() => {});
 
   beforeEach(() => {
     ({ rerender } = render(
@@ -67,7 +67,8 @@ describe('Test decrement', () => {
     ));
   });
 
-  test('Test decrement fn works', async () => {
+  test('decrement button changes value for the text input', async () => {
+    const setInputValue = jest.fn(() => {});
     const decrementBtn = screen.getByTestId('decrement');
     const text = screen.getByTestId('text');
     fireEvent.click(decrementBtn);

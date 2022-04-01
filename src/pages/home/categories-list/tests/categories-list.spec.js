@@ -34,7 +34,7 @@ describe('tests for categories list component', () => {
   });
 
   it('should exist with carousel wrapper', () => {
-    const title = screen.getByRole('heading');
+    const title = screen.getByRole('heading', { level: 2 });
     const list = screen.getByRole('list');
 
     expect(title).toBeInTheDocument();

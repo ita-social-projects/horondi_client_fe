@@ -17,7 +17,7 @@ const EmptyOrder = ({ emptyTitle, buttonTitle, name }) => {
     <>
       <PathBack />
       <div className={styles.root} data-cy={name}>
-        <Typography className={styles.title} variant='h2'>
+        <Typography data-testid='title' className={styles.title} variant='h2'>
           {emptyTitle}
         </Typography>
         <BackpackIcon className={styles.defaultBackpackIcon} />

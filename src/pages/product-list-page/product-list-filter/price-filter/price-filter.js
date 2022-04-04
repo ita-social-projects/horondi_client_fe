@@ -35,6 +35,7 @@ const PriceFilter = ({ priceRange }) => {
       : [min, max];
 
   const [prices, setPrices] = useState(getDefaultPrices());
+  const [pricesFromInput, setPricesFromInput] = useState([min, max]);
 
   const searchParamsRef = useRef();
   searchParamsRef.current = searchParams;
@@ -59,6 +60,7 @@ const PriceFilter = ({ priceRange }) => {
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
+    setPricesFromInput(newPrices);
   };
 
   const handlePriceFilter = useCallback(
@@ -76,7 +78,7 @@ const PriceFilter = ({ priceRange }) => {
     }, 1000);
 
     return () => clearTimeout(delayDebounce);
-  }, [prices, min, handlePriceFilter]);
+  }, [pricesFromInput]);
 
   return (
     <FormGroup data-cy='price_filter'>

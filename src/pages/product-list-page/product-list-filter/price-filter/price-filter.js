@@ -19,19 +19,6 @@ const PriceFilter = ({ priceRange }) => {
   const history = useHistory();
   const priceFilterValue = searchParams.get(priceFilter);
 
-  const getDefaultPrices = () =>
-    priceFilterValue
-      ? searchParams
-        .get(priceFilter)
-        .split(',')
-        .map((price) => +price)
-      : ['', ''];
-
-  const [prices, setPrices] = useState(getDefaultPrices());
-
-  const searchParamsRef = useRef();
-  searchParamsRef.current = searchParams;
-
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
   }));
@@ -39,11 +26,24 @@ const PriceFilter = ({ priceRange }) => {
   const min = getMin(priceRange.minPrice, currency);
   const max = getMax(priceRange.maxPrice, currency);
 
+  const getDefaultPrices = () =>
+    priceFilterValue
+      ? searchParams
+        .get(priceFilter)
+        .split(',')
+        .map((price) => +price)
+      : [min, max];
+
+  const [prices, setPrices] = useState(getDefaultPrices());
+  const [pricesFromInput, setPricesFromInput] = useState([min, max]);
+
+  const searchParamsRef = useRef();
+  searchParamsRef.current = searchParams;
+
   useEffect(() => {
-    if (prices[0] === '' && prices[1] === '' && min && max) {
-      setPrices([min, max]);
-    }
-  }, [min, max, currency, prices]);
+    setPrices([min, max]);
+    handlePriceFilter([min, max]);
+  }, [min, max]);
 
   useEffect(() => {
     setPrices(getDefaultPrices());
@@ -60,6 +60,7 @@ const PriceFilter = ({ priceRange }) => {
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
+    setPricesFromInput(newPrices);
   };
 
   const handlePriceFilter = useCallback(
@@ -73,13 +74,11 @@ const PriceFilter = ({ priceRange }) => {
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      if (prices[0] !== min) {
-        handlePriceFilter(prices);
-      }
+      handlePriceFilter(prices);
     }, 1000);
 
     return () => clearTimeout(delayDebounce);
-  }, [prices, min, handlePriceFilter]);
+  }, [pricesFromInput]);
 
   return (
     <FormGroup data-cy='price_filter'>

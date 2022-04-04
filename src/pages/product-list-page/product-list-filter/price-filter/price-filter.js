@@ -70,6 +70,14 @@ const PriceFilter = ({ priceRange }) => {
     [defaultPage, page, priceFilter, history]
   );
 
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      handlePriceFilter(prices);
+    }, 1000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [prices, min, handlePriceFilter]);
+
   return (
     <FormGroup data-cy='price_filter'>
       <Typography id='range-slider' component='div' className={styles.priceName}>

@@ -10,14 +10,13 @@ import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 
-const PriceFilter = ({ priceRange }) => {
+const PriceFilter = ({ priceRange, resetPrices }) => {
   const { t } = useTranslation();
   const { search } = useLocation();
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
   const searchParams = new URLSearchParams(search);
   const styles = useStyles();
   const history = useHistory();
-  const priceFilterValue = searchParams.get(priceFilter);
 
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
@@ -26,15 +25,7 @@ const PriceFilter = ({ priceRange }) => {
   const min = getMin(priceRange.minPrice, currency);
   const max = getMax(priceRange.maxPrice, currency);
 
-  const getDefaultPrices = () =>
-    priceFilterValue
-      ? searchParams
-        .get(priceFilter)
-        .split(',')
-        .map((price) => +price)
-      : [min, max];
-
-  const [prices, setPrices] = useState(getDefaultPrices());
+  const [prices, setPrices] = useState([min, max]);
   const [pricesFromInput, setPricesFromInput] = useState([min, max]);
 
   const searchParamsRef = useRef();
@@ -43,11 +34,7 @@ const PriceFilter = ({ priceRange }) => {
   useEffect(() => {
     setPrices([min, max]);
     handlePriceFilter([min, max]);
-  }, [min, max]);
-
-  useEffect(() => {
-    setPrices(getDefaultPrices());
-  }, [priceFilterValue]);
+  }, [min, max, resetPrices]);
 
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
@@ -74,7 +61,9 @@ const PriceFilter = ({ priceRange }) => {
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      handlePriceFilter(prices);
+      if (min) {
+        handlePriceFilter(pricesFromInput);
+      }
     }, 1000);
 
     return () => clearTimeout(delayDebounce);

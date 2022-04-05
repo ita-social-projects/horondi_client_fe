@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   homeHeader: {
     backgroundSize: 'cover',
+    backgroundPosition: 'center',
     minHeight: '100vh'
   },
   overlay: {
@@ -20,37 +21,38 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-around',
     '@media (max-width: 1400px)': {
-      maxWidth: '70vw',
-      justifyContent: 'space-around',
+      maxWidth: '80vw',
       padding: '50px 40px 0px 100px'
-    },
-    '@media (max-width: 1024px)': {
-      maxWidth: '75vw',
-      justifyContent: 'space-around',
-      padding: '25px 40px 0px 80px'
     },
     '@media (max-width: 768px)': {
       maxWidth: '90vw',
-      justifyContent: 'space-around',
       padding: '25px 40px 25px 90px'
     },
-    '@media (max-height: 768px)': {
+    '@media (max-height: 575px)': {
       fontSize: '35px',
-      padding: '25px 0px 20px 60px'
+      padding: '50px 0px 20px 60px'
     },
-    '@media (max-height: 660px) and (max-width: 600px)': {
+    '@media (max-width: 600px)': {
       padding: '25px 0px 20px 35px'
     }
   },
   headerWrapper: {
-    minHeight: '300px',
+    minHeight: '350px',
     '@media (max-width: 768px)': {
       maxWidth: '80vw',
       minHeight: '200px'
     },
     '@media ( max-height: 560px)': {
-      width: '60vw',
       minHeight: '200px'
+    }
+  },
+  slideNumber: {
+    color: '#E4E7ED',
+    fontSize: '16px',
+    fontWeight: '400',
+    '& span:nth-child(1)': {
+      fontSize: '20px',
+      fontWeight: '600'
     }
   },
   headerTitle: {
@@ -64,11 +66,17 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 1600px)': {
       fontSize: '60px'
     },
-    '@media (max-width: 1200px)': {
+    '@media (max-width: 1400px)': {
       fontSize: '50px'
     },
-    '@media (max-width: 768px)': {
+    '@media (max-width: 1200px)': {
+      fontSize: '40px'
+    },
+    '@media (max-width: 991px)': {
       fontSize: '35px'
+    },
+    '@media (max-width: 575px)': {
+      fontSize: '25px'
     },
     '@media (min-height: 1200px)': {
       fontSize: '40px'
@@ -101,21 +109,19 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    alignItems: 'flex-start',
     '@media (max-width: 768px)': {
-      minHeight: '5rem'
-    },
-    '@media (max-width: 320px)': {
-      minHeight: '5rem'
+      minHeight: '6rem'
     }
   },
   buttonStyles: {
     height: '50px',
     width: '210px',
-    display: 'block',
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '16px',
-    lineHeight: '25px',
+    lineHeight: '50px',
+    textAlign: 'center',
     backgroundColor: 'rgba(40, 40, 40, 0.2)',
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
@@ -127,28 +133,16 @@ export const useStyles = makeStyles(() => ({
   },
   arrows: {
     display: 'flex',
-    columnGap: '24px',
-    '&:hover': {
-      cursor: 'pointer'
-    },
-    '& img': {
-      width: '76px'
-    }
+    columnGap: '30px'
   },
-  slideNumber: {
-    color: '#E4E7ED',
-    fontSize: '15px',
-    fontWeight: '700',
-    '& span:nth-child(1)': {
-      fontSize: '18px'
+  arrow: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    padding: 0,
+    cursor: 'pointer',
+    '&:disabled': {
+      opacity: 0.45,
+      cursor: 'default'
     }
-  },
-  sliderInner: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.45)'
   }
 }));

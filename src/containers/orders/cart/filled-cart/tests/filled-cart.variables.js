@@ -1,4 +1,5 @@
 import { getPromoCodeByCode } from '../../../operations/getPromoCodeByCode.queries';
+import { addProductFromConstructor } from '../../../../../pages/cart/operations/cart.mutations';
 import { mockQueryData, mockQueryDataConstructor } from '../../cart-item/tests/cart-item.variables';
 
 export const items = [
@@ -33,27 +34,106 @@ export const items = [
   }
 ];
 
-export const mockPromoCode = [
-  {
-    request: {
-      query: getPromoCodeByCode,
-      variables: {
-        code: 'test'
-      }
-    },
-    result: {
-      data: {
-        getPromoCodeByCode: {
-          __typename: 'PromoCode',
-          _id: '61edc27490ffbc28a4853000',
-          code: 'test',
-          discount: 10,
-          categories: ['bags']
-        }
+export const mockPromoCode = {
+  request: {
+    query: getPromoCodeByCode,
+    variables: {
+      code: 'test'
+    }
+  },
+  result: {
+    data: {
+      getPromoCodeByCode: {
+        __typename: 'PromoCode',
+        _id: '61edc27490ffbc28a4853000',
+        code: 'test',
+        discount: 10,
+        categories: ['bags']
       }
     }
   }
-];
+};
+
+const productFromConstructorVariables = {
+  product: {
+    name: [
+      {
+        lang: 'ua',
+        value: 'ололлоллоолл'
+      },
+      {
+        lang: 'en',
+        value: 'uytyrjyututyu'
+      }
+    ],
+    model: '6043bf9e3e06ad3edcdb7b30',
+    pattern: '619e26a95bbfb0002540a16d',
+    mainMaterial: {
+      material: '6043a1f33e06ad3edcdb7b09',
+      color: '6043a99c3e06ad3edcdb7b0c'
+    },
+    bottomMaterial: {
+      material: '6043ac5d3e06ad3edcdb7b13',
+      color: '6043a9cc3e06ad3edcdb7b0e'
+    },
+    sizes: ['604394a2a7532c33dcb326d5'],
+    basePrice: 90
+  },
+  upload: []
+};
+
+export const mockProductFromConstructor = {
+  request: {
+    query: addProductFromConstructor,
+    variables: {
+      ...productFromConstructorVariables
+    }
+  },
+  result: {
+    data: {
+      addProductFromConstructor: {
+        __typename: 'Product',
+        _id: '620fc7a2ada7db5c08df6d14',
+        name: [
+          {
+            value: 'олололололло',
+            lang: 'ua'
+          },
+          {
+            value: 'uytyrjyututyu',
+            lang: 'en'
+          }
+        ],
+        translationsKey: '620fc7a2ada7db5c08df6d13',
+        bottomMaterial: {
+          material: {
+            translationsKey: '61840dc8a40f604a050ce414'
+          }
+        },
+        images: null,
+        sizes: [
+          {
+            size: {
+              _id: '604394a2a7532c33dcb326d5',
+              name: 'M',
+              available: true
+            },
+            price: [
+              {
+                value: 3200,
+                currency: 'UAH'
+              },
+              {
+                value: 111,
+                currency: 'USD'
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+};
 
 export const mockFilteredProducts = [
   {

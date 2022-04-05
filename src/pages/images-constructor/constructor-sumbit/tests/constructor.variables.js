@@ -18,7 +18,10 @@ export const constructorValues = {
   bottoms: {
     translationsKey: '61938f3f47ff1a3ccc1ac522'
   },
-  sizes: {
+  patterns: {
+    _id: '61938f3f47ff1a3ccc1ac522'
+  },
+  size: {
     name: 'L',
     _id: '604394a2a7532c33dcb326d5',
     additionalPrice: [
@@ -31,9 +34,6 @@ export const constructorValues = {
         currency: 'USD'
       }
     ]
-  },
-  patterns: {
-    _id: '61938f3f47ff1a3ccc1ac522'
   }
 };
 

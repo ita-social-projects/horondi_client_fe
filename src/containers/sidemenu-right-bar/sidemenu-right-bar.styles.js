@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     alignItems: 'center',
     justifyContent: 'space-around',
-    marginTop: fromSideBar ? 'auto' : 0,
+    marginTop: fromSideBar ? '1rem' : 0,
     width: '100%'
   }),
   iconItem: {

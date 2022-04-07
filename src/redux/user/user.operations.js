@@ -176,7 +176,11 @@ const updateUserById = async ({ user, id, upload, deleteAvatar }) => {
           district
           zipcode
         }
-        confirmed
+        configs {
+          language
+          currency
+          theme
+        }
       }
     }
   `;

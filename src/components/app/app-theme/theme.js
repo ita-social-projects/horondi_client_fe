@@ -113,8 +113,8 @@ export default {
     },
     button: {
       normal: {
-        backgroundColor: '#020202',
-        color: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        color: '#020202'
       },
       hover: {
         backgroundColor: '#FFFFFF',

@@ -40,7 +40,7 @@ jest.mock('../../../../hooks/use-cart', () => ({
   })
 }));
 
-describe.skip('Constructor submit tests', () => {
+describe('Constructor submit tests', () => {
   let wrapper;
   const themeValue = theme('light');
 
@@ -55,7 +55,6 @@ describe.skip('Constructor submit tests', () => {
           isWishful={false}
           constructorValues={constructorValues}
           sizeAndPrice={{}}
-          allSizes={[]}
         />
       </ThemeProvider>
     );

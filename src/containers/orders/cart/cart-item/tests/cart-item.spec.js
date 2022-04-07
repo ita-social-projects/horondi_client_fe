@@ -28,7 +28,7 @@ const mockCartOperations = {
   getProductPrice: mockGetProductPrice
 };
 
-describe.skip('Cart item component tests', () => {
+describe('Cart item component tests', () => {
   it('should calculate price with promoCode', async () => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>

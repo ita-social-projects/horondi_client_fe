@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
 import { useStyles } from './slider-home-page.style';
-import { ReactComponent as ArrowLeft } from '../../../images/ArrowLeft.svg';
-import { ReactComponent as ArrowRight } from '../../../images/ArrowRight.svg';
+import ArrowLeft from '../../../images/ArrowLeft.svg';
+import ArrowRight from '../../../images/ArrowRight.svg';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { getAllSlides } from '../operations/slider/slider.queries';
 import { IMG_URL } from '../../../configs';
@@ -59,7 +59,7 @@ const SliderHomePage = () => {
                   aria-label='previous slide'
                   disabled={currSlide === 0}
                 >
-                  <ArrowLeft />
+                  <img src={ArrowLeft} alt='left arrow' aria-hidden='true' />
                 </button>
                 <button
                   className={styles.arrow}
@@ -68,7 +68,7 @@ const SliderHomePage = () => {
                   aria-label='next slide'
                   disabled={currSlide === slides.length - 1}
                 >
-                  <ArrowRight />
+                  <img src={ArrowRight} alt='right arrow' aria-hidden='true' />
                 </button>
               </div>
             </div>

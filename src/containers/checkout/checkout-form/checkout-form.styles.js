@@ -366,6 +366,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   yourOrderButton: {
     color: palette.button.normal.color,
+    fontSize: '12px',
     fontWeight: 600,
     backgroundColor: palette.button.normal.backgroundColor,
     '&:hover': {

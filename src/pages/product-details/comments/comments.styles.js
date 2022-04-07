@@ -175,6 +175,10 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     color: theme.palette.textColor,
     backgroundColor: theme.palette.backgroundColor,
-    border: theme.palette.comments.cancelButtonBorder.border
+    border: theme.palette.comments.cancelButtonBorder.border,
+    '&:hover': {
+      color: theme.palette.button.hoverSecondary.color,
+      backgroundColor: theme.palette.button.hoverSecondary.backgroundColor
+    }
   }
 }));

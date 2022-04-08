@@ -105,13 +105,13 @@ export const useStyles = makeStyles(() => ({
     }
   },
   navWrapper: {
-    minHeight: '8rem',
+    minHeight: '130px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     '@media (max-width: 768px)': {
-      minHeight: '6rem'
+      minHeight: '95px'
     }
   },
   buttonStyles: {

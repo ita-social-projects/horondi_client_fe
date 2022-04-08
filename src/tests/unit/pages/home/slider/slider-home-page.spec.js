@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { mockSlides } from './slider-home-page.variables';
 import SliderHomePage from '../../../../../pages/home/slider/slider-home-page';
 
@@ -12,15 +11,13 @@ jest.mock('../../../../../pages/home/slider/slider-home-page.style', () => ({
 
 describe('SliderHomePage is valid', () => {
   beforeEach(() => {
-    act(() => {
-      render(
-        <Router>
-          <MockedProvider mocks={mockSlides} addTypename={false}>
-            <SliderHomePage />
-          </MockedProvider>
-        </Router>
-      );
-    });
+    render(
+      <Router>
+        <MockedProvider mocks={mockSlides} addTypename={false}>
+          <SliderHomePage />
+        </MockedProvider>
+      </Router>
+    );
   });
 
   it('should test right and left slider arrow buttons', async () => {

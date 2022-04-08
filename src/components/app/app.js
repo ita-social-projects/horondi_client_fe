@@ -16,6 +16,7 @@ import { preserveUser } from '../../redux/user/user.actions';
 import { selectLocation } from '../../utils/multiple.selectors';
 import { SnackBarContextProvider } from '../../context/snackbar-context';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import CurrencyContextProvider from '../../context/currency-context';
 
 const App = () => {
   const [appTheme, setAppTheme] = useState(true);
@@ -48,9 +49,11 @@ const App = () => {
         <ThemeContext.Provider value={[appTheme, setAppTheme]}>
           <CategoriesContextProvider>
             <SnackBarContextProvider>
-              <CssBaseline />
-              <Routes />
-              <Chat />
+              <CurrencyContextProvider>
+                <CssBaseline />
+                <Routes />
+                <Chat />
+              </CurrencyContextProvider>
             </SnackBarContextProvider>
           </CategoriesContextProvider>
         </ThemeContext.Provider>

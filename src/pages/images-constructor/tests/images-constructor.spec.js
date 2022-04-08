@@ -1,7 +1,7 @@
 import React from 'react';
 import * as redux from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
-import { act, render, screen, fireEvent, waitForElement } from '@testing-library/react';
+import { render, screen, fireEvent, waitForElement } from '@testing-library/react';
 import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
@@ -36,13 +36,11 @@ const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 mockUseDispatch.mockImplementation(() => mockDispatch);
 
 beforeEach(async () => {
-  await act(async () => {
-    render(
-      <MockedProvider mocks={mockAllConstructors} addTypename={false}>
-        <ImagesConstructor />
-      </MockedProvider>
-    );
-  });
+  render(
+    <MockedProvider mocks={mockAllConstructors} addTypename={false}>
+      <ImagesConstructor />
+    </MockedProvider>
+  );
 
   await new Promise((resolve) => setTimeout(resolve, 0));
 });

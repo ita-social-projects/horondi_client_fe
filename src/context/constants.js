@@ -12,12 +12,10 @@ export const getAllCurrencies = gql`
         UAH {
           name
           exchangeRate
-          unicode
         }
         USD {
           name
           exchangeRate
-          unicode
         }
       }
     }

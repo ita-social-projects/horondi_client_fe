@@ -23,7 +23,7 @@ const CurrencyContextProvider = ({ children }) => {
     }
   }, [data]);
 
-  const currencyHandler = (event, newCurrencyName) => {
+  const currencyHandler = (_event, newCurrencyName) => {
     if (newCurrencyName !== null) {
       return setCurrentCurrency(newCurrencyName);
     }

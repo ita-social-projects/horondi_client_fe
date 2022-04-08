@@ -4,6 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import ThanksCard from '../../../../pages/thanks-page/thanks-card/thanks-card';
 import { order } from '../../pages/thanks-page/thanks-page.variables';
 
+jest.mock('../../../../pages/thanks-page/thanks-card/thanks-card.styles', () => ({
+  useStyles: () => ({})
+}));
+
 describe('Tests for Thanks Card', () => {
   beforeEach(() => {
     render(

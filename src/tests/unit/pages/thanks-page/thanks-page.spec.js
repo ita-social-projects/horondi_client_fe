@@ -10,6 +10,9 @@ import { deliveryTypes } from '../../../../configs';
 import { getFromLocalStorage } from '../../../../services/local-storage.service';
 
 jest.mock('../../../../pages/thanks-page/thanks-page.styles', () => ({ useStyles: () => ({}) }));
+jest.mock('../../../../pages/thanks-page/thanks-card/thanks-card.styles.js', () => ({
+  useStyles: () => ({})
+}));
 jest.mock('react-redux');
 jest.mock('../../../../services/local-storage.service');
 

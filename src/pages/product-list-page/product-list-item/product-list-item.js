@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/styles';
@@ -14,16 +13,15 @@ import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../configs/routes';
 import { getCurrencySign } from '../../../utils/currency';
+import { CurrencyContext } from '../../../context/currency-context';
 
 const ProductListItem = ({ product }) => {
   const { t } = useTranslation();
   const { palette } = useTheme();
 
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+  const { currency } = useContext(CurrencyContext);
 
-  const currencySign = getCurrencySign(currency);
+  const currencySign = getCurrencySign(currency.name);
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
 
@@ -42,10 +40,13 @@ const ProductListItem = ({ product }) => {
     const availableSizes = product.sizes.filter(
       ({ size, price }) => size.available && { size, price }
     );
+
+    const price = Math.round(availableSizes[0]?.price * currency.exchangeRate);
+
     return product.available ? (
       <div className={styles.price}>
         <div>
-          {t('common.from') + availableSizes[availableSizes.length - 1]?.price[currency].value}
+          {t('common.from') + price}
           {'\u00A0'}
         </div>
         <div className={styles.currency}>{currencySign}</div>
@@ -86,11 +87,7 @@ ProductListItem.propTypes = {
       })
     ),
     rate: PropTypes.number,
-    basePrice: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.number
-      })
-    ),
+    basePrice: PropTypes.number,
     images: PropTypes.shape({
       isMain: PropTypes.string,
       large: PropTypes.string,
@@ -106,22 +103,13 @@ ProductListItem.propTypes = {
 ProductListItem.defaultProps = {
   product: {
     _id: '',
-    basePrice: [
-      {
-        value: 1
-      }
-    ],
+    basePrice: 0,
     sizes: [
       {
         size: {
           _id: ''
         },
-        price: [
-          {
-            value: 1,
-            currency: ''
-          }
-        ]
+        price: 0
       }
     ],
     images: {

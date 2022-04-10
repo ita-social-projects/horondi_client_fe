@@ -8,14 +8,14 @@ import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
 import { SCROLL_BAR_LINKS } from '../constants';
-import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
+import { getCurrencySign } from '../../../utils/currency';
 
 const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
 
-  const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
+  const currencySign = getCurrencySign(currency.name);
 
   const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
@@ -50,11 +50,11 @@ const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
         {shortProductInfo(parse(t(`${translationsKey}.description`)))}
       </div>
 
-      {Object.keys(currentPrice).length ? (
+      {currentPrice ? (
         <div className={styles.priceContainer}>
           <span data-cy='price' className={styles.price}>
             {currencySign}
-            {Math.round(currentPrice[currency]?.value).toFixed(2)}
+            {Math.round(currentPrice * currency.exchangeRate).toFixed(2)}
           </span>
         </div>
       ) : null}

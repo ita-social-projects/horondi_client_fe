@@ -1,18 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const lightThemeButtonHover = {
-  '&:hover': {
-    backgroundColor: '#242424',
-    color: '#FEFEFE'
-  }
-};
-const darkThemeButtonHover = {
-  '&:hover': {
-    backgroundColor: '#020202',
-    color: '#FEFEFE'
-  }
-};
-
 export const useStyles = makeStyles((theme) => ({
   container: {
     boxShadow: 'none',
@@ -136,7 +123,10 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '0px',
     background: 'inherit',
     color: theme.palette.textColor,
-    '&:hover': theme.palette.type === 'light' ? lightThemeButtonHover : darkThemeButtonHover,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hoverSecondary.backgroundColor,
+      color: theme.palette.button.hoverSecondary.color
+    },
     '@media (max-width: 350px)': {
       fontSize: '12px',
       width: '150px',

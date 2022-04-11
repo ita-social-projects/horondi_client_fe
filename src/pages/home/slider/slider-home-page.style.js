@@ -121,8 +121,7 @@ export const useStyles = makeStyles(() => ({
     border: '1px solid #FEFEFE',
     borderRadius: '0',
     '&:hover': {
-      backgroundColor: '#1d1d1d',
-      color: '#FEFEFE'
+      backgroundColor: 'rgba(40, 40, 40, 0.7)'
     }
   },
   arrows: {

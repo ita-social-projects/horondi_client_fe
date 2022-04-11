@@ -95,6 +95,9 @@ export const useStyles = makeStyles((theme) => ({
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
     cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'rgba(40, 40, 40, 0.7)'
+    },
     '@media (max-width: 420px)': {
       marginTop: '10px'
     },

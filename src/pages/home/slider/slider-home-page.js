@@ -16,8 +16,7 @@ const SliderHomePage = () => {
   const [slides, setSlides] = useState([]);
   const styles = useStyles();
   const appStyles = useAppStyles();
-  const { t, i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { t } = useTranslation();
   const { loading, error } = useQuery(getAllSlides, {
     onCompleted: (data) => setSlides(data.getAllSlides.items)
   });
@@ -44,8 +43,12 @@ const SliderHomePage = () => {
                 <span> / </span>
                 <span>{handleNumPrefix(slides.length)}</span>
               </div>
-              <h2 className={styles.headerTitle}>{slides[currSlide].title[language].value}</h2>
-              <p className={styles.description}>{slides[currSlide].description[language].value}</p>
+              <h2 className={styles.headerTitle}>
+                {t(`${slides[currSlide].translations_key}.title`)}
+              </h2>
+              <p className={styles.description}>
+                {t(`${slides[currSlide].translations_key}.description`)}
+              </p>
             </div>
             <div className={styles.navWrapper}>
               <Button className={styles.buttonStyles} component={Link} to={slides[currSlide].link}>

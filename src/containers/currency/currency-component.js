@@ -8,8 +8,8 @@ const CurrencyComponent = ({ fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const { currencyHandler } = useContext(CurrencyContext);
 
-  const mappedCurrencies = CURRENCIES_LIST.map(
-    ({ name: currencyName, unicode: currencyUnicode }) => (
+  const mappedCurrencies = Object.values(CURRENCIES_LIST).map(
+    ({ label: currencyName, unicode: currencyUnicode }) => (
       <Button
         onClick={currencyHandler}
         data-cy={`${CURRENCY} ${currencyName}`}

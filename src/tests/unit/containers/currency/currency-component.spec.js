@@ -2,16 +2,19 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { DOLLAR_UNICODE, HRYVNIA_UNICODE } from '../../../../containers/currency/constants';
+
 import CurrencyComponent from '../../../../containers/currency/currency-component';
 
 jest.mock('../../../../containers/currency/currency.styles', () => ({
   useStyles: () => ({})
 }));
 
+const hryvniaUnicode = '\u20b4';
+const dollarUnicode = '\u0024';
+
 describe('Currency-component', () => {
   const store = createStore(() => [], {});
-  const handleChange = jest.fn();
+  const currencyHandler = jest.fn();
 
   let dollarButton;
   let hryvniaButton;
@@ -23,8 +26,8 @@ describe('Currency-component', () => {
       </Provider>
     );
 
-    dollarButton = screen.getByText(DOLLAR_UNICODE);
-    hryvniaButton = screen.getByText(HRYVNIA_UNICODE);
+    dollarButton = screen.getByText(dollarUnicode);
+    hryvniaButton = screen.getByText(hryvniaUnicode);
   });
 
   it('Should render the component', () => {
@@ -35,13 +38,13 @@ describe('Currency-component', () => {
 
   it('Should execute function when you click on one of the currency buttons', () => {
     fireEvent.click(hryvniaButton, {
-      handleChange: handleChange()
+      currencyHandler: currencyHandler()
     });
 
     fireEvent.click(dollarButton, {
-      handleChange: handleChange()
+      currencyHandler: currencyHandler()
     });
 
-    expect(handleChange).toHaveBeenCalledTimes(2);
+    expect(currencyHandler).toHaveBeenCalledTimes(2);
   });
 });

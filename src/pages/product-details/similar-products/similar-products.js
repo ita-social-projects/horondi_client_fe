@@ -25,7 +25,7 @@ const SimilarProducts = ({ cartList, product }) => {
 
   const { t } = useTranslation();
 
-  const currencySign = getCurrencySign(currency.name);
+  const currencySign = getCurrencySign[currency.name];
   let imagesList;
 
   if (error || loading) return errorOrLoadingHandler(error, loading);

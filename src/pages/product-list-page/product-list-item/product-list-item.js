@@ -21,7 +21,7 @@ const ProductListItem = ({ product }) => {
 
   const { currency } = useContext(CurrencyContext);
 
-  const currencySign = getCurrencySign(currency.name);
+  const currencySign = getCurrencySign[currency.name];
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
 

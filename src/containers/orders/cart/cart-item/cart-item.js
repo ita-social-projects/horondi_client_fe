@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -16,11 +15,12 @@ import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
-import { calcPriceForCart } from '../../../../utils/priceCalculating';
+import { calcPriceForCart, priceCalculation } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import Loader from '../../../../components/loader';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
+import { CurrencyContext } from '../../../../context/currency-context';
 
 const { pathToProducts } = routes;
 
@@ -32,14 +32,14 @@ const canvasY = 0;
 const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+  const { currency } = useContext(CurrencyContext);
   const [inputValue, setInputValue] = useState(item.quantity);
-  const currencySign = getCurrencySign(currency);
+  const currencySign = getCurrencySign[currency.name];
   const [currentSize, setCurrentSize] = useState(item.sizeAndPrice.size._id);
   const [firstlyMounted, toggleFirstlyMounted] = useState(false);
-  const [currentPrice, setCurrentPrice] = useState(item.sizeAndPrice.price[currency].value);
+  const [currentPrice, setCurrentPrice] = useState(
+    priceCalculation(item.sizeAndPrice.price, currency)
+  );
   const {
     changeQuantity,
     changeSize,

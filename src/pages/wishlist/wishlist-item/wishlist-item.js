@@ -28,7 +28,7 @@ const WishlistItem = ({
   const dispatch = useDispatch();
   const { addToCart } = cartOperations;
   const { pathToCart } = routes;
-  const currencySign = getCurrencySign(currency);
+  const currencySign = getCurrencySign[currency.name];
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);
@@ -74,7 +74,7 @@ const WishlistItem = ({
     return availableSizes.length ? (
       <div className={styles.price}>
         {currencySign}
-        {availableSizes[0].price[currency].value}
+        {availableSizes[0].price}
       </div>
     ) : (
       <>{t('product.sizeNotAvailable')}</>

@@ -61,7 +61,8 @@ export const useCart = (user = null) => {
     return price;
   };
 
-  const getProductPrice = (id, currency) => getCartItem(id).sizeAndPrice.price[currency].value;
+  const getProductPrice = (id, currency) =>
+    getCartItem(id).sizeAndPrice.price * currency.exchangeRate;
 
   const setCartItem = (id, item) => {
     const newCart = cart.map((cartItem) => (cartItem.id === id ? item : cartItem));
@@ -88,9 +89,10 @@ export const useCart = (user = null) => {
     );
   };
 
-  const getTotalPrice = (currency = 0) =>
+  const getTotalPrice = (currency) =>
     cart.reduce(
-      (acc, item) => acc + calcPriceForCart(item.sizeAndPrice.price[currency].value, item.quantity),
+      (acc, item) =>
+        acc + calcPriceForCart(item.sizeAndPrice.price * currency.exchangeRate, item.quantity),
       0
     );
 

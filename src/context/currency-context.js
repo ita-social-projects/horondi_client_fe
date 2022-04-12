@@ -36,6 +36,12 @@ const CurrencyContextProvider = ({ children }) => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (currencies.length) {
+      setCurrentCurrency(currencies.find((item) => item.name === 'UAH'));
+    }
+  }, [currencies]);
+
   return (
     <CurrencyContext.Provider value={{ currency: currentCurrency, currencyHandler }}>
       {children}

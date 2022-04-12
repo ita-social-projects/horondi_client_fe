@@ -36,6 +36,20 @@ export const getConstructorByModel = gql`
             lang
             value
           }
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
           additionalPrice {
             currency
             value
@@ -49,6 +63,7 @@ export const getConstructorByModel = gql`
           }
           features {
             material {
+              _id
               translationsKey
             }
           }
@@ -56,9 +71,16 @@ export const getConstructorByModel = gql`
             value
             currency
           }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
         }
         patterns {
           _id
+          constructorImg
           name {
             lang
             value

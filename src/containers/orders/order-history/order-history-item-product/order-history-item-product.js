@@ -2,41 +2,67 @@ import React from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { useTheme } from '@material-ui/styles';
+import { useQuery } from '@apollo/client';
 import { useStyles } from './order-history-item-product.styles';
 import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
-import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
-import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
+import ConstructorCanvas from '../../../../components/constructor-canvas';
+import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 
 const OrderHistoryItemProduct = ({ item, currency }) => {
   const styles = useStyles();
   const currencySign = getCurrencySign(currency);
   const fixedPriceProduct = item.fixedPrice[currency].value;
   const { t } = useTranslation();
-  const { palette } = useTheme();
-
-  const isLightTheme = palette.type === 'light';
-
-  const plugImage = isLightTheme ? productPlugLight : productPlugDark;
 
   const { product } = item;
-
+  const { data: constructorByModel, loading: loadingConstructorByModel } = useQuery(
+    getConstructorByModel,
+    {
+      variables: {
+        id: product?.model?._id
+      },
+      skip: !product?.isFromConstructor
+    }
+  );
+  const constructor =
+    constructorByModel?.getConstructorByModel && constructorByModel.getConstructorByModel[0];
+  const bottom = constructor?.bottoms.findIndex(
+    (b) => b.features.material._id === product?.bottomMaterial.material._id
+  );
+  const basic = constructor?.basics.findIndex(
+    (b) =>
+      b.features.material._id === product?.mainMaterial.material._id &&
+      b.features.color._id === product?.mainMaterial.color._id
+  );
+  const pattern = constructor?.patterns.findIndex((b) => b._id === product?.pattern._id);
   const defaultProductName = product
     ? t(`${product?.translationsKey}.name`)
     : t('product.notAvailable');
   const constructorProductName = t('common.backpackFromConstructor');
   const productName = product?.isFromConstructor ? constructorProductName : defaultProductName;
+  const defaultProductImg = (
+    <img
+      src={`${IMG_URL}${product?.images?.primary.thumbnail}`}
+      alt='img-product'
+      className={styles.image}
+    />
+  );
+  const constructorItem = {
+    basic: constructor?.basics[basic],
+    bottom: constructor?.bottoms[bottom],
+    pattern: constructor?.patterns[pattern]
+  };
 
+  const constructorProductImg = loadingConstructorByModel ? null : (
+    <div className={styles.imgCanvasItem}>
+      <ConstructorCanvas item={constructorItem} width={130} height={133} x={0} y={0} />
+    </div>
+  );
+  const productImg = product?.isFromConstructor ? constructorProductImg : defaultProductImg;
   return (
     <TableRow className={styles.root}>
-      <TableCell className={styles.image}>
-        <img
-          src={product?.images ? `${IMG_URL}${product?.images?.primary.thumbnail}` : plugImage}
-          alt='img-product'
-          className={styles.imgItem}
-        />
-      </TableCell>
+      <TableCell className={styles.image}>{productImg}</TableCell>
       <TableCell className={styles.description}>
         <p className={styles.productName}>{productName}</p>
         <p className={styles.productBottom}>

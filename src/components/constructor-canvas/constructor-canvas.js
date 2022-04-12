@@ -3,7 +3,6 @@ import { IMG_URL } from '../../configs';
 
 const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
   const canvasRef = useRef();
-
   const mergeImages = (
     imagesToMerge,
     currentCanvas,
@@ -28,8 +27,8 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
           new Promise((resolveImage, rejectImage) => {
             const img = new Image();
             img.onload = () => resolveImage(img);
-            img.onerror = () => {
-              rejectImage(new Error());
+            img.onerror = (error) => {
+              rejectImage(new Error(error));
             };
             img.src = `${IMG_URL}${source}`;
           })
@@ -53,7 +52,6 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
           result.unshift(values[key].images.small);
         }
       });
-
       return result;
     };
 

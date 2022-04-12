@@ -90,7 +90,7 @@ const ImagesConstructor = () => {
     : null;
 
   const sizeAndPrice = {
-    price: defaultPrice + costPattern + constructorValues.bottom.additionalPrice.value,
+    price: CONSTRUCTOR_DEFAULT_PRICE + costPattern + constructorValues.bottom.additionalPrice.value,
     size: {
       available: constructorValues.size.available,
       name: constructorValues.size.name,

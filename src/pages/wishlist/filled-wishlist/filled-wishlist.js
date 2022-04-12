@@ -13,6 +13,7 @@ import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.ac
 import { TOAST_SETTINGS } from '../../product-details/constants';
 import { useCart } from '../../../hooks/use-cart';
 import { useWishlist } from '../../../hooks/use-wishlist';
+import { CurrencyContext } from '../../../context/currency-context';
 
 const FilledWishlist = ({ items }) => {
   const { userData } = useSelector(({ User }) => ({
@@ -23,6 +24,8 @@ const FilledWishlist = ({ items }) => {
   const [wishlist, setWishlist] = useState(items || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
   const { cartOperations, isInCart } = useCart(userData);
+
+  const { currency } = useContext(CurrencyContext);
 
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();

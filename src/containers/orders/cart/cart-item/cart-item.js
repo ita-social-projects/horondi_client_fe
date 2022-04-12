@@ -14,7 +14,7 @@ import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 
 import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
 import routes from '../../../../configs/routes';
-import { calcPriceForCart } from '../../../../utils/priceCalculating';
+import { calcPriceForCart, priceCalculation } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import Loader from '../../../../components/loader';

@@ -7,6 +7,9 @@ export const calcPriceForCart = (price, quantity, discount) => {
 };
 
 const roundPrice = (price) => parseInt(price, 10);
-export const getMin = (minPrice, currency) => (minPrice ? roundPrice(minPrice[currency].value) : 0);
+export const getMin = (minPrice, currency) =>
+  minPrice ? roundPrice(minPrice * currency.exchangeRate) : 0;
 export const getMax = (maxPrice, currency) =>
-  maxPrice ? roundPrice(maxPrice[currency].value) : 1000;
+  maxPrice ? roundPrice(maxPrice * currency.exchangeRate) : 1000;
+export const fixPrice = (prices, currency) =>
+  prices.map((el) => roundPrice(el / currency.exchangeRate));

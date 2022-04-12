@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +18,7 @@ import SimilarProducts from '../../../../pages/product-details/similar-products'
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
 import { addProductFromConstructor } from '../../../../pages/cart/operations/cart.mutations';
+import { CurrencyContext } from '../../../../context/currency-context';
 
 const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
@@ -32,8 +33,9 @@ const FilledCart = ({ items, cartOperations }) => {
   const [promoCodeValue, setPromoCodeValue] = useState('');
   const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
 
-  const { currency, cartLoading, user } = useSelector(({ Currency, User }) => ({
-    currency: Currency.currency,
+  const { currency } = useContext(CurrencyContext);
+
+  const { cartLoading, user } = useSelector(({ User }) => ({
     user: User.userData
   }));
 
@@ -43,7 +45,7 @@ const FilledCart = ({ items, cartOperations }) => {
     }
   });
 
-  const currencySign = getCurrencySign(currency);
+  const currencySign = getCurrencySign[currency.name];
   const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
 
   const checkPromoCode = () => {

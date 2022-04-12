@@ -12,6 +12,7 @@ import { IMG_URL } from '../../../configs';
 import { getCurrencySign } from '../../../utils/currency';
 import routes from '../../../configs/routes';
 import ThemeContext from '../../../context/theme-context';
+import { priceCalculation } from '../../../utils/priceCalculating';
 
 const { pathToProducts } = routes;
 
@@ -29,7 +30,7 @@ const WishlistItem = ({
   const dispatch = useDispatch();
   const { addToCart } = cartOperations;
   const { pathToCart } = routes;
-  const currencySign = getCurrencySign(currency);
+  const currencySign = getCurrencySign[currency.name];
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);
@@ -77,7 +78,7 @@ const WishlistItem = ({
         <div className={styles.price}>
           {currencySign}
           {'\u00A0'}
-          {availableSizes[0].price[currency].value}
+          {priceCalculation(availableSizes[0].price, currency)}
         </div>
       </>
     ) : (

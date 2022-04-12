@@ -26,10 +26,7 @@ export const getProductById = gql`
             name
             available
           }
-          price {
-            value
-            currency
-          }
+          price
         }
       }
     }

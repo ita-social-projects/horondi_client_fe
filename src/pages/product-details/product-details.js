@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
@@ -27,14 +27,13 @@ import ProductDescription from './product-description';
 import ProductPath from './product-path/product-path';
 import { ArrowIcon } from '../../images/profile-icons';
 import { useWishlist } from '../../hooks/use-wishlist';
+import { CurrencyContext } from '../../context/currency-context';
 
 const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+  const { currency } = useContext(CurrencyContext);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();

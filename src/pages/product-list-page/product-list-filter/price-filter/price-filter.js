@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { TextField } from '@material-ui/core';
-import { getMin, getMax } from '../../../../utils/priceCalculating';
+import { getMin, getMax, fixPrice } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
+import { CurrencyContext } from '../../../../context/currency-context';
 
 const PriceFilter = ({ priceRange, resetPrices }) => {
   const { t } = useTranslation();
@@ -18,9 +18,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
   const styles = useStyles();
   const history = useHistory();
 
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+  const { currency } = useContext(CurrencyContext);
 
   const min = getMin(priceRange.minPrice, currency);
   const max = getMax(priceRange.maxPrice, currency);
@@ -33,7 +31,6 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
 
   useEffect(() => {
     setPrices([min, max]);
-    handlePriceFilter([min, max]);
   }, [min, max, resetPrices]);
 
   const handlePriceChange = (event, newValue) => {
@@ -47,7 +44,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
-    setPricesFromInput(newPrices);
+    setPricesFromInput(fixPrice(newPrices, currency));
   };
 
   const handlePriceFilter = useCallback(
@@ -102,7 +99,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
         className={styles.slider}
         value={prices.map((price) => +price)}
         onChange={handlePriceChange}
-        onClick={() => handlePriceFilter(prices)}
+        onClick={() => handlePriceFilter(fixPrice(prices, currency))}
         valueLabelDisplay='auto'
         min={min}
         max={max}

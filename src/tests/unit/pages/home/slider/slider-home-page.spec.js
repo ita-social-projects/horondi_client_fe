@@ -23,14 +23,15 @@ describe('SliderHomePage is valid', () => {
   it('should test right and left slider arrow buttons', async () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    const rightButton = screen.getByRole('button', { name: /next slide/i });
     const leftButton = screen.getByRole('button', { name: /previous slide/i });
+    const rightButton = screen.getByRole('button', { name: /next slide/i });
+
     fireEvent.click(rightButton);
-    fireEvent.click(rightButton);
+    const statusAfterRightClick = screen.getByText('02');
+    expect(statusAfterRightClick).toBeInTheDocument();
+
     fireEvent.click(leftButton);
-
-    const currentSlide = screen.getByText(/02/i);
-
-    expect(currentSlide).toBeInTheDocument();
+    const statusAfterLeftClick = screen.getByText('01');
+    expect(statusAfterLeftClick).toBeInTheDocument();
   });
 });

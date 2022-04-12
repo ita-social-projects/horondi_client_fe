@@ -187,5 +187,9 @@ export const useStyles = makeStyles((theme) => ({
   pluse: {
     fontSize: '24px',
     margin: '0 5px'
+  },
+  currencySign: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }));

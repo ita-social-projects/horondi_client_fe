@@ -56,7 +56,7 @@ const FilledCart = ({ items, cartOperations }) => {
 
   useEffect(() => {
     promoCode
-      ? setPrice(getTotalPricesWithPromoCode(currency, promoCode))
+      ? setPrice(getTotalPricesWithPromoCode(promoCode))
       : setPrice(getTotalPrice(currency));
   }, [items, currency, getTotalPrice, promoCode, getTotalPricesWithPromoCode]);
 
@@ -153,7 +153,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   <span>{t('cart.saving')}</span>
                   <div>
                     {currencySign}
-                    {getTotalPrice(currency) - getTotalPricesWithPromoCode(currency, promoCode)}
+                    {getTotalPrice(currency) - getTotalPricesWithPromoCode(promoCode)}
                   </div>
                 </div>
               )}

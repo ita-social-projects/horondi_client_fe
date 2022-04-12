@@ -37,7 +37,6 @@ export const getConstructorByModel = gql`
             value
           }
           additionalPrice {
-            currency
             value
           }
         }
@@ -54,7 +53,6 @@ export const getConstructorByModel = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
         patterns {
@@ -65,7 +63,6 @@ export const getConstructorByModel = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
       }

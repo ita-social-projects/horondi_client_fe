@@ -37,7 +37,6 @@ export const getConstructorByModel = gql`
           available
           additionalPrice {
             value
-            currency
           }
         }
         bottoms {
@@ -63,7 +62,6 @@ export const getConstructorByModel = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
         pocketsWithRestrictions {
@@ -105,7 +103,6 @@ export const getConstructorByModel = gql`
           constructorImg
           additionalPrice {
             value
-            currency
           }
         }
         model {
@@ -119,7 +116,6 @@ export const getConstructorByModel = gql`
             name
             additionalPrice {
               value
-              currency
             }
             available
           }

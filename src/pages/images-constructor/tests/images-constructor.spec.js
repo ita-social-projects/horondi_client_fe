@@ -26,8 +26,7 @@ jest.mock('i18next', () => ({
 jest.mock('../../../utils/checkout', () => ({ getCurrentCurrency: () => '1' }));
 jest.mock('../../../utils/constructor', () => ({
   constructorEndPrice: () => '',
-  constructorPartPrice: () => [1, 2, 3],
-  constructorPartNames: () => ''
+  constructorPartPrice: () => [1, 2, 3]
 }));
 
 const mockDispatch = jest.fn();

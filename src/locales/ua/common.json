@@ -85,5 +85,6 @@
     "models": "Наші моделі"
   },
   "titleQuestionsAnswers": "Питання та відповіді",
-  "backpack": "Ваш рюкзак"
+  "backpack": "Ваш рюкзак",
+  "constructorAdditionals": ["Гобелен:", "Матеріал дна:"]
 }

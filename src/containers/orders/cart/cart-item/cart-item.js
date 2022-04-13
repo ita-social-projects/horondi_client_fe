@@ -66,8 +66,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     }
   });
 
-  const constructorByModel =
-    (product?.getConstructorByModel && product?.getConstructorByModel[0]) || {};
+  const constructorByModel = product?.getConstructorByModel || {};
 
   const constructorCartItem = {
     ...constructorByModel,

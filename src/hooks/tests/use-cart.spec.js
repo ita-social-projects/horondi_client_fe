@@ -31,7 +31,7 @@ describe('use-cart tests', () => {
   });
   it('should return total price with promo code', () => {
     act(() => {
-      res = wrap.result.current.cartOperations.getTotalPricesWithPromoCode(0, mockPromoCode);
+      res = wrap.result.current.cartOperations.getTotalPricesWithPromoCode(mockPromoCode);
     });
 
     expect(res).toBe(900);

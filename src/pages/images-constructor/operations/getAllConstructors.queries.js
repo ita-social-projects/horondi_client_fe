@@ -36,7 +36,6 @@ export const getAllConstructors = gql`
           available
           additionalPrice {
             value
-            currency
           }
         }
         bottoms {
@@ -62,7 +61,6 @@ export const getAllConstructors = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
         pocketsWithRestrictions {
@@ -103,7 +101,6 @@ export const getAllConstructors = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
         model {
@@ -117,7 +114,6 @@ export const getAllConstructors = gql`
             name
             additionalPrice {
               value
-              currency
             }
           }
         }

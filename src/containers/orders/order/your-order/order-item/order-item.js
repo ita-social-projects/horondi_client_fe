@@ -40,7 +40,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const orderItem = useMemo(
     () =>
       isFromConstructor
-        ? { ...dataProduct?.getConstructorByModel[0], category: { code: 'constructor' } }
+        ? { ...dataProduct?.getConstructorByModel, category: { code: 'constructor' } }
         : dataProduct?.getProductById,
     [isFromConstructor, dataProduct]
   );

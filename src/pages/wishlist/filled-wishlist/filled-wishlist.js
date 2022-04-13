@@ -21,7 +21,7 @@ const FilledWishlist = ({ items }) => {
   }));
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
-  const [wishlist, setWishlist] = useState(items || []);
+  const [wishlist, setWishlist] = useState(items.reverse() || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
   const { cartOperations, isInCart } = useCart(userData);
 

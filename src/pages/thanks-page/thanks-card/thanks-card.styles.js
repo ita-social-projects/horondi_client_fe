@@ -61,10 +61,10 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   continueShopping: {
     margin: '10px 10% 10px 10%',
-    color: palette.type === 'light' ? whiteText : blackText,
-    backgroundColor: palette.type === 'light' ? blackText : whiteText,
+    backgroundColor: palette.button.normal.backgroundColor,
+    color: palette.button.normal.color,
     '&:hover': {
-      backgroundColor: palette.type === 'light' ? '#151515' : '#d1d1d1'
+      backgroundColor: palette.button.hover.backgroundColor
     },
     width: '80%',
     height: '44px',
@@ -79,15 +79,15 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   goToHomePage: {
     margin: '10px 10% 10px 10%',
-    color: palette.type === 'light' ? blackText : whiteText,
+    color: palette.textColor,
+    backgroundColor: palette.backgroundColor,
     '&:hover': {
-      backgroundColor: palette.type === 'light' ? blackText : whiteText,
-      color: palette.type === 'light' ? whiteText : blackText
+      backgroundColor: palette.button.hoverSecondary.backgroundColor
     },
     width: '80%',
     height: '44px',
     borderRadius: '1px',
-    borderColor: palette.type === 'light' ? blackText : whiteText,
+    borderColor: palette.button.normal.borderColor,
 
     fontStyle: 'normal',
     fontWeight: '600',

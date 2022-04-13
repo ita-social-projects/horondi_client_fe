@@ -72,11 +72,13 @@ export const useStyles = makeStyles((theme) => ({
       '&:first-child': {
         color: theme.palette.black,
         backgroundColor: theme.palette.white,
-        border: '1px solid'
+        border: '1px solid',
+        '&:hover': {
+          backgroundColor: theme.palette.lightGray
+        }
       },
       '&:hover': {
-        color: theme.palette.button.hover.color,
-        backgroundColor: theme.palette.button.hover.backgroundColor
+        backgroundColor: theme.palette.mediumGray
       },
       '@media (max-width: 500px)': {
         fontSize: '12px'

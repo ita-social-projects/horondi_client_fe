@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useLazyQuery, useMutation } from '@apollo/client';
-import { useHistory } from 'react-router';
 import { INITIAL_CERTIFICATE_COUNT, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT } from '../../configs';
 import { useStyles } from './gift-certificate.styles';
 import { validationSchema } from '../../validators/email';
@@ -15,6 +14,8 @@ import routes from '../../configs/routes';
 import { generateCertificate } from './operations/gift-certificate.mutations';
 import { getPaymentCheckoutForCertificates } from './operations/gift-certificate.queries';
 import { getCurrentCurrency } from '../../utils/checkout';
+import { setToLocalStorage } from '../../services/local-storage.service';
+import { orderDataToLS } from '../../utils/order';
 
 const { pathToCertificateThanks } = routes;
 
@@ -22,19 +23,14 @@ const GiftCertificate = () => {
   const { t } = useTranslation();
   const styles = useStyles();
   const appStyles = useAppStyles();
-  const history = useHistory();
 
   const [getPaymentCheckoutForCertificate] = useLazyQuery(getPaymentCheckoutForCertificates, {
     onCompleted: (data) => {
       const { paymentUrl, paymentToken, certificatesOrderId } =
         data.getPaymentCheckoutForCertificates;
+      setToLocalStorage(orderDataToLS.certificatesOrderId, certificatesOrderId);
+      window.open(`${process.env.REACT_APP_ROOT_PATH}${pathToCertificateThanks}/${paymentToken}`);
       window.open(paymentUrl);
-      history.push({
-        pathname: `${pathToCertificateThanks}/${paymentToken}`,
-        state: {
-          certificatesOrderId
-        }
-      });
     }
   });
 

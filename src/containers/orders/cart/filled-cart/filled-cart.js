@@ -17,8 +17,9 @@ import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
+import { addProductFromConstructor } from '../../../../pages/cart/operations/cart.mutations';
 
-const FilledCart = ({ items, cartOperations, addProductFromConstructor }) => {
+const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const history = useHistory();

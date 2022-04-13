@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import ModelsList from '../models-list';
 import ClassicButton from '../../../../components/classic-button';
 
+jest.mock('../models-list.style.js', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 

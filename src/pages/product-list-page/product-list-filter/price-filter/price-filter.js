@@ -10,27 +10,13 @@ import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 
-const PriceFilter = ({ priceRange }) => {
+const PriceFilter = ({ priceRange, resetPrices }) => {
   const { t } = useTranslation();
   const { search } = useLocation();
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
   const searchParams = new URLSearchParams(search);
   const styles = useStyles();
   const history = useHistory();
-  const priceFilterValue = searchParams.get(priceFilter);
-
-  const getDefaultPrices = () =>
-    priceFilterValue
-      ? searchParams
-        .get(priceFilter)
-        .split(',')
-        .map((price) => +price)
-      : ['', ''];
-
-  const [prices, setPrices] = useState(getDefaultPrices());
-
-  const searchParamsRef = useRef();
-  searchParamsRef.current = searchParams;
 
   const { currency } = useSelector(({ Currency }) => ({
     currency: Currency.currency
@@ -39,15 +25,16 @@ const PriceFilter = ({ priceRange }) => {
   const min = getMin(priceRange.minPrice, currency);
   const max = getMax(priceRange.maxPrice, currency);
 
-  useEffect(() => {
-    if (prices[0] === '' && prices[1] === '' && min && max) {
-      setPrices([min, max]);
-    }
-  }, [min, max, currency, prices]);
+  const [prices, setPrices] = useState([min, max]);
+  const [pricesFromInput, setPricesFromInput] = useState([min, max]);
+
+  const searchParamsRef = useRef();
+  searchParamsRef.current = searchParams;
 
   useEffect(() => {
-    setPrices(getDefaultPrices());
-  }, [priceFilterValue]);
+    setPrices([min, max]);
+    handlePriceFilter([min, max]);
+  }, [min, max, resetPrices]);
 
   const handlePriceChange = (event, newValue) => {
     setPrices(newValue.map((value) => +value));
@@ -60,6 +47,7 @@ const PriceFilter = ({ priceRange }) => {
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
+    setPricesFromInput(newPrices);
   };
 
   const handlePriceFilter = useCallback(
@@ -73,13 +61,13 @@ const PriceFilter = ({ priceRange }) => {
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      if (prices[0] !== min) {
-        handlePriceFilter(prices);
+      if (min) {
+        handlePriceFilter(pricesFromInput);
       }
     }, 1000);
 
     return () => clearTimeout(delayDebounce);
-  }, [prices, min, handlePriceFilter]);
+  }, [pricesFromInput]);
 
   return (
     <FormGroup data-cy='price_filter'>

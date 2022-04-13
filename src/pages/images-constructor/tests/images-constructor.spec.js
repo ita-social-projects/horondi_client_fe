@@ -1,7 +1,7 @@
 import React from 'react';
 import * as redux from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitForElement } from '@testing-library/react';
 import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
@@ -36,28 +36,34 @@ const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 mockUseDispatch.mockImplementation(() => mockDispatch);
 
 beforeEach(async () => {
-  mockUseDispatch.mockImplementation(() => mockDispatch);
   render(
     <MockedProvider mocks={mockAllConstructors} addTypename={false}>
       <ImagesConstructor />
     </MockedProvider>
   );
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  await new Promise((resolve) => setTimeout(resolve, 0));
 });
 
-describe.skip('ImagesConstructor component tests', () => {
-  it('renders h1', () => {
-    expect(screen.getByText(/common.title/i)).toBeInTheDocument();
+describe('ImagesConstructor component tests', () => {
+  it('renders h1', async () => {
+    waitForElement(() => {
+      expect(screen.getByText(/Створи сам/i)).toBeInTheDocument();
+    });
   });
 
   it('it can change selected item', () => {
-    const select = screen.getByTestId('model');
-    expect(select).toBeInTheDocument();
+    waitForElement(() => {
+      const select = screen.getByTestId('model');
+      expect(select).toBeInTheDocument();
+    });
   });
 
   it('modal', () => {
-    const button = screen.getAllByRole('button')[0];
-    fireEvent.click(button);
-    expect(<Modal />).toBeTruthy();
+    waitForElement(() => {
+      const button = screen.getAllByRole('button')[0];
+      fireEvent.click(button);
+      expect(<Modal />).toBeTruthy();
+    });
   });
 });

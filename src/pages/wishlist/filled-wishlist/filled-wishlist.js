@@ -37,7 +37,7 @@ const FilledWishlist = ({ items }) => {
   const { removeFromWishlist } = wishlistOperations;
 
   useEffect(() => {
-    updatedWishlist && setWishlist(updatedWishlist);
+    updatedWishlist && setWishlist([...updatedWishlist].reverse());
   }, [updatedWishlist]);
 
   useEffect(() => {

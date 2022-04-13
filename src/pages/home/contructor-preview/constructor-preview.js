@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 
+import { Button } from '@material-ui/core';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import VolumeOffIcon from '@material-ui/icons/VolumeOff';
 import { useTranslation } from 'react-i18next';
@@ -37,7 +38,7 @@ const ConstructorPreview = () => {
           <p className={styles.constructorDescription}> {t('home.constructorName')} </p>
         </div>
         <Link to={pathToConstructor}>
-          <button className={styles.buttonStyles}> {t('home.createStyle')} </button>
+          <Button className={styles.buttonStyles}> {t('home.createStyle')} </Button>
         </Link>
       </div>
       <div className={styles.playerSoundControl}>

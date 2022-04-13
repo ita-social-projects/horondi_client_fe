@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
+import { useLazyQuery, useSubscription } from '@apollo/client';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import ThanksCard from './thanks-card';
-import { getOrder, getPaidOrder } from '../../redux/order/order.actions';
+import { getOrder, setOrder } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
-import { getFromLocalStorage } from '../../services/local-storage.service';
+import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { Loader } from '../../components/loader/loader';
 import { deliveryTypes, ORDER_NUMBER_LENGTH } from '../../configs';
+import { orderPaidSubscription, sendOrderToEmail } from '../../redux/order/order.operations';
+import { checkoutPayMethod } from '../../containers/checkout/checkout-form/const';
 
 const { pathToMain } = routes;
 
@@ -20,27 +23,47 @@ const ThanksPage = () => {
 
   const language = i18n.language === 'ua' ? 0 : 1;
 
-  const { order, loading, paidOrderLoading, user } = useSelector(({ Order, User }) => ({
+  const [paidOrderLoading, setLoading] = useState(true);
+
+  const { order, loading, user } = useSelector(({ Order, User }) => ({
     order: Order.order,
     loading: Order.loading,
-    paidOrderLoading: Order.paidOrderLoading,
     user: User.userData
   }));
 
   const styles = useStyles();
   const paymentMethod = getFromLocalStorage(orderDataToLS.paymentMethod);
 
-  useEffect(() => {
-    const paidOrderNumber = router.pathname.slice(router.pathname.length - ORDER_NUMBER_LENGTH);
+  const [sendPaidOrderToEmail] = useLazyQuery(sendOrderToEmail);
 
-    if (paidOrderNumber && paymentMethod === 'CARD') {
-      dispatch(getPaidOrder({ paidOrderNumber, language }));
-    } else {
+  const paidOrderNumber = router.pathname.slice(router.pathname.length - ORDER_NUMBER_LENGTH);
+
+  useSubscription(orderPaidSubscription, {
+    variables: { orderId: paidOrderNumber },
+    onSubscriptionData: ({
+      subscriptionData: {
+        data: { paidOrder }
+      }
+    }) => {
+      dispatch(setOrder(paidOrder));
+      setToLocalStorage(orderDataToLS.order, paidOrder);
+      sendPaidOrderToEmail({
+        variables: {
+          language,
+          paidOrderNumber
+        }
+      });
+      setLoading(false);
+    }
+  });
+
+  useEffect(() => {
+    if (paymentMethod === checkoutPayMethod.cash) {
       dispatch(getOrder());
     }
-  }, [dispatch, router.pathname, language, user]);
+  }, [dispatch, language, user]);
 
-  if (loading || paidOrderLoading) {
+  if ((paymentMethod === checkoutPayMethod.card && paidOrderLoading) || loading) {
     return <Loader data-testid='loader' />;
   }
 

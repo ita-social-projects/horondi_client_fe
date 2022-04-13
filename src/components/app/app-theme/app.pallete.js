@@ -54,6 +54,10 @@ export const paletteGenerator = (colorSchema) => ({
       backgroundColor: theme[colorSchema].button.hover.backgroundColor,
       color: theme[colorSchema].button.hover.color
     },
+    hoverSecondary: {
+      backgroundColor: theme[colorSchema].button.hoverSecondary.backgroundColor,
+      color: theme[colorSchema].button.hoverSecondary.color
+    },
     disabled: {
       backgroundColor: theme[colorSchema].button.disabled.backgroundColor,
       color: theme[colorSchema].button.disabled.color

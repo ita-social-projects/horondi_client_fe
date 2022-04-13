@@ -25,6 +25,10 @@ export default {
         backgroundColor: '#353333',
         color: '#FFFFFF'
       },
+      hoverSecondary: {
+        backgroundColor: '#E7E7E7',
+        color: '#000000'
+      },
       disabled: {
         backgroundColor: '#999999',
         color: '#C2C2C2'
@@ -113,12 +117,16 @@ export default {
     },
     button: {
       normal: {
-        backgroundColor: '#020202',
-        color: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        color: '#020202'
       },
       hover: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#E7E7E7',
         color: '#000000'
+      },
+      hoverSecondary: {
+        backgroundColor: '#353333',
+        color: '#FFFFFF'
       },
       disabled: {
         backgroundColor: '#868585',

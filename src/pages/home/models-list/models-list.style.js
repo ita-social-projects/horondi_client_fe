@@ -17,8 +17,8 @@ export const useStyles = makeStyles((theme) => ({
       borderColor: theme.palette.textColor,
       margin: 50,
       '&:hover': {
-        color: theme.palette.textColor,
-        backgroundColor: theme.palette.backgroundColor
+        color: theme.palette.button.hoverSecondary.color,
+        backgroundColor: theme.palette.button.hoverSecondary.backgroundColor
       }
     }
   }),

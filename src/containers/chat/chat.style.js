@@ -79,28 +79,30 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexDirection: 'column',
     alignItems: 'center',
     right: '15%',
-    top: '105px',
+    top: '108px',
     bottom: '10%',
     width: '320px',
     height: '600px',
     zIndex: 899,
+    overflow: 'auto',
     background: palette.backgroundColor,
     boxShadow: '0px 5px 8px rgba(0, 0, 0, 0.25)',
     '@media (max-width: 768px)': {
       width: '70%',
-      right: '15%'
+      right: '15%',
+      top: '93px'
     },
     '@media (max-width: 420px)': {
       width: '90%',
       right: '5%'
     },
     '@media (max-height: 750px)': {
-      height: '80%',
-      top: '15%'
+      height: '80%'
     }
   },
   cancelIcon: {
     position: 'absolute',
+    top: '2px',
     right: '1px',
     '&:hover': {
       cursor: 'pointer'

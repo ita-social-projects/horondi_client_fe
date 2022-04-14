@@ -1,8 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/styles';
+import { order, mock } from './order-history-item.variables';
 import OrderHistoryItem from '../../../../containers/orders/order-history/order-history-item/order-history-item.js';
-import { order } from './order-history-item.variables';
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
 jest.mock('react-redux');
 jest.mock(
@@ -19,22 +23,25 @@ useSelector.mockImplementation(() => ({
   currency: 1
 }));
 
-jest.mock('@material-ui/styles', () => ({
-  ...jest.requireActual('@material-ui/styles'),
-  useTheme: () => ({
-    palette: {
-      type: 'light'
-    }
-  })
-}));
-
+const themeValue = theme('light');
+let wrapper;
 describe('OrderHistoryOrder component tests', () => {
+  beforeEach(() => {
+    wrapper = render(
+      <MockedProvider mocks={mock}>
+        <BrowserRouter>
+          <ThemeProvider theme={themeValue}>
+            <OrderHistoryItem order={order} />
+          </ThemeProvider>
+        </BrowserRouter>
+      </MockedProvider>
+    );
+  });
+
   it('Should render OrderHistoryOrder', () => {
-    const component = shallow(<OrderHistoryItem order={order} />);
-    expect(component).toBeDefined();
+    expect(wrapper).toBeDefined();
   });
   it('renders delivery status, order number and common price', () => {
-    render(<OrderHistoryItem order={order} />);
     expect(screen.getByText(/created/i)).toBeInTheDocument();
     expect(screen.getByText(/1634215702438/)).toBeInTheDocument();
     expect(screen.getAllByText(/total/i).length).toBe(2);

@@ -90,6 +90,19 @@ export const getConstructorByModel = gql`
             currency
           }
         }
+        pocketsWithRestrictions {
+          currentPocketWithPosition {
+            pocket {
+              _id
+              images {
+                large
+                medium
+                small
+                thumbnail
+              }
+            }
+          }
+        }
       }
       ... on Error {
         message

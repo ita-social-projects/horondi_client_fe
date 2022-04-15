@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { getAllCurrencies } from './constants';
 import errorOrLoadingHandler from '../utils/errorOrLoadingHandler';

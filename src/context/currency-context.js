@@ -1,49 +1,40 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { getAllCurrencies } from './constants';
+import errorOrLoadingHandler from '../utils/errorOrLoadingHandler';
 
 const initialValues = {
-  currency: {
-    name: 'USD',
-    exchangeRate: 1
-  },
-  currencyHandler: () => {}
+  currency: 'UAH',
+  currencyHandler: () => {},
+  getPriceWithCurrency: () => {},
+  currencies: {}
 };
 
 export const CurrencyContext = createContext(initialValues);
 
 const CurrencyContextProvider = ({ children }) => {
-  const [currencies, setCurrencies] = useState([]);
-  const [currentCurrency, setCurrentCurrency] = useState({
-    name: 'USD',
-    exchangeRate: 1
+  const [currencies, setCurrencies] = useState({});
+  const [currentCurrency, setCurrentCurrency] = useState('UAH');
+
+  const { error } = useQuery(getAllCurrencies, {
+    onCompleted: (data) => setCurrencies({ ...data.getAllCurrencies[0].convertOptions })
   });
 
-  const { data } = useQuery(getAllCurrencies);
+  if (error) return errorOrLoadingHandler(error);
 
   const currencyHandler = (event) => {
     const newCurrencyName = event.target.value;
-    const newCurrency = currencies.find((el) => el.name === newCurrencyName);
+    const newCurrency = currencies[newCurrencyName].name;
 
-    if (newCurrency) {
-      return setCurrentCurrency(newCurrency);
-    }
+    return setCurrentCurrency(newCurrency);
   };
 
-  useEffect(() => {
-    if (data) {
-      setCurrencies([...data.getAllCurrencies[0].convertOptions]);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (currencies.length) {
-      setCurrentCurrency(currencies.find((item) => item.name === 'UAH'));
-    }
-  }, [currencies]);
+  const getPriceWithCurrency = (value) => Math.round(value * currencies[currentCurrency].exchangeRate);
 
   return (
-    <CurrencyContext.Provider value={{ currency: currentCurrency, currencyHandler }}>
+    <CurrencyContext.Provider
+      value={{ currency: currentCurrency, currencyHandler, getPriceWithCurrency, currencies }}
+    >
       {children}
     </CurrencyContext.Provider>
   );

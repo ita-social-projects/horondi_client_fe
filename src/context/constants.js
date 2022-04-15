@@ -9,8 +9,16 @@ export const getAllCurrencies = gql`
     getAllCurrencies {
       _id
       convertOptions {
-        name
-        exchangeRate
+        UAH {
+          name
+          exchangeRate
+          unicode
+        }
+        USD {
+          name
+          exchangeRate
+          unicode
+        }
       }
     }
   }

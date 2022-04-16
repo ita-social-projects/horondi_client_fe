@@ -4,8 +4,13 @@ import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import OrderHistoryItemProduct from '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product';
-import { item, nullProduct, translationsKey } from './order-history-item-product.variables';
-import { mock } from '../order-history-item/order-history-item.variables';
+import {
+  item,
+  mockConstructor,
+  nullProduct,
+  translationsKey
+} from './order-history-item-product.variables';
+
 import { theme } from '../../../../components/app/app-theme/app.theme';
 
 jest.mock(
@@ -21,7 +26,7 @@ let wrapper;
 describe('OrderHistoryOrderItem component tests', () => {
   beforeEach(() => {
     wrapper = render(
-      <MockedProvider mocks={mock}>
+      <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
             <OrderHistoryItemProduct item={item} currency={0} />
@@ -30,7 +35,6 @@ describe('OrderHistoryOrderItem component tests', () => {
       </MockedProvider>
     );
   });
-
   it('Should render OrderHistoryOrderItem', () => {
     expect(wrapper).toBeDefined();
   });
@@ -49,7 +53,7 @@ describe('OrderHistoryOrderItem component tests', () => {
 describe('OrderHistoryOrderItem component tests,renders plug for product', () => {
   it('Renders plug for product', () => {
     render(
-      <MockedProvider mocks={mock}>
+      <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
             <OrderHistoryItemProduct item={nullProduct} currency={1} />
@@ -57,7 +61,6 @@ describe('OrderHistoryOrderItem component tests,renders plug for product', () =>
         </BrowserRouter>
       </MockedProvider>
     );
-
     expect(screen.getByText('product.notAvailable')).toBeInTheDocument();
   });
 });

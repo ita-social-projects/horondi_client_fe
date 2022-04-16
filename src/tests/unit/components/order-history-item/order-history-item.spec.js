@@ -41,6 +41,10 @@ describe('OrderHistoryOrder component tests', () => {
   it('Should render OrderHistoryOrder', () => {
     expect(wrapper).toBeDefined();
   });
+  it('renders 6 cells in a row', () => {
+    const cells = document.querySelectorAll('td');
+    expect(cells.length).toBe(6);
+  });
   it('renders delivery status, order number and common price', () => {
     expect(screen.getByText(/created/i)).toBeInTheDocument();
     expect(screen.getByText(/1634215702438/)).toBeInTheDocument();

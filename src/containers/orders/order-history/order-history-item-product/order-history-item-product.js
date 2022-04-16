@@ -25,6 +25,7 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
       skip: !product?.isFromConstructor
     }
   );
+
   const constructor =
     constructorByModel?.getConstructorByModel && constructorByModel.getConstructorByModel[0];
   const bottom = constructor?.bottoms.findIndex(
@@ -38,11 +39,13 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
   const pattern = constructor?.patterns.findIndex((b) => b._id === product?.pattern._id);
   const pocket =
     constructor && constructor.pocketsWithRestrictions[0]?.currentPocketWithPosition?.pocket;
+
   const defaultProductName = product
     ? t(`${product?.translationsKey}.name`)
     : t('product.notAvailable');
   const constructorProductName = t('common.backpackFromConstructor');
   const productName = product?.isFromConstructor ? constructorProductName : defaultProductName;
+
   const defaultProductImg = (
     <img
       src={`${IMG_URL}${product?.images?.primary.thumbnail}`}
@@ -56,13 +59,13 @@ const OrderHistoryItemProduct = ({ item, currency }) => {
     pattern: constructor?.patterns[pattern],
     pocket
   };
-
   const constructorProductImg = loadingConstructorByModel ? null : (
     <div className={styles.imgCanvasItem}>
       <ConstructorCanvas item={constructorItem} width={130} height={133} x={0} y={0} />
     </div>
   );
   const productImg = product?.isFromConstructor ? constructorProductImg : defaultProductImg;
+
   return (
     <TableRow className={styles.root}>
       <TableCell className={styles.image}>{productImg}</TableCell>

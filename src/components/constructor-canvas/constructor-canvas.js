@@ -27,8 +27,8 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
           new Promise((resolveImage, rejectImage) => {
             const img = new Image();
             img.onload = () => resolveImage(img);
-            img.onerror = (error) => {
-              rejectImage(new Error(error));
+            img.onerror = () => {
+              rejectImage(new Error());
             };
             img.src = `${IMG_URL}${source}`;
           })

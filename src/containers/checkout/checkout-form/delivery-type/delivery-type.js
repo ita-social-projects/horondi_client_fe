@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, FormControlLabel, Radio, RadioGroup, Select } from '@material-ui/core';
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Select,
+  Tabs,
+  Tab
+} from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,6 +21,9 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
 
   const [deliveryTypeValue, setDeliveryTypeValue] = useState(deliveryType);
   const [courierOrganization, setcourierOrganization] = useState(deliveryTypes.NOVAPOSTCOURIER);
+  const [tabValue, setTabValue] = useState(0);
+
+  const handleTabChange = (e, newTabValue) => setTabValue(newTabValue);
 
   const handleCourierOrganizationChange = (eventValue) => {
     setFieldValue('courierOrganization', eventValue);
@@ -46,6 +57,18 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
   return (
     <div className={styles.deliveryTypeContainer}>
       <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
+      <Tabs
+        className={styles.tabs}
+        value={tabValue}
+        TabIndicatorProps={{ style: { display: 'none' } }}
+        onChange={handleTabChange}
+        variant='fullWidth'
+        scrollButtons='auto'
+        aria-label='delivery type'
+      >
+        <Tab className={styles.tab} label={t('checkout.tabs.withinUkraineDelivery')} />
+        <Tab className={styles.tab} label={t('checkout.tabs.worldWideDelivery')} />
+      </Tabs>
       <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
         <RadioGroup
           data-testid='delivery-type'

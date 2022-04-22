@@ -42,12 +42,6 @@ export const useStyles = makeStyles(({ palette }) => ({
       textDecoration: 'underline'
     }
   },
-  deliveryTitle: {
-    fontSize: 23,
-    fontWeight: 700,
-    color: palette.textColor,
-    marginBottom: 10
-  },
   error: {
     color: '#e60000',
     marginBottom: '2%'
@@ -71,23 +65,5 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: 50,
     width: '100%',
     marginBottom: 10
-  },
-  tabs: {
-    margin: '10px 0 15px 0',
-    '& .Mui-selected': {
-      backgroundColor: palette.button.normal.backgroundColor,
-      color: palette.button.hover.color,
-      border: `1px solid ${palette.button.normal.borderColor}`
-    }
-  },
-  tab: {
-    color: palette.textColor,
-    border: `1px solid ${palette.button.normal.borderColor}`,
-    textTransform: 'none',
-    fontWeight: 600,
-
-    '@media (max-width: 767px)': {
-      fontSize: '14px'
-    }
   }
 }));

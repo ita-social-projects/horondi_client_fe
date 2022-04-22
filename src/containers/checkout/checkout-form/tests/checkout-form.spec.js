@@ -5,7 +5,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
-import DeliveryType from '../delivery-type/delivery-type';
 import {
   ukrPostMockRegions,
   ukrPostMockDistricts,
@@ -80,10 +79,6 @@ describe('CheckoutForm component tests', () => {
   it('should submit add payment method', async () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     wrapper.find('form').simulate('submit');
-  });
-  it('<CheckoutForm /> should contain component <DeliveryType />', () => {
-    const wrapper = shallow(<CheckoutForm {...props} language={0} />);
-    expect(wrapper.find(DeliveryType).length).toEqual(1);
   });
 });
 

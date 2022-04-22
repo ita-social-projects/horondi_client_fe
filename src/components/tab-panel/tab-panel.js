@@ -6,7 +6,7 @@ const TabPanel = ({ children, value, index, ...rest }) => (
     component='div'
     role='tabpanel'
     hidden={value !== index}
-    aria-label={`tab panel ${index + 1}`}
+    aria-label={`${index} tab panel`}
     {...rest}
   >
     {children}

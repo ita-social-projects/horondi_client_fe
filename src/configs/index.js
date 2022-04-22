@@ -45,6 +45,11 @@ export const deliveryTypes = {
   COURIER: 'COURIER'
 };
 
+export const countryOptions = {
+  WITHIN_UKRAINE: 'WITHIN_UKRAINE',
+  WORLDWIDE: 'WORLDWIDE'
+};
+
 const courierArray = ['NOVAPOSTCOURIER', 'UKRPOSTCOURIER', 'COURIER'];
 export const isCourier = (type) => courierArray.some((arrType) => arrType === type);
 

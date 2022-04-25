@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useStyles } from './about-us.style';
+import { useStyles } from './AboutUsPage.style';
 import { useAppStyles } from '../../components/app/app.styles';
 
 const AboutUsPage = () => {

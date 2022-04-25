@@ -69,7 +69,7 @@ const BusinessPage = lazy(() => import('../pages/business-page'));
 const AnswersQuestionsPage = lazy(() => import('../pages/answers-questions-page'));
 const GiftСertificate = lazy(() => import('../pages/gift-certificate'));
 const MyCertificates = lazy(() => import('../pages/my-certificates'));
-const AboutUsPage = lazy(() => import('../pages/about-us'));
+const AboutUsPage = lazy(() => import('../pages/AboutUsPage'));
 
 const Routes = () => {
   const styles = useStyles();

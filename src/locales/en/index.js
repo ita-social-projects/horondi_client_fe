@@ -29,6 +29,7 @@ import footer from './footer.json';
 import newsDetail from './newsDetail.json';
 import header from './header.json';
 import certificate from './certificate.json';
+import aboutUs from './about-us.json';
 
 export default {
   translations: {
@@ -62,6 +63,7 @@ export default {
     footer,
     newsDetail,
     header,
-    certificate
+    certificate,
+    aboutUs
   }
 };

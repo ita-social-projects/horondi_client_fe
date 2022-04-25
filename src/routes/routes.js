@@ -41,7 +41,8 @@ const {
   pathToChosenProduct,
   pathToAnswersQuestionsPage,
   pathToGiftСertificate,
-  pathToMyCertificates
+  pathToMyCertificates,
+  pathToAboutUs
 } = routes;
 
 const ImagesConstructor = lazy(() => import('../pages/images-constructor'));
@@ -68,6 +69,7 @@ const BusinessPage = lazy(() => import('../pages/business-page'));
 const AnswersQuestionsPage = lazy(() => import('../pages/answers-questions-page'));
 const GiftСertificate = lazy(() => import('../pages/gift-certificate'));
 const MyCertificates = lazy(() => import('../pages/my-certificates'));
+const AboutUsPage = lazy(() => import('../pages/about-us'));
 
 const Routes = () => {
   const styles = useStyles();
@@ -93,6 +95,7 @@ const Routes = () => {
               <Route path={pathToWishlist} exact component={Wishlist} />
               <Route path={pathToContacts} exact component={Contacts} />
               <Route path={pathToMaterials} exact component={Materials} />
+              <Route path={pathToAboutUs} exact component={AboutUsPage} />
               <Route path={pathToChosenPage} exact component={BusinessPage} />
               <Route path={pathToAnswersQuestionsPage} exact component={AnswersQuestionsPage} />
               <Route path={pathToGiftСertificate} exact component={GiftСertificate} />

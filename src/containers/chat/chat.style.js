@@ -21,6 +21,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     borderRadius: '29px',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     right: '12px',
+    border: 'none',
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
       boxShadow: ' 0 0 10px white',
@@ -29,6 +30,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       cursor: 'pointer',
       background: palette.yellow
+    },
+    '&:disabled': {
+      background: palette.lightGrayShade
     }
   }),
   iconsMessengers: {

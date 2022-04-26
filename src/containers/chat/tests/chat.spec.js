@@ -17,6 +17,7 @@ jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => [true, () => null]
 }));
+jest.mock('react-messenger-chat-plugin', () => 'react-messenger-chat-plugin');
 
 describe('chat tests', () => {
   it('Should render chat', () => {

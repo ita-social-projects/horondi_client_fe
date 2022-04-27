@@ -376,6 +376,9 @@ export const useStyles = makeStyles(({ palette }) => ({
       backgroundColor: palette.button.normal.backgroundColor,
       color: palette.button.hover.color,
       border: `1px solid ${palette.button.normal.borderColor}`
+    },
+    '& .MuiTab-textColorInherit': {
+      opacity: 1
     }
   },
   tab: {

@@ -93,5 +93,16 @@
   "tabs": {
     "withinUkraineDelivery": "Доставка у межах України",
     "worldWideDelivery": "Міжнародна доставка"
+  },
+  "worldWideDelivery": {
+    "topUkrpost": "Доставка Укрпоштою / 1-3 тижні",
+    "contactBy": "Для замовлення за межами України зв’яжіться зі мною у:",
+    "chooseMessenger": "Обрати месенджер *",
+    "messengerPhone": "Номер телефону *",
+    "country": "Країна *",
+    "state": "Штат/Провінція",
+    "city": "Місто *",
+    "street": "Вулиця *",
+    "cityCode": "Код міста *"
   }
 }

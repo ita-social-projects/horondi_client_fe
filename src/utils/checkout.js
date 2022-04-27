@@ -27,7 +27,14 @@ export const stateInitialValues = {
   district: '',
   regionId: '',
   districtId: '',
-  cityId: ''
+  cityId: '',
+  messenger: '',
+  messengerPhone: '',
+  worldWideCountry: '',
+  stateOrProvince: '',
+  worldWideCity: '',
+  worldWideStreet: '',
+  cityCode: ''
 };
 
 export const checkoutPropTypes = {
@@ -54,7 +61,14 @@ export const checkoutPropTypes = {
     house: PropTypes.string,
     flat: PropTypes.string,
     region: PropTypes.string,
-    district: PropTypes.string
+    district: PropTypes.string,
+    messenger: PropTypes.string,
+    messengerPhone: PropTypes.string,
+    worldWideCountry: PropTypes.string,
+    stateOrProvince: PropTypes.string,
+    worldWideCity: PropTypes.string,
+    worldWideStreet: PropTypes.string,
+    cityCode: PropTypes.string
   }),
   errors: PropTypes.shape({
     firstName: PropTypes.string,
@@ -86,7 +100,14 @@ export const checkoutPropTypes = {
     house: PropTypes.string,
     flat: PropTypes.string,
     region: PropTypes.string,
-    district: PropTypes.string
+    district: PropTypes.string,
+    messenger: PropTypes.string,
+    messengerPhone: PropTypes.string,
+    worldWideCountry: PropTypes.string,
+    stateOrProvince: PropTypes.string,
+    worldWideCity: PropTypes.string,
+    worldWideStreet: PropTypes.string,
+    cityCode: PropTypes.string
   })
 };
 
@@ -132,6 +153,13 @@ export const orderInputData = (data, deliveryType, cartItems) => ({
     street: data.street || '',
     house: data.house || '',
     flat: data.flat || '',
+    messenger: data.messenger || '',
+    messengerPhone: data.messengerPhone || '',
+    worldWideCountry: data.worldWideCountry || '',
+    stateOrProvince: data.stateOrProvince || '',
+    worldWideCity: data.worldWideCity || '',
+    worldWideStreet: data.worldWideStreet || '',
+    cityCode: data.cityCode || '',
     byCourier:
       deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
       deliveryType === deliveryTypes.UKRPOSTCOURIER

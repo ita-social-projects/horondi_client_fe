@@ -102,7 +102,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
 
   const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     enableReinitialize: true,
-    validationSchema: validationSchema(deliveryType, t),
+    validationSchema: validationSchema(deliveryType, countryOption, t),
     initialValues,
 
     onSubmit: (data) => {

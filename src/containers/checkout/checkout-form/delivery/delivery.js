@@ -49,7 +49,13 @@ const Delivery = ({
       )}
     </TabPanel>
     <TabPanel value={countryOption} index={countryOptions.WORLDWIDE}>
-      <Worldwide />
+      <Worldwide
+        errors={errors}
+        touched={touched}
+        values={values}
+        handleChange={handleChange}
+        setFieldValue={setFieldValue}
+      />
     </TabPanel>
   </>
 );

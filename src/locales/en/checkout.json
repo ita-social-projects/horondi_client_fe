@@ -93,5 +93,16 @@
   "tabs": {
     "withinUkraineDelivery": "Delivery within Ukraine",
     "worldWideDelivery": "Worldwide delivery"
+  },
+  "worldWideDelivery": {
+    "topUkrpost": "Delivery by Ukrposhta / 1-3 weeks",
+    "contactBy": "For worldwide delivery, contact me on:",
+    "chooseMessenger": "Choose messenger *",
+    "messengerPhone": "Phone number *",
+    "country": "Country *",
+    "state": "State/Province",
+    "city": "City *",
+    "street": "Street *",
+    "cityCode": "Area code *"
   }
 }

@@ -17,14 +17,33 @@ jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => [true, () => null]
 }));
-jest.mock('react-messenger-chat-plugin', () => 'react-messenger-chat-plugin');
+jest.mock('react-messenger-chat-plugin', () => ({
+  showMessenger: () => jest.mock(),
+  hideMessenger: () => jest.mock()
+}));
 
 describe('chat tests', () => {
-  it('Should render chat', () => {
-    useQuery.mockImplementation(() => ({
-      ...useQueryData
-    }));
+  useQuery.mockImplementation(() => ({
+    ...useQueryData
+  }));
+
+  beforeEach(() => {
     wrapper = shallow(<Chat />);
+  });
+
+  it('Should render chat', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('Should render button', () => {
+    const button = wrapper.find('button');
+
+    expect(button).toBeDefined();
+  });
+
+  it('Button should be disabled', () => {
+    wrapper.find('button').prop('onClick')();
+
+    expect(wrapper.find('button').prop('disabled')).toBe(true);
   });
 });

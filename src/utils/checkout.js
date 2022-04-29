@@ -6,7 +6,7 @@ import {
   deliveryTypes,
   MATERIAL_UI_COLOR,
   SESSION_STORAGE
-} from '../configs';
+  , countryOptions } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
@@ -133,42 +133,64 @@ const productItemsInput = (cartItems) =>
     }
   }));
 
-export const orderInputData = (data, deliveryType, cartItems) => ({
-  recipient: {
+export const orderInputData = (data, deliveryType, cartItems, countryOption) => {
+  const recipient = {
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,
     phoneNumber: data.phoneNumber
-  },
-  delivery: {
-    sentBy: deliveryType,
-    invoiceNumber: data.invoiceNumber || '',
-    courierOffice: data.courierOffice || '',
-    region: data.region || '',
-    district: data.district || '',
-    regionId: data.regionId || '',
-    districtId: data.districtId || '',
-    cityId: data.cityId || '',
-    city: data.city || '',
-    street: data.street || '',
-    house: data.house || '',
-    flat: data.flat || '',
-    messenger: data.messenger || '',
-    messengerPhone: data.messengerPhone || '',
-    worldWideCountry: data.worldWideCountry || '',
-    stateOrProvince: data.stateOrProvince || '',
-    worldWideCity: data.worldWideCity || '',
-    worldWideStreet: data.worldWideStreet || '',
-    cityCode: data.cityCode || '',
-    byCourier:
-      deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER
-  },
-  items: productItemsInput(cartItems),
-  paymentMethod:
-    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash,
-  userComment: data.userComment
-});
+  };
+  const items = productItemsInput(cartItems);
+  const paymentMethod =
+    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash;
+  const {userComment} = data;
+
+  if (countryOption === countryOptions.WITHIN_UKRAINE) {
+    return {
+      recipient,
+      delivery: {
+        sentBy: deliveryType,
+        invoiceNumber: data.invoiceNumber || '',
+        courierOffice: data.courierOffice || '',
+        region: data.region || '',
+        district: data.district || '',
+        regionId: data.regionId || '',
+        districtId: data.districtId || '',
+        cityId: data.cityId || '',
+        city: data.city || '',
+        street: data.street || '',
+        house: data.house || '',
+        flat: data.flat || '',
+        byCourier:
+          deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+          deliveryType === deliveryTypes.UKRPOSTCOURIER
+      },
+      items,
+      paymentMethod,
+      userComment
+    };
+  }
+
+  if (countryOption === countryOptions.WORLDWIDE) {
+    return {
+      recipient,
+      delivery: {
+        sentBy: deliveryTypes.WORLDWIDE,
+        messenger: data.messenger || '',
+        messengerPhone: data.messengerPhone || '',
+        worldWideCountry: data.worldWideCountry || '',
+        stateOrProvince: data.stateOrProvince || '',
+        worldWideCity: data.worldWideCity || '',
+        worldWideStreet: data.worldWideStreet || '',
+        cityCode: data.cityCode || '',
+        byCourier: false
+      },
+      items,
+      paymentMethod,
+      userComment
+    };
+  }
+};
 
 export const checkoutFormBtnValue = (values) =>
   values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash

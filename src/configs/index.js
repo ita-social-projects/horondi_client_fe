@@ -42,7 +42,8 @@ export const deliveryTypes = {
   SELFPICKUP: 'SELFPICKUP',
   NOVAPOSTCOURIER: 'NOVAPOSTCOURIER',
   UKRPOSTCOURIER: 'UKRPOSTCOURIER',
-  COURIER: 'COURIER'
+  COURIER: 'COURIER',
+  WORLDWIDE: 'WORLDWIDE'
 };
 
 export const countryOptions = {

@@ -110,13 +110,13 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
         dispatch(addPaymentMethod(checkoutPayMethod.card));
         dispatch(
           getFondyData({
-            order: orderInputData(data, deliveryType, cartItems, language),
+            order: orderInputData(data, deliveryType, cartItems, countryOption),
             currency: getCurrentCurrency(currency),
             amount: String(totalPriceToPay)
           })
         );
       } else {
-        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language)));
+        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, countryOption)));
         dispatch(addPaymentMethod(checkoutPayMethod.cash));
       }
       clearSessionStorage();
@@ -231,11 +231,17 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
                   value={values.paymentMethod}
                   onChange={handleChange}
                 >
-                  {Object.values(checkoutPayMethod).map((value) => (
-                    <MenuItem key={value} value={value}>
-                      {t(`checkout.checkoutPayment.${value}`)}
+                  {countryOption === countryOptions.WORLDWIDE ? (
+                    <MenuItem value={checkoutPayMethod.card}>
+                      {t(`checkout.checkoutPayment.${checkoutPayMethod.card}`)}
                     </MenuItem>
-                  ))}
+                  ) : (
+                    Object.values(checkoutPayMethod).map((value) => (
+                      <MenuItem key={value} value={value}>
+                        {t(`checkout.checkoutPayment.${value}`)}
+                      </MenuItem>
+                    ))
+                  )}
                 </Select>
                 {touched.paymentMethod && errors.paymentMethod && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>

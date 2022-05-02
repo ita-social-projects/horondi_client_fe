@@ -176,7 +176,11 @@ const updateUserById = async ({ user, id, upload, deleteAvatar }) => {
           district
           zipcode
         }
-        confirmed
+        configs {
+          language
+          currency
+          theme
+        }
       }
     }
   `;
@@ -274,7 +278,7 @@ const regenerateUserTokenPairs = async (refreshToken) => {
   return result?.data?.regenerateAccessToken;
 };
 
-const getWishlistByUserId = async (id) => {
+const getWishlistByUserId = async () => {
   const getWishlistByUseQuery = `
   query {
     getWishlistByUserId {
@@ -337,7 +341,7 @@ const getWishlistByUserId = async (id) => {
     }
   }
 `;
-  const result = await getItems(getWishlistByUseQuery, { id });
+  const result = await getItems(getWishlistByUseQuery);
 
   return result?.data?.getWishlistByUserId;
 };

@@ -77,7 +77,7 @@ describe('user sagas tests', () => {
       .provide([
         [call(getGoogleUser, payload), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
@@ -113,7 +113,7 @@ describe('user sagas tests', () => {
       .provide([
         [call(getFacebookUser, payload), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
@@ -148,7 +148,7 @@ describe('user sagas tests', () => {
       .provide([
         [call(loginUser, { user: { email, pass, rememberMe } }), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
       .run()

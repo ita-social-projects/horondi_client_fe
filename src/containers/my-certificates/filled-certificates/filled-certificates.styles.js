@@ -61,12 +61,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     ...button,
     width: '345px',
     padding: '12px',
-    background: palette.white,
     border: `1px solid ${palette.button.normal.borderColor}`,
-    color: palette.black,
+    color: palette.textColor,
+    backgroundColor: palette.backgroundColor,
     '&:hover': {
-      backgroundColor: palette.button.hover.backgroundColor,
-      color: palette.button.hover.color
+      backgroundColor: palette.button.hoverSecondary.backgroundColor,
+      color: palette.button.hoverSecondary.color
     }
   },
   certificateTable: {

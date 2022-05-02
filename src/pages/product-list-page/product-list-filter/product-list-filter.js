@@ -25,6 +25,7 @@ const ProductListFilter = ({ filterParams }) => {
   const [priceRange, setPriceRange] = useState({});
   const [filters, setFilters] = useState({});
   const filtersOptions = useProductFilters(filterParams, filters);
+  const [resetPrices, setResetPrices] = useState(false);
 
   const searchParams = new URLSearchParams(search);
 
@@ -48,6 +49,7 @@ const ProductListFilter = ({ filterParams }) => {
     const sortQuery = searchParams.get(TEXT_FIELDS.SORT);
     const quantityPerPage = searchParams.get(countPerPage);
     history.push(`${pathToCategory}?page=1&sort=${sortQuery}&countPerPage=${quantityPerPage}`);
+    setResetPrices((prev) => !prev);
   };
 
   const filterButtons = Object.values(filtersOptions).map(
@@ -69,7 +71,7 @@ const ProductListFilter = ({ filterParams }) => {
         <Button className={styles.button} data-cy='clear_filter_button' onClick={handleClearFilter}>
           {t('common.clearFilter')}
         </Button>
-        <PriceFilter priceRange={priceRange} />
+        <PriceFilter priceRange={priceRange} resetPrices={resetPrices} />
         <HotItemFilter />
         {filterButtons}
       </Grid>

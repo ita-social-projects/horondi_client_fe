@@ -67,7 +67,7 @@ function* setLoginUser(user) {
   const purchasedProducts = yield call(getPurchasedProducts, user._id);
   setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
   setToLocalStorage(ACCESS_TOKEN, user.token);
-  const wishlist = yield call(getWishlistByUserId, user._id);
+  const wishlist = yield call(getWishlistByUserId);
   setToLocalStorage(WISHLIST_KEY, wishlist.products);
   yield put(setNewWishlist(wishlist.products));
   yield put(setUser({ ...user, purchasedProducts, wishlist }));

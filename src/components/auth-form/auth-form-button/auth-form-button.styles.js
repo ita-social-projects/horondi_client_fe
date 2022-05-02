@@ -8,8 +8,8 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.textColor,
     color: theme.palette.backgroundColor,
     '&:hover': {
-      background: theme.palette.textColor,
-      color: theme.palette.backgroundColor
+      color: theme.palette.button.hover.color,
+      backgroundColor: theme.palette.button.hover.backgroundColor
     },
     '&:disabled': {
       color: theme.palette.button.disabled.backgroundColor

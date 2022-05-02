@@ -43,7 +43,10 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
         id='filled-basic'
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         onChange={setQuantityFromInput}
-        inputProps={{ style: { textAlign: 'center', width: '20px', height: '3px' } }}
+        inputProps={{
+          style: { textAlign: 'center', width: '20px', height: '3px' },
+          'data-testid': 'text'
+        }}
       />
       <Button
         className={styles.button}

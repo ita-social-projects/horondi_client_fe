@@ -12,6 +12,12 @@ export const useStyles = makeStyles(() => ({
       minHeight: '130px'
     }
   },
+  imgCanvasItem: {
+    maxHeight: '165px',
+    minHeight: '130px',
+    position: 'relative',
+    left: '40px'
+  },
   price: {
     fontSize: '20px',
     lineHeight: '28px',

@@ -40,14 +40,14 @@ export const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
     textAlign: 'center',
     fontSize: '1rem',
-    backgroundColor: theme.palette.textColor,
-    color: theme.palette.backgroundColor,
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    color: theme.palette.button.normal.color,
     margin: '14px 0 18px 0',
     borderRadius: '4px',
     fontWeight: '600',
     '&:hover': {
-      backgroundColor: theme.palette.textColor,
-      color: theme.palette.backgroundColor
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
     },
     '@media (max-width: 600px)': {
       padding: '0.2rem 0.6rem',

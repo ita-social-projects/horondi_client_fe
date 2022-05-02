@@ -8,9 +8,9 @@ import { push } from 'connected-react-router';
 import { useDispatch } from 'react-redux';
 import { useStyles } from './wishlist-item.styles';
 import { IMG_URL } from '../../../configs';
-import { getCurrencySign } from '../../../utils/currency';
 import routes from '../../../configs/routes';
 import ThemeContext from '../../../context/theme-context';
+import { useCurrency } from '../../../hooks/use-currency';
 
 const { pathToProducts } = routes;
 
@@ -24,11 +24,12 @@ const WishlistItem = ({
 }) => {
   const { t } = useTranslation();
   const [isLightTheme] = useContext(ThemeContext);
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
   const styles = useStyles(isLightTheme);
   const dispatch = useDispatch();
   const { addToCart } = cartOperations;
   const { pathToCart } = routes;
-  const currencySign = getCurrencySign[currency.name];
+  const currencySign = getCurrencySign();
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);
@@ -74,7 +75,7 @@ const WishlistItem = ({
     return availableSizes.length ? (
       <div className={styles.price}>
         {currencySign}
-        {availableSizes[0].price}
+        {getPriceWithCurrency(availableSizes[0].price)}
       </div>
     ) : (
       <>{t('product.sizeNotAvailable')}</>

@@ -6,7 +6,6 @@ import errorOrLoadingHandler from '../utils/errorOrLoadingHandler';
 const initialValues = {
   currency: 'UAH',
   currencyHandler: () => {},
-  getPriceWithCurrency: () => {},
   currencies: {}
 };
 
@@ -24,17 +23,12 @@ const CurrencyContextProvider = ({ children }) => {
 
   const currencyHandler = (event) => {
     const newCurrencyName = event.target.value;
-    const newCurrency = currencies[newCurrencyName].name;
 
-    return setCurrentCurrency(newCurrency);
+    return setCurrentCurrency(newCurrencyName);
   };
 
-  const getPriceWithCurrency = (value) => Math.round(value * currencies[currentCurrency].exchangeRate);
-
   return (
-    <CurrencyContext.Provider
-      value={{ currency: currentCurrency, currencyHandler, getPriceWithCurrency, currencies }}
-    >
+    <CurrencyContext.Provider value={{ currency: currentCurrency, currencyHandler, currencies }}>
       {children}
     </CurrencyContext.Provider>
   );

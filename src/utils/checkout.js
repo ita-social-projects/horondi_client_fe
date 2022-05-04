@@ -177,6 +177,7 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       recipient,
       delivery: {
         sentBy: deliveryTypes.WORLDWIDE,
+        invoiceNumber: data.invoiceNumber || '',
         messenger: data.messenger || '',
         messengerPhone: data.messengerPhone || '',
         worldWideCountry: data.worldWideCountry || '',

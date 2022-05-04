@@ -78,12 +78,19 @@ export const validationSchema = (deliveryType, countryOption) => {
     return Yup.object().shape({
       ...base,
       messenger: Yup.string().required('error.requiredField'),
-      messengerPhone: Yup.string().required('error.requiredField'),
+      messengerPhone: Yup.string()
+        .matches(formRegExp.wholeNumber, 'error.onlyNumber')
+        .min(9, 'error.profile.phoneTooShort')
+        .required('error.requiredField')
+        .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
+        .max(14, 'error.profile.phoneTooLong'),
       worldWideCountry: Yup.string().required('error.requiredField'),
       stateOrProvince: Yup.string(),
       worldWideCity: Yup.string().required('error.requiredField'),
       worldWideStreet: Yup.string().required('error.requiredField'),
-      cityCode: Yup.string().required('error.requiredField')
+      cityCode: Yup.string()
+        .required('error.requiredField')
+        .matches(formRegExp.wholeNumber, 'checkout.checkoutError.cityCode')
     });
   }
 };

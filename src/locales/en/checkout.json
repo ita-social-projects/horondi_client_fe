@@ -88,7 +88,8 @@
     "street": "Field should contain from 2 to 100 characters",
     "house": "Min value is 1 character",
     "flat": "Min value is 1 character",
-    "onlyLetter": "Field should contain only letters"
+    "onlyLetter": "Field should contain only letters",
+    "cityCode": "Field should contain only numbers"
   },
   "tabs": {
     "withinUkraineDelivery": "Delivery within Ukraine",

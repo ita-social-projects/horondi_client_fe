@@ -1,14 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControl, InputLabel, Select, MenuItem, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { messengers, phones } from './const';
-import { TEXT_FIELD_VARIANT } from '../../../../../configs';
+import { messengers } from './const';
+import { TEXT_FIELD_VARIANT, RESET } from '../../../../../configs';
 import { useStyles } from './worldwide.styles';
+import WorldwideService from '../../../../../services/worldwide-delivery.service';
 
 const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => {
-  const { t } = useTranslation();
   const styles = useStyles();
+  const { t } = useTranslation();
+
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [statesOptions, setStatesOptions] = useState([]);
+  const [citiesOptions, setCitiesOptions] = useState([]);
+
+  const [countryInputState, setCountryInput] = useState('');
+  const [stateOrProvinceInput, setStateOrProvinceInput] = useState('');
+
+  const handleCityInputChange = (value, reason) => {
+    if (reason !== RESET || (reason === RESET && value)) {
+      setFieldValue('worldWideCity', value);
+    }
+  };
+
+  useEffect(() => {
+    WorldwideService.getCountries().then(setCountryOptions);
+  }, []);
+
+  useEffect(() => {
+    if (values.worldWideCountry) {
+      WorldwideService.getStatesByCountry(values.worldWideCountry).then(setStatesOptions);
+    } else {
+      setFieldValue('stateOrProvince', '');
+      setFieldValue('worldWideCity', '');
+      setFieldValue('worldWideStreet', '');
+      setFieldValue('cityCode', '');
+      setStatesOptions([]);
+      setCitiesOptions([]);
+    }
+  }, [values.worldWideCountry]);
+
+  useEffect(() => {
+    if (values.stateOrProvince) {
+      WorldwideService.getCitiesByState(values.worldWideCountry, values.stateOrProvince).then(
+        setCitiesOptions
+      );
+    } else {
+      setFieldValue('worldWideCity', '');
+      setFieldValue('worldWideStreet', '');
+      setFieldValue('cityCode', '');
+      setCitiesOptions([]);
+    }
+  }, [values.stateOrProvince]);
 
   return (
     <div className={styles.worldwide}>
@@ -16,16 +60,16 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       <p className={styles.contactBy}>{t('checkout.worldWideDelivery.contactBy')}</p>
       <div className={styles.selectWrapper}>
         <FormControl
+          className={styles.formControl}
           error={touched.messenger && !!errors.messenger}
           variant={TEXT_FIELD_VARIANT.OUTLINED}
-          className={styles.formControl}
         >
           <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
             {t('checkout.worldWideDelivery.chooseMessenger')}
           </InputLabel>
           <Select
-            label={t('checkout.worldWideDelivery.chooseMessenger')}
             className={styles.paymentSelect}
+            label={t('checkout.worldWideDelivery.chooseMessenger')}
             name='messenger'
             value={values.messenger}
             onChange={handleChange}
@@ -40,26 +84,16 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
             <div className={styles.error}>{t(errors.messenger)}</div>
           )}
         </FormControl>
-        <FormControl
-          error={touched.messengerPhone && !!errors.messengerPhone}
-          variant={TEXT_FIELD_VARIANT.OUTLINED}
-          className={styles.formControl}
-        >
-          <InputLabel variant={TEXT_FIELD_VARIANT.OUTLINED}>
-            {t('checkout.worldWideDelivery.messengerPhone')}
-          </InputLabel>
-          <Select
+        <FormControl>
+          <TextField
+            className={styles.formControl}
+            error={touched.messengerPhone && !!errors.messengerPhone}
             label={t('checkout.worldWideDelivery.messengerPhone')}
-            name='messengerPhone'
+            variant={TEXT_FIELD_VARIANT.OUTLINED}
             value={values.messengerPhone}
+            name='messengerPhone'
             onChange={handleChange}
-          >
-            {phones.map((phone) => (
-              <MenuItem key={phone} value={phone}>
-                {phone}
-              </MenuItem>
-            ))}
-          </Select>
+          />
           {touched.messengerPhone && errors.messengerPhone && (
             <div className={styles.error}>{t(errors.messengerPhone)}</div>
           )}
@@ -69,8 +103,10 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       <div className={styles.addressWrapper}>
         <Autocomplete
           className={styles.addressInput}
-          options={['country1', 'country2']}
-          inputValue={values.worldWideCountry}
+          options={countryOptions}
+          value={values.worldWideCountry}
+          inputValue={countryInputState}
+          onInputChange={(_, value) => setCountryInput(value)}
           onChange={(_, value) => setFieldValue('worldWideCountry', value || '')}
           renderInput={(params) => (
             <TextField
@@ -86,8 +122,10 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
         )}
         <Autocomplete
           className={styles.addressInput}
-          options={['state1', 'state2']}
-          inputValue={values.stateOrProvince}
+          options={statesOptions}
+          value={values.stateOrProvince}
+          inputValue={stateOrProvinceInput}
+          onInputChange={(_, value) => setStateOrProvinceInput(value)}
           onChange={(_, value) => setFieldValue('stateOrProvince', value || '')}
           disabled={!values.worldWideCountry}
           renderInput={(params) => (
@@ -100,8 +138,11 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
         />
         <Autocomplete
           className={styles.addressInput}
-          options={['city1', 'city2']}
+          options={citiesOptions}
           inputValue={values.worldWideCity}
+          onInputChange={(e, value, reason) => {
+            handleCityInputChange(value, reason);
+          }}
           onChange={(_, value) => setFieldValue('worldWideCity', value || '')}
           disabled={!values.worldWideCountry}
           renderInput={(params) => (
@@ -116,38 +157,28 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
         {touched.worldWideCity && errors.worldWideCity && (
           <div className={styles.error}>{t(errors.worldWideCity)}</div>
         )}
-        <Autocomplete
+        <TextField
           className={styles.addressInput}
-          options={['street1', 'street2']}
-          inputValue={values.worldWideStreet}
-          onChange={(_, value) => setFieldValue('worldWideStreet', value || '')}
+          error={touched.worldWideStreet && !!errors.worldWideStreet}
+          label={t('checkout.worldWideDelivery.street')}
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
+          value={values.worldWideStreet}
+          name='worldWideStreet'
+          onChange={handleChange}
           disabled={!values.worldWideCity}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              label={t('checkout.worldWideDelivery.street')}
-              error={touched.worldWideStreet && !!errors.worldWideStreet}
-            />
-          )}
         />
         {touched.worldWideStreet && errors.worldWideStreet && (
           <div className={styles.error}>{t(errors.worldWideStreet)}</div>
         )}
-        <Autocomplete
+        <TextField
           className={`${styles.addressInput} ${styles.addressInputCode}`}
-          options={['111', '222']}
-          inputValue={values.cityCode}
-          onChange={(_, value) => setFieldValue('cityCode', value || '')}
+          error={touched.cityCode && !!errors.cityCode}
+          label={t('checkout.worldWideDelivery.cityCode')}
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
+          value={values.cityCode}
+          name='cityCode'
+          onChange={handleChange}
           disabled={!values.worldWideStreet}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              label={t('checkout.worldWideDelivery.cityCode')}
-              error={touched.cityCode && !!errors.cityCode}
-            />
-          )}
         />
         {touched.cityCode && errors.cityCode && (
           <div className={styles.error}>{t(errors.cityCode)}</div>

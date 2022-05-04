@@ -5,8 +5,9 @@ import {
   DEFAULT_CURRENCY,
   deliveryTypes,
   MATERIAL_UI_COLOR,
-  SESSION_STORAGE
-  , countryOptions } from '../configs';
+  SESSION_STORAGE,
+  countryOptions
+} from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
 
@@ -143,7 +144,7 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
   const items = productItemsInput(cartItems);
   const paymentMethod =
     data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash;
-  const {userComment} = data;
+  const { userComment } = data;
 
   if (countryOption === countryOptions.WITHIN_UKRAINE) {
     return {
@@ -242,7 +243,8 @@ export const updateInitialValues = (data, deliveryType) => {
     firstName: firstName || '',
     lastName: lastName || '',
     email: email || '',
-    phoneNumber: phoneNumber || ''
+    phoneNumber: phoneNumber || '',
+    messengerPhone: phoneNumber || ''
   };
 
   const initValuesForNovaPost = {

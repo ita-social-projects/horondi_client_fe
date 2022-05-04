@@ -51,6 +51,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   addressInput: {
     marginBottom: '15px',
+    width: '100%',
     '& label.Mui-focused': {
       color: palette.textColor
     },

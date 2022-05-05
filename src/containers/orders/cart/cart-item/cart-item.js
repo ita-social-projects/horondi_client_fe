@@ -13,14 +13,14 @@ import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 
 import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
-import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
-import { calcPriceForCart, priceCalculation } from '../../../../utils/priceCalculating';
+import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import Loader from '../../../../components/loader';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
 import { CurrencyContext } from '../../../../context/currency-context';
+import { useCurrency } from '../../../../hooks/use-currency';
 
 const { pathToProducts } = routes;
 
@@ -33,13 +33,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useContext(CurrencyContext);
+  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const [inputValue, setInputValue] = useState(item.quantity);
-  const currencySign = getCurrencySign[currency.name];
+  const currencySign = getCurrencySign();
   const [currentSize, setCurrentSize] = useState(item.sizeAndPrice.size._id);
   const [firstlyMounted, toggleFirstlyMounted] = useState(false);
-  const [currentPrice, setCurrentPrice] = useState(
-    priceCalculation(item.sizeAndPrice.price, currency)
-  );
+  const [currentPrice, setCurrentPrice] = useState(getPriceWithCurrency(item.sizeAndPrice.price));
   const {
     changeQuantity,
     changeSize,
@@ -147,9 +146,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     setCurrentSize(itemData.sizeAndPrice.size._id);
 
     if (promoCode) {
-      setCurrentPrice(getProductPriceWithPromoCode(item.id, currency, promoCode));
+      setCurrentPrice(getProductPriceWithPromoCode(item.id, promoCode));
     } else {
-      setCurrentPrice(getProductPrice(item.id, currency));
+      setCurrentPrice(getProductPrice(item.id));
     }
   }, [promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice, getCartItem]);
 
@@ -168,7 +167,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
           <div className={styles.promo}>
             <s>
               {currencySign}
-              {Math.round(calcPriceForCart(item.sizeAndPrice.price[currency].value, inputValue))}
+              {Math.round(
+                calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)
+              )}
             </s>
             <span>
               {currencySign}
@@ -182,7 +183,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     return (
       <>
         {currencySign}
-        {Math.round(calcPriceForCart(currentPrice, inputValue))}
+        {calcPriceForCart(currentPrice, inputValue)}
       </>
     );
   };
@@ -247,7 +248,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       <TableCell data-cy='cart-item-description'>
         <div className={styles.price}>
           {currencySign}
-          {Math.round(currentPrice)}
+          {currentPrice}
         </div>
       </TableCell>
       <TableCell>

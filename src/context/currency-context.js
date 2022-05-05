@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { getAllCurrencies } from './constants';
 import errorOrLoadingHandler from '../utils/errorOrLoadingHandler';
@@ -15,17 +15,21 @@ const CurrencyContextProvider = ({ children }) => {
   const [currencies, setCurrencies] = useState({});
   const [currentCurrency, setCurrentCurrency] = useState('UAH');
 
-  const { error } = useQuery(getAllCurrencies, {
-    onCompleted: (data) => setCurrencies({ ...data.getAllCurrencies[0].convertOptions })
-  });
+  const { error, loading, data } = useQuery(getAllCurrencies);
 
-  if (error) return errorOrLoadingHandler(error);
+  useEffect(() => {
+    if (data) {
+      setCurrencies({ ...data.getAllCurrencies[0].convertOptions });
+    }
+  }, [data]);
 
   const currencyHandler = (event) => {
     const newCurrencyName = event.target.value;
 
     return setCurrentCurrency(newCurrencyName);
   };
+
+  if (error || loading) return errorOrLoadingHandler(error, loading);
 
   return (
     <CurrencyContext.Provider value={{ currency: currentCurrency, currencyHandler, currencies }}>

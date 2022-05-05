@@ -14,14 +14,7 @@ import { useCurrency } from '../../../hooks/use-currency';
 
 const { pathToProducts } = routes;
 
-const WishlistItem = ({
-  item,
-  setModalVisibility,
-  setModalItem,
-  cartOperations,
-  currency,
-  isInCart
-}) => {
+const WishlistItem = ({ item, setModalVisibility, setModalItem, cartOperations, isInCart }) => {
   const { t } = useTranslation();
   const [isLightTheme] = useContext(ThemeContext);
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();

@@ -12,18 +12,19 @@ import OrderTable from '../../order/order-table';
 import { useStyles } from './filled-cart.styles';
 import { Loader } from '../../../../components/loader/loader';
 import PathBack from '../path-back/path-back';
-import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
 import { addProductFromConstructor } from '../../../../pages/cart/operations/cart.mutations';
 import { CurrencyContext } from '../../../../context/currency-context';
+import { useCurrency } from '../../../../hooks/use-currency';
 
 const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
+  const { getCurrencySign } = useCurrency();
 
   const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
@@ -45,7 +46,7 @@ const FilledCart = ({ items, cartOperations }) => {
     }
   });
 
-  const currencySign = getCurrencySign[currency.name];
+  const currencySign = getCurrencySign();
   const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
 
   const checkPromoCode = () => {
@@ -55,9 +56,7 @@ const FilledCart = ({ items, cartOperations }) => {
   };
 
   useEffect(() => {
-    promoCode
-      ? setPrice(getTotalPricesWithPromoCode(promoCode))
-      : setPrice(getTotalPrice(currency));
+    promoCode ? setPrice(getTotalPricesWithPromoCode(promoCode)) : setPrice(getTotalPrice());
   }, [items, currency, getTotalPrice, promoCode, getTotalPricesWithPromoCode]);
 
   if (cartLoading || productFromConstructorLoading) {
@@ -153,7 +152,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   <span>{t('cart.saving')}</span>
                   <div>
                     {currencySign}
-                    {getTotalPrice(currency) - getTotalPricesWithPromoCode(promoCode)}
+                    {getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
                   </div>
                 </div>
               )}

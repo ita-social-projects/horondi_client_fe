@@ -8,9 +8,11 @@ import {
 import { calcPriceForCart } from '../utils/priceCalculating';
 import { CART_KEY } from '../configs';
 import { setCart } from '../redux/common-store/common.actions';
+import { useCurrency } from './use-currency';
 
 export const useCart = (user = null) => {
   const dispatch = useDispatch();
+  const { getPriceWithCurrency } = useCurrency();
 
   const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY) || []);
 
@@ -43,7 +45,10 @@ export const useCart = (user = null) => {
       }
       return [Math.round(price), item.quantity];
     });
-    return newArr.reduce((acc, item) => acc + calcPriceForCart(item[0], item[1]), 0);
+    return newArr.reduce(
+      (acc, item) => acc + getPriceWithCurrency(calcPriceForCart(item[0], item[1])),
+      0
+    );
   };
 
   const getProductPriceWithPromoCode = (id, promoCode) => {
@@ -55,14 +60,13 @@ export const useCart = (user = null) => {
     const { price } = product.sizeAndPrice;
 
     if (isAllowCategory) {
-      return Math.round(price - (price / 100) * discount);
+      return getPriceWithCurrency(Math.round(price - (price / 100) * discount));
     }
 
-    return price;
+    return getPriceWithCurrency(price);
   };
 
-  const getProductPrice = (id, currency) =>
-    getCartItem(id).sizeAndPrice.price * currency.exchangeRate;
+  const getProductPrice = (id) => getPriceWithCurrency(getCartItem(id).sizeAndPrice.price);
 
   const setCartItem = (id, item) => {
     const newCart = cart.map((cartItem) => (cartItem.id === id ? item : cartItem));
@@ -89,10 +93,10 @@ export const useCart = (user = null) => {
     );
   };
 
-  const getTotalPrice = (currency) =>
+  const getTotalPrice = () =>
     cart.reduce(
       (acc, item) =>
-        acc + calcPriceForCart(item.sizeAndPrice.price * currency.exchangeRate, item.quantity),
+        acc + calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), item.quantity),
       0
     );
 

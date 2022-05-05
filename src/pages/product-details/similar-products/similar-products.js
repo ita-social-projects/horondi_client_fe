@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
-=======
-import React, { useContext, useState } from 'react';
->>>>>>> a69ba7ad (Refactoring/prices-catalog (#1895))
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import { useQuery } from '@apollo/client';

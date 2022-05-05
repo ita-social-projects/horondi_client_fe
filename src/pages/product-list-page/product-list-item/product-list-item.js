@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -12,16 +12,15 @@ import { IMG_URL } from '../../../configs';
 import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../configs/routes';
-import { getCurrencySign } from '../../../utils/currency';
-import { CurrencyContext } from '../../../context/currency-context';
+import { useCurrency } from '../../../hooks/use-currency';
 
 const ProductListItem = ({ product }) => {
   const { t } = useTranslation();
   const { palette } = useTheme();
 
-  const { currency } = useContext(CurrencyContext);
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
 
-  const currencySign = getCurrencySign[currency.name];
+  const currencySign = getCurrencySign();
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
 
@@ -41,7 +40,7 @@ const ProductListItem = ({ product }) => {
       ({ size, price }) => size.available && { size, price }
     );
 
-    const price = Math.round(availableSizes[0]?.price * currency.exchangeRate);
+    const price = getPriceWithCurrency(availableSizes[0]?.price);
 
     return product.available ? (
       <div className={styles.price}>

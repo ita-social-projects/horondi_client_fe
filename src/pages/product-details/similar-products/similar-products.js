@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import 'react-multi-carousel/lib/styles.css';
 import Carousel from 'react-multi-carousel';
 import { useQuery } from '@apollo/client';
@@ -9,15 +9,14 @@ import { useStyles } from './similar-products.styles';
 import { RESPONSIVE_PDP } from '../constants';
 import SimilarProductsItem from './similar-products-item';
 import { getFullProducts, similarProductForCart } from '../../../utils/productDetails';
-import { getCurrencySign } from '../../../utils/currency';
 import { getFilteredProductsQuery } from '../../product-list-page/operations/product-list.queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
-import { CurrencyContext } from '../../../context/currency-context';
+import { useCurrency } from '../../../hooks/use-currency';
 
 const SimilarProducts = ({ cartList, product }) => {
   const [similarProducts, setSimilarProducts] = useState([]);
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
   const styles = useStyles();
-  const { currency } = useContext(CurrencyContext);
 
   const { error, loading } = useQuery(getFilteredProductsQuery, {
     onCompleted: (data) => setSimilarProducts(data.getProducts.items)
@@ -25,7 +24,7 @@ const SimilarProducts = ({ cartList, product }) => {
 
   const { t } = useTranslation();
 
-  const currencySign = getCurrencySign[currency.name];
+  const currencySign = getCurrencySign();
   let imagesList;
 
   if (error || loading) return errorOrLoadingHandler(error, loading);
@@ -44,13 +43,12 @@ const SimilarProducts = ({ cartList, product }) => {
 
   imagesList = imagesList.map(({ _id, images, rate, sizes, translationsKey }) => {
     const availableSize =
-      sizes &&
-      sizes.filter(({ size, price }) => size.available && price)[0]?.price * currency.exchangeRate;
+      sizes && sizes.filter(({ size, price }) => size.available && price)[0]?.price;
 
     const checkPrice = () =>
       availableSize ? (
         <div className={styles.price}>
-          {Math.round(availableSize)}
+          {getPriceWithCurrency(availableSize)}
           <span>{currencySign} </span>
         </div>
       ) : (

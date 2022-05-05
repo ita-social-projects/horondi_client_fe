@@ -17,7 +17,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useAppStyles } from '../../components/app/app.styles';
 import ConstructorCanvas from '../../components/constructor-canvas';
 import { CurrencyContext } from '../../context/currency-context';
-import { getCurrencySign } from '../../utils/currency';
+import { useCurrency } from '../../hooks/use-currency';
 
 const ImagesConstructor = () => {
   const {
@@ -34,9 +34,10 @@ const ImagesConstructor = () => {
     valuesLoading
   } = useConstructorLoader();
 
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
   const { currency } = useContext(CurrencyContext);
 
-  const defaultPrice = Math.round(CONSTRUCTOR_DEFAULT_PRICE * currency.exchangeRate);
+  const defaultPrice = getPriceWithCurrency(CONSTRUCTOR_DEFAULT_PRICE);
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
@@ -55,8 +56,7 @@ const ImagesConstructor = () => {
   };
 
   useEffect(() => {
-    const getPrice = (key) =>
-      Math.round(constructorValues[key].additionalPrice.value * currency.exchangeRate);
+    const getPrice = (key) => getPriceWithCurrency(constructorValues[key].absolutePrice);
 
     setAllPrice(
       Object.keys(constructorValues).reduce((acc, key) => {
@@ -85,12 +85,10 @@ const ImagesConstructor = () => {
     return constructorEndPrice(defaultPrice + allPrices.bottom);
   }
 
-  const costPattern = constructorValues.pattern
-    ? constructorValues.pattern.additionalPrice.value
-    : null;
+  const costPattern = constructorValues.pattern ? constructorValues.pattern.absolutePrice : null;
 
   const sizeAndPrice = {
-    price: CONSTRUCTOR_DEFAULT_PRICE + costPattern + constructorValues.bottom.additionalPrice.value,
+    price: CONSTRUCTOR_DEFAULT_PRICE + costPattern + constructorValues.bottom.absolutePrice,
     size: {
       available: constructorValues.size.available,
       name: constructorValues.size.name,
@@ -167,7 +165,7 @@ const ImagesConstructor = () => {
                   });
                   setAllPrice((prevState) => ({
                     ...prevState,
-                    pattern: constructorValues.pattern.additionalPrice.value
+                    pattern: constructorValues.pattern.absolutePrice
                   }));
                 }}
               >
@@ -196,7 +194,7 @@ const ImagesConstructor = () => {
                   });
                   setAllPrice((prevState) => ({
                     ...prevState,
-                    bottom: constructorValues.bottom.additionalPrice.value
+                    bottom: constructorValues.bottom.absolutePrice
                   }));
                 }}
               >
@@ -270,7 +268,7 @@ const ImagesConstructor = () => {
                   <span>{t('common.defaultPrice')}</span>
                   <span className={styles.currencySign}>
                     {defaultPrice}
-                    {getCurrencySign[currency.name]}
+                    {getCurrencySign()}
                   </span>
                 </li>
                 <div className={`${styles.line} ${styles.topLine}`} />
@@ -281,7 +279,7 @@ const ImagesConstructor = () => {
                         {t(`common.constructorAdditionals`, { returnObjects: true })[index]}
                       </span>
                       <span className={styles.currencySign}>
-                        {item} {getCurrencySign[currency.name]}
+                        {item} {getCurrencySign()}
                       </span>
                     </li>
                   ) : (
@@ -295,7 +293,7 @@ const ImagesConstructor = () => {
               {t('common.endPrice')}
               <span className={styles.currencySign}>
                 {price()}
-                {getCurrencySign[currency.name]}
+                {getCurrencySign()}
               </span>
             </h2>
             <ConstructorSubmit

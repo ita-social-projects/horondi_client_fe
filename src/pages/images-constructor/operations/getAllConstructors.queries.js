@@ -34,9 +34,7 @@ export const getAllConstructors = gql`
             thumbnail
           }
           available
-          additionalPrice {
-            value
-          }
+          absolutePrice
         }
         bottoms {
           _id
@@ -59,9 +57,7 @@ export const getAllConstructors = gql`
             small
             thumbnail
           }
-          additionalPrice {
-            value
-          }
+          absolutePrice
         }
         pocketsWithRestrictions {
           currentPocketWithPosition {
@@ -99,9 +95,8 @@ export const getAllConstructors = gql`
             small
             thumbnail
           }
-          additionalPrice {
-            value
-          }
+          absolutePrice
+          relativePrice
         }
         model {
           _id
@@ -112,9 +107,8 @@ export const getAllConstructors = gql`
           }
           sizes {
             name
-            additionalPrice {
-              value
-            }
+            absolutePrice
+            relativePrice
           }
         }
       }

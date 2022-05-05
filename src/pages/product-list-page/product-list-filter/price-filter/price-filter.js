@@ -9,8 +9,10 @@ import { getMin, getMax, fixPrice } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { CurrencyContext } from '../../../../context/currency-context';
+import { useCurrency } from '../../../../hooks/use-currency';
 
 const PriceFilter = ({ priceRange, resetPrices }) => {
+  const { getPriceWithCurrency } = useCurrency();
   const { t } = useTranslation();
   const { search } = useLocation();
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
@@ -18,10 +20,10 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
   const styles = useStyles();
   const history = useHistory();
 
-  const { currency } = useContext(CurrencyContext);
+  const { currency: currentCurrency, currencies } = useContext(CurrencyContext);
 
-  const min = getMin(priceRange.minPrice, currency);
-  const max = getMax(priceRange.maxPrice, currency);
+  const min = getMin(getPriceWithCurrency(priceRange.minPrice));
+  const max = getMax(getPriceWithCurrency(priceRange.maxPrice));
 
   const [prices, setPrices] = useState([min, max]);
   const [pricesFromInput, setPricesFromInput] = useState([min, max]);
@@ -44,7 +46,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
-    setPricesFromInput(fixPrice(newPrices, currency));
+    setPricesFromInput(fixPrice(newPrices, currencies[currentCurrency]));
   };
 
   const handlePriceFilter = useCallback(
@@ -99,7 +101,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
         className={styles.slider}
         value={prices.map((price) => +price)}
         onChange={handlePriceChange}
-        onClick={() => handlePriceFilter(fixPrice(prices, currency))}
+        onClick={() => handlePriceFilter(fixPrice(prices, currencies[currentCurrency]))}
         valueLabelDisplay='auto'
         min={min}
         max={max}

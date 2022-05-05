@@ -8,14 +8,15 @@ import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
 import { SCROLL_BAR_LINKS } from '../constants';
-import { getCurrencySign } from '../../../utils/currency';
+import { useCurrency } from '../../../hooks/use-currency';
 
-const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
+const ProductInfo = ({ product, countComments, currentPrice }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
 
-  const currencySign = getCurrencySign[currency.name];
+  const currencySign = getCurrencySign();
 
   const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
@@ -54,7 +55,7 @@ const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
         <div className={styles.priceContainer}>
           <span data-cy='price' className={styles.price}>
             {currencySign}
-            {Math.round(currentPrice * currency.exchangeRate).toFixed(2)}
+            {getPriceWithCurrency(currentPrice).toFixed(2)}
           </span>
         </div>
       ) : null}

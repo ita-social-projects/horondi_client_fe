@@ -65,9 +65,6 @@ export const getProductById = gql`
               lang
               value
             }
-            additionalPrice {
-              value
-            }
           }
           color {
             _id

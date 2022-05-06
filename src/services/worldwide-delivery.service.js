@@ -17,7 +17,7 @@ class WorldwideService {
     return res.data.data.states.map((state) => state.name);
   }
 
-  async getCitiesByState(country, state) {
+  async getCitiesByCountryAndState(country, state) {
     const res = await axios.post(`${this._apiBase}/countries/state/cities`, {
       country,
       state

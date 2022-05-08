@@ -23,7 +23,9 @@ export const props = {
     district: 'Cannot be empty',
     city: 'Cannot be empty',
     courierOffice: 'Cannot be empty'
-  }
+  },
+  setDeliveryType: () => {},
+  setFieldValue: () => {}
 };
 export const mockRequestData = [
   {

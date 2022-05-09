@@ -65,7 +65,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
   const [initialValues, setInitialValues] = useState(stateInitialValues);
   const [pricesFromQuery, setPricesFromQuery] = useState([]);
 
-  const handleCountryOption = (e, newTabValue) => setCountryOption(newTabValue);
+  const handleCountryOption = (_, newTabValue) => setCountryOption(newTabValue);
 
   const { discount, categories } = promoCode?.getPromoCodeByCode || {};
 

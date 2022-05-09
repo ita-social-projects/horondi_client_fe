@@ -156,7 +156,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
           className={styles.addressInput}
           options={citiesOptions}
           inputValue={values.worldWideCity}
-          onInputChange={(e, value, reason) => {
+          onInputChange={(_, value, reason) => {
             handleCityInputChange(value, reason);
           }}
           onChange={(_, value) => setFieldValue('worldWideCity', value || '')}

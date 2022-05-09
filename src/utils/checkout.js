@@ -134,6 +134,8 @@ const productItemsInput = (cartItems) =>
     }
   }));
 
+const handleOrderItem = (item) => item || '';
+
 export const orderInputData = (data, deliveryType, cartItems, countryOption) => {
   const recipient = {
     firstName: data.firstName,
@@ -151,17 +153,17 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       recipient,
       delivery: {
         sentBy: deliveryType,
-        invoiceNumber: data.invoiceNumber || '',
-        courierOffice: data.courierOffice || '',
-        region: data.region || '',
-        district: data.district || '',
-        regionId: data.regionId || '',
-        districtId: data.districtId || '',
-        cityId: data.cityId || '',
-        city: data.city || '',
-        street: data.street || '',
-        house: data.house || '',
-        flat: data.flat || '',
+        invoiceNumber: handleOrderItem(data.invoiceNumber),
+        courierOffice: handleOrderItem(data.courierOffice),
+        region: handleOrderItem(data.region),
+        district: handleOrderItem(data.district),
+        regionId: handleOrderItem(data.regionId),
+        districtId: handleOrderItem(data.districtId),
+        cityId: handleOrderItem(data.cityId),
+        city: handleOrderItem(data.city),
+        street: handleOrderItem(data.street),
+        house: handleOrderItem(data.house),
+        flat: handleOrderItem(data.flat),
         byCourier:
           deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
           deliveryType === deliveryTypes.UKRPOSTCOURIER
@@ -177,14 +179,14 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       recipient,
       delivery: {
         sentBy: deliveryTypes.WORLDWIDE,
-        invoiceNumber: data.invoiceNumber || '',
-        messenger: data.messenger || '',
-        messengerPhone: data.messengerPhone || '',
-        worldWideCountry: data.worldWideCountry || '',
-        stateOrProvince: data.stateOrProvince || '',
-        worldWideCity: data.worldWideCity || '',
-        worldWideStreet: data.worldWideStreet || '',
-        cityCode: data.cityCode || '',
+        invoiceNumber: handleOrderItem(data.invoiceNumber),
+        messenger: handleOrderItem(data.messenger),
+        messengerPhone: handleOrderItem(data.messengerPhone),
+        worldWideCountry: handleOrderItem(data.worldWideCountry),
+        stateOrProvince: handleOrderItem(data.stateOrProvince),
+        worldWideCity: handleOrderItem(data.worldWideCity),
+        worldWideStreet: handleOrderItem(data.worldWideStreet),
+        cityCode: handleOrderItem(data.cityCode),
         byCourier: false
       },
       items,
@@ -241,24 +243,24 @@ export const updateInitialValues = (data, deliveryType) => {
   const { firstName, lastName, email, phoneNumber, address } = data;
 
   const profileData = {
-    firstName: firstName || '',
-    lastName: lastName || '',
-    email: email || '',
-    phoneNumber: phoneNumber || '',
-    messengerPhone: phoneNumber || ''
+    firstName: handleOrderItem(firstName),
+    lastName: handleOrderItem(lastName),
+    email: handleOrderItem(email),
+    phoneNumber: handleOrderItem(phoneNumber),
+    messengerPhone: handleOrderItem(phoneNumber)
   };
 
   const initValuesForNovaPost = {
     ...stateInitialValues,
     ...profileData,
-    city: address?.city || ''
+    city: handleOrderItem(address?.city)
   };
   const initValuesForUkrPost = {
     ...stateInitialValues,
     ...profileData,
-    region: address?.region || '',
-    district: address?.district || '',
-    city: address?.city || ''
+    region: handleOrderItem(address?.region),
+    district: handleOrderItem(address?.district),
+    city: handleOrderItem(address?.city)
   };
   const initValuesForSelfpickup = {
     ...stateInitialValues,
@@ -276,12 +278,12 @@ export const updateInitialValues = (data, deliveryType) => {
       return {
         ...stateInitialValues,
         ...profileData,
-        region: address?.region || '',
-        district: address?.district || '',
-        city: address?.city || '',
-        street: address?.street || '',
-        house: address?.buildingNumber || '',
-        flat: address?.appartment || ''
+        region: handleOrderItem(address?.region),
+        district: handleOrderItem(address?.district),
+        city: handleOrderItem(address?.city),
+        street: handleOrderItem(address?.street),
+        house: handleOrderItem(address?.buildingNumber),
+        flat: handleOrderItem(address?.appartment)
       };
   }
 };

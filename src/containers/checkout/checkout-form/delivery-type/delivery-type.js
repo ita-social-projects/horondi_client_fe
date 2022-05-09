@@ -70,7 +70,7 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
               label={t('checkout.checkoutTextFields.courier')}
               className={styles.courierSelect}
               data-cy='courierOrganization'
-              name='courierOrganization'
+              data-testid='courierOrganization'
               value={courierOrganization}
               onChange={(e) => handleCourierOrganizationChange(e.target.value)}
             >

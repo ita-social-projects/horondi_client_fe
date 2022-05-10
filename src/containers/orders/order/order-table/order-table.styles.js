@@ -39,15 +39,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       textAlign: 'center'
     },
     '& td:first-child': {
-      textAlign: 'left',
-      '& img': {
-        width: '220px',
-        height: '133px',
-        '@media (max-width: 600px)': {
-          width: 'auto',
-          height: 'auto'
-        }
-      }
+      textAlign: 'left'
     }
   },
   tableHeader: {

@@ -46,7 +46,15 @@ export const useStyles = makeStyles(({ palette }) => ({
       height: 60
     }
   },
-
+  itemImg: {
+    objectFit: 'cover',
+    width: '220px',
+    height: '133px',
+    '@media (max-width: 600px)': {
+      width: 'auto',
+      height: 'auto'
+    }
+  },
   product: {
     display: 'flex',
     alignItems: 'center',

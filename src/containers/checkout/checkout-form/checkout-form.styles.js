@@ -285,6 +285,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     position: 'absolute',
     width: '56px',
     height: '56px',
+    objectFit: 'cover',
+    objectPosition: '55% 50%',
     left: '25px',
     top: '0px'
   },
@@ -327,7 +329,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     justifyContent: 'flex-end',
     width: '28px',
     height: '20px',
-    left: '284px',
+    left: '295px',
     top: '7px',
     fontStyle: 'normal',
     fontWeight: '600',

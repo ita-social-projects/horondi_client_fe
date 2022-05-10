@@ -144,6 +144,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
           onInputChange={(_, value) => setStateOrProvinceInput(value)}
           onChange={(_, value) => setFieldValue('stateOrProvince', value || '')}
           disabled={!values.worldWideCountry}
+          data-testid='stateOrProvince'
           renderInput={(params) => (
             <TextField
               {...params}
@@ -160,6 +161,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
             handleCityInputChange(value, reason);
           }}
           onChange={(_, value) => setFieldValue('worldWideCity', value || '')}
+          data-testid='worldWideCity'
           disabled={!values.worldWideCountry}
           renderInput={(params) => (
             <TextField
@@ -180,6 +182,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
           variant={TEXT_FIELD_VARIANT.OUTLINED}
           value={values.worldWideStreet}
           name='worldWideStreet'
+          data-testid='worldWideStreet'
           onChange={handleChange}
           disabled={!values.worldWideCity}
         />

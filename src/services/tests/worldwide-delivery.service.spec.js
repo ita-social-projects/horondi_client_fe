@@ -3,7 +3,8 @@ import worldwideService from '../worldwide-delivery.service';
 import {
   countriesResponseMock,
   statesResponseMock,
-  citiesResponseMock
+  citiesResponseMock,
+  endpoints
 } from './worldwide-delivery.service.variables';
 
 jest.mock('axios');
@@ -14,7 +15,7 @@ describe('worldwideService tests', () => {
 
     const result = await worldwideService.getCountries();
 
-    expect(axios.get).toHaveBeenCalled();
+    expect(axios.get).toHaveBeenCalledWith(endpoints.countries);
     expect(result).toEqual(['Ukraine', 'Belgium']);
   });
 
@@ -23,7 +24,7 @@ describe('worldwideService tests', () => {
 
     const result = await worldwideService.getStatesByCountry('Ukraine');
 
-    expect(axios.post).toHaveBeenCalled();
+    expect(axios.post).toHaveBeenCalledWith(endpoints.states.url, endpoints.states.body);
     expect(result).toEqual(['Lviv Oblast', 'Dnipropetrovsk Oblast']);
   });
 
@@ -32,7 +33,7 @@ describe('worldwideService tests', () => {
 
     const result = await worldwideService.getCitiesByCountryAndState('Belgium', 'Luxembourg');
 
-    expect(axios.post).toHaveBeenCalled();
+    expect(axios.post).toHaveBeenCalledWith(endpoints.cities.url, endpoints.cities.body);
     expect(result).toEqual([]);
   });
 });

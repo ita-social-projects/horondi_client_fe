@@ -13,3 +13,15 @@ export const statesResponseMock = {
 };
 
 export const citiesResponseMock = { data: { data: [] } };
+
+export const endpoints = {
+  countries: 'https://countriesnow.space/api/v0.1/countries/states',
+  states: {
+    url: 'https://countriesnow.space/api/v0.1/countries/states',
+    body: { country: 'Ukraine' }
+  },
+  cities: {
+    url: 'https://countriesnow.space/api/v0.1/countries/state/cities',
+    body: { country: 'Belgium', state: 'Luxembourg' }
+  }
+};

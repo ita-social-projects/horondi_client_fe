@@ -1,6 +1,5 @@
 import React from 'react';
 import { screen, render, within, fireEvent } from '@testing-library/react';
-import {} from '@testing-library/dom';
 import Worldwide from '../worldwide';
 import { props } from './worldwide.variables';
 

@@ -5,7 +5,8 @@ import {
   DEFAULT_CURRENCY,
   deliveryTypes,
   MATERIAL_UI_COLOR,
-  SESSION_STORAGE
+  SESSION_STORAGE,
+  countryOptions
 } from '../configs';
 import { getFromSessionStorage, setToSessionStorage } from '../services/session-storage.service';
 import { checkoutPayMethod } from '../containers/checkout/checkout-form/const';
@@ -27,7 +28,14 @@ export const stateInitialValues = {
   district: '',
   regionId: '',
   districtId: '',
-  cityId: ''
+  cityId: '',
+  messenger: '',
+  messengerPhone: '',
+  worldWideCountry: '',
+  stateOrProvince: '',
+  worldWideCity: '',
+  worldWideStreet: '',
+  cityCode: ''
 };
 
 export const checkoutPropTypes = {
@@ -54,7 +62,14 @@ export const checkoutPropTypes = {
     house: PropTypes.string,
     flat: PropTypes.string,
     region: PropTypes.string,
-    district: PropTypes.string
+    district: PropTypes.string,
+    messenger: PropTypes.string,
+    messengerPhone: PropTypes.string,
+    worldWideCountry: PropTypes.string,
+    stateOrProvince: PropTypes.string,
+    worldWideCity: PropTypes.string,
+    worldWideStreet: PropTypes.string,
+    cityCode: PropTypes.string
   }),
   errors: PropTypes.shape({
     firstName: PropTypes.string,
@@ -86,7 +101,14 @@ export const checkoutPropTypes = {
     house: PropTypes.string,
     flat: PropTypes.string,
     region: PropTypes.string,
-    district: PropTypes.string
+    district: PropTypes.string,
+    messenger: PropTypes.string,
+    messengerPhone: PropTypes.string,
+    worldWideCountry: PropTypes.string,
+    stateOrProvince: PropTypes.string,
+    worldWideCity: PropTypes.string,
+    worldWideStreet: PropTypes.string,
+    cityCode: PropTypes.string
   })
 };
 
@@ -112,35 +134,67 @@ const productItemsInput = (cartItems) =>
     }
   }));
 
-export const orderInputData = (data, deliveryType, cartItems) => ({
-  recipient: {
+const handleOrderItem = (item) => item || '';
+
+export const orderInputData = (data, deliveryType, cartItems, countryOption) => {
+  const recipient = {
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,
     phoneNumber: data.phoneNumber
-  },
-  delivery: {
-    sentBy: deliveryType,
-    invoiceNumber: data.invoiceNumber || '',
-    courierOffice: data.courierOffice || '',
-    region: data.region || '',
-    district: data.district || '',
-    regionId: data.regionId || '',
-    districtId: data.districtId || '',
-    cityId: data.cityId || '',
-    city: data.city || '',
-    street: data.street || '',
-    house: data.house || '',
-    flat: data.flat || '',
-    byCourier:
-      deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
-      deliveryType === deliveryTypes.UKRPOSTCOURIER
-  },
-  items: productItemsInput(cartItems),
-  paymentMethod:
-    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash,
-  userComment: data.userComment
-});
+  };
+  const items = productItemsInput(cartItems);
+  const paymentMethod =
+    data.paymentMethod === checkoutPayMethod.card ? checkoutPayMethod.card : checkoutPayMethod.cash;
+  const { userComment } = data;
+
+  if (countryOption === countryOptions.WITHIN_UKRAINE) {
+    return {
+      recipient,
+      delivery: {
+        sentBy: deliveryType,
+        invoiceNumber: handleOrderItem(data.invoiceNumber),
+        courierOffice: handleOrderItem(data.courierOffice),
+        region: handleOrderItem(data.region),
+        district: handleOrderItem(data.district),
+        regionId: handleOrderItem(data.regionId),
+        districtId: handleOrderItem(data.districtId),
+        cityId: handleOrderItem(data.cityId),
+        city: handleOrderItem(data.city),
+        street: handleOrderItem(data.street),
+        house: handleOrderItem(data.house),
+        flat: handleOrderItem(data.flat),
+        byCourier:
+          deliveryType === deliveryTypes.NOVAPOSTCOURIER ||
+          deliveryType === deliveryTypes.UKRPOSTCOURIER
+      },
+      items,
+      paymentMethod,
+      userComment
+    };
+  }
+
+  if (countryOption === countryOptions.WORLDWIDE) {
+    return {
+      recipient,
+      delivery: {
+        sentBy: deliveryTypes.WORLDWIDE,
+        invoiceNumber: handleOrderItem(data.invoiceNumber),
+        messenger: handleOrderItem(data.messenger),
+        messengerPhone: handleOrderItem(data.messengerPhone),
+        worldWideCountry: handleOrderItem(data.worldWideCountry),
+        stateOrProvince: handleOrderItem(data.stateOrProvince),
+        worldWideCity: handleOrderItem(data.worldWideCity),
+        worldWideStreet: handleOrderItem(data.worldWideStreet),
+        cityCode: handleOrderItem(data.cityCode),
+        byCourier: false
+      },
+      items,
+      paymentMethod,
+      userComment
+    };
+  }
+};
 
 export const checkoutFormBtnValue = (values) =>
   values.paymentMethod === '' || values.paymentMethod === checkoutPayMethod.cash
@@ -189,23 +243,24 @@ export const updateInitialValues = (data, deliveryType) => {
   const { firstName, lastName, email, phoneNumber, address } = data;
 
   const profileData = {
-    firstName: firstName || '',
-    lastName: lastName || '',
-    email: email || '',
-    phoneNumber: phoneNumber || ''
+    firstName: handleOrderItem(firstName),
+    lastName: handleOrderItem(lastName),
+    email: handleOrderItem(email),
+    phoneNumber: handleOrderItem(phoneNumber),
+    messengerPhone: handleOrderItem(phoneNumber)
   };
 
   const initValuesForNovaPost = {
     ...stateInitialValues,
     ...profileData,
-    city: address?.city || ''
+    city: handleOrderItem(address?.city)
   };
   const initValuesForUkrPost = {
     ...stateInitialValues,
     ...profileData,
-    region: address?.region || '',
-    district: address?.district || '',
-    city: address?.city || ''
+    region: handleOrderItem(address?.region),
+    district: handleOrderItem(address?.district),
+    city: handleOrderItem(address?.city)
   };
   const initValuesForSelfpickup = {
     ...stateInitialValues,
@@ -223,12 +278,12 @@ export const updateInitialValues = (data, deliveryType) => {
       return {
         ...stateInitialValues,
         ...profileData,
-        region: address?.region || '',
-        district: address?.district || '',
-        city: address?.city || '',
-        street: address?.street || '',
-        house: address?.buildingNumber || '',
-        flat: address?.appartment || ''
+        region: handleOrderItem(address?.region),
+        district: handleOrderItem(address?.district),
+        city: handleOrderItem(address?.city),
+        street: handleOrderItem(address?.street),
+        house: handleOrderItem(address?.buildingNumber),
+        flat: handleOrderItem(address?.appartment)
       };
   }
 };

@@ -23,10 +23,10 @@ const CurrencyContextProvider = ({ children }) => {
     }
   }, [data]);
 
-  const currencyHandler = (event) => {
-    const newCurrencyName = event.target.value;
-
-    return setCurrentCurrency(newCurrencyName);
+  const currencyHandler = (event, newCurrencyName) => {
+    if (newCurrencyName !== null) {
+      return setCurrentCurrency(newCurrencyName);
+    }
   };
 
   if (error || loading) return errorOrLoadingHandler(error, loading);

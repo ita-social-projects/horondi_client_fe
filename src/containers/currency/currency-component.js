@@ -1,33 +1,36 @@
 import React, { useContext } from 'react';
-import { ButtonGroup, Button } from '@material-ui/core';
-import _ from 'lodash';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 import { useStyles } from './currency.styles';
-import { CURRENCY } from '../../configs';
+import { CURRENCY, CURRENCIES_LIST } from '../../configs';
 import { CurrencyContext } from '../../context/currency-context';
-import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const CurrencyComponent = ({ fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
-  const { currencyHandler, currencies } = useContext(CurrencyContext);
+  const { currency, currencyHandler } = useContext(CurrencyContext);
 
-  const mappedCurrencies = Object.values(currencies).map(
-    ({ name: currencyName, unicode: currencyUnicode }) => (
-      <Button
-        onClick={currencyHandler}
-        data-cy={`${CURRENCY} ${currencyName}`}
-        key={currencyName}
-        value={currencyName}
+  const mappedCurrencies = Object.values(CURRENCIES_LIST).map(
+    ({ label: currencyLabel, unicode: currencyUnicode }) => (
+      <ToggleButton
+        value={currencyLabel}
+        key={currencyLabel}
+        arau-label={`${CURRENCY} ${currencyLabel}`}
       >
         {currencyUnicode}
-      </Button>
+      </ToggleButton>
     )
   );
 
   return (
     <div data-cy='currency' className={styles.root}>
-      {errorOrLoadingHandler(false, _.isEmpty(currencies))}
-      <ButtonGroup>{mappedCurrencies}</ButtonGroup>
+      <ToggleButtonGroup
+        value={currency}
+        exclusive
+        onChange={currencyHandler}
+        aria-label={CURRENCY}
+      >
+        {mappedCurrencies}
+      </ToggleButtonGroup>
     </div>
   );
 };

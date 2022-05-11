@@ -17,6 +17,7 @@ export const getProductById = gql`
         }
         images {
           primary {
+            medium
             thumbnail
           }
         }

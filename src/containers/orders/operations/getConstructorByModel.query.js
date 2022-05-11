@@ -21,6 +21,7 @@ export const getConstructorByModel = gql`
             value
           }
           images {
+            medium
             small
             thumbnail
           }

@@ -45,7 +45,6 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
 
   return (
     <div className={styles.deliveryTypeContainer}>
-      <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
       <FormControl component='fieldset' classes={{ root: styles.radioBtnWrapper }}>
         <RadioGroup
           data-testid='delivery-type'
@@ -70,7 +69,7 @@ const DeliveryType = ({ setFieldValue, touched, errors, deliveryType, setDeliver
             <Select
               label={t('checkout.checkoutTextFields.courier')}
               className={styles.courierSelect}
-              data-cy='courierOrganization'
+              data-testid='courierOrganization'
               name='courierOrganization'
               value={courierOrganization}
               onChange={(e) => handleCourierOrganizationChange(e.target.value)}

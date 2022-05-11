@@ -86,7 +86,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   return (
     <ListItem className={styles.yourOrderListItem} key={orderItem?._id} alignItems='center'>
       <Typography component='div'>x {product.quantity}</Typography>
-      {productImg}
+      <div>{productImg}</div>
       <ListItemText
         className={styles.yourOrderListItemDescriptionContainer}
         primary={<div className={styles.yourOrderListItemDescriptionPrimary}>{productName}</div>}

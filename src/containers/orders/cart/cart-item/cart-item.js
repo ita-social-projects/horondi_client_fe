@@ -225,7 +225,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   return cartItem ? (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell classes={{ root: styles.product }} data-cy='cart-item-img'>
-        {productImg}
+        <div>{productImg}</div>
         <div>
           {productName}
           {itemMaterial}

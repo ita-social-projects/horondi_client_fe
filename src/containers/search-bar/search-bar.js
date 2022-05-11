@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
@@ -18,12 +18,11 @@ const SearchBar = ({
 }) => {
   const styles = useStyles({ fromNavBar });
   const { t } = useTranslation();
-
   const [searchTimeout, setSearchTimeout] = useState(null);
-
-  const { loading, refetch } = useQuery(getFilteredProductsQuery, {
-    onCompleted: (data) =>
-      setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items })),
+  const [getProductsQuery, { loading }] = useLazyQuery(getFilteredProductsQuery, {
+    onCompleted: (data) => {
+      setSearchParams((prevState) => ({ ...prevState, loading, products: data.getProducts.items }));
+    },
     variables: { search: searchParams.searchFilter }
   });
 
@@ -45,16 +44,18 @@ const SearchBar = ({
             searchFilter: target.value,
             searchBarVisibility: true
           }));
-          refetch();
+          getProductsQuery();
         }, 1000)
       );
+    } else {
+      handleOnBlur();
     }
   };
 
   const mainClass = fromNavBar ? styles.root : styles.notFromNavbar;
 
   const handleOnBlur = () => {
-    setTimeout(() => setSearchParams(initialSearchState), 100);
+    setTimeout(() => setSearchParams(initialSearchState), 0);
   };
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { shallow } from 'enzyme';
 import { TextField } from '@material-ui/core';
 import SearchBar from '../search-bar';
@@ -18,9 +18,9 @@ jest.mock('../search-bar.styles.js', () => ({
 
 jest.mock('@apollo/client');
 
-useQuery.mockImplementation((query, options) => {
+useLazyQuery.mockImplementation((query, options) => {
   options.onCompleted();
-  return { error: null, loading: true };
+  return [query, { error: null, loading: true }];
 });
 
 const initialSearchState = {
@@ -34,7 +34,6 @@ describe('SearchBar component tests', () => {
   it('Should render one SearchBar component when the input value is typed', () => {
     const component = shallow(
       <SearchBar
-        fromSideBar=''
         initialSearchState={initialSearchState}
         searchParams={initialSearchState}
         setSearchParams={() => null}
@@ -48,7 +47,6 @@ describe('SearchBar component tests', () => {
   it('Should render SearchBar component when regExp doesnt match', () => {
     const component = shallow(
       <SearchBar
-        fromSideBar=''
         initialSearchState={initialSearchState}
         searchParams={initialSearchState}
         setSearchParams={() => null}

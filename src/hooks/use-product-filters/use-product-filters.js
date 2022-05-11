@@ -9,6 +9,7 @@ const useProductFilters = (filterParams, filtersList) => {
   const { t, i18n } = useTranslation();
   const history = useHistory();
   const [filtersData, setFiltersData] = useState({});
+  const { page, defaultPage, nameFilter } = URL_QUERIES_NAME;
 
   const searchParams = new URLSearchParams(search);
 
@@ -25,18 +26,24 @@ const useProductFilters = (filterParams, filtersList) => {
     const currentCategory = categoriesList.find((el) => el.name[language].value === target.name);
 
     if (target.checked) {
-      if (query) searchParams.set(queryName, query.concat(',', currentCategory._id));
-      else searchParams.set(queryName, currentCategory._id);
+      if (query) {
+        searchParams.set(queryName, query.concat(',', currentCategory._id));
+      } else {
+        searchParams.set(queryName, currentCategory._id);
+      }
     } else if (query) {
       searchParams.set(queryName, query.replace(currentCategory._id, ''));
-    } else searchParams.delete(queryName);
-
+    } else {
+      searchParams.delete(queryName);
+    }
+    searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
 
   const handleFilterClear = (queryName) => {
     searchParams.set(TEXT_FIELDS.PAGE, 1);
     searchParams.delete(queryName);
+    searchParams.delete(nameFilter);
     history.push(`?${searchParams.toString()}`);
   };
 

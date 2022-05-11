@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { debounce } from 'lodash';
 
 import { useStyles, searchStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
@@ -27,8 +28,17 @@ const ProductSort = () => {
   const searchParams = new URLSearchParams(search);
   const { sort, nameFilter, page, defaultPage } = URL_QUERIES_NAME;
   const nameFilterValue = searchParams.get(nameFilter);
-  const currentNameFilter = nameFilterValue || '';
+
+  const [searchFieldValue, setSearchFieldValue] = useState('');
+
+  useEffect(() => {
+    if (!nameFilterValue) {
+      setSearchFieldValue('');
+    }
+  }, [nameFilterValue]);
+
   const query = searchParams.get(sort);
+
   const selectHandler = (e) => {
     const { name } = e.target.value;
     searchParams.set(sort, name);
@@ -36,9 +46,19 @@ const ProductSort = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const handleSearch = (e) => {
-    searchParams.set(nameFilter, e.target.value);
-    history.push(`?${searchParams.toString()}`);
+  const debouncedHandleSearch = useCallback(
+    debounce((value) => {
+      searchParams.set(nameFilter, value);
+      history.push(`?${searchParams.toString()}`);
+    }, 1000),
+    []
+  );
+
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    debouncedHandleSearch.cancel();
+    setSearchFieldValue(value);
+    debouncedHandleSearch(value);
   };
 
   useEffect(() => {
@@ -69,7 +89,7 @@ const ProductSort = () => {
         fieldOptions={searchStyles}
         fromNavBar={false}
         searchHandler={handleSearch}
-        defaultValue={currentNameFilter}
+        defaultValue={searchFieldValue}
       />
 
       <div className={styles.sortByText}>

@@ -18,18 +18,14 @@ const HotItemFilter = () => {
   const [hotItem, setHotItem] = useState(false);
 
   useEffect(() => {
-    if (searchParams.get(isHotItemFilter)) {
-      setHotItem(!hotItem);
-    }
-  }, [isHotItemFilter]);
+    setHotItem(!!searchParams.get(isHotItemFilter));
+  });
 
   const handleChange = (event) => {
     if (event.target.checked) {
       searchParams.set(isHotItemFilter, event.target.checked);
-      setHotItem(!hotItem);
     } else {
       searchParams.delete(isHotItemFilter);
-      setHotItem(!hotItem);
     }
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);

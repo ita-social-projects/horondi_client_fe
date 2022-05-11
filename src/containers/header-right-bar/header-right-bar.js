@@ -29,7 +29,6 @@ const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
         setSearchParams={setSearchParams}
         initialSearchState={initialSearchState}
         handleErrors={handleErrors}
-        errors={errors}
       />
       <SearchBarList searchParams={searchParams} errors={errors} />
       <div className={styles.wishlist}>

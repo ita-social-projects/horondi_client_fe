@@ -9,16 +9,9 @@ import { mockAllFilteredProducts } from './product-list-page.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import ProductListPage from '../../../../pages/product-list-page/product-list-page';
 
-const mockHistoryPush = jest.fn();
 const history = createMemoryHistory();
 const themeValue = theme('light');
-let mockNameFilter = '';
-
-jest.mock('react-router', () => ({
-  ...jest.requireActual('react-router'),
-  useLocation: () => ({ search: `?sort=popularity&nameFilter=${mockNameFilter}` }),
-  useHistory: () => ({ push: mockHistoryPush })
-}));
+let isWrongNameFilter = false;
 
 jest.mock('react-redux', () => ({
   useSelector: () => ({ currency: 0 })
@@ -41,10 +34,10 @@ jest.mock('react-i18next', () => ({
   })
 }));
 
-describe('ProductListPage with correct values', () => {
+describe('ProductListPage with correct query', () => {
   beforeEach(() => {
     render(
-      <MockedProvider mocks={mockAllFilteredProducts} addTypename>
+      <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>
         <ThemeProvider theme={themeValue}>
           <Router history={history}>
             <ProductListPage width='sm' />
@@ -68,11 +61,11 @@ describe('ProductListPage with correct values', () => {
   });
 });
 
-describe('ProductListPage with uncorrect values', () => {
+describe('ProductListPage with incorrect query', () => {
   beforeAll(() => {
-    mockNameFilter = 'wrong_text';
+    isWrongNameFilter = true;
     render(
-      <MockedProvider mocks={mockAllFilteredProducts} addTypename>
+      <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>
         <ThemeProvider theme={themeValue}>
           <Router history={history}>
             <ProductListPage width='sm' />

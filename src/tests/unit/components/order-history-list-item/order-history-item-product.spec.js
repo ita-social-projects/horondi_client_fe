@@ -10,7 +10,6 @@ import {
   nullProduct,
   translationsKey
 } from './order-history-item-product.variables';
-
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import { DollarIcon } from '../../../../images/profile-icons';
 
@@ -26,6 +25,13 @@ jest.mock(
 
 const themeValue = theme('light');
 let wrapper;
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
 
 jest.mock('../../../../hooks/use-currency', () => ({
   useCurrency: () => ({

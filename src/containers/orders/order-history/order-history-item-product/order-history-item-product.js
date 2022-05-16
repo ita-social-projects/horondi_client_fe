@@ -7,6 +7,8 @@ import { useStyles } from './order-history-item-product.styles';
 import { IMG_URL } from '../../../../configs';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
+import productPlugDark from '../../../../images/product-plug-dark-theme-img.png';
+import productPlugLight from '../../../../images/product-plug-light-theme-img.png';
 import { useCurrency } from '../../../../hooks/use-currency';
 
 const OrderHistoryItemProduct = ({ item }) => {

@@ -4,8 +4,14 @@ import { useCart } from '../use-cart';
 import { mockItem, mockPromoCode, sizeAndPrice } from './use-cart.variables';
 
 const dispatch = jest.fn();
-
+const mockGetPriceWithCurrency = jest.fn((price) => price);
 jest.mock('react-redux');
+
+jest.mock('../use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency
+  })
+}));
 
 useDispatch.mockImplementation(() => dispatch);
 
@@ -34,32 +40,31 @@ describe('use-cart tests', () => {
       res = wrap.result.current.cartOperations.getTotalPricesWithPromoCode(mockPromoCode);
     });
 
-    expect(res).toBe(900);
+    expect(res).toBe(90);
   });
   it('should return product price with promo code', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPriceWithPromoCode(
         mockItem.id,
-        0,
         mockPromoCode
       );
     });
 
-    expect(res).toBe(900);
+    expect(res).toBe(90);
   });
   it('should return product price', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPrice(mockItem.id, 0);
     });
 
-    expect(res).toBe(1000);
+    expect(res).toBe(100);
   });
   it('should return total price', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getTotalPrice();
     });
 
-    expect(res).toBe(1000);
+    expect(res).toBe(100);
   });
   it('should check is item in cart', () => {
     act(() => {

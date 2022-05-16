@@ -7,6 +7,10 @@ import { ThemeProvider } from '@material-ui/styles';
 import { order, mock } from './order-history-item.variables';
 import OrderHistoryItem from '../../../../containers/orders/order-history/order-history-item/order-history-item.js';
 import { theme } from '../../../../components/app/app-theme/app.theme';
+import { DollarIcon } from '../../../../images/profile-icons.js';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock('react-redux');
 jest.mock(
@@ -25,6 +29,22 @@ useSelector.mockImplementation(() => ({
 
 const themeValue = theme('light');
 let wrapper;
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
+jest.mock('../../../../hooks/use-currency.js', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
 describe('OrderHistoryOrder component tests', () => {
   beforeEach(() => {
     wrapper = render(

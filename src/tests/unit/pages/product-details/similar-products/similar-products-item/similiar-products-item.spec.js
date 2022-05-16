@@ -46,7 +46,7 @@ describe('Similar products test', () => {
       id: item.id,
       imageUrl: item.product.images.primary.thumbnail,
       rate: item.rate,
-      price: item.price[0].value,
+      price: item.price,
       translationsKey: '61af5cbf97e964ccc50e2c31'
     };
     render(
@@ -74,7 +74,7 @@ describe('UseEffect', () => {
       id: item.id,
       imageUrl: item.product.images.primary.thumbnail,
       rate: item.rate,
-      price: item.price[0].value,
+      price: item.price,
       translationsKey: '61af5cbf97e964ccc50e2c31'
     };
     await act(async () => {

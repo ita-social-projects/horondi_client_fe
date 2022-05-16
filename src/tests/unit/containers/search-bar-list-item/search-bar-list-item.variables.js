@@ -4,20 +4,14 @@ const minPrice = 1312;
 export const product = {
   images: { primary: { small: 'test' } },
   name: { 0: { value: etalonString }, 1: { value: 'test' } },
-  basePrice: { 0: { value: 0, currency: 'UAH' } },
+  basePrice: 50,
   sizes: [
     {
-      price: [
-        {
-          value: minPrice,
-          currency: 'UAH'
-        }
-      ]
+      price: minPrice
     }
   ]
 };
 
-export const mockStore = {
-  currency: 0,
-  lightMode: true
-};
+// export const mockStore = {
+//   lightMode: true
+// };

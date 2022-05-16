@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useCallback, useRef, useContext } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { useHistory, useLocation } from 'react-router';
 import { TextField } from '@material-ui/core';
-import { getMin, getMax, fixPrice } from '../../../../utils/priceCalculating';
+
+import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
-import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
 
 const PriceFilter = ({ priceRange, resetPrices }) => {
-  const { getPriceWithCurrency } = useCurrency();
+  const { getPriceWithCurrency, getBaseCurrencyPrice } = useCurrency();
   const { t } = useTranslation();
   const { search } = useLocation();
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
@@ -20,10 +20,10 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
   const styles = useStyles();
   const history = useHistory();
 
-  const { currency: currentCurrency, currencies } = useContext(CurrencyContext);
-
   const min = getMin(getPriceWithCurrency(priceRange.minPrice));
   const max = getMax(getPriceWithCurrency(priceRange.maxPrice));
+
+  const fixPrice = (prices) => prices.map((el) => getBaseCurrencyPrice(el));
 
   const [prices, setPrices] = useState([min, max]);
   const [pricesFromInput, setPricesFromInput] = useState([min, max]);
@@ -46,7 +46,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
     const newPrices = [...prices];
     newPrices[e.target.id] = e.target.value;
     setPrices(newPrices);
-    setPricesFromInput(fixPrice(newPrices, currencies[currentCurrency]));
+    setPricesFromInput(fixPrice(newPrices));
   };
 
   const handlePriceFilter = useCallback(
@@ -101,7 +101,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
         className={styles.slider}
         value={prices.map((price) => +price)}
         onChange={handlePriceChange}
-        onClick={() => handlePriceFilter(fixPrice(prices, currencies[currentCurrency]))}
+        onClick={() => handlePriceFilter(fixPrice(prices))}
         valueLabelDisplay='auto'
         min={min}
         max={max}

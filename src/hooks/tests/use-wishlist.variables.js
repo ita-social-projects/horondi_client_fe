@@ -12,16 +12,7 @@ export const mockItem = {
       volumeInLiters: 18,
       weightInKg: 0.8
     },
-    price: [
-      {
-        value: 1000,
-        currency: 'UAH'
-      },
-      {
-        value: 36,
-        currency: 'USD'
-      }
-    ]
+    price: 36
   },
   quantity: 1,
   constructor: false,

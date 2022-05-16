@@ -12,6 +12,10 @@ import {
 } from './order-history-item-product.variables';
 
 import { theme } from '../../../../components/app/app-theme/app.theme';
+import { DollarIcon } from '../../../../images/profile-icons';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock(
   '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product.styles',
@@ -22,6 +26,13 @@ jest.mock(
 
 const themeValue = theme('light');
 let wrapper;
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
 
 describe('OrderHistoryOrderItem component tests', () => {
   beforeEach(() => {

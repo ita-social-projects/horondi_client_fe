@@ -2,9 +2,21 @@ import React from 'react';
 import * as redux from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent, waitForElement } from '@testing-library/react';
+
 import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
+import { DollarIcon } from '../../../images/profile-icons';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+
+jest.mock('../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),

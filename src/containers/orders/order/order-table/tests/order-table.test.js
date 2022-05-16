@@ -5,6 +5,10 @@ import { MockedProvider } from '@apollo/client/testing';
 import OrderTable from '../order-table';
 import Modal from '../../../../../components/modal/modal';
 import { mockGetProductById, props, modalProps, mockCartOperations } from './order-table.variables';
+import { DollarIcon } from '../../../../../images/profile-icons';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock('../order-table.styles', () => ({
   useStyles: () => ({})
@@ -12,6 +16,12 @@ jest.mock('../order-table.styles', () => ({
 jest.mock('../../../../../components/modal/modal.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../cart/cart-item/cart-item.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
+jest.mock('../../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
 
 const dispatch = jest.fn();
 useDispatch.mockImplementation(() => dispatch);

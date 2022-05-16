@@ -55,14 +55,8 @@ export const mocks = [
             }
           ],
           user_id: '618a3d5553c0ee0025ca918e',
-          totalItemsPrice: [
-            { value: 2250, currency: 'UAH' },
-            { value: 77, currency: 'USD' }
-          ],
-          totalPriceToPay: [
-            { value: 2250, currency: 'UAH' },
-            { value: 77, currency: 'USD' }
-          ],
+          totalItemsPrice: 77,
+          totalPriceToPay: 77,
           orderNumber: '1648386022767',
           dateOfCreation: '2022-03-27T13:00:22.774Z',
           lastUpdatedDate: '2022-03-27T13:00:22.774Z'

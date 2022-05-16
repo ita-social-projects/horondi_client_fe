@@ -2,11 +2,22 @@ import React from 'react';
 import i18next from 'i18next';
 import ProductInfo from '../product-info';
 import { props } from './product-info.variables';
+import { DollarIcon } from '../../../../images/profile-icons';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock('react-redux');
 
 jest.mock('../product-info.styles', () => ({
   useStyles: () => ({})
+}));
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
 }));
 
 describe('Product info', () => {

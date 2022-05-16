@@ -80,16 +80,7 @@ const mockedItems = [
         }
       ]
     },
-    basePrice: [
-      {
-        value: 1386.95,
-        currency: 'UAH'
-      },
-      {
-        value: 50,
-        currency: 'USD'
-      }
-    ],
+    basePrice: 50,
     availableCount: 0,
     available: true,
     rate: 5,
@@ -99,31 +90,13 @@ const mockedItems = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2150,
-            currency: 'UAH'
-          },
-          {
-            value: 77,
-            currency: 'USD'
-          }
-        ]
+        price: 77
       },
       {
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2100,
-            currency: 'UAH'
-          },
-          {
-            value: 76,
-            currency: 'USD'
-          }
-        ]
+        price: 76
       }
     ]
   },
@@ -206,16 +179,7 @@ const mockedItems = [
         }
       ]
     },
-    basePrice: [
-      {
-        value: 1000,
-        currency: 'UAH'
-      },
-      {
-        value: 50,
-        currency: 'USD'
-      }
-    ],
+    basePrice: 5,
     availableCount: 0,
     available: true,
     rate: 5,
@@ -225,31 +189,13 @@ const mockedItems = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 1000,
-            currency: 'UAH'
-          },
-          {
-            value: 77,
-            currency: 'USD'
-          }
-        ]
+        price: 77
       },
       {
         size: {
           available: true
         },
-        price: [
-          {
-            value: 1000,
-            currency: 'UAH'
-          },
-          {
-            value: 76,
-            currency: 'USD'
-          }
-        ]
+        price: 76
       }
     ]
   }
@@ -259,7 +205,7 @@ export const mockAllFilteredProducts = (queryValue) => [
   {
     request: {
       query: getFilteredProductsQuery,
-      variables: { purchasedCount: -1, currency: 0, limit: 9, skip: 0, search: null }
+      variables: { purchasedCount: -1, limit: 9, skip: 0, search: null }
     },
     result: {
       loading: false,

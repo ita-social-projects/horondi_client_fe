@@ -2,11 +2,7 @@ export default function changeCartItemSizeHandler(item, value, cart) {
   const changedItems = cart.map((el) => {
     if (el.id === item.id) {
       el.options.size = value.size;
-      el.price = value.price;
-
-      el.price.forEach((price) => {
-        price.value *= value.quantity;
-      });
+      el.price = value.price * value.quantity;
     }
     return el;
   });

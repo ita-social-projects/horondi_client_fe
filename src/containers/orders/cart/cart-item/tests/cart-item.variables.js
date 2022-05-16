@@ -120,9 +120,9 @@ export const props = {
 
 export const mockQueryData = {
   __typename: 'Product',
-  _id: '61938f3f47ff1a3ccc1ac5e7',
+  _id: '60588c204b419a0ec128e4bc',
   category: {
-    code: 'bags'
+    code: 'backpacks'
   },
   name: [
     {
@@ -136,12 +136,12 @@ export const mockQueryData = {
   ],
   bottomMaterial: {
     material: {
-      translationsKey: '61938f3f47ff1a3ccc1ac5e2'
+      translationsKey: '61840da5a40f604a050ce412'
     }
   },
   images: {
     primary: {
-      thumbnail: 'thumbnail_hd0lc0ckw1zhymv_photo_2021-11-16_10-30-29.jpg'
+      medium: 'medium_4051sf11kxg1wx88_27.png'
     }
   },
   sizes: [
@@ -203,7 +203,7 @@ export const mockQueryDataConstructor = {
       }
     ],
     images: {
-      thumbnail: 'thumbnail_id73cf0kly0of2u_rolltop.png'
+      medium: 'medium_4051sf11kxg1wx88_27.png'
     },
     sizes: [
       {
@@ -324,7 +324,7 @@ export const mockProduct = [
           },
           images: {
             primary: {
-              thumbnail: 'thumbnail_4051sf11kxg1bqc1_97.png'
+              medium: 'medium_4051sf11kxg1wx88_27.png'
             }
           },
           sizes: [
@@ -404,8 +404,8 @@ export const mockProduct = [
               }
             ],
             images: {
-              small: 'small_id73cf0kly0of2u_rolltop.png',
-              thumbnail: 'thumbnail_id73cf0kly0of2u_rolltop.png'
+              thumbnail: 'thumbnail_id73cf0kly0of2u_rolltop.png',
+              medium: 'medium_4051sf11kxg1wx88_27.png'
             },
             sizes: [
               {

@@ -20,12 +20,14 @@ const AboutUs = () => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
   const aboutUsData = data.getBusinessTextByCode;
   const key = aboutUsData.translationsKey;
+  const translatedTitle = t(`${key}.title`);
+  const translatedSections = t(`${key}.sections`, { returnObjects: true });
 
-  const sections = aboutUsData.sections[0].value.map((section, idx) => (
+  const sections = translatedSections.map((section) => (
     <div key={section.id} className={`${styles.section}`}>
       <div>
-        <h3>{t(`${key}.sections.${idx}.title`)}</h3>
-        <p>{parse(t(`${key}.sections.${idx}.text`))}</p>
+        <h3>{section.title}</h3>
+        <p>{parse(section.text)}</p>
       </div>
       <img className={`${styles.sectionImg}`} src={section.img.src} alt={section.img.name} />
     </div>
@@ -34,7 +36,7 @@ const AboutUs = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.root}`}>
-        <h1>{t(`${key}.title`)}</h1>
+        <h1>{translatedTitle}</h1>
         <hr />
         <div className={`${styles.sections}`}>{sections}</div>
         <img

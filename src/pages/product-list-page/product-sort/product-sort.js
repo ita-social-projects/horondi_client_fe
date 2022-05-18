@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { debounce } from 'lodash';
+import useDebounce from '../../../hooks/use-debounce';
 
 import { useStyles, searchStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
@@ -29,11 +29,12 @@ const ProductSort = () => {
   const { sort, nameFilter, page, defaultPage } = URL_QUERIES_NAME;
   const nameFilterValue = searchParams.get(nameFilter);
 
-  const [searchFieldValue, setSearchFieldValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const debouncedSearchValue = useDebounce(searchValue, 1000);
 
   useEffect(() => {
     if (!nameFilterValue) {
-      setSearchFieldValue('');
+      setSearchValue('');
     }
   }, [nameFilterValue]);
 
@@ -46,19 +47,19 @@ const ProductSort = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const debouncedHandleSearch = useCallback(
-    debounce((value) => {
-      searchParams.set(nameFilter, value);
-      history.push(`?${searchParams.toString()}`);
-    }, 1000),
-    []
-  );
+  useEffect(() => {
+    if (debouncedSearchValue) {
+      searchParams.set(page, defaultPage);
+      searchParams.set(nameFilter, debouncedSearchValue);
+    } else {
+      searchParams.delete(nameFilter);
+    }
+    history.push(`?${searchParams.toString()}`);
+  }, [debouncedSearchValue]);
 
   const handleSearch = (event) => {
     const { value } = event.target;
-    debouncedHandleSearch.cancel();
-    setSearchFieldValue(value);
-    debouncedHandleSearch(value);
+    setSearchValue(value);
   };
 
   useEffect(() => {
@@ -89,7 +90,7 @@ const ProductSort = () => {
         fieldOptions={searchStyles}
         fromNavBar={false}
         searchHandler={handleSearch}
-        defaultValue={searchFieldValue}
+        defaultValue={searchValue}
       />
 
       <div className={styles.sortByText}>

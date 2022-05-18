@@ -267,7 +267,7 @@ export const mockAllFilteredProducts = (queryValue) => [
         getProducts: {
           __typename: 'PaginatedProducts',
           items: queryValue ? [] : mockedItems,
-          count: 0
+          count: queryValue ? 0 : 1
         }
       }
     }

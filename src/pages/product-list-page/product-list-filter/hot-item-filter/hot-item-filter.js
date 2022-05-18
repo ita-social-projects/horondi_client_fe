@@ -15,11 +15,12 @@ const HotItemFilter = () => {
 
   const { isHotItemFilter, page, defaultPage } = URL_QUERIES_NAME;
   const searchParams = new URLSearchParams(search);
+  const hotItemParam = searchParams.get(isHotItemFilter);
   const [hotItem, setHotItem] = useState(false);
 
   useEffect(() => {
-    setHotItem(!!searchParams.get(isHotItemFilter));
-  });
+    setHotItem(Boolean(hotItemParam));
+  }, [hotItemParam]);
 
   const handleChange = (event) => {
     if (event.target.checked) {

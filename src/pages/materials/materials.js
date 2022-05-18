@@ -63,7 +63,7 @@ const Materials = () => {
     variables: { type: 'main', limit: 0, skip: 0 }
   });
 
-  const materialsTextile = dataTextile?.getMaterialsBlocksByType || {};
+  const materialsTextile = dataTextile?.getMaterialsBlocksByType.items || [];
 
   const {
     loading: loadingBottom,
@@ -73,7 +73,7 @@ const Materials = () => {
     variables: { type: 'bottom', limit: 0, skip: 0 }
   });
 
-  const materialsBottom = dataBottom?.getMaterialsBlocksByType || {};
+  const materialsBottom = dataBottom?.getMaterialsBlocksByType.items || [];
 
   const { isLoading, isError } = useIsLoadingOrError(
     [loadingPatterns, loadingTextile, loadingBottom],

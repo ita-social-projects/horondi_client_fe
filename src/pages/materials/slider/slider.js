@@ -17,8 +17,8 @@ const Slider = ({ sliderlImages, patterns }) => {
   const sliderRef = useRef();
   const carouselRef = useRef();
 
-  const amountOfSlides = (`0${  patterns.length}`).slice(-2);
-  const currentSlide = (`0${  selected + 1}`).slice(-2);
+  const amountOfSlides = `0${patterns.length}`.slice(-2);
+  const currentSlide = `0${selected + 1}`.slice(-2);
 
   const sliderItem = patterns.map((pattern, index) => (
     <div key={pattern._id} data-src={sliderlImages[index]}>
@@ -31,24 +31,26 @@ const Slider = ({ sliderlImages, patterns }) => {
     </div>
   ));
 
-  const onClickHandler = (element) => {
+  const slideChangeHandler = (element) => {
     const prevIndex = sliderRef.current.index;
-    const currentIndex = +element.target.dataset.index;
+    const currentIndex = Number(element.target.dataset.index);
 
     if (prevIndex > currentIndex) {
-      return sliderRef.current.goTo({ index: currentIndex, direction: false });
+      sliderRef.current.goTo({ index: currentIndex, direction: false });
+      return;
     }
 
     sliderRef.current.goTo({ index: currentIndex, direction: true });
   };
 
   const onTransitionEnd = (element) => {
-    const {slidesToShow} = carouselRef.current.state;
+    const { slidesToShow } = carouselRef.current.state;
 
     setSelected(element.currentIndex);
 
     if (element.slides - slidesToShow < element.currentIndex) {
-      return carouselRef.current.goToSlide(element.slides - slidesToShow);
+      carouselRef.current.goToSlide(element.slides - slidesToShow);
+      return;
     }
 
     carouselRef.current.goToSlide(element.currentIndex);
@@ -82,7 +84,7 @@ const Slider = ({ sliderlImages, patterns }) => {
             alt=''
             data-index={index}
             draggable={false}
-            onClick={onClickHandler}
+            onClick={slideChangeHandler}
             className={`${styles.image} ${selected === index ? styles.selected : ''}`}
           />
         ))}

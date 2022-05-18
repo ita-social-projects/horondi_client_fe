@@ -12,19 +12,17 @@ const MaterialsBottom = ({ materialsBottom }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const materialsBottomItems = materialsBottom.items
-    ? materialsBottom.items.map((item, index) => (
-      <Card key={index} className={styles.card}>
-        <CardMedia className={styles.media} image={item.image}>
-          <CardContent className={styles.content}>
-            <Typography variant='body2' component='p'>
-              {t(`${item.translationsKey}.text`)}
-            </Typography>
-          </CardContent>
-        </CardMedia>
-      </Card>
-    ))
-    : null;
+  const materialsBottomItems = materialsBottom.map((item, index) => (
+    <Card key={index} className={styles.card}>
+      <CardMedia className={styles.media} image={item.image}>
+        <CardContent className={styles.content}>
+          <Typography variant='body2' component='p'>
+            {t(`${item.translationsKey}.text`)}
+          </Typography>
+        </CardContent>
+      </CardMedia>
+    </Card>
+  ));
 
   return (
     <>

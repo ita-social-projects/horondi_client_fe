@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import useDebounce from '../../../hooks/use-debounce';
 
-import { useStyles, searchStyles } from './product-sort.styles';
+import { useStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import SearchBar from '../../../containers/search-bar/search-bar';
 import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
@@ -86,8 +86,6 @@ const ProductSort = () => {
       <SearchBar
         searchParams={searchState}
         setSearchParams={setSearchState}
-        initialSearchState={initialSearchState}
-        fieldOptions={searchStyles}
         fromNavBar={false}
         searchHandler={handleSearch}
         defaultValue={searchValue}

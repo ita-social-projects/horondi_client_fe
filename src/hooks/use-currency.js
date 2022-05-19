@@ -18,7 +18,7 @@ export const useCurrency = () => {
     }
   };
 
-  const getBaseCurrencyPrice = (valueInUAH) => Math.round(valueInUAH / currencies.USD.exchangeRate);
+  const getBaseCurrencyPrice = (valueInUAH) => Math.round(valueInUAH / currencies.UAH.exchangeRate);
 
   return {
     getPriceWithCurrency,

@@ -40,12 +40,12 @@ const ProductListItem = ({ product }) => {
       ({ size, price }) => size.available && { size, price }
     );
 
-    const price = getPriceWithCurrency(availableSizes[0]?.price);
+    const priceWithCurrency = getPriceWithCurrency(availableSizes[0]?.price);
 
     return product.available ? (
       <div className={styles.price}>
         <div>
-          {t('common.from') + price}
+          {t('common.from') + priceWithCurrency}
           {'\u00A0'}
         </div>
         <div className={styles.currency}>{currencySign}</div>

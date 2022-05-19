@@ -5,7 +5,7 @@ import errorOrLoadingHandler from '../utils/errorOrLoadingHandler';
 
 const initialValues = {
   currency: 'UAH',
-  currencyHandler: () => {},
+  currencyHandler: () => ({}),
   currencies: {}
 };
 

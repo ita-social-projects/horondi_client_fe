@@ -23,7 +23,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
   const min = getMin(getPriceWithCurrency(priceRange.minPrice));
   const max = getMax(getPriceWithCurrency(priceRange.maxPrice));
 
-  const fixPrice = (prices) => prices.map((el) => getBaseCurrencyPrice(el));
+  const fixPrice = (inputPrices) => inputPrices.map((el) => getBaseCurrencyPrice(el));
 
   const [prices, setPrices] = useState([min, max]);
   const [pricesFromInput, setPricesFromInput] = useState([min, max]);

@@ -10,15 +10,14 @@ export const useCurrency = () => {
     Math.round(value * currencies[currentCurrency].exchangeRate);
 
   const getCurrencySign = () => {
-    switch (currentCurrency) {
-      case 'USD':
-        return <DollarIcon />;
-      default:
-        return <HryvniaIcon />;
+    if (currentCurrency === 'USD') {
+      return <DollarIcon />;
     }
+    return <HryvniaIcon />;
   };
 
-  const getBaseCurrencyPrice = (valueInUAH) => Math.round(valueInUAH / currencies.UAH.exchangeRate);
+  const getBaseCurrencyPrice = (value) =>
+    Math.round(value / currencies[currentCurrency].exchangeRate);
 
   return {
     getPriceWithCurrency,

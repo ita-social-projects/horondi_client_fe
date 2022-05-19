@@ -40,7 +40,7 @@ describe('OrderHistoryOrderItem component tests', () => {
       <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItemProduct item={item} currency={0} />
+            <OrderHistoryItemProduct item={item} />
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>
@@ -67,7 +67,7 @@ describe('OrderHistoryOrderItem component tests,renders plug for product', () =>
       <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItemProduct item={nullProduct} currency={1} />
+            <OrderHistoryItemProduct item={nullProduct} />
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>

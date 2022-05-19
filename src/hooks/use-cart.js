@@ -20,7 +20,7 @@ export const useCart = (user = null) => {
   }, [cart, user, dispatch]);
 
   const addToCart = (item) => {
-    setNewCart((prevCart) => [...prevCart, item]);
+    setNewCart((prevCart) => [item, ...prevCart]);
   };
 
   const clearCart = () => {

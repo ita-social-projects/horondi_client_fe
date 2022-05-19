@@ -77,8 +77,8 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const cartItem = isFromConstructor ? constructorCartItem : product?.getProductById;
 
   const itemFoto = isFromConstructor
-    ? cartItem?.model?.images?.thumbnail
-    : cartItem?.images.primary.thumbnail;
+    ? cartItem?.model?.images?.medium
+    : cartItem?.images.primary.medium;
 
   const defaultItemName = t(`${cartItem?.translationsKey}.name`);
   const constructorItemName = t('common.backpackFromConstructor');
@@ -225,7 +225,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   return cartItem ? (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell classes={{ root: styles.product }} data-cy='cart-item-img'>
-        {productImg}
+        <div>{productImg}</div>
         <div>
           {productName}
           {itemMaterial}

@@ -17,7 +17,6 @@ const { ACCESS_TOKEN_IS_NOT_VALID } = AUTH_ERRORS;
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: introspectionResult
 });
-const token = getFromLocalStorage(ACCESS_TOKEN);
 
 export const REACT_APP_API_URL =
   window.env && window.env.REACT_APP_API_URL
@@ -29,7 +28,7 @@ const wsLink = new WebSocketLink({
   options: {
     reconnect: true,
     connectionParams: {
-      authToken: token
+      authToken: getFromLocalStorage(ACCESS_TOKEN)
     }
   }
 });
@@ -37,7 +36,7 @@ const wsLink = new WebSocketLink({
 const authLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    token: token || ''
+    token: getFromLocalStorage(ACCESS_TOKEN) || ''
   }
 }));
 
@@ -61,6 +60,7 @@ export const client = new ApolloClient({
 
 export const getItems = async (query, variables = {}) => {
   try {
+    const token = getFromLocalStorage(ACCESS_TOKEN);
     const queryResult = await client.query({
       query: gql`
         ${query}
@@ -95,6 +95,7 @@ export const getItems = async (query, variables = {}) => {
 
 export const setItems = async (query, variables) => {
   try {
+    const token = getFromLocalStorage(ACCESS_TOKEN);
     const mutationResult = await client.mutate({
       mutation: gql`
         ${query}

@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const getAllSlides = gql`
   query {
-    getAllSlides {
+    getAllSlides(show_statuses: true) {
       items {
         _id
         images {

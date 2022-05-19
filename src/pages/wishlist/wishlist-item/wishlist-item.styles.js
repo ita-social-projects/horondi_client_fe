@@ -17,7 +17,7 @@ const button = {
   }
 };
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ palette }) => ({
   root: {
     justifyContent: 'space-between',
     whiteSpace: 'nowrap',
@@ -98,24 +98,23 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
-  cartButton: (isLightTheme) => ({
+  cartButton: {
     ...button,
+    background: palette.button.normal.backgroundColor,
+    color: palette.button.normal.color,
     '&:hover': {
-      backgroundColor: isLightTheme ? '#3F3F3F' : '#020202',
-      color: '#FEFEFE'
-    },
-    background: isLightTheme ? '#020202' : '#FEFEFE',
-    color: isLightTheme ? '#FEFEFE' : '#020202'
-  }),
-  detailsButton: (isLightTheme) => ({
+      backgroundColor: palette.button.hover.backgroundColor,
+      color: palette.button.hover.color
+    }
+  },
+  detailsButton: {
     ...button,
     marginTop: '15px',
+    background: palette.backgroundColor,
+    color: palette.textColor,
+    border: `1px solid ${palette.button.normal.borderColor}`,
     '&:hover': {
-      backgroundColor: isLightTheme ? '#3F3F3F' : '#020202',
-      color: '#FEFEFE'
-    },
-    background: isLightTheme ? '#FEFEFE' : 'none',
-    border: isLightTheme ? 'none' : '1px solid #FEFEFE',
-    color: isLightTheme ? '#020202' : '#FEFEFE'
-  })
+      backgroundColor: palette.button.hoverSecondary.backgroundColor
+    }
+  }
 }));

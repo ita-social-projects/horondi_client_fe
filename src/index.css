@@ -50,10 +50,11 @@ p {
   padding: 0 !important;
 }
 
-.fb_dialog_content iframe:first-child {
-  bottom: 190px !important;
-}
-
 iframe.fb_customer_chat_bounce_in_v2 {
-  right: 84px !important;
+  right: 100px !important;
+  bottom: 24px !important;
+}
+iframe.fb_customer_chat_bounce_out_v2 {
+  right: 100px !important;
+  bottom: 24px !important;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField, InputAdornment, Tabs, Tab } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,11 +10,11 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
-import DeliveryType from './delivery-type';
 import { useStyles } from './checkout-form.styles';
 import {
   CY_CODE_ERR,
   deliveryTypes,
+  countryOptions,
   SESSION_STORAGE,
   TEXT_FIELDS,
   TEXT_FIELD_VARIANT
@@ -61,8 +61,11 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
   );
+  const [countryOption, setCountryOption] = useState(countryOptions.WITHIN_UKRAINE);
   const [initialValues, setInitialValues] = useState(stateInitialValues);
   const [pricesFromQuery, setPricesFromQuery] = useState([]);
+
+  const handleCountryOption = (_, newTabValue) => setCountryOption(newTabValue);
 
   const { discount, categories } = promoCode?.getPromoCodeByCode || {};
 
@@ -99,7 +102,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
 
   const { values, handleSubmit, handleChange, setFieldValue, touched, errors } = useFormik({
     enableReinitialize: true,
-    validationSchema: validationSchema(deliveryType, t),
+    validationSchema: validationSchema(deliveryType, countryOption, t),
     initialValues,
 
     onSubmit: (data) => {
@@ -107,13 +110,13 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
         dispatch(addPaymentMethod(checkoutPayMethod.card));
         dispatch(
           getFondyData({
-            order: orderInputData(data, deliveryType, cartItems, language),
+            order: orderInputData(data, deliveryType, cartItems, countryOption),
             currency: getCurrentCurrency(currency),
             amount: String(totalPriceToPay)
           })
         );
       } else {
-        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, language)));
+        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, countryOption)));
         dispatch(addPaymentMethod(checkoutPayMethod.cash));
       }
       clearSessionStorage();
@@ -177,21 +180,37 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
                 ))}
               </div>
             </div>
-            <DeliveryType
-              errors={errors}
-              touched={touched}
-              setFieldValue={setFieldValue}
-              deliveryType={deliveryType}
-              setDeliveryType={setDeliveryType}
-            />
+            <h3 className={styles.deliveryTitle}>{t('checkout.checkoutTitles.delivery')}</h3>
+            <Tabs
+              className={styles.tabs}
+              value={countryOption}
+              TabIndicatorProps={{ style: { display: 'none' } }}
+              onChange={handleCountryOption}
+              variant='fullWidth'
+              scrollButtons='auto'
+              aria-label='delivery type'
+            >
+              <Tab
+                className={styles.tab}
+                label={t('checkout.tabs.withinUkraineDelivery')}
+                value={countryOptions.WITHIN_UKRAINE}
+              />
+              <Tab
+                className={styles.tab}
+                label={t('checkout.tabs.worldWideDelivery')}
+                value={countryOptions.WORLDWIDE}
+              />
+            </Tabs>
             <Delivery
               deliveryType={deliveryType}
+              countryOption={countryOption}
               language={language}
               values={values}
               errors={errors}
               touched={touched}
               handleChange={handleChange}
               setFieldValue={setFieldValue}
+              setDeliveryType={setDeliveryType}
             />
             <div>
               <h2 className={styles.title}>{t('checkout.checkoutTitles.payment')}</h2>
@@ -212,11 +231,17 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
                   value={values.paymentMethod}
                   onChange={handleChange}
                 >
-                  {Object.values(checkoutPayMethod).map((value) => (
-                    <MenuItem key={value} value={value}>
-                      {t(`checkout.checkoutPayment.${value}`)}
+                  {countryOption === countryOptions.WORLDWIDE ? (
+                    <MenuItem value={checkoutPayMethod.card}>
+                      {t(`checkout.checkoutPayment.${checkoutPayMethod.card}`)}
                     </MenuItem>
-                  ))}
+                  ) : (
+                    Object.values(checkoutPayMethod).map((value) => (
+                      <MenuItem key={value} value={value}>
+                        {t(`checkout.checkoutPayment.${value}`)}
+                      </MenuItem>
+                    ))
+                  )}
                 </Select>
                 {touched.paymentMethod && errors.paymentMethod && (
                   <div data-cy={CY_CODE_ERR} className={styles.error}>

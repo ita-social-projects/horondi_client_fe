@@ -12,6 +12,7 @@ import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
 import { useCart } from '../../../../../hooks/use-cart';
 import { getConstructorByModel } from '../../../operations/getConstructorByModel.query';
+import ConstructorCanvas from '../../../../../components/constructor-canvas';
 
 const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const styles = useStyles();
@@ -67,14 +68,25 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
+  const defaultProductImg = (
+    <img
+      className={styles.yourOrderListImg}
+      src={`${IMG_URL}${orderItem?.images?.primary.thumbnail}`}
+      alt='product-img'
+    />
+  );
+  const constructorProductImg = (
+    <div className={styles.yourOrderListImg}>
+      <ConstructorCanvas item={product} width={56} height={56} x={0} y={0} />
+    </div>
+  );
+
+  const productImg = isFromConstructor ? constructorProductImg : defaultProductImg;
+
   return (
     <ListItem className={styles.yourOrderListItem} key={orderItem?._id} alignItems='center'>
       <Typography component='div'>x {product.quantity}</Typography>
-      <img
-        className={styles.yourOrderListImg}
-        src={`${IMG_URL}${orderItem?.images?.primary.thumbnail}`}
-        alt='product-img'
-      />
+      <div>{productImg}</div>
       <ListItemText
         className={styles.yourOrderListItemDescriptionContainer}
         primary={<div className={styles.yourOrderListItemDescriptionPrimary}>{productName}</div>}

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: ({ isModelsVisible, modelsCount }) => ({
-    height: !isModelsVisible ? '480px' : `${(modelsCount / 2) * 210 + 250}px`,
+    height: !isModelsVisible ? '960px' : `${(modelsCount / 2) * 210 + 250}px`,
     minHeight: '480px',
     position: 'relative',
     display: 'flex',
@@ -17,8 +17,8 @@ export const useStyles = makeStyles((theme) => ({
       borderColor: theme.palette.textColor,
       margin: 50,
       '&:hover': {
-        color: theme.palette.textColor,
-        backgroundColor: theme.palette.backgroundColor
+        color: theme.palette.button.hoverSecondary.color,
+        backgroundColor: theme.palette.button.hoverSecondary.backgroundColor
       }
     }
   }),

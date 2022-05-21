@@ -1,6 +1,6 @@
 import { getFilteredProductsQuery } from '../../../../pages/product-list-page/operations/product-list.queries';
 
-const items = [
+const mockedItems = [
   {
     _id: '605658df158e2fdb53498442',
     category: {
@@ -255,19 +255,19 @@ const items = [
   }
 ];
 
-export const mockAllFilteredProducts = [
+export const mockAllFilteredProducts = (queryValue) => [
   {
     request: {
       query: getFilteredProductsQuery,
-      variables: { purchasedCount: -1, currency: 0, limit: 9, skip: 0 }
+      variables: { purchasedCount: -1, currency: 0, limit: 9, skip: 0, search: null }
     },
     result: {
       loading: false,
       data: {
         getProducts: {
           __typename: 'PaginatedProducts',
-          items,
-          count: 1
+          items: queryValue ? [] : mockedItems,
+          count: queryValue ? 0 : 1
         }
       }
     }

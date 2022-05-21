@@ -15,21 +15,18 @@ const HotItemFilter = () => {
 
   const { isHotItemFilter, page, defaultPage } = URL_QUERIES_NAME;
   const searchParams = new URLSearchParams(search);
+  const hotItemParam = searchParams.get(isHotItemFilter);
   const [hotItem, setHotItem] = useState(false);
 
   useEffect(() => {
-    if (searchParams.get(isHotItemFilter)) {
-      setHotItem(!hotItem);
-    }
-  }, [isHotItemFilter]);
+    setHotItem(Boolean(hotItemParam));
+  }, [hotItemParam]);
 
   const handleChange = (event) => {
     if (event.target.checked) {
       searchParams.set(isHotItemFilter, event.target.checked);
-      setHotItem(!hotItem);
     } else {
       searchParams.delete(isHotItemFilter);
-      setHotItem(!hotItem);
     }
     searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);

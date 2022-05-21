@@ -2,13 +2,14 @@ import { useHistory, useLocation } from 'react-router';
 import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { TEXT_FIELDS, URL_QUERIES_NAME } from '../../configs';
+import { URL_QUERIES_NAME } from '../../configs';
 
 const useProductFilters = (filterParams, filtersList) => {
   const { search } = useLocation();
   const { t, i18n } = useTranslation();
   const history = useHistory();
   const [filtersData, setFiltersData] = useState({});
+  const { page, defaultPage } = URL_QUERIES_NAME;
 
   const searchParams = new URLSearchParams(search);
 
@@ -21,22 +22,14 @@ const useProductFilters = (filterParams, filtersList) => {
   ];
 
   const handleFilterChange = ({ target }, queryName, categoriesList) => {
-    const query = searchParams.get(queryName);
+    const query = searchParams.get(queryName) || '';
     const currentCategory = categoriesList.find((el) => el.name[language].value === target.name);
 
-    if (target.checked) {
-      if (query) searchParams.set(queryName, query.concat(',', currentCategory._id));
-      else searchParams.set(queryName, currentCategory._id);
-    } else if (query) {
-      searchParams.set(queryName, query.replace(currentCategory._id, ''));
-    } else searchParams.delete(queryName);
+    target.checked
+      ? searchParams.set(queryName, query.concat(',', currentCategory._id))
+      : searchParams.set(queryName, query.replace(`,${currentCategory._id}`, ''));
 
-    history.push(`?${searchParams.toString()}`);
-  };
-
-  const handleFilterClear = (queryName) => {
-    searchParams.set(TEXT_FIELDS.PAGE, 1);
-    searchParams.delete(queryName);
+    searchParams.set(page, defaultPage);
     history.push(`?${searchParams.toString()}`);
   };
 
@@ -49,11 +42,9 @@ const useProductFilters = (filterParams, filtersList) => {
         productFilter: filterParams[filterNames[index]] || [],
         list: map(filtersList[key], (el) => el.name[language].value),
         categories: filtersList[key],
-        clearFilter: () => handleFilterClear(queriesNames[index]),
         filterHandler: (e) => handleFilterChange(e, queriesNames[index], filtersList[key])
       };
     });
-
     setFiltersData(data);
   }, [filtersList, filterParams, language]);
 

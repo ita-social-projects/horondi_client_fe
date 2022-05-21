@@ -16,7 +16,7 @@ const Search = createSvgIcon(
 function SearchIcon() {
   return (
     <>
-      <Search />
+      <Search data-testid='search-icon' />
     </>
   );
 }

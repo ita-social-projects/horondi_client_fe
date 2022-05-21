@@ -69,7 +69,7 @@ const Materials = () => {
   });
   const materialsPage = loadingMaterials ? {} : dataMaterials.getBusinessTextByCode;
 
-  const materialPageText = materialsPage.text && parse(t(`${materialsPage.translationsKey}.text`));
+  const materialPageText = materialsPage && parse(t(`${materialsPage.translationsKey}.text`));
   const styles = useStyles();
   const appStyles = useAppStyles();
   const imagesForSlider = patterns.map((pattern, i) => (

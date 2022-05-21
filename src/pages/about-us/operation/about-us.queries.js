@@ -7,27 +7,12 @@ export const getBusinessTextByCode = gql`
       ... on BusinessText {
         _id
         code
-        title {
-          lang
-          value
-        }
-        sections {
-          lang
-          value {
-            id
-            title
-            text
-            img {
-              name
-              src
-            }
-          }
-        }
-        text {
-          lang
-          value
-        }
         languages
+        sectionsImgs {
+          id
+          name
+          src
+        }
         footerImg {
           name
           src

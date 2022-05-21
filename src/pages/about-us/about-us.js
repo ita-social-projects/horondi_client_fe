@@ -23,13 +23,17 @@ const AboutUs = () => {
   const translatedTitle = t(`${key}.title`);
   const translatedSections = t(`${key}.sections`, { returnObjects: true });
 
-  const sections = translatedSections.map((section) => (
+  const sections = translatedSections.map((section, idx) => (
     <div key={section.id} className={`${styles.section}`}>
       <div>
         <h3>{section.title}</h3>
         <p>{parse(section.text)}</p>
       </div>
-      <img className={`${styles.sectionImg}`} src={section.img.src} alt={section.img.name} />
+      <img
+        className={`${styles.sectionImg}`}
+        src={aboutUsData.sectionsImgs[idx].src}
+        alt={aboutUsData.sectionsImgs[idx].name}
+      />
     </div>
   ));
 

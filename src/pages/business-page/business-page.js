@@ -9,7 +9,7 @@ import { getBusinessTextByCode } from './operations/business-page.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
 const BusinessPage = ({ match }) => {
-  const [page, setPage] = useState({});
+  const [page, setPage] = useState(null);
   const code = match.params.page;
   const { t } = useTranslation();
 

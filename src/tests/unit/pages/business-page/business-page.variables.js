@@ -1,48 +1,37 @@
 import { getBusinessTextByCode } from '../../../../pages/business-page/operations/business-page.queries';
 
 export const mockedEmail = 'email@gmail.com';
+const mockCode = 'privacy-policy';
 export const mockData = {
   params: {
-    page: 'about-us'
+    page: mockCode
   }
 };
+export const mockTranslationsKey = '61817b82c1b8cf2127edcb3a';
 
 export const mockRequest = [
   {
     request: {
       query: getBusinessTextByCode,
       variables: {
-        code: 'about-us'
+        code: mockCode
       }
     },
     result: {
       data: {
         getBusinessTextByCode: {
           __typename: 'BusinessText',
-          _id: '5fa034039a59a906f0610e37',
-          code: 'about-us',
-          title: [
-            {
-              value: 'Про нас '
-            },
-            {
-              value: 'About Us'
-            }
-          ],
-          text: [
-            {
-              value:
-                '<h3>Сашко Горонді</h3><img class="editor-img" src="https://horondi.blob.core.windows.net/horondi/images/small_519cbe8km3uwo4a_IMG_0120.jpg" alt="IMG_0120.jpg" width="150px"><img class="editor-img" src="https://horondi.blob.core.windows.net/horondi/images/small_519cbe8km3uwo4b_IMG_0428.jpg" alt="IMG_0428.jpg" width="150px">'
-            },
-            {
-              value:
-                '<h3>Sashko Horondi</h3><img class="editor-img" src="https://horondi.blob.core.windows.net/horondi/images/small_519cbe8km3v4htv_IMG_0120.jpg" alt="IMG_0120.jpg" width="150px"><img class="editor-img" src="https://horondi.blob.core.windows.net/horondi/images/small_519cbe8km3v4htw_IMG_0428.jpg" alt="IMG_0428.jpg" width="150px">'
-            }
-          ],
-          translationsKey: '61801f62d63e5d40d8f09f07',
-          date: '1604334592591'
+          _id: '5fa034039a59a906f0610e38',
+          code: mockCode,
+          languages: ['ua', 'en'],
+          translationsKey: mockTranslationsKey
         }
       }
     }
   }
 ];
+
+export const mockTranslated = {
+  title: 'Умови',
+  text: '<p>Some text</p>'
+};

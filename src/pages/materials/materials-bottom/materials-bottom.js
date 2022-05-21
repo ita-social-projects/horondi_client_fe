@@ -12,8 +12,8 @@ const MaterialsBottom = ({ materialsBottom }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const materialsBottomItems = materialsBottom.map((item, index) => (
-    <Card key={index} className={styles.card}>
+  const materialsBottomItems = materialsBottom.map((item) => (
+    <Card key={item._id} className={styles.card}>
       <CardMedia className={styles.media} image={item.image}>
         <CardContent className={styles.content}>
           <Typography variant='body2' component='p'>
@@ -26,7 +26,7 @@ const MaterialsBottom = ({ materialsBottom }) => {
 
   return (
     <>
-      <h2>{t(`materialsPage.bottom`)}</h2>
+      {materialsBottom.length > 0 && <h2>{t(`materialsPage.bottom`)}</h2>}
       <Carousel infinite={false} className={styles.carousel} responsive={responsive}>
         {materialsBottomItems}
       </Carousel>

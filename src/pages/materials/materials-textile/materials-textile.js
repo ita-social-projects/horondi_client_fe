@@ -6,8 +6,8 @@ const MaterialsTextile = ({ materialsTextile }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
-  const materialsTextileItems = materialsTextile.map((item, index) => (
-    <div key={index} className={styles.container}>
+  const materialsTextileItems = materialsTextile.map((item) => (
+    <div key={item._id} className={styles.container}>
       <img className={styles.image} src={item.image} alt='' />
       <div className={styles.content}>
         <h3>{item.title}</h3>
@@ -18,7 +18,7 @@ const MaterialsTextile = ({ materialsTextile }) => {
 
   return (
     <>
-      <h2>{t('materialsPage.mainTextile')}</h2>
+      {materialsTextile.length > 0 && <h2>{t('materialsPage.mainTextile')}</h2>}
       {materialsTextileItems}
     </>
   );

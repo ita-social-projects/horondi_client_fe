@@ -107,6 +107,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     textAlign: 'center'
   },
   deleteIcon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     color: palette.cart.iconColor,
     cursor: 'pointer'
   },

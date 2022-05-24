@@ -181,10 +181,10 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     }
 
     return (
-      <div>
+      <>
         {currencySign}
         {Math.round(calcPriceForCart(currentPrice, inputValue))}
-      </div>
+      </>
     );
   };
 
@@ -259,14 +259,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
         />
       </TableCell>
       <TableCell>
-        <div className={styles.price}>
-          <div>{totalProductPrice()}</div>
-        </div>
+        <div className={styles.price}>{totalProductPrice()}</div>
       </TableCell>
       <TableCell>
-        <span>
-          <DeleteIcon data-testid='delete' onClick={onDeleteItem} className={styles.deleteIcon} />
-        </span>
+        <div className={styles.deleteIcon}>
+          <DeleteIcon data-testid='delete' onClick={onDeleteItem} />
+        </div>
       </TableCell>
     </TableRow>
   ) : null;

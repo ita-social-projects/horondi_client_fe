@@ -217,6 +217,8 @@ export function* handleSendConfirmation({ payload }) {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(setUserOrders(null));
+  setToLocalStorage(REFRESH_TOKEN, '');
+  setToLocalStorage(ACCESS_TOKEN, '');
 }
 
 export function* handleTokenCheck({ payload }) {

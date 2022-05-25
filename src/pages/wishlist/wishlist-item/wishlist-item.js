@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
-
-import { TableCell, TableRow } from '@material-ui/core';
+import { TableCell, TableRow, IconButton } from '@material-ui/core';
 import { push } from 'connected-react-router';
 import { useDispatch } from 'react-redux';
 import { useStyles } from './wishlist-item.styles';
@@ -73,13 +72,10 @@ const WishlistItem = ({
     );
 
     return availableSizes.length ? (
-      <>
-        <div className={styles.price}>
-          {currencySign}
-          {'\u00A0'}
-          {availableSizes[0].price[currency].value}
-        </div>
-      </>
+      <div className={styles.price}>
+        {currencySign}
+        {availableSizes[0].price[currency].value}
+      </div>
     ) : (
       <>{t('product.sizeNotAvailable')}</>
     );
@@ -125,9 +121,14 @@ const WishlistItem = ({
               </Button>
             </Link>
           </div>
-          <div className={styles.deleteIcon}>
-            <DeleteIcon onClick={onRemoveItem} fontSize='default' />
-          </div>
+          <IconButton
+            className={styles.deleteButton}
+            role='button'
+            aria-label='Delete from wishlist'
+            onClick={onRemoveItem}
+          >
+            <DeleteIcon className={styles.deleteIcon} fontSize='default' />
+          </IconButton>
         </div>
       </TableCell>
     </TableRow>

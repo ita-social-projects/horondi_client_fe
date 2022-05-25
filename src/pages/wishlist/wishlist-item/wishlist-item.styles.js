@@ -9,7 +9,7 @@ const button = {
   letterSpacing: '0.0125em',
   textTransform: 'uppercase',
   '@media (max-width: 880px)': {
-    padding: '4px 2px',
+    padding: '8px',
     fontSize: '10px'
   },
   '@media (max-width:500px)': {
@@ -25,13 +25,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     overflow: 'hidden'
   },
   allItems: {
-    '@media (max-width:868px)': {
-      padding: '3px 0'
-    }
+    padding: '16px 0'
   },
   product: {
     display: 'flex',
-    alignItems: 'center',
     marginRight: '50px',
     '@media (max-width: 1100px)': {
       flexDirection: 'column',
@@ -39,6 +36,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   itemImg: {
+    marginRight: '30px',
+
+    '@media (max-width: 1100px)': {
+      marginRight: '0'
+    },
+
     '@media (max-width: 576px)': {
       width: '70px'
     }
@@ -72,22 +75,27 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'spaceBetween',
-    marginLeft: '5px',
     '& svg': {
       fontSize: '15px',
-      marginRight: '5px'
+      marginRight: '2px'
     }
   },
   delete: {
     display: 'flex',
     justifyContent: 'flex-end'
   },
-  deleteIcon: {
+  deleteButton: {
     marginLeft: '20px',
+    padding: '2px',
     cursor: 'pointer',
+    alignSelf: 'flex-start',
+
     '@media (max-width: 880px)': {
       marginLeft: '0'
     }
+  },
+  deleteIcon: {
+    fill: '#818181'
   },
   priceWrapper: {
     textAlign: 'center',

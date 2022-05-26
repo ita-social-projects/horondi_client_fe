@@ -12,7 +12,6 @@ import { DollarIcon } from '../../../../images/profile-icons';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
-const mockHistoryPush = jest.fn();
 const history = createMemoryHistory();
 const themeValue = theme('light');
 let isWrongNameFilter = false;

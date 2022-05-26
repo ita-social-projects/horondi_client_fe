@@ -11,6 +11,7 @@ export const useStyles = makeStyles(() => ({
     top: 96,
     right: 0,
     backgroundColor: 'white',
+    boxShadow: 'rgb(197 197 197) 0px 5px 10px',
     zIndex: 10000,
     '@media (min-width: 555px)': {
       top: 52,

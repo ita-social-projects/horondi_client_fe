@@ -8,11 +8,7 @@ import Wishlist from '../wishlist-header';
 
 const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
-  const [errors, setErrors] = useState();
 
-  const handleErrors = (error) => {
-    setErrors(error);
-  };
   const initialSearchState = {
     searchFilter: '',
     products: [],
@@ -24,14 +20,8 @@ const HeaderRightBar = ({ fromSideBar, setIsMenuOpen }) => {
 
   return (
     <div className={styles.root}>
-      <SearchBar
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-        initialSearchState={initialSearchState}
-        handleErrors={handleErrors}
-        errors={errors}
-      />
-      <SearchBarList searchParams={searchParams} errors={errors} />
+      <SearchBar searchParams={searchParams} setSearchParams={setSearchParams} />
+      <SearchBarList searchParams={searchParams} />
       <div className={styles.wishlist}>
         <Wishlist />
       </div>

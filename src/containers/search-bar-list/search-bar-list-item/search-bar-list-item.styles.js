@@ -36,7 +36,12 @@ export const useStyles = makeStyles(({ palette }) => ({
       width: 'fit-content',
       minWidth: 'fit-content',
       height: '30px',
-      margin: '10px 5px'
+      margin: '10px',
+      borderRadius: '4px',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.07)',
+        color: '#000000'
+      }
     }
   }
 }));

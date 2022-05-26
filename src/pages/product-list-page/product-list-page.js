@@ -52,6 +52,7 @@ const ProductListPage = ({ width }) => {
   const variables = {
     ...sortParams,
     ...filterParams,
+    search: nameFilter,
     currency,
     limit: Math.ceil(Math.abs(countPerPage)) || 9,
     skip:
@@ -103,14 +104,6 @@ const ProductListPage = ({ width }) => {
 
   const itemsToShow = () => {
     if (products?.length > 0) {
-      if (nameFilter) {
-        const filteredProducts = products.filter((product) =>
-          product.name.some((name) => name.value.toLowerCase().includes(nameFilter.toLowerCase()))
-        );
-        return filteredProducts.map((product) => (
-          <ProductListItem key={product._id} product={product} />
-        ));
-      }
       return products.map((product) => <ProductListItem key={product._id} product={product} />);
     }
     return null;

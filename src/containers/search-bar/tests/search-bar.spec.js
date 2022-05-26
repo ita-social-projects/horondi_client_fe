@@ -1,13 +1,12 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { shallow } from 'enzyme';
-import { TextField } from '@material-ui/core';
-import SearchBar from '../search-bar';
-import SearchIcon from '../SearchIcon';
+import { MockedProvider } from '@apollo/client/testing';
+import { render, fireEvent, screen, act } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { mocks, TestWrapper } from './search-bar.variables';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key) => key,
+    t: () => 'searchBarPlaceholder',
     i18n: { changeLanguage: jest.fn() }
   })
 }));
@@ -16,51 +15,49 @@ jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
 
-jest.mock('@apollo/client');
+describe('search-bar testing', () => {
+  const targetValue = 'banana';
 
-useQuery.mockImplementation((query, options) => {
-  options.onCompleted();
-  return { error: null, loading: true };
-});
-
-const initialSearchState = {
-  searchFilter: '',
-  products: [],
-  searchBarVisibility: false,
-  loading: false
-};
-
-describe('SearchBar component tests', () => {
-  it('Should render one SearchBar component when the input value is typed', () => {
-    const component = shallow(
-      <SearchBar
-        fromSideBar=''
-        initialSearchState={initialSearchState}
-        searchParams={initialSearchState}
-        setSearchParams={() => null}
-        fromNavBar
-        handleErrors={jest.fn()}
-      />
+  beforeEach(() => {
+    render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <TestWrapper />
+      </MockedProvider>
     );
-    component.find(TextField).simulate('focus', { target: { value: 'test' } });
-    expect(component.find(TextField)).toHaveLength(1);
   });
-  it('Should render SearchBar component when regExp doesnt match', () => {
-    const component = shallow(
-      <SearchBar
-        fromSideBar=''
-        initialSearchState={initialSearchState}
-        searchParams={initialSearchState}
-        setSearchParams={() => null}
-        fromNavBar
-        handleErrors={jest.fn()}
-      />
-    );
-    component.find(TextField).simulate('focus', { target: { value: '000' } });
-    expect(component.find(TextField).props().inputProps.maxLength).toEqual(20);
+
+  test('shoud render searchBar with initial props', () => {
+    expect(screen.getByTestId('search-icon')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('searchBarPlaceholder')).toBeInTheDocument();
   });
-  it('Should render SearchIcon component', () => {
-    const component = shallow(<SearchIcon />);
-    expect(component).toBeDefined();
+
+  test('shoud appear element with queried data', async () => {
+    act(() => {
+      fireEvent.change(screen.getByPlaceholderText('searchBarPlaceholder'), {
+        target: { value: targetValue }
+      });
+    });
+    const element = await screen.findByTestId(targetValue);
+    expect(element.textContent).toBe('1');
+  });
+
+  test('should element with data disappear on blur and appear on focus', async () => {
+    act(() => {
+      fireEvent.change(screen.getByPlaceholderText('searchBarPlaceholder'), {
+        target: { value: targetValue }
+      });
+    });
+    act(() => {
+      fireEvent.focusOut(screen.getByPlaceholderText('searchBarPlaceholder'));
+    });
+
+    expect(screen.queryByTestId(targetValue)).not.toBeInTheDocument();
+
+    act(() => {
+      fireEvent.focusIn(screen.getByPlaceholderText('searchBarPlaceholder'));
+    });
+
+    const element = await screen.findByTestId(targetValue);
+    expect(element.textContent).toBe('1');
   });
 });

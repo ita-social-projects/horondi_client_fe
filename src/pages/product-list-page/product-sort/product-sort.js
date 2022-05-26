@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import useDebounce from '../../../hooks/use-debounce';
 
-import { useStyles, searchStyles } from './product-sort.styles';
+import { useStyles } from './product-sort.styles';
 import CountPerPage from '../count-per-page';
 import SearchBar from '../../../containers/search-bar/search-bar';
 import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
@@ -27,8 +28,18 @@ const ProductSort = () => {
   const searchParams = new URLSearchParams(search);
   const { sort, nameFilter, page, defaultPage } = URL_QUERIES_NAME;
   const nameFilterValue = searchParams.get(nameFilter);
-  const currentNameFilter = nameFilterValue || '';
+
+  const [searchValue, setSearchValue] = useState('');
+  const debouncedSearchValue = useDebounce(searchValue, 1000);
+
+  useEffect(() => {
+    if (!nameFilterValue) {
+      setSearchValue('');
+    }
+  }, [nameFilterValue]);
+
   const query = searchParams.get(sort);
+
   const selectHandler = (e) => {
     const { name } = e.target.value;
     searchParams.set(sort, name);
@@ -36,9 +47,19 @@ const ProductSort = () => {
     history.push(`?${searchParams.toString()}`);
   };
 
-  const handleSearch = (e) => {
-    searchParams.set(nameFilter, e.target.value);
+  useEffect(() => {
+    if (debouncedSearchValue) {
+      searchParams.set(page, defaultPage);
+      searchParams.set(nameFilter, debouncedSearchValue);
+    } else {
+      searchParams.delete(nameFilter);
+    }
     history.push(`?${searchParams.toString()}`);
+  }, [debouncedSearchValue]);
+
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    setSearchValue(value);
   };
 
   useEffect(() => {
@@ -65,11 +86,9 @@ const ProductSort = () => {
       <SearchBar
         searchParams={searchState}
         setSearchParams={setSearchState}
-        initialSearchState={initialSearchState}
-        fieldOptions={searchStyles}
         fromNavBar={false}
         searchHandler={handleSearch}
-        defaultValue={currentNameFilter}
+        defaultValue={searchValue}
       />
 
       <div className={styles.sortByText}>

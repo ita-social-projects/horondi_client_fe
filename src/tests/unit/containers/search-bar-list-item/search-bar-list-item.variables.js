@@ -11,7 +11,3 @@ export const product = {
     }
   ]
 };
-
-// export const mockStore = {
-//   lightMode: true
-// };

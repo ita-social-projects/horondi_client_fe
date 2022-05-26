@@ -1,5 +1,4 @@
 export const mockedProps = {
-  currency: 0,
   checkoutFormBtnValue: jest.fn(),
   consentLink: 'Link',
   t: jest.fn(),

@@ -1,37 +1,35 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { CurrencyContext } from '../../context/currency-context';
+import { MockedProvider } from '@apollo/client/testing';
+import CurrencyContextProvider from '../../context/currency-context';
 import { HryvniaIcon } from '../../images/profile-icons';
 import { useCurrency } from '../use-currency';
+import { mockedCurrencies } from '../../tests/unit/containers/currency/currency.variables';
 
-const mockedValues = {
-  currency: 'UAH',
-  currencies: {
-    UAH: {
-      name: 'UAH',
-      exchangeRate: 30
-    },
-    USD: {
-      name: 'USD',
-      exchangeRate: 1
-    }
-  }
-};
-
-const wrapper = ({ children }) => <CurrencyContext.Provider value={mockedValues}>{children}</CurrencyContext.Provider>;
+const wrapper = ({ children }) => (
+  <MockedProvider mocks={mockedCurrencies} addTypename={false}>
+    <CurrencyContextProvider>{children}</CurrencyContextProvider>
+  </MockedProvider>
+);
 
 describe('use-currency tests', () => {
-  const { result } = renderHook(() => useCurrency(), { wrapper });
+  let renderedHook;
+
+  beforeAll(async () => {
+    renderedHook = renderHook(() => useCurrency(), { wrapper });
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
 
   it('should return currency sign', () => {
-    expect(result.current.getCurrencySign()).toStrictEqual(<HryvniaIcon />);
+    expect(renderedHook.result.current.getCurrencySign()).toStrictEqual(<HryvniaIcon />);
   });
 
   it('should return value with currency', () => {
-    expect(result.current.getPriceWithCurrency(10)).toEqual(300);
+    expect(renderedHook.result.current.getPriceWithCurrency(10)).toEqual(300);
   });
 
   it('should return base price', () => {
-    expect(result.current.getBaseCurrencyPrice(900)).toEqual(30);
+    expect(renderedHook.result.current.getBaseCurrencyPrice(900)).toEqual(30);
   });
 });

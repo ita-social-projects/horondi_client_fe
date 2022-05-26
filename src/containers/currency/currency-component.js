@@ -8,7 +8,6 @@ import { CurrencyContext } from '../../context/currency-context';
 const CurrencyComponent = ({ fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
   const { currency, currencyHandler } = useContext(CurrencyContext);
-
   const mappedCurrencies = Object.values(CURRENCIES_LIST).map(
     ({ label: currencyLabel, unicode: currencyUnicode }) => (
       <ToggleButton

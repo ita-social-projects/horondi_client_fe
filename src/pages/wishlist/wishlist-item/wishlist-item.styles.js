@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
+  padding: '16px',
+  minWidth: '255px',
   borderRadius: '4px',
   fontStyle: 'normal',
   fontWeight: '600',
@@ -10,7 +12,8 @@ const button = {
   textTransform: 'uppercase',
   '@media (max-width: 880px)': {
     padding: '8px',
-    fontSize: '10px'
+    fontSize: '10px',
+    minWidth: 'auto'
   },
   '@media (max-width:500px)': {
     fontSize: '8px'
@@ -29,9 +32,11 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   product: {
     display: 'flex',
+    alignItems: 'center',
     marginRight: '50px',
     '@media (max-width: 1100px)': {
       flexDirection: 'column',
+      alignItems: 'flex-start',
       marginRight: '0'
     }
   },
@@ -69,15 +74,14 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   }),
   price: {
-    fontSize: '15px',
+    fontSize: '20px',
     textAlign: 'center',
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'spaceBetween',
     '& svg': {
-      fontSize: '15px',
-      marginRight: '2px'
+      width: '20px',
+      height: '20px'
     }
   },
   delete: {
@@ -86,12 +90,12 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   deleteButton: {
     marginLeft: '20px',
-    padding: '2px',
     cursor: 'pointer',
     alignSelf: 'flex-start',
 
     '@media (max-width: 880px)': {
-      marginLeft: '0'
+      marginLeft: '0',
+      alignSelf: 'center'
     }
   },
   deleteIcon: {

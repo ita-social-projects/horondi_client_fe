@@ -7,7 +7,6 @@ import { ThemeProvider } from '@material-ui/styles';
 import { order, mock } from './order-history-item.variables';
 import OrderHistoryItem from '../../../../containers/orders/order-history/order-history-item/order-history-item.js';
 import { theme } from '../../../../components/app/app-theme/app.theme';
-import { order } from './order-history-item.variables';
 import { DollarIcon } from '../../../../images/profile-icons.js';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);

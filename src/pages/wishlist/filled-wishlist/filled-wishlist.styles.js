@@ -43,9 +43,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     color: '#242424',
     paddingBottom: 10,
     paddingTop: 10,
-    '& >th': {
-      padding: 8,
-      textAlign: 'center'
+    '& > th': {
+      padding: 8
     },
     borderTop: `1px solid ${palette.cart.borderColor}`,
     borderBottom: `1px solid ${palette.cart.borderColor}`

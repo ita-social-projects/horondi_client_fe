@@ -33,10 +33,7 @@ export const addOrder = async (order) => {
                 }
               }
             }
-            fixedPrice {
-              currency
-              value
-            }
+            fixedPrice
             quantity
             options {
               size {
@@ -44,10 +41,7 @@ export const addOrder = async (order) => {
               }
             }
           }
-          totalPriceToPay {
-            currency
-            value
-          }
+          totalPriceToPay
           paymentStatus
         }
         ... on Error {
@@ -94,10 +88,7 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
                 }
               }
             }
-            fixedPrice {
-              currency
-              value
-            }
+            fixedPrice
             quantity
             options {
               size {
@@ -105,10 +96,7 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
               }
             }
           }
-          totalPriceToPay {
-            currency
-            value
-          }
+          totalPriceToPay
           paymentStatus
         }
         ... on Error {
@@ -153,10 +141,7 @@ export const orderPaidSubscription = gql`
               }
             }
           }
-          fixedPrice {
-            currency
-            value
-          }
+          fixedPrice
           quantity
           options {
             size {
@@ -164,10 +149,7 @@ export const orderPaidSubscription = gql`
             }
           }
         }
-        totalPriceToPay {
-          currency
-          value
-        }
+        totalPriceToPay
         paymentStatus
       }
       ... on Error {
@@ -206,10 +188,7 @@ export const sendOrderToEmail = gql`
               }
             }
           }
-          fixedPrice {
-            currency
-            value
-          }
+          fixedPrice
           quantity
           options {
             size {
@@ -217,10 +196,7 @@ export const sendOrderToEmail = gql`
             }
           }
         }
-        totalPriceToPay {
-          currency
-          value
-        }
+        totalPriceToPay
         paymentStatus
       }
       ... on Error {

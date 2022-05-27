@@ -41,6 +41,7 @@ export const addOrder = async (order) => {
               }
             }
           }
+          fixedExchangeRate
           totalPriceToPay
           paymentStatus
         }

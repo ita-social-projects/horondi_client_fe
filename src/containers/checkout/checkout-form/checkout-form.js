@@ -110,8 +110,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
         dispatch(
           getFondyData({
             order: orderInputData(data, deliveryType, cartItems, countryOption),
-            currency,
-            amount: String(totalPriceToPay)
+            currency
           })
         );
       } else {

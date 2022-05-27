@@ -42,11 +42,15 @@ export function* handleGetFondyUrl({ payload }) {
 
     const newOrder = yield call(addOrder, payload.order);
 
+    const { totalPriceToPay, fixedExchangeRate } = newOrder;
+    const orderPrice =
+      payload.currency === 'UAH' ? totalPriceToPay * fixedExchangeRate : totalPriceToPay;
+
     const orderWithCheckoutUrl = yield call(
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      (payload.amount * 100).toString()
+      (Math.round(orderPrice) * 100).toString()
     );
 
     setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);

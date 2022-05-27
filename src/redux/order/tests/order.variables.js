@@ -9,8 +9,8 @@ export const orderExample = {
   cancellationReason: 'not my size',
   delivery: {},
   items: [{}],
-  totalItemsPrice: [{}],
-  totalPriceToPay: [{}],
+  totalItemsPrice: 250,
+  totalPriceToPay: 250,
   isPaid: true,
   paymentMethod: 'CARD',
   paymentStatus: 'CREATED'

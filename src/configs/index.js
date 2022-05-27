@@ -77,10 +77,10 @@ export const TEXT_FIELD_VARIANT = {
   ROUNTED: 'rounded'
 };
 
-export const CURRENCIES_LIST = [
-  { currency: 'UAH', value: 0 },
-  { currency: 'USD', value: 1 }
-];
+export const CURRENCIES_LIST = {
+  UAH: { label: 'UAH', unicode: '\u20b4' },
+  USD: { label: 'USD', unicode: '\u0024' }
+};
 export const LANGUAGE = 'language';
 export const CURRENCY = 'currency';
 

@@ -6,7 +6,7 @@ export const initialState = {
       _id: ''
     },
     quantity: 1,
-    price: [],
+    price: 0,
     options: {
       size: {
         _id: ''

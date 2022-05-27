@@ -1,7 +1,3 @@
-export const mockSelector = {
-  currency: 0
-};
-
 export const mockItem = {
   _id: '605658df158e2fdb53498442',
   category: {
@@ -57,31 +53,13 @@ export const mockImagesList = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2050,
-            currency: 'UAH'
-          },
-          {
-            value: 76,
-            currency: 'USD'
-          }
-        ]
+        price: 76
       },
       {
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2050,
-            currency: 'UAH'
-          },
-          {
-            value: 76,
-            currency: 'USD'
-          }
-        ]
+        price: 76
       }
     ]
   }

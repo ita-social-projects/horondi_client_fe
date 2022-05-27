@@ -1,42 +1,27 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: ({ fromSideBar, currency }) => ({
-    '& .MuiButtonGroup-root': {
+  root: ({ fromSideBar }) => ({
+    '& .MuiToggleButtonGroup-root': {
       height: '20px',
-      '&:hover': {
-        backgroundColor: 'none',
-        '& .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child)': {
-          borderRight: `1px solid ${fromSideBar ? '' : 'rgba(254, 254, 254, 0.75)'}`
-        },
-        '& span': {
-          color: fromSideBar ? '' : 'rgba(254, 254, 254, 0.75)'
-        }
-      },
-      '& .MuiButton-root': {
-        padding: '5px 8px',
+      '& .MuiToggleButton-root': {
+        border: 'none',
+        borderRadius: '0px',
         fontStyle: 'normal',
         fontWeight: 600,
         fontSize: '12px',
         letterSpacing: '0.0015em',
         color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)',
-        borderRadius: '0px',
-        '& > span': {
-          zIndex: -1
+        '&.Mui-selected': {
+          textDecoration: 'underline',
+          backgroundColor: 'transparent'
         }
       }
     },
-    '& .MuiButton-outlined': {
-      border: 'none'
-    },
-    '& .MuiButtonGroup-groupedOutlinedHorizontal:last-child': {
-      textDecoration: currency ? 'underline' : null
-    },
-    '& .MuiButtonGroup-groupedOutlinedHorizontal:not(:last-child)': {
-      textDecoration: currency ? null : 'underline',
+    '& .MuiToggleButtonGroup-grouped:first-child': {
       borderRight: `1px solid ${
         fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
-      }`
+      } !important`
     }
   })
 }));

@@ -21,10 +21,7 @@ export const mockGetProductById = {
         },
         sizes: [
           {
-            price: [
-              { value: 2150, currency: 'UAH' },
-              { value: 77, currency: 'USD' }
-            ],
+            price: 77,
             size: { _id: '604394a2a7532c33dcb326d5', name: 'M', available: true }
           }
         ]
@@ -44,12 +41,7 @@ export const props = {
           _id: 'test',
           name: 'S'
         },
-        price: [
-          {
-            value: 1000,
-            currency: 'UAH'
-          }
-        ]
+        price: 50
       }
     }
   ],
@@ -69,12 +61,7 @@ const mockGetCartItem = jest.fn().mockReturnValue({
       _id: 'test',
       name: 'S'
     },
-    price: [
-      {
-        value: 1000,
-        currency: 'UAH'
-      }
-    ]
+    price: 50
   }
 });
 

@@ -1,17 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import CartItem from '../cart-item';
 import { props, mockProduct, constructor, itemData } from './cart-item.variables';
+import { DollarIcon } from '../../../../../images/profile-icons';
 
 jest.mock('react-redux');
 jest.mock('../cart-item.styles', () => ({ useStyles: () => ({}) }));
-
-useSelector.mockImplementation(() => ({
-  currency: 0
-}));
 
 const mockChangeQuantity = jest.fn();
 const mockChangeSizeConstructor = jest.fn();
@@ -19,6 +15,9 @@ const mockGetCartItem = jest.fn(() => itemData);
 const mockChangeSize = jest.fn();
 const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
 const mockGetProductPrice = jest.fn(() => 1100);
+const mockGetPriceWithCurrency = jest.fn(() => 200);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+
 const mockCartOperations = {
   changeQuantity: mockChangeQuantity,
   getCartItem: mockGetCartItem,
@@ -27,6 +26,13 @@ const mockCartOperations = {
   getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
   getProductPrice: mockGetProductPrice
 };
+
+jest.mock('../../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
 
 describe('Cart item component tests', () => {
   it('should calculate price with promoCode', async () => {

@@ -37,7 +37,6 @@ export const getConstructorById = gql`
             value
           }
           additionalPrice {
-            currency
             value
           }
         }
@@ -54,7 +53,6 @@ export const getConstructorById = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
         patterns {
@@ -65,7 +63,6 @@ export const getConstructorById = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
       }

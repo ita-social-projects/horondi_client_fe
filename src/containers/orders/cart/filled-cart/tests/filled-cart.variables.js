@@ -17,16 +17,7 @@ export const items = [
         volumeInLiters: 18,
         weightInKg: 0.8
       },
-      price: [
-        {
-          value: 1000,
-          currency: 'UAH'
-        },
-        {
-          value: 36,
-          currency: 'USD'
-        }
-      ]
+      price: 36
     },
     quantity: 1,
     constructor: false,
@@ -118,16 +109,7 @@ export const mockProductFromConstructor = {
               name: 'M',
               available: true
             },
-            price: [
-              {
-                value: 3200,
-                currency: 'UAH'
-              },
-              {
-                value: 111,
-                currency: 'USD'
-              }
-            ]
+            price: 111
           }
         ]
       }
@@ -215,16 +197,7 @@ export const mockFilteredProducts = [
         }
       ]
     },
-    basePrice: [
-      {
-        value: 1398.12,
-        currency: 'UAH'
-      },
-      {
-        value: 50,
-        currency: 'USD'
-      }
-    ],
+    basePrice: 50,
     availableCount: 0,
     rate: 5,
     translationsKey: '61af5b8d97e964ccc50e2c27',
@@ -233,16 +206,7 @@ export const mockFilteredProducts = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2100,
-            currency: 'UAH'
-          },
-          {
-            value: 75,
-            currency: 'USD'
-          }
-        ]
+        price: 75
       }
     ]
   }
@@ -250,11 +214,7 @@ export const mockFilteredProducts = [
 
 export const itemData = {
   sizeAndPrice: {
-    price: [
-      {
-        value: 2100
-      }
-    ],
+    price: 60,
     size: {
       _id: '',
       name: 'S'

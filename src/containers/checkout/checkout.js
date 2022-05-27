@@ -15,15 +15,12 @@ const Checkout = () => {
   const {
     state: { promoCode }
   } = useLocation();
-  const { currency, loading, isOrderCreated, order, user } = useSelector(
-    ({ Currency, Order, User }) => ({
-      currency: Currency.currency,
-      loading: Order.loading,
-      isOrderCreated: Order.isOrderCreated,
-      order: Order.order,
-      user: User.userData
-    })
-  );
+  const { loading, isOrderCreated, order, user } = useSelector(({ Order, User }) => ({
+    loading: Order.loading,
+    isOrderCreated: Order.isOrderCreated,
+    order: Order.order,
+    user: User.userData
+  }));
   const dispatch = useDispatch();
 
   const { cart: cartItems, cartOperations } = useCart(user);
@@ -40,7 +37,6 @@ const Checkout = () => {
       {!loading && (
         <div className={styles.checkoutContainer}>
           <CheckoutForm
-            currency={currency}
             cartItems={cartItems}
             cartOperations={cartOperations}
             promoCode={promoCode}

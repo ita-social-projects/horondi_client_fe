@@ -5,16 +5,7 @@ export const sizes = [
       name: 'S',
       available: true
     },
-    price: [
-      {
-        value: 2050,
-        currency: 'UAH'
-      },
-      {
-        value: 76,
-        currency: 'USD'
-      }
-    ]
+    price: 76
   },
   {
     size: {
@@ -22,15 +13,6 @@ export const sizes = [
       name: 'S',
       available: true
     },
-    price: [
-      {
-        value: 2100,
-        currency: 'UAH'
-      },
-      {
-        value: 76,
-        currency: 'USD'
-      }
-    ]
+    price: 76
   }
 ];

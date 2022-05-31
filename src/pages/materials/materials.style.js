@@ -1,81 +1,73 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 30,
-    '& h1': {
+    userSelect: 'none',
+    paddingTop: '30px',
+    '& h2': {
+      fontSize: '48px',
+      fontWeight: '400',
       textAlign: 'center',
-      fontSize: '45px',
-      '@media (max-width: 670px)': {
-        fontSize: '30px'
+      marginTop: '100px',
+      '@media (max-width: 768px)': {
+        marginTop: '60px'
       }
-    },
-    '& > h2, h3': {
-      textDecoration: 'underline orangered',
-      textAlign: 'left'
-    },
-    '& h3': {
-      fontSize: '30px',
-      '@media (max-width: 670px)': {
-        textAlign: 'center',
-        fontSize: '20px'
-      }
-    },
-    '& > p > strong': {
-      margin: 0,
-      lineHeight: 0,
-      color: 'white',
-      alignSelf: 'flex-end',
-      position: 'relative',
-      fontWeight: 'bold',
-      zIndex: 1
-    },
-    '& div': {
-      width: 320
-    },
-    '& p': {
-      '@media (max-width: 670px)': {
-        lineHeight: '1rem',
-        textAlign: 'justify'
-      }
-    },
-    '& .editor-img ': {
-      width: 200,
-      float: ' left',
-      margin: '0 30px 30px 0',
-      '@media (max-width: 670px)': {
-        width: '100px',
-        margin: 3
-      }
-    },
-    '.sliderImage img': {
-      width: '100%'
-    },
-    '.sliderImage img , .editor-img': {
-      height: 'auto'
     },
     '& .awssld__content p': {
       position: 'absolute',
-      margin: 0,
-      color: '#fff',
-      bottom: '37px',
-      left: '22px',
+      margin: '0',
+      color: theme.palette.white,
+      bottom: '35px',
+      right: '35px',
       fontSize: '24px',
-      fontWeight: 600
-    },
-    '& .awssld__content': {
-      borderRadius: '10px'
+      fontWeight: '600',
+      '@media (max-width: 520px)': {
+        visibility: 'hidden'
+      }
     },
     '& .awssld__content img': {
       opacity: '50%'
     },
-    '& .awssld__controls button .awssld__controls__arrow-left, & .awssld__controls button .awssld__controls__arrow-right':
-      {
-        opacity: 1
-      },
-    '& .awssld__controls__arrow-left:before, & .awssld__controls__arrow-left:after, & .awssld__controls__arrow-right:before, & .awssld__controls__arrow-right:after':
-      {
-        background: '#fff'
+    '& .awssld__controls': {
+      '@media all and (max-width: 520px)': {
+        visibility: 'visible'
       }
+    },
+    '& .awssld__controls button': {
+      width: '65px',
+      height: '40px',
+      top: 'unset',
+      bottom: '15px',
+      marginLeft: '35px',
+      padding: '0',
+      transition: 'transform  0.3s linear',
+      '&:hover': {
+        transform: 'scale(1.1)'
+      },
+      '@media (max-width: 520px)': {
+        width: '55px'
+      }
+    },
+    '& .awssld__controls button img': {
+      width: '100%'
+    },
+    '& .awssld__next': {
+      right: 'unset',
+      left: '100px',
+      '@media (max-width: 520px)': {
+        left: '80px'
+      }
+    },
+    '& .carousel-item': {
+      padding: '0 10px'
+    }
+  },
+  title: {
+    fontSize: '60px',
+    fontWeight: '300',
+    textAlign: 'center',
+    borderBottom: `1px solid ${theme.palette.cart.borderColor}`,
+    paddingBottom: '30px',
+    marginTop: '60px'
   }
 }));

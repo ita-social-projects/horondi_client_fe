@@ -10,6 +10,7 @@ import {
   mockPromoCode,
   mockProductFromConstructor
 } from './filled-cart.variables';
+import { DollarIcon } from '../../../../../images/profile-icons';
 
 jest.mock('react-redux');
 jest.mock('../filled-cart.styles.js', () => ({ useStyles: () => ({}) }));
@@ -21,6 +22,8 @@ const mockGetCartItem = jest.fn(() => itemData);
 const mockGetProductPrice = jest.fn(() => 1100);
 const mockGetTotalPricesWithPromoCode = jest.fn(() => '41');
 const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
+const mockGetPriceWithCurrency = jest.fn(() => 200);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 const mockCartOperations = {
   getTotalPrice: mockGetTotalPrice,
@@ -29,6 +32,13 @@ const mockCartOperations = {
   getTotalPricesWithPromoCode: mockGetTotalPricesWithPromoCode,
   getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode
 };
+
+jest.mock('../../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
 
 const mocks = [mockPromoCode, mockProductFromConstructor];
 

@@ -8,7 +8,10 @@ import { ThemeProvider } from '@material-ui/styles';
 import { mockAllFilteredProducts } from './product-list-page.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import ProductListPage from '../../../../pages/product-list-page/product-list-page';
+import { DollarIcon } from '../../../../images/profile-icons';
 
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const history = createMemoryHistory();
 const themeValue = theme('light');
 let isWrongNameFilter = false;
@@ -34,7 +37,14 @@ jest.mock('react-i18next', () => ({
   })
 }));
 
-describe('ProductListPage with correct query', () => {
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
+describe('ProductListPage with correct values', () => {
   beforeEach(() => {
     render(
       <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>

@@ -1,5 +1,4 @@
 export const mockedProps = {
-  currency: 0,
   checkoutFormBtnValue: jest.fn(),
   consentLink: 'Link',
   t: jest.fn(),
@@ -33,16 +32,7 @@ export const mockedCartItemsData = [
         volumeInLiters: 18,
         weightInKg: 0.8
       },
-      price: [
-        {
-          value: 1000,
-          currency: 'UAH'
-        },
-        {
-          value: 36,
-          currency: 'USD'
-        }
-      ]
+      price: 36
     },
     quantity: 1,
     constructor: false,
@@ -86,32 +76,14 @@ export const mockQueryData = {
         _id: '604394a2a7532c33dcb326d5',
         name: 'L'
       },
-      price: [
-        {
-          value: 1000,
-          currency: 'UAH'
-        },
-        {
-          value: 37,
-          currency: 'USD'
-        }
-      ]
+      price: 37
     },
     {
       size: {
         _id: '604394cba7532c33dcb326d6',
         name: 'M'
       },
-      price: [
-        {
-          value: 950,
-          currency: 'UAH'
-        },
-        {
-          value: 36,
-          currency: 'USD'
-        }
-      ]
+      price: 36
     }
   ]
 };
@@ -158,12 +130,7 @@ const mockQueryDataConstructor = {
           value: 'Мальмо жовтий роллтоп'
         }
       ],
-      additionalPrice: [
-        {
-          currency: 'UAH',
-          value: 538
-        }
-      ]
+      additionalPrice: 15
     },
     {
       _id: '619eb9a45bbfb0002540bf96',
@@ -184,12 +151,7 @@ const mockQueryDataConstructor = {
           value: 'Шкіра чорна '
         }
       ],
-      additionalPrice: [
-        {
-          value: 326,
-          currency: 'UAH'
-        }
-      ]
+      additionalPrice: 15
     },
     {
       _id: '619e947d5bbfb0002540b7c1',
@@ -200,12 +162,7 @@ const mockQueryDataConstructor = {
         }
       ],
 
-      additionalPrice: [
-        {
-          value: 15,
-          currency: 'USD'
-        }
-      ]
+      additionalPrice: 15
     }
   ],
   patterns: [
@@ -217,12 +174,7 @@ const mockQueryDataConstructor = {
           value: 'Червоний'
         }
       ],
-      additionalPrice: [
-        {
-          value: 55,
-          currency: 'UAH'
-        }
-      ]
+      additionalPrice: 5
     },
     {
       _id: '619e28845bbfb0002540a370',

@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,13 +13,14 @@ import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 
 import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
-import { getCurrencySign } from '../../../../utils/currency';
 import routes from '../../../../configs/routes';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import Loader from '../../../../components/loader';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
+import { CurrencyContext } from '../../../../context/currency-context';
+import { useCurrency } from '../../../../hooks/use-currency';
 
 const { pathToProducts } = routes;
 
@@ -32,14 +32,13 @@ const canvasY = 0;
 const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+  const { currency } = useContext(CurrencyContext);
+  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const [inputValue, setInputValue] = useState(item.quantity);
-  const currencySign = getCurrencySign(currency);
+  const currencySign = getCurrencySign();
   const [currentSize, setCurrentSize] = useState(item.sizeAndPrice.size._id);
   const [firstlyMounted, toggleFirstlyMounted] = useState(false);
-  const [currentPrice, setCurrentPrice] = useState(item.sizeAndPrice.price[currency].value);
+  const [currentPrice, setCurrentPrice] = useState(getPriceWithCurrency(item.sizeAndPrice.price));
   const {
     changeQuantity,
     changeSize,
@@ -66,8 +65,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     }
   });
 
-  const constructorByModel =
-    (product?.getConstructorByModel && product?.getConstructorByModel[0]) || {};
+  const constructorByModel = product?.getConstructorByModel || {};
 
   const constructorCartItem = {
     ...constructorByModel,
@@ -148,9 +146,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     setCurrentSize(itemData.sizeAndPrice.size._id);
 
     if (promoCode) {
-      setCurrentPrice(getProductPriceWithPromoCode(item.id, currency, promoCode));
+      setCurrentPrice(getProductPriceWithPromoCode(item.id, promoCode));
     } else {
-      setCurrentPrice(getProductPrice(item.id, currency));
+      setCurrentPrice(getProductPrice(item.id));
     }
   }, [promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice, getCartItem]);
 
@@ -169,7 +167,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
           <div className={styles.promo}>
             <s>
               {currencySign}
-              {Math.round(calcPriceForCart(item.sizeAndPrice.price[currency].value, inputValue))}
+              {Math.round(
+                calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)
+              )}
             </s>
             <span>
               {currencySign}
@@ -181,10 +181,10 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     }
 
     return (
-      <div>
+      <>
         {currencySign}
-        {Math.round(calcPriceForCart(currentPrice, inputValue))}
-      </div>
+        {calcPriceForCart(currentPrice, inputValue)}
+      </>
     );
   };
 
@@ -248,7 +248,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       <TableCell data-cy='cart-item-description'>
         <div className={styles.price}>
           {currencySign}
-          {Math.round(currentPrice)}
+          {currentPrice}
         </div>
       </TableCell>
       <TableCell>
@@ -259,14 +259,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
         />
       </TableCell>
       <TableCell>
-        <div className={styles.price}>
-          <div>{totalProductPrice()}</div>
-        </div>
+        <div className={styles.price}>{totalProductPrice()}</div>
       </TableCell>
       <TableCell>
-        <span>
-          <DeleteIcon data-testid='delete' onClick={onDeleteItem} className={styles.deleteIcon} />
-        </span>
+        <div className={styles.deleteIcon}>
+          <DeleteIcon data-testid='delete' onClick={onDeleteItem} />
+        </div>
       </TableCell>
     </TableRow>
   ) : null;

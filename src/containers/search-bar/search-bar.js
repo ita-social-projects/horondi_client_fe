@@ -60,7 +60,7 @@ const SearchBar = ({
   const mainClass = fromNavBar ? styles.root : styles.notFromNavbar;
 
   const handleOnBlur = () => {
-    visibilityToggle(false);
+    setTimeout(() => visibilityToggle(false), 100);
   };
 
   const handleOnFocus = () => {

@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const button = {
+  padding: '16px',
+  minWidth: '255px',
   borderRadius: '4px',
   fontStyle: 'normal',
   fontWeight: '600',
@@ -9,8 +11,9 @@ const button = {
   letterSpacing: '0.0125em',
   textTransform: 'uppercase',
   '@media (max-width: 880px)': {
-    padding: '4px 2px',
-    fontSize: '10px'
+    padding: '8px',
+    fontSize: '10px',
+    minWidth: 'auto'
   },
   '@media (max-width:500px)': {
     fontSize: '8px'
@@ -25,9 +28,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     overflow: 'hidden'
   },
   allItems: {
-    '@media (max-width:868px)': {
-      padding: '3px 0'
-    }
+    padding: '16px 0'
   },
   product: {
     display: 'flex',
@@ -35,10 +36,17 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginRight: '50px',
     '@media (max-width: 1100px)': {
       flexDirection: 'column',
+      alignItems: 'flex-start',
       marginRight: '0'
     }
   },
   itemImg: {
+    marginRight: '30px',
+
+    '@media (max-width: 1100px)': {
+      marginRight: '0'
+    },
+
     '@media (max-width: 576px)': {
       width: '70px'
     }
@@ -66,28 +74,32 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   }),
   price: {
-    fontSize: '15px',
+    fontSize: '20px',
     textAlign: 'center',
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'spaceBetween',
-    marginLeft: '5px',
     '& svg': {
-      fontSize: '15px',
-      marginRight: '5px'
+      width: '20px',
+      height: '20px'
     }
   },
   delete: {
     display: 'flex',
     justifyContent: 'flex-end'
   },
-  deleteIcon: {
+  deleteButton: {
     marginLeft: '20px',
     cursor: 'pointer',
+    alignSelf: 'flex-start',
+
     '@media (max-width: 880px)': {
-      marginLeft: '0'
+      marginLeft: '0',
+      alignSelf: 'center'
     }
+  },
+  deleteIcon: {
+    fill: '#818181'
   },
   priceWrapper: {
     textAlign: 'center',

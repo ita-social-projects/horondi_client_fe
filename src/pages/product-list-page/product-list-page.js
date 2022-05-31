@@ -9,7 +9,6 @@ import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
 import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
-import { useSelector } from 'react-redux';
 
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
@@ -33,10 +32,6 @@ const ProductListPage = ({ width }) => {
   const history = useHistory();
   const [products, setProducts] = useState([]);
 
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
-
   const [paginationParams, setPaginationParams] = useState({
     pagesCount: 1,
     currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
@@ -53,7 +48,6 @@ const ProductListPage = ({ width }) => {
     ...sortParams,
     ...filterParams,
     search: nameFilter,
-    currency,
     limit: Math.ceil(Math.abs(countPerPage)) || 9,
     skip:
       Math.ceil(Math.abs(currentPage)) > 1

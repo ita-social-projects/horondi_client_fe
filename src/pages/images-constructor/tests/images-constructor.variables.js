@@ -33,42 +33,15 @@ export const mockAllConstructors = [
                 sizes: [
                   {
                     name: 'L',
-                    additionalPrice: [
-                      {
-                        value: 136,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 5,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 5
                   },
                   {
                     name: 'M',
-                    additionalPrice: [
-                      {
-                        value: 109,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 4,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 4
                   },
                   {
                     name: 'S',
-                    additionalPrice: [
-                      {
-                        value: 82,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 3,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 3
                   }
                 ]
               },
@@ -103,16 +76,7 @@ export const mockAllConstructors = [
                     thumbnail: 'thumbnail_eewk311kwe34min_основа-тканина-жовта.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 538,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 20,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 20
                 },
                 {
                   _id: '619eb9a45bbfb0002540bf96',
@@ -134,16 +98,7 @@ export const mockAllConstructors = [
                     thumbnail: 'thumbnail_eewk311kwe35v9c_основа-тканина-червона.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 538,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 20,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 20
                 },
                 {
                   _id: '619eb9d55bbfb0002540bfad',
@@ -165,16 +120,7 @@ export const mockAllConstructors = [
                     thumbnail: 'thumbnail_eewk311kwe36xsl_основа-тканина-сіра.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 538,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 20,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 20
                 },
                 {
                   _id: '619eba0c5bbfb0002540bfbf',
@@ -196,16 +142,7 @@ export const mockAllConstructors = [
                     thumbnail: 'thumbnail_eewk311kwe3847z_основа-тканина-синя.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 538,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 20,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 20
                 }
               ],
               bottoms: [
@@ -228,16 +165,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdxcgv1_низ-шкіра-чорна.png',
                     thumbnail: 'thumbnail_eewk311kwdxcgv1_низ-шкіра-чорна.png'
                   },
-                  additionalPrice: [
-                    {
-                      value: 326,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 12,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 12
                 },
                 {
                   _id: '619e947d5bbfb0002540b7c1',
@@ -258,16 +186,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdxi1px_низ-шкіра-коричнева.png',
                     thumbnail: 'thumbnail_eewk311kwdxi1px_низ-шкіра-коричнева.png'
                   },
-                  additionalPrice: [
-                    {
-                      value: 407,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 15,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 15
                 }
               ],
               pocketsWithRestrictions: [
@@ -306,16 +225,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdggeyx_158.jpg',
                     thumbnail: 'thumbnail_eewk311kwdggeyx_158.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 55,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 2,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 2
                 },
                 {
                   _id: '619e25dc5bbfb00025409e4d',
@@ -337,12 +247,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdgmaqv_155.jpg',
                     thumbnail: 'thumbnail_eewk311kwdgmaqv_155.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 2,
-                      currency: null
-                    }
-                  ]
+                  additionalPrice: 2
                 },
                 {
                   _id: '619e26a95bbfb0002540a16d',
@@ -364,16 +269,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdgr8a4_161.jpg',
                     thumbnail: 'thumbnail_eewk311kwdgr8a4_161.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 55,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 2,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 2
                 },
                 {
                   _id: '619e27905bbfb0002540a2f4',
@@ -395,16 +291,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdgw7kl_163.jpg',
                     thumbnail: 'thumbnail_eewk311kwdgw7kl_163.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 55,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 2,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 2
                 },
                 {
                   _id: '619e28845bbfb0002540a370',
@@ -426,16 +313,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdh16q1_147.jpg',
                     thumbnail: 'thumbnail_eewk311kwdh16q1_147.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 55,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 2,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 2
                 }
               ]
             },
@@ -457,16 +335,7 @@ export const mockAllConstructors = [
                 sizes: [
                   {
                     name: 'L',
-                    additionalPrice: [
-                      {
-                        value: 136,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 5,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 5
                   }
                 ]
               },
@@ -501,16 +370,7 @@ export const mockAllConstructors = [
                     thumbnail: 'thumbnail_eewk311kwe39fw4_низ-2.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 323,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 12,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 12
                 },
                 {
                   _id: '619eba775bbfb0002540bfe4',
@@ -533,16 +393,7 @@ export const mockAllConstructors = [
                       'thumbnail_eewk311kwe3afar_зображення_viber_2021-11-20_18-46-41-600.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 323,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 12,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 12
                 }
               ],
               bottoms: [
@@ -565,16 +416,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdxsfjz_низ.png',
                     thumbnail: 'thumbnail_eewk311kwdxsfjz_низ.png'
                   },
-                  additionalPrice: [
-                    {
-                      value: 407,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 15,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 15
                 }
               ],
               pocketsWithRestrictions: [],
@@ -599,16 +441,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdp9l83_Чорний.jpg',
                     thumbnail: 'thumbnail_eewk311kwdp9l83_Чорний.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 191,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 7,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 7
                 },
                 {
                   _id: '619e5fc05bbfb0002540b181',
@@ -630,16 +463,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdpga47_Синій.jpg',
                     thumbnail: 'thumbnail_eewk311kwdpga47_Синій.jpg'
                   },
-                  additionalPrice: [
-                    {
-                      value: 218,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 8,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 8
                 }
               ]
             },
@@ -661,42 +485,15 @@ export const mockAllConstructors = [
                 sizes: [
                   {
                     name: 'L',
-                    additionalPrice: [
-                      {
-                        value: 136,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 5,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 5
                   },
                   {
                     name: 'M',
-                    additionalPrice: [
-                      {
-                        value: 109,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 4,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 4
                   },
                   {
                     name: 'S',
-                    additionalPrice: [
-                      {
-                        value: 82,
-                        currency: 'UAH'
-                      },
-                      {
-                        value: 3,
-                        currency: 'USD'
-                      }
-                    ]
+                    additionalPrice: 3
                   }
                 ]
               },
@@ -731,16 +528,7 @@ export const mockAllConstructors = [
                     thumbnail: 'thumbnail_eewk311kwe3bjq0_основа.png'
                   },
                   available: true,
-                  additionalPrice: [
-                    {
-                      value: 323,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 12,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 12
                 }
               ],
               bottoms: [
@@ -763,16 +551,7 @@ export const mockAllConstructors = [
                     small: 'small_eewk311kwdxv3ap_низ-чорна.png',
                     thumbnail: 'thumbnail_eewk311kwdxv3ap_низ-чорна.png'
                   },
-                  additionalPrice: [
-                    {
-                      value: 407,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 15,
-                      currency: 'USD'
-                    }
-                  ]
+                  additionalPrice: 15
                 }
               ],
               pocketsWithRestrictions: [],
@@ -812,46 +591,19 @@ export const mockAllConstructors = [
                 {
                   _id: '604394a2a7532c33dcb326d5',
                   name: 'L',
-                  additionalPrice: [
-                    {
-                      value: 136,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 5,
-                      currency: 'USD'
-                    }
-                  ],
+                  additionalPrice: 5,
                   available: true
                 },
                 {
                   _id: '604394cba7532c33dcb326d6',
                   name: 'M',
-                  additionalPrice: [
-                    {
-                      value: 109,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 4,
-                      currency: 'USD'
-                    }
-                  ],
+                  additionalPrice: 4,
                   available: true
                 },
                 {
                   _id: '60439516a7532c33dcb326d7',
                   name: 'S',
-                  additionalPrice: [
-                    {
-                      value: 82,
-                      currency: 'UAH'
-                    },
-                    {
-                      value: 3,
-                      currency: 'USD'
-                    }
-                  ],
+                  additionalPrice: 3,
                   available: true
                 }
               ]
@@ -887,16 +639,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwe34min_основа-тканина-жовта.png'
                 },
                 available: true,
-                additionalPrice: [
-                  {
-                    value: 538,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 20,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 20
               },
               {
                 _id: '619eb9a45bbfb0002540bf96',
@@ -918,16 +661,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwe35v9c_основа-тканина-червона.png'
                 },
                 available: true,
-                additionalPrice: [
-                  {
-                    value: 538,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 20,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 20
               },
               {
                 _id: '619eb9d55bbfb0002540bfad',
@@ -949,16 +683,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwe36xsl_основа-тканина-сіра.png'
                 },
                 available: true,
-                additionalPrice: [
-                  {
-                    value: 538,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 20,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 20
               },
               {
                 _id: '619eba0c5bbfb0002540bfbf',
@@ -980,16 +705,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwe3847z_основа-тканина-синя.png'
                 },
                 available: true,
-                additionalPrice: [
-                  {
-                    value: 538,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 20,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 20
               }
             ],
             pocketsWithRestrictions: [
@@ -1027,16 +743,7 @@ export const mockAllConstructors = [
                   small: 'small_eewk311kwdxcgv1_низ-шкіра-чорна.png',
                   thumbnail: 'thumbnail_eewk311kwdxcgv1_низ-шкіра-чорна.png'
                 },
-                additionalPrice: [
-                  {
-                    value: 326,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 12,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 4
               },
               {
                 _id: '619e947d5bbfb0002540b7c1',
@@ -1057,16 +764,7 @@ export const mockAllConstructors = [
                   small: 'small_eewk311kwdxi1px_низ-шкіра-коричнева.png',
                   thumbnail: 'thumbnail_eewk311kwdxi1px_низ-шкіра-коричнева.png'
                 },
-                additionalPrice: [
-                  {
-                    value: 407,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 15,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 15
               }
             ],
             patterns: [
@@ -1090,16 +788,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwdggeyx_158.jpg'
                 },
                 constructorImg: 'small_eewk311kwdgh3ty_гобелен-5.png',
-                additionalPrice: [
-                  {
-                    value: 55,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 2,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 2
               },
               {
                 _id: '619e25dc5bbfb00025409e4d',
@@ -1121,12 +810,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwdgmaqv_155.jpg'
                 },
                 constructorImg: 'small_eewk311kwdgmzxf_гобелен-3.png',
-                additionalPrice: [
-                  {
-                    value: 2,
-                    currency: null
-                  }
-                ]
+                additionalPrice: 2
               },
               {
                 _id: '619e26a95bbfb0002540a16d',
@@ -1148,16 +832,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwdgr8a4_161.jpg'
                 },
                 constructorImg: 'small_eewk311kwdgrjem_гобелен-6.png',
-                additionalPrice: [
-                  {
-                    value: 55,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 2,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 2
               },
               {
                 _id: '619e27905bbfb0002540a2f4',
@@ -1179,16 +854,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwdgw7kl_163.jpg'
                 },
                 constructorImg: 'small_eewk311kwdgwig5_гобелен-7.png',
-                additionalPrice: [
-                  {
-                    value: 55,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 2,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 2
               },
               {
                 _id: '619e28845bbfb0002540a370',
@@ -1210,16 +876,7 @@ export const mockAllConstructors = [
                   thumbnail: 'thumbnail_eewk311kwdh16q1_147.jpg'
                 },
                 constructorImg: 'small_eewk311kwdh1qa3_гобелен-1.png',
-                additionalPrice: [
-                  {
-                    value: 55,
-                    currency: 'UAH'
-                  },
-                  {
-                    value: 2,
-                    currency: 'USD'
-                  }
-                ]
+                additionalPrice: 2
               }
             ]
           }

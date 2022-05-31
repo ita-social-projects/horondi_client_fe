@@ -79,16 +79,7 @@ const mockedItems = [
         }
       ]
     },
-    basePrice: [
-      {
-        value: 1334.26,
-        currency: 'UAH'
-      },
-      {
-        value: 50,
-        currency: 'USD'
-      }
-    ],
+    basePrice: 50,
     isHotItem: true,
     purchasedCount: 1214,
     availableCount: 0,
@@ -98,16 +89,7 @@ const mockedItems = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 1950,
-            currency: 'UAH'
-          },
-          {
-            value: 74,
-            currency: 'USD'
-          }
-        ]
+        price: 74
       }
     ]
   }

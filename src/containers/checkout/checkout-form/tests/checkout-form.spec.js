@@ -13,9 +13,12 @@ import {
   mockProduct,
   mockedCartItemsData
 } from './checkout-form.variables';
+import { DollarIcon } from '../../../../images/profile-icons';
 
 const mockClearCart = jest.fn();
-const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const mockGetProductPriceWithPromoCode = jest.fn(() => 50);
 const dispatch = jest.fn();
 const mockCartOperations = {
   clearCart: mockClearCart
@@ -31,6 +34,13 @@ jest.mock('../../../../hooks/use-cart', () => ({
   })
 }));
 
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
 jest.mock('../../../../services/session-storage.service.js', () => ({
   setToSessionStorage: jest.fn(),
   getFromSessionStorage: jest.fn(() => 'UKRPOSTCOURIER'),
@@ -38,8 +48,7 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
 }));
 
 const props = {
-  currency: 0,
-  cartItems: [{ price: [{ currency: 'ua', value: 100 }] }],
+  cartItems: [{ price: 20 }],
   cartOperations: mockCartOperations,
   promoCode: {
     getPromoCodeByCode: {

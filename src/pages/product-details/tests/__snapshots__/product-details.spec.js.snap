@@ -15,8 +15,7 @@ exports[`Product details test Should render product details component 1`] = `
       <div>
         <ProductInfo
           countComments={0}
-          currency={0}
-          currentPrice={Array []}
+          currentPrice={0}
           product={Object {}}
         />
         <ProductSizes
@@ -39,7 +38,7 @@ exports[`Product details test Should render product details component 1`] = `
                     "_id": "",
                   },
                 },
-                "price": Array [],
+                "price": 0,
                 "product": Object {
                   "_id": "",
                 },

@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { ButtonGroup, Button } from '@material-ui/core';
-import { useStyles } from './currency.styles';
-import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
-import { changeCurrency } from '../../redux/currency/currency.actions';
-import { CURRENCIES_LIST, DEFAULT_CURRENCY, CURRENCY } from '../../configs';
-import { HRYVNIA_UNICODE, DOLLAR_UNICODE } from './constants';
+import React, { useContext } from 'react';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
-const currencyInLocalStorage = getFromLocalStorage(CURRENCY) || DEFAULT_CURRENCY;
+import { useStyles } from './currency.styles';
+import { CURRENCY, CURRENCIES_LIST } from '../../configs';
+import { CurrencyContext } from '../../context/currency-context';
 
 const CurrencyComponent = ({ fromSideBar }) => {
-  const dispatch = useDispatch();
-  const currency = getFromLocalStorage(CURRENCY);
-  const styles = useStyles({ fromSideBar, currency });
-  useEffect(() => {
-    dispatch(changeCurrency(currencyInLocalStorage));
-  }, [dispatch]);
-  const handleChange = (e) => {
-    const targetValue = Number(e.target.value);
-    if (targetValue !== undefined) {
-      setToLocalStorage('currency', targetValue);
-      dispatch(changeCurrency(targetValue));
-    }
-  };
-  const mappedCurrencies = CURRENCIES_LIST.map(({ currency: curr, value }) => (
-    <Button onClick={handleChange} data-cy={`${CURRENCY} ${value + 1}`} key={value} value={value}>
-      {curr === 'UAH' ? HRYVNIA_UNICODE : DOLLAR_UNICODE}
-    </Button>
-  ));
+  const styles = useStyles({ fromSideBar });
+  const { currency, currencyHandler } = useContext(CurrencyContext);
+  const mappedCurrencies = Object.values(CURRENCIES_LIST).map(
+    ({ label: currencyLabel, unicode: currencyUnicode }) => (
+      <ToggleButton
+        value={currencyLabel}
+        key={currencyLabel}
+        arau-label={`${CURRENCY} ${currencyLabel}`}
+      >
+        {currencyUnicode}
+      </ToggleButton>
+    )
+  );
+
   return (
     <div data-cy='currency' className={styles.root}>
-      <ButtonGroup>{mappedCurrencies}</ButtonGroup>
+      <ToggleButtonGroup
+        value={currency}
+        exclusive
+        onChange={currencyHandler}
+        aria-label={CURRENCY}
+      >
+        {mappedCurrencies}
+      </ToggleButtonGroup>
     </div>
   );
 };

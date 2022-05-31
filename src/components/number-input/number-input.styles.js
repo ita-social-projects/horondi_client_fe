@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   root: {
     '& .MuiOutlinedInput-root': {
       fontSize: '20px',

@@ -39,22 +39,22 @@ const useConstructorLoader = () => {
   useEffect(() => {
     if (constructorByModel) {
       const pocket =
-        constructorByModel.getConstructorByModel[0].pocketsWithRestrictions[0]
+        constructorByModel.getConstructorByModel.pocketsWithRestrictions[0]
           ?.currentPocketWithPosition?.pocket;
 
       const values = {
-        name: constructorByModel.getConstructorByModel[0].name,
-        size: constructorByModel.getConstructorByModel[0].model.sizes[0],
-        pattern: constructorByModel.getConstructorByModel[0].patterns[0],
-        bottom: constructorByModel.getConstructorByModel[0].bottoms[0],
-        basic: constructorByModel.getConstructorByModel[0].basics[0],
-        model: constructorByModel.getConstructorByModel[0].model,
+        name: constructorByModel.getConstructorByModel.name,
+        size: constructorByModel.getConstructorByModel.model.sizes[0],
+        pattern: constructorByModel.getConstructorByModel.patterns[0],
+        bottom: constructorByModel.getConstructorByModel.bottoms[0],
+        basic: constructorByModel.getConstructorByModel.basics[0],
+        model: constructorByModel.getConstructorByModel.model,
         pocket
       };
 
       setConstructorValues(values);
 
-      currentConstructorModel.current = constructorByModel.getConstructorByModel[0];
+      currentConstructorModel.current = constructorByModel.getConstructorByModel;
 
       currentConstructorModel.current.model && setValuesLoading(false);
     }

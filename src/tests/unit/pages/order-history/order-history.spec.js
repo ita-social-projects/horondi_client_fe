@@ -5,6 +5,10 @@ import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { fullMockedOrders, emptyMockedOrders } from './order-history.variables';
 import OrderHistory from '../../../../pages/order-history/order-history';
+import { DollarIcon } from '../../../../images/profile-icons';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock('../../../../pages/order-history/order-history.styles', () => ({
   useStyles: () => ({})
@@ -37,6 +41,13 @@ jest.mock('@material-ui/styles', () => ({
 jest.mock('react-redux');
 useSelector.mockImplementation(() => ({
   currency: 0
+}));
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
 }));
 
 describe('OrderHistory component', () => {

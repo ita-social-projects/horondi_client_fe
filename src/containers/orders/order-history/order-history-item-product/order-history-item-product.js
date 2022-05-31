@@ -4,15 +4,16 @@ import { useTranslation } from 'react-i18next';
 
 import { useQuery } from '@apollo/client';
 import { useStyles } from './order-history-item-product.styles';
-import { getCurrencySign } from '../../../../utils/currency';
 import { IMG_URL } from '../../../../configs';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
+import { useCurrency } from '../../../../hooks/use-currency';
 
-const OrderHistoryItemProduct = ({ item, currency }) => {
+const OrderHistoryItemProduct = ({ item }) => {
   const styles = useStyles();
-  const currencySign = getCurrencySign(currency);
-  const fixedPriceProduct = item.fixedPrice[currency].value;
+  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
+  const currencySign = getCurrencySign();
+  const fixedPriceProduct = getPriceWithCurrency(item.fixedPrice);
   const { t } = useTranslation();
 
   const { product } = item;

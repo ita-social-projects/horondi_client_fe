@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { TextField, InputAdornment, Tabs, Tab } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -26,7 +26,6 @@ import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
   checkoutPropTypes,
-  getCurrentCurrency,
   getThemeColor,
   handleError,
   updateInitialValues,
@@ -34,7 +33,6 @@ import {
   orderInputData,
   userContactInputLabels
 } from '../../../utils/checkout';
-import { getCurrencySign } from '../../../utils/currency';
 import { validationSchema } from '../../../validators/checkout';
 import {
   clearSessionStorage,
@@ -45,14 +43,15 @@ import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import { useAppStyles } from '../../../components/app/app.styles';
+import { CurrencyContext } from '../../../context/currency-context';
 
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
 
-const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
+const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
+  const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
-  const currencySign = getCurrencySign(currency);
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
@@ -111,8 +110,7 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
         dispatch(
           getFondyData({
             order: orderInputData(data, deliveryType, cartItems, countryOption),
-            currency: getCurrentCurrency(currency),
-            amount: String(totalPriceToPay)
+            currency
           })
         );
       } else {
@@ -282,7 +280,6 @@ const CheckoutForm = ({ currency, cartItems, cartOperations, promoCode }) => {
               consentLink={consentLink}
               t={t}
               currency={currency}
-              currencySign={currencySign}
               totalPriceToPay={totalPriceToPay}
               values={values}
               language={language}

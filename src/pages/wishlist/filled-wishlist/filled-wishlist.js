@@ -15,8 +15,7 @@ import { useCart } from '../../../hooks/use-cart';
 import { useWishlist } from '../../../hooks/use-wishlist';
 
 const FilledWishlist = ({ items }) => {
-  const { currency, userData } = useSelector(({ Currency, User }) => ({
-    currency: Currency.currency,
+  const { userData } = useSelector(({ User }) => ({
     userData: User.userData
   }));
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -83,7 +82,6 @@ const FilledWishlist = ({ items }) => {
                   cartOperations={cartOperations}
                   isInCart={isInCart}
                   setModalItem={setModalItem}
-                  currency={currency}
                 />
               ))}
             </TableBody>

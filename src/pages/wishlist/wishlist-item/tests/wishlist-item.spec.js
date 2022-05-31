@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { DollarIcon } from '../../../../images/profile-icons';
 import WishlistItem from '../wishlist-item';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock('../wishlist-item.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');
@@ -16,6 +20,13 @@ jest.mock('../../../../context/theme-context', () => ({}));
 
 jest.mock('connected-react-router', () => ({
   push: jest.fn()
+}));
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
 }));
 
 const mockIsInCart = jest.fn();

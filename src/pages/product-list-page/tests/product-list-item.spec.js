@@ -1,12 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { DollarIcon } from '../../../images/profile-icons';
 import ProductListItem from '../product-list-item/product-list-item';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 const dispatch = jest.fn();
 const product = {
   _id: '605658df158e2fdb53498442',
   availableCount: 0,
-  basePrice: [],
+  basePrice: 0,
   category: {},
   images: { primary: { large: '' } },
   isHotItem: true,
@@ -21,17 +26,11 @@ const product = {
   rate: 4,
   sizes: [
     {
-      price: [
-        { currency: '', value: 1954 },
-        { currency: '', value: 1954 }
-      ],
+      price: 50,
       size: { available: true }
     },
     {
-      price: [
-        { currency: '', value: 1954 },
-        { currency: '', value: 1954 }
-      ],
+      price: 100,
       size: { available: true }
     }
   ]
@@ -55,8 +54,14 @@ jest.mock('@material-ui/styles', () => ({
 }));
 
 useSelector.mockImplementation(() => ({
-  language: 0,
-  currency: 0
+  language: 0
+}));
+
+jest.mock('../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
 }));
 
 describe('ProductListItem component tests', () => {

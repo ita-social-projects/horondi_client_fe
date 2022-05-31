@@ -32,32 +32,14 @@ export const product = {
         _id: '604394a2a7532c33dcb326d5',
         name: 'L'
       },
-      price: [
-        {
-          value: 1050,
-          currency: 'UAH'
-        },
-        {
-          value: 39,
-          currency: 'USD'
-        }
-      ]
+      price: 39
     },
     {
       size: {
         _id: '604394cba7532c33dcb326d6',
         name: 'M'
       },
-      price: [
-        {
-          value: 1000,
-          currency: 'UAH'
-        },
-        {
-          value: 38,
-          currency: 'USD'
-        }
-      ]
+      price: 38
     }
   ]
 };
@@ -71,16 +53,7 @@ export const mockCart = [
         _id: '604394a2a7532c33dcb326d5',
         name: 'L'
       },
-      price: [
-        {
-          value: 1000,
-          currency: 'UAH'
-        },
-        {
-          value: 37,
-          currency: 'USD'
-        }
-      ]
+      price: 37
     },
     quantity: 4
   }

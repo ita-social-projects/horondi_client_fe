@@ -6,8 +6,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { mockedCartItemsData, mockedProps } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
 import { mockProduct } from '../../../../containers/checkout/checkout-form/tests/checkout-form.variables';
+import { DollarIcon } from '../../../../images/profile-icons';
 
 const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const userData = {
   cartItems: mockedCartItemsData,
   language: 0
@@ -32,6 +35,13 @@ jest.mock('../../../../hooks/use-cart', () => ({
   })
 }));
 
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
 useSelector.mockImplementation(() => userData);
 
 describe('YourOrder component tests', () => {
@@ -53,6 +63,7 @@ describe('YourOrder component tests', () => {
   });
 
   it('should calculate price with promoCode', () => {
+    expect(mockGetPriceWithCurrency).toHaveBeenCalled();
     expect(mockGetProductPriceWithPromoCode).toHaveBeenCalled();
   });
 });

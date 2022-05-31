@@ -61,10 +61,7 @@ export const order = {
   items: [
     {
       quantity: 1,
-      fixedPrice: [
-        { currency: 'UAH', value: 1950 },
-        { currency: 'USD', value: 74 }
-      ],
+      fixedPrice: 74,
       options: { size: { name: 'S' } },
       product: {
         bottomMaterial: {
@@ -90,8 +87,5 @@ export const order = {
       }
     }
   ],
-  totalItemsPrice: [
-    { value: 1950, currency: 'UAH' },
-    { value: 74, currency: 'USD' }
-  ]
+  totalItemsPrice: 74
 };

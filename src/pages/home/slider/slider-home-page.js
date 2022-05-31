@@ -10,6 +10,7 @@ import { useAppStyles } from '../../../components/app/app.styles';
 import { getAllSlides } from '../operations/slider/slider.queries';
 import { IMG_URL } from '../../../configs';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
+import routes from '../../../configs/routes';
 
 const SliderHomePage = () => {
   const [currSlide, setCurrSlide] = useState(0);
@@ -17,6 +18,7 @@ const SliderHomePage = () => {
   const styles = useStyles();
   const appStyles = useAppStyles();
   const { t } = useTranslation();
+  const { pathToCategory } = routes;
   const { loading, error } = useQuery(getAllSlides, {
     onCompleted: (data) => setSlides(data.getAllSlides.items)
   });
@@ -51,8 +53,8 @@ const SliderHomePage = () => {
               </p>
             </div>
             <div className={styles.navWrapper}>
-              <Button className={styles.buttonStyles} component={Link} to={slides[currSlide].link}>
-                {t('home.readMore')}
+              <Button className={styles.buttonStyles} component={Link} to={pathToCategory}>
+                {t('home.shopNow')}
               </Button>
               <div className={styles.arrows}>
                 <button

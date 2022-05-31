@@ -1,6 +1,6 @@
 import { getFilteredProductsQuery } from '../../../../pages/product-list-page/operations/product-list.queries';
 
-const items = [
+const mockedItems = [
   {
     _id: '605658df158e2fdb53498442',
     category: {
@@ -80,16 +80,7 @@ const items = [
         }
       ]
     },
-    basePrice: [
-      {
-        value: 1386.95,
-        currency: 'UAH'
-      },
-      {
-        value: 50,
-        currency: 'USD'
-      }
-    ],
+    basePrice: 50,
     availableCount: 0,
     available: true,
     rate: 5,
@@ -99,31 +90,13 @@ const items = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2150,
-            currency: 'UAH'
-          },
-          {
-            value: 77,
-            currency: 'USD'
-          }
-        ]
+        price: 77
       },
       {
         size: {
           available: true
         },
-        price: [
-          {
-            value: 2100,
-            currency: 'UAH'
-          },
-          {
-            value: 76,
-            currency: 'USD'
-          }
-        ]
+        price: 76
       }
     ]
   },
@@ -206,16 +179,7 @@ const items = [
         }
       ]
     },
-    basePrice: [
-      {
-        value: 1000,
-        currency: 'UAH'
-      },
-      {
-        value: 50,
-        currency: 'USD'
-      }
-    ],
+    basePrice: 5,
     availableCount: 0,
     available: true,
     rate: 5,
@@ -225,49 +189,31 @@ const items = [
         size: {
           available: true
         },
-        price: [
-          {
-            value: 1000,
-            currency: 'UAH'
-          },
-          {
-            value: 77,
-            currency: 'USD'
-          }
-        ]
+        price: 77
       },
       {
         size: {
           available: true
         },
-        price: [
-          {
-            value: 1000,
-            currency: 'UAH'
-          },
-          {
-            value: 76,
-            currency: 'USD'
-          }
-        ]
+        price: 76
       }
     ]
   }
 ];
 
-export const mockAllFilteredProducts = [
+export const mockAllFilteredProducts = (queryValue) => [
   {
     request: {
       query: getFilteredProductsQuery,
-      variables: { purchasedCount: -1, currency: 0, limit: 9, skip: 0 }
+      variables: { purchasedCount: -1, limit: 9, skip: 0, search: null }
     },
     result: {
       loading: false,
       data: {
         getProducts: {
           __typename: 'PaginatedProducts',
-          items,
-          count: 1
+          items: queryValue ? [] : mockedItems,
+          count: queryValue ? 0 : 1
         }
       }
     }

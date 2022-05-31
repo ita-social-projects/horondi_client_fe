@@ -12,16 +12,7 @@ export const fullMockedOrders = {
           items: [
             {
               quantity: 1,
-              fixedPrice: [
-                {
-                  currency: 'UAH',
-                  value: 2100
-                },
-                {
-                  currency: 'USD',
-                  value: 76
-                }
-              ],
+              fixedPrice: 76,
               options: {
                 size: {
                   name: 'S'
@@ -56,16 +47,7 @@ export const fullMockedOrders = {
               }
             }
           ],
-          totalItemsPrice: [
-            {
-              value: 2100,
-              currency: 'UAH'
-            },
-            {
-              value: 76,
-              currency: 'USD'
-            }
-          ]
+          totalItemsPrice: 76
         }
       ],
       ordersCount: 40

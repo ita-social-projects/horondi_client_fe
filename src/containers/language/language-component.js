@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ButtonGroup, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
@@ -16,6 +16,10 @@ const LanguageComponent = ({ fromSideBar }) => {
     setToLocalStorage(LANGUAGE, targetValue);
     i18n.changeLanguage(targetValue);
   };
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, []);
 
   const mappedLanguages = LANGUAGES_LIST.map((lang) => (
     <Button key={lang} value={lang}>

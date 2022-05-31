@@ -8,9 +8,11 @@ import {
 import { calcPriceForCart } from '../utils/priceCalculating';
 import { CART_KEY } from '../configs';
 import { setCart } from '../redux/common-store/common.actions';
+import { useCurrency } from './use-currency';
 
 export const useCart = (user = null) => {
   const dispatch = useDispatch();
+  const { getPriceWithCurrency } = useCurrency();
 
   const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY) || []);
 
@@ -20,7 +22,7 @@ export const useCart = (user = null) => {
   }, [cart, user, dispatch]);
 
   const addToCart = (item) => {
-    setNewCart((prevCart) => [...prevCart, item]);
+    setNewCart((prevCart) => [item, ...prevCart]);
   };
 
   const clearCart = () => {
@@ -30,10 +32,10 @@ export const useCart = (user = null) => {
   const getCartItem = (id) =>
     cart.find((cartItem) => cartItem.id === id || cartItem.productId === id);
 
-  const getTotalPricesWithPromoCode = (currency, promoCode) => {
+  const getTotalPricesWithPromoCode = (promoCode) => {
     const { discount, categories } = promoCode.getPromoCodeByCode;
     const newArr = cart.map((item) => {
-      const price = item.sizeAndPrice.price[currency].value;
+      const { price } = item.sizeAndPrice;
 
       const isAllowCategory = categories.find(
         (el) => el.toLowerCase() === item.category.code.toLowerCase()
@@ -43,25 +45,28 @@ export const useCart = (user = null) => {
       }
       return [Math.round(price), item.quantity];
     });
-    return newArr.reduce((acc, item) => acc + calcPriceForCart(item[0], item[1]), 0);
+    return newArr.reduce(
+      (acc, item) => acc + getPriceWithCurrency(calcPriceForCart(item[0], item[1])),
+      0
+    );
   };
 
-  const getProductPriceWithPromoCode = (id, currency, promoCode) => {
+  const getProductPriceWithPromoCode = (id, promoCode) => {
     const product = getCartItem(id);
     const { discount, categories } = promoCode.getPromoCodeByCode;
     const isAllowCategory = categories.find(
       (item) => item.toLowerCase() === product.category.code.toLowerCase()
     );
-    const price = product.sizeAndPrice.price[currency].value;
+    const { price } = product.sizeAndPrice;
 
     if (isAllowCategory) {
-      return Math.round(price - (price / 100) * discount);
+      return getPriceWithCurrency(Math.round(price - (price / 100) * discount));
     }
 
-    return price;
+    return getPriceWithCurrency(price);
   };
 
-  const getProductPrice = (id, currency) => getCartItem(id).sizeAndPrice.price[currency].value;
+  const getProductPrice = (id) => getPriceWithCurrency(getCartItem(id).sizeAndPrice.price);
 
   const setCartItem = (id, item) => {
     const newCart = cart.map((cartItem) => (cartItem.id === id ? item : cartItem));
@@ -88,9 +93,10 @@ export const useCart = (user = null) => {
     );
   };
 
-  const getTotalPrice = (currency = 0) =>
+  const getTotalPrice = () =>
     cart.reduce(
-      (acc, item) => acc + calcPriceForCart(item.sizeAndPrice.price[currency].value, item.quantity),
+      (acc, item) =>
+        acc + calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), item.quantity),
       0
     );
 

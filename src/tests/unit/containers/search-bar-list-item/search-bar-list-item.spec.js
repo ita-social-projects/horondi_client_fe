@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import SearchBarListItem from '../../../../containers/search-bar-list/search-bar-list-item/search-bar-list-item';
-import { product, mockStore } from './search-bar-list-item.variables';
+import { product } from './search-bar-list-item.variables';
 
-jest.mock('react-redux');
+const mockGetPriceWithCurrency = jest.fn((value) => value);
 
 const mockDispatch = jest.fn();
 
-useSelector.mockImplementation(() => mockStore);
+jest.mock('react-redux');
+
 useDispatch.mockReturnValue(mockDispatch);
 
 jest.mock('connected-react-router', () => ({
@@ -41,6 +42,12 @@ jest.mock(
     useStyles: () => ({})
   })
 );
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency
+  })
+}));
 
 describe('test SearchBarListItem component', () => {
   const etalonString = 'test';

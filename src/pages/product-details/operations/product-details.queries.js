@@ -65,10 +65,6 @@ export const getProductById = gql`
               lang
               value
             }
-            additionalPrice {
-              currency
-              value
-            }
           }
           color {
             _id
@@ -115,10 +111,7 @@ export const getProductById = gql`
             value
           }
         }
-        basePrice {
-          currency
-          value
-        }
+        basePrice
         sizes {
           size {
             available
@@ -131,10 +124,7 @@ export const getProductById = gql`
             weightInKg
             available
           }
-          price {
-            value
-            currency
-          }
+          price
         }
         availableCount
         available

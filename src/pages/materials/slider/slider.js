@@ -1,46 +1,95 @@
-import clsx from 'clsx';
 import React, { useState, useRef } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
-
+import Carousel from 'react-multi-carousel';
+import { useTranslation } from 'react-i18next';
+import { responsiveCarousel } from './constants';
 import { useStyles } from './slider.styles';
+import 'react-awesome-slider/dist/styles.css';
 
-const Slider = (props) => {
-  const styles = useStyles();
-  const { bulletsSet } = props;
+import ArrowRight from '../../../images/ArrowRight.svg';
+import ArrowLeft from '../../../images/ArrowLeft.svg';
+
+const Slider = ({ sliderlImages, patterns }) => {
   const [selected, setSelected] = useState(0);
-
-  const onClickHandler = (e) => {
-    sliderRef.current.goTo({ index: +e.target.dataset.index, direction: true });
-    sliderRef.current.onTransitionRequest(+e.target.dataset.index);
-  };
-
-  const onTransitionEnd = (info, ...args) => {
-    props.onTransitionEnd(info, ...args);
-    setSelected(info.currentIndex);
-  };
+  const styles = useStyles();
+  const { t } = useTranslation();
 
   const sliderRef = useRef();
+  const carouselRef = useRef();
 
-  return (
-    <div>
-      <AwesomeSlider ref={sliderRef} {...props} onTransitionEnd={onTransitionEnd} />
-      <div className={styles.container}>
-        {bulletsSet &&
-          bulletsSet.map((bullet, i) => (
-            <img
-              src={bullet}
-              key={i}
-              alt={i}
-              className={clsx({
-                [styles.image]: true,
-                [styles.selected]: selected === i
-              })}
-              data-index={i}
-              onClick={onClickHandler}
-            />
-          ))}
+  const amountOfSlides = `0${patterns.length}`.slice(-2);
+  const currentSlide = `0${selected + 1}`.slice(-2);
+
+  const sliderItem = patterns.map((pattern, index) => (
+    <div key={pattern._id} data-src={sliderlImages[index]}>
+      <p className={styles.sliderText}>{t(`${pattern.translationsKey}.name`)}</p>
+      <div className={styles.counter}>
+        <span>{currentSlide}</span>
+        <span> / </span>
+        <span>{amountOfSlides}</span>
       </div>
     </div>
+  ));
+
+  const slideChangeHandler = (element) => {
+    const prevIndex = sliderRef.current.index;
+    const currentIndex = Number(element.target.dataset.index);
+
+    if (prevIndex > currentIndex) {
+      sliderRef.current.goTo({ index: currentIndex, direction: false });
+      return;
+    }
+
+    sliderRef.current.goTo({ index: currentIndex, direction: true });
+  };
+
+  const onTransitionEnd = (element) => {
+    const { slidesToShow } = carouselRef.current.state;
+
+    setSelected(element.currentIndex);
+
+    if (element.slides - slidesToShow < element.currentIndex) {
+      carouselRef.current.goToSlide(element.slides - slidesToShow);
+      return;
+    }
+
+    carouselRef.current.goToSlide(element.currentIndex);
+  };
+
+  return (
+    <>
+      <p>{t(`materialsPage.sliderDescription`)}</p>
+      <AwesomeSlider
+        ref={sliderRef}
+        bullets={false}
+        onTransitionEnd={onTransitionEnd}
+        className={styles.slider}
+        organicArrows={false}
+        buttonContentLeft={<img src={ArrowLeft} alt='right arrow' />}
+        buttonContentRight={<img src={ArrowRight} alt='left arrow' />}
+      >
+        {sliderItem}
+      </AwesomeSlider>
+      <Carousel
+        ref={carouselRef}
+        responsive={responsiveCarousel}
+        arrows={false}
+        itemClass='carousel-item'
+        centerMode
+      >
+        {sliderlImages.map((image, index) => (
+          <img
+            src={image}
+            key={index}
+            alt=''
+            data-index={index}
+            draggable={false}
+            onClick={slideChangeHandler}
+            className={`${styles.image} ${selected === index ? styles.selected : ''}`}
+          />
+        ))}
+      </Carousel>
+    </>
   );
 };
 

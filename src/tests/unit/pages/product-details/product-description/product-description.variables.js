@@ -57,16 +57,7 @@ export const product = {
           value: 'Leatherette'
         }
       ],
-      additionalPrice: [
-        {
-          currency: 'UAH',
-          value: 135
-        },
-        {
-          currency: 'USD',
-          value: 5
-        }
-      ]
+      additionalPrice: 5
     }
   },
   sizes: [
@@ -81,16 +72,7 @@ export const product = {
         weightInKg: 0.8,
         available: false
       },
-      price: [
-        {
-          value: 2000,
-          currency: 'UAH'
-        },
-        {
-          value: 75,
-          currency: 'USD'
-        }
-      ]
+      price: 75
     }
   ],
   availableCount: 0,

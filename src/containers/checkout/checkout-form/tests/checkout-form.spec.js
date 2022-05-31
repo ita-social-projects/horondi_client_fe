@@ -5,7 +5,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
-import DeliveryType from '../delivery-type/delivery-type';
 import {
   ukrPostMockRegions,
   ukrPostMockDistricts,
@@ -14,9 +13,12 @@ import {
   mockProduct,
   mockedCartItemsData
 } from './checkout-form.variables';
+import { DollarIcon } from '../../../../images/profile-icons';
 
 const mockClearCart = jest.fn();
-const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const mockGetProductPriceWithPromoCode = jest.fn(() => 50);
 const dispatch = jest.fn();
 const mockCartOperations = {
   clearCart: mockClearCart
@@ -32,6 +34,13 @@ jest.mock('../../../../hooks/use-cart', () => ({
   })
 }));
 
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
 jest.mock('../../../../services/session-storage.service.js', () => ({
   setToSessionStorage: jest.fn(),
   getFromSessionStorage: jest.fn(() => 'UKRPOSTCOURIER'),
@@ -39,8 +48,7 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
 }));
 
 const props = {
-  currency: 0,
-  cartItems: [{ price: [{ currency: 'ua', value: 100 }] }],
+  cartItems: [{ price: 20 }],
   cartOperations: mockCartOperations,
   promoCode: {
     getPromoCodeByCode: {
@@ -80,10 +88,6 @@ describe('CheckoutForm component tests', () => {
   it('should submit add payment method', async () => {
     const wrapper = shallow(<CheckoutForm {...props} />);
     wrapper.find('form').simulate('submit');
-  });
-  it('<CheckoutForm /> should contain component <DeliveryType />', () => {
-    const wrapper = shallow(<CheckoutForm {...props} language={0} />);
-    expect(wrapper.find(DeliveryType).length).toEqual(1);
   });
 });
 

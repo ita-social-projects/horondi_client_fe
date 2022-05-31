@@ -10,8 +10,11 @@ import {
   nullProduct,
   translationsKey
 } from './order-history-item-product.variables';
-
 import { theme } from '../../../../components/app/app-theme/app.theme';
+import { DollarIcon } from '../../../../images/profile-icons';
+
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 jest.mock(
   '../../../../containers/orders/order-history/order-history-item-product/order-history-item-product.styles',
@@ -23,13 +26,27 @@ jest.mock(
 const themeValue = theme('light');
 let wrapper;
 
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
 describe('OrderHistoryOrderItem component tests', () => {
   beforeEach(() => {
     wrapper = render(
       <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItemProduct item={item} currency={0} />
+            <OrderHistoryItemProduct item={item} />
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>
@@ -56,7 +73,7 @@ describe('OrderHistoryOrderItem component tests,renders plug for product', () =>
       <MockedProvider mocks={mockConstructor}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItemProduct item={nullProduct} currency={1} />
+            <OrderHistoryItemProduct item={nullProduct} />
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>

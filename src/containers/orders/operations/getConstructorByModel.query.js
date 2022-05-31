@@ -21,8 +21,7 @@ export const getConstructorByModel = gql`
             value
           }
           images {
-            small
-            thumbnail
+            medium
           }
           sizes {
             _id
@@ -51,7 +50,6 @@ export const getConstructorByModel = gql`
             thumbnail
           }
           additionalPrice {
-            currency
             value
           }
         }
@@ -69,7 +67,6 @@ export const getConstructorByModel = gql`
           }
           additionalPrice {
             value
-            currency
           }
           images {
             large
@@ -87,7 +84,6 @@ export const getConstructorByModel = gql`
           }
           additionalPrice {
             value
-            currency
           }
         }
         pocketsWithRestrictions {

@@ -15,16 +15,7 @@ export const item = {
       volumeInLiters: 18,
       weightInKg: 0.8
     },
-    price: [
-      {
-        value: 1000,
-        currency: 'UAH'
-      },
-      {
-        value: 36,
-        currency: 'USD'
-      }
-    ]
+    price: 36
   },
   quantity: 1,
   constructor: {},
@@ -35,16 +26,7 @@ export const constructor = {
   id: 1644253698084,
   productId: '619ea7245bbfb0002540bd29',
   sizeAndPrice: {
-    price: [
-      {
-        value: 1783,
-        currency: 'UAH'
-      },
-      {
-        value: 64,
-        currency: 'USD'
-      }
-    ],
+    price: 64,
     size: {
       available: true,
       name: 'M',
@@ -69,16 +51,7 @@ export const constructor = {
         small: 'small_eewk311kwdxcgv1_низ-шкіра-чорна.png',
         thumbnail: 'thumbnail_eewk311kwdxcgv1_низ-шкіра-чорна.png'
       },
-      additionalPrice: [
-        {
-          value: 327,
-          currency: 'UAH'
-        },
-        {
-          value: 12,
-          currency: 'USD'
-        }
-      ]
+      additionalPrice: 12
     }
   },
   quantity: 1,
@@ -90,11 +63,7 @@ export const constructor = {
 
 export const itemData = {
   sizeAndPrice: {
-    price: [
-      {
-        value: 2100
-      }
-    ],
+    price: 50,
     size: {
       _id: '',
       name: 'S'
@@ -120,9 +89,9 @@ export const props = {
 
 export const mockQueryData = {
   __typename: 'Product',
-  _id: '61938f3f47ff1a3ccc1ac5e7',
+  _id: '60588c204b419a0ec128e4bc',
   category: {
-    code: 'bags'
+    code: 'backpacks'
   },
   name: [
     {
@@ -136,12 +105,12 @@ export const mockQueryData = {
   ],
   bottomMaterial: {
     material: {
-      translationsKey: '61938f3f47ff1a3ccc1ac5e2'
+      translationsKey: '61840da5a40f604a050ce412'
     }
   },
   images: {
     primary: {
-      thumbnail: 'thumbnail_hd0lc0ckw1zhymv_photo_2021-11-16_10-30-29.jpg'
+      medium: 'medium_4051sf11kxg1wx88_27.png'
     }
   },
   sizes: [
@@ -150,32 +119,14 @@ export const mockQueryData = {
         _id: '604394a2a7532c33dcb326d5',
         name: 'L'
       },
-      price: [
-        {
-          value: 1000,
-          currency: 'UAH'
-        },
-        {
-          value: 37,
-          currency: 'USD'
-        }
-      ]
+      price: 37
     },
     {
       size: {
         _id: '604394cba7532c33dcb326d6',
         name: 'M'
       },
-      price: [
-        {
-          value: 950,
-          currency: 'UAH'
-        },
-        {
-          value: 36,
-          currency: 'USD'
-        }
-      ]
+      price: 36
     }
   ]
 };
@@ -203,7 +154,7 @@ export const mockQueryDataConstructor = {
       }
     ],
     images: {
-      thumbnail: 'thumbnail_id73cf0kly0of2u_rolltop.png'
+      medium: 'medium_4051sf11kxg1wx88_27.png'
     },
     sizes: [
       {
@@ -222,12 +173,7 @@ export const mockQueryDataConstructor = {
           value: 'Мальмо жовтий роллтоп'
         }
       ],
-      additionalPrice: [
-        {
-          currency: 'UAH',
-          value: 538
-        }
-      ]
+      additionalPrice: 20
     },
     {
       _id: '619eb9a45bbfb0002540bf96',
@@ -248,12 +194,7 @@ export const mockQueryDataConstructor = {
           value: 'Шкіра чорна '
         }
       ],
-      additionalPrice: [
-        {
-          value: 326,
-          currency: 'UAH'
-        }
-      ]
+      additionalPrice: 20
     },
     {
       _id: '619e947d5bbfb0002540b7c1',
@@ -264,12 +205,7 @@ export const mockQueryDataConstructor = {
         }
       ],
 
-      additionalPrice: [
-        {
-          value: 15,
-          currency: 'USD'
-        }
-      ]
+      additionalPrice: 15
     }
   ],
   patterns: [
@@ -281,12 +217,7 @@ export const mockQueryDataConstructor = {
           value: 'Червоний'
         }
       ],
-      additionalPrice: [
-        {
-          value: 55,
-          currency: 'UAH'
-        }
-      ]
+      additionalPrice: 7
     },
     {
       _id: '619e28845bbfb0002540a370',
@@ -324,7 +255,7 @@ export const mockProduct = [
           },
           images: {
             primary: {
-              thumbnail: 'thumbnail_4051sf11kxg1bqc1_97.png'
+              medium: 'medium_4051sf11kxg1wx88_27.png'
             }
           },
           sizes: [
@@ -334,16 +265,7 @@ export const mockProduct = [
                 name: 'S',
                 available: true
               },
-              price: [
-                {
-                  value: 1000,
-                  currency: 'UAH'
-                },
-                {
-                  value: 36,
-                  currency: 'USD'
-                }
-              ]
+              price: 36
             },
             {
               size: {
@@ -351,16 +273,7 @@ export const mockProduct = [
                 name: 'M',
                 available: true
               },
-              price: [
-                {
-                  value: 1050,
-                  currency: 'UAH'
-                },
-                {
-                  value: 38,
-                  currency: 'USD'
-                }
-              ]
+              price: 36
             }
           ]
         }
@@ -404,8 +317,8 @@ export const mockProduct = [
               }
             ],
             images: {
-              small: 'small_id73cf0kly0of2u_rolltop.png',
-              thumbnail: 'thumbnail_id73cf0kly0of2u_rolltop.png'
+              thumbnail: 'thumbnail_id73cf0kly0of2u_rolltop.png',
+              medium: 'medium_4051sf11kxg1wx88_27.png'
             },
             sizes: [
               {
@@ -438,16 +351,7 @@ export const mockProduct = [
                   value: 'Malmo yellow rolltop'
                 }
               ],
-              additionalPrice: [
-                {
-                  currency: 'UAH',
-                  value: 538
-                },
-                {
-                  currency: 'USD',
-                  value: 20
-                }
-              ]
+              additionalPrice: 20
             },
             {
               _id: '619eb9a45bbfb0002540bf96',
@@ -461,16 +365,7 @@ export const mockProduct = [
                   value: 'Malmo red rolltop'
                 }
               ],
-              additionalPrice: [
-                {
-                  currency: 'UAH',
-                  value: 538
-                },
-                {
-                  currency: 'USD',
-                  value: 20
-                }
-              ]
+              additionalPrice: 20
             },
             {
               _id: '619eb9d55bbfb0002540bfad',
@@ -484,16 +379,7 @@ export const mockProduct = [
                   value: 'Malmo gray rolltop'
                 }
               ],
-              additionalPrice: [
-                {
-                  currency: 'UAH',
-                  value: 538
-                },
-                {
-                  currency: 'USD',
-                  value: 20
-                }
-              ]
+              additionalPrice: 20
             },
             {
               _id: '619eba0c5bbfb0002540bfbf',
@@ -507,16 +393,7 @@ export const mockProduct = [
                   value: 'Malmo blue rolltop'
                 }
               ],
-              additionalPrice: [
-                {
-                  currency: 'UAH',
-                  value: 538
-                },
-                {
-                  currency: 'USD',
-                  value: 20
-                }
-              ]
+              additionalPrice: 20
             }
           ],
           bottoms: [
@@ -537,16 +414,7 @@ export const mockProduct = [
                   translationsKey: '61840dc8a40f604a050ce414'
                 }
               },
-              additionalPrice: [
-                {
-                  value: 327,
-                  currency: 'UAH'
-                },
-                {
-                  value: 12,
-                  currency: 'USD'
-                }
-              ]
+              additionalPrice: 12
             },
             {
               _id: '619e947d5bbfb0002540b7c1',
@@ -565,16 +433,7 @@ export const mockProduct = [
                   translationsKey: '61840dc8a40f604a050ce414'
                 }
               },
-              additionalPrice: [
-                {
-                  value: 407,
-                  currency: 'UAH'
-                },
-                {
-                  value: 15,
-                  currency: 'USD'
-                }
-              ]
+              additionalPrice: 15
             }
           ],
           patterns: [
@@ -590,16 +449,7 @@ export const mockProduct = [
                   value: 'Red'
                 }
               ],
-              additionalPrice: [
-                {
-                  value: 56,
-                  currency: 'UAH'
-                },
-                {
-                  value: 2,
-                  currency: 'USD'
-                }
-              ]
+              additionalPrice: 2
             },
             {
               _id: '619e25dc5bbfb00025409e4d',
@@ -613,12 +463,7 @@ export const mockProduct = [
                   value: 'Gray square'
                 }
               ],
-              additionalPrice: [
-                {
-                  value: 2,
-                  currency: null
-                }
-              ]
+              additionalPrice: 2
             },
             {
               _id: '619e26a95bbfb0002540a16d',
@@ -632,16 +477,7 @@ export const mockProduct = [
                   value: 'Orange ribbon'
                 }
               ],
-              additionalPrice: [
-                {
-                  value: 56,
-                  currency: 'UAH'
-                },
-                {
-                  value: 2,
-                  currency: 'USD'
-                }
-              ]
+              additionalPrice: 2
             },
             {
               _id: '619e27905bbfb0002540a2f4',
@@ -655,16 +491,7 @@ export const mockProduct = [
                   value: 'Gray ribbon'
                 }
               ],
-              additionalPrice: [
-                {
-                  value: 56,
-                  currency: 'UAH'
-                },
-                {
-                  value: 2,
-                  currency: 'USD'
-                }
-              ]
+              additionalPrice: 2
             },
             {
               _id: '619e28845bbfb0002540a370',
@@ -678,16 +505,7 @@ export const mockProduct = [
                   value: 'Pink Blue'
                 }
               ],
-              additionalPrice: [
-                {
-                  value: 56,
-                  currency: 'UAH'
-                },
-                {
-                  value: 2,
-                  currency: 'USD'
-                }
-              ]
+              additionalPrice: 2
             }
           ]
         }

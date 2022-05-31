@@ -41,10 +41,7 @@ export const deleteProductFromWishlist = gql`
               name
               _id
             }
-            price {
-              currency
-              value
-            }
+            price
           }
           bottomMaterial {
             material {

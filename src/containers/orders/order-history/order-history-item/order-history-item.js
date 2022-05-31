@@ -11,7 +11,7 @@ import { useCurrency } from '../../../../hooks/use-currency';
 const OrderHistoryItem = ({ order }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { getCurrencySign } = useCurrency();
+  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
 
   const { color } = STATUS_COLORS.find((item) => item.label === order.status);
 
@@ -19,7 +19,7 @@ const OrderHistoryItem = ({ order }) => {
     <OrderHistoryItemProduct key={item.product._id + item.options.size.name} item={item} />
   ));
 
-  const totalPrice = order.totalItemsPrice;
+  const totalPrice = getPriceWithCurrency(order.totalItemsPrice);
   const currencySign = getCurrencySign();
   const dateInFormat = getFormatDate(order.dateOfCreation);
 
@@ -39,7 +39,7 @@ const OrderHistoryItem = ({ order }) => {
         </div>
       </div>
       <div>
-        <OrderHistoryTable items={orderProducts} totalPrice={totalPrice} />
+        <OrderHistoryTable items={orderProducts} />
       </div>
       <div className={styles.bottom}>
         <div className={styles.totalText}>{t('common.total')}:</div>

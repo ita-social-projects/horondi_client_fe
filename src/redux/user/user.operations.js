@@ -306,10 +306,7 @@ const getWishlistByUserId = async () => {
               available
               name
             }
-            price {
-              currency
-              value
-            }
+            price
           }
           mainMaterial {
             material {

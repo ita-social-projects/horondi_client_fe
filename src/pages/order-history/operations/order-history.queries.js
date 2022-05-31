@@ -10,10 +10,7 @@ export const getUserOrdersQuery = gql`
         orderNumber
         items {
           quantity
-          fixedPrice {
-            currency
-            value
-          }
+          fixedPrice
           options {
             size {
               name
@@ -60,10 +57,7 @@ export const getUserOrdersQuery = gql`
             }
           }
         }
-        totalItemsPrice {
-          value
-          currency
-        }
+        totalItemsPrice
       }
       ordersCount
     }

@@ -15,10 +15,7 @@ export const mock = [
           items: [
             {
               quantity: 1,
-              fixedPrice: [
-                { currency: 'UAH', value: 1950 },
-                { currency: 'USD', value: 74 }
-              ],
+              fixedPrice: 74,
               options: { size: { name: 'S' } },
               product: {
                 bottomMaterial: {

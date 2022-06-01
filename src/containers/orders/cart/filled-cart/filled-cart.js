@@ -81,7 +81,7 @@ const FilledCart = ({ items, cartOperations }) => {
             color: item.bottom?.features.color._id
           },
           sizes: [item.sizeAndPrice.size._id],
-          basePrice: item.sizeAndPrice.price.find((p) => p.currency === 'USD').value
+          basePrice: item.sizeAndPrice.price
         },
         upload: []
       };

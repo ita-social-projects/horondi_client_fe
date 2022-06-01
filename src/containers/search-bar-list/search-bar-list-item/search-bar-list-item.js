@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
@@ -13,11 +13,13 @@ import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
 import routes from '../../../configs/routes';
 import { useCurrency } from '../../../hooks/use-currency';
+import { CurrencyContext } from '../../../context/currency-context';
 
 const { pathToProducts } = routes;
 
 const SearchBarListItem = ({ product }) => {
   const { getPriceWithCurrency } = useCurrency();
+  const { currency } = useContext(CurrencyContext);
   const { t } = useTranslation();
 
   const [image, setImage] = useState(IMG_URL + product.images.primary.small);
@@ -42,8 +44,7 @@ const SearchBarListItem = ({ product }) => {
         <div className={styles.title}>
           <Typography variant='h4'>{t(`${product.translationsKey}.name`)}</Typography>
           <div>
-            {Math.min(...product.sizes.map((size) => getPriceWithCurrency(size.price)))}{' '}
-            {getPriceWithCurrency(product.basePrice)}
+            {Math.min(...product.sizes.map((size) => getPriceWithCurrency(size.price)))} {currency}
           </div>
         </div>
         <div className={styles.buttons}>

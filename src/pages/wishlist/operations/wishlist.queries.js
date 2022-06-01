@@ -28,10 +28,7 @@ export const getWishlistByUserId = gql`
               available
               name
             }
-            price {
-              currency
-              value
-            }
+            price
           }
           mainMaterial {
             material {

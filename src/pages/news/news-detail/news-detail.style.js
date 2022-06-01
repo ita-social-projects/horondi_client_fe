@@ -34,7 +34,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   breadcrumbs: {
-    color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE'
+    color: theme.palette.type === 'light' ? '#242424' : '#FEFEFE',
+    marginTop: '60px'
   },
   content: {
     padding: 0

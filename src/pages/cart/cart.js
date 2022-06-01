@@ -4,7 +4,6 @@ import { useAppStyles } from '../../components/app/app.styles';
 import EmptyCart from '../../containers/orders/cart/empty-cart';
 import FilledCart from '../../containers/orders/cart/filled-cart';
 import { useCart } from '../../hooks/use-cart';
-import { addProductFromConstructor } from './operations/cart.mutations';
 
 const Cart = () => {
   const styles = useAppStyles();
@@ -17,11 +16,7 @@ const Cart = () => {
     <div className={styles.rootApp}>
       <div className={styles.containerApp}>
         {cartItems.length ? (
-          <FilledCart
-            items={cartItems}
-            cartOperations={cartOperations}
-            addProductFromConstructor={addProductFromConstructor}
-          />
+          <FilledCart items={cartItems} cartOperations={cartOperations} />
         ) : (
           <EmptyCart />
         )}

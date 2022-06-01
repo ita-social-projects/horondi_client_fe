@@ -49,9 +49,7 @@ export const getConstructorByModel = gql`
             small
             thumbnail
           }
-          additionalPrice {
-            value
-          }
+          absolutePrice
         }
         bottoms {
           _id
@@ -65,9 +63,7 @@ export const getConstructorByModel = gql`
               translationsKey
             }
           }
-          additionalPrice {
-            value
-          }
+          absolutePrice
           images {
             large
             medium
@@ -82,9 +78,7 @@ export const getConstructorByModel = gql`
             lang
             value
           }
-          additionalPrice {
-            value
-          }
+          absolutePrice
         }
         pocketsWithRestrictions {
           currentPocketWithPosition {

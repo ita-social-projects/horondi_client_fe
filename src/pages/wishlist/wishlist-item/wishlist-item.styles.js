@@ -79,9 +79,18 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
+    marginRight: '10px',
     '& svg': {
       width: '20px',
       height: '20px'
+    },
+
+    '@media (max-width:500px)': {
+      fontSize: '14px',
+      '& svg': {
+        width: '14px',
+        height: '14px'
+      }
     }
   },
   delete: {
@@ -95,6 +104,7 @@ export const useStyles = makeStyles(({ palette }) => ({
 
     '@media (max-width: 880px)': {
       marginLeft: '0',
+      padding: '6px',
       alignSelf: 'center'
     }
   },

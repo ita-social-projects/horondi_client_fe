@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
       zIndex: 11,
       height: '100vh',
       width: 'fit-content',
-      minWidth: '360px',
+      minWidth: '320px',
       maxWidth: '450px',
       '@media (max-width: 768px)': {
         width: '100%'

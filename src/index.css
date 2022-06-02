@@ -54,7 +54,16 @@ iframe.fb_customer_chat_bounce_in_v2 {
   right: 100px !important;
   bottom: 24px !important;
 }
+
 iframe.fb_customer_chat_bounce_out_v2 {
   right: 100px !important;
   bottom: 24px !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0px 1000px #000 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 0s ease-in-out 0s;
 }

@@ -43,7 +43,6 @@ export default function Register() {
     registerError: User.error,
     hasRegistered: User.userRegistered
   }));
-
   const isLightTheme = palette.type === 'light';
   const dispatch = useDispatch();
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import SideBarItem from '../sidebar-item';
 
-jest.mock('../sidebar-items.style.js', () => ({
+jest.mock('../sidebar-items.styles.js', () => ({
   useStyles: () => ({})
 }));
 jest.mock('react-redux');

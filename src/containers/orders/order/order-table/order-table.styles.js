@@ -19,6 +19,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   table: {
     width: '100%',
+    whiteSpace: 'nowrap',
     '@media (max-width: 750px)': {
       width: '600px',
       overflowX: 'auto'

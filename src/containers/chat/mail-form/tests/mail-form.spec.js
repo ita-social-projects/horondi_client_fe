@@ -52,7 +52,7 @@ describe('<MailForm />', () => {
   });
   it('should render phoneNumber & email', () => {
     const { getByText } = render(<MailForm {...props} />);
-    const phone = getByText(/069000000/i);
+    const phone = getByText('+38 (069) 000 00 00');
     const email = getByText(/test@gmail.com/i);
     expect(phone).toBeInTheDocument();
     expect(email).toBeInTheDocument();

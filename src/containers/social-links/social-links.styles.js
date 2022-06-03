@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   cardBody: ({ position, fromSideBar }) => ({
     flex: position === 'center' ? 0 : 1,
     '@media screen and (max-width: 552px)': {
@@ -65,8 +65,9 @@ export const useStyles = makeStyles(() => ({
   iconWrap: {
     marginRight: '16px',
     color: 'transparent',
+    transition: 'color 0.5s linear 0s',
     '&:hover': {
-      color: '#bebebe'
+      color: theme.palette.type === 'light' ? '#000000' : '#FFFFFF'
     }
   }
 }));

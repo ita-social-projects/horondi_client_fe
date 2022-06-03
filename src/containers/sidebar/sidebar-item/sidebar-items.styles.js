@@ -35,7 +35,11 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& span': {
       textTransform: 'uppercase',
-      fontSize: '14px'
+      fontSize: '14px',
+      fontWeight: '400'
+    },
+    '&:hover span': {
+      textDecoration: 'underline'
     },
     '& a': {
       color: 'inherit'
@@ -44,17 +48,12 @@ export const useStyles = makeStyles((theme) => ({
       content: "'◆'",
       fontSize: '1.2rem',
       display: 'block',
-      color: '#3F51B5',
+      color: theme.palette.type === 'light' ? '#000000' : '#FFFFFF',
       width: 15,
       height: 27,
       position: 'relative',
       bottom: '1px',
-      marginRight: 10,
-      opacity: 0,
-      transition: 'opacity .2s ease'
-    },
-    '&:hover:before': {
-      opacity: 1
+      marginRight: 10
     }
   }
 }));

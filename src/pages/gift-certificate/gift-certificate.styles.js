@@ -28,7 +28,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   checkboxWrapper: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     alignItems: 'center',
     '@media (max-width: 420px)': {
       display: 'flex',
@@ -42,7 +43,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     justifyContent: 'space-between',
     marginTop: '40px',
     marginBottom: '128px',
-    '@media (max-width: 420px)': {
+    '@media (max-width: 490px)': {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center'
@@ -52,7 +53,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    width: '345px'
+    flexWrap: 'wrap',
+    width: '320px'
   },
   purchaseButton: {
     ...buttonStyles,

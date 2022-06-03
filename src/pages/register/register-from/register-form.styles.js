@@ -61,7 +61,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   googleText: {
     textAlign: 'center',
     fontSize: '12px',
-    marginTop: '0px',
+    marginTop: '28px',
     marginBottom: '8px'
   },
   registerError: {
@@ -75,7 +75,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     color: '#f44336',
     wordWrap: 'break-word',
     position: 'absolute',
-    top: '42px',
+    top: '30px',
     left: '0px'
   },
   registerGroup: {

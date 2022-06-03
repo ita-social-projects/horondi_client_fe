@@ -243,6 +243,8 @@ export function* handleUserError(e) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
+  } else if (e?.message === 'USER_ALREADY_EXIST') {
+    yield put(setUserError(i18n.t('error.userError.userAlredyExist')));
   } else if (i18n.exists(`error.userError.${e?.message}`)) {
     yield put(setUserError(i18n.t(`error.userError.${e.message}`)));
   } else {

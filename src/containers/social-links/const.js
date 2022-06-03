@@ -1,7 +1,7 @@
 export const navItems = [
   {
     id: '1',
-    url: '/pages/about-us',
+    url: '/about-us',
     label: 'aboutUs'
   },
   {

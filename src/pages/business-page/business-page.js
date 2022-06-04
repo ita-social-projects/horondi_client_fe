@@ -18,7 +18,7 @@ const BusinessPage = ({ match }) => {
     onCompleted: (data) => setPage(data.getBusinessTextByCode)
   });
 
-  const addressText = page?.text && parse(t(`${page.translationsKey}.text`));
+  const addressText = page && parse(t(`${page.translationsKey}.text`));
 
   const styles = useStyles();
   const appStyles = useAppStyles();
@@ -28,7 +28,7 @@ const BusinessPage = ({ match }) => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.root}`}>
-        {page.title && <h1>{t(`${page.translationsKey}.title`)}</h1>}
+        {page && <h1>{t(`${page.translationsKey}.title`)}</h1>}
         <hr />
         {addressText}
       </div>

@@ -5,7 +5,6 @@ import PhoneIphoneOutlinedIcon from '@material-ui/icons/PhoneIphoneOutlined';
 import EmailOutlined from '@material-ui/icons/EmailOutlined';
 import ActiveMessenger from '../active-messenger';
 import { useStyles } from '../chat.style';
-import { formatPhoneNumber } from '../../../utils/format-phone-number';
 
 export const MailForm = ({ contacts, cancelIconHandler, iconsVisible, mailFormVisible }) => {
   const style = useStyles({ iconsVisible, mailFormVisible });
@@ -22,7 +21,7 @@ export const MailForm = ({ contacts, cancelIconHandler, iconsVisible, mailFormVi
           <div key={contact._id}>
             <div className={style.phoneNumbers}>
               <PhoneIphoneOutlinedIcon className={style.iconContact} />
-              <span>{formatPhoneNumber(contact.phoneNumber)}</span>
+              <span>{contact.phoneNumber}</span>
             </div>
             <div className={style.phoneNumbers}>
               <EmailOutlined className={style.iconContact} />

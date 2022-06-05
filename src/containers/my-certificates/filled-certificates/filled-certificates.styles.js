@@ -24,6 +24,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '20px',
     lineHeight: '28px',
     letterSpacing: '0.0015em',
+    width: '100%',
     '& > div:nth-child(2n)': {
       margin: '0 0 45px 0'
     },
@@ -70,6 +71,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   certificateTable: {
+    width: '100%',
     flexGrow: 1,
     '@media (max-width: 813px)': {
       marginRight: 'initial'

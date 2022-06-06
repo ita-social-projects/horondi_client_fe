@@ -78,7 +78,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   };
 
   useEffect(() => {
-    if (userData) {
+    if (userData && userData.configs) {
       const { theme, language, currency } = userData.configs;
 
       setLightMode(theme === 'light');

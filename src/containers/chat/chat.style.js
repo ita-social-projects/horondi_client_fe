@@ -118,14 +118,16 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '40%',
     fontSize: '1rem',
     flexDirection: 'column',
-    margin: '0 50px 0 0'
+    margin: '0 60px 0 0'
   },
   contactsTitle: {
-    margin: '3px 70px 2px 0',
+    margin: '3px 70px 10px 0',
     fontSize: '1.3rem'
   },
   phoneNumbers: {
-    color: palette.textColor
+    color: palette.textColor,
+    display: 'flex',
+    marginBottom: '10px'
   },
   mailTitle: {
     marginTop: '5%',
@@ -173,7 +175,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   iconContact: {
-    margin: '0 5px 0 0',
+    margin: '0 15px 0 0',
     fontSize: '20px',
     paddingTop: '2px'
   },

@@ -3,7 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const title = {
   fontWeight: 'normal',
   fontSize: '2.375em',
-  margin: '67px'
+  margin: '67px',
+  '@media (max-width: 550px)': {
+    fontSize: '33px',
+    margin: '48px'
+  },
+  '@media (max-width: 380px)': {
+    fontSize: '26px',
+    margin: '25px'
+  }
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
@@ -11,7 +19,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     ...title
   },
   root: {
-    width: '1110px',
+    maxWidth: '1110px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -19,16 +27,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   table: {
     width: '100%',
-    '@media (max-width: 750px)': {
-      width: '600px',
-      overflowX: 'auto'
-    },
-    '@media (max-width: 600px)': {
-      width: '400px',
-      overflowX: 'auto'
-    },
-    '@media (max-width: 400px)': {
-      width: '300px',
+    '@media (max-width: 700px)': {
+      maxWidth: '600px',
       overflowX: 'auto'
     },
     '& td': {
@@ -36,7 +36,10 @@ export const useStyles = makeStyles(({ palette }) => ({
       lineHeight: '28px',
       fontSize: '20px',
       fontWeight: 400,
-      textAlign: 'center'
+      '@media (max-width: 700px)': {
+        fontSize: '15px',
+        lineHeight: '20px'
+      }
     },
     '& td:last-child': {
       color: palette
@@ -44,9 +47,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     '& td:first-child': {
       textAlign: 'left',
       '& img': {
-        '@media (max-width: 600px)': {
-          width: 'auto',
-          height: 'auto'
+        '@media (max-width: 700px)': {
+          width: '134px',
+          height: '63px',
+          marginRight: '5px'
         }
       }
     }

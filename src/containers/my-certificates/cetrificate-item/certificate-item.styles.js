@@ -59,6 +59,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'center',
     justifyContent: 'left',
     marginRight: '50px',
+    '@media (max-width: 800px)': {
+      marginRight: '35px'
+    },
     '& svg': {
       marginRight: '5px'
     }
@@ -67,7 +70,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'left',
-    marginRight: '25px'
+    marginRight: '25px',
+    '@media (max-width: 800px)': {
+      marginRight: '8px'
+    }
   },
   statusRed: {
     display: 'flex',

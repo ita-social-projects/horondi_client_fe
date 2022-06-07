@@ -50,10 +50,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     objectFit: 'cover',
     width: '220px',
     height: '133px',
-    '@media (max-width: 600px)': {
-      width: 'auto',
-      height: 'auto'
-    }
+    marginRight: '30px'
   },
   product: {
     display: 'flex',

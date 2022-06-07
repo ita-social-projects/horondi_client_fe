@@ -82,18 +82,18 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   buttonStyles: {
-    marginTop: '30px',
-    height: '44px',
-    width: '244px',
     fontFamily: 'Open Sans',
+    marginTop: '30px',
+    padding: '12px 48px',
     fontWeight: '600',
     fontSize: '14px',
+    lineHeight: '18px',
     letterSpacing: '0.0125em',
     textTransform: 'uppercase',
-    lineHeight: '25px',
     background: 'none',
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
+    borderRadius: '0',
     cursor: 'pointer',
     '&:hover': {
       backgroundColor: 'rgba(40, 40, 40, 0.7)'

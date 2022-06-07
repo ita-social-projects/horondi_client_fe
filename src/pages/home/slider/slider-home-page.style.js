@@ -115,14 +115,12 @@ export const useStyles = makeStyles(() => ({
     }
   },
   buttonStyles: {
-    height: '50px',
-    width: '210px',
+    padding: '12px 48px',
     fontStyle: 'normal',
     fontWeight: '600',
-    fontSize: '16px',
-    lineHeight: '50px',
+    fontSize: '14px',
+    lineHeight: '18px',
     textAlign: 'center',
-    backgroundColor: 'rgba(40, 40, 40, 0.2)',
     color: '#FEFEFE',
     border: '1px solid #FEFEFE',
     borderRadius: '0',

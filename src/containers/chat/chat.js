@@ -31,16 +31,18 @@ export const Chat = () => {
 
   return (
     <>
-      <MessengerChat
-        pageId={CHAT_FACEBOOK_DATA.pageId}
-        appId={CHAT_FACEBOOK_DATA.appId}
-        onClick={() => setMailFormVisible(false)}
-        height={190}
-        onMessengerLoad={() => {
-          setChutButtonDisabled(false);
-          hideMessenger();
-        }}
-      />
+      <div className={style.fbChatWrapper}>
+        <MessengerChat
+          pageId={CHAT_FACEBOOK_DATA.pageId}
+          appId={CHAT_FACEBOOK_DATA.appId}
+          onClick={() => setMailFormVisible(false)}
+          height={190}
+          onMessengerLoad={() => {
+            setChutButtonDisabled(false);
+            hideMessenger();
+          }}
+        />
+      </div>
       {iconsVisible && (
         <div className={style.iconsMessengers}>
           <div

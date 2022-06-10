@@ -37,6 +37,7 @@ export const Chat = () => {
           appId={CHAT_FACEBOOK_DATA.appId}
           onClick={() => setMailFormVisible(false)}
           height={190}
+          debugMode
           onMessengerLoad={() => {
             setChutButtonDisabled(false);
             hideMessenger();

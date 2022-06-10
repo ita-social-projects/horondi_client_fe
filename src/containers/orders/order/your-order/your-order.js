@@ -64,7 +64,7 @@ const YourOrder = ({ ...props }) => {
       <Typography className={styles.yourOrderTotalPrice} component='div'>
         {t('common.toPay')}:
         <div className={styles.totalPrice}>
-          <span>{currencySign}</span>
+          {currencySign}
           {getPriceWithCurrency(totalPriceToPay)}
         </div>{' '}
       </Typography>

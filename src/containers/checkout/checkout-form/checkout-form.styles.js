@@ -305,12 +305,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '312px',
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
     left: '24px',
     flex: 'none',
     order: '3',
     flexGrow: '0',
-    margin: '16px 0px 0px 0px',
+    margin: '8px 0px',
     fontStyle: 'normal',
     fontWeight: '600',
     fontSize: '20px',
@@ -349,11 +350,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   totalPrice: {
     display: 'flex',
+    alignItems: 'center',
     whiteSpace: 'nowrap',
-    '& span': {
-      paddingTop: '4px',
-      paddingRight: '3px'
-    },
     '& svg': {
       fontSize: '20px'
     }

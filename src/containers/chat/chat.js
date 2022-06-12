@@ -15,7 +15,6 @@ export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
   const [сhutButtonDisabled, setChutButtonDisabled] = useState(true);
-
   const style = useStyles({ iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
@@ -28,22 +27,31 @@ export const Chat = () => {
     setIconsVisible(!iconsVisible);
     iconsVisible ? hideMessenger() : showMessenger(false);
   };
-
+  const facebookInit = () => {
+    window.FB.init({
+      appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
+      cookie: true,
+      xfbml: true,
+      version: 'v3.3'
+    });
+  };
   return (
     <>
+      (
       <div className={style.fbChatWrapper}>
         <MessengerChat
           pageId={CHAT_FACEBOOK_DATA.pageId}
           appId={CHAT_FACEBOOK_DATA.appId}
           onClick={() => setMailFormVisible(false)}
           height={190}
-          debugMode
           onMessengerLoad={() => {
             setChutButtonDisabled(false);
             hideMessenger();
+            facebookInit();
           }}
         />
       </div>
+      )
       {iconsVisible && (
         <div className={style.iconsMessengers}>
           <div

@@ -42,14 +42,16 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
       const result = [];
 
       Object.keys(values).forEach((key) => {
-        if (key === 'pattern' && item.pattern) {
-          result.unshift(values[key].constructorImg);
-        } else if (
-          typeof values[key] === 'object' &&
-          !Array.isArray(values[key]) &&
-          values[key].images
-        ) {
-          result.unshift(values[key].images.small);
+        if (key !== 'basePrice') {
+          if (key === 'pattern' && item.pattern) {
+            result.unshift(values[key].constructorImg);
+          } else if (
+            typeof values[key] === 'object' &&
+            !Array.isArray(values[key]) &&
+            values[key].images
+          ) {
+            result.unshift(values[key].images.small);
+          }
         }
       });
       return result;

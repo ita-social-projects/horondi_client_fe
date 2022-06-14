@@ -12,7 +12,7 @@ const OrderHistoryTable = ({ items }) => {
       <Divider variant='fullWidth' />
       <Table>
         <TableHead>
-          <TableRow>
+          <TableRow classes={{ root: styles.tableHeader }}>
             <TableCell style={{ width: '22%' }} className={styles.tableCell}>
               {t('common.product')}
             </TableCell>

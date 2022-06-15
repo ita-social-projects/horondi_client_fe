@@ -114,6 +114,7 @@ export const getConstructorByModel = gql`
             available
           }
         }
+        basePrice
       }
       ... on Error {
         message

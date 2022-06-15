@@ -49,6 +49,7 @@ const useConstructorLoader = () => {
         bottom: constructorByModel.getConstructorByModel.bottoms[0],
         basic: constructorByModel.getConstructorByModel.basics[0],
         model: constructorByModel.getConstructorByModel.model,
+        basePrice: constructorByModel.getConstructorByModel.basePrice,
         pocket
       };
 

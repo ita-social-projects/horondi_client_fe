@@ -9,7 +9,6 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
 
-import { CONSTRUCTOR_DEFAULT_PRICE } from './constants';
 import { constructorEndPrice, constructorPartPrice } from '../../utils/constructor';
 import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
@@ -37,7 +36,9 @@ const ImagesConstructor = () => {
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();
   const { currency } = useContext(CurrencyContext);
 
-  const defaultPrice = getPriceWithCurrency(CONSTRUCTOR_DEFAULT_PRICE);
+  const { basePrice } = constructorValues;
+
+  const defaultPrice = getPriceWithCurrency(basePrice);
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
@@ -88,7 +89,7 @@ const ImagesConstructor = () => {
   const costPattern = constructorValues.pattern ? constructorValues.pattern.absolutePrice : null;
 
   const sizeAndPrice = {
-    price: CONSTRUCTOR_DEFAULT_PRICE + costPattern + constructorValues.bottom.absolutePrice,
+    price: basePrice + costPattern + constructorValues.bottom.absolutePrice,
     size: {
       available: constructorValues.size.available,
       name: constructorValues.size.name,

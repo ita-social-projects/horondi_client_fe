@@ -46,7 +46,7 @@ export const getUserOrdersQuery = gql`
             }
             images {
               primary {
-                thumbnail
+                medium
               }
             }
             bottomMaterial {

@@ -65,16 +65,14 @@ const OrderHistoryItemProduct = ({ item }) => {
     pocket
   };
   const constructorProductImg = loadingConstructorByModel ? null : (
-    <>
-      <ConstructorCanvas
-        item={constructorItem}
-        className={styles.imgCanvasItem}
-        width={canvasW}
-        height={canvasH}
-        x={canvasX}
-        y={canvasY}
-      />
-    </>
+    <ConstructorCanvas
+      item={constructorItem}
+      className={styles.imgCanvasItem}
+      width={canvasW}
+      height={canvasH}
+      x={canvasX}
+      y={canvasY}
+    />
   );
   const productImg = product?.isFromConstructor ? constructorProductImg : defaultProductImg;
   return (

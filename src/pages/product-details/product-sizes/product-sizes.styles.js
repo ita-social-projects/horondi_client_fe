@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => {
     height: '36px',
     fontWeight: 600,
     fontSize: 14,
-    lineHeight: 19
+    lineHeight: '19px'
   };
 
   return {
@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => {
       textAlign: 'left',
       fontFamily: 'Roboto,Helvetica,Arial,sans-serif',
       fontWeight: '400',
-      lineHeight: '1.66',
+      lineHeight: '1.66px',
       letterSpacing: '0.03333em',
       color: 'tomato',
       position: 'absolute',
@@ -52,7 +52,7 @@ export const useStyles = makeStyles((theme) => {
       }
     },
     container: {
-      marginBottom: '25px'
+      margin: '25px 0'
     }
   };
 });

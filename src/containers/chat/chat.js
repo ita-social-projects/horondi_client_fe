@@ -37,7 +37,6 @@ export const Chat = () => {
   };
   return (
     <>
-      (
       <div className={style.fbChatWrapper}>
         <MessengerChat
           pageId={CHAT_FACEBOOK_DATA.pageId}
@@ -51,7 +50,6 @@ export const Chat = () => {
           }}
         />
       </div>
-      )
       {iconsVisible && (
         <div className={style.iconsMessengers}>
           <div

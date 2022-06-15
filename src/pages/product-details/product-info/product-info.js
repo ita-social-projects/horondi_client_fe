@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import parse from 'html-react-parser';
 
+import clsx from 'clsx';
 import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
@@ -11,6 +12,7 @@ import { SCROLL_BAR_LINKS } from '../constants';
 import { useCurrency } from '../../../hooks/use-currency';
 
 const ProductInfo = ({ product, countComments, currentPrice }) => {
+  const [isPatternZoomed, setPatternZoom] = useState(false);
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
@@ -74,11 +76,19 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
         </div>
         <div className={styles.colorAndPatern}>
           <span className={styles.subtitle}>{t('product.pattern')}:</span>
-          <img
-            className={styles.circle}
-            alt='pattern'
-            src={`${IMG_URL}${product.pattern.images.thumbnail}`}
-          />
+          <button
+            className={styles.patternButton}
+            type='button'
+            onClick={() => setPatternZoom(!isPatternZoomed)}
+          >
+            <img
+              className={clsx(styles.circle, {
+                [styles.zoomedPattern]: isPatternZoomed
+              })}
+              src={`${IMG_URL}${product.pattern.images.thumbnail}`}
+              alt='pattern'
+            />
+          </button>
         </div>
       </div>
     </div>

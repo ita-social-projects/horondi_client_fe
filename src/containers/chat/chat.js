@@ -27,14 +27,7 @@ export const Chat = () => {
     setIconsVisible(!iconsVisible);
     iconsVisible ? hideMessenger() : showMessenger(false);
   };
-  const facebookInit = () => {
-    window.FB.init({
-      appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
-      cookie: true,
-      xfbml: true,
-      version: 'v3.3'
-    });
-  };
+
   return (
     <>
       (
@@ -47,7 +40,6 @@ export const Chat = () => {
           onMessengerLoad={() => {
             setChutButtonDisabled(false);
             hideMessenger();
-            facebookInit();
           }}
         />
       </div>

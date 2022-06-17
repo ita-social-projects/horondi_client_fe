@@ -157,24 +157,6 @@ describe('CheckoutForm tests for: ', () => {
     expect(streetsField.value).toEqual('Південна');
   });
 
-  it('building field', async () => {
-    const buildingField = screen.getByTestId('house').querySelector('input');
-    fireEvent.change(buildingField, { target: { value: '34' } });
-    expect(buildingField.value).toEqual('34');
-  });
-
-  it('flat field', async () => {
-    const flatField = screen.getByTestId('flat').querySelector('input');
-    fireEvent.change(flatField, { target: { value: '36' } });
-    expect(flatField.value).toEqual('36');
-  });
-
-  it('paymentMetod field', async () => {
-    const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
-    fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
-    expect(paymentMetodField.value).toEqual('CASH');
-  });
-
   it('click on button action', async () => {
     const firstNameField = screen.getByTestId('firstName').querySelector('input');
     const lastNameField = screen.getByTestId('lastName').querySelector('input');

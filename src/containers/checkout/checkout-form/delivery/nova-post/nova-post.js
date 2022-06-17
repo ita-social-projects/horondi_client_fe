@@ -66,14 +66,14 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
       <div className={styles.novaPostData}>
         <div className={styles.selectorInfo}>
           <Autocomplete
-            onInputChange={(e, value, reason) => {
+            onInputChange={(_e, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
                 value = value.trim().charAt(0).toUpperCase() + value.slice(1);
                 setCitySearchValue(value);
               }
             }}
             noOptionsText={t('delivery.noCity')}
-            onChange={(event, value) => {
+            onChange={(_event, value) => {
               if (value) {
                 setSelectedCity(value.description);
                 setFieldValue('city', value.description);
@@ -110,13 +110,13 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
       <div className={styles.novaPostData}>
         <div className={styles.selectorInfo}>
           <Autocomplete
-            onInputChange={(event, value, reason) => {
+            onInputChange={(_event, value, reason) => {
               if (reason !== RESET || (reason === RESET && value)) {
                 setFieldValue('courierOffice', value);
               }
             }}
             noOptionsText={t('delivery.noDepartment')}
-            onChange={(event, value) => {
+            onChange={(_event, value) => {
               if (value) {
                 setFieldValue('courierOffice', value.description);
               } else {

@@ -8,7 +8,7 @@ const Alert = (props) => <MuiAlert elevation={6} variant='filled' {...props} />;
 const Snackbar = () => {
   const { closeSnackBar } = useContext(SnackBarContext);
 
-  const handleClose = (event, reason) => {
+  const handleClose = (_event, reason) => {
     if (reason === 'clickaway') {
       return;
     }

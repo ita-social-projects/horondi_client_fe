@@ -8,7 +8,7 @@ import { useStyles } from './news-item.style';
 import { IMG_URL } from '../../../configs';
 import { TIME_OPTIONS } from '../constants';
 
-const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
+const NewsItem = ({ date, image, id, slug, translationsKey }) => {
   const { t, i18n } = useTranslation();
   const dateLanguage = i18n.language === 'ua' ? 'ukr-UA' : 'en-US';
   const styles = useStyles();
@@ -72,16 +72,7 @@ const NewsItem = ({ date, author, image, id, slug, translationsKey }) => {
 const newsItemPropTypes = {
   date: PropTypes.string,
   id: PropTypes.string,
-  image: PropTypes.string,
-  author: PropTypes.shape({
-    image: PropTypes.string,
-    name: PropTypes.arrayOf(
-      PropTypes.shape({
-        lang: PropTypes.string,
-        value: PropTypes.string
-      })
-    )
-  })
+  image: PropTypes.string
 };
 
 NewsItem.propTypes = newsItemPropTypes;

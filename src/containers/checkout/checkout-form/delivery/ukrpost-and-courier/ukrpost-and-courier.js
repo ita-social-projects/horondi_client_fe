@@ -213,11 +213,11 @@ const UkrpostAndCourier = ({
         <Autocomplete
           data-testid='region'
           name='region'
-          onInputChange={(e, value, reason) => {
+          onInputChange={(_e, value, reason) => {
             handleRegionInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noRegion')}
-          onChange={(event, value) => {
+          onChange={(_event, value) => {
             handleRegionChange(value);
           }}
           options={ukrPoshtaRegions || []}
@@ -251,11 +251,11 @@ const UkrpostAndCourier = ({
         )}
         <Autocomplete
           data-testid='district'
-          onInputChange={(e, value, reason) => {
+          onInputChange={(_e, value, reason) => {
             handleDistrictInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noDistrict')}
-          onChange={(event, value) => {
+          onChange={(_event, value) => {
             handleDistrictChange(value);
           }}
           disabled={!values.region}
@@ -290,11 +290,11 @@ const UkrpostAndCourier = ({
         )}
         <Autocomplete
           data-testid='cities'
-          onInputChange={(e, value, reason) => {
+          onInputChange={(_e, value, reason) => {
             handleCityInputChange(value, reason);
           }}
           noOptionsText={t('delivery.noCity')}
-          onChange={(event, value) => {
+          onChange={(_event, value) => {
             handleCityChange(value);
           }}
           disabled={!values.district}
@@ -330,11 +330,11 @@ const UkrpostAndCourier = ({
         {deliveryType === deliveryTypes.UKRPOST ? (
           <>
             <Autocomplete
-              onInputChange={(e, value, reason) => {
+              onInputChange={(_e, value, reason) => {
                 handleCourierOfficeInputChange(value, reason);
               }}
               noOptionsText={t('delivery.noDepartment')}
-              onChange={(event, value) => {
+              onChange={(_event, value) => {
                 handleCourierOfficeChange(value);
               }}
               disabled={!values.city}
@@ -376,11 +376,11 @@ const UkrpostAndCourier = ({
           <>
             <Autocomplete
               data-testid='streets'
-              onInputChange={(e, value, reason) => {
+              onInputChange={(_e, value, reason) => {
                 handleStreetInputChange(value, reason);
               }}
               noOptionsText={t('delivery.noStreet')}
-              onChange={(event, value) => {
+              onChange={(_event, value) => {
                 handleStreetChange(value);
               }}
               disabled={!values.city}

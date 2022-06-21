@@ -79,7 +79,7 @@ const ProductListPage = ({ width }) => {
     setFilterParams(getFilterParamsFromQuery(searchParams));
   }, [searchParams, sortParamsFromQuery]);
 
-  const changeHandler = (e, value) => {
+  const changeHandler = (_e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);
     history.push(`?${searchParams.toString()}`);
   };

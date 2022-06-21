@@ -74,7 +74,7 @@ const AboutUsPage = lazy(() => import('../pages/about-us'));
 const Routes = () => {
   const styles = useStyles();
   const { categories } = useContext(CategoriesContext);
-  const { userData, userIsChecked } = useSelector(({ Categories, User }) => ({
+  const { userData, userIsChecked } = useSelector(({ User }) => ({
     userIsChecked: User.userIsChecked,
     userData: User.userData
   }));

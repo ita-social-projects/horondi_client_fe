@@ -35,7 +35,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
     setPrices([min, max]);
   }, [min, max, resetPrices]);
 
-  const handlePriceChange = (event, newValue) => {
+  const handlePriceChange = (_event, newValue) => {
     setPrices(newValue.map((value) => +value));
   };
 

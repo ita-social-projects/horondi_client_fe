@@ -73,7 +73,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
     handleClick();
   };
 
-  const handleClose = (event, reason) => {
+  const handleClose = (_event, reason) => {
     if (reason === 'clickaway') {
       return;
     }

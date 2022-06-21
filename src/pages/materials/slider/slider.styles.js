@@ -21,9 +21,6 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     objectFit: 'cover',
     transition: 'all 0.2s linear',
-    '&:hover': {
-      transform: 'scale(1.05)'
-    },
     '@media (max-width: 520px)': {
       height: '60px'
     }

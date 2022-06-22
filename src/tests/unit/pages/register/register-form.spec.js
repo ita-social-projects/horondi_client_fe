@@ -5,7 +5,6 @@ import { FormControlLabel } from '@material-ui/core';
 import RegisterForm from '../../../../pages/register/register-from/register-form';
 import { Loader } from '../../../../components/loader/loader';
 
-window.FB = { init: jest.fn() };
 jest.mock('../../../../pages/register/register-from/register-form.styles', () => ({
   useStyles: () => ({})
 }));
@@ -14,6 +13,7 @@ jest.mock('../../../../components/google-log-in-btn/google-button.styles', () =>
 }));
 jest.mock('react-redux');
 jest.mock('formik');
+window.FB = { init: jest.fn() };
 
 const dispatch = jest.fn();
 const props = {

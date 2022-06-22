@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@greatsumini/react-facebook-login": "^3.2.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.55",
@@ -39,6 +40,7 @@
     "react-i18next": "^11.12.0",
     "react-images-viewer": "^1.6.2",
     "react-messenger-chat-plugin": "^2.0.2",
+    "react-messenger-customer-chat": "^0.8.0",
     "react-multi-carousel": "^2.5.5",
     "react-player": "^2.3.1",
     "react-redux": "^7.2.0",
@@ -55,7 +57,7 @@
     "yup": "^0.29.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=cert.pem&&set SSL_KEY_FILE=key.pem&&react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "rtest": "react-scripts test --coverage",

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+// import FacebookLogin from '@greatsumini/react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { Button } from '@material-ui/core';
 import { loginByFacebook } from '../../redux/user/user.actions';
@@ -28,19 +29,25 @@ export const FacebookBtn = () => {
 
   return (
     <FacebookLogin
-      appId={process.env.REACT_APP_FACEBOOK_LOGIN_FOR_STAGING_CLIENT_ID}
+      appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
       fields='name,email,picture'
+      // initParams={{
+      //   xfbml: true
+      // }}
+      // xfbml='true'
+      // useCustomChat={true}
       callback={responseFacebook}
+      // onSuccess={responseFacebook}
       render={(renderProps) => (
         <Button
           onClick={renderProps.onClick}
           className={styles.loginBtn}
-          disabled={renderProps.disabled}
+          disabled={renderProps.isDisabled}
           fullWidth
         >
           <span
             className={styles.socialLogo}
-            style={{ background: `url(${FacebookLogo}) 0% 0% / contain no-repeat` }}
+            style={{ background: `url(${FacebookLogo}) 0% 0% / contain no-repeat ` }}
           />
           Facebook
         </Button>

@@ -24,7 +24,7 @@ export const FacebookBtn = () => {
   };
   useEffect(() => {
     facebookInit();
-  });
+  },[]);
 
   return (
     <FacebookLogin

@@ -3,8 +3,4 @@
 		<rect width="27.39" height="31.59" fill="black"></rect>
 		<path d="M24.3926 28.5938H18.2578V17.9062H9.16993V28.5938H3V3H9.16993V13.1601H18.2578V3H24.3926V28.5938Z" fill="white"></path>
 	</svg>
-	<style>
-		@media (prefers-color-scheme: light) { :root { filter: none; } }
-		@media (prefers-color-scheme: dark) { :root { filter: none; } }
-	</style>
 </svg>

@@ -27,6 +27,7 @@ const mockSubmit = jest.fn();
 const mockChange = jest.fn();
 const mockSetFieldValue = jest.fn();
 const mockBlur = jest.fn();
+window.FB = { init: jest.fn() };
 
 const formik = {
   values: {},

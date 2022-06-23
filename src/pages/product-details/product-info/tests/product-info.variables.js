@@ -58,16 +58,7 @@ export const props = (boolType, countComments = 1, disabled = true) => ({
           weightInKg: 0.8,
           available: true
         },
-        price: [
-          {
-            value: 2000,
-            currency: 'UAH'
-          },
-          {
-            value: 75,
-            currency: 'USD'
-          }
-        ]
+        price: 75
       }
     ],
     pattern: {

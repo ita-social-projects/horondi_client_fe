@@ -6,7 +6,7 @@ import { getWishlistByUserId } from '../pages/wishlist/operations/wishlist.queri
 export default function useWishlistLoader() {
   const user = getFromLocalStorage('accessToken');
   const userWishlist = (data) =>
-    data?.getWishlistByUserId.products ? data.getWishlistByUserId : { products: [] };
+    data?.getWishlistByUserId.products ? data?.getWishlistByUserId : { products: [] };
 
   const {
     loading,

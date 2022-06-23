@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { Card } from '@material-ui/core';
@@ -32,9 +32,6 @@ const { pathToCategory } = routes;
 
 const ProductDetails = ({ match }) => {
   const { id } = match.params;
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -137,7 +134,6 @@ const ProductDetails = ({ match }) => {
               <ProductInfo
                 product={product}
                 countComments={countComments}
-                currency={currency}
                 currentPrice={productToSend.price}
               />
             )}

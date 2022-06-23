@@ -8,17 +8,13 @@ import { ThemeProvider } from '@material-ui/styles';
 import { mockAllFilteredProducts } from './product-list-page.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import ProductListPage from '../../../../pages/product-list-page/product-list-page';
+import { DollarIcon } from '../../../../images/profile-icons';
 
-const mockHistoryPush = jest.fn();
+const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const history = createMemoryHistory();
 const themeValue = theme('light');
-let mockNameFilter = '';
-
-jest.mock('react-router', () => ({
-  ...jest.requireActual('react-router'),
-  useLocation: () => ({ search: `?sort=popularity&nameFilter=${mockNameFilter}` }),
-  useHistory: () => ({ push: mockHistoryPush })
-}));
+let isWrongNameFilter = false;
 
 jest.mock('react-redux', () => ({
   useSelector: () => ({ currency: 0 })
@@ -41,10 +37,17 @@ jest.mock('react-i18next', () => ({
   })
 }));
 
+jest.mock('../../../../hooks/use-currency', () => ({
+  useCurrency: () => ({
+    getPriceWithCurrency: mockGetPriceWithCurrency,
+    getCurrencySign: mockGetCurrencySign
+  })
+}));
+
 describe('ProductListPage with correct values', () => {
   beforeEach(() => {
     render(
-      <MockedProvider mocks={mockAllFilteredProducts} addTypename>
+      <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>
         <ThemeProvider theme={themeValue}>
           <Router history={history}>
             <ProductListPage width='sm' />
@@ -68,11 +71,11 @@ describe('ProductListPage with correct values', () => {
   });
 });
 
-describe('ProductListPage with uncorrect values', () => {
+describe('ProductListPage with incorrect query', () => {
   beforeAll(() => {
-    mockNameFilter = 'wrong_text';
+    isWrongNameFilter = true;
     render(
-      <MockedProvider mocks={mockAllFilteredProducts} addTypename>
+      <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>
         <ThemeProvider theme={themeValue}>
           <Router history={history}>
             <ProductListPage width='sm' />

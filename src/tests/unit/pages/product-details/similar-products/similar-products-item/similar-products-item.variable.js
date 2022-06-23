@@ -23,16 +23,7 @@ export const item = {
   },
   rate: 80,
   quantity: 1,
-  price: [
-    {
-      value: 1950,
-      currency: 'UAH'
-    },
-    {
-      value: 71,
-      currency: 'USD'
-    }
-  ],
+  price: 71,
   allSizes: [
     {
       size: {
@@ -45,16 +36,7 @@ export const item = {
         volumeInLiters: 18,
         weightInKg: 0.8
       },
-      price: [
-        {
-          value: 1950,
-          currency: 'UAH'
-        },
-        {
-          value: 71,
-          currency: 'USD'
-        }
-      ]
+      price: 71
     }
   ],
   id: '1641159892400'

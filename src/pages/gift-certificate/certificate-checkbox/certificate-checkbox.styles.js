@@ -25,6 +25,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'center',
     backgroundImage: `url(${sertificateImg})`,
     width: '310px',
+    '@media (max-width: 425px)': {
+      width: '210px'
+    },
     height: '152px',
     backgroundSize: '100% 100%',
     fontSize: '10px',

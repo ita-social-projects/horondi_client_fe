@@ -9,7 +9,6 @@ import withWidth from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
 import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
-import { useSelector } from 'react-redux';
 
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
@@ -33,10 +32,6 @@ const ProductListPage = ({ width }) => {
   const history = useHistory();
   const [products, setProducts] = useState([]);
 
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
-
   const [paginationParams, setPaginationParams] = useState({
     pagesCount: 1,
     currentPage: +searchParams.get(URL_QUERIES_NAME.page) || 1,
@@ -52,7 +47,7 @@ const ProductListPage = ({ width }) => {
   const variables = {
     ...sortParams,
     ...filterParams,
-    currency,
+    search: nameFilter,
     limit: Math.ceil(Math.abs(countPerPage)) || 9,
     skip:
       Math.ceil(Math.abs(currentPage)) > 1
@@ -84,7 +79,7 @@ const ProductListPage = ({ width }) => {
     setFilterParams(getFilterParamsFromQuery(searchParams));
   }, [searchParams, sortParamsFromQuery]);
 
-  const changeHandler = (e, value) => {
+  const changeHandler = (_e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);
     history.push(`?${searchParams.toString()}`);
   };
@@ -103,14 +98,6 @@ const ProductListPage = ({ width }) => {
 
   const itemsToShow = () => {
     if (products?.length > 0) {
-      if (nameFilter) {
-        const filteredProducts = products.filter((product) =>
-          product.name.some((name) => name.value.toLowerCase().includes(nameFilter.toLowerCase()))
-        );
-        return filteredProducts.map((product) => (
-          <ProductListItem key={product._id} product={product} />
-        ));
-      }
       return products.map((product) => <ProductListItem key={product._id} product={product} />);
     }
     return null;

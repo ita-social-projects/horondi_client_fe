@@ -20,7 +20,7 @@ const AnswersQuestionsPage = () => {
 
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+  const handleChange = (panel) => (_event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 

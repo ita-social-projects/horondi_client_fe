@@ -13,7 +13,6 @@ export const getFilteredProductsQuery = gql`
     $purchasedCount: Int
     $category: [String]
     $models: [String]
-    $currency: Int
   ) {
     getProducts(
       filter: {
@@ -22,7 +21,6 @@ export const getFilteredProductsQuery = gql`
         category: $category
         isHotItem: $isHotItem
         models: $models
-        currency: $currency
       }
       limit: $limit
       skip: $skip
@@ -76,10 +74,7 @@ export const getFilteredProductsQuery = gql`
               value
             }
           }
-          basePrice {
-            value
-            currency
-          }
+          basePrice
           availableCount
           available
           rate
@@ -88,10 +83,7 @@ export const getFilteredProductsQuery = gql`
             size {
               available
             }
-            price {
-              value
-              currency
-            }
+            price
           }
         }
         count
@@ -124,12 +116,8 @@ export const getAllFiltersQuery = gql`
           value
         }
       }
-      maxPrice {
-        value
-      }
-      minPrice {
-        value
-      }
+      maxPrice
+      minPrice
     }
   }
 `;

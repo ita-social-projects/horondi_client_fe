@@ -19,6 +19,13 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: '1.5rem'
       }
     },
+    '& ul:last-child': {
+      marginBottom: '140px'
+    },
+    '& p:last-child': {
+      marginBottom: '140px',
+      '@media (max-width: 670px)': { marginBottom: '140px' }
+    },
     '& > h1': {
       textAlign: 'center',
       transform: 'scale(1, 1.1)',

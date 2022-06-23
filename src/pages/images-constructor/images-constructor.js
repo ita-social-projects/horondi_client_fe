@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
@@ -10,18 +9,14 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
 
-import { CONSTRUCTOR_DEFAULT_PRICE } from './constants';
-import {
-  constructorEndPrice,
-  constructorPartPrice,
-  constructorPartNames
-} from '../../utils/constructor';
-import { getCurrentCurrency } from '../../utils/checkout';
+import { constructorEndPrice, constructorPartPrice } from '../../utils/constructor';
 import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useAppStyles } from '../../components/app/app.styles';
 import ConstructorCanvas from '../../components/constructor-canvas';
+import { CurrencyContext } from '../../context/currency-context';
+import { useCurrency } from '../../hooks/use-currency';
 
 const ImagesConstructor = () => {
   const {
@@ -38,14 +33,12 @@ const ImagesConstructor = () => {
     valuesLoading
   } = useConstructorLoader();
 
-  const { currency } = useSelector(({ Currency }) => ({
-    currency: Currency.currency
-  }));
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { currency } = useContext(CurrencyContext);
 
-  const { i18n } = useTranslation();
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const { basePrice } = constructorValues;
 
-  const defaultPrice = CONSTRUCTOR_DEFAULT_PRICE[currency];
+  const defaultPrice = getPriceWithCurrency(basePrice);
 
   const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
@@ -64,55 +57,39 @@ const ImagesConstructor = () => {
   };
 
   useEffect(() => {
-    const getPrice = (currencyInFanc, key) =>
-      !currencyInFanc
-        ? constructorValues[key].additionalPrice[0].value
-        : constructorValues[key].additionalPrice[1].value;
+    const getPrice = (key) => getPriceWithCurrency(constructorValues[key].absolutePrice);
 
     setAllPrice(
       Object.keys(constructorValues).reduce((acc, key) => {
-        if (key === 'pattern' && constructorValues.pattern !== undefined)
-          acc.pattern = getPrice(currency, key);
-        if (key === 'bottom') acc.bottom = getPrice(currency, key);
+        if (key === 'pattern' && constructorValues.pattern !== undefined) {
+          acc.pattern = getPrice(key);
+        }
+
+        if (key === 'bottom') {
+          acc.bottom = getPrice(key);
+        }
+
         return acc;
       }, {})
     );
   }, [constructorValues, currency, setAllPrice]);
 
   const { isError } = useIsLoadingOrError([], [constructorsError, constructorError]);
-  if (valuesLoading) return errorOrLoadingHandler(isError, valuesLoading);
+  if (valuesLoading) {
+    return errorOrLoadingHandler(isError, valuesLoading);
+  }
 
   function price() {
     if (allPrices.pattern) {
-      return constructorEndPrice(+defaultPrice + allPrices.pattern + allPrices.bottom);
+      return constructorEndPrice(defaultPrice + allPrices.pattern + allPrices.bottom);
     }
-    return constructorEndPrice(+defaultPrice + allPrices.bottom);
+    return constructorEndPrice(defaultPrice + allPrices.bottom);
   }
 
-  const costPatternUAH = constructorValues.pattern
-    ? constructorValues.pattern.additionalPrice[0].value
-    : null;
-  const costPatternUSD = constructorValues.pattern
-    ? constructorValues.pattern.additionalPrice[1].value
-    : null;
+  const costPattern = constructorValues.pattern ? constructorValues.pattern.absolutePrice : null;
 
   const sizeAndPrice = {
-    price: [
-      {
-        value:
-          +CONSTRUCTOR_DEFAULT_PRICE[0] +
-          costPatternUAH +
-          constructorValues.bottom.additionalPrice[0].value,
-        currency: 'UAH'
-      },
-      {
-        value:
-          +CONSTRUCTOR_DEFAULT_PRICE[1] +
-          costPatternUSD +
-          constructorValues.bottom.additionalPrice[1].value,
-        currency: 'USD'
-      }
-    ],
+    price: basePrice + costPattern + constructorValues.bottom.absolutePrice,
     size: {
       available: constructorValues.size.available,
       name: constructorValues.size.name,
@@ -189,7 +166,7 @@ const ImagesConstructor = () => {
                   });
                   setAllPrice((prevState) => ({
                     ...prevState,
-                    pattern: constructorValues.pattern.additionalPrice[currency].value
+                    pattern: constructorValues.pattern.absolutePrice
                   }));
                 }}
               >
@@ -218,7 +195,7 @@ const ImagesConstructor = () => {
                   });
                   setAllPrice((prevState) => ({
                     ...prevState,
-                    bottom: constructorValues.bottom.additionalPrice[currency].value
+                    bottom: constructorValues.bottom.absolutePrice
                   }));
                 }}
               >
@@ -266,7 +243,6 @@ const ImagesConstructor = () => {
                 setModalVisibility={setModalVisibility}
                 onAction={onModalAction}
                 isOpen={modalVisibility}
-                language={language}
                 isEmpty
                 isFullscreen
                 content={<h3>MODAL FOR CONSTRUCTOR</h3>}
@@ -291,18 +267,20 @@ const ImagesConstructor = () => {
                 <div className={`${styles.line} ${styles.bottomLine}`} />
                 <li className={styles.priceItem}>
                   <span>{t('common.defaultPrice')}</span>
-                  <span>
+                  <span className={styles.currencySign}>
                     {defaultPrice}
-                    {getCurrentCurrency(currency)}
+                    {getCurrencySign()}
                   </span>
                 </li>
                 <div className={`${styles.line} ${styles.topLine}`} />
                 {constructorPartPrice(allPrices.pattern, allPrices.bottom).map((item, index) =>
                   item ? (
                     <li key={index} className={styles.priceItem}>
-                      <span>{constructorPartNames(!language)[index]}</span>
                       <span>
-                        {item} {getCurrentCurrency(currency)}
+                        {t(`common.constructorAdditionals`, { returnObjects: true })[index]}
+                      </span>
+                      <span className={styles.currencySign}>
+                        {item} {getCurrencySign()}
                       </span>
                     </li>
                   ) : (
@@ -314,9 +292,9 @@ const ImagesConstructor = () => {
             </div>
             <h2 className={styles.headerWrapper}>
               {t('common.endPrice')}
-              <span>
+              <span className={styles.currencySign}>
                 {price()}
-                {getCurrentCurrency(currency)}
+                {getCurrencySign()}
               </span>
             </h2>
             <ConstructorSubmit

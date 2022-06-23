@@ -7,12 +7,6 @@ export const getBusinessTextByCode = gql`
       ... on BusinessText {
         _id
         code
-        title {
-          value
-        }
-        text {
-          value
-        }
         translationsKey
         date
       }

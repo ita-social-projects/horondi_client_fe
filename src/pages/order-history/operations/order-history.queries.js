@@ -10,10 +10,7 @@ export const getUserOrdersQuery = gql`
         orderNumber
         items {
           quantity
-          fixedPrice {
-            currency
-            value
-          }
+          fixedPrice
           options {
             size {
               name
@@ -23,27 +20,44 @@ export const getUserOrdersQuery = gql`
             _id
             isFromConstructor
             translationsKey
+            mainMaterial {
+              color {
+                _id
+              }
+              material {
+                _id
+              }
+            }
+            pattern {
+              _id
+              constructorImg
+              images {
+                large
+                medium
+                small
+                thumbnail
+              }
+            }
             model {
+              _id
               sizes {
                 name
               }
             }
             images {
               primary {
-                thumbnail
+                medium
               }
             }
             bottomMaterial {
               material {
+                _id
                 translationsKey
               }
             }
           }
         }
-        totalItemsPrice {
-          value
-          currency
-        }
+        totalItemsPrice
       }
       ordersCount
     }

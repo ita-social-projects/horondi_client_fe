@@ -124,7 +124,7 @@ const Comments = ({ productId, checkCountComments }) => {
             disabled={!userData}
             name='edit-rate'
             value={rate}
-            onChange={(e, newRate) => setRate(newRate)}
+            onChange={(_e, newRate) => setRate(newRate)}
           />
         </span>
       </Tooltip>

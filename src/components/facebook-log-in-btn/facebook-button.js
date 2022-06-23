@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { Button } from '@material-ui/core';
@@ -14,9 +14,21 @@ export const FacebookBtn = () => {
     dispatch(loginByFacebook({ idToken: response.accessToken }));
   };
 
+  const facebookInit = () => {
+    window.FB.init({
+      appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
+      coockie: true,
+      xfbml: true,
+      version: 'v3.3'
+    });
+  };
+  useEffect(() => {
+    facebookInit();
+  },[]);
+
   return (
     <FacebookLogin
-      appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
+      appId={process.env.REACT_APP_FACEBOOK_LOGIN_FOR_STAGING_CLIENT_ID}
       fields='name,email,picture'
       callback={responseFacebook}
       render={(renderProps) => (

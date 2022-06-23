@@ -24,16 +24,7 @@ export const constructorValues = {
   size: {
     name: 'L',
     _id: '604394a2a7532c33dcb326d5',
-    additionalPrice: [
-      {
-        value: 136,
-        currency: 'UAH'
-      },
-      {
-        value: 5,
-        currency: 'USD'
-      }
-    ]
+    additionalPrice: 5
   }
 };
 
@@ -46,16 +37,7 @@ export const mockCart = [
         _id: '604394a2a7532c33dcb326d5',
         name: 'L'
       },
-      price: [
-        {
-          value: 1780,
-          currency: 'UAH'
-        },
-        {
-          value: 64,
-          currency: 'USD'
-        }
-      ]
+      price: 64
     },
     quantity: 4
   }

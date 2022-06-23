@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
       zIndex: 11,
       height: '100vh',
       width: 'fit-content',
-      minWidth: '360px',
+      minWidth: '320px',
       maxWidth: '450px',
       '@media (max-width: 768px)': {
         width: '100%'
@@ -83,7 +83,7 @@ export const useStyles = makeStyles((theme) => ({
       content: "'◆'",
       fontSize: '1.2rem',
       display: 'block',
-      color: '#3F51B5',
+      color: theme.palette.type === 'light' ? '#000000' : '#FFFFFF',
       width: 15,
       height: 27,
       position: 'relative',

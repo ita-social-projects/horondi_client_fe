@@ -28,7 +28,7 @@ const routes = {
   pathToTerms: '/pages/terms',
   pathToUserAgreement: '/pages/user-agreement',
   pathToAnswersQuestionsPage: '/answers-questions',
-  pathToAboutUs: '/pages/about-us',
+  pathToAboutUs: '/about-us',
   pathToGiftСertificate: '/certificates',
   pathToMyCertificates: '/my-certificates'
 };

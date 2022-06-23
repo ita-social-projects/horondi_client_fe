@@ -3,7 +3,6 @@ import { IMG_URL } from '../../configs';
 
 const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
   const canvasRef = useRef();
-
   const mergeImages = (
     imagesToMerge,
     currentCanvas,
@@ -43,17 +42,18 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
       const result = [];
 
       Object.keys(values).forEach((key) => {
-        if (key === 'pattern' && item.pattern) {
-          result.unshift(values[key].constructorImg);
-        } else if (
-          typeof values[key] === 'object' &&
-          !Array.isArray(values[key]) &&
-          values[key].images
-        ) {
-          result.unshift(values[key].images.small);
+        if (key !== 'basePrice') {
+          if (key === 'pattern' && item.pattern) {
+            result.unshift(values[key].constructorImg);
+          } else if (
+            typeof values[key] === 'object' &&
+            !Array.isArray(values[key]) &&
+            values[key].images
+          ) {
+            result.unshift(values[key].images.small);
+          }
         }
       });
-
       return result;
     };
 

@@ -27,10 +27,7 @@ export const addProductFromConstructor = gql`
             name
             available
           }
-          price {
-            value
-            currency
-          }
+          price
         }
       }
     }

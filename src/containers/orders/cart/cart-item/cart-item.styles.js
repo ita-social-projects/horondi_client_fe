@@ -46,7 +46,12 @@ export const useStyles = makeStyles(({ palette }) => ({
       height: 60
     }
   },
-
+  itemImg: {
+    objectFit: 'cover',
+    width: '220px',
+    height: '133px',
+    marginRight: '30px'
+  },
   product: {
     display: 'flex',
     alignItems: 'center',
@@ -99,6 +104,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     textAlign: 'center'
   },
   deleteIcon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     color: palette.cart.iconColor,
     cursor: 'pointer'
   },

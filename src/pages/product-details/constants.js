@@ -14,7 +14,7 @@ export const defaultProductToSend = {
     _id: ''
   },
   quantity: 1,
-  price: [],
+  price: 0,
   options: {
     size: {
       _id: ''

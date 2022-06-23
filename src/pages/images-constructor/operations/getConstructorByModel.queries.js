@@ -35,10 +35,7 @@ export const getConstructorByModel = gql`
             thumbnail
           }
           available
-          additionalPrice {
-            value
-            currency
-          }
+          absolutePrice
         }
         bottoms {
           _id
@@ -61,10 +58,7 @@ export const getConstructorByModel = gql`
             small
             thumbnail
           }
-          additionalPrice {
-            value
-            currency
-          }
+          absolutePrice
         }
         pocketsWithRestrictions {
           currentPocketWithPosition {
@@ -103,10 +97,8 @@ export const getConstructorByModel = gql`
             thumbnail
           }
           constructorImg
-          additionalPrice {
-            value
-            currency
-          }
+          absolutePrice
+          relativePrice
         }
         model {
           _id
@@ -117,13 +109,12 @@ export const getConstructorByModel = gql`
           sizes {
             _id
             name
-            additionalPrice {
-              value
-              currency
-            }
+            absolutePrice
+            relativePrice
             available
           }
         }
+        basePrice
       }
       ... on Error {
         message

@@ -67,7 +67,7 @@ function* setLoginUser(user) {
   const purchasedProducts = yield call(getPurchasedProducts, user._id);
   setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
   setToLocalStorage(ACCESS_TOKEN, user.token);
-  const wishlist = yield call(getWishlistByUserId, user._id);
+  const wishlist = yield call(getWishlistByUserId);
   setToLocalStorage(WISHLIST_KEY, wishlist.products);
   yield put(setNewWishlist(wishlist.products));
   yield put(setUser({ ...user, purchasedProducts, wishlist }));
@@ -121,6 +121,7 @@ export function* handleUserConfirm({ payload }) {
     const user = yield call(confirmUserEmail, payload);
     setToLocalStorage(ACCESS_TOKEN, user.token);
     setToLocalStorage(REFRESH_TOKEN, user.refreshToken);
+    yield call(handleUserPreserve);
     yield put(setUserIsConfirmed(true));
     yield put(setUserLoading(false));
   } catch (e) {
@@ -217,6 +218,8 @@ export function* handleSendConfirmation({ payload }) {
 export function* handleUserLogout() {
   yield put(setUser(null));
   yield put(setUserOrders(null));
+  setToLocalStorage(REFRESH_TOKEN, '');
+  setToLocalStorage(ACCESS_TOKEN, '');
 }
 
 export function* handleTokenCheck({ payload }) {
@@ -240,6 +243,8 @@ export function* handleUserError(e) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
+  } else if (e?.message === 'USER_ALREADY_EXIST') {
+    yield put(setUserError(i18n.t('error.userError.userAlredyExist')));
   } else if (i18n.exists(`error.userError.${e?.message}`)) {
     yield put(setUserError(i18n.t(`error.userError.${e.message}`)));
   } else {

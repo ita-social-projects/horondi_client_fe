@@ -59,22 +59,13 @@ export const useStyles = makeStyles((theme) => ({
     wordSpacing: '0.2rem',
     '& img': {
       display: 'block'
-    },
-    '@media (max-width: 600px)': {
-      justifyContent: 'space-between',
-      display: 'flex',
-      margin: '10px 0'
     }
   },
   colorAndPatern: {
+    position: 'relative',
     margin: '20px 0',
     display: 'block',
-    alignItems: 'center',
-    gap: '5px',
-    '@media (max-width: 600px)': {
-      display: 'flex',
-      margin: '10px 0'
-    }
+    alignItems: 'center'
   },
   subtitle: {
     alignSelf: 'center',
@@ -105,11 +96,28 @@ export const useStyles = makeStyles((theme) => ({
   circle: {
     width: '32px',
     height: '32px',
-    borderRadius: '50%'
+    borderRadius: '50%',
+    transition: 'border-radius .2s'
   },
   comments: {
     color: theme.palette.textColor,
     display: 'block',
     textDecorationLine: 'underline'
+  },
+  patternButton: {
+    position: 'absolute',
+    padding: 0,
+    display: 'block',
+    backgroundColor: 'transparent',
+    border: 'none',
+    cursor: 'zoom-in',
+    zIndex: 10
+  },
+  zoomedPattern: {
+    width: 'auto',
+    height: 'auto',
+    maxWidth: '200px',
+    borderRadius: 0,
+    cursor: 'zoom-out'
   }
 }));

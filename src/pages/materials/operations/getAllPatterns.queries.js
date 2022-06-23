@@ -20,3 +20,22 @@ export const getAllPatterns = gql`
     }
   }
 `;
+
+export const getMaterialsBlocksByType = gql`
+  query ($type: String!, $skip: Int!, $limit: Int!) {
+    getMaterialsBlocksByType(type: $type, skip: $skip, limit: $limit) {
+      items {
+        _id
+        title
+        type
+        image
+        text {
+          lang
+          value
+        }
+        translationsKey
+      }
+      count
+    }
+  }
+`;

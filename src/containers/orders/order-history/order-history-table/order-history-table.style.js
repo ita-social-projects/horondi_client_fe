@@ -10,5 +10,16 @@ export const useStyles = makeStyles(() => ({
       width: '60%',
       textAlign: 'right'
     }
-  }
+  },
+  tableHeader: () => ({
+    fontStyle: 'normal',
+    '& > th': {
+      '@media (max-width: 768px)': {
+        padding: '10px'
+      },
+      '@media (max-width: 576px)': {
+        padding: '3px'
+      }
+    }
+  })
 }));

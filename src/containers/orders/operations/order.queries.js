@@ -17,7 +17,7 @@ export const getProductById = gql`
         }
         images {
           primary {
-            thumbnail
+            medium
           }
         }
         sizes {
@@ -26,10 +26,7 @@ export const getProductById = gql`
             name
             available
           }
-          price {
-            value
-            currency
-          }
+          price
         }
       }
     }

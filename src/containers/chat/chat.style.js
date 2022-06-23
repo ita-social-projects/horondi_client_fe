@@ -21,6 +21,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     borderRadius: '29px',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     right: '12px',
+    border: 'none',
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
       boxShadow: ' 0 0 10px white',
@@ -29,6 +30,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       cursor: 'pointer',
       background: palette.yellow
+    },
+    '&:disabled': {
+      background: palette.lightGrayShade
     }
   }),
   iconsMessengers: {
@@ -114,14 +118,16 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '40%',
     fontSize: '1rem',
     flexDirection: 'column',
-    margin: '0 50px 0 0'
+    margin: '0 60px 0 0'
   },
   contactsTitle: {
-    margin: '3px 70px 2px 0',
+    margin: '3px 70px 10px 0',
     fontSize: '1.3rem'
   },
   phoneNumbers: {
-    color: palette.textColor
+    color: palette.textColor,
+    display: 'flex',
+    marginBottom: '10px'
   },
   mailTitle: {
     marginTop: '5%',
@@ -169,7 +175,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   iconContact: {
-    margin: '0 5px 0 0',
+    margin: '0 15px 0 0',
     fontSize: '20px',
     paddingTop: '2px'
   },
@@ -186,5 +192,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   thankForMsg: {
     fontSize: '1rem',
     marginBottom: '20px'
+  },
+  fbChatWrapper: {
+    zIndex: 100
   }
 }));

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+import { MessengerChat, showMessenger, hideMessenger } from 'react-messenger-chat-plugin';
 import { config } from 'react-spring';
 import { Transition } from 'react-spring/renderprops';
 import { useQuery } from '@apollo/client';
@@ -14,7 +14,7 @@ import { CHAT_FACEBOOK_DATA } from './constants';
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-
+  const [сhutButtonDisabled, setChutButtonDisabled] = useState(true);
   const style = useStyles({ iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
@@ -22,15 +22,28 @@ export const Chat = () => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
   const contacts = data.getContacts.items;
 
+  const chatButtonHendler = () => {
+    setMailFormVisible(false);
+    setIconsVisible(!iconsVisible);
+    iconsVisible ? hideMessenger() : showMessenger(false);
+  };
+
   return (
     <>
+      <div className={style.fbChatWrapper}>
+        <MessengerChat
+          pageId={CHAT_FACEBOOK_DATA.pageId}
+          appId={CHAT_FACEBOOK_DATA.appId}
+          onClick={() => setMailFormVisible(false)}
+          height={190}
+          onMessengerLoad={() => {
+            setChutButtonDisabled(false);
+            hideMessenger();
+          }}
+        />
+      </div>
       {iconsVisible && (
         <div className={style.iconsMessengers}>
-          <MessengerCustomerChat
-            pageId={CHAT_FACEBOOK_DATA.pageId}
-            appId={CHAT_FACEBOOK_DATA.appId}
-            onClick={() => setMailFormVisible(false)}
-          />
           <div
             className={mailFormVisible ? style.msgIconActive : style.msgIcon}
             onClick={() => setMailFormVisible(!mailFormVisible)}
@@ -61,15 +74,9 @@ export const Chat = () => {
           </Transition>
         </div>
       )}
-      <div
-        onClick={() => {
-          setMailFormVisible(false);
-          setIconsVisible(!iconsVisible);
-        }}
-        className={style.chatIcon}
-      >
+      <button onClick={chatButtonHendler} disabled={сhutButtonDisabled} className={style.chatIcon}>
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
-      </div>
+      </button>
     </>
   );
 };

@@ -77,7 +77,7 @@ describe('user sagas tests', () => {
       .provide([
         [call(getGoogleUser, payload), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
@@ -113,7 +113,7 @@ describe('user sagas tests', () => {
       .provide([
         [call(getFacebookUser, payload), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
       .put(setUserLoading(false))
@@ -148,7 +148,7 @@ describe('user sagas tests', () => {
       .provide([
         [call(loginUser, { user: { email, pass, rememberMe } }), user],
         [call(getPurchasedProducts, user._id), purchasedProducts],
-        [call(getWishlistByUserId, user._id), wishlist]
+        [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
       .run()
@@ -176,7 +176,7 @@ describe('user sagas tests', () => {
       .withReducer(userReducer)
       .put(resetState())
       .put(setUserLoading(true))
-      .provide([[call(confirmUserEmail, token), user]])
+      .provide([[call(confirmUserEmail, token), user], [call(handleUserPreserve)]])
       .put(setUserIsConfirmed(true))
       .put(setUserLoading(false))
       .hasFinalState({
@@ -189,7 +189,7 @@ describe('user sagas tests', () => {
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
         expect(analysisPut).toHaveLength(4);
-        expect(analysisCall).toHaveLength(1);
+        expect(analysisCall).toHaveLength(2);
       }));
 
   it('should handle user confirm error', () =>

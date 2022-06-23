@@ -85,5 +85,6 @@
     "models": "Our models"
   },
   "titleQuestionsAnswers": "Questions and answers",
-  "backpack": "Your Backpack"
+  "backpack": "Your Backpack", 
+  "constructorAdditionals": ["Front-Pocket material:", "Bottom material:"]
 }

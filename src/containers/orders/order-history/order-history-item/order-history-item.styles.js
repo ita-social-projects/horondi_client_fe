@@ -16,7 +16,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '40px',
     fontSize: '14px',
     fontWeight: '600',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    '@media (max-width: 576px)': {
+      fontSize: '11px'
+    }
   },
   headingStatus: {
     display: 'flex'
@@ -76,7 +79,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
-
+    '@media (max-width: 768px)': {
+      fontSize: '18px'
+    },
+    '@media (max-width: 576px)': {
+      fontSize: '14px'
+    },
     '& div': {
       width: '60%',
       textAlign: 'right'

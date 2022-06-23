@@ -13,6 +13,7 @@ jest.mock('../../../../components/google-log-in-btn/google-button.styles', () =>
 }));
 jest.mock('react-redux');
 jest.mock('formik');
+window.FB = { init: jest.fn() };
 
 const dispatch = jest.fn();
 const props = {

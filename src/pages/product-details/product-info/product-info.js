@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Tooltip from '@material-ui/core/Tooltip';
 import Rating from '@material-ui/lab/Rating';
 import parse from 'html-react-parser';
 
+import clsx from 'clsx';
 import { useStyles } from './product-info.styles';
 import { IMG_URL } from '../../../configs';
 import Colors from './colors';
 import { SCROLL_BAR_LINKS } from '../constants';
-import { DollarIcon, HryvniaIcon } from '../../../images/profile-icons';
+import { useCurrency } from '../../../hooks/use-currency';
 
-const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
+const ProductInfo = ({ product, countComments, currentPrice }) => {
+  const [isPatternZoomed, setPatternZoom] = useState(false);
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
+  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
 
-  const currencySign = currency ? <DollarIcon /> : <HryvniaIcon />;
+  const currencySign = getCurrencySign();
 
   const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
@@ -50,11 +53,11 @@ const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
         {shortProductInfo(parse(t(`${translationsKey}.description`)))}
       </div>
 
-      {Object.keys(currentPrice).length ? (
+      {currentPrice ? (
         <div className={styles.priceContainer}>
           <span data-cy='price' className={styles.price}>
             {currencySign}
-            {Math.round(currentPrice[currency]?.value).toFixed(2)}
+            {getPriceWithCurrency(currentPrice).toFixed(2)}
           </span>
         </div>
       ) : null}
@@ -73,11 +76,19 @@ const ProductInfo = ({ product, countComments, currency, currentPrice }) => {
         </div>
         <div className={styles.colorAndPatern}>
           <span className={styles.subtitle}>{t('product.pattern')}:</span>
-          <img
-            className={styles.circle}
-            alt='pattern'
-            src={`${IMG_URL}${product.pattern.images.thumbnail}`}
-          />
+          <button
+            className={styles.patternButton}
+            type='button'
+            onClick={() => setPatternZoom(!isPatternZoomed)}
+          >
+            <img
+              className={clsx(styles.circle, {
+                [styles.zoomedPattern]: isPatternZoomed
+              })}
+              src={`${IMG_URL}${product.pattern.images.thumbnail}`}
+              alt='pattern'
+            />
+          </button>
         </div>
       </div>
     </div>

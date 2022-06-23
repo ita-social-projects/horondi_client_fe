@@ -21,8 +21,7 @@ export const getConstructorByModel = gql`
             value
           }
           images {
-            small
-            thumbnail
+            medium
           }
           sizes {
             _id
@@ -36,10 +35,21 @@ export const getConstructorByModel = gql`
             lang
             value
           }
-          additionalPrice {
-            currency
-            value
+          features {
+            material {
+              _id
+            }
+            color {
+              _id
+            }
           }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+          absolutePrice
         }
         bottoms {
           _id
@@ -49,23 +59,38 @@ export const getConstructorByModel = gql`
           }
           features {
             material {
+              _id
               translationsKey
             }
           }
-          additionalPrice {
-            value
-            currency
+          absolutePrice
+          images {
+            large
+            medium
+            small
+            thumbnail
           }
         }
         patterns {
           _id
+          constructorImg
           name {
             lang
             value
           }
-          additionalPrice {
-            value
-            currency
+          absolutePrice
+        }
+        pocketsWithRestrictions {
+          currentPocketWithPosition {
+            pocket {
+              _id
+              images {
+                large
+                medium
+                small
+                thumbnail
+              }
+            }
           }
         }
       }

@@ -23,10 +23,7 @@ const baseStyles = {
     }
   },
   '& .MuiSvgIcon-root': {
-    stroke: '#FFF',
-    position: 'absolute',
-    top: '11px',
-    left: '12px'
+    stroke: '#FFF'
   },
   '& .MuiInput-underline:after, & .MuiInput-underline:before': {
     display: 'none'
@@ -43,7 +40,7 @@ export const useStyles = makeStyles((theme, color) => ({
       position: 'relative',
       flex: 'unset'
     },
-    '@media (max-width: 555px)': {
+    '@media (max-width: 556px)': {
       flex: '1',
       position: 'absolute',
       top: '40px',
@@ -70,6 +67,41 @@ export const useStyles = makeStyles((theme, color) => ({
     },
     '& .MuiSvgIcon-root': {
       display: 'none'
+    }
+  }),
+  searchInputIcon: () => ({
+    position: 'absolute',
+    top: '11px',
+    left: '12px'
+  }),
+  clearIconBlock: () => ({
+    '@media (max-width: 556px)': {
+      margin: '-30px 7px 0 0'
+    }
+  }),
+  clearInputIcon: () => ({
+    position: 'absolute',
+    top: '8px',
+    left: '320px',
+    cursor: 'pointer',
+    borderRadius: '50%',
+    transition: 'background-color 0.3s linear',
+    '&:hover': {
+      backgroundColor: '#000'
+    },
+    
+    '@media (max-width: 1000px)': {
+      left: '220px'
+    },
+    '@media (max-width: 800px)': {
+      left: '170px'
+    },
+    '@media (max-width: 600px)': {
+      left: '120px'
+    },
+    '@media (max-width: 556px)': {
+      left: '510px',
+      position: 'sticky'
     }
   })
 }));

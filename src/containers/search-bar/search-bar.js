@@ -6,6 +6,7 @@ import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
 import useDebounce from '../../hooks/use-debounce';
+import ClearIcon from './ClearIcon';
 
 const SearchBar = ({
   searchParams,
@@ -71,7 +72,7 @@ const SearchBar = ({
 
   return (
     <div className={mainClass}>
-      <SearchIcon />
+      <SearchIcon searchInputIcon={styles.searchInputIcon} />
       <TextField
         placeholder={t('searchBar.search')}
         value={defaultValue || searchValue}
@@ -80,6 +81,8 @@ const SearchBar = ({
         inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
       />
+      <ClearIcon searchValue={searchValue} setSearchValue={setSearchValue} clearInputIcon={styles.clearInputIcon}
+      clearIconBlock={styles.clearIconBlock} />
     </div>
   );
 };

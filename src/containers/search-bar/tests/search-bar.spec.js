@@ -29,6 +29,7 @@ describe('search-bar testing', () => {
   test('shoud render searchBar with initial props', () => {
     expect(screen.getByTestId('search-icon')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('searchBarPlaceholder')).toBeInTheDocument();
+    expect(screen.getByTestId('clear-icon')).toBeInTheDocument();
   });
 
   test('shoud appear element with queried data', async () => {

@@ -81,8 +81,7 @@ const SearchBar = ({
         inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
       />
-      <ClearIcon searchValue={searchValue} setSearchValue={setSearchValue} clearInputIcon={styles.clearInputIcon}
-      clearIconBlock={styles.clearIconBlock} />
+      <ClearIcon setSearchValue={setSearchValue} clearInputIcon={styles.clearInputIcon} clearIconBlock={styles.clearIconBlock} />
     </div>
   );
 };

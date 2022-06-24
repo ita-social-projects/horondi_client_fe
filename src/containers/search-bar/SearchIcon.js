@@ -13,7 +13,7 @@ const Search = createSvgIcon(
   'Search'
 );
 
-function SearchIcon(props) {
+const SearchIcon = (props) => {
 
   const searchInputIcon = props.searchInputIcon;
 

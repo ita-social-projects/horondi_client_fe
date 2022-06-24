@@ -13,16 +13,15 @@ const Clear = createSvgIcon(
     'Clear'
 );
 
-function ClearIcon(props) {   
+const ClearIcon = (props) => {   
 
     const clearInputIcon = props.clearInputIcon;
     const clearIconBlock = props.clearIconBlock;
 
     const clearSearchInput = () => {
-        if(!!props.searchValue) {
         props.setSearchValue('');
-        }
     }
+    
     return (
         <>
             <div className={clearIconBlock} onClick={clearSearchInput} >

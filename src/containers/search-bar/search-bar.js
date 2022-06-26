@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
+import { InputAdornment } from '@mui/material';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
 import useDebounce from '../../hooks/use-debounce';
 import ClearIcon from './ClearIcon';
-import { InputAdornment } from '@mui/material';
 
 const SearchBar = ({
   searchParams,
@@ -78,12 +78,12 @@ const SearchBar = ({
         value={defaultValue || searchValue}
         onBlur={handleOnBlur}
         onFocus={handleOnFocus}
-        inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
         InputProps={{
+          inputProps:{ maxLength: 20 },
           startAdornment: <InputAdornment position='end' sx={{margin: '7px -35px 0 12px'}}>
             <SearchIcon />
-          </InputAdornment>,
+          </InputAdornment>
         }}
       />
       <ClearIcon setSearchValue={setSearchValue} clearInputIcon={styles.clearInputIcon} clearIconBlock={styles.clearIconBlock} />

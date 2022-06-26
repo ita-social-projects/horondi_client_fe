@@ -23,11 +23,9 @@ const ClearIcon = (props) => {
     }
     
     return (
-        <>
-            <div className={clearIconBlock} onClick={clearSearchInput} >
+             <div className={clearIconBlock} onClick={clearSearchInput} >
                 <Clear className={clearInputIcon} data-testid='clear-icon' />
-            </div>
-        </>
+             </div>
     );
 }
 

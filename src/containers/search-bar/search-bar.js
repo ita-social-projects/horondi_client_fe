@@ -7,6 +7,7 @@ import { getFilteredProductsQuery } from '../../pages/product-list-page/operatio
 import SearchIcon from './SearchIcon';
 import useDebounce from '../../hooks/use-debounce';
 import ClearIcon from './ClearIcon';
+import { InputAdornment } from '@mui/material';
 
 const SearchBar = ({
   searchParams,
@@ -72,7 +73,6 @@ const SearchBar = ({
 
   return (
     <div className={mainClass}>
-      <SearchIcon searchInputIcon={styles.searchInputIcon} />
       <TextField
         placeholder={t('searchBar.search')}
         value={defaultValue || searchValue}
@@ -80,6 +80,11 @@ const SearchBar = ({
         onFocus={handleOnFocus}
         inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
+        InputProps={{
+          startAdornment: <InputAdornment position='end' sx={{margin: '7px -35px 0 12px'}}>
+            <SearchIcon />
+          </InputAdornment>,
+        }}
       />
       <ClearIcon setSearchValue={setSearchValue} clearInputIcon={styles.clearInputIcon} clearIconBlock={styles.clearIconBlock} />
     </div>

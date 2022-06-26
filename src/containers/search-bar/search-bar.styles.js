@@ -69,11 +69,6 @@ export const useStyles = makeStyles((theme, color) => ({
       display: 'none'
     }
   }),
-  searchInputIcon: () => ({
-    position: 'absolute',
-    top: '11px',
-    left: '12px'
-  }),
   clearIconBlock: () => ({
     '@media (max-width: 556px)': {
       margin: '-30px 7px 0 0'

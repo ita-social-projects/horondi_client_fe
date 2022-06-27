@@ -72,7 +72,7 @@ const SearchBar = ({
   };
 
   const textFieldClear = () => {
-    searchHandler ? searchHandler({target: { value: ''}}) : handleSearch({target: { value: ''}})
+    setSearchValue('');
   }
 
   return (

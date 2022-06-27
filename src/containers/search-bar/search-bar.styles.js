@@ -74,6 +74,9 @@ export const useStyles = makeStyles((theme, color) => ({
     },
     '& .MuiSvgIcon-root': {
       display: 'none'
+    },
+    '& .MuiInputAdornment-root': {
+      display: 'none'
     }
   }),
   clearInputIcon: () => ({

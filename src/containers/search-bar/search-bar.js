@@ -89,7 +89,7 @@ const SearchBar = ({
             <SearchIcon />
           </InputAdornment>,
           endAdornment: <InputAdornment position='start' >
-          <ClearIcon className={styles.clearInputIcon} onClick={textFieldClear} />
+          <ClearIcon data-testid="clear-icon"  className={styles.clearInputIcon} onClick={textFieldClear} />
         </InputAdornment> 
         }}
       />

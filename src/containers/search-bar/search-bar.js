@@ -6,6 +6,8 @@ import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
 import useDebounce from '../../hooks/use-debounce';
+import { InputAdornment } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const SearchBar = ({
   searchParams,
@@ -69,16 +71,27 @@ const SearchBar = ({
     }
   };
 
+  const textFieldClear = () => {
+    searchHandler ? searchHandler({target: { value: ''}}) : handleSearch({target: { value: ''}})
+  }
+
   return (
     <div className={mainClass}>
-      <SearchIcon />
       <TextField
         placeholder={t('searchBar.search')}
         value={defaultValue || searchValue}
         onBlur={handleOnBlur}
         onFocus={handleOnFocus}
-        inputProps={{ maxLength: 20 }}
         onChange={searchHandler || handleSearch}
+        InputProps={{
+          inputProps:{ maxLength: 20 },
+          startAdornment: <InputAdornment position='end' >
+            <SearchIcon />
+          </InputAdornment>,
+          endAdornment: <InputAdornment position='start' >
+          <ClearIcon className={styles.clearInputIcon} onClick={textFieldClear} />
+        </InputAdornment> 
+        }}
       />
     </div>
   );

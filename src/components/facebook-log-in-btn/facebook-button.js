@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import FacebookLogin from '@greatsumini/react-facebook-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 import { Button } from '@material-ui/core';
 import { loginByFacebook } from '../../redux/user/user.actions';
 import { useStyles } from '../google-log-in-btn/google-button.styles';
@@ -14,6 +13,19 @@ export const FacebookBtn = () => {
   const responseFacebook = (response) => {
     dispatch(loginByFacebook({ idToken: response.accessToken }));
   };
+  const facebookInit = () => {
+    if (window.FB) {
+      window.FB.init({
+        appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
+        cookie: true,
+        xfbml: true,
+        version: 'v3.3'
+      });
+    }
+  };
+  useEffect(() => {
+    facebookInit();
+  }, []);
 
   const facebookInit = () => {
     window.FB.init({
@@ -31,13 +43,11 @@ export const FacebookBtn = () => {
     <FacebookLogin
       appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
       fields='name,email,picture'
-      // initParams={{
-      //   xfbml: true
-      // }}
-      // xfbml='true'
-      // useCustomChat={true}
-      callback={responseFacebook}
-      // onSuccess={responseFacebook}
+      initParams={{
+        xfbml: true
+      }}
+      useCustomChat
+      onSuccess={responseFacebook}
       render={(renderProps) => (
         <Button
           onClick={renderProps.onClick}

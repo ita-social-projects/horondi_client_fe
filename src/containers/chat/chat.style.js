@@ -200,8 +200,5 @@ export const useStyles = makeStyles(({ palette }) => ({
   thankForMsg: {
     fontSize: '1rem',
     marginBottom: '20px'
-  },
-  fbChatWrapper: {
-    zIndex: 100
   }
 }));

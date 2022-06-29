@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-// import { MessengerChat, showMessenger, hideMessenger } from 'react-messenger-chat-plugin';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { config } from 'react-spring';
 import { Transition } from 'react-spring/renderprops';
@@ -20,58 +19,38 @@ export const Chat = () => {
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // const root = document.getElementById('fb-root');
-      if (window.FB?.CustomerChat) {
-        window.FB.CustomerChat.hide();
-      }
-      // if (FB.CustomerChat) {
-      //   console.log('1 setTimeout');
-      //   document.getElementById('fb-root').style.visibility = 'hidden';
-      // }
-    }, 1000);
-
     setTimeout(() => {
       setChutButtonDisabled(false);
-      // document.getElementById('fb-root').style.visibility = 'visible';
-      // console.log(document.getElementById('fb-root')?.style?.visibility);
-      // console.log('2 setTimeout');
-      clearInterval(interval);
-    }, 10000);
+    }, 5000);
   }, []);
 
   const { loading, error, data } = useQuery(getContactsForChat);
   if (loading || error) return errorOrLoadingHandler(error, loading);
   const contacts = data.getContacts.items;
 
+  const showIcon = () => {
+    if (document.getElementById('fb-root').style.visibility === 'visible') {
+      document.getElementById('fb-root').style.visibility = 'hidden';
+    } else if (
+      document.getElementById('fb-root').style.visibility === '' ||
+      document.getElementById('fb-root').style.visibility === 'hidden'
+    ) {
+      document.getElementById('fb-root').style.visibility = 'visible';
+    }
+  };
   const chatButtonHendler = () => {
     setMailFormVisible(false);
     setIconsVisible(!iconsVisible);
-    if (window.FB) {
-      iconsVisible ? window.FB.CustomerChat.hide() : window.FB.CustomerChat.show(false);
-    }
-    // iconsVisible ? hideMessenger() : showMessenger(false);
+    showIcon();
   };
 
   return (
     <>
-      <div className={style.fbChatWrapper}>
-        {/* <MessengerChat
-            pageId={CHAT_FACEBOOK_DATA.pageId}
-            // appId={CHAT_FACEBOOK_DATA.appId}
-            onClick={() => setMailFormVisible(false)}
-            height={190}
-            onMessengerLoad={() => {
-              setChutButtonDisabled(false);
-              hideMessenger();
-            }}
-          /> */}
-        <MessengerCustomerChat
-          pageId={CHAT_FACEBOOK_DATA.pageId}
-          appId={CHAT_FACEBOOK_DATA.appId}
-          onClick={() => setMailFormVisible(false)}
-        />
-      </div>
+      <MessengerCustomerChat
+        pageId={CHAT_FACEBOOK_DATA.pageId}
+        appId={CHAT_FACEBOOK_DATA.appId}
+        onClick={() => setMailFormVisible(false)}
+      />
       {iconsVisible && (
         <div className={style.iconsMessengers}>
           <div

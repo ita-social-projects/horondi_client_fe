@@ -13,19 +13,6 @@ export const FacebookBtn = () => {
   const responseFacebook = (response) => {
     dispatch(loginByFacebook({ idToken: response.accessToken }));
   };
-  const facebookInit = () => {
-    if (window.FB) {
-      window.FB.init({
-        appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
-        cookie: true,
-        xfbml: true,
-        version: 'v3.3'
-      });
-    }
-  };
-  useEffect(() => {
-    facebookInit();
-  }, []);
 
   const facebookInit = () => {
     window.FB.init({
@@ -37,7 +24,7 @@ export const FacebookBtn = () => {
   };
   useEffect(() => {
     facebookInit();
-  },[]);
+  }, []);
 
   return (
     <FacebookLogin

@@ -9,6 +9,7 @@ import { DARK_THEME, LIGHT_THEME } from '../../../../configs/index';
 import Login from '../../../../pages/login/login';
 import { AuthWrapper, AuthButton, AuthHeading } from '../../../../components/auth-form';
 
+window.FB = { init: jest.fn() };
 jest.mock('../../../../pages/login/login.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../../components/google-log-in-btn/google-button.styles', () => ({
   useStyles: () => ({})

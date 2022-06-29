@@ -29,12 +29,10 @@ export const Chat = () => {
   const contacts = data.getContacts.items;
 
   const showIcon = () => {
-    if (document.getElementById('fb-root').style.visibility === 'visible') {
+    const fbChatIcon = document.getElementById('fb-root').style.visibility;
+    if (fbChatIcon === 'visible') {
       document.getElementById('fb-root').style.visibility = 'hidden';
-    } else if (
-      document.getElementById('fb-root').style.visibility === '' ||
-      document.getElementById('fb-root').style.visibility === 'hidden'
-    ) {
+    } else if (fbChatIcon === '' || fbChatIcon === 'hidden') {
       document.getElementById('fb-root').style.visibility = 'visible';
     }
   };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { waitForElement } from '@testing-library/react';
 import Chat from '..';
 
 let wrapper;
@@ -9,6 +10,7 @@ const useQueryData = {
   data: { getContacts: [{}] }
 };
 
+window.FB = { init: jest.fn() };
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 jest.mock('../chat.style.js', () => ({ useStyles: () => ({}) }));
@@ -16,10 +18,6 @@ jest.mock('../../../context/theme-context', () => ({}));
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => [true, () => null]
-}));
-jest.mock('react-messenger-chat-plugin', () => ({
-  showMessenger: () => jest.mock(),
-  hideMessenger: () => jest.mock()
 }));
 
 describe('chat tests', () => {
@@ -42,7 +40,9 @@ describe('chat tests', () => {
   });
 
   it('Button should be disabled', () => {
-    wrapper.find('button').prop('onClick')();
+    waitForElement(() => {
+      wrapper.find('button').prop('onClick')();
+    });
 
     expect(wrapper.find('button').prop('disabled')).toBe(true);
   });

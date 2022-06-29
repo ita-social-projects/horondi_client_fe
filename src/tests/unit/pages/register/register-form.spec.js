@@ -5,6 +5,7 @@ import { FormControlLabel } from '@material-ui/core';
 import RegisterForm from '../../../../pages/register/register-from/register-form';
 import { Loader } from '../../../../components/loader/loader';
 
+window.FB = { init: jest.fn() };
 jest.mock('../../../../pages/register/register-from/register-form.styles', () => ({
   useStyles: () => ({})
 }));

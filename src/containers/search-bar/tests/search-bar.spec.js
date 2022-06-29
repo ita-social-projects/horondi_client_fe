@@ -60,4 +60,16 @@ describe('search-bar testing', () => {
     const element = await screen.findByTestId(targetValue);
     expect(element.textContent).toBe('1');
   });
+
+test('should clear input when click on icon click', () => {
+    fireEvent.change(screen.getByPlaceholderText('searchBarPlaceholder'), {
+      target: { value: targetValue }
+    });
+    const inputValue = screen.getByPlaceholderText('searchBarPlaceholder');
+    expect(inputValue.value).toBe(targetValue);
+    fireEvent.click(screen.getByTestId('clear-icon'));
+  expect(inputValue.value).toBe('');
 });
+
+});
+

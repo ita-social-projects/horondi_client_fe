@@ -85,8 +85,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     right: '15%',
     top: '108px',
     bottom: '10%',
+    minWidth: '275px',
     width: '320px',
-    height: '600px',
+    height: 'fit-content',
+    borderRadius: '4px',
+    padding: '16px 4px 4px 4px',
     zIndex: 899,
     overflow: 'auto',
     background: palette.backgroundColor,
@@ -96,18 +99,19 @@ export const useStyles = makeStyles(({ palette }) => ({
       right: '15%',
       top: '93px'
     },
+    '@media (max-width: 556px)': {
+      top: '123px'
+    },
     '@media (max-width: 420px)': {
+      top: '93px',
       width: '90%',
       right: '5%'
-    },
-    '@media (max-height: 750px)': {
-      height: '80%'
     }
   },
   cancelIcon: {
     position: 'absolute',
-    top: '2px',
-    right: '1px',
+    top: '6px',
+    right: '4px',
     '&:hover': {
       cursor: 'pointer'
     }

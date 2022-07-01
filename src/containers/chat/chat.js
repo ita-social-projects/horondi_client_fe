@@ -10,6 +10,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
 import { CHAT_FACEBOOK_DATA } from './constants';
+import { showIcon } from './helperFunc';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
@@ -28,14 +29,6 @@ export const Chat = () => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
   const contacts = data.getContacts.items;
 
-  const showIcon = () => {
-    const fbChatIcon = document.getElementById('fb-root').style.visibility;
-    if (fbChatIcon === 'visible') {
-      document.getElementById('fb-root').style.visibility = 'hidden';
-    } else if (fbChatIcon === '' || fbChatIcon === 'hidden') {
-      document.getElementById('fb-root').style.visibility = 'visible';
-    }
-  };
   const chatButtonHendler = () => {
     setMailFormVisible(false);
     setIconsVisible(!iconsVisible);

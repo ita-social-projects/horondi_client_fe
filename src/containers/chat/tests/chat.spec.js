@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { waitForElement } from '@testing-library/react';
 import Chat from '..';
 
 let wrapper;
@@ -19,7 +18,9 @@ jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => [true, () => null]
 }));
-
+jest.mock('../helperFunc', () => ({
+  showIcon: () => jest.fn()
+}));
 describe('chat tests', () => {
   useQuery.mockImplementation(() => ({
     ...useQueryData
@@ -40,10 +41,7 @@ describe('chat tests', () => {
   });
 
   it('Button should be disabled', () => {
-    waitForElement(() => {
-      wrapper.find('button').prop('onClick')();
-    });
-
+    wrapper.find('button').prop('onClick')();
     expect(wrapper.find('button').prop('disabled')).toBe(true);
   });
 });

@@ -9,7 +9,6 @@ const useQueryData = {
   data: { getContacts: [{}] }
 };
 
-window.FB = { init: jest.fn() };
 jest.mock('react-redux');
 jest.mock('@apollo/client');
 jest.mock('../chat.style.js', () => ({ useStyles: () => ({}) }));

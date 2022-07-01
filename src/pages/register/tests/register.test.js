@@ -34,7 +34,6 @@ let wrapper;
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => mockStore);
-window.FB = { init: jest.fn() };
 
 describe('Register component tests', () => {
   beforeEach(() => {

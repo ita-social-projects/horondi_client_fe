@@ -135,7 +135,7 @@ export const ActiveMessenger = ({ iconsVisible, mailFormVisible }) => {
           variant='outlined'
           name='message'
           multiline
-          rows={10}
+          rows={6}
           inputProps={{ maxLength: 500 }}
           error={!messageValidated && shouldValidate}
           helperText={handleHelperText(messageValidated, shouldValidate, 'profile.message')}

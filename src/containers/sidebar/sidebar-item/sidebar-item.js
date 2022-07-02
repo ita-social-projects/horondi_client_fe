@@ -12,7 +12,7 @@ import { useStyles } from './sidebar-items.styles';
 import { ITEMS_PER_PAGE } from '../../../pages/product-list-page/constants';
 
 const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
-  const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
+  const { sort, page, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
   const { t } = useTranslation();
 
   const styles = useStyles();
@@ -21,7 +21,6 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
   const handleClick = () => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
-  const countPerPageValue = ITEMS_PER_PAGE[0].value;
 
   return (
     <>

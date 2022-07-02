@@ -35,7 +35,7 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
           {models.map((model) => (
             <ListItem button className={styles.nested} key={model._id} onClick={handlerItem}>
               <Link
-                to={`/catalog/:category?${sort}=${POPULARITY}&${categoryFilter}=%2C${category}&${page}=${defaultPage}&${modelsFilter}=%2C${model._id}`}
+                to={`/catalog/:category?${sort}=${POPULARITY}&${page}=${defaultPage}&${categoryFilter}=%2C${category}&${modelsFilter}=%2C${model._id}`}
               >
                 <ListItemText primary={t(`${model.translationsKey}.name`)} />
               </Link>

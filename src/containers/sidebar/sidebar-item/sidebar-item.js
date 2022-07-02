@@ -9,7 +9,6 @@ import { URL_QUERIES_NAME } from '../../../configs/index';
 import { POPULARITY } from '../constants';
 
 import { useStyles } from './sidebar-items.styles';
-import { ITEMS_PER_PAGE } from '../../../pages/product-list-page/constants';
 
 const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
   const { sort, page, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;

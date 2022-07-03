@@ -66,7 +66,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
 
   const handleCountryOption = (_, newTabValue) => setCountryOption(newTabValue);
 
-  const { discount, categories } = promoCode?.getPromoCodeByCode || {};
+  const { discount, categories, _id } = promoCode?.getPromoCodeByCode || {};
 
   const totalPriceToPay = pricesFromQuery
     .map((item, index) => {
@@ -114,7 +114,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
           })
         );
       } else {
-        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, countryOption)));
+        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, countryOption, _id)));
         dispatch(addPaymentMethod(checkoutPayMethod.cash));
       }
       clearSessionStorage();

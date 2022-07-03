@@ -44,6 +44,7 @@ export const addOrder = async (order) => {
           fixedExchangeRate
           totalPriceToPay
           paymentStatus
+          promoCodeId
         }
         ... on Error {
           statusCode

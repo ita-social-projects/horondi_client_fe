@@ -136,7 +136,7 @@ const productItemsInput = (cartItems) =>
 
 const handleOrderItem = (item) => item || '';
 
-export const orderInputData = (data, deliveryType, cartItems, countryOption) => {
+export const orderInputData = (data, deliveryType, cartItems, countryOption, _id = '') => {
   const recipient = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -170,7 +170,8 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       },
       items,
       paymentMethod,
-      userComment
+      userComment,
+      promoCodeId: _id
     };
   }
 
@@ -191,7 +192,8 @@ export const orderInputData = (data, deliveryType, cartItems, countryOption) => 
       },
       items,
       paymentMethod,
-      userComment
+      userComment,
+      promoCodeId: _id
     };
   }
 };

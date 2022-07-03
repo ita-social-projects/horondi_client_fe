@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Button from '@material-ui/core/Button';
@@ -9,6 +9,7 @@ import { TEXT_FIELD_VARIANT, TEXT_FIELDS } from '../../configs';
 
 const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   const styles = useStyles();
+  const numInput = useRef();
   const setQuantityFromInput = (e) => {
     let num;
     if (e.target.value.match(/\D/g)) {
@@ -23,6 +24,14 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
     setInputValue(Number(num));
     onChangeQuantity(Number(num));
   };
+
+  const handleInputFocus = () => {
+    numInput.current.select();
+  };
+
+  useEffect(() => {
+    numInput.current.focus();
+  }, [quantity]);
 
   return (
     <div className={styles.root} data-cy='cart-item-quantity'>
@@ -41,8 +50,10 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
         type={TEXT_FIELDS.STRING}
         value={quantity}
         id='filled-basic'
+        inputRef={numInput}
         variant={TEXT_FIELD_VARIANT.OUTLINED}
         onChange={setQuantityFromInput}
+        onFocus={handleInputFocus}
         inputProps={{
           style: { textAlign: 'center', width: '20px', height: '3px' },
           'data-testid': 'text'

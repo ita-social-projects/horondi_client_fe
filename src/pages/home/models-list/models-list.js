@@ -29,7 +29,7 @@ const ModelsList = () => {
   if (loading || error) return errorOrLoadingHandler(error, loading);
 
   return (
-    <div className={appStyles.rootApp}>
+    <div id='models' data-section-style='light' className={appStyles.rootApp}>
       <div
         className={`${appStyles.containerApp} ${styles.root}`}
         data-section-style='light'

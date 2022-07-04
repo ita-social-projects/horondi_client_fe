@@ -23,6 +23,9 @@ export const useStyles = makeStyles((theme) => ({
       '@media (max-width: 768px)': {
         width: '150% !important'
       }
+    },
+    '& .react-player': {
+      overflow: 'hidden'
     }
   }),
   playerSoundControl: {

@@ -9,10 +9,9 @@ import { URL_QUERIES_NAME } from '../../../configs/index';
 import { POPULARITY } from '../constants';
 
 import { useStyles } from './sidebar-items.styles';
-import { ITEMS_PER_PAGE } from '../../../pages/product-list-page/constants';
 
 const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
-  const { sort, page, countPerPage, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
+  const { sort, page, categoryFilter, modelsFilter, defaultPage } = URL_QUERIES_NAME;
   const { t } = useTranslation();
 
   const styles = useStyles();
@@ -21,7 +20,6 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
   const handleClick = () => {
     setIsListOpen((prevValue) => setIsListOpen(!prevValue));
   };
-  const countPerPageValue = ITEMS_PER_PAGE[0].value;
 
   return (
     <>
@@ -35,7 +33,7 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
           {models.map((model) => (
             <ListItem button className={styles.nested} key={model._id} onClick={handlerItem}>
               <Link
-                to={`/catalog/products?${page}=${defaultPage}&${sort}=${POPULARITY}&${countPerPage}=${countPerPageValue}&${categoryFilter}=${category}&${modelsFilter}=${model._id}`}
+                to={`/catalog/:category?${sort}=${POPULARITY}&${page}=${defaultPage}&${categoryFilter}=%2C${category}&${modelsFilter}=%2C${model._id}`}
               >
                 <ListItemText primary={t(`${model.translationsKey}.name`)} />
               </Link>

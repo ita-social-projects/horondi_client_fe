@@ -7,13 +7,10 @@ import { ExpandMoreOutlined } from '@material-ui/icons';
 import { useStyles } from './product-description.styles';
 import Detail from '../detail';
 
-const ProductDescription = ({ product, currentSizeIndex }) => {
+const ProductDescription = ({ product, currentSize }) => {
   const styles = useStyles();
-  const { mainMaterial, innerMaterial, bottomMaterial, sizes, translationsKey } = product;
-  const currentWeight =
-    sizes && currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.weightInKg : '';
-  const currentVolume =
-    sizes && currentSizeIndex >= 0 ? sizes[currentSizeIndex].size.volumeInLiters : '';
+  const { mainMaterial, innerMaterial, bottomMaterial, translationsKey } = product;
+  const { volumeInLiters, weightInKg } = currentSize;
   const { t } = useTranslation();
 
   return (
@@ -72,7 +69,7 @@ const ProductDescription = ({ product, currentSizeIndex }) => {
       </div>
 
       <div className={styles.description}>
-        {currentVolume && currentWeight && product.available ? (
+        {volumeInLiters && weightInKg && product.available && (
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreOutlined />}
@@ -87,16 +84,13 @@ const ProductDescription = ({ product, currentSizeIndex }) => {
               <Typography component='div' className={styles.text}>
                 <Detail
                   subtitle={t('product.weight.volumeLabel')}
-                  description={`${currentVolume}`}
+                  description={`${volumeInLiters}`}
                 />
-                <Detail
-                  subtitle={t('product.weight.weightLabel')}
-                  description={`${currentWeight}`}
-                />
+                <Detail subtitle={t('product.weight.weightLabel')} description={`${weightInKg}`} />
               </Typography>
             </AccordionDetails>
           </Accordion>
-        ) : null}
+        )}
       </div>
     </div>
   );

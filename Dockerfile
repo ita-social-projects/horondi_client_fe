@@ -25,6 +25,7 @@ COPY ./ssh_setup.sh /tmp
 RUN chmod +x /tmp/ssh_setup.sh \
     && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \ 
     && service ssh restart
-EXPOSE 2222 80
-CMD /usr/sbin/sshd -D ; sh /usr/share/nginx/html/get-env.sh ; nginx -g 'daemon off;'
+EXPOSE 80 2222
+CMD /usr/sbin/sshd && sh /usr/share/nginx/html/get-env.sh && nginx -g 'daemon off;'
+
 

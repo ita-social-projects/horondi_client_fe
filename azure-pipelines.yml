@@ -62,7 +62,7 @@ stages:
               azureContainerRegistry: '{"loginServer":"horondistaging.azurecr.io", "id" : "/subscriptions/734fc759-c3a2-4e22-a478-301dc5b10496/resourceGroups/Horondi/providers/Microsoft.ContainerRegistry/registries/HorondiStaging"}'
               action: 'Build an image'
               dockerFile: '**/Dockerfile'
-              buildArguments: '--build-arg username=${{ variables.user }} --build-arg password=${{ variables.pass }}'
+              buildArguments: '--build-arg username=$(user) --build-arg password=$(pass)'
               imageName: '$(Build.Repository.Name):$(Build.BuildId)'
           - task: Docker@0
             name: deployedStaging

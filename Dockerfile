@@ -18,10 +18,10 @@ COPY --from=build /app/get-env.sh /usr/share/nginx/html/get-env.sh
 COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 RUN chmod +x /usr/share/nginx/html/get-env.sh && \
     cat /etc/nginx/conf.d/default.conf
-RUN apt-get update && apt-get install openssh-server sudo -y \
-     && useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ${username} \
-     && mkdir -p /tmp \
-     && echo "${username}:${password}" | chpasswd 
+RUN apt-get update && apt-get install openssh-server sudo -y
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ${username}
+RUN mkdir -p /tmp 
+RUN echo "${username}:${password}" | chpasswd 
 COPY ./sshd_config /etc/ssh/
 COPY ./ssh_setup.sh /tmp
 RUN chmod +x /tmp/ssh_setup.sh \

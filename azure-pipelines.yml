@@ -5,10 +5,12 @@
 trigger:
   - development
   - master
+  - devops 
 
 pr:
   - master
   - development
+  - devops
 
 resources:
   - repo: self

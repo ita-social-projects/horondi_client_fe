@@ -11,7 +11,6 @@ RUN npm run build
 
 # production environment & SSH access
 FROM nginx:stable
-ARG username
 ARG password
 COPY --from=build /app/build /usr/share/nginx/html
 COPY --from=build /app/get-env.sh /usr/share/nginx/html/get-env.sh
@@ -19,9 +18,8 @@ COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
 RUN chmod +x /usr/share/nginx/html/get-env.sh && \
     cat /etc/nginx/conf.d/default.conf
 RUN apt-get update && apt-get install openssh-server sudo -y
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ${username}
 RUN mkdir -p /tmp 
-RUN echo "${username}:${password}" | chpasswd 
+RUN echo "root:${password}" | chpasswd 
 COPY ./sshd_config /etc/ssh/
 COPY ./ssh_setup.sh /tmp
 RUN chmod +x /tmp/ssh_setup.sh \

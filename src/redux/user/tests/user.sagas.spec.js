@@ -80,6 +80,7 @@ describe('user sagas tests', () => {
         [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
+      .put(setUserIsConfirmed(true))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,

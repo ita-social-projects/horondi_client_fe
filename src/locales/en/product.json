@@ -77,6 +77,8 @@
   "size": {
     "S": "Small",
     "M": "Medium",
-    "L": "Long"
+    "L": "Large",
+    "XL": "Extra Large",
+    "XXL": "Double Extra Large"
   }
 }

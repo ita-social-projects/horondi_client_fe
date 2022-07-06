@@ -49,8 +49,6 @@ const ProductDetails = ({ match }) => {
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
-  const currentSizeIndex = sizes && currentSize ? sizes.indexOf(currentSize) : -1;
-
   const [isOpenedSnackbar, setIsOpenedSnackbar] = React.useState(false);
 
   useEffect(() => {
@@ -161,7 +159,7 @@ const ProductDetails = ({ match }) => {
             </div>
           </div>
           {product.description ? (
-            <ProductDescription product={product} currentSizeIndex={currentSizeIndex} />
+            <ProductDescription product={product} currentSize={productToSend.options.size} />
           ) : null}
         </div>
         {product._id ? <SimilarProducts product={product} /> : null}

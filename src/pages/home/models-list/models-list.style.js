@@ -10,6 +10,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'height 1s ease',
+    '@media (max-width: 568px)': {
+      height: '1000px'
+    },
     '& button': {
       fontFamily: 'Open Sans',
       fontSize: '14px',
@@ -51,13 +54,13 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   modelsWrapperClosed: () => ({
-    height: 200
+    height: 260 
   }),
   modelsWrapperOpened: () => ({
-    height: 400,
-    '@media (max-width: 480px)': {
-      height: 600
-    }
+    height: 510,
+    '@media (max-width: 568px)': {
+      height: 760
+    },
   }),
   modelsTitle: () => ({
     color: theme.palette.textColor,

@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     display: 'flex',
     overflow: 'hidden',
-    height: 170,
+    height: 230,
     position: 'relative',
     boxShadow: '0px 9px 12px rgba(0, 0, 0, 0.10)',
     borderRadius: '6px',
@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover footer': {
       opacity: 1
     },
-    '@media (max-width: 480px)': {
+    '@media (max-width: 568px)': {
       flex: '1 0 37%'
     }
   },
@@ -50,10 +50,13 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-start',
     zIndex: 10,
     color: theme.palette.textColor,
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'left',
     transition: 'color .2s ease',
     fontWeight: '600',
+    '@media (max-width: 768px)': {
+      justifyContent: 'center'
+    },
     '@media (max-width: 450px)': {
       fontSize: '1.3em'
     },
@@ -63,17 +66,27 @@ export const useStyles = makeStyles((theme) => ({
   },
   modelItemImage: {
     width: '50%',
-    height: '100%',
+    height: '80%',
     position: 'absolute',
-    right: '70px',
+    top: '25px',
+    right: '75px',
     backgroundSize: 'cover',
     '& img': {
       transition: 'all .2s ease',
       width: 'auto',
       height: '100%',
-      '@media (max-width: 450px)': {
+      '@media (max-width: 1150px)': {
+        height: '90%',
+        marginLeft: '-10px',
+      },
+      '@media (max-width: 950px)': {
+        height: '80%',
+        marginLeft: '-10px',
+        marginTop: '20px'
+      },
+      '@media (max-width: 768px)': {
         height: '70%',
-        marginLeft: '-30px',
+        marginLeft: '-21px',
         marginTop: '30px'
       }
     }
@@ -86,13 +99,17 @@ export const useStyles = makeStyles((theme) => ({
     opacity: 0,
     zIndex: 10,
     color: theme.palette.textColor,
-    fontSize: '14px',
+    fontSize: '11px',
     fontWeight: '600',
     display: 'flex',
     alignItems: 'center',
     '& svg': {
       marginLeft: '5px',
       fontSize: '27px'
+    },
+    '@media (max-width: 1010px)': {
+      fontSize: '10px',
+      bottom: 10,
     }
   }
 }));

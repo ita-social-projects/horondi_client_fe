@@ -25,7 +25,4 @@ const ModelItem = ({ model, modelsUrl }) => {
   );
 };
 
-
-
-
 export default ModelItem;

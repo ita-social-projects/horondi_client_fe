@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useHistory } from 'react-router';
@@ -43,6 +43,10 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   const dispatch = useDispatch();
   const styles = useStyles({ fromSideBar });
   const history = useHistory();
+
+  useLayoutEffect(() => {
+    window.addEventListener('scroll', () => handleClose());
+  }, []);
 
   const configsUser = {
     currency: getFromLocalStorage('currency'),
@@ -170,6 +174,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       <Menu
         data-testid='menu'
         className={styles.list}
+        disableScrollLock='true'
         anchorEl={anchorEl}
         keepMounted
         elevation={0}

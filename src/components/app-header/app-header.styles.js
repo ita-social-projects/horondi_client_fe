@@ -10,8 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#020202',
     boxShadow: '0px 8px 16px 0px #2424241F',
     zIndex: '1301',
-
-    transition: 'all 0.5s ease-out',
+    transition: 'transform 0.5s ease-out',
     '& .MuiToolbar-regular': {
       minHeight: '35px',
       padding: '10px 85px',
@@ -35,7 +34,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   sticky: {
     transform: 'translateY(-35px)',
-    transition: 'all 0.5s ease-out',
     '@media (max-width: 485px)': {
       transform: 'translateY(-95px)'
     }

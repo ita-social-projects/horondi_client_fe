@@ -11,7 +11,7 @@ const AppFooter = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.footer}>
+      <div className={`${styles.footer} mui-fixed`}>
         <div className={`${appStyles.containerWideApp} ${styles.cardDeck}`}>
           <SocialLinks
             showTitle

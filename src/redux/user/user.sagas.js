@@ -78,6 +78,7 @@ export function* handleGoogleUserLogin({ payload }) {
     yield put(setUserLoading(true));
     const user = yield call(getGoogleUser, payload);
     yield setLoginUser(user);
+    yield put(setUserIsConfirmed(true));
     const returnPage = sessionStorage.getItem(RETURN_PAGE);
     yield put(push(returnPage));
   } catch (e) {

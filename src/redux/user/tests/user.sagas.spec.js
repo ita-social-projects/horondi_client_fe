@@ -80,6 +80,7 @@ describe('user sagas tests', () => {
         [call(getWishlistByUserId), wishlist]
       ])
       .put(setUser({ ...user, purchasedProducts, wishlist }))
+      .put(setUserIsConfirmed(true))
       .put(setUserLoading(false))
       .hasFinalState({
         ...initialStateMock,
@@ -90,7 +91,7 @@ describe('user sagas tests', () => {
         const { allEffects: analysis } = result;
         const analysisPut = analysis.filter((e) => e.type === 'PUT');
         const analysisCall = analysis.filter((e) => e.type === 'CALL');
-        expect(analysisPut).toHaveLength(5);
+        expect(analysisPut).toHaveLength(6);
         expect(analysisCall).toHaveLength(3);
         clearLocalStorage();
       }));

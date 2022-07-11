@@ -10,8 +10,7 @@ const useQueryData = {
   error: false,
   data: { getContacts: [{}] }
 };
-const myTestComp = (prop) => <div className={`mock_${prop}Icon`} />;
-myTestComp.displayName = 'myTest';
+
 jest.mock('@material-ui/icons/Forum', () => {
   const icons = {
     __esModule: true
@@ -19,7 +18,7 @@ jest.mock('@material-ui/icons/Forum', () => {
   const handler = {
     get(_, prop) {
       // eslint-disable-next-line react/display-name
-      return () => <myTestComp prop={prop} />;
+      return () => <div prop={prop} />;
     }
   };
 

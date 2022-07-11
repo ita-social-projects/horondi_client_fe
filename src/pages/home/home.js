@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 import SliderHomePage from './slider';
 import CategoriesList from './categories-list';
@@ -12,17 +12,25 @@ const Home = () => {
   const styles = useStyles();
 
   const homeRef = useRef(null);
-  const homeElement = useMemo(() => homeRef, []);
+  const [didMount, setDidMount] = useState(false);
+
+  useEffect(() => {
+    setDidMount(true);
+
+    return () => setDidMount(false);
+  }, []);
 
   return (
-    <div ref={homeRef} className={styles.home} data-cy='home-page'>
-      <SliderHomePage />
-      <CategoriesList />
-      <ConstructorPreview />
-      <ModelsList />
-      <OurLooks />
-      <ScrollBar homeRef={homeElement} />
-    </div>
+    <>
+      <div ref={homeRef} className={styles.home} data-cy='home-page'>
+        <SliderHomePage />
+        <CategoriesList />
+        <ConstructorPreview />
+        <ModelsList />
+        <OurLooks />
+      </div>
+      {didMount && <ScrollBar homeRef={homeRef} />}
+    </>
   );
 };
 

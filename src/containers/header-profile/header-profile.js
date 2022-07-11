@@ -46,6 +46,9 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
 
   useLayoutEffect(() => {
     window.addEventListener('scroll', () => handleClose());
+    return () => {
+      window.removeEventListener('scroll', () => handleClose());
+    }
   }, []);
 
   const configsUser = {

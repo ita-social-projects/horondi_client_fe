@@ -1,13 +1,30 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import Chat from '..';
+import { render, screen } from '@testing-library/react';
+import { Chat } from '../chat';
 
 let wrapper;
+
 const useQueryData = {
   loading: false,
   error: false,
   data: { getContacts: [{}] }
 };
+const myTestComp = (prop) => <div className={`mock_${prop}Icon`} />;
+myTestComp.displayName = 'myTest';
+jest.mock('@material-ui/icons/Forum', () => {
+  const icons = {
+    __esModule: true
+  };
+  const handler = {
+    get(_, prop) {
+      // eslint-disable-next-line react/display-name
+      return () => <myTestComp prop={prop} />;
+    }
+  };
+
+  return new Proxy(icons, handler);
+});
 
 jest.mock('react-redux');
 jest.mock('@apollo/client');
@@ -17,30 +34,22 @@ jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useContext: () => [true, () => null]
 }));
-jest.mock('../helperFunc', () => ({
-  showIcon: () => jest.fn()
-}));
+jest.mock('react-messenger-customer-chat');
 describe('chat tests', () => {
   useQuery.mockImplementation(() => ({
     ...useQueryData
   }));
-
   beforeEach(() => {
-    wrapper = shallow(<Chat />);
+    wrapper = render(<Chat />);
   });
 
   it('Should render chat', () => {
     expect(wrapper).toBeDefined();
+    screen.debug();
   });
 
-  it('Should render button', () => {
-    const button = wrapper.find('button');
-
-    expect(button).toBeDefined();
-  });
-
-  it('Button should be disabled', () => {
-    wrapper.find('button').prop('onClick')();
-    expect(wrapper.find('button').prop('disabled')).toBe(true);
+  it('Click on messanger btn after it is active', async () => {
+    const button = await screen.getByTestId('chatBtn');
+    expect(button).toBeDisabled();
   });
 });

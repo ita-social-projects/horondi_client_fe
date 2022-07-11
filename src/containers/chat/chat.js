@@ -18,11 +18,13 @@ export const Chat = () => {
   const [сhutButtonDisabled, setChutButtonDisabled] = useState(true);
   const style = useStyles({ iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
-
-  useEffect(() => {
+  const makeBtnDisabled = () => {
     setTimeout(() => {
       setChutButtonDisabled(false);
     }, 5000);
+  };
+  useEffect(() => {
+    makeBtnDisabled();
   }, []);
 
   const { loading, error, data } = useQuery(getContactsForChat);
@@ -74,7 +76,12 @@ export const Chat = () => {
           </Transition>
         </div>
       )}
-      <button onClick={chatButtonHendler} className={style.chatIcon} disabled={сhutButtonDisabled}>
+      <button
+        data-testid='chatBtn'
+        onClick={chatButtonHendler}
+        className={style.chatIcon}
+        disabled={сhutButtonDisabled}
+      >
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </button>
     </>

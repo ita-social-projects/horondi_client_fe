@@ -192,6 +192,7 @@ export const mockProduct = [
           },
           images: {
             primary: {
+              medium: 'medium_4051sf11kxg1bqc1_97.png',
               thumbnail: 'thumbnail_4051sf11kxg1bqc1_97.png'
             }
           },

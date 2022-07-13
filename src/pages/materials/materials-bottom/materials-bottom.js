@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import Carousel from 'react-multi-carousel';
+import parse from 'html-react-parser';
 import { responsive } from './constants';
 import { useStyles } from './materials-bottom.style';
+import { IMG_URL } from '../../../configs/index';
 
 const MaterialsBottom = ({ materialsBottom }) => {
   const styles = useStyles();
@@ -14,11 +15,9 @@ const MaterialsBottom = ({ materialsBottom }) => {
 
   const materialsBottomItems = materialsBottom.map((item) => (
     <Card key={item._id} className={styles.card}>
-      <CardMedia className={styles.media} image={item.image}>
+      <CardMedia className={styles.media} image={`${IMG_URL}${item.image.medium}`}>
         <CardContent className={styles.content}>
-          <Typography variant='body2' component='p'>
-            {t(`${item.translationsKey}.text`)}
-          </Typography>
+          {parse(t(`${item.translationsKey}.text`))}
         </CardContent>
       </CardMedia>
     </Card>

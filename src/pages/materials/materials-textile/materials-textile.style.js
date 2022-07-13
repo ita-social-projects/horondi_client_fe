@@ -22,6 +22,10 @@ export const useStyles = makeStyles(() => ({
       fontSize: '34px',
       fontWeight: '400',
       marginBottom: '0'
+    },
+    '& ul': {
+      fontSize: '16px',
+      paddingLeft: '20px'
     }
   }
 }));

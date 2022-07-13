@@ -109,67 +109,67 @@ describe('CheckoutForm tests for: ', () => {
       </BrowserRouter>
     );
   });
-  it('first name field', async () => {
+  it('first name field', () => {
     const firstNameField = screen.getByTestId('firstName').querySelector('input');
     fireEvent.change(firstNameField, { target: { value: 'Roman' } });
     expect(firstNameField.value).toEqual('Roman');
   });
 
-  it('last name field', async () => {
+  it('last name field', () => {
     const lastNameField = screen.getByTestId('lastName').querySelector('input');
     fireEvent.change(lastNameField, { target: { value: 'Denes' } });
     expect(lastNameField.value).toEqual('Denes');
   });
 
-  it('email field', async () => {
+  it('email field', () => {
     const emailField = screen.getByTestId('email').querySelector('input');
     fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
     expect(emailField.value).toEqual('netro@gmail.com');
   });
 
-  it('phoneNumber field', async () => {
+  it('phoneNumber field', () => {
     const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
     fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
     expect(phoneNumberField.value).toEqual('380686717536');
   });
 
-  it('region field', async () => {
+  it('region field', () => {
     const regionField = screen.getByTestId('region').querySelector('input');
     fireEvent.change(regionField, { target: { value: 'Вінницька' } });
     expect(regionField.value).toEqual('Вінницька');
   });
 
-  it('districts field', async () => {
+  it('districts field', () => {
     const districtsField = screen.getByTestId('district').querySelector('input');
     fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
     expect(districtsField.value).toEqual('Гайсинський');
   });
 
-  it('cities field', async () => {
+  it('cities field', () => {
     const citiesField = screen.getByTestId('cities').querySelector('input');
     fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
     expect(citiesField.value).toEqual('Адамівка');
   });
 
-  it('streets field', async () => {
+  it('streets field', () => {
     const streetsField = screen.getByTestId('streets').querySelector('input');
     fireEvent.change(streetsField, { target: { value: 'Південна' } });
     expect(streetsField.value).toEqual('Південна');
   });
 
-  it('building field', async () => {
+  it('building field', () => {
     const buildingField = screen.getByTestId('house').querySelector('input');
     fireEvent.change(buildingField, { target: { value: '34' } });
     expect(buildingField.value).toEqual('34');
   });
 
-  it('flat field', async () => {
+  it('flat field', () => {
     const flatField = screen.getByTestId('flat').querySelector('input');
     fireEvent.change(flatField, { target: { value: '36' } });
     expect(flatField.value).toEqual('36');
   });
 
-  it('paymentMetod field', async () => {
+  it('paymentMetod field', () => {
     const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
     fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
     expect(paymentMetodField.value).toEqual('CASH');

@@ -33,7 +33,8 @@ const AppHeader = () => {
 
   const Header = clsx({
     [styles.header]: true,
-    [styles.sticky]: sticky
+    [styles.sticky]: sticky,
+    'mui-fixed': true
   });
 
   useLayoutEffect(() => {

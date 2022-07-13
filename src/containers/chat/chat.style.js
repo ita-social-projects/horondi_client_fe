@@ -20,12 +20,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '60px',
     borderRadius: '29px',
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
-    right: '12px',
+    left: `calc(100vw - 113px)`,
     border: 'none',
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
       boxShadow: ' 0 0 10px white',
-      zIndex: 900
+      zIndex: 900,
+      left: `calc(100vw - 96px)`
     },
     '&:hover': {
       cursor: 'pointer',
@@ -48,7 +49,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 12px 0px',
     background: 'none',
     display: 'block',
-    right: '12px'
+    left: `calc(100vw - 113px)`,
+    '@media (max-width: 768px)': {
+      left: `calc(100vw - 96px)`
+    }
   },
   msgIcon: {
     ...flexCenter,

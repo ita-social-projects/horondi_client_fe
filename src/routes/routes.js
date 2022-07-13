@@ -84,7 +84,7 @@ const Routes = () => {
       <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <AppHeader />
-          <div className={styles.root}>
+          <div className={`${styles.root} mui-fixed`}>
             <Switch>
               <Route path={pathToMain} exact component={Home} />
               <Route path={pathToErrorPage} exact component={ErrorPage} />

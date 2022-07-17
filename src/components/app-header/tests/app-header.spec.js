@@ -25,9 +25,9 @@ jest.mock('../../../containers/header-profile/header-profile.js', () => ({
   __esModule: true,
   default: () => null
 }));
-/* eslint-disable react/display-name */
 jest.mock('../../../containers/sidebar/sidebar.js', () => ({
   __esModule: true,
+    // eslint-disable-next-line react/display-name
   default: ({ isMenuOpen }) => isMenuOpen && <div data-testid='sidebar' />
 }));
 

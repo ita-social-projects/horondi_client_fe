@@ -27,8 +27,9 @@ jest.mock('../../../containers/header-profile/header-profile.js', () => ({
 }));
 jest.mock('../../../containers/sidebar/sidebar.js', () => ({
   __esModule: true,
-    // eslint-disable-next-line react/display-name
-  default: ({ isMenuOpen }) => isMenuOpen && <div data-testid='sidebar' />
+  default: function mockSidebar({ isMenuOpen }) {
+    return isMenuOpen && <div data-testid='sidebar' />;
+  }
 }));
 
 jest.mock('react-i18next', () => ({
@@ -40,7 +41,11 @@ jest.mock('react-i18next', () => ({
 
 const themeContextProviderMockValues = [true, jest.fn(() => {})];
 const store = createStore(() => [], {});
-let getByTestId; let getByText; let queryByTestId; let getAllByRole; let getByRole;
+let getByTestId;
+let getByText;
+let queryByTestId;
+let getAllByRole;
+let getByRole;
 
 describe('Test AppHeader', () => {
   beforeEach(

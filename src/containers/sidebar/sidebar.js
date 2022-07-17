@@ -26,7 +26,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
-  const [isLightTheme] = useContext(ThemeContext);
+  const isLightTheme = useContext(ThemeContext);
 
   const sidebar = clsx({
     [styles.drawer]: true,

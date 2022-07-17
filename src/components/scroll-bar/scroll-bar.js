@@ -46,10 +46,10 @@ const ScrollBar = ({ homeRef }) => {
 
   return (
     <>
-      <div className={styles.scrollBar}>
+      <div data-testid='scroll-bar-div' className={styles.scrollBar}>
         {SCROLL_BAR_DATA.map((item) => (
-          <a key={item} href={item} className={styles.scrollBarItem}>
-            <div className={styles.sectionPoint} data-id={item === currentSection.id} />
+          <a data-testid={`link-btn-${item}`} key={item} href={item} className={styles.scrollBarItem}>
+            <div data-testid={`section-div-${item}`} className={styles.sectionPoint} data-id={item === currentSection.id} />
             <span className={styles.sectionTitle}>
               {t(`common.scrollbar.${item.replace('#', '')}`)}
             </span>

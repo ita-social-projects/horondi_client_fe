@@ -3,11 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   drawer: ({ fromSideBar }) => ({
     '& .MuiDrawer-paper': {
-      padding: '18px 24px 15px 24px',
+      padding: '18px 24px 24px 24px',
       backgroundColor: theme.palette.type === 'light' ? '#FFFFFF' : '#000000',
       zIndex: 11,
       height: '100vh',
-      width: 'fit-content',
+      justifyContent: 'space-between',
+      width: '100%',
       minWidth: '320px',
       maxWidth: '450px',
       '@media (max-width: 768px)': {
@@ -32,7 +33,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sideMenuContent: {
-    width: '75%'
+    width: '80%',
+    flex: '1'
   },
   itemHighlighting: {
     width: '100%',
@@ -65,7 +67,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   subList: {
     fontSize: '1.3rem',
-    marginTop: '45px'
+    marginTop: '45px',
+    '@media (max-width: 450px)': {
+      marginTop: '30px'
+    }
   },
   subItem: {
     color: theme.palette.textColor,

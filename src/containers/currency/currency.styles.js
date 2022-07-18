@@ -23,6 +23,9 @@ export const useStyles = makeStyles((theme) => ({
       borderRight: `1px solid ${
         fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)'
       } !important`
+    },
+    '& .MuiToggleButton-root:first-child': {
+      fontWeight: 700,
     }
   })
 }));

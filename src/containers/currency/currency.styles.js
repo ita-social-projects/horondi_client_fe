@@ -9,7 +9,8 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: '0px',
         fontStyle: 'normal',
         fontWeight: 600,
-        fontSize: '12px',
+        fontSize: '15px',
+        marginTop: '-1 px',
         letterSpacing: '0.0015em',
         color: fromSideBar ? theme.palette.textColor : 'rgba(254, 254, 254, 0.75)',
         '&.Mui-selected': {

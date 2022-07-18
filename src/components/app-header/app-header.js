@@ -1,8 +1,7 @@
-import React, { useLayoutEffect, useState, useContext } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   AppBar,
   IconButton as BurgerMenu,
-  Switch,
   Typography,
   Toolbar,
   Link as PhoneLink
@@ -15,19 +14,16 @@ import { useStyles } from './app-header.styles';
 import Sidebar from '../../containers/sidebar';
 import HeaderRightBar from '../../containers/header-right-bar';
 import CurrencyComponent from '../../containers/currency';
+import ThemeComponent from '../../containers/theme/theme-component';
 import Language from '../../containers/language';
-import ThemeContext from '../../context/theme-context';
-import { setToLocalStorage, getFromLocalStorage } from '../../services/local-storage.service';
 
-import { HORONDI, DARK_THEME, LIGHT_THEME } from '../../configs';
+import { HORONDI } from '../../configs';
 import { useAppStyles } from '../app/app.styles';
 
 const AppHeader = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [lightMode, setLightMode] = useContext(ThemeContext);
   const [sticky, setSticky] = useState(false);
-  const theme = getFromLocalStorage('theme');
   const styles = useStyles();
   const appStyles = useAppStyles();
 
@@ -46,21 +42,13 @@ const AppHeader = () => {
     });
   }, []);
 
-  const handleChangeTheme = (e) => {
-    e.target.checked = !e.target.checked;
-    setLightMode(!lightMode);
-    setToLocalStorage('theme', !lightMode ? LIGHT_THEME : DARK_THEME);
-  };
-
   return (
     <div className={styles.root}>
-      <AppBar position='static' className={Header}>
+      <AppBar position='static' className={Header} data-testid='header-container'>
         <Toolbar className={`${appStyles.containerWideApp} ${styles.upperToolbar}`} disableGutters>
           <Typography>{t('header.workingDays')}</Typography>
           <div className={styles.theme}>
-            <Typography>{t('header.lightTheme')}</Typography>
-            <Switch checked={theme === 'dark'} onClick={handleChangeTheme} />
-            <Typography>{t('header.darkTheme')}</Typography>
+            <ThemeComponent />
           </div>
           <div className={styles.language}>
             <Language />
@@ -73,7 +61,11 @@ const AppHeader = () => {
           </PhoneLink>
         </Toolbar>
         <Toolbar className={`${appStyles.containerWideApp} ${styles.bottomToolbar}`} disableGutters>
-          <BurgerMenu className={styles.menuButton} onClick={() => setIsMenuOpen(true)}>
+          <BurgerMenu
+            className={styles.menuButton}
+            onClick={() => setIsMenuOpen(true)}
+            data-testid='burger-icon'
+          >
             <MenuIcon />
           </BurgerMenu>
           <Typography variant='h5'>

@@ -27,6 +27,10 @@ jest.mock('../../../../containers/cart-header', () => ({
   __esModule: true,
   default: () => null
 }));
+jest.mock('../../../../containers/theme', () => ({
+  __esModule: true,
+  default: () => null
+}));
 jest.mock('../../../../containers/currency', () => ({
   __esModule: true,
   default: () => null

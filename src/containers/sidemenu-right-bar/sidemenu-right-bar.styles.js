@@ -5,17 +5,29 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     marginLeft: 'auto',
     alignItems: 'center',
-    justifyContent: 'space-around',
-    marginTop: fromSideBar ? '14px' : 0,
-    width: '100%'
+    gap: '24px',
+    marginTop: fromSideBar ? '8px' : 0,
+    width: '100%',
+    '@media (max-width: 425px)': {
+      gap: '6px'
+    }
   }),
   iconItem: {
-    marginRight: '40px',
     '@media (max-width: 425px)': {
       marginRight: '0px'
     }
   },
+  flexColumn: {
+    display: 'flex',
+    gap: '24px',
+    flexDirection: 'column',
+    '@media (max-width: 425px)': {
+      gap: '16px'
+    }
+  },
   wishlist: {
+    display: 'flex',
+    justifyContent: 'center',
     transform: 'scale(1.3)',
     '@media (max-width: 425px)': {
       transform: 'scale(1.1)'
@@ -28,6 +40,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   cartHeader: {
+    display: 'flex',
+    justifyContent: 'center',
     transform: 'scale(1.3)',
     '@media (max-width: 425px)': {
       transform: 'scale(1.1)'
@@ -39,10 +53,10 @@ export const useStyles = makeStyles((theme) => ({
       color: 'white'
     }
   },
-  currency: {
-    transform: 'scale(1.3)'
-  },
-  language: {
-    transform: 'scale(1.3)'
+  togglItem: {
+    transform: 'scale(1.3)',
+    '@media (max-width: 425px)': {
+      transform: 'scale(1.1)'
+    }
   }
 }));

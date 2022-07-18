@@ -4,8 +4,8 @@ export const useStyles = makeStyles((theme) => ({
   cardBody: ({ position, fromSideBar }) => ({
     flex: position === 'center' ? 0 : 1,
     '@media screen and (max-width: 552px)': {
-      width: '50%',
-      padding: '20px 25px 10px',
+      width: fromSideBar ? 'fit-content' : '50%',
+      padding: fromSideBar ? '' : '20px 25px 10px',
       margin: fromSideBar ? '20px 0 10px 0' : ''
     }
   }),
@@ -38,9 +38,9 @@ export const useStyles = makeStyles((theme) => ({
   iconsBox: {
     display: 'flex',
     flexDirection: 'column',
-    paddingTop: '15px',
+    paddingTop: '45px',
     '@media (max-width: 552px)': {
-      paddingTop: '20px'
+      paddingTop: '25px'
     }
   },
   cardTitleFooter: {
@@ -55,12 +55,13 @@ export const useStyles = makeStyles((theme) => ({
   iconsContainer: ({ position, fromSideBar }) => ({
     display: 'flex',
     justifyContent: position,
+    marginLeft: fromSideBar ? '25px' : '',
     '@media screen and (max-width: 552px)': {
-      justifyContent: 'space-around'
+      justifyContent: fromSideBar ? '' : 'space-around',
+      marginLeft: fromSideBar ? '15px' : ''
     },
     transform: fromSideBar ? 'scale(1.2)' : '',
-    marginTop: '19px',
-    marginLeft: fromSideBar ? '25px' : ''
+    marginTop: '19px'
   }),
   iconWrap: {
     marginRight: '16px',

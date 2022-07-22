@@ -21,6 +21,7 @@ jest.mock('../../../services/local-storage.service', () => ({
   setToLocalStorage: () => mockToLocalStorage(),
   getFromLocalStorage: () => jest.fn()
 }));
+window.FB = { init: jest.fn() };
 
 const themeValue = theme('light');
 const dispatch = jest.fn();

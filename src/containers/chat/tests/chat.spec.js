@@ -1,9 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { render, screen } from '@testing-library/react';
-import { Chat } from '../chat';
-
-let wrapper;
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Chat } from '../chat.js';
 
 const useQueryData = {
   loading: false,
@@ -27,28 +25,20 @@ jest.mock('@material-ui/icons/Forum', () => {
 
 jest.mock('react-redux');
 jest.mock('@apollo/client');
+
 jest.mock('../chat.style.js', () => ({ useStyles: () => ({}) }));
-jest.mock('../../../context/theme-context', () => ({}));
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useContext: () => [true, () => null]
-}));
-jest.mock('react-messenger-customer-chat');
 describe('chat tests', () => {
   useQuery.mockImplementation(() => ({
     ...useQueryData
   }));
-  beforeEach(() => {
-    wrapper = render(<Chat />);
-  });
+  render(<Chat />);
 
-  it('Should render chat', () => {
-    expect(wrapper).toBeDefined();
-    screen.debug();
-  });
-
-  it('Click on messanger btn after it is active', async () => {
-    const button = await screen.getByTestId('chatBtn');
-    expect(button).toBeDisabled();
+  it('Click on messanger btn after it is active', () => {
+    const buttonChat = screen.getByTestId('chatBtn');
+    fireEvent.click(buttonChat);
+    const button = screen.getByTestId('messengerBtn');
+    fireEvent.click(button);
+    const mailBtn = screen.getByTestId('mailIconBtn');
+    expect(mailBtn).toBeInTheDocument();
   });
 });

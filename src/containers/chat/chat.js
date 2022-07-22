@@ -1,37 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ForumIcon from '@material-ui/icons/Forum';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
-import { config } from 'react-spring';
-import { Transition } from 'react-spring/renderprops';
+import { Transition, config } from 'react-spring';
 import { useQuery } from '@apollo/client';
 import { getContactsForChat } from './operations/chat-contacts.query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
-import { CHAT_FACEBOOK_DATA } from './constants';
-import { showIcon } from './helperFunc';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
   const [mailFormVisible, setMailFormVisible] = useState(false);
-  const [сhutButtonDisabled, setChutButtonDisabled] = useState(true);
   const style = useStyles({ iconsVisible, mailFormVisible });
   const cancelIconHandler = () => setMailFormVisible(!mailFormVisible);
-  const makeBtnDisabled = () => {
-    setTimeout(() => {
-      setChutButtonDisabled(false);
-    }, 5000);
-  };
-  useEffect(() => {
-    makeBtnDisabled();
-  }, []);
 
   const { loading, error, data } = useQuery(getContactsForChat);
   if (loading || error) return errorOrLoadingHandler(error, loading);
   const contacts = data.getContacts.items;
-
-  const chatButtonHendler = () => {
+  const showIcon = () => {
+    const fbChatIcon = document.getElementById('fb-root')?.style.visibility;
+    if (fbChatIcon === 'visible') {
+      document.getElementById('fb-root').style.visibility = 'hidden';
+    } else if (fbChatIcon === '' || fbChatIcon === 'hidden') {
+      document.getElementById('fb-root').style.visibility = 'visible';
+    }
+  };
+  const chatButtonHandler = () => {
     setMailFormVisible(false);
     setIconsVisible(!iconsVisible);
     showIcon();
@@ -39,18 +33,14 @@ export const Chat = () => {
 
   return (
     <>
-      <MessengerCustomerChat
-        pageId={CHAT_FACEBOOK_DATA.pageId}
-        appId={CHAT_FACEBOOK_DATA.appId}
-        onClick={() => setMailFormVisible(false)}
-      />
       {iconsVisible && (
         <div className={style.iconsMessengers}>
           <div
             className={mailFormVisible ? style.msgIconActive : style.msgIcon}
             onClick={() => setMailFormVisible(!mailFormVisible)}
+            data-testid='messengerBtn'
           >
-            <MailOutlineIcon className={style.icon} />
+            <MailOutlineIcon data-testid='mailIconBtn' className={style.icon} />
           </div>
           <Transition
             initial={null}
@@ -76,12 +66,7 @@ export const Chat = () => {
           </Transition>
         </div>
       )}
-      <button
-        data-testid='chatBtn'
-        onClick={chatButtonHendler}
-        className={style.chatIcon}
-        disabled={сhutButtonDisabled}
-      >
+      <button data-testid='chatBtn' onClick={chatButtonHandler} className={style.chatIcon}>
         <ForumIcon className={style.icon} style={{ fontSize: 40 }} />
       </button>
     </>

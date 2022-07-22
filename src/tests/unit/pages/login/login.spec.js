@@ -21,6 +21,7 @@ jest.mock('@greatsumini/react-facebook-login');
 jest.mock('../../../../components/auth-form/auth-form-button/auth-form-button.styles', () => ({
   useStyles: () => ({})
 }));
+window.FB = { init: jest.fn() };
 
 const dispatch = jest.fn();
 const mockSubmit = jest.fn();

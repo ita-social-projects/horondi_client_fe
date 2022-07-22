@@ -33,12 +33,11 @@ describe('chat tests', () => {
   }));
   render(<Chat />);
 
-  it('Click on messanger btn after it is active', () => {
+  it('Click on messanger btn mail icon shows', () => {
     const buttonChat = screen.getByTestId('chatBtn');
     fireEvent.click(buttonChat);
     const button = screen.getByTestId('messengerBtn');
     fireEvent.click(button);
-    const mailBtn = screen.getByTestId('mailIconBtn');
-    expect(mailBtn).toBeInTheDocument();
+    expect(screen.getByTestId('mailIconBtn')).toBeInTheDocument();
   });
 });

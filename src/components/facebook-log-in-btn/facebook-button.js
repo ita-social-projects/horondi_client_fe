@@ -13,14 +13,13 @@ export const FacebookBtn = () => {
   const responseFacebook = (response) => {
     dispatch(loginByFacebook({ idToken: response.accessToken }));
   };
-  const facebookInit = () => {
+  const facebookInit = () =>
     window.FB.init({
       appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
       coockie: true,
       xfbml: true,
       version: 'v3.3'
     });
-  };
 
   return (
     <FacebookLogin

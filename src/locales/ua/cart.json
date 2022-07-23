@@ -9,7 +9,8 @@
   "continue": "Продовжити покупки",
   "totalPrice": "До оплати",
   "saving": "Економія",
-  "notFound": "Промокод не знайдено",
+  "promoCodeNotFound": "Промокод не знайдено",
+  "certificateNotFound": "Сертифікат не знайдено",
   "checkout": "Оформити замовлення",
   "pathBack": {
     "toMain": "Головна",

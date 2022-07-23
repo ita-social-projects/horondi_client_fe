@@ -29,7 +29,7 @@ const canvasH = 120;
 const canvasX = 0;
 const canvasY = 0;
 
-const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
+const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode, certificateData, lastItem }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useContext(CurrencyContext);
@@ -45,15 +45,18 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     getCartItem,
     changeSizeConstructor,
     getProductPriceWithPromoCode,
+    getProductPriceWithCertificate,
     getProductPrice
   } = cartOperations;
-
+ 
   const onChangeQuantity = useCallback(
     _.debounce((value) => {
       changeQuantity(item.id, value);
     }, 500)
   );
   const { isFromConstructor } = item;
+
+  const generalPriceWithCurrency = calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue);
 
   const {
     data: product,
@@ -146,40 +149,44 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     setCurrentSize(itemData.sizeAndPrice.size._id);
 
     if (promoCode) {
-      setCurrentPrice(getProductPriceWithPromoCode(item.id, promoCode));
-    } else {
-      setCurrentPrice(getProductPrice(item.id));
+      return setCurrentPrice(getProductPriceWithPromoCode(item.id, promoCode));
     }
-  }, [promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice, getCartItem]);
+    if(certificateData && item.id === lastItem.id) {
+      return  setCurrentPrice(getProductPriceWithCertificate(item.id, certificateData));
+    } 
+      setCurrentPrice(getProductPrice(item.id));
+
+  }, [promoCode, certificateData, currency, item, getProductPriceWithPromoCode, getProductPriceWithCertificate, 
+    getProductPrice, getCartItem]);
 
   const onDeleteItem = () => {
     setModalVisibility(true);
     setModalItem(item);
   };
 
-  const totalProductPrice = () => {
-    if (promoCode) {
-      const { categories } = promoCode.getPromoCodeByCode;
-      const isAllowCategory = categories.find((el) => el === cartItem?.category.code);
+  const priceWithCertificate = () => {
+    if(item.id === lastItem.id) {
+      return generalPriceWithCurrency - certificateData.getCertificateByName.value;
+    }
+    return generalPriceWithCurrency;
+  };
 
-      if (isAllowCategory) {
+  const totalProductPrice = () => {
+    if ((certificateData && item.id === lastItem.id) || promoCode) {
         return (
           <div className={styles.promo}>
             <s>
               {currencySign}
-              {Math.round(
-                calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)
-              )}
+              {Math.round(generalPriceWithCurrency)}
             </s>
             <span>
               {currencySign}
-              {calcPriceForCart(currentPrice, inputValue)}
+              {promoCode && calcPriceForCart(currentPrice, inputValue)}
+              {certificateData && priceWithCertificate()}
             </span>
           </div>
         );
-      }
-    }
-
+  }
     return (
       <>
         {currencySign}

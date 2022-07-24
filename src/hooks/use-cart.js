@@ -48,7 +48,8 @@ export const useCart = (user = null) => {
     });
     return newArr.reduce(
       (acc, item) => {
-         return acc + calcPriceForCart(item[0], item[1])},
+        const [itemPrice, itemQuantity] = item;
+         return acc + calcPriceForCart(itemPrice, itemQuantity)},
       0
     );
   };
@@ -64,7 +65,8 @@ export const useCart = (user = null) => {
 
     return newArr.reduce( 
       (acc, item) => {
-        return acc + calcPriceWithCertificateForCart(item[0], item[1], item[2])},
+        const [priceWithCertificate, quantity, price] = item;
+        return acc + calcPriceWithCertificateForCart(priceWithCertificate, quantity, price)},
         0
     );
   };

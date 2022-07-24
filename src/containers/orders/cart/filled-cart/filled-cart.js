@@ -70,7 +70,8 @@ const FilledCart = ({ items, cartOperations }) => {
     getTotalSavePrice } = cartOperations;
 
   const checkPromoCode = () => {
-    if (certificateAndPromoInput.current.value.startsWith('HOR')) {
+    const searchValue = new RegExp(/^HOR/, 'i')
+    if (searchValue.test(certificateAndPromoInput.current.value)) {
       setCertificateValue(certificateAndPromoInput.current.value);
       getCertificate();
       certificateAndPromoInput.current.value = '';

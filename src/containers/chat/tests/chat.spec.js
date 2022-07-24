@@ -39,5 +39,6 @@ describe('chat tests', () => {
     const button = screen.getByTestId('messengerBtn');
     fireEvent.click(button);
     expect(screen.getByTestId('mailIconBtn')).toBeInTheDocument();
+    fireEvent.click(buttonChat);
   });
 });

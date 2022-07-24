@@ -48,7 +48,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
     window.addEventListener('scroll', () => handleClose());
     return () => {
       window.removeEventListener('scroll', () => handleClose());
-    }
+    };
   }, []);
 
   const configsUser = {
@@ -177,7 +177,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       <Menu
         data-testid='menu'
         className={styles.list}
-        disableScrollLock='true'
+        disableScrollLock
         anchorEl={anchorEl}
         keepMounted
         elevation={0}

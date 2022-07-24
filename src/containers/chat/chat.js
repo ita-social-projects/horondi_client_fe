@@ -7,6 +7,7 @@ import { getContactsForChat } from './operations/chat-contacts.query';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useStyles } from './chat.style';
 import MailForm from './mail-form';
+import { showIcon } from './helperFunc';
 
 export const Chat = () => {
   const [iconsVisible, setIconsVisible] = useState(false);
@@ -17,14 +18,7 @@ export const Chat = () => {
   const { loading, error, data } = useQuery(getContactsForChat);
   if (loading || error) return errorOrLoadingHandler(error, loading);
   const contacts = data.getContacts.items;
-  const showIcon = () => {
-    const fbChatIcon = document.getElementById('fb-root')?.style.visibility;
-    if (fbChatIcon === 'visible') {
-      document.getElementById('fb-root').style.visibility = 'hidden';
-    } else if (fbChatIcon === '' || fbChatIcon === 'hidden') {
-      document.getElementById('fb-root').style.visibility = 'visible';
-    }
-  };
+
   const chatButtonHandler = () => {
     setMailFormVisible(false);
     setIconsVisible(!iconsVisible);

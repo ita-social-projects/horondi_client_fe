@@ -27,6 +27,13 @@ export const mockPromoCode = {
   }
 };
 
+export const mockCertificate = {
+  getCertificateByName: {
+    name: 'HOR40315176',
+    value: 17,
+  }
+};
+
 export const sizeAndPrice = {
   size: {
     available: true,

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useCart } from '../use-cart';
-import { mockItem, mockPromoCode, sizeAndPrice } from './use-cart.variables';
+import { mockItem, mockPromoCode, mockCertificate, sizeAndPrice } from './use-cart.variables';
 
 const dispatch = jest.fn();
 const mockGetPriceWithCurrency = jest.fn((price) => price);
@@ -42,6 +42,15 @@ describe('use-cart tests', () => {
 
     expect(res).toBe(90);
   });
+
+  it('should return total price with certificate', () => {
+    act(() => {
+      res = wrap.result.current.cartOperations.getTotalPricesWithCertificate(mockCertificate);
+    });
+
+    expect(res).toBe(83);
+  });
+  
   it('should return product price with promo code', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPriceWithPromoCode(
@@ -52,6 +61,29 @@ describe('use-cart tests', () => {
 
     expect(res).toBe(90);
   });
+
+  it('should return product price with certificate', () => {
+    act(() => {
+      res = wrap.result.current.cartOperations.getProductPriceWithCertificate(
+        mockItem.id,
+        mockCertificate
+      );
+    });
+    
+    expect(res).toBe(83);
+  });
+
+  it('should return total save price with certificate', () => {
+    act(() => {
+      res = wrap.result.current.cartOperations.getTotalSavePrice (
+        mockItem.id,
+        mockCertificate
+      );
+    });
+    
+    expect(res).toBe(17);
+  });
+
   it('should return product price', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPrice(mockItem.id, 0);

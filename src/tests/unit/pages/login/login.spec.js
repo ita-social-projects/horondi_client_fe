@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 import { useFormik } from 'formik';
 import { BrowserRouter as Router } from 'react-router-dom';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 import { SnackBarContextProvider } from '../../../../context/snackbar-context';
 import { getFromLocalStorage } from '../../../../services/local-storage.service';
 import { DARK_THEME, LIGHT_THEME } from '../../../../configs/index';
@@ -15,19 +16,18 @@ jest.mock('../../../../components/google-log-in-btn/google-button.styles', () =>
 }));
 jest.mock('react-redux');
 jest.mock('formik');
-jest.mock('react-facebook-login/dist/facebook-login-render-props');
 jest.mock('../../../../services/local-storage.service');
-
+jest.mock('@greatsumini/react-facebook-login');
 jest.mock('../../../../components/auth-form/auth-form-button/auth-form-button.styles', () => ({
   useStyles: () => ({})
 }));
+window.FB = { init: jest.fn() };
 
 const dispatch = jest.fn();
 const mockSubmit = jest.fn();
 const mockChange = jest.fn();
 const mockSetFieldValue = jest.fn();
 const mockBlur = jest.fn();
-window.FB = { init: jest.fn() };
 
 const formik = {
   values: {},
@@ -50,6 +50,7 @@ getFromLocalStorage.mockImplementation(() => theme);
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => storage);
 useFormik.mockImplementation(() => formik);
+FacebookLogin.mockImplementation(() => 'react-facebook-login');
 
 describe('Login page test', () => {
   it('should render with Light theme', () => {

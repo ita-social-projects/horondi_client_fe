@@ -23,7 +23,7 @@ const dispatch = jest.fn();
 const mockCartOperations = {
   clearCart: mockClearCart
 };
-
+window.FB = { init: jest.fn() };
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-redux');

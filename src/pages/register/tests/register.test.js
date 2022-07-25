@@ -21,6 +21,7 @@ jest.mock('../../../services/local-storage.service', () => ({
   setToLocalStorage: () => mockToLocalStorage(),
   getFromLocalStorage: () => jest.fn()
 }));
+window.FB = { init: jest.fn() };
 
 const themeValue = theme('light');
 const dispatch = jest.fn();
@@ -34,7 +35,6 @@ let wrapper;
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => mockStore);
-window.FB = { init: jest.fn() };
 
 describe('Register component tests', () => {
   beforeEach(() => {

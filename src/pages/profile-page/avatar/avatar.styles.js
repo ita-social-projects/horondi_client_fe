@@ -5,6 +5,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '100%',
     width: '100%',
     borderRadius: '50%',
+    objectFit: 'cover',
     '&:hover': {
       zIndex: -1
     }

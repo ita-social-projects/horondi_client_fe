@@ -16,6 +16,7 @@ const MyCertificates = () => {
   const appStyles = useAppStyles();
 
   const { loading, error } = useQuery(getAllCertificates, {
+    fetchPolicy: 'network-only',
     variables: {
       limit: CERTIFICATES_LIMIT,
       skip: (currentPage - 1) * CERTIFICATES_LIMIT

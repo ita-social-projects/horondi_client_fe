@@ -44,9 +44,8 @@ export const Chat = () => {
             leave={{ opacity: 0, height: 0 }}
             config={config.gentle}
           >
-            {(item) =>
-              item &&
-              ((styles) => (
+            {(styles, item) => (
+              item && (
                 <div style={styles}>
                   <MailForm
                     contacts={contacts}
@@ -55,8 +54,8 @@ export const Chat = () => {
                     mailFormVisible={mailFormVisible}
                   />
                 </div>
-              ))
-            }
+              )
+            )}
           </Transition>
         </div>
       )}

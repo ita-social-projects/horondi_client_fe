@@ -5,7 +5,7 @@ import {
   getFromLocalStorage,
   setToLocalStorage
 } from '../services/local-storage.service';
-import { calcPriceForCart, calcPriceWithCertificateForCart } from '../utils/priceCalculating';
+import { calcPriceForCart } from '../utils/priceCalculating';
 import { CART_KEY } from '../configs';
 import { setCart } from '../redux/common-store/common.actions';
 import { useCurrency } from './use-currency';
@@ -36,39 +36,19 @@ export const useCart = (user = null) => {
     const { discount, categories } = promoCode.getPromoCodeByCode;
     const newArr = cart.map((item) => {
       const { price } = item.sizeAndPrice;
-      
+
       const isAllowCategory = categories.find(
         (el) => el.toLowerCase() === item.category.code.toLowerCase()
       );
       if (isAllowCategory) {
         return [getPriceWithCurrency(Math.round(price - (price / 100) * discount)), item.quantity];
-        
       }
       return [getPriceWithCurrency(price), item.quantity];
     });
-    return newArr.reduce(
-      (acc, item) => {
-        const [itemPrice, itemQuantity] = item;
-         return acc + calcPriceForCart(itemPrice, itemQuantity)},
-      0
-    );
-  };
-
-  const getTotalPricesWithCertificate = (certificateData) => {
-    const { value } = certificateData.getCertificateByName;
-
-    const newArr = cart.map((item) => {
-      const price = getPriceWithCurrency(item.sizeAndPrice.price);
-      const priceWithCertificate = price;
-      return [priceWithCertificate - value, item.quantity, price];
-    });
-
-    return newArr.reduce( 
-      (acc, item) => {
-        const [priceWithCertificate, quantity, price] = item;
-        return acc + calcPriceWithCertificateForCart(priceWithCertificate, quantity, price)},
-        0
-    );
+    return newArr.reduce((acc, item) => {
+      const [itemPrice, itemQuantity] = item;
+      return acc + calcPriceForCart(itemPrice, itemQuantity);
+    }, 0);
   };
 
   const getProductPriceWithPromoCode = (id, promoCode) => {
@@ -79,23 +59,11 @@ export const useCart = (user = null) => {
     );
     const { price } = product.sizeAndPrice;
 
-   if (isAllowCategory) {
+    if (isAllowCategory) {
       return getPriceWithCurrency(Math.round(price - (price / 100) * discount));
     }
 
     return getPriceWithCurrency(price);
-  };
-
-  const getProductPriceWithCertificate = (id, certificateData) => {
-    const product = getCartItem(id);
-    const { value } = certificateData.getCertificateByName;
-    const price = getPriceWithCurrency(product.sizeAndPrice.price);
-    return price - value;
-  };
-
-  const getTotalSavePrice = (id, certificateData) => {
-    const { value } = certificateData.getCertificateByName;
-    if(id) return value;
   };
 
   const getProductPrice = (id) => getPriceWithCurrency(getCartItem(id).sizeAndPrice.price);
@@ -165,11 +133,8 @@ export const useCart = (user = null) => {
     clearCart,
     changeSizeConstructor,
     getProductPriceWithPromoCode,
-    getProductPriceWithCertificate,
     getTotalPricesWithPromoCode,
-    getTotalPricesWithCertificate,
-    getProductPrice,
-    getTotalSavePrice
+    getProductPrice
   };
 
   return {

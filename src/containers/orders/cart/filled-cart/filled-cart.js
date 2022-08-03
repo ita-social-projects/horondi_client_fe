@@ -32,10 +32,9 @@ const FilledCart = ({ items, cartOperations }) => {
   const certificateAndPromoInput = useRef(null);
   const { pathToCategory, pathToCheckout } = routes;
   const [price, setPrice] = useState();
-  const [promoCodeValue, setPromoCodeValue] = useState('');
-  const [certificateValue, setCertificateValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
-  const [disable, setDisable] = useState(false)
+  const [disable, setDisable] = useState(false);
 
   const { currency } = useContext(CurrencyContext);
 
@@ -43,18 +42,22 @@ const FilledCart = ({ items, cartOperations }) => {
     user: User.userData
   }));
 
-  const lastItem = items[items.length - 1];
-
-  const [getPromoCode, { data: promoCode, error: promoCodeError }] = useLazyQuery(getPromoCodeByCode, {
-    variables: {
-      code: promoCodeValue
+  const [getPromoCode, { data: promoCode, error: promoCodeError }] = useLazyQuery(
+    getPromoCodeByCode,
+    {
+      variables: {
+        code: inputValue
+      }
     }
-  });
-  const [getCertificate, { data: certificateData, error: certificateError }] = useLazyQuery(getCertificateByName, {
-    variables: {
-      name: certificateValue
+  );
+  const [getCertificate, { data: certificateData, error: certificateError }] = useLazyQuery(
+    getCertificateByName,
+    {
+      variables: {
+        name: inputValue
+      }
     }
-  });
+  );
 
   const errorHandler = () => {
     if (certificateData || promoCode) return null;
@@ -63,21 +66,17 @@ const FilledCart = ({ items, cartOperations }) => {
   };
 
   const currencySign = getCurrencySign();
-  const { 
-    getTotalPrice, 
-    setCartItem, 
-    getTotalPricesWithPromoCode, 
-    getTotalSavePrice } = cartOperations;
+  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
 
-  const checkPromoCode = () => {
-    const searchValue = new RegExp(/^HOR/, 'i')
+  const checkPromoOrCertificate = () => {
+    const searchValue = new RegExp(/^HOR/, 'i');
     if (searchValue.test(certificateAndPromoInput.current.value)) {
-      setCertificateValue(certificateAndPromoInput.current.value);
+      setInputValue(certificateAndPromoInput.current.value);
       getCertificate();
       certificateAndPromoInput.current.value = '';
-      return
+      return;
     }
-    setPromoCodeValue(certificateAndPromoInput.current.value);
+    setInputValue(certificateAndPromoInput.current.value);
     getPromoCode();
     certificateAndPromoInput.current.value = '';
   };
@@ -85,33 +84,32 @@ const FilledCart = ({ items, cartOperations }) => {
   useLayoutEffect(() => {
     if (certificateData) {
       setDisable(true);
-      return setPrice( getTotalPrice() - getTotalSavePrice(lastItem.id, certificateData));
+      return setPrice(getTotalPrice() - certificateData.getCertificateByName.value);
     }
     if (promoCode) {
       setDisable(true);
       return setPrice(getTotalPricesWithPromoCode(promoCode));
     }
     setPrice(getTotalPrice());
-
-  }, [items, currency, getTotalPrice, promoCode, certificateData, getTotalPricesWithPromoCode, getTotalSavePrice]);
+  }, [items, currency, getTotalPrice, promoCode, certificateData, getTotalPricesWithPromoCode]);
 
   if (cartLoading || productFromConstructorLoading) {
     return <Loader />;
-  };
+  }
 
   const totalSavePrice = () => {
     if (promoCode || certificateData) {
-          return (
-            <div className={styles.totalPrice}>
-              <span>{t('cart.saving')}</span>
-              <div>
-                {currencySign}
-                {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
-                {certificateData && getTotalSavePrice(lastItem.id, certificateData)}
-              </div>
-            </div>
-          )
-        }
+      return (
+        <div className={styles.totalPrice}>
+          <span>{t('cart.saving')}</span>
+          <div>
+            {currencySign}
+            {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
+            {certificateData && getTotalPrice() - price}
+          </div>
+        </div>
+      );
+    }
   };
 
   const onGoToCheckout = async () => {
@@ -155,71 +153,70 @@ const FilledCart = ({ items, cartOperations }) => {
     history.push(pathToCheckout, { promoCode });
   };
 
-    return (
-      <>
-        <PathBack />
-        <div className={styles.root} data-cy='filled-cart'>
-          <div className={styles.orderWrapper}>
-            <div className={styles.orderTable}>
-              <OrderTable
-                items={items}
-                lastItem={lastItem}
-                user={user}
-                cartOperations={cartOperations}
-                promoCode={promoCode}
-                certificateData={certificateData}
-              />
-            </div>
+  return (
+    <>
+      <PathBack />
+      <div className={styles.root} data-cy='filled-cart'>
+        <div className={styles.orderWrapper}>
+          <div className={styles.orderTable}>
+            <OrderTable
+              items={items}
+              user={user}
+              cartOperations={cartOperations}
+              promoCode={promoCode}
+              certificateData={certificateData}
+            />
           </div>
-          <div>
-            <div className={styles.promoAndTotalWrapper}>
-              <div className={styles.promoWrapper}>
-                <div>
-                  <TextField
-                    className={styles.textField}
-                    InputProps={{
-                      className: styles.promoInput
-                    }}
-                    placeholder={t('cart.promoPlaceHolder')}
-                    variant={TEXT_FIELD_VARIANT.OUTLINED}
-                    inputRef={certificateAndPromoInput}
-                    disabled={disable}
-                    error={!!promoCodeError || !!certificateError}
-                    helperText={errorHandler()}
-                  />
-                  <Button
-                    data-testid='promoButton'
-                    variant='contained'
-                    className={`${styles.promoButton} ${styles.promoInput}`}
-                    onClick={checkPromoCode}
-                    disabled={disable}
-                  >
-                    {t('cart.applyPromoCode')}
-                  </Button>
-                </div>
-                <Link to={pathToCategory}>
-                  <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
-                </Link>
-              </div>
-              <div className={styles.totalWrapper}>
-                {totalSavePrice()}
-                <div className={styles.totalPrice}>
-                  <span>{t('cart.totalPrice')}</span>
-                  <div>
-                    {currencySign}
-                    {price}
-                  </div>
-                </div>
-                <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
-                  {t('cart.checkout')}
+        </div>
+        <div>
+          <div className={styles.promoAndTotalWrapper}>
+            <div className={styles.promoWrapper}>
+              <div>
+                <TextField
+                  className={styles.textField}
+                  InputProps={{
+                    className: styles.promoInput
+                  }}
+                  placeholder={t('cart.promoPlaceHolder')}
+                  variant={TEXT_FIELD_VARIANT.OUTLINED}
+                  inputRef={certificateAndPromoInput}
+                  disabled={disable}
+                  error={promoCodeError || certificateError}
+                  helperText={errorHandler()}
+                />
+                <Button
+                  data-testid='promoButton'
+                  variant='contained'
+                  className={`${styles.promoButton} ${styles.promoInput}`}
+                  onClick={checkPromoOrCertificate}
+                  disabled={disable}
+                >
+                  {t('cart.applyPromoCode')}
                 </Button>
               </div>
+              <Link to={pathToCategory}>
+                <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
+              </Link>
+            </div>
+            <div className={styles.totalWrapper}>
+              {totalSavePrice()}
+              <div className={styles.totalPrice}>
+                <span>{t('cart.totalPrice')}</span>
+                <div>
+                  {currencySign}
+                  {price}
+                </div>
+              </div>
+              <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
+                {t('cart.checkout')}
+              </Button>
             </div>
           </div>
-          <SimilarProducts cartList={items} />
         </div>
-      </>
-    );
+        <SimilarProducts cartList={items} />
+      </div>
+    </>
+  );
 };
 
 export default FilledCart;

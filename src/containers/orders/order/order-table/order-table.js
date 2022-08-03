@@ -6,7 +6,7 @@ import { useStyles } from './order-table.styles';
 import CartItem from '../../cart/cart-item';
 import Modal from '../../../../components/modal';
 
-const OrderTable = ({ items, lastItem, user, cartOperations, promoCode, certificateData }) => {
+const OrderTable = ({ items, user, cartOperations, promoCode, certificateData }) => {
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
@@ -19,7 +19,6 @@ const OrderTable = ({ items, lastItem, user, cartOperations, promoCode, certific
     <CartItem
       key={item.id}
       item={item}
-      lastItem={lastItem}
       language={language}
       user={user}
       setModalVisibility={setRemoveOneModalVisibility}

@@ -45,12 +45,14 @@ describe('use-cart tests', () => {
 
   it('should return total price with certificate', () => {
     act(() => {
-      res = wrap.result.current.cartOperations.getTotalPricesWithCertificate(mockCertificate);
+      res =
+        wrap.result.current.cartOperations.getTotalPrice() -
+        mockCertificate.getCertificateByName.value;
     });
 
     expect(res).toBe(83);
   });
-  
+
   it('should return product price with promo code', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPriceWithPromoCode(
@@ -62,25 +64,14 @@ describe('use-cart tests', () => {
     expect(res).toBe(90);
   });
 
-  it('should return product price with certificate', () => {
-    act(() => {
-      res = wrap.result.current.cartOperations.getProductPriceWithCertificate(
-        mockItem.id,
-        mockCertificate
-      );
-    });
-    
-    expect(res).toBe(83);
-  });
-
   it('should return total save price with certificate', () => {
     act(() => {
-      res = wrap.result.current.cartOperations.getTotalSavePrice (
-        mockItem.id,
-        mockCertificate
-      );
+      const price =
+        wrap.result.current.cartOperations.getTotalPrice() -
+        mockCertificate.getCertificateByName.value;
+      res = wrap.result.current.cartOperations.getTotalPrice() - price;
     });
-    
+
     expect(res).toBe(17);
   });
 

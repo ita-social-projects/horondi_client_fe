@@ -166,7 +166,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
           </s>
           <span>
             {currencySign}
-            {promoCode && calcPriceForCart(currentPrice, inputValue)}
+            {calcPriceForCart(currentPrice, inputValue)}
           </span>
         </div>
       );

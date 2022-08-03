@@ -29,14 +29,7 @@ const canvasH = 120;
 const canvasX = 0;
 const canvasY = 0;
 
-const CartItem = ({
-  item,
-  setModalVisibility,
-  setModalItem,
-  cartOperations,
-  promoCode,
-  certificateData
-}) => {
+const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, promoCode }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useContext(CurrencyContext);

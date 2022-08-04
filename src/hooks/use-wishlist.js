@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useMutation } from '@apollo/client';
 import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
@@ -15,6 +15,7 @@ export const useWishlist = () => {
   const [wishlist, setWishlist] = useState(getFromLocalStorage(WISHLIST_KEY));
   const [addProductMutation] = useMutation(addProductToWishlist);
   const [deleteProductMutation] = useMutation(deleteProductFromWishlist);
+  const user = useSelector(({ User }) => User.userData);
 
   useEffect(() => {
     setToLocalStorage(WISHLIST_KEY, wishlist);
@@ -26,16 +27,14 @@ export const useWishlist = () => {
 
   const addToWishlist = (item) => {
     setWishlist((prevWishlist) => [...prevWishlist, item]);
-    setToLocalStorage(WISHLIST_KEY, wishlist);
-    addProductMutation({ variables: { productId: item._id } });
+    user && addProductMutation({ variables: { productId: item._id } });
   };
 
   const removeFromWishlist = (item) => {
     setWishlist((prevWishlist) =>
       prevWishlist.filter((wishlistItem) => wishlistItem._id !== item._id)
     );
-    setToLocalStorage(WISHLIST_KEY, wishlist);
-    deleteProductMutation({ variables: { productId: item._id } });
+    user && deleteProductMutation({ variables: { productId: item._id } });
   };
 
   const wishlistOperations = {

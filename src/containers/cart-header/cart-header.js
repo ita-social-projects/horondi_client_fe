@@ -22,7 +22,7 @@ const CartHeader = ({ fromSideBar }) => {
   );
   useEffect(() => {
     dispatch(setCart(getFromLocalStorage(CART_KEY)));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

@@ -19,7 +19,7 @@ const WishlistHeader = () => {
 
   useEffect(() => {
     dispatch(setNewWishlist(getFromLocalStorage(WISHLIST_KEY)));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

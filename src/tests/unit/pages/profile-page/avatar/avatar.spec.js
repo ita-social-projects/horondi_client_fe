@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import Avatar from '../../../../../pages/profile-page/avatar/avatar';
-import FileReaderMock from '../../../../../../../horondi_admin/__mocks__/fileReaderMock';
+import FileReaderMock from '../../../../../../__mocks__/fileReaderMock';
 
 jest.mock('../../../../../pages/profile-page/avatar/avatar.styles', () => ({
   useStyles: () => ({})

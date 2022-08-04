@@ -15,15 +15,14 @@ const Checkout = () => {
   const {
     state: { promoCode }
   } = useLocation();
-  const { loading, isOrderCreated, order, user } = useSelector(({ Order, User }) => ({
+  const { loading, isOrderCreated, order } = useSelector(({ Order }) => ({
     loading: Order.loading,
     isOrderCreated: Order.isOrderCreated,
-    order: Order.order,
-    user: User.userData
+    order: Order.order
   }));
   const dispatch = useDispatch();
 
-  const { cart: cartItems, cartOperations } = useCart(user);
+  const { cart: cartItems, cartOperations } = useCart();
 
   useEffect(() => () => dispatch(setIsOrderCreated(false)), [dispatch, isOrderCreated]);
 

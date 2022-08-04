@@ -10,16 +10,16 @@ import { CART_KEY } from '../configs';
 import { setCart } from '../redux/common-store/common.actions';
 import { useCurrency } from './use-currency';
 
-export const useCart = (user = null) => {
+export const useCart = () => {
   const dispatch = useDispatch();
   const { getPriceWithCurrency } = useCurrency();
 
-  const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY) || []);
+  const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY));
 
   useEffect(() => {
-    setToLocalStorage(CART_KEY, [...cart]);
+    setToLocalStorage(CART_KEY, cart);
     dispatch(setCart(cart));
-  }, [cart, user, dispatch]);
+  }, [cart, dispatch]);
 
   const addToCart = (item) => {
     setNewCart((prevCart) => [item, ...prevCart]);

@@ -109,70 +109,81 @@ describe('CheckoutForm tests for: ', () => {
       </BrowserRouter>
     );
   });
-  it('first name field', () => {
-    const firstNameField = screen.getByTestId('firstName').querySelector('input');
-    fireEvent.change(firstNameField, { target: { value: 'Roman' } });
-    expect(firstNameField.value).toEqual('Roman');
+  it('first name field', async () => {
+    const firstNameField = await screen.findByTestId('firstName');
+    const input = firstNameField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Roman' } });
+    expect(input.value).toEqual('Roman');
   });
 
-  it('last name field', () => {
-    const lastNameField = screen.getByTestId('lastName').querySelector('input');
-    fireEvent.change(lastNameField, { target: { value: 'Denes' } });
-    expect(lastNameField.value).toEqual('Denes');
+  it('last name field', async () => {
+    const lastNameField = await screen.findByTestId('lastName');
+    const input = lastNameField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Denes' } });
+    expect(input.value).toEqual('Denes');
   });
 
-  it('email field', () => {
-    const emailField = screen.getByTestId('email').querySelector('input');
-    fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
-    expect(emailField.value).toEqual('netro@gmail.com');
+  it('email field', async () => {
+    const emailField = await screen.findByTestId('email');
+    const input = emailField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'netro@gmail.com' } });
+    expect(input.value).toEqual('netro@gmail.com');
   });
 
-  it('phoneNumber field', () => {
-    const phoneNumberField = screen.getByTestId('phoneNumber').querySelector('input');
-    fireEvent.change(phoneNumberField, { target: { value: '380686717536' } });
-    expect(phoneNumberField.value).toEqual('380686717536');
+  it('phoneNumber field', async () => {
+    const phoneNumberField = await screen.findByTestId('phoneNumber');
+    const input = phoneNumberField.querySelector('input');
+    fireEvent.change(input, { target: { value: '686717536' } });
+    expect(input.value).toEqual('686717536');
   });
 
-  it('region field', () => {
-    const regionField = screen.getByTestId('region').querySelector('input');
-    fireEvent.change(regionField, { target: { value: 'Вінницька' } });
-    expect(regionField.value).toEqual('Вінницька');
+  it('region field', async () => {
+    const regionField = await screen.findByTestId('region');
+    const input = regionField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Вінницька' } });
+    expect(input.value).toEqual('Вінницька');
   });
 
-  it('districts field', () => {
-    const districtsField = screen.getByTestId('district').querySelector('input');
-    fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
-    expect(districtsField.value).toEqual('Гайсинський');
+  it('districts field', async () => {
+    const districtsField = await screen.findByTestId('district');
+    const input = districtsField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Гайсинський' } });
+    expect(input.value).toEqual('Гайсинський');
   });
 
-  it('cities field', () => {
-    const citiesField = screen.getByTestId('cities').querySelector('input');
-    fireEvent.change(citiesField, { target: { value: 'Адамівка' } });
-    expect(citiesField.value).toEqual('Адамівка');
+  it('cities field', async () => {
+    const citiesField = await screen.findByTestId('cities');
+    const input = citiesField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Адамівка' } });
+    expect(input.value).toEqual('Адамівка');
   });
 
-  it('streets field', () => {
-    const streetsField = screen.getByTestId('streets').querySelector('input');
-    fireEvent.change(streetsField, { target: { value: 'Південна' } });
-    expect(streetsField.value).toEqual('Південна');
+  it('streets field', async () => {
+    const streetsField = await screen.findByTestId('streets');
+    const input = streetsField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'Південна' } });
+    expect(input.value).toEqual('Південна');
   });
 
-  it('building field', () => {
-    const buildingField = screen.getByTestId('house').querySelector('input');
-    fireEvent.change(buildingField, { target: { value: '34' } });
-    expect(buildingField.value).toEqual('34');
+  it('building field', async () => {
+    const buildingField = await screen.findByTestId('house');
+    const input = buildingField.querySelector('input');
+    fireEvent.change(input, { target: { value: '34' } });
+    expect(input.value).toEqual('34');
   });
 
-  it('flat field', () => {
-    const flatField = screen.getByTestId('flat').querySelector('input');
-    fireEvent.change(flatField, { target: { value: '36' } });
-    expect(flatField.value).toEqual('36');
+  it('flat field', async () => {
+    const flatField = await screen.findByTestId('flat');
+    const input = flatField.querySelector('input');
+    fireEvent.change(input, { target: { value: '36' } });
+    expect(input.value).toEqual('36');
   });
 
-  it('paymentMetod field', () => {
-    const paymentMetodField = screen.getByTestId('paymentMetod').querySelector('input');
-    fireEvent.change(paymentMetodField, { target: { value: 'CASH' } });
-    expect(paymentMetodField.value).toEqual('CASH');
+  it('paymentMetod field', async () => {
+    const paymentMetodField = await screen.findByTestId('paymentMetod');
+    const input = paymentMetodField.querySelector('input');
+    fireEvent.change(input, { target: { value: 'CASH' } });
+    expect(input.value).toEqual('CASH');
   });
 
   it('click on button action', async () => {

@@ -4,7 +4,6 @@ export const DARK_THEME = 'dark';
 export const LIGHT_THEME = 'light';
 
 export const IMG_URL = 'https://horondi.blob.core.windows.net/horondi/images/';
-export const CART_KEY = 'newCart';
 
 export const ERROR_PAGE_IMAGES = {
   light: './images/error-page/error-light.png',
@@ -107,8 +106,7 @@ export const MATERIAL_UI_COLOR = {
   ACTION: 'action'
 };
 
-export const cartKey = 'cart';
-export const newCartKey = 'newCart';
+export const CART_KEY = 'cart';
 export const WISHLIST_KEY = 'wishlist';
 export const countPerPage = 'countPerPage';
 

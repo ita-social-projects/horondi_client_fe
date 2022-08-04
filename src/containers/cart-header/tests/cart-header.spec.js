@@ -18,6 +18,7 @@ describe('CartHeader', () => {
         <CartHeader />
       </BrowserRouter>
     );
+
     expect(screen.getByText('1')).toBeInTheDocument();
   });
 });

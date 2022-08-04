@@ -15,6 +15,7 @@ describe('Test for the wishlist-header component', () => {
         <WishlistHeader />
       </BrowserRouter>
     );
+
     expect(screen.getByText('2')).toBeInTheDocument();
   });
 });

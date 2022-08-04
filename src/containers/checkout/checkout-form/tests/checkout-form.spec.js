@@ -113,6 +113,7 @@ describe('CheckoutForm tests for: ', () => {
     const firstNameField = await screen.findByTestId('firstName');
     const input = firstNameField.querySelector('input');
     fireEvent.change(input, { target: { value: 'Roman' } });
+
     expect(input.value).toEqual('Roman');
   });
 
@@ -120,6 +121,7 @@ describe('CheckoutForm tests for: ', () => {
     const lastNameField = await screen.findByTestId('lastName');
     const input = lastNameField.querySelector('input');
     fireEvent.change(input, { target: { value: 'Denes' } });
+
     expect(input.value).toEqual('Denes');
   });
 
@@ -127,6 +129,7 @@ describe('CheckoutForm tests for: ', () => {
     const emailField = await screen.findByTestId('email');
     const input = emailField.querySelector('input');
     fireEvent.change(input, { target: { value: 'netro@gmail.com' } });
+
     expect(input.value).toEqual('netro@gmail.com');
   });
 
@@ -134,6 +137,7 @@ describe('CheckoutForm tests for: ', () => {
     const phoneNumberField = await screen.findByTestId('phoneNumber');
     const input = phoneNumberField.querySelector('input');
     fireEvent.change(input, { target: { value: '686717536' } });
+
     expect(input.value).toEqual('686717536');
   });
 
@@ -141,6 +145,7 @@ describe('CheckoutForm tests for: ', () => {
     const regionField = await screen.findByTestId('region');
     const input = regionField.querySelector('input');
     fireEvent.change(input, { target: { value: 'Вінницька' } });
+
     expect(input.value).toEqual('Вінницька');
   });
 
@@ -148,6 +153,7 @@ describe('CheckoutForm tests for: ', () => {
     const districtsField = await screen.findByTestId('district');
     const input = districtsField.querySelector('input');
     fireEvent.change(input, { target: { value: 'Гайсинський' } });
+
     expect(input.value).toEqual('Гайсинський');
   });
 
@@ -155,6 +161,7 @@ describe('CheckoutForm tests for: ', () => {
     const citiesField = await screen.findByTestId('cities');
     const input = citiesField.querySelector('input');
     fireEvent.change(input, { target: { value: 'Адамівка' } });
+
     expect(input.value).toEqual('Адамівка');
   });
 
@@ -162,6 +169,7 @@ describe('CheckoutForm tests for: ', () => {
     const streetsField = await screen.findByTestId('streets');
     const input = streetsField.querySelector('input');
     fireEvent.change(input, { target: { value: 'Південна' } });
+
     expect(input.value).toEqual('Південна');
   });
 
@@ -169,6 +177,7 @@ describe('CheckoutForm tests for: ', () => {
     const buildingField = await screen.findByTestId('house');
     const input = buildingField.querySelector('input');
     fireEvent.change(input, { target: { value: '34' } });
+
     expect(input.value).toEqual('34');
   });
 
@@ -176,6 +185,7 @@ describe('CheckoutForm tests for: ', () => {
     const flatField = await screen.findByTestId('flat');
     const input = flatField.querySelector('input');
     fireEvent.change(input, { target: { value: '36' } });
+
     expect(input.value).toEqual('36');
   });
 
@@ -183,6 +193,7 @@ describe('CheckoutForm tests for: ', () => {
     const paymentMetodField = await screen.findByTestId('paymentMetod');
     const input = paymentMetodField.querySelector('input');
     fireEvent.change(input, { target: { value: 'CASH' } });
+
     expect(input.value).toEqual('CASH');
   });
 
@@ -214,6 +225,7 @@ describe('CheckoutForm tests for: ', () => {
 
     fireEvent.click(button);
     await new Promise((resolve) => setTimeout(resolve, 0));
-    await expect(dispatch).toHaveBeenCalledTimes(1);
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

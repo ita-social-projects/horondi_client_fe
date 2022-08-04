@@ -2,13 +2,15 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import Avatar from '../../../../../pages/profile-page/avatar/avatar';
+import FileReaderMock from '../../../../../../../horondi_admin/__mocks__/fileReaderMock';
 
 jest.mock('../../../../../pages/profile-page/avatar/avatar.styles', () => ({
   useStyles: () => ({})
 }));
 
 const mockT = jest.fn((arg) => arg);
-const mockSetUserImageUrl = jest.fn;
+const fileReader = new FileReaderMock();
+jest.spyOn(window, 'FileReader').mockImplementation(() => fileReader);
 
 describe('Profile=Page test image restrictions', () => {
   let uploader;
@@ -23,7 +25,7 @@ describe('Profile=Page test image restrictions', () => {
   });
 
   beforeEach(() => {
-    render(<Avatar t={mockT} setUserImageUrl={mockSetUserImageUrl} />);
+    render(<Avatar t={mockT} />);
     uploader = screen.getByTestId('imageInput');
   });
 
@@ -53,11 +55,6 @@ describe('Profile=Page test image restrictions', () => {
 
     expect(uploader.files.length).toBe(1);
   });
-  // it('should show preview image', async () => {
-  //   const file = new File(['test file'], 'image.jpeg', { type: 'image/png' });
-  //   fireEvent.change(uploader, { target: { files: [file] } });
-  //   expect(screen.getByTestId('renderedImage')).toBeInTheDocument();
-  // });
 
   it('should render file input field', () => {
     const file = new File(['test file'], 'image.jpeg', { type: 'image/png' });
@@ -65,5 +62,21 @@ describe('Profile=Page test image restrictions', () => {
     fireEvent.change(uploader, { target: { files: [file] } });
 
     expect(screen.getByTestId('imageInput')).toBeInTheDocument();
+  });
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const fileReader = new FileReaderMock();
+  jest.spyOn(window, 'FileReader').mockImplementation(() => fileReader);
+
+  it('Should test FileReader ', () => {
+    const file = new File(['test file'], 'image.jpeg', { type: 'image/png' });
+    fireEvent.change(uploader, { target: { files: [file] } });
+    fileReader.result = 'file content';
+    fileReader.onload({ target: { result: 'foo' } });
+    expect(fileReader.readAsDataURL).toHaveBeenCalled();
+    expect(fileReader.readAsDataURL).toHaveBeenCalledWith(file);
   });
 });

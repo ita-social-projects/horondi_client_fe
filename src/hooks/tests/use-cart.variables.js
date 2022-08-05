@@ -28,9 +28,9 @@ export const mockPromoCode = {
 };
 
 export const mockCertificate = {
-  getCertificateByName: {
+  getCertificateByParams: {
     name: 'HOR40315176',
-    value: 17,
+    value: 17
   }
 };
 

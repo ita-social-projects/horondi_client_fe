@@ -1,5 +1,5 @@
 import { getPromoCodeByCode } from '../../../operations/getPromoCodeByCode.queries';
-import { getCertificateByName } from '../../../operations/getCertificateByName.queries';
+import { getCertificateByParams } from '../../../operations/getCertificateByParams.queries';
 import { addProductFromConstructor } from '../../../../../pages/cart/operations/cart.mutations';
 import { mockQueryData, mockQueryDataConstructor } from '../../cart-item/tests/cart-item.variables';
 
@@ -48,23 +48,25 @@ export const mockPromoCode = {
 
 export const mockCertificate = {
   request: {
-    query: getCertificateByName,
+    query: getCertificateByParams,
     variables: {
-      code: 'HOR40315176'
+      params: {
+        name: 'HOR40315176'
+      }
     }
   },
   result: {
     data: {
       getCertificateByName: {
-        dateEnd: "2023-07-20T15:06:30.256Z",
-        dateStart: "2022-07-19T15:06:30.256Z",
+        dateEnd: '2023-07-20T15:06:30.256Z',
+        dateStart: '2022-07-19T15:06:30.256Z',
         isActivated: true,
         isExpired: false,
         isUsed: false,
-        name: "HOR40315176",
+        name: 'HOR40315176',
         value: 17,
-        _id: "62d6cab33cb3cc2908fc7d61",
-        __typename: "PaginatedCertificate",
+        _id: '62d6cab33cb3cc2908fc7d61',
+        __typename: 'PaginatedCertificate'
       }
     }
   }

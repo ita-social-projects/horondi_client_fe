@@ -47,7 +47,7 @@ describe('use-cart tests', () => {
     act(() => {
       res =
         wrap.result.current.cartOperations.getTotalPrice() -
-        mockCertificate.getCertificateByName.value;
+        mockCertificate.getCertificateByParams.value;
     });
 
     expect(res).toBe(83);
@@ -68,7 +68,7 @@ describe('use-cart tests', () => {
     act(() => {
       const price =
         wrap.result.current.cartOperations.getTotalPrice() -
-        mockCertificate.getCertificateByName.value;
+        mockCertificate.getCertificateByParams.value;
       res = wrap.result.current.cartOperations.getTotalPrice() - price;
     });
 

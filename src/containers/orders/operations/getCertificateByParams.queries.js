@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const getCertificateByName = gql`
-  query ($name: String!) {
-    getCertificateByName(name: $name) {
+export const getCertificateByParams = gql`
+  query ($params: CertificateInput!) {
+    getCertificateByParams(params: $params) {
       __typename
       ... on Certificate {
         _id

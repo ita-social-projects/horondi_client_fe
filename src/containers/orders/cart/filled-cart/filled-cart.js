@@ -16,7 +16,7 @@ import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
-import { getCertificateByName } from '../../operations/getCertificateByName.queries';
+import { getCertificateByParams } from '../../operations/getCertificateByParams.queries';
 import { addProductFromConstructor } from '../../../../pages/cart/operations/cart.mutations';
 import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
@@ -51,10 +51,12 @@ const FilledCart = ({ items, cartOperations }) => {
     }
   );
   const [getCertificate, { data: certificateData, error: certificateError }] = useLazyQuery(
-    getCertificateByName,
+    getCertificateByParams,
     {
       variables: {
-        name: inputValue
+        params: {
+          name: inputValue
+        }
       }
     }
   );
@@ -84,7 +86,7 @@ const FilledCart = ({ items, cartOperations }) => {
   useLayoutEffect(() => {
     if (certificateData) {
       setDisable(true);
-      return setPrice(getTotalPrice() - certificateData.getCertificateByName.value);
+      return setPrice(getTotalPrice() - certificateData.getCertificateByParams.value);
     }
     if (promoCode) {
       setDisable(true);

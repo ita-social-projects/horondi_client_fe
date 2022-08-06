@@ -12,9 +12,8 @@ import { useCart } from '../../hooks/use-cart';
 const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
-  const {
-    state: { promoCode }
-  } = useLocation();
+  const location = useLocation();
+  const promoCode = location.state?.promoCode;
   const { loading, isOrderCreated, order } = useSelector(({ Order }) => ({
     loading: Order.loading,
     isOrderCreated: Order.isOrderCreated,
@@ -31,7 +30,7 @@ const Checkout = () => {
   return (
     <div className={styles.root}>
       {isOrderCreated && <Redirect to={`${pathToThanks}/${order?._id}`} />}
-      {!cartItems.length && <Redirect to={pathToMain} />}
+      {!cartItems.length && !loading && <Redirect to={pathToMain} />}
       {loading && <Loader />}
       {!loading && (
         <div className={styles.checkoutContainer}>

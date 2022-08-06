@@ -1,32 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  clearNewCart,
-  getFromLocalStorage,
-  setToLocalStorage
-} from '../services/local-storage.service';
+import { useContext } from 'react';
+import { CartContext } from '../context/cart-context';
 import { calcPriceForCart } from '../utils/priceCalculating';
-import { CART_KEY } from '../configs';
-import { setCart } from '../redux/common-store/common.actions';
 import { useCurrency } from './use-currency';
 
 export const useCart = () => {
-  const dispatch = useDispatch();
   const { getPriceWithCurrency } = useCurrency();
 
-  const [cart, setNewCart] = useState(getFromLocalStorage(CART_KEY));
-
-  useEffect(() => {
-    setToLocalStorage(CART_KEY, cart);
-    dispatch(setCart(cart));
-  }, [cart, dispatch]);
+  const { cart, setCart } = useContext(CartContext);
 
   const addToCart = (item) => {
-    setNewCart((prevCart) => [item, ...prevCart]);
+    setCart((prevCart) => [item, ...prevCart]);
   };
 
   const clearCart = () => {
-    clearNewCart();
+    setCart([]);
   };
 
   const getCartItem = (id) =>
@@ -70,11 +57,11 @@ export const useCart = () => {
 
   const setCartItem = (id, item) => {
     const newCart = cart.map((cartItem) => (cartItem.id === id ? item : cartItem));
-    setNewCart(newCart);
+    setCart(newCart);
   };
 
   const removeFromCart = (item) => {
-    setNewCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
+    setCart((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
   };
 
   const isInCart = (productId, sizeId = null) =>
@@ -85,7 +72,7 @@ export const useCart = () => {
     );
 
   const changeQuantity = (id, count) => {
-    setNewCart((prevCart) =>
+    setCart((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) el.quantity = count;
         return el;
@@ -101,7 +88,7 @@ export const useCart = () => {
     );
 
   const changeSize = (id, sizeAndPrice) => {
-    setNewCart((prevCart) =>
+    setCart((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) {
           el.sizeAndPrice = sizeAndPrice;
@@ -112,7 +99,7 @@ export const useCart = () => {
   };
 
   const changeSizeConstructor = (id, size) => {
-    setNewCart((prevCart) =>
+    setCart((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) {
           el.sizeAndPrice.size = size;

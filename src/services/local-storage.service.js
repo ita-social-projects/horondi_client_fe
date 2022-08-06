@@ -1,10 +1,4 @@
-import {
-  CART_KEY,
-  DEFAULT_COUNT_PER_PAGE,
-  DEFAULT_CURRENCY,
-  DEFAULT_LANGUAGE,
-  HORONDI
-} from '../configs';
+import { DEFAULT_COUNT_PER_PAGE, DEFAULT_CURRENCY, DEFAULT_LANGUAGE, HORONDI } from '../configs';
 
 export const clearLocalStorage = () => {
   const horondi = {
@@ -21,10 +15,6 @@ export const clearLocalStorage = () => {
     order: null
   };
   localStorage.setItem(HORONDI, JSON.stringify(horondi));
-};
-
-export const clearNewCart = () => {
-  setToLocalStorage(CART_KEY, []);
 };
 
 if (!localStorage.getItem(HORONDI)) {

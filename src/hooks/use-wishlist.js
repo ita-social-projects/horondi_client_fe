@@ -1,26 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useContext, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useMutation } from '@apollo/client';
-import { getFromLocalStorage, setToLocalStorage } from '../services/local-storage.service';
+import { getFromLocalStorage } from '../services/local-storage.service';
 import { WISHLIST_KEY } from '../configs';
-import { setNewWishlist } from '../redux/common-store/common.actions';
 import {
   addProductToWishlist,
   deleteProductFromWishlist
 } from '../pages/wishlist/operations/wishlist.mutations';
 
+import { WishlistContext } from '../context/wishlist-context';
+
 export const useWishlist = () => {
-  const dispatch = useDispatch();
-  const [wishlist, setWishlist] = useState(getFromLocalStorage(WISHLIST_KEY));
+  const { wishlist, setWishlist } = useContext(WishlistContext);
   const [addProductMutation] = useMutation(addProductToWishlist);
   const [deleteProductMutation] = useMutation(deleteProductFromWishlist);
   const user = useSelector(({ User }) => User.userData);
 
   useEffect(() => {
-    setToLocalStorage(WISHLIST_KEY, wishlist);
-    dispatch(setNewWishlist(wishlist));
-  }, [wishlist, dispatch]);
+    setWishlist(getFromLocalStorage(WISHLIST_KEY));
+  }, [user, setWishlist]);
 
   const isInWishlist = (product) =>
     wishlist.find((wishlistItem) => wishlistItem._id === product._id);

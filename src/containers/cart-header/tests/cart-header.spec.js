@@ -6,9 +6,11 @@ import CartHeader from '../cart-header';
 jest.mock('../cart-header.styles.js', () => ({
   useStyles: () => ({})
 }));
-jest.mock('react-redux', () => ({
-  useDispatch: () => () => null,
-  useSelector: () => [{ quantity: 1 }]
+
+jest.mock('../../../hooks/use-cart', () => ({
+  useCart: () => ({
+    cart: [{ id: '84d7', quantity: 1 }]
+  })
 }));
 
 describe('CartHeader', () => {

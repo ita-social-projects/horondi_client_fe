@@ -3,9 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import WishlistHeader from '../wishlist-header';
 
-jest.mock('react-redux', () => ({
-  useDispatch: () => () => null,
-  useSelector: () => 2
+jest.mock('../../../hooks/use-wishlist', () => ({
+  useWishlist: () => ({
+    wishlist: [{ _id: '614cb8' }, { _id: '61af5' }]
+  })
 }));
 
 describe('Test for the wishlist-header component', () => {

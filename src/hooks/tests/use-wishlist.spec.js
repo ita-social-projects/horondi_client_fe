@@ -1,16 +1,16 @@
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { mockItem } from './use-wishlist.variables';
 import { useWishlist } from '../use-wishlist';
+import WishlistContextProvider from '../../context/wishlist-context';
 
-const dispatch = jest.fn();
+const wrapper = ({ children }) => <WishlistContextProvider>{children}</WishlistContextProvider>;
 
-jest.mock('react-redux');
-
+const mockMutation = jest.fn();
 jest.mock('@apollo/client', () => ({
   ...jest.requireActual('@apollo/client'),
   useMutation: () => [
-    () => null,
+    mockMutation,
     {
       loading: true,
       error: null,
@@ -19,13 +19,15 @@ jest.mock('@apollo/client', () => ({
   ]
 }));
 
-useDispatch.mockImplementation(() => dispatch);
+jest.mock('react-redux', () => ({
+  useSelector: () => true
+}));
 
 describe('use-wishlist tests', () => {
   let wrap;
   let res;
   beforeEach(() => {
-    wrap = renderHook(useWishlist);
+    wrap = renderHook(() => useWishlist(), { wrapper });
   });
 
   it('should add item to wishlist', () => {
@@ -34,6 +36,7 @@ describe('use-wishlist tests', () => {
     });
 
     expect(wrap.result.current.wishlist).toContain(mockItem);
+    expect(mockMutation).toHaveBeenCalledTimes(1);
   });
 
   it('should check is item in wishlist', () => {
@@ -50,5 +53,6 @@ describe('use-wishlist tests', () => {
     });
 
     expect(wrap.result.current.wishlist).toHaveLength(0);
+    expect(mockMutation).toHaveBeenCalledTimes(1);
   });
 });

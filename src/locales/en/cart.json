@@ -9,7 +9,8 @@
   "continue": "Continue shopping",
   "totalPrice": "Total price",
   "saving": "Save",
-  "notFound": "Promo code not found",
+  "promoCodeNotFound": "Promo code not found",
+  "certificateNotFound": "Certificate not found",
   "checkout": "Go to checkout",
   "pathBack": {
     "toMain": "Home",

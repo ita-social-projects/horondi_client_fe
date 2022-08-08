@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,7 @@ import routes from '../../../../configs/routes';
 import SimilarProducts from '../../../../pages/product-details/similar-products';
 import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import { getPromoCodeByCode } from '../../operations/getPromoCodeByCode.queries';
+import { getCertificateByParams } from '../../operations/getCertificateByParams.queries';
 import { addProductFromConstructor } from '../../../../pages/cart/operations/cart.mutations';
 import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
@@ -28,11 +29,12 @@ const FilledCart = ({ items, cartOperations }) => {
 
   const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
-  const promoCodeInput = useRef(null);
+  const certificateAndPromoInput = useRef(null);
   const { pathToCategory, pathToCheckout } = routes;
   const [price, setPrice] = useState();
-  const [promoCodeValue, setPromoCodeValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const { currency } = useContext(CurrencyContext);
 
@@ -40,28 +42,77 @@ const FilledCart = ({ items, cartOperations }) => {
     user: User.userData
   }));
 
-  const [getPromoCode, { data: promoCode, error }] = useLazyQuery(getPromoCodeByCode, {
-    variables: {
-      code: promoCodeValue
+  const [getPromoCode, { data: promoCode, error: promoCodeError }] = useLazyQuery(
+    getPromoCodeByCode,
+    {
+      variables: {
+        code: inputValue
+      }
     }
-  });
+  );
+  const [getCertificate, { data: certificateData, error: certificateError }] = useLazyQuery(
+    getCertificateByParams,
+    {
+      variables: {
+        params: {
+          name: inputValue
+        }
+      }
+    }
+  );
+
+  const errorHandler = () => {
+    if (certificateData || promoCode) return null;
+    if (promoCodeError) return t('cart.promoCodeNotFound');
+    if (certificateError) return t('cart.certificateNotFound');
+  };
 
   const currencySign = getCurrencySign();
   const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
 
-  const checkPromoCode = () => {
-    setPromoCodeValue(promoCodeInput.current.value);
+  const checkPromoOrCertificate = () => {
+    const searchValue = new RegExp(/^HOR/, 'i');
+    if (searchValue.test(certificateAndPromoInput.current.value)) {
+      setInputValue(certificateAndPromoInput.current.value);
+      getCertificate();
+      certificateAndPromoInput.current.value = '';
+      return;
+    }
+    setInputValue(certificateAndPromoInput.current.value);
     getPromoCode();
-    promoCodeInput.current.value = '';
+    certificateAndPromoInput.current.value = '';
   };
 
-  useEffect(() => {
-    promoCode ? setPrice(getTotalPricesWithPromoCode(promoCode)) : setPrice(getTotalPrice());
-  }, [items, currency, getTotalPrice, promoCode, getTotalPricesWithPromoCode]);
+  useLayoutEffect(() => {
+    if (certificateData) {
+      setDisable(true);
+      return setPrice(getTotalPrice() - certificateData.getCertificateByParams.value);
+    }
+    if (promoCode) {
+      setDisable(true);
+      return setPrice(getTotalPricesWithPromoCode(promoCode));
+    }
+    setPrice(getTotalPrice());
+  }, [items, currency, getTotalPrice, promoCode, certificateData, getTotalPricesWithPromoCode]);
 
   if (cartLoading || productFromConstructorLoading) {
     return <Loader />;
   }
+
+  const totalSavePrice = () => {
+    if (promoCode || certificateData) {
+      return (
+        <div className={styles.totalPrice}>
+          <span>{t('cart.saving')}</span>
+          <div>
+            {currencySign}
+            {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
+            {certificateData && getTotalPrice() - price}
+          </div>
+        </div>
+      );
+    }
+  };
 
   const onGoToCheckout = async () => {
     const itemsFromConstructor = items.filter((item) => item.isFromConstructor);
@@ -100,7 +151,7 @@ const FilledCart = ({ items, cartOperations }) => {
         productId: data.addProductFromConstructor._id
       });
     }
-
+    history.push(pathToCheckout, { certificateData });
     history.push(pathToCheckout, { promoCode });
   };
 
@@ -115,6 +166,7 @@ const FilledCart = ({ items, cartOperations }) => {
               user={user}
               cartOperations={cartOperations}
               promoCode={promoCode}
+              certificateData={certificateData}
             />
           </div>
         </div>
@@ -129,15 +181,17 @@ const FilledCart = ({ items, cartOperations }) => {
                   }}
                   placeholder={t('cart.promoPlaceHolder')}
                   variant={TEXT_FIELD_VARIANT.OUTLINED}
-                  inputRef={promoCodeInput}
-                  error={!!error}
-                  helperText={error && t('cart.notFound')}
+                  inputRef={certificateAndPromoInput}
+                  disabled={disable}
+                  error={promoCodeError || certificateError}
+                  helperText={errorHandler()}
                 />
                 <Button
                   data-testid='promoButton'
                   variant='contained'
                   className={`${styles.promoButton} ${styles.promoInput}`}
-                  onClick={checkPromoCode}
+                  onClick={checkPromoOrCertificate}
+                  disabled={disable}
                 >
                   {t('cart.applyPromoCode')}
                 </Button>
@@ -147,15 +201,7 @@ const FilledCart = ({ items, cartOperations }) => {
               </Link>
             </div>
             <div className={styles.totalWrapper}>
-              {promoCode && (
-                <div className={styles.totalPrice}>
-                  <span>{t('cart.saving')}</span>
-                  <div>
-                    {currencySign}
-                    {getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
-                  </div>
-                </div>
-              )}
+              {totalSavePrice()}
               <div className={styles.totalPrice}>
                 <span>{t('cart.totalPrice')}</span>
                 <div>

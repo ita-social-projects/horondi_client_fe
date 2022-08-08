@@ -28,14 +28,14 @@ export const useCart = () => {
         (el) => el.toLowerCase() === item.category.code.toLowerCase()
       );
       if (isAllowCategory) {
-        return [Math.round(price - (price / 100) * discount), item.quantity];
+        return [getPriceWithCurrency(Math.round(price - (price / 100) * discount)), item.quantity];
       }
-      return [Math.round(price), item.quantity];
+      return [getPriceWithCurrency(price), item.quantity];
     });
-    return newArr.reduce(
-      (acc, item) => acc + getPriceWithCurrency(calcPriceForCart(item[0], item[1])),
-      0
-    );
+    return newArr.reduce((acc, item) => {
+      const [itemPrice, itemQuantity] = item;
+      return acc + calcPriceForCart(itemPrice, itemQuantity);
+    }, 0);
   };
 
   const getProductPriceWithPromoCode = (id, promoCode) => {

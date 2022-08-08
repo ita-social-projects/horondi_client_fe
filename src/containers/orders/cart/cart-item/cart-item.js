@@ -146,10 +146,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     setCurrentSize(itemData.sizeAndPrice.size._id);
 
     if (promoCode) {
-      setCurrentPrice(getProductPriceWithPromoCode(item.id, promoCode));
-    } else {
-      setCurrentPrice(getProductPrice(item.id));
+      return setCurrentPrice(getProductPriceWithPromoCode(item.id, promoCode));
     }
+    setCurrentPrice(getProductPrice(item.id));
   }, [promoCode, currency, item, getProductPriceWithPromoCode, getProductPrice, getCartItem]);
 
   const onDeleteItem = () => {
@@ -159,27 +158,19 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
 
   const totalProductPrice = () => {
     if (promoCode) {
-      const { categories } = promoCode.getPromoCodeByCode;
-      const isAllowCategory = categories.find((el) => el === cartItem?.category.code);
-
-      if (isAllowCategory) {
-        return (
-          <div className={styles.promo}>
-            <s>
-              {currencySign}
-              {Math.round(
-                calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)
-              )}
-            </s>
-            <span>
-              {currencySign}
-              {calcPriceForCart(currentPrice, inputValue)}
-            </span>
-          </div>
-        );
-      }
+      return (
+        <div className={styles.promo}>
+          <s>
+            {currencySign}
+            {calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)}
+          </s>
+          <span>
+            {currencySign}
+            {calcPriceForCart(currentPrice, inputValue)}
+          </span>
+        </div>
+      );
     }
-
     return (
       <>
         {currencySign}

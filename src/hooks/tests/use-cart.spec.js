@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useCart } from '../use-cart';
-import { mockItem, mockPromoCode, sizeAndPrice } from './use-cart.variables';
+import { mockItem, mockPromoCode, mockCertificate, sizeAndPrice } from './use-cart.variables';
 import CartContextProvider from '../../context/cart-context';
 
 const wrapper = ({ children }) => <CartContextProvider>{children}</CartContextProvider>;
@@ -40,6 +40,17 @@ describe('use-cart tests', () => {
 
     expect(res).toBe(90);
   });
+
+  it('should return total price with certificate', () => {
+    act(() => {
+      res =
+        wrap.result.current.cartOperations.getTotalPrice() -
+        mockCertificate.getCertificateByParams.value;
+    });
+
+    expect(res).toBe(83);
+  });
+
   it('should return product price with promo code', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPriceWithPromoCode(
@@ -50,6 +61,18 @@ describe('use-cart tests', () => {
 
     expect(res).toBe(90);
   });
+
+  it('should return total save price with certificate', () => {
+    act(() => {
+      const price =
+        wrap.result.current.cartOperations.getTotalPrice() -
+        mockCertificate.getCertificateByParams.value;
+      res = wrap.result.current.cartOperations.getTotalPrice() - price;
+    });
+
+    expect(res).toBe(17);
+  });
+
   it('should return product price', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getProductPrice(mockItem.id, 0);

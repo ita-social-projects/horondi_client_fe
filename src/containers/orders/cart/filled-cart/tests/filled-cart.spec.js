@@ -8,6 +8,7 @@ import {
   itemData,
   items,
   mockPromoCode,
+  mockCertificate,
   mockProductFromConstructor
 } from './filled-cart.variables';
 import { DollarIcon } from '../../../../../images/profile-icons';
@@ -40,7 +41,7 @@ jest.mock('../../../../../hooks/use-currency', () => ({
   })
 }));
 
-const mocks = [mockPromoCode, mockProductFromConstructor];
+const mocks = [mockPromoCode, mockCertificate, mockProductFromConstructor];
 
 describe('Filled cart component tests', () => {
   it('should calculate total price with promo code', async () => {
@@ -60,6 +61,29 @@ describe('Filled cart component tests', () => {
 
     const input = document.querySelector('input');
     fireEvent.change(input, { target: { value: 'test' } });
+    const button = screen.getByTestId('promoButton');
+    fireEvent.click(button);
+
+    expect(mockGetTotalPrice).toHaveBeenCalled();
+  });
+
+  it('should calculate total price with certificate', async () => {
+    useSelector.mockImplementation(() => ({
+      cartLoading: false,
+      currency: 0
+    }));
+
+    render(
+      <Router>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <FilledCart items={items} cartOperations={mockCartOperations} />
+        </MockedProvider>
+      </Router>
+    );
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    const input = document.querySelector('input');
+    fireEvent.change(input, { target: { value: 'HOR40315176' } });
     const button = screen.getByTestId('promoButton');
     fireEvent.click(button);
 

@@ -17,6 +17,8 @@ import { selectLocation } from '../../utils/multiple.selectors';
 import { SnackBarContextProvider } from '../../context/snackbar-context';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import CurrencyContextProvider from '../../context/currency-context';
+import WishlistContextProvider from '../../context/wishlist-context';
+import CartContextProvider from '../../context/cart-context';
 
 const App = () => {
   const [appTheme, setAppTheme] = useState(true);
@@ -50,9 +52,13 @@ const App = () => {
           <CategoriesContextProvider>
             <SnackBarContextProvider>
               <CurrencyContextProvider>
-                <CssBaseline />
-                <Routes />
-                <Chat />
+                <WishlistContextProvider>
+                  <CartContextProvider>
+                    <CssBaseline />
+                    <Routes />
+                    <Chat />
+                  </CartContextProvider>
+                </WishlistContextProvider>
               </CurrencyContextProvider>
             </SnackBarContextProvider>
           </CategoriesContextProvider>

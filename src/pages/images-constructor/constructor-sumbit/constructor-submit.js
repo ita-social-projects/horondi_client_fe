@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
@@ -12,13 +12,10 @@ import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
-const ConstructorSubmit = ({ isWishful, constructorValues, sizeAndPrice, allSizes }) => {
+const ConstructorSubmit = ({ constructorValues, sizeAndPrice }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { userData } = useSelector(({ User }) => ({
-    userData: User.userData
-  }));
-  const { cartOperations, isInCart } = useCart(userData);
+  const { cartOperations, isInCart } = useCart();
 
   const { t } = useTranslation();
 

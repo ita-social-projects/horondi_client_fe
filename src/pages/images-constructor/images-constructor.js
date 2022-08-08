@@ -297,11 +297,7 @@ const ImagesConstructor = () => {
                 {getCurrencySign()}
               </span>
             </h2>
-            <ConstructorSubmit
-              constructorValues={constructorValues}
-              sizeAndPrice={sizeAndPrice}
-              allSizes={currentConstructorModel.current.sizes}
-            />
+            <ConstructorSubmit constructorValues={constructorValues} sizeAndPrice={sizeAndPrice} />
           </div>
         </div>
       </div>

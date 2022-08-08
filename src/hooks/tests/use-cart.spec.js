@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useCart } from '../use-cart';
 import { mockItem, mockPromoCode, mockCertificate, sizeAndPrice } from './use-cart.variables';
+import CartContextProvider from '../../context/cart-context';
 
-const dispatch = jest.fn();
+const wrapper = ({ children }) => <CartContextProvider>{children}</CartContextProvider>;
 const mockGetPriceWithCurrency = jest.fn((price) => price);
-jest.mock('react-redux');
 
 jest.mock('../use-currency', () => ({
   useCurrency: () => ({
@@ -13,13 +13,11 @@ jest.mock('../use-currency', () => ({
   })
 }));
 
-useDispatch.mockImplementation(() => dispatch);
-
 describe('use-cart tests', () => {
   let wrap;
   let res;
   beforeEach(() => {
-    wrap = renderHook(useCart);
+    wrap = renderHook(() => useCart(), { wrapper });
   });
   it('should add item to cart', () => {
     act(() => {

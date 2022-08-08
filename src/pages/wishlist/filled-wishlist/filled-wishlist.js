@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
 import Modal from '../../../components/modal';
@@ -15,14 +15,11 @@ import { useCart } from '../../../hooks/use-cart';
 import { useWishlist } from '../../../hooks/use-wishlist';
 
 const FilledWishlist = ({ items }) => {
-  const { userData } = useSelector(({ User }) => ({
-    userData: User.userData
-  }));
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const [wishlist, setWishlist] = useState(items || []);
   const [similarProductsList, setSimilarProductsList] = useState([]);
-  const { cartOperations, isInCart } = useCart(userData);
+  const { cartOperations, isInCart } = useCart();
 
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();

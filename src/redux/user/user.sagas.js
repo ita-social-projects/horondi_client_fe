@@ -51,13 +51,12 @@ import {
   USER_IS_BLOCKED,
   USER_TOKENS,
   AUTH_ERRORS,
-  newCartKey,
   WISHLIST_KEY
 } from '../../configs';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
-import { setCart, setNewWishlist } from '../common-store/common.actions';
+import { setNewWishlist } from '../common-store/common.actions';
 import i18n from '../../i18n';
 
 const { pathToLogin } = routes;
@@ -181,8 +180,6 @@ export function* handleUserPreserve() {
     const user = yield call(getUserByToken);
     const purchasedProducts = yield call(getPurchasedProducts, user._id);
     yield put(setUser({ ...user, purchasedProducts }));
-    const cartFromLc = getFromLocalStorage(newCartKey);
-    yield put(setCart(cartFromLc));
   } catch (e) {
     yield call(handleUserError, e);
   } finally {

@@ -1,4 +1,4 @@
-import { SET_CART , SET_WISHLIST } from './common.types';
+import { SET_CART, SET_WISHLIST } from './common.types';
 
 export const initialState = {
   cart: [],

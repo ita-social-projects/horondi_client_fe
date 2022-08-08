@@ -14,6 +14,12 @@ jest.mock('react-router', () => ({
 }));
 React.useContext = mockUseContext;
 
+jest.mock('../../../hooks/use-cart', () => ({
+  useCart: () => ({
+    cart: [{ id: '84d7' }]
+  })
+}));
+
 const state = {
   currency: 0,
   loading: false,

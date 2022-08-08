@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
@@ -16,10 +16,7 @@ const { pathToCart } = routes;
 const ProductSubmit = ({ setSizeIsNotSelectedError, product, disabled, productToSend }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const { userData } = useSelector(({ User }) => ({
-    userData: User.userData
-  }));
-  const { cartOperations, isInCart } = useCart(userData);
+  const { cartOperations, isInCart } = useCart();
   const { t } = useTranslation();
 
   const isItemInCart = isInCart(productToSend.product._id, productToSend.options.size._id);

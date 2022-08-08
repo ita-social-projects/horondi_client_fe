@@ -52,7 +52,6 @@ describe('Constructor submit tests', () => {
       <ThemeProvider theme={themeValue}>
         <ConstructorSubmit
           product={constructorValues}
-          isWishful={false}
           constructorValues={constructorValues}
           sizeAndPrice={{}}
         />

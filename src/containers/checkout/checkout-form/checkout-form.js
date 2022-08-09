@@ -109,7 +109,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
         dispatch(addPaymentMethod(checkoutPayMethod.card));
         dispatch(
           getFondyData({
-            order: orderInputData(data, deliveryType, cartItems, countryOption),
+            order: orderInputData(data, deliveryType, cartItems, countryOption, _id),
             currency
           })
         );
@@ -163,10 +163,12 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
                       onChange={handleChange}
                       error={handleError(touched[field.name], errors[field.name])}
                       InputProps={
-                        field.name === 'phoneNumber' && {
-                          maxLength: 9,
-                          startAdornment: <InputAdornment position='start'>+380</InputAdornment>
-                        }
+                        field.name === 'phoneNumber'
+                          ? {
+                            maxLength: 9,
+                            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+                          }
+                          : {}
                       }
                     />
                     {touched[field.name] && errors[field.name] && (

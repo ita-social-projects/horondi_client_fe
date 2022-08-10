@@ -70,6 +70,8 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
     }
   }, [values.stateOrProvince]);
 
+  const getOptionSelected = (option, value) => option === value || value === '';
+
   return (
     <div className={styles.worldwide}>
       <p className={styles.topUkrpost}>{t('checkout.worldWideDelivery.topUkrpost')}</p>
@@ -120,7 +122,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
         <Autocomplete
           className={styles.addressInput}
           options={countryOptions}
-          getOptionSelected={(option, value) => option === value || value === ''}
+          getOptionSelected={getOptionSelected}
           value={values.worldWideCountry}
           inputValue={countryInputState}
           onInputChange={(_, value) => setCountryInput(value)}
@@ -141,7 +143,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
           className={styles.addressInput}
           options={statesOptions}
           value={values.stateOrProvince}
-          getOptionSelected={(option, value) => option === value || value === ''}
+          getOptionSelected={getOptionSelected}
           inputValue={stateOrProvinceInput}
           onInputChange={(_, value) => setStateOrProvinceInput(value)}
           onChange={(_, value) => setFieldValue('stateOrProvince', value || '')}
@@ -158,7 +160,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
         <Autocomplete
           className={styles.addressInput}
           options={citiesOptions}
-          getOptionSelected={(option, value) => option === value || value === ''}
+          getOptionSelected={getOptionSelected}
           inputValue={values.worldWideCity}
           onInputChange={(_, value, reason) => {
             handleCityInputChange(value, reason);

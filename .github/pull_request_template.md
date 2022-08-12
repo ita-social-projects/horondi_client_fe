@@ -11,6 +11,6 @@ Please include a summary of the change and which issue is fixed. Please also inc
 ### Checklist
 
 - [ ] 🔽 My branch is up-to-date with "development" branch
-- [ ] ✅All tests passed locally
+- [ ] ✅All tests passed locally and lint ran successfully
 - [ ] ✨My changes working with up-to-date admin and back-end part locally, like charm
 - [ ] 🔗 Link pull request to issue

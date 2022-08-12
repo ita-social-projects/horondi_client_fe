@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 
 import { useAppStyles } from '../../components/app/app.styles';
-import { getAllCertificates } from './operations/my-certificates.queries';
+import { getAllUserCertificates } from './operations/my-certificates.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import EmptyCertificates from '../../containers/my-certificates/empty-certificates';
 import FilledCertificates from '../../containers/my-certificates/filled-certificates/filled-certificates';
@@ -15,14 +15,15 @@ const MyCertificates = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const appStyles = useAppStyles();
 
-  const { loading, error } = useQuery(getAllCertificates, {
+  const { loading, error } = useQuery(getAllUserCertificates, {
+    fetchPolicy: 'network-only',
     variables: {
       limit: CERTIFICATES_LIMIT,
       skip: (currentPage - 1) * CERTIFICATES_LIMIT
     },
     onCompleted: (data) => {
-      setCertificates(data.getAllCertificates.items);
-      setCount(data.getAllCertificates.count);
+      setCertificates(data.getAllUserCertificates.items);
+      setCount(data.getAllUserCertificates.count);
     }
   });
 

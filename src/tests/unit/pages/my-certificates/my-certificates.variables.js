@@ -1,8 +1,8 @@
-import { getAllCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
+import { getAllUserCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
 
 export const certificateMock1 = {
   request: {
-    query: getAllCertificates,
+    query: getAllUserCertificates,
     variables: {
       limit: 5,
       skip: (1 - 1) * 5
@@ -10,7 +10,7 @@ export const certificateMock1 = {
   },
   result: {
     data: {
-      getAllCertificates: {
+      getAllUserCertificates: {
         __typename: 'PaginatedCertificate',
         items: [
           {
@@ -42,7 +42,7 @@ export const certificateMock1 = {
 
 export const certificateMock2 = {
   request: {
-    query: getAllCertificates,
+    query: getAllUserCertificates,
     variables: {
       limit: 5,
       skip: (1 - 1) * 5
@@ -50,7 +50,7 @@ export const certificateMock2 = {
   },
   result: {
     data: {
-      getAllCertificates: {
+      getAllUserCertificates: {
         __typename: 'PaginatedCertificate',
         items: [
           {
@@ -82,7 +82,7 @@ export const certificateMock2 = {
 
 export const certificateMock3 = {
   request: {
-    query: getAllCertificates,
+    query: getAllUserCertificates,
     variables: {
       limit: 5,
       skip: (1 - 1) * 5
@@ -90,7 +90,7 @@ export const certificateMock3 = {
   },
   result: {
     data: {
-      getAllCertificates: {
+      getAllUserCertificates: {
         __typename: 'PaginatedCertificate',
         items: [
           {

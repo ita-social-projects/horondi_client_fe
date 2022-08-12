@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
+import { InputAdornment } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 import { useStyles } from './search-bar.styles';
 import { getFilteredProductsQuery } from '../../pages/product-list-page/operations/product-list.queries';
 import SearchIcon from './SearchIcon';
 import useDebounce from '../../hooks/use-debounce';
-import { InputAdornment } from '@material-ui/core';
-import ClearIcon from '@material-ui/icons/Clear';
 
 const SearchBar = ({
   searchParams,
@@ -73,7 +73,7 @@ const SearchBar = ({
 
   const textFieldClear = () => {
     setSearchValue('');
-  }
+  };
 
   return (
     <div className={mainClass}>
@@ -84,13 +84,21 @@ const SearchBar = ({
         onFocus={handleOnFocus}
         onChange={searchHandler || handleSearch}
         InputProps={{
-          inputProps:{ maxLength: 20 },
-          startAdornment: <InputAdornment position='end' >
-            <SearchIcon />
-          </InputAdornment>,
-          endAdornment: <InputAdornment position='start' >
-          <ClearIcon data-testid="clear-icon"  className={styles.clearInputIcon} onClick={textFieldClear} />
-        </InputAdornment> 
+          inputProps: { maxLength: 20 },
+          startAdornment: (
+            <InputAdornment position='end'>
+              <SearchIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position='start'>
+              <ClearIcon
+                data-testid='clear-icon'
+                className={styles.clearInputIcon}
+                onClick={textFieldClear}
+              />
+            </InputAdornment>
+          )
         }}
       />
     </div>

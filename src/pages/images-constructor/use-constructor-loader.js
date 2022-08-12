@@ -32,7 +32,8 @@ const useConstructorLoader = () => {
     if (constructors) {
       allModels.current = constructors.getAllConstructors.items.map((item) => item.model);
       setConstructorModel(constructors.getAllConstructors.items[0].model._id);
-      currentConstructorModel.current = constructors.getAllConstructors.items[0];
+      const [firstItem] = constructors.getAllConstructors.items;
+      currentConstructorModel.current = firstItem;
     }
   }, [constructors]);
 

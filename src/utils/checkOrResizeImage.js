@@ -10,11 +10,9 @@ export const checkOrResizeImage = (
   const canvasCtx = canvas.getContext('2d');
   let width = originalImage.naturalWidth;
   let height = originalImage.naturalHeight;
-  if (width >= height) {
-    if (width > maxWidth) {
-      height *= maxWidth / width;
-      width = maxWidth;
-    }
+  if (width >= height && width > maxWidth) {
+    height *= maxWidth / width;
+    width = maxWidth;
   } else if (height >= maxHeight) {
     width *= maxHeight / height;
     height = maxHeight;

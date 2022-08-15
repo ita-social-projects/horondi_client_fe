@@ -55,7 +55,6 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const { clearCart } = cartOperations;
   const dispatch = useDispatch();
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
@@ -118,7 +117,6 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
         dispatch(addPaymentMethod(checkoutPayMethod.cash));
       }
       clearSessionStorage();
-      clearCart();
     }
   });
 

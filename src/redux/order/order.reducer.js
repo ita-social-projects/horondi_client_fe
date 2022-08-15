@@ -1,9 +1,10 @@
-import { SET_ORDER, SET_IS_ORDER_CREATED, SET_LOADING } from './order.types';
+import { SET_ORDER, SET_IS_ORDER_CREATED, SET_LOADING, SET_CLEAR_CART } from './order.types';
 
 const initialState = {
   loading: false,
   order: null,
-  isOrderCreated: false
+  isOrderCreated: false,
+  shouldClearCart: false
 };
 
 export const orderReducer = (state = initialState, action = {}) => {
@@ -22,6 +23,11 @@ export const orderReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: action.payload
+      };
+    case SET_CLEAR_CART:
+      return {
+        ...state,
+        shouldClearCart: action.payload
       };
     default:
       return state;

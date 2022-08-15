@@ -6,13 +6,14 @@ import { useLazyQuery, useSubscription } from '@apollo/client';
 import { orderDataToLS } from '../../utils/order';
 import { useStyles } from './thanks-page.styles';
 import ThanksCard from './thanks-card';
-import { getOrder, setOrder } from '../../redux/order/order.actions';
+import { getOrder, setOrder, getClearCart } from '../../redux/order/order.actions';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { Loader } from '../../components/loader/loader';
 import { deliveryTypes, ORDER_NUMBER_LENGTH } from '../../configs';
 import { orderPaidSubscription, sendOrderToEmail } from '../../redux/order/order.operations';
 import { checkoutPayMethod } from '../../containers/checkout/checkout-form/const';
+import { useCart } from '../../hooks/use-cart';
 
 const { pathToMain } = routes;
 
@@ -20,14 +21,18 @@ const ThanksPage = () => {
   const router = useLocation();
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const { cartOperations } = useCart();
+
+  const { clearCart } = cartOperations;
 
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const [paidOrderLoading, setLoading] = useState(true);
 
-  const { order, loading, user } = useSelector(({ Order, User }) => ({
+  const { order, loading, shouldClearCart, user } = useSelector(({ Order, User }) => ({
     order: Order.order,
     loading: Order.loading,
+    shouldClearCart: Order.shouldClearCart,
     user: User.userData
   }));
 
@@ -47,6 +52,7 @@ const ThanksPage = () => {
     }) => {
       dispatch(setOrder(paidOrder));
       setToLocalStorage(orderDataToLS.order, paidOrder);
+      dispatch(getClearCart());
       sendPaidOrderToEmail({
         variables: {
           language,
@@ -60,13 +66,16 @@ const ThanksPage = () => {
   useEffect(() => {
     if (paymentMethod === checkoutPayMethod.cash) {
       dispatch(getOrder());
+      dispatch(getClearCart());
     }
-  }, [dispatch, language, user]);
+    if (shouldClearCart) {
+      clearCart();
+    }
+  }, [dispatch, language, user, shouldClearCart]);
 
   if ((paymentMethod === checkoutPayMethod.card && paidOrderLoading) || loading) {
     return <Loader data-testid='loader' />;
   }
-
   const getDeliveryAddress = (orderPayload) => {
     const deliveryType = orderPayload?.delivery.sentBy;
     const courierOffice = orderPayload?.delivery.courierOffice;

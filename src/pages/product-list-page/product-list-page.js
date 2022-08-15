@@ -10,6 +10,7 @@ import Drawer from '@material-ui/core/Drawer';
 import { useHistory, useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
 
+import { useSelector } from 'react-redux';
 import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
@@ -21,6 +22,7 @@ import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import getSortParamsFromQuery from '../../utils/getSortParamsFromQuery';
 import getFilterParamsFromQuery from '../../utils/getFilterParamsFromQuery';
 import { BackpackIcon } from '../../images/backpack-icon';
+import { useCart } from '../../hooks/use-cart';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
@@ -31,6 +33,9 @@ const ProductListPage = ({ width }) => {
   const styles = useStyles();
   const history = useHistory();
   const [products, setProducts] = useState([]);
+  const { cartOperations } = useCart();
+
+  const { clearCart } = cartOperations;
 
   const [paginationParams, setPaginationParams] = useState({
     pagesCount: 1,
@@ -41,6 +46,10 @@ const ProductListPage = ({ width }) => {
   const [sortParams, setSortParams] = useState(() => getSortParamsFromQuery(sortParamsFromQuery));
   const [filterParams, setFilterParams] = useState(() => getFilterParamsFromQuery(searchParams));
   const [filterMenuStatus, setFilterMenuStatus] = useState(false);
+
+  const { shouldClearCart } = useSelector(({ Order }) => ({
+    shouldClearCart: Order.shouldClearCart
+  }));
 
   const { pagesCount, currentPage, countPerPage } = paginationParams;
 
@@ -68,6 +77,12 @@ const ProductListPage = ({ width }) => {
   useEffect(() => {
     setSearchParams(new URLSearchParams(search));
   }, [search]);
+
+  useEffect(() => {
+    if (shouldClearCart) {
+      clearCart();
+    }
+  }, [shouldClearCart]);
 
   useEffect(() => {
     setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));

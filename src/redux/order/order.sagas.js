@@ -2,9 +2,15 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import { setError } from '../error/error.actions';
-import { setOrderLoading, setIsOrderCreated, setOrder } from './order.actions';
+import { setOrderLoading, setIsOrderCreated, setOrder, setClearCart } from './order.actions';
 import { addOrder, getPaymentCheckout } from './order.operations';
-import { ADD_ORDER, GET_ORDER, GET_FONDY_DATA, ADD_PAYMENT_METHOD } from './order.types';
+import {
+  ADD_ORDER,
+  GET_ORDER,
+  GET_FONDY_DATA,
+  ADD_PAYMENT_METHOD,
+  GET_CLEAR_CART
+} from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
@@ -34,6 +40,10 @@ export function* handleGetCreatedOrder() {
 
   yield put(setOrder(orderData));
   yield put(setOrderLoading(false));
+}
+
+export function* handleGetClearCart() {
+  yield put(setClearCart(true));
 }
 
 export function* handleGetFondyUrl({ payload }) {
@@ -91,4 +101,5 @@ export default function* orderSaga() {
   yield takeEvery(GET_ORDER, handleGetCreatedOrder);
   yield takeEvery(GET_FONDY_DATA, handleGetFondyUrl);
   yield takeEvery(ADD_PAYMENT_METHOD, handleSetPaymentMethod);
+  yield takeEvery(GET_CLEAR_CART, handleGetClearCart);
 }

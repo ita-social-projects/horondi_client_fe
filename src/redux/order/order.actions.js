@@ -1,8 +1,10 @@
 import {
   SET_LOADING,
   SET_ORDER,
+  SET_CLEAR_CART,
   SET_IS_ORDER_CREATED,
   GET_ORDER,
+  GET_CLEAR_CART,
   ADD_ORDER,
   GET_FONDY_DATA,
   ADD_PAYMENT_METHOD
@@ -10,6 +12,10 @@ import {
 
 export const setOrder = (payload) => ({
   type: SET_ORDER,
+  payload
+});
+export const setClearCart = (payload) => ({
+  type: SET_CLEAR_CART,
   payload
 });
 export const addOrder = (payload) => ({
@@ -28,7 +34,9 @@ export const setIsOrderCreated = (payload) => ({
 export const getOrder = () => ({
   type: GET_ORDER
 });
-
+export const getClearCart = () => ({
+  type: GET_CLEAR_CART
+});
 export const getFondyData = (payload) => ({
   type: GET_FONDY_DATA,
   payload

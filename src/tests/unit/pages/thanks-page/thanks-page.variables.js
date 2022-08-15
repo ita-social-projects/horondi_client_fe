@@ -70,6 +70,7 @@ export const state = {
   isLightTheme: true,
   language: 1,
   loading: false,
+  shouldClearCart: false,
   currency: 0,
   order,
   user: {}

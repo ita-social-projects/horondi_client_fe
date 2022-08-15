@@ -11,6 +11,7 @@ import ProductListPage from '../../../../pages/product-list-page/product-list-pa
 import { DollarIcon } from '../../../../images/profile-icons';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
+const mockClearCart = jest.fn(() => []);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const history = createMemoryHistory();
 const themeValue = theme('light');
@@ -41,6 +42,13 @@ jest.mock('../../../../hooks/use-currency', () => ({
   useCurrency: () => ({
     getPriceWithCurrency: mockGetPriceWithCurrency,
     getCurrencySign: mockGetCurrencySign
+  })
+}));
+
+jest.mock('../../../../hooks/use-cart', () => ({
+  useCart: () => ({
+    cart: [{ id: '84d7', quantity: 1 }],
+    cartOperations: { clearCart: mockClearCart }
   })
 }));
 

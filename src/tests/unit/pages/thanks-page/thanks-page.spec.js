@@ -15,6 +15,12 @@ jest.mock('../../../../pages/thanks-page/thanks-card/thanks-card.styles.js', () 
 }));
 jest.mock('react-redux');
 jest.mock('../../../../services/local-storage.service');
+jest.mock('../../../../hooks/use-cart', () => ({
+  useCart: () => ({
+    cart: [{ id: '84d7', quantity: 1 }],
+    cartOperations: { clearCart: jest.fn(() => []) }
+  })
+}));
 
 const dispatch = jest.fn();
 

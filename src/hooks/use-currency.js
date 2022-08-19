@@ -19,12 +19,12 @@ export const useCurrency = () => {
   const getBaseCurrencyPrice = (value) =>
     Math.round(value / currencies[currentCurrency].exchangeRate);
 
-  const getPriceInDollars = (value) => Math.round(value / currencies.UAH.exchangeRate);
+  const getCertificatePriceInUSD = (value) => Math.round(value / currencies.UAH.exchangeRate);
 
   return {
     getPriceWithCurrency,
     getCurrencySign,
     getBaseCurrencyPrice,
-    getPriceInDollars
+    getCertificatePriceInUSD
   };
 };

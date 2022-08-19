@@ -5,7 +5,7 @@ import { calcPriceForCart } from '../utils/priceCalculating';
 import { useCurrency } from './use-currency';
 
 export const useCart = () => {
-  const { getPriceWithCurrency, getPriceInDollars } = useCurrency();
+  const { getPriceWithCurrency, getCertificatePriceInUSD } = useCurrency();
 
   const { cart, setCart } = useContext(CartContext);
 
@@ -25,7 +25,7 @@ export const useCart = () => {
   const getTotalPriceWithCertificate = (certificate) => {
     const { value } = certificate.getCertificateByParams;
     if (currency === 'USD') {
-      return getTotalPrice() - getPriceInDollars(value);
+      return getTotalPrice() - getCertificatePriceInUSD(value);
     }
     return getTotalPrice() - value;
   };

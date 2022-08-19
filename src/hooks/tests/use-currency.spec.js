@@ -34,6 +34,6 @@ describe('use-currency tests', () => {
   });
 
   it('should return price in usd', () => {
-    expect(renderedHook.result.current.getPriceInDollars(1000)).toEqual(33);
+    expect(renderedHook.result.current.getCertificatePriceInUSD(1000)).toEqual(33);
   });
 });

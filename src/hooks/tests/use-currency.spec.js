@@ -32,4 +32,8 @@ describe('use-currency tests', () => {
   it('should return base price', () => {
     expect(renderedHook.result.current.getBaseCurrencyPrice(900)).toEqual(30);
   });
+
+  it('should return price in usd', () => {
+    expect(renderedHook.result.current.getPriceInDollars(1000)).toEqual(33);
+  });
 });

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const baseStyles = {
   '& .MuiFormControl-root': {
-    width: '100%',
+    width: '100%'
   },
   '& .MuiInputBase-root': {
     width: '350px',
@@ -16,7 +16,7 @@ const baseStyles = {
       width: '180px'
     },
     '@media (max-width: 556px)': {
-      width: '100%',
+      width: '100%'
     }
   },
   '& .MuiInput-input': {
@@ -89,4 +89,3 @@ export const useStyles = makeStyles((theme, color) => ({
     }
   })
 }));
-

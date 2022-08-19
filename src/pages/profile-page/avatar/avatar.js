@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, FormHelperText } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-
 import { CameraIcon } from '../../../images/profile-icons';
 import { useStyles } from './avatar.styles';
 

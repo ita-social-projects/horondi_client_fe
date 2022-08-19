@@ -158,18 +158,23 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
 
   const totalProductPrice = () => {
     if (promoCode) {
-      return (
-        <div className={styles.promo}>
-          <s>
-            {currencySign}
-            {calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)}
-          </s>
-          <span>
-            {currencySign}
-            {calcPriceForCart(currentPrice, inputValue)}
-          </span>
-        </div>
-      );
+      const { categories } = promoCode.getPromoCodeByCode;
+      const isAllowCategory = categories.find((item) => item === cartItem?.category.code);
+
+      if (isAllowCategory) {
+        return (
+          <div className={styles.promo}>
+            <s>
+              {currencySign}
+              {calcPriceForCart(getPriceWithCurrency(item.sizeAndPrice.price), inputValue)}
+            </s>
+            <span>
+              {currencySign}
+              {calcPriceForCart(currentPrice, inputValue)}
+            </span>
+          </div>
+        );
+      }
     }
     return (
       <>

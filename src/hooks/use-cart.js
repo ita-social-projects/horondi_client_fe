@@ -1,12 +1,15 @@
 import { useContext } from 'react';
 import { CartContext } from '../context/cart-context';
+import { CurrencyContext } from '../context/currency-context';
 import { calcPriceForCart } from '../utils/priceCalculating';
 import { useCurrency } from './use-currency';
 
 export const useCart = () => {
-  const { getPriceWithCurrency } = useCurrency();
+  const { getPriceWithCurrency, getCertificatePriceInUSD } = useCurrency();
 
   const { cart, setCart } = useContext(CartContext);
+
+  const { currency } = useContext(CurrencyContext);
 
   const addToCart = (item) => {
     setCart((prevCart) => [item, ...prevCart]);
@@ -18,6 +21,14 @@ export const useCart = () => {
 
   const getCartItem = (id) =>
     cart.find((cartItem) => cartItem.id === id || cartItem.productId === id);
+
+  const getTotalPriceWithCertificate = (certificate) => {
+    const { value } = certificate.getCertificateByParams;
+    if (currency === 'USD') {
+      return getTotalPrice() - getCertificatePriceInUSD(value);
+    }
+    return getTotalPrice() - value;
+  };
 
   const getTotalPricesWithPromoCode = (promoCode) => {
     const { discount, categories } = promoCode.getPromoCodeByCode;
@@ -121,6 +132,7 @@ export const useCart = () => {
     changeSizeConstructor,
     getProductPriceWithPromoCode,
     getTotalPricesWithPromoCode,
+    getTotalPriceWithCertificate,
     getProductPrice
   };
 

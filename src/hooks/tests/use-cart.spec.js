@@ -43,9 +43,7 @@ describe('use-cart tests', () => {
 
   it('should return total price with certificate', () => {
     act(() => {
-      res =
-        wrap.result.current.cartOperations.getTotalPrice() -
-        mockCertificate.getCertificateByParams.value;
+      res = wrap.result.current.cartOperations.getTotalPriceWithCertificate(mockCertificate);
     });
 
     expect(res).toBe(83);

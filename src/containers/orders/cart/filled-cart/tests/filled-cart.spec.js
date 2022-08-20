@@ -23,7 +23,9 @@ const mockGetCartItem = jest.fn(() => itemData);
 const mockGetProductPrice = jest.fn(() => 1100);
 const mockGetTotalPricesWithPromoCode = jest.fn(() => '41');
 const mockGetProductPriceWithPromoCode = jest.fn(() => 1000);
+const mockGetTotalPriceWithCertificate = jest.fn(() => '39');
 const mockGetPriceWithCurrency = jest.fn(() => 200);
+const mockgetCertificatePriceInUSD = jest.fn(() => 14);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 
 const mockCartOperations = {
@@ -31,13 +33,15 @@ const mockCartOperations = {
   getCartItem: mockGetCartItem,
   getProductPrice: mockGetProductPrice,
   getTotalPricesWithPromoCode: mockGetTotalPricesWithPromoCode,
-  getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode
+  getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
+  getTotalPriceWithCertificate: mockGetTotalPriceWithCertificate
 };
 
 jest.mock('../../../../../hooks/use-currency', () => ({
   useCurrency: () => ({
     getPriceWithCurrency: mockGetPriceWithCurrency,
-    getCurrencySign: mockGetCurrencySign
+    getCurrencySign: mockGetCurrencySign,
+    getCertificatePriceInUSD: mockgetCertificatePriceInUSD
   })
 }));
 

@@ -68,7 +68,8 @@ const FilledCart = ({ items, cartOperations }) => {
   };
 
   const currencySign = getCurrencySign();
-  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode } = cartOperations;
+  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode, getTotalPriceWithCertificate } =
+    cartOperations;
 
   const checkPromoOrCertificate = () => {
     const searchValue = new RegExp(/^HOR/, 'i');
@@ -86,7 +87,7 @@ const FilledCart = ({ items, cartOperations }) => {
   useLayoutEffect(() => {
     if (certificateData) {
       setDisable(true);
-      return setPrice(getTotalPrice() - certificateData.getCertificateByParams.value);
+      return setPrice(getTotalPriceWithCertificate(certificateData));
     }
     if (promoCode) {
       setDisable(true);

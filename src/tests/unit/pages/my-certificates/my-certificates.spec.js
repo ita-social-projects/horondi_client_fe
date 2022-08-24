@@ -26,6 +26,13 @@ jest.mock(
   })
 );
 
+jest.mock(
+  '../../../../containers/my-certificates/cetrificate-item/certificate-item.styles.js',
+  () => ({
+    useStyles: () => ({})
+  })
+);
+
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
   useTheme: () => ({

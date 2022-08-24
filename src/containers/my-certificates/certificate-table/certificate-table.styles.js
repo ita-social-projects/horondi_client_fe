@@ -27,25 +27,21 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   table: {
     width: '100%',
-    '@media (max-width: 700px)': {
+    '@media (max-width: 760px)': {
       maxWidth: '600px',
       overflowX: 'auto'
     },
     '& td': {
-      padding: '24px 0px',
+      padding: '24px 13px',
       lineHeight: '28px',
-      fontSize: '20px',
+      fontSize: '19px',
       fontWeight: 400,
       '@media (max-width: 700px)': {
         fontSize: '15px',
         lineHeight: '20px'
       }
     },
-    '& td:last-child': {
-      color: palette
-    },
     '& td:first-child': {
-      textAlign: 'left',
       '& img': {
         '@media (max-width: 700px)': {
           width: '134px',
@@ -60,11 +56,14 @@ export const useStyles = makeStyles(({ palette }) => ({
     borderTopStyle: 'solid',
     borderTopColor: palette.cart.borderColor,
     '& >th': {
-      padding: '10px 0',
+      padding: '10px 15px',
       fontSize: '14px',
       fontWeight: 600,
       lineHeight: '20px',
       textAlign: 'left'
+    },
+    '& >th:last-child': {
+      paddingLeft: '40px'
     }
   }
 }));

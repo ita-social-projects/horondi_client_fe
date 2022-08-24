@@ -10,6 +10,13 @@ jest.mock(
   })
 );
 
+jest.mock(
+  '../../../../../containers/my-certificates/cetrificate-item/certificate-item.styles.js',
+  () => ({
+    useStyles: () => ({})
+  })
+);
+
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key) => key,

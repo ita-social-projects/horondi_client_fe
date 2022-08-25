@@ -11,10 +11,7 @@ const CertificateTable = ({ items }) => {
   const { t } = useTranslation();
 
   const certificateItems = useMemo(
-    () =>
-      [...items]
-        .sort((a, b) => new Date(b.dateStart) - new Date(a.dateStart))
-        .map((item) => <CertificateItem item={item} key={item._id} />),
+    () => [...items].map((item) => <CertificateItem item={item} key={item._id} />),
     [items]
   );
 

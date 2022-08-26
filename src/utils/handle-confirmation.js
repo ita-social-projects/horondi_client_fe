@@ -4,7 +4,7 @@ import i18next from 'i18next';
 export const handleMessage = (error) =>
   error ? (
     <>
-      <h3>{error}</h3>
+      <h3>{i18next.t(error)}</h3>
     </>
   ) : (
     <>

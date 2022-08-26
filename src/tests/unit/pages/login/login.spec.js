@@ -119,7 +119,7 @@ describe('Login page test', () => {
       </SnackBarContextProvider>
     );
 
-    const form = getByText(/wrongCredentials/i);
+    const form = getByText(/ERROR/i);
     expect(form).toBeInTheDocument();
     storage.loginError = '';
   });

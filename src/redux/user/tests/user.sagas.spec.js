@@ -67,7 +67,6 @@ import routes from '../../../configs/routes';
 import { USER_IS_BLOCKED, AUTH_ERRORS } from '../../../configs';
 import { handleUserIsBlocked } from '../../../utils/user-helpers';
 import { clearLocalStorage } from '../../../services/local-storage.service';
-import i18n from '../../../i18n';
 
 describe('user sagas tests', () => {
   it('should handle google user login ', () =>
@@ -100,10 +99,10 @@ describe('user sagas tests', () => {
     expectSaga(handleGoogleUserLogin, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -136,10 +135,10 @@ describe('user sagas tests', () => {
     expectSaga(handleFacebookUserLogin, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -165,10 +164,10 @@ describe('user sagas tests', () => {
     expectSaga(handleUserLogin, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -197,10 +196,10 @@ describe('user sagas tests', () => {
     expectSaga(handleUserConfirm, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -229,11 +228,11 @@ describe('user sagas tests', () => {
     expectSaga(handleUserRecovery, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
         recoveryLoading: true,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -262,10 +261,10 @@ describe('user sagas tests', () => {
     expectSaga(handlePasswordReset, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -293,10 +292,10 @@ describe('user sagas tests', () => {
     expectSaga(handleUserRegister, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -332,11 +331,11 @@ describe('user sagas tests', () => {
     expectSaga(handleUserPreserve)
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
         userIsChecked: true,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -371,10 +370,10 @@ describe('user sagas tests', () => {
     expectSaga(handleUpdateUser, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -403,11 +402,11 @@ describe('user sagas tests', () => {
     expectSaga(handleSendConfirmation, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
         confirmationLoading: true,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -442,10 +441,10 @@ describe('user sagas tests', () => {
     expectSaga(handleTokenCheck, { payload: null })
       .provide([[call(handleUserError, error)]])
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run());
 
@@ -465,10 +464,10 @@ describe('user sagas tests', () => {
   it('should handle user default error', () =>
     expectSaga(handleUserError, error)
       .withReducer(userReducer)
-      .put(setUserError(i18n.t('error.userError.defaultError')))
+      .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        error: i18n.t('error.userError.defaultError')
+        error: 'error.userError.defaultError'
       })
       .run()
       .then((result) => {

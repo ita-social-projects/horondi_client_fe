@@ -72,7 +72,7 @@ const Recovery = () => {
                 variant='outlined'
                 fullWidth
                 onChange={(e) => handleChange(e) || (error && dispatch(resetState()))}
-                helperText={handleHelperText(errors.email, error)}
+                helperText={handleHelperText(errors.email, t(error))}
                 error={!!errors.email || !!error}
                 color={MATERIAL_UI_COLOR.PRIMARY}
               />

@@ -117,4 +117,4 @@ export const TEXT_FIELDS = {
   SORT: 'sort'
 };
 
-export const ROW_FIELDS = ['certificate', 'code', 'price', 'expiration', 'status'];
+export const ROW_FIELDS = ['certificate', 'code', 'price', 'expiration', 'status', 'actions'];

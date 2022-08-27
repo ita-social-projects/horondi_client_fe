@@ -5,12 +5,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%'
   },
   name: {
-    textAlign: 'left'
+    paddingTop: '3px'
   },
   itemImg: {
     height: '79px',
-    width: '168px',
-    marginRight: '25px'
+    width: '168px'
   },
   area: {
     backgroundColor: palette.backgroundColor,
@@ -24,26 +23,16 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '28px',
     pointerEvents: 'none'
   },
-  copyBtn: {
+  iconBtn: {
     backgroundColor: palette.backgroundColor,
     border: 'none'
   },
-  copyIcon: {
-    backgroundColor: palette.backgroundColor,
-    display: 'flex',
-    alignItems: 'center',
-    color: palette.lightGrayShade,
+  certificateIcon: {
+    color: palette.cart.iconColor,
     '&:hover': {
       color: palette.blue,
       cursor: 'pointer'
     }
-  },
-  code: {
-    fontWeight: '700',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'left',
-    marginRight: '25px'
   },
   item: {
     display: 'flex',
@@ -58,7 +47,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'left',
-    marginRight: '50px',
+    marginRight: '20px',
     '@media (max-width: 800px)': {
       marginRight: '35px'
     },
@@ -70,7 +59,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'left',
-    marginRight: '25px',
+    marginRight: '10px',
     '@media (max-width: 800px)': {
       marginRight: '8px'
     }
@@ -92,6 +81,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     alignItems: 'center',
     justifyContent: 'left',
     color: palette.blue
+  },
+  actions: {
+    paddingTop: '5px',
+    marginLeft: '20px'
   },
   loadingBar: {
     display: 'flex',

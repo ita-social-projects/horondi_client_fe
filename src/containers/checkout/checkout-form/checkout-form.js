@@ -21,7 +21,7 @@ import {
 } from '../../../configs';
 import Delivery from './delivery';
 import routes from '../../../configs/routes';
-import { addOrder, addPaymentMethod, getFondyData } from '../../../redux/order/order.actions';
+import { addOrder, getFondyData } from '../../../redux/order/order.actions';
 import {
   checkoutDefaultProps,
   checkoutFormBtnValue,
@@ -48,7 +48,7 @@ import { CurrencyContext } from '../../../context/currency-context';
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
 
-const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate }) => {
+const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate, handleCashPayment }) => {
   const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
@@ -107,7 +107,6 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate }) => 
 
     onSubmit: (data) => {
       if (data.paymentMethod === checkoutPayMethod.card) {
-        dispatch(addPaymentMethod(checkoutPayMethod.card));
         dispatch(
           getFondyData({
             order: orderInputData(
@@ -127,7 +126,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate }) => 
             orderInputData(data, deliveryType, cartItems, countryOption, promoCodeId, certificateId)
           )
         );
-        dispatch(addPaymentMethod(checkoutPayMethod.cash));
+        handleCashPayment();
       }
       clearSessionStorage();
       clearCart();
@@ -177,9 +176,9 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate }) => 
                       InputProps={
                         field.name === 'phoneNumber'
                           ? {
-                            maxLength: 9,
-                            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
-                          }
+                              maxLength: 9,
+                              startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+                            }
                           : {}
                       }
                     />

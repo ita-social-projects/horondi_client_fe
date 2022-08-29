@@ -114,7 +114,7 @@ const Routes = () => {
                 isAuthed={!userData}
                 redirectTo={pathToMain}
               />
-              <Route path={pathToThanks} component={ThanksPage} />
+              <Route path={pathToThanks} exact component={ThanksPage} />
               <Route path={pathToCertificateThanks} component={CertificateThanksPage} />
               <Route path={pathToCart} exact component={Cart} />
               <Route path={pathToCheckout} exact component={Checkout} />

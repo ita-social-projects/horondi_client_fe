@@ -26,7 +26,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '460px',
     minHeight: '499px',
     left: '260px',
-    top: '268px'
+    top: '268px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   thanksForBuy: {
     margin: '40px 30px 40px 30px',
@@ -42,26 +45,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: '22px',
     textAlign: 'center'
   },
-  customerInfo: {
-    margin: '10px 25px 10px 25px'
-  },
-  infoChunk: {
-    margin: '10px 25px 10px 25px',
-    fontSize: '16px',
-    color: palette.type === 'light' ? blackText : whiteText
-  },
-  chunkName: {
-    display: 'inline'
-  },
-  chunkValue: {
-    display: 'inline',
-    fontWeight: 'bold'
-  },
-  controllBlock: {
-    marginTop: '5%'
-  },
   continueShopping: {
-    margin: '10px 10% 10px 10%',
+    margin: '50px 10% 10px 10%',
     backgroundColor: palette.button.normal.backgroundColor,
     color: palette.button.normal.color,
     '&:hover': {

@@ -13,7 +13,7 @@ const { pathToThanks, pathToMain } = routes;
 
 const Checkout = () => {
   const location = useLocation();
-  const promoCode = location.state?.promoCode;
+  const { promoCode, certificateData } = location?.state;
   const { loading, isOrderCreated, order } = useSelector(({ Order }) => ({
     loading: Order.loading,
     isOrderCreated: Order.isOrderCreated,
@@ -38,6 +38,7 @@ const Checkout = () => {
             cartItems={cartItems}
             cartOperations={cartOperations}
             promoCode={promoCode}
+            certificate={certificateData}
           />
         </div>
       )}

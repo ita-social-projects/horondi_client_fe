@@ -45,6 +45,7 @@ export const addOrder = async (order) => {
           totalPriceToPay
           paymentStatus
           promoCodeId
+          certificateId
         }
         ... on Error {
           statusCode

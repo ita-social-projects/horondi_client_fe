@@ -48,7 +48,7 @@ import { CurrencyContext } from '../../../context/currency-context';
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
 
-const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
+const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate }) => {
   const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
@@ -66,7 +66,8 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
 
   const handleCountryOption = (_, newTabValue) => setCountryOption(newTabValue);
 
-  const { discount, categories, _id } = promoCode?.getPromoCodeByCode || {};
+  const { discount, categories, _id: promoCodeId } = promoCode?.getPromoCodeByCode || {};
+  const { _id: certificateId } = certificate?.getCertificateByParams || {};
 
   const totalPriceToPay = pricesFromQuery
     .map((item, index) => {
@@ -109,12 +110,23 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
         dispatch(addPaymentMethod(checkoutPayMethod.card));
         dispatch(
           getFondyData({
-            order: orderInputData(data, deliveryType, cartItems, countryOption, _id),
+            order: orderInputData(
+              data,
+              deliveryType,
+              cartItems,
+              countryOption,
+              promoCodeId,
+              certificateId
+            ),
             currency
           })
         );
       } else {
-        dispatch(addOrder(orderInputData(data, deliveryType, cartItems, countryOption, _id)));
+        dispatch(
+          addOrder(
+            orderInputData(data, deliveryType, cartItems, countryOption, promoCodeId, certificateId)
+          )
+        );
         dispatch(addPaymentMethod(checkoutPayMethod.cash));
       }
       clearSessionStorage();
@@ -289,6 +301,7 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode }) => {
               deliveryType={deliveryType}
               setPricesFromQuery={setPricesFromQuery}
               promoCode={promoCode}
+              certificate={certificate}
             />
           </Grid>
         </Grid>

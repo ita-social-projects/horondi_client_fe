@@ -7,7 +7,8 @@ import { useCurrency } from '../../../../hooks/use-currency';
 
 const YourOrder = ({ ...props }) => {
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
-  const { cart } = useCart();
+  const { cart, cartOperations } = useCart();
+  const { getTotalPriceWithCertificate } = cartOperations;
   const {
     currency,
     checkoutFormBtnValue,
@@ -19,11 +20,17 @@ const YourOrder = ({ ...props }) => {
     styles,
     deliveryType,
     setPricesFromQuery,
-    promoCode
+    promoCode,
+    certificate
   } = props;
 
   const [productPrices, setProductPrices] = useState([]);
   const currencySign = getCurrencySign();
+
+  const totalPrice = certificate
+    ? getTotalPriceWithCertificate(certificate)
+    : getPriceWithCurrency(totalPriceToPay);
+
   useEffect(() => {
     setPricesFromQuery(
       productPrices.map((item) => ({ price: item.price, category: item.category }))
@@ -65,7 +72,7 @@ const YourOrder = ({ ...props }) => {
         {t('common.toPay')}:
         <div className={styles.totalPrice}>
           {currencySign}
-          {getPriceWithCurrency(totalPriceToPay)}
+          {totalPrice}
         </div>{' '}
       </Typography>
       <Divider variant='fullWidth' />

@@ -1,4 +1,4 @@
-export const mockedProps = {
+export const PromoCodeMockedProps = {
   checkoutFormBtnValue: jest.fn(),
   consentLink: 'Link',
   t: jest.fn(),
@@ -11,6 +11,24 @@ export const mockedProps = {
       code: 'test',
       discount: 10,
       categories: ['bags']
+    }
+  },
+  certificate: undefined
+};
+
+export const certificateMockedProps = {
+  checkoutFormBtnValue: jest.fn(),
+  consentLink: 'Link',
+  t: jest.fn(),
+  styles: {},
+  language: 0,
+  setPricesFromQuery: jest.fn(),
+  deliveryType: '',
+  promoCode: undefined,
+  certificate: {
+    getCertificateByParams: {
+      name: 'HOR66014399',
+      value: 27
     }
   }
 };

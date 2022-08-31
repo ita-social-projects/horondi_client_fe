@@ -94,7 +94,15 @@ const FilledCart = ({ items, cartOperations }) => {
       return setPrice(getTotalPricesWithPromoCode(promoCode));
     }
     setPrice(getTotalPrice());
-  }, [items, currency, getTotalPrice, promoCode, certificateData, getTotalPricesWithPromoCode]);
+  }, [
+    items,
+    currency,
+    getTotalPrice,
+    promoCode,
+    certificateData,
+    getTotalPricesWithPromoCode,
+    getTotalPriceWithCertificate
+  ]);
 
   if (cartLoading || productFromConstructorLoading) {
     return <Loader />;
@@ -152,8 +160,7 @@ const FilledCart = ({ items, cartOperations }) => {
         productId: data.addProductFromConstructor._id
       });
     }
-    history.push(pathToCheckout, { certificateData });
-    history.push(pathToCheckout, { promoCode });
+    history.push(pathToCheckout, { promoCode, certificateData });
   };
 
   return (

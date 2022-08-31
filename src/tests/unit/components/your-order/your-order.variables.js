@@ -1,4 +1,4 @@
-export const PromoCodeMockedProps = {
+export const promoCodeMockedProps = {
   checkoutFormBtnValue: jest.fn(),
   consentLink: 'Link',
   t: jest.fn(),

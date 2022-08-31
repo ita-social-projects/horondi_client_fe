@@ -5,7 +5,7 @@ import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {
   mockedCartItemsData,
-  PromoCodeMockedProps,
+  promoCodeMockedProps,
   certificateMockedProps
 } from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
@@ -57,7 +57,7 @@ describe('YourOrder component tests with promoCode', () => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
-          <YourOrder {...PromoCodeMockedProps} />
+          <YourOrder {...promoCodeMockedProps} />
         </Router>
       </MockedProvider>
     );

@@ -55,9 +55,7 @@ const Login = () => {
       }
     });
 
-  const wrongCredentials = loginError ? (
-    <p className={styles.loginError}>{t('error.wrongCredentials')}</p>
-  ) : null;
+  const wrongCredentials = loginError ? <p className={styles.loginError}>{t(loginError)}</p> : null;
 
   const emailStyles = useMemo(
     () => (errors.email === 'error.profile.email' ? styles.afterText : ''),

@@ -88,7 +88,7 @@ export default function Register() {
               setShowPassword={setShowPassword}
               showPasswordConfirm={showPasswordConfirm}
               setShowPasswordConfirm={setShowPasswordConfirm}
-              registerError={registerError}
+              registerError={t(registerError)}
               setShouldValidate={() => {
                 setShouldValidate(true);
               }}

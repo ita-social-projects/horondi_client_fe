@@ -53,6 +53,7 @@ import {
   AUTH_ERRORS,
   WISHLIST_KEY
 } from '../../configs';
+import { USER_ERROR } from '../../pages/login/constants';
 import routes from '../../configs/routes';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { handleUserIsBlocked } from '../../utils/user-helpers';
@@ -241,12 +242,10 @@ export function* handleUserError(e) {
     yield call(handleUserIsBlocked);
   } else if (e?.message === AUTH_ERRORS.REFRESH_TOKEN_IS_NOT_VALID) {
     yield call(handleRefreshTokenInvalid);
-  } else if (e?.message === 'USER_ALREADY_EXIST') {
-    yield put(setUserError(i18n.t('error.userError.userAlredyExist')));
-  } else if (i18n.exists(`error.userError.${e?.message}`)) {
-    yield put(setUserError(i18n.t(`error.userError.${e.message}`)));
+  } else if (i18n.exists(USER_ERROR[e?.message])) {
+    yield put(setUserError(USER_ERROR[e?.message]));
   } else {
-    yield put(setUserError(i18n.t('error.userError.defaultError')));
+    yield put(setUserError('error.userError.defaultError'));
   }
 }
 

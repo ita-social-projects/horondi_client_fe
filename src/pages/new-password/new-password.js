@@ -104,7 +104,7 @@ const NewPassword = ({ token }) => {
               >
                 {t('common.change')}
               </AuthButton>
-              {handleErrorMessage(userError, styles.serverError)}
+              {handleErrorMessage(t(userError), styles.serverError)}
             </Form>
           )}
         </AuthWrapper>

@@ -3,12 +3,17 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { mockedCartItemsData, mockedProps } from './your-order.variables';
+import {
+  mockedCartItemsData,
+  promoCodeMockedProps,
+  certificateMockedProps
+} from './your-order.variables';
 import YourOrder from '../../../../containers/orders/order/your-order';
 import { mockProduct } from '../../../../containers/checkout/checkout-form/tests/checkout-form.variables';
 import { DollarIcon } from '../../../../images/profile-icons';
 
 const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
+const mockGetTotalPriceWithCertificate = jest.fn(() => 1500);
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const userData = {
@@ -31,7 +36,10 @@ jest.mock('react-redux', () => ({
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
     cart: mockedCartItemsData,
-    cartOperations: { getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode }
+    cartOperations: {
+      getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
+      getTotalPriceWithCertificate: mockGetTotalPriceWithCertificate
+    }
   })
 }));
 
@@ -44,12 +52,12 @@ jest.mock('../../../../hooks/use-currency', () => ({
 
 useSelector.mockImplementation(() => userData);
 
-describe('YourOrder component tests', () => {
+describe('YourOrder component tests with promoCode', () => {
   beforeEach(() => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
         <Router>
-          <YourOrder {...mockedProps} />
+          <YourOrder {...promoCodeMockedProps} />
         </Router>
       </MockedProvider>
     );
@@ -65,5 +73,21 @@ describe('YourOrder component tests', () => {
   it('should calculate price with promoCode', () => {
     expect(mockGetPriceWithCurrency).toHaveBeenCalled();
     expect(mockGetProductPriceWithPromoCode).toHaveBeenCalled();
+  });
+});
+
+describe('YourOrder component tests with certificate', () => {
+  beforeEach(() => {
+    render(
+      <MockedProvider mocks={mockProduct} addTypename={false}>
+        <Router>
+          <YourOrder {...certificateMockedProps} />
+        </Router>
+      </MockedProvider>
+    );
+  });
+
+  it('should calculate price with certificate', () => {
+    expect(mockGetTotalPriceWithCertificate).toHaveBeenCalled();
   });
 });

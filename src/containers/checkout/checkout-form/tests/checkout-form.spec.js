@@ -48,7 +48,7 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
 }));
 
 const props = {
-  cartItems: [{ price: 20 }],
+  cartItems: [{ sizeAndPrice: { price: 20, size: { _id: '1' } } }],
   cartOperations: mockCartOperations,
   promoCode: {
     getPromoCodeByCode: {
@@ -56,7 +56,8 @@ const props = {
       discount: 10,
       categories: ['bags']
     }
-  }
+  },
+  handleCashPayment: jest.fn()
 };
 
 const userData = {

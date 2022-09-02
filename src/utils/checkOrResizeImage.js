@@ -1,5 +1,4 @@
 export const checkOrResizeImage = (
-  base64Str,
   originalImage,
   setUserImageUrl,
   setUpload,

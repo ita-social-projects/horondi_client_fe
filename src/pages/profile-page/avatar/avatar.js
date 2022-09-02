@@ -40,7 +40,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
         const originalImage = new Image();
         originalImage.src = result;
         originalImage.onload = () => {
-          checkOrResizeImage(result, originalImage, setUserImageUrl, setUpload);
+          checkOrResizeImage(originalImage, setUserImageUrl, setUpload);
         };
       };
       reader.readAsDataURL(imageFile);

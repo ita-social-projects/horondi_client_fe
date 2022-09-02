@@ -9,20 +9,9 @@ jest.mock('../../../../../pages/profile-page/avatar/avatar.styles', () => ({
 }));
 
 const mockT = jest.fn((arg) => arg);
-const fileReader = new FileReaderMock();
-jest.spyOn(window, 'FileReader').mockImplementation(() => fileReader);
 
 describe('Profile=Page test image restrictions', () => {
   let uploader;
-  beforeAll(() => {
-    global.Image = class {
-      constructor() {
-        setTimeout(() => {
-          this.onload();
-        }, 100);
-      }
-    };
-  });
 
   beforeEach(() => {
     render(<Avatar t={mockT} />);
@@ -68,15 +57,35 @@ describe('Profile=Page test image restrictions', () => {
     jest.clearAllMocks();
   });
 
-  const fileReader = new FileReaderMock();
-  jest.spyOn(window, 'FileReader').mockImplementation(() => fileReader);
-
   it('Should test FileReader ', () => {
+    const fileReader = new FileReaderMock();
+    jest.spyOn(window, 'FileReader').mockImplementation(() => fileReader);
+
     const file = new File(['test file'], 'image.jpeg', { type: 'image/png' });
     fireEvent.change(uploader, { target: { files: [file] } });
     fileReader.result = 'file content';
     fileReader.onload({ target: { result: 'foo' } });
     expect(fileReader.readAsDataURL).toHaveBeenCalled();
     expect(fileReader.readAsDataURL).toHaveBeenCalledWith(file);
+  });
+
+  it('should call resizer function', (done) => {
+    const checkOrResizeImage = jest.fn();
+
+    global.Image = class {
+      constructor() {
+        setTimeout(() => {
+          this.onload(); // simulate success
+        }, 100);
+      }
+    };
+
+    const callback = (status) => {
+      done();
+    };
+
+    checkOrResizeImage('some_image', callback);
+
+    expect(checkOrResizeImage).toHaveBeenCalled();
   });
 });

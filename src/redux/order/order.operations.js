@@ -116,53 +116,6 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
   return result?.data?.getPaymentCheckout;
 };
 
-export const orderPaidSubscription = gql`
-  subscription OrderPaid($orderId: String!) {
-    paidOrder(orderId: $orderId) {
-      __typename
-      ... on Order {
-        _id
-        orderNumber
-        recipient {
-          firstName
-          lastName
-          email
-          phoneNumber
-        }
-        delivery {
-          sentBy
-        }
-        items {
-          product {
-            name {
-              lang
-              value
-            }
-            images {
-              primary {
-                thumbnail
-              }
-            }
-          }
-          fixedPrice
-          quantity
-          options {
-            size {
-              name
-            }
-          }
-        }
-        totalPriceToPay
-        paymentStatus
-      }
-      ... on Error {
-        statusCode
-        message
-      }
-    }
-  }
-`;
-
 export const sendOrderToEmail = gql`
   query ($language: Int!, $paidOrderNumber: String!) {
     sendOrderToEmail(language: $language, paidOrderNumber: $paidOrderNumber) {

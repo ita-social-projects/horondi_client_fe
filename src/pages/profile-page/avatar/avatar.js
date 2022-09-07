@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, FormHelperText } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-
 import { CameraIcon } from '../../../images/profile-icons';
 import { useStyles } from './avatar.styles';
 
@@ -32,42 +31,15 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
     return false;
   };
 
-  const checkDimension = async (result) => {
-    const image = new Image();
-
-    const promiseImg = new Promise((resolve, reject) => {
-      image.onload = () => {
-        if (image.height <= 100 && image.width <= 100) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      };
-
-      image.onerror = (error) => reject(error);
-    });
-
-    image.src = result;
-
-    return promiseImg;
-  };
-
   const handleImageLoad = async ({ target }) => {
-    const image = target.files[0];
-
-    if (image && checkExtension(image) && checkFileSize(image)) {
+    const imageFile = target.files[0];
+    if (imageFile && checkExtension(imageFile) && checkFileSize(imageFile)) {
       const reader = new FileReader();
-
       reader.onload = async ({ target: { result } }) => {
-        if (await checkDimension(result)) {
-          setUserImageUrl(result);
-          setUpload(image);
-        } else {
-          setErrorMessage(t('error.profile.dimension'));
-        }
+        setUserImageUrl(result);
+        setUpload(imageFile);
       };
-
-      reader.readAsDataURL(image);
+      reader.readAsDataURL(imageFile);
     }
   };
 
@@ -88,7 +60,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
             src={userImageUrl}
             alt='profile-logo'
             className={classes.userImage}
-            data-testid='renderedimage'
+            data-testid='renderedImage'
           />
         </>
       )}

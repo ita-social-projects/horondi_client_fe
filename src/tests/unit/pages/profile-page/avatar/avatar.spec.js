@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import Avatar from '../../../../../pages/profile-page/avatar/avatar';
-import FileReaderMock from '../../../../../../__mocks__/fileReaderMock';
 
 jest.mock('../../../../../pages/profile-page/avatar/avatar.styles', () => ({
   useStyles: () => ({})
@@ -45,47 +44,7 @@ describe('Profile=Page test image restrictions', () => {
     expect(uploader.files.length).toBe(1);
   });
 
-  it('should render file input field', () => {
-    const file = new File(['test file'], 'image.jpeg', { type: 'image/png' });
-
-    fireEvent.change(uploader, { target: { files: [file] } });
-
-    expect(screen.getByTestId('imageInput')).toBeInTheDocument();
-  });
-
   beforeEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('Should test FileReader ', () => {
-    const fileReader = new FileReaderMock();
-    jest.spyOn(window, 'FileReader').mockImplementation(() => fileReader);
-
-    const file = new File(['test file'], 'image.jpeg', { type: 'image/png' });
-    fireEvent.change(uploader, { target: { files: [file] } });
-    fileReader.result = 'file content';
-    fileReader.onload({ target: { result: 'foo' } });
-    expect(fileReader.readAsDataURL).toHaveBeenCalled();
-    expect(fileReader.readAsDataURL).toHaveBeenCalledWith(file);
-  });
-
-  it('should call resizer function', (done) => {
-    const checkOrResizeImage = jest.fn();
-
-    global.Image = class {
-      constructor() {
-        setTimeout(() => {
-          this.onload(); // simulate success
-        }, 100);
-      }
-    };
-
-    const callback = (status) => {
-      done();
-    };
-
-    checkOrResizeImage('some_image', callback);
-
-    expect(checkOrResizeImage).toHaveBeenCalled();
   });
 });

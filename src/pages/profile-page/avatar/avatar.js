@@ -3,7 +3,6 @@ import { Button, FormHelperText } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { CameraIcon } from '../../../images/profile-icons';
 import { useStyles } from './avatar.styles';
-import { checkOrResizeImage } from '../../../utils/checkOrResizeImage';
 
 const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }) => {
   const classes = useStyles();
@@ -37,11 +36,8 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
     if (imageFile && checkExtension(imageFile) && checkFileSize(imageFile)) {
       const reader = new FileReader();
       reader.onload = async ({ target: { result } }) => {
-        const originalImage = new Image();
-        originalImage.src = result;
-        originalImage.onload = () => {
-          checkOrResizeImage(originalImage, setUserImageUrl, setUpload);
-        };
+        setUserImageUrl(result);
+        setUpload(imageFile);
       };
       reader.readAsDataURL(imageFile);
     }

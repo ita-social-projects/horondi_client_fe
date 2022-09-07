@@ -8,9 +8,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '100%',
     position: 'relative'
   },
-  thanksContainer: {
-    height: '100%'
-  },
   linkToPayment: {
     display: 'flex',
     alignItems: 'center',
@@ -32,14 +29,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.hover.color
     }
   },
-  thunksTitle: () => ({
-    fontSize: 30,
-    color: palette.type === 'light' ? '#000000' : '#ffffff',
-    fontWeight: 400,
-    marginBottom: 0
-  }),
-
-  thunksInfo: {
+  thanksInfo: {
     height: '100%',
     width: '100%'
   }

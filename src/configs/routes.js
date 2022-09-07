@@ -22,7 +22,7 @@ const routes = {
   pathToCheckout: '/checkout',
   pathToCart: '/cart',
   pathToMain: '/',
-  pathToThanks: '/thanks',
+  pathToThanks: '/thanks/:orderNumber',
   pathToCertificateThanks: '/certificatethanks',
   pathToProfile: '/profile',
   pathToTerms: '/pages/terms',

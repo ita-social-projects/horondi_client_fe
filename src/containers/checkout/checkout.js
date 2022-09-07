@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router';
 
@@ -9,11 +9,12 @@ import routes from '../../configs/routes';
 import { setIsOrderCreated } from '../../redux/order/order.actions';
 import { useCart } from '../../hooks/use-cart';
 
-const { pathToThanks, pathToMain } = routes;
+const { pathToMain } = routes;
 
 const Checkout = () => {
   const location = useLocation();
   const { promoCode, certificateData } = location?.state;
+  const [isCashPayment, setIsCashPayment] = useState();
   const { loading, isOrderCreated, order } = useSelector(({ Order }) => ({
     loading: Order.loading,
     isOrderCreated: Order.isOrderCreated,
@@ -27,9 +28,11 @@ const Checkout = () => {
 
   const styles = useStyles();
 
+  const onCashPayment = () => setIsCashPayment(true);
+
   return (
     <div className={styles.root}>
-      {isOrderCreated && <Redirect to={`${pathToThanks}/${order?._id}`} />}
+      {isOrderCreated && isCashPayment && <Redirect to={`thanks/${order?.orderNumber}`} />}
       {!cartItems.length && !loading && <Redirect to={pathToMain} />}
       {loading && <Loader />}
       {!loading && (
@@ -39,6 +42,7 @@ const Checkout = () => {
             cartOperations={cartOperations}
             promoCode={promoCode}
             certificate={certificateData}
+            handleCashPayment={onCashPayment}
           />
         </div>
       )}

@@ -2,10 +2,14 @@ import React from 'react';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/styles';
 import OrderTable from '../order-table';
 import ConfirmDialog from '../../../../../components/confirm-dialog';
 import { mockGetProductById, props, modalProps, mockCartOperations } from './order-table.variables';
 import { DollarIcon } from '../../../../../images/profile-icons';
+import { theme } from '../../../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
@@ -53,7 +57,11 @@ describe('test <OrderTable /> component', () => {
 
 describe('test <Modal/> component', () => {
   beforeEach(() => {
-    render(<ConfirmDialog {...modalProps} />);
+    render(
+      <ThemeProvider theme={themeValue}>
+        <ConfirmDialog {...modalProps} />
+      </ThemeProvider>
+    );
   });
 
   it('should render <ConfirmDialog /> component', () => {

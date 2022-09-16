@@ -1,8 +1,13 @@
 import React from 'react';
 import { render, screen, act, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/styles';
+
 import Modal from '../modal';
 import { SnackBarContextProvider } from '../../../context/snackbar-context';
 import ModalGiftCertificate from '../../../containers/modal-gift-certificate';
+import { theme } from '../../app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 jest.mock('../modal.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('react-i18next', () => ({
@@ -14,7 +19,7 @@ jest.mock('react-i18next', () => ({
 
 jest.mock('../../../containers/modal-gift-certificate', () => ({
   __esModule: true,
-  default () {
+  default() {
     return <div>child component</div>;
   }
 }));
@@ -26,11 +31,13 @@ describe('Modal component', () => {
   };
   beforeEach(() => {
     render(
-      <SnackBarContextProvider>
-        <Modal {...props}>
-          <ModalGiftCertificate />
-        </Modal>
-      </SnackBarContextProvider>
+      <ThemeProvider theme={themeValue}>
+        <SnackBarContextProvider>
+          <Modal {...props}>
+            <ModalGiftCertificate />
+          </Modal>
+        </SnackBarContextProvider>
+      </ThemeProvider>
     );
   });
 

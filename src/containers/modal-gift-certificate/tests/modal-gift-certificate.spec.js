@@ -21,7 +21,7 @@ jest.mock('@apollo/client', () => ({
       loading: true,
       error: null,
       data: {
-        gitftCertificateToEmail: {
+        giftCertificateToEmail: {
           id: mockSelector.validUser._id,
           email: 'test@test.com',
           oldEmail: mockSelector.validUser.email,

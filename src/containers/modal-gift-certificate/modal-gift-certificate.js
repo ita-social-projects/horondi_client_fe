@@ -7,7 +7,7 @@ import { TextField, Typography, Button } from '@material-ui/core';
 
 import { validationSchema } from '../../validators/email';
 import { Loader } from '../../components/loader/loader';
-import { gitftCertificateToEmail } from '../../pages/gift-certificate/operations/gift-certificate.mutations';
+import { giftCertificateToEmail } from '../../pages/gift-certificate/operations/gift-certificate.mutations';
 import { useStyles } from './modal-gift-certificate.styles';
 
 const ModalGiftCertificate = ({ item, setModalVisibility }) => {
@@ -43,7 +43,7 @@ const ModalGiftCertificate = ({ item, setModalVisibility }) => {
   );
 
   const [gitftCertificate, { loading: gitftCertificateLoading }] = useMutation(
-    gitftCertificateToEmail,
+    giftCertificateToEmail,
     {
       onCompleted: () => setModalVisibility(false)
     }

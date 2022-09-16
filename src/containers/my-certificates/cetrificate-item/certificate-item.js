@@ -7,7 +7,7 @@ import CertificateCodeCopy from '../../../images/certificates/certificateCodeCop
 import CertificateCodeGift from '../../../images/certificates/certificateCodeGift';
 import CertificateImages from '../../../images/certificates/CertificateImages';
 
-const CertificateItem = ({ item }) => {
+const CertificateItem = ({ item, openModal }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
@@ -57,7 +57,11 @@ const CertificateItem = ({ item }) => {
           </Tooltip>
           <Tooltip title={t('certificate.gift')} placement='top'>
             <button className={styles.iconBtn}>
-              <CertificateCodeGift alt='certificate-gift-icon' className={styles.certificateIcon} />
+              <CertificateCodeGift
+                alt='certificate-gift-icon'
+                onClick={() => openModal(item)}
+                className={styles.certificateIcon}
+              />
             </button>
           </Tooltip>
         </div>

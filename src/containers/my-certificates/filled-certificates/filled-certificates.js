@@ -8,16 +8,19 @@ import routes from '../../../configs/routes';
 import { useStyles } from './filled-certificates.styles';
 import CertificateTable from '../certificate-table';
 import OrderHistoryPagination from '../../orders/order-history/order-history-pagination';
+import ModalGiftCertificate from '../../modal-gift-certificate/modal-gift-certificate';
 
 const FilledCertificates = ({ items, count, pagination }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [chosenItem, setChosenItem] = useState(null);
   const styles = useStyles();
   const { t } = useTranslation();
 
   const { pathToGiftСertificate } = routes;
 
-  const openModal = () => {
-    !modalVisibility ? setModalVisibility(true) : setModalVisibility(false);
+  const openModal = (item) => {
+    setModalVisibility(true);
+    setChosenItem(item);
   };
 
   return (
@@ -25,7 +28,7 @@ const FilledCertificates = ({ items, count, pagination }) => {
       <div className={styles.root} data-cy='filled-certificates'>
         <div className={styles.totalWrapper}>
           <div className={styles.certificateTable}>
-            <CertificateTable items={items} />
+            <CertificateTable items={items} openModal={openModal} />
           </div>
           {count > 5 && <OrderHistoryPagination data={pagination} />}
         </div>
@@ -34,13 +37,10 @@ const FilledCertificates = ({ items, count, pagination }) => {
             <Link to={pathToGiftСertificate}>
               <Button className={styles.buyButton}>{t('certificate.buy')}</Button>
             </Link>
-            <Button className={styles.addButton} onClick={openModal}>
-              {t('certificate.add')}
-            </Button>
             {modalVisibility && (
-              <div>
-                <Modal isOpen={modalVisibility} onAction={openModal} isInput />
-              </div>
+              <Modal isOpen={modalVisibility} setModalVisibility={setModalVisibility}>
+                <ModalGiftCertificate item={chosenItem} setModalVisibility={setModalVisibility} />
+              </Modal>
             )}
           </div>
         </div>

@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, FormControl, FormHelperText } from '@material-ui/core';
+import { FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import useConstructorLoader from './use-constructor-loader';
@@ -10,7 +10,6 @@ import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
 
 import { constructorEndPrice, constructorPartPrice } from '../../utils/constructor';
-import Modal from '../../components/modal';
 import ConstructorSubmit from './constructor-sumbit';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useAppStyles } from '../../components/app/app.styles';
@@ -40,21 +39,12 @@ const ImagesConstructor = () => {
 
   const defaultPrice = getPriceWithCurrency(basePrice);
 
-  const [modalVisibility, setModalVisibility] = useState(false);
   const styles = useStyles();
   const appStyles = useAppStyles();
   const { t } = useTranslation();
 
   const canvasH = 768;
   const canvasW = 768;
-
-  const showModal = () => {
-    setModalVisibility(true);
-  };
-
-  const onModalAction = () => {
-    setModalVisibility(false);
-  };
 
   useEffect(() => {
     const getPrice = (key) => getPriceWithCurrency(constructorValues[key].absolutePrice);
@@ -72,7 +62,7 @@ const ImagesConstructor = () => {
         return acc;
       }, {})
     );
-  }, [constructorValues, currency, setAllPrice]);
+  }, [constructorValues, currency, setAllPrice, getPriceWithCurrency]);
 
   const { isError } = useIsLoadingOrError([], [constructorsError, constructorError]);
   if (valuesLoading) {
@@ -232,22 +222,6 @@ const ImagesConstructor = () => {
               </Select>
               <FormHelperText className={styles.formHelper}>{t('common.size')}</FormHelperText>
             </FormControl>
-
-            <Button className={styles.buttonOptions} onClick={showModal} data-testid='modalButton'>
-              <span className={styles.pluse}>+</span> {t('buttons.moreOptions')}
-            </Button>
-
-            {modalVisibility && (
-              <Modal
-                className={styles.modal}
-                setModalVisibility={setModalVisibility}
-                onAction={onModalAction}
-                isOpen={modalVisibility}
-                isEmpty
-                isFullscreen
-                content={<h3>MODAL FOR CONSTRUCTOR</h3>}
-              />
-            )}
           </form>
 
           <div className={styles.imageContainer}>

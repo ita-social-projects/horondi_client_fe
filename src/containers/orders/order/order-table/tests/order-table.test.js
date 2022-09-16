@@ -3,7 +3,7 @@ import { render, screen, act, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import OrderTable from '../order-table';
-import Modal from '../../../../../components/modal/modal';
+import ConfirmDialog from '../../../../../components/confirm-dialog';
 import { mockGetProductById, props, modalProps, mockCartOperations } from './order-table.variables';
 import { DollarIcon } from '../../../../../images/profile-icons';
 
@@ -53,18 +53,18 @@ describe('test <OrderTable /> component', () => {
 
 describe('test <Modal/> component', () => {
   beforeEach(() => {
-    render(<Modal {...modalProps} />);
+    render(<ConfirmDialog {...modalProps} />);
   });
 
-  it('should render <Modal /> component', () => {
+  it('should render <ConfirmDialog /> component', () => {
     expect(screen.queryByText(modalProps.message)).toBeInTheDocument();
-    expect(screen.queryByText('common.buttons.confirm')).toBeInTheDocument();
-    expect(screen.queryByText('common.buttons.cancel')).toBeInTheDocument();
-    expect(screen.queryByText('common.modalHeader')).toBeInTheDocument();
+    expect(screen.queryByText(modalProps.confirmButtonText)).toBeInTheDocument();
+    expect(screen.queryByText(modalProps.dismisButtonText)).toBeInTheDocument();
+    expect(screen.queryByText(modalProps.title)).toBeInTheDocument();
   });
 
   it('call onAction with true', () => {
-    const confirmButton = screen.queryByText('common.buttons.confirm');
+    const confirmButton = screen.queryByText(modalProps.confirmButtonText);
     act(() => {
       fireEvent.click(confirmButton);
     });
@@ -73,7 +73,7 @@ describe('test <Modal/> component', () => {
   });
 
   it('call onAction with false', () => {
-    const cancelButton = screen.queryByText('common.buttons.cancel');
+    const cancelButton = screen.queryByText(modalProps.dismisButtonText);
     act(() => {
       fireEvent.click(cancelButton);
     });

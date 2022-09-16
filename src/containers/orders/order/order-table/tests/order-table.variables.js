@@ -49,10 +49,12 @@ export const props = {
 };
 
 export const modalProps = {
-  language: 1,
-  message: 'test',
+  onAction: jest.fn(),
   isOpen: true,
-  onAction: jest.fn()
+  message: 'test',
+  title: 'test title',
+  confirmButtonText: 'mockConfirm',
+  dismisButtonText: 'mockDismis'
 };
 
 const mockGetCartItem = jest.fn().mockReturnValue({

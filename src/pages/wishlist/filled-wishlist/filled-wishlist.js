@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 import { useDispatch } from 'react-redux';
 import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
-import Modal from '../../../components/modal';
+import ConfirmDialog from '../../../components/confirm-dialog';
 import ThemeContext from '../../../context/theme-context';
 import EmptyWishlist from '../empty-wishlist';
 import SimilarProducts from '../../product-details/similar-products';
@@ -21,12 +21,11 @@ const FilledWishlist = ({ items }) => {
   const [similarProductsList, setSimilarProductsList] = useState([]);
   const { cartOperations, isInCart } = useCart();
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [isLightTheme] = useContext(ThemeContext);
 
-  const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles(isLightTheme);
 
   const { wishlist: updatedWishlist, wishlistOperations } = useWishlist();
@@ -85,15 +84,15 @@ const FilledWishlist = ({ items }) => {
           </Table>
         </div>
         {modalVisibility && (
-          <div>
-            <Modal
-              itemName={t(`${modalItem.translationsKey}.name`)}
-              message={t('modal.modalDeleteFromWishlistMessage')}
-              isOpen={modalVisibility}
-              onAction={onModalAction}
-              language={language}
-            />
-          </div>
+          <ConfirmDialog
+            title={t('common.modalHeader')}
+            isOpen={modalVisibility}
+            onAction={onModalAction}
+            message={`${t('modal.modalDeleteFromWishlistMessage')} 
+				${t(`${modalItem.translationsKey}.name`)} ?`}
+            confirmButtonText={t('common.buttons.confirm')}
+            dismisButtonText={t('common.buttons.cancel')}
+          />
         )}
       </div>
       <SimilarProducts cartList={similarProductsList} />

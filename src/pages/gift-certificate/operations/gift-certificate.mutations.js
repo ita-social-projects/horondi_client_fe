@@ -18,3 +18,18 @@ export const generateCertificate = gql`
     }
   }
 `;
+
+export const gitftCertificateToEmail = gql`
+  mutation ($id: ID!, $email: String!, $oldEmail: String!, $language: Int!) {
+    gitftCertificateToEmail(id: $id, email: $email, oldEmail: $oldEmail, language: $language) {
+      __typename
+      ... on Certificate {
+        email
+      }
+      ... on Error {
+        statusCode
+        message
+      }
+    }
+  }
+`;

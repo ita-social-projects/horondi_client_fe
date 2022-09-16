@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 import { useStyles } from './order-table.styles';
 
 import CartItem from '../../cart/cart-item';
-import Modal from '../../../../components/modal';
+import ConfirmDialog from '../../../../components/confirm-dialog';
 
 const OrderTable = ({ items, user, cartOperations, promoCode, certificateData }) => {
   const { t, i18n } = useTranslation();
@@ -40,14 +40,14 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
   return (
     <div className={styles.root}>
       {removeOneModalVisibility && (
-        <>
-          <Modal
-            message={t('cart.deleteItem')}
-            isOpen={removeOneModalVisibility}
-            onAction={onRemoveOneModalAction}
-            isCartModal
-          />
-        </>
+        <ConfirmDialog
+          title={t('common.modalHeader')}
+          message={t('cart.deleteItem')}
+          isOpen={removeOneModalVisibility}
+          onAction={onRemoveOneModalAction}
+          confirmButtonText={t('common.buttons.confirm')}
+          dismisButtonText={t('common.buttons.cancel')}
+        />
       )}
       <h2 className={styles.titleWrapper}>{t('cart.titleFilled')} </h2>
       <div className={styles.table}>

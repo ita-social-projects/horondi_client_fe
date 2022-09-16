@@ -6,12 +6,15 @@ import { useStyles } from './certificate-table.styles';
 import { ROW_FIELDS } from '../../../configs/index';
 import CertificateItem from '../cetrificate-item';
 
-const CertificateTable = ({ items }) => {
+const CertificateTable = ({ items, openModal }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
   const certificateItems = useMemo(
-    () => [...items].map((item) => <CertificateItem item={item} key={item._id} />),
+    () =>
+      [...items].map((item) => (
+        <CertificateItem item={item} key={item._id} openModal={openModal} />
+      )),
     [items]
   );
 

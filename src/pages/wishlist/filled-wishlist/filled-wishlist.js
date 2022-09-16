@@ -24,6 +24,8 @@ const FilledWishlist = ({ items }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const itemName = t(`${modalItem.translationsKey}.name`);
+
   const [isLightTheme] = useContext(ThemeContext);
 
   const styles = useStyles(isLightTheme);
@@ -88,8 +90,7 @@ const FilledWishlist = ({ items }) => {
             title={t('common.modalHeader')}
             isOpen={modalVisibility}
             onAction={onModalAction}
-            message={`${t('modal.modalDeleteFromWishlistMessage')} 
-				${t(`${modalItem.translationsKey}.name`)} ?`}
+            message={`${t('modal.modalDeleteFromWishlistMessage')} ${itemName}?`}
             confirmButtonText={t('common.buttons.confirm')}
             dismisButtonText={t('common.buttons.cancel')}
           />

@@ -10,8 +10,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.black,
       fontSize: 14,
       marginLeft: 8,
-      maxWidth: '158px',
-      width: '100%',
+      width: '158px',
       padding: '10px 32px',
 
       '&:first-child': {

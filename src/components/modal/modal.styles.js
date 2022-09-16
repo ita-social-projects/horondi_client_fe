@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: '16px',
     right: '16px',
-    color: '#808080',
+    color: theme.palette.comments.modal.closeModalIcon.color,
     fontSize: '26px',
     cursor: 'pointer'
   }

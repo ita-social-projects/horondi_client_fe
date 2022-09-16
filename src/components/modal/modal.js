@@ -20,7 +20,7 @@ const Modal = ({ isOpen, children, setModalVisibility }) => {
       aria-labelledby='simple-modal-title'
       aria-describedby='simple-modal-description'
     >
-      <div className={styles.paper} data-cy='removing-modal'>
+      <div className={styles.paper}>
         <CloseIcon
           className={styles.closeIcon}
           onClick={handleClose}

@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '10px 0',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    borderBottom: '2px solid #E2E8F0',
+    borderBottom: theme.palette.comments.modal.titleBorder.border,
     fontSize: '20px',
     color: theme.palette.black,
     fontWeight: '700',

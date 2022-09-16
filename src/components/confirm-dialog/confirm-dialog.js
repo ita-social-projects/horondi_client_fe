@@ -27,7 +27,7 @@ const ConfirmDialog = ({
       aria-labelledby='simple-modal-title'
       aria-describedby='simple-modal-description'
     >
-      <div className={styles.paper} data-cy='removing-modal'>
+      <div className={styles.paper}>
         <div className={styles.header}>
           <span>{title}</span>
           <CloseIcon

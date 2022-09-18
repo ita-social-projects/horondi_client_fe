@@ -68,14 +68,16 @@ const ModalGiftCertificate = ({ item, setModalVisibility }) => {
           className={styles.input}
           label={t('login.placeholders.email')}
           variant='outlined'
-          type='email'
+          type='text'
           onBlur={handleBlur}
           onChange={handleChange}
           onFocus={handleFocus}
           value={values.email}
           error={touched.email && Boolean(t(errors.email))}
-          helperText={touched.email && Boolean(t(errors.email)) && t('error.profile.email')}
         />
+        <div className={styles.errorText}>
+          {touched.email && Boolean(t(errors.email)) ? t('error.profile.email') : ''}
+        </div>
         <div className={styles.buttonGroup}>
           <Button
             variant='contained'

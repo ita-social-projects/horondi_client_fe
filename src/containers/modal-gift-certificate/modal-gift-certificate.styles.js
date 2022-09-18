@@ -55,5 +55,11 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     gap: '24px'
+  },
+  errorText: {
+    marginTop: '-24px',
+    height: '12px',
+    fontSize: '12px',
+    color: theme.palette.error.main
   }
 }));

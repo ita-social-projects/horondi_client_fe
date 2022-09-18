@@ -69,6 +69,6 @@ describe('ModalGiftCertificate test', () => {
       fireEvent.focusIn(input);
     });
 
-    expect(error).not.toBeInTheDocument();
+    expect(screen.queryByText('error.profile.email')).not.toBeInTheDocument();
   });
 });

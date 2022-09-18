@@ -5,5 +5,10 @@
   "modalButtons": {
     "confirm": "Delete",
     "camcel": "Cancel"
+  },
+  "giftCertificate": {
+    "title": "Would you like to gift this certificate?",
+    "confirmButton": "Gift",
+    "dismisButton": "Cancel"
   }
 }

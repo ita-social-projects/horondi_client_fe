@@ -53,6 +53,7 @@ const FilledCart = ({ items, cartOperations }) => {
   const [getCertificate, { data: certificateData, error: certificateError }] = useLazyQuery(
     getCertificateByParams,
     {
+      fetchPolicy: 'network-only',
       variables: {
         params: {
           name: inputValue

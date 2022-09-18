@@ -13,6 +13,10 @@ const CertificateItem = ({ item, openModal }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
+  const date = new Date().toISOString();
+  const daysRemaining = Date.parse(item.dateEnd) - Date.parse(date);
+  const isLessThanMonth = daysRemaining < 2678400000 && daysRemaining > 0;
+
   const dateHandler = (date) => date.slice(0, 10).split('-').reverse().join('/');
 
   const onCopyIconClick = () => {

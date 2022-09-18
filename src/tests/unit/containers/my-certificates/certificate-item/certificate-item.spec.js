@@ -15,7 +15,7 @@ jest.mock(
 const mockHandleClick = jest.fn();
 const themeValue = theme('light');
 
-describe('CertificateItem component test', () => {
+describe('ActiveTable component test', () => {
   beforeEach(() => {
     render(
       <ThemeProvider theme={themeValue}>
@@ -35,8 +35,8 @@ describe('CertificateItem component test', () => {
     expect(code).toBeInTheDocument();
   });
 
-  it('should have an expired status', () => {
-    const status = screen.getByText(/expired/i);
+  it('should have an active status', () => {
+    const status = screen.getByText(/active/i);
 
     expect(status).toBeInTheDocument();
   });
@@ -47,5 +47,17 @@ describe('CertificateItem component test', () => {
     fireEvent.click(copyButton);
 
     expect(navigator.clipboard.writeText).toBeCalledTimes(1);
+  });
+});
+
+describe('NotActiveTable component test', () => {
+  beforeEach(() => {
+    render(<CertificateItem {...notActiveCertificateMock} />);
+  });
+
+  it('should have an used status', () => {
+    const status = screen.getByText(/used/i);
+
+    expect(status).toBeInTheDocument();
   });
 });

@@ -37,6 +37,12 @@ export const paletteGenerator = (colorSchema) => ({
       color: theme[colorSchema].card.selectedButton.color
     }
   },
+  myCertificate: {
+    backgroundColorRed: theme[colorSchema].myCertificate.backgroundColorRed,
+    backgroundColorGray: theme[colorSchema].myCertificate.backgroundColorGray,
+    notActiveTextColor: theme[colorSchema].myCertificate.notActiveTextColor,
+    iconBtnColor: theme[colorSchema].myCertificate.iconBtnColor
+  },
   catalog: {
     pageFilterCell: {
       hover: {

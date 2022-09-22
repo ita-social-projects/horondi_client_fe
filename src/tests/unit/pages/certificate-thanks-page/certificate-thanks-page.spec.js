@@ -36,16 +36,6 @@ const setLoading = jest.fn();
 useState.mockImplementation(jest.requireActual('react').useState);
 
 describe('CertificateThanksPage component tests', () => {
-  it('CertificateThanksPage should contain Loader until loading finished', () => {
-    const { getByTestId } = render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <CertificateThanksPage />
-      </MockedProvider>
-    );
-
-    expect(getByTestId('loader')).toBeInTheDocument();
-  });
-
   it('ThanksPage should contain ThanksCard with post office address', () => {
     useState.mockImplementation(() => [false, setLoading]);
 

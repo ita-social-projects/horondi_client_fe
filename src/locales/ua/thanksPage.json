@@ -1,33 +1,31 @@
 {
-    "thanksPageTitle": {
-        "thanks": "Дякуємо!",
-        "yourOrder": "Ваше замовлення",
-        "size": "Розмір -",
-        "alt": "Продукт",
-        "result": "Підсумок",
-        "linkToPayment": "Посилання на оплату"
-    },
-    "thanksCard": {
-        "thanksForBuy": "Дякуємо за Вашу покупку!",
-        "orderNumber": "Замовлення №",
-        "certificateName": "Код сертифікату: ",
-        "certificatePrice": "Ціна: ",
-        "email": "Пошта: ",
-        "certificatePaymentStatus": "Статус оплати: ",
-        "dateStart": "Початкова дата: ",
-        "dateEnd": "Кінцева дата: ",
-        "customer": "Замовник: ",
-        "phone": "Телефон: ",
-        "deliveryType": "Тип доставки: ",
-        "address": "Адреса: ",
-        "continueShopping": "ПРОДОВЖИТИ ПОКУПКИ",
-        "goToHomePage": "НА ГОЛОВНУ СТОРІНКУ",
-        "guest": "Гість",
-        "selfDelivery": "Львів, вул. Заводська, 31"
-    },
-    "paymentStatus": {
-        "created": "Замовлення створено",
-        "processing": "Замовлення очікує на оплату",
-        "paid": "Замовлення оплачено"
-      }
+  "thanksPageTitle": {
+    "thanks": "Дякуємо!",
+    "yourOrder": "Ваше замовлення",
+    "size": "Розмір -",
+    "alt": "Продукт",
+    "result": "Підсумок",
+    "linkToPayment": "Посилання на оплату"
+  },
+  "thanksCard": {
+    "certificateThanks": "Ваше замовлення № <strong>{{name}}</strong> на суму <strong>{{value}} грн</strong> успішно оформлено. Інформація про сертифікат буде надіслана на електронну адресу <strong>{{email}}</strong> .",
+    "thanksForBuy": "Дякуємо за Вашу покупку!",
+    "orderNumber": "Замовлення №",
+    "email": "Пошта: ",
+    "dateStart": "Початкова дата: ",
+    "dateEnd": "Кінцева дата: ",
+    "customer": "Замовник: ",
+    "phone": "Телефон: ",
+    "deliveryType": "Тип доставки: ",
+    "address": "Адреса: ",
+    "continueShopping": "ПРОДОВЖИТИ ПОКУПКИ",
+    "goToHomePage": "НА ГОЛОВНУ СТОРІНКУ",
+    "guest": "Гість",
+    "selfDelivery": "Львів, вул. Заводська, 31"
+  },
+  "paymentStatus": {
+    "created": "Замовлення створено",
+    "processing": "Замовлення очікує на оплату",
+    "paid": "Замовлення оплачено"
+  }
 }

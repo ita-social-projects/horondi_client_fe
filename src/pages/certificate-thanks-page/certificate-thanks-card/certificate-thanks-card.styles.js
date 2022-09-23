@@ -19,22 +19,29 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   infoCard: {
     backgroundColor: palette.backgroundColor,
-    width: '460px',
-    height: '530px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    maxWidth: '460px',
+    maxHeight: '530px',
     left: '260px',
-    top: '268px'
+    top: '268px',
+    overflowY: 'auto',
+    padding: '24px'
   },
   thanksForBuy: {
-    margin: '40px 30px 20px 30px',
+    marginBottom: '30px',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '26px',
     lineHeight: '32px',
     textAlign: 'center'
   },
-  certificateName: {
-    fontSize: '22px',
-    textAlign: 'center'
+  certificateText: {
+    margin: '30px 16px',
+    fontSize: '18px',
+    textAlign: 'center',
+    lineHeight: '35px'
   },
   certificateInfo: {
     margin: '10px 25px 10px 25px'

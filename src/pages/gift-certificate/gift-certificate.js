@@ -10,26 +10,19 @@ import { validationSchema } from '../../validators/email';
 import { certificateRules } from '../../locales/en/certificate.json';
 import CertificateCheckbox from './certificate-checkbox';
 import { useAppStyles } from '../../components/app/app.styles';
-import routes from '../../configs/routes';
 import { generateCertificate } from './operations/gift-certificate.mutations';
 import { getPaymentCheckoutForCertificates } from './operations/gift-certificate.queries';
 import { getCurrentCurrency } from '../../utils/checkout';
-import { setToLocalStorage } from '../../services/local-storage.service';
-import { orderDataToLS } from '../../utils/order';
-
-const { pathToCertificateThanks } = routes;
 
 const GiftCertificate = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const styles = useStyles();
   const appStyles = useAppStyles();
+  const language = i18n.language === 'ua' ? 0 : 1;
 
   const [getPaymentCheckoutForCertificate] = useLazyQuery(getPaymentCheckoutForCertificates, {
     onCompleted: (data) => {
-      const { paymentUrl, paymentToken, certificatesOrderId } =
-        data.getPaymentCheckoutForCertificates;
-      setToLocalStorage(orderDataToLS.certificatesOrderId, certificatesOrderId);
-      window.open(`${process.env.REACT_APP_ROOT_PATH}${pathToCertificateThanks}/${paymentToken}`);
+      const { paymentUrl } = data.getPaymentCheckoutForCertificates;
       window.open(paymentUrl);
     }
   });
@@ -37,12 +30,14 @@ const GiftCertificate = () => {
   const [generateCertificates] = useMutation(generateCertificate, {
     onCompleted: (data) => {
       const { certificates, certificatesPrice } = data.generateCertificate;
+      certificates[0].email = values.email;
       getPaymentCheckoutForCertificate({
         variables: {
           data: {
             currency: getCurrentCurrency(currency),
             amount: String(certificatesPrice),
-            certificates
+            certificates,
+            language
           }
         }
       });

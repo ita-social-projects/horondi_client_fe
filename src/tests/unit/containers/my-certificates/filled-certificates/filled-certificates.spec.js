@@ -22,7 +22,8 @@ jest.mock(
 jest.mock(
   '../../../../../containers/my-certificates/cetrificate-item/certificate-item.styles.js',
   () => ({
-    useStyles: () => ({})
+    useActiveStyles: () => ({}),
+    useNotActiveStyles: () => ({})
   })
 );
 

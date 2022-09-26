@@ -8,7 +8,8 @@ import CertificateItem from '../../../../../containers/my-certificates/cetrifica
 jest.mock(
   '../../../../../containers/my-certificates/cetrificate-item/certificate-item.styles.js',
   () => ({
-    useStyles: () => ({})
+    useActiveStyles: () => ({}),
+    useNotActiveStyles: () => ({})
   })
 );
 

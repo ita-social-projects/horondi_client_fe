@@ -3,15 +3,20 @@ import { useTranslation } from 'react-i18next';
 
 import { TableCell, TableRow, Tooltip } from '@material-ui/core';
 import Toast from '../../toast';
-import { useStyles } from './certificate-item.styles';
+
 import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
 import CertificateCodeGift from '../../../images/certificates/certificateCodeGift';
 import CertificateImages from '../../../images/certificates/CertificateImages';
 
+import { useActiveStyles, useNotActiveStyles } from './certificate-item.styles';
+
 const CertificateItem = ({ item, openModal }) => {
   const [isOpenedSnackbar, setIsOpenedSnackbar] = useState(false);
-  const styles = useStyles();
   const { t } = useTranslation();
+  const activeStyles = useActiveStyles();
+  const notActiveStyles = useNotActiveStyles();
+
+  const styles = item.isActivated ? activeStyles : notActiveStyles;
 
   const date = new Date().toISOString();
   const daysRemaining = Date.parse(item.dateEnd) - Date.parse(date);

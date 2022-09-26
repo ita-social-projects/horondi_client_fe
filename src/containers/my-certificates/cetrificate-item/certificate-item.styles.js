@@ -45,40 +45,20 @@ const status = {
   justifyContent: 'left'
 };
 
-export const useStyles = makeStyles(({ palette }) => ({
-  tableActive: {},
-  tableActiveRed: {
+export const useActiveStyles = makeStyles(({ palette }) => ({
+  rootRed: {
     backgroundColor: palette.myCertificate.backgroundColorRed
   },
-  tableNotActive: {
-    backgroundColor: palette.myCertificate.backgroundColorGray
-  },
-  name: {
-    paddingTop: '3px'
-  },
-  imageActive: {
+  image: {
     ...image
   },
-  imageNotActive: {
-    ...image,
-    filter: 'grayscale(100%)'
-  },
-  areaActive: {
+  area: {
     ...area,
     border: palette.white,
     color: palette.textColor
   },
-  areaNotActive: {
-    ...area,
-    border: palette.white,
-    color: palette.myCertificate.notActiveTextColor
-  },
-  iconBtnActive: {
+  iconBtn: {
     ...iconBtn
-  },
-  iconBtnNotActive: {
-    ...iconBtn,
-    color: palette.myCertificate.iconBtnColor
   },
   certificateIcon: {
     color: palette.cart.iconColor,
@@ -87,51 +67,53 @@ export const useStyles = makeStyles(({ palette }) => ({
       cursor: 'pointer'
     }
   },
-  item: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'left',
-    '& svg': {
-      marginRight: '5px',
-      fontSize: '20px'
-    }
-  },
-  priceActive: {
+  price: {
     ...price
   },
-  priceNotActive: {
-    ...price,
-    color: palette.myCertificate.notActiveTextColor
-  },
-  dateActive: {
+  date: {
     ...date
   },
-  dateActiveRed: {
+  dateRed: {
     ...date,
     color: palette.red
   },
-  dateNotActive: {
-    color: palette.myCertificate.notActiveTextColor
-  },
-  statusActive: {
+  status: {
     ...status,
     color: palette.green
-  },
-  statusInProgress: {
-    ...status,
-    color: palette.red
-  },
-  statusNotActive: {
-    ...status,
-    color: palette.myCertificate.notActiveTextColor
   },
   actions: {
     paddingTop: '5px',
     marginLeft: '20px'
+  }
+}));
+
+export const useNotActiveStyles = makeStyles(({ palette }) => ({
+  root: {
+    backgroundColor: palette.myCertificate.backgroundColorGray
   },
-  loadingBar: {
-    display: 'flex',
-    justifyContent: 'center',
-    textAlign: 'center'
+  image: {
+    ...image,
+    filter: 'grayscale(100%)'
+  },
+  area: {
+    ...area,
+    border: palette.white,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  iconBtn: {
+    ...iconBtn,
+    color: palette.myCertificate.iconBtnColor
+  },
+  price: {
+    ...price,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  date: {
+    ...date,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  status: {
+    ...status,
+    color: palette.myCertificate.notActiveTextColor
   }
 }));

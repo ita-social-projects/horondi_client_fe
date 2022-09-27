@@ -7,6 +7,8 @@ import { act } from 'react-dom/test-utils';
 import ThemeContext from '../../../context/theme-context';
 import AppHeader from '../app-header';
 
+const mockClearCart = jest.fn();
+
 jest.mock('../../../containers/search-bar/search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
@@ -32,6 +34,12 @@ jest.mock('../../../containers/sidebar/sidebar.js', () => ({
   }
 }));
 
+jest.mock('../../../hooks/use-cart', () => ({
+  useCart: () => ({
+    cart: [{ id: '84d7' }],
+    cartOperations: { clearCart: mockClearCart }
+  })
+}));
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key) => key,

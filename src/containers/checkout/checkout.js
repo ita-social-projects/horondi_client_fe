@@ -22,7 +22,7 @@ const Checkout = () => {
   }));
   const dispatch = useDispatch();
 
-  const { cart: cartItems, cartOperations } = useCart();
+  const { cart: cartItems } = useCart();
 
   useEffect(() => () => dispatch(setIsOrderCreated(false)), [dispatch, isOrderCreated]);
 
@@ -39,7 +39,6 @@ const Checkout = () => {
         <div className={styles.checkoutContainer}>
           <CheckoutForm
             cartItems={cartItems}
-            cartOperations={cartOperations}
             promoCode={promoCode}
             certificate={certificateData}
             handleCashPayment={onCashPayment}

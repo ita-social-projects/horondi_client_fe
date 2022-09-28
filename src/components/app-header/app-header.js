@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useCallback } from 'react';
 import {
   AppBar,
   IconButton as BurgerMenu,
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './app-header.styles';
+import { useCart } from '../../hooks/use-cart';
 import Sidebar from '../../containers/sidebar';
 import HeaderRightBar from '../../containers/header-right-bar';
 import CurrencyComponent from '../../containers/currency';
@@ -26,12 +27,20 @@ const AppHeader = () => {
   const [sticky, setSticky] = useState(false);
   const styles = useStyles();
   const appStyles = useAppStyles();
+  const { cart, cartOperations } = useCart();
+  const { clearCart } = cartOperations;
 
   const Header = clsx({
     [styles.header]: true,
     [styles.sticky]: sticky,
     'mui-fixed': true
   });
+
+  const clearCartHandler = useCallback(() => {
+    if (cart.length) {
+      clearCart();
+    }
+  }, [cart, clearCart]);
 
   useLayoutEffect(() => {
     let lastScrollTop = 0;
@@ -41,6 +50,13 @@ const AppHeader = () => {
       lastScrollTop = currPoint <= 0 ? 0 : currPoint;
     });
   }, []);
+
+  useLayoutEffect(() => {
+    window.addEventListener('storage', clearCartHandler);
+    return () => {
+      window.removeEventListener('storage', clearCartHandler);
+    };
+  }, [clearCartHandler]);
 
   return (
     <div className={styles.root}>

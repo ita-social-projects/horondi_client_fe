@@ -15,14 +15,11 @@ import {
 } from './checkout-form.variables';
 import { DollarIcon } from '../../../../images/profile-icons';
 
-const mockClearCart = jest.fn();
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const mockGetProductPriceWithPromoCode = jest.fn(() => 50);
 const dispatch = jest.fn();
-const mockCartOperations = {
-  clearCart: mockClearCart
-};
+
 window.FB = { init: jest.fn() };
 jest.mock('../checkout-form.styles', () => ({ useStyles: () => ({ Theme: 'lightMode' }) }));
 jest.mock('../delivery-type/delivery-type.styles', () => ({ useStyles: () => ({}) }));
@@ -49,7 +46,6 @@ jest.mock('../../../../services/session-storage.service.js', () => ({
 
 const props = {
   cartItems: [{ sizeAndPrice: { price: 20, size: { _id: '1' } } }],
-  cartOperations: mockCartOperations,
   promoCode: {
     getPromoCodeByCode: {
       code: 'test',

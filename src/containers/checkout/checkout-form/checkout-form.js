@@ -48,14 +48,13 @@ import { CurrencyContext } from '../../../context/currency-context';
 const { pathToUserAgreement, pathToTerms, pathToCart } = routes;
 const userContactLabels = userContactInputLabels();
 
-const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate, handleCashPayment }) => {
+const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) => {
   const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
   const userData = useSelector(({ User }) => User.userData);
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
-  const { clearCart } = cartOperations;
   const dispatch = useDispatch();
   const [deliveryType, setDeliveryType] = useState(
     getFromSessionStorage(SESSION_STORAGE.DELIVERY_TYPE) || deliveryTypes.SELFPICKUP
@@ -129,7 +128,6 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate, handl
         handleCashPayment();
       }
       clearSessionStorage();
-      clearCart();
     }
   });
 
@@ -176,9 +174,9 @@ const CheckoutForm = ({ cartItems, cartOperations, promoCode, certificate, handl
                       InputProps={
                         field.name === 'phoneNumber'
                           ? {
-                              maxLength: 9,
-                              startAdornment: <InputAdornment position='start'>+380</InputAdornment>
-                            }
+                            maxLength: 9,
+                            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+                          }
                           : {}
                       }
                     />

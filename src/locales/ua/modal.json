@@ -8,7 +8,8 @@
   },
   "giftCertificate": {
     "title": "Бажаєте подарувати цей сертифікат?",
+    "successfulTitle": "Сертифікат успішно надіслано!",
     "confirmButton": "Подарувати",
-    "dismisButton": "Скасувати"
+    "dismissButton": "Скасувати"
   }
 }

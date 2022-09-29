@@ -51,6 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   formWrapper: {
+    color: theme.palette.textColor,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -61,5 +62,20 @@ export const useStyles = makeStyles((theme) => ({
     height: '12px',
     fontSize: '12px',
     color: theme.palette.error.main
+  },
+  successfulTitle: {
+    marginTop: '45px'
+  },
+  dismissButton: {
+    color: theme.palette.button.normal.color,
+    backgroundColor: theme.palette.button.normal.backgroundColor,
+    fontSize: 14,
+    margin: '0 auto',
+    width: '125px',
+    padding: '10px 0',
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    }
   }
 }));

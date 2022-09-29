@@ -8,7 +8,8 @@
   },
   "giftCertificate": {
     "title": "Would you like to gift this certificate?",
+    "successfulTitle": "Certificate sent successfully!",
     "confirmButton": "Gift",
-    "dismisButton": "Cancel"
+    "dismissButton": "Cancel"
   }
 }

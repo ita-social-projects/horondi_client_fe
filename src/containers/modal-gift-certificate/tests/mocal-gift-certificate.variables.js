@@ -1,3 +1,5 @@
+import { giftCertificateToEmail } from '../../../pages/gift-certificate/operations/gift-certificate.mutations';
+
 export const mockSelector = {
   validUser: {
     orders: [],
@@ -23,3 +25,26 @@ export const certificateMock = {
   dateStart: '2022-02-07T10:12:15.024Z',
   dateEnd: '2023-02-08T10:12:15.024Z'
 };
+export const requestMocks = [
+  {
+    request: {
+      query: giftCertificateToEmail,
+      variables: {
+        id: '61e0447659cb701db416a3a4',
+        email: 'test@test.com',
+        oldEmail: 'horondidev@gmail.com',
+        language: 1
+      }
+    },
+    result: {
+      data: {
+        giftCertificateToEmail: {
+          id: '61e0447659cb701db416a3a4',
+          email: 'test@test.com',
+          oldEmail: 'horondidev@gmail.com',
+          language: 1
+        }
+      }
+    }
+  }
+];

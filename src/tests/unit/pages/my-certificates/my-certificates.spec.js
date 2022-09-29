@@ -3,7 +3,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, cleanup, fireEvent, waitForElement } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import MyCertificates from '../../../../pages/my-certificates/my-certificates';
-import { certificateMock1, certificateMock2, certificateMock3 } from './my-certificates.variables';
+import {
+  certificateMock1,
+  certificateMock2,
+  certificateMock3,
+  certificateMock4
+} from './my-certificates.variables';
 
 jest.mock(
   '../../../../containers/my-certificates/filled-certificates/filled-certificates.styles',
@@ -53,7 +58,7 @@ describe('MyCertificates test', () => {
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
-    const element = screen.getAllByText(/XYQ332765/i);
+    const element = await screen.findAllByText(/XYQ332765/i);
 
     expect(element).toHaveLength(2);
   });
@@ -67,7 +72,7 @@ describe('MyCertificates test', () => {
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
-    const element = screen.getByText(/certificate.emptyTitle/i);
+    const element = await screen.findByText(/certificate.title/i);
 
     expect(element).toBeInTheDocument();
     cleanup();
@@ -82,11 +87,26 @@ describe('MyCertificates test', () => {
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
-    const nextPageButton = document.querySelector('[aria-label="Go to page 2"]');
+    const nextPageButton = await screen.findByLabelText('Go to page 2');
     fireEvent.click(nextPageButton);
 
     waitForElement(() => {
       expect(document.querySelector('[aria-current="true"]')).toHaveTextContent('2');
+    });
+  });
+  it('should change page when items array are empty', async () => {
+    render(
+      <MockedProvider mocks={[certificateMock4]} addTypename={false}>
+        <Router>
+          <MyCertificates />
+        </Router>
+      </MockedProvider>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    waitForElement(() => {
+      expect(document.querySelector('[aria-current="true"]')).toHaveTextContent('0');
     });
   });
 });

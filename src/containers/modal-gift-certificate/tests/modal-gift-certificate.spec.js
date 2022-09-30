@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { mockSelector, certificateMock } from './mocal-gift-certificate.variables';
+import { mockSelector, certificateMock, requestMocks } from './mocal-gift-certificate.variables';
 import ModalGiftCertificate from '../modal-gift-certificate';
+import ModalSuccessfulGift from '../../modal-successful-gift/modal-successful-gift';
 
 jest.mock('react-redux');
 jest.mock('react-i18next', () => ({
@@ -13,31 +15,25 @@ jest.mock('react-i18next', () => ({
 }));
 
 const setModalVisibility = jest.fn();
-jest.mock('@apollo/client', () => ({
-  ...jest.requireActual('@apollo/client'),
-  useMutation: () => [
-    () => null,
-    {
-      loading: true,
-      error: null,
-      data: {
-        giftCertificateToEmail: {
-          id: mockSelector.validUser._id,
-          email: 'test@test.com',
-          oldEmail: mockSelector.validUser.email,
-          language: 1
-        }
-      }
-    }
-  ]
-}));
+const setIsComplete = jest.fn();
+const setEmail = jest.fn();
+
 jest.mock('../modal-gift-certificate.styles.js', () => ({ useStyles: () => ({}) }));
 
 useSelector.mockImplementation(() => ({ userData: mockSelector.validUser }));
 
 describe('ModalGiftCertificate test', () => {
   beforeEach(() => {
-    render(<ModalGiftCertificate item={certificateMock} setModalVisibility={setModalVisibility} />);
+    render(
+      <MockedProvider mocks={requestMocks}>
+        <ModalGiftCertificate
+          item={certificateMock}
+          setIsComplete={setIsComplete}
+          setEmail={setEmail}
+          setModalVisibility={setModalVisibility}
+        />
+      </MockedProvider>
+    );
   });
   it('should render ModalGiftCertificate component', () => {
     expect(screen.getByTestId('dismiss')).toBeInTheDocument();
@@ -70,5 +66,46 @@ describe('ModalGiftCertificate test', () => {
     });
 
     expect(screen.queryByText('error.profile.email')).not.toBeInTheDocument();
+  });
+
+  it('should confirm with valid email', async () => {
+    const input = screen.getByRole('textbox');
+    const confirmButton = screen.getByTestId('confirm');
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'test@test.com' } });
+    });
+    act(() => {
+      fireEvent.click(confirmButton);
+    });
+
+    expect(screen.queryByText('error.profile.email')).not.toBeInTheDocument();
+  });
+});
+
+describe('ModalSuccessfulGift test', () => {
+  beforeEach(() => {
+    render(
+      <MockedProvider mocks={requestMocks}>
+        <ModalSuccessfulGift setIsComplete={setIsComplete} />
+      </MockedProvider>
+    );
+  });
+
+  it('should render ModalSuccessfulGift component', () => {
+    const title = screen.getByText('modal.giftCertificate.successfulTitle');
+    const dismissButton = screen.getByText('modal.giftCertificate.dismissButton');
+
+    expect(title).toBeInTheDocument();
+    expect(dismissButton).toBeInTheDocument();
+  });
+
+  it('should close modal on dismissButton click', () => {
+    const dismissButton = screen.getByText('modal.giftCertificate.dismissButton');
+    act(() => {
+      fireEvent.click(dismissButton);
+    });
+
+    expect(setIsComplete).toHaveBeenCalledWith(false);
   });
 });

@@ -10,7 +10,7 @@ import { Loader } from '../../components/loader/loader';
 import { giftCertificateToEmail } from '../../pages/gift-certificate/operations/gift-certificate.mutations';
 import { useStyles } from './modal-gift-certificate.styles';
 
-const ModalGiftCertificate = ({ item, setModalVisibility }) => {
+const ModalGiftCertificate = ({ item, setIsComplete, setEmail, setModalVisibility }) => {
   const { t, i18n } = useTranslation();
 
   const language = i18n.language === 'ua' ? 0 : 1;
@@ -45,7 +45,11 @@ const ModalGiftCertificate = ({ item, setModalVisibility }) => {
   const [gitftCertificate, { loading: gitftCertificateLoading }] = useMutation(
     giftCertificateToEmail,
     {
-      onCompleted: () => setModalVisibility(false)
+      onCompleted: () => {
+        setModalVisibility(false);
+        setIsComplete(true);
+        setEmail(values.email);
+      }
     }
   );
 
@@ -92,7 +96,7 @@ const ModalGiftCertificate = ({ item, setModalVisibility }) => {
             )}
           </Button>
           <Button variant='contained' onClick={handleDismis} data-testid='dismiss'>
-            {t('modal.giftCertificate.dismisButton')}
+            {t('modal.giftCertificate.dismissButton')}
           </Button>
         </div>
       </div>

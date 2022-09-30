@@ -9,6 +9,7 @@ import ErrorBoundary from '../components/error-boundary';
 import Loader from '../components/loader';
 import ProtectedRoute from '../components/protected-route';
 import AppHeader from '../components/app-header';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
 import AppFooter from '../components/app-footer';
 import Home from '../pages/home';
 import ProductDetails from '../pages/product-details';
@@ -83,6 +84,7 @@ const Routes = () => {
     <ConnectedRouter history={history}>
       <Suspense fallback={<Loader />}>
         <ErrorBoundary>
+          <ScrollToTop />
           <AppHeader />
           <div className={`${styles.root} mui-fixed`}>
             <Switch>

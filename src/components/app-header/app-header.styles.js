@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     backgroundColor: '#020202',
     boxShadow: '0px 8px 16px 0px #2424241F',
-    zIndex: '1301',
+    zIndex: '1000',
     transition: 'transform 0.5s ease-out',
     '& .MuiToolbar-regular': {
       minHeight: '35px',
@@ -29,7 +29,8 @@ export const useStyles = makeStyles((theme) => ({
       zIndex: 1000
     },
     '@media (max-width: 556px)': {
-      paddingBottom: '45px'
+      gap: '48px',
+      paddingBottom: '48px'
     }
   },
   sticky: {
@@ -53,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '0px 80px',
     borderBottom: '1px solid rgba(91, 91, 91, 0.6)',
-    '@media (max-width: 485px)': {
+    '@media (max-width: 556px)': {
       display: 'none'
     }
   },
@@ -104,7 +105,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#ffffff',
     marginRight: '24px',
     marginLeft: '-15px',
-    '@media (max-width: 768px)': {
+    '	68px)': {
       padding: '12px 5px 12px',
       marginLeft: 0
     }

@@ -79,13 +79,14 @@ const Routes = () => {
     userIsChecked: User.userIsChecked,
     userData: User.userData
   }));
+  const expireDate = userData?.certificateExpires;
 
   return (
     <ConnectedRouter history={history}>
       <Suspense fallback={<Loader />}>
         <ErrorBoundary>
           <ScrollToTop />
-          <AppHeader />
+          <AppHeader expireDate={expireDate} />
           <div className={`${styles.root} mui-fixed`}>
             <Switch>
               <Route path={pathToMain} exact component={Home} />

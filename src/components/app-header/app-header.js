@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useCallback } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useCallback } from 'react';
 import {
   AppBar,
   IconButton as BurgerMenu,
@@ -17,18 +17,29 @@ import HeaderRightBar from '../../containers/header-right-bar';
 import CurrencyComponent from '../../containers/currency';
 import ThemeComponent from '../../containers/theme/theme-component';
 import Language from '../../containers/language';
+import HeaderNotificationBar from '../header-notification-bar';
+import NotificationCertificateEnds from '../../containers/my-certificates/notification-certificate-ends';
 
 import { HORONDI } from '../../configs';
 import { useAppStyles } from '../app/app.styles';
 
-const AppHeader = () => {
+const AppHeader = ({ expireDate }) => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
+  const [notification, setNotification] = useState(null);
   const styles = useStyles();
   const appStyles = useAppStyles();
   const { cart, cartOperations } = useCart();
   const { clearCart } = cartOperations;
+
+  useEffect(
+    () =>
+      expireDate
+        ? setNotification(<NotificationCertificateEnds expireDate={expireDate} />)
+        : setNotification(null),
+    [expireDate]
+  );
 
   const Header = clsx({
     [styles.header]: true,
@@ -91,6 +102,11 @@ const AppHeader = () => {
           </Typography>
           <HeaderRightBar setIsMenuOpen={setIsMenuOpen} />
         </Toolbar>
+        {notification && (
+          <HeaderNotificationBar closeNotificationBar={setNotification}>
+            {notification}
+          </HeaderNotificationBar>
+        )}
       </AppBar>
       <div className={styles.headerspace} />
       <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />

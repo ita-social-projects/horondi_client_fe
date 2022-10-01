@@ -149,3 +149,22 @@ export const certificateMock3 = {
     }
   }
 };
+
+export const certificateMock4 = {
+  request: {
+    query: getAllUserCertificates,
+    variables: {
+      limit: 5,
+      skip: (1 - 1) * 5
+    }
+  },
+  result: {
+    data: {
+      getAllUserCertificates: {
+        __typename: 'PaginatedCertificate',
+        items: [],
+        count: 7
+      }
+    }
+  }
+};

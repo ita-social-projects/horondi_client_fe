@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useLazyQuery } from '@apollo/client';
 
 import { useAppStyles } from '../../components/app/app.styles';
 import { getAllUserCertificates } from './operations/my-certificates.queries';
@@ -15,17 +15,23 @@ const MyCertificates = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const appStyles = useAppStyles();
 
-  const { loading, error } = useQuery(getAllUserCertificates, {
+  const [getAllCertificates, { loading, error }] = useLazyQuery(getAllUserCertificates, {
     fetchPolicy: 'network-only',
     variables: {
       limit: CERTIFICATES_LIMIT,
       skip: (currentPage - 1) * CERTIFICATES_LIMIT
     },
     onCompleted: (data) => {
-      setCertificates(data.getAllUserCertificates.items);
-      setCount(data.getAllUserCertificates.count);
+      const { items, count } = data.getAllUserCertificates;
+      setCertificates(items);
+      setCount(count);
+      if (!items.length && count) {
+        setCurrentPage((prev) => prev - 1);
+      }
     }
   });
+
+  useEffect(() => getAllCertificates(), [getAllCertificates]);
 
   const changePage = (value) => {
     setCurrentPage(value);
@@ -42,6 +48,7 @@ const MyCertificates = () => {
           <FilledCertificates
             items={certificates}
             count={count}
+            onCertificateGift={getAllCertificates}
             pagination={[currentPage, quantityPages, changePage]}
           />
         ) : (

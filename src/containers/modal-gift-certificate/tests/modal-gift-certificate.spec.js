@@ -17,6 +17,7 @@ jest.mock('react-i18next', () => ({
 const setModalVisibility = jest.fn();
 const setIsComplete = jest.fn();
 const setEmail = jest.fn();
+const onCertificateGift = jest.fn();
 
 jest.mock('../modal-gift-certificate.styles.js', () => ({ useStyles: () => ({}) }));
 
@@ -31,6 +32,7 @@ describe('ModalGiftCertificate test', () => {
           setIsComplete={setIsComplete}
           setEmail={setEmail}
           setModalVisibility={setModalVisibility}
+          onCertificateGift={onCertificateGift}
         />
       </MockedProvider>
     );

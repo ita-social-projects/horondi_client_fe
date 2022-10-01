@@ -11,7 +11,7 @@ import OrderHistoryPagination from '../../orders/order-history/order-history-pag
 import ModalGiftCertificate from '../../modal-gift-certificate/modal-gift-certificate';
 import ModalSuccessfulGift from '../../modal-successful-gift/modal-successful-gift';
 
-const FilledCertificates = ({ items, count, pagination }) => {
+const FilledCertificates = ({ items, count, pagination, onCertificateGift }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [email, setEmail] = useState('');
@@ -52,7 +52,11 @@ const FilledCertificates = ({ items, count, pagination }) => {
             )}
             {isComplete && (
               <Modal isOpen={isComplete} setModalVisibility={setIsComplete}>
-                <ModalSuccessfulGift email={email} setIsComplete={setIsComplete} />
+                <ModalSuccessfulGift
+                  email={email}
+                  setIsComplete={setIsComplete}
+                  onCertificateGift={onCertificateGift}
+                />
               </Modal>
             )}
           </div>

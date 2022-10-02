@@ -26,6 +26,17 @@ const FilledCertificates = ({ items, count, pagination, onCertificateGift }) => 
     setChosenItem(item);
   };
 
+  const handleCertificateGift = (email) => {
+    setEmail(email);
+    setModalVisibility(false);
+    setIsComplete(true);
+  };
+
+  const closeSuccesModal = () => {
+    onCertificateGift();
+    setIsComplete(false);
+  };
+
   return (
     <>
       <div className={styles.root} data-cy='filled-certificates'>
@@ -44,19 +55,14 @@ const FilledCertificates = ({ items, count, pagination, onCertificateGift }) => 
               <Modal isOpen={modalVisibility} setModalVisibility={setModalVisibility}>
                 <ModalGiftCertificate
                   item={chosenItem}
-                  setIsComplete={setIsComplete}
-                  setEmail={setEmail}
+                  handleCertificateGift={handleCertificateGift}
                   setModalVisibility={setModalVisibility}
                 />
               </Modal>
             )}
             {isComplete && (
-              <Modal isOpen={isComplete} setModalVisibility={setIsComplete}>
-                <ModalSuccessfulGift
-                  email={email}
-                  setIsComplete={setIsComplete}
-                  onCertificateGift={onCertificateGift}
-                />
+              <Modal isOpen={isComplete} setModalVisibility={closeSuccesModal}>
+                <ModalSuccessfulGift email={email} closeSuccesModal={closeSuccesModal} />
               </Modal>
             )}
           </div>

@@ -10,6 +10,7 @@
     "title": "Бажаєте подарувати цей сертифікат?",
     "successfulTitle": "Сертифікат успішно надіслано!",
     "confirmButton": "Подарувати",
-    "dismissButton": "Скасувати"
+    "dismissButton": "Скасувати",
+	 "closeButton":"Закрити"
   }
 }

@@ -15,9 +15,8 @@ jest.mock('react-i18next', () => ({
 }));
 
 const setModalVisibility = jest.fn();
-const setIsComplete = jest.fn();
-const setEmail = jest.fn();
-const onCertificateGift = jest.fn();
+const closeSuccesModal = jest.fn();
+const handleCertificateGift = jest.fn();
 
 jest.mock('../modal-gift-certificate.styles.js', () => ({ useStyles: () => ({}) }));
 
@@ -29,10 +28,8 @@ describe('ModalGiftCertificate test', () => {
       <MockedProvider mocks={requestMocks}>
         <ModalGiftCertificate
           item={certificateMock}
-          setIsComplete={setIsComplete}
-          setEmail={setEmail}
           setModalVisibility={setModalVisibility}
-          onCertificateGift={onCertificateGift}
+          handleCertificateGift={handleCertificateGift}
         />
       </MockedProvider>
     );
@@ -89,25 +86,25 @@ describe('ModalSuccessfulGift test', () => {
   beforeEach(() => {
     render(
       <MockedProvider mocks={requestMocks}>
-        <ModalSuccessfulGift setIsComplete={setIsComplete} />
+        <ModalSuccessfulGift closeSuccesModal={closeSuccesModal} />
       </MockedProvider>
     );
   });
 
   it('should render ModalSuccessfulGift component', () => {
     const title = screen.getByText('modal.giftCertificate.successfulTitle');
-    const dismissButton = screen.getByText('modal.giftCertificate.dismissButton');
+    const dismissButton = screen.getByText('modal.giftCertificate.closeButton');
 
     expect(title).toBeInTheDocument();
     expect(dismissButton).toBeInTheDocument();
   });
 
   it('should close modal on dismissButton click', () => {
-    const dismissButton = screen.getByText('modal.giftCertificate.dismissButton');
+    const dismissButton = screen.getByText('modal.giftCertificate.closeButton');
     act(() => {
       fireEvent.click(dismissButton);
     });
 
-    expect(setIsComplete).toHaveBeenCalledWith(false);
+    expect(closeSuccesModal).toHaveBeenCalled();
   });
 });

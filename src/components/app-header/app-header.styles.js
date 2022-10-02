@@ -105,7 +105,7 @@ export const useStyles = makeStyles((theme) => ({
     color: '#ffffff',
     marginRight: '24px',
     marginLeft: '-15px',
-    '	68px)': {
+    '@media (max-width: 768px)': {
       padding: '12px 5px 12px',
       marginLeft: 0
     }

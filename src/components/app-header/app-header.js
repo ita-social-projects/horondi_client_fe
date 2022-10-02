@@ -33,13 +33,11 @@ const AppHeader = ({ expireDate }) => {
   const { cart, cartOperations } = useCart();
   const { clearCart } = cartOperations;
 
-  useEffect(
-    () =>
-      expireDate
-        ? setNotification(<NotificationCertificateEnds expireDate={expireDate} />)
-        : setNotification(null),
-    [expireDate]
-  );
+  useEffect(() => {
+    const certificateExpire = expireDate && <NotificationCertificateEnds expireDate={expireDate} />;
+
+    setNotification(certificateExpire);
+  }, [expireDate]);
 
   const Header = clsx({
     [styles.header]: true,

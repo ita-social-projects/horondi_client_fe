@@ -50,20 +50,44 @@ const loginUser = async (data) => {
 const getGoogleUser = async ({ idToken }) => {
   const getGoogleUserMutation = `
     mutation($idToken:String!){googleUser(idToken:$idToken){
-      _id
-      firstName
-      lastName
+		orders
+		token
+		refreshToken
+		_id
+		email
+		firstName
+		lastName
 		certificateExpires
-      email
+		phoneNumber
+		confirmed
+		configs {
+		  language
+		  currency
+		  theme
+		}
+		images {
+		  thumbnail
+		}
+		address {
+		  country
+		  city
+		  street
+		  buildingNumber
+		  appartment
+		  region
+		  district
+		  zipcode
+		  }
+		  banned{
+		  blockPeriod
+		  blockCount
+		  updatedAt
+		}
       credentials{
         source
         tokenPass
       }
-      token
-} 
-
-}
-  `;
+	}}`;
   const result = await getItems(getGoogleUserMutation, { idToken });
 
   return result?.data?.googleUser;

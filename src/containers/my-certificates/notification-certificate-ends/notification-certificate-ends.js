@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
+import routes from '../../../configs/routes';
 
 import { useStyles } from './notification-certificate-ends.styles';
 
@@ -16,7 +17,12 @@ const NotificationCertificateEnds = ({ expireDate }) => {
       <div>
         <Trans i18nKey='certificate.certificateNotification' values={{ date, time }} />
       </div>
-      <Button variant='outlined' component={Link} to='/my-certificates' className={styles.button}>
+      <Button
+        variant='outlined'
+        component={Link}
+        to={routes.pathToMyCertificates}
+        className={styles.button}
+      >
         {t('certificate.certificateNotificationButton')}
       </Button>
     </div>

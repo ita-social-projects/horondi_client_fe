@@ -24,14 +24,8 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
     color: theme.palette.black,
     fontWeight: '600',
-    lineHeight: '28px',
+    height: '40px',
     border: '1px solid',
-    '@media (max-width: 870px)': {
-      lineHeight: '24px'
-    },
-    '@media (max-width: 714px)': {
-      lineHeight: '16px'
-    },
     '@media (max-width: 450px)': {
       fontSize: '10px'
     }

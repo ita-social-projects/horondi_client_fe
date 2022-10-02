@@ -16,8 +16,8 @@ export const useStyles = makeStyles((theme) => ({
       padding: '10px 85px',
       width: '95%',
       margin: 'auto',
-      '@media (max-width: 870px)': {
-        padding: '0'
+      '@media (max-width: 1000px)': {
+        padding: '6px 0'
       }
     },
     '& .MuiTypography-body1': {

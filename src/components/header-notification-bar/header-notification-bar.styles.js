@@ -6,7 +6,13 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: 'fit-content',
     marginBottom: '-48px',
-    backgroundColor: theme.palette.notification.backgroundColor
+    backgroundColor: theme.palette.notification.backgroundColor,
+    position: 'fixed',
+    zIndex: '1250',
+    top: '111px',
+    '@media (max-width: 1000px)': {
+      top: '95px'
+    }
   },
   content: {
     maxWidth: '1440px',

@@ -100,12 +100,12 @@ const AppHeader = ({ expireDate }) => {
           </Typography>
           <HeaderRightBar setIsMenuOpen={setIsMenuOpen} />
         </Toolbar>
-        {notification && (
-          <HeaderNotificationBar closeNotificationBar={setNotification}>
-            {notification}
-          </HeaderNotificationBar>
-        )}
       </AppBar>
+      {notification && (
+        <HeaderNotificationBar closeNotificationBar={setNotification} className={Header}>
+          {notification}
+        </HeaderNotificationBar>
+      )}
       <div className={styles.headerspace} />
       <Sidebar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
     </div>

@@ -69,7 +69,7 @@ const Recovery = () => {
             onChange={handleChange}
             onFocus={handleFocus}
             value={values.email}
-            error={errorMsg}
+            error={!!errorMsg}
           />
           <div className={styles.errorText}>{errorMsg || ''}</div>
           <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>

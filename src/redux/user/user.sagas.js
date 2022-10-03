@@ -135,7 +135,6 @@ export function* handleUserRecovery({ payload }) {
     yield put(resetState());
     yield put(setRecoveryLoading(true));
     yield call(recoverUser, payload);
-    yield put(setRecoveryLoading(false));
     yield put(userHasRecovered(true));
     if (payload.redirect) {
       yield delay(REDIRECT_TIMEOUT);
@@ -143,6 +142,8 @@ export function* handleUserRecovery({ payload }) {
     }
   } catch (e) {
     yield call(handleUserError, e);
+  } finally {
+    yield put(setRecoveryLoading(false));
   }
 }
 

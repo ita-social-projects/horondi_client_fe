@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import routes from '../../../../configs/routes';
 import { useStyles } from './path-back.styles';
 
-const { pathToCategory, pathToMain } = routes;
+const { pathToMain } = routes;
 
-const PathBack = () => {
+const PathBack = ({ categoryLink, categoryText, currentPageText }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
@@ -14,8 +14,7 @@ const PathBack = () => {
     <div className={styles.path}>
       <div className={styles.pathLine}>
         <Link to={pathToMain}>{t('cart.pathBack.toMain')}</Link> /{' '}
-        <Link to={pathToCategory}>{t('cart.pathBack.toCatalog')}</Link> /{' '}
-        {t('cart.pathBack.yourCart')}
+        <Link to={categoryLink}>{t(categoryText)}</Link> / {t(currentPageText)}
       </div>
     </div>
   );

@@ -11,7 +11,11 @@ describe('Path-back component tests', () => {
   beforeEach(() => {
     wrapper = render(
       <Router history={history}>
-        <PathBack />
+        <PathBack
+          categoryLink='/'
+          categoryText='cart.pathBack.toCatalog'
+          currentPageText='cart.pathBack.yourCart'
+        />
       </Router>
     );
   });

@@ -165,7 +165,11 @@ const FilledCart = ({ items, cartOperations }) => {
 
   return (
     <>
-      <PathBack />
+      <PathBack
+        categoryLink={pathToCategory}
+        categoryText='cart.pathBack.toCatalog'
+        currentPageText='cart.pathBack.yourCart'
+      />
       <div className={styles.root} data-cy='filled-cart'>
         <div className={styles.orderWrapper}>
           <div className={styles.orderTable}>

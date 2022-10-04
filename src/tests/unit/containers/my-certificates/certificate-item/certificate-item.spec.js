@@ -1,5 +1,7 @@
 import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/styles';
+import { theme } from '../../../../../components/app/app-theme/app.theme';
 import { mockedCertificateItem } from './certificate-item.variable';
 import CertificateItem from '../../../../../containers/my-certificates/cetrificate-item';
 
@@ -10,20 +12,16 @@ jest.mock(
   })
 );
 
-jest.mock('@material-ui/styles', () => ({
-  ...jest.requireActual('@material-ui/styles'),
-  useTheme: () => ({
-    palette: {
-      type: 'light'
-    }
-  })
-}));
-
 const mockHandleClick = jest.fn();
+const themeValue = theme('light');
 
 describe('CertificateItem component test', () => {
   beforeEach(() => {
-    render(<CertificateItem onClick={mockHandleClick} {...mockedCertificateItem} />);
+    render(
+      <ThemeProvider theme={themeValue}>
+        <CertificateItem onClick={mockHandleClick} {...mockedCertificateItem} />
+      </ThemeProvider>
+    );
 
     const mockClipboard = {
       writeText: jest.fn()

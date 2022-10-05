@@ -8,6 +8,7 @@ const EmptyOrderHistory = () => {
     <EmptyOrder
       emptyTitle={t('orderHistory.emptyTitle')}
       buttonTitle={t('orderHistory.buttonEmpty')}
+      currentPageText='orderHistory.title'
       name='empty-order-history'
     />
   );

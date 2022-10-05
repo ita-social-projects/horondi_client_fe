@@ -9,6 +9,7 @@ import { useStyles } from './empty-certificates.styles';
 import routes from '../../../configs/routes';
 import EmptyCertificateLight from '../../../images/certificates/emptyCertificateLight';
 import EmptyCertificateDark from '../../../images/certificates/emptyCertificateDark';
+import PathBack from '../../orders/cart/path-back/path-back';
 
 const { pathToGiftСertificate } = routes;
 
@@ -21,6 +22,11 @@ const EmptyCertificates = () => {
 
   return (
     <>
+      <PathBack
+        categoryLink={pathToGiftСertificate}
+        categoryText='certificate.certificates'
+        currentPageText='certificate.title'
+      />
       <div className={styles.root} data-cy='empty-certificates-item'>
         <Typography className={styles.title} variant='h2'>
           {t('certificate.emptyTitle')}

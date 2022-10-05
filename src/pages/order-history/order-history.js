@@ -42,21 +42,23 @@ const OrderHistory = () => {
 
   return (
     <div className={appStyles.rootApp}>
-      {userOrders && userOrders.length ? (
-        <div className={appStyles.containerApp}>
-          <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
+      <div className={appStyles.containerApp}>
+        {userOrders && userOrders.length ? (
           <div>
-            {userOrders.map((order) => (
-              <OrderHistoryItem order={order} key={order.orderNumber} />
-            ))}
+            <div className={styles.mainTitle}>{t('orderHistory.title')}</div>
+            <div>
+              {userOrders.map((order) => (
+                <OrderHistoryItem order={order} key={order.orderNumber} />
+              ))}
+            </div>
+            {quantityPages >= 2 && (
+              <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
+            )}
           </div>
-          {quantityPages >= 2 && (
-            <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
-          )}
-        </div>
-      ) : (
-        <EmptyOrderHistory />
-      )}
+        ) : (
+          <EmptyOrderHistory />
+        )}
+      </div>
     </div>
   );
 };

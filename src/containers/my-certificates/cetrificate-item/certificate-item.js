@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TableCell, TableRow, Tooltip } from '@material-ui/core';
+import Toast from '../../toast';
 import { useStyles } from './certificate-item.styles';
 import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
 import CertificateCodeGift from '../../../images/certificates/certificateCodeGift';
 import CertificateImages from '../../../images/certificates/CertificateImages';
 
 const CertificateItem = ({ item, openModal }) => {
+  const [isOpenedSnackbar, setIsOpenedSnackbar] = useState(false);
   const styles = useStyles();
   const { t } = useTranslation();
 
   const dateHandler = (date) => date.slice(0, 10).split('-').reverse().join('/');
+
+  const onCopyIconClick = () => {
+    navigator.clipboard.writeText(item.name);
+    setIsOpenedSnackbar(true);
+  };
 
   return (
     <TableRow className={styles.root} data-cy='certificate-item'>
@@ -48,10 +55,7 @@ const CertificateItem = ({ item, openModal }) => {
       <TableCell data-cy='certificate-item-code'>
         <div className={styles.actions}>
           <Tooltip title={t('certificate.copy')} placement='top'>
-            <button
-              className={styles.iconBtn}
-              onClick={() => navigator.clipboard.writeText(item.name)}
-            >
+            <button className={styles.iconBtn} onClick={onCopyIconClick} data-testid='copyIconBtn'>
               <CertificateCodeCopy alt='certificate-copy-icon' className={styles.certificateIcon} />
             </button>
           </Tooltip>
@@ -66,6 +70,11 @@ const CertificateItem = ({ item, openModal }) => {
           </Tooltip>
         </div>
       </TableCell>
+      <Toast
+        isOpenedSnackbar={isOpenedSnackbar}
+        setIsOpenedSnackbar={setIsOpenedSnackbar}
+        message={t('certificate.successfulCopy')}
+      />
     </TableRow>
   );
 };

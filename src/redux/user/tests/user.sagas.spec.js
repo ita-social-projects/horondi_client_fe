@@ -231,7 +231,7 @@ describe('user sagas tests', () => {
       .put(setUserError('error.userError.defaultError'))
       .hasFinalState({
         ...initialStateMock,
-        recoveryLoading: true,
+        recoveryLoading: false,
         error: 'error.userError.defaultError'
       })
       .run());

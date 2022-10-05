@@ -25,6 +25,9 @@ export const useStyles = makeStyles((theme) => ({
     background: theme.palette.backgroundColor
   },
   minimumWidth: {
-    minWidth: '280px'
+    minWidth: '400px',
+    '@media (max-width: 600px)': {
+      minWidth: '280px'
+    }
   }
 }));

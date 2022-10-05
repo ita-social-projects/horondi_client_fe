@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.textColor
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.blue,
+        borderColor: theme.palette.black,
         borederWidth: '2px'
       }
     }
@@ -36,11 +36,28 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     maxWidth: '400px'
   },
-
+  errorText: {
+    marginTop: '-20px',
+    height: 'fit-content',
+    lineHeight: '12px',
+    minHeight: '12px',
+    fontSize: '12px',
+    color: theme.palette.error.main,
+    '@media (max-width: 600px)': {
+      minHeight: '24px'
+    }
+  },
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,
       color: '#828282'
     }
+  },
+  successText: {
+    lineHeight: '24px',
+    maxWidth: '400px'
+  },
+  heading: {
+    fontSize: '28px'
   }
 }));

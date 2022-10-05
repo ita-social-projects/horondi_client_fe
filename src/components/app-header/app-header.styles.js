@@ -16,8 +16,8 @@ export const useStyles = makeStyles((theme) => ({
       padding: '10px 85px',
       width: '95%',
       margin: 'auto',
-      '@media (max-width: 870px)': {
-        padding: '0'
+      '@media (max-width: 1000px)': {
+        padding: '6px 0'
       }
     },
     '& .MuiTypography-body1': {
@@ -29,7 +29,8 @@ export const useStyles = makeStyles((theme) => ({
       zIndex: 1000
     },
     '@media (max-width: 556px)': {
-      paddingBottom: '45px'
+      gap: '48px',
+      paddingBottom: '48px'
     }
   },
   sticky: {
@@ -53,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '0px 80px',
     borderBottom: '1px solid rgba(91, 91, 91, 0.6)',
-    '@media (max-width: 485px)': {
+    '@media (max-width: 556px)': {
       display: 'none'
     }
   },

@@ -10,6 +10,7 @@
     "title": "Would you like to gift this certificate?",
     "successfulTitle": "Certificate sent successfully!",
     "confirmButton": "Gift",
-    "dismissButton": "Cancel"
+    "dismissButton": "Cancel",
+    "closeButton": "Close"
   }
 }

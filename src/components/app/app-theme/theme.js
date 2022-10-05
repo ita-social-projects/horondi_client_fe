@@ -97,6 +97,9 @@ export default {
         }
       }
     },
+    notification: {
+      backgroundColor: '#FAE69E'
+    },
     arrowIcon: {
       arrowColor: 'rgba(2, 2, 2, 0.5)'
     },
@@ -151,6 +154,9 @@ export default {
     },
     contactForm: {
       background: '#232323'
+    },
+    notification: {
+      backgroundColor: '#CFAF3D'
     },
     productDescription: {
       borderColor: '#5B5B5B'

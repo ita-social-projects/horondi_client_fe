@@ -67,6 +67,7 @@ export const paletteGenerator = (colorSchema) => ({
     borderColor: theme[colorSchema].cart.borderColor,
     iconColor: theme[colorSchema].cart.iconColor
   },
+  notification: { backgroundColor: theme[colorSchema].notification.backgroundColor },
   contactForm: {
     background: theme[colorSchema].contactForm.background
   },

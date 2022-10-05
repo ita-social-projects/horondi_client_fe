@@ -45,7 +45,7 @@ export const useStyles = makeStyles(() => ({
         margin: '0 16px'
       }
     },
-    '@media (max-width: 870px)': {
+    '@media (max-width: 1000px)': {
       marginTop: '-9px'
     }
   }

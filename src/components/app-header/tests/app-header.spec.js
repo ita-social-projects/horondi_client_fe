@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { act } from 'react-dom/test-utils';
+import { ThemeProvider } from '@material-ui/styles';
+import { theme } from '../../app/app-theme/app.theme';
 import ThemeContext from '../../../context/theme-context';
 import AppHeader from '../app-header';
 
@@ -44,26 +46,33 @@ jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key) => key,
     i18n: { changeLanguage: jest.fn() }
-  })
+  }),
+  Trans: () => jest.fn()
 }));
 
+const themeValue = theme('light');
 const themeContextProviderMockValues = [true, jest.fn(() => {})];
 const store = createStore(() => [], {});
+const expireDateMock = '2022-10-23T00:00:00.000+00:00';
+
 let getByTestId;
 let getByText;
 let queryByTestId;
 let getAllByRole;
 let getByRole;
+let queryByText;
 
 describe('Test AppHeader', () => {
   beforeEach(
     () =>
-      ({ getByTestId, getByText, queryByTestId, getAllByRole, getByRole } = render(
+      ({ getByTestId, getByText, queryByTestId, getAllByRole, getByRole, queryByText } = render(
         <Provider store={store}>
           <BrowserRouter>
-            <ThemeContext.Provider value={themeContextProviderMockValues}>
-              <AppHeader />
-            </ThemeContext.Provider>
+            <ThemeProvider theme={themeValue}>
+              <ThemeContext.Provider value={themeContextProviderMockValues}>
+                <AppHeader expireDate={expireDateMock} />
+              </ThemeContext.Provider>
+            </ThemeProvider>
           </BrowserRouter>
         </Provider>
       ))
@@ -73,7 +82,7 @@ describe('Test AppHeader', () => {
     const buttons = getAllByRole('button');
     expect(getByText(mainHeaderTitle)).toBeInTheDocument();
     expect(getByRole('textbox')).toBeInTheDocument();
-    expect(buttons.length).toBe(5);
+    expect(buttons.length).toBe(6);
   });
   it('Top of the header should be visible by default', () => {
     const header = getByTestId('header-container');
@@ -96,5 +105,38 @@ describe('Test AppHeader', () => {
       fireEvent.click(burgerIcon);
     });
     expect(getByTestId('sidebar')).toBeInTheDocument();
+  });
+  it('Shoud show notification bar', () => {
+    const notificationButton = getByText('certificate.certificateNotificationButton');
+
+    expect(notificationButton).toBeInTheDocument();
+  });
+  it('Shoud close notification bar', () => {
+    const closeNotificationButton = getByTestId('closeNotification');
+    fireEvent.click(closeNotificationButton);
+    const notificationButton = queryByText('certificate.certificateNotificationButton');
+    expect(notificationButton).not.toBeInTheDocument();
+  });
+});
+
+describe('Test AppHeader without prop', () => {
+  beforeEach(
+    () =>
+      ({ getByTestId, getByText, queryByTestId, getAllByRole, getByRole, queryByText } = render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <ThemeProvider theme={themeValue}>
+              <ThemeContext.Provider value={themeContextProviderMockValues}>
+                <AppHeader expireDate={null} />
+              </ThemeContext.Provider>
+            </ThemeProvider>
+          </BrowserRouter>
+        </Provider>
+      ))
+  );
+  it('Shoudn`t show notification bar', () => {
+    const notificationButton = queryByText('certificate.certificateNotificationButton');
+
+    expect(notificationButton).not.toBeInTheDocument();
   });
 });

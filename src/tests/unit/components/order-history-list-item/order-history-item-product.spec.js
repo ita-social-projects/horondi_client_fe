@@ -55,9 +55,9 @@ describe('OrderHistoryOrderItem component tests', () => {
   it('Should render OrderHistoryOrderItem', () => {
     expect(wrapper).toBeDefined();
   });
-  it('renders 6 cells in a row', () => {
+  it('renders 7 cells in a row', () => {
     const cells = document.querySelectorAll('td');
-    expect(cells.length).toBe(6);
+    expect(cells.length).toBe(7);
   });
   it('renders <img/>', () => {
     const img = document.querySelector('img');

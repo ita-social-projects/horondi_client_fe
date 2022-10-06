@@ -13,7 +13,7 @@ const OrderHistoryTable = ({ items }) => {
       <Table>
         <TableHead>
           <TableRow classes={{ root: styles.tableHeader }}>
-            <TableCell style={{ width: '22%' }} className={styles.tableCell}>
+            <TableCell style={{ width: '22%' }} className={`${styles.tableCell} ${styles.product}`}>
               {t('common.product')}
             </TableCell>
             <TableCell style={{ width: '25%' }} className={styles.tableCell} />

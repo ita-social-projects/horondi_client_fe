@@ -14,11 +14,11 @@ const canvasH = 500;
 const canvasX = 0;
 const canvasY = 0;
 
-const OrderHistoryItemProduct = ({ item }) => {
+const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRate }) => {
   const styles = useStyles();
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const currencySign = getCurrencySign();
-  const fixedPriceProduct = getPriceWithCurrency(item.fixedPrice);
+  const fixedPriceProduct = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
   const { t } = useTranslation();
 
   const { product } = item;

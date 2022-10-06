@@ -12,31 +12,56 @@ const OrderHistoryItem = ({ order }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
+  const {
+    totalPriceToPay,
+    dateOfCreation,
+    items,
+    orderNumber,
+    fixedExchangeRate,
+    status,
+    itemsPriceWithDiscount
+  } = order;
 
-  const { color } = STATUS_COLORS.find((item) => item.label === order.status);
+  const { color } = STATUS_COLORS.find((item) => item.label === status);
 
-  const orderProducts = order.items.map((item) => (
-    <OrderHistoryItemProduct key={item.product._id + item.options.size.name} item={item} />
+  const orderProducts = items.map((item, idx) => (
+    <OrderHistoryItemProduct
+      key={item.product._id + item.options.size.name}
+      item={item}
+      itemPriceWithDiscount={itemsPriceWithDiscount[idx]}
+      fixedExchangeRate={fixedExchangeRate}
+    />
   ));
 
-  const totalPrice = getPriceWithCurrency(order.totalItemsPrice);
+  const totalPrice = getPriceWithCurrency(totalPriceToPay, fixedExchangeRate);
   const currencySign = getCurrencySign();
-  const dateInFormat = getFormatDate(order.dateOfCreation);
+  const dateInFormat = getFormatDate(dateOfCreation);
+
+  const columnTitles = [
+    {
+      text: t(`checkout.checkoutTitles.orderNumber`),
+      value: orderNumber
+    },
+    {
+      text: t(`orderHistory.tableField.date`),
+      value: dateInFormat
+    },
+    {
+      text: t(`orderHistory.tableField.status`),
+      value: t(`orderHistory.statuses.${status}`),
+      styles: { color }
+    }
+  ];
 
   return (
     <div className={styles.root}>
       <div className={styles.heading}>
-        <div>
-          {t(`checkout.checkoutTitles.orderNumber`)}
-          {order.orderNumber}{' '}
-        </div>
-        <div>
-          {t(`orderHistory.tableField.date`)}: {dateInFormat}
-        </div>
-        <div className={styles.headingStatus}>
-          <div>{t(`orderHistory.tableField.status`)}:&nbsp;</div>
-          <div style={{ color: { color } }}>{t(`orderHistory.statuses.${order.status}`)}</div>
-        </div>
+        {columnTitles.map((title) => (
+          <div className={styles.headingStatus} key={title.text}>
+            <div>{title.text}</div>
+            <div style={title.styles}>{title.value}</div>
+          </div>
+        ))}
       </div>
       <div>
         <OrderHistoryTable items={orderProducts} />

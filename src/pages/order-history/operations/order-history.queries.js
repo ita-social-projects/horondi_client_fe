@@ -57,7 +57,9 @@ export const getUserOrdersQuery = gql`
             }
           }
         }
-        totalItemsPrice
+        totalPriceToPay
+        fixedExchangeRate
+        itemsPriceWithDiscount
       }
       ordersCount
     }

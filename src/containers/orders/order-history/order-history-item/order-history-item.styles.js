@@ -13,7 +13,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '30px 0 20px',
     display: 'flex',
     width: '100%',
-    height: '40px',
+    minHeight: '40px',
     fontSize: '14px',
     fontWeight: '600',
     justifyContent: 'space-between',
@@ -22,7 +22,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   headingStatus: {
-    display: 'flex'
+    display: 'flex',
+    gap: '8px',
+    '@media (max-width: 450px)': {
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 0
+    }
   },
   info: {
     width: '50%'

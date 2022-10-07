@@ -7,10 +7,10 @@ export const useStyles = makeStyles(() => ({
     fontWeight: 400,
     marginBottom: 0,
     marginTop: 72,
-    '@media screen and (max-width:768px)': {
+    '@media screen and (max-width:810px)': {
       fontSize: '32px'
     },
-    '@media screen and (max-width:576px)': {
+    '@media screen and (max-width: 610px)': {
       fontSize: '22px'
     }
   },

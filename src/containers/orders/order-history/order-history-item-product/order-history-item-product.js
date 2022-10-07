@@ -14,11 +14,11 @@ const canvasH = 500;
 const canvasX = 0;
 const canvasY = 0;
 
-const OrderHistoryItemProduct = ({ item }) => {
+const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRate }) => {
   const styles = useStyles();
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const currencySign = getCurrencySign();
-  const fixedPriceProduct = getPriceWithCurrency(item.fixedPrice);
+  const productPrice = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
   const { t } = useTranslation();
 
   const { product } = item;
@@ -77,7 +77,7 @@ const OrderHistoryItemProduct = ({ item }) => {
   const productImg = product?.isFromConstructor ? constructorProductImg : defaultProductImg;
   return (
     <TableRow className={styles.root} classes={{ root: styles.tableBody }}>
-      <TableCell>{productImg}</TableCell>
+      <TableCell className={styles.imageCell}>{productImg}</TableCell>
       <TableCell>
         <div>
           <p className={styles.productName}>{productName}</p>
@@ -87,13 +87,14 @@ const OrderHistoryItemProduct = ({ item }) => {
           </p>
         </div>
       </TableCell>
+      <TableCell className={styles.empty} />
       <TableCell>
         <div className={styles.description}>{item.options.size.name}</div>
       </TableCell>
       <TableCell>
         <div className={styles.price}>
           {currencySign}
-          {fixedPriceProduct}
+          {productPrice}
         </div>
       </TableCell>
       <TableCell>
@@ -102,7 +103,7 @@ const OrderHistoryItemProduct = ({ item }) => {
       <TableCell>
         <div className={styles.price}>
           {currencySign}
-          {item.quantity * fixedPriceProduct}
+          {item.quantity * productPrice}
         </div>
       </TableCell>
     </TableRow>

@@ -41,10 +41,9 @@ export const mock = [
               }
             }
           ],
-          totalItemsPrice: [
-            { value: 1950, currency: 'UAH' },
-            { value: 74, currency: 'USD' }
-          ]
+          totalPriceToPay: [74],
+          itemsPriceWithDiscount: [74],
+          fixedExchangeRate: '36.6'
         }
       }
     }
@@ -84,5 +83,7 @@ export const order = {
       }
     }
   ],
-  totalItemsPrice: 74
+  totalPriceToPay: [74],
+  itemsPriceWithDiscount: [74],
+  fixedExchangeRate: '36.6'
 };

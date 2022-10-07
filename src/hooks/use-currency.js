@@ -6,15 +6,15 @@ import { HryvniaIcon, DollarIcon } from '../images/profile-icons';
 export const useCurrency = () => {
   const { currency: currentCurrency, currencies } = useContext(CurrencyContext);
 
-  const getPriceWithCurrency = (value) =>
-    Math.round(value * currencies[currentCurrency].exchangeRate);
+  const uah = currentCurrency === 'UAH';
 
-  const getCurrencySign = () => {
-    if (currentCurrency === 'USD') {
-      return <DollarIcon />;
-    }
-    return <HryvniaIcon />;
+  const getPriceWithCurrency = (value, exchangeRate) => {
+    const fixedRateExchange = uah && exchangeRate;
+
+    return Math.round(value * (fixedRateExchange || currencies[currentCurrency].exchangeRate));
   };
+
+  const getCurrencySign = () => (uah ? <HryvniaIcon /> : <DollarIcon />);
 
   const getBaseCurrencyPrice = (value) =>
     Math.round(value / currencies[currentCurrency].exchangeRate);

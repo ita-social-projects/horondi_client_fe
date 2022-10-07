@@ -13,16 +13,22 @@ export const useStyles = makeStyles(({ palette }) => ({
     margin: '30px 0 20px',
     display: 'flex',
     width: '100%',
-    height: '40px',
+    minHeight: '40px',
     fontSize: '14px',
     fontWeight: '600',
     justifyContent: 'space-between',
-    '@media (max-width: 576px)': {
+    '@media (max-width: 610px)': {
       fontSize: '11px'
     }
   },
   headingStatus: {
-    display: 'flex'
+    display: 'flex',
+    gap: '8px',
+    '@media (max-width: 450px)': {
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 0
+    }
   },
   info: {
     width: '50%'
@@ -65,10 +71,16 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   bottom: {
     display: 'flex',
-    margin: '20px 40px',
+    margin: '20px 24px',
     fontSize: '1.2rem',
     textAlign: 'right',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    '@media (max-width: 1050px)': {
+      margin: '20px 8px'
+    },
+    '@media (max-width: 610px)': {
+      margin: '4px'
+    }
   },
   totalText: {
     fontWeight: '600',
@@ -79,19 +91,25 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'uppercase',
     display: 'flex',
     alignItems: 'center',
-    '@media (max-width: 768px)': {
-      fontSize: '18px'
+    '& svg': {
+      fontSize: '20px',
+      marginRight: '5px'
     },
-    '@media (max-width: 576px)': {
-      fontSize: '14px'
+    '@media (max-width: 810px)': {
+      fontSize: '18px',
+      '& svg': {
+        fontSize: '18px'
+      }
+    },
+    '@media (max-width: 610px)': {
+      fontSize: '14px',
+      '& svg': {
+        fontSize: '14px'
+      }
     },
     '& div': {
       width: '60%',
       textAlign: 'right'
-    },
-    '& svg': {
-      fontSize: '20px',
-      marginRight: '5px'
     }
   }
 }));

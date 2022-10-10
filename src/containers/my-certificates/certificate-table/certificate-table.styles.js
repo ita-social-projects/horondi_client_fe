@@ -13,8 +13,57 @@ const title = {
     margin: '25px'
   }
 };
+const area = {
+  backgroundColor: 'inherit',
+  font: 'inherit',
+  fontWeight: '600',
+  resize: 'none',
+  overflow: 'hidden',
+  width: '118px',
+  height: '28px',
+  pointerEvents: 'none'
+};
+const iconBtn = {
+  backgroundColor: 'inherit',
+  border: 'none'
+};
+const price = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'left',
+  marginRight: '20px',
+  '@media (max-width: 800px)': {
+    marginRight: '35px'
+  },
+  '& svg': {
+    marginRight: '5px'
+  }
+};
+const image = {
+  height: '79px',
+  width: '168px'
+};
+const date = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'left',
+  marginRight: '10px',
+  '@media (max-width: 800px)': {
+    marginRight: '8px'
+  }
+};
+const status = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'left'
+};
 
-export const useStyles = makeStyles(({ palette }) => ({
+const actions = {
+  paddingTop: '5px',
+  marginLeft: '20px'
+};
+
+export const useActiveStyles = makeStyles(({ palette }) => ({
   titleWrapper: {
     ...title
   },
@@ -51,19 +100,103 @@ export const useStyles = makeStyles(({ palette }) => ({
       }
     }
   },
-  tableHeader: {
-    borderTopWidth: '1px',
-    borderTopStyle: 'solid',
-    borderTopColor: palette.cart.borderColor,
-    '& >th': {
-      padding: '10px 15px',
-      fontSize: '14px',
-      fontWeight: 600,
-      lineHeight: '20px',
-      textAlign: 'left'
-    },
-    '& >th:last-child': {
-      paddingLeft: '40px'
+  image: {
+    ...image
+  },
+  code: {
+    ...area,
+    border: palette.white,
+    color: palette.textColor
+  },
+  iconBtn: {
+    ...iconBtn,
+    color: palette.cart.iconColor,
+    '&:hover': {
+      color: palette.blue,
+      cursor: 'pointer'
     }
+  },
+  price: {
+    ...price
+  },
+  date: {
+    ...date
+  },
+  status: {
+    ...status,
+    color: palette.green
+  },
+  actions: {
+    ...actions
+  }
+}));
+
+export const useExpiringStyles = makeStyles(({ palette }) => ({
+  tableRow: {
+    backgroundColor: palette.myCertificate.backgroundColorRed
+  },
+  image: {
+    ...image
+  },
+  code: {
+    ...area,
+    border: palette.white,
+    color: palette.textColor
+  },
+  iconBtn: {
+    ...iconBtn,
+    color: palette.cart.iconColor,
+    '&:hover': {
+      color: palette.blue,
+      cursor: 'pointer'
+    }
+  },
+  price: {
+    ...price
+  },
+  date: {
+    ...date,
+    color: palette.red
+  },
+  status: {
+    ...status,
+    color: palette.green
+  },
+  actions: {
+    ...actions
+  }
+}));
+
+export const useNotActiveStyles = makeStyles(({ palette }) => ({
+  tableRow: {
+    backgroundColor: palette.myCertificate.backgroundColorGray
+  },
+  image: {
+    ...image,
+    filter: 'grayscale(100%)'
+  },
+  code: {
+    ...area,
+    border: palette.white,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  iconBtn: {
+    ...iconBtn,
+    color: palette.myCertificate.iconBtnColor
+  },
+  price: {
+    ...price,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  date: {
+    ...date,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  status: {
+    ...status,
+    color: palette.myCertificate.notActiveTextColor
+  },
+  actions: {
+    ...actions
   }
 }));

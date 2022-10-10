@@ -118,6 +118,13 @@ export const TEXT_FIELDS = {
 };
 
 export const ROW_FIELDS = {
-  CERTIFICATE: ['certificate', 'code', 'price', 'expiration', 'status', 'actions'],
-  ORDER: ['product', 'size', 'price', 'quantity', 'toPay', 'actions']
+  CERTIFICATE: [
+    'certificate.certificate',
+    'certificate.code',
+    'certificate.price',
+    'certificate.expiration',
+    'certificate.status',
+    'certificate.actions'
+  ],
+  ORDER: ['cart.product', 'cart.size', 'cart.price', 'cart.quantity', 'cart.toPay', 'cart.actions']
 };

@@ -1,22 +1,18 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TableCell } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { useStyles } from './order-table.styles';
 
 import CartItem from '../../cart/cart-item';
 import ConfirmDialog from '../../../../components/confirm-dialog';
-import { ROW_FIELDS } from '../../../../configs';
-import TableComponent from '../../../../components/table';
 
 const OrderTable = ({ items, user, cartOperations, promoCode, certificateData }) => {
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
-
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const { removeFromCart } = cartOperations;
-
   const cartItems = items.map((item) => (
     <CartItem
       key={item.id}
@@ -31,19 +27,12 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
     />
   ));
 
-  const headerItems = useMemo(
-    () => ROW_FIELDS.ORDER.map((item) => <TableCell key={item}>{t(`cart.${item}`)}</TableCell>),
-    [ROW_FIELDS.ORDER, t]
-  );
-
   const onRemoveOneModalAction = (action) => {
     if (action) {
       removeFromCart(modalItem);
     }
-
     setRemoveOneModalVisibility(false);
   };
-
   return (
     <div className={styles.root}>
       {removeOneModalVisibility && (
@@ -58,14 +47,25 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
       )}
       <h2 className={styles.titleWrapper}>{t('cart.titleFilled')} </h2>
       <div className={styles.table}>
-        <TableComponent
-          headerItems={headerItems}
-          headerStyle={styles.tableHeader}
-          bodyItems={cartItems}
-        />
+        <Table>
+          <TableHead>
+            <TableRow
+              classes={{
+                root: styles.tableHeader
+              }}
+            >
+              <TableCell>{t('cart.product')}</TableCell>
+              <TableCell>{t('cart.size')}</TableCell>
+              <TableCell>{t('cart.price')}</TableCell>
+              <TableCell>{t('cart.quantity')}</TableCell>
+              <TableCell>{t('cart.toPay')}</TableCell>
+              <TableCell>{t('cart.actions')}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{cartItems}</TableBody>
+        </Table>
       </div>
     </div>
   );
 };
-
 export default OrderTable;

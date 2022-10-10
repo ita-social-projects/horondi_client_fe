@@ -4,6 +4,7 @@ import { render, screen, cleanup, fireEvent, waitForElement } from '@testing-lib
 import { MockedProvider } from '@apollo/client/testing';
 import MyCertificates from '../../../../pages/my-certificates/my-certificates';
 import {
+  mockStore,
   certificateMock1,
   certificateMock2,
   certificateMock3,
@@ -27,17 +28,15 @@ jest.mock(
 jest.mock(
   '../../../../containers/my-certificates/certificate-table/certificate-table.styles.js',
   () => ({
-    useStyles: () => ({})
-  })
-);
-
-jest.mock(
-  '../../../../containers/my-certificates/cetrificate-item/certificate-item.styles.js',
-  () => ({
     useActiveStyles: () => ({}),
+    useExpiringStyles: () => ({}),
     useNotActiveStyles: () => ({})
   })
 );
+
+jest.mock('../../../../components/table/table.styles', () => ({
+  useStyles: () => ({})
+}));
 
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
@@ -46,6 +45,11 @@ jest.mock('@material-ui/styles', () => ({
       type: 'light'
     }
   })
+}));
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: () => mockStore
 }));
 
 describe('MyCertificates test', () => {

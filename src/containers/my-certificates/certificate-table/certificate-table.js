@@ -7,8 +7,8 @@ import Toast from '../../toast';
 import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
 import CertificateCodeGift from '../../../images/certificates/certificateCodeGift';
 import CertificateImages from '../../../images/certificates/CertificateImages';
-import { ROW_FIELDS } from '../../../configs/index';
 import { useActiveStyles, useExpiringStyles, useNotActiveStyles } from './certificate-table.styles';
+import { ROW_FIELDS } from '../../../configs/index';
 
 const CertificateTable = ({ items, openModal }) => {
   const { t } = useTranslation();

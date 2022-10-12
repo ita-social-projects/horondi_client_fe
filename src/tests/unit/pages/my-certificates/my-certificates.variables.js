@@ -1,5 +1,13 @@
 import { getAllUserCertificates } from '../../../../pages/my-certificates/operations/my-certificates.queries';
 
+export const mockStore = {
+  userData: {
+    email: 'sashkohorondi@gmail.com',
+    certificateExpires: '2022-10-16T05:00:00.000Z'
+  },
+  currency: 0
+};
+
 export const certificateMock1 = {
   request: {
     query: getAllUserCertificates,

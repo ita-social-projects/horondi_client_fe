@@ -15,16 +15,15 @@ jest.mock(
 jest.mock(
   '../../../../../containers/my-certificates/certificate-table/certificate-table.styles.js',
   () => ({
-    useStyles: () => ({})
+    useActiveStyles: () => ({}),
+    useExpiringStyles: () => ({}),
+    useNotActiveStyles: () => ({})
   })
 );
 
-jest.mock(
-  '../../../../../containers/my-certificates/cetrificate-item/certificate-item.styles.js',
-  () => ({
-    useStyles: () => ({})
-  })
-);
+jest.mock('../../../../../components/table/table.styles', () => ({
+  useStyles: () => ({})
+}));
 
 jest.mock('../../../../../components/modal/modal.styles.js', () => ({
   useStyles: () => ({})
@@ -34,6 +33,13 @@ jest.mock('react-i18next', () => ({
   useTranslation: () => ({
     t: (key) => key,
     i18n: { language: 'en' }
+  })
+}));
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: () => ({
+    userData: { certificateExpires: '2022-10-16T05:00:00.000Z' }
   })
 }));
 

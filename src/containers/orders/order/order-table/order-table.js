@@ -10,11 +10,9 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
   const { t, i18n } = useTranslation();
   const language = i18n.language === 'ua' ? 0 : 1;
   const styles = useStyles();
-
   const [removeOneModalVisibility, setRemoveOneModalVisibility] = useState(false);
   const [modalItem, setModalItem] = useState({});
   const { removeFromCart } = cartOperations;
-
   const cartItems = items.map((item) => (
     <CartItem
       key={item.id}
@@ -33,10 +31,8 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
     if (action) {
       removeFromCart(modalItem);
     }
-
     setRemoveOneModalVisibility(false);
   };
-
   return (
     <div className={styles.root}>
       {removeOneModalVisibility && (
@@ -72,5 +68,4 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
     </div>
   );
 };
-
 export default OrderTable;

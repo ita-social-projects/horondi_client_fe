@@ -7,6 +7,7 @@ export const getCertificateByParams = gql`
       ... on Certificate {
         _id
         name
+        inProgress
         isExpired
         isUsed
         value

@@ -37,3 +37,21 @@ describe('NewPassword component', () => {
     expect(component.find(AuthWrapper).length).toBe(1);
   });
 });
+
+describe('NewPassword component', () => {
+  it('Should contains succes window', () => {
+    const state = {
+      userError: '',
+      loading: false,
+      passwordReset: true,
+      language: 0
+    };
+    state.passwordReset = true;
+    useSelector.mockImplementation(() => state);
+
+    const wrapper = mount(<NewPassword />);
+    const successHeading = wrapper.find('h2');
+
+    expect(successHeading.length).toBe(1);
+  });
+});

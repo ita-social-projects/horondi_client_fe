@@ -1,13 +1,4 @@
-import React from 'react';
 import i18next from 'i18next';
-import { Loader } from '../components/loader/loader';
-
-export const handleSuccessOrLoader = (userRecovered, successWindow) => {
-  if (userRecovered) {
-    return successWindow;
-  }
-  return <Loader heightWrap='214px' />;
-};
 
 const handleHelperErorrText = (error) =>
   error

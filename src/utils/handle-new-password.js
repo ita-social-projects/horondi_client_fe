@@ -1,13 +1,5 @@
 import React from 'react';
 import i18next from 'i18next';
-import { Loader } from '../components/loader/loader';
-
-export const handleNewPasswodLoaderOrWindow = (passwordReset, successWindow) => {
-  if (passwordReset) {
-    return successWindow;
-  }
-  return <Loader />;
-};
 
 export const handleErrorMessage = (userError, className) => {
   if (userError) {

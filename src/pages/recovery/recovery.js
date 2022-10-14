@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 import { useStyles } from './recovery.styles';
 import { recoverUser, setUserError, userHasRecovered } from '../../redux/user/user.actions';
 import { AuthWrapper, AuthButton, AuthHeading } from '../../components/auth-form';
-import { handleHelperText, handleSuccessOrLoader } from '../../utils/handle-recovery-page';
+import { handleHelperText } from '../../utils/handle-recovery-page';
 import { validationSchema } from '../../validators/email';
 
 const Recovery = () => {
@@ -50,12 +50,9 @@ const Recovery = () => {
   const inputError = touched.email && errors.email;
   const errorMsg = handleHelperText(t(inputError || error));
 
-  const successOrLoader =
-    (userRecovered || recoveryLoading) && handleSuccessOrLoader(userRecovered, successWindow);
-
   return (
     <AuthWrapper>
-      {successOrLoader || (
+      {(userRecovered && successWindow) || (
         <form onSubmit={handleSubmit}>
           <AuthHeading>{t('recovery.recoveryTitle')}</AuthHeading>
           <TextField
@@ -73,7 +70,7 @@ const Recovery = () => {
           />
           <div className={styles.errorText}>{errorMsg || ''}</div>
           <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
-          <AuthButton>{t('recovery.recoveryButtonText')}</AuthButton>
+          <AuthButton loading={recoveryLoading}>{t('recovery.recoveryButtonText')}</AuthButton>
         </form>
       )}
     </AuthWrapper>

@@ -94,21 +94,6 @@ describe('Login page test', () => {
     expect(rememberMeCheckbox).toBeEnabled();
   });
 
-  it('form should disappear when loader is called', () => {
-    storage.userLoading = true;
-    const { queryByText } = render(
-      <SnackBarContextProvider>
-        <Router>
-          <Login />
-        </Router>
-      </SnackBarContextProvider>
-    );
-
-    const form = queryByText(/google/i);
-    expect(form).toBeNull();
-    storage.userLoading = false;
-  });
-
   it('should render error message if error occurred', () => {
     storage.loginError = 'ERROR';
     const { getByText } = render(

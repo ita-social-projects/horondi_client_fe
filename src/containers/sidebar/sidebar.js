@@ -46,7 +46,10 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   }, []);
 
   const { loading, error } = useQuery(getCategoriesForBurgerMenu, {
-    onCompleted: (data) => setCategories(data.getCategoriesForBurgerMenu)
+    onCompleted: (data) =>
+      setCategories(
+        data.getCategoriesForBurgerMenu.filter((category) => category.models.length > 0)
+      )
   });
 
   const categoriesList = useMemo(

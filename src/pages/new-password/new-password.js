@@ -2,16 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './new-password.styles';
-import { formRegExp } from '../../configs/regexp';
 import { endAdornment } from '../../utils/eyeToggle';
 import { resetPassword, resetState } from '../../redux/user/user.actions';
-import {
-  handleNewPasswodLoaderOrWindow,
-  handleErrorMessage
-} from '../../utils/handle-new-password';
+import { handleErrorMessage } from '../../utils/handle-new-password';
+import { newPasswordSchema } from '../../validators/new-password';
 import { AuthWrapper, AuthHeading, AuthButton } from '../../components/auth-form';
 
 const NewPassword = ({ token }) => {
@@ -44,33 +40,17 @@ const NewPassword = ({ token }) => {
     </div>
   );
 
-  const validationSchema = Yup.object({
-    password: Yup.string()
-      .matches(formRegExp.password, t('error.profile.pass'))
-      .required(t('error.profile.pass')),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], t('error.confirmPassword'))
-      .when('password', {
-        is: (val) => {
-          if (val) return val;
-        },
-        then: Yup.string().required(t('error.confirmPassword'))
-      })
-  });
-
   return (
     <Formik
       onSubmit={handleRecovery}
       initialValues={{ password: '', confirmPassword: '' }}
       validateOnBlur={shouldValidate}
       validateOnChange={shouldValidate}
-      validationSchema={validationSchema}
+      validationSchema={newPasswordSchema}
     >
       {({ errors }) => (
         <AuthWrapper>
-          {passwordReset || loading ? (
-            handleNewPasswodLoaderOrWindow(passwordReset, successWindow)
-          ) : (
+          {(passwordReset && successWindow) || (
             <Form className='newPasswordForm'>
               <AuthHeading>{t('common.enterNew')}</AuthHeading>
               <Field
@@ -98,6 +78,7 @@ const NewPassword = ({ token }) => {
                 helperText={errors.confirmPassword || ''}
               />
               <AuthButton
+                loading={loading}
                 onclick={() => {
                   setShouldValidate(true);
                 }}

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Field, useFormikContext } from 'formik';
 import { FormControlLabel } from '@material-ui/core';
 import RegisterForm from '../../../../pages/register/register-from/register-form';
-import { Loader } from '../../../../components/loader/loader';
 
 jest.mock('../../../../pages/register/register-from/register-form.styles', () => ({
   useStyles: () => ({})
@@ -50,14 +49,7 @@ describe('RegisterForm tests', () => {
     const wrapper = shallow(<RegisterForm {...props} />);
     expect(wrapper.find(Field).length).toEqual(4);
   });
-  it('should not render Loader if not loading', () => {
-    const wrapper = shallow(<RegisterForm {...props} />);
-    expect(wrapper.find(Loader)).toHaveLength(0);
-  });
-  it('should render Loader if loading', () => {
-    const wrapper = shallow(<RegisterForm {...props} loading />);
-    expect(wrapper.find(Loader)).toHaveLength(1);
-  });
+
   it('should set checkbox checked', () => {
     const wrapper = shallow(<RegisterForm {...props} />);
     const checkbox = wrapper.find(FormControlLabel);

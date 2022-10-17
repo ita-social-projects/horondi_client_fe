@@ -10,7 +10,6 @@ import { useStyles } from './register-form.styles';
 import { endAdornment } from '../../../utils/eyeToggle';
 import GoogleBtn from '../../../components/google-log-in-btn/index';
 import FacebookBtn from '../../../components/facebook-log-in-btn';
-import { Loader } from '../../../components/loader/loader';
 import routes from '../../../configs/routes';
 import { AuthButton, AuthHeading } from '../../../components/auth-form';
 
@@ -60,51 +59,45 @@ export default function RegisterForm({
 
   return (
     <Form className={styles.registerForm}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <AuthHeading>{t('register.formLabel')}</AuthHeading>
-          {Object.keys(values).map((name) => (
-            <Field
-              key={name}
-              type={type(name)}
-              name={name}
-              as={TextField}
-              label={t(`register.placeholders.${name}`)}
-              variant={TEXT_FIELD_VARIANT.OUTLINED}
-              fullWidth
-              error={!!errors[name]}
-              helperText={t(errors[name])}
-              className={`${styles.dataInput} ${
-                name === USER_REGISTER_LABELS.email && styles.afterText
-              }`}
-              InputProps={inputProps(name)}
-            />
-          ))}
-          <FormControlLabel
-            checked={checked}
-            onChange={handleChange}
-            control={<Checkbox className={styles.checkbox} />}
-            label={consentLink}
-          />
-          <div className={styles.registerGroup}>
-            <AuthButton onClick={setShouldValidate} disabled={!checked}>
-              {' '}
-              {t('register.formLabel')}
-            </AuthButton>
-            <p className={styles.registerError}>{registerError}</p>
-            <p className={styles.googleText}>{t('register.googleSignIn')}</p>
-            <GoogleBtn />
-            <FacebookBtn />
-          </div>
-          <div>
-            <Link to={pathToLogin} className={styles.loginBtn}>
-              {t('register.loginFormLabel')}
-            </Link>
-          </div>
-        </>
-      )}
+      <AuthHeading>{t('register.formLabel')}</AuthHeading>
+      {Object.keys(values).map((name) => (
+        <Field
+          key={name}
+          type={type(name)}
+          name={name}
+          as={TextField}
+          label={t(`register.placeholders.${name}`)}
+          variant={TEXT_FIELD_VARIANT.OUTLINED}
+          fullWidth
+          error={!!errors[name]}
+          helperText={t(errors[name])}
+          className={`${styles.dataInput} ${
+            name === USER_REGISTER_LABELS.email && styles.afterText
+          }`}
+          InputProps={inputProps(name)}
+        />
+      ))}
+      <FormControlLabel
+        checked={checked}
+        onChange={handleChange}
+        control={<Checkbox className={styles.checkbox} />}
+        label={consentLink}
+      />
+      <div className={styles.registerGroup}>
+        <AuthButton onClick={setShouldValidate} disabled={!checked} loading={loading}>
+          {' '}
+          {t('register.formLabel')}
+        </AuthButton>
+        <p className={styles.registerError}>{registerError}</p>
+        <p className={styles.googleText}>{t('register.googleSignIn')}</p>
+        <GoogleBtn />
+        <FacebookBtn />
+      </div>
+      <div>
+        <Link to={pathToLogin} className={styles.loginBtn}>
+          {t('register.loginFormLabel')}
+        </Link>
+      </div>
     </Form>
   );
 }

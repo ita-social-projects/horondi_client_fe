@@ -11,7 +11,6 @@ import { loginUser, resetState } from '../../redux/user/user.actions';
 import { endAdornment } from '../../utils/eyeToggle';
 import GoogleBtn from '../../components/google-log-in-btn/index';
 import FacebookBtn from '../../components/facebook-log-in-btn';
-import { Loader } from '../../components/loader/loader';
 import routes from '../../configs/routes';
 import { loginValidationSchema } from '../../validators/login';
 import Snackbar from '../../containers/snackbar';
@@ -64,79 +63,77 @@ const Login = () => {
 
   return (
     <AuthWrapper>
-      {userLoading ? (
-        <Loader />
-      ) : (
-        <form onSubmit={(e) => eventPreventHandler(e)}>
-          <AuthHeading>{t('login.formLabel')}</AuthHeading>
-          <TextField
-            data-cy='email'
-            id='email'
-            label={t('login.placeholders.email')}
-            className={`${styles.emailInput} ${emailStyles}`}
-            fullWidth
-            variant='outlined'
-            type='text'
-            name='email'
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.email}
-            color={MATERIAL_UI_COLOR.PRIMARY}
-            error={Boolean(touched.email && t(errors.email))}
-            helperText={touched.email && t(errors.email)}
-          />
-          <TextField
-            data-cy='password'
-            id='password'
-            label={t('login.placeholders.password')}
-            className={styles.passwordInput}
-            fullWidth
-            variant='outlined'
-            color={MATERIAL_UI_COLOR.PRIMARY}
-            type='password'
-            InputProps={endAdornment(showPassword, setShowPassword)}
-            value={values.password}
-            name='password'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={Boolean(touched.password && t(errors.password))}
-            helperText={touched.password && t(errors.password)}
-          />
-          <div className={styles.recoveryContainer}>
-            <div>
-              <FormControlLabel
-                data-testid='staySignedIn'
-                key={t('login.rememberMe')}
-                value={values.rememberMe}
-                checked={values.rememberMe}
-                control={<Checkbox color={checkTheme()} />}
-                label={t('login.rememberMe')}
-                labelPlacement='end'
-                onChange={() => setFieldValue('rememberMe', !values.rememberMe)}
-              />
-            </div>
+      <form onSubmit={(e) => eventPreventHandler(e)}>
+        <AuthHeading>{t('login.formLabel')}</AuthHeading>
+        <TextField
+          data-cy='email'
+          id='email'
+          label={t('login.placeholders.email')}
+          className={`${styles.emailInput} ${emailStyles}`}
+          fullWidth
+          variant='outlined'
+          type='text'
+          name='email'
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.email}
+          color={MATERIAL_UI_COLOR.PRIMARY}
+          error={Boolean(touched.email && t(errors.email))}
+          helperText={touched.email && t(errors.email)}
+        />
+        <TextField
+          data-cy='password'
+          id='password'
+          label={t('login.placeholders.password')}
+          className={styles.passwordInput}
+          fullWidth
+          variant='outlined'
+          color={MATERIAL_UI_COLOR.PRIMARY}
+          type='password'
+          InputProps={endAdornment(showPassword, setShowPassword)}
+          value={values.password}
+          name='password'
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={Boolean(touched.password && t(errors.password))}
+          helperText={touched.password && t(errors.password)}
+        />
+        <div className={styles.recoveryContainer}>
+          <div>
+            <FormControlLabel
+              data-testid='staySignedIn'
+              key={t('login.rememberMe')}
+              value={values.rememberMe}
+              checked={values.rememberMe}
+              control={<Checkbox color={checkTheme()} />}
+              label={t('login.rememberMe')}
+              labelPlacement='end'
+              onChange={() => setFieldValue('rememberMe', !values.rememberMe)}
+            />
           </div>
+        </div>
 
-          <div className={styles.loginGroup}>
-            <AuthButton onclick={handleSubmit}>{t('login.formLabel').toUpperCase()}</AuthButton>
-            {wrongCredentials}
-          </div>
-          <Link to={pathToRecovery} className={styles.recoveryBtn}>
-            {t('login.forgotPassword')}
+        <div className={styles.loginGroup}>
+          <AuthButton loading={userLoading} onclick={handleSubmit}>
+            {t('login.formLabel').toUpperCase()}
+          </AuthButton>
+          {wrongCredentials}
+        </div>
+        <Link to={pathToRecovery} className={styles.recoveryBtn}>
+          {t('login.forgotPassword')}
+        </Link>
+        <div className={styles.orContainer}>
+          <span className={styles.orText}>{t('login.orText')}</span>
+        </div>
+        <GoogleBtn />
+        <FacebookBtn />
+        <div className={styles.registerContainer}>
+          <Link to={pathToRegister} className={styles.registerBtn}>
+            {t('login.registerProposal')}
           </Link>
-          <div className={styles.orContainer}>
-            <span className={styles.orText}>{t('login.orText')}</span>
-          </div>
-          <GoogleBtn />
-          <FacebookBtn />
-          <div className={styles.registerContainer}>
-            <Link to={pathToRegister} className={styles.registerBtn}>
-              {t('login.registerProposal')}
-            </Link>
-          </div>
-          <Snackbar />
-        </form>
-      )}
+        </div>
+        <Snackbar />
+      </form>
     </AuthWrapper>
   );
 };

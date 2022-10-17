@@ -6,12 +6,13 @@ import {
   handleAddOrder,
   handleGetCreatedOrder,
   handleGetFondyUrl,
-  handleOrderError
+  handleOrderError,
+  handleSendOrderToEmail
 } from '../order.sagas';
-import { orderExample, paidOrder, payload, message } from './order.variables';
+import { orderExample, mockPayload, paidOrder, payload, message } from './order.variables';
 import { setToLocalStorage, getFromLocalStorage } from '../../../services/local-storage.service';
 import { setError } from '../../error/error.actions';
-import { getPaymentCheckout, addOrder } from '../order.operations';
+import { getPaymentCheckout, addOrder, sendOrderToEmail } from '../order.operations';
 import routes from '../../../configs/routes';
 
 const { pathToErrorPage, pathToAllProducts } = routes;
@@ -61,6 +62,17 @@ describe('sagas test', () => {
       .put(setOrder(paidOrder))
       .put(push(`${pathToAllProducts}`))
       .put(setOrderLoading(false))
+      .run();
+  });
+
+  it('fetching sending order to email', () => {
+    expectSaga(handleSendOrderToEmail, mockPayload)
+      .provide([
+        [
+          matchers.call.fn(sendOrderToEmail, mockPayload.language, mockPayload.paidOrderNumber),
+          orderExample
+        ]
+      ])
       .run();
   });
 });

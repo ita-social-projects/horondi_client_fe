@@ -5,6 +5,7 @@ import {
   GET_ORDER,
   ADD_ORDER,
   GET_FONDY_DATA,
+  SEND_ORDER_TO_EMAIL,
   ADD_PAYMENT_METHOD
 } from './order.types';
 
@@ -31,6 +32,10 @@ export const getOrder = () => ({
 
 export const getFondyData = (payload) => ({
   type: GET_FONDY_DATA,
+  payload
+});
+export const sendOrderToEmail = (payload) => ({
+  type: SEND_ORDER_TO_EMAIL,
   payload
 });
 export const addPaymentMethod = (payload) => ({

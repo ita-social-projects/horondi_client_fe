@@ -1,8 +1,8 @@
-import { ApolloClient, gql, split, ApolloLink } from '@apollo/client';
+import { ApolloClient, gql, split, ApolloLink, InMemoryCache } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { setContext } from '@apollo/client/link/context';
 import fetch from 'unfetch';
-import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client/public';
 import { getMainDefinition } from '@apollo/client/utilities';
 

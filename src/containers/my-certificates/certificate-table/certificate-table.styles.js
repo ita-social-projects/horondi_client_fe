@@ -81,7 +81,7 @@ export const useActiveStyles = makeStyles(({ palette }) => ({
       overflowX: 'auto'
     },
     '& td': {
-      padding: '24px 13px',
+      padding: '24px 12px',
       lineHeight: '28px',
       fontSize: '19px',
       fontWeight: 400,

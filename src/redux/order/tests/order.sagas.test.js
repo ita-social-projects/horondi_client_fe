@@ -1,4 +1,5 @@
 import { expectSaga } from 'redux-saga-test-plan';
+import { call } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { push } from 'connected-react-router';
 import { setIsOrderCreated, setOrder, setOrderLoading } from '../order.actions';
@@ -66,13 +67,8 @@ describe('sagas test', () => {
   });
 
   it('fetching sending order to email', () => {
-    expectSaga(handleSendOrderToEmail, mockPayload)
-      .provide([
-        [
-          matchers.call.fn(sendOrderToEmail, mockPayload.language, mockPayload.paidOrderNumber),
-          orderExample
-        ]
-      ])
+    expectSaga(handleSendOrderToEmail, { payload: mockPayload })
+      .provide([[call(sendOrderToEmail, { mockPayload }), paidOrder]])
       .run();
   });
 });

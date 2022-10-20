@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontSize: '14px',
     lineHeight: '20px',
-    width: '450px',
+    width: '100%',
     height: '50px',
     textTransform: 'uppercase',
     background: theme.palette.textColor,

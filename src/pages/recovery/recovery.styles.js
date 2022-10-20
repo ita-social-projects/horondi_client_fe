@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   emailInput: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#828282'
+        borderColor: theme.palette.lightGrayShade
       },
       '&.Mui-focused fieldset': {
         borderColor: theme.palette.blue
@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
       paddingLeft: '30px'
     },
     '& .MuiInputBase-input:focus': {
-      color: '#828282'
+      color: theme.palette.lightGrayShade
     },
     '& label': {
       fontStyle: 'normal',
@@ -58,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,
-      color: '#828282 !important'
+      color: theme.palette.lightGrayShade
     }
   },
   successText: {

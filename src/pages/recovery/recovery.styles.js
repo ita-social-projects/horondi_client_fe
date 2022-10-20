@@ -11,10 +11,12 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& .MuiInputBase-input': {
+      fontFamily: 'Open Sans',
       fontStyle: 'normal',
-      fontWeight: 'normal',
-      fontSize: '1rem',
-      color: theme.palette.textColor
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: '25px',
+      paddingLeft: '30px'
     },
     '& .MuiInputBase-input:focus': {
       color: '#828282'
@@ -22,21 +24,22 @@ export const useStyles = makeStyles((theme) => ({
     '& label': {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: '1rem',
+      fontSize: '18px',
       background: 'white',
       paddingRight: '5px',
-      transform: 'translate(1rem, 1.2rem) scale(1)'
+      transform: 'translate(13, 16) scale(1)'
     },
     '& label.Mui-focused': {
       color: theme.palette.blue
     }
   },
   recoveryText: {
-    margin: '7px 0 30px',
+    margin: '10px 0 35px',
+    fonFamily: 'Open Sans',
     fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '0.75rem',
-    lineHeight: '15px',
+    fontWeight: '400',
+    fontSize: '12px',
+    lineHeight: '16px',
     textAlign: 'left',
     maxWidth: '400px'
   },

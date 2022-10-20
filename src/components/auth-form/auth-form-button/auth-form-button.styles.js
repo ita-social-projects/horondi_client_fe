@@ -2,10 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   authBtn: {
-    fontSize: '0.8rem',
-    height: '3rem',
-    border: '1px solid black',
-    borderRadius: '5px',
+    fontFamily: 'Open Sans',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    fontSize: '14px',
+    lineHeight: '20px',
+    width: '450px',
+    height: '50px',
     textTransform: 'uppercase',
     background: theme.palette.textColor,
     color: theme.palette.backgroundColor,

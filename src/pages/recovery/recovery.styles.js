@@ -2,33 +2,37 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   emailInput: {
-    marginBottom: '21px',
-    '& label': {
-      transform: 'translate(14px, 14px) scale(1)'
-    },
-    '& div > input': {
-      padding: '11px 14px !important',
-      position: 'relative'
-    },
-    '& p': {
-      position: 'absolute',
-      top: '40px'
-    },
-    '& label.Mui-focused': {
-      color: theme.palette.textColor
-    },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: '#828282'
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.black,
-        borederWidth: '2px'
+        borderColor: theme.palette.blue
       }
+    },
+    '& .MuiInputBase-input': {
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: '1rem',
+      color: theme.palette.textColor
+    },
+    '& .MuiInputBase-input:focus': {
+      color: '#828282'
+    },
+    '& label': {
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: '1rem',
+      background: 'white',
+      paddingRight: '5px',
+      transform: 'translate(1rem, 1.2rem) scale(1)'
+    },
+    '& label.Mui-focused': {
+      color: theme.palette.blue
     }
   },
   recoveryText: {
-    margin: '5px 0 15px',
+    margin: '7px 0 30px',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '0.75rem',
@@ -37,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: '400px'
   },
   errorText: {
-    marginTop: '-20px',
+    margin: '5px 0 15px',
     height: 'fit-content',
     lineHeight: '12px',
     minHeight: '12px',
@@ -50,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,
-      color: '#828282'
+      color: '#828282 !important'
     }
   },
   successText: {

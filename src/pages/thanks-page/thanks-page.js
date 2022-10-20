@@ -20,8 +20,8 @@ const ThanksPage = () => {
   useLayoutEffect(() => {
     if (cart.length) {
       clearCart();
+      dispatch(sendOrderToEmail({ language, paidOrderNumber: orderNumber }));
     }
-    dispatch(sendOrderToEmail({ language, paidOrderNumber: orderNumber }));
   }, []);
 
   return (

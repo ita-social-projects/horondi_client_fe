@@ -12,6 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& .MuiInputBase-input': {
       fontFamily: 'Open Sans',
+      color: theme.palette.textColor,
       fontStyle: 'normal',
       fontWeight: '400',
       fontSize: '18px',

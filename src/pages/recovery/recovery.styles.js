@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
       }
     },
     '& .MuiInputBase-input': {
-      fontFamily: 'Open Sans',
+      fontFamily: theme.typography.fontFamily,
       color: theme.palette.textColor,
       fontStyle: 'normal',
       fontWeight: '400',
@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   recoveryText: {
     margin: '10px 0 35px',
-    fonFamily: 'Open Sans',
+    fonFamily: theme.typography.fontFamily,
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: '12px',

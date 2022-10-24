@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.button.fontSize,
     fontWeight: theme.typography.h2.fontWeight,
     lineHeight: theme.typography.h2.lineHeight,
-    width: '100%',
     height: '50px',
     textTransform: 'uppercase',
     '&:hover': {

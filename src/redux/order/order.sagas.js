@@ -76,7 +76,11 @@ export function* handleGetFondyUrl({ payload }) {
 }
 
 export function* handleSendOrderToEmail({ payload }) {
-  yield call(sendOrderToEmail, payload.language, payload.paidOrderNumber);
+  try {
+    yield call(sendOrderToEmail, payload.language, payload.paidOrderNumber);
+  } catch (e) {
+    yield call(handleOrderError, e);
+  }
 }
 
 export function handleSetPaymentMethod({ payload }) {

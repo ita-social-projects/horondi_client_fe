@@ -2,6 +2,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { call } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { push } from 'connected-react-router';
+import { orderReducer } from '../order.reducer';
 import { setIsOrderCreated, setOrder, setOrderLoading } from '../order.actions';
 import {
   handleAddOrder,
@@ -69,6 +70,11 @@ describe('sagas test', () => {
   it('fetching sending order to email', () => {
     expectSaga(handleSendOrderToEmail, { payload: mockPayload })
       .provide([[call(sendOrderToEmail, { mockPayload }), paidOrder]])
-      .run();
+      .withReducer(orderReducer)
+      .run()
+      .then((result) => {
+        const { allEffects: analysis } = result;
+        expect(analysis[0].payload.args).toEqual([0, 234]);
+      });
   });
 });

@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   recoveryText: {
     margin: '10px 0 35px',
-    fonFamily: theme.typography.fontFamily,
+    fontFamily: theme.typography.fontFamily,
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: '12px',

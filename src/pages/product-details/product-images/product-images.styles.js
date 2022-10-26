@@ -118,6 +118,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: '0 5px',
+    color: theme.palette.black,
     '@media (max-width: 500px)': {
       padding: '0',
       fontSize: '14px'

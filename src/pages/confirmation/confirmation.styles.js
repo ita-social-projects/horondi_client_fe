@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme) => ({
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    minHeight: '100vh'
+    flex: 1
+    // minHeight: '75vh' //75
   },
   welcome: {
     minHeight: '100px',

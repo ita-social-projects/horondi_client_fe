@@ -3,11 +3,8 @@ import BG from '../../images/welcome.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   confirmation: {
-    background: `url(${BG}) no-repeat `,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    background: `center/cover url(${BG}) no-repeat `,
     flex: 1
-    // minHeight: '75vh' //75
   },
   welcome: {
     minHeight: '100px',

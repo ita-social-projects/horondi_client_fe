@@ -7,15 +7,16 @@ export const useStyles = makeStyles((theme) => ({
     flex: 1
   },
   welcome: {
-    minHeight: '100px',
-    padding: '30px',
+    height: '200px',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '150px',
+    margin: 'auto',
+    padding: '20px',
     width: '400px',
     textAlign: 'center',
-    position: 'absolute',
-    top: '209px',
-    left: '0px',
-    right: '0px',
-    margin: 'auto',
     borderRadius: '7px',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     '& h2': {

@@ -1,17 +1,20 @@
 import { expectSaga } from 'redux-saga-test-plan';
+import { call } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { push } from 'connected-react-router';
+import { orderReducer } from '../order.reducer';
 import { setIsOrderCreated, setOrder, setOrderLoading } from '../order.actions';
 import {
   handleAddOrder,
   handleGetCreatedOrder,
   handleGetFondyUrl,
-  handleOrderError
+  handleOrderError,
+  handleSendOrderToEmail
 } from '../order.sagas';
-import { orderExample, paidOrder, payload, message } from './order.variables';
+import { orderExample, mockPayload, paidOrder, payload, message } from './order.variables';
 import { setToLocalStorage, getFromLocalStorage } from '../../../services/local-storage.service';
 import { setError } from '../../error/error.actions';
-import { getPaymentCheckout, addOrder } from '../order.operations';
+import { getPaymentCheckout, addOrder, sendOrderToEmail } from '../order.operations';
 import routes from '../../../configs/routes';
 
 const { pathToErrorPage, pathToAllProducts } = routes;
@@ -62,5 +65,16 @@ describe('sagas test', () => {
       .put(push(`${pathToAllProducts}`))
       .put(setOrderLoading(false))
       .run();
+  });
+
+  it('fetching sending order to email', () => {
+    expectSaga(handleSendOrderToEmail, { payload: mockPayload })
+      .provide([[call(sendOrderToEmail, { mockPayload }), paidOrder]])
+      .withReducer(orderReducer)
+      .run()
+      .then((result) => {
+        const { allEffects: analysis } = result;
+        expect(analysis[0].payload.args).toEqual([0, 234]);
+      });
   });
 });

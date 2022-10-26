@@ -1,4 +1,4 @@
-import { orderExample } from './order.variables';
+import { orderExample, mockPayload } from './order.variables';
 import {
   SET_LOADING,
   SET_ORDER,
@@ -6,6 +6,7 @@ import {
   GET_ORDER,
   ADD_ORDER,
   GET_FONDY_DATA,
+  SEND_ORDER_TO_EMAIL,
   ADD_PAYMENT_METHOD
 } from '../order.types';
 import {
@@ -15,6 +16,7 @@ import {
   setIsOrderCreated,
   getOrder,
   getFondyData,
+  sendOrderToEmail,
   addPaymentMethod
 } from '../order.actions';
 
@@ -70,6 +72,15 @@ describe('Orders actions test', () => {
     };
 
     expect(getFondyData(orderExample.paymentMethod)).toEqual(result);
+  });
+
+  it('should send order to email', () => {
+    const result = {
+      type: SEND_ORDER_TO_EMAIL,
+      payload: mockPayload
+    };
+
+    expect(sendOrderToEmail(mockPayload)).toEqual(result);
   });
 });
 

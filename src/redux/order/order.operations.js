@@ -116,49 +116,54 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
   return result?.data?.getPaymentCheckout;
 };
 
-export const sendOrderToEmail = gql`
-  query ($language: Int!, $paidOrderNumber: String!) {
-    sendOrderToEmail(language: $language, paidOrderNumber: $paidOrderNumber) {
-      __typename
-      ... on Order {
-        _id
-        orderNumber
-        recipient {
-          firstName
-          lastName
-          email
-          phoneNumber
-        }
-        delivery {
-          sentBy
-        }
-        items {
-          product {
-            name {
-              lang
-              value
+export const sendOrderToEmail = async (language, paidOrderNumber) => {
+  const sendOrderToEmailQuery = gql`
+    query ($language: Int!, $paidOrderNumber: String!) {
+      sendOrderToEmail(language: $language, paidOrderNumber: $paidOrderNumber) {
+        __typename
+        ... on Order {
+          _id
+          orderNumber
+          recipient {
+            firstName
+            lastName
+            email
+            phoneNumber
+          }
+          delivery {
+            sentBy
+          }
+          items {
+            product {
+              name {
+                lang
+                value
+              }
+              images {
+                primary {
+                  thumbnail
+                }
+              }
             }
-            images {
-              primary {
-                thumbnail
+            fixedPrice
+            quantity
+            options {
+              size {
+                name
               }
             }
           }
-          fixedPrice
-          quantity
-          options {
-            size {
-              name
-            }
-          }
+          totalPriceToPay
+          paymentStatus
         }
-        totalPriceToPay
-        paymentStatus
-      }
-      ... on Error {
-        statusCode
-        message
+        ... on Error {
+          statusCode
+          message
+        }
       }
     }
-  }
-`;
+  `;
+  const result = await getItems(sendOrderToEmailQuery, { language, paidOrderNumber });
+
+  return result?.data?.sendOrderToEmail;
+};

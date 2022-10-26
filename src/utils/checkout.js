@@ -127,7 +127,7 @@ const productItemsInput = (cartItems) =>
   cartItems.map((item) => ({
     product: item.productId,
     quantity: item.quantity,
-    isFromConstructor: item.constructor.isConstructor,
+    isFromConstructor: item.isFromConstructor,
     price: item.sizeAndPrice.price,
     options: {
       size: item.sizeAndPrice.size._id

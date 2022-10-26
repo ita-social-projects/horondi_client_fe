@@ -5,8 +5,8 @@ export const useStyles = makeStyles((theme) => ({
   confirmation: {
     background: `url(${BG}) no-repeat `,
     backgroundSize: 'cover',
-    height: '700px',
-    position: 'relative'
+    backgroundPosition: 'center',
+    minHeight: '100vh'
   },
   welcome: {
     minHeight: '100px',

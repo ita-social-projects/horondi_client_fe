@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 import { useQuery } from '@apollo/client';
 import { useStyles } from './order-history-item-product.styles';
-import { IMG_URL } from '../../../../configs';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
 import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import { useCurrency } from '../../../../hooks/use-currency';
+import useProductImage from '../../../../hooks/use-product-image';
+import ThemeContext from '../../../../context/theme-context';
 
 const canvasW = 720;
 const canvasH = 500;
@@ -17,9 +18,11 @@ const canvasY = 0;
 const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRate }) => {
   const styles = useStyles();
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
+  const [isLightTheme] = useContext(ThemeContext);
   const currencySign = getCurrencySign();
   const productPrice = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
   const { t } = useTranslation();
+  const { image, checkImage } = useProductImage();
 
   const { product } = item;
   const { data: constructorByModel, loading: loadingConstructorByModel } = useQuery(
@@ -31,6 +34,10 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
       skip: !product?.isFromConstructor
     }
   );
+
+  useEffect(() => {
+    checkImage(product.images.primary.medium, isLightTheme);
+  }, [checkImage, isLightTheme, product.images.primary.medium]);
 
   const constructor = constructorByModel?.getConstructorByModel;
   const bottom = constructor?.bottoms.findIndex(
@@ -51,13 +58,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const constructorProductName = t('common.backpackFromConstructor');
   const productName = product?.isFromConstructor ? constructorProductName : defaultProductName;
 
-  const defaultProductImg = (
-    <img
-      src={`${IMG_URL}${product?.images?.primary.medium}`}
-      alt='img-product'
-      className={styles.image}
-    />
-  );
+  const defaultProductImg = <img src={image} alt='img-product' className={styles.image} />;
   const constructorItem = {
     basic: constructor?.basics[basic],
     bottom: constructor?.bottoms[bottom],

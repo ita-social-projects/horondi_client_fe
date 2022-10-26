@@ -12,7 +12,7 @@ import NumberInput from '../../../../components/number-input';
 import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 
-import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
+import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import routes from '../../../../configs/routes';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
@@ -21,6 +21,8 @@ import Loader from '../../../../components/loader';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
 import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
+import useProductImage from '../../../../hooks/use-product-image';
+import ThemeContext from '../../../../context/theme-context';
 
 const { pathToProducts } = routes;
 
@@ -33,6 +35,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useContext(CurrencyContext);
+  const [isLightTheme] = useContext(ThemeContext);
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const [inputValue, setInputValue] = useState(item.quantity);
   const currencySign = getCurrencySign();
@@ -45,8 +48,10 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     getCartItem,
     changeSizeConstructor,
     getProductPriceWithPromoCode,
-    getProductPrice
+    getProductPrice,
+    removeFromCart
   } = cartOperations;
+  const { image, checkImage } = useProductImage();
 
   const onChangeQuantity = useCallback(
     _.debounce((value) => {
@@ -62,9 +67,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   } = useQuery(isFromConstructor ? getConstructorByModel : getProductById, {
     variables: {
       id: isFromConstructor ? item.model?._id : item.productId
-    }
+    },
+    fetchPolicy: 'no-cache'
   });
-
   const constructorByModel = product?.getConstructorByModel || {};
 
   const constructorCartItem = {
@@ -73,10 +78,17 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   };
 
   const cartItem = isFromConstructor ? constructorCartItem : product?.getProductById;
-
   const itemFoto = isFromConstructor
     ? cartItem?.model?.images?.medium
     : cartItem?.images.primary.medium;
+
+  useEffect(() => {
+    checkImage(itemFoto, isLightTheme);
+  }, [checkImage, isLightTheme, itemFoto]);
+
+  useEffect(() => {
+    cartItem?.isDeleted && removeFromCart(item);
+  }, [cartItem, item, removeFromCart]);
 
   const defaultItemName = t(`${cartItem?.translationsKey}.name`);
   const constructorItemName = t('common.backpackFromConstructor');
@@ -106,7 +118,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
 
   const defaultProductImg = (
     <Link to={`${pathToProducts}/${cartItem?._id}`}>
-      <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
+      <img className={styles.itemImg} src={image} alt='product-img' />
     </Link>
   );
   const constructorProductImg = (

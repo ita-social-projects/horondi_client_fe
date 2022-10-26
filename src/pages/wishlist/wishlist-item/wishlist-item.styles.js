@@ -42,6 +42,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   itemImg: {
     marginRight: '30px',
+    maxWidth: '128px',
 
     '@media (max-width: 1100px)': {
       marginRight: '0'

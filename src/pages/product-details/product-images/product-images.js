@@ -6,20 +6,16 @@ import { useTheme } from '@material-ui/styles';
 import Loader from '../../../components/loader';
 
 import { useStyles } from './product-images.styles';
-import { getImage } from '../../../utils/imageLoad';
-import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
-import productPlugLight from '../../../images/product-plug-light-theme-img.png';
+import useProductImage from '../../../hooks/use-product-image';
 
 const ProductImages = ({ images }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [imagesSet, setImagesSet] = useState([]);
   const [currImg, setCurrImg] = useState(0);
 
   const [primaryImage, setPrimaryImage] = useState(0);
   const [secondaryImages, setSecondaryImages] = useState([]);
 
-  const [loading, setLoading] = useState(false);
-
+  const { imageArray: imagesSet, checkImage } = useProductImage();
   const { t } = useTranslation();
   const { palette } = useTheme();
 
@@ -31,27 +27,11 @@ const ProductImages = ({ images }) => {
   );
 
   useEffect(() => {
-    const initialPhotos = async () => {
-      setLoading(true);
-      const mapImages = await Promise.all(
-        initImages.map(async (item) => {
-          try {
-            const result = await getImage(item);
-            return { src: result };
-          } catch (e) {
-            return { src: isLightTheme ? productPlugLight : productPlugDark };
-          }
-        })
-      );
-
-      setImagesSet(mapImages);
-      setLoading(false);
-    };
-    initialPhotos();
-  }, [isLightTheme, initImages]);
+    checkImage(initImages, isLightTheme);
+  }, [isLightTheme, initImages, checkImage]);
 
   useEffect(() => {
-    setSecondaryImages(imagesSet.slice(1, images.length));
+    imagesSet.length && setSecondaryImages(imagesSet.slice(1, images.length));
   }, [imagesSet, images.length]);
 
   useEffect(() => {
@@ -73,12 +53,12 @@ const ProductImages = ({ images }) => {
         return (
           <div className={styles.lastImagesBox} key={i} onClick={() => openImage(i + 1)}>
             <div className={styles.lastImageText}>
-              {t('product.allPhotos.viewAll')} {`(${images.additional.length})`}{' '}
+              {t('product.allPhotos.viewAll')} {`(${images.additional.length})`}
               {t('product.allPhotos.photo')}
             </div>
             <img
               className={styles.lastImage}
-              src={image.src}
+              src={image}
               alt={t('product.imgAltInfo')}
               data-cy='image'
             />
@@ -89,7 +69,7 @@ const ProductImages = ({ images }) => {
         <div key={i} className={styles.imageItem}>
           <img
             className={styles.sideImage}
-            src={image.src}
+            src={image}
             alt={t('product.imgAltInfo')}
             onClick={() => setPrimaryImage(imagesSet.indexOf(secondaryImages[i]))}
             data-cy='image'
@@ -106,10 +86,14 @@ const ProductImages = ({ images }) => {
     setPrimaryImage((prev) => prev - 1);
   };
 
+  const imagesForViewer = imagesSet.map((image) => ({
+    src: image
+  }));
+
   return (
     <div className={styles.imageBody}>
       <ImgsViewer
-        imgs={imagesSet}
+        imgs={imagesForViewer}
         currImg={currImg}
         showThumbnails
         isOpen={isOpen}
@@ -127,11 +111,11 @@ const ProductImages = ({ images }) => {
             <ArrowBackIosRounded />
           </button>
           <div className={styles.imageContainer}>
-            {loading ? (
+            {!imagesSet.length ? (
               <Loader heightWrap='100px' />
             ) : (
               <img
-                src={imagesSet[primaryImage]?.src}
+                src={imagesSet[primaryImage]}
                 className={styles.primaryImage}
                 alt={t('product.imgAltInfo')}
               />

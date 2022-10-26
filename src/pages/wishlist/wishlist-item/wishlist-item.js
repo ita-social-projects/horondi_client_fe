@@ -1,20 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 import { TableCell, TableRow, IconButton } from '@material-ui/core';
 import { push } from 'connected-react-router';
 import { useDispatch } from 'react-redux';
 import { useStyles } from './wishlist-item.styles';
-import { IMG_URL } from '../../../configs';
 import routes from '../../../configs/routes';
 import ThemeContext from '../../../context/theme-context';
 import { useCurrency } from '../../../hooks/use-currency';
+import { getProductById } from '../../../containers/orders/operations/order.queries';
+import useProductImage from '../../../hooks/use-product-image';
 
 const { pathToProducts } = routes;
 
-const WishlistItem = ({ item, setModalVisibility, setModalItem, cartOperations, isInCart }) => {
+const WishlistItem = ({
+  item,
+  setModalVisibility,
+  setModalItem,
+  cartOperations,
+  isInCart,
+  wishlistOperations
+}) => {
   const { t } = useTranslation();
   const [isLightTheme] = useContext(ThemeContext);
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();
@@ -27,6 +36,21 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem, cartOperations, 
     setModalVisibility(true);
     setModalItem(item);
   };
+  const { image, checkImage } = useProductImage();
+
+  useEffect(() => {
+    checkImage(item.images.primary.thumbnail, isLightTheme);
+  }, [isLightTheme, checkImage, item.images.primary.thumbnail]);
+
+  const { data: product } = useQuery(getProductById, {
+    variables: {
+      id: item._id
+    },
+    fetchPolicy: 'no-cache',
+    onCompleted: () => {
+      product.getProductById.isDeleted && wishlistOperations.removeFromWishlist(item);
+    }
+  });
 
   const goToCheckout = () => {
     dispatch(push(pathToCart));
@@ -74,16 +98,13 @@ const WishlistItem = ({ item, setModalVisibility, setModalItem, cartOperations, 
       <>{t('product.sizeNotAvailable')}</>
     );
   };
+
   return (
     <TableRow classes={{ root: styles.root }} data-cy='cart-item'>
       <TableCell className={styles.allItems}>
         <div className={styles.product}>
           <Link to={`${pathToProducts}/${item._id}`}>
-            <img
-              className={styles.itemImg}
-              src={`${IMG_URL}${item.images.primary.thumbnail} `}
-              alt='product-img'
-            />
+            <img className={styles.itemImg} src={image} alt='product-img' />
           </Link>
           <div>
             <Link to={`${pathToProducts}/${item._id}`}>

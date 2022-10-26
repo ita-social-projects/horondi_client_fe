@@ -6,6 +6,7 @@ export const getProductById = gql`
       __typename
       ... on Product {
         _id
+        isDeleted
         category {
           code
         }

@@ -25,6 +25,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const { image, checkImage } = useProductImage();
 
   const { product } = item;
+  const productPrimaryImage = product?.images.primary.medium;
   const { data: constructorByModel, loading: loadingConstructorByModel } = useQuery(
     getConstructorByModel,
     {
@@ -36,8 +37,8 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   );
 
   useEffect(() => {
-    checkImage(product?.images.primary.medium, isLightTheme);
-  }, [checkImage, isLightTheme, product?.images.primary.medium]);
+    checkImage(productPrimaryImage, isLightTheme);
+  }, [checkImage, isLightTheme, productPrimaryImage]);
 
   const constructor = constructorByModel?.getConstructorByModel;
   const bottom = constructor?.bottoms.findIndex(

@@ -3,6 +3,7 @@ import { render, screen, act, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { ThemeProvider } from '@material-ui/styles';
+import { BrowserRouter } from 'react-router-dom';
 import OrderTable from '../order-table';
 import ConfirmDialog from '../../../../../components/confirm-dialog';
 import { mockGetProductById, props, modalProps, mockCartOperations } from './order-table.variables';
@@ -45,7 +46,9 @@ describe('test <OrderTable /> component', () => {
       <MockedProvider mocks={[mockGetProductById]} addTypename={false}>
         <ThemeProvider theme={themeValue}>
           <ThemeContext.Provider value={themeContextProviderMockValues}>
-            <OrderTable {...props} cartOperations={mockCartOperations} />
+            <BrowserRouter>
+              <OrderTable {...props} cartOperations={mockCartOperations} />
+            </BrowserRouter>
           </ThemeContext.Provider>
         </ThemeProvider>
       </MockedProvider>
@@ -67,7 +70,9 @@ describe('test <Modal/> component', () => {
       <ThemeProvider theme={themeValue}>
         <ThemeProvider theme={themeValue}>
           <ThemeContext.Provider value={themeContextProviderMockValues}>
-            <ConfirmDialog {...modalProps} />
+            <BrowserRouter>
+              <ConfirmDialog {...modalProps} />
+            </BrowserRouter>
           </ThemeContext.Provider>
         </ThemeProvider>
       </ThemeProvider>

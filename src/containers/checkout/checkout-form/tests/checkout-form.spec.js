@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/styles';
 import CheckoutForm from '../checkout-form';
 import Delivery from '../delivery/delivery';
 import {
@@ -14,6 +15,8 @@ import {
   mockedCartItemsData
 } from './checkout-form.variables';
 import { DollarIcon } from '../../../../images/profile-icons';
+import { theme } from '../../../../components/app/app-theme/app.theme';
+import ThemeContext from '../../../../context/theme-context';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
@@ -65,6 +68,8 @@ const userData = {
 };
 
 const handleSubmit = jest.fn();
+const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 useDispatch.mockImplementation(() => dispatch);
 useSelector.mockImplementation(() => userData);
@@ -101,7 +106,11 @@ describe('CheckoutForm tests for: ', () => {
             mockProduct)
           }
         >
-          <CheckoutForm {...props} onSubmit={handleSubmit} />
+          <ThemeProvider theme={themeValue}>
+            <ThemeContext.Provider value={themeContextProviderMockValues}>
+              <CheckoutForm {...props} onSubmit={handleSubmit} />
+            </ThemeContext.Provider>
+          </ThemeProvider>
         </MockedProvider>
       </BrowserRouter>
     );

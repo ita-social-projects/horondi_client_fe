@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/styles';
 import {
   mockedCartItemsData,
   promoCodeMockedProps,
@@ -11,6 +12,8 @@ import {
 import YourOrder from '../../../../containers/orders/order/your-order';
 import { mockProduct } from '../../../../containers/checkout/checkout-form/tests/checkout-form.variables';
 import { DollarIcon } from '../../../../images/profile-icons';
+import ThemeContext from '../../../../context/theme-context';
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
 const mockGetProductPriceWithPromoCode = jest.fn(() => 900);
 const mockGetTotalPriceWithCertificate = jest.fn(() => 1500);
@@ -20,6 +23,8 @@ const userData = {
   cartItems: mockedCartItemsData,
   language: 0
 };
+const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 jest.mock('../../../../containers/orders/cart/filled-cart/filled-cart.styles', () => ({
   useStyles: () => ({})
@@ -56,9 +61,13 @@ describe('YourOrder component tests with promoCode', () => {
   beforeEach(() => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <YourOrder {...promoCodeMockedProps} />
-        </Router>
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <Router>
+              <YourOrder {...promoCodeMockedProps} />
+            </Router>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </MockedProvider>
     );
   });
@@ -80,9 +89,13 @@ describe('YourOrder component tests with certificate', () => {
   beforeEach(() => {
     render(
       <MockedProvider mocks={mockProduct} addTypename={false}>
-        <Router>
-          <YourOrder {...certificateMockedProps} />
-        </Router>
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <Router>
+              <YourOrder {...certificateMockedProps} />
+            </Router>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </MockedProvider>
     );
   });

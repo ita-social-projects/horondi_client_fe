@@ -36,8 +36,8 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   );
 
   useEffect(() => {
-    checkImage(product.images.primary.medium, isLightTheme);
-  }, [checkImage, isLightTheme, product.images.primary.medium]);
+    checkImage(product?.images.primary.medium, isLightTheme);
+  }, [checkImage, isLightTheme, product?.images.primary.medium]);
 
   const constructor = constructorByModel?.getConstructorByModel;
   const bottom = constructor?.bottoms.findIndex(

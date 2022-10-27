@@ -118,6 +118,7 @@ const ProductImages = ({ images }) => {
                 src={imagesSet[primaryImage]}
                 className={styles.primaryImage}
                 alt={t('product.imgAltInfo')}
+                data-testid='product-image'
               />
             )}
           </div>

@@ -59,7 +59,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const debounceQuantity = useDebounce(inputValue, 500);
   useEffect(() => {
     changeQuantity(item.id, debounceQuantity);
-  }, [debounceQuantity]);
+  }, [debounceQuantity, changeQuantity, item.id]);
   const { isFromConstructor } = item;
 
   const {
@@ -89,7 +89,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   }, [checkImage, isLightTheme, itemImage]);
 
   useEffect(() => {
-    cartItem?.isDeleted && removeFromCart(item);
+    (cartItem?.isDeleted || cartItem?.message) && removeFromCart(item);
   }, [cartItem, item, removeFromCart]);
 
   const defaultItemName = t(`${cartItem?.translationsKey}.name`);

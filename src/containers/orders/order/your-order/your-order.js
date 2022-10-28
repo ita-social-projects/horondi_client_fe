@@ -36,6 +36,19 @@ const YourOrder = ({ ...props }) => {
       productPrices.map((item) => ({ price: item.price, category: item.category }))
     );
   }, [setPricesFromQuery, productPrices, currency]);
+
+  const orderItems =
+    cartItems &&
+    cartItems.map((item) => (
+      <OrderItem
+        key={item.id}
+        product={item}
+        setProductPrices={setProductPrices}
+        data-testid='orderItem'
+        promoCode={promoCode}
+      />
+    ));
+
   return (
     <Paper className={styles.yourOrderContainer} elevation={4}>
       <Typography
@@ -49,17 +62,7 @@ const YourOrder = ({ ...props }) => {
       </Typography>
       <Divider variant='fullWidth' />
       <List className={styles.yourOrderList} data-testid='orderList'>
-        {cartItems
-          ? cartItems.map((item) => (
-            <OrderItem
-              key={item.id}
-              product={item}
-              setProductPrices={setProductPrices}
-              data-testid='orderItem'
-              promoCode={promoCode}
-            />
-          ))
-          : null}
+        {orderItems}
       </List>
       <Divider variant='fullWidth' />
       {deliveryType === 'SELFPICKUP' && (

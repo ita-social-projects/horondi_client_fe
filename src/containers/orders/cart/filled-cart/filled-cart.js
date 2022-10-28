@@ -196,7 +196,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   placeholder={t('cart.promoPlaceHolder')}
                   variant={TEXT_FIELD_VARIANT.OUTLINED}
                   inputRef={certificateAndPromoInput}
-                  disabled={!!(certificateData || promoCode)}
+                  disabled={Boolean(certificateData || promoCode)}
                   error={promoCodeError || certificateError}
                   helperText={errorHandler()}
                 />
@@ -205,7 +205,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   variant='contained'
                   className={`${styles.promoButton} ${styles.promoInput}`}
                   onClick={checkPromoOrCertificate}
-                  disabled={!!(certificateData || promoCode)}
+                  disabled={Boolean(certificateData || promoCode)}
                 >
                   {t('cart.applyPromoCode')}
                 </Button>

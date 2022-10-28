@@ -33,6 +33,20 @@ describe('use-cart tests', () => {
 
     expect(res).toEqual(mockItem);
   });
+  it('should add promocode', () => {
+    act(() => {
+      res = wrap.result.current.cartOperations.addPromocode(mockPromoCode);
+    });
+
+    expect(wrap.result.current.promoCode).toEqual(mockPromoCode);
+  });
+  it('should add certificate', () => {
+    act(() => {
+      res = wrap.result.current.cartOperations.addCertificate(mockCertificate);
+    });
+
+    expect(wrap.result.current.certificate).toEqual(mockCertificate);
+  });
   it('should return total price with promo code', () => {
     act(() => {
       res = wrap.result.current.cartOperations.getTotalPricesWithPromoCode(mockPromoCode);
@@ -122,5 +136,14 @@ describe('use-cart tests', () => {
     });
 
     expect(wrap.result.current.cartItems).toHaveLength(0);
+  });
+  it('should clean cart', () => {
+    act(() => {
+      wrap.result.current.cartOperations.clearCart();
+    });
+
+    expect(wrap.result.current.cartItems).toHaveLength(0);
+    expect(wrap.result.current.certificate).toBe('');
+    expect(wrap.result.current.certificate).toBe('');
   });
 });

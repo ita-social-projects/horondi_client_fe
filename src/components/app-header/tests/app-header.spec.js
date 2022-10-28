@@ -139,4 +139,13 @@ describe('Test AppHeader without prop', () => {
 
     expect(notificationButton).not.toBeInTheDocument();
   });
+  it('Should clean cart', () => {
+    window.dispatchEvent(
+      new StorageEvent('storage', {
+        key: 'test_key',
+        newValue: 'test_value'
+      })
+    );
+    expect(mockClearCart).toHaveBeenCalled();
+  });
 });

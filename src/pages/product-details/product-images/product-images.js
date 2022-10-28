@@ -15,7 +15,7 @@ const ProductImages = ({ images }) => {
   const [primaryImage, setPrimaryImage] = useState(0);
   const [secondaryImages, setSecondaryImages] = useState([]);
 
-  const { imageArray: imagesSet, checkImage } = useProductImage();
+  const { imageUrlArray: imagesSet, checkImage } = useProductImage();
   const { t } = useTranslation();
   const { palette } = useTheme();
 

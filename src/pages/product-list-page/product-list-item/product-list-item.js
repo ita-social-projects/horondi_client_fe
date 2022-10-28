@@ -16,7 +16,7 @@ const ProductListItem = ({ product }) => {
   const { palette } = useTheme();
 
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();
-  const { image, checkImage } = useProductImage();
+  const { imageUrl, checkImage } = useProductImage();
 
   const currencySign = getCurrencySign();
 
@@ -47,7 +47,8 @@ const ProductListItem = ({ product }) => {
     );
   };
 
-  const styles = useStyles({ image });
+  const styles = useStyles({ imageUrl });
+
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
       <Link to={`${pathToProducts}/${product._id}`}>

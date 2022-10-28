@@ -4,8 +4,8 @@ import productPlugDark from '../images/product-plug-dark-theme-img.png';
 import productPlugLight from '../images/product-plug-light-theme-img.png';
 
 const useProductImage = () => {
-  const [image, setImage] = useState('');
-  const [imageArray, setImageArray] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrlArray, setImageUrlArray] = useState([]);
 
   const getBlobOrDefaultImage = useCallback(async (path, isLightTheme, defaultImage) => {
     try {
@@ -26,15 +26,15 @@ const useProductImage = () => {
             return image;
           })
         );
-        setImageArray(result);
+        setImageUrlArray(result);
       } else {
         const result = await getBlobOrDefaultImage(path, isLightTheme, defaultImage);
-        setImage(result);
+        setImageUrl(result);
       }
     },
     [getBlobOrDefaultImage]
   );
 
-  return { image, imageArray, checkImage };
+  return { imageUrl, imageUrlArray, checkImage };
 };
 export default useProductImage;

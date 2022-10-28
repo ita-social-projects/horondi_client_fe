@@ -22,7 +22,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const currencySign = getCurrencySign();
   const productPrice = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
   const { t } = useTranslation();
-  const { image, checkImage } = useProductImage();
+  const { imageUrl, checkImage } = useProductImage();
 
   const { product } = item;
   const productPrimaryImage = product?.images.primary.medium;
@@ -59,7 +59,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const constructorProductName = t('common.backpackFromConstructor');
   const productName = product?.isFromConstructor ? constructorProductName : defaultProductName;
 
-  const defaultProductImg = <img src={image} alt='img-product' className={styles.image} />;
+  const defaultProductImg = <img src={imageUrl} alt='img-product' className={styles.image} />;
   const constructorItem = {
     basic: constructor?.basics[basic],
     bottom: constructor?.bottoms[bottom],

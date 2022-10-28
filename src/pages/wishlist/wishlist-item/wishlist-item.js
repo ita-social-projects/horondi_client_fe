@@ -36,7 +36,7 @@ const WishlistItem = ({
     setModalVisibility(true);
     setModalItem(item);
   };
-  const { image, checkImage } = useProductImage();
+  const { imageUrl, checkImage } = useProductImage();
 
   useEffect(() => {
     checkImage(item.images.primary.thumbnail, isLightTheme);
@@ -104,7 +104,7 @@ const WishlistItem = ({
       <TableCell className={styles.allItems}>
         <div className={styles.product}>
           <Link to={`${pathToProducts}/${item._id}`}>
-            <img className={styles.itemImg} src={image} alt='product-img' />
+            <img className={styles.itemImg} src={imageUrl} alt='product-img' />
           </Link>
           <div>
             <Link to={`${pathToProducts}/${item._id}`}>

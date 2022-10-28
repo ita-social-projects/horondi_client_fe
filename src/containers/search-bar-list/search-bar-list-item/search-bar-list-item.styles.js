@@ -8,8 +8,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     padding: 10,
     borderBottom: '1px solid #c3c3c3'
   },
-  image: ({ image }) => ({
-    background: `url(${image}) no-repeat center ${
+  image: ({ imageUrl }) => ({
+    background: `url(${imageUrl}) no-repeat center ${
       palette.type === 'light' ? '#f6f6f6' : '#323232'
     }`,
     width: 80,

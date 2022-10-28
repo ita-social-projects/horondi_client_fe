@@ -21,7 +21,7 @@ const Materials = () => {
   const [materialsBottom, setMaterialsBottom] = useState([]);
   const styles = useStyles();
   const appStyles = useAppStyles();
-  const { imageArray: patternImages, checkImage } = useProductImage();
+  const { imageUrlArray: patternImages, checkImage } = useProductImage();
 
   const isLightTheme = palette.type === 'light';
 

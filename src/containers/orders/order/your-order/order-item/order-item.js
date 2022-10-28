@@ -18,7 +18,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();
   const [isLightTheme] = useContext(ThemeContext);
   const styles = useStyles();
-  const { image, checkImage } = useProductImage();
+  const { imageUrl, checkImage } = useProductImage();
 
   const { t } = useTranslation();
   const currencySign = getCurrencySign();
@@ -75,7 +75,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   const defaultProductImg = (
-    <img className={styles.yourOrderListImg} src={image} alt='product-img' />
+    <img className={styles.yourOrderListImg} src={imageUrl} alt='product-img' />
   );
   const constructorProductImg = (
     <div className={styles.yourOrderListImg}>

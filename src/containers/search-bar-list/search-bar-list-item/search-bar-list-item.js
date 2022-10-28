@@ -19,10 +19,10 @@ const SearchBarListItem = ({ product }) => {
   const { currency } = useContext(CurrencyContext);
   const { t } = useTranslation();
 
-  const { image, checkImage } = useProductImage();
+  const { imageUrl, checkImage } = useProductImage();
 
   const dispatch = useDispatch();
-  const styles = useStyles({ image });
+  const styles = useStyles({ imageUrl });
   const { palette } = useTheme();
 
   const isLightTheme = palette.type === 'light';

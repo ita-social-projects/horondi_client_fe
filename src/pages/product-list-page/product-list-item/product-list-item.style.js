@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(({ palette }) => ({
   productItem: (props) => ({
-    background: `url(${props.image}) no-repeat center / cover ${
+    background: `center / cover url(${props.imageUrl}) no-repeat  ${
       palette.type === 'light' ? '#e3e7ea' : '#262626'
     }`,
     height: '100%',

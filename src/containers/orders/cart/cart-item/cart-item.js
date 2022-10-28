@@ -1,10 +1,9 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Select from '@material-ui/core/Select';
 import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import _ from 'lodash';
 
 import { useQuery } from '@apollo/client';
 import { useStyles } from './cart-item.styles';
@@ -23,6 +22,7 @@ import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
 import useProductImage from '../../../../hooks/use-product-image';
 import ThemeContext from '../../../../context/theme-context';
+import useDebounce from '../../../../hooks/use-debounce';
 
 const { pathToProducts } = routes;
 
@@ -51,13 +51,15 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     getProductPrice,
     removeFromCart
   } = cartOperations;
-  const { image, checkImage } = useProductImage();
+  const { imageUrl, checkImage } = useProductImage();
 
-  const onChangeQuantity = useCallback(
-    _.debounce((value) => {
-      changeQuantity(item.id, value);
-    }, 500)
-  );
+  const onChangeQuantity = (value) => {
+    setInputValue(value);
+  };
+  const debounceQuantity = useDebounce(inputValue, 500);
+  useEffect(() => {
+    changeQuantity(item.id, debounceQuantity);
+  }, [debounceQuantity]);
   const { isFromConstructor } = item;
 
   const {
@@ -78,13 +80,13 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   };
 
   const cartItem = isFromConstructor ? constructorCartItem : product?.getProductById;
-  const itemFoto = isFromConstructor
+  const itemImage = isFromConstructor
     ? cartItem?.model?.images?.medium
     : cartItem?.images.primary.medium;
 
   useEffect(() => {
-    checkImage(itemFoto, isLightTheme);
-  }, [checkImage, isLightTheme, itemFoto]);
+    checkImage(itemImage, isLightTheme);
+  }, [checkImage, isLightTheme, itemImage]);
 
   useEffect(() => {
     cartItem?.isDeleted && removeFromCart(item);
@@ -118,7 +120,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
 
   const defaultProductImg = (
     <Link to={`${pathToProducts}/${cartItem?._id}`}>
-      <img className={styles.itemImg} src={image} alt='product-img' />
+      <img className={styles.itemImg} src={imageUrl} alt='product-img' />
     </Link>
   );
   const constructorProductImg = (

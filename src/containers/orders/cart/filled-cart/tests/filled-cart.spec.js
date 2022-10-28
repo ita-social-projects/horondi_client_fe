@@ -21,6 +21,7 @@ jest.mock('../filled-cart.styles.js', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../order/order-table/order-table.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../cart-item/cart-item.styles', () => ({ useStyles: () => ({}) }));
 
+const mockChangeQuantity = jest.fn();
 const mockGetTotalPrice = jest.fn(() => '43');
 const mockGetCartItem = jest.fn(() => itemData);
 const mockGetProductPrice = jest.fn(() => 1100);
@@ -34,6 +35,7 @@ const themeValue = theme('light');
 const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 const mockCartOperations = {
+  changeQuantity: mockChangeQuantity,
   getTotalPrice: mockGetTotalPrice,
   getCartItem: mockGetCartItem,
   getProductPrice: mockGetProductPrice,

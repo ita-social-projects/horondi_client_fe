@@ -34,7 +34,6 @@ const FilledCart = ({ items, cartOperations }) => {
   const [price, setPrice] = useState();
   const [inputValue, setInputValue] = useState('');
   const [productFromConstructorLoading, setProductFromConstructorLoading] = useState(false);
-  const [disable, setDisable] = useState(false);
 
   const { currency } = useContext(CurrencyContext);
 
@@ -69,8 +68,14 @@ const FilledCart = ({ items, cartOperations }) => {
   };
 
   const currencySign = getCurrencySign();
-  const { getTotalPrice, setCartItem, getTotalPricesWithPromoCode, getTotalPriceWithCertificate } =
-    cartOperations;
+  const {
+    getTotalPrice,
+    setCartItem,
+    getTotalPricesWithPromoCode,
+    getTotalPriceWithCertificate,
+    addPromocode,
+    addCertificate
+  } = cartOperations;
 
   const checkPromoOrCertificate = () => {
     const searchValue = new RegExp(/^HOR/, 'i');
@@ -86,14 +91,8 @@ const FilledCart = ({ items, cartOperations }) => {
   };
 
   useLayoutEffect(() => {
-    if (certificateData) {
-      setDisable(true);
-      return setPrice(getTotalPriceWithCertificate(certificateData));
-    }
-    if (promoCode) {
-      setDisable(true);
-      return setPrice(getTotalPricesWithPromoCode(promoCode));
-    }
+    if (certificateData) return setPrice(getTotalPriceWithCertificate(certificateData));
+    if (promoCode) return setPrice(getTotalPricesWithPromoCode(promoCode));
     setPrice(getTotalPrice());
   }, [
     items,
@@ -161,7 +160,9 @@ const FilledCart = ({ items, cartOperations }) => {
         productId: data.addProductFromConstructor._id
       });
     }
-    history.push(pathToCheckout, { promoCode, certificateData });
+    promoCode && addPromocode(promoCode);
+    certificateData && addCertificate(certificateData);
+    history.push(pathToCheckout);
   };
 
   return (
@@ -195,7 +196,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   placeholder={t('cart.promoPlaceHolder')}
                   variant={TEXT_FIELD_VARIANT.OUTLINED}
                   inputRef={certificateAndPromoInput}
-                  disabled={disable}
+                  disabled={!!(certificateData || promoCode)}
                   error={promoCodeError || certificateError}
                   helperText={errorHandler()}
                 />
@@ -204,7 +205,7 @@ const FilledCart = ({ items, cartOperations }) => {
                   variant='contained'
                   className={`${styles.promoButton} ${styles.promoInput}`}
                   onClick={checkPromoOrCertificate}
-                  disabled={disable}
+                  disabled={!!(certificateData || promoCode)}
                 >
                   {t('cart.applyPromoCode')}
                 </Button>

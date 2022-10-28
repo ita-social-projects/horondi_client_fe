@@ -38,7 +38,7 @@ jest.mock('../../../containers/sidebar/sidebar.js', () => ({
 
 jest.mock('../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: [{ id: '84d7' }],
+    cartItems: [{ id: '84d7' }],
     cartOperations: { clearCart: mockClearCart }
   })
 }));

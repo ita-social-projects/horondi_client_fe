@@ -12,13 +12,13 @@ const ThanksPage = () => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const styles = useStyles();
-  const { cart, cartOperations } = useCart();
+  const { cartItems, cartOperations } = useCart();
   const { clearCart } = cartOperations;
 
   const language = i18n.language === 'ua' ? 0 : 1;
 
   useLayoutEffect(() => {
-    if (cart.length) {
+    if (cartItems.length) {
       clearCart();
       dispatch(sendOrderToEmail({ language, paidOrderNumber: orderNumber }));
     }

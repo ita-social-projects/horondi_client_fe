@@ -24,7 +24,7 @@ describe('use-cart tests', () => {
       wrap.result.current.cartOperations.addToCart(mockItem);
     });
 
-    expect(wrap.result.current.cart).toContain(mockItem);
+    expect(wrap.result.current.cartItems).toContain(mockItem);
   });
   it('should return cart item by id', () => {
     act(() => {
@@ -96,7 +96,7 @@ describe('use-cart tests', () => {
     act(() => {
       wrap.result.current.cartOperations.changeQuantity(mockItem.id, 2);
     });
-    const item = wrap.result.current.cart.find((el) => (el.id = mockItem.id));
+    const item = wrap.result.current.cartItems.find((el) => (el.id = mockItem.id));
 
     expect(item.quantity).toEqual(2);
   });
@@ -104,7 +104,7 @@ describe('use-cart tests', () => {
     act(() => {
       wrap.result.current.cartOperations.changeSize(mockItem.id, sizeAndPrice);
     });
-    const item = wrap.result.current.cart.find((el) => (el.id = mockItem.id));
+    const item = wrap.result.current.cartItems.find((el) => (el.id = mockItem.id));
 
     expect(item.sizeAndPrice).toEqual(sizeAndPrice);
   });
@@ -112,7 +112,7 @@ describe('use-cart tests', () => {
     act(() => {
       wrap.result.current.cartOperations.changeSizeConstructor(mockItem.id, sizeAndPrice.size);
     });
-    const item = wrap.result.current.cart.find((el) => (el.id = mockItem.id));
+    const item = wrap.result.current.cartItems.find((el) => (el.id = mockItem.id));
 
     expect(item.sizeAndPrice.size).toEqual(sizeAndPrice.size);
   });
@@ -121,6 +121,6 @@ describe('use-cart tests', () => {
       wrap.result.current.cartOperations.removeFromCart(mockItem);
     });
 
-    expect(wrap.result.current.cart).toHaveLength(0);
+    expect(wrap.result.current.cartItems).toHaveLength(0);
   });
 });

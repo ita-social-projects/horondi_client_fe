@@ -32,7 +32,7 @@ const mockAddToCart = jest.fn();
 
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: mockCart,
+    cartItems: mockCart,
     isInCart: () => false,
     cartOperations: {
       addToCart: mockAddToCart

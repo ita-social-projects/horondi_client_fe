@@ -7,7 +7,7 @@ import { useCurrency } from '../../../../hooks/use-currency';
 
 const YourOrder = ({ ...props }) => {
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
-  const { cart, cartOperations } = useCart();
+  const { cartItems, cartOperations } = useCart();
   const { getTotalPriceWithCertificate } = cartOperations;
   const {
     currency,
@@ -49,8 +49,8 @@ const YourOrder = ({ ...props }) => {
       </Typography>
       <Divider variant='fullWidth' />
       <List className={styles.yourOrderList} data-testid='orderList'>
-        {cart
-          ? cart.map((item) => (
+        {cartItems
+          ? cartItems.map((item) => (
             <OrderItem
               key={item.id}
               product={item}

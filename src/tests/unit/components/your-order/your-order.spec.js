@@ -35,7 +35,7 @@ jest.mock('react-redux', () => ({
 
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: mockedCartItemsData,
+    cartItems: mockedCartItemsData,
     cartOperations: {
       getProductPriceWithPromoCode: mockGetProductPriceWithPromoCode,
       getTotalPriceWithCertificate: mockGetTotalPriceWithCertificate

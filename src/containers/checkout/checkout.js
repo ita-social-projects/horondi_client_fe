@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useLocation } from 'react-router';
+import { Redirect } from 'react-router';
 
 import { useStyles } from './checkout.styles';
 import CheckoutForm from './checkout-form';
@@ -12,8 +12,6 @@ import { useCart } from '../../hooks/use-cart';
 const { pathToMain } = routes;
 
 const Checkout = () => {
-  const location = useLocation();
-  const { promoCode, certificateData } = location?.state;
   const [isCashPayment, setIsCashPayment] = useState();
   const { loading, isOrderCreated, order } = useSelector(({ Order }) => ({
     loading: Order.loading,
@@ -22,7 +20,7 @@ const Checkout = () => {
   }));
   const dispatch = useDispatch();
 
-  const { cart: cartItems } = useCart();
+  const { cartItems, promoCode, certificate } = useCart();
 
   useEffect(() => () => dispatch(setIsOrderCreated(false)), [dispatch, isOrderCreated]);
 
@@ -40,7 +38,7 @@ const Checkout = () => {
           <CheckoutForm
             cartItems={cartItems}
             promoCode={promoCode}
-            certificate={certificateData}
+            certificate={certificate}
             handleCashPayment={onCashPayment}
           />
         </div>

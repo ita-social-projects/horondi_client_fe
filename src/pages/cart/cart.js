@@ -6,7 +6,7 @@ import { useCart } from '../../hooks/use-cart';
 
 const Cart = () => {
   const styles = useAppStyles();
-  const { cart: cartItems, cartOperations } = useCart();
+  const { cartItems, cartOperations } = useCart();
 
   return (
     <div className={styles.rootApp}>

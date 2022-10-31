@@ -85,7 +85,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     : cartItem?.images.primary.medium;
 
   useEffect(() => {
-    checkImage(itemImage, isLightTheme);
+    itemImage && checkImage(itemImage, isLightTheme);
   }, [checkImage, isLightTheme, itemImage]);
 
   useEffect(() => {
@@ -142,6 +142,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       <span className={styles.itemName}>{itemName}</span>
     </Link>
   );
+
   const constructorProductName = <span className={styles.itemName}>{itemName}</span>;
   const productName = isFromConstructor ? constructorProductName : defaultProductName;
 

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { CartContext } from '../context/cart-context';
 import { CurrencyContext } from '../context/currency-context';
 import { calcPriceForCart } from '../utils/priceCalculating';
@@ -93,14 +93,14 @@ export const useCart = () => {
         (sizeId ? sizeId === cartItem.sizeAndPrice.size._id : true)
     );
 
-  const changeQuantity = (id, count) => {
+  const changeQuantity = useCallback((id, count) => {
     setCartItems((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) el.quantity = count;
         return el;
       })
     );
-  };
+  }, []);
 
   const getTotalPrice = () =>
     cartItems.reduce(

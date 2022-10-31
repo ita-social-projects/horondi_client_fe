@@ -12,8 +12,11 @@ const { pathToCart } = routes;
 
 const CartHeader = ({ fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
-  const { cart } = useCart();
-  const itemsCount = useMemo(() => cart.reduce((acc, item) => acc + item.quantity, 0), [cart]);
+  const { cartItems } = useCart();
+  const itemsCount = useMemo(
+    () => cartItems.reduce((acc, item) => acc + item.quantity, 0),
+    [cartItems]
+  );
 
   return (
     <>

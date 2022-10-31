@@ -9,7 +9,7 @@ jest.mock('../cart-header.styles.js', () => ({
 
 jest.mock('../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: [{ id: '84d7', quantity: 1 }]
+    cartItems: [{ id: '84d7', quantity: 1 }]
   })
 }));
 

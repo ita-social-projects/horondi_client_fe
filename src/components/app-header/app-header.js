@@ -30,7 +30,7 @@ const AppHeader = ({ expireDate }) => {
   const [notification, setNotification] = useState(null);
   const styles = useStyles();
   const appStyles = useAppStyles();
-  const { cart, cartOperations } = useCart();
+  const { cartItems, cartOperations } = useCart();
   const { clearCart } = cartOperations;
 
   useEffect(() => {
@@ -46,10 +46,10 @@ const AppHeader = ({ expireDate }) => {
   });
 
   const clearCartHandler = useCallback(() => {
-    if (cart.length) {
+    if (cartItems.length) {
       clearCart();
     }
-  }, [cart, clearCart]);
+  }, [cartItems, clearCart]);
 
   useLayoutEffect(() => {
     let lastScrollTop = 0;

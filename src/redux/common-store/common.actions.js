@@ -1,6 +1,6 @@
 import { SET_CART, SET_WISHLIST } from './common.types';
 
-const setCart = (cart) => ({
+const setCartItems = (cart) => ({
   type: SET_CART,
   payload: cart
 });
@@ -10,4 +10,4 @@ const setNewWishlist = (wishlist) => ({
   payload: wishlist
 });
 
-export { setCart, setNewWishlist };
+export { setCartItems, setNewWishlist };

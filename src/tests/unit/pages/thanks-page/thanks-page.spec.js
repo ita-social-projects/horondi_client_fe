@@ -17,7 +17,7 @@ jest.mock('react-router', () => ({
 }));
 jest.mock('../../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: [{ id: '84d7' }],
+    cartItems: [{ id: '84d7' }],
     cartOperations: { clearCart: mockClearCart }
   })
 }));

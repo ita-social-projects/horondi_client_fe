@@ -38,7 +38,7 @@ jest.mock('../../../containers/sidebar/sidebar.js', () => ({
 
 jest.mock('../../../hooks/use-cart', () => ({
   useCart: () => ({
-    cart: [{ id: '84d7' }],
+    cartItems: [{ id: '84d7' }],
     cartOperations: { clearCart: mockClearCart }
   })
 }));
@@ -138,5 +138,14 @@ describe('Test AppHeader without prop', () => {
     const notificationButton = queryByText('certificate.certificateNotificationButton');
 
     expect(notificationButton).not.toBeInTheDocument();
+  });
+  it('Should clean cart', () => {
+    window.dispatchEvent(
+      new StorageEvent('storage', {
+        key: 'test_key',
+        newValue: 'test_value'
+      })
+    );
+    expect(mockClearCart).toHaveBeenCalled();
   });
 });

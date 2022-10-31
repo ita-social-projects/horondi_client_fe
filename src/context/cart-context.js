@@ -5,13 +5,21 @@ import { getFromLocalStorage, setToLocalStorage } from '../services/local-storag
 export const CartContext = React.createContext();
 
 const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState(getFromLocalStorage(CART_KEY));
+  const [cartItems, setCartItems] = useState(getFromLocalStorage(CART_KEY));
+  const [promoCode, setPromocode] = useState('');
+  const [certificate, setCertificate] = useState('');
 
   useEffect(() => {
-    setToLocalStorage(CART_KEY, cart);
-  }, [cart]);
+    setToLocalStorage(CART_KEY, cartItems);
+  }, [cartItems]);
 
-  return <CartContext.Provider value={{ cart, setCart }}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider
+      value={{ cartItems, setCartItems, promoCode, setPromocode, certificate, setCertificate }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export default CartContextProvider;

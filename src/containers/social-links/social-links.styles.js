@@ -38,13 +38,13 @@ export const useStyles = makeStyles((theme) => ({
   iconsBox: {
     display: 'flex',
     flexDirection: 'column',
-    paddingTop: '45px',
+    paddingTop: '65px',
     '@media (max-width: 552px)': {
       paddingTop: '25px'
     }
   },
   cardTitleFooter: {
-    marginTop: '50px'
+    marginTop: 'auto'
   },
   cardTitle: {
     fontSize: '14px',

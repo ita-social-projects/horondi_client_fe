@@ -3,16 +3,19 @@ import { render, screen, act, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { ThemeProvider } from '@material-ui/styles';
+import { BrowserRouter } from 'react-router-dom';
 import OrderTable from '../order-table';
 import ConfirmDialog from '../../../../../components/confirm-dialog';
 import { mockGetProductById, props, modalProps, mockCartOperations } from './order-table.variables';
 import { DollarIcon } from '../../../../../images/profile-icons';
 import { theme } from '../../../../../components/app/app-theme/app.theme';
+import ThemeContext from '../../../../../context/theme-context';
 
 const themeValue = theme('light');
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 jest.mock('../order-table.styles', () => ({
   useStyles: () => ({})
@@ -41,7 +44,13 @@ describe('test <OrderTable /> component', () => {
     testUseSelector(0);
     render(
       <MockedProvider mocks={[mockGetProductById]} addTypename={false}>
-        <OrderTable {...props} cartOperations={mockCartOperations} />
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <BrowserRouter>
+              <OrderTable {...props} cartOperations={mockCartOperations} />
+            </BrowserRouter>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </MockedProvider>
     );
 
@@ -59,7 +68,13 @@ describe('test <Modal/> component', () => {
   beforeEach(() => {
     render(
       <ThemeProvider theme={themeValue}>
-        <ConfirmDialog {...modalProps} />
+        <ThemeProvider theme={themeValue}>
+          <ThemeContext.Provider value={themeContextProviderMockValues}>
+            <BrowserRouter>
+              <ConfirmDialog {...modalProps} />
+            </BrowserRouter>
+          </ThemeContext.Provider>
+        </ThemeProvider>
       </ThemeProvider>
     );
   });

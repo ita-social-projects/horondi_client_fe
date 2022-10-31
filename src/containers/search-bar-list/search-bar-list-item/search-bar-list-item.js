@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import Typography from '@material-ui/core/Typography';
@@ -6,14 +6,11 @@ import { useTheme } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
 
 import { useStyles } from './search-bar-list-item.styles';
-import { getImage } from '../../../utils/imageLoad';
-import productPlugLight from '../../../images/product-plug-light-theme-img.png';
-import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
-import { IMG_URL } from '../../../configs';
 import { ClassicButton } from '../../../components/classic-button/classic-button';
 import routes from '../../../configs/routes';
 import { useCurrency } from '../../../hooks/use-currency';
 import { CurrencyContext } from '../../../context/currency-context';
+import useProductImage from '../../../hooks/use-product-image';
 
 const { pathToProducts } = routes;
 
@@ -22,20 +19,17 @@ const SearchBarListItem = ({ product }) => {
   const { currency } = useContext(CurrencyContext);
   const { t } = useTranslation();
 
-  const [image, setImage] = useState(IMG_URL + product.images.primary.small);
+  const { imageUrl, checkImage } = useProductImage();
+
   const dispatch = useDispatch();
-  const styles = useStyles({ image });
+  const styles = useStyles({ imageUrl });
   const { palette } = useTheme();
 
   const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
-    getImage(product.images.primary.small)
-      .then((src) => setImage(src))
-      .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
-
-    return () => setImage(null);
-  }, [isLightTheme, product.images.primary.small]);
+    checkImage(product.images.primary.small, isLightTheme);
+  }, [product.images.primary.small, checkImage, isLightTheme]);
 
   return (
     <div className={styles.searchBarListItem}>

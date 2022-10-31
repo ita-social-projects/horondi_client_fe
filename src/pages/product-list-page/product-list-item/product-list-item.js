@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -7,33 +7,25 @@ import { useTheme } from '@material-ui/styles';
 
 import { useStyles } from './product-list-item.style';
 import StarRating from '../../../components/star-rating';
-import { getImage } from '../../../utils/imageLoad';
-import { IMG_URL } from '../../../configs';
-import productPlugDark from '../../../images/product-plug-dark-theme-img.png';
-import productPlugLight from '../../../images/product-plug-light-theme-img.png';
 import routes from '../../../configs/routes';
 import { useCurrency } from '../../../hooks/use-currency';
+import useProductImage from '../../../hooks/use-product-image';
 
 const ProductListItem = ({ product }) => {
   const { t } = useTranslation();
   const { palette } = useTheme();
 
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { imageUrl, checkImage } = useProductImage();
 
   const currencySign = getCurrencySign();
-
-  const [image, setImage] = useState(IMG_URL + product.images.primary.small);
 
   const { pathToProducts } = routes;
   const isLightTheme = palette.type === 'light';
 
   useEffect(() => {
-    getImage(product.images.primary.small)
-      .then((src) => setImage(src))
-      .catch(() => setImage(isLightTheme ? productPlugLight : productPlugDark));
-
-    return () => setImage(null);
-  }, [isLightTheme, product.images.primary.small]);
+    checkImage(product.images.primary.small, isLightTheme);
+  }, [isLightTheme, product.images.primary.small, checkImage]);
 
   const checkDisabledProduct = () => {
     const availableSizes = product.sizes.filter(
@@ -55,7 +47,8 @@ const ProductListItem = ({ product }) => {
     );
   };
 
-  const styles = useStyles({ image });
+  const styles = useStyles({ imageUrl });
+
   return (
     <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
       <Link to={`${pathToProducts}/${product._id}`}>

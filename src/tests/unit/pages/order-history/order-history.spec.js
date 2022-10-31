@@ -3,12 +3,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
+import { ThemeProvider } from '@material-ui/styles';
 import { fullMockedOrders, emptyMockedOrders } from './order-history.variables';
 import OrderHistory from '../../../../pages/order-history/order-history';
 import { DollarIcon } from '../../../../images/profile-icons';
+import ThemeContext from '../../../../context/theme-context';
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 jest.mock('../../../../pages/order-history/order-history.styles', () => ({
   useStyles: () => ({})
@@ -56,9 +61,13 @@ describe('OrderHistory component', () => {
       ...fullMockedOrders
     }));
     const { getAllByText } = render(
-      <Router>
-        <OrderHistory />
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <Router>
+            <OrderHistory />
+          </Router>
+        </ThemeContext.Provider>
+      </ThemeProvider>
     );
     const text1 = getAllByText(/orderHistory/i);
     expect(text1).toHaveLength(4);
@@ -69,9 +78,13 @@ describe('OrderHistory component', () => {
       ...emptyMockedOrders
     }));
     const { getAllByText } = render(
-      <Router>
-        <OrderHistory />
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <Router>
+            <OrderHistory />
+          </Router>
+        </ThemeContext.Provider>
+      </ThemeProvider>
     );
     const text2 = getAllByText(/emptyTitle/i);
     expect(text2).toBeDefined();
@@ -82,9 +95,13 @@ describe('OrderHistory component', () => {
       ...fullMockedOrders
     }));
     const { container } = render(
-      <Router>
-        <OrderHistory />
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <Router>
+            <OrderHistory />
+          </Router>
+        </ThemeContext.Provider>
+      </ThemeProvider>
     );
     const nextPageBtn = container.querySelector('button[aria-label="Go to next page"]');
     fireEvent.click(nextPageBtn);

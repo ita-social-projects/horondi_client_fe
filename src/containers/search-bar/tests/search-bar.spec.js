@@ -3,6 +3,7 @@ import { MockedProvider } from '@apollo/client/testing';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { mocks, TestWrapper } from './search-bar.variables';
+import ThemeContext from '../../../context/theme-context';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -14,6 +15,7 @@ jest.mock('react-i18next', () => ({
 jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 describe('search-bar testing', () => {
   const targetValue = 'banana';
@@ -21,7 +23,9 @@ describe('search-bar testing', () => {
   beforeEach(() => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <TestWrapper />
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <TestWrapper />
+        </ThemeContext.Provider>
       </MockedProvider>
     );
   });

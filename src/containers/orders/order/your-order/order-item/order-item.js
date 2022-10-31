@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { ListItem, ListItemText, Typography } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
-import { IMG_URL } from '../../../../../configs';
 import { useStyles } from '../../../../checkout/checkout-form/checkout-form.styles';
 import { getProductById } from '../../../operations/order.queries';
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
@@ -12,10 +11,14 @@ import { useCart } from '../../../../../hooks/use-cart';
 import { getConstructorByModel } from '../../../operations/getConstructorByModel.query';
 import ConstructorCanvas from '../../../../../components/constructor-canvas';
 import { useCurrency } from '../../../../../hooks/use-currency';
+import useProductImage from '../../../../../hooks/use-product-image';
+import ThemeContext from '../../../../../context/theme-context';
 
 const OrderItem = ({ product, setProductPrices, promoCode }) => {
   const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const [isLightTheme] = useContext(ThemeContext);
   const styles = useStyles();
+  const { imageUrl, checkImage } = useProductImage();
 
   const { t } = useTranslation();
   const currencySign = getCurrencySign();
@@ -57,6 +60,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   const { price } = sizeAndPrice;
   const { category } = orderItem || {};
+  const productImage = orderItem?.images.primary.thumbnail;
 
   useEffect(() => {
     if (category) {
@@ -64,14 +68,14 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
     }
   }, [setProductPrices, price, category]);
 
+  useEffect(() => {
+    productImage && checkImage(productImage, isLightTheme);
+  }, [checkImage, isLightTheme, productImage]);
+
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   const defaultProductImg = (
-    <img
-      className={styles.yourOrderListImg}
-      src={`${IMG_URL}${orderItem?.images?.primary.thumbnail}`}
-      alt='product-img'
-    />
+    <img className={styles.yourOrderListImg} src={imageUrl} alt='product-img' />
   );
   const constructorProductImg = (
     <div className={styles.yourOrderListImg}>

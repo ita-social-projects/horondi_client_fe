@@ -8,6 +8,7 @@ import { order, mock } from './order-history-item.variables';
 import OrderHistoryItem from '../../../../containers/orders/order-history/order-history-item/order-history-item.js';
 import { theme } from '../../../../components/app/app-theme/app.theme';
 import { DollarIcon } from '../../../../images/profile-icons.js';
+import ThemeContext from '../../../../context/theme-context';
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
@@ -28,6 +29,7 @@ useSelector.mockImplementation(() => ({
 }));
 
 const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 let wrapper;
 jest.mock('@material-ui/styles', () => ({
   ...jest.requireActual('@material-ui/styles'),
@@ -51,7 +53,9 @@ describe('OrderHistoryOrder component tests', () => {
       <MockedProvider mocks={mock}>
         <BrowserRouter>
           <ThemeProvider theme={themeValue}>
-            <OrderHistoryItem order={order} />
+            <ThemeContext.Provider value={themeContextProviderMockValues}>
+              <OrderHistoryItem order={order} />
+            </ThemeContext.Provider>
           </ThemeProvider>
         </BrowserRouter>
       </MockedProvider>

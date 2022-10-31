@@ -1,10 +1,9 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Select from '@material-ui/core/Select';
 import { MenuItem, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import _ from 'lodash';
 
 import { useQuery } from '@apollo/client';
 import { useStyles } from './cart-item.styles';
@@ -12,7 +11,7 @@ import NumberInput from '../../../../components/number-input';
 import errorOrLoadingHandler from '../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../hooks/useIsLoadingOrError';
 
-import { IMG_URL, TEXT_FIELD_VARIANT } from '../../../../configs';
+import { TEXT_FIELD_VARIANT } from '../../../../configs';
 import routes from '../../../../configs/routes';
 import { calcPriceForCart } from '../../../../utils/priceCalculating';
 import { getProductById } from '../../operations/order.queries';
@@ -21,6 +20,9 @@ import Loader from '../../../../components/loader';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
 import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
+import useProductImage from '../../../../hooks/use-product-image';
+import ThemeContext from '../../../../context/theme-context';
+import useDebounce from '../../../../hooks/use-debounce';
 
 const { pathToProducts } = routes;
 
@@ -33,6 +35,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const styles = useStyles();
   const { t } = useTranslation();
   const { currency } = useContext(CurrencyContext);
+  const [isLightTheme] = useContext(ThemeContext);
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const [inputValue, setInputValue] = useState(item.quantity);
   const currencySign = getCurrencySign();
@@ -45,14 +48,18 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     getCartItem,
     changeSizeConstructor,
     getProductPriceWithPromoCode,
-    getProductPrice
+    getProductPrice,
+    removeFromCart
   } = cartOperations;
+  const { imageUrl, checkImage } = useProductImage();
 
-  const onChangeQuantity = useCallback(
-    _.debounce((value) => {
-      changeQuantity(item.id, value);
-    }, 500)
-  );
+  const onChangeQuantity = (value) => {
+    setInputValue(value);
+  };
+  const debounceQuantity = useDebounce(inputValue, 500);
+  useEffect(() => {
+    changeQuantity(item.id, debounceQuantity);
+  }, [debounceQuantity, changeQuantity, item.id]);
   const { isFromConstructor } = item;
 
   const {
@@ -62,9 +69,9 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   } = useQuery(isFromConstructor ? getConstructorByModel : getProductById, {
     variables: {
       id: isFromConstructor ? item.model?._id : item.productId
-    }
+    },
+    fetchPolicy: 'no-cache'
   });
-
   const constructorByModel = product?.getConstructorByModel || {};
 
   const constructorCartItem = {
@@ -73,10 +80,17 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   };
 
   const cartItem = isFromConstructor ? constructorCartItem : product?.getProductById;
-
-  const itemFoto = isFromConstructor
+  const itemImage = isFromConstructor
     ? cartItem?.model?.images?.medium
     : cartItem?.images.primary.medium;
+
+  useEffect(() => {
+    checkImage(itemImage, isLightTheme);
+  }, [checkImage, isLightTheme, itemImage]);
+
+  useEffect(() => {
+    (cartItem?.isDeleted || cartItem?.message) && removeFromCart(item);
+  }, [cartItem, item, removeFromCart]);
 
   const defaultItemName = t(`${cartItem?.translationsKey}.name`);
   const constructorItemName = t('common.backpackFromConstructor');
@@ -106,7 +120,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
 
   const defaultProductImg = (
     <Link to={`${pathToProducts}/${cartItem?._id}`}>
-      <img className={styles.itemImg} src={`${IMG_URL}${itemFoto} `} alt='product-img' />
+      <img className={styles.itemImg} src={imageUrl} alt='product-img' />
     </Link>
   );
   const constructorProductImg = (

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/styles';
 import FilledCart from '../filled-cart';
 import {
   itemData,
@@ -12,12 +13,15 @@ import {
   mockProductFromConstructor
 } from './filled-cart.variables';
 import { DollarIcon } from '../../../../../images/profile-icons';
+import ThemeContext from '../../../../../context/theme-context';
+import { theme } from '../../../../../components/app/app-theme/app.theme';
 
 jest.mock('react-redux');
 jest.mock('../filled-cart.styles.js', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../order/order-table/order-table.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../cart-item/cart-item.styles', () => ({ useStyles: () => ({}) }));
 
+const mockChangeQuantity = jest.fn();
 const mockGetTotalPrice = jest.fn(() => '43');
 const mockGetCartItem = jest.fn(() => itemData);
 const mockGetProductPrice = jest.fn(() => 1100);
@@ -27,8 +31,11 @@ const mockGetTotalPriceWithCertificate = jest.fn(() => '39');
 const mockGetPriceWithCurrency = jest.fn(() => 200);
 const mockgetCertificatePriceInUSD = jest.fn(() => 14);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const themeValue = theme('light');
+const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 const mockCartOperations = {
+  changeQuantity: mockChangeQuantity,
   getTotalPrice: mockGetTotalPrice,
   getCartItem: mockGetCartItem,
   getProductPrice: mockGetProductPrice,
@@ -55,11 +62,15 @@ describe('Filled cart component tests', () => {
     }));
 
     render(
-      <Router>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <FilledCart items={items} cartOperations={mockCartOperations} />
-        </MockedProvider>
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <Router>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <FilledCart items={items} cartOperations={mockCartOperations} />
+            </MockedProvider>
+          </Router>
+        </ThemeContext.Provider>
+      </ThemeProvider>
     );
     await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -78,11 +89,15 @@ describe('Filled cart component tests', () => {
     }));
 
     render(
-      <Router>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <FilledCart items={items} cartOperations={mockCartOperations} />
-        </MockedProvider>
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <Router>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <FilledCart items={items} cartOperations={mockCartOperations} />
+            </MockedProvider>
+          </Router>
+        </ThemeContext.Provider>
+      </ThemeProvider>
     );
     await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -100,11 +115,15 @@ describe('Filled cart component tests', () => {
       currency: 0
     }));
     render(
-      <Router>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <FilledCart items={items} cartOperations={mockCartOperations} />
-        </MockedProvider>
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <ThemeContext.Provider value={themeContextProviderMockValues}>
+          <Router>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <FilledCart items={items} cartOperations={mockCartOperations} />
+            </MockedProvider>
+          </Router>
+        </ThemeContext.Provider>
+      </ThemeProvider>
     );
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();

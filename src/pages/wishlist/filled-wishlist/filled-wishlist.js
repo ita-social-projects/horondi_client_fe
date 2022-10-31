@@ -77,6 +77,7 @@ const FilledWishlist = ({ items }) => {
                   setModalVisibility={() => {
                     setModalVisibility(!modalVisibility);
                   }}
+                  wishlistOperations={wishlistOperations}
                   cartOperations={cartOperations}
                   isInCart={isInCart}
                   setModalItem={setModalItem}

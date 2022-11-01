@@ -62,6 +62,7 @@ export const useStyles = makeStyles((theme) => ({
       height: 760
     }
   }),
+
   modelsTitle: () => ({
     color: theme.palette.textColor,
     fontSize: 34,

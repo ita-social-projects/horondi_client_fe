@@ -2,42 +2,50 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   emailInput: {
-    marginBottom: '21px',
-    '& label': {
-      transform: 'translate(14px, 14px) scale(1)'
-    },
-    '& div > input': {
-      padding: '11px 14px !important',
-      position: 'relative'
-    },
-    '& p': {
-      position: 'absolute',
-      top: '40px'
-    },
-    '& label.Mui-focused': {
-      color: theme.palette.textColor
-    },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: theme.palette.textColor
+        borderColor: theme.palette.lightGrayShade
       },
       '&.Mui-focused fieldset': {
-        borderColor: theme.palette.black,
-        borederWidth: '2px'
+        borderColor: theme.palette.blue
       }
+    },
+    '& .MuiInputBase-input': {
+      fontFamily: theme.typography.fontFamily,
+      color: theme.palette.textColor,
+      fontStyle: 'normal',
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: '25px',
+      paddingLeft: '30px'
+    },
+    '& .MuiInputBase-input:focus': {
+      color: theme.palette.lightGrayShade
+    },
+    '& label': {
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: '18px',
+      background: 'white',
+      paddingRight: '5px',
+      transform: 'translate(13, 16) scale(1)'
+    },
+    '& label.Mui-focused': {
+      color: theme.palette.blue
     }
   },
   recoveryText: {
-    margin: '5px 0 15px',
+    margin: '10px 0 35px',
+    fontFamily: theme.typography.fontFamily,
     fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '0.75rem',
-    lineHeight: '15px',
+    fontWeight: '400',
+    fontSize: '12px',
+    lineHeight: '16px',
     textAlign: 'left',
     maxWidth: '400px'
   },
   errorText: {
-    marginTop: '-20px',
+    margin: '5px 0 15px',
     height: 'fit-content',
     lineHeight: '12px',
     minHeight: '12px',
@@ -50,7 +58,7 @@ export const useStyles = makeStyles((theme) => ({
   helperEmail: {
     '& p::after': {
       content: `'example@mail.com'`,
-      color: '#828282'
+      color: theme.palette.lightGrayShade
     }
   },
   successText: {

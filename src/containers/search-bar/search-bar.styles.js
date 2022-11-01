@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme, color) => ({
     '@media (max-width: 556px)': {
       flex: '1',
       position: 'absolute',
-      top: '40px',
+      top: '50px',
       margin: '5px 0',
       width: '100%'
     },

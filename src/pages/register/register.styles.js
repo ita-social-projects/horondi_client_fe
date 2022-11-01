@@ -52,10 +52,13 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.backgroundColor,
     width: '100%',
     height: '350px',
-    padding: '30px 63px 63px',
+    padding: '30px 63px',
     '& p': {
       textAlign: 'center',
       fontSize: '20px'
+    },
+    '@media (max-width: 525px)': {
+      padding: '30px 33px'
     }
   },
   registerSuccessInfo: {

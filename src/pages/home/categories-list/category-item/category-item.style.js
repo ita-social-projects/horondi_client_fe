@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '0px',
     backgroundImage: `url("${props.image}")`,
     backgroundPosition: 'center',
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     backgroundColor: theme.palette.carouselItem.normal.backgroundColor,
     backgroundRepeat: 'no-repeat',
     cursor: 'pointer',

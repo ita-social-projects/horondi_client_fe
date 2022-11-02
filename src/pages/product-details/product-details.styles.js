@@ -61,5 +61,10 @@ export const useStyles = makeStyles((theme) => ({
   arrowIcon: {
     fontSize: '52px',
     fill: theme.palette.arrowIcon.arrowColor
+  },
+  addToFavouriteButton: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 }));

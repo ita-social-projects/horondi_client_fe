@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: ({ isModelsVisible, modelsCount }) => ({
-    height: !isModelsVisible ? '960px' : `${(modelsCount / 2) * 210 + 250}px`,
-    minHeight: '480px',
+    maxHeight: !isModelsVisible ? '900px' : `${(modelsCount / 2) * 210 + 250}px`,
+    minHeight: '550px',
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     transition: 'height 1s ease',
     '@media (max-width: 568px)': {
-      height: '1000px'
+      maxHeight: '600px'
     },
     '& button': {
       fontFamily: 'Open Sans',
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
       color: theme.palette.textColor,
       backgroundColor: theme.palette.backgroundColor,
       borderColor: theme.palette.textColor,
-      margin: 50,
+      margin: 55,
       '&:hover': {
         color: theme.palette.button.hoverSecondary.color,
         backgroundColor: theme.palette.button.hoverSecondary.backgroundColor
@@ -54,14 +54,15 @@ export const useStyles = makeStyles((theme) => ({
     }
   }),
   modelsWrapperClosed: () => ({
-    height: 260 
+    height: 260
   }),
   modelsWrapperOpened: () => ({
     height: 510,
     '@media (max-width: 568px)': {
       height: 760
-    },
+    }
   }),
+
   modelsTitle: () => ({
     color: theme.palette.textColor,
     fontSize: 34,

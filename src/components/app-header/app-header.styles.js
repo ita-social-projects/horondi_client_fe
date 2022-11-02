@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: '0px 80px',
     borderBottom: '1px solid rgba(91, 91, 91, 0.6)',
-    '@media (max-width: 556px)': {
+    '@media (max-width: 768px)': {
       display: 'none'
     }
   },

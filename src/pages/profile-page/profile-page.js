@@ -113,6 +113,7 @@ const ProfilePage = () => {
         error={touched[name] && !!errors[name]}
         helperText={t(errors[name])}
         className={handleClassName(classes.dataInput, classes.nameInputs, name)}
+        disabled={name === 'email'}
       />
     ));
 

@@ -31,15 +31,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   nested: {
     '&:hover': {
-      background: 'none'
+      background: 'none',
+      cursor: 'default'
     },
     '& span': {
       textTransform: 'uppercase',
       fontSize: '14px',
       fontWeight: '400'
-    },
-    '&:hover span': {
-      textDecoration: 'underline'
     },
     '& a': {
       color: 'inherit'
@@ -54,6 +52,12 @@ export const useStyles = makeStyles((theme) => ({
       position: 'relative',
       bottom: '1px',
       marginRight: 10
+    }
+  },
+  listItemText: {
+    '&:hover': {
+      textDecoration: 'underline',
+      cursor: 'pointer'
     }
   }
 }));

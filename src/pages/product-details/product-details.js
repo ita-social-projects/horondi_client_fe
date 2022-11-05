@@ -149,7 +149,11 @@ const ProductDetails = ({ match }) => {
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}
               />
-              <Tooltip title={wishlistTip} placement='bottom'>
+              <Tooltip
+                className={styles.addToFavouriteButton}
+                title={wishlistTip}
+                placement='bottom'
+              >
                 {itemInWishlist ? (
                   <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
                 ) : (

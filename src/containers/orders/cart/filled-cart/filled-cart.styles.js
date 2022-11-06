@@ -112,7 +112,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     '@media (max-width: 850px)': {
       width: '100%',
       flexDirection: 'column',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     '@media (max-width: 420px)': {
       display: 'flex',

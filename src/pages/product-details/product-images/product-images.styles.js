@@ -90,11 +90,12 @@ export const useStyles = makeStyles((theme) => ({
   additionalImagePreview: {
     display: 'flex',
     alignItems: 'flex-end',
-    gap: 30,
+    margin: 'auto',
+    gap: 17,
     maxHeight: '120px',
     justifyContent: 'space-between',
     '@media (max-width: 600px)': {
-      gap: 15,
+      gap: 13,
       maxHeight: '100px'
     },
     height: '100%'
@@ -103,7 +104,7 @@ export const useStyles = makeStyles((theme) => ({
   lastImage: {
     ...imgSides,
     filter: 'brightness(50%)',
-    boxShadow: theme.palette.carouselItem.shadow.boxShadow
+    boxShadow: 'inset 0 0 0 1000px rgba(0,0,0,.5)'
   },
 
   lastImageText: {
@@ -118,7 +119,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: '0 5px',
-    color: theme.palette.black,
+    color: theme.palette.white,
     '@media (max-width: 500px)': {
       padding: '0',
       fontSize: '14px'
@@ -126,6 +127,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   imageItem: {
     flex: '1 1 30%',
+    maxWidth: '160px',
     height: '100%',
     border: theme.palette.imageContainer.border,
     borderRadius: '6px'
@@ -134,6 +136,7 @@ export const useStyles = makeStyles((theme) => ({
     flex: '1 1 30%',
     position: 'relative',
     color: 'white',
+    maxWidth: '160px',
     cursor: 'pointer',
     height: '100%',
     border: theme.palette.imageContainer.border,

@@ -1,6 +1,11 @@
 import i18next from 'i18next';
 
-export const constructorPartPrice = (priceGobelen, priceBottom) => [priceGobelen, priceBottom];
+export const constructorPartPrice = ({ pattern, bottom, size, basic }) => [
+  basic,
+  pattern,
+  bottom,
+  size
+];
 
 export const constructorEndPrice = (priceTotal) => {
   if (!priceTotal) {

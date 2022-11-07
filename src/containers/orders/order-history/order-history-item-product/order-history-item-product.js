@@ -50,8 +50,6 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
       b.features.color._id === product?.mainMaterial.color._id
   );
   const pattern = constructor?.patterns.findIndex((b) => b._id === product?.pattern._id);
-  const pocket =
-    constructor && constructor.pocketsWithRestrictions[0]?.currentPocketWithPosition?.pocket;
 
   const defaultProductName = product
     ? t(`${product?.translationsKey}.name`)
@@ -63,8 +61,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const constructorItem = {
     basic: constructor?.basics[basic],
     bottom: constructor?.bottoms[bottom],
-    pattern: constructor?.patterns[pattern],
-    pocket
+    pattern: constructor?.patterns[pattern]
   };
   const constructorProductImg = loadingConstructorByModel ? null : (
     <ConstructorCanvas

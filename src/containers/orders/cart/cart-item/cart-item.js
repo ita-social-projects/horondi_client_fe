@@ -59,7 +59,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const debounceQuantity = useDebounce(inputValue, 500);
   useEffect(() => {
     changeQuantity(item.id, debounceQuantity);
-  }, [debounceQuantity, changeQuantity, item.id]);
+  }, []);
   const { isFromConstructor } = item;
 
   const {

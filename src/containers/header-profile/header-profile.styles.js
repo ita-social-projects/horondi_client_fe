@@ -30,6 +30,7 @@ export const useStyles = makeStyles(() => ({
   list: {
     '& .MuiPaper-root': {
       marginTop: '19px',
+      minWidth: '230px',
       padding: '8px 0',
       backgroundColor: '#000',
       borderRadius: '0px'

@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     transition: 'height 1s ease',
     '@media (max-width: 568px)': {
-      maxHeight: '600px'
+      maxHeight: '1000px'
     },
     '& button': {
       fontFamily: 'Open Sans',
@@ -68,6 +68,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 34,
     marginBottom: 30,
     fontWeight: '400',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    paddingLeft: '20px'
   })
 }));

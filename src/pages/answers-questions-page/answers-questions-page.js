@@ -27,7 +27,7 @@ const AnswersQuestionsPage = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.container}`}>
-        <h1>{t('common.titleQuestionsAnswers')}</h1>
+        <h1 className={styles.pageTitle}>{t('common.titleQuestionsAnswers')}</h1>
         {page.map((accordion) => {
           const { _id } = accordion;
           const question = accordion.question && (

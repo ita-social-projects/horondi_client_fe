@@ -24,5 +24,8 @@ export const useStyles = makeStyles(() => ({
     '& hr': {
       color: '#242424'
     }
+  },
+  pageTitle: {
+    marginBottom: '60px'
   }
 }));

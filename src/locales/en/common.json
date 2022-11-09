@@ -86,5 +86,5 @@
   },
   "titleQuestionsAnswers": "Questions and answers",
   "backpack": "Your Backpack", 
-  "constructorAdditionals": ["Front-Pocket material:", "Bottom material:"]
+  "constructorAdditionals": ["Basic material:", "Pattern material:", "Bottom material:", "Size:"]
 }

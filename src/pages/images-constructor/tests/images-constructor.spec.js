@@ -18,6 +18,10 @@ jest.mock('../../../hooks/use-currency', () => ({
   })
 }));
 
+jest.mock('../../../hooks/use-cart.js');
+
+jest.mock('../constructor-sumbit/constructor-submit.js', () => () => null);
+
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useSelector: () => ({ currency: 0 })
@@ -37,7 +41,6 @@ jest.mock('i18next', () => ({
 
 jest.mock('../../../utils/checkout', () => ({ getCurrentCurrency: () => '1' }));
 jest.mock('../../../utils/constructor', () => ({
-  constructorEndPrice: () => '',
   constructorPartPrice: () => [1, 2, 3]
 }));
 
@@ -46,17 +49,17 @@ const mockUseDispatch = jest.spyOn(redux, 'useDispatch');
 
 mockUseDispatch.mockImplementation(() => mockDispatch);
 
-beforeEach(async () => {
-  render(
-    <MockedProvider mocks={mockAllConstructors} addTypename={false}>
-      <ImagesConstructor />
-    </MockedProvider>
-  );
-
-  await new Promise((resolve) => setTimeout(resolve, 0));
-});
-
 describe('ImagesConstructor component tests', () => {
+  beforeEach(async () => {
+    render(
+      <MockedProvider mocks={mockAllConstructors} addTypename={false}>
+        <ImagesConstructor />
+      </MockedProvider>
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
+
   it('renders h1', async () => {
     waitForElement(() => {
       expect(screen.getByText(/Створи сам/i)).toBeInTheDocument();

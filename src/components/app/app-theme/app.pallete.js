@@ -13,6 +13,7 @@ const blue = '#1976D2';
 const red = '#F44336';
 const lightPing = '#FEEFEF';
 const green = '#4CAF50';
+const shadow = 'inset 0 0 0 1000px rgba(0,0,0,.5)';
 
 export const paletteGenerator = (colorSchema) => ({
   black,
@@ -26,6 +27,7 @@ export const paletteGenerator = (colorSchema) => ({
   red,
   lightPing,
   green,
+  shadow,
   textColor: theme[colorSchema].textColor,
   backgroundColor: theme[colorSchema].backgroundColor,
   card: {

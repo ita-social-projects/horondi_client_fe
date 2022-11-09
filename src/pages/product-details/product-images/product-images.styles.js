@@ -104,7 +104,7 @@ export const useStyles = makeStyles((theme) => ({
   lastImage: {
     ...imgSides,
     filter: 'brightness(50%)',
-    boxShadow: 'inset 0 0 0 1000px rgba(0,0,0,.5)'
+    boxShadow: theme.palette.shadow
   },
 
   lastImageText: {

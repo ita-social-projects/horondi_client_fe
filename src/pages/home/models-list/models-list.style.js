@@ -1,18 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  root: ({ isModelsVisible, modelsCount }) => ({
-    maxHeight: !isModelsVisible ? '900px' : `${(modelsCount / 2) * 210 + 250}px`,
-    minHeight: '550px',
+  root: () => ({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'height 1s ease',
-    '@media (max-width: 568px)': {
-      maxHeight: '1000px'
-    },
     '& button': {
       fontFamily: 'Open Sans',
       fontSize: '14px',

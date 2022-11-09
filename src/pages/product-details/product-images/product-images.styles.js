@@ -104,7 +104,7 @@ export const useStyles = makeStyles((theme) => ({
   lastImage: {
     ...imgSides,
     filter: 'brightness(50%)',
-    boxShadow: theme.palette.shadow
+    opacity: 0.5
   },
 
   lastImageText: {
@@ -118,7 +118,9 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '24px',
     display: 'flex',
     alignItems: 'center',
-    padding: '0 5px',
+    backgroundColor: theme.palette.black,
+    opacity: 0.7,
+    borderRadius: '6px',
     color: theme.palette.white,
     '@media (max-width: 500px)': {
       padding: '0',

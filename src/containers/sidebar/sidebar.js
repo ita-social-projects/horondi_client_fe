@@ -18,6 +18,7 @@ import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import ThemeContext from '../../context/theme-context';
 import CertificateIcon from './CertificateIcon';
+import { getAllConstructors } from '../../pages/images-constructor/operations/getAllConstructors.queries';
 
 const { pathToConstructor, pathToGiftСertificate } = routes;
 
@@ -27,6 +28,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
   const isLightTheme = useContext(ThemeContext);
+  const [isConstructor, setIsConstructor] = useState(false);
 
   const sidebar = clsx({
     [styles.drawer]: true,
@@ -52,6 +54,15 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       )
   });
 
+  useQuery(getAllConstructors, {
+    variables: {
+      limit: 0,
+      skip: 0
+    },
+    onCompleted: ({ getAllConstructors }) =>
+      setIsConstructor(Boolean(getAllConstructors.items.length))
+  });
+
   const categoriesList = useMemo(
     () =>
       categories?.map(({ category, models }) => (
@@ -66,6 +77,25 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       )),
     [categories, styles, setIsMenuOpen]
   );
+
+  const constructorLink = useMemo(() => {
+    if (isConstructor) {
+      return (
+        <>
+          <Link
+            to={pathToConstructor}
+            className={styles.mainItem}
+            onClick={() => setIsMenuOpen(false)}
+            data-testid='linkToConstructor'
+          >
+            <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
+          </Link>
+          <div className={styles.itemHighlighting} />
+        </>
+      );
+    }
+    return null;
+  }, [isConstructor, styles]);
 
   const subList = useMemo(
     () => (
@@ -117,17 +147,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           <CertificateIcon data-testid='link' alt='tre' />
         </Link>
         <div className={styles.itemHighlighting} />
-
-        <Link
-          to={pathToConstructor}
-          className={styles.mainItem}
-          onClick={() => setIsMenuOpen(false)}
-          data-testid='linkToConstructor'
-        >
-          <span className={styles.constructorItem}>{t('sidebar.constructorCreate')}</span>
-        </Link>
-        <div className={styles.itemHighlighting} />
-
+        {constructorLink}
         {subList}
         <SocialLinks
           showTitle

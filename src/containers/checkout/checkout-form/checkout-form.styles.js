@@ -47,7 +47,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%',
     marginBottom: 10,
     '@media (max-width: 991px)': {
-      flexDirection: 'column'
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   },
   userInfoContainer: {
@@ -142,11 +143,6 @@ export const useStyles = makeStyles(({ palette }) => ({
   delivery: {
     width: '100%'
   },
-  deliveryContainer: {
-    '@media (max-width: 768px)': {
-      alignSelf: 'center'
-    }
-  },
   inputData: {
     marginBottom: 10,
     width: '100%'
@@ -187,10 +183,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   checkoutTitleLine: {
     background: '#636262',
     height: 1,
-    marginTop: 15,
-    '@media (max-width: 768px)': {
-      width: '90%'
-    }
+    marginTop: 15
   },
 
   consentMessage: {

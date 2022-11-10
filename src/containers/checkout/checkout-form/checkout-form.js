@@ -285,7 +285,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
               </p>
             </div>
           </Grid>
-          <Grid item className={styles.deliveryContainer}>
+          <Grid>
             <YourOrder
               checkoutFormBtnValue={checkoutFormBtnValue}
               consentLink={consentLink}

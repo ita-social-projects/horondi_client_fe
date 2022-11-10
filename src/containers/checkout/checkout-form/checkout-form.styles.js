@@ -143,9 +143,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     width: '100%'
   },
   deliveryContainer: {
-    '@media (max-width: 991px)': {
-      width: '100%',
-      marginTop: '2%'
+    '@media (max-width: 768px)': {
+      alignSelf: 'center'
     }
   },
   inputData: {
@@ -217,7 +216,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     padding: '32px 24px',
     marginTop: '20px',
     '@media (max-width: 1150px)': {
-      position: 'inherit',
       marginBottom: '20px'
     },
     '&.MuiPaper-root': {

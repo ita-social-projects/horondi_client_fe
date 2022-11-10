@@ -74,7 +74,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       borderColor: palette.red
     },
     '&.MuiOutlinedInput-notchedOutline': {
-      borderColor: palette.blue
+      borderColor: palette.black
     }
   }
 }));

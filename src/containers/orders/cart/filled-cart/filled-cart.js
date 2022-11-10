@@ -142,16 +142,14 @@ const FilledCart = ({ items, cartOperations }) => {
           },
           sizes: [item.sizeAndPrice.size._id],
           basePrice: item.sizeAndPrice.price
-        },
-        upload: []
+        }
       };
 
       setProductFromConstructorLoading(true);
 
       const { data } = await addConstructorProduct({
         variables: {
-          product: input.product,
-          upload: input.upload
+          product: input.product
         }
       });
 

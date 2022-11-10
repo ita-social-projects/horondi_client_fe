@@ -14,14 +14,13 @@ const ProductPath = ({ category, translationsKey }) => {
 
   const categoryId = category?._id;
   const countPerPageValue = ITEMS_PER_PAGE[0].value;
+  const pathToCatologWithFilters = `${pathToCategory}?&${URL_QUERIES_NAME.page}=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}&${URL_QUERIES_NAME.categoryFilter}=%2C${categoryId}`;
 
   return (
     <div className={styles.paths}>
       <Link to={pathToMain}>{t('common.home')}</Link> {`\u00A0 / \u00A0`}
       <Link to={pathToAllProducts}>{t('common.scrollbar.catalog')}</Link> {`\u00A0 / \u00A0`}
-      <Link
-        to={`${pathToCategory}?&${URL_QUERIES_NAME.page}=${URL_QUERIES_NAME.defaultPage}&${countPerPage}=${countPerPageValue}&${URL_QUERIES_NAME.categoryFilter}=%2C${categoryId}`}
-      >
+      <Link to={pathToCatologWithFilters}>
         {category ? t(`${category.translationsKey}.name`) : null}
       </Link>
       {`\u00A0 / \u00A0`}

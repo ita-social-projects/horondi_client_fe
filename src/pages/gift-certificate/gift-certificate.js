@@ -138,6 +138,7 @@ const GiftCertificate = () => {
                 id='email'
                 data-testid='email'
                 fullWidth
+                type='email'
                 label={t('checkout.checkoutTextFields.email')}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 className={styles.textField}

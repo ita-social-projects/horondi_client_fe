@@ -65,16 +65,17 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.hover.color,
       backgroundColor: palette.button.hover.backgroundColor
     }
-  },
-  textField: {
-    '& label.Mui-focused': {
-      color: palette.borderColor
-    },
-    '& .MuiOutlinedInput-root.Mui-focused': {
-      borderColor: palette.red
-    },
-    '&.MuiOutlinedInput-notchedOutline': {
-      borderColor: palette.black
-    }
   }
+  // ,
+  // textField: {
+  //   '& label.Mui-focused': {
+  //     color: palette.borderColor
+  //   },
+  //   '& .MuiOutlinedInput-root.Mui-focused': {
+  //     borderColor: palette.red
+  //   },
+  //   '&.MuiOutlinedInput-notchedOutline': {
+  //     borderColor: palette.black
+  //   }
+  // }
 }));

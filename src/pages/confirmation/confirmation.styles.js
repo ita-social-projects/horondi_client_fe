@@ -36,7 +36,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& button': {
       marginTop: '45px',
-      height: '35px',
       backgroundColor: '#404040',
       color: 'white',
       width: '135px',

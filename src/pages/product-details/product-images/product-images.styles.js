@@ -103,8 +103,7 @@ export const useStyles = makeStyles((theme) => ({
 
   lastImage: {
     ...imgSides,
-    filter: 'brightness(50%)',
-    opacity: 0.5
+    filter: 'brightness(50%)'
   },
 
   lastImageText: {
@@ -118,9 +117,7 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '24px',
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: theme.palette.black,
-    opacity: 0.7,
-    borderRadius: '6px',
+
     color: theme.palette.white,
     '@media (max-width: 500px)': {
       padding: '0',
@@ -142,6 +139,7 @@ export const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     height: '100%',
     border: theme.palette.imageContainer.border,
-    borderRadius: '6px'
+    borderRadius: '6px',
+    backgroundColor: 'rgba(0,0,0,0.5)'
   }
 }));

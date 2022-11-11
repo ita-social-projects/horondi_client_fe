@@ -15,8 +15,6 @@ export const useStyles = makeStyles((theme) => ({
   welcome: {
     display: 'flex',
     flexDirection: 'column',
-    maxHeight: '200px',
-    maxWidth: '400px',
     padding: '20px',
     textAlign: 'center',
     borderRadius: '7px',

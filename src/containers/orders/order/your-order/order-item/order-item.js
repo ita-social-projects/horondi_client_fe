@@ -60,7 +60,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   const { price } = sizeAndPrice;
   const { category } = orderItem || {};
-  const productImage = orderItem?.images.primary.thumbnail;
+  const productImage = isFromConstructor ? null : orderItem?.images.primary.thumbnail;
 
   useEffect(() => {
     if (category) {

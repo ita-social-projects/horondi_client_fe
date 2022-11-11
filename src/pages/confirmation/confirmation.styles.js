@@ -3,22 +3,26 @@ import BG from '../../images/welcome.jpg';
 
 export const useStyles = makeStyles((theme) => ({
   confirmation: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     background: `center/cover url(${BG}) no-repeat `,
-    flex: 1
+    flex: 1,
+    '@media (max-width: 768px)': {
+      padding: '30px 10px 20px 10px'
+    }
   },
   welcome: {
-    height: '200px',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    right: '0',
-    bottom: '150px',
-    margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
     padding: '20px',
-    width: '400px',
     textAlign: 'center',
     borderRadius: '7px',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    buttonGroup: {
+      display: 'flex',
+      flexDirection: 'row'
+    },
     '& h2': {
       margin: '0',
       color: 'white',
@@ -32,12 +36,14 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& button': {
       marginTop: '45px',
-      height: '45px',
       backgroundColor: '#404040',
       color: 'white',
       width: '135px',
       '&:hover': {
         backgroundColor: 'black'
+      },
+      '@media (max-width: 400px)': {
+        width: '114px'
       }
     }
   },

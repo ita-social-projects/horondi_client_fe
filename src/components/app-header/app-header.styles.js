@@ -26,9 +26,7 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       position: 'fixed',
       top: 0,
-      zIndex: 1000
-    },
-    '@media (max-width: 556px)': {
+      zIndex: 1000,
       gap: '48px',
       paddingBottom: '48px'
     }

@@ -12,10 +12,7 @@ const baseStyles = {
     '@media (max-width: 800px)': {
       width: '200px'
     },
-    '@media (max-width: 600px)': {
-      width: '180px'
-    },
-    '@media (max-width: 556px)': {
+    '@media (max-width: 768px)': {
       width: '100%'
     }
   },
@@ -47,7 +44,7 @@ export const useStyles = makeStyles((theme, color) => ({
       position: 'relative',
       flex: 'unset'
     },
-    '@media (max-width: 556px)': {
+    '@media (max-width: 768px)': {
       flex: '1',
       position: 'absolute',
       top: '50px',

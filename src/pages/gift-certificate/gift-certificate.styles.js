@@ -65,13 +65,5 @@ export const useStyles = makeStyles(({ palette }) => ({
       color: palette.button.hover.color,
       backgroundColor: palette.button.hover.backgroundColor
     }
-  },
-  textField: {
-    '& label.Mui-focused': {
-      color: palette.textColor
-    },
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: palette.textColor
-    }
   }
 }));

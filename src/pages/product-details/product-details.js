@@ -49,7 +49,7 @@ const ProductDetails = ({ match }) => {
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
-  const [isOpenedSnackbar, setIsOpenedSnackbar] = React.useState(false);
+  const [isOpenedSnackbar, setIsOpenedSnackbar] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -118,7 +118,7 @@ const ProductDetails = ({ match }) => {
     }
   };
 
-  const onBackHandler = () => {
+  const backToCatalog = () => {
     if (history.location.key) {
       history.goBack();
     } else {
@@ -132,7 +132,7 @@ const ProductDetails = ({ match }) => {
     <div className={appStyles.rootApp}>
       <Card className={`${appStyles.containerApp} ${styles.container} `}>
         <ProductPath category={category} translationsKey={translationsKey} />
-        <Button className={styles.backBtn} onClick={onBackHandler}>
+        <Button className={styles.backBtn} onClick={backToCatalog}>
           <ArrowIcon className={styles.arrowIcon} />
         </Button>
         <div className={styles.product}>

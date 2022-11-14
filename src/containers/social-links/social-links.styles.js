@@ -19,10 +19,13 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     '@media (max-width: 768px)': {
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'left',
       textAlign: 'center',
       marginLeft: '0px',
-      fontSize: '1rem'
+      fontSize: '1rem',
+      '@media (max-width: 553px)': {
+        justifyContent: 'center'
+      }
     }
   }),
   cardBodyFooter: {
@@ -64,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '19px'
   }),
   iconWrap: {
-    marginRight: '16px',
+    margin: '0 8px',
     color: 'transparent',
     transition: 'color 0.5s linear 0s',
     '&:hover': {

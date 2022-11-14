@@ -26,7 +26,7 @@ const OrderHistoryItem = ({ order }) => {
 
   const orderProducts = items.map((item, idx) => (
     <OrderHistoryItemProduct
-      key={item.product._id + item.options.size.name}
+      key={item.product._id + idx}
       item={item}
       itemPriceWithDiscount={itemsPriceWithDiscount[idx]}
       fixedExchangeRate={fixedExchangeRate}

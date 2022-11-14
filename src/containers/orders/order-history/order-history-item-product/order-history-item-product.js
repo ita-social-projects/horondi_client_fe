@@ -20,7 +20,8 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const { getCurrencySign, getPriceWithCurrency } = useCurrency();
   const [isLightTheme] = useContext(ThemeContext);
   const currencySign = getCurrencySign();
-  const productPrice = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
+  const productPrice = getPriceWithCurrency(item.fixedPrice, fixedExchangeRate);
+  const totalProductPrice = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
   const { t } = useTranslation();
   const { imageUrl, checkImage } = useProductImage();
 
@@ -88,7 +89,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
       </TableCell>
       <TableCell className={styles.empty} />
       <TableCell>
-        <div className={styles.description}>{item.options.size.name}</div>
+        <div className={styles.description}>{item.options.size?.name || '-'}</div>
       </TableCell>
       <TableCell>
         <div className={styles.price}>
@@ -102,7 +103,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
       <TableCell>
         <div className={styles.price}>
           {currencySign}
-          {item.quantity * productPrice}
+          {totalProductPrice}
         </div>
       </TableCell>
     </TableRow>

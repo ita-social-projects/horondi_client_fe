@@ -72,7 +72,7 @@ const FilledWishlist = ({ items }) => {
             <TableBody>
               {wishlist.map((item, i) => (
                 <WishlistItem
-                  key={i}
+                  key={item._id}
                   item={item}
                   setModalVisibility={() => {
                     setModalVisibility(!modalVisibility);

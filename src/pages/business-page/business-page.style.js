@@ -82,6 +82,21 @@ export const useStyles = makeStyles((theme) => ({
         width: 305,
         margin: '10px 20px'
       }
+    },
+
+    '& h2': {
+      fontWeight: '400',
+      fontSize: '30px',
+      '@media (max-width: 670px)': {
+        fontSize: '21px'
+      },
+      '& span, & strong': {
+        fontWeight: '400',
+        fontSize: '30px',
+        '@media (max-width: 670px)': {
+          fontSize: '21px'
+        }
+      }
     }
   }
 }));

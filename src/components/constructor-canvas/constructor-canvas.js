@@ -60,7 +60,7 @@ const ConstructorCanvas = ({ className, item, width, height, x, y }) => {
     loadImages(createImagesArray(item)).then((loadedImages) => {
       mergeImages(loadedImages, canvasRef.current, width, height, x, y);
     });
-  }, [item, canvasRef.current]);
+  }, [item, width, height, x, y]);
 
   return <canvas className={className} ref={canvasRef} width={width} height={height} />;
 };

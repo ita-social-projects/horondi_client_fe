@@ -13,7 +13,7 @@ export const useCurrency = () => {
 
     return Math.round(value * (fixedRateExchange || currencies[currentCurrency].exchangeRate));
   };
-
+  // usememo
   const getCurrencySign = () => (uah ? <HryvniaIcon /> : <DollarIcon />);
 
   const getBaseCurrencyPrice = (value) =>

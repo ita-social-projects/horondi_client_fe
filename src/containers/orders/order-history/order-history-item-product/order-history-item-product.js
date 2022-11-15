@@ -25,7 +25,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const { imageUrl, checkImage } = useProductImage();
 
   const { product } = item;
-  const productPrimaryImage = product?.images.primary.medium;
+  const productPrimaryImage = product?.isFromConstructor ? null : product?.images.primary.medium;
   const { data: constructorByModel, loading: loadingConstructorByModel } = useQuery(
     getConstructorByModel,
     {

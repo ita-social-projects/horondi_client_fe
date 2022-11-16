@@ -57,7 +57,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       setStatesOptions([]);
       setCitiesOptions([]);
     }
-  }, [values.worldWideCountry]);
+  }, [values.worldWideCountry, setFieldValue]);
 
   useEffect(() => {
     if (values.stateOrProvince) {
@@ -68,7 +68,7 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       setFieldValue('cityCode', '');
       setCitiesOptions([]);
     }
-  }, [values.stateOrProvince]);
+  }, [values.stateOrProvince, setFieldValue, values.worldWideCountry]);
 
   const getOptionSelected = (option, value) => option === value || value === '';
 

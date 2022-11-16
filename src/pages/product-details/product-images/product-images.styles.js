@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const imgSides = {
   height: '100%',
-  objectFit: 'cover',
+  objectFit: 'contain',
   borderRadius: '6px',
   cursor: 'pointer'
 };
@@ -58,7 +58,6 @@ export const useStyles = makeStyles((theme) => ({
     flex: '1 1 30%',
     ...imgSides,
     boxShadow: theme.palette.carouselItem.shadow.boxShadow,
-    objectFit: 'contain',
     padding: '5px'
   },
 
@@ -96,6 +95,7 @@ export const useStyles = makeStyles((theme) => ({
   additionalImagePreview: {
     display: 'flex',
     alignItems: 'flex-end',
+    margin: 'auto',
     gap: 30,
     justifyContent: 'space-between',
     height: '100%',

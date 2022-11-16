@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   images: {
     maxWidth: 540,
+    width: '100%',
     display: 'flex',
     gap: '20px',
     flexDirection: 'column',
@@ -34,9 +35,10 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   imageContainer: {
-    display: 'block',
+    display: 'flex',
     borderRadius: '6px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    margin: '0 auto'
   },
 
   primaryImage: {
@@ -55,12 +57,16 @@ export const useStyles = makeStyles((theme) => ({
   sideImage: {
     flex: '1 1 30%',
     ...imgSides,
-    boxShadow: theme.palette.carouselItem.shadow.boxShadow
+    boxShadow: theme.palette.carouselItem.shadow.boxShadow,
+    objectFit: 'contain',
+    padding: '5px'
   },
 
   imagePreviewContainer: {
     display: 'grid',
     gridTemplateColumns: '48px 1fr 48px',
+    gridTemplateRows: 'minmax(120px, 350px)',
+    gap: '5px',
     alignItems: 'center',
     border: theme.palette.imageContainer.border,
     borderRadius: '6px',
@@ -90,15 +96,12 @@ export const useStyles = makeStyles((theme) => ({
   additionalImagePreview: {
     display: 'flex',
     alignItems: 'flex-end',
-    margin: 'auto',
-    gap: 17,
-    maxHeight: '120px',
+    gap: 30,
     justifyContent: 'space-between',
+    height: '100%',
     '@media (max-width: 600px)': {
-      gap: 13,
-      maxHeight: '100px'
-    },
-    height: '100%'
+      gap: 13
+    }
   },
 
   lastImage: {
@@ -126,20 +129,26 @@ export const useStyles = makeStyles((theme) => ({
   },
   imageItem: {
     flex: '1 1 30%',
-    maxWidth: '160px',
-    height: '100%',
+    width: '160px',
+    height: '122px',
     border: theme.palette.imageContainer.border,
-    borderRadius: '6px'
+    borderRadius: '6px',
+    '@media (max-width: 600px)': {
+      width: '100%'
+    }
   },
   lastImagesBox: {
     flex: '1 1 30%',
     position: 'relative',
     color: 'white',
-    maxWidth: '160px',
+    width: '160px',
+    height: '122px',
     cursor: 'pointer',
-    height: '100%',
     border: theme.palette.imageContainer.border,
     borderRadius: '6px',
-    backgroundColor: 'rgba(0,0,0,0.5)'
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    '@media (max-width: 600px)': {
+      width: '100%'
+    }
   }
 }));

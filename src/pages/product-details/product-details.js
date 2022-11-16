@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
-import { Card } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { Button, Card } from '@material-ui/core';
 
 import { useTranslation } from 'react-i18next';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -49,7 +49,8 @@ const ProductDetails = ({ match }) => {
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
-  const [isOpenedSnackbar, setIsOpenedSnackbar] = React.useState(false);
+  const [isOpenedSnackbar, setIsOpenedSnackbar] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -116,15 +117,24 @@ const ProductDetails = ({ match }) => {
       setSizeIsNotSelectedError(false);
     }
   };
+
+  const backToCatalog = () => {
+    if (history.location.key) {
+      history.goBack();
+    } else {
+      history.push(pathToCategory);
+    }
+  };
+
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
     <div className={appStyles.rootApp}>
       <Card className={`${appStyles.containerApp} ${styles.container} `}>
         <ProductPath category={category} translationsKey={translationsKey} />
-        <Link to={pathToCategory} className={styles.backBtn}>
+        <Button className={styles.backBtn} onClick={backToCatalog}>
           <ArrowIcon className={styles.arrowIcon} />
-        </Link>
+        </Button>
         <div className={styles.product}>
           {product.images ? <ProductImages images={product.images} /> : null}
           <div className={styles.productDetails}>

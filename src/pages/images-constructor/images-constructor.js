@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
@@ -32,7 +32,7 @@ const ImagesConstructor = () => {
     valuesLoading
   } = useConstructorLoader();
 
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
@@ -43,28 +43,30 @@ const ImagesConstructor = () => {
   const canvasW = 768;
   const { basePrice } = constructorValues;
 
-  const currencySign = useMemo(() => getCurrencySign(), [currency, getCurrencySign]);
   const defaultPrice = useMemo(
     () => getPriceWithCurrency(basePrice),
-    [basePrice, currency, getPriceWithCurrency]
+    [basePrice, getPriceWithCurrency]
   );
 
-  const getItemPrice = (key, isWithCurrency = true) => {
-    let price;
+  const getItemPrice = useCallback(
+    (key, isWithCurrency = true) => {
+      let price;
 
-    if (constructorValues[key]?.relativePrice) {
-      price = (constructorValues[key].relativePrice * basePrice) / 100;
-    } else {
-      price = constructorValues[key]?.absolutePrice || 0;
-    }
+      if (constructorValues[key]?.relativePrice) {
+        price = (constructorValues[key].relativePrice * basePrice) / 100;
+      } else {
+        price = constructorValues[key]?.absolutePrice || 0;
+      }
 
-    return isWithCurrency ? getPriceWithCurrency(price) : price;
-  };
+      return isWithCurrency ? getPriceWithCurrency(price) : price;
+    },
+    [getPriceWithCurrency, basePrice, constructorValues]
+  );
 
-  const getTotalPrice = (isWithCurrecny) => {
+  const getTotalPrice = (isWithCurrency) => {
     const startPrice = getPriceWithCurrency(basePrice);
     let endPrice;
-    if (isWithCurrecny) {
+    if (isWithCurrency) {
       endPrice = Object.values(allPrices).reduce((acc, value) => acc + value, startPrice);
     } else {
       const objectKeys = ['basic', 'bottom', 'pattern', 'size'];
@@ -101,7 +103,7 @@ const ImagesConstructor = () => {
         return acc;
       }, {})
     );
-  }, [constructorValues, setAllPrice, currency]);
+  }, [constructorValues, setAllPrice, currency, getItemPrice]);
 
   if (valuesLoading) {
     return errorOrLoadingHandler(isError, valuesLoading);

@@ -127,6 +127,12 @@ const ProductDetails = ({ match }) => {
     }
   };
 
+  const addToWishlistIcon = itemInWishlist ? (
+    <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
+  ) : (
+    <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
+  );
+
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
@@ -166,13 +172,7 @@ const ProductDetails = ({ match }) => {
                 title={wishlistTip}
                 placement='bottom'
               >
-                <IconButton disabled={isDeleted}>
-                  {itemInWishlist ? (
-                    <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
-                  ) : (
-                    <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
-                  )}
-                </IconButton>
+                <IconButton disabled={isDeleted}>{addToWishlistIcon}</IconButton>
               </Tooltip>
             </div>
           </div>

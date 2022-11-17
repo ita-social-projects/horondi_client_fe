@@ -128,6 +128,7 @@ export const getProductById = gql`
         }
         availableCount
         available
+        isDeleted
         rate
         translationsKey
       }

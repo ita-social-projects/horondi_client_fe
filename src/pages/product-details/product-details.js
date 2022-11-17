@@ -45,7 +45,7 @@ const ProductDetails = ({ match }) => {
   });
   const { isLoading, isError } = useIsLoadingOrError([loading], [error]);
   const product = data?.getProductById || {};
-  const { _id: productId, category, sizes, available, translationsKey } = product;
+  const { _id: productId, category, sizes, available, translationsKey, isDeleted } = product;
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
@@ -154,7 +154,7 @@ const ProductDetails = ({ match }) => {
             />
             <div className={styles.submitWrapper}>
               <ProductSubmit
-                disabled={!available}
+                disabled={!available || isDeleted}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}

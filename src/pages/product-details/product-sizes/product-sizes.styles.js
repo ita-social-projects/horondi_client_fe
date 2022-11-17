@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => {
   return {
     sizeButtons: {
       '& [data-cy="sizes"]': {
-        border: `1px solid ${theme.palette.black}`,
         borderRadius: '4px'
       }
     },
@@ -45,10 +44,13 @@ export const useStyles = makeStyles((theme) => {
     selectedSize: {
       ...sizeButton,
       backgroundColor: theme.palette.black,
-      color: theme.palette.white,
+      color: theme.palette.backgroundColor,
       '&:hover': {
         backgroundColor: theme.palette.card.selectedButton.backgroundColor,
         color: theme.palette.card.selectedButton.color
+      },
+      '&:disabled': {
+        backgroundColor: 'rgba(2, 2, 2, 0.2)'
       }
     },
     container: {

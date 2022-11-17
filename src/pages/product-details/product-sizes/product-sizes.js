@@ -10,6 +10,7 @@ const ProductSizes = ({
   handleSizeChange,
   sizes,
   available,
+  isDeleted,
   sizeIsNotSelectedError,
   currentSize
 }) => {
@@ -45,7 +46,9 @@ const ProductSizes = ({
             <span>{checkSizeName()}</span>
           </div>
           <div className={styles.sizeButtons}>
-            <ButtonGroup data-cy='sizes'>{sizeButtons}</ButtonGroup>
+            <ButtonGroup disabled={isDeleted} data-cy='sizes'>
+              {sizeButtons}
+            </ButtonGroup>
           </div>
         </div>
       ) : null}

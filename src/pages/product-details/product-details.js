@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import { useStyles } from './product-details.styles';
 import { useAppStyles } from '../../components/app/app.styles';
 import { defaultProductToSend, TOAST_SETTINGS } from './constants';
@@ -148,6 +149,7 @@ const ProductDetails = ({ match }) => {
             <ProductSizes
               handleSizeChange={handleSizeChange}
               available={available}
+              isDeleted={isDeleted}
               sizes={sizes}
               currentSize={productToSend.options.size}
               sizeIsNotSelectedError={sizeIsNotSelectedError}
@@ -164,11 +166,13 @@ const ProductDetails = ({ match }) => {
                 title={wishlistTip}
                 placement='bottom'
               >
-                {itemInWishlist ? (
-                  <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
-                ) : (
-                  <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
-                )}
+                <IconButton disabled={isDeleted}>
+                  {itemInWishlist ? (
+                    <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
+                  ) : (
+                    <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
+                  )}
+                </IconButton>
               </Tooltip>
             </div>
           </div>

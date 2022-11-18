@@ -162,7 +162,7 @@ const ProductDetails = ({ match }) => {
             />
             <div className={styles.submitWrapper}>
               <ProductSubmit
-                disabled={!available || isDeleted}
+                disabled={isDeleted || !available}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}

@@ -53,13 +53,12 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   } = cartOperations;
   const { imageUrl, checkImage } = useProductImage();
 
-  const onChangeQuantity = (value) => {
-    setInputValue(value);
-  };
-  const debounceQuantity = useDebounce(inputValue, 500);
+  const debounceQuantity = useDebounce(inputValue, 200);
+
   useEffect(() => {
     changeQuantity(item.id, debounceQuantity);
-  }, []);
+  }, [item.id, changeQuantity, debounceQuantity]);
+
   const { isFromConstructor } = item;
 
   const {
@@ -265,7 +264,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       <TableCell>
         <NumberInput
           quantity={inputValue}
-          onChangeQuantity={onChangeQuantity}
+          onChangeQuantity={setInputValue}
           setInputValue={setInputValue}
         />
       </TableCell>

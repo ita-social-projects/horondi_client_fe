@@ -9,7 +9,6 @@ export const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     backgroundColor: '#020202',
     boxShadow: '0px 8px 16px 0px #2424241F',
-    zIndex: '1301',
     transition: 'transform 0.5s ease-out',
     '& .MuiToolbar-regular': {
       minHeight: '35px',
@@ -26,7 +25,6 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       position: 'fixed',
       top: 0,
-      zIndex: 1000,
       gap: '48px',
       paddingBottom: '48px'
     }

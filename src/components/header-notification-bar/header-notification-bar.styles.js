@@ -8,10 +8,13 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: '-48px',
     backgroundColor: theme.palette.notification.backgroundColor,
     position: 'fixed',
-    zIndex: '1250',
+    zIndex: '1000',
     top: '111px',
     '@media (max-width: 1000px)': {
       top: '95px'
+    },
+    '@media (max-width: 768px)': {
+      top: '109px'
     }
   },
   content: {

@@ -16,9 +16,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
   const styles = useStyles();
   const { rate, mainMaterial, translationsKey } = product;
   const { t } = useTranslation();
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
-
-  const currencySign = getCurrencySign();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
 
   const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>

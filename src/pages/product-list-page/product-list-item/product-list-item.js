@@ -15,11 +15,8 @@ const ProductListItem = ({ product }) => {
   const { t } = useTranslation();
   const { palette } = useTheme();
 
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const { imageUrl, checkImage } = useProductImage();
-
-  const currencySign = getCurrencySign();
-
   const { pathToProducts } = routes;
   const isLightTheme = palette.type === 'light';
 

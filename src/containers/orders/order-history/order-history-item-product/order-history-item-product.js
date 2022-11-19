@@ -17,9 +17,8 @@ const canvasY = 0;
 
 const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRate }) => {
   const styles = useStyles();
-  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
+  const { currencySign, getPriceWithCurrency } = useCurrency();
   const [isLightTheme] = useContext(ThemeContext);
-  const currencySign = getCurrencySign();
   const productPrice = getPriceWithCurrency(item.fixedPrice, fixedExchangeRate);
   const totalProductPrice = getPriceWithCurrency(itemPriceWithDiscount, fixedExchangeRate);
   const { t } = useTranslation();

@@ -11,7 +11,7 @@ import { useCurrency } from '../../../../hooks/use-currency';
 const OrderHistoryItem = ({ order }) => {
   const styles = useStyles();
   const { t } = useTranslation();
-  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
+  const { currencySign, getPriceWithCurrency } = useCurrency();
   const {
     totalPriceToPay,
     dateOfCreation,
@@ -34,7 +34,6 @@ const OrderHistoryItem = ({ order }) => {
   ));
 
   const totalPrice = getPriceWithCurrency(totalPriceToPay, fixedExchangeRate);
-  const currencySign = getCurrencySign();
   const dateInFormat = getFormatDate(dateOfCreation);
 
   const columnTitles = [

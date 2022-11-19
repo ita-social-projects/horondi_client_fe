@@ -32,7 +32,7 @@ const ImagesConstructor = () => {
     valuesLoading
   } = useConstructorLoader();
 
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const { currency } = useContext(CurrencyContext);
   const styles = useStyles();
   const appStyles = useAppStyles();
@@ -43,7 +43,6 @@ const ImagesConstructor = () => {
   const canvasW = 768;
   const { basePrice } = constructorValues;
 
-  const currencySign = useMemo(() => getCurrencySign(), [currency, getCurrencySign]);
   const defaultPrice = useMemo(
     () => getPriceWithCurrency(basePrice),
     [basePrice, currency, getPriceWithCurrency]

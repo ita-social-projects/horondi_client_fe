@@ -25,7 +25,7 @@ const FilledCart = ({ items, cartOperations }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
-  const { getCurrencySign } = useCurrency();
+  const { currencySign } = useCurrency();
 
   const [addConstructorProduct] = useMutation(addProductFromConstructor);
 
@@ -67,7 +67,6 @@ const FilledCart = ({ items, cartOperations }) => {
     if (certificateError) return t('cart.certificateNotFound');
   };
 
-  const currencySign = getCurrencySign();
   const {
     getTotalPrice,
     setCartItem,

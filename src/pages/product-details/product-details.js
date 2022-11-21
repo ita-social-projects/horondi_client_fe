@@ -133,6 +133,8 @@ const ProductDetails = ({ match }) => {
     <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
   );
 
+  const disableSubmit = isDeleted || !available || !Object.keys(productToSend.options.size).length;
+
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
@@ -162,9 +164,7 @@ const ProductDetails = ({ match }) => {
             />
             <div className={styles.submitWrapper}>
               <ProductSubmit
-                disabled={
-                  isDeleted || !available || !Object.keys(productToSend.options.size).length
-                }
+                disabled={disableSubmit}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}

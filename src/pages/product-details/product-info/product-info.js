@@ -20,9 +20,12 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
 
   const currencySign = getCurrencySign();
 
+  const productIsDeleted = <div className={styles.isDeleted}>{t('product.isDeleted')}</div>;
   const checkDisabledProductResult = product.available ? null : (
     <div className={styles.notAvailable}>{t('product.notAvailable')}</div>
   );
+  const productStatus = product.isDeleted ? productIsDeleted : checkDisabledProductResult;
+
   const correctCommentsName = (count) => {
     if (count === 0) return t('product.comments.noComments');
     if (count === 1) return t('product.comments.commentsOne');
@@ -38,7 +41,7 @@ const ProductInfo = ({ product, countComments, currentPrice }) => {
     <div className={styles.common}>
       <div className={styles.head}>
         <span className={styles.title}>{t(`${translationsKey}.name`)}</span>
-        {checkDisabledProductResult}
+        {productStatus}
       </div>
       <Tooltip className={styles.rate} title={rate.toFixed(2)} placement='left'>
         <span>

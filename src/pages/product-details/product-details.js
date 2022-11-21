@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavouriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import { useStyles } from './product-details.styles';
 import { useAppStyles } from '../../components/app/app.styles';
 import { defaultProductToSend, TOAST_SETTINGS } from './constants';
@@ -45,7 +46,7 @@ const ProductDetails = ({ match }) => {
   });
   const { isLoading, isError } = useIsLoadingOrError([loading], [error]);
   const product = data?.getProductById || {};
-  const { _id: productId, category, sizes, available, translationsKey } = product;
+  const { _id: productId, category, sizes, available, translationsKey, isDeleted } = product;
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
   const currentSize = availableSizes ? availableSizes[0] : {};
@@ -126,6 +127,12 @@ const ProductDetails = ({ match }) => {
     }
   };
 
+  const addToWishlistIcon = itemInWishlist ? (
+    <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
+  ) : (
+    <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
+  );
+
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
@@ -148,13 +155,14 @@ const ProductDetails = ({ match }) => {
             <ProductSizes
               handleSizeChange={handleSizeChange}
               available={available}
+              isDeleted={isDeleted}
               sizes={sizes}
               currentSize={productToSend.options.size}
               sizeIsNotSelectedError={sizeIsNotSelectedError}
             />
             <div className={styles.submitWrapper}>
               <ProductSubmit
-                disabled={!available}
+                disabled={isDeleted || !available}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}
@@ -164,11 +172,7 @@ const ProductDetails = ({ match }) => {
                 title={wishlistTip}
                 placement='bottom'
               >
-                {itemInWishlist ? (
-                  <FavoriteIcon data-cy='wishful' onClick={wishlistHandler} />
-                ) : (
-                  <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
-                )}
+                <IconButton disabled={isDeleted}>{addToWishlistIcon}</IconButton>
               </Tooltip>
             </div>
           </div>

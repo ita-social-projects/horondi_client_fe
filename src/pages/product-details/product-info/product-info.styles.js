@@ -42,6 +42,16 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: '0.06em',
     borderRadius: '4px'
   },
+  isDeleted: {
+    textAlignLast: 'center',
+    color: theme.palette.backgroundColor,
+    background: theme.palette.button.disabled.backgroundColor,
+    padding: '6px',
+    fontSize: '16px',
+    lineHeight: '20px',
+    letterSpacing: '0.06em',
+    borderRadius: '4px'
+  },
   price: {
     display: 'flex',
     alignItems: 'center',

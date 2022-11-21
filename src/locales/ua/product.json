@@ -21,6 +21,7 @@
   },
   "priceFrom": "від ",
   "sizeNotAvailable": "Товар недоступний",
+  "isDeleted": "Знято з виробництва",
   "unavailable": "немає в наявності",
   "pdpButtons": {
     "cartButton": "Додати до кошика",

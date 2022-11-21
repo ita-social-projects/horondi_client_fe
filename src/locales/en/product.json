@@ -6,6 +6,7 @@
   },
   "pattern": "Pattern",
   "notAvailable": "Not available",
+  "isDeleted": "Taken out of production",
   "productDescription": {
     "description": "Product Description",
     "mainMaterial": "Main material",

@@ -39,19 +39,19 @@ const ProductSizes = ({
 
   return (
     <div>
-      {sizeButtons ? (
-        <div className={styles.container}>
-          <div className={styles.label}>
-            <span>{t('common.size')}: </span>
-            <span>{checkSizeName()}</span>
-          </div>
+      <div className={styles.container}>
+        <div className={styles.label}>
+          <span>{t('common.size')}: </span>
+          <span>{checkSizeName()}</span>
+        </div>
+        {sizeButtons.length > 0 && (
           <div className={styles.sizeButtons}>
             <ButtonGroup disabled={isDeleted} data-cy='sizes'>
               {sizeButtons}
             </ButtonGroup>
           </div>
-        </div>
-      ) : null}
+        )}
+      </div>
       {sizeIsNotSelectedError ? <div className={styles.error}>{t('error.errorSize')}</div> : null}
     </div>
   );

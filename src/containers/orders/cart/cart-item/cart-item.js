@@ -63,8 +63,8 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   const { isFromConstructor } = item;
 
   const {
-    data: product,
     error: errorProduct,
+    data: product,
     loading: loadingProduct
   } = useQuery(isFromConstructor ? getConstructorByModel : getProductById, {
     variables: {

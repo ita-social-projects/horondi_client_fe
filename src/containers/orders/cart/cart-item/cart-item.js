@@ -53,7 +53,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   } = cartOperations;
   const { imageUrl, checkImage } = useProductImage();
 
-  const debounceQuantity = useDebounce(inputValue, 200);
+  const debounceQuantity = useDebounce(inputValue, 500);
 
   useEffect(() => {
     changeQuantity(item.id, debounceQuantity);

@@ -85,7 +85,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
   };
 
   useEffect(() => {
-    if (userData && userData.configs) {
+    if (userData?.configs) {
       const { theme, language, currency } = userData.configs;
 
       setLightMode(theme === 'light');
@@ -97,7 +97,7 @@ const HeaderProfile = ({ fromSideBar, setIsMenuOpen }) => {
       setToLocalStorage('currency', currency);
       dispatch(changeCurrency(currency));
     }
-  }, [userData]);
+  }, [userData, setLightMode, dispatch]);
 
   const handleLogIn = () => {
     setIsMenuOpen(false);

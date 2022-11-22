@@ -2,7 +2,6 @@ import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { MockedProvider } from '@apollo/client/testing';
 import CurrencyContextProvider from '../../context/currency-context';
-import { HryvniaIcon } from '../../images/profile-icons';
 import { useCurrency } from '../use-currency';
 import { mockedCurrencies } from '../../tests/unit/containers/currency/currency.variables';
 
@@ -19,10 +18,6 @@ describe('use-currency tests', () => {
     renderedHook = renderHook(() => useCurrency(), { wrapper });
 
     await new Promise((resolve) => setTimeout(resolve, 0));
-  });
-
-  it('should return currency sign', () => {
-    expect(renderedHook.result.current.getCurrencySign()).toStrictEqual(<HryvniaIcon />);
   });
 
   it('should return value with currency', () => {

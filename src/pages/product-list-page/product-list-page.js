@@ -94,7 +94,7 @@ const ProductListPage = ({ width }) => {
         pagesCount: Math.ceil(data.getProducts.count / countPerPage)
       }));
     }
-  }, [data]);
+  }, [data, countPerPage]);
 
   const itemsToShow = () => {
     if (products?.length > 0) {

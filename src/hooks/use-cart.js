@@ -93,14 +93,17 @@ export const useCart = () => {
         (sizeId ? sizeId === cartItem.sizeAndPrice.size._id : true)
     );
 
-  const changeQuantity = useCallback((id, count) => {
-    setCartItems((prevCart) =>
-      prevCart.map((el) => {
-        if (el.id === id) el.quantity = count;
-        return el;
-      })
-    );
-  }, []);
+  const changeQuantity = useCallback(
+    (id, count) => {
+      setCartItems((prevCart) =>
+        prevCart.map((el) => {
+          if (el.id === id) el.quantity = count;
+          return el;
+        })
+      );
+    },
+    [setCartItems]
+  );
 
   const getTotalPrice = () =>
     cartItems.reduce(

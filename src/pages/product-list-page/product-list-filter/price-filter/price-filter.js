@@ -66,7 +66,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
     }, 1000);
 
     return () => clearTimeout(delayDebounce);
-  }, [pricesFromInput]);
+  }, [pricesFromInput, handlePriceFilter, min]);
 
   return (
     <FormGroup data-cy='price_filter'>

@@ -6,7 +6,7 @@ import OrderItem from './order-item';
 import { useCurrency } from '../../../../hooks/use-currency';
 
 const YourOrder = ({ ...props }) => {
-  const { getCurrencySign, getPriceWithCurrency } = useCurrency();
+  const { currencySign, getPriceWithCurrency } = useCurrency();
   const { cartItems, cartOperations } = useCart();
   const { getTotalPriceWithCertificate } = cartOperations;
   const {
@@ -25,7 +25,6 @@ const YourOrder = ({ ...props }) => {
   } = props;
 
   const [productPrices, setProductPrices] = useState([]);
-  const currencySign = getCurrencySign();
 
   const totalPrice = certificate
     ? getTotalPriceWithCertificate(certificate)

@@ -26,12 +26,11 @@ const WishlistItem = ({
 }) => {
   const { t } = useTranslation();
   const [isLightTheme] = useContext(ThemeContext);
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const styles = useStyles(isLightTheme);
   const dispatch = useDispatch();
   const { addToCart } = cartOperations;
   const { pathToCart } = routes;
-  const currencySign = getCurrencySign();
   const onRemoveItem = () => {
     setModalVisibility(true);
     setModalItem(item);

@@ -15,13 +15,13 @@ import useProductImage from '../../../../../hooks/use-product-image';
 import ThemeContext from '../../../../../context/theme-context';
 
 const OrderItem = ({ product, setProductPrices, promoCode }) => {
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const [isLightTheme] = useContext(ThemeContext);
   const styles = useStyles();
   const { imageUrl, checkImage } = useProductImage();
 
   const { t } = useTranslation();
-  const currencySign = getCurrencySign();
+
   const { cartOperations } = useCart();
 
   const { isFromConstructor, sizeAndPrice } = product;

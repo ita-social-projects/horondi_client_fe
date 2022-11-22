@@ -55,7 +55,7 @@ const ProductSort = () => {
       searchParams.delete(nameFilter);
     }
     history.push(`?${searchParams.toString()}`);
-  }, [debouncedSearchValue, defaultPage, history, nameFilter, page, searchParams]);
+  }, [debouncedSearchValue]);
 
   const handleSearch = (event) => {
     const { value } = event.target;

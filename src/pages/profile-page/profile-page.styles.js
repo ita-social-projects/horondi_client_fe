@@ -25,7 +25,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     gap: '24px',
     '@media screen and (max-width: 1144px)': {
       flexDirection: 'column',
-      alignItems: 'center',
       maxWidth: 635,
       margin: '0 auto'
     }
@@ -34,7 +33,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: 56,
     flexBasis: '60%',
     '@media (max-width: 1144px)': {
-      width: '100%',
       marginBottom: 0
     }
   },
@@ -56,7 +54,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     gridColumn: 'span 2',
     '@media (max-width: 768px)': {
       gridColumn: 'span 3',
-      justifySelf: 'center'
+      textAlign: 'center'
     }
   },
   dataInput: {

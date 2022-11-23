@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.button.fontSize,
     fontWeight: theme.typography.h2.fontWeight,
     lineHeight: theme.typography.h2.lineHeight,
-    minHeight: '42px',
     textTransform: 'uppercase',
     '&:hover': {
       color: theme.palette.button.hover.color,

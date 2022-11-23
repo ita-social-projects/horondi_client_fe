@@ -105,7 +105,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
     initialValues,
 
     onSubmit: (data) => {
-      const orderData = { ...data, phoneNumber: `+380${data.phoneNumber}` };
+      const orderData = { ...data, phoneNumber: `+38${data.phoneNumber}` };
       if (data.paymentMethod === checkoutPayMethod.card) {
         dispatch(
           getFondyData({
@@ -147,7 +147,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
     if (userData) {
       setInitialValues(
         updateInitialValues(
-          { ...userData, phoneNumber: userData.phoneNumber.slice(4) },
+          { ...userData, phoneNumber: userData.phoneNumber.slice(3) },
           deliveryType
         )
       );
@@ -187,8 +187,8 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
                       InputProps={
                         field.name === 'phoneNumber'
                           ? {
-                            maxLength: 9,
-                            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+                            maxLength: 10,
+                            startAdornment: <InputAdornment position='start'>+38</InputAdornment>
                           }
                           : {}
                       }

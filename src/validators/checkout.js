@@ -21,10 +21,10 @@ export const validationSchema = (deliveryType, countryOption) => {
       .max(60, 'error.emailLength'),
     phoneNumber: Yup.string()
       .matches(formRegExp.wholeNumber, 'error.onlyNumber')
-      .min(9, 'error.profile.phoneTooShort')
+      .min(10, 'error.profile.phoneTooShort')
       .required('error.requiredField')
       .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
-      .max(9, 'error.profile.phoneTooLong'),
+      .max(10, 'error.profile.phoneTooLong'),
     paymentMethod: Yup.string().required('error.requiredField'),
     userComment: Yup.string().min(2, 'error.userComment').max(500, 'error.userComment')
   };

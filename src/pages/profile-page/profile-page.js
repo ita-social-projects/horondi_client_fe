@@ -19,7 +19,7 @@ import SnackbarItem from '../../containers/snackbar';
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
   const [upload, setUpload] = useState(null);
-  const [update, setUpdate] = useState(false);
+  const [updated, setUpdated] = useState(false);
   const [deleteAvatar, setDeleteAvatar] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
   const { t, i18n } = useTranslation();
@@ -56,7 +56,7 @@ const ProfilePage = () => {
       firstName,
       lastName,
       email,
-      phoneNumber: `+380${phoneNumber}`,
+      phoneNumber: `+38${phoneNumber}`,
       address,
       configs: { ...userData.configs, language: i18n.language }
     };
@@ -68,17 +68,17 @@ const ProfilePage = () => {
 
     dispatch(updateUser({ user, id: userData._id, upload, deleteAvatar }));
     setShouldValidate(false);
-    setUpdate(true);
+    setUpdated(true);
   };
 
   useEffect(() => {
-    if (!userLoading && update) {
+    if (!userLoading && updated) {
       userError
         ? setSnackBarMessage(t('profilePage.updateError'), 'error')
         : setSnackBarMessage(t('profilePage.updateSuccess'));
-      setUpdate(false);
+      setUpdated(false);
     }
-  }, [userLoading, userError, update, setSnackBarMessage, t]);
+  }, [userLoading, userError, updated, setSnackBarMessage, t]);
 
   const { errors, values, touched, handleBlur, resetForm, handleSubmit, handleChange } = useFormik({
     initialValues,
@@ -104,7 +104,7 @@ const ProfilePage = () => {
           firstName,
           lastName,
           email,
-          phoneNumber: phoneNumber.slice(4),
+          phoneNumber: phoneNumber.slice(3),
           ...address
         }
       });
@@ -126,8 +126,8 @@ const ProfilePage = () => {
           InputProps={
             name === 'phoneNumber'
               ? {
-                maxLength: 9,
-                startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+                maxLength: 10,
+                startAdornment: <InputAdornment position='start'>+38</InputAdornment>
               }
               : {}
           }
@@ -136,7 +136,7 @@ const ProfilePage = () => {
           color={MATERIAL_UI_COLOR.PRIMARY}
           onChange={handleChange}
           error={touched[name] && !!errors[name]}
-          helperText={t(errors[name])}
+          helperText={t(errors[name]) || ' '}
           className={handleClassName(classes.dataInput, classes.nameInputs, name)}
           disabled={name === 'email'}
         />

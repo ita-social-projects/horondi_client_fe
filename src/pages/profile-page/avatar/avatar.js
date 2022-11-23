@@ -43,7 +43,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
     }
   };
 
-  const handleLableClass = useMemo(
+  const lableClass = useMemo(
     () => (userImageUrl ? classes.updateLabel : classes.uploadLabel),
     [userImageUrl, classes]
   );
@@ -73,7 +73,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
         accept='image/jpg, image/jpeg, image/png'
         data-testid='imageInput'
       />
-      <label htmlFor='photoUpload' className={`${classes.imageContainerLabel} ${handleLableClass}`}>
+      <label htmlFor='photoUpload' className={`${classes.imageContainerLabel} ${lableClass}`}>
         <Button component='span' className={classes.uploadBtn}>
           <CameraIcon className={classes.cameraIcon} />
           <FormHelperText

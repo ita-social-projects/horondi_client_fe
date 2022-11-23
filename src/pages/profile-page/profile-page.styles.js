@@ -21,31 +21,29 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: 37
   },
   profile: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 0.7fr',
-    columnGap: '24px',
+    display: 'flex',
+    gap: '24px',
     '@media screen and (max-width: 1144px)': {
-      gridTemplateColumns: '1fr',
-      justifyContent: 'center'
+      flexDirection: 'column',
+      alignItems: 'center',
+      maxWidth: 635,
+      margin: '0 auto'
     }
   },
   userFormControl: {
-    maxWidth: 635,
-    width: '100%',
     marginBottom: 56,
-    justifySelf: 'center',
-    '@media screen and (max-width: 1144px)': {
-      marginBottom: 24
+    flexBasis: '60%',
+    '@media (max-width: 1144px)': {
+      width: '100%',
+      marginBottom: 0
     }
   },
   userForm: {
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
     padding: '56px 95px',
-    marginBottom: 20,
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
-    rowGap: '23px',
-    position: 'relative',
+    rowGap: '8px',
     '@media (max-width: 575px)': {
       padding: '56px 40px'
     }
@@ -54,7 +52,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: 24,
     fontWeight: 800,
     color: palette.textColor,
-    margin: 0,
+    margin: '0 0 12px',
     gridColumn: 'span 2',
     '@media (max-width: 768px)': {
       gridColumn: 'span 3',
@@ -69,7 +67,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderColor: palette.textColor
-    }
+    },
+    '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': { marginRight: '4px' }
   },
   nameInputs: {
     gridColumn: 'span 2',
@@ -79,15 +78,13 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   button: {
     gridColumn: 'span 3',
-    height: '48px'
+    padding: '10px'
   },
   userActions: {
+    flexBasis: '40%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    justifySelf: 'center',
-    maxWidth: 635,
-    width: '100%',
     '@media (max-width: 1144px)': {
       marginBottom: '56px'
     }

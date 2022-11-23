@@ -220,7 +220,7 @@ describe('CheckoutForm tests for: ', () => {
     fireEvent.change(firstNameField, { target: { value: 'Roman' } });
     fireEvent.change(lastNameField, { target: { value: 'Denes' } });
     fireEvent.change(emailField, { target: { value: 'netro@gmail.com' } });
-    fireEvent.change(phoneNumberField, { target: { value: '686717536' } });
+    fireEvent.change(phoneNumberField, { target: { value: '0686717536' } });
     fireEvent.change(regionField, { target: { value: 'Вінницька' } });
     fireEvent.change(districtsField, { target: { value: 'Гайсинський' } });
     fireEvent.change(citiesField, { target: { value: 'Адамівка' } });

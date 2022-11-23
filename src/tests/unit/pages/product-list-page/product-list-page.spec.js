@@ -14,7 +14,7 @@ const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
 const history = createMemoryHistory();
 const themeValue = theme('light');
-let isWrongNameFilter = false;
+const isWrongNameFilter = false;
 
 jest.mock('react-redux', () => ({
   useSelector: () => ({ currency: 0 })
@@ -68,26 +68,5 @@ describe('ProductListPage with correct values', () => {
     const products = await screen.getAllByTestId('product');
 
     expect(products).toHaveLength(2);
-  });
-});
-
-describe('ProductListPage with incorrect query', () => {
-  beforeAll(() => {
-    isWrongNameFilter = true;
-    render(
-      <MockedProvider mocks={mockAllFilteredProducts(isWrongNameFilter)} addTypename>
-        <ThemeProvider theme={themeValue}>
-          <Router history={history}>
-            <ProductListPage width='sm' />
-          </Router>
-        </ThemeProvider>
-      </MockedProvider>
-    );
-  });
-
-  it('should render not-found-product image', async () => {
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    expect(screen.getByTestId('backpack-icon')).toBeDefined();
   });
 });

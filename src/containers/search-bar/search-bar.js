@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
@@ -34,12 +34,19 @@ const SearchBar = ({
     fetchPolicy: 'no-cache'
   });
 
-  const visibilityToggle = (value) => {
-    setSearchParams((prevState) => ({
-      ...prevState,
-      searchBarVisibility: value
-    }));
-  };
+  const visibilityToggle = useCallback(
+    (value) => {
+      setSearchParams((prevState) => ({
+        ...prevState,
+        searchBarVisibility: value
+      }));
+    },
+    [setSearchParams]
+  );
+
+  const handleOnBlur = useCallback(() => {
+    setTimeout(() => visibilityToggle(false), 100);
+  }, [visibilityToggle]);
 
   useEffect(() => {
     if (debouncedSearchValue) {
@@ -52,7 +59,7 @@ const SearchBar = ({
     } else {
       handleOnBlur();
     }
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, getProductsQuery, handleOnBlur, setSearchParams]);
 
   const handleSearch = (event) => {
     const { value } = event.target;
@@ -60,10 +67,6 @@ const SearchBar = ({
   };
 
   const mainClass = fromNavBar ? styles.root : styles.notFromNavbar;
-
-  const handleOnBlur = () => {
-    setTimeout(() => visibilityToggle(false), 100);
-  };
 
   const handleOnFocus = () => {
     if (searchValue) {

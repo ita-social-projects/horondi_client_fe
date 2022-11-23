@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
@@ -15,14 +15,14 @@ const ThanksPage = () => {
   const { cartItems, cartOperations } = useCart();
   const { clearCart } = cartOperations;
 
-  const language = i18n.language === 'ua' ? 0 : 1;
+  const language = useMemo(() => (i18n.language === 'ua' ? 0 : 1), [i18n]);
 
   useLayoutEffect(() => {
     if (cartItems.length) {
       clearCart();
       dispatch(sendOrderToEmail({ language, paidOrderNumber: orderNumber }));
     }
-  }, []);
+  }, [dispatch, cartItems.length, clearCart, language, orderNumber]);
 
   return (
     <div className={styles.thanksBackground}>

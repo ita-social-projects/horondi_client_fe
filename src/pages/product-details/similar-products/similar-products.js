@@ -15,7 +15,7 @@ import { useCurrency } from '../../../hooks/use-currency';
 
 const SimilarProducts = ({ cartList, product }) => {
   const [similarProducts, setSimilarProducts] = useState([]);
-  const { getPriceWithCurrency, getCurrencySign } = useCurrency();
+  const { getPriceWithCurrency, currencySign } = useCurrency();
   const styles = useStyles();
 
   const { error, loading } = useQuery(getFilteredProductsQuery, {
@@ -24,7 +24,6 @@ const SimilarProducts = ({ cartList, product }) => {
 
   const { t } = useTranslation();
 
-  const currencySign = getCurrencySign();
   let imagesList;
 
   if (error || loading) return errorOrLoadingHandler(error, loading);

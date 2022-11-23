@@ -95,7 +95,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
       );
     }
     return null;
-  }, [isConstructor, styles]);
+  }, [isConstructor, styles, setIsMenuOpen, t]);
 
   const subList = useMemo(
     () => (

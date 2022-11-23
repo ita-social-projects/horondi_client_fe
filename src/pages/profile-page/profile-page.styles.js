@@ -96,7 +96,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       padding: '32px 95px'
     },
     '@media (max-width: 575px)': {
-      padding: '56px 40px'
+      padding: '32px 40px'
     }
   },
   userActionsInput: {

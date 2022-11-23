@@ -67,8 +67,8 @@ const Recovery = () => {
             onFocus={handleFocus}
             value={values.email}
             error={!!errorMsg}
+            helperText={errorMsg || ' '}
           />
-          <div className={styles.errorText}>{errorMsg || ''}</div>
           <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
           <AuthButton loading={recoveryLoading}>{t('recovery.recoveryButtonText')}</AuthButton>
         </form>

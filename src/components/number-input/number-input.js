@@ -16,8 +16,8 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
       num = 1;
     } else if (e.target.value < 1) {
       num = 1;
-    } else if (e.target.value > 1000) {
-      num = 1000;
+    } else if (e.target.value > 99) {
+      num = 99;
     } else {
       num = e.target.value;
     }
@@ -65,7 +65,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
           onChangeQuantity(quantity + 1);
           setInputValue(quantity + 1);
         }}
-        disabled={quantity >= 1000}
+        disabled={quantity >= 99}
         data-testid='increment'
       >
         <AddIcon />

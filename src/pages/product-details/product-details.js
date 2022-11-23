@@ -49,7 +49,7 @@ const ProductDetails = ({ match }) => {
   const { _id: productId, category, sizes, available, translationsKey, isDeleted } = product;
 
   const availableSizes = sizes && sizes.filter(({ size }) => size.available);
-  const currentSize = availableSizes ? availableSizes[0] : {};
+  const currentSize = availableSizes?.length && availableSizes[0];
   const [isOpenedSnackbar, setIsOpenedSnackbar] = useState(false);
   const history = useHistory();
 
@@ -58,15 +58,15 @@ const ProductDetails = ({ match }) => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (product.category) {
+    if (category) {
       setProductToSend({
         id: Date.now().toString(),
         product: {
           _id: productId
         },
-        price: currentSize?.price,
+        price: currentSize.price,
         options: {
-          size: currentSize?.size
+          size: currentSize.size || {}
         }
       });
     }
@@ -74,7 +74,7 @@ const ProductDetails = ({ match }) => {
     return () => {
       setSizeIsNotSelectedError(false);
     };
-  }, [currentSize, product, productId]);
+  }, [currentSize, category, productId]);
 
   const { isInWishlist, wishlistOperations } = useWishlist();
   const itemInWishlist = isInWishlist(product);
@@ -133,6 +133,8 @@ const ProductDetails = ({ match }) => {
     <FavouriteBorderIcon data-cy='not-wishful' onClick={wishlistHandler} />
   );
 
+  const disableSubmit = isDeleted || !available || !Object.keys(productToSend.options.size).length;
+
   if (isLoading || isError) return errorOrLoadingHandler(isError, isLoading);
 
   return (
@@ -162,7 +164,7 @@ const ProductDetails = ({ match }) => {
             />
             <div className={styles.submitWrapper}>
               <ProductSubmit
-                disabled={isDeleted || !available}
+                disabled={disableSubmit}
                 product={product}
                 setSizeIsNotSelectedError={setSizeIsNotSelectedError}
                 productToSend={productToSend}
@@ -180,9 +182,9 @@ const ProductDetails = ({ match }) => {
             <ProductDescription product={product} currentSize={productToSend.options.size} />
           ) : null}
         </div>
-        {product._id ? <SimilarProducts product={product} /> : null}
-        {product._id ? (
-          <Comments productId={product._id} checkCountComments={checkCountComments} />
+        {productId ? <SimilarProducts product={product} /> : null}
+        {productId ? (
+          <Comments productId={productId} checkCountComments={checkCountComments} />
         ) : null}
         <Toast
           isOpenedSnackbar={isOpenedSnackbar}

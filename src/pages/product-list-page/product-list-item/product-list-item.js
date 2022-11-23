@@ -29,9 +29,10 @@ const ProductListItem = ({ product }) => {
       ({ size, price }) => size.available && { size, price }
     );
 
-    const priceWithCurrency = getPriceWithCurrency(availableSizes[0]?.price);
+    const lowestPrice = availableSizes[0]?.price;
+    const priceWithCurrency = lowestPrice && getPriceWithCurrency(lowestPrice);
 
-    return product.available ? (
+    return product.available && lowestPrice ? (
       <div className={styles.price}>
         <div>
           {t('common.from') + priceWithCurrency}

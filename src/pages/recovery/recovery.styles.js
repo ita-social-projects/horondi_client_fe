@@ -2,50 +2,49 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   emailInput: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: theme.palette.lightGrayShade
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: theme.palette.blue
-      }
-    },
-    '& .MuiInputBase-input': {
-      fontFamily: theme.typography.fontFamily,
-      color: theme.palette.textColor,
-      fontStyle: 'normal',
-      fontWeight: '400',
-      fontSize: '18px',
-      lineHeight: '25px',
-      paddingLeft: '30px'
-    },
-    '& .MuiInputBase-input:focus': {
-      color: theme.palette.lightGrayShade
+    '& h4': {
+      fontSize: '34px',
+      lineHeight: '46px'
     },
     '& label': {
-      fontStyle: 'normal',
-      fontWeight: 'normal',
-      fontSize: '18px',
-      background: 'white',
-      paddingRight: '5px',
-      transform: 'translate(13, 16) scale(1)'
+      fontWeight: 400,
+      fontSize: '16px',
+      transform: 'translate(14px, 12px) scale(1)'
+    },
+    '& div > input': {
+      padding: '11px 14px !important',
+      position: 'relative',
+      fontWeight: 400,
+      fontSize: '16px',
+      lineHeight: '24px'
     },
     '& label.Mui-focused': {
-      color: theme.palette.blue
+      color: theme.palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.textColor,
+        '& legend': {
+          fontSize: '11px'
+        }
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.black,
+        borederWidth: '2px'
+      }
     }
   },
   recoveryText: {
-    margin: '10px 0 35px',
+    margin: '0 0 24px',
     fontFamily: theme.typography.fontFamily,
     fontStyle: 'normal',
-    fontWeight: '400',
     fontSize: '12px',
     lineHeight: '16px',
     textAlign: 'left',
-    maxWidth: '400px'
+    maxWidth: '450px'
   },
   errorText: {
-    margin: '5px 0 15px',
+    margin: '5px 0 10px 14px',
     height: 'fit-content',
     lineHeight: '12px',
     minHeight: '12px',

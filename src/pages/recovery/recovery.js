@@ -68,7 +68,7 @@ const Recovery = () => {
             value={values.email}
             error={!!errorMsg}
           />
-          {errorMsg && <div className={styles.errorText}>{errorMsg}</div>}
+          <div className={styles.errorText}>{errorMsg || ''}</div>
           <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
           <AuthButton loading={recoveryLoading}>{t('recovery.recoveryButtonText')}</AuthButton>
         </form>

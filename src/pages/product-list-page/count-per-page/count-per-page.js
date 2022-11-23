@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
@@ -14,13 +14,23 @@ const CountPerPage = () => {
 
   const searchParams = new URLSearchParams(search);
   const { countPerPage, page, defaultPage } = URL_QUERIES_NAME;
+  const queryCountPerPage = searchParams.get(countPerPage);
   const countPerPageText = t('productListPage.countPerPage');
+
+  useEffect(() => {
+    if (!queryCountPerPage) {
+      searchParams.set(countPerPage, ITEMS_PER_PAGE[0].value);
+      searchParams.set(page, defaultPage);
+      history.push(`?${searchParams.toString()}`);
+    }
+  }, [searchParams, countPerPage, history, queryCountPerPage, defaultPage, page]);
 
   const pickQuantity = (value) => {
     searchParams.set(page, defaultPage);
     searchParams.set(countPerPage, value);
     history.push(`?${searchParams.toString()}`);
   };
+
   const productsOnPage = ITEMS_PER_PAGE.map((item) => (
     <Button
       className={

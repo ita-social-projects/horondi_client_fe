@@ -52,10 +52,10 @@ exports[`Product details test Should render product details component 1`] = `
             title="product.tooltips.addWishful"
           >
             <WithStyles(ForwardRef(IconButton))>
-            <Memo(ForwardRef(FavoriteBorderIcon))
-              data-cy="not-wishful"
-              onClick={[Function]}
-            />
+              <Memo(ForwardRef(FavoriteBorderIcon))
+                data-cy="not-wishful"
+                onClick={[Function]}
+              />
             </WithStyles(ForwardRef(IconButton))>
           </WithStyles(ForwardRef(Tooltip))>
         </div>

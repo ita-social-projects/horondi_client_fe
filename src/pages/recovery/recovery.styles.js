@@ -7,11 +7,10 @@ export const useStyles = makeStyles((theme) => ({
       fontSize: '16px',
       transform: 'translate(14px, 12px) scale(1)'
     },
-    '& div > input': {
+    '& .MuiOutlinedInput-input': {
       padding: '11px 14px',
-      fontWeight: 400,
-      fontSize: '16px',
-      lineHeight: '24px'
+      fontWeight: theme.typography.h5.fontWeight,
+      fontSize: theme.typography.h5.fontSize
     },
     '& label.Mui-focused': {
       color: theme.palette.textColor

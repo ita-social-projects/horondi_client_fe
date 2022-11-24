@@ -19,7 +19,7 @@ const LanguageComponent = ({ fromSideBar }) => {
 
   useEffect(() => {
     i18n.changeLanguage(language);
-  }, [i18n]);
+  }, [i18n, language]);
 
   const mappedLanguages = LANGUAGES_LIST.map((lang) => (
     <Button key={lang} value={lang}>

@@ -51,7 +51,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sectionImg: {
-    maxWidth: '100%'
+    width: '100%',
+    maxWidth: '530px'
   },
   bottomImg: {
     padding: '20px 0',

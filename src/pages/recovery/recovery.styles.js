@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
       '& fieldset': {
         borderColor: theme.palette.textColor,
         '& legend': {
-          fontSize: '11px'
+          fontSize: theme.typography.overline.fontSize
         }
       },
       '&.Mui-focused fieldset': {

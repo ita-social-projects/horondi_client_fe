@@ -58,12 +58,12 @@ export const useStyles = makeStyles((theme) => ({
   iconsContainer: ({ position, fromSideBar }) => ({
     display: 'flex',
     justifyContent: position,
-    marginLeft: fromSideBar ? '25px' : '',
+    marginLeft: fromSideBar ? '6px' : '',
     '@media screen and (max-width: 552px)': {
       justifyContent: fromSideBar ? '' : 'space-around',
-      marginLeft: fromSideBar ? '15px' : ''
+      marginLeft: fromSideBar ? '0px' : ''
     },
-    transform: fromSideBar ? 'scale(1.2)' : '',
+    transform: fromSideBar ? 'scale(1.1)' : '',
     marginTop: '19px'
   }),
   iconWrap: {

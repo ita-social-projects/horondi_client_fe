@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  root: () => ({
+  root: (fromSideBar) => ({
     width: '40px',
     height: '40px',
     color: '#fff',
@@ -15,7 +15,7 @@ export const useStyles = makeStyles(() => ({
       backgroundColor: '#F44336'
     },
     '@media (max-width: 900px)': {
-      marginRight: '10px'
+      marginRight: fromSideBar ? '0px' : '10px'
     }
   }),
   svg: {

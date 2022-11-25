@@ -1,15 +1,24 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const root = {
+  display: 'flex',
+  marginLeft: 'auto',
+  alignItems: 'center',
+  gap: '24px',
+  width: '100%'
+};
+
 export const useStyles = makeStyles((theme) => ({
-  root: ({ fromSideBar }) => ({
-    display: 'flex',
-    marginLeft: 'auto',
-    alignItems: 'center',
-    gap: '24px',
+  topIcons: ({ fromSideBar }) => ({
+    ...root,
+    marginTop: fromSideBar ? '8px' : 0
+  }),
+  bottomIcons: ({ fromSideBar }) => ({
+    ...root,
     marginTop: fromSideBar ? '8px' : 0,
-    width: '100%',
     '@media (max-width: 425px)': {
-      gap: '6px'
+      gap: '6px',
+      marginBottom: fromSideBar ? '20px' : 0
     }
   }),
   iconItem: {
@@ -25,26 +34,12 @@ export const useStyles = makeStyles((theme) => ({
       gap: '16px'
     }
   },
-  wishlist: {
+  wishListAndCartIcon: {
     display: 'flex',
     justifyContent: 'center',
-    transform: 'scale(1.3)',
+    transform: 'scale(1.1)',
     '@media (max-width: 425px)': {
-      transform: 'scale(1.1)'
-    },
-    '& svg': {
-      color: theme.palette.textColor
-    },
-    '& svg:hover': {
-      color: 'white'
-    }
-  },
-  cartHeader: {
-    display: 'flex',
-    justifyContent: 'center',
-    transform: 'scale(1.3)',
-    '@media (max-width: 425px)': {
-      transform: 'scale(1.1)'
+      transform: 'scale(1)' // 1
     },
     '& svg': {
       color: theme.palette.textColor
@@ -54,9 +49,9 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   togglItem: {
-    transform: 'scale(1.3)',
+    transform: 'scale(1.1)',
     '@media (max-width: 425px)': {
-      transform: 'scale(1.1)'
+      transform: 'scale(1)'
     }
   }
 }));

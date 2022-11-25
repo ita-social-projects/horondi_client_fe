@@ -10,8 +10,8 @@ import { useWishlist } from '../../hooks/use-wishlist';
 
 const { pathToWishlist } = routes;
 
-const WishlistHeader = () => {
-  const styles = useStyles();
+const WishlistHeader = ({ fromSideBar }) => {
+  const styles = useStyles({ fromSideBar });
   const { wishlist } = useWishlist();
 
   return (

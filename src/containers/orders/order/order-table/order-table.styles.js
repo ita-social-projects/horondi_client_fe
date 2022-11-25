@@ -6,9 +6,17 @@ const title = {
   lineHeight: '65px'
 };
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles((theme) => ({
   titleWrapper: {
-    ...title
+    ...title,
+    '@media (max-width: 900px)': {
+      fontSize: theme.typography.h1.fontSize,
+      lineHeight: theme.typography.h1.lineHeight
+    },
+    '@media (max-width: 650px)': {
+      fontSize: theme.typography.h2.fontSize,
+      lineHeight: theme.typography.h2.lineHeight
+    }
   },
   root: {
     maxWidth: '1440px',
@@ -20,44 +28,54 @@ export const useStyles = makeStyles(({ palette }) => ({
   table: {
     width: '100%',
     whiteSpace: 'nowrap',
-    '@media (max-width: 750px)': {
-      width: '600px',
-      overflowX: 'auto'
+    '& .MuiTableCell-root': {
+      '@media (max-width: 650px)': {
+        borderBottom: 'none'
+      }
     },
-    '@media (max-width: 600px)': {
-      width: '400px',
-      overflowX: 'auto'
-    },
-    '@media (max-width: 400px)': {
-      width: '300px',
-      overflowX: 'auto'
+    '& tr': {
+      '@media (max-width: 650px)': {
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr 1fr',
+        gridTemplateRows: 'auto',
+        borderBottom: '1px solid lightgrey'
+      },
+      '& >th': {
+        '@media (max-width: 650px)': {
+          display: 'none'
+        }
+      }
     },
     '& td': {
-      padding: '32px 0',
+      padding: '16px 0',
       lineHeight: '28px',
-      fontSize: '20px',
-      fontWeight: 400,
-      textAlign: 'center'
-    },
-    '& td:first-child': {
-      textAlign: 'left'
+      fontSize: theme.typography.h4.fontSize,
+      fontWeight: theme.typography.h4.fontWeight,
+      textAlign: 'center',
+      '&:first-child': {
+        textAlign: 'left',
+        '@media (max-width: 768px)': {
+          textAlign: 'center'
+        }
+      },
+      '@media (max-width: 900px)': {
+        fontSize: '18px'
+      },
+      '@media (max-width: 650px)': {
+        margin: 'auto'
+      }
     }
   },
   tableHeader: {
     borderTopWidth: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: palette.cart.borderColor,
+    borderTopColor: theme.palette.cart.borderColor,
     '& >th': {
       padding: '10px 0',
-      fontSize: '14px',
-      fontWeight: 600,
-      lineHeight: '20px',
+      fontSize: theme.typography.h6.fontSize,
+      fontWeight: theme.typography.body1.fontWeight,
+      lineHeight: theme.typography.h6.lineHeight,
       textAlign: 'center'
-    },
-    '@media (max-width: 425px)': {
-      '& >th': {
-        verticalAlign: 'text-top'
-      }
     }
   }
 }));

@@ -3,11 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const name = {
   fontWeight: '700',
   fontSize: '24px',
-  lineHeight: '32px',
-  '@media (max-width: 420px)': {
-    fontSize: '14px',
-    fontWeight: '700'
-  }
+  lineHeight: '32px'
 };
 const description = {
   fontWeight: '400',
@@ -16,49 +12,56 @@ const description = {
   letterSpacing: '0.0025em'
 };
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     justifyContent: 'space-between'
   },
   itemDescription: {
     ...description,
-    color: palette.textColor,
-    '@media (max-width: 420px)': {
-      fontSize: '12px'
+    color: theme.palette.textColor,
+    '@media (max-width: 650px)': {
+      fontSize: theme.typography.body1.fontSize
     }
   },
   itemName: {
     ...name,
-    color: palette.textColor
-  },
-  constructorProductImgContainer: {
-    padding: '0 45px',
-    '@media (max-width: 600px)': {
-      padding: '0 32px'
-    }
-  },
-  constructorProductImg: {
-    width: 130,
-    height: 133,
-    '@media (max-width: 600px)': {
-      width: 60,
-      height: 60
+    color: theme.palette.textColor,
+    '@media (max-width: 900px)': {
+      fontSize: theme.typography.h4.fontSize
+    },
+    '@media (max-width: 650px)': {
+      fontSize: theme.typography.subtitle1.fontSize
     }
   },
   itemImg: {
     objectFit: 'cover',
-    width: '220px',
-    height: '133px',
-    marginRight: '30px'
+    height: '150px',
+    width: '140px',
+    marginRight: '30px',
+    '@media (max-width: 900px)': {
+      height: '120px',
+      width: '110px',
+      marginRight: '16px'
+    },
+    '@media (max-width: 650px)': {
+      height: '100px',
+      width: '90px'
+    }
+  },
+  constructorProductImg: {
+    objectFit: 'fill'
   },
   product: {
     display: 'flex',
     alignItems: 'center',
-    '@media (max-width: 420px)': {
-      display: 'flex',
+    textAlign: 'left',
+    '@media (max-width: 768px)': {
       flexDirection: 'column',
-      alignItems: 'center'
+      textAlign: 'center'
+    },
+    '@media (max-width: 650px)': {
+      gridRow: '1/4'
     }
   },
   price: {
@@ -68,13 +71,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     '& svg': {
       marginRight: '3px',
       fontSize: '18px'
-    },
-    '@media (max-width: 420px)': {
-      fontSize: '14px',
-      '& svg': {
-        marginRight: '2px',
-        fontSize: '14px'
-      }
     }
   },
   promo: {
@@ -84,18 +80,22 @@ export const useStyles = makeStyles(({ palette }) => ({
   selectSizeStyle: {
     width: '71px',
     height: '40px',
-    fontSize: '20px',
-    fontWeight: 400,
+    fontSize: theme.typography.h4.fontSize,
+    fontWeight: theme.typography.h4.fontWeight,
     '& legend': {
       display: 'none'
+    },
+    '& .MuiSelect-outlined': {
+      '@media (max-width: 768px)': {
+        paddingRight: '24px'
+      }
     },
     '& .MuiSelect-select:focus': {
       background: 'transparent'
     },
-    '@media (max-width: 425px)': {
-      fontSize: '14px',
-      width: '75px',
-      height: '35px'
+    '@media (max-width: 768px)': {
+      fontSize: theme.typography.subtitle1.fontSize,
+      width: '62px'
     }
   },
   loadingBar: {
@@ -107,14 +107,19 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: palette.cart.iconColor,
+    color: theme.palette.cart.iconColor,
     cursor: 'pointer'
   },
-  selectInputStyle: {
-    '@media (max-width: 425px)': {
-      fontSize: '14px',
-      width: '55px',
-      height: '35px'
+  sizes: {
+    '@media (max-width: 650px)': { gridColumn: 2, gridRow: 3 },
+    '@media (max-width: 450px)': { display: 'none' }
+  },
+  delete: { '@media (max-width: 650px)': { gridColumn: 3, gridRow: 3 } },
+  quantity: { '@media (max-width: 450px)': { gridColumn: 3, gridRow: 2 } },
+  totalPrice: { '@media (max-width: 450px)': { gridColumn: 3, gridRow: 1 } },
+  productPrice: {
+    '@media (max-width: 650px)': {
+      display: 'none'
     }
   }
 }));

@@ -2,58 +2,40 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   emailInput: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: theme.palette.lightGrayShade
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: theme.palette.blue
-      }
-    },
-    '& .MuiInputBase-input': {
-      fontFamily: theme.typography.fontFamily,
-      color: theme.palette.textColor,
-      fontStyle: 'normal',
-      fontWeight: '400',
-      fontSize: '18px',
-      lineHeight: '25px',
-      paddingLeft: '30px'
-    },
-    '& .MuiInputBase-input:focus': {
-      color: theme.palette.lightGrayShade
-    },
     '& label': {
-      fontStyle: 'normal',
-      fontWeight: 'normal',
-      fontSize: '18px',
-      background: 'white',
-      paddingRight: '5px',
-      transform: 'translate(13, 16) scale(1)'
+      fontWeight: 400,
+      fontSize: '16px',
+      transform: 'translate(14px, 12px) scale(1)'
+    },
+    '& .MuiOutlinedInput-input': {
+      padding: '11px 14px',
+      fontWeight: theme.typography.h5.fontWeight,
+      fontSize: theme.typography.h5.fontSize
     },
     '& label.Mui-focused': {
-      color: theme.palette.blue
+      color: theme.palette.textColor
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.textColor,
+        '& legend': {
+          fontSize: theme.typography.overline.fontSize
+        }
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: theme.palette.black,
+        borederWidth: '2px'
+      }
     }
   },
   recoveryText: {
-    margin: '10px 0 35px',
+    margin: '3px 0 24px',
     fontFamily: theme.typography.fontFamily,
     fontStyle: 'normal',
-    fontWeight: '400',
     fontSize: '12px',
     lineHeight: '16px',
     textAlign: 'left',
-    maxWidth: '400px'
-  },
-  errorText: {
-    margin: '5px 0 15px',
-    height: 'fit-content',
-    lineHeight: '12px',
-    minHeight: '12px',
-    fontSize: '12px',
-    color: theme.palette.error.main,
-    '@media (max-width: 600px)': {
-      minHeight: '24px'
-    }
+    maxWidth: '450px'
   },
   helperEmail: {
     '& p::after': {

@@ -26,6 +26,9 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: '32px',
         marginBottom: '10px'
       }
+    },
+    '@media (max-width: 500px)': {
+      padding: '10px 0'
     }
   },
   sections: {
@@ -48,7 +51,8 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sectionImg: {
-    width: '530px'
+    width: '100%',
+    maxWidth: '530px'
   },
   bottomImg: {
     padding: '20px 0',

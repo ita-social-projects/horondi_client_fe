@@ -64,6 +64,19 @@ export const getConstructorByModel = gql`
         }
         pockets {
           _id
+          name {
+            lang
+            value
+          }
+          images {
+            large
+            medium
+            small
+            thumbnail
+          }
+          positions {
+            _id
+          }
         }
         patterns {
           _id

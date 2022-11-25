@@ -11,6 +11,15 @@ jest.mock('react-i18next', () => ({
   })
 }));
 
+jest.mock('@material-ui/styles', () => ({
+  ...jest.requireActual('@material-ui/styles'),
+  useTheme: () => ({
+    palette: {
+      type: 'light'
+    }
+  })
+}));
+
 jest.mock('../scroll-bar.styles.js', () => ({
   scrollBarStyles: () => ({})
 }));

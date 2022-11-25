@@ -39,7 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     transform: 'scale(1.1)',
     '@media (max-width: 425px)': {
-      transform: 'scale(1)' // 1
+      transform: 'scale(1)'
     },
     '& svg': {
       color: theme.palette.textColor

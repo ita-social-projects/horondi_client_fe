@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { ButtonGroup, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useStyles } from './language.styles';
@@ -7,7 +7,7 @@ import { LANGUAGE } from '../../configs';
 import { LANGUAGES_LIST } from './constants';
 
 const LanguageComponent = ({ fromSideBar }) => {
-  const language = useRef(getFromLocalStorage(LANGUAGE));
+  const language = getFromLocalStorage(LANGUAGE);
   const styles = useStyles({ fromSideBar, language });
   const { i18n } = useTranslation();
 
@@ -18,8 +18,8 @@ const LanguageComponent = ({ fromSideBar }) => {
   };
 
   useEffect(() => {
-    i18n.changeLanguage(language.current);
-  }, [i18n]);
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   const mappedLanguages = LANGUAGES_LIST.map((lang) => (
     <Button key={lang} value={lang}>

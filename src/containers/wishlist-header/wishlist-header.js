@@ -19,7 +19,7 @@ const WishlistHeader = ({ fromSideBar }) => {
       <Link to={pathToWishlist}>
         <IconButton className={styles.root} aria-label={WISHLIST_KEY} tabIndex={-1} disableRipple>
           <Badge badgeContent={wishlist.length} color='secondary'>
-            <FavoriteBorderOutlined className={styles.svg} />
+            <FavoriteBorderOutlined />
           </Badge>
         </IconButton>
       </Link>

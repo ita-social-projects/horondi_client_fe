@@ -37,21 +37,11 @@ export const useStyles = makeStyles((theme) => ({
   wishListAndCartIcon: {
     display: 'flex',
     justifyContent: 'center',
-    transform: 'scale(1.1)',
-    '@media (max-width: 425px)': {
-      transform: 'scale(1)'
-    },
     '& svg': {
       color: theme.palette.textColor
     },
     '& svg:hover': {
       color: 'white'
-    }
-  },
-  togglItem: {
-    transform: 'scale(1.1)',
-    '@media (max-width: 425px)': {
-      transform: 'scale(1)'
     }
   }
 }));

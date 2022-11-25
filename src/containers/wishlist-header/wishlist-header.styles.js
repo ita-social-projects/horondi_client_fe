@@ -17,9 +17,5 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 900px)': {
       marginRight: fromSideBar ? '0px' : '10px'
     }
-  }),
-  svg: {
-    width: '24px',
-    height: '24px'
-  }
+  })
 }));

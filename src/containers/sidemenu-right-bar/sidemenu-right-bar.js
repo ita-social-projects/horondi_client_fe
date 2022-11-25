@@ -28,13 +28,13 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
         </div>
       </div>
       <div className={styles.bottomIcons}>
-        <div className={`${styles.togglItem} ${styles.iconItem}`}>
+        <div className={styles.iconItem}>
           <Language fromSideBar />
         </div>
-        <div className={`${styles.togglItem} ${styles.iconItem}`}>
+        <div className={styles.iconItem}>
           <Currency fromSideBar />
         </div>
-        <div className={`${styles.togglItem} ${styles.iconItem}`}>
+        <div className={styles.iconItem}>
           <ThemeComponent fromSideBar />
         </div>
       </div>

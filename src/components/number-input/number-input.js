@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { useStyles } from './number-input.styles';
 import { TEXT_FIELD_VARIANT, TEXT_FIELDS } from '../../configs';
 
-const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
+const NumberInput = ({ onChangeQuantity, quantity, setInputValue, focused }) => {
   const styles = useStyles();
   const numInput = useRef();
   const setQuantityFromInput = (e) => {
@@ -30,8 +30,8 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue }) => {
   };
 
   useEffect(() => {
-    numInput.current.focus();
-  }, [quantity]);
+    focused && numInput.current.focus();
+  }, [quantity, focused]);
 
   return (
     <div className={styles.root} data-cy='cart-item-quantity'>

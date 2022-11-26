@@ -83,7 +83,8 @@ export const useCart = () => {
   };
 
   const removeFromCart = (item) => {
-    setCartItems((prevCart) => prevCart.filter((cartItem) => cartItem.id !== item.id));
+    const newCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id);
+    newCartItems.length ? setCartItems(newCartItems) : clearCart();
   };
 
   const isInCart = (productId, sizeId = null) =>

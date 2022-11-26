@@ -21,7 +21,7 @@ import { addProductFromConstructor } from '../../../../pages/cart/operations/car
 import { CurrencyContext } from '../../../../context/currency-context';
 import { useCurrency } from '../../../../hooks/use-currency';
 
-const FilledCart = ({ items, cartOperations }) => {
+const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart }) => {
   const styles = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
@@ -41,7 +41,7 @@ const FilledCart = ({ items, cartOperations }) => {
     user: User.userData
   }));
 
-  const [getPromoCode, { data: promoCode, error: promoCodeError }] = useLazyQuery(
+  const [getPromoCode, { data: promoCodeData, error: promoCodeError }] = useLazyQuery(
     getPromoCodeByCode,
     {
       variables: {
@@ -60,9 +60,11 @@ const FilledCart = ({ items, cartOperations }) => {
       }
     }
   );
+  const certificate = certificateData || certificateInCart;
+  const promoCode = promoCodeData || promoCodedInCart;
 
   const errorHandler = () => {
-    if (certificateData || promoCode) return null;
+    if (certificateData || promoCodeData) return null;
     if (promoCodeError) return t('cart.promoCodeNotFound');
     if (certificateError) return t('cart.certificateNotFound');
   };
@@ -90,7 +92,7 @@ const FilledCart = ({ items, cartOperations }) => {
   };
 
   useLayoutEffect(() => {
-    if (certificateData) return setPrice(getTotalPriceWithCertificate(certificateData));
+    if (certificate) return setPrice(getTotalPriceWithCertificate(certificate));
     if (promoCode) return setPrice(getTotalPricesWithPromoCode(promoCode));
     setPrice(getTotalPrice());
   }, [
@@ -98,7 +100,7 @@ const FilledCart = ({ items, cartOperations }) => {
     currency,
     getTotalPrice,
     promoCode,
-    certificateData,
+    certificate,
     getTotalPricesWithPromoCode,
     getTotalPriceWithCertificate
   ]);
@@ -108,14 +110,14 @@ const FilledCart = ({ items, cartOperations }) => {
   }
 
   const totalSavePrice = () => {
-    if (promoCode || certificateData) {
+    if (promoCode || certificate) {
       return (
         <div className={styles.totalPrice}>
           <span>{t('cart.saving')}</span>
           <div>
             {currencySign}
             {promoCode && getTotalPrice() - getTotalPricesWithPromoCode(promoCode)}
-            {certificateData && getTotalPrice() - price}
+            {certificate && getTotalPrice() - price}
           </div>
         </div>
       );
@@ -158,7 +160,7 @@ const FilledCart = ({ items, cartOperations }) => {
       });
     }
     promoCode && addPromocode(promoCode);
-    certificateData && addCertificate(certificateData);
+    certificate && addCertificate(certificate);
     history.push(pathToCheckout);
   };
 
@@ -177,7 +179,7 @@ const FilledCart = ({ items, cartOperations }) => {
               user={user}
               cartOperations={cartOperations}
               promoCode={promoCode}
-              certificateData={certificateData}
+              certificateData={certificate}
             />
           </div>
         </div>
@@ -192,7 +194,7 @@ const FilledCart = ({ items, cartOperations }) => {
                 placeholder={t('cart.promoPlaceHolder')}
                 variant={TEXT_FIELD_VARIANT.OUTLINED}
                 inputRef={certificateAndPromoInput}
-                disabled={Boolean(certificateData || promoCode)}
+                disabled={Boolean(certificate || promoCode)}
                 error={promoCodeError || certificateError}
                 helperText={errorHandler()}
               />
@@ -201,7 +203,7 @@ const FilledCart = ({ items, cartOperations }) => {
                 variant='contained'
                 className={`${styles.promoButton} ${styles.promoInput}`}
                 onClick={checkPromoOrCertificate}
-                disabled={Boolean(certificateData || promoCode)}
+                disabled={Boolean(certificate || promoCode)}
               >
                 {t('cart.applyPromoCode')}
               </Button>

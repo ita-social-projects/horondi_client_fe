@@ -49,14 +49,12 @@ const ProfilePage = () => {
   }));
 
   const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
-    if (phoneNumber === null) {
-      phoneNumber = '';
-    }
+    const userPhoneNumber = phoneNumber || '';
     const user = {
       firstName,
       lastName,
       email,
-      phoneNumber: `+38${phoneNumber}`,
+      phoneNumber: userPhoneNumber,
       address,
       configs: { ...userData.configs, language: i18n.language }
     };
@@ -104,7 +102,7 @@ const ProfilePage = () => {
           firstName,
           lastName,
           email,
-          phoneNumber: phoneNumber.slice(3),
+          phoneNumber: phoneNumber || '',
           ...address
         }
       });

@@ -6,13 +6,17 @@ import { useCart } from '../../hooks/use-cart';
 
 const Cart = () => {
   const styles = useAppStyles();
-  const { cartItems, cartOperations } = useCart();
-
+  const { cartItems, cartOperations, promoCode, certificate } = useCart();
   return (
     <div className={styles.rootApp}>
       <div className={styles.containerApp}>
         {cartItems.length ? (
-          <FilledCart items={cartItems} cartOperations={cartOperations} />
+          <FilledCart
+            items={cartItems}
+            cartOperations={cartOperations}
+            promoCodedInCart={promoCode}
+            certificateInCart={certificate}
+          />
         ) : (
           <EmptyCart />
         )}

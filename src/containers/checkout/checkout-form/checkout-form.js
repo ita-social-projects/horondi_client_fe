@@ -105,12 +105,11 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
     initialValues,
 
     onSubmit: (data) => {
-      const orderData = { ...data, phoneNumber: `+38${data.phoneNumber}` };
       if (data.paymentMethod === checkoutPayMethod.card) {
         dispatch(
           getFondyData({
             order: orderInputData(
-              orderData,
+              data,
               deliveryType,
               cartItems,
               countryOption,
@@ -123,14 +122,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
       } else {
         dispatch(
           addOrder(
-            orderInputData(
-              orderData,
-              deliveryType,
-              cartItems,
-              countryOption,
-              promoCodeId,
-              certificateId
-            )
+            orderInputData(data, deliveryType, cartItems, countryOption, promoCodeId, certificateId)
           )
         );
         handleCashPayment();
@@ -145,12 +137,7 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
 
   useEffect(() => {
     if (userData) {
-      setInitialValues(
-        updateInitialValues(
-          { ...userData, phoneNumber: userData.phoneNumber.slice(3) },
-          deliveryType
-        )
-      );
+      setInitialValues(updateInitialValues({ ...userData }, deliveryType));
     }
   }, [userData, deliveryType]);
 

@@ -38,13 +38,12 @@ export const useStyles = makeStyles((theme) => {
       bottom: '0'
     },
     sizeButton: {
-      ...sizeButton,
-      backgroundColor: theme.palette.card.childrenBackgroundColor
+      ...sizeButton
     },
     selectedSize: {
       ...sizeButton,
-      backgroundColor: theme.palette.black,
-      color: theme.palette.backgroundColor,
+      backgroundColor: theme.palette.button.normal.backgroundColor,
+      color: theme.palette.button.normal.color,
       '&:hover': {
         backgroundColor: theme.palette.card.selectedButton.backgroundColor,
         color: theme.palette.card.selectedButton.color

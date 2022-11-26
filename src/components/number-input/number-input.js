@@ -31,7 +31,7 @@ const NumberInput = ({ onChangeQuantity, quantity, setInputValue, focused }) => 
 
   useEffect(() => {
     focused && numInput.current.focus();
-  }, [quantity, focused]);
+  }, [focused]);
 
   return (
     <div className={styles.root} data-cy='cart-item-quantity'>

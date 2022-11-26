@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, FormHelperText } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { CameraIcon } from '../../../images/profile-icons';
@@ -43,9 +43,13 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
     }
   };
 
-  const handleLableClass = () => (userImageUrl ? classes.updateLabel : classes.uploadLabel);
+  const lableClass = useMemo(
+    () => (userImageUrl ? classes.updateLabel : classes.uploadLabel),
+    [userImageUrl, classes]
+  );
 
-  const deleteAvatar = () => {
+  const deleteAvatar = (e) => {
+    e.preventDefault();
     setUserImageUrl(null);
     setUpload(null);
     setDeleteAvatar(true);
@@ -54,15 +58,12 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
   return (
     <div className={classes.imageContainer}>
       {userImageUrl && (
-        <>
-          <DeleteIcon className={classes.deleteIcon} onClick={deleteAvatar} />
-          <img
-            src={userImageUrl}
-            alt='profile-logo'
-            className={classes.userImage}
-            data-testid='renderedImage'
-          />
-        </>
+        <img
+          src={userImageUrl}
+          alt='profile-logo'
+          className={classes.userImage}
+          data-testid='renderedImage'
+        />
       )}
       <input
         type='file'
@@ -72,10 +73,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
         accept='image/jpg, image/jpeg, image/png'
         data-testid='imageInput'
       />
-      <label
-        htmlFor='photoUpload'
-        className={`${classes.imageContainerLabel} ${handleLableClass()}`}
-      >
+      <label htmlFor='photoUpload' className={`${classes.imageContainerLabel} ${lableClass}`}>
         <Button component='span' className={classes.uploadBtn}>
           <CameraIcon className={classes.cameraIcon} />
           <FormHelperText
@@ -86,6 +84,7 @@ const Avatar = ({ setUserImageUrl, userImageUrl, setUpload, setDeleteAvatar, t }
             {errorMessage}
           </FormHelperText>
         </Button>
+        {userImageUrl && <DeleteIcon className={classes.deleteIcon} onClick={deleteAvatar} />}
       </label>
     </div>
   );

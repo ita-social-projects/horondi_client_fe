@@ -2,9 +2,11 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Loader } from '../../../../components/loader/loader';
+import { ThemeProvider } from '@material-ui/core';
 import ProfilePage from '../../../../pages/profile-page/profile-page';
 import { mockedUserData } from './profile-page.variables';
+import { theme } from '../../../../components/app/app-theme/app.theme';
+import { SnackBarContextProvider } from '../../../../context/snackbar-context';
 
 jest.mock('../../../../pages/profile-page/profile-page.styles', () => ({
   useStyles: () => ({})
@@ -32,37 +34,25 @@ const formik = {
   handleChange: mockChange
 };
 
+const themeValue = theme('light');
+
 useDispatch.mockImplementation(() => dispatch);
 
 useFormik.mockImplementation(() => formik);
 
 describe('<Profile-page /> component tests', () => {
-  it('should render Loader if user is loading', () => {
-    useSelector.mockImplementation(() => ({
-      userData: mockedUserData,
-      userLoading: true
-    }));
-    const wrapper = shallow(<ProfilePage />);
-    expect(wrapper.find(Loader).length).toEqual(1);
-  });
-
-  it('should render Loaders if confirmation & recovery is loading', () => {
-    useSelector.mockImplementation(() => ({
-      userData: mockedUserData,
-      userLoading: false,
-      confirmationLoading: true,
-      recoveryLoading: true
-    }));
-    const wrapper = shallow(<ProfilePage />);
-    expect(wrapper.find(Loader).length).toEqual(2);
-  });
-
   it('should render form', () => {
     useSelector.mockImplementation(() => ({
       userData: mockedUserData,
       userLoading: false
     }));
-    const { getByTestId } = render(<ProfilePage />);
+    const { getByTestId } = render(
+      <SnackBarContextProvider>
+        <ThemeProvider theme={themeValue}>
+          <ProfilePage />
+        </ThemeProvider>
+      </SnackBarContextProvider>
+    );
     const form = getByTestId('userForm');
     expect(form).toBeInTheDocument();
   });
@@ -74,7 +64,13 @@ describe('<Profile-page /> component tests', () => {
       confirmationEmailSent: true,
       userRecovered: true
     }));
-    const { getAllByTestId } = render(<ProfilePage />);
+    const { getAllByTestId } = render(
+      <SnackBarContextProvider>
+        <ThemeProvider theme={themeValue}>
+          <ProfilePage />
+        </ThemeProvider>
+      </SnackBarContextProvider>
+    );
     const emailSentContainer = getAllByTestId('emailSent');
     expect(emailSentContainer[0]).toBeInTheDocument();
   });
@@ -84,7 +80,13 @@ describe('<Profile-page /> component tests', () => {
       userData: mockedUserData,
       userLoading: false
     }));
-    const { getByTestId } = render(<ProfilePage />);
+    const { getByTestId } = render(
+      <SnackBarContextProvider>
+        <ThemeProvider theme={themeValue}>
+          <ProfilePage />
+        </ThemeProvider>
+      </SnackBarContextProvider>
+    );
     const passwordChangeBtn = getByTestId('passwordChangeBtn');
     fireEvent.click(passwordChangeBtn);
     expect(dispatch).toHaveBeenCalledTimes(1);
@@ -95,7 +97,13 @@ describe('<Profile-page /> component tests', () => {
       userData: mockedUserData,
       userLoading: false
     }));
-    const { getByTestId } = render(<ProfilePage />);
+    const { getByTestId } = render(
+      <SnackBarContextProvider>
+        <ThemeProvider theme={themeValue}>
+          <ProfilePage />
+        </ThemeProvider>
+      </SnackBarContextProvider>
+    );
     const emailConfirmBtn = getByTestId('emailConfirmBtn');
     fireEvent.click(emailConfirmBtn);
     expect(dispatch).toHaveBeenCalledTimes(1);
@@ -106,7 +114,13 @@ describe('<Profile-page /> component tests', () => {
       userData: mockedUserData,
       userLoading: false
     }));
-    const { getByTestId } = render(<ProfilePage />);
+    const { getByTestId } = render(
+      <SnackBarContextProvider>
+        <ThemeProvider theme={themeValue}>
+          <ProfilePage />
+        </ThemeProvider>
+      </SnackBarContextProvider>
+    );
     const submitBtn = getByTestId('submitBtn');
     fireEvent.click(submitBtn);
     expect(mockSubmit).toHaveBeenCalledTimes(1);

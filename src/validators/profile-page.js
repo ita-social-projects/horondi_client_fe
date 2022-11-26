@@ -19,9 +19,9 @@ export const validationSchema = Yup.object().shape({
     .required('error.requiredField'),
   phoneNumber: Yup.string()
     .matches(formRegExp.wholeNumber, 'error.onlyNumber')
-    .min(9, 'error.profile.phoneTooShort')
+    .min(10, 'error.profile.phoneTooShort')
     .matches(formRegExp.phoneNumber, 'error.profile.phoneNumber')
-    .max(9, 'error.profile.phoneTooLong')
+    .max(10, 'error.profile.phoneTooLong')
     .nullable(),
   country: Yup.string()
     .min(2, 'error.profile.country')

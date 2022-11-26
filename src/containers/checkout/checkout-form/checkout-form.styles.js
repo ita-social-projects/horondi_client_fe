@@ -73,6 +73,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         borderColor: palette.textColor
       }
     },
+    '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
+      marginRight: '4px'
+    },
     width: '100%'
   },
   textAreaField: {

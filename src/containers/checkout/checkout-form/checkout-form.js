@@ -105,11 +105,12 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
     initialValues,
 
     onSubmit: (data) => {
+      const orderData = { ...data, phoneNumber: `+38${data.phoneNumber}` };
       if (data.paymentMethod === checkoutPayMethod.card) {
         dispatch(
           getFondyData({
             order: orderInputData(
-              data,
+              orderData,
               deliveryType,
               cartItems,
               countryOption,
@@ -122,7 +123,14 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
       } else {
         dispatch(
           addOrder(
-            orderInputData(data, deliveryType, cartItems, countryOption, promoCodeId, certificateId)
+            orderInputData(
+              orderData,
+              deliveryType,
+              cartItems,
+              countryOption,
+              promoCodeId,
+              certificateId
+            )
           )
         );
         handleCashPayment();
@@ -137,7 +145,12 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
 
   useEffect(() => {
     if (userData) {
-      setInitialValues(updateInitialValues(userData, deliveryType));
+      setInitialValues(
+        updateInitialValues(
+          { ...userData, phoneNumber: userData.phoneNumber.slice(3) },
+          deliveryType
+        )
+      );
     }
   }, [userData, deliveryType]);
 
@@ -174,8 +187,8 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
                       InputProps={
                         field.name === 'phoneNumber'
                           ? {
-                            maxLength: 9,
-                            startAdornment: <InputAdornment position='start'>+380</InputAdornment>
+                            maxLength: 10,
+                            startAdornment: <InputAdornment position='start'>+38</InputAdornment>
                           }
                           : {}
                       }

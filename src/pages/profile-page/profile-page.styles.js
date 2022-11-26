@@ -22,25 +22,27 @@ export const useStyles = makeStyles(({ palette }) => ({
   },
   profile: {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    '@media screen and (max-width: 1136px)': {
-      justifyContent: 'center'
+    gap: '24px',
+    '@media screen and (max-width: 1144px)': {
+      flexDirection: 'column',
+      maxWidth: 635,
+      margin: '0 auto'
     }
   },
   userFormControl: {
-    maxWidth: 635,
-    marginBottom: 56
+    marginBottom: 56,
+    flexBasis: '60%',
+    '@media (max-width: 1144px)': {
+      marginBottom: 0
+    }
   },
   userForm: {
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
     padding: '56px 95px',
-    marginBottom: 20,
     display: 'grid',
     gridTemplateColumns: 'repeat(3,1fr)',
-    rowGap: '23px',
-    position: 'relative',
-    '@media (max-width: 768px)': {
+    rowGap: '8px',
+    '@media (max-width: 575px)': {
       padding: '56px 40px'
     }
   },
@@ -48,11 +50,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontSize: 24,
     fontWeight: 800,
     color: palette.textColor,
-    margin: 0,
+    margin: '0 0 12px',
     gridColumn: 'span 2',
     '@media (max-width: 768px)': {
       gridColumn: 'span 3',
-      margin: '0 auto'
+      textAlign: 'center'
     }
   },
   dataInput: {
@@ -63,7 +65,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
       borderColor: palette.textColor
-    }
+    },
+    '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': { marginRight: '4px' }
   },
   nameInputs: {
     gridColumn: 'span 2',
@@ -72,55 +75,36 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   button: {
-    fontSize: '1rem',
-    lineHeight: '20px',
-    width: '100%',
     gridColumn: 'span 3',
-    textTransform: 'uppercase'
+    padding: '10px'
   },
   userActions: {
+    flexBasis: '40%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    width: 445,
-    '@media (max-width: 1200px)': {
+    '@media (max-width: 1144px)': {
       marginBottom: '56px'
-    }
-  },
-  userActionsButton: {
-    border: '1px solid',
-    borderColor: palette.button.normal.borderColor,
-    padding: '12px 48px',
-    '& span': {
-      fontWeight: 600
-    }
-  },
-  saveBtn: {
-    backgroundColor: palette.button.normal.backgroundColor,
-    color: palette.button.normal.color,
-    padding: '16px 0',
-    '&:hover': {
-      backgroundColor: palette.button.hover.backgroundColor,
-      color: palette.button.hover.color
     }
   },
   newPassword: {
     minHeight: 100,
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    padding: '22px 32px',
-    marginBottom: 20
+    padding: '32px',
+    marginBottom: 20,
+    '@media (max-width: 1144px)': {
+      padding: '32px 95px'
+    },
+    '@media (max-width: 575px)': {
+      padding: '32px 40px'
+    }
   },
   userActionsInput: {
     margin: '16px 0px 8px 0px'
   },
-  confirmUser: {
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
-    minHeight: 100,
-    padding: '20px 34px'
-  },
   userActionsText: {
     display: 'block',
-    margin: '16px 0',
+    margin: '12px 0',
     color: palette.info.main
   },
   emailSent: {

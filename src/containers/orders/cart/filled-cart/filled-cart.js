@@ -181,49 +181,47 @@ const FilledCart = ({ items, cartOperations }) => {
             />
           </div>
         </div>
-        <div>
-          <div className={styles.promoAndTotalWrapper}>
-            <div className={styles.promoWrapper}>
-              <div>
-                <TextField
-                  className={styles.textField}
-                  InputProps={{
-                    className: styles.promoInput
-                  }}
-                  placeholder={t('cart.promoPlaceHolder')}
-                  variant={TEXT_FIELD_VARIANT.OUTLINED}
-                  inputRef={certificateAndPromoInput}
-                  disabled={Boolean(certificateData || promoCode)}
-                  error={promoCodeError || certificateError}
-                  helperText={errorHandler()}
-                />
-                <Button
-                  data-testid='promoButton'
-                  variant='contained'
-                  className={`${styles.promoButton} ${styles.promoInput}`}
-                  onClick={checkPromoOrCertificate}
-                  disabled={Boolean(certificateData || promoCode)}
-                >
-                  {t('cart.applyPromoCode')}
-                </Button>
-              </div>
-              <Link to={pathToCategory}>
-                <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
-              </Link>
-            </div>
-            <div className={styles.totalWrapper}>
-              {totalSavePrice()}
-              <div className={styles.totalPrice}>
-                <span>{t('cart.totalPrice')}</span>
-                <div>
-                  {currencySign}
-                  {price}
-                </div>
-              </div>
-              <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
-                {t('cart.checkout')}
+        <div className={styles.promoAndTotalWrapper}>
+          <div className={styles.promoWrapper}>
+            <div>
+              <TextField
+                className={styles.textField}
+                InputProps={{
+                  className: styles.promoInput
+                }}
+                placeholder={t('cart.promoPlaceHolder')}
+                variant={TEXT_FIELD_VARIANT.OUTLINED}
+                inputRef={certificateAndPromoInput}
+                disabled={Boolean(certificateData || promoCode)}
+                error={promoCodeError || certificateError}
+                helperText={errorHandler()}
+              />
+              <Button
+                data-testid='promoButton'
+                variant='contained'
+                className={`${styles.promoButton} ${styles.promoInput}`}
+                onClick={checkPromoOrCertificate}
+                disabled={Boolean(certificateData || promoCode)}
+              >
+                {t('cart.applyPromoCode')}
               </Button>
             </div>
+            <Link to={pathToCategory}>
+              <Button className={styles.shoppingButton}>{t('cart.continue')}</Button>
+            </Link>
+          </div>
+          <div className={styles.totalWrapper}>
+            {totalSavePrice()}
+            <div className={styles.totalPrice}>
+              <span>{t('cart.totalPrice')}</span>
+              <div>
+                {currencySign}
+                {price}
+              </div>
+            </div>
+            <Button variant='contained' className={styles.ordersButton} onClick={onGoToCheckout}>
+              {t('cart.checkout')}
+            </Button>
           </div>
         </div>
         <SimilarProducts cartList={items} />

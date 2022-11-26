@@ -57,7 +57,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
   useEffect(() => {
     changeQuantity(item.id, debounceQuantity);
   }, [item.id, changeQuantity, debounceQuantity]);
-  
+
   const { isFromConstructor } = item;
 
   const {
@@ -122,16 +122,14 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
     </Link>
   );
   const constructorProductImg = (
-    <div className={styles.constructorProductImgContainer}>
-      <ConstructorCanvas
-        className={styles.constructorProductImg}
-        item={item}
-        width={canvasW}
-        height={canvasH}
-        x={canvasX}
-        y={canvasY}
-      />
-    </div>
+    <ConstructorCanvas
+      className={`${styles.itemImg} ${styles.constructorProductImg}`}
+      item={item}
+      width={canvasW}
+      height={canvasH}
+      x={canvasX}
+      y={canvasY}
+    />
   );
   const productImg = isFromConstructor ? constructorProductImg : defaultProductImg;
 
@@ -240,7 +238,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
           {itemMaterial}
         </div>
       </TableCell>
-      <TableCell data-cy='cart-item-description'>
+      <TableCell data-cy='cart-item-description' className={styles.sizes}>
         <Select
           label='title'
           data-cy='size'
@@ -254,23 +252,23 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
           {itemSize}
         </Select>
       </TableCell>
-      <TableCell data-cy='cart-item-description'>
+      <TableCell data-cy='cart-item-description' className={styles.productPrice}>
         <div className={styles.price}>
           {currencySign}
           {currentPrice}
         </div>
       </TableCell>
-      <TableCell>
+      <TableCell className={styles.quantity}>
         <NumberInput
           quantity={inputValue}
           onChangeQuantity={setInputValue}
           setInputValue={setInputValue}
         />
       </TableCell>
-      <TableCell>
+      <TableCell className={styles.totalPrice}>
         <div className={styles.price}>{totalProductPrice()}</div>
       </TableCell>
-      <TableCell>
+      <TableCell className={styles.delete}>
         <div className={styles.deleteIcon}>
           <DeleteIcon data-testid='delete' onClick={onDeleteItem} />
         </div>

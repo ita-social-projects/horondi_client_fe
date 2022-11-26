@@ -34,7 +34,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    '@media (max-width: 650px)': { position: 'relative' }
   },
   promoInput: {
     '&, &::placeholder': {
@@ -84,6 +85,12 @@ export const useStyles = makeStyles(({ palette }) => ({
     '&:hover': {
       backgroundColor: palette.button.hover.backgroundColor,
       color: palette.button.hover.color
+    },
+    '@media (max-width: 900px)': {
+      padding: '14px 90px'
+    },
+    '@media (max-width: 450px)': {
+      padding: '14px 65px'
     }
   },
   orderWrapper: {
@@ -107,18 +114,21 @@ export const useStyles = makeStyles(({ palette }) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginTop: '50px',
-    marginBottom: '100px',
-    '@media (max-width: 850px)': {
+    paddingTop: '50px',
+    paddingBottom: '100px',
+    '@media (max-width: 900px)': {
       width: '100%',
-      flexDirection: 'column',
+      flexDirection: 'column-reverse',
       justifyContent: 'center',
       alignItems: 'center'
     },
-    '@media (max-width: 420px)': {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
+    '@media (max-width: 650px)': {
+      paddingTop: '12px',
+      paddingBottom: '48px',
+      position: 'sticky',
+      bottom: 0,
+      background: palette.backgroundColor,
+      boxShadow: `0px -10px 10px -5px ${palette.divider}`
     }
   },
   totalPrice: {

@@ -94,7 +94,10 @@ export const URL_QUERIES_NAME = {
   isHotItemFilter: 'isHotItemFilter',
   priceFilter: 'priceFilter',
   nameFilter: 'nameFilter',
-  defaultPage: '1'
+  defaultPage: '1',
+  defaultCount: '9',
+  defaultMinRange: '0',
+  defaultMaxRange: '1000'
 };
 
 export const TEXT_VALUE = 'text';

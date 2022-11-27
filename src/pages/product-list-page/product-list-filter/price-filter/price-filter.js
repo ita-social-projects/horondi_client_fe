@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import FormGroup from '@material-ui/core/FormGroup';
 import Typography from '@material-ui/core/Typography';
@@ -10,13 +10,14 @@ import { getMin, getMax } from '../../../../utils/priceCalculating';
 import { useStyles } from '../product-list-filter.styles';
 import { URL_QUERIES_NAME } from '../../../../configs/index';
 import { useCurrency } from '../../../../hooks/use-currency';
+import useDebounce from '../../../../hooks/use-debounce';
 
 const PriceFilter = ({ priceRange, resetPrices }) => {
   const { getPriceWithCurrency, getBaseCurrencyPrice } = useCurrency();
   const { t } = useTranslation();
   const { search } = useLocation();
   const { priceFilter, page, defaultPage } = URL_QUERIES_NAME;
-  const searchParams = new URLSearchParams(search);
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
   const styles = useStyles();
   const history = useHistory();
 
@@ -26,10 +27,7 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
   const fixPrice = (inputPrices) => inputPrices.map((el) => getBaseCurrencyPrice(el));
 
   const [prices, setPrices] = useState([min, max]);
-  const [pricesFromInput, setPricesFromInput] = useState([min, max]);
-
-  const searchParamsRef = useRef();
-  searchParamsRef.current = searchParams;
+  const [pricesFromInput, setPricesFromInput] = useState([]);
 
   useEffect(() => {
     setPrices([min, max]);
@@ -51,22 +49,18 @@ const PriceFilter = ({ priceRange, resetPrices }) => {
 
   const handlePriceFilter = useCallback(
     (pricesArr) => {
-      searchParamsRef.current.set(priceFilter, pricesArr.map((price) => price).join());
-      searchParamsRef.current.set(page, defaultPage);
-      history.push(`?${searchParamsRef.current.toString()}`);
+      searchParams.set(priceFilter, pricesArr.map((price) => price).join());
+      searchParams.set(page, defaultPage);
+      history.push(`?${searchParams.toString()}`);
     },
-    [defaultPage, page, priceFilter, history]
+    [defaultPage, page, priceFilter, history, searchParams]
   );
 
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      if (min) {
-        handlePriceFilter(pricesFromInput);
-      }
-    }, 1000);
+  const debouncedPrices = useDebounce(pricesFromInput, 1000);
 
-    return () => clearTimeout(delayDebounce);
-  }, [pricesFromInput, handlePriceFilter, min]);
+  useEffect(() => {
+    debouncedPrices.length && handlePriceFilter(debouncedPrices);
+  }, [debouncedPrices, handlePriceFilter]);
 
   return (
     <FormGroup data-cy='price_filter'>

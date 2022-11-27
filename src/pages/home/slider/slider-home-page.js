@@ -8,7 +8,9 @@ import ArrowLeft from '../../../images/ArrowLeft.svg';
 import ArrowRight from '../../../images/ArrowRight.svg';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { getAllSlides } from '../operations/slider/slider.queries';
-import { IMG_URL } from '../../../configs';
+import { IMG_URL, URL_QUERIES_NAME } from '../../../configs';
+
+import { POPULARITY } from '../../../containers/sidebar/constants';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import routes from '../../../configs/routes';
 
@@ -22,6 +24,17 @@ const SliderHomePage = () => {
   const { loading, error } = useQuery(getAllSlides, {
     onCompleted: (data) => setSlides(data.getAllSlides.items)
   });
+  const {
+    sort,
+    page,
+    countPerPage,
+    defaultCount,
+    defaultPage,
+    defaultMinRange,
+    defaultMaxRange,
+    priceFilter
+  } = URL_QUERIES_NAME;
+  const pathToCatalog = `${pathToCategory}?${sort}=${POPULARITY}&${page}=${defaultPage}&${countPerPage}=${defaultCount}&${priceFilter}=${defaultMinRange}%2C${defaultMaxRange}`;
 
   const handleNumPrefix = (slideNumber) => (slideNumber < 10 ? `0${slideNumber}` : slideNumber);
   const handleSlideSwitch = (num) => setCurrSlide((prevSlide) => prevSlide + num);
@@ -53,7 +66,7 @@ const SliderHomePage = () => {
               </p>
             </div>
             <div className={styles.navWrapper}>
-              <Button className={styles.buttonStyles} component={Link} to={pathToCategory}>
+              <Button className={styles.buttonStyles} component={Link} to={pathToCatalog}>
                 {t('home.shopNow')}
               </Button>
               <div className={styles.arrows}>

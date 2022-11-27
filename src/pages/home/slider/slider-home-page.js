@@ -9,7 +9,6 @@ import ArrowRight from '../../../images/ArrowRight.svg';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { getAllSlides } from '../operations/slider/slider.queries';
 import { IMG_URL } from '../../../configs';
-
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import routes from '../../../configs/routes';
 

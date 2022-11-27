@@ -11,18 +11,8 @@ import routes from '../../../configs/routes';
 import { useStyles } from './sidebar-items.styles';
 
 const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemStyles }) => {
-  const {
-    sort,
-    page,
-    categoryFilter,
-    modelsFilter,
-    countPerPage,
-    defaultPage,
-    defaultCount,
-    priceFilter,
-    defaultMinRange,
-    defaultMaxRange
-  } = URL_QUERIES_NAME;
+  const { sort, page, categoryFilter, modelsFilter, countPerPage, defaultPage, defaultCount } =
+    URL_QUERIES_NAME;
 
   const { pathToCategory } = routes;
   const { t } = useTranslation();
@@ -46,7 +36,7 @@ const SideBarItem = ({ category, handlerItem, models, translationsKey, mainItemS
           {models.map((model) => (
             <ListItem button className={styles.nested} key={model._id} onClick={handlerItem}>
               <Link
-                to={`${pathToCategory}?${sort}=${POPULARITY}&${page}=${defaultPage}&${categoryFilter}=%2C${category}&${modelsFilter}=%2C${model._id}&${countPerPage}=${defaultCount}&${priceFilter}=${defaultMinRange}%2C${defaultMaxRange}`}
+                to={`${pathToCategory}?${sort}=${POPULARITY}&${page}=${defaultPage}&${categoryFilter}=%2C${category}&${modelsFilter}=%2C${model._id}&${countPerPage}=${defaultCount}`}
               >
                 <ListItemText
                   className={styles.listItemText}

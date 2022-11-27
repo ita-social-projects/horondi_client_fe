@@ -95,9 +95,7 @@ export const URL_QUERIES_NAME = {
   priceFilter: 'priceFilter',
   nameFilter: 'nameFilter',
   defaultPage: '1',
-  defaultCount: '9',
-  defaultMinRange: '0',
-  defaultMaxRange: '1000'
+  defaultCount: '9'
 };
 
 export const TEXT_VALUE = 'text';

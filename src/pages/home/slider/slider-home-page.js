@@ -24,17 +24,8 @@ const SliderHomePage = () => {
   const { loading, error } = useQuery(getAllSlides, {
     onCompleted: (data) => setSlides(data.getAllSlides.items)
   });
-  const {
-    sort,
-    page,
-    countPerPage,
-    defaultCount,
-    defaultPage,
-    defaultMinRange,
-    defaultMaxRange,
-    priceFilter
-  } = URL_QUERIES_NAME;
-  const pathToCatalog = `${pathToCategory}?${sort}=${POPULARITY}&${page}=${defaultPage}&${countPerPage}=${defaultCount}&${priceFilter}=${defaultMinRange}%2C${defaultMaxRange}`;
+  const { sort, page, countPerPage, defaultCount, defaultPage } = URL_QUERIES_NAME;
+  const pathToCatalog = `${pathToCategory}?${sort}=${POPULARITY}&${page}=${defaultPage}&${countPerPage}=${defaultCount}`;
 
   const handleNumPrefix = (slideNumber) => (slideNumber < 10 ? `0${slideNumber}` : slideNumber);
   const handleSlideSwitch = (num) => setCurrSlide((prevSlide) => prevSlide + num);

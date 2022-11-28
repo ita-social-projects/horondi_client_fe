@@ -66,7 +66,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
     if (orderItemId) {
       setProductPrices((prevState) => [...prevState, { price, category }]);
     }
-  }, [setProductPrices, price, category]);
+  }, [setProductPrices, price, category, orderItemId]);
 
   useEffect(() => {
     productImage && checkImage(productImage, isLightTheme);

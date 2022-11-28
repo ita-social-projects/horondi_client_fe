@@ -135,9 +135,7 @@ const CommentsItem = ({ userFirstName, commentItem, commentId, productId, refetc
               ) : null}
               {handleUserCommentApprove(userData, email, show) ? (
                 <Tooltip title={t('product.tooltips.feedbackComment')}>
-                  <>
-                    <FeedbackOutlinedIcon className={styles.iconF} />
-                  </>
+                  <FeedbackOutlinedIcon className={styles.feedbackIcon} />
                 </Tooltip>
               ) : null}
             </div>

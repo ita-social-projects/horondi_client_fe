@@ -11,11 +11,18 @@ const buttonStyles = {
 export const useStyles = makeStyles(({ palette }) => ({
   pageTitle: {
     display: 'flex',
-    fontWeight: '500',
+    fontWeight: '400',
     justifyContent: 'center',
     fontSize: '48px',
     borderBottom: '1px solid gray',
-    padding: '72px 0'
+    padding: '50px 0 60px 0',
+    textAlign: 'center',
+    marginBottom: '25px',
+    lineHeight: '46px',
+    '@media (max-width: 788px)': {
+      fontSize: '35px',
+      padding: '50px 0 25px 0'
+    }
   },
   chooseCertificate: {
     fontSize: '24px',

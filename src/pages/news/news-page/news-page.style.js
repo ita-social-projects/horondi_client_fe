@@ -3,13 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   newsTitle: {
     textAlign: 'center',
-    height: '205px',
     margin: '0px',
-    padding: '0px',
-    lineHeight: '225px',
+    padding: '70px 0 20px 0',
+    lineHeight: '46px',
     fontSize: '59px',
     fontWeight: '300',
-    letterSpacing: '-2px'
+    letterSpacing: '-2px',
+    '@media (max-width: 550px)': {
+      fontSize: '35px'
+    }
   },
   NewsPageItem: {
     display: 'grid',

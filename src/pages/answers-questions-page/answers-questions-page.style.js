@@ -15,17 +15,17 @@ export const useStyles = makeStyles(() => ({
       textAlign: 'center',
       transform: 'scale(1, 1.1)',
       fontStyle: 'normal',
-      fontWeight: '400',
+      fontWeight: '300',
       fontSize: '59px',
       lineHeight: '46px',
       letterSpacing: '0.0025em',
-      marginTop: '80px'
+      marginTop: '80px',
+      '@media (max-width: 788px)': {
+        fontSize: '35px'
+      }
     },
     '& hr': {
       color: '#242424'
     }
-  },
-  pageTitle: {
-    marginBottom: '60px'
   }
 }));

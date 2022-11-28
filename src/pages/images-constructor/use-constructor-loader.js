@@ -47,7 +47,7 @@ const useConstructorLoader = () => {
         bottom: constructor.bottoms[0],
         basic: constructor.basics[0],
         model: constructor.model,
-        pocket: constructor.pockets,
+        pocket: constructor.pockets[0],
         basePrice: constructor.basePrice
       };
 

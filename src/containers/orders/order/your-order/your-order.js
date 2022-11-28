@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button, Divider, List, Paper, Typography } from '@material-ui/core';
 import SelfPickup from '../../../checkout/checkout-form/delivery/self-pickup/self-pickup';
 import { useCart } from '../../../../hooks/use-cart';
@@ -10,7 +10,6 @@ const YourOrder = ({ ...props }) => {
   const { cartItems, cartOperations } = useCart();
   const { getTotalPriceWithCertificate } = cartOperations;
   const {
-    currency,
     checkoutFormBtnValue,
     consentLink,
     t,
@@ -24,17 +23,9 @@ const YourOrder = ({ ...props }) => {
     certificate
   } = props;
 
-  const [productPrices, setProductPrices] = useState([]);
-
   const totalPrice = certificate
     ? getTotalPriceWithCertificate(certificate)
     : getPriceWithCurrency(totalPriceToPay);
-
-  useEffect(() => {
-    setPricesFromQuery(
-      productPrices.map((item) => ({ price: item.price, category: item.category }))
-    );
-  }, [setPricesFromQuery, productPrices, currency]);
 
   const orderItems =
     cartItems &&
@@ -42,7 +33,7 @@ const YourOrder = ({ ...props }) => {
       <OrderItem
         key={item.id}
         product={item}
-        setProductPrices={setProductPrices}
+        setProductPrices={setPricesFromQuery}
         data-testid='orderItem'
         promoCode={promoCode}
       />

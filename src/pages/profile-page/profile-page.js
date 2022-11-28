@@ -49,9 +49,6 @@ const ProfilePage = () => {
   }));
 
   const handleSaveUser = ({ firstName, lastName, email, phoneNumber, ...address }) => {
-    if (phoneNumber === null) {
-      phoneNumber = '';
-    }
     const user = {
       firstName,
       lastName,
@@ -60,11 +57,6 @@ const ProfilePage = () => {
       address,
       configs: { ...userData.configs, language: i18n.language }
     };
-    Object.keys(address).forEach((key) => {
-      if (address[key] === null) {
-        address[key] = '';
-      }
-    });
 
     dispatch(updateUser({ user, id: userData._id, upload, deleteAvatar }));
     setShouldValidate(false);
@@ -80,8 +72,8 @@ const ProfilePage = () => {
     }
   }, [userLoading, userError, updated, setSnackBarMessage, t]);
 
-  const { errors, values, touched, handleBlur, resetForm, handleSubmit, handleChange } = useFormik({
-    initialValues,
+  const { errors, isValid, values, dirty, handleBlur, handleSubmit, handleChange } = useFormik({
+    initialValues: initialValues(userData),
     onSubmit: handleSaveUser,
     validationSchema,
     validateOnChange: shouldValidate,
@@ -97,22 +89,10 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    if (userData) {
-      const { firstName, lastName, email, phoneNumber, address } = userData;
-      resetForm({
-        values: {
-          firstName,
-          lastName,
-          email,
-          phoneNumber: phoneNumber.slice(3),
-          ...address
-        }
-      });
-    }
     if (userData.images && userData.images.thumbnail) {
       setUserImageUrl(IMG_URL + userData.images.thumbnail);
     }
-  }, [userData, resetForm]);
+  }, [userData]);
 
   const getTextFields = useCallback(
     (textFields) =>
@@ -123,25 +103,23 @@ const ProfilePage = () => {
           name={name}
           variant={TEXT_FIELD_VARIANT.OUTLINED}
           value={values[name]}
-          InputProps={
-            name === 'phoneNumber'
-              ? {
-                maxLength: 10,
-                startAdornment: <InputAdornment position='start'>+38</InputAdornment>
-              }
-              : {}
-          }
+          InputProps={{
+            startAdornment: name === 'phoneNumber' && (
+              <InputAdornment position='start'>+38</InputAdornment>
+            )
+          }}
           label={t(`profilePage.labels.${name}`)}
           fullWidth
           color={MATERIAL_UI_COLOR.PRIMARY}
           onChange={handleChange}
-          error={touched[name] && !!errors[name]}
+          onBlur={handleBlur}
+          error={!!errors[name]}
           helperText={t(errors[name]) || ' '}
           className={handleClassName(classes.dataInput, classes.nameInputs, name)}
           disabled={name === 'email'}
         />
       )),
-    [classes, errors, handleChange, t, touched, values]
+    [classes, errors, handleChange, t, values]
   );
 
   const emailSent = useCallback(
@@ -188,8 +166,8 @@ const ProfilePage = () => {
         name='confirmEmail'
         onChange={handleChange}
         onBlur={handleBlur}
-        error={Boolean(touched.confirmEmail && t(errors.confirmEmail))}
-        helperText={touched.confirmEmail && t(errors.confirmEmail)}
+        error={t(errors.confirmEmail)}
+        helperText={t(errors.confirmEmail)}
       />
       <span className={classes.userActionsText}>
         {!confirmationEmailSent && t('profilePage.emailConfirm.text')}
@@ -232,6 +210,7 @@ const ProfilePage = () => {
                 loading={userLoading}
                 onclick={() => setShouldValidate(true)}
                 data-testid='submitBtn'
+                disabled={!dirty || !isValid}
               >
                 {t('profilePage.labels.saveBtnTitle')}
               </AuthButton>

@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { ThemeProvider } from '@material-ui/core';
+import { wait } from '@testing-library/user-event/dist/utils';
 import ProfilePage from '../../../../pages/profile-page/profile-page';
 import { mockedUserData } from './profile-page.variables';
 import { theme } from '../../../../components/app/app-theme/app.theme';
@@ -109,7 +110,7 @@ describe('<Profile-page /> component tests', () => {
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
-  it('should handle submit', () => {
+  it('should handle submit', async () => {
     useSelector.mockImplementation(() => ({
       userData: mockedUserData,
       userLoading: false
@@ -121,8 +122,11 @@ describe('<Profile-page /> component tests', () => {
         </ThemeProvider>
       </SnackBarContextProvider>
     );
+
     const submitBtn = getByTestId('submitBtn');
     fireEvent.click(submitBtn);
-    expect(mockSubmit).toHaveBeenCalledTimes(1);
+    await wait(() => {
+      expect(mockSubmit).toHaveBeenCalledTimes(1);
+    });
   });
 });

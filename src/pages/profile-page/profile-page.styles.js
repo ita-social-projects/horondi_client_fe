@@ -60,13 +60,9 @@ export const useStyles = makeStyles(({ palette }) => ({
   dataInput: {
     gridColumn: 'span 3',
     position: 'relative',
-    '& label.Mui-focused': {
-      color: palette.textColor
-    },
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: palette.textColor
-    },
-    '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': { marginRight: '4px' }
+    '& .MuiInputAdornment-positionStart': {
+      marginRight: '4px'
+    }
   },
   nameInputs: {
     gridColumn: 'span 2',
@@ -120,10 +116,5 @@ export const useStyles = makeStyles(({ palette }) => ({
   openedLetterIcon: {
     fontSize: '52px',
     marginBottom: '16px'
-  },
-  error: {
-    color: '#e60000',
-    marginLeft: '3%',
-    gridColumn: 'span 2'
   }
 }));

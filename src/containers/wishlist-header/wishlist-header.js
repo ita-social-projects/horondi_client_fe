@@ -10,8 +10,8 @@ import { useWishlist } from '../../hooks/use-wishlist';
 
 const { pathToWishlist } = routes;
 
-const WishlistHeader = () => {
-  const styles = useStyles();
+const WishlistHeader = ({ fromSideBar }) => {
+  const styles = useStyles({ fromSideBar });
   const { wishlist } = useWishlist();
 
   return (
@@ -19,7 +19,7 @@ const WishlistHeader = () => {
       <Link to={pathToWishlist}>
         <IconButton className={styles.root} aria-label={WISHLIST_KEY} tabIndex={-1} disableRipple>
           <Badge badgeContent={wishlist.length} color='secondary'>
-            <FavoriteBorderOutlined className={styles.svg} />
+            <FavoriteBorderOutlined />
           </Badge>
         </IconButton>
       </Link>

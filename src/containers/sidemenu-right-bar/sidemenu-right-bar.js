@@ -11,30 +11,30 @@ const SidemenuRightBar = ({ fromSideBar, setIsMenuOpen }) => {
   const styles = useStyles({ fromSideBar });
   return (
     <div className={styles.flexColumn}>
-      <div className={styles.root}>
+      <div className={styles.topIcons}>
         <div
-          className={`${styles.wishlist} ${styles.iconItem}`}
+          className={`${styles.wishListAndCartIcon} ${styles.iconItem}`}
           onClick={() => setIsMenuOpen(false)}
           data-testid='wishlist-icon'
         >
-          <WishlistHeader />
+          <WishlistHeader fromSideBar />
         </div>
         <div
-          className={`${styles.cartHeader} ${styles.iconItem}`}
+          className={`${styles.wishListAndCartIcon} ${styles.iconItem}`}
           onClick={() => setIsMenuOpen(false)}
           data-testid='cart-icon'
         >
           <CartHeader fromSideBar />
         </div>
       </div>
-      <div className={styles.root}>
-        <div className={`${styles.togglItem} ${styles.iconItem}`}>
+      <div className={styles.bottomIcons}>
+        <div className={styles.iconItem}>
           <Language fromSideBar />
         </div>
-        <div className={`${styles.togglItem} ${styles.iconItem}`}>
+        <div className={styles.iconItem}>
           <Currency fromSideBar />
         </div>
-        <div className={`${styles.togglItem} ${styles.iconItem}`}>
+        <div className={styles.iconItem}>
           <ThemeComponent fromSideBar />
         </div>
       </div>

@@ -1,11 +1,11 @@
-import React, { useMemo, useState, useLayoutEffect, useContext } from 'react';
+import React, { useMemo, useState, useLayoutEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { useTheme } from '@material-ui/styles';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import SideBarItem from './sidebar-item';
@@ -16,7 +16,6 @@ import SidemenuRightBar from '../sidemenu-right-bar';
 import routes from '../../configs/routes';
 import { getCategoriesForBurgerMenu } from './operations/burger-menu.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
-import ThemeContext from '../../context/theme-context';
 import CertificateIcon from './CertificateIcon';
 import { getAllConstructors } from '../../pages/images-constructor/operations/getAllConstructors.queries';
 
@@ -24,10 +23,10 @@ const { pathToConstructor, pathToGiftСertificate } = routes;
 
 const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
   const styles = useStyles({ fromSideBar });
+  const { palette } = useTheme();
   const [sticky, setSticky] = useState(false);
   const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
-  const isLightTheme = useContext(ThemeContext);
   const [isConstructor, setIsConstructor] = useState(false);
 
   const sidebar = clsx({
@@ -154,7 +153,7 @@ const Sidebar = ({ setIsMenuOpen, isMenuOpen, fromSideBar }) => {
           fromSideBar
           socialIconsStyles={styles.socialIconsStyles}
           position='flex-start'
-          color={isLightTheme ? '#000000' : '#FFFFFF'}
+          color={palette.textColor}
           setIsMenuOpen={setIsMenuOpen}
         />
       </div>

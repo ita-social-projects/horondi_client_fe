@@ -119,7 +119,7 @@ const ProfilePage = () => {
           disabled={name === 'email'}
         />
       )),
-    [classes, errors, handleChange, t, values]
+    [classes, errors, handleChange, handleBlur, t, values]
   );
 
   const emailSent = useCallback(
@@ -166,7 +166,7 @@ const ProfilePage = () => {
         name='confirmEmail'
         onChange={handleChange}
         onBlur={handleBlur}
-        error={t(errors.confirmEmail)}
+        error={!!errors.confirmEmail}
         helperText={t(errors.confirmEmail)}
       />
       <span className={classes.userActionsText}>

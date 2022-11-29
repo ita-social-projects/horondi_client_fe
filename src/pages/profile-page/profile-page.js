@@ -53,7 +53,7 @@ const ProfilePage = () => {
       firstName,
       lastName,
       email,
-      phoneNumber: `+38${phoneNumber}`,
+      phoneNumber,
       address,
       configs: { ...userData.configs, language: i18n.language }
     };

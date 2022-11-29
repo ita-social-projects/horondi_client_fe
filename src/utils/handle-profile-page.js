@@ -8,7 +8,7 @@ export const initialValues = (userData) => {
     firstName: firstName || '',
     lastName: lastName || '',
     email: email || '',
-    phoneNumber: phoneNumber.slice(3) || '',
+    phoneNumber: phoneNumber || '',
     country: address.country || '',
     region: address.region || '',
     district: address.district || '',

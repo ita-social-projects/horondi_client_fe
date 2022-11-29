@@ -48,7 +48,8 @@ const useProductFilters = (filterParams, filtersList) => {
     });
 
     setFiltersData(data);
-  }, [filtersList, filterParams, language, queriesNames, t, handleFilterChange]);
+    // eslint-disable-next-line
+  }, [filtersList, filterParams, language, queriesNames]);
 
   return filtersData;
 };

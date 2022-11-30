@@ -59,14 +59,14 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
   );
 
   const { price } = sizeAndPrice;
-  const { category } = orderItem || {};
+  const { category, _id: orderItemId } = orderItem || {};
   const productImage = isFromConstructor ? null : orderItem?.images.primary.thumbnail;
 
   useEffect(() => {
-    if (category) {
+    if (orderItemId) {
       setProductPrices((prevState) => [...prevState, { price, category }]);
     }
-  }, [setProductPrices, price, category]);
+  }, [setProductPrices, price, category, orderItemId]);
 
   useEffect(() => {
     productImage && checkImage(productImage, isLightTheme);

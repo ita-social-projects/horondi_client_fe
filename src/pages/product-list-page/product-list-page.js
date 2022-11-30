@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
 import { Typography } from '@material-ui/core';
@@ -24,7 +24,7 @@ import { BackpackIcon } from '../../images/backpack-icon';
 
 const ProductListPage = ({ width }) => {
   const { search } = useLocation();
-  const [searchParams, setSearchParams] = useState(new URLSearchParams(search));
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
   const sortParamsFromQuery = searchParams.get(URL_QUERIES_NAME.sort);
   const nameFilter = searchParams.get(URL_QUERIES_NAME.nameFilter);
   const { t } = useTranslation();
@@ -64,10 +64,6 @@ const ProductListPage = ({ width }) => {
   const { data, loading, error } = useQuery(getFilteredProductsQuery, {
     variables
   });
-
-  useEffect(() => {
-    setSearchParams(new URLSearchParams(search));
-  }, [search]);
 
   useEffect(() => {
     setSortParams(() => getSortParamsFromQuery(sortParamsFromQuery));

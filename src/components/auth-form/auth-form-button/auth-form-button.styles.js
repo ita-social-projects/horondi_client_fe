@@ -14,7 +14,8 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.button.hover.backgroundColor
     },
     '&:disabled': {
-      color: theme.palette.button.disabled.backgroundColor
+      backgroundColor: theme.palette.button.disabled.backgroundColor,
+      color: theme.palette.button.disabled.color
     }
   }
 }));

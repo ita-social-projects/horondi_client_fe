@@ -44,6 +44,7 @@ const CertificateCheckbox = ({
         {checked ? (
           <div data-testid='number-input'>
             <NumberInput
+              focused
               quantity={count}
               onChangeQuantity={handleCountChange}
               setInputValue={setCount}

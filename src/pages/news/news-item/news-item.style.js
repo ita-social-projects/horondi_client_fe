@@ -45,13 +45,15 @@ export const useStyles = makeStyles(() => ({
   },
   newsItemContent: {
     padding: '0px',
-    height: '270px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    '@media (min-width: 753px)': {
+      height: '270px'
+    }
   },
   ArticleTitleContainer: {
     padding: '0px',
-    '@media (min-width: 768px)': {
-      height: '100px'
+    '@media (min-width: 753px)': {
+      height: '80px'
     }
   },
   ArticleTitle: {

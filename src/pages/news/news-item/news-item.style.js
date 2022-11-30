@@ -46,7 +46,6 @@ export const useStyles = makeStyles(() => ({
   newsItemContent: {
     padding: '0px',
     overflow: 'hidden',
-    paddingButtom: '50px',
     '@media (min-width: 753px)': {
       height: '270px'
     }

@@ -23,11 +23,7 @@ const totalWrapper = {
   alignItems: 'center',
   fontWeight: '600',
   fontSize: '20px',
-  lineHeight: '28px',
-  letterSpacing: '0.0015em',
-  '@media (max-width: 850px)': {
-    marginTop: '20px'
-  }
+  lineHeight: '28px'
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
@@ -78,7 +74,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   ordersButton: {
     ...button,
     width: '100%',
-    padding: '16px',
+    padding: '16px 42px',
     background: palette.button.normal.backgroundColor,
     color: palette.button.normal.color,
     marginBottom: '20px',
@@ -135,7 +131,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
-    gap: '90px',
     '& svg': {
       marginRight: '5px',
       fontSize: '20px'

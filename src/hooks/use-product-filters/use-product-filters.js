@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -8,12 +8,10 @@ const useProductFilters = (filterParams, filtersList) => {
   const { search } = useLocation();
   const { t, i18n } = useTranslation();
   const history = useHistory();
-  const [filtersData, setFiltersData] = useState({});
   const { page, defaultPage, categoryFilter, modelsFilter, patternsFilter } = URL_QUERIES_NAME;
 
-  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
-
   const language = i18n.language === 'ua' ? 0 : 1;
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
   const queriesNames = useMemo(
     () => [categoryFilter, modelsFilter, patternsFilter],
     [categoryFilter, modelsFilter, patternsFilter]
@@ -34,7 +32,7 @@ const useProductFilters = (filterParams, filtersList) => {
     [defaultPage, history, language, page, searchParams]
   );
 
-  useEffect(() => {
+  const filtersData = useMemo(() => {
     const data = {};
 
     Object.keys(filtersList).forEach((key, index) => {
@@ -47,9 +45,8 @@ const useProductFilters = (filterParams, filtersList) => {
       };
     });
 
-    setFiltersData(data);
-    // eslint-disable-next-line
-  }, [filtersList, filterParams, language, queriesNames]);
+    return data;
+  }, [filterParams, filtersList, handleFilterChange, language, queriesNames, t]);
 
   return filtersData;
 };

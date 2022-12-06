@@ -5,7 +5,8 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '@media (max-width: 500px)': {
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
+      marginTop: '16px'
     }
   },
   form: {
@@ -37,7 +38,10 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.textColor
       },
       '& label': {
-        transform: 'translate(15px, 20px) scale(1)'
+        '@media (max-width: 450px)': {
+          transform: 'none',
+          padding: '8px'
+        }
       },
       '& div > input': {
         padding: '13px 16px',
@@ -76,9 +80,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: '16px 0 24px 16px',
     textTransform: 'none',
     textAlign: 'center',
-    fontSize: '14px',
-    fontFamily: 'Open sans',
-    fontWeight: '600',
+    fontSize: theme.typography.body1.fontSize,
+    fontWeight: theme.typography.body1.fontWeight,
     backgroundColor: theme.palette.button.normal.backgroundColor,
     color: theme.palette.button.normal.color,
     '&:hover': {

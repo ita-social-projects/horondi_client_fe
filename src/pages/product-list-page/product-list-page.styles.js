@@ -57,7 +57,7 @@ export const useStyles = makeStyles((theme) => ({
           margin: '0 5px'
         },
         '& button.Mui-selected': {
-          backgroundColor: theme.palette.lightGray,
+          backgroundColor: theme.palette.gray,
           border: theme.palette.type === 'light' ? '1px solid #000000' : '1px solid #FEFEFE'
         }
       }

@@ -97,6 +97,8 @@ export const URL_QUERIES_NAME = {
   defaultPage: '1'
 };
 
+export const FILTER_NAMES = ['category', 'models', 'patterns'];
+
 export const TEXT_VALUE = 'text';
 
 export const MATERIAL_UI_COLOR = {

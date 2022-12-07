@@ -182,6 +182,8 @@ const ProfilePage = () => {
     </>
   );
 
+  const buttonDisabled = !(dirty && isValid) && !upload && !deleteAvatar;
+
   return (
     <div className={appStyles.rootApp}>
       <div className={appStyles.containerApp}>
@@ -210,7 +212,7 @@ const ProfilePage = () => {
                 loading={userLoading}
                 onclick={() => setShouldValidate(true)}
                 data-testid='submitBtn'
-                disabled={!dirty || !isValid}
+                disabled={buttonDisabled}
               >
                 {t('profilePage.labels.saveBtnTitle')}
               </AuthButton>

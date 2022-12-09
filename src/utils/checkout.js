@@ -226,19 +226,19 @@ export const courierInputLabels = () => [
 export const userContactInputLabels = () => [
   {
     name: 'firstName',
-    label: i18next.t(`checkout.checkoutTextFields.firstName`)
+    label: 'checkout.checkoutTextFields.firstName'
   },
   {
     name: 'lastName',
-    label: i18next.t(`checkout.checkoutTextFields.lastName`)
+    label: 'checkout.checkoutTextFields.lastName'
   },
   {
     name: 'email',
-    label: i18next.t(`checkout.checkoutTextFields.email`)
+    label: 'checkout.checkoutTextFields.email'
   },
   {
     name: 'phoneNumber',
-    label: i18next.t(`checkout.checkoutTextFields.contactPhoneNumber`)
+    label: 'checkout.checkoutTextFields.contactPhoneNumber'
   }
 ];
 

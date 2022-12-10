@@ -36,7 +36,7 @@ const SearchBarListItem = ({ product }) => {
       <div data-testid='image' className={styles.image} style={{ backgroundSize: 'cover' }} />
       <div className={styles.content}>
         <div className={styles.title}>
-          <Typography variant='h4'>{t(`${product.translationsKey}.name`)}</Typography>
+          <Typography variant='h6'>{t(`${product.translationsKey}.name`)}</Typography>
           <div>
             {Math.min(...product.sizes.map((size) => getPriceWithCurrency(size.price)))} {currency}
           </div>

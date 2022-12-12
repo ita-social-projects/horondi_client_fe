@@ -3,21 +3,16 @@ import BG from '../../images/9.jpg';
 
 export const useStyles = makeStyles(() => ({
   thanksBackground: {
-    background: `url(${BG}) no-repeat `,
+    background: `url(${BG}) no-repeat center center fixed`,
     backgroundSize: 'cover',
-    height: '1000px',
-    position: 'relative'
-  },
-  thanksContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%'
+    height: '100vh',
+    '@media (min-height: 900px)': {
+      height: '80vh'
+    }
   },
   thanksInfo: {
-    width: '100%',
+    height: '100%',
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    justifyContent: 'center'
   }
 }));

@@ -14,10 +14,8 @@ const CertificateThanksPage = () => {
 
   return (
     <div className={styles.thanksBackground}>
-      <div className={styles.thanksContainer}>
-        <div className={styles.thanksInfo}>
-          {data.length > 2 && <CertificateThanksCard name={name} email={email} value={value} />}
-        </div>
+      <div className={styles.thanksInfo}>
+        {data.length > 2 && <CertificateThanksCard name={name} email={email} value={value} />}
       </div>
     </div>
   );

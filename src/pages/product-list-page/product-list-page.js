@@ -78,6 +78,7 @@ const ProductListPage = ({ width }) => {
   const changeHandler = (_e, value) => {
     searchParams.set(URL_QUERIES_NAME.page, value);
     history.push(`?${searchParams.toString()}`);
+    window.scrollTo(0, 0);
   };
 
   const handleFilterShow = () => setFilterMenuStatus((prevState) => !prevState);

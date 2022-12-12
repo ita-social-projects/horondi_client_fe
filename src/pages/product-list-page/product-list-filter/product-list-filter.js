@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +27,7 @@ const ProductListFilter = ({ filterParams }) => {
   const filtersOptions = useProductFilters(filterParams, filters);
   const [resetPrices, setResetPrices] = useState(false);
 
-  const searchParams = new URLSearchParams(search);
+  const searchParams = useMemo(() => new URLSearchParams(search), [search]);
 
   const { error, loading } = useQuery(getAllFiltersQuery, {
     onCompleted: (data) => {

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextField } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { useStyles } from './recovery.styles';
@@ -8,6 +7,7 @@ import { recoverUser, setUserError, userHasRecovered } from '../../redux/user/us
 import { AuthWrapper, AuthButton, AuthHeading } from '../../components/auth-form';
 import { handleHelperText } from '../../utils/handle-recovery-page';
 import { validationSchema } from '../../validators/email';
+import AppTextField from '../../components/app-text-field';
 
 const Recovery = () => {
   const styles = useStyles();
@@ -42,8 +42,8 @@ const Recovery = () => {
 
   const successWindow = (
     <div>
-      <h2 className={styles.heading}>{t('recovery.successTitle')}</h2>
-      <p className={styles.successText}>{t('recovery.successText')}</p>
+      <h2>{t('recovery.successTitle')}</h2>
+      <p>{t('recovery.successText')}</p>
     </div>
   );
 
@@ -52,22 +52,22 @@ const Recovery = () => {
 
   return (
     <AuthWrapper>
-      {(userRecovered && successWindow) || (
+      {userRecovered ? (
+        successWindow
+      ) : (
         <form onSubmit={handleSubmit}>
           <AuthHeading>{t('recovery.recoveryTitle')}</AuthHeading>
-          <TextField
+          <AppTextField
             name='email'
             type='text'
             label={t('recovery.recoveryEmail')}
-            className={`${styles.emailInput}`}
             variant='outlined'
             fullWidth
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
             value={values.email}
-            error={!!errorMsg}
-            helperText={errorMsg || ' '}
+            errorMsg={errorMsg}
           />
           <p className={styles.recoveryText}>{t('recovery.recoveryText')}</p>
           <AuthButton loading={recoveryLoading}>{t('recovery.recoveryButtonText')}</AuthButton>

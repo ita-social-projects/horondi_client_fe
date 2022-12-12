@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Field, useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 import { FormControlLabel } from '@material-ui/core';
 import RegisterForm from '../../../../pages/register/register-from/register-form';
+import AppTextField from '../../../../components/app-text-field';
 
 jest.mock('../../../../pages/register/register-from/register-form.styles', () => ({
   useStyles: () => ({})
@@ -15,7 +16,13 @@ jest.mock('formik');
 
 const dispatch = jest.fn();
 const props = {
+  formOperations: {
+    handleSubmit: jest.fn(),
+    handleChange: jest.fn(),
+    handleBlur: jest.fn()
+  },
   loading: false,
+  touched: {},
   values: {
     email: '',
     firstName: '',
@@ -25,8 +32,7 @@ const props = {
   errors: {},
   showPassword: true,
   setShowPassword: jest.fn(),
-  registerError: null,
-  setShouldValidate: jest.fn()
+  registerError: null
 };
 const formik = {
   initialValues: {
@@ -47,7 +53,7 @@ useDispatch.mockImplementation(() => dispatch);
 describe('RegisterForm tests', () => {
   it('should render all fields of Register Form', () => {
     const wrapper = shallow(<RegisterForm {...props} />);
-    expect(wrapper.find(Field).length).toEqual(4);
+    expect(wrapper.find(AppTextField).length).toEqual(4);
   });
 
   it('should set checkbox checked', () => {

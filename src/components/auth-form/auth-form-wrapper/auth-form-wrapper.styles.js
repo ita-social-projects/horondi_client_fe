@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     position: 'relative',
     padding: '50px 0',
-    '@media (max-width: 525px)': {
+    '@media (max-width: 620px)': {
       background: 'none',
       padding: 0
     }
@@ -20,14 +20,17 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'hidden'
   },
   innerForm: {
-    padding: '50px 118px',
-    maxWidth: '685px',
-    background: theme.palette.backgroundColor
-  },
-  minimumWidth: {
-    minWidth: '400px',
-    '@media (max-width: 600px)': {
-      minWidth: '280px'
+    padding: '50px 106px',
+    maxWidth: '620px',
+    background: theme.palette.backgroundColor,
+    '@media (max-width: 620px)': {
+      maxWidth: '100%'
+    },
+    '@media (max-width: 550px)': {
+      padding: '50px 72px'
+    },
+    '@media (max-width: 450px)': {
+      padding: '50px 32px'
     }
   }
 }));

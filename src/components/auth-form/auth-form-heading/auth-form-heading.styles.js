@@ -9,6 +9,9 @@ export const useStyles = makeStyles((theme) => ({
     letterSpacing: theme.typography.h2.letterSpacing,
     lineHeight: theme.typography.h2.lineHeight,
     textAlign: 'center',
-    margin: '0 0 25px'
+    margin: '0 0 25px',
+    '@media (max-width: 550px)': {
+      fontSize: theme.typography.h2.fontSize
+    }
   }
 }));

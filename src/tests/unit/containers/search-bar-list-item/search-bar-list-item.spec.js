@@ -57,8 +57,8 @@ describe('test SearchBarListItem component', () => {
     ({ container } = render(<SearchBarListItem product={product} />));
   });
 
-  it('Component should render appropriate `h4`', () => {
-    const el = container.querySelector('h4');
+  it('Component should render appropriate `h6`', () => {
+    const el = container.querySelector('h6');
     expect(el.textContent).toBe(etalonString);
   });
 

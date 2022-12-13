@@ -50,16 +50,15 @@ jest.mock('../../../../hooks/use-currency', () => ({
 }));
 
 describe('test SearchBarListItem component', () => {
-  const etalonString = 'test';
   let container;
 
   beforeEach(() => {
     ({ container } = render(<SearchBarListItem product={product} />));
   });
 
-  it('Component should render appropriate `h6`', () => {
-    const el = container.querySelector('h6');
-    expect(el.textContent).toBe(etalonString);
+  it('Component should render title `h6`', () => {
+    const el = screen.getByTestId('title');
+    expect(el).toBeInTheDocument();
   });
 
   it('after click on button component should call dispatch', () => {

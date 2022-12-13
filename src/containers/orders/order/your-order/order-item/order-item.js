@@ -100,7 +100,7 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
               {t('product.productDescription.bottomMaterial')}: {bottomMaterialName}
             </div>
             <div>
-              {t('common.size')}:{sizeAndPrice.size.name}
+              {t('common.size')}: {sizeAndPrice.size.name}
             </div>
           </Typography>
         }
@@ -111,7 +111,6 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
             ? cartOperations.getProductPriceWithPromoCode(product.productId, promoCode)
             : getPriceWithCurrency(sizeAndPrice.price)}
         </div>
-        <div style={{ width: '3px' }} />
         <div className={styles.priceForItem}>{currencySign}</div>
       </Typography>
     </ListItem>

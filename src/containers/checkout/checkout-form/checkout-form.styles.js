@@ -221,7 +221,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   yourOrderList: {
     marginTop: '10px',
     position: 'static',
-    height: '136px',
+    height: '150px',
     width: '105%',
     overflowX: 'hidden',
     overflowY: 'scroll',
@@ -241,39 +241,24 @@ export const useStyles = makeStyles(({ palette }) => ({
     height: '56px',
     objectFit: 'cover',
     objectPosition: '55% 50%',
-    margin: '0px 0px 0px 10px'
+    marginLeft: '10px'
   },
   yourOrderListItem: {
     height: '50%'
   },
   listItemQuantity: {
-    marginBottom: '10px'
+    marginBottom: '7px'
   },
   yourOrderListItemDescriptionContainer: {
-    margin: '0px 0px 50px 10px'
+    maxWidth: '184px',
+    margin: '0px 0px 10px 10px'
   },
   yourOrderListItemDescriptionPrimary: {
-    top: '1px',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    letterSpacing: '0.001em'
+    fontSize: '14px'
   },
   yourOrderListItemDescriptionSecondary: {
-    position: 'absolute',
-    height: '32px',
-    width: 'max-content',
-    top: '23px',
-    fontStyle: 'normal',
+    marginTop: '5px',
     fontWeight: 'normal',
-    fontSize: '12px',
-    lineHeight: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    letterSpacing: '0.004em',
     opacity: '75%'
   },
   yourOrderListItemPrice: {
@@ -343,7 +328,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   priceForItem: {
     '& svg': {
       fontSize: '18px',
-      padding: '2px 5px 0px 0px'
+      paddingTop: '2px'
     }
   },
   deliveryTitle: {

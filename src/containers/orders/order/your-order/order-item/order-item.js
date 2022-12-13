@@ -87,7 +87,9 @@ const OrderItem = ({ product, setProductPrices, promoCode }) => {
 
   return (
     <ListItem className={styles.yourOrderListItem} key={orderItem?._id} alignItems='center'>
-      <Typography component='div'>x {product.quantity}</Typography>
+      <Typography className={styles.listItemQuantity} component='div'>
+        x {product.quantity}
+      </Typography>
       <div>{productImg}</div>
       <ListItemText
         className={styles.yourOrderListItemDescriptionContainer}

@@ -237,22 +237,20 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   yourOrderListImg: {
-    position: 'absolute',
     width: '56px',
     height: '56px',
     objectFit: 'cover',
     objectPosition: '55% 50%',
-    left: '25px',
-    top: '0px'
+    margin: '0px 0px 0px 10px'
   },
   yourOrderListItem: {
-    height: '56px'
+    height: '50%'
+  },
+  listItemQuantity: {
+    marginBottom: '10px'
   },
   yourOrderListItemDescriptionContainer: {
-    position: 'absolute',
-    height: '53px',
-    left: '93px',
-    top: '1px'
+    margin: '0px 0px 50px 10px'
   },
   yourOrderListItemDescriptionPrimary: {
     top: '1px',
@@ -279,19 +277,11 @@ export const useStyles = makeStyles(({ palette }) => ({
     opacity: '75%'
   },
   yourOrderListItemPrice: {
-    position: 'absolute',
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '28px',
-    height: '20px',
-    left: '295px',
-    top: '7px',
-    fontStyle: 'normal',
-    fontWeight: '600',
     fontSize: '14px',
     lineHeight: '20px',
-    textAlign: 'right',
-    letterSpacing: '0.001em'
+    margin: '0px 0px 40px'
   },
   yourOrderTotalPrice: {
     position: 'static',
@@ -351,11 +341,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   priceForItem: {
-    display: 'flex',
-    whiteSpace: 'nowrap',
     '& svg': {
       fontSize: '18px',
-      paddingTop: '2px'
+      padding: '2px 5px 0px 0px'
     }
   },
   deliveryTitle: {

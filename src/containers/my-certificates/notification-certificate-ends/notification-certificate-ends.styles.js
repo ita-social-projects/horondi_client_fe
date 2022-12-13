@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     fontWeight: '600',
     color: theme.palette.black,
+    textTransform: 'uppercase',
     fontSize: '16px',
     '@media (max-width: 870px)': {
       textAlign: 'center',

@@ -6,30 +6,31 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const TableBodyRow = ({ item, bodyColumns, rowActions, styles }) => {
   const bodyCells = bodyColumns.map(({ altText, style, calculatedCellValue }) => (
-    <TableCell key={calculatedCellValue(item)}>
+    <TableCell key={calculatedCellValue(item)} className={style}>
       {altText ? (
-        <img src={calculatedCellValue(item)} className={style(item)} alt={altText} />
+        <img src={calculatedCellValue(item)} className={style} alt={altText} />
       ) : (
-        <div className={style(item)}>{calculatedCellValue(item)}</div>
+        <div>{calculatedCellValue(item)}</div>
       )}
     </TableCell>
   ));
 
-  const actionCells = rowActions.map(({ id, title, func, style, icon }) => (
-    <Tooltip key={id} title={title(item)} placement='top'>
-      <button className={style(item)} onClick={() => func(item)}>
-        {icon}
-      </button>
-    </Tooltip>
-  ));
+  const actionCell = (
+    <TableCell className={rowActions.style}>
+      {rowActions.actions.map(({ id, title, func, style, icon }) => (
+        <Tooltip key={id} title={title(item)} placement='top'>
+          <button className={style} onClick={() => func(item)}>
+            {icon}
+          </button>
+        </Tooltip>
+      ))}
+    </TableCell>
+  );
 
   return (
-    <TableRow className={styles(item).tableRow}>
+    <TableRow className={styles(item, 'tableRow')}>
       {bodyCells}
-
-      <TableCell>
-        <div className={styles(item).actions}>{actionCells}</div>
-      </TableCell>
+      {actionCell}
     </TableRow>
   );
 };

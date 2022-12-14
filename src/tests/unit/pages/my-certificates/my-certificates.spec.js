@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, cleanup, fireEvent, waitForElement } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/styles';
 import MyCertificates from '../../../../pages/my-certificates/my-certificates';
 import {
   mockStore,
@@ -10,56 +11,25 @@ import {
   certificateMock3,
   certificateMock4
 } from './my-certificates.variables';
-
-jest.mock(
-  '../../../../containers/my-certificates/filled-certificates/filled-certificates.styles',
-  () => ({
-    useStyles: () => ({})
-  })
-);
-
-jest.mock(
-  '../../../../containers/my-certificates/empty-certificates/empty-certificates.styles',
-  () => ({
-    useStyles: () => ({})
-  })
-);
-
-jest.mock(
-  '../../../../containers/my-certificates/certificate-table/certificate-table.styles.js',
-  () => ({
-    useActiveStyles: () => ({}),
-    useExpiringStyles: () => ({}),
-    useNotActiveStyles: () => ({})
-  })
-);
-
-jest.mock('../../../../components/table/table.styles', () => ({
-  useStyles: () => ({})
-}));
-
-jest.mock('@material-ui/styles', () => ({
-  ...jest.requireActual('@material-ui/styles'),
-  useTheme: () => ({
-    palette: {
-      type: 'light'
-    }
-  })
-}));
+import { theme } from '../../../../components/app/app-theme/app.theme';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useSelector: () => mockStore
 }));
 
+const themeValue = theme('light');
+
 describe('MyCertificates test', () => {
   it('should render two certificates', async () => {
     render(
-      <MockedProvider mocks={[certificateMock1]} addTypename={false}>
-        <Router>
-          <MyCertificates />
-        </Router>
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={[certificateMock1]} addTypename={false}>
+          <Router>
+            <MyCertificates />
+          </Router>
+        </MockedProvider>
+      </ThemeProvider>
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
@@ -69,11 +39,13 @@ describe('MyCertificates test', () => {
   });
   it('should render title', async () => {
     render(
-      <MockedProvider mocks={[certificateMock2]} addTypename={false}>
-        <Router>
-          <MyCertificates />
-        </Router>
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={[certificateMock2]} addTypename={false}>
+          <Router>
+            <MyCertificates />
+          </Router>
+        </MockedProvider>
+      </ThemeProvider>
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
@@ -84,11 +56,13 @@ describe('MyCertificates test', () => {
   });
   it('should change page', async () => {
     render(
-      <MockedProvider mocks={[certificateMock3]} addTypename={false}>
-        <Router>
-          <MyCertificates />
-        </Router>
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={[certificateMock3]} addTypename={false}>
+          <Router>
+            <MyCertificates />
+          </Router>
+        </MockedProvider>
+      </ThemeProvider>
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));
@@ -101,11 +75,13 @@ describe('MyCertificates test', () => {
   });
   it('should change page when items array are empty', async () => {
     render(
-      <MockedProvider mocks={[certificateMock4]} addTypename={false}>
-        <Router>
-          <MyCertificates />
-        </Router>
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={[certificateMock4]} addTypename={false}>
+          <Router>
+            <MyCertificates />
+          </Router>
+        </MockedProvider>
+      </ThemeProvider>
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));

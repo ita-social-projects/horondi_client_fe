@@ -1,33 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { screen, render } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/styles';
 import { mockedCertificateItems } from './filled-certificates.variables';
 import FilledCertificates from '../../../../../containers/my-certificates/filled-certificates/filled-certificates';
 import Modal from '../../../../../components/modal/modal';
-
-jest.mock(
-  '../../../../../containers/my-certificates/filled-certificates/filled-certificates.styles.js',
-  () => ({
-    useStyles: () => ({})
-  })
-);
-
-jest.mock(
-  '../../../../../containers/my-certificates/certificate-table/certificate-table.styles.js',
-  () => ({
-    useActiveStyles: () => ({}),
-    useExpiringStyles: () => ({}),
-    useNotActiveStyles: () => ({})
-  })
-);
-
-jest.mock('../../../../../components/table/table.styles', () => ({
-  useStyles: () => ({})
-}));
-
-jest.mock('../../../../../components/modal/modal.styles.js', () => ({
-  useStyles: () => ({})
-}));
+import { theme } from '../../../../../components/app/app-theme/app.theme';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -42,25 +20,18 @@ jest.mock('react-redux', () => ({
     userData: { certificateExpires: '2022-10-16T05:00:00.000Z' }
   })
 }));
-
-jest.mock('@material-ui/styles', () => ({
-  ...jest.requireActual('@material-ui/styles'),
-  useTheme: () => ({
-    palette: {
-      type: 'light'
-    }
-  })
-}));
-
 const props = { ...mockedCertificateItems };
+const themeValue = theme('light');
 
 describe('FilledCertificates component test', () => {
   it('should render FilledCertificate component', () => {
     const wrapper = render(
-      <Router>
-        <FilledCertificates {...props} />
-        <Modal />
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <Router>
+          <FilledCertificates {...props} />
+          <Modal />
+        </Router>
+      </ThemeProvider>
     );
 
     expect(wrapper).toBeDefined();
@@ -68,10 +39,12 @@ describe('FilledCertificates component test', () => {
 
   it('should render a buy button', () => {
     render(
-      <Router>
-        <FilledCertificates {...props} />
-        <Modal />
-      </Router>
+      <ThemeProvider theme={themeValue}>
+        <Router>
+          <FilledCertificates {...props} />
+          <Modal />
+        </Router>
+      </ThemeProvider>
     );
 
     const buyButton = screen.getByText(/certificate.buy/i);

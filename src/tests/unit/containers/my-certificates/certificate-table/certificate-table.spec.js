@@ -1,20 +1,9 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/styles';
 import { mockedCertificates } from './certificate-table.variables';
 import CertificateTable from '../../../../../containers/my-certificates/certificate-table/certificate-table';
-
-jest.mock(
-  '../../../../../containers/my-certificates/certificate-table/certificate-table.styles.js',
-  () => ({
-    useActiveStyles: () => ({}),
-    useExpiringStyles: () => ({}),
-    useNotActiveStyles: () => ({})
-  })
-);
-
-jest.mock('../../../../../components/table/table.styles', () => ({
-  useStyles: () => ({})
-}));
+import { theme } from '../../../../../components/app/app-theme/app.theme';
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -30,9 +19,15 @@ jest.mock('react-redux', () => ({
   })
 }));
 
+const themeValue = theme('light');
+
 describe('CertificateTable component', () => {
   beforeEach(() => {
-    render(<CertificateTable {...mockedCertificates} />);
+    render(
+      <ThemeProvider theme={themeValue}>
+        <CertificateTable {...mockedCertificates} />
+      </ThemeProvider>
+    );
   });
 
   it('should render a table title', () => {

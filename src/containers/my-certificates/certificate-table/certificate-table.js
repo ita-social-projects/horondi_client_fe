@@ -7,26 +7,24 @@ import Toast from '../../toast';
 import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
 import CertificateCodeGift from '../../../images/certificates/certificateCodeGift';
 import CertificateImages from '../../../images/certificates/CertificateImages';
-import { useActiveStyles, useExpiringStyles, useNotActiveStyles } from './certificate-table.styles';
+import { useStyles } from './certificate-table.styles';
 import { ROW_FIELDS } from '../../../configs/index';
 
 const CertificateTable = ({ items, openModal }) => {
   const { t } = useTranslation();
   const [isOpenedSnackbar, setIsOpenedSnackbar] = useState(false);
-  const activeStyles = useActiveStyles();
-  const expiringStyles = useExpiringStyles();
-  const notActiveStyles = useNotActiveStyles();
+  const styles = useStyles();
 
   const { expireDate } = useSelector(({ User }) => ({
     expireDate: User.userData.certificateExpires
   }));
 
-  const dateHandler = (date) => date.slice(0, 10).split('-').reverse().join('/');
+  const dateHandler = (date) => new Date(date).toLocaleDateString('uk-UA').replace(/\./g, '/');
 
-  const getStyles = (item) => {
-    if (item.dateEnd === expireDate) return expiringStyles;
-    if (item.isActivated) return activeStyles;
-    return notActiveStyles;
+  const getStyles = (item, className) => {
+    if (item.dateEnd === expireDate) return `${styles[className]} ${styles.expires}`;
+    if (item.isActivated) return styles[className];
+    return `${styles[className]} ${styles.notActive}`;
   };
 
   const onCopyIconClick = (item) => {
@@ -41,51 +39,54 @@ const CertificateTable = ({ items, openModal }) => {
     return t(`certificate.active`);
   };
 
-  const rowActions = [
-    {
-      id: 1,
-      title: (item) => (item.isActivated ? t('certificate.copy') : ''),
-      func: (item) => item.isActivated && onCopyIconClick(item),
-      style: (item) => getStyles(item).iconBtn,
-      icon: <CertificateCodeCopy />
-    },
-    {
-      id: 2,
-      title: (item) => (item.isActivated ? t('certificate.gift') : ''),
-      func: (item) => item.isActivated && openModal(item),
-      style: (item) => getStyles(item).iconBtn,
-      icon: <CertificateCodeGift />
-    }
-  ];
+  const rowActions = {
+    style: styles.actionItems,
+    actions: [
+      {
+        id: 1,
+        title: (item) => (item.isActivated ? t('certificate.copy') : ''),
+        func: (item) => item.isActivated && onCopyIconClick(item),
+        style: styles.iconBtn,
+        icon: <CertificateCodeCopy />
+      },
+      {
+        id: 2,
+        title: (item) => (item.isActivated ? t('certificate.gift') : ''),
+        func: (item) => item.isActivated && openModal(item),
+        style: styles.iconBtn,
+        icon: <CertificateCodeGift />
+      }
+    ]
+  };
 
   const bodyColumns = [
     {
       altText: 'certificate',
-      style: (item) => getStyles(item).image,
+      style: styles.image,
       calculatedCellValue: (item) => CertificateImages[`image${item.value}`]
     },
     {
-      style: (item) => getStyles(item).code,
+      style: styles.code,
       calculatedCellValue: (item) => `${item.name}`
     },
     {
-      style: (item) => getStyles(item).price,
+      style: styles.price,
       calculatedCellValue: (item) => `${item.value} ${t('certificate.currency')}`
     },
     {
-      style: (item) => getStyles(item).date,
+      style: styles.date,
       calculatedCellValue: (item) => `${dateHandler(item.dateStart)} - ${dateHandler(item.dateEnd)}`
     },
     {
-      style: (item) => getStyles(item).status,
+      style: styles.status,
       calculatedCellValue: (item) => checkStatus(item)
     }
   ];
 
   return (
-    <div className={activeStyles.root}>
-      <h2 className={activeStyles.titleWrapper}>{t('certificate.title')}</h2>
-      <div className={activeStyles.table}>
+    <div className={styles.root}>
+      <h2 className={styles.titleWrapper}>{t('certificate.title')}</h2>
+      <div className={styles.table}>
         <TableComponent
           items={items}
           headerColumns={ROW_FIELDS.CERTIFICATE}

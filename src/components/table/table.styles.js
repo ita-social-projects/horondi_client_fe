@@ -13,7 +13,8 @@ export const useStyles = makeStyles(({ palette }) => ({
       textAlign: 'left'
     },
     '& >th:last-child': {
-      paddingLeft: '40px'
-    }
+      textAlign: 'center'
+    },
+    '@media (max-width: 750px)': { display: 'none' }
   }
 }));

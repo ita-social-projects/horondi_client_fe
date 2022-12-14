@@ -4,15 +4,15 @@ export const useStyles = makeStyles(() => ({
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
-    margin: '76px 0 98px 0',
+    margin: '45px 0',
     '& ul': {
       '& li': {
         '& button': {
           opacity: 1,
-          borderRadius: 0,
-          height: '50px',
-          width: '50px',
-          margin: '0 5px'
+          borderRadius: 2,
+          padding: '25px 20px',
+          margin: '0 5px',
+          '@media (max-width:500px)': { padding: '22px 15px' }
         }
       }
     },
@@ -20,17 +20,7 @@ export const useStyles = makeStyles(() => ({
       backgroundColor: 'black'
     },
     '@media (max-width:500px)': {
-      padding: '1rem 0',
-      '& ul': {
-        '& li': {
-          '& button': {
-            minWidth: '25px',
-            height: '25px',
-            padding: 0,
-            margin: 0
-          }
-        }
-      }
+      padding: '1rem 0'
     }
   }
 }));

@@ -1,1 +1,1 @@
-export const LIMIT_HISTORY_ORDERS = 10;
+export const LIMIT_HISTORY_ORDERS = 5;

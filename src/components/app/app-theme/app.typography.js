@@ -67,5 +67,10 @@ export default {
     letterSpacing: '0.33px',
     lineHeight: '13px',
     textTransform: 'uppercase'
+  },
+  pageTitle: {
+    fontSize: '48px',
+    fontWeight: 400,
+    lineHeight: '56px'
   }
 };

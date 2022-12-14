@@ -221,7 +221,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   yourOrderList: {
     marginTop: '10px',
     position: 'static',
-    height: '136px',
+    height: '150px',
     width: '105%',
     overflowX: 'hidden',
     overflowY: 'scroll',
@@ -237,61 +237,36 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   yourOrderListImg: {
-    position: 'absolute',
     width: '56px',
     height: '56px',
     objectFit: 'cover',
     objectPosition: '55% 50%',
-    left: '25px',
-    top: '0px'
+    marginLeft: '10px'
   },
   yourOrderListItem: {
-    height: '56px'
+    height: '50%'
+  },
+  listItemQuantity: {
+    marginBottom: '7px'
   },
   yourOrderListItemDescriptionContainer: {
-    position: 'absolute',
-    height: '53px',
-    left: '93px',
-    top: '1px'
+    maxWidth: '184px',
+    margin: '0px 0px 10px 10px'
   },
   yourOrderListItemDescriptionPrimary: {
-    top: '1px',
-    fontStyle: 'normal',
-    fontWeight: '600',
-    fontSize: '14px',
-    lineHeight: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    letterSpacing: '0.001em'
+    fontSize: '14px'
   },
   yourOrderListItemDescriptionSecondary: {
-    position: 'absolute',
-    height: '32px',
-    width: 'max-content',
-    top: '23px',
-    fontStyle: 'normal',
+    marginTop: '5px',
     fontWeight: 'normal',
-    fontSize: '12px',
-    lineHeight: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    letterSpacing: '0.004em',
     opacity: '75%'
   },
   yourOrderListItemPrice: {
-    position: 'absolute',
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '28px',
-    height: '20px',
-    left: '295px',
-    top: '7px',
-    fontStyle: 'normal',
-    fontWeight: '600',
     fontSize: '14px',
     lineHeight: '20px',
-    textAlign: 'right',
-    letterSpacing: '0.001em'
+    margin: '0px 0px 40px'
   },
   yourOrderTotalPrice: {
     position: 'static',
@@ -351,8 +326,6 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   },
   priceForItem: {
-    display: 'flex',
-    whiteSpace: 'nowrap',
     '& svg': {
       fontSize: '18px',
       paddingTop: '2px'

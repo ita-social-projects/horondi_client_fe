@@ -9,8 +9,8 @@ export const useStyles = makeStyles(({ palette }) => ({
   imageWrapper: {
     background: `url(${BG}) no-repeat center center`,
     backgroundSize: 'cover',
-    height: '580px',
-    width: '460px',
+    minHeight: '580px',
+    minWidth: '460px',
     '@media (max-width: 959px)': {
       display: 'none'
     }

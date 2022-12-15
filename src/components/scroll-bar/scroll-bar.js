@@ -44,7 +44,7 @@ const ScrollBar = ({ homeRef }) => {
   useEffect(() => {
     if (homePageSections[sectionIdx]) {
       const section = homePageSections[sectionIdx];
-      const top = window.pageYOffset + section.getBoundingClientRect().top - window.innerHeight / 5;
+      const top = window.scrollY + section.getBoundingClientRect().top - window.innerHeight / 5;
       window.scrollTo({ top });
       setsectionIdx(null);
     }

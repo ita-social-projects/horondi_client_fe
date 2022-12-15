@@ -44,7 +44,7 @@ export const scrollBarStyles = makeStyles(() => ({
   }),
   sectionTitle: ({ isDarkSection }) => ({
     color: isDarkSection ? '#fff' : '#000',
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     textDecoration: 'underline',
     display: 'none',
     backgroundColor: isDarkSection ? '#00000020' : '#ffffff80',

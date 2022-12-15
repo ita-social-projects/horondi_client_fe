@@ -35,7 +35,7 @@ const fakeRef = {
         },
         offsetTop: 2478,
         offsetHeight: 960,
-        getBoundingClientRect: () => ({ top: 0 })
+        getBoundingClientRect: () => ({ top: 153.6 })
       },
       {
         id: 'horondiStyle',

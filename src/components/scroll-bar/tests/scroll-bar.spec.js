@@ -68,15 +68,13 @@ describe('ScrollBar testing', () => {
   });
 
   test('it chould scroll after click', async () => {
-    const sliderSection = screen.getByTestId('section-div-#slider');
-    const modelsSection = screen.getByTestId('section-div-#models');
+    const mockedScroll = jest.fn();
+    global.scrollTo = mockedScroll;
     const modelsSectionButton = screen.getByTestId('link-btn-#models');
-
     act(() => {
       fireEvent.click(modelsSectionButton);
     });
 
-    expect(sliderSection.getAttribute('data-id')).toEqual('true');
-    expect(modelsSection.getAttribute('data-id')).not.toEqual('true');
+    expect(mockedScroll).toHaveBeenCalledWith({ top: 2550 });
   });
 });

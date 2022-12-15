@@ -5,7 +5,8 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: '80px'
+    marginBottom: '80px',
+    gap: '32px'
   },
   buttonWrapper: { width: '352px', '@media (max-width: 500px)': { width: '292px' } },
   buyButton: {

@@ -5,21 +5,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    position: 'relative'
   },
-  title: (isLightTheme) => ({
-    fontStyle: 'normal',
-    marginTop: '50px',
-    fontWeight: 'normal',
-    fontSize: '38px',
-    lineHeight: '65px',
-    marginBottom: '80px',
-    color: isLightTheme ? '#242424' : '#FEFEFE',
-    '@media screen and (max-width:768px)': {
-      fontSize: '28px',
-      margin: '30px 0 40px'
-    }
-  }),
   table: {
     flexGrow: 1,
     width: '100%',
@@ -48,5 +36,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     borderTop: `1px solid ${palette.cart.borderColor}`,
     borderBottom: `1px solid ${palette.cart.borderColor}`
-  })
+  }),
+  pathBack: {
+    position: 'absolute',
+    top: 0,
+    left: 0
+  }
 }));

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
@@ -6,13 +6,15 @@ import { useDispatch } from 'react-redux';
 import { useStyles } from './filled-wishlist.styles';
 import WishlistItem from '../wishlist-item';
 import ConfirmDialog from '../../../components/confirm-dialog';
-import ThemeContext from '../../../context/theme-context';
 import EmptyWishlist from '../empty-wishlist';
 import SimilarProducts from '../../product-details/similar-products';
 import { setToastMessage, setToastSettings } from '../../../redux/toast/toast.actions';
 import { TOAST_SETTINGS } from '../../product-details/constants';
 import { useCart } from '../../../hooks/use-cart';
 import { useWishlist } from '../../../hooks/use-wishlist';
+import PathBack from '../../../containers/orders/cart/path-back/path-back';
+import routes from '../../../configs/routes';
+import PageTitle from '../../../components/page-title/page-title';
 
 const FilledWishlist = ({ items }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -26,9 +28,7 @@ const FilledWishlist = ({ items }) => {
 
   const itemName = t(`${modalItem.translationsKey}.name`);
 
-  const [isLightTheme] = useContext(ThemeContext);
-
-  const styles = useStyles(isLightTheme);
+  const styles = useStyles();
 
   const { wishlist: updatedWishlist, wishlistOperations } = useWishlist();
   const { removeFromWishlist } = wishlistOperations;
@@ -59,7 +59,13 @@ const FilledWishlist = ({ items }) => {
   return (
     <>
       <div className={styles.root}>
-        <div className={styles.title}>{t('wishlist.wishlistTitles.filled')}</div>
+        <PathBack
+          className={styles.pathBack}
+          categoryLink={routes.pathToCategory}
+          categoryText='cart.pathBack.toCatalog'
+          currentPageText='wishlist.wishlistTitles.filled'
+        />
+        <PageTitle title={t('wishlist.wishlistTitles.filled')} />
         <div className={styles.table}>
           <Table>
             <TableHead>

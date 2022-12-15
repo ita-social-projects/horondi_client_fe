@@ -2,15 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 50,
     '& p, & ul, & li, & span': {
       color: `${theme.palette.textColor} !important`,
       fontSize: '1rem',
       lineHeight: '2rem',
       '@media (max-width: 670px)': {
         lineHeight: '1.5rem',
-        textAlign: 'justify',
-        margin: '0 20px'
+        textAlign: 'justify'
       }
     },
     '& h3': {
@@ -26,18 +24,6 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: '140px',
       '@media (max-width: 670px)': { marginBottom: '140px' }
     },
-    '& > h1': {
-      textAlign: 'center',
-      transform: 'scale(1, 1.1)',
-      fontStyle: 'normal',
-      fontWeight: '300',
-      fontSize: '59px',
-      lineHeight: '46px',
-      letterSpacing: '0.0025em',
-      '@media (max-width: 670px)': {
-        fontSize: '35px'
-      }
-    },
     '& > pre': {
       padding: '3px',
       color: '#ffffff',
@@ -46,14 +32,11 @@ export const useStyles = makeStyles((theme) => ({
       background: '#3f51b5'
     },
     '& > h2': {
-      letterSpacing: '-0.0025em',
+      verticalAlign: 'middle',
       display: ' inline-block',
       paddingLeft: '15px',
       fontStyle: 'normal',
-      fontWeight: 'normal',
-      '@media (max-width: 670px)': {
-        marginLeft: '45px'
-      }
+      fontWeight: 'normal'
     },
     '& > p > strong': {
       color: 'white',

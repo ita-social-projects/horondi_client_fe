@@ -5,39 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    padding: '0 10px',
-    '& > hr': {
-      border: '1px solid rgba(91, 91, 91, 0.2)',
-      width: '100%',
-      marginTop: '30px',
-      marginBottom: '48px',
-      '@media (max-width: 670px)': {
-        margin: 0
-      }
-    }
-  },
-  headingWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    '& > h1': {
-      marginTop: '72px',
-      fontFamily: 'Montserrat',
-      fontWeight: 400,
-      letterSpacing: 0.5,
-      lineHeight: '65px',
-      fontStyle: 'normal',
-      fontSize: '48px',
-      '@media (max-width: 670px)': {
-        padding: '0px',
-        fontSize: '32px',
-        marginTop: '42px'
-      },
-      '@media (max-width: 346px)': {
-        fontSize: '27px',
-        marginTop: '82px'
-      }
-    }
+    padding: '0 10px'
   },
   mainHeader: {
     fontSize: '24px'

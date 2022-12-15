@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './news-page.style';
 import { NEWS_AMOUNT } from './constants';
 import NewsItem from '../news-item';
+import PageTitle from '../../../components/page-title';
 import { getAllNews } from '../operations/news-queries';
 import errorOrLoadingHandler from '../../../utils/errorOrLoadingHandler';
 import OrderHistoryPagination from '../../../containers/orders/order-history/order-history-pagination/index';
@@ -53,7 +54,7 @@ const NewsPage = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={appStyles.containerApp}>
-        <h1 className={styles.newsTitle}>{t('common.news')}</h1>
+        <PageTitle title={t('common.news')} titleLine />
         <div className={styles.NewsPageItem}>{newsItems}</div>
         <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
       </div>

@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
   root: {
-    margin: '15px auto',
     borderRadius: '5px'
   },
 
@@ -10,7 +9,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'uppercase',
     background: palette.orderHistoryHeading.background,
     padding: '10px',
-    margin: '30px 0 20px',
+    marginBottom: '20px',
     display: 'flex',
     width: '100%',
     minHeight: '40px',

@@ -150,38 +150,23 @@ export const useStyles = makeStyles(({ palette }) => ({
     marginBottom: 10,
     width: '100%'
   },
-
   checkoutTitleInfo: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     width: '100%'
   },
-  checkoutTitleInfoData: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: '25px',
-    width: '100%'
-  },
   backBtn: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    padding: '0 20px 0 0',
-    height: '100%',
+    position: 'absolute',
+    top: '40px',
     width: 48,
     color: palette.backspaceIcon.color,
+    '@media (max-width: 900px)': { top: '32px' },
+    '@media (max-width: 600px)': { top: '24px' },
     '&:hover': {
       transform: 'scale(1.1)',
       transition: '0.1s'
     }
-  },
-  checkoutTitle: {
-    fontSize: 30,
-    fontWeight: 400,
-    textAlign: 'center',
-    color: palette.textColor,
-    width: '100%'
   },
   checkoutTitleLine: {
     background: '#636262',

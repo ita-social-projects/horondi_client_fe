@@ -41,6 +41,7 @@ import {
 } from '../../../services/session-storage.service';
 import { checkoutPayMethod } from './const';
 import YourOrder from '../../orders/order/your-order';
+import PageTitle from '../../../components/page-title';
 import { calcPriceForCart } from '../../../utils/priceCalculating';
 import { useAppStyles } from '../../../components/app/app.styles';
 import { CurrencyContext } from '../../../context/currency-context';
@@ -146,13 +147,10 @@ const CheckoutForm = ({ cartItems, promoCode, certificate, handleCashPayment }) 
       <form onSubmit={handleSubmit} className={appStyles.containerApp}>
         <Grid item className={styles.checkoutFormContainer}>
           <div className={styles.checkoutTitleInfo}>
-            <div className={styles.checkoutTitleInfoData}>
-              <Link to={pathToCart} className={styles.backBtn}>
-                <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
-              </Link>
-            </div>
-            <h2 className={styles.checkoutTitle}>{t('checkout.checkoutTitles.checkoutTitle')}</h2>
-            <div className={styles.checkoutTitleLine} />
+            <Link to={pathToCart} className={styles.backBtn}>
+              <KeyboardBackspaceIcon color={getThemeColor()} className={styles.backBtnLine} />
+            </Link>
+            <PageTitle title={t('checkout.checkoutTitles.checkoutTitle')} titleLine />
           </div>
           <Grid item className={styles.userInfoContainer}>
             <div>

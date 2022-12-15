@@ -15,6 +15,7 @@ import { useAppStyles } from '../../components/app/app.styles';
 import AuthButton from '../../components/auth-form/auth-form-button/auth-form-button';
 import { SnackBarContext } from '../../context/snackbar-context';
 import SnackbarItem from '../../containers/snackbar';
+import PageTitle from '../../components/page-title';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -187,10 +188,7 @@ const ProfilePage = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={appStyles.containerApp}>
-        <div className={classes.profileTitleInfo}>
-          <h2 className={classes.profileTitle}>{t('profilePage.titles.mainTitle')}</h2>
-          <div className={classes.titleLine} />
-        </div>
+        <PageTitle title={t('profilePage.titles.mainTitle')} titleLine />
         <div className={classes.profile}>
           <div className={classes.userFormControl}>
             <form onSubmit={handleSubmit} className={classes.userForm} data-testid='userForm'>

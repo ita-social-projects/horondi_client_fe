@@ -6,15 +6,18 @@ import { useStyles } from './path-back.styles';
 
 const { pathToMain } = routes;
 
-const PathBack = ({ categoryLink, categoryText, currentPageText }) => {
+const PathBack = ({ categoryLink, categoryText, currentPageText, className }) => {
   const styles = useStyles();
   const { t } = useTranslation();
 
   return (
-    <div className={styles.path}>
+    <div className={`${styles.path} ${className}`}>
       <div className={styles.pathLine}>
-        <Link to={pathToMain}>{t('cart.pathBack.toMain')}</Link> /{' '}
-        <Link to={categoryLink}>{t(categoryText)}</Link> / {t(currentPageText)}
+        <Link to={pathToMain}>{t('cart.pathBack.toMain')}</Link>
+        {` / `}
+        <Link to={categoryLink}>{t(categoryText)}</Link>
+        {` / `}
+        <span>{t(currentPageText)}</span>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 
 import { useStyles } from './images-constructor.style';
 import Loader from '../../components/loader';
+import PageTitle from '../../components/page-title';
 
 import { constructorPartPrice } from '../../utils/constructor';
 import ConstructorSubmit from './constructor-sumbit';
@@ -120,10 +121,7 @@ const ImagesConstructor = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.constructorWrapper}`}>
-        <div className={styles.headingWrapper}>
-          <h1>{t('common.title')}</h1>
-        </div>
-        <hr />
+        <PageTitle title={t('common.title')} titleLine />
         <div className={styles.contentWrapper}>
           <form className={styles.formWrapper}>
             <FormControl>

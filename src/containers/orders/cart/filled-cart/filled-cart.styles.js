@@ -23,7 +23,10 @@ const totalWrapper = {
   alignItems: 'center',
   fontWeight: '600',
   fontSize: '20px',
-  lineHeight: '28px'
+  lineHeight: '28px',
+  '@media (max-width: 650px)': {
+    gap: '12px'
+  }
 };
 
 export const useStyles = makeStyles(({ palette }) => ({
@@ -31,7 +34,10 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    '@media (max-width: 650px)': { position: 'relative' }
+    position: 'relative'
+  },
+  pathBack: {
+    position: 'absolute'
   },
   promoInput: {
     '&, &::placeholder': {
@@ -46,6 +52,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
+    '@media (max-width: 650px)': {
+      gap: '12px'
+    },
     '& >div': {
       display: 'flex',
       gap: '8px'
@@ -86,7 +95,8 @@ export const useStyles = makeStyles(({ palette }) => ({
       padding: '14px 90px'
     },
     '@media (max-width: 450px)': {
-      padding: '14px 65px'
+      padding: '14px 65px',
+      marginBottom: '12px'
     }
   },
   orderWrapper: {
@@ -119,8 +129,7 @@ export const useStyles = makeStyles(({ palette }) => ({
       alignItems: 'center'
     },
     '@media (max-width: 650px)': {
-      paddingTop: '12px',
-      paddingBottom: '48px',
+      padding: '16px 0',
       position: 'sticky',
       bottom: 0,
       background: palette.backgroundColor,

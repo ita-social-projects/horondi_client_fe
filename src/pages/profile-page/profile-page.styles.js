@@ -1,25 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({ palette }) => ({
-  profileTitleInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  profileTitle: {
-    fontSize: 48,
-    color: palette.textColor,
-    margin: '72px 0px',
-    fontWeight: '600',
-    fontFamily: 'Open Sans'
-  },
-  titleLine: {
-    width: '100%',
-    height: 1,
-    borderBottom: '1px solid #E8E8E8',
-    marginBottom: 37
-  },
   profile: {
     display: 'flex',
     gap: '24px',

@@ -2,8 +2,11 @@ import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ThemeProvider } from '@material-ui/core';
 import { mocks, TestWrapper } from './search-bar.variables';
-import ThemeContext from '../../../context/theme-context';
+import { theme } from '../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
@@ -15,18 +18,17 @@ jest.mock('react-i18next', () => ({
 jest.mock('../search-bar.styles.js', () => ({
   useStyles: () => ({})
 }));
-const themeContextProviderMockValues = [true, jest.fn(() => {})];
 
 describe('search-bar testing', () => {
   const targetValue = 'banana';
 
   beforeEach(() => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <ThemeContext.Provider value={themeContextProviderMockValues}>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={mocks} addTypename={false}>
           <TestWrapper />
-        </ThemeContext.Provider>
-      </MockedProvider>
+        </MockedProvider>
+      </ThemeProvider>
     );
   });
 

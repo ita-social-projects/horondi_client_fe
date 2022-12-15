@@ -9,6 +9,7 @@ import { useStyles } from './gift-certificate.styles';
 import { validationSchema } from '../../validators/email';
 import { certificateRules } from '../../locales/en/certificate.json';
 import CertificateCheckbox from './certificate-checkbox';
+import PageTitle from '../../components/page-title';
 import { useAppStyles } from '../../components/app/app.styles';
 import { generateCertificate } from './operations/gift-certificate.mutations';
 import { getPaymentCheckoutForCertificates } from './operations/gift-certificate.queries';
@@ -127,7 +128,7 @@ const GiftCertificate = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={appStyles.containerApp}>
-        <h1 className={styles.pageTitle}>{t('certificate.giftCertificate')}</h1>
+        <PageTitle title={t('certificate.giftCertificate')} titleLine />
         <h2 className={styles.chooseCertificate}>{t('certificate.chooseCertificate')}</h2>
         <div className={styles.checkboxWrapper}>{checkboxContent}</div>
         <div className={styles.lowerWrapper}>

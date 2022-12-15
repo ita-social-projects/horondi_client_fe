@@ -7,6 +7,7 @@ import { useStyles } from './business-page.style';
 import { useAppStyles } from '../../components/app/app.styles';
 import { getBusinessTextByCode } from './operations/business-page.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
+import PageTitle from '../../components/page-title';
 
 const BusinessPage = ({ match }) => {
   const [page, setPage] = useState({});
@@ -28,8 +29,7 @@ const BusinessPage = ({ match }) => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.root}`}>
-        {page && <h1>{t(`${page.translationsKey}.title`)}</h1>}
-        <hr />
+        {page && <PageTitle title={t(`${page.translationsKey}.title`)} titleLine />}
         {addressText}
       </div>
     </div>

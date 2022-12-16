@@ -3,16 +3,14 @@ import BG from '../../../images/thanks.png';
 
 export const useStyles = makeStyles(({ palette }) => ({
   thanksCardContainer: {
-    height: '100vh',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center'
   },
   imageWrapper: {
     background: `url(${BG}) no-repeat center center`,
     backgroundSize: 'cover',
-    height: '65%',
-    width: '50vh',
+    minHeight: '580px',
+    minWidth: '460px',
     '@media (max-width: 959px)': {
       display: 'none'
     }

@@ -5,6 +5,7 @@ import { useStyles } from './order-table.styles';
 
 import CartItem from '../../cart/cart-item';
 import ConfirmDialog from '../../../../components/confirm-dialog';
+import PageTitle from '../../../../components/page-title/page-title';
 
 const OrderTable = ({ items, user, cartOperations, promoCode, certificateData }) => {
   const { t, i18n } = useTranslation();
@@ -45,7 +46,7 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
           dismisButtonText={t('common.buttons.cancel')}
         />
       )}
-      <h2 className={styles.titleWrapper}>{t('cart.titleFilled')} </h2>
+      <PageTitle title={t('cart.titleFilled')} />
       <div className={styles.table}>
         <Table>
           <TableHead>

@@ -1,8 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/core';
 import AboutUs from '../about-us';
 import { mocks, uaTitle, mockTranslationsKey, mockTranslated } from './variables';
+import { theme } from '../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 jest.mock('react-i18next', () => ({
   ...jest.requireActual('react-i18next'),
@@ -20,9 +24,11 @@ jest.mock('react-i18next', () => ({
 
 describe('AboutUs component tests', () => {
   render(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <AboutUs />
-    </MockedProvider>
+    <ThemeProvider theme={themeValue}>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <AboutUs />
+      </MockedProvider>
+    </ThemeProvider>
   );
 
   it('should render', async () => {

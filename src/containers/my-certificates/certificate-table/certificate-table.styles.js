@@ -1,15 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  titleWrapper: {
-    textAlign: 'center',
-    fontSize: theme.typography.pageTitle.fontSize,
-    fontWeight: theme.typography.pageTitle.fontWeight,
-    lineHeight: theme.typography.pageTitle.lineHeight,
-    margin: '72px 0 48px',
-    '@media (max-width: 750px)': { fontSize: theme.typography.h1.fontSize, margin: '72px 0 35px' }
-  },
-
   iconBtn: {
     color: 'inherit',
     opacity: '0.6',

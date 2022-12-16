@@ -7,6 +7,7 @@ import Toast from '../../toast';
 import CertificateCodeCopy from '../../../images/certificates/certificateCodeCopy';
 import CertificateCodeGift from '../../../images/certificates/certificateCodeGift';
 import CertificateImages from '../../../images/certificates/CertificateImages';
+import PageTitle from '../../../components/page-title';
 import { useStyles } from './certificate-table.styles';
 import { ROW_FIELDS } from '../../../configs/index';
 
@@ -85,7 +86,7 @@ const CertificateTable = ({ items, openModal }) => {
 
   return (
     <div className={styles.root}>
-      <h2 className={styles.titleWrapper}>{t('certificate.title')}</h2>
+      <PageTitle title={t('certificate.title')} />
       <div className={styles.table}>
         <TableComponent
           items={items}

@@ -6,6 +6,7 @@ import { useIsLoadingOrError } from '../../hooks/useIsLoadingOrError';
 import Slider from './slider';
 import MaterialsBottom from './materials-bottom';
 import MaterialsTextile from './materials-textile';
+import PageTitle from '../../components/page-title';
 import { getAllPatterns, getMaterialsBlocksByType } from './operations/getAllPatterns.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 
@@ -73,7 +74,7 @@ const Materials = () => {
   return (
     <div className={`${appStyles.rootApp} ${styles.root}`}>
       <div className={appStyles.containerApp}>
-        <h1 className={styles.title}>{t(`materialsPage.materials`)}</h1>
+        <PageTitle title={t(`materialsPage.materials`)} titleLine />
         <Slider sliderlImages={patternImages} patterns={patterns} />
         <MaterialsTextile materialsTextile={materialsTextile} />
         <MaterialsBottom materialsBottom={materialsBottom} />

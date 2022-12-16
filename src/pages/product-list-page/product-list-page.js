@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
-import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -14,6 +13,7 @@ import { useStyles } from './product-list-page.styles';
 import ProductSort from './product-sort';
 import ProductFilter from './product-list-filter';
 import ProductListItem from './product-list-item';
+import PageTitle from '../../components/page-title';
 import { URL_QUERIES_NAME } from '../../configs';
 import { TEMPORARY_WIDTHS, DRAWER_PERMANENT, DRAWER_TEMPORARY } from './constants';
 import { getFilteredProductsQuery } from './operations/product-list.queries';
@@ -141,7 +141,7 @@ const ProductListPage = ({ width }) => {
   return (
     <Container maxWidth='lg'>
       <div className={styles.root}>
-        <Typography className={styles.header}>{t('common.scrollbar.catalog')}</Typography>
+        <PageTitle title={t('common.scrollbar.catalog')} titleLine />
         <div className={styles.sortDiv}>
           <ProductSort />
         </div>

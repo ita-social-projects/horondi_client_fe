@@ -26,24 +26,11 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   sortDiv: {
-    paddingTop: '51px',
-    '@media (max-width: 960px)': {
-      paddingTop: '21px'
-    },
     '& div': {
       flexWrap: 'wrap',
       marginRight: 0
     }
   },
-  header: {
-    display: 'flex',
-    justifyContent: 'center',
-    fontSize: '59px',
-    fontWeight: 'normal',
-    borderBottom: '1px solid gray',
-    padding: '80px 1rem 50px 1rem'
-  },
-
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',

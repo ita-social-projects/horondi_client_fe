@@ -4,7 +4,6 @@ export const useStyles = makeStyles(() => ({
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
-    margin: '45px 0',
     '& ul': {
       '& li': {
         '& button': {

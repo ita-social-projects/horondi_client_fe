@@ -18,13 +18,13 @@ const ProductPath = ({ category, translationsKey }) => {
 
   return (
     <div className={styles.paths}>
-      <Link to={pathToMain}>{t('common.home')}</Link> {`\u00A0 / \u00A0`}
-      <Link to={pathToAllProducts}>{t('common.scrollbar.catalog')}</Link> {`\u00A0 / \u00A0`}
+      <Link to={pathToMain}>{t('common.home')}</Link> {` / `}
+      <Link to={pathToAllProducts}>{t('common.scrollbar.catalog')}</Link> {` / `}
       <Link to={pathToCatologWithFilters}>
         {category ? t(`${category.translationsKey}.name`) : null}
       </Link>
-      {`\u00A0 / \u00A0`}
-      {t(`${translationsKey}.name`)}
+      {` / `}
+      <span>{t(`${translationsKey}.name`)}</span>
     </div>
   );
 };

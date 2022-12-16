@@ -3,6 +3,7 @@ import parse from 'html-react-parser';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Accordions from '../../components/accordion/accordions';
+import PageTitle from '../../components/page-title';
 import { useStyles } from './answers-questions-page.style';
 import { getAllQuestionsAnswers } from './operations/answers-questions.queries';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
@@ -27,11 +28,11 @@ const AnswersQuestionsPage = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.container}`}>
-        <h1 className={styles.pageTitle}>{t('common.titleQuestionsAnswers')}</h1>
+        <PageTitle title={t('common.titleQuestionsAnswers')} />
         {page.map((accordion) => {
           const { _id } = accordion;
           const question = accordion.question && (
-            <h1>{t(`${accordion.translationsKey}.question`)}</h1>
+            <h2>{t(`${accordion.translationsKey}.question`)}</h2>
           );
           const answer = accordion?.answer && parse(t(`${accordion.translationsKey}.answer`));
           return (

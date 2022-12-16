@@ -3,10 +3,14 @@ import * as redux from 'react-redux';
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen, fireEvent, waitForElement } from '@testing-library/react';
 
+import { ThemeProvider } from '@material-ui/core';
 import Modal from '../../../components/modal';
 import ImagesConstructor from '../images-constructor';
 import { mockAllConstructors } from './images-constructor.variables';
 import { DollarIcon } from '../../../images/profile-icons';
+import { theme } from '../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
@@ -27,14 +31,6 @@ jest.mock('react-redux', () => ({
   useSelector: () => ({ currency: 0 })
 }));
 
-jest.mock('../images-constructor.style', () => ({
-  useStyles: () => ({})
-}));
-
-jest.mock('../constructor-sumbit/constructor-submit.styles', () => ({
-  useStyles: () => ({})
-}));
-
 jest.mock('i18next', () => ({
   useTranslation: () => ({ i18n: { language: 'ua' }, t: () => 'test' })
 }));
@@ -52,9 +48,11 @@ mockUseDispatch.mockImplementation(() => mockDispatch);
 describe('ImagesConstructor component tests', () => {
   beforeEach(async () => {
     render(
-      <MockedProvider mocks={mockAllConstructors} addTypename={false}>
-        <ImagesConstructor />
-      </MockedProvider>
+      <ThemeProvider theme={themeValue}>
+        <MockedProvider mocks={mockAllConstructors} addTypename={false}>
+          <ImagesConstructor />
+        </MockedProvider>
+      </ThemeProvider>
     );
 
     await new Promise((resolve) => setTimeout(resolve, 0));

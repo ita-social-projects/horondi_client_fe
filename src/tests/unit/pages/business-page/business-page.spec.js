@@ -1,14 +1,20 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from '@material-ui/core';
 import { mockData, mockRequest } from './business-page.variables';
 import BusinessPage from '../../../../pages/business-page/business-page';
+import { theme } from '../../../../components/app/app-theme/app.theme';
+
+const themeValue = theme('light');
 
 beforeEach(() => {
   render(
-    <MockedProvider mocks={mockRequest} addTypename={false}>
-      <BusinessPage match={mockData} />
-    </MockedProvider>
+    <ThemeProvider theme={themeValue}>
+      <MockedProvider mocks={mockRequest} addTypename={false}>
+        <BusinessPage match={mockData} />
+      </MockedProvider>
+    </ThemeProvider>
   );
 });
 

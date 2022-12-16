@@ -1,33 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const path = {
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  fontSize: '17px',
-  lineHeight: '22px',
-  letterSpacing: '0.0025em'
-};
-
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles((theme) => ({
   path: {
-    marginTop: '74px',
+    marginTop: '48px',
+    '@media (max-width: 900px)': { marginTop: '40px' },
+    '@media (max-width: 600px)': { marginTop: '32px' },
     '&, & a': {
-      ...path,
-      color: palette.textColor
+      fontSize: theme.typography.subtitle1.fontSize,
+      '@media (max-width: 900px)': { fontSize: theme.typography.subtitle2.fontSize },
+      '@media (max-width: 600px)': { fontSize: theme.typography.body1.fontSize },
+      color: theme.palette.textColor,
+      fontWeight: theme.typography.body2.fontWeight
     },
-    '&': {
-      color: palette.textColor,
-      fontWeight: 600,
-      display: 'flex',
-      justifyContent: 'flex-start'
+    '& span': {
+      fontWeight: theme.typography.body1.fontWeight
     },
     '& a:hover': {
-      color: palette.textColor,
-      fontWeight: 'bold',
+      fontWeight: theme.typography.body1.fontWeight,
       transition: '0.5s'
     }
-  },
-  pathLine: {
-    paddingLeft: '20px'
   }
 }));

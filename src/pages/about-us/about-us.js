@@ -7,6 +7,7 @@ import { useAppStyles } from '../../components/app/app.styles';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { getBusinessTextByCode } from './operation/about-us.queries';
 import { ABOUT_US_CODE } from './constants';
+import PageTitle from '../../components/page-title';
 
 const AboutUs = () => {
   const { t } = useTranslation();
@@ -40,8 +41,7 @@ const AboutUs = () => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.root}`}>
-        <h1>{translatedTitle}</h1>
-        <hr />
+        <PageTitle title={translatedTitle} titleLine />
         <div className={`${styles.sections}`}>{sections}</div>
         <img
           className={`${styles.bottomImg}`}

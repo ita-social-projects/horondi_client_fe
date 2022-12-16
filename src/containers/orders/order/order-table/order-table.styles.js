@@ -1,23 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const title = {
-  fontWeight: '600',
-  fontSize: '48px',
-  lineHeight: '65px'
-};
-
 export const useStyles = makeStyles((theme) => ({
-  titleWrapper: {
-    ...title,
-    '@media (max-width: 900px)': {
-      fontSize: theme.typography.h1.fontSize,
-      lineHeight: theme.typography.h1.lineHeight
-    },
-    '@media (max-width: 650px)': {
-      fontSize: theme.typography.h2.fontSize,
-      lineHeight: theme.typography.h2.lineHeight
-    }
-  },
   root: {
     maxWidth: '1440px',
     display: 'flex',

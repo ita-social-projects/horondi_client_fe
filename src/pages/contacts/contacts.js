@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { useStyles } from './contacts.styles';
 import { GOOGLE_MAP_URL } from './constants';
 import { getContacts } from './operations/contacts.queries';
+import PageTitle from '../../components/page-title';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import email from '../../images/footer-icons/email.svg';
 import phone from '../../images/footer-icons/phone.svg';
@@ -12,7 +13,7 @@ import location from '../../images/footer-icons/location.svg';
 import clock from '../../images/contacts-icons/clock.svg';
 import { useAppStyles } from '../../components/app/app.styles';
 
-const Contacts = ({ fromCheckout }) => {
+const Contacts = () => {
   const styles = useStyles();
   const appStyles = useAppStyles();
   const { t } = useTranslation();
@@ -91,9 +92,7 @@ const Contacts = ({ fromCheckout }) => {
   return (
     <div className={appStyles.rootApp}>
       <div className={`${appStyles.containerApp} ${styles.wrapper}`}>
-        {!fromCheckout && (
-          <h2 className={styles.contactsTitle}>{t('contacts.pageTitles.title')}</h2>
-        )}
+        <PageTitle title={t('contacts.pageTitles.title')} titleLine />
         {contactsDisplay}
       </div>
     </div>

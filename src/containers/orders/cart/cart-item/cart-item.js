@@ -223,7 +223,7 @@ const CartItem = ({ item, setModalVisibility, setModalItem, cartOperations, prom
       : cartItem.model.sizes &&
         cartItem.model.sizes.map((cartData) => {
           if (event.target.value === cartData._id && firstlyMounted) {
-            changeSizeConstructor(item.id, cartData);
+            changeSizeConstructor(item.id, cartData, { ...item, sizeAndPrice: { size: cartData } });
           }
           return null;
         });

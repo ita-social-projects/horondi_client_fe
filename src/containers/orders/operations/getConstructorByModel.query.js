@@ -27,6 +27,8 @@ export const getConstructorByModel = gql`
             _id
             name
             available
+            absolutePrice
+            relativePrice
           }
         }
         basics {

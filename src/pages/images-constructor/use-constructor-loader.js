@@ -4,7 +4,7 @@ import { getAllConstructors } from './operations/getAllConstructors.queries';
 import { getConstructorByModel } from './operations/getConstructorByModel.queries';
 
 const useConstructorLoader = () => {
-  const [constructorValues, setConstructorValues] = useState({});
+  const [constructorValues, setConstructorValues] = useState(null);
   const [constructorModel, setConstructorModel] = useState('');
   const currentConstructorModel = useRef({});
   const allModels = useRef([]);
@@ -42,7 +42,7 @@ const useConstructorLoader = () => {
 
       const values = {
         name: constructor.name,
-        size: constructor.model.sizes[0],
+        sizeAndPrice: { size: constructor.model.sizes[0] },
         pattern: constructor.patterns[0],
         bottom: constructor.bottoms[0],
         basic: constructor.basics[0],
@@ -62,6 +62,17 @@ const useConstructorLoader = () => {
     !called && constructorModel && getConstructorByModelHandler();
     called && refetch();
   }, [called, constructorModel, getConstructorByModelHandler, refetch]);
+
+  useEffect(() => {
+    if (constructorValues) {
+      setAllPrice({
+        pattern: constructorValues.pattern.absolutePrice || null,
+        bottom: constructorValues.bottom.absolutePrice || null,
+        basic: constructorValues.basic.absolutePrice || null,
+        size: constructorValues.sizeAndPrice.size.absolutePrice || null
+      });
+    }
+  }, [constructorValues, setAllPrice]);
 
   return {
     constructorValues,

@@ -134,15 +134,15 @@ const FilledCart = ({ items, cartOperations, certificateInCart, promoCodedInCart
           model: item.model?._id,
           pattern: item.pattern?._id,
           mainMaterial: {
-            material: item.basic?.features.material._id,
+            material: item.basic._id,
             color: item.basic?.features.color._id
           },
           bottomMaterial: {
-            material: item.bottom?.features.material._id,
+            material: item.bottom?._id,
             color: item.bottom?.features.color._id
           },
           sizes: [item.sizeAndPrice.size._id],
-          basePrice: item.sizeAndPrice.price
+          basePrice: item.basePrice
         }
       };
 

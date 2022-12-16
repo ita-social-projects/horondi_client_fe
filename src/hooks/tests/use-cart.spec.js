@@ -1,7 +1,13 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useCart } from '../use-cart';
-import { mockItem, mockPromoCode, mockCertificate, sizeAndPrice } from './use-cart.variables';
+import {
+  mockItem,
+  mockPromoCode,
+  mockCertificate,
+  sizeAndPrice,
+  constructorData
+} from './use-cart.variables';
 import CartContextProvider from '../../context/cart-context';
 
 const wrapper = ({ children }) => <CartContextProvider>{children}</CartContextProvider>;
@@ -124,7 +130,11 @@ describe('use-cart tests', () => {
   });
   it('should change constructor size', () => {
     act(() => {
-      wrap.result.current.cartOperations.changeSizeConstructor(mockItem.id, sizeAndPrice.size);
+      wrap.result.current.cartOperations.changeSizeConstructor(
+        mockItem.id,
+        sizeAndPrice.size,
+        constructorData
+      );
     });
     const item = wrap.result.current.cartItems.find((el) => (el.id = mockItem.id));
 

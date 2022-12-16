@@ -47,3 +47,71 @@ export const sizeAndPrice = {
   },
   price: 100
 };
+
+export const constructorData = {
+  id: 1671183478828,
+  sizeAndPrice: {
+    size: {
+      _id: '60439516a7532c33dcb326d7',
+      name: 'S',
+      available: true,
+      absolutePrice: 20,
+      relativePrice: null
+    }
+  },
+  pattern: {
+    _id: '619e24c25bbfb00025409bf3',
+    absolutePrice: 50,
+    relativePrice: null
+  },
+  bottom: {
+    _id: '619e937b5bbfb0002540b7b9',
+    absolutePrice: null,
+    relativePrice: 100
+  },
+  basic: {
+    _id: '619eb96c5bbfb0002540bf84',
+    available: true,
+    absolutePrice: 12,
+    relativePrice: null
+  },
+  model: {
+    _id: '6043bf9e3e06ad3edcdb7b30',
+    sizes: [
+      {
+        _id: '604394cba7532c33dcb326d6',
+        name: 'M',
+        absolutePrice: 25,
+        relativePrice: null,
+        available: true
+      },
+      {
+        _id: '60439516a7532c33dcb326d7',
+        name: 'S',
+        absolutePrice: 20,
+        relativePrice: null,
+        available: true
+      },
+      {
+        _id: '636cbd8c15410800273f0e93',
+        name: 'XXL',
+        absolutePrice: 1,
+        relativePrice: null,
+        available: true
+      },
+      {
+        _id: '636cbe4215410800273f0ebc',
+        name: 'XXS',
+        absolutePrice: 1,
+        relativePrice: null,
+        available: false
+      }
+    ]
+  },
+  basePrice: 9,
+  quantity: 1,
+  isFromConstructor: true,
+  category: {
+    code: 'constructor'
+  }
+};

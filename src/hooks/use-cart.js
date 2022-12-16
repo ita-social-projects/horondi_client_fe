@@ -113,6 +113,27 @@ export const useCart = () => {
       0
     );
 
+  const getConstructorPrice = (constructorData) => {
+    const prices = [
+      constructorData.pattern,
+      constructorData.bottom,
+      constructorData.basic,
+      constructorData.sizeAndPrice.size
+    ];
+
+    return prices.reduce((acc, cur) => {
+      if (cur.absolutePrice) {
+        acc += cur.absolutePrice;
+      }
+
+      if (cur.relativePrice) {
+        acc += constructorData.basePrice * (cur.relativePrice / 100);
+      }
+
+      return Math.round(acc);
+    }, constructorData.basePrice);
+  };
+
   const changeSize = (id, sizeAndPrice) => {
     setCartItems((prevCart) =>
       prevCart.map((el) => {
@@ -124,11 +145,14 @@ export const useCart = () => {
     );
   };
 
-  const changeSizeConstructor = (id, size) => {
+  const changeSizeConstructor = (id, size, constructorData) => {
     setCartItems((prevCart) =>
       prevCart.map((el) => {
         if (el.id === id) {
-          el.sizeAndPrice.size = size;
+          el.sizeAndPrice = {
+            size,
+            price: getConstructorPrice(constructorData)
+          };
         }
         return el;
       })
@@ -150,7 +174,8 @@ export const useCart = () => {
     getProductPriceWithPromoCode,
     getTotalPricesWithPromoCode,
     getTotalPriceWithCertificate,
-    getProductPrice
+    getProductPrice,
+    getConstructorPrice
   };
 
   return {

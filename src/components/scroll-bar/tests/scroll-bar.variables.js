@@ -34,7 +34,8 @@ const fakeRef = {
           sectionStyle: 'light'
         },
         offsetTop: 2478,
-        offsetHeight: 960
+        offsetHeight: 960,
+        getBoundingClientRect: () => ({ top: 153.6 })
       },
       {
         id: 'horondiStyle',

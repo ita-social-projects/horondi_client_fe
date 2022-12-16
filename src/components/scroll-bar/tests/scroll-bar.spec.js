@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useQuery } from '@apollo/client';
 import { TestWrapper } from './scroll-bar.variables';
@@ -65,5 +65,16 @@ describe('ScrollBar testing', () => {
     const modelsSection = screen.getByTestId('section-div-#models');
     expect(sliderSection.getAttribute('data-id')).not.toEqual('true');
     expect(modelsSection.getAttribute('data-id')).toEqual('true');
+  });
+
+  test('it chould scroll after click', async () => {
+    const mockedScroll = jest.fn();
+    global.scrollTo = mockedScroll;
+    const modelsSectionButton = screen.getByTestId('link-btn-#models');
+    act(() => {
+      fireEvent.click(modelsSectionButton);
+    });
+
+    expect(mockedScroll).toHaveBeenCalledWith({ top: 2550 });
   });
 });

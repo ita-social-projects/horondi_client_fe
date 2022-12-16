@@ -7,9 +7,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   imageSection: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(5, 1fr)',
-    gridTemplateRows: 'repeat(2, 1fr)',
-    flexFlow: 'wrap',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gridAutoRows: 'minmax(350px, auto)',
     height: '100%',
     '& :nth-child(1)': {
       gridArea: '1/1/2/3'
@@ -31,18 +30,30 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& :nth-child(7)': {
       gridArea: '2/3/3/5'
+    },
+    '@media (max-width: 1399px)': {
+      '& :nth-child(3)': {
+        gridArea: '2/3/3/4'
+      },
+      '& :nth-child(4)': {
+        gridArea: '1/4/3/6'
+      },
+      '& :nth-child(7)': {
+        gridArea: '1/5/3/6'
+      }
+    },
+    '@media (max-width: 559px)': {
+      '& :nth-child(1)': {
+        gridArea: '1/2/3/3'
+      },
+      '& :nth-child(5)': {
+        gridArea: '1/1/3/2'
+      }
     }
   },
   imageWrapper: {
     height: '100%',
     overflow: 'hidden',
-    flexBasis: '16.666%',
-    '@media screen and (max-width: 991px)': {
-      flexBasis: '25%'
-    },
-    '@media screen and (max-width: 552px)': {
-      flexBasis: '50%'
-    },
     '&:hover > div': {
       transform: 'scale(1.1)'
     }

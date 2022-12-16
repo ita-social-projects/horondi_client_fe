@@ -78,7 +78,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
     <TableRow className={styles.root} classes={{ root: styles.tableBody }}>
       <TableCell className={styles.imageCell}>{productImg}</TableCell>
       <TableCell>
-        <div>
+        <div className={styles.product}>
           <p className={styles.productName}>{productName}</p>
           <p className={styles.productBottom}>
             {product && t('cart.bottomMaterial')} -{' '}

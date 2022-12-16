@@ -59,8 +59,8 @@ export const useStyles = makeStyles((theme, color) => ({
   }),
   notFromNavbar: () => ({
     ...baseStyles,
+    gridRow: 2,
     borderRadius: '4px',
-    background: 'inherit',
     border: theme.palette.seachBar.border,
     '& .MuiInputBase-root': {
       width: '255px'

@@ -13,11 +13,15 @@ export const useStyles = makeStyles(({ palette }) => ({
     }
   }),
   wrapper: {
-    height: '380px',
     width: '100%',
+    maxHeight: '380px',
+    aspectRatio: 0.9,
     cursor: 'pointer',
+    '@media (max-width: 600px)': {
+      maxHeight: '340px'
+    },
     '@media (max-width: 450px)': {
-      height: '320px'
+      maxHeight: '300px'
     }
   },
   unavailableContainer: {

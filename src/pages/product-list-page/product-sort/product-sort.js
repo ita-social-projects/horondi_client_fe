@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { MenuItem, Select } from '@material-ui/core';
+import { Button, MenuItem, Select } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import useDebounce from '../../../hooks/use-debounce';
@@ -10,7 +10,7 @@ import SearchBar from '../../../containers/search-bar/search-bar';
 import { URL_QUERIES_NAME, TEXT_FIELD_VARIANT } from '../../../configs';
 import { SORT_BY_SELECT_OPTIONS } from '../constants';
 
-const ProductSort = () => {
+const ProductSort = ({ handleFilterShow }) => {
   const { t } = useTranslation();
   const styles = useStyles();
   const history = useHistory();
@@ -105,6 +105,9 @@ const ProductSort = () => {
         </Select>
       </div>
       <CountPerPage />
+      <Button className={styles.button} variant='contained' fullWidth onClick={handleFilterShow}>
+        {t('common.showFilters')}
+      </Button>
     </div>
   );
 };

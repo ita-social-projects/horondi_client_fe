@@ -7,8 +7,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: '0 2rem 1rem 2rem',
-    width: '100%'
+    padding: '0 32px 16px',
+    width: '100%',
+    '@media (max-width: 768px)': { padding: '0 0 16px' }
   },
   productsWrapper: {
     width: '100%',
@@ -23,12 +24,6 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 768px)': {
       padding: 0,
       margin: 0
-    }
-  },
-  sortDiv: {
-    '& div': {
-      flexWrap: 'wrap',
-      marginRight: 0
     }
   },
   paginationDiv: {
@@ -62,23 +57,6 @@ export const useStyles = makeStyles((theme) => ({
         }
       }
     }
-  },
-  button: {
-    fontSize: '0.9em',
-    margin: '0 auto',
-    display: 'none',
-    color: theme.palette.backgroundColor,
-    backgroundColor: theme.palette.textColor,
-    '&:hover': {
-      backgroundColor: theme.palette.button.hover.backgroundColor,
-      color: theme.palette.button.hover.color
-    },
-    '@media (max-width: 959px)': {
-      display: 'block'
-    }
-  },
-  filterButtonBlock: {
-    padding: '15px'
   },
   products: {
     display: 'flex',

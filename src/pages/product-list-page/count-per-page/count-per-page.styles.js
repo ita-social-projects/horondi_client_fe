@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core';
 export const useStyles = makeStyles((theme) => ({
   items: {
     height: '100%',
-    marginLeft: '1rem',
     lineHeight: '100%',
     '& .MuiButton-outlined': {
       boxSizing: 'border-box',
@@ -17,7 +16,18 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   pageCounter: {
-    minHeight: '31px'
+    display: 'flex',
+    columnGap: '16px',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '@media (max-width:1020px)': { gridColumn: 2, justifySelf: 'end' },
+    '@media (max-width:600px)': {
+      gridColumn: 1,
+      flexDirection: 'column',
+      justifySelf: 'start',
+      alignItems: 'flex-start'
+    }
   },
 
   selectedButton: {

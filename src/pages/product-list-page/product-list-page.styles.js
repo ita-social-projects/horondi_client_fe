@@ -16,11 +16,13 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    rowGap: '48px',
+    marginBottom: '96px',
+    '@media (max-width:600px)': { marginBottom: '60px', rowGap: '24px' }
   },
   productsDiv: {
     width: '100%',
-
     '@media (max-width: 768px)': {
       padding: 0,
       margin: 0
@@ -29,33 +31,22 @@ export const useStyles = makeStyles((theme) => ({
   paginationDiv: {
     display: 'flex',
     justifyContent: 'center',
-    margin: '76px 0 98px 0',
     '& ul': {
       '& li': {
         '& button': {
-          borderRadius: 0,
-          height: '50px',
-          width: '50px',
-          margin: '0 5px'
-        },
-        '& button.Mui-selected': {
-          backgroundColor: theme.palette.gray,
-          border: theme.palette.type === 'light' ? '1px solid #000000' : '1px solid #FEFEFE'
+          opacity: 1,
+          borderRadius: 2,
+          padding: '25px 20px',
+          margin: '0 5px',
+          '@media (max-width:600px)': { padding: '22px 15px' }
         }
       }
     },
+    '& Mui-selected': {
+      backgroundColor: 'black'
+    },
     '@media (max-width:500px)': {
-      padding: '1rem 0',
-      '& ul': {
-        '& li': {
-          '& button': {
-            minWidth: '25px !important',
-            height: '25px !important',
-            padding: 0,
-            margin: 0
-          }
-        }
-      }
+      padding: '1rem 0'
     }
   },
   products: {
@@ -80,10 +71,10 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    overflowY: 'auto'
   },
   drawerContainer: {
-    overflow: 'auto',
     display: 'flex',
     paddingTop: '20px',
     justifyContent: 'center'

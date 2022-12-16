@@ -140,8 +140,8 @@ const ProductListPage = ({ width }) => {
   return (
     <Container maxWidth='lg'>
       <div className={styles.root}>
-        <PageTitle title={t('common.scrollbar.catalog')} />
-        <ProductSort />
+        <PageTitle title={t('common.scrollbar.catalog')} titleLine />
+        <ProductSort handleFilterShow={handleFilterShow} />
         <div className={styles.list}>
           <Drawer
             id='menuDrawer'

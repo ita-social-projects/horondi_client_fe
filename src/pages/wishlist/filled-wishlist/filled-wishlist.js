@@ -65,7 +65,7 @@ const FilledWishlist = ({ items }) => {
           categoryText='cart.pathBack.toCatalog'
           currentPageText='wishlist.wishlistTitles.filled'
         />
-        <PageTitle title={t('wishlist.wishlistTitles.filled')} />
+        <PageTitle title={t('wishlist.wishlistTitles.filled')} marginForCrumbs />
         <div className={styles.table}>
           <Table>
             <TableHead>

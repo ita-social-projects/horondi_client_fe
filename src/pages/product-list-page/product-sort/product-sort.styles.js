@@ -31,7 +31,8 @@ export const useStyles = makeStyles((theme) => ({
       justifySelf: 'end'
     },
     '@media (max-width:600px)': {
-      gridColumn: 1
+      gridColumn: 1,
+      justifySelf: 'center'
     }
   },
   sortDiv: {
@@ -48,7 +49,9 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: 'end'
     },
     '@media (max-width:600px)': {
-      justifyContent: 'center'
+      gridTemplateColumns: '1fr',
+      justifyItems: 'center',
+      marginBottom: '12px'
     }
   },
 
@@ -113,7 +116,8 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width: 959px)': {
       display: 'block',
       gridColumn: 1,
-      gridRow: 1
+      gridRow: 1,
+      maxWidth: '255px'
     }
   }
 }));

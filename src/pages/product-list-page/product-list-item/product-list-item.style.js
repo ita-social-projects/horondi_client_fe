@@ -15,10 +15,14 @@ export const useStyles = makeStyles(({ palette }) => ({
   wrapper: {
     width: '100%',
     maxHeight: '380px',
-    aspectRatio: 0.9,
+    aspectRatio: 0.8,
     cursor: 'pointer',
     '@media (max-width: 600px)': {
       maxHeight: '340px'
+    },
+    '@media (max-width: 500px)': {
+      maxWidth: '100%',
+      flexBasis: '100%'
     },
     '@media (max-width: 450px)': {
       maxHeight: '300px'
@@ -34,7 +38,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    height: '4rem',
+    height: 'fit-content',
     width: '100%',
     position: 'absolute',
     backgroundColor: 'rgba(3,3,3,0.6)',
@@ -44,11 +48,14 @@ export const useStyles = makeStyles(({ palette }) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '12px'
+    fontSize: '12px',
+    '@media (max-width: 600px)': { padding: '4px 8px' }
   },
   title: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    columnGap: '8px',
     fontSize: '14px',
     marginTop: '5px',
     textTransform: 'capitalize'
@@ -59,13 +66,15 @@ export const useStyles = makeStyles(({ palette }) => ({
     textTransform: 'capitalize'
   },
   price: {
-    marginLeft: '10px',
     display: 'flex',
     whiteSpace: 'nowrap',
     alignItems: 'center',
     fontSize: '20px',
     fontWeight: '600',
-    color: 'white'
+    color: 'white',
+    '@media (max-width: 600px)': {
+      fontSize: '18px'
+    }
   },
   currency: {
     paddingTop: '5px'

@@ -73,6 +73,11 @@ export const useStyles = makeStyles(() => ({
       }
     }
   },
+  product: {
+    '@media (max-width: 366px)': {
+      width: '80px'
+    }
+  },
   productName: {
     fontWeight: 'bold',
     fontSize: '24px',
@@ -89,7 +94,9 @@ export const useStyles = makeStyles(() => ({
       fontSize: '14px',
       lineHeight: '18px',
       whiteSpace: 'normal',
-      marginTop: '0px'
+      marginTop: '0px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
   },
   productBottom: {
@@ -115,6 +122,9 @@ export const useStyles = makeStyles(() => ({
       },
       '@media (max-width: 610px)': {
         padding: '6px'
+      },
+      '@media (max-width: 366px)': {
+        padding: '4px'
       }
     }
   }),

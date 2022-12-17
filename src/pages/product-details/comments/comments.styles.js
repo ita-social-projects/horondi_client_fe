@@ -179,6 +179,9 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       color: theme.palette.button.hoverSecondary.color,
       backgroundColor: theme.palette.button.hoverSecondary.backgroundColor
+    },
+    '&:disabled': {
+      border: 0
     }
   }
 }));

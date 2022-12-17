@@ -21,6 +21,12 @@ export const constructorValues = {
   patterns: {
     _id: '61938f3f47ff1a3ccc1ac522'
   },
+  basic: {
+    _id: '61938f3f47ff1a3ccc1ac522'
+  },
+  bottom: {
+    _id: '61938f3f47ff1a3ccc1ac522'
+  },
   sizeAndPrice: {
     size: {
       _id: '604394cba7532c33dcb326d6',

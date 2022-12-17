@@ -9,6 +9,7 @@ import { useStyles } from './nova-post.styles';
 import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT, RESET } from '../../../../../configs';
 import { getNovaPoshtaCities, getNovaPoshtaWarehouses } from './operations/nova-post.queries.js';
+import { getOptionSelected } from '../../../../../utils/handle-delivery';
 
 const NovaPost = ({ setFieldValue, errors, touched, values }) => {
   const [citySearchValue, setCitySearchValue] = useState('');
@@ -86,6 +87,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
             options={cities}
             inputValue={citySearchValue}
             getOptionLabel={(option) => option?.description || null}
+            getOptionSelected={getOptionSelected}
             className={styles.dataInput}
             renderInput={(params) => (
               <TextField
@@ -123,6 +125,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
                 setFieldValue('courierOffice', '');
               }
             }}
+            getOptionSelected={getOptionSelected}
             disabled={!selectedCity || !wareHouses.length}
             options={_.filter(
               wareHouses,

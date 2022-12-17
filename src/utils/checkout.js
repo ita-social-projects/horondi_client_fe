@@ -131,6 +131,7 @@ const productItemsInput = (cartItems) =>
     price: item.sizeAndPrice.price,
     constructorBasics: item.constructorBasics || null,
     constructorBottom: item.constructorBottom || null,
+    constructorFrontPocket: item.constructorFrontPocket || null,
     options: {
       size: item.sizeAndPrice.size._id
     }

@@ -34,6 +34,15 @@ export const getUserOrdersQuery = gql`
               thumbnail
             }
           }
+          constructorFrontPocket {
+            _id
+            images {
+              large
+              medium
+              small
+              thumbnail
+            }
+          }
           product {
             _id
             isFromConstructor

@@ -55,8 +55,12 @@ const NewsPage = () => {
     <div className={appStyles.rootApp}>
       <div className={appStyles.containerApp}>
         <PageTitle title={t('common.news')} titleLine />
-        <div className={styles.NewsPageItem}>{newsItems}</div>
-        <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
+        <div className={styles.newsItems}>
+          <div className={styles.NewsPageItem}>{newsItems}</div>
+          {quantityPages >= 2 && (
+            <OrderHistoryPagination data={[currentPage, quantityPages, changeHandler]} />
+          )}
+        </div>
       </div>
     </div>
   );

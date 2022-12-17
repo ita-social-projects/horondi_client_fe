@@ -6,7 +6,10 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'column',
     gap: '32px',
     marginBottom: '80px',
-    width: '100%'
+    width: '100%',
+    '@media (max-width: 600px)': {
+      marginBottom: '30px'
+    }
   },
   loader: {
     margin: '100px auto'

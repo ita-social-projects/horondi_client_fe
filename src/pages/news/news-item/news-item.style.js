@@ -15,6 +15,9 @@ export const useStyles = makeStyles(() => ({
     '@media (max-width: 800px)': {
       margin: '0 auto'
     },
+    '@media (max-width: 600px)': {
+      padding: '20px 0px 25px 0px'
+    },
     '@media (max-width: 350px)': {
       maxWidth: '300px'
     }

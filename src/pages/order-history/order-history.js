@@ -33,7 +33,7 @@ const OrderHistory = () => {
 
   if (loadingOrders || errorOrders) return errorOrLoadingHandler(errorOrders, loadingOrders);
 
-  const { ordersCount, userOrders } = data.getUserOrders;
+  const { ordersCount, userOrders } = data?.getUserOrders || {};
   const quantityPages = Math.ceil(ordersCount / LIMIT_HISTORY_ORDERS);
 
   const changeHandler = (value) => {

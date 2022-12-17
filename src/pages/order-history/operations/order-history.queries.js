@@ -16,18 +16,28 @@ export const getUserOrdersQuery = gql`
               name
             }
           }
+          constructorBasics {
+            _id
+            images {
+              large
+              medium
+              small
+              thumbnail
+            }
+          }
+          constructorBottom {
+            _id
+            images {
+              large
+              medium
+              small
+              thumbnail
+            }
+          }
           product {
             _id
             isFromConstructor
             translationsKey
-            mainMaterial {
-              color {
-                _id
-              }
-              material {
-                _id
-              }
-            }
             pattern {
               _id
               constructorImg
@@ -47,12 +57,6 @@ export const getUserOrdersQuery = gql`
             images {
               primary {
                 medium
-              }
-            }
-            bottomMaterial {
-              material {
-                _id
-                translationsKey
               }
             }
           }

@@ -78,8 +78,7 @@ export const useCart = () => {
   const getProductPrice = (id) => getPriceWithCurrency(getCartItem(id).sizeAndPrice.price);
 
   const setCartItem = (id, item) => {
-    const newCart = cartItems.map((cartItem) => (cartItem.id === id ? item : cartItem));
-    setCartItems(newCart);
+    setCartItems((prev) => prev.map((cartItem) => (cartItem.id === id ? item : cartItem)));
   };
 
   const removeFromCart = (item) => {

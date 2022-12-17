@@ -48,6 +48,8 @@ const ConstructorSubmit = ({ constructorValues }) => {
           price: getConstructorPrice(constructorValues)
         },
         quantity: 1,
+        constructorBasics: constructorValues.basic._id,
+        constructorBottom: constructorValues.bottom._id,
         isFromConstructor: true,
         category: { code: 'constructor' }
       };

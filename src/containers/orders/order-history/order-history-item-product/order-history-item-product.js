@@ -2,10 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-import { useQuery } from '@apollo/client';
 import { useStyles } from './order-history-item-product.styles';
 import ConstructorCanvas from '../../../../components/constructor-canvas';
-import { getConstructorByModel } from '../../operations/getConstructorByModel.query';
 import { useCurrency } from '../../../../hooks/use-currency';
 import useProductImage from '../../../../hooks/use-product-image';
 import ThemeContext from '../../../../context/theme-context';
@@ -26,30 +24,10 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
 
   const { product } = item;
   const productPrimaryImage = product?.isFromConstructor ? null : product?.images.primary.medium;
-  const { data: constructorByModel, loading: loadingConstructorByModel } = useQuery(
-    getConstructorByModel,
-    {
-      variables: {
-        id: product?.model?._id
-      },
-      skip: !product?.isFromConstructor
-    }
-  );
 
   useEffect(() => {
     checkImage(productPrimaryImage, isLightTheme);
   }, [checkImage, isLightTheme, productPrimaryImage]);
-
-  const constructor = constructorByModel?.getConstructorByModel;
-  const bottom = constructor?.bottoms.findIndex(
-    (b) => b.features.material._id === product?.bottomMaterial.material._id
-  );
-  const basic = constructor?.basics.findIndex(
-    (b) =>
-      b.features.material._id === product?.mainMaterial.material._id &&
-      b.features.color._id === product?.mainMaterial.color._id
-  );
-  const pattern = constructor?.patterns.findIndex((b) => b._id === product?.pattern._id);
 
   const defaultProductName = product
     ? t(`${product?.translationsKey}.name`)
@@ -59,11 +37,11 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
 
   const defaultProductImg = <img src={imageUrl} alt='img-product' className={styles.image} />;
   const constructorItem = {
-    basic: constructor?.basics[basic],
-    bottom: constructor?.bottoms[bottom],
-    pattern: constructor?.patterns[pattern]
+    basic: item?.constructorBasics,
+    bottom: item?.constructorBottom,
+    pattern: item?.product?.pattern
   };
-  const constructorProductImg = loadingConstructorByModel ? null : (
+  const constructorProductImg = (
     <ConstructorCanvas
       item={constructorItem}
       className={styles.imgCanvasItem}
@@ -73,6 +51,7 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
       y={canvasY}
     />
   );
+
   const productImg = product?.isFromConstructor ? constructorProductImg : defaultProductImg;
   return (
     <TableRow className={styles.root} classes={{ root: styles.tableBody }}>
@@ -80,10 +59,6 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
       <TableCell>
         <div>
           <p className={styles.productName}>{productName}</p>
-          <p className={styles.productBottom}>
-            {product && t('cart.bottomMaterial')} -{' '}
-            {product && t(`${product.bottomMaterial.material.translationsKey}.name`)}
-          </p>
         </div>
       </TableCell>
       <TableCell className={styles.empty} />

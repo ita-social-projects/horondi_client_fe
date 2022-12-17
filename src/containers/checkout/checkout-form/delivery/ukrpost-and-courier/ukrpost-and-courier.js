@@ -211,6 +211,8 @@ const UkrpostAndCourier = ({
 
   if (isError) return errorOrLoadingHandler(isError);
 
+  const getOptionSelected = (option, value) => option.value === value.value || value === '';
+
   return (
     <div className={styles.addressContainer}>
       <h3 className={styles.addressTitle}>{t('delivery.deliveryAddress')}</h3>
@@ -228,7 +230,7 @@ const UkrpostAndCourier = ({
           options={ukrPoshtaRegions || []}
           inputValue={values.region}
           getOptionLabel={(option) => option?.REGION_UA || ''}
-          getOptionSelected={(option, value) => value.value === option.value}
+          getOptionSelected={getOptionSelected}
           className={styles.dataInput}
           renderInput={(params) => (
             <TextField
@@ -268,7 +270,7 @@ const UkrpostAndCourier = ({
           options={ukrPoshtaDistricts || []}
           inputValue={values.district}
           getOptionLabel={(option) => option?.DISTRICT_UA || ''}
-          getOptionSelected={(option, value) => value.value === option.value}
+          getOptionSelected={getOptionSelected}
           className={styles.dataInput}
           renderInput={(params) => (
             <TextField
@@ -308,7 +310,7 @@ const UkrpostAndCourier = ({
           options={ukrPoshtaCities || []}
           inputValue={values.city}
           getOptionLabel={(option) => option?.CITY_UA || ''}
-          getOptionSelected={(option, value) => value.value === option.value}
+          getOptionSelected={getOptionSelected}
           className={styles.dataInput}
           renderInput={(params) => (
             <TextField
@@ -353,7 +355,7 @@ const UkrpostAndCourier = ({
                   option?.STREET_UA_VPZ ? option?.STREET_UA_VPZ : ''
                 }` || ''
               }
-              getOptionSelected={(option, value) => value.value === option.value}
+              getOptionSelected={getOptionSelected}
               className={styles.dataInput}
               renderInput={(params) => (
                 <TextField
@@ -396,7 +398,7 @@ const UkrpostAndCourier = ({
               options={ukrPoshtaStreets || []}
               inputValue={values.street}
               getOptionLabel={(option) => option?.STREET_UA || ''}
-              getOptionSelected={(option, value) => value.value === option.value}
+              getOptionSelected={getOptionSelected}
               className={styles.dataInput}
               renderInput={(params) => (
                 <TextField

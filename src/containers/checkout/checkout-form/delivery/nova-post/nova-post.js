@@ -60,6 +60,8 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
     }
   }, [dataHouses]);
 
+  const getOptionSelected = (option, value) => option.value === value.value || value === '';
+
   return (
     <div className={styles.novaPostContainer}>
       <h3 className={styles.novaPostTitle}>{t('delivery.deliveryAddress')}</h3>
@@ -86,7 +88,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
             options={cities}
             inputValue={citySearchValue}
             getOptionLabel={(option) => option?.description || null}
-            getOptionSelected={(option, value) => option.value === value.value}
+            getOptionSelected={getOptionSelected}
             className={styles.dataInput}
             renderInput={(params) => (
               <TextField
@@ -124,7 +126,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
                 setFieldValue('courierOffice', '');
               }
             }}
-            getOptionSelected={(option, value) => option.value === value.value}
+            getOptionSelected={getOptionSelected}
             disabled={!selectedCity || !wareHouses.length}
             options={_.filter(
               wareHouses,

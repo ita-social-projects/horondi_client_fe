@@ -11,11 +11,10 @@ export const useStyles = makeStyles(() => ({
       flexWrap: 'wrap'
     }
   },
-  center: {
-    width: '3rem',
-    margin: '22rem auto',
-    '@media (max-width: 1400px)': {
-      margin: '13rem auto'
+  newsItems: {
+    marginBottom: '80px',
+    '@media (max-width: 600px)': {
+      marginBottom: '30px'
     }
   }
 }));

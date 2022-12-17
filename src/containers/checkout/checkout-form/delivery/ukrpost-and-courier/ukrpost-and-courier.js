@@ -23,6 +23,7 @@ import {
 
 import errorOrLoadingHandler from '../../../../../utils/errorOrLoadingHandler';
 import { useIsLoadingOrError } from '../../../../../hooks/useIsLoadingOrError';
+import { getOptionSelected } from '../../../../../utils/handle-delivery';
 
 const UkrpostAndCourier = ({
   deliveryType,
@@ -210,8 +211,6 @@ const UkrpostAndCourier = ({
   };
 
   if (isError) return errorOrLoadingHandler(isError);
-
-  const getOptionSelected = (option, value) => option.value === value.value || value === '';
 
   return (
     <div className={styles.addressContainer}>

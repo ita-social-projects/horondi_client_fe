@@ -6,6 +6,7 @@ import { messengers } from './const';
 import { TEXT_FIELD_VARIANT, RESET } from '../../../../../configs';
 import { useStyles } from './worldwide.styles';
 import WorldwideService from '../../../../../services/worldwide-delivery.service';
+import { getOptionSelected } from '../../../../../utils/handle-delivery';
 
 const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => {
   const styles = useStyles();
@@ -69,8 +70,6 @@ const Worldwide = ({ errors, touched, values, handleChange, setFieldValue }) => 
       setCitiesOptions([]);
     }
   }, [values.stateOrProvince, setFieldValue, values.worldWideCountry]);
-
-  const getOptionSelected = (option, value) => option.value === value.value || value === '';
 
   return (
     <div className={styles.worldwide}>

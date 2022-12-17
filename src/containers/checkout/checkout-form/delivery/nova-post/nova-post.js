@@ -9,6 +9,7 @@ import { useStyles } from './nova-post.styles';
 import { POSTOMAT } from '../../../../../utils/checkout';
 import { CY_CODE_ERR, MATERIAL_UI_COLOR, TEXT_FIELD_VARIANT, RESET } from '../../../../../configs';
 import { getNovaPoshtaCities, getNovaPoshtaWarehouses } from './operations/nova-post.queries.js';
+import { getOptionSelected } from '../../../../../utils/handle-delivery';
 
 const NovaPost = ({ setFieldValue, errors, touched, values }) => {
   const [citySearchValue, setCitySearchValue] = useState('');
@@ -59,8 +60,6 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
       setWareHouses(dataHouses.getNovaPoshtaWarehouses);
     }
   }, [dataHouses]);
-
-  const getOptionSelected = (option, value) => option.value === value.value || value === '';
 
   return (
     <div className={styles.novaPostContainer}>

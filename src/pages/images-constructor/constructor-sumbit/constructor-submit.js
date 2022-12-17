@@ -12,21 +12,21 @@ import { useCart } from '../../../hooks/use-cart';
 
 const { pathToCart } = routes;
 
-const ConstructorSubmit = ({ constructorValues, sizeAndPrice }) => {
+const ConstructorSubmit = ({ constructorValues }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { cartOperations, isInCart } = useCart();
+  const { addToCart, getConstructorPrice } = cartOperations;
 
   const { t } = useTranslation();
 
-  const isItemInCart = isInCart(constructorValues._id, constructorValues.size._id);
+  const isItemInCart = isInCart(constructorValues._id, constructorValues.sizeAndPrice.size._id);
 
   const TOAST_SETTINGS = {
     autoClose: 3000,
     hideProgressBar: true
   };
 
-  const { addToCart } = cartOperations;
   const cartTootipTitle = isItemInCart
     ? t('product.tooltips.itemInCart')
     : t('product.tooltips.itemInCartAlready');
@@ -43,8 +43,13 @@ const ConstructorSubmit = ({ constructorValues, sizeAndPrice }) => {
       const newCart = {
         id: Date.now(),
         ...constructorValues,
-        sizeAndPrice,
+        sizeAndPrice: {
+          ...constructorValues.sizeAndPrice,
+          price: getConstructorPrice(constructorValues)
+        },
         quantity: 1,
+        constructorBasics: constructorValues.basic._id,
+        constructorBottom: constructorValues.bottom._id,
         isFromConstructor: true,
         category: { code: 'constructor' }
       };

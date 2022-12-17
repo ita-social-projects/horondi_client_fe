@@ -83,7 +83,7 @@ export const useStyles = makeStyles(() => ({
     fontSize: '24px',
     lineHeight: '32px',
     marginBottom: '0px',
-    marginTop: '40px',
+    marginTop: '0px',
     whiteSpace: 'nowrap',
     '@media (max-width: 810px)': {
       fontSize: '20px',

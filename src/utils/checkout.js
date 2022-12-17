@@ -129,6 +129,8 @@ const productItemsInput = (cartItems) =>
     quantity: item.quantity,
     isFromConstructor: item.isFromConstructor,
     price: item.sizeAndPrice.price,
+    constructorBasics: item.constructorBasics || null,
+    constructorBottom: item.constructorBottom || null,
     options: {
       size: item.sizeAndPrice.size._id
     }

@@ -14,6 +14,7 @@ const themeValue = theme('light');
 
 const mockGetPriceWithCurrency = jest.fn(() => 50);
 const mockGetCurrencySign = jest.fn(() => <DollarIcon />);
+const mockGetConstructorPrice = jest.fn();
 
 jest.mock('../../../hooks/use-currency', () => ({
   useCurrency: () => ({
@@ -21,8 +22,6 @@ jest.mock('../../../hooks/use-currency', () => ({
     getCurrencySign: mockGetCurrencySign
   })
 }));
-
-jest.mock('../../../hooks/use-cart.js');
 
 jest.mock('../constructor-sumbit/constructor-submit.js', () => () => null);
 
@@ -33,6 +32,14 @@ jest.mock('react-redux', () => ({
 
 jest.mock('i18next', () => ({
   useTranslation: () => ({ i18n: { language: 'ua' }, t: () => 'test' })
+}));
+
+jest.mock('../../../hooks/use-cart.js', () => ({
+  useCart: () => ({
+    cartOperations: {
+      getConstructorPrice: mockGetConstructorPrice
+    }
+  })
 }));
 
 jest.mock('../../../utils/checkout', () => ({ getCurrentCurrency: () => '1' }));

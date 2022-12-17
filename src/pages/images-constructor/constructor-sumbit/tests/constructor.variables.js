@@ -21,10 +21,21 @@ export const constructorValues = {
   patterns: {
     _id: '61938f3f47ff1a3ccc1ac522'
   },
-  size: {
-    name: 'L',
-    _id: '604394a2a7532c33dcb326d5',
-    additionalPrice: 5
+  basic: {
+    _id: '61938f3f47ff1a3ccc1ac522'
+  },
+  bottom: {
+    _id: '61938f3f47ff1a3ccc1ac522'
+  },
+  sizeAndPrice: {
+    size: {
+      _id: '604394cba7532c33dcb326d6',
+      name: 'M',
+      absolutePrice: 25,
+      relativePrice: null,
+      available: true
+    },
+    price: 105
   }
 };
 

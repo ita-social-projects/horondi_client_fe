@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControl, FormHelperText } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
@@ -15,8 +15,8 @@ import ConstructorSubmit from './constructor-sumbit';
 import errorOrLoadingHandler from '../../utils/errorOrLoadingHandler';
 import { useAppStyles } from '../../components/app/app.styles';
 import ConstructorCanvas from '../../components/constructor-canvas';
-import { CurrencyContext } from '../../context/currency-context';
 import { useCurrency } from '../../hooks/use-currency';
+import { useCart } from '../../hooks/use-cart';
 
 const ImagesConstructor = () => {
   const {
@@ -34,7 +34,7 @@ const ImagesConstructor = () => {
   } = useConstructorLoader();
 
   const { getPriceWithCurrency, currencySign } = useCurrency();
-  const { currency } = useContext(CurrencyContext);
+  const { cartOperations } = useCart();
   const styles = useStyles();
   const appStyles = useAppStyles();
   const { t } = useTranslation();
@@ -42,81 +42,11 @@ const ImagesConstructor = () => {
 
   const canvasH = 768;
   const canvasW = 768;
-  const { basePrice } = constructorValues;
-
-  const defaultPrice = useMemo(
-    () => getPriceWithCurrency(basePrice),
-    [basePrice, getPriceWithCurrency]
-  );
-
-  const getItemPrice = useCallback(
-    (key, isWithCurrency = true) => {
-      let price;
-
-      if (constructorValues[key]?.relativePrice) {
-        price = (constructorValues[key].relativePrice * basePrice) / 100;
-      } else {
-        price = constructorValues[key]?.absolutePrice || 0;
-      }
-
-      return isWithCurrency ? getPriceWithCurrency(price) : price;
-    },
-    [getPriceWithCurrency, basePrice, constructorValues]
-  );
-
-  const getTotalPrice = (isWithCurrency) => {
-    const startPrice = getPriceWithCurrency(basePrice);
-    let endPrice;
-    if (isWithCurrency) {
-      endPrice = Object.values(allPrices).reduce((acc, value) => acc + value, startPrice);
-    } else {
-      const objectKeys = ['basic', 'bottom', 'pattern', 'size'];
-      endPrice = objectKeys.reduce((acc, key) => acc + getItemPrice(key, false), basePrice);
-    }
-
-    return endPrice;
-  };
-
-  useEffect(() => {
-    setAllPrice(
-      Object.keys(constructorValues).reduce((acc, key) => {
-        if (key === 'pattern' && constructorValues.pattern !== undefined) {
-          acc.pattern = getItemPrice(key);
-        }
-
-        switch (key) {
-          case 'bottom':
-            acc.bottom = getItemPrice(key);
-            break;
-
-          case 'basic':
-            acc.basic = getItemPrice(key);
-            break;
-
-          case 'size':
-            acc.size = getItemPrice(key);
-            break;
-
-          default:
-            break;
-        }
-
-        return acc;
-      }, {})
-    );
-  }, [constructorValues, setAllPrice, currency, getItemPrice]);
+  const { getConstructorPrice } = cartOperations;
 
   if (valuesLoading) {
     return errorOrLoadingHandler(isError, valuesLoading);
   }
-  const sizeAndPrice = {
-    price: getTotalPrice(false),
-    size: {
-      available: constructorValues.size.available,
-      name: constructorValues.size.name,
-      _id: constructorValues.size._id
-    }
-  };
 
   return (
     <div className={appStyles.rootApp}>
@@ -233,21 +163,26 @@ const ImagesConstructor = () => {
                 label='title'
                 data-cy='size'
                 name='size'
-                value={constructorValues.size._id}
+                value={constructorValues.sizeAndPrice.size._id}
                 onChange={(e) =>
                   setConstructorValues({
                     ...constructorValues,
-                    size: currentConstructorModel.current.model.sizes.find(
-                      (size) => size._id === e.target.value
-                    )
+                    sizeAndPrice: {
+                      size: currentConstructorModel.current.model.sizes.find(
+                        (size) => size._id === e.target.value
+                      )
+                    }
                   })
                 }
               >
-                {currentConstructorModel.current.model.sizes.map((size) => (
-                  <MenuItem className={styles.menuItem} key={size.name} value={size._id}>
-                    {size.name}
-                  </MenuItem>
-                ))}
+                {currentConstructorModel.current.model.sizes.map(
+                  (size) =>
+                    size.available && (
+                      <MenuItem className={styles.menuItem} key={size.name} value={size._id}>
+                        {size.name}
+                      </MenuItem>
+                    )
+                )}
               </Select>
               <FormHelperText className={styles.formHelper}>{t('common.size')}</FormHelperText>
             </FormControl>
@@ -271,7 +206,7 @@ const ImagesConstructor = () => {
                 <li className={styles.priceItem}>
                   <span>{t('common.defaultPrice')}</span>
                   <span className={styles.currencySign}>
-                    {defaultPrice}
+                    {getPriceWithCurrency(constructorValues.basePrice)}
                     {currencySign}
                   </span>
                 </li>
@@ -283,7 +218,7 @@ const ImagesConstructor = () => {
                         {t(`common.constructorAdditionals`, { returnObjects: true })[index]}
                       </span>
                       <span className={styles.currencySign}>
-                        {item} {currencySign}
+                        {getPriceWithCurrency(item)} {currencySign}
                       </span>
                     </li>
                   ) : (
@@ -296,11 +231,11 @@ const ImagesConstructor = () => {
             <h2 className={styles.headerWrapper}>
               {t('common.endPrice')}
               <span className={styles.currencySign}>
-                {getTotalPrice(true)}
+                {getPriceWithCurrency(getConstructorPrice(constructorValues))}
                 {currencySign}
               </span>
             </h2>
-            <ConstructorSubmit constructorValues={constructorValues} sizeAndPrice={sizeAndPrice} />
+            <ConstructorSubmit constructorValues={constructorValues} />
           </div>
         </div>
       </div>

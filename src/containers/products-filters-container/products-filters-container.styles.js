@@ -7,7 +7,8 @@ export const useStyles = makeStyles(() => ({
     padding: '24px 0px',
     '& .Mui-selected': {
       backgroundColor: 'transparent'
-    }
+    },
+    '@media (max-width:600px)': { padding: '12px 0px' }
   },
   mainItem: {
     textTransform: 'uppercase',

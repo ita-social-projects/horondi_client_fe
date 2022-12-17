@@ -6,6 +6,9 @@ const mockHistoryPush = jest.fn();
 jest.mock('../count-per-page/count-per-page.styles', () => ({
   useStyles: () => ({ theme: { palette: { button: { hover: { color: '' } } } } })
 }));
+jest.mock('../product-sort/product-sort.styles', () => ({
+  useStyles: () => ({ theme: { palette: { button: { hover: { color: '' } } } } })
+}));
 
 jest.mock('react-router', () => ({
   useLocation: () => ({ search: jest.fn() }),

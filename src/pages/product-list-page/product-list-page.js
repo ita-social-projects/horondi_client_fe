@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pagination } from '@material-ui/lab';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import withWidth from '@material-ui/core/withWidth';
@@ -142,14 +141,7 @@ const ProductListPage = ({ width }) => {
     <Container maxWidth='lg'>
       <div className={styles.root}>
         <PageTitle title={t('common.scrollbar.catalog')} titleLine />
-        <div className={styles.sortDiv}>
-          <ProductSort />
-        </div>
-        <div className={styles.filterButtonBlock}>
-          <Button className={styles.button} variant='contained' onClick={handleFilterShow}>
-            {t('common.showFilters')}
-          </Button>
-        </div>
+        <ProductSort handleFilterShow={handleFilterShow} />
         <div className={styles.list}>
           <Drawer
             id='menuDrawer'

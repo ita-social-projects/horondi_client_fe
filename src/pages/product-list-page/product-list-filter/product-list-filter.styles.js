@@ -38,7 +38,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   slider: {
     color: '#4d4d4d',
-    padding: '60px 0'
+    padding: '60px 0',
+    '@media (max-width:600px)': { padding: '40px 0px' }
   },
   popular: {
     borderTop: '1px solid gray',

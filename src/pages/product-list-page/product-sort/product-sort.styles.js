@@ -23,30 +23,35 @@ export const useStyles = makeStyles((theme) => ({
   },
   sortByText: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+    '@media (max-width:1020px)': {
+      flexWrap: 'wrap',
+      gridColumn: 2,
+      justifySelf: 'end'
+    },
+    '@media (max-width:600px)': {
+      gridColumn: 1,
+      justifySelf: 'center'
+    }
   },
   sortDiv: {
-    width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    lineHeight: '25px',
-    '@media (max-width:959px)': {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center'
+    flexWrap: 'wrap',
+    gap: '12px',
+    marginBottom: '24px',
+    '@media (max-width:1020px)': {
+      display: 'grid',
+      gridTemplateColumns: 'fit-content(100px)',
+      gridAutoRows: 'auto',
+      alignItems: 'end'
     },
-    '&>div': {
-      '@media (max-width:959px)': {
-        display: 'flex',
-        flexDirection: 'column',
-        marginBottom: '10px'
-      },
-      '@media (max-width:500px)': {
-        marginRight: '0',
-        marginBottom: '.5rem',
-        textAlign: 'center'
-      }
+    '@media (max-width:600px)': {
+      gridTemplateColumns: '1fr',
+      justifyItems: 'center',
+      marginBottom: '12px'
     }
   },
 
@@ -97,5 +102,22 @@ export const useStyles = makeStyles((theme) => ({
   activeButton: {
     backgroundColor: 'black',
     color: 'white'
+  },
+  button: {
+    padding: '9px 0',
+    fontSize: '0.9em',
+    display: 'none',
+    color: theme.palette.backgroundColor,
+    backgroundColor: theme.palette.textColor,
+    '&:hover': {
+      backgroundColor: theme.palette.button.hover.backgroundColor,
+      color: theme.palette.button.hover.color
+    },
+    '@media (max-width: 959px)': {
+      display: 'block',
+      gridColumn: 1,
+      gridRow: 1,
+      maxWidth: '255px'
+    }
   }
 }));

@@ -46,7 +46,7 @@ const OrderTable = ({ items, user, cartOperations, promoCode, certificateData })
           dismisButtonText={t('common.buttons.cancel')}
         />
       )}
-      <PageTitle title={t('cart.titleFilled')} />
+      <PageTitle title={t('cart.titleFilled')} marginForCrumbs />
       <div className={styles.table}>
         <Table>
           <TableHead>

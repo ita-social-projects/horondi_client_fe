@@ -48,7 +48,7 @@ const ProductListItem = ({ product }) => {
   const styles = useStyles({ imageUrl });
 
   return (
-    <Grid item xs={12} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
+    <Grid item xs={6} sm={6} md={6} lg={4} className={styles.wrapper} data-testid='product'>
       <Link to={`${pathToProducts}/${product._id}`}>
         <div className={styles.productItem}>
           {product.available ? '' : <div className={styles.unavailableContainer} />}

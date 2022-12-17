@@ -8,6 +8,7 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'flex-end',
     margin: 'auto',
     padding: 0,
+    '@media (max-width: 650px)': { gap: '8px' },
     '&>div': {
       marginLeft: '30px',
       '@media (max-width: 650px)': {

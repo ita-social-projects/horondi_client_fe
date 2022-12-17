@@ -27,6 +27,9 @@ export const constructorValues = {
   bottom: {
     _id: '61938f3f47ff1a3ccc1ac522'
   },
+  pocket: {
+    _id: '61938f3f47ff1a3ccc1ac522'
+  },
   sizeAndPrice: {
     size: {
       _id: '604394cba7532c33dcb326d6',

@@ -39,7 +39,8 @@ const OrderHistoryItemProduct = ({ item, itemPriceWithDiscount, fixedExchangeRat
   const constructorItem = {
     basic: item?.constructorBasics,
     bottom: item?.constructorBottom,
-    pattern: item?.product?.pattern
+    pattern: item?.product?.pattern,
+    pocket: item?.constructorFrontPocket
   };
   const constructorProductImg = (
     <ConstructorCanvas

@@ -50,6 +50,7 @@ const ConstructorSubmit = ({ constructorValues }) => {
         quantity: 1,
         constructorBasics: constructorValues.basic._id,
         constructorBottom: constructorValues.bottom._id,
+        constructorFrontPocket: constructorValues.pocket._id,
         isFromConstructor: true,
         category: { code: 'constructor' }
       };

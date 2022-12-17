@@ -24,8 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     '@media (max-width:1020px)': { gridColumn: 2, justifySelf: 'end' },
     '@media (max-width:600px)': {
       gridColumn: 1,
-      justifySelf: 'center',
-      alignItems: 'cener'
+      justifySelf: 'center'
     }
   },
 

@@ -126,13 +126,15 @@ const UkrpostAndCourier = ({
       setFieldValue('regionId', value.REGION_ID);
       setFieldValue('district', '');
       setFieldValue('city', '');
-      setFieldValue('courierOffice', '');
     } else {
       setFieldValue('region', '');
       setFieldValue('regionId', '');
     }
+    setFieldValue('courierOffice', '');
     setFieldValue('district', '');
+    setFieldValue('districtId', '');
     setFieldValue('city', '');
+    setFieldValue('cityId', '');
     setFieldValue('street', '');
     setFieldValue('house', '');
     setFieldValue('flat', '');
@@ -151,9 +153,11 @@ const UkrpostAndCourier = ({
       setFieldValue('district', '');
     }
     setFieldValue('city', '');
+    setFieldValue('cityId', '');
     setFieldValue('street', '');
     setFieldValue('house', '');
     setFieldValue('flat', '');
+    setFieldValue('courierOffice', '');
   };
   const handleCityInputChange = (value, reason) => {
     if (reason !== RESET || (reason === RESET && value)) {
@@ -194,6 +198,7 @@ const UkrpostAndCourier = ({
       setFieldValue('courierOffice', '');
     }
   };
+
   const handleStreetChange = (value) => {
     if (value) {
       setFieldValue('street', value.STREET_UA);
@@ -223,6 +228,7 @@ const UkrpostAndCourier = ({
           options={ukrPoshtaRegions || []}
           inputValue={values.region}
           getOptionLabel={(option) => option?.REGION_UA || ''}
+          getOptionSelected={(option, value) => value.value === option.value}
           className={styles.dataInput}
           renderInput={(params) => (
             <TextField
@@ -262,6 +268,7 @@ const UkrpostAndCourier = ({
           options={ukrPoshtaDistricts || []}
           inputValue={values.district}
           getOptionLabel={(option) => option?.DISTRICT_UA || ''}
+          getOptionSelected={(option, value) => value.value === option.value}
           className={styles.dataInput}
           renderInput={(params) => (
             <TextField
@@ -301,6 +308,7 @@ const UkrpostAndCourier = ({
           options={ukrPoshtaCities || []}
           inputValue={values.city}
           getOptionLabel={(option) => option?.CITY_UA || ''}
+          getOptionSelected={(option, value) => value.value === option.value}
           className={styles.dataInput}
           renderInput={(params) => (
             <TextField
@@ -345,6 +353,7 @@ const UkrpostAndCourier = ({
                   option?.STREET_UA_VPZ ? option?.STREET_UA_VPZ : ''
                 }` || ''
               }
+              getOptionSelected={(option, value) => value.value === option.value}
               className={styles.dataInput}
               renderInput={(params) => (
                 <TextField
@@ -387,6 +396,7 @@ const UkrpostAndCourier = ({
               options={ukrPoshtaStreets || []}
               inputValue={values.street}
               getOptionLabel={(option) => option?.STREET_UA || ''}
+              getOptionSelected={(option, value) => value.value === option.value}
               className={styles.dataInput}
               renderInput={(params) => (
                 <TextField

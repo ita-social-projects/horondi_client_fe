@@ -86,6 +86,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
             options={cities}
             inputValue={citySearchValue}
             getOptionLabel={(option) => option?.description || null}
+            getOptionSelected={(option, value) => option.value === value.value}
             className={styles.dataInput}
             renderInput={(params) => (
               <TextField
@@ -123,6 +124,7 @@ const NovaPost = ({ setFieldValue, errors, touched, values }) => {
                 setFieldValue('courierOffice', '');
               }
             }}
+            getOptionSelected={(option, value) => option.value === value.value}
             disabled={!selectedCity || !wareHouses.length}
             options={_.filter(
               wareHouses,

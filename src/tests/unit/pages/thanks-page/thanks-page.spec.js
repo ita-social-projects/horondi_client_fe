@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ThanksPage from '../../../../pages/thanks-page/thanks-page';
 
 const mockClearCart = jest.fn();
-const mockDispatch = jest.fn();
 
 jest.mock('../../../../pages/thanks-page/thanks-page.styles', () => ({ useStyles: () => ({}) }));
 jest.mock('../../../../pages/thanks-page/thanks-card/thanks-card.styles.js', () => ({
@@ -20,10 +19,6 @@ jest.mock('../../../../hooks/use-cart', () => ({
     cartItems: [{ id: '84d7' }],
     cartOperations: { clearCart: mockClearCart }
   })
-}));
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: () => mockDispatch
 }));
 
 describe('ThanksPage component tests', () => {

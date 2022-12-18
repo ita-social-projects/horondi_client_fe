@@ -3,14 +3,8 @@ import { push } from 'connected-react-router';
 
 import { setError } from '../error/error.actions';
 import { setOrderLoading, setIsOrderCreated, setOrder } from './order.actions';
-import { addOrder, getPaymentCheckout, sendOrderToEmail } from './order.operations';
-import {
-  ADD_ORDER,
-  GET_ORDER,
-  GET_FONDY_DATA,
-  SEND_ORDER_TO_EMAIL,
-  ADD_PAYMENT_METHOD
-} from './order.types';
+import { addOrder, getPaymentCheckout } from './order.operations';
+import { ADD_ORDER, GET_ORDER, GET_FONDY_DATA, ADD_PAYMENT_METHOD } from './order.types';
 import { getFromLocalStorage, setToLocalStorage } from '../../services/local-storage.service';
 import { orderDataToLS } from '../../utils/order';
 import routes from '../../configs/routes';
@@ -56,7 +50,8 @@ export function* handleGetFondyUrl({ payload }) {
       getPaymentCheckout,
       newOrder._id,
       payload.currency,
-      (Math.round(orderPrice) * 100).toString()
+      (Math.round(orderPrice) * 100).toString(),
+      payload.language
     );
 
     setToLocalStorage(orderDataToLS.order, orderWithCheckoutUrl);
@@ -70,14 +65,6 @@ export function* handleGetFondyUrl({ payload }) {
     yield put(push(`${pathToAllProducts}`));
 
     yield put(setOrderLoading(false));
-  } catch (e) {
-    yield call(handleOrderError, e);
-  }
-}
-
-export function* handleSendOrderToEmail({ payload }) {
-  try {
-    yield call(sendOrderToEmail, payload.language, payload.paidOrderNumber);
   } catch (e) {
     yield call(handleOrderError, e);
   }
@@ -101,6 +88,5 @@ export default function* orderSaga() {
   yield takeEvery(ADD_ORDER, handleAddOrder);
   yield takeEvery(GET_ORDER, handleGetCreatedOrder);
   yield takeEvery(GET_FONDY_DATA, handleGetFondyUrl);
-  yield takeEvery(SEND_ORDER_TO_EMAIL, handleSendOrderToEmail);
   yield takeEvery(ADD_PAYMENT_METHOD, handleSetPaymentMethod);
 }

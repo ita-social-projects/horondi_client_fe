@@ -16,8 +16,6 @@ export const orderExample = {
   paymentStatus: 'CREATED'
 };
 
-export const mockPayload = { language: 0, paidOrderNumber: 234 };
-
 export const paidOrder = {
   ...orderExample,
   paymentStatus: 'PAID'

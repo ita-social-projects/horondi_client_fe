@@ -58,7 +58,7 @@ export const addOrder = async (order) => {
   return result?.data?.addOrder;
 };
 
-export const getPaymentCheckout = async (orderId, currency, amount) => {
+export const getPaymentCheckout = async (orderId, currency, amount, language) => {
   const getPaymentCheckoutQuery = `
     query($data: PaymentInput!) {
       getPaymentCheckout(data: $data) {
@@ -110,7 +110,7 @@ export const getPaymentCheckout = async (orderId, currency, amount) => {
     }
   `;
   const result = await getItems(getPaymentCheckoutQuery, {
-    data: { orderId, currency, amount }
+    data: { orderId, currency, amount, language }
   });
 
   return result?.data?.getPaymentCheckout;

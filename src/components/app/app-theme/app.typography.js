@@ -2,15 +2,15 @@ export default {
   fontFamily: ['Open Sans', 'Montserrat', '-apple-system', 'Arial', 'sans-serif'].join(','),
   h1: {
     fontWeight: 500,
-    fontSize: '35px',
+    fontSize: '40px',
     letterSpacing: '-0.24px',
-    lineHeight: '40px'
+    lineHeight: '46px'
   },
   h2: {
     fontWeight: 500,
-    fontSize: '29px',
+    fontSize: '32px',
     letterSpacing: '-0.24px',
-    lineHeight: '32px'
+    lineHeight: '38px'
   },
   h3: {
     fontWeight: 500,

@@ -4,7 +4,7 @@ export const useStyles = makeStyles(({ palette }) => ({
   root: {
     backgroundColor: palette.backgroundColor,
     flexGrow: '1',
-    paddingTop: '20px',
+    paddingTop: '92px',
     display: 'flex',
     flexDirection: 'column'
   }

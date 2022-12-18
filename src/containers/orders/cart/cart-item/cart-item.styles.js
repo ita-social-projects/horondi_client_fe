@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const name = {
   fontWeight: '700',
-  fontSize: '24px',
+  fontSize: '20px',
   lineHeight: '32px'
 };
 const description = {
@@ -45,8 +45,7 @@ export const useStyles = makeStyles((theme) => ({
       marginRight: '16px'
     },
     '@media (max-width: 650px)': {
-      height: '100px',
-      width: '90px'
+      marginRight: 0
     }
   },
   constructorProductImg: {

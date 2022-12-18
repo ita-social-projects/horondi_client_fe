@@ -28,15 +28,15 @@ export const RESPONSIVE_PDP = {
     items: 5
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3000, min: 1100 },
     items: 3
   },
   tablet: {
-    breakpoint: { max: 1146, min: 464 },
+    breakpoint: { max: 750, min: 600 },
     items: 2
   },
   mobile: {
-    breakpoint: { max: 810, min: 0 },
+    breakpoint: { max: 380, min: 0 },
     items: 1
   }
 };

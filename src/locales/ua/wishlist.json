@@ -10,7 +10,8 @@
     "toCart": "Додати до кошика"
   },
   "wishlistTableFields": {
-    "item": "ПРОДУКТ",
-    "price": "ЦІНА"
+    "item": "Продукт",
+    "price": "Ціна",
+    "actions": "Дії"
   }
 }

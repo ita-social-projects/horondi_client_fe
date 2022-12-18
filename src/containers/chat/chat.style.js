@@ -24,7 +24,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     border: 'none',
     transition: 'background 0.3s',
     '@media (max-width: 768px)': {
-      boxShadow: ' 0 0 10px white',
+      boxShadow: ' 0 0 5px white',
       zIndex: 900,
       left: `calc(100vw - 96px)`
     },

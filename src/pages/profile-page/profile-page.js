@@ -16,6 +16,7 @@ import AuthButton from '../../components/auth-form/auth-form-button/auth-form-bu
 import { SnackBarContext } from '../../context/snackbar-context';
 import SnackbarItem from '../../containers/snackbar';
 import PageTitle from '../../components/page-title';
+import ThemeContext from '../../context/theme-context';
 
 const ProfilePage = () => {
   const [userImageUrl, setUserImageUrl] = useState(null);
@@ -25,6 +26,7 @@ const ProfilePage = () => {
   const [shouldValidate, setShouldValidate] = useState(false);
   const { t, i18n } = useTranslation();
   const { setSnackBarMessage } = useContext(SnackBarContext);
+  const [isLightTheme] = useContext(ThemeContext);
   const language = i18n.language === 'ua' ? 0 : 1;
 
   const classes = useStyles();
@@ -56,7 +58,11 @@ const ProfilePage = () => {
       email,
       phoneNumber,
       address,
-      configs: { ...userData.configs, language: i18n.language }
+      configs: {
+        ...userData.configs,
+        language: i18n.language,
+        theme: isLightTheme ? 'light' : 'dark'
+      }
     };
 
     dispatch(updateUser({ user, id: userData._id, upload, deleteAvatar }));

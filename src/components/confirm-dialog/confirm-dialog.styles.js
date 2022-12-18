@@ -2,13 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: '16px',
-    gap: '16px',
+    padding: '18px',
+    gap: '18px',
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
     position: 'absolute',
-
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -16,36 +15,35 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.white,
     outline: '0',
     boxShadow: theme.shadows[5],
-
     '@media (max-width: 500px)': {
-      width: '320px'
+      width: '320px',
+      padding: '14px',
+      gap: '14px'
     },
     '& p': {
       display: 'flex',
-      margin: '0',
-      fontSize: '16px',
+      margin: '0 0 16px',
+      textAlign: 'left',
+      lineHeight: '24px',
+      fontSize: '18px',
       color: theme.palette.black,
-      '& b': {
-        fontSize: '14px',
-        fontStyle: '600'
-      },
-      '@media (max-width:500px)': {
-        padding: '10px 10px 20px',
-        fontSize: '14px'
+      '@media (max-width:600px)': {
+        fontSize: '16px'
       }
     }
   },
   header: {
     display: 'flex',
-    padding: '10px 0',
+    paddingBottom: '12px',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
     borderBottom: theme.palette.comments.modal.titleBorder.border,
-    fontSize: '20px',
+    fontSize: '24px',
     color: theme.palette.black,
     fontWeight: '700',
     '@media (max-width: 500px)': {
-      padding: '5px'
+      paddingBottom: '8px',
+      fontSize: '20px'
     }
   },
   closeIcon: {
@@ -57,13 +55,11 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     width: '100%',
-    marginTop: '10px',
-    padding: '0 7px 7px 0',
+    gap: '12px',
     '& > button': {
       color: theme.palette.white,
       backgroundColor: theme.palette.black,
       fontSize: 14,
-      margin: 8,
       padding: '8px 15px',
       '&:first-child': {
         color: theme.palette.black,

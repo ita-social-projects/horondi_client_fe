@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme) => ({
       props.isLightTheme ? '#e3e7ea' : '#262626'
     }`,
     width: '90%',
-    height: '325px',
+    aspectRatio: 1,
+    maxHeight: '280px',
     backgroundSize: 'cover',
     '&:hover': {
       cursor: 'pointer'
@@ -15,10 +16,13 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
     borderRadius: '5px',
     boxShadow: props.palette.carouselItem.shadow.boxShadow,
-    outline: `1px solid ${props.palette.cart.borderColor}`
+    outline: `1px solid ${props.palette.cart.borderColor}`,
+    '@media (max-width: 600px)': {
+      maxHeight: '220px'
+    }
   }),
   info: {
-    height: '69px',
+    height: 'fit-content',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',

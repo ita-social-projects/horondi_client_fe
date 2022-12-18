@@ -5,7 +5,7 @@ import { useStyles } from './auth-form-button.styles';
 
 const AuthFormButton = ({ onclick, disabled = false, children, loading, className, ...props }) => {
   const styles = useStyles();
-  const loaderSize = '42px';
+  const loaderSize = '44px';
   const loaderGrid = '1/-1';
 
   if (loading)

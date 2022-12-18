@@ -72,7 +72,7 @@ const FilledWishlist = ({ items }) => {
               <TableRow classes={{ root: styles.tableHeader }}>
                 <TableCell>{t('wishlist.wishlistTableFields.item')}</TableCell>
                 <TableCell>{t('wishlist.wishlistTableFields.price')}</TableCell>
-                <TableCell />
+                <TableCell>{t('wishlist.wishlistTableFields.actions')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

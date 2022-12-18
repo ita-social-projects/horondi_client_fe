@@ -14,22 +14,29 @@ export const useStyles = makeStyles(() => ({
     clear: 'both'
   },
   cardDeck: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4,auto)',
+    gridAutoRows: 'auto',
+    justifyItems: 'start',
+    gap: '16px',
+    padding: '48px 0 24px 24px',
     boxSizing: 'border-box',
-    paddingRight: '100px',
+    alignItems: 'start',
     '& a': {
       transition: 'color .2s ease'
     },
     '& a:hover': {
       color: '#bebebe'
     },
-    '@media screen and (max-width: 552px)': {
-      flexDirection: 'column',
-      alignItems: 'center'
+    '@media screen and (max-width: 768px)': {
+      gridTemplateColumns: 'repeat(2,auto)',
+      gap: '32px',
+      padding: '28px'
     },
-    '@media screen and (max-width: 992px)': {
-      paddingRight: '0',
-      flexWrap: 'wrap'
+    '@media screen and (max-width: 500px)': {
+      gridTemplateColumns: '1fr',
+      gap: '24px',
+      padding: '20px'
     }
   },
   icons: {
